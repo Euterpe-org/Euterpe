@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using MuseDashModTools.ViewModels;
-using MuseDashModTools.Views;
+using MuseDashModToolsUI.ViewModels;
+using MuseDashModToolsUI.Views;
 
-namespace MuseDashModTools
+namespace MuseDashModToolsUI
 {
     public partial class App : Application
     {

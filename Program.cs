@@ -3,7 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
 using System;
 
-namespace MuseDashModTools
+namespace MuseDashModToolsUI
 {
     internal class Program
     {

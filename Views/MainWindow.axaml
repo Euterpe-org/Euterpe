@@ -1,17 +1,81 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:MuseDashModTools.ViewModels"
+        xmlns:vm="using:MuseDashModToolsUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="MuseDashModTools.Views.MainWindow"
+        x:Class="MuseDashModToolsUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="MuseDashModTools">
+        Title="Muse Dash Mod Downloader"
+		Width="800" Height="450"
+        CanResize="False" Background="#282828">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+	
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter Property="Foreground" Value="#ddd"/>
+			<Setter Property="Background" Value="#0000"/>
+			<Setter Property="BorderBrush" Value="#707070"/>
+			<Setter Property="CornerRadius" Value="1"/>
+		</Style>
+		<Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="#bbb"/>
+			<Setter Property="Background" Value="#0000"/>
+		</Style>
+		<Style Selector="CheckBox">
+			<Setter Property="Margin" Value="250,10,0,0"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="BorderBrush" Value="#ddd"/>
+			<Setter Property="Foreground" Value="#ddd"/>
+		</Style>
+	</Window.Styles>
+	
+	<Grid Background="#282828">
+		<StackPanel VerticalAlignment="Top">
+			<Button Command="{Binding Button_FilterAll}" Content="All" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80"/>
+			<Button Command="{Binding Button_FilterInstalled}" Content="Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80"/>
+			<Button Command="{Binding Button_FilterEnabled}" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80"/>
+			<Button Command="{Binding Button_FilterOutdated}" Content="Outdated" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80"/>
+		</StackPanel>
+		<StackPanel VerticalAlignment="Bottom">
+			<Button Content="Path" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80"/>
+			<Button Content="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80"/>
+		</StackPanel>
+		<Grid Width="800">
+			<Separator HorizontalAlignment="Left" Margin="79,0,0,0" VerticalAlignment="Top" Height="450" Width="2" Background="#707070" BorderBrush="#FF707070"/>
+		</Grid>
+		<TextBox Width="721" Height="40" Foreground="#bbb" Background="#0000" HorizontalAlignment="Right" TextWrapping="Wrap" Watermark="Search Mods" VerticalAlignment="Top" BorderBrush="#707070" BorderThickness="2" SelectionBrush="#282828" SelectionForegroundBrush="#bbb" CornerRadius="1"/>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<ScrollViewer Margin="80,40,0,0" Height="410" Width="720">
+			
+			<StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" Width="703" x:Name="ModItemsContainer" Orientation="Vertical">
+				<StackPanel.Styles>
+					<Style Selector="CheckBox /template/ Border#NormalRectangle">
+						<Setter Property="BorderBrush" Value="#707070"/>
+					</Style>
+				</StackPanel.Styles>
+				<Grid>
+					<StackPanel Width="675">
+						<Button Click="Button_Expander" BorderBrush="Transparent" Width="675" Height="75" Foreground="#bbb" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Content="ModName" Margin="0,10,0,0"/>
+						<StackPanel IsVisible="False" Tag="ExpanderContent" Margin="30,0,0,0">
+
+							<TextBlock Margin="0,0,0,10" Text="This is a mod description"/>
+							<TextBlock Text="installed"/>
+							<Button Content="Homepage" Margin="0,0,0,10"/>
+							<TextBlock Text="Dependencies:"/>
+						</StackPanel>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+						<CheckBox>On</CheckBox>
+						<Button Margin="30,10,0,0" Foreground="#ddd" Width="75" Height="30" Content="Uninstall" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#505050"/>
+						<Button Margin="30,10,0,0" Foreground="#ddd" Width="75" Height="30" Content="Update" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#505050"/>
+					</StackPanel>
+				</Grid>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
 
 </Window>

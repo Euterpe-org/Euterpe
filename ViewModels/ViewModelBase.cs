@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MuseDashModTools.ViewModels
+namespace MuseDashModToolsUI.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {
