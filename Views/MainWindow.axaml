@@ -56,6 +56,9 @@
 					<Style Selector="CheckBox /template/ Border#NormalRectangle">
 						<Setter Property="BorderBrush" Value="#707070"/>
 					</Style>
+					<Style Selector="StackPanel > TextBlock">
+						<Setter Property="TextWrapping" Value="Wrap"></Setter>
+					</Style>
 				</StackPanel.Styles>
 				<Grid>
 					<StackPanel Width="675">

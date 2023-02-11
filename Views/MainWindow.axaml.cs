@@ -36,7 +36,7 @@ namespace MuseDashModToolsUI.Views
         public List<WebModInfo> WebModsList { get; private set; }
         public List<LocalModInfo> LocalModsList { get; private set; } = new();
 
-        private const string ModLinks = "MDModsDev/ModLinks/dev/ModLinks.json";
+        private const string BaseLink = "MDModsDev/ModLinks/dev/";
         public MainWindow()
         {
             InitializeComponent();
@@ -109,11 +109,11 @@ namespace MuseDashModToolsUI.Views
                 string data;
                 try
                 {
-                    data = webClient.DownloadString("https://raw.githubusercontent.com/" + ModLinks);
+                    data = webClient.DownloadString("https://raw.githubusercontent.com/" + BaseLink + "ModLinks.json");
                 }
                 catch (WebException)
                 {
-                    data = webClient.DownloadString("https://raw.fastgit.org/" + ModLinks);
+                    data = webClient.DownloadString("https://raw.fastgit.org/" + BaseLink + "ModLinks.json");
                 }
                 webClient.Dispose();
                 WebModsList = JsonSerializer.Deserialize<List<WebModInfo>>(data);
@@ -121,6 +121,37 @@ namespace MuseDashModToolsUI.Views
             catch (Exception)
             {
                 ErrorAndExit("Failed to download\nonline mod info");
+            }
+        }
+
+        public byte[] GithubFileDownload(string relativeURL)
+        {
+            var webClient = new WebClient
+            {
+                Encoding = Encoding.UTF8
+            };
+            byte[] data;
+            try
+            {
+                data = webClient.DownloadData("https://raw.githubusercontent.com/" + BaseLink + relativeURL);
+                webClient.Dispose();
+                return data;
+            }
+            catch (WebException)
+            {
+                try
+                {
+
+                    data = webClient.DownloadData("https://raw.fastgit.org/" + BaseLink + relativeURL);
+                    webClient.Dispose();
+                    return data;
+
+                }
+                catch (Exception)
+                {
+                    webClient.Dispose();
+                    return null;
+                }
             }
         }
 
@@ -181,15 +212,17 @@ namespace MuseDashModToolsUI.Views
                 VerticalContentAlignment = VerticalAlignment.Top,
                 Foreground = (IBrush)new BrushConverter().ConvertFromString("#bbb"),
                 Content = webMod.Name,
-                Margin = new(0,15,0,0)
+                Margin = new(0, 15, 0, 0),
+                BorderBrush = Brushes.Transparent
             };
+            expanderButton.Click += Button_Expander;
             expanderPanel.Children.Add(expanderButton);
 
             StackPanel expanderContent = new()
             {
                 Tag = "ExpanderContent",
                 IsVisible = false,
-                Margin = new(30,0,0,0)
+                Margin = new(50,0,0,0)
             };
             expanderPanel.Children.Add(expanderContent);
             expanderContent.Children.Add(new TextBlock
@@ -205,10 +238,10 @@ namespace MuseDashModToolsUI.Views
                 Button homepageButton = new()
                 {
                     Content = "Homepage",
-                    Margin = new(0, 0, 0, 10),
+                    Margin = new(0, 5, 0, 5),
                     Tag = webMod.HomePage
                 };
-                homepageButton.Click += new EventHandler<RoutedEventArgs>(RoutedOpenURL);
+                homepageButton.Click += RoutedOpenURL;
                 expanderContent.Children.Add(homepageButton);
             }
             expanderContent.Children.Add(new TextBlock
@@ -235,6 +268,7 @@ namespace MuseDashModToolsUI.Views
                 Tag = webMod.Name,
                 Margin = new(250, 30, 0, 0),
                 VerticalAlignment = VerticalAlignment.Top,
+                Background = (IBrush)new BrushConverter().ConvertFromString("#505050"),
             };
             downloadButton.Click += InstallModUpdate;
             controlsPanel.Children.Add(downloadButton);
@@ -302,8 +336,7 @@ namespace MuseDashModToolsUI.Views
             }
             catch (Exception)
             {
-                ErrorAndExit("Failed to read local mods\nMake sure you're in the game directory");
-                throw;
+                DialogPopup("Failed to read local mods\nMake sure you're in the game directory");
             }
                 
         }
@@ -314,7 +347,7 @@ namespace MuseDashModToolsUI.Views
         }
 
         //Used for implementing expanders, cause the built-in one is glitchy as all hell.
-        public void Button_Expander(object sender, RoutedEventArgs args)
+        public void Button_Expander(object? sender, RoutedEventArgs args)
         {
             ((Panel)((Control)sender).Parent)
                 .Children
@@ -322,7 +355,6 @@ namespace MuseDashModToolsUI.Views
                     ((Control)x).Tag == "ExpanderContent"
                 )
                 .IsVisible ^= true;
-            File.WriteAllText("asd.txt", "heheheha");
         }
 
         public void RoutedOpenURL(object? sender, RoutedEventArgs args)
@@ -332,6 +364,19 @@ namespace MuseDashModToolsUI.Views
 
         public void InstallModUpdate(object? sender, RoutedEventArgs args)
         {
+            var webMod = WebModsList.Find(x => x.Name == (string)((Control)sender).Tag);
+            if (webMod == null)
+            {
+                DialogPopup("Mod download failed\n(key was not present)");
+                return;
+            }
+            byte[] data = GithubFileDownload(webMod.DownloadLink);
+            if (data == null)
+            {
+                DialogPopup("Mod download failed\n(webclient failed)");
+                return;
+            }
+            Path.Join(Directory.GetCurrentDirectory(), "Mods", webMod.DownloadLink[5..]);
         }
 
         public void OpenURL(string linkToOpen)
@@ -340,13 +385,16 @@ namespace MuseDashModToolsUI.Views
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? linkToOpen : "open",
-                    Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {linkToOpen}" : "",
+                    FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? linkToOpen : (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "xdg-open" : "open"),
+                    Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {linkToOpen}" : (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? linkToOpen : ""),
                     CreateNoWindow = true,
                     UseShellExecute = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 });
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                DialogPopup("Failed to open URL");
+            }
         }
     }
 
