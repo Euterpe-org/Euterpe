@@ -21,6 +21,8 @@ using Avalonia.Layout;
 using Avalonia.Input;
 using Harmony;
 using Avalonia.Media;
+using System.Security;
+using Avalonia.Controls.Primitives;
 
 namespace MuseDashModToolsUI.Views
 {
@@ -36,6 +38,11 @@ namespace MuseDashModToolsUI.Views
         public List<WebModInfo> WebModsList { get; private set; }
         public List<LocalModInfo> LocalModsList { get; private set; } = new();
 
+        // for early debugging:
+        public bool SuccessPopups { get; set; } = true;
+
+        public string CurrentWorkingDirectory = Directory.GetCurrentDirectory();
+
         private const string BaseLink = "MDModsDev/ModLinks/dev/";
         public MainWindow()
         {
@@ -45,6 +52,18 @@ namespace MuseDashModToolsUI.Views
             InitializeLocalModsList();
             FinishInitialization();
 
+        }
+
+        public static bool IsValidUrl(this string source)
+        {
+            Uri uriResult;
+            return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+        }
+
+        public static bool IsValidPath(this string source)
+        {
+            Uri uriResult;
+            return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeFile);
         }
 
         public void ExitProgram()
@@ -196,7 +215,10 @@ namespace MuseDashModToolsUI.Views
         //Adds a mod that isn't installed
         public void AddMod(WebModInfo webMod)
         {
-            Grid modGrid = new();
+            Grid modGrid = new()
+            {
+                Tag = webMod.Name
+            };
             ModItemsContainer.Children.Add(modGrid);
             StackPanel expanderPanel = new()
             {
@@ -289,7 +311,7 @@ namespace MuseDashModToolsUI.Views
             try
             {
                 
-                string path = Path.Join(Directory.GetCurrentDirectory(), "Mods");
+                string path = Path.Join(CurrentWorkingDirectory, "Mods");
                 var files = Directory.GetFiles(path, "*.dll")
                     .Concat(Directory.GetFiles(path, "*.dll.disabled"))
                     .ToList();
@@ -307,7 +329,11 @@ namespace MuseDashModToolsUI.Views
                             catch (Exception) {}
                             continue;
                         }
-                        var mod = new LocalModInfo() { Disabled = isDisabled };
+                        var mod = new LocalModInfo()
+                        {
+                            Disabled = isDisabled,
+                            FileName = Path.GetFileName(file)
+                        };
                         var assembly = Assembly.LoadFrom(file);
                         var properties = assembly.GetCustomAttribute(typeof(MelonInfoAttribute)).GetType().GetProperties();
                         foreach (var property in properties)
@@ -316,9 +342,21 @@ namespace MuseDashModToolsUI.Views
                             {
                                 mod.Name = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
                             }
-                            if (property.Name == "Version")
+                            else if (property.Name == "Version")
                             {
                                 mod.Version = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                            }
+                            else if (property.Name == "Description")
+                            {
+                                mod.Description = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                            }
+                            else if (property.Name == "Author")
+                            {
+                                mod.Author = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                            }
+                            else if (property.Name == "DownloadLink")
+                            {
+                                mod.HomePage = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
                             }
                         }
                         SHA256 mySHA256 = SHA256.Create();
@@ -337,6 +375,7 @@ namespace MuseDashModToolsUI.Views
             catch (Exception)
             {
                 DialogPopup("Failed to read local mods\nMake sure you're in the game directory");
+
             }
                 
         }
@@ -344,6 +383,16 @@ namespace MuseDashModToolsUI.Views
         public void UpdateFilters()
         {
 
+        }
+
+        public void ModCheckboxChanged(object? sender, RoutedEventArgs args)
+        {
+            bool? isChecked = ((ToggleButton)sender).IsChecked;
+            var localMod = LocalModsList.Find(x => x.Name == (string)((Control)sender).Tag);
+            if (isChecked == null)
+            {
+                ((ToggleButton)sender).IsChecked ^= !localMod.Disabled;
+            }
         }
 
         //Used for implementing expanders, cause the built-in one is glitchy as all hell.
@@ -373,10 +422,108 @@ namespace MuseDashModToolsUI.Views
             byte[] data = GithubFileDownload(webMod.DownloadLink);
             if (data == null)
             {
-                DialogPopup("Mod download failed\n(webclient failed)");
+                DialogPopup("Mod download failed\n(are you online?)");
                 return;
             }
-            Path.Join(Directory.GetCurrentDirectory(), "Mods", webMod.DownloadLink[5..]);
+            string path = Path.Join(CurrentWorkingDirectory, "Mods", webMod.DownloadLink[5..]);
+            int lastIdx = path.LastIndexOf(Path.DirectorySeparatorChar);
+            if (!webMod.DownloadLink[5..].Contains('.'))
+            {
+                DialogPopup($"Something went horribly wrong,\nas {webMod.DownloadLink[5..]} is not a file path!");
+                return;
+            }
+            if (File.Exists(path))
+            {
+                try
+                {
+                    File.WriteAllBytes(path, data);
+                    if (SuccessPopups)
+                    {
+                        DialogPopup("Update successful.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    switch (ex)
+                    {
+                        case SecurityException:
+                        case UnauthorizedAccessException:
+                            DialogPopup("File update failed\n(unauthorized)");
+                            break;
+                        case IOException:
+                            DialogPopup("File update failed\n(is the game running?)");
+                            break;
+                        default:
+                            DialogPopup($"File update failed\n({ex})");
+                            break;
+                    }
+                    return;
+                }
+            }
+            else
+            {
+                try
+                {
+                    File.WriteAllBytes(path, data);
+                    if (true)
+                    {
+                        DialogPopup("Download successful.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    switch (ex)
+                    {
+                        case SecurityException:
+                        case UnauthorizedAccessException:
+                            DialogPopup("Mod install failed\n(unauthorized)");
+                            break;
+                        case IOException:
+                            DialogPopup("Mod install failed\n(is the game running?)");
+                            break;
+                        default:
+                            DialogPopup($"Mod install failed\n({ex})");
+                            break;
+                    }
+                    return;
+                }
+            }
+        }
+
+        public void UninstallMod(object? sender, RoutedEventArgs args)
+        {
+            var localMod = LocalModsList.Find(x => x.Name == (string)((Control)sender).Tag);
+
+            string path = Path.Join(CurrentWorkingDirectory, "Mods", localMod.FileName);
+            if (!File.Exists(path))
+            {
+                DialogPopup("Mod uninstall failed\n(file not found)");
+                return;
+            }
+            try
+            {
+                File.Delete(path);
+                if (SuccessPopups)
+                {
+                    DialogPopup("Uninstall successful");
+                }
+            }
+            catch (Exception ex)
+            {
+                switch (ex)
+                {
+                    case UnauthorizedAccessException:
+                        DialogPopup("Mod uninstall failed\n(unauthorized)");
+                        break;
+                    case IOException:
+                        DialogPopup("Mod uninstall failed\n(is the game running?)");
+                        break;
+                    default:
+                        DialogPopup($"Mod uninstall failed\n({ex})");
+                        break;
+                }
+                return;
+            }
         }
 
         public void OpenURL(string linkToOpen)
@@ -418,6 +565,7 @@ namespace MuseDashModToolsUI.Views
         public string Name { get; set; }
         public string Version { get; set; }
         public string SHA256 { get; set; }
+        public string FileName { get; set; }
         public bool Disabled { get; set; }
         public string? Description { get; set; }
         public string? Author { get; set; }
