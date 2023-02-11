@@ -54,13 +54,13 @@ namespace MuseDashModToolsUI.Views
 
         }
 
-        public static bool IsValidUrl(this string source)
+        public static bool IsValidUrl(string source)
         {
             Uri uriResult;
             return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
         }
 
-        public static bool IsValidPath(this string source)
+        public static bool IsValidPath(string source)
         {
             Uri uriResult;
             return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeFile);
