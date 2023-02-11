@@ -255,7 +255,7 @@ namespace MuseDashModToolsUI.Views
             {
                 Text = $"{webMod.Version}",
             });
-            if (webMod.HomePage != "")
+            if (IsValidUrl(webMod.HomePage))
             {
                 Button homepageButton = new()
                 {
@@ -300,12 +300,71 @@ namespace MuseDashModToolsUI.Views
 
         }
 
-        public void UpdateModDisplay(string modName)
+        public void UpdateModDisplay(WebModInfo webMod, LocalModInfo localMod)
         {
 
         }
+        public void UpdateModDisplay(LocalModInfo localMod)
+        {
+
+        }
+        public void UpdateModDisplay(WebModInfo webMod)
+        {
+            if (webMod == null)
+            {
+                //TODO remove from list, then:
+                return;
+            }
+        }
 
         //Loads installed mods from the mods folder
+
+        public LocalModInfo LoadLocalMod(string file)
+        {
+            var mod = new LocalModInfo()
+            {
+                Disabled = file.EndsWith(".disabled"),
+                FileName = Path.GetFileName(file)
+            };
+            var assembly = Assembly.LoadFrom(file);
+            var properties = assembly.GetCustomAttribute(typeof(MelonInfoAttribute)).GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.Name == "Name")
+                {
+                    mod.Name = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                }
+                else if (property.Name == "Version")
+                {
+                    mod.Version = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                }
+                else if (property.Name == "Description")
+                {
+                    mod.Description = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                }
+                else if (property.Name == "Author")
+                {
+                    mod.Author = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                }
+                else if (property.Name == "DownloadLink")
+                {
+                    mod.HomePage = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                    if (!IsValidUrl(mod.HomePage))
+                    {
+                        mod.HomePage = null;
+                    }
+                }
+            }
+            SHA256 mySHA256 = SHA256.Create();
+            var fInfo = new FileInfo(file);
+            FileStream fileStream = fInfo.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            fileStream.Position = 0;
+            byte[] hashValue = mySHA256.ComputeHash(fileStream);
+            string output = BitConverter.ToString(hashValue).Replace("-", "").ToLower();
+            mod.SHA256 = output;
+            fileStream.Close();
+            return mod;
+        }
         public void InitializeLocalModsList()
         {
             try
@@ -319,8 +378,7 @@ namespace MuseDashModToolsUI.Views
                 {
                     try
                     {
-                        bool isDisabled = file.EndsWith(".disabled");
-                        if (isDisabled && files.Contains(file[..^9]))
+                        if (file.EndsWith(".disabled") && files.Contains(file[..^9]))
                         {
                             try
                             {
@@ -329,45 +387,8 @@ namespace MuseDashModToolsUI.Views
                             catch (Exception) {}
                             continue;
                         }
-                        var mod = new LocalModInfo()
-                        {
-                            Disabled = isDisabled,
-                            FileName = Path.GetFileName(file)
-                        };
-                        var assembly = Assembly.LoadFrom(file);
-                        var properties = assembly.GetCustomAttribute(typeof(MelonInfoAttribute)).GetType().GetProperties();
-                        foreach (var property in properties)
-                        {
-                            if (property.Name == "Name")
-                            {
-                                mod.Name = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
-                            }
-                            else if (property.Name == "Version")
-                            {
-                                mod.Version = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
-                            }
-                            else if (property.Name == "Description")
-                            {
-                                mod.Description = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
-                            }
-                            else if (property.Name == "Author")
-                            {
-                                mod.Author = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
-                            }
-                            else if (property.Name == "DownloadLink")
-                            {
-                                mod.HomePage = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
-                            }
-                        }
-                        SHA256 mySHA256 = SHA256.Create();
-                        var fInfo = new FileInfo(file);
-                        FileStream fileStream = fInfo.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                        fileStream.Position = 0;
-                        byte[] hashValue = mySHA256.ComputeHash(fileStream);
-                        string output = BitConverter.ToString(hashValue).Replace("-", "").ToLower();
-                        mod.SHA256 = output;
-                        fileStream.Close();
-                        LocalModsList.Add(mod);
+                        LocalModsList.Add(LoadLocalMod(path));
+
                     }
                     catch (Exception) { throw; }
                 }
@@ -382,17 +403,36 @@ namespace MuseDashModToolsUI.Views
 
         public void UpdateFilters()
         {
-
+            
         }
 
         public void ModCheckboxChanged(object? sender, RoutedEventArgs args)
         {
             bool? isChecked = ((ToggleButton)sender).IsChecked;
             var localMod = LocalModsList.Find(x => x.Name == (string)((Control)sender).Tag);
-            if (isChecked == null)
+
+            try
             {
-                ((ToggleButton)sender).IsChecked ^= !localMod.Disabled;
+                File.Move(localMod.FileName + (localMod.Disabled ? ".disabled" : ""), localMod.FileName + (localMod.Disabled ? "" : ".disabled"), true);
             }
+            catch (Exception ex)
+            {
+                switch (ex)
+                {
+                    case UnauthorizedAccessException:
+                        DialogPopup("Mod disable/enable failed\n(unauthorized)");
+                        break;
+                    case IOException:
+                        DialogPopup("Mod disable/enable failed\n(is the game running?)");
+                        break;
+                    default:
+                        DialogPopup($"Mod disable/enable failed\n({ex})");
+                        break;
+                }
+                ((ToggleButton)sender).IsChecked ^= true;
+                return;
+            }
+
         }
 
         //Used for implementing expanders, cause the built-in one is glitchy as all hell.
@@ -437,6 +477,9 @@ namespace MuseDashModToolsUI.Views
                 try
                 {
                     File.WriteAllBytes(path, data);
+                    var localMod = LoadLocalMod(path);
+                    LocalModsList.Add(localMod);
+                    UpdateModDisplay(webMod, localMod);
                     if (SuccessPopups)
                     {
                         DialogPopup("Update successful.");
@@ -465,7 +508,10 @@ namespace MuseDashModToolsUI.Views
                 try
                 {
                     File.WriteAllBytes(path, data);
-                    if (true)
+                    var localMod = LoadLocalMod(path);
+                    LocalModsList.Add(LoadLocalMod(path));
+                    UpdateModDisplay(webMod, localMod);
+                    if (SuccessPopups)
                     {
                         DialogPopup("Download successful.");
                     }
@@ -503,6 +549,8 @@ namespace MuseDashModToolsUI.Views
             try
             {
                 File.Delete(path);
+                UpdateModDisplay(WebModsList.Find(x=> x.Name == localMod.Name));
+                LocalModsList.Remove(localMod);
                 if (SuccessPopups)
                 {
                     DialogPopup("Uninstall successful");
