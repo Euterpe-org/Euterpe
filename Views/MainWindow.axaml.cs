@@ -23,6 +23,7 @@ using Harmony;
 using Avalonia.Media;
 using System.Security;
 using Avalonia.Controls.Primitives;
+using DynamicData;
 
 namespace MuseDashModToolsUI.Views
 {
@@ -79,7 +80,10 @@ namespace MuseDashModToolsUI.Views
             this.Content = null;
             dialog.TextDisplay = errorMessage;
             dialog.ButtonClickFunction = ExitProgram;
-            this.Show();
+            if (!this.IsVisible)
+            {
+                this.Show();
+            }
             dialog.ShowDialog(this);
         }
 
@@ -92,6 +96,10 @@ namespace MuseDashModToolsUI.Views
             dialog.ButtonClickFunction = exitAction;
             if (isModal)
             {
+                if (!this.IsVisible)
+                {
+                    this.Show();
+                }
                 dialog.ShowDialog(this);
             }
             else
@@ -107,6 +115,10 @@ namespace MuseDashModToolsUI.Views
             dialog.TextDisplay = message;
             if (isModal)
             {
+                if (!this.IsVisible)
+                {
+                    this.Show();
+                }
                 dialog.ShowDialog(this);
             }
             else
@@ -209,7 +221,81 @@ namespace MuseDashModToolsUI.Views
         //Adds a mod that isn't tracked online
         public void AddMod(LocalModInfo localMod)
         {
+            Grid modGrid = new()
+            {
+                Tag = localMod.Name
+            };
+            ModItemsContainer.Children.Add(modGrid);
+            StackPanel expanderPanel = new()
+            {
+                Width = 675
+            };
+            modGrid.Children.Add(expanderPanel);
 
+            Button expanderButton = new()
+            {
+                Width = 675,
+                Height = 75,
+                HorizontalContentAlignment = HorizontalAlignment.Left,
+                VerticalContentAlignment = VerticalAlignment.Top,
+                Foreground = (IBrush)new BrushConverter().ConvertFromString("#bbb"),
+                Content = localMod.Name,
+                Margin = new(0, 15, 0, 0),
+                BorderBrush = Brushes.Transparent
+            };
+            expanderButton.Click += Button_Expander;
+            expanderPanel.Children.Add(expanderButton);
+
+            StackPanel expanderContent = new()
+            {
+                Tag = "ExpanderContent",
+                IsVisible = false,
+                Margin = new(50, 0, 0, 0)
+            };
+            expanderPanel.Children.Add(expanderContent);
+            expanderContent.Children.Add(new TextBlock
+            {
+                Text = $"{((localMod.Description == "" || localMod.Description == null) ? "" : localMod.Description)}\n\nAuthor: {localMod.Author}\nVersion:\n",
+            });
+            expanderContent.Children.Add(new TextBlock
+            {
+                Text = $"{localMod.Version}",
+            });
+            if (IsValidUrl(localMod.HomePage))
+            {
+                Button homepageButton = new()
+                {
+                    Content = "Homepage",
+                    Margin = new(0, 5, 0, 5),
+                    Tag = localMod.HomePage
+                };
+                homepageButton.Click += RoutedOpenURL;
+                expanderContent.Children.Add(homepageButton);
+            }
+
+
+
+
+            StackPanel controlsPanel = new()
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new(0, 0, 10, 0)
+            };
+            modGrid.Children.Add(controlsPanel);
+
+
+            Button downloadButton = new()
+            {
+                Content = "Uninstall",
+                Width = 75,
+                Height = 30,
+                Tag = localMod.Name,
+                Margin = new(250, 30, 0, 0),
+                VerticalAlignment = VerticalAlignment.Top,
+                Background = (IBrush)new BrushConverter().ConvertFromString("#505050"),
+            };
+            downloadButton.Click += UninstallMod;
+            controlsPanel.Children.Add(downloadButton);
         }
 
         //Adds a mod that isn't installed
@@ -266,10 +352,14 @@ namespace MuseDashModToolsUI.Views
                 homepageButton.Click += RoutedOpenURL;
                 expanderContent.Children.Add(homepageButton);
             }
-            expanderContent.Children.Add(new TextBlock
+            if (webMod.DependentMods.Length != 0)
             {
-                Text = $"Dependencies:\n{string.Join("\n", webMod.DependentMods)}",
-            });
+                expanderContent.Children.Add(new TextBlock
+                {
+                    Text = $"Dependencies:\n{string.Join("\n", webMod.DependentMods)}",
+                });
+            }
+            
 
 
 
@@ -300,21 +390,22 @@ namespace MuseDashModToolsUI.Views
 
         }
 
+
         public void UpdateModDisplay(WebModInfo webMod, LocalModInfo localMod)
         {
 
         }
         public void UpdateModDisplay(LocalModInfo localMod)
         {
-
+            if (WebModsList.Find(x => x.Name == localMod.Name) == null || LocalModsList.Find(x => x.Name == localMod.Name) == null)
+            {
+                ModItemsContainer.Children.Remove(ModItemsContainer.Children.First(x => ((Control)x).Tag == localMod.Name));
+                return;
+            }
         }
         public void UpdateModDisplay(WebModInfo webMod)
         {
-            if (webMod == null)
-            {
-                //TODO remove from list, then:
-                return;
-            }
+
         }
 
         //Loads installed mods from the mods folder
@@ -330,25 +421,36 @@ namespace MuseDashModToolsUI.Views
             var properties = assembly.GetCustomAttribute(typeof(MelonInfoAttribute)).GetType().GetProperties();
             foreach (var property in properties)
             {
+                var temp = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null);
                 if (property.Name == "Name")
                 {
-                    mod.Name = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                    if (temp == null)
+                        return null;
+                    mod.Name = temp.ToString();
                 }
                 else if (property.Name == "Version")
                 {
-                    mod.Version = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                    if (temp == null)
+                        return null;
+                    mod.Version = temp.ToString();
                 }
                 else if (property.Name == "Description")
                 {
-                    mod.Description = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                    if (temp == null) 
+                        continue;
+                    mod.Description = temp.ToString();
                 }
                 else if (property.Name == "Author")
                 {
-                    mod.Author = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                    if (temp == null)
+                        continue;
+                    mod.Author = temp.ToString();
                 }
                 else if (property.Name == "DownloadLink")
                 {
-                    mod.HomePage = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null).ToString();
+                    if (temp == null)
+                        continue;
+                    mod.HomePage = temp.ToString();
                     if (!IsValidUrl(mod.HomePage))
                     {
                         mod.HomePage = null;
@@ -357,11 +459,12 @@ namespace MuseDashModToolsUI.Views
             }
             SHA256 mySHA256 = SHA256.Create();
             var fInfo = new FileInfo(file);
-            FileStream fileStream = fInfo.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            FileStream fileStream = fInfo.Open(FileMode.Open, FileAccess.Read, FileShare.Read);
             fileStream.Position = 0;
             byte[] hashValue = mySHA256.ComputeHash(fileStream);
             string output = BitConverter.ToString(hashValue).Replace("-", "").ToLower();
             mod.SHA256 = output;
+            mySHA256.Dispose();
             fileStream.Close();
             return mod;
         }
@@ -387,7 +490,11 @@ namespace MuseDashModToolsUI.Views
                             catch (Exception) {}
                             continue;
                         }
-                        LocalModsList.Add(LoadLocalMod(path));
+                        var localMod = LoadLocalMod(file);
+                        if (localMod != null)
+                        {
+                            LocalModsList.Add(localMod);
+                        }
 
                     }
                     catch (Exception) { throw; }
@@ -396,7 +503,7 @@ namespace MuseDashModToolsUI.Views
             catch (Exception)
             {
                 DialogPopup("Failed to read local mods\nMake sure you're in the game directory");
-
+                throw;
             }
                 
         }
@@ -549,8 +656,8 @@ namespace MuseDashModToolsUI.Views
             try
             {
                 File.Delete(path);
-                UpdateModDisplay(WebModsList.Find(x=> x.Name == localMod.Name));
                 LocalModsList.Remove(localMod);
+                UpdateModDisplay(localMod);
                 if (SuccessPopups)
                 {
                     DialogPopup("Uninstall successful");
@@ -562,6 +669,7 @@ namespace MuseDashModToolsUI.Views
                 {
                     case UnauthorizedAccessException:
                         DialogPopup("Mod uninstall failed\n(unauthorized)");
+                        throw;
                         break;
                     case IOException:
                         DialogPopup("Mod uninstall failed\n(is the game running?)");
