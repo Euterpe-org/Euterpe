@@ -10,6 +10,10 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaXaml Remove="Mods\**" />
+    <Compile Remove="Mods\**" />
+    <EmbeddedResource Remove="Mods\**" />
+    <None Remove="Mods\**" />
     <None Remove=".gitignore" />
   </ItemGroup>
   <ItemGroup>
