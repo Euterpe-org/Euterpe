@@ -314,9 +314,6 @@ public partial class MainWindow : Window
             };
         }
 
-        ;
-    }
-
     //Adds a mod that's installed
     public void AddMod(WebModInfo webMod, LocalModInfo localMod, int index = -1)
     {
