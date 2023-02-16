@@ -33,7 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MelonLoader">
-      <HintPath>D:\Steam\steamapps\common\Muse Dash\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>Binary\MelonLoader.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
