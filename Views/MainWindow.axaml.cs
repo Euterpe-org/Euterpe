@@ -169,9 +169,7 @@ public partial class MainWindow : Window
         byte[] data;
         try
         {
-            data = webClient.DownloadData("https://raw.githubusercontent.com/" + BaseLink + relativeURL);
-            webClient.Dispose();
-            return data;
+            webClient.DownloadFile("https://raw.githubusercontent.com/" + BaseLink + relativeUrl, Path.Join(CurrentGameDirectory, relativeUrl.Remove(5)));
         }
         catch (WebException)
         {
