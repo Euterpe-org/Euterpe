@@ -303,6 +303,7 @@ namespace MuseDashModToolsUI.Views
 
         public void InitializeSettings()
         {
+            CurrentGameDirectory = null;
             if (!File.Exists("settings"))
             {
                 return;
@@ -556,13 +557,26 @@ namespace MuseDashModToolsUI.Views
             modGrid.Children.Add(controlsPanel);
 
 
+
+            CheckBox isEnabledBox = new CheckBox()
+            {
+                IsChecked = !localMod.Disabled,
+                Content = "On",
+                Tag = localMod.Name,
+                Foreground = "#ddd".ToBrush()
+            };
+            isEnabledBox.Checked += ModCheckboxChanged;
+            isEnabledBox.Unchecked += ModCheckboxChanged;
+            controlsPanel.Children.Add(isEnabledBox);
+
+
             Button downloadButton = new()
             {
                 Content = "Uninstall",
                 Width = 75,
                 Height = 30,
                 Tag = localMod.Name,
-                Margin = new(300, LazyMarginLoL, 0, 0),
+                Margin = new(30, LazyMarginLoL, 0, 0),
                 VerticalAlignment = VerticalAlignment.Top,
                 Background = Color_BG50,
             };
