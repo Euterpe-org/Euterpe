@@ -8,16 +8,13 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Layout;
 using Avalonia.Media;
 using MelonLoader;
 
@@ -31,41 +28,22 @@ namespace MuseDashModToolsUI.Views;
 #pragma warning disable CS8601
 #pragma warning disable CS8603
 
-public static class Extensions
-{
-    public static IBrush ToBrush(this string HexColorString) => (IBrush)new BrushConverter().ConvertFromString(HexColorString);
-
-    public static bool IsValidUrl(this string source)
-    {
-        Uri uriResult;
-        return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-    }
-
-    public static bool IsValidPath(this string source)
-    {
-        Uri uriResult;
-        return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeFile;
-    }
-}
-
 public partial class MainWindow : Window
 {
     private const string BaseLink = "MDModsDev/ModLinks/dev/";
 
-    public static IBrush Color_BG50 = "#505050".ToBrush();
-    public static IBrush Color_Red = "#c80000".ToBrush();
-    public static IBrush Color_BBB = "#bbb".ToBrush();
-    public static IBrush Color_Purple = "#a000e6".ToBrush();
-    public static IBrush Color_Yellow = "#e19600".ToBrush();
-
-    //public string CurrentGameDirectory = Directory.GetCurrentDirectory();
-
-    public string? CurrentGameDirectory;
+    private readonly IBrush Color_BBB = "#bbb".ToBrush();
+    private readonly IBrush Color_BG50 = "#505050".ToBrush();
+    private readonly IBrush Color_Purple = "#a000e6".ToBrush();
+    private readonly IBrush Color_Red = "#c80000".ToBrush();
+    private readonly IBrush Color_Yellow = "#e19600".ToBrush();
 
     private readonly int LazyMarginLoL = 35;
 
+    private string? CurrentGameDirectory = Directory.GetCurrentDirectory();
+
     public bool localLoadSuccess = true;
-    public bool webLoadSuccess = true;
+    private bool WebLoadSuccess;
 
     public MainWindow()
     {
@@ -131,15 +109,14 @@ public partial class MainWindow : Window
 
     public DialogWindow DialogPopup(string message, bool isModal = true) => DialogPopup(message, null, isModal);
 
-    //Downloads online mods
+    /// <summary>
+    /// Downloads online mods
+    /// </summary>
     public void InitializeWebModsList()
     {
         try
         {
-            var webClient = new WebClient
-            {
-                Encoding = Encoding.UTF8
-            };
+            var webClient = new WebClient { Encoding = Encoding.UTF8 };
             string data;
             try
             {
@@ -152,54 +129,52 @@ public partial class MainWindow : Window
 
             webClient.Dispose();
             WebModsList = JsonSerializer.Deserialize<List<WebModInfo>>(data);
+            WebLoadSuccess = true;
         }
         catch (Exception)
         {
-            DialogPopup("Failed to download\nonline mod info");
-            webLoadSuccess = false;
+            DialogPopup("Failed to download online mod info");
+            WebLoadSuccess = false;
         }
     }
 
-    public byte[] GithubFileDownload(string relativeURL)
+    /// <summary>
+    /// Download file from github
+    /// </summary>
+    public byte[] ModDownload(string relativeUrl)
     {
-        var webClient = new WebClient
-        {
-            Encoding = Encoding.UTF8
-        };
-        byte[] data;
+        var webClient = new WebClient { Encoding = Encoding.UTF8 };
         try
         {
-            webClient.DownloadFile("https://raw.githubusercontent.com/" + BaseLink + relativeUrl, Path.Join(CurrentGameDirectory, relativeUrl.Remove(5)));
+            return webClient.DownloadData("https://raw.githubusercontent.com/" + BaseLink + relativeUrl);
         }
         catch (WebException)
         {
             try
             {
-                data = webClient.DownloadData("https://raw.fastgit.org/" + BaseLink + relativeURL);
-                webClient.Dispose();
-                return data;
+                return webClient.DownloadData("https://raw.fastgit.org/" + BaseLink + relativeUrl);
             }
             catch (Exception)
             {
-                webClient.Dispose();
                 return null;
             }
+        }
+        finally
+        {
+            webClient.Dispose();
         }
     }
 
     //Main function is to compare mods and call each AddMod function appropriately
-    public void FinishInitialization()
+    internal void FinishInitialization()
     {
-        if (localLoadSuccess == false)
-        {
-            return;
-        }
+        if (!localLoadSuccess) return;
 
         var isTracked = new bool[LocalModsList.Count];
-        for (var i = 0; i < WebModsList.Count; i++)
+        foreach (var webMod in WebModsList)
         {
-            var webMod = WebModsList[i];
-            var localModIdx = LocalModsList.FindIndex(localMod => localMod.Name == webMod.Name);
+            var mod = webMod;
+            var localModIdx = LocalModsList.FindIndex(localMod => localMod.Name == mod.Name);
             if (localModIdx == -1)
             {
                 AddMod(webMod);
@@ -284,7 +259,7 @@ public partial class MainWindow : Window
         LocalModsList.Clear();
         CurrentGameDirectory = result;
         InitializeLocalModsList(false);
-        if (localLoadSuccess == false)
+        if (!localLoadSuccess)
         {
             DialogPopup("Failed to read local mods", ChoosePath);
             CurrentGameDirectory = null;
@@ -294,396 +269,24 @@ public partial class MainWindow : Window
         FinishInitialization();
     }
 
-        public void InitializeSettings()
-        {
-            CurrentGameDirectory = null;
-            if (!File.Exists("settings"))
-            {
-                return;
-            }
-            string[] settings = File.ReadAllLines("settings");
-            if (settings[0] == "")
-            {
-                return;
-            }
-            if (settings[0].IsValidPath())
-            {
-                CurrentGameDirectory = settings[0];
-            };
-        }
-
-    //Adds a mod that's installed
-    public void AddMod(WebModInfo webMod, LocalModInfo localMod, int index = -1)
+    public void InitializeSettings()
     {
-        Grid modGrid = new()
+        CurrentGameDirectory = null;
+        if (!File.Exists("settings"))
         {
-            Tag = webMod.Name
-        };
-        StackPanel expanderPanel = new()
-        {
-            Width = 675
-        };
-        modGrid.Children.Add(expanderPanel);
-
-        Button expanderButton = new()
-        {
-            Width = 675,
-            Height = 75,
-            HorizontalContentAlignment = HorizontalAlignment.Left,
-            VerticalContentAlignment = VerticalAlignment.Center,
-            Foreground = Color_BBB,
-            Content = webMod.Name,
-            Margin = new Thickness(0, 15, 0, 0),
-            BorderBrush = Brushes.Transparent
-        };
-        expanderButton.Click += Button_Expander;
-        expanderPanel.Children.Add(expanderButton);
-
-        StackPanel expanderContent = new()
-        {
-            Tag = "ExpanderContent",
-            IsVisible = false,
-            Margin = new Thickness(50, 0, 0, 0)
-        };
-        expanderPanel.Children.Add(expanderContent);
-        expanderContent.Children.Add(new TextBlock
-        {
-            Text = $"{webMod.Description}\n\nAuthor: {webMod.Author}\nVersion:\n"
-        });
-        TextBlock versionText = new()
-        {
-            Text = $"{localMod.Version}"
-        };
-        var versionDate = new Version(webMod.Version) > new Version(localMod.Version) ? -1 : new Version(webMod.Version) < new Version(localMod.Version) ? 1 : 0;
-        var ShaMismatch = (versionDate == 0) & (webMod.SHA256 != localMod.SHA256);
-        if (versionDate == -1)
-        {
-            versionText.Text += $" => {webMod.Version}";
-            versionText.Foreground = Color_Red;
-            expanderButton.Foreground = Color_Red;
-        }
-        else if (versionDate == 1)
-        {
-            versionText.Text += " (WOW MOD DEV)";
-            versionText.Foreground = Color_Purple;
-            expanderButton.Foreground = Color_Purple;
-        }
-        else if (ShaMismatch)
-        {
-            versionText.Text += $" (Modified)";
-            versionText.Foreground = Color_Yellow;
-            expanderButton.Foreground = Color_Yellow;
-        }
-
-        expanderContent.Children.Add(versionText);
-        if (webMod.HomePage.IsValidUrl())
-        {
-            Button homepageButton = new()
-            {
-                Content = "Homepage",
-                Margin = new Thickness(0, 5, 0, 5),
-                Tag = webMod.HomePage
-            };
-            homepageButton.Click += RoutedOpenURL;
-            expanderContent.Children.Add(homepageButton);
-        }
-
-        if (webMod.DependentMods.Length != 0)
-        {
-            StackPanel dependencyBlock = new();
-            dependencyBlock.Children.Add(new TextBlock { Text = $"Dependencies:" });
-            foreach (var githubPath in webMod.DependentMods)
-            {
-                string modName;
-                var temp = WebModsList.Find(x => x.DownloadLink == githubPath);
-                modName = temp == null ? Path.GetFileName(githubPath) : temp.Name;
-                TextBlock modBlock = new()
-                {
-                    Text = modName
-                };
-                if (!LocalModsList.Any(x => x.Name == modName))
-                {
-                    modBlock.Foreground = Color_Red;
-                }
-
-                dependencyBlock.Children.Add(modBlock);
-            }
-
-            expanderContent.Children.Add(dependencyBlock);
-        }
-
-
-        StackPanel controlsPanel = new()
-        {
-            Orientation = Orientation.Horizontal,
-            Margin = new Thickness(0, 0, 10, 0)
-        };
-        modGrid.Children.Add(controlsPanel);
-
-        var isEnabledBox = new CheckBox()
-        {
-            IsChecked = !localMod.Disabled,
-            Content = "On",
-            Tag = webMod.Name,
-            Foreground = "#ddd".ToBrush()
-        };
-        isEnabledBox.Checked += ModCheckboxChanged;
-        isEnabledBox.Unchecked += ModCheckboxChanged;
-        controlsPanel.Children.Add(isEnabledBox);
-
-
-        Button uninstallButton = new()
-        {
-            Content = "Uninstall",
-            Width = 75,
-            Height = 30,
-            Tag = webMod.Name,
-            Margin = new Thickness(30, LazyMarginLoL, 0, 0),
-            VerticalAlignment = VerticalAlignment.Top,
-            Background = Color_BG50
-        };
-        uninstallButton.Click += UninstallMod;
-        controlsPanel.Children.Add(uninstallButton);
-
-
-        if (versionDate != 0 || ShaMismatch)
-        {
-            Button updateButton = new()
-            {
-                Width = 75,
-                Height = 30,
-                Tag = webMod.Name,
-                Margin = new Thickness(30, LazyMarginLoL, 0, 0),
-                VerticalAlignment = VerticalAlignment.Top,
-                Background = Color_BG50
-            };
-
-            if (versionDate == -1)
-            {
-                updateButton.Content = "Update";
-                updateButton.Foreground = Color_Red;
-            }
-            else if (ShaMismatch || versionDate == 1)
-            {
-                updateButton.Content = "Reinstall";
-                updateButton.Foreground = ShaMismatch ? Color_Yellow : Color_Purple;
-            }
-
-            updateButton.Click += InstallModUpdateCall;
-            controlsPanel.Children.Add(updateButton);
-        }
-
-
-        if (index == -1)
-        {
-            ModItemsContainer.Children.Add(modGrid);
             return;
         }
 
-        ModItemsContainer.Children.Insert(index, modGrid);
-        ModItemsContainer.Children.RemoveAt(index + 1);
-    }
-
-    //Adds a mod that isn't tracked online
-    public void AddMod(LocalModInfo localMod)
-    {
-        Grid modGrid = new()
+        var settings = File.ReadAllLines("settings");
+        if (settings[0] == "")
         {
-            Tag = localMod.Name
-        };
-        ModItemsContainer.Children.Add(modGrid);
-        StackPanel expanderPanel = new()
-        {
-            Width = 675
-        };
-        modGrid.Children.Add(expanderPanel);
-
-        Button expanderButton = new()
-        {
-            Width = 675,
-            Height = 75,
-            HorizontalContentAlignment = HorizontalAlignment.Left,
-            VerticalContentAlignment = VerticalAlignment.Center,
-            Foreground = Color_BBB,
-            Content = localMod.Name,
-            Margin = new Thickness(0, 15, 0, 0),
-            BorderBrush = Brushes.Transparent
-        };
-        expanderButton.Click += Button_Expander;
-        expanderPanel.Children.Add(expanderButton);
-
-        StackPanel expanderContent = new()
-        {
-            Tag = "ExpanderContent",
-            IsVisible = false,
-            Margin = new Thickness(50, 0, 0, 0)
-        };
-        expanderPanel.Children.Add(expanderContent);
-        expanderContent.Children.Add(new TextBlock
-        {
-            Text = $"{(localMod.Description == "" || localMod.Description == null ? "" : localMod.Description)}\n\nAuthor: {localMod.Author}\nVersion:\n"
-        });
-        expanderContent.Children.Add(new TextBlock
-        {
-            Text = $"{localMod.Version}"
-        });
-        if (localMod.HomePage.IsValidUrl())
-        {
-            Button homepageButton = new()
-            {
-                Content = "Homepage",
-                Margin = new Thickness(0, 5, 0, 5),
-                Tag = localMod.HomePage
-            };
-            homepageButton.Click += RoutedOpenURL;
-            expanderContent.Children.Add(homepageButton);
-        }
-
-
-        StackPanel controlsPanel = new()
-        {
-            Orientation = Orientation.Horizontal,
-            Margin = new Thickness(0, 0, 10, 0)
-        };
-        modGrid.Children.Add(controlsPanel);
-
-
-
-            CheckBox isEnabledBox = new CheckBox()
-            {
-                IsChecked = !localMod.Disabled,
-                Content = "On",
-                Tag = localMod.Name,
-                Foreground = "#ddd".ToBrush()
-            };
-            isEnabledBox.Checked += ModCheckboxChanged;
-            isEnabledBox.Unchecked += ModCheckboxChanged;
-            controlsPanel.Children.Add(isEnabledBox);
-
-
-            Button downloadButton = new()
-            {
-                Content = "Uninstall",
-                Width = 75,
-                Height = 30,
-                Tag = localMod.Name,
-                Margin = new(30, LazyMarginLoL, 0, 0),
-                VerticalAlignment = VerticalAlignment.Top,
-                Background = Color_BG50,
-            };
-            downloadButton.Click += UninstallMod;
-            controlsPanel.Children.Add(downloadButton);
-        }
-
-    //Adds a mod that isn't installed
-    public void AddMod(WebModInfo webMod, int index = -1)
-    {
-        Grid modGrid = new()
-        {
-            Tag = webMod.Name
-        };
-        StackPanel expanderPanel = new()
-        {
-            Width = 675
-        };
-        modGrid.Children.Add(expanderPanel);
-
-        Button expanderButton = new()
-        {
-            Width = 675,
-            Height = 75,
-            HorizontalContentAlignment = HorizontalAlignment.Left,
-            VerticalContentAlignment = VerticalAlignment.Center,
-            Foreground = Color_BBB,
-            Content = webMod.Name,
-            Margin = new Thickness(0, 15, 0, 0),
-            BorderBrush = Brushes.Transparent
-        };
-        expanderButton.Click += Button_Expander;
-        expanderPanel.Children.Add(expanderButton);
-
-        StackPanel expanderContent = new()
-        {
-            Tag = "ExpanderContent",
-            IsVisible = false,
-            Margin = new Thickness(50, 0, 0, 0)
-        };
-        expanderPanel.Children.Add(expanderContent);
-        expanderContent.Children.Add(new TextBlock
-        {
-            Text = $"{webMod.Description}\n\nAuthor: {webMod.Author}\nVersion:\n"
-        });
-        expanderContent.Children.Add(new TextBlock
-        {
-            Text = $"{webMod.Version}"
-        });
-        if (webMod.HomePage.IsValidUrl())
-        {
-            Button homepageButton = new()
-            {
-                Content = "Homepage",
-                Margin = new Thickness(0, 5, 0, 5),
-                Tag = webMod.HomePage
-            };
-            homepageButton.Click += RoutedOpenURL;
-            expanderContent.Children.Add(homepageButton);
-        }
-
-        if (webMod.DependentMods.Length != 0)
-        {
-            StackPanel dependencyBlock = new();
-            dependencyBlock.Children.Add(new TextBlock { Text = $"Dependencies:" });
-            foreach (var githubPath in webMod.DependentMods)
-            {
-                string modName;
-                var temp = WebModsList.Find(x => x.DownloadLink == githubPath);
-                modName = temp == null ? Path.GetFileName(githubPath) : temp.Name;
-                TextBlock modBlock = new()
-                {
-                    Text = modName
-                };
-                if (!LocalModsList.Any(x => x.Name == modName))
-                {
-                    modBlock.Foreground = Color_Red;
-                }
-
-                dependencyBlock.Children.Add(modBlock);
-            }
-
-            expanderContent.Children.Add(dependencyBlock);
-        }
-
-
-        StackPanel controlsPanel = new()
-        {
-            Orientation = Orientation.Horizontal,
-            Margin = new Thickness(0, 0, 10, 0)
-        };
-        modGrid.Children.Add(controlsPanel);
-
-
-        Button downloadButton = new()
-        {
-            Content = "Install",
-            Width = 75,
-            Height = 30,
-            Tag = webMod.Name,
-            Margin = new Thickness(300, LazyMarginLoL, 0, 0),
-            VerticalAlignment = VerticalAlignment.Top,
-            Background = Color_BG50
-        };
-        downloadButton.Click += InstallModUpdateCall;
-        controlsPanel.Children.Add(downloadButton);
-
-
-        if (index == -1)
-        {
-            ModItemsContainer.Children.Add(modGrid);
             return;
         }
 
-        ModItemsContainer.Children.Insert(index, modGrid);
-        ModItemsContainer.Children.RemoveAt(index + 1);
+        if (settings[0].IsValidPath())
+        {
+            CurrentGameDirectory = settings[0];
+        }
     }
 
 
@@ -721,74 +324,34 @@ public partial class MainWindow : Window
         }
     }
 
-    public LocalModInfo LoadLocalMod(string file)
+    /// <summary>
+    /// Load local mod and return its info
+    /// </summary>
+    internal LocalModInfo LoadLocalMod(string file)
     {
         var tempPath = Path.GetFileName(file);
         if (tempPath.EndsWith(".disabled"))
-        {
             tempPath = tempPath[..^9];
-        }
 
-        var mod = new LocalModInfo()
+        var mod = new LocalModInfo
         {
             Disabled = file.EndsWith(".disabled"),
             FileName = tempPath
         };
         var assembly = Assembly.Load(File.ReadAllBytes(file));
-        var properties = assembly.GetCustomAttribute(typeof(MelonInfoAttribute)).GetType().GetProperties();
-        foreach (var property in properties)
-        {
-            var temp = property.GetValue(assembly.GetCustomAttribute(typeof(MelonInfoAttribute)), null);
-            switch (property.Name)
-            {
-                case "Name":
-                    if (temp == null)
-                        return null;
-                    mod.Name = temp.ToString();
-                    break;
-                case "Version":
-                    if (temp == null)
-                        return null;
-                    mod.Version = temp.ToString();
-                    break;
-                case "Description":
-                    if (temp == null)
-                        continue;
-                    mod.Description = temp.ToString();
-                    break;
-                case "Author":
-                    if (temp == null)
-                        continue;
-                    mod.Author = temp.ToString();
-                    break;
-                case "DownloadLink":
-                    if (temp == null)
-                        continue;
-                    mod.HomePage = temp.ToString();
-                    if (!mod.HomePage.IsValidUrl())
-                    {
-                        mod.HomePage = null;
-                    }
+        var attribute = MelonUtils.PullAttributeFromAssembly<MelonInfoAttribute>(assembly);
 
-                    break;
-                default:
-                    break;
-            }
+        mod.Name = attribute.Name;
+        mod.Version = attribute.Version;
+        mod.Author = attribute.Author;
+        mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(file);
 
-            ;
-        }
-
-        var mySHA256 = SHA256.Create();
-        var fileStream = File.OpenRead(file);
-        var hashValue = mySHA256.ComputeHash(fileStream);
-        var output = BitConverter.ToString(hashValue).Replace("-", "").ToLower();
-        mod.SHA256 = output;
-        mySHA256.Dispose();
-        fileStream.Close();
         return mod;
     }
 
-    //Loads installed mods from the mods folder
+    /// <summary>
+    /// Loads installed mods from the mods folder
+    /// </summary>
     public void InitializeLocalModsList(bool failPopups = true)
     {
         localLoadSuccess = true;
@@ -855,7 +418,7 @@ public partial class MainWindow : Window
     public void SearchFilterChanged(object? sender, TextInputEventArgs args)
     {
         var searchTerm = ((TextBox)sender).Text;
-        if (searchTerm == null || searchTerm == "")
+        if (string.IsNullOrEmpty(searchTerm))
         {
             foreach (Control control in ModItemsContainer.Children)
             {
@@ -865,7 +428,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        searchTerm = Regex.Replace(searchTerm, "[ ]{2,}", " ", RegexOptions.None);
+        searchTerm = Regex.Replace(searchTerm, "[ ]{2,}", " ", RegexOptions.None).ToLower();
         var any = false;
         foreach (Control control in ModItemsContainer.Children)
         {
@@ -873,6 +436,7 @@ public partial class MainWindow : Window
             control.IsVisible = false;
             var localMod = LocalModsList.Find(x => x.Name == modName);
             var webMod = WebModsList.Find(x => x.Name == modName);
+            modName = modName.ToLower();
             switch (Selected_ModFilter)
             {
                 case 0:
@@ -1036,7 +600,7 @@ public partial class MainWindow : Window
             return false;
         }
 
-        var data = GithubFileDownload(webMod.DownloadLink);
+        var data = ModDownload(webMod.DownloadLink);
         if (data == null)
         {
             DialogPopup("Mod download failed\n(are you online?)");
@@ -1055,73 +619,36 @@ public partial class MainWindow : Window
             }
         }
 
-        if (localModIdx != -1)
+        try
         {
-            try
+            File.WriteAllBytes(path, data);
+            var localMod = LoadLocalMod(path);
+            LocalModsList.Add(LoadLocalMod(path));
+            UpdateModDisplay(webMod, localMod);
+            if (SuccessPopups && allowSuccessSetting)
             {
-                File.WriteAllBytes(path, data);
-                var localMod = LoadLocalMod(path);
-                LocalModsList.Add(localMod);
-                UpdateModDisplay(webMod, localMod);
-                if (SuccessPopups && allowSuccessSetting)
-                {
-                    DialogPopup("Update successful.");
-                }
-
-                return true;
+                DialogPopup("Download successful.");
             }
-            catch (Exception ex)
-            {
-                switch (ex)
-                {
-                    case SecurityException:
-                    case UnauthorizedAccessException:
-                        DialogPopup("File update failed\n(unauthorized)");
-                        break;
-                    case IOException:
-                        DialogPopup("File update failed\n(is the game running?)");
-                        break;
-                    default:
-                        DialogPopup($"File update failed\n({ex.GetType()})");
-                        break;
-                }
 
-                return false;
-            }
+            return true;
         }
-        else
+        catch (Exception ex)
         {
-            try
+            switch (ex)
             {
-                File.WriteAllBytes(path, data);
-                var localMod = LoadLocalMod(path);
-                LocalModsList.Add(LoadLocalMod(path));
-                UpdateModDisplay(webMod, localMod);
-                if (SuccessPopups && allowSuccessSetting)
-                {
-                    DialogPopup("Download successful.");
-                }
-
-                return true;
+                case SecurityException:
+                case UnauthorizedAccessException:
+                    DialogPopup("Mod install failed\n(unauthorized)");
+                    break;
+                case IOException:
+                    DialogPopup("Mod install failed\n(is the game running?)");
+                    break;
+                default:
+                    DialogPopup($"Mod install failed\n({ex.GetType()})");
+                    break;
             }
-            catch (Exception ex)
-            {
-                switch (ex)
-                {
-                    case SecurityException:
-                    case UnauthorizedAccessException:
-                        DialogPopup("Mod install failed\n(unauthorized)");
-                        break;
-                    case IOException:
-                        DialogPopup("Mod install failed\n(is the game running?)");
-                        break;
-                    default:
-                        DialogPopup($"Mod install failed\n({ex.GetType()})");
-                        break;
-                }
 
-                return false;
-            }
+            return false;
         }
     }
 
@@ -1208,31 +735,4 @@ public partial class MainWindow : Window
     {
         OpenPath(Path.Join(CurrentGameDirectory, "Mods"));
     }
-}
-
-public class WebModInfo
-{
-    public string Name { get; set; }
-    public string Version { get; set; }
-    public string Author { get; set; }
-    public string DownloadLink { get; set; }
-    public string HomePage { get; set; }
-    public string[] GameVersion { get; set; }
-    public string Description { get; set; }
-    public string[] DependentMods { get; set; }
-    public string[] DependentLibs { get; set; }
-    public string[] IncompatibleMods { get; set; }
-    public string SHA256 { get; set; }
-}
-
-public class LocalModInfo
-{
-    public string Name { get; set; }
-    public string Version { get; set; }
-    public string SHA256 { get; set; }
-    public string FileName { get; set; }
-    public bool Disabled { get; set; }
-    public string? Description { get; set; }
-    public string? Author { get; set; }
-    public string? HomePage { get; set; }
 }
