@@ -3,10 +3,10 @@
              xmlns:local="using:MuseDashModToolsUI"
              x:Class="MuseDashModToolsUI.App">
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <local:ViewLocator />
     </Application.DataTemplates>
 
     <Application.Styles>
-        <FluentTheme Mode="Light"/>
+        <FluentTheme Mode="Light" />
     </Application.Styles>
 </Application>

@@ -8,37 +8,37 @@
         Title=""
         TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True" CanResize="False"
-		Width="275" Height="175">
-	<Design.DataContext>
-		<vm:DialogViewModel/>
-	</Design.DataContext>
-	<Window.Styles>
-		<Style Selector="Label">
-			<Setter Property="Foreground" Value="#ddd"/>
-		</Style>
-		<Style Selector="StackPanel">
-			<Setter Property="HorizontalAlignment" Value="Center"></Setter>
-			<Setter Property="VerticalAlignment" Value="Center"></Setter>
-			<Setter Property="Orientation" Value="Vertical"></Setter>
-		</Style>
-	</Window.Styles>
-	<Panel>
-		<ExperimentalAcrylicBorder IsHitTestVisible="False">
-			<ExperimentalAcrylicBorder.Material>
-				<ExperimentalAcrylicMaterial
+        Width="275" Height="175">
+    <Design.DataContext>
+        <vm:DialogViewModel />
+    </Design.DataContext>
+    <Window.Styles>
+        <Style Selector="Label">
+            <Setter Property="Foreground" Value="#ddd" />
+        </Style>
+        <Style Selector="StackPanel">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Orientation" Value="Vertical" />
+        </Style>
+    </Window.Styles>
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
                     BackgroundSource="Digger"
                     TintColor="Black"
                     TintOpacity="1"
                     MaterialOpacity="0.65" />
-			</ExperimentalAcrylicBorder.Material>
-		</ExperimentalAcrylicBorder>
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
 
-		<StackPanel x:Name="MainDialogContainer">
-			<Label HorizontalContentAlignment="Center"/>
-			<Button Click="Button_Exit" Foreground="#ddd" HorizontalAlignment="Center">
-				OK
-			</Button>
-		</StackPanel>
-        
-	</Panel>
+        <StackPanel x:Name="MainDialogContainer">
+            <Label HorizontalContentAlignment="Center" />
+            <Button Click="Button_Exit" Foreground="#ddd" HorizontalAlignment="Center">
+                OK
+            </Button>
+        </StackPanel>
+
+    </Panel>
 </Window>
