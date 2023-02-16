@@ -1,63 +1,41 @@
-using Avalonia.Controls;
-using System.Collections.Generic;
-using System.Net;
-using System.Text.Json;
-using System.Text;
 using System;
-using System.IO;
-using Avalonia.Interactivity;
-using System.Linq;
-using Avalonia;
-using ReactiveUI;
-using MuseDashModToolsUI.Views;
-using System.Diagnostics;
-using System.Reactive;
-using System.Runtime.InteropServices;
-using Avalonia.Layout;
 using System.ComponentModel;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
 
-namespace MuseDashModToolsUI.Views
+namespace MuseDashModToolsUI.Views;
+
+public partial class DialogWindow : Window
 {
-    public partial class DialogWindow: Window
+    public DialogWindow()
     {
-        public string TextDisplay
+        InitializeComponent();
+    }
+
+    public string TextDisplay
+    {
+        get => storeTextDisplay;
+        set
         {
-            get
-            {
-                return storeTextDisplay;
-            }
-            set
-            {
-                storeTextDisplay = value;
-                var temp = (Label)MainDialogContainer.Children[0];
-                temp.Content = TextDisplay;
-            }
+            storeTextDisplay = value;
+            var temp = (Label)MainDialogContainer.Children[0];
+            temp.Content = TextDisplay;
         }
+    }
 
-        public string storeTextDisplay { get; set; }
+    public string storeTextDisplay { get; set; }
 
-        public Action? ButtonClickFunction { get; set; }
-        public DialogWindow()
-        {
-            InitializeComponent();
-        }
+    public Action? ButtonClickFunction { get; set; }
 
-        public void Button_Exit(object sender, RoutedEventArgs args)
-        {
-            ButtonClickFunction?.Invoke();
-            this.Close();
-        }
+    public void Button_Exit(object sender, RoutedEventArgs args)
+    {
+        ButtonClickFunction?.Invoke();
+        Close();
+    }
 
-        public event EventHandler<CancelEventArgs> Closing
-        {
-            add
-            {
-                ButtonClickFunction?.Invoke();
-            }
-            remove
-            {
-
-            }
-        }
+    public event EventHandler<CancelEventArgs> Closing
+    {
+        add { ButtonClickFunction?.Invoke(); }
+        remove { }
     }
 }
