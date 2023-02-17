@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
+using System;
+using System.IO;
+using System.Linq;
+using static MuseDashModToolsUI.Utils;
 
 namespace MuseDashModToolsUI.Views;
 
@@ -43,7 +44,7 @@ public partial class MainWindow
         expanderContent.Children.Add(new TextBlock { Text = $"{webMod.Description}\n\nAuthor: {webMod.Author}\nVersion:\n" });
 
         TextBlock versionText = new() { Text = $"{localMod.Version}" };
-        var versionDate = new Version(webMod.Version) > new Version(localMod.Version) ? -1 : new Version(webMod.Version) < new Version(localMod.Version) ? 1 : 0;
+        var versionDate = new Version(webMod.Version!) > new Version(localMod.Version!) ? -1 : new Version(webMod.Version!) < new Version(localMod.Version!) ? 1 : 0;
         var ShaMismatch = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
 
         switch (versionDate)
@@ -61,20 +62,20 @@ public partial class MainWindow
                 break;
 
             default:
-            {
-                if (ShaMismatch)
                 {
-                    versionText.Text += $" (Modified)";
-                    versionText.Foreground = Color_Yellow;
-                    expanderButton.Foreground = Color_Yellow;
-                }
+                    if (ShaMismatch)
+                    {
+                        versionText.Text += $" (Modified)";
+                        versionText.Foreground = Color_Yellow;
+                        expanderButton.Foreground = Color_Yellow;
+                    }
 
-                break;
-            }
+                    break;
+                }
         }
 
         expanderContent.Children.Add(versionText);
-        if (webMod.HomePage.IsValidUrl())
+        if (webMod.HomePage!.IsValidUrl())
         {
             Button homepageButton = new()
             {
@@ -82,7 +83,7 @@ public partial class MainWindow
                 Margin = new Thickness(0, 5, 0, 5),
                 Tag = webMod.HomePage
             };
-            homepageButton.Click += RoutedOpenURL;
+            homepageButton.Click += RoutedOpenUrl;
             expanderContent.Children.Add(homepageButton);
         }
 
@@ -104,7 +105,6 @@ public partial class MainWindow
             expanderContent.Children.Add(dependencyBlock);
         }
 
-
         StackPanel controlsPanel = new()
         {
             Orientation = Orientation.Horizontal,
@@ -119,10 +119,9 @@ public partial class MainWindow
             Tag = webMod.Name,
             Foreground = "#ddd".ToBrush()
         };
-        isEnabledBox.Checked += ModCheckboxChanged;
-        isEnabledBox.Unchecked += ModCheckboxChanged;
+        isEnabledBox.Checked += DisableMod;
+        isEnabledBox.Unchecked += DisableMod;
         controlsPanel.Children.Add(isEnabledBox);
-
 
         Button uninstallButton = new()
         {
@@ -136,7 +135,6 @@ public partial class MainWindow
         };
         uninstallButton.Click += UninstallMod;
         controlsPanel.Children.Add(uninstallButton);
-
 
         if (versionDate != 0 || ShaMismatch)
         {
@@ -164,7 +162,6 @@ public partial class MainWindow
             updateButton.Click += InstallModUpdateCall;
             controlsPanel.Children.Add(updateButton);
         }
-
 
         if (index == -1)
         {
@@ -212,7 +209,7 @@ public partial class MainWindow
             Text = $"{(string.IsNullOrEmpty(localMod.Description) ? "" : localMod.Description)}\n\nAuthor: {localMod.Author}\nVersion:\n"
         });
         expanderContent.Children.Add(new TextBlock { Text = $"{localMod.Version}" });
-        if (localMod.HomePage.IsValidUrl())
+        if (localMod.HomePage!.IsValidUrl())
         {
             Button homepageButton = new()
             {
@@ -220,10 +217,9 @@ public partial class MainWindow
                 Margin = new Thickness(0, 5, 0, 5),
                 Tag = localMod.HomePage
             };
-            homepageButton.Click += RoutedOpenURL;
+            homepageButton.Click += RoutedOpenUrl;
             expanderContent.Children.Add(homepageButton);
         }
-
 
         StackPanel controlsPanel = new()
         {
@@ -232,7 +228,6 @@ public partial class MainWindow
         };
         modGrid.Children.Add(controlsPanel);
 
-
         var isEnabledBox = new CheckBox()
         {
             IsChecked = !localMod.Disabled,
@@ -240,10 +235,9 @@ public partial class MainWindow
             Tag = localMod.Name,
             Foreground = "#ddd".ToBrush()
         };
-        isEnabledBox.Checked += ModCheckboxChanged;
-        isEnabledBox.Unchecked += ModCheckboxChanged;
+        isEnabledBox.Checked += DisableMod;
+        isEnabledBox.Unchecked += DisableMod;
         controlsPanel.Children.Add(isEnabledBox);
-
 
         Button downloadButton = new()
         {
@@ -291,7 +285,7 @@ public partial class MainWindow
         expanderPanel.Children.Add(expanderContent);
         expanderContent.Children.Add(new TextBlock { Text = $"{webMod.Description}\n\nAuthor: {webMod.Author}\nVersion:\n" });
         expanderContent.Children.Add(new TextBlock { Text = $"{webMod.Version}" });
-        if (webMod.HomePage.IsValidUrl())
+        if (webMod.HomePage!.IsValidUrl())
         {
             Button homepageButton = new()
             {
@@ -299,11 +293,11 @@ public partial class MainWindow
                 Margin = new Thickness(0, 5, 0, 5),
                 Tag = webMod.HomePage
             };
-            homepageButton.Click += RoutedOpenURL;
+            homepageButton.Click += RoutedOpenUrl;
             expanderContent.Children.Add(homepageButton);
         }
 
-        if (webMod.DependentMods.Length != 0)
+        if (webMod.DependentMods!.Length != 0)
         {
             StackPanel dependencyBlock = new();
             dependencyBlock.Children.Add(new TextBlock { Text = $"Dependencies:" });
@@ -326,14 +320,12 @@ public partial class MainWindow
             expanderContent.Children.Add(dependencyBlock);
         }
 
-
         StackPanel controlsPanel = new()
         {
             Orientation = Orientation.Horizontal,
             Margin = new Thickness(0, 0, 10, 0)
         };
         modGrid.Children.Add(controlsPanel);
-
 
         Button downloadButton = new()
         {
@@ -347,7 +339,6 @@ public partial class MainWindow
         };
         downloadButton.Click += InstallModUpdateCall;
         controlsPanel.Children.Add(downloadButton);
-
 
         if (index == -1)
         {

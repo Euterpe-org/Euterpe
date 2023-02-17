@@ -2,27 +2,27 @@
 
 public class WebModInfo
 {
-    internal string? Name { get; set; }
-    internal string? Version { get; set; }
-    internal string? Author { get; set; }
-    internal string? DownloadLink { get; set; }
-    internal string? HomePage { get; set; }
-    internal string[]? GameVersion { get; set; }
-    internal string? Description { get; set; }
-    internal string[]? DependentMods { get; set; }
-    internal string[]? DependentLibs { get; set; }
-    internal string[]? IncompatibleMods { get; set; }
-    internal string? SHA256 { get; set; }
+    public string? Name { get; set; }
+    public string? Version { get; set; }
+    public string? Author { get; set; }
+    public string? DownloadLink { get; set; }
+    public string? HomePage { get; set; }
+    public string[]? GameVersion { get; set; }
+    public string? Description { get; set; }
+    public string[]? DependentMods { get; set; }
+    public string[]? DependentLibs { get; set; }
+    public string[]? IncompatibleMods { get; set; }
+    public string? SHA256 { get; set; }
 }
 
 public class LocalModInfo
 {
-    internal string? Name { get; set; }
-    internal string? Version { get; set; }
-    internal string? SHA256 { get; set; }
-    internal string? FileName { get; set; }
-    internal bool Disabled { get; set; }
-    internal string? Description { get; set; }
-    internal string? Author { get; set; }
-    internal string? HomePage { get; set; }
+    public string? Name { get; set; }
+    public string? Version { get; set; }
+    public string? SHA256 { get; set; }
+    public string? FileName { get; set; }
+    public bool Disabled { get; set; }
+    public string? Description { get; set; }
+    public string? Author { get; set; }
+    public string? HomePage { get; set; }
 }

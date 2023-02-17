@@ -47,7 +47,7 @@
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom">
             <Button Click="ChoosePath_Call" Content="Path" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
-            <Button Click="OpenMods" Content="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
+            <Button Click="OpenModsFolder" Content="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
         </StackPanel>
         <Grid Width="800">
             <Separator HorizontalAlignment="Left" Margin="79,0,0,0" VerticalAlignment="Top" Height="450" Width="2" Background="#707070" BorderBrush="#FF707070" />

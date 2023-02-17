@@ -12,28 +12,28 @@ public partial class DialogWindow : Window
         InitializeComponent();
     }
 
-    public string TextDisplay
+    internal string TextDisplay
     {
-        get => storeTextDisplay;
+        get => StoreTextDisplay!;
         set
         {
-            storeTextDisplay = value;
+            StoreTextDisplay = value;
             var temp = (Label)MainDialogContainer.Children[0];
             temp.Content = TextDisplay;
         }
     }
 
-    public string storeTextDisplay { get; set; }
+    private string? StoreTextDisplay { get; set; }
 
-    public Action? ButtonClickFunction { get; set; }
+    internal Action? ButtonClickFunction { get; set; }
 
-    public void Button_Exit(object sender, RoutedEventArgs args)
+    internal void Button_Exit(object sender, RoutedEventArgs args)
     {
         ButtonClickFunction?.Invoke();
         Close();
     }
 
-    public event EventHandler<CancelEventArgs> Closing
+    internal event EventHandler<CancelEventArgs> Closing
     {
         add { ButtonClickFunction?.Invoke(); }
         remove { }
