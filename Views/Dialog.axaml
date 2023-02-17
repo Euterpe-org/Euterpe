@@ -8,7 +8,7 @@
         Title=""
         TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True" CanResize="False"
-        Width="275" Height="175">
+        MinWidth="275" MinHeight="175" MaxWidth="500">
     <Design.DataContext>
         <vm:DialogViewModel />
     </Design.DataContext>
@@ -34,7 +34,7 @@
         </ExperimentalAcrylicBorder>
 
         <StackPanel x:Name="MainDialogContainer">
-            <Label HorizontalContentAlignment="Center" />
+			<TextBlock TextWrapping="Wrap" TextAlignment="Center"/>
             <Button Click="Button_Exit" Foreground="#ddd" HorizontalAlignment="Center">
                 OK
             </Button>

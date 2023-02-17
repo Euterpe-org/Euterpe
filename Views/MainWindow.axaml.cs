@@ -134,6 +134,8 @@ public partial class MainWindow : Window
             var files = Directory.GetFiles(path, "*.dll")
                 .Concat(Directory.GetFiles(path, "*.dll.disabled"))
                 .ToList();
+            //Keep in mind that if you add popups in a loop, no place is safe. I will find you.
+            var failedMods = new List<string>();
             foreach (var file in files)
             {
                 try
@@ -147,24 +149,42 @@ public partial class MainWindow : Window
                         }
                         catch (Exception)
                         {
-                            DialogPopup($"Deleting \"{file.Replace(path, null)}\" failed");
+                            //DialogPopup($"Deleting \"{file.Replace(path, null)}\" failed");
                         }
 
                         continue;
                     }
 
                     var localMod = LoadLocalMod(file);
-                    if (localMod is not null)
+                    if (localMod is null)
                     {
-                        LocalModsList.Add(localMod);
+                        failedMods.Add(Path.GetFileName(file));
+                        continue;
                     }
+                    //If a mod with the given name already exists (to avoid duplicate mods with different filenames)
+                    if (LocalModsList.Any(x => x.Name == localMod.Name))
+                    {
+                        try
+                        {
+                            File.Delete(file);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                        continue;
+                    }
+                    LocalModsList.Add(localMod);
                 }
                 catch (Exception)
                 {
-                    DialogPopup($"Add \"{file.Replace(path, null)}\" to mod list failed");
+                    failedMods.Add(Path.GetFileName(file));
                 }
             }
-
+            if (failedMods.Count != 0)
+            {
+                DialogPopup($"Failed to load the following mods:\n{string.Join("\n", failedMods)}");
+            }
             localLoadSuccess = true;
         }
         catch (Exception)
@@ -233,9 +253,31 @@ public partial class MainWindow : Window
         }
 
         var localModIdx = LocalModsList.FindIndex(x => x.Name == webMod.Name);
-        var path = Path.Join(CurrentGameDirectory, "Mods", localModIdx == -1 ? webMod.DownloadLink![5..] : LocalModsList[localModIdx].FileName);
+        var path = Path.Join(CurrentGameDirectory, "Mods", localModIdx == -1 ? webMod.DownloadLink![5..] : LocalModsList[localModIdx].FileNameExtended());
         //var lastIdx = path.LastIndexOf(Path.DirectorySeparatorChar);
-        ModDownload(webMod.DownloadLink!, path);
+        try
+        {
+            ModDownload(webMod.DownloadLink!, path);
+        }
+        catch (Exception ex)
+        {
+            switch (ex)
+            {
+                case WebException:
+                    DialogPopup("Mod install failed\n(WebException, are you online?)");
+                    break;
+                case SecurityException:
+                case UnauthorizedAccessException:
+                case IOException:
+                    DialogPopup($"Mod install failed\n({ex.GetType()}, is the game running?)");
+                    break;
+
+                default:
+                    DialogPopup($"Mod install failed\n({ex.GetType()})");
+                    break;
+            }
+            return false;
+        }
         foreach (var dependencyName in webMod.DependentMods!)
         {
             var dependentMod = WebModsList.Find(x => x.DownloadLink == dependencyName);
@@ -246,38 +288,14 @@ public partial class MainWindow : Window
         }
 
         // Load downloaded mod
-        try
+        var localMod = LoadLocalMod(path);
+        LocalModsList.Add(localMod);
+        UpdateModDisplay(webMod, localMod);
+        if (SuccessPopups && allowSuccessSetting)
         {
-            var localMod = LoadLocalMod(path);
-            LocalModsList.Add(LoadLocalMod(path));
-            UpdateModDisplay(webMod, localMod);
-            if (SuccessPopups && allowSuccessSetting)
-            {
-                DialogPopup("Download successful.");
-            }
-
-            return true;
+            DialogPopup("Download successful.");
         }
-        catch (Exception ex)
-        {
-            switch (ex)
-            {
-                case SecurityException:
-                case UnauthorizedAccessException:
-                    DialogPopup("Mod install failed\n(unauthorized)");
-                    break;
-
-                case IOException:
-                    DialogPopup("Mod install failed\n(is the game running?)");
-                    break;
-
-                default:
-                    DialogPopup($"Mod install failed\n({ex.GetType()})");
-                    break;
-            }
-
-            return false;
-        }
+        return true;
     }
 
     /// <summary>
@@ -295,24 +313,6 @@ public partial class MainWindow : Window
             catch (WebException)
             {
                 webClient.DownloadFile("https://raw.fastgit.org/" + BaseLink + relativeUrl, path);
-            }
-        }
-        catch (Exception ex)
-        {
-            switch (ex)
-            {
-                case SecurityException:
-                case UnauthorizedAccessException:
-                    DialogPopup("Mod install failed\n(unauthorized)");
-                    break;
-
-                case IOException:
-                    DialogPopup("Mod install failed\n(is the game running?)");
-                    break;
-
-                default:
-                    DialogPopup("Mod download failed\n(are you online?)");
-                    break;
             }
         }
         finally
@@ -333,10 +333,10 @@ public partial class MainWindow : Window
     {
         var localMod = LocalModsList.Find(x => x.Name == (string)((Control)sender!).Tag!);
 
-        var path = Path.Join(CurrentGameDirectory, "Mods", localMod!.FileName);
+        var path = Path.Join(CurrentGameDirectory, "Mods", localMod!.FileNameExtended());
         if (!File.Exists(path))
         {
-            DialogPopup("Mod uninstall failed\n(file not found)");
+            ErrorAndExit($"Something went horribly wrong:\nYou somehow tried to uninstall\n{localMod!.FileNameExtended()},\nwhich simply doesn't exist!");
             return;
         }
 
@@ -355,11 +355,8 @@ public partial class MainWindow : Window
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    DialogPopup("Mod uninstall failed\n(unauthorized)");
-                    break;
-
                 case IOException:
-                    DialogPopup("Mod uninstall failed\n(is the game running?)");
+                    DialogPopup($"Mod uninstall failed\n({ex.GetType()}, is the game running?)");
                     break;
 
                 default:
@@ -372,25 +369,26 @@ public partial class MainWindow : Window
     /// <summary>
     /// Disable mods
     /// </summary>
-    private void DisableMod(object? sender, RoutedEventArgs args)
+    private void ToggleMod(object? sender, RoutedEventArgs args)
     {
         //var isChecked = ((ToggleButton)sender).IsChecked;
-        var localMod = LocalModsList.Find(x => x.Name == (string)((Control)sender!).Tag!);
+        var modName = (string)((Control)sender!).Tag!;
+        var localMod = LocalModsList.Find(x => x.Name == modName);
         if (localMod == null)
         {
-            throw new NullReferenceException();
+            ErrorAndExit($"Something went horribly wrong:\nYou somehow disabled {modName},\nwhich doesn't exist!");
         }
 
         try
         {
             File.Move(
-                Path.Join(CurrentGameDirectory, "Mods", localMod.FileName),
-                Path.Join(CurrentGameDirectory, "Mods", localMod.Disabled ? localMod.FileName![..^9] : localMod.FileName + ".disabled"),
+                Path.Join(CurrentGameDirectory, "Mods", localMod!.FileNameExtended()),
+                Path.Join(CurrentGameDirectory, "Mods", localMod.FileNameExtended(true)),
                 true);
 
-            // Update disabled and file name
+            // Update disabled
             localMod.Disabled ^= true;
-            localMod.FileName = localMod.Disabled ? localMod.FileName + ".disabled" : localMod.FileName![..^9];
+            return;
         }
         catch (Exception ex)
         {
@@ -462,6 +460,40 @@ public partial class MainWindow : Window
         SearchFilterChanged(Input_SearchFilter, null);
     }
 
+    private bool DoesModPassFilter(string modName)
+    {
+        var localMod = LocalModsList.Find(x => x.Name == modName);
+        var webMod = WebModsList.Find(x => x.Name == modName);
+        modName = modName.ToLower();
+        switch (Selected_ModFilter)
+        {
+            case 1:
+                if (localMod == null)
+                {
+                    return false;
+                }
+                break;
+
+            case 2:
+                if (localMod == null || localMod.Disabled)
+                {
+                    return false;
+                }
+                break;
+
+            case 3:
+                if (localMod == null || webMod == null || new Version(webMod.Version!) <= new Version(localMod.Version!))
+                {
+                    return false;
+                }
+                break;
+
+            default:
+                break;
+        }
+        return true;
+    }
+
     private void SearchFilterChanged(object? sender, TextInputEventArgs? args)
     {
         var searchTerm = ((TextBox)sender!).Text;
@@ -469,7 +501,7 @@ public partial class MainWindow : Window
         {
             foreach (Control control in ModItemsContainer.Children)
             {
-                control.IsVisible = true;
+                control.IsVisible = DoesModPassFilter((string)control.Tag!);
             }
 
             return;
@@ -481,40 +513,10 @@ public partial class MainWindow : Window
         {
             var modName = (string)control.Tag!;
             control.IsVisible = false;
-            var localMod = LocalModsList.Find(x => x.Name == modName);
-            var webMod = WebModsList.Find(x => x.Name == modName);
-            modName = modName.ToLower();
-            switch (Selected_ModFilter)
+
+            if (!DoesModPassFilter(modName))
             {
-                case 0:
-                    break;
-
-                case 1:
-                    if (localMod == null)
-                    {
-                        continue;
-                    }
-
-                    break;
-
-                case 2:
-                    if (localMod == null || localMod.Disabled)
-                    {
-                        continue;
-                    }
-
-                    break;
-
-                case 3:
-                    if (localMod == null || webMod == null || new Version(webMod.Version!) <= new Version(localMod.Version!))
-                    {
-                        continue;
-                    }
-
-                    break;
-
-                default:
-                    break;
+                continue;
             }
 
             if (modName.Contains(searchTerm))
@@ -534,39 +536,9 @@ public partial class MainWindow : Window
         {
             var modName = (string)control.Tag!;
             control.IsVisible = false;
-            var localMod = LocalModsList.Find(x => x.Name == modName);
-            var webMod = WebModsList.Find(x => x.Name == modName);
-            switch (Selected_ModFilter)
+            if (!DoesModPassFilter(modName))
             {
-                case 0:
-                    break;
-
-                case 1:
-                    if (localMod == null)
-                    {
-                        continue;
-                    }
-
-                    break;
-
-                case 2:
-                    if (localMod == null || localMod.Disabled)
-                    {
-                        continue;
-                    }
-
-                    break;
-
-                case 3:
-                    if (localMod == null || webMod == null || new Version(webMod.Version!) <= new Version(localMod.Version!))
-                    {
-                        continue;
-                    }
-
-                    break;
-
-                default:
-                    break;
+                continue;
             }
 
             control.IsVisible = true;
@@ -595,14 +567,20 @@ public partial class MainWindow : Window
         var mod = new LocalModInfo
         {
             Disabled = file.EndsWith(".disabled"),
-            FileName = Path.GetFileName(file)
         };
+
+        mod.FileName = mod.Disabled ? Path.GetFileName(file)[..^9] : Path.GetFileName(file);
         var assembly = Assembly.Load(File.ReadAllBytes(file));
         var attribute = MelonUtils.PullAttributeFromAssembly<MelonInfoAttribute>(assembly);
 
         mod.Name = attribute.Name;
         mod.Version = attribute.Version;
+        if (mod.Name == null || mod.Version == null)
+        {
+            return null;
+        }
         mod.Author = attribute.Author;
+        mod.HomePage = attribute.DownloadLink;
         mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(file);
 
         return mod;
@@ -698,7 +676,8 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Completely erases all contents of the main window and opens a dialog with the given errorMessage, once the dialog is exited, the program will close.
+    /// Completely erases the contents of the main window and opens a dialog with the given errorMessage.
+    /// Once the dialog is closed, the program will exit.
     /// </summary>
     private void ErrorAndExit(string errorMessage)
     {

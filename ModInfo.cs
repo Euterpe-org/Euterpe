@@ -25,4 +25,10 @@ public class LocalModInfo
     public string? Description { get; set; }
     public string? Author { get; set; }
     public string? HomePage { get; set; }
+
+    public string FileNameExtended(bool reverse = false)
+    {
+        return FileName + ((reverse ? !Disabled : Disabled) ? ".disabled" : "");
+
+    }
 }

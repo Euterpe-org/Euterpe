@@ -119,8 +119,8 @@ public partial class MainWindow
             Tag = webMod.Name,
             Foreground = "#ddd".ToBrush()
         };
-        isEnabledBox.Checked += DisableMod;
-        isEnabledBox.Unchecked += DisableMod;
+        isEnabledBox.Checked += ToggleMod;
+        isEnabledBox.Unchecked += ToggleMod;
         controlsPanel.Children.Add(isEnabledBox);
 
         Button uninstallButton = new()
@@ -235,8 +235,8 @@ public partial class MainWindow
             Tag = localMod.Name,
             Foreground = "#ddd".ToBrush()
         };
-        isEnabledBox.Checked += DisableMod;
-        isEnabledBox.Unchecked += DisableMod;
+        isEnabledBox.Checked += ToggleMod;
+        isEnabledBox.Unchecked += ToggleMod;
         controlsPanel.Children.Add(isEnabledBox);
 
         Button downloadButton = new()

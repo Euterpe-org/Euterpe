@@ -10,6 +10,7 @@ public partial class DialogWindow : Window
     public DialogWindow()
     {
         InitializeComponent();
+        this.SizeToContent = SizeToContent.WidthAndHeight;
     }
 
     internal string TextDisplay
@@ -18,8 +19,8 @@ public partial class DialogWindow : Window
         set
         {
             StoreTextDisplay = value;
-            var temp = (Label)MainDialogContainer.Children[0];
-            temp.Content = TextDisplay;
+            var temp = (TextBlock)MainDialogContainer.Children[0];
+            temp.Text = TextDisplay;
         }
     }
 
