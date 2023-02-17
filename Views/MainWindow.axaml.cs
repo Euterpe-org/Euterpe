@@ -86,9 +86,9 @@ public partial class MainWindow : Window
     /// </summary>
     internal void InitializeWebModsList()
     {
+        var webClient = new WebClient { Encoding = Encoding.UTF8 };
         try
         {
-            var webClient = new WebClient { Encoding = Encoding.UTF8 };
             string data;
             try
             {
@@ -99,7 +99,6 @@ public partial class MainWindow : Window
                 data = webClient.DownloadString("https://raw.fastgit.org/" + BaseLink + "ModLinks.json");
             }
 
-            webClient.Dispose();
             WebModsList = JsonSerializer.Deserialize<List<WebModInfo>>(data)!;
             WebLoadSuccess = true;
         }
@@ -107,6 +106,10 @@ public partial class MainWindow : Window
         {
             DialogPopup("Failed to download online mods info");
             WebLoadSuccess = false;
+        }
+        finally
+        {
+            webClient.Dispose();
         }
     }
 
@@ -205,6 +208,9 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Save game directory in settings
+    /// </summary>
     private void SaveSettings(object? sender, CancelEventArgs args)
     {
         File.WriteAllLines("Settings", new string[] { CurrentGameDirectory! });
@@ -411,6 +417,9 @@ public partial class MainWindow : Window
 
     #region DisPlay
 
+    /// <summary>
+    /// Update mod display after downloading mod
+    /// </summary>
     private void UpdateModDisplay(WebModInfo webMod, LocalModInfo localMod)
     {
         for (var i = 0; i < ModItemsContainer.Children.Count; i++)
@@ -425,6 +434,9 @@ public partial class MainWindow : Window
         AddMod(webMod, localMod);
     }
 
+    /// <summary>
+    /// Update mod display after uninstalling mod
+    /// </summary>
     private void UpdateModDisplay(LocalModInfo localMod)
     {
         var webModIdx = WebModsList.FindIndex(x => x.Name == localMod.Name);
@@ -596,11 +608,9 @@ public partial class MainWindow : Window
         return mod;
     }
 
-    private void ChoosePath_Call(object? sender, RoutedEventArgs args)
-    {
-        ChoosePath();
-    }
-
+    /// <summary>
+    /// Let user choosing game path
+    /// </summary>
     private async void ChoosePath()
     {
         OpenFolderDialog dialog = new() { Title = "Choose Muse Dash Folder" };
@@ -663,11 +673,25 @@ public partial class MainWindow : Window
         FinishInitialization();
     }
 
+    /// <summary>
+    /// For xaml
+    /// </summary>
+    private void ChoosePath_Call(object? sender, RoutedEventArgs args)
+    {
+        ChoosePath();
+    }
+
+    /// <summary>
+    /// For xaml
+    /// </summary>
     private void OpenModsFolder(object sender, RoutedEventArgs args)
     {
         OpenPath(Path.Join(CurrentGameDirectory, "Mods"));
     }
 
+    /// <summary>
+    /// For xaml
+    /// </summary>
     private static void RoutedOpenUrl(object? sender, RoutedEventArgs args)
     {
         OpenUrl((string)((Control)sender!).Tag!);
