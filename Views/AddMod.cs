@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Skia;
 using System;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,8 @@ public partial class MainWindow
     /// </summary>
     internal void AddMod(WebModInfo webMod, LocalModInfo localMod, int index = -1)
     {
+        var duplicates = LocalModsList.FindAll(x => x.Name == localMod.Name);
+        bool isDuplicated = duplicates.Count > 1;
         Grid modGrid = new() { Tag = webMod.Name };
         StackPanel expanderPanel = new() { Width = 675 };
         modGrid.Children.Add(expanderPanel);
@@ -26,7 +29,7 @@ public partial class MainWindow
             Height = 75,
             HorizontalContentAlignment = HorizontalAlignment.Left,
             VerticalContentAlignment = VerticalAlignment.Center,
-            Foreground = Color_BBB,
+            Foreground = isDuplicated ? Color_Cyan : Color_BBB,
             Content = webMod.Name,
             Margin = new Thickness(0, 15, 0, 0),
             BorderBrush = Brushes.Transparent
@@ -104,6 +107,17 @@ public partial class MainWindow
 
             expanderContent.Children.Add(dependencyBlock);
         }
+        if (isDuplicated)
+        {
+            StackPanel duplicatesBlock = new();
+            duplicatesBlock.Children.Add(new TextBlock { Text = $"Filename: {localMod.FileNameExtended()}" });
+            duplicatesBlock.Children.Add(new TextBlock { Text = $"Duplicated by:", Foreground = Color_Cyan });
+            foreach (var mod in duplicates)
+            {
+                duplicatesBlock.Children.Add(new TextBlock { Text = mod.FileNameExtended(), Foreground = Color_Cyan });
+            }
+            expanderContent.Children.Add(duplicatesBlock);
+        }
 
         StackPanel controlsPanel = new()
         {
@@ -178,6 +192,8 @@ public partial class MainWindow
     /// </summary>
     internal void AddMod(LocalModInfo localMod)
     {
+        var duplicates = LocalModsList.FindAll(x => x.Name == localMod.Name);
+        bool isDuplicated = LocalModsList.Count(x => x.Name == localMod.Name) > 1;
         Grid modGrid = new() { Tag = localMod.Name };
         ModItemsContainer.Children.Add(modGrid);
         StackPanel expanderPanel = new() { Width = 675 };
@@ -189,7 +205,7 @@ public partial class MainWindow
             Height = 75,
             HorizontalContentAlignment = HorizontalAlignment.Left,
             VerticalContentAlignment = VerticalAlignment.Center,
-            Foreground = Color_BBB,
+            Foreground = isDuplicated ? Color_Cyan : Color_BBB,
             Content = localMod.Name,
             Margin = new Thickness(0, 15, 0, 0),
             BorderBrush = Brushes.Transparent
@@ -219,6 +235,17 @@ public partial class MainWindow
             };
             homepageButton.Click += RoutedOpenUrl;
             expanderContent.Children.Add(homepageButton);
+        }
+        if (isDuplicated)
+        {
+            StackPanel duplicatesBlock = new();
+            duplicatesBlock.Children.Add(new TextBlock { Text = $"Filename: {localMod.FileNameExtended()}" });
+            duplicatesBlock.Children.Add(new TextBlock { Text = $"Duplicated by:", Foreground = Color_Cyan });
+            foreach (var mod in duplicates)
+            {
+                duplicatesBlock.Children.Add(new TextBlock { Text = mod.FileNameExtended(), Foreground = Color_Cyan });
+            }
+            expanderContent.Children.Add(duplicatesBlock);
         }
 
         StackPanel controlsPanel = new()

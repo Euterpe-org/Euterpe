@@ -31,6 +31,7 @@ public partial class MainWindow : Window
     private readonly IBrush Color_Purple = "#a000e6".ToBrush();
     private readonly IBrush Color_Red = "#c80000".ToBrush();
     private readonly IBrush Color_Yellow = "#e19600".ToBrush();
+    private readonly IBrush Color_Cyan = "#88b0bb".ToBrush();
 
     private readonly int LazyMarginLoL = 35;
 
@@ -159,19 +160,6 @@ public partial class MainWindow : Window
                     if (localMod is null)
                     {
                         failedMods.Add(Path.GetFileName(file));
-                        continue;
-                    }
-                    //If a mod with the given name already exists (to avoid duplicate mods with different filenames)
-                    if (LocalModsList.Any(x => x.Name == localMod.Name))
-                    {
-                        try
-                        {
-                            File.Delete(file);
-                        }
-                        catch (Exception)
-                        {
-
-                        }
                         continue;
                     }
                     LocalModsList.Add(localMod);
