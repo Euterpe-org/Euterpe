@@ -119,7 +119,7 @@ public partial class MainWindow : Window
         {
             if (failPopups)
             {
-                DialogPopup("No path is set\nNavigate to the game folder", ChoosePath);
+                DialogPopup("No path is set\nNavigate to the Muse Dash folder", ChoosePath);
             }
 
             localLoadSuccess = false;
@@ -168,7 +168,7 @@ public partial class MainWindow : Window
         {
             if (failPopups)
             {
-                DialogPopup("Failed to read local mods\nMake sure you're in the game directory");
+                DialogPopup("Failed to read local mods\nMake sure you've chose the Muse Dash folder");
             }
 
             localLoadSuccess = false;
@@ -603,7 +603,7 @@ public partial class MainWindow : Window
 
     private async void ChoosePath()
     {
-        OpenFolderDialog dialog = new() { Title = "Choose game path" };
+        OpenFolderDialog dialog = new() { Title = "Choose Muse Dash Folder" };
         Action? exitAction = CurrentGameDirectory == null ? ChoosePath : null;
         var result = await dialog.ShowAsync(this);
         if (result == null)
