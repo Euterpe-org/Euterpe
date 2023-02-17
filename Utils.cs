@@ -63,7 +63,7 @@ internal static class Utils
         DialogWindow dialog = new()
         {
             TextDisplay = message,
-            ButtonClickFunction = exitAction
+            WindowExitFunction = exitAction
         };
         if (isModal)
         {

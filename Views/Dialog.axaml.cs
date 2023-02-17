@@ -11,6 +11,7 @@ public partial class DialogWindow : Window
     {
         InitializeComponent();
         this.SizeToContent = SizeToContent.WidthAndHeight;
+        Closing += CloseWindow;
     }
 
     internal string TextDisplay
@@ -26,17 +27,17 @@ public partial class DialogWindow : Window
 
     private string? StoreTextDisplay { get; set; }
 
+    internal Action? WindowExitFunction { get; set; }
     internal Action? ButtonClickFunction { get; set; }
 
-    internal void Button_Exit(object sender, RoutedEventArgs args)
+    internal void Button_Exit(object? sender, RoutedEventArgs args)
     {
         ButtonClickFunction?.Invoke();
         Close();
     }
 
-    internal event EventHandler<CancelEventArgs> Closing
+    internal void CloseWindow(object? sender, CancelEventArgs args)
     {
-        add { ButtonClickFunction?.Invoke(); }
-        remove { }
+        WindowExitFunction?.Invoke();
     }
 }
