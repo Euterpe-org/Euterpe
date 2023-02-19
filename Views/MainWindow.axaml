@@ -40,10 +40,10 @@
 
     <Grid Background="#282828">
         <StackPanel VerticalAlignment="Top">
-            <Button Command="{Binding Button_FilterAll}" Content="All" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding Button_FilterInstalled}" Content="Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding Button_FilterEnabled}" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding Button_FilterOutdated}" Content="Outdated" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterAll}" Content="All" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterInstalled}" Content="Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterEnabled}" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterOutdated}" Content="Outdated" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom">
             <Button Click="ChoosePath_Call" Content="Path" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />

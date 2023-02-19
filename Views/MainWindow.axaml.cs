@@ -16,6 +16,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using MelonLoader;
+using MuseDashModToolsUI.Models;
 using static MuseDashModToolsUI.Utils;
 
 namespace MuseDashModToolsUI.Views;

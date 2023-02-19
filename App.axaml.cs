@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.Views;
+using Splat;
 
 namespace MuseDashModToolsUI;
 
@@ -17,12 +19,14 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            DataContext = GetRequiredService<IMainWindowViewModel>();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel()
+                DataContext = DataContext
             };
         }
 
         base.OnFrameworkInitializationCompleted();
     }
+    private static T GetRequiredService<T>() => Locator.Current.GetRequiredService<T>();
 }

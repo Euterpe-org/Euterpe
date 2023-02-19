@@ -6,6 +6,7 @@ using Avalonia.Skia;
 using System;
 using System.IO;
 using System.Linq;
+using MuseDashModToolsUI.Models;
 using static MuseDashModToolsUI.Utils;
 
 namespace MuseDashModToolsUI.Views;
