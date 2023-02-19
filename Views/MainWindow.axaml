@@ -10,9 +10,9 @@
         Width="800" Height="450"
         CanResize="False" Background="#282828">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel />
-    </Design.DataContext>
+    <!--<Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>-->
 
     <Window.Styles>
         <Style Selector="Button">
@@ -65,6 +65,216 @@
                         <Setter Property="TextWrapping" Value="Wrap" />
                     </Style>
                 </StackPanel.Styles>
+				<!--Installed mod (tracked)-->
+				<Grid Tag="mod.Name">
+					<StackPanel Width="675">
+						<!--This button is what I used to make expanders-->
+						<!--If the mod is duplicated, Color_Cyan is used,
+					otherwise Color_BBB-->
+						<Button Width="675" Height="75"
+								HorizontalContentAlignment="Left"
+								VerticalContentAlignment="Center"
+								Foreground="#bbb" Content="mod.Name"
+								Click="Button_Expander" BorderBrush="Transparent"/>
+						<StackPanel Tag="ExpanderContent" IsVisible="False" Margin="50,0,0,0">
+							<TextBlock>
+								"ModDescription" &#x0a; &#x0a; Author: "ModAuthor" &#x0a; Version: &#x0a;
+							</TextBlock>
+							<!--
+						If up-to-date: No additional content
+						If outdated: Adds " => OnlineVersion", Color_Red
+						If newer: Adds " (WOW MOD DEV)", Color_Purple (inspired by the mod)
+						if right version, but hash doesn't match: Adds " (Modified)", Color_Yellow
+						-->
+							<TextBlock>
+								"ModVersion"
+							</TextBlock>
+
+							<!--If mod.HomePage.IsValidUrl() is false, this field is omitted-->
+							<!--Maybe could be turned into a reactive command with the homepage as parameter?-->
+							<Button Tag="mod.Homepage" Margin="0,5,0,5" Click="RoutedOpenUrl">
+								Homepage
+							</Button>
+							<!--If there are no dependencies, this field is omitted-->
+							<StackPanel>
+								<TextBlock>Dependencies:</TextBlock>
+								<TextBlock>Mod1</TextBlock>
+								<TextBlock>Mod2</TextBlock>
+								<!--
+							mod.DependentMods contains a list of paths equivalent
+							in format to the WebMod.DownloadLink's format.
+							If found in WebModsList, the WebMod.Name is displayed.
+							If not, Path.GetFileName(dependencyName) is displayed-->
+								<!--If a dependency isn't installed, it's display in Color_Red-->
+							</StackPanel>
+							<!--Appears only if the mod is duplicated
+						(mod.name duplicate check in LocalModsList)
+						Displays the filenames of the mods that duplicate the current mod-->
+							<StackPanel>
+								<TextBlock>
+									Filename: "mod.FileNameExtended()"
+								</TextBlock>
+								<TextBlock>
+									Duplicated by:
+								</TextBlock>
+								<TextBlock>FileName1.dll</TextBlock>
+								<TextBlock>FileName2.dll.disable</TextBlock>
+							</StackPanel>
+						</StackPanel>
+					</StackPanel>
+
+					
+					<!--The controls go here (Update, disable, etc.)-->
+					<StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+						<!--IsChecked: !mod.Disabled-->
+						<CheckBox IsChecked="False" Tag="mod.Name"
+								  Foreground="#ddd" Checked="ToggleMod"
+								  Unchecked="ToggleMod" Content="On">
+						</CheckBox>
+						<Button Tag="mod.Name" Width="75" Height="30"
+								Margin="30,35,0,0" Background="#505050"
+								Click="UninstallMod" VerticalAlignment="Top"
+								Content="Uninstall">
+						</Button>
+						<!--If HASH mismatch or newer version,
+								content is "Reinstall" instead-->
+						<!--
+						Up-to-date: omit field entirely
+						Outdated: Color_Red
+						Newer: Color_Purple
+						Same version, hash mismatch: Yellow-->
+						<Button Tag="mod.Name" Width="75" Height="30"
+								Margin="30,35,0,0" Background="#505050"
+								Click="InstallModUpdateCall" VerticalAlignment="Top"
+								Content="Update">
+						</Button>
+					</StackPanel>
+					
+				</Grid>
+
+
+
+
+
+
+
+
+				<!--Installed mod (untracked)-->
+				<Grid Tag="mod.Name">
+					<StackPanel Width="675">
+						<!--This button is what I used to make expanders-->
+						<!--If the mod is duplicated, Color_Cyan is used,
+					otherwise Color_BBB-->
+						<Button Width="675" Height="75"
+								HorizontalContentAlignment="Left"
+								VerticalContentAlignment="Center"
+								Foreground="#bbb" Content="mod.Name"
+								Click="Button_Expander" BorderBrush="Transparent"/>
+						<StackPanel Tag="ExpanderContent" IsVisible="False" Margin="50,0,0,0">
+							<TextBlock>
+								"ModDescription" &#x0a; &#x0a; Author: "ModAuthor" &#x0a; Version: &#x0a;
+							</TextBlock>
+							<!--
+						Version checking is impossible here,
+						so this field is always just the current version-->
+							<TextBlock>
+								"ModVersion"
+							</TextBlock>
+
+							<!--If mod.HomePage.IsValidUrl() is false, this field is omitted
+							(Homepage here is pulled from MelonModInfo.DownloadLink)-->
+							<Button Tag="mod.Homepage" Margin="0,5,0,5" Click="RoutedOpenUrl">
+								Homepage
+							</Button>
+							<!--The "Dependencies" field is omitted.-->
+							<!--Appears only if the mod is duplicated
+						(mod.name duplicate check in LocalModsList)
+						Displays the filenames of the mods that duplicate the current mod-->
+							<StackPanel>
+								<TextBlock>
+									Filename: "mod.FileNameExtended()"
+								</TextBlock>
+								<TextBlock>
+									Duplicated by:
+								</TextBlock>
+								<TextBlock>FileName1.dll</TextBlock>
+								<TextBlock>FileName2.dll.disable</TextBlock>
+							</StackPanel>
+						</StackPanel>
+					</StackPanel>
+
+
+					<!--The controls go here (disable & uninstall)-->
+					<StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+						<!--IsChecked: !mod.Disabled-->
+						<CheckBox IsChecked="False" Tag="mod.Name"
+								  Foreground="#ddd" Checked="ToggleMod"
+								  Unchecked="ToggleMod" Content="On">
+						</CheckBox>
+						<Button Tag="mod.Name" Width="75" Height="30"
+								Margin="30,35,0,0" Background="#505050"
+								Click="UninstallMod" VerticalAlignment="Top"
+								Content="Uninstall">
+						</Button>
+						<!--"Update" is omitted-->
+					</StackPanel>
+
+				</Grid>
+				
+
+
+				<!--Uninstalled mod-->
+				<Grid Tag="mod.Name">
+					<StackPanel Width="675">
+						<!--This button is what I used to make expanders-->
+						<!--If the mod is duplicated, Color_Cyan is used,
+					otherwise Color_BBB-->
+						<Button Width="675" Height="75"
+								HorizontalContentAlignment="Left"
+								VerticalContentAlignment="Center"
+								Foreground="#bbb" Content="mod.Name"
+								Click="Button_Expander" BorderBrush="Transparent"/>
+						<StackPanel Tag="ExpanderContent" IsVisible="False" Margin="50,0,0,0">
+							<TextBlock>
+								"ModDescription" &#x0a; &#x0a; Author: "ModAuthor" &#x0a; Version: &#x0a;
+							</TextBlock>
+							<!--Displays the latest available version-->
+							<TextBlock>
+								"ModVersion"
+							</TextBlock>
+
+							<!--If mod.HomePage.IsValidUrl() is false, this field is omitted-->
+							<Button Tag="mod.Homepage" Margin="0,5,0,5" Click="RoutedOpenUrl">
+								Homepage
+							</Button>
+							<StackPanel>
+								<TextBlock>Dependencies:</TextBlock>
+								<TextBlock>Mod1</TextBlock>
+								<TextBlock>Mod2</TextBlock>
+								<!--
+							mod.DependentMods contains a list of paths equivalent
+							in format to the WebMod.DownloadLink's format.
+							If found in WebModsList, the WebMod.Name is displayed.
+							If not, Path.GetFileName(dependencyName) is displayed-->
+								<!--If a dependency isn't installed, it's display in Color_Red-->
+							</StackPanel>
+							<!--Duplicate list is not applicable here-->
+						</StackPanel>
+					</StackPanel>
+
+
+					<!--The controls go here (disable & uninstall)-->
+					<StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+						<!--Checkbox & Uninstall is not applicable here-->
+						<Button Tag="mod.Name" Width="75" Height="30"
+								Margin="300,35,0,0" Background="#505050"
+								Click="InstallModUpdateCall" VerticalAlignment="Top"
+								Content="Install">
+						</Button>
+					</StackPanel>
+				</Grid>
+				
+				
             </StackPanel>
         </ScrollViewer>
     </Grid>

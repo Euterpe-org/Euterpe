@@ -9,15 +9,9 @@ using MuseDashModToolsUI.Views;
 
 namespace MuseDashModToolsUI;
 
-internal static class Utils
+public static class Utils
 {
-    /// <summary>
-    /// Used for implementing expanders, cause the built-in one is glitchy as all hell.
-    /// </summary>
-    internal static void Button_Expander(object? sender, RoutedEventArgs args)
-    {
-        ((Panel)((Control)sender!).Parent!).Children.First(x => (string)((Control)x).Tag! == "ExpanderContent").IsVisible ^= true;
-    }
+    
 
     internal static void OpenUrl(string linkToOpen)
     {

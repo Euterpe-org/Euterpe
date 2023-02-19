@@ -36,7 +36,7 @@ public partial class MainWindow : Window
 
     private readonly int LazyMarginLoL = 35;
 
-    private string? CurrentGameDirectory = Directory.GetCurrentDirectory();
+    private string? CurrentGameDirectory = "D:\\Steam\\steamapps\\common\\Muse Dash";
 
     private bool localLoadSuccess;
     private bool WebLoadSuccess;
@@ -71,6 +71,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void InitializeSettings()
     {
+        return;
         CurrentGameDirectory = null;
         if (!File.Exists("Settings"))
             return;
@@ -671,5 +672,13 @@ public partial class MainWindow : Window
     private void ErrorAndExit(string errorMessage)
     {
         DialogPopup(errorMessage, () => { Environment.Exit(0); }, true);
+    }
+
+    /// <summary>
+    /// Used for implementing expanders, cause the built-in one is glitchy as all hell.
+    /// </summary>
+    public void Button_Expander(object? sender, RoutedEventArgs args)
+    {
+        ((Panel)((Control)sender!).Parent!).Children.First(x => (string)((Control)x).Tag! == "ExpanderContent").IsVisible ^= true;
     }
 }
