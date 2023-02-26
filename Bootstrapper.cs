@@ -13,8 +13,10 @@ public static class Bootstrapper
     public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
         services.Register<IGitHubService>(() => new GitHubService(new HttpClient()));  // Call services.Register<T> and pass it lambda that creates instance of your service
+        services.Register<ILocalService>(() => new LocalService());  // Call services.Register<T> and pass it lambda that creates instance of your service
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
-            resolver.GetRequiredService<IGitHubService>()));
+            resolver.GetRequiredService<IGitHubService>(),
+            resolver.GetRequiredService<ILocalService>()));
     }
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)
     {

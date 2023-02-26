@@ -36,6 +36,7 @@
         <Style Selector="TextBox">
             <Setter Property="Foreground" Value="#bbb" />
         </Style>
+	    
     </Window.Styles>
 
     <Grid Background="#282828">
@@ -65,7 +66,9 @@
                         <Setter Property="TextWrapping" Value="Wrap" />
                     </Style>
                 </StackPanel.Styles>
-				<!--Installed mod (tracked)-->
+	            <ListBox Foreground="Transparent" Background="Transparent">
+		        <ListBoxItem>
+		            <!--Installed mod (tracked)-->
 				<Grid Tag="mod.Name">
 					<StackPanel Width="675">
 						<!--This button is what I used to make expanders-->
@@ -151,6 +154,7 @@
 					</StackPanel>
 					
 				</Grid>
+		        </ListBoxItem>
 
 
 
@@ -158,7 +162,7 @@
 
 
 
-
+				<ListBoxItem>
 				<!--Installed mod (untracked)-->
 				<Grid Tag="mod.Name">
 					<StackPanel Width="675">
@@ -220,9 +224,10 @@
 					</StackPanel>
 
 				</Grid>
+				</ListBoxItem>
 				
 
-
+		        <ListBoxItem>
 				<!--Uninstalled mod-->
 				<Grid Tag="mod.Name">
 					<StackPanel Width="675">
@@ -261,6 +266,7 @@
 							<!--Duplicate list is not applicable here-->
 						</StackPanel>
 					</StackPanel>
+					
 
 
 					<!--The controls go here (disable & uninstall)-->
@@ -273,7 +279,8 @@
 						</Button>
 					</StackPanel>
 				</Grid>
-				
+				</ListBoxItem>
+				</ListBox>
 				
             </StackPanel>
         </ScrollViewer>

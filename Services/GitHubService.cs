@@ -18,18 +18,18 @@ public class GitHubService : IGitHubService
     {
         _client = client;
     }
-    public async Task<List<WebModInfo>> GetModsAsync()
+    public async Task<List<Mod>> GetModsAsync()
     {
-        var result = Enumerable.Empty<WebModInfo>();
+        var result = Enumerable.Empty<Mod>();
         try
         {
-            result = await _client.GetFromJsonAsync<List<WebModInfo>>(
+            result = await _client.GetFromJsonAsync<List<Mod>>(
                 "https://raw.githubusercontent.com/" + _baseLink +
                 "ModLinks.json");
         }
         catch (Exception)
         {
-            result = await _client.GetFromJsonAsync<List<WebModInfo>>("https://raw.fastgit.org/" + _baseLink +
+            result = await _client.GetFromJsonAsync<List<Mod>>("https://raw.fastgit.org/" + _baseLink +
                                                                       "ModLinks.json");
         }
         

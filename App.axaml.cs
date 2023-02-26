@@ -8,7 +8,7 @@ using Splat;
 
 namespace MuseDashModToolsUI;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {

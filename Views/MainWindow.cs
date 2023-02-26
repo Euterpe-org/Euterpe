@@ -16,11 +16,11 @@ public partial class MainWindow
     /// <summary>
     /// Adds a mod that's installed
     /// </summary>
-    internal void AddMod(WebModInfo webMod, LocalModInfo localMod, int index = -1)
+    internal void AddMod(Mod mod, Mod localMod, int index = -1)
     {
         var duplicates = LocalModsList.FindAll(x => x.Name == localMod.Name);
         bool isDuplicated = duplicates.Count > 1;
-        Grid modGrid = new() { Tag = webMod.Name };
+        Grid modGrid = new() { Tag = mod.Name };
         StackPanel expanderPanel = new() { Width = 675 };
         modGrid.Children.Add(expanderPanel);
 
@@ -31,7 +31,7 @@ public partial class MainWindow
             HorizontalContentAlignment = HorizontalAlignment.Left,
             VerticalContentAlignment = VerticalAlignment.Center,
             Foreground = isDuplicated ? Color_Cyan : Color_BBB,
-            Content = webMod.Name,
+            Content = mod.Name,
             Margin = new Thickness(0, 15, 0, 0),
             BorderBrush = Brushes.Transparent
         };
@@ -45,16 +45,16 @@ public partial class MainWindow
             Margin = new Thickness(50, 0, 0, 0)
         };
         expanderPanel.Children.Add(expanderContent);
-        expanderContent.Children.Add(new TextBlock { Text = $"{webMod.Description}\n\nAuthor: {webMod.Author}\nVersion:\n" });
+        expanderContent.Children.Add(new TextBlock { Text = $"{mod.Description}\n\nAuthor: {mod.Author}\nVersion:\n" });
 
         TextBlock versionText = new() { Text = $"{localMod.Version}" };
-        var versionDate = new Version(webMod.Version!) > new Version(localMod.Version!) ? -1 : new Version(webMod.Version!) < new Version(localMod.Version!) ? 1 : 0;
-        var ShaMismatch = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
+        var versionDate = new Version(mod.Version!) > new Version(localMod.Version!) ? -1 : new Version(mod.Version!) < new Version(localMod.Version!) ? 1 : 0;
+        var ShaMismatch = versionDate == 0 && mod.SHA256 != localMod.SHA256;
 
         switch (versionDate)
         {
             case -1:
-                versionText.Text += $" => {webMod.Version}";
+                versionText.Text += $" => {mod.Version}";
                 versionText.Foreground = Color_Red;
                 expanderButton.Foreground = Color_Red;
                 break;
@@ -79,23 +79,23 @@ public partial class MainWindow
         }
 
         expanderContent.Children.Add(versionText);
-        if (webMod.HomePage!.IsValidUrl())
+        if (mod.HomePage!.IsValidUrl())
         {
             Button homepageButton = new()
             {
                 Content = "Homepage",
                 Margin = new Thickness(0, 5, 0, 5),
-                Tag = webMod.HomePage
+                Tag = mod.HomePage
             };
             homepageButton.Click += RoutedOpenUrl;
             expanderContent.Children.Add(homepageButton);
         }
 
-        if (webMod.DependentMods!.Length != 0)
+        if (mod.DependentMods!.Length != 0)
         {
             StackPanel dependencyBlock = new();
             dependencyBlock.Children.Add(new TextBlock { Text = $"Dependencies:" });
-            foreach (var githubPath in webMod.DependentMods)
+            foreach (var githubPath in mod.DependentMods)
             {
                 var temp = WebModsList.Find(x => x.DownloadLink == githubPath);
                 var modName = temp == null ? Path.GetFileName(githubPath) : temp.Name;
@@ -113,9 +113,9 @@ public partial class MainWindow
             StackPanel duplicatesBlock = new();
             duplicatesBlock.Children.Add(new TextBlock { Text = $"Filename: {localMod.FileNameExtended()}" });
             duplicatesBlock.Children.Add(new TextBlock { Text = $"Duplicated by:", Foreground = Color_Cyan });
-            foreach (var mod in duplicates)
+            foreach (var duplicate in duplicates)
             {
-                duplicatesBlock.Children.Add(new TextBlock { Text = mod.FileNameExtended(), Foreground = Color_Cyan });
+                duplicatesBlock.Children.Add(new TextBlock { Text = duplicate.FileNameExtended(), Foreground = Color_Cyan });
             }
             expanderContent.Children.Add(duplicatesBlock);
         }
@@ -129,9 +129,9 @@ public partial class MainWindow
 
         var isEnabledBox = new CheckBox()
         {
-            IsChecked = !localMod.Disabled,
+            IsChecked = !localMod.IsDisabled,
             Content = "On",
-            Tag = webMod.Name,
+            Tag = mod.Name,
             Foreground = "#ddd".ToBrush()
         };
         isEnabledBox.Checked += ToggleMod;
@@ -143,7 +143,7 @@ public partial class MainWindow
             Content = "Uninstall",
             Width = 75,
             Height = 30,
-            Tag = webMod.Name,
+            Tag = mod.Name,
             Margin = new Thickness(30, LazyMarginLoL, 0, 0),
             VerticalAlignment = VerticalAlignment.Top,
             Background = Color_BG50
@@ -157,7 +157,7 @@ public partial class MainWindow
             {
                 Width = 75,
                 Height = 30,
-                Tag = webMod.Name,
+                Tag = mod.Name,
                 Margin = new Thickness(30, LazyMarginLoL, 0, 0),
                 VerticalAlignment = VerticalAlignment.Top,
                 Background = Color_BG50
@@ -191,7 +191,7 @@ public partial class MainWindow
     /// <summary>
     /// Adds a mod that isn't tracked online
     /// </summary>
-    internal void AddMod(LocalModInfo localMod)
+    internal void AddMod(Mod localMod)
     {
         var duplicates = LocalModsList.FindAll(x => x.Name == localMod.Name);
         bool isDuplicated = LocalModsList.Count(x => x.Name == localMod.Name) > 1;
@@ -258,7 +258,7 @@ public partial class MainWindow
 
         var isEnabledBox = new CheckBox()
         {
-            IsChecked = !localMod.Disabled,
+            IsChecked = !localMod.IsDisabled,
             Content = "On",
             Tag = localMod.Name,
             Foreground = "#ddd".ToBrush()
@@ -284,9 +284,9 @@ public partial class MainWindow
     /// <summary>
     /// Adds a mod that isn't installed
     /// </summary>
-    internal void AddMod(WebModInfo webMod, int index = -1)
+    internal void AddMod(Mod mod, int index = -1)
     {
-        Grid modGrid = new() { Tag = webMod.Name };
+        Grid modGrid = new() { Tag = mod.Name };
         StackPanel expanderPanel = new() { Width = 675 };
         modGrid.Children.Add(expanderPanel);
 
@@ -297,7 +297,7 @@ public partial class MainWindow
             HorizontalContentAlignment = HorizontalAlignment.Left,
             VerticalContentAlignment = VerticalAlignment.Center,
             Foreground = Color_BBB,
-            Content = webMod.Name,
+            Content = mod.Name,
             Margin = new Thickness(0, 15, 0, 0),
             BorderBrush = Brushes.Transparent
         };
@@ -311,25 +311,25 @@ public partial class MainWindow
             Margin = new Thickness(50, 0, 0, 0)
         };
         expanderPanel.Children.Add(expanderContent);
-        expanderContent.Children.Add(new TextBlock { Text = $"{webMod.Description}\n\nAuthor: {webMod.Author}\nVersion:\n" });
-        expanderContent.Children.Add(new TextBlock { Text = $"{webMod.Version}" });
-        if (webMod.HomePage!.IsValidUrl())
+        expanderContent.Children.Add(new TextBlock { Text = $"{mod.Description}\n\nAuthor: {mod.Author}\nVersion:\n" });
+        expanderContent.Children.Add(new TextBlock { Text = $"{mod.Version}" });
+        if (mod.HomePage!.IsValidUrl())
         {
             Button homepageButton = new()
             {
                 Content = "Homepage",
                 Margin = new Thickness(0, 5, 0, 5),
-                Tag = webMod.HomePage
+                Tag = mod.HomePage
             };
             homepageButton.Click += RoutedOpenUrl;
             expanderContent.Children.Add(homepageButton);
         }
 
-        if (webMod.DependentMods!.Length != 0)
+        if (mod.DependentMods!.Length != 0)
         {
             StackPanel dependencyBlock = new();
             dependencyBlock.Children.Add(new TextBlock { Text = $"Dependencies:" });
-            foreach (var githubPath in webMod.DependentMods)
+            foreach (var githubPath in mod.DependentMods)
             {
                 var temp = WebModsList.Find(x => x.DownloadLink == githubPath);
                 var modName = temp == null ? Path.GetFileName(githubPath) : temp.Name;
@@ -360,7 +360,7 @@ public partial class MainWindow
             Content = "Install",
             Width = 75,
             Height = 30,
-            Tag = webMod.Name,
+            Tag = mod.Name,
             Margin = new Thickness(300, LazyMarginLoL, 0, 0),
             VerticalAlignment = VerticalAlignment.Top,
             Background = Color_BG50

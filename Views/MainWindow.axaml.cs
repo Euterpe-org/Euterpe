@@ -58,8 +58,8 @@ public partial class MainWindow : Window
 
     //private Version GameVersion { get; } = null;
 
-    private List<WebModInfo> WebModsList { get; set; } = new();
-    private List<LocalModInfo> LocalModsList { get; } = new();
+    private List<Mod> WebModsList { get; set; } = new();
+    private List<Mod> LocalModsList { get; } = new();
 
     // for early debugging:
     private bool SuccessPopups => false;
@@ -102,7 +102,7 @@ public partial class MainWindow : Window
                 data = webClient.DownloadString("https://raw.fastgit.org/" + BaseLink + "ModLinks.json");
             }
 
-            WebModsList = JsonSerializer.Deserialize<List<WebModInfo>>(data)!;
+            WebModsList = JsonSerializer.Deserialize<List<Mod>>(data)!;
             WebLoadSuccess = true;
         }
         catch (Exception)
@@ -377,7 +377,7 @@ public partial class MainWindow : Window
                 true);
 
             // Update disabled
-            localMod.Disabled ^= true;
+            localMod.IsDisabled ^= true;
             return;
         }
         catch (Exception ex)
@@ -408,24 +408,24 @@ public partial class MainWindow : Window
     /// <summary>
     /// Update mod display after downloading mod
     /// </summary>
-    private void UpdateModDisplay(WebModInfo webMod, LocalModInfo localMod)
+    private void UpdateModDisplay(Mod mod, Mod localMod)
     {
         for (var i = 0; i < ModItemsContainer.Children.Count; i++)
         {
-            if ((string)((Control)ModItemsContainer.Children[i]).Tag! == webMod.Name)
+            if ((string)((Control)ModItemsContainer.Children[i]).Tag! == mod.Name)
             {
-                AddMod(webMod, localMod, i);
+                AddMod(mod, localMod, i);
                 break;
             }
         }
 
-        AddMod(webMod, localMod);
+        AddMod(mod, localMod);
     }
 
     /// <summary>
     /// Update mod display after uninstalling mod
     /// </summary>
-    private void UpdateModDisplay(LocalModInfo localMod)
+    private void UpdateModDisplay(Mod localMod)
     {
         var webModIdx = WebModsList.FindIndex(x => x.Name == localMod.Name);
         if (webModIdx == -1)
@@ -465,7 +465,7 @@ public partial class MainWindow : Window
                 break;
 
             case 2:
-                if (localMod == null || localMod.Disabled)
+                if (localMod == null || localMod.IsDisabled)
                 {
                     return false;
                 }
@@ -552,14 +552,14 @@ public partial class MainWindow : Window
     /// <summary>
     /// Load local mod and return its info
     /// </summary>
-    private LocalModInfo LoadLocalMod(string file)
+    private Mod LoadLocalMod(string file)
     {
-        var mod = new LocalModInfo
+        var mod = new Mod
         {
-            Disabled = file.EndsWith(".disabled"),
+            IsDisabled = file.EndsWith(".disabled"),
         };
 
-        mod.FileName = mod.Disabled ? Path.GetFileName(file)[..^9] : Path.GetFileName(file);
+        mod.FileName = mod.IsDisabled ? Path.GetFileName(file)[..^9] : Path.GetFileName(file);
         var assembly = Assembly.Load(File.ReadAllBytes(file));
         var attribute = MelonUtils.PullAttributeFromAssembly<MelonInfoAttribute>(assembly);
 
@@ -680,5 +680,7 @@ public partial class MainWindow : Window
     public void Button_Expander(object? sender, RoutedEventArgs args)
     {
         ((Panel)((Control)sender!).Parent!).Children.First(x => (string)((Control)x).Tag! == "ExpanderContent").IsVisible ^= true;
+        var parent = ((Control) sender).Parent.Parent.Parent;
+        ((ListBoxItem) parent).IsSelected = true;
     }
 }
