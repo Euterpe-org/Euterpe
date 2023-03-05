@@ -1,8 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using ReactiveUI;
 
 namespace MuseDashModToolsUI.Models;
 
-public class Mod
+public class Mod : ReactiveObject
 {
     public string? Name { get; set; }
     public string? Version { get; set; }
@@ -13,16 +15,21 @@ public class Mod
     [JsonIgnore] public bool IsTracked { get; set; }
     [JsonIgnore] public bool IsShaMismatched { get; set; }
     
-    [JsonIgnore] public string XamlDescription => $"{Description} &#x0a; &#x0a; Author: {Author} &#x0a; Version: {Version}";
+    [JsonIgnore] public string XamlDescription => $"{Description} \n\n Author: {Author} \n Version: {Version}";
+    private bool _isExpanded;
+    [JsonIgnore]
+    public bool IsExpanded
+    {
+        get => _isExpanded;
+        set => this.RaiseAndSetIfChanged(ref _isExpanded, value);
+    }
     public string? DownloadLink { get; set; }
     public string? HomePage { get; set; }
     public string[]? GameVersion { get; set; }
     public string? Description { get; set; }
     public string[]? DependentMods { get; set; }
-    public string[]? DependentLibs { get; set; }
-    [JsonIgnore] public bool HasDependencies => DependentLibs is not null && DependentLibs.Length > 0;
-    
-    public string[]? IncompatibleMods { get; set; }
+    public List<string> DependentLibs { get; set; } = new();
+    public List<string> IncompatibleMods { get; set; } = new();
     public string? SHA256 { get; set; }
     public string FileNameExtended(bool reverse = false)
     {

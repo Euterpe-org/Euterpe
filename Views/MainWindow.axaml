@@ -41,10 +41,10 @@
 
     <Grid Background="#282828">
         <StackPanel VerticalAlignment="Top">
-            <Button Command="{Binding FilterAll}" Content="All" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding FilterInstalled}" Content="Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding FilterEnabled}" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding FilterOutdated}" Content="Outdated" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterAllCommand}" Content="All" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterAllCommand}" Content="Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterAllCommand}" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterAllCommand}" Content="Outdated" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom">
             <Button Content="Path" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
@@ -78,9 +78,9 @@
 						<Button Width="675" Height="75"
 								HorizontalContentAlignment="Left"
 								VerticalContentAlignment="Center"
-								Foreground="#bbb" Content="{Binding Name}" BorderBrush="Transparent"/>
-						<StackPanel Tag="ExpanderContent" IsVisible="False" Margin="50,0,0,0">
-							<TextBlock Text="{Binding XamlDescription}" />
+								Foreground="#bbb" Content="{Binding Name}" BorderBrush="Transparent" Command="{Binding $parent[ItemsControl].DataContext.SelectedItemCommand}" CommandParameter="{Binding .}"/>
+						<StackPanel Tag="ExpanderContent" IsVisible="{Binding IsExpanded}" Margin="50,0,0,0">
+						<TextBlock Text="{Binding XamlDescription}" />
 								<!--
 						If up-to-date: No additional content
 						If outdated: Adds " => OnlineVersion", Color_Red
@@ -95,7 +95,7 @@
 								Homepage
 							</Button>
 							<!--If there are no dependencies, this field is omitted-->
-							<StackPanel IsVisible="{Binding HasDependencies}">
+							<StackPanel IsVisible="{Binding !!DependentLibs.Count}">
 								<TextBlock>Dependencies:</TextBlock>
 								<TextBlock>Mod1</TextBlock>
 								<TextBlock>Mod2</TextBlock>
@@ -128,9 +128,9 @@
 						<!--IsChecked: !mod.Disabled-->
 						<CheckBox IsChecked="False" Tag="{Binding Name}"
 								  Foreground="#ddd" 
-								   Content="On">
+						          Content="On">
 						</CheckBox>
-						<Button Tag="{Binding Name}" Width="75" Height="30"
+						<Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
 						        Margin="30,35,0,0" Background="#505050"
 						        VerticalAlignment="Top"
 						        Content="Uninstall">
@@ -142,7 +142,7 @@
 						Outdated: Color_Red
 						Newer: Color_Purple
 						Same version, hash mismatch: Yellow-->
-						<Button Tag="{Binding Name}" Width="75" Height="30"
+						<Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
 								Margin="30,35,0,0" Background="#505050"
 						        VerticalAlignment="Top"
 								Content="Update">

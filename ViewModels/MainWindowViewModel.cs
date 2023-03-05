@@ -19,6 +19,15 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReactiveCommand<Unit, Unit> FilterAllCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterInstalledCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterEnabledCommand { get; }
+    public ReactiveCommand<Mod, Unit> SelectedItemCommand { get; }
+
+    private Mod _selectedItem;
+
+    public Mod SelectedItem
+    {
+        get => _selectedItem;
+        set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
+    }
 
     public ObservableCollection<Mod> Mods { get; } = new();
     
@@ -27,7 +36,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     public MainWindowViewModel()
     {
-
+        
     }
     public MainWindowViewModel(IGitHubService gitHubService, ILocalService localService)
     {
@@ -37,8 +46,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         FilterAllCommand = ReactiveCommand.Create(FilterAll);
         FilterInstalledCommand = ReactiveCommand.Create(FilterInstalled);
         FilterEnabledCommand = ReactiveCommand.Create(FilterEnabled);
+        SelectedItemCommand = ReactiveCommand.Create<Mod>(OnSelectedItem);
         RxApp.MainThreadScheduler.Schedule(InitializeModList);
     }
+
+    
 
     private async void InitializeModList()
     {
@@ -101,7 +113,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     }
     
     
-
     public void FilterAll()
     {
         MainWindow.Instance!.Selected_ModFilter = 0;
@@ -125,4 +136,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         MainWindow.Instance!.Selected_ModFilter = 3;
         MainWindow.Instance.UpdateFilters();
     }
+    private void OnSelectedItem(Mod item)
+    {
+        item.IsExpanded = !item.IsExpanded;
+        SelectedItem = item;
+    }
+
 }
