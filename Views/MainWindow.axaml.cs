@@ -44,13 +44,13 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Instance = this;
-        Input_SearchFilter.AddHandler(TextInputEvent, SearchFilterChanged, RoutingStrategies.Tunnel);
-        InitializeSettings();
-        InitializeWebModsList();
-        InitializeLocalModsList();
-        FinishInitialization();
-        Closing += SaveSettings;
+        // Instance = this;
+        // Input_SearchFilter.AddHandler(TextInputEvent, SearchFilterChanged, RoutingStrategies.Tunnel);
+        // InitializeSettings();
+        // InitializeWebModsList();
+        // InitializeLocalModsList();
+        // FinishInitialization();
+        // Closing += SaveSettings;
     }
 
     internal static MainWindow? Instance { get; private set; }
@@ -116,107 +116,6 @@ public partial class MainWindow : Window
         }
     }
 
-    /// <summary>
-    /// Loads installed mods from the mods folder
-    /// </summary>
-    public void InitializeLocalModsList(bool failPopups = true)
-    {
-        if (CurrentGameDirectory is null)
-        {
-            if (failPopups)
-            {
-                DialogPopup("No path is set\nNavigate to the Muse Dash folder", ChoosePath);
-            }
-
-            localLoadSuccess = false;
-        }
-
-        try
-        {
-            var path = Path.Join(CurrentGameDirectory, "Mods");
-            var files = Directory.GetFiles(path, "*.dll")
-                .Concat(Directory.GetFiles(path, "*.dll.disabled"))
-                .ToList();
-            //Keep in mind that if you add popups in a loop, no place is safe. I will find you.
-            var failedMods = new List<string>();
-            foreach (var file in files)
-            {
-                try
-                {
-                    // If disabled and not disabled dll both exist
-                    if (file.EndsWith(".disabled") && files.Contains(file[..^9]))
-                    {
-                        try
-                        {
-                            File.Delete(file);
-                        }
-                        catch (Exception)
-                        {
-                            //DialogPopup($"Deleting \"{file.Replace(path, null)}\" failed");
-                        }
-
-                        continue;
-                    }
-
-                    var localMod = LoadLocalMod(file);
-                    if (localMod is null)
-                    {
-                        failedMods.Add(Path.GetFileName(file));
-                        continue;
-                    }
-                    LocalModsList.Add(localMod);
-                }
-                catch (Exception)
-                {
-                    failedMods.Add(Path.GetFileName(file));
-                }
-            }
-            if (failedMods.Count != 0)
-            {
-                DialogPopup($"Failed to load the following mods:\n{string.Join("\n", failedMods)}");
-            }
-            localLoadSuccess = true;
-        }
-        catch (Exception)
-        {
-            if (failPopups)
-            {
-                DialogPopup("Failed to read local mods\nMake sure you've chose the Muse Dash folder");
-            }
-
-            localLoadSuccess = false;
-        }
-    }
-
-    /// <summary>
-    /// Main function is to compare mods and call each AddMod function appropriately
-    /// </summary>
-    internal void FinishInitialization()
-    {
-        if (!localLoadSuccess || !WebLoadSuccess) return;
-
-        var isTracked = new bool[LocalModsList.Count];
-        foreach (var webMod in WebModsList)
-        {
-            var localModIdx = LocalModsList.FindIndex(localMod => localMod.Name == webMod.Name);
-            if (localModIdx == -1)
-            {
-                AddMod(webMod);
-                continue;
-            }
-
-            isTracked[localModIdx] = true;
-            AddMod(webMod, LocalModsList[localModIdx]);
-        }
-
-        for (var i = 0; i < isTracked.Length; i++)
-        {
-            if (!isTracked[i])
-            {
-                AddMod(LocalModsList[i]);
-            }
-        }
-    }
 
     /// <summary>
     /// Save game directory in settings
@@ -229,64 +128,6 @@ public partial class MainWindow : Window
     #endregion Initialize
 
     #region Mod Install, Update, Uninstall, Disable
-
-    /// <summary>
-    /// Install mods
-    /// </summary>
-    private bool InstallModUpdate(string modName, bool allowSuccessSetting)
-    {
-        var webMod = WebModsList.Find(x => x.Name == modName);
-        if (webMod is null)
-        {
-            DialogPopup($"Mod download failed\n(key \"{modName}\" was not present)");
-            return false;
-        }
-
-        var localModIdx = LocalModsList.FindIndex(x => x.Name == webMod.Name);
-        var path = Path.Join(CurrentGameDirectory, "Mods", localModIdx == -1 ? webMod.DownloadLink![5..] : LocalModsList[localModIdx].FileNameExtended());
-        //var lastIdx = path.LastIndexOf(Path.DirectorySeparatorChar);
-        try
-        {
-            ModDownload(webMod.DownloadLink!, path);
-        }
-        catch (Exception ex)
-        {
-            switch (ex)
-            {
-                case WebException:
-                    DialogPopup("Mod install failed\n(WebException, are you online?)");
-                    break;
-                case SecurityException:
-                case UnauthorizedAccessException:
-                case IOException:
-                    DialogPopup($"Mod install failed\n({ex.GetType()}, is the game running?)");
-                    break;
-
-                default:
-                    DialogPopup($"Mod install failed\n({ex.GetType()})");
-                    break;
-            }
-            return false;
-        }
-        foreach (var dependencyName in webMod.DependentMods!)
-        {
-            var dependentMod = WebModsList.Find(x => x.DownloadLink == dependencyName);
-            if (!InstallModUpdate(dependentMod?.Name!, false))
-            {
-                return false;
-            }
-        }
-
-        // Load downloaded mod
-        var localMod = LoadLocalMod(path);
-        LocalModsList.Add(localMod);
-        UpdateModDisplay(webMod, localMod);
-        if (SuccessPopups && allowSuccessSetting)
-        {
-            DialogPopup("Download successful.");
-        }
-        return true;
-    }
 
     /// <summary>
     /// Download file from github
@@ -310,52 +151,9 @@ public partial class MainWindow : Window
             webClient.Dispose();
         }
     }
+    
 
-    private void InstallModUpdateCall(object? sender, RoutedEventArgs args)
-    {
-        InstallModUpdate((string)((Control)sender!).Tag!, true);
-    }
-
-    /// <summary>
-    /// Uninstall mods
-    /// </summary>
-    private void UninstallMod(object? sender, RoutedEventArgs args)
-    {
-        var localMod = LocalModsList.Find(x => x.Name == (string)((Control)sender!).Tag!);
-
-        var path = Path.Join(CurrentGameDirectory, "Mods", localMod!.FileNameExtended());
-        if (!File.Exists(path))
-        {
-            ErrorAndExit($"Something went horribly wrong:\nYou somehow tried to uninstall\n{localMod!.FileNameExtended()},\nwhich simply doesn't exist!");
-            return;
-        }
-
-        try
-        {
-            File.Delete(path);
-            LocalModsList.Remove(localMod);
-            UpdateModDisplay(localMod);
-            if (SuccessPopups)
-            {
-                DialogPopup("Uninstall successful");
-            }
-        }
-        catch (Exception ex)
-        {
-            switch (ex)
-            {
-                case UnauthorizedAccessException:
-                case IOException:
-                    DialogPopup($"Mod uninstall failed\n({ex.GetType()}, is the game running?)");
-                    break;
-
-                default:
-                    DialogPopup($"Mod uninstall failed\n({ex.GetType()})");
-                    break;
-            }
-        }
-    }
-
+    
     /// <summary>
     /// Disable mods
     /// </summary>
@@ -404,46 +202,8 @@ public partial class MainWindow : Window
     #endregion Mod Install, Update, Uninstall, Disable
 
     #region DisPlay
-
-    /// <summary>
-    /// Update mod display after downloading mod
-    /// </summary>
-    private void UpdateModDisplay(Mod mod, Mod localMod)
-    {
-        for (var i = 0; i < ModItemsContainer.Children.Count; i++)
-        {
-            if ((string)((Control)ModItemsContainer.Children[i]).Tag! == mod.Name)
-            {
-                AddMod(mod, localMod, i);
-                break;
-            }
-        }
-
-        AddMod(mod, localMod);
-    }
-
-    /// <summary>
-    /// Update mod display after uninstalling mod
-    /// </summary>
-    private void UpdateModDisplay(Mod localMod)
-    {
-        var webModIdx = WebModsList.FindIndex(x => x.Name == localMod.Name);
-        if (webModIdx == -1)
-        {
-            ModItemsContainer.Children.Remove(ModItemsContainer.Children.First(x => (string)((Control)x).Tag! == localMod.Name));
-            return;
-        }
-
-        var webMod = WebModsList[webModIdx];
-        for (var i = 0; i < ModItemsContainer.Children.Count; i++)
-        {
-            if ((string)((Control)ModItemsContainer.Children[i]).Tag! == webMod.Name)
-            {
-                AddMod(webMod, i);
-                break;
-            }
-        }
-    }
+    
+    
 
     internal void UpdateFilters()
     {
@@ -575,79 +335,8 @@ public partial class MainWindow : Window
 
         return mod;
     }
+    
 
-    /// <summary>
-    /// Let user choosing game path
-    /// </summary>
-    private async void ChoosePath()
-    {
-        OpenFolderDialog dialog = new() { Title = "Choose Muse Dash Folder" };
-        Action? exitAction = CurrentGameDirectory == null ? ChoosePath : null;
-        var result = await dialog.ShowAsync(this);
-        if (result == null)
-        {
-            if (CurrentGameDirectory == null)
-            {
-                ChoosePath();
-            }
-
-            return;
-        }
-
-        var MDPath = Path.Join(result, "MuseDash.exe");
-        var ModsPath = Path.Join(result, "Mods");
-        if (File.Exists(MDPath))
-        {
-            try
-            {
-                var version = FileVersionInfo.GetVersionInfo(MDPath).FileVersion;
-                if (version == null || !version.StartsWith("2019."))
-                {
-                    DialogPopup("Failed to verify MuseDash.exe\nMake sure you selected the right folder", exitAction);
-                    return;
-                }
-            }
-            catch (Exception)
-            {
-                DialogPopup("Couldn't find MuseDash.exe\nMake sure you selected the right folder", exitAction);
-                return;
-            }
-        }
-
-        if (!Directory.Exists(ModsPath))
-        {
-            try
-            {
-                Directory.CreateDirectory(ModsPath);
-            }
-            catch (Exception)
-            {
-                DialogPopup("Couldn't find or create the Mods folder", exitAction);
-                return;
-            }
-        }
-
-        ModItemsContainer.Children.Clear();
-        LocalModsList.Clear();
-        CurrentGameDirectory = result;
-        InitializeLocalModsList(false);
-        if (!localLoadSuccess)
-        {
-            DialogPopup("Failed to read local mods", ChoosePath);
-            CurrentGameDirectory = null;
-            return;
-        }
-
-        FinishInitialization();
-    }
-
-    /// <summary>
-    /// For xaml
-    /// </summary>
-    private void ChoosePath_Call(object? sender, RoutedEventArgs args)
-    {
-        ChoosePath();
-    }
 
     /// <summary>
     /// For xaml

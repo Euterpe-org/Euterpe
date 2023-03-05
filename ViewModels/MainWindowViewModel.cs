@@ -1,31 +1,34 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reflection;
-using System.Threading.Tasks;
 using MelonLoader;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
 using MuseDashModToolsUI.Views;
 using ReactiveUI;
-using System.Reactive.Concurrency;
 
 namespace MuseDashModToolsUI.ViewModels;
 
-internal class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
+public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
     public ReactiveCommand<Unit, Unit> FilterAllCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterInstalledCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterEnabledCommand { get; }
 
     public ObservableCollection<Mod> Mods { get; } = new();
+    
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
 
+    public MainWindowViewModel()
+    {
+
+    }
     public MainWindowViewModel(IGitHubService gitHubService, ILocalService localService)
     {
         _gitHubService = gitHubService;
@@ -34,7 +37,6 @@ internal class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         FilterAllCommand = ReactiveCommand.Create(FilterAll);
         FilterInstalledCommand = ReactiveCommand.Create(FilterInstalled);
         FilterEnabledCommand = ReactiveCommand.Create(FilterEnabled);
-
         RxApp.MainThreadScheduler.Schedule(InitializeModList);
     }
 
