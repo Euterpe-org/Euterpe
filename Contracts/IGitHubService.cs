@@ -7,4 +7,5 @@ namespace MuseDashModToolsUI.Contracts;
 public interface IGitHubService
 {
     Task<List<Mod>> GetModsAsync();
+    Task DownloadModAsync(string link, string path);
 }

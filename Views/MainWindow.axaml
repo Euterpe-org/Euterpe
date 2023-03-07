@@ -95,7 +95,7 @@
 								Homepage
 							</Button>
 							<!--If there are no dependencies, this field is omitted-->
-							<StackPanel IsVisible="{Binding !!DependentLibs.Count}">
+							<StackPanel IsVisible="{Binding !!DependentMods.Count}">
 								<TextBlock>Dependencies:</TextBlock>
 								<TextBlock>Mod1</TextBlock>
 								<TextBlock>Mod2</TextBlock>
@@ -133,7 +133,17 @@
 						<Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
 						        Margin="30,35,0,0" Background="#505050"
 						        VerticalAlignment="Top"
+						        Command="{Binding $parent[ItemsControl].DataContext.RemoveModCommand}"
+						        CommandParameter="{Binding .}"
 						        Content="Uninstall">
+						</Button>
+						
+						<Button IsVisible="{Binding !IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
+						        Margin="30,35,0,0" Background="#505050"
+						        VerticalAlignment="Top"
+						        Command="{Binding $parent[ItemsControl].DataContext.InstallModCommand}"
+						        CommandParameter="{Binding .}"
+						        Content="Install">
 						</Button>
 						<!--If HASH mismatch or newer version,
 								content is "Reinstall" instead-->
@@ -142,10 +152,11 @@
 						Outdated: Color_Red
 						Newer: Color_Purple
 						Same version, hash mismatch: Yellow-->
-						<Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
+						<Button IsVisible="{Binding HasUpdate}" Tag="{Binding Name}" Width="75" Height="30"
 								Margin="30,35,0,0" Background="#505050"
 						        VerticalAlignment="Top"
 								Content="Update">
+							
 						</Button>
 					</StackPanel>
 				</Grid>

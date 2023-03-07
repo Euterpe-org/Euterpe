@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -12,7 +13,9 @@ namespace MuseDashModToolsUI.Services;
 public class GitHubService : IGitHubService
 {
     private readonly HttpClient _client;
-    private readonly string _baseLink = "MDModsDev/ModLinks/dev/";
+    
+    private const string BaseLink = "MDModsDev/ModLinks/dev/";
+    private const string PrimaryLink = "https://raw.githubusercontent.com/";
     
     public GitHubService(HttpClient client)
     {
@@ -20,19 +23,18 @@ public class GitHubService : IGitHubService
     }
     public async Task<List<Mod>> GetModsAsync()
     {
-        var result = Enumerable.Empty<Mod>();
-        try
-        {
-            result = await _client.GetFromJsonAsync<List<Mod>>(
-                "https://raw.githubusercontent.com/" + _baseLink +
-                "ModLinks.json");
-        }
-        catch (Exception)
-        {
-            result = await _client.GetFromJsonAsync<List<Mod>>("https://raw.fastgit.org/" + _baseLink +
-                                                                      "ModLinks.json");
-        }
+        return (await _client.GetFromJsonAsync<List<Mod>>(
+            PrimaryLink + BaseLink +
+            "ModLinks.json"))!;
         
-        return result!.ToList();
     }
+
+    public async Task DownloadModAsync(string link, string path)
+    {
+        var l = PrimaryLink + BaseLink + link;
+        var result = await _client.GetAsync(PrimaryLink + BaseLink + link);
+        await using var fs = new FileStream(path, FileMode.CreateNew);
+        await result.Content.CopyToAsync(fs);
+    }
+    
 }

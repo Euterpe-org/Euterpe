@@ -1,11 +1,22 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reflection;
+using System.Security;
+using System.Text;
+using System.Threading.Tasks;
+using Avalonia.Styling;
+using DynamicData;
 using MelonLoader;
+using MessageBox.Avalonia;
+using MessageBox.Avalonia.DTO;
+using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
@@ -20,6 +31,9 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReactiveCommand<Unit, Unit> FilterInstalledCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterEnabledCommand { get; }
     public ReactiveCommand<Mod, Unit> SelectedItemCommand { get; }
+    public ReactiveCommand<Mod, Unit> InstallModCommand { get; } 
+    
+    public ReactiveCommand<Mod, Unit> RemoveModCommand { get; }
 
     private Mod _selectedItem;
 
@@ -47,6 +61,9 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         FilterInstalledCommand = ReactiveCommand.Create(FilterInstalled);
         FilterEnabledCommand = ReactiveCommand.Create(FilterEnabled);
         SelectedItemCommand = ReactiveCommand.Create<Mod>(OnSelectedItem);
+        InstallModCommand = ReactiveCommand.CreateFromTask<Mod>(OnInstallMod);
+        RemoveModCommand = ReactiveCommand.CreateFromTask<Mod>(OnDeleteMod);
+        
         RxApp.MainThreadScheduler.Schedule(InitializeModList);
     }
 
@@ -56,7 +73,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         var webMods = await _gitHubService.GetModsAsync();
         var localPaths = _localService.GetModFiles(@"E:\SteamLibrary\steamapps\common\Muse Dash\Mods");
-        var localMods = localPaths.Select(LoadLocalMod).Where(mod => mod is not null).ToList();
+        var localMods = localPaths.Select(_localService.LoadMod).Where(mod => mod is not null).ToList();
         var isTracked = new bool[localMods.Count];
         foreach (var webMod in webMods)
         {
@@ -69,10 +86,21 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 Mods.Add(webMod);
                 continue;
             }
-            
-            
+
+            if (localMods.Count(x => x!.Name == localMod.Name) > 1)
+            {
+                localMod.IsDuplicated = true;
+            }
+
             isTracked[localModIdx] = true;
             localMod.IsTracked = true;
+            localMod.Version = webMod.Version;
+            
+            localMod.DependentLibs = webMod.DependentLibs;
+            localMod.DependentMods = webMod.DependentMods;
+            localMod.IncompatibleMods = webMod.IncompatibleMods;
+            localMod.DownloadLink = webMod.DownloadLink;
+            
             var versionDate = new Version(webMod.Version!) > new Version(localMod.Version!) ? -1 : new Version(webMod.Version!) < new Version(localMod.Version!) ? 1 : 0;
             localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
             
@@ -82,34 +110,13 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         {
             if (!isTracked[i])
             {
-                Mods.Add(localMods[i]!);
+                if (localMods.Count(x => x!.Name == localMods[i]!.Name) == 1)
+                {
+                    Mods.Add(localMods[i]!);
+                }
+                
             }
         }
-        
-    }
-    
-    private Mod? LoadLocalMod(string file)
-    {
-        var mod = new Mod
-        {
-            IsDisabled = file.EndsWith(".disabled"),
-        };
-
-        mod.FileName = mod.IsDisabled ? Path.GetFileName(file)[..^9] : Path.GetFileName(file);
-        var assembly = Assembly.Load(File.ReadAllBytes(file));
-        var attribute = MelonUtils.PullAttributeFromAssembly<MelonInfoAttribute>(assembly);
-
-        mod.Name = attribute.Name;
-        mod.Version = attribute.Version;
-        if (mod.Name == null || mod.Version == null)
-        {
-            return null;
-        }
-        mod.Author = attribute.Author;
-        mod.HomePage = attribute.DownloadLink;
-        mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(file);
-
-        return mod;
     }
     
     
@@ -142,4 +149,121 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         SelectedItem = item;
     }
 
+    private async Task OnInstallMod(Mod item)
+    {
+        if (item.DownloadLink is null)
+        {
+            await CreateMessageBox("Failure", "This mod does not have an available resource for download.", ButtonEnum.Ok, Icon.Error);
+            return;
+        }
+        
+        var errors = new StringBuilder();
+        var modPaths = new List<string>();
+        try
+        {
+            var path = Path.Join(Path.GetTempPath(), item.DownloadLink.Split("/")[1]);
+            await _gitHubService.DownloadModAsync(item.DownloadLink, path);
+            modPaths.Add(path);
+        }
+        catch (Exception ex)
+        {
+            switch (ex)
+            {
+                case WebException:
+                    errors.AppendLine($"Mod installation failed\nAre you online? {ex.ToString()}");
+                    break;
+                case SecurityException:
+                case UnauthorizedAccessException:
+                case IOException:
+                    errors.AppendLine($"Mod installation failed\nIs the game running? {ex.ToString()}");
+                    break;
+                default:
+                    errors.AppendLine($"Mod installation failed\n{ex.ToString()}");
+                    break;
+            }
+        }
+        
+        foreach (var mod in item.DependentMods)
+        {
+            var dependedMod = Mods.FirstOrDefault(x => x.DownloadLink == mod && x.IsLocal);
+            if (dependedMod is not null) continue;
+            try
+            {
+                var path = Path.Join(Path.GetTempPath(), mod.Split("/")[1]);
+                await _gitHubService.DownloadModAsync(mod, path);
+                modPaths.Add(path);
+            }
+            catch (Exception ex)
+            {
+                errors.AppendLine($"Dependency failed to install\n {ex.ToString()}");
+            }
+        }
+        
+
+        if (modPaths.Count > 0)
+        {
+            foreach (var path in modPaths)
+            {
+                File.Move(path, @"E:\SteamLibrary\steamapps\common\Muse Dash\Mods\" + Path.GetFileName(path));
+            }
+        }
+        if (errors.Length > 0)
+        {
+            await CreateMessageBox("Failure", errors.ToString(), ButtonEnum.Ok, Icon.Error);
+            return;
+        }
+
+        await CreateMessageBox("Success", $"{item.Name} mod has been successfully installed", ButtonEnum.Ok, Icon.Info);
+
+    }
+    private void OnUpdateMod(Mod item)
+    {
+        
+    }
+
+    private async Task OnDeleteMod(Mod item)
+    {
+        var path = @"E:\SteamLibrary\steamapps\common\Muse Dash\Mods\" + item.FileName;
+        if (!File.Exists(path))
+        {
+            await CreateMessageBox("Failure", "Cannot delete file that doesn't exist", ButtonEnum.Ok, Icon.Error);
+            return;
+        }
+
+        try
+        {
+            File.Delete(path);
+            Mods.Remove(item);
+
+            await CreateMessageBox("Success", $"{item.Name} has been successfully deleted.", ButtonEnum.Ok, Icon.Info);
+        }
+        catch (Exception ex)
+        {
+            switch (ex)
+            {
+                case UnauthorizedAccessException:
+                case IOException:
+                    await CreateMessageBox("Failure", "Mod uninstall failed\nIs the game running?", ButtonEnum.Ok, Icon.Error);
+                    break;
+                default:
+                    await CreateMessageBox("Failure", "Mod uninstall failed\n?", ButtonEnum.Ok, Icon.Error);
+                    break;
+            }
+        }
+        
+    }
+
+    private void OpenUrl(string path)
+    {
+        Process.Start(path);
+    }
+
+    private async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.None)
+        => await MessageBoxManager
+            .GetMessageBoxStandardWindow(new MessageBoxStandardParams{
+                ButtonDefinitions = button,
+                ContentTitle = title,
+                ContentMessage = content,
+                Icon = icon
+            }).Show();
 }
