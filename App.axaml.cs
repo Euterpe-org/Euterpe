@@ -2,7 +2,6 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.Views;
 using Splat;
 

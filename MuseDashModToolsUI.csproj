@@ -39,9 +39,4 @@
 			<HintPath>Binary\MelonLoader.dll</HintPath>
 		</Reference>
 	</ItemGroup>
-	<ItemGroup>
-		<Compile Update="Views\Dialog.axaml.cs">
-			<DependentUpon>Dialog.axaml</DependentUpon>
-		</Compile>
-	</ItemGroup>
 </Project>

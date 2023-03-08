@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+        xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -13,7 +14,14 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
+	
+	<Window.Resources>
+		<converters:DuplicateConverter x:Key="DuplicateConverter" />
+		<converters:VersionColourConverter x:Key="VersionColourConverter" />
+		<converters:VersionTextConverter x:Key="VersionTextConverter" />
+		<converters:InstallationTextConverter x:Key="InstallationTextConverter" />
+	</Window.Resources>
+	
     <Window.Styles>
         <Style Selector="Button">
             <Setter Property="Foreground" Value="#ddd" />
@@ -42,18 +50,18 @@
     <Grid Background="#282828">
         <StackPanel VerticalAlignment="Top">
             <Button Command="{Binding FilterAllCommand}" Content="All" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding FilterAllCommand}" Content="Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding FilterAllCommand}" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
-            <Button Command="{Binding FilterAllCommand}" Content="Outdated" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterInstalledCommand}" Content="Installed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterEnabledCommand}" Content="Enabled" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
+            <Button Command="{Binding FilterOutdatedCommand}" Content="Outdated" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="80" />
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom">
-            <Button Content="Path" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
-            <Button Content="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
+            <Button Command="{Binding OpenFolderDialogueCommand}" Content="Path" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
+            <Button Command="{Binding OpenModsFolderCommand}" Content="Mods" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="80" />
         </StackPanel>
         <Grid Width="800">
             <Separator HorizontalAlignment="Left" Margin="79,0,0,0" VerticalAlignment="Top" Height="450" Width="2" Background="#707070" BorderBrush="#FF707070" />
         </Grid>
-        <TextBox x:Name="Input_SearchFilter" Width="721" Height="40" Background="#0000" HorizontalAlignment="Right" TextWrapping="NoWrap" Watermark="Search Mods" VerticalAlignment="Top" BorderBrush="#707070" BorderThickness="2" SelectionBrush="#282828" SelectionForegroundBrush="#bbb" CornerRadius="1" AcceptsReturn="False" />
+        <TextBox x:Name="Input_SearchFilter" Text="{Binding Filter}" Width="721" Height="40" Background="#0000" HorizontalAlignment="Right" TextWrapping="NoWrap" Watermark="Search Mods" VerticalAlignment="Top" BorderBrush="#707070" BorderThickness="2" SelectionBrush="#282828" SelectionForegroundBrush="#bbb" CornerRadius="1" AcceptsReturn="False" />
 
         <ScrollViewer Margin="80,40,0,0" Height="410" Width="720">
 
@@ -78,7 +86,7 @@
 						<Button Width="675" Height="75"
 								HorizontalContentAlignment="Left"
 								VerticalContentAlignment="Center"
-								Foreground="#bbb" Content="{Binding Name}" BorderBrush="Transparent" Command="{Binding $parent[ItemsControl].DataContext.SelectedItemCommand}" CommandParameter="{Binding .}"/>
+								Foreground="{Binding ., Converter={StaticResource DuplicateConverter}}" Content="{Binding Name}" BorderBrush="Transparent" Command="{Binding $parent[ItemsControl].DataContext.SelectedItemCommand}" CommandParameter="{Binding .}"/>
 						<StackPanel Tag="ExpanderContent" IsVisible="{Binding IsExpanded}" Margin="50,0,0,0">
 						<TextBlock Text="{Binding XamlDescription}" />
 								<!--
@@ -87,19 +95,24 @@
 						If newer: Adds " (WOW MOD DEV)", Color_Purple (inspired by the mod)
 						if right version, but hash doesn't match: Adds " (Modified)", Color_Yellow
 						-->
-						<TextBlock Text="{Binding Version}" />
+						<TextBlock Text="{Binding ., Converter={StaticResource VersionTextConverter}}" Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
 								<!--If mod.HomePage.IsValidUrl() is false, this field is omitted-->
 							<!--Maybe could be turned into a reactive command with the homepage as parameter?-->
-							<Button Tag="mod.Homepage" Margin="0,5,0,5">
+							<Button IsVisible="{Binding IsValidHomePage}" Command="{Binding $parent[ItemsControl].DataContext.OpenUrlCommand}" CommandParameter="{Binding HomePage}" Tag="mod.Homepage" Margin="0,5,0,5">
 								Homepage
 							</Button>
 							<!--If there are no dependencies, this field is omitted-->
 							<StackPanel IsVisible="{Binding !!DependentMods.Count}">
 								<TextBlock>Dependencies:</TextBlock>
-								<TextBlock>Mod1</TextBlock>
-								<TextBlock>Mod2</TextBlock>
-								<!--
+								<ItemsControl Items="{Binding DependentMods}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding .}"></TextBlock>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+									<!--
 							mod.DependentMods contains a list of paths equivalent
 							in format to the WebMod.DownloadLink's format.
 							If found in WebModsList, the WebMod.Name is displayed.
@@ -109,15 +122,13 @@
 							<!--Appears only if the mod is duplicated
 						(mod.name duplicate check in LocalModsList)
 						Displays the filenames of the mods that duplicate the current mod-->
-							<StackPanel>
-								<TextBlock>
-									Filename: "mod.FileNameExtended()"
-								</TextBlock>
-								<TextBlock>
+							<StackPanel IsVisible="{Binding IsDuplicated}">
+								<TextBlock Text="{Binding FileName, StringFormat='Filename: {0}'}" />
+									<TextBlock>
 									Duplicated by:
 								</TextBlock>
-								<TextBlock>FileName1.dll</TextBlock>
-								<TextBlock>FileName2.dll.disable</TextBlock>
+								<TextBlock Text="{Binding FileName}" />
+								<TextBlock Text="{Binding FileName, StringFormat='{}{0}.disabled'}" />
 							</StackPanel>
 						</StackPanel>
 					</StackPanel>
@@ -126,7 +137,10 @@
 					<!--The controls go here (Update, disable, etc.)-->
 					<StackPanel Orientation="Horizontal" Margin="0,0,10,0">
 						<!--IsChecked: !mod.Disabled-->
-						<CheckBox IsChecked="False" Tag="{Binding Name}"
+						<CheckBox IsChecked="{Binding !IsDisabled}" Tag="{Binding Name}"
+						          IsEnabled="{Binding IsLocal}"
+						          Command="{Binding $parent[ItemsControl].DataContext.ToggleModCommand}"
+						          CommandParameter="{Binding .}"
 								  Foreground="#ddd" 
 						          Content="On">
 						</CheckBox>
@@ -152,10 +166,11 @@
 						Outdated: Color_Red
 						Newer: Color_Purple
 						Same version, hash mismatch: Yellow-->
-						<Button IsVisible="{Binding HasUpdate}" Tag="{Binding Name}" Width="75" Height="30"
+						<Button IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}" Width="75" Height="30"
+						        Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
 								Margin="30,35,0,0" Background="#505050"
 						        VerticalAlignment="Top"
-								Content="Update">
+								Content="{Binding ., Converter={StaticResource InstallationTextConverter}}">
 							
 						</Button>
 					</StackPanel>

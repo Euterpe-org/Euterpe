@@ -7,20 +7,21 @@ using System.Linq;
 using System.Net;
 using System.Reactive;
 using System.Reactive.Concurrency;
-using System.Reflection;
 using System.Security;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Avalonia.Styling;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using DynamicData;
-using MelonLoader;
+using DynamicData.Binding;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
-using MuseDashModToolsUI.Views;
 using ReactiveUI;
 
 namespace MuseDashModToolsUI.ViewModels;
@@ -30,10 +31,14 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReactiveCommand<Unit, Unit> FilterAllCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterInstalledCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterEnabledCommand { get; }
+    public ReactiveCommand<Unit, Unit> FilterOutdatedCommand { get; }
     public ReactiveCommand<Mod, Unit> SelectedItemCommand { get; }
-    public ReactiveCommand<Mod, Unit> InstallModCommand { get; } 
-    
+    public ReactiveCommand<Mod, Unit> InstallModCommand { get; }
     public ReactiveCommand<Mod, Unit> RemoveModCommand { get; }
+    public ReactiveCommand<Mod, Unit> ToggleModCommand { get; }
+    public ReactiveCommand<string, Unit> OpenUrlCommand { get; }
+    public ReactiveCommand<Unit, Unit> OpenFolderDialogueCommand { get; }
+    public ReactiveCommand<Unit, Unit> OpenModsFolderCommand { get; }
 
     private Mod _selectedItem;
 
@@ -43,8 +48,35 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
     }
 
-    public ObservableCollection<Mod> Mods { get; } = new();
-    
+    private string _filter;
+
+    public string Filter
+    {
+        get => _filter;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _filter, value);
+            _sourceCache.Refresh();
+        }
+    }
+
+    private Filter _categoryFilter;
+
+    public Filter CategoryFilter
+    {
+        get => _categoryFilter;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _categoryFilter, value);
+            _sourceCache.Refresh();
+        }
+    }
+    private SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
+    private readonly ReadOnlyObservableCollection<Mod> _mods;
+    public ReadOnlyObservableCollection<Mod> Mods  => _mods;
+    private Settings _settings = new();
+
+
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
 
@@ -57,14 +89,35 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _gitHubService = gitHubService;
         _localService = localService;
         
-        FilterAllCommand = ReactiveCommand.Create(FilterAll);
-        FilterInstalledCommand = ReactiveCommand.Create(FilterInstalled);
-        FilterEnabledCommand = ReactiveCommand.Create(FilterEnabled);
+        FilterAllCommand = ReactiveCommand.Create(OnFilterAll);
+        FilterInstalledCommand = ReactiveCommand.Create(OnFilterInstalled);
+        FilterEnabledCommand = ReactiveCommand.Create(OnFilterEnabled);
+        FilterOutdatedCommand = ReactiveCommand.Create(OnFilterOutdated);
+        
+        OpenUrlCommand = ReactiveCommand.Create<string>(OpenUrl);
+        OpenFolderDialogueCommand = ReactiveCommand.CreateFromTask(OnChoosePath);
+        OpenModsFolderCommand = ReactiveCommand.CreateFromTask(OpenModsFolder);
+
+
         SelectedItemCommand = ReactiveCommand.Create<Mod>(OnSelectedItem);
         InstallModCommand = ReactiveCommand.CreateFromTask<Mod>(OnInstallMod);
         RemoveModCommand = ReactiveCommand.CreateFromTask<Mod>(OnDeleteMod);
+        ToggleModCommand = ReactiveCommand.CreateFromTask<Mod>(OnToggleMod);
         
-        RxApp.MainThreadScheduler.Schedule(InitializeModList);
+        _sourceCache.Connect()
+            .Filter(x => string.IsNullOrEmpty(Filter) || x.Name!.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            .Filter(x => CategoryFilter != Models.Filter.Enabled || CategoryFilter == Models.Filter.Enabled && x is {IsDisabled: false, IsLocal: true})
+            .Filter(x => CategoryFilter != Models.Filter.Outdated || CategoryFilter == Models.Filter.Outdated)
+            .Filter(x => CategoryFilter != Models.Filter.Installed || CategoryFilter == Models.Filter.Installed && x.IsLocal)
+            .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
+            .Bind(out _mods)
+            .Subscribe();
+        
+        InitializeSettings();
+        if (!string.IsNullOrEmpty(_settings.ModsFolder))
+        {
+            RxApp.MainThreadScheduler.Schedule(InitializeModList);
+        }
     }
 
     
@@ -72,7 +125,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private async void InitializeModList()
     {
         var webMods = await _gitHubService.GetModsAsync();
-        var localPaths = _localService.GetModFiles(@"E:\SteamLibrary\steamapps\common\Muse Dash\Mods");
+        var localPaths = _localService.GetModFiles(_settings.ModsFolder);
         var localMods = localPaths.Select(_localService.LoadMod).Where(mod => mod is not null).ToList();
         var isTracked = new bool[localMods.Count];
         foreach (var webMod in webMods)
@@ -83,7 +136,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             if (localMod is null)
             {
                 webMod.IsTracked = true;
-                Mods.Add(webMod);
+                _sourceCache.AddOrUpdate(webMod);
                 continue;
             }
 
@@ -100,11 +153,13 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             localMod.DependentMods = webMod.DependentMods;
             localMod.IncompatibleMods = webMod.IncompatibleMods;
             localMod.DownloadLink = webMod.DownloadLink;
+            localMod.HomePage = webMod.HomePage;
             
             var versionDate = new Version(webMod.Version!) > new Version(localMod.Version!) ? -1 : new Version(webMod.Version!) < new Version(localMod.Version!) ? 1 : 0;
+            localMod.State = (UpdateState) versionDate;
             localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
             
-            Mods.Add(localMod);
+            _sourceCache.AddOrUpdate(localMod);
         }
         for (var i = 0; i < isTracked.Length; i++)
         {
@@ -112,41 +167,31 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             {
                 if (localMods.Count(x => x!.Name == localMods[i]!.Name) == 1)
                 {
-                    Mods.Add(localMods[i]!);
+                    _sourceCache.AddOrUpdate(localMods[i]!);
                 }
                 
             }
         }
     }
-    
-    
-    public void FilterAll()
-    {
-        MainWindow.Instance!.Selected_ModFilter = 0;
-        MainWindow.Instance.UpdateFilters();
-    }
 
-    public void FilterInstalled()
+    private void InitializeSettings()
     {
-        MainWindow.Instance!.Selected_ModFilter = 1;
-        MainWindow.Instance.UpdateFilters();
-    }
+        try
+        {
+            if (!File.Exists("appsettings.json"))
+            {
+                File.Create("appsettings.json");
+                var json = JsonSerializer.Serialize(_settings);
+                File.WriteAllText("appsettings.json", json);
+            }
 
-    public void FilterEnabled()
-    {
-        MainWindow.Instance!.Selected_ModFilter = 2;
-        MainWindow.Instance.UpdateFilters();
-    }
-
-    public void FilterOutdated()
-    {
-        MainWindow.Instance!.Selected_ModFilter = 3;
-        MainWindow.Instance.UpdateFilters();
-    }
-    private void OnSelectedItem(Mod item)
-    {
-        item.IsExpanded = !item.IsExpanded;
-        SelectedItem = item;
+            var options = JsonSerializer.Deserialize<Settings>(File.ReadAllText("appsettings.json"));
+            _settings = options;
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
     }
 
     private async Task OnInstallMod(Mod item)
@@ -159,10 +204,14 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         
         var errors = new StringBuilder();
         var modPaths = new List<string>();
+        var mods = new List<Mod>();
         try
         {
             var path = Path.Join(Path.GetTempPath(), item.DownloadLink.Split("/")[1]);
-            await _gitHubService.DownloadModAsync(item.DownloadLink, path);
+            if (!File.Exists(path))
+            {
+                await _gitHubService.DownloadModAsync(item.DownloadLink, path);
+            }
             modPaths.Add(path);
         }
         catch (Exception ex)
@@ -190,7 +239,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             try
             {
                 var path = Path.Join(Path.GetTempPath(), mod.Split("/")[1]);
-                await _gitHubService.DownloadModAsync(mod, path);
+                if (!File.Exists(path))
+                {
+                    await _gitHubService.DownloadModAsync(mod, path);
+                }
                 modPaths.Add(path);
             }
             catch (Exception ex)
@@ -204,7 +256,17 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         {
             foreach (var path in modPaths)
             {
-                File.Move(path, @"E:\SteamLibrary\steamapps\common\Muse Dash\Mods\" + Path.GetFileName(path));
+                var fullPath = Path.Join(_settings.ModsFolder, Path.GetFileName(path));
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+                File.Move(path, fullPath);
+                var mod = _localService.LoadMod(fullPath);
+                if (mod is not null)
+                {
+                    mods.Add(mod);
+                }
             }
         }
         if (errors.Length > 0)
@@ -213,17 +275,55 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             return;
         }
 
-        await CreateMessageBox("Success", $"{item.Name} mod has been successfully installed", ButtonEnum.Ok, Icon.Info);
+        if (mods.Count > 0)
+        {
+            foreach (var mod in mods)
+            {
+                var existedMod = _mods.FirstOrDefault(x => x.Name == mod.Name);
+                if (existedMod is not null)
+                {
+                    _sourceCache.Remove(existedMod);
+                }
+                _sourceCache.AddOrUpdate(mod);
+            }
+        }
 
+        await CreateMessageBox("Success", $"{item.Name} mod has been successfully installed", ButtonEnum.Ok, Icon.Info);
     }
-    private void OnUpdateMod(Mod item)
+
+    private async Task OnToggleMod(Mod item)
     {
-        
+        //Kind of a bummer that I have to reverse the boolean here, due to binding triggering before the command executes. If you find a better way for this, hit me with a big fat PR
+        item.IsDisabled = !item.IsDisabled;
+        try
+        {
+            File.Move(
+                Path.Join(_settings.ModsFolder, item.FileNameExtended()),
+                Path.Join(_settings.ModsFolder, item.FileNameExtended(true)));
+        }
+        catch (Exception ex)
+        {
+            switch (ex)
+            {
+                case UnauthorizedAccessException:
+                    await CreateMessageBox("Failure", "Mod disable/enable failed\nUnauthorized", ButtonEnum.Ok, Icon.Error);
+                    break;
+                case IOException:
+                    await CreateMessageBox("Failure", "Mod disable/enable failed\nIs the game running?", ButtonEnum.Ok, Icon.Error);
+                    break;
+
+                default:
+                    await CreateMessageBox("Failure", "Mod disable/enable failed\n", ButtonEnum.Ok, Icon.Error);
+                    break;
+            }
+            item.IsDisabled = !item.IsDisabled;
+        }
+        item.IsDisabled = !item.IsDisabled;
     }
 
     private async Task OnDeleteMod(Mod item)
     {
-        var path = @"E:\SteamLibrary\steamapps\common\Muse Dash\Mods\" + item.FileName;
+        var path = Path.Join(_settings.ModsFolder, item.FileName);
         if (!File.Exists(path))
         {
             await CreateMessageBox("Failure", "Cannot delete file that doesn't exist", ButtonEnum.Ok, Icon.Error);
@@ -232,8 +332,16 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         try
         {
+            
             File.Delete(path);
-            Mods.Remove(item);
+            _sourceCache.Remove(item);
+            
+            var mods = await _gitHubService.GetModsAsync();
+            var webMod = mods.FirstOrDefault(x => x.Name == item.Name);
+            if (webMod is not null)
+            {
+                _sourceCache.AddOrUpdate(webMod);
+            }
 
             await CreateMessageBox("Success", $"{item.Name} has been successfully deleted.", ButtonEnum.Ok, Icon.Info);
         }
@@ -253,9 +361,77 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         
     }
 
+    private async Task OnChoosePath()
+    {
+        while (true)
+        {
+            var dialogue = new OpenFolderDialog();
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var path = await dialogue.ShowAsync(desktop.MainWindow);
+                if (string.IsNullOrEmpty(path))
+                {
+                    await CreateMessageBox("Failure", "The path you chose is invalid. Try again...", ButtonEnum.Ok, Icon.Error);
+                    continue;
+                }
+
+                _settings.ModsFolder = path;
+                var json = JsonSerializer.Serialize(_settings);
+                await File.WriteAllTextAsync("appsettings.json", json);
+                RxApp.MainThreadScheduler.Schedule(InitializeModList);
+            }
+
+            break;
+        }
+    }
+
     private void OpenUrl(string path)
     {
-        Process.Start(path);
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = path,
+            UseShellExecute = true
+        });
+    }
+    
+    private async Task OpenModsFolder()
+    {
+        if (string.IsNullOrEmpty(_settings.ModsFolder))
+        {
+            await CreateMessageBox("Failure", "Choose the mods folder first!", ButtonEnum.Ok, Icon.Error);
+            return;
+        }
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = _settings.ModsFolder,
+            UseShellExecute = true
+        });
+    }
+    
+
+    private void OnFilterAll()
+    {
+        CategoryFilter = Models.Filter.All;
+    }
+
+    private void OnFilterInstalled()
+    {
+        CategoryFilter = Models.Filter.Installed;
+    }
+
+    private void OnFilterEnabled()
+    {
+        CategoryFilter = Models.Filter.Enabled;
+    }
+
+    private void OnFilterOutdated()
+    {
+        CategoryFilter = Models.Filter.Outdated;
+    }
+    private void OnSelectedItem(Mod item)
+    {
+        item.IsExpanded = !item.IsExpanded;
+        SelectedItem = item;
     }
 
     private async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.None)
