@@ -27,7 +27,7 @@ public class Mod : ReactiveObject
     [JsonIgnore] public bool IsShaMismatched { get; set; }
     [JsonIgnore] public bool IsDuplicated { get; set; }
     
-    [JsonIgnore] public string XamlDescription => $"{Description} \n\n Author: {Author} \n Version: {Version}";
+    [JsonIgnore] public string XamlDescription => $"{Description}\n\n Author: {Author}\n Version: {Version}";
     private bool _isExpanded;
     [JsonIgnore]
     public bool IsExpanded
