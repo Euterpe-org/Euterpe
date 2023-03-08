@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -13,7 +14,9 @@ public class GitHubService : IGitHubService
     private readonly HttpClient _client;
     
     private const string BaseLink = "MDModsDev/ModLinks/dev/";
+    
     private const string PrimaryLink = "https://raw.githubusercontent.com/";
+    private const string SecondaryLink = "https://raw.fastgit.org/";
     
     public GitHubService(HttpClient client)
     {
@@ -21,16 +24,35 @@ public class GitHubService : IGitHubService
     }
     public async Task<List<Mod>> GetModsAsync()
     {
-        return (await _client.GetFromJsonAsync<List<Mod>>(
-            PrimaryLink + BaseLink +
-            "ModLinks.json"))!;
-        
+        List<Mod> mods;
+        try
+        {
+            mods = (await _client.GetFromJsonAsync<List<Mod>>(
+                PrimaryLink + BaseLink +
+                "ModLinks.json"))!;
+        }
+        catch (Exception ex)
+        {
+            mods = (await _client.GetFromJsonAsync<List<Mod>>(
+                SecondaryLink + BaseLink +
+                "ModLinks.json"))!;
+        }
+
+        return mods;
+
     }
 
     public async Task DownloadModAsync(string link, string path)
     {
-        var l = PrimaryLink + BaseLink + link;
-        var result = await _client.GetAsync(PrimaryLink + BaseLink + link);
+        HttpResponseMessage result;
+        try
+        {
+            result = await _client.GetAsync(PrimaryLink + BaseLink + link);
+        }
+        catch (Exception)
+        {
+            result = await _client.GetAsync(SecondaryLink + BaseLink + link);
+        }
         await using var fs = new FileStream(path, FileMode.CreateNew);
         await result.Content.CopyToAsync(fs);
     }
