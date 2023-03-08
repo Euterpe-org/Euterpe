@@ -323,7 +323,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task OnDeleteMod(Mod item)
     {
-        var path = Path.Join(_settings.ModsFolder, item.FileName);
+        var path = Path.Join(_settings.ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
             await CreateMessageBox("Failure", "Cannot delete file that doesn't exist", ButtonEnum.Ok, Icon.Error);

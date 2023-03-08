@@ -127,7 +127,6 @@
 									<TextBlock>
 									Duplicated by:
 								</TextBlock>
-								<TextBlock Text="{Binding FileName}" />
 								<TextBlock Text="{Binding FileName, StringFormat='{}{0}.disabled'}" />
 							</StackPanel>
 						</StackPanel>
