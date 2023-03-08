@@ -170,6 +170,8 @@
 						        Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
 								Margin="30,35,0,0" Background="#505050"
 						        VerticalAlignment="Top"
+						        Command="{Binding $parent[ItemsControl].DataContext.InstallModCommand}"
+						        CommandParameter="{Binding .}"
 								Content="{Binding ., Converter={StaticResource InstallationTextConverter}}">
 							
 						</Button>

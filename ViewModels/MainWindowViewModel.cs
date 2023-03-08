@@ -107,7 +107,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(Filter) || x.Name!.Contains(Filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => CategoryFilter != Models.Filter.Enabled || CategoryFilter == Models.Filter.Enabled && x is {IsDisabled: false, IsLocal: true})
-            .Filter(x => CategoryFilter != Models.Filter.Outdated || CategoryFilter == Models.Filter.Outdated)
+            .Filter(x => CategoryFilter != Models.Filter.Outdated || CategoryFilter == Models.Filter.Outdated && x.State == UpdateState.Outdated)
             .Filter(x => CategoryFilter != Models.Filter.Installed || CategoryFilter == Models.Filter.Installed && x.IsLocal)
             .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
             .Bind(out _mods)
@@ -155,7 +155,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             localMod.DownloadLink = webMod.DownloadLink;
             localMod.HomePage = webMod.HomePage;
             
-            var versionDate = new Version(webMod.Version!) > new Version(localMod.Version!) ? -1 : new Version(webMod.Version!) < new Version(localMod.Version!) ? 1 : 0;
+            var versionDate = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 : new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
             localMod.State = (UpdateState) versionDate;
             localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
             
