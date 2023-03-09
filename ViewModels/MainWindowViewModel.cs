@@ -39,6 +39,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReactiveCommand<string, Unit> OpenUrlCommand { get; }
     public ReactiveCommand<Unit, Unit> OpenFolderDialogueCommand { get; }
     public ReactiveCommand<Unit, Unit> OpenModsFolderCommand { get; }
+    public ReactiveCommand<Unit, Unit> InstallMelonLoaderCommand { get; }
+    public ReactiveCommand<Unit, Unit> UnInstallMelonLoaderCommand { get; }
 
     private Mod _selectedItem;
 
@@ -77,7 +79,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
     private Settings _settings = new();
 
-
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
 
@@ -98,6 +99,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         OpenUrlCommand = ReactiveCommand.Create<string>(OpenUrl);
         OpenFolderDialogueCommand = ReactiveCommand.CreateFromTask(OnChoosePath);
         OpenModsFolderCommand = ReactiveCommand.CreateFromTask(OpenModsFolder);
+        InstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnInstallMelonLoader);
+        UnInstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnUnInstallMelonLoader);
 
 
         SelectedItemCommand = ReactiveCommand.Create<Mod>(OnSelectedItem);
@@ -364,6 +367,39 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     break;
             }
         }
+    }
+
+    private async Task OnInstallMelonLoader()
+    {
+        /* we need to upload a zip called "MelonLoader.zip" into github modlinks repository
+        and download from github (most likely about 50mb)
+        then unzip it to muse dash folder*/
+        var MuseDashFolder = _settings.ModsFolder[..^5];
+    }
+
+    private async Task OnUnInstallMelonLoader()
+    {
+        var MuseDashFolder = _settings.ModsFolder[..^5];
+        var MelonLoaderFolder = Path.Join(MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(MuseDashFolder, "version.dll");
+        var noticeTxt = Path.Join(MuseDashFolder, "NOTICE.txt");
+
+        if (Directory.Exists(MelonLoaderFolder))
+        {
+            try
+            {
+                Directory.Delete(MelonLoaderFolder, true);
+                File.Delete(versionFile);
+                File.Delete(noticeTxt);
+                await CreateMessageBox("Success", "MelonLoader has been successfully uninstalled", ButtonEnum.Ok, Icon.Success);
+            }
+            catch (Exception)
+            {
+                await CreateErrorMessageBox("Failure", "Cannot uninstall MelonLoader, please make sure your game is not running!");
+            }
+        }
+        else
+            await CreateErrorMessageBox("Failure", "Cannot find MelonLoader Folder, have you installed MelonLoader?");
     }
 
     private async Task OnChoosePath()
