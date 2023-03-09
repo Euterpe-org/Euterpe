@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
@@ -96,8 +97,15 @@ public class GitHubService : IGitHubService
             if (tag == null) return;
             if (!Version.TryParse(tag, out var version)) return;
             if (version <= currentVersion) return;
-            // Different platform need to use different link
-            var link = doc.RootElement.GetProperty("assets")[0].GetProperty("browser_download_url").GetString();
+
+            string? link;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                link = doc.RootElement.GetProperty("assets")[0].GetProperty("browser_download_url").GetString();
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                link = doc.RootElement.GetProperty("assets")[1].GetProperty("browser_download_url").GetString();
+            else
+                link = null;
+
             var parentPath = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent!.FullName;
             await DownloadUpdates(link!, Directory.GetCurrentDirectory() + ".zip", parentPath);
         }
