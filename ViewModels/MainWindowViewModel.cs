@@ -17,13 +17,12 @@ using Avalonia.Controls.ApplicationLifetimes;
 using DynamicData;
 using DynamicData.Binding;
 using ICSharpCode.SharpZipLib.Zip;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
 using ReactiveUI;
+using static MuseDashModToolsUI.Utils.MessageBoxUtils;
 
 #pragma warning disable CS8618
 
@@ -135,7 +134,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var UserDataPath = Path.Join(_settings.MuseDashFolder, "UserData");
         if (!File.Exists(ExePath) || !File.Exists(GameAssemblyPath))
         {
-            await CreateErrorMessageBox("Failure", "Couldn't find MuseDash.exe or GameAssembly.dll\nMake sure you selected the right folder");
+            await CreateErrorMessageBox("Couldn't find MuseDash.exe or GameAssembly.dll\nMake sure you selected the right folder");
             return false;
         }
 
@@ -144,7 +143,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             var version = FileVersionInfo.GetVersionInfo(ExePath).FileVersion;
             if (version is not "2019.4.32.16288752")
             {
-                await CreateErrorMessageBox("Failure", "Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
+                await CreateErrorMessageBox("Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
                 return false;
             }
 
@@ -168,7 +167,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Failure", "Failed to verify MuseDash.exe\nMake sure you selected the right folder");
+            await CreateErrorMessageBox("Failed to verify MuseDash.exe\nMake sure you selected the right folder");
             return false;
         }
 
@@ -249,7 +248,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         if (item.DownloadLink is null)
         {
-            await CreateErrorMessageBox("Failure", "This mod does not have an available resource for download.");
+            await CreateErrorMessageBox("This mod does not have an available resource for download.");
             return;
         }
 
@@ -327,7 +326,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         if (errors.Length > 0)
         {
-            await CreateErrorMessageBox("Failure", errors.ToString());
+            await CreateErrorMessageBox(errors.ToString());
             return;
         }
 
@@ -363,15 +362,15 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    await CreateErrorMessageBox("Failure", "Mod disable/enable failed\nUnauthorized");
+                    await CreateErrorMessageBox("Mod disable/enable failed\nUnauthorized");
                     break;
 
                 case IOException:
-                    await CreateErrorMessageBox("Failure", "Mod disable/enable failed\nIs the game running?");
+                    await CreateErrorMessageBox("Mod disable/enable failed\nIs the game running?");
                     break;
 
                 default:
-                    await CreateErrorMessageBox("Failure", "Mod disable/enable failed\n");
+                    await CreateErrorMessageBox("Mod disable/enable failed\n");
                     break;
             }
 
@@ -386,7 +385,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var path = Path.Join(ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
-            await CreateErrorMessageBox("Failure", "Cannot delete file that doesn't exist");
+            await CreateErrorMessageBox("Cannot delete file that doesn't exist");
             return;
         }
 
@@ -410,11 +409,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             {
                 case UnauthorizedAccessException:
                 case IOException:
-                    await CreateErrorMessageBox("Failure", "Mod uninstall failed\nIs the game running?");
+                    await CreateErrorMessageBox("Mod uninstall failed\nIs the game running?");
                     break;
 
                 default:
-                    await CreateErrorMessageBox("Failure", "Mod uninstall failed");
+                    await CreateErrorMessageBox("Mod uninstall failed");
                     break;
             }
         }
@@ -433,11 +432,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             {
                 if (ex is WebException)
                 {
-                    await CreateErrorMessageBox("Failure", "MelonLoader download failed\nAre you online?");
+                    await CreateErrorMessageBox("MelonLoader download failed\nAre you online?");
                     return;
                 }
 
-                await CreateErrorMessageBox("Failure", "MelonLoader download failed");
+                await CreateErrorMessageBox("MelonLoader download failed");
             }
         }
 
@@ -448,7 +447,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Failure", "Cannot unzip MelonLoader.zip");
+            await CreateErrorMessageBox("Cannot unzip MelonLoader.zip");
         }
 
         try
@@ -457,7 +456,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Failure", "Failed to delete MelonLoader.zip");
+            await CreateErrorMessageBox("Failed to delete MelonLoader.zip");
         }
     }
 
@@ -478,11 +477,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
             catch (Exception)
             {
-                await CreateErrorMessageBox("Failure", "Cannot uninstall MelonLoader, please make sure your game is not running!");
+                await CreateErrorMessageBox("Cannot uninstall MelonLoader, please make sure your game is not running!");
             }
         }
         else
-            await CreateErrorMessageBox("Failure", "Cannot find MelonLoader Folder, have you installed MelonLoader?");
+            await CreateErrorMessageBox("Cannot find MelonLoader Folder, have you installed MelonLoader?");
     }
 
     private async Task OnChoosePath()
@@ -495,7 +494,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 var path = await dialogue.ShowAsync(desktop.MainWindow);
                 if (string.IsNullOrEmpty(path))
                 {
-                    await CreateErrorMessageBox("Failure", "The path you chose is invalid. Try again...");
+                    await CreateErrorMessageBox("The path you chose is invalid. Try again...");
                     continue;
                 }
 
@@ -522,7 +521,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         if (string.IsNullOrEmpty(ModsFolder))
         {
-            await CreateErrorMessageBox("Failure", "Choose the mods folder first!");
+            await CreateErrorMessageBox("Choose the mods folder first!");
             return;
         }
 
@@ -546,16 +545,4 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         item.IsExpanded = !item.IsExpanded;
         SelectedItem = item;
     }
-
-    private async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.None)
-        => await MessageBoxManager
-            .GetMessageBoxStandardWindow(new MessageBoxStandardParams
-            {
-                ButtonDefinitions = button,
-                ContentTitle = title,
-                ContentMessage = content,
-                Icon = icon
-            }).Show();
-
-    private async Task<ButtonResult> CreateErrorMessageBox(string title, string content) => await CreateMessageBox(title, content, icon: Icon.Error);
 }

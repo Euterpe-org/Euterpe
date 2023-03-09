@@ -8,11 +8,9 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.DTO;
-using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Models;
+using static MuseDashModToolsUI.Utils.MessageBoxUtils;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -111,14 +109,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await MessageBoxManager
-                .GetMessageBoxStandardWindow(new MessageBoxStandardParams
-                {
-                    ButtonDefinitions = ButtonEnum.Ok,
-                    ContentTitle = "Failure",
-                    ContentMessage = "Checking updates failed",
-                    Icon = Icon.Error
-                }).Show();
+            await CreateErrorMessageBox("Checking updates failed");
         }
     }
 
@@ -142,14 +133,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await MessageBoxManager
-                .GetMessageBoxStandardWindow(new MessageBoxStandardParams
-                {
-                    ButtonDefinitions = ButtonEnum.Ok,
-                    ContentTitle = "Failure",
-                    ContentMessage = "Unable to unzip the latest version of app\nMaybe try manually unzip?",
-                    Icon = Icon.Error
-                }).Show();
+            await CreateErrorMessageBox("Unable to unzip the latest version of app\nMaybe try manually unzip?");
         }
 
         try
@@ -158,14 +142,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await MessageBoxManager
-                .GetMessageBoxStandardWindow(new MessageBoxStandardParams
-                {
-                    ButtonDefinitions = ButtonEnum.Ok,
-                    ContentTitle = "Failure",
-                    ContentMessage = "Failed to delete zip file\nTry manually delete",
-                    Icon = Icon.Error
-                }).Show();
+            await CreateErrorMessageBox("Failed to delete zip file\nTry manually delete");
         }
     }
 }
