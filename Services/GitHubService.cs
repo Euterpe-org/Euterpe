@@ -31,7 +31,7 @@ public class GitHubService : IGitHubService
                 PrimaryLink + BaseLink +
                 "ModLinks.json"))!;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             mods = (await _client.GetFromJsonAsync<List<Mod>>(
                 SecondaryLink + BaseLink +

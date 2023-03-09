@@ -71,9 +71,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             _sourceCache.Refresh();
         }
     }
-    private SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
+
+    private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly ReadOnlyObservableCollection<Mod> _mods;
-    public ReadOnlyObservableCollection<Mod> Mods  => _mods;
+    public ReadOnlyObservableCollection<Mod> Mods => _mods;
     private Settings _settings = new();
 
 
@@ -82,18 +83,18 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     public MainWindowViewModel()
     {
-        
     }
+
     public MainWindowViewModel(IGitHubService gitHubService, ILocalService localService)
     {
         _gitHubService = gitHubService;
         _localService = localService;
-        
+
         FilterAllCommand = ReactiveCommand.Create(OnFilterAll);
         FilterInstalledCommand = ReactiveCommand.Create(OnFilterInstalled);
         FilterEnabledCommand = ReactiveCommand.Create(OnFilterEnabled);
         FilterOutdatedCommand = ReactiveCommand.Create(OnFilterOutdated);
-        
+
         OpenUrlCommand = ReactiveCommand.Create<string>(OpenUrl);
         OpenFolderDialogueCommand = ReactiveCommand.CreateFromTask(OnChoosePath);
         OpenModsFolderCommand = ReactiveCommand.CreateFromTask(OpenModsFolder);
@@ -112,7 +113,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
             .Bind(out _mods)
             .Subscribe();
-        
+
         InitializeSettings();
         if (!string.IsNullOrEmpty(_settings.ModsFolder))
         {
@@ -120,7 +121,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
     }
 
-    
 
     private async void InitializeModList()
     {
@@ -132,7 +132,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         {
             var localMod = localMods.FirstOrDefault(x => x!.Name == webMod.Name);
             var localModIdx = localMods.IndexOf(localMod);
-            
+
             if (localMod is null)
             {
                 webMod.IsTracked = true;
@@ -148,7 +148,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             isTracked[localModIdx] = true;
             localMod.IsTracked = true;
             localMod.Version = webMod.Version;
-            
+
             localMod.DependentLibs = webMod.DependentLibs;
             localMod.DependentMods = webMod.DependentMods;
             localMod.IncompatibleMods = webMod.IncompatibleMods;
@@ -156,11 +156,12 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             localMod.HomePage = webMod.HomePage;
 
             var versionDate = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 : new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
-            localMod.State = (UpdateState) versionDate;
+            localMod.State = (UpdateState)versionDate;
             localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
-            
+
             _sourceCache.AddOrUpdate(localMod);
         }
+
         for (var i = 0; i < isTracked.Length; i++)
         {
             if (!isTracked[i])
@@ -169,7 +170,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 {
                     _sourceCache.AddOrUpdate(localMods[i]!);
                 }
-                
             }
         }
     }
@@ -198,20 +198,21 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         if (item.DownloadLink is null)
         {
-            await CreateMessageBox("Failure", "This mod does not have an available resource for download.", ButtonEnum.Ok, Icon.Error);
+            await CreateErrorMessageBox("Failure", "This mod does not have an available resource for download.");
             return;
         }
-        
+
         var errors = new StringBuilder();
         var modPaths = new List<string>();
         var mods = new List<Mod>();
         try
         {
-            var path = Path.Join(Path.GetTempPath(), item.DownloadLink.Split("/")[1]);
+            var path = Path.Join(Path.GetTempPath(), item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             if (!File.Exists(path))
             {
                 await _gitHubService.DownloadModAsync(item.DownloadLink, path);
             }
+
             modPaths.Add(path);
         }
         catch (Exception ex)
@@ -231,7 +232,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     break;
             }
         }
-        
+
         foreach (var mod in item.DependentMods)
         {
             var dependedMod = Mods.FirstOrDefault(x => x.DownloadLink == mod && x.IsLocal);
@@ -243,6 +244,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 {
                     await _gitHubService.DownloadModAsync(mod, path);
                 }
+
                 modPaths.Add(path);
             }
             catch (Exception ex)
@@ -250,7 +252,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 errors.AppendLine($"Dependency failed to install\n {ex.ToString()}");
             }
         }
-        
+
 
         if (modPaths.Count > 0)
         {
@@ -261,6 +263,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 {
                     File.Delete(fullPath);
                 }
+
                 File.Move(path, fullPath);
                 var mod = _localService.LoadMod(fullPath);
                 if (mod is not null)
@@ -269,9 +272,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 }
             }
         }
+
         if (errors.Length > 0)
         {
-            await CreateMessageBox("Failure", errors.ToString(), ButtonEnum.Ok, Icon.Error);
+            await CreateErrorMessageBox("Failure", errors.ToString());
             return;
         }
 
@@ -284,6 +288,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 {
                     _sourceCache.Remove(existedMod);
                 }
+
                 _sourceCache.AddOrUpdate(mod);
             }
         }
@@ -306,18 +311,20 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    await CreateMessageBox("Failure", "Mod disable/enable failed\nUnauthorized", ButtonEnum.Ok, Icon.Error);
+                    await CreateErrorMessageBox("Failure", "Mod disable/enable failed\nUnauthorized");
                     break;
                 case IOException:
-                    await CreateMessageBox("Failure", "Mod disable/enable failed\nIs the game running?", ButtonEnum.Ok, Icon.Error);
+                    await CreateErrorMessageBox("Failure", "Mod disable/enable failed\nIs the game running?");
                     break;
 
                 default:
-                    await CreateMessageBox("Failure", "Mod disable/enable failed\n", ButtonEnum.Ok, Icon.Error);
+                    await CreateErrorMessageBox("Failure", "Mod disable/enable failed\n");
                     break;
             }
+
             item.IsDisabled = !item.IsDisabled;
         }
+
         item.IsDisabled = !item.IsDisabled;
     }
 
@@ -326,16 +333,15 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var path = Path.Join(_settings.ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
-            await CreateMessageBox("Failure", "Cannot delete file that doesn't exist", ButtonEnum.Ok, Icon.Error);
+            await CreateErrorMessageBox("Failure", "Cannot delete file that doesn't exist");
             return;
         }
 
         try
         {
-            
             File.Delete(path);
             _sourceCache.Remove(item);
-            
+
             var mods = await _gitHubService.GetModsAsync();
             var webMod = mods.FirstOrDefault(x => x.Name == item.Name);
             if (webMod is not null)
@@ -351,14 +357,13 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             {
                 case UnauthorizedAccessException:
                 case IOException:
-                    await CreateMessageBox("Failure", "Mod uninstall failed\nIs the game running?", ButtonEnum.Ok, Icon.Error);
+                    await CreateErrorMessageBox("Failure", "Mod uninstall failed\nIs the game running?");
                     break;
                 default:
-                    await CreateMessageBox("Failure", "Mod uninstall failed\n?", ButtonEnum.Ok, Icon.Error);
+                    await CreateErrorMessageBox("Failure", "Mod uninstall failed\n?");
                     break;
             }
         }
-        
     }
 
     private async Task OnChoosePath()
@@ -371,7 +376,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 var path = await dialogue.ShowAsync(desktop.MainWindow);
                 if (string.IsNullOrEmpty(path))
                 {
-                    await CreateMessageBox("Failure", "The path you chose is invalid. Try again...", ButtonEnum.Ok, Icon.Error);
+                    await CreateErrorMessageBox("Failure", "The path you chose is invalid. Try again...");
                     continue;
                 }
 
@@ -393,41 +398,31 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             UseShellExecute = true
         });
     }
-    
+
     private async Task OpenModsFolder()
     {
         if (string.IsNullOrEmpty(_settings.ModsFolder))
         {
-            await CreateMessageBox("Failure", "Choose the mods folder first!", ButtonEnum.Ok, Icon.Error);
+            await CreateErrorMessageBox("Failure", "Choose the mods folder first!");
             return;
         }
+
         Process.Start(new ProcessStartInfo
         {
             FileName = _settings.ModsFolder,
             UseShellExecute = true
         });
     }
-    
 
-    private void OnFilterAll()
-    {
-        CategoryFilter = Models.Filter.All;
-    }
 
-    private void OnFilterInstalled()
-    {
-        CategoryFilter = Models.Filter.Installed;
-    }
+    private void OnFilterAll() => CategoryFilter = Models.Filter.All;
 
-    private void OnFilterEnabled()
-    {
-        CategoryFilter = Models.Filter.Enabled;
-    }
+    private void OnFilterInstalled() => CategoryFilter = Models.Filter.Installed;
 
-    private void OnFilterOutdated()
-    {
-        CategoryFilter = Models.Filter.Outdated;
-    }
+    private void OnFilterEnabled() => CategoryFilter = Models.Filter.Enabled;
+
+    private void OnFilterOutdated() => CategoryFilter = Models.Filter.Outdated;
+
     private void OnSelectedItem(Mod item)
     {
         item.IsExpanded = !item.IsExpanded;
@@ -436,10 +431,13 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.None)
         => await MessageBoxManager
-            .GetMessageBoxStandardWindow(new MessageBoxStandardParams{
+            .GetMessageBoxStandardWindow(new MessageBoxStandardParams
+            {
                 ButtonDefinitions = button,
                 ContentTitle = title,
                 ContentMessage = content,
                 Icon = icon
             }).Show();
+
+    private async Task<ButtonResult> CreateErrorMessageBox(string title, string content) => await CreateMessageBox(title, content, icon: Icon.Error);
 }
