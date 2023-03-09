@@ -25,6 +25,8 @@ using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
 using ReactiveUI;
 
+#pragma warning disable CS8618
+
 namespace MuseDashModToolsUI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
@@ -220,7 +222,17 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
 
             var options = JsonSerializer.Deserialize<Settings>(File.ReadAllText("appsettings.json"));
-            _settings = options;
+            _settings = options!;
+            if (string.IsNullOrEmpty(_settings.MuseDashFolder)) return;
+            var cfgFilePath = Path.Join(_settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
+            if (!File.Exists(cfgFilePath))
+                File.WriteAllText(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
+            else
+            {
+                var path = File.ReadAllText(cfgFilePath);
+                if (path != Process.GetCurrentProcess().MainModule!.FileName)
+                    File.WriteAllText(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
+            }
         }
         catch (Exception)
         {
@@ -473,7 +485,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         while (true)
         {
             var dialogue = new OpenFolderDialog{Title = "Choose Muse Dash Folder"};
-            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var path = await dialogue.ShowAsync(desktop.MainWindow);
                 if (string.IsNullOrEmpty(path))
@@ -485,6 +497,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 _settings.MuseDashFolder = path;
                 var json = JsonSerializer.Serialize(_settings);
                 await File.WriteAllTextAsync("appsettings.json", json);
+                await File.WriteAllTextAsync(Path.Join(_settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg"), Process.GetCurrentProcess().MainModule!.FileName);
                 RxApp.MainThreadScheduler.Schedule(InitializeModList);
             }
 
