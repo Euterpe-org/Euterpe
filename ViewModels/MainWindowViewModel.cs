@@ -437,7 +437,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         while (true)
         {
-            var dialogue = new OpenFolderDialog();
+            var dialogue = new OpenFolderDialog{Title = "Choose Muse Dash Folder"};
             if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var path = await dialogue.ShowAsync(desktop.MainWindow);
