@@ -56,5 +56,19 @@ public class GitHubService : IGitHubService
         await using var fs = new FileStream(path, FileMode.CreateNew);
         await result.Content.CopyToAsync(fs);
     }
-    
+
+    public async Task DownloadMelonLoader(string link, string path)
+    {
+        byte[] result;
+        try
+        {
+            result = await _client.GetByteArrayAsync(PrimaryLink + BaseLink + link);
+        }
+        catch (Exception)
+        {
+            result = await _client.GetByteArrayAsync(SecondaryLink + BaseLink + link);
+        }
+
+        await File.WriteAllBytesAsync(path, result);
+    }
 }

@@ -16,6 +16,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using DynamicData;
 using DynamicData.Binding;
+using ICSharpCode.SharpZipLib.Zip;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
@@ -396,7 +397,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     break;
 
                 default:
-                    await CreateErrorMessageBox("Failure", "Mod uninstall failed\n?");
+                    await CreateErrorMessageBox("Failure", "Mod uninstall failed");
                     break;
             }
         }
@@ -404,9 +405,43 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task OnInstallMelonLoader()
     {
-        /* we need to upload a zip called "MelonLoader.zip" into github modlinks repository
-        and download from github (most likely about 50mb)
-        then unzip it to muse dash folder*/
+        var ZipPath = Path.Join(_settings.MuseDashFolder, "MelonLoader.zip");
+        if (!File.Exists(ZipPath))
+        {
+            try
+            {
+                await _gitHubService.DownloadMelonLoader("MelonLoader.zip", ZipPath);
+            }
+            catch (Exception ex)
+            {
+                if (ex is WebException)
+                {
+                    await CreateErrorMessageBox("Failure", "MelonLoader download failed\nAre you online?");
+                    return;
+                }
+
+                await CreateErrorMessageBox("Failure", "MelonLoader download failed");
+            }
+        }
+
+        try
+        {
+            var fastZip = new FastZip();
+            fastZip.ExtractZip(ZipPath, _settings.MuseDashFolder, null);
+        }
+        catch (Exception)
+        {
+            await CreateErrorMessageBox("Failure", "Cannot unzip MelonLoader.zip");
+        }
+
+        try
+        {
+            File.Delete(ZipPath);
+        }
+        catch (Exception)
+        {
+            await CreateErrorMessageBox("Failure", "Failed to delete MelonLoader.zip");
+        }
     }
 
     private async Task OnUnInstallMelonLoader()
