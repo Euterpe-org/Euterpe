@@ -131,25 +131,39 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         var ExePath = Path.Join(_settings.MuseDashFolder, "MuseDash.exe");
         var GameAssemblyPath = Path.Join(_settings.MuseDashFolder, "GameAssembly.dll");
+        var UserDataPath = Path.Join(_settings.MuseDashFolder, "UserData");
         if (!File.Exists(ExePath) || !File.Exists(GameAssemblyPath))
         {
             await CreateErrorMessageBox("Failure", "Couldn't find MuseDash.exe or GameAssembly.dll\nMake sure you selected the right folder");
             return false;
         }
 
-        if (!Directory.Exists(ModsFolder))
-        {
-            await CreateErrorMessageBox("Failure", "Mods Folder doesn't exist!");
-            return false;
-        }
-
         try
         {
             var version = FileVersionInfo.GetVersionInfo(ExePath).FileVersion;
-            if (version != null && version.StartsWith("2019.")) return true;
-            await CreateErrorMessageBox("Failure","Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
-            return false;
+            if (version is not "2019.4.32.16288752")
+            {
+                await CreateErrorMessageBox("Failure", "Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
+                return false;
+            }
 
+            if (!Directory.Exists(ModsFolder))
+                Directory.CreateDirectory(ModsFolder);
+
+            if (!Directory.Exists(UserDataPath))
+                Directory.CreateDirectory(UserDataPath);
+
+            var cfgFilePath = Path.Join(_settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
+            if (!File.Exists(cfgFilePath))
+                await File.WriteAllTextAsync(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
+            else
+            {
+                var path = await File.ReadAllTextAsync(cfgFilePath);
+                if (path != Process.GetCurrentProcess().MainModule!.FileName)
+                    await File.WriteAllTextAsync(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
+            }
+
+            return true;
         }
         catch (Exception)
         {
@@ -223,16 +237,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
             var options = JsonSerializer.Deserialize<Settings>(File.ReadAllText("appsettings.json"));
             _settings = options!;
-            if (string.IsNullOrEmpty(_settings.MuseDashFolder)) return;
-            var cfgFilePath = Path.Join(_settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
-            if (!File.Exists(cfgFilePath))
-                File.WriteAllText(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
-            else
-            {
-                var path = File.ReadAllText(cfgFilePath);
-                if (path != Process.GetCurrentProcess().MainModule!.FileName)
-                    File.WriteAllText(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
-            }
         }
         catch (Exception)
         {
@@ -497,7 +501,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 _settings.MuseDashFolder = path;
                 var json = JsonSerializer.Serialize(_settings);
                 await File.WriteAllTextAsync("appsettings.json", json);
-                await File.WriteAllTextAsync(Path.Join(_settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg"), Process.GetCurrentProcess().MainModule!.FileName);
                 RxApp.MainThreadScheduler.Schedule(InitializeModList);
             }
 
