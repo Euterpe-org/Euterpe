@@ -2,14 +2,15 @@
 
 public class Settings
 {
-    public string ModsFolder { get; set; }
+    public string MuseDashFolder { get; set; }
 
     public Settings()
     {
         
     }
-    public Settings(string modsFolder)
+
+    public Settings(string museDashFolder)
     {
-        ModsFolder = modsFolder;
+        MuseDashFolder = museDashFolder;
     }
 }

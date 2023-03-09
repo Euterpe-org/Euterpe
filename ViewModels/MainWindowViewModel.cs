@@ -77,7 +77,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
-    private Settings _settings = new();
+    private static Settings _settings = new();
+    private static string ModsFolder => !string.IsNullOrEmpty(_settings.MuseDashFolder) ? Path.Join(_settings.MuseDashFolder,"Mods") : string.Empty;
 
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
@@ -102,7 +103,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         InstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnInstallMelonLoader);
         UnInstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnUnInstallMelonLoader);
 
-
         SelectedItemCommand = ReactiveCommand.Create<Mod>(OnSelectedItem);
         InstallModCommand = ReactiveCommand.CreateFromTask<Mod>(OnInstallMod);
         RemoveModCommand = ReactiveCommand.CreateFromTask<Mod>(OnDeleteMod);
@@ -118,17 +118,50 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             .Subscribe();
 
         InitializeSettings();
-        if (!string.IsNullOrEmpty(_settings.ModsFolder))
+        if (!string.IsNullOrEmpty(_settings.MuseDashFolder))
         {
             RxApp.MainThreadScheduler.Schedule(InitializeModList);
         }
     }
 
+    private async Task<bool> CheckValidPath()
+    {
+        var ExePath = Path.Join(_settings.MuseDashFolder, "MuseDash.exe");
+        var GameAssemblyPath = Path.Join(_settings.MuseDashFolder, "GameAssembly.dll");
+        if (!File.Exists(ExePath) || !File.Exists(GameAssemblyPath))
+        {
+            await CreateErrorMessageBox("Failure", "Couldn't find MuseDash.exe or GameAssembly.dll\nMake sure you selected the right folder");
+            return false;
+        }
+
+        if (!Directory.Exists(ModsFolder))
+        {
+            await CreateErrorMessageBox("Failure", "Mods Folder doesn't exist!");
+            return false;
+        }
+
+        try
+        {
+            var version = FileVersionInfo.GetVersionInfo(ExePath).FileVersion;
+            if (version != null && version.StartsWith("2019.")) return true;
+            await CreateErrorMessageBox("Failure","Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
+            return false;
+
+        }
+        catch (Exception)
+        {
+            await CreateErrorMessageBox("Failure", "Failed to verify MuseDash.exe\nMake sure you selected the right folder");
+            return false;
+        }
+
+    }
 
     private async void InitializeModList()
     {
+        var result = await CheckValidPath();
+        if (!result) return;
         var webMods = await _gitHubService.GetModsAsync();
-        var localPaths = _localService.GetModFiles(_settings.ModsFolder);
+        var localPaths = _localService.GetModFiles(ModsFolder); 
         var localMods = localPaths.Select(_localService.LoadMod).Where(mod => mod is not null).ToList();
         var isTracked = new bool[localMods.Count];
         foreach (var webMod in webMods)
@@ -167,12 +200,9 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         for (var i = 0; i < isTracked.Length; i++)
         {
-            if (!isTracked[i])
+            if (!isTracked[i]&& localMods.Count(x => x!.Name == localMods[i]!.Name) == 1)
             {
-                if (localMods.Count(x => x!.Name == localMods[i]!.Name) == 1)
-                {
-                    _sourceCache.AddOrUpdate(localMods[i]!);
-                }
+                _sourceCache.AddOrUpdate(localMods[i]!);
             }
         }
     }
@@ -225,11 +255,13 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 case WebException:
                     errors.AppendLine($"Mod installation failed\nAre you online? {ex.ToString()}");
                     break;
+
                 case SecurityException:
                 case UnauthorizedAccessException:
                 case IOException:
                     errors.AppendLine($"Mod installation failed\nIs the game running? {ex.ToString()}");
                     break;
+
                 default:
                     errors.AppendLine($"Mod installation failed\n{ex.ToString()}");
                     break;
@@ -256,12 +288,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
         }
 
-
         if (modPaths.Count > 0)
         {
             foreach (var path in modPaths)
             {
-                var fullPath = Path.Join(_settings.ModsFolder, Path.GetFileName(path));
+                var fullPath = Path.Join(ModsFolder, Path.GetFileName(path));
                 if (File.Exists(fullPath))
                 {
                     File.Delete(fullPath);
@@ -306,8 +337,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         try
         {
             File.Move(
-                Path.Join(_settings.ModsFolder, item.FileNameExtended()),
-                Path.Join(_settings.ModsFolder, item.FileNameExtended(true)));
+                Path.Join(ModsFolder, item.FileNameExtended()),
+                Path.Join(ModsFolder, item.FileNameExtended(true)));
         }
         catch (Exception ex)
         {
@@ -316,6 +347,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 case UnauthorizedAccessException:
                     await CreateErrorMessageBox("Failure", "Mod disable/enable failed\nUnauthorized");
                     break;
+
                 case IOException:
                     await CreateErrorMessageBox("Failure", "Mod disable/enable failed\nIs the game running?");
                     break;
@@ -333,7 +365,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task OnDeleteMod(Mod item)
     {
-        var path = Path.Join(_settings.ModsFolder, item.FileNameExtended());
+        var path = Path.Join(ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
             await CreateErrorMessageBox("Failure", "Cannot delete file that doesn't exist");
@@ -362,6 +394,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 case IOException:
                     await CreateErrorMessageBox("Failure", "Mod uninstall failed\nIs the game running?");
                     break;
+
                 default:
                     await CreateErrorMessageBox("Failure", "Mod uninstall failed\n?");
                     break;
@@ -374,15 +407,13 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         /* we need to upload a zip called "MelonLoader.zip" into github modlinks repository
         and download from github (most likely about 50mb)
         then unzip it to muse dash folder*/
-        var MuseDashFolder = _settings.ModsFolder[..^5];
     }
 
     private async Task OnUnInstallMelonLoader()
     {
-        var MuseDashFolder = _settings.ModsFolder[..^5];
-        var MelonLoaderFolder = Path.Join(MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(MuseDashFolder, "version.dll");
-        var noticeTxt = Path.Join(MuseDashFolder, "NOTICE.txt");
+        var MelonLoaderFolder = Path.Join(_settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(_settings.MuseDashFolder, "version.dll");
+        var noticeTxt = Path.Join(_settings.MuseDashFolder, "NOTICE.txt");
 
         if (Directory.Exists(MelonLoaderFolder))
         {
@@ -416,7 +447,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     continue;
                 }
 
-                _settings.ModsFolder = path;
+                _settings.MuseDashFolder = path;
                 var json = JsonSerializer.Serialize(_settings);
                 await File.WriteAllTextAsync("appsettings.json", json);
                 RxApp.MainThreadScheduler.Schedule(InitializeModList);
@@ -437,7 +468,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task OpenModsFolder()
     {
-        if (string.IsNullOrEmpty(_settings.ModsFolder))
+        if (string.IsNullOrEmpty(ModsFolder))
         {
             await CreateErrorMessageBox("Failure", "Choose the mods folder first!");
             return;
@@ -445,11 +476,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         Process.Start(new ProcessStartInfo
         {
-            FileName = _settings.ModsFolder,
+            FileName = ModsFolder,
             UseShellExecute = true
         });
     }
-
 
     private void OnFilterAll() => CategoryFilter = Models.Filter.All;
 
