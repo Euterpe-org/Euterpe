@@ -138,7 +138,7 @@ public class GitHubService : IGitHubService
         var fastZip = new FastZip();
         try
         {
-            fastZip.ExtractZip(zipPath, parentPath, null);
+            fastZip.ExtractZip(zipPath, parentPath, FastZip.Overwrite.Always, null, null, null, true);
         }
         catch (Exception)
         {
@@ -148,6 +148,22 @@ public class GitHubService : IGitHubService
                     ButtonDefinitions = ButtonEnum.Ok,
                     ContentTitle = "Failure",
                     ContentMessage = "Unable to unzip the latest version of app\nMaybe try manually unzip?",
+                    Icon = Icon.Error
+                }).Show();
+        }
+
+        try
+        {
+            File.Delete(zipPath);
+        }
+        catch (Exception)
+        {
+            await MessageBoxManager
+                .GetMessageBoxStandardWindow(new MessageBoxStandardParams
+                {
+                    ButtonDefinitions = ButtonEnum.Ok,
+                    ContentTitle = "Failure",
+                    ContentMessage = "Failed to delete zip file\nTry manually delete",
                     Icon = Icon.Error
                 }).Show();
         }
