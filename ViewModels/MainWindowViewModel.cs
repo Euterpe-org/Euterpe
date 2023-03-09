@@ -121,6 +121,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             .Subscribe();
 
         InitializeSettings();
+        RxApp.MainThreadScheduler.Schedule(_gitHubService.CheckUpdates);
         if (!string.IsNullOrEmpty(_settings.MuseDashFolder))
         {
             RxApp.MainThreadScheduler.Schedule(InitializeModList);

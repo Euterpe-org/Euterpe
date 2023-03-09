@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
+using ICSharpCode.SharpZipLib.Zip;
+using MessageBox.Avalonia;
+using MessageBox.Avalonia.DTO;
+using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Models;
 
@@ -14,7 +20,8 @@ public class GitHubService : IGitHubService
     private readonly HttpClient _client;
     
     private const string BaseLink = "MDModsDev/ModLinks/dev/";
-    
+    private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
+
     private const string PrimaryLink = "https://raw.githubusercontent.com/";
     private const string SecondaryLink = "https://raw.fastgit.org/";
     
@@ -70,5 +77,71 @@ public class GitHubService : IGitHubService
         }
 
         await File.WriteAllBytesAsync(path, result);
+    }
+
+    public async void CheckUpdates()
+    {
+        _client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
+
+        var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        try
+        {
+            var result = await _client.GetStringAsync(ReleaseInfoLink);
+            var doc = JsonDocument.Parse(result);
+
+            if (!doc.RootElement.TryGetProperty("tag_name", out var tagName))
+                return;
+
+            var tag = tagName.GetString();
+            if (tag == null) return;
+            if (!Version.TryParse(tag, out var version)) return;
+            if (version <= currentVersion) return;
+            // Different platform need to use different link
+            var link = doc.RootElement.GetProperty("assets")[0].GetProperty("browser_download_url").GetString();
+            var parentPath = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent!.FullName;
+            await DownloadUpdates(link!, Directory.GetCurrentDirectory() + ".zip", parentPath);
+        }
+        catch (Exception)
+        {
+            await MessageBoxManager
+                .GetMessageBoxStandardWindow(new MessageBoxStandardParams
+                {
+                    ButtonDefinitions = ButtonEnum.Ok,
+                    ContentTitle = "Failure",
+                    ContentMessage = "Checking updates failed",
+                    Icon = Icon.Error
+                }).Show();
+        }
+    }
+
+    public async Task DownloadUpdates(string link, string zipPath, string parentPath)
+    {
+        byte[] result;
+        try
+        {
+            result = await _client.GetByteArrayAsync(link);
+        }
+        catch (Exception)
+        {
+            result = await _client.GetByteArrayAsync(link.Replace("github.com", "download.fastgit.org"));
+        }
+
+        await File.WriteAllBytesAsync(zipPath, result);
+        var fastZip = new FastZip();
+        try
+        {
+            fastZip.ExtractZip(zipPath, parentPath, null);
+        }
+        catch (Exception)
+        {
+            await MessageBoxManager
+                .GetMessageBoxStandardWindow(new MessageBoxStandardParams
+                {
+                    ButtonDefinitions = ButtonEnum.Ok,
+                    ContentTitle = "Failure",
+                    ContentMessage = "Unable to unzip the latest version of app\nMaybe try manually unzip?",
+                    Icon = Icon.Error
+                }).Show();
+        }
     }
 }
