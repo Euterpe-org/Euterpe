@@ -8,7 +8,7 @@ namespace MuseDashModToolsUI.Services
 {
     public class DialogueService : IDialogueService
     {
-        public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.None)
+        public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.Success)
             => await MessageBoxManager
                 .GetMessageBoxStandardWindow(new MessageBoxStandardParams
                 {
@@ -23,7 +23,7 @@ namespace MuseDashModToolsUI.Services
 
         public async Task<bool> CreateConfirmMessageBox(string title, string content)
         {
-            var result = await CreateMessageBox(title, content, ButtonEnum.YesNo, Icon.Stop);
+            var result = await CreateMessageBox(title, content, ButtonEnum.YesNo, Icon.Warning);
             return result.HasFlag(ButtonResult.Yes) && !result.HasFlag(ButtonResult.None);
         }
 

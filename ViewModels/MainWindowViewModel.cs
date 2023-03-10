@@ -17,7 +17,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using DynamicData;
 using DynamicData.Binding;
 using ICSharpCode.SharpZipLib.Zip;
-using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
@@ -362,7 +361,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
         }
 
-        await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed", ButtonEnum.Ok, Icon.Info);
+        await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed");
     }
 
     private async Task OnReinstallMod(Mod item)
@@ -426,7 +425,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 _sourceCache.AddOrUpdate(webMod);
             }
 
-            await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully deleted.", ButtonEnum.Ok, Icon.Info);
+            await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully deleted.");
         }
         catch (Exception ex)
         {
@@ -500,7 +499,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 Directory.Delete(melonLoaderFolder, true);
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
-                await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully uninstalled", ButtonEnum.Ok, Icon.Success);
+                await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully uninstalled");
             }
             catch (Exception)
             {
