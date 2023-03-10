@@ -20,5 +20,13 @@ namespace MuseDashModToolsUI.Services
 
         public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) => await CreateMessageBox(title, content, icon: Icon.Error);
         public async Task<ButtonResult> CreateErrorMessageBox(string content) => await CreateErrorMessageBox("Failure", content);
+
+        public async Task<bool> CreateConfirmMessageBox(string title, string content)
+        {
+            var result = await CreateMessageBox(title, content, ButtonEnum.YesNo, Icon.Stop);
+            return result.HasFlag(ButtonResult.Yes) && !result.HasFlag(ButtonResult.None);
+        }
+
+        public async Task<bool> CreateConfirmMessageBox(string content) => await CreateConfirmMessageBox("Warning", content);
     }
 }

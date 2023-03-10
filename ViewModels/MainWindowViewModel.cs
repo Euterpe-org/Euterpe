@@ -35,13 +35,14 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReactiveCommand<Unit, Unit> FilterOutdatedCommand { get; }
     public ReactiveCommand<Mod, Unit> SelectedItemCommand { get; }
     public ReactiveCommand<Mod, Unit> InstallModCommand { get; }
+    public ReactiveCommand<Mod, Unit> ReinstallModCommand { get; }
     public ReactiveCommand<Mod, Unit> RemoveModCommand { get; }
     public ReactiveCommand<Mod, Unit> ToggleModCommand { get; }
     public ReactiveCommand<string, Unit> OpenUrlCommand { get; }
     public ReactiveCommand<Unit, Unit> OpenFolderDialogueCommand { get; }
     public ReactiveCommand<Unit, Unit> OpenModsFolderCommand { get; }
     public ReactiveCommand<Unit, Unit> InstallMelonLoaderCommand { get; }
-    public ReactiveCommand<Unit, Unit> UnInstallMelonLoaderCommand { get; }
+    public ReactiveCommand<Unit, Unit> UninstallMelonLoaderCommand { get; }
 
     private Mod _selectedItem;
 
@@ -104,10 +105,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         OpenFolderDialogueCommand = ReactiveCommand.CreateFromTask(OnChoosePath);
         OpenModsFolderCommand = ReactiveCommand.CreateFromTask(OpenModsFolder);
         InstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnInstallMelonLoader);
-        UnInstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnUnInstallMelonLoader);
+        UninstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnUninstallMelonLoader);
 
         SelectedItemCommand = ReactiveCommand.Create<Mod>(OnSelectedItem);
         InstallModCommand = ReactiveCommand.CreateFromTask<Mod>(OnInstallMod);
+        ReinstallModCommand = ReactiveCommand.CreateFromTask<Mod>(OnReinstallMod);
         RemoveModCommand = ReactiveCommand.CreateFromTask<Mod>(OnDeleteMod);
         ToggleModCommand = ReactiveCommand.CreateFromTask<Mod>(OnToggleMod);
 
@@ -363,6 +365,13 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed", ButtonEnum.Ok, Icon.Info);
     }
 
+    private async Task OnReinstallMod(Mod item)
+    {
+        var result = await _dialogueService.CreateConfirmMessageBox($"You are asking to reinstall {item.Name}\nPlease confirm your operation");
+        if (!result) return;
+        await OnInstallMod(item);
+    }
+
     private async Task OnToggleMod(Mod item)
     {
         //Kind of a bummer that I have to reverse the boolean here, due to binding triggering before the command executes. If you find a better way for this, hit me with a big fat PR
@@ -476,8 +485,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
     }
 
-    private async Task OnUnInstallMelonLoader()
+    private async Task OnUninstallMelonLoader()
     {
+        var result = await _dialogueService.CreateConfirmMessageBox("You are asking to uninstall MelonLoader\nPlease confirm your operation");
+        if (!result) return;
         var melonLoaderFolder = Path.Join(_settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(_settings.MuseDashFolder, "version.dll");
         var noticeTxt = Path.Join(_settings.MuseDashFolder, "NOTICE.txt");
