@@ -79,6 +79,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
     private Settings _settings = new();
+    private bool _isValidPath;
     private string ModsFolder => !string.IsNullOrEmpty(_settings.MuseDashFolder) ? Path.Join(_settings.MuseDashFolder, "Mods") : string.Empty;
 
     private readonly IGitHubService _gitHubService;
@@ -201,8 +202,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async void InitializeModList()
     {
-        var result = await CheckValidPath();
-        if (!result) return;
+        _isValidPath = await CheckValidPath();
+        if (!_isValidPath) return;
         var webMods = await _gitHubService.GetModsAsync();
         var localPaths = _localService.GetModFiles(ModsFolder);
         List<Mod>? localMods;
@@ -445,6 +446,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task OnInstallMelonLoader()
     {
+        if (!_isValidPath) return;
         var zipPath = Path.Join(_settings.MuseDashFolder, "MelonLoader.zip");
         if (!File.Exists(zipPath))
         {
@@ -456,7 +458,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             {
                 if (ex is WebException)
                 {
-                    await _dialogueService.CreateErrorMessageBox("MelonLoader download failed\nAre you online?");
+                    await _dialogueService.CreateErrorMessageBox("MelonLoader download failed due to internet\nAre you online?");
                     return;
                 }
 
@@ -467,11 +469,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         try
         {
             var fastZip = new FastZip();
-            fastZip.ExtractZip(zipPath, _settings.MuseDashFolder, null);
+            fastZip.ExtractZip(zipPath, _settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Cannot unzip MelonLoader.zip");
+            await _dialogueService.CreateErrorMessageBox($"Cannot unzip MelonLoader.zip in\n{zipPath}\nMaybe try manually unzip?");
         }
 
         try
@@ -480,12 +482,15 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Failed to delete MelonLoader.zip");
+            await _dialogueService.CreateErrorMessageBox($"Failed to delete MelonLoader.zip in\n{zipPath}\nTry manually delete");
         }
+
+        await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully installed\n");
     }
 
     private async Task OnUninstallMelonLoader()
     {
+        if (!_isValidPath) return;
         var result = await _dialogueService.CreateConfirmMessageBox("You are asking to uninstall MelonLoader\nPlease confirm your operation");
         if (!result) return;
         var melonLoaderFolder = Path.Join(_settings.MuseDashFolder, "MelonLoader");
@@ -499,15 +504,15 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 Directory.Delete(melonLoaderFolder, true);
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
-                await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully uninstalled");
+                await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully uninstalled\n");
             }
             catch (Exception)
             {
-                await _dialogueService.CreateErrorMessageBox("Cannot uninstall MelonLoader, please make sure your game is not running!");
+                await _dialogueService.CreateErrorMessageBox("Cannot uninstall MelonLoader\nPlease make sure your game is not running!");
             }
         }
         else
-            await _dialogueService.CreateErrorMessageBox("Cannot find MelonLoader Folder, have you installed MelonLoader?");
+            await _dialogueService.CreateErrorMessageBox("Cannot find MelonLoader Folder\nHave you installed MelonLoader?");
     }
 
     private async Task OnChoosePath()
@@ -545,9 +550,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task OpenModsFolder()
     {
-        if (string.IsNullOrEmpty(ModsFolder))
+        if (!_isValidPath)
         {
-            await _dialogueService.CreateErrorMessageBox("Choose the mods folder first!");
+            await _dialogueService.CreateErrorMessageBox("Choose correct Muse Dash folder first!");
+            await OnChoosePath();
             return;
         }
 

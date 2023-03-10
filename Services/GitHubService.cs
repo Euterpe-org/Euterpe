@@ -134,7 +134,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Unable to unzip the latest version of app\nMaybe try manually unzip?");
+            await _dialogueService.CreateErrorMessageBox($"Unable to unzip the latest version of app in\n{zipPath}\nMaybe try manually unzip?");
         }
 
         try
@@ -143,7 +143,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Failed to delete zip file\nTry manually delete");
+            await _dialogueService.CreateErrorMessageBox($"Failed to delete zip file in\n{zipPath}Try manually delete");
         }
     }
 }
