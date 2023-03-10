@@ -105,13 +105,7 @@
                                         <!--If there are no dependencies, this field is omitted-->
                                         <StackPanel IsVisible="{Binding DependencyCount}">
                                             <TextBlock>Dependencies:</TextBlock>
-											<ItemsControl Items="{Binding DependencyNames}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding .}" />
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
+											<TextBlock Text="{Binding DependencyNames}"></TextBlock>
                                             <!--
 							mod.DependentMods contains a list of paths equivalent
 							in format to the WebMod.DownloadLink's format.

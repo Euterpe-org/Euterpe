@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using ReactiveUI;
@@ -75,19 +74,24 @@ public class Mod : ReactiveObject
     [JsonIgnore] private int DependencyCount => DependentMods.Count + DependentLibs.Count;
 
     [JsonIgnore]
-    public List<string>? DependencyNames
+    public string? DependencyNames
     {
         get
         {
             if (DependencyCount == 0)
                 return null;
-            var dependentMods = new List<string>();
-            var dependentLibs = new List<string>();
-            if (DependentMods.Count > 0)
-                dependentMods = DependentMods.Select(name => name[5..] + "\r\n").ToList();
-            if (DependentLibs.Count > 0)
-                dependentLibs = DependentMods.Select(name => name[5..] + "\r\n").ToList();
-            return dependentMods.Concat(dependentLibs).ToList();
+            var sb = new StringBuilder();
+            foreach (var dependentMod in DependentMods)
+            {
+                sb.AppendLine(dependentMod[5..]);
+            }
+
+            foreach (var dependentLib in DependentLibs)
+            {
+                sb.AppendLine(dependentLib[5..]);
+            }
+
+            return sb.ToString();
         }
     }
 
