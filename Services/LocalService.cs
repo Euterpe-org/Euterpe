@@ -24,17 +24,18 @@ public class LocalService : ILocalService
         var assembly = Assembly.Load(File.ReadAllBytes(filePath));
         var attribute = MelonUtils.PullAttributeFromAssembly<MelonInfoAttribute>(assembly);
 
-        mod.Name = attribute.Name;
-        mod.LocalVersion = attribute.Version;
-        
-        if (mod.Name == null || mod.LocalVersion == null)
-        {
-            return null;
-        }
-        mod.Author = attribute.Author;
-        mod.HomePage = attribute.DownloadLink;
-        mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(filePath);
+            mod.Name = attribute.Name;
+            mod.LocalVersion = attribute.Version;
 
-        return mod;
+            if (mod.Name == null || mod.LocalVersion == null)
+            {
+                return null;
+            }
+
+            mod.Author = attribute.Author;
+            mod.HomePage = attribute.DownloadLink;
+            mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(filePath);
+
+            return mod;
     }
 }

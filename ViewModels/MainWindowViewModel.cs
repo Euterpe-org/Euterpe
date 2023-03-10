@@ -22,7 +22,6 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
 using ReactiveUI;
-using static MuseDashModToolsUI.Utils.MessageBoxUtils;
 
 #pragma warning disable CS8618
 
@@ -79,20 +78,22 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
-    private static Settings _settings = new();
-    private static string ModsFolder => !string.IsNullOrEmpty(_settings.MuseDashFolder) ? Path.Join(_settings.MuseDashFolder,"Mods") : string.Empty;
+    private Settings _settings = new();
+    private string ModsFolder => !string.IsNullOrEmpty(_settings.MuseDashFolder) ? Path.Join(_settings.MuseDashFolder, "Mods") : string.Empty;
 
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
+    private readonly IDialogueService _dialogueService;
 
     public MainWindowViewModel()
     {
     }
 
-    public MainWindowViewModel(IGitHubService gitHubService, ILocalService localService)
+    public MainWindowViewModel(IGitHubService gitHubService, ILocalService localService, IDialogueService dialogueService)
     {
         _gitHubService = gitHubService;
         _localService = localService;
+        _dialogueService = dialogueService;
 
         FilterAllCommand = ReactiveCommand.Create(OnFilterAll);
         FilterInstalledCommand = ReactiveCommand.Create(OnFilterInstalled);
@@ -119,39 +120,63 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             .Bind(out _mods)
             .Subscribe();
 
-        InitializeSettings();
-        RxApp.MainThreadScheduler.Schedule(_gitHubService.CheckUpdates);
-        if (!string.IsNullOrEmpty(_settings.MuseDashFolder))
+        RxApp.MainThreadScheduler.Schedule(InitializeSettings);
+        //RxApp.MainThreadScheduler.Schedule(_gitHubService.CheckUpdates);
+    }
+
+    private async void InitializeSettings()
+    {
+        try
         {
-            RxApp.MainThreadScheduler.Schedule(InitializeModList);
+            if (!File.Exists("appsettings.json"))
+            {
+                await _dialogueService.CreateErrorMessageBox("Warning", "You haven't choose Muse Dash Folder\nPlease choose the folder");
+                await OnChoosePath();
+                return;
+            }
+
+            var text = await File.ReadAllTextAsync("appsettings.json");
+            if (string.IsNullOrEmpty(text))
+            {
+                await _dialogueService.CreateErrorMessageBox("Warning", "Your stored Muse Dash Folder path is null\nPlease choose the correct folder");
+                await OnChoosePath();
+                return;
+            }
+
+            _settings = JsonSerializer.Deserialize<Settings>(text)!;
+            InitializeModList();
+        }
+        catch (Exception)
+        {
+            // ignored
         }
     }
 
     private async Task<bool> CheckValidPath()
     {
-        var ExePath = Path.Join(_settings.MuseDashFolder, "MuseDash.exe");
-        var GameAssemblyPath = Path.Join(_settings.MuseDashFolder, "GameAssembly.dll");
-        var UserDataPath = Path.Join(_settings.MuseDashFolder, "UserData");
-        if (!File.Exists(ExePath) || !File.Exists(GameAssemblyPath))
+        var exePath = Path.Join(_settings.MuseDashFolder, "MuseDash.exe");
+        var gameAssemblyPath = Path.Join(_settings.MuseDashFolder, "GameAssembly.dll");
+        var userDataPath = Path.Join(_settings.MuseDashFolder, "UserData");
+        if (!File.Exists(exePath) || !File.Exists(gameAssemblyPath))
         {
-            await CreateErrorMessageBox("Couldn't find MuseDash.exe or GameAssembly.dll\nMake sure you selected the right folder");
+            await _dialogueService.CreateErrorMessageBox("Couldn't find MuseDash.exe or GameAssembly.dll\nMake sure you selected the right folder");
             return false;
         }
 
         try
         {
-            var version = FileVersionInfo.GetVersionInfo(ExePath).FileVersion;
+            var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
             if (version is not "2019.4.32.16288752")
             {
-                await CreateErrorMessageBox("Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
+                await _dialogueService.CreateErrorMessageBox("Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
                 return false;
             }
 
             if (!Directory.Exists(ModsFolder))
                 Directory.CreateDirectory(ModsFolder);
 
-            if (!Directory.Exists(UserDataPath))
-                Directory.CreateDirectory(UserDataPath);
+            if (!Directory.Exists(userDataPath))
+                Directory.CreateDirectory(userDataPath);
 
             var cfgFilePath = Path.Join(_settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
             if (!File.Exists(cfgFilePath))
@@ -167,7 +192,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Failed to verify MuseDash.exe\nMake sure you selected the right folder");
+            await _dialogueService.CreateErrorMessageBox("Failed to verify MuseDash.exe\nMake sure you selected the right folder");
             return false;
         }
 
@@ -178,13 +203,24 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var result = await CheckValidPath();
         if (!result) return;
         var webMods = await _gitHubService.GetModsAsync();
-        var localPaths = _localService.GetModFiles(ModsFolder); 
-        var localMods = localPaths.Select(_localService.LoadMod).Where(mod => mod is not null).ToList();
+        var localPaths = _localService.GetModFiles(ModsFolder);
+        List<Mod>? localMods;
+        try
+        {
+            localMods = localPaths.Select(_localService.LoadMod).Where(mod => mod is not null).ToList()!;
+        }
+        catch (Exception)
+        {
+            await _dialogueService.CreateErrorMessageBox("Your downloaded mods are broken\nPlease delete 0kb mod if it exist");
+            Environment.Exit(0);
+            return;
+        }
+
         var isTracked = new bool[localMods.Count];
         foreach (var webMod in webMods)
         {
-            var localMod = localMods.FirstOrDefault(x => x!.Name == webMod.Name);
-            var localModIdx = localMods.IndexOf(localMod);
+            var localMod = localMods.FirstOrDefault(x => x.Name == webMod.Name);
+            var localModIdx = localMods.IndexOf(localMod!);
 
             if (localMod is null)
             {
@@ -217,30 +253,10 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         for (var i = 0; i < isTracked.Length; i++)
         {
-            if (!isTracked[i]&& localMods.Count(x => x!.Name == localMods[i]!.Name) == 1)
+            if (!isTracked[i] && localMods.Count(x => x!.Name == localMods[i]!.Name) == 1)
             {
                 _sourceCache.AddOrUpdate(localMods[i]!);
             }
-        }
-    }
-
-    private void InitializeSettings()
-    {
-        try
-        {
-            if (!File.Exists("appsettings.json"))
-            {
-                File.Create("appsettings.json");
-                var json = JsonSerializer.Serialize(_settings);
-                File.WriteAllText("appsettings.json", json);
-            }
-
-            var options = JsonSerializer.Deserialize<Settings>(File.ReadAllText("appsettings.json"));
-            _settings = options!;
-        }
-        catch (Exception)
-        {
-            // ignored
         }
     }
 
@@ -248,7 +264,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         if (item.DownloadLink is null)
         {
-            await CreateErrorMessageBox("This mod does not have an available resource for download.");
+            await _dialogueService.CreateErrorMessageBox("This mod does not have an available resource for download.");
             return;
         }
 
@@ -326,7 +342,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         if (errors.Length > 0)
         {
-            await CreateErrorMessageBox(errors.ToString());
+            await _dialogueService.CreateErrorMessageBox(errors.ToString());
             return;
         }
 
@@ -344,7 +360,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
         }
 
-        await CreateMessageBox("Success", $"{item.Name} has been successfully installed", ButtonEnum.Ok, Icon.Info);
+        await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed", ButtonEnum.Ok, Icon.Info);
     }
 
     private async Task OnToggleMod(Mod item)
@@ -362,15 +378,15 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    await CreateErrorMessageBox("Mod disable/enable failed\nUnauthorized");
+                    await _dialogueService.CreateErrorMessageBox("Mod disable/enable failed\nUnauthorized");
                     break;
 
                 case IOException:
-                    await CreateErrorMessageBox("Mod disable/enable failed\nIs the game running?");
+                    await _dialogueService.CreateErrorMessageBox("Mod disable/enable failed\nIs the game running?");
                     break;
 
                 default:
-                    await CreateErrorMessageBox("Mod disable/enable failed\n");
+                    await _dialogueService.CreateErrorMessageBox("Mod disable/enable failed\n");
                     break;
             }
 
@@ -385,7 +401,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var path = Path.Join(ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
-            await CreateErrorMessageBox("Cannot delete file that doesn't exist");
+            await _dialogueService.CreateErrorMessageBox("Cannot delete file that doesn't exist");
             return;
         }
 
@@ -401,7 +417,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 _sourceCache.AddOrUpdate(webMod);
             }
 
-            await CreateMessageBox("Success", $"{item.Name} has been successfully deleted.", ButtonEnum.Ok, Icon.Info);
+            await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully deleted.", ButtonEnum.Ok, Icon.Info);
         }
         catch (Exception ex)
         {
@@ -409,11 +425,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             {
                 case UnauthorizedAccessException:
                 case IOException:
-                    await CreateErrorMessageBox("Mod uninstall failed\nIs the game running?");
+                    await _dialogueService.CreateErrorMessageBox("Mod uninstall failed\nIs the game running?");
                     break;
 
                 default:
-                    await CreateErrorMessageBox("Mod uninstall failed");
+                    await _dialogueService.CreateErrorMessageBox("Mod uninstall failed");
                     break;
             }
         }
@@ -421,67 +437,67 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task OnInstallMelonLoader()
     {
-        var ZipPath = Path.Join(_settings.MuseDashFolder, "MelonLoader.zip");
-        if (!File.Exists(ZipPath))
+        var zipPath = Path.Join(_settings.MuseDashFolder, "MelonLoader.zip");
+        if (!File.Exists(zipPath))
         {
             try
             {
-                await _gitHubService.DownloadMelonLoader("MelonLoader.zip", ZipPath);
+                await _gitHubService.DownloadMelonLoader("MelonLoader.zip", zipPath);
             }
             catch (Exception ex)
             {
                 if (ex is WebException)
                 {
-                    await CreateErrorMessageBox("MelonLoader download failed\nAre you online?");
+                    await _dialogueService.CreateErrorMessageBox("MelonLoader download failed\nAre you online?");
                     return;
                 }
 
-                await CreateErrorMessageBox("MelonLoader download failed");
+                await _dialogueService.CreateErrorMessageBox("MelonLoader download failed");
             }
         }
 
         try
         {
             var fastZip = new FastZip();
-            fastZip.ExtractZip(ZipPath, _settings.MuseDashFolder, null);
+            fastZip.ExtractZip(zipPath, _settings.MuseDashFolder, null);
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Cannot unzip MelonLoader.zip");
+            await _dialogueService.CreateErrorMessageBox("Cannot unzip MelonLoader.zip");
         }
 
         try
         {
-            File.Delete(ZipPath);
+            File.Delete(zipPath);
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Failed to delete MelonLoader.zip");
+            await _dialogueService.CreateErrorMessageBox("Failed to delete MelonLoader.zip");
         }
     }
 
     private async Task OnUnInstallMelonLoader()
     {
-        var MelonLoaderFolder = Path.Join(_settings.MuseDashFolder, "MelonLoader");
+        var melonLoaderFolder = Path.Join(_settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(_settings.MuseDashFolder, "version.dll");
         var noticeTxt = Path.Join(_settings.MuseDashFolder, "NOTICE.txt");
 
-        if (Directory.Exists(MelonLoaderFolder))
+        if (Directory.Exists(melonLoaderFolder))
         {
             try
             {
-                Directory.Delete(MelonLoaderFolder, true);
+                Directory.Delete(melonLoaderFolder, true);
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
-                await CreateMessageBox("Success", "MelonLoader has been successfully uninstalled", ButtonEnum.Ok, Icon.Success);
+                await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully uninstalled", ButtonEnum.Ok, Icon.Success);
             }
             catch (Exception)
             {
-                await CreateErrorMessageBox("Cannot uninstall MelonLoader, please make sure your game is not running!");
+                await _dialogueService.CreateErrorMessageBox("Cannot uninstall MelonLoader, please make sure your game is not running!");
             }
         }
         else
-            await CreateErrorMessageBox("Cannot find MelonLoader Folder, have you installed MelonLoader?");
+            await _dialogueService.CreateErrorMessageBox("Cannot find MelonLoader Folder, have you installed MelonLoader?");
     }
 
     private async Task OnChoosePath()
@@ -494,7 +510,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 var path = await dialogue.ShowAsync(desktop.MainWindow);
                 if (string.IsNullOrEmpty(path))
                 {
-                    await CreateErrorMessageBox("The path you chose is invalid. Try again...");
+                    await _dialogueService.CreateErrorMessageBox("The path you chose is invalid. Try again...");
                     continue;
                 }
 
@@ -521,7 +537,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         if (string.IsNullOrEmpty(ModsFolder))
         {
-            await CreateErrorMessageBox("Choose the mods folder first!");
+            await _dialogueService.CreateErrorMessageBox("Choose the mods folder first!");
             return;
         }
 

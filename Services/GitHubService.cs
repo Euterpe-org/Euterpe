@@ -10,23 +10,24 @@ using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Models;
-using static MuseDashModToolsUI.Utils.MessageBoxUtils;
 
 namespace MuseDashModToolsUI.Services;
 
 public class GitHubService : IGitHubService
 {
     private readonly HttpClient _client;
-    
+    private readonly IDialogueService _dialogueService;
+
     private const string BaseLink = "MDModsDev/ModLinks/dev/";
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/";
     private const string SecondaryLink = "https://raw.fastgit.org/";
-    
-    public GitHubService(HttpClient client)
+
+    public GitHubService(HttpClient client, IDialogueService dialogueService)
     {
         _client = client;
+        _dialogueService = dialogueService;
     }
     public async Task<List<Mod>> GetModsAsync()
     {
@@ -109,7 +110,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Checking updates failed");
+            await _dialogueService.CreateErrorMessageBox("Checking updates failed");
         }
     }
 
@@ -133,7 +134,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Unable to unzip the latest version of app\nMaybe try manually unzip?");
+            await _dialogueService.CreateErrorMessageBox("Unable to unzip the latest version of app\nMaybe try manually unzip?");
         }
 
         try
@@ -142,7 +143,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await CreateErrorMessageBox("Failed to delete zip file\nTry manually delete");
+            await _dialogueService.CreateErrorMessageBox("Failed to delete zip file\nTry manually delete");
         }
     }
 }
