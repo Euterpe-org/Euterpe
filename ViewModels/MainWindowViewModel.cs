@@ -200,10 +200,21 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     }
 
+    private async Task CheckMelonLoaderInstall()
+    {
+        var melonLoaderFolder = Path.Join(_settings.MuseDashFolder, "MelonLoader");
+        if (Directory.Exists(melonLoaderFolder)) return;
+        var install = await _dialogueService.CreateConfirmMessageBox("Notice", "You did not install MelonLoader\nWhich is needed to run all the mods\nInstall Now?");
+        if (install)
+            await OnInstallMelonLoader();
+    }
+
     private async void InitializeModList()
     {
         _isValidPath = await CheckValidPath();
         if (!_isValidPath) return;
+        await CheckMelonLoaderInstall();
+
         var webMods = await _gitHubService.GetModsAsync();
         var localPaths = _localService.GetModFiles(ModsFolder);
         List<Mod>? localMods;
@@ -239,7 +250,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             isTracked[localModIdx] = true;
             localMod.IsTracked = true;
             localMod.Version = webMod.Version;
-
+            localMod.GameVersion = webMod.GameVersion;
             localMod.DependentLibs = webMod.DependentLibs;
             localMod.DependentMods = webMod.DependentMods;
             localMod.IncompatibleMods = webMod.IncompatibleMods;
@@ -249,6 +260,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             var versionDate = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 : new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
             localMod.State = (UpdateState)versionDate;
             localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
+            if (localMod.IsShaMismatched)
+                localMod.State = UpdateState.Modified;
 
             _sourceCache.AddOrUpdate(localMod);
         }
@@ -266,7 +279,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         if (item.DownloadLink is null)
         {
-            await _dialogueService.CreateErrorMessageBox("This mod does not have an available resource for download.");
+            await _dialogueService.CreateErrorMessageBox("This mod does not have an available resource for download.\n");
             return;
         }
 
@@ -362,11 +375,17 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
         }
 
-        await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed");
+        await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed\n");
     }
 
     private async Task OnReinstallMod(Mod item)
     {
+        if (item.IsUpdatable)
+        {
+            await OnInstallMod(item);
+            return;
+        }
+
         var result = await _dialogueService.CreateConfirmMessageBox($"You are asking to reinstall {item.Name}\nPlease confirm your operation");
         if (!result) return;
         await OnInstallMod(item);
@@ -463,6 +482,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 }
 
                 await _dialogueService.CreateErrorMessageBox("MelonLoader download failed");
+                return;
             }
         }
 
@@ -474,6 +494,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         catch (Exception)
         {
             await _dialogueService.CreateErrorMessageBox($"Cannot unzip MelonLoader.zip in\n{zipPath}\nMaybe try manually unzip?");
+            return;
         }
 
         try
@@ -483,6 +504,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         catch (Exception)
         {
             await _dialogueService.CreateErrorMessageBox($"Failed to delete MelonLoader.zip in\n{zipPath}\nTry manually delete");
+            return;
         }
 
         await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully installed\n");

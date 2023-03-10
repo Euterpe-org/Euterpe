@@ -103,9 +103,9 @@
                                             Homepage
                                         </Button>
                                         <!--If there are no dependencies, this field is omitted-->
-                                        <StackPanel IsVisible="{Binding !!DependentMods.Count}">
+                                        <StackPanel IsVisible="{Binding DependencyCount}">
                                             <TextBlock>Dependencies:</TextBlock>
-                                            <ItemsControl Items="{Binding DependentMods}">
+											<ItemsControl Items="{Binding DependencyNames}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Text="{Binding .}" />
@@ -142,16 +142,23 @@
                                               CommandParameter="{Binding .}"
                                               Foreground="#ddd"
                                               Content="On" />
+
                                     <Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
+                                            IsEnabled="{Binding !IsIncompatible}"
                                             Margin="30,22.5,0,0" Background="#505050"
                                             VerticalAlignment="Top"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
                                             Command="{Binding $parent[ItemsControl].DataContext.RemoveModCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uninstall" />
 
                                     <Button IsVisible="{Binding !IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
+                                            IsEnabled="{Binding !IsIncompatible}"
                                             Margin="30,22.5,0,0" Background="#505050"
                                             VerticalAlignment="Top"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
                                             Command="{Binding $parent[ItemsControl].DataContext.InstallModCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Install" />
@@ -166,6 +173,8 @@
                                             Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
                                             Margin="30,22.5,0,0" Background="#505050"
                                             VerticalAlignment="Top"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
                                             Command="{Binding $parent[ItemsControl].DataContext.ReinstallModCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="{Binding ., Converter={StaticResource InstallationTextConverter}}" />

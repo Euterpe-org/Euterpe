@@ -8,6 +8,7 @@
 	  <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
     <TrimMode>copyused</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+	  <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
@@ -16,6 +17,9 @@
     <EmbeddedResource Remove="Mods\**" />
     <None Remove="Mods\**" />
     <None Remove=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.

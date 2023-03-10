@@ -16,17 +16,17 @@ public class InstallationTextConverter : IValueConverter
                 case UpdateState.Outdated:
                     return "Update";
                 case UpdateState.Newer:
+                case UpdateState.Modified:
                     return "Reinstall";
                 case UpdateState.Normal:
-                case UpdateState.Modified:
                 default:
                 {
-                    return mod is {State: UpdateState.Normal, IsShaMismatched: true} ? "Reinstall" : "";
+                    return string.Empty;
                 }
             }
         }
 
-        return "";
+        return string.Empty;
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
