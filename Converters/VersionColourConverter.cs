@@ -11,11 +11,11 @@ public class VersionColourConverter : IValueConverter
 {
     private readonly IBrush Default = "#bbb".ToBrush();
     private readonly IBrush Blue = "#82aaff".ToBrush();
-    private readonly IBrush Red = "#c80000".ToBrush();
+    private readonly IBrush Red = "#fd2617".ToBrush();
     private readonly IBrush Purple = "#a000e6".ToBrush();
     private readonly IBrush Yellow = "#e19600".ToBrush();
-    
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is Mod mod)
         {
@@ -40,8 +40,5 @@ public class VersionColourConverter : IValueConverter
         return Default;
     }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-    {
-        return value;
-    }
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => value;
 }

@@ -11,12 +11,14 @@ using System.Security;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AssetsTools.NET.Extra;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using DynamicData;
 using DynamicData.Binding;
 using ICSharpCode.SharpZipLib.Zip;
+using MelonLoader;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
@@ -32,6 +34,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReactiveCommand<Unit, Unit> FilterInstalledCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterEnabledCommand { get; }
     public ReactiveCommand<Unit, Unit> FilterOutdatedCommand { get; }
+    public ReactiveCommand<Unit, Unit> FilterIncompatibleCommand { get; }
     public ReactiveCommand<Mod, Unit> SelectedItemCommand { get; }
     public ReactiveCommand<Mod, Unit> InstallModCommand { get; }
     public ReactiveCommand<Mod, Unit> ReinstallModCommand { get; }
@@ -80,6 +83,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
     private Settings _settings = new();
     private bool _isValidPath;
+    private string _currentGameVersion;
     private string ModsFolder => !string.IsNullOrEmpty(_settings.MuseDashFolder) ? Path.Join(_settings.MuseDashFolder, "Mods") : string.Empty;
 
     private readonly IGitHubService _gitHubService;
@@ -100,6 +104,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         FilterInstalledCommand = ReactiveCommand.Create(OnFilterInstalled);
         FilterEnabledCommand = ReactiveCommand.Create(OnFilterEnabled);
         FilterOutdatedCommand = ReactiveCommand.Create(OnFilterOutdated);
+        FilterIncompatibleCommand = ReactiveCommand.Create(OnFilterIncompatible);
 
         OpenUrlCommand = ReactiveCommand.Create<string>(OpenUrl);
         OpenFolderDialogueCommand = ReactiveCommand.CreateFromTask(OnChoosePath);
@@ -118,6 +123,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             .Filter(x => CategoryFilter != Models.Filter.Enabled || (CategoryFilter == Models.Filter.Enabled && x is { IsDisabled: false, IsLocal: true }))
             .Filter(x => CategoryFilter != Models.Filter.Outdated || (CategoryFilter == Models.Filter.Outdated && x.State == UpdateState.Outdated))
             .Filter(x => CategoryFilter != Models.Filter.Installed || (CategoryFilter == Models.Filter.Installed && x.IsLocal))
+            .Filter(x => CategoryFilter != Models.Filter.Incompatible || (CategoryFilter == Models.Filter.Incompatible && x is { IsIncompatible: true, IsLocal: true }))
             .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
             .Bind(out _mods)
             .Subscribe();
@@ -190,6 +196,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     await File.WriteAllTextAsync(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
             }
 
+            await CheckGameVersion();
+
             return true;
         }
         catch (Exception)
@@ -198,6 +206,28 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             return false;
         }
 
+    }
+
+    private async Task CheckGameVersion()
+    {
+        var assetsManager = new AssetsManager();
+        var bundlePath = Path.Join(_settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        try
+        {
+            var instance = assetsManager.LoadAssetsFile(bundlePath, true);
+            assetsManager.LoadIncludedClassPackage();
+            if (!instance.file.Metadata.TypeTreeEnabled)
+                assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
+            var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
+
+            var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion");
+            _currentGameVersion = bundleVersion!.AsString;
+        }
+        catch (Exception)
+        {
+            await _dialogueService.CreateErrorMessageBox($"Cannot read current game version\nDo you fully installed Muse Dash?\nPlease check your globalgamemanagers file in\n{bundlePath}");
+            Environment.Exit(0);
+        }
     }
 
     private async Task CheckMelonLoaderInstall()
@@ -238,11 +268,12 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             if (localMod is null)
             {
                 webMod.IsTracked = true;
+                webMod.IsIncompatible = !CheckCompatible(webMod);
                 _sourceCache.AddOrUpdate(webMod);
                 continue;
             }
 
-            if (localMods.Count(x => x!.Name == localMod.Name) > 1)
+            if (localMods.Count(x => x.Name == localMod.Name) > 1)
             {
                 localMod.IsDuplicated = true;
             }
@@ -262,7 +293,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
             if (localMod.IsShaMismatched)
                 localMod.State = UpdateState.Modified;
-
+            localMod.IsIncompatible = !CheckCompatible(localMod);
             _sourceCache.AddOrUpdate(localMod);
         }
 
@@ -273,6 +304,14 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 _sourceCache.AddOrUpdate(localMods[i]!);
             }
         }
+    }
+
+    private bool CheckCompatible(Mod mod)
+    {
+        if (mod.CompatibleGameVersion == "All")
+            return true;
+        var compatibleVersions = mod.CompatibleGameVersion.Split(", ");
+        return compatibleVersions.Contains(_currentGameVersion);
     }
 
     private async Task OnInstallMod(Mod item)
@@ -593,6 +632,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private void OnFilterEnabled() => CategoryFilter = Models.Filter.Enabled;
 
     private void OnFilterOutdated() => CategoryFilter = Models.Filter.Outdated;
+
+    private void OnFilterIncompatible() => CategoryFilter = Models.Filter.Incompatible;
 
     private void OnSelectedItem(Mod item)
     {

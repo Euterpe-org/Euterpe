@@ -4,11 +4,11 @@
         xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         Icon="/Assets/Icon.ico"
         Title="Muse Dash Mod Tools"
-        Width="800" Height="450"
+        Width="1000" Height="600"
         CanResize="True" Background="#282828">
 
     <Design.DataContext>
@@ -18,6 +18,7 @@
     <Window.Resources>
         <converters:DuplicateConverter x:Key="DuplicateConverter" />
         <converters:VersionColourConverter x:Key="VersionColourConverter" />
+        <converters:ReinstallConverter x:Key="ReinstallConverter" />
         <converters:VersionTextConverter x:Key="VersionTextConverter" />
         <converters:InstallationTextConverter x:Key="InstallationTextConverter" />
     </Window.Resources>
@@ -54,6 +55,7 @@
             <Button Command="{Binding FilterInstalledCommand}" Content="Installed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="40" Width="105" />
             <Button Command="{Binding FilterEnabledCommand}" Content="Enabled" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="40" Width="105" />
             <Button Command="{Binding FilterOutdatedCommand}" Content="Outdated" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="40" Width="105" />
+            <Button Command="{Binding FilterIncompatibleCommand}" Content="Incompatible" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Height="40" Width="105" />
         </StackPanel>
         <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
             <Button Command="{Binding InstallMelonLoaderCommand}" Content="Install&#x0a;MelonLoader" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="105" />
@@ -138,7 +140,7 @@
                                               Content="On" />
 
                                     <Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
-                                            IsEnabled="{Binding !IsIncompatible}"
+                                            Foreground="{Binding ., Converter={StaticResource ReinstallConverter}}"
                                             Margin="30,22.5,0,0" Background="#505050"
                                             VerticalAlignment="Top"
                                             HorizontalContentAlignment="Center"

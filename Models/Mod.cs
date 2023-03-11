@@ -116,5 +116,6 @@ public enum Filter
     All = 0,
     Installed = 1,
     Enabled = 2,
-    Outdated = 3
+    Outdated = 3,
+    Incompatible = 4
 }
