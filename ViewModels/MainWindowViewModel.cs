@@ -196,7 +196,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     await File.WriteAllTextAsync(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
             }
 
-            await CheckGameVersion();
+            await ReadGameVersion();
 
             return true;
         }
@@ -208,7 +208,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     }
 
-    private async Task CheckGameVersion()
+    private async Task ReadGameVersion()
     {
         var assetsManager = new AssetsManager();
         var bundlePath = Path.Join(_settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
@@ -233,7 +233,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private async Task CheckMelonLoaderInstall()
     {
         var melonLoaderFolder = Path.Join(_settings.MuseDashFolder, "MelonLoader");
-        if (Directory.Exists(melonLoaderFolder)) return;
+        var versionFile = Path.Join(_settings.MuseDashFolder, "version.dll");
+        if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
         var install = await _dialogueService.CreateConfirmMessageBox("Notice", "You did not install MelonLoader\nWhich is needed to run all the mods\nInstall Now?");
         if (install)
             await OnInstallMelonLoader();
@@ -306,13 +307,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
     }
 
-    private bool CheckCompatible(Mod mod)
-    {
-        if (mod.CompatibleGameVersion == "All")
-            return true;
-        var compatibleVersions = mod.CompatibleGameVersion.Split(", ");
-        return compatibleVersions.Contains(_currentGameVersion);
-    }
+    private bool CheckCompatible(Mod mod) => mod.CompatibleGameVersion == "All" || mod.GameVersion!.Contains(_currentGameVersion);
 
     private async Task OnInstallMod(Mod item)
     {
@@ -484,7 +479,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 _sourceCache.AddOrUpdate(webMod);
             }
 
-            await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully deleted.");
+            await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully deleted.\n");
         }
         catch (Exception ex)
         {
@@ -520,7 +515,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     return;
                 }
 
-                await _dialogueService.CreateErrorMessageBox("MelonLoader download failed");
+                await _dialogueService.CreateErrorMessageBox($"MelonLoader download failed\n{ex}");
                 return;
             }
         }
@@ -532,7 +527,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox($"Cannot unzip MelonLoader.zip in\n{zipPath}\nMaybe try manually unzip?");
+            await _dialogueService.CreateErrorMessageBox($"Cannot unzip MelonLoader.zip in\n{zipPath}\nPlease make sure your game is not running\nThen try manually unzip");
             return;
         }
 
