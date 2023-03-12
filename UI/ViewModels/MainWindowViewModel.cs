@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -130,6 +130,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         RxApp.MainThreadScheduler.Schedule(InitializeSettings);
         //RxApp.MainThreadScheduler.Schedule(_gitHubService.CheckUpdates);
+        AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
 
     private async void InitializeSettings()
@@ -168,7 +169,8 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var userDataPath = Path.Join(_settings.MuseDashFolder, "UserData");
         if (!File.Exists(exePath) || !File.Exists(gameAssemblyPath))
         {
-            await _dialogueService.CreateErrorMessageBox("Couldn't find MuseDash.exe or GameAssembly.dll\nPlease manually choose the right folder");
+            await _dialogueService.CreateErrorMessageBox("Couldn't find MuseDash.exe or GameAssembly.dll\nPlease choose the right folder");
+            await OnChoosePath();
             return false;
         }
 
@@ -206,7 +208,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             await _dialogueService.CreateErrorMessageBox("Failed to verify MuseDash.exe\nMake sure you selected the right folder");
             return false;
         }
-
     }
 
     private async Task ReadGameVersion()
@@ -272,6 +273,9 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 webMod.IsTracked = true;
                 webMod.IsIncompatible = !CheckCompatible(webMod);
                 _sourceCache.AddOrUpdate(webMod);
+                if (!_settings.AskInstallMuseDashModTools)
+                    continue;
+                await CheckModToolsInstall(webMod);
                 continue;
             }
 
@@ -301,7 +305,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         for (var i = 0; i < isTracked.Length; i++)
         {
-            if (!isTracked[i] && localMods.Count(x => x!.Name == localMods[i]!.Name) == 1)
+            if (!isTracked[i] && localMods.Count(x => x.Name == localMods[i]!.Name) == 1)
             {
                 _sourceCache.AddOrUpdate(localMods[i]!);
             }
@@ -309,6 +313,21 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     }
 
     private bool CheckCompatible(Mod mod) => mod.CompatibleGameVersion == "All" || mod.GameVersion!.Contains(_currentGameVersion);
+
+    private async Task CheckModToolsInstall(Mod mod)
+    {
+        if (mod.Name != "MuseDashModTools") return;
+        var result = await _dialogueService.CreateCustomConfirmMessageBox("You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?");
+        switch (result)
+        {
+            case "Yes":
+                await OnInstallMod(mod);
+                break;
+            case "No and Don't Ask Again":
+                _settings.AskInstallMuseDashModTools = false;
+                break;
+        }
+    }
 
     private async Task OnInstallMod(Mod item)
     {
@@ -576,7 +595,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         while (true)
         {
-            var dialogue = new OpenFolderDialog{Title = "Choose Muse Dash Folder"};
+            var dialogue = new OpenFolderDialog { Title = "Choose Muse Dash Folder" };
             if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var path = await dialogue.ShowAsync(desktop.MainWindow);
@@ -635,5 +654,11 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         item.IsExpanded = !item.IsExpanded;
         SelectedItem = item;
+    }
+
+    private void OnExit(object sender, EventArgs e)
+    {
+        var json = JsonSerializer.Serialize(_settings);
+        File.WriteAllText("appsettings.json", json);
     }
 }
