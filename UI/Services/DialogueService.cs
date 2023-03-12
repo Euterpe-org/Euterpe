@@ -5,9 +5,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
-using UI.Contracts;
+using MuseDashModToolsUI.Contracts;
 
-namespace UI.Services;
+namespace MuseDashModToolsUI.Services;
 
 public class DialogueService : IDialogueService
 {

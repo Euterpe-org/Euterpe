@@ -1,4 +1,4 @@
-﻿namespace UI.ViewModels;
+﻿namespace MuseDashModToolsUI.ViewModels;
 
 public class DownloadWindowViewModel
 {

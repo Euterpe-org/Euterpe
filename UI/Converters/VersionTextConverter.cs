@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using Avalonia.Data.Converters;
-using UI.Models;
+using MuseDashModToolsUI.Models;
 
-namespace UI.Converters;
+namespace MuseDashModToolsUI.Converters;
 
 public class VersionTextConverter : IValueConverter
 {

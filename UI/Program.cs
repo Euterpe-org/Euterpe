@@ -3,7 +3,7 @@ using Avalonia;
 using Avalonia.ReactiveUI;
 using Splat;
 
-namespace UI;
+namespace MuseDashModToolsUI;
 
 internal class Program
 {

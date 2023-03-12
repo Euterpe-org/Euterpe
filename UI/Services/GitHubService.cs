@@ -8,10 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
-using UI.Contracts;
-using UI.Models;
+using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Models;
 
-namespace UI.Services;
+namespace MuseDashModToolsUI.Services;
 
 public class GitHubService : IGitHubService
 {

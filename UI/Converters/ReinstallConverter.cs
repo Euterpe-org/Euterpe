@@ -2,10 +2,10 @@
 using System.Globalization;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
-using UI.Extensions;
-using UI.Models;
+using MuseDashModToolsUI.Extensions;
+using MuseDashModToolsUI.Models;
 
-namespace UI.Converters;
+namespace MuseDashModToolsUI.Converters;
 
 public class ReinstallConverter : IValueConverter
 {

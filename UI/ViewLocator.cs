@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using UI.ViewModels;
+using MuseDashModToolsUI.ViewModels;
 
-namespace UI;
+namespace MuseDashModToolsUI;
 
 public class ViewLocator : IDataTemplate
 {

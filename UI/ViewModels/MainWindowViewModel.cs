@@ -19,14 +19,14 @@ using DynamicData;
 using DynamicData.Binding;
 using ICSharpCode.SharpZipLib.Zip;
 using MelonLoader;
+using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Models;
 using ReactiveUI;
-using UI.Contracts;
-using UI.Contracts.ViewModels;
-using UI.Models;
 
 #pragma warning disable CS8618
 
-namespace UI.ViewModels;
+namespace MuseDashModToolsUI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {

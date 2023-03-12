@@ -1,18 +1,19 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:UI.ViewModels"
-        xmlns:converters="clr-namespace:UI.Converters"
+        xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+        xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:MuseDashModToolsUI.ViewModels"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
-        x:Class="UI.Views.MainWindow"
+        x:Class="MuseDashModToolsUI.Views.MainWindow"
         Icon="/Assets/Icon.ico"
         Title="Muse Dash Mod Tools"
         Width="1000" Height="600"
         CanResize="True" Background="#282828">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel />
+        <viewModels:MainWindowViewModel />
     </Design.DataContext>
 
     <Window.Resources>

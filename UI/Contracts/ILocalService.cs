@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using UI.Models;
+using MuseDashModToolsUI.Models;
 
-namespace UI.Contracts;
+namespace MuseDashModToolsUI.Contracts;
 
 public interface ILocalService
 {

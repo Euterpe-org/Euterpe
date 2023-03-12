@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using UI.Models;
+using MuseDashModToolsUI.Models;
 
-namespace UI.Contracts;
+namespace MuseDashModToolsUI.Contracts;
 
 public interface IGitHubService
 {

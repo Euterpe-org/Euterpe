@@ -1,4 +1,4 @@
-﻿namespace UI.Models;
+﻿namespace MuseDashModToolsUI.Models;
 
 public class Settings
 {

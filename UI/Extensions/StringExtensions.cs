@@ -1,6 +1,6 @@
 ﻿using Avalonia.Media;
 
-namespace UI.Extensions;
+namespace MuseDashModToolsUI.Extensions;
 
 public static class StringExtensions
 {

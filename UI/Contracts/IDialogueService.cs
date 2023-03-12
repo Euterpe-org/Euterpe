@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MessageBox.Avalonia.Enums;
 
-namespace UI.Contracts;
+namespace MuseDashModToolsUI.Contracts;
 
 public interface IDialogueService
 {

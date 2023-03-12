@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Net.Http;
+using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Services;
+using MuseDashModToolsUI.ViewModels;
 using Splat;
-using UI.Contracts;
-using UI.Contracts.ViewModels;
-using UI.Services;
-using UI.ViewModels;
 
-namespace UI;
+namespace MuseDashModToolsUI;
 
 public static class Bootstrapper
 {

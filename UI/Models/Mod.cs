@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using ReactiveUI;
 
-namespace UI.Models;
+namespace MuseDashModToolsUI.Models;
 
 public class Mod : ReactiveObject
 {

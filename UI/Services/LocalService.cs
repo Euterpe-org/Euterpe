@@ -3,10 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using MelonLoader;
-using UI.Contracts;
-using UI.Models;
+using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Models;
 
-namespace UI.Services;
+namespace MuseDashModToolsUI.Services;
 
 public class LocalService : ILocalService
 {
