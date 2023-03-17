@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Security;
 using System.Text;
@@ -15,6 +14,7 @@ using AssetsTools.NET.Extra;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using DynamicData.Binding;
 using ICSharpCode.SharpZipLib.Zip;
@@ -28,24 +28,8 @@ using ReactiveUI;
 
 namespace MuseDashModToolsUI.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
+public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
-    public ReactiveCommand<Unit, Unit> FilterAllCommand { get; }
-    public ReactiveCommand<Unit, Unit> FilterInstalledCommand { get; }
-    public ReactiveCommand<Unit, Unit> FilterEnabledCommand { get; }
-    public ReactiveCommand<Unit, Unit> FilterOutdatedCommand { get; }
-    public ReactiveCommand<Unit, Unit> FilterIncompatibleCommand { get; }
-    public ReactiveCommand<Mod, Unit> SelectedItemCommand { get; }
-    public ReactiveCommand<Mod, Unit> InstallModCommand { get; }
-    public ReactiveCommand<Mod, Unit> ReinstallModCommand { get; }
-    public ReactiveCommand<Mod, Unit> RemoveModCommand { get; }
-    public ReactiveCommand<Mod, Unit> ToggleModCommand { get; }
-    public ReactiveCommand<string, Unit> OpenUrlCommand { get; }
-    public ReactiveCommand<Unit, Unit> OpenFolderDialogueCommand { get; }
-    public ReactiveCommand<Unit, Unit> OpenModsFolderCommand { get; }
-    public ReactiveCommand<Unit, Unit> InstallMelonLoaderCommand { get; }
-    public ReactiveCommand<Unit, Unit> UninstallMelonLoaderCommand { get; }
-
     private Mod _selectedItem;
 
     public Mod SelectedItem
@@ -100,24 +84,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _localService = localService;
         _dialogueService = dialogueService;
 
-        FilterAllCommand = ReactiveCommand.Create(OnFilterAll);
-        FilterInstalledCommand = ReactiveCommand.Create(OnFilterInstalled);
-        FilterEnabledCommand = ReactiveCommand.Create(OnFilterEnabled);
-        FilterOutdatedCommand = ReactiveCommand.Create(OnFilterOutdated);
-        FilterIncompatibleCommand = ReactiveCommand.Create(OnFilterIncompatible);
-
-        OpenUrlCommand = ReactiveCommand.Create<string>(OpenUrl);
-        OpenFolderDialogueCommand = ReactiveCommand.CreateFromTask(OnChoosePath);
-        OpenModsFolderCommand = ReactiveCommand.CreateFromTask(OpenModsFolder);
-        InstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnInstallMelonLoader);
-        UninstallMelonLoaderCommand = ReactiveCommand.CreateFromTask(OnUninstallMelonLoader);
-
-        SelectedItemCommand = ReactiveCommand.Create<Mod>(OnSelectedItem);
-        InstallModCommand = ReactiveCommand.CreateFromTask<Mod>(OnInstallMod);
-        ReinstallModCommand = ReactiveCommand.CreateFromTask<Mod>(OnReinstallMod);
-        RemoveModCommand = ReactiveCommand.CreateFromTask<Mod>(OnDeleteMod);
-        ToggleModCommand = ReactiveCommand.CreateFromTask<Mod>(OnToggleMod);
-
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(Filter) || x.Name!.Contains(Filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => CategoryFilter != Models.Filter.Enabled || (CategoryFilter == Models.Filter.Enabled && x is { IsDisabled: false, IsLocal: true }))
@@ -141,7 +107,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             {
                 await _dialogueService.CreateErrorMessageBox("Warning", "You haven't choose Muse Dash Folder\nPlease choose the folder");
                 await OnChoosePath();
-                Debug.WriteLine("run");
                 return;
             }
 
@@ -329,6 +294,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
     }
 
+    [RelayCommand]
     private async Task OnInstallMod(Mod item)
     {
         if (item.DownloadLink is null)
@@ -432,6 +398,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed\n");
     }
 
+    [RelayCommand]
     private async Task OnReinstallMod(Mod item)
     {
         if (item.State == UpdateState.Outdated)
@@ -445,6 +412,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         await OnInstallMod(item);
     }
 
+    [RelayCommand]
     private async Task OnToggleMod(Mod item)
     {
         //Kind of a bummer that I have to reverse the boolean here, due to binding triggering before the command executes. If you find a better way for this, hit me with a big fat PR
@@ -478,6 +446,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         item.IsDisabled = !item.IsDisabled;
     }
 
+    [RelayCommand]
     private async Task OnDeleteMod(Mod item)
     {
         var path = Path.Join(ModsFolder, item.FileNameExtended());
@@ -517,6 +486,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
     }
 
+    [RelayCommand]
     private async Task OnInstallMelonLoader()
     {
         if (!_isValidPath) return;
@@ -564,6 +534,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully installed\n");
     }
 
+    [RelayCommand]
     private async Task OnUninstallMelonLoader()
     {
         if (!_isValidPath) return;
@@ -591,6 +562,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             await _dialogueService.CreateErrorMessageBox("Cannot find MelonLoader Folder\nHave you installed MelonLoader?");
     }
 
+    [RelayCommand]
     private async Task OnChoosePath()
     {
         while (true)
@@ -615,6 +587,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
     }
 
+    [RelayCommand]
     private void OpenUrl(string path)
     {
         Process.Start(new ProcessStartInfo
@@ -624,6 +597,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         });
     }
 
+    [RelayCommand]
     private async Task OpenModsFolder()
     {
         if (!_isValidPath)
@@ -640,16 +614,22 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         });
     }
 
+    [RelayCommand]
     private void OnFilterAll() => CategoryFilter = Models.Filter.All;
 
+    [RelayCommand]
     private void OnFilterInstalled() => CategoryFilter = Models.Filter.Installed;
 
+    [RelayCommand]
     private void OnFilterEnabled() => CategoryFilter = Models.Filter.Enabled;
 
+    [RelayCommand]
     private void OnFilterOutdated() => CategoryFilter = Models.Filter.Outdated;
 
+    [RelayCommand]
     private void OnFilterIncompatible() => CategoryFilter = Models.Filter.Incompatible;
 
+    [RelayCommand]
     private void OnSelectedItem(Mod item)
     {
         item.IsExpanded = !item.IsExpanded;

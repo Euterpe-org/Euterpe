@@ -4,7 +4,6 @@
         xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:MuseDashModToolsUI.ViewModels"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         Icon="/Assets/Icon.ico"
@@ -13,7 +12,7 @@
         CanResize="True" Background="#282828">
 
     <Design.DataContext>
-        <viewModels:MainWindowViewModel />
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
     <Window.Resources>
@@ -61,7 +60,7 @@
         <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
             <Button Command="{Binding InstallMelonLoaderCommand}" Content="Install&#x0a;MelonLoader" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="105" />
             <Button Command="{Binding UninstallMelonLoaderCommand}" Content="Uninstall&#x0a;MelonLoader" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="50" Width="105" />
-            <Button Command="{Binding OpenFolderDialogueCommand}" Content="Path" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="105" />
+            <Button Command="{Binding ChoosePathCommand}" Content="Path" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="105" />
             <Button Command="{Binding OpenModsFolderCommand}" Content="Mods" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="105" />
         </StackPanel>
         <Separator Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="104,0,0,0"  Width="1" Background="#707070" BorderBrush="#FF707070" />
@@ -146,7 +145,7 @@
                                             VerticalAlignment="Top"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Command="{Binding $parent[ItemsControl].DataContext.RemoveModCommand}"
+                                            Command="{Binding $parent[ItemsControl].DataContext.DeleteModCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uninstall" />
 
