@@ -60,7 +60,8 @@ public class GitHubService : IGitHubService
         {
             result = await _client.GetAsync(SecondaryLink + BaseLink + link);
         }
-        await using var fs = new FileStream(path, FileMode.CreateNew);
+
+        await using var fs = new FileStream(path, FileMode.OpenOrCreate);
         await result.Content.CopyToAsync(fs);
     }
 

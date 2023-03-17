@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reactive.Concurrency;
 using System.Security;
 using System.Text;
@@ -304,23 +305,19 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
 
         var errors = new StringBuilder();
-        var modPaths = new List<string>();
-        var mods = new List<Mod>();
+
         try
         {
-            var path = Path.Join(Path.GetTempPath(), item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
-            if (!File.Exists(path))
-            {
-                await _gitHubService.DownloadModAsync(item.DownloadLink, path);
-            }
-
-            modPaths.Add(path);
+            var path = Path.Join(ModsFolder, item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
+            await _gitHubService.DownloadModAsync(item.DownloadLink, path);
+            var mod = _localService.LoadMod(path);
+            _sourceCache!.AddOrUpdate(mod);
         }
         catch (Exception ex)
         {
             switch (ex)
             {
-                case WebException:
+                case HttpRequestException:
                     errors.AppendLine($"Mod installation failed\nAre you online? {ex.ToString()}");
                     break;
 
@@ -336,19 +333,16 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
         }
 
-        foreach (var mod in item.DependentMods)
+        foreach (var dependentMod in item.DependentMods)
         {
-            var dependedMod = Mods.FirstOrDefault(x => x.DownloadLink == mod && x.IsLocal);
-            if (dependedMod is not null) continue;
+            var installedMod = Mods.FirstOrDefault(x => x.DownloadLink == dependentMod && x.IsLocal);
+            if (installedMod is not null) continue;
             try
             {
-                var path = Path.Join(Path.GetTempPath(), mod.Split("/")[1]);
-                if (!File.Exists(path))
-                {
-                    await _gitHubService.DownloadModAsync(mod, path);
-                }
-
-                modPaths.Add(path);
+                var path = Path.Join(ModsFolder, dependentMod.Split("/")[1]);
+                await _gitHubService.DownloadModAsync(dependentMod, path);
+                var mod = _localService.LoadMod(path);
+                _sourceCache!.AddOrUpdate(mod);
             }
             catch (Exception ex)
             {
@@ -356,43 +350,10 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
         }
 
-        if (modPaths.Count > 0)
-        {
-            foreach (var path in modPaths)
-            {
-                var fullPath = Path.Join(ModsFolder, Path.GetFileName(path));
-                if (File.Exists(fullPath))
-                {
-                    File.Delete(fullPath);
-                }
-
-                File.Move(path, fullPath);
-                var mod = _localService.LoadMod(fullPath);
-                if (mod is not null)
-                {
-                    mods.Add(mod);
-                }
-            }
-        }
-
         if (errors.Length > 0)
         {
             await _dialogueService.CreateErrorMessageBox(errors.ToString());
             return;
-        }
-
-        if (mods.Count > 0)
-        {
-            foreach (var mod in mods)
-            {
-                var existedMod = _mods.FirstOrDefault(x => x.Name == mod.Name);
-                if (existedMod is not null)
-                {
-                    _sourceCache.Remove(existedMod);
-                }
-
-                _sourceCache.AddOrUpdate(mod);
-            }
         }
 
         await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed\n");
