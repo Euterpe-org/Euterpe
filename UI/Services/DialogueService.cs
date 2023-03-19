@@ -59,15 +59,23 @@ public class DialogueService : IDialogueService
         return isMainWindow ? await messageBox.ShowDialog(desktop!.MainWindow) : await messageBox.Show();
     }
 
-    public async Task<string> CreateCustomConfirmMessageBox(string content) =>
+    public async Task<string> CreateCustomConfirmMessageBox(string content, int buttonCount = 3) =>
         await CreateCustomMessageBox(
             "Notice",
             content,
-            new[]
-            {
-                new ButtonDefinition { Name = "Yes", IsDefault = true },
-                new ButtonDefinition { Name = "No", IsCancel = true },
-                new ButtonDefinition { Name = "No and Don't Ask Again", IsCancel = true }
-            },
+            buttonCount == 3
+                ? new[]
+                {
+                    new ButtonDefinition { Name = "Yes", IsDefault = true },
+                    new ButtonDefinition { Name = "No", IsCancel = true },
+                    new ButtonDefinition { Name = "No and Don't Ask Again", IsCancel = true }
+                }
+                : new[]
+                {
+                    new ButtonDefinition { Name = "Yes", IsDefault = true },
+                    new ButtonDefinition { Name = "Yes and Don't ask Again", IsCancel = false },
+                    new ButtonDefinition { Name = "No", IsCancel = true },
+                    new ButtonDefinition { Name = "No and Don't Ask Again", IsCancel = true }
+                },
             Icon.Info);
 }

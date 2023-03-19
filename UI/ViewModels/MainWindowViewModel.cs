@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Reactive.Concurrency;
 using System.Security;
@@ -15,6 +14,7 @@ using AssetsTools.NET.Extra;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using DynamicData.Binding;
@@ -31,37 +31,9 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
-    private Mod _selectedItem;
-
-    public Mod SelectedItem
-    {
-        get => _selectedItem;
-        set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
-    }
-
-    private string _filter;
-
-    public string Filter
-    {
-        get => _filter;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _filter, value);
-            _sourceCache.Refresh();
-        }
-    }
-
-    private Filter _categoryFilter;
-
-    public Filter CategoryFilter
-    {
-        get => _categoryFilter;
-        set
-        {
-            this.RaiseAndSetIfChanged(ref _categoryFilter, value);
-            _sourceCache.Refresh();
-        }
-    }
+    [ObservableProperty] private Mod _selectedItem;
+    [ObservableProperty] private string _filter;
+    [ObservableProperty] private FilterType _categoryFilterType;
 
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly ReadOnlyObservableCollection<Mod> _mods;
@@ -86,11 +58,11 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _dialogueService = dialogueService;
 
         _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(Filter) || x.Name!.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => CategoryFilter != Models.Filter.Enabled || (CategoryFilter == Models.Filter.Enabled && x is { IsDisabled: false, IsLocal: true }))
-            .Filter(x => CategoryFilter != Models.Filter.Outdated || (CategoryFilter == Models.Filter.Outdated && x.State == UpdateState.Outdated))
-            .Filter(x => CategoryFilter != Models.Filter.Installed || (CategoryFilter == Models.Filter.Installed && x.IsLocal))
-            .Filter(x => CategoryFilter != Models.Filter.Incompatible || (CategoryFilter == Models.Filter.Incompatible && x is { IsIncompatible: true, IsLocal: true }))
+            .Filter(x => string.IsNullOrEmpty(_filter) || x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase))
+            .Filter(x => _categoryFilterType != FilterType.Enabled || (_categoryFilterType == FilterType.Enabled && x is { IsDisabled: false, IsLocal: true }))
+            .Filter(x => _categoryFilterType != FilterType.Outdated || (_categoryFilterType == FilterType.Outdated && x.State == UpdateState.Outdated))
+            .Filter(x => _categoryFilterType != FilterType.Installed || (_categoryFilterType == FilterType.Installed && x.IsLocal))
+            .Filter(x => _categoryFilterType != FilterType.Incompatible || (_categoryFilterType == FilterType.Incompatible && x is { IsIncompatible: true, IsLocal: true }))
             .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
             .Bind(out _mods)
             .Subscribe();
@@ -104,14 +76,14 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         try
         {
-            if (!File.Exists("appsettings.json"))
+            if (!File.Exists("Settings.json"))
             {
                 await _dialogueService.CreateErrorMessageBox("Warning", "You haven't choose Muse Dash Folder\nPlease choose the folder");
                 await OnChoosePath();
                 return;
             }
 
-            var text = await File.ReadAllTextAsync("appsettings.json");
+            var text = await File.ReadAllTextAsync("Settings.json");
             if (string.IsNullOrEmpty(text))
             {
                 await _dialogueService.CreateErrorMessageBox("Warning", "Your stored Muse Dash Folder path is null\nPlease choose the correct folder");
@@ -239,8 +211,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 webMod.IsTracked = true;
                 webMod.IsIncompatible = !CheckCompatible(webMod);
                 _sourceCache.AddOrUpdate(webMod);
-                if (!_settings.AskInstallMuseDashModTools)
-                    continue;
                 await CheckModToolsInstall(webMod);
                 continue;
             }
@@ -282,6 +252,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private async Task CheckModToolsInstall(Mod mod)
     {
+        if (_settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
         var result = await _dialogueService.CreateCustomConfirmMessageBox("You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?");
         switch (result)
@@ -290,7 +261,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 await OnInstallMod(mod);
                 break;
             case "No and Don't Ask Again":
-                _settings.AskInstallMuseDashModTools = false;
+                _settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
                 break;
         }
     }
@@ -310,8 +281,12 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         {
             var path = Path.Join(ModsFolder, item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             await _gitHubService.DownloadModAsync(item.DownloadLink, path);
-            var mod = _localService.LoadMod(path);
-            _sourceCache!.AddOrUpdate(mod);
+            var downloadedMod = _localService.LoadMod(path)!;
+            var webMods = await _gitHubService.GetModsAsync();
+            var mod = webMods.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
+            mod.FileName = downloadedMod.FileName;
+            mod.LocalVersion = downloadedMod.LocalVersion;
+            _sourceCache.AddOrUpdate(mod);
         }
         catch (Exception ex)
         {
@@ -376,13 +351,22 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     [RelayCommand]
     private async Task OnToggleMod(Mod item)
     {
-        //Kind of a bummer that I have to reverse the boolean here, due to binding triggering before the command executes. If you find a better way for this, hit me with a big fat PR
-        item.IsDisabled = !item.IsDisabled;
         try
         {
+            if (item.IsDisabled)
+            {
+                var hasReverseDependency = SearchReverseDependencies(item.Name!, out var reverseDependenciesName);
+                if (hasReverseDependency)
+                {
+                    _settings.AskDisableDependenciesWhenDisabling = await DisableReverseDependencies($"{item.Name} is used by {reverseDependenciesName} as dependency\nAre you sure you want to disable this mod?",
+                        $"Do you want to disable the mods depend on {item.Name} as well?",
+                        reverseDependenciesName, _settings.AskDisableDependenciesWhenDisabling);
+                }
+            }
+
             File.Move(
-                Path.Join(ModsFolder, item.FileNameExtended()),
-                Path.Join(ModsFolder, item.FileNameExtended(true)));
+                Path.Join(ModsFolder, item.FileNameExtended(true)),
+                Path.Join(ModsFolder, item.FileNameExtended()));
         }
         catch (Exception ex)
         {
@@ -403,8 +387,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
             item.IsDisabled = !item.IsDisabled;
         }
-
-        item.IsDisabled = !item.IsDisabled;
     }
 
     [RelayCommand]
@@ -419,11 +401,18 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         try
         {
+            var hasReverseDependency = SearchReverseDependencies(item.Name!, out var reverseDependenciesName);
+            if (hasReverseDependency)
+            {
+                _settings.AskDisableDependenciesWhenDeleting = await DisableReverseDependencies($"{item.Name} is used by {reverseDependenciesName} as dependency\nAre you sure you want to delete this mod?",
+                    $"Do you want to disable the mods depend on {item.Name}?",
+                    reverseDependenciesName, _settings.AskDisableDependenciesWhenDeleting);
+            }
+
             File.Delete(path);
             _sourceCache.Remove(item);
-
-            var mods = await _gitHubService.GetModsAsync();
-            var webMod = mods.FirstOrDefault(x => x.Name == item.Name);
+            var webMods = await _gitHubService.GetModsAsync();
+            var webMod = webMods.FirstOrDefault(x => x.Name == item.Name);
             if (webMod is not null)
             {
                 _sourceCache.AddOrUpdate(webMod);
@@ -447,6 +436,64 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         }
     }
 
+    private bool SearchReverseDependencies(string modName, out string enabledDependentModsName)
+    {
+        var sb = new StringBuilder();
+
+        foreach (var dependentModName in _sourceCache.Items.Where(x => x.DependencyNames.Contains(modName) && x.IsLocal).Select(x => x.Name))
+        {
+            sb.Append(dependentModName + ", ");
+        }
+
+        enabledDependentModsName = sb.Length > 0 ? sb.ToString()[..^2] : string.Empty;
+        return sb.Length > 0;
+    }
+
+    private async Task<AskType> DisableReverseDependencies(string content1, string content2, string reverseDependenciesName, AskType askType)
+    {
+        var result = await _dialogueService.CreateConfirmMessageBox(content1);
+        if (!result)
+            return askType;
+        switch (askType)
+        {
+            case AskType.Always:
+                var askResult = await _dialogueService.CreateCustomConfirmMessageBox(content2, 4);
+                switch (askResult)
+                {
+                    case "Yes":
+                        await DisableMod();
+                        break;
+                    case "Yes and Don't ask Again":
+                        await DisableMod();
+                        askType = AskType.YesAndNoAsk;
+                        break;
+                    case "No and Don't ask Again":
+                        askType = AskType.NoAndNoAsk;
+                        break;
+                }
+
+                break;
+            case AskType.YesAndNoAsk:
+                await DisableMod();
+                break;
+            case AskType.NoAndNoAsk:
+            default: break;
+        }
+
+        async Task DisableMod()
+        {
+            foreach (var mod in _sourceCache.KeyValues
+                         .Where(x => reverseDependenciesName.Contains(x.Key) && !x.Value.IsDisabled)
+                         .Select(x => x.Value))
+            {
+                mod.IsDisabled = true;
+                await OnToggleMod(mod);
+            }
+        }
+
+        return askType;
+    }
+
     [RelayCommand]
     private async Task OnInstallMelonLoader()
     {
@@ -460,7 +507,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
             catch (Exception ex)
             {
-                if (ex is WebException)
+                if (ex is HttpRequestException)
                 {
                     await _dialogueService.CreateErrorMessageBox("MelonLoader download failed due to internet\nAre you online?");
                     return;
@@ -540,7 +587,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
                 _settings.MuseDashFolder = path;
                 var json = JsonSerializer.Serialize(_settings);
-                await File.WriteAllTextAsync("appsettings.json", json);
+                await File.WriteAllTextAsync("Settings.json", json);
                 RxApp.MainThreadScheduler.Schedule(InitializeModList);
             }
 
@@ -576,19 +623,19 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     }
 
     [RelayCommand]
-    private void OnFilterAll() => CategoryFilter = Models.Filter.All;
+    private void OnFilterAll() => CategoryFilterType = FilterType.All;
 
     [RelayCommand]
-    private void OnFilterInstalled() => CategoryFilter = Models.Filter.Installed;
+    private void OnFilterInstalled() => CategoryFilterType = FilterType.Installed;
 
     [RelayCommand]
-    private void OnFilterEnabled() => CategoryFilter = Models.Filter.Enabled;
+    private void OnFilterEnabled() => CategoryFilterType = FilterType.Enabled;
 
     [RelayCommand]
-    private void OnFilterOutdated() => CategoryFilter = Models.Filter.Outdated;
+    private void OnFilterOutdated() => CategoryFilterType = FilterType.Outdated;
 
     [RelayCommand]
-    private void OnFilterIncompatible() => CategoryFilter = Models.Filter.Incompatible;
+    private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
 
     [RelayCommand]
     private void OnSelectedItem(Mod item)
@@ -597,9 +644,12 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         SelectedItem = item;
     }
 
+    partial void OnFilterChanged(string value) => _sourceCache.Refresh();
+    partial void OnCategoryFilterTypeChanged(FilterType value) => _sourceCache.Refresh();
+
     private void OnExit(object sender, EventArgs e)
     {
         var json = JsonSerializer.Serialize(_settings);
-        File.WriteAllText("appsettings.json", json);
+        File.WriteAllText("Settings.json", json);
     }
 }

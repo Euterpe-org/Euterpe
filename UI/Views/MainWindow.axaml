@@ -34,7 +34,7 @@
             <Setter Property="Foreground" Value="#bbb" />
             <Setter Property="Background" Value="#0000" />
         </Style>
-        <Style Selector="CheckBox">
+        <Style Selector="ToggleSwitch">
             <Setter Property="Margin" Value="300,22,0,0" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="BorderBrush" Value="#ddd" />
@@ -63,7 +63,7 @@
             <Button Command="{Binding ChoosePathCommand}" Content="Path" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="105" />
             <Button Command="{Binding OpenModsFolderCommand}" Content="Mods" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="105" />
         </StackPanel>
-        <Separator Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="104,0,0,0"  Width="1" Background="#707070" BorderBrush="#FF707070" />
+        <Separator Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="104,0,0,0" Width="1" Background="#707070" BorderBrush="#FF707070" />
         <TextBox Grid.Column="1" x:Name="Input_SearchFilter" Text="{Binding Filter}" Height="40" Background="#0000" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextWrapping="NoWrap" Watermark="Search Mods" BorderBrush="#707070" BorderThickness="1" SelectionBrush="#282828" SelectionForegroundBrush="#bbb" CornerRadius="1" AcceptsReturn="False" />
         <ScrollViewer Grid.Column="1" Margin="0,40,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer" Orientation="Vertical">
@@ -107,7 +107,7 @@
                                         <!--If there are no dependencies, this field is omitted-->
                                         <StackPanel IsVisible="{Binding DependencyCount}">
                                             <TextBlock>Dependencies:</TextBlock>
-											<TextBlock Text="{Binding DependencyNames}"></TextBlock>
+                                            <TextBlock Text="{Binding DependencyNames}" />
                                             <!--
 							mod.DependentMods contains a list of paths equivalent
 							in format to the WebMod.DownloadLink's format.
@@ -132,12 +132,12 @@
                                 <!--The controls go here (Update, disable, etc.)-->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <!--IsChecked: !mod.Disabled-->
-                                    <CheckBox IsChecked="{Binding !IsDisabled}" Tag="{Binding Name}"
-                                              IsEnabled="{Binding IsLocal}"
-                                              Command="{Binding $parent[ItemsControl].DataContext.ToggleModCommand}"
-                                              CommandParameter="{Binding .}"
-                                              Foreground="#ddd"
-                                              Content="On" />
+                                    <ToggleSwitch IsChecked="{Binding !IsDisabled }"
+                                                  IsEnabled="{Binding IsLocal}"
+                                                  Command="{Binding $parent[ItemsControl].DataContext.ToggleModCommand}"
+                                                  CommandParameter="{Binding .}"
+                                                  Foreground="#ddd">
+                                    </ToggleSwitch>
 
                                     <Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
                                             Foreground="{Binding ., Converter={StaticResource ReinstallConverter}}"

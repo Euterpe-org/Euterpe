@@ -12,5 +12,5 @@ public interface IDialogueService
     Task<bool> CreateConfirmMessageBox(string title, string content);
     Task<bool> CreateConfirmMessageBox(string content);
     Task<string> CreateCustomMessageBox(string title, string content, ButtonDefinition[] buttonDefinitions, Icon icon);
-    Task<string> CreateCustomConfirmMessageBox(string content);
+    Task<string> CreateCustomConfirmMessageBox(string content, int buttonCount = 3);
 }

@@ -74,12 +74,12 @@ public class Mod : ReactiveObject
     [JsonIgnore] private int DependencyCount => DependentMods.Count + DependentLibs.Count;
 
     [JsonIgnore]
-    public string? DependencyNames
+    public string DependencyNames
     {
         get
         {
             if (DependencyCount == 0)
-                return null;
+                return string.Empty;
             var sb = new StringBuilder();
             foreach (var dependentMod in DependentMods)
             {
@@ -97,10 +97,7 @@ public class Mod : ReactiveObject
 
     public List<string> IncompatibleMods { get; set; } = new();
     public string? SHA256 { get; set; }
-    public string FileNameExtended(bool reverse = false)
-    {
-        return FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : "");
-    }
+    public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : "");
 }
 
 public enum UpdateState
@@ -111,7 +108,7 @@ public enum UpdateState
     Modified = 2
 }
 
-public enum Filter
+public enum FilterType
 {
     All = 0,
     Installed = 1,
