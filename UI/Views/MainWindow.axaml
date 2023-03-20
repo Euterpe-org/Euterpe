@@ -141,7 +141,7 @@
 
                                     <Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
                                             Foreground="{Binding ., Converter={StaticResource ReinstallConverter}}"
-                                            Margin="30,22.5,0,0" Background="#505050"
+                                            Margin="40,22.5,0,0" Background="#505050"
                                             VerticalAlignment="Top"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
@@ -151,7 +151,7 @@
 
                                     <Button IsVisible="{Binding !IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
                                             IsEnabled="{Binding !IsIncompatible}"
-                                            Margin="30,22.5,0,0" Background="#505050"
+                                            Margin="40,22.5,0,0" Background="#505050"
                                             VerticalAlignment="Top"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
@@ -167,7 +167,7 @@
 						Same version, hash mismatch: Yellow-->
                                     <Button IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}" Width="75" Height="30"
                                             Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
-                                            Margin="30,22.5,0,0" Background="#505050"
+                                            Margin="40,22.5,0,0" Background="#505050"
                                             VerticalAlignment="Top"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"

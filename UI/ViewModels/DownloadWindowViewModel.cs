@@ -1,5 +1,8 @@
-﻿namespace MuseDashModToolsUI.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class DownloadWindowViewModel
+namespace MuseDashModToolsUI.ViewModels;
+
+public partial class DownloadWindowViewModel : ViewModelBase
 {
+    [ObservableProperty] private double _percentage;
 }

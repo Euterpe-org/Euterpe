@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Text.Json.Serialization;
 using ReactiveUI;
 
@@ -55,49 +55,19 @@ public class Mod : ReactiveObject
         get
         {
             if (GameVersion is null) return string.Empty;
-            var sb = new StringBuilder();
-            foreach (var version in GameVersion)
-            {
-                if (version == "*")
-                    return "All";
-
-                sb.Append(version + ", ");
-            }
-
-            return sb.ToString()[..^2];
+            return GameVersion[0] == "*" ? "All" : string.Join(", ", GameVersion);
         }
     }
 
     public string? Description { get; set; }
     public List<string> DependentMods { get; set; } = new();
     public List<string> DependentLibs { get; set; } = new();
-    [JsonIgnore] private int DependencyCount => DependentMods.Count + DependentLibs.Count;
-
-    [JsonIgnore]
-    public string DependencyNames
-    {
-        get
-        {
-            if (DependencyCount == 0)
-                return string.Empty;
-            var sb = new StringBuilder();
-            foreach (var dependentMod in DependentMods)
-            {
-                sb.AppendLine(dependentMod[5..]);
-            }
-
-            foreach (var dependentLib in DependentLibs)
-            {
-                sb.AppendLine(dependentLib[5..]);
-            }
-
-            return sb.ToString();
-        }
-    }
+    [JsonIgnore] public int DependencyCount => DependentMods.Count + DependentLibs.Count;
+    [JsonIgnore] public string DependencyNames => DependencyCount == 0 ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
 
     public List<string> IncompatibleMods { get; set; } = new();
     public string? SHA256 { get; set; }
-    public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : "");
+    public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : string.Empty);
 }
 
 public enum UpdateState

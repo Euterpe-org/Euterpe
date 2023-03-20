@@ -3,7 +3,7 @@
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
         x:Class="MuseDashModToolsUI.Views.DownloadWindow"
         Title="DownloadWindow"
         TransparencyLevelHint="AcrylicBlur"
@@ -13,7 +13,14 @@
         <vm:DownloadWindowViewModel />
     </Design.DataContext>
 
-
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Foreground" Value="#ddd" />
+            <Setter Property="Background" Value="#0000" />
+            <Setter Property="BorderBrush" Value="#707070" />
+            <Setter Property="CornerRadius" Value="1" />
+        </Style>
+    </Window.Styles>
     <Panel>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
@@ -27,11 +34,11 @@
         <Panel Margin="40" />
         <Grid RowDefinitions="*,*,*,*,50"
               ShowGridLines="True">
-            <Image Grid.Row="0" Source="/Assets/ML_Icon.png"></Image>
-            <TextBlock Grid.Row="1" Text="Downloading MelonLoader.zip" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Blue"></TextBlock>
-            <ProgressBar Grid.Row="2" Width="400" Height="20" ShowProgressText="True" Value="{Binding Percentage}"></ProgressBar>
-            <TextBlock Grid.Row="3" Text="{Binding UnzipStatus}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <Button Grid.Row="4" Content="Finished" FontSize="20" Width="100" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+            <Image Grid.Row="0" Source="/Assets/ML_Icon.png" />
+            <TextBlock Grid.Row="1" Text="Downloading MelonLoader.zip" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Blue" />
+            <ProgressBar Grid.Row="2" Width="400" Height="20" ShowProgressText="True" Value="{Binding Percentage}" />
+            <TextBlock Grid.Row="3" Text="{Binding UnzipStatus}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Grid.Row="4" Content="Finished" FontSize="20" Width="100" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </Grid>
     </Panel>
 </Window>
