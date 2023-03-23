@@ -16,34 +16,53 @@
     </Design.DataContext>
 
     <Window.Resources>
-        <converters:DuplicateConverter x:Key="DuplicateConverter" />
         <converters:VersionColourConverter x:Key="VersionColourConverter" />
         <converters:ReinstallConverter x:Key="ReinstallConverter" />
         <converters:VersionTextConverter x:Key="VersionTextConverter" />
         <converters:InstallationTextConverter x:Key="InstallationTextConverter" />
+        <Thickness x:Key="ExpanderContentPadding">0</Thickness>
+        <Thickness x:Key="ExpanderDropdownDownBorderThickness">0,0,0,1</Thickness>
     </Window.Resources>
 
     <Window.Styles>
         <Style Selector="Button">
-            <Setter Property="Foreground" Value="#ddd" />
+            <Setter Property="Foreground" Value="#DDD" />
             <Setter Property="Background" Value="#0000" />
             <Setter Property="BorderBrush" Value="#707070" />
             <Setter Property="CornerRadius" Value="1" />
         </Style>
+        <Style Selector="Button:pointerover ContentPresenter">
+            <Setter Property="Background" Value="#8C8C8C" />
+        </Style>
+        <Style Selector="Button:pressed ContentPresenter">
+            <Setter Property="Background" Value="#595959" />
+        </Style>
+        <Style Selector="Button:disabled ContentPresenter">
+            <Setter Property="Background" Value="#595959" />
+        </Style>
+        <Style Selector="Label">
+            <Setter Property="Foreground" Value="#DDD" />
+        </Style>
         <Style Selector="TextBlock">
-            <Setter Property="Foreground" Value="#bbb" />
+            <Setter Property="Foreground" Value="#BBB" />
             <Setter Property="Background" Value="#0000" />
         </Style>
         <Style Selector="ToggleSwitch">
             <Setter Property="Margin" Value="300,22,0,0" />
             <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="BorderBrush" Value="#ddd" />
+            <Setter Property="BorderBrush" Value="#DDD" />
         </Style>
         <Style Selector="TextBox:focus">
             <Setter Property="Foreground" Value="#000" />
         </Style>
         <Style Selector="TextBox">
-            <Setter Property="Foreground" Value="#bbb" />
+            <Setter Property="Foreground" Value="#BBB" />
+        </Style>
+        <Style Selector="Expander">
+            <Setter Property="Background" Value="#0000" />
+        </Style>
+        <Style Selector="Expander:expanded ContentPresenter">
+            <Setter Property="Background" Value="#282828" />
         </Style>
 
     </Window.Styles>
@@ -68,11 +87,17 @@
         <ScrollViewer Grid.Column="1" Margin="0,40,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer" Orientation="Vertical">
                 <StackPanel.Styles>
-                    <Style Selector="CheckBox /template/ Border#NormalRectangle">
-                        <Setter Property="BorderBrush" Value="#707070" />
-                    </Style>
                     <Style Selector="StackPanel > TextBlock">
                         <Setter Property="TextWrapping" Value="Wrap" />
+                    </Style>
+                    <Style Selector="StackPanel>Button:pointerover ContentPresenter">
+                        <Setter Property="Background" Value="#8C8C8C" />
+                    </Style>
+                    <Style Selector="StackPanel>Button:pressed ContentPresenter">
+                        <Setter Property="Background" Value="#595959" />
+                    </Style>
+                    <Style Selector="StackPanel>Button:disabled ContentPresenter">
+                        <Setter Property="Background" Value="#595959" />
                     </Style>
                 </StackPanel.Styles>
                 <ItemsControl Foreground="Transparent" Background="Transparent" Items="{Binding Mods}">
@@ -80,16 +105,14 @@
                         <DataTemplate>
                             <!--Installed mod (tracked)-->
                             <Grid Tag="{Binding Name}">
-                                <StackPanel HorizontalAlignment="Stretch">
-                                    <!--This button is what I used to make expanders-->
-                                    <!--If the mod is duplicated, Color_Cyan is used,
-					otherwise Color_BBB-->
-                                    <Button Height="75"
-                                            HorizontalAlignment="Stretch"
-                                            HorizontalContentAlignment="Left"
-                                            VerticalContentAlignment="Center"
-                                            Foreground="{Binding ., Converter={StaticResource DuplicateConverter}}" Content="{Binding Name}" BorderBrush="Transparent" Command="{Binding $parent[ItemsControl].DataContext.SelectedItemCommand}" CommandParameter="{Binding .}" />
-                                    <StackPanel Tag="ExpanderContent" IsVisible="{Binding IsExpanded}" Margin="50,0,0,0">
+                                <Expander>
+                                    <Expander.Header>
+                                        <Label Content="{Binding Name}"
+                                               Height="50"
+                                               HorizontalContentAlignment="Left"
+                                               VerticalContentAlignment="Center" />
+                                    </Expander.Header>
+                                    <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="50,0,0,5">
                                         <TextBlock Text="{Binding XamlDescription}" />
                                         <!--
 						If up-to-date: No additional content
@@ -97,13 +120,17 @@
 						If newer: Adds " (WOW MOD DEV)", Color_Purple (inspired by the mod)
 						if right version, but hash doesn't match: Adds " (Modified)", Color_Yellow
 						-->
-                                        <TextBlock Text="{Binding ., Converter={StaticResource VersionTextConverter}}" Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
+                                        <TextBlock Text="{Binding ., Converter={StaticResource VersionTextConverter}}" 
+                                                   Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
                                         <!--If mod.HomePage.IsValidUrl() is false, this field is omitted-->
                                         <!--Maybe could be turned into a reactive command with the homepage as parameter?-->
-                                        <Button IsVisible="{Binding IsValidHomePage}" Command="{Binding $parent[ItemsControl].DataContext.OpenUrlCommand}" CommandParameter="{Binding HomePage}" Tag="mod.Homepage" Margin="0,5,0,5">
-                                            Homepage
-                                        </Button>
+                                        <Button IsVisible="{Binding IsValidHomePage}"
+                                                Command="{Binding $parent[ItemsControl].DataContext.OpenUrlCommand}"
+                                                CommandParameter="{Binding HomePage}" 
+                                                Tag="mod.Homepage" 
+                                                Margin="0,5,0,0" 
+                                                Content="HomePage" />
                                         <!--If there are no dependencies, this field is omitted-->
                                         <StackPanel IsVisible="{Binding DependencyCount}">
                                             <TextBlock>Dependencies:</TextBlock>
@@ -126,8 +153,8 @@
                                             <TextBlock Text="{Binding FileName, StringFormat='{}{0}.disabled'}" />
                                         </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
 
+                                </Expander>
 
                                 <!--The controls go here (Update, disable, etc.)-->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
@@ -136,8 +163,9 @@
                                                   IsEnabled="{Binding IsLocal}"
                                                   Command="{Binding $parent[ItemsControl].DataContext.ToggleModCommand}"
                                                   CommandParameter="{Binding .}"
-                                                  Foreground="#ddd">
-                                    </ToggleSwitch>
+                                                  OnContent="Enabled"
+                                                  OffContent="Disabled"
+                                                  Foreground="#ddd" />
 
                                     <Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}" Width="75" Height="30"
                                             Foreground="{Binding ., Converter={StaticResource ReinstallConverter}}"

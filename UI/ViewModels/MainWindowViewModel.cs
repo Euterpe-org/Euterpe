@@ -330,9 +330,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         if (disabledDependencies.Length > 0)
         {
             var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
-            _settings.AskEnableDependenciesWhenInstalling = await EnableDependencies(
+            _settings.AskEnableDependenciesWhenInstalling = await ChangeDependenciesState(
                 $"Do you want to enable {item.Name}'s dependency {disabledDependencyNames}?",
-                disabledDependencies, _settings.AskEnableDependenciesWhenInstalling);
+                disabledDependencies, _settings.AskEnableDependenciesWhenInstalling, false);
         }
 
 
@@ -379,9 +379,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                             return;
                         }
 
-                        _settings.AskDisableDependenciesWhenDisabling = await DisableReverseDependencies(
+                        _settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
                             $"Do you want to disable the mods depend on {item.Name} as well?",
-                            enabledReverseDependencies, _settings.AskDisableDependenciesWhenDisabling);
+                            enabledReverseDependencies, _settings.AskDisableDependenciesWhenDisabling, true);
                     }
 
                     break;
@@ -392,9 +392,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     if (disabledDependencies.Length > 0)
                     {
                         var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
-                        _settings.AskEnableDependenciesWhenEnabling = await EnableDependencies(
+                        _settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
                             $"Do you want to enable {item.Name}'s dependency {disabledDependencyNames} as well?",
-                            disabledDependencies, _settings.AskEnableDependenciesWhenEnabling);
+                            disabledDependencies, _settings.AskEnableDependenciesWhenEnabling, false);
                     }
 
                     break;
@@ -445,9 +445,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 var result = await _dialogueService.CreateConfirmMessageBox($"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to delete this mod?");
                 if (!result)
                     return;
-                _settings.AskDisableDependenciesWhenDeleting = await DisableReverseDependencies(
+                _settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
                     $"Do you want to disable the mods depend on {item.Name}?",
-                    enabledReverseDependencies, _settings.AskDisableDependenciesWhenDeleting);
+                    enabledReverseDependencies, _settings.AskDisableDependenciesWhenDeleting, true);
             }
 
             File.Delete(path);
@@ -492,7 +492,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         return reverseDependencies;
     }
 
-    private async Task<AskType> EnableDependencies(string content, IEnumerable<Mod> disabledDependencies, AskType askType)
+    private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod> dependencies, AskType askType, bool turnOff)
     {
         switch (askType)
         {
@@ -501,10 +501,10 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 switch (askResult)
                 {
                     case "Yes":
-                        await EnableMod();
+                        await ChangeState();
                         break;
                     case "Yes and Don't ask Again":
-                        await EnableMod();
+                        await ChangeState();
                         askType = AskType.YesAndNoAsk;
                         break;
                     case "No and Don't ask Again":
@@ -514,58 +514,18 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
                 break;
             case AskType.YesAndNoAsk:
-                await EnableMod();
+                await ChangeState();
                 break;
             case AskType.NoAndNoAsk:
             default: break;
         }
 
-        async Task EnableMod()
+        async Task ChangeState()
         {
-            foreach (var dependency in disabledDependencies)
+            foreach (var dependency in dependencies)
             {
-                dependency.IsDisabled = false;
+                dependency.IsDisabled = turnOff;
                 await OnToggleMod(dependency);
-            }
-        }
-
-        return askType;
-    }
-
-    private async Task<AskType> DisableReverseDependencies(string content, IEnumerable<Mod> enabledReverseDependencies, AskType askType)
-    {
-        switch (askType)
-        {
-            case AskType.Always:
-                var askResult = await _dialogueService.CreateCustomConfirmMessageBox(content, 4);
-                switch (askResult)
-                {
-                    case "Yes":
-                        await DisableMod();
-                        break;
-                    case "Yes and Don't ask Again":
-                        await DisableMod();
-                        askType = AskType.YesAndNoAsk;
-                        break;
-                    case "No and Don't ask Again":
-                        askType = AskType.NoAndNoAsk;
-                        break;
-                }
-
-                break;
-            case AskType.YesAndNoAsk:
-                await DisableMod();
-                break;
-            case AskType.NoAndNoAsk:
-            default: break;
-        }
-
-        async Task DisableMod()
-        {
-            foreach (var reverseDependency in enabledReverseDependencies)
-            {
-                reverseDependency.IsDisabled = true;
-                await OnToggleMod(reverseDependency);
             }
         }
 
