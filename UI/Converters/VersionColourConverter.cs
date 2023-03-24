@@ -12,7 +12,7 @@ public class VersionColourConverter : IValueConverter
     private readonly IBrush Default = "#BFBFBF".ToBrush();
     private readonly IBrush Blue = "#82AAFF".ToBrush();
     private readonly IBrush Red = "#FD2617".ToBrush();
-    private readonly IBrush Purple = "#A000E6".ToBrush();
+    private readonly IBrush Purple = "#BE3CF0".ToBrush();
     private readonly IBrush Yellow = "#E19600".ToBrush();
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
