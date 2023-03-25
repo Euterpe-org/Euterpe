@@ -20,6 +20,7 @@ using DynamicData;
 using DynamicData.Binding;
 using ICSharpCode.SharpZipLib.Zip;
 using MelonLoader;
+using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
@@ -31,7 +32,6 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
-    [ObservableProperty] private Mod _selectedItem;
     [ObservableProperty] private string _filter;
     [ObservableProperty] private FilterType _categoryFilterType;
 
@@ -218,6 +218,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             if (localMods.Count(x => x.Name == localMod.Name) > 1)
             {
                 localMod.IsDuplicated = true;
+                localMod.DuplicatedModNames = string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
 
             isTracked[localModIdx] = true;
@@ -241,10 +242,16 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         for (var i = 0; i < isTracked.Length; i++)
         {
-            if (!isTracked[i] && localMods.Count(x => x.Name == localMods[i]!.Name) == 1)
+            if (isTracked[i]) continue;
+            var localMod = localMods[i];
+            if (localMods.FirstOrDefault(x => x.Name == localMod.Name)!.IsTracked) continue;
+            if (localMods.Count(x => x.Name == localMod.Name) > 1)
             {
-                _sourceCache.AddOrUpdate(localMods[i]!);
+                localMod.IsDuplicated = true;
+                localMod.DuplicatedModNames = string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
+
+            _sourceCache.AddOrUpdate(localMods[i]!);
         }
     }
 
@@ -429,6 +436,13 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     [RelayCommand]
     private async Task OnDeleteMod(Mod item)
     {
+        if (item.IsDuplicated)
+        {
+            await _dialogueService.CreateMessageBox("Notice", $"Please manually choose and delete the duplicated mod\n{item.DuplicatedModNames}", icon: Icon.Info);
+            await OpenModsFolder();
+            return;
+        }
+
         var path = Path.Join(ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
@@ -674,13 +688,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     [RelayCommand]
     private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
-
-    [RelayCommand]
-    private void OnSelectedItem(Mod item)
-    {
-        item.IsExpanded = !item.IsExpanded;
-        SelectedItem = item;
-    }
 
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
     partial void OnCategoryFilterTypeChanged(FilterType value) => _sourceCache.Refresh();

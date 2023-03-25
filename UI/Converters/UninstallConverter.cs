@@ -7,9 +7,9 @@ using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Converters;
 
-public class ReinstallConverter : IValueConverter
+public class UninstallConverter : IValueConverter
 {
-    private readonly IBrush Default = "#BFBFBF".ToBrush();
+    private readonly IBrush Default = "#FEFEFE".ToBrush();
     private readonly IBrush Red = "#FD2617".ToBrush();
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)

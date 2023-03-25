@@ -9,11 +9,11 @@ namespace MuseDashModToolsUI.Converters;
 
 public class VersionColourConverter : IValueConverter
 {
-    private readonly IBrush Default = "#BFBFBF".ToBrush();
-    private readonly IBrush Blue = "#82AAFF".ToBrush();
+    private readonly IBrush Default = "#CCC".ToBrush();
+    private readonly IBrush Blue = "#6D96FF".ToBrush();
     private readonly IBrush Red = "#FD2617".ToBrush();
-    private readonly IBrush Purple = "#A000E6".ToBrush();
-    private readonly IBrush Yellow = "#E19600".ToBrush();
+    private readonly IBrush Purple = "#AC2AE6".ToBrush();
+    private readonly IBrush Orange = "#E19600".ToBrush();
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
@@ -28,7 +28,7 @@ public class VersionColourConverter : IValueConverter
                 case UpdateState.Newer:
                     return Purple;
                 case UpdateState.Modified:
-                    return Yellow;
+                    return Orange;
                 case UpdateState.Normal:
                 default:
                 {
