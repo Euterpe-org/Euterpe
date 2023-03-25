@@ -5,7 +5,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
-        xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -150,15 +149,17 @@
                      AcceptsReturn="False">
 
                 <TextBox.InnerRightContent>
-                    <icons:MaterialIconExt Kind="Search" Size="24" />
+                    <Image Source="/Assets/magnify.png" />
                 </TextBox.InnerRightContent>
             </TextBox>
         </controls:Card>
 
         <!--About-->
         <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0">
-            <MenuItem Width="50" Height="50" Header="{icons:MaterialIconExt DotsVertical, Size=30}">
-
+            <MenuItem Width="50" Height="50">
+                <MenuItem.Header>
+                    <Image Source="/Assets/dots_vertical.png" />
+                </MenuItem.Header>
                 <!--Project-->
                 <MenuItem Header="About Project"
                           Command="{Binding OpenUrlCommand}"
@@ -169,12 +170,18 @@
                 </MenuItem>
 
                 <!--Creators-->
-                <MenuItem Header="Creators" Icon="{icons:MaterialIconExt Kind=AccountsGroup,Size=20}">
+                <MenuItem Header="Creators">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/account_group.png" />
+                    </MenuItem.Icon>
 
                     <!--lxy-->
                     <MenuItem Header="lxy">
                         <!--Account-->
-                        <MenuItem Header="Social Account" Icon="{icons:MaterialIconExt Kind=Account,Size=20}">
+                        <MenuItem Header="Social Account">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/account.png" />
+                            </MenuItem.Icon>
                             <MenuItem Header="BiliBili"
                                       Command="{Binding OpenUrlCommand}"
                                       CommandParameter="https://space.bilibili.com/255895683">
@@ -184,17 +191,26 @@
                             </MenuItem>
                             <MenuItem Header="Github"
                                       Command="{Binding OpenUrlCommand}"
-                                      CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI"
-                                      Icon="{icons:MaterialIconExt Kind=Github,Size=20}" />
+                                      CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/github.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem Header="Twitch"
                                       Command="{Binding OpenUrlCommand}"
-                                      CommandParameter="https://www.twitch.tv/lxymahatma"
-                                      Icon="{icons:MaterialIconExt Kind=Twitch,Size=20}" />
+                                      CommandParameter="https://www.twitch.tv/lxymahatma">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/twitch.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
 
                         </MenuItem>
 
                         <!--Donate-->
-                        <MenuItem Header="Donate" Icon="{icons:MaterialIconExt Kind=HandCoin, Size=20}">
+                        <MenuItem Header="Donate">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/hand_coin.png" />
+                            </MenuItem.Icon>
                             <MenuItem Header="爱发电"
                                       Command="{Binding OpenUrlCommand}"
                                       CommandParameter="https://afdian.net/a/lxymahatma">
@@ -206,7 +222,7 @@
                                       Command="{Binding OpenUrlCommand}"
                                       CommandParameter="https://www.patreon.com/user?u=58140035">
                                 <MenuItem.Icon>
-                                    <Image Source="/Assets/Patreon.png" />
+                                    <Image Source="/Assets/patreon.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
@@ -264,7 +280,7 @@
                                         <TextBlock Classes="Body2" Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                    Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
-                                        <Button IsVisible="{Binding IsValidHomePage}"
+                                        <Button Classes="Dark" IsVisible="{Binding IsValidHomePage}"
                                                 Command="{ReflectionBinding $parent[ItemsControl].DataContext.OpenUrlCommand}"
                                                 CommandParameter="{Binding HomePage}"
                                                 Tag="mod.Homepage"
