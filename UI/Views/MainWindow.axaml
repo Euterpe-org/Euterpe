@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+        xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -35,6 +36,7 @@
     </Window.Styles>
 
     <Grid ColumnDefinitions="140,*">
+        <!--The left navigation part-->
         <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True" LeftDrawerWidth="140">
             <controls:NavigationDrawer.LeftDrawerContent>
                 <ListBox Name="DrawerList" Focusable="{Binding ElementName=DrawerList}">
@@ -100,6 +102,8 @@
                 </ListBox>
             </controls:NavigationDrawer.LeftDrawerContent>
         </controls:NavigationDrawer>
+
+        <!--Buttons-->
         <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <StackPanel.Styles>
                 <Style Selector="Button">
@@ -118,27 +122,106 @@
             <Button Command="{Binding ChoosePathCommand}" Content="Path" />
             <Button Command="{Binding OpenModsFolderCommand}" Content="Mods" />
         </StackPanel>
+
+        <!--Separator for column-->
         <Separator Grid.Column="0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Stretch"
                    Margin="140,0,0,0" Width="1"
                    Background="#333333"
                    BorderBrush="#333333" />
-        <TextBox Grid.Column="1" x:Name="Input_SearchFilter"
-                 Margin="14,0,0,0"
-                 Text="{Binding Filter}"
-                 Height="50"
-                 Background="#0000"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Top"
-                 TextWrapping="NoWrap"
-                 Watermark="Search Mods"
-                 BorderBrush="#333333"
-                 BorderThickness="1"
-                 SelectionBrush="#282828"
-                 SelectionForegroundBrush="#bbb"
-                 CornerRadius="1"
-                 AcceptsReturn="False" />
+
+        <controls:Card Grid.Column="1"
+                       VerticalAlignment="Top"
+                       Height="49"
+                       BorderBrush="#333333"
+                       BorderThickness="0,0,0,1"
+                       Margin="0,0,15,0">
+            <!--Search bar-->
+            <TextBox x:Name="Input_SearchFilter"
+                     Classes="Solo"
+                     Background="#505050"
+                     Margin="12,0,200,0"
+                     Text="{Binding Filter}"
+                     Watermark="Search Mods"
+                     BorderBrush="#999999"
+                     BorderThickness="1"
+                     CornerRadius="1"
+                     AcceptsReturn="False">
+
+                <TextBox.InnerRightContent>
+                    <icons:MaterialIconExt Kind="Search" Size="24" />
+                </TextBox.InnerRightContent>
+            </TextBox>
+        </controls:Card>
+
+        <!--About-->
+        <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0">
+            <MenuItem Width="50" Height="50" Header="{icons:MaterialIconExt DotsVertical, Size=30}">
+
+                <!--Project-->
+                <MenuItem Header="About Project"
+                          Command="{Binding OpenUrlCommand}"
+                          CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/Icon.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!--Creators-->
+                <MenuItem Header="Creators" Icon="{icons:MaterialIconExt Kind=AccountsGroup,Size=20}">
+
+                    <!--lxy-->
+                    <MenuItem Header="lxy">
+                        <!--Account-->
+                        <MenuItem Header="Social Account" Icon="{icons:MaterialIconExt Kind=Account,Size=20}">
+                            <MenuItem Header="BiliBili"
+                                      Command="{Binding OpenUrlCommand}"
+                                      CommandParameter="https://space.bilibili.com/255895683">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/bilibili.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Github"
+                                      Command="{Binding OpenUrlCommand}"
+                                      CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI"
+                                      Icon="{icons:MaterialIconExt Kind=Github,Size=20}" />
+                            <MenuItem Header="Twitch"
+                                      Command="{Binding OpenUrlCommand}"
+                                      CommandParameter="https://www.twitch.tv/lxymahatma"
+                                      Icon="{icons:MaterialIconExt Kind=Twitch,Size=20}" />
+
+                        </MenuItem>
+
+                        <!--Donate-->
+                        <MenuItem Header="Donate" Icon="{icons:MaterialIconExt Kind=HandCoin, Size=20}">
+                            <MenuItem Header="爱发电"
+                                      Command="{Binding OpenUrlCommand}"
+                                      CommandParameter="https://afdian.net/a/lxymahatma">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/afdian.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Patreon"
+                                      Command="{Binding OpenUrlCommand}"
+                                      CommandParameter="https://www.patreon.com/user?u=58140035">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/Patreon.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                    </MenuItem>
+
+                    <!--Balint-->
+                    <MenuItem Header="Balint" />
+
+                    <!--Ultra_Rabbit-->
+                    <MenuItem Header="Ultra_Rabbit" />
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <!--Mods-->
         <ScrollViewer Grid.Column="1" Margin="0,50,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer" Orientation="Vertical">
                 <StackPanel.Styles>
@@ -202,6 +285,7 @@
                                     </StackPanel>
                                 </Expander>
 
+                                <!--Enable/Disable, Install, Uninstall, Reinstall-->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <StackPanel.Styles>
                                         <Style Selector="Button">
