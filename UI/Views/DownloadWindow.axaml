@@ -5,40 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
         x:Class="MuseDashModToolsUI.Views.DownloadWindow"
-        Title="DownloadWindow"
-        TransparencyLevelHint="AcrylicBlur"
-        ExtendClientAreaToDecorationsHint="True">
+        Title="DownloadWindow">
 
     <Design.DataContext>
         <vm:DownloadWindowViewModel />
     </Design.DataContext>
 
-    <Window.Styles>
-        <Style Selector="Button">
-            <Setter Property="Foreground" Value="#ddd" />
-            <Setter Property="Background" Value="#0000" />
-            <Setter Property="BorderBrush" Value="#707070" />
-            <Setter Property="CornerRadius" Value="1" />
-        </Style>
-    </Window.Styles>
-    <Panel>
-        <ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    BackgroundSource="Digger"
-                    TintColor="Black"
-                    TintOpacity="1"
-                    MaterialOpacity="0.65" />
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
-        <Panel Margin="40" />
-        <Grid RowDefinitions="*,*,*,*,50"
-              ShowGridLines="True">
-            <Image Grid.Row="0" Source="/Assets/ML_Icon.png" />
-            <TextBlock Grid.Row="1" Text="Downloading MelonLoader.zip" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Blue" />
-            <ProgressBar Grid.Row="2" Width="400" Height="20" ShowProgressText="True" Value="{Binding Percentage}" />
-            <TextBlock Grid.Row="3" Text="{Binding UnzipStatus}" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Button Grid.Row="4" Content="Finished" FontSize="20" Width="100" Height="50" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        </Grid>
-    </Panel>
+    
 </Window>

@@ -30,15 +30,9 @@ public class Mod : ReactiveObject
     [JsonIgnore] public bool IsShaMismatched { get; set; }
     [JsonIgnore] public bool IsDuplicated { get; set; }
 
-    [JsonIgnore] public string XamlDescription => $"{Description} \n\nAuthor: {Author} \nVersion: {Version}\nCompatible Game Version: {CompatibleGameVersion}";
-    private bool _isExpanded;
+    [JsonIgnore] public string? DuplicatedModNames { get; set; }
 
-    [JsonIgnore]
-    public bool IsExpanded
-    {
-        get => _isExpanded;
-        set => this.RaiseAndSetIfChanged(ref _isExpanded, value);
-    }
+    [JsonIgnore] public string XamlDescription => $"{Description} \n\nAuthor: {Author} \nVersion: {Version}\nCompatible Game Version: {CompatibleGameVersion}";
 
     public string? DownloadLink { get; set; }
     public string? HomePage { get; set; }

@@ -15,6 +15,7 @@
         CanResize="True">
 
     <Window.Resources>
+        <converters:DuplicateConverter x:Key="DuplicateConverter" />
         <converters:VersionColourConverter x:Key="VersionColourConverter" />
         <converters:UninstallConverter x:Key="UninstallConverter" />
         <converters:VersionTextConverter x:Key="VersionTextConverter" />
@@ -163,10 +164,12 @@
                                         <Label Height="80"
                                                HorizontalContentAlignment="Left"
                                                VerticalContentAlignment="Center">
-                                            <TextBlock Classes="Body2" Text="{Binding Name}" />
+                                            <TextBlock Classes="Body2"
+                                                       Text="{Binding Name}"
+                                                       Foreground="{Binding .,Converter={StaticResource DuplicateConverter}}" />
                                         </Label>
-
                                     </Expander.Header>
+
                                     <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,0,0,20">
                                         <StackPanel.Styles>
                                             <Style Selector="TextBlock">
@@ -187,17 +190,14 @@
                                                 Margin="0,5,0,0"
                                                 Content="HomePage" />
 
-                                        <StackPanel IsVisible="{Binding DependencyCount}">
+                                        <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
                                             <TextBlock Classes="Body2">Dependencies:</TextBlock>
                                             <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
                                         </StackPanel>
 
-                                        <StackPanel IsVisible="{Binding IsDuplicated}">
-                                            <TextBlock Text="{Binding FileName, StringFormat='Filename: {0}'}" />
-                                            <TextBlock>
-                                                Duplicated by:
-                                            </TextBlock>
-                                            <TextBlock Text="{Binding FileName, StringFormat='{}{0}.disabled'}" />
+                                        <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
+                                            <TextBlock Classes="Body2" Text="Duplicated by:" />
+                                            <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Expander>
