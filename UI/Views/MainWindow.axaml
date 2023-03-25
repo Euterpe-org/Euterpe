@@ -52,12 +52,54 @@
                         <Style Selector="ListBoxItem:selected ContentPresenter">
                             <Setter Property="Background" Value="#737373" />
                         </Style>
+                        <Style Selector="Label">
+                            <Setter Property="Width" Value="140" />
+                            <Setter Property="Height" Value="50" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <Setter Property="Background" Value="#0000" />
+                        </Style>
                     </ListBox.Styles>
-                    <TextBlock Classes="Body1" Text="All"  />
-                    <TextBlock Classes="Body1" Text="Installed" />
-                    <TextBlock Classes="Body1" Text="Enabled" />
-                    <TextBlock Classes="Body1" Text="Outdated" />
-                    <TextBlock Classes="Body1" Text="Incompatible" />
+                    <Label>
+                        <TextBlock Classes="Body1" Text="All" />
+                        <Interaction.Behaviors>
+                            <EventTriggerBehavior EventName="PointerPressed">
+                                <InvokeCommandAction Command="{Binding FilterAllCommand, Mode=OneWay}" />
+                            </EventTriggerBehavior>
+                        </Interaction.Behaviors>
+                    </Label>
+                    <Label>
+                        <TextBlock Classes="Body1" Text="Installed" />
+                        <Interaction.Behaviors>
+                            <EventTriggerBehavior EventName="PointerPressed">
+                                <InvokeCommandAction Command="{Binding FilterInstalledCommand, Mode=OneWay}" />
+                            </EventTriggerBehavior>
+                        </Interaction.Behaviors>
+                    </Label>
+                    <Label>
+                        <TextBlock Classes="Body1" Text="Enabled" />
+                        <Interaction.Behaviors>
+                            <EventTriggerBehavior EventName="PointerPressed">
+                                <InvokeCommandAction Command="{Binding FilterEnabledCommand, Mode=OneWay}" />
+                            </EventTriggerBehavior>
+                        </Interaction.Behaviors>
+                    </Label>
+                    <Label>
+                        <TextBlock Classes="Body1" Text="Outdated" />
+                        <Interaction.Behaviors>
+                            <EventTriggerBehavior EventName="PointerPressed">
+                                <InvokeCommandAction Command="{Binding FilterOutdatedCommand, Mode=OneWay}" />
+                            </EventTriggerBehavior>
+                        </Interaction.Behaviors>
+                    </Label>
+                    <Label>
+                        <TextBlock Classes="Body1" Text="Incompatible" />
+                        <Interaction.Behaviors>
+                            <EventTriggerBehavior EventName="PointerPressed">
+                                <InvokeCommandAction Command="{Binding FilterIncompatibleCommand, Mode=OneWay}" />
+                            </EventTriggerBehavior>
+                        </Interaction.Behaviors>
+                    </Label>
                 </ListBox>
             </controls:NavigationDrawer.LeftDrawerContent>
         </controls:NavigationDrawer>
@@ -122,10 +164,12 @@
                             <Grid Tag="{Binding Name}">
                                 <Expander>
                                     <Expander.Header>
-                                        <Label Content="{Binding Name}"
-                                               Height="80"
+                                        <Label Height="80"
                                                HorizontalContentAlignment="Left"
-                                               VerticalContentAlignment="Center" />
+                                               VerticalContentAlignment="Center">
+                                            <TextBlock Classes="Body2" Text="{Binding Name}" />
+                                        </Label>
+
                                     </Expander.Header>
                                     <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,0,0,20">
                                         <StackPanel.Styles>
@@ -133,9 +177,9 @@
                                                 <Setter Property="Foreground" Value="#CCC" />
                                             </Style>
                                         </StackPanel.Styles>
-                                        <TextBlock Text="{Binding XamlDescription}"/>
+                                        <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
 
-                                        <TextBlock Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
+                                        <TextBlock Classes="Body2" Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                    Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
                                         <Button IsVisible="{Binding IsValidHomePage}"
@@ -148,8 +192,8 @@
                                                 Content="HomePage" />
 
                                         <StackPanel IsVisible="{Binding DependencyCount}">
-                                            <TextBlock>Dependencies:</TextBlock>
-                                            <TextBlock Text="{Binding DependencyNames}" />
+                                            <TextBlock Classes="Body2">Dependencies:</TextBlock>
+                                            <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
                                         </StackPanel>
 
                                         <StackPanel IsVisible="{Binding IsDuplicated}">
@@ -165,8 +209,6 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <StackPanel.Styles>
                                         <Style Selector="Button">
-                                            <Setter Property="Foreground" Value="#CCC" />
-                                            <Setter Property="Background" Value="#505050" />
                                             <Setter Property="VerticalAlignment" Value="Top" />
                                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                                             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -183,19 +225,19 @@
                                                   CommandParameter="{Binding .}"
                                                   Foreground="#DDD" />
 
-                                    <Button IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
+                                    <Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
                                             Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
                                             Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Uninstall" />
 
-                                    <Button IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
+                                    <Button Classes="Dark" IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
                                             IsEnabled="{Binding !IsIncompatible}"
                                             Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
                                             CommandParameter="{Binding .}"
                                             Content="Install" />
 
-                                    <Button IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
+                                    <Button Classes="Dark" IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
                                             Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
                                             Command="{ReflectionBinding $parent[ItemsControl].DataContext.ReinstallModCommand}"
                                             CommandParameter="{Binding .}"
