@@ -31,7 +31,6 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
-    [ObservableProperty] private Mod _selectedItem;
     [ObservableProperty] private string _filter;
     [ObservableProperty] private FilterType _categoryFilterType;
 
@@ -674,13 +673,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     [RelayCommand]
     private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
-
-    [RelayCommand]
-    private void OnSelectedItem(Mod item)
-    {
-        item.IsExpanded = !item.IsExpanded;
-        SelectedItem = item;
-    }
 
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
     partial void OnCategoryFilterTypeChanged(FilterType value) => _sourceCache.Refresh();

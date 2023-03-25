@@ -14,10 +14,6 @@
         Width="1000" Height="600"
         CanResize="True">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel />
-    </Design.DataContext>
-
     <Window.Resources>
         <converters:VersionColourConverter x:Key="VersionColourConverter" />
         <converters:UninstallConverter x:Key="UninstallConverter" />
@@ -162,7 +158,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Tag="{Binding Name}">
-                                <Expander>
+                                <Expander Margin="0,0,15,0">
                                     <Expander.Header>
                                         <Label Height="80"
                                                HorizontalContentAlignment="Left"
