@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
@@ -16,23 +17,20 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
     [ObservableProperty] private bool _downloadFinished;
     [ObservableProperty] private string _downloadProgress = "Downloading progress: 0%";
 
+    private readonly ISettings _settings;
     private readonly IGitHubService _gitHubService;
     private readonly IDialogueService _dialogueService;
 
-    public DownloadWindowViewModel(IGitHubService gitHubService, IDialogueService dialogueService)
+    public DownloadWindowViewModel(ISettings settings, IGitHubService gitHubService, IDialogueService dialogueService)
     {
+        _settings = settings;
         _gitHubService = gitHubService;
         _dialogueService = dialogueService;
     }
 
-    public DownloadWindowViewModel(string gameFolderPath)
+    public async Task InstallMelonLoader()
     {
-        InstallMelonLoader(gameFolderPath);
-    }
-
-    private async void InstallMelonLoader(string gameFolderPath)
-    {
-        var zipPath = Path.Join(gameFolderPath, "MelonLoader.zip");
+        var zipPath = Path.Join(_settings.MuseDashFolder, "MelonLoader.zip");
         if (!File.Exists(zipPath))
         {
             try
@@ -55,7 +53,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         try
         {
             var fastZip = new FastZip();
-            fastZip.ExtractZip(zipPath, gameFolderPath, FastZip.Overwrite.Always, null, null, null, true);
+            fastZip.ExtractZip(zipPath, _settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
         }
         catch (Exception)
         {

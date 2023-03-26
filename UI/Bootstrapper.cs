@@ -2,6 +2,7 @@
 using System.Net.Http;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Models;
 using MuseDashModToolsUI.Services;
 using MuseDashModToolsUI.ViewModels;
 using Splat;
@@ -12,17 +13,22 @@ public static class Bootstrapper
 {
     public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
+        services.RegisterLazySingleton<ISettings>(() => new Settings());
         services.Register<IDialogueService>(() => new DialogueService()); // Call services.Register<T> and pass it lambda that creates instance of your service
         services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>())); // Call services.Register<T> and pass it lambda that creates instance of your service
         services.Register<ILocalService>(() => new LocalService()); // Call services.Register<T> and pass it lambda that creates instance of your service
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
+            resolver.GetRequiredService<ISettings>(),
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ILocalService>(),
-            resolver.GetRequiredService<IDialogueService>()));
+            resolver.GetRequiredService<IDialogueService>(),
+            resolver.GetRequiredService<IDownloadWindowViewModel>()));
         services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
+            resolver.GetRequiredService<ISettings>(),
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<IDialogueService>()));
     }
+
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)
     {
         var service = resolver.GetService<TService>();

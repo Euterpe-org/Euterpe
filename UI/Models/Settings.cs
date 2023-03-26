@@ -1,6 +1,8 @@
-﻿namespace MuseDashModToolsUI.Models;
+﻿using MuseDashModToolsUI.Contracts;
 
-public class Settings
+namespace MuseDashModToolsUI.Models;
+
+public class Settings : ISettings
 {
     public string? MuseDashFolder { get; set; }
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
@@ -11,11 +13,6 @@ public class Settings
 
     public Settings()
     {
-    }
-
-    public Settings(string? museDashFolder)
-    {
-        MuseDashFolder = museDashFolder;
     }
 }
 

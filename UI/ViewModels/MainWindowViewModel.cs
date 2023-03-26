@@ -36,24 +36,27 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
-    private Settings _settings = new();
     private bool _isValidPath;
     private string _currentGameVersion;
     private string ModsFolder => !string.IsNullOrEmpty(_settings.MuseDashFolder) ? Path.Join(_settings.MuseDashFolder, "Mods") : string.Empty;
 
+    private ISettings _settings;
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
     private readonly IDialogueService _dialogueService;
+    private readonly IDownloadWindowViewModel _downloadWindowViewModel;
 
     public MainWindowViewModel()
     {
     }
 
-    public MainWindowViewModel(IGitHubService gitHubService, ILocalService localService, IDialogueService dialogueService)
+    public MainWindowViewModel(ISettings settings, IGitHubService gitHubService, ILocalService localService, IDialogueService dialogueService, IDownloadWindowViewModel downloadWindowViewModel)
     {
+        _settings = settings;
         _gitHubService = gitHubService;
         _localService = localService;
         _dialogueService = dialogueService;
+        _downloadWindowViewModel = downloadWindowViewModel;
 
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(_filter) || x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase))
@@ -547,7 +550,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private async Task OnInstallMelonLoader()
     {
         if (!_isValidPath) return;
-        await DialogHost.Show(new DownloadWindowViewModel(_settings.MuseDashFolder!), "DownloadWindowDialog");
+        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog");
     }
 
     [RelayCommand]
