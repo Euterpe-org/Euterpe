@@ -19,6 +19,9 @@ public static class Bootstrapper
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ILocalService>(),
             resolver.GetRequiredService<IDialogueService>()));
+        services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
+            resolver.GetRequiredService<IGitHubService>(),
+            resolver.GetRequiredService<IDialogueService>()));
     }
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)
     {

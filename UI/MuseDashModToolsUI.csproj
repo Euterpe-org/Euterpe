@@ -31,7 +31,7 @@
 		<TrimmableAssembly Include="Avalonia.Themes.Default" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="AssetsTools.NET" Version="3.0.0-preview2" />
+		<PackageReference Include="AssetsTools.NET" Version="3.0.0-preview3" />
 		<PackageReference Include="Avalonia" Version="0.10.19" />
 		<PackageReference Include="Avalonia.Desktop" Version="0.10.19" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->

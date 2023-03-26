@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reactive.Concurrency;
 using System.Security;
 using System.Text;
 using System.Text.Json;
@@ -16,15 +15,14 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DialogHostAvalonia;
 using DynamicData;
 using DynamicData.Binding;
-using ICSharpCode.SharpZipLib.Zip;
 using MelonLoader;
 using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
-using ReactiveUI;
 
 #pragma warning disable CS8618
 
@@ -59,16 +57,16 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(_filter) || x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => _categoryFilterType != FilterType.Enabled || (_categoryFilterType == FilterType.Enabled && x is { IsDisabled: false, IsLocal: true }))
-            .Filter(x => _categoryFilterType != FilterType.Outdated || (_categoryFilterType == FilterType.Outdated && x.State == UpdateState.Outdated))
-            .Filter(x => _categoryFilterType != FilterType.Installed || (_categoryFilterType == FilterType.Installed && x.IsLocal))
-            .Filter(x => _categoryFilterType != FilterType.Incompatible || (_categoryFilterType == FilterType.Incompatible && x is { IsIncompatible: true, IsLocal: true }))
+            .Filter(x => _categoryFilterType != FilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
+            .Filter(x => _categoryFilterType != FilterType.Outdated || x.State == UpdateState.Outdated)
+            .Filter(x => _categoryFilterType != FilterType.Installed || x.IsLocal)
+            .Filter(x => _categoryFilterType != FilterType.Incompatible || x is { IsIncompatible: true, IsLocal: true })
             .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
             .Bind(out _mods)
             .Subscribe();
 
-        RxApp.MainThreadScheduler.Schedule(InitializeSettings);
-        //RxApp.MainThreadScheduler.Schedule(_gitHubService.CheckUpdates);
+        InitializeSettings();
+        //_gitHubService.CheckUpdates;
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
 
@@ -94,7 +92,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             _settings = JsonSerializer.Deserialize<Settings>(text)!;
             InitializeModList();
         }
-        catch (Exception)
+        catch
         {
             // ignored
         }
@@ -129,12 +127,12 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
             var cfgFilePath = Path.Join(_settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
             if (!File.Exists(cfgFilePath))
-                await File.WriteAllTextAsync(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
+                await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
             else
             {
                 var path = await File.ReadAllTextAsync(cfgFilePath);
-                if (path != Process.GetCurrentProcess().MainModule!.FileName)
-                    await File.WriteAllTextAsync(cfgFilePath, Process.GetCurrentProcess().MainModule!.FileName);
+                if (path != Environment.ProcessPath)
+                    await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
             }
 
             await ReadGameVersion();
@@ -300,17 +298,17 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             switch (ex)
             {
                 case HttpRequestException:
-                    errors.AppendLine($"Mod installation failed\nAre you online? {ex.ToString()}");
+                    errors.AppendLine($"Mod installation failed\nAre you online? {ex}");
                     break;
 
                 case SecurityException:
                 case UnauthorizedAccessException:
                 case IOException:
-                    errors.AppendLine($"Mod installation failed\nIs the game running? {ex.ToString()}");
+                    errors.AppendLine($"Mod installation failed\nIs the game running? {ex}");
                     break;
 
                 default:
-                    errors.AppendLine($"Mod installation failed\n{ex.ToString()}");
+                    errors.AppendLine($"Mod installation failed\n{ex}");
                     break;
             }
         }
@@ -329,7 +327,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             }
             catch (Exception ex)
             {
-                errors.AppendLine($"Dependency failed to install\n {ex.ToString()}");
+                errors.AppendLine($"Dependency failed to install\n {ex}");
             }
         }
 
@@ -341,7 +339,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 $"Do you want to enable {item.Name}'s dependency {disabledDependencyNames}?",
                 disabledDependencies, _settings.AskEnableDependenciesWhenInstalling, false);
         }
-
 
         if (errors.Length > 0)
         {
@@ -550,48 +547,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private async Task OnInstallMelonLoader()
     {
         if (!_isValidPath) return;
-        var zipPath = Path.Join(_settings.MuseDashFolder, "MelonLoader.zip");
-        if (!File.Exists(zipPath))
-        {
-            try
-            {
-                await _gitHubService.DownloadMelonLoader("MelonLoader.zip", zipPath);
-            }
-            catch (Exception ex)
-            {
-                if (ex is HttpRequestException)
-                {
-                    await _dialogueService.CreateErrorMessageBox("MelonLoader download failed due to internet\nAre you online?");
-                    return;
-                }
-
-                await _dialogueService.CreateErrorMessageBox($"MelonLoader download failed\n{ex}");
-                return;
-            }
-        }
-
-        try
-        {
-            var fastZip = new FastZip();
-            fastZip.ExtractZip(zipPath, _settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
-        }
-        catch (Exception)
-        {
-            await _dialogueService.CreateErrorMessageBox($"Cannot unzip MelonLoader.zip in\n{zipPath}\nPlease make sure your game is not running\nThen try manually unzip");
-            return;
-        }
-
-        try
-        {
-            File.Delete(zipPath);
-        }
-        catch (Exception)
-        {
-            await _dialogueService.CreateErrorMessageBox($"Failed to delete MelonLoader.zip in\n{zipPath}\nTry manually delete");
-            return;
-        }
-
-        await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully installed\n");
+        await DialogHost.Show(new DownloadWindowViewModel(_settings.MuseDashFolder!), "DownloadWindowDialog");
     }
 
     [RelayCommand]
@@ -640,7 +596,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 _settings.MuseDashFolder = path;
                 var json = JsonSerializer.Serialize(_settings);
                 await File.WriteAllTextAsync("Settings.json", json);
-                RxApp.MainThreadScheduler.Schedule(InitializeModList);
+                InitializeModList();
             }
 
             break;

@@ -1,5 +1,5 @@
 ﻿namespace MuseDashModToolsUI.Contracts.ViewModels;
 
-public interface IMainWindowViewModel
+public interface IDownloadWindowViewModel
 {
 }

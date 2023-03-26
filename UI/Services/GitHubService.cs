@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -65,19 +66,38 @@ public class GitHubService : IGitHubService
         await result.Content.CopyToAsync(fs);
     }
 
-    public async Task DownloadMelonLoader(string link, string path)
+    public async Task DownloadMelonLoader(string path, double downloadProgress, bool finished)
     {
-        byte[] result;
+        Debug.WriteLine("runed");
+        HttpResponseMessage result;
         try
         {
-            result = await _client.GetByteArrayAsync(PrimaryLink + BaseLink + link);
+            result = await _client.GetAsync(PrimaryLink + BaseLink + "MelonLoader.zip");
         }
         catch (Exception)
         {
-            result = await _client.GetByteArrayAsync(SecondaryLink + BaseLink + link);
+            result = await _client.GetAsync(SecondaryLink + BaseLink + "MelonLoader.zip");
         }
 
-        await File.WriteAllBytesAsync(path, result);
+        Debug.WriteLine("Runed2");
+        var totalLength = result.Content.Headers.ContentLength;
+        var contentStream = await result.Content.ReadAsStreamAsync();
+        await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+        var buffer = new byte[5 * 1024];
+        var readLength = 0L;
+        int length;
+        while ((length = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+        {
+            readLength += length;
+            if (totalLength > 0)
+            {
+                downloadProgress = Math.Round((double)readLength / totalLength.Value * 100, 2);
+            }
+
+            fs.Write(buffer, 0, length);
+        }
+
+        finished = true;
     }
 
     public async void CheckUpdates()
