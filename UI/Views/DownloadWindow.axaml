@@ -3,13 +3,40 @@
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
+        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+        xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
         x:Class="MuseDashModToolsUI.Views.DownloadWindow"
-        Title="DownloadWindow">
+        x:DataType="vm:DownloadWindowViewModel"
+        x:CompileBindings="True"
+        Title="DownloadWindow"
+        Width="400"
+        Height="250">
 
-    <Design.DataContext>
-        <vm:DownloadWindowViewModel />
-    </Design.DataContext>
+    <Grid RowDefinitions="*,*,50">
+        <Image Grid.Row="0"
+               VerticalAlignment="Top"
+               Width="50"
+               Source="/Assets/ML_Icon.png" />
+        <Border Grid.Row="0"
+                VerticalAlignment="Center"
+                Margin="0,20,0,0">
+            <TextBlock Classes="Headline5"
+                       TextAlignment="Center"
+                       Foreground="#6D96FF"
+                       Text="Downloading MelonLoader" />
+        </Border>
 
-    
+        <controls:Card Grid.Row="1" Width="250" Height="80">
+            <ProgressBar Margin="20,0"
+                         Value="{Binding Percentage}" />
+        </controls:Card>
+        <Button Grid.Row="2"
+                IsEnabled="{Binding DownloadFinished}"
+                Classes="Dark"
+                Margin="5"
+                HorizontalAlignment="Right"
+                Content="Finished"/>
+    </Grid>
+
 </Window>
