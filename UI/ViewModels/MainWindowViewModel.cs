@@ -374,7 +374,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             switch (item.IsDisabled)
             {
                 case true:
-                {
                     var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
                     if (enabledReverseDependencies.Length > 0)
                     {
@@ -392,9 +391,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     }
 
                     break;
-                }
                 case false:
-                {
                     var disabledDependencies = SearchDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
                     if (disabledDependencies.Length > 0)
                     {
@@ -405,7 +402,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                     }
 
                     break;
-                }
             }
 
             File.Move(

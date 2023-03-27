@@ -57,8 +57,8 @@
                     <controls:Card Grid.Row="1" Width="250" Height="80">
                         <StackPanel VerticalAlignment="Center">
                             <ProgressBar Margin="20,20,20,0"
-                                         Value="{Binding Percentage}" />
-                            <TextBlock Text="Downloading progress: 0%" 
+                                         Value="{ReflectionBinding Percentage}" />
+                            <TextBlock Text="{ReflectionBinding DownloadProgress}" 
                                        TextAlignment="Center"
                                        Margin="0,10,0,0"/>
                         </StackPanel>
