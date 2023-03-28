@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -47,7 +46,6 @@ public class GitHubService : IGitHubService
         }
 
         return mods;
-
     }
 
     public async Task DownloadModAsync(string link, string path)
@@ -68,7 +66,6 @@ public class GitHubService : IGitHubService
 
     public async Task DownloadMelonLoader(string path, double downloadProgress, bool finished)
     {
-        Debug.WriteLine("runed");
         HttpResponseMessage result;
         try
         {
@@ -79,7 +76,6 @@ public class GitHubService : IGitHubService
             result = await _client.GetAsync(SecondaryLink + BaseLink + "MelonLoader.zip");
         }
 
-        Debug.WriteLine("Runed2");
         var totalLength = result.Content.Headers.ContentLength;
         var contentStream = await result.Content.ReadAsStreamAsync();
         await using var fs = new FileStream(path, FileMode.OpenOrCreate);

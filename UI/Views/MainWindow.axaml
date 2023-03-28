@@ -39,8 +39,9 @@
 
     <dialogHostAvalonia:DialogHost Identifier="DownloadWindowDialog">
         <dialogHostAvalonia:DialogHost.DataTemplates>
+            <!--Download Dialog Content-->
             <DataTemplate DataType="vm:DownloadWindowViewModel">
-                <Grid RowDefinitions="100,100,50" Width="350">
+                <Grid Width="350" Height="250" RowDefinitions="*,*,50">
                     <Image Grid.Row="0"
                            VerticalAlignment="Top"
                            Width="50"
@@ -58,9 +59,9 @@
                         <StackPanel VerticalAlignment="Center">
                             <ProgressBar Margin="20,20,20,0"
                                          Value="{ReflectionBinding Percentage}" />
-                            <TextBlock Text="{ReflectionBinding DownloadProgress}" 
+                            <TextBlock Text="{ReflectionBinding DownloadProgress}"
                                        TextAlignment="Center"
-                                       Margin="0,10,0,0"/>
+                                       Margin="0,10,0,0" />
                         </StackPanel>
                     </controls:Card>
 
@@ -70,13 +71,14 @@
                             Margin="5"
                             HorizontalAlignment="Right"
                             Content="Finished"
-                            Command="{ReflectionBinding RelativeSource={RelativeSource FindAncestor, AncestorType=dialogHostAvalonia:DialogHost}, Path=CloseDialogCommand}"/>
+                            Command="{ReflectionBinding RelativeSource={RelativeSource FindAncestor, AncestorType=dialogHostAvalonia:DialogHost}, Path=CloseDialogCommand}" />
                 </Grid>
             </DataTemplate>
-
         </dialogHostAvalonia:DialogHost.DataTemplates>
+
         <!--Main Window-->
         <Grid ColumnDefinitions="140,*">
+
             <!--The left navigation part-->
             <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True" LeftDrawerWidth="140">
                 <controls:NavigationDrawer.LeftDrawerContent>
@@ -154,6 +156,9 @@
                         <Setter Property="Height" Value="50" />
                         <Setter Property="Margin" Value="0,5" />
                     </Style>
+                    <Style Selector="Button TextBlock">
+                        <Setter Property="TextAlignment" Value="Center" />
+                    </Style>
                     <Style Selector="Button:pointerover ContentPresenter">
                         <Setter Property="Background" Value="#808080" />
                     </Style>
@@ -172,14 +177,15 @@
                        Background="#333333"
                        BorderBrush="#333333" />
 
+            <!--Search bar-->
             <controls:Card Grid.Column="1"
                            VerticalAlignment="Top"
                            Height="49"
                            BorderBrush="#333333"
                            BorderThickness="0,0,0,1"
                            Margin="0,0,15,0">
-                <!--Search bar-->
-                <TextBox x:Name="Input_SearchFilter"
+
+                <TextBox Name="Input_SearchFilter"
                          Classes="Solo"
                          Background="#505050"
                          Margin="12,0,200,0"
@@ -196,38 +202,67 @@
                 </TextBox>
             </controls:Card>
 
-            <!--About-->
-            <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0">
-                <MenuItem Width="50" Height="50">
-                    <MenuItem.Header>
-                        <Image Source="/Assets/dots_vertical.png" />
-                    </MenuItem.Header>
-                    <!--Project-->
-                    <MenuItem Header="About Project"
-                              Command="{Binding OpenUrlCommand}"
-                              CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
-                        <MenuItem.Icon>
-                            <Image Source="/Assets/Icon.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
+            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog" CloseOnClickAway="True">
+                <dialogHostAvalonia:DialogHost.DialogContent>
+                    <!--About Dialog Content-->
+                    <Grid RowDefinitions="100,100,150,80" Width="800">
+						<Button Grid.Row="0"
+                                Width="150"
+                                Classes="Flat"
+                                HorizontalAlignment="Center"
+                                ToolTip.Tip="Muse Dash Modding Community Website"
+                                Command="{Binding OpenUrlCommand}"
+                                CommandParameter="https://mdmc.moe/"
+                                Margin="-500,0,0,0">
+                            <Image Source="/Assets/MDMC_Website.png" Width="150" />
+                        </Button>
 
-                    <!--Creators-->
-                    <MenuItem Header="Creators">
-                        <MenuItem.Icon>
-                            <Image Source="/Assets/account_group.png" />
-                        </MenuItem.Icon>
+                        <Button Grid.Row="0"
+                                Classes="Flat"
+                                HorizontalAlignment="Center"
+                                ToolTip.Tip="Project"
+                                Command="{Binding OpenUrlCommand}"
+                                CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
+                            <Image Source="/Assets/Icon.png" Margin="-7,0,0,5"/>
+                        </Button>
+
+                        <Button Grid.Row="0"
+                                Classes="Flat"
+                                HorizontalAlignment="Center"
+                                ToolTip.Tip="Muse Dash Modding Community Discord"
+                                Command="{Binding OpenUrlCommand}"
+                                CommandParameter="https://discord.gg/mdmc"
+                                Margin="500,0,0,0">
+                            <Image Source="/Assets/MDMC_Discord.png" Width="80"/>
+                        </Button>
+
+                        <StackPanel Grid.Row="1" VerticalAlignment="Top">
+                            <TextBlock Classes="Headline4"
+                                       Text="About Muse Dash Mod Tools"
+                                       TextAlignment="Center" />
+                            <TextBlock Classes="Headline6"
+                                       Text="Muse Dash Mod Tools aims for making modding muse dash easier&#x0a;And its development cannot be done without those people's effort"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center" />
+                        </StackPanel>
 
                         <!--lxy-->
-                        <MenuItem Header="lxy">
-                            <MenuItem.Icon>
-                                <Image Source="/Assets/lxy.png" />
-                            </MenuItem.Icon>
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Width="150" Height="150" Margin="25,0">
+                            <StackPanel>
+                                <Image Width="60" Height="60" Source="/Assets/lxy.png" />
+                                <TextBlock Classes="Body1"
+                                           Text="lxy"
+                                           TextAlignment="Center" />
+                                <TextBlock Classes="Body3"
+                                           Text="For planning the project and rewriting ui"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center" />
+                            </StackPanel>
+                        </controls:Card>
 
+                        <Menu Grid.Row="3" HorizontalAlignment="Left">
                             <!--Account-->
-                            <MenuItem Header="Social Account">
-                                <MenuItem.Icon>
-                                    <Image Source="/Assets/account.png" />
-                                </MenuItem.Icon>
+                            <MenuItem Header="Social Account" Width="100">
                                 <MenuItem Header="BiliBili"
                                           Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://space.bilibili.com/255895683">
@@ -252,10 +287,7 @@
                             </MenuItem>
 
                             <!--Donate-->
-                            <MenuItem Header="Donate">
-                                <MenuItem.Icon>
-                                    <Image Source="/Assets/hand_coin.png" />
-                                </MenuItem.Icon>
+                            <MenuItem Header="Donate" Width="100">
                                 <MenuItem Header="爱发电"
                                           Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://afdian.net/a/lxymahatma">
@@ -271,126 +303,222 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                        </MenuItem>
+                        </Menu>
+
+                        <!--Super Pig-->
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Classes="Dark" Width="150" Height="150" Margin="225,0">
+                            <StackPanel>
+                                <Image Width="60" Height="60" Source="/Assets/Super_Pig.png" />
+                                <TextBlock Classes="Body1"
+                                           Text="Super Pig"
+                                           TextAlignment="Center" />
+                                <TextBlock Classes="Body3"
+                                           Text="For redrawing the Muse Dash Mod Tools icon"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center" />
+                            </StackPanel>
+                        </controls:Card>
+
+                        <Menu Grid.Row="3" HorizontalAlignment="Left" Margin="200,0,0,0">
+                            <!--Account-->
+                            <MenuItem Header="Social Account" Width="200">
+                                <MenuItem Header="BiliBili"
+                                          Command="{Binding OpenUrlCommand}"
+                                          CommandParameter="https://space.bilibili.com/252615263">
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/bilibili.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuItem>
+                        </Menu>
 
                         <!--Balint-->
-                        <MenuItem Header="Balint" />
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150" Margin="0,0,225,0">
+                            <StackPanel>
+                                <Image Width="60" Height="60" Source="/Assets/Balint.png" />
+                                <TextBlock Classes="Body1"
+                                           Text="Balint"
+                                           TextAlignment="Center" />
+                                <TextBlock Classes="Body3"
+                                           Text="For making the first version of Muse Dash Mod Tools"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center" />
+                            </StackPanel>
+                        </controls:Card>
 
-                        <!--Ultra_Rabbit-->
-                        <MenuItem Header="Ultra_Rabbit" />
-                    </MenuItem>
-                </MenuItem>
-            </Menu>
+                        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,200,0">
+                            <!--Account-->
+                            <MenuItem Header="Social Account" Width="200">
+                                <MenuItem Header="Github"
+                                          Command="{Binding OpenUrlCommand}"
+                                          CommandParameter="https://github.com/Balint817">
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/github.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuItem>
+                        </Menu>
 
-            <!--Mods-->
-            <ScrollViewer Grid.Column="1" Margin="0,50,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer" Orientation="Vertical">
-                    <StackPanel.Styles>
-                        <Style Selector="StackPanel > TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap" />
-                        </Style>
-                        <Style Selector="Button:pointerover ContentPresenter">
-                            <Setter Property="Background" Value="#8C8C8C" />
-                        </Style>
-                        <Style Selector="Button:pressed ContentPresenter">
-                            <Setter Property="Background" Value="#595959" />
-                        </Style>
-                        <Style Selector="Button:disabled ContentPresenter">
-                            <Setter Property="Background" Value="#595959" />
-                        </Style>
-                    </StackPanel.Styles>
-                    <ItemsControl Foreground="Transparent" Background="Transparent" Items="{Binding Mods}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Tag="{Binding Name}">
-                                    <Expander Margin="0,0,15,0">
-                                        <Expander.Header>
-                                            <Label Height="80"
-                                                   HorizontalContentAlignment="Left"
-                                                   VerticalContentAlignment="Center">
-                                                <TextBlock Classes="Body2"
-                                                           Text="{Binding Name}"
-                                                           Foreground="{Binding .,Converter={StaticResource DuplicateConverter}}" />
-                                            </Label>
-                                        </Expander.Header>
+                        <!--Ultra Rabbit-->
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150" Margin="25,0">
+                            <StackPanel>
+                                <Image Width="60" Height="60" Source="/Assets/Ultra_Rabbit.jpg" />
+                                <TextBlock Classes="Body1"
+                                           Text="Ultra Rabbit"
+                                           TextAlignment="Center" />
+                                <TextBlock Classes="Body3"
+                                           Text="For rewriting the whole project"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center" />
+                            </StackPanel>
+                        </controls:Card>
 
-                                        <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,0,0,20">
-                                            <StackPanel.Styles>
-                                                <Style Selector="TextBlock">
-                                                    <Setter Property="Foreground" Value="#CCC" />
-                                                </Style>
-                                            </StackPanel.Styles>
-                                            <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
+                        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,0,0">
+                            <!--Account-->
+                            <MenuItem Header="Social Account" Width="200">
+                                <MenuItem Header="Github"
+                                          Command="{Binding OpenUrlCommand}"
+                                          CommandParameter="https://github.com/TheBunnies">
+                                    <MenuItem.Icon>
+                                        <Image Source="/Assets/github.png" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuItem>
+                        </Menu>
+                    </Grid>
+                </dialogHostAvalonia:DialogHost.DialogContent>
 
-                                            <TextBlock Classes="Body2" Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
-                                                       Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
+                <!--About and Mods-->
+                <Grid ColumnDefinitions="140,*">
+                    <!--About-->
+                    <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0">
+                        <MenuItem Width="50" Height="50">
+                            <MenuItem.Header>
+                                <Image Source="/Assets/dots_vertical.png" />
+                            </MenuItem.Header>
+                            <!--Project-->
+                            <MenuItem Header="About Project"
+                                      Command="{ReflectionBinding $parent[dialogHostAvalonia:DialogHost].OpenDialogCommand}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/Icon.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
 
-                                            <Button Classes="Dark" IsVisible="{Binding IsValidHomePage}"
-                                                    Command="{ReflectionBinding $parent[ItemsControl].DataContext.OpenUrlCommand}"
-                                                    CommandParameter="{Binding HomePage}"
-                                                    Tag="mod.Homepage"
-                                                    Width="120"
-                                                    HorizontalAlignment="Left"
-                                                    Margin="0,5,0,0"
-                                                    Content="HomePage" />
+                    <!--Mods-->
+                    <ScrollViewer Grid.Column="1" Margin="1,50,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer" Orientation="Vertical">
+                            <StackPanel.Styles>
+                                <Style Selector="StackPanel > TextBlock">
+                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                </Style>
+                                <Style Selector="Button:pointerover ContentPresenter">
+                                    <Setter Property="Background" Value="#8C8C8C" />
+                                </Style>
+                                <Style Selector="Button:pressed ContentPresenter">
+                                    <Setter Property="Background" Value="#595959" />
+                                </Style>
+                                <Style Selector="Button:disabled ContentPresenter">
+                                    <Setter Property="Background" Value="#595959" />
+                                </Style>
+                            </StackPanel.Styles>
 
-                                            <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
-                                                <TextBlock Classes="Body2">Dependencies:</TextBlock>
-                                                <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
+                            <!--Mod List-->
+                            <ItemsControl Foreground="Transparent" Background="Transparent" Items="{Binding Mods}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Tag="{Binding Name}">
+                                            <Expander Margin="0,0,15,0">
+                                                <Expander.Header>
+                                                    <Label Height="80"
+                                                           HorizontalContentAlignment="Left"
+                                                           VerticalContentAlignment="Center">
+                                                        <TextBlock Classes="Body2"
+                                                                   Text="{Binding Name}"
+                                                                   Foreground="{Binding .,Converter={StaticResource DuplicateConverter}}" />
+                                                    </Label>
+                                                </Expander.Header>
+
+                                                <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,0,0,20">
+                                                    <StackPanel.Styles>
+                                                        <Style Selector="TextBlock">
+                                                            <Setter Property="Foreground" Value="#CCC" />
+                                                        </Style>
+                                                    </StackPanel.Styles>
+                                                    <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
+
+                                                    <TextBlock Classes="Body2" Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
+                                                               Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
+
+                                                    <Button Classes="Dark" IsVisible="{Binding IsValidHomePage}"
+                                                            Command="{ReflectionBinding $parent[ItemsControl].DataContext.OpenUrlCommand}"
+                                                            CommandParameter="{Binding HomePage}"
+                                                            Tag="mod.Homepage"
+                                                            Width="120"
+                                                            HorizontalAlignment="Left"
+                                                            Margin="0,5,0,0"
+                                                            Content="HomePage" />
+
+                                                    <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
+                                                        <TextBlock Classes="Body2">Dependencies:</TextBlock>
+                                                        <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
+                                                    </StackPanel>
+
+                                                    <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
+                                                        <TextBlock Classes="Body2" Text="Duplicated by:" />
+                                                        <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Expander>
+
+                                            <!--Enable/Disable, Install, Uninstall, Reinstall-->
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+                                                <StackPanel.Styles>
+                                                    <Style Selector="Button">
+                                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                                        <Setter Property="Width" Value="100" />
+                                                        <Setter Property="Height" Value="40" />
+                                                        <Setter Property="Margin" Value="40,23,0,17" />
+                                                    </Style>
+                                                </StackPanel.Styles>
+                                                <ToggleSwitch IsChecked="{Binding !IsDisabled }"
+                                                              IsEnabled="{Binding IsLocal}"
+                                                              Height="40"
+                                                              Margin="300,23,0,17"
+                                                              Command="{ReflectionBinding $parent[ItemsControl].DataContext.ToggleModCommand}"
+                                                              CommandParameter="{Binding .}"
+                                                              Foreground="#DDD" />
+
+                                                <Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
+                                                        Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        Content="Uninstall" />
+
+                                                <Button Classes="Dark" IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
+                                                        IsEnabled="{Binding !IsIncompatible}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        Content="Install" />
+
+                                                <Button Classes="Dark" IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
+                                                        Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.ReinstallModCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        Content="{Binding ., Converter={StaticResource InstallationTextConverter}}" />
+
                                             </StackPanel>
-
-                                            <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
-                                                <TextBlock Classes="Body2" Text="Duplicated by:" />
-                                                <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </Expander>
-
-                                    <!--Enable/Disable, Install, Uninstall, Reinstall-->
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
-                                        <StackPanel.Styles>
-                                            <Style Selector="Button">
-                                                <Setter Property="VerticalAlignment" Value="Top" />
-                                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                                <Setter Property="VerticalContentAlignment" Value="Center" />
-                                                <Setter Property="Width" Value="100" />
-                                                <Setter Property="Height" Value="40" />
-                                                <Setter Property="Margin" Value="40,23,0,17" />
-                                            </Style>
-                                        </StackPanel.Styles>
-                                        <ToggleSwitch IsChecked="{Binding !IsDisabled }"
-                                                      IsEnabled="{Binding IsLocal}"
-                                                      Height="40"
-                                                      Margin="300,23,0,17"
-                                                      Command="{ReflectionBinding $parent[ItemsControl].DataContext.ToggleModCommand}"
-                                                      CommandParameter="{Binding .}"
-                                                      Foreground="#DDD" />
-
-                                        <Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
-                                                Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
-                                                Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
-                                                CommandParameter="{Binding .}"
-                                                Content="Uninstall" />
-
-                                        <Button Classes="Dark" IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
-                                                IsEnabled="{Binding !IsIncompatible}"
-                                                Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
-                                                CommandParameter="{Binding .}"
-                                                Content="Install" />
-
-                                        <Button Classes="Dark" IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
-                                                Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
-                                                Command="{ReflectionBinding $parent[ItemsControl].DataContext.ReinstallModCommand}"
-                                                CommandParameter="{Binding .}"
-                                                Content="{Binding ., Converter={StaticResource InstallationTextConverter}}" />
-
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </dialogHostAvalonia:DialogHost>
         </Grid>
     </dialogHostAvalonia:DialogHost>
 

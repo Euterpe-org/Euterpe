@@ -46,10 +46,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly IDialogueService _dialogueService;
     private readonly IDownloadWindowViewModel _downloadWindowViewModel;
 
-    public MainWindowViewModel()
-    {
-    }
-
     public MainWindowViewModel(ISettings settings, IGitHubService gitHubService, ILocalService localService, IDialogueService dialogueService, IDownloadWindowViewModel downloadWindowViewModel)
     {
         _settings = settings;
