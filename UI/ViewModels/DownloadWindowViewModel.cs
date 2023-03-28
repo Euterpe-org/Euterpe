@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
+using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
@@ -11,15 +12,14 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowViewModel
 {
-    [ObservableProperty] private double _percentage;
-    [ObservableProperty] private bool _downloadFinished;
-    [ObservableProperty] private string _downloadProgress = "Downloading progress: 0%";
+    [ObservableProperty] private int _percentage;
+    [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
 
-    private readonly ISettings _settings;
-    private readonly IGitHubService _gitHubService;
     private readonly IDialogueService _dialogueService;
+    private readonly IGitHubService _gitHubService;
+    private readonly ISettingService _settings;
 
-    public DownloadWindowViewModel(ISettings settings, IGitHubService gitHubService, IDialogueService dialogueService)
+    public DownloadWindowViewModel(IDialogueService dialogueService, IGitHubService gitHubService, ISettingService settings)
     {
         _settings = settings;
         _gitHubService = gitHubService;
@@ -28,12 +28,13 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 
     public async Task InstallMelonLoader()
     {
-        var zipPath = Path.Join(_settings.MuseDashFolder, "MelonLoader.zip");
+        var zipPath = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader.zip");
+        var downloadProgress = new Progress<int>(UpdateDownloadProgress);
         if (!File.Exists(zipPath))
         {
             try
             {
-                await _gitHubService.DownloadMelonLoader(zipPath, Percentage, DownloadFinished);
+                await _gitHubService.DownloadMelonLoader(zipPath, downloadProgress);
             }
             catch (Exception ex)
             {
@@ -51,7 +52,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         try
         {
             var fastZip = new FastZip();
-            fastZip.ExtractZip(zipPath, _settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
+            fastZip.ExtractZip(zipPath, _settings.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
         }
         catch (Exception)
         {
@@ -70,7 +71,12 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         }
 
         await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully installed\n");
+        DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
     }
 
-    partial void OnPercentageChanged(double value) => DownloadProgress = "Downloading progress: " + value + "%";
+    private void UpdateDownloadProgress(int value)
+    {
+        Percentage = value;
+        DownloadProgress = "Download progress: " + value + "%";
+    }
 }

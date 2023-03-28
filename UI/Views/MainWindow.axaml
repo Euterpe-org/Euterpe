@@ -41,37 +41,30 @@
         <dialogHostAvalonia:DialogHost.DataTemplates>
             <!--Download Dialog Content-->
             <DataTemplate DataType="vm:DownloadWindowViewModel">
-                <Grid Width="350" Height="250" RowDefinitions="*,*,50">
+				<Grid Height="220" Width="320" RowDefinitions="120,100">
                     <Image Grid.Row="0"
                            VerticalAlignment="Top"
+                           Margin="0,20,0,0"
                            Width="50"
                            Source="/Assets/ML_Icon.png" />
                     <Border Grid.Row="0"
                             VerticalAlignment="Center"
-                            Margin="0,20,0,0">
+                            Margin="0,60,0,10">
                         <TextBlock Classes="Headline5"
                                    TextAlignment="Center"
                                    Foreground="#6D96FF"
                                    Text="Downloading MelonLoader" />
                     </Border>
 
-                    <controls:Card Grid.Row="1" Width="250" Height="80">
+                    <controls:Card Grid.Row="1" Width="250" Height="80" >
                         <StackPanel VerticalAlignment="Center">
                             <ProgressBar Margin="20,20,20,0"
                                          Value="{ReflectionBinding Percentage}" />
                             <TextBlock Text="{ReflectionBinding DownloadProgress}"
                                        TextAlignment="Center"
-                                       Margin="0,10,0,0" />
+                                       Margin="0,10,0,0"/>
                         </StackPanel>
                     </controls:Card>
-
-                    <Button Grid.Row="2"
-                            IsEnabled="{ReflectionBinding DownloadFinished}"
-                            Classes="Dark"
-                            Margin="5"
-                            HorizontalAlignment="Right"
-                            Content="Finished"
-                            Command="{ReflectionBinding RelativeSource={RelativeSource FindAncestor, AncestorType=dialogHostAvalonia:DialogHost}, Path=CloseDialogCommand}" />
                 </Grid>
             </DataTemplate>
         </dialogHostAvalonia:DialogHost.DataTemplates>
@@ -254,7 +247,7 @@
                                            Text="lxy"
                                            TextAlignment="Center" />
                                 <TextBlock Classes="Body3"
-                                           Text="For planning the project and rewriting ui"
+                                           Text="For planning the project, rewriting ui and refactoring code"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center" />
                             </StackPanel>

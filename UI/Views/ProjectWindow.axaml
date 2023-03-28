@@ -53,7 +53,7 @@
                            Text="lxy"
                            TextAlignment="Center" />
                 <TextBlock Classes="Body3"
-                           Text="For planning the project and rewriting ui"
+                           Text="For planning the project, rewriting ui and refactoring code"
                            TextWrapping="Wrap"
                            TextAlignment="Center" />
             </StackPanel>

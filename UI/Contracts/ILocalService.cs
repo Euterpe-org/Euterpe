@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Contracts;
@@ -7,4 +8,10 @@ public interface ILocalService
 {
     List<string> GetModFiles(string path);
     Mod? LoadMod(string filePath);
+    Task<bool> CheckValidPath();
+    Task<string> ReadGameVersion();
+    Task CheckMelonLoaderInstall();
+    Task OnInstallMelonLoader();
+    Task OnUninstallMelonLoader();
+    Task OpenModsFolder();
 }

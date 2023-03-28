@@ -2,7 +2,6 @@
 using System.Net.Http;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Models;
 using MuseDashModToolsUI.Services;
 using MuseDashModToolsUI.ViewModels;
 using Splat;
@@ -13,20 +12,26 @@ public static class Bootstrapper
 {
     public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
-        services.RegisterConstant<ISettings>(new Settings());
         services.Register<IDialogueService>(() => new DialogueService());
         services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>()));
-        services.Register<ILocalService>(() => new LocalService());
+        services.RegisterConstant<ISettingService>(new SettingService(resolver.GetRequiredService<IDialogueService>()));
         services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
-            resolver.GetRequiredService<ISettings>(),
-            resolver.GetRequiredService<IGitHubService>(),
-            resolver.GetRequiredService<IDialogueService>()));
-        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
-            resolver.GetRequiredService<ISettings>(),
-            resolver.GetRequiredService<IGitHubService>(),
-            resolver.GetRequiredService<ILocalService>(),
             resolver.GetRequiredService<IDialogueService>(),
+            resolver.GetRequiredService<IGitHubService>(),
+            resolver.GetRequiredService<ISettingService>()));
+        services.RegisterConstant<ILocalService>(new LocalService(
+            resolver.GetRequiredService<IDialogueService>(),
+            resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<IDownloadWindowViewModel>()));
+        services.RegisterConstant<IModService>(new ModService(
+            resolver.GetRequiredService<IDialogueService>(),
+            resolver.GetRequiredService<IGitHubService>(),
+            resolver.GetRequiredService<ISettingService>(),
+            resolver.GetRequiredService<ILocalService>()));
+        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
+            resolver.GetRequiredService<ISettingService>(),
+            resolver.GetRequiredService<ILocalService>(),
+            resolver.GetRequiredService<IModService>()));
     }
 
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)

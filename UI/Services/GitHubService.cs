@@ -64,16 +64,16 @@ public class GitHubService : IGitHubService
         await result.Content.CopyToAsync(fs);
     }
 
-    public async Task DownloadMelonLoader(string path, double downloadProgress, bool finished)
+    public async Task DownloadMelonLoader(string path, IProgress<int> downloadProgress)
     {
         HttpResponseMessage result;
         try
         {
-            result = await _client.GetAsync(PrimaryLink + BaseLink + "MelonLoader.zip");
+            result = await _client.GetAsync(PrimaryLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
         }
         catch (Exception)
         {
-            result = await _client.GetAsync(SecondaryLink + BaseLink + "MelonLoader.zip");
+            result = await _client.GetAsync(SecondaryLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
         }
 
         var totalLength = result.Content.Headers.ContentLength;
@@ -87,13 +87,11 @@ public class GitHubService : IGitHubService
             readLength += length;
             if (totalLength > 0)
             {
-                downloadProgress = Math.Round((double)readLength / totalLength.Value * 100, 2);
+                downloadProgress.Report((int)Math.Round((double)readLength / totalLength.Value * 100));
             }
 
             fs.Write(buffer, 0, length);
         }
-
-        finished = true;
     }
 
     public async void CheckUpdates()
