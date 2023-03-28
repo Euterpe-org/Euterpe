@@ -542,7 +542,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private async Task OnInstallMelonLoader()
     {
         if (!_isValidPath) return;
-        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog");
+        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog", (object sender, DialogOpenedEventArgs args) => _downloadWindowViewModel.InstallMelonLoader());
     }
 
     [RelayCommand]

@@ -15,11 +15,10 @@ internal class Program
     {
         RegisterDependencies();
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        
     }
+
     private static void RegisterDependencies() =>
         Bootstrapper.Register(Locator.CurrentMutable, Locator.Current);
-        
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()

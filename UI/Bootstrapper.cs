@@ -13,20 +13,21 @@ public static class Bootstrapper
 {
     public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
-        services.RegisterLazySingleton<ISettings>(() => new Settings());
-        services.Register<IDialogueService>(() => new DialogueService()); // Call services.Register<T> and pass it lambda that creates instance of your service
-        services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>())); // Call services.Register<T> and pass it lambda that creates instance of your service
-        services.Register<ILocalService>(() => new LocalService()); // Call services.Register<T> and pass it lambda that creates instance of your service
+        services.RegisterConstant<ISettings>(new Settings());
+        var settingService = resolver.GetRequiredService<ISettings>();
+        services.Register<IDialogueService>(() => new DialogueService());
+        services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>()));
+        services.Register<ILocalService>(() => new LocalService());
+        services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
+            settingService,
+            resolver.GetRequiredService<IGitHubService>(),
+            resolver.GetRequiredService<IDialogueService>()));
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
-            resolver.GetRequiredService<ISettings>(),
+            settingService,
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ILocalService>(),
             resolver.GetRequiredService<IDialogueService>(),
             resolver.GetRequiredService<IDownloadWindowViewModel>()));
-        services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
-            resolver.GetRequiredService<ISettings>(),
-            resolver.GetRequiredService<IGitHubService>(),
-            resolver.GetRequiredService<IDialogueService>()));
     }
 
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)

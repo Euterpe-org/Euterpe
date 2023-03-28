@@ -10,10 +10,6 @@ public class Settings : ISettings
     public AskType AskDisableDependenciesWhenDeleting { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenEnabling { get; set; } = AskType.Always;
     public AskType AskDisableDependenciesWhenDisabling { get; set; } = AskType.Always;
-
-    public Settings()
-    {
-    }
 }
 
 public enum AskType

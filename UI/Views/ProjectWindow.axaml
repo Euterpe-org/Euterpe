@@ -19,7 +19,7 @@
         <Button Grid.Row="0"
                 Classes="Flat"
                 HorizontalAlignment="Center"
-                ToolTip.Tip="Project"
+                ToolTip.Tip="Muse Dash Mod Tools Project"
                 Command="{Binding OpenUrlCommand}"
                 CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
             <Image Source="/Assets/Icon.png" Margin="-7,0,0,5"/>
