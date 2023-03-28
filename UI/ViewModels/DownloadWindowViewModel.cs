@@ -7,8 +7,6 @@ using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 
-#pragma warning disable CS8618
-
 namespace MuseDashModToolsUI.ViewModels;
 
 public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowViewModel

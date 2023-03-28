@@ -14,16 +14,15 @@ public static class Bootstrapper
     public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
         services.RegisterConstant<ISettings>(new Settings());
-        var settingService = resolver.GetRequiredService<ISettings>();
         services.Register<IDialogueService>(() => new DialogueService());
         services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>()));
         services.Register<ILocalService>(() => new LocalService());
         services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
-            settingService,
+            resolver.GetRequiredService<ISettings>(),
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<IDialogueService>()));
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
-            settingService,
+            resolver.GetRequiredService<ISettings>(),
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ILocalService>(),
             resolver.GetRequiredService<IDialogueService>(),

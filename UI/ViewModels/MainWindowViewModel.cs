@@ -88,7 +88,13 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 return;
             }
 
-            _settings = JsonSerializer.Deserialize<Settings>(text)!;
+            var settings = JsonSerializer.Deserialize<Settings>(text)!;
+            _settings.MuseDashFolder = settings.MuseDashFolder;
+            _settings.AskInstallMuseDashModTools = settings.AskInstallMuseDashModTools;
+            _settings.AskEnableDependenciesWhenInstalling = settings.AskEnableDependenciesWhenInstalling;
+            _settings.AskDisableDependenciesWhenDeleting = settings.AskDisableDependenciesWhenDeleting;
+            _settings.AskEnableDependenciesWhenEnabling = settings.AskEnableDependenciesWhenEnabling;
+            _settings.AskDisableDependenciesWhenDisabling = settings.AskDisableDependenciesWhenDisabling;
             InitializeModList();
         }
         catch
@@ -248,7 +254,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
                 localMod.DuplicatedModNames = string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
 
-            _sourceCache.AddOrUpdate(localMods[i]!);
+            _sourceCache.AddOrUpdate(localMods[i]);
         }
     }
 
