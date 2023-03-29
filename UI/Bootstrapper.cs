@@ -29,6 +29,7 @@ public static class Bootstrapper
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<ILocalService>()));
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
+            resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<ILocalService>(),
             resolver.GetRequiredService<IModService>()));

@@ -25,12 +25,14 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
+    private readonly IGitHubService _gitHubService;
     private readonly ISettingService _settings;
     private readonly ILocalService _localService;
     private readonly IModService _modService;
 
-    public MainWindowViewModel(ISettingService settings, ILocalService localService, IModService modService)
+    public MainWindowViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
     {
+        _gitHubService = gitHubService;
         _settings = settings;
         _localService = localService;
         _modService = modService;
@@ -46,7 +48,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             .Subscribe();
 
         Initialize();
-        //_gitHubService.CheckUpdates;
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
 
@@ -54,6 +55,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         await _settings.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
+        await _gitHubService.CheckUpdates();
     }
 
     [RelayCommand]
@@ -89,6 +91,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     [RelayCommand]
     private async Task OpenModsFolder() => await _localService.OpenModsFolder();
+
+    [RelayCommand]
+    private async Task OnCheckUpdate() => await _gitHubService.CheckUpdates();
 
     [RelayCommand]
     private void OnFilterAll() => CategoryFilterType = FilterType.All;

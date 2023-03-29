@@ -41,7 +41,7 @@
         <dialogHostAvalonia:DialogHost.DataTemplates>
             <!--Download Dialog Content-->
             <DataTemplate DataType="vm:DownloadWindowViewModel">
-				<Grid Height="220" Width="320" RowDefinitions="120,100">
+                <Grid Height="220" Width="320" RowDefinitions="120,100">
                     <Image Grid.Row="0"
                            VerticalAlignment="Top"
                            Margin="0,20,0,0"
@@ -56,13 +56,13 @@
                                    Text="Downloading MelonLoader" />
                     </Border>
 
-                    <controls:Card Grid.Row="1" Width="250" Height="80" >
+                    <controls:Card Grid.Row="1" Width="250" Height="80">
                         <StackPanel VerticalAlignment="Center">
                             <ProgressBar Margin="20,20,20,0"
                                          Value="{ReflectionBinding Percentage}" />
                             <TextBlock Text="{ReflectionBinding DownloadProgress}"
                                        TextAlignment="Center"
-                                       Margin="0,10,0,0"/>
+                                       Margin="0,10,0,0" />
                         </StackPanel>
                     </controls:Card>
                 </Grid>
@@ -199,7 +199,7 @@
                 <dialogHostAvalonia:DialogHost.DialogContent>
                     <!--About Dialog Content-->
                     <Grid RowDefinitions="100,100,150,80" Width="800">
-						<Button Grid.Row="0"
+                        <Button Grid.Row="0"
                                 Width="150"
                                 Classes="Flat"
                                 HorizontalAlignment="Center"
@@ -216,7 +216,7 @@
                                 ToolTip.Tip="Muse Dash Mod Tools Project"
                                 Command="{Binding OpenUrlCommand}"
                                 CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
-                            <Image Source="/Assets/Icon.png" Margin="-7,0,0,5"/>
+                            <Image Source="/Assets/Icon.png" Margin="-7,0,0,5" />
                         </Button>
 
                         <Button Grid.Row="0"
@@ -226,7 +226,7 @@
                                 Command="{Binding OpenUrlCommand}"
                                 CommandParameter="https://discord.gg/mdmc"
                                 Margin="500,0,0,0">
-                            <Image Source="/Assets/MDMC_Discord.png" Width="80"/>
+                            <Image Source="/Assets/MDMC_Discord.png" Width="80" />
                         </Button>
 
                         <StackPanel Grid.Row="1" VerticalAlignment="Top">
@@ -389,11 +389,20 @@
                             <MenuItem.Header>
                                 <Image Source="/Assets/dots_vertical.png" />
                             </MenuItem.Header>
+
                             <!--Project-->
                             <MenuItem Header="About Project"
                                       Command="{ReflectionBinding $parent[dialogHostAvalonia:DialogHost].OpenDialogCommand}">
                                 <MenuItem.Icon>
                                     <Image Source="/Assets/Icon.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                            <!--Check Update-->
+                            <MenuItem Header="Check Update"
+                                      Command="{Binding CheckUpdateCommand}">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/update.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
-using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Models;
 
@@ -29,6 +30,7 @@ public class GitHubService : IGitHubService
         _client = client;
         _dialogueService = dialogueService;
     }
+
     public async Task<List<Mod>> GetModsAsync()
     {
         List<Mod> mods;
@@ -64,7 +66,7 @@ public class GitHubService : IGitHubService
         await result.Content.CopyToAsync(fs);
     }
 
-    public async Task DownloadMelonLoader(string path, IProgress<int> downloadProgress)
+    public async Task DownloadMelonLoader(string path, IProgress<double> downloadProgress)
     {
         HttpResponseMessage result;
         try
@@ -87,14 +89,14 @@ public class GitHubService : IGitHubService
             readLength += length;
             if (totalLength > 0)
             {
-                downloadProgress.Report((int)Math.Round((double)readLength / totalLength.Value * 100));
+                downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
             }
 
             fs.Write(buffer, 0, length);
         }
     }
 
-    public async void CheckUpdates()
+    public async Task CheckUpdates()
     {
         _client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
 
@@ -108,57 +110,61 @@ public class GitHubService : IGitHubService
                 return;
 
             var tag = tagName.GetString();
-            if (tag == null) return;
+            if (tag is null) return;
             if (!Version.TryParse(tag, out var version)) return;
             if (version <= currentVersion) return;
 
-            string? link;
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                link = doc.RootElement.GetProperty("assets")[0].GetProperty("browser_download_url").GetString();
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                link = doc.RootElement.GetProperty("assets")[1].GetProperty("browser_download_url").GetString();
-            else
-                link = null;
+            var link = string.Empty;
+            var assets = doc.RootElement.GetProperty("assets");
+            var releases = assets.EnumerateArray();
 
-            var parentPath = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent!.FullName;
-            await DownloadUpdates(link!, Directory.GetCurrentDirectory() + ".zip", parentPath);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Linux"));
+                link = release.GetProperty("browser_download_url").GetString()!;
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Windows"));
+                link = release.GetProperty("browser_download_url").GetString()!;
+            }
+
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var parentPath = new DirectoryInfo(currentDirectory).Parent!.FullName;
+            await LaunchUpdater(currentDirectory, new[] { link, currentDirectory + ".zip", parentPath });
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Checking updates failed");
+            await _dialogueService.CreateErrorMessageBox("Checking updates failed\nIf you are in China Mainland please open VPN");
         }
     }
 
-    public async Task DownloadUpdates(string link, string zipPath, string parentPath)
+    private async Task LaunchUpdater(string currentDirectory, IEnumerable<string> launchArgs)
     {
-        byte[] result;
-        try
+        var updaterExePath = Path.Combine(currentDirectory, "Updater.exe");
+        var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
+        var updaterTargetPath = Path.Combine(currentDirectory, "Update", "Updater.exe");
+        if (!File.Exists(updaterExePath))
         {
-            result = await _client.GetByteArrayAsync(link);
-        }
-        catch (Exception)
-        {
-            result = await _client.GetByteArrayAsync(link.Replace("github.com", "download.fastgit.org"));
+            await _dialogueService.CreateErrorMessageBox("Cannot find Updater.exe\nPlease make sure you have downloaded full software");
+            return;
         }
 
-        await File.WriteAllBytesAsync(zipPath, result);
-        var fastZip = new FastZip();
-        try
+        if (!Directory.Exists(updaterTargetFolder))
         {
-            fastZip.ExtractZip(zipPath, parentPath, FastZip.Overwrite.Always, null, null, null, true);
-        }
-        catch (Exception)
-        {
-            await _dialogueService.CreateErrorMessageBox($"Unable to unzip the latest version of app in\n{zipPath}\nMaybe try manually unzip?");
+            Directory.CreateDirectory(updaterTargetFolder);
         }
 
         try
         {
-            File.Delete(zipPath);
+            File.Copy(updaterExePath, updaterTargetPath, true);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            await _dialogueService.CreateErrorMessageBox($"Failed to delete zip file in\n{zipPath}Try manually delete");
+            await _dialogueService.CreateErrorMessageBox($"Cannot copy Updater.exe to target path\n{ex}");
         }
+
+        Process.Start(updaterTargetPath, launchArgs);
     }
 }
