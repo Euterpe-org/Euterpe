@@ -19,7 +19,7 @@ public class GitHubService : IGitHubService
     private readonly HttpClient _client;
     private readonly IDialogueService _dialogueService;
 
-    private const string BaseLink = "MDModsDev/ModLinks/dev/";
+    private const string BaseLink = "MDModsDev/ModLinks/main/";
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/";
