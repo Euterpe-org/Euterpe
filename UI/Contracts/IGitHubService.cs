@@ -10,5 +10,5 @@ public interface IGitHubService
     Task<List<Mod>> GetModsAsync();
     Task DownloadModAsync(string link, string path);
     Task DownloadMelonLoader(string path, IProgress<double> downloadProgress);
-    Task CheckUpdates();
+    Task CheckUpdates(bool userClick = false);
 }

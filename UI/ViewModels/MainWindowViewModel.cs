@@ -93,7 +93,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private async Task OpenModsFolder() => await _localService.OpenModsFolder();
 
     [RelayCommand]
-    private async Task OnCheckUpdate() => await _gitHubService.CheckUpdates();
+    private async Task OnCheckUpdate() => await _gitHubService.CheckUpdates(true);
 
     [RelayCommand]
     private void OnFilterAll() => CategoryFilterType = FilterType.All;

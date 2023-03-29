@@ -96,7 +96,7 @@ public class GitHubService : IGitHubService
         }
     }
 
-    public async Task CheckUpdates()
+    public async Task CheckUpdates(bool userClick = false)
     {
         _client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
 
@@ -112,7 +112,12 @@ public class GitHubService : IGitHubService
             var tag = tagName.GetString();
             if (tag is null) return;
             if (!Version.TryParse(tag, out var version)) return;
-            if (version <= currentVersion) return;
+            if (version <= currentVersion)
+            {
+                if (userClick)
+                    await _dialogueService.CreateMessageBox("Success", "Check update success\nYou are using the latest version of Muse Dash Mod Tools");
+                return;
+            }
 
             var link = string.Empty;
             var assets = doc.RootElement.GetProperty("assets");
