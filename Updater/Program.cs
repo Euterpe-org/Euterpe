@@ -1,4 +1,5 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿using System.Diagnostics;
+using ICSharpCode.SharpZipLib.Zip;
 
 HttpClient httpClient = new();
 
@@ -11,6 +12,7 @@ else
 {
     await DownloadUpdates(args);
     Unzip(args[1], args[2]);
+    Process.Start(Path.Combine(args[2], "MuseDashModTools.exe"));
 }
 
 async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
