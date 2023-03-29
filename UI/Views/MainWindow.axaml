@@ -18,7 +18,7 @@
         CanResize="True">
 
     <Window.Resources>
-        <converters:DuplicateConverter x:Key="DuplicateConverter" />
+        <converters:NameColourConverter x:Key="NameColourConverter" />
         <converters:VersionColourConverter x:Key="VersionColourConverter" />
         <converters:UninstallConverter x:Key="UninstallConverter" />
         <converters:VersionTextConverter x:Key="VersionTextConverter" />
@@ -438,7 +438,7 @@
                                                            VerticalContentAlignment="Center">
                                                         <TextBlock Classes="Body2"
                                                                    Text="{Binding Name}"
-                                                                   Foreground="{Binding .,Converter={StaticResource DuplicateConverter}}" />
+                                                                   Foreground="{Binding .,Converter={StaticResource NameColourConverter}}" />
                                                     </Label>
                                                 </Expander.Header>
 

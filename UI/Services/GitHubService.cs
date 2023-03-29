@@ -119,6 +119,8 @@ public class GitHubService : IGitHubService
                 return;
             }
 
+            var update = await _dialogueService.CreateConfirmMessageBox("Notice", "A newer version of Muse Dash Mod Tools is released\nDo you want to install it now?");
+            if (!update) return;
             var link = string.Empty;
             var assets = doc.RootElement.GetProperty("assets");
             var releases = assets.EnumerateArray();
