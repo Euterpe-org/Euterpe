@@ -86,6 +86,7 @@ public class ModService : IModService
             localMod.IncompatibleMods = webMod.IncompatibleMods;
             localMod.DownloadLink = webMod.DownloadLink;
             localMod.HomePage = webMod.HomePage;
+            localMod.Description = webMod.Description;
 
             var versionDate = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 : new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
             localMod.State = (UpdateState)versionDate;

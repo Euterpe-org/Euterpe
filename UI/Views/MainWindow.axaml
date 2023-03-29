@@ -442,13 +442,13 @@
                                                     </Label>
                                                 </Expander.Header>
 
-                                                <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,0,0,20">
+                                                <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,40,0,20">
                                                     <StackPanel.Styles>
                                                         <Style Selector="TextBlock">
                                                             <Setter Property="Foreground" Value="#CCC" />
                                                         </Style>
                                                     </StackPanel.Styles>
-                                                    <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
+                                                    <TextBlock Classes="Body2" Text="{Binding XamlDescription}"/>
 
                                                     <TextBlock Classes="Body2" Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                                Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
