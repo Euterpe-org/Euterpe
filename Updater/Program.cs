@@ -10,6 +10,7 @@ if (args.Length < 3)
 else
 {
     await DownloadUpdates(args);
+    Unzip(args[1], args[2]);
 }
 
 async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
@@ -46,29 +47,32 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     catch (Exception ex)
     {
         Console.WriteLine($"Download latest version failed\n{ex}");
+        Console.ReadKey();
     }
-
-    Unzip(downloadArgs[1], downloadArgs[2]);
 }
 
-void Unzip(string zipPath, string parentFolderPath)
+void Unzip(string zipPath, string targetPath)
 {
     var fastZip = new FastZip();
     try
     {
-        fastZip.ExtractZip(zipPath, parentFolderPath, FastZip.Overwrite.Always, null, null, null, true);
+        fastZip.ExtractZip(zipPath, targetPath, FastZip.Overwrite.Always, null, null, null, true);
     }
-    catch (Exception)
+    catch (Exception ex)
     {
+        Console.WriteLine(ex);
         Console.WriteLine($"Unable to unzip the latest version of app in\n{zipPath}\nMaybe try manually unzip?");
+        Console.ReadKey();
     }
 
     try
     {
         File.Delete(zipPath);
     }
-    catch (Exception)
+    catch (Exception ex)
     {
+        Console.WriteLine(ex);
         Console.WriteLine($"Failed to delete zip file in\n{zipPath}Try manually delete");
+        Console.ReadKey();
     }
 }

@@ -127,19 +127,19 @@ public class GitHubService : IGitHubService
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Linux"));
+                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Linux.zip"));
                 link = release.GetProperty("browser_download_url").GetString()!;
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Windows"));
+                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Windows.zip"));
                 link = release.GetProperty("browser_download_url").GetString()!;
             }
 
             var currentDirectory = Directory.GetCurrentDirectory();
-            var parentPath = new DirectoryInfo(currentDirectory).Parent!.FullName;
-            await LaunchUpdater(currentDirectory, new[] { link, currentDirectory + ".zip", parentPath });
+            await LaunchUpdater(currentDirectory, new[] { link, currentDirectory + ".zip", currentDirectory });
+            Environment.Exit(0);
         }
         catch (Exception)
         {
