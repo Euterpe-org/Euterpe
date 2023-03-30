@@ -448,7 +448,7 @@
                                                             <Setter Property="Foreground" Value="#CCC" />
                                                         </Style>
                                                     </StackPanel.Styles>
-                                                    <TextBlock Classes="Body2" Text="{Binding XamlDescription}"/>
+                                                    <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
 
                                                     <TextBlock Classes="Body2" Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                                Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
@@ -500,7 +500,7 @@
                                                         CommandParameter="{Binding .}"
                                                         Content="Install" />
 
-												<Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
+                                                <Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
                                                         Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
                                                         CommandParameter="{Binding .}"

@@ -191,7 +191,7 @@ public class ModService : IModService
         if (disabledDependencies.Length > 0)
         {
             var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
-            _settings.Settings.AskEnableDependenciesWhenInstalling = await ChangeDependenciesState(_sourceCache!,
+            _settings.Settings.AskEnableDependenciesWhenInstalling = await ChangeDependenciesState(
                 $"Do you want to enable {item.Name}'s dependency {disabledDependencyNames}?",
                 disabledDependencies, _settings.Settings.AskEnableDependenciesWhenInstalling, false);
         }
@@ -236,7 +236,7 @@ public class ModService : IModService
                             return;
                         }
 
-                        _settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(_sourceCache!,
+                        _settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
                             $"Do you want to disable the mods depend on {item.Name} as well?",
                             enabledReverseDependencies, _settings.Settings.AskDisableDependenciesWhenDisabling, true);
                     }
@@ -247,7 +247,7 @@ public class ModService : IModService
                     if (disabledDependencies.Length > 0)
                     {
                         var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
-                        _settings.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(_sourceCache!,
+                        _settings.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
                             $"Do you want to enable {item.Name}'s dependency {disabledDependencyNames} as well?",
                             disabledDependencies, _settings.Settings.AskEnableDependenciesWhenEnabling, false);
                     }
@@ -305,7 +305,7 @@ public class ModService : IModService
                 var result = await _dialogueService.CreateConfirmMessageBox($"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to delete this mod?");
                 if (!result)
                     return;
-                _settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(_sourceCache!,
+                _settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
                     $"Do you want to disable the mods depend on {item.Name}?",
                     enabledReverseDependencies, _settings.Settings.AskDisableDependenciesWhenDeleting, true);
             }
@@ -338,22 +338,20 @@ public class ModService : IModService
         }
     }
 
-    private IEnumerable<Mod> SearchDependencies(IObservableCache<Mod, string> sourceCache, string modName)
+    private static IEnumerable<Mod> SearchDependencies(IObservableCache<Mod, string> sourceCache, string modName)
     {
         var dependencyNames = sourceCache.Lookup(modName).Value.DependencyNames;
-        var dependencies = dependencyNames.Split("\r\n")
+        return dependencyNames.Split("\r\n")
             .Where(x => sourceCache.Lookup(x).HasValue)
             .Select(x => sourceCache.Lookup(x).Value);
-        return dependencies;
     }
 
-    private IEnumerable<Mod> SearchReverseDependencies(IObservableCache<Mod, string> sourceCache, string modName)
+    private static IEnumerable<Mod> SearchReverseDependencies(IObservableCache<Mod, string> sourceCache, string modName)
     {
-        var reverseDependencies = sourceCache.Items.Where(x => x.DependencyNames.Split("\r\n").Contains(modName));
-        return reverseDependencies;
+        return sourceCache.Items.Where(x => x.DependencyNames.Split("\r\n").Contains(modName));
     }
 
-    private async Task<AskType> ChangeDependenciesState(SourceCache<Mod, string> sourceCache, string content, IEnumerable<Mod> dependencies, AskType askType, bool turnOff)
+    private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod> dependencies, AskType askType, bool turnOff)
     {
         switch (askType)
         {
