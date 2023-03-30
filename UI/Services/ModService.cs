@@ -110,11 +110,6 @@ public class ModService : IModService
 
             sourceCache.AddOrUpdate(localMods[i]);
         }
-
-        bool CheckCompatible(Mod mod)
-        {
-            return mod.CompatibleGameVersion == "All" || mod.GameVersion!.Contains(_currentGameVersion);
-        }
     }
 
     public async Task CheckModToolsInstall(Mod mod)
@@ -321,6 +316,7 @@ public class ModService : IModService
             var webMod = webMods.FirstOrDefault(x => x.Name == item.Name);
             if (webMod is not null)
             {
+                webMod.IsIncompatible = !CheckCompatible(webMod);
                 _sourceCache!.AddOrUpdate(webMod);
             }
 
@@ -396,4 +392,6 @@ public class ModService : IModService
 
         return askType;
     }
+
+    private bool CheckCompatible(Mod mod) => mod.CompatibleGameVersion == "All" || mod.GameVersion!.Contains(_currentGameVersion);
 }

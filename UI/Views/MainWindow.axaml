@@ -494,17 +494,17 @@
                                                               CommandParameter="{Binding .}"
                                                               Foreground="#DDD" />
 
-                                                <Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
+                                                <Button Classes="Dark" IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
+                                                        IsEnabled="{Binding IsInstallable}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        Content="Install" />
+
+												<Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
                                                         Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="Uninstall" />
-
-                                                <Button Classes="Dark" IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
-                                                        IsEnabled="{Binding !IsIncompatible}"
-                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
-                                                        CommandParameter="{Binding .}"
-                                                        Content="Install" />
 
                                                 <Button Classes="Dark" IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"

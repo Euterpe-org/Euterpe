@@ -17,6 +17,7 @@ public class Mod : ReactiveObject
     public string? Author { get; set; }
     public string? FileName { get; set; }
     [JsonIgnore] public bool IsLocal => FileName is not null;
+    [JsonIgnore] public bool IsInstallable => !IsLocal && !IsIncompatible;
     private bool _isDisabled;
 
     [JsonIgnore]
