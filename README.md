@@ -8,3 +8,7 @@
 4. Warn you with different color button if your mod version is not correct
 5. Search the mod by name using the search bar
 6. Different category filter type on the left side
+
+### Screenshot
+
+![Screenshot](Intro/Screenshot.png)
