@@ -143,7 +143,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Checking updates failed\nIf you are in China Mainland please open VPN");
+            await _dialogueService.CreateErrorMessageBox("Checking updates failed\nAre you online?");
         }
     }
 

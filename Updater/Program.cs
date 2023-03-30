@@ -11,7 +11,9 @@ if (args.Length < 3)
 else
 {
     await DownloadUpdates(args);
+    Console.WriteLine("Download finished. Extracting...");
     Unzip(args[1], args[2]);
+    Console.WriteLine("Extracting finished. Launching MuseDashModTools...");
     Process.Start(Path.Combine(args[2], "MuseDashModTools.exe"));
 }
 
@@ -24,7 +26,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     }
     catch (Exception)
     {
-        result = await httpClient.GetAsync(downloadArgs[0], HttpCompletionOption.ResponseHeadersRead);
+        result = await httpClient.GetAsync(downloadArgs[0].Replace("github.com", "download.fastgit.org"), HttpCompletionOption.ResponseHeadersRead);
     }
 
     var totalLength = result.Content.Headers.ContentLength;

@@ -47,6 +47,13 @@ public class SettingService : ISettingService
             Settings.AskDisableDependenciesWhenDeleting = settings.AskDisableDependenciesWhenDeleting;
             Settings.AskEnableDependenciesWhenEnabling = settings.AskEnableDependenciesWhenEnabling;
             Settings.AskDisableDependenciesWhenDisabling = settings.AskDisableDependenciesWhenDisabling;
+
+            var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
+            var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
+            if (File.Exists(updaterPath))
+                File.Delete(updaterPath);
+            if (Directory.Exists(updateDirectory))
+                Directory.Delete(updateDirectory);
         }
         catch (Exception ex)
         {
