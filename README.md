@@ -1,6 +1,7 @@
 # MuseDashModToolsUI
 
 ## -A UI app for making muse dash modding easier
+[中文说明](https://www.bilibili.com/read/cv22748380)
 ### What it can do
 1. Download and install MelonLoader from this app (which is needed for muse dash modding)
 2. Install mods with a simple click
