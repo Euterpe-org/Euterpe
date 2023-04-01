@@ -2,37 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using ReactiveUI;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace MuseDashModToolsUI.Models;
 
-public class Mod : ReactiveObject
+public partial class Mod : ObservableObject
 {
     public string? Name { get; set; }
     public string? Version { get; set; }
-    public string? LocalVersion { get; set; }
+    [JsonIgnore] public string? LocalVersion { get; set; }
     [JsonIgnore] public UpdateState State { get; set; }
     [JsonIgnore] public bool IsIncompatible { get; set; }
     [JsonIgnore] public bool IsUpdatable => IsLocal && State != UpdateState.Normal;
     public string? Author { get; set; }
-    public string? FileName { get; set; }
+    [JsonIgnore] public string? FileName { get; set; }
     [JsonIgnore] public bool IsLocal => FileName is not null;
     [JsonIgnore] public bool IsInstallable => !IsLocal && !IsIncompatible;
-    private bool _isDisabled;
 
-    [JsonIgnore]
-    public bool IsDisabled
-    {
-        get => _isDisabled;
-        set => this.RaiseAndSetIfChanged(ref _isDisabled, value);
-    }
-
+    [ObservableProperty] private bool _isDisabled;
     [JsonIgnore] public bool IsTracked { get; set; }
     [JsonIgnore] public bool IsShaMismatched { get; set; }
     [JsonIgnore] public bool IsDuplicated { get; set; }
-
     [JsonIgnore] public string? DuplicatedModNames { get; set; }
-
     [JsonIgnore] public string XamlDescription => $"{Description} \n\nAuthor: {Author} \nVersion: {Version}\nCompatible Game Version: {CompatibleGameVersion}";
 
     public string? DownloadLink { get; set; }
