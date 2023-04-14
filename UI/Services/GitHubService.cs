@@ -8,6 +8,7 @@ using System.Net.Http.Json;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Models;
@@ -84,7 +85,7 @@ public class GitHubService : IGitHubService
         var buffer = new byte[5 * 1024];
         var readLength = 0L;
         int length;
-        while ((length = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+        while ((length = await contentStream.ReadAsync(buffer, 0, buffer.Length,CancellationToken.None)) != 0)
         {
             readLength += length;
             if (totalLength > 0)

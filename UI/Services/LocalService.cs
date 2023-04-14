@@ -144,7 +144,7 @@ public class LocalService : ILocalService
     public async Task OnInstallMelonLoader()
     {
         if (!IsValidPath) return;
-        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog", (object sender, DialogOpenedEventArgs args) => _downloadWindowViewModel.InstallMelonLoader());
+        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog", (object _, DialogOpenedEventArgs _) => _downloadWindowViewModel.InstallMelonLoader());
     }
 
     public async Task OnUninstallMelonLoader()
