@@ -8,6 +8,7 @@ namespace MuseDashModToolsUI.Models;
 
 public partial class Mod : ObservableObject
 {
+    [ObservableProperty] private bool _isDisabled;
     public string? Name { get; set; }
     public string? Version { get; set; }
     [JsonIgnore] public string? LocalVersion { get; set; }
@@ -18,13 +19,14 @@ public partial class Mod : ObservableObject
     [JsonIgnore] public string? FileName { get; set; }
     [JsonIgnore] public bool IsLocal => FileName is not null;
     [JsonIgnore] public bool IsInstallable => !IsLocal && !IsIncompatible;
-
-    [ObservableProperty] private bool _isDisabled;
     [JsonIgnore] public bool IsTracked { get; set; }
     [JsonIgnore] public bool IsShaMismatched { get; set; }
     [JsonIgnore] public bool IsDuplicated { get; set; }
     [JsonIgnore] public string? DuplicatedModNames { get; set; }
-    [JsonIgnore] public string XamlDescription => $"{Description} \n\nAuthor: {Author} \nVersion: {Version}\nCompatible Game Version: {CompatibleGameVersion}";
+
+    [JsonIgnore]
+    public string XamlDescription =>
+        $"{Description} \n\nAuthor: {Author} \nOnline Version: {Version}\nCompatible Game Version: {CompatibleGameVersion}";
 
     public string? DownloadLink { get; set; }
     public string? HomePage { get; set; }
@@ -49,7 +51,9 @@ public partial class Mod : ObservableObject
     public List<string> DependentMods { get; set; } = new();
     public List<string> DependentLibs { get; set; } = new();
     [JsonIgnore] public int DependencyCount => DependentMods.Count + DependentLibs.Count;
-    [JsonIgnore] public string DependencyNames => DependencyCount == 0 ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
+
+    [JsonIgnore]
+    public string DependencyNames => DependencyCount == 0 ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
 
     public List<string> IncompatibleMods { get; set; } = new();
     public string? SHA256 { get; set; }

@@ -17,14 +17,14 @@ namespace MuseDashModToolsUI.Services;
 
 public class GitHubService : IGitHubService
 {
-    private readonly HttpClient _client;
-    private readonly IDialogueService _dialogueService;
-
     private const string BaseLink = "MDModsDev/ModLinks/main/";
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/";
     private const string SecondaryLink = "https://raw.fastgit.org/";
+    private const string ThirdLink = "https://raw.gitmirror.com/";
+    private readonly HttpClient _client;
+    private readonly IDialogueService _dialogueService;
 
     public GitHubService(HttpClient client, IDialogueService dialogueService)
     {
@@ -58,9 +58,16 @@ public class GitHubService : IGitHubService
         {
             result = await _client.GetAsync(PrimaryLink + BaseLink + link);
         }
-        catch (Exception)
+        catch
         {
-            result = await _client.GetAsync(SecondaryLink + BaseLink + link);
+            try
+            {
+                result = await _client.GetAsync(SecondaryLink + BaseLink + link);
+            }
+            catch
+            {
+                result = await _client.GetAsync(ThirdLink + BaseLink + link);
+            }
         }
 
         await using var fs = new FileStream(path, FileMode.OpenOrCreate);
@@ -74,9 +81,16 @@ public class GitHubService : IGitHubService
         {
             result = await _client.GetAsync(PrimaryLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
         }
-        catch (Exception)
+        catch
         {
-            result = await _client.GetAsync(SecondaryLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+            try
+            {
+                result = await _client.GetAsync(SecondaryLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+            }
+            catch
+            {
+                result = await _client.GetAsync(ThirdLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+            }
         }
 
         var totalLength = result.Content.Headers.ContentLength;
@@ -85,13 +99,10 @@ public class GitHubService : IGitHubService
         var buffer = new byte[5 * 1024];
         var readLength = 0L;
         int length;
-        while ((length = await contentStream.ReadAsync(buffer, 0, buffer.Length,CancellationToken.None)) != 0)
+        while ((length = await contentStream.ReadAsync(buffer, 0, buffer.Length, CancellationToken.None)) != 0)
         {
             readLength += length;
-            if (totalLength > 0)
-            {
-                downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
-            }
+            if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
 
             fs.Write(buffer, 0, length);
         }
@@ -116,11 +127,13 @@ public class GitHubService : IGitHubService
             if (version <= currentVersion)
             {
                 if (userClick)
-                    await _dialogueService.CreateMessageBox("Success", "Check update success\nYou are using the latest version of Muse Dash Mod Tools");
+                    await _dialogueService.CreateMessageBox("Success",
+                        "Check update success\nYou are using the latest version of Muse Dash Mod Tools");
                 return;
             }
 
-            var update = await _dialogueService.CreateConfirmMessageBox("Notice", "A newer version of Muse Dash Mod Tools is released\nDo you want to install it now?");
+            var update = await _dialogueService.CreateConfirmMessageBox("Notice",
+                "A newer version of Muse Dash Mod Tools is released\nDo you want to install it now?");
             if (!update) return;
             var link = string.Empty;
             var assets = doc.RootElement.GetProperty("assets");
@@ -159,10 +172,7 @@ public class GitHubService : IGitHubService
             return;
         }
 
-        if (!Directory.Exists(updaterTargetFolder))
-        {
-            Directory.CreateDirectory(updaterTargetFolder);
-        }
+        if (!Directory.Exists(updaterTargetFolder)) Directory.CreateDirectory(updaterTargetFolder);
 
         try
         {

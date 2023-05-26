@@ -18,12 +18,12 @@ public class ModService : IModService
 {
     private readonly IDialogueService _dialogueService;
     private readonly IGitHubService _gitHubService;
-    private readonly ISettingService _settings;
     private readonly ILocalService _localService;
+    private readonly ISettingService _settings;
+    private string? _currentGameVersion;
 
     private SourceCache<Mod, string>? _sourceCache;
     private ReadOnlyObservableCollection<Mod>? Mods;
-    private string? _currentGameVersion;
 
     public ModService(IDialogueService dialogueService, IGitHubService gitHubService, ISettingService settings, ILocalService localService)
     {
@@ -74,7 +74,8 @@ public class ModService : IModService
             if (localMods.Count(x => x.Name == localMod.Name) > 1)
             {
                 localMod.IsDuplicated = true;
-                localMod.DuplicatedModNames = string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
+                localMod.DuplicatedModNames =
+                    string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
 
             isTracked[localModIdx] = true;
@@ -88,7 +89,8 @@ public class ModService : IModService
             localMod.HomePage = webMod.HomePage;
             localMod.Description = webMod.Description;
 
-            var versionDate = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 : new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
+            var versionDate = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 :
+                new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
             localMod.State = (UpdateState)versionDate;
             localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
             if (localMod.IsShaMismatched)
@@ -105,7 +107,8 @@ public class ModService : IModService
             if (localMods.Count(x => x.Name == localMod.Name) > 1)
             {
                 localMod.IsDuplicated = true;
-                localMod.DuplicatedModNames = string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
+                localMod.DuplicatedModNames =
+                    string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
 
             sourceCache.AddOrUpdate(localMods[i]);
@@ -116,7 +119,8 @@ public class ModService : IModService
     {
         if (_settings.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
-        var result = await _dialogueService.CreateCustomConfirmMessageBox("You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?");
+        var result = await _dialogueService.CreateCustomConfirmMessageBox(
+            "You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?");
         switch (result)
         {
             case "Yes":
@@ -213,7 +217,8 @@ public class ModService : IModService
             return;
         }
 
-        var result = await _dialogueService.CreateConfirmMessageBox($"You are asking to reinstall {item.Name}\nPlease confirm your operation");
+        var result = await _dialogueService.CreateConfirmMessageBox(
+            $"You are asking to reinstall {item.Name}\nPlease confirm your operation");
         if (!result) return;
         await OnInstallMod(item);
     }
@@ -225,11 +230,13 @@ public class ModService : IModService
             switch (item.IsDisabled)
             {
                 case true:
-                    var enabledReverseDependencies = SearchReverseDependencies(_sourceCache!, item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
+                    var enabledReverseDependencies = SearchReverseDependencies(_sourceCache!, item.Name!)
+                        .Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
                     if (enabledReverseDependencies.Length > 0)
                     {
                         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
-                        var result = await _dialogueService.CreateConfirmMessageBox($"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to disable this mod?");
+                        var result = await _dialogueService.CreateConfirmMessageBox(
+                            $"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to disable this mod?");
                         if (!result)
                         {
                             item.IsDisabled = !item.IsDisabled;
@@ -243,7 +250,8 @@ public class ModService : IModService
 
                     break;
                 case false:
-                    var disabledDependencies = SearchDependencies(_sourceCache!, item.Name!).Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
+                    var disabledDependencies = SearchDependencies(_sourceCache!, item.Name!)
+                        .Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
                     if (disabledDependencies.Length > 0)
                     {
                         var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
@@ -284,7 +292,8 @@ public class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await _dialogueService.CreateMessageBox("Notice", $"Please manually choose and delete the duplicated mod\n{item.DuplicatedModNames}", icon: Icon.Info);
+            await _dialogueService.CreateMessageBox("Notice",
+                $"Please manually choose and delete the duplicated mod\n{item.DuplicatedModNames}", icon: Icon.Info);
             await _localService.OpenModsFolder();
             return;
         }
@@ -298,11 +307,13 @@ public class ModService : IModService
 
         try
         {
-            var enabledReverseDependencies = SearchReverseDependencies(_sourceCache!, item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
+            var enabledReverseDependencies = SearchReverseDependencies(_sourceCache!, item.Name!)
+                .Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
             if (enabledReverseDependencies.Length > 0)
             {
                 var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
-                var result = await _dialogueService.CreateConfirmMessageBox($"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to delete this mod?");
+                var result = await _dialogueService.CreateConfirmMessageBox(
+                    $"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to delete this mod?");
                 if (!result)
                     return;
                 _settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(

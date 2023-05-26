@@ -178,7 +178,7 @@
                            BorderThickness="0,0,0,1"
                            Margin="0,0,15,0">
 
-                <TextBox Name="Input_SearchFilter"
+                <TextBox Name="InputSearchFilter"
                          Classes="Solo"
                          Background="#505050"
                          Margin="12,0,200,0"
@@ -431,7 +431,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Tag="{Binding Name}">
-                                            <Expander Margin="0,0,15,0">
+                                            <Expander Margin="0,0,15,0.5">
                                                 <Expander.Header>
                                                     <Label Height="80"
                                                            HorizontalContentAlignment="Left"
@@ -450,7 +450,8 @@
                                                     </StackPanel.Styles>
                                                     <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
 
-                                                    <TextBlock Classes="Body2" Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
+                                                    <TextBlock Classes="Body2"
+                                                               Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                                Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
                                                     <Button Classes="Dark" IsVisible="{Binding IsValidHomePage}"
@@ -483,7 +484,7 @@
                                                         <Setter Property="VerticalContentAlignment" Value="Center" />
                                                         <Setter Property="Width" Value="100" />
                                                         <Setter Property="Height" Value="40" />
-                                                        <Setter Property="Margin" Value="40,23,0,17" />
+                                                        <Setter Property="Margin" Value="50,23,0,17" />
                                                     </Style>
                                                 </StackPanel.Styles>
                                                 <ToggleSwitch IsChecked="{Binding !IsDisabled }"

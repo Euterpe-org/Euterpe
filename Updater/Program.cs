@@ -26,7 +26,16 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     }
     catch (Exception)
     {
-        result = await httpClient.GetAsync(downloadArgs[0].Replace("github.com", "download.fastgit.org"), HttpCompletionOption.ResponseHeadersRead);
+        try
+        {
+            result = await httpClient.GetAsync(downloadArgs[0].Replace("github.com", "download.fastgit.org"),
+                HttpCompletionOption.ResponseHeadersRead);
+        }
+        catch
+        {
+            result = await httpClient.GetAsync("https://hub.gitmirror.com/" + downloadArgs[0],
+                HttpCompletionOption.ResponseContentRead);
+        }
     }
 
     var totalLength = result.Content.Headers.ContentLength;
@@ -41,9 +50,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
         {
             readLength += length;
             if (totalLength > 0)
-            {
                 Console.WriteLine("Current download progress: " + Math.Round((double)readLength / totalLength.Value * 100, 2) + "%");
-            }
 
             fs.Write(buffer, 0, length);
         }

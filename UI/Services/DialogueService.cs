@@ -12,7 +12,8 @@ namespace MuseDashModToolsUI.Services;
 
 public class DialogueService : IDialogueService
 {
-    public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.Success)
+    public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok,
+        Icon icon = Icon.Success)
     {
         var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
         var isMainWindow = desktop?.MainWindow is not null;
@@ -29,7 +30,8 @@ public class DialogueService : IDialogueService
         return isMainWindow ? await messageBox.Show(desktop!.MainWindow) : await messageBox.Show();
     }
 
-    public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) => await CreateMessageBox(title, content, icon: Icon.Error);
+    public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) =>
+        await CreateMessageBox(title, content, icon: Icon.Error);
 
     public async Task<ButtonResult> CreateErrorMessageBox(string content) => await CreateErrorMessageBox("Failure", content);
 

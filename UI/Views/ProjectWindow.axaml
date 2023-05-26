@@ -5,7 +5,7 @@
         Title="ProjectWindow">
     <Grid RowDefinitions="100,100,150,80" Width="800" ShowGridLines="True">
 
-		<Button Grid.Row="0"
+        <Button Grid.Row="0"
                 Width="150"
                 Classes="Flat"
                 HorizontalAlignment="Center"
@@ -22,7 +22,7 @@
                 ToolTip.Tip="Muse Dash Mod Tools Project"
                 Command="{Binding OpenUrlCommand}"
                 CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
-            <Image Source="/Assets/Icon.png" Margin="-7,0,0,5"/>
+            <Image Source="/Assets/Icon.png" Margin="-7,0,0,5" />
         </Button>
 
         <Button Grid.Row="0"
@@ -32,7 +32,7 @@
                 Command="{Binding OpenUrlCommand}"
                 CommandParameter="https://discord.gg/mdmc"
                 Margin="500,0,0,0">
-            <Image Source="/Assets/MDMC_Discord.png" Width="80"/>
+            <Image Source="/Assets/MDMC_Discord.png" Width="80" />
         </Button>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Top">

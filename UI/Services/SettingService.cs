@@ -14,12 +14,13 @@ namespace MuseDashModToolsUI.Services;
 public class SettingService : ISettingService
 {
     [JsonIgnore] private readonly IDialogueService _dialogueService;
-    public Setting Settings { get; set; } = new();
 
     public SettingService(IDialogueService dialogueService)
     {
         _dialogueService = dialogueService;
     }
+
+    public Setting Settings { get; set; } = new();
 
     public async Task InitializeSettings()
     {
@@ -36,7 +37,8 @@ public class SettingService : ISettingService
             var settings = JsonSerializer.Deserialize<Setting>(text)!;
             if (settings.MuseDashFolder is null)
             {
-                await _dialogueService.CreateErrorMessageBox("Warning", "Your stored Muse Dash Folder path is null\nPlease choose the correct folder");
+                await _dialogueService.CreateErrorMessageBox("Warning",
+                    "Your stored Muse Dash Folder path is null\nPlease choose the correct folder");
                 await OnChoosePath();
                 return;
             }

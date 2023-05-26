@@ -17,8 +17,8 @@ namespace MuseDashModToolsUI.Services;
 public class LocalService : ILocalService
 {
     private readonly IDialogueService _dialogueService;
-    private readonly ISettingService _settings;
     private readonly IDownloadWindowViewModel _downloadWindowViewModel;
+    private readonly ISettingService _settings;
 
     private bool IsValidPath { get; set; }
 
@@ -47,10 +47,7 @@ public class LocalService : ILocalService
         mod.Name = attribute.Name;
         mod.LocalVersion = attribute.Version;
 
-        if (mod.Name == null || mod.LocalVersion == null)
-        {
-            return null;
-        }
+        if (mod.Name == null || mod.LocalVersion == null) return null;
 
         mod.Author = attribute.Author;
         mod.HomePage = attribute.DownloadLink;
@@ -74,7 +71,8 @@ public class LocalService : ILocalService
             var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
             if (version is not "2019.4.32.16288752")
             {
-                await _dialogueService.CreateErrorMessageBox("Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
+                await _dialogueService.CreateErrorMessageBox(
+                    "Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
                 IsValidPath = false;
                 return IsValidPath;
             }
@@ -87,7 +85,9 @@ public class LocalService : ILocalService
 
             var cfgFilePath = Path.Join(_settings.Settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
             if (!File.Exists(cfgFilePath))
+            {
                 await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
+            }
             else
             {
                 var path = await File.ReadAllTextAsync(cfgFilePath);
@@ -124,7 +124,8 @@ public class LocalService : ILocalService
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox($"Cannot read current game version\nDo you fully installed Muse Dash?\nPlease check your globalgamemanagers file in\n{bundlePath}");
+            await _dialogueService.CreateErrorMessageBox(
+                $"Cannot read current game version\nDo you fully installed Muse Dash?\nPlease check your globalgamemanagers file in\n{bundlePath}");
             Environment.Exit(0);
         }
 
@@ -136,7 +137,8 @@ public class LocalService : ILocalService
         var melonLoaderFolder = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(_settings.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
-        var install = await _dialogueService.CreateConfirmMessageBox("Notice", "You did not install MelonLoader\nWhich is needed to run all the mods\nInstall Now?");
+        var install = await _dialogueService.CreateConfirmMessageBox("Notice",
+            "You did not install MelonLoader\nWhich is needed to run all the mods\nInstall Now?");
         if (install)
             await OnInstallMelonLoader();
     }
@@ -144,20 +146,21 @@ public class LocalService : ILocalService
     public async Task OnInstallMelonLoader()
     {
         if (!IsValidPath) return;
-        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog", (object _, DialogOpenedEventArgs _) => _downloadWindowViewModel.InstallMelonLoader());
+        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog",
+            (object _, DialogOpenedEventArgs _) => _downloadWindowViewModel.InstallMelonLoader());
     }
 
     public async Task OnUninstallMelonLoader()
     {
         if (!IsValidPath) return;
-        var result = await _dialogueService.CreateConfirmMessageBox("You are asking to uninstall MelonLoader\nPlease confirm your operation");
+        var result = await _dialogueService.CreateConfirmMessageBox(
+            "You are asking to uninstall MelonLoader\nPlease confirm your operation");
         if (!result) return;
         var melonLoaderFolder = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(_settings.Settings.MuseDashFolder, "version.dll");
         var noticeTxt = Path.Join(_settings.Settings.MuseDashFolder, "NOTICE.txt");
 
         if (Directory.Exists(melonLoaderFolder))
-        {
             try
             {
                 Directory.Delete(melonLoaderFolder, true);
@@ -169,7 +172,6 @@ public class LocalService : ILocalService
             {
                 await _dialogueService.CreateErrorMessageBox("Cannot uninstall MelonLoader\nPlease make sure your game is not running!");
             }
-        }
         else
             await _dialogueService.CreateErrorMessageBox("Cannot find MelonLoader Folder\nHave you installed MelonLoader?");
     }

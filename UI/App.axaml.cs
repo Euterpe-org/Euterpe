@@ -27,5 +27,6 @@ public class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
+
     private static T GetRequiredService<T>() => Locator.Current.GetRequiredService<T>();
 }

@@ -12,12 +12,11 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowViewModel
 {
-    [ObservableProperty] private double _percentage;
-    [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
-
     private readonly IDialogueService _dialogueService;
     private readonly IGitHubService _gitHubService;
     private readonly ISettingService _settings;
+    [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
+    [ObservableProperty] private double _percentage;
 
     public DownloadWindowViewModel(IDialogueService dialogueService, IGitHubService gitHubService, ISettingService settings)
     {
@@ -31,7 +30,6 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         var zipPath = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader.zip");
         var downloadProgress = new Progress<double>(UpdateDownloadProgress);
         if (!File.Exists(zipPath))
-        {
             try
             {
                 await _gitHubService.DownloadMelonLoader(zipPath, downloadProgress);
@@ -49,7 +47,6 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
                 DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                 return;
             }
-        }
 
         try
         {
@@ -58,7 +55,8 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox($"Cannot unzip MelonLoader.zip in\n{zipPath}\nPlease make sure your game is not running\nThen try manually unzip");
+            await _dialogueService.CreateErrorMessageBox(
+                $"Cannot unzip MelonLoader.zip in\n{zipPath}\nPlease make sure your game is not running\nThen try manually unzip");
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
         }

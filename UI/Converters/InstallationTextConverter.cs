@@ -10,7 +10,6 @@ public class InstallationTextConverter : IValueConverter
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is Mod mod)
-        {
             switch (mod.State)
             {
                 case UpdateState.Outdated:
@@ -24,7 +23,6 @@ public class InstallationTextConverter : IValueConverter
                     return string.Empty;
                 }
             }
-        }
 
         return string.Empty;
     }

@@ -18,17 +18,16 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
-    [ObservableProperty] private string _filter;
-    [ObservableProperty] private FilterType _categoryFilterType;
+    private readonly IGitHubService _gitHubService;
+    private readonly ILocalService _localService;
+    private readonly ReadOnlyObservableCollection<Mod> _mods;
+    private readonly IModService _modService;
+    private readonly ISettingService _settings;
 
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
-    private readonly ReadOnlyObservableCollection<Mod> _mods;
+    [ObservableProperty] private FilterType _categoryFilterType;
+    [ObservableProperty] private string _filter;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
-
-    private readonly IGitHubService _gitHubService;
-    private readonly ISettingService _settings;
-    private readonly ILocalService _localService;
-    private readonly IModService _modService;
 
     public MainWindowViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
     {
