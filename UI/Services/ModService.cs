@@ -52,6 +52,7 @@ public class ModService : IModService
         catch (Exception)
         {
             await _dialogueService.CreateErrorMessageBox("Your downloaded mods are broken\nPlease delete 0kb mod if it exist");
+            await _localService.OpenModsFolder();
             Environment.Exit(0);
             return;
         }
