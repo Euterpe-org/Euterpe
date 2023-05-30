@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -108,7 +107,7 @@ public class GitHubService : IGitHubService
         var buffer = new byte[5 * 1024];
         var readLength = 0L;
         int length;
-        while ((length = await contentStream.ReadAsync(buffer, 0, buffer.Length, CancellationToken.None)) != 0)
+        while ((length = await contentStream.ReadAsync(buffer, CancellationToken.None)) != 0)
         {
             readLength += length;
             if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
@@ -141,20 +140,22 @@ public class GitHubService : IGitHubService
                 return;
             }
 
+            var info = doc.RootElement.GetProperty("name").GetString();
             var update = await _dialogueService.CreateConfirmMessageBox("Notice",
-                "A newer version of Muse Dash Mod Tools is released\nDo you want to install it now?");
+                "A newer version of Muse Dash Mod Tools is released\nDo you want to install it now?\n\nRelease info:\n" + info);
+
             if (!update) return;
             var link = string.Empty;
             var assets = doc.RootElement.GetProperty("assets");
             var releases = assets.EnumerateArray();
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            if (OperatingSystem.IsLinux())
             {
                 var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Linux.zip"));
                 link = release.GetProperty("browser_download_url").GetString()!;
             }
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (OperatingSystem.IsWindows())
             {
                 var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Windows.zip"));
                 link = release.GetProperty("browser_download_url").GetString()!;
@@ -164,7 +165,7 @@ public class GitHubService : IGitHubService
             await LaunchUpdater(currentDirectory, new[] { link, currentDirectory + ".zip", currentDirectory });
             Environment.Exit(0);
         }
-        catch (Exception)
+        catch
         {
             await _dialogueService.CreateErrorMessageBox("Checking updates failed\nAre you online?");
         }

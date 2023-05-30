@@ -53,10 +53,10 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
             var fastZip = new FastZip();
             fastZip.ExtractZip(zipPath, _settings.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             await _dialogueService.CreateErrorMessageBox(
-                $"Cannot unzip MelonLoader.zip in\n{zipPath}\nPlease make sure your game is not running\nThen try manually unzip");
+                $"Cannot unzip MelonLoader.zip in\n{zipPath}\nError:{ex}\nTry manually unzip?");
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
         }
@@ -65,9 +65,10 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         {
             File.Delete(zipPath);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            await _dialogueService.CreateErrorMessageBox($"Failed to delete MelonLoader.zip in\n{zipPath}\nTry manually delete");
+            await _dialogueService.CreateErrorMessageBox(
+                $"Failed to delete MelonLoader.zip in\n{zipPath}\nError:{ex}\nTry manually delete");
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
         }

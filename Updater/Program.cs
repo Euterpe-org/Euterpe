@@ -24,7 +24,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     {
         result = await httpClient.GetAsync(downloadArgs[0], HttpCompletionOption.ResponseHeadersRead);
     }
-    catch (Exception)
+    catch
     {
         try
         {
@@ -46,7 +46,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     try
     {
         int length;
-        while ((length = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+        while ((length = await contentStream.ReadAsync(buffer, CancellationToken.None)) != 0)
         {
             readLength += length;
             if (totalLength > 0)

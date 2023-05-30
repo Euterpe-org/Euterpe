@@ -37,7 +37,8 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _modService = modService;
 
         _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(_filter) || x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase))
+            .Filter(x => string.IsNullOrEmpty(_filter) || x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase) ||
+                         x.XamlDescription.Contains(_filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => _categoryFilterType != FilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
             .Filter(x => _categoryFilterType != FilterType.Outdated || x.State == UpdateState.Outdated)
             .Filter(x => _categoryFilterType != FilterType.Installed || x.IsLocal)
