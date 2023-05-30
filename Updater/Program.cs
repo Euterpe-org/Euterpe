@@ -46,7 +46,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     try
     {
         int length;
-        while ((length = await contentStream.ReadAsync(buffer, CancellationToken.None)) != 0)
+        while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
         {
             readLength += length;
             if (totalLength > 0)

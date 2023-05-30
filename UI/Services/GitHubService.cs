@@ -107,7 +107,7 @@ public class GitHubService : IGitHubService
         var buffer = new byte[5 * 1024];
         var readLength = 0L;
         int length;
-        while ((length = await contentStream.ReadAsync(buffer, CancellationToken.None)) != 0)
+        while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
         {
             readLength += length;
             if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
