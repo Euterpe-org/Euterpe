@@ -159,13 +159,13 @@ public class ModService : IModService
             switch (ex)
             {
                 case HttpRequestException:
-                    errors.AppendLine($"Mod installation failed\nAre you online? {ex}");
+                    errors.AppendLine($"Mod installation failed. Are you online?\n{ex}");
                     break;
 
                 case SecurityException:
                 case UnauthorizedAccessException:
                 case IOException:
-                    errors.AppendLine($"Mod installation failed\nIs the game running? {ex}");
+                    errors.AppendLine($"Mod installation failed. Is the game running?\n{ex}");
                     break;
 
                 default:
@@ -188,7 +188,7 @@ public class ModService : IModService
             }
             catch (Exception ex)
             {
-                errors.AppendLine($"Dependency failed to install\n {ex}");
+                errors.AppendLine($"Dependency failed to install\n{ex}");
             }
         }
 
@@ -273,15 +273,15 @@ public class ModService : IModService
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    await _dialogueService.CreateErrorMessageBox("Mod disable/enable failed\nUnauthorized");
+                    await _dialogueService.CreateErrorMessageBox($"Mod disable/enable failed. Unauthorized\n{ex}");
                     break;
 
                 case IOException:
-                    await _dialogueService.CreateErrorMessageBox("Mod disable/enable failed\nIs the game running?");
+                    await _dialogueService.CreateErrorMessageBox($"Mod disable/enable failed. Is the game running?\n{ex}");
                     break;
 
                 default:
-                    await _dialogueService.CreateErrorMessageBox("Mod disable/enable failed\n");
+                    await _dialogueService.CreateErrorMessageBox($"Mod disable/enable failed\n{ex}");
                     break;
             }
 
@@ -340,11 +340,11 @@ public class ModService : IModService
             {
                 case UnauthorizedAccessException:
                 case IOException:
-                    await _dialogueService.CreateErrorMessageBox("Mod uninstall failed\nIs the game running?");
+                    await _dialogueService.CreateErrorMessageBox($"Mod uninstall failed. Is the game running?\n{ex}");
                     break;
 
                 default:
-                    await _dialogueService.CreateErrorMessageBox("Mod uninstall failed");
+                    await _dialogueService.CreateErrorMessageBox($"Mod uninstall failed\n{ex}");
                     break;
             }
         }
