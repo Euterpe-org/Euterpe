@@ -25,6 +25,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly ISettingService _settings;
 
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
+    private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private FilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
@@ -56,6 +57,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         await _settings.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
         await _gitHubService.CheckUpdates();
+        FileMonitorStart();
     }
 
     [RelayCommand]
@@ -77,7 +79,11 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private async Task OnUninstallMelonLoader() => await _localService.OnUninstallMelonLoader();
 
     [RelayCommand]
-    private async Task OnChoosePath() => await _settings.OnChoosePath();
+    private async Task OnChoosePath()
+    {
+        await _settings.OnChoosePath();
+        Initialize();
+    }
 
     [RelayCommand]
     private void OpenUrl(string path)
@@ -112,6 +118,18 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
     partial void OnCategoryFilterTypeChanged(FilterType value) => _sourceCache.Refresh();
+
+    private void FileMonitorStart()
+    {
+        _watcher.Path = _settings.Settings.ModsFolder;
+        _watcher.Filters.Add("*.dll");
+        _watcher.Filters.Add("*.disabled");
+        _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
+        _watcher.Changed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
+        _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
+        _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
+        _watcher.EnableRaisingEvents = true;
+    }
 
     private void OnExit(object sender, EventArgs e)
     {

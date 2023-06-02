@@ -28,19 +28,20 @@ public class SettingService : ISettingService
         {
             if (!File.Exists("Settings.json"))
             {
-                await _dialogueService.CreateErrorMessageBox("Warning", "You haven't choose Muse Dash Folder\nPlease choose the folder");
+                await _dialogueService.CreateErrorMessageBox("Warning",
+                    "You haven't choose Muse Dash Folder\nPlease choose the folder");
                 await OnChoosePath();
                 return;
             }
 
             var text = await File.ReadAllTextAsync("Settings.json");
             var settings = JsonSerializer.Deserialize<Setting>(text)!;
-            if (settings.MuseDashFolder is null)
+            if (string.IsNullOrEmpty(settings.MuseDashFolder))
             {
                 await _dialogueService.CreateErrorMessageBox("Warning",
                     "Your stored Muse Dash Folder path is null\nPlease choose the correct folder");
                 await OnChoosePath();
-                return;
+                await InitializeSettings();
             }
 
             Settings.MuseDashFolder = settings.MuseDashFolder;
@@ -78,7 +79,7 @@ public class SettingService : ISettingService
                 }
 
                 Settings.MuseDashFolder = path;
-                var json = JsonSerializer.Serialize(this);
+                var json = JsonSerializer.Serialize(Settings);
                 await File.WriteAllTextAsync("Settings.json", json);
             }
 

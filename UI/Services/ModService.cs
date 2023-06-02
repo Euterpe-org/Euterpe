@@ -116,23 +116,6 @@ public class ModService : IModService
         }
     }
 
-    public async Task CheckModToolsInstall(Mod mod)
-    {
-        if (_settings.Settings.AskInstallMuseDashModTools != AskType.Always) return;
-        if (mod.Name != "MuseDashModTools") return;
-        var result = await _dialogueService.CreateCustomConfirmMessageBox(
-            "You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?");
-        switch (result)
-        {
-            case "Yes":
-                await OnInstallMod(mod);
-                break;
-            case "No and Don't Ask Again":
-                _settings.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
-                break;
-        }
-    }
-
     public async Task OnInstallMod(Mod item)
     {
         if (item.DownloadLink is null)
@@ -347,6 +330,23 @@ public class ModService : IModService
                     await _dialogueService.CreateErrorMessageBox($"Mod uninstall failed\n{ex}");
                     break;
             }
+        }
+    }
+
+    private async Task CheckModToolsInstall(Mod mod)
+    {
+        if (_settings.Settings.AskInstallMuseDashModTools != AskType.Always) return;
+        if (mod.Name != "MuseDashModTools") return;
+        var result = await _dialogueService.CreateCustomConfirmMessageBox(
+            "You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?");
+        switch (result)
+        {
+            case "Yes":
+                await OnInstallMod(mod);
+                break;
+            case "No and Don't Ask Again":
+                _settings.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
+                break;
         }
     }
 
