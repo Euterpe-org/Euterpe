@@ -4,7 +4,7 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <Version>1.0.7</Version>
+        <Version>1.0.8</Version>
         <!--Avalonia doesen't support TrimMode=link currently,but we are working on that https://github.com/AvaloniaUI/Avalonia/issues/6892 -->
         <TrimMode>copyused</TrimMode>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
@@ -24,6 +24,14 @@
         <EmbeddedResource Remove="Mods\**"/>
         <None Remove="Mods\**"/>
         <None Remove=".gitignore"/>
+        <EmbeddedResource Update="Localization\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Update="Localization\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
         <Content Include="Assets\Icon.ico"/>

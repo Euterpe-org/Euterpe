@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Avalonia.Data.Converters;
+using MuseDashModToolsUI.Localization;
 using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Converters;
@@ -13,10 +14,10 @@ public class InstallationTextConverter : IValueConverter
             switch (mod.State)
             {
                 case UpdateState.Outdated:
-                    return "Update";
+                    return Resources.XAML_Update_Mod;
                 case UpdateState.Newer:
                 case UpdateState.Modified:
-                    return "Reinstall";
+                    return Resources.XAML_Reinstall_Mod;
                 case UpdateState.Normal:
                 default:
                 {

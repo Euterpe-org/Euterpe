@@ -10,7 +10,9 @@ using DialogHostAvalonia;
 using MelonLoader;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -62,7 +64,7 @@ public class LocalService : ILocalService
         var userDataPath = Path.Join(_settings.Settings.MuseDashFolder, "UserData");
         if (!File.Exists(exePath) || !File.Exists(gameAssemblyPath))
         {
-            await _dialogueService.CreateErrorMessageBox("Couldn't find MuseDash.exe or GameAssembly.dll\nPlease choose the right folder");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_NoExeFound.Localize());
             await _settings.OnChoosePath();
         }
 
@@ -71,8 +73,7 @@ public class LocalService : ILocalService
             var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
             if (version is not "2019.4.32.16288752")
             {
-                await _dialogueService.CreateErrorMessageBox(
-                    "Muse Dash.exe is not correct version \nAre you using a pirated or modified version?");
+                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
                 IsValidPath = false;
                 return IsValidPath;
             }
@@ -100,7 +101,7 @@ public class LocalService : ILocalService
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Failed to verify MuseDash.exe\nMake sure you selected the right folder");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed.Localize());
             await _settings.OnChoosePath();
             IsValidPath = false;
             return IsValidPath;
@@ -124,8 +125,7 @@ public class LocalService : ILocalService
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox(
-                $"Cannot read current game version\nDo you fully installed Muse Dash?\nPlease check your globalgamemanagers file in\n{bundlePath}");
+            await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed.Localize(), bundlePath));
             Environment.Exit(0);
         }
 
@@ -137,8 +137,7 @@ public class LocalService : ILocalService
         var melonLoaderFolder = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(_settings.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
-        var install = await _dialogueService.CreateConfirmMessageBox("Notice",
-            "You did not install MelonLoader\nWhich is needed to run all the mods\nInstall Now?");
+        var install = await _dialogueService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader.Localize());
         if (install)
             await OnInstallMelonLoader();
     }
@@ -166,21 +165,21 @@ public class LocalService : ILocalService
                 Directory.Delete(melonLoaderFolder, true);
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
-                await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully uninstalled\n");
+                await _dialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
             }
             catch (Exception)
             {
-                await _dialogueService.CreateErrorMessageBox("Cannot uninstall MelonLoader\nPlease make sure your game is not running!");
+                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed.Localize());
             }
         else
-            await _dialogueService.CreateErrorMessageBox("Cannot find MelonLoader Folder\nHave you installed MelonLoader?");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_NoMelonLoaderFolder.Localize());
     }
 
     public async Task OpenModsFolder()
     {
         if (!IsValidPath)
         {
-            await _dialogueService.CreateErrorMessageBox("Choose correct Muse Dash folder first!");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             await _settings.OnChoosePath();
             return;
         }

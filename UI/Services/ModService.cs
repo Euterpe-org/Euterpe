@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using DynamicData;
 using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -51,7 +53,7 @@ public class ModService : IModService
         }
         catch (Exception)
         {
-            await _dialogueService.CreateErrorMessageBox("Your downloaded mods are broken\nPlease delete 0kb mod if it exist");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_BrokenMods.Localize());
             await _localService.OpenModsFolder();
             Environment.Exit(0);
             return;
@@ -120,7 +122,7 @@ public class ModService : IModService
     {
         if (item.DownloadLink is null)
         {
-            await _dialogueService.CreateErrorMessageBox("This mod does not have an available resource for download.\n");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_NoDownloadLink.Localize());
             return;
         }
 
@@ -142,17 +144,17 @@ public class ModService : IModService
             switch (ex)
             {
                 case HttpRequestException:
-                    errors.AppendLine($"Mod installation failed. Are you online?\n{ex}");
+                    errors.AppendLine(string.Format(MsgBox_Content_InstallModFailed_Internet.Localize(), ex));
                     break;
 
                 case SecurityException:
                 case UnauthorizedAccessException:
                 case IOException:
-                    errors.AppendLine($"Mod installation failed. Is the game running?\n{ex}");
+                    errors.AppendLine(string.Format(MsgBox_Content_InstallModFailed_Game.Localize(), ex));
                     break;
 
                 default:
-                    errors.AppendLine($"Mod installation failed\n{ex}");
+                    errors.AppendLine(string.Format(MsgBox_Content_InstallModFailed.Localize(), ex));
                     break;
             }
         }
@@ -171,7 +173,7 @@ public class ModService : IModService
             }
             catch (Exception ex)
             {
-                errors.AppendLine($"Dependency failed to install\n{ex}");
+                errors.AppendLine(string.Format(MsgBox_Content_InstallDependencyFailed.Localize(), ex));
             }
         }
 
@@ -180,7 +182,7 @@ public class ModService : IModService
         {
             var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
             _settings.Settings.AskEnableDependenciesWhenInstalling = await ChangeDependenciesState(
-                $"Do you want to enable {item.Name}'s dependency {disabledDependencyNames}?",
+                string.Format(MsgBox_Content_EnableDependency, item.Name, disabledDependencyNames),
                 disabledDependencies, _settings.Settings.AskEnableDependenciesWhenInstalling, false);
         }
 
@@ -190,7 +192,8 @@ public class ModService : IModService
             return;
         }
 
-        await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully installed\n");
+        await _dialogueService.CreateMessageBox(MsgBox_Title_Success,
+            string.Format(MsgBox_Content_InstallModSuccess.Localize(), item.Name));
     }
 
     public async Task OnReinstallMod(Mod item)
@@ -202,7 +205,7 @@ public class ModService : IModService
         }
 
         var result = await _dialogueService.CreateConfirmMessageBox(
-            $"You are asking to reinstall {item.Name}\nPlease confirm your operation");
+            string.Format(MsgBox_Content_ReinstallMod.Localize(), item.Name));
         if (!result) return;
         await OnInstallMod(item);
     }
@@ -220,7 +223,7 @@ public class ModService : IModService
                     {
                         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
                         var result = await _dialogueService.CreateConfirmMessageBox(
-                            $"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to disable this mod?");
+                            string.Format(MsgBox_Content_EnableReverseDependency.Localize(), item.Name, enabledReverseDependencyNames));
                         if (!result)
                         {
                             item.IsDisabled = !item.IsDisabled;
@@ -228,8 +231,8 @@ public class ModService : IModService
                         }
 
                         _settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
-                            $"Do you want to disable the mods depend on {item.Name} as well?",
-                            enabledReverseDependencies, _settings.Settings.AskDisableDependenciesWhenDisabling, true);
+                            string.Format(MsgBox_Content_DisableDependency, item.Name), enabledReverseDependencies,
+                            _settings.Settings.AskDisableDependenciesWhenDisabling, true);
                     }
 
                     break;
@@ -240,7 +243,7 @@ public class ModService : IModService
                     {
                         var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
                         _settings.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
-                            $"Do you want to enable {item.Name}'s dependency {disabledDependencyNames} as well?",
+                            string.Format(MsgBox_Content_EnableDependency, item.Name, disabledDependencyNames),
                             disabledDependencies, _settings.Settings.AskEnableDependenciesWhenEnabling, false);
                     }
 
@@ -256,15 +259,16 @@ public class ModService : IModService
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    await _dialogueService.CreateErrorMessageBox($"Mod disable/enable failed. Unauthorized\n{ex}");
+                    await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
+                        ex));
                     break;
 
                 case IOException:
-                    await _dialogueService.CreateErrorMessageBox($"Mod disable/enable failed. Is the game running?\n{ex}");
+                    await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
                     break;
 
                 default:
-                    await _dialogueService.CreateErrorMessageBox($"Mod disable/enable failed\n{ex}");
+                    await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
                     break;
             }
 
@@ -276,8 +280,8 @@ public class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await _dialogueService.CreateMessageBox("Notice",
-                $"Please manually choose and delete the duplicated mod\n{item.DuplicatedModNames}", icon: Icon.Info);
+            await _dialogueService.CreateMessageBox(MsgBox_Title_Notice,
+                string.Format(MsgBox_Content_DuplicateMods.Localize(), item.DuplicatedModNames), icon: Icon.Info);
             await _localService.OpenModsFolder();
             return;
         }
@@ -285,7 +289,7 @@ public class ModService : IModService
         var path = Path.Join(_settings.Settings.ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
-            await _dialogueService.CreateErrorMessageBox("Cannot delete file that doesn't exist");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallModFailed_Null);
             return;
         }
 
@@ -297,12 +301,12 @@ public class ModService : IModService
             {
                 var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
                 var result = await _dialogueService.CreateConfirmMessageBox(
-                    $"{item.Name} is used by {enabledReverseDependencyNames} as dependency\nAre you sure you want to delete this mod?");
+                    string.Format(MsgBox_Content_UninstallDependency, item.Name, enabledReverseDependencyNames));
                 if (!result)
                     return;
                 _settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
-                    $"Do you want to disable the mods depend on {item.Name}?",
-                    enabledReverseDependencies, _settings.Settings.AskDisableDependenciesWhenDeleting, true);
+                    string.Format(MsgBox_Content_DisableDependency, item.Name), enabledReverseDependencies,
+                    _settings.Settings.AskDisableDependenciesWhenDeleting, true);
             }
 
             File.Delete(path);
@@ -315,7 +319,8 @@ public class ModService : IModService
                 _sourceCache!.AddOrUpdate(webMod);
             }
 
-            await _dialogueService.CreateMessageBox("Success", $"{item.Name} has been successfully deleted.\n");
+            await _dialogueService.CreateMessageBox(MsgBox_Title_Success,
+                string.Format(MsgBox_Content_UninstallModSuccess.Localize(), item.Name));
         }
         catch (Exception ex)
         {
@@ -323,11 +328,11 @@ public class ModService : IModService
             {
                 case UnauthorizedAccessException:
                 case IOException:
-                    await _dialogueService.CreateErrorMessageBox($"Mod uninstall failed. Is the game running?\n{ex}");
+                    await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
                     break;
 
                 default:
-                    await _dialogueService.CreateErrorMessageBox($"Mod uninstall failed\n{ex}");
+                    await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
                     break;
             }
         }
@@ -337,17 +342,9 @@ public class ModService : IModService
     {
         if (_settings.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
-        var result = await _dialogueService.CreateCustomConfirmMessageBox(
-            "You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?");
-        switch (result)
-        {
-            case "Yes":
-                await OnInstallMod(mod);
-                break;
-            case "No and Don't Ask Again":
-                _settings.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
-                break;
-        }
+        var result = await _dialogueService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
+        if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
+        else if (result == MsgBox_Button_NoNoAsk) _settings.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
 
     private static IEnumerable<Mod> SearchDependencies(IObservableCache<Mod, string> sourceCache, string modName)
@@ -369,18 +366,18 @@ public class ModService : IModService
         {
             case AskType.Always:
                 var askResult = await _dialogueService.CreateCustomConfirmMessageBox(content, 4);
-                switch (askResult)
+                if (askResult == MsgBox_Button_Yes)
                 {
-                    case "Yes":
-                        await ChangeState();
-                        break;
-                    case "Yes and Don't ask Again":
-                        await ChangeState();
-                        askType = AskType.YesAndNoAsk;
-                        break;
-                    case "No and Don't ask Again":
-                        askType = AskType.NoAndNoAsk;
-                        break;
+                    await ChangeState();
+                }
+                else if (askResult == MsgBox_Button_YesNoAsk)
+                {
+                    await ChangeState();
+                    askType = AskType.YesAndNoAsk;
+                }
+                else if (askResult == MsgBox_Button_NoNoAsk)
+                {
+                    askType = AskType.NoAndNoAsk;
                 }
 
                 break;
@@ -403,5 +400,6 @@ public class ModService : IModService
         return askType;
     }
 
-    private bool CheckCompatible(Mod mod) => mod.CompatibleGameVersion == "All" || mod.GameVersion!.Contains(_currentGameVersion);
+    private bool CheckCompatible(Mod mod) =>
+        mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion!.Contains(_currentGameVersion);
 }

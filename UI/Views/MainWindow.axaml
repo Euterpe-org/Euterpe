@@ -8,6 +8,7 @@
         xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
         xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
         xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -96,7 +97,7 @@
                             </Style>
                         </ListBox.Styles>
                         <Label>
-                            <TextBlock Classes="Body1" Text="All" />
+                            <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_All}" />
                             <i:Interaction.Behaviors>
                                 <ia:EventTriggerBehavior EventName="PointerPressed">
                                     <ia:InvokeCommandAction Command="{Binding FilterAllCommand, Mode=OneWay}" />
@@ -104,7 +105,7 @@
                             </i:Interaction.Behaviors>
                         </Label>
                         <Label>
-                            <TextBlock Classes="Body1" Text="Installed" />
+                            <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Installed}" />
                             <i:Interaction.Behaviors>
                                 <ia:EventTriggerBehavior EventName="PointerPressed">
                                     <ia:InvokeCommandAction Command="{Binding FilterInstalledCommand, Mode=OneWay}" />
@@ -112,7 +113,7 @@
                             </i:Interaction.Behaviors>
                         </Label>
                         <Label>
-                            <TextBlock Classes="Body1" Text="Enabled" />
+                            <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Enabled}" />
                             <i:Interaction.Behaviors>
                                 <ia:EventTriggerBehavior EventName="PointerPressed">
                                     <ia:InvokeCommandAction Command="{Binding FilterEnabledCommand, Mode=OneWay}" />
@@ -120,7 +121,7 @@
                             </i:Interaction.Behaviors>
                         </Label>
                         <Label>
-                            <TextBlock Classes="Body1" Text="Outdated" />
+                            <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Outdated}" />
                             <i:Interaction.Behaviors>
                                 <ia:EventTriggerBehavior EventName="PointerPressed">
                                     <ia:InvokeCommandAction Command="{Binding FilterOutdatedCommand, Mode=OneWay}" />
@@ -128,7 +129,7 @@
                             </i:Interaction.Behaviors>
                         </Label>
                         <Label>
-                            <TextBlock Classes="Body1" Text="Incompatible" />
+                            <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Incompatible}" />
                             <i:Interaction.Behaviors>
                                 <ia:EventTriggerBehavior EventName="PointerPressed">
                                     <ia:InvokeCommandAction Command="{Binding FilterIncompatibleCommand, Mode=OneWay}" />
@@ -146,7 +147,7 @@
                         <Setter Property="Foreground" Value="#CCC" />
                         <Setter Property="Background" Value="#4D4D4D" />
                         <Setter Property="Width" Value="120" />
-                        <Setter Property="Height" Value="50" />
+                        <Setter Property="Height" Value="55" />
                         <Setter Property="Margin" Value="0,5" />
                     </Style>
                     <Style Selector="Button TextBlock">
@@ -156,10 +157,10 @@
                         <Setter Property="Background" Value="#808080" />
                     </Style>
                 </StackPanel.Styles>
-                <Button Content="Install&#x0a;MelonLoader" Command="{Binding InstallMelonLoaderCommand}" />
-                <Button Content="Uninstall&#x0a;MelonLoader" Command="{Binding UninstallMelonLoaderCommand}" />
-                <Button Content="Path" Command="{Binding ChoosePathCommand}" />
-                <Button Content="Mods" Command="{Binding OpenModsFolderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Install_MelonLoader}" Command="{Binding InstallMelonLoaderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}" Command="{Binding UninstallMelonLoaderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Path}" Command="{Binding ChoosePathCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Mods}" Command="{Binding OpenModsFolderCommand}" />
             </StackPanel>
 
             <!--Separator for column-->
@@ -183,7 +184,8 @@
                          Background="#505050"
                          Margin="12,0,200,0"
                          Text="{Binding Filter}"
-                         Watermark="Search Mods    (Name, Author, Descriptions)"
+                         Watermark="{ext:LocalizeExtensions XAML_SearchBar}"
+                         FontFamily="Microsoft YaHei,Simsun"
                          BorderBrush="#999999"
                          BorderThickness="1"
                          CornerRadius="1"
@@ -391,7 +393,7 @@
                             </MenuItem.Header>
 
                             <!--Project-->
-                            <MenuItem Header="About Project"
+                            <MenuItem Header="{ext:LocalizeExtensions XAML_About_Project}"
                                       Command="{ReflectionBinding $parent[dialogHostAvalonia:DialogHost].OpenDialogCommand}">
                                 <MenuItem.Icon>
                                     <Image Source="/Assets/Icon.png" />
@@ -399,7 +401,7 @@
                             </MenuItem>
 
                             <!--Check Update-->
-                            <MenuItem Header="Check Update"
+                            <MenuItem Header="{ext:LocalizeExtensions XAML_Check_Update}"
                                       Command="{Binding CheckUpdateCommand}">
                                 <MenuItem.Icon>
                                     <Image Source="/Assets/update.png" />
@@ -454,6 +456,16 @@
                                                                Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                                Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
+                                                    <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
+                                                        <TextBlock Classes="Body2" Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
+                                                        <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
+                                                    </StackPanel>
+
+                                                    <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
+                                                        <TextBlock Classes="Body2" Text="{ext:LocalizeExtensions XAML_Mod_Duplicate}" />
+                                                        <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
+                                                    </StackPanel>
+
                                                     <Button Classes="Dark" IsVisible="{Binding IsValidHomePage}"
                                                             Command="{ReflectionBinding $parent[ItemsControl].DataContext.OpenUrlCommand}"
                                                             CommandParameter="{Binding HomePage}"
@@ -461,17 +473,7 @@
                                                             Width="120"
                                                             HorizontalAlignment="Left"
                                                             Margin="0,5,0,0"
-                                                            Content="HomePage" />
-
-                                                    <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
-                                                        <TextBlock Classes="Body2">Dependencies:</TextBlock>
-                                                        <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
-                                                    </StackPanel>
-
-                                                    <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
-                                                        <TextBlock Classes="Body2" Text="Duplicated by:" />
-                                                        <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
-                                                    </StackPanel>
+                                                            Content="{ext:LocalizeExtensions XAML_HomePage}" />
                                                 </StackPanel>
                                             </Expander>
 
@@ -499,13 +501,13 @@
                                                         IsEnabled="{Binding IsInstallable}"
                                                         Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
                                                         CommandParameter="{Binding .}"
-                                                        Content="Install" />
+                                                        Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
 
                                                 <Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
                                                         Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
                                                         CommandParameter="{Binding .}"
-                                                        Content="Uninstall" />
+                                                        Content="{ext:LocalizeExtensions XAML_Uninstall_Mod}" />
 
                                                 <Button Classes="Dark" IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"

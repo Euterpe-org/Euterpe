@@ -10,7 +10,9 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -135,15 +137,14 @@ public class GitHubService : IGitHubService
             if (version <= currentVersion)
             {
                 if (userClick)
-                    await _dialogueService.CreateMessageBox("Success",
-                        "Check update success\nYou are using the latest version of Muse Dash Mod Tools");
+                    await _dialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_LatestVersion.Localize());
                 return;
             }
 
             var title = doc.RootElement.GetProperty("name").GetString();
             var body = doc.RootElement.GetProperty("body").GetString();
-            var update = await _dialogueService.CreateConfirmMessageBox("Notice",
-                $"A newer version of Muse Dash Mod Tools ({version}) is released\nDo you want to install it now?\n\nRelease Title:\n{title}\n\nRelease Info:\n{body}");
+            var update = await _dialogueService.CreateConfirmMessageBox(MsgBox_Title_Notice,
+                string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body));
 
             if (!update) return;
             var link = string.Empty;
@@ -168,7 +169,7 @@ public class GitHubService : IGitHubService
         }
         catch
         {
-            await _dialogueService.CreateErrorMessageBox("Checking updates failed\nAre you online?");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_CheckUpdateFailed.Localize());
         }
     }
 
@@ -179,7 +180,7 @@ public class GitHubService : IGitHubService
         var updaterTargetPath = Path.Combine(currentDirectory, "Update", "Updater.exe");
         if (!File.Exists(updaterExePath))
         {
-            await _dialogueService.CreateErrorMessageBox("Cannot find Updater.exe\nPlease make sure you have downloaded full software");
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
             return;
         }
 
@@ -191,7 +192,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception ex)
         {
-            await _dialogueService.CreateErrorMessageBox($"Cannot copy Updater.exe to target path\n{ex}");
+            await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
         }
 
         Process.Start(updaterTargetPath, launchArgs);

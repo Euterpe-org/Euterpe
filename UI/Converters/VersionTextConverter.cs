@@ -2,6 +2,7 @@
 using System.Globalization;
 using Avalonia.Data.Converters;
 using MuseDashModToolsUI.Models;
+using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Converters;
 
@@ -12,19 +13,19 @@ public class VersionTextConverter : IValueConverter
         if (value is Mod mod)
         {
             if (mod.IsIncompatible)
-                return $"{mod.Name}'s {mod.Version} version is incompatible with your game version";
+                return string.Format(XAML_Mod_Incompatible, mod.Name, mod.Version);
             switch (mod.State)
             {
                 case UpdateState.Outdated:
-                    return $"Local Version: {mod.LocalVersion} (Has a newer version: {mod.Version})";
+                    return string.Format(XAML_Mod_Outdated, mod.LocalVersion, mod.Version);
                 case UpdateState.Newer:
-                    return $"Local Version: {mod.LocalVersion} (WOW MOD DEV)";
+                    return string.Format(XAML_Mod_Newer, mod.LocalVersion);
                 case UpdateState.Modified:
-                    return $"Local Version: {mod.LocalVersion} (Modified)";
+                    return string.Format(XAML_Mod_Modified, mod.LocalVersion);
                 case UpdateState.Normal:
                 default:
                 {
-                    return mod is { State: UpdateState.Normal, IsLocal: true } ? $"Local Version: {mod.LocalVersion}" : null;
+                    return mod is { State: UpdateState.Normal, IsLocal: true } ? string.Format(XAML_Mod_Normal, mod.LocalVersion) : null;
                 }
             }
         }

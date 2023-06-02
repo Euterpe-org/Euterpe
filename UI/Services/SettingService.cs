@@ -7,7 +7,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -28,8 +30,7 @@ public class SettingService : ISettingService
         {
             if (!File.Exists("Settings.json"))
             {
-                await _dialogueService.CreateErrorMessageBox("Warning",
-                    "You haven't choose Muse Dash Folder\nPlease choose the folder");
+                await _dialogueService.CreateErrorMessageBox("Warning", MsgBox_Content_ChoosePath.Localize());
                 await OnChoosePath();
                 return;
             }
@@ -38,8 +39,7 @@ public class SettingService : ISettingService
             var settings = JsonSerializer.Deserialize<Setting>(text)!;
             if (string.IsNullOrEmpty(settings.MuseDashFolder))
             {
-                await _dialogueService.CreateErrorMessageBox("Warning",
-                    "Your stored Muse Dash Folder path is null\nPlease choose the correct folder");
+                await _dialogueService.CreateErrorMessageBox(MsgBox_Title_Warning, MsgBox_Content_NullPath.Localize());
                 await OnChoosePath();
                 await InitializeSettings();
             }
@@ -68,13 +68,13 @@ public class SettingService : ISettingService
     {
         while (true)
         {
-            var dialogue = new OpenFolderDialog { Title = "Choose Muse Dash Folder" };
+            var dialogue = new OpenFolderDialog { Title = FolderDialog_Title };
             if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var path = await dialogue.ShowAsync(desktop.MainWindow);
                 if (string.IsNullOrEmpty(path))
                 {
-                    await _dialogueService.CreateErrorMessageBox("The path you chose is invalid. Try again...");
+                    await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
                     continue;
                 }
 

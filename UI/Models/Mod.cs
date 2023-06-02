@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MuseDashModToolsUI.Extensions;
+using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Models;
 
@@ -25,8 +27,7 @@ public partial class Mod : ObservableObject
     [JsonIgnore] public string? DuplicatedModNames { get; set; }
 
     [JsonIgnore]
-    public string XamlDescription =>
-        $"{Description} \n\nAuthor: {Author} \nOnline Version: {Version}\nCompatible Game Version: {CompatibleGameVersion}";
+    public string XamlDescription => string.Format(XAML_Mod_Description.Localize(), Description, Author, Version, CompatibleGameVersion);
 
     public string? DownloadLink { get; set; }
     public string? HomePage { get; set; }
@@ -43,7 +44,7 @@ public partial class Mod : ObservableObject
         get
         {
             if (GameVersion is null) return string.Empty;
-            return GameVersion[0] == "*" ? "All" : string.Join(", ", GameVersion);
+            return GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
         }
     }
 
