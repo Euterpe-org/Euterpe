@@ -140,9 +140,10 @@ public class GitHubService : IGitHubService
                 return;
             }
 
-            var info = doc.RootElement.GetProperty("name").GetString();
+            var title = doc.RootElement.GetProperty("name").GetString();
+            var body = doc.RootElement.GetProperty("body").GetString();
             var update = await _dialogueService.CreateConfirmMessageBox("Notice",
-                "A newer version of Muse Dash Mod Tools is released\nDo you want to install it now?\n\nRelease info:\n" + info);
+                $"A newer version of Muse Dash Mod Tools ({version}) is released\nDo you want to install it now?\n\nRelease Title:\n{title}\n\nRelease Info:\n{body}");
 
             if (!update) return;
             var link = string.Empty;
