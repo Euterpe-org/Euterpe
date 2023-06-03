@@ -241,4 +241,19 @@
     <data name="XAML_HomePage" xml:space="preserve">
         <value>HomePage</value>
     </data>
+    <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
+        <value>MelonLoader download failed due to internet\nAre you online?\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
+        <value>MelonLoader download failed\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
+        <value>Cannot unzip MelonLoader.zip in\n{0}\nError:{1}\nTry manually unzip?</value>
+    </data>
+    <data name="MsgBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
+        <value>Failed to delete MelonLoader.zip in\n{0}\nError:{1}\nTry manually delete</value>
+    </data>
+    <data name="MsgBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
+        <value>MelonLoader has been successfully installed\n</value>
+    </data>
 </root>

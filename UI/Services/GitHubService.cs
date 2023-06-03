@@ -18,12 +18,11 @@ namespace MuseDashModToolsUI.Services;
 
 public class GitHubService : IGitHubService
 {
-    private const string BaseLink = "MDModsDev/ModLinks/main/";
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
 
-    private const string PrimaryLink = "https://raw.githubusercontent.com/";
-    private const string SecondaryLink = "https://raw.fastgit.org/";
-    private const string ThirdLink = "https://raw.gitmirror.com/";
+    private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
+    private const string SecondaryLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
+    private const string ThirdLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
     private readonly HttpClient _client;
     private readonly IDialogueService _dialogueService;
 
@@ -38,23 +37,17 @@ public class GitHubService : IGitHubService
         List<Mod> mods;
         try
         {
-            mods = (await _client.GetFromJsonAsync<List<Mod>>(
-                PrimaryLink + BaseLink +
-                "ModLinks.json"))!;
+            mods = (await _client.GetFromJsonAsync<List<Mod>>(PrimaryLink + "ModLinks.json"))!;
         }
         catch
         {
             try
             {
-                mods = (await _client.GetFromJsonAsync<List<Mod>>(
-                    SecondaryLink + BaseLink +
-                    "ModLinks.json"))!;
+                mods = (await _client.GetFromJsonAsync<List<Mod>>(SecondaryLink + "ModLinks.json"))!;
             }
             catch
             {
-                mods = (await _client.GetFromJsonAsync<List<Mod>>(
-                    ThirdLink + BaseLink +
-                    "ModLinks.json"))!;
+                mods = (await _client.GetFromJsonAsync<List<Mod>>(ThirdLink + "ModLinks.json"))!;
             }
         }
 
@@ -66,17 +59,17 @@ public class GitHubService : IGitHubService
         HttpResponseMessage result;
         try
         {
-            result = await _client.GetAsync(PrimaryLink + BaseLink + link);
+            result = await _client.GetAsync(PrimaryLink + link);
         }
         catch
         {
             try
             {
-                result = await _client.GetAsync(SecondaryLink + BaseLink + link);
+                result = await _client.GetAsync(SecondaryLink + link);
             }
             catch
             {
-                result = await _client.GetAsync(ThirdLink + BaseLink + link);
+                result = await _client.GetAsync(ThirdLink + link);
             }
         }
 
@@ -89,17 +82,17 @@ public class GitHubService : IGitHubService
         HttpResponseMessage result;
         try
         {
-            result = await _client.GetAsync(PrimaryLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+            result = await _client.GetAsync(PrimaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
         }
         catch
         {
             try
             {
-                result = await _client.GetAsync(SecondaryLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+                result = await _client.GetAsync(SecondaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
             }
             catch
             {
-                result = await _client.GetAsync(ThirdLink + BaseLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+                result = await _client.GetAsync(ThirdLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
             }
         }
 

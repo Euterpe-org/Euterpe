@@ -177,6 +177,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to delete MelonLoader.zip in\n{0}\nError:{1}\nTry manually delete.
+        /// </summary>
+        internal static string MsgBox_Content_DeleteMelonLoaderZipFailed {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DeleteMelonLoaderZipFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to disable the mods depend on {0}?.
         /// </summary>
         internal static string MsgBox_Content_DisableDependency {
@@ -245,6 +254,33 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_InstallMelonLoader {
             get {
                 return ResourceManager.GetString("MsgBox_Content_InstallMelonLoader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MelonLoader download failed\n{0}.
+        /// </summary>
+        internal static string MsgBox_Content_InstallMelonLoaderFailed {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_InstallMelonLoaderFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MelonLoader download failed due to internet\nAre you online?\n{0}.
+        /// </summary>
+        internal static string MsgBox_Content_InstallMelonLoaderFailed_Internet {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_InstallMelonLoaderFailed_Internet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MelonLoader has been successfully installed\n.
+        /// </summary>
+        internal static string MsgBox_Content_InstallMelonLoaderSuccess {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_InstallMelonLoaderSuccess", resourceCulture);
             }
         }
         
@@ -434,6 +470,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_UninstallModSuccess {
             get {
                 return ResourceManager.GetString("MsgBox_Content_UninstallModSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot unzip MelonLoader.zip in\n{0}\nError:{1}\nTry manually unzip?.
+        /// </summary>
+        internal static string MsgBox_Content_UnzipMelonLoaderFailed {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_UnzipMelonLoaderFailed", resourceCulture);
             }
         }
         

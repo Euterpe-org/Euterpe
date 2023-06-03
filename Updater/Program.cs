@@ -28,13 +28,13 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     {
         try
         {
-            result = await httpClient.GetAsync(downloadArgs[0].Replace("github.com", "download.fastgit.org"),
-                HttpCompletionOption.ResponseHeadersRead);
+            result = await httpClient.GetAsync("https://hub.gitmirror.com/" + downloadArgs[0],
+                HttpCompletionOption.ResponseContentRead);
         }
         catch
         {
-            result = await httpClient.GetAsync("https://hub.gitmirror.com/" + downloadArgs[0],
-                HttpCompletionOption.ResponseContentRead);
+            result = await httpClient.GetAsync("https://ghproxy.com/" + downloadArgs[0],
+                HttpCompletionOption.ResponseHeadersRead);
         }
     }
 
@@ -57,7 +57,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Download latest version failed\n{ex}");
+        Console.WriteLine($"Download latest version failed\n{ex}\nYou can download manually from {downloadArgs[0]}");
         Console.ReadKey();
     }
 }

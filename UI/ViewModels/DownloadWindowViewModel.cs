@@ -7,6 +7,8 @@ using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Extensions;
+using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.ViewModels;
 
@@ -38,12 +40,13 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
             {
                 if (ex is HttpRequestException)
                 {
-                    await _dialogueService.CreateErrorMessageBox("MelonLoader download failed due to internet\nAre you online?");
+                    await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet.Localize(),
+                        ex));
                     DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                     return;
                 }
 
-                await _dialogueService.CreateErrorMessageBox($"MelonLoader download failed\n{ex}");
+                await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed.Localize(), ex));
                 DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                 return;
             }
@@ -55,8 +58,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         }
         catch (Exception ex)
         {
-            await _dialogueService.CreateErrorMessageBox(
-                $"Cannot unzip MelonLoader.zip in\n{zipPath}\nError:{ex}\nTry manually unzip?");
+            await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed.Localize(), zipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
         }
@@ -67,13 +69,12 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         }
         catch (Exception ex)
         {
-            await _dialogueService.CreateErrorMessageBox(
-                $"Failed to delete MelonLoader.zip in\n{zipPath}\nError:{ex}\nTry manually delete");
+            await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed.Localize(), zipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
         }
 
-        await _dialogueService.CreateMessageBox("Success", "MelonLoader has been successfully installed\n");
+        await _dialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_InstallMelonLoaderSuccess.Localize());
         DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
     }
 
