@@ -420,6 +420,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are asking to uninstall MelonLoader\nPlease confirm your operation.
+        /// </summary>
+        internal static string MsgBox_Content_UninstallMelonLoader {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_UninstallMelonLoader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot uninstall MelonLoader\nPlease make sure your game is not running!.
         /// </summary>
         internal static string MsgBox_Content_UninstallMelonLoaderFailed {

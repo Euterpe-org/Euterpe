@@ -152,8 +152,7 @@ public class LocalService : ILocalService
     public async Task OnUninstallMelonLoader()
     {
         if (!IsValidPath) return;
-        var result = await _dialogueService.CreateConfirmMessageBox(
-            "You are asking to uninstall MelonLoader\nPlease confirm your operation");
+        var result = await _dialogueService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize());
         if (!result) return;
         var melonLoaderFolder = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(_settings.Settings.MuseDashFolder, "version.dll");
