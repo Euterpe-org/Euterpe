@@ -79,7 +79,7 @@ public class SettingService : ISettingService
                 }
 
                 Settings.MuseDashFolder = path;
-                var json = JsonSerializer.Serialize(Settings);
+                var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
                 await File.WriteAllTextAsync("Settings.json", json);
             }
 

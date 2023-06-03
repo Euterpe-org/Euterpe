@@ -61,16 +61,36 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     }
 
     [RelayCommand]
-    private async Task OnInstallMod(Mod item) => await _modService.OnInstallMod(item);
+    private async Task OnInstallMod(Mod item)
+    {
+        _watcher.EnableRaisingEvents = false;
+        await _modService.OnInstallMod(item);
+        _watcher.EnableRaisingEvents = true;
+    }
 
     [RelayCommand]
-    private async Task OnReinstallMod(Mod item) => await _modService.OnReinstallMod(item);
+    private async Task OnReinstallMod(Mod item)
+    {
+        _watcher.EnableRaisingEvents = false;
+        await _modService.OnReinstallMod(item);
+        _watcher.EnableRaisingEvents = true;
+    }
 
     [RelayCommand]
-    private async Task OnToggleMod(Mod item) => await _modService.OnToggleMod(item);
+    private async Task OnToggleMod(Mod item)
+    {
+        _watcher.EnableRaisingEvents = false;
+        await _modService.OnToggleMod(item);
+        _watcher.EnableRaisingEvents = true;
+    }
 
     [RelayCommand]
-    private async Task OnDeleteMod(Mod item) => await _modService.OnDeleteMod(item);
+    private async Task OnDeleteMod(Mod item)
+    {
+        _watcher.EnableRaisingEvents = false;
+        await _modService.OnDeleteMod(item);
+        _watcher.EnableRaisingEvents = true;
+    }
 
     [RelayCommand]
     private async Task OnInstallMelonLoader() => await _localService.OnInstallMelonLoader();
@@ -133,7 +153,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private void OnExit(object sender, EventArgs e)
     {
-        var json = JsonSerializer.Serialize(_settings.Settings);
+        var json = JsonSerializer.Serialize(_settings.Settings, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText("Settings.json", json);
     }
 }
