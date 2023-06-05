@@ -21,8 +21,8 @@ public class GitHubService : IGitHubService
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
-    private const string SecondaryLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
-    private const string ThirdLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
+    private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
+    private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
     private readonly HttpClient _client;
     private readonly IDialogueService _dialogueService;
 
@@ -82,17 +82,17 @@ public class GitHubService : IGitHubService
         HttpResponseMessage result;
         try
         {
-            result = await _client.GetAsync(PrimaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+            result = await _client.GetAsync(PrimaryLink + "MelonLoader.zip");
         }
         catch
         {
             try
             {
-                result = await _client.GetAsync(SecondaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+                result = await _client.GetAsync(SecondaryLink + "MelonLoader.zip");
             }
             catch
             {
-                result = await _client.GetAsync(ThirdLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+                result = await _client.GetAsync(ThirdLink + "MelonLoader.zip");
             }
         }
 

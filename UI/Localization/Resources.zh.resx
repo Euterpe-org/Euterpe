@@ -115,7 +115,7 @@
         <value>你还没有选择 Muse Dash 的文件夹\n请选择文件夹</value>
     </data>
     <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
-        <value>无法找 到Updater.exe\n请确认你下载了整个软件</value>
+        <value>无法找到 Updater.exe\n请确认你下载了整个软件</value>
     </data>
     <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
         <value>Mod卸载失败\n{0}</value>
@@ -124,10 +124,10 @@
         <value>Mod卸载失败。游戏是否正在运行？\n{0}</value>
     </data>
     <data name="MsgBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
-        <value>MelonLoader已经成功被卸载\n</value>
+        <value>MelonLoader 已经成功被卸载\n</value>
     </data>
     <data name="MsgBox_Content_UninstallMelonLoaderFailed" xml:space="preserve">
-        <value>无法卸载MelonLoader\n请确认你的游戏没有在运行！</value>
+        <value>无法卸载 MelonLoader\n请确认你的游戏没有在运行！</value>
     </data>
     <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
         <value>你正在要求重装{0}\n请确认你的操作</value>
@@ -136,7 +136,7 @@
         <value>无法读取当前游戏版本\n你是否完整下载了 Muse Dash？\n请检查你的globalgamemanagers文件在路径\n{0}</value>
     </data>
     <data name="MsgBox_Content_NoMelonLoaderFolder" xml:space="preserve">
-        <value>无法找到MelonLoader文件夹\n你是否安装了MelonLoader？</value>
+        <value>无法找到 MelonLoader 文件夹\n你是否安装了 MelonLoader？</value>
     </data>
     <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
         <value>无法找到 MuseDash.exe 或者GameAssembly.dll\n请选择正确的文件夹</value>
@@ -148,10 +148,10 @@
         <value>先选择正确的 Muse Dash文件夹！</value>
     </data>
     <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
-        <value>你想要启用{0}的依赖mod{1}吗？</value>
+        <value>你想要启用 {0} 的依赖mod {1} 吗？</value>
     </data>
     <data name="MsgBox_Content_ExeVerifyFailed" xml:space="preserve">
-        <value>验证 MuseDash.exe失败\n请确认你选择了正确的文件夹</value>
+        <value>验证 MuseDash.exe 失败\n请确认你选择了正确的文件夹</value>
     </data>
     <data name="MsgBox_Content_IncorrectVersion" xml:space="preserve">
         <value>MuseDash.exe 并不是正确的版本\n你是否在使用破解版？</value>
@@ -175,7 +175,7 @@
         <value>Mod安装失败。是否联网？\n{0}</value>
     </data>
     <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
-        <value>你没有安装MuseDashModTools的mod\n每次开启Muse Dash的时候会自动检查mod更新\n是否现在安装？</value>
+        <value>你没有安装 MuseDashModTools 的mod\n每次开启 Muse Dash 的时候会自动检查mod更新\n是否现在安装？</value>
     </data>
     <data name="XAML_Mod_Description" xml:space="preserve">
         <value>{0} \n\n作者： {1} \n线上版本：{2}\n支持游戏版本：{3}</value>
@@ -190,7 +190,7 @@
         <value>依赖：</value>
     </data>
     <data name="XAML_Mod_Incompatible" xml:space="preserve">
-        <value>{0}的{1}版本和你的游戏版本不兼容</value>
+        <value>{0} 的{1}版本和你的游戏版本不兼容</value>
     </data>
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>本地版本：{0}（有新版本：{1}）</value>
@@ -214,7 +214,7 @@
         <value>{0}使用依赖{1}\n你确定你想要删除这个mod吗？</value>
     </data>
     <data name="MsgBox_Content_DisableDependency" xml:space="preserve">
-        <value>你想要禁用依赖于{0}的mod吗？</value>
+        <value>你想要禁用依赖于 {0} 的mod吗？</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
         <value>请手动选择并且删除重复的mod\n{0}</value>
@@ -229,13 +229,13 @@
         <value>Mod启用/禁用失败\n{0}</value>
     </data>
     <data name="MsgBox_Content_EnableReverseDependency" xml:space="preserve">
-        <value>{0}被{1}用作依赖\n你确定你想要删除这个mod？</value>
+        <value>{0} 被 {1} 用作依赖\n你确定你想要禁用这个mod？</value>
     </data>
     <data name="XAML_HomePage" xml:space="preserve">
         <value>主页</value>
     </data>
     <data name="MsgBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-        <value>无法删除{0}下的MelonLoader.zip\n错误信息：\n{1}\n请尝试手动删除</value>
+        <value>无法删除 {0} 下的 MelonLoader.zip\n错误信息：\n{1}\n请尝试手动删除</value>
     </data>
     <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
         <value>MelonLoader下载失败\n{0}</value>
@@ -244,12 +244,12 @@
         <value>MelonLoader下载失败。是否联网？\n{0}</value>
     </data>
     <data name="MsgBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
-        <value>MelonLoader已经成功安装\n</value>
+        <value>MelonLoader 已经成功安装\n</value>
     </data>
     <data name="MsgBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
-        <value>无法解压{0}下的MelonLoader.zip\n错误信息：{1}\n尝试手动解压？</value>
+        <value>无法解压 {0} 下的 MelonLoader.zip\n错误信息：{1}\n尝试手动解压？</value>
     </data>
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
-        <value>你正在要求卸载Melonloader\n请确认你的操作</value>
+        <value>你正在要求卸载 MelonLoader\n请确认你的操作</value>
     </data>
 </root>

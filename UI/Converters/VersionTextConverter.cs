@@ -25,7 +25,9 @@ public class VersionTextConverter : IValueConverter
                 case UpdateState.Normal:
                 default:
                 {
-                    return mod is { State: UpdateState.Normal, IsLocal: true } ? string.Format(XAML_Mod_Normal, mod.LocalVersion) : null;
+                    return mod is { State: UpdateState.Normal, IsLocal: true }
+                        ? string.Format(XAML_Mod_Normal, mod.LocalVersion)
+                        : null;
                 }
             }
         }
