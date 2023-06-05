@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -15,7 +15,7 @@ namespace MuseDashModToolsUI.Services;
 
 public class SettingService : ISettingService
 {
-    [JsonIgnore] private readonly IDialogueService _dialogueService;
+    private readonly IDialogueService _dialogueService;
 
     public SettingService(IDialogueService dialogueService)
     {
@@ -44,12 +44,9 @@ public class SettingService : ISettingService
                 await InitializeSettings();
             }
 
-            Settings.MuseDashFolder = settings.MuseDashFolder;
-            Settings.AskInstallMuseDashModTools = settings.AskInstallMuseDashModTools;
-            Settings.AskEnableDependenciesWhenInstalling = settings.AskEnableDependenciesWhenInstalling;
-            Settings.AskDisableDependenciesWhenDeleting = settings.AskDisableDependenciesWhenDeleting;
-            Settings.AskEnableDependenciesWhenEnabling = settings.AskEnableDependenciesWhenEnabling;
-            Settings.AskDisableDependenciesWhenDisabling = settings.AskDisableDependenciesWhenDisabling;
+            if (string.IsNullOrEmpty(settings.Language)) settings.Language = CultureInfo.CurrentUICulture.ToString();
+
+            Settings = settings.Clone();
 
             var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
             var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
@@ -79,6 +76,7 @@ public class SettingService : ISettingService
                 }
 
                 Settings.MuseDashFolder = path;
+                Settings.Language = CultureInfo.CurrentUICulture.ToString();
                 var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
                 await File.WriteAllTextAsync("Settings.json", json);
             }

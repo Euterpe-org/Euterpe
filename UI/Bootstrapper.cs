@@ -12,22 +12,38 @@ public static class Bootstrapper
 {
     public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
+        // Dialog Service
         services.Register<IDialogueService>(() => new DialogueService());
+
+        // Github Service
         services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>()));
+
+        // Setting Service
         services.RegisterConstant<ISettingService>(new SettingService(resolver.GetRequiredService<IDialogueService>()));
+
+        // Localization Service
+        services.RegisterConstant<ILocalizationService>(new LocalizationService(resolver.GetRequiredService<ISettingService>()));
+
+        // Download Window View Model
         services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
             resolver.GetRequiredService<IDialogueService>(),
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ISettingService>()));
+
+        // Local Service
         services.RegisterConstant<ILocalService>(new LocalService(
             resolver.GetRequiredService<IDialogueService>(),
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<IDownloadWindowViewModel>()));
+
+        // Mod Service
         services.RegisterConstant<IModService>(new ModService(
             resolver.GetRequiredService<IDialogueService>(),
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<ILocalService>()));
+
+        // Main Window View Model
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ISettingService>(),

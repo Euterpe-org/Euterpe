@@ -6,12 +6,22 @@ namespace MuseDashModToolsUI.Models;
 public class Setting
 {
     public string? MuseDashFolder { get; set; }
-    [JsonIgnore] public string ModsFolder => !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "Mods") : string.Empty;
+    public string? Language { get; set; }
+
+    [JsonIgnore]
+    public string ModsFolder =>
+        !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "Mods") : string.Empty;
+
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;
     public AskType AskDisableDependenciesWhenDeleting { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenEnabling { get; set; } = AskType.Always;
     public AskType AskDisableDependenciesWhenDisabling { get; set; } = AskType.Always;
+
+    public Setting Clone()
+    {
+        return (Setting)MemberwiseClone();
+    }
 }
 
 public enum AskType
