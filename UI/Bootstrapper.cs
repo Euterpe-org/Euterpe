@@ -16,13 +16,15 @@ public static class Bootstrapper
         services.Register<IDialogueService>(() => new DialogueService());
 
         // Github Service
-        services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>()));
+        services.Register<IGitHubService>(() =>
+            new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>()));
 
         // Setting Service
         services.RegisterConstant<ISettingService>(new SettingService(resolver.GetRequiredService<IDialogueService>()));
 
         // Localization Service
-        services.RegisterConstant<ILocalizationService>(new LocalizationService(resolver.GetRequiredService<ISettingService>()));
+        services.RegisterConstant<ILocalizationService>(
+            new LocalizationService(resolver.GetRequiredService<ISettingService>()));
 
         // Download Window View Model
         services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
@@ -51,7 +53,7 @@ public static class Bootstrapper
             resolver.GetRequiredService<IModService>()));
 
         // Main Window View Model
-        services.RegisterLazySingleton(() => new MainWindowViewModel());
+        //services.RegisterLazySingleton(() => new MainWindowViewModel());
     }
 
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)

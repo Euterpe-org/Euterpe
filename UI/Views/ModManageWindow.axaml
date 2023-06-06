@@ -1,32 +1,28 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:MuseDashModToolsUI.ViewModels"
-        xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-        xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
-        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
-        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
-        x:Class="MuseDashModToolsUI.Views.ModManageWindow"
-        x:DataType="vm:ModManageWindowViewModel"
-        x:CompileBindings="True"
-        Icon="/Assets/Icon.ico"
-        Title="Muse Dash Mod Tools"
-        Width="1000" Height="600"
-        CanResize="True">
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+             xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
+             x:Class="MuseDashModToolsUI.Views.ModManageWindow"
+             x:DataType="vm:ModManageWindowViewModel"
+             x:CompileBindings="True">
 
-    <Window.Resources>
+    <UserControl.Resources>
         <converters:NameColourConverter x:Key="NameColourConverter" />
         <converters:VersionColourConverter x:Key="VersionColourConverter" />
         <converters:UninstallConverter x:Key="UninstallConverter" />
         <converters:VersionTextConverter x:Key="VersionTextConverter" />
         <converters:InstallationTextConverter x:Key="InstallationTextConverter" />
-    </Window.Resources>
+    </UserControl.Resources>
 
-    <Window.Styles>
+    <UserControl.Styles>
         <Style Selector="ToggleSwitch">
             <Setter Property="Margin" Value="300,20,0,20" />
             <Setter Property="VerticalAlignment" Value="Top" />
@@ -36,7 +32,7 @@
             <Setter Property="Margin" Value="0,17,0,23" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
-    </Window.Styles>
+    </UserControl.Styles>
 
     <dialogHostAvalonia:DialogHost Identifier="DownloadWindowDialog">
         <dialogHostAvalonia:DialogHost.DataTemplates>
@@ -74,7 +70,8 @@
         <Grid ColumnDefinitions="140,*">
 
             <!--The left navigation part-->
-            <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True" LeftDrawerWidth="140">
+            <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True"
+                                       LeftDrawerWidth="140">
                 <controls:NavigationDrawer.LeftDrawerContent>
                     <ListBox Name="DrawerList" Focusable="{Binding ElementName=DrawerList}">
                         <ListBox.Styles>
@@ -157,8 +154,10 @@
                         <Setter Property="Background" Value="#808080" />
                     </Style>
                 </StackPanel.Styles>
-                <Button Content="{ext:LocalizeExtensions XAML_Install_MelonLoader}" Command="{Binding InstallMelonLoaderCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}" Command="{Binding UninstallMelonLoaderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Install_MelonLoader}"
+                        Command="{Binding InstallMelonLoaderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}"
+                        Command="{Binding UninstallMelonLoaderCommand}" />
                 <Button Content="{ext:LocalizeExtensions XAML_Path}" Command="{Binding ChoosePathCommand}" />
                 <Button Content="{ext:LocalizeExtensions XAML_Mods}" Command="{Binding OpenModsFolderCommand}" />
             </StackPanel>
@@ -197,16 +196,24 @@
                 </TextBox>
             </controls:Card>
 
-            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog" CloseOnClickAway="True">
+            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog"
+                                           CloseOnClickAway="True">
                 <dialogHostAvalonia:DialogHost.DialogContent>
                     <!--About Dialog Content-->
                     <Grid RowDefinitions="100,100,150,80" Width="800">
+                        <Grid.Styles>
+                            <Style Selector="Button">
+                                <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
+                            </Style>
+                            <Style Selector="MenuItem">
+                                <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
+                            </Style>
+                        </Grid.Styles>
                         <Button Grid.Row="0"
                                 Width="150"
                                 Classes="Flat"
                                 HorizontalAlignment="Center"
                                 ToolTip.Tip="Muse Dash Modding Community Website"
-                                Command="{Binding OpenUrlCommand}"
                                 CommandParameter="https://mdmc.moe/"
                                 Margin="-500,0,0,0">
                             <Image Source="/Assets/MDMC_Website.png" Width="150" />
@@ -216,7 +223,6 @@
                                 Classes="Flat"
                                 HorizontalAlignment="Center"
                                 ToolTip.Tip="Muse Dash Mod Tools Project"
-                                Command="{Binding OpenUrlCommand}"
                                 CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
                             <Image Source="/Assets/Icon.png" Margin="-7,0,0,5" />
                         </Button>
@@ -225,7 +231,6 @@
                                 Classes="Flat"
                                 HorizontalAlignment="Center"
                                 ToolTip.Tip="Muse Dash Modding Community Discord"
-                                Command="{Binding OpenUrlCommand}"
                                 CommandParameter="https://discord.gg/mdmc"
                                 Margin="500,0,0,0">
                             <Image Source="/Assets/MDMC_Discord.png" Width="80" />
@@ -259,21 +264,18 @@
                             <!--Account-->
                             <MenuItem Header="Social Account" Width="100">
                                 <MenuItem Header="BiliBili"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://space.bilibili.com/255895683">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/bilibili.png" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <MenuItem Header="Github"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://github.com/lxymahatma">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/github.png" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <MenuItem Header="Twitch"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://www.twitch.tv/lxymahatma">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/twitch.png" />
@@ -284,14 +286,12 @@
                             <!--Donate-->
                             <MenuItem Header="Donate" Width="100">
                                 <MenuItem Header="爱发电"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://afdian.net/a/lxymahatma">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/afdian.png" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <MenuItem Header="Patreon"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://www.patreon.com/user?u=58140035">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/patreon.png" />
@@ -301,7 +301,8 @@
                         </Menu>
 
                         <!--Super Pig-->
-                        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Classes="Dark" Width="150" Height="150" Margin="225,0">
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Classes="Dark" Width="150" Height="150"
+                                       Margin="225,0">
                             <StackPanel>
                                 <Image Width="60" Height="60" Source="/Assets/Super_Pig.png" />
                                 <TextBlock Classes="Body1"
@@ -318,7 +319,6 @@
                             <!--Account-->
                             <MenuItem Header="Social Account" Width="200">
                                 <MenuItem Header="BiliBili"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://space.bilibili.com/252615263">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/bilibili.png" />
@@ -328,7 +328,8 @@
                         </Menu>
 
                         <!--Balint-->
-                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150" Margin="0,0,225,0">
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150"
+                                       Margin="0,0,225,0">
                             <StackPanel>
                                 <Image Width="60" Height="60" Source="/Assets/Balint.png" />
                                 <TextBlock Classes="Body1"
@@ -345,7 +346,6 @@
                             <!--Account-->
                             <MenuItem Header="Social Account" Width="200">
                                 <MenuItem Header="Github"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://github.com/Balint817">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/github.png" />
@@ -355,7 +355,8 @@
                         </Menu>
 
                         <!--Ultra Rabbit-->
-                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150" Margin="25,0">
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150"
+                                       Margin="25,0">
                             <StackPanel>
                                 <Image Width="60" Height="60" Source="/Assets/Ultra_Rabbit.jpg" />
                                 <TextBlock Classes="Body1"
@@ -372,7 +373,6 @@
                             <!--Account-->
                             <MenuItem Header="Social Account" Width="200">
                                 <MenuItem Header="Github"
-                                          Command="{Binding OpenUrlCommand}"
                                           CommandParameter="https://github.com/TheBunnies">
                                     <MenuItem.Icon>
                                         <Image Source="/Assets/github.png" />
@@ -411,8 +411,10 @@
                     </Menu>
 
                     <!--Mods-->
-                    <ScrollViewer Grid.Column="1" Margin="1,50,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer" Orientation="Vertical">
+                    <ScrollViewer Grid.Column="1" Margin="1,50,0,0" VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch">
+                        <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer"
+                                    Orientation="Vertical">
                             <StackPanel.Styles>
                                 <Style Selector="StackPanel > TextBlock">
                                     <Setter Property="TextWrapping" Value="Wrap" />
@@ -444,7 +446,8 @@
                                                     </Label>
                                                 </Expander.Header>
 
-                                                <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,40,0,20">
+                                                <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch"
+                                                            Margin="40,40,0,20">
                                                     <StackPanel.Styles>
                                                         <Style Selector="TextBlock">
                                                             <Setter Property="Foreground" Value="#CCC" />
@@ -457,12 +460,14 @@
                                                                Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
                                                     <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
-                                                        <TextBlock Classes="Body2" Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
+                                                        <TextBlock Classes="Body2"
+                                                                   Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
                                                         <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
                                                     </StackPanel>
 
                                                     <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
-                                                        <TextBlock Classes="Body2" Text="{ext:LocalizeExtensions XAML_Mod_Duplicate}" />
+                                                        <TextBlock Classes="Body2"
+                                                                   Text="{ext:LocalizeExtensions XAML_Mod_Duplicate}" />
                                                         <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
                                                     </StackPanel>
 
@@ -497,19 +502,22 @@
                                                               CommandParameter="{Binding .}"
                                                               Foreground="#DDD" />
 
-                                                <Button Classes="Dark" IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
+                                                <Button Classes="Dark" IsVisible="{Binding !IsLocal}"
+                                                        Tag="{Binding Name}"
                                                         IsEnabled="{Binding IsInstallable}"
                                                         Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
 
-                                                <Button Classes="Dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
+                                                <Button Classes="Dark" IsVisible="{Binding IsLocal}"
+                                                        Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
                                                         Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{ext:LocalizeExtensions XAML_Uninstall_Mod}" />
 
-                                                <Button Classes="Dark" IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
+                                                <Button Classes="Dark" IsVisible="{Binding IsUpdatable}"
+                                                        Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
                                                         Command="{ReflectionBinding $parent[ItemsControl].DataContext.ReinstallModCommand}"
                                                         CommandParameter="{Binding .}"
@@ -527,4 +535,4 @@
         </Grid>
     </dialogHostAvalonia:DialogHost>
 
-</Window>
+</UserControl>
