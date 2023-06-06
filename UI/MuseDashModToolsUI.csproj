@@ -18,12 +18,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**"/>
-        <AvaloniaXaml Remove="Mods\**"/>
-        <Compile Remove="Mods\**"/>
-        <EmbeddedResource Remove="Mods\**"/>
-        <None Remove="Mods\**"/>
-        <None Remove=".gitignore"/>
+        <AvaloniaResource Include="Assets\**" />
+        <AvaloniaXaml Remove="Mods\**" />
+        <Compile Remove="Mods\**" />
+        <EmbeddedResource Remove="Mods\**" />
+        <None Remove="Mods\**" />
+        <None Remove=".gitignore" />
         <EmbeddedResource Update="Localization\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -34,29 +34,29 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="Assets\Icon.ico"/>
+        <Content Include="Assets\Icon.ico" />
     </ItemGroup>
     <ItemGroup>
         <!--This helps with theme dll-s trimming.
     If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme Default theme will be trimmed from the output and vice versa.
     https://github.com/AvaloniaUI/Avalonia/issues/5593 -->
-        <TrimmableAssembly Include="Avalonia.Themes.Fluent"/>
-        <TrimmableAssembly Include="Avalonia.Themes.Default"/>
+        <TrimmableAssembly Include="Avalonia.Themes.Fluent" />
+        <TrimmableAssembly Include="Avalonia.Themes.Default" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="AssetsTools.NET" Version="3.0.0-preview3"/>
-        <PackageReference Include="Avalonia" Version="0.10.21"/>
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.21"/>
+        <PackageReference Include="AssetsTools.NET" Version="3.0.0-preview3" />
+        <PackageReference Include="Avalonia" Version="0.10.21" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.21" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.21"/>
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.21"/>
-        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.19"/>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0"/>
-        <PackageReference Include="DialogHost.Avalonia" Version="0.6.0-avalonia10"/>
-        <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1"/>
-        <PackageReference Include="Material.Avalonia" Version="3.0.0-avalonia10-preview2.126-nightly"/>
-        <PackageReference Include="MessageBox.Avalonia" Version="2.0.1"/>
-        <PackageReference Include="SharpZipLib" Version="1.4.2"/>
-        <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.21" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.21" />
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.19" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+        <PackageReference Include="DialogHost.Avalonia" Version="0.6.0-avalonia10" />
+        <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1" />
+        <PackageReference Include="Material.Avalonia" Version="3.0.0-avalonia10-preview2.126-nightly" />
+        <PackageReference Include="MessageBox.Avalonia" Version="2.0.1" />
+        <PackageReference Include="SharpZipLib" Version="1.4.2" />
+        <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
     </ItemGroup>
 </Project>

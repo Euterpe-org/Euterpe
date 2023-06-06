@@ -43,12 +43,15 @@ public static class Bootstrapper
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<ILocalService>()));
 
-        // Main Window View Model
-        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
+        // Mod Manage Window View Model
+        services.RegisterLazySingleton(() => new ModManageWindowViewModel(
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<ILocalService>(),
             resolver.GetRequiredService<IModService>()));
+
+        // Main Window View Model
+        services.RegisterLazySingleton(() => new MainWindowViewModel());
     }
 
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)
