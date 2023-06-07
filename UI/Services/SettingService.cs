@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
@@ -65,21 +66,20 @@ public class SettingService : ISettingService
     {
         while (true)
         {
-            var dialogue = new OpenFolderDialog { Title = FolderDialog_Title };
-            if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
+            var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+                { AllowMultiple = false, Title = FolderDialog_Title });
+            var path = dialogue[0].TryGetLocalPath();
+            if (string.IsNullOrEmpty(path))
             {
-                var path = await dialogue.ShowAsync(desktop.MainWindow);
-                if (string.IsNullOrEmpty(path))
-                {
-                    await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
-                    continue;
-                }
-
-                Settings.MuseDashFolder = path;
-                Settings.Language = CultureInfo.CurrentUICulture.ToString();
-                var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
-                await File.WriteAllTextAsync("Settings.json", json);
+                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
+                continue;
             }
+
+            Settings.MuseDashFolder = path;
+            Settings.Language = CultureInfo.CurrentUICulture.ToString();
+            var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
+            await File.WriteAllTextAsync("Settings.json", json);
 
             break;
         }

@@ -1,5 +1,6 @@
 ﻿namespace MuseDashModToolsUI.Contracts.ViewModels;
 
-public interface IModManageWindowViewModel
+public interface ISettingsViewModel
 {
+    
 }

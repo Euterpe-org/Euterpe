@@ -1,12 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+        xmlns:tabs="clr-namespace:MuseDashModToolsUI.Views.Tabs"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
-        x:DataType="vm:ModManageWindowViewModel"
+        x:DataType="vm:MainWindowViewModel"
         x:CompileBindings="True"
         Icon="/Assets/Icon.ico"
         Title="Muse Dash Mod Tools"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaTitleBarHeightHint="-1"
-        Width="1000" Height="600">
+        Width="1000" Height="800"
+        WindowStartupLocation="CenterScreen">
+    <tabs:ModManageView />
 </Window>

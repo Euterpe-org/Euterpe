@@ -10,8 +10,8 @@
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
-             x:Class="MuseDashModToolsUI.Views.ModManageWindow"
-             x:DataType="vm:ModManageWindowViewModel"
+             x:Class="MuseDashModToolsUI.Views.Tabs.ModManageView"
+             x:DataType="vm:ModManageViewModel"
              x:CompileBindings="True">
 
     <UserControl.Resources>
@@ -21,18 +21,6 @@
         <converters:VersionTextConverter x:Key="VersionTextConverter" />
         <converters:InstallationTextConverter x:Key="InstallationTextConverter" />
     </UserControl.Resources>
-
-    <UserControl.Styles>
-        <Style Selector="ToggleSwitch">
-            <Setter Property="Margin" Value="300,20,0,20" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="BorderBrush" Value="#DDD" />
-        </Style>
-        <Style Selector="Expander ToggleButton#PART_toggle">
-            <Setter Property="Margin" Value="0,17,0,23" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-        </Style>
-    </UserControl.Styles>
 
     <dialogHostAvalonia:DialogHost Identifier="DownloadWindowDialog">
         <dialogHostAvalonia:DialogHost.DataTemplates>
@@ -70,8 +58,7 @@
         <Grid ColumnDefinitions="140,*">
 
             <!--The left navigation part-->
-            <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True"
-                                       LeftDrawerWidth="140">
+            <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True" LeftDrawerWidth="140">
                 <controls:NavigationDrawer.LeftDrawerContent>
                     <ListBox Name="DrawerList" Focusable="{Binding ElementName=DrawerList}">
                         <ListBox.Styles>
@@ -154,10 +141,8 @@
                         <Setter Property="Background" Value="#808080" />
                     </Style>
                 </StackPanel.Styles>
-                <Button Content="{ext:LocalizeExtensions XAML_Install_MelonLoader}"
-                        Command="{Binding InstallMelonLoaderCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}"
-                        Command="{Binding UninstallMelonLoaderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Install_MelonLoader}" Command="{Binding InstallMelonLoaderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}" Command="{Binding UninstallMelonLoaderCommand}" />
                 <Button Content="{ext:LocalizeExtensions XAML_Path}" Command="{Binding ChoosePathCommand}" />
                 <Button Content="{ext:LocalizeExtensions XAML_Mods}" Command="{Binding OpenModsFolderCommand}" />
             </StackPanel>
@@ -178,26 +163,29 @@
                            BorderThickness="0,0,0,1"
                            Margin="0,0,15,0">
 
+                <controls:Card.Styles>
+                    <Style Selector="TextBox Panel#PART_TextContainer">
+                        <Setter Property="Margin" Value="8,20,0,0" />
+                    </Style>
+                </controls:Card.Styles>
                 <TextBox Name="InputSearchFilter"
                          Classes="Solo"
                          Background="#505050"
                          Margin="12,0,200,0"
                          Text="{Binding Filter}"
                          Watermark="{ext:LocalizeExtensions XAML_SearchBar}"
-                         FontFamily="Microsoft YaHei,Simsun"
                          BorderBrush="#999999"
                          BorderThickness="1"
                          CornerRadius="1"
                          AcceptsReturn="False">
 
                     <TextBox.InnerRightContent>
-                        <Image Source="/Assets/magnify.png" />
+                        <Image Source="/Assets/magnify.png" Height="30" Width="30" />
                     </TextBox.InnerRightContent>
                 </TextBox>
             </controls:Card>
 
-            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog"
-                                           CloseOnClickAway="True">
+            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog" CloseOnClickAway="True">
                 <dialogHostAvalonia:DialogHost.DialogContent>
                     <!--About Dialog Content-->
                     <Grid RowDefinitions="100,100,150,80" Width="800">
@@ -207,6 +195,9 @@
                             </Style>
                             <Style Selector="MenuItem">
                                 <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
+                            </Style>
+                            <Style Selector="MenuItem ContentPresenter">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
                             </Style>
                         </Grid.Styles>
                         <Button Grid.Row="0"
@@ -261,8 +252,13 @@
                         </controls:Card>
 
                         <Menu Grid.Row="3" HorizontalAlignment="Left">
+                            <Menu.Styles>
+                                <Style Selector="MenuItem AccessText">
+                                    <Setter Property="FontSize" Value="13" />
+                                </Style>
+                            </Menu.Styles>
                             <!--Account-->
-                            <MenuItem Header="Social Account" Width="100">
+                            <MenuItem Header="Social Account" Width="120">
                                 <MenuItem Header="BiliBili"
                                           CommandParameter="https://space.bilibili.com/255895683">
                                     <MenuItem.Icon>
@@ -284,7 +280,7 @@
                             </MenuItem>
 
                             <!--Donate-->
-                            <MenuItem Header="Donate" Width="100">
+                            <MenuItem Header="Donate" Width="80">
                                 <MenuItem Header="爱发电"
                                           CommandParameter="https://afdian.net/a/lxymahatma">
                                     <MenuItem.Icon>
@@ -301,8 +297,7 @@
                         </Menu>
 
                         <!--Super Pig-->
-                        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Classes="Dark" Width="150" Height="150"
-                                       Margin="225,0">
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Width="150" Height="150" Margin="225,0">
                             <StackPanel>
                                 <Image Width="60" Height="60" Source="/Assets/Super_Pig.png" />
                                 <TextBlock Classes="Body1"
@@ -315,9 +310,9 @@
                             </StackPanel>
                         </controls:Card>
 
-                        <Menu Grid.Row="3" HorizontalAlignment="Left" Margin="200,0,0,0">
+                        <Menu Grid.Row="3" HorizontalAlignment="Left" Margin="225,0,0,0">
                             <!--Account-->
-                            <MenuItem Header="Social Account" Width="200">
+                            <MenuItem Header="Social Account" Width="150">
                                 <MenuItem Header="BiliBili"
                                           CommandParameter="https://space.bilibili.com/252615263">
                                     <MenuItem.Icon>
@@ -328,8 +323,7 @@
                         </Menu>
 
                         <!--Balint-->
-                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150"
-                                       Margin="0,0,225,0">
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Width="150" Height="150" Margin="0,0,225,0">
                             <StackPanel>
                                 <Image Width="60" Height="60" Source="/Assets/Balint.png" />
                                 <TextBlock Classes="Body1"
@@ -342,9 +336,9 @@
                             </StackPanel>
                         </controls:Card>
 
-                        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,200,0">
+                        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,225,0">
                             <!--Account-->
-                            <MenuItem Header="Social Account" Width="200">
+                            <MenuItem Header="Social Account" Width="150">
                                 <MenuItem Header="Github"
                                           CommandParameter="https://github.com/Balint817">
                                     <MenuItem.Icon>
@@ -355,8 +349,7 @@
                         </Menu>
 
                         <!--Ultra Rabbit-->
-                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150"
-                                       Margin="25,0">
+                        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Width="150" Height="150" Margin="25,0">
                             <StackPanel>
                                 <Image Width="60" Height="60" Source="/Assets/Ultra_Rabbit.jpg" />
                                 <TextBlock Classes="Body1"
@@ -369,9 +362,9 @@
                             </StackPanel>
                         </controls:Card>
 
-                        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,0,0">
+                        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,25,0">
                             <!--Account-->
-                            <MenuItem Header="Social Account" Width="200">
+                            <MenuItem Header="Social Account" Width="150">
                                 <MenuItem Header="Github"
                                           CommandParameter="https://github.com/TheBunnies">
                                     <MenuItem.Icon>
@@ -389,7 +382,7 @@
                     <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0">
                         <MenuItem Width="50" Height="50">
                             <MenuItem.Header>
-                                <Image Source="/Assets/dots_vertical.png" />
+                                <Image Source="/Assets/dots_vertical.png" Width="40" Height="40" />
                             </MenuItem.Header>
 
                             <!--Project-->
@@ -411,10 +404,8 @@
                     </Menu>
 
                     <!--Mods-->
-                    <ScrollViewer Grid.Column="1" Margin="1,50,0,0" VerticalAlignment="Stretch"
-                                  HorizontalAlignment="Stretch">
-                        <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" x:Name="ModItemsContainer"
-                                    Orientation="Vertical">
+                    <ScrollViewer Grid.Column="1" Margin="1,50,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" Orientation="Vertical">
                             <StackPanel.Styles>
                                 <Style Selector="StackPanel > TextBlock">
                                     <Setter Property="TextWrapping" Value="Wrap" />
@@ -431,14 +422,23 @@
                             </StackPanel.Styles>
 
                             <!--Mod List-->
-                            <ItemsControl Foreground="Transparent" Background="Transparent" Items="{Binding Mods}">
+                            <ItemsControl Foreground="Transparent" Background="Transparent" ItemsSource="{Binding Mods}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Tag="{Binding Name}">
                                             <Expander Margin="0,0,15,0.5">
+                                                <Expander.Styles>
+                                                    <Style Selector="Expander ContentPresenter#PART_ContentPresenter">
+                                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                                    </Style>
+                                                    <Style Selector="Expander ToggleButton#PART_ToggleButton">
+                                                        <Setter Property="Height" Value="80" />
+                                                    </Style>
+                                                </Expander.Styles>
                                                 <Expander.Header>
                                                     <Label Height="80"
                                                            HorizontalContentAlignment="Left"
+                                                           HorizontalAlignment="Left"
                                                            VerticalContentAlignment="Center">
                                                         <TextBlock Classes="Body2"
                                                                    Text="{Binding Name}"
@@ -446,37 +446,39 @@
                                                     </Label>
                                                 </Expander.Header>
 
-                                                <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch"
-                                                            Margin="40,40,0,20">
+                                                <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch" Margin="40,40,0,20">
                                                     <StackPanel.Styles>
                                                         <Style Selector="TextBlock">
                                                             <Setter Property="Foreground" Value="#CCC" />
+                                                        </Style>
+                                                        <Style Selector="Button ContentPresenter">
+                                                            <Setter Property="HorizontalAlignment" Value="Center" />
                                                         </Style>
                                                     </StackPanel.Styles>
                                                     <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
 
                                                     <TextBlock Classes="Body2"
+                                                               IsVisible="{Binding IsLocal}"
                                                                Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                                Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
                                                     <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
-                                                        <TextBlock Classes="Body2"
-                                                                   Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
+                                                        <TextBlock Classes="Body2" Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
                                                         <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
                                                     </StackPanel>
 
                                                     <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
-                                                        <TextBlock Classes="Body2"
-                                                                   Text="{ext:LocalizeExtensions XAML_Mod_Duplicate}" />
+                                                        <TextBlock Classes="Body2" Text="{ext:LocalizeExtensions XAML_Mod_Duplicate}" />
                                                         <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
                                                     </StackPanel>
 
-                                                    <Button Classes="Dark" IsVisible="{Binding IsValidHomePage}"
-                                                            Command="{ReflectionBinding $parent[ItemsControl].DataContext.OpenUrlCommand}"
+                                                    <Button Classes="dark" IsVisible="{Binding IsValidHomePage}"
+                                                            Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).OpenUrlCommand}"
                                                             CommandParameter="{Binding HomePage}"
-                                                            Tag="mod.Homepage"
                                                             Width="120"
+                                                            Height="35"
                                                             HorizontalAlignment="Left"
+                                                            HorizontalContentAlignment="Center"
                                                             Margin="0,5,0,0"
                                                             Content="{ext:LocalizeExtensions XAML_HomePage}" />
                                                 </StackPanel>
@@ -493,33 +495,35 @@
                                                         <Setter Property="Height" Value="40" />
                                                         <Setter Property="Margin" Value="50,23,0,17" />
                                                     </Style>
+                                                    <Style Selector="ToggleSwitch">
+                                                        <Setter Property="Margin" Value="300,20,0,20" />
+                                                        <Setter Property="VerticalAlignment" Value="Top" />
+                                                        <Setter Property="BorderBrush" Value="#DDD" />
+                                                    </Style>
                                                 </StackPanel.Styles>
                                                 <ToggleSwitch IsChecked="{Binding !IsDisabled }"
                                                               IsEnabled="{Binding IsLocal}"
                                                               Height="40"
                                                               Margin="300,23,0,17"
-                                                              Command="{ReflectionBinding $parent[ItemsControl].DataContext.ToggleModCommand}"
+                                                              Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).ToggleModCommand}"
                                                               CommandParameter="{Binding .}"
                                                               Foreground="#DDD" />
 
-                                                <Button Classes="Dark" IsVisible="{Binding !IsLocal}"
-                                                        Tag="{Binding Name}"
+                                                <Button Classes="dark" IsVisible="{Binding !IsLocal}" Tag="{Binding Name}"
                                                         IsEnabled="{Binding IsInstallable}"
-                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).InstallModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
 
-                                                <Button Classes="Dark" IsVisible="{Binding IsLocal}"
-                                                        Tag="{Binding Name}"
+                                                <Button Classes="dark" IsVisible="{Binding IsLocal}" Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
-                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).DeleteModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{ext:LocalizeExtensions XAML_Uninstall_Mod}" />
 
-                                                <Button Classes="Dark" IsVisible="{Binding IsUpdatable}"
-                                                        Tag="{Binding Name}"
+                                                <Button Classes="dark" IsVisible="{Binding IsUpdatable}" Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
-                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.ReinstallModCommand}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).ReinstallModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{Binding ., Converter={StaticResource InstallationTextConverter}}" />
 

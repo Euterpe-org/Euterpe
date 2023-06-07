@@ -16,7 +16,7 @@ using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.ViewModels;
 
-public partial class ModManageWindowViewModel : ViewModelBase, IModManageWindowViewModel
+public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 {
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
@@ -30,7 +30,7 @@ public partial class ModManageWindowViewModel : ViewModelBase, IModManageWindowV
     [ObservableProperty] private string _filter;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
-    public ModManageWindowViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
+    public ModManageViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
     {
         _gitHubService = gitHubService;
         _settings = settings;
