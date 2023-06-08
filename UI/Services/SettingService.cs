@@ -69,13 +69,12 @@ public class SettingService : ISettingService
             if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
             var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
                 { AllowMultiple = false, Title = FolderDialog_Title });
-            var path = dialogue[0].TryGetLocalPath();
-            if (string.IsNullOrEmpty(path))
+            if (dialogue.Count <= 0)
             {
                 await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
                 continue;
             }
-
+            var path = dialogue[0].TryGetLocalPath();
             Settings.MuseDashFolder = path;
             Settings.Language = CultureInfo.CurrentUICulture.ToString();
             var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
