@@ -4,7 +4,6 @@
         xmlns:tabs="clr-namespace:MuseDashModToolsUI.Views.Tabs"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        x:CompileBindings="True"
         Icon="/Assets/Icon.ico"
         Title="Muse Dash Mod Tools"
         Width="1000" Height="800"

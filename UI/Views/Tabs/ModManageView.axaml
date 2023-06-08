@@ -11,12 +11,11 @@
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
              x:Class="MuseDashModToolsUI.Views.Tabs.ModManageView"
-             x:DataType="vm:ModManageViewModel"
-             x:CompileBindings="True">
+             x:DataType="vm:ModManageViewModel">
 
-    <UserControl.DataContext>
+    <Design.DataContext>
         <vm:ModManageViewModel />
-    </UserControl.DataContext>
+    </Design.DataContext>
 
     <UserControl.Resources>
         <converters:NameColourConverter x:Key="NameColourConverter" />
@@ -487,7 +486,7 @@
                                                     </StackPanel>
 
                                                     <Button Classes="dark" IsVisible="{Binding IsValidHomePage}"
-                                                            Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).OpenUrlCommand}"
+                                                            Command="{ReflectionBinding $parent[ItemsControl].DataContext.OpenUrlCommand}"
                                                             CommandParameter="{Binding HomePage}"
                                                             Width="120"
                                                             Height="35"
@@ -519,28 +518,28 @@
                                                               IsEnabled="{Binding IsLocal}"
                                                               Height="40"
                                                               Margin="300,23,0,17"
-                                                              Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).ToggleModCommand}"
+                                                              Command="{ReflectionBinding $parent[ItemsControl].DataContext.ToggleModCommand}"
                                                               CommandParameter="{Binding .}"
                                                               Foreground="#DDD" />
 
                                                 <Button Classes="dark" IsVisible="{Binding !IsLocal}"
                                                         Tag="{Binding Name}"
                                                         IsEnabled="{Binding IsInstallable}"
-                                                        Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).InstallModCommand}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.InstallModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
 
                                                 <Button Classes="dark" IsVisible="{Binding IsLocal}"
                                                         Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
-                                                        Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).DeleteModCommand}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.DeleteModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{ext:LocalizeExtensions XAML_Uninstall_Mod}" />
 
                                                 <Button Classes="dark" IsVisible="{Binding IsUpdatable}"
                                                         Tag="{Binding Name}"
                                                         Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
-                                                        Command="{ReflectionBinding $parent[ItemsControl].((vm:ModManageViewModel)DataContext).ReinstallModCommand}"
+                                                        Command="{ReflectionBinding $parent[ItemsControl].DataContext.ReinstallModCommand}"
                                                         CommandParameter="{Binding .}"
                                                         Content="{Binding ., Converter={StaticResource InstallationTextConverter}}" />
 

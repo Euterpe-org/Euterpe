@@ -74,6 +74,7 @@ public class SettingService : ISettingService
                 await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
                 continue;
             }
+
             var path = dialogue[0].TryGetLocalPath();
             Settings.MuseDashFolder = path;
             Settings.Language = CultureInfo.CurrentUICulture.ToString();

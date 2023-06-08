@@ -5,8 +5,7 @@
              xmlns:vm="clr-namespace:MuseDashModToolsUI.ViewModels"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
              x:Class="MuseDashModToolsUI.Views.Tabs.SettingsView"
-             x:DataType="vm:SettingsViewModel"
-             x:CompileBindings="True">
+             x:DataType="vm:SettingsViewModel">
 
     <UserControl.DataContext>
         <vm:SettingsViewModel />

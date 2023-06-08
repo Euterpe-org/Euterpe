@@ -1,7 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MuseDashModToolsUI.ViewModels"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
         x:Class="MuseDashModToolsUI.Views.ProjectWindow"
+        x:DataType="vm:ModManageViewModel"
         Title="ProjectWindow">
     <Grid RowDefinitions="100,100,150,80" Width="800" ShowGridLines="True">
 
