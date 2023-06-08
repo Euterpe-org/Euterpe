@@ -45,12 +45,17 @@ public static class Bootstrapper
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<ILocalService>()));
 
-        // Mod Manage Window View Model
+        // Mod Manage UserControl View Model
         services.RegisterLazySingleton<IModManageViewModel>(() => new ModManageViewModel(
             resolver.GetRequiredService<IGitHubService>(),
             resolver.GetRequiredService<ISettingService>(),
             resolver.GetRequiredService<ILocalService>(),
             resolver.GetRequiredService<IModService>()));
+
+        // Settings UserControl View Model
+        services.RegisterLazySingleton<ISettingsViewModel>(() => new SettingsViewModel(
+            resolver.GetRequiredService<ISettingService>(),
+            resolver.GetRequiredService<IModManageViewModel>()));
 
         // Main Window View Model
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(

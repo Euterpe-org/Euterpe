@@ -8,6 +8,17 @@
         Icon="/Assets/Icon.ico"
         Title="Muse Dash Mod Tools"
         Width="1000" Height="800"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterScreen">
-    <tabs:ModManageView />
+
+    <Grid RowDefinitions="100,*">
+        <Image Grid.Row="0" Margin="20,0,0,0" Source="/Assets/Icon.ico" Height="50" Width="50"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center" />
+        <TextBlock Grid.Row="0" Margin="80,25,0,0" Height="50" FontSize="25" HorizontalAlignment="Left"
+                   VerticalAlignment="Center" Text="Muse Dash Mod Tools" />
+        <!-- <TabStrip Grid.Row="0" ItemsSource="{Binding viewModels }" /> -->
+        <tabs:ModManageView Grid.Row="1" />
+    </Grid>
 </Window>

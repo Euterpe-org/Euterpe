@@ -32,9 +32,8 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     public ModManageViewModel()
     {
-        
     }
-    
+
     public ModManageViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
     {
         _gitHubService = gitHubService;
@@ -57,7 +56,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
 
-    private async void Initialize()
+    public async void Initialize()
     {
         await _settings.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
