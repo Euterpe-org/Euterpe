@@ -30,6 +30,11 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     [ObservableProperty] private string _filter;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
+    public ModManageViewModel()
+    {
+        
+    }
+    
     public ModManageViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
     {
         _gitHubService = gitHubService;
