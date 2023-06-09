@@ -56,7 +56,7 @@
         <value>模组文件夹</value>
     </data>
     <data name="XAML_SearchBar" xml:space="preserve">
-        <value>搜索模组    （名字，作者，描述）</value>
+        <value>搜索模组    （名字、作者、描述）</value>
     </data>
     <data name="XAML_Uninstall_Mod" xml:space="preserve">
         <value>卸载</value>
@@ -200,7 +200,7 @@
         <value>本地版本：{0}</value>
     </data>
     <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0} \n\n作者： {1} \n线上版本：{2}\n支持游戏版本：{3}</value>
+        <value>{0} \n\n作者：{1} \n线上版本：{2}\n支持游戏版本：{3}</value>
     </data>
     <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
         <value>全部</value>
