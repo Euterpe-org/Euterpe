@@ -1,15 +1,18 @@
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MuseDashModToolsUI.Extensions;
+using MuseDashModToolsUI.ViewModels;
 
 namespace MuseDashModToolsUI.Models;
 
-public class TabView<T> : ObservableObject
+public partial class TabView : ObservableObject
 {
-    public T ViewModel { get; set; }
-    public string DisplayName { get; set; }
+    [ObservableProperty] private string _displayName;
+    public Control View { get; set; }
 
-    public TabView(T viewModel, string displayName)
+    public TabView(ViewModelBase viewModel, string displayName)
     {
-        ViewModel = viewModel;
+        View = viewModel.GetView();
         DisplayName = displayName;
     }
 }

@@ -12,6 +12,7 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 {
+    private readonly ILocalizationService _localizationService;
     private readonly IModManageViewModel _modManageViewModel;
     private readonly ISettingService _settingService;
     [ObservableProperty] private string? _language;
@@ -22,10 +23,12 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     {
     }
 
-    public SettingsViewModel(ISettingService settingService, IModManageViewModel modManageViewModel)
+    public SettingsViewModel(ISettingService settingService, IModManageViewModel modManageViewModel,
+        ILocalizationService localizationService)
     {
         _settingService = settingService;
         _modManageViewModel = modManageViewModel;
+        _localizationService = localizationService;
         Initialize();
     }
 
@@ -39,6 +42,9 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         AskTypes.Add(_settingService.Settings.AskEnableDependenciesWhenInstalling);
         AskTypes.Add(_settingService.Settings.AskInstallMuseDashModTools);
     }
+
+    [RelayCommand]
+    private void SetLanguage() => _localizationService.SetLanguage("en-US");
 
     [RelayCommand]
     private async Task OnChoosePath()

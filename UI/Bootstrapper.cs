@@ -55,7 +55,8 @@ public static class Bootstrapper
         // Settings UserControl View Model
         services.RegisterLazySingleton<ISettingsViewModel>(() => new SettingsViewModel(
             resolver.GetRequiredService<ISettingService>(),
-            resolver.GetRequiredService<IModManageViewModel>()));
+            resolver.GetRequiredService<IModManageViewModel>(),
+            resolver.GetRequiredService<ILocalizationService>()));
 
         // Main Window View Model
         services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel());
