@@ -262,7 +262,7 @@
     <data name="XAML_Tab_ModManage" xml:space="preserve">
         <value>Mods</value>
     </data>
-    <data name="XAML_Tab_Settings" xml:space="preserve">
-        <value>Settings</value>
+    <data name="XAML_Tab_Setting" xml:space="preserve">
+        <value>Setting</value>
     </data>
 </root>

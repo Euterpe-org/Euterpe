@@ -8,7 +8,7 @@ using MuseDashModToolsUI.Models;
 
 #pragma warning disable CS8618
 
-namespace MuseDashModToolsUI.ViewModels;
+namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 {

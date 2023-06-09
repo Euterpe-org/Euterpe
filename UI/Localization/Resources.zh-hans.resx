@@ -262,7 +262,7 @@
     <data name="XAML_Tab_ModManage" xml:space="preserve">
         <value>模组</value>
     </data>
-    <data name="XAML_Tab_Settings" xml:space="preserve">
+    <data name="XAML_Tab_Setting" xml:space="preserve">
         <value>设置</value>
     </data>
 </root>

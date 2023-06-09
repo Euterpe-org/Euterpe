@@ -10,5 +10,6 @@ public partial class ModManageView : UserControl
     {
         DataContext = Locator.Current.GetRequiredService<IModManageViewModel>();
         InitializeComponent();
+        DrawerList.SelectedIndex = 0;
     }
 }

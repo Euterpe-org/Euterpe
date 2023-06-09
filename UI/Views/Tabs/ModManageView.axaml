@@ -9,12 +9,13 @@
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
+             xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
              x:Class="MuseDashModToolsUI.Views.Tabs.ModManageView"
-             x:DataType="vm:ModManageViewModel">
+             x:DataType="tabs:ModManageViewModel">
 
     <Design.DataContext>
-        <vm:ModManageViewModel />
+        <tabs:ModManageViewModel />
     </Design.DataContext>
 
     <UserControl.Resources>

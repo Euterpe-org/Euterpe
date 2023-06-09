@@ -4,6 +4,7 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Services;
 using MuseDashModToolsUI.ViewModels;
+using MuseDashModToolsUI.ViewModels.Tabs;
 using Splat;
 
 namespace MuseDashModToolsUI;
@@ -58,8 +59,8 @@ public static class Bootstrapper
             resolver.GetRequiredService<IModManageViewModel>()));
 
         // Main Window View Model
-        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
-            resolver.GetRequiredService<IModManageViewModel>()));
+        // services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
+        //     resolver.GetRequiredService<IModManageViewModel>()));
     }
 
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)

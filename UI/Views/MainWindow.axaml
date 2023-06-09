@@ -1,6 +1,8 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/Icon.ico"
@@ -16,12 +18,35 @@
                VerticalAlignment="Center" />
         <TextBlock Grid.Row="0" Margin="80,25,0,0" Height="50" FontSize="25" HorizontalAlignment="Left"
                    VerticalAlignment="Center" Text="Muse Dash Mod Tools" />
-        <TabStrip Grid.Row="0" HorizontalAlignment="Center" ItemsSource="{Binding Tabs }">
+        <TabStrip Grid.Row="0"
+                  HorizontalAlignment="Center"
+                  ItemsSource="{Binding Tabs }"
+                  SelectedIndex="{Binding SelectedIdx}">
+            <i:Interaction.Behaviors>
+                <ia:EventTriggerBehavior EventName="PointerPressed">
+                    <ia:InvokeCommandAction Command="{Binding SwitchTabCommand}" />
+                </ia:EventTriggerBehavior>
+            </i:Interaction.Behaviors>
+            <TabStrip.Styles>
+                <Style Selector="TabStripItem">
+                    <Setter Property="Height" Value="40" />
+                    <Setter Property="Margin" Value="0,10,0,0" />
+                </Style>
+                <Style Selector="TabStripItem:selected ContentPresenter">
+                    <Setter Property="Background" Value="#737373" />
+                </Style>
+            </TabStrip.Styles>
             <TabStrip.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding DisplayName}" Foreground="#FFF" />
+                    <Label VerticalContentAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           Content="{Binding DisplayName}"
+                           FontSize="16"
+                           Foreground="#FFF" />
                 </DataTemplate>
             </TabStrip.ItemTemplate>
         </TabStrip>
+
+        <UserControl Grid.Row="1" Content="{Binding Content}" />
     </Grid>
 </Window>

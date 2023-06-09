@@ -525,9 +525,9 @@ namespace MuseDashModToolsUI.Localization {
             }
         }
         
-        internal static string XAML_Tab_Settings {
+        internal static string XAML_Tab_Setting {
             get {
-                return ResourceManager.GetString("XAML_Tab_Settings", resourceCulture);
+                return ResourceManager.GetString("XAML_Tab_Setting", resourceCulture);
             }
         }
     }
