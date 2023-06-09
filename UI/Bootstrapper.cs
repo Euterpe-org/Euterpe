@@ -24,8 +24,7 @@ public static class Bootstrapper
         services.RegisterConstant<ISettingService>(new SettingService(resolver.GetRequiredService<IDialogueService>()));
 
         // Localization Service
-        services.RegisterConstant<ILocalizationService>(
-            new LocalizationService(resolver.GetRequiredService<ISettingService>()));
+        services.RegisterConstant<ILocalizationService>(new LocalizationService(resolver.GetRequiredService<ISettingService>()));
 
         // Download Window View Model
         services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
@@ -59,8 +58,7 @@ public static class Bootstrapper
             resolver.GetRequiredService<IModManageViewModel>()));
 
         // Main Window View Model
-        // services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
-        //     resolver.GetRequiredService<IModManageViewModel>()));
+        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel());
     }
 
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)

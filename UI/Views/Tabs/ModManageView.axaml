@@ -151,7 +151,7 @@
                 <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}"
                         Command="{Binding UninstallMelonLoaderCommand}" />
                 <Button Content="{ext:LocalizeExtensions XAML_Path}" Command="{Binding ChoosePathCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_Mods}" Command="{Binding OpenModsFolderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_ModsFolder}" Command="{Binding OpenModsFolderCommand}" />
             </StackPanel>
 
             <!--Separator for column-->
@@ -172,7 +172,7 @@
 
                 <controls:Card.Styles>
                     <Style Selector="TextBox Panel#PART_TextContainer">
-                        <Setter Property="Margin" Value="8,18,0,0" />
+                        <Setter Property="Margin" Value="8,19,0,0" />
                     </Style>
                 </controls:Card.Styles>
                 <TextBox Name="InputSearchFilter"

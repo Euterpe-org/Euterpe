@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -48,6 +49,7 @@ public class SettingService : ISettingService
             if (string.IsNullOrEmpty(settings.Language)) settings.Language = CultureInfo.CurrentUICulture.ToString();
 
             Settings = settings.Clone();
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 
             var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
             var updaterPath = Path.Combine(updateDirectory, "Updater.exe");

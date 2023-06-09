@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Localization;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -15,7 +14,7 @@ public class LocalizationService : ILocalizationService
 
     public void SetLanguage(string language)
     {
-        Resources.Culture = CultureInfo.GetCultureInfo(language);
+        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
         _settingService.Settings.Language = language;
     }
 }
