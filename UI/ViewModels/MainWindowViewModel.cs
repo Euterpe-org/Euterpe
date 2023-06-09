@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
 using Splat;
@@ -15,8 +17,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private int _selectedTabIndex;
     [ObservableProperty] private ObservableCollection<TabView> _tabs = new();
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(ISettingService settingService)
     {
+        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(settingService.Settings.Language!);
         Tabs = new ObservableCollection<TabView>
         {
             new((ViewModelBase)_resolver.GetRequiredService<IModManageViewModel>(), XAML_Tab_ModManage),
