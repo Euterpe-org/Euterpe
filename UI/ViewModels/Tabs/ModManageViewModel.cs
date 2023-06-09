@@ -22,7 +22,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly ILocalService _localService;
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     private readonly IModService _modService;
-    private readonly ISettingService _settings;
+    private readonly ISettingService _settingService;
 
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly FileSystemWatcher _watcher = new();
@@ -34,10 +34,11 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     {
     }
 
-    public ModManageViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
+    public ModManageViewModel(IGitHubService gitHubService, ISettingService settingService, ILocalService localService,
+        IModService modService)
     {
         _gitHubService = gitHubService;
-        _settings = settings;
+        _settingService = settingService;
         _localService = localService;
         _modService = modService;
 
@@ -58,7 +59,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     public async void Initialize()
     {
-        await _settings.InitializeSettings();
+        await _settingService.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
         await _gitHubService.CheckUpdates();
         FileMonitorStart();
@@ -105,7 +106,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     [RelayCommand]
     private async Task OnChoosePath()
     {
-        await _settings.OnChoosePath();
+        await _settingService.OnChoosePath();
         Initialize();
     }
 
@@ -145,7 +146,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     private void FileMonitorStart()
     {
-        _watcher.Path = _settings.Settings.ModsFolder;
+        _watcher.Path = _settingService.Settings.ModsFolder;
         _watcher.Filters.Add("*.dll");
         _watcher.Filters.Add("*.disabled");
         _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
@@ -157,7 +158,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     private void OnExit(object sender, EventArgs e)
     {
-        var json = JsonSerializer.Serialize(_settings.Settings, new JsonSerializerOptions { WriteIndented = true });
+        var json = JsonSerializer.Serialize(_settingService.Settings, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText("Settings.json", json);
     }
 }

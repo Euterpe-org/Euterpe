@@ -20,14 +20,14 @@ public class LocalService : ILocalService
 {
     private readonly IDialogueService _dialogueService;
     private readonly IDownloadWindowViewModel _downloadWindowViewModel;
-    private readonly ISettingService _settings;
+    private readonly ISettingService _settingService;
 
     private bool IsValidPath { get; set; }
 
-    public LocalService(IDialogueService dialogueService, ISettingService settings, IDownloadWindowViewModel downloadWindowViewModel)
+    public LocalService(IDialogueService dialogueService, ISettingService settingService, IDownloadWindowViewModel downloadWindowViewModel)
     {
         _dialogueService = dialogueService;
-        _settings = settings;
+        _settingService = settingService;
         _downloadWindowViewModel = downloadWindowViewModel;
     }
 
@@ -59,13 +59,13 @@ public class LocalService : ILocalService
 
     public async Task<bool> CheckValidPath()
     {
-        var exePath = Path.Join(_settings.Settings.MuseDashFolder, "MuseDash.exe");
-        var gameAssemblyPath = Path.Join(_settings.Settings.MuseDashFolder, "GameAssembly.dll");
-        var userDataPath = Path.Join(_settings.Settings.MuseDashFolder, "UserData");
+        var exePath = Path.Join(_settingService.Settings.MuseDashFolder, "MuseDash.exe");
+        var gameAssemblyPath = Path.Join(_settingService.Settings.MuseDashFolder, "GameAssembly.dll");
+        var userDataPath = Path.Join(_settingService.Settings.MuseDashFolder, "UserData");
         if (!File.Exists(exePath) || !File.Exists(gameAssemblyPath))
         {
             await _dialogueService.CreateErrorMessageBox(MsgBox_Content_NoExeFound.Localize());
-            await _settings.OnChoosePath();
+            await _settingService.OnChoosePath();
         }
 
         try
@@ -78,13 +78,13 @@ public class LocalService : ILocalService
                 return IsValidPath;
             }
 
-            if (!Directory.Exists(_settings.Settings.ModsFolder))
-                Directory.CreateDirectory(_settings.Settings.ModsFolder);
+            if (!Directory.Exists(_settingService.Settings.ModsFolder))
+                Directory.CreateDirectory(_settingService.Settings.ModsFolder);
 
             if (!Directory.Exists(userDataPath))
                 Directory.CreateDirectory(userDataPath);
 
-            var cfgFilePath = Path.Join(_settings.Settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
+            var cfgFilePath = Path.Join(_settingService.Settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
             if (!File.Exists(cfgFilePath))
             {
                 await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
@@ -102,7 +102,7 @@ public class LocalService : ILocalService
         catch (Exception)
         {
             await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed.Localize());
-            await _settings.OnChoosePath();
+            await _settingService.OnChoosePath();
             IsValidPath = false;
             return IsValidPath;
         }
@@ -111,7 +111,7 @@ public class LocalService : ILocalService
     public async Task<string> ReadGameVersion()
     {
         var assetsManager = new AssetsManager();
-        var bundlePath = Path.Join(_settings.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        var bundlePath = Path.Join(_settingService.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
@@ -134,8 +134,8 @@ public class LocalService : ILocalService
 
     public async Task CheckMelonLoaderInstall()
     {
-        var melonLoaderFolder = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(_settings.Settings.MuseDashFolder, "version.dll");
+        var melonLoaderFolder = Path.Join(_settingService.Settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(_settingService.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
         var install = await _dialogueService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader.Localize());
         if (install)
@@ -154,9 +154,9 @@ public class LocalService : ILocalService
         if (!IsValidPath) return;
         var result = await _dialogueService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize());
         if (!result) return;
-        var melonLoaderFolder = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(_settings.Settings.MuseDashFolder, "version.dll");
-        var noticeTxt = Path.Join(_settings.Settings.MuseDashFolder, "NOTICE.txt");
+        var melonLoaderFolder = Path.Join(_settingService.Settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(_settingService.Settings.MuseDashFolder, "version.dll");
+        var noticeTxt = Path.Join(_settingService.Settings.MuseDashFolder, "NOTICE.txt");
 
         if (Directory.Exists(melonLoaderFolder))
             try
@@ -179,13 +179,13 @@ public class LocalService : ILocalService
         if (!IsValidPath)
         {
             await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
-            await _settings.OnChoosePath();
+            await _settingService.OnChoosePath();
             return;
         }
 
         Process.Start(new ProcessStartInfo
         {
-            FileName = _settings.Settings.ModsFolder,
+            FileName = _settingService.Settings.ModsFolder,
             UseShellExecute = true
         });
     }

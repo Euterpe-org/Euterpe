@@ -7,8 +7,9 @@
              x:Class="MuseDashModToolsUI.Views.Tabs.SettingsView"
              x:DataType="tabs:SettingsViewModel">
 
-    <UserControl.DataContext>
+    <Design.DataContext>
         <tabs:SettingsViewModel />
-    </UserControl.DataContext>
+    </Design.DataContext>
+
 
 </UserControl>
