@@ -52,7 +52,7 @@
     <data name="XAML_Path" xml:space="preserve">
         <value>游戏路径</value>
     </data>
-    <data name="XAML_Mods" xml:space="preserve">
+    <data name="XAML_ModsFolder" xml:space="preserve">
         <value>模组文件夹</value>
     </data>
     <data name="XAML_SearchBar" xml:space="preserve">
@@ -258,5 +258,11 @@
     </data>
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>你正在要求卸载 MelonLoader\n请确认你的操作</value>
+    </data>
+    <data name="XAML_Tab_ModManage" xml:space="preserve">
+        <value>模组</value>
+    </data>
+    <data name="XAML_Tab_Settings" xml:space="preserve">
+        <value>设置</value>
     </data>
 </root>

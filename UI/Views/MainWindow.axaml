@@ -1,7 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
-        xmlns:tabs="clr-namespace:MuseDashModToolsUI.Views.Tabs"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/Icon.ico"
@@ -17,7 +16,12 @@
                VerticalAlignment="Center" />
         <TextBlock Grid.Row="0" Margin="80,25,0,0" Height="50" FontSize="25" HorizontalAlignment="Left"
                    VerticalAlignment="Center" Text="Muse Dash Mod Tools" />
-        <!-- <TabStrip Grid.Row="0" ItemsSource="{Binding viewModels }" /> -->
-        <tabs:ModManageView Grid.Row="1" />
+        <TabStrip Grid.Row="0" HorizontalAlignment="Center" ItemsSource="{Binding Tabs }">
+            <TabStrip.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding DisplayName}" Foreground="#FFF" />
+                </DataTemplate>
+            </TabStrip.ItemTemplate>
+        </TabStrip>
     </Grid>
 </Window>

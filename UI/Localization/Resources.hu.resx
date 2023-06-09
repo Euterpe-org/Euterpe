@@ -51,7 +51,7 @@
     <data name="XAML_Path" xml:space="preserve">
         <value>Útvonal</value>
     </data>
-    <data name="XAML_Mods" xml:space="preserve">
+    <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Mappa</value>
     </data>
     <data name="XAML_SearchBar" xml:space="preserve">
