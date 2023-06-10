@@ -265,4 +265,7 @@
     <data name="XAML_Tab_Setting" xml:space="preserve">
         <value>Setting</value>
     </data>
+    <data name="XAML_UserDataFolder" xml:space="preserve">
+        <value>UserData</value>
+    </data>
 </root>

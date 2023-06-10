@@ -189,4 +189,20 @@ public class LocalService : ILocalService
             UseShellExecute = true
         });
     }
+
+    public async Task OpenUserDataFolder()
+    {
+        if (!IsValidPath)
+        {
+            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await _settingService.OnChoosePath();
+            return;
+        }
+
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = _settingService.Settings.UserDataFolder,
+            UseShellExecute = true
+        });
+    }
 }

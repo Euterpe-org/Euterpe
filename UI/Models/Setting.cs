@@ -9,6 +9,10 @@ public class Setting
     public string? Language { get; set; }
 
     [JsonIgnore]
+    public string UserDataFolder =>
+        !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "UserData") : string.Empty;
+
+    [JsonIgnore]
     public string ModsFolder =>
         !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "Mods") : string.Empty;
 

@@ -120,6 +120,9 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     }
 
     [RelayCommand]
+    private async Task OpenUserDataFolder() => await _localService.OpenUserDataFolder();
+
+    [RelayCommand]
     private async Task OpenModsFolder() => await _localService.OpenModsFolder();
 
     [RelayCommand]

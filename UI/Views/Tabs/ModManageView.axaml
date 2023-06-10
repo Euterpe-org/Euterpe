@@ -150,8 +150,10 @@
                         Command="{Binding InstallMelonLoaderCommand}" />
                 <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}"
                         Command="{Binding UninstallMelonLoaderCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_Path}" Command="{Binding ChoosePathCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_ModsFolder}" Command="{Binding OpenModsFolderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_UserDataFolder}"
+                        Command="{Binding OpenUserDataFolderCommand}" />
+                <Button Content="{ext:LocalizeExtensions XAML_ModsFolder}"
+                        Command="{Binding OpenModsFolderCommand}" />
             </StackPanel>
 
             <!--Separator for column-->

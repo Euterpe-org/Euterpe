@@ -14,4 +14,5 @@ public interface ILocalService
     Task OnInstallMelonLoader();
     Task OnUninstallMelonLoader();
     Task OpenModsFolder();
+    Task OpenUserDataFolder();
 }
