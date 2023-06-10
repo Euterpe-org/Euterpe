@@ -6,21 +6,34 @@
         Icon="/Assets/Icon.ico"
         Title="Muse Dash Mod Tools"
         Width="1000" Height="800"
+        MinWidth="880" MinHeight="680"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterScreen">
 
     <Grid RowDefinitions="100,*">
-        <Image Grid.Row="0" Margin="20,0,0,0" Source="/Assets/Icon.ico" Height="50" Width="50"
+        <Image Grid.Row="0"
+               Margin="20,0,0,0"
+               Source="/Assets/Icon.ico"
+               Height="50"
+               Width="50"
                HorizontalAlignment="Left"
                VerticalAlignment="Center" />
-        <TextBlock Grid.Row="0" Margin="80,25,0,0" Height="50" FontSize="25" HorizontalAlignment="Left"
-                   VerticalAlignment="Center" Text="Muse Dash Mod Tools" />
+
+        <TextBlock Grid.Row="0"
+                   Margin="80,25,0,0"
+                   Height="50"
+                   FontSize="25"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="Muse Dash Mod Tools" />
+
         <TabStrip Grid.Row="0"
                   HorizontalAlignment="Center"
                   Margin="0,10,0,0"
-                  ItemsSource="{Binding Tabs }"
+                  ItemsSource="{Binding Tabs, Mode=OneTime}"
                   SelectionChanged="SwitchTab">
+
             <TabStrip.Styles>
                 <Style Selector="TabStripItem">
                     <Setter Property="Height" Value="35" />
@@ -30,6 +43,7 @@
                     <Setter Property="Background" Value="#808080" />
                 </Style>
             </TabStrip.Styles>
+
             <TabStrip.ItemTemplate>
                 <DataTemplate>
                     <Label VerticalContentAlignment="Center"
@@ -41,6 +55,13 @@
                 </DataTemplate>
             </TabStrip.ItemTemplate>
         </TabStrip>
+
+        <TextBlock Grid.Row="0"
+                   Margin="0,0,20,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   FontSize="25"
+                   Text="{Binding Version}" />
 
         <UserControl Grid.Row="1" Content="{Binding Content}" />
     </Grid>

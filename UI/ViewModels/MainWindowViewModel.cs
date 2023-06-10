@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Reflection;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MuseDashModToolsUI.Contracts;
@@ -14,8 +15,8 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
     private readonly IReadonlyDependencyResolver _resolver = Locator.Current;
     [ObservableProperty] private Control? _content;
-    private int _selectedTabIndex;
     [ObservableProperty] private ObservableCollection<TabView> _tabs = new();
+    public static string Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)!;
 
     public MainWindowViewModel(ISettingService settingService)
     {
@@ -30,14 +31,11 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public void SwitchTab(int index)
     {
         Content = Tabs[index].View;
-        _selectedTabIndex = index;
     }
-
 
     public void Refresh()
     {
         Tabs[0].DisplayName = XAML_Tab_ModManage;
         Tabs[1].DisplayName = XAML_Tab_Setting;
-        Content = Tabs[_selectedTabIndex].View;
     }
 }
