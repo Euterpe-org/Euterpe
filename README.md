@@ -26,8 +26,10 @@
 
 1. English (Default)
 2. Chinese Simplified
-3. Hungarian
-4. Russian
+3. Chinese Traditional
+4. Hungarian
+5. Russian
+6. Spanish
 
 
 
