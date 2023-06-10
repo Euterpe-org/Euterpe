@@ -20,12 +20,14 @@
 
 
 ### Translation
+[![Crowdin](https://badges.crowdin.net/musedashmodtools/localized.svg)](https://crowdin.com/project/musedashmodtools)
 
 **Current Supported Languages:**
 
 1. English (Default)
 2. Chinese Simplified
 3. Hungarian
+4. Russian
 
 
 
