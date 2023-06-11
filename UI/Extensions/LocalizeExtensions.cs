@@ -1,6 +1,8 @@
 ﻿using System;
+using Avalonia.Data;
 using Avalonia.Markup.Xaml;
-using MuseDashModToolsUI.Localization;
+using MuseDashModToolsUI.Contracts;
+using Splat;
 
 namespace MuseDashModToolsUI.Extensions;
 
@@ -12,6 +14,11 @@ public class LocalizeExtensions : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        return Resources.ResourceManager.GetString(Key, Resources.Culture)?.Replace("\\n", "\n") ?? $"#{Key}#";
+        return new Binding
+        {
+            Mode = BindingMode.OneWay,
+            Source = Locator.Current.GetService<ILocalizationService>(),
+            Path = $"[{Key}]"
+        };
     }
 }

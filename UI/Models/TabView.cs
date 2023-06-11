@@ -1,13 +1,14 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using MuseDashModToolsUI.ViewModels;
 
 namespace MuseDashModToolsUI.Models;
 
-public class TabView<T> : ObservableObject
+public partial class TabView : ObservableObject
 {
     [ObservableProperty] private string _displayName;
-    public T ViewModel { get; set; }
+    public ViewModelBase ViewModel { get; set; }
 
-    public TabView(T viewModel, string displayName)
+    public TabView(ViewModelBase viewModel, string displayName)
     {
         ViewModel = viewModel;
         DisplayName = displayName;
