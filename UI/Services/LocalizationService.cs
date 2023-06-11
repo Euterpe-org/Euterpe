@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
 using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using Splat;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -18,6 +16,5 @@ public class LocalizationService : ILocalizationService
     {
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
         _settingService.Settings.Language = language;
-        Locator.Current.GetRequiredService<IMainWindowViewModel>().Refresh();
     }
 }
