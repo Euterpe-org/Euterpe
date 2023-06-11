@@ -31,7 +31,7 @@
         <TabStrip Grid.Row="0"
                   HorizontalAlignment="Center"
                   Margin="0,10,0,0"
-                  ItemsSource="{Binding Tabs, Mode=OneTime}"
+                  ItemsSource="{Binding Tabs}"
                   SelectionChanged="SwitchTab">
 
             <TabStrip.Styles>

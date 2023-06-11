@@ -1,6 +1,4 @@
-using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
-using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.ViewModels;
 
 namespace MuseDashModToolsUI.Models;
@@ -8,11 +6,11 @@ namespace MuseDashModToolsUI.Models;
 public partial class TabView : ObservableObject
 {
     [ObservableProperty] private string _displayName;
-    public Control View { get; set; }
+    public ViewModelBase ViewModel { get; set; }
 
     public TabView(ViewModelBase viewModel, string displayName)
     {
-        View = viewModel.GetView();
+        ViewModel = viewModel;
         DisplayName = displayName;
     }
 }
