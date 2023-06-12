@@ -3,4 +3,5 @@
 public interface ISettingsViewModel
 {
     void Initialize();
+    void ChangeOptionName();
 }

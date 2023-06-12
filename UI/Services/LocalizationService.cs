@@ -33,6 +33,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         Locator.Current.GetRequiredService<IMainWindowViewModel>().ChangeTabName();
+        Locator.Current.GetRequiredService<ISettingsViewModel>().ChangeOptionName();
         _settingService.Settings.LanguageCode = language;
     }
 

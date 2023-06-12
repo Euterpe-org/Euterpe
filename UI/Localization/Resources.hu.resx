@@ -207,10 +207,10 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>Duplikálja:</value>
     </data>
-    <data name="MsgBox_Content_EnableReverseDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} az a(z) {1}-nek a függősége\nBiztos hogy ki akarod kapcsolni?</value>
     </data>
-    <data name="MsgBox_Content_DisableDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>Ki akarod kapcsolni a(z) {0}-ra függő modokat?</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
@@ -222,7 +222,7 @@
     <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0} sikeresen eltávolítva\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} az a(z) {1}-nek a függősége\nBiztos hogy ki akarod törölni?</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">

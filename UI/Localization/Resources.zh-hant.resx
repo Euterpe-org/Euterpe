@@ -204,10 +204,10 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>重複:</value>
     </data>
-    <data name="MsgBox_Content_EnableReverseDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} 被 {1} 用作依賴\n你确定你想要禁用這個 mod?</value>
     </data>
-    <data name="MsgBox_Content_DisableDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>你要禁用依賴於 {0} 的 mod 嗎?</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
@@ -219,7 +219,7 @@
     <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0} 已經被成功刪除\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} 使用依賴 {1} \n你確定你想要刪除這個 mod 嗎？</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">

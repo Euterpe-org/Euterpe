@@ -211,10 +211,10 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>Duplicated by:</value>
     </data>
-    <data name="MsgBox_Content_EnableReverseDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} is used by {1} as dependency\nAre you sure you want to disable this mod?</value>
     </data>
-    <data name="MsgBox_Content_DisableDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>Do you want to disable the mods depend on {0}?</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
@@ -226,7 +226,7 @@
     <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0} has been successfully deleted\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} is used by {1} as dependency\nAre you sure you want to delete this mod?</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
@@ -269,16 +269,16 @@
         <value>UserData</value>
     </data>
     <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>Ask enable dependency when installing mod</value>
+        <value>Enable dependency when installing mod</value>
     </data>
     <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>Ask enable dependency when enabling mod</value>
+        <value>Enable dependency when enabling mod</value>
     </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>Ask disable dependency when deleting mod</value>
+        <value>Disable dependency when deleting mod</value>
     </data>
     <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>Ask disable dependency when disabling mod</value>
+        <value>Disable dependency when disabling mod</value>
     </data>
     <data name="XAML_ChangePath" xml:space="preserve">
         <value>Change Path</value>
@@ -291,5 +291,14 @@
     </data>
     <data name="XAML_Apply" xml:space="preserve">
         <value>Apply</value>
+    </data>
+    <data name="XAML_AskType_Always" xml:space="preserve">
+        <value>Always Ask</value>
+    </data>
+    <data name="XAML_AskType_Yes" xml:space="preserve">
+        <value>Yes</value>
+    </data>
+    <data name="XAML_AskType_No" xml:space="preserve">
+        <value>No</value>
     </data>
 </root>

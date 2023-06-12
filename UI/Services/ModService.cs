@@ -223,7 +223,7 @@ public class ModService : IModService
                     {
                         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
                         var result = await _dialogueService.CreateConfirmMessageBox(
-                            string.Format(MsgBox_Content_EnableReverseDependency.Localize(), item.Name, enabledReverseDependencyNames));
+                            string.Format(MsgBox_Content_DisableModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
                         if (!result)
                         {
                             item.IsDisabled = !item.IsDisabled;
@@ -231,7 +231,7 @@ public class ModService : IModService
                         }
 
                         _settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
-                            string.Format(MsgBox_Content_DisableDependency, item.Name), enabledReverseDependencies,
+                            string.Format(MsgBox_Content_DisableReverseDependency, item.Name), enabledReverseDependencies,
                             _settings.Settings.AskDisableDependenciesWhenDisabling, true);
                     }
 
@@ -301,11 +301,11 @@ public class ModService : IModService
             {
                 var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
                 var result = await _dialogueService.CreateConfirmMessageBox(
-                    string.Format(MsgBox_Content_UninstallDependency, item.Name, enabledReverseDependencyNames));
+                    string.Format(MsgBox_Content_DeleteModConfirm, item.Name, enabledReverseDependencyNames));
                 if (!result)
                     return;
                 _settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
-                    string.Format(MsgBox_Content_DisableDependency, item.Name), enabledReverseDependencies,
+                    string.Format(MsgBox_Content_DisableReverseDependency, item.Name), enabledReverseDependencies,
                     _settings.Settings.AskDisableDependenciesWhenDeleting, true);
             }
 

@@ -186,11 +186,29 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to delete this mod?.
+        /// </summary>
+        internal static string MsgBox_Content_DeleteModConfirm {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DeleteModConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to disable this mod?.
+        /// </summary>
+        internal static string MsgBox_Content_DisableModConfirm {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DisableModConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to disable the mods depend on {0}?.
         /// </summary>
-        internal static string MsgBox_Content_DisableDependency {
+        internal static string MsgBox_Content_DisableReverseDependency {
             get {
-                return ResourceManager.GetString("MsgBox_Content_DisableDependency", resourceCulture);
+                return ResourceManager.GetString("MsgBox_Content_DisableReverseDependency", resourceCulture);
             }
         }
         
@@ -209,15 +227,6 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_EnableDependency {
             get {
                 return ResourceManager.GetString("MsgBox_Content_EnableDependency", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to disable this mod?.
-        /// </summary>
-        internal static string MsgBox_Content_EnableReverseDependency {
-            get {
-                return ResourceManager.GetString("MsgBox_Content_EnableReverseDependency", resourceCulture);
             }
         }
         
@@ -411,15 +420,6 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to delete this mod?.
-        /// </summary>
-        internal static string MsgBox_Content_UninstallDependency {
-            get {
-                return ResourceManager.GetString("MsgBox_Content_UninstallDependency", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You are asking to uninstall MelonLoader\nPlease confirm your operation.
         /// </summary>
         internal static string MsgBox_Content_UninstallMelonLoader {
@@ -560,6 +560,33 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_Apply {
             get {
                 return ResourceManager.GetString("XAML_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always Ask.
+        /// </summary>
+        internal static string XAML_AskType_Always {
+            get {
+                return ResourceManager.GetString("XAML_AskType_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string XAML_AskType_No {
+            get {
+                return ResourceManager.GetString("XAML_AskType_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string XAML_AskType_Yes {
+            get {
+                return ResourceManager.GetString("XAML_AskType_Yes", resourceCulture);
             }
         }
         
@@ -780,7 +807,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ask disable dependency when deleting mod.
+        ///   Looks up a localized string similar to Disable dependency when deleting mod.
         /// </summary>
         internal static string XAML_Setting_DisableDependency_Delete {
             get {
@@ -789,7 +816,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ask disable dependency when disabling mod.
+        ///   Looks up a localized string similar to Disable dependency when disabling mod.
         /// </summary>
         internal static string XAML_Setting_DisableDependency_Disable {
             get {
@@ -798,7 +825,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ask enable dependency when enabling mod.
+        ///   Looks up a localized string similar to Enable dependency when enabling mod.
         /// </summary>
         internal static string XAML_Setting_EnableDependency_Enable {
             get {
@@ -807,7 +834,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ask enable dependency when installing mod.
+        ///   Looks up a localized string similar to Enable dependency when installing mod.
         /// </summary>
         internal static string XAML_Setting_EnableDependency_Install {
             get {

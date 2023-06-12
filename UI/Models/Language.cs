@@ -1,4 +1,6 @@
-﻿namespace MuseDashModToolsUI.Models;
+﻿using System.Globalization;
+
+namespace MuseDashModToolsUI.Models;
 
 public class Language
 {
@@ -11,5 +13,11 @@ public class Language
     {
         Name = name;
         DisplayName = displayName;
+    }
+
+    public Language(CultureInfo cultureInfo)
+    {
+        Name = cultureInfo.Name;
+        DisplayName = cultureInfo.DisplayName;
     }
 }
