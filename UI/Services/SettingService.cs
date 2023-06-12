@@ -8,8 +8,10 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using Splat;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
@@ -84,6 +86,7 @@ public class SettingService : ISettingService
             var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
             await File.WriteAllTextAsync("Settings.json", json);
 
+            Locator.Current.GetRequiredService<ISettingsViewModel>().Initialize();
             break;
         }
     }

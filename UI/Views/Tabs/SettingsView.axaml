@@ -40,7 +40,10 @@
                          AcceptsReturn="False"
                          IsReadOnly="True" />
 
-                <Button Classes="dark" Height="40" Margin="20,0,0,0">
+                <Button Classes="dark"
+                        Height="40"
+                        Margin="20,0,0,0"
+                        Command="{Binding ChoosePathCommand}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/folder.png"
                                Height="35"
