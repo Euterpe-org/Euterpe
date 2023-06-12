@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -23,7 +24,7 @@ public class SettingService : ISettingService
     public SettingService(IDialogueService dialogueService)
     {
         _dialogueService = dialogueService;
-        Task.Run(InitializeSettings);
+        Task.Run(InitializeLanguageAndPath);
     }
 
     public Setting Settings { get; set; } = new();
@@ -89,5 +90,15 @@ public class SettingService : ISettingService
             Locator.Current.GetRequiredService<ISettingsViewModel>().Initialize();
             break;
         }
+    }
+
+    private async Task InitializeLanguageAndPath()
+    {
+        if (!File.Exists("Settings.json"))
+            return;
+        var text = await File.ReadAllTextAsync("Settings.json");
+        var setting = JsonNode.Parse(text);
+        Settings.LanguageCode = setting?["LanguageCode"]?.ToString();
+        Settings.MuseDashFolder = setting?["MuseDashFolder"]?.ToString();
     }
 }

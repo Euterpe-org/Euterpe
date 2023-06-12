@@ -59,6 +59,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     public async void Initialize()
     {
+        await _settingService.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
         await _gitHubService.CheckUpdates();
         FileMonitorStart();

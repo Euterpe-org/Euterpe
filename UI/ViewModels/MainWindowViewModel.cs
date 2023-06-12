@@ -19,7 +19,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     public MainWindowViewModel(ISettingService settingService)
     {
-        if (settingService.Settings.LanguageCode != null)
+        if (settingService.Settings.LanguageCode is not null)
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(settingService.Settings.LanguageCode);
         Tabs = new List<TabView>
         {

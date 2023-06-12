@@ -92,10 +92,10 @@ public class ModService : IModService
             localMod.HomePage = webMod.HomePage;
             localMod.Description = webMod.Description;
 
-            var versionDate = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 :
+            var versionState = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 :
                 new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
-            localMod.State = (UpdateState)versionDate;
-            localMod.IsShaMismatched = versionDate == 0 && webMod.SHA256 != localMod.SHA256;
+            localMod.State = (UpdateState)versionState;
+            localMod.IsShaMismatched = versionState == 0 && webMod.SHA256 != localMod.SHA256;
             if (localMod.IsShaMismatched)
                 localMod.State = UpdateState.Modified;
             localMod.IsIncompatible = !CheckCompatible(localMod);
