@@ -27,6 +27,7 @@
                 <Setter Property="Margin" Value="20,0,0,0" />
             </Style>
         </Grid.Styles>
+
         <!--Muse Dash Folder Path-->
         <controls:Card Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
@@ -38,7 +39,8 @@
                          VerticalAlignment="Center"
                          HorizontalAlignment="Left"
                          AcceptsReturn="False"
-                         IsReadOnly="True" />
+                         IsReadOnly="True"
+                         MaxWidth="500" />
 
                 <Button Classes="dark"
                         Height="40"
