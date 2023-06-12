@@ -57,7 +57,7 @@
         </TabStrip>
 
         <TextBlock Grid.Row="0"
-                   Margin="0,0,20,0"
+                   Margin="0,0,50,0"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    FontSize="25"

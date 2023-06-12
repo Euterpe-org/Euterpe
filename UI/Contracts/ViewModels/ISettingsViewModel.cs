@@ -2,4 +2,5 @@
 
 public interface ISettingsViewModel
 {
+    void Initialize();
 }

@@ -555,6 +555,24 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        internal static string XAML_Apply {
+            get {
+                return ResourceManager.GetString("XAML_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Path.
+        /// </summary>
+        internal static string XAML_ChangePath {
+            get {
+                return ResourceManager.GetString("XAML_ChangePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Update.
         /// </summary>
         internal static string XAML_Check_Update {
@@ -569,6 +587,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_Enabled {
             get {
                 return ResourceManager.GetString("XAML_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help Translate.
+        /// </summary>
+        internal static string XAML_HelpTranslate {
+            get {
+                return ResourceManager.GetString("XAML_HelpTranslate", resourceCulture);
             }
         }
         
@@ -614,6 +641,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_Installed {
             get {
                 return ResourceManager.GetString("XAML_Installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string XAML_Language {
+            get {
+                return ResourceManager.GetString("XAML_Language", resourceCulture);
             }
         }
         
@@ -717,7 +753,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path.
+        ///   Looks up a localized string similar to Muse Dash Folder Path.
         /// </summary>
         internal static string XAML_Path {
             get {
@@ -740,6 +776,42 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_SearchBar {
             get {
                 return ResourceManager.GetString("XAML_SearchBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ask disable dependency when deleting mod.
+        /// </summary>
+        internal static string XAML_Setting_DisableDependency_Delete {
+            get {
+                return ResourceManager.GetString("XAML_Setting_DisableDependency_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ask disable dependency when disabling mod.
+        /// </summary>
+        internal static string XAML_Setting_DisableDependency_Disable {
+            get {
+                return ResourceManager.GetString("XAML_Setting_DisableDependency_Disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ask enable dependency when enabling mod.
+        /// </summary>
+        internal static string XAML_Setting_EnableDependency_Enable {
+            get {
+                return ResourceManager.GetString("XAML_Setting_EnableDependency_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ask enable dependency when installing mod.
+        /// </summary>
+        internal static string XAML_Setting_EnableDependency_Install {
+            get {
+                return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
             }
         }
         

@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -15,9 +15,9 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private readonly ILocalizationService _localizationService;
     private readonly IModManageViewModel _modManageViewModel;
     private readonly ISettingService _settingService;
-    [ObservableProperty] private string? _language;
+    [ObservableProperty] private Language _currentLanguage;
     [ObservableProperty] private string? _path;
-    public ObservableCollection<AskType> AskTypes { get; set; } = new();
+    public List<Language> AvailableLanguages => _localizationService.AvailableLanguages;
 
     public SettingsViewModel()
     {
@@ -32,19 +32,15 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         Initialize();
     }
 
-    private void Initialize()
+    public void Initialize()
     {
-        Language = _settingService.Settings.Language;
+        CurrentLanguage.Name = _settingService.Settings.LanguageCode;
+        CurrentLanguage = AvailableLanguages.Find(x => x.Name == CurrentLanguage.Name)!;
         Path = _settingService.Settings.MuseDashFolder;
-        AskTypes.Add(_settingService.Settings.AskDisableDependenciesWhenDeleting);
-        AskTypes.Add(_settingService.Settings.AskDisableDependenciesWhenDisabling);
-        AskTypes.Add(_settingService.Settings.AskEnableDependenciesWhenEnabling);
-        AskTypes.Add(_settingService.Settings.AskEnableDependenciesWhenInstalling);
-        AskTypes.Add(_settingService.Settings.AskInstallMuseDashModTools);
     }
 
     [RelayCommand]
-    private void SetLanguage() => _localizationService.SetLanguage("en-US");
+    private void SetLanguage() => _localizationService.SetLanguage(CurrentLanguage.Name!);
 
     [RelayCommand]
     private async Task OnChoosePath()

@@ -50,7 +50,7 @@
         <value>Uninstall\nMelonLoader</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
-        <value>Path</value>
+        <value>Muse Dash Folder Path</value>
     </data>
     <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Mods</value>
@@ -267,5 +267,29 @@
     </data>
     <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>UserData</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+        <value>Ask enable dependency when installing mod</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+        <value>Ask enable dependency when enabling mod</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+        <value>Ask disable dependency when deleting mod</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+        <value>Ask disable dependency when disabling mod</value>
+    </data>
+    <data name="XAML_ChangePath" xml:space="preserve">
+        <value>Change Path</value>
+    </data>
+    <data name="XAML_HelpTranslate" xml:space="preserve">
+        <value>Help Translate</value>
+    </data>
+    <data name="XAML_Language" xml:space="preserve">
+        <value>Language</value>
+    </data>
+    <data name="XAML_Apply" xml:space="preserve">
+        <value>Apply</value>
     </data>
 </root>

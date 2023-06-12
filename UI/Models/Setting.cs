@@ -6,7 +6,7 @@ namespace MuseDashModToolsUI.Models;
 public class Setting
 {
     public string? MuseDashFolder { get; set; }
-    public string? Language { get; set; }
+    public string? LanguageCode { get; set; }
 
     [JsonIgnore]
     public string UserDataFolder =>

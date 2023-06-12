@@ -48,9 +48,6 @@
     <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
         <value>MelonLoader\nEltávolítása</value>
     </data>
-    <data name="XAML_Path" xml:space="preserve">
-        <value>Útvonal</value>
-    </data>
     <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Mappa</value>
     </data>

@@ -26,30 +26,7 @@ public class SettingService : ISettingService
 
     public Setting Settings { get; set; } = new();
 
-    public async Task OnChoosePath()
-    {
-        while (true)
-        {
-            if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
-            var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-                { AllowMultiple = false, Title = FolderDialog_Title });
-            if (dialogue.Count <= 0)
-            {
-                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
-                continue;
-            }
-
-            var path = dialogue[0].TryGetLocalPath();
-            Settings.MuseDashFolder = path;
-            Settings.Language = CultureInfo.CurrentUICulture.ToString();
-            var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
-            await File.WriteAllTextAsync("Settings.json", json);
-
-            break;
-        }
-    }
-
-    private async Task InitializeSettings()
+    public async Task InitializeSettings()
     {
         try
         {
@@ -69,7 +46,7 @@ public class SettingService : ISettingService
                 await InitializeSettings();
             }
 
-            if (string.IsNullOrEmpty(settings.Language)) settings.Language = CultureInfo.CurrentUICulture.ToString();
+            if (string.IsNullOrEmpty(settings.LanguageCode)) settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
 
             Settings = settings.Clone();
 
@@ -83,6 +60,31 @@ public class SettingService : ISettingService
         catch (Exception ex)
         {
             await _dialogueService.CreateErrorMessageBox(ex.ToString());
+        }
+    }
+
+    public async Task OnChoosePath()
+    {
+        while (true)
+        {
+            if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
+            var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+                { AllowMultiple = false, Title = FolderDialog_Title });
+            if (dialogue.Count <= 0)
+            {
+                if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
+                    break;
+                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
+                continue;
+            }
+
+            var path = dialogue[0].TryGetLocalPath();
+            Settings.MuseDashFolder = path;
+            Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
+            var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
+            await File.WriteAllTextAsync("Settings.json", json);
+
+            break;
         }
     }
 }

@@ -19,7 +19,8 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     public MainWindowViewModel(ISettingService settingService)
     {
-        CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(settingService.Settings.Language!);
+        if (settingService.Settings.LanguageCode != null)
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(settingService.Settings.LanguageCode);
         Tabs = new List<TabView>
         {
             new((ViewModelBase)_resolver.GetRequiredService<IModManageViewModel>(), XAML_Tab_ModManage),

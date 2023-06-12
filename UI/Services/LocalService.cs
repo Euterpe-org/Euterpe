@@ -59,6 +59,8 @@ public class LocalService : ILocalService
 
     public async Task<bool> CheckValidPath()
     {
+        if (string.IsNullOrEmpty(_settingService.Settings.MuseDashFolder))
+            await _settingService.InitializeSettings();
         var exePath = Path.Join(_settingService.Settings.MuseDashFolder, "MuseDash.exe");
         var gameAssemblyPath = Path.Join(_settingService.Settings.MuseDashFolder, "GameAssembly.dll");
         var userDataPath = Path.Join(_settingService.Settings.MuseDashFolder, "UserData");

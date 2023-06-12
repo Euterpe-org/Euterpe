@@ -59,7 +59,8 @@ public static class Bootstrapper
             resolver.GetRequiredService<ILocalizationService>()));
 
         // Main Window View Model
-        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(resolver.GetRequiredService<ISettingService>()));
+        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
+            resolver.GetRequiredService<ISettingService>()));
     }
 
     public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)

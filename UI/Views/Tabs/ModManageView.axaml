@@ -177,6 +177,7 @@
                         <Setter Property="Margin" Value="8,19,0,0" />
                     </Style>
                 </controls:Card.Styles>
+
                 <TextBox Name="InputSearchFilter"
                          Classes="Solo"
                          Background="#505050"
@@ -409,6 +410,15 @@
                                       Command="{Binding CheckUpdateCommand}">
                                 <MenuItem.Icon>
                                     <Image Source="/Assets/update.png" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+
+                            <!--Translate-->
+                            <MenuItem Header="{ext:LocalizeExtensions XAML_HelpTranslate}"
+                                      Command="{Binding OpenUrlCommand}"
+                                      CommandParameter="https://crowdin.com/project/musedashmodtools">
+                                <MenuItem.Icon>
+                                    <Image Source="/Assets/translate.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>

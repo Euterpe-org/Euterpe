@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
+             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
              x:Class="MuseDashModToolsUI.Views.Tabs.SettingsView"
              x:DataType="tabs:SettingsViewModel">
@@ -10,6 +11,89 @@
     <Design.DataContext>
         <tabs:SettingsViewModel />
     </Design.DataContext>
+
+    <Grid RowDefinitions="*,*,*,*,*,*,*,*" Background="#424242" ShowGridLines="True">
+        <!--Muse Dash Folder Path-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,0,0,0">
+            <TextBlock
+                FontSize="16"
+                Text="{ext:LocalizeExtensions XAML_Path}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left" />
+
+            <TextBox Classes="outline"
+                     Text="{Binding Path}"
+                     Margin="20,0,0,5"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     AcceptsReturn="False"
+                     IsReadOnly="True" />
+
+            <Button Classes="dark" Height="40" Margin="20,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/folder.png"
+                           Height="35"
+                           Width="35"
+                           VerticalAlignment="Center" />
+                    <TextBlock Margin="5,0,0,0"
+                               FontSize="16"
+                               Text="{ext:LocalizeExtensions XAML_ChangePath}"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!--Language-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20,0,0,0">
+            <TextBlock
+                FontSize="16"
+                Text="{ext:LocalizeExtensions XAML_Language}"
+                VerticalAlignment="Center" />
+
+            <ComboBox Classes="Filled" Margin="20,0,0,0"
+                      ItemsSource="{Binding AvailableLanguages}"
+                      SelectedItem="{Binding CurrentLanguage}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button Classes="dark" Height="40" Margin="20,0,0,0" Content="{ext:LocalizeExtensions XAML_Apply}"
+                    Command="{Binding SetLanguageCommand}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20,0,0,0">
+            <TextBlock
+                FontSize="16"
+                Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}"
+                VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="20,0,0,0">
+            <TextBlock
+                FontSize="16"
+                Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}"
+                VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="20,0,0,0">
+            <TextBlock
+                FontSize="16"
+                Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}"
+                VerticalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="20,0,0,0">
+            <TextBlock
+                FontSize="16"
+                Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}"
+                VerticalAlignment="Center" />
+        </StackPanel>
+
+
+    </Grid>
 
 
 </UserControl>

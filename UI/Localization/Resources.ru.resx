@@ -48,9 +48,6 @@
     <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
         <value>Удалить\nMelonLoader</value>
     </data>
-    <data name="XAML_Path" xml:space="preserve">
-        <value>Путь</value>
-    </data>
     <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Моды</value>
     </data>
