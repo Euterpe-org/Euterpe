@@ -66,7 +66,7 @@
 
                 <ComboBox Classes="Filled"
                           Margin="20,0,0,0"
-                          Width="240"
+                          MinWidth="200"
                           ItemsSource="{Binding AvailableLanguages}"
                           SelectedItem="{Binding CurrentLanguage}">
                     <ComboBox.ItemTemplate>
@@ -85,7 +85,7 @@
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
                 <ComboBox Classes="Filled"
-                          Width="150"
+                          MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
                           SelectedItem="{Binding EnableDependenciesWhenInstalling}" />
             </StackPanel>
@@ -95,7 +95,7 @@
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
                 <ComboBox Classes="Filled"
-                          Width="150"
+                          MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
                           SelectedItem="{Binding EnableDependenciesWhenEnabling}" />
             </StackPanel>
@@ -105,7 +105,7 @@
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
                 <ComboBox Classes="Filled"
-                          Width="150"
+                          MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
                           SelectedItem="{Binding DisableDependenciesWhenDeleting}" />
             </StackPanel>
@@ -115,7 +115,7 @@
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
                 <ComboBox Classes="Filled"
-                          Width="150"
+                          MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
                           SelectedItem="{Binding DisableDependenciesWhenDisabling}" />
             </StackPanel>
