@@ -59,8 +59,6 @@ public partial class Mod : ObservableObject
     public List<string> IncompatibleMods { get; set; } = new();
     public string? SHA256 { get; set; }
     public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : string.Empty);
-
-    public Mod Clone() => (Mod)MemberwiseClone();
 }
 
 public enum UpdateState
