@@ -135,8 +135,7 @@ public class ModService : IModService
             var downloadedMod = _localService.LoadMod(path)!;
             var webMods = await _gitHubService.GetModsAsync();
             var mod = webMods.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
-            mod.FileName = downloadedMod.FileName;
-            mod.LocalVersion = downloadedMod.LocalVersion;
+            mod = downloadedMod.Clone();
             _sourceCache!.AddOrUpdate(mod);
         }
         catch (Exception ex)
