@@ -19,10 +19,10 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private readonly ISettingService _settingService;
     [ObservableProperty] private string[] _askTypes = { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
     [ObservableProperty] private Language? _currentLanguage;
-    [ObservableProperty] private string? _disableDependenciesWhenDeleting;
-    [ObservableProperty] private string? _disableDependenciesWhenDisabling;
-    [ObservableProperty] private string? _enableDependenciesWhenEnabling;
-    [ObservableProperty] private string? _enableDependenciesWhenInstalling;
+    [ObservableProperty] private int _disableDependenciesWhenDeleting;
+    [ObservableProperty] private int _disableDependenciesWhenDisabling;
+    [ObservableProperty] private int _enableDependenciesWhenEnabling;
+    [ObservableProperty] private int _enableDependenciesWhenInstalling;
     [ObservableProperty] private string? _path;
     public List<Language> AvailableLanguages => _localizationService.AvailableLanguages;
 
@@ -44,7 +44,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     {
         CurrentLanguage = _settingService.Settings.LanguageCode is null
             ? new Language(CultureInfo.CurrentUICulture)
-            : new Language(CultureInfo.GetCultureInfo(_settingService.Settings.LanguageCode!));
+            : new Language(CultureInfo.GetCultureInfo(_settingService.Settings.LanguageCode));
         Path = _settingService.Settings.MuseDashFolder;
     }
 
@@ -65,44 +65,23 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 
     #region OnPropertyChanged
 
-    partial void OnEnableDependenciesWhenInstallingChanged(string? value)
+    partial void OnEnableDependenciesWhenInstallingChanged(int oldValue, int newValue)
     {
-        if (value == XAML_AskType_Always)
-            _settingService.Settings.AskEnableDependenciesWhenInstalling = AskType.Always;
-        if (value == XAML_AskType_Yes)
-            _settingService.Settings.AskEnableDependenciesWhenInstalling = AskType.YesAndNoAsk;
-        if (value == XAML_AskType_No)
-            _settingService.Settings.AskEnableDependenciesWhenInstalling = AskType.NoAndNoAsk;
-    }
-
-    partial void OnEnableDependenciesWhenEnablingChanged(string? value)
-    {
-        if (value == XAML_AskType_Always)
-            _settingService.Settings.AskEnableDependenciesWhenEnabling = AskType.Always;
-        if (value == XAML_AskType_Yes)
-            _settingService.Settings.AskEnableDependenciesWhenEnabling = AskType.YesAndNoAsk;
-        if (value == XAML_AskType_No)
-            _settingService.Settings.AskEnableDependenciesWhenEnabling = AskType.NoAndNoAsk;
-    }
-
-    partial void OnDisableDependenciesWhenDeletingChanged(string? value)
-    {
-        if (value == XAML_AskType_Always)
-            _settingService.Settings.AskDisableDependenciesWhenDeleting = AskType.Always;
-        if (value == XAML_AskType_Yes)
-            _settingService.Settings.AskDisableDependenciesWhenDeleting = AskType.YesAndNoAsk;
-        if (value == XAML_AskType_No)
-            _settingService.Settings.AskDisableDependenciesWhenDeleting = AskType.NoAndNoAsk;
-    }
-
-    partial void OnDisableDependenciesWhenDisablingChanged(string? value)
-    {
-        if (value == XAML_AskType_Always)
-            _settingService.Settings.AskDisableDependenciesWhenDisabling = AskType.Always;
-        if (value == XAML_AskType_Yes)
-            _settingService.Settings.AskDisableDependenciesWhenDisabling = AskType.YesAndNoAsk;
-        if (value == XAML_AskType_No)
-            _settingService.Settings.AskDisableDependenciesWhenDisabling = AskType.NoAndNoAsk;
+        switch (newValue)
+        {
+            case -1:
+                EnableDependenciesWhenInstalling = oldValue;
+                break;
+            case 0:
+                _settingService.Settings.AskEnableDependenciesWhenInstalling = AskType.Always;
+                break;
+            case 1:
+                _settingService.Settings.AskEnableDependenciesWhenInstalling = AskType.YesAndNoAsk;
+                break;
+            case 2:
+                _settingService.Settings.AskEnableDependenciesWhenInstalling = AskType.NoAndNoAsk;
+                break;
+        }
     }
 
     #endregion

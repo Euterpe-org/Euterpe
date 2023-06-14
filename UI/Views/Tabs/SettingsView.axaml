@@ -76,7 +76,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
-                <Button Classes="dark" Height="40" Margin="20,0,0,0" Content="{ext:LocalizeExtensions XAML_Apply}"
+                <Button Classes="dark" Height="40" Margin="20,0,0,0"
+                        Content="{ext:LocalizeExtensions XAML_Apply}"
                         Command="{Binding SetLanguageCommand}" />
             </StackPanel>
         </controls:Card>
@@ -87,7 +88,7 @@
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
-                          SelectedItem="{Binding EnableDependenciesWhenInstalling}" />
+                          SelectedIndex="{Binding EnableDependenciesWhenInstalling}" />
             </StackPanel>
         </controls:Card>
 
@@ -97,7 +98,7 @@
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
-                          SelectedItem="{Binding EnableDependenciesWhenEnabling}" />
+                          SelectedIndex="{Binding EnableDependenciesWhenEnabling}" />
             </StackPanel>
         </controls:Card>
 
@@ -107,7 +108,7 @@
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
-                          SelectedItem="{Binding DisableDependenciesWhenDeleting}" />
+                          SelectedIndex="{Binding DisableDependenciesWhenDeleting}" />
             </StackPanel>
         </controls:Card>
 
@@ -117,7 +118,7 @@
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
-                          SelectedItem="{Binding DisableDependenciesWhenDisabling}" />
+                          SelectedIndex="{Binding DisableDependenciesWhenDisabling}" />
             </StackPanel>
         </controls:Card>
 
