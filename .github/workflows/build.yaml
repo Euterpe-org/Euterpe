@@ -1,0 +1,104 @@
+name: Build Packages
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  pull_request:
+    branches:
+      - 'main'
+      - 'master'
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        build-type:
+          - Debug
+          - Release
+        target-os:
+          - ubuntu-latest
+          - windows-latest
+          # - osx-latest # Requires dotnet 8 and later
+        target-arch:
+          - x64
+          # - arm64 # /usr/bin/ld: unrecognised emulation mode: aarch64linux
+        dotnet-version:
+          - '7.0'
+    runs-on: ${{ matrix.target-os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      
+      - name: Install AOT Toolchain
+        if: matrix.target-os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends clang zlib1g-dev
+      
+      - name: Build
+        run: |
+          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }}
+
+      - name: List result on Windows
+        if: matrix.target-os == 'windows-latest'
+        run: ls -l bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish
+
+      - name: List result on Linux
+        if: matrix.target-os == 'ubuntu-latest'
+        run: ls -l bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish
+
+      - name: Package on Windows
+        if: matrix.target-os == 'windows-latest'
+        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-windows-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.7z bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish\*
+      - name: Package on Linux
+        if: matrix.target-os == 'ubuntu-latest'
+        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-linux-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.7z bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: archives
+          path: MuseDashModToolsUI-*.7z
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Get archives
+        uses: actions/download-artifact@v3
+        with:
+          name: archives
+
+      - name: List archives
+        run: ls -l
+
+      - name: Generate digest
+        id: digest
+        run: |
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "sha256sum<<$EOF" >> $GITHUB_OUTPUT
+          sha256sum MuseDashModToolsUI-Release-*.7z >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+
+      - name: Release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: MuseDashModToolsUI-Release-*.7z
+          body: |
+            sha256sums:
+            ```
+            ${{ steps.digest.output.sha256sum }}
+            ```
+          generate_release_notes: true
