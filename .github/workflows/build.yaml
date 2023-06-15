@@ -60,16 +60,16 @@ jobs:
 
       - name: Package on Windows
         if: matrix.target-os == 'windows-latest'
-        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-windows-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.7z bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish\*
+        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-windows-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish\*
       - name: Package on Linux
         if: matrix.target-os == 'ubuntu-latest'
-        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-linux-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.7z bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
+        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-linux-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: archives
-          path: MuseDashModToolsUI-*.7z
+          path: MuseDashModToolsUI-*.zip
 
   release:
     runs-on: ubuntu-latest
@@ -88,14 +88,14 @@ jobs:
         run: |
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           echo "sha256sum<<$EOF" >> $GITHUB_OUTPUT
-          sha256sum MuseDashModToolsUI-Release-*.7z >> $GITHUB_OUTPUT
+          sha256sum MuseDashModToolsUI-Release-*.zip >> $GITHUB_OUTPUT
           echo "$EOF" >> $GITHUB_OUTPUT
 
       - name: Release
         if: github.ref_type == 'tag'
         uses: softprops/action-gh-release@v1
         with:
-          files: MuseDashModToolsUI-Release-*.7z
+          files: MuseDashModToolsUI-Release-*.zip
           body: |
             sha256sums:
             ```
