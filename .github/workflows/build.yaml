@@ -48,7 +48,7 @@ jobs:
       
       - name: Build
         run: |
-          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }}
+          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }
 
       - name: List result on Windows
         if: matrix.target-os == 'windows-latest'
@@ -58,18 +58,19 @@ jobs:
         if: matrix.target-os == 'ubuntu-latest'
         run: ls -l bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish
 
-      - name: Package on Windows
+      - name: Upload Artifact on Windows
         if: matrix.target-os == 'windows-latest'
-        run: 7z a -tzip MuseDashModToolsUI-${{ matrix.build-type }}-windows-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip .\bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish\*
-      - name: Package on Linux
-        if: matrix.target-os == 'ubuntu-latest'
-        run: 7z a -tzip MuseDashModToolsUI-${{ matrix.build-type }}-linux-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip ./bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
-
-      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: archives
-          path: MuseDashModToolsUI-*.zip
+          name: MuseDashModToolsUI-${{ matrix.build-type }}-windows-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
+          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/win-${{ matrix.target-arch }}/publish/*
+          
+      - name: Upload Artifact on Linux
+        if: matrix.target-os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v3
+        with:
+          name: MuseDashModToolsUI-${{ matrix.build-type }}-linux-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
+          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
 
   release:
     runs-on: ubuntu-latest
@@ -77,12 +78,16 @@ jobs:
     steps:
       - name: Get archives
         uses: actions/download-artifact@v3
-        with:
-          name: archives
-
-      - name: List archives
+      
+      - name: List contents
         run: ls -l
-
+        
+      - name: Archiving files
+        run: find -maxdepth 1 -mindepth 1 -type d -exec 7z a {}.zip -tzip {} \;
+        
+      - name: List contents after making archives
+        run: ls -l
+        
       - name: Generate digest
         id: digest
         run: |
