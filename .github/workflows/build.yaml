@@ -60,10 +60,10 @@ jobs:
 
       - name: Package on Windows
         if: matrix.target-os == 'windows-latest'
-        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-windows-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish\*
+        run: 7z a -tzip MuseDashModToolsUI-${{ matrix.build-type }}-windows-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip .\bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish\*
       - name: Package on Linux
         if: matrix.target-os == 'ubuntu-latest'
-        run: 7z a MuseDashModToolsUI-${{ matrix.build-type }}-linux-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
+        run: 7z a -tzip MuseDashModToolsUI-${{ matrix.build-type }}-linux-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip ./bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
