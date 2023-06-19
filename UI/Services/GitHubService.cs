@@ -82,17 +82,17 @@ public class GitHubService : IGitHubService
         HttpResponseMessage result;
         try
         {
-            result = await _client.GetAsync(PrimaryLink + "MelonLoader.zip");
+            result = await _client.GetAsync(PrimaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
         }
         catch
         {
             try
             {
-                result = await _client.GetAsync(SecondaryLink + "MelonLoader.zip");
+                result = await _client.GetAsync(SecondaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
             }
             catch
             {
-                result = await _client.GetAsync(ThirdLink + "MelonLoader.zip");
+                result = await _client.GetAsync(ThirdLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
             }
         }
 
