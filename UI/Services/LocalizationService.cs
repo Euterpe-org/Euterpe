@@ -30,11 +30,11 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
     public void SetLanguage(string language)
     {
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+        _settingService.Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         Locator.Current.GetRequiredService<IMainWindowViewModel>().ChangeTabName();
         Locator.Current.GetRequiredService<ISettingsViewModel>().ChangeOptionName();
-        _settingService.Settings.LanguageCode = language;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
