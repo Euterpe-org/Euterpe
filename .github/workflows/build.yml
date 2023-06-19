@@ -21,7 +21,7 @@ jobs:
           # - osx-latest # Requires dotnet 8 and later
         target-arch:
           - x64
-          # - arm64 # /usr/bin/ld: unrecognised emulation mode: aarch64linux
+          # - arm64 # /usr/bin/ld: unrecognised emulation mode: arch64linux
         dotnet-version:
           - '7.0'
     runs-on: ${{ matrix.target-os }}
@@ -40,13 +40,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends clang zlib1g-dev
 
-      - name: Build UI
-        working-directory: ./UI/
-        run: |
-          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} -p:PublishSingleFile=true -p:PublishTrimmed=false -p:PublishReadyToRun=false -p:IncludeNativeLibrariesForSelfExtract=true
-          
-      - name: Build Updater
-        working-directory: ./Updater/
+      - name: Build Project
         run: |
           dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} 
           
@@ -66,9 +60,17 @@ jobs:
         if: matrix.target-os == 'ubuntu-latest'
         run: 7z a -tzip MuseDashModToolsUI-${{ matrix.build-type }}-linux-${{ matrix.target-arch }}-net${{ matrix.dotnet-version }}.zip bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
 
-      - name: Upload Artifact
+      - name: Upload Artifact on Windows
+        if: matrix.target-os == 'windows-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: archives
-          path: MuseDashModToolsUI-*.zip
+          name: MuseDashModToolsUI-${{ matrix.build-type }}-windows-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
+          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/win-${{ matrix.target-arch }}/publish/*
+          
+      - name: Upload Artifact on Linux
+        if: matrix.target-os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v3
+        with:
+          name: MuseDashModToolsUI-${{ matrix.build-type }}-linux-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
+          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
         
