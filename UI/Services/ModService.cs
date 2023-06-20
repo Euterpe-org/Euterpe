@@ -12,6 +12,7 @@ using MessageBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
@@ -21,18 +22,21 @@ public class ModService : IModService
     private readonly IDialogueService _dialogueService;
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
+    private readonly ILogger _logger;
     private readonly ISettingService _settings;
     private string? _currentGameVersion;
 
     private SourceCache<Mod, string>? _sourceCache;
     private ReadOnlyObservableCollection<Mod>? Mods;
 
-    public ModService(IDialogueService dialogueService, IGitHubService gitHubService, ISettingService settings, ILocalService localService)
+    public ModService(IDialogueService dialogueService, IGitHubService gitHubService, ILocalService localService, ILogger logger,
+        ISettingService settings)
     {
         _dialogueService = dialogueService;
         _gitHubService = gitHubService;
-        _settings = settings;
         _localService = localService;
+        _logger = logger;
+        _settings = settings;
     }
 
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)

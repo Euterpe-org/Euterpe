@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
@@ -25,11 +26,13 @@ public class GitHubService : IGitHubService
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
     private readonly HttpClient _client;
     private readonly IDialogueService _dialogueService;
+    private readonly ILogger _logger;
 
-    public GitHubService(HttpClient client, IDialogueService dialogueService)
+    public GitHubService(HttpClient client, IDialogueService dialogueService, ILogger logger)
     {
         _client = client;
         _dialogueService = dialogueService;
+        _logger = logger;
     }
 
     public async Task<List<Mod>> GetModsAsync()
@@ -38,16 +41,21 @@ public class GitHubService : IGitHubService
         try
         {
             mods = (await _client.GetFromJsonAsync<List<Mod>>(PrimaryLink + "ModLinks.json"))!;
+            _logger.Information("Get mods list from primary link success");
         }
         catch
         {
+            _logger.Warning("Get mods list from primary link failed, try secondary link...");
             try
             {
                 mods = (await _client.GetFromJsonAsync<List<Mod>>(SecondaryLink + "ModLinks.json"))!;
+                _logger.Information("Get mods list from secondary link success");
             }
             catch
             {
+                _logger.Warning("Get mods list from secondary link failed, try third link...");
                 mods = (await _client.GetFromJsonAsync<List<Mod>>(ThirdLink + "ModLinks.json"))!;
+                _logger.Information("Get mods list from third link success");
             }
         }
 
@@ -126,7 +134,7 @@ public class GitHubService : IGitHubService
 
             var tag = tagName.GetString();
             if (tag is null) return;
-            if (!Version.TryParse(tag, out var version)) return;
+            if (!Version.TryParse(tag.StartsWith('v') ? tag[1..] : tag, out var version)) return;
             if (version <= currentVersion)
             {
                 if (userClick)
@@ -146,13 +154,15 @@ public class GitHubService : IGitHubService
 
             if (OperatingSystem.IsLinux())
             {
-                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Linux.zip"));
+                var release = releases.FirstOrDefault(x =>
+                    x.GetProperty("name").GetString()!.Contains("Linux", StringComparison.OrdinalIgnoreCase));
                 link = release.GetProperty("browser_download_url").GetString()!;
             }
 
             if (OperatingSystem.IsWindows())
             {
-                var release = releases.FirstOrDefault(x => x.GetProperty("name").GetString()!.EndsWith("Windows.zip"));
+                var release = releases.FirstOrDefault(x =>
+                    x.GetProperty("name").GetString()!.Contains("Windows", StringComparison.OrdinalIgnoreCase));
                 link = release.GetProperty("browser_download_url").GetString()!;
             }
 

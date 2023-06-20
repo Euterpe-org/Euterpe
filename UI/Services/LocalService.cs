@@ -12,6 +12,7 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
@@ -20,15 +21,19 @@ public class LocalService : ILocalService
 {
     private readonly IDialogueService _dialogueService;
     private readonly IDownloadWindowViewModel _downloadWindowViewModel;
+    private readonly ILogger _logger;
     private readonly ISettingService _settingService;
 
     private bool IsValidPath { get; set; }
 
-    public LocalService(IDialogueService dialogueService, ISettingService settingService, IDownloadWindowViewModel downloadWindowViewModel)
+    public LocalService(IDialogueService dialogueService, IDownloadWindowViewModel downloadWindowViewModel, ILogger logger,
+        ISettingService settingService
+    )
     {
         _dialogueService = dialogueService;
-        _settingService = settingService;
         _downloadWindowViewModel = downloadWindowViewModel;
+        _logger = logger;
+        _settingService = settingService;
     }
 
     public List<string> GetModFiles(string path) => Directory.GetFiles(path)

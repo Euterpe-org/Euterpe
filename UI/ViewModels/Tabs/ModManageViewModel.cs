@@ -11,6 +11,7 @@ using DynamicData.Binding;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
+using Serilog;
 
 #pragma warning disable CS8618
 
@@ -20,6 +21,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 {
     private readonly IGitHubService _gitHubService;
     private readonly ILocalService _localService;
+    private readonly ILogger _logger;
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     private readonly IModService _modService;
     private readonly ISettingService _settingService;
@@ -34,13 +36,16 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     {
     }
 
-    public ModManageViewModel(IGitHubService gitHubService, ISettingService settingService, ILocalService localService,
-        IModService modService)
+    public ModManageViewModel(IGitHubService gitHubService, ILocalService localService, ILogger logger, IModService modService,
+        ISettingService settingService
+    )
     {
         _gitHubService = gitHubService;
-        _settingService = settingService;
         _localService = localService;
         _modService = modService;
+        _logger = logger;
+        _settingService = settingService;
+
 
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(_filter) || x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase) ||

@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
+using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
@@ -15,6 +16,7 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 {
     private readonly ILocalizationService _localizationService;
+    private readonly ILogger _logger;
     private readonly IModManageViewModel _modManageViewModel;
     private readonly ISettingService _settingService;
     [ObservableProperty] private string[] _askTypes = { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
@@ -31,11 +33,12 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     {
     }
 
-    public SettingsViewModel(ISettingService settingService, IModManageViewModel modManageViewModel,
-        ILocalizationService localizationService)
+    public SettingsViewModel(ILocalizationService localizationService, IModManageViewModel modManageViewModel, ILogger logger,
+        ISettingService settingService)
     {
         _settingService = settingService;
         _modManageViewModel = modManageViewModel;
+        _logger = logger;
         _localizationService = localizationService;
         Initialize();
     }

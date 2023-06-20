@@ -8,6 +8,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
+using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.ViewModels;
@@ -16,20 +17,23 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 {
     private readonly IDialogueService _dialogueService;
     private readonly IGitHubService _gitHubService;
-    private readonly ISettingService _settings;
+    private readonly ILogger _logger;
+    private readonly ISettingService _settingService;
     [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
     [ObservableProperty] private double _percentage;
 
-    public DownloadWindowViewModel(IDialogueService dialogueService, IGitHubService gitHubService, ISettingService settings)
+    public DownloadWindowViewModel(IDialogueService dialogueService, IGitHubService gitHubService, ILogger logger,
+        ISettingService settingService)
     {
-        _settings = settings;
+        _settingService = settingService;
         _gitHubService = gitHubService;
+        _logger = logger;
         _dialogueService = dialogueService;
     }
 
     public async Task InstallMelonLoader()
     {
-        var zipPath = Path.Join(_settings.Settings.MuseDashFolder, "MelonLoader.zip");
+        var zipPath = Path.Join(_settingService.Settings.MuseDashFolder, "MelonLoader.zip");
         var downloadProgress = new Progress<double>(UpdateDownloadProgress);
         if (!File.Exists(zipPath))
             try
@@ -54,7 +58,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         try
         {
             var fastZip = new FastZip();
-            fastZip.ExtractZip(zipPath, _settings.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
+            fastZip.ExtractZip(zipPath, _settingService.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
         }
         catch (Exception ex)
         {

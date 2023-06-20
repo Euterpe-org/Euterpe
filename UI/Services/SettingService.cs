@@ -14,16 +14,19 @@ using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using Splat;
 using static MuseDashModToolsUI.Localization.Resources;
+using ILogger = Serilog.ILogger;
 
 namespace MuseDashModToolsUI.Services;
 
 public class SettingService : ISettingService
 {
     private readonly IDialogueService _dialogueService;
+    private readonly ILogger _logger;
 
-    public SettingService(IDialogueService dialogueService)
+    public SettingService(IDialogueService dialogueService, ILogger logger)
     {
         _dialogueService = dialogueService;
+        _logger = logger;
         Task.Run(InitializeLanguageAndPath);
     }
 

@@ -8,18 +8,21 @@ using MuseDashModToolsUI.Localization;
 using MuseDashModToolsUI.Models;
 using Splat;
 using static MuseDashModToolsUI.Localization.Resources;
+using ILogger = Serilog.ILogger;
 
 namespace MuseDashModToolsUI.Services;
 
 public class LocalizationService : ILocalizationService, INotifyPropertyChanged
 {
+    private readonly ILogger _logger;
     private readonly ISettingService _settingService;
 
     public string this[string resourceKey] =>
         Resources.ResourceManager.GetString(resourceKey, Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
 
-    public LocalizationService(ISettingService settingService)
+    public LocalizationService(ILogger logger, ISettingService settingService)
     {
+        _logger = logger;
         _settingService = settingService;
         GetAvailableCultures();
     }
