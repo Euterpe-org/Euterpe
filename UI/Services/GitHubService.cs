@@ -68,16 +68,21 @@ public class GitHubService : IGitHubService
         try
         {
             result = await _client.GetAsync(PrimaryLink + link);
+            _logger.Information("Download mod from primary link success");
         }
         catch
         {
             try
             {
+                _logger.Warning("Download mod from primary link failed, try secondary link...");
                 result = await _client.GetAsync(SecondaryLink + link);
+                _logger.Information("Download mod from secondary link success");
             }
             catch
             {
+                _logger.Warning("Download mod from secondary link failed, try third link...");
                 result = await _client.GetAsync(ThirdLink + link);
+                _logger.Information("Download mod from third link success");
             }
         }
 
@@ -91,16 +96,21 @@ public class GitHubService : IGitHubService
         try
         {
             result = await _client.GetAsync(PrimaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+            _logger.Information("Get MelonLoader Download ResponseHeader from primary link success");
         }
         catch
         {
             try
             {
+                _logger.Warning("Get MelonLoader Download ResponseHeader from primary link failed, try secondary link...");
                 result = await _client.GetAsync(SecondaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+                _logger.Information("Get MelonLoader Download ResponseHeader from secondary link success");
             }
             catch
             {
+                _logger.Warning("Get MelonLoader Download ResponseHeader from secondary link failed, try third link...");
                 result = await _client.GetAsync(ThirdLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
+                _logger.Information("Get MelonLoader Download ResponseHeader from third link success");
             }
         }
 
@@ -117,6 +127,8 @@ public class GitHubService : IGitHubService
 
             fs.Write(buffer, 0, length);
         }
+
+        _logger.Information("Download MelonLoader success");
     }
 
     public async Task CheckUpdates(bool userClick = false)
@@ -124,6 +136,7 @@ public class GitHubService : IGitHubService
         _client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
 
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        _logger.Information("Get current version success{Version}", currentVersion);
         try
         {
             var result = await _client.GetStringAsync(ReleaseInfoLink);
@@ -135,6 +148,7 @@ public class GitHubService : IGitHubService
             var tag = tagName.GetString();
             if (tag is null) return;
             if (!Version.TryParse(tag.StartsWith('v') ? tag[1..] : tag, out var version)) return;
+            _logger.Information("Get latest version success{Version}", version);
             if (version <= currentVersion)
             {
                 if (userClick)
@@ -157,6 +171,7 @@ public class GitHubService : IGitHubService
                 var release = releases.FirstOrDefault(x =>
                     x.GetProperty("name").GetString()!.Contains("Linux", StringComparison.OrdinalIgnoreCase));
                 link = release.GetProperty("browser_download_url").GetString()!;
+                _logger.Information("Get Linux download link success{Link}", link);
             }
 
             if (OperatingSystem.IsWindows())
@@ -164,10 +179,12 @@ public class GitHubService : IGitHubService
                 var release = releases.FirstOrDefault(x =>
                     x.GetProperty("name").GetString()!.Contains("Windows", StringComparison.OrdinalIgnoreCase));
                 link = release.GetProperty("browser_download_url").GetString()!;
+                _logger.Information("Get Windows download link success{Link}", link);
             }
 
             var currentDirectory = Directory.GetCurrentDirectory();
             await LaunchUpdater(currentDirectory, new[] { link, currentDirectory + ".zip", currentDirectory });
+            _logger.Information("Launch updater success, exit...");
             Environment.Exit(0);
         }
         catch
@@ -183,18 +200,25 @@ public class GitHubService : IGitHubService
         var updaterTargetPath = Path.Combine(currentDirectory, "Update", "Updater.exe");
         if (!File.Exists(updaterExePath))
         {
+            _logger.Error("Updater.exe not found");
             await _dialogueService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
             return;
         }
 
-        if (!Directory.Exists(updaterTargetFolder)) Directory.CreateDirectory(updaterTargetFolder);
+        if (!Directory.Exists(updaterTargetFolder))
+        {
+            Directory.CreateDirectory(updaterTargetFolder);
+            _logger.Information("Create Update target folder success");
+        }
 
         try
         {
             File.Copy(updaterExePath, updaterTargetPath, true);
+            _logger.Information("Copy Updater.exe to Update folder success");
         }
         catch (Exception ex)
         {
+            _logger.Information("Copy Updater.exe to Update folder failed {Exception}", ex.ToString());
             await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using Avalonia;
 using Serilog;
@@ -8,6 +9,8 @@ namespace MuseDashModToolsUI;
 
 internal class Program
 {
+    private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
+
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
     // yet and stuff might break.
@@ -16,7 +19,16 @@ internal class Program
     {
         CreateLogger();
         RegisterDependencies();
-        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        try
+        {
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Fatal("Unhandled exception: {Exception}", ex.ToString());
+            if (File.Exists(Path.Combine("Logs", LogFileName)))
+                Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
+        }
     }
 
     private static void RegisterDependencies() =>
@@ -24,11 +36,9 @@ internal class Program
 
     private static void CreateLogger()
     {
-        var now = DateTime.Now;
-        var logFileName = $"{now:yyyy-MM-dd_HH-mm-ss}.log";
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.File(Path.Combine("Logs", logFileName),
+            .WriteTo.File(Path.Combine("Logs", LogFileName),
                 rollingInterval: RollingInterval.Infinite,
                 retainedFileCountLimit: 60)
             .CreateLogger();

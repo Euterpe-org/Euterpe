@@ -49,6 +49,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
             ? new Language(CultureInfo.CurrentUICulture)
             : new Language(CultureInfo.GetCultureInfo(_settingService.Settings.LanguageCode));
         Path = _settingService.Settings.MuseDashFolder;
+        _logger.Information("Settings Window initialized");
     }
 
     public void ChangeOptionName()

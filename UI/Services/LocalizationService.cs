@@ -29,7 +29,6 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
 
     public List<Language> AvailableLanguages { get; } = new();
 
-
     public void SetLanguage(string language)
     {
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
@@ -38,6 +37,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         Locator.Current.GetRequiredService<IMainWindowViewModel>().ChangeTabName();
         Locator.Current.GetRequiredService<ISettingsViewModel>().ChangeOptionName();
+        _logger.Information("Language changed to {Language}", language);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -61,5 +61,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
             if (rs != null)
                 AvailableLanguages.Add(new Language(culture.Name, culture.DisplayName));
         }
+
+        _logger.Information("Available languages loaded: {AvailableLanguages}", string.Join(", ", AvailableLanguages));
     }
 }

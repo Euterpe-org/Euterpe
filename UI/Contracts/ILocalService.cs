@@ -6,7 +6,7 @@ namespace MuseDashModToolsUI.Contracts;
 
 public interface ILocalService
 {
-    List<string> GetModFiles(string path);
+    IEnumerable<string> GetModFiles(string path);
     Mod? LoadMod(string filePath);
     Task<bool> CheckValidPath();
     Task<string> ReadGameVersion();

@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -59,7 +58,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             .Subscribe();
 
         Initialize();
-        AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
 
     public async void Initialize()
@@ -68,6 +66,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         await _modService.InitializeModList(_sourceCache, Mods);
         await _gitHubService.CheckUpdates();
         FileMonitorStart();
+        _logger.Information("Mod Manage Window Initialized");
     }
 
     [RelayCommand]
@@ -162,11 +161,5 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.EnableRaisingEvents = true;
-    }
-
-    private void OnExit(object sender, EventArgs e)
-    {
-        var json = JsonSerializer.Serialize(_settingService.Settings, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText("Settings.json", json);
     }
 }
