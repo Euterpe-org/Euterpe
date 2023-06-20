@@ -39,13 +39,14 @@ internal static class Program
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File(Path.Combine("Logs", LogFileName),
+                outputTemplate: "[{Timestamp:HH:mm:ss.fff zzz}] [{Level}]{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}",
                 rollingInterval: RollingInterval.Infinite,
                 retainedFileCountLimit: 60)
             .CreateLogger();
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
-    public static AppBuilder BuildAvaloniaApp()
+    private static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .LogToTrace();

@@ -59,7 +59,7 @@ public class LocalService : ILocalService
         mod.Author = attribute.Author;
         mod.HomePage = attribute.DownloadLink;
         mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(filePath);
-        _logger.Information("Mod {Name} loaded. File name {FileName}", mod.Name, mod.FileName);
+        _logger.Information("Local mod {Name} loaded. File name {FileName}", mod.Name, mod.FileName);
         return mod;
     }
 
