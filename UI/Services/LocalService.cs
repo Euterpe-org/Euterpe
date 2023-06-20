@@ -59,7 +59,7 @@ public class LocalService : ILocalService
         mod.Author = attribute.Author;
         mod.HomePage = attribute.DownloadLink;
         mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(filePath);
-        _logger.Information("Mod {Name} loaded, File name {FileName}", mod.Name, mod.FileName);
+        _logger.Information("Mod {Name} loaded. File name {FileName}", mod.Name, mod.FileName);
         return mod;
     }
 
@@ -139,7 +139,7 @@ public class LocalService : ILocalService
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
 
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion");
-            _logger.Information("Game version read successfully{BundleVersion}", bundleVersion!.AsString);
+            _logger.Information("Game version read successfully: {BundleVersion}", bundleVersion!.AsString);
             return bundleVersion.AsString;
         }
         catch (Exception)

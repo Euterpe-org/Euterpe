@@ -7,7 +7,7 @@ using Splat;
 
 namespace MuseDashModToolsUI;
 
-internal class Program
+internal static class Program
 {
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
 
@@ -27,7 +27,7 @@ internal class Program
         {
             Log.Logger.Fatal("Unhandled exception: {Exception}", ex.ToString());
             if (File.Exists(Path.Combine("Logs", LogFileName)))
-                Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
+                Process.Start("explorer.exe", "/select," + Path.Combine("Logs", LogFileName));
         }
     }
 

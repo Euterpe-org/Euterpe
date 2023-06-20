@@ -63,6 +63,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     [RelayCommand]
     private async Task OnChoosePath()
     {
+        _logger.Information("Choose path button clicked");
         await _settingService.OnChoosePath();
         _modManageViewModel.Initialize();
     }

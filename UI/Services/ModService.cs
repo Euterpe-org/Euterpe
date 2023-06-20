@@ -41,6 +41,7 @@ public class ModService : IModService
 
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)
     {
+        _logger.Information("Initializing mod list...");
         _sourceCache = sourceCache;
         Mods = mods;
         var isValidPath = await _localService.CheckValidPath();
@@ -54,7 +55,7 @@ public class ModService : IModService
         try
         {
             localMods = localPaths.Select(_localService.LoadMod).Where(mod => mod is not null).ToList()!;
-            _logger.Information("Load local mods success");
+            _logger.Information("Read all local mods info success");
         }
         catch (Exception)
         {
@@ -105,8 +106,8 @@ public class ModService : IModService
             if (localMod.IsShaMismatched)
                 localMod.State = UpdateState.Modified;
             localMod.IsIncompatible = !CheckCompatible(localMod);
-            _logger.Information("Load local mod {Name} success", localMod.Name);
             sourceCache.AddOrUpdate(localMod);
+            _logger.Information("Mod {Name} loaded to UI", localMod.Name);
         }
 
         CheckDuplicatedMods(isTracked, localMods);
@@ -377,16 +378,18 @@ public class ModService : IModService
 
     private IEnumerable<Mod> SearchDependencies(string modName)
     {
-        var dependencyNames = _sourceCache?.Lookup(modName).Value.DependencyNames;
-        _logger.Information("Search dependencies of {ModName}: {DependencyNames}", modName, dependencyNames ?? "null");
-        return dependencyNames?.Split("\r\n")
-            .Where(x => _sourceCache!.Lookup(x).HasValue)
+        var dependencyNames = _sourceCache?.Lookup(modName).Value.DependencyNames.Split("\r\n");
+        _logger.Information("Search dependencies of {ModName}: {DependencyNames}", modName, dependencyNames);
+        return dependencyNames?.Where(x => _sourceCache!.Lookup(x).HasValue)
             .Select(x => _sourceCache!.Lookup(x).Value)!;
     }
 
     private IEnumerable<Mod> SearchReverseDependencies(string modName)
     {
-        return _sourceCache?.Items.Where(x => x.DependencyNames.Split("\r\n").Contains(modName))!;
+        var reverseDependencyNames = _sourceCache?.Items.Where(x => x.DependencyNames.Split("\r\n").Contains(modName))
+            .Select(x => x.Name).ToArray();
+        _logger.Information("Search reverse dependencies of {ModName}: {ReverseDependencyNames}", modName, reverseDependencyNames);
+        return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x.Name))!;
     }
 
     private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod> dependencies, AskType askType, bool turnOff)

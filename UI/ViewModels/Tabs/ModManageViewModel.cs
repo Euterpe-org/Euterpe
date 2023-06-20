@@ -108,13 +108,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private async Task OnUninstallMelonLoader() => await _localService.OnUninstallMelonLoader();
 
     [RelayCommand]
-    private async Task OnChoosePath()
-    {
-        await _settingService.OnChoosePath();
-        Initialize();
-    }
-
-    [RelayCommand]
     private void OpenUrl(string path)
     {
         Process.Start(new ProcessStartInfo
@@ -122,6 +115,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             FileName = path,
             UseShellExecute = true
         });
+        _logger.Information("Open Url: {Url}", path);
     }
 
     [RelayCommand]
@@ -149,7 +143,12 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
 
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
-    partial void OnCategoryFilterTypeChanged(FilterType value) => _sourceCache.Refresh();
+
+    partial void OnCategoryFilterTypeChanged(FilterType value)
+    {
+        _logger.Information("Category Filter Changed: {Filter}", value);
+        _sourceCache.Refresh();
+    }
 
     private void FileMonitorStart()
     {
@@ -161,5 +160,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.EnableRaisingEvents = true;
+        _logger.Information("File Monitor Started");
     }
 }

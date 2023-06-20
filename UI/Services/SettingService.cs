@@ -34,7 +34,7 @@ public class SettingService : ISettingService
 
     public async Task InitializeSettings()
     {
-        _logger.Information("Initializing settings");
+        _logger.Information("Initializing settings...");
         try
         {
             if (!File.Exists("Settings.json"))

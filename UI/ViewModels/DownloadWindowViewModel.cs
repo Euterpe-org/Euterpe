@@ -38,18 +38,21 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         if (!File.Exists(zipPath))
             try
             {
+                _logger.Information("Start downloading MelonLoader.zip");
                 await _gitHubService.DownloadMelonLoader(zipPath, downloadProgress);
             }
             catch (Exception ex)
             {
                 if (ex is HttpRequestException)
                 {
+                    _logger.Error("Download MelonLoader.zip failed: {Exception}", ex.ToString());
                     await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet.Localize(),
                         ex));
                     DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                     return;
                 }
 
+                _logger.Error("Download MelonLoader.zip failed: {Exception}", ex.ToString());
                 await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed.Localize(), ex));
                 DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                 return;
@@ -57,11 +60,13 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 
         try
         {
+            _logger.Information("Extracting MelonLoader.zip");
             var fastZip = new FastZip();
             fastZip.ExtractZip(zipPath, _settingService.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
         }
         catch (Exception ex)
         {
+            _logger.Error("Extracting MelonLoader.zip failed: {Exception}", ex.ToString());
             await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed.Localize(), zipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
@@ -69,15 +74,18 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 
         try
         {
+            _logger.Information("Deleting MelonLoader.zip");
             File.Delete(zipPath);
         }
         catch (Exception ex)
         {
+            _logger.Error("Deleting MelonLoader.zip failed: {Exception}", ex.ToString());
             await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed.Localize(), zipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
         }
 
+        _logger.Information("MelonLoader install success");
         await _dialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_InstallMelonLoaderSuccess.Localize());
         DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
     }

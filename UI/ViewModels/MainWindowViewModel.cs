@@ -42,7 +42,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         Content = Tabs[index].ViewModel;
         var name = Tabs[index].Name;
-        _logger.Information("Switching Tabs to {Name}", name);
+        _logger.Information("Switching tab to {Name}", name);
     }
 
     public void ChangeTabName()
@@ -55,5 +55,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         var json = JsonSerializer.Serialize(_settingService.Settings, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText("Settings.json", json);
+        _logger.Information("Settings saved");
     }
 }

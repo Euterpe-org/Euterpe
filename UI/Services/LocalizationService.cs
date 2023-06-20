@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Resources;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
@@ -62,6 +63,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
                 AvailableLanguages.Add(new Language(culture.Name, culture.DisplayName));
         }
 
-        _logger.Information("Available languages loaded: {AvailableLanguages}", string.Join(", ", AvailableLanguages));
+        _logger.Information("Available languages loaded: {AvailableLanguages}",
+            string.Join(", ", AvailableLanguages.Select(x => x.Name)));
     }
 }

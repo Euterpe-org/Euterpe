@@ -133,10 +133,11 @@ public class GitHubService : IGitHubService
 
     public async Task CheckUpdates(bool userClick = false)
     {
+        _logger.Information("Checking updates...");
         _client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
 
         var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-        _logger.Information("Get current version success{Version}", currentVersion);
+        _logger.Information("Get current version success: {Version}", currentVersion);
         try
         {
             var result = await _client.GetStringAsync(ReleaseInfoLink);
@@ -148,7 +149,7 @@ public class GitHubService : IGitHubService
             var tag = tagName.GetString();
             if (tag is null) return;
             if (!Version.TryParse(tag.StartsWith('v') ? tag[1..] : tag, out var version)) return;
-            _logger.Information("Get latest version success{Version}", version);
+            _logger.Information("Get latest version success: {Version}", version);
             if (version <= currentVersion)
             {
                 if (userClick)
@@ -218,7 +219,7 @@ public class GitHubService : IGitHubService
         }
         catch (Exception ex)
         {
-            _logger.Information("Copy Updater.exe to Update folder failed {Exception}", ex.ToString());
+            _logger.Information("Copy Updater.exe to Update folder failed: {Exception}", ex.ToString());
             await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
         }
 
