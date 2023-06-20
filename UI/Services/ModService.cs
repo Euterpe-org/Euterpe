@@ -262,18 +262,18 @@ public class ModService : IModService
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    _logger.Error("Change mod {Name} state failed: {Exception}", item.Name, ex.ToString());
+                    _logger.Error(ex, "Change mod {Name} state failed", item.Name);
                     await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
                         ex));
                     break;
 
                 case IOException:
-                    _logger.Error("Change mod {Name} state failed: {Exception}", item.Name, ex.ToString());
+                    _logger.Error(ex, "Change mod {Name} state failed", item.Name);
                     await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
                     break;
 
                 default:
-                    _logger.Error("Change mod {Name} state failed: {Exception}", item.Name, ex.ToString());
+                    _logger.Error(ex, "Change mod {Name} state failed", item.Name);
                     await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
                     break;
             }
@@ -336,12 +336,12 @@ public class ModService : IModService
             {
                 case UnauthorizedAccessException:
                 case IOException:
-                    _logger.Error("Delete mod {Name} failed: {Exception}", item.Name, ex.ToString());
+                    _logger.Error(ex, "Delete mod {Name} failed", item.Name);
                     await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
                     break;
 
                 default:
-                    _logger.Error("Delete mod {Name} failed: {Exception}", item.Name, ex.ToString());
+                    _logger.Error(ex, "Delete mod {Name} failed", item.Name);
                     await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
                     break;
             }

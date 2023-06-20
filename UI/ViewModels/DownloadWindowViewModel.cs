@@ -45,14 +45,14 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
             {
                 if (ex is HttpRequestException)
                 {
-                    _logger.Error("Download MelonLoader.zip failed: {Exception}", ex.ToString());
+                    _logger.Error(ex, "Download MelonLoader.zip failed");
                     await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet.Localize(),
                         ex));
                     DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                     return;
                 }
 
-                _logger.Error("Download MelonLoader.zip failed: {Exception}", ex.ToString());
+                _logger.Error(ex, "Download MelonLoader.zip failed");
                 await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed.Localize(), ex));
                 DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                 return;
@@ -66,7 +66,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         }
         catch (Exception ex)
         {
-            _logger.Error("Extracting MelonLoader.zip failed: {Exception}", ex.ToString());
+            _logger.Error(ex, "Extracting MelonLoader.zip failed");
             await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed.Localize(), zipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
@@ -79,7 +79,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         }
         catch (Exception ex)
         {
-            _logger.Error("Deleting MelonLoader.zip failed: {Exception}", ex.ToString());
+            _logger.Error(ex, "Deleting MelonLoader.zip failed");
             await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed.Localize(), zipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;

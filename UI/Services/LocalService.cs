@@ -102,14 +102,14 @@ public class LocalService : ILocalService
             if (!File.Exists(cfgFilePath))
             {
                 await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
-                _logger.Information("Config file not found, created");
+                _logger.Information("UserData config file not found, created");
             }
             else
             {
                 var path = await File.ReadAllTextAsync(cfgFilePath);
                 if (path != Environment.ProcessPath)
                     await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
-                _logger.Information("Config file found, path updated");
+                _logger.Information("UserData config file found, path updated");
             }
 
             IsValidPath = true;

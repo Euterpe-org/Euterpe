@@ -79,7 +79,7 @@ public class SettingService : ISettingService
         }
         catch (Exception ex)
         {
-            _logger.Error("Error occurred while initializing settings {Exception}", ex.ToString());
+            _logger.Error(ex, "Error occurred while initializing settings");
             await _dialogueService.CreateErrorMessageBox(ex.ToString());
         }
     }

@@ -1,7 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using Avalonia;
+using MuseDashModToolsUI.Models;
 using Serilog;
 using Splat;
 
@@ -9,6 +11,7 @@ namespace MuseDashModToolsUI;
 
 internal static class Program
 {
+    private const int AttachParentProcess = -1;
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
@@ -17,6 +20,9 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+#if DEBUG
+        AttachToParentConsole();
+#endif
         CreateLogger();
         RegisterDependencies();
         try
@@ -38,8 +44,11 @@ internal static class Program
     {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.File(Path.Combine("Logs", LogFileName),
-                outputTemplate: "[{Timestamp:HH:mm:ss.fff zzz}] [{Level}]{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}",
+#if DEBUG
+            .WriteTo.Console()
+#endif
+            .WriteTo.File(new TextFormatter(),
+                Path.Combine("Logs", LogFileName),
                 rollingInterval: RollingInterval.Infinite,
                 retainedFileCountLimit: 60)
             .CreateLogger();
@@ -50,4 +59,14 @@ internal static class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .LogToTrace();
+
+#if DEBUG
+    [DllImport("kernel32.dll")]
+    private static extern bool AttachConsole(int dwProcessId);
+
+    private static void AttachToParentConsole()
+    {
+        AttachConsole(AttachParentProcess);
+    }
+#endif
 }
