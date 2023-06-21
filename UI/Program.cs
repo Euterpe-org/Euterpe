@@ -1,7 +1,5 @@
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using Avalonia;
 using MuseDashModToolsUI.Models;
 using Serilog;
@@ -11,7 +9,6 @@ namespace MuseDashModToolsUI;
 
 internal static class Program
 {
-    private const int AttachParentProcess = -1;
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
@@ -20,7 +17,7 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-#if DEBUG
+#if DEBUG && WINDOWS
         AttachToParentConsole();
 #endif
         CreateLogger();
@@ -31,9 +28,11 @@ internal static class Program
         }
         catch (Exception ex)
         {
-            Log.Logger.Fatal("Unhandled exception: {Exception}", ex.ToString());
+            Log.Logger.Fatal(ex, "Unhandled exception");
+#if WINDOWS
             if (File.Exists(Path.Combine("Logs", LogFileName)))
                 Process.Start("explorer.exe", "/select," + Path.Combine("Logs", LogFileName));
+#endif
         }
     }
 
@@ -44,7 +43,7 @@ internal static class Program
     {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-#if DEBUG
+#if DEBUG && WINDOWS
             .WriteTo.Console()
 #endif
             .WriteTo.File(new TextFormatter(),
@@ -60,7 +59,9 @@ internal static class Program
             .UsePlatformDetect()
             .LogToTrace();
 
-#if DEBUG
+#if DEBUG && WINDOWS
+    private const int AttachParentProcess = -1;
+
     [DllImport("kernel32.dll")]
     private static extern bool AttachConsole(int dwProcessId);
 

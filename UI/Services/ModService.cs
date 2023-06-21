@@ -57,11 +57,11 @@ public class ModService : IModService
             localMods = localPaths.Select(_localService.LoadMod).Where(mod => mod is not null).ToList()!;
             _logger.Information("Read all local mods info success");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             await _dialogueService.CreateErrorMessageBox(MsgBox_Content_BrokenMods.Localize());
             await _localService.OpenModsFolder();
-            _logger.Fatal("Broken mods detected/Load local mods failed");
+            _logger.Fatal(ex, "Load local mods failed");
             Environment.Exit(0);
             return;
         }

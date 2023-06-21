@@ -142,9 +142,9 @@ public class LocalService : ILocalService
             _logger.Information("Game version read successfully: {BundleVersion}", bundleVersion!.AsString);
             return bundleVersion.AsString;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            _logger.Fatal("Read game version failed, showing error message box...");
+            _logger.Fatal(ex, "Read game version failed, showing error message box...");
             await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed.Localize(), bundlePath));
             Environment.Exit(0);
         }
