@@ -1,13 +1,13 @@
-#define WINDOWS
+// #define WINDOWS
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using Avalonia;
 using MuseDashModToolsUI.Models;
 using Serilog;
 using Splat;
 #if DEBUG && WINDOWS
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 #endif
 
