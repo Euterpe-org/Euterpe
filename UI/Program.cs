@@ -1,9 +1,15 @@
+#define WINDOWS
+
 using System;
 using System.IO;
 using Avalonia;
 using MuseDashModToolsUI.Models;
 using Serilog;
 using Splat;
+#if DEBUG && WINDOWS
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+#endif
 
 namespace MuseDashModToolsUI;
 
@@ -29,10 +35,13 @@ internal static class Program
         catch (Exception ex)
         {
             Log.Logger.Fatal(ex, "Unhandled exception");
-#if WINDOWS
             if (File.Exists(Path.Combine("Logs", LogFileName)))
-                Process.Start("explorer.exe", "/select," + Path.Combine("Logs", LogFileName));
-#endif
+            {
+                if (OperatingSystem.IsWindows())
+                    Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
+                if (OperatingSystem.IsLinux())
+                    Process.Start("xdg-open", "--select " + Path.Combine("Logs", LogFileName));
+            }
         }
     }
 

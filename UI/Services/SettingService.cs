@@ -92,7 +92,7 @@ public class SettingService : ISettingService
             _logger.Information("Showing choose folder dialogue");
             var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
                 { AllowMultiple = false, Title = FolderDialog_Title });
-            if (dialogue.Count <= 0)
+            if (dialogue.Count == 0)
             {
                 if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
                     break;

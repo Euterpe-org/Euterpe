@@ -26,8 +26,8 @@ public class ModService : IModService
     private readonly ISettingService _settings;
     private string? _currentGameVersion;
 
+    private ReadOnlyObservableCollection<Mod>? _mods;
     private SourceCache<Mod, string>? _sourceCache;
-    private ReadOnlyObservableCollection<Mod>? Mods;
 
     public ModService(IDialogueService dialogueService, IGitHubService gitHubService, ILocalService localService, ILogger logger,
         ISettingService settings)
@@ -43,7 +43,7 @@ public class ModService : IModService
     {
         _logger.Information("Initializing mod list...");
         _sourceCache = sourceCache;
-        Mods = mods;
+        _mods = mods;
         var isValidPath = await _localService.CheckValidPath();
         if (!isValidPath) return;
         _currentGameVersion = await _localService.ReadGameVersion();
@@ -160,7 +160,7 @@ public class ModService : IModService
         var dependencies = SearchDependencies(item.Name!).ToArray();
         foreach (var dependency in dependencies)
         {
-            var installedMod = Mods!.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
+            var installedMod = _mods!.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
             if (installedMod is not null) continue;
             try
             {
