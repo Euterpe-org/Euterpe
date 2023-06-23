@@ -58,7 +58,7 @@
             </DataTemplate>
         </dialogHostAvalonia:DialogHost.DataTemplates>
 
-        <!--Main Window-->
+        <!--ModManage Window-->
         <Grid ColumnDefinitions="140,*">
 
             <!--The left navigation part-->
