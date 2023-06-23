@@ -109,7 +109,7 @@ public class SettingService : ISettingService
             Logger?.Information("User chose path {Path}", path);
             Settings.MuseDashFolder = path;
             Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
-            Logger?.Information("Path {path}", Settings.MuseDashFolder);
+
             var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
             await File.WriteAllTextAsync("Settings.json", json);
             Logger?.Information("Settings saved to Settings.json");

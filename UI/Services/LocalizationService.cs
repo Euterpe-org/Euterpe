@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -17,7 +16,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
 {
     public ILogger? Logger { get; init; }
     public ISettingService? SettingService { get; init; }
-    public Lazy<IUpdateTextService>? UpdateUiService { get; init; }
+    public IUpdateTextService? UpdateUiService { get; init; }
 
     public LocalizationService() => Task.Run(GetAvailableCultures);
 
@@ -33,8 +32,8 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         SettingService!.Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
-        UpdateUiService?.Value.ChangeTabName();
-        UpdateUiService?.Value.ChangeOptionName();
+        UpdateUiService?.ChangeTabName();
+        UpdateUiService?.ChangeOptionName();
         Logger?.Information("Language changed to {Language}", language);
     }
 
