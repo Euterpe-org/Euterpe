@@ -2,6 +2,6 @@
 
 public interface ISettingsViewModel
 {
+    string[] AskTypes { get; set; }
     void Initialize();
-    void ChangeOptionName();
 }

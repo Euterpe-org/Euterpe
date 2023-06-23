@@ -1,18 +1,18 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+             xmlns:contract="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.ModManageView"
-             x:DataType="tabs:ModManageViewModel">
+             x:DataType="tabs:ModManageViewModel"
+             DataContext="{ext:DependencyInjection Type=contract:IModManageViewModel}">
 
     <Design.DataContext>
         <tabs:ModManageViewModel />
@@ -87,43 +87,43 @@
                         </ListBox.Styles>
                         <Label>
                             <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_All}" />
-                            <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="PointerPressed">
-                                    <ia:InvokeCommandAction Command="{Binding FilterAllCommand, Mode=OneWay}" />
-                                </ia:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
+                            <Interaction.Behaviors>
+                                <EventTriggerBehavior EventName="PointerPressed">
+                                    <InvokeCommandAction Command="{Binding FilterAllCommand, Mode=OneWay}" />
+                                </EventTriggerBehavior>
+                            </Interaction.Behaviors>
                         </Label>
                         <Label>
                             <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Installed}" />
-                            <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="PointerPressed">
-                                    <ia:InvokeCommandAction Command="{Binding FilterInstalledCommand, Mode=OneWay}" />
-                                </ia:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
+                            <Interaction.Behaviors>
+                                <EventTriggerBehavior EventName="PointerPressed">
+                                    <InvokeCommandAction Command="{Binding FilterInstalledCommand, Mode=OneWay}" />
+                                </EventTriggerBehavior>
+                            </Interaction.Behaviors>
                         </Label>
                         <Label>
                             <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Enabled}" />
-                            <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="PointerPressed">
-                                    <ia:InvokeCommandAction Command="{Binding FilterEnabledCommand, Mode=OneWay}" />
-                                </ia:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
+                            <Interaction.Behaviors>
+                                <EventTriggerBehavior EventName="PointerPressed">
+                                    <InvokeCommandAction Command="{Binding FilterEnabledCommand, Mode=OneWay}" />
+                                </EventTriggerBehavior>
+                            </Interaction.Behaviors>
                         </Label>
                         <Label>
                             <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Outdated}" />
-                            <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="PointerPressed">
-                                    <ia:InvokeCommandAction Command="{Binding FilterOutdatedCommand, Mode=OneWay}" />
-                                </ia:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
+                            <Interaction.Behaviors>
+                                <EventTriggerBehavior EventName="PointerPressed">
+                                    <InvokeCommandAction Command="{Binding FilterOutdatedCommand, Mode=OneWay}" />
+                                </EventTriggerBehavior>
+                            </Interaction.Behaviors>
                         </Label>
                         <Label>
                             <TextBlock Classes="Body1" Text="{ext:LocalizeExtensions XAML_Incompatible}" />
-                            <i:Interaction.Behaviors>
-                                <ia:EventTriggerBehavior EventName="PointerPressed">
-                                    <ia:InvokeCommandAction Command="{Binding FilterIncompatibleCommand, Mode=OneWay}" />
-                                </ia:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>
+                            <Interaction.Behaviors>
+                                <EventTriggerBehavior EventName="PointerPressed">
+                                    <InvokeCommandAction Command="{Binding FilterIncompatibleCommand, Mode=OneWay}" />
+                                </EventTriggerBehavior>
+                            </Interaction.Behaviors>
                         </Label>
                     </ListBox>
                 </controls:NavigationDrawer.LeftDrawerContent>

@@ -12,9 +12,8 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
-using Splat;
+using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
-using ILogger = Serilog.ILogger;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -22,11 +21,13 @@ public class SettingService : ISettingService
 {
     private readonly IDialogueService _dialogueService;
     private readonly ILogger _logger;
+    private readonly Lazy<ISettingsViewModel> _settingsViewModel;
 
-    public SettingService(IDialogueService dialogueService, ILogger logger)
+    public SettingService(IDialogueService dialogueService, ILogger logger, Lazy<ISettingsViewModel> settingsViewModel)
     {
         _dialogueService = dialogueService;
         _logger = logger;
+        _settingsViewModel = settingsViewModel;
         Task.Run(InitializeLanguageAndPath);
     }
 
@@ -84,7 +85,7 @@ public class SettingService : ISettingService
         }
     }
 
-    public async Task OnChoosePath()
+    public async Task<bool> OnChoosePath()
     {
         while (true)
         {
@@ -95,12 +96,23 @@ public class SettingService : ISettingService
             if (dialogue.Count == 0)
             {
                 if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
-                    break;
+                {
+                    _logger.Information("Path not changed");
+                    return false;
+                }
+
+                _logger.Error("Invalid path, showing error message box");
                 await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
                 continue;
             }
 
             var path = dialogue[0].TryGetLocalPath();
+            if (path == Settings.MuseDashFolder)
+            {
+                _logger.Information("Path not changed");
+                return false;
+            }
+
             _logger.Information("User chose path {Path}", path);
             Settings.MuseDashFolder = path;
             Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
@@ -108,8 +120,8 @@ public class SettingService : ISettingService
             await File.WriteAllTextAsync("Settings.json", json);
             _logger.Information("Settings saved to Settings.json");
 
-            Locator.Current.GetRequiredService<ISettingsViewModel>().Initialize();
-            break;
+            _settingsViewModel.Value.Initialize();
+            return true;
         }
     }
 

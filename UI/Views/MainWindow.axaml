@@ -1,8 +1,11 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+        xmlns:contract="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
+        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
         Icon="/Assets/Icon.ico"
         Title="Muse Dash Mod Tools"
         Width="1000" Height="800"
@@ -32,12 +35,20 @@
                   HorizontalAlignment="Center"
                   Margin="0,10,0,0"
                   ItemsSource="{Binding Tabs}"
-                  SelectionChanged="SwitchTab">
+                  SelectedIndex="{Binding SelectedTabIndex}">
+            <Interaction.Behaviors>
+                <ValueChangedTriggerBehavior Binding="{Binding SelectedTabIndex}">
+                    <InvokeCommandAction
+                        Command="{Binding SwitchTabCommand, Mode=OneWay}" />
+                </ValueChangedTriggerBehavior>
+            </Interaction.Behaviors>
 
             <TabStrip.Styles>
                 <Style Selector="TabStripItem">
                     <Setter Property="Height" Value="35" />
                     <Setter Property="Background" Value="#4D4D4D" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
                 </Style>
                 <Style Selector="TabStripItem:selected ContentPresenter">
                     <Setter Property="Background" Value="#808080" />

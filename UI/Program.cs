@@ -6,7 +6,6 @@ using System.IO;
 using Avalonia;
 using MuseDashModToolsUI.Models;
 using Serilog;
-using Splat;
 #if DEBUG && WINDOWS
 using System.Runtime.InteropServices;
 #endif
@@ -45,8 +44,7 @@ internal static class Program
         }
     }
 
-    private static void RegisterDependencies() =>
-        Bootstrapper.Register(Locator.CurrentMutable, Locator.Current);
+    private static void RegisterDependencies() => Bootstrapper.Register();
 
     private static void CreateLogger()
     {

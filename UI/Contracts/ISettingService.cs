@@ -5,7 +5,7 @@ namespace MuseDashModToolsUI.Contracts;
 
 public interface ISettingService
 {
-    public Setting Settings { get; set; }
+    public Setting Settings { get; }
     Task InitializeSettings();
-    Task OnChoosePath();
+    Task<bool> OnChoosePath();
 }

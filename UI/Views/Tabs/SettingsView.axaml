@@ -2,12 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:contract="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
              x:Class="MuseDashModToolsUI.Views.Tabs.SettingsView"
-             x:DataType="tabs:SettingsViewModel">
+             x:DataType="tabs:SettingsViewModel"
+             DataContext="{ext:DependencyInjection Type=contract:ISettingsViewModel}">
 
     <Design.DataContext>
         <tabs:SettingsViewModel />
