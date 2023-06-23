@@ -14,10 +14,6 @@
              x:DataType="tabs:ModManageViewModel"
              DataContext="{ext:DependencyInjection Type=contract:IModManageViewModel}">
 
-    <Design.DataContext>
-        <tabs:ModManageViewModel />
-    </Design.DataContext>
-
     <UserControl.Resources>
         <converters:NameColourConverter x:Key="NameColourConverter" />
         <converters:VersionColourConverter x:Key="VersionColourConverter" />

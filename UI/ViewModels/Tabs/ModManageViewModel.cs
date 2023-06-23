@@ -18,32 +18,22 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 {
-    private readonly IGitHubService _gitHubService;
-    private readonly ILocalService _localService;
-    private readonly ILogger _logger;
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     private readonly IModService _modService;
-    private readonly ISettingService _settingService;
 
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private FilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
+    public ILogger Logger { get; init; }
+    public ISettingService SettingService { get; init; }
+    public ILocalService LocalService { get; init; }
+    public IGitHubService GitHubService { get; init; }
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
-    public ModManageViewModel()
+    public ModManageViewModel(IModService modService)
     {
-    }
-
-    public ModManageViewModel(IGitHubService gitHubService, ILocalService localService, ILogger logger, IModService modService,
-        ISettingService settingService
-    )
-    {
-        _gitHubService = gitHubService;
-        _localService = localService;
         _modService = modService;
-        _logger = logger;
-        _settingService = settingService;
 
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(_filter) ||
@@ -57,16 +47,15 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             .Bind(out _mods)
             .Subscribe();
 
-        Initialize();
+        Task.Run(async () => await Initialize());
     }
 
-    public async void Initialize()
+    public async Task Initialize()
     {
-        await _settingService.InitializeSettings();
+        await SettingService.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
-        await _gitHubService.CheckUpdates();
         FileMonitorStart();
-        _logger.Information("Mod Manage Window Initialized");
+        Logger.Information("Mod Manage Window Initialized");
     }
 
     [RelayCommand]
@@ -86,7 +75,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     }
 
     [RelayCommand]
-    private async Task OnToggleMod(Mod item)
+    private async Task OnToggleMod(Mod? item)
     {
         _watcher.EnableRaisingEvents = false;
         await _modService.OnToggleMod(item);
@@ -102,10 +91,10 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     }
 
     [RelayCommand]
-    private async Task OnInstallMelonLoader() => await _localService.OnInstallMelonLoader();
+    private async Task OnInstallMelonLoader() => await LocalService.OnInstallMelonLoader();
 
     [RelayCommand]
-    private async Task OnUninstallMelonLoader() => await _localService.OnUninstallMelonLoader();
+    private async Task OnUninstallMelonLoader() => await LocalService.OnUninstallMelonLoader();
 
     [RelayCommand]
     private void OpenUrl(string path)
@@ -115,17 +104,17 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             FileName = path,
             UseShellExecute = true
         });
-        _logger.Information("Open Url: {Url}", path);
+        Logger.Information("Open Url: {Url}", path);
     }
 
     [RelayCommand]
-    private async Task OpenUserDataFolder() => await _localService.OpenUserDataFolder();
+    private async Task OpenUserDataFolder() => await LocalService.OpenUserDataFolder();
 
     [RelayCommand]
-    private async Task OpenModsFolder() => await _localService.OpenModsFolder();
+    private async Task OpenModsFolder() => await LocalService.OpenModsFolder();
 
     [RelayCommand]
-    private async Task OnCheckUpdate() => await _gitHubService.CheckUpdates(true);
+    private async Task OnCheckUpdate() => await GitHubService.CheckUpdates(true);
 
     [RelayCommand]
     private void OnFilterAll() => CategoryFilterType = FilterType.All;
@@ -146,13 +135,13 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     partial void OnCategoryFilterTypeChanged(FilterType value)
     {
-        _logger.Information("Category Filter Changed: {Filter}", value);
+        Logger.Information("Category Filter Changed: {Filter}", value);
         _sourceCache.Refresh();
     }
 
     private void FileMonitorStart()
     {
-        _watcher.Path = _settingService.Settings.ModsFolder;
+        _watcher.Path = SettingService.Settings.ModsFolder;
         _watcher.Filters.Add("*.dll");
         _watcher.Filters.Add("*.disabled");
         _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
@@ -160,6 +149,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.EnableRaisingEvents = true;
-        _logger.Information("File Monitor Started");
+        Logger.Information("File Monitor Started");
     }
 }

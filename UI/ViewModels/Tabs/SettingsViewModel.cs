@@ -28,11 +28,6 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     [ObservableProperty] private string? _path;
     public List<Language> AvailableLanguages => _localizationService.AvailableLanguages;
 
-
-    public SettingsViewModel()
-    {
-    }
-
     public SettingsViewModel(ILocalizationService localizationService, IModManageViewModel modManageViewModel, ILogger logger,
         ISettingService settingService)
     {

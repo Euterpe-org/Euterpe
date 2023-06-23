@@ -18,16 +18,16 @@ public static class Bootstrapper
         builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
         builder.RegisterInstance(new HttpClient());
         builder.RegisterType<DialogueService>().As<IDialogueService>();
-        builder.RegisterType<GitHubService>().As<IGitHubService>();
-        builder.RegisterType<SettingService>().As<ISettingService>().SingleInstance();
-        builder.RegisterType<LocalizationService>().As<ILocalizationService>().SingleInstance();
-        builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().SingleInstance();
-        builder.RegisterType<LocalService>().As<ILocalService>().SingleInstance();
-        builder.RegisterType<ModService>().As<IModService>().SingleInstance();
-        builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().SingleInstance();
-        builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().SingleInstance();
-        builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().SingleInstance();
-        builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
+        builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
+        builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().PropertiesAutowired().SingleInstance();
 
         var container = builder.Build();
         DependencyInjectionExtension.Resolver = type => container.Resolve(type!);

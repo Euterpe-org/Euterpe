@@ -19,22 +19,12 @@ namespace MuseDashModToolsUI.Services;
 
 public class LocalService : ILocalService
 {
-    private readonly IDialogueService _dialogueService;
-    private readonly IDownloadWindowViewModel _downloadWindowViewModel;
-    private readonly ILogger _logger;
-    private readonly ISettingService _settingService;
+    public IDialogueService? DialogueService { get; init; }
+    public IDownloadWindowViewModel? DownloadWindowViewModel { get; init; }
+    public ILogger? Logger { get; init; }
+    public ISettingService? SettingService { get; init; }
 
     private bool IsValidPath { get; set; }
-
-    public LocalService(IDialogueService dialogueService, IDownloadWindowViewModel downloadWindowViewModel, ILogger logger,
-        ISettingService settingService
-    )
-    {
-        _dialogueService = dialogueService;
-        _downloadWindowViewModel = downloadWindowViewModel;
-        _logger = logger;
-        _settingService = settingService;
-    }
 
     public IEnumerable<string> GetModFiles(string path) => Directory.GetFiles(path)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll")
@@ -59,21 +49,21 @@ public class LocalService : ILocalService
         mod.Author = attribute.Author;
         mod.HomePage = attribute.DownloadLink;
         mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(filePath);
-        _logger.Information("Local mod {Name} loaded. File name {FileName}", mod.Name, mod.FileName);
+        Logger?.Information("Local mod {Name} loaded. File name {FileName}", mod.Name, mod.FileName);
         return mod;
     }
 
     public async Task<bool> CheckValidPath()
     {
-        _logger.Information("Checking valid path...");
-        var exePath = Path.Join(_settingService.Settings.MuseDashFolder, "MuseDash.exe");
-        var gameAssemblyPath = Path.Join(_settingService.Settings.MuseDashFolder, "GameAssembly.dll");
-        var userDataPath = Path.Join(_settingService.Settings.MuseDashFolder, "UserData");
+        Logger?.Information("Checking valid path...");
+        var exePath = Path.Join(SettingService?.Settings.MuseDashFolder, "MuseDash.exe");
+        var gameAssemblyPath = Path.Join(SettingService?.Settings.MuseDashFolder, "GameAssembly.dll");
+        var userDataPath = Path.Join(SettingService?.Settings.MuseDashFolder, "UserData");
         if (!File.Exists(exePath) || !File.Exists(gameAssemblyPath))
         {
-            _logger.Error("No game files found, showing error message box...");
-            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_NoExeFound.Localize());
-            await _settingService.OnChoosePath();
+            Logger?.Error("No game files found, showing error message box...");
+            await DialogueService!.CreateErrorMessageBox(MsgBox_Content_NoExeFound.Localize());
+            await SettingService!.OnChoosePath();
         }
 
         try
@@ -81,46 +71,46 @@ public class LocalService : ILocalService
             var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
             if (version is not "2019.4.32.16288752")
             {
-                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
+                await DialogueService!.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
                 IsValidPath = false;
                 return IsValidPath;
             }
 
-            if (!Directory.Exists(_settingService.Settings.ModsFolder))
+            if (!Directory.Exists(SettingService?.Settings.ModsFolder))
             {
-                Directory.CreateDirectory(_settingService.Settings.ModsFolder);
-                _logger.Information("Mods folder not found, created");
+                Directory.CreateDirectory(SettingService!.Settings.ModsFolder);
+                Logger?.Information("Mods folder not found, created");
             }
 
             if (!Directory.Exists(userDataPath))
             {
                 Directory.CreateDirectory(userDataPath);
-                _logger.Information("UserData folder not found, created");
+                Logger?.Information("UserData folder not found, created");
             }
 
-            var cfgFilePath = Path.Join(_settingService.Settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
+            var cfgFilePath = Path.Join(SettingService.Settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
             if (!File.Exists(cfgFilePath))
             {
                 await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
-                _logger.Information("UserData config file not found, created");
+                Logger?.Information("UserData config file not found, created");
             }
             else
             {
                 var path = await File.ReadAllTextAsync(cfgFilePath);
                 if (path != Environment.ProcessPath)
                     await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
-                _logger.Information("UserData config file found, path updated");
+                Logger?.Information("UserData config file found, path updated");
             }
 
             IsValidPath = true;
-            _logger.Information("Path verified");
+            Logger?.Information("Path verified");
             return IsValidPath;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            _logger.Error("Exe verify failed, showing error message box...");
-            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed.Localize());
-            await _settingService.OnChoosePath();
+            Logger?.Error(ex, "Exe verify failed, showing error message box...");
+            await DialogueService!.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed.Localize());
+            await SettingService!.OnChoosePath();
             IsValidPath = false;
             return IsValidPath;
         }
@@ -129,7 +119,7 @@ public class LocalService : ILocalService
     public async Task<string> ReadGameVersion()
     {
         var assetsManager = new AssetsManager();
-        var bundlePath = Path.Join(_settingService.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        var bundlePath = Path.Join(SettingService?.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
@@ -139,13 +129,13 @@ public class LocalService : ILocalService
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
 
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion");
-            _logger.Information("Game version read successfully: {BundleVersion}", bundleVersion!.AsString);
-            return bundleVersion.AsString;
+            Logger?.Information("Game version read successfully: {BundleVersion}", bundleVersion!.AsString);
+            return bundleVersion!.AsString;
         }
         catch (Exception ex)
         {
-            _logger.Fatal(ex, "Read game version failed, showing error message box...");
-            await _dialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed.Localize(), bundlePath));
+            Logger?.Fatal(ex, "Read game version failed, showing error message box...");
+            await DialogueService!.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed.Localize(), bundlePath));
             Environment.Exit(0);
         }
 
@@ -154,10 +144,10 @@ public class LocalService : ILocalService
 
     public async Task CheckMelonLoaderInstall()
     {
-        var melonLoaderFolder = Path.Join(_settingService.Settings.MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(_settingService.Settings.MuseDashFolder, "version.dll");
+        var melonLoaderFolder = Path.Join(SettingService?.Settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(SettingService?.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
-        var install = await _dialogueService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader.Localize());
+        var install = await DialogueService!.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader.Localize());
         if (install)
             await OnInstallMelonLoader();
     }
@@ -165,19 +155,19 @@ public class LocalService : ILocalService
     public async Task OnInstallMelonLoader()
     {
         if (!IsValidPath) return;
-        _logger.Information("Showing MelonLoader download window...");
-        await DialogHost.Show(_downloadWindowViewModel, "DownloadWindowDialog",
-            (object _, DialogOpenedEventArgs _) => _downloadWindowViewModel.InstallMelonLoader());
+        Logger?.Information("Showing MelonLoader download window...");
+        await DialogHost.Show(DownloadWindowViewModel!, "DownloadWindowDialog",
+            (object _, DialogOpenedEventArgs _) => DownloadWindowViewModel?.InstallMelonLoader());
     }
 
     public async Task OnUninstallMelonLoader()
     {
         if (!IsValidPath) return;
-        var result = await _dialogueService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize());
+        var result = await DialogueService!.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize());
         if (!result) return;
-        var melonLoaderFolder = Path.Join(_settingService.Settings.MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(_settingService.Settings.MuseDashFolder, "version.dll");
-        var noticeTxt = Path.Join(_settingService.Settings.MuseDashFolder, "NOTICE.txt");
+        var melonLoaderFolder = Path.Join(SettingService?.Settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(SettingService?.Settings.MuseDashFolder, "version.dll");
+        var noticeTxt = Path.Join(SettingService?.Settings.MuseDashFolder, "NOTICE.txt");
 
         if (Directory.Exists(melonLoaderFolder))
         {
@@ -186,19 +176,19 @@ public class LocalService : ILocalService
                 Directory.Delete(melonLoaderFolder, true);
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
-                _logger.Information("MelonLoader uninstalled successfully");
-                await _dialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
+                Logger?.Information("MelonLoader uninstalled successfully");
+                await DialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
             }
             catch (Exception)
             {
-                _logger.Error("MelonLoader uninstall failed, showing error message box...");
-                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed.Localize());
+                Logger?.Error("MelonLoader uninstall failed, showing error message box...");
+                await DialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed.Localize());
             }
         }
         else
         {
-            _logger.Error("MelonLoader folder not found, showing error message box...");
-            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_NoMelonLoaderFolder.Localize());
+            Logger?.Error("MelonLoader folder not found, showing error message box...");
+            await DialogueService.CreateErrorMessageBox(MsgBox_Content_NoMelonLoaderFolder.Localize());
         }
     }
 
@@ -206,16 +196,16 @@ public class LocalService : ILocalService
     {
         if (!IsValidPath)
         {
-            _logger.Error("Not valid path, showing error message box...");
-            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
-            await _settingService.OnChoosePath();
+            Logger?.Error("Not valid path, showing error message box...");
+            await DialogueService!.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await SettingService!.OnChoosePath();
             return;
         }
 
-        _logger.Information("Opening mods folder...");
+        Logger?.Information("Opening mods folder...");
         Process.Start(new ProcessStartInfo
         {
-            FileName = _settingService.Settings.ModsFolder,
+            FileName = SettingService?.Settings.ModsFolder,
             UseShellExecute = true
         });
     }
@@ -224,16 +214,16 @@ public class LocalService : ILocalService
     {
         if (!IsValidPath)
         {
-            _logger.Error("Not valid path, showing error message box...");
-            await _dialogueService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
-            await _settingService.OnChoosePath();
+            Logger?.Error("Not valid path, showing error message box...");
+            await DialogueService!.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await SettingService!.OnChoosePath();
             return;
         }
 
-        _logger.Information("Opening UserData folder...");
+        Logger?.Information("Opening UserData folder...");
         Process.Start(new ProcessStartInfo
         {
-            FileName = _settingService.Settings.UserDataFolder,
+            FileName = SettingService?.Settings.UserDataFolder,
             UseShellExecute = true
         });
     }

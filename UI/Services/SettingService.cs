@@ -19,29 +19,21 @@ namespace MuseDashModToolsUI.Services;
 
 public class SettingService : ISettingService
 {
-    private readonly IDialogueService _dialogueService;
-    private readonly ILogger _logger;
-    private readonly Lazy<ISettingsViewModel> _settingsViewModel;
-
-    public SettingService(IDialogueService dialogueService, ILogger logger, Lazy<ISettingsViewModel> settingsViewModel)
-    {
-        _dialogueService = dialogueService;
-        _logger = logger;
-        _settingsViewModel = settingsViewModel;
-        Task.Run(InitializeLanguageAndPath);
-    }
-
-    public Setting Settings { get; set; } = new();
+    public ILogger? Logger { get; init; }
+    public Lazy<ISettingsViewModel>? SettingsViewModel { get; init; }
+    public IDialogueService? DialogueService { get; init; }
+    public SettingService() => Task.Run(InitializeLanguageAndPath);
+    public Setting Settings { get; private set; } = new();
 
     public async Task InitializeSettings()
     {
-        _logger.Information("Initializing settings...");
+        Logger?.Information("Initializing settings...");
         try
         {
             if (!File.Exists("Settings.json"))
             {
-                _logger.Error("Settings.json not found, creating new one");
-                await _dialogueService.CreateErrorMessageBox("Warning", MsgBox_Content_ChoosePath.Localize());
+                Logger?.Error("Settings.json not found, creating new one");
+                await DialogueService!.CreateErrorMessageBox("Warning", MsgBox_Content_ChoosePath.Localize());
                 await OnChoosePath();
                 return;
             }
@@ -50,8 +42,8 @@ public class SettingService : ISettingService
             var settings = JsonSerializer.Deserialize<Setting>(text)!;
             if (string.IsNullOrEmpty(settings.MuseDashFolder))
             {
-                _logger.Error("Settings.json stored path is empty, asking user to choose path");
-                await _dialogueService.CreateErrorMessageBox(MsgBox_Title_Warning, MsgBox_Content_NullPath.Localize());
+                Logger?.Error("Settings.json stored path is empty, asking user to choose path");
+                await DialogueService!.CreateErrorMessageBox(MsgBox_Title_Warning, MsgBox_Content_NullPath.Localize());
                 await OnChoosePath();
                 await InitializeSettings();
             }
@@ -59,7 +51,7 @@ public class SettingService : ISettingService
             if (string.IsNullOrEmpty(settings.LanguageCode))
             {
                 settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
-                _logger.Warning("Settings.json stored language code is empty, using system language");
+                Logger?.Warning("Settings.json stored language code is empty, using system language");
             }
 
             Settings = settings.Clone();
@@ -69,19 +61,19 @@ public class SettingService : ISettingService
             if (File.Exists(updaterPath))
             {
                 File.Delete(updaterPath);
-                _logger.Information("Updater.exe found, deleting it");
+                Logger?.Information("Updater.exe found, deleting it");
             }
 
             if (Directory.Exists(updateDirectory))
             {
                 Directory.Delete(updateDirectory);
-                _logger.Information("Update directory found, deleting it");
+                Logger?.Information("Update directory found, deleting it");
             }
         }
         catch (Exception ex)
         {
-            _logger.Error(ex, "Error occurred while initializing settings");
-            await _dialogueService.CreateErrorMessageBox(ex.ToString());
+            Logger?.Error(ex, "Error occurred while initializing settings");
+            await DialogueService!.CreateErrorMessageBox(ex.ToString());
         }
     }
 
@@ -90,37 +82,39 @@ public class SettingService : ISettingService
         while (true)
         {
             if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
-            _logger.Information("Showing choose folder dialogue");
+            Logger?.Information("Showing choose folder dialogue");
+
             var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
                 { AllowMultiple = false, Title = FolderDialog_Title });
             if (dialogue.Count == 0)
             {
                 if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
                 {
-                    _logger.Information("Path not changed");
+                    Logger?.Information("Path not changed");
                     return false;
                 }
 
-                _logger.Error("Invalid path, showing error message box");
-                await _dialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
+                Logger?.Error("Invalid path, showing error message box");
+                await DialogueService!.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
                 continue;
             }
 
             var path = dialogue[0].TryGetLocalPath();
             if (path == Settings.MuseDashFolder)
             {
-                _logger.Information("Path not changed");
+                Logger?.Information("Path not changed");
                 return false;
             }
 
-            _logger.Information("User chose path {Path}", path);
+            Logger?.Information("User chose path {Path}", path);
             Settings.MuseDashFolder = path;
             Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
+            Logger?.Information("Path {path}", Settings.MuseDashFolder);
             var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
             await File.WriteAllTextAsync("Settings.json", json);
-            _logger.Information("Settings saved to Settings.json");
+            Logger?.Information("Settings saved to Settings.json");
 
-            _settingsViewModel.Value.Initialize();
+            SettingsViewModel?.Value.Initialize();
             return true;
         }
     }
@@ -133,6 +127,6 @@ public class SettingService : ISettingService
         var setting = JsonNode.Parse(text);
         Settings.LanguageCode = setting?["LanguageCode"]?.ToString();
         Settings.MuseDashFolder = setting?["MuseDashFolder"]?.ToString();
-        _logger.Information("Language and Path loaded from Settings.json");
+        Logger?.Information("Language and Path loaded from Settings.json");
     }
 }

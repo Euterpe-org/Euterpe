@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
+using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Localization;
 using MuseDashModToolsUI.Models;
@@ -14,17 +15,11 @@ namespace MuseDashModToolsUI.Services;
 
 public class LocalizationService : ILocalizationService, INotifyPropertyChanged
 {
-    private readonly ILogger _logger;
-    private readonly ISettingService _settingService;
-    private readonly Lazy<IUpdateTextService> _updateUiService;
+    public ILogger? Logger { get; init; }
+    public ISettingService? SettingService { get; init; }
+    public Lazy<IUpdateTextService>? UpdateUiService { get; init; }
 
-    public LocalizationService(ILogger logger, ISettingService settingService, Lazy<IUpdateTextService> updateUiService)
-    {
-        _logger = logger;
-        _settingService = settingService;
-        _updateUiService = updateUiService;
-        GetAvailableCultures();
-    }
+    public LocalizationService() => Task.Run(GetAvailableCultures);
 
     public string this[string resourceKey] =>
         Resources.ResourceManager.GetString(resourceKey, Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
@@ -35,12 +30,12 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
     {
         if (CultureInfo.CurrentUICulture.Name == language) return;
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
-        _settingService.Settings.LanguageCode = language;
+        SettingService!.Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
-        _updateUiService.Value.ChangeTabName();
-        _updateUiService.Value.ChangeOptionName();
-        _logger.Information("Language changed to {Language}", language);
+        UpdateUiService?.Value.ChangeTabName();
+        UpdateUiService?.Value.ChangeOptionName();
+        Logger?.Information("Language changed to {Language}", language);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -65,7 +60,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
                 AvailableLanguages.Add(new Language(culture.Name, culture.DisplayName));
         }
 
-        _logger.Information("Available languages loaded: {AvailableLanguages}",
+        Logger?.Information("Available languages loaded: {AvailableLanguages}",
             string.Join(", ", AvailableLanguages.Select(x => x.Name)));
     }
 }

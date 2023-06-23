@@ -11,10 +11,6 @@
              x:DataType="tabs:SettingsViewModel"
              DataContext="{ext:DependencyInjection Type=contract:ISettingsViewModel}">
 
-    <Design.DataContext>
-        <tabs:SettingsViewModel />
-    </Design.DataContext>
-
     <Grid RowDefinitions="*,*,*,*,*,*,*,*" Background="#424242">
         <Grid.Styles>
             <Style Selector="controls|Card">
