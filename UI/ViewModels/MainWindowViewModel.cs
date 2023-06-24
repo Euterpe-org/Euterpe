@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
@@ -17,17 +16,17 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
+    private readonly ILogger _logger;
     private readonly ISettingService _settingService;
     [ObservableProperty] private ViewModelBase? _content;
     [ObservableProperty] private int _selectedTabIndex;
     [ObservableProperty] private List<TabView> _tabs = new();
-    public ILogger? Logger { get; init; }
-    public IGitHubService? GitHubService { get; init; }
     public static string Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)!;
 
     public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ISettingService settingService,
         ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
     {
+        _logger = logger;
         _settingService = settingService;
         if (settingService.Settings.LanguageCode is not null)
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(settingService.Settings.LanguageCode);
@@ -48,13 +47,13 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         Content = Tabs[SelectedTabIndex].ViewModel;
         var name = Tabs[SelectedTabIndex].Name;
-        Logger?.Information("Switching tab to {Name}", name);
+        _logger.Information("Switching tab to {Name}", name);
     }
 
     private void OnExit(object sender, EventArgs e)
     {
         var json = JsonSerializer.Serialize(_settingService.Settings, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText("Settings.json", json);
-        Logger?.Information("Settings saved");
+        _logger.Information("Settings saved");
     }
 }

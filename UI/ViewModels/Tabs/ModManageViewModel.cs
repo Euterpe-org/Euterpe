@@ -21,6 +21,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly ILogger _logger;
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     private readonly IModService _modService;
+    private readonly ISettingService _settingService;
 
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly FileSystemWatcher _watcher = new();
@@ -32,7 +33,9 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     public ModManageViewModel(ILogger logger, IModService modService, ISettingService settingService)
     {
+        _logger = logger;
         _modService = modService;
+        _settingService = settingService;
 
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(_filter) ||
@@ -51,10 +54,10 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     public async Task Initialize()
     {
-        await SettingService.InitializeSettings();
+        await _settingService.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
         FileMonitorStart();
-        Logger.Information("Mod Manage Window Initialized");
+        _logger.Information("Mod Manage Window Initialized");
     }
 
     [RelayCommand]
@@ -103,7 +106,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             FileName = path,
             UseShellExecute = true
         });
-        Logger.Information("Open Url: {Url}", path);
+        _logger.Information("Open Url: {Url}", path);
     }
 
     [RelayCommand]
@@ -134,13 +137,13 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     partial void OnCategoryFilterTypeChanged(FilterType value)
     {
-        Logger.Information("Category Filter Changed: {Filter}", value);
+        _logger.Information("Category Filter Changed: {Filter}", value);
         _sourceCache.Refresh();
     }
 
     private void FileMonitorStart()
     {
-        _watcher.Path = SettingService.Settings.ModsFolder;
+        _watcher.Path = _settingService.Settings.ModsFolder;
         _watcher.Filters.Add("*.dll");
         _watcher.Filters.Add("*.disabled");
         _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
@@ -148,6 +151,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.EnableRaisingEvents = true;
-        Logger.Information("File Monitor Started");
+        _logger.Information("File Monitor Started");
     }
 }
