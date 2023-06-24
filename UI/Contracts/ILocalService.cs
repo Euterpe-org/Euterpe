@@ -11,7 +11,7 @@ public interface ILocalService
     Task<bool> CheckValidPath();
     Task<string> ReadGameVersion();
     Task CheckMelonLoaderInstall();
-    Task OnInstallMelonLoader();
+    void OnInstallMelonLoader();
     Task OnUninstallMelonLoader();
     Task OpenModsFolder();
     Task OpenUserDataFolder();

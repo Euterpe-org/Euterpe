@@ -12,8 +12,8 @@
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterScreen"
-        Width="320"
-        Height="220">
+        Width="350"
+        Height="250">
 
     <Grid RowDefinitions="120,100">
         <Image Grid.Row="0"
