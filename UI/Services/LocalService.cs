@@ -179,9 +179,9 @@ public class LocalService : ILocalService
                 Logger?.Information("MelonLoader uninstalled successfully");
                 await DialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Logger?.Error("MelonLoader uninstall failed, showing error message box...");
+                Logger?.Error(ex, "MelonLoader uninstall failed, showing error message box...");
                 await DialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed.Localize());
             }
         }

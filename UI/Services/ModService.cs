@@ -56,51 +56,7 @@ public class ModService : IModService
             return;
         }
 
-        var isTracked = new bool[localMods.Count];
-        foreach (var webMod in webMods!)
-        {
-            var localMod = localMods.FirstOrDefault(x => x.Name == webMod.Name);
-            var localModIdx = localMods.IndexOf(localMod!);
-
-            if (localMod is null)
-            {
-                webMod.IsTracked = true;
-                webMod.IsIncompatible = !CheckCompatible(webMod);
-                sourceCache.AddOrUpdate(webMod);
-                await CheckModToolsInstall(webMod);
-                continue;
-            }
-
-            if (localMods.Count(x => x.Name == localMod.Name) > 1)
-            {
-                localMod.IsDuplicated = true;
-                localMod.DuplicatedModNames =
-                    string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
-            }
-
-            isTracked[localModIdx] = true;
-            localMod.IsTracked = true;
-            localMod.Version = webMod.Version;
-            localMod.GameVersion = webMod.GameVersion;
-            localMod.DependentLibs = webMod.DependentLibs;
-            localMod.DependentMods = webMod.DependentMods;
-            localMod.IncompatibleMods = webMod.IncompatibleMods;
-            localMod.DownloadLink = webMod.DownloadLink;
-            localMod.HomePage = webMod.HomePage;
-            localMod.Description = webMod.Description;
-
-            var versionState = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1 :
-                new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
-            localMod.State = (UpdateState)versionState;
-            localMod.IsShaMismatched = versionState == 0 && webMod.SHA256 != localMod.SHA256;
-            if (localMod.IsShaMismatched)
-                localMod.State = UpdateState.Modified;
-            localMod.IsIncompatible = !CheckCompatible(localMod);
-            sourceCache.AddOrUpdate(localMod);
-            Logger?.Information("Mod {Name} loaded to UI", localMod.Name);
-        }
-
-        CheckDuplicatedMods(isTracked, localMods);
+        await LoadModsToUI(localMods, webMods!);
     }
 
     public async Task OnInstallMod(Mod item)
@@ -166,7 +122,7 @@ public class ModService : IModService
             }
         }
 
-        Mod?[] disabledDependencies = dependencies.Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
+        var disabledDependencies = dependencies.Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
         if (disabledDependencies.Length > 0)
         {
             var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x?.Name));
@@ -213,7 +169,7 @@ public class ModService : IModService
                         .Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
                     if (enabledReverseDependencies.Length > 0)
                     {
-                        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
+                        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
                         var result = await DialogueService!.CreateConfirmMessageBox(
                             string.Format(MsgBox_Content_DisableModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
                         if (!result)
@@ -229,11 +185,11 @@ public class ModService : IModService
 
                     break;
                 case false:
-                    Mod?[] disabledDependencies = SearchDependencies(item.Name!)
+                    var disabledDependencies = SearchDependencies(item.Name!)
                         .Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
                     if (disabledDependencies.Length > 0)
                     {
-                        var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x?.Name));
+                        var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
                         Settings!.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
                             string.Format(MsgBox_Content_EnableDependency, item.Name, disabledDependencyNames),
                             disabledDependencies, Settings!.Settings.AskEnableDependenciesWhenEnabling, false);
@@ -338,6 +294,55 @@ public class ModService : IModService
         }
     }
 
+    private async Task LoadModsToUI(List<Mod> localMods, List<Mod> webMods)
+    {
+        var isTracked = new bool[localMods.Count];
+        foreach (var webMod in webMods!)
+        {
+            var localMod = localMods.FirstOrDefault(x => x.Name == webMod.Name);
+            var localModIdx = localMods.IndexOf(localMod!);
+
+            if (localMod is null)
+            {
+                webMod.IsTracked = true;
+                webMod.IsIncompatible = !CheckCompatible(webMod);
+                _sourceCache?.AddOrUpdate(webMod);
+                await CheckModToolsInstall(webMod);
+                continue;
+            }
+
+            if (localMods.Count(x => x.Name == localMod.Name) > 1)
+            {
+                localMod.IsDuplicated = true;
+                localMod.DuplicatedModNames =
+                    string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
+            }
+
+            isTracked[localModIdx] = true;
+            localMod.IsTracked = true;
+            localMod.Version = webMod.Version;
+            localMod.GameVersion = webMod.GameVersion;
+            localMod.DependentLibs = webMod.DependentLibs;
+            localMod.DependentMods = webMod.DependentMods;
+            localMod.IncompatibleMods = webMod.IncompatibleMods;
+            localMod.DownloadLink = webMod.DownloadLink;
+            localMod.HomePage = webMod.HomePage;
+            localMod.Description = webMod.Description;
+
+            var versionState = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1
+                : new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
+            localMod.State = (UpdateState)versionState;
+            localMod.IsShaMismatched = versionState == 0 && webMod.SHA256 != localMod.SHA256;
+            if (localMod.IsShaMismatched)
+                localMod.State = UpdateState.Modified;
+            localMod.IsIncompatible = !CheckCompatible(localMod);
+            _sourceCache?.AddOrUpdate(localMod);
+            Logger?.Information("Mod {Name} loaded to UI", localMod.Name);
+        }
+
+        CheckDuplicatedMods(isTracked, localMods);
+    }
+
     private void CheckDuplicatedMods(IReadOnlyList<bool> isTracked, IReadOnlyList<Mod> localMods)
     {
         for (var i = 0; i < isTracked.Count; i++)
@@ -374,7 +379,7 @@ public class ModService : IModService
             .Select(x => _sourceCache!.Lookup(x).Value)!;
     }
 
-    private IEnumerable<Mod?> SearchReverseDependencies(string modName)
+    private IEnumerable<Mod> SearchReverseDependencies(string modName)
     {
         var reverseDependencyNames = _sourceCache?.Items.Where(x => x!.DependencyNames.Split("\r\n").Contains(modName))
             .Select(x => x?.Name).ToArray();
