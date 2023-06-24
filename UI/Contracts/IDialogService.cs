@@ -4,9 +4,10 @@ namespace MuseDashModToolsUI.Contracts;
 
 public interface IDialogService
 {
-    void ShowDialog(object data);
+    void ShowDialog(object viewModel);
     void ShowDialog<T>();
-    void ShowDialog(object data, EventHandler openedEventHandler);
+    void ShowDialog(object viewModel, EventHandler openedEventHandler);
     void ShowDialog<T>(EventHandler openedEventHandler);
     void CloseDialog();
+    void CloseDialog(EventHandler closedEventHandler);
 }

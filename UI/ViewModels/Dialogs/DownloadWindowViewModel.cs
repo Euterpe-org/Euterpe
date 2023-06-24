@@ -81,6 +81,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         Logger.Information("MelonLoader install success");
         await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_InstallMelonLoaderSuccess.Localize());
         DialogService.CloseDialog();
+        Logger.Information("Close Download Window");
     }
 
     private void UpdateDownloadProgress(double value)
