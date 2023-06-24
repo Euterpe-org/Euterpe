@@ -49,10 +49,10 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             .Bind(out _mods)
             .Subscribe();
 
-        Task.Run(async () => await Initialize());
+        Initialize();
     }
 
-    public async Task Initialize()
+    public async void Initialize()
     {
         await _settingService.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);

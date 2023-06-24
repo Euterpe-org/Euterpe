@@ -10,6 +10,6 @@ public interface IModService
     Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods);
     Task OnInstallMod(Mod item);
     Task OnReinstallMod(Mod item);
-    Task OnToggleMod(Mod? item);
+    Task OnToggleMod(Mod item);
     Task OnDeleteMod(Mod item);
 }

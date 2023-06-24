@@ -152,6 +152,7 @@ public class ModService : IModService
             await OnInstallMod(item);
             return;
         }
+
         var result = await DialogueService.CreateConfirmMessageBox(
             string.Format(MsgBox_Content_ReinstallMod.Localize(), item.Name));
         if (!result) return;
@@ -159,11 +160,11 @@ public class ModService : IModService
         await OnInstallMod(item);
     }
 
-    public async Task OnToggleMod(Mod? item)
+    public async Task OnToggleMod(Mod item)
     {
         try
         {
-            switch (item!.IsDisabled)
+            switch (item.IsDisabled)
             {
                 case true:
                     var enabledReverseDependencies = SearchReverseDependencies(item.Name!)
@@ -225,7 +226,7 @@ public class ModService : IModService
                     break;
             }
 
-            item!.IsDisabled = !item.IsDisabled;
+            item.IsDisabled = !item.IsDisabled;
         }
     }
 
