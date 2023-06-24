@@ -18,6 +18,7 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 {
+    private readonly ILogger _logger;
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     private readonly IModService _modService;
 
@@ -25,13 +26,11 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private FilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
-    public ILogger Logger { get; init; }
-    public ISettingService SettingService { get; init; }
-    public ILocalService LocalService { get; init; }
     public IGitHubService GitHubService { get; init; }
+    public ILocalService LocalService { get; init; }
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
-    public ModManageViewModel(IModService modService)
+    public ModManageViewModel(ILogger logger, IModService modService, ISettingService settingService)
     {
         _modService = modService;
 

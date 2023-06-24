@@ -25,7 +25,8 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     public IGitHubService? GitHubService { get; init; }
     public static string Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)!;
 
-    public MainWindowViewModel(ISettingService settingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
+    public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ISettingService settingService,
+        ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
     {
         _settingService = settingService;
         if (settingService.Settings.LanguageCode is not null)
@@ -36,17 +37,10 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             new((ViewModelBase)modManageViewModel, XAML_Tab_ModManage, "ModManage"),
             new((ViewModelBase)settingsViewModel, XAML_Tab_Setting, "Setting")
         };
-
-        Task.Run(Initialize);
-
-        AppDomain.CurrentDomain.ProcessExit += OnExit!;
-    }
-
-    private void Initialize()
-    {
         SwitchTab();
-        GitHubService?.CheckUpdates();
-        Logger?.Information("Main Window initialized");
+        gitHubService.CheckUpdates();
+        _logger.Information("Main Window initialized");
+        AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
 
     [RelayCommand]

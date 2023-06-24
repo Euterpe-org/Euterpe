@@ -15,6 +15,8 @@ using MuseDashModToolsUI.Models;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
+#pragma warning disable CS8618
+
 namespace MuseDashModToolsUI.Services;
 
 public class ModService : IModService
@@ -22,49 +24,49 @@ public class ModService : IModService
     private string? _currentGameVersion;
 
     private ReadOnlyObservableCollection<Mod>? _mods;
-    private SourceCache<Mod?, string>? _sourceCache;
-    public IDialogueService? DialogueService { get; init; }
-    public IGitHubService? GitHubService { get; init; }
-    public ILocalService? LocalService { get; init; }
-    public ILogger? Logger { get; init; }
-    public ISettingService? Settings { get; init; }
+    private SourceCache<Mod, string>? _sourceCache;
+    public IDialogueService DialogueService { get; init; }
+    public IGitHubService GitHubService { get; init; }
+    public ILocalService LocalService { get; init; }
+    public ILogger Logger { get; init; }
+    public ISettingService Settings { get; init; }
 
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)
     {
-        Logger?.Information("Initializing mod list...");
-        _sourceCache = sourceCache!;
+        Logger.Information("Initializing mod list...");
+        _sourceCache = sourceCache;
         _mods = mods;
-        var isValidPath = await LocalService!.CheckValidPath();
+        var isValidPath = await LocalService.CheckValidPath();
         if (!isValidPath) return;
-        _currentGameVersion = await LocalService!.ReadGameVersion();
-        await LocalService!.CheckMelonLoaderInstall();
+        _currentGameVersion = await LocalService.ReadGameVersion();
+        await LocalService.CheckMelonLoaderInstall();
 
-        var webMods = await GitHubService!.GetModsAsync();
-        var localPaths = LocalService!.GetModFiles(Settings!.Settings.ModsFolder);
+        var webMods = await GitHubService.GetModsAsync();
+        var localPaths = LocalService.GetModFiles(Settings.Settings.ModsFolder);
         List<Mod>? localMods;
         try
         {
-            localMods = localPaths.Select(LocalService!.LoadMod).Where(mod => mod is not null).ToList()!;
-            Logger?.Information("Read all local mods info success");
+            localMods = localPaths.Select(LocalService.LoadMod).Where(mod => mod is not null).ToList()!;
+            Logger.Information("Read all local mods info success");
         }
         catch (Exception ex)
         {
-            await DialogueService!.CreateErrorMessageBox(MsgBox_Content_BrokenMods.Localize());
-            await LocalService!.OpenModsFolder();
-            Logger?.Fatal(ex, "Load local mods failed");
+            await DialogueService.CreateErrorMessageBox(MsgBox_Content_BrokenMods.Localize());
+            await LocalService.OpenModsFolder();
+            Logger.Fatal(ex, "Load local mods failed");
             Environment.Exit(0);
             return;
         }
 
-        await LoadModsToUI(localMods, webMods!);
+        await LoadModsToUI(localMods, webMods);
     }
 
     public async Task OnInstallMod(Mod item)
     {
         if (item.DownloadLink is null)
         {
-            Logger?.Error("Download link is null");
-            await DialogueService!.CreateErrorMessageBox(MsgBox_Content_NoDownloadLink.Localize());
+            Logger.Error("Download link is null");
+            await DialogueService.CreateErrorMessageBox(MsgBox_Content_NoDownloadLink.Localize());
             return;
         }
 
@@ -72,15 +74,15 @@ public class ModService : IModService
 
         try
         {
-            var path = Path.Join(Settings!.Settings.ModsFolder, item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
-            await GitHubService!.DownloadModAsync(item.DownloadLink, path);
-            var downloadedMod = LocalService!.LoadMod(path)!;
-            var webMods = await GitHubService!.GetModsAsync();
-            var mod = webMods?.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
+            var path = Path.Join(Settings.Settings.ModsFolder, item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
+            await GitHubService.DownloadModAsync(item.DownloadLink, path);
+            var downloadedMod = LocalService.LoadMod(path)!;
+            var webMods = await GitHubService.GetModsAsync();
+            var mod = webMods.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
             mod.IsDisabled = downloadedMod.IsDisabled;
             mod.FileName = downloadedMod.FileName;
             mod.LocalVersion = downloadedMod.LocalVersion;
-            Logger?.Information("Install mod {Name} success", mod.Name);
+            Logger.Information("Install mod {Name} success", mod.Name);
             _sourceCache?.AddOrUpdate(mod);
         }
         catch (Exception ex)
@@ -110,10 +112,10 @@ public class ModService : IModService
             if (installedMod is not null) continue;
             try
             {
-                var path = Path.Join(Settings!.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
-                await GitHubService!.DownloadModAsync(dependency.DownloadLink, path);
-                var mod = LocalService!.LoadMod(path);
-                Logger?.Information("Install dependency {Name} success", mod!.Name);
+                var path = Path.Join(Settings.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
+                await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
+                var mod = LocalService.LoadMod(path);
+                Logger.Information("Install dependency {Name} success", mod!.Name);
                 _sourceCache!.AddOrUpdate(mod);
             }
             catch (Exception ex)
@@ -125,20 +127,20 @@ public class ModService : IModService
         var disabledDependencies = dependencies.Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
         if (disabledDependencies.Length > 0)
         {
-            var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x?.Name));
-            Settings!.Settings.AskEnableDependenciesWhenInstalling = await ChangeDependenciesState(
+            var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
+            Settings.Settings.AskEnableDependenciesWhenInstalling = await ChangeDependenciesState(
                 string.Format(MsgBox_Content_EnableDependency, item.Name, disabledDependencyNames),
-                disabledDependencies, Settings!.Settings.AskEnableDependenciesWhenInstalling, false);
+                disabledDependencies, Settings.Settings.AskEnableDependenciesWhenInstalling, false);
         }
 
         if (errors.Length > 0)
         {
-            Logger?.Error("Install mod {Name} failed: {Errors}", item.Name, errors.ToString());
-            await DialogueService!.CreateErrorMessageBox(errors.ToString());
+            Logger.Error("Install mod {Name} failed: {Errors}", item.Name, errors.ToString());
+            await DialogueService.CreateErrorMessageBox(errors.ToString());
             return;
         }
 
-        await DialogueService!.CreateMessageBox(MsgBox_Title_Success,
+        await DialogueService.CreateMessageBox(MsgBox_Title_Success,
             string.Format(MsgBox_Content_InstallModSuccess.Localize(), item.Name));
     }
 
@@ -146,15 +148,14 @@ public class ModService : IModService
     {
         if (item.State == UpdateState.Outdated)
         {
-            Logger?.Information("Updating mod {Name}", item.Name);
+            Logger.Information("Updating mod {Name}", item.Name);
             await OnInstallMod(item);
             return;
         }
-
-        var result = await DialogueService!.CreateConfirmMessageBox(
+        var result = await DialogueService.CreateConfirmMessageBox(
             string.Format(MsgBox_Content_ReinstallMod.Localize(), item.Name));
         if (!result) return;
-        Logger?.Information("Reinstalling mod {Name}", item.Name);
+        Logger.Information("Reinstalling mod {Name}", item.Name);
         await OnInstallMod(item);
     }
 
@@ -170,7 +171,7 @@ public class ModService : IModService
                     if (enabledReverseDependencies.Length > 0)
                     {
                         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
-                        var result = await DialogueService!.CreateConfirmMessageBox(
+                        var result = await DialogueService.CreateConfirmMessageBox(
                             string.Format(MsgBox_Content_DisableModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
                         if (!result)
                         {
@@ -178,9 +179,9 @@ public class ModService : IModService
                             return;
                         }
 
-                        Settings!.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
+                        Settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
                             string.Format(MsgBox_Content_DisableReverseDependency, item.Name), enabledReverseDependencies,
-                            Settings!.Settings.AskDisableDependenciesWhenDisabling, true);
+                            Settings.Settings.AskDisableDependenciesWhenDisabling, true);
                     }
 
                     break;
@@ -190,37 +191,37 @@ public class ModService : IModService
                     if (disabledDependencies.Length > 0)
                     {
                         var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
-                        Settings!.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
+                        Settings.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
                             string.Format(MsgBox_Content_EnableDependency, item.Name, disabledDependencyNames),
-                            disabledDependencies, Settings!.Settings.AskEnableDependenciesWhenEnabling, false);
+                            disabledDependencies, Settings.Settings.AskEnableDependenciesWhenEnabling, false);
                     }
 
                     break;
             }
 
             File.Move(
-                Path.Join(Settings!.Settings.ModsFolder, item.FileNameExtended(true)),
-                Path.Join(Settings!.Settings.ModsFolder, item.FileNameExtended()));
-            Logger?.Information("Change mod {Name} state to {State}", item.Name, item.IsDisabled ? "Disabled" : "Enabled");
+                Path.Join(Settings.Settings.ModsFolder, item.FileNameExtended(true)),
+                Path.Join(Settings.Settings.ModsFolder, item.FileNameExtended()));
+            Logger.Information("Change mod {Name} state to {State}", item.Name, item.IsDisabled ? "Disabled" : "Enabled");
         }
         catch (Exception ex)
         {
             switch (ex)
             {
                 case UnauthorizedAccessException:
-                    Logger?.Error(ex, "Change mod {Name} state failed", item?.Name);
-                    await DialogueService!.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
+                    Logger.Error(ex, "Change mod {Name} state failed", item.Name);
+                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
                         ex));
                     break;
 
                 case IOException:
-                    Logger?.Error(ex, "Change mod {Name} state failed", item?.Name);
-                    await DialogueService!.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
+                    Logger.Error(ex, "Change mod {Name} state failed", item.Name);
+                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
                     break;
 
                 default:
-                    Logger?.Error(ex, "Change mod {Name} state failed", item?.Name);
-                    await DialogueService!.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
+                    Logger.Error(ex, "Change mod {Name} state failed", item.Name);
+                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
                     break;
             }
 
@@ -232,17 +233,17 @@ public class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await DialogueService!.CreateMessageBox(MsgBox_Title_Notice,
+            await DialogueService.CreateMessageBox(MsgBox_Title_Notice,
                 string.Format(MsgBox_Content_DuplicateMods.Localize(), item.DuplicatedModNames), icon: Icon.Info);
-            await LocalService!.OpenModsFolder();
+            await LocalService.OpenModsFolder();
             return;
         }
 
-        var path = Path.Join(Settings!.Settings.ModsFolder, item.FileNameExtended());
+        var path = Path.Join(Settings.Settings.ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
-            Logger?.Error("Delete mod {Name} failed: File not found", item.Name);
-            await DialogueService!.CreateErrorMessageBox(MsgBox_Content_UninstallModFailed_Null);
+            Logger.Error("Delete mod {Name} failed: File not found", item.Name);
+            await DialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallModFailed_Null);
             return;
         }
 
@@ -252,28 +253,28 @@ public class ModService : IModService
                 .Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
             if (enabledReverseDependencies.Length > 0)
             {
-                var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
-                var result = await DialogueService!.CreateConfirmMessageBox(
+                var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
+                var result = await DialogueService.CreateConfirmMessageBox(
                     string.Format(MsgBox_Content_DeleteModConfirm, item.Name, enabledReverseDependencyNames));
                 if (!result) return;
-                Settings!.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
+                Settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
                     string.Format(MsgBox_Content_DisableReverseDependency, item.Name), enabledReverseDependencies,
-                    Settings!.Settings.AskDisableDependenciesWhenDeleting, true);
+                    Settings.Settings.AskDisableDependenciesWhenDeleting, true);
             }
 
             File.Delete(path);
             _sourceCache!.Remove(item);
-            Logger?.Information("Delete mod {Name} success", item.Name);
-            var webMods = await GitHubService!.GetModsAsync();
-            var webMod = webMods?.FirstOrDefault(x => x.Name == item.Name);
+            Logger.Information("Delete mod {Name} success", item.Name);
+            var webMods = await GitHubService.GetModsAsync();
+            var webMod = webMods.FirstOrDefault(x => x.Name == item.Name);
             if (webMod is not null)
             {
                 webMod.IsIncompatible = !CheckCompatible(webMod);
                 _sourceCache?.AddOrUpdate(webMod);
-                Logger?.Information("Update deleted mod info success");
+                Logger.Information("Update deleted mod info success");
             }
 
-            await DialogueService!.CreateMessageBox(MsgBox_Title_Success,
+            await DialogueService.CreateMessageBox(MsgBox_Title_Success,
                 string.Format(MsgBox_Content_UninstallModSuccess.Localize(), item.Name));
         }
         catch (Exception ex)
@@ -282,13 +283,13 @@ public class ModService : IModService
             {
                 case UnauthorizedAccessException:
                 case IOException:
-                    Logger?.Error(ex, "Delete mod {Name} failed", item.Name);
-                    await DialogueService!.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
+                    Logger.Error(ex, "Delete mod {Name} failed", item.Name);
+                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
                     break;
 
                 default:
-                    Logger?.Error(ex, "Delete mod {Name} failed", item.Name);
-                    await DialogueService!.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
+                    Logger.Error(ex, "Delete mod {Name} failed", item.Name);
+                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
                     break;
             }
         }
@@ -297,7 +298,7 @@ public class ModService : IModService
     private async Task LoadModsToUI(List<Mod> localMods, List<Mod> webMods)
     {
         var isTracked = new bool[localMods.Count];
-        foreach (var webMod in webMods!)
+        foreach (var webMod in webMods)
         {
             var localMod = localMods.FirstOrDefault(x => x.Name == webMod.Name);
             var localModIdx = localMods.IndexOf(localMod!);
@@ -355,7 +356,7 @@ public class ModService : IModService
                 localMod.IsDuplicated = true;
                 localMod.DuplicatedModNames =
                     string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
-                Logger?.Information("Found duplicated mod {DuplicateMods}", localMod.DuplicatedModNames);
+                Logger.Information("Found duplicated mod {DuplicateMods}", localMod.DuplicatedModNames);
             }
 
             _sourceCache?.AddOrUpdate(localMods[i]);
@@ -364,27 +365,27 @@ public class ModService : IModService
 
     private async Task CheckModToolsInstall(Mod mod)
     {
-        if (Settings!.Settings.AskInstallMuseDashModTools != AskType.Always) return;
+        if (Settings.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
-        var result = await DialogueService!.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
+        var result = await DialogueService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
         if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
-        else if (result == MsgBox_Button_NoNoAsk) Settings!.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
+        else if (result == MsgBox_Button_NoNoAsk) Settings.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
 
     private IEnumerable<Mod> SearchDependencies(string modName)
     {
-        var dependencyNames = _sourceCache?.Lookup(modName).Value?.DependencyNames.Split("\r\n");
-        Logger?.Information("Search dependencies of {ModName}: {DependencyNames}", modName, dependencyNames);
+        var dependencyNames = _sourceCache?.Lookup(modName).Value.DependencyNames.Split("\r\n");
+        Logger.Information("Search dependencies of {ModName}: {DependencyNames}", modName, dependencyNames);
         return dependencyNames?.Where(x => _sourceCache!.Lookup(x).HasValue)
             .Select(x => _sourceCache!.Lookup(x).Value)!;
     }
 
     private IEnumerable<Mod> SearchReverseDependencies(string modName)
     {
-        var reverseDependencyNames = _sourceCache?.Items.Where(x => x!.DependencyNames.Split("\r\n").Contains(modName))
-            .Select(x => x?.Name).ToArray();
-        Logger?.Information("Search reverse dependencies of {ModName}: {ReverseDependencyNames}", modName, reverseDependencyNames);
-        return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x?.Name))!;
+        var reverseDependencyNames = _sourceCache?.Items.Where(x => x.DependencyNames.Split("\r\n").Contains(modName))
+            .Select(x => x.Name).ToArray();
+        Logger.Information("Search reverse dependencies of {ModName}: {ReverseDependencyNames}", modName, reverseDependencyNames);
+        return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x.Name))!;
     }
 
     private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod?> dependencies, AskType askType, bool turnOff)
@@ -392,7 +393,7 @@ public class ModService : IModService
         switch (askType)
         {
             case AskType.Always:
-                var askResult = await DialogueService!.CreateCustomConfirmMessageBox(content, 4);
+                var askResult = await DialogueService.CreateCustomConfirmMessageBox(content, 4);
                 if (askResult == MsgBox_Button_Yes)
                 {
                     await ChangeState();

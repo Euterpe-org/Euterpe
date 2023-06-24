@@ -28,7 +28,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     public IModManageViewModel ModManageViewModel { get; init; }
     public List<Language> AvailableLanguages => LocalizationService.AvailableLanguages;
 
-    public SettingsViewModel(ISettingService settingService, ILogger logger)
+    public SettingsViewModel(ILogger logger, ISettingService settingService)
     {
         _settingService = settingService;
         _logger = logger;
@@ -52,7 +52,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     {
         _logger.Information("Choose path button clicked");
         var changed = await _settingService.OnChoosePath();
-        if (changed) await ModManageViewModel.Initialize();
+        if (changed) ModManageViewModel.Initialize();
     }
 
     #region OnPropertyChanged

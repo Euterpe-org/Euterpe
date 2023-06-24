@@ -1,4 +1,4 @@
-// #define WINDOWS
+#define WINDOWS
 
 using System;
 using System.Diagnostics;

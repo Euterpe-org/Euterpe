@@ -102,25 +102,25 @@
   <data name="FolderDialog_Title" xml:space="preserve">
         <value>Selecciona la carpeta de Muse Dash</value>
     </data>
-  <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
+    <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
         <value>¡La ruta seleccionada no es válida! Prueba de nuevo</value>
     </data>
-  <data name="MsgBox_Content_NullPath" xml:space="preserve">
+    <data name="MsgBox_Content_NullPath" xml:space="preserve">
         <value>Tu carpeta de Muse Dash está vacía\nSelecciona nuevamente la carpeta correcta</value>
     </data>
-  <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
+    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
         <value>¡No seleccionaste la carpeta de Muse Dash!\nSelecciona donde está la carpeta del juego</value>
     </data>
-  <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
-        <value>¡Aviso de mods corruptos!\nPor favor, borra cualquier mod que tengas instalado que pese 0kb, y reinicia el programa</value>
+    <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
+        <value>¡Aviso de mods corruptos!\nPor favor, borra cualquier mod que tengas instalado que pese 0KB, y reinicia el programa</value>
     </data>
-  <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
+    <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
         <value>Comprobación de parche fallida\n¿Tienes conexión a internet?</value>
     </data>
-  <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
+    <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
         <value>¡No se pudo encontrar el actualizador del programa!\nAsegúrate de haber instalado el programa de forma correcta</value>
     </data>
-  <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
+    <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
         <value>No se pudo copiar Updater.exe a la carpeta\n{0}</value>
     </data>
   <data name="MsgBox_Content_NoExeFound" xml:space="preserve">

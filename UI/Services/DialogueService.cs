@@ -26,7 +26,6 @@ public class DialogueService : IDialogueService
                 ContentMessage = content,
                 ButtonDefinitions = button,
                 Icon = icon,
-                FontFamily = "Microsoft YaHei,Simsun",
                 Topmost = true,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
@@ -58,7 +57,6 @@ public class DialogueService : IDialogueService
                 ContentMessage = content,
                 ButtonDefinitions = buttonDefinitions,
                 Icon = icon,
-                FontFamily = "Microsoft YaHei,Simsun",
                 CanResize = true,
                 Topmost = true,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen

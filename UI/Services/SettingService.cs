@@ -15,15 +15,23 @@ using MuseDashModToolsUI.Models;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
+#pragma warning disable CS8618
+
 namespace MuseDashModToolsUI.Services;
 
 public class SettingService : ISettingService
 {
-    public ILogger? Logger { get; init; }
-    public Lazy<ISettingsViewModel>? SettingsViewModel { get; init; }
-    public IDialogueService? DialogueService { get; init; }
-    public SettingService() => Task.Run(InitializeLanguageAndPath);
-    public Setting Settings { get; private set; } = new();
+    private readonly ILogger _logger;
+    public IDialogueService DialogueService { get; init; }
+    public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
+
+    public SettingService(ILogger logger)
+    {
+        _logger = logger;
+        Task.Run(InitializeLanguageAndPath);
+    }
+
+    public Setting Settings { get; set; } = new();
 
     public async Task InitializeSettings()
     {
@@ -32,8 +40,8 @@ public class SettingService : ISettingService
         {
             if (!File.Exists("Settings.json"))
             {
-                Logger?.Error("Settings.json not found, creating new one");
-                await DialogueService!.CreateErrorMessageBox("Warning", MsgBox_Content_ChoosePath.Localize());
+                _logger.Error("Settings.json not found, creating new one");
+                await DialogueService.CreateErrorMessageBox("Warning", MsgBox_Content_ChoosePath.Localize());
                 await OnChoosePath();
                 return;
             }
@@ -42,8 +50,8 @@ public class SettingService : ISettingService
             var settings = JsonSerializer.Deserialize<Setting>(text)!;
             if (string.IsNullOrEmpty(settings.MuseDashFolder))
             {
-                Logger?.Error("Settings.json stored path is empty, asking user to choose path");
-                await DialogueService!.CreateErrorMessageBox(MsgBox_Title_Warning, MsgBox_Content_NullPath.Localize());
+                _logger.Error("Settings.json stored path is empty, asking user to choose path");
+                await DialogueService.CreateErrorMessageBox(MsgBox_Title_Warning, MsgBox_Content_NullPath.Localize());
                 await OnChoosePath();
                 await InitializeSettings();
             }
@@ -72,8 +80,8 @@ public class SettingService : ISettingService
         }
         catch (Exception ex)
         {
-            Logger?.Error(ex, "Error occurred while initializing settings");
-            await DialogueService!.CreateErrorMessageBox(ex.ToString());
+            _logger.Error(ex, "Error occurred while initializing settings");
+            await DialogueService.CreateErrorMessageBox(ex.ToString());
         }
     }
 
@@ -94,8 +102,8 @@ public class SettingService : ISettingService
                     return false;
                 }
 
-                Logger?.Error("Invalid path, showing error message box");
-                await DialogueService!.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
+                _logger.Error("Invalid path, showing error message box");
+                await DialogueService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
                 continue;
             }
 
@@ -114,7 +122,7 @@ public class SettingService : ISettingService
             await File.WriteAllTextAsync("Settings.json", json);
             Logger?.Information("Settings saved to Settings.json");
 
-            SettingsViewModel?.Value.Initialize();
+            SettingsViewModel.Value.Initialize();
             return true;
         }
     }
