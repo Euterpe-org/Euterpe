@@ -21,7 +21,7 @@ namespace MuseDashModToolsUI.Services;
 
 public class LocalService : ILocalService
 {
-    public IDialogueService DialogueService { get; init; }
+    public IMessageBoxService MessageBoxService { get; init; }
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
     public ILogger Logger { get; init; }
     public ISettingService SettingService { get; init; }
@@ -64,7 +64,7 @@ public class LocalService : ILocalService
         if (!File.Exists(exePath) || !File.Exists(gameAssemblyPath))
         {
             Logger.Error("No game files found, showing error message box...");
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_NoExeFound.Localize());
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoExeFound.Localize());
             await SettingService.OnChoosePath();
         }
 
@@ -73,7 +73,7 @@ public class LocalService : ILocalService
             var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
             if (version is not "2019.4.32.16288752")
             {
-                await DialogueService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
+                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
                 IsValidPath = false;
                 return IsValidPath;
             }
@@ -111,7 +111,7 @@ public class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.Error(ex, "Exe verify failed, showing error message box...");
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed.Localize());
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed.Localize());
             await SettingService.OnChoosePath();
             IsValidPath = false;
             return IsValidPath;
@@ -137,7 +137,7 @@ public class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.Fatal(ex, "Read game version failed, showing error message box...");
-            await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed.Localize(), bundlePath));
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed.Localize(), bundlePath));
             Environment.Exit(0);
         }
 
@@ -149,7 +149,7 @@ public class LocalService : ILocalService
         var melonLoaderFolder = Path.Join(SettingService.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(SettingService.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
-        var install = await DialogueService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader.Localize());
+        var install = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader.Localize());
         if (install)
             await OnInstallMelonLoader();
     }
@@ -165,7 +165,7 @@ public class LocalService : ILocalService
     public async Task OnUninstallMelonLoader()
     {
         if (!IsValidPath) return;
-        var result = await DialogueService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize());
+        var result = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize());
         if (!result) return;
         var melonLoaderFolder = Path.Join(SettingService.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(SettingService.Settings.MuseDashFolder, "version.dll");
@@ -179,18 +179,18 @@ public class LocalService : ILocalService
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
                 Logger.Information("MelonLoader uninstalled successfully");
-                await DialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
+                await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
             }
             catch (Exception ex)
             {
                 Logger.Error(ex, "MelonLoader uninstall failed, showing error message box...");
-                await DialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed.Localize());
+                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed.Localize());
             }
         }
         else
         {
             Logger.Error("MelonLoader folder not found, showing error message box...");
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_NoMelonLoaderFolder.Localize());
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoMelonLoaderFolder.Localize());
         }
     }
 
@@ -199,7 +199,7 @@ public class LocalService : ILocalService
         if (!IsValidPath)
         {
             Logger.Error("Not valid path, showing error message box...");
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             await SettingService.OnChoosePath();
             return;
         }
@@ -217,7 +217,7 @@ public class LocalService : ILocalService
         if (!IsValidPath)
         {
             Logger.Error("Not valid path, showing error message box...");
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             await SettingService.OnChoosePath();
             return;
         }

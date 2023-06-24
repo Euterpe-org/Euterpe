@@ -25,7 +25,7 @@ public class ModService : IModService
 
     private ReadOnlyObservableCollection<Mod>? _mods;
     private SourceCache<Mod, string>? _sourceCache;
-    public IDialogueService DialogueService { get; init; }
+    public IMessageBoxService MessageBoxService { get; init; }
     public IGitHubService GitHubService { get; init; }
     public ILocalService LocalService { get; init; }
     public ILogger Logger { get; init; }
@@ -51,7 +51,7 @@ public class ModService : IModService
         }
         catch (Exception ex)
         {
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_BrokenMods.Localize());
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_BrokenMods.Localize());
             await LocalService.OpenModsFolder();
             Logger.Fatal(ex, "Load local mods failed");
             Environment.Exit(0);
@@ -66,7 +66,7 @@ public class ModService : IModService
         if (item.DownloadLink is null)
         {
             Logger.Error("Download link is null");
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_NoDownloadLink.Localize());
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoDownloadLink.Localize());
             return;
         }
 
@@ -136,11 +136,11 @@ public class ModService : IModService
         if (errors.Length > 0)
         {
             Logger.Error("Install mod {Name} failed: {Errors}", item.Name, errors.ToString());
-            await DialogueService.CreateErrorMessageBox(errors.ToString());
+            await MessageBoxService.CreateErrorMessageBox(errors.ToString());
             return;
         }
 
-        await DialogueService.CreateMessageBox(MsgBox_Title_Success,
+        await MessageBoxService.CreateMessageBox(MsgBox_Title_Success,
             string.Format(MsgBox_Content_InstallModSuccess.Localize(), item.Name));
     }
 
@@ -153,7 +153,7 @@ public class ModService : IModService
             return;
         }
 
-        var result = await DialogueService.CreateConfirmMessageBox(
+        var result = await MessageBoxService.CreateConfirmMessageBox(
             string.Format(MsgBox_Content_ReinstallMod.Localize(), item.Name));
         if (!result) return;
         Logger.Information("Reinstalling mod {Name}", item.Name);
@@ -172,7 +172,7 @@ public class ModService : IModService
                     if (enabledReverseDependencies.Length > 0)
                     {
                         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
-                        var result = await DialogueService.CreateConfirmMessageBox(
+                        var result = await MessageBoxService.CreateConfirmMessageBox(
                             string.Format(MsgBox_Content_DisableModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
                         if (!result)
                         {
@@ -211,18 +211,18 @@ public class ModService : IModService
             {
                 case UnauthorizedAccessException:
                     Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
+                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
                         ex));
                     break;
 
                 case IOException:
                     Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
                     break;
 
                 default:
                     Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
                     break;
             }
 
@@ -234,7 +234,7 @@ public class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await DialogueService.CreateMessageBox(MsgBox_Title_Notice,
+            await MessageBoxService.CreateMessageBox(MsgBox_Title_Notice,
                 string.Format(MsgBox_Content_DuplicateMods.Localize(), item.DuplicatedModNames), icon: Icon.Info);
             await LocalService.OpenModsFolder();
             return;
@@ -244,7 +244,7 @@ public class ModService : IModService
         if (!File.Exists(path))
         {
             Logger.Error("Delete mod {Name} failed: File not found", item.Name);
-            await DialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallModFailed_Null);
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UninstallModFailed_Null);
             return;
         }
 
@@ -255,7 +255,7 @@ public class ModService : IModService
             if (enabledReverseDependencies.Length > 0)
             {
                 var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
-                var result = await DialogueService.CreateConfirmMessageBox(
+                var result = await MessageBoxService.CreateConfirmMessageBox(
                     string.Format(MsgBox_Content_DeleteModConfirm, item.Name, enabledReverseDependencyNames));
                 if (!result) return;
                 Settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
@@ -275,7 +275,7 @@ public class ModService : IModService
                 Logger.Information("Update deleted mod info success");
             }
 
-            await DialogueService.CreateMessageBox(MsgBox_Title_Success,
+            await MessageBoxService.CreateMessageBox(MsgBox_Title_Success,
                 string.Format(MsgBox_Content_UninstallModSuccess.Localize(), item.Name));
         }
         catch (Exception ex)
@@ -285,12 +285,12 @@ public class ModService : IModService
                 case UnauthorizedAccessException:
                 case IOException:
                     Logger.Error(ex, "Delete mod {Name} failed", item.Name);
-                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
                     break;
 
                 default:
                     Logger.Error(ex, "Delete mod {Name} failed", item.Name);
-                    await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
                     break;
             }
         }
@@ -368,7 +368,7 @@ public class ModService : IModService
     {
         if (Settings.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
-        var result = await DialogueService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
+        var result = await MessageBoxService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
         if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
         else if (result == MsgBox_Button_NoNoAsk) Settings.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
@@ -394,7 +394,7 @@ public class ModService : IModService
         switch (askType)
         {
             case AskType.Always:
-                var askResult = await DialogueService.CreateCustomConfirmMessageBox(content, 4);
+                var askResult = await MessageBoxService.CreateCustomConfirmMessageBox(content, 4);
                 if (askResult == MsgBox_Button_Yes)
                 {
                     await ChangeState();
