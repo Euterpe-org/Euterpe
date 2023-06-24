@@ -31,19 +31,22 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         if (settingService.Settings.LanguageCode is not null)
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(settingService.Settings.LanguageCode);
 
-        Task.Run(() =>
+        Tabs = new List<TabView>
         {
-            Tabs = new List<TabView>
-            {
-                new((ViewModelBase)modManageViewModel, XAML_Tab_ModManage, "ModManage"),
-                new((ViewModelBase)settingsViewModel, XAML_Tab_Setting, "Setting")
-            };
-            SwitchTab();
-            GitHubService?.CheckUpdates();
-            Logger?.Information("Main Window initialized");
-        });
+            new((ViewModelBase)modManageViewModel, XAML_Tab_ModManage, "ModManage"),
+            new((ViewModelBase)settingsViewModel, XAML_Tab_Setting, "Setting")
+        };
+
+        Task.Run(Initialize);
 
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
+    }
+
+    private void Initialize()
+    {
+        SwitchTab();
+        GitHubService?.CheckUpdates();
+        Logger?.Information("Main Window initialized");
     }
 
     [RelayCommand]

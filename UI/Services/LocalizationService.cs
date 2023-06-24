@@ -45,7 +45,6 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
         var defaultCulture = CultureInfo.GetCultureInfo("en");
 
-
         foreach (var culture in cultures)
         {
             if (culture.Equals(CultureInfo.InvariantCulture))
