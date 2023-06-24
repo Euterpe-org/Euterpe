@@ -183,7 +183,7 @@ public class LocalService : ILocalService
             }
             catch (Exception ex)
             {
-                Logger.Error("MelonLoader uninstall failed, showing error message box...");
+                Logger.Error(ex, "MelonLoader uninstall failed, showing error message box...");
                 await DialogueService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed.Localize());
             }
         }

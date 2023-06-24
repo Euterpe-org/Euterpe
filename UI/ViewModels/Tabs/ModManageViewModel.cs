@@ -77,7 +77,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     }
 
     [RelayCommand]
-    private async Task OnToggleMod(Mod? item)
+    private async Task OnToggleMod(Mod item)
     {
         _watcher.EnableRaisingEvents = false;
         await _modService.OnToggleMod(item);
