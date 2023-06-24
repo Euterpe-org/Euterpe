@@ -2,5 +2,7 @@
 
 public interface IDialogService
 {
-    void ShowDialog();
+    void ShowDialog(object data);
+    void ShowDialog<T>();
+    void CloseDialog();
 }

@@ -1,12 +1,19 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+        xmlns:contract="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
-        x:Class="MuseDashModToolsUI.Views.DownloadWindow"
-        x:DataType="vm:DownloadWindowViewModel"
+        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
+        xmlns:dialogs="clr-namespace:MuseDashModToolsUI.ViewModels.Dialogs"
+        x:Class="MuseDashModToolsUI.Views.Dialogs.DownloadWindow"
+        x:DataType="dialogs:DownloadWindowViewModel"
+        DataContext="{ext:DependencyInjection Type=contract:IDownloadWindowViewModel}"
         x:CompileBindings="True"
         Title="DownloadWindow"
-        Width="320">
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        WindowStartupLocation="CenterScreen"
+        Width="320"
+        Height="220">
 
     <Grid RowDefinitions="120,100">
         <Image Grid.Row="0"
@@ -14,6 +21,7 @@
                Margin="0,20,0,0"
                Width="50"
                Source="/Assets/ML_Icon.png" />
+
         <Border Grid.Row="0"
                 VerticalAlignment="Center"
                 Margin="0,60,0,10">

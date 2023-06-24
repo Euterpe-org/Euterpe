@@ -13,7 +13,7 @@ using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
 
-namespace MuseDashModToolsUI.ViewModels;
+namespace MuseDashModToolsUI.ViewModels.Dialogs;
 
 public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowViewModel
 {
