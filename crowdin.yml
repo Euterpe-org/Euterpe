@@ -1,3 +1,9 @@
 files:
   - source: /UI/Localization/Resources.resx
     translation: /UI/Localization/%file_name%.%osx_locale%.resx
+targets:
+  - name: Resx
+    sources:
+      - '*.resx'
+    file: '%osx_locale%.resx'
+    format: crowdin-resx
