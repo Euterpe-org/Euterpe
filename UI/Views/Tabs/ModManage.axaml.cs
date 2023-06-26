@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace MuseDashModToolsUI.Views.Tabs;
 
-public partial class ModManageView : UserControl
+public partial class ModManage : UserControl
 {
-    public ModManageView()
+    public ModManage()
     {
         InitializeComponent();
         DrawerList.SelectedIndex = 0;

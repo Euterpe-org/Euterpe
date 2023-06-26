@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace MuseDashModToolsUI.Views;
+namespace MuseDashModToolsUI.Views.Dialogs;
 
 public partial class ProjectWindow : Window
 {

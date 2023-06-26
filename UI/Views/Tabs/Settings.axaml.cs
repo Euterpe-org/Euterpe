@@ -2,9 +2,9 @@
 
 namespace MuseDashModToolsUI.Views.Tabs;
 
-public partial class SettingsView : UserControl
+public partial class Settings : UserControl
 {
-    public SettingsView()
+    public Settings()
     {
         InitializeComponent();
     }

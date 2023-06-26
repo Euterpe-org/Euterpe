@@ -12,7 +12,7 @@ using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
-public class DialogueService : IDialogueService
+public class MessageBoxService : IMessageBoxService
 {
     public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok,
         Icon icon = Icon.Success)

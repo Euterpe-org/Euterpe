@@ -32,29 +32,12 @@
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\Resources.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-        </Compile>
-        <Compile Update="Views\Tabs\ModManageView.axaml.cs">
-            <DependentUpon>ModManageView.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Tabs\SettingsView.axaml.cs">
-            <DependentUpon>SettingsView.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
     </ItemGroup>
+    
     <ItemGroup>
         <Content Include="Assets\Icon.ico"/>
     </ItemGroup>
-    <ItemGroup>
-        <!--This helps with theme dll-s trimming.
-    If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme Default theme will be trimmed from the output and vice versa.
-    https://github.com/AvaloniaUI/Avalonia/issues/5593 -->
-        <TrimmableAssembly Include="Avalonia.Themes.Fluent"/>
-        <TrimmableAssembly Include="Avalonia.Themes.Default"/>
-    </ItemGroup>
+
     <ItemGroup>
         <PackageReference Include="AssetsTools.NET" Version="3.0.0-preview3"/>
         <PackageReference Include="Autofac" Version="7.0.1"/>

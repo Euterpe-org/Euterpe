@@ -7,7 +7,7 @@
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
-             x:Class="MuseDashModToolsUI.Views.Tabs.SettingsView"
+             x:Class="MuseDashModToolsUI.Views.Tabs.Settings"
              x:DataType="tabs:SettingsViewModel"
              DataContext="{ext:DependencyInjection Type=contract:ISettingsViewModel}">
 
