@@ -17,8 +17,7 @@ public static class Bootstrapper
         var builder = new ContainerBuilder();
         builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
         builder.RegisterInstance(new HttpClient());
-        builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
-        builder.RegisterType<DialogService>().As<IDialogService>().SingleInstance();
+        builder.RegisterType<DialogueService>().As<IDialogueService>();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
         builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();

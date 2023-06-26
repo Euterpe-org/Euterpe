@@ -5,7 +5,7 @@ using MessageBox.Avalonia.Models;
 
 namespace MuseDashModToolsUI.Contracts;
 
-public interface IMessageBoxService
+public interface IDialogueService
 {
     Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.Success);
     Task<ButtonResult> CreateErrorMessageBox(string title, string content);

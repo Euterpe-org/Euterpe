@@ -27,7 +27,7 @@ public class GitHubService : IGitHubService
     private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
     public HttpClient Client { get; init; }
-    public IMessageBoxService MessageBoxService { get; init; }
+    public IDialogueService DialogueService { get; init; }
     public ILogger Logger { get; init; }
 
     public async Task<List<Mod>> GetModsAsync()
@@ -148,13 +148,13 @@ public class GitHubService : IGitHubService
             if (version <= currentVersion)
             {
                 if (userClick)
-                    await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_LatestVersion.Localize());
+                    await DialogueService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_LatestVersion.Localize());
                 return;
             }
 
             var title = doc.RootElement.GetProperty("name").GetString();
             var body = doc.RootElement.GetProperty("body").GetString();
-            var update = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice,
+            var update = await DialogueService.CreateConfirmMessageBox(MsgBox_Title_Notice,
                 string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body));
 
             if (!update) return;
@@ -185,7 +185,7 @@ public class GitHubService : IGitHubService
         }
         catch
         {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CheckUpdateFailed.Localize());
+            await DialogueService.CreateErrorMessageBox(MsgBox_Content_CheckUpdateFailed.Localize());
         }
     }
 
@@ -197,7 +197,7 @@ public class GitHubService : IGitHubService
         if (!File.Exists(updaterExePath))
         {
             Logger.Error("Updater.exe not found");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
+            await DialogueService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
             return;
         }
 
@@ -215,7 +215,7 @@ public class GitHubService : IGitHubService
         catch (Exception ex)
         {
             Logger.Information("Copy Updater.exe to Update folder failed: {Exception}", ex.ToString());
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
+            await DialogueService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
         }
 
         Process.Start(updaterTargetPath, launchArgs);
