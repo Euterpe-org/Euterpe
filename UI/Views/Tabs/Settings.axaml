@@ -82,6 +82,23 @@
 
         <controls:Card Grid.Row="2">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
+                <ComboBox Classes="Filled"
+                          MinWidth="180"
+                          ItemsSource="{Binding DownloadSources}"
+                          SelectedIndex="{Binding CurrentDownloadSource}" />
+            </StackPanel>
+        </controls:Card>
+
+        <controls:Card Grid.Row="3">
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
+                <ComboBox Classes="Filled" />
+            </StackPanel>
+        </controls:Card>
+
+        <controls:Card Grid.Row="4">
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
                 <ComboBox Classes="Filled"
                           MinWidth="150"
@@ -90,7 +107,7 @@
             </StackPanel>
         </controls:Card>
 
-        <controls:Card Grid.Row="3">
+        <controls:Card Grid.Row="5">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
                 <ComboBox Classes="Filled"
@@ -100,7 +117,7 @@
             </StackPanel>
         </controls:Card>
 
-        <controls:Card Grid.Row="4">
+        <controls:Card Grid.Row="6">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
                 <ComboBox Classes="Filled"
@@ -110,7 +127,7 @@
             </StackPanel>
         </controls:Card>
 
-        <controls:Card Grid.Row="5">
+        <controls:Card Grid.Row="7">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
                 <ComboBox Classes="Filled"

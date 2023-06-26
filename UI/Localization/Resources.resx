@@ -301,4 +301,19 @@
     <data name="XAML_AskType_No" xml:space="preserve">
         <value>No</value>
     </data>
+    <data name="XAML_DownloadSource" xml:space="preserve">
+        <value>Download Source: </value>
+    </data>
+    <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github Mirror</value>
+    </data>
+    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+    <data name="XAML_Font" xml:space="preserve">
+        <value>Font</value>
+    </data>
 </root>

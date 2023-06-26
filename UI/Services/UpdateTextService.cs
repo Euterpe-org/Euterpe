@@ -20,5 +20,6 @@ public class UpdateTextService : IUpdateTextService
     public void ChangeOptionName()
     {
         SettingsViewModel.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
+        SettingsViewModel.DownloadSources = new[] { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
     }
 }

@@ -28,7 +28,7 @@ public class SettingService : ISettingService
     public SettingService(ILogger logger)
     {
         _logger = logger;
-        Task.Run(InitializeLanguageAndPath);
+        Task.Run(LoadSavedSetting);
     }
 
     public Setting Settings { get; set; } = new();
@@ -127,7 +127,7 @@ public class SettingService : ISettingService
         }
     }
 
-    private async Task InitializeLanguageAndPath()
+    private async Task LoadSavedSetting()
     {
         if (!File.Exists("Settings.json"))
             return;
@@ -135,6 +135,11 @@ public class SettingService : ISettingService
         var setting = JsonNode.Parse(text);
         Settings.LanguageCode = setting?["LanguageCode"]?.ToString();
         Settings.MuseDashFolder = setting?["MuseDashFolder"]?.ToString();
-        _logger.Information("Language and Path loaded from Settings.json");
+        Settings.DownloadSource = Enum.Parse<DownloadSources>(setting?["DownloadSource"]?.ToString()!);
+        Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(setting?["AskEnableDependenciesWhenInstalling"]?.ToString()!);
+        Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(setting?["AskEnableDependenciesWhenEnabling"]?.ToString()!);
+        Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(setting?["AskDisableDependenciesWhenDeleting"]?.ToString()!);
+        Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(setting?["AskDisableDependenciesWhenDisabling"]?.ToString()!);
+        _logger.Information("Saved setting loaded from Settings.json");
     }
 }

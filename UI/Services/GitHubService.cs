@@ -26,9 +26,18 @@ public class GitHubService : IGitHubService
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
     private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
+
+    private Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
+    {
+        { DownloadSources.Github, PrimaryLink },
+        { DownloadSources.GithubMirror, SecondaryLink },
+        { DownloadSources.Gitee, ThirdLink }
+    };
+
     public HttpClient Client { get; init; }
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
+    public ISettingService SettingService { get; init; }
 
     public async Task<List<Mod>> GetModsAsync()
     {

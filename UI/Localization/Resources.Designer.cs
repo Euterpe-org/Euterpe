@@ -609,11 +609,56 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download Source: .
+        /// </summary>
+        internal static string XAML_DownloadSource {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gitee.
+        /// </summary>
+        internal static string XAML_DownloadSource_Gitee {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource_Gitee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Github.
+        /// </summary>
+        internal static string XAML_DownloadSource_Github {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource_Github", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Github Mirror.
+        /// </summary>
+        internal static string XAML_DownloadSource_GithubMirror {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource_GithubMirror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
         internal static string XAML_Enabled {
             get {
                 return ResourceManager.GetString("XAML_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font.
+        /// </summary>
+        internal static string XAML_Font {
+            get {
+                return ResourceManager.GetString("XAML_Font", resourceCulture);
             }
         }
         

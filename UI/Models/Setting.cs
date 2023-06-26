@@ -16,10 +16,11 @@ public class Setting
     public string ModsFolder =>
         !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "Mods") : string.Empty;
 
+    public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;
-    public AskType AskDisableDependenciesWhenDeleting { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenEnabling { get; set; } = AskType.Always;
+    public AskType AskDisableDependenciesWhenDeleting { get; set; } = AskType.Always;
     public AskType AskDisableDependenciesWhenDisabling { get; set; } = AskType.Always;
 
     public Setting Clone()
@@ -33,4 +34,11 @@ public enum AskType
     Always,
     YesAndNoAsk,
     NoAndNoAsk
+}
+
+public enum DownloadSources
+{
+    Github,
+    GithubMirror,
+    Gitee
 }

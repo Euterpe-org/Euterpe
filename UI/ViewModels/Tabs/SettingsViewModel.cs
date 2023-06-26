@@ -18,9 +18,14 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private readonly ILogger _logger;
     private readonly ISettingService _settingService;
     [ObservableProperty] private string[] _askTypes = { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
+    [ObservableProperty] private int _currentDownloadSource;
     [ObservableProperty] private Language? _currentLanguage;
     [ObservableProperty] private int _disableDependenciesWhenDeleting;
     [ObservableProperty] private int _disableDependenciesWhenDisabling;
+
+    [ObservableProperty] private string[] _downloadSources =
+        { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
+
     [ObservableProperty] private int _enableDependenciesWhenEnabling;
     [ObservableProperty] private int _enableDependenciesWhenInstalling;
     [ObservableProperty] private string? _path;
