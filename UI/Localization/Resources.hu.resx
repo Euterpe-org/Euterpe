@@ -285,8 +285,8 @@
   <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>Közreműködés</value>
     </data>
-  <data name="XAML_Language" xml:space="preserve">
-        <value>Nyelv</value>
+    <data name="XAML_Language" xml:space="preserve">
+        <value>Nyelv: </value>
     </data>
   <data name="XAML_Apply" xml:space="preserve">
         <value>Alkalmaz</value>

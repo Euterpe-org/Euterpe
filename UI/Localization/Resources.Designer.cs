@@ -654,7 +654,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Font.
+        ///   Looks up a localized string similar to Font:.
         /// </summary>
         internal static string XAML_Font {
             get {
@@ -717,7 +717,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language.
+        ///   Looks up a localized string similar to Language: .
         /// </summary>
         internal static string XAML_Language {
             get {

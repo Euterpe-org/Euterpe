@@ -287,7 +287,7 @@
         <value>Help Translate</value>
     </data>
     <data name="XAML_Language" xml:space="preserve">
-        <value>Language</value>
+        <value>Language: </value>
     </data>
     <data name="XAML_Apply" xml:space="preserve">
         <value>Apply</value>
@@ -314,6 +314,6 @@
         <value>Gitee</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
-        <value>Font</value>
+        <value>Font:</value>
     </data>
 </root>

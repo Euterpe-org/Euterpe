@@ -285,8 +285,8 @@
   <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>¡Ayuda a traducir!</value>
     </data>
-  <data name="XAML_Language" xml:space="preserve">
-        <value>Idioma</value>
+    <data name="XAML_Language" xml:space="preserve">
+        <value>Idioma: </value>
     </data>
   <data name="XAML_Apply" xml:space="preserve">
         <value>Aplicar</value>

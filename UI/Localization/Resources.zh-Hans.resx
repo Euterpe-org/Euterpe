@@ -286,7 +286,7 @@
         <value>帮助翻译</value>
     </data>
     <data name="XAML_Language" xml:space="preserve">
-        <value>语言</value>
+        <value>语言：</value>
     </data>
     <data name="XAML_Apply" xml:space="preserve">
         <value>应用</value>
@@ -313,6 +313,6 @@
         <value>Github 镜像</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
-        <value>字体</value>
+        <value>字体：</value>
     </data>
 </root>
