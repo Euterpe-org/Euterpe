@@ -10,16 +10,16 @@ public class DialogService : IDialogService
 {
     private Window? _dialog;
 
-    public void ShowDialog(object viewModel)
+    public void ShowDialog(object data)
     {
-        var name = viewModel.GetType().FullName!.Replace("ViewModel", "View")[..^4];
+        var name = data.GetType().FullName!.Replace("ViewModel", "View")[..^4];
         _dialog = CreateWindow(name);
     }
 
-    public void ShowDialog(object viewModel, EventHandler openedEventHandler)
+    public void ShowDialog(object data, EventHandler openedEventHandler)
     {
-        ShowDialog(viewModel);
-        openedEventHandler.Invoke(viewModel, EventArgs.Empty);
+        ShowDialog(data);
+        openedEventHandler.Invoke(data, EventArgs.Empty);
     }
 
     public void ShowDialog<T>()
@@ -40,19 +40,13 @@ public class DialogService : IDialogService
         _dialog = null;
     }
 
-    public void CloseDialog(EventHandler closedEventHandler)
-    {
-        CloseDialog();
-        closedEventHandler.Invoke(null, EventArgs.Empty);
-    }
-
     private static Window? CreateWindow(string name)
     {
         var type = Type.GetType(name);
         if (type is null) return null;
         var dialog = (Window)Activator.CreateInstance(type)!;
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            dialog.Show();
+            dialog.ShowDialog(desktop.MainWindow!);
         return dialog;
     }
 }

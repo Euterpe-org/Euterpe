@@ -9,5 +9,6 @@
 
     <Application.Styles>
         <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Grey" SecondaryColor="Indigo" />
+        <StyleInclude Source="avares://DialogHost.Avalonia/Styles.xaml" />
     </Application.Styles>
 </Application>

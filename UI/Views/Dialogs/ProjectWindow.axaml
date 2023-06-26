@@ -11,16 +11,10 @@
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterOwner"
-        Width="840"
-        Height="500">
+        Width="850"
+        Height="450">
 
-    <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Deactivated">
-            <InvokeCommandAction Command="{Binding CloseCommand, Mode=OneWay}" />
-        </EventTriggerBehavior>
-    </Interaction.Behaviors>
-
-    <Grid RowDefinitions="120,120,160,100" Width="800">
+    <Grid RowDefinitions="100,100,150,100" Width="800">
         <Grid.Styles>
             <Style Selector="Button">
                 <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
