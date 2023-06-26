@@ -4,6 +4,6 @@ files:
 targets:
   - name: Resx
     sources:
-      - UI/Localization/*.resx
+      - '*.resx'
     file: UI/Localization/Resources.%osx_locale%.resx
     format: crowdin-resx
