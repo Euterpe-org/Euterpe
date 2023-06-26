@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace MuseDashModToolsUI.Views.Dialogs;
+namespace MuseDashModToolsUI.Views;
 
 public partial class DownloadWindow : Window
 {

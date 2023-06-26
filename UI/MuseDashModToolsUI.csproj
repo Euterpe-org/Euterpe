@@ -44,14 +44,6 @@
             <DependentUpon>SettingsView.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Dialogs\DownloadWindow.axaml.cs">
-            <DependentUpon>DownloadWindow.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="Views\Dialogs\ProjectWindow.axaml.cs">
-            <DependentUpon>ProjectWindow.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
     </ItemGroup>
     <ItemGroup>
         <Content Include="Assets\Icon.ico"/>

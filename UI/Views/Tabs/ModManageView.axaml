@@ -1,5 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MuseDashModToolsUI.ViewModels"
              xmlns:contract="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +9,6 @@
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
-             xmlns:dialogs="clr-namespace:MuseDashModToolsUI.ViewModels.Dialogs"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.ModManageView"
              x:DataType="tabs:ModManageViewModel"
@@ -25,7 +25,7 @@
     <dialogHostAvalonia:DialogHost Identifier="DownloadWindowDialog">
         <dialogHostAvalonia:DialogHost.DataTemplates>
             <!--Download Dialog Content-->
-            <DataTemplate DataType="dialogs:DownloadWindowViewModel">
+            <DataTemplate DataType="vm:DownloadWindowViewModel">
                 <Grid Height="220" Width="320" RowDefinitions="120,100">
                     <Image Grid.Row="0"
                            VerticalAlignment="Top"

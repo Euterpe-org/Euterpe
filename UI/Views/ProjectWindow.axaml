@@ -1,20 +1,12 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:contract="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
-        xmlns:dialog="clr-namespace:MuseDashModToolsUI.ViewModels.Dialogs"
-        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
-        x:Class="MuseDashModToolsUI.Views.Dialogs.ProjectWindow"
-        x:DataType="dialog:ProjectWindowViewModel"
-        DataContext="{ext:DependencyInjection Type=contract:IProjectWindowViewModel}"
-        Title="ProjectWindow"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaTitleBarHeightHint="-1"
-        WindowStartupLocation="CenterOwner"
-        Width="850"
-        Height="450">
+        xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
+        x:Class="MuseDashModToolsUI.Views.ProjectWindow"
+        x:DataType="tabs:ModManageViewModel"
+        Title="ProjectWindow">
 
-    <Grid RowDefinitions="100,100,150,100" Width="800">
+    <Grid RowDefinitions="100,100,150,80" Width="800">
         <Grid.Styles>
             <Style Selector="Button">
                 <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
