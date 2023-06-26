@@ -27,10 +27,8 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private FilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
-    public IDialogService DialogService { get; init; }
     public IGitHubService GitHubService { get; init; }
     public ILocalService LocalService { get; init; }
-    public IProjectWindowViewModel ProjectWindowViewModel { get; init; }
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
     public ModManageViewModel(ILogger logger, IModService modService, ISettingService settingService)
@@ -95,7 +93,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     }
 
     [RelayCommand]
-    private void OnInstallMelonLoader() => LocalService.OnInstallMelonLoader();
+    private async Task OnInstallMelonLoader() => await LocalService.OnInstallMelonLoader();
 
     [RelayCommand]
     private async Task OnUninstallMelonLoader() => await LocalService.OnUninstallMelonLoader();
@@ -116,9 +114,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     [RelayCommand]
     private async Task OpenModsFolder() => await LocalService.OpenModsFolder();
-
-    [RelayCommand]
-    private void OpenProjectWindow() => DialogService.ShowDialog(ProjectWindowViewModel);
 
     [RelayCommand]
     private async Task OnCheckUpdate() => await GitHubService.CheckUpdates(true);

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AssetsTools.NET.Extra;
+using DialogHostAvalonia;
 using MelonLoader;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
@@ -20,10 +21,9 @@ namespace MuseDashModToolsUI.Services;
 
 public class LocalService : ILocalService
 {
-    public IDialogService DialogService { get; init; }
+    public IMessageBoxService MessageBoxService { get; init; }
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
     public ILogger Logger { get; init; }
-    public IMessageBoxService MessageBoxService { get; init; }
     public ISettingService SettingService { get; init; }
 
     private bool IsValidPath { get; set; }
@@ -150,14 +150,16 @@ public class LocalService : ILocalService
         var versionFile = Path.Join(SettingService.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
         var install = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader.Localize());
-        if (install) OnInstallMelonLoader();
+        if (install)
+            await OnInstallMelonLoader();
     }
 
-    public void OnInstallMelonLoader()
+    public async Task OnInstallMelonLoader()
     {
         if (!IsValidPath) return;
         Logger.Information("Showing MelonLoader download window...");
-        DialogService.ShowDialog(DownloadWindowViewModel, (_, _) => DownloadWindowViewModel.InstallMelonLoader());
+        await DialogHost.Show(DownloadWindowViewModel, "DownloadWindowDialog",
+            (object _, DialogOpenedEventArgs _) => DownloadWindowViewModel.InstallMelonLoader());
     }
 
     public async Task OnUninstallMelonLoader()

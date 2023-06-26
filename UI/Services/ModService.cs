@@ -25,11 +25,10 @@ public class ModService : IModService
 
     private ReadOnlyObservableCollection<Mod>? _mods;
     private SourceCache<Mod, string>? _sourceCache;
-
+    public IMessageBoxService MessageBoxService { get; init; }
     public IGitHubService GitHubService { get; init; }
     public ILocalService LocalService { get; init; }
     public ILogger Logger { get; init; }
-    public IMessageBoxService MessageBoxService { get; init; }
     public ISettingService Settings { get; init; }
 
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)
