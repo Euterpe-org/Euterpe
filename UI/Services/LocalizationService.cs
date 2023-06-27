@@ -38,8 +38,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         SettingService.Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
-        UpdateTextService.Value.ChangeTabName();
-        UpdateTextService.Value.ChangeOptionName();
+        UpdateTextService.Value.UpdateText();
         _logger.Information("Language changed to {Language}", language);
     }
 

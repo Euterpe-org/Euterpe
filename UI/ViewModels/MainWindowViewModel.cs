@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
@@ -28,8 +27,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     {
         _logger = logger;
         _settingService = settingService;
-        if (settingService.Settings.LanguageCode is not null)
-            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(settingService.Settings.LanguageCode);
 
         Tabs = new List<TabView>
         {

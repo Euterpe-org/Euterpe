@@ -240,6 +240,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to get mod list from any source.
+        /// </summary>
+        internal static string MsgBox_Content_GetModListFailed {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_GetModListFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MuseDash.exe is not correct version \nAre you using a pirated or modified version?.
         /// </summary>
         internal static string MsgBox_Content_IncorrectVersion {

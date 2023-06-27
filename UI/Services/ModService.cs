@@ -24,7 +24,8 @@ public class ModService : IModService
     private string? _currentGameVersion;
 
     private ReadOnlyObservableCollection<Mod>? _mods;
-    private SourceCache<Mod, string>? _sourceCache;
+    private SourceCache<Mod?, string>? _sourceCache;
+    private List<Mod>? _webMods;
 
     public IGitHubService GitHubService { get; init; }
     public ILocalService LocalService { get; init; }
@@ -35,14 +36,15 @@ public class ModService : IModService
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)
     {
         Logger.Information("Initializing mod list...");
-        _sourceCache = sourceCache;
+        _sourceCache = sourceCache!;
         _mods = mods;
         var isValidPath = await LocalService.CheckValidPath();
         if (!isValidPath) return;
         _currentGameVersion = await LocalService.ReadGameVersion();
         await LocalService.CheckMelonLoaderInstall();
 
-        var webMods = await GitHubService.GetModsAsync();
+        _webMods ??= await GitHubService.GetModListAsync();
+        if (_webMods is null) return;
         var localPaths = LocalService.GetModFiles(Settings.Settings.ModsFolder);
         List<Mod>? localMods;
         try
@@ -59,7 +61,7 @@ public class ModService : IModService
             return;
         }
 
-        await LoadModsToUI(localMods, webMods);
+        await LoadModsToUI(localMods, _webMods);
     }
 
     public async Task OnInstallMod(Mod item)
@@ -78,8 +80,8 @@ public class ModService : IModService
             var path = Path.Join(Settings.Settings.ModsFolder, item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             await GitHubService.DownloadModAsync(item.DownloadLink, path);
             var downloadedMod = LocalService.LoadMod(path)!;
-            var webMods = await GitHubService.GetModsAsync();
-            var mod = webMods.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
+            _webMods ??= await GitHubService.GetModListAsync();
+            var mod = _webMods?.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
             mod.IsDisabled = downloadedMod.IsDisabled;
             mod.FileName = downloadedMod.FileName;
             mod.LocalVersion = downloadedMod.LocalVersion;
@@ -172,7 +174,7 @@ public class ModService : IModService
                         .Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
                     if (enabledReverseDependencies.Length > 0)
                     {
-                        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
+                        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
                         var result = await MessageBoxService.CreateConfirmMessageBox(
                             string.Format(MsgBox_Content_DisableModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
                         if (!result)
@@ -267,8 +269,8 @@ public class ModService : IModService
             File.Delete(path);
             _sourceCache!.Remove(item);
             Logger.Information("Delete mod {Name} success", item.Name);
-            var webMods = await GitHubService.GetModsAsync();
-            var webMod = webMods.FirstOrDefault(x => x.Name == item.Name);
+            var webMods = await GitHubService.GetModListAsync();
+            var webMod = webMods?.FirstOrDefault(x => x.Name == item.Name);
             if (webMod is not null)
             {
                 webMod.IsIncompatible = !CheckCompatible(webMod);
@@ -297,10 +299,10 @@ public class ModService : IModService
         }
     }
 
-    private async Task LoadModsToUI(List<Mod> localMods, List<Mod> webMods)
+    private async Task LoadModsToUI(List<Mod> localMods, List<Mod>? webMods)
     {
         var isTracked = new bool[localMods.Count];
-        foreach (var webMod in webMods)
+        foreach (var webMod in webMods!)
         {
             var localMod = localMods.FirstOrDefault(x => x.Name == webMod.Name);
             var localModIdx = localMods.IndexOf(localMod!);
@@ -376,18 +378,18 @@ public class ModService : IModService
 
     private IEnumerable<Mod> SearchDependencies(string modName)
     {
-        var dependencyNames = _sourceCache?.Lookup(modName).Value.DependencyNames.Split("\r\n");
+        var dependencyNames = _sourceCache?.Lookup(modName).Value?.DependencyNames.Split("\r\n");
         Logger.Information("Search dependencies of {ModName}: {DependencyNames}", modName, dependencyNames);
         return dependencyNames?.Where(x => _sourceCache!.Lookup(x).HasValue)
             .Select(x => _sourceCache!.Lookup(x).Value)!;
     }
 
-    private IEnumerable<Mod> SearchReverseDependencies(string modName)
+    private IEnumerable<Mod?> SearchReverseDependencies(string modName)
     {
-        var reverseDependencyNames = _sourceCache?.Items.Where(x => x.DependencyNames.Split("\r\n").Contains(modName))
-            .Select(x => x.Name).ToArray();
+        var reverseDependencyNames = _sourceCache?.Items.Where(x => x!.DependencyNames.Split("\r\n").Contains(modName))
+            .Select(x => x?.Name).ToArray();
         Logger.Information("Search reverse dependencies of {ModName}: {ReverseDependencyNames}", modName, reverseDependencyNames);
-        return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x.Name))!;
+        return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x?.Name))!;
     }
 
     private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod?> dependencies, AskType askType, bool turnOff)

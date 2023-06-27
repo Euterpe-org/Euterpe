@@ -2,6 +2,5 @@
 
 public interface IUpdateTextService
 {
-    void ChangeTabName();
-    void ChangeOptionName();
+    void UpdateText();
 }

@@ -10,6 +10,13 @@ public class UpdateTextService : IUpdateTextService
 {
     public IMainWindowViewModel MainWindowViewModel { get; init; }
     public ISettingsViewModel SettingsViewModel { get; init; }
+    public ISettingService SettingService { get; init; }
+
+    public void UpdateText()
+    {
+        ChangeTabName();
+        ChangeOptionName();
+    }
 
     public void ChangeTabName()
     {
@@ -20,6 +27,8 @@ public class UpdateTextService : IUpdateTextService
     public void ChangeOptionName()
     {
         SettingsViewModel.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
-        SettingsViewModel.DownloadSources = new[] { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
+        SettingsViewModel.DownloadSources = new[]
+            { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
+        SettingsViewModel.CurrentDownloadSource = (int)SettingService.Settings.DownloadSource;
     }
 }
