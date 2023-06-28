@@ -24,6 +24,9 @@ jobs:
           # - arm64 # /usr/bin/ld: unrecognised emulation mode: arch64linux
         dotnet-version:
           - '7.0'
+        self-contained
+          - true
+          - false
     runs-on: ${{ matrix.target-os }}
     steps:
       - name: Checkout
@@ -42,7 +45,8 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} --self-contained=true
+          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} --self-contained=${{ matrix
+          .self-contained }}
           
       - name: List result on Windows
         if: matrix.target-os == 'windows-latest'
