@@ -42,7 +42,7 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} 
+          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} --self-contained=true
           
       - name: List result on Windows
         if: matrix.target-os == 'windows-latest'
