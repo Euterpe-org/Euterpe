@@ -266,7 +266,7 @@ public class ModService : IModService
                 .Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
             if (enabledReverseDependencies.Length > 0)
             {
-                var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x.Name));
+                var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
                 var result = await MessageBoxService.CreateConfirmMessageBox(
                     string.Format(MsgBox_Content_DeleteModConfirm, item.Name, enabledReverseDependencyNames));
                 if (!result) return;

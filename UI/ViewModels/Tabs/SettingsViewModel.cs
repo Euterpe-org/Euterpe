@@ -49,6 +49,10 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         CurrentLanguage = new Language(CultureInfo.CurrentUICulture);
         Path = _settingService.Settings.MuseDashFolder;
         CurrentDownloadSource = (int)_settingService.Settings.DownloadSource;
+        EnableDependenciesWhenInstalling = (int)_settingService.Settings.AskEnableDependenciesWhenInstalling;
+        EnableDependenciesWhenEnabling = (int)_settingService.Settings.AskEnableDependenciesWhenEnabling;
+        DisableDependenciesWhenDeleting = (int)_settingService.Settings.AskDisableDependenciesWhenDeleting;
+        DisableDependenciesWhenDisabling = (int)_settingService.Settings.AskDisableDependenciesWhenDisabling;
 
         _logger.Information("Settings Window initialized");
     }
@@ -80,6 +84,30 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
             newValue = oldValue;
         else
             _settingService.Settings.AskEnableDependenciesWhenInstalling = (AskType)newValue;
+    }
+
+    partial void OnEnableDependenciesWhenEnablingChanged(int oldValue, int newValue)
+    {
+        if (newValue == -1)
+            newValue = oldValue;
+        else
+            _settingService.Settings.AskEnableDependenciesWhenEnabling = (AskType)newValue;
+    }
+
+    partial void OnDisableDependenciesWhenDeletingChanged(int oldValue, int newValue)
+    {
+        if (newValue == -1)
+            newValue = oldValue;
+        else
+            _settingService.Settings.AskDisableDependenciesWhenDeleting = (AskType)newValue;
+    }
+
+    partial void OnDisableDependenciesWhenDisablingChanged(int oldValue, int newValue)
+    {
+        if (newValue == -1)
+            newValue = oldValue;
+        else
+            _settingService.Settings.AskDisableDependenciesWhenDisabling = (AskType)newValue;
     }
 
     #endregion
