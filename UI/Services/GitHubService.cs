@@ -24,7 +24,10 @@ public class GitHubService : IGitHubService
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
-    private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
+
+    private const string SecondaryLink =
+        "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
+
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
     private Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
@@ -70,43 +73,15 @@ public class GitHubService : IGitHubService
 
     public async Task DownloadMelonLoader(string path, IProgress<double> downloadProgress)
     {
-        HttpResponseMessage result;
-        try
-        {
-            result = await Client.GetAsync(PrimaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
-            Logger.Information("Get MelonLoader Download ResponseHeader from primary link success");
-        }
-        catch
-        {
-            try
-            {
-                Logger.Warning("Get MelonLoader Download ResponseHeader from primary link failed, try secondary link...");
-                result = await Client.GetAsync(SecondaryLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
-                Logger.Information("Get MelonLoader Download ResponseHeader from secondary link success");
-            }
-            catch
-            {
-                Logger.Warning("Get MelonLoader Download ResponseHeader from secondary link failed, try third link...");
-                result = await Client.GetAsync(ThirdLink + "MelonLoader.zip", HttpCompletionOption.ResponseHeadersRead);
-                Logger.Information("Get MelonLoader Download ResponseHeader from third link success");
-            }
-        }
+        var defaultDownloadSource = DownloadSourceDictionary[SettingService.Settings.DownloadSource];
+        var result = await DownloadMelonLoaderFromSource(defaultDownloadSource, path, downloadProgress);
+        if (result is not null) return;
 
-        var totalLength = result.Content.Headers.ContentLength;
-        var contentStream = await result.Content.ReadAsStreamAsync();
-        await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-        var buffer = new byte[5 * 1024];
-        var readLength = 0L;
-        int length;
-        while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SettingService.Settings.DownloadSource))
         {
-            readLength += length;
-            if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
-
-            fs.Write(buffer, 0, length);
+            result = await DownloadMelonLoaderFromSource(pair.Value, path, downloadProgress);
+            if (result is not null) return;
         }
-
-        Logger.Information("Download MelonLoader success");
     }
 
     public async Task CheckUpdates(bool userClick = false)
@@ -131,7 +106,8 @@ public class GitHubService : IGitHubService
             if (version <= currentVersion)
             {
                 if (userClick)
-                    await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_LatestVersion.Localize());
+                    await MessageBoxService.CreateMessageBox(MsgBox_Title_Success,
+                        MsgBox_Content_LatestVersion.Localize());
                 return;
             }
 
@@ -173,6 +149,39 @@ public class GitHubService : IGitHubService
         }
     }
 
+    private async Task<HttpResponseMessage?> DownloadMelonLoaderFromSource(string downloadSource, string path,
+        IProgress<double> downloadProgress)
+    {
+        var url = downloadSource + "MelonLoader.zip";
+        try
+        {
+            var result = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            Logger.Information("Get MelonLoader Download ResponseHeader from {URL} success", url);
+
+            var totalLength = result.Content.Headers.ContentLength;
+            var contentStream = await result.Content.ReadAsStreamAsync();
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            var buffer = new byte[5 * 1024];
+            var readLength = 0L;
+            int length;
+            while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
+            {
+                readLength += length;
+                if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
+
+                fs.Write(buffer, 0, length);
+            }
+
+            Logger.Information("Download MelonLoader success");
+            return result;
+        }
+        catch
+        {
+            Logger.Warning("Download MelonLoader from {URL} failed", url);
+            return null;
+        }
+    }
+
     private async Task<HttpResponseMessage?> DownloadModFromSourceAsync(string downloadSource, string link, string path)
     {
         var url = downloadSource + link;
@@ -207,7 +216,6 @@ public class GitHubService : IGitHubService
         }
     }
 
-
     private async Task LaunchUpdater(string currentDirectory, IEnumerable<string> launchArgs)
     {
         var updaterExePath = Path.Combine(currentDirectory, "Updater.exe");
@@ -234,7 +242,8 @@ public class GitHubService : IGitHubService
         catch (Exception ex)
         {
             Logger.Information("Copy Updater.exe to Update folder failed: {Exception}", ex.ToString());
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
+            await MessageBoxService.CreateErrorMessageBox(
+                string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
         }
 
         Process.Start(updaterTargetPath, launchArgs);

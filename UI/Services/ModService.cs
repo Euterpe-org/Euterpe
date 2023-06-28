@@ -77,10 +77,12 @@ public class ModService : IModService
 
         try
         {
-            var path = Path.Join(Settings.Settings.ModsFolder, item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
+            var path = Path.Join(Settings.Settings.ModsFolder,
+                item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             await GitHubService.DownloadModAsync(item.DownloadLink, path);
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
+            if (_webMods is null) return;
             var mod = _webMods?.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
             mod.IsDisabled = downloadedMod.IsDisabled;
             mod.FileName = downloadedMod.FileName;
@@ -174,9 +176,11 @@ public class ModService : IModService
                         .Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
                     if (enabledReverseDependencies.Length > 0)
                     {
-                        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
+                        var enabledReverseDependencyNames =
+                            string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
                         var result = await MessageBoxService.CreateConfirmMessageBox(
-                            string.Format(MsgBox_Content_DisableModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
+                            string.Format(MsgBox_Content_DisableModConfirm.Localize(), item.Name,
+                                enabledReverseDependencyNames));
                         if (!result)
                         {
                             item.IsDisabled = !item.IsDisabled;
@@ -184,7 +188,8 @@ public class ModService : IModService
                         }
 
                         Settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
-                            string.Format(MsgBox_Content_DisableReverseDependency, item.Name), enabledReverseDependencies,
+                            string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
+                            enabledReverseDependencies,
                             Settings.Settings.AskDisableDependenciesWhenDisabling, true);
                     }
 
@@ -206,7 +211,8 @@ public class ModService : IModService
             File.Move(
                 Path.Join(Settings.Settings.ModsFolder, item.FileNameExtended(true)),
                 Path.Join(Settings.Settings.ModsFolder, item.FileNameExtended()));
-            Logger.Information("Change mod {Name} state to {State}", item.Name, item.IsDisabled ? "Disabled" : "Enabled");
+            Logger.Information("Change mod {Name} state to {State}", item.Name,
+                item.IsDisabled ? "Disabled" : "Enabled");
         }
         catch (Exception ex)
         {
@@ -214,18 +220,21 @@ public class ModService : IModService
             {
                 case UnauthorizedAccessException:
                     Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
+                    await MessageBoxService.CreateErrorMessageBox(string.Format(
+                        MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
                         ex));
                     break;
 
                 case IOException:
                     Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(
+                        string.Format(MsgBox_Content_ChangeModStateFailed_Game.Localize(), ex));
                     break;
 
                 default:
                     Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(
+                        string.Format(MsgBox_Content_ChangeModStateFailed.Localize(), ex));
                     break;
             }
 
@@ -267,10 +276,12 @@ public class ModService : IModService
             }
 
             File.Delete(path);
+            _webMods?.FirstOrDefault(x => x.Name == item.Name)?.SetDefault();
             _sourceCache!.Remove(item);
             Logger.Information("Delete mod {Name} success", item.Name);
-            var webMods = await GitHubService.GetModListAsync();
-            var webMod = webMods?.FirstOrDefault(x => x.Name == item.Name);
+            _webMods ??= await GitHubService.GetModListAsync();
+            if (_webMods is null) return;
+            var webMod = _webMods?.FirstOrDefault(x => x.Name == item.Name);
             if (webMod is not null)
             {
                 webMod.IsIncompatible = !CheckCompatible(webMod);
@@ -288,12 +299,14 @@ public class ModService : IModService
                 case UnauthorizedAccessException:
                 case IOException:
                     Logger.Error(ex, "Delete mod {Name} failed", item.Name);
-                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(
+                        string.Format(MsgBox_Content_UninstallModFailed_Game.Localize(), ex));
                     break;
 
                 default:
                     Logger.Error(ex, "Delete mod {Name} failed", item.Name);
-                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
+                    await MessageBoxService.CreateErrorMessageBox(
+                        string.Format(MsgBox_Content_UninstallModFailed.Localize(), ex));
                     break;
             }
         }
@@ -320,7 +333,8 @@ public class ModService : IModService
             {
                 localMod.IsDuplicated = true;
                 localMod.DuplicatedModNames =
-                    string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
+                    string.Join("\r\n",
+                        localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
 
             isTracked[localModIdx] = true;
@@ -359,7 +373,8 @@ public class ModService : IModService
             {
                 localMod.IsDuplicated = true;
                 localMod.DuplicatedModNames =
-                    string.Join("\r\n", localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
+                    string.Join("\r\n",
+                        localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
                 Logger.Information("Found duplicated mod {DuplicateMods}", localMod.DuplicatedModNames);
             }
 
@@ -371,7 +386,8 @@ public class ModService : IModService
     {
         if (Settings.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
-        var result = await MessageBoxService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
+        var result =
+            await MessageBoxService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
         if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
         else if (result == MsgBox_Button_NoNoAsk) Settings.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
@@ -388,11 +404,13 @@ public class ModService : IModService
     {
         var reverseDependencyNames = _sourceCache?.Items.Where(x => x!.DependencyNames.Split("\r\n").Contains(modName))
             .Select(x => x?.Name).ToArray();
-        Logger.Information("Search reverse dependencies of {ModName}: {ReverseDependencyNames}", modName, reverseDependencyNames);
+        Logger.Information("Search reverse dependencies of {ModName}: {ReverseDependencyNames}", modName,
+            reverseDependencyNames);
         return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x?.Name))!;
     }
 
-    private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod?> dependencies, AskType askType, bool turnOff)
+    private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod?> dependencies, AskType askType,
+        bool turnOff)
     {
         switch (askType)
         {
