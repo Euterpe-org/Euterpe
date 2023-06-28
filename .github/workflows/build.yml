@@ -24,7 +24,7 @@ jobs:
           # - arm64 # /usr/bin/ld: unrecognised emulation mode: arch64linux
         dotnet-version:
           - '7.0'
-        self-contained
+        self-contained:
           - true
           - false
     runs-on: ${{ matrix.target-os }}
@@ -60,13 +60,13 @@ jobs:
         if: matrix.target-os == 'windows-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: MuseDashModToolsUI-${{ matrix.build-type }}-windows-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
+          name: MuseDashModToolsUI-${{ matrix.build-type }}-windows-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-self-contained-${{ matrix.self-contained }}
           path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/win-${{ matrix.target-arch }}/publish/*
           
       - name: Upload Artifact on Linux
         if: matrix.target-os == 'ubuntu-latest'
         uses: actions/upload-artifact@v3
         with:
-          name: MuseDashModToolsUI-${{ matrix.build-type }}-linux-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
+          name: MuseDashModToolsUI-${{ matrix.build-type }}-linux-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-self-contained-${{ matrix.self-contained }}
           path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
         
