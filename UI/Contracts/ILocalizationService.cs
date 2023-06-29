@@ -9,4 +9,5 @@ public interface ILocalizationService
     List<Language> AvailableLanguages { get; }
     string[] AvailableFonts { get; }
     void SetLanguage(string language);
+    void SetFont(string fontName);
 }

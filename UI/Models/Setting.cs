@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Text.Json.Serialization;
-using Avalonia.Media;
 
 namespace MuseDashModToolsUI.Models;
 
@@ -8,7 +7,7 @@ public class Setting
 {
     public string? MuseDashFolder { get; set; }
     public string? LanguageCode { get; set; }
-    public string? FontName { get; set; }
+    public string? FontName { get; set; } = "Segoe UI";
 
     [JsonIgnore]
     public string UserDataFolder =>

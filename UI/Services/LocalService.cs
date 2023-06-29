@@ -60,12 +60,13 @@ public class LocalService : ILocalService
         Logger.Information("Checking valid path...");
         var exePath = Path.Join(SettingService.Settings.MuseDashFolder, "MuseDash.exe");
         var gameAssemblyPath = Path.Join(SettingService.Settings.MuseDashFolder, "GameAssembly.dll");
-        var userDataPath = Path.Join(SettingService.Settings.MuseDashFolder, "UserData");
+
         if (!File.Exists(exePath) || !File.Exists(gameAssemblyPath))
         {
             Logger.Error("No game files found, showing error message box...");
             await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoExeFound.Localize());
             await SettingService.OnChoosePath();
+            return false;
         }
 
         try
@@ -84,25 +85,15 @@ public class LocalService : ILocalService
                 Logger.Information("Mods folder not found, created");
             }
 
-            if (!Directory.Exists(userDataPath))
+            if (!Directory.Exists(SettingService.Settings.UserDataFolder))
             {
-                Directory.CreateDirectory(userDataPath);
+                Directory.CreateDirectory(SettingService.Settings.UserDataFolder);
                 Logger.Information("UserData folder not found, created");
             }
 
             var cfgFilePath = Path.Join(SettingService.Settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
-            if (!File.Exists(cfgFilePath))
-            {
-                await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
-                Logger.Information("UserData config file not found, created");
-            }
-            else
-            {
-                var path = await File.ReadAllTextAsync(cfgFilePath);
-                if (path != Environment.ProcessPath)
-                    await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
-                Logger.Information("UserData config file found, path updated");
-            }
+            await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
+            Logger.Information("Write path into cfg file successfully");
 
             IsValidPath = true;
             Logger.Information("Path verified");

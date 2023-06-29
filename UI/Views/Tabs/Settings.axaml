@@ -59,13 +59,12 @@
         <!--Language-->
         <controls:Card Grid.Row="1">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                <TextBlock
-                    Text="{ext:LocalizeExtensions XAML_Language}" />
+                <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
 
                 <ComboBox Classes="Filled"
                           MinWidth="200"
                           ItemsSource="{Binding AvailableLanguages}"
-                          SelectedItem="{Binding CurrentLanguage}">
+                          SelectedIndex="{Binding CurrentLanguage}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding FullName}" />
@@ -82,6 +81,7 @@
         <controls:Card Grid.Row="2">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
+
                 <ComboBox Classes="Filled"
                           MinWidth="180"
                           ItemsSource="{Binding DownloadSources}"
@@ -92,14 +92,21 @@
         <controls:Card Grid.Row="3">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
+
                 <ComboBox Classes="Filled"
+                          MinWidth="250"
                           ItemsSource="{Binding AvailableFonts}" />
+
+                <Button Classes="dark" Height="40" Margin="20,0,0,0"
+                        Content="{ext:LocalizeExtensions XAML_Apply}"
+                        Command="{Binding SetFontCommand}" />
             </StackPanel>
         </controls:Card>
 
         <controls:Card Grid.Row="4">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
+
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
@@ -110,6 +117,7 @@
         <controls:Card Grid.Row="5">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
+
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
@@ -120,6 +128,7 @@
         <controls:Card Grid.Row="6">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
+
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"
@@ -130,6 +139,7 @@
         <controls:Card Grid.Row="7">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
+
                 <ComboBox Classes="Filled"
                           MinWidth="150"
                           ItemsSource="{Binding AskTypes}"

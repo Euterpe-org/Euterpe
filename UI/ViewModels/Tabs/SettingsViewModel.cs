@@ -21,7 +21,8 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private readonly ISettingService _settingService;
     [ObservableProperty] private string[] _askTypes;
     [ObservableProperty] private int _currentDownloadSource;
-    [ObservableProperty] private Language? _currentLanguage;
+    [ObservableProperty] private int _currentFont;
+    [ObservableProperty] private int _currentLanguage;
     [ObservableProperty] private int _disableDependenciesWhenDeleting;
     [ObservableProperty] private int _disableDependenciesWhenDisabling;
     [ObservableProperty] private string[] _downloadSources;
@@ -31,8 +32,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     public List<Language> AvailableLanguages => _localizationService.AvailableLanguages;
     public string[] AvailableFonts => _localizationService.AvailableFonts;
 
-    public SettingsViewModel(ILocalizationService localizationService, ILogger logger,
-        IModManageViewModel modManageViewModel,
+    public SettingsViewModel(ILocalizationService localizationService, ILogger logger, IModManageViewModel modManageViewModel,
         ISettingService settingService)
     {
         _localizationService = localizationService;
@@ -49,7 +49,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
         DownloadSources = new[]
             { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
-        CurrentLanguage = new Language(CultureInfo.CurrentUICulture);
+        CurrentLanguage = AvailableLanguages.FindIndex(x => x.Name == CultureInfo.CurrentUICulture.Name);
         Path = _settingService.Settings.MuseDashFolder;
         CurrentDownloadSource = (int)_settingService.Settings.DownloadSource;
         EnableDependenciesWhenInstalling = (int)_settingService.Settings.AskEnableDependenciesWhenInstalling;
@@ -61,14 +61,16 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     }
 
     [RelayCommand]
-    private void SetLanguage() => _localizationService.SetLanguage(CurrentLanguage!.Name!);
+    private void SetLanguage() => _localizationService.SetLanguage(AvailableLanguages[CurrentLanguage].Name!);
+
+    [RelayCommand]
+    private void SetFont() => _localizationService.SetFont(AvailableFonts[CurrentFont]);
 
     [RelayCommand]
     private async Task OnChoosePath()
     {
         _logger.Information("Choose path button clicked");
-        var changed = await _settingService.OnChoosePath();
-        if (changed) _modManageViewModel.Initialize();
+        await _settingService.OnChoosePath();
     }
 
     #region OnPropertyChanged

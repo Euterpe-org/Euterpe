@@ -34,8 +34,7 @@ public class MessageBoxService : IMessageBoxService
                 Icon = icon,
                 Topmost = true,
                 FontFamily = SettingService.Value.Settings.FontName,
-                WindowStartupLocation =
-                    isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
+                WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.Show(desktop!.MainWindow) : await messageBox.Show();
     }
@@ -70,8 +69,8 @@ public class MessageBoxService : IMessageBoxService
                 Icon = icon,
                 CanResize = true,
                 Topmost = true,
-                WindowStartupLocation =
-                    isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
+                FontFamily = SettingService.Value.Settings.FontName,
+                WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.ShowDialog(desktop!.MainWindow) : await messageBox.Show();
     }

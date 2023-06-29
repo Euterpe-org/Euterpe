@@ -1,6 +1,5 @@
 ﻿using System.Net.Http;
 using Autofac;
-using Avalonia.Media;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;

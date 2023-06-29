@@ -23,6 +23,7 @@ public class SettingService : ISettingService
 {
     private readonly ILogger _logger;
     public IMessageBoxService MessageBoxService { get; init; }
+    public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
     public SettingService(ILogger logger)
@@ -85,7 +86,7 @@ public class SettingService : ISettingService
         }
     }
 
-    public async Task<bool> OnChoosePath()
+    public async Task OnChoosePath()
     {
         while (true)
         {
@@ -99,7 +100,7 @@ public class SettingService : ISettingService
                 if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
                 {
                     _logger.Information("Path not changed");
-                    return false;
+                    return;
                 }
 
                 _logger.Error("Invalid path, showing error message box");
@@ -111,19 +112,20 @@ public class SettingService : ISettingService
             if (path == Settings.MuseDashFolder)
             {
                 _logger.Information("Path not changed");
-                return false;
+                return;
             }
 
             _logger.Information("User chose path {Path}", path);
             Settings.MuseDashFolder = path;
-            Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
+            Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
 
             var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
             await File.WriteAllTextAsync("Settings.json", json);
             _logger.Information("Settings saved to Settings.json");
 
             SettingsViewModel.Value.Initialize();
-            return true;
+            ModManageViewModel.Value.Initialize();
+            return;
         }
     }
 
@@ -133,8 +135,10 @@ public class SettingService : ISettingService
             return;
         var text = await File.ReadAllTextAsync("Settings.json");
         var setting = JsonNode.Parse(text);
-        Settings.LanguageCode = setting?["LanguageCode"]?.ToString();
+
         Settings.MuseDashFolder = setting?["MuseDashFolder"]?.ToString();
+        Settings.LanguageCode = setting?["LanguageCode"]?.ToString();
+        Settings.FontName = setting?["FontName"]?.ToString();
         Settings.DownloadSource = Enum.Parse<DownloadSources>(setting?["DownloadSource"]?.ToString()!);
         Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(setting?["AskEnableDependenciesWhenInstalling"]?.ToString()!);
         Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(setting?["AskEnableDependenciesWhenEnabling"]?.ToString()!);
