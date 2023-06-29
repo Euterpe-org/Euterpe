@@ -5,7 +5,7 @@ using Serilog.Formatting;
 
 namespace MuseDashModToolsUI.Models;
 
-public class TextFormatter : ITextFormatter
+public class LogFileFormatter : ITextFormatter
 {
     public void Format(LogEvent logEvent, TextWriter output)
     {

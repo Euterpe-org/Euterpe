@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using Autofac;
+using Avalonia.Media;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
@@ -20,7 +21,7 @@ public static class Bootstrapper
         builder.RegisterInstance(new HttpClient());
 
         // Services
-        builder.RegisterType<MessageBoxService>().As<IMessageBoxService>();
+        builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
         builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();

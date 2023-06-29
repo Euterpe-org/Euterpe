@@ -51,7 +51,6 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
                 return;
             }
 
-
         try
         {
             Logger.Information("Extracting MelonLoader.zip");

@@ -95,17 +95,17 @@ public class ModService : IModService
             switch (ex)
             {
                 case HttpRequestException:
-                    errors.AppendLine(string.Format(MsgBox_Content_InstallModFailed_Internet.Localize(), ex));
+                    errors.AppendFormat(MsgBox_Content_InstallModFailed_Internet.Localize(), ex).AppendLine();
                     break;
 
                 case SecurityException:
                 case UnauthorizedAccessException:
                 case IOException:
-                    errors.AppendLine(string.Format(MsgBox_Content_InstallModFailed_Game.Localize(), ex));
+                    errors.AppendFormat(MsgBox_Content_InstallModFailed_Game.Localize(), ex).AppendLine();
                     break;
 
                 default:
-                    errors.AppendLine(string.Format(MsgBox_Content_InstallModFailed.Localize(), ex));
+                    errors.AppendFormat(MsgBox_Content_InstallModFailed.Localize(), ex).AppendLine();
                     break;
             }
         }
@@ -125,7 +125,7 @@ public class ModService : IModService
             }
             catch (Exception ex)
             {
-                errors.AppendLine(string.Format(MsgBox_Content_InstallDependencyFailed.Localize(), ex));
+                errors.AppendFormat(MsgBox_Content_InstallDependencyFailed.Localize(), ex).AppendLine();
             }
         }
 
@@ -438,6 +438,8 @@ public class ModService : IModService
             default: break;
         }
 
+        return askType;
+
         async Task ChangeState()
         {
             foreach (var dependency in dependencies)
@@ -446,8 +448,6 @@ public class ModService : IModService
                 await OnToggleMod(dependency);
             }
         }
-
-        return askType;
     }
 
     private bool CheckCompatible(Mod mod) =>

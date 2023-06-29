@@ -45,7 +45,7 @@ internal static class Program
 #if DEBUG
             .WriteTo.Console()
 #endif
-            .WriteTo.File(new TextFormatter(),
+            .WriteTo.File(new LogFileFormatter(),
                 Path.Combine("Logs", LogFileName),
                 rollingInterval: RollingInterval.Infinite,
                 retainedFileCountLimit: 60)

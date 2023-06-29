@@ -92,7 +92,8 @@
         <controls:Card Grid.Row="3">
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
-                <ComboBox Classes="Filled" />
+                <ComboBox Classes="Filled"
+                          ItemsSource="{Binding AvailableFonts}" />
             </StackPanel>
         </controls:Card>
 

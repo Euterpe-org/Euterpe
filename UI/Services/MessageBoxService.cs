@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -10,10 +11,15 @@ using MessageBox.Avalonia.Models;
 using MuseDashModToolsUI.Contracts;
 using static MuseDashModToolsUI.Localization.Resources;
 
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+
 namespace MuseDashModToolsUI.Services;
 
 public class MessageBoxService : IMessageBoxService
 {
+    public Lazy<ISettingService>? SettingService { get; init; }
+
     public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok,
         Icon icon = Icon.Success)
     {
@@ -27,7 +33,9 @@ public class MessageBoxService : IMessageBoxService
                 ButtonDefinitions = button,
                 Icon = icon,
                 Topmost = true,
-                WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
+                FontFamily = SettingService.Value.Settings.FontName,
+                WindowStartupLocation =
+                    isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.Show(desktop!.MainWindow) : await messageBox.Show();
     }
@@ -35,7 +43,8 @@ public class MessageBoxService : IMessageBoxService
     public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) =>
         await CreateMessageBox(title, content, icon: Icon.Error);
 
-    public async Task<ButtonResult> CreateErrorMessageBox(string content) => await CreateErrorMessageBox(MsgBox_Title_Failure, content);
+    public async Task<ButtonResult> CreateErrorMessageBox(string content) =>
+        await CreateErrorMessageBox(MsgBox_Title_Failure, content);
 
     public async Task<bool> CreateConfirmMessageBox(string title, string content)
     {
@@ -43,9 +52,11 @@ public class MessageBoxService : IMessageBoxService
         return result == MsgBox_Button_Yes;
     }
 
-    public async Task<bool> CreateConfirmMessageBox(string content) => await CreateConfirmMessageBox(MsgBox_Title_Warning, content);
+    public async Task<bool> CreateConfirmMessageBox(string content) =>
+        await CreateConfirmMessageBox(MsgBox_Title_Warning, content);
 
-    public async Task<string> CreateCustomMessageBox(string title, string content, IEnumerable<ButtonDefinition> buttonDefinitions,
+    public async Task<string> CreateCustomMessageBox(string title, string content,
+        IEnumerable<ButtonDefinition> buttonDefinitions,
         Icon icon)
     {
         var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
@@ -59,7 +70,8 @@ public class MessageBoxService : IMessageBoxService
                 Icon = icon,
                 CanResize = true,
                 Topmost = true,
-                WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
+                WindowStartupLocation =
+                    isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.ShowDialog(desktop!.MainWindow) : await messageBox.Show();
     }

@@ -29,8 +29,10 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     [ObservableProperty] private int _enableDependenciesWhenInstalling;
     [ObservableProperty] private string? _path;
     public List<Language> AvailableLanguages => _localizationService.AvailableLanguages;
+    public string[] AvailableFonts => _localizationService.AvailableFonts;
 
-    public SettingsViewModel(ILocalizationService localizationService, ILogger logger, IModManageViewModel modManageViewModel,
+    public SettingsViewModel(ILocalizationService localizationService, ILogger logger,
+        IModManageViewModel modManageViewModel,
         ISettingService settingService)
     {
         _localizationService = localizationService;
@@ -45,7 +47,8 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         if (_settingService.Settings.LanguageCode is not null)
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_settingService.Settings.LanguageCode);
         AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
-        DownloadSources = new[] { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
+        DownloadSources = new[]
+            { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
         CurrentLanguage = new Language(CultureInfo.CurrentUICulture);
         Path = _settingService.Settings.MuseDashFolder;
         CurrentDownloadSource = (int)_settingService.Settings.DownloadSource;

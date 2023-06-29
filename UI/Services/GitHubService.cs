@@ -25,8 +25,7 @@ public class GitHubService : IGitHubService
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
 
-    private const string SecondaryLink =
-        "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
+    private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
 
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
@@ -106,8 +105,7 @@ public class GitHubService : IGitHubService
             if (version <= currentVersion)
             {
                 if (userClick)
-                    await MessageBoxService.CreateMessageBox(MsgBox_Title_Success,
-                        MsgBox_Content_LatestVersion.Localize());
+                    await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_LatestVersion.Localize());
                 return;
             }
 
