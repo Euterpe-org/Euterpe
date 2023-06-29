@@ -64,20 +64,6 @@ public class SettingService : ISettingService
             }
 
             Settings = settings.Clone();
-
-            var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
-            var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
-            if (File.Exists(updaterPath))
-            {
-                File.Delete(updaterPath);
-                _logger.Information("Updater.exe found, deleting it");
-            }
-
-            if (Directory.Exists(updateDirectory))
-            {
-                Directory.Delete(updateDirectory);
-                _logger.Information("Update directory found, deleting it");
-            }
         }
         catch (Exception ex)
         {
@@ -145,5 +131,19 @@ public class SettingService : ISettingService
         Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(setting?["AskDisableDependenciesWhenDeleting"]?.ToString()!);
         Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(setting?["AskDisableDependenciesWhenDisabling"]?.ToString()!);
         _logger.Information("Saved setting loaded from Settings.json");
+
+        var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
+        var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
+        if (File.Exists(updaterPath))
+        {
+            File.Delete(updaterPath);
+            _logger.Information("Updater.exe found, deleting it");
+        }
+
+        if (Directory.Exists(updateDirectory))
+        {
+            Directory.Delete(updateDirectory);
+            _logger.Information("Update directory found, deleting it");
+        }
     }
 }
