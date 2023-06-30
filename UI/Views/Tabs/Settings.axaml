@@ -24,11 +24,19 @@
             <Style Selector="ComboBox">
                 <Setter Property="Margin" Value="20,0,0,0" />
             </Style>
+            <Style Selector="controls|Card > StackPanel">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Margin" Value="20,0,0,0" />
+            </Style>
+            <Style Selector="Button">
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Margin" Value="20,0,0,0" />
+            </Style>
         </Grid.Styles>
 
         <!--Muse Dash Folder Path-->
         <controls:Card Grid.Row="0">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Path}" />
 
                 <TextBox Classes="outline"
@@ -41,8 +49,6 @@
                          MaxWidth="500" />
 
                 <Button Classes="dark"
-                        Height="40"
-                        Margin="20,0,0,0"
                         Command="{Binding ChoosePathCommand}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Assets/folder.png"
@@ -58,7 +64,7 @@
 
         <!--Language-->
         <controls:Card Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
 
                 <ComboBox Classes="Filled"
@@ -72,14 +78,14 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
-                <Button Classes="dark" Height="40" Margin="20,0,0,0"
+                <Button Classes="dark"
                         Content="{ext:LocalizeExtensions XAML_Apply}"
                         Command="{Binding SetLanguageCommand}" />
             </StackPanel>
         </controls:Card>
 
         <controls:Card Grid.Row="2">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
 
                 <ComboBox Classes="Filled"
@@ -90,7 +96,7 @@
         </controls:Card>
 
         <controls:Card Grid.Row="3">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
 
                 <ComboBox Classes="Filled"
@@ -98,14 +104,14 @@
                           ItemsSource="{Binding AvailableFonts}"
                           SelectedIndex="{Binding CurrentFontIndex}" />
 
-                <Button Classes="dark" Height="40" Margin="20,0,0,0"
+                <Button Classes="dark"
                         Content="{ext:LocalizeExtensions XAML_Apply}"
                         Command="{Binding SetFontCommand}" />
             </StackPanel>
         </controls:Card>
 
         <controls:Card Grid.Row="4">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
 
                 <ComboBox Classes="Filled"
@@ -116,7 +122,7 @@
         </controls:Card>
 
         <controls:Card Grid.Row="5">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
 
                 <ComboBox Classes="Filled"
@@ -127,7 +133,7 @@
         </controls:Card>
 
         <controls:Card Grid.Row="6">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
 
                 <ComboBox Classes="Filled"
@@ -138,7 +144,7 @@
         </controls:Card>
 
         <controls:Card Grid.Row="7">
-            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+            <StackPanel>
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
 
                 <ComboBox Classes="Filled"

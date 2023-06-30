@@ -27,8 +27,7 @@ public class UpdateTextService : IUpdateTextService
     private void ChangeOptionName()
     {
         SettingsViewModel.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
-        SettingsViewModel.DownloadSources = new[]
-            { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
+        SettingsViewModel.DownloadSources = new[] { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
         SettingsViewModel.CurrentDownloadSource = (int)SettingService.Settings.DownloadSource;
         SettingsViewModel.DisableDependenciesWhenDeleting = (int)SettingService.Settings.AskDisableDependenciesWhenDeleting;
         SettingsViewModel.DisableDependenciesWhenDisabling = (int)SettingService.Settings.AskDisableDependenciesWhenDisabling;

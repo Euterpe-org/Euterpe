@@ -72,6 +72,7 @@ internal static class Program
             .LogToTrace()
             .With(new FontManagerOptions
             {
+                DefaultFamilyName = _fontName,
                 FontFallbacks = new[]
                 {
                     new FontFallback { FontFamily = new FontFamily(_fontName!) }
