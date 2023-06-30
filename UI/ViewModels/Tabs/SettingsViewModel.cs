@@ -15,14 +15,14 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 {
+    private readonly IFontManageService _fontManageService;
     private readonly ILocalizationService _localizationService;
     private readonly ILogger _logger;
-    private readonly IModManageViewModel _modManageViewModel;
     private readonly ISettingService _settingService;
     [ObservableProperty] private string[] _askTypes;
     [ObservableProperty] private int _currentDownloadSource;
-    [ObservableProperty] private int _currentFont;
-    [ObservableProperty] private int _currentLanguage;
+    [ObservableProperty] private int _currentFontIndex;
+    [ObservableProperty] private int _currentLanguageIndex;
     [ObservableProperty] private int _disableDependenciesWhenDeleting;
     [ObservableProperty] private int _disableDependenciesWhenDisabling;
     [ObservableProperty] private string[] _downloadSources;
@@ -30,15 +30,15 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     [ObservableProperty] private int _enableDependenciesWhenInstalling;
     [ObservableProperty] private string? _path;
     public List<Language> AvailableLanguages => _localizationService.AvailableLanguages;
-    public string[] AvailableFonts => _localizationService.AvailableFonts;
+    public List<string> AvailableFonts => _fontManageService.AvailableFonts;
 
-    public SettingsViewModel(ILocalizationService localizationService, ILogger logger, IModManageViewModel modManageViewModel,
+    public SettingsViewModel(IFontManageService fontManageService, ILocalizationService localizationService, ILogger logger,
         ISettingService settingService)
     {
+        _fontManageService = fontManageService;
         _localizationService = localizationService;
         _logger = logger;
         _settingService = settingService;
-        _modManageViewModel = modManageViewModel;
         Initialize();
     }
 
@@ -49,7 +49,8 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
         DownloadSources = new[]
             { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
-        CurrentLanguage = AvailableLanguages.FindIndex(x => x.Name == CultureInfo.CurrentUICulture.Name);
+        CurrentLanguageIndex = AvailableLanguages.FindIndex(x => x.Name == CultureInfo.CurrentUICulture.Name);
+        CurrentFontIndex = AvailableFonts.FindIndex(x => x == _settingService.Settings.FontName);
         Path = _settingService.Settings.MuseDashFolder;
         CurrentDownloadSource = (int)_settingService.Settings.DownloadSource;
         EnableDependenciesWhenInstalling = (int)_settingService.Settings.AskEnableDependenciesWhenInstalling;
@@ -61,10 +62,10 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     }
 
     [RelayCommand]
-    private void SetLanguage() => _localizationService.SetLanguage(AvailableLanguages[CurrentLanguage].Name!);
+    private void SetLanguage() => _localizationService.SetLanguage(AvailableLanguages[CurrentLanguageIndex].Name!);
 
     [RelayCommand]
-    private void SetFont() => _localizationService.SetFont(AvailableFonts[CurrentFont]);
+    private void SetFont() => _fontManageService.SetFont(AvailableFonts[CurrentFontIndex]);
 
     [RelayCommand]
     private async Task OnChoosePath()

@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
-using Avalonia.Media;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Localization;
 using MuseDashModToolsUI.Models;
@@ -31,7 +30,6 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         Resources.ResourceManager.GetString(resourceKey, Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
 
     public List<Language> AvailableLanguages { get; } = new();
-    public string[] AvailableFonts => GetAvailableFonts();
 
     public void SetLanguage(string language)
     {
@@ -45,10 +43,6 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void SetFont(string fontName)
-    {
-    }
 
     private void GetAvailableCultures()
     {
@@ -72,6 +66,4 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         _logger.Information("Available languages loaded: {AvailableLanguages}",
             string.Join(", ", AvailableLanguages.Select(x => x.Name)));
     }
-
-    private static string[] GetAvailableFonts() => FontManager.Current.SystemFonts.Select(x => x.Name).ToArray();
 }

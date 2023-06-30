@@ -16,23 +16,26 @@ public static class Bootstrapper
     public static void Register()
     {
         var builder = new ContainerBuilder();
+
+        // Instances
         builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
         builder.RegisterInstance(new HttpClient());
 
         // Services
-        builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
+        builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
-        builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
 
         // View Models
         builder.RegisterType<ProjectWindowViewModel>().As<IProjectWindowViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().SingleInstance();
-        builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
 
         var container = builder.Build();

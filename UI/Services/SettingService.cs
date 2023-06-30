@@ -120,16 +120,16 @@ public class SettingService : ISettingService
         if (!File.Exists("Settings.json"))
             return;
         var text = await File.ReadAllTextAsync("Settings.json");
-        var setting = JsonNode.Parse(text);
+        var settings = JsonNode.Parse(text);
 
-        Settings.MuseDashFolder = setting?["MuseDashFolder"]?.ToString();
-        Settings.LanguageCode = setting?["LanguageCode"]?.ToString();
-        Settings.FontName = setting?["FontName"]?.ToString();
-        Settings.DownloadSource = Enum.Parse<DownloadSources>(setting?["DownloadSource"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(setting?["AskEnableDependenciesWhenInstalling"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(setting?["AskEnableDependenciesWhenEnabling"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(setting?["AskDisableDependenciesWhenDeleting"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(setting?["AskDisableDependenciesWhenDisabling"]?.ToString()!);
+        Settings.MuseDashFolder = settings?["MuseDashFolder"]?.ToString();
+        Settings.LanguageCode = settings?["LanguageCode"]?.ToString();
+        Settings.FontName = settings?["FontName"]?.ToString();
+        Settings.DownloadSource = Enum.Parse<DownloadSources>(settings?["DownloadSource"]?.ToString()!);
+        Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(settings?["AskEnableDependenciesWhenInstalling"]?.ToString()!);
+        Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings?["AskEnableDependenciesWhenEnabling"]?.ToString()!);
+        Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(settings?["AskDisableDependenciesWhenDeleting"]?.ToString()!);
+        Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(settings?["AskDisableDependenciesWhenDisabling"]?.ToString()!);
         _logger.Information("Saved setting loaded from Settings.json");
 
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");

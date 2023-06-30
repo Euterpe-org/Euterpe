@@ -64,7 +64,7 @@
                 <ComboBox Classes="Filled"
                           MinWidth="200"
                           ItemsSource="{Binding AvailableLanguages}"
-                          SelectedIndex="{Binding CurrentLanguage}">
+                          SelectedIndex="{Binding CurrentLanguageIndex}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding FullName}" />
@@ -95,7 +95,8 @@
 
                 <ComboBox Classes="Filled"
                           MinWidth="250"
-                          ItemsSource="{Binding AvailableFonts}" />
+                          ItemsSource="{Binding AvailableFonts}"
+                          SelectedIndex="{Binding CurrentFontIndex}" />
 
                 <Button Classes="dark" Height="40" Margin="20,0,0,0"
                         Content="{ext:LocalizeExtensions XAML_Apply}"
