@@ -466,7 +466,7 @@
                                                 </Expander.Header>
 
                                                 <StackPanel Tag="ExpanderContent" HorizontalAlignment="Stretch"
-                                                            Margin="40,40,0,20">
+                                                            Margin="25,40,0,20">
                                                     <StackPanel.Styles>
                                                         <Style Selector="TextBlock">
                                                             <Setter Property="Foreground" Value="#CCC" />

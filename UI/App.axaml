@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:MuseDashModToolsUI"
              xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
+             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
              x:Class="MuseDashModToolsUI.App">
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -13,5 +14,17 @@
         <FluentTheme />
         <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Grey" SecondaryColor="Indigo" />
         <StyleInclude Source="avares://DialogHost.Avalonia/Styles.xaml" />
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+        </Style>
+        <Style Selector="Button ContentPresenter">
+            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+        </Style>
+        <Style Selector="TemplatedControl">
+            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+        </Style>
     </Application.Styles>
 </Application>

@@ -100,7 +100,7 @@
                 <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
 
                 <ComboBox Classes="Filled"
-                          MinWidth="250"
+                          MinWidth="300"
                           ItemsSource="{Binding AvailableFonts}"
                           SelectedIndex="{Binding CurrentFontIndex}" />
 
