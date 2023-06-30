@@ -1,9 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text.Json.Nodes;
+using Autofac;
 using Avalonia;
 using Avalonia.Media;
+using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Models;
 using Serilog;
 
@@ -12,7 +13,7 @@ namespace MuseDashModToolsUI;
 internal static class Program
 {
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
-    private static string? _fontName;
+    private static IContainer? _container;
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
@@ -21,8 +22,7 @@ internal static class Program
     public static void Main(string[] args)
     {
         CreateLogger();
-        RegisterDependencies();
-        ReadSavedFontName();
+        _container = RegisterDependencies();
         try
         {
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
@@ -40,7 +40,7 @@ internal static class Program
         }
     }
 
-    private static void RegisterDependencies() => Bootstrapper.Register();
+    private static IContainer RegisterDependencies() => Bootstrapper.Register();
 
     private static void CreateLogger()
     {
@@ -56,15 +56,6 @@ internal static class Program
             .CreateLogger();
     }
 
-    private static void ReadSavedFontName()
-    {
-        var text = File.ReadAllText("Settings.json");
-        var settings = JsonNode.Parse(text);
-        _fontName = settings?["FontName"]?.ToString();
-        if (string.IsNullOrEmpty(_fontName))
-            _fontName = "Segoe UI";
-    }
-
     // Avalonia configuration, don't remove; also used by visual designer.
     private static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
@@ -72,10 +63,10 @@ internal static class Program
             .LogToTrace()
             .With(new FontManagerOptions
             {
-                DefaultFamilyName = _fontName,
+                DefaultFamilyName = _container?.Resolve<ISettingService>().Settings.FontName,
                 FontFallbacks = new[]
                 {
-                    new FontFallback { FontFamily = new FontFamily(_fontName!) }
+                    new FontFallback { FontFamily = new FontFamily(_container?.Resolve<ISettingService>().Settings.FontName!) }
                 }
             });
 }

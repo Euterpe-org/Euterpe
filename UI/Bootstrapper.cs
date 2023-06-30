@@ -13,7 +13,7 @@ namespace MuseDashModToolsUI;
 
 public static class Bootstrapper
 {
-    public static void Register()
+    public static IContainer Register()
     {
         var builder = new ContainerBuilder();
 
@@ -41,5 +41,7 @@ public static class Bootstrapper
         var container = builder.Build();
         DependencyInjectionExtension.Resolver = type => container.Resolve(type!);
         LocalizeExtensions.LocalizationService = container.Resolve<ILocalizationService>();
+        FontExtensions.FontManageService = container.Resolve<IFontManageService>();
+        return container;
     }
 }

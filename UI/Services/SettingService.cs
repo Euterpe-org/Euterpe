@@ -29,7 +29,7 @@ public class SettingService : ISettingService
     public SettingService(ILogger logger)
     {
         _logger = logger;
-        Task.Run(LoadSavedSetting);
+        LoadSavedSetting().Wait();
     }
 
     public Setting Settings { get; set; } = new();
