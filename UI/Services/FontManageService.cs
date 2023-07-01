@@ -29,5 +29,10 @@ public class FontManageService : IFontManageService, INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private static List<string> GetAvailableFonts() => FontManager.Current.SystemFonts.Select(x => x.Name).Order().ToList();
+    private List<string> GetAvailableFonts()
+    {
+        var installedFonts = FontManager.Current.SystemFonts.Select(x => x.Name).Order().ToList();
+        Logger.Information("Available fonts loaded: {InstalledFonts}", string.Join(",", installedFonts));
+        return installedFonts;
+    }
 }

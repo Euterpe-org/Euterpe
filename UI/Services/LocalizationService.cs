@@ -10,7 +10,7 @@ using MuseDashModToolsUI.Models;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
-#pragma warning disable CS8618
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace MuseDashModToolsUI.Services;
 
