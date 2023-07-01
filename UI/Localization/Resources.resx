@@ -319,4 +319,7 @@
     <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>Failed to get mod list from any source</value>
     </data>
+    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+        <value>Analysis</value>
+    </data>
 </root>

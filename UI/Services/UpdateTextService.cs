@@ -21,7 +21,8 @@ public class UpdateTextService : IUpdateTextService
     private void ChangeTabName()
     {
         MainWindowViewModel.Tabs[0].DisplayName = XAML_Tab_ModManage;
-        MainWindowViewModel.Tabs[1].DisplayName = XAML_Tab_Setting;
+        MainWindowViewModel.Tabs[1].DisplayName = XAML_Tab_LogAnalysis;
+        MainWindowViewModel.Tabs[2].DisplayName = XAML_Tab_Setting;
     }
 
     private void ChangeOptionName()

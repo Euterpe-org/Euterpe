@@ -318,4 +318,7 @@
     <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>无法从任一下载源获取 Mod 列表</value>
     </data>
+    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+        <value>分析</value>
+    </data>
 </root>

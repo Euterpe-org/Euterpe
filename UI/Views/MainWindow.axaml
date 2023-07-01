@@ -49,9 +49,13 @@
                     <Setter Property="Background" Value="#4D4D4D" />
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0.5,0" />
                 </Style>
                 <Style Selector="TabStripItem:selected ContentPresenter">
                     <Setter Property="Background" Value="#808080" />
+                </Style>
+                <Style Selector="TabStripItem:pointerover">
+                    <Setter Property="Background" Value="#595959" />
                 </Style>
             </TabStrip.Styles>
 

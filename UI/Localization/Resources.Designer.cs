@@ -897,6 +897,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analysis.
+        /// </summary>
+        internal static string XAML_Tab_LogAnalysis {
+            get {
+                return ResourceManager.GetString("XAML_Tab_LogAnalysis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
         internal static string XAML_Tab_ModManage {

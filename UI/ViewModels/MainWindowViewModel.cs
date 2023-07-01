@@ -22,8 +22,8 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     [ObservableProperty] private List<TabView> _tabs = new();
     public static string Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)!;
 
-    public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ISettingService settingService,
-        ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
+    public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ILogAnalysisViewModel logAnalysisViewModel,
+        ISettingService settingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
     {
         _logger = logger;
         _settingService = settingService;
@@ -31,6 +31,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         Tabs = new List<TabView>
         {
             new((ViewModelBase)modManageViewModel, XAML_Tab_ModManage, "ModManage"),
+            new((ViewModelBase)logAnalysisViewModel, XAML_Tab_LogAnalysis, "LogAnalysis"),
             new((ViewModelBase)settingsViewModel, XAML_Tab_Setting, "Setting")
         };
         SwitchTab();

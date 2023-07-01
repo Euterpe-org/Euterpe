@@ -58,8 +58,7 @@
         <Grid ColumnDefinitions="140,*">
 
             <!--The left navigation part-->
-            <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True"
-                                       LeftDrawerWidth="140">
+            <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True" LeftDrawerWidth="140">
                 <controls:NavigationDrawer.LeftDrawerContent>
                     <ListBox Name="DrawerList" Focusable="{Binding ElementName=DrawerList}">
                         <ListBox.Styles>
