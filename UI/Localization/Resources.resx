@@ -322,4 +322,16 @@
     <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
         <value>Analysis</value>
     </data>
+    <data name="XAML_LogFolder" xml:space="preserve">
+        <value>Open Log Folder</value>
+    </data>
+    <data name="XAML_Analyze" xml:space="preserve">
+        <value>Analyzing Log</value>
+    </data>
+    <data name="MsgBox_Content_PirateGame" xml:space="preserve">
+        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+    </data>
+    <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+        <value/>
+    </data>
 </root>

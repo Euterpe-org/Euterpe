@@ -1,10 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Autofac;
 using Avalonia;
-using Avalonia.Media;
-using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Models;
 using Serilog;
 
@@ -13,7 +10,6 @@ namespace MuseDashModToolsUI;
 internal static class Program
 {
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
-    private static IContainer? _container;
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
@@ -22,7 +18,7 @@ internal static class Program
     public static void Main(string[] args)
     {
         CreateLogger();
-        _container = RegisterDependencies();
+        RegisterDependencies();
         try
         {
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
@@ -40,7 +36,7 @@ internal static class Program
         }
     }
 
-    private static IContainer RegisterDependencies() => Bootstrapper.Register();
+    private static void RegisterDependencies() => Bootstrapper.Register();
 
     private static void CreateLogger()
     {
@@ -60,13 +56,5 @@ internal static class Program
     private static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .LogToTrace()
-            .With(new FontManagerOptions
-            {
-                DefaultFamilyName = _container?.Resolve<ISettingService>().Settings.FontName,
-                FontFallbacks = new[]
-                {
-                    new FontFallback { FontFamily = new FontFamily(_container?.Resolve<ISettingService>().Settings.FontName!) }
-                }
-            });
+            .LogToTrace();
 }

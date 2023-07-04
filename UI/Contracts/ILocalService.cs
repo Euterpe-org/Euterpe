@@ -13,6 +13,8 @@ public interface ILocalService
     Task CheckMelonLoaderInstall();
     Task OnInstallMelonLoader();
     Task OnUninstallMelonLoader();
+    Task<bool> CheckPirate(string logContent);
     Task OpenModsFolder();
     Task OpenUserDataFolder();
+    Task OpenLogFolder();
 }

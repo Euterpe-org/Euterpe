@@ -220,4 +220,52 @@ public class LocalService : ILocalService
             UseShellExecute = true
         });
     }
+
+    public async Task OpenLogFolder()
+    {
+        if (!IsValidPath)
+        {
+            Logger.Error("Not valid path, showing error message box...");
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await SettingService.OnChoosePath();
+            return;
+        }
+
+        Logger.Information("Opening Log folder...");
+        var logPath = Path.Combine(SettingService.Settings.MuseDashFolder!, "MelonLoader", "Latest.log");
+        if (OperatingSystem.IsWindows())
+            Process.Start("explorer.exe", "/select, " + logPath);
+        if (OperatingSystem.IsLinux())
+            Process.Start("xdg-open", "--select " + logPath);
+    }
+
+    public async Task<bool> CheckPirate(string logContent)
+    {
+        if (!logContent.Contains("ApplicationPath"))
+        {
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoApplicationPath);
+            return false;
+        }
+
+        var content = logContent.Split("\r\n");
+        foreach (var line in content)
+        {
+            if (!line.Contains("ApplicationPath")) continue;
+
+            var path = line[39..];
+            if (!path.Contains(@"steamapps\common\Muse Dash"))
+            {
+                Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash'");
+                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_PirateGame.Localize());
+                return false;
+            }
+
+            var vdfPath = Path.Combine(path[..^30], "libraryfolders.vdf");
+            if (File.Exists(vdfPath))
+            {
+            }
+        }
+
+        return true;
+    }
 }

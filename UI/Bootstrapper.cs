@@ -13,7 +13,7 @@ namespace MuseDashModToolsUI;
 
 public static class Bootstrapper
 {
-    public static IContainer Register()
+    public static void Register()
     {
         var builder = new ContainerBuilder();
 
@@ -32,17 +32,18 @@ public static class Bootstrapper
         builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
 
         // View Models
-        builder.RegisterType<ProjectWindowViewModel>().As<IProjectWindowViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<ProjectWindowViewModel>().As<IProjectWindowViewModel>().PropertiesAutowired()
+            .SingleInstance();
+        builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired()
+            .SingleInstance();
         builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().SingleInstance();
-        builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().SingleInstance();
+        builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
 
         var container = builder.Build();
         DependencyInjectionExtension.Resolver = type => container.Resolve(type!);
         LocalizeExtensions.LocalizationService = container.Resolve<ILocalizationService>();
         FontExtensions.FontManageService = container.Resolve<IFontManageService>();
-        return container;
     }
 }

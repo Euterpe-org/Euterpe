@@ -375,6 +375,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MsgBox_Content_NoApplicationPath {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoApplicationPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This mod does not have an available resource for download\n.
         /// </summary>
         internal static string MsgBox_Content_NoDownloadLink {
@@ -407,6 +416,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_NullPath {
             get {
                 return ResourceManager.GetString("MsgBox_Content_NullPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash&quot;\nAre you using pirate version?.
+        /// </summary>
+        internal static string MsgBox_Content_PirateGame {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_PirateGame", resourceCulture);
             }
         }
         
@@ -560,6 +578,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_All {
             get {
                 return ResourceManager.GetString("XAML_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzing Log.
+        /// </summary>
+        internal static string XAML_Analyze {
+            get {
+                return ResourceManager.GetString("XAML_Analyze", resourceCulture);
             }
         }
         
@@ -731,6 +758,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_Language {
             get {
                 return ResourceManager.GetString("XAML_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Log Folder.
+        /// </summary>
+        internal static string XAML_LogFolder {
+            get {
+                return ResourceManager.GetString("XAML_LogFolder", resourceCulture);
             }
         }
         

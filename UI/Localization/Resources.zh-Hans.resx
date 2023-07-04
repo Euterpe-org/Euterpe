@@ -321,4 +321,10 @@
     <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
         <value>分析</value>
     </data>
+    <data name="XAML_LogFolder" xml:space="preserve">
+        <value>打开日志文件夹</value>
+    </data>
+    <data name="XAML_Analyze" xml:space="preserve">
+        <value>分析日志</value>
+    </data>
 </root>

@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using MessageBox.Avalonia;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
 using MessageBox.Avalonia.Models;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Dto;
+using MsBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -20,13 +22,12 @@ public class MessageBoxService : IMessageBoxService
 {
     public Lazy<ISettingService>? SettingService { get; init; }
 
-    public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok,
-        Icon icon = Icon.Success)
+    public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.Success)
     {
         var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
         var isMainWindow = desktop?.MainWindow is not null;
         var messageBox = MessageBoxManager
-            .GetMessageBoxStandardWindow(new MessageBoxStandardParams
+            .GetMessageBoxStandard(new MessageBoxStandardParams
             {
                 ContentTitle = title,
                 ContentMessage = content,
@@ -36,7 +37,7 @@ public class MessageBoxService : IMessageBoxService
                 FontFamily = SettingService.Value.Settings.FontName,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
-        return isMainWindow ? await messageBox.Show(desktop!.MainWindow) : await messageBox.Show();
+        return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
     }
 
     public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) =>
@@ -61,7 +62,7 @@ public class MessageBoxService : IMessageBoxService
         var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
         var isMainWindow = desktop?.MainWindow is not null;
         var messageBox = MessageBoxManager
-            .GetMessageBoxCustomWindow(new MessageBoxCustomParams
+            .GetMessageBoxCustom(new MessageBoxCustomParams
             {
                 ContentTitle = title,
                 ContentMessage = content,
@@ -72,7 +73,7 @@ public class MessageBoxService : IMessageBoxService
                 FontFamily = SettingService.Value.Settings.FontName,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
-        return isMainWindow ? await messageBox.ShowDialog(desktop!.MainWindow) : await messageBox.Show();
+        return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
     }
 
     public async Task<string> CreateCustomConfirmMessageBox(string title, string content, int buttonCount, Icon icon)

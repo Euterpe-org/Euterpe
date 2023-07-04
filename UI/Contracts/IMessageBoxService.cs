@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MessageBox.Avalonia.Enums;
 using MessageBox.Avalonia.Models;
+using MsBox.Avalonia.Enums;
 
 namespace MuseDashModToolsUI.Contracts;
 
