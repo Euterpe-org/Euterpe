@@ -105,7 +105,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your downloaded mods are broken\nPlease delete 0KB mod if it exist, then restart the application.
+        ///   Looks up a localized string similar to Your downloaded mods are broken\nPlease delete 0KB mod if it exist, then restart the application\n{0}.
         /// </summary>
         internal static string MsgBox_Content_BrokenMods {
             get {

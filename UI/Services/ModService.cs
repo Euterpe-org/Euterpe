@@ -54,7 +54,7 @@ public class ModService : IModService
         }
         catch (Exception ex)
         {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_BrokenMods.Localize());
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_BrokenMods.Localize(), ex));
             await LocalService.OpenModsFolder();
             Logger.Fatal(ex, "Load local mods failed");
             Environment.Exit(0);
@@ -268,7 +268,7 @@ public class ModService : IModService
             {
                 var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
                 var result = await MessageBoxService.CreateConfirmMessageBox(
-                    string.Format(MsgBox_Content_DeleteModConfirm, item.Name, enabledReverseDependencyNames));
+                    string.Format(MsgBox_Content_DeleteModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
                 if (!result) return;
                 Settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
                     string.Format(MsgBox_Content_DisableReverseDependency, item.Name), enabledReverseDependencies,
