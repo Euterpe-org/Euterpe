@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
@@ -14,24 +13,20 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 {
     private readonly ILogAnalyzeService _logAnalyzeService;
     private readonly ILogger _logger;
-    private readonly ISettingService _settingService;
-    private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private string _logContent;
     public ILocalService LocalService { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
 
-    public LogAnalysisViewModel(ILogAnalyzeService logAnalyzeService, ILogger logger, ISettingService settingService)
+    public LogAnalysisViewModel(ILogAnalyzeService logAnalyzeService, ILogger logger)
     {
         _logAnalyzeService = logAnalyzeService;
         _logger = logger;
-        _settingService = settingService;
         Initialize();
     }
 
     public async void Initialize()
     {
         LogContent = await _logAnalyzeService.LoadLog();
-        StartLogFileMonitor();
         _logger.Information("Log Analysis Window Initialized");
     }
 
@@ -46,16 +41,4 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 
     [RelayCommand]
     private async Task OpenLogFolder() => await LocalService.OpenLogFolder();
-
-    private void StartLogFileMonitor()
-    {
-        _watcher.Path = _settingService.Settings.MelonLoaderFolder;
-        _watcher.Filter = "Latest.log";
-        _watcher.Renamed += (_, _) => Initialize();
-        _watcher.Changed += (_, _) => Initialize();
-        _watcher.Created += (_, _) => Initialize();
-        _watcher.Deleted += (_, _) => Initialize();
-        _watcher.EnableRaisingEvents = true;
-        _logger.Information("Log File Monitor Started");
-    }
 }

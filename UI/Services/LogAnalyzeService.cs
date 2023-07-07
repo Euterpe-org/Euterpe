@@ -17,6 +17,7 @@ namespace MuseDashModToolsUI.Services;
 
 public class LogAnalyzeService : ILogAnalyzeService
 {
+    private readonly FileSystemWatcher _watcher = new();
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
     public ISettingService SettingService { get; init; }
@@ -85,6 +86,7 @@ public class LogAnalyzeService : ILogAnalyzeService
         {
             LogContent = await File.ReadAllTextAsync(LogPath);
             Logger.Information("Read Log Success");
+            StartLogFileMonitor();
             return LogContent;
         }
         catch (Exception ex)
@@ -92,5 +94,17 @@ public class LogAnalyzeService : ILogAnalyzeService
             Logger.Error(ex, "Read Log Error");
             return string.Empty;
         }
+    }
+
+    private void StartLogFileMonitor()
+    {
+        _watcher.Path = SettingService.Settings.MelonLoaderFolder;
+        _watcher.Filter = "Latest.log";
+        _watcher.Renamed += async (_, _) => await LoadLog();
+        _watcher.Changed += async (_, _) => await LoadLog();
+        _watcher.Created += async (_, _) => await LoadLog();
+        _watcher.Deleted += async (_, _) => await LoadLog();
+        _watcher.EnableRaisingEvents = true;
+        Logger.Information("Log File Monitor Started");
     }
 }
