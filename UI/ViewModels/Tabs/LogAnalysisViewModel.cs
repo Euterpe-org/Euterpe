@@ -12,18 +12,16 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 {
-    private readonly ILocalService _localService;
     private readonly ILogAnalyzeService _logAnalyzeService;
     private readonly ILogger _logger;
     private readonly ISettingService _settingService;
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private string _logContent;
+    public ILocalService LocalService { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
 
-    public LogAnalysisViewModel(ILocalService localService, ILogAnalyzeService logAnalyzeService, ILogger logger,
-        ISettingService settingService)
+    public LogAnalysisViewModel(ILogAnalyzeService logAnalyzeService, ILogger logger, ISettingService settingService)
     {
-        _localService = localService;
         _logAnalyzeService = logAnalyzeService;
         _logger = logger;
         _settingService = settingService;
@@ -47,7 +45,7 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
     }
 
     [RelayCommand]
-    private async Task OpenLogFolder() => await _localService.OpenLogFolder();
+    private async Task OpenLogFolder() => await LocalService.OpenLogFolder();
 
     private void StartLogFileMonitor()
     {

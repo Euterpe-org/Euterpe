@@ -33,7 +33,7 @@
 
         <TabStrip Grid.Row="0" Grid.Column="1"
                   HorizontalAlignment="Center"
-                  Margin="-40,10,0,0"
+                  Margin="0,10,0,0"
                   ItemsSource="{Binding Tabs}"
                   SelectedIndex="{Binding SelectedTabIndex}">
             <Interaction.Behaviors>

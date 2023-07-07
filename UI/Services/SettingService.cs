@@ -64,6 +64,12 @@ public class SettingService : ISettingService
                 _logger.Warning("Settings.json stored language code is empty, using system language");
             }
 
+            if (string.IsNullOrEmpty(settings.FontName))
+            {
+                settings.FontName = "Segoe UI";
+                _logger.Warning("Settings.json stored font name is empty, using default font Segoe UI");
+            }
+
             Settings = settings.Clone();
         }
         catch (Exception ex)
