@@ -191,7 +191,7 @@ public class LocalService : ILocalService
         if (!logContent.Contains("ApplicationPath"))
         {
             await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoApplicationPath);
-            return false;
+            return true;
         }
 
         var content = logContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x[15..]);
@@ -207,23 +207,23 @@ public class LocalService : ILocalService
         {
             Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash'");
             await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_GamePathError.Localize());
-            return false;
+            return true;
         }
 
         var steamPath = path[..^30];
         var vdfPath = Path.Combine(steamPath, "libraryfolders.vdf");
-        if (!File.Exists(vdfPath)) return false;
+        if (!File.Exists(vdfPath)) return true;
 
         var stream = File.OpenRead(vdfPath);
         var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
         var data = kv.Deserialize<Dictionary<int, SteamLibraryFolder>>(stream);
 
         if (data.Values.Any(value => value.Path?.Replace(@"\\", @"\") == steamPath[..^10] && value.Apps.ContainsKey(774171)))
-            return true;
+            return false;
 
         Logger.Information("Cannot found download record in libraryfolders.vdf");
         await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
-        return false;
+        return true;
     }
 
     public async Task<string> LoadLog()

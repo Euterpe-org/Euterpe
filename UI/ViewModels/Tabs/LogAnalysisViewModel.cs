@@ -1,10 +1,14 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Extensions;
 using Serilog;
+using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -40,6 +44,14 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
     {
         var pirate = await _localService.CheckPirate(LogContent);
         if (pirate) return;
+        var content = LogContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x[15..]);
+        var melonLoaderVersion = content.First(x => x.Contains("MelonLoader")).Substring(13, 5);
+        if (melonLoaderVersion != "0.5.7")
+        {
+            _logger.Information("Incorrect MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion.Localize(),
+                melonLoaderVersion));
+        }
     }
 
     [RelayCommand]

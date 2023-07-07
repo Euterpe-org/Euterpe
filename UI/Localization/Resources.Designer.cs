@@ -258,6 +258,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7.
+        /// </summary>
+        internal static string MsgBox_Content_IncorrectMelonLoaderVersion {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_IncorrectMelonLoaderVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MuseDash.exe is not correct version \nAre you using a pirated or modified version?.
         /// </summary>
         internal static string MsgBox_Content_IncorrectVersion {
