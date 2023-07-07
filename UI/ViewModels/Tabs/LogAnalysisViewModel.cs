@@ -1,14 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Extensions;
 using Serilog;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -17,16 +13,18 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 {
     private readonly ILocalService _localService;
+    private readonly ILogAnalyzeService _logAnalyzeService;
     private readonly ILogger _logger;
     private readonly ISettingService _settingService;
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private string _logContent;
-
     public IMessageBoxService MessageBoxService { get; init; }
 
-    public LogAnalysisViewModel(ILocalService localService, ILogger logger, ISettingService settingService)
+    public LogAnalysisViewModel(ILocalService localService, ILogAnalyzeService logAnalyzeService, ILogger logger,
+        ISettingService settingService)
     {
         _localService = localService;
+        _logAnalyzeService = logAnalyzeService;
         _logger = logger;
         _settingService = settingService;
         Initialize();
@@ -34,7 +32,7 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 
     public async void Initialize()
     {
-        LogContent = await _localService.LoadLog();
+        LogContent = await _logAnalyzeService.LoadLog();
         StartLogFileMonitor();
         _logger.Information("Log Analysis Window Initialized");
     }
@@ -42,16 +40,10 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
     [RelayCommand]
     private async Task AnalyzeLog()
     {
-        var pirate = await _localService.CheckPirate(LogContent);
+        var pirate = await _logAnalyzeService.CheckPirate();
         if (pirate) return;
-        var content = LogContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x[15..]);
-        var melonLoaderVersion = content.First(x => x.Contains("MelonLoader")).Substring(13, 5);
-        if (melonLoaderVersion != "0.5.7")
-        {
-            _logger.Information("Incorrect MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion.Localize(),
-                melonLoaderVersion));
-        }
+        var correctVersion = await _logAnalyzeService.CheckMelonLoaderVersion();
+        if (!correctVersion) return;
     }
 
     [RelayCommand]

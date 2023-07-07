@@ -26,6 +26,7 @@ public static class Bootstrapper
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();

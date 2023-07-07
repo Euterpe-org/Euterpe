@@ -13,7 +13,6 @@ using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using Serilog;
-using ValveKeyValue;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
@@ -26,9 +25,7 @@ public class LocalService : ILocalService
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
     public ILogger Logger { get; init; }
     public ISettingService SettingService { get; init; }
-
     private bool IsValidPath { get; set; }
-    private string LogPath { get; set; }
 
     public IEnumerable<string> GetModFiles(string path) => Directory.GetFiles(path)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll")
@@ -186,65 +183,6 @@ public class LocalService : ILocalService
         }
     }
 
-    public async Task<bool> CheckPirate(string logContent)
-    {
-        if (!logContent.Contains("ApplicationPath"))
-        {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoApplicationPath);
-            return true;
-        }
-
-        var content = logContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x[15..]);
-        var path = string.Empty;
-
-        foreach (var line in content)
-        {
-            if (!line.Contains("ApplicationPath")) continue;
-            path = line[24..];
-        }
-
-        if (!path.Contains(@"steamapps\common\Muse Dash"))
-        {
-            Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash'");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_GamePathError.Localize());
-            return true;
-        }
-
-        var steamPath = path[..^30];
-        var vdfPath = Path.Combine(steamPath, "libraryfolders.vdf");
-        if (!File.Exists(vdfPath)) return true;
-
-        var stream = File.OpenRead(vdfPath);
-        var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
-        var data = kv.Deserialize<Dictionary<int, SteamLibraryFolder>>(stream);
-
-        if (data.Values.Any(value => value.Path?.Replace(@"\\", @"\") == steamPath[..^10] && value.Apps.ContainsKey(774171)))
-            return false;
-
-        Logger.Information("Cannot found download record in libraryfolders.vdf");
-        await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
-        return true;
-    }
-
-    public async Task<string> LoadLog()
-    {
-        if (!string.IsNullOrEmpty(SettingService.Settings.MelonLoaderFolder))
-            LogPath = Path.Combine(SettingService.Settings.MelonLoaderFolder, "Latest.log");
-        if (!File.Exists(LogPath)) return string.Empty;
-
-        try
-        {
-            var logContent = await File.ReadAllTextAsync(LogPath);
-            Logger.Information("Read Log Success");
-            return logContent;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex, "Read Log Error");
-            return string.Empty;
-        }
-    }
-
     public async Task OpenModsFolder()
     {
         if (!IsValidPath)
@@ -291,10 +229,11 @@ public class LocalService : ILocalService
             return;
         }
 
+        var logPath = Path.Combine(SettingService.Settings.MelonLoaderFolder, "Latest.log");
         Logger.Information("Opening Log folder...");
         if (OperatingSystem.IsWindows())
-            Process.Start("explorer.exe", "/select, " + LogPath);
+            Process.Start("explorer.exe", "/select, " + logPath);
         if (OperatingSystem.IsLinux())
-            Process.Start("xdg-open", LogPath);
+            Process.Start("xdg-open", logPath);
     }
 }
