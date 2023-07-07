@@ -12,35 +12,48 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 {
+    private readonly ILocalService _localService;
     private readonly ILogger _logger;
     private readonly ISettingService _settingService;
+    private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private string _logContent;
-    private string _logPath;
-    public ILocalService LocalService { get; init; }
+
     public IMessageBoxService MessageBoxService { get; init; }
 
-    public LogAnalysisViewModel(ILogger logger, ISettingService settingService)
+    public LogAnalysisViewModel(ILocalService localService, ILogger logger, ISettingService settingService)
     {
+        _localService = localService;
         _logger = logger;
         _settingService = settingService;
         Initialize();
     }
 
-    private void Initialize()
+    public async void Initialize()
     {
-        _logPath = Path.Combine(_settingService.Settings.MuseDashFolder!, "MelonLoader", "Latest.log");
-        if (File.Exists(_logPath))
-            LogContent = File.ReadAllText(_logPath);
-        _logger.Information("Log Analysis Window Initialize");
+        LogContent = await _localService.LoadLog();
+        StartLogFileMonitor();
+        _logger.Information("Log Analysis Window Initialized");
     }
 
     [RelayCommand]
     private async Task AnalyzeLog()
     {
-        var pirate = await LocalService.CheckPirate(LogContent);
+        var pirate = await _localService.CheckPirate(LogContent);
         if (pirate) return;
     }
 
     [RelayCommand]
-    private async Task OpenLogFolder() => await LocalService.OpenLogFolder();
+    private async Task OpenLogFolder() => await _localService.OpenLogFolder();
+
+    private void StartLogFileMonitor()
+    {
+        _watcher.Path = _settingService.Settings.MelonLoaderFolder;
+        _watcher.Filter = "Latest.log";
+        _watcher.Renamed += (_, _) => Initialize();
+        _watcher.Changed += (_, _) => Initialize();
+        _watcher.Created += (_, _) => Initialize();
+        _watcher.Deleted += (_, _) => Initialize();
+        _watcher.EnableRaisingEvents = true;
+        _logger.Information("Log File Monitor Started");
+    }
 }

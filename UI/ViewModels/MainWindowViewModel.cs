@@ -17,7 +17,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
     private readonly ILogger _logger;
     private readonly ISettingService _settingService;
-    [ObservableProperty] private ViewModelBase? _content;
+    [ObservableProperty] private ViewModelBase _content;
     [ObservableProperty] private int _selectedTabIndex;
     [ObservableProperty] private List<TabView> _tabs = new();
     public static string Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)!;

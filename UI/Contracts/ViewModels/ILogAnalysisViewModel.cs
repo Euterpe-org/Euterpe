@@ -2,4 +2,5 @@
 
 public interface ILogAnalysisViewModel
 {
+    void Initialize();
 }

@@ -17,6 +17,10 @@ public class Setting
     public string ModsFolder =>
         !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "Mods") : string.Empty;
 
+    [JsonIgnore]
+    public string MelonLoaderFolder =>
+        !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "MelonLoader") : string.Empty;
+
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;

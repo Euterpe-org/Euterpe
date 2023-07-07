@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <PublishSingleFile>true</PublishSingleFile>
         <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <Version>1.2.0</Version>
-        <TrimMode>copyused</TrimMode>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>

@@ -23,6 +23,7 @@ public class SettingService : ISettingService
 {
     private readonly ILogger _logger;
     public IMessageBoxService MessageBoxService { get; init; }
+    public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
     public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
@@ -32,7 +33,7 @@ public class SettingService : ISettingService
         LoadSavedSetting().Wait();
     }
 
-    public Setting Settings { get; set; } = new();
+    public Setting Settings { get; private set; } = new();
 
     public async Task InitializeSettings()
     {
@@ -111,6 +112,7 @@ public class SettingService : ISettingService
 
             SettingsViewModel.Value.Initialize();
             ModManageViewModel.Value.Initialize();
+            LogAnalysisViewModel.Value.Initialize();
             return;
         }
     }

@@ -31,7 +31,7 @@ internal static class Program
                 if (OperatingSystem.IsWindows())
                     Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
                 if (OperatingSystem.IsLinux())
-                    Process.Start("xdg-open", "--select " + Path.Combine("Logs", LogFileName));
+                    Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
             }
         }
     }

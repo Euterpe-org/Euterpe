@@ -56,7 +56,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     {
         await _settingService.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
-        FileMonitorStart();
+        StartModsDllMonitor();
         _logger.Information("Mod Manage Window Initialized");
     }
 
@@ -141,7 +141,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _sourceCache.Refresh();
     }
 
-    private void FileMonitorStart()
+    private void StartModsDllMonitor()
     {
         _watcher.Path = _settingService.Settings.ModsFolder;
         _watcher.Filters.Add("*.dll");
@@ -151,6 +151,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.EnableRaisingEvents = true;
-        _logger.Information("File Monitor Started");
+        _logger.Information("Mods Dll File Monitor Started");
     }
 }

@@ -40,6 +40,8 @@ public class MessageBoxService : IMessageBoxService
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
     }
 
+    public async Task<ButtonResult> CreateSuccessMessageBox(string content) => await CreateMessageBox(MsgBox_Title_Success, content);
+
     public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) =>
         await CreateMessageBox(title, content, icon: Icon.Error);
 
