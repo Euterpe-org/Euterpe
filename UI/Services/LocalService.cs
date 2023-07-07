@@ -13,6 +13,7 @@ using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using Serilog;
+using ValveKeyValue;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
@@ -193,26 +194,36 @@ public class LocalService : ILocalService
             return false;
         }
 
-        var content = logContent.Split("\r\n");
+        var content = logContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x[15..]);
+        var path = string.Empty;
+
         foreach (var line in content)
         {
             if (!line.Contains("ApplicationPath")) continue;
-
-            var path = line[39..];
-            if (!path.Contains(@"steamapps\common\Muse Dash"))
-            {
-                Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash'");
-                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_PirateGame.Localize());
-                return false;
-            }
-
-            var vdfPath = Path.Combine(path[..^30], "libraryfolders.vdf");
-            if (File.Exists(vdfPath))
-            {
-            }
+            path = line[24..];
         }
 
-        return true;
+        if (!path.Contains(@"steamapps\common\Muse Dash"))
+        {
+            Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash'");
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_GamePathError.Localize());
+            return false;
+        }
+
+        var steamPath = path[..^30];
+        var vdfPath = Path.Combine(steamPath, "libraryfolders.vdf");
+        if (!File.Exists(vdfPath)) return false;
+
+        var stream = File.OpenRead(vdfPath);
+        var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
+        var data = kv.Deserialize<Dictionary<int, SteamLibraryFolder>>(stream);
+
+        if (data.Values.Any(value => value.Path?.Replace(@"\\", @"\") == steamPath[..^10] && value.Apps.ContainsKey(774171)))
+            return true;
+
+        Logger.Information("Cannot found download record in libraryfolders.vdf");
+        await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
+        return false;
     }
 
     public async Task<string> LoadLog()

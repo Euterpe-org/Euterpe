@@ -240,6 +240,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash&quot;\nAre you using pirate version?.
+        /// </summary>
+        internal static string MsgBox_Content_GamePathError {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_GamePathError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to get mod list from any source.
         /// </summary>
         internal static string MsgBox_Content_GetModListFailed {
@@ -375,7 +384,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to You don&apos;t have application path in the log.
         /// </summary>
         internal static string MsgBox_Content_NoApplicationPath {
             get {
@@ -402,6 +411,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot verify you have bought the game on Steam\nAre you using pirate version?.
+        /// </summary>
+        internal static string MsgBox_Content_NoInstallRecord {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoInstallRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot find MelonLoader Folder\nHave you installed MelonLoader?.
         /// </summary>
         internal static string MsgBox_Content_NoMelonLoaderFolder {
@@ -416,15 +434,6 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_NullPath {
             get {
                 return ResourceManager.GetString("MsgBox_Content_NullPath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash&quot;\nAre you using pirate version?.
-        /// </summary>
-        internal static string MsgBox_Content_PirateGame {
-            get {
-                return ResourceManager.GetString("MsgBox_Content_PirateGame", resourceCulture);
             }
         }
         
