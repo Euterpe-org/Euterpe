@@ -60,22 +60,24 @@ public partial class Mod : ObservableObject
     public string? SHA256 { get; set; }
     public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : string.Empty);
 
-    public void SetDefault()
+    public Mod SetDefault()
     {
         LocalVersion = null;
         IsIncompatible = false;
+        IsDisabled = false;
         FileName = null;
         IsTracked = false;
         IsShaMismatched = false;
         IsDuplicated = false;
         SHA256 = null;
+        return this;
     }
 }
 
 public enum UpdateState
 {
-    Normal = 0,
     Outdated = -1,
+    Normal = 0,
     Newer = 1,
     Modified = 2
 }

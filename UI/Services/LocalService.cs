@@ -155,8 +155,7 @@ public class LocalService : ILocalService
     public async Task OnUninstallMelonLoader()
     {
         if (!IsValidPath) return;
-        var result = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize());
-        if (!result) return;
+        if (!await MessageBoxService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader.Localize())) return;
         var versionFile = Path.Join(SettingService.Settings.MuseDashFolder, "version.dll");
         var noticeTxt = Path.Join(SettingService.Settings.MuseDashFolder, "NOTICE.txt");
 
