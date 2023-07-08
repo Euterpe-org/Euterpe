@@ -1,7 +1,7 @@
 # MuseDashModToolsUI
 
 [![Release Download Count](https://img.shields.io/github/downloads/MDModsDev/MuseDashModToolsUI/total)](https://github.com/MDModsDev/MuseDashModToolsUI/releases/latest)
-[![Contributors](https://img.shields.io/github/contributors/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDv/MuseDashModToolsUI/graphs/contributors)
+[![Contributors](https://img.shields.io/github/contributors/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/graphs/contributors)
 [![Discord](https://img.shields.io/discord/812100927468470273)](https://discord.gg/mdmc)
 [![Crowdin](https://badges.crowdin.net/musedashmodtools/localized.svg)](https://crowdin.com/project/musedashmodtools)
 ![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)
