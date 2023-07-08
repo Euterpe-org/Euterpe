@@ -193,75 +193,6 @@ public class ModService : IModService
         }
     }
 
-    private async Task DisableReverseDependencies(Mod item)
-    {
-        var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
-        if (enabledReverseDependencies.Length == 0) return;
-
-        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
-        var result = await MessageBoxService.CreateConfirmMessageBox(
-            string.Format(MsgBox_Content_DeleteModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
-        if (!result) return;
-
-        Settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
-            string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
-            enabledReverseDependencies, Settings.Settings.AskDisableDependenciesWhenDeleting, true);
-    }
-
-    private async Task HandleDeleteModException(Mod item, Exception ex)
-    {
-        var errorMsg = string.Format(
-            ex is UnauthorizedAccessException or IOException
-                ? MsgBox_Content_UninstallModFailed_Game.Localize()
-                : MsgBox_Content_UninstallModFailed.Localize(), ex);
-
-        Logger.Error(ex, "Delete mod {Name} failed", item.Name);
-        await MessageBoxService.CreateErrorMessageBox(errorMsg);
-    }
-
-    private async Task EnabledReverseDependencies(Mod item)
-    {
-        var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
-        if (enabledReverseDependencies.Length == 0) return;
-        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
-        var result = await MessageBoxService.CreateConfirmMessageBox(string.Format(MsgBox_Content_DisableModConfirm.Localize(),
-            item.Name, enabledReverseDependencyNames));
-        if (!result)
-        {
-            item.IsDisabled = !item.IsDisabled;
-            return;
-        }
-
-        Settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
-            string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
-            enabledReverseDependencies, Settings.Settings.AskDisableDependenciesWhenDisabling, true);
-    }
-
-    private async Task DisabledDependencies(Mod item)
-    {
-        var disabledDependencies = SearchDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
-        if (disabledDependencies.Length == 0) return;
-        var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
-        Settings.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
-            string.Format(MsgBox_Content_EnableDependency, item.Name, disabledDependencyNames),
-            disabledDependencies, Settings.Settings.AskEnableDependenciesWhenEnabling, false);
-    }
-
-    private async Task HandleToggleModException(Mod item, Exception ex)
-    {
-        var errorMsg = ex switch
-        {
-            UnauthorizedAccessException => MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
-            IOException => MsgBox_Content_ChangeModStateFailed_Game.Localize(),
-            _ => MsgBox_Content_ChangeModStateFailed.Localize()
-        };
-
-        Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-        await MessageBoxService.CreateErrorMessageBox(string.Format(errorMsg, ex));
-
-        item.IsDisabled = !item.IsDisabled;
-    }
-
     private async Task InstallDependency(string name)
     {
         var dependencies = SearchDependencies(name).ToArray();
@@ -296,6 +227,75 @@ public class ModService : IModService
                 string.Format(MsgBox_Content_EnableDependency, name, disabledDependencyNames),
                 disabledDependencies, Settings.Settings.AskEnableDependenciesWhenInstalling, false);
         }
+    }
+
+    private async Task EnabledReverseDependencies(Mod item)
+    {
+        var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
+        if (enabledReverseDependencies.Length == 0) return;
+        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
+        var result = await MessageBoxService.CreateConfirmMessageBox(string.Format(MsgBox_Content_DisableModConfirm.Localize(),
+            item.Name, enabledReverseDependencyNames));
+        if (!result)
+        {
+            item.IsDisabled = !item.IsDisabled;
+            return;
+        }
+
+        Settings.Settings.AskDisableDependenciesWhenDisabling = await ChangeDependenciesState(
+            string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
+            enabledReverseDependencies, Settings.Settings.AskDisableDependenciesWhenDisabling, true);
+    }
+
+    private async Task DisabledDependencies(Mod item)
+    {
+        var disabledDependencies = SearchDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
+        if (disabledDependencies.Length == 0) return;
+        var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
+        Settings.Settings.AskEnableDependenciesWhenEnabling = await ChangeDependenciesState(
+            string.Format(MsgBox_Content_EnableDependency, item.Name, disabledDependencyNames),
+            disabledDependencies, Settings.Settings.AskEnableDependenciesWhenEnabling, false);
+    }
+
+    private async Task DisableReverseDependencies(Mod item)
+    {
+        var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
+        if (enabledReverseDependencies.Length == 0) return;
+
+        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
+        var result = await MessageBoxService.CreateConfirmMessageBox(
+            string.Format(MsgBox_Content_DeleteModConfirm.Localize(), item.Name, enabledReverseDependencyNames));
+        if (!result) return;
+
+        Settings.Settings.AskDisableDependenciesWhenDeleting = await ChangeDependenciesState(
+            string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
+            enabledReverseDependencies, Settings.Settings.AskDisableDependenciesWhenDeleting, true);
+    }
+
+    private async Task HandleToggleModException(Mod item, Exception ex)
+    {
+        var errorMsg = ex switch
+        {
+            UnauthorizedAccessException => MsgBox_Content_ChangeModStateFailed_Unauthorized.Localize(),
+            IOException => MsgBox_Content_ChangeModStateFailed_Game.Localize(),
+            _ => MsgBox_Content_ChangeModStateFailed.Localize()
+        };
+
+        Logger.Error(ex, "Change mod {Name} state failed", item.Name);
+        await MessageBoxService.CreateErrorMessageBox(string.Format(errorMsg, ex));
+
+        item.IsDisabled = !item.IsDisabled;
+    }
+
+    private async Task HandleDeleteModException(Mod item, Exception ex)
+    {
+        var errorMsg = string.Format(
+            ex is UnauthorizedAccessException or IOException
+                ? MsgBox_Content_UninstallModFailed_Game.Localize()
+                : MsgBox_Content_UninstallModFailed.Localize(), ex);
+
+        Logger.Error(ex, "Delete mod {Name} failed", item.Name);
+        await MessageBoxService.CreateErrorMessageBox(errorMsg);
     }
 
     private async Task LoadModsToUI(List<Mod> localMods, List<Mod>? webMods)
