@@ -1,6 +1,13 @@
 # MuseDashModToolsUI
 
-## -A UI app for making muse dash modding easier
+[![Release Download Count](https://img.shields.io/github/downloads/MDModsDev/MuseDashModToolsUI/total)](https://github.com/MDModsDev/MuseDashModToolsUI/releases/latest)
+[![Contributors](https://img.shields.io/github/contributors/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDv/MuseDashModToolsUI/graphs/contributors)
+[![Discord](https://img.shields.io/discord/812100927468470273)](https://discord.gg/mdmc)
+[![Crowdin](https://badges.crowdin.net/musedashmodtools/localized.svg)](https://crowdin.com/project/musedashmodtools)
+![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)
+![Release Version](https://img.shields.io/github/v/release/MDModsDev/MuseDashModToolsUI)
+
+## A UI app for making muse dash modding easier
 [中文说明](https://www.bilibili.com/read/cv22748380)
 
 ### What it can do
@@ -20,9 +27,8 @@
 
 
 ### Translation
-[![Crowdin](https://badges.crowdin.net/musedashmodtools/localized.svg)](https://crowdin.com/project/musedashmodtools)
 
-**Current Supported Languages:**
+#### Current Supported Languages:
 
 1. English (Default)
 2. Chinese Simplified
