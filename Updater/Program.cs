@@ -14,7 +14,8 @@ else
     await DownloadUpdates(args);
     Console.WriteLine("Download finished. Extracting...");
     Unzip(args[1], args[2]);
-    Console.WriteLine("Extracting finished. Launching MuseDashModTools...");
+    Console.WriteLine("Extracting finished. Pressing any key to launch MuseDashModTools");
+    Console.ReadKey();
     Process.Start(Path.Combine(args[2], "MuseDashModTools.exe"));
 }
 

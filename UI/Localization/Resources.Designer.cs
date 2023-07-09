@@ -402,6 +402,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot find purchase record for Muse Dash&apos;s DLC\nYou have to buy it in order to play custom chart.
+        /// </summary>
+        internal static string MsgBox_Content_NoDlcPurchased {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoDlcPurchased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This mod does not have an available resource for download\n.
         /// </summary>
         internal static string MsgBox_Content_NoDownloadLink {

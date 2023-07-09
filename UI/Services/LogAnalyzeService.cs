@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -51,19 +50,30 @@ public class LogAnalyzeService : ILogAnalyzeService
         }
 
         var steamPath = gamePath[..^40];
-        var vdfPath = Path.Combine(steamPath, "steamapps", "libraryfolders.vdf");
-        if (!File.Exists(vdfPath)) return true;
+        var acfPath = Path.Combine(steamPath, "steamapps", "appmanifest_774171.acf");
+        if (!File.Exists(acfPath))
+        {
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
+            Logger.Information("Cannot find appmanifest_774171.acf");
+            return true;
+        }
 
-        var stream = File.OpenRead(vdfPath);
+        var stream = File.OpenRead(acfPath);
         var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
-        var data = kv.Deserialize<Dictionary<int, SteamLibraryFolder>>(stream);
+        var data = kv.Deserialize<AppState>(stream);
 
-        if (data.Values.Any(value => value.Path?.Replace(@"\\", @"\") == steamPath && value.Apps.ContainsKey(774171)))
-            return false;
+        if (data.Appid != 774171 || data.Name != "Muse Dash" || data.InstalledDepots.Keys.All(x => x != 774172))
+        {
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
+            Logger.Information("Cannot find Muse Dash download record in file");
+            return true;
+        }
 
-        Logger.Information("Cannot found download record in libraryfolders.vdf");
-        await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
-        return true;
+        if (data.InstalledDepots.Keys.Any(x => x == 1055810) && data.InstalledDepots[1055810]["dlcappid"] == 1055810) return false;
+
+        await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoDlcPurchased.Localize());
+        Logger.Information("Cannot find Muse Dash DLC purchase record in file");
+        return false;
     }
 
     public async Task<bool> CheckMelonLoaderVersion()
