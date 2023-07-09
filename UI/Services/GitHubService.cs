@@ -105,7 +105,7 @@ public class GitHubService : IGitHubService
             if (version <= currentVersion)
             {
                 if (userClick)
-                    await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_LatestVersion.Localize());
+                    await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion.Localize());
                 return;
             }
 

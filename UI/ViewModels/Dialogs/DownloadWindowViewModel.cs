@@ -79,7 +79,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         }
 
         Logger.Information("MelonLoader install success");
-        await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_InstallMelonLoaderSuccess.Localize());
+        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_InstallMelonLoaderSuccess.Localize());
         DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
     }
 

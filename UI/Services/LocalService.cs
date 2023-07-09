@@ -167,7 +167,7 @@ public class LocalService : ILocalService
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
                 Logger.Information("MelonLoader uninstalled successfully");
-                await MessageBoxService.CreateMessageBox(MsgBox_Title_Success, MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
+                await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_UninstallMelonLoaderSuccess.Localize());
             }
             catch (Exception ex)
             {
