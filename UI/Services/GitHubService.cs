@@ -29,7 +29,7 @@ public class GitHubService : IGitHubService
 
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
-    private Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
+    private static Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
     {
         { DownloadSources.Github, PrimaryLink },
         { DownloadSources.GithubMirror, SecondaryLink },
