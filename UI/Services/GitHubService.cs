@@ -130,10 +130,9 @@ public class GitHubService : IGitHubService
 
     private async Task<bool> SkipVersionCheck(Version version, Version currentVersion, bool userClick)
     {
-        if (version == SettingService.Settings.SkipVersion) return true;
+        if (!userClick) return version == SettingService.Settings.SkipVersion || version <= currentVersion;
         if (version > currentVersion) return false;
-        if (userClick)
-            await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion.Localize());
+        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion.Localize());
         return true;
     }
 
