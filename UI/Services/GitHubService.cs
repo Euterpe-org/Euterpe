@@ -172,7 +172,7 @@ public class GitHubService : IGitHubService
         try
         {
             var result = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-            Logger.Information("Get MelonLoader Download ResponseHeader from {URL} success", url);
+            Logger.Information("Get MelonLoader Download ResponseHeader from {Url} success", url);
 
             var totalLength = result.Content.Headers.ContentLength;
             var contentStream = await result.Content.ReadAsStreamAsync();
@@ -193,7 +193,7 @@ public class GitHubService : IGitHubService
         }
         catch
         {
-            Logger.Warning("Download MelonLoader from {URL} failed", url);
+            Logger.Warning("Download MelonLoader from {Url} failed", url);
             return null;
         }
     }
@@ -204,14 +204,14 @@ public class GitHubService : IGitHubService
         try
         {
             var result = await Client.GetAsync(url);
-            Logger.Information("Download mod from {URL} success", url);
+            Logger.Information("Download mod from {Url} success", url);
             await using var fs = new FileStream(path, FileMode.OpenOrCreate);
             await result.Content.CopyToAsync(fs);
             return result;
         }
         catch
         {
-            Logger.Warning("Download mod from {URL} failed", url);
+            Logger.Warning("Download mod from {Url} failed", url);
             return null;
         }
     }
@@ -222,12 +222,12 @@ public class GitHubService : IGitHubService
         try
         {
             var mods = (await Client.GetFromJsonAsync<List<Mod>>(url))!;
-            Logger.Information("Get mod list from {URL} success", url);
+            Logger.Information("Get mod list from {Url} success", url);
             return mods;
         }
         catch
         {
-            Logger.Warning("Get mod list from {URL} failed", url);
+            Logger.Warning("Get mod list from {Url} failed", url);
             return null;
         }
     }
