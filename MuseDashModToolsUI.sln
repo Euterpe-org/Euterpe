@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MuseDashModToolsUI", "UI\Mu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModToolsUI.Updater", "Updater\MuseDashModToolsUI.Updater.csproj", "{32E03077-D3BA-4309-AAE8-1FFC2F22A238}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModToolsUI.Test", "UI.Test\MuseDashModToolsUI.Test.csproj", "{DAC8DAA0-003E-485C-8600-84F4B5B8CEA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{32E03077-D3BA-4309-AAE8-1FFC2F22A238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32E03077-D3BA-4309-AAE8-1FFC2F22A238}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32E03077-D3BA-4309-AAE8-1FFC2F22A238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC8DAA0-003E-485C-8600-84F4B5B8CEA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC8DAA0-003E-485C-8600-84F4B5B8CEA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC8DAA0-003E-485C-8600-84F4B5B8CEA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC8DAA0-003E-485C-8600-84F4B5B8CEA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

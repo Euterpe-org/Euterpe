@@ -1,16 +1,32 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
-        x:Class="MuseDashModToolsUI.Views.ProjectWindow"
+        xmlns:dialogs="clr-namespace:MuseDashModToolsUI.ViewModels.Dialogs"
+        xmlns:contract="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
+        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions"
+        x:Class="MuseDashModToolsUI.Views.Dialogs.ProjectWindow"
+        x:DataType="dialogs:ProjectWindowViewModel"
+        DataContext="{ext:DependencyInjection Type=contract:IProjectWindowViewModel}"
         Title="ProjectWindow">
-    <Grid RowDefinitions="100,100,150,80" Width="800" ShowGridLines="True">
+
+    <Grid RowDefinitions="100,100,150,80" Width="800">
+        <Grid.Styles>
+            <Style Selector="Button">
+                <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
+            </Style>
+            <Style Selector="MenuItem">
+                <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
+            </Style>
+            <Style Selector="MenuItem ContentPresenter">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </Grid.Styles>
 
         <Button Grid.Row="0"
                 Width="150"
                 Classes="Flat"
                 HorizontalAlignment="Center"
                 ToolTip.Tip="Muse Dash Modding Community Website"
-                Command="{Binding OpenUrlCommand}"
                 CommandParameter="https://mdmc.moe/"
                 Margin="-500,0,0,0">
             <Image Source="/Assets/MDMC_Website.png" Width="150" />
@@ -20,7 +36,6 @@
                 Classes="Flat"
                 HorizontalAlignment="Center"
                 ToolTip.Tip="Muse Dash Mod Tools Project"
-                Command="{Binding OpenUrlCommand}"
                 CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
             <Image Source="/Assets/Icon.png" Margin="-7,0,0,5" />
         </Button>
@@ -29,7 +44,6 @@
                 Classes="Flat"
                 HorizontalAlignment="Center"
                 ToolTip.Tip="Muse Dash Modding Community Discord"
-                Command="{Binding OpenUrlCommand}"
                 CommandParameter="https://discord.gg/mdmc"
                 Margin="500,0,0,0">
             <Image Source="/Assets/MDMC_Discord.png" Width="80" />
@@ -60,24 +74,26 @@
         </controls:Card>
 
         <Menu Grid.Row="3" HorizontalAlignment="Left">
+            <Menu.Styles>
+                <Style Selector="MenuItem AccessText">
+                    <Setter Property="FontSize" Value="13" />
+                </Style>
+            </Menu.Styles>
             <!--Account-->
-            <MenuItem Header="Social Account" Width="100">
+            <MenuItem Header="Social Account" Width="120">
                 <MenuItem Header="BiliBili"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://space.bilibili.com/255895683">
                     <MenuItem.Icon>
                         <Image Source="/Assets/bilibili.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Github"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://github.com/lxymahatma">
                     <MenuItem.Icon>
                         <Image Source="/Assets/github.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Twitch"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://www.twitch.tv/lxymahatma">
                     <MenuItem.Icon>
                         <Image Source="/Assets/twitch.png" />
@@ -86,16 +102,14 @@
             </MenuItem>
 
             <!--Donate-->
-            <MenuItem Header="Donate" Width="100">
+            <MenuItem Header="Donate" Width="80">
                 <MenuItem Header="爱发电"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://afdian.net/a/lxymahatma">
                     <MenuItem.Icon>
                         <Image Source="/Assets/afdian.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Patreon"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://www.patreon.com/user?u=58140035">
                     <MenuItem.Icon>
                         <Image Source="/Assets/patreon.png" />
@@ -105,7 +119,7 @@
         </Menu>
 
         <!--Super Pig-->
-        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Classes="Dark" Width="150" Height="150" Margin="225,0">
+        <controls:Card Grid.Row="2" HorizontalAlignment="Left" Width="150" Height="150" Margin="225,0">
             <StackPanel>
                 <Image Width="60" Height="60" Source="/Assets/Super_Pig.png" />
                 <TextBlock Classes="Body1"
@@ -118,11 +132,10 @@
             </StackPanel>
         </controls:Card>
 
-        <Menu Grid.Row="3" HorizontalAlignment="Left" Margin="200,0,0,0">
+        <Menu Grid.Row="3" HorizontalAlignment="Left" Margin="225,0,0,0">
             <!--Account-->
-            <MenuItem Header="Social Account" Width="200">
+            <MenuItem Header="Social Account" Width="150">
                 <MenuItem Header="BiliBili"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://space.bilibili.com/252615263">
                     <MenuItem.Icon>
                         <Image Source="/Assets/bilibili.png" />
@@ -132,7 +145,8 @@
         </Menu>
 
         <!--Balint-->
-        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150" Margin="0,0,225,0">
+        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Width="150" Height="150"
+                       Margin="0,0,225,0">
             <StackPanel>
                 <Image Width="60" Height="60" Source="/Assets/Balint.png" />
                 <TextBlock Classes="Body1"
@@ -145,11 +159,10 @@
             </StackPanel>
         </controls:Card>
 
-        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,200,0">
+        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,225,0">
             <!--Account-->
-            <MenuItem Header="Social Account" Width="200">
+            <MenuItem Header="Social Account" Width="150">
                 <MenuItem Header="Github"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://github.com/Balint817">
                     <MenuItem.Icon>
                         <Image Source="/Assets/github.png" />
@@ -159,7 +172,7 @@
         </Menu>
 
         <!--Ultra Rabbit-->
-        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Classes="Dark" Width="150" Height="150" Margin="25,0">
+        <controls:Card Grid.Row="2" HorizontalAlignment="Right" Width="150" Height="150" Margin="25,0">
             <StackPanel>
                 <Image Width="60" Height="60" Source="/Assets/Ultra_Rabbit.jpg" />
                 <TextBlock Classes="Body1"
@@ -172,11 +185,10 @@
             </StackPanel>
         </controls:Card>
 
-        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,0,0">
+        <Menu Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,25,0">
             <!--Account-->
-            <MenuItem Header="Social Account" Width="200">
+            <MenuItem Header="Social Account" Width="150">
                 <MenuItem Header="Github"
-                          Command="{Binding OpenUrlCommand}"
                           CommandParameter="https://github.com/TheBunnies">
                     <MenuItem.Icon>
                         <Image Source="/Assets/github.png" />

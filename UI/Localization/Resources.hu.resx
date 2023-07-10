@@ -49,9 +49,9 @@
         <value>MelonLoader\nEltávolítása</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
-        <value>Útvonal</value>
+        <value>Muse Dash mappa</value>
     </data>
-    <data name="XAML_Mods" xml:space="preserve">
+    <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Mappa</value>
     </data>
     <data name="XAML_SearchBar" xml:space="preserve">
@@ -112,7 +112,7 @@
         <value>Még nem választottal Muse Dash mappát\nVálaszd ki a mappát</value>
     </data>
     <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
-        <value>A letöltött modjaid érvénytelenek\nHa van 0KB-os mod, akkor azt töröld ki</value>
+        <value>A letöltött modjaid érvénytelenek\nHa van 0KB-os mod, akkor azt töröld ki\n{0}</value>
     </data>
     <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
         <value>Ellenőrzés sikertelen\nBiztos hogy online vagy?</value>
@@ -210,10 +210,10 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>Duplikálja:</value>
     </data>
-    <data name="MsgBox_Content_EnableReverseDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} az a(z) {1}-nek a függősége\nBiztos hogy ki akarod kapcsolni?</value>
     </data>
-    <data name="MsgBox_Content_DisableDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>Ki akarod kapcsolni a(z) {0}-ra függő modokat?</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
@@ -225,7 +225,7 @@
     <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0} sikeresen eltávolítva\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} az a(z) {1}-nek a függősége\nBiztos hogy ki akarod törölni?</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
@@ -257,5 +257,89 @@
     </data>
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>MelonLoader el lesz távolítva\nErősítsd meg a műveletet</value>
+    </data>
+    <data name="XAML_Tab_ModManage" xml:space="preserve">
+        <value>Mod-ok</value>
+    </data>
+    <data name="XAML_Tab_Setting" xml:space="preserve">
+        <value>Beállítások</value>
+    </data>
+    <data name="XAML_UserDataFolder" xml:space="preserve">
+        <value>UserData</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+        <value>Függőségek bekapcsolása mod telepítésekor</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+        <value>Függőségek bekapcsolása mod bekapcsolásakor</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+        <value>Függőségek kikapcsolása mod törlésekor</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+        <value>Függőségek kikapcsolása mod kikapcsolásakor</value>
+    </data>
+    <data name="XAML_ChangePath" xml:space="preserve">
+        <value>Mappaválasztás</value>
+    </data>
+    <data name="XAML_HelpTranslate" xml:space="preserve">
+        <value>Közreműködés</value>
+    </data>
+    <data name="XAML_Language" xml:space="preserve">
+        <value>Nyelv: </value>
+    </data>
+    <data name="XAML_Apply" xml:space="preserve">
+        <value>Alkalmaz</value>
+    </data>
+    <data name="XAML_AskType_Always" xml:space="preserve">
+        <value>Kérdezz rá</value>
+    </data>
+    <data name="XAML_AskType_Yes" xml:space="preserve">
+        <value>Igen</value>
+    </data>
+    <data name="XAML_AskType_No" xml:space="preserve">
+        <value>Nem</value>
+    </data>
+    <data name="XAML_DownloadSource" xml:space="preserve">
+        <value>Download Source: </value>
+    </data>
+    <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github Mirror</value>
+    </data>
+    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+    <data name="XAML_Font" xml:space="preserve">
+        <value>Font:</value>
+    </data>
+    <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
+        <value>Failed to get mod list from any source</value>
+    </data>
+    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+        <value>Analysis</value>
+    </data>
+    <data name="XAML_LogFolder" xml:space="preserve">
+        <value>Open Log Folder</value>
+    </data>
+    <data name="XAML_Analyze" xml:space="preserve">
+        <value>Analyzing Log</value>
+    </data>
+    <data name="MsgBox_Content_GamePathError" xml:space="preserve">
+        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+    </data>
+    <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+        <value>You don't have application path in the log</value>
+    </data>
+    <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
+        <value>Cannot verify you have bought the game on Steam\nAre you using pirate version?</value>
+    </data>
+    <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
+        <value>You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7</value>
+    </data>
+    <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
+        <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
     </data>
 </root>

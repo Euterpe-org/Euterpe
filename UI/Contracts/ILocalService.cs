@@ -6,7 +6,7 @@ namespace MuseDashModToolsUI.Contracts;
 
 public interface ILocalService
 {
-    List<string> GetModFiles(string path);
+    IEnumerable<string> GetModFiles(string path);
     Mod? LoadMod(string filePath);
     Task<bool> CheckValidPath();
     Task<string> ReadGameVersion();
@@ -14,4 +14,6 @@ public interface ILocalService
     Task OnInstallMelonLoader();
     Task OnUninstallMelonLoader();
     Task OpenModsFolder();
+    Task OpenUserDataFolder();
+    Task OpenLogFolder();
 }

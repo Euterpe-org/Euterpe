@@ -1,159 +1,59 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text.Json;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DynamicData;
-using DynamicData.Binding;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
+using Serilog;
+using static MuseDashModToolsUI.Localization.Resources;
 
-#pragma warning disable CS8618
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
-    private readonly IGitHubService _gitHubService;
-    private readonly ILocalService _localService;
-    private readonly ReadOnlyObservableCollection<Mod> _mods;
-    private readonly IModService _modService;
-    private readonly ISettingService _settings;
+    private readonly ILogger _logger;
+    private readonly ISettingService _settingService;
+    [ObservableProperty] private ViewModelBase _content;
+    [ObservableProperty] private int _selectedTabIndex;
+    [ObservableProperty] private List<TabView> _tabs = new();
+    public static string Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)!;
 
-    private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
-    private readonly FileSystemWatcher _watcher = new();
-    [ObservableProperty] private FilterType _categoryFilterType;
-    [ObservableProperty] private string _filter;
-    public ReadOnlyObservableCollection<Mod> Mods => _mods;
-
-    public MainWindowViewModel(IGitHubService gitHubService, ISettingService settings, ILocalService localService, IModService modService)
+    public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ILogAnalysisViewModel logAnalysisViewModel,
+        ISettingService settingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
     {
-        _gitHubService = gitHubService;
-        _settings = settings;
-        _localService = localService;
-        _modService = modService;
+        _logger = logger;
+        _settingService = settingService;
 
-        _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(_filter) || x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase) ||
-                         x.XamlDescription.Contains(_filter, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => _categoryFilterType != FilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
-            .Filter(x => _categoryFilterType != FilterType.Outdated || x.State == UpdateState.Outdated)
-            .Filter(x => _categoryFilterType != FilterType.Installed || x.IsLocal)
-            .Filter(x => _categoryFilterType != FilterType.Incompatible || x is { IsIncompatible: true, IsLocal: true })
-            .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
-            .Bind(out _mods)
-            .Subscribe();
-
-        Initialize();
+        Tabs = new List<TabView>
+        {
+            new((ViewModelBase)modManageViewModel, XAML_Tab_ModManage, "ModManage"),
+            new((ViewModelBase)logAnalysisViewModel, XAML_Tab_LogAnalysis, "LogAnalysis"),
+            new((ViewModelBase)settingsViewModel, XAML_Tab_Setting, "Setting")
+        };
+        SwitchTab();
+        gitHubService.CheckUpdates();
+        _logger.Information("Main Window initialized");
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
 
-    private async void Initialize()
+    [RelayCommand]
+    private void SwitchTab()
     {
-        await _settings.InitializeSettings();
-        await _modService.InitializeModList(_sourceCache, Mods);
-        await _gitHubService.CheckUpdates();
-        FileMonitorStart();
-    }
-
-    [RelayCommand]
-    private async Task OnInstallMod(Mod item)
-    {
-        _watcher.EnableRaisingEvents = false;
-        await _modService.OnInstallMod(item);
-        _watcher.EnableRaisingEvents = true;
-    }
-
-    [RelayCommand]
-    private async Task OnReinstallMod(Mod item)
-    {
-        _watcher.EnableRaisingEvents = false;
-        await _modService.OnReinstallMod(item);
-        _watcher.EnableRaisingEvents = true;
-    }
-
-    [RelayCommand]
-    private async Task OnToggleMod(Mod item)
-    {
-        _watcher.EnableRaisingEvents = false;
-        await _modService.OnToggleMod(item);
-        _watcher.EnableRaisingEvents = true;
-    }
-
-    [RelayCommand]
-    private async Task OnDeleteMod(Mod item)
-    {
-        _watcher.EnableRaisingEvents = false;
-        await _modService.OnDeleteMod(item);
-        _watcher.EnableRaisingEvents = true;
-    }
-
-    [RelayCommand]
-    private async Task OnInstallMelonLoader() => await _localService.OnInstallMelonLoader();
-
-    [RelayCommand]
-    private async Task OnUninstallMelonLoader() => await _localService.OnUninstallMelonLoader();
-
-    [RelayCommand]
-    private async Task OnChoosePath()
-    {
-        await _settings.OnChoosePath();
-        Initialize();
-    }
-
-    [RelayCommand]
-    private void OpenUrl(string path)
-    {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = path,
-            UseShellExecute = true
-        });
-    }
-
-    [RelayCommand]
-    private async Task OpenModsFolder() => await _localService.OpenModsFolder();
-
-    [RelayCommand]
-    private async Task OnCheckUpdate() => await _gitHubService.CheckUpdates(true);
-
-    [RelayCommand]
-    private void OnFilterAll() => CategoryFilterType = FilterType.All;
-
-    [RelayCommand]
-    private void OnFilterInstalled() => CategoryFilterType = FilterType.Installed;
-
-    [RelayCommand]
-    private void OnFilterEnabled() => CategoryFilterType = FilterType.Enabled;
-
-    [RelayCommand]
-    private void OnFilterOutdated() => CategoryFilterType = FilterType.Outdated;
-
-    [RelayCommand]
-    private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
-
-    partial void OnFilterChanged(string value) => _sourceCache.Refresh();
-    partial void OnCategoryFilterTypeChanged(FilterType value) => _sourceCache.Refresh();
-
-    private void FileMonitorStart()
-    {
-        _watcher.Path = _settings.Settings.ModsFolder;
-        _watcher.Filters.Add("*.dll");
-        _watcher.Filters.Add("*.disabled");
-        _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.Changed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.EnableRaisingEvents = true;
+        Content = Tabs[SelectedTabIndex].ViewModel;
+        var name = Tabs[SelectedTabIndex].Name;
+        _logger.Information("Switching tab to {Name}", name);
     }
 
     private void OnExit(object sender, EventArgs e)
     {
-        var json = JsonSerializer.Serialize(_settings.Settings, new JsonSerializerOptions { WriteIndented = true });
+        var json = JsonSerializer.Serialize(_settingService.Settings, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText("Settings.json", json);
+        _logger.Information("Settings saved");
     }
 }

@@ -1,63 +1,50 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
+using Autofac;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Services;
 using MuseDashModToolsUI.ViewModels;
-using Splat;
+using MuseDashModToolsUI.ViewModels.Dialogs;
+using MuseDashModToolsUI.ViewModels.Tabs;
+using Serilog;
 
 namespace MuseDashModToolsUI;
 
 public static class Bootstrapper
 {
-    public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
+    public static void Register()
     {
-        // Dialog Service
-        services.Register<IDialogueService>(() => new DialogueService());
+        var builder = new ContainerBuilder();
 
-        // Github Service
-        services.Register<IGitHubService>(() => new GitHubService(new HttpClient(), resolver.GetRequiredService<IDialogueService>()));
+        // Instances
+        builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
+        builder.RegisterInstance(new HttpClient());
 
-        // Setting Service
-        services.RegisterConstant<ISettingService>(new SettingService(resolver.GetRequiredService<IDialogueService>()));
+        // Services
+        builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
+        builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
+        builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
 
-        // Localization Service
-        services.RegisterConstant<ILocalizationService>(new LocalizationService(resolver.GetRequiredService<ISettingService>()));
+        // View Models
+        builder.RegisterType<ProjectWindowViewModel>().As<IProjectWindowViewModel>().PropertiesAutowired()
+            .SingleInstance();
+        builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired()
+            .SingleInstance();
+        builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().SingleInstance();
+        builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
 
-        // Download Window View Model
-        services.RegisterLazySingleton<IDownloadWindowViewModel>(() => new DownloadWindowViewModel(
-            resolver.GetRequiredService<IDialogueService>(),
-            resolver.GetRequiredService<IGitHubService>(),
-            resolver.GetRequiredService<ISettingService>()));
-
-        // Local Service
-        services.RegisterConstant<ILocalService>(new LocalService(
-            resolver.GetRequiredService<IDialogueService>(),
-            resolver.GetRequiredService<ISettingService>(),
-            resolver.GetRequiredService<IDownloadWindowViewModel>()));
-
-        // Mod Service
-        services.RegisterConstant<IModService>(new ModService(
-            resolver.GetRequiredService<IDialogueService>(),
-            resolver.GetRequiredService<IGitHubService>(),
-            resolver.GetRequiredService<ISettingService>(),
-            resolver.GetRequiredService<ILocalService>()));
-
-        // Main Window View Model
-        services.RegisterLazySingleton<IMainWindowViewModel>(() => new MainWindowViewModel(
-            resolver.GetRequiredService<IGitHubService>(),
-            resolver.GetRequiredService<ISettingService>(),
-            resolver.GetRequiredService<ILocalService>(),
-            resolver.GetRequiredService<IModService>()));
-    }
-
-    public static TService GetRequiredService<TService>(this IReadonlyDependencyResolver resolver)
-    {
-        var service = resolver.GetService<TService>();
-        if (service is null) // Splat is not able to resolve type for us
-            throw new InvalidOperationException(
-                $"Failed to resolve object of type {typeof(TService)}"); // throw error with detailed description
-
-        return service; // return instance if not null
+        var container = builder.Build();
+        DependencyInjectionExtension.Resolver = type => container.Resolve(type!);
+        LocalizeExtensions.LocalizationService = container.Resolve<ILocalizationService>();
+        FontExtensions.FontManageService = container.Resolve<IFontManageService>();
     }
 }

@@ -50,9 +50,9 @@
         <value>Uninstall\nMelonLoader</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
-        <value>Path</value>
+        <value>Muse Dash Folder Path</value>
     </data>
-    <data name="XAML_Mods" xml:space="preserve">
+    <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Mods</value>
     </data>
     <data name="XAML_SearchBar" xml:space="preserve">
@@ -113,7 +113,7 @@
         <value>You haven't choose Muse Dash Folder\nPlease choose the folder</value>
     </data>
     <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
-        <value>Your downloaded mods are broken\nPlease delete 0kb mod if it exist, then restart the application</value>
+        <value>Your downloaded mods are broken\nPlease delete 0KB mod if it exist, then restart the application\n{0}</value>
     </data>
     <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
         <value>Checking updates failed\nAre you online?</value>
@@ -211,10 +211,10 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>Duplicated by:</value>
     </data>
-    <data name="MsgBox_Content_EnableReverseDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} is used by {1} as dependency\nAre you sure you want to disable this mod?</value>
     </data>
-    <data name="MsgBox_Content_DisableDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>Do you want to disable the mods depend on {0}?</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
@@ -226,7 +226,7 @@
     <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0} has been successfully deleted\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} is used by {1} as dependency\nAre you sure you want to delete this mod?</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
@@ -258,5 +258,89 @@
     </data>
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>You are asking to uninstall MelonLoader\nPlease confirm your operation</value>
+    </data>
+    <data name="XAML_Tab_ModManage" xml:space="preserve">
+        <value>Mods</value>
+    </data>
+    <data name="XAML_Tab_Setting" xml:space="preserve">
+        <value>Setting</value>
+    </data>
+    <data name="XAML_UserDataFolder" xml:space="preserve">
+        <value>UserData</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+        <value>Enable dependency when installing mod</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+        <value>Enable dependency when enabling mod</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+        <value>Disable dependency when deleting mod</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+        <value>Disable dependency when disabling mod</value>
+    </data>
+    <data name="XAML_ChangePath" xml:space="preserve">
+        <value>Change Path</value>
+    </data>
+    <data name="XAML_HelpTranslate" xml:space="preserve">
+        <value>Help Translate</value>
+    </data>
+    <data name="XAML_Language" xml:space="preserve">
+        <value>Language: </value>
+    </data>
+    <data name="XAML_Apply" xml:space="preserve">
+        <value>Apply</value>
+    </data>
+    <data name="XAML_AskType_Always" xml:space="preserve">
+        <value>Always Ask</value>
+    </data>
+    <data name="XAML_AskType_Yes" xml:space="preserve">
+        <value>Yes</value>
+    </data>
+    <data name="XAML_AskType_No" xml:space="preserve">
+        <value>No</value>
+    </data>
+    <data name="XAML_DownloadSource" xml:space="preserve">
+        <value>Download Source: </value>
+    </data>
+    <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github Mirror</value>
+    </data>
+    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+    <data name="XAML_Font" xml:space="preserve">
+        <value>Font:</value>
+    </data>
+    <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
+        <value>Failed to get mod list from any source</value>
+    </data>
+    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+        <value>Analysis</value>
+    </data>
+    <data name="XAML_LogFolder" xml:space="preserve">
+        <value>Open Log Folder</value>
+    </data>
+    <data name="XAML_Analyze" xml:space="preserve">
+        <value>Analyzing Log</value>
+    </data>
+    <data name="MsgBox_Content_GamePathError" xml:space="preserve">
+        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+    </data>
+    <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+        <value>You don't have application path in the log</value>
+    </data>
+    <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
+        <value>Cannot verify you have bought the game on Steam\nAre you using pirate version?</value>
+    </data>
+    <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
+        <value>You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7</value>
+    </data>
+    <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
+        <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
     </data>
 </root>

@@ -105,7 +105,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your downloaded mods are broken\nPlease delete 0kb mod if it exist, then restart the application.
+        ///   Looks up a localized string similar to Your downloaded mods are broken\nPlease delete 0KB mod if it exist, then restart the application\n{0}.
         /// </summary>
         internal static string MsgBox_Content_BrokenMods {
             get {
@@ -186,11 +186,29 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to delete this mod?.
+        /// </summary>
+        internal static string MsgBox_Content_DeleteModConfirm {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DeleteModConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to disable this mod?.
+        /// </summary>
+        internal static string MsgBox_Content_DisableModConfirm {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DisableModConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to disable the mods depend on {0}?.
         /// </summary>
-        internal static string MsgBox_Content_DisableDependency {
+        internal static string MsgBox_Content_DisableReverseDependency {
             get {
-                return ResourceManager.GetString("MsgBox_Content_DisableDependency", resourceCulture);
+                return ResourceManager.GetString("MsgBox_Content_DisableReverseDependency", resourceCulture);
             }
         }
         
@@ -213,20 +231,38 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to disable this mod?.
-        /// </summary>
-        internal static string MsgBox_Content_EnableReverseDependency {
-            get {
-                return ResourceManager.GetString("MsgBox_Content_EnableReverseDependency", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Failed to verify MuseDash.exe\nMake sure you selected the right folder.
         /// </summary>
         internal static string MsgBox_Content_ExeVerifyFailed {
             get {
                 return ResourceManager.GetString("MsgBox_Content_ExeVerifyFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash&quot;\nAre you using pirate version?.
+        /// </summary>
+        internal static string MsgBox_Content_GamePathError {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_GamePathError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to get mod list from any source.
+        /// </summary>
+        internal static string MsgBox_Content_GetModListFailed {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_GetModListFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7.
+        /// </summary>
+        internal static string MsgBox_Content_IncorrectMelonLoaderVersion {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_IncorrectMelonLoaderVersion", resourceCulture);
             }
         }
         
@@ -357,6 +393,24 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have application path in the log.
+        /// </summary>
+        internal static string MsgBox_Content_NoApplicationPath {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoApplicationPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find purchase record for Muse Dash&apos;s DLC\nYou have to buy it in order to play custom chart.
+        /// </summary>
+        internal static string MsgBox_Content_NoDlcPurchased {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoDlcPurchased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This mod does not have an available resource for download\n.
         /// </summary>
         internal static string MsgBox_Content_NoDownloadLink {
@@ -371,6 +425,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_NoExeFound {
             get {
                 return ResourceManager.GetString("MsgBox_Content_NoExeFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot verify you have bought the game on Steam\nAre you using pirate version?.
+        /// </summary>
+        internal static string MsgBox_Content_NoInstallRecord {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoInstallRecord", resourceCulture);
             }
         }
         
@@ -407,15 +470,6 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_ReinstallMod {
             get {
                 return ResourceManager.GetString("MsgBox_Content_ReinstallMod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to delete this mod?.
-        /// </summary>
-        internal static string MsgBox_Content_UninstallDependency {
-            get {
-                return ResourceManager.GetString("MsgBox_Content_UninstallDependency", resourceCulture);
             }
         }
         
@@ -555,6 +609,60 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyzing Log.
+        /// </summary>
+        internal static string XAML_Analyze {
+            get {
+                return ResourceManager.GetString("XAML_Analyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        internal static string XAML_Apply {
+            get {
+                return ResourceManager.GetString("XAML_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always Ask.
+        /// </summary>
+        internal static string XAML_AskType_Always {
+            get {
+                return ResourceManager.GetString("XAML_AskType_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string XAML_AskType_No {
+            get {
+                return ResourceManager.GetString("XAML_AskType_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string XAML_AskType_Yes {
+            get {
+                return ResourceManager.GetString("XAML_AskType_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Path.
+        /// </summary>
+        internal static string XAML_ChangePath {
+            get {
+                return ResourceManager.GetString("XAML_ChangePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Update.
         /// </summary>
         internal static string XAML_Check_Update {
@@ -564,11 +672,65 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download Source: .
+        /// </summary>
+        internal static string XAML_DownloadSource {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gitee.
+        /// </summary>
+        internal static string XAML_DownloadSource_Gitee {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource_Gitee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Github.
+        /// </summary>
+        internal static string XAML_DownloadSource_Github {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource_Github", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Github Mirror.
+        /// </summary>
+        internal static string XAML_DownloadSource_GithubMirror {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource_GithubMirror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
         internal static string XAML_Enabled {
             get {
                 return ResourceManager.GetString("XAML_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font:.
+        /// </summary>
+        internal static string XAML_Font {
+            get {
+                return ResourceManager.GetString("XAML_Font", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help Translate.
+        /// </summary>
+        internal static string XAML_HelpTranslate {
+            get {
+                return ResourceManager.GetString("XAML_HelpTranslate", resourceCulture);
             }
         }
         
@@ -614,6 +776,24 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_Installed {
             get {
                 return ResourceManager.GetString("XAML_Installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language: .
+        /// </summary>
+        internal static string XAML_Language {
+            get {
+                return ResourceManager.GetString("XAML_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Log Folder.
+        /// </summary>
+        internal static string XAML_LogFolder {
+            get {
+                return ResourceManager.GetString("XAML_LogFolder", resourceCulture);
             }
         }
         
@@ -701,9 +881,9 @@ namespace MuseDashModToolsUI.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
-        internal static string XAML_Mods {
+        internal static string XAML_ModsFolder {
             get {
-                return ResourceManager.GetString("XAML_Mods", resourceCulture);
+                return ResourceManager.GetString("XAML_ModsFolder", resourceCulture);
             }
         }
         
@@ -717,7 +897,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path.
+        ///   Looks up a localized string similar to Muse Dash Folder Path.
         /// </summary>
         internal static string XAML_Path {
             get {
@@ -740,6 +920,69 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_SearchBar {
             get {
                 return ResourceManager.GetString("XAML_SearchBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable dependency when deleting mod.
+        /// </summary>
+        internal static string XAML_Setting_DisableDependency_Delete {
+            get {
+                return ResourceManager.GetString("XAML_Setting_DisableDependency_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable dependency when disabling mod.
+        /// </summary>
+        internal static string XAML_Setting_DisableDependency_Disable {
+            get {
+                return ResourceManager.GetString("XAML_Setting_DisableDependency_Disable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable dependency when enabling mod.
+        /// </summary>
+        internal static string XAML_Setting_EnableDependency_Enable {
+            get {
+                return ResourceManager.GetString("XAML_Setting_EnableDependency_Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable dependency when installing mod.
+        /// </summary>
+        internal static string XAML_Setting_EnableDependency_Install {
+            get {
+                return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis.
+        /// </summary>
+        internal static string XAML_Tab_LogAnalysis {
+            get {
+                return ResourceManager.GetString("XAML_Tab_LogAnalysis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mods.
+        /// </summary>
+        internal static string XAML_Tab_ModManage {
+            get {
+                return ResourceManager.GetString("XAML_Tab_ModManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        internal static string XAML_Tab_Setting {
+            get {
+                return ResourceManager.GetString("XAML_Tab_Setting", resourceCulture);
             }
         }
         
@@ -767,6 +1010,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_Update_Mod {
             get {
                 return ResourceManager.GetString("XAML_Update_Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserData.
+        /// </summary>
+        internal static string XAML_UserDataFolder {
+            get {
+                return ResourceManager.GetString("XAML_UserDataFolder", resourceCulture);
             }
         }
     }

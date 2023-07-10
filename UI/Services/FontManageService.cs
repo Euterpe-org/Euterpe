@@ -1,0 +1,45 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using Avalonia.Media;
+using MuseDashModToolsUI.Contracts;
+using Serilog;
+using SkiaSharp;
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+
+namespace MuseDashModToolsUI.Services;
+
+public class FontManageService : IFontManageService, INotifyPropertyChanged
+{
+    private readonly ILogger _logger;
+    private readonly SKFontManager _skFontManager = SKFontManager.Default;
+    public ISettingService? SettingService { get; init; }
+
+    public FontFamily this[string _] => new(SettingService.Settings.FontName!);
+
+    public FontManageService(ILogger logger)
+    {
+        _logger = logger;
+        GetAvailableFonts();
+    }
+
+    public List<string> AvailableFonts { get; private set; } = new();
+
+    public void SetFont(string fontName)
+    {
+        if (SettingService.Settings.FontName == fontName) return;
+        SettingService.Settings.FontName = fontName;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
+        _logger.Information("Font changed to {FontName}", fontName);
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void GetAvailableFonts()
+    {
+        AvailableFonts = _skFontManager.GetFontFamilies().Order().ToList();
+        _logger.Information("Available fonts loaded: {InstalledFonts}", string.Join(",", AvailableFonts));
+    }
+}

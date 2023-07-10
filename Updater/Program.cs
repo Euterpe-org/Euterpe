@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using ICSharpCode.SharpZipLib.Zip;
+using ShellProgressBar;
 
 HttpClient httpClient = new();
 
@@ -13,12 +14,24 @@ else
     await DownloadUpdates(args);
     Console.WriteLine("Download finished. Extracting...");
     Unzip(args[1], args[2]);
-    Console.WriteLine("Extracting finished. Launching MuseDashModTools...");
+    Console.WriteLine("Extracting finished. Pressing any key to launch MuseDashModTools");
+    Console.ReadKey();
     Process.Start(Path.Combine(args[2], "MuseDashModTools.exe"));
 }
 
+return;
+
 async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
 {
+    var options = new ProgressBarOptions
+    {
+        ForegroundColorDone = ConsoleColor.DarkGreen,
+        ProgressCharacter = '─',
+        ProgressBarOnBottom = true
+    };
+    using var progressBar = new ProgressBar(10000, "Download Progress", options);
+    var progress = progressBar.AsProgress<double>();
+
     HttpResponseMessage result;
     try
     {
@@ -28,13 +41,11 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
     {
         try
         {
-            result = await httpClient.GetAsync("https://hub.gitmirror.com/" + downloadArgs[0],
-                HttpCompletionOption.ResponseContentRead);
+            result = await httpClient.GetAsync("https://hub.gitmirror.com/" + downloadArgs[0], HttpCompletionOption.ResponseHeadersRead);
         }
         catch
         {
-            result = await httpClient.GetAsync("https://ghproxy.com/" + downloadArgs[0],
-                HttpCompletionOption.ResponseHeadersRead);
+            result = await httpClient.GetAsync("https://ghproxy.com/" + downloadArgs[0], HttpCompletionOption.ResponseHeadersRead);
         }
     }
 
@@ -50,7 +61,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
         {
             readLength += length;
             if (totalLength > 0)
-                Console.WriteLine("Current download progress: " + Math.Round((double)readLength / totalLength.Value * 100, 2) + "%");
+                progress.Report(Math.Round((double)readLength / totalLength.Value * 100, 4));
 
             fs.Write(buffer, 0, length);
         }

@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <root>
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
         <xsd:element name="root" msdata:IsDataSet="true">
@@ -50,9 +49,9 @@
         <value>卸载\nMelonLoader</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
-        <value>游戏路径</value>
+        <value>Muse Dash 文件夹路径</value>
     </data>
-    <data name="XAML_Mods" xml:space="preserve">
+    <data name="XAML_ModsFolder" xml:space="preserve">
         <value>模组文件夹</value>
     </data>
     <data name="XAML_SearchBar" xml:space="preserve">
@@ -113,7 +112,7 @@
         <value>你还没有选择 Muse Dash 的文件夹\n请选择文件夹</value>
     </data>
     <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
-        <value>你下载的mod有问题\n如果有0kb的mod，请删除之后重新启动应用</value>
+        <value>你下载的 Mod 有问题\n如果有0KB的 Mod，请删除之后重新启动应用\n{0}</value>
     </data>
     <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
         <value>检查更新失败\n是否联网？</value>
@@ -211,10 +210,10 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>重复：</value>
     </data>
-    <data name="MsgBox_Content_EnableReverseDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} 被 {1} 用作依赖\n你确定你想要禁用这个mod？</value>
     </data>
-    <data name="MsgBox_Content_DisableDependency" xml:space="preserve">
+    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>你想要禁用依赖于 {0} 的mod吗？</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
@@ -226,8 +225,8 @@
     <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0}已经被成功删除\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallDependency" xml:space="preserve">
-        <value>{0} 使用依赖 {1} \n你确定你想要删除这个mod吗？</value>
+    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
+        <value>{0} 被 {1} 用作依赖 \n你确定你想要删除这个mod吗？</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
         <value>Mod启用/禁用失败。没有权限\n{0}</value>
@@ -258,5 +257,89 @@
     </data>
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>你正在要求卸载 MelonLoader\n请确认你的操作</value>
+    </data>
+    <data name="XAML_Tab_ModManage" xml:space="preserve">
+        <value>模组</value>
+    </data>
+    <data name="XAML_Tab_Setting" xml:space="preserve">
+        <value>设置</value>
+    </data>
+    <data name="XAML_UserDataFolder" xml:space="preserve">
+        <value>配置文件夹</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+        <value>安装 mod 时启用依赖</value>
+    </data>
+    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+        <value>启用 mod 时启用依赖</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+        <value>删除 mod 时禁用依赖</value>
+    </data>
+    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+        <value>禁用 mod 时禁用依赖</value>
+    </data>
+    <data name="XAML_ChangePath" xml:space="preserve">
+        <value>更改路径</value>
+    </data>
+    <data name="XAML_HelpTranslate" xml:space="preserve">
+        <value>帮助翻译</value>
+    </data>
+    <data name="XAML_Language" xml:space="preserve">
+        <value>语言：</value>
+    </data>
+    <data name="XAML_Apply" xml:space="preserve">
+        <value>应用</value>
+    </data>
+    <data name="XAML_AskType_Always" xml:space="preserve">
+        <value>总是询问</value>
+    </data>
+    <data name="XAML_AskType_Yes" xml:space="preserve">
+        <value>是</value>
+    </data>
+    <data name="XAML_AskType_No" xml:space="preserve">
+        <value>否</value>
+    </data>
+    <data name="XAML_DownloadSource" xml:space="preserve">
+        <value>下载源：</value>
+    </data>
+    <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github 镜像</value>
+    </data>
+    <data name="XAML_Font" xml:space="preserve">
+        <value>字体：</value>
+    </data>
+    <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
+        <value>无法从任一下载源获取 Mod 列表</value>
+    </data>
+    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+        <value>分析</value>
+    </data>
+    <data name="XAML_LogFolder" xml:space="preserve">
+        <value>打开日志文件夹</value>
+    </data>
+    <data name="XAML_Analyze" xml:space="preserve">
+        <value>分析日志</value>
+    </data>
+    <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
+        <value>无法验证你在Steam上购买了此游戏\n你在使用盗版吗？</value>
+    </data>
+    <data name="MsgBox_Content_GamePathError" xml:space="preserve">
+        <value>你的游戏路径没有包含"steamapps\common\Muse Dash"\n你在使用盗版吗？</value>
+    </data>
+    <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+        <value>你的日志中没有包含应用路径</value>
+    </data>
+    <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
+        <value>你安装了错误版本的 MelonLoader：{0}\n请使用模组管理界面的按钮安装 MelonLoader 0.5.7</value>
+    </data>
+    <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
+        <value>无法找到 Muse Dash DLC 的购买记录\n你需要购买以游玩自制谱</value>
     </data>
 </root>
