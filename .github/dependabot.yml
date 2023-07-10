@@ -1,7 +1,7 @@
 ﻿version: 2
 updates:
   - package-ecosystem: "nuget"
-    target-branch: "dev/rewrite"
+    target-branch: "master"
     directory: "/"
     schedule:
       interval: "daily"

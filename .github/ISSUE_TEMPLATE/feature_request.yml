@@ -1,0 +1,19 @@
+name: Feature Request
+description: What things do you think is needed to add into Muse Dash Mod Tools UI
+labels: "feature request"
+body:
+  - type: textarea
+    id: introduction
+    attributes:
+      label: Brief Introduction
+      placeholder: Briefly describes the functions you want to add
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: Details
+      placeholder: More details like method parameters or what specifically the variables could do
+    validations:
+      required: true
