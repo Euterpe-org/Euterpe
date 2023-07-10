@@ -113,7 +113,7 @@ public class ModService : IModService
             }
         }
 
-        await InstallDependency(item);
+        await CheckDependencyInstall(item);
 
         if (errors.Length > 0)
         {
@@ -155,7 +155,7 @@ public class ModService : IModService
             }
             else
             {
-                await InstallDependency(item);
+                await CheckDependencyInstall(item);
             }
 
             File.Move(Path.Join(SettingService.Settings.ModsFolder, item.FileNameExtended(true)),
@@ -207,7 +207,7 @@ public class ModService : IModService
         }
     }
 
-    private async Task InstallDependency(Mod item)
+    private async Task CheckDependencyInstall(Mod item)
     {
         var dependencies = SearchDependencies(item.Name!).ToArray();
         foreach (var dependency in dependencies)
@@ -225,7 +225,7 @@ public class ModService : IModService
                 dependency.SHA256 = mod.SHA256;
                 Logger.Information("Install dependency {Name} success", mod.Name);
                 _sourceCache!.AddOrUpdate(dependency);
-                await InstallDependency(dependency);
+                await CheckDependencyInstall(dependency);
             }
             catch (Exception ex)
             {
@@ -233,13 +233,13 @@ public class ModService : IModService
             }
         }
 
-        SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item,
+        SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
             MsgBox_Content_EnableDependency, SettingService.Settings.AskEnableDependenciesWhenInstalling);
     }
 
-    private async Task<AskType> EnableDependencies(Mod item, string message, AskType askType)
+    private async Task<AskType> EnableDependencies(Mod item, IEnumerable<Mod> dependencies, string message, AskType askType)
     {
-        var disabledDependencies = SearchDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
+        var disabledDependencies = dependencies.Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
         if (disabledDependencies.Length == 0) return askType;
         var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
 
