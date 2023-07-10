@@ -102,25 +102,25 @@
     <data name="FolderDialog_Title" xml:space="preserve">
         <value>选择 Muse Dash 文件夹</value>
     </data>
-    <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
+  <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
         <value>你选择的路径无效，请再次选择</value>
     </data>
-    <data name="MsgBox_Content_NullPath" xml:space="preserve">
+  <data name="MsgBox_Content_NullPath" xml:space="preserve">
         <value>你所存储的 Muse Dash 文件夹是空\n请选择正确的文件夹</value>
     </data>
-    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
+  <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
         <value>你还没有选择 Muse Dash 的文件夹\n请选择文件夹</value>
     </data>
-    <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
+  <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
         <value>你下载的 Mod 有问题\n如果有0KB的 Mod，请删除之后重新启动应用\n{0}</value>
     </data>
-    <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
+  <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
         <value>检查更新失败\n是否联网？</value>
     </data>
-    <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
+  <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
         <value>无法找到 Updater.exe\n请确认你下载了整个软件</value>
     </data>
-    <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
+  <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
         <value>无法将 Updater.exe 复制到目标文件夹\n{0}</value>
     </data>
     <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
@@ -141,55 +141,55 @@
     <data name="MsgBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
         <value>MelonLoader 已经成功被卸载\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallMelonLoaderFailed" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallMelonLoaderFailed" xml:space="preserve">
         <value>无法卸载 MelonLoader\n请确认你的游戏没有在运行！</value>
     </data>
-    <data name="MsgBox_Content_NoMelonLoaderFolder" xml:space="preserve">
+  <data name="MsgBox_Content_NoMelonLoaderFolder" xml:space="preserve">
         <value>无法找到 MelonLoader 文件夹\n你是否安装了 MelonLoader？</value>
     </data>
-    <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
+  <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
         <value>先选择正确的 Muse Dash文件夹！</value>
     </data>
-    <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
-        <value>你没有安装 MuseDashModTools 的 mod\n每次开启 Muse Dash 的时候会自动检查mod更新\n是否现在安装？</value>
+  <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
+        <value>你没有安装 MuseDashModTools 的mod\n每次开启 Muse Dash 的时候会自动检查mod更新\n是否现在安装？</value>
     </data>
-    <data name="MsgBox_Content_NoDownloadLink" xml:space="preserve">
-        <value>这个 Mod 没有可用链接进行下载\n</value>
+  <data name="MsgBox_Content_NoDownloadLink" xml:space="preserve">
+        <value>这个mod没有可用链接进行下载\n</value>
     </data>
-    <data name="MsgBox_Content_InstallModFailed_Internet" xml:space="preserve">
-        <value>Mod 安装失败。是否联网？\n{0}</value>
+  <data name="MsgBox_Content_InstallModFailed_Internet" xml:space="preserve">
+        <value>Mod安装失败。是否联网？\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallModFailed_Game" xml:space="preserve">
-        <value>Mod 安装失败。游戏是否正在运行？\n{0}</value>
+  <data name="MsgBox_Content_InstallModFailed_Game" xml:space="preserve">
+        <value>Mod安装失败。游戏是否正在运行？\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
-        <value>Mod 安装失败\n{0}</value>
+  <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
+        <value>Mod安装失败\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
+  <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
         <value>依赖安装失败\n{0}</value>
     </data>
-    <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
-        <value>你想要启用 {0} 的依赖 Mod {1} 吗？</value>
+  <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
+        <value>你想要启用 {0} 的依赖mod {1} 吗？</value>
     </data>
-    <data name="MsgBox_Content_InstallModSuccess" xml:space="preserve">
+  <data name="MsgBox_Content_InstallModSuccess" xml:space="preserve">
         <value>{0} 已成功安装\n</value>
     </data>
-    <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
+  <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
         <value>你正在要求重装{0}\n请确认你的操作</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
-        <value>Mod 卸载失败\n{0}</value>
+  <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
+        <value>Mod卸载失败\n{0}</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
-        <value>Mod 卸载失败。游戏是否正在运行？\n{0}</value>
+  <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
+        <value>Mod卸载失败。游戏是否正在运行？\n{0}</value>
     </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
+  <data name="XAML_Mod_Incompatible" xml:space="preserve">
         <value>{0} 的 {1} 版本和你的游戏版本不兼容</value>
     </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
+  <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>本地版本：{0}（有新版本：{1}）</value>
     </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
+  <data name="XAML_Mod_Newer" xml:space="preserve">
         <value>本地版本：{0}（WOW MOD开发者）</value>
     </data>
     <data name="XAML_Mod_Modified" xml:space="preserve">
@@ -204,46 +204,46 @@
     <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
         <value>全部</value>
     </data>
-    <data name="XAML_Mod_Dependencies" xml:space="preserve">
+  <data name="XAML_Mod_Dependencies" xml:space="preserve">
         <value>依赖：</value>
     </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
+  <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>重复：</value>
     </data>
-    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
+  <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} 被 {1} 用作依赖\n你确定你想要禁用这个mod？</value>
     </data>
-    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
-        <value>你想要禁用依赖于 {0} 的 Mod 吗？</value>
+  <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
+        <value>你想要禁用依赖于 {0} 的mod吗？</value>
     </data>
-    <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
-        <value>请手动选择并且删除重复的 Mod \n{0}</value>
+  <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
+        <value>请手动选择并且删除重复的mod\n{0}</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed_Null" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModFailed_Null" xml:space="preserve">
         <value>无法删除不存在的文件</value>
     </data>
-    <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
-        <value>{0} 已经被成功删除\n</value>
+  <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
+        <value>{0}已经被成功删除\n</value>
     </data>
-    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
+  <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} 被 {1} 用作依赖 \n你确定你想要删除这个mod吗？</value>
     </data>
-    <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-        <value>Mod 启用/禁用失败。没有权限\n{0}</value>
+  <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
+        <value>Mod启用/禁用失败。没有权限\n{0}</value>
     </data>
-    <data name="MsgBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-        <value>Mod 启用/禁用失败。游戏是否正在运行？\n{0}</value>
+  <data name="MsgBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
+        <value>Mod启用/禁用失败。游戏是否正在运行？\n{0}</value>
     </data>
-    <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
-        <value>Mod 启用/禁用失败\n{0}</value>
+  <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
+        <value>Mod启用/禁用失败\n{0}</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
+  <data name="XAML_HomePage" xml:space="preserve">
         <value>主页</value>
     </data>
-    <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
+  <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
         <value>MelonLoader下载失败\n是否联网？\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
+  <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
         <value>MelonLoader下载失败\n{0}</value>
     </data>
     <data name="MsgBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
@@ -258,31 +258,31 @@
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>你正在要求卸载 MelonLoader\n请确认你的操作</value>
     </data>
-    <data name="XAML_Tab_ModManage" xml:space="preserve">
+  <data name="XAML_Tab_ModManage" xml:space="preserve">
         <value>模组</value>
     </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
+  <data name="XAML_Tab_Setting" xml:space="preserve">
         <value>设置</value>
     </data>
-    <data name="XAML_UserDataFolder" xml:space="preserve">
+  <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>配置文件夹</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>安装 Mod 时启用依赖</value>
+  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+        <value>安装 mod 时启用依赖</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>启用 Mod 时启用依赖</value>
+  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+        <value>启用 mod 时启用依赖</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>删除 Mod 时禁用依赖</value>
+  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+        <value>删除 mod 时禁用依赖</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>禁用 Mod 时禁用依赖</value>
+  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+        <value>禁用 mod 时禁用依赖</value>
     </data>
-    <data name="XAML_ChangePath" xml:space="preserve">
+  <data name="XAML_ChangePath" xml:space="preserve">
         <value>更改路径</value>
     </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
+  <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>帮助翻译</value>
     </data>
     <data name="XAML_Language" xml:space="preserve">

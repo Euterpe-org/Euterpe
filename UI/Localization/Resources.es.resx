@@ -102,25 +102,25 @@
     <data name="FolderDialog_Title" xml:space="preserve">
         <value>Selecciona la carpeta de Muse Dash</value>
     </data>
-    <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
+  <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
         <value>¡La ruta seleccionada no es válida! Prueba de nuevo</value>
     </data>
-    <data name="MsgBox_Content_NullPath" xml:space="preserve">
+  <data name="MsgBox_Content_NullPath" xml:space="preserve">
         <value>Tu carpeta de Muse Dash está vacía\nSelecciona nuevamente la carpeta correcta</value>
     </data>
-    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
+  <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
         <value>¡No seleccionaste la carpeta de Muse Dash!\nSelecciona donde está la carpeta del juego</value>
     </data>
-    <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
+  <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
         <value>¡Aviso de mods corruptos!\nPor favor, borra cualquier mod que tengas instalado que pese 0KB, y reinicia el programa\n{0}</value>
     </data>
-    <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
+  <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
         <value>Comprobación de parche fallida\n¿Tienes conexión a internet?</value>
     </data>
-    <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
+  <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
         <value>¡No se pudo encontrar el actualizador del programa!\nAsegúrate de haber instalado el programa de forma correcta</value>
     </data>
-    <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
+  <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
         <value>No se pudo copiar Updater.exe a la carpeta\n{0}</value>
     </data>
     <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
@@ -285,7 +285,7 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>¡Ayuda a traducir!</value>
     </data>
-    <data name="XAML_Language" xml:space="preserve">
+  <data name="XAML_Language" xml:space="preserve">
         <value>Idioma: </value>
     </data>
     <data name="XAML_Apply" xml:space="preserve">
@@ -299,5 +299,47 @@
     </data>
     <data name="XAML_AskType_No" xml:space="preserve">
         <value>No</value>
+    </data>
+  <data name="XAML_DownloadSource" xml:space="preserve">
+        <value>Descarga Oficial:</value>
+    </data>
+  <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+  <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github Mirror</value>
+    </data>
+  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+  <data name="XAML_Font" xml:space="preserve">
+        <value>Fuente:</value>
+    </data>
+  <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
+        <value>¡No se pudo obtener la lista de mods!</value>
+    </data>
+  <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+        <value>Analizar</value>
+    </data>
+  <data name="XAML_LogFolder" xml:space="preserve">
+        <value>Open Log Folder</value>
+    </data>
+  <data name="XAML_Analyze" xml:space="preserve">
+        <value>Analyzing Log</value>
+    </data>
+  <data name="MsgBox_Content_GamePathError" xml:space="preserve">
+        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+    </data>
+  <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+        <value>You don't have application path in the log</value>
+    </data>
+  <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
+        <value>Cannot verify you have bought the game on Steam\nAre you using pirate version?</value>
+    </data>
+  <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
+        <value>You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7</value>
+    </data>
+  <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
+        <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
     </data>
 </root>

@@ -111,7 +111,7 @@
     <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
         <value>你還沒有選擇 Muse Dash 的文件夾\n請選擇文件夾</value>
     </data>
-    <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
+  <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
         <value>你下載的 Mod 有問題\n如果有 0KB 的 Mod ，請刪除後再重新啟動程式\n{0}</value>
     </data>
     <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
@@ -171,25 +171,25 @@
     <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>你想要啟用 {0} 的依賴 Mod {1} 嗎?</value>
     </data>
-    <data name="MsgBox_Content_InstallModSuccess" xml:space="preserve">
+  <data name="MsgBox_Content_InstallModSuccess" xml:space="preserve">
         <value>{0} 已成功安裝\n</value>
     </data>
-    <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
+  <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
         <value>你正在要求重新安裝 {0}\n請確認你的操作</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
         <value>Mod 請除安裝失敗\n{0}</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
-        <value>Mod 請除安裝失敗。遊戲是否正執行? \n{0}}</value>
+  <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
+        <value>Mod 安裝失敗。遊戲是否正執行? \n{0}}</value>
     </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
+  <data name="XAML_Mod_Incompatible" xml:space="preserve">
         <value>{0} 的 {1} 版本和你的遊戲版本不相容</value>
     </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
+  <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>你的版本: {0} (有新版本: {1})</value>
     </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
+  <data name="XAML_Mod_Newer" xml:space="preserve">
         <value>你的版本: {0} (WOW MOD開發者)</value>
     </data>
     <data name="XAML_Mod_Modified" xml:space="preserve">
@@ -207,25 +207,25 @@
     <data name="XAML_Mod_Dependencies" xml:space="preserve">
         <value>依賴:</value>
     </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
+  <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>重複:</value>
     </data>
-    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
+  <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} 被 {1} 用作依賴\n你确定你想要禁用這個 mod?</value>
     </data>
-    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
+  <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>你要禁用依賴於 {0} 的 mod 嗎?</value>
     </data>
-    <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
-        <value>請手動選擇並且刪除重複的 Mod \n{0}</value>
+  <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
+        <value>請手動選擇並且刪除重複的 mod \n{0}</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed_Null" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModFailed_Null" xml:space="preserve">
         <value>無法刪除不存在的文件</value>
     </data>
-    <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0} 已經被成功刪除\n</value>
     </data>
-    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
+  <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} 被 {1} 用作依賴\n你確定你想要刪除這個 mod 嗎？</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
@@ -299,5 +299,47 @@
     </data>
     <data name="XAML_AskType_No" xml:space="preserve">
         <value>No</value>
+    </data>
+  <data name="XAML_DownloadSource" xml:space="preserve">
+        <value>Download Source: </value>
+    </data>
+  <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+  <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github Mirror</value>
+    </data>
+  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+  <data name="XAML_Font" xml:space="preserve">
+        <value>Font:</value>
+    </data>
+  <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
+        <value>Failed to get mod list from any source</value>
+    </data>
+  <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+        <value>Analysis</value>
+    </data>
+  <data name="XAML_LogFolder" xml:space="preserve">
+        <value>Open Log Folder</value>
+    </data>
+  <data name="XAML_Analyze" xml:space="preserve">
+        <value>Analyzing Log</value>
+    </data>
+  <data name="MsgBox_Content_GamePathError" xml:space="preserve">
+        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+    </data>
+  <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+        <value>You don't have application path in the log</value>
+    </data>
+  <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
+        <value>Cannot verify you have bought the game on Steam\nAre you using pirate version?</value>
+    </data>
+  <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
+        <value>You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7</value>
+    </data>
+  <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
+        <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
     </data>
 </root>
