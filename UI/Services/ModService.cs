@@ -146,13 +146,15 @@ public class ModService : IModService
         {
             if (item.IsDisabled)
             {
-                SettingsViewModel.DisableDependenciesWhenDisabling = (int)await DisableReverseDependencies(item,
-                    MsgBox_Content_DisableModConfirm.Localize(), SettingService.Settings.AskDisableDependenciesWhenDisabling);
+                var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DisableModConfirm.Localize(),
+                    SettingService.Settings.AskDisableDependenciesWhenDisabling);
+                if (!result)
+                    return;
+
+                SettingsViewModel.DisableDependenciesWhenDisabling = (int)askType;
             }
             else
             {
-                SettingsViewModel.EnableDependenciesWhenEnabling = (int)await EnableDependencies(item,
-                    MsgBox_Content_EnableDependency, SettingService.Settings.AskEnableDependenciesWhenEnabling);
                 await InstallDependency(item);
             }
 
@@ -187,9 +189,12 @@ public class ModService : IModService
 
         try
         {
-            SettingsViewModel.DisableDependenciesWhenDeleting = (int)await DisableReverseDependencies(item,
-                MsgBox_Content_DeleteModConfirm.Localize(), SettingService.Settings.AskDisableDependenciesWhenDeleting);
+            var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DeleteModConfirm.Localize(),
+                SettingService.Settings.AskDisableDependenciesWhenDeleting);
+            if (!result)
+                return;
 
+            SettingsViewModel.DisableDependenciesWhenDeleting = (int)askType;
             File.Delete(path);
             var mod = _webMods?.FirstOrDefault(x => x.Name == item.Name)?.SetDefault();
             _sourceCache?.AddOrUpdate(mod);
@@ -242,21 +247,21 @@ public class ModService : IModService
             disabledDependencies, askType, false);
     }
 
-    private async Task<AskType> DisableReverseDependencies(Mod item, string message, AskType askType)
+    private async Task<(bool, AskType)> DisableReverseDependencies(Mod item, string message, AskType askType)
     {
         var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
-        if (enabledReverseDependencies.Length == 0) return askType;
+        if (enabledReverseDependencies.Length == 0) return (true, askType);
         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
 
         var result = await MessageBoxService.CreateConfirmMessageBox(string.Format(message, item.Name, enabledReverseDependencyNames));
         if (!result)
         {
-            item.IsDisabled = !item.IsDisabled;
-            return askType;
+            item.IsDisabled = result;
+            return (result, askType);
         }
 
-        return await ChangeDependenciesState(string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
-            enabledReverseDependencies, askType, true);
+        return (true, await ChangeDependenciesState(string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
+            enabledReverseDependencies, askType, true));
     }
 
     private async Task HandleToggleModException(Mod item, Exception ex)

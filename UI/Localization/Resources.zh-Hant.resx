@@ -226,7 +226,7 @@
         <value>{0} 已經被成功刪除\n</value>
     </data>
     <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
-        <value>{0} 使用依賴 {1} \n你確定你想要刪除這個 mod 嗎？</value>
+        <value>{0} 被 {1} 用作依賴\n你確定你想要刪除這個 mod 嗎？</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
         <value>Mod 啟用/禁用失敗。沒有權限\n{0}</value>
