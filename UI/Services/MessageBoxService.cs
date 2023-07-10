@@ -54,12 +54,10 @@ public class MessageBoxService : IMessageBoxService
         return result == MsgBox_Button_Yes;
     }
 
-    public async Task<bool> CreateConfirmMessageBox(string content) =>
-        await CreateConfirmMessageBox(MsgBox_Title_Warning, content);
+    public async Task<bool> CreateConfirmMessageBox(string content) => await CreateConfirmMessageBox(MsgBox_Title_Warning, content);
 
     public async Task<string> CreateCustomMessageBox(string title, string content,
-        IEnumerable<ButtonDefinition> buttonDefinitions,
-        Icon icon)
+        IEnumerable<ButtonDefinition> buttonDefinitions, Icon icon)
     {
         var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
         var isMainWindow = desktop?.MainWindow is not null;
