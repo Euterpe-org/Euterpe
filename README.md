@@ -7,6 +7,9 @@
 ![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)
 ![Release Version](https://img.shields.io/github/v/release/MDModsDev/MuseDashModToolsUI)
 
+### V1.2.0 Prerelease is available now!
+[Prerelease Download](https://github.com/MDModsDev/MuseDashModToolsUI/releases/tag/1.2.0-rc1)
+
 ## A UI app for making muse dash modding easier
 [中文说明](https://www.bilibili.com/read/cv22748380)
 
