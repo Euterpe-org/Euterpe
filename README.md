@@ -6,6 +6,7 @@
 [![Crowdin](https://badges.crowdin.net/musedashmodtools/localized.svg)](https://crowdin.com/project/musedashmodtools)
 ![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)
 ![Release Version](https://img.shields.io/github/v/release/MDModsDev/MuseDashModToolsUI)
+![Code Count](https://img.shields.io/endpoint?url=https%3A%2F%2Fghloc.vercel.app%2Fapi%2FMDModsDev%2FMuseDashModToolsUI%2Fbadge)
 
 ### V1.2.0 Prerelease is available now!
 [Prerelease Download](https://github.com/MDModsDev/MuseDashModToolsUI/releases/tag/1.2.0-rc1)
