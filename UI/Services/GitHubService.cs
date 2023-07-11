@@ -117,6 +117,108 @@ public class GitHubService : IGitHubService
         }
     }
 
+    private async Task<List<Mod>?> GetModListFromSourceAsync(string downloadSource)
+    {
+        var url = downloadSource + "ModLinks.json";
+        try
+        {
+            var mods = (await Client.GetFromJsonAsync<List<Mod>>(url))!;
+            Logger.Information("Get mod list from {Url} success", url);
+            return mods;
+        }
+        catch
+        {
+            Logger.Warning("Get mod list from {Url} failed", url);
+            return null;
+        }
+    }
+
+    private async Task<HttpResponseMessage?> DownloadModFromSourceAsync(string downloadSource, string link, string path)
+    {
+        var url = downloadSource + link;
+        try
+        {
+            var result = await Client.GetAsync(url);
+            Logger.Information("Download mod from {Url} success", url);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await result.Content.CopyToAsync(fs);
+            return result;
+        }
+        catch
+        {
+            Logger.Warning("Download mod from {Url} failed", url);
+            return null;
+        }
+    }
+
+    private async Task<HttpResponseMessage?> DownloadMelonLoaderFromSource(string downloadSource, string path,
+        IProgress<double> downloadProgress)
+    {
+        var url = downloadSource + "MelonLoader.zip";
+        try
+        {
+            var result = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            Logger.Information("Get MelonLoader Download ResponseHeader from {Url} success", url);
+
+            var totalLength = result.Content.Headers.ContentLength;
+            var contentStream = await result.Content.ReadAsStreamAsync();
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            var buffer = new byte[5 * 1024];
+            var readLength = 0L;
+            int length;
+            while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
+            {
+                readLength += length;
+                if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
+
+                fs.Write(buffer, 0, length);
+            }
+
+            Logger.Information("Download MelonLoader success");
+            return result;
+        }
+        catch
+        {
+            Logger.Warning("Download MelonLoader from {Url} failed", url);
+            return null;
+        }
+    }
+
+    private async Task LaunchUpdater(string currentDirectory, IEnumerable<string> launchArgs)
+    {
+        var updaterExePath = Path.Combine(currentDirectory, "Updater.exe");
+        var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
+        var updaterTargetPath = Path.Combine(currentDirectory, "Update", "Updater.exe");
+        if (!File.Exists(updaterExePath))
+        {
+            Logger.Error("Updater.exe not found");
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
+            return;
+        }
+
+        if (!Directory.Exists(updaterTargetFolder))
+        {
+            Directory.CreateDirectory(updaterTargetFolder);
+            Logger.Information("Create Update target folder success");
+        }
+
+        try
+        {
+            File.Copy(updaterExePath, updaterTargetPath, true);
+            Logger.Information("Copy Updater.exe to Update folder success");
+        }
+        catch (Exception ex)
+        {
+            Logger.Information("Copy Updater.exe to Update folder failed: {Exception}", ex.ToString());
+            await MessageBoxService.CreateErrorMessageBox(
+                string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
+        }
+
+        Process.Start(updaterTargetPath, launchArgs);
+    }
+
+    #region CheckUpdates Private Methods
+
     private Version? GetVersionFromTag(JsonElement tagName)
     {
         var tag = tagName.GetString();
@@ -165,103 +267,5 @@ public class GitHubService : IGitHubService
         return link;
     }
 
-    private async Task<HttpResponseMessage?> DownloadMelonLoaderFromSource(string downloadSource, string path,
-        IProgress<double> downloadProgress)
-    {
-        var url = downloadSource + "MelonLoader.zip";
-        try
-        {
-            var result = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-            Logger.Information("Get MelonLoader Download ResponseHeader from {Url} success", url);
-
-            var totalLength = result.Content.Headers.ContentLength;
-            var contentStream = await result.Content.ReadAsStreamAsync();
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            var buffer = new byte[5 * 1024];
-            var readLength = 0L;
-            int length;
-            while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
-            {
-                readLength += length;
-                if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
-
-                fs.Write(buffer, 0, length);
-            }
-
-            Logger.Information("Download MelonLoader success");
-            return result;
-        }
-        catch
-        {
-            Logger.Warning("Download MelonLoader from {Url} failed", url);
-            return null;
-        }
-    }
-
-    private async Task<HttpResponseMessage?> DownloadModFromSourceAsync(string downloadSource, string link, string path)
-    {
-        var url = downloadSource + link;
-        try
-        {
-            var result = await Client.GetAsync(url);
-            Logger.Information("Download mod from {Url} success", url);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await result.Content.CopyToAsync(fs);
-            return result;
-        }
-        catch
-        {
-            Logger.Warning("Download mod from {Url} failed", url);
-            return null;
-        }
-    }
-
-    private async Task<List<Mod>?> GetModListFromSourceAsync(string downloadSource)
-    {
-        var url = downloadSource + "ModLinks.json";
-        try
-        {
-            var mods = (await Client.GetFromJsonAsync<List<Mod>>(url))!;
-            Logger.Information("Get mod list from {Url} success", url);
-            return mods;
-        }
-        catch
-        {
-            Logger.Warning("Get mod list from {Url} failed", url);
-            return null;
-        }
-    }
-
-    private async Task LaunchUpdater(string currentDirectory, IEnumerable<string> launchArgs)
-    {
-        var updaterExePath = Path.Combine(currentDirectory, "Updater.exe");
-        var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
-        var updaterTargetPath = Path.Combine(currentDirectory, "Update", "Updater.exe");
-        if (!File.Exists(updaterExePath))
-        {
-            Logger.Error("Updater.exe not found");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
-            return;
-        }
-
-        if (!Directory.Exists(updaterTargetFolder))
-        {
-            Directory.CreateDirectory(updaterTargetFolder);
-            Logger.Information("Create Update target folder success");
-        }
-
-        try
-        {
-            File.Copy(updaterExePath, updaterTargetPath, true);
-            Logger.Information("Copy Updater.exe to Update folder success");
-        }
-        catch (Exception ex)
-        {
-            Logger.Information("Copy Updater.exe to Update folder failed: {Exception}", ex.ToString());
-            await MessageBoxService.CreateErrorMessageBox(
-                string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
-        }
-
-        Process.Start(updaterTargetPath, launchArgs);
-    }
+    #endregion
 }
