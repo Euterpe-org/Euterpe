@@ -82,6 +82,7 @@ public class ModService : IModService
             var path = Path.Join(SettingService.Settings.ModsFolder,
                 item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             await GitHubService.DownloadModAsync(item.DownloadLink, path);
+
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
             if (_webMods is null) return;
@@ -90,27 +91,13 @@ public class ModService : IModService
             mod.FileName = downloadedMod.FileName;
             mod.LocalVersion = downloadedMod.LocalVersion;
             mod.SHA256 = downloadedMod.SHA256;
+
             Logger.Information("Install mod {Name} success", mod.Name);
             _sourceCache?.AddOrUpdate(mod);
         }
         catch (Exception ex)
         {
-            switch (ex)
-            {
-                case HttpRequestException:
-                    errors.AppendFormat(MsgBox_Content_InstallModFailed_Internet.Localize(), ex).AppendLine();
-                    break;
-
-                case SecurityException:
-                case UnauthorizedAccessException:
-                case IOException:
-                    errors.AppendFormat(MsgBox_Content_InstallModFailed_Game.Localize(), ex).AppendLine();
-                    break;
-
-                default:
-                    errors.AppendFormat(MsgBox_Content_InstallModFailed.Localize(), ex).AppendLine();
-                    break;
-            }
+            HandleInstallModException(ex, errors);
         }
 
         await CheckDependencyInstall(item);
@@ -204,6 +191,26 @@ public class ModService : IModService
         catch (Exception ex)
         {
             await HandleDeleteModException(item, ex);
+        }
+    }
+
+    private static void HandleInstallModException(Exception ex, StringBuilder errors)
+    {
+        switch (ex)
+        {
+            case HttpRequestException:
+                errors.AppendFormat(MsgBox_Content_InstallModFailed_Internet.Localize(), ex).AppendLine();
+                break;
+
+            case SecurityException:
+            case UnauthorizedAccessException:
+            case IOException:
+                errors.AppendFormat(MsgBox_Content_InstallModFailed_Game.Localize(), ex).AppendLine();
+                break;
+
+            default:
+                errors.AppendFormat(MsgBox_Content_InstallModFailed.Localize(), ex).AppendLine();
+                break;
         }
     }
 
