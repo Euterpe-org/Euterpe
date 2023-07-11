@@ -1,11 +1,11 @@
 # MuseDashModToolsUI
 
-[![Release Download Count](https://img.shields.io/github/downloads/MDModsDev/MuseDashModToolsUI/total)](https://github.com/MDModsDev/MuseDashModToolsUI/releases/latest)
+[![Release Download Count](https://img.shields.io/github/downloads/MDModsDev/MuseDashModToolsUI/total)](https://github.com/MDModsDev/MuseDashModToolsUI/releases)
 [![Contributors](https://img.shields.io/github/contributors/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/graphs/contributors)
 [![Discord](https://img.shields.io/discord/812100927468470273)](https://discord.gg/mdmc)
 [![Crowdin](https://badges.crowdin.net/musedashmodtools/localized.svg)](https://crowdin.com/project/musedashmodtools)
-![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)
-![Release Version](https://img.shields.io/github/v/release/MDModsDev/MuseDashModToolsUI)
+[![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/stargazers)
+[![Release Version](https://img.shields.io/github/v/release/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/releases/latest)
 ![Code Count](https://img.shields.io/endpoint?url=https%3A%2F%2Fghloc.vercel.app%2Fapi%2FMDModsDev%2FMuseDashModToolsUI%2Fbadge)
 
 ### V1.2.0 Prerelease is available now!
