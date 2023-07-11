@@ -322,24 +322,24 @@
         <value>Analizar</value>
     </data>
   <data name="XAML_LogFolder" xml:space="preserve">
-        <value>Open Log Folder</value>
+        <value>Revisar mis Logs</value>
     </data>
   <data name="XAML_Analyze" xml:space="preserve">
-        <value>Analyzing Log</value>
+        <value>Analizar Logs</value>
     </data>
   <data name="MsgBox_Content_GamePathError" xml:space="preserve">
-        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+        <value>Se detectó a Muse Dash fuera de "steamapps\common\Muse Dash"\n¿Has pirateado el juego?</value>
     </data>
   <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
-        <value>You don't have application path in the log</value>
+        <value>¡El Log no ha registrado donde tienes instalado el juego!</value>
     </data>
   <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
-        <value>Cannot verify you have bought the game on Steam\nAre you using pirate version?</value>
+        <value>Steam no pudo verificar donde has instalado Muse Dash\n¿Has pirateado el juego?</value>
     </data>
   <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
-        <value>You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7</value>
+        <value>¡MelonLoader {0}, no es compatible!\nVe a la pestaña de MODS → Instalar MelonLoader</value>
     </data>
   <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
-        <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
+        <value>¡No se detectó el Pase [Just as Planned]!\nEsto es necesario para poder jugar Custom Charts</value>
     </data>
 </root>
