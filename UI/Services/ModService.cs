@@ -100,7 +100,7 @@ public class ModService : IModService
             HandleInstallModException(ex, errors);
         }
 
-        await CheckDependencyInstall(item);
+        errors.Append(await CheckDependencyInstall(item));
 
         if (errors.Length > 0)
         {
@@ -329,9 +329,10 @@ public class ModService : IModService
 
     #region Dependency Private Methods
 
-    private async Task CheckDependencyInstall(Mod item)
+    private async Task<StringBuilder> CheckDependencyInstall(Mod item)
     {
         var dependencies = SearchDependencies(item.Name!).ToArray();
+        var errors = new StringBuilder();
         foreach (var dependency in dependencies)
         {
             var installedMod = _mods!.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
@@ -351,12 +352,14 @@ public class ModService : IModService
             }
             catch (Exception ex)
             {
+                errors.AppendLine(ex.ToString());
                 Logger.Information(ex, "Install dependency {Name} failed", dependency.Name);
             }
         }
 
         SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
             MsgBox_Content_EnableDependency, SettingService.Settings.AskEnableDependenciesWhenInstalling);
+        return errors;
     }
 
     private async Task<AskType> EnableDependencies(Mod item, IEnumerable<Mod> dependencies, string message, AskType askType)
