@@ -34,7 +34,7 @@ body:
       required: false
 
   - type: textarea
-    id: download
+    id: logs
     attributes:
       label: Logs
       placeholder: |-
