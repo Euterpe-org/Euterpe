@@ -82,6 +82,7 @@ public class ModService : IModService
             var path = Path.Join(SettingService.Settings.ModsFolder,
                 item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             await GitHubService.DownloadModAsync(item.DownloadLink, path);
+
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
             if (_webMods is null) return;
@@ -90,30 +91,16 @@ public class ModService : IModService
             mod.FileName = downloadedMod.FileName;
             mod.LocalVersion = downloadedMod.LocalVersion;
             mod.SHA256 = downloadedMod.SHA256;
+
             Logger.Information("Install mod {Name} success", mod.Name);
             _sourceCache?.AddOrUpdate(mod);
         }
         catch (Exception ex)
         {
-            switch (ex)
-            {
-                case HttpRequestException:
-                    errors.AppendFormat(MsgBox_Content_InstallModFailed_Internet.Localize(), ex).AppendLine();
-                    break;
-
-                case SecurityException:
-                case UnauthorizedAccessException:
-                case IOException:
-                    errors.AppendFormat(MsgBox_Content_InstallModFailed_Game.Localize(), ex).AppendLine();
-                    break;
-
-                default:
-                    errors.AppendFormat(MsgBox_Content_InstallModFailed.Localize(), ex).AppendLine();
-                    break;
-            }
+            HandleInstallModException(ex, errors);
         }
 
-        await CheckDependencyInstall(item);
+        errors.Append(await CheckDependencyInstall(item));
 
         if (errors.Length > 0)
         {
@@ -207,61 +194,24 @@ public class ModService : IModService
         }
     }
 
-    private async Task CheckDependencyInstall(Mod item)
+    private static void HandleInstallModException(Exception ex, StringBuilder errors)
     {
-        var dependencies = SearchDependencies(item.Name!).ToArray();
-        foreach (var dependency in dependencies)
+        switch (ex)
         {
-            var installedMod = _mods!.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
-            if (installedMod is not null) continue;
-            try
-            {
-                var path = Path.Join(SettingService.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
-                await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
-                var mod = LocalService.LoadMod(path);
-                dependency.IsDisabled = mod!.IsDisabled;
-                dependency.FileName = mod.FileName;
-                dependency.LocalVersion = mod.LocalVersion;
-                dependency.SHA256 = mod.SHA256;
-                Logger.Information("Install dependency {Name} success", mod.Name);
-                _sourceCache!.AddOrUpdate(dependency);
-                await CheckDependencyInstall(dependency);
-            }
-            catch (Exception ex)
-            {
-                Logger.Information(ex, "Install dependency {Name} failed", dependency.Name);
-            }
+            case HttpRequestException:
+                errors.AppendFormat(MsgBox_Content_InstallModFailed_Internet.Localize(), ex).AppendLine();
+                break;
+
+            case SecurityException:
+            case UnauthorizedAccessException:
+            case IOException:
+                errors.AppendFormat(MsgBox_Content_InstallModFailed_Game.Localize(), ex).AppendLine();
+                break;
+
+            default:
+                errors.AppendFormat(MsgBox_Content_InstallModFailed.Localize(), ex).AppendLine();
+                break;
         }
-
-        SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
-            MsgBox_Content_EnableDependency, SettingService.Settings.AskEnableDependenciesWhenInstalling);
-    }
-
-    private async Task<AskType> EnableDependencies(Mod item, IEnumerable<Mod> dependencies, string message, AskType askType)
-    {
-        var disabledDependencies = dependencies.Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
-        if (disabledDependencies.Length == 0) return askType;
-        var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
-
-        return await ChangeDependenciesState(string.Format(message, item.Name, disabledDependencyNames),
-            disabledDependencies, askType, false);
-    }
-
-    private async Task<(bool, AskType)> DisableReverseDependencies(Mod item, string message, AskType askType)
-    {
-        var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
-        if (enabledReverseDependencies.Length == 0) return (true, askType);
-        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
-
-        var result = await MessageBoxService.CreateConfirmMessageBox(string.Format(message, item.Name, enabledReverseDependencyNames));
-        if (!result)
-        {
-            item.IsDisabled = result;
-            return (result, askType);
-        }
-
-        return (true, await ChangeDependenciesState(string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
-            enabledReverseDependencies, askType, true));
     }
 
     private async Task HandleToggleModException(Mod item, Exception ex)
@@ -289,6 +239,8 @@ public class ModService : IModService
         Logger.Error(ex, "Delete mod {Name} failed", item.Name);
         await MessageBoxService.CreateErrorMessageBox(errorMsg);
     }
+
+    #region InitializeModList Private Methods
 
     private async Task LoadModsToUI(List<Mod> localMods, List<Mod>? webMods)
     {
@@ -370,6 +322,73 @@ public class ModService : IModService
         else if (result == MsgBox_Button_NoNoAsk) SettingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
 
+    private bool CheckCompatible(Mod mod) =>
+        mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion!.Contains(_currentGameVersion);
+
+    #endregion
+
+    #region Dependency Private Methods
+
+    private async Task<StringBuilder> CheckDependencyInstall(Mod item)
+    {
+        var dependencies = SearchDependencies(item.Name!).ToArray();
+        var errors = new StringBuilder();
+        foreach (var dependency in dependencies)
+        {
+            var installedMod = _mods!.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
+            if (installedMod is not null) continue;
+            try
+            {
+                var path = Path.Join(SettingService.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
+                await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
+                var mod = LocalService.LoadMod(path);
+                dependency.IsDisabled = mod!.IsDisabled;
+                dependency.FileName = mod.FileName;
+                dependency.LocalVersion = mod.LocalVersion;
+                dependency.SHA256 = mod.SHA256;
+                Logger.Information("Install dependency {Name} success", mod.Name);
+                _sourceCache!.AddOrUpdate(dependency);
+                await CheckDependencyInstall(dependency);
+            }
+            catch (Exception ex)
+            {
+                errors.AppendLine(ex.ToString());
+                Logger.Information(ex, "Install dependency {Name} failed", dependency.Name);
+            }
+        }
+
+        SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
+            MsgBox_Content_EnableDependency, SettingService.Settings.AskEnableDependenciesWhenInstalling);
+        return errors;
+    }
+
+    private async Task<AskType> EnableDependencies(Mod item, IEnumerable<Mod> dependencies, string message, AskType askType)
+    {
+        var disabledDependencies = dependencies.Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
+        if (disabledDependencies.Length == 0) return askType;
+        var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
+
+        return await ChangeDependenciesState(string.Format(message, item.Name, disabledDependencyNames),
+            disabledDependencies, askType, false);
+    }
+
+    private async Task<(bool, AskType)> DisableReverseDependencies(Mod item, string message, AskType askType)
+    {
+        var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
+        if (enabledReverseDependencies.Length == 0) return (true, askType);
+        var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
+
+        var result = await MessageBoxService.CreateConfirmMessageBox(string.Format(message, item.Name, enabledReverseDependencyNames));
+        if (!result)
+        {
+            item.IsDisabled = result;
+            return (result, askType);
+        }
+
+        return (true, await ChangeDependenciesState(string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
+            enabledReverseDependencies, askType, true));
+    }
+
     private IEnumerable<Mod> SearchDependencies(string modName)
     {
         var dependencyNames = _sourceCache?.Lookup(modName).Value?.DependencyNames.Split("\r\n");
@@ -428,6 +447,5 @@ public class ModService : IModService
         }
     }
 
-    private bool CheckCompatible(Mod mod) =>
-        mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion!.Contains(_currentGameVersion);
+    #endregion
 }

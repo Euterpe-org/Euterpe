@@ -1,11 +1,17 @@
-name: Build
+name: Build Packages
+
 on:
   push:
     branches:
-      - dev/rewrite
+      - 'main'
+      - 'master'
+    tags:
+      - 'v?[0-9]+.[0-9]+.[0-9]+'
   pull_request:
     branches:
-      - dev/rewrite
+      - 'main'
+      - 'master'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -46,7 +52,7 @@ jobs:
       - name: Build Project
         run: |
           dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} --self-contained=${{ matrix.self-contained }}
-          
+
       - name: List result on Windows
         if: matrix.target-os == 'windows-latest'
         run: ls -l bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish
@@ -61,7 +67,7 @@ jobs:
         with:
           name: MuseDashModToolsUI-${{ matrix.build-type }}-windows-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-${{ matrix.self-contained && 'self-contained' || 'runtime-required' }}
           path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/win-${{ matrix.target-arch }}/publish/*
-          
+
       - name: Upload Artifact on Linux
         if: matrix.target-os == 'ubuntu-latest'
         uses: actions/upload-artifact@v3

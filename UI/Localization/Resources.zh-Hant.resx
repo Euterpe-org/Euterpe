@@ -199,7 +199,7 @@
         <value>你的版本: {0}</value>
     </data>
   <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0} \n\n作者： {1} \n線上版本：{2}\n支持遊戲版本：{3}</value>
+        <value>{0} \n\n作者：{1} \n線上版本：{2}\n支持遊戲版本：{3}</value>
     </data>
   <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
         <value>全部</value>

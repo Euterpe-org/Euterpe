@@ -133,6 +133,8 @@ public class SettingService : ISettingService
         Settings.MuseDashFolder = settings?["MuseDashFolder"]?.ToString();
         Settings.LanguageCode = settings?["LanguageCode"]?.ToString();
         Settings.FontName = settings?["FontName"]?.ToString();
+        if (Version.TryParse(settings?["SkipVersion"]?.ToString()!, out var version))
+            Settings.SkipVersion = version;
         Settings.DownloadSource = Enum.Parse<DownloadSources>(settings?["DownloadSource"]?.ToString()!);
         Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(settings?["AskEnableDependenciesWhenInstalling"]?.ToString()!);
         Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings?["AskEnableDependenciesWhenEnabling"]?.ToString()!);

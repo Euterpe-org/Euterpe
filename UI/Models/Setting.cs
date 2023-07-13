@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json.Serialization;
 
 namespace MuseDashModToolsUI.Models;
@@ -8,6 +9,7 @@ public class Setting
     public string? MuseDashFolder { get; set; }
     public string? LanguageCode { get; set; }
     public string? FontName { get; set; } = "Segoe UI";
+    public Version SkipVersion { get; set; } = new();
 
     [JsonIgnore]
     public string UserDataFolder =>

@@ -1,12 +1,11 @@
 using System.Globalization;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Services;
-using Serilog;
 using Xunit.Abstractions;
 
 namespace MuseDashModToolsUI.Test;
 
-public class SettingTest
+public class SettingServiceTest
 {
     private const string SettingJson = """
                                        {
@@ -22,20 +21,18 @@ public class SettingTest
                                        }
                                        """;
 
-    private readonly ITestOutputHelper _testOutputHelper;
+    private readonly TestLogger _logger;
 
-    public SettingTest(ITestOutputHelper testOutputHelper)
+    public SettingServiceTest(ITestOutputHelper testOutputHelper)
     {
-        _testOutputHelper = testOutputHelper;
+        _logger = new TestLogger(testOutputHelper);
     }
 
     [Fact]
     public async Task NullSettingTest()
     {
         await File.WriteAllTextAsync("Settings.json", SettingJson);
-        var logService = new Mock<ILogger>();
-        var messageBoxService = new Mock<IMessageBoxService>();
-        var settingService = new SettingService(logService.Object) { MessageBoxService = messageBoxService.Object };
+        var settingService = new SettingService(_logger) { MessageBoxService = new Mock<IMessageBoxService>().Object };
         await settingService.InitializeSettings();
 
         Assert.Equal(CultureInfo.CurrentUICulture.Name, settingService.Settings.LanguageCode);

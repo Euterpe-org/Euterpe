@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using MsBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
@@ -94,47 +95,16 @@ public class GitHubService : IGitHubService
         {
             var result = await Client.GetStringAsync(ReleaseInfoLink);
             var doc = JsonDocument.Parse(result);
+            if (!doc.RootElement.TryGetProperty("tag_name", out var tagName)) return;
 
-            if (!doc.RootElement.TryGetProperty("tag_name", out var tagName))
-                return;
-
-            var tag = tagName.GetString();
-            if (tag is null) return;
-            if (!Version.TryParse(tag.StartsWith('v') ? tag[1..] : tag, out var version)) return;
-            Logger.Information("Get latest version success: {Version}", version);
-            if (version <= currentVersion)
-            {
-                if (userClick)
-                    await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion.Localize());
-                return;
-            }
+            var version = GetVersionFromTag(tagName);
+            if (version is null || await SkipVersionCheck(version, currentVersion!, userClick)) return;
 
             var title = doc.RootElement.GetProperty("name").GetString();
             var body = doc.RootElement.GetProperty("body").GetString();
-            var update = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice,
-                string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body));
+            if (!await UpdateRequired(version, title!, body!)) return;
 
-            if (!update) return;
-            var link = string.Empty;
-            var assets = doc.RootElement.GetProperty("assets");
-            var releases = assets.EnumerateArray();
-
-            if (OperatingSystem.IsLinux())
-            {
-                var release = releases.FirstOrDefault(x =>
-                    x.GetProperty("name").GetString()!.Contains("Linux", StringComparison.OrdinalIgnoreCase));
-                link = release.GetProperty("browser_download_url").GetString()!;
-                Logger.Information("Get Linux download link success{Link}", link);
-            }
-
-            if (OperatingSystem.IsWindows())
-            {
-                var release = releases.FirstOrDefault(x =>
-                    x.GetProperty("name").GetString()!.Contains("Windows", StringComparison.OrdinalIgnoreCase));
-                link = release.GetProperty("browser_download_url").GetString()!;
-                Logger.Information("Get Windows download link success{Link}", link);
-            }
-
+            var link = GetDownloadLink(doc);
             var currentDirectory = Directory.GetCurrentDirectory();
             await LaunchUpdater(currentDirectory, new[] { link, currentDirectory + ".zip", currentDirectory });
             Logger.Information("Launch updater success, exit...");
@@ -147,6 +117,40 @@ public class GitHubService : IGitHubService
         }
     }
 
+    private async Task<List<Mod>?> GetModListFromSourceAsync(string downloadSource)
+    {
+        var url = downloadSource + "ModLinks.json";
+        try
+        {
+            var mods = (await Client.GetFromJsonAsync<List<Mod>>(url))!;
+            Logger.Information("Get mod list from {Url} success", url);
+            return mods;
+        }
+        catch
+        {
+            Logger.Warning("Get mod list from {Url} failed", url);
+            return null;
+        }
+    }
+
+    private async Task<HttpResponseMessage?> DownloadModFromSourceAsync(string downloadSource, string link, string path)
+    {
+        var url = downloadSource + link;
+        try
+        {
+            var result = await Client.GetAsync(url);
+            Logger.Information("Download mod from {Url} success", url);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await result.Content.CopyToAsync(fs);
+            return result;
+        }
+        catch
+        {
+            Logger.Warning("Download mod from {Url} failed", url);
+            return null;
+        }
+    }
+
     private async Task<HttpResponseMessage?> DownloadMelonLoaderFromSource(string downloadSource, string path,
         IProgress<double> downloadProgress)
     {
@@ -154,7 +158,7 @@ public class GitHubService : IGitHubService
         try
         {
             var result = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-            Logger.Information("Get MelonLoader Download ResponseHeader from {URL} success", url);
+            Logger.Information("Get MelonLoader Download ResponseHeader from {Url} success", url);
 
             var totalLength = result.Content.Headers.ContentLength;
             var contentStream = await result.Content.ReadAsStreamAsync();
@@ -175,41 +179,7 @@ public class GitHubService : IGitHubService
         }
         catch
         {
-            Logger.Warning("Download MelonLoader from {URL} failed", url);
-            return null;
-        }
-    }
-
-    private async Task<HttpResponseMessage?> DownloadModFromSourceAsync(string downloadSource, string link, string path)
-    {
-        var url = downloadSource + link;
-        try
-        {
-            var result = await Client.GetAsync(url);
-            Logger.Information("Download mod from {URL} success", url);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await result.Content.CopyToAsync(fs);
-            return result;
-        }
-        catch
-        {
-            Logger.Warning("Download mod from {URL} failed", url);
-            return null;
-        }
-    }
-
-    private async Task<List<Mod>?> GetModListFromSourceAsync(string downloadSource)
-    {
-        var url = downloadSource + "ModLinks.json";
-        try
-        {
-            var mods = (await Client.GetFromJsonAsync<List<Mod>>(url))!;
-            Logger.Information("Get mod list from {URL} success", url);
-            return mods;
-        }
-        catch
-        {
-            Logger.Warning("Get mod list from {URL} failed", url);
+            Logger.Warning("Download MelonLoader from {Url} failed", url);
             return null;
         }
     }
@@ -246,4 +216,56 @@ public class GitHubService : IGitHubService
 
         Process.Start(updaterTargetPath, launchArgs);
     }
+
+    #region CheckUpdates Private Methods
+
+    private Version? GetVersionFromTag(JsonElement tagName)
+    {
+        var tag = tagName.GetString();
+        if (tag is null) return null;
+
+        if (!Version.TryParse(tag.StartsWith('v') ? tag[1..] : tag, out var version)) return null;
+        Logger.Information("Get latest version success: {Version}", version);
+
+        return version;
+    }
+
+    private async Task<bool> SkipVersionCheck(Version version, Version currentVersion, bool userClick)
+    {
+        if (!userClick) return version == SettingService.Settings.SkipVersion || version <= currentVersion;
+        if (version > currentVersion) return false;
+        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion.Localize());
+        return true;
+    }
+
+    private async Task<bool> UpdateRequired(Version version, string title, string body)
+    {
+        var update = await MessageBoxService.CreateCustomConfirmMessageBox(MsgBox_Title_Notice,
+            string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body), 3, Icon.Info);
+
+        if (update == MsgBox_Button_NoNoAsk)
+        {
+            SettingService.Settings.SkipVersion = version;
+            return false;
+        }
+
+        return update != MsgBox_Button_No;
+    }
+
+    private string GetDownloadLink(JsonDocument doc)
+    {
+        var assets = doc.RootElement.GetProperty("assets");
+        var releases = assets.EnumerateArray();
+
+        var osString = OperatingSystem.IsWindows() ? "Windows" : "Linux";
+
+        var release = releases.FirstOrDefault(x =>
+            x.GetProperty("name").GetString()!.Contains(osString, StringComparison.OrdinalIgnoreCase));
+        var link = release.GetProperty("browser_download_url").GetString()!;
+
+        Logger.Information("Get {OsString} download link success {Link}", osString, link);
+        return link;
+    }
+
+    #endregion
 }
