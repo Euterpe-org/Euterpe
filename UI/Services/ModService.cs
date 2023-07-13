@@ -8,7 +8,6 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using DynamicData;
-using MsBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
@@ -160,8 +159,7 @@ public class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await MessageBoxService.CreateMessageBox(MsgBox_Title_Notice,
-                string.Format(MsgBox_Content_DuplicateMods.Localize(), item.DuplicatedModNames), icon: Icon.Info);
+            await MessageBoxService.CreateNoticeMessageBox(string.Format(MsgBox_Content_DuplicateMods.Localize(), item.DuplicatedModNames));
             await LocalService.OpenModsFolder();
             return;
         }

@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using MsBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
@@ -240,8 +239,8 @@ public class GitHubService : IGitHubService
 
     private async Task<bool> UpdateRequired(Version version, string title, string body)
     {
-        var update = await MessageBoxService.CreateCustomConfirmMessageBox(MsgBox_Title_Notice,
-            string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body), 3, Icon.Info);
+        var update = await MessageBoxService.CreateCustomConfirmMessageBox(
+            string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body), 3);
 
         if (update == MsgBox_Button_NoNoAsk)
         {
