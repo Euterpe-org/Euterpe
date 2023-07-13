@@ -33,6 +33,7 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
     [RelayCommand]
     private async Task AnalyzeLog()
     {
+        _logger.Information("Log Analysis Started...");
         if (await _logAnalyzeService.CheckPirate()) return;
         if (!await _logAnalyzeService.CheckMelonLoaderVersion()) return;
     }

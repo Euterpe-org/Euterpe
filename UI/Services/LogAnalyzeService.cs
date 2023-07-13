@@ -33,13 +33,13 @@ public class LogAnalyzeService : ILogAnalyzeService
             return true;
         }
 
-        LogContentArray = LogContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).Select(x => x[15..]).ToArray();
+        LogContentArray = LogContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
         var gamePath = string.Empty;
 
         foreach (var line in LogContentArray)
         {
             if (!line.Contains("ApplicationPath")) continue;
-            gamePath = line[24..];
+            gamePath = line[39..];
         }
 
         if (!gamePath.Contains(@"steamapps\common\Muse Dash"))
@@ -69,7 +69,11 @@ public class LogAnalyzeService : ILogAnalyzeService
             return true;
         }
 
-        if (data.InstalledDepots.Keys.Any(x => x == 1055810) && data.InstalledDepots[1055810]["dlcappid"] == 1055810) return false;
+        if (data.InstalledDepots.Keys.Any(x => x == 1055810) && data.InstalledDepots[1055810]["dlcappid"] == 1055810)
+        {
+            Logger.Information("Muse Dash DLC purchased");
+            return false;
+        }
 
         await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoDlcPurchased.Localize());
         Logger.Information("Cannot find Muse Dash DLC purchase record in file");
@@ -78,8 +82,12 @@ public class LogAnalyzeService : ILogAnalyzeService
 
     public async Task<bool> CheckMelonLoaderVersion()
     {
-        var melonLoaderVersion = LogContentArray.First(x => x.Contains("MelonLoader")).Substring(13, 5);
-        if (melonLoaderVersion == "0.5.7") return true;
+        var melonLoaderVersion = LogContentArray.First(x => x.Contains("MelonLoader")).Substring(28, 5);
+        if (melonLoaderVersion == "0.5.7")
+        {
+            Logger.Information("Correct MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
+            return true;
+        }
 
         Logger.Information("Incorrect MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
         await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion.Localize(), melonLoaderVersion));
