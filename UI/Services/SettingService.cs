@@ -53,7 +53,7 @@ public class SettingService : ISettingService
             if (string.IsNullOrEmpty(settings.MuseDashFolder))
             {
                 _logger.Error("Settings.json stored path is empty, asking user to choose path");
-                await MessageBoxService.CreateErrorMessageBox(MsgBox_Title_Warning, MsgBox_Content_NullPath.Localize());
+                await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath.Localize());
                 await OnChoosePath();
                 await InitializeSettings();
             }

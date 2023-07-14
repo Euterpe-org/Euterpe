@@ -5,6 +5,8 @@ using Avalonia.Media;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 
+// ReSharper disable InconsistentNaming
+
 namespace MuseDashModToolsUI.Converters;
 
 public class VersionColourConverter : IValueConverter
@@ -12,7 +14,7 @@ public class VersionColourConverter : IValueConverter
     private readonly IBrush Blue = "#6D96FF".ToBrush();
     private readonly IBrush Default = "#CCC".ToBrush();
     private readonly IBrush Orange = "#E19600".ToBrush();
-    private readonly IBrush Purple = "#AC2AE6".ToBrush();
+    private readonly IBrush Purple = "#A228D9".ToBrush();
     private readonly IBrush Red = "#FD2617".ToBrush();
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)

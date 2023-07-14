@@ -43,7 +43,11 @@ public class MessageBoxService : IMessageBoxService
     public async Task<ButtonResult> CreateNoticeMessageBox(string content, Icon icon = Icon.Info) =>
         await CreateMessageBox(MsgBox_Title_Notice, content, icon: icon);
 
-    public async Task<ButtonResult> CreateSuccessMessageBox(string content) => await CreateMessageBox(MsgBox_Title_Success, content);
+    public async Task<ButtonResult> CreateSuccessMessageBox(string content, Icon icon = Icon.Success) =>
+        await CreateMessageBox(MsgBox_Title_Success, content, icon: icon);
+
+    public async Task<ButtonResult> CreateWarningMessageBox(string content, Icon icon = Icon.Warning) =>
+        await CreateMessageBox(MsgBox_Title_Warning, content, icon: icon);
 
     public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) =>
         await CreateMessageBox(title, content, icon: Icon.Error);
