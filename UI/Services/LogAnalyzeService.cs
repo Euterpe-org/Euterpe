@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -128,27 +127,25 @@ public class LogAnalyzeService : ILogAnalyzeService
 
     private void CheckModVersion()
     {
-        var loadedMods = new List<string>();
         for (var i = 0; i < LogContentArray.Length; i++)
         {
-            if (LogContentArray[i].Contains("Assembly: ")) loadedMods.Add(LogContentArray[i - 2][15..]);
-            if (LogContentArray[i].Contains("Mods loaded.")) break;
-        }
-
-        foreach (var mod in loadedMods)
-        {
-            var splitData = mod.Split(" v");
-            var modName = splitData[0];
-            var modVersion = splitData[1];
-            var version = ModService.CompareVersion(modName, modVersion);
-            switch (version)
+            if (LogContentArray[i].Contains("Assembly: "))
             {
-                case 0:
-                    continue;
-                case -1:
-                    LogContentBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
-                    break;
+                var splitData = LogContentArray[i - 2][15..].Split(" v");
+                var modName = splitData[0];
+                var modVersion = splitData[1];
+                var version = ModService.CompareVersion(modName, modVersion);
+                switch (version)
+                {
+                    case 0:
+                        continue;
+                    case -1:
+                        LogContentBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
+                        break;
+                }
             }
+
+            if (LogContentArray[i].Contains("Mods loaded.")) break;
         }
     }
 
