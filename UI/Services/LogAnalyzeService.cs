@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,22 @@ public class LogAnalyzeService : ILogAnalyzeService
     private readonly FileSystemWatcher _watcher = new();
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
+    public IModService ModService { get; init; }
     public ISettingService SettingService { get; init; }
     private string LogPath { get; set; } = string.Empty;
     private string LogContent { get; set; } = string.Empty;
     private string[] LogContentArray { get; set; }
-    private StringBuilder LogContentBuilder { get; set; } = new();
+    private StringBuilder LogContentBuilder { get; } = new();
+
+    public async Task AnalyzeLog()
+    {
+        CheckModVersion();
+        if (LogContentBuilder.Length > 0)
+        {
+            await MessageBoxService.CreateSuccessMessageBox(LogContentBuilder.ToString());
+            LogContentBuilder.Clear();
+        }
+    }
 
     public async Task<bool> CheckPirate()
     {
@@ -111,6 +123,32 @@ public class LogAnalyzeService : ILogAnalyzeService
         {
             Logger.Error(ex, "Read Log Error");
             return string.Empty;
+        }
+    }
+
+    private void CheckModVersion()
+    {
+        var loadedMods = new List<string>();
+        for (var i = 0; i < LogContentArray.Length; i++)
+        {
+            if (LogContentArray[i].Contains("Assembly: ")) loadedMods.Add(LogContentArray[i - 2][15..]);
+            if (LogContentArray[i].Contains("Mods loaded.")) break;
+        }
+
+        foreach (var mod in loadedMods)
+        {
+            var splitData = mod.Split(" v");
+            var modName = splitData[0];
+            var modVersion = splitData[1];
+            var version = ModService.CompareVersion(modName, modVersion);
+            switch (version)
+            {
+                case 0:
+                    continue;
+                case -1:
+                    LogContentBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
+                    break;
+            }
         }
     }
 

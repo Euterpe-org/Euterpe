@@ -65,6 +65,17 @@ public class ModService : IModService
         await LoadModsToUI(localMods, _webMods);
     }
 
+    public int CompareVersion(string modName, string modVersion)
+    {
+        var webMod = _webMods?.FirstOrDefault(x => x.Name == modName);
+        if (webMod is null) return 0;
+
+        var webModVersion = new Version(webMod.Version!);
+        var loadedModVersion = new Version(modVersion);
+
+        return webModVersion > loadedModVersion ? -1 : 0;
+    }
+
     public async Task OnInstallMod(Mod item)
     {
         if (item.DownloadLink is null)
@@ -191,6 +202,7 @@ public class ModService : IModService
             await HandleDeleteModException(item, ex);
         }
     }
+
 
     private static void HandleInstallModException(Exception ex, StringBuilder errors)
     {

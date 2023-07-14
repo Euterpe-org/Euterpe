@@ -36,6 +36,7 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
         _logger.Information("Log Analysis Started...");
         if (await _logAnalyzeService.CheckPirate()) return;
         if (!await _logAnalyzeService.CheckMelonLoaderVersion()) return;
+        await _logAnalyzeService.AnalyzeLog();
     }
 
     [RelayCommand]

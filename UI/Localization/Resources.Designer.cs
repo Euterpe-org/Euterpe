@@ -456,6 +456,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is outdated, please update using &quot;ModManage&quot;page.
+        /// </summary>
+        internal static string MsgBox_Content_OutdatedMod {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_OutdatedMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot read current game version\nDo you fully installed Muse Dash?\nPlease check your globalgamemanagers file in\n{0}.
         /// </summary>
         internal static string MsgBox_Content_ReadGameVersionFailed {
