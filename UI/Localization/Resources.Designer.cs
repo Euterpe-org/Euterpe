@@ -438,6 +438,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Log File Found\nYou have to launch the game once after installing MelonLoader to generate log.
+        /// </summary>
+        internal static string MsgBox_Content_NoLogFile {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoLogFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot find MelonLoader Folder\nHave you installed MelonLoader?.
         /// </summary>
         internal static string MsgBox_Content_NoMelonLoaderFolder {

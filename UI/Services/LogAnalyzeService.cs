@@ -116,7 +116,7 @@ public class LogAnalyzeService : ILogAnalyzeService
     {
         if (!string.IsNullOrEmpty(SettingService.Settings.MelonLoaderFolder))
             LogPath = Path.Combine(SettingService.Settings.MelonLoaderFolder, "Latest.log");
-        if (!File.Exists(LogPath)) return string.Empty;
+        if (!File.Exists(LogPath)) return MsgBox_Content_NoLogFile.Localize();
 
         try
         {
