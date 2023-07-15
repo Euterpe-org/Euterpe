@@ -1,7 +1,4 @@
 using System.Globalization;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Services;
-using Xunit.Abstractions;
 
 namespace MuseDashModToolsUI.Test;
 

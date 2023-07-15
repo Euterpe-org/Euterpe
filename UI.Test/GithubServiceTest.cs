@@ -1,7 +1,4 @@
-﻿using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Services;
-using RichardSzalay.MockHttp;
-using Xunit.Abstractions;
+﻿using RichardSzalay.MockHttp;
 
 namespace MuseDashModToolsUI.Test;
 

@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Serilog;
 using Serilog.Events;
-using Xunit.Abstractions;
 
 namespace MuseDashModToolsUI.Test;
 
