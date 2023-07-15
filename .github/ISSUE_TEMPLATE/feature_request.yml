@@ -1,5 +1,6 @@
 name: Feature Request
 description: What things do you think is needed to add into Muse Dash Mod Tools UI
+title: "[Feature Request]: "
 labels: "feature request"
 body:
   - type: textarea

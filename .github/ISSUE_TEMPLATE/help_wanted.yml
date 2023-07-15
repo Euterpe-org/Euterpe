@@ -1,5 +1,6 @@
 name: Help Wanted
 description: You've met a problem and need help
+title: "[Help Wanted]: "
 labels: "help wanted"
 body:
   - type: dropdown
