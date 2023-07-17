@@ -50,7 +50,7 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="DialogHost.Avalonia" Version="0.7.5"/>
         <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1"/>
-        <PackageReference Include="Material.Avalonia" Version="3.0.0-avalonia11-preview5.205-nightly"/>
+        <PackageReference Include="Material.Avalonia" Version="3.0.0-avalonia11-preview5.207-nightly"/>
         <PackageReference Include="MessageBox.Avalonia" Version="3.0.1-rc2"/>
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Analyzers" Version="4.3.0">
             <PrivateAssets>all</PrivateAssets>
