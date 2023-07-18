@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MsBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using Serilog;
@@ -22,6 +23,7 @@ public class LogAnalyzeService : ILogAnalyzeService
     public IMessageBoxService MessageBoxService { get; init; }
     public IModService ModService { get; init; }
     public ISettingService SettingService { get; init; }
+    public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
     private string LogPath { get; set; } = string.Empty;
     private string LogContent { get; set; } = string.Empty;
     private string[] LogContentArray { get; set; }
@@ -120,7 +122,9 @@ public class LogAnalyzeService : ILogAnalyzeService
 
         try
         {
-            LogContent = await File.ReadAllTextAsync(LogPath);
+            await using var stream = new FileStream(LogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var reader = new StreamReader(stream);
+            LogContent = await reader.ReadToEndAsync();
             Logger.Information("Read Log Success");
             StartLogFileMonitor();
             return LogContent;
@@ -160,10 +164,10 @@ public class LogAnalyzeService : ILogAnalyzeService
     {
         _watcher.Path = SettingService.Settings.MelonLoaderFolder;
         _watcher.Filter = "Latest.log";
-        _watcher.Renamed += async (_, _) => await LoadLog();
-        _watcher.Changed += async (_, _) => await LoadLog();
-        _watcher.Created += async (_, _) => await LoadLog();
-        _watcher.Deleted += async (_, _) => await LoadLog();
+        _watcher.Renamed += (_, _) => LogAnalysisViewModel.Value.Initialize();
+        _watcher.Changed += (_, _) => LogAnalysisViewModel.Value.Initialize();
+        _watcher.Created += (_, _) => LogAnalysisViewModel.Value.Initialize();
+        _watcher.Deleted += (_, _) => LogAnalysisViewModel.Value.Initialize();
         _watcher.EnableRaisingEvents = true;
         Logger.Information("Log File Monitor Started");
     }
