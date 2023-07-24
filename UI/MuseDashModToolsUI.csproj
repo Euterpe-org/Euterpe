@@ -61,7 +61,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Serilog" Version="3.0.2-dev-02044"/>
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Serilog.Sinks.Console" Version="4.1.1-dev-00910"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Serilog.Sinks.Console" Version="4.1.1-dev-00917"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
         <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
