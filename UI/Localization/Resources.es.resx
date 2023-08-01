@@ -202,10 +202,10 @@
         <value>Todas</value>
     </data>
     <data name="XAML_Mod_Dependencies" xml:space="preserve">
-        <value>Dependencias:</value>
+        <value>Dependencias: </value>
     </data>
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
-        <value>Duplicado de:</value>
+        <value>Duplicado de: </value>
     </data>
     <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} es usado por {1} como dependencia\n¿Estás seguro de intentar desactivarlo?</value>
@@ -298,7 +298,7 @@
         <value>No</value>
     </data>
     <data name="XAML_DownloadSource" xml:space="preserve">
-        <value>Descarga Oficial:</value>
+        <value>Descarga Oficial: </value>
     </data>
     <data name="XAML_DownloadSource_Github" xml:space="preserve">
         <value>Github</value>

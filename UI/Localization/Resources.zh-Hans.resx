@@ -348,4 +348,7 @@
     <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
         <value>无法找到日志文件\n你需要在安装 MelonLoader 之后启动一次游戏来生成日志文件</value>
     </data>
+    <data name="XAML_DownloadPrerelease" xml:space="preserve">
+        <value>下载预发行版本：</value>
+    </data>
 </root>

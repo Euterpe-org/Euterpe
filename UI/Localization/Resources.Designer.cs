@@ -690,6 +690,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download Prerelease: .
+        /// </summary>
+        internal static string XAML_DownloadPrerelease {
+            get {
+                return ResourceManager.GetString("XAML_DownloadPrerelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download Source: .
         /// </summary>
         internal static string XAML_DownloadSource {
@@ -825,7 +834,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dependencies:.
+        ///   Looks up a localized string similar to Dependencies: .
         /// </summary>
         internal static string XAML_Mod_Dependencies {
             get {
@@ -843,7 +852,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duplicated by:.
+        ///   Looks up a localized string similar to Duplicated by: .
         /// </summary>
         internal static string XAML_Mod_Duplicate {
             get {

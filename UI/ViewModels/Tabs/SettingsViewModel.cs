@@ -25,6 +25,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     [ObservableProperty] private int _currentLanguageIndex;
     [ObservableProperty] private int _disableDependenciesWhenDeleting;
     [ObservableProperty] private int _disableDependenciesWhenDisabling;
+    [ObservableProperty] private bool _downloadPrerelease;
     [ObservableProperty] private string[] _downloadSources;
     [ObservableProperty] private int _enableDependenciesWhenEnabling;
     [ObservableProperty] private int _enableDependenciesWhenInstalling;
@@ -56,7 +57,9 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         EnableDependenciesWhenEnabling = (int)_settingService.Settings.AskEnableDependenciesWhenEnabling;
         DisableDependenciesWhenDeleting = (int)_settingService.Settings.AskDisableDependenciesWhenDeleting;
         DisableDependenciesWhenDisabling = (int)_settingService.Settings.AskDisableDependenciesWhenDisabling;
+        DownloadPrerelease = _settingService.Settings.DownloadPrerelease;
 
+        _logger.Debug(_settingService.Settings.DownloadPrerelease.ToString());
         _logger.Information("Settings Window initialized");
     }
 
@@ -113,6 +116,11 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
             newValue = oldValue;
         else
             _settingService.Settings.AskDisableDependenciesWhenDisabling = (AskType)newValue;
+    }
+
+    partial void OnDownloadPrereleaseChanged(bool value)
+    {
+        _settingService.Settings.DownloadPrerelease = value;
     }
 
     #endregion

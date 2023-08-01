@@ -11,7 +11,7 @@ public class Setting
     public string? FontName { get; set; } = "Segoe UI";
     public Version SkipVersion { get; set; } = new();
 
-    public bool DownloadPrerelease { get; set; } = false;
+    public bool DownloadPrerelease { get; set; }
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;
