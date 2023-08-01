@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
+using Newtonsoft.Json;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -52,7 +52,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     private void OnExit(object sender, EventArgs e)
     {
-        var json = JsonSerializer.Serialize(_settingService.Settings, new JsonSerializerOptions { WriteIndented = true });
+        var json = JsonConvert.SerializeObject(_settingService.Settings, Formatting.Indented);
         File.WriteAllText("Settings.json", json);
         _logger.Information("Settings saved");
     }

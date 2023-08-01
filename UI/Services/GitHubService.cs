@@ -4,9 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Reflection;
-using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
@@ -19,15 +18,16 @@ using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
-public class GitHubService : IGitHubService
+public partial class GitHubService : IGitHubService
 {
-    private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
+    private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
 
     private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
 
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
+    private string DefaultDownloadSource => DownloadSourceDictionary[SettingService.Settings.DownloadSource];
 
     private static Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
     {
@@ -43,8 +43,7 @@ public class GitHubService : IGitHubService
 
     public async Task<List<Mod>?> GetModListAsync()
     {
-        var defaultDownloadSource = DownloadSourceDictionary[SettingService.Settings.DownloadSource];
-        var mods = await GetModListFromSourceAsync(defaultDownloadSource);
+        var mods = await GetModListFromSourceAsync(DefaultDownloadSource);
         if (mods is not null) return mods;
 
         foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SettingService.Settings.DownloadSource))
@@ -72,8 +71,7 @@ public class GitHubService : IGitHubService
 
     public async Task DownloadMelonLoader(string path, IProgress<double> downloadProgress)
     {
-        var defaultDownloadSource = DownloadSourceDictionary[SettingService.Settings.DownloadSource];
-        var result = await DownloadMelonLoaderFromSource(defaultDownloadSource, path, downloadProgress);
+        var result = await DownloadMelonLoaderFromSource(DefaultDownloadSource, path, downloadProgress);
         if (result is not null) return;
 
         foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SettingService.Settings.DownloadSource))
@@ -92,20 +90,20 @@ public class GitHubService : IGitHubService
         Logger.Information("Get current version success: {Version}", currentVersion);
         try
         {
-            var result = await Client.GetStringAsync(ReleaseInfoLink);
-            var doc = JsonDocument.Parse(result);
-            if (!doc.RootElement.TryGetProperty("tag_name", out var tagName)) return;
+            var releases = await Client.GetFromJsonAsync<List<GithubRelease>>(ReleaseInfoLink);
+            Logger.Information("Get releases success");
 
-            var version = GetVersionFromTag(tagName);
+            var release = SettingService.Settings.DownloadPrerelease ? releases[0] : releases.Find(x => !x.Prerelease)!;
+
+            var version = GetVersionFromTag(release.TagName);
             if (version is null || await SkipVersionCheck(version, currentVersion!, userClick)) return;
 
-            var title = doc.RootElement.GetProperty("name").GetString();
-            var body = doc.RootElement.GetProperty("body").GetString();
-            if (!await UpdateRequired(version, title!, body!)) return;
+            var title = release.Name;
+            var body = release.Body;
+            if (!await UpdateRequired(release.TagName, title, body)) return;
 
-            var link = GetDownloadLink(doc);
-            var currentDirectory = Directory.GetCurrentDirectory();
-            await LaunchUpdater(currentDirectory, new[] { link, currentDirectory + ".zip", currentDirectory });
+            var link = GetDownloadLink(release.Assets);
+            await LaunchUpdater(link);
             Logger.Information("Launch updater success, exit...");
             Environment.Exit(0);
         }
@@ -121,7 +119,7 @@ public class GitHubService : IGitHubService
         var url = downloadSource + "ModLinks.json";
         try
         {
-            var mods = (await Client.GetFromJsonAsync<List<Mod>>(url))!;
+            var mods = await Client.GetFromJsonAsync<List<Mod>>(url);
             Logger.Information("Get mod list from {Url} success", url);
             return mods;
         }
@@ -150,8 +148,7 @@ public class GitHubService : IGitHubService
         }
     }
 
-    private async Task<HttpResponseMessage?> DownloadMelonLoaderFromSource(string downloadSource, string path,
-        IProgress<double> downloadProgress)
+    private async Task<HttpResponseMessage?> DownloadMelonLoaderFromSource(string downloadSource, string path, IProgress<double> downloadProgress)
     {
         var url = downloadSource + "MelonLoader.zip";
         try
@@ -183,8 +180,9 @@ public class GitHubService : IGitHubService
         }
     }
 
-    private async Task LaunchUpdater(string currentDirectory, IEnumerable<string> launchArgs)
+    private async Task LaunchUpdater(string link)
     {
+        var currentDirectory = Directory.GetCurrentDirectory();
         var updaterExePath = Path.Combine(currentDirectory, "Updater.exe");
         var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
         var updaterTargetPath = Path.Combine(currentDirectory, "Update", "Updater.exe");
@@ -213,19 +211,17 @@ public class GitHubService : IGitHubService
                 string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
         }
 
-        Process.Start(updaterTargetPath, launchArgs);
+        Process.Start(updaterTargetPath, new[] { link, currentDirectory });
     }
 
     #region CheckUpdates Private Methods
 
-    private Version? GetVersionFromTag(JsonElement tagName)
+    private Version? GetVersionFromTag(string tagName)
     {
-        var tag = tagName.GetString();
-        if (tag is null) return null;
-
-        if (!Version.TryParse(tag.StartsWith('v') ? tag[1..] : tag, out var version)) return null;
+        var tag = VersionRegex().Match(tagName);
+        if (!tag.Success) return null;
+        if (!Version.TryParse(tag.Groups[1].Value, out var version)) return null;
         Logger.Information("Get latest version success: {Version}", version);
-
         return version;
     }
 
@@ -237,34 +233,33 @@ public class GitHubService : IGitHubService
         return true;
     }
 
-    private async Task<bool> UpdateRequired(Version version, string title, string body)
+    private async Task<bool> UpdateRequired(string version, string title, string body)
     {
-        var update = await MessageBoxService.CreateCustomConfirmMessageBox(
+        var update = await MessageBoxService.CreateCustomMarkDownConfirmMessageBox(
             string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body), 3);
 
         if (update == MsgBox_Button_NoNoAsk)
         {
-            SettingService.Settings.SkipVersion = version;
+            SettingService.Settings.SkipVersion = new Version(version);
             return false;
         }
 
         return update != MsgBox_Button_No;
     }
 
-    private string GetDownloadLink(JsonDocument doc)
+    private string GetDownloadLink(List<GitHubReleaseAsset> assets)
     {
-        var assets = doc.RootElement.GetProperty("assets");
-        var releases = assets.EnumerateArray();
-
         var osString = OperatingSystem.IsWindows() ? "Windows" : "Linux";
 
-        var release = releases.FirstOrDefault(x =>
-            x.GetProperty("name").GetString()!.Contains(osString, StringComparison.OrdinalIgnoreCase));
-        var link = release.GetProperty("browser_download_url").GetString()!;
+        var release = assets.Find(x => x.Name.Contains(osString, StringComparison.OrdinalIgnoreCase))!;
+        var link = release.BrowserDownloadUrl;
 
         Logger.Information("Get {OsString} download link success {Link}", osString, link);
         return link;
     }
+
+    [GeneratedRegex(@"v?(\d+\.\d+\.\d+)(-?\w*)")]
+    private static partial Regex VersionRegex();
 
     #endregion
 }

@@ -97,7 +97,7 @@
         <value>Aviso</value>
     </data>
     <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
-        <value>¡Hay una nueva versión de Muse Dash Mod Tools({0})!\n¿Te gustaría poder instalarlo ahora?\n\nTítulo del parche:\n{1}\n\nNotas del parche:\n{2}</value>
+        <value>¡Hay una nueva versión de Muse Dash Mod Tools({0})!\n\n¿Te gustaría poder instalarlo ahora?\n\nTítulo del parche:\n{1}\n\nNotas del parche:\n{2}</value>
     </data>
     <data name="FolderDialog_Title" xml:space="preserve">
         <value>Selecciona la carpeta de Muse Dash</value>
@@ -164,9 +164,6 @@
     </data>
     <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
         <value>La instalación del mod fallo\n{0}</value>
-    </data>
-    <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
-        <value>No se pudo instalar las Dependencias\n{0}</value>
     </data>
     <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>¿Quieres activar el mod {1}? Es una dependencia del mod {0}</value>

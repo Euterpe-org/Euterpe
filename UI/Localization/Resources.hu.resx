@@ -97,7 +97,7 @@
         <value>Figyelmeztetés</value>
     </data>
     <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
-        <value>Egy újabb verzió ({0}) elérhető\nSzeretnéd telepíteni?\n\nCím:\n{1}\n\nInfó:\n{2}</value>
+        <value>Egy újabb verzió ({0}) elérhető\n\nSzeretnéd telepíteni?\n\nCím:\n{1}\n\nInfó:\n{2}</value>
     </data>
     <data name="FolderDialog_Title" xml:space="preserve">
         <value>Válaszd ki a Muse Dash mappát</value>
@@ -164,9 +164,6 @@
     </data>
     <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
         <value>Mod telepítés sikertelen\n{0}</value>
-    </data>
-    <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
-        <value>Függőség feltelepítése sikertelen\n{0}</value>
     </data>
     <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>Szeretnéd bekapcsolni {0} függőségét, {1}-et?</value>

@@ -97,7 +97,7 @@
         <value>注意</value>
     </data>
     <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
-        <value>有新版本的 Muse Dash Mod Tools （{0}）已经发布\n你想要现在就安装吗\n\n发布标题：\n{1}\n\n发布内容：\n{2}</value>
+        <value>有新版本的 Muse Dash Mod Tools （{0}）已经发布\n\n你想要现在就安装吗\n\n发布标题：\n{1}\n\n发布内容：\n{2}</value>
     </data>
     <data name="FolderDialog_Title" xml:space="preserve">
         <value>选择 Muse Dash 文件夹</value>
@@ -166,7 +166,7 @@
         <value>Mod安装失败\n{0}</value>
     </data>
     <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
-        <value>依赖安装失败\n{0}</value>
+        <value>依赖 {0} 安装失败\n{1}</value>
     </data>
     <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>你想要启用 {0} 的依赖mod {1} 吗？</value>

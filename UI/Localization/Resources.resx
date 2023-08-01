@@ -98,7 +98,7 @@
         <value>Notice</value>
     </data>
     <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
-        <value>A newer version of Muse Dash Mod Tools ({0}) is released\nDo you want to install it now?\n\nRelease Title:\n{1}\n\nRelease Info:\n{2}</value>
+        <value>A newer version of Muse Dash Mod Tools ({0}) is released\n\nDo you want to install it now?\n\nRelease Title:\n{1}\n\nRelease Info:\n{2}</value>
     </data>
     <data name="FolderDialog_Title" xml:space="preserve">
         <value>Choose Muse Dash Folder</value>
@@ -167,7 +167,7 @@
         <value>Mod installation failed\n{0}</value>
     </data>
     <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
-        <value>Dependency failed to install\n{0}</value>
+        <value>Dependency {0} failed to install\n{1}</value>
     </data>
     <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>Do you want to enable {0}'s dependency {1}?</value>

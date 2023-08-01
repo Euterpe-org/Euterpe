@@ -13,10 +13,10 @@ else
 {
     await DownloadUpdates(args);
     Console.WriteLine("Download finished. Extracting...");
-    Unzip(args[1], args[2]);
+    Unzip(args[1] + ".zip", args[1]);
     Console.WriteLine("Extracting finished. Pressing any key to launch MuseDashModTools");
     Console.ReadKey();
-    Process.Start(Path.Combine(args[2], "MuseDashModTools.exe"));
+    Process.Start(Path.Combine(args[1], "MuseDashModTools.exe"));
 }
 
 return;
@@ -51,7 +51,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
 
     var totalLength = result.Content.Headers.ContentLength;
     var contentStream = await result.Content.ReadAsStreamAsync();
-    await using var fs = new FileStream(downloadArgs[1], FileMode.OpenOrCreate);
+    await using var fs = new FileStream(downloadArgs[1] + ".zip", FileMode.OpenOrCreate);
     var buffer = new byte[5 * 1024];
     var readLength = 0L;
     try

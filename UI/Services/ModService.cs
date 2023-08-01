@@ -67,7 +67,7 @@ public class ModService : IModService
 
     public int CompareVersion(string modName, string modVersion)
     {
-        var webMod = _webMods?.FirstOrDefault(x => x.Name == modName);
+        var webMod = _webMods?.Find(x => x.Name == modName);
         if (webMod is null) return 0;
 
         var webModVersion = new Version(webMod.Version!);
@@ -96,7 +96,7 @@ public class ModService : IModService
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
             if (_webMods is null) return;
-            var mod = _webMods?.FirstOrDefault(x => x.Name == downloadedMod.Name)!;
+            var mod = _webMods?.Find(x => x.Name == downloadedMod.Name)!;
             mod.IsDisabled = downloadedMod.IsDisabled;
             mod.FileName = downloadedMod.FileName;
             mod.LocalVersion = downloadedMod.LocalVersion;
@@ -192,7 +192,7 @@ public class ModService : IModService
 
             SettingsViewModel.DisableDependenciesWhenDeleting = (int)askType;
             File.Delete(path);
-            var mod = _webMods?.FirstOrDefault(x => x.Name == item.Name)?.SetDefault();
+            var mod = _webMods?.Find(x => x.Name == item.Name)?.SetDefault();
             _sourceCache?.AddOrUpdate(mod);
             Logger.Information("Delete mod {Name} success", item.Name);
             await MessageBoxService.CreateSuccessMessageBox(string.Format(MsgBox_Content_UninstallModSuccess.Localize(), item.Name));
@@ -202,7 +202,6 @@ public class ModService : IModService
             await HandleDeleteModException(item, ex);
         }
     }
-
 
     private static void HandleInstallModException(Exception ex, StringBuilder errors)
     {
@@ -257,7 +256,7 @@ public class ModService : IModService
         var isTracked = new bool[localMods.Count];
         foreach (var webMod in webMods!)
         {
-            var localMod = localMods.FirstOrDefault(x => x.Name == webMod.Name);
+            var localMod = localMods.Find(x => x.Name == webMod.Name);
             var localModIdx = localMods.IndexOf(localMod!);
 
             if (localMod is null)
@@ -362,7 +361,7 @@ public class ModService : IModService
             }
             catch (Exception ex)
             {
-                errors.AppendLine(ex.ToString());
+                errors.AppendFormat(MsgBox_Content_InstallDependencyFailed.Localize(), dependency.Name, ex).AppendLine();
                 Logger.Information(ex, "Install dependency {Name} failed", dependency.Name);
             }
         }

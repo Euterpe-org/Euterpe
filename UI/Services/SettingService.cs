@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -12,6 +10,8 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -49,7 +49,7 @@ public class SettingService : ISettingService
             }
 
             var text = await File.ReadAllTextAsync("Settings.json");
-            var settings = JsonSerializer.Deserialize<Setting>(text)!;
+            var settings = JsonConvert.DeserializeObject<Setting>(text)!;
             if (string.IsNullOrEmpty(settings.MuseDashFolder))
             {
                 _logger.Error("Settings.json stored path is empty, asking user to choose path");
@@ -112,7 +112,7 @@ public class SettingService : ISettingService
             Settings.MuseDashFolder = path;
             Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
 
-            var json = JsonSerializer.Serialize(Settings, new JsonSerializerOptions { WriteIndented = true });
+            var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
             await File.WriteAllTextAsync("Settings.json", json);
             _logger.Information("Settings saved to Settings.json");
 
@@ -125,21 +125,20 @@ public class SettingService : ISettingService
 
     private async Task LoadSavedSetting()
     {
-        if (!File.Exists("Settings.json"))
-            return;
+        if (!File.Exists("Settings.json")) return;
         var text = await File.ReadAllTextAsync("Settings.json");
-        var settings = JsonNode.Parse(text);
+        var settings = JObject.Parse(text);
 
-        Settings.MuseDashFolder = settings?["MuseDashFolder"]?.ToString();
-        Settings.LanguageCode = settings?["LanguageCode"]?.ToString();
-        Settings.FontName = settings?["FontName"]?.ToString();
-        if (Version.TryParse(settings?["SkipVersion"]?.ToString()!, out var version))
+        Settings.MuseDashFolder = settings["MuseDashFolder"]?.ToString();
+        Settings.LanguageCode = settings["LanguageCode"]?.ToString();
+        Settings.FontName = settings["FontName"]?.ToString();
+        if (Version.TryParse(settings["SkipVersion"]?.ToString()!, out var version))
             Settings.SkipVersion = version;
-        Settings.DownloadSource = Enum.Parse<DownloadSources>(settings?["DownloadSource"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(settings?["AskEnableDependenciesWhenInstalling"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings?["AskEnableDependenciesWhenEnabling"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(settings?["AskDisableDependenciesWhenDeleting"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(settings?["AskDisableDependenciesWhenDisabling"]?.ToString()!);
+        Settings.DownloadSource = Enum.Parse<DownloadSources>(settings["DownloadSource"]?.ToString()!);
+        Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenInstalling"]?.ToString()!);
+        Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenEnabling"]?.ToString()!);
+        Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDeleting"]?.ToString()!);
+        Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDisabling"]?.ToString()!);
         _logger.Information("Saved setting loaded from Settings.json");
 
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");

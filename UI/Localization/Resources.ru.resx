@@ -97,7 +97,7 @@
         <value>Уведомление</value>
     </data>
     <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
-        <value>Существует более новая версия Muse Dash Mod Tools ({0})\nХотите установить её?\n\nИмя релиза:\n{1}\n\nИнформация о релизе:\n{2}</value>
+        <value>Существует более новая версия Muse Dash Mod Tools ({0})\n\nХотите установить её?\n\nИмя релиза:\n{1}\n\nИнформация о релизе:\n{2}</value>
     </data>
     <data name="FolderDialog_Title" xml:space="preserve">
         <value>Выберите папку Muse Dash</value>
@@ -164,9 +164,6 @@
     </data>
     <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
         <value>Неуспешная установка мода\n{0}</value>
-    </data>
-    <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
-        <value>Неуспешная установка зависимости\n{0}</value>
     </data>
     <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>Хотели ли бы Вы включить зависимость {1} мода {0}?</value>

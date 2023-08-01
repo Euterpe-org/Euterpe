@@ -276,7 +276,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dependency failed to install\n{0}.
+        ///   Looks up a localized string similar to Dependency {0} failed to install\n{1}.
         /// </summary>
         internal static string MsgBox_Content_InstallDependencyFailed {
             get {
@@ -384,7 +384,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A newer version of Muse Dash Mod Tools ({0}) is released\nDo you want to install it now?\n\nRelease Title:\n{1}\n\nRelease Info:\n{2}.
+        ///   Looks up a localized string similar to A newer version of Muse Dash Mod Tools ({0}) is released\n\nDo you want to install it now?\n\nRelease Title:\n{1}\n\nRelease Info:\n{2}.
         /// </summary>
         internal static string MsgBox_Content_NewerVersion {
             get {
