@@ -59,7 +59,6 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         DisableDependenciesWhenDisabling = (int)_settingService.Settings.AskDisableDependenciesWhenDisabling;
         DownloadPrerelease = _settingService.Settings.DownloadPrerelease;
 
-        _logger.Debug(_settingService.Settings.DownloadPrerelease.ToString());
         _logger.Information("Settings Window initialized");
     }
 

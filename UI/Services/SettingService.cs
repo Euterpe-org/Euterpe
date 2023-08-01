@@ -79,6 +79,13 @@ public class SettingService : ISettingService
         }
     }
 
+    public void SaveSettings()
+    {
+        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+        File.WriteAllText("Settings.json", json);
+        _logger.Information("Settings saved");
+    }
+
     public async Task OnChoosePath()
     {
         while (true)

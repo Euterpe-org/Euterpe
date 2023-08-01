@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
-using Newtonsoft.Json;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -50,10 +48,5 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _logger.Information("Switching tab to {Name}", name);
     }
 
-    private void OnExit(object sender, EventArgs e)
-    {
-        var json = JsonConvert.SerializeObject(_settingService.Settings, Formatting.Indented);
-        File.WriteAllText("Settings.json", json);
-        _logger.Information("Settings saved");
-    }
+    private void OnExit(object sender, EventArgs e) => _settingService.SaveSettings();
 }
