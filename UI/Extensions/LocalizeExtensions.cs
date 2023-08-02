@@ -12,13 +12,10 @@ public class LocalizeExtensions : MarkupExtension
 
     public LocalizeExtensions(string key) => Key = key;
 
-    public override object ProvideValue(IServiceProvider serviceProvider)
+    public override object ProvideValue(IServiceProvider serviceProvider) => new Binding
     {
-        return new Binding
-        {
-            Mode = BindingMode.OneWay,
-            Source = LocalizationService,
-            Path = $"[{Key}]"
-        };
-    }
+        Mode = BindingMode.OneWay,
+        Source = LocalizationService,
+        Path = $"[{Key}]"
+    };
 }

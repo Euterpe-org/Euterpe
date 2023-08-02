@@ -12,13 +12,10 @@ public class FontExtensions : MarkupExtension
 
     public FontExtensions(string key) => Key = key;
 
-    public override object ProvideValue(IServiceProvider serviceProvider)
+    public override object ProvideValue(IServiceProvider serviceProvider) => new Binding
     {
-        return new Binding
-        {
-            Mode = BindingMode.OneWay,
-            Source = FontManageService,
-            Path = $"[{Key}]"
-        };
-    }
+        Mode = BindingMode.OneWay,
+        Source = FontManageService,
+        Path = $"[{Key}]"
+    };
 }

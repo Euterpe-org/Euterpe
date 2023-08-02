@@ -8,10 +8,7 @@ public class TestLogger : ILogger
 {
     private ITestOutputHelper TestOutputHelper { get; }
 
-    public TestLogger(ITestOutputHelper testOutputHelper)
-    {
-        TestOutputHelper = testOutputHelper;
-    }
+    public TestLogger(ITestOutputHelper testOutputHelper) => TestOutputHelper = testOutputHelper;
 
     public void Write(LogEvent logEvent)
     {
