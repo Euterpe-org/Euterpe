@@ -54,13 +54,13 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
         {
             if (culture.Equals(CultureInfo.InvariantCulture))
             {
-                AvailableLanguages.Add(new Language(defaultCulture.Name, defaultCulture.DisplayName));
+                AvailableLanguages.Add(new Language(defaultCulture));
                 continue;
             }
 
             var rs = rm.GetResourceSet(culture, true, false);
             if (rs != null)
-                AvailableLanguages.Add(new Language(culture.Name, culture.DisplayName));
+                AvailableLanguages.Add(new Language(culture));
         }
 
         _logger.Information("Available languages loaded: {AvailableLanguages}",

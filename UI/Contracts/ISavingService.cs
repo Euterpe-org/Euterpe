@@ -7,6 +7,6 @@ public interface ISavingService
 {
     public Setting Settings { get; }
     Task InitializeSettings();
-    Task SaveSettings();
+    Task Save();
     Task OnChoosePath();
 }

@@ -95,7 +95,7 @@ public class SavingService : ISavingService
         }
     }
 
-    public async Task SaveSettings()
+    public async Task Save()
     {
         var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
@@ -176,15 +176,15 @@ public class SavingService : ISavingService
     {
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
         var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
-        if (File.Exists(updaterPath))
+        if (_fileSystem.File.Exists(updaterPath))
         {
-            File.Delete(updaterPath);
+            _fileSystem.File.Delete(updaterPath);
             _logger.Information("Updater.exe found, deleting it");
         }
 
-        if (Directory.Exists(updateDirectory))
+        if (_fileSystem.Directory.Exists(updateDirectory))
         {
-            Directory.Delete(updateDirectory);
+            _fileSystem.Directory.Delete(updateDirectory);
             _logger.Information("Update directory found, deleting it");
         }
     }
