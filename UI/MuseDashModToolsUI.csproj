@@ -3,7 +3,7 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <Version>1.2.0</Version>
+        <Version>1.2.0-rc2</Version>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
@@ -53,6 +53,7 @@
         <PackageReference Include="Material.Avalonia" Version="3.0.0-avalonia11-preview5.216-nightly"/>
         <PackageReference Include="MessageBox.Avalonia" Version="3.1.2"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="NuGet.Versioning" Version="6.6.1"/>
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Analyzers" Version="4.3.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -65,6 +66,8 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
+        <PackageReference Include="TestableIO.System.IO.Abstractions" Version="19.2.29"/>
+        <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.29"/>
         <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
     </ItemGroup>
 </Project>

@@ -31,7 +31,7 @@ public class ModService : IModService
     public ILocalService LocalService { get; init; }
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
-    public ISettingService SettingService { get; init; }
+    public ISavingService SavingService { get; init; }
     public ISettingsViewModel SettingsViewModel { get; init; }
 
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)
@@ -46,7 +46,7 @@ public class ModService : IModService
 
         _webMods ??= await GitHubService.GetModListAsync();
         if (_webMods is null) return;
-        var localPaths = LocalService.GetModFiles(SettingService.Settings.ModsFolder);
+        var localPaths = LocalService.GetModFiles(SavingService.Settings.ModsFolder);
         List<Mod>? localMods;
         try
         {
@@ -89,7 +89,7 @@ public class ModService : IModService
 
         try
         {
-            var path = Path.Join(SettingService.Settings.ModsFolder,
+            var path = Path.Join(SavingService.Settings.ModsFolder,
                 item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             await GitHubService.DownloadModAsync(item.DownloadLink, path);
 
@@ -144,7 +144,7 @@ public class ModService : IModService
             if (item.IsDisabled)
             {
                 var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DisableModConfirm.Localize(),
-                    SettingService.Settings.AskDisableDependenciesWhenDisabling);
+                    SavingService.Settings.AskDisableDependenciesWhenDisabling);
                 if (!result)
                     return;
 
@@ -155,8 +155,8 @@ public class ModService : IModService
                 await CheckDependencyInstall(item);
             }
 
-            File.Move(Path.Join(SettingService.Settings.ModsFolder, item.FileNameExtended(true)),
-                Path.Join(SettingService.Settings.ModsFolder, item.FileNameExtended()));
+            File.Move(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended(true)),
+                Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
             Logger.Information("Change mod {Name} state to {State}", item.Name,
                 item.IsDisabled ? "Disabled" : "Enabled");
         }
@@ -175,7 +175,7 @@ public class ModService : IModService
             return;
         }
 
-        var path = Path.Join(SettingService.Settings.ModsFolder, item.FileNameExtended());
+        var path = Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
             Logger.Error("Delete mod {Name} failed: File not found", item.Name);
@@ -186,7 +186,7 @@ public class ModService : IModService
         try
         {
             var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DeleteModConfirm.Localize(),
-                SettingService.Settings.AskDisableDependenciesWhenDeleting);
+                SavingService.Settings.AskDisableDependenciesWhenDeleting);
             if (!result)
                 return;
 
@@ -323,12 +323,12 @@ public class ModService : IModService
 
     private async Task CheckModToolsInstall(Mod mod)
     {
-        if (SettingService.Settings.AskInstallMuseDashModTools != AskType.Always) return;
+        if (SavingService.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
         var result =
             await MessageBoxService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools.Localize(), 3);
         if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
-        else if (result == MsgBox_Button_NoNoAsk) SettingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
+        else if (result == MsgBox_Button_NoNoAsk) SavingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
 
     private bool CheckCompatible(Mod mod) =>
@@ -348,7 +348,7 @@ public class ModService : IModService
             if (installedMod is not null) continue;
             try
             {
-                var path = Path.Join(SettingService.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
+                var path = Path.Join(SavingService.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
                 await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
                 var mod = LocalService.LoadMod(path);
                 dependency.IsDisabled = mod!.IsDisabled;
@@ -367,7 +367,7 @@ public class ModService : IModService
         }
 
         SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
-            MsgBox_Content_EnableDependency, SettingService.Settings.AskEnableDependenciesWhenInstalling);
+            MsgBox_Content_EnableDependency, SavingService.Settings.AskEnableDependenciesWhenInstalling);
         return errors;
     }
 

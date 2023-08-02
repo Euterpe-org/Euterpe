@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using NuGet.Versioning;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -27,7 +28,7 @@ public partial class GitHubService : IGitHubService
     private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
 
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
-    private string DefaultDownloadSource => DownloadSourceDictionary[SettingService.Settings.DownloadSource];
+    private string DefaultDownloadSource => DownloadSourceDictionary[SavingService.Settings.DownloadSource];
 
     private static Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
     {
@@ -39,14 +40,14 @@ public partial class GitHubService : IGitHubService
     public HttpClient Client { get; init; }
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
-    public ISettingService SettingService { get; init; }
+    public ISavingService SavingService { get; init; }
 
     public async Task<List<Mod>?> GetModListAsync()
     {
         var mods = await GetModListFromSourceAsync(DefaultDownloadSource);
         if (mods is not null) return mods;
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SettingService.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Settings.DownloadSource))
         {
             mods = await GetModListFromSourceAsync(pair.Value);
             if (mods is not null) return mods;
@@ -58,11 +59,11 @@ public partial class GitHubService : IGitHubService
 
     public async Task DownloadModAsync(string link, string path)
     {
-        var defaultDownloadSource = DownloadSourceDictionary[SettingService.Settings.DownloadSource];
+        var defaultDownloadSource = DownloadSourceDictionary[SavingService.Settings.DownloadSource];
         var result = await DownloadModFromSourceAsync(defaultDownloadSource, link, path);
         if (result is not null) return;
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SettingService.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Settings.DownloadSource))
         {
             result = await DownloadModFromSourceAsync(pair.Value, link, path);
             if (result is not null) return;
@@ -74,7 +75,7 @@ public partial class GitHubService : IGitHubService
         var result = await DownloadMelonLoaderFromSource(DefaultDownloadSource, path, downloadProgress);
         if (result is not null) return;
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SettingService.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Settings.DownloadSource))
         {
             result = await DownloadMelonLoaderFromSource(pair.Value, path, downloadProgress);
             if (result is not null) return;
@@ -86,14 +87,14 @@ public partial class GitHubService : IGitHubService
         Logger.Information("Checking updates...");
         Client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
 
-        var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        var currentVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
         Logger.Information("Get current version success: {Version}", currentVersion);
         try
         {
             var releases = await Client.GetFromJsonAsync<List<GithubRelease>>(ReleaseInfoLink);
             Logger.Information("Get releases success");
 
-            var release = SettingService.Settings.DownloadPrerelease ? releases[0] : releases.Find(x => !x.Prerelease)!;
+            var release = SavingService.Settings.DownloadPrerelease ? releases[0] : releases.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
             if (version is null || await SkipVersionCheck(version, currentVersion!, userClick)) return;
@@ -216,19 +217,20 @@ public partial class GitHubService : IGitHubService
 
     #region CheckUpdates Private Methods
 
-    private Version? GetVersionFromTag(string tagName)
+    private SemanticVersion? GetVersionFromTag(string tagName)
     {
         var tag = VersionRegex().Match(tagName);
         if (!tag.Success) return null;
-        if (!Version.TryParse(tag.Groups[1].Value, out var version)) return null;
+        if (!SemanticVersion.TryParse(tag.Groups[1].Value, out var version)) return null;
         Logger.Information("Get latest version success: {Version}", version);
         return version;
     }
 
-    private async Task<bool> SkipVersionCheck(Version version, Version currentVersion, bool userClick)
+    private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool userClick)
     {
-        if (!userClick) return version == SettingService.Settings.SkipVersion || version <= currentVersion;
-        if (version > currentVersion) return false;
+        var current = SemanticVersion.Parse(currentVersion)!;
+        if (!userClick) return version == SavingService.Settings.SkipVersion || version <= current;
+        if (version > current) return false;
         await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion.Localize());
         return true;
     }
@@ -240,7 +242,7 @@ public partial class GitHubService : IGitHubService
 
         if (update == MsgBox_Button_NoNoAsk)
         {
-            SettingService.Settings.SkipVersion = new Version(version);
+            SavingService.Settings.SkipVersion = SemanticVersion.Parse(version);
             return false;
         }
 
@@ -258,7 +260,7 @@ public partial class GitHubService : IGitHubService
         return link;
     }
 
-    [GeneratedRegex(@"v?(\d+\.\d+\.\d+)(-?\w*)")]
+    [GeneratedRegex(@"v?(\d+\.\d+\.\d+-?\w*)")]
     private static partial Regex VersionRegex();
 
     #endregion

@@ -3,10 +3,10 @@ using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Contracts;
 
-public interface ISettingService
+public interface ISavingService
 {
     public Setting Settings { get; }
     Task InitializeSettings();
-    void SaveSettings();
+    Task SaveSettings();
     Task OnChoosePath();
 }

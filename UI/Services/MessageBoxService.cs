@@ -18,7 +18,7 @@ namespace MuseDashModToolsUI.Services;
 
 public class MessageBoxService : IMessageBoxService
 {
-    public Lazy<ISettingService>? SettingService { get; init; }
+    public Lazy<ISavingService>? SavingService { get; init; }
 
     public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.Success)
     {
@@ -32,7 +32,7 @@ public class MessageBoxService : IMessageBoxService
                 ButtonDefinitions = button,
                 Icon = icon,
                 Topmost = true,
-                FontFamily = SettingService.Value.Settings.FontName,
+                FontFamily = SavingService.Value.Settings.FontName,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
@@ -134,7 +134,7 @@ public class MessageBoxService : IMessageBoxService
                 Icon = icon,
                 CanResize = true,
                 Topmost = true,
-                FontFamily = SettingService.Value.Settings.FontName,
+                FontFamily = SavingService.Value.Settings.FontName,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
@@ -154,7 +154,7 @@ public class MessageBoxService : IMessageBoxService
                 Icon = icon,
                 CanResize = true,
                 Topmost = true,
-                FontFamily = SettingService.Value.Settings.FontName,
+                FontFamily = SavingService.Value.Settings.FontName,
                 Markdown = true,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });

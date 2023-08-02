@@ -21,7 +21,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly ILogger _logger;
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     private readonly IModService _modService;
-    private readonly ISettingService _settingService;
+    private readonly ISavingService _savingService;
 
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
     private readonly FileSystemWatcher _watcher = new();
@@ -31,11 +31,11 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     public ILocalService LocalService { get; init; }
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
-    public ModManageViewModel(ILogger logger, IModService modService, ISettingService settingService)
+    public ModManageViewModel(ILogger logger, IModService modService, ISavingService savingService)
     {
         _logger = logger;
         _modService = modService;
-        _settingService = settingService;
+        _savingService = savingService;
 
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(_filter) ||
@@ -54,7 +54,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     public async void Initialize()
     {
-        await _settingService.InitializeSettings();
+        await _savingService.InitializeSettings();
         await _modService.InitializeModList(_sourceCache, Mods);
         StartModsDllMonitor();
         _logger.Information("Mod Manage Window Initialized");
@@ -143,7 +143,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 
     private void StartModsDllMonitor()
     {
-        _watcher.Path = _settingService.Settings.ModsFolder;
+        _watcher.Path = _savingService.Settings.ModsFolder;
         _watcher.Filters.Add("*.dll");
         _watcher.Filters.Add("*.disabled");
         _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);

@@ -1,6 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Newtonsoft.Json;
+using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Models;
 
@@ -9,7 +9,7 @@ public class Setting
     public string? MuseDashFolder { get; set; }
     public string? LanguageCode { get; set; }
     public string? FontName { get; set; } = "Segoe UI";
-    public Version SkipVersion { get; set; } = new();
+    public SemanticVersion? SkipVersion { get; set; }
 
     public bool DownloadPrerelease { get; set; }
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;

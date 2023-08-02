@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.IO.Abstractions;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -12,6 +13,7 @@ using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NuGet.Versioning;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -19,18 +21,32 @@ using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
-public class SettingService : ISettingService
+public class SavingService : ISavingService
 {
+    private readonly IFileSystem _fileSystem;
     private readonly ILogger _logger;
+
+    private static string ConfigFolderPath
+    {
+        get
+        {
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Muse Dash Mod Tools");
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            return path;
+        }
+    }
+
+    private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
     public IMessageBoxService MessageBoxService { get; init; }
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
     public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
-    public SettingService(ILogger logger)
+    public SavingService(ILogger logger, IFileSystem fileSystem)
     {
         _logger = logger;
-        LoadSavedSetting().Wait();
+        _fileSystem = fileSystem;
+        Load().Wait();
     }
 
     public Setting Settings { get; private set; } = new();
@@ -40,7 +56,7 @@ public class SettingService : ISettingService
         _logger.Information("Initializing settings...");
         try
         {
-            if (!File.Exists("Settings.json"))
+            if (!_fileSystem.File.Exists(SettingPath))
             {
                 _logger.Error("Settings.json not found, creating new one");
                 await MessageBoxService.CreateErrorMessageBox("Warning", MsgBox_Content_ChoosePath.Localize());
@@ -48,7 +64,7 @@ public class SettingService : ISettingService
                 return;
             }
 
-            var text = await File.ReadAllTextAsync("Settings.json");
+            var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
             var settings = JsonConvert.DeserializeObject<Setting>(text)!;
             if (string.IsNullOrEmpty(settings.MuseDashFolder))
             {
@@ -79,10 +95,10 @@ public class SettingService : ISettingService
         }
     }
 
-    public void SaveSettings()
+    public async Task SaveSettings()
     {
         var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-        File.WriteAllText("Settings.json", json);
+        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
         _logger.Information("Settings saved");
     }
 
@@ -120,7 +136,7 @@ public class SettingService : ISettingService
             Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
 
             var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-            await File.WriteAllTextAsync("Settings.json", json);
+            await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
             _logger.Information("Settings saved to Settings.json");
 
             SettingsViewModel.Value.Initialize();
@@ -130,16 +146,22 @@ public class SettingService : ISettingService
         }
     }
 
+    private async Task Load()
+    {
+        await LoadSavedSetting();
+        DeleteUpdater();
+    }
+
     private async Task LoadSavedSetting()
     {
-        if (!File.Exists("Settings.json")) return;
-        var text = await File.ReadAllTextAsync("Settings.json");
+        if (!_fileSystem.File.Exists(SettingPath)) return;
+        var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
         var settings = JObject.Parse(text);
 
         Settings.MuseDashFolder = settings["MuseDashFolder"]?.ToString();
         Settings.LanguageCode = settings["LanguageCode"]?.ToString();
         Settings.FontName = settings["FontName"]?.ToString();
-        if (Version.TryParse(settings["SkipVersion"]?.ToString()!, out var version))
+        if (SemanticVersion.TryParse(settings["SkipVersion"]?.ToString()!, out var version))
             Settings.SkipVersion = version;
         Settings.DownloadSource = Enum.Parse<DownloadSources>(settings["DownloadSource"]?.ToString()!);
         Settings.DownloadPrerelease = bool.Parse(settings["DownloadPrerelease"]?.ToString()!);
@@ -148,7 +170,10 @@ public class SettingService : ISettingService
         Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDeleting"]?.ToString()!);
         Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDisabling"]?.ToString()!);
         _logger.Information("Saved setting loaded from Settings.json");
+    }
 
+    private void DeleteUpdater()
+    {
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
         var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
         if (File.Exists(updaterPath))

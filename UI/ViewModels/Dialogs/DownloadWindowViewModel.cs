@@ -22,11 +22,11 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
     public IMessageBoxService MessageBoxService { get; init; }
     public IGitHubService GitHubService { get; init; }
     public ILogger Logger { get; init; }
-    public ISettingService SettingService { get; init; }
+    public ISavingService SavingService { get; init; }
 
     public async Task InstallMelonLoader()
     {
-        var zipPath = Path.Join(SettingService.Settings.MuseDashFolder, "MelonLoader.zip");
+        var zipPath = Path.Join(SavingService.Settings.MuseDashFolder, "MelonLoader.zip");
         var downloadProgress = new Progress<double>(UpdateDownloadProgress);
         if (!File.Exists(zipPath))
             try
@@ -55,7 +55,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         {
             Logger.Information("Extracting MelonLoader.zip");
             var fastZip = new FastZip();
-            fastZip.ExtractZip(zipPath, SettingService.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
+            fastZip.ExtractZip(zipPath, SavingService.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
         }
         catch (Exception ex)
         {

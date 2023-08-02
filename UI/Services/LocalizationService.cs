@@ -17,7 +17,7 @@ namespace MuseDashModToolsUI.Services;
 public class LocalizationService : ILocalizationService, INotifyPropertyChanged
 {
     private readonly ILogger _logger;
-    public ISettingService SettingService { get; init; }
+    public ISavingService SavingService { get; init; }
     public Lazy<IUpdateTextService> UpdateTextService { get; init; }
 
     public LocalizationService(ILogger logger)
@@ -35,7 +35,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
     {
         if (CultureInfo.CurrentUICulture.Name == language) return;
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
-        SettingService.Settings.LanguageCode = language;
+        SavingService.Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         UpdateTextService.Value.UpdateText();

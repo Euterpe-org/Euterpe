@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -16,17 +17,17 @@ namespace MuseDashModToolsUI.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
     private readonly ILogger _logger;
-    private readonly ISettingService _settingService;
+    private readonly ISavingService _savingService;
     [ObservableProperty] private ViewModelBase _content;
     [ObservableProperty] private int _selectedTabIndex;
     [ObservableProperty] private List<TabView> _tabs = new();
-    public static string Version => Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)!;
+    public static string Version => FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion!;
 
     public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ILogAnalysisViewModel logAnalysisViewModel,
-        ISettingService settingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
+        ISavingService savingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
     {
         _logger = logger;
-        _settingService = settingService;
+        _savingService = savingService;
 
         Tabs = new List<TabView>
         {
@@ -48,5 +49,5 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _logger.Information("Switching tab to {Name}", name);
     }
 
-    private void OnExit(object sender, EventArgs e) => _settingService.SaveSettings();
+    private void OnExit(object sender, EventArgs e) => _savingService.SaveSettings().Wait();
 }

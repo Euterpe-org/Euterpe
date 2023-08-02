@@ -22,7 +22,7 @@ public class LogAnalyzeService : ILogAnalyzeService
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
     public IModService ModService { get; init; }
-    public ISettingService SettingService { get; init; }
+    public ISavingService SavingService { get; init; }
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
     private string LogPath { get; set; } = string.Empty;
     private string LogContent { get; set; } = string.Empty;
@@ -116,8 +116,8 @@ public class LogAnalyzeService : ILogAnalyzeService
 
     public async Task<string> LoadLog()
     {
-        if (!string.IsNullOrEmpty(SettingService.Settings.MelonLoaderFolder))
-            LogPath = Path.Combine(SettingService.Settings.MelonLoaderFolder, "Latest.log");
+        if (!string.IsNullOrEmpty(SavingService.Settings.MelonLoaderFolder))
+            LogPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");
         if (!File.Exists(LogPath)) return MsgBox_Content_NoLogFile.Localize();
 
         try
@@ -162,7 +162,7 @@ public class LogAnalyzeService : ILogAnalyzeService
 
     private void StartLogFileMonitor()
     {
-        _watcher.Path = SettingService.Settings.MelonLoaderFolder;
+        _watcher.Path = SavingService.Settings.MelonLoaderFolder;
         _watcher.Filter = "Latest.log";
         _watcher.Renamed += (_, _) => LogAnalysisViewModel.Value.Initialize();
         _watcher.Changed += (_, _) => LogAnalysisViewModel.Value.Initialize();

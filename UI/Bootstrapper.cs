@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.IO.Abstractions;
+using System.Net.Http;
 using Autofac;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
@@ -22,6 +23,7 @@ public static class Bootstrapper
         builder.RegisterInstance(new HttpClient());
 
         // Services
+        builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
         builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
@@ -29,7 +31,7 @@ public static class Bootstrapper
         builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
 
         // View Models
