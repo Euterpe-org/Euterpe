@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using MsBox.Avalonia.Enums;
 using MuseDashModToolsUI.Contracts;
@@ -16,7 +17,7 @@ using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
-public class LogAnalyzeService : ILogAnalyzeService
+public partial class LogAnalyzeService : ILogAnalyzeService
 {
     private readonly FileSystemWatcher _watcher = new();
     public ILogger Logger { get; init; }
@@ -26,16 +27,15 @@ public class LogAnalyzeService : ILogAnalyzeService
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
     private string LogPath { get; set; } = string.Empty;
     private string LogContent { get; set; } = string.Empty;
-    private string[] LogContentArray { get; set; }
-    private StringBuilder LogContentBuilder { get; } = new();
+    private StringBuilder LogErrorBuilder { get; } = new();
 
     public async Task AnalyzeLog()
     {
         CheckModVersion();
-        if (LogContentBuilder.Length > 0)
+        if (LogErrorBuilder.Length > 0)
         {
-            await MessageBoxService.CreateSuccessMessageBox(LogContentBuilder.ToString(), Icon.Warning);
-            LogContentBuilder.Clear();
+            await MessageBoxService.CreateSuccessMessageBox(LogErrorBuilder.ToString(), Icon.Warning);
+            LogErrorBuilder.Clear();
         }
         else
         {
@@ -52,24 +52,17 @@ public class LogAnalyzeService : ILogAnalyzeService
             return true;
         }
 
-        LogContentArray = LogContent.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
-        var gamePath = string.Empty;
-
-        foreach (var line in LogContentArray)
+        var pathMatch = ApplicationPathRegex().Match(LogContent);
+        if (!pathMatch.Success)
         {
-            if (!line.Contains("ApplicationPath")) continue;
-            gamePath = line[39..];
-        }
-
-        if (!gamePath.Contains(@"steamapps\common\Muse Dash"))
-        {
-            Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash'");
+            Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash\musedash.exe'");
             await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_GamePathError.Localize(), Icon.Warning);
             return true;
         }
 
-        var steamPath = gamePath[..^40];
-        var acfPath = Path.Combine(steamPath, "steamapps", "appmanifest_774171.acf");
+        var steamPath = pathMatch.Groups[1].Value;
+        var acfPath = Path.Combine(steamPath, "appmanifest_774171.acf");
+
         if (!File.Exists(acfPath))
         {
             await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_NoInstallRecord.Localize(), Icon.Warning);
@@ -101,7 +94,15 @@ public class LogAnalyzeService : ILogAnalyzeService
 
     public async Task<bool> CheckMelonLoaderVersion()
     {
-        var melonLoaderVersion = LogContentArray.First(x => x.Contains("MelonLoader")).Substring(28, 5);
+        var version = MelonLoaderVersionRegex().Match(LogContent);
+        if (!version.Success)
+        {
+            await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_NoMelonLoaderVersion, Icon.Warning);
+            Logger.Information("MelonLoader Version not found");
+            return false;
+        }
+
+        var melonLoaderVersion = version.Groups[1].Value;
         if (melonLoaderVersion == "0.5.7")
         {
             Logger.Information("Correct MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
@@ -138,7 +139,7 @@ public class LogAnalyzeService : ILogAnalyzeService
 
     private void CheckModVersion()
     {
-        for (var i = 0; i < LogContentArray.Length; i++)
+        /*for (var i = 0; i < LogContentArray.Length; i++)
         {
             if (LogContentArray[i].Contains("Assembly: "))
             {
@@ -151,13 +152,13 @@ public class LogAnalyzeService : ILogAnalyzeService
                     case 0:
                         continue;
                     case -1:
-                        LogContentBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
+                        LogErrorBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
                         break;
                 }
             }
 
             if (LogContentArray[i].Contains("Mods loaded.")) break;
-        }
+        }*/
     }
 
     private void StartLogFileMonitor()
@@ -171,4 +172,10 @@ public class LogAnalyzeService : ILogAnalyzeService
         _watcher.EnableRaisingEvents = true;
         Logger.Information("Log File Monitor Started");
     }
+
+    [GeneratedRegex(@"ApplicationPath = (.*Steam\\steamapps)\\common\\Muse Dash\\musedash.exe")]
+    private static partial Regex ApplicationPathRegex();
+
+    [GeneratedRegex(@"MelonLoader v(\d\.\d\.\d)")]
+    private static partial Regex MelonLoaderVersionRegex();
 }

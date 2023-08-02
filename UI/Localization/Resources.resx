@@ -329,7 +329,7 @@
         <value>Analyzing Log</value>
     </data>
     <data name="MsgBox_Content_GamePathError" xml:space="preserve">
-        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+        <value>Your game path doesn't contain "steamapps\common\Muse Dash\musedash.exe"\nAre you using pirate version?</value>
     </data>
     <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
         <value>You don't have application path in the log</value>
@@ -351,5 +351,8 @@
     </data>
     <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>Download Prerelease: </value>
+    </data>
+    <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
+        <value>Cannot find MelonLoader version from log</value>
     </data>
 </root>

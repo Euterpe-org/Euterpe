@@ -240,7 +240,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash&quot;\nAre you using pirate version?.
+        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash\musedash.exe&quot;\nAre you using pirate version?.
         /// </summary>
         internal static string MsgBox_Content_GamePathError {
             get {
@@ -452,6 +452,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string MsgBox_Content_NoMelonLoaderFolder {
             get {
                 return ResourceManager.GetString("MsgBox_Content_NoMelonLoaderFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot find MelonLoader version from log.
+        /// </summary>
+        internal static string MsgBox_Content_NoMelonLoaderVersion {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_NoMelonLoaderVersion", resourceCulture);
             }
         }
         
