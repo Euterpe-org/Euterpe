@@ -65,15 +65,15 @@ public class ModService : IModService
         await LoadModsToUI(localMods, _webMods);
     }
 
-    public int CompareVersion(string modName, string modVersion)
+    public bool CompareVersion(string modName, string modVersion)
     {
         var webMod = _webMods?.Find(x => x.Name == modName);
-        if (webMod is null) return 0;
+        if (webMod is null) return false;
 
         var webModVersion = new Version(webMod.Version!);
         var loadedModVersion = new Version(modVersion);
 
-        return webModVersion > loadedModVersion ? -1 : 0;
+        return webModVersion > loadedModVersion;
     }
 
     public async Task OnInstallMod(Mod item)

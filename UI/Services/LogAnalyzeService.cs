@@ -139,26 +139,16 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
     private void CheckModVersion()
     {
-        /*for (var i = 0; i < LogContentArray.Length; i++)
-        {
-            if (LogContentArray[i].Contains("Assembly: "))
-            {
-                var splitData = LogContentArray[i - 2][15..].Split(" v");
-                var modName = splitData[0];
-                var modVersion = splitData[1];
-                var version = ModService.CompareVersion(modName, modVersion);
-                switch (version)
-                {
-                    case 0:
-                        continue;
-                    case -1:
-                        LogErrorBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
-                        break;
-                }
-            }
+        var modVersionMatches = ModVersionRegex().Matches(LogContent);
+        if (modVersionMatches.Count == 0) return;
 
-            if (LogContentArray[i].Contains("Mods loaded.")) break;
-        }*/
+        foreach (var mod in modVersionMatches.Select(x => x.Groups))
+        {
+            var modName = mod[1].Value;
+            var modVersion = mod[2].Value;
+            var version = ModService.CompareVersion(modName, modVersion);
+            if (version) LogErrorBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
+        }
     }
 
     private void StartLogFileMonitor()
@@ -176,6 +166,9 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     [GeneratedRegex(@"ApplicationPath = (.*Steam\\steamapps)\\common\\Muse Dash\\musedash.exe")]
     private static partial Regex ApplicationPathRegex();
 
-    [GeneratedRegex(@"MelonLoader v(\d\.\d\.\d)")]
+    [GeneratedRegex(@"MelonLoader v(\d+\.\d+\.\d+)")]
     private static partial Regex MelonLoaderVersionRegex();
+
+    [GeneratedRegex(@"\[\d{2}:\d{2}:\d{2}.\d{3}] (.*?) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
+    private static partial Regex ModVersionRegex();
 }
