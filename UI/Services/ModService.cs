@@ -34,6 +34,17 @@ public class ModService : IModService
     public ISavingService SavingService { get; init; }
     public ISettingsViewModel SettingsViewModel { get; init; }
 
+    public bool CompareVersion(string modName, string modVersion)
+    {
+        var webMod = _webMods?.Find(x => x.Name == modName);
+        if (webMod is null) return false;
+
+        var webModVersion = new Version(webMod.Version!);
+        var loadedModVersion = new Version(modVersion);
+
+        return webModVersion > loadedModVersion;
+    }
+
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)
     {
         Logger.Information("Initializing mod list...");
@@ -63,17 +74,6 @@ public class ModService : IModService
         }
 
         await LoadModsToUI(localMods, _webMods);
-    }
-
-    public bool CompareVersion(string modName, string modVersion)
-    {
-        var webMod = _webMods?.Find(x => x.Name == modName);
-        if (webMod is null) return false;
-
-        var webModVersion = new Version(webMod.Version!);
-        var loadedModVersion = new Version(modVersion);
-
-        return webModVersion > loadedModVersion;
     }
 
     public async Task OnInstallMod(Mod item)
