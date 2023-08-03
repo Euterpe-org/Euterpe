@@ -39,6 +39,6 @@ public class SavingServiceTest
         await savingService.InitializeSettings();
 
         Assert.Equal(CultureInfo.CurrentUICulture.Name, savingService.Settings.LanguageCode);
-        Assert.Equal("Segoe UI", savingService.Settings.FontName);
+        Assert.Equal(FontManageService.DefaultFont, savingService.Settings.FontName);
     }
 }

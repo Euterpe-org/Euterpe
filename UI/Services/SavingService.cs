@@ -82,8 +82,8 @@ public class SavingService : ISavingService
 
             if (string.IsNullOrEmpty(settings.FontName))
             {
-                settings.FontName = "Segoe UI";
-                _logger.Warning("Settings.json stored font name is empty, using default font Segoe UI");
+                settings.FontName = FontManageService.DefaultFont;
+                _logger.Warning("Settings.json stored font name is empty, using default font");
             }
 
             Settings = settings.Clone();

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using MuseDashModToolsUI.Services;
 using Newtonsoft.Json;
 using NuGet.Versioning;
 
@@ -8,7 +9,7 @@ public class Setting
 {
     public string? MuseDashFolder { get; set; }
     public string? LanguageCode { get; set; }
-    public string? FontName { get; set; } = "Segoe UI";
+    public string? FontName { get; set; } = FontManageService.DefaultFont;
     public SemanticVersion? SkipVersion { get; set; }
 
     public bool DownloadPrerelease { get; set; }
