@@ -354,4 +354,7 @@
     <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
         <value>无法从日志中找到 MelonLoader的版本</value>
     </data>
+    <data name="XAML_TroubleShoot" xml:space="preserve">
+        <value>报告未知问题</value>
+    </data>
 </root>

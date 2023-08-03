@@ -355,4 +355,7 @@
     <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
         <value>Cannot find MelonLoader version from log</value>
     </data>
+    <data name="XAML_TroubleShoot" xml:space="preserve">
+        <value>Trouble Shoot</value>
+    </data>
 </root>

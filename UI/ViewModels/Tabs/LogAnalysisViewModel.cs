@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
@@ -41,4 +42,15 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 
     [RelayCommand]
     private async Task OpenLogFolder() => await LocalService.OpenLogFolder();
+
+    [RelayCommand]
+    private void OpenUrl(string path)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = path,
+            UseShellExecute = true
+        });
+        _logger.Information("Open Url: {Url}", path);
+    }
 }

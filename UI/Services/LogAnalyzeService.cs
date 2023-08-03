@@ -161,7 +161,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         Logger.Information("Log File Monitor Started");
     }
 
-    [GeneratedRegex(@"ApplicationPath = (.*Steam\\steamapps)\\common\\Muse Dash\\musedash.exe")]
+    [GeneratedRegex(@"ApplicationPath = (.*steamapps)\\common\\Muse Dash\\musedash.exe")]
     private static partial Regex ApplicationPathRegex();
 
     [GeneratedRegex(@"MelonLoader v(\d+\.\d+\.\d+)")]

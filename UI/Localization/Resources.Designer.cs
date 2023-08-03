@@ -1023,6 +1023,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trouble Shoot.
+        /// </summary>
+        internal static string XAML_TroubleShoot {
+            get {
+                return ResourceManager.GetString("XAML_TroubleShoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uninstall\nMelonLoader.
         /// </summary>
         internal static string XAML_Uninstall_MelonLoader {

@@ -12,6 +12,7 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
+using NuGet.Versioning;
 using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -287,8 +288,8 @@ public class ModService : IModService
             localMod.HomePage = webMod.HomePage;
             localMod.Description = webMod.Description;
 
-            var versionState = new Version(webMod.Version!) > new Version(localMod.LocalVersion!) ? -1
-                : new Version(webMod.Version!) < new Version(localMod.LocalVersion!) ? 1 : 0;
+            var versionState = SemanticVersion.Parse(webMod.Version!) > SemanticVersion.Parse(localMod.LocalVersion!) ? -1
+                : SemanticVersion.Parse(webMod.Version!) < SemanticVersion.Parse(localMod.LocalVersion!) ? 1 : 0;
             localMod.State = (UpdateState)versionState;
             localMod.IsShaMismatched = versionState == 0 && webMod.SHA256 != localMod.SHA256;
             if (localMod.IsShaMismatched)
