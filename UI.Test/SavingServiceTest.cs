@@ -28,7 +28,12 @@ public class SavingServiceTest
     public async Task NullSettingTest()
     {
         var fs = new Mock<IFileSystem>();
-        fs.Setup(f => f.File.Exists(It.IsAny<string>())).Returns(true);
+        var settingPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Muse Dash Mod Tools",
+            "Settings.json");
+        var updaterPath = Path.Combine(Directory.GetCurrentDirectory(), "Update", "Updater.exe");
+        fs.Setup(f => f.File.Exists(settingPath)).Returns(true);
+        fs.Setup(f => f.File.Exists(updaterPath)).Returns(false);
+        fs.Setup(f => f.Directory.Exists(It.IsAny<string?>())).Returns(false);
         fs.Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()).Result).Returns(SettingJson);
         var savingService = new SavingService(_logger, fs.Object) { MessageBoxService = new Mock<IMessageBoxService>().Object };
         await savingService.InitializeSettings();

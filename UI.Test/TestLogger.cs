@@ -16,4 +16,9 @@ public class TestLogger : ILogger
         if (logEvent.Exception is not null)
             TestOutputHelper.WriteLine(logEvent.Exception.ToString());
     }
+
+    public void DebugOutput(string output)
+    {
+        TestOutputHelper.WriteLine(output);
+    }
 }
