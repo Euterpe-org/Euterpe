@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -87,7 +86,7 @@ public partial class GitHubService : IGitHubService
         Logger.Information("Checking updates...");
         Client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
 
-        var currentVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
+        var currentVersion = FileVersionInfo.GetVersionInfo(Environment.ProcessPath!).ProductVersion;
         Logger.Information("Get current version success: {Version}", currentVersion);
         try
         {

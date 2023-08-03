@@ -40,8 +40,8 @@ public class ModService : IModService
         var webMod = _webMods?.Find(x => x.Name == modName);
         if (webMod is null) return false;
 
-        var webModVersion = new Version(webMod.Version!);
-        var loadedModVersion = new Version(modVersion);
+        var webModVersion = SemanticVersion.Parse(webMod.Version!);
+        var loadedModVersion = SemanticVersion.Parse(modVersion);
 
         return webModVersion > loadedModVersion;
     }
