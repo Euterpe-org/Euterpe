@@ -30,7 +30,7 @@ public class SavingService : ISavingService
     {
         get
         {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Muse Dash Mod Tools");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             return path;
         }
