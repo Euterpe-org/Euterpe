@@ -67,7 +67,7 @@
                            Text="lxy"
                            TextAlignment="Center" />
                 <TextBlock Classes="Body3"
-                           Text="For planning the project, rewriting ui and refactoring code"
+                           Text="For planning and maintaining the project"
                            TextWrapping="Wrap"
                            TextAlignment="Center" />
             </StackPanel>
@@ -153,7 +153,7 @@
                            Text="Balint"
                            TextAlignment="Center" />
                 <TextBlock Classes="Body3"
-                           Text="For making the first version of Muse Dash Mod Tools"
+                           Text="For making the first version of the project"
                            TextWrapping="Wrap"
                            TextAlignment="Center" />
             </StackPanel>

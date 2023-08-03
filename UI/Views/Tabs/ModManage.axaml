@@ -251,7 +251,7 @@
                                            Text="lxy"
                                            TextAlignment="Center" />
                                 <TextBlock Classes="Body3"
-                                           Text="For planning the project, rewriting ui and refactoring code"
+                                           Text="For planning and maintaining the project"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center" />
                             </StackPanel>
@@ -337,7 +337,7 @@
                                            Text="Balint"
                                            TextAlignment="Center" />
                                 <TextBlock Classes="Body3"
-                                           Text="For making the first version of Muse Dash Mod Tools"
+                                           Text="For making the first version of the project"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center" />
                             </StackPanel>
@@ -512,7 +512,7 @@
                                                         <Setter Property="VerticalAlignment" Value="Top" />
                                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
                                                         <Setter Property="VerticalContentAlignment" Value="Center" />
-                                                        <Setter Property="Width" Value="100" />
+                                                        <Setter Property="MinWidth" Value="110" />
                                                         <Setter Property="Height" Value="40" />
                                                         <Setter Property="Margin" Value="50,23,0,17" />
                                                     </Style>
