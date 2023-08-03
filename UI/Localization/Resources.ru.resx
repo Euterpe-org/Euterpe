@@ -325,7 +325,7 @@
         <value>Analyzing Log</value>
     </data>
     <data name="MsgBox_Content_GamePathError" xml:space="preserve">
-        <value>Your game path doesn't contain "steamapps\common\Muse Dash"\nAre you using pirate version?</value>
+        <value>Your game path doesn't contain "steamapps\common\Muse Dash\musedash.exe"\nAre you using pirate version?</value>
     </data>
     <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
         <value>You don't have application path in the log</value>
@@ -338,5 +338,20 @@
     </data>
     <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
         <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
+    </data>
+  <data name="MsgBox_Content_OutdatedMod" xml:space="preserve">
+        <value>{0} is outdated, please update using "ModManage"page</value>
+    </data>
+  <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
+        <value>No Log File Found\nYou have to launch the game once after installing MelonLoader to generate log</value>
+    </data>
+  <data name="XAML_DownloadPrerelease" xml:space="preserve">
+        <value>Download Prerelease: </value>
+    </data>
+  <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
+        <value>Cannot find MelonLoader version from log</value>
+    </data>
+  <data name="XAML_TroubleShoot" xml:space="preserve">
+        <value>Trouble Shoot</value>
     </data>
 </root>
