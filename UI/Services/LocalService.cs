@@ -41,6 +41,7 @@ public class LocalService : ILocalService
         mod.FileName = mod.IsDisabled ? Path.GetFileName(filePath)[..^9] : Path.GetFileName(filePath);
         var assembly = Assembly.Load(File.ReadAllBytes(filePath));
         var attribute = MelonUtils.PullAttributeFromAssembly<MelonInfoAttribute>(assembly);
+        if (attribute is null) return null;
 
         mod.Name = attribute.Name;
         mod.LocalVersion = attribute.Version;
