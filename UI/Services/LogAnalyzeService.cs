@@ -164,9 +164,9 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     [GeneratedRegex(@"ApplicationPath = (.*steamapps)\\common\\Muse Dash\\musedash.exe")]
     private static partial Regex ApplicationPathRegex();
 
-    [GeneratedRegex(@"MelonLoader v(\d+\.\d+\.\d+)")]
+    [GeneratedRegex(@"\bMelonLoader v(\d+\.\d+\.\d+)")]
     private static partial Regex MelonLoaderVersionRegex();
 
-    [GeneratedRegex(@"\[.*] (.*?) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
+    [GeneratedRegex(@"\b(?!MelonLoader\b)([\w\s]+) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
     private static partial Regex ModVersionRegex();
 }
