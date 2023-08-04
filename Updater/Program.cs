@@ -4,7 +4,7 @@ using ShellProgressBar;
 
 HttpClient httpClient = new();
 
-if (args.Length < 3)
+if (args.Length < 2)
 {
     Console.WriteLine("Invalid launch!\nLaunch arguments are null!");
     Console.ReadKey();
