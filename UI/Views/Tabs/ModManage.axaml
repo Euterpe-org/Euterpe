@@ -512,7 +512,7 @@
                                                         <Setter Property="VerticalAlignment" Value="Top" />
                                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
                                                         <Setter Property="VerticalContentAlignment" Value="Center" />
-                                                        <Setter Property="MinWidth" Value="110" />
+                                                        <Setter Property="MinWidth" Value="100" />
                                                         <Setter Property="Height" Value="40" />
                                                         <Setter Property="Margin" Value="50,23,0,17" />
                                                     </Style>

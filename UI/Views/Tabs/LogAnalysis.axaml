@@ -40,7 +40,8 @@
                     Content="{ext:LocalizeExtensions XAML_LogFolder}"
                     Command="{Binding OpenLogFolderCommand}" />
 
-            <Button Grid.Row="0" Grid.Column="2" Classes="dark"
+            <Button Grid.Row="0" Grid.Column="2"
+                    Classes="dark"
                     HorizontalAlignment="Right"
                     Margin="0,0,10,0"
                     Content="{ext:LocalizeExtensions XAML_TroubleShoot}"

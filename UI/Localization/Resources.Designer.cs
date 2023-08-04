@@ -582,6 +582,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyze Success.
+        /// </summary>
+        internal static string MsgBox_Title_AnalyzeSuccess {
+            get {
+                return ResourceManager.GetString("MsgBox_Title_AnalyzeSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failure.
         /// </summary>
         internal static string MsgBox_Title_Failure {
