@@ -3,7 +3,7 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <Version>1.2.0-rc2</Version>
+        <Version>1.2.0</Version>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
