@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using ICSharpCode.SharpZipLib.Zip;
-using ShellProgressBar;
+using Spectre.Console;
 
 HttpClient httpClient = new();
 
@@ -23,15 +23,6 @@ return;
 
 async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
 {
-    var options = new ProgressBarOptions
-    {
-        ForegroundColorDone = ConsoleColor.DarkGreen,
-        ProgressCharacter = '─',
-        ProgressBarOnBottom = true
-    };
-    using var progressBar = new ProgressBar(10000, "Download Progress", options);
-    var progress = progressBar.AsProgress<double>();
-
     HttpResponseMessage result;
     try
     {
@@ -51,21 +42,25 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
 
     var totalLength = result.Content.Headers.ContentLength;
     var contentStream = await result.Content.ReadAsStreamAsync();
-    await using var fs = new FileStream(downloadArgs[1] + ".zip", FileMode.OpenOrCreate);
     var buffer = new byte[5 * 1024];
-    var readLength = 0L;
+    int length;
     try
     {
-        int length;
-        while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
-        {
-            readLength += length;
-            if (totalLength > 0)
-                progress.Report(Math.Round((double)readLength / totalLength.Value * 100, 4));
-
-            fs.Write(buffer, 0, length);
-        }
+        await AnsiConsole.Progress()
+            .Columns(new TaskDescriptionColumn(), new ProgressBarColumn(), new PercentageColumn(), new RemainingTimeColumn(), new SpinnerColumn())
+            .StartAsync(async ctx =>
+            {
+                var task = ctx.AddTask("[green]Download Progress[/]");
+                await using var fs = new FileStream(downloadArgs[1] + ".zip", FileMode.OpenOrCreate);
+                while (!ctx.IsFinished &&
+                       (length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
+                {
+                    task.Increment((double)length / totalLength!.Value * 100);
+                    fs.Write(buffer, 0, length);
+                }
+            });
     }
+
     catch (Exception ex)
     {
         Console.WriteLine($"Download latest version failed\n{ex}\nYou can download manually from {downloadArgs[0]}");
