@@ -9,13 +9,15 @@ namespace MuseDashModToolsUI.Converters;
 
 public class UninstallConverter : IValueConverter
 {
+    private readonly IBrush Cyan = "#75E3FF".ToBrush();
     private readonly IBrush Default = "#FEFEFE".ToBrush();
     private readonly IBrush Red = "#FD2617".ToBrush();
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is Mod mod) return mod.IsIncompatible ? Red : Default;
-
+        if (value is not Mod mod) return Default;
+        if (mod.IsIncompatible) return Red;
+        if (mod.IsDuplicated) return Cyan;
         return Default;
     }
 
