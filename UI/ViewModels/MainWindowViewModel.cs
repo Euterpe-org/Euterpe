@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
@@ -17,7 +16,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     [ObservableProperty] private ViewModelBase _content;
     [ObservableProperty] private int _selectedTabIndex;
     [ObservableProperty] private List<TabView> _tabs = new();
-    public static string Version => FileVersionInfo.GetVersionInfo(Environment.ProcessPath!).ProductVersion!;
+    public static string Version => BuildInfo.Version;
 
     public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ILogAnalysisViewModel logAnalysisViewModel,
         ISavingService savingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)

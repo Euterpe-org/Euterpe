@@ -6,8 +6,6 @@
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-        Icon="/Assets/Icon.ico"
-        Title="Muse Dash Mod Tools"
         Width="1000" Height="800"
         MinWidth="880" MinHeight="680"
         ExtendClientAreaToDecorationsHint="True"

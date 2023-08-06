@@ -16,9 +16,9 @@ namespace MuseDashModToolsUI.Services;
 
 public class LocalService : ILocalService
 {
-    public IMessageBoxService MessageBoxService { get; init; }
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
     public ILogger Logger { get; init; }
+    public IMessageBoxService MessageBoxService { get; init; }
     public ISavingService SavingService { get; init; }
     private bool IsValidPath { get; set; }
 
@@ -69,6 +69,7 @@ public class LocalService : ILocalService
             var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
             if (version is not "2019.4.32.16288752")
             {
+                Logger.Error("Incorrect game version {Version}, showing error message box...", version);
                 await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
                 IsValidPath = false;
                 return IsValidPath;
@@ -98,7 +99,6 @@ public class LocalService : ILocalService
         {
             Logger.Error(ex, "Exe verify failed, showing error message box...");
             await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed.Localize());
-            await SavingService.OnChoosePath();
             IsValidPath = false;
             return IsValidPath;
         }

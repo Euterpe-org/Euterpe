@@ -10,7 +10,7 @@ public class Setting
     public string? MuseDashFolder { get; set; }
     public string? LanguageCode { get; set; }
     public string? FontName { get; set; } = FontManageService.DefaultFont;
-    public SemanticVersion? SkipVersion { get; set; }
+    public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(BuildInfo.Version);
 
     public bool DownloadPrerelease { get; set; }
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
