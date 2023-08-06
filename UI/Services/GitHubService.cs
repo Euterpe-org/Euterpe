@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
-using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618

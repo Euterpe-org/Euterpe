@@ -1,9 +1,7 @@
-using System;
 using System.Diagnostics;
 using System.IO;
 using Avalonia;
 using MuseDashModToolsUI.Models;
-using Serilog;
 
 namespace MuseDashModToolsUI;
 

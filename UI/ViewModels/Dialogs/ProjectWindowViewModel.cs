@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts.ViewModels;
-using Serilog;
 
 #pragma warning disable CS8602
 

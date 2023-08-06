@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Contracts.ViewModels;

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AssetsTools.NET.Extra;
 using DialogHostAvalonia;
 using MelonLoader;
@@ -12,7 +8,6 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
-using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;

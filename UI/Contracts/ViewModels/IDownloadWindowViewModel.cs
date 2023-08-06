@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace MuseDashModToolsUI.Contracts.ViewModels;
+﻿namespace MuseDashModToolsUI.Contracts.ViewModels;
 
 public interface IDownloadWindowViewModel
 {

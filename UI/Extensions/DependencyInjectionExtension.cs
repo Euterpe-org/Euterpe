@@ -1,5 +1,4 @@
-﻿using System;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Markup.Xaml;
 
 namespace MuseDashModToolsUI.Extensions;
 

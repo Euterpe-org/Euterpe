@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using Avalonia.Media;
 using MuseDashModToolsUI.Contracts;
-using Serilog;
 using SkiaSharp;
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
