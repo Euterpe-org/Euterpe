@@ -46,7 +46,7 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.2"/>
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.2"/>
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.2"/>
-        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.1"/>
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.2"/>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="DialogHost.Avalonia" Version="0.7.5"/>
         <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1"/>
