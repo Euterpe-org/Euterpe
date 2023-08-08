@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using MsBox.Avalonia.Enums;
+﻿using MsBox.Avalonia.Enums;
 using MsBox.Avalonia.Models;
 
 namespace MuseDashModToolsUI.Contracts;
@@ -13,6 +11,7 @@ public interface IMessageBoxService
     Task<ButtonResult> CreateWarningMessageBox(string content, Icon icon = Icon.Warning);
     Task<ButtonResult> CreateErrorMessageBox(string title, string content);
     Task<ButtonResult> CreateErrorMessageBox(string content);
+    Task<ButtonResult> CreateAnalyzeSuccessMessageBox(string content);
     Task<bool> CreateConfirmMessageBox(string title, string content);
     Task<bool> CreateConfirmMessageBox(string content);
     Task<string> CreateCustomMessageBox(string title, string content, IEnumerable<ButtonDefinition> buttonDefinitions, Icon icon);

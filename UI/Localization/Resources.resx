@@ -358,4 +358,7 @@
     <data name="XAML_TroubleShoot" xml:space="preserve">
         <value>Trouble Shoot</value>
     </data>
+    <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
+        <value>Analyze Success</value>
+    </data>
 </root>

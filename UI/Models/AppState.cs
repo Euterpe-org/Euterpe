@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MuseDashModToolsUI.Models;
+﻿namespace MuseDashModToolsUI.Models;
 
 public class AppState
 {

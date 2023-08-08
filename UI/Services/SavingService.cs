@@ -1,8 +1,6 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.IO.Abstractions;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -14,7 +12,6 @@ using MuseDashModToolsUI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NuGet.Versioning;
-using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
@@ -30,7 +27,7 @@ public class SavingService : ISavingService
     {
         get
         {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Muse Dash Mod Tools");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             return path;
         }
@@ -82,8 +79,8 @@ public class SavingService : ISavingService
 
             if (string.IsNullOrEmpty(settings.FontName))
             {
-                settings.FontName = "Segoe UI";
-                _logger.Warning("Settings.json stored font name is empty, using default font Segoe UI");
+                settings.FontName = FontManageService.DefaultFont;
+                _logger.Warning("Settings.json stored font name is empty, using default font");
             }
 
             Settings = settings.Clone();

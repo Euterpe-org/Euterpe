@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
-using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
@@ -86,8 +80,7 @@ public partial class GitHubService : IGitHubService
         Logger.Information("Checking updates...");
         Client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
 
-        var currentVersion = FileVersionInfo.GetVersionInfo(Environment.ProcessPath!).ProductVersion;
-        Logger.Information("Get current version success: {Version}", currentVersion);
+        Logger.Information("Get current version success: {Version}", BuildInfo.Version);
         try
         {
             var releases = await Client.GetFromJsonAsync<List<GithubRelease>>(ReleaseInfoLink);
@@ -96,7 +89,7 @@ public partial class GitHubService : IGitHubService
             var release = SavingService.Settings.DownloadPrerelease ? releases[0] : releases.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
-            if (version is null || await SkipVersionCheck(version, currentVersion!, userClick)) return;
+            if (version is null || await SkipVersionCheck(version, BuildInfo.Version, userClick)) return;
 
             var title = release.Name;
             var body = release.Body;
@@ -245,7 +238,7 @@ public partial class GitHubService : IGitHubService
             return false;
         }
 
-        return update != MsgBox_Button_No;
+        return update != MsgBox_Button_No && !string.IsNullOrEmpty(update);
     }
 
     private string GetDownloadLink(List<GitHubReleaseAsset> assets)

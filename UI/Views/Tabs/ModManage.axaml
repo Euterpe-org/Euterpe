@@ -190,8 +190,7 @@
                 </TextBox>
             </controls:Card>
 
-            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog"
-                                           CloseOnClickAway="True">
+            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog" CloseOnClickAway="True">
                 <dialogHostAvalonia:DialogHost.DialogContent>
                     <!--About Dialog Content-->
                     <Grid RowDefinitions="100,100,150,80" Width="800">
@@ -251,7 +250,7 @@
                                            Text="lxy"
                                            TextAlignment="Center" />
                                 <TextBlock Classes="Body3"
-                                           Text="For planning the project, rewriting ui and refactoring code"
+                                           Text="For planning and maintaining the project"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center" />
                             </StackPanel>
@@ -337,7 +336,7 @@
                                            Text="Balint"
                                            TextAlignment="Center" />
                                 <TextBlock Classes="Body3"
-                                           Text="For making the first version of Muse Dash Mod Tools"
+                                           Text="For making the first version of the project"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center" />
                             </StackPanel>
@@ -420,8 +419,7 @@
                     </Menu>
 
                     <!--Mods-->
-                    <ScrollViewer Grid.Column="1" Margin="1,50,0,0" VerticalAlignment="Stretch"
-                                  HorizontalAlignment="Stretch">
+                    <ScrollViewer Grid.Column="1" Margin="1,51,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" Orientation="Vertical">
                             <StackPanel.Styles>
                                 <Style Selector="StackPanel > TextBlock">
@@ -512,7 +510,7 @@
                                                         <Setter Property="VerticalAlignment" Value="Top" />
                                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
                                                         <Setter Property="VerticalContentAlignment" Value="Center" />
-                                                        <Setter Property="Width" Value="100" />
+                                                        <Setter Property="MinWidth" Value="100" />
                                                         <Setter Property="Height" Value="40" />
                                                         <Setter Property="Margin" Value="50,23,0,17" />
                                                     </Style>

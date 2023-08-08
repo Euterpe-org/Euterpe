@@ -8,7 +8,6 @@ using MuseDashModToolsUI.Services;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
 using MuseDashModToolsUI.ViewModels.Tabs;
-using Serilog;
 
 namespace MuseDashModToolsUI;
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MuseDashModToolsUI.Models;
+﻿using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Contracts;
 

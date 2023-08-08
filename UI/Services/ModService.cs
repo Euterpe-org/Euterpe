@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Security;
 using System.Text;
-using System.Threading.Tasks;
 using DynamicData;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
-using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
@@ -52,7 +47,7 @@ public class ModService : IModService
         _sourceCache = sourceCache!;
         _mods = mods;
         var isValidPath = await LocalService.CheckValidPath();
-        if (!isValidPath) return;
+        if (!isValidPath) await SavingService.OnChoosePath();
         _currentGameVersion = await LocalService.ReadGameVersion();
         await LocalService.CheckMelonLoaderInstall();
 

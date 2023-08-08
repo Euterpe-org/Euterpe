@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using MsBox.Avalonia;
@@ -52,6 +49,9 @@ public class MessageBoxService : IMessageBoxService
 
     public async Task<ButtonResult> CreateErrorMessageBox(string content) =>
         await CreateErrorMessageBox(MsgBox_Title_Failure, content);
+
+    public async Task<ButtonResult> CreateAnalyzeSuccessMessageBox(string content) =>
+        await CreateErrorMessageBox(MsgBox_Title_AnalyzeSuccess, content);
 
     public async Task<bool> CreateConfirmMessageBox(string title, string content)
     {

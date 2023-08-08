@@ -1,14 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
-using Serilog;
 using ValveKeyValue;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -33,7 +29,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         CheckModVersion();
         if (LogErrorBuilder.Length > 0)
         {
-            await MessageBoxService.CreateErrorMessageBox(LogErrorBuilder.ToString());
+            await MessageBoxService.CreateAnalyzeSuccessMessageBox(LogErrorBuilder.ToString());
             LogErrorBuilder.Clear();
         }
         else
@@ -47,7 +43,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     {
         if (!LogContent.Contains("ApplicationPath"))
         {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoApplicationPath);
+            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoApplicationPath);
             return true;
         }
 
@@ -55,7 +51,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         if (!pathMatch.Success)
         {
             Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash\musedash.exe'");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_GamePathError.Localize());
+            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_GamePathError.Localize());
             return true;
         }
 
@@ -64,7 +60,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
         if (!File.Exists(acfPath))
         {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
+            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord.Localize());
             Logger.Information("Cannot find appmanifest_774171.acf");
             return true;
         }
@@ -75,7 +71,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
         if (data.Appid != 774171 || data.Name != "Muse Dash" || data.InstalledDepots.Keys.All(x => x != 774172))
         {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoInstallRecord.Localize());
+            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord.Localize());
             Logger.Information("Cannot find Muse Dash download record in file");
             return true;
         }
@@ -86,7 +82,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
             return false;
         }
 
-        await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoDlcPurchased.Localize());
+        await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoDlcPurchased.Localize());
         Logger.Information("Cannot find Muse Dash DLC purchase record in file");
         return false;
     }
@@ -96,7 +92,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         var version = MelonLoaderVersionRegex().Match(LogContent);
         if (!version.Success)
         {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoMelonLoaderVersion);
+            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoMelonLoaderVersion);
             Logger.Information("MelonLoader Version not found");
             return false;
         }
@@ -109,7 +105,8 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         }
 
         Logger.Information("Incorrect MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
-        await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion.Localize(), melonLoaderVersion));
+        await MessageBoxService.CreateAnalyzeSuccessMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion.Localize(),
+            melonLoaderVersion));
         return false;
     }
 
@@ -164,9 +161,9 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     [GeneratedRegex(@"ApplicationPath = (.*steamapps)\\common\\Muse Dash\\musedash.exe")]
     private static partial Regex ApplicationPathRegex();
 
-    [GeneratedRegex(@"MelonLoader v(\d+\.\d+\.\d+)")]
+    [GeneratedRegex(@"\bMelonLoader v(\d+\.\d+\.\d+)")]
     private static partial Regex MelonLoaderVersionRegex();
 
-    [GeneratedRegex(@"\[.*] (.*?) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
+    [GeneratedRegex(@"\b(?!MelonLoader\b)([\w\s]+) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
     private static partial Regex ModVersionRegex();
 }

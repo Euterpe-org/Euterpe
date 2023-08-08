@@ -357,4 +357,7 @@
     <data name="XAML_TroubleShoot" xml:space="preserve">
         <value>报告未知问题</value>
     </data>
+    <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
+        <value>分析成功</value>
+    </data>
 </root>

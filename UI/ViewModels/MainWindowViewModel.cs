@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
-using Serilog;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -20,7 +16,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     [ObservableProperty] private ViewModelBase _content;
     [ObservableProperty] private int _selectedTabIndex;
     [ObservableProperty] private List<TabView> _tabs = new();
-    public static string Version => FileVersionInfo.GetVersionInfo(Environment.ProcessPath!).ProductVersion!;
+    public static string Version => BuildInfo.Version;
 
     public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ILogAnalysisViewModel logAnalysisViewModel,
         ISavingService savingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)

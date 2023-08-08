@@ -6,8 +6,6 @@
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-        Icon="/Assets/Icon.ico"
-        Title="Muse Dash Mod Tools"
         Width="1000" Height="800"
         MinWidth="880" MinHeight="680"
         ExtendClientAreaToDecorationsHint="True"
@@ -26,7 +24,7 @@
         <TextBlock Grid.Row="0" Grid.Column="0"
                    Margin="80,25,0,0"
                    Height="50"
-                   FontSize="25"
+                   FontSize="20"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Text="Muse Dash Mod Tools" />
@@ -63,7 +61,7 @@
                 <DataTemplate>
                     <Label VerticalContentAlignment="Center"
                            HorizontalContentAlignment="Center"
-                           FontSize="16"
+                           FontSize="14"
                            Foreground="#FFF">
                         <TextBlock Text="{Binding DisplayName}" />
                     </Label>

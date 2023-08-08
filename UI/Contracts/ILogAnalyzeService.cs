@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace MuseDashModToolsUI.Contracts;
+﻿namespace MuseDashModToolsUI.Contracts;
 
 public interface ILogAnalyzeService
 {

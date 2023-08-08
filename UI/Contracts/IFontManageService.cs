@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MuseDashModToolsUI.Contracts;
+﻿namespace MuseDashModToolsUI.Contracts;
 
 public interface IFontManageService
 {
