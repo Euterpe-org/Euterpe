@@ -190,8 +190,7 @@
                 </TextBox>
             </controls:Card>
 
-            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog"
-                                           CloseOnClickAway="True">
+            <dialogHostAvalonia:DialogHost Grid.Column="0" Grid.ColumnSpan="2" Identifier="ProjectDialog" CloseOnClickAway="True">
                 <dialogHostAvalonia:DialogHost.DialogContent>
                     <!--About Dialog Content-->
                     <Grid RowDefinitions="100,100,150,80" Width="800">
@@ -420,8 +419,7 @@
                     </Menu>
 
                     <!--Mods-->
-                    <ScrollViewer Grid.Column="1" Margin="1,50,0,0" VerticalAlignment="Stretch"
-                                  HorizontalAlignment="Stretch">
+                    <ScrollViewer Grid.Column="1" Margin="1,51,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" Orientation="Vertical">
                             <StackPanel.Styles>
                                 <Style Selector="StackPanel > TextBlock">
