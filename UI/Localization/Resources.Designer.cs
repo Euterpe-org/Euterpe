@@ -492,6 +492,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have not registered Headquarters Mod\nPlease register in #bot-commands channel in MDMC discord.
+        /// </summary>
+        internal static string MsgBox_Content_RegisterHQ {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_RegisterHQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are asking to reinstall {0}\nPlease confirm your operation.
         /// </summary>
         internal static string MsgBox_Content_ReinstallMod {
@@ -969,7 +978,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable dependency when deleting mod.
+        ///   Looks up a localized string similar to Disable dependency when deleting Mod.
         /// </summary>
         internal static string XAML_Setting_DisableDependency_Delete {
             get {
@@ -978,7 +987,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable dependency when disabling mod.
+        ///   Looks up a localized string similar to Disable dependency when disabling Mod.
         /// </summary>
         internal static string XAML_Setting_DisableDependency_Disable {
             get {
@@ -987,7 +996,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable dependency when enabling mod.
+        ///   Looks up a localized string similar to Enable dependency when enabling Mod.
         /// </summary>
         internal static string XAML_Setting_EnableDependency_Enable {
             get {
@@ -996,7 +1005,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable dependency when installing mod.
+        ///   Looks up a localized string similar to Enable dependency when installing Mod.
         /// </summary>
         internal static string XAML_Setting_EnableDependency_Install {
             get {

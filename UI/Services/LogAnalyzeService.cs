@@ -27,6 +27,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     public async Task AnalyzeLog()
     {
         CheckModVersion();
+        CheckHeadQuarterRegister();
         if (LogErrorBuilder.Length > 0)
         {
             await MessageBoxService.CreateAnalyzeSuccessMessageBox(LogErrorBuilder.ToString());
@@ -146,6 +147,12 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         }
     }
 
+    private void CheckHeadQuarterRegister()
+    {
+        if (HeadQuarterRegisterRegex().Match(LogContent).Success)
+            LogErrorBuilder.AppendLine(MsgBox_Content_RegisterHQ.Localize());
+    }
+
     private void StartLogFileMonitor()
     {
         _watcher.Path = SavingService.Settings.MelonLoaderFolder;
@@ -166,4 +173,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
     [GeneratedRegex(@"\b(?!MelonLoader\b)([\w\s]+) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
     private static partial Regex ModVersionRegex();
+
+    [GeneratedRegex("You have not registered for Headquarters", RegexOptions.Multiline)]
+    private static partial Regex HeadQuarterRegisterRegex();
 }

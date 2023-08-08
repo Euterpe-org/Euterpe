@@ -267,17 +267,17 @@
   <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>使用者文件</value>
     </data>
-  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>安裝mod時啟用依賴</value>
+    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+        <value>安裝Mod時啟用依賴</value>
     </data>
-  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>啟用mod時啟用依賴</value>
+    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+        <value>啟用Mod時啟用依賴</value>
     </data>
-  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>刪除mod時禁用依賴</value>
+    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+        <value>刪除Mod時禁用依賴</value>
     </data>
-  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>禁用mod時禁用依賴</value>
+    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+        <value>禁用Mod時禁用依賴</value>
     </data>
   <data name="XAML_ChangePath" xml:space="preserve">
         <value>更改路徑</value>
