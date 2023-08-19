@@ -66,13 +66,16 @@ public class LocalService : ILocalService
 
         try
         {
-            var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
-            if (version is not "2019.4.32.16288752")
+            if (OperatingSystem.IsWindows())
             {
-                Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
-                IsValidPath = false;
-                return IsValidPath;
+                var version = FileVersionInfo.GetVersionInfo(exePath).FileVersion;
+                if (version is not "2019.4.32.16288752")
+                {
+                    Logger.Error("Incorrect game version {Version}, showing error message box...", version);
+                    await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion.Localize());
+                    IsValidPath = false;
+                    return IsValidPath;
+                }
             }
 
             if (!Directory.Exists(SavingService.Settings.ModsFolder))
