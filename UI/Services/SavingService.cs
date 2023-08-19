@@ -56,7 +56,7 @@ public class SavingService : ISavingService
             if (!_fileSystem.File.Exists(SettingPath))
             {
                 _logger.Error("Settings.json not found, creating new one");
-                await MessageBoxService.CreateErrorMessageBox("Warning", MsgBox_Content_ChoosePath.Localize());
+                await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_ChoosePath.Localize());
                 await OnChoosePath();
                 return;
             }
