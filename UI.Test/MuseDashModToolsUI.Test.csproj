@@ -13,7 +13,7 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0-preview-23371-04"/>
         <PackageReference Include="Moq" Version="4.18.4"/>
         <PackageReference Include="RichardSzalay.MockHttp" Version="6.0.0"/>
-        <PackageReference Include="xunit" Version="2.5.1-pre.11"/>
+        <PackageReference Include="xunit" Version="2.5.1-pre.20"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.1-pre.10">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>

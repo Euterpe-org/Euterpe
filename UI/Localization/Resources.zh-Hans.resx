@@ -124,7 +124,7 @@
         <value>无法将 Updater.exe 复制到目标文件夹\n{0}</value>
     </data>
     <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
-        <value>无法找到 MuseDash.exe 或者GameAssembly.dll\n请选择正确的文件夹</value>
+        <value>无法找到 MuseDash.exe 或者 GameAssembly.dll\n请选择正确的文件夹</value>
     </data>
     <data name="MsgBox_Content_IncorrectVersion" xml:space="preserve">
         <value>MuseDash.exe 并不是正确的版本\n你是否在使用破解版？</value>
