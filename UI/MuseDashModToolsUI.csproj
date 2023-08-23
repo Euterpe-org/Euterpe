@@ -67,7 +67,7 @@
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
         <PackageReference Include="TestableIO.System.IO.Abstractions" Version="19.2.64"/>
-        <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.61"/>
+        <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.64"/>
         <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
     </ItemGroup>
 </Project>
