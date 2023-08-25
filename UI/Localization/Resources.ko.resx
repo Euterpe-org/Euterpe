@@ -1,360 +1,366 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
 
         </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>1.3</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="XAML_About_Project" xml:space="preserve">
+  </resheader>
+  <data name="XAML_About_Project" xml:space="preserve">
         <value>About Project</value>
     </data>
-    <data name="XAML_Check_Update" xml:space="preserve">
+  <data name="XAML_Check_Update" xml:space="preserve">
         <value>Check Update</value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+  <data name="XAML_All" xml:space="preserve">
         <value>All</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+  <data name="XAML_Enabled" xml:space="preserve">
         <value>Enabled</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+  <data name="XAML_Installed" xml:space="preserve">
         <value>Installed</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+  <data name="XAML_Outdated" xml:space="preserve">
         <value>Outdated</value>
     </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
+  <data name="XAML_Incompatible" xml:space="preserve">
         <value>Incompatible</value>
     </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
+  <data name="XAML_Install_MelonLoader" xml:space="preserve">
         <value>Install\nMelonLoader</value>
     </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
+  <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
         <value>Uninstall\nMelonLoader</value>
     </data>
-    <data name="XAML_Path" xml:space="preserve">
+  <data name="XAML_Path" xml:space="preserve">
         <value>Muse Dash Folder Path</value>
     </data>
-    <data name="XAML_ModsFolder" xml:space="preserve">
+  <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Mods</value>
     </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
+  <data name="XAML_SearchBar" xml:space="preserve">
         <value>Search Mods    (Name, Author, Descriptions)</value>
     </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
+  <data name="XAML_Uninstall_Mod" xml:space="preserve">
         <value>Uninstall</value>
     </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
+  <data name="XAML_Install_Mod" xml:space="preserve">
         <value>Install</value>
     </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
+  <data name="XAML_Reinstall_Mod" xml:space="preserve">
         <value>Reinstall</value>
     </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
+  <data name="XAML_Update_Mod" xml:space="preserve">
         <value>Update</value>
     </data>
-    <data name="MsgBox_Title_Failure" xml:space="preserve">
+  <data name="MsgBox_Title_Failure" xml:space="preserve">
         <value>Failure</value>
     </data>
-    <data name="MsgBox_Title_Warning" xml:space="preserve">
+  <data name="MsgBox_Title_Warning" xml:space="preserve">
         <value>Warning</value>
     </data>
-    <data name="MsgBox_Title_Success" xml:space="preserve">
+  <data name="MsgBox_Title_Success" xml:space="preserve">
         <value>Success</value>
     </data>
-    <data name="MsgBox_Button_Yes" xml:space="preserve">
+  <data name="MsgBox_Button_Yes" xml:space="preserve">
         <value>Yes</value>
     </data>
-    <data name="MsgBox_Button_No" xml:space="preserve">
+  <data name="MsgBox_Button_No" xml:space="preserve">
         <value>No</value>
     </data>
-    <data name="MsgBox_Button_YesNoAsk" xml:space="preserve">
+  <data name="MsgBox_Button_YesNoAsk" xml:space="preserve">
         <value>Yes and Don't Ask Again</value>
     </data>
-    <data name="MsgBox_Button_NoNoAsk" xml:space="preserve">
+  <data name="MsgBox_Button_NoNoAsk" xml:space="preserve">
         <value>No and Don't Ask Again</value>
     </data>
-    <data name="MsgBox_Content_LatestVersion" xml:space="preserve">
+  <data name="MsgBox_Content_LatestVersion" xml:space="preserve">
         <value>Check update success\nYou are using the latest version of Muse Dash Mod Tools</value>
     </data>
-    <data name="MsgBox_Title_Notice" xml:space="preserve">
+  <data name="MsgBox_Title_Notice" xml:space="preserve">
         <value>Notice</value>
     </data>
-    <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
+  <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
         <value>A newer version of Muse Dash Mod Tools ({0}) is released\n\nDo you want to install it now?\n\nRelease Title:\n{1}\n\nRelease Info:\n{2}</value>
     </data>
-    <data name="FolderDialog_Title" xml:space="preserve">
+  <data name="FolderDialog_Title" xml:space="preserve">
         <value>Choose Muse Dash Folder</value>
     </data>
-    <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
+  <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
         <value>The path you have chosen is invalid. Try again</value>
     </data>
-    <data name="MsgBox_Content_NullPath" xml:space="preserve">
+  <data name="MsgBox_Content_NullPath" xml:space="preserve">
         <value>Your stored Muse Dash Folder path is null\nPlease choose the correct folder</value>
     </data>
-    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
+  <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
         <value>You haven't choose Muse Dash Folder\nPlease choose the folder</value>
     </data>
-    <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
+  <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
         <value>Your downloaded mods are broken\nPlease delete 0KB mod if it exist, then restart the application\n{0}</value>
     </data>
-    <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
+  <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
         <value>Checking updates failed\nAre you online?</value>
     </data>
-    <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
+  <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
         <value>Cannot find Updater.exe\nPlease make sure you have downloaded full software</value>
     </data>
-    <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
+  <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
         <value>Cannot copy Updater.exe to target path\n{0}</value>
     </data>
-    <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
+  <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
         <value>Couldn't find MuseDash.exe or GameAssembly.dll\nPlease choose the right folder</value>
     </data>
-    <data name="MsgBox_Content_IncorrectVersion" xml:space="preserve">
+  <data name="MsgBox_Content_IncorrectVersion" xml:space="preserve">
         <value>MuseDash.exe is not correct version \nAre you using a pirated or modified version?</value>
     </data>
-    <data name="MsgBox_Content_ExeVerifyFailed" xml:space="preserve">
+  <data name="MsgBox_Content_ExeVerifyFailed" xml:space="preserve">
         <value>Failed to verify MuseDash.exe\nMake sure you selected the right folder</value>
     </data>
-    <data name="MsgBox_Content_ReadGameVersionFailed" xml:space="preserve">
+  <data name="MsgBox_Content_ReadGameVersionFailed" xml:space="preserve">
         <value>Cannot read current game version\nDo you fully installed Muse Dash?\nPlease check your globalgamemanagers file in\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallMelonLoader" xml:space="preserve">
+  <data name="MsgBox_Content_InstallMelonLoader" xml:space="preserve">
         <value>You did not install MelonLoader\nWhich is needed to run all the mods\nInstall Now?</value>
     </data>
-    <data name="MsgBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
         <value>MelonLoader has been successfully uninstalled\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallMelonLoaderFailed" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallMelonLoaderFailed" xml:space="preserve">
         <value>Cannot uninstall MelonLoader\nPlease make sure your game is not running!</value>
     </data>
-    <data name="MsgBox_Content_NoMelonLoaderFolder" xml:space="preserve">
+  <data name="MsgBox_Content_NoMelonLoaderFolder" xml:space="preserve">
         <value>Cannot find MelonLoader Folder\nHave you installed MelonLoader?</value>
     </data>
-    <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
+  <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
         <value>Choose correct Muse Dash folder first!</value>
     </data>
-    <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
+  <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
         <value>You don't have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?</value>
     </data>
-    <data name="MsgBox_Content_NoDownloadLink" xml:space="preserve">
+  <data name="MsgBox_Content_NoDownloadLink" xml:space="preserve">
         <value>This mod does not have an available resource for download\n</value>
     </data>
-    <data name="MsgBox_Content_InstallModFailed_Internet" xml:space="preserve">
+  <data name="MsgBox_Content_InstallModFailed_Internet" xml:space="preserve">
         <value>Mod installation failed. Are you online?\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallModFailed_Game" xml:space="preserve">
+  <data name="MsgBox_Content_InstallModFailed_Game" xml:space="preserve">
         <value>Mod installation failed. Is the game running?\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
+  <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
         <value>Mod installation failed\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
+  <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
         <value>Dependency {0} failed to install\n{1}</value>
     </data>
-    <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
+  <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>Do you want to enable {0}'s dependency {1}?</value>
     </data>
-    <data name="MsgBox_Content_InstallModSuccess" xml:space="preserve">
+  <data name="MsgBox_Content_InstallModSuccess" xml:space="preserve">
         <value>{0} has been successfully installed\n</value>
     </data>
-    <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
+  <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
         <value>You are asking to reinstall {0}\nPlease confirm your operation</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
         <value>Mod uninstall failed\n{0}</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
         <value>Mod uninstall failed. Is the game running?\n{0}</value>
     </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
+  <data name="XAML_Mod_Incompatible" xml:space="preserve">
         <value>{0}'s {1} version is incompatible with your game version</value>
     </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
+  <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Local Version: {0} (Has a newer version: {1})</value>
     </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
+  <data name="XAML_Mod_Newer" xml:space="preserve">
         <value>Local Version: {0} (WOW MOD DEV)</value>
     </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
+  <data name="XAML_Mod_Modified" xml:space="preserve">
         <value>Local Version: {0} (Modified)</value>
     </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
+  <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>Local Version: {0}</value>
     </data>
-    <data name="XAML_Mod_Description" xml:space="preserve">
+  <data name="XAML_Mod_Description" xml:space="preserve">
         <value>{0} \n\nAuthor: {1} \nOnline Version: {2}\nCompatible Game Version: {3}</value>
     </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
+  <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
         <value>All</value>
     </data>
-    <data name="XAML_Mod_Dependencies" xml:space="preserve">
+  <data name="XAML_Mod_Dependencies" xml:space="preserve">
         <value>Dependencies: </value>
     </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
+  <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>Duplicated by: </value>
     </data>
-    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
+  <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} is used by {1} as dependency\nAre you sure you want to disable this mod?</value>
     </data>
-    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
+  <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>Do you want to disable the mods depend on {0}?</value>
     </data>
-    <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
+  <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
         <value>Please manually choose and delete the duplicated mod\n{0}</value>
     </data>
-    <data name="MsgBox_Content_UninstallModFailed_Null" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModFailed_Null" xml:space="preserve">
         <value>Cannot delete file that doesn't exist</value>
     </data>
-    <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
         <value>{0} has been successfully deleted\n</value>
     </data>
-    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
+  <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
         <value>{0} is used by {1} as dependency\nAre you sure you want to delete this mod?</value>
     </data>
-    <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
+  <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
         <value>Mod enable/disable failed. Unauthorized\n{0}</value>
     </data>
-    <data name="MsgBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
+  <data name="MsgBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
         <value>Mod enable/disable failed. Is the game running?\n{0}</value>
     </data>
-    <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
+  <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
         <value>Mod enable/disable failed\n{0}</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
+  <data name="XAML_HomePage" xml:space="preserve">
         <value>HomePage</value>
     </data>
-    <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
+  <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
         <value>MelonLoader download failed due to internet\nAre you online?\n{0}</value>
     </data>
-    <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
+  <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
         <value>MelonLoader download failed\n{0}</value>
     </data>
-    <data name="MsgBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
+  <data name="MsgBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
         <value>Cannot unzip MelonLoader.zip in\n{0}\nError:{1}\nTry manually unzip?</value>
     </data>
-    <data name="MsgBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
+  <data name="MsgBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
         <value>Failed to delete MelonLoader.zip in\n{0}\nError:{1}\nTry manually delete</value>
     </data>
-    <data name="MsgBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
+  <data name="MsgBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
         <value>MelonLoader has been successfully installed\n</value>
     </data>
-    <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
+  <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>You are asking to uninstall MelonLoader\nPlease confirm your operation</value>
     </data>
-    <data name="XAML_Tab_ModManage" xml:space="preserve">
+  <data name="XAML_Tab_ModManage" xml:space="preserve">
         <value>Mods</value>
     </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
+  <data name="XAML_Tab_Setting" xml:space="preserve">
         <value>Setting</value>
     </data>
-    <data name="XAML_UserDataFolder" xml:space="preserve">
+  <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>UserData</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>Enable dependency when installing mod</value>
+  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+        <value>Enable dependency when installing Mod</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>Enable dependency when enabling mod</value>
+  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+        <value>Enable dependency when enabling Mod</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>Disable dependency when deleting mod</value>
+  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+        <value>Disable dependency when deleting Mod</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>Disable dependency when disabling mod</value>
+  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+        <value>Disable dependency when disabling Mod</value>
     </data>
-    <data name="XAML_ChangePath" xml:space="preserve">
+  <data name="XAML_ChangePath" xml:space="preserve">
         <value>Change Path</value>
     </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
+  <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>Help Translate</value>
     </data>
-    <data name="XAML_Language" xml:space="preserve">
+  <data name="XAML_Language" xml:space="preserve">
         <value>Language: </value>
     </data>
-    <data name="XAML_Apply" xml:space="preserve">
+  <data name="XAML_Apply" xml:space="preserve">
         <value>Apply</value>
     </data>
-    <data name="XAML_AskType_Always" xml:space="preserve">
+  <data name="XAML_AskType_Always" xml:space="preserve">
         <value>Always Ask</value>
     </data>
-    <data name="XAML_AskType_Yes" xml:space="preserve">
+  <data name="XAML_AskType_Yes" xml:space="preserve">
         <value>Yes</value>
     </data>
-    <data name="XAML_AskType_No" xml:space="preserve">
+  <data name="XAML_AskType_No" xml:space="preserve">
         <value>No</value>
     </data>
-    <data name="XAML_DownloadSource" xml:space="preserve">
+  <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Download Source: </value>
     </data>
-    <data name="XAML_DownloadSource_Github" xml:space="preserve">
+  <data name="XAML_DownloadSource_Github" xml:space="preserve">
         <value>Github</value>
     </data>
-    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+  <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
         <value>Github Mirror</value>
     </data>
-    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
         <value>Gitee</value>
     </data>
-    <data name="XAML_Font" xml:space="preserve">
+  <data name="XAML_Font" xml:space="preserve">
         <value>Font:</value>
     </data>
-    <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
+  <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>Failed to get mod list from any source</value>
     </data>
-    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+  <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
         <value>Analysis</value>
     </data>
-    <data name="XAML_LogFolder" xml:space="preserve">
+  <data name="XAML_LogFolder" xml:space="preserve">
         <value>Open Log Folder</value>
     </data>
-    <data name="XAML_Analyze" xml:space="preserve">
+  <data name="XAML_Analyze" xml:space="preserve">
         <value>Analyzing Log</value>
     </data>
-    <data name="MsgBox_Content_GamePathError" xml:space="preserve">
+  <data name="MsgBox_Content_GamePathError" xml:space="preserve">
         <value>Your game path doesn't contain "steamapps\common\Muse Dash\musedash.exe"\nAre you using pirate version?</value>
     </data>
-    <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+  <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
         <value>You don't have application path in the log</value>
     </data>
-    <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
+  <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
         <value>Cannot verify you have bought the game on Steam\nAre you using pirate version?</value>
     </data>
-    <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
+  <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
         <value>You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7</value>
     </data>
-    <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
+  <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
         <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
     </data>
-    <data name="MsgBox_Content_OutdatedMod" xml:space="preserve">
+  <data name="MsgBox_Content_OutdatedMod" xml:space="preserve">
         <value>{0} is outdated, please update using "ModManage"page</value>
     </data>
-    <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
+  <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
         <value>No Log File Found\nYou have to launch the game once after installing MelonLoader to generate log</value>
     </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
+  <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>Download Prerelease: </value>
     </data>
-    <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
+  <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
         <value>Cannot find MelonLoader version from log</value>
     </data>
-    <data name="XAML_TroubleShoot" xml:space="preserve">
+  <data name="XAML_TroubleShoot" xml:space="preserve">
         <value>Trouble Shoot</value>
+    </data>
+  <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
+        <value>Analyze Success</value>
+    </data>
+  <data name="MsgBox_Content_RegisterHQ" xml:space="preserve">
+        <value>You have not registered Headquarters Mod\nPlease register in #bot-commands channel in MDMC discord</value>
     </data>
 </root>
