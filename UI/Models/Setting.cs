@@ -21,6 +21,10 @@ public class Setting
     public AskType AskDisableDependenciesWhenDisabling { get; set; } = AskType.Always;
 
     [JsonIgnore]
+    public string MuseDashExePath =>
+        !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "MuseDash.exe") : string.Empty;
+
+    [JsonIgnore]
     public string UserDataFolder =>
         !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "UserData") : string.Empty;
 

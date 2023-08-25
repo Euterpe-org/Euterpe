@@ -6,7 +6,7 @@ public interface ILocalService
 {
     IEnumerable<string> GetModFiles(string path);
     Mod? LoadMod(string filePath);
-    Task<bool> CheckValidPath();
+    Task CheckValidPath();
     Task<string> ReadGameVersion();
     Task CheckMelonLoaderInstall();
     Task OnInstallMelonLoader();
