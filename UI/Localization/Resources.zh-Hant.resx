@@ -267,16 +267,16 @@
   <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>使用者文件</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
         <value>安裝Mod時啟用依賴</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
         <value>啟用Mod時啟用依賴</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
         <value>刪除Mod時禁用依賴</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
         <value>禁用Mod時禁用依賴</value>
     </data>
   <data name="XAML_ChangePath" xml:space="preserve">
@@ -359,5 +359,8 @@
     </data>
   <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
         <value>分析成功</value>
+    </data>
+  <data name="MsgBox_Content_RegisterHQ" xml:space="preserve">
+        <value>你尚未註冊Headquarters Mod\n請在 MDMC Discord 的 #bot-commands 頻道內註冊。</value>
     </data>
 </root>

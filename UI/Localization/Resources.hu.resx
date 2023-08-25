@@ -268,16 +268,16 @@
         <value>UserData</value>
     </data>
   <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>Függőségek bekapcsolása mod telepítésekor</value>
+        <value>Enable dependency when installing Mod</value>
     </data>
   <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>Függőségek bekapcsolása mod bekapcsolásakor</value>
+        <value>Enable dependency when enabling Mod</value>
     </data>
   <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>Függőségek kikapcsolása mod törlésekor</value>
+        <value>Disable dependency when deleting Mod</value>
     </data>
   <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>Függőségek kikapcsolása mod kikapcsolásakor</value>
+        <value>Disable dependency when disabling Mod</value>
     </data>
   <data name="XAML_ChangePath" xml:space="preserve">
         <value>Mappaválasztás</value>
@@ -342,22 +342,25 @@
   <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
         <value>Cannot find purchase record for Muse Dash's DLC\nYou have to buy it in order to play custom chart</value>
     </data>
-    <data name="MsgBox_Content_OutdatedMod" xml:space="preserve">
+  <data name="MsgBox_Content_OutdatedMod" xml:space="preserve">
         <value>{0} is outdated, please update using "ModManage"page</value>
     </data>
-    <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
+  <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
         <value>No Log File Found\nYou have to launch the game once after installing MelonLoader to generate log</value>
     </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
+  <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>Download Prerelease: </value>
     </data>
-    <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
+  <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
         <value>Cannot find MelonLoader version from log</value>
     </data>
-    <data name="XAML_TroubleShoot" xml:space="preserve">
+  <data name="XAML_TroubleShoot" xml:space="preserve">
         <value>Trouble Shoot</value>
     </data>
   <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
         <value>Analyze Success</value>
+    </data>
+  <data name="MsgBox_Content_RegisterHQ" xml:space="preserve">
+        <value>You have not registered Headquarters Mod\nPlease register in #bot-commands channel in MDMC discord</value>
     </data>
 </root>
