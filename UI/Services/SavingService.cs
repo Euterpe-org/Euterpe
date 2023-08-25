@@ -35,6 +35,7 @@ public class SavingService : ISavingService
 
     private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
     public IMessageBoxService MessageBoxService { get; init; }
+    public Lazy<ILocalService> LocalService { get; init; }
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
     public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
@@ -66,6 +67,7 @@ public class SavingService : ISavingService
             await NullSettingCatch(settings);
 
             Settings = settings.Clone();
+            await LocalService.Value.CheckValidPath();
         }
         catch (Exception ex)
         {
@@ -99,6 +101,7 @@ public class SavingService : ISavingService
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
         _logger.Information("Settings saved to Settings.json");
 
+        await LocalService.Value.CheckValidPath();
         SettingsViewModel.Value.Initialize();
         ModManageViewModel.Value.Initialize();
         LogAnalysisViewModel.Value.Initialize();
