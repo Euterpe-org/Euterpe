@@ -40,7 +40,9 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         Initialize();
     }
 
-    public void Initialize()
+    public void UpdatePath() => Path = _savingService.Settings.MuseDashFolder;
+
+    private void Initialize()
     {
         if (_savingService.Settings.LanguageCode is not null)
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);

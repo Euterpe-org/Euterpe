@@ -97,12 +97,13 @@ public class SavingService : ISavingService
         Settings.MuseDashFolder = path;
         Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
 
+        SettingsViewModel.Value.UpdatePath();
+
         var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
         _logger.Information("Settings saved to Settings.json");
 
         await LocalService.Value.CheckValidPath();
-        SettingsViewModel.Value.Initialize();
         ModManageViewModel.Value.Initialize();
         LogAnalysisViewModel.Value.Initialize();
     }
