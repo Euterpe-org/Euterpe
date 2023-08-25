@@ -63,25 +63,7 @@ public class SavingService : ISavingService
 
             var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
             var settings = JsonConvert.DeserializeObject<Setting>(text)!;
-            if (string.IsNullOrEmpty(settings.MuseDashFolder))
-            {
-                _logger.Error("Settings.json stored path is empty, asking user to choose path");
-                await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath.Localize());
-                await OnChoosePath();
-                await InitializeSettings();
-            }
-
-            if (string.IsNullOrEmpty(settings.LanguageCode))
-            {
-                settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
-                _logger.Warning("Settings.json stored language code is empty, using system language");
-            }
-
-            if (string.IsNullOrEmpty(settings.FontName))
-            {
-                settings.FontName = FontManageService.DefaultFont;
-                _logger.Warning("Settings.json stored font name is empty, using default font");
-            }
+            await NullSettingCatch(settings);
 
             Settings = settings.Clone();
         }
@@ -101,6 +83,52 @@ public class SavingService : ISavingService
 
     public async Task OnChoosePath()
     {
+        var path = await GetChosenPath();
+
+        if (path == Settings.MuseDashFolder)
+        {
+            _logger.Information("Path not changed");
+            return;
+        }
+
+        _logger.Information("User chose path {Path}", path);
+        Settings.MuseDashFolder = path;
+        Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
+
+        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
+        _logger.Information("Settings saved to Settings.json");
+
+        SettingsViewModel.Value.Initialize();
+        ModManageViewModel.Value.Initialize();
+        LogAnalysisViewModel.Value.Initialize();
+    }
+
+    private async Task NullSettingCatch(Setting settings)
+    {
+        if (string.IsNullOrEmpty(settings.MuseDashFolder))
+        {
+            _logger.Error("Settings.json stored path is empty, asking user to choose path");
+            await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath.Localize());
+            await OnChoosePath();
+            await InitializeSettings();
+        }
+
+        if (string.IsNullOrEmpty(settings.LanguageCode))
+        {
+            settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
+            _logger.Warning("Settings.json stored language code is empty, using system language");
+        }
+
+        if (string.IsNullOrEmpty(settings.FontName))
+        {
+            settings.FontName = FontManageService.DefaultFont;
+            _logger.Warning("Settings.json stored font name is empty, using default font");
+        }
+    }
+
+    private async Task<string?> GetChosenPath()
+    {
         while (true)
         {
             if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
@@ -108,38 +136,12 @@ public class SavingService : ISavingService
 
             var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
                 { AllowMultiple = false, Title = FolderDialog_Title });
-            if (dialogue.Count == 0)
-            {
-                if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
-                {
-                    _logger.Information("Path not changed");
-                    return;
-                }
 
-                _logger.Error("Invalid path, showing error message box");
-                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
-                continue;
-            }
+            if (dialogue.Count != 0) return dialogue[0].TryGetLocalPath();
+            if (!string.IsNullOrEmpty(Settings.MuseDashFolder)) return Settings.MuseDashFolder;
 
-            var path = dialogue[0].TryGetLocalPath();
-            if (path == Settings.MuseDashFolder)
-            {
-                _logger.Information("Path not changed");
-                return;
-            }
-
-            _logger.Information("User chose path {Path}", path);
-            Settings.MuseDashFolder = path;
-            Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
-
-            var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-            await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-            _logger.Information("Settings saved to Settings.json");
-
-            SettingsViewModel.Value.Initialize();
-            ModManageViewModel.Value.Initialize();
-            LogAnalysisViewModel.Value.Initialize();
-            return;
+            _logger.Error("Invalid path, showing error message box");
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
         }
     }
 

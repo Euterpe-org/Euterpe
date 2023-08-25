@@ -46,8 +46,7 @@ public class ModService : IModService
         Logger.Information("Initializing mod list...");
         _sourceCache = sourceCache!;
         _mods = mods;
-        var isValidPath = await LocalService.CheckValidPath();
-        if (!isValidPath) await SavingService.OnChoosePath();
+        await LocalService.CheckValidPath();
         _currentGameVersion = await LocalService.ReadGameVersion();
         await LocalService.CheckMelonLoaderInstall();
 
