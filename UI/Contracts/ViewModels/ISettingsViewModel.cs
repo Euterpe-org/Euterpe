@@ -9,5 +9,5 @@ public interface ISettingsViewModel
     int DisableDependenciesWhenDisabling { get; set; }
     int EnableDependenciesWhenEnabling { get; set; }
     int EnableDependenciesWhenInstalling { get; set; }
-    void Initialize();
+    void UpdatePath();
 }
