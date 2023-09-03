@@ -41,3 +41,7 @@
 
 
 **If you want to contribute to translation, use [Crowdin](https://crowdin.com/project/musedashmodtools) to translate.** (If you cannot find the language you want to translate, ask me on discord or create an issue)
+
+
+### Contribution
+![Alt](https://repobeats.axiom.co/api/embed/383f9213373d55530c04c5bdec49e842cd5e17d7.svg)
