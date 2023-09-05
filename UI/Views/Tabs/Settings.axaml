@@ -15,6 +15,8 @@
         <Grid.Styles>
             <Style Selector="controls|Card">
                 <Setter Property="Margin" Value="0,1" />
+            </Style>
+            <Style Selector="StackPanel > controls|Card">
                 <Setter Property="Height" Value="80" />
             </Style>
             <Style Selector="TextBlock">
@@ -70,7 +72,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
 
-                        <ComboBox Classes="Filled"
+                        <ComboBox Theme="{StaticResource MaterialFilledComboBox}"
                                   MinWidth="200"
                                   ItemsSource="{Binding AvailableLanguages}"
                                   SelectedIndex="{Binding CurrentLanguageIndex}">
@@ -92,7 +94,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
 
-                        <ComboBox Classes="Filled"
+                        <ComboBox Theme="{StaticResource MaterialFilledComboBox}"
                                   MinWidth="180"
                                   ItemsSource="{Binding DownloadSources}"
                                   SelectedIndex="{Binding CurrentDownloadSource}" />
@@ -113,7 +115,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
 
-                        <ComboBox Classes="Filled"
+                        <ComboBox Theme="{StaticResource MaterialFilledComboBox}"
                                   MinWidth="300"
                                   ItemsSource="{Binding AvailableFonts}"
                                   SelectedIndex="{Binding CurrentFontIndex}" />
@@ -128,7 +130,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
 
-                        <ComboBox Classes="Filled"
+                        <ComboBox Theme="{StaticResource MaterialFilledComboBox}"
                                   MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding EnableDependenciesWhenInstalling}" />
@@ -139,7 +141,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
 
-                        <ComboBox Classes="Filled"
+                        <ComboBox Theme="{StaticResource MaterialFilledComboBox}"
                                   MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding EnableDependenciesWhenEnabling}" />
@@ -150,7 +152,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
 
-                        <ComboBox Classes="Filled"
+                        <ComboBox Theme="{StaticResource MaterialFilledComboBox}"
                                   MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding DisableDependenciesWhenDeleting}" />
@@ -161,7 +163,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
 
-                        <ComboBox Classes="Filled"
+                        <ComboBox Theme="{StaticResource MaterialFilledComboBox}"
                                   MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding DisableDependenciesWhenDisabling}" />
