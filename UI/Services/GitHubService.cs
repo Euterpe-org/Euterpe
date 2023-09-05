@@ -107,6 +107,20 @@ public partial class GitHubService : IGitHubService
         }
     }
 
+    public async Task<long?> GetMelonLoaderFileSize()
+    {
+        var result = await GetMelonLoaderResponse(DefaultDownloadSource);
+        if (result is not null) return result.Content.Headers.ContentLength;
+
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Settings.DownloadSource))
+        {
+            result = await GetMelonLoaderResponse(pair.Value);
+            if (result is not null) return result.Content.Headers.ContentLength;
+        }
+
+        return 0;
+    }
+
     private async Task<List<Mod>?> GetModListFromSourceAsync(string downloadSource)
     {
         var url = downloadSource + "ModLinks.json";
@@ -137,6 +151,22 @@ public partial class GitHubService : IGitHubService
         catch
         {
             Logger.Warning("Download mod from {Url} failed", url);
+            return null;
+        }
+    }
+
+    private async Task<HttpResponseMessage?> GetMelonLoaderResponse(string downloadSource)
+    {
+        var url = downloadSource + "MelonLoader.zip";
+        try
+        {
+            var result = await Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            Logger.Information("Get MelonLoader Download ResponseHeader from {Url} success", url);
+            return result;
+        }
+        catch
+        {
+            Logger.Warning("Get MelonLoader Download ResponseHeader from {Url} failed", url);
             return null;
         }
     }
