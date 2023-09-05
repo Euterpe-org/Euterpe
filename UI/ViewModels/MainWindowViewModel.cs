@@ -1,3 +1,4 @@
+using Autofac;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MuseDashModToolsUI.Contracts;
@@ -18,20 +19,19 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     [ObservableProperty] private List<TabView> _tabs = new();
     public static string Version => BuildInfo.Version;
 
-    public MainWindowViewModel(IGitHubService gitHubService, ILogger logger, ILogAnalysisViewModel logAnalysisViewModel,
-        ISavingService savingService, ISettingsViewModel settingsViewModel, IModManageViewModel modManageViewModel)
+    public MainWindowViewModel(IComponentContext context)
     {
-        _logger = logger;
-        _savingService = savingService;
+        _logger = context.Resolve<ILogger>();
+        _savingService = context.Resolve<ISavingService>();
 
         Tabs = new List<TabView>
         {
-            new((ViewModelBase)modManageViewModel, XAML_Tab_ModManage, "ModManage"),
-            new((ViewModelBase)logAnalysisViewModel, XAML_Tab_LogAnalysis, "LogAnalysis"),
-            new((ViewModelBase)settingsViewModel, XAML_Tab_Setting, "Setting")
+            new((ViewModelBase)context.Resolve<IModManageViewModel>(), XAML_Tab_ModManage, "ModManage"),
+            new((ViewModelBase)context.Resolve<ILogAnalysisViewModel>(), XAML_Tab_LogAnalysis, "LogAnalysis"),
+            new((ViewModelBase)context.Resolve<ISettingsViewModel>(), XAML_Tab_Setting, "Setting")
         };
         SwitchTab();
-        gitHubService.CheckUpdates();
+        context.Resolve<IGitHubService>().CheckUpdates();
         _logger.Information("Main Window initialized");
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }

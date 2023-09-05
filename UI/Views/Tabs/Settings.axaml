@@ -15,6 +15,8 @@
         <Grid.Styles>
             <Style Selector="controls|Card">
                 <Setter Property="Margin" Value="0,1" />
+            </Style>
+            <Style Selector="StackPanel > controls|Card">
                 <Setter Property="Height" Value="80" />
             </Style>
             <Style Selector="TextBlock">
@@ -24,6 +26,7 @@
             </Style>
             <Style Selector="ComboBox">
                 <Setter Property="Margin" Value="20,0,0,0" />
+                <Setter Property="Theme" Value="{StaticResource MaterialFilledComboBox}" />
             </Style>
             <Style Selector="controls|Card > StackPanel">
                 <Setter Property="Orientation" Value="Horizontal" />
@@ -70,8 +73,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
 
-                        <ComboBox Classes="Filled"
-                                  MinWidth="200"
+                        <ComboBox MinWidth="200"
                                   ItemsSource="{Binding AvailableLanguages}"
                                   SelectedIndex="{Binding CurrentLanguageIndex}">
                             <ComboBox.ItemTemplate>
@@ -92,8 +94,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
 
-                        <ComboBox Classes="Filled"
-                                  MinWidth="180"
+                        <ComboBox MinWidth="180"
                                   ItemsSource="{Binding DownloadSources}"
                                   SelectedIndex="{Binding CurrentDownloadSource}" />
                     </StackPanel>
@@ -113,8 +114,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
 
-                        <ComboBox Classes="Filled"
-                                  MinWidth="300"
+                        <ComboBox MinWidth="300"
                                   ItemsSource="{Binding AvailableFonts}"
                                   SelectedIndex="{Binding CurrentFontIndex}" />
 
@@ -128,8 +128,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
 
-                        <ComboBox Classes="Filled"
-                                  MinWidth="150"
+                        <ComboBox MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding EnableDependenciesWhenInstalling}" />
                     </StackPanel>
@@ -139,8 +138,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
 
-                        <ComboBox Classes="Filled"
-                                  MinWidth="150"
+                        <ComboBox MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding EnableDependenciesWhenEnabling}" />
                     </StackPanel>
@@ -150,8 +148,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
 
-                        <ComboBox Classes="Filled"
-                                  MinWidth="150"
+                        <ComboBox MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding DisableDependenciesWhenDeleting}" />
                     </StackPanel>
@@ -161,8 +158,7 @@
                     <StackPanel>
                         <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
 
-                        <ComboBox Classes="Filled"
-                                  MinWidth="150"
+                        <ComboBox MinWidth="150"
                                   ItemsSource="{Binding AskTypes}"
                                   SelectedIndex="{Binding DisableDependenciesWhenDisabling}" />
                     </StackPanel>

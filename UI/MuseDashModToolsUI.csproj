@@ -50,15 +50,15 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="DialogHost.Avalonia" Version="0.7.6"/>
         <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1"/>
-        <PackageReference Include="Material.Avalonia" Version="3.0.0-avalonia11-preview6.17-nightly"/>
+        <PackageReference Include="Material.Avalonia" Version="3.0.0"/>
         <PackageReference Include="MessageBox.Avalonia" Version="3.1.4"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="NuGet.Versioning" Version="6.7.0"/>
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Analyzers" Version="4.4.0">
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Analyzers" Version="4.5.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Formatting.Analyzers" Version="4.4.0">
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Formatting.Analyzers" Version="4.5.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -66,8 +66,8 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
-        <PackageReference Include="TestableIO.System.IO.Abstractions" Version="19.2.67"/>
-        <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.67"/>
+        <PackageReference Include="TestableIO.System.IO.Abstractions" Version="19.2.69"/>
+        <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.69"/>
         <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
     </ItemGroup>
 </Project>
