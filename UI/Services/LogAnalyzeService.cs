@@ -35,7 +35,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         }
         else
         {
-            await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LogAnalyzeComplete);
+            await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LogAnalyzeComplete.Localize());
             Logger.Information("Log Analysis Completed");
         }
     }

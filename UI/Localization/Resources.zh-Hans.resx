@@ -364,6 +364,6 @@
         <value>你还没有注册 Headquarters Mod\n请在 MDMC Discord 的 #bot-commands 频道注册</value>
     </data>
     <data name="MsgBox_Content_LogAnalyzeComplete" xml:space="preserve">
-        <value>日志分析完成</value>
+        <value>日志分析完成，未从日志中发现明显错误\n如果仍然有问题请去 trouble shoot 频道询问</value>
     </data>
 </root>

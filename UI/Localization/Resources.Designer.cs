@@ -384,7 +384,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log Analysis Completed.
+        ///   Looks up a localized string similar to Log analysis completed, no obvious errors are found in your log file\nIf you still have issues please go to trouble shoot channel.
         /// </summary>
         internal static string MsgBox_Content_LogAnalyzeComplete {
             get {
