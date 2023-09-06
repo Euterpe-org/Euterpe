@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Net.Http;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
@@ -44,29 +43,9 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 
     private async Task<bool> DownloadMelonLoaderZipFile()
     {
-        try
-        {
-            var downloadProgress = new Progress<double>(UpdateDownloadProgress);
-            Logger.Information("Start downloading MelonLoader.zip");
-            await GitHubService.DownloadMelonLoader(SavingService.Settings.MelonLoaderZipPath, downloadProgress);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            if (ex is HttpRequestException)
-            {
-                Logger.Error(ex, "Download MelonLoader.zip failed");
-                await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet.Localize(),
-                    ex));
-                DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
-                return false;
-            }
-
-            Logger.Error(ex, "Download MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed.Localize(), ex));
-            DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
-            return false;
-        }
+        var downloadProgress = new Progress<double>(UpdateDownloadProgress);
+        Logger.Information("Start downloading MelonLoader");
+        return await GitHubService.DownloadMelonLoader(downloadProgress);
     }
 
     private async Task<bool> ExtractMelonLoaderZipFile()
