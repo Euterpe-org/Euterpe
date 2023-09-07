@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Net.Http;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
@@ -23,61 +22,68 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 
     public async Task InstallMelonLoader()
     {
-        var zipPath = Path.Join(SavingService.Settings.MuseDashFolder, "MelonLoader.zip");
-        var downloadProgress = new Progress<double>(UpdateDownloadProgress);
-        if (!File.Exists(zipPath))
-            try
-            {
-                Logger.Information("Start downloading MelonLoader.zip");
-                await GitHubService.DownloadMelonLoader(zipPath, downloadProgress);
-            }
-            catch (Exception ex)
-            {
-                if (ex is HttpRequestException)
-                {
-                    Logger.Error(ex, "Download MelonLoader.zip failed");
-                    await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet.Localize(),
-                        ex));
-                    DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
-                    return;
-                }
-
-                Logger.Error(ex, "Download MelonLoader.zip failed");
-                await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed.Localize(), ex));
-                DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
-                return;
-            }
-
-        try
+        if (File.Exists(SavingService.Settings.MelonLoaderZipPath))
         {
-            Logger.Information("Extracting MelonLoader.zip");
-            var fastZip = new FastZip();
-            fastZip.ExtractZip(zipPath, SavingService.Settings.MuseDashFolder, FastZip.Overwrite.Always, null, null, null, true);
+            var onlineSize = await GitHubService.GetMelonLoaderFileSize();
+            var zipInfo = new FileInfo(SavingService.Settings.MelonLoaderZipPath);
+            if (onlineSize > zipInfo.Length && !await DownloadMelonLoaderZipFile()) return;
         }
-        catch (Exception ex)
+        else if (!await DownloadMelonLoaderZipFile())
         {
-            Logger.Error(ex, "Extracting MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed.Localize(), zipPath, ex));
-            DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return;
         }
 
-        try
-        {
-            Logger.Information("Deleting MelonLoader.zip");
-            File.Delete(zipPath);
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex, "Deleting MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed.Localize(), zipPath, ex));
-            DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
-            return;
-        }
+        if (!await ExtractMelonLoaderZipFile()) return;
+        if (!await DeleteMelonLoaderZipFile()) return;
 
         Logger.Information("MelonLoader install success");
         await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_InstallMelonLoaderSuccess.Localize());
         DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
+    }
+
+    private async Task<bool> DownloadMelonLoaderZipFile()
+    {
+        var downloadProgress = new Progress<double>(UpdateDownloadProgress);
+        Logger.Information("Start downloading MelonLoader");
+        return await GitHubService.DownloadMelonLoader(downloadProgress);
+    }
+
+    private async Task<bool> ExtractMelonLoaderZipFile()
+    {
+        try
+        {
+            Logger.Information("Extracting MelonLoader.zip");
+            var fastZip = new FastZip();
+            fastZip.ExtractZip(SavingService.Settings.MelonLoaderZipPath, SavingService.Settings.MuseDashFolder, FastZip.Overwrite.Always,
+                null, null, null, true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Extracting MelonLoader.zip failed");
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed.Localize(),
+                SavingService.Settings.MelonLoaderZipPath, ex));
+            DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
+            return false;
+        }
+    }
+
+    private async Task<bool> DeleteMelonLoaderZipFile()
+    {
+        try
+        {
+            Logger.Information("Deleting MelonLoader.zip");
+            File.Delete(SavingService.Settings.MelonLoaderZipPath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Deleting MelonLoader.zip failed");
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed.Localize(),
+                SavingService.Settings.MelonLoaderZipPath, ex));
+            DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
+            return false;
+        }
     }
 
     private void UpdateDownloadProgress(double value)

@@ -36,6 +36,10 @@ public class Setting
     public string MelonLoaderFolder =>
         !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "MelonLoader") : string.Empty;
 
+    [JsonIgnore]
+    public string MelonLoaderZipPath =>
+        !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "MelonLoader.zip") : string.Empty;
+
     public Setting Clone() => (Setting)MemberwiseClone();
 }
 
