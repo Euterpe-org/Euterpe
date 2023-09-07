@@ -119,10 +119,10 @@
         <value>Checking updates failed\nAre you online?</value>
     </data>
     <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
-        <value>Cannot find Updater.exe\nPlease make sure you have downloaded full software</value>
+        <value>Cannot find Updater\nPlease make sure you have downloaded full software</value>
     </data>
     <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
-        <value>Cannot copy Updater.exe to target path\n{0}</value>
+        <value>Cannot copy Updater to target path\n{0}</value>
     </data>
     <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
         <value>Couldn't find MuseDash.exe or GameAssembly.dll\nPlease choose the right folder</value>

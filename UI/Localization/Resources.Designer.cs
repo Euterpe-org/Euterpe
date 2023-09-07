@@ -168,7 +168,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot copy Updater.exe to target path\n{0}.
+        ///   Looks up a localized string similar to Cannot copy Updater to target path\n{0}.
         /// </summary>
         internal static string MsgBox_Content_CopyUpdaterFailed {
             get {
@@ -591,7 +591,7 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot find Updater.exe\nPlease make sure you have downloaded full software.
+        ///   Looks up a localized string similar to Cannot find Updater\nPlease make sure you have downloaded full software.
         /// </summary>
         internal static string MsgBox_Content_UpdaterNotFound {
             get {

@@ -214,14 +214,41 @@ public partial class GitHubService : IGitHubService
     private async Task LaunchUpdater(string link)
     {
         var currentDirectory = Directory.GetCurrentDirectory();
-        var updaterExePath = Path.Combine(currentDirectory, "Updater.exe");
         var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
-        var updaterTargetPath = Path.Combine(currentDirectory, "Update", "Updater.exe");
+        var updaterExePath = GetUpdaterFilePath(currentDirectory);
+        var updaterTargetPath = GetUpdaterFilePath(updaterTargetFolder);
+
+        if (!await CheckUpdaterFilesExist(updaterExePath, updaterTargetFolder)) return;
+
+        try
+        {
+            File.Copy(updaterExePath, updaterTargetPath, true);
+            Logger.Information("Copy Updater to Update folder success");
+        }
+        catch (Exception ex)
+        {
+            Logger.Information("Copy Updater to Update folder failed: {Exception}", ex.ToString());
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
+        }
+
+        Process.Start(updaterTargetPath, new[] { link, currentDirectory });
+    }
+
+    private static string GetUpdaterFilePath(string folder)
+    {
+        if (OperatingSystem.IsWindows()) return Path.Combine(folder, "Updater.exe");
+        if (OperatingSystem.IsLinux()) return Path.Combine(folder, "Updater");
+
+        return Path.Combine(folder, "Updater.exe");
+    }
+
+    private async Task<bool> CheckUpdaterFilesExist(string updaterExePath, string updaterTargetFolder)
+    {
         if (!File.Exists(updaterExePath))
         {
-            Logger.Error("Updater.exe not found");
+            Logger.Error("Updater not found");
             await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
-            return;
+            return false;
         }
 
         if (!Directory.Exists(updaterTargetFolder))
@@ -230,19 +257,7 @@ public partial class GitHubService : IGitHubService
             Logger.Information("Create Update target folder success");
         }
 
-        try
-        {
-            File.Copy(updaterExePath, updaterTargetPath, true);
-            Logger.Information("Copy Updater.exe to Update folder success");
-        }
-        catch (Exception ex)
-        {
-            Logger.Information("Copy Updater.exe to Update folder failed: {Exception}", ex.ToString());
-            await MessageBoxService.CreateErrorMessageBox(
-                string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
-        }
-
-        Process.Start(updaterTargetPath, new[] { link, currentDirectory });
+        return true;
     }
 
     #region CheckUpdates Private Methods

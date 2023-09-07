@@ -16,7 +16,11 @@ else
     Unzip(args[1] + ".zip", args[1]);
     Console.WriteLine("Extracting finished. Pressing any key to launch MuseDashModTools");
     Console.ReadKey();
-    Process.Start(Path.Combine(args[1], "MuseDashModTools.exe"));
+
+    if (OperatingSystem.IsWindows())
+        Process.Start(Path.Combine(args[1], "MuseDashModTools.exe"));
+    if (OperatingSystem.IsLinux())
+        Process.Start(Path.Combine(args[1], "MuseDashModTools"));
 }
 
 return;
