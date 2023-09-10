@@ -1,3 +1,7 @@
+#if DEBUG
+#else
+using System.Diagnostics;
+#endif
 using System.IO;
 using Avalonia;
 using MuseDashModToolsUI.Models;
