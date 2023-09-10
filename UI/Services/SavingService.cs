@@ -91,16 +91,8 @@ public class SavingService : ISavingService
         }
 
         _logger.Information("User chose path {Path}", path);
-        Settings.MuseDashFolder = path;
-        Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
+        await WriteSettings(path!);
 
-        SettingsViewModel.Value.UpdatePath();
-
-        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-        _logger.Information("Settings saved to Settings.json");
-
-        await LocalService.Value.CheckValidPath();
         ModManageViewModel.Value.Initialize();
         LogAnalysisViewModel.Value.Initialize();
     }
@@ -117,8 +109,20 @@ public class SavingService : ISavingService
                 return;
             }
 
-            Settings.MuseDashFolder = folderPath;
+            await WriteSettings(folderPath);
         }
+    }
+
+    private async Task WriteSettings(string path)
+    {
+        Settings.MuseDashFolder = path;
+        Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
+
+        SettingsViewModel.Value.UpdatePath();
+
+        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
+        _logger.Information("Settings saved to Settings.json");
     }
 
     private async Task NullSettingCatch(Setting settings)
@@ -128,7 +132,7 @@ public class SavingService : ISavingService
             _logger.Error("Settings.json stored path is empty, asking user to choose path");
             await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath);
             await OnChoosePath();
-            await InitializeSettings();
+            settings.MuseDashFolder = Settings.MuseDashFolder;
         }
 
         if (string.IsNullOrEmpty(settings.LanguageCode))

@@ -22,6 +22,44 @@ public class LocalService : ILocalService
     public ISavingService SavingService { get; init; }
     private bool IsValidPath { get; set; }
 
+    public async Task CheckMelonLoaderInstall()
+    {
+        var melonLoaderFolder = Path.Join(SavingService.Settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(SavingService.Settings.MuseDashFolder, "version.dll");
+        if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
+        var install = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader);
+        if (install)
+            await OnInstallMelonLoader();
+    }
+
+    public async Task CheckValidPath()
+    {
+        Logger.Information("Checking valid path...");
+        await CheckGameFileExist();
+
+        try
+        {
+            if (OperatingSystem.IsWindows())
+            {
+                var version = FileVersionInfo.GetVersionInfo(SavingService.Settings.MuseDashExePath).FileVersion;
+                if (version is not "2019.4.32.16288752")
+                {
+                    Logger.Error("Incorrect game version {Version}, showing error message box...", version);
+                    await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion);
+                }
+            }
+
+            await CreateFiles();
+            IsValidPath = true;
+            Logger.Information("Path verified {Path}", SavingService.Settings.MuseDashFolder);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Exe verify failed, showing error message box...");
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed);
+        }
+    }
+
     public IEnumerable<string> GetModFiles(string path) => Directory.GetFiles(path)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll")
         .ToList();
@@ -48,70 +86,6 @@ public class LocalService : ILocalService
         mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(filePath);
         Logger.Information("Local mod {Name} loaded. File name {FileName}", mod.Name, mod.FileName);
         return mod;
-    }
-
-    public async Task CheckValidPath()
-    {
-        Logger.Information("Checking valid path...");
-        await CheckGameFileExist();
-
-        try
-        {
-            if (OperatingSystem.IsWindows())
-            {
-                var version = FileVersionInfo.GetVersionInfo(SavingService.Settings.MuseDashExePath).FileVersion;
-                if (version is not "2019.4.32.16288752")
-                {
-                    Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-                    await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion);
-                }
-            }
-
-            await CreateFiles();
-            IsValidPath = true;
-            Logger.Information("Path verified");
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex, "Exe verify failed, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed);
-        }
-    }
-
-    public async Task<string> ReadGameVersion()
-    {
-        var assetsManager = new AssetsManager();
-        var bundlePath = Path.Join(SavingService.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
-        try
-        {
-            var instance = assetsManager.LoadAssetsFile(bundlePath, true);
-            assetsManager.LoadIncludedClassPackage();
-            if (!instance.file.Metadata.TypeTreeEnabled)
-                assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
-            var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
-
-            var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion");
-            Logger.Information("Game version read successfully: {BundleVersion}", bundleVersion!.AsString);
-            return bundleVersion.AsString;
-        }
-        catch (Exception ex)
-        {
-            Logger.Fatal(ex, "Read game version failed, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed, bundlePath));
-            Environment.Exit(0);
-        }
-
-        return string.Empty;
-    }
-
-    public async Task CheckMelonLoaderInstall()
-    {
-        var melonLoaderFolder = Path.Join(SavingService.Settings.MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(SavingService.Settings.MuseDashFolder, "version.dll");
-        if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
-        var install = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader);
-        if (install)
-            await OnInstallMelonLoader();
     }
 
     public bool GetPathFromRegistry(out string folderPath)
@@ -216,6 +190,32 @@ public class LocalService : ILocalService
             Process.Start("xdg-open", logPath);
     }
 
+    public async Task<string> ReadGameVersion()
+    {
+        var assetsManager = new AssetsManager();
+        var bundlePath = Path.Join(SavingService.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        try
+        {
+            var instance = assetsManager.LoadAssetsFile(bundlePath, true);
+            assetsManager.LoadIncludedClassPackage();
+            if (!instance.file.Metadata.TypeTreeEnabled)
+                assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
+            var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
+
+            var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion");
+            Logger.Information("Game version read successfully: {BundleVersion}", bundleVersion!.AsString);
+            return bundleVersion.AsString;
+        }
+        catch (Exception ex)
+        {
+            Logger.Fatal(ex, "Read game version failed, showing error message box...");
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed, bundlePath));
+            Environment.Exit(0);
+        }
+
+        return string.Empty;
+    }
+
     #region CheckValidPath Private Methods
 
     private async Task CheckGameFileExist()
@@ -224,7 +224,7 @@ public class LocalService : ILocalService
 
         if (!File.Exists(SavingService.Settings.MuseDashExePath) || !File.Exists(gameAssemblyPath))
         {
-            Logger.Error("No game files found, showing error message box...");
+            Logger.Error("No game files found in {Path}, showing error message box...", SavingService.Settings.MuseDashFolder);
             await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoExeFound);
             await SavingService.OnChoosePath();
             await CheckGameFileExist();
