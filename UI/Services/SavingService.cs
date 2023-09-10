@@ -7,7 +7,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -57,9 +56,7 @@ public class SavingService : ISavingService
             if (!_fileSystem.File.Exists(SettingPath))
             {
                 _logger.Error("Settings.json not found, creating new one");
-                await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_ChoosePath.Localize());
-                await OnChoosePath();
-                return;
+                await GetGameFolderPath();
             }
 
             var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
@@ -108,12 +105,28 @@ public class SavingService : ISavingService
         LogAnalysisViewModel.Value.Initialize();
     }
 
+    private async Task GetGameFolderPath()
+    {
+        if (LocalService.Value.GetPathFromRegistry(out var folderPath))
+        {
+            if (!await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice,
+                    string.Format(MsgBox_Content_InstallPathConfirm, folderPath)))
+            {
+                await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_ChoosePath);
+                await OnChoosePath();
+                return;
+            }
+
+            Settings.MuseDashFolder = folderPath;
+        }
+    }
+
     private async Task NullSettingCatch(Setting settings)
     {
         if (string.IsNullOrEmpty(settings.MuseDashFolder))
         {
             _logger.Error("Settings.json stored path is empty, asking user to choose path");
-            await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath.Localize());
+            await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath);
             await OnChoosePath();
             await InitializeSettings();
         }

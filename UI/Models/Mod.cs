@@ -24,7 +24,7 @@ public partial class Mod : ObservableObject
     [JsonIgnore] public string? DuplicatedModNames { get; set; }
 
     [JsonIgnore]
-    public string XamlDescription => string.Format(XAML_Mod_Description.Localize(), Description, Author, Version, CompatibleGameVersion);
+    public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(), Description, Author, Version, CompatibleGameVersion);
 
     public string? DownloadLink { get; set; }
     public string? HomePage { get; set; }

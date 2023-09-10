@@ -4,7 +4,6 @@ using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Extensions;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
@@ -37,7 +36,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         if (!await DeleteMelonLoaderZipFile()) return;
 
         Logger.Information("MelonLoader install success");
-        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_InstallMelonLoaderSuccess.Localize());
+        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_InstallMelonLoaderSuccess);
         DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
     }
 
@@ -61,7 +60,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         catch (Exception ex)
         {
             Logger.Error(ex, "Extracting MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed.Localize(),
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed,
                 SavingService.Settings.MelonLoaderZipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
@@ -79,7 +78,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         catch (Exception ex)
         {
             Logger.Error(ex, "Deleting MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed.Localize(),
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed,
                 SavingService.Settings.MelonLoaderZipPath, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;

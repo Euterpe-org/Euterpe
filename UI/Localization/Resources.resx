@@ -367,4 +367,7 @@
     <data name="MsgBox_Content_LogAnalyzeComplete" xml:space="preserve">
         <value>Log analysis completed, no obvious errors are found in your log file\nIf you still have issues please go to trouble shoot channel</value>
     </data>
+    <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
+        <value>Detected Muse Dash folder path is {0}\nIs this the correct game folder?</value>
+    </data>
 </root>

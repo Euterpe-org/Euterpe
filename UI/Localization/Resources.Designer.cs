@@ -366,6 +366,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Detected Muse Dash folder path is {0}\nIs this the correct game folder?.
+        /// </summary>
+        internal static string MsgBox_Content_InstallPathConfirm {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_InstallPathConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The path you have chosen is invalid. Try again.
         /// </summary>
         internal static string MsgBox_Content_InvalidPath {

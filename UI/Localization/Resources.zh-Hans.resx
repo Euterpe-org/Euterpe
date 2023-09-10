@@ -123,7 +123,7 @@
     <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
         <value>无法将 Updater 复制到目标文件夹\n{0}</value>
     </data>
-  <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
+    <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
         <value>无法找到 MuseDash.exe 或者 GameAssembly.dll\n请选择正确的文件夹</value>
     </data>
     <data name="MsgBox_Content_IncorrectVersion" xml:space="preserve">
@@ -365,5 +365,8 @@
     </data>
     <data name="MsgBox_Content_LogAnalyzeComplete" xml:space="preserve">
         <value>日志分析完成，未从日志中发现明显错误\n如果仍然有问题请去 trouble shoot 频道询问</value>
+    </data>
+    <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
+        <value>检测到的 Muse Dash 文件夹为 {0}\n这是正确的游戏文件夹吗</value>
     </data>
 </root>

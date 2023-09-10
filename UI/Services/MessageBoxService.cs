@@ -6,6 +6,7 @@ using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Enums;
 using MsBox.Avalonia.Models;
 using MuseDashModToolsUI.Contracts;
+using MuseDashModToolsUI.Extensions;
 using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -25,7 +26,7 @@ public class MessageBoxService : IMessageBoxService
             .GetMessageBoxStandard(new MessageBoxStandardParams
             {
                 ContentTitle = title,
-                ContentMessage = content,
+                ContentMessage = content.NormalizeNewline(),
                 ButtonDefinitions = button,
                 Icon = icon,
                 Topmost = true,
@@ -129,7 +130,7 @@ public class MessageBoxService : IMessageBoxService
             .GetMessageBoxCustom(new MessageBoxCustomParams
             {
                 ContentTitle = title,
-                ContentMessage = content,
+                ContentMessage = content.NormalizeNewline(),
                 ButtonDefinitions = buttonDefinitions,
                 Icon = icon,
                 CanResize = true,

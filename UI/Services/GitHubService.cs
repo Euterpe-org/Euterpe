@@ -66,7 +66,7 @@ public partial class GitHubService : IGitHubService
         catch (Exception ex)
         {
             Logger.Error(ex, "Check updates failed");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CheckUpdateFailed.Localize());
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CheckUpdateFailed);
         }
     }
 
@@ -171,14 +171,14 @@ public partial class GitHubService : IGitHubService
             if (ex is HttpRequestException)
             {
                 Logger.Error(ex, "Download MelonLoader.zip failed");
-                await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet.Localize(),
+                await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet,
                     ex));
                 DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                 return false;
             }
 
             Logger.Error(ex, "Download MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed.Localize(), ex));
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed, ex));
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }
@@ -228,7 +228,7 @@ public partial class GitHubService : IGitHubService
         catch (Exception ex)
         {
             Logger.Information("Copy Updater to Update folder failed: {Exception}", ex.ToString());
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed.Localize(), ex));
+            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed, ex));
         }
 
         Process.Start(updaterTargetPath, new[] { link, currentDirectory });
@@ -247,7 +247,7 @@ public partial class GitHubService : IGitHubService
         if (!File.Exists(updaterExePath))
         {
             Logger.Error("Updater not found");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound.Localize());
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound);
             return false;
         }
 
@@ -276,14 +276,14 @@ public partial class GitHubService : IGitHubService
         var current = SemanticVersion.Parse(currentVersion)!;
         if (!userClick) return version == SavingService.Settings.SkipVersion || version <= current;
         if (version > current) return false;
-        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion.Localize());
+        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion);
         return true;
     }
 
     private async Task<bool> UpdateRequired(string version, string title, string body)
     {
         var update = await MessageBoxService.CreateCustomMarkDownConfirmMessageBox(
-            string.Format(MsgBox_Content_NewerVersion.Localize(), version, title, body), 3);
+            string.Format(MsgBox_Content_NewerVersion, version, title, body), 3);
 
         if (update == MsgBox_Button_NoNoAsk)
         {

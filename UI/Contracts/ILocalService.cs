@@ -9,6 +9,7 @@ public interface ILocalService
     Task CheckValidPath();
     Task<string> ReadGameVersion();
     Task CheckMelonLoaderInstall();
+    bool GetPathFromRegistry(out string folderPath);
     Task OnInstallMelonLoader();
     Task OnUninstallMelonLoader();
     Task OpenModsFolder();
