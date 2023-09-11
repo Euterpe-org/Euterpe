@@ -11,6 +11,7 @@ public interface IMessageBoxService
     Task<ButtonResult> CreateWarningMessageBox(string content, Icon icon = Icon.Warning);
     Task<ButtonResult> CreateErrorMessageBox(string title, string content);
     Task<ButtonResult> CreateErrorMessageBox(string content);
+    Task<ButtonResult> CreateErrorMessageBox(string content, Exception ex);
     Task<ButtonResult> CreateAnalyzeSuccessMessageBox(string content);
     Task<bool> CreateConfirmMessageBox(string title, string content);
     Task<bool> CreateConfirmMessageBox(string content);

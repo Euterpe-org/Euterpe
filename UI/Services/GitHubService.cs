@@ -171,14 +171,13 @@ public partial class GitHubService : IGitHubService
             if (ex is HttpRequestException)
             {
                 Logger.Error(ex, "Download MelonLoader.zip failed");
-                await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed_Internet,
-                    ex));
+                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InstallMelonLoaderFailed_Internet, ex);
                 DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                 return false;
             }
 
             Logger.Error(ex, "Download MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_InstallMelonLoaderFailed, ex));
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InstallMelonLoaderFailed, ex);
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }
@@ -227,8 +226,8 @@ public partial class GitHubService : IGitHubService
         }
         catch (Exception ex)
         {
-            Logger.Information("Copy Updater to Update folder failed: {Exception}", ex.ToString());
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_CopyUpdaterFailed, ex));
+            Logger.Information(ex, "Copy Updater to Update folder failed");
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CopyUpdaterFailed, ex);
         }
 
         Process.Start(updaterTargetPath, new[] { link, currentDirectory });

@@ -59,7 +59,7 @@ public class ModService : IModService
         }
         catch (Exception ex)
         {
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_BrokenMods, ex));
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_BrokenMods, ex);
             await LocalService.OpenModsFolder();
             Logger.Fatal(ex, "Load local mods failed");
             Environment.Exit(0);
@@ -89,7 +89,7 @@ public class ModService : IModService
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
             if (_webMods is null) return;
-            var mod = _webMods?.Find(x => x.Name == downloadedMod.Name)!;
+            var mod = _webMods.Find(x => x.Name == downloadedMod.Name)!;
             mod.IsDisabled = downloadedMod.IsDisabled;
             mod.FileName = downloadedMod.FileName;
             mod.LocalVersion = downloadedMod.LocalVersion;
@@ -163,8 +163,7 @@ public class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await MessageBoxService.CreateNoticeMessageBox(
-                string.Format(MsgBox_Content_DuplicateMods, item.DuplicatedModNames));
+            await MessageBoxService.CreateNoticeMessageBox(string.Format(MsgBox_Content_DuplicateMods, item.DuplicatedModNames));
             await LocalService.OpenModsFolder();
             return;
         }
@@ -227,7 +226,7 @@ public class ModService : IModService
         };
 
         Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-        await MessageBoxService.CreateErrorMessageBox(string.Format(errorMsg, ex));
+        await MessageBoxService.CreateErrorMessageBox(errorMsg, ex);
 
         item.IsDisabled = !item.IsDisabled;
     }

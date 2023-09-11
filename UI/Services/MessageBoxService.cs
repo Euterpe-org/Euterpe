@@ -18,49 +18,7 @@ public class MessageBoxService : IMessageBoxService
 {
     public Lazy<ISavingService>? SavingService { get; init; }
 
-    public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.Success)
-    {
-        var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-        var isMainWindow = desktop?.MainWindow is not null;
-        var messageBox = MessageBoxManager
-            .GetMessageBoxStandard(new MessageBoxStandardParams
-            {
-                ContentTitle = title,
-                ContentMessage = content.NormalizeNewline(),
-                ButtonDefinitions = button,
-                Icon = icon,
-                Topmost = true,
-                FontFamily = SavingService.Value.Settings.FontName,
-                WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
-            });
-        return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
-    }
-
-    public async Task<ButtonResult> CreateNoticeMessageBox(string content, Icon icon = Icon.Info) =>
-        await CreateMessageBox(MsgBox_Title_Notice, content, icon: icon);
-
-    public async Task<ButtonResult> CreateSuccessMessageBox(string content, Icon icon = Icon.Success) =>
-        await CreateMessageBox(MsgBox_Title_Success, content, icon: icon);
-
-    public async Task<ButtonResult> CreateWarningMessageBox(string content, Icon icon = Icon.Warning) =>
-        await CreateMessageBox(MsgBox_Title_Warning, content, icon: icon);
-
-    public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) =>
-        await CreateMessageBox(title, content, icon: Icon.Error);
-
-    public async Task<ButtonResult> CreateErrorMessageBox(string content) =>
-        await CreateErrorMessageBox(MsgBox_Title_Failure, content);
-
-    public async Task<ButtonResult> CreateAnalyzeSuccessMessageBox(string content) =>
-        await CreateErrorMessageBox(MsgBox_Title_AnalyzeSuccess, content);
-
-    public async Task<bool> CreateConfirmMessageBox(string title, string content)
-    {
-        var result = await CreateCustomConfirmMessageBox(title, content, 2, Icon.Warning);
-        return result == MsgBox_Button_Yes;
-    }
-
-    public async Task<bool> CreateConfirmMessageBox(string content) => await CreateConfirmMessageBox(MsgBox_Title_Warning, content);
+    #region Custom Message Box
 
     public async Task<string> CreateCustomConfirmMessageBox(string title, string content, int buttonCount, Icon icon = Icon.Info)
     {
@@ -161,4 +119,57 @@ public class MessageBoxService : IMessageBoxService
             });
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
     }
+
+    #endregion
+
+    #region Normal Message Box
+
+    public async Task<ButtonResult> CreateMessageBox(string title, string content, ButtonEnum button = ButtonEnum.Ok, Icon icon = Icon.Success)
+    {
+        var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+        var isMainWindow = desktop?.MainWindow is not null;
+        var messageBox = MessageBoxManager
+            .GetMessageBoxStandard(new MessageBoxStandardParams
+            {
+                ContentTitle = title,
+                ContentMessage = content.NormalizeNewline(),
+                ButtonDefinitions = button,
+                Icon = icon,
+                Topmost = true,
+                FontFamily = SavingService.Value.Settings.FontName,
+                WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
+            });
+        return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
+    }
+
+    public async Task<ButtonResult> CreateSuccessMessageBox(string content, Icon icon = Icon.Success) =>
+        await CreateMessageBox(MsgBox_Title_Success, content, icon: icon);
+
+    public async Task<ButtonResult> CreateNoticeMessageBox(string content, Icon icon = Icon.Info) =>
+        await CreateMessageBox(MsgBox_Title_Notice, content, icon: icon);
+
+    public async Task<ButtonResult> CreateWarningMessageBox(string content, Icon icon = Icon.Warning) =>
+        await CreateMessageBox(MsgBox_Title_Warning, content, icon: icon);
+
+    public async Task<ButtonResult> CreateErrorMessageBox(string title, string content) =>
+        await CreateMessageBox(title, content, icon: Icon.Error);
+
+    public async Task<ButtonResult> CreateErrorMessageBox(string content) =>
+        await CreateErrorMessageBox(MsgBox_Title_Failure, content);
+
+    public async Task<ButtonResult> CreateErrorMessageBox(string content, Exception ex) =>
+        await CreateErrorMessageBox(string.Format(content, ex));
+
+    public async Task<ButtonResult> CreateAnalyzeSuccessMessageBox(string content) =>
+        await CreateMessageBox(MsgBox_Title_AnalyzeSuccess, content, icon: Icon.Error);
+
+    public async Task<bool> CreateConfirmMessageBox(string title, string content)
+    {
+        var result = await CreateCustomConfirmMessageBox(title, content, 2, Icon.Warning);
+        return result == MsgBox_Button_Yes;
+    }
+
+    public async Task<bool> CreateConfirmMessageBox(string content) => await CreateConfirmMessageBox(MsgBox_Title_Warning, content);
+
+    #endregion
 }
