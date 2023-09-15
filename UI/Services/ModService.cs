@@ -89,14 +89,12 @@ public class ModService : IModService
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
             if (_webMods is null) return;
-            var mod = _webMods.Find(x => x.Name == downloadedMod.Name)!;
-            mod.IsDisabled = downloadedMod.IsDisabled;
-            mod.FileName = downloadedMod.FileName;
-            mod.LocalVersion = downloadedMod.LocalVersion;
-            mod.SHA256 = downloadedMod.SHA256;
+            var webMod = _webMods.Find(x => x.Name == downloadedMod.Name)!;
+            downloadedMod.CloneOnlineInfo(webMod);
+            CheckVersionState(webMod, downloadedMod);
 
-            Logger.Information("Install mod {Name} success", mod.Name);
-            _sourceCache?.AddOrUpdate(mod);
+            Logger.Information("Install mod {Name} success", downloadedMod.Name);
+            _sourceCache?.AddOrUpdate(downloadedMod);
         }
         catch (Exception ex)
         {
@@ -127,6 +125,7 @@ public class ModService : IModService
         var reinstall = await MessageBoxService.CreateConfirmMessageBox(string.Format(MsgBox_Content_ReinstallMod, item.Name));
         if (!reinstall) return;
         Logger.Information("Reinstalling mod {Name}", item.Name);
+        File.Delete(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
         await OnInstallMod(item);
     }
 
@@ -185,7 +184,7 @@ public class ModService : IModService
 
             SettingsViewModel.DisableDependenciesWhenDeleting = (int)askType;
             File.Delete(path);
-            var mod = _webMods?.Find(x => x.Name == item.Name)?.SetDefault();
+            var mod = _webMods?.Find(x => x.Name == item.Name)?.RemoveLocalInfo();
             _sourceCache?.AddOrUpdate(mod);
             Logger.Information("Delete mod {Name} success", item.Name);
             await MessageBoxService.CreateSuccessMessageBox(string.Format(MsgBox_Content_UninstallModSuccess, item.Name));
@@ -280,18 +279,23 @@ public class ModService : IModService
             localMod.HomePage = webMod.HomePage;
             localMod.Description = webMod.Description;
 
-            var versionState = SemanticVersion.Parse(webMod.Version!) > SemanticVersion.Parse(localMod.LocalVersion!) ? -1
-                : SemanticVersion.Parse(webMod.Version!) < SemanticVersion.Parse(localMod.LocalVersion!) ? 1 : 0;
-            localMod.State = (UpdateState)versionState;
-            localMod.IsShaMismatched = versionState == 0 && webMod.SHA256 != localMod.SHA256;
-            if (localMod.IsShaMismatched)
-                localMod.State = UpdateState.Modified;
-            localMod.IsIncompatible = !CheckCompatible(localMod);
+            CheckVersionState(webMod, localMod);
             _sourceCache?.AddOrUpdate(localMod);
             Logger?.Information("Mod {Name} loaded to UI", localMod.Name);
         }
 
         CheckDuplicatedMods(isTracked, localMods);
+    }
+
+    private void CheckVersionState(Mod webMod, Mod localMod)
+    {
+        var versionState = SemanticVersion.Parse(webMod.Version!) > SemanticVersion.Parse(localMod.LocalVersion!) ? -1
+            : SemanticVersion.Parse(webMod.Version!) < SemanticVersion.Parse(localMod.LocalVersion!) ? 1 : 0;
+        localMod.State = (UpdateState)versionState;
+        localMod.IsShaMismatched = versionState == 0 && webMod.SHA256 != localMod.SHA256;
+        if (localMod.IsShaMismatched)
+            localMod.State = UpdateState.Modified;
+        localMod.IsIncompatible = !CheckCompatible(localMod);
     }
 
     private void CheckDuplicatedMods(IReadOnlyList<bool> isTracked, IReadOnlyList<Mod> localMods)
