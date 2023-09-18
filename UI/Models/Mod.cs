@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MuseDashModToolsUI.Extensions;
 using Newtonsoft.Json;
-using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Models;
 

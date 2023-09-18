@@ -2,7 +2,6 @@
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
 

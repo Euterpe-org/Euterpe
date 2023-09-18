@@ -6,7 +6,6 @@ using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
 

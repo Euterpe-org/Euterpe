@@ -1,5 +1,4 @@
 using System.IO;
-using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 

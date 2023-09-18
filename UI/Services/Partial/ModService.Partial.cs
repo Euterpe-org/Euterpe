@@ -5,7 +5,6 @@ using System.Text;
 using DynamicData;
 using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
-using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 

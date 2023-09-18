@@ -4,7 +4,6 @@ using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
 

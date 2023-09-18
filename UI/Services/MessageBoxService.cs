@@ -7,7 +7,6 @@ using MsBox.Avalonia.Enums;
 using MsBox.Avalonia.Models;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
