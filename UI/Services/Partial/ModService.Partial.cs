@@ -10,6 +10,11 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class ModService
 {
+    /// <summary>
+    ///     Handle exception when install mod
+    /// </summary>
+    /// <param name="ex"></param>
+    /// <param name="errors"></param>
     private static void HandleInstallModException(Exception ex, StringBuilder errors)
     {
         switch (ex)
@@ -30,6 +35,11 @@ public partial class ModService
         }
     }
 
+    /// <summary>
+    ///     Handle exception when toggle mod
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="ex"></param>
     private async Task HandleToggleModException(Mod item, Exception ex)
     {
         var errorMsg = ex switch
@@ -45,6 +55,11 @@ public partial class ModService
         item.IsDisabled = !item.IsDisabled;
     }
 
+    /// <summary>
+    ///     Handle exception when delete mod
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="ex"></param>
     private async Task HandleDeleteModException(Mod item, Exception ex)
     {
         var errorMsg = string.Format(
@@ -58,6 +73,11 @@ public partial class ModService
 
     #region InitializeModList Private Methods
 
+    /// <summary>
+    ///     Load local mods and show on the UI
+    /// </summary>
+    /// <param name="localMods"></param>
+    /// <param name="webMods"></param>
     private async Task LoadModsToUI(List<Mod> localMods, List<Mod>? webMods)
     {
         var isTracked = new bool[localMods.Count];
@@ -102,6 +122,11 @@ public partial class ModService
         CheckDuplicatedMods(isTracked, localMods);
     }
 
+    /// <summary>
+    ///     Check the mod's version state
+    /// </summary>
+    /// <param name="webMod"></param>
+    /// <param name="localMod"></param>
     private void CheckVersionState(Mod webMod, Mod localMod)
     {
         var versionState = SemanticVersion.Parse(webMod.Version!) > SemanticVersion.Parse(localMod.LocalVersion!) ? -1
@@ -113,6 +138,11 @@ public partial class ModService
         localMod.IsIncompatible = !CheckCompatible(localMod);
     }
 
+    /// <summary>
+    ///     Check duplicated mods
+    /// </summary>
+    /// <param name="isTracked"></param>
+    /// <param name="localMods"></param>
     private void CheckDuplicatedMods(IReadOnlyList<bool> isTracked, IReadOnlyList<Mod> localMods)
     {
         for (var i = 0; i < isTracked.Count; i++)
@@ -133,6 +163,10 @@ public partial class ModService
         }
     }
 
+    /// <summary>
+    ///     Check Mod Tools intall
+    /// </summary>
+    /// <param name="mod"></param>
     private async Task CheckModToolsInstall(Mod mod)
     {
         if (SavingService.Settings.AskInstallMuseDashModTools != AskType.Always) return;
@@ -143,6 +177,11 @@ public partial class ModService
         else if (result == MsgBox_Button_NoNoAsk) SavingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
 
+    /// <summary>
+    ///     Check if the mod is compatible with the current game version
+    /// </summary>
+    /// <param name="mod"></param>
+    /// <returns></returns>
     private bool CheckCompatible(Mod mod) =>
         mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion!.Contains(_currentGameVersion);
 
@@ -150,6 +189,11 @@ public partial class ModService
 
     #region Dependency Private Methods
 
+    /// <summary>
+    ///     Check if the mod's dependencies are installed
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns>StringBuilder of errors</returns>
     private async Task<StringBuilder> CheckDependencyInstall(Mod item)
     {
         var dependencies = SearchDependencies(item.Name!).ToArray();
@@ -162,12 +206,12 @@ public partial class ModService
             {
                 var path = Path.Join(SavingService.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
                 await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
-                var mod = LocalService.LoadMod(path);
-                dependency.IsDisabled = mod!.IsDisabled;
-                dependency.FileName = mod.FileName;
-                dependency.LocalVersion = mod.LocalVersion;
-                dependency.SHA256 = mod.SHA256;
-                Logger.Information("Install dependency {Name} success", mod.Name);
+                var downloadedMod = LocalService.LoadMod(path);
+                dependency.IsDisabled = downloadedMod!.IsDisabled;
+                dependency.FileName = downloadedMod.FileName;
+                dependency.LocalVersion = downloadedMod.LocalVersion;
+                dependency.SHA256 = downloadedMod.SHA256;
+                Logger.Information("Install dependency {Name} success", downloadedMod.Name);
                 _sourceCache!.AddOrUpdate(dependency);
                 await CheckDependencyInstall(dependency);
             }
@@ -183,6 +227,14 @@ public partial class ModService
         return errors;
     }
 
+    /// <summary>
+    ///     Enable Dependencies
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="dependencies"></param>
+    /// <param name="message"></param>
+    /// <param name="askType"></param>
+    /// <returns></returns>
     private async Task<AskType> EnableDependencies(Mod item, IEnumerable<Mod> dependencies, string message, AskType askType)
     {
         var disabledDependencies = dependencies.Where(x => x is { IsLocal: true, IsDisabled: true }).ToArray();
@@ -193,6 +245,13 @@ public partial class ModService
             disabledDependencies, askType, false);
     }
 
+    /// <summary>
+    ///     Disable Reverse Dependencies
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="message"></param>
+    /// <param name="askType"></param>
+    /// <returns></returns>
     private async Task<(bool, AskType)> DisableReverseDependencies(Mod item, string message, AskType askType)
     {
         var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
@@ -210,6 +269,11 @@ public partial class ModService
             enabledReverseDependencies, askType, true));
     }
 
+    /// <summary>
+    ///     Search Dependencies
+    /// </summary>
+    /// <param name="modName"></param>
+    /// <returns></returns>
     private IEnumerable<Mod> SearchDependencies(string modName)
     {
         var dependencyNames = _sourceCache?.Lookup(modName).Value?.DependencyNames.Split("\r\n");
@@ -218,6 +282,11 @@ public partial class ModService
             .Select(x => _sourceCache!.Lookup(x).Value)!;
     }
 
+    /// <summary>
+    ///     Search Reverse Dependencies
+    /// </summary>
+    /// <param name="modName"></param>
+    /// <returns></returns>
     private IEnumerable<Mod?> SearchReverseDependencies(string modName)
     {
         var reverseDependencyNames = _sourceCache?.Items.Where(x => x!.DependencyNames.Split("\r\n").Contains(modName))
@@ -227,6 +296,14 @@ public partial class ModService
         return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x?.Name))!;
     }
 
+    /// <summary>
+    ///     Change dependency states according to ask type
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="dependencies"></param>
+    /// <param name="askType">Saved AskType</param>
+    /// <param name="turnOff"></param>
+    /// <returns></returns>
     private async Task<AskType> ChangeDependenciesState(string content, IEnumerable<Mod?> dependencies, AskType askType, bool turnOff)
     {
         switch (askType)

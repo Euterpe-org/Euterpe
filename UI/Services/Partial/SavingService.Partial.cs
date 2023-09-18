@@ -13,6 +13,9 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class SavingService
 {
+    /// <summary>
+    ///     Automatically find game folder path
+    /// </summary>
     private async Task GetGameFolderPath()
     {
         if (LocalService.Value.GetPathFromRegistry(out var folderPath))
@@ -45,6 +48,11 @@ public partial class SavingService
         _logger.Information("Settings saved to Settings.json");
     }
 
+    /// <summary>
+    ///     Catch null setting and ask user to choose path
+    ///     Set some value to default value if it's null
+    /// </summary>
+    /// <param name="settings"></param>
     private async Task NullSettingCatch(Setting settings)
     {
         if (string.IsNullOrEmpty(settings.MuseDashFolder))
@@ -68,6 +76,10 @@ public partial class SavingService
         }
     }
 
+    /// <summary>
+    ///     Get user's chosen path
+    /// </summary>
+    /// <returns>Chosen path</returns>
     private async Task<string?> GetChosenPath()
     {
         while (true)
@@ -86,12 +98,19 @@ public partial class SavingService
         }
     }
 
+    /// <summary>
+    ///     Load saved setting from Settings.json
+    ///     Delete Updater
+    /// </summary>
     private async Task Load()
     {
         await LoadSavedSetting();
         DeleteUpdater();
     }
 
+    /// <summary>
+    ///     If Settings.json exists, load it
+    /// </summary>
     private async Task LoadSavedSetting()
     {
         if (!_fileSystem.File.Exists(SettingPath)) return;
@@ -112,6 +131,9 @@ public partial class SavingService
         _logger.Information("Saved setting loaded from Settings.json");
     }
 
+    /// <summary>
+    ///     If Updater files exist, delete them
+    /// </summary>
     private void DeleteUpdater()
     {
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");

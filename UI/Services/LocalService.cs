@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using AssetsTools.NET.Extra;
 using DialogHostAvalonia;
 using MelonLoader;
@@ -38,16 +40,7 @@ public partial class LocalService : ILocalService
 
         try
         {
-            if (OperatingSystem.IsWindows())
-            {
-                var version = FileVersionInfo.GetVersionInfo(SavingService.Settings.MuseDashExePath).FileVersion;
-                if (version is not "2019.4.32.16288752")
-                {
-                    Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-                    await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion);
-                }
-            }
-
+            if (OperatingSystem.IsWindows() && !await VerifyGameVersion()) return;
             await CreateFiles();
             IsValidPath = true;
             Logger.Information("Path verified {Path}", SavingService.Settings.MuseDashFolder);
@@ -62,6 +55,30 @@ public partial class LocalService : ILocalService
     public IEnumerable<string> GetModFiles(string path) => Directory.GetFiles(path)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll")
         .ToList();
+
+    public async Task<bool> LaunchUpdater(string link)
+    {
+        var currentDirectory = Directory.GetCurrentDirectory();
+        var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
+        var updaterFilePath = GetUpdaterFilePath(currentDirectory);
+        var updaterTargetPath = GetUpdaterFilePath(updaterTargetFolder);
+
+        if (!await CheckUpdaterFilesExist(updaterFilePath, updaterTargetFolder)) return false;
+
+        try
+        {
+            File.Copy(updaterFilePath, updaterTargetPath, true);
+            Logger.Information("Copy Updater to Update folder success");
+        }
+        catch (Exception ex)
+        {
+            Logger.Information(ex, "Copy Updater to Update folder failed");
+            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CopyUpdaterFailed, ex);
+        }
+
+        Process.Start(updaterTargetPath, new[] { link, currentDirectory });
+        return true;
+    }
 
     public Mod? LoadMod(string filePath)
     {
@@ -87,6 +104,7 @@ public partial class LocalService : ILocalService
         return mod;
     }
 
+    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool GetPathFromRegistry(out string folderPath)
     {
         folderPath = string.Empty;

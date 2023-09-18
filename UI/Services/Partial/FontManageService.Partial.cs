@@ -2,6 +2,9 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class FontManageService
 {
+    /// <summary>
+    ///     Get available fonts
+    /// </summary>
     private void GetAvailableFonts()
     {
         AvailableFonts = _skFontManager.GetFontFamilies().Order().ToList();

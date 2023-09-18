@@ -7,6 +7,9 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class LocalizationService
 {
+    /// <summary>
+    ///     Get all available cultures from the resources
+    /// </summary>
     private void GetAvailableCultures()
     {
         var rm = new ResourceManager(typeof(Resources));

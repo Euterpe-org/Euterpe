@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -11,6 +10,11 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class GitHubService
 {
+    /// <summary>
+    ///     Get Mod list from download source
+    /// </summary>
+    /// <param name="downloadSource"></param>
+    /// <returns>Mod list</returns>
     private async Task<List<Mod>?> GetModListFromSourceAsync(string downloadSource)
     {
         var url = downloadSource + "ModLinks.json";
@@ -27,6 +31,13 @@ public partial class GitHubService
         }
     }
 
+    /// <summary>
+    ///     Download mod from download source
+    /// </summary>
+    /// <param name="downloadSource"></param>
+    /// <param name="link"></param>
+    /// <param name="path">File path</param>
+    /// <returns></returns>
     private async Task<HttpResponseMessage?> DownloadModFromSourceAsync(string downloadSource, string link, string path)
     {
         var url = downloadSource + link;
@@ -45,6 +56,11 @@ public partial class GitHubService
         }
     }
 
+    /// <summary>
+    ///     Download MelonLoader
+    /// </summary>
+    /// <param name="downloadProgress"></param>
+    /// <returns>Success</returns>
     private async Task<bool> DownloadMelonLoaderFromSourceAsync(IProgress<double> downloadProgress)
     {
         try
@@ -83,6 +99,9 @@ public partial class GitHubService
         }
     }
 
+    /// <summary>
+    ///     Get MelonLoader response message
+    /// </summary>
     private async Task GetMelonLoaderResponseMessage()
     {
         await GetMelonLoaderResponseFromSource(DefaultDownloadSource);
@@ -95,6 +114,10 @@ public partial class GitHubService
         }
     }
 
+    /// <summary>
+    ///     Get MelonLoader Response message from download source
+    /// </summary>
+    /// <param name="downloadSource"></param>
     private async Task GetMelonLoaderResponseFromSource(string downloadSource)
     {
         var url = downloadSource + "MelonLoader.zip";
@@ -110,57 +133,13 @@ public partial class GitHubService
         }
     }
 
-    private async Task LaunchUpdater(string link)
-    {
-        var currentDirectory = Directory.GetCurrentDirectory();
-        var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
-        var updaterExePath = GetUpdaterFilePath(currentDirectory);
-        var updaterTargetPath = GetUpdaterFilePath(updaterTargetFolder);
-
-        if (!await CheckUpdaterFilesExist(updaterExePath, updaterTargetFolder)) return;
-
-        try
-        {
-            File.Copy(updaterExePath, updaterTargetPath, true);
-            Logger.Information("Copy Updater to Update folder success");
-        }
-        catch (Exception ex)
-        {
-            Logger.Information(ex, "Copy Updater to Update folder failed");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CopyUpdaterFailed, ex);
-        }
-
-        Process.Start(updaterTargetPath, new[] { link, currentDirectory });
-    }
-
-    private static string GetUpdaterFilePath(string folder)
-    {
-        if (OperatingSystem.IsWindows()) return Path.Combine(folder, "Updater.exe");
-        if (OperatingSystem.IsLinux()) return Path.Combine(folder, "Updater");
-
-        return Path.Combine(folder, "Updater.exe");
-    }
-
-    private async Task<bool> CheckUpdaterFilesExist(string updaterExePath, string updaterTargetFolder)
-    {
-        if (!File.Exists(updaterExePath))
-        {
-            Logger.Error("Updater not found");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound);
-            return false;
-        }
-
-        if (!Directory.Exists(updaterTargetFolder))
-        {
-            Directory.CreateDirectory(updaterTargetFolder);
-            Logger.Information("Create Update target folder success");
-        }
-
-        return true;
-    }
-
     #region CheckUpdates Private Methods
 
+    /// <summary>
+    ///     Get version number from github's tag name
+    /// </summary>
+    /// <param name="tagName"></param>
+    /// <returns>Version</returns>
     private SemanticVersion? GetVersionFromTag(string tagName)
     {
         var tag = VersionRegex().Match(tagName);
@@ -170,15 +149,30 @@ public partial class GitHubService
         return version;
     }
 
+    /// <summary>
+    ///     Skip version check if current version is the saved SkipVersion, newer or equal than latest version
+    ///     If user click the button to manually check updates then show a message box
+    /// </summary>
+    /// <param name="version"></param>
+    /// <param name="currentVersion"></param>
+    /// <param name="userClick"></param>
+    /// <returns>Skip</returns>
     private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool userClick)
     {
-        var current = SemanticVersion.Parse(currentVersion)!;
+        var current = SemanticVersion.Parse(currentVersion);
         if (!userClick) return version == SavingService.Settings.SkipVersion || version <= current;
         if (version > current) return false;
         await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion);
         return true;
     }
 
+    /// <summary>
+    ///     Show message box to ask user if they want to update
+    /// </summary>
+    /// <param name="version"></param>
+    /// <param name="title"></param>
+    /// <param name="body"></param>
+    /// <returns>Update</returns>
     private async Task<bool> UpdateRequired(string version, string title, string body)
     {
         var update = await MessageBoxService.CreateCustomMarkDownConfirmMessageBox(
@@ -193,6 +187,11 @@ public partial class GitHubService
         return update != MsgBox_Button_No && !string.IsNullOrEmpty(update);
     }
 
+    /// <summary>
+    ///     Get download link on different platform
+    /// </summary>
+    /// <param name="assets"></param>
+    /// <returns>Download link</returns>
     private string GetDownloadLink(List<GitHubReleaseAsset> assets)
     {
         var osString = OperatingSystem.IsWindows() ? "Windows" : "Linux";

@@ -4,6 +4,19 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class LogAnalyzeService
 {
+    /// <summary>
+    ///     Check whether the user has registered HQ or not
+    /// </summary>
+    private void CheckHeadQuarterRegister()
+    {
+        if (!HeadQuarterRegisterRegex().Match(LogContent).Success) return;
+        Logger.Information("Didn't register HQ, showing message box");
+        LogErrorBuilder.AppendLine(MsgBox_Content_RegisterHQ);
+    }
+
+    /// <summary>
+    ///     Check whether the mod is outdated or not
+    /// </summary>
     private void CheckModVersion()
     {
         var modVersionMatches = ModVersionRegex().Matches(LogContent);
@@ -21,13 +34,9 @@ public partial class LogAnalyzeService
         }
     }
 
-    private void CheckHeadQuarterRegister()
-    {
-        if (!HeadQuarterRegisterRegex().Match(LogContent).Success) return;
-        Logger.Information("Didn't register HQ, showing message box");
-        LogErrorBuilder.AppendLine(MsgBox_Content_RegisterHQ);
-    }
-
+    /// <summary>
+    ///     Start log file monitor
+    /// </summary>
     private void StartLogFileMonitor()
     {
         _watcher.Path = SavingService.Settings.MelonLoaderFolder;

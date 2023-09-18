@@ -15,5 +15,6 @@ public partial class UpdateTextService : IUpdateTextService
     {
         ChangeTabName();
         ChangeOptionName();
+        RecoverOption();
     }
 }
