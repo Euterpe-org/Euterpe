@@ -7,7 +7,7 @@ using SkiaSharp;
 
 namespace MuseDashModToolsUI.Services;
 
-public class FontManageService : IFontManageService, INotifyPropertyChanged
+public partial class FontManageService : IFontManageService, INotifyPropertyChanged
 {
     private static readonly SKFontManager _skFontManager = SKFontManager.Default;
     private readonly ILogger _logger;
@@ -34,10 +34,4 @@ public class FontManageService : IFontManageService, INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void GetAvailableFonts()
-    {
-        AvailableFonts = _skFontManager.GetFontFamilies().Order().ToList();
-        _logger.Information("Available fonts loaded: {InstalledFonts}", string.Join(",", AvailableFonts));
-    }
 }

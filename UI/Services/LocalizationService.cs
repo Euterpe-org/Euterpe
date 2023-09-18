@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
-using System.Resources;
 using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Localization;
 using MuseDashModToolsUI.Models;
 using static MuseDashModToolsUI.Localization.Resources;
 
@@ -10,7 +8,7 @@ using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
-public class LocalizationService : ILocalizationService, INotifyPropertyChanged
+public partial class LocalizationService : ILocalizationService, INotifyPropertyChanged
 {
     private readonly ILogger _logger;
     public ISavingService SavingService { get; init; }
@@ -23,7 +21,7 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
     }
 
     public string this[string resourceKey] =>
-        Resources.ResourceManager.GetString(resourceKey, Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
+        ResourceManager.GetString(resourceKey, Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
 
     public List<Language> AvailableLanguages { get; } = new();
 
@@ -39,27 +37,4 @@ public class LocalizationService : ILocalizationService, INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void GetAvailableCultures()
-    {
-        var rm = new ResourceManager(typeof(Resources));
-        var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
-        var defaultCulture = CultureInfo.GetCultureInfo("en");
-
-        foreach (var culture in cultures)
-        {
-            if (culture.Equals(CultureInfo.InvariantCulture))
-            {
-                AvailableLanguages.Add(new Language(defaultCulture));
-                continue;
-            }
-
-            var rs = rm.GetResourceSet(culture, true, false);
-            if (rs != null)
-                AvailableLanguages.Add(new Language(culture));
-        }
-
-        _logger.Information("Available languages loaded: {AvailableLanguages}",
-            string.Join(", ", AvailableLanguages.Select(x => x.Name)));
-    }
 }
