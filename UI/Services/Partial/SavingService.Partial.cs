@@ -14,22 +14,28 @@ namespace MuseDashModToolsUI.Services;
 public partial class SavingService
 {
     /// <summary>
-    ///     Automatically find game folder path
+    ///     Try automatically find game folder path
     /// </summary>
-    private async Task GetGameFolderPath()
+    private async Task TryGetGameFolderPath()
     {
-        if (LocalService.Value.GetPathFromRegistry(out var folderPath))
-        {
-            if (!await MessageBoxService.NoticeConfirmMessageBox(MsgBox_Title_Notice,
-                    string.Format(MsgBox_Content_InstallPathConfirm, folderPath)))
-            {
-                await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
-                await OnChoosePath();
-                return;
-            }
+        if (OperatingSystem.IsWindows() && LocalService.Value.GetPathOnWindows(out var folderPath)) await ConfirmPath(folderPath!);
+        else if (OperatingSystem.IsLinux() && LocalService.Value.GetPathOnLinux(out folderPath)) await ConfirmPath(folderPath!);
+    }
 
-            await WriteSettings(folderPath);
+    /// <summary>
+    ///     Let user confirm game path and write setting
+    /// </summary>
+    /// <param name="folderPath"></param>
+    private async Task ConfirmPath(string folderPath)
+    {
+        if (!await MessageBoxService.NoticeConfirmMessageBox(MsgBox_Title_Notice, string.Format(MsgBox_Content_InstallPathConfirm, folderPath)))
+        {
+            await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
+            await OnChoosePath();
+            return;
         }
+
+        await WriteSettings(folderPath);
     }
 
     /// <summary>

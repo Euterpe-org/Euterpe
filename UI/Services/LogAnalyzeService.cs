@@ -2,6 +2,7 @@
 using System.Text;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
+using MuseDashModToolsUI.Extensions;
 using MuseDashModToolsUI.Models;
 using ValveKeyValue;
 
@@ -112,7 +113,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     {
         if (!string.IsNullOrEmpty(SavingService.Settings.MelonLoaderFolder))
             LogPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");
-        if (!File.Exists(LogPath)) return MsgBox_Content_NoLogFile;
+        if (!File.Exists(LogPath)) return MsgBox_Content_NoLogFile.NormalizeNewline();
 
         try
         {

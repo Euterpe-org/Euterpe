@@ -2,11 +2,22 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using Microsoft.Win32;
 
 namespace MuseDashModToolsUI.Services;
 
 public partial class LocalService
 {
+    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
+    private static bool GetPathFromRegistry(out string folderPath)
+    {
+        folderPath = string.Empty;
+        if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null) is not string steamPath)
+            return false;
+        folderPath = Path.Combine(steamPath, "steamapps", "common", "Muse Dash");
+        return Directory.Exists(folderPath);
+    }
+
     /// <summary>
     ///     Verify game exe version
     /// </summary>

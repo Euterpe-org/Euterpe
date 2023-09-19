@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -6,7 +7,6 @@ using System.Runtime.Versioning;
 using AssetsTools.NET.Extra;
 using DialogHostAvalonia;
 using MelonLoader;
-using Microsoft.Win32;
 using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Models;
@@ -17,6 +17,26 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class LocalService : ILocalService
 {
+    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
+    private static readonly ImmutableList<string> WindowsPaths = new List<string>
+        {
+            @"Program Files\Steam\steamapps\common\Muse Dash",
+            @"Program Files (x86)\Steam\steamapps\common\Muse Dash",
+            @"Program Files\SteamLibrary\steamapps\common\Muse Dash",
+            @"Program Files (x86)\SteamLibrary\steamapps\common\Muse Dash",
+            @"Steam/steamapps\common\Muse Dash",
+            @"SteamLibrary\steamapps\common\Muse Dash"
+        }
+        .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToImmutableList();
+
+    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
+    private static readonly ImmutableList<string> LinuxPaths = new List<string>
+        {
+            ".local/share/Steam/steamapps/common/Muse Dash",
+            ".steam/steam/steamapps/common/Muse Dash"
+        }
+        .ToImmutableList();
+
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
@@ -104,15 +124,18 @@ public partial class LocalService : ILocalService
         return mod;
     }
 
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public bool GetPathFromRegistry(out string folderPath)
+    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
+    public bool GetPathOnLinux(out string? folderPath)
     {
-        folderPath = string.Empty;
-        if (!OperatingSystem.IsWindows()) return false;
-        if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null) is not string steamPath)
-            return false;
-        folderPath = Path.Combine(steamPath, "steamapps", "common", "Muse Dash");
-        return Directory.Exists(folderPath);
+        folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
+        return folderPath is not null;
+    }
+
+    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
+    public bool GetPathOnWindows(out string? folderPath)
+    {
+        folderPath = WindowsPaths.FirstOrDefault(Directory.Exists);
+        return folderPath is not null || GetPathFromRegistry(out folderPath);
     }
 
     public async Task OnInstallMelonLoader()

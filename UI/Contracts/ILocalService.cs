@@ -1,4 +1,6 @@
-﻿using MuseDashModToolsUI.Models;
+﻿using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Contracts;
 
@@ -21,12 +23,11 @@ public interface ILocalService
     /// <returns>Mod dll paths</returns>
     IEnumerable<string> GetModFiles(string path);
 
-    /// <summary>
-    ///     Get game path from registry
-    /// </summary>
-    /// <param name="folderPath">Game folder path</param>
-    /// <returns>Success</returns>
-    bool GetPathFromRegistry(out string folderPath);
+    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
+    bool GetPathOnLinux(out string? folderPath);
+
+    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
+    bool GetPathOnWindows(out string? folderPath);
 
     /// <summary>
     ///     Launch Updater

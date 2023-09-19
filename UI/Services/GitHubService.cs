@@ -28,10 +28,10 @@ public partial class GitHubService : IGitHubService
     };
 
     public HttpClient Client { get; init; }
-    public ILocalService LocalService { get; init; }
     public ILogger Logger { get; init; }
     public IMessageBoxService MessageBoxService { get; init; }
     public ISavingService SavingService { get; init; }
+    public Lazy<ILocalService> LocalService { get; init; }
 
     public async Task CheckUpdates(bool userClick = false)
     {
@@ -54,7 +54,7 @@ public partial class GitHubService : IGitHubService
             if (!await UpdateRequired(release.TagName, title, body)) return;
 
             var link = GetDownloadLink(release.Assets);
-            if (!await LocalService.LaunchUpdater(link)) return;
+            if (!await LocalService.Value.LaunchUpdater(link)) return;
             Logger.Information("Launch updater success, exit...");
             Environment.Exit(0);
         }

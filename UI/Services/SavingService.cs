@@ -49,7 +49,7 @@ public partial class SavingService : ISavingService
             if (!_fileSystem.File.Exists(SettingPath))
             {
                 _logger.Error("Settings.json not found, creating new one");
-                await GetGameFolderPath();
+                await TryGetGameFolderPath();
             }
 
             var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
@@ -58,6 +58,7 @@ public partial class SavingService : ISavingService
 
             Settings = settings.Clone();
             await LocalService.Value.CheckValidPath();
+            LogAnalysisViewModel.Value.Initialize();
         }
         catch (Exception ex)
         {
