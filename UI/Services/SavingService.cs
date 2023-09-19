@@ -62,7 +62,7 @@ public partial class SavingService : ISavingService
         catch (Exception ex)
         {
             _logger.Error(ex, "Error occurred while initializing settings");
-            await MessageBoxService.CreateErrorMessageBox(ex.ToString());
+            await MessageBoxService.ErrorMessageBox(ex.ToString());
         }
     }
 

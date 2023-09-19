@@ -61,7 +61,7 @@ public partial class GitHubService : IGitHubService
         catch (Exception ex)
         {
             Logger.Error(ex, "Check updates failed");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CheckUpdateFailed);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_CheckUpdateFailed);
         }
     }
 
@@ -102,7 +102,7 @@ public partial class GitHubService : IGitHubService
             if (mods is not null) return mods;
         }
 
-        await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_GetModListFailed);
+        await MessageBoxService.ErrorMessageBox(MsgBox_Content_GetModListFailed);
         return null;
     }
 }

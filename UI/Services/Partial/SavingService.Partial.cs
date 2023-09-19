@@ -20,10 +20,10 @@ public partial class SavingService
     {
         if (LocalService.Value.GetPathFromRegistry(out var folderPath))
         {
-            if (!await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice,
+            if (!await MessageBoxService.NoticeConfirmMessageBox(MsgBox_Title_Notice,
                     string.Format(MsgBox_Content_InstallPathConfirm, folderPath)))
             {
-                await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_ChoosePath);
+                await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
                 await OnChoosePath();
                 return;
             }
@@ -58,7 +58,7 @@ public partial class SavingService
         if (string.IsNullOrEmpty(settings.MuseDashFolder))
         {
             _logger.Error("Settings.json stored path is empty, asking user to choose path");
-            await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath);
+            await MessageBoxService.WarningMessageBox(MsgBox_Content_NullPath);
             await OnChoosePath();
             settings.MuseDashFolder = Settings.MuseDashFolder;
         }
@@ -94,7 +94,7 @@ public partial class SavingService
             if (!string.IsNullOrEmpty(Settings.MuseDashFolder)) return Settings.MuseDashFolder;
 
             _logger.Error("Invalid path, showing error message box");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_InvalidPath);
         }
     }
 

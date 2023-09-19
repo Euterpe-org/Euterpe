@@ -60,7 +60,7 @@ public partial class GitHubService
     ///     Download MelonLoader
     /// </summary>
     /// <param name="downloadProgress"></param>
-    /// <returns>Success</returns>
+    /// <returns>Is success</returns>
     private async Task<bool> DownloadMelonLoaderFromSourceAsync(IProgress<double> downloadProgress)
     {
         try
@@ -87,13 +87,13 @@ public partial class GitHubService
             if (ex is HttpRequestException)
             {
                 Logger.Error(ex, "Download MelonLoader.zip failed");
-                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InstallMelonLoaderFailed_Internet, ex);
+                await MessageBoxService.ErrorMessageBox(MsgBox_Content_InstallMelonLoaderFailed_Internet, ex);
                 DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
                 return false;
             }
 
             Logger.Error(ex, "Download MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InstallMelonLoaderFailed, ex);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_InstallMelonLoaderFailed, ex);
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }
@@ -156,13 +156,13 @@ public partial class GitHubService
     /// <param name="version"></param>
     /// <param name="currentVersion"></param>
     /// <param name="userClick"></param>
-    /// <returns>Skip</returns>
+    /// <returns>Is skip</returns>
     private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool userClick)
     {
         var current = SemanticVersion.Parse(currentVersion);
         if (!userClick) return version == SavingService.Settings.SkipVersion || version <= current;
         if (version > current) return false;
-        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LatestVersion);
+        await MessageBoxService.SuccessMessageBox(MsgBox_Content_LatestVersion);
         return true;
     }
 
@@ -172,10 +172,10 @@ public partial class GitHubService
     /// <param name="version"></param>
     /// <param name="title"></param>
     /// <param name="body"></param>
-    /// <returns>Update</returns>
+    /// <returns>Is update</returns>
     private async Task<bool> UpdateRequired(string version, string title, string body)
     {
-        var update = await MessageBoxService.CreateCustomMarkDownConfirmMessageBox(
+        var update = await MessageBoxService.CustomMarkDownConfirmMessageBox(
             string.Format(MsgBox_Content_NewerVersion, version, title, body), 3);
 
         if (update == MsgBox_Button_NoNoAsk)

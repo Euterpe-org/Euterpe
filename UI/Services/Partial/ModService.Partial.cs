@@ -50,7 +50,7 @@ public partial class ModService
         };
 
         Logger.Error(ex, "Change mod {Name} state failed", item.Name);
-        await MessageBoxService.CreateErrorMessageBox(errorMsg, ex);
+        await MessageBoxService.ErrorMessageBox(errorMsg, ex);
 
         item.IsDisabled = !item.IsDisabled;
     }
@@ -68,7 +68,7 @@ public partial class ModService
                 : MsgBox_Content_UninstallModFailed, ex);
 
         Logger.Error(ex, "Delete mod {Name} failed", item.Name);
-        await MessageBoxService.CreateErrorMessageBox(errorMsg);
+        await MessageBoxService.ErrorMessageBox(errorMsg);
     }
 
     #region InitializeModList Private Methods
@@ -164,7 +164,7 @@ public partial class ModService
     }
 
     /// <summary>
-    ///     Check Mod Tools intall
+    ///     Check Mod Tools install
     /// </summary>
     /// <param name="mod"></param>
     private async Task CheckModToolsInstall(Mod mod)
@@ -172,7 +172,7 @@ public partial class ModService
         if (SavingService.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
         var result =
-            await MessageBoxService.CreateCustomConfirmMessageBox(MsgBox_Content_InstallModTools, 3);
+            await MessageBoxService.CustomConfirmMessageBox(MsgBox_Content_InstallModTools, 3);
         if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
         else if (result == MsgBox_Button_NoNoAsk) SavingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
@@ -193,7 +193,7 @@ public partial class ModService
     ///     Check if the mod's dependencies are installed
     /// </summary>
     /// <param name="item"></param>
-    /// <returns>StringBuilder of errors</returns>
+    /// <returns>StringBuilder for errors</returns>
     private async Task<StringBuilder> CheckDependencyInstall(Mod item)
     {
         var dependencies = SearchDependencies(item.Name!).ToArray();
@@ -258,7 +258,7 @@ public partial class ModService
         if (enabledReverseDependencies.Length == 0) return (true, askType);
         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
 
-        var result = await MessageBoxService.CreateConfirmMessageBox(string.Format(message, item.Name, enabledReverseDependencyNames));
+        var result = await MessageBoxService.WarningConfirmMessageBox(string.Format(message, item.Name, enabledReverseDependencyNames));
         if (!result)
         {
             item.IsDisabled = result;
@@ -270,10 +270,10 @@ public partial class ModService
     }
 
     /// <summary>
-    ///     Search Dependencies
+    ///     Search dependencies
     /// </summary>
     /// <param name="modName"></param>
-    /// <returns></returns>
+    /// <returns>Dependencies</returns>
     private IEnumerable<Mod> SearchDependencies(string modName)
     {
         var dependencyNames = _sourceCache?.Lookup(modName).Value?.DependencyNames.Split("\r\n");
@@ -283,10 +283,10 @@ public partial class ModService
     }
 
     /// <summary>
-    ///     Search Reverse Dependencies
+    ///     Search reverse dependencies
     /// </summary>
     /// <param name="modName"></param>
-    /// <returns></returns>
+    /// <returns>Reverse dependencies</returns>
     private IEnumerable<Mod?> SearchReverseDependencies(string modName)
     {
         var reverseDependencyNames = _sourceCache?.Items.Where(x => x!.DependencyNames.Split("\r\n").Contains(modName))
@@ -309,7 +309,7 @@ public partial class ModService
         switch (askType)
         {
             case AskType.Always:
-                var askResult = await MessageBoxService.CreateCustomConfirmMessageBox(content, 4);
+                var askResult = await MessageBoxService.CustomConfirmMessageBox(content, 4);
                 if (askResult == MsgBox_Button_Yes)
                 {
                     await ChangeState(dependencies, turnOff);

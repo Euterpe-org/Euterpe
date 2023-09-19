@@ -7,11 +7,11 @@ namespace MuseDashModToolsUI.Contracts;
 public interface IModService
 {
     /// <summary>
-    ///     Compare pass in mod version with web mod
+    ///     Compare the pass in mod version with web mod version
     /// </summary>
     /// <param name="modName"></param>
     /// <param name="modVersion"></param>
-    /// <returns>OutDated</returns>
+    /// <returns>Is outdated</returns>
     bool CompareVersion(string modName, string modVersion);
 
     /// <summary>

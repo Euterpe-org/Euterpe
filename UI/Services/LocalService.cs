@@ -28,7 +28,7 @@ public partial class LocalService : ILocalService
         var melonLoaderFolder = Path.Join(SavingService.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(SavingService.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
-        var install = await MessageBoxService.CreateConfirmMessageBox(MsgBox_Title_Notice, MsgBox_Content_InstallMelonLoader);
+        var install = await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_InstallMelonLoader);
         if (install)
             await OnInstallMelonLoader();
     }
@@ -48,7 +48,7 @@ public partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.Error(ex, "Exe verify failed, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ExeVerifyFailed);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ExeVerifyFailed);
         }
     }
 
@@ -73,7 +73,7 @@ public partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.Information(ex, "Copy Updater to Update folder failed");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_CopyUpdaterFailed, ex);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_CopyUpdaterFailed, ex);
         }
 
         Process.Start(updaterTargetPath, new[] { link, currentDirectory });
@@ -126,7 +126,7 @@ public partial class LocalService : ILocalService
     public async Task OnUninstallMelonLoader()
     {
         if (!IsValidPath) return;
-        if (!await MessageBoxService.CreateConfirmMessageBox(MsgBox_Content_UninstallMelonLoader)) return;
+        if (!await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_UninstallMelonLoader)) return;
         var versionFile = Path.Join(SavingService.Settings.MuseDashFolder, "version.dll");
         var noticeTxt = Path.Join(SavingService.Settings.MuseDashFolder, "NOTICE.txt");
 
@@ -138,18 +138,18 @@ public partial class LocalService : ILocalService
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
                 Logger.Information("MelonLoader uninstalled successfully");
-                await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_UninstallMelonLoaderSuccess);
+                await MessageBoxService.SuccessMessageBox(MsgBox_Content_UninstallMelonLoaderSuccess);
             }
             catch (Exception ex)
             {
                 Logger.Error(ex, "MelonLoader uninstall failed, showing error message box...");
-                await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed);
+                await MessageBoxService.ErrorMessageBox(MsgBox_Content_UninstallMelonLoaderFailed);
             }
         }
         else
         {
             Logger.Error("MelonLoader folder not found, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoMelonLoaderFolder);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoMelonLoaderFolder);
         }
     }
 
@@ -158,7 +158,7 @@ public partial class LocalService : ILocalService
         if (!IsValidPath)
         {
             Logger.Error("Not valid path, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             await SavingService.OnChoosePath();
             return;
         }
@@ -176,7 +176,7 @@ public partial class LocalService : ILocalService
         if (!IsValidPath)
         {
             Logger.Error("Not valid path, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             await SavingService.OnChoosePath();
             return;
         }
@@ -194,7 +194,7 @@ public partial class LocalService : ILocalService
         if (!IsValidPath)
         {
             Logger.Error("Not valid path, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             await SavingService.OnChoosePath();
             return;
         }
@@ -226,7 +226,7 @@ public partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.Fatal(ex, "Read game version failed, showing error message box...");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed, bundlePath));
+            await MessageBoxService.ErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed, bundlePath));
             Environment.Exit(0);
         }
 

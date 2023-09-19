@@ -56,7 +56,7 @@ public partial class ModService : IModService
         }
         catch (Exception ex)
         {
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_BrokenMods, ex);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_BrokenMods, ex);
             await LocalService.OpenModsFolder();
             Logger.Fatal(ex, "Load local mods failed");
             Environment.Exit(0);
@@ -71,7 +71,7 @@ public partial class ModService : IModService
         if (item.DownloadLink is null)
         {
             Logger.Error("Download link is null");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoDownloadLink);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoDownloadLink);
             return;
         }
 
@@ -103,11 +103,11 @@ public partial class ModService : IModService
         if (errors.Length > 0)
         {
             Logger.Error("Install mod {Name} failed: {Errors}", item.Name, errors.ToString());
-            await MessageBoxService.CreateErrorMessageBox(errors.ToString());
+            await MessageBoxService.ErrorMessageBox(errors.ToString());
             return;
         }
 
-        await MessageBoxService.CreateSuccessMessageBox(string.Format(MsgBox_Content_InstallModSuccess, item.Name));
+        await MessageBoxService.SuccessMessageBox(string.Format(MsgBox_Content_InstallModSuccess, item.Name));
     }
 
     public async Task OnReinstallMod(Mod item)
@@ -119,7 +119,7 @@ public partial class ModService : IModService
             return;
         }
 
-        var reinstall = await MessageBoxService.CreateConfirmMessageBox(string.Format(MsgBox_Content_ReinstallMod, item.Name));
+        var reinstall = await MessageBoxService.WarningConfirmMessageBox(string.Format(MsgBox_Content_ReinstallMod, item.Name));
         if (!reinstall) return;
         Logger.Information("Reinstalling mod {Name}", item.Name);
         File.Delete(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
@@ -159,7 +159,7 @@ public partial class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await MessageBoxService.CreateNoticeMessageBox(string.Format(MsgBox_Content_DuplicateMods, item.DuplicatedModNames));
+            await MessageBoxService.NoticeMessageBox(string.Format(MsgBox_Content_DuplicateMods, item.DuplicatedModNames));
             await LocalService.OpenModsFolder();
             return;
         }
@@ -168,7 +168,7 @@ public partial class ModService : IModService
         if (!File.Exists(path))
         {
             Logger.Error("Delete mod {Name} failed: File not found", item.Name);
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UninstallModFailed_Null);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_UninstallModFailed_Null);
             return;
         }
 
@@ -184,7 +184,7 @@ public partial class ModService : IModService
             var mod = _webMods?.Find(x => x.Name == item.Name)?.RemoveLocalInfo();
             _sourceCache?.AddOrUpdate(mod);
             Logger.Information("Delete mod {Name} success", item.Name);
-            await MessageBoxService.CreateSuccessMessageBox(string.Format(MsgBox_Content_UninstallModSuccess, item.Name));
+            await MessageBoxService.SuccessMessageBox(string.Format(MsgBox_Content_UninstallModSuccess, item.Name));
         }
         catch (Exception ex)
         {

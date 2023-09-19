@@ -23,13 +23,13 @@ public interface IGitHubService
     ///     Download MelonLoader
     /// </summary>
     /// <param name="downloadProgress"></param>
-    /// <returns>Success</returns>
+    /// <returns>Is success</returns>
     Task<bool> DownloadMelonLoader(IProgress<double> downloadProgress);
 
     /// <summary>
     ///     Get MelonLoader File Size
     /// </summary>
-    /// <returns>Success</returns>
+    /// <returns>File size</returns>
     Task<long?> GetMelonLoaderFileSize();
 
     /// <summary>

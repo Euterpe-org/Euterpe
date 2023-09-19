@@ -27,12 +27,12 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         CheckHeadQuarterRegister();
         if (LogErrorBuilder.Length > 0)
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(LogErrorBuilder.ToString());
+            await MessageBoxService.AnalyzeSuccessMessageBox(LogErrorBuilder.ToString());
             LogErrorBuilder.Clear();
         }
         else
         {
-            await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LogAnalyzeComplete);
+            await MessageBoxService.SuccessMessageBox(MsgBox_Content_LogAnalyzeComplete);
             Logger.Information("Log Analysis Completed");
         }
     }
@@ -41,7 +41,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     {
         if (!LogContent.Contains("ApplicationPath"))
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoApplicationPath);
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoApplicationPath);
             return true;
         }
 
@@ -49,7 +49,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         if (!pathMatch.Success)
         {
             Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash\musedash.exe'");
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_GamePathError);
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_GamePathError);
             return true;
         }
 
@@ -58,7 +58,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
         if (!File.Exists(acfPath))
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord);
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord);
             Logger.Information("Cannot find appmanifest_774171.acf");
             return true;
         }
@@ -69,7 +69,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
         if (data.Appid != 774171 || data.Name != "Muse Dash" || data.InstalledDepots.Keys.All(x => x != 774172))
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord);
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord);
             Logger.Information("Cannot find Muse Dash download record in file");
             return true;
         }
@@ -80,7 +80,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
             return false;
         }
 
-        await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoDlcPurchased);
+        await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoDlcPurchased);
         Logger.Information("Cannot find Muse Dash DLC purchase record in file");
         return false;
     }
@@ -90,7 +90,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         var version = MelonLoaderVersionRegex().Match(LogContent);
         if (!version.Success)
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoMelonLoaderVersion);
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoMelonLoaderVersion);
             Logger.Information("MelonLoader Version not found");
             return false;
         }
@@ -103,7 +103,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         }
 
         Logger.Information("Incorrect MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
-        await MessageBoxService.CreateAnalyzeSuccessMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion,
+        await MessageBoxService.AnalyzeSuccessMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion,
             melonLoaderVersion));
         return false;
     }

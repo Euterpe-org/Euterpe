@@ -10,13 +10,13 @@ public interface ILogAnalyzeService
     /// <summary>
     ///     Check whether the game is pirated
     /// </summary>
-    /// <returns>Pirate</returns>
+    /// <returns>Is pirate</returns>
     Task<bool> CheckPirate();
 
     /// <summary>
     ///     Check if MelonLoader version is correct
     /// </summary>
-    /// <returns>Correct Version</returns>
+    /// <returns>Is correct version</returns>
     Task<bool> CheckMelonLoaderVersion();
 
     /// <summary>

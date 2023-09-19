@@ -10,13 +10,14 @@ public partial class LocalService
     /// <summary>
     ///     Verify game exe version
     /// </summary>
+    /// <returns>Is correct version</returns>
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     private async Task<bool> VerifyGameVersion()
     {
         var version = FileVersionInfo.GetVersionInfo(SavingService.Settings.MuseDashExePath).FileVersion;
         if (version is "2019.4.32.16288752") return true;
         Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-        await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_IncorrectVersion);
+        await MessageBoxService.ErrorMessageBox(MsgBox_Content_IncorrectVersion);
         return false;
     }
 
@@ -32,7 +33,7 @@ public partial class LocalService
         if (!File.Exists(SavingService.Settings.MuseDashExePath) || !File.Exists(gameAssemblyPath))
         {
             Logger.Error("No game files found in {Path}, showing error message box...", SavingService.Settings.MuseDashFolder);
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_NoExeFound);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoExeFound);
             await SavingService.OnChoosePath();
             await CheckGameFileExist();
         }
@@ -67,10 +68,10 @@ public partial class LocalService
     #region LaunchUpdater Private Methods
 
     /// <summary>
-    ///     Get Updater File Path
+    ///     Get Updater file path
     /// </summary>
     /// <param name="folder">Created Updater folder path</param>
-    /// <returns></returns>
+    /// <returns>Updater file path</returns>
     private static string GetUpdaterFilePath(string folder)
     {
         if (OperatingSystem.IsWindows()) return Path.Combine(folder, "Updater.exe");
@@ -84,13 +85,13 @@ public partial class LocalService
     /// </summary>
     /// <param name="updaterFilePath"></param>
     /// <param name="updaterTargetFolder"></param>
-    /// <returns></returns>
+    /// <returns>Is exist</returns>
     private async Task<bool> CheckUpdaterFilesExist(string updaterFilePath, string updaterTargetFolder)
     {
         if (!File.Exists(updaterFilePath))
         {
             Logger.Error("Updater not found");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_UpdaterNotFound);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_UpdaterNotFound);
             return false;
         }
 
