@@ -101,10 +101,59 @@ public interface IMessageBoxService
     /// <returns></returns>
     Task<bool> WarningConfirmMessageBox(string content);
 
+    /// <summary>
+    ///     Create custom message box with title, content, button definitions and icon
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="content"></param>
+    /// <param name="buttonDefinitions"></param>
+    /// <param name="icon"></param>
+    /// <returns></returns>
     Task<string> CustomMessageBox(string title, string content, IEnumerable<ButtonDefinition> buttonDefinitions, Icon icon);
+
+    /// <summary>
+    ///     Create custom confirm message box with title, content, button and icon
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="content"></param>
+    /// <param name="buttonCount"></param>
+    /// <param name="icon"></param>
+    /// <returns></returns>
     Task<string> CustomConfirmMessageBox(string title, string content, int buttonCount, Icon icon = Icon.Info);
+
+    /// <summary>
+    ///     Create custom confirm message box with Notice title, content, button and Info icon
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="buttonCount"></param>
+    /// <returns></returns>
     Task<string> CustomConfirmMessageBox(string content, int buttonCount);
+
+    /// <summary>
+    ///     Create custom markdown message box with title, content, button definitions and icon
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="content"></param>
+    /// <param name="buttonDefinitions"></param>
+    /// <param name="icon"></param>
+    /// <returns></returns>
     Task<string> CustomMarkDownMessageBox(string title, string content, IEnumerable<ButtonDefinition> buttonDefinitions, Icon icon);
+
+    /// <summary>
+    ///     Create custom markdown confirm message box with title, content, button and Info icon
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="content"></param>
+    /// <param name="buttonCount"></param>
+    /// <param name="icon"></param>
+    /// <returns></returns>
     Task<string> CustomMarkDownConfirmMessageBox(string title, string content, int buttonCount, Icon icon = Icon.Info);
+
+    /// <summary>
+    ///     Create custom markdown confirm message box with Notice title, content, button and Info icon
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="buttonCount"></param>
+    /// <returns></returns>
     Task<string> CustomMarkDownConfirmMessageBox(string content, int buttonCount);
 }

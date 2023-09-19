@@ -19,45 +19,6 @@ public partial class MessageBoxService : IMessageBoxService
 
     #region Custom Message Box
 
-    public async Task<string> CustomConfirmMessageBox(string title, string content, int buttonCount, Icon icon = Icon.Info)
-    {
-        var buttonDefinitions = GetButtonDefinition(buttonCount);
-        return await CustomMessageBox(title, content, buttonDefinitions, icon);
-    }
-
-    public async Task<string> CustomConfirmMessageBox(string content, int buttonCount) =>
-        await CustomConfirmMessageBox(MsgBox_Title_Notice, content, buttonCount);
-
-    public async Task<string> CustomMarkDownConfirmMessageBox(string title, string content, int buttonCount, Icon icon = Icon.Info)
-    {
-        var buttonDefinitions = buttonCount switch
-        {
-            3 => new[]
-            {
-                new ButtonDefinition { Name = MsgBox_Button_Yes, IsDefault = true },
-                new ButtonDefinition { Name = MsgBox_Button_No, IsCancel = true },
-                new ButtonDefinition { Name = MsgBox_Button_NoNoAsk, IsCancel = true }
-            },
-            4 => new[]
-            {
-                new ButtonDefinition { Name = MsgBox_Button_Yes, IsDefault = true },
-                new ButtonDefinition { Name = MsgBox_Button_YesNoAsk, IsCancel = false },
-                new ButtonDefinition { Name = MsgBox_Button_No, IsCancel = true },
-                new ButtonDefinition { Name = MsgBox_Button_NoNoAsk, IsCancel = true }
-            },
-            _ => new[]
-            {
-                new ButtonDefinition { Name = MsgBox_Button_Yes, IsDefault = true },
-                new ButtonDefinition { Name = MsgBox_Button_No, IsCancel = true }
-            }
-        };
-
-        return await CustomMarkDownMessageBox(title, content, buttonDefinitions, icon);
-    }
-
-    public async Task<string> CustomMarkDownConfirmMessageBox(string content, int buttonCount) =>
-        await CustomMarkDownConfirmMessageBox(MsgBox_Title_Notice, content, buttonCount);
-
     public async Task<string> CustomMessageBox(string title, string content, IEnumerable<ButtonDefinition> buttonDefinitions, Icon icon)
     {
         var desktop = Application.Current!.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
@@ -76,6 +37,15 @@ public partial class MessageBoxService : IMessageBoxService
             });
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
     }
+
+    public async Task<string> CustomConfirmMessageBox(string title, string content, int buttonCount, Icon icon = Icon.Info)
+    {
+        var buttonDefinitions = GetButtonDefinition(buttonCount);
+        return await CustomMessageBox(title, content, buttonDefinitions, icon);
+    }
+
+    public async Task<string> CustomConfirmMessageBox(string content, int buttonCount) =>
+        await CustomConfirmMessageBox(MsgBox_Title_Notice, content, buttonCount);
 
     public async Task<string> CustomMarkDownMessageBox(string title, string content, IEnumerable<ButtonDefinition> buttonDefinitions,
         Icon icon)
@@ -97,6 +67,15 @@ public partial class MessageBoxService : IMessageBoxService
             });
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
     }
+
+    public async Task<string> CustomMarkDownConfirmMessageBox(string title, string content, int buttonCount, Icon icon = Icon.Info)
+    {
+        var buttonDefinitions = GetButtonDefinition(buttonCount);
+        return await CustomMarkDownMessageBox(title, content, buttonDefinitions, icon);
+    }
+
+    public async Task<string> CustomMarkDownConfirmMessageBox(string content, int buttonCount) =>
+        await CustomMarkDownConfirmMessageBox(MsgBox_Title_Notice, content, buttonCount);
 
     #endregion
 
