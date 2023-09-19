@@ -26,7 +26,7 @@ public partial class SavingService
     /// <param name="folderPath"></param>
     private async Task ConfirmPath(string folderPath)
     {
-        if (!await MessageBoxService.NoticeConfirmMessageBox(MsgBox_Title_Notice, string.Format(MsgBox_Content_InstallPathConfirm, folderPath)))
+        if (!await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_InstallPathConfirm, folderPath))
         {
             await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
             await OnChoosePath();

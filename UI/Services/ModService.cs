@@ -115,7 +115,7 @@ public partial class ModService : IModService
             return;
         }
 
-        await MessageBoxService.SuccessMessageBox(string.Format(MsgBox_Content_InstallModSuccess, item.Name));
+        await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_InstallModSuccess, item.Name!);
     }
 
     public async Task OnReinstallMod(Mod item)
@@ -127,7 +127,7 @@ public partial class ModService : IModService
             return;
         }
 
-        var reinstall = await MessageBoxService.WarningConfirmMessageBox(string.Format(MsgBox_Content_ReinstallMod, item.Name));
+        var reinstall = await MessageBoxService.FormatWarningConfirmMessageBox(MsgBox_Content_ReinstallMod, item.Name!);
         if (!reinstall) return;
         Logger.Information("Reinstalling mod {Name}", item.Name);
         File.Delete(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
@@ -167,7 +167,7 @@ public partial class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await MessageBoxService.NoticeMessageBox(string.Format(MsgBox_Content_DuplicateMods, item.DuplicatedModNames));
+            await MessageBoxService.FormatNoticeMessageBox(MsgBox_Content_DuplicateMods, item.DuplicatedModNames!);
             await LocalService.OpenModsFolder();
             return;
         }
@@ -192,7 +192,7 @@ public partial class ModService : IModService
             var mod = _webMods?.Find(x => x.Name == item.Name)?.RemoveLocalInfo();
             _sourceCache?.AddOrUpdate(mod);
             Logger.Information("Delete mod {Name} success", item.Name);
-            await MessageBoxService.SuccessMessageBox(string.Format(MsgBox_Content_UninstallModSuccess, item.Name));
+            await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_UninstallModSuccess, item.Name!);
         }
         catch (Exception ex)
         {

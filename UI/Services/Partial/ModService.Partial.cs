@@ -257,7 +257,7 @@ public partial class ModService
         if (enabledReverseDependencies.Length == 0) return (true, askType);
         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
 
-        var result = await MessageBoxService.WarningConfirmMessageBox(string.Format(message, item.Name, enabledReverseDependencyNames));
+        var result = await MessageBoxService.FormatWarningConfirmMessageBox(message, item.Name!, enabledReverseDependencyNames);
         if (!result)
         {
             item.IsDisabled = result;

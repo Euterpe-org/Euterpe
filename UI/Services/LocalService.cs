@@ -265,7 +265,7 @@ public partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.Fatal(ex, "Read game version failed, showing error message box...");
-            await MessageBoxService.ErrorMessageBox(string.Format(MsgBox_Content_ReadGameVersionFailed, bundlePath));
+            await MessageBoxService.FormatErrorMessageBox(MsgBox_Content_ReadGameVersionFailed, bundlePath);
             Environment.Exit(0);
         }
 

@@ -112,8 +112,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         }
 
         Logger.Information("Incorrect MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
-        await MessageBoxService.AnalyzeSuccessMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion,
-            melonLoaderVersion));
+        await MessageBoxService.FormatAnalyzeSuccessMessageBox(MsgBox_Content_IncorrectMelonLoaderVersion, melonLoaderVersion);
         return false;
     }
 

@@ -23,6 +23,14 @@ public interface IMessageBoxService
     Task<ButtonResult> AnalyzeSuccessMessageBox(string content);
 
     /// <summary>
+    ///     Create analyze success message box with formatted message
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task<ButtonResult> FormatAnalyzeSuccessMessageBox(string content, params object[] args);
+
+    /// <summary>
     ///     Create message box with Error title
     /// </summary>
     /// <param name="content"></param>
@@ -39,12 +47,28 @@ public interface IMessageBoxService
     Task<ButtonResult> ErrorMessageBox(string content, Exception ex);
 
     /// <summary>
+    ///     Create message box with Error title and formatted message
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task<ButtonResult> FormatErrorMessageBox(string content, params object[] args);
+
+    /// <summary>
     ///     Create message box with Notice title
     /// </summary>
     /// <param name="content"></param>
     /// <param name="icon">Default icon Info</param>
     /// <returns></returns>
     Task<ButtonResult> NoticeMessageBox(string content, Icon icon = Icon.Info);
+
+    /// <summary>
+    ///     Create message box with Notice title and formatted message
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task<ButtonResult> FormatNoticeMessageBox(string content, params object[] args);
 
     /// <summary>
     ///     Create message box with Success title
@@ -55,12 +79,28 @@ public interface IMessageBoxService
     Task<ButtonResult> SuccessMessageBox(string content, Icon icon = Icon.Success);
 
     /// <summary>
+    ///     Create message box with Success title and formatted message
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task<ButtonResult> FormatSuccessMessageBox(string content, params object[] args);
+
+    /// <summary>
     ///     Create message box with Warning title
     /// </summary>
     /// <param name="content"></param>
     /// <param name="icon">Default icon Warning</param>
     /// <returns></returns>
     Task<ButtonResult> WarningMessageBox(string content, Icon icon = Icon.Warning);
+
+    /// <summary>
+    ///     Create message box with Warning title and formatted message
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task<ButtonResult> FormatWarningMessageBox(string content, params object[] args);
 
     /// <summary>
     ///     Create confirm message box with title, content,Yes No button and icon
@@ -87,6 +127,14 @@ public interface IMessageBoxService
     Task<bool> NoticeConfirmMessageBox(string content);
 
     /// <summary>
+    ///     Create confirm message box with Notice title, formatted content,Yes No button and Info icon
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task<bool> FormatNoticeConfirmMessageBox(string content, params object[] args);
+
+    /// <summary>
     ///     Create confirm message box with title, content,Yes No button and Warning icon
     /// </summary>
     /// <param name="title"></param>
@@ -100,6 +148,14 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <returns></returns>
     Task<bool> WarningConfirmMessageBox(string content);
+
+    /// <summary>
+    ///     Create confirm message box with Warning title, formatted content,Yes No button and Warning icon
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task<bool> FormatWarningConfirmMessageBox(string content, params object[] args);
 
     /// <summary>
     ///     Create custom message box with title, content, button definitions and icon
