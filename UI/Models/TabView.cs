@@ -1,4 +1,3 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using MuseDashModToolsUI.ViewModels;
 
 namespace MuseDashModToolsUI.Models;

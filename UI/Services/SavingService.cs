@@ -1,8 +1,5 @@
 ﻿using System.IO;
 using System.IO.Abstractions;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Models;
 using Newtonsoft.Json;
 
 #pragma warning disable CS8618
@@ -25,10 +22,20 @@ public partial class SavingService : ISavingService
     }
 
     private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
+
+    [UsedImplicitly]
     public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
     public SavingService(ILogger logger, IFileSystem fileSystem)

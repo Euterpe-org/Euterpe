@@ -1,9 +1,6 @@
 ﻿using System.IO;
-using CommunityToolkit.Mvvm.ComponentModel;
 using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
 
 #pragma warning disable CS8618
 
@@ -13,9 +10,17 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 {
     [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
     [ObservableProperty] private double _percentage;
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
 
     public async Task InstallMelonLoader()

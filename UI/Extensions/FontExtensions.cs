@@ -1,6 +1,5 @@
 ﻿using Avalonia.Data;
 using Avalonia.Markup.Xaml;
-using MuseDashModToolsUI.Contracts;
 
 namespace MuseDashModToolsUI.Extensions;
 

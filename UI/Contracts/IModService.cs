@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using DynamicData;
-using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Contracts;
 

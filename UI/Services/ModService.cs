@@ -2,9 +2,6 @@
 using System.IO;
 using System.Text;
 using DynamicData;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
 
 #pragma warning disable CS8618
@@ -19,11 +16,22 @@ public partial class ModService : IModService
     private SourceCache<Mod?, string>? _sourceCache;
     private List<Mod>? _webMods;
 
+    [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
+
+    [UsedImplicitly]
     public ILocalService LocalService { get; init; }
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
+
+    [UsedImplicitly]
     public ISettingsViewModel SettingsViewModel { get; init; }
 
     public bool CompareVersion(string modName, string modVersion)

@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Models;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -10,7 +8,11 @@ namespace MuseDashModToolsUI.Services;
 public partial class LocalizationService : ILocalizationService, INotifyPropertyChanged
 {
     private readonly ILogger _logger;
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<IUpdateTextService> UpdateTextService { get; init; }
 
     public LocalizationService(ILogger logger)

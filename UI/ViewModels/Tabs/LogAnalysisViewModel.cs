@@ -1,8 +1,4 @@
 ﻿using System.Diagnostics;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -13,8 +9,9 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
     private readonly ILogAnalyzeService _logAnalyzeService;
     private readonly ILogger _logger;
     [ObservableProperty] private string _logContent;
+
+    [UsedImplicitly]
     public ILocalService LocalService { get; init; }
-    public IMessageBoxService MessageBoxService { get; init; }
 
     public LogAnalysisViewModel(ILogAnalyzeService logAnalyzeService, ILogger logger)
     {

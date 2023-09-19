@@ -7,9 +7,6 @@ using System.Runtime.Versioning;
 using AssetsTools.NET.Extra;
 using DialogHostAvalonia;
 using MelonLoader;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -37,10 +34,18 @@ public partial class LocalService : ILocalService
         }
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToImmutableList();
 
+    [UsedImplicitly]
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
+
     private bool IsValidPath { get; set; }
 
     public async Task CheckMelonLoaderInstall()

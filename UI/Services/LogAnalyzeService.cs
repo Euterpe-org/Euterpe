@@ -1,9 +1,6 @@
 ﻿using System.IO;
 using System.Text;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
-using MuseDashModToolsUI.Models;
 using ValveKeyValue;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -13,11 +10,22 @@ namespace MuseDashModToolsUI.Services;
 public partial class LogAnalyzeService : ILogAnalyzeService
 {
     private readonly FileSystemWatcher _watcher = new();
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public IModService ModService { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
+
     private string LogPath { get; set; } = string.Empty;
     private string LogContent { get; set; } = string.Empty;
     private StringBuilder LogErrorBuilder { get; } = new();

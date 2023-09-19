@@ -1,6 +1,4 @@
-﻿using MuseDashModToolsUI.Models;
-
-namespace MuseDashModToolsUI.Contracts;
+﻿namespace MuseDashModToolsUI.Contracts;
 
 public interface ILocalizationService
 {

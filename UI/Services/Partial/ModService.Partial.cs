@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Security;
 using System.Text;
 using DynamicData;
-using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;

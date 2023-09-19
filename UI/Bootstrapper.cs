@@ -1,10 +1,7 @@
 ﻿using System.IO.Abstractions;
 using System.Net.Http;
 using Autofac;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
 using MuseDashModToolsUI.Extensions;
-using MuseDashModToolsUI.Services;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
 using MuseDashModToolsUI.ViewModels.Tabs;

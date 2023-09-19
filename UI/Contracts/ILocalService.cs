@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI.Contracts;
 

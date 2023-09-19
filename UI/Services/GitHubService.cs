@@ -1,7 +1,5 @@
 ﻿using System.Net.Http;
-using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
-using MuseDashModToolsUI.Models;
 
 #pragma warning disable CS8618
 
@@ -27,10 +25,19 @@ public partial class GitHubService : IGitHubService
         { DownloadSources.Gitee, ThirdLink }
     };
 
+    [UsedImplicitly]
     public HttpClient Client { get; init; }
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
 
     public async Task CheckUpdates(bool userClick = false)

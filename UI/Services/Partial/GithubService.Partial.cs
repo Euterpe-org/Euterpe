@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using DialogHostAvalonia;
 using MuseDashModToolsUI.Extensions;
-using MuseDashModToolsUI.Models;
 using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;

@@ -1,13 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using DynamicData.Binding;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Models;
 
 #pragma warning disable CS8618
 
@@ -24,8 +19,13 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private FilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
+
+    [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
+
+    [UsedImplicitly]
     public ILocalService LocalService { get; init; }
+
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
     public ModManageViewModel(ILogger logger, IModService modService, ISavingService savingService)
@@ -130,6 +130,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     [RelayCommand]
     private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
 
+    [UsedImplicitly]
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
 
     partial void OnCategoryFilterTypeChanged(FilterType value)

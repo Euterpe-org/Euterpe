@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using Avalonia.Media;
-using MuseDashModToolsUI.Contracts;
 using SkiaSharp;
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -11,6 +10,8 @@ public partial class FontManageService : IFontManageService, INotifyPropertyChan
 {
     private static readonly SKFontManager _skFontManager = SKFontManager.Default;
     private readonly ILogger _logger;
+
+    [UsedImplicitly]
     public ISavingService? SavingService { get; init; }
 
     public FontFamily this[string _] => new(SavingService.Settings.FontName!);

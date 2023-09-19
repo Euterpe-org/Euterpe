@@ -1,11 +1,8 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
+﻿using Avalonia.Controls.ApplicationLifetimes;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Enums;
 using MsBox.Avalonia.Models;
-using MuseDashModToolsUI.Contracts;
 using MuseDashModToolsUI.Extensions;
 
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -15,6 +12,7 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class MessageBoxService : IMessageBoxService
 {
+    [UsedImplicitly]
     public Lazy<ISavingService>? SavingService { get; init; }
 
     #region Custom Message Box

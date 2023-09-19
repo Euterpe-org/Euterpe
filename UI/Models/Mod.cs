@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MuseDashModToolsUI.Extensions;
+﻿using MuseDashModToolsUI.Extensions;
 using Newtonsoft.Json;
 
 namespace MuseDashModToolsUI.Models;

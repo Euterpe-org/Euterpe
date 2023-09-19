@@ -1,4 +1,3 @@
-using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using MuseDashModToolsUI.ViewModels;
 

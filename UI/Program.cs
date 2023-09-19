@@ -3,14 +3,14 @@
 using System.Diagnostics;
 #endif
 using System.IO;
-using Avalonia;
-using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI;
 
 internal static class Program
 {
+    [UsedImplicitly]
     private const string IssuePage = "https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose";
+
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any

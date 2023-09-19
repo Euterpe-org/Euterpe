@@ -1,10 +1,5 @@
 ﻿using System.Globalization;
 using Autofac;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Models;
 
 #pragma warning disable CS8618
 
@@ -75,6 +70,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 
     #region OnPropertyChanged
 
+    [UsedImplicitly]
     partial void OnCurrentDownloadSourceChanged(int oldValue, int newValue)
     {
         if (newValue == -1)
@@ -83,6 +79,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
             _savingService.Settings.DownloadSource = (DownloadSources)newValue;
     }
 
+    [UsedImplicitly]
     partial void OnEnableDependenciesWhenInstallingChanged(int oldValue, int newValue)
     {
         if (newValue == -1)
@@ -91,6 +88,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
             _savingService.Settings.AskEnableDependenciesWhenInstalling = (AskType)newValue;
     }
 
+    [UsedImplicitly]
     partial void OnEnableDependenciesWhenEnablingChanged(int oldValue, int newValue)
     {
         if (newValue == -1)
@@ -99,6 +97,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
             _savingService.Settings.AskEnableDependenciesWhenEnabling = (AskType)newValue;
     }
 
+    [UsedImplicitly]
     partial void OnDisableDependenciesWhenDeletingChanged(int oldValue, int newValue)
     {
         if (newValue == -1)
@@ -107,6 +106,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
             _savingService.Settings.AskDisableDependenciesWhenDeleting = (AskType)newValue;
     }
 
+    [UsedImplicitly]
     partial void OnDisableDependenciesWhenDisablingChanged(int oldValue, int newValue)
     {
         if (newValue == -1)

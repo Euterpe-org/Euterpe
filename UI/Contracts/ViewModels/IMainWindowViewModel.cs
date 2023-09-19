@@ -1,5 +1,3 @@
-using MuseDashModToolsUI.Models;
-
 namespace MuseDashModToolsUI.Contracts.ViewModels;
 
 public interface IMainWindowViewModel

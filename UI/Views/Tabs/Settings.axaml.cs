@@ -1,6 +1,4 @@
-﻿using Avalonia.Controls;
-
-namespace MuseDashModToolsUI.Views.Tabs;
+﻿namespace MuseDashModToolsUI.Views.Tabs;
 
 public partial class Settings : UserControl
 {
