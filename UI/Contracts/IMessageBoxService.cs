@@ -28,6 +28,7 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <param name="args"></param>
     /// <returns></returns>
+    [StringFormatMethod("content")]
     Task<ButtonResult> FormatAnalyzeSuccessMessageBox(string content, params object[] args);
 
     /// <summary>
@@ -52,6 +53,7 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <param name="args"></param>
     /// <returns></returns>
+    [StringFormatMethod("content")]
     Task<ButtonResult> FormatErrorMessageBox(string content, params object[] args);
 
     /// <summary>
@@ -68,6 +70,7 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <param name="args"></param>
     /// <returns></returns>
+    [StringFormatMethod("content")]
     Task<ButtonResult> FormatNoticeMessageBox(string content, params object[] args);
 
     /// <summary>
@@ -84,6 +87,7 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <param name="args"></param>
     /// <returns></returns>
+    [StringFormatMethod("content")]
     Task<ButtonResult> FormatSuccessMessageBox(string content, params object[] args);
 
     /// <summary>
@@ -100,6 +104,7 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <param name="args"></param>
     /// <returns></returns>
+    [StringFormatMethod("content")]
     Task<ButtonResult> FormatWarningMessageBox(string content, params object[] args);
 
     /// <summary>
@@ -132,6 +137,7 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <param name="args"></param>
     /// <returns></returns>
+    [StringFormatMethod("content")]
     Task<bool> FormatNoticeConfirmMessageBox(string content, params object[] args);
 
     /// <summary>
@@ -155,6 +161,7 @@ public interface IMessageBoxService
     /// <param name="content"></param>
     /// <param name="args"></param>
     /// <returns></returns>
+    [StringFormatMethod("content")]
     Task<bool> FormatWarningConfirmMessageBox(string content, params object[] args);
 
     /// <summary>
