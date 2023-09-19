@@ -128,14 +128,25 @@ public partial class LocalService : ILocalService
     public bool GetPathOnLinux(out string? folderPath)
     {
         folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
-        return folderPath is not null;
+        if (folderPath is null) return false;
+        Logger.Information("Auto detected game path on Linux {Path}", folderPath);
+        return true;
     }
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool GetPathOnWindows(out string? folderPath)
     {
         folderPath = WindowsPaths.FirstOrDefault(Directory.Exists);
-        return folderPath is not null || GetPathFromRegistry(out folderPath);
+
+        if (folderPath is null)
+        {
+            if (!GetPathFromRegistry(out folderPath)) return false;
+            Logger.Information("Auto detected game path from Registry {Path}", folderPath);
+            return true;
+        }
+
+        Logger.Information("Auto detected game path on Windows {Path}", folderPath);
+        return true;
     }
 
     public async Task OnInstallMelonLoader()

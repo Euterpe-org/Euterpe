@@ -8,6 +8,11 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class LocalService
 {
+    /// <summary>
+    ///     Get game folder path from Registry
+    /// </summary>
+    /// <param name="folderPath"></param>
+    /// <returns>Is success</returns>
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     private static bool GetPathFromRegistry(out string folderPath)
     {
