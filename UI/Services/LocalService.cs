@@ -35,7 +35,7 @@ public partial class LocalService : ILocalService
             ".local/share/Steam/steamapps/common/Muse Dash",
             ".steam/steam/steamapps/common/Muse Dash"
         }
-        .ToImmutableList();
+        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToImmutableList();
 
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
     public ILogger Logger { get; init; }
