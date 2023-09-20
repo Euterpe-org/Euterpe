@@ -3,7 +3,6 @@ using MsBox.Avalonia;
 using MsBox.Avalonia.Dto;
 using MsBox.Avalonia.Enums;
 using MsBox.Avalonia.Models;
-using MuseDashModToolsUI.Extensions;
 
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.

@@ -1,5 +1,4 @@
-﻿using MuseDashModToolsUI.Extensions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace MuseDashModToolsUI.Models;
 

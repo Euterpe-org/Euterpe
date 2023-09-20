@@ -10,10 +10,10 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class ModService : IModService
 {
-    private string? _currentGameVersion;
+    private string _currentGameVersion;
 
-    private ReadOnlyObservableCollection<Mod>? _mods;
-    private SourceCache<Mod?, string>? _sourceCache;
+    private ReadOnlyObservableCollection<Mod> _mods;
+    private SourceCache<Mod, string> _sourceCache;
     private List<Mod>? _webMods;
 
     [UsedImplicitly]
@@ -48,7 +48,7 @@ public partial class ModService : IModService
     public async Task InitializeModList(SourceCache<Mod, string> sourceCache, ReadOnlyObservableCollection<Mod> mods)
     {
         Logger.Information("Initializing mod list...");
-        _sourceCache = sourceCache!;
+        _sourceCache = sourceCache;
         _mods = mods;
         _currentGameVersion = await LocalService.ReadGameVersion();
         await LocalService.CheckMelonLoaderInstall();
@@ -99,7 +99,7 @@ public partial class ModService : IModService
             CheckVersionState(webMod, downloadedMod);
 
             Logger.Information("Install mod {Name} success", downloadedMod.Name);
-            _sourceCache?.AddOrUpdate(downloadedMod);
+            _sourceCache.AddOrUpdate(downloadedMod);
         }
         catch (Exception ex)
         {
@@ -190,7 +190,7 @@ public partial class ModService : IModService
             SettingsViewModel.DisableDependenciesWhenDeleting = (int)askType;
             File.Delete(path);
             var mod = _webMods?.Find(x => x.Name == item.Name)?.RemoveLocalInfo();
-            _sourceCache?.AddOrUpdate(mod);
+            _sourceCache!.AddOrUpdate(mod);
             Logger.Information("Delete mod {Name} success", item.Name);
             await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_UninstallModSuccess, item.Name!);
         }

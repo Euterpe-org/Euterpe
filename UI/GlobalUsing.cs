@@ -5,6 +5,7 @@ global using CommunityToolkit.Mvvm.Input;
 global using JetBrains.Annotations;
 global using MuseDashModToolsUI.Contracts;
 global using MuseDashModToolsUI.Contracts.ViewModels;
+global using MuseDashModToolsUI.Extensions;
 global using MuseDashModToolsUI.Models;
 global using MuseDashModToolsUI.Services;
 global using System;

@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using MuseDashModToolsUI.Extensions;
 
 #pragma warning disable CS8618
 

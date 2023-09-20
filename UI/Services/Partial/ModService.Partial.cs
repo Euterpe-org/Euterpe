@@ -199,7 +199,7 @@ public partial class ModService
         var errors = new StringBuilder();
         foreach (var dependency in dependencies)
         {
-            var installedMod = _mods!.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
+            var installedMod = _mods.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
             if (installedMod is not null) continue;
             try
             {
@@ -211,7 +211,7 @@ public partial class ModService
                 dependency.LocalVersion = downloadedMod.LocalVersion;
                 dependency.SHA256 = downloadedMod.SHA256;
                 Logger.Information("Install dependency {Name} success", downloadedMod.Name);
-                _sourceCache!.AddOrUpdate(dependency);
+                _sourceCache.AddOrUpdate(dependency);
                 await CheckDependencyInstall(dependency);
             }
             catch (Exception ex)
@@ -275,10 +275,9 @@ public partial class ModService
     /// <returns>Dependencies</returns>
     private IEnumerable<Mod> SearchDependencies(string modName)
     {
-        var dependencyNames = _sourceCache?.Lookup(modName).Value?.DependencyNames.Split("\r\n");
+        var dependencyNames = _sourceCache.Lookup(modName).Value.DependencyNames.Split("\r\n");
         Logger.Information("Search dependencies of {ModName}: {DependencyNames}", modName, dependencyNames);
-        return dependencyNames?.Where(x => _sourceCache!.Lookup(x).HasValue)
-            .Select(x => _sourceCache!.Lookup(x).Value)!;
+        return dependencyNames.Where(x => _sourceCache.Lookup(x).HasValue).Select(x => _sourceCache.Lookup(x).Value);
     }
 
     /// <summary>
@@ -288,11 +287,11 @@ public partial class ModService
     /// <returns>Reverse dependencies</returns>
     private IEnumerable<Mod?> SearchReverseDependencies(string modName)
     {
-        var reverseDependencyNames = _sourceCache?.Items.Where(x => x!.DependencyNames.Split("\r\n").Contains(modName))
-            .Select(x => x?.Name).ToArray();
+        var reverseDependencyNames = _sourceCache.Items.Where(x => x.DependencyNames.Split("\r\n").Contains(modName))
+            .Select(x => x.Name).ToArray();
         Logger.Information("Search reverse dependencies of {ModName}: {ReverseDependencyNames}", modName,
             reverseDependencyNames);
-        return _sourceCache?.Items.Where(x => reverseDependencyNames!.Contains(x?.Name))!;
+        return _sourceCache.Items.Where(x => reverseDependencyNames.Contains(x.Name));
     }
 
     /// <summary>

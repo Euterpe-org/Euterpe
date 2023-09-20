@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
-using MuseDashModToolsUI.Extensions;
 
 namespace MuseDashModToolsUI.Converters;
 
