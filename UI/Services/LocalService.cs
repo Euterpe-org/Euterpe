@@ -192,6 +192,15 @@ public partial class LocalService : ILocalService
         }
     }
 
+    public void OnLaunchGame(bool isModded)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "steam://rungameid/774171" + (isModded ? string.Empty : "//--no-mods"),
+            UseShellExecute = true
+        });
+    }
+
     public async Task OpenModsFolder()
     {
         if (!IsValidPath)

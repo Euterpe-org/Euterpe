@@ -153,12 +153,12 @@ public partial class GitHubService
     /// </summary>
     /// <param name="version"></param>
     /// <param name="currentVersion"></param>
-    /// <param name="userClick"></param>
+    /// <param name="isUserClick"></param>
     /// <returns>Is skip</returns>
-    private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool userClick)
+    private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool isUserClick)
     {
         var current = SemanticVersion.Parse(currentVersion);
-        if (!userClick) return version == SavingService.Settings.SkipVersion || version <= current;
+        if (!isUserClick) return version == SavingService.Settings.SkipVersion || version <= current;
         if (version > current) return false;
         await MessageBoxService.SuccessMessageBox(MsgBox_Content_LatestVersion);
         return true;

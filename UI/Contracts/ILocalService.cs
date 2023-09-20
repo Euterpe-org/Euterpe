@@ -22,9 +22,19 @@ public interface ILocalService
     /// <returns>Mod dll paths</returns>
     IEnumerable<string> GetModFiles(string path);
 
+    /// <summary>
+    ///     Get game folder path on Linux
+    /// </summary>
+    /// <param name="folderPath"></param>
+    /// <returns>Is success</returns>
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     bool GetPathOnLinux(out string? folderPath);
 
+    /// <summary>
+    ///     Get game folder path on Windows
+    /// </summary>
+    /// <param name="folderPath"></param>
+    /// <returns>Is success</returns>
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     bool GetPathOnWindows(out string? folderPath);
 
@@ -53,6 +63,12 @@ public interface ILocalService
     /// </summary>
     /// <returns></returns>
     Task OnUninstallMelonLoader();
+
+    /// <summary>
+    ///     Launch Game
+    /// </summary>
+    /// <param name="isModded"></param>
+    void OnLaunchGame(bool isModded);
 
     /// <summary>
     ///     Open Mods folder

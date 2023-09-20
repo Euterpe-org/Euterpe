@@ -5,9 +5,9 @@ public interface IGitHubService
     /// <summary>
     ///     Check Mod Tools Updates
     /// </summary>
-    /// <param name="userClick"></param>
+    /// <param name="isUserClick"></param>
     /// <returns></returns>
-    Task CheckUpdates(bool userClick = false);
+    Task CheckUpdates(bool isUserClick = false);
 
     /// <summary>
     ///     Download Mod

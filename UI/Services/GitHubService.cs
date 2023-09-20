@@ -39,7 +39,7 @@ public partial class GitHubService : IGitHubService
     [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
 
-    public async Task CheckUpdates(bool userClick = false)
+    public async Task CheckUpdates(bool isUserClick = false)
     {
         Logger.Information("Checking updates...");
         Client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
@@ -53,7 +53,7 @@ public partial class GitHubService : IGitHubService
             var release = SavingService.Settings.DownloadPrerelease ? releases[0] : releases.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
-            if (version is null || await SkipVersionCheck(version, BuildInfo.Version, userClick)) return;
+            if (version is null || await SkipVersionCheck(version, BuildInfo.Version, isUserClick)) return;
 
             var title = release.Name;
             var body = release.Body;
