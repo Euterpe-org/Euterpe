@@ -71,48 +71,38 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     #region OnPropertyChanged
 
     [UsedImplicitly]
-    partial void OnCurrentDownloadSourceChanged(int oldValue, int newValue)
+    partial void OnCurrentDownloadSourceChanged(int value)
     {
-        if (newValue == -1)
-            newValue = oldValue;
-        else
-            _savingService.Settings.DownloadSource = (DownloadSources)newValue;
+        if (value != -1)
+            _savingService.Settings.DownloadSource = (DownloadSources)value;
     }
 
     [UsedImplicitly]
-    partial void OnEnableDependenciesWhenInstallingChanged(int oldValue, int newValue)
+    partial void OnEnableDependenciesWhenInstallingChanged(int value)
     {
-        if (newValue == -1)
-            newValue = oldValue;
-        else
-            _savingService.Settings.AskEnableDependenciesWhenInstalling = (AskType)newValue;
+        if (value != -1)
+            _savingService.Settings.AskEnableDependenciesWhenInstalling = (AskType)value;
     }
 
     [UsedImplicitly]
-    partial void OnEnableDependenciesWhenEnablingChanged(int oldValue, int newValue)
+    partial void OnEnableDependenciesWhenEnablingChanged(int value)
     {
-        if (newValue == -1)
-            newValue = oldValue;
-        else
-            _savingService.Settings.AskEnableDependenciesWhenEnabling = (AskType)newValue;
+        if (value != -1)
+            _savingService.Settings.AskEnableDependenciesWhenEnabling = (AskType)value;
     }
 
     [UsedImplicitly]
-    partial void OnDisableDependenciesWhenDeletingChanged(int oldValue, int newValue)
+    partial void OnDisableDependenciesWhenDeletingChanged(int value)
     {
-        if (newValue == -1)
-            newValue = oldValue;
-        else
-            _savingService.Settings.AskDisableDependenciesWhenDeleting = (AskType)newValue;
+        if (value != -1)
+            _savingService.Settings.AskDisableDependenciesWhenDeleting = (AskType)value;
     }
 
     [UsedImplicitly]
-    partial void OnDisableDependenciesWhenDisablingChanged(int oldValue, int newValue)
+    partial void OnDisableDependenciesWhenDisablingChanged(int value)
     {
-        if (newValue == -1)
-            newValue = oldValue;
-        else
-            _savingService.Settings.AskDisableDependenciesWhenDisabling = (AskType)newValue;
+        if (value != -1)
+            _savingService.Settings.AskDisableDependenciesWhenDisabling = (AskType)value;
     }
 
     partial void OnDownloadPrereleaseChanged(bool value)
