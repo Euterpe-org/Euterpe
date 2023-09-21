@@ -19,6 +19,9 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        // Prevent multiple launch
+        using var mutex = new Mutex(true, "MuseDashModTools");
+        if (!mutex.WaitOne(TimeSpan.Zero, true)) return;
         CreateLogger();
         RegisterDependencies();
         try
