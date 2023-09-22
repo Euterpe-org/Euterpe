@@ -166,7 +166,7 @@
         <value>La instalación del mod fallo\n{0}</value>
     </data>
   <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
-        <value>No se pudo instalar las Dependencias\n{0}</value>
+        <value>La dependencia {0} ha tenido un error\n{1}</value>
     </data>
   <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
         <value>¿Quieres activar el mod {1}? Es una dependencia del mod {0}</value>
