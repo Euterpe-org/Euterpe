@@ -27,6 +27,7 @@ public static class Bootstrapper
         builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SerializeService>().As<ISerializeService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
 
         // View Models

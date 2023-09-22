@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Models;

@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.IO.Abstractions;
-using Newtonsoft.Json;
 
 #pragma warning disable CS8618
 
@@ -25,6 +24,9 @@ public partial class SavingService : ISavingService
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public ISerializeService SerializeService { get; init; }
 
     [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
@@ -60,7 +62,7 @@ public partial class SavingService : ISavingService
             }
 
             var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
-            var settings = JsonConvert.DeserializeObject<Setting>(text)!;
+            var settings = SerializeService.DeserializeSetting(text)!;
             await NullSettingCatch(settings);
 
             Settings = settings.Clone();
@@ -76,7 +78,7 @@ public partial class SavingService : ISavingService
 
     public async Task Save()
     {
-        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+        var json = SerializeService.SerializeSetting(Settings);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
         _logger.Information("Settings saved");
     }

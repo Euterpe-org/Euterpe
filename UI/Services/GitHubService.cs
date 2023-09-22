@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Net.Http.Json;
 
 #pragma warning disable CS8618
 
@@ -50,7 +51,7 @@ public partial class GitHubService : IGitHubService
             var releases = await Client.GetFromJsonAsync<List<GithubRelease>>(ReleaseInfoLink);
             Logger.Information("Get releases success");
 
-            var release = SavingService.Settings.DownloadPrerelease ? releases[0] : releases.Find(x => !x.Prerelease)!;
+            var release = SavingService.Settings.DownloadPrerelease ? releases![0] : releases!.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
             if (version is null || await SkipVersionCheck(version, BuildInfo.Version, isUserClick)) return;

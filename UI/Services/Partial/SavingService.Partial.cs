@@ -1,9 +1,8 @@
 using System.Globalization;
 using System.IO;
+using System.Text.Json.Nodes;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;
@@ -47,7 +46,7 @@ public partial class SavingService
 
         SettingsViewModel.Value.UpdatePath();
 
-        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+        var json = SerializeService.SerializeSetting(Settings);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
         _logger.Information("Settings saved to Settings.json");
     }
@@ -119,7 +118,8 @@ public partial class SavingService
     {
         if (!_fileSystem.File.Exists(SettingPath)) return;
         var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
-        var settings = JObject.Parse(text);
+        var settings = JsonNode.Parse(text);
+        if (settings is null) return;
 
         Settings.MuseDashFolder = settings["MuseDashFolder"]?.ToString();
         Settings.LanguageCode = settings["LanguageCode"]?.ToString();
