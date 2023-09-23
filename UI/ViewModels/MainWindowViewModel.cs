@@ -25,7 +25,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             new((ViewModelBase)context.Resolve<ISettingsViewModel>(), XAML_Tab_Setting, "Setting")
         };
         SwitchTab();
+#if !DEBUG
         context.Resolve<IGitHubService>().CheckUpdates();
+#endif
         _logger.Information("Main Window initialized");
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
