@@ -75,15 +75,13 @@ public partial class ModService
     /// <summary>
     ///     Load local mods and show on the UI
     /// </summary>
-    /// <param name="localMods"></param>
-    /// <param name="webMods"></param>
-    private async Task LoadModsToUI(List<Mod> localMods, List<Mod>? webMods)
+    private async Task LoadModsToUI()
     {
-        var isTracked = new bool[localMods.Count];
-        foreach (var webMod in webMods!)
+        var isTracked = new bool[_localMods.Count];
+        foreach (var webMod in _webMods!)
         {
-            var localMod = localMods.Find(x => x.Name == webMod.Name);
-            var localModIdx = localMods.IndexOf(localMod!);
+            var localMod = _localMods.Find(x => x.Name == webMod.Name);
+            var localModIdx = _localMods.IndexOf(localMod!);
 
             if (localMod is null)
             {
@@ -94,12 +92,11 @@ public partial class ModService
                 continue;
             }
 
-            if (localMods.Count(x => x.Name == localMod.Name) > 1)
+            if (_localMods.Count(x => x.Name == localMod.Name) > 1)
             {
                 localMod.IsDuplicated = true;
-                localMod.DuplicatedModNames =
-                    string.Join("\r\n",
-                        localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
+                localMod.DuplicatedModNames = string.Join(
+                    "\r\n", _localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
 
             isTracked[localModIdx] = true;
@@ -118,7 +115,7 @@ public partial class ModService
             Logger?.Information("Mod {Name} loaded to UI", localMod.Name);
         }
 
-        CheckDuplicatedMods(isTracked, localMods);
+        CheckDuplicatedMods(isTracked, _localMods);
     }
 
     /// <summary>

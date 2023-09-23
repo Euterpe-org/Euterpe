@@ -11,7 +11,7 @@ namespace MuseDashModToolsUI.Services;
 public partial class ModService : IModService
 {
     private string _currentGameVersion;
-
+    private List<Mod> _localMods;
     private ReadOnlyObservableCollection<Mod> _mods;
     private SourceCache<Mod, string> _sourceCache;
     private List<Mod>? _webMods;
@@ -56,10 +56,9 @@ public partial class ModService : IModService
         _webMods ??= await GitHubService.GetModListAsync();
         if (_webMods is null) return;
         var localPaths = LocalService.GetModFiles(SavingService.Settings.ModsFolder);
-        List<Mod>? localMods;
         try
         {
-            localMods = localPaths.Select(LocalService.LoadMod).Where(mod => mod is not null).ToList()!;
+            _localMods = localPaths.Select(LocalService.LoadMod).Where(mod => mod is not null).ToList()!;
             Logger.Information("Read all local mods info success");
         }
         catch (Exception ex)
@@ -71,7 +70,7 @@ public partial class ModService : IModService
             return;
         }
 
-        await LoadModsToUI(localMods, _webMods);
+        await LoadModsToUI();
     }
 
     public async Task OnInstallMod(Mod item)

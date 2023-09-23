@@ -145,6 +145,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _sourceCache.Refresh();
     }
 
+    // TODO Only load added/removed/modified mods instead of all (lxy, 2023/9/23) Planning Time: 2 months
     private void StartModsDllMonitor()
     {
         _watcher.Path = _savingService.Settings.ModsFolder;
