@@ -48,6 +48,13 @@ public interface IMessageBoxService
     Task<ButtonResult> ErrorMessageBox(string content, Exception ex);
 
     /// <summary>
+    ///     Create message box with Error title and exception message
+    /// </summary>
+    /// <param name="ex"></param>
+    /// <returns></returns>
+    Task<ButtonResult> ErrorMessageBox(Exception ex);
+
+    /// <summary>
     ///     Create message box with Error title and formatted message
     /// </summary>
     /// <param name="content"></param>

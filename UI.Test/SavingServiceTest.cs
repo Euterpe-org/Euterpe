@@ -10,8 +10,9 @@ public class SavingServiceTest
                                         "MuseDashFolder": "MuseDash",
                                         "LanguageCode": null,
                                         "FontName": null,
-                                        "DownloadSource": 0,
+                                        "SkipVersion": null,
                                         "DownloadPrerelease": false,
+                                        "DownloadSource": 0,
                                         "AskInstallMuseDashModTools": 0,
                                         "AskEnableDependenciesWhenInstalling": 0,
                                         "AskEnableDependenciesWhenEnabling": 0,
@@ -35,7 +36,11 @@ public class SavingServiceTest
         fs.Setup(f => f.File.Exists(updaterPath)).Returns(false);
         fs.Setup(f => f.Directory.Exists(It.IsAny<string?>())).Returns(false);
         fs.Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(SettingJson);
-        var savingService = new SavingService(_logger, fs.Object) { MessageBoxService = new Mock<IMessageBoxService>().Object };
+        var savingService = new SavingService(_logger, fs.Object)
+        {
+            MessageBoxService = new Mock<IMessageBoxService>().Object,
+            SerializeService = new SerializeService()
+        };
         await savingService.InitializeSettings();
 
         Assert.Equal(CultureInfo.CurrentUICulture.Name, savingService.Settings.LanguageCode);

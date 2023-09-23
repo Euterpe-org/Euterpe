@@ -108,6 +108,8 @@ public partial class MessageBoxService : IMessageBoxService
     public async Task<ButtonResult> ErrorMessageBox(string content, Exception ex) =>
         await ErrorMessageBox(string.Format(content, ex));
 
+    public async Task<ButtonResult> ErrorMessageBox(Exception ex) => await ErrorMessageBox(ex.ToString());
+
     public async Task<ButtonResult> FormatErrorMessageBox(string content, params object[] args) =>
         await ErrorMessageBox(string.Format(content, args));
 
