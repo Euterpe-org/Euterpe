@@ -1,5 +1,4 @@
-#if DEBUG
-#else
+#if !DEBUG
 using System.Diagnostics;
 #endif
 using System.IO;
@@ -33,8 +32,7 @@ internal static class Program
             Log.Logger.Fatal(ex, "Unhandled exception");
             if (File.Exists(Path.Combine("Logs", LogFileName)))
             {
-#if DEBUG
-#else
+#if !DEBUG
                 if (OperatingSystem.IsWindows())
                     Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
                 if (OperatingSystem.IsLinux())
