@@ -32,7 +32,7 @@ public class WindowsService : IPlatformService
     [UsedImplicitly]
     public Lazy<ISavingService> SavingService { get; init; }
 
-    public string GetOsString() => "Windows";
+    public string OsString => "Windows";
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool GetPath(out string? folderPath)

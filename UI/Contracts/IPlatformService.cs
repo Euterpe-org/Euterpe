@@ -5,8 +5,7 @@ public interface IPlatformService
     /// <summary>
     ///     Get OS string for download link
     /// </summary>
-    /// <returns>Os string</returns>
-    string GetOsString();
+    string OsString { get; }
 
     /// <summary>
     ///     Get game folder path

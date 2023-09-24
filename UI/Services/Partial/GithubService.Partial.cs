@@ -193,12 +193,10 @@ public partial class GitHubService
     /// <returns>Download link</returns>
     private string GetDownloadLink(List<GitHubReleaseAsset> assets)
     {
-        var osString = PlatformService.GetOsString();
-
-        var release = assets.Find(x => x.Name.Contains(osString, StringComparison.OrdinalIgnoreCase))!;
+        var release = assets.Find(x => x.Name.Contains(PlatformService.OsString, StringComparison.OrdinalIgnoreCase))!;
         var link = release.BrowserDownloadUrl;
 
-        Logger.Information("Get {OsString} download link success {Link}", osString, link);
+        Logger.Information("Get {OsString} download link success {Link}", PlatformService.OsString, link);
         return link;
     }
 

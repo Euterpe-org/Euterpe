@@ -21,7 +21,7 @@ public class LinuxService : IPlatformService
     [UsedImplicitly]
     public ILogger Logger { get; init; }
 
-    public string GetOsString() => "Linux";
+    public string OsString => "Linux";
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool GetPath(out string? folderPath)
