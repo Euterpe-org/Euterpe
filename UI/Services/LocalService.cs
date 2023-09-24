@@ -219,9 +219,9 @@ public partial class LocalService : ILocalService
                 assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
 
-            var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion");
-            Logger.Information("Game version read successfully: {BundleVersion}", bundleVersion!.AsString);
-            return bundleVersion.AsString;
+            var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion").AsString!;
+            Logger.Information("Game version read successfully: {BundleVersion}", bundleVersion);
+            return bundleVersion;
         }
         catch (Exception ex)
         {

@@ -77,7 +77,7 @@ public partial class ModService
     /// </summary>
     private async Task LoadModsToUI()
     {
-        var isTracked = new bool[_localMods.Count];
+        _isTracked = new bool[_localMods.Count];
         foreach (var webMod in _webMods!)
         {
             var localMod = _localMods.Find(x => x.Name == webMod.Name);
@@ -99,7 +99,7 @@ public partial class ModService
                     "\r\n", _localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
             }
 
-            isTracked[localModIdx] = true;
+            _isTracked[localModIdx] = true;
             localMod.IsTracked = true;
             localMod.Version = webMod.Version;
             localMod.GameVersion = webMod.GameVersion;
@@ -115,7 +115,7 @@ public partial class ModService
             Logger?.Information("Mod {Name} loaded to UI", localMod.Name);
         }
 
-        CheckDuplicatedMods(isTracked, _localMods);
+        CheckDuplicatedMods();
     }
 
     /// <summary>
@@ -137,25 +137,22 @@ public partial class ModService
     /// <summary>
     ///     Check duplicated mods
     /// </summary>
-    /// <param name="isTracked"></param>
-    /// <param name="localMods"></param>
-    private void CheckDuplicatedMods(IReadOnlyList<bool> isTracked, IReadOnlyList<Mod> localMods)
+    private void CheckDuplicatedMods()
     {
-        for (var i = 0; i < isTracked.Count; i++)
+        for (var i = 0; i < _isTracked.Length; i++)
         {
-            if (isTracked[i]) continue;
-            var localMod = localMods[i];
-            if (localMods.FirstOrDefault(x => x.Name == localMod.Name)!.IsTracked) continue;
-            if (localMods.Count(x => x.Name == localMod.Name) > 1)
+            if (_isTracked[i]) continue;
+            var localMod = _localMods[i];
+            if (_localMods.FirstOrDefault(x => x.Name == localMod.Name)!.IsTracked) continue;
+            if (_localMods.Count(x => x.Name == localMod.Name) > 1)
             {
                 localMod.IsDuplicated = true;
-                localMod.DuplicatedModNames =
-                    string.Join("\r\n",
-                        localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
+                localMod.DuplicatedModNames = string.Join("\r\n",
+                    _localMods.Where(x => x.Name == localMod.Name).Select(x => x.FileNameExtended()));
                 Logger.Information("Found duplicated mod {DuplicateMods}", localMod.DuplicatedModNames);
             }
 
-            _sourceCache?.AddOrUpdate(localMods[i]);
+            _sourceCache?.AddOrUpdate(_localMods[i]);
         }
     }
 
