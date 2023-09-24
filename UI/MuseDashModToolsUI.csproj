@@ -5,9 +5,11 @@
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
+        <AssemblyName>MuseDashModTools</AssemblyName>
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <NoWarn>CS7035</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
