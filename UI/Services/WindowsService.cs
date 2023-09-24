@@ -35,7 +35,7 @@ public class WindowsService : IPlatformService
     public string OsString => "Windows";
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public bool GetPath(out string? folderPath)
+    public bool GetGamePath(out string? folderPath)
     {
         folderPath = WindowsPaths.FirstOrDefault(Directory.Exists);
 

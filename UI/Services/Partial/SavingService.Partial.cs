@@ -15,7 +15,7 @@ public partial class SavingService
     private async Task TryGetGameFolderPath()
     {
         _logger.Information("Trying auto detect game path");
-        if (PlatformService.GetPath(out var folderPath)) await ConfirmPath(folderPath!);
+        if (PlatformService.GetGamePath(out var folderPath)) await ConfirmPath(folderPath!);
     }
 
     /// <summary>

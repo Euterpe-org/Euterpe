@@ -24,7 +24,7 @@ public class LinuxService : IPlatformService
     public string OsString => "Linux";
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public bool GetPath(out string? folderPath)
+    public bool GetGamePath(out string? folderPath)
     {
         folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
         if (folderPath is null) return false;

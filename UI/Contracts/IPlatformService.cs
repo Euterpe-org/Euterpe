@@ -12,7 +12,7 @@ public interface IPlatformService
     /// </summary>
     /// <param name="folderPath"></param>
     /// <returns>Is success</returns>
-    bool GetPath(out string? folderPath);
+    bool GetGamePath(out string? folderPath);
 
     /// <summary>
     ///     Get Updater file path
