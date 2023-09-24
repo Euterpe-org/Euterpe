@@ -1,7 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-
-namespace MuseDashModToolsUI.Contracts;
+﻿namespace MuseDashModToolsUI.Contracts;
 
 public interface ILocalService
 {
@@ -21,22 +18,6 @@ public interface ILocalService
     /// <param name="path"></param>
     /// <returns>Mod dll paths</returns>
     IEnumerable<string> GetModFiles(string path);
-
-    /// <summary>
-    ///     Get game folder path on Linux
-    /// </summary>
-    /// <param name="folderPath"></param>
-    /// <returns>Is success</returns>
-    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    bool GetPathOnLinux(out string? folderPath);
-
-    /// <summary>
-    ///     Get game folder path on Windows
-    /// </summary>
-    /// <param name="folderPath"></param>
-    /// <returns>Is success</returns>
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    bool GetPathOnWindows(out string? folderPath);
 
     /// <summary>
     ///     Launch Updater

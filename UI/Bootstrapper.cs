@@ -30,6 +30,12 @@ public static class Bootstrapper
         builder.RegisterType<SerializeService>().As<ISerializeService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
 
+        // Platform Service
+        if (OperatingSystem.IsWindows())
+            builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+        else if (OperatingSystem.IsLinux())
+            builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+
         // View Models
         builder.RegisterType<ProjectWindowViewModel>().As<IProjectWindowViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();

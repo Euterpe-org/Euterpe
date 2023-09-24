@@ -193,7 +193,7 @@ public partial class GitHubService
     /// <returns>Download link</returns>
     private string GetDownloadLink(List<GitHubReleaseAsset> assets)
     {
-        var osString = OperatingSystem.IsWindows() ? "Windows" : "Linux";
+        var osString = PlatformService.GetOsString();
 
         var release = assets.Find(x => x.Name.Contains(osString, StringComparison.OrdinalIgnoreCase))!;
         var link = release.BrowserDownloadUrl;

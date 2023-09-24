@@ -35,6 +35,9 @@ public partial class GitHubService : IGitHubService
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
 
     [UsedImplicitly]

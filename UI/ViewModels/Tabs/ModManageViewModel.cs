@@ -57,37 +57,50 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
         _logger.Information("Mod Manage Window Initialized");
     }
 
-    [RelayCommand]
-    private async Task OnInstallMod(Mod item)
+    private async Task ExecuteWithWatcherDisabled(Func<Mod, Task> func, Mod item)
     {
         _watcher.EnableRaisingEvents = false;
-        await _modService.OnInstallMod(item);
+        await func(item);
         _watcher.EnableRaisingEvents = true;
     }
 
-    [RelayCommand]
-    private async Task OnReinstallMod(Mod item)
+    [UsedImplicitly]
+    partial void OnFilterChanged(string value) => _sourceCache.Refresh();
+
+    [UsedImplicitly]
+    partial void OnCategoryFilterTypeChanged(FilterType value)
     {
-        _watcher.EnableRaisingEvents = false;
-        await _modService.OnReinstallMod(item);
-        _watcher.EnableRaisingEvents = true;
+        _logger.Information("Category Filter Changed: {Filter}", value);
+        _sourceCache.Refresh();
     }
 
-    [RelayCommand]
-    private async Task OnToggleMod(Mod item)
+    // TODO Only load added/removed/modified mods instead of all (lxy, 2023/9/23) Planning Time: 2 months
+    private void StartModsDllMonitor()
     {
-        _watcher.EnableRaisingEvents = false;
-        await _modService.OnToggleMod(item);
+        _watcher.Path = _savingService.Settings.ModsFolder;
+        _watcher.Filters.Add("*.dll");
+        _watcher.Filters.Add("*.disabled");
+        _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
+        _watcher.Changed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
+        _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
+        _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
         _watcher.EnableRaisingEvents = true;
+        _logger.Information("Mods Dll File Monitor Started");
     }
 
+    #region Commands
+
     [RelayCommand]
-    private async Task OnDeleteMod(Mod item)
-    {
-        _watcher.EnableRaisingEvents = false;
-        await _modService.OnDeleteMod(item);
-        _watcher.EnableRaisingEvents = true;
-    }
+    private async Task OnInstallMod(Mod item) => await ExecuteWithWatcherDisabled(_modService.OnInstallMod, item);
+
+    [RelayCommand]
+    private async Task OnReinstallMod(Mod item) => await ExecuteWithWatcherDisabled(_modService.OnReinstallMod, item);
+
+    [RelayCommand]
+    private async Task OnToggleMod(Mod item) => await ExecuteWithWatcherDisabled(_modService.OnToggleMod, item);
+
+    [RelayCommand]
+    private async Task OnDeleteMod(Mod item) => await ExecuteWithWatcherDisabled(_modService.OnDeleteMod, item);
 
     [RelayCommand]
     private async Task OnInstallMelonLoader() => await LocalService.OnInstallMelonLoader();
@@ -136,26 +149,5 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     [RelayCommand]
     private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
 
-    [UsedImplicitly]
-    partial void OnFilterChanged(string value) => _sourceCache.Refresh();
-
-    partial void OnCategoryFilterTypeChanged(FilterType value)
-    {
-        _logger.Information("Category Filter Changed: {Filter}", value);
-        _sourceCache.Refresh();
-    }
-
-    // TODO Only load added/removed/modified mods instead of all (lxy, 2023/9/23) Planning Time: 2 months
-    private void StartModsDllMonitor()
-    {
-        _watcher.Path = _savingService.Settings.ModsFolder;
-        _watcher.Filters.Add("*.dll");
-        _watcher.Filters.Add("*.disabled");
-        _watcher.Renamed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.Changed += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.Created += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.Deleted += async (_, _) => await _modService.InitializeModList(_sourceCache, Mods);
-        _watcher.EnableRaisingEvents = true;
-        _logger.Information("Mods Dll File Monitor Started");
-    }
+    #endregion
 }

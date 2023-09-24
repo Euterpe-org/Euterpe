@@ -1,9 +1,6 @@
-﻿using System.Collections.Immutable;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using AssetsTools.NET.Extra;
 using DialogHostAvalonia;
 using MelonLoader;
@@ -14,26 +11,6 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class LocalService : ILocalService
 {
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    private static readonly ImmutableList<string> WindowsPaths = new List<string>
-        {
-            @"Program Files\Steam\steamapps\common\Muse Dash",
-            @"Program Files (x86)\Steam\steamapps\common\Muse Dash",
-            @"Program Files\SteamLibrary\steamapps\common\Muse Dash",
-            @"Program Files (x86)\SteamLibrary\steamapps\common\Muse Dash",
-            @"Steam/steamapps\common\Muse Dash",
-            @"SteamLibrary\steamapps\common\Muse Dash"
-        }
-        .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToImmutableList();
-
-    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    private static readonly ImmutableList<string> LinuxPaths = new List<string>
-        {
-            ".local/share/Steam/steamapps/common/Muse Dash",
-            ".steam/steam/steamapps/common/Muse Dash"
-        }
-        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToImmutableList();
-
     [UsedImplicitly]
     public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
 
@@ -42,6 +19,9 @@ public partial class LocalService : ILocalService
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
     public ISavingService SavingService { get; init; }
@@ -65,7 +45,7 @@ public partial class LocalService : ILocalService
 
         try
         {
-            if (OperatingSystem.IsWindows() && !await VerifyGameVersion()) return;
+            if (!await PlatformService.VerifyGameVersion()) return;
             await CreateFiles();
             IsValidPath = true;
             Logger.Information("Path verified {Path}", SavingService.Settings.MuseDashFolder);
@@ -85,8 +65,8 @@ public partial class LocalService : ILocalService
     {
         var currentDirectory = Directory.GetCurrentDirectory();
         var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
-        var updaterFilePath = GetUpdaterFilePath(currentDirectory);
-        var updaterTargetPath = GetUpdaterFilePath(updaterTargetFolder);
+        var updaterFilePath = PlatformService.GetUpdaterFilePath(currentDirectory);
+        var updaterTargetPath = PlatformService.GetUpdaterFilePath(updaterTargetFolder);
 
         if (!await CheckUpdaterFilesExist(updaterFilePath, updaterTargetFolder)) return false;
 
@@ -127,31 +107,6 @@ public partial class LocalService : ILocalService
         mod.SHA256 = MelonUtils.ComputeSimpleSHA256Hash(filePath);
         Logger.Information("Local mod {Name} loaded. File name {FileName}", mod.Name, mod.FileName);
         return mod;
-    }
-
-    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public bool GetPathOnLinux(out string? folderPath)
-    {
-        folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
-        if (folderPath is null) return false;
-        Logger.Information("Auto detected game path on Linux {Path}", folderPath);
-        return true;
-    }
-
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public bool GetPathOnWindows(out string? folderPath)
-    {
-        folderPath = WindowsPaths.FirstOrDefault(Directory.Exists);
-
-        if (folderPath is null)
-        {
-            if (!GetPathFromRegistry(out folderPath)) return false;
-            Logger.Information("Auto detected game path from Registry {Path}", folderPath);
-            return true;
-        }
-
-        Logger.Information("Auto detected game path on Windows {Path}", folderPath);
-        return true;
     }
 
     public async Task OnInstallMelonLoader()
@@ -249,10 +204,7 @@ public partial class LocalService : ILocalService
 
         var logPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");
         Logger.Information("Opening Log folder...");
-        if (OperatingSystem.IsWindows())
-            Process.Start("explorer.exe", "/select, " + logPath);
-        if (OperatingSystem.IsLinux())
-            Process.Start("xdg-open", logPath);
+        PlatformService.OpenLogFolder(logPath);
     }
 
     public async Task<string> ReadGameVersion()

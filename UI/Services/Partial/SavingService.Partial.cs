@@ -15,8 +15,7 @@ public partial class SavingService
     private async Task TryGetGameFolderPath()
     {
         _logger.Information("Trying auto detect game path");
-        if (OperatingSystem.IsWindows() && LocalService.Value.GetPathOnWindows(out var folderPath)) await ConfirmPath(folderPath!);
-        else if (OperatingSystem.IsLinux() && LocalService.Value.GetPathOnLinux(out folderPath)) await ConfirmPath(folderPath!);
+        if (PlatformService.GetPath(out var folderPath)) await ConfirmPath(folderPath!);
     }
 
     /// <summary>

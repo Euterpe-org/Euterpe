@@ -26,6 +26,9 @@ public partial class SavingService : ISavingService
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; }
+
+    [UsedImplicitly]
     public ISerializeService SerializeService { get; init; }
 
     [UsedImplicitly]

@@ -1,40 +1,31 @@
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using Microsoft.Win32;
 
 namespace MuseDashModToolsUI.Services;
 
 public partial class LocalService
 {
     /// <summary>
-    ///     Get game folder path from Registry
+    ///     Check updater files exist
     /// </summary>
-    /// <param name="folderPath"></param>
-    /// <returns>Is success</returns>
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    private static bool GetPathFromRegistry(out string folderPath)
+    /// <param name="updaterFilePath"></param>
+    /// <param name="updaterTargetFolder"></param>
+    /// <returns>Is exist</returns>
+    private async Task<bool> CheckUpdaterFilesExist(string updaterFilePath, string updaterTargetFolder)
     {
-        folderPath = string.Empty;
-        if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null) is not string steamPath)
+        if (!File.Exists(updaterFilePath))
+        {
+            Logger.Error("Updater not found");
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_UpdaterNotFound);
             return false;
-        folderPath = Path.Combine(steamPath, "steamapps", "common", "Muse Dash");
-        return Directory.Exists(folderPath);
-    }
+        }
 
-    /// <summary>
-    ///     Verify game exe version
-    /// </summary>
-    /// <returns>Is correct version</returns>
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    private async Task<bool> VerifyGameVersion()
-    {
-        var version = FileVersionInfo.GetVersionInfo(SavingService.Settings.MuseDashExePath).FileVersion;
-        if (version is "2019.4.32.16288752") return true;
-        Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-        await MessageBoxService.ErrorMessageBox(MsgBox_Content_IncorrectVersion);
-        return false;
+        if (!Directory.Exists(updaterTargetFolder))
+        {
+            Directory.CreateDirectory(updaterTargetFolder);
+            Logger.Information("Create Update target folder success");
+        }
+
+        return true;
     }
 
     #region CheckValidPath Private Methods
@@ -77,47 +68,6 @@ public partial class LocalService
         var cfgFilePath = Path.Join(SavingService.Settings.MuseDashFolder, "UserData", "MuseDashModTools.cfg");
         await File.WriteAllTextAsync(cfgFilePath, Environment.ProcessPath);
         Logger.Information("Write path into cfg file successfully");
-    }
-
-    #endregion
-
-    #region LaunchUpdater Private Methods
-
-    /// <summary>
-    ///     Get Updater file path
-    /// </summary>
-    /// <param name="folder">Created Updater folder path</param>
-    /// <returns>Updater file path</returns>
-    private static string GetUpdaterFilePath(string folder)
-    {
-        if (OperatingSystem.IsWindows()) return Path.Combine(folder, "Updater.exe");
-        if (OperatingSystem.IsLinux()) return Path.Combine(folder, "Updater");
-
-        return Path.Combine(folder, "Updater.exe");
-    }
-
-    /// <summary>
-    ///     Check updater files exist
-    /// </summary>
-    /// <param name="updaterFilePath"></param>
-    /// <param name="updaterTargetFolder"></param>
-    /// <returns>Is exist</returns>
-    private async Task<bool> CheckUpdaterFilesExist(string updaterFilePath, string updaterTargetFolder)
-    {
-        if (!File.Exists(updaterFilePath))
-        {
-            Logger.Error("Updater not found");
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_UpdaterNotFound);
-            return false;
-        }
-
-        if (!Directory.Exists(updaterTargetFolder))
-        {
-            Directory.CreateDirectory(updaterTargetFolder);
-            Logger.Information("Create Update target folder success");
-        }
-
-        return true;
     }
 
     #endregion
