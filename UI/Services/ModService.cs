@@ -11,6 +11,7 @@ namespace MuseDashModToolsUI.Services;
 public partial class ModService : IModService
 {
     private string _currentGameVersion;
+    private bool[] _isTracked;
     private List<Mod> _localMods;
     private ReadOnlyObservableCollection<Mod> _mods;
     private SourceCache<Mod, string> _sourceCache;
