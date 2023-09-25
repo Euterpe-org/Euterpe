@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Text.Json.Serialization;
 using NuGet.Versioning;
 
@@ -7,7 +8,7 @@ namespace MuseDashModToolsUI.Models;
 public class Setting
 {
     public string? MuseDashFolder { get; set; }
-    public string? LanguageCode { get; set; }
+    public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
     public string? FontName { get; set; } = FontManageService.DefaultFont;
     public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(BuildInfo.Version);
 

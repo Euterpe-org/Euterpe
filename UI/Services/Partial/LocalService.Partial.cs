@@ -35,17 +35,22 @@ public partial class LocalService
     /// </summary>
     private async Task CheckGameFileExist()
     {
-        var gameAssemblyPath = Path.Join(SavingService.Settings.MuseDashFolder, "GameAssembly.dll");
-
-        if (!File.Exists(SavingService.Settings.MuseDashExePath) || !File.Exists(gameAssemblyPath))
+        while (true)
         {
-            Logger.Error("No game files found in {Path}, showing error message box...", SavingService.Settings.MuseDashFolder);
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoExeFound);
-            await SavingService.OnChoosePath();
-            await CheckGameFileExist();
-        }
+            var gameAssemblyPath = Path.Join(SavingService.Settings.MuseDashFolder, "GameAssembly.dll");
 
-        Logger.Information("Game files exists");
+            if (!File.Exists(SavingService.Settings.MuseDashExePath) || !File.Exists(gameAssemblyPath))
+            {
+                Logger.Error("No game files found in {Path}, showing error message box...", SavingService.Settings.MuseDashFolder);
+                await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoExeFound);
+                await SavingService.GetFolderPath();
+            }
+            else
+            {
+                Logger.Information("Game files exists");
+                break;
+            }
+        }
     }
 
     /// <summary>

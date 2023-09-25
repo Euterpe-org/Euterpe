@@ -14,7 +14,7 @@ public partial class SavingService
     /// </summary>
     private async Task TryGetGameFolderPath()
     {
-        _logger.Information("Trying auto detect game path");
+        _logger.Information("Trying auto detect game path...");
         if (_platformService.GetGamePath(out var folderPath)) await ConfirmPath(folderPath!);
     }
 
@@ -26,56 +26,26 @@ public partial class SavingService
     {
         if (!await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_InstallPathConfirm, folderPath))
         {
-            await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
-            await OnChoosePath();
+            _logger.Information("User canceled auto detect game path, asking user to choose path");
+            await GetFolderPath();
             return;
         }
 
-        await WriteSettings(folderPath);
+        Settings.MuseDashFolder = folderPath;
     }
 
     /// <summary>
-    ///     Write Setting into Settings.json
+    ///     If Updater files exist, delete them
     /// </summary>
-    /// <param name="path">Muse Dash Folder Path</param>
-    private async Task WriteSettings(string path)
+    private void DeleteUpdater()
     {
-        Settings.MuseDashFolder = path;
-        Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
+        var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
+        var updaterPath = _platformService.GetUpdaterFilePath(updateDirectory);
+        if (!_fileSystem.File.Exists(updaterPath)) return;
 
-        SettingsViewModel.Value.UpdatePath();
-
-        var json = SerializeService.SerializeSetting(Settings);
-        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-        _logger.Information("Settings saved to Settings.json");
-    }
-
-    /// <summary>
-    ///     Catch null setting and ask user to choose path
-    ///     Set some value to default value if it's null
-    /// </summary>
-    /// <param name="settings"></param>
-    private async Task NullSettingCatch(Setting settings)
-    {
-        if (string.IsNullOrEmpty(settings.MuseDashFolder))
-        {
-            _logger.Error("Settings.json stored path is empty, asking user to choose path");
-            await MessageBoxService.WarningMessageBox(MsgBox_Content_NullPath);
-            await OnChoosePath();
-            settings.MuseDashFolder = Settings.MuseDashFolder;
-        }
-
-        if (string.IsNullOrEmpty(settings.LanguageCode))
-        {
-            settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
-            _logger.Warning("Settings.json stored language code is empty, using system language");
-        }
-
-        if (string.IsNullOrEmpty(settings.FontName))
-        {
-            settings.FontName = FontManageService.DefaultFont;
-            _logger.Warning("Settings.json stored font name is empty, using default font");
-        }
+        _fileSystem.File.Delete(updaterPath);
+        _fileSystem.Directory.Delete(updateDirectory);
+        _logger.Information("Updater found, deleting it");
     }
 
     /// <summary>
@@ -131,20 +101,35 @@ public partial class SavingService
         Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenEnabling"]?.ToString()!);
         Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDeleting"]?.ToString()!);
         Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDisabling"]?.ToString()!);
+
+        _isSavedLoaded = true;
         _logger.Information("Saved setting loaded from Settings.json");
     }
 
     /// <summary>
-    ///     If Updater files exist, delete them
+    ///     Catch null setting and ask user to choose path
+    ///     Set some value to default value if it's null
     /// </summary>
-    private void DeleteUpdater()
+    private async Task NullSettingsCatch()
     {
-        var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
-        var updaterPath = _platformService.GetUpdaterFilePath(updateDirectory);
-        if (!_fileSystem.File.Exists(updaterPath)) return;
+        _logger.Information("Detecting null settings...");
+        if (string.IsNullOrEmpty(Settings.MuseDashFolder))
+        {
+            _logger.Error("Muse Dash path is empty, asking user to choose path");
+            await MessageBoxService.WarningMessageBox(MsgBox_Content_NullPath);
+            await GetFolderPath();
+        }
 
-        _fileSystem.File.Delete(updaterPath);
-        _fileSystem.Directory.Delete(updateDirectory);
-        _logger.Information("Updater found, deleting it");
+        if (string.IsNullOrEmpty(Settings.LanguageCode))
+        {
+            Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
+            _logger.Warning("Language code is empty, using system language");
+        }
+
+        if (string.IsNullOrEmpty(Settings.FontName))
+        {
+            Settings.FontName = FontManageService.DefaultFont;
+            _logger.Warning("Font name is empty, using default font");
+        }
     }
 }

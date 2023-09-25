@@ -17,10 +17,10 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
     {
         _logAnalyzeService = logAnalyzeService;
         _logger = logger;
-        Initialize();
+        Initialize().ConfigureAwait(false);
     }
 
-    public async void Initialize()
+    public async Task Initialize()
     {
         LogContent = await _logAnalyzeService.LoadLog();
         _logger.Information("Log Analysis Window Initialized");

@@ -10,6 +10,7 @@ public partial class SavingService : ISavingService
     private readonly IFileSystem _fileSystem;
     private readonly ILogger _logger;
     private readonly IPlatformService _platformService;
+    private bool _isSavedLoaded;
 
     private static string ConfigFolderPath
     {
@@ -49,36 +50,9 @@ public partial class SavingService : ISavingService
         Load().Wait();
     }
 
-    public Setting Settings { get; private set; } = new();
+    public Setting Settings { get; } = new();
 
-    // TODO Fix recursive initialize setting (lxy, 2023/9/18) Planning Time: 2 months
-    public async Task InitializeSettings()
-    {
-        _logger.Information("Initializing settings...");
-        try
-        {
-            if (!_fileSystem.File.Exists(SettingPath))
-            {
-                _logger.Error("Settings.json not found, creating new one");
-                await TryGetGameFolderPath();
-            }
-
-            var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
-            var settings = SerializeService.DeserializeSetting(text)!;
-            await NullSettingCatch(settings);
-
-            Settings = settings.Clone();
-            await LocalService.Value.CheckValidPath();
-            LogAnalysisViewModel.Value.Initialize();
-        }
-        catch (Exception ex)
-        {
-            _logger.Error(ex, "Error occurred while initializing settings");
-            await MessageBoxService.ErrorMessageBox(ex);
-        }
-    }
-
-    public async Task OnChoosePath()
+    public async Task GetFolderPath()
     {
         var path = await GetChosenPath();
 
@@ -89,16 +63,45 @@ public partial class SavingService : ISavingService
         }
 
         _logger.Information("User chose path {Path}", path);
-        await WriteSettings(path!);
+        Settings.MuseDashFolder = path;
+    }
 
-        ModManageViewModel.Value.Initialize();
-        LogAnalysisViewModel.Value.Initialize();
+    // TODO Fix recursive initialize setting (lxy, 2023/9/18) Planning Time: 2 months
+    public async Task InitializeSettings()
+    {
+        _logger.Information("Initializing settings...");
+
+        if (!_isSavedLoaded)
+        {
+            _logger.Error("Settings.json not found or invalid, getting game path...");
+            await TryGetGameFolderPath();
+        }
+
+        // Check for null setting and path validity
+        await NullSettingsCatch();
+        await LocalService.Value.CheckValidPath();
+
+        // Update path in SettingsView and log content in LogAnalysisView
+        SettingsViewModel.Value.UpdatePath();
+        await LogAnalysisViewModel.Value.Initialize();
+    }
+
+    public async Task OnChoosePath()
+    {
+        await GetFolderPath();
+
+        await NullSettingsCatch();
+        await LocalService.Value.CheckValidPath();
+
+        SettingsViewModel.Value.UpdatePath();
+        await LogAnalysisViewModel.Value.Initialize();
+        await ModManageViewModel.Value.Initialize();
     }
 
     public async Task Save()
     {
         var json = SerializeService.SerializeSetting(Settings);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-        _logger.Information("Settings saved");
+        _logger.Information("Settings saved to Settings.json");
     }
 }

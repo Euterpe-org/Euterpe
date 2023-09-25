@@ -2,5 +2,9 @@
 
 public interface IModManageViewModel
 {
-    void Initialize();
+    /// <summary>
+    ///     Initialize mod list and start dll monitor
+    /// </summary>
+    /// <returns></returns>
+    Task Initialize();
 }
