@@ -15,7 +15,7 @@ public partial class SavingService
     private async Task TryGetGameFolderPath()
     {
         _logger.Information("Trying auto detect game path");
-        if (PlatformService.GetGamePath(out var folderPath)) await ConfirmPath(folderPath!);
+        if (_platformService.GetGamePath(out var folderPath)) await ConfirmPath(folderPath!);
     }
 
     /// <summary>
@@ -121,8 +121,8 @@ public partial class SavingService
         if (settings is null) return;
 
         Settings.MuseDashFolder = settings["MuseDashFolder"]?.ToString();
-        Settings.LanguageCode = settings["LanguageCode"]?.ToString();
-        Settings.FontName = settings["FontName"]?.ToString();
+        Settings.LanguageCode = settings["LanguageCode"]?.ToString() ?? CultureInfo.CurrentUICulture.ToString();
+        Settings.FontName = settings["FontName"]?.ToString() ?? FontManageService.DefaultFont;
         if (SemanticVersion.TryParse(settings["SkipVersion"]?.ToString()!, out var version))
             Settings.SkipVersion = version;
         Settings.DownloadSource = Enum.Parse<DownloadSources>(settings["DownloadSource"]?.ToString()!);
@@ -140,17 +140,11 @@ public partial class SavingService
     private void DeleteUpdater()
     {
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
-        var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
-        if (_fileSystem.File.Exists(updaterPath))
-        {
-            _fileSystem.File.Delete(updaterPath);
-            _logger.Information("Updater.exe found, deleting it");
-        }
+        var updaterPath = _platformService.GetUpdaterFilePath(updateDirectory);
+        if (!_fileSystem.File.Exists(updaterPath)) return;
 
-        if (_fileSystem.Directory.Exists(updateDirectory))
-        {
-            _fileSystem.Directory.Delete(updateDirectory);
-            _logger.Information("Update directory found, deleting it");
-        }
+        _fileSystem.File.Delete(updaterPath);
+        _fileSystem.Directory.Delete(updateDirectory);
+        _logger.Information("Updater found, deleting it");
     }
 }

@@ -143,7 +143,7 @@ public partial class ModService
         {
             if (_isTracked[i]) continue;
             var localMod = _localMods[i];
-            if (_localMods.FirstOrDefault(x => x.Name == localMod.Name)!.IsTracked) continue;
+            if (_localMods.Find(x => x.Name == localMod.Name)!.IsTracked) continue;
             if (_localMods.Count(x => x.Name == localMod.Name) > 1)
             {
                 localMod.IsDuplicated = true;

@@ -9,6 +9,7 @@ public partial class SavingService : ISavingService
 {
     private readonly IFileSystem _fileSystem;
     private readonly ILogger _logger;
+    private readonly IPlatformService _platformService;
 
     private static string ConfigFolderPath
     {
@@ -26,9 +27,6 @@ public partial class SavingService : ISavingService
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; }
-
-    [UsedImplicitly]
     public ISerializeService SerializeService { get; init; }
 
     [UsedImplicitly]
@@ -43,10 +41,11 @@ public partial class SavingService : ISavingService
     [UsedImplicitly]
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
-    public SavingService(ILogger logger, IFileSystem fileSystem)
+    public SavingService(IFileSystem fileSystem, ILogger logger, IPlatformService platformService)
     {
-        _logger = logger;
         _fileSystem = fileSystem;
+        _logger = logger;
+        _platformService = platformService;
         Load().Wait();
     }
 
@@ -79,13 +78,6 @@ public partial class SavingService : ISavingService
         }
     }
 
-    public async Task Save()
-    {
-        var json = SerializeService.SerializeSetting(Settings);
-        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-        _logger.Information("Settings saved");
-    }
-
     public async Task OnChoosePath()
     {
         var path = await GetChosenPath();
@@ -101,5 +93,12 @@ public partial class SavingService : ISavingService
 
         ModManageViewModel.Value.Initialize();
         LogAnalysisViewModel.Value.Initialize();
+    }
+
+    public async Task Save()
+    {
+        var json = SerializeService.SerializeSetting(Settings);
+        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
+        _logger.Information("Settings saved");
     }
 }
