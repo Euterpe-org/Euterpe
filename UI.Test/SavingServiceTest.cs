@@ -36,7 +36,7 @@ public class SavingServiceTest
         fs.Setup(f => f.File.Exists(updaterPath)).Returns(false);
         fs.Setup(f => f.Directory.Exists(It.IsAny<string?>())).Returns(false);
         fs.Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(SettingJson);
-        var savingService = new SavingService(_logger, fs.Object)
+        var savingService = new SavingService(fs.Object, _logger, new Mock<IPlatformService>().Object)
         {
             MessageBoxService = new Mock<IMessageBoxService>().Object,
             SerializeService = new SerializeService()
