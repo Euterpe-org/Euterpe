@@ -46,8 +46,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             .Bind(out _mods)
             .Subscribe();
 
-        _savingService.InitializeSettings().ConfigureAwait(false);
-        Initialize().ConfigureAwait(false);
+        _savingService.InitializeSettings().ContinueWith(_ => Initialize()).ConfigureAwait(false);
     }
 
     public async Task Initialize()
