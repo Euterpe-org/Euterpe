@@ -2,10 +2,16 @@
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class UpdateTextService : IUpdateTextService
+public partial class UpdateUIService : IUpdateUIService
 {
     [UsedImplicitly]
+    public ILogAnalysisViewModel LogAnalysisViewModel { get; init; }
+
+    [UsedImplicitly]
     public IMainWindowViewModel MainWindowViewModel { get; init; }
+
+    [UsedImplicitly]
+    public IModManageViewModel ModManageViewModel { get; init; }
 
     [UsedImplicitly]
     public ISettingsViewModel SettingsViewModel { get; init; }
@@ -18,5 +24,12 @@ public partial class UpdateTextService : IUpdateTextService
         ChangeTabName();
         ChangeOptionName();
         RecoverOption();
+    }
+
+    public async Task InitializeTabs()
+    {
+        SettingsViewModel.UpdatePath();
+        await ModManageViewModel.Initialize();
+        await LogAnalysisViewModel.Initialize();
     }
 }

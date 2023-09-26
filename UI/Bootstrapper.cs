@@ -28,7 +28,7 @@ public static class Bootstrapper
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SerializeService>().As<ISerializeService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
 
         // Platform Service
         if (OperatingSystem.IsWindows())

@@ -13,7 +13,7 @@ public partial class LocalizationService : ILocalizationService, INotifyProperty
     public ISavingService SavingService { get; init; }
 
     [UsedImplicitly]
-    public Lazy<IUpdateTextService> UpdateTextService { get; init; }
+    public Lazy<IUpdateUIService> UpdateTextService { get; init; }
 
     public LocalizationService(ILogger logger)
     {

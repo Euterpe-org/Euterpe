@@ -65,7 +65,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private async Task OnChoosePath()
     {
         _logger.Information("Choose path button clicked");
-        await _savingService.OnChoosePath(true);
+        await _savingService.OnChoosePath();
     }
 
     #region OnPropertyChanged

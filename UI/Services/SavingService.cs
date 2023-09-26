@@ -42,6 +42,9 @@ public partial class SavingService : ISavingService
     [UsedImplicitly]
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
+    [UsedImplicitly]
+    public Lazy<IUpdateUIService> UpdateUIService { get; init; }
+
     public SavingService(IFileSystem fileSystem, ILogger logger, IPlatformService platformService)
     {
         _fileSystem = fileSystem;
@@ -63,13 +66,17 @@ public partial class SavingService : ISavingService
         }
 
         await CheckSettingValidity();
-
-        // Update path in SettingsView and log content in LogAnalysisView
-        SettingsViewModel.Value.UpdatePath();
-        await LogAnalysisViewModel.Value.Initialize();
+        await UpdateUIService.Value.InitializeTabs();
     }
 
-    public async Task OnChoosePath(bool isInitializeTabs = false)
+    public async Task Save()
+    {
+        var json = SerializeService.SerializeSetting(Settings);
+        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
+        _logger.Information("Settings saved to Settings.json");
+    }
+
+    public async Task OnChoosePath()
     {
         var path = await GetChosenPath();
 
@@ -83,19 +90,5 @@ public partial class SavingService : ISavingService
         Settings.MuseDashFolder = path;
 
         await CheckSettingValidity();
-
-        if (isInitializeTabs)
-        {
-            SettingsViewModel.Value.UpdatePath();
-            await LogAnalysisViewModel.Value.Initialize();
-            await ModManageViewModel.Value.Initialize();
-        }
-    }
-
-    public async Task Save()
-    {
-        var json = SerializeService.SerializeSetting(Settings);
-        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-        _logger.Information("Settings saved to Settings.json");
     }
 }

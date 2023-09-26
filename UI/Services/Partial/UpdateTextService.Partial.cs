@@ -1,6 +1,6 @@
 namespace MuseDashModToolsUI.Services;
 
-public partial class UpdateTextService
+public partial class UpdateUIService
 {
     /// <summary>
     ///     Change Main Window tab display name

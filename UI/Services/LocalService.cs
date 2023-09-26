@@ -162,7 +162,6 @@ public partial class LocalService : ILocalService
         {
             Logger.Error("Not valid path, showing error message box...");
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
-            await SavingService.OnChoosePath(true);
             return;
         }
 
@@ -180,7 +179,6 @@ public partial class LocalService : ILocalService
         {
             Logger.Error("Not valid path, showing error message box...");
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
-            await SavingService.OnChoosePath(true);
             return;
         }
 
@@ -198,7 +196,6 @@ public partial class LocalService : ILocalService
         {
             Logger.Error("Not valid path, showing error message box...");
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
-            await SavingService.OnChoosePath(true);
             return;
         }
 
