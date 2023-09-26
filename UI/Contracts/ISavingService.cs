@@ -5,12 +5,6 @@ public interface ISavingService
     public Setting Settings { get; }
 
     /// <summary>
-    ///     Get muse dash folder path from user
-    /// </summary>
-    /// <returns></returns>
-    Task GetFolderPath();
-
-    /// <summary>
     ///     Initialize Settings
     /// </summary>
     /// <returns></returns>
@@ -19,8 +13,9 @@ public interface ISavingService
     /// <summary>
     ///     Get muse dash folder path and Initialize tabs
     /// </summary>
+    /// <param name="isInitializeTabs"></param>
     /// <returns></returns>
-    Task OnChoosePath();
+    Task OnChoosePath(bool isInitializeTabs = false);
 
     /// <summary>
     ///     Save Settings into Settings.json

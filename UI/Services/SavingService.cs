@@ -52,7 +52,24 @@ public partial class SavingService : ISavingService
 
     public Setting Settings { get; } = new();
 
-    public async Task GetFolderPath()
+    public async Task InitializeSettings()
+    {
+        _logger.Information("Initializing settings...");
+
+        if (!_isSavedLoaded)
+        {
+            _logger.Error("Settings.json not found or invalid, getting game path...");
+            await TryGetGameFolderPath();
+        }
+
+        await CheckSettingValidity();
+
+        // Update path in SettingsView and log content in LogAnalysisView
+        SettingsViewModel.Value.UpdatePath();
+        await LogAnalysisViewModel.Value.Initialize();
+    }
+
+    public async Task OnChoosePath(bool isInitializeTabs = false)
     {
         var path = await GetChosenPath();
 
@@ -64,38 +81,15 @@ public partial class SavingService : ISavingService
 
         _logger.Information("User chose path {Path}", path);
         Settings.MuseDashFolder = path;
-    }
 
-    // TODO Fix recursive initialize setting (lxy, 2023/9/18) Planning Time: 2 months
-    public async Task InitializeSettings()
-    {
-        _logger.Information("Initializing settings...");
+        await CheckSettingValidity();
 
-        if (!_isSavedLoaded)
+        if (isInitializeTabs)
         {
-            _logger.Error("Settings.json not found or invalid, getting game path...");
-            await TryGetGameFolderPath();
+            SettingsViewModel.Value.UpdatePath();
+            await LogAnalysisViewModel.Value.Initialize();
+            await ModManageViewModel.Value.Initialize();
         }
-
-        // Check for null setting and path validity
-        await NullSettingsCatch();
-        await LocalService.Value.CheckValidPath();
-
-        // Update path in SettingsView and log content in LogAnalysisView
-        SettingsViewModel.Value.UpdatePath();
-        await LogAnalysisViewModel.Value.Initialize();
-    }
-
-    public async Task OnChoosePath()
-    {
-        await GetFolderPath();
-
-        await NullSettingsCatch();
-        await LocalService.Value.CheckValidPath();
-
-        SettingsViewModel.Value.UpdatePath();
-        await LogAnalysisViewModel.Value.Initialize();
-        await ModManageViewModel.Value.Initialize();
     }
 
     public async Task Save()

@@ -10,12 +10,12 @@ namespace MuseDashModToolsUI.Services;
 public partial class SavingService
 {
     /// <summary>
-    ///     Try automatically find game folder path
+    ///     Check null setting and valid path
     /// </summary>
-    private async Task TryGetGameFolderPath()
+    private async Task CheckSettingValidity()
     {
-        _logger.Information("Trying auto detect game path...");
-        if (_platformService.GetGamePath(out var folderPath)) await ConfirmPath(folderPath!);
+        await NullSettingsCatch();
+        await LocalService.Value.CheckValidPath();
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public partial class SavingService
         if (!await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_InstallPathConfirm, folderPath))
         {
             _logger.Information("User canceled auto detect game path, asking user to choose path");
-            await GetFolderPath();
+            await OnChoosePath();
             return;
         }
 
@@ -117,7 +117,7 @@ public partial class SavingService
         {
             _logger.Error("Muse Dash path is empty, asking user to choose path");
             await MessageBoxService.WarningMessageBox(MsgBox_Content_NullPath);
-            await GetFolderPath();
+            await OnChoosePath();
         }
 
         if (string.IsNullOrEmpty(Settings.LanguageCode))
@@ -131,5 +131,14 @@ public partial class SavingService
             Settings.FontName = FontManageService.DefaultFont;
             _logger.Warning("Font name is empty, using default font");
         }
+    }
+
+    /// <summary>
+    ///     Try automatically find game folder path
+    /// </summary>
+    private async Task TryGetGameFolderPath()
+    {
+        _logger.Information("Trying auto detect game path...");
+        if (_platformService.GetGamePath(out var folderPath)) await ConfirmPath(folderPath!);
     }
 }
