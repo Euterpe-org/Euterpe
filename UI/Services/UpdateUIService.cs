@@ -4,6 +4,8 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class UpdateUIService : IUpdateUIService
 {
+    public ILogger Logger { get; init; }
+
     [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
 
@@ -31,5 +33,7 @@ public partial class UpdateUIService : IUpdateUIService
         SettingsViewModel.Value.UpdatePath();
         await ModManageViewModel.Value.Initialize();
         await LogAnalysisViewModel.Value.Initialize();
+
+        Logger.Information("Tabs initialized");
     }
 }
