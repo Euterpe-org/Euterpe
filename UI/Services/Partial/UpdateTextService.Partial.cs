@@ -7,9 +7,9 @@ public partial class UpdateUIService
     /// </summary>
     private void ChangeTabName()
     {
-        MainWindowViewModel.Tabs[0].DisplayName = XAML_Tab_ModManage;
-        MainWindowViewModel.Tabs[1].DisplayName = XAML_Tab_LogAnalysis;
-        MainWindowViewModel.Tabs[2].DisplayName = XAML_Tab_Setting;
+        MainWindowViewModel.Value.Tabs[0].DisplayName = XAML_Tab_ModManage;
+        MainWindowViewModel.Value.Tabs[1].DisplayName = XAML_Tab_LogAnalysis;
+        MainWindowViewModel.Value.Tabs[2].DisplayName = XAML_Tab_Setting;
     }
 
     /// <summary>
@@ -17,8 +17,9 @@ public partial class UpdateUIService
     /// </summary>
     private void ChangeOptionName()
     {
-        SettingsViewModel.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
-        SettingsViewModel.DownloadSources = new[] { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
+        SettingsViewModel.Value.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
+        SettingsViewModel.Value.DownloadSources = new[]
+            { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
     }
 
     /// <summary>
@@ -26,10 +27,10 @@ public partial class UpdateUIService
     /// </summary>
     private void RecoverOption()
     {
-        SettingsViewModel.CurrentDownloadSource = (int)SavingService.Settings.DownloadSource;
-        SettingsViewModel.DisableDependenciesWhenDeleting = (int)SavingService.Settings.AskDisableDependenciesWhenDeleting;
-        SettingsViewModel.DisableDependenciesWhenDisabling = (int)SavingService.Settings.AskDisableDependenciesWhenDisabling;
-        SettingsViewModel.EnableDependenciesWhenEnabling = (int)SavingService.Settings.AskEnableDependenciesWhenEnabling;
-        SettingsViewModel.EnableDependenciesWhenInstalling = (int)SavingService.Settings.AskEnableDependenciesWhenInstalling;
+        SettingsViewModel.Value.CurrentDownloadSource = (int)SavingService.Value.Settings.DownloadSource;
+        SettingsViewModel.Value.DisableDependenciesWhenDeleting = (int)SavingService.Value.Settings.AskDisableDependenciesWhenDeleting;
+        SettingsViewModel.Value.DisableDependenciesWhenDisabling = (int)SavingService.Value.Settings.AskDisableDependenciesWhenDisabling;
+        SettingsViewModel.Value.EnableDependenciesWhenEnabling = (int)SavingService.Value.Settings.AskEnableDependenciesWhenEnabling;
+        SettingsViewModel.Value.EnableDependenciesWhenInstalling = (int)SavingService.Value.Settings.AskEnableDependenciesWhenInstalling;
     }
 }

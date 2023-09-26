@@ -5,19 +5,19 @@ namespace MuseDashModToolsUI.Services;
 public partial class UpdateUIService : IUpdateUIService
 {
     [UsedImplicitly]
-    public ILogAnalysisViewModel LogAnalysisViewModel { get; init; }
+    public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
 
     [UsedImplicitly]
-    public IMainWindowViewModel MainWindowViewModel { get; init; }
+    public Lazy<IMainWindowViewModel> MainWindowViewModel { get; init; }
 
     [UsedImplicitly]
-    public IModManageViewModel ModManageViewModel { get; init; }
+    public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
 
     [UsedImplicitly]
-    public ISettingsViewModel SettingsViewModel { get; init; }
+    public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Lazy<ISavingService> SavingService { get; init; }
 
     public void UpdateText()
     {
@@ -28,8 +28,8 @@ public partial class UpdateUIService : IUpdateUIService
 
     public async Task InitializeTabs()
     {
-        SettingsViewModel.UpdatePath();
-        await ModManageViewModel.Initialize();
-        await LogAnalysisViewModel.Initialize();
+        SettingsViewModel.Value.UpdatePath();
+        await ModManageViewModel.Value.Initialize();
+        await LogAnalysisViewModel.Value.Initialize();
     }
 }

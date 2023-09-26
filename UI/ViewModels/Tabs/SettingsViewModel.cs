@@ -11,6 +11,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private readonly ILocalizationService _localizationService;
     private readonly ILogger _logger;
     private readonly ISavingService _savingService;
+    private readonly IUpdateUIService _updateUIService;
     [ObservableProperty] private string[] _askTypes;
     [ObservableProperty] private int _currentDownloadSource;
     [ObservableProperty] private int _currentFontIndex;
@@ -31,6 +32,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         _localizationService = context.Resolve<ILocalizationService>();
         _logger = context.Resolve<ILogger>();
         _savingService = context.Resolve<ISavingService>();
+        _updateUIService = context.Resolve<IUpdateUIService>();
         Initialize();
     }
 
@@ -66,6 +68,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     {
         _logger.Information("Choose path button clicked");
         await _savingService.OnChoosePath();
+        await _updateUIService.InitializeTabs();
     }
 
     #region OnPropertyChanged
