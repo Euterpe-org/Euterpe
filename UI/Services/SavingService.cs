@@ -47,7 +47,7 @@ public partial class SavingService : ISavingService
         _fileSystem = fileSystem;
         _logger = logger;
         _platformService = platformService;
-        Load().Wait();
+        Load().ConfigureAwait(false);
     }
 
     public Setting Settings { get; } = new();

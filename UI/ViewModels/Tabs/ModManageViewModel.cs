@@ -19,7 +19,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private FilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
-    private bool _isInitialized;
 
     [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
@@ -47,17 +46,12 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             .Bind(out _mods)
             .Subscribe();
 
+        _savingService.InitializeSettings().ConfigureAwait(false);
         Initialize().ConfigureAwait(false);
     }
 
     public async Task Initialize()
     {
-        if (!_isInitialized)
-        {
-            await _savingService.InitializeSettings();
-            _isInitialized = true;
-        }
-
         await _modService.InitializeModList(_sourceCache, Mods);
         StartModsDllMonitor();
         _logger.Information("Mod Manage Window Initialized");
