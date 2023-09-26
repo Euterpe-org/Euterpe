@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
 using Avalonia.Data.Converters;
-using MuseDashModToolsUI.Models;
-using static MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Converters;
 

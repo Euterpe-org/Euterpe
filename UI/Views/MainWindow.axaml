@@ -69,11 +69,12 @@
             </TabStrip.ItemTemplate>
         </TabStrip>
 
-        <TextBlock Grid.Row="0" Grid.Column="2"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="25"
-                   Text="{Binding Version}" />
+        <Viewbox Grid.Row="0" Grid.Column="2" Margin="0,0,15,0">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="25"
+                       Text="{Binding Version}" />
+        </Viewbox>
 
         <UserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
                      Content="{Binding Content}" />

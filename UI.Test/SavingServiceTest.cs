@@ -10,8 +10,9 @@ public class SavingServiceTest
                                         "MuseDashFolder": "MuseDash",
                                         "LanguageCode": null,
                                         "FontName": null,
-                                        "DownloadSource": 0,
+                                        "SkipVersion": null,
                                         "DownloadPrerelease": false,
+                                        "DownloadSource": 0,
                                         "AskInstallMuseDashModTools": 0,
                                         "AskEnableDependenciesWhenInstalling": 0,
                                         "AskEnableDependenciesWhenEnabling": 0,
@@ -28,6 +29,8 @@ public class SavingServiceTest
     public async Task NullSettingTest()
     {
         var fs = new Mock<IFileSystem>();
+        var localService = new Lazy<ILocalService>(() => new Mock<ILocalService>().Object);
+        var updateUIService = new Lazy<IUpdateUIService>(() => new Mock<IUpdateUIService>().Object);
         var settingPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools",
             "Settings.json");
         var updaterPath = Path.Combine(Directory.GetCurrentDirectory(), "Update", "Updater.exe");
@@ -35,7 +38,13 @@ public class SavingServiceTest
         fs.Setup(f => f.File.Exists(updaterPath)).Returns(false);
         fs.Setup(f => f.Directory.Exists(It.IsAny<string?>())).Returns(false);
         fs.Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(SettingJson);
-        var savingService = new SavingService(_logger, fs.Object) { MessageBoxService = new Mock<IMessageBoxService>().Object };
+        var savingService = new SavingService(fs.Object, _logger, new Mock<IPlatformService>().Object)
+        {
+            LocalService = localService,
+            MessageBoxService = new Mock<IMessageBoxService>().Object,
+            SerializeService = new SerializeService(),
+            UpdateUIService = updateUIService
+        };
         await savingService.InitializeSettings();
 
         Assert.Equal(CultureInfo.CurrentUICulture.Name, savingService.Settings.LanguageCode);

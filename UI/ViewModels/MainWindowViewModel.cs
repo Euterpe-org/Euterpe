@@ -1,10 +1,4 @@
 using Autofac;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Models;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -31,7 +25,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
             new((ViewModelBase)context.Resolve<ISettingsViewModel>(), XAML_Tab_Setting, "Setting")
         };
         SwitchTab();
+#if !DEBUG
         context.Resolve<IGitHubService>().CheckUpdates();
+#endif
         _logger.Information("Main Window initialized");
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }

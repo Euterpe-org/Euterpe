@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel;
 using Avalonia.Media;
-using MuseDashModToolsUI.Contracts;
 using SkiaSharp;
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
 namespace MuseDashModToolsUI.Services;
 
-public class FontManageService : IFontManageService, INotifyPropertyChanged
+public partial class FontManageService : IFontManageService, INotifyPropertyChanged
 {
     private static readonly SKFontManager _skFontManager = SKFontManager.Default;
     private readonly ILogger _logger;
+
+    [UsedImplicitly]
     public ISavingService? SavingService { get; init; }
 
     public FontFamily this[string _] => new(SavingService.Settings.FontName!);
@@ -34,10 +35,4 @@ public class FontManageService : IFontManageService, INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void GetAvailableFonts()
-    {
-        AvailableFonts = _skFontManager.GetFontFamilies().Order().ToList();
-        _logger.Information("Available fonts loaded: {InstalledFonts}", string.Join(",", AvailableFonts));
-    }
 }

@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using CommunityToolkit.Mvvm.Input;
-using MuseDashModToolsUI.Contracts.ViewModels;
 
 #pragma warning disable CS8602
 
@@ -8,6 +6,7 @@ namespace MuseDashModToolsUI.ViewModels.Dialogs;
 
 public partial class ProjectWindowViewModel : ViewModelBase, IProjectWindowViewModel
 {
+    [UsedImplicitly]
     public ILogger? Logger { get; init; }
 
     [RelayCommand]

@@ -2,5 +2,8 @@
 
 public interface ILogAnalysisViewModel
 {
-    void Initialize();
+    /// <summary>
+    ///     Load log content
+    /// </summary>
+    Task Initialize();
 }

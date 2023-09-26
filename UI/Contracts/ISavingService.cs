@@ -1,11 +1,24 @@
-﻿using MuseDashModToolsUI.Models;
-
-namespace MuseDashModToolsUI.Contracts;
+﻿namespace MuseDashModToolsUI.Contracts;
 
 public interface ISavingService
 {
     public Setting Settings { get; }
+
+    /// <summary>
+    ///     Initialize Settings
+    /// </summary>
+    /// <returns></returns>
     Task InitializeSettings();
-    Task Save();
+
+    /// <summary>
+    ///     Get muse dash folder path and Initialize tabs
+    /// </summary>
+    /// <returns></returns>
     Task OnChoosePath();
+
+    /// <summary>
+    ///     Save Settings into Settings.json
+    /// </summary>
+    /// <returns></returns>
+    Task Save();
 }

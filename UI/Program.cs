@@ -1,13 +1,15 @@
+#if !DEBUG
 using System.Diagnostics;
+#endif
 using System.IO;
-using Avalonia;
-using MuseDashModToolsUI.Models;
 
 namespace MuseDashModToolsUI;
 
 internal static class Program
 {
+    [UsedImplicitly]
     private const string IssuePage = "https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose";
+
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
@@ -16,7 +18,11 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        // Prevent multiple launch
+        using var mutex = new Mutex(true, "MuseDashModTools");
+        if (!mutex.WaitOne(TimeSpan.Zero, true)) return;
         CreateLogger();
+        DeleteUnusedLogFile();
         RegisterDependencies();
         try
         {
@@ -27,6 +33,7 @@ internal static class Program
             Log.Logger.Fatal(ex, "Unhandled exception");
             if (File.Exists(Path.Combine("Logs", LogFileName)))
             {
+#if !DEBUG
                 if (OperatingSystem.IsWindows())
                     Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
                 if (OperatingSystem.IsLinux())
@@ -36,6 +43,7 @@ internal static class Program
                     FileName = IssuePage,
                     UseShellExecute = true
                 });
+#endif
             }
         }
     }
@@ -51,9 +59,14 @@ internal static class Program
 #endif
             .WriteTo.File(new LogFileFormatter(),
                 Path.Combine("Logs", LogFileName),
-                rollingInterval: RollingInterval.Infinite,
-                retainedFileCountLimit: 60)
+                rollingInterval: RollingInterval.Infinite)
             .CreateLogger();
+    }
+
+    private static void DeleteUnusedLogFile()
+    {
+        var logs = Directory.GetFiles("Logs", "*.log").OrderDescending().Skip(60);
+        Parallel.ForEachAsync(logs, async (log, c) => { await Task.Run(() => File.Delete(log), c); });
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.

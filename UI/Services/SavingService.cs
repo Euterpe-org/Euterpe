@@ -1,27 +1,16 @@
-﻿using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System.IO.Abstractions;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Platform.Storage;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Extensions;
-using MuseDashModToolsUI.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NuGet.Versioning;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
 
 namespace MuseDashModToolsUI.Services;
 
-public class SavingService : ISavingService
+public partial class SavingService : ISavingService
 {
     private readonly IFileSystem _fileSystem;
     private readonly ILogger _logger;
+    private readonly IPlatformService _platformService;
+    private bool _isSavedLoaded;
 
     private static string ConfigFolderPath
     {
@@ -34,53 +23,59 @@ public class SavingService : ISavingService
     }
 
     private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public ISerializeService SerializeService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
+
+    [UsedImplicitly]
     public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
 
-    public SavingService(ILogger logger, IFileSystem fileSystem)
+    [UsedImplicitly]
+    public Lazy<IUpdateUIService> UpdateUIService { get; init; }
+
+    public SavingService(IFileSystem fileSystem, ILogger logger, IPlatformService platformService)
     {
-        _logger = logger;
         _fileSystem = fileSystem;
-        Load().Wait();
+        _logger = logger;
+        _platformService = platformService;
+        Load().ConfigureAwait(false);
     }
 
-    public Setting Settings { get; private set; } = new();
+    public Setting Settings { get; } = new();
 
     public async Task InitializeSettings()
     {
         _logger.Information("Initializing settings...");
-        try
-        {
-            if (!_fileSystem.File.Exists(SettingPath))
-            {
-                _logger.Error("Settings.json not found, creating new one");
-                await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_ChoosePath.Localize());
-                await OnChoosePath();
-                return;
-            }
 
-            var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
-            var settings = JsonConvert.DeserializeObject<Setting>(text)!;
-            await NullSettingCatch(settings);
-
-            Settings = settings.Clone();
-            await LocalService.Value.CheckValidPath();
-        }
-        catch (Exception ex)
+        if (!_isSavedLoaded)
         {
-            _logger.Error(ex, "Error occurred while initializing settings");
-            await MessageBoxService.CreateErrorMessageBox(ex.ToString());
+            _logger.Error("Settings.json not found or invalid, getting game path...");
+            await TryGetGameFolderPath();
         }
+
+        await CheckSettingValidity();
+        await UpdateUIService.Value.InitializeTabs();
+
+        _logger.Information("Settings initialize finished");
     }
 
     public async Task Save()
     {
-        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+        var json = SerializeService.SerializeSetting(Settings);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-        _logger.Information("Settings saved");
+        _logger.Information("Settings saved to Settings.json");
     }
 
     public async Task OnChoosePath()
@@ -95,100 +90,7 @@ public class SavingService : ISavingService
 
         _logger.Information("User chose path {Path}", path);
         Settings.MuseDashFolder = path;
-        Settings.LanguageCode ??= CultureInfo.CurrentUICulture.Name;
 
-        SettingsViewModel.Value.UpdatePath();
-
-        var json = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-        await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
-        _logger.Information("Settings saved to Settings.json");
-
-        await LocalService.Value.CheckValidPath();
-        ModManageViewModel.Value.Initialize();
-        LogAnalysisViewModel.Value.Initialize();
-    }
-
-    private async Task NullSettingCatch(Setting settings)
-    {
-        if (string.IsNullOrEmpty(settings.MuseDashFolder))
-        {
-            _logger.Error("Settings.json stored path is empty, asking user to choose path");
-            await MessageBoxService.CreateWarningMessageBox(MsgBox_Content_NullPath.Localize());
-            await OnChoosePath();
-            await InitializeSettings();
-        }
-
-        if (string.IsNullOrEmpty(settings.LanguageCode))
-        {
-            settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
-            _logger.Warning("Settings.json stored language code is empty, using system language");
-        }
-
-        if (string.IsNullOrEmpty(settings.FontName))
-        {
-            settings.FontName = FontManageService.DefaultFont;
-            _logger.Warning("Settings.json stored font name is empty, using default font");
-        }
-    }
-
-    private async Task<string?> GetChosenPath()
-    {
-        while (true)
-        {
-            if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
-            _logger.Information("Showing choose folder dialogue");
-
-            var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-                { AllowMultiple = false, Title = FolderDialog_Title });
-
-            if (dialogue.Count != 0) return dialogue[0].TryGetLocalPath();
-            if (!string.IsNullOrEmpty(Settings.MuseDashFolder)) return Settings.MuseDashFolder;
-
-            _logger.Error("Invalid path, showing error message box");
-            await MessageBoxService.CreateErrorMessageBox(MsgBox_Content_InvalidPath);
-        }
-    }
-
-    private async Task Load()
-    {
-        await LoadSavedSetting();
-        DeleteUpdater();
-    }
-
-    private async Task LoadSavedSetting()
-    {
-        if (!_fileSystem.File.Exists(SettingPath)) return;
-        var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
-        var settings = JObject.Parse(text);
-
-        Settings.MuseDashFolder = settings["MuseDashFolder"]?.ToString();
-        Settings.LanguageCode = settings["LanguageCode"]?.ToString();
-        Settings.FontName = settings["FontName"]?.ToString();
-        if (SemanticVersion.TryParse(settings["SkipVersion"]?.ToString()!, out var version))
-            Settings.SkipVersion = version;
-        Settings.DownloadSource = Enum.Parse<DownloadSources>(settings["DownloadSource"]?.ToString()!);
-        Settings.DownloadPrerelease = bool.Parse(settings["DownloadPrerelease"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenInstalling"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenEnabling"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDeleting"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDisabling"]?.ToString()!);
-        _logger.Information("Saved setting loaded from Settings.json");
-    }
-
-    private void DeleteUpdater()
-    {
-        var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
-        var updaterPath = Path.Combine(updateDirectory, "Updater.exe");
-        if (_fileSystem.File.Exists(updaterPath))
-        {
-            _fileSystem.File.Delete(updaterPath);
-            _logger.Information("Updater.exe found, deleting it");
-        }
-
-        if (_fileSystem.Directory.Exists(updateDirectory))
-        {
-            _fileSystem.Directory.Delete(updateDirectory);
-            _logger.Information("Update directory found, deleting it");
-        }
+        await CheckSettingValidity();
     }
 }

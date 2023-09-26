@@ -1,10 +1,6 @@
 ﻿using System.IO.Abstractions;
 using System.Net.Http;
 using Autofac;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Extensions;
-using MuseDashModToolsUI.Services;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
 using MuseDashModToolsUI.ViewModels.Tabs;
@@ -31,7 +27,14 @@ public static class Bootstrapper
         builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<UpdateTextService>().As<IUpdateTextService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SerializeService>().As<ISerializeService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
+
+        // Platform Service
+        if (OperatingSystem.IsWindows())
+            builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+        else if (OperatingSystem.IsLinux())
+            builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
 
         // View Models
         builder.RegisterType<ProjectWindowViewModel>().As<IProjectWindowViewModel>().PropertiesAutowired().SingleInstance();

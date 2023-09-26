@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MuseDashModToolsUI.Extensions;
-using Newtonsoft.Json;
-using static MuseDashModToolsUI.Localization.Resources;
+﻿using System.Text.Json.Serialization;
 
 namespace MuseDashModToolsUI.Models;
 
@@ -24,7 +21,7 @@ public partial class Mod : ObservableObject
     [JsonIgnore] public string? DuplicatedModNames { get; set; }
 
     [JsonIgnore]
-    public string XamlDescription => string.Format(XAML_Mod_Description.Localize(), Description, Author, Version, CompatibleGameVersion);
+    public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(), Description, Author, Version, CompatibleGameVersion);
 
     public string? DownloadLink { get; set; }
     public string? HomePage { get; set; }
@@ -57,15 +54,26 @@ public partial class Mod : ObservableObject
     public string? SHA256 { get; set; }
     public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : string.Empty);
 
-    public Mod SetDefault()
+    public void CloneOnlineInfo(Mod webMod)
     {
-        LocalVersion = null;
-        IsIncompatible = false;
-        IsDisabled = false;
+        DownloadLink = webMod.DownloadLink;
+        HomePage = webMod.HomePage;
+        GameVersion = webMod.GameVersion;
+        Description = webMod.Description;
+        DependentMods = webMod.DependentMods;
+        DependentLibs = webMod.DependentLibs;
+        IncompatibleMods = webMod.IncompatibleMods;
+    }
+
+    public Mod RemoveLocalInfo()
+    {
         FileName = null;
-        IsTracked = false;
-        IsShaMismatched = false;
+        IsDisabled = false;
         IsDuplicated = false;
+        IsIncompatible = false;
+        IsShaMismatched = false;
+        IsTracked = false;
+        LocalVersion = null;
         SHA256 = null;
         return this;
     }

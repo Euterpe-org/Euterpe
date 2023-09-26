@@ -1,12 +1,6 @@
 ﻿using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Extensions;
-using MuseDashModToolsUI.Models;
 using ValveKeyValue;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -15,11 +9,22 @@ namespace MuseDashModToolsUI.Services;
 public partial class LogAnalyzeService : ILogAnalyzeService
 {
     private readonly FileSystemWatcher _watcher = new();
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public IModService ModService { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
+
     private string LogPath { get; set; } = string.Empty;
     private string LogContent { get; set; } = string.Empty;
     private StringBuilder LogErrorBuilder { get; } = new();
@@ -30,12 +35,12 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         CheckHeadQuarterRegister();
         if (LogErrorBuilder.Length > 0)
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(LogErrorBuilder.ToString());
+            await MessageBoxService.AnalyzeSuccessMessageBox(LogErrorBuilder.ToString());
             LogErrorBuilder.Clear();
         }
         else
         {
-            await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_LogAnalyzeComplete.Localize());
+            await MessageBoxService.SuccessMessageBox(MsgBox_Content_LogAnalyzeComplete);
             Logger.Information("Log Analysis Completed");
         }
     }
@@ -44,7 +49,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     {
         if (!LogContent.Contains("ApplicationPath"))
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoApplicationPath);
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoApplicationPath);
             return true;
         }
 
@@ -52,7 +57,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         if (!pathMatch.Success)
         {
             Logger.Information(@"Game path doesn't contain 'steamapps\common\Muse Dash\musedash.exe'");
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_GamePathError.Localize());
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_GamePathError);
             return true;
         }
 
@@ -61,7 +66,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
         if (!File.Exists(acfPath))
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord.Localize());
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord);
             Logger.Information("Cannot find appmanifest_774171.acf");
             return true;
         }
@@ -72,7 +77,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
 
         if (data.Appid != 774171 || data.Name != "Muse Dash" || data.InstalledDepots.Keys.All(x => x != 774172))
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord.Localize());
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord);
             Logger.Information("Cannot find Muse Dash download record in file");
             return true;
         }
@@ -83,7 +88,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
             return false;
         }
 
-        await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoDlcPurchased.Localize());
+        await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoDlcPurchased);
         Logger.Information("Cannot find Muse Dash DLC purchase record in file");
         return false;
     }
@@ -93,7 +98,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         var version = MelonLoaderVersionRegex().Match(LogContent);
         if (!version.Success)
         {
-            await MessageBoxService.CreateAnalyzeSuccessMessageBox(MsgBox_Content_NoMelonLoaderVersion);
+            await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoMelonLoaderVersion);
             Logger.Information("MelonLoader Version not found");
             return false;
         }
@@ -106,8 +111,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         }
 
         Logger.Information("Incorrect MelonLoader Version: {MelonLoaderVersion}", melonLoaderVersion);
-        await MessageBoxService.CreateAnalyzeSuccessMessageBox(string.Format(MsgBox_Content_IncorrectMelonLoaderVersion.Localize(),
-            melonLoaderVersion));
+        await MessageBoxService.FormatAnalyzeSuccessMessageBox(MsgBox_Content_IncorrectMelonLoaderVersion, melonLoaderVersion);
         return false;
     }
 
@@ -115,7 +119,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     {
         if (!string.IsNullOrEmpty(SavingService.Settings.MelonLoaderFolder))
             LogPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");
-        if (!File.Exists(LogPath)) return MsgBox_Content_NoLogFile.Localize();
+        if (!File.Exists(LogPath)) return MsgBox_Content_NoLogFile.NormalizeNewline();
 
         try
         {
@@ -132,52 +136,4 @@ public partial class LogAnalyzeService : ILogAnalyzeService
             return string.Empty;
         }
     }
-
-    private void CheckModVersion()
-    {
-        var modVersionMatches = ModVersionRegex().Matches(LogContent);
-        if (modVersionMatches.Count == 0) return;
-
-        foreach (var mod in modVersionMatches.Select(x => x.Groups))
-        {
-            var modName = mod[1].Value;
-            var modVersion = mod[2].Value;
-
-            var outdated = ModService.CompareVersion(modName, modVersion);
-            if (!outdated) continue;
-            LogErrorBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
-            Logger.Information("Outdated Mod: {ModName}", modName);
-        }
-    }
-
-    private void CheckHeadQuarterRegister()
-    {
-        if (!HeadQuarterRegisterRegex().Match(LogContent).Success) return;
-        Logger.Information("Didn't register HQ, showing message box");
-        LogErrorBuilder.AppendLine(MsgBox_Content_RegisterHQ.Localize());
-    }
-
-    private void StartLogFileMonitor()
-    {
-        _watcher.Path = SavingService.Settings.MelonLoaderFolder;
-        _watcher.Filter = "Latest.log";
-        _watcher.Renamed += (_, _) => LogAnalysisViewModel.Value.Initialize();
-        _watcher.Changed += (_, _) => LogAnalysisViewModel.Value.Initialize();
-        _watcher.Created += (_, _) => LogAnalysisViewModel.Value.Initialize();
-        _watcher.Deleted += (_, _) => LogAnalysisViewModel.Value.Initialize();
-        _watcher.EnableRaisingEvents = true;
-        Logger.Information("Log File Monitor Started");
-    }
-
-    [GeneratedRegex(@"ApplicationPath = (.*steamapps)\\common\\Muse Dash\\musedash.exe")]
-    private static partial Regex ApplicationPathRegex();
-
-    [GeneratedRegex(@"\bMelonLoader v(\d+\.\d+\.\d+)")]
-    private static partial Regex MelonLoaderVersionRegex();
-
-    [GeneratedRegex(@"\b(?!MelonLoader\b)([\w\s]+) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
-    private static partial Regex ModVersionRegex();
-
-    [GeneratedRegex("You have not registered for Headquarters", RegexOptions.Multiline)]
-    private static partial Regex HeadQuarterRegisterRegex();
 }

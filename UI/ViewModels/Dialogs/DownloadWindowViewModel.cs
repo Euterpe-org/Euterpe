@@ -1,11 +1,6 @@
 ﻿using System.IO;
-using CommunityToolkit.Mvvm.ComponentModel;
 using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
-using MuseDashModToolsUI.Contracts;
-using MuseDashModToolsUI.Contracts.ViewModels;
-using MuseDashModToolsUI.Extensions;
-using static MuseDashModToolsUI.Localization.Resources;
 
 #pragma warning disable CS8618
 
@@ -15,9 +10,17 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
 {
     [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
     [ObservableProperty] private double _percentage;
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
 
     public async Task InstallMelonLoader()
@@ -37,7 +40,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         if (!await DeleteMelonLoaderZipFile()) return;
 
         Logger.Information("MelonLoader install success");
-        await MessageBoxService.CreateSuccessMessageBox(MsgBox_Content_InstallMelonLoaderSuccess.Localize());
+        await MessageBoxService.SuccessMessageBox(MsgBox_Content_InstallMelonLoaderSuccess);
         DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
     }
 
@@ -61,8 +64,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         catch (Exception ex)
         {
             Logger.Error(ex, "Extracting MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_UnzipMelonLoaderFailed.Localize(),
-                SavingService.Settings.MelonLoaderZipPath, ex));
+            await MessageBoxService.FormatErrorMessageBox(MsgBox_Content_UnzipMelonLoaderFailed, SavingService.Settings.MelonLoaderZipPath, ex);
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }
@@ -79,8 +81,8 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         catch (Exception ex)
         {
             Logger.Error(ex, "Deleting MelonLoader.zip failed");
-            await MessageBoxService.CreateErrorMessageBox(string.Format(MsgBox_Content_DeleteMelonLoaderZipFailed.Localize(),
-                SavingService.Settings.MelonLoaderZipPath, ex));
+            await MessageBoxService.FormatErrorMessageBox(MsgBox_Content_DeleteMelonLoaderZipFailed,
+                SavingService.Settings.MelonLoaderZipPath, ex);
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }
