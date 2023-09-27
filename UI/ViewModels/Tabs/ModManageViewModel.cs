@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using DynamicData;
-using DynamicData.Binding;
 
 #pragma warning disable CS8618
 
@@ -15,6 +14,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private readonly FileSystemWatcher _watcher = new();
     [ObservableProperty] private FilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
+    public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
     [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
@@ -31,8 +31,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     [UsedImplicitly]
     public ISavingService SavingService { get; init; }
 
-    public ReadOnlyObservableCollection<Mod> Mods => _mods;
-
     public ModManageViewModel()
     {
         _sourceCache.Connect()
@@ -43,7 +41,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             .Filter(x => _categoryFilterType != FilterType.Outdated || x.State == UpdateState.Outdated)
             .Filter(x => _categoryFilterType != FilterType.Installed || x.IsLocal)
             .Filter(x => _categoryFilterType != FilterType.Incompatible || x is { IsIncompatible: true, IsLocal: true })
-            .Sort(SortExpressionComparer<Mod>.Ascending(t => t.Name!))
+            .SortBy(x => x.Name!)
             .Bind(out _mods)
             .Subscribe();
     }

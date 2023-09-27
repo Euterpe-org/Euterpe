@@ -41,5 +41,5 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _logger.Information("Switching tab to {Name}", name);
     }
 
-    private void OnExit(object sender, EventArgs e) => _savingService.Save().Wait();
+    private void OnExit(object sender, EventArgs e) => _savingService.Save().ConfigureAwait(false);
 }
