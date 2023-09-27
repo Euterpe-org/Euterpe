@@ -16,7 +16,7 @@ public partial class GitHubService : IGitHubService
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
     private HttpResponseMessage? _melonLoaderResponseMessage;
-    private string DefaultDownloadSource => DownloadSourceDictionary[SavingService.Settings.DownloadSource];
+    private string DefaultDownloadSource => DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
 
     private static Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
     {
@@ -38,7 +38,7 @@ public partial class GitHubService : IGitHubService
     public IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Lazy<ISavingService> SavingService { get; init; }
 
     [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
@@ -54,7 +54,7 @@ public partial class GitHubService : IGitHubService
             var releases = await Client.GetFromJsonAsync<List<GithubRelease>>(ReleaseInfoLink);
             Logger.Information("Get releases success");
 
-            var release = SavingService.Settings.DownloadPrerelease ? releases![0] : releases!.Find(x => !x.Prerelease)!;
+            var release = SavingService.Value.Settings.DownloadPrerelease ? releases![0] : releases!.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
             if (version is null || await SkipVersionCheck(version, BuildInfo.Version, isUserClick)) return;
@@ -77,11 +77,11 @@ public partial class GitHubService : IGitHubService
 
     public async Task DownloadModAsync(string link, string path)
     {
-        var defaultDownloadSource = DownloadSourceDictionary[SavingService.Settings.DownloadSource];
+        var defaultDownloadSource = DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
         var result = await DownloadModFromSourceAsync(defaultDownloadSource, link, path);
         if (result is not null) return;
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
         {
             result = await DownloadModFromSourceAsync(pair.Value, link, path);
             if (result is not null) return;
@@ -106,7 +106,7 @@ public partial class GitHubService : IGitHubService
         var mods = await GetModListFromSourceAsync(DefaultDownloadSource);
         if (mods is not null) return mods;
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
         {
             mods = await GetModListFromSourceAsync(pair.Value);
             if (mods is not null) return mods;

@@ -31,6 +31,9 @@ public partial class SavingService : ISavingService
     public ISerializeService SerializeService { get; init; }
 
     [UsedImplicitly]
+    public IUpdateUIService UpdateUIService { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
 
     [UsedImplicitly]
@@ -41,9 +44,6 @@ public partial class SavingService : ISavingService
 
     [UsedImplicitly]
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IUpdateUIService> UpdateUIService { get; init; }
 
     public SavingService(IFileSystem fileSystem, ILogger logger, IPlatformService platformService)
     {
@@ -66,7 +66,7 @@ public partial class SavingService : ISavingService
         }
 
         await CheckSettingValidity();
-        await UpdateUIService.Value.InitializeTabs();
+        await UpdateUIService.InitializeTabs();
 
         _logger.Information("Settings initialize finished");
     }

@@ -66,7 +66,7 @@ public partial class GitHubService
         {
             var totalLength = _melonLoaderResponseMessage!.Content.Headers.ContentLength;
             var contentStream = await _melonLoaderResponseMessage.Content.ReadAsStreamAsync();
-            await using var fs = new FileStream(SavingService.Settings.MelonLoaderZipPath, FileMode.OpenOrCreate);
+            await using var fs = new FileStream(SavingService.Value.Settings.MelonLoaderZipPath, FileMode.OpenOrCreate);
             var buffer = new byte[5 * 1024];
             var readLength = 0L;
             int length;
@@ -106,7 +106,7 @@ public partial class GitHubService
         await GetMelonLoaderResponseFromSource(DefaultDownloadSource);
         if (_melonLoaderResponseMessage is not null) return;
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
         {
             await GetMelonLoaderResponseFromSource(pair.Value);
             if (_melonLoaderResponseMessage is not null) return;
@@ -159,7 +159,7 @@ public partial class GitHubService
     private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool isUserClick)
     {
         var current = SemanticVersion.Parse(currentVersion);
-        if (!isUserClick) return version == SavingService.Settings.SkipVersion || version <= current;
+        if (!isUserClick) return version == SavingService.Value.Settings.SkipVersion || version <= current;
         if (version > current) return false;
         await MessageBoxService.SuccessMessageBox(MsgBox_Content_LatestVersion);
         return true;
@@ -179,7 +179,7 @@ public partial class GitHubService
 
         if (update == MsgBox_Button_NoNoAsk)
         {
-            SavingService.Settings.SkipVersion = SemanticVersion.Parse(version);
+            SavingService.Value.Settings.SkipVersion = SemanticVersion.Parse(version);
             return false;
         }
 
