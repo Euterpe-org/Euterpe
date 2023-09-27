@@ -61,7 +61,7 @@ public partial class SavingService : ISavingService
 
         if (!_isSavedLoaded)
         {
-            _logger.Error("Settings.json not found or invalid, getting game path...");
+            _logger.Warning("Didn't load setting from Settings.json, getting game path...");
             await TryGetGameFolderPath();
         }
 

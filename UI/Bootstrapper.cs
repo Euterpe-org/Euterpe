@@ -24,7 +24,7 @@ public static class Bootstrapper
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<MessageBoxService>().PropertiesAutowired().As<IMessageBoxService>();
+        builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SerializeService>().As<ISerializeService>().PropertiesAutowired().SingleInstance();
