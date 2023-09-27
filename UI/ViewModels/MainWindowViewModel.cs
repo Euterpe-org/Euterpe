@@ -28,6 +28,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 #if !DEBUG
         context.Resolve<IGitHubService>().CheckUpdates();
 #endif
+        _savingService.InitializeSettings().ConfigureAwait(false);
         _logger.Information("Main Window initialized");
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
