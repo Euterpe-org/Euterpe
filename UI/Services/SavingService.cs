@@ -66,7 +66,7 @@ public partial class SavingService : ISavingService
         }
 
         await CheckSettingValidity();
-        await UpdateUIService.InitializeTabs();
+        await UpdateUIService.InitializeAllTabs();
 
         _logger.Information("Settings initialize finished");
     }

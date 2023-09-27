@@ -43,7 +43,7 @@ public static class Bootstrapper
         builder.RegisterType<ProjectWindowViewModel>().As<IProjectWindowViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().SingleInstance();
+        builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
 
