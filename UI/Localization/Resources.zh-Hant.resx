@@ -21,9 +21,6 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-    <data name="XAML_About_Project" xml:space="preserve">
-        <value>關於項目</value>
-    </data>
     <data name="XAML_Check_Update" xml:space="preserve">
         <value>檢查更新</value>
     </data>
