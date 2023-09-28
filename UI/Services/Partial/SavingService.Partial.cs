@@ -15,7 +15,7 @@ public partial class SavingService
     private async Task CheckSettingValidity()
     {
         await NullSettingsCatch();
-        await LocalService.Value.CheckValidPath();
+        await LocalService.CheckValidPath();
     }
 
     /// <summary>

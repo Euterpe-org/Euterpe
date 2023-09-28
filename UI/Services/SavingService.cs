@@ -34,7 +34,7 @@ public partial class SavingService : ISavingService
     public IUpdateUIService UpdateUIService { get; init; }
 
     [UsedImplicitly]
-    public Lazy<ILocalService> LocalService { get; init; }
+    public ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }

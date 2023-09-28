@@ -12,9 +12,6 @@ namespace MuseDashModToolsUI.Services;
 public partial class LocalService : ILocalService
 {
     [UsedImplicitly]
-    public IDownloadWindowViewModel DownloadWindowViewModel { get; init; }
-
-    [UsedImplicitly]
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
@@ -24,14 +21,17 @@ public partial class LocalService : ILocalService
     public IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Lazy<IDownloadWindowViewModel> DownloadWindowViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ISavingService> SavingService { get; init; }
 
     private bool IsValidPath { get; set; }
 
     public async Task CheckMelonLoaderInstall()
     {
-        var melonLoaderFolder = Path.Join(SavingService.Settings.MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(SavingService.Settings.MuseDashFolder, "version.dll");
+        var melonLoaderFolder = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(SavingService.Value.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
         var install = await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_InstallMelonLoader);
         if (install)
@@ -48,7 +48,7 @@ public partial class LocalService : ILocalService
             if (!await PlatformService.VerifyGameVersion()) return;
             await CreateFiles();
             IsValidPath = true;
-            Logger.Information("Path verified {Path}", SavingService.Settings.MuseDashFolder);
+            Logger.Information("Path verified {Path}", SavingService.Value.Settings.MuseDashFolder);
         }
         catch (Exception ex)
         {
@@ -114,21 +114,21 @@ public partial class LocalService : ILocalService
         if (!IsValidPath) return;
         Logger.Information("Showing MelonLoader download window...");
         await DialogHost.Show(DownloadWindowViewModel, "DownloadWindowDialog",
-            (object _, DialogOpenedEventArgs _) => DownloadWindowViewModel.InstallMelonLoader());
+            (object _, DialogOpenedEventArgs _) => DownloadWindowViewModel.Value.InstallMelonLoader());
     }
 
     public async Task OnUninstallMelonLoader()
     {
         if (!IsValidPath) return;
         if (!await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_UninstallMelonLoader)) return;
-        var versionFile = Path.Join(SavingService.Settings.MuseDashFolder, "version.dll");
-        var noticeTxt = Path.Join(SavingService.Settings.MuseDashFolder, "NOTICE.txt");
+        var versionFile = Path.Join(SavingService.Value.Settings.MuseDashFolder, "version.dll");
+        var noticeTxt = Path.Join(SavingService.Value.Settings.MuseDashFolder, "NOTICE.txt");
 
-        if (Directory.Exists(SavingService.Settings.MelonLoaderFolder))
+        if (Directory.Exists(SavingService.Value.Settings.MelonLoaderFolder))
         {
             try
             {
-                Directory.Delete(SavingService.Settings.MelonLoaderFolder, true);
+                Directory.Delete(SavingService.Value.Settings.MelonLoaderFolder, true);
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
                 Logger.Information("MelonLoader uninstalled successfully");
@@ -168,7 +168,7 @@ public partial class LocalService : ILocalService
         Logger.Information("Opening mods folder...");
         Process.Start(new ProcessStartInfo
         {
-            FileName = SavingService.Settings.ModsFolder,
+            FileName = SavingService.Value.Settings.ModsFolder,
             UseShellExecute = true
         });
     }
@@ -185,7 +185,7 @@ public partial class LocalService : ILocalService
         Logger.Information("Opening UserData folder...");
         Process.Start(new ProcessStartInfo
         {
-            FileName = SavingService.Settings.UserDataFolder,
+            FileName = SavingService.Value.Settings.UserDataFolder,
             UseShellExecute = true
         });
     }
@@ -199,7 +199,7 @@ public partial class LocalService : ILocalService
             return;
         }
 
-        var logPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");
+        var logPath = Path.Combine(SavingService.Value.Settings.MelonLoaderFolder, "Latest.log");
         Logger.Information("Opening Log folder...");
         PlatformService.OpenLogFolder(logPath);
     }
@@ -207,7 +207,7 @@ public partial class LocalService : ILocalService
     public async Task<string> ReadGameVersion()
     {
         var assetsManager = new AssetsManager();
-        var bundlePath = Path.Join(SavingService.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        var bundlePath = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
