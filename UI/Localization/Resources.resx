@@ -370,4 +370,7 @@
     <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
         <value>Detected Muse Dash folder path is {0}\nIs this the correct game folder?</value>
     </data>
+    <data name="XAML_Tab_About" xml:space="preserve">
+        <value>About</value>
+    </data>
 </root>

@@ -15,7 +15,7 @@ public partial class SavingService
     private async Task CheckSettingValidity()
     {
         await NullSettingsCatch();
-        await LocalService.Value.CheckValidPath();
+        await LocalService.CheckValidPath();
     }
 
     /// <summary>
@@ -85,7 +85,12 @@ public partial class SavingService
     /// </summary>
     private async Task LoadSavedSetting()
     {
-        if (!_fileSystem.File.Exists(SettingPath)) return;
+        if (!_fileSystem.File.Exists(SettingPath))
+        {
+            _logger.Warning("Settings.json not found, skipping load");
+            return;
+        }
+
         var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
         var settings = JsonNode.Parse(text);
         if (settings is null) return;

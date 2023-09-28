@@ -34,16 +34,7 @@ public partial class SavingService : ISavingService
     public IUpdateUIService UpdateUIService { get; init; }
 
     [UsedImplicitly]
-    public Lazy<ILocalService> LocalService { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
+    public ILocalService LocalService { get; init; }
 
     public SavingService(IFileSystem fileSystem, ILogger logger, IPlatformService platformService)
     {
@@ -61,12 +52,12 @@ public partial class SavingService : ISavingService
 
         if (!_isSavedLoaded)
         {
-            _logger.Error("Settings.json not found or invalid, getting game path...");
+            _logger.Warning("Didn't load setting from Settings.json, getting game path...");
             await TryGetGameFolderPath();
         }
 
         await CheckSettingValidity();
-        await UpdateUIService.InitializeTabs();
+        await UpdateUIService.InitializeAllTabs();
 
         _logger.Information("Settings initialize finished");
     }

@@ -369,4 +369,7 @@
     <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
         <value>检测到的 Muse Dash 文件夹为 {0}\n这是正确的游戏文件夹吗</value>
     </data>
+    <data name="XAML_Tab_About" xml:space="preserve">
+        <value>关于</value>
+    </data>
 </root>

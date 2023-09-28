@@ -29,7 +29,6 @@ public class SavingServiceTest
     public async Task NullSettingTest()
     {
         var fs = new Mock<IFileSystem>();
-        var localService = new Lazy<ILocalService>(() => new Mock<ILocalService>().Object);
         var settingPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools",
             "Settings.json");
         var updaterPath = Path.Combine(Directory.GetCurrentDirectory(), "Update", "Updater.exe");
@@ -39,7 +38,7 @@ public class SavingServiceTest
         fs.Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(SettingJson);
         var savingService = new SavingService(fs.Object, _logger, new Mock<IPlatformService>().Object)
         {
-            LocalService = localService,
+            LocalService = new Mock<ILocalService>().Object,
             MessageBoxService = new Mock<IMessageBoxService>().Object,
             SerializeService = new SerializeService(),
             UpdateUIService = new Mock<IUpdateUIService>().Object

@@ -8,8 +8,14 @@ public interface IUpdateUIService
     void UpdateText();
 
     /// <summary>
-    ///     Initialize Tabs
+    ///     Initialize All Tabs
     /// </summary>
     /// <returns></returns>
-    Task InitializeTabs();
+    Task InitializeAllTabs();
+
+    /// <summary>
+    ///     Initialize ModManage and LogAnalysis tabs when path changed
+    /// </summary>
+    /// <returns></returns>
+    Task InitializeTabsOnChoosePath();
 }

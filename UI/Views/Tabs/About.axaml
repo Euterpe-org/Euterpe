@@ -1,0 +1,222 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
+             xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
+             xmlns:ext="using:MuseDashModToolsUI.Extensions"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+             x:Class="MuseDashModToolsUI.Views.Tabs.About"
+             x:DataType="tabs:AboutViewModel"
+             DataContext="{ext:DependencyInjection Type=contract:IAboutViewModel}">
+
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
+        </Style>
+        <Style Selector="MenuItem">
+            <Setter Property="Command" Value="{Binding OpenUrlCommand}" />
+        </Style>
+        <Style Selector="MenuItem ContentPresenter">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Styles>
+
+    <controls:Card Background="#3D3D3D" Margin="10,0,10,10">
+        <StackPanel>
+            <Grid RowDefinitions="140,100" ColumnDefinitions="*,*,*" Margin="0,20">
+                <Grid.Styles>
+                    <Style Selector="Button">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </Grid.Styles>
+                <Button Grid.Row="0" Grid.Column="0"
+                        Width="150"
+                        Height="120"
+                        Classes="Flat"
+                        ToolTip.Tip="Muse Dash Modding Community Website"
+                        CommandParameter="https://mdmc.moe/">
+                    <Image Source="/Assets/MDMC_Website.png" Width="150" />
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="1"
+                        Width="120"
+                        Height="120"
+                        Classes="Flat"
+                        ToolTip.Tip="Muse Dash Mod Tools Project"
+                        CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
+                    <Image Source="/Assets/Icon.png" Margin="0,0,0,5" />
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="2"
+                        Width="120"
+                        Height="120"
+                        Classes="Flat"
+                        ToolTip.Tip="Muse Dash Modding Community Discord"
+                        CommandParameter="https://discord.gg/mdmc">
+                    <Image Source="/Assets/MDMC_Discord.png" Width="90" />
+                </Button>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top">
+                    <TextBlock Classes="Headline4"
+                               Text="About Muse Dash Mod Tools"
+                               TextAlignment="Center" />
+                    <TextBlock Classes="Headline5"
+                               Text="Muse Dash Mod Tools aims for making modding muse dash easier&#x0a;And its development cannot be done without those people's effort"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center" />
+                </StackPanel>
+            </Grid>
+
+            <Grid RowDefinitions="150,100" ColumnDefinitions="*,*,*,*" Margin="0,20">
+                <Grid.Styles>
+                    <Style Selector="controls|Card">
+                        <Setter Property="Background" Value="#595959" />
+                    </Style>
+                </Grid.Styles>
+                <!--lxy-->
+                <controls:Card Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Width="150" Height="150" Margin="0,0">
+                    <StackPanel>
+                        <Image Width="60" Height="60" Source="/Assets/lxy.png" />
+                        <TextBlock Classes="Body1"
+                                   Text="lxy"
+                                   TextAlignment="Center" />
+                        <TextBlock Classes="Body3"
+                                   Text="For planning and maintaining the project"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </controls:Card>
+
+                <Menu Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+                    <Menu.Styles>
+                        <Style Selector="MenuItem AccessText">
+                            <Setter Property="FontSize" Value="13" />
+                        </Style>
+                    </Menu.Styles>
+
+                    <!--Account-->
+                    <MenuItem Header="Social Account" Width="120">
+                        <MenuItem Header="BiliBili"
+                                  CommandParameter="https://space.bilibili.com/255895683">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/bilibili.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Github"
+                                  CommandParameter="https://github.com/lxymahatma">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/github.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Twitch"
+                                  CommandParameter="https://www.twitch.tv/lxymahatma">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/twitch.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+
+                    <!--Donate-->
+                    <MenuItem Header="Donate" Width="80">
+                        <MenuItem Header="爱发电"
+                                  CommandParameter="https://afdian.net/a/lxymahatma">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/afdian.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Patreon"
+                                  CommandParameter="https://www.patreon.com/user?u=58140035">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/patreon.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+
+                <!--Super Pig-->
+                <controls:Card Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="150" Height="150" Margin="0,0">
+                    <StackPanel>
+                        <Image Width="60" Height="60" Source="/Assets/Super_Pig.png" />
+                        <TextBlock Classes="Body1"
+                                   Text="Super Pig"
+                                   TextAlignment="Center" />
+                        <TextBlock Classes="Body3"
+                                   Text="For redrawing the Muse Dash Mod Tools icon"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </controls:Card>
+
+                <Menu Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <!--Account-->
+                    <MenuItem Header="Social Account" Width="150">
+                        <MenuItem Header="BiliBili"
+                                  CommandParameter="https://space.bilibili.com/252615263">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/bilibili.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+
+                <!--Balint-->
+                <controls:Card Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Width="150" Height="150"
+                               Margin="0,0,0,0">
+                    <StackPanel>
+                        <Image Width="60" Height="60" Source="/Assets/Balint.png" />
+                        <TextBlock Classes="Body1"
+                                   Text="Balint"
+                                   TextAlignment="Center" />
+                        <TextBlock Classes="Body3"
+                                   Text="For making the first version of the project"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </controls:Card>
+
+                <Menu Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <!--Account-->
+                    <MenuItem Header="Social Account" Width="150">
+                        <MenuItem Header="Github"
+                                  CommandParameter="https://github.com/Balint817">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/github.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+
+                <!--Ultra Rabbit-->
+                <controls:Card Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Width="150" Height="150" Margin="0,0">
+                    <StackPanel>
+                        <Image Width="60" Height="60" Source="/Assets/Ultra_Rabbit.jpg" />
+                        <TextBlock Classes="Body1"
+                                   Text="Ultra Rabbit"
+                                   TextAlignment="Center" />
+                        <TextBlock Classes="Body3"
+                                   Text="For rewriting the whole project"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </controls:Card>
+
+                <Menu Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <!--Account-->
+                    <MenuItem Header="Social Account" Width="150">
+                        <MenuItem Header="Github"
+                                  CommandParameter="https://github.com/TheBunnies">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/github.png" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+            </Grid>
+        </StackPanel>
+    </controls:Card>
+
+
+</UserControl>

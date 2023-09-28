@@ -6,33 +6,30 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 {
-    private readonly ILogAnalyzeService _logAnalyzeService;
-    private readonly ILogger _logger;
     [ObservableProperty] private string _logContent;
 
     [UsedImplicitly]
     public ILocalService LocalService { get; init; }
 
-    public LogAnalysisViewModel(ILogAnalyzeService logAnalyzeService, ILogger logger)
-    {
-        _logAnalyzeService = logAnalyzeService;
-        _logger = logger;
-        Initialize().ConfigureAwait(false);
-    }
+    [UsedImplicitly]
+    public ILogAnalyzeService LogAnalyzeService { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
 
     public async Task Initialize()
     {
-        LogContent = await _logAnalyzeService.LoadLog();
-        _logger.Information("Log Analysis Window Initialized");
+        LogContent = await LogAnalyzeService.LoadLog();
+        Logger.Information("Log Analysis Window Initialized");
     }
 
     [RelayCommand]
     private async Task AnalyzeLog()
     {
-        _logger.Information("Log Analysis Started...");
-        if (await _logAnalyzeService.CheckPirate()) return;
-        if (!await _logAnalyzeService.CheckMelonLoaderVersion()) return;
-        await _logAnalyzeService.AnalyzeLog();
+        Logger.Information("Log Analysis Started...");
+        if (await LogAnalyzeService.CheckPirate()) return;
+        if (!await LogAnalyzeService.CheckMelonLoaderVersion()) return;
+        await LogAnalyzeService.AnalyzeLog();
     }
 
     [RelayCommand]
@@ -46,6 +43,6 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
             FileName = path,
             UseShellExecute = true
         });
-        _logger.Information("Open Url: {Url}", path);
+        Logger.Information("Open Url: {Url}", path);
     }
 }
