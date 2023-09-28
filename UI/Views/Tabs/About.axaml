@@ -23,7 +23,7 @@
         </Style>
     </UserControl.Styles>
 
-    <controls:Card Background="#3D3D3D" Margin="10,0,10,10">
+    <controls:Card Background="#424242" Margin="10,0,10,10">
         <ScrollViewer>
             <StackPanel>
                 <Grid RowDefinitions="140,100" ColumnDefinitions="*,*,*" Margin="0,20">
@@ -87,6 +87,8 @@
                             <Setter Property="Margin" Value="0,0,0,5" />
                         </Style>
                         <Style Selector="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="TextAlignment" Value="Center" />
                             <Setter Property="Margin" Value="0,0,0,5" />
                         </Style>
                         <Style Selector="MenuItem">
@@ -98,13 +100,10 @@
                     <controls:Card Grid.Row="0" Grid.Column="0">
                         <StackPanel>
                             <Image Source="/Assets/lxy.png" />
-                            <TextBlock Classes="Body1"
-                                       Text="lxy"
-                                       TextAlignment="Center" />
-                            <TextBlock Classes="Body3"
-                                       Text="For planning and maintaining the project"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center" />
+                            <TextBlock Classes="Headline6"
+                                       Text="lxy" />
+                            <TextBlock Classes="Body2"
+                                       Text="For planning and maintaining the project" />
                         </StackPanel>
                     </controls:Card>
 
@@ -152,13 +151,10 @@
                     <controls:Card Grid.Row="0" Grid.Column="1">
                         <StackPanel>
                             <Image Source="/Assets/Super_Pig.png" />
-                            <TextBlock Classes="Body1"
-                                       Text="Super Pig"
-                                       TextAlignment="Center" />
-                            <TextBlock Classes="Body3"
-                                       Text="For redrawing the Muse Dash Mod Tools icon"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center" />
+                            <TextBlock Classes="Headline6"
+                                       Text="Super Pig" />
+                            <TextBlock Classes="Body2"
+                                       Text="For redrawing the Muse Dash Mod Tools icon" />
                         </StackPanel>
                     </controls:Card>
 
@@ -178,13 +174,10 @@
                     <controls:Card Grid.Row="0" Grid.Column="2">
                         <StackPanel>
                             <Image Source="/Assets/Balint.png" />
-                            <TextBlock Classes="Body1"
-                                       Text="Balint"
-                                       TextAlignment="Center" />
-                            <TextBlock Classes="Body3"
-                                       Text="For making the first version of the project"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center" />
+                            <TextBlock Classes="Headline6"
+                                       Text="Balint" />
+                            <TextBlock Classes="Body2"
+                                       Text="For making the first version of the project" />
                         </StackPanel>
                     </controls:Card>
 
@@ -204,13 +197,10 @@
                     <controls:Card Grid.Row="0" Grid.Column="3">
                         <StackPanel>
                             <Image Source="/Assets/Ultra_Rabbit.jpg" />
-                            <TextBlock Classes="Body1"
-                                       Text="Ultra Rabbit"
-                                       TextAlignment="Center" />
-                            <TextBlock Classes="Body3"
-                                       Text="For rewriting the first version of the project"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center" />
+                            <TextBlock Classes="Headline6"
+                                       Text="Ultra Rabbit" />
+                            <TextBlock Classes="Body2"
+                                       Text="For rewriting the first version of the project" />
                         </StackPanel>
                     </controls:Card>
 
