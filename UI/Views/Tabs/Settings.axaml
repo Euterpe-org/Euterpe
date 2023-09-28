@@ -11,10 +11,10 @@
              x:DataType="tabs:SettingsViewModel"
              DataContext="{ext:DependencyInjection Type=contract:ISettingsViewModel}">
 
-    <ScrollViewer Margin="10,0">
+    <ScrollViewer Background="#424242" Margin="10,0">
         <ScrollViewer.Styles>
             <Style Selector="controls|Card">
-                <Setter Property="Margin" Value="0,0.5" />
+                <Setter Property="Margin" Value="0,1" />
             </Style>
             <Style Selector="StackPanel > controls|Card">
                 <Setter Property="Height" Value="80" />
