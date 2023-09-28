@@ -26,6 +26,7 @@
     <controls:Card Background="#424242" Margin="10,0,10,10">
         <ScrollViewer>
             <StackPanel>
+                <!--About Project-->
                 <Grid RowDefinitions="140,100" ColumnDefinitions="*,*,*" Margin="0,20">
                     <Grid.Styles>
                         <Style Selector="Button">
@@ -71,9 +72,10 @@
                     </StackPanel>
                 </Grid>
 
+                <!--Developers-->
                 <TextBlock HorizontalAlignment="Center" FontSize="50" Margin="0,10,0,20">Developers</TextBlock>
 
-                <Grid RowDefinitions="150,100" ColumnDefinitions="*,*,*,*" Margin="0,20">
+                <Grid RowDefinitions="180,100" ColumnDefinitions="*,*,*,*" Margin="0,20">
                     <Grid.Styles>
                         <Style Selector="Grid>controls|Card">
                             <Setter Property="Background" Value="#595959" />
@@ -84,7 +86,7 @@
                         <Style Selector="StackPanel>Image">
                             <Setter Property="Height" Value="70" />
                             <Setter Property="Width" Value="70" />
-                            <Setter Property="Margin" Value="0,0,0,5" />
+                            <Setter Property="Margin" Value="0,0,0,10" />
                         </Style>
                         <Style Selector="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -101,7 +103,7 @@
                         <StackPanel>
                             <Image Source="/Assets/lxy.png" />
                             <TextBlock Classes="Headline6"
-                                       Text="lxy" />
+                                       Text="Lxy" />
                             <TextBlock Classes="Body2"
                                        Text="For planning and maintaining the project" />
                         </StackPanel>
@@ -217,7 +219,92 @@
                     </Menu>
                 </Grid>
 
+                <!--Translators-->
                 <TextBlock HorizontalAlignment="Center" FontSize="50" Margin="0,10,0,20">Translators</TextBlock>
+
+                <Grid RowDefinitions="*,*,*,*,*,*,*,*" ColumnDefinitions="220,*,*,*,*,*">
+                    <Grid.Styles>
+                        <Style Selector="TextBlock">
+                            <Setter Property="FontSize" Value="25" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                        <Style Selector="StackPanel>TextBlock">
+                            <Setter Property="FontSize" Value="18" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                        <Style Selector="Image">
+                            <Setter Property="Height" Value="60" />
+                            <Setter Property="Width" Value="60" />
+                            <Setter Property="Margin" Value="0,0,0,15" />
+                        </Style>
+                        <Style Selector="controls|Card">
+                            <Setter Property="Background" Value="#595959" />
+                            <Setter Property="Height" Value="120" />
+                            <Setter Property="Width" Value="140" />
+                            <Setter Property="Margin" Value="0,10" />
+                        </Style>
+                    </Grid.Styles>
+
+                    <!--Chinese Simplified-->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Chinese&#x0a;Simplified:" />
+                    <controls:Card Grid.Row="0" Grid.Column="1">
+                        <StackPanel>
+                            <Image Source="/Assets/lxymahatma.jpg" />
+                            <TextBlock>Lxymahatma</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+
+                    <!--Chinese Traditional-->
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Chinese&#x0a;Traditional:" />
+                    <controls:Card Grid.Row="1" Grid.Column="1">
+                        <StackPanel>
+                            <Image Source="/Assets/Shiron_Lee.jpg" />
+                            <TextBlock>Shiron_Lee</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+
+                    <!--French-->
+
+                    <!--Hungarian-->
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Hungarian: " />
+                    <controls:Card Grid.Row="2" Grid.Column="1">
+                        <StackPanel>
+                            <Image Source="/Assets/Balint.png" />
+                            <TextBlock>Balint</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+
+                    <!--Japanese-->
+
+                    <!--Korean-->
+
+                    <!--Russian-->
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Russian: " />
+                    <controls:Card Grid.Row="3" Grid.Column="1">
+                        <StackPanel>
+                            <Image Source="/Assets/Ultra_Rabbit.jpg" />
+                            <TextBlock>Ultra Rabbit</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+                    <controls:Card Grid.Row="3" Grid.Column="2">
+                        <StackPanel>
+                            <Image Source="/Assets/Ronner.jpg" />
+                            <TextBlock>Ronner</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+
+                    <!--Spanish-->
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Spanish: " />
+                    <controls:Card Grid.Row="4" Grid.Column="1">
+                        <StackPanel>
+                            <Image Source="/Assets/MNight4.png" />
+                            <TextBlock>MNight4</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
 
