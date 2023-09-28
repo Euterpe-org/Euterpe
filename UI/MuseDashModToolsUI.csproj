@@ -65,7 +65,7 @@
         </PackageReference>
         <PackageReference Include="Serilog" Version="3.0.2-dev-02056"/>
         <PackageReference Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918"/>
-        <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00968"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
         <PackageReference Include="TestableIO.System.IO.Abstractions" Version="19.2.69"/>
         <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.69"/>
