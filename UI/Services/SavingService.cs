@@ -36,15 +36,6 @@ public partial class SavingService : ISavingService
     [UsedImplicitly]
     public ILocalService LocalService { get; init; }
 
-    [UsedImplicitly]
-    public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
-
     public SavingService(IFileSystem fileSystem, ILogger logger, IPlatformService platformService)
     {
         _fileSystem = fileSystem;

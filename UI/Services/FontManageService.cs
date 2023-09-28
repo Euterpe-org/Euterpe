@@ -2,7 +2,7 @@
 using Avalonia.Media;
 using SkiaSharp;
 
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 namespace MuseDashModToolsUI.Services;
 
@@ -12,7 +12,7 @@ public partial class FontManageService : IFontManageService, INotifyPropertyChan
     private readonly ILogger _logger;
 
     [UsedImplicitly]
-    public ISavingService? SavingService { get; init; }
+    public ISavingService SavingService { get; init; }
 
     public FontFamily this[string _] => new(SavingService.Settings.FontName!);
     public static string DefaultFont => _skFontManager.GetFontFamilies()[0];
