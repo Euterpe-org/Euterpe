@@ -5,11 +5,11 @@ namespace MuseDashModToolsUI.Services;
 public partial class LocalService
 {
     /// <summary>
-    ///     Check updater files exist
+    ///     Check updater files exist and create updater target folder
     /// </summary>
     /// <param name="updaterFilePath"></param>
     /// <param name="updaterTargetFolder"></param>
-    /// <returns>Is exist</returns>
+    /// <returns>Is exist and create success</returns>
     private async Task<bool> CheckUpdaterFilesExist(string updaterFilePath, string updaterTargetFolder)
     {
         if (!File.Exists(updaterFilePath))
