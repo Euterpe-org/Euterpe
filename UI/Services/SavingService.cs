@@ -53,7 +53,11 @@ public partial class SavingService : ISavingService
         if (!_isSavedLoaded)
         {
             _logger.Warning("Didn't load setting from Settings.json, getting game path...");
-            await TryGetGameFolderPath();
+            if (!await TryGetGameFolderPath())
+            {
+                await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
+                await OnChoosePath();
+            }
         }
 
         await CheckSettingValidity();

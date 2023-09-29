@@ -141,9 +141,13 @@ public partial class SavingService
     /// <summary>
     ///     Try automatically find game folder path
     /// </summary>
-    private async Task TryGetGameFolderPath()
+    /// <returns>Is success</returns>
+    private async Task<bool> TryGetGameFolderPath()
     {
         _logger.Information("Trying auto detect game path...");
-        if (_platformService.GetGamePath(out var folderPath)) await ConfirmPath(folderPath!);
+
+        if (!_platformService.GetGamePath(out var folderPath)) return false;
+        await ConfirmPath(folderPath!);
+        return true;
     }
 }
