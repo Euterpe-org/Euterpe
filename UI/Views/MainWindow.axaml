@@ -69,7 +69,7 @@
             </TabStrip.ItemTemplate>
         </TabStrip>
 
-        <Viewbox Grid.Row="0" Grid.Column="2" Margin="0,0,15,0">
+        <Viewbox Grid.Row="0" Grid.Column="2" Margin="0,15,15,0">
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="25"
