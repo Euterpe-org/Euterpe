@@ -366,7 +366,7 @@
     <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
         <value>Обнаружен путь к папке Muse Dash - {0}\nЭто правильная папка игры?</value>
     </data>
-  <data name="XAML_Tab_About" xml:space="preserve">
+    <data name="XAML_Tab_About" xml:space="preserve">
         <value>About</value>
     </data>
 </root>
