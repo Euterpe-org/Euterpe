@@ -62,7 +62,7 @@
                     </Button>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top">
-                        <TextBlock Classes="Headline4"
+                        <TextBlock Classes="Headline3"
                                    Text="About Muse Dash Mod Tools"
                                    TextAlignment="Center" />
                         <TextBlock Classes="Headline5"
@@ -266,6 +266,13 @@
                         </StackPanel>
                     </controls:Card>
 
+                    <controls:Card Grid.Row="1" Grid.Column="2">
+                        <StackPanel>
+                            <Image Source="/Assets/bigbeesushi.jpg" />
+                            <TextBlock>Bigbeesushi</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+
                     <!--French-->
 
                     <!--Hungarian-->
@@ -289,6 +296,7 @@
                             <TextBlock>Ultra Rabbit</TextBlock>
                         </StackPanel>
                     </controls:Card>
+
                     <controls:Card Grid.Row="3" Grid.Column="2">
                         <StackPanel>
                             <Image Source="/Assets/Ronner.jpg" />
