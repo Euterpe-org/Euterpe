@@ -4,6 +4,7 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class UpdateUIService : IUpdateUIService
 {
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
@@ -28,12 +29,20 @@ public partial class UpdateUIService : IUpdateUIService
         RecoverOption();
     }
 
-    public async Task InitializeTabs()
+    public async Task InitializeAllTabs()
     {
-        SettingsViewModel.Value.UpdatePath();
+        SettingsViewModel.Value.Initialize();
         await ModManageViewModel.Value.Initialize();
         await LogAnalysisViewModel.Value.Initialize();
 
-        Logger.Information("Tabs initialized");
+        Logger.Information("All Tabs initialized");
+    }
+
+    public async Task InitializeTabsOnChoosePath()
+    {
+        await ModManageViewModel.Value.Initialize();
+        await LogAnalysisViewModel.Value.Initialize();
+
+        Logger.Information("Path changed, ModManage and LogAnalysis tabs initialized");
     }
 }

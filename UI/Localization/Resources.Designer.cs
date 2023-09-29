@@ -654,15 +654,6 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About Project.
-        /// </summary>
-        internal static string XAML_About_Project {
-            get {
-                return ResourceManager.GetString("XAML_About_Project", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         internal static string XAML_All {
@@ -1028,6 +1019,15 @@ namespace MuseDashModToolsUI.Localization {
         internal static string XAML_Setting_EnableDependency_Install {
             get {
                 return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string XAML_Tab_About {
+            get {
+                return ResourceManager.GetString("XAML_Tab_About", resourceCulture);
             }
         }
         

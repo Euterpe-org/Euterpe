@@ -1,10 +1,8 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
-#pragma warning disable CS8602
+namespace MuseDashModToolsUI.ViewModels.Tabs;
 
-namespace MuseDashModToolsUI.ViewModels.Dialogs;
-
-public partial class ProjectWindowViewModel : ViewModelBase, IProjectWindowViewModel
+public partial class AboutViewModel : ViewModelBase, IAboutViewModel
 {
     [UsedImplicitly]
     public ILogger? Logger { get; init; }

@@ -11,8 +11,8 @@
              x:DataType="tabs:SettingsViewModel"
              DataContext="{ext:DependencyInjection Type=contract:ISettingsViewModel}">
 
-    <Grid Background="#424242">
-        <Grid.Styles>
+    <ScrollViewer Background="#424242" Margin="10,0">
+        <ScrollViewer.Styles>
             <Style Selector="controls|Card">
                 <Setter Property="Margin" Value="0,1" />
             </Style>
@@ -36,136 +36,133 @@
                 <Setter Property="Height" Value="40" />
                 <Setter Property="Margin" Value="20,0,0,0" />
             </Style>
-        </Grid.Styles>
+        </ScrollViewer.Styles>
 
-        <ScrollViewer>
-            <StackPanel Orientation="Vertical">
-                <!--Muse Dash Folder Path-->
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_Path}" />
+        <StackPanel Orientation="Vertical">
+            <!--Muse Dash Folder Path-->
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_Path}" />
 
-                        <TextBox Classes="outline"
-                                 Text="{Binding Path}"
-                                 Margin="20,0,0,5"
-                                 VerticalAlignment="Center"
-                                 HorizontalAlignment="Left"
-                                 AcceptsReturn="False"
-                                 IsReadOnly="True"
-                                 MaxWidth="500" />
+                    <TextBox Classes="outline"
+                             Text="{Binding Path}"
+                             Margin="20,0,0,5"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"
+                             AcceptsReturn="False"
+                             IsReadOnly="True"
+                             MaxWidth="500" />
 
-                        <Button Classes="dark"
-                                Command="{Binding ChoosePathCommand}">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="/Assets/folder.png"
-                                       Height="35"
-                                       Width="35"
-                                       VerticalAlignment="Center" />
-                                <TextBlock Margin="5,0,0,0"
-                                           Text="{ext:LocalizeExtensions XAML_ChangePath}" />
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </controls:Card>
+                    <Button Classes="dark"
+                            Command="{Binding ChoosePathCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/folder.png"
+                                   Height="35"
+                                   Width="35"
+                                   VerticalAlignment="Center" />
+                            <TextBlock Margin="5,0,0,0"
+                                       Text="{ext:LocalizeExtensions XAML_ChangePath}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </controls:Card>
 
-                <!--Language-->
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
+            <!--Language-->
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
 
-                        <ComboBox MinWidth="200"
-                                  ItemsSource="{Binding AvailableLanguages}"
-                                  SelectedIndex="{Binding CurrentLanguageIndex}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding FullName}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                    <ComboBox MinWidth="200"
+                              ItemsSource="{Binding AvailableLanguages}"
+                              SelectedIndex="{Binding CurrentLanguageIndex}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FullName}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
-                        <Button Classes="dark"
-                                Content="{ext:LocalizeExtensions XAML_Apply}"
-                                Command="{Binding SetLanguageCommand}" />
-                    </StackPanel>
-                </controls:Card>
+                    <Button Classes="dark"
+                            Content="{ext:LocalizeExtensions XAML_Apply}"
+                            Command="{Binding SetLanguageCommand}" />
+                </StackPanel>
+            </controls:Card>
 
-                <!--Download Source-->
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
+            <!--Download Source-->
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
 
-                        <ComboBox MinWidth="180"
-                                  ItemsSource="{Binding DownloadSources}"
-                                  SelectedIndex="{Binding CurrentDownloadSource}" />
-                    </StackPanel>
-                </controls:Card>
+                    <ComboBox MinWidth="180"
+                              ItemsSource="{Binding DownloadSources}"
+                              SelectedIndex="{Binding CurrentDownloadSource}" />
+                </StackPanel>
+            </controls:Card>
 
-                <!--Prerelease-->
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadPrerelease}" />
+            <!--Prerelease-->
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadPrerelease}" />
 
-                        <ToggleSwitch Margin="20,0,0,0" IsChecked="{Binding DownloadPrerelease}" />
-                    </StackPanel>
-                </controls:Card>
+                    <ToggleSwitch Margin="20,0,0,0" IsChecked="{Binding DownloadPrerelease}" />
+                </StackPanel>
+            </controls:Card>
 
-                <!--Font-->
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
+            <!--Font-->
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
 
-                        <ComboBox MinWidth="300"
-                                  ItemsSource="{Binding AvailableFonts}"
-                                  SelectedIndex="{Binding CurrentFontIndex}" />
+                    <ComboBox MinWidth="300"
+                              ItemsSource="{Binding AvailableFonts}"
+                              SelectedIndex="{Binding CurrentFontIndex}" />
 
-                        <Button Classes="dark"
-                                Content="{ext:LocalizeExtensions XAML_Apply}"
-                                Command="{Binding SetFontCommand}" />
-                    </StackPanel>
-                </controls:Card>
+                    <Button Classes="dark"
+                            Content="{ext:LocalizeExtensions XAML_Apply}"
+                            Command="{Binding SetFontCommand}" />
+                </StackPanel>
+            </controls:Card>
 
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
 
-                        <ComboBox MinWidth="150"
-                                  ItemsSource="{Binding AskTypes}"
-                                  SelectedIndex="{Binding EnableDependenciesWhenInstalling}" />
-                    </StackPanel>
-                </controls:Card>
+                    <ComboBox MinWidth="150"
+                              ItemsSource="{Binding AskTypes}"
+                              SelectedIndex="{Binding EnableDependenciesWhenInstalling}" />
+                </StackPanel>
+            </controls:Card>
 
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
 
-                        <ComboBox MinWidth="150"
-                                  ItemsSource="{Binding AskTypes}"
-                                  SelectedIndex="{Binding EnableDependenciesWhenEnabling}" />
-                    </StackPanel>
-                </controls:Card>
+                    <ComboBox MinWidth="150"
+                              ItemsSource="{Binding AskTypes}"
+                              SelectedIndex="{Binding EnableDependenciesWhenEnabling}" />
+                </StackPanel>
+            </controls:Card>
 
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
 
-                        <ComboBox MinWidth="150"
-                                  ItemsSource="{Binding AskTypes}"
-                                  SelectedIndex="{Binding DisableDependenciesWhenDeleting}" />
-                    </StackPanel>
-                </controls:Card>
+                    <ComboBox MinWidth="150"
+                              ItemsSource="{Binding AskTypes}"
+                              SelectedIndex="{Binding DisableDependenciesWhenDeleting}" />
+                </StackPanel>
+            </controls:Card>
 
-                <controls:Card>
-                    <StackPanel>
-                        <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
+            <controls:Card>
+                <StackPanel>
+                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
 
-                        <ComboBox MinWidth="150"
-                                  ItemsSource="{Binding AskTypes}"
-                                  SelectedIndex="{Binding DisableDependenciesWhenDisabling}" />
-                    </StackPanel>
-                </controls:Card>
-            </StackPanel>
-        </ScrollViewer>
-
-    </Grid>
+                    <ComboBox MinWidth="150"
+                              ItemsSource="{Binding AskTypes}"
+                              SelectedIndex="{Binding DisableDependenciesWhenDisabling}" />
+                </StackPanel>
+            </controls:Card>
+        </StackPanel>
+    </ScrollViewer>
 
 </UserControl>
