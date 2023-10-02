@@ -369,4 +369,7 @@
     <data name="XAML_Tab_About" xml:space="preserve">
         <value>关于</value>
     </data>
+    <data name="XAML_ReportBug" xml:space="preserve">
+        <value>报告 Bug</value>
+    </data>
 </root>

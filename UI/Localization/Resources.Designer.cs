@@ -978,6 +978,15 @@ namespace MuseDashModToolsUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Report Bug.
+        /// </summary>
+        internal static string XAML_ReportBug {
+            get {
+                return ResourceManager.GetString("XAML_ReportBug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
         /// </summary>
         internal static string XAML_SearchBar {

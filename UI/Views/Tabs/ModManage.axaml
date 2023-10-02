@@ -214,7 +214,7 @@
                     </MenuItem>
 
                     <!--Bug Report-->
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_Report_Bug}"
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ReportBug}"
                               Command="{Binding OpenUrlCommand}"
                               CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose">
                         <MenuItem.Icon>
