@@ -20,8 +20,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="XAML_Check_Update" xml:space="preserve">
+  </resheader>
+  <data name="XAML_Check_Update" xml:space="preserve">
         <value>检查更新</value>
     </data>
   <data name="XAML_All" xml:space="preserve">
@@ -366,7 +366,10 @@
   <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
         <value>检测到的 Muse Dash 文件夹为 {0}\n这是正确的游戏文件夹吗</value>
     </data>
-    <data name="XAML_Tab_About" xml:space="preserve">
+  <data name="XAML_Tab_About" xml:space="preserve">
         <value>关于</value>
+    </data>
+  <data name="XAML_ReportBug" xml:space="preserve">
+        <value>报告 Bug</value>
     </data>
 </root>
