@@ -370,4 +370,7 @@
     <data name="XAML_Tab_About" xml:space="preserve">
         <value>About</value>
     </data>
+    <data name="XAML_ReportBug" xml:space="preserve">
+        <value>Report Bug</value>
+    </data>
 </root>

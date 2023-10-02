@@ -10,6 +10,7 @@ public partial class UpdateUIService
         MainWindowViewModel.Value.Tabs[0].DisplayName = XAML_Tab_ModManage;
         MainWindowViewModel.Value.Tabs[1].DisplayName = XAML_Tab_LogAnalysis;
         MainWindowViewModel.Value.Tabs[2].DisplayName = XAML_Tab_Setting;
+        MainWindowViewModel.Value.Tabs[3].DisplayName = XAML_Tab_About;
     }
 
     /// <summary>
