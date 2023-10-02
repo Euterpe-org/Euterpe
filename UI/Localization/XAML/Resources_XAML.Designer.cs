@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MuseDashModToolsUI.Localization {
+namespace MuseDashModToolsUI.Localization.XAML {
     using System;
     
     

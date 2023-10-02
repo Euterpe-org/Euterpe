@@ -1,6 +1,6 @@
 using System.Globalization;
 using System.Resources;
-using MuseDashModToolsUI.Localization;
+using MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
