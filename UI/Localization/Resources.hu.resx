@@ -20,8 +20,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="XAML_Check_Update" xml:space="preserve">
+  </resheader>
+  <data name="XAML_Check_Update" xml:space="preserve">
         <value>Frissítés</value>
     </data>
   <data name="XAML_All" xml:space="preserve">
@@ -368,5 +368,8 @@
     </data>
   <data name="XAML_Tab_About" xml:space="preserve">
         <value>A projektről</value>
+    </data>
+  <data name="XAML_ReportBug" xml:space="preserve">
+        <value>Report Bug</value>
     </data>
 </root>
