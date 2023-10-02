@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MuseDashModToolsUI.Localization.MessageBox {
+namespace MuseDashModToolsUI.Localization.MsgBox {
     using System;
     
     
