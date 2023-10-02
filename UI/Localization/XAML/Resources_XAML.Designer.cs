@@ -38,7 +38,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.Resources_XAML", typeof(Resources_XAML).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.XAML.Resources_XAML", typeof(Resources_XAML).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

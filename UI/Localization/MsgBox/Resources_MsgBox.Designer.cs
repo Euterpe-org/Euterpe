@@ -38,7 +38,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.MessageBox.Resources_MsgBox", typeof(Resources_MsgBox).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.MsgBox.Resources_MsgBox", typeof(Resources_MsgBox).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
