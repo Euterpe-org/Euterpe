@@ -212,6 +212,15 @@
                             <Image Source="/Assets/translate.png" />
                         </MenuItem.Icon>
                     </MenuItem>
+
+                    <!--Bug Report-->
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_Report_Bug}"
+                              Command="{Binding OpenUrlCommand}"
+                              CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose">
+                        <MenuItem.Icon>
+                            <Image Source="/Assets/bug.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
 
