@@ -21,51 +21,6 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-    <data name="XAML_Check_Update" xml:space="preserve">
-        <value>Comprobar actualización</value>
-    </data>
-    <data name="XAML_All" xml:space="preserve">
-        <value>Mostrar todo</value>
-    </data>
-    <data name="XAML_Enabled" xml:space="preserve">
-        <value>Activo</value>
-    </data>
-    <data name="XAML_Installed" xml:space="preserve">
-        <value>Instalado</value>
-    </data>
-    <data name="XAML_Outdated" xml:space="preserve">
-        <value>Desactualizado</value>
-    </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
-        <value>Incompatible</value>
-    </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
-        <value>Instalar\nMelonLoader</value>
-    </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-        <value>Remover\nMelonLoader</value>
-    </data>
-    <data name="XAML_Path" xml:space="preserve">
-        <value>Carpeta de Muse Dash</value>
-    </data>
-    <data name="XAML_ModsFolder" xml:space="preserve">
-        <value>Carpeta de\nmods</value>
-    </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
-        <value>Buscar mods (Nombre, Autor, Descripción)</value>
-    </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
-        <value>Desinstalar</value>
-    </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
-        <value>Instalar</value>
-    </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
-        <value>Reinstalar</value>
-    </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
-        <value>Actualizar</value>
-    </data>
     <data name="MsgBox_Title_Failure" xml:space="preserve">
         <value>Error</value>
     </data>
@@ -180,33 +135,6 @@
     <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
         <value>La desinstalación del mod fallo. ¿Estás jugando Muse Dash?\n{0}</value>
     </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
-        <value>El mod {0} v{1}, no es compatible con tu versión actual de Muse Dash</value>
-    </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
-        <value>Versión instalada: {0} (Nueva versión disponible: {1})</value>
-    </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
-        <value>Versión instalada: {0} (MODO DESARROLLADOR)</value>
-    </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
-        <value>Versión instalada: {0} (Modificado)</value>
-    </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
-        <value>Versión instalada: {0}</value>
-    </data>
-    <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0} \n\nAutor: {1} \nUltima versión: {2} \nVersiones de Muse Dash compatibles: {3}</value>
-    </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
-        <value>Todas</value>
-    </data>
-    <data name="XAML_Mod_Dependencies" xml:space="preserve">
-        <value>Dependencias:</value>
-    </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
-        <value>Duplicado de:</value>
-    </data>
     <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} es usado por {1} como dependencia\n¿Estás seguro de intentar desactivarlo?</value>
     </data>
@@ -234,9 +162,6 @@
     <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
         <value>No se pudo activar/desactivar el mod.\n{0}</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>Más información</value>
-    </data>
     <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
         <value>MelonLoader fallo en descargar por problemas de conexión\n¿Hay conexión a internet?\n{0}</value>
     </data>
@@ -255,74 +180,8 @@
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>¡Estas por desinstalar MelonLoader!\n¿Podrías confirmar esta acción?</value>
     </data>
-    <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>Mods</value>
-    </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>Ajustes</value>
-    </data>
-    <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>Carpeta de\najustes local</value>
-    </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>Activar dependencias al instalar un Mod</value>
-    </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>Activar dependencias al activar un Mod</value>
-    </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>Desactivar dependencia al eliminar un Mod</value>
-    </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>Desactivar dependencia al desactivar un Mod</value>
-    </data>
-    <data name="XAML_ChangePath" xml:space="preserve">
-        <value>Modificar carpeta</value>
-    </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
-        <value>¡Ayuda a traducir!</value>
-    </data>
-    <data name="XAML_Language" xml:space="preserve">
-        <value>Idioma: </value>
-    </data>
-    <data name="XAML_Apply" xml:space="preserve">
-        <value>Aplicar</value>
-    </data>
-    <data name="XAML_AskType_Always" xml:space="preserve">
-        <value>Preguntar primero</value>
-    </data>
-    <data name="XAML_AskType_Yes" xml:space="preserve">
-        <value>Sí</value>
-    </data>
-    <data name="XAML_AskType_No" xml:space="preserve">
-        <value>No</value>
-    </data>
-    <data name="XAML_DownloadSource" xml:space="preserve">
-        <value>Descarga Oficial:</value>
-    </data>
-    <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
-    </data>
-    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
-        <value>Github Mirror</value>
-    </data>
-    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-    <data name="XAML_Font" xml:space="preserve">
-        <value>Fuente:</value>
-    </data>
     <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>¡No se pudo obtener la lista de mods!</value>
-    </data>
-    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
-        <value>Analizar</value>
-    </data>
-    <data name="XAML_LogFolder" xml:space="preserve">
-        <value>Ir a mi Log</value>
-    </data>
-    <data name="XAML_Analyze" xml:space="preserve">
-        <value>Analizar\neste log</value>
     </data>
     <data name="MsgBox_Content_GamePathError" xml:space="preserve">
         <value>Se detectó a Muse Dash fuera de "steamapps\common\Muse Dash"\n¿Has pirateado el juego?</value>
@@ -345,14 +204,8 @@
     <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
         <value>¡No se encontró tu archivo Log!\nDebes lanzar el juego luego de instalar MelonLoader,\npara que este pueda crear un archivo Log</value>
     </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
-        <value>Descargar versión de pre-estable: </value>
-    </data>
     <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
         <value>¡La versión de MelonLoader no fue detectada en tu Log!</value>
-    </data>
-    <data name="XAML_TroubleShoot" xml:space="preserve">
-        <value>Reportar un\nproblema</value>
     </data>
     <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
         <value>Análisis completado</value>
@@ -365,8 +218,5 @@
     </data>
     <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
         <value>¿Tienes Muse Dash instalado en esta carpeta?\n{0}</value>
-    </data>
-    <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
     </data>
 </root>

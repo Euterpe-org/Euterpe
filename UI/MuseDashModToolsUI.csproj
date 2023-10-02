@@ -28,10 +28,25 @@
         <EmbeddedResource Remove="Mods\**"/>
         <None Remove="Mods\**"/>
         <None Remove=".gitignore"/>
+        
         <EmbeddedResource Update="Localization\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <Compile Update="Localization\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <EmbeddedResource Update="Localization\Resources_XAML.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources_XAML.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Update="Localization\Resources_XAML.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources_XAML.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>

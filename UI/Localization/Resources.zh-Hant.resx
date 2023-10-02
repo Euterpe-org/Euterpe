@@ -21,51 +21,6 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-    <data name="XAML_Check_Update" xml:space="preserve">
-        <value>檢查更新</value>
-    </data>
-    <data name="XAML_All" xml:space="preserve">
-        <value>全部</value>
-    </data>
-    <data name="XAML_Enabled" xml:space="preserve">
-        <value>已啟用</value>
-    </data>
-    <data name="XAML_Installed" xml:space="preserve">
-        <value>已安裝</value>
-    </data>
-    <data name="XAML_Outdated" xml:space="preserve">
-        <value>有更新</value>
-    </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
-        <value>不相容</value>
-    </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
-        <value>安裝\nMelonLoader</value>
-    </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-        <value>解除安裝\nMelonLoader</value>
-    </data>
-    <data name="XAML_Path" xml:space="preserve">
-        <value>Muse Dash 文件路徑</value>
-    </data>
-    <data name="XAML_ModsFolder" xml:space="preserve">
-        <value>模組文件夾</value>
-    </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
-        <value>搜尋模組    (名字,   作者,  描述)</value>
-    </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
-        <value>解除安裝</value>
-    </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
-        <value>安裝</value>
-    </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
-        <value>重新安裝</value>
-    </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
-        <value>更新</value>
-    </data>
     <data name="MsgBox_Title_Failure" xml:space="preserve">
         <value>失敗</value>
     </data>
@@ -180,33 +135,6 @@
     <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
         <value>Mod 安裝失敗。遊戲是否正執行? \n{0}}</value>
     </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
-        <value>{0} 的 {1} 版本和你的遊戲版本不相容</value>
-    </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
-        <value>你的版本: {0} (有新版本: {1})</value>
-    </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
-        <value>你的版本: {0} (WOW MOD開發者)</value>
-    </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
-        <value>本地版本: {0} (修改)</value>
-    </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
-        <value>你的版本: {0}</value>
-    </data>
-    <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0} \n\n作者：{1} \n線上版本：{2}\n支持遊戲版本：{3}</value>
-    </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
-        <value>全部</value>
-    </data>
-    <data name="XAML_Mod_Dependencies" xml:space="preserve">
-        <value>依賴:</value>
-    </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
-        <value>重複:</value>
-    </data>
     <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} 被 {1} 用作依賴\n你确定你想要禁用這個 mod?</value>
     </data>
@@ -234,9 +162,6 @@
     <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
         <value>Mod 啟用/禁用失敗\n{0}</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>主頁</value>
-    </data>
     <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
         <value>MelonLoader 下載失敗\n 是否連上網路? \n{0}}</value>
     </data>
@@ -255,74 +180,8 @@
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>你正在要求解除安裝 MelonLoader\n請確認你的操作</value>
     </data>
-    <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>模組</value>
-    </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>設置</value>
-    </data>
-    <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>使用者文件</value>
-    </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>安裝Mod時啟用依賴</value>
-    </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>啟用Mod時啟用依賴</value>
-    </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>刪除Mod時禁用依賴</value>
-    </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>禁用Mod時禁用依賴</value>
-    </data>
-    <data name="XAML_ChangePath" xml:space="preserve">
-        <value>更改路徑</value>
-    </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
-        <value>幫助翻譯</value>
-    </data>
-    <data name="XAML_Language" xml:space="preserve">
-        <value>語言: </value>
-    </data>
-    <data name="XAML_Apply" xml:space="preserve">
-        <value>應用</value>
-    </data>
-    <data name="XAML_AskType_Always" xml:space="preserve">
-        <value>總是詢問</value>
-    </data>
-    <data name="XAML_AskType_Yes" xml:space="preserve">
-        <value>是</value>
-    </data>
-    <data name="XAML_AskType_No" xml:space="preserve">
-        <value>否</value>
-    </data>
-    <data name="XAML_DownloadSource" xml:space="preserve">
-        <value>下載源: </value>
-    </data>
-    <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
-    </data>
-    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
-        <value>Github 鏡像</value>
-    </data>
-    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-    <data name="XAML_Font" xml:space="preserve">
-        <value>字體:</value>
-    </data>
     <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>無法從任一下載源獲取Mod列表</value>
-    </data>
-    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
-        <value>分析</value>
-    </data>
-    <data name="XAML_LogFolder" xml:space="preserve">
-        <value>打開日誌文件夾</value>
-    </data>
-    <data name="XAML_Analyze" xml:space="preserve">
-        <value>分析日誌</value>
     </data>
     <data name="MsgBox_Content_GamePathError" xml:space="preserve">
         <value>Your game path doesn't contain "steamapps\common\Muse Dash\musedash.exe"\nAre you using pirate version?</value>
@@ -345,14 +204,8 @@
     <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
         <value>無法找到日誌文件\n你需要在安裝 MelonLoader 之後啟動一次遊戲來生成日誌文件</value>
     </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
-        <value>下載預發行版本: </value>
-    </data>
     <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
         <value>無法從日誌中找到 MelonLoader的版本</value>
-    </data>
-    <data name="XAML_TroubleShoot" xml:space="preserve">
-        <value>報告未知問題</value>
     </data>
     <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
         <value>分析成功</value>
@@ -365,8 +218,5 @@
     </data>
     <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
         <value>Detected Muse Dash folder path is {0}\nIs this the correct game folder?</value>
-    </data>
-    <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
     </data>
 </root>

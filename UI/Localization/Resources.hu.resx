@@ -21,51 +21,6 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-    <data name="XAML_Check_Update" xml:space="preserve">
-        <value>Frissítés</value>
-    </data>
-    <data name="XAML_All" xml:space="preserve">
-        <value>Mind</value>
-    </data>
-    <data name="XAML_Enabled" xml:space="preserve">
-        <value>Bekapcsolt</value>
-    </data>
-    <data name="XAML_Installed" xml:space="preserve">
-        <value>Telepített</value>
-    </data>
-    <data name="XAML_Outdated" xml:space="preserve">
-        <value>Elavult</value>
-    </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
-        <value>Nem működik</value>
-    </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
-        <value>MelonLoader\nTelepítése</value>
-    </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-        <value>MelonLoader\nEltávolítása</value>
-    </data>
-    <data name="XAML_Path" xml:space="preserve">
-        <value>Muse Dash mappa</value>
-    </data>
-    <data name="XAML_ModsFolder" xml:space="preserve">
-        <value>Mappa</value>
-    </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
-        <value>Keresés</value>
-    </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
-        <value>Törlés</value>
-    </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
-        <value>Telepítés</value>
-    </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
-        <value>Újra-telepítés</value>
-    </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
-        <value>Frissítés</value>
-    </data>
     <data name="MsgBox_Title_Failure" xml:space="preserve">
         <value>Hiba</value>
     </data>
@@ -180,33 +135,6 @@
     <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
         <value>Mod eltávolítás sikertelen. Fut a játék?\n{0}</value>
     </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
-        <value>{0}-nak az {1}-es verziója nem működik ezen a játék verzión</value>
-    </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
-        <value>Helyi verzió: {0} (Újabb elérhető: {1})</value>
-    </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
-        <value>Helyi verzió: {0} (ATYA ÚRISTEN, ÖN FEJLESZTŐ?!)</value>
-    </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
-        <value>Helyi verzió: {0} (Módosított)</value>
-    </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
-        <value>Hely verzió: {0}</value>
-    </data>
-    <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0}\n\nFejlesztő: {1}\nOnline verzió: {2}\nKompatibilis játék verzió: {3}</value>
-    </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
-        <value>Mind</value>
-    </data>
-    <data name="XAML_Mod_Dependencies" xml:space="preserve">
-        <value>Függőségek:</value>
-    </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
-        <value>Duplikálja:</value>
-    </data>
     <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
         <value>{0} az a(z) {1}-nek a függősége\nBiztos hogy ki akarod kapcsolni?</value>
     </data>
@@ -234,9 +162,6 @@
     <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
         <value>Mod be-/kikapcsolás sikertelen\n{0}</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>Fő-oldal</value>
-    </data>
     <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
         <value>MelonLoader letöltés sikertelen\nOnline vagy?\n{0}</value>
     </data>
@@ -255,74 +180,8 @@
     <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
         <value>MelonLoader el lesz távolítva\nErősítsd meg a műveletet</value>
     </data>
-    <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>Modok</value>
-    </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>Beállítások</value>
-    </data>
-    <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>UserData</value>
-    </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>Függőségek bekapcsolása mod telepítésekor</value>
-    </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>Függőségek bekapcsolása mod bekapcsolásakor</value>
-    </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>Függőségek kikapcsolása mod törlésekor</value>
-    </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>Függőségek kikapcsolása mod kikapcsolásakor</value>
-    </data>
-    <data name="XAML_ChangePath" xml:space="preserve">
-        <value>Mappaválasztás</value>
-    </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
-        <value>Közreműködés</value>
-    </data>
-    <data name="XAML_Language" xml:space="preserve">
-        <value>Nyelv: </value>
-    </data>
-    <data name="XAML_Apply" xml:space="preserve">
-        <value>Alkalmaz</value>
-    </data>
-    <data name="XAML_AskType_Always" xml:space="preserve">
-        <value>Kérdezz rá</value>
-    </data>
-    <data name="XAML_AskType_Yes" xml:space="preserve">
-        <value>Igen</value>
-    </data>
-    <data name="XAML_AskType_No" xml:space="preserve">
-        <value>Nem</value>
-    </data>
-    <data name="XAML_DownloadSource" xml:space="preserve">
-        <value>Letöltési forrás: </value>
-    </data>
-    <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
-    </data>
-    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
-        <value>Github Mirror</value>
-    </data>
-    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-    <data name="XAML_Font" xml:space="preserve">
-        <value>Betűtípus:</value>
-    </data>
     <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>Egyik forrásból sem sikerült lekérni a mod-listát</value>
-    </data>
-    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
-        <value>Elemzés</value>
-    </data>
-    <data name="XAML_LogFolder" xml:space="preserve">
-        <value>Log mappa megnyitása</value>
-    </data>
-    <data name="XAML_Analyze" xml:space="preserve">
-        <value>Log elemzése</value>
     </data>
     <data name="MsgBox_Content_GamePathError" xml:space="preserve">
         <value>A játék útvonalad gyanús!\nKalóz verziót használsz?</value>
@@ -345,14 +204,8 @@
     <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
         <value>Nem található log fájl\nEl kell indítani a játékot egyszer MelonLoader telepítése után hogy legyen log</value>
     </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
-        <value>Korai kiadások letöltése: </value>
-    </data>
     <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
         <value>Nem található a MelonLoader verzió a log fájlban</value>
-    </data>
-    <data name="XAML_TroubleShoot" xml:space="preserve">
-        <value>Hibakezelés</value>
     </data>
     <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
         <value>Elemzés sikeres</value>
@@ -365,8 +218,5 @@
     </data>
     <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
         <value>Érzékelt Muse Dash mappa: {0}\nEz a helyes mappa?</value>
-    </data>
-    <data name="XAML_Tab_About" xml:space="preserve">
-        <value>A projektről</value>
     </data>
 </root>

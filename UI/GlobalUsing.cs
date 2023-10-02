@@ -17,3 +17,4 @@ global using System.Runtime.InteropServices;
 global using System.Runtime.Versioning;
 global using Serilog;
 global using static MuseDashModToolsUI.Localization.Resources;
+global using static MuseDashModToolsUI.Localization.Resources_XAML;

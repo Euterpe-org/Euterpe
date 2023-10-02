@@ -41,7 +41,10 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         if (SavingService.Settings.LanguageCode is not null)
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(SavingService.Settings.LanguageCode);
         AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
-        DownloadSources = new[] { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee };
+        DownloadSources = new[]
+        {
+            XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee
+        };
         CurrentLanguageIndex = AvailableLanguages.FindIndex(x => x.Name == CultureInfo.CurrentUICulture.Name);
         CurrentFontIndex = AvailableFonts.FindIndex(x => x == SavingService.Settings.FontName);
         Path = SavingService.Settings.MuseDashFolder;
