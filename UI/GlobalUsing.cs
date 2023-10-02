@@ -18,3 +18,4 @@ global using System.Runtime.Versioning;
 global using Serilog;
 global using static MuseDashModToolsUI.Localization.Resources;
 global using static MuseDashModToolsUI.Localization.Resources_XAML;
+global using static MuseDashModToolsUI.Localization.MessageBox.Resources_MsgBox;
