@@ -46,11 +46,11 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Update="Localization\MessageBox\Resources_MsgBox.resx">
+        <EmbeddedResource Update="Localization\MsgBox\Resources_MsgBox.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources_MsgBox.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\MessageBox\Resources_MsgBox.Designer.cs">
+        <Compile Update="Localization\MsgBox\Resources_MsgBox.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources_MsgBox.resx</DependentUpon>
