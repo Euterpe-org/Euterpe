@@ -113,7 +113,7 @@ public partial class LocalService : ILocalService
     {
         if (!IsValidPath) return;
         Logger.Information("Showing MelonLoader download window...");
-        await DialogHost.Show(DownloadWindowViewModel, "DownloadWindowDialog",
+        await DialogHost.Show(DownloadWindowViewModel.Value, "DownloadWindowDialog",
             (object _, DialogOpenedEventArgs _) => DownloadWindowViewModel.Value.InstallMelonLoader());
     }
 
