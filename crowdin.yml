@@ -1,4 +1,4 @@
-pull_request_title: [skip ci] Translations update from Crowdin
+﻿pull_request_title: [skip ci] Translations update from Crowdin
 
 files: 
   - source: /UI/Localization/MsgBox/Resources_MsgBox.resx
