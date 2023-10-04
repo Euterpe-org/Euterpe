@@ -1,3 +1,5 @@
+pull_request_title: "[skip ci] Update translations from Crowdin"
+
 files:
   - source: /UI/Localization/MsgBox/Resources_MsgBox.resx
     translation: /UI/Localization/MsgBox/%file_name%.%osx_locale%.resx
