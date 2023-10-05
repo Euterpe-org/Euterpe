@@ -19,17 +19,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         </value>
   </resheader>
-  <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>UserData</value>
-    </data>
-  <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
-    </data>
   <data name="XAML_Check_Update" xml:space="preserve">
         <value>Frissítés</value>
-    </data>
-  <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
-        <value>Github Mirror</value>
     </data>
   <data name="XAML_Analyze" xml:space="preserve">
         <value>Log elemzése</value>
@@ -51,12 +42,6 @@
     </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>Korai kiadások letöltése: </value>
-    </data>
-  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-  <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
     </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Letöltési forrás: </value>

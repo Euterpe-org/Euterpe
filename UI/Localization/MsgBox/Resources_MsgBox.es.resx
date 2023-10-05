@@ -19,9 +19,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         </value>
   </resheader>
-  <data name="MsgBox_Button_No" xml:space="preserve">
-        <value>No</value>
-    </data>
   <data name="MsgBox_Button_NoNoAsk" xml:space="preserve">
         <value>No y no preguntes de nuevo</value>
     </data>
