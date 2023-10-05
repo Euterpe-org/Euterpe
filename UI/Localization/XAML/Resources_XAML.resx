@@ -173,4 +173,13 @@
     <data name="XAML_Update_Mod" xml:space="preserve">
         <value>Update</value>
     </data>
+    <data name="XAML_DownloadSource_Custom" xml:space="preserve">
+        <value>Custom</value>
+    </data>
+    <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
+        <value>Provide the link of custom download source</value>
+    </data>
+    <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
+        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)</value>
+    </data>
 </root>

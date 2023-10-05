@@ -36,6 +36,9 @@
                 <Setter Property="Height" Value="40" />
                 <Setter Property="Margin" Value="20,0,0,0" />
             </Style>
+            <Style Selector="TextBox">
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
         </ScrollViewer.Styles>
 
         <StackPanel Orientation="Vertical">
@@ -46,8 +49,7 @@
 
                     <TextBox Classes="outline"
                              Text="{Binding Path}"
-                             Margin="20,0,0,5"
-                             VerticalAlignment="Center"
+                             Margin="20,0,0,7"
                              HorizontalAlignment="Left"
                              AcceptsReturn="False"
                              IsReadOnly="True"
@@ -97,6 +99,24 @@
                               ItemsSource="{Binding DownloadSources}"
                               SelectedIndex="{Binding CurrentDownloadSource}" />
                 </StackPanel>
+            </controls:Card>
+
+            <!--Custom Download Link-->
+            <controls:Card IsVisible="{Binding IsUsingCustomDownloadSource}">
+                <StackPanel>
+                    <TextBox Classes="outline"
+                             Margin="0,0,0,7"
+                             TextWrapping="WrapWithOverflow"
+                             Watermark="{ext:LocalizeExtensions XAML_UseCustomDownloadSource}"
+                             Text="{Binding CustomDownloadSource}" />
+
+                    <Image Source="/Assets/alert_circle.png"
+                           Margin="20,0,0,0"
+                           Width="40"
+                           Height="40"
+                           ToolTip.Tip="{ext:LocalizeExtensions XAML_CustomDownloadSourceFormat}" />
+                </StackPanel>
+
             </controls:Card>
 
             <!--Prerelease-->

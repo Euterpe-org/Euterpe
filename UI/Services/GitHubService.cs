@@ -18,11 +18,12 @@ public partial class GitHubService : IGitHubService
     private HttpResponseMessage? _melonLoaderResponseMessage;
     private string DefaultDownloadSource => DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
 
-    private static Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
+    private Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
     {
         { DownloadSources.Github, PrimaryLink },
         { DownloadSources.GithubMirror, SecondaryLink },
-        { DownloadSources.Gitee, ThirdLink }
+        { DownloadSources.Gitee, ThirdLink },
+        { DownloadSources.Custom, SavingService.Value.Settings.CustomDownloadSource! }
     };
 
     [UsedImplicitly]
