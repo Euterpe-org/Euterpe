@@ -14,8 +14,10 @@ public class SemanticVersionJsonConverter : JsonConverter<SemanticVersion>
 
     public override void Write(Utf8JsonWriter writer, SemanticVersion semanticVersion, JsonSerializerOptions options)
     {
-        var releaseLabel = semanticVersion.ReleaseLabels.ToArray()[0];
-        var versionString = $"{semanticVersion.Major}.{semanticVersion.Minor}.{semanticVersion.Patch}-{releaseLabel}";
+        var releaseLabel = semanticVersion.ReleaseLabels.FirstOrDefault();
+        var versionString = string.IsNullOrEmpty(releaseLabel)
+            ? $"{semanticVersion.Major}.{semanticVersion.Minor}.{semanticVersion.Patch}"
+            : $"{semanticVersion.Major}.{semanticVersion.Minor}.{semanticVersion.Patch}-{releaseLabel}";
         writer.WriteStringValue(versionString);
     }
 }
