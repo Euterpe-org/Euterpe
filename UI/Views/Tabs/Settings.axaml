@@ -108,6 +108,7 @@
                              Margin="0,0,0,7"
                              TextWrapping="WrapWithOverflow"
                              Watermark="{ext:LocalizeExtensions XAML_UseCustomDownloadSource}"
+                             MinWidth="400"
                              Text="{Binding CustomDownloadSource}" />
 
                     <Image Source="/Assets/alert_circle.png"
