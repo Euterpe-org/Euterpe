@@ -132,6 +132,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository).
+        /// </summary>
+        internal static string XAML_CustomDownloadSourceFormat {
+            get {
+                return ResourceManager.GetString("XAML_CustomDownloadSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download Prerelease: .
         /// </summary>
         internal static string XAML_DownloadPrerelease {
@@ -146,6 +155,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_DownloadSource {
             get {
                 return ResourceManager.GetString("XAML_DownloadSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string XAML_DownloadSource_Custom {
+            get {
+                return ResourceManager.GetString("XAML_DownloadSource_Custom", resourceCulture);
             }
         }
         
@@ -506,6 +524,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_Update_Mod {
             get {
                 return ResourceManager.GetString("XAML_Update_Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provide the link of custom download source.
+        /// </summary>
+        internal static string XAML_UseCustomDownloadSource {
+            get {
+                return ResourceManager.GetString("XAML_UseCustomDownloadSource", resourceCulture);
             }
         }
         
