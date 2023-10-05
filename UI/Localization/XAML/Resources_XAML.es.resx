@@ -22,14 +22,8 @@
   <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>Carpeta de\najustes local</value>
     </data>
-  <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
-    </data>
   <data name="XAML_Check_Update" xml:space="preserve">
         <value>Comprobar actualización</value>
-    </data>
-  <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
-        <value>Github Mirror</value>
     </data>
   <data name="XAML_Analyze" xml:space="preserve">
         <value>Analizar\neste log</value>
@@ -40,9 +34,6 @@
   <data name="XAML_AskType_Always" xml:space="preserve">
         <value>Preguntar primero</value>
     </data>
-  <data name="XAML_AskType_No" xml:space="preserve">
-        <value>No</value>
-    </data>
   <data name="XAML_AskType_Yes" xml:space="preserve">
         <value>Sí</value>
     </data>
@@ -51,12 +42,6 @@
     </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>Descargar versión de pre-estable: </value>
-    </data>
-  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-  <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
     </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Descarga Oficial:</value>
@@ -78,9 +63,6 @@
     </data>
   <data name="XAML_Installed" xml:space="preserve">
         <value>Instalado</value>
-    </data>
-  <data name="XAML_Incompatible" xml:space="preserve">
-        <value>Incompatible</value>
     </data>
   <data name="XAML_Install_MelonLoader" xml:space="preserve">
         <value>Instalar\nMelonLoader</value>
@@ -121,9 +103,6 @@
   <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>Versión instalada: {0}</value>
     </data>
-  <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
-    </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Versión instalada: {0} (Nueva versión disponible: {1})</value>
     </data>
@@ -153,9 +132,6 @@
     </data>
   <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
         <value>Analizar</value>
-    </data>
-  <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>Mods</value>
     </data>
   <data name="XAML_Tab_Setting" xml:space="preserve">
         <value>Ajustes</value>

@@ -22,14 +22,8 @@
   <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>Данные пользователя</value>
     </data>
-  <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
-    </data>
   <data name="XAML_Check_Update" xml:space="preserve">
         <value>Проверить обновления</value>
-    </data>
-  <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
-        <value>Github Mirror</value>
     </data>
   <data name="XAML_Analyze" xml:space="preserve">
         <value>Анализ журнала</value>
@@ -51,12 +45,6 @@
     </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>Скачать предварительный релиз: </value>
-    </data>
-  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-  <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
     </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Источник скачивания: </value>
@@ -120,9 +108,6 @@
     </data>
   <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>Локальная версия: {0}</value>
-    </data>
-  <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
     </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Локальная версия: {0} (Имеет новую версию: {1})</value>

@@ -22,9 +22,6 @@
   <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>使用者文件</value>
     </data>
-  <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
-    </data>
   <data name="XAML_Check_Update" xml:space="preserve">
         <value>檢查更新</value>
     </data>
@@ -51,12 +48,6 @@
     </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>下載預發行版本: </value>
-    </data>
-  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-  <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
     </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
         <value>下載源: </value>
@@ -120,9 +111,6 @@
     </data>
   <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>你的版本: {0}</value>
-    </data>
-  <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
     </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>你的版本: {0} (有新版本: {1})</value>

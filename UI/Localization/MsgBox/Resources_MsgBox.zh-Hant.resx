@@ -76,9 +76,6 @@
   <data name="MsgBox_Content_ExeVerifyFailed" xml:space="preserve">
         <value>驗證Muse Dash.exe失敗\n請確認你選擇了正確的資料夾</value>
     </data>
-  <data name="MsgBox_Content_GamePathError" xml:space="preserve">
-        <value>Your game path doesn't contain "steamapps\common\Muse Dash\musedash.exe"\nAre you using pirate version?</value>
-    </data>
   <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>無法從任一下載源獲取Mod列表</value>
     </data>
@@ -118,17 +115,11 @@
   <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
         <value>你沒有安裝 MuseDashModTools 的 Mod\n每次開啟 Muse Dash 的時候會自動檢查 Mod 更新\n是否現在安裝?</value>
     </data>
-  <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
-        <value>Detected Muse Dash folder path is {0}\nIs this the correct game folder?</value>
-    </data>
   <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
         <value>你選擇的位置無效，請再次選擇</value>
     </data>
   <data name="MsgBox_Content_LatestVersion" xml:space="preserve">
         <value>檢查更新成功\nMuse Dash Mod Tools 已經是最新版本\n</value>
-    </data>
-  <data name="MsgBox_Content_LogAnalyzeComplete" xml:space="preserve">
-        <value>Log analysis completed, no obvious errors are found in your log file\nIf you still have issues please go to trouble shoot channel</value>
     </data>
   <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
         <value>有新版本的 Muse Dash Mod Tools （{0}）已經發布\n\n你想要現在就安裝嗎\n\n發布標題：\n{1}\n\n發布内容：\n{2}</value>

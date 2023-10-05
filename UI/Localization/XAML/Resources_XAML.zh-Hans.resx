@@ -52,12 +52,6 @@
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>下载预发行版本：</value>
     </data>
-  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
-        <value>Gitee</value>
-    </data>
-  <data name="XAML_DownloadSource_Github" xml:space="preserve">
-        <value>Github</value>
-    </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
         <value>下载源：</value>
     </data>
