@@ -180,6 +180,6 @@
         <value>Provide the link of custom download source</value>
     </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)</value>
+        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTake effect after restarting app</value>
     </data>
 </root>

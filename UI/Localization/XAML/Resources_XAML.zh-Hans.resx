@@ -179,6 +179,6 @@
         <value>填写一个自定义的下载链接</value>
     </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-        <value>链接必须以 "/" 结尾，并且在链接后面加上 "ModLinks.json" 后必须可以访问并解析（即 Github 仓库同样结构）</value>
+        <value>链接必须以 "/" 结尾，并且在链接后面加上 "ModLinks.json" 后必须可以访问并解析（即 Github 仓库同样结构）\n重启应用生效</value>
     </data>
 </root>

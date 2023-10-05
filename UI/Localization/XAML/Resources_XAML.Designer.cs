@@ -132,7 +132,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository).
+        ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository)\nTake effect after restarting app.
         /// </summary>
         internal static string XAML_CustomDownloadSourceFormat {
             get {
