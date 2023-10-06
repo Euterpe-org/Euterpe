@@ -465,6 +465,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Charts.
+        /// </summary>
+        internal static string XAML_Tab_ChartDownload {
+            get {
+                return ResourceManager.GetString("XAML_Tab_ChartDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analysis.
         /// </summary>
         internal static string XAML_Tab_LogAnalysis {

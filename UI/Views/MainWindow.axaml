@@ -12,7 +12,7 @@
         ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterScreen">
 
-    <Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150" Background="#2D2D2D">
+    <Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150" Background="#2D2D2D" ShowGridLines="True">
         <Image Grid.Row="0" Grid.Column="0"
                Margin="15,0,0,0"
                Source="/Assets/Icon.ico"
@@ -22,7 +22,7 @@
                VerticalAlignment="Center" />
 
         <TextBlock Grid.Row="0" Grid.Column="0"
-                   Margin="80,25,0,0"
+                   Margin="80,30,0,0"
                    Height="50"
                    FontSize="20"
                    HorizontalAlignment="Left"

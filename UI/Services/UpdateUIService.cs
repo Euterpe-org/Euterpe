@@ -8,6 +8,9 @@ public partial class UpdateUIService : IUpdateUIService
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
+    public Lazy<IChartDownloadViewModel> ChartDownloadViewModel { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
 
     [UsedImplicitly]
