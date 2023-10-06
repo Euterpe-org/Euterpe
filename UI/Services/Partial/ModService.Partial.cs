@@ -125,8 +125,8 @@ public partial class ModService
     /// <param name="localMod"></param>
     private void CheckVersionState(Mod webMod, Mod localMod)
     {
-        var versionState = SemanticVersion.Parse(webMod.Version!) > SemanticVersion.Parse(localMod.LocalVersion!) ? -1
-            : SemanticVersion.Parse(webMod.Version!) < SemanticVersion.Parse(localMod.LocalVersion!) ? 1 : 0;
+        var versionState = SemanticVersion.Parse(webMod.Version) > SemanticVersion.Parse(localMod.LocalVersion!) ? -1
+            : SemanticVersion.Parse(webMod.Version) < SemanticVersion.Parse(localMod.LocalVersion!) ? 1 : 0;
         localMod.State = (UpdateState)versionState;
         localMod.IsShaMismatched = versionState == 0 && webMod.SHA256 != localMod.SHA256;
         if (localMod.IsShaMismatched)
@@ -189,7 +189,7 @@ public partial class ModService
     /// <returns>StringBuilder for errors</returns>
     private async Task<StringBuilder> CheckDependencyInstall(Mod item)
     {
-        var dependencies = SearchDependencies(item.Name!).ToArray();
+        var dependencies = SearchDependencies(item.Name).ToArray();
         var errors = new StringBuilder();
         foreach (var dependency in dependencies)
         {
@@ -247,11 +247,11 @@ public partial class ModService
     /// <returns></returns>
     private async Task<(bool, AskType)> DisableReverseDependencies(Mod item, string message, AskType askType)
     {
-        var enabledReverseDependencies = SearchReverseDependencies(item.Name!).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
+        var enabledReverseDependencies = SearchReverseDependencies(item.Name).Where(x => x is { IsLocal: true, IsDisabled: false }).ToArray();
         if (enabledReverseDependencies.Length == 0) return (true, askType);
         var enabledReverseDependencyNames = string.Join(", ", enabledReverseDependencies.Select(x => x?.Name));
 
-        var result = await MessageBoxService.FormatWarningConfirmMessageBox(message, item.Name!, enabledReverseDependencyNames);
+        var result = await MessageBoxService.FormatWarningConfirmMessageBox(message, item.Name, enabledReverseDependencyNames);
         if (!result)
         {
             item.IsDisabled = result;

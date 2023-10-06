@@ -9,4 +9,22 @@
              x:Class="MuseDashModToolsUI.Views.Tabs.ChartDownload"
              x:DataType="tabs:ChartDownloadViewModel"
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
+
+    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,Auto">
+        <ListBox ItemsSource="{Binding Charts}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,Auto">
+                        <Image Source="{Binding Cover}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Name}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>

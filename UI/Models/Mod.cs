@@ -1,17 +1,19 @@
 ﻿using System.Text.Json.Serialization;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
 namespace MuseDashModToolsUI.Models;
 
 public partial class Mod : ObservableObject
 {
     [ObservableProperty] private bool _isDisabled;
-    public string? Name { get; set; }
-    public string? Version { get; set; }
+    public string Name { get; set; }
+    public string Version { get; set; }
     [JsonIgnore] public string? LocalVersion { get; set; }
     [JsonIgnore] public UpdateState State { get; set; }
     [JsonIgnore] public bool IsIncompatible { get; set; }
     [JsonIgnore] public bool IsUpdatable => IsLocal && State != UpdateState.Normal;
-    public string? Author { get; set; }
+    public string Author { get; set; }
     [JsonIgnore] public string? FileName { get; set; }
     [JsonIgnore] public bool IsLocal => FileName is not null;
     [JsonIgnore] public bool IsInstallable => !IsLocal && !IsIncompatible;
@@ -77,21 +79,4 @@ public partial class Mod : ObservableObject
         SHA256 = null;
         return this;
     }
-}
-
-public enum UpdateState
-{
-    Outdated = -1,
-    Normal = 0,
-    Newer = 1,
-    Modified = 2
-}
-
-public enum FilterType
-{
-    All = 0,
-    Installed = 1,
-    Enabled = 2,
-    Outdated = 3,
-    Incompatible = 4
 }

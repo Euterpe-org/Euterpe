@@ -10,9 +10,9 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 {
     private readonly ReadOnlyObservableCollection<Mod> _mods;
-    private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name!);
+    private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name);
     private readonly FileSystemWatcher _watcher = new();
-    [ObservableProperty] private FilterType _categoryFilterType;
+    [ObservableProperty] private ModFilterType _categoryModFilterType;
     [ObservableProperty] private string _filter;
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
@@ -35,13 +35,13 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     {
         _sourceCache.Connect()
             .Filter(x => string.IsNullOrEmpty(_filter) ||
-                         x.Name!.Contains(_filter, StringComparison.OrdinalIgnoreCase) ||
+                         x.Name.Contains(_filter, StringComparison.OrdinalIgnoreCase) ||
                          x.XamlDescription.Contains(_filter, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => _categoryFilterType != FilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
-            .Filter(x => _categoryFilterType != FilterType.Outdated || x.State == UpdateState.Outdated)
-            .Filter(x => _categoryFilterType != FilterType.Installed || x.IsLocal)
-            .Filter(x => _categoryFilterType != FilterType.Incompatible || x is { IsIncompatible: true, IsLocal: true })
-            .SortBy(x => x.Name!)
+            .Filter(x => _categoryModFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
+            .Filter(x => _categoryModFilterType != ModFilterType.Outdated || x.State == UpdateState.Outdated)
+            .Filter(x => _categoryModFilterType != ModFilterType.Installed || x.IsLocal)
+            .Filter(x => _categoryModFilterType != ModFilterType.Incompatible || x is { IsIncompatible: true, IsLocal: true })
+            .SortBy(x => x.Name)
             .Bind(out _mods)
             .Subscribe();
     }
@@ -64,7 +64,7 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
 
     [UsedImplicitly]
-    partial void OnCategoryFilterTypeChanged(FilterType value)
+    partial void OnCategoryModFilterTypeChanged(ModFilterType value)
     {
         Logger.Information("Category Filter Changed: {Filter}", value);
         _sourceCache.Refresh();
@@ -131,19 +131,19 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private async Task OnCheckUpdate() => await GitHubService.CheckUpdates(true);
 
     [RelayCommand]
-    private void OnFilterAll() => CategoryFilterType = FilterType.All;
+    private void OnFilterAll() => CategoryModFilterType = ModFilterType.All;
 
     [RelayCommand]
-    private void OnFilterInstalled() => CategoryFilterType = FilterType.Installed;
+    private void OnFilterInstalled() => CategoryModFilterType = ModFilterType.Installed;
 
     [RelayCommand]
-    private void OnFilterEnabled() => CategoryFilterType = FilterType.Enabled;
+    private void OnFilterEnabled() => CategoryModFilterType = ModFilterType.Enabled;
 
     [RelayCommand]
-    private void OnFilterOutdated() => CategoryFilterType = FilterType.Outdated;
+    private void OnFilterOutdated() => CategoryModFilterType = ModFilterType.Outdated;
 
     [RelayCommand]
-    private void OnFilterIncompatible() => CategoryFilterType = FilterType.Incompatible;
+    private void OnFilterIncompatible() => CategoryModFilterType = ModFilterType.Incompatible;
 
     #endregion
 }

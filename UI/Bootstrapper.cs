@@ -18,6 +18,7 @@ public static class Bootstrapper
         builder.RegisterInstance(new HttpClient());
 
         // Services
+        builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
         builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
