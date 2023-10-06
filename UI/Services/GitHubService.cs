@@ -97,6 +97,21 @@ public partial class GitHubService : IGitHubService
         return await DownloadMelonLoaderFromSourceAsync(downloadProgress);
     }
 
+    public async Task<List<Chart>?> GetChartList()
+    {
+        try
+        {
+            var charts = await Client.GetFromJsonAsync<List<Chart>>(ChartAPILink);
+            Logger.Information("Get chart list success");
+            return charts;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Get chart list failed");
+            return null;
+        }
+    }
+
     public async Task<long?> GetMelonLoaderFileSize()
     {
         await GetMelonLoaderResponseMessage();

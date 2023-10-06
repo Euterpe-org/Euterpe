@@ -25,6 +25,12 @@ public interface IGitHubService
     Task<bool> DownloadMelonLoader(IProgress<double> downloadProgress);
 
     /// <summary>
+    ///     Get Chart list
+    /// </summary>
+    /// <returns>Chart list</returns>
+    Task<List<Chart>?> GetChartList();
+
+    /// <summary>
     ///     Get MelonLoader File Size
     /// </summary>
     /// <returns>File size</returns>

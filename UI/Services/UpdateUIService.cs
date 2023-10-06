@@ -35,8 +35,8 @@ public partial class UpdateUIService : IUpdateUIService
     public async Task InitializeAllTabs()
     {
         SettingsViewModel.Value.Initialize();
-        ChartDownloadViewModel.Value.Initialize();
         await ModManageViewModel.Value.Initialize();
+        await ChartDownloadViewModel.Value.Initialize();
         await LogAnalysisViewModel.Value.Initialize();
 
         Logger.Information("All Tabs initialized");
