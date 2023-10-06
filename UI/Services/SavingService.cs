@@ -28,7 +28,7 @@ public partial class SavingService : ISavingService
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public ISerializeService SerializeService { get; init; }
+    public ISerializationService SerializationService { get; init; }
 
     [UsedImplicitly]
     public IUpdateUIService UpdateUIService { get; init; }
@@ -45,6 +45,17 @@ public partial class SavingService : ISavingService
     }
 
     public Setting Settings { get; } = new();
+    public string ModLinksPath => Path.Combine(ConfigFolderPath, "ModLinks.json");
+
+    public string ChartFolderPath
+    {
+        get
+        {
+            var path = Path.Combine(ConfigFolderPath, "Charts");
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            return path;
+        }
+    }
 
     public async Task InitializeSettings()
     {
@@ -68,7 +79,7 @@ public partial class SavingService : ISavingService
 
     public async Task Save()
     {
-        var json = SerializeService.SerializeSetting(Settings);
+        var json = SerializationService.SerializeSetting(Settings);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
         _logger.Information("Settings saved to Settings.json");
     }

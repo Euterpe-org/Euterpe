@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 using System.Net.Http.Json;
 
 #pragma warning disable CS8618
@@ -44,10 +45,13 @@ public partial class GitHubService : IGitHubService
     public IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
+    public ISerializationService SerializationService { get; init; }
 
     [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ISavingService> SavingService { get; init; }
 
     public async Task CheckUpdates(bool isUserClick = false)
     {
@@ -134,6 +138,14 @@ public partial class GitHubService : IGitHubService
             if (mods is not null) return mods;
         }
 
+        if (File.Exists(SavingService.Value.ModLinksPath))
+        {
+            Logger.Information("Get mod list from online source failed, deserializing local mod list");
+            mods = SerializationService.DeserializeModList();
+            if (mods is not null) return mods;
+        }
+
+        Logger.Error("Failed to get working mod list from any source");
         await MessageBoxService.ErrorMessageBox(MsgBox_Content_GetModListFailed);
         return null;
     }
