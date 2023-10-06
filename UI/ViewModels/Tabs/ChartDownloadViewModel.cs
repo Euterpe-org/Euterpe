@@ -5,4 +5,8 @@ public class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewModel
 {
     [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
+
+    public void Initialize()
+    {
+    }
 }

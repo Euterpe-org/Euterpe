@@ -19,12 +19,9 @@ public partial class UpdateUIService
     /// </summary>
     private void ChangeOptionName()
     {
-        SettingsViewModel.Value.AskTypes = new[]
-            { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
+        SettingsViewModel.Value.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
         SettingsViewModel.Value.DownloadSources = new[]
-        {
-            XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee
-        };
+            { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee, XAML_DownloadSource_Custom };
     }
 
     /// <summary>

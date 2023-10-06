@@ -8,6 +8,7 @@ namespace MuseDashModToolsUI.Services;
 public partial class GitHubService : IGitHubService
 {
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
+    private const string ChartAPILink = "https://mdmc.moe/api/v1/charts";
 
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
 
