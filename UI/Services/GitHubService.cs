@@ -7,13 +7,17 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class GitHubService : IGitHubService
 {
+    // Github Release APIs
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
-    private const string ChartAPILink = "https://mdmc.moe/api/v1/charts";
 
+    // Chart APIs
+    private const string ChartListApi = "https://mdmc.moe/api/v1/charts";
+    private const string ChartCoverApi = "https://mdmc.moe/charts/{0}/cover.png";
+    private const string ChartDownloadApi = "https://mdmc.moe/download/{0}";
+
+    // ModLinks
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
-
     private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
-
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
     private HttpResponseMessage? _melonLoaderResponseMessage;
@@ -101,7 +105,8 @@ public partial class GitHubService : IGitHubService
     {
         try
         {
-            var charts = await Client.GetFromJsonAsync<List<Chart>>(ChartAPILink);
+            var charts = await Client.GetFromJsonAsync<List<Chart>>(ChartListApi);
+            await GetChartCovers(charts);
             Logger.Information("Get chart list success");
             return charts;
         }

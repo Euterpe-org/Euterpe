@@ -2,6 +2,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
+using Avalonia.Media.Imaging;
 using DialogHostAvalonia;
 using NuGet.Versioning;
 
@@ -95,6 +96,15 @@ public partial class GitHubService
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_InstallMelonLoaderFailed, ex);
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
+        }
+    }
+
+    private async Task GetChartCovers(List<Chart>? charts)
+    {
+        foreach (var chart in charts!)
+        {
+            var stream = new MemoryStream(await Client.GetByteArrayAsync(string.Format(ChartCoverApi, chart.Id)));
+            chart.Cover = await Task.Run(() => Bitmap.DecodeToWidth(stream, 200));
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Avalonia.Media.Imaging;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace MuseDashModToolsUI.Models;
@@ -34,6 +35,9 @@ public class Chart
 
     [JsonPropertyName("__v")]
     public int V { get; set; }
+
+    [JsonIgnore]
+    public Bitmap? Cover { get; set; }
 }
 
 public class Analytic

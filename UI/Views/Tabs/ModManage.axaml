@@ -226,7 +226,7 @@
 
             <!--Mods-->
             <ScrollViewer Grid.Column="1" Margin="1,51,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" Orientation="Vertical">
+                <StackPanel Orientation="Vertical">
                     <StackPanel.Styles>
                         <Style Selector="StackPanel > TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
