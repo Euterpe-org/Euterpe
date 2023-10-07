@@ -44,28 +44,28 @@ public class Chart
     public bool IsLocal { get; set; }
 
     [JsonIgnore]
-    public string Easy => Difficulties[0];
+    public string EasyLevel => Difficulties[0];
 
     [JsonIgnore]
-    public string Hard => Difficulties[1];
+    public string HardLevel => Difficulties[1];
 
     [JsonIgnore]
-    public string Master => Difficulties[2];
+    public string MasterLevel => Difficulties[2];
 
     [JsonIgnore]
-    public string Hidden => Difficulties[3];
+    public string HiddenLevel => Difficulties[3];
 
     [JsonIgnore]
-    public bool HasEasy => Easy != "0";
+    public bool HasEasy => EasyLevel != "0";
 
     [JsonIgnore]
-    public bool HasHard => Hard != "0";
+    public bool HasHard => HardLevel != "0";
 
     [JsonIgnore]
-    public bool HasMaster => Master != "0";
+    public bool HasMaster => MasterLevel != "0";
 
     [JsonIgnore]
-    public bool HasHidden => Hidden != "0";
+    public bool HasHidden => HiddenLevel != "0";
 }
 
 public class Analytic

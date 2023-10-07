@@ -47,7 +47,7 @@
                 <ListBox ItemsSource="{Binding Charts}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="4" />
+                            <UniformGrid Columns="3" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
 
@@ -56,80 +56,91 @@
                             <controls:Card Background="#595959">
                                 <Grid HorizontalAlignment="Center"
                                       RowDefinitions="Auto,Auto,Auto,Auto,Auto"
-                                      ColumnDefinitions="100,100">
+                                      ColumnDefinitions="150,150">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
                                             <Setter Property="Orientation" Value="Horizontal" />
+                                        </Style>
+                                        <Style Selector="Image">
+                                            <Setter Property="Width" Value="25" />
+                                            <Setter Property="Height" Value="25" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                        </Style>
+                                        <Style Selector="TextBlock">
+                                            <Setter Property="FontSize" Value="20" />
+                                            <Setter Property="VerticalAlignment" Value="Bottom" />
                                         </Style>
                                     </Grid.Styles>
 
                                     <!--Cover-->
                                     <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                           Width="200" Height="200"
                                            Source="{Binding Cover}"
-                                           HorizontalAlignment="Center" />
+                                           HorizontalAlignment="Center"
+                                           Margin="0,5" />
 
                                     <!--Name-->
                                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                                FontSize="25"
                                                Text="{Binding Name}"
-                                               TextWrapping="WrapWithOverflow" />
+                                               TextWrapping="WrapWithOverflow"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,5" />
 
                                     <!--Difficulties-->
-                                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,5">
                                         <StackPanel.Styles>
-                                            <Style Selector="Image">
-                                                <Setter Property="Width" Value="25" />
-                                                <Setter Property="Height" Value="25" />
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                            </Style>
-                                            <Style Selector="TextBlock">
-                                                <Setter Property="FontSize" Value="20" />
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                            </Style>
                                             <Style Selector="StackPanel">
-                                                <Setter Property="Margin" Value="5,0" />
+                                                <Setter Property="Margin" Value="0,0,10,0" />
                                             </Style>
                                         </StackPanel.Styles>
 
                                         <!--Easy-->
                                         <StackPanel IsVisible="{Binding HasEasy}">
-                                            <Image Source="/Assets/Easy.png" />
-                                            <TextBlock Text="{Binding Easy}" />
+                                            <Image Source="/Assets/Difficulties/Easy.png" />
+                                            <TextBlock Text="{Binding EasyLevel}" />
                                         </StackPanel>
 
                                         <!--Hard-->
                                         <StackPanel IsVisible="{Binding HasHard}">
-                                            <Image Source="/Assets/Hard.png" />
-                                            <TextBlock Text="{Binding Hard}" />
+                                            <Image Source="/Assets/Difficulties/Hard.png" />
+                                            <TextBlock Text="{Binding HardLevel}" />
                                         </StackPanel>
 
                                         <!--Master-->
                                         <StackPanel IsVisible="{Binding HasMaster}">
-                                            <Image Source="/Assets/Master.png" />
-                                            <TextBlock Text="{Binding Master}" />
+                                            <Image Source="/Assets/Difficulties/Master.png" />
+                                            <TextBlock Text="{Binding MasterLevel}" />
                                         </StackPanel>
 
                                         <!--Hidden-->
                                         <StackPanel IsVisible="{Binding HasHidden}">
-                                            <Image Source="/Assets/Master.png" />
-                                            <TextBlock Text="{Binding Hidden}" />
+                                            <Image Source="/Assets/Difficulties/Hidden.png" />
+                                            <TextBlock Text="{Binding HiddenLevel}" />
                                         </StackPanel>
 
                                     </StackPanel>
 
                                     <!--Likes-->
-                                    <StackPanel Grid.Row="3" Grid.Column="0">
+                                    <StackPanel Grid.Row="3" Grid.Column="0"
+                                                Margin="0,5">
+                                        <Image Source="/Assets/like.png" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Likes}" />
                                         <TextBlock Text="{Binding Analytics.LikesCount}" />
                                     </StackPanel>
 
                                     <!--Downloads-->
-                                    <StackPanel Grid.Row="3" Grid.Column="1">
+                                    <StackPanel Grid.Row="3" Grid.Column="1"
+                                                Margin="0,5">
+                                        <Image Source="/Assets/download.png" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Downloads}" />
                                         <TextBlock Text="{Binding Analytics.Downloads}" />
                                     </StackPanel>
 
                                     <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Margin="0,20,0,0"
                                             Content="{ext:LocalizeExtensions XAML_Download_Chart}" />
                                 </Grid>
                             </controls:Card>

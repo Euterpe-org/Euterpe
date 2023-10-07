@@ -101,7 +101,7 @@
                     <!--lxy-->
                     <controls:Card Grid.Row="0" Grid.Column="0">
                         <StackPanel>
-                            <Image Source="/Assets/lxy.png" />
+                            <Image Source="/Assets/Contributors/lxy.png" />
                             <TextBlock Classes="Headline6"
                                        Text="Lxy" />
                             <TextBlock Classes="Body2"
@@ -152,7 +152,7 @@
                     <!--Super Pig-->
                     <controls:Card Grid.Row="0" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Super_Pig.png" />
+                            <Image Source="/Assets/Contributors/Super_Pig.png" />
                             <TextBlock Classes="Headline6"
                                        Text="Super Pig" />
                             <TextBlock Classes="Body2"
@@ -175,7 +175,7 @@
                     <!--Balint-->
                     <controls:Card Grid.Row="0" Grid.Column="2">
                         <StackPanel>
-                            <Image Source="/Assets/Balint.png" />
+                            <Image Source="/Assets/Contributors/Balint.png" />
                             <TextBlock Classes="Headline6"
                                        Text="Balint" />
                             <TextBlock Classes="Body2"
@@ -198,7 +198,7 @@
                     <!--Ultra Rabbit-->
                     <controls:Card Grid.Row="0" Grid.Column="3">
                         <StackPanel>
-                            <Image Source="/Assets/Ultra_Rabbit.jpg" />
+                            <Image Source="/Assets/Contributors/Ultra_Rabbit.jpg" />
                             <TextBlock Classes="Headline6"
                                        Text="Ultra Rabbit" />
                             <TextBlock Classes="Body2"
@@ -252,7 +252,7 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Chinese&#x0a;Simplified:" />
                     <controls:Card Grid.Row="0" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/lxymahatma.jpg" />
+                            <Image Source="/Assets/Contributors/lxymahatma.jpg" />
                             <TextBlock>Lxymahatma</TextBlock>
                         </StackPanel>
                     </controls:Card>
@@ -261,14 +261,14 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Chinese&#x0a;Traditional:" />
                     <controls:Card Grid.Row="1" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Shiron_Lee.jpg" />
+                            <Image Source="/Assets/Contributors/Shiron_Lee.jpg" />
                             <TextBlock>Shiron_Lee</TextBlock>
                         </StackPanel>
                     </controls:Card>
 
                     <controls:Card Grid.Row="1" Grid.Column="2">
                         <StackPanel>
-                            <Image Source="/Assets/bigbeesushi.jpg" />
+                            <Image Source="/Assets/Contributors/bigbeesushi.jpg" />
                             <TextBlock>Bigbeesushi</TextBlock>
                         </StackPanel>
                     </controls:Card>
@@ -279,7 +279,7 @@
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Hungarian: " />
                     <controls:Card Grid.Row="2" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Balint.png" />
+                            <Image Source="/Assets/Contributors/Balint.png" />
                             <TextBlock>Balint</TextBlock>
                         </StackPanel>
                     </controls:Card>
@@ -292,14 +292,14 @@
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Russian: " />
                     <controls:Card Grid.Row="3" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Ultra_Rabbit.jpg" />
+                            <Image Source="/Assets/Contributors/Ultra_Rabbit.jpg" />
                             <TextBlock>Ultra Rabbit</TextBlock>
                         </StackPanel>
                     </controls:Card>
 
                     <controls:Card Grid.Row="3" Grid.Column="2">
                         <StackPanel>
-                            <Image Source="/Assets/Ronner.jpg" />
+                            <Image Source="/Assets/Contributors/Ronner.jpg" />
                             <TextBlock>Ronner</TextBlock>
                         </StackPanel>
                     </controls:Card>
@@ -308,7 +308,7 @@
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Spanish: " />
                     <controls:Card Grid.Row="4" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/MNight4.png" />
+                            <Image Source="/Assets/Contributors/MNight4.png" />
                             <TextBlock>MNight4</TextBlock>
                         </StackPanel>
                     </controls:Card>
