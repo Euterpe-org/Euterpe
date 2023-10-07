@@ -11,25 +11,25 @@ public class Chart
     public Analytic Analytics { get; set; }
 
     [JsonPropertyName("_id")]
-    public string IdStr { get; set; }
+    public string IdStr { get; set; } = string.Empty;
 
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("author")]
-    public string Author { get; set; }
+    public string Author { get; set; } = string.Empty;
 
     [JsonPropertyName("bpm")]
-    public string Bpm { get; set; }
+    public string Bpm { get; set; } = string.Empty;
 
     [JsonPropertyName("difficulties")]
     public string[] Difficulties { get; set; }
 
     [JsonPropertyName("charter")]
-    public string Charter { get; set; }
+    public string Charter { get; set; } = string.Empty;
 
     [JsonPropertyName("charter_id")]
     public string[] CharterId { get; set; }
@@ -42,12 +42,39 @@ public class Chart
 
     [JsonIgnore]
     public bool IsLocal { get; set; }
+
+    [JsonIgnore]
+    public string Easy => Difficulties[0];
+
+    [JsonIgnore]
+    public string Hard => Difficulties[1];
+
+    [JsonIgnore]
+    public string Master => Difficulties[2];
+
+    [JsonIgnore]
+    public string Hidden => Difficulties[3];
+
+    [JsonIgnore]
+    public bool HasEasy => Easy != "0";
+
+    [JsonIgnore]
+    public bool HasHard => Hard != "0";
+
+    [JsonIgnore]
+    public bool HasMaster => Master != "0";
+
+    [JsonIgnore]
+    public bool HasHidden => Hidden != "0";
 }
 
 public class Analytic
 {
     [JsonPropertyName("likes")]
     public string[] Likes { get; set; }
+
+    [JsonIgnore]
+    public int LikesCount => Likes.Length;
 
     [JsonPropertyName("plays")]
     public int Plays { get; set; }

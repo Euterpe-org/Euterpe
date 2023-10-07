@@ -123,6 +123,33 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloads: .
+        /// </summary>
+        internal static string XAML_Chart_Downloads {
+            get {
+                return ResourceManager.GetString("XAML_Chart_Downloads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Likes: .
+        /// </summary>
+        internal static string XAML_Chart_Likes {
+            get {
+                return ResourceManager.GetString("XAML_Chart_Likes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Charts.
+        /// </summary>
+        internal static string XAML_Chart_SearchBar {
+            get {
+                return ResourceManager.GetString("XAML_Chart_SearchBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Update.
         /// </summary>
         internal static string XAML_Check_Update {
@@ -137,6 +164,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_CustomDownloadSourceFormat {
             get {
                 return ResourceManager.GetString("XAML_CustomDownloadSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        internal static string XAML_Download_Chart {
+            get {
+                return ResourceManager.GetString("XAML_Download_Chart", resourceCulture);
             }
         }
         
@@ -366,6 +402,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
+        /// </summary>
+        internal static string XAML_Mod_SearchBar {
+            get {
+                return ResourceManager.GetString("XAML_Mod_SearchBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
         internal static string XAML_ModsFolder {
@@ -407,15 +452,6 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_ReportBug {
             get {
                 return ResourceManager.GetString("XAML_ReportBug", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
-        /// </summary>
-        internal static string XAML_SearchBar {
-            get {
-                return ResourceManager.GetString("XAML_SearchBar", resourceCulture);
             }
         }
         

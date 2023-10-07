@@ -115,7 +115,7 @@ public partial class GitHubService
             try
             {
                 var stream = await LoadCoverAsync(chart);
-                chart.Cover = await Task.Run(() => Bitmap.DecodeToWidth(stream, 200));
+                chart.Cover = await Task.Run(() => Bitmap.DecodeToWidth(stream, 150));
             }
             finally
             {

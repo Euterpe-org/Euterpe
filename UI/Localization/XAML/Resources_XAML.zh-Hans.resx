@@ -130,7 +130,7 @@
     <data name="XAML_Reinstall_Mod" xml:space="preserve">
         <value>重装</value>
     </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
+    <data name="XAML_Mod_SearchBar" xml:space="preserve">
         <value>搜索模组    （名字，作者，描述）</value>
     </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
@@ -177,5 +177,17 @@
     </data>
     <data name="XAML_Tab_ChartDownload" xml:space="preserve">
         <value>谱面</value>
+    </data>
+    <data name="XAML_Chart_SearchBar" xml:space="preserve">
+        <value>搜索谱面</value>
+    </data>
+    <data name="XAML_Download_Chart" xml:space="preserve">
+        <value>下载</value>
+    </data>
+    <data name="XAML_Chart_Downloads" xml:space="preserve">
+        <value>下载数：</value>
+    </data>
+    <data name="XAML_Chart_Likes" xml:space="preserve">
+        <value>点赞数：</value>
     </data>
 </root>

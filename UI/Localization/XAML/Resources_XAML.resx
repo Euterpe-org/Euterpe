@@ -137,7 +137,7 @@
     <data name="XAML_Reinstall_Mod" xml:space="preserve">
         <value>Reinstall</value>
     </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
+    <data name="XAML_Mod_SearchBar" xml:space="preserve">
         <value>Search Mods    (Name, Author, Descriptions)</value>
     </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
@@ -184,5 +184,17 @@
     </data>
     <data name="XAML_Tab_ChartDownload" xml:space="preserve">
         <value>Charts</value>
+    </data>
+    <data name="XAML_Chart_SearchBar" xml:space="preserve">
+        <value>Search Charts</value>
+    </data>
+    <data name="XAML_Download_Chart" xml:space="preserve">
+        <value>Download</value>
+    </data>
+    <data name="XAML_Chart_Downloads" xml:space="preserve">
+        <value>Downloads: </value>
+    </data>
+    <data name="XAML_Chart_Likes" xml:space="preserve">
+        <value>Likes: </value>
     </data>
 </root>

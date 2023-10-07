@@ -115,7 +115,7 @@
     <data name="XAML_Reinstall_Mod" xml:space="preserve">
         <value>Reinstalar</value>
     </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
+    <data name="XAML_Mod_SearchBar" xml:space="preserve">
         <value>Buscar mods (Nombre, Autor, Descripción)</value>
     </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">

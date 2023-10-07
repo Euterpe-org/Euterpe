@@ -12,10 +12,14 @@ public class ChartService : IChartService
     [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
 
+    [UsedImplicitly]
+    public ISavingService SavingService { get; init; }
+
     public async Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts)
     {
         _sourceCache = sourceCache;
         _charts = charts;
+
 
         var webCharts = await GitHubService.GetChartList();
         _sourceCache.AddOrUpdate(webCharts);
