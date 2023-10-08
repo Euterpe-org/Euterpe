@@ -206,7 +206,7 @@
     <data name="XAML_ChartSortOptions" xml:space="preserve">
         <value>Sort by: </value>
     </data>
-    <data name="XAML_ChartFilterOptions" xml:space="preserve">
+    <data name="XAML_ChartFilterTypes" xml:space="preserve">
         <value>Filter by: </value>
     </data>
     <data name="XAML_ChartSortOption_Default" xml:space="preserve">
@@ -227,16 +227,16 @@
     <data name="XAML_ChartSortOption_Level" xml:space="preserve">
         <value>Level</value>
     </data>
-    <data name="XAML_ChartFilterOption_Easy" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
         <value>Easy</value>
     </data>
-    <data name="XAML_ChartFilterOption_Hard" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
         <value>Hard</value>
     </data>
-    <data name="XAML_ChartFilterOption_Master" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Master" xml:space="preserve">
         <value>Master</value>
     </data>
-    <data name="XAML_ChartFilterOption_Hidden" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
         <value>Hidden</value>
     </data>
 </root>

@@ -161,45 +161,45 @@ namespace MuseDashModToolsUI.Localization.XAML {
         /// <summary>
         ///   Looks up a localized string similar to Easy.
         /// </summary>
-        internal static string XAML_ChartFilterOption_Easy {
+        internal static string XAML_ChartFilterType_Easy {
             get {
-                return ResourceManager.GetString("XAML_ChartFilterOption_Easy", resourceCulture);
+                return ResourceManager.GetString("XAML_ChartFilterType_Easy", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Hard.
         /// </summary>
-        internal static string XAML_ChartFilterOption_Hard {
+        internal static string XAML_ChartFilterType_Hard {
             get {
-                return ResourceManager.GetString("XAML_ChartFilterOption_Hard", resourceCulture);
+                return ResourceManager.GetString("XAML_ChartFilterType_Hard", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Hidden.
         /// </summary>
-        internal static string XAML_ChartFilterOption_Hidden {
+        internal static string XAML_ChartFilterType_Hidden {
             get {
-                return ResourceManager.GetString("XAML_ChartFilterOption_Hidden", resourceCulture);
+                return ResourceManager.GetString("XAML_ChartFilterType_Hidden", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Master.
         /// </summary>
-        internal static string XAML_ChartFilterOption_Master {
+        internal static string XAML_ChartFilterType_Master {
             get {
-                return ResourceManager.GetString("XAML_ChartFilterOption_Master", resourceCulture);
+                return ResourceManager.GetString("XAML_ChartFilterType_Master", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Filter by: .
         /// </summary>
-        internal static string XAML_ChartFilterOptions {
+        internal static string XAML_ChartFilterTypes {
             get {
-                return ResourceManager.GetString("XAML_ChartFilterOptions", resourceCulture);
+                return ResourceManager.GetString("XAML_ChartFilterTypes", resourceCulture);
             }
         }
         

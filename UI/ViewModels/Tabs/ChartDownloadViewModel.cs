@@ -9,6 +9,7 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 {
     private readonly ReadOnlyObservableCollection<Chart> _charts;
     private readonly SourceCache<Chart, string> _sourceCache = new(x => x.Name);
+    [ObservableProperty] private List<ChartFilterType> _categoryChartFilterTypes = new();
     [ObservableProperty] private int _currentSortOptionIndex;
     [ObservableProperty] private string _filter;
     [ObservableProperty] private string[] _sortOptions;
@@ -25,11 +26,14 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 
     public ChartDownloadViewModel()
     {
-        _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(Filter)
-                         || x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase)
-                         || x.Author.Contains(Filter, StringComparison.OrdinalIgnoreCase)
-                         || x.Charter.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+        _sourceCache.Connect().Filter(x => string.IsNullOrEmpty(Filter) ||
+                                           x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
+                                           x.Author.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
+                                           x.Charter.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Easy) || x.HasEasy)
+            .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Hard) || x.HasHard)
+            .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Master) || x.HasMaster)
+            .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Hidden) || x.HasHidden)
             .SortBy(GetSortByOption)
             .Bind(out _charts)
             .Subscribe();
@@ -63,6 +67,16 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
         };
     }
 
+    private void FilterBy(ChartFilterType filterType)
+    {
+        if (CategoryChartFilterTypes.Contains(filterType))
+            CategoryChartFilterTypes.Remove(filterType);
+        else
+            CategoryChartFilterTypes.Add(filterType);
+
+        _sourceCache.Refresh();
+    }
+
     [UsedImplicitly]
     partial void OnCurrentSortOptionIndexChanged(int value)
     {
@@ -81,6 +95,18 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 
     [RelayCommand]
     private async Task OpenCustomAlbumsFolder() => await LocalService.OpenCustomAlbumsFolder();
+
+    [RelayCommand]
+    private void OnFilterEasy() => FilterBy(ChartFilterType.Easy);
+
+    [RelayCommand]
+    private void OnFilterHard() => FilterBy(ChartFilterType.Hard);
+
+    [RelayCommand]
+    private void OnFilterMaster() => FilterBy(ChartFilterType.Master);
+
+    [RelayCommand]
+    private void OnFilterHidden() => FilterBy(ChartFilterType.Hidden);
 
     #endregion
 }

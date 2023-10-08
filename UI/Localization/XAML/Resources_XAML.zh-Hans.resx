@@ -199,7 +199,7 @@
     <data name="XAML_ChartSortOptions" xml:space="preserve">
         <value>排序：</value>
     </data>
-    <data name="XAML_ChartFilterOptions" xml:space="preserve">
+    <data name="XAML_ChartFilterTypes" xml:space="preserve">
         <value>筛选：</value>
     </data>
     <data name="XAML_ChartSortOption_Default" xml:space="preserve">
@@ -220,16 +220,16 @@
     <data name="XAML_ChartSortOption_Name" xml:space="preserve">
         <value>名称</value>
     </data>
-    <data name="XAML_ChartFilterOption_Easy" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
         <value>萌新</value>
     </data>
-    <data name="XAML_ChartFilterOption_Hard" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
         <value>高手</value>
     </data>
-    <data name="XAML_ChartFilterOption_Hidden" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
         <value>隐藏</value>
     </data>
-    <data name="XAML_ChartFilterOption_Master" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Master" xml:space="preserve">
         <value>大触</value>
     </data>
 </root>

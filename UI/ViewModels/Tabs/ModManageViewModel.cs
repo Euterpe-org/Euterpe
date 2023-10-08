@@ -37,10 +37,10 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
             .Filter(x => string.IsNullOrEmpty(Filter) ||
                          x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
                          x.XamlDescription.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => _categoryModFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
-            .Filter(x => _categoryModFilterType != ModFilterType.Outdated || x.State == UpdateState.Outdated)
-            .Filter(x => _categoryModFilterType != ModFilterType.Installed || x.IsLocal)
-            .Filter(x => _categoryModFilterType != ModFilterType.Incompatible || x is { IsIncompatible: true, IsLocal: true })
+            .Filter(x => CategoryModFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
+            .Filter(x => CategoryModFilterType != ModFilterType.Outdated || x.State == UpdateState.Outdated)
+            .Filter(x => CategoryModFilterType != ModFilterType.Installed || x.IsLocal)
+            .Filter(x => CategoryModFilterType != ModFilterType.Incompatible || x is { IsIncompatible: true, IsLocal: true })
             .SortBy(x => x.Name)
             .Bind(out _mods)
             .Subscribe();

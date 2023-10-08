@@ -55,7 +55,16 @@
 
             <!--Filter Options-->
             <Menu Grid.Row="0" Grid.Column="2">
-                <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterOptions}" />
+                <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterTypes}">
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
+                              Command="{Binding FilterEasyCommand}" />
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
+                              Command="{Binding FilterHardCommand}" />
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
+                              Command="{Binding FilterMasterCommand}" />
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
+                              Command="{Binding FilterHiddenCommand}" />
+                </MenuItem>
             </Menu>
 
             <!--Custom Albums folder-->
