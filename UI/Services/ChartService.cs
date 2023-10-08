@@ -28,12 +28,14 @@ public class ChartService : IChartService
             Directory.CreateDirectory(SavingService.Settings.CustomAlbumFolder);
 
         var webCharts = await GitHubService.GetChartList();
-        _sourceCache.AddOrUpdate(webCharts);
+        _sourceCache.AddOrUpdate(webCharts!);
     }
 
     public async Task DownloadChart(Chart item)
     {
         var path = Path.Combine(SavingService.Settings.CustomAlbumFolder, item.Name.RemoveInvalidChars() + ".mdm");
+        if (File.Exists(path)) await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_OverrideChart, item.Name);
+
         await GitHubService.DownloadChart(item.Id, path);
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
     }
