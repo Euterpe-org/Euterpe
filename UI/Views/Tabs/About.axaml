@@ -103,7 +103,7 @@
                         <StackPanel>
                             <Image Source="/Assets/Contributors/lxy.png" />
                             <TextBlock Classes="Headline6"
-                                       Text="Lxy" />
+                                       Text="lxy" />
                             <TextBlock Classes="Body2"
                                        Text="For planning and maintaining the project" />
                         </StackPanel>
@@ -234,6 +234,7 @@
                             <Setter Property="FontSize" Value="18" />
                             <Setter Property="TextAlignment" Value="Center" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="MinWidth" Value="100" />
                         </Style>
                         <Style Selector="Image">
                             <Setter Property="Height" Value="60" />
@@ -253,7 +254,7 @@
                     <controls:Card Grid.Row="0" Grid.Column="1">
                         <StackPanel>
                             <Image Source="/Assets/Contributors/lxymahatma.jpg" />
-                            <TextBlock>Lxymahatma</TextBlock>
+                            <TextBlock>lxymahatma</TextBlock>
                         </StackPanel>
                     </controls:Card>
 

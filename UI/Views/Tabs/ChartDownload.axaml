@@ -12,7 +12,7 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="60,*" ColumnDefinitions="*,*,*,250">
+        <Grid RowDefinitions="60,*" ColumnDefinitions="*,*,*,Auto" Margin="10,0">
             <!--Search bar-->
             <controls:Card Grid.Column="0"
                            VerticalAlignment="Top"
@@ -66,6 +66,7 @@
             <Button Grid.Row="0" Grid.Column="3"
                     FontSize="15"
                     Classes="dark"
+                    MinWidth="200"
                     Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
                     Command="{Binding OpenCustomAlbumsFolderCommand}" />
 
@@ -82,7 +83,7 @@
                         <DataTemplate>
                             <controls:Card Background="#595959">
                                 <Grid HorizontalAlignment="Center"
-                                      RowDefinitions="200,Auto,Auto,30,Auto,Auto"
+                                      RowDefinitions="200,Auto,45,35,35,80"
                                       ColumnDefinitions="160,160">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
@@ -95,7 +96,8 @@
                                             <Setter Property="Margin" Value="0,0,5,0" />
                                         </Style>
                                         <Style Selector="Grid>StackPanel">
-                                            <Setter Property="Margin" Value="0,5" />
+                                            <Setter Property="Margin" Value="0,10" />
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
                                         </Style>
                                         <Style Selector="Grid>TextBlock">
                                             <Setter Property="TextWrapping" Value="WrapWithOverflow" />
@@ -107,7 +109,7 @@
                                             <Setter Property="VerticalAlignment" Value="Center" />
                                         </Style>
                                         <Style Selector="DockPanel>TextBlock">
-                                            <Setter Property="FontSize" Value="18" />
+                                            <Setter Property="FontSize" Value="20" />
                                             <Setter Property="VerticalAlignment" Value="Center" />
                                         </Style>
                                     </Grid.Styles>
@@ -123,6 +125,7 @@
                                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                                FontSize="30"
                                                MinHeight="35"
+                                               MinWidth="200"
                                                Text="{Binding Name}"
                                                TextAlignment="Center" />
 
@@ -142,8 +145,7 @@
 
 
                                     <!--Difficulties-->
-                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                                                HorizontalAlignment="Center">
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                                         <StackPanel.Styles>
                                             <Style Selector="StackPanel">
                                                 <Setter Property="Margin" Value="5,0" />
@@ -192,6 +194,8 @@
 
                                     <!--Download button-->
                                     <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Classes="dark"
+                                            FontSize="25"
                                             Margin="0,20,0,0"
                                             Content="{ext:LocalizeExtensions XAML_Download_Chart}"
                                             Command="{ReflectionBinding $parent[ListBox].DataContext.DownloadChartCommand}"
