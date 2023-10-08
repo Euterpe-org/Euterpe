@@ -12,39 +12,36 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="60,*" ColumnDefinitions="*,*,*,Auto" Margin="10,0">
-            <!--Search bar-->
-            <controls:Card Grid.Column="0"
-                           VerticalAlignment="Top"
-                           Height="49"
-                           BorderBrush="#333333"
-                           BorderThickness="0,0,0,1"
-                           Margin="0,0,15,0">
+        <Grid RowDefinitions="60,*" ColumnDefinitions="*,*,*,Auto">
 
-                <controls:Card.Styles>
+            <!--Search bar-->
+            <TextBox Grid.Row="0" Grid.Column="0"
+                     Height="40"
+                     Classes="Solo"
+                     Background="#505050"
+                     Margin="10,0"
+                     Text="{Binding Filter}"
+                     Watermark="{ext:LocalizeExtensions XAML_Chart_SearchBar}"
+                     BorderBrush="#999999"
+                     BorderThickness="1"
+                     CornerRadius="1"
+                     AcceptsReturn="False">
+
+                <TextBox.Styles>
                     <Style Selector="TextBox Panel#PART_TextContainer">
                         <Setter Property="Margin" Value="8,19,0,0" />
                     </Style>
-                </controls:Card.Styles>
+                </TextBox.Styles>
 
-                <TextBox Classes="Solo"
-                         Background="#505050"
-                         Margin="12,0,0,0"
-                         Text="{Binding Filter}"
-                         Watermark="{ext:LocalizeExtensions XAML_Chart_SearchBar}"
-                         BorderBrush="#999999"
-                         BorderThickness="1"
-                         CornerRadius="1"
-                         AcceptsReturn="False">
-
-                    <TextBox.InnerRightContent>
-                        <Image Source="/Assets/magnify.png" Height="30" Width="30" />
-                    </TextBox.InnerRightContent>
-                </TextBox>
-            </controls:Card>
+                <TextBox.InnerRightContent>
+                    <Image Source="/Assets/magnify.png" Height="30" Width="30" />
+                </TextBox.InnerRightContent>
+            </TextBox>
 
             <!--Sort Options-->
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Grid.Column="1"
+                        Orientation="Horizontal"
+                        Margin="10,0">
                 <TextBlock FontSize="20"
                            Text="{ext:LocalizeExtensions XAML_ChartSortOptions}"
                            VerticalAlignment="Center" />
@@ -56,7 +53,6 @@
                           Theme="{StaticResource MaterialFilledComboBox}" />
             </StackPanel>
 
-
             <!--Filter Options-->
             <Menu Grid.Row="0" Grid.Column="2">
                 <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterOptions}" />
@@ -67,6 +63,7 @@
                     FontSize="15"
                     Classes="dark"
                     MinWidth="200"
+                    Margin="10,0"
                     Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
                     Command="{Binding OpenCustomAlbumsFolderCommand}" />
 
