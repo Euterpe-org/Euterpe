@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
@@ -66,23 +67,28 @@
             </StackPanel>
 
             <!--Filter Options-->
-            <StackPanel Grid.Row="0" Grid.Column="2">
+            <Menu Grid.Row="0" Grid.Column="2" FontSize="20" HorizontalAlignment="Center">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/filter.png" Margin="0,0,5,0" />
+                            <TextBlock Text="{ext:LocalizeExtensions XAML_ChartFilterTypes}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </MenuItem.Header>
 
-                <Image Source="/Assets/filter.png" />
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}" />
 
-                <Menu FontSize="20">
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterTypes}">
-                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
-                                  Command="{Binding FilterEasyCommand}" />
-                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
-                                  Command="{Binding FilterHardCommand}" />
-                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
-                                  Command="{Binding FilterMasterCommand}" />
-                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
-                                  Command="{Binding FilterHiddenCommand}" />
-                    </MenuItem>
-                </Menu>
-            </StackPanel>
+                    <!--<MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
+                              Command="{Binding FilterEasyCommand}" />
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
+                              Command="{Binding FilterHardCommand}" />
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
+                              Command="{Binding FilterMasterCommand}" />
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
+                              Command="{Binding FilterHiddenCommand}" />-->
+                </MenuItem>
+            </Menu>
 
 
             <!--Custom Albums folder-->
