@@ -164,8 +164,7 @@ public partial class ModService
     {
         if (SavingService.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
-        var result =
-            await MessageBoxService.CustomConfirmMessageBox(MsgBox_Content_InstallModTools, 3);
+        var result = await MessageBoxService.CustomConfirmMessageBox(MsgBox_Content_InstallModTools, 3);
         if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
         else if (result == MsgBox_Button_NoNoAsk) SavingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
