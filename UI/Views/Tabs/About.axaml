@@ -29,14 +29,14 @@
                 <!--About Project-->
                 <Grid RowDefinitions="140,100" ColumnDefinitions="*,*,*" Margin="0,20">
                     <Grid.Styles>
-                        <Style Selector="Button">
+                        <Style Selector="Grid>Button">
                             <Setter Property="HorizontalAlignment" Value="Center" />
                             <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Width" Value="150" />
+                            <Setter Property="Height" Value="120" />
                         </Style>
                     </Grid.Styles>
                     <Button Grid.Row="0" Grid.Column="0"
-                            Width="150"
-                            Height="120"
                             Classes="Flat"
                             ToolTip.Tip="Muse Dash Modding Community Website"
                             CommandParameter="https://mdmc.moe/">
@@ -44,8 +44,6 @@
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="1"
-                            Width="120"
-                            Height="120"
                             Classes="Flat"
                             ToolTip.Tip="Muse Dash Mod Tools Project"
                             CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
@@ -53,8 +51,6 @@
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="2"
-                            Width="120"
-                            Height="120"
                             Classes="Flat"
                             ToolTip.Tip="Muse Dash Modding Community Discord"
                             CommandParameter="https://discord.gg/mdmc">
@@ -62,9 +58,11 @@
                     </Button>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top">
+
                         <TextBlock Classes="Headline3"
                                    Text="About Muse Dash Mod Tools"
                                    TextAlignment="Center" />
+
                         <TextBlock Classes="Headline5"
                                    Text="Muse Dash Mod Tools aims for making modding muse dash easier&#x0a;And its development cannot be done without those people's effort"
                                    TextWrapping="Wrap"
@@ -93,8 +91,9 @@
                             <Setter Property="TextAlignment" Value="Center" />
                             <Setter Property="Margin" Value="0,0,0,5" />
                         </Style>
-                        <Style Selector="MenuItem">
+                        <Style Selector="Menu">
                             <Setter Property="FontSize" Value="15" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
                         </Style>
                     </Grid.Styles>
 
@@ -109,7 +108,7 @@
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="0">
                         <!--Accounts-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="BiliBili"
@@ -160,7 +159,7 @@
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="1">
                         <!--Account-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="BiliBili"
@@ -183,7 +182,7 @@
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="2">
                         <!--Account-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="Github"
@@ -206,7 +205,7 @@
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="3">
                         <!--Account-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="Github"

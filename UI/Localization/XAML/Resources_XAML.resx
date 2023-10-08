@@ -207,7 +207,7 @@
         <value>Sort by: </value>
     </data>
     <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>Filter by: </value>
+        <value>Filter by</value>
     </data>
     <data name="XAML_ChartSortOption_Default" xml:space="preserve">
         <value>Default</value>

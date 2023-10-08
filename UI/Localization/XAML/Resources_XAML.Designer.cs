@@ -195,7 +195,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter by: .
+        ///   Looks up a localized string similar to Filter by.
         /// </summary>
         internal static string XAML_ChartFilterTypes {
             get {

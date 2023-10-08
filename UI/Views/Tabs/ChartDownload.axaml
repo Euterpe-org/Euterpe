@@ -12,7 +12,18 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="60,*" ColumnDefinitions="*,*,*,Auto">
+        <Grid RowDefinitions="60,*" ColumnDefinitions="365,280,*,280">
+            <Grid.Styles>
+                <Style Selector="StackPanel>Image">
+                    <Setter Property="Width" Value="30" />
+                    <Setter Property="Height" Value="30" />
+                </Style>
+                <Style Selector="Grid>StackPanel">
+                    <Setter Property="Orientation" Value="Horizontal" />
+                    <Setter Property="Margin" Value="10,0" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </Grid.Styles>
 
             <!--Search bar-->
             <TextBox Grid.Row="0" Grid.Column="0"
@@ -39,9 +50,10 @@
             </TextBox>
 
             <!--Sort Options-->
-            <StackPanel Grid.Row="0" Grid.Column="1"
-                        Orientation="Horizontal"
-                        Margin="10,0">
+            <StackPanel Grid.Row="0" Grid.Column="1">
+
+                <Image Source="/Assets/sort.png" Margin="0,0,10,0" />
+
                 <TextBlock FontSize="20"
                            Text="{ext:LocalizeExtensions XAML_ChartSortOptions}"
                            VerticalAlignment="Center" />
@@ -54,31 +66,36 @@
             </StackPanel>
 
             <!--Filter Options-->
-            <Menu Grid.Row="0" Grid.Column="2">
-                <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterTypes}">
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
-                              Command="{Binding FilterEasyCommand}" />
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
-                              Command="{Binding FilterHardCommand}" />
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
-                              Command="{Binding FilterMasterCommand}" />
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
-                              Command="{Binding FilterHiddenCommand}" />
-                </MenuItem>
-            </Menu>
+            <StackPanel Grid.Row="0" Grid.Column="2">
+
+                <Image Source="/Assets/filter.png" />
+
+                <Menu FontSize="20">
+                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterTypes}">
+                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
+                                  Command="{Binding FilterEasyCommand}" />
+                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
+                                  Command="{Binding FilterHardCommand}" />
+                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
+                                  Command="{Binding FilterMasterCommand}" />
+                        <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
+                                  Command="{Binding FilterHiddenCommand}" />
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+
 
             <!--Custom Albums folder-->
             <Button Grid.Row="0" Grid.Column="3"
-                    FontSize="15"
+                    FontSize="16"
                     Classes="dark"
-                    MinWidth="200"
-                    Margin="10,0"
+                    Margin="10,0,20,0"
                     Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
                     Command="{Binding OpenCustomAlbumsFolderCommand}" />
 
             <!--Chart list-->
             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <ListBox ItemsSource="{Binding Charts}">
+                <ListBox ItemsSource="{Binding Charts}" Margin="0,0,10,0">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3" />
@@ -87,10 +104,15 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <controls:Card Background="#595959">
+                            <controls:Card Background="#595959" BorderBrush="#999999">
+                                <controls:Card.Styles>
+                                    <Style Selector="controls|Card Border#PART_BackgroundBorder">
+                                        <Setter Property="BorderThickness" Value="2" />
+                                    </Style>
+                                </controls:Card.Styles>
                                 <Grid HorizontalAlignment="Center"
                                       RowDefinitions="200,Auto,45,35,35,80"
-                                      ColumnDefinitions="160,160">
+                                      ColumnDefinitions="150,150">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
                                             <Setter Property="Orientation" Value="Horizontal" />

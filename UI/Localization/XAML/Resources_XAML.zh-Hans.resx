@@ -200,7 +200,7 @@
         <value>排序：</value>
     </data>
     <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>筛选：</value>
+        <value>筛选</value>
     </data>
     <data name="XAML_ChartSortOption_Default" xml:space="preserve">
         <value>默认</value>
