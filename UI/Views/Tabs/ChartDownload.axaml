@@ -77,16 +77,34 @@
                         </StackPanel>
                     </MenuItem.Header>
 
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}" />
+                    <!--Easy-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Easy.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
 
-                    <!--<MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
-                              Command="{Binding FilterEasyCommand}" />
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
-                              Command="{Binding FilterHardCommand}" />
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
-                              Command="{Binding FilterMasterCommand}" />
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
-                              Command="{Binding FilterHiddenCommand}" />-->
+                    <!--Hard-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Hard.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
+
+                    <!--Master-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Master.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
+
+                    <!--Hidden-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Hidden.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
+
                 </MenuItem>
             </Menu>
 
