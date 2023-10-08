@@ -41,9 +41,6 @@ public class Chart
     public Bitmap? Cover { get; set; }
 
     [JsonIgnore]
-    public bool IsLocal { get; set; }
-
-    [JsonIgnore]
     public string EasyLevel => Difficulties[0];
 
     [JsonIgnore]

@@ -24,8 +24,8 @@ public class ChartService : IChartService
         _sourceCache = sourceCache;
         _charts = charts;
 
-        if (!Directory.Exists(SavingService.Settings.CustomAlbumFolder))
-            Directory.CreateDirectory(SavingService.Settings.CustomAlbumFolder);
+        if (!Directory.Exists(SavingService.Settings.CustomAlbumsFolder))
+            Directory.CreateDirectory(SavingService.Settings.CustomAlbumsFolder);
 
         var webCharts = await GitHubService.GetChartList();
         _sourceCache.AddOrUpdate(webCharts!);
@@ -33,7 +33,7 @@ public class ChartService : IChartService
 
     public async Task DownloadChart(Chart item)
     {
-        var path = Path.Combine(SavingService.Settings.CustomAlbumFolder, item.Name.RemoveInvalidChars() + ".mdm");
+        var path = Path.Combine(SavingService.Settings.CustomAlbumsFolder, item.Name.RemoveInvalidChars() + ".mdm");
         if (File.Exists(path)) await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_OverrideChart, item.Name);
 
         await GitHubService.DownloadChart(item.Id, path);

@@ -156,6 +156,23 @@ public partial class LocalService : ILocalService
         });
     }
 
+    public async Task OpenCustomAlbumsFolder()
+    {
+        if (!IsValidPath)
+        {
+            Logger.Error("Not valid path, showing error message box...");
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+            return;
+        }
+
+        Logger.Information("Opening Custom Albums folder...");
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = SavingService.Value.Settings.CustomAlbumsFolder,
+            UseShellExecute = true
+        });
+    }
+
     public async Task OpenModsFolder()
     {
         if (!IsValidPath)

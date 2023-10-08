@@ -9,7 +9,6 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 {
     private readonly ReadOnlyObservableCollection<Chart> _charts;
     private readonly SourceCache<Chart, string> _sourceCache = new(x => x.Name);
-    [ObservableProperty] private ChartFilterType _categoryFilterType;
     [ObservableProperty] private string _filter;
     public ReadOnlyObservableCollection<Chart> Charts => _charts;
 
@@ -17,14 +16,18 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     public IChartService ChartService { get; init; }
 
     [UsedImplicitly]
+    public ILocalService LocalService { get; init; }
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
 
     public ChartDownloadViewModel()
     {
         _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(_filter) || x.Name.Contains(_filter, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => _categoryFilterType != ChartFilterType.Installed || x.IsLocal)
-            .Filter(x => _categoryFilterType != ChartFilterType.NotInstalled || !x.IsLocal)
+            .Filter(x => string.IsNullOrEmpty(_filter)
+                         || x.Name.Contains(_filter, StringComparison.OrdinalIgnoreCase)
+                         || x.Author.Contains(_filter, StringComparison.OrdinalIgnoreCase)
+                         || x.Charter.Contains(_filter, StringComparison.OrdinalIgnoreCase))
             .SortBy(x => x.Id)
             .Bind(out _charts)
             .Subscribe();
@@ -41,4 +44,7 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 
     [RelayCommand]
     private async Task DownloadChart(Chart item) => await ChartService.DownloadChart(item);
+
+    [RelayCommand]
+    private async Task OpenCustomAlbumsFolder() => await LocalService.OpenCustomAlbumsFolder();
 }
