@@ -12,7 +12,7 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="100,*" ColumnDefinitions="*,*">
+        <Grid RowDefinitions="100,*" ColumnDefinitions="*,200,*">
             <!--Search bar-->
             <controls:Card Grid.Column="0"
                            VerticalAlignment="Top"
@@ -43,14 +43,26 @@
                 </TextBox>
             </controls:Card>
 
+            <Button Grid.Row="0" Grid.Column="1"
+                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
+                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
+
             <!--Sort Options-->
-            <Menu Grid.Row="0" Grid.Column="1">
-                <MenuItem Header="" />
+            <Menu Grid.Row="0" Grid.Column="2">
+                <MenuItem Header="{ext:LocalizeExtensions XAML_SortOptions}">
+                    <MenuItem Header="Default" Command="{Binding SortByIdCommand }" />
+                    <MenuItem Header="Name" Command="{Binding SortByNameCommand }" />
+                    <MenuItem Header="Downloads" Command="{Binding SortByDownloadsCommand }" />
+                    <MenuItem Header="Likes" Command="{Binding SortByLikesCommand }" />
+                    <MenuItem Header="Level" Command="{Binding SortByLevelCommand }" />
+                    <MenuItem Header="Latest" Command="{Binding SortByLatestCommand }" />
+
+                </MenuItem>
             </Menu>
 
 
             <!--Chart list-->
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <ListBox ItemsSource="{Binding Charts}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>

@@ -34,9 +34,9 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     public ModManageViewModel()
     {
         _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(_filter) ||
-                         x.Name.Contains(_filter, StringComparison.OrdinalIgnoreCase) ||
-                         x.XamlDescription.Contains(_filter, StringComparison.OrdinalIgnoreCase))
+            .Filter(x => string.IsNullOrEmpty(Filter) ||
+                         x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
+                         x.XamlDescription.Contains(Filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => _categoryModFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
             .Filter(x => _categoryModFilterType != ModFilterType.Outdated || x.State == UpdateState.Outdated)
             .Filter(x => _categoryModFilterType != ModFilterType.Installed || x.IsLocal)

@@ -193,4 +193,7 @@
     <data name="XAML_Charter" xml:space="preserve">
         <value>谱师：</value>
     </data>
+    <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
+        <value>打开自制谱文件夹</value>
+    </data>
 </root>

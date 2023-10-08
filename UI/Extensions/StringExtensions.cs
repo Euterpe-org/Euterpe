@@ -16,4 +16,6 @@ public static class StringExtensions
         var invalidCharRegex = new Regex($"[{Regex.Escape(invalidFileNameChars)}]");
         return invalidCharRegex.Replace(str, "_");
     }
+
+    public static int ParseLevel(this string str) => !int.TryParse(str, out var level) ? 0 : level;
 }

@@ -10,6 +10,8 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     private readonly ReadOnlyObservableCollection<Chart> _charts;
     private readonly SourceCache<Chart, string> _sourceCache = new(x => x.Name);
     [ObservableProperty] private string _filter;
+    private ChartSortOptions _sortOption;
+
     public ReadOnlyObservableCollection<Chart> Charts => _charts;
 
     [UsedImplicitly]
@@ -24,11 +26,11 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     public ChartDownloadViewModel()
     {
         _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(_filter)
-                         || x.Name.Contains(_filter, StringComparison.OrdinalIgnoreCase)
-                         || x.Author.Contains(_filter, StringComparison.OrdinalIgnoreCase)
-                         || x.Charter.Contains(_filter, StringComparison.OrdinalIgnoreCase))
-            .SortBy(x => x.Id)
+            .Filter(x => string.IsNullOrEmpty(Filter)
+                         || x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase)
+                         || x.Author.Contains(Filter, StringComparison.OrdinalIgnoreCase)
+                         || x.Charter.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            .SortBy(GetSortByOption)
             .Bind(out _charts)
             .Subscribe();
     }
@@ -42,9 +44,51 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     [UsedImplicitly]
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
 
+    private void SortBy(ChartSortOptions option)
+    {
+        _sortOption = option;
+        _sourceCache.Refresh();
+    }
+
+    private IComparable GetSortByOption(Chart chart)
+    {
+        return _sortOption switch
+        {
+            ChartSortOptions.Id => chart.Id,
+            ChartSortOptions.Name => chart.Name,
+            ChartSortOptions.Downloads => -chart.Analytics.Downloads,
+            ChartSortOptions.Likes => -chart.Analytics.LikesCount,
+            ChartSortOptions.Level => -chart.GetHighestLevel(),
+            ChartSortOptions.Latest => -chart.Id,
+            _ => ChartSortOptions.Id
+        };
+    }
+
+    #region Commands
+
     [RelayCommand]
     private async Task DownloadChart(Chart item) => await ChartService.DownloadChart(item);
 
     [RelayCommand]
     private async Task OpenCustomAlbumsFolder() => await LocalService.OpenCustomAlbumsFolder();
+
+    [RelayCommand]
+    private void SortById() => SortBy(ChartSortOptions.Id);
+
+    [RelayCommand]
+    private void SortByName() => SortBy(ChartSortOptions.Name);
+
+    [RelayCommand]
+    private void SortByDownloads() => SortBy(ChartSortOptions.Downloads);
+
+    [RelayCommand]
+    private void SortByLikes() => SortBy(ChartSortOptions.Likes);
+
+    [RelayCommand]
+    private void SortByLevel() => SortBy(ChartSortOptions.Level);
+
+    [RelayCommand]
+    private void SortByLatest() => SortBy(ChartSortOptions.Latest);
+
+    #endregion
 }

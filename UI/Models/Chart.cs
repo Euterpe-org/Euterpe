@@ -63,6 +63,12 @@ public class Chart
 
     [JsonIgnore]
     public bool HasHidden => HiddenLevel != "0";
+
+    public int GetHighestLevel()
+    {
+        var highestLevel = Difficulties.Max(x => x.ParseLevel());
+        return highestLevel;
+    }
 }
 
 public class Analytic

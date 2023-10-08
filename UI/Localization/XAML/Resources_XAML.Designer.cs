@@ -168,6 +168,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Custom_Albums Folder.
+        /// </summary>
+        internal static string XAML_CustomAlbumsFolder {
+            get {
+                return ResourceManager.GetString("XAML_CustomAlbumsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository)\nTake effect after restarting app.
         /// </summary>
         internal static string XAML_CustomDownloadSourceFormat {
@@ -497,6 +506,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_Setting_EnableDependency_Install {
             get {
                 return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort by: .
+        /// </summary>
+        internal static string XAML_SortOptions {
+            get {
+                return ResourceManager.GetString("XAML_SortOptions", resourceCulture);
             }
         }
         
