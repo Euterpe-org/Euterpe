@@ -79,6 +79,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 
     #region OnPropertyChanged
 
+    [UsedImplicitly]
     partial void OnCurrentDownloadSourceChanged(int value)
     {
         if (value != -1)
@@ -87,32 +88,38 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         IsUsingCustomDownloadSource = value == 3;
     }
 
+    [UsedImplicitly]
     partial void OnEnableDependenciesWhenInstallingChanged(int value)
     {
         if (value != -1)
             SavingService.Settings.AskEnableDependenciesWhenInstalling = (AskType)value;
     }
 
+    [UsedImplicitly]
     partial void OnEnableDependenciesWhenEnablingChanged(int value)
     {
         if (value != -1)
             SavingService.Settings.AskEnableDependenciesWhenEnabling = (AskType)value;
     }
 
+    [UsedImplicitly]
     partial void OnDisableDependenciesWhenDeletingChanged(int value)
     {
         if (value != -1)
             SavingService.Settings.AskDisableDependenciesWhenDeleting = (AskType)value;
     }
 
+    [UsedImplicitly]
     partial void OnDisableDependenciesWhenDisablingChanged(int value)
     {
         if (value != -1)
             SavingService.Settings.AskDisableDependenciesWhenDisabling = (AskType)value;
     }
 
+    [UsedImplicitly]
     partial void OnDownloadPrereleaseChanged(bool value) => SavingService.Settings.DownloadPrerelease = value;
 
+    [UsedImplicitly]
     partial void OnCustomDownloadSourceChanged(string? value) => SavingService.Settings.CustomDownloadSource = value;
 
     #endregion

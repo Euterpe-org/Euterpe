@@ -22,6 +22,12 @@ public partial class UpdateUIService
         SettingsViewModel.Value.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
         SettingsViewModel.Value.DownloadSources = new[]
             { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee, XAML_DownloadSource_Custom };
+        ChartDownloadViewModel.Value.SortOptions = new[]
+        {
+            XAML_ChartSortOption_Default, XAML_ChartSortOption_Name,
+            XAML_ChartSortOption_Downloads, XAML_ChartSortOption_Likes,
+            XAML_ChartSortOption_Level, XAML_ChartSortOption_Latest
+        };
     }
 
     /// <summary>
@@ -34,5 +40,6 @@ public partial class UpdateUIService
         SettingsViewModel.Value.DisableDependenciesWhenDisabling = (int)SavingService.Value.Settings.AskDisableDependenciesWhenDisabling;
         SettingsViewModel.Value.EnableDependenciesWhenEnabling = (int)SavingService.Value.Settings.AskEnableDependenciesWhenEnabling;
         SettingsViewModel.Value.EnableDependenciesWhenInstalling = (int)SavingService.Value.Settings.AskEnableDependenciesWhenInstalling;
+        ChartDownloadViewModel.Value.CurrentSortOptionIndex = (int)ChartDownloadViewModel.Value.SortOption;
     }
 }

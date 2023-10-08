@@ -196,4 +196,28 @@
     <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
         <value>打开自制谱文件夹</value>
     </data>
+    <data name="XAML_ChartSortOptions" xml:space="preserve">
+        <value>排序：</value>
+    </data>
+    <data name="XAML_ChartFilterOptions" xml:space="preserve">
+        <value>筛选：</value>
+    </data>
+    <data name="XAML_ChartSortOption_Default" xml:space="preserve">
+        <value>默认</value>
+    </data>
+    <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
+        <value>下载</value>
+    </data>
+    <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
+        <value>最新</value>
+    </data>
+    <data name="XAML_ChartSortOption_Level" xml:space="preserve">
+        <value>等级</value>
+    </data>
+    <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
+        <value>点赞</value>
+    </data>
+    <data name="XAML_ChartSortOption_Name" xml:space="preserve">
+        <value>名称</value>
+    </data>
 </root>

@@ -6,6 +6,7 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
+    private readonly ILocalService _localService;
     private readonly ILogger _logger;
     private readonly ISavingService _savingService;
     [ObservableProperty] private ViewModelBase _content;
@@ -15,6 +16,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     public MainWindowViewModel(IComponentContext context)
     {
+        _localService = context.Resolve<ILocalService>();
         _logger = context.Resolve<ILogger>();
         _savingService = context.Resolve<ISavingService>();
 
@@ -42,6 +44,12 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var name = Tabs[SelectedTabIndex].Name;
         _logger.Information("Switching tab to {Name}", name);
     }
+
+    [RelayCommand]
+    private void OnLaunchVanillaGame() => _localService.OnLaunchGame(false);
+
+    [RelayCommand]
+    private void OnLaunchModdedGame() => _localService.OnLaunchGame(true);
 
     private void OnExit(object sender, EventArgs e) => _savingService.Save().Wait();
 }

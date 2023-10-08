@@ -203,7 +203,28 @@
     <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
         <value>Open Custom_Albums Folder</value>
     </data>
-    <data name="XAML_SortOptions" xml:space="preserve">
+    <data name="XAML_ChartSortOptions" xml:space="preserve">
         <value>Sort by: </value>
+    </data>
+    <data name="XAML_ChartFilterOptions" xml:space="preserve">
+        <value>Filter by: </value>
+    </data>
+    <data name="XAML_ChartSortOption_Default" xml:space="preserve">
+        <value>Default</value>
+    </data>
+    <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
+        <value>Likes</value>
+    </data>
+    <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
+        <value>Downloads</value>
+    </data>
+    <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
+        <value>Latest</value>
+    </data>
+    <data name="XAML_ChartSortOption_Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="XAML_ChartSortOption_Level" xml:space="preserve">
+        <value>Level</value>
     </data>
 </root>

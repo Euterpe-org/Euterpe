@@ -12,7 +12,7 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="100,*" ColumnDefinitions="*,200,*">
+        <Grid RowDefinitions="100,*" ColumnDefinitions="*,200,*,*">
             <!--Search bar-->
             <controls:Card Grid.Column="0"
                            VerticalAlignment="Top"
@@ -48,8 +48,8 @@
                     Command="{Binding OpenCustomAlbumsFolderCommand}" />
 
             <!--Sort Options-->
-            <Menu Grid.Row="0" Grid.Column="2">
-                <MenuItem Header="{ext:LocalizeExtensions XAML_SortOptions}">
+            <!--<Menu Grid.Row="0" Grid.Column="2">
+                <MenuItem Header="{ext:LocalizeExtensions XAML_ChartSortOptions}">
                     <MenuItem Header="Default" Command="{Binding SortByIdCommand }" />
                     <MenuItem Header="Name" Command="{Binding SortByNameCommand }" />
                     <MenuItem Header="Downloads" Command="{Binding SortByDownloadsCommand }" />
@@ -58,11 +58,19 @@
                     <MenuItem Header="Latest" Command="{Binding SortByLatestCommand }" />
 
                 </MenuItem>
+            </Menu>-->
+            <ComboBox Grid.Row="0" Grid.Column="2"
+                      ItemsSource="{Binding SortOptions}"
+                      SelectedIndex="{Binding CurrentSortOptionIndex}" />
+
+            <!--Filter Options-->
+            <Menu Grid.Row="0" Grid.Column="3">
+                <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterOptions}" />
             </Menu>
 
 
             <!--Chart list-->
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <ListBox ItemsSource="{Binding Charts}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>

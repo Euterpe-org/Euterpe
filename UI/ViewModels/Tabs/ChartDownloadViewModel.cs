@@ -9,9 +9,9 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 {
     private readonly ReadOnlyObservableCollection<Chart> _charts;
     private readonly SourceCache<Chart, string> _sourceCache = new(x => x.Name);
+    [ObservableProperty] private int _currentSortOptionIndex;
     [ObservableProperty] private string _filter;
-    private ChartSortOptions _sortOption;
-
+    [ObservableProperty] private string[] _sortOptions;
     public ReadOnlyObservableCollection<Chart> Charts => _charts;
 
     [UsedImplicitly]
@@ -35,24 +35,23 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
             .Subscribe();
     }
 
+    public ChartSortOptions SortOption { get; private set; }
+
     public async Task Initialize()
     {
+        SortOptions = new[]
+        {
+            XAML_ChartSortOption_Default, XAML_ChartSortOption_Name,
+            XAML_ChartSortOption_Downloads, XAML_ChartSortOption_Likes,
+            XAML_ChartSortOption_Level, XAML_ChartSortOption_Latest
+        };
         await ChartService.InitializeChartList(_sourceCache, Charts);
         Logger.Information("Chart Download Window Initialized");
     }
 
-    [UsedImplicitly]
-    partial void OnFilterChanged(string value) => _sourceCache.Refresh();
-
-    private void SortBy(ChartSortOptions option)
-    {
-        _sortOption = option;
-        _sourceCache.Refresh();
-    }
-
     private IComparable GetSortByOption(Chart chart)
     {
-        return _sortOption switch
+        return SortOption switch
         {
             ChartSortOptions.Id => chart.Id,
             ChartSortOptions.Name => chart.Name,
@@ -64,6 +63,17 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
         };
     }
 
+    [UsedImplicitly]
+    partial void OnCurrentSortOptionIndexChanged(int value)
+    {
+        if (value == -1) return;
+        SortOption = (ChartSortOptions)value;
+        _sourceCache.Refresh();
+    }
+
+    [UsedImplicitly]
+    partial void OnFilterChanged(string value) => _sourceCache.Refresh();
+
     #region Commands
 
     [RelayCommand]
@@ -71,24 +81,6 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 
     [RelayCommand]
     private async Task OpenCustomAlbumsFolder() => await LocalService.OpenCustomAlbumsFolder();
-
-    [RelayCommand]
-    private void SortById() => SortBy(ChartSortOptions.Id);
-
-    [RelayCommand]
-    private void SortByName() => SortBy(ChartSortOptions.Name);
-
-    [RelayCommand]
-    private void SortByDownloads() => SortBy(ChartSortOptions.Downloads);
-
-    [RelayCommand]
-    private void SortByLikes() => SortBy(ChartSortOptions.Likes);
-
-    [RelayCommand]
-    private void SortByLevel() => SortBy(ChartSortOptions.Level);
-
-    [RelayCommand]
-    private void SortByLatest() => SortBy(ChartSortOptions.Latest);
 
     #endregion
 }

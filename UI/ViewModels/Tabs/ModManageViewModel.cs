@@ -105,12 +105,6 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private async Task OnUninstallMelonLoader() => await LocalService.OnUninstallMelonLoader();
 
     [RelayCommand]
-    private void OnLaunchVanillaGame() => LocalService.OnLaunchGame(false);
-
-    [RelayCommand]
-    private void OnLaunchModdedGame() => LocalService.OnLaunchGame(true);
-
-    [RelayCommand]
     private void OpenUrl(string path)
     {
         Process.Start(new ProcessStartInfo
