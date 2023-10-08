@@ -12,7 +12,7 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="100,*" ColumnDefinitions="*,200,*,*">
+        <Grid RowDefinitions="60,*" ColumnDefinitions="*,*,*,250">
             <!--Search bar-->
             <controls:Card Grid.Column="0"
                            VerticalAlignment="Top"
@@ -43,31 +43,31 @@
                 </TextBox>
             </controls:Card>
 
-            <Button Grid.Row="0" Grid.Column="1"
-                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
-                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
-
             <!--Sort Options-->
-            <!--<Menu Grid.Row="0" Grid.Column="2">
-                <MenuItem Header="{ext:LocalizeExtensions XAML_ChartSortOptions}">
-                    <MenuItem Header="Default" Command="{Binding SortByIdCommand }" />
-                    <MenuItem Header="Name" Command="{Binding SortByNameCommand }" />
-                    <MenuItem Header="Downloads" Command="{Binding SortByDownloadsCommand }" />
-                    <MenuItem Header="Likes" Command="{Binding SortByLikesCommand }" />
-                    <MenuItem Header="Level" Command="{Binding SortByLevelCommand }" />
-                    <MenuItem Header="Latest" Command="{Binding SortByLatestCommand }" />
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                <TextBlock FontSize="20"
+                           Text="{ext:LocalizeExtensions XAML_ChartSortOptions}"
+                           VerticalAlignment="Center" />
 
-                </MenuItem>
-            </Menu>-->
-            <ComboBox Grid.Row="0" Grid.Column="2"
-                      ItemsSource="{Binding SortOptions}"
-                      SelectedIndex="{Binding CurrentSortOptionIndex}" />
+                <ComboBox MinWidth="150"
+                          ItemsSource="{Binding SortOptions}"
+                          SelectedIndex="{Binding CurrentSortOptionIndex}"
+                          FontSize="18"
+                          Theme="{StaticResource MaterialFilledComboBox}" />
+            </StackPanel>
+
 
             <!--Filter Options-->
-            <Menu Grid.Row="0" Grid.Column="3">
+            <Menu Grid.Row="0" Grid.Column="2">
                 <MenuItem Header="{ext:LocalizeExtensions XAML_ChartFilterOptions}" />
             </Menu>
 
+            <!--Custom Albums folder-->
+            <Button Grid.Row="0" Grid.Column="3"
+                    FontSize="15"
+                    Classes="dark"
+                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
+                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
 
             <!--Chart list-->
             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

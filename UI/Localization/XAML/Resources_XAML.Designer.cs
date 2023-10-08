@@ -159,6 +159,42 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Easy.
+        /// </summary>
+        internal static string XAML_ChartFilterOption_Easy {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterOption_Easy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard.
+        /// </summary>
+        internal static string XAML_ChartFilterOption_Hard {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterOption_Hard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hidden.
+        /// </summary>
+        internal static string XAML_ChartFilterOption_Hidden {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterOption_Hidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master.
+        /// </summary>
+        internal static string XAML_ChartFilterOption_Master {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterOption_Master", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter by: .
         /// </summary>
         internal static string XAML_ChartFilterOptions {
