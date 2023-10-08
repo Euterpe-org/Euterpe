@@ -190,4 +190,7 @@
     <data name="XAML_Chart_Likes" xml:space="preserve">
         <value>点赞数：</value>
     </data>
+    <data name="XAML_Charter" xml:space="preserve">
+        <value>谱师：</value>
+    </data>
 </root>

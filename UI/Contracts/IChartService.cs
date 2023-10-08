@@ -12,4 +12,11 @@ public interface IChartService
     /// <param name="charts"></param>
     /// <returns></returns>
     Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts);
+
+    /// <summary>
+    ///     Download Chart
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    Task DownloadChart(Chart item);
 }

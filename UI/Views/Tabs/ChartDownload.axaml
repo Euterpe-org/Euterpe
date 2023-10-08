@@ -55,20 +55,33 @@
                         <DataTemplate>
                             <controls:Card Background="#595959">
                                 <Grid HorizontalAlignment="Center"
-                                      RowDefinitions="Auto,Auto,Auto,Auto,Auto"
-                                      ColumnDefinitions="150,150">
+                                      RowDefinitions="200,Auto,Auto,30,Auto,Auto"
+                                      ColumnDefinitions="160,160">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
                                             <Setter Property="Orientation" Value="Horizontal" />
                                         </Style>
-                                        <Style Selector="Image">
+                                        <Style Selector="StackPanel>Image">
                                             <Setter Property="Width" Value="25" />
                                             <Setter Property="Height" Value="25" />
                                             <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Margin" Value="0,0,5,0" />
                                         </Style>
-                                        <Style Selector="TextBlock">
-                                            <Setter Property="FontSize" Value="20" />
+                                        <Style Selector="Grid>StackPanel">
+                                            <Setter Property="Margin" Value="0,5" />
+                                        </Style>
+                                        <Style Selector="Grid>TextBlock">
+                                            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="Margin" Value="0,5" />
+                                        </Style>
+                                        <Style Selector="StackPanel>TextBlock">
+                                            <Setter Property="FontSize" Value="22" />
                                             <Setter Property="VerticalAlignment" Value="Bottom" />
+                                        </Style>
+                                        <Style Selector="DockPanel>TextBlock">
+                                            <Setter Property="FontSize" Value="22" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
                                         </Style>
                                     </Grid.Styles>
 
@@ -81,19 +94,31 @@
 
                                     <!--Name-->
                                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                               FontSize="25"
-                                               Text="{Binding Name}"
-                                               TextWrapping="WrapWithOverflow"
+                                               FontSize="26"
+                                               MinHeight="35"
+                                               Text="{Binding Name}" />
+
+                                    <!--Charter-->
+                                    <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                                HorizontalAlignment="Center"
-                                               Margin="0,5" />
+                                               MinHeight="30"
+                                               Margin="0,5">
+
+                                        <Image Height="30" Width="30"
+                                               Margin="0,0,5,0"
+                                               Source="/Assets/charter.png" />
+                                        <TextBlock Text="{ext:LocalizeExtensions XAML_Charter}" />
+                                        <TextBlock Text="{Binding Charter}"
+                                                   TextWrapping="WrapWithOverflow" />
+                                    </DockPanel>
+
 
                                     <!--Difficulties-->
-                                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                                HorizontalAlignment="Center"
-                                                Margin="0,5">
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                                HorizontalAlignment="Center">
                                         <StackPanel.Styles>
                                             <Style Selector="StackPanel">
-                                                <Setter Property="Margin" Value="0,0,10,0" />
+                                                <Setter Property="Margin" Value="5,0" />
                                             </Style>
                                         </StackPanel.Styles>
 
@@ -124,24 +149,25 @@
                                     </StackPanel>
 
                                     <!--Likes-->
-                                    <StackPanel Grid.Row="3" Grid.Column="0"
-                                                Margin="0,5">
+                                    <StackPanel Grid.Row="4" Grid.Column="0">
                                         <Image Source="/Assets/like.png" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Likes}" />
                                         <TextBlock Text="{Binding Analytics.LikesCount}" />
                                     </StackPanel>
 
                                     <!--Downloads-->
-                                    <StackPanel Grid.Row="3" Grid.Column="1"
-                                                Margin="0,5">
+                                    <StackPanel Grid.Row="4" Grid.Column="1">
                                         <Image Source="/Assets/download.png" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Downloads}" />
                                         <TextBlock Text="{Binding Analytics.Downloads}" />
                                     </StackPanel>
 
-                                    <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                    <!--Download button-->
+                                    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                                             Margin="0,20,0,0"
-                                            Content="{ext:LocalizeExtensions XAML_Download_Chart}" />
+                                            Content="{ext:LocalizeExtensions XAML_Download_Chart}"
+                                            Command="{ReflectionBinding $parent[ListBox].DataContext.DownloadChartCommand}"
+                                            CommandParameter="{Binding .}" />
                                 </Grid>
                             </controls:Card>
 

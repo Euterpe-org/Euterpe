@@ -150,6 +150,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Charter: .
+        /// </summary>
+        internal static string XAML_Charter {
+            get {
+                return ResourceManager.GetString("XAML_Charter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Update.
         /// </summary>
         internal static string XAML_Check_Update {

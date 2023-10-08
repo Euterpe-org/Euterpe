@@ -24,4 +24,8 @@ public class ChartService : IChartService
         var webCharts = await GitHubService.GetChartList();
         _sourceCache.AddOrUpdate(webCharts);
     }
+
+    public async Task DownloadChart(Chart item)
+    {
+    }
 }

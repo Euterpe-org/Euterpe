@@ -6,11 +6,12 @@
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-        Width="1000" Height="800"
+        Width="1100" Height="850"
         MinWidth="880" MinHeight="680"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="#2D2D2D">
 
     <Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150">
         <Image Grid.Row="0" Grid.Column="0"

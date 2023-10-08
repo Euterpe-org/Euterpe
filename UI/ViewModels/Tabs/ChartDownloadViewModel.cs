@@ -35,4 +35,10 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
         await ChartService.InitializeChartList(_sourceCache, Charts);
         Logger.Information("Chart Download Window Initialized");
     }
+
+    [UsedImplicitly]
+    partial void OnFilterChanged(string value) => _sourceCache.Refresh();
+
+    [RelayCommand]
+    private async Task DownloadChart(Chart item) => await ChartService.DownloadChart(item);
 }
