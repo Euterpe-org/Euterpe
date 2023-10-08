@@ -43,6 +43,13 @@
                 </TextBox>
             </controls:Card>
 
+            <!--Sort Options-->
+            <Menu Grid.Row="0" Grid.Column="1">
+                <MenuItem Header="" />
+            </Menu>
+
+
+            <!--Chart list-->
             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <ListBox ItemsSource="{Binding Charts}">
                     <ListBox.ItemsPanel>
@@ -76,11 +83,11 @@
                                             <Setter Property="Margin" Value="0,5" />
                                         </Style>
                                         <Style Selector="StackPanel>TextBlock">
-                                            <Setter Property="FontSize" Value="22" />
-                                            <Setter Property="VerticalAlignment" Value="Bottom" />
+                                            <Setter Property="FontSize" Value="18" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
                                         </Style>
                                         <Style Selector="DockPanel>TextBlock">
-                                            <Setter Property="FontSize" Value="22" />
+                                            <Setter Property="FontSize" Value="18" />
                                             <Setter Property="VerticalAlignment" Value="Center" />
                                         </Style>
                                     </Grid.Styles>
@@ -94,9 +101,10 @@
 
                                     <!--Name-->
                                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                               FontSize="26"
+                                               FontSize="30"
                                                MinHeight="35"
-                                               Text="{Binding Name}" />
+                                               Text="{Binding Name}"
+                                               TextAlignment="Center" />
 
                                     <!--Charter-->
                                     <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
@@ -109,7 +117,7 @@
                                                Source="/Assets/charter.png" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Charter}" />
                                         <TextBlock Text="{Binding Charter}"
-                                                   TextWrapping="WrapWithOverflow" />
+                                                   TextTrimming="WordEllipsis" />
                                     </DockPanel>
 
 

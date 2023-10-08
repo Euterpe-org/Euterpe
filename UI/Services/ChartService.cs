@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.IO;
 using DynamicData;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -13,6 +14,9 @@ public class ChartService : IChartService
     public IGitHubService GitHubService { get; init; }
 
     [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
     public ISavingService SavingService { get; init; }
 
     public async Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts)
@@ -20,6 +24,8 @@ public class ChartService : IChartService
         _sourceCache = sourceCache;
         _charts = charts;
 
+        if (!Directory.Exists(SavingService.Settings.CustomAlbumFolder))
+            Directory.CreateDirectory(SavingService.Settings.CustomAlbumFolder);
 
         var webCharts = await GitHubService.GetChartList();
         _sourceCache.AddOrUpdate(webCharts);
@@ -27,5 +33,8 @@ public class ChartService : IChartService
 
     public async Task DownloadChart(Chart item)
     {
+        var path = Path.Combine(SavingService.Settings.CustomAlbumFolder, item.Name.RemoveInvalidChars() + ".mdm");
+        await GitHubService.DownloadChart(item.Id, path);
+        await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
     }
 }

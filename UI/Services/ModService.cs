@@ -89,7 +89,7 @@ public partial class ModService : IModService
         {
             var path = Path.Join(SavingService.Settings.ModsFolder,
                 item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
-            await GitHubService.DownloadModAsync(item.DownloadLink, path);
+            await GitHubService.DownloadMod(item.DownloadLink, path);
 
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();

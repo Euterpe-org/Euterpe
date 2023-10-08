@@ -85,7 +85,24 @@ public partial class GitHubService : IGitHubService
         }
     }
 
-    public async Task DownloadModAsync(string link, string path)
+    public async Task DownloadChart(int id, string path)
+    {
+        var url = string.Format(ChartDownloadApi, id);
+        try
+        {
+            var result = await Client.GetAsync(url);
+            Logger.Information("Download chart from {Url} success", url);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await result.Content.CopyToAsync(fs);
+        }
+        catch (Exception ex)
+        {
+            Logger.Warning("Download chart from {Url} failed", url);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_DownloadChartFailed, ex);
+        }
+    }
+
+    public async Task DownloadMod(string link, string path)
     {
         var defaultDownloadSource = DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
         var result = await DownloadModFromSourceAsync(defaultDownloadSource, link, path);

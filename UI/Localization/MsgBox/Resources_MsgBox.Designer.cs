@@ -204,6 +204,24 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chart download failed\n{0}.
+        /// </summary>
+        internal static string MsgBox_Content_DownloadChartFailed {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DownloadChartFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has been successfully downloaded\n.
+        /// </summary>
+        internal static string MsgBox_Content_DownloadChartSuccess {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DownloadChartSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please manually choose and delete the duplicated mod\n{0}.
         /// </summary>
         internal static string MsgBox_Content_DuplicateMods {
