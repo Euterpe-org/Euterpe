@@ -1,3 +1,4 @@
+using System.Globalization;
 using Autofac;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -19,6 +20,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _localService = context.Resolve<ILocalService>();
         _logger = context.Resolve<ILogger>();
         _savingService = context.Resolve<ISavingService>();
+
+        if (_savingService.Settings.LanguageCode is not null)
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);
 
         Tabs = new List<TabView>
         {
