@@ -1,163 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
-    <xsd:element name="root" msdata:IsDataSet="true">
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-        </xsd:element>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
   </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
-    <value>1.3</value>
+    <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-        </value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-        </value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>使用者文件</value>
-    </data>
+    <value>使用者文件</value>
+  </data>
   <data name="XAML_Check_Update" xml:space="preserve">
-        <value>檢查更新</value>
-    </data>
+    <value>檢查更新</value>
+  </data>
   <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
-        <value>Github 鏡像</value>
-    </data>
-  <data name="XAML_Analyze" xml:space="preserve">
-        <value>分析日誌</value>
-    </data>
+    <value>Github 鏡像</value>
+  </data>
   <data name="XAML_Apply" xml:space="preserve">
-        <value>應用</value>
-    </data>
+    <value>應用</value>
+  </data>
   <data name="XAML_AskType_Always" xml:space="preserve">
-        <value>總是詢問</value>
-    </data>
+    <value>總是詢問</value>
+  </data>
   <data name="XAML_AskType_No" xml:space="preserve">
-        <value>否</value>
-    </data>
+    <value>否</value>
+  </data>
   <data name="XAML_AskType_Yes" xml:space="preserve">
-        <value>是</value>
-    </data>
+    <value>是</value>
+  </data>
   <data name="XAML_ChangePath" xml:space="preserve">
-        <value>更改路徑</value>
-    </data>
+    <value>更改路徑</value>
+  </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
-        <value>下載預發行版本: </value>
-    </data>
+    <value>下載預發行版本: </value>
+  </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
-        <value>下載源: </value>
-    </data>
+    <value>下載源: </value>
+  </data>
   <data name="XAML_All" xml:space="preserve">
-        <value>全部</value>
-    </data>
+    <value>全部</value>
+  </data>
   <data name="XAML_Enabled" xml:space="preserve">
-        <value>已啟用</value>
-    </data>
+    <value>已啟用</value>
+  </data>
   <data name="XAML_Font" xml:space="preserve">
-        <value>字體:</value>
-    </data>
+    <value>字體:</value>
+  </data>
   <data name="XAML_HelpTranslate" xml:space="preserve">
-        <value>幫助翻譯</value>
-    </data>
+    <value>幫助翻譯</value>
+  </data>
   <data name="XAML_HomePage" xml:space="preserve">
-        <value>主頁</value>
-    </data>
+    <value>主頁</value>
+  </data>
   <data name="XAML_Installed" xml:space="preserve">
-        <value>已安裝</value>
-    </data>
+    <value>已安裝</value>
+  </data>
   <data name="XAML_Incompatible" xml:space="preserve">
-        <value>不相容</value>
-    </data>
+    <value>不相容</value>
+  </data>
   <data name="XAML_Install_MelonLoader" xml:space="preserve">
-        <value>安裝\nMelonLoader</value>
-    </data>
+    <value>安裝\nMelonLoader</value>
+  </data>
   <data name="XAML_Install_Mod" xml:space="preserve">
-        <value>安裝</value>
-    </data>
+    <value>安裝</value>
+  </data>
   <data name="XAML_Language" xml:space="preserve">
-        <value>語言: </value>
-    </data>
+    <value>語言: </value>
+  </data>
   <data name="XAML_LogFolder" xml:space="preserve">
-        <value>打開日誌文件夾</value>
-    </data>
+    <value>打開日誌文件夾</value>
+  </data>
   <data name="XAML_ModsFolder" xml:space="preserve">
-        <value>模組文件夾</value>
-    </data>
+    <value>模組文件夾</value>
+  </data>
   <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
-        <value>全部</value>
-    </data>
+    <value>全部</value>
+  </data>
   <data name="XAML_Mod_Dependencies" xml:space="preserve">
-        <value>依賴:</value>
-    </data>
+    <value>依賴:</value>
+  </data>
   <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0} \n\n作者：{1} \n線上版本：{2}\n支持遊戲版本：{3}</value>
-    </data>
+    <value>{0} \n\n作者：{1} \n線上版本：{2}\n支持遊戲版本：{3}</value>
+  </data>
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
-        <value>重複:</value>
-    </data>
+    <value>重複:</value>
+  </data>
   <data name="XAML_Mod_Incompatible" xml:space="preserve">
-        <value>{0} 的 {1} 版本和你的遊戲版本不相容</value>
-    </data>
+    <value>{0} 的 {1} 版本和你的遊戲版本不相容</value>
+  </data>
   <data name="XAML_Mod_Modified" xml:space="preserve">
-        <value>本地版本: {0} (修改)</value>
-    </data>
+    <value>本地版本: {0} (修改)</value>
+  </data>
   <data name="XAML_Mod_Newer" xml:space="preserve">
-        <value>你的版本: {0} (WOW MOD開發者)</value>
-    </data>
+    <value>你的版本: {0} (WOW MOD開發者)</value>
+  </data>
   <data name="XAML_Mod_Normal" xml:space="preserve">
-        <value>你的版本: {0}</value>
-    </data>
+    <value>你的版本: {0}</value>
+  </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
-        <value>你的版本: {0} (有新版本: {1})</value>
-    </data>
+    <value>你的版本: {0} (有新版本: {1})</value>
+  </data>
   <data name="XAML_Outdated" xml:space="preserve">
-        <value>有更新</value>
-    </data>
+    <value>有更新</value>
+  </data>
   <data name="XAML_Path" xml:space="preserve">
-        <value>Muse Dash 文件路徑</value>
-    </data>
+    <value>Muse Dash 文件路徑</value>
+  </data>
   <data name="XAML_Reinstall_Mod" xml:space="preserve">
-        <value>重新安裝</value>
-    </data>
+    <value>重新安裝</value>
+  </data>
   <data name="XAML_SearchBar" xml:space="preserve">
-        <value>搜尋模組    (名字,   作者,  描述)</value>
-    </data>
-  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>刪除Mod時禁用依賴</value>
-    </data>
-  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>禁用Mod時禁用依賴</value>
-    </data>
-  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>啟用Mod時啟用依賴</value>
-    </data>
-  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>安裝Mod時啟用依賴</value>
-    </data>
+    <value>搜尋模組    (名字,   作者,  描述)</value>
+  </data>
   <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
-        <value>分析</value>
-    </data>
+    <value>分析</value>
+  </data>
   <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>模組</value>
-    </data>
+    <value>模組</value>
+  </data>
   <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>設置</value>
-    </data>
-  <data name="XAML_TroubleShoot" xml:space="preserve">
-        <value>報告未知問題</value>
-    </data>
+    <value>設置</value>
+  </data>
   <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-        <value>解除安裝\nMelonLoader</value>
-    </data>
+    <value>解除安裝\nMelonLoader</value>
+  </data>
   <data name="XAML_Uninstall_Mod" xml:space="preserve">
-        <value>解除安裝</value>
-    </data>
+    <value>解除安裝</value>
+  </data>
   <data name="XAML_Update_Mod" xml:space="preserve">
-        <value>更新</value>
-    </data>
+    <value>更新</value>
+  </data>
 </root>
