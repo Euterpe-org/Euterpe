@@ -13,6 +13,4 @@ public class DifficultyFilter : MenuItem
         get => GetValue(IsCheckedProperty);
         set => SetValue(IsCheckedProperty, value);
     }
-
-    protected override Type StyleKeyOverride => typeof(MenuItem);
 }
