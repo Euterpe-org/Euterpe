@@ -1,154 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
+    <xsd:element name="root" msdata:IsDataSet="true">
 
         </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>1.3</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="XAML_UserDataFolder" xml:space="preserve">
+  </resheader>
+  <data name="XAML_UserDataFolder" xml:space="preserve">
         <value>Carpeta de\najustes local</value>
     </data>
-    <data name="XAML_Check_Update" xml:space="preserve">
+  <data name="XAML_ReportBug" xml:space="preserve">
+        <value>Report Bug</value>
+    </data>
+  <data name="XAML_Check_Update" xml:space="preserve">
         <value>Comprobar actualización</value>
     </data>
-    <data name="XAML_Analyze" xml:space="preserve">
+  <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github Mirror</value>
+    </data>
+  <data name="XAML_Analyze" xml:space="preserve">
         <value>Analizar\neste log</value>
     </data>
-    <data name="XAML_Apply" xml:space="preserve">
+  <data name="XAML_Apply" xml:space="preserve">
         <value>Aplicar</value>
     </data>
-    <data name="XAML_AskType_Always" xml:space="preserve">
+  <data name="XAML_AskType_Always" xml:space="preserve">
         <value>Preguntar primero</value>
     </data>
-    <data name="XAML_AskType_Yes" xml:space="preserve">
+  <data name="XAML_AskType_No" xml:space="preserve">
+        <value>No</value>
+    </data>
+  <data name="XAML_AskType_Yes" xml:space="preserve">
         <value>Sí</value>
     </data>
-    <data name="XAML_ChangePath" xml:space="preserve">
+  <data name="XAML_ChangePath" xml:space="preserve">
         <value>Modificar carpeta</value>
     </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
+  <data name="XAML_DownloadPrerelease" xml:space="preserve">
         <value>Descargar versión de pre-estable: </value>
     </data>
-    <data name="XAML_DownloadSource" xml:space="preserve">
+  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+  <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+  <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Descarga Oficial:</value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+  <data name="XAML_All" xml:space="preserve">
         <value>Mostrar todo</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+  <data name="XAML_Enabled" xml:space="preserve">
         <value>Activo</value>
     </data>
-    <data name="XAML_Font" xml:space="preserve">
+  <data name="XAML_Font" xml:space="preserve">
         <value>Fuente:</value>
     </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
+  <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>¡Ayuda a traducir!</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
+  <data name="XAML_HomePage" xml:space="preserve">
         <value>Más información</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+  <data name="XAML_Installed" xml:space="preserve">
         <value>Instalado</value>
     </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
+  <data name="XAML_Incompatible" xml:space="preserve">
+        <value>Incompatible</value>
+    </data>
+  <data name="XAML_Install_MelonLoader" xml:space="preserve">
         <value>Instalar\nMelonLoader</value>
     </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
+  <data name="XAML_Install_Mod" xml:space="preserve">
         <value>Instalar</value>
     </data>
-    <data name="XAML_Language" xml:space="preserve">
+  <data name="XAML_Language" xml:space="preserve">
         <value>Idioma: </value>
     </data>
-    <data name="XAML_LogFolder" xml:space="preserve">
+  <data name="XAML_LogFolder" xml:space="preserve">
         <value>Ir a mi Log</value>
     </data>
-    <data name="XAML_ModsFolder" xml:space="preserve">
+  <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Carpeta de\nmods</value>
     </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
+  <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
         <value>Todas</value>
     </data>
-    <data name="XAML_Mod_Dependencies" xml:space="preserve">
+  <data name="XAML_Mod_Dependencies" xml:space="preserve">
         <value>Dependencias:</value>
     </data>
-    <data name="XAML_Mod_Description" xml:space="preserve">
+  <data name="XAML_Mod_Description" xml:space="preserve">
         <value>{0} \n\nAutor: {1} \nUltima versión: {2} \nVersiones de Muse Dash compatibles: {3}</value>
     </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
+  <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>Duplicado de:</value>
     </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
+  <data name="XAML_Mod_Incompatible" xml:space="preserve">
         <value>El mod {0} v{1}, no es compatible con tu versión actual de Muse Dash</value>
     </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
+  <data name="XAML_Mod_Modified" xml:space="preserve">
         <value>Versión instalada: {0} (Modificado)</value>
     </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
+  <data name="XAML_Mod_Newer" xml:space="preserve">
         <value>Versión instalada: {0} (MODO DESARROLLADOR)</value>
     </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
+  <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>Versión instalada: {0}</value>
     </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
+  <data name="XAML_Tab_About" xml:space="preserve">
+        <value>About</value>
+    </data>
+  <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Versión instalada: {0} (Nueva versión disponible: {1})</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+  <data name="XAML_Outdated" xml:space="preserve">
         <value>Desactualizado</value>
     </data>
-    <data name="XAML_Path" xml:space="preserve">
+  <data name="XAML_Path" xml:space="preserve">
         <value>Carpeta de Muse Dash</value>
     </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
+  <data name="XAML_Reinstall_Mod" xml:space="preserve">
         <value>Reinstalar</value>
     </data>
-    <data name="XAML_Mod_SearchBar" xml:space="preserve">
+  <data name="XAML_Mod_SearchBar" xml:space="preserve">
         <value>Buscar mods (Nombre, Autor, Descripción)</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
         <value>Desactivar dependencia al eliminar un Mod</value>
     </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
         <value>Desactivar dependencia al desactivar un Mod</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
         <value>Activar dependencias al activar un Mod</value>
     </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
         <value>Activar dependencias al instalar un Mod</value>
     </data>
-    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
+  <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
         <value>Analizar</value>
     </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
+  <data name="XAML_Tab_ModManage" xml:space="preserve">
+        <value>Mods</value>
+    </data>
+  <data name="XAML_Tab_Setting" xml:space="preserve">
         <value>Ajustes</value>
     </data>
-    <data name="XAML_TroubleShoot" xml:space="preserve">
+  <data name="XAML_TroubleShoot" xml:space="preserve">
         <value>Reportar un\nproblema</value>
     </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
+  <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
         <value>Remover\nMelonLoader</value>
     </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
+  <data name="XAML_Uninstall_Mod" xml:space="preserve">
         <value>Desinstalar</value>
     </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
+  <data name="XAML_Update_Mod" xml:space="preserve">
         <value>Actualizar</value>
     </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
+  <data name="XAML_DownloadSource_Custom" xml:space="preserve">
+        <value>Custom</value>
+    </data>
+  <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
+        <value>Provide the link of custom download source</value>
+    </data>
+  <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
+        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
+    </data>
+  <data name="XAML_Tab_ChartDownload" xml:space="preserve">
+        <value>Charts</value>
+    </data>
+  <data name="XAML_Chart_SearchBar" xml:space="preserve">
+        <value>Search Charts (Name, Author, Charter)</value>
+    </data>
+  <data name="XAML_Download_Chart" xml:space="preserve">
+        <value>Download</value>
+    </data>
+  <data name="XAML_Chart_Downloads" xml:space="preserve">
+        <value>Downloads: </value>
+    </data>
+  <data name="XAML_Chart_Likes" xml:space="preserve">
+        <value>Likes: </value>
+    </data>
+  <data name="XAML_Charter" xml:space="preserve">
+        <value>Charter: </value>
+    </data>
+  <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
+        <value>Open Custom_Albums Folder</value>
+    </data>
+  <data name="XAML_ChartSortOptions" xml:space="preserve">
+        <value>Sort by: </value>
+    </data>
+  <data name="XAML_ChartFilterTypes" xml:space="preserve">
+        <value>Filter by</value>
+    </data>
+  <data name="XAML_ChartSortOption_Default" xml:space="preserve">
+        <value>Default</value>
+    </data>
+  <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
+        <value>Likes</value>
+    </data>
+  <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
+        <value>Downloads</value>
+    </data>
+  <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
+        <value>Latest</value>
+    </data>
+  <data name="XAML_ChartSortOption_Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+  <data name="XAML_ChartSortOption_Level" xml:space="preserve">
+        <value>Level</value>
+    </data>
+  <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
+        <value>Easy</value>
+    </data>
+  <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
+        <value>Hard</value>
+    </data>
+  <data name="XAML_ChartFilterType_Master" xml:space="preserve">
+        <value>Master</value>
+    </data>
+  <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
+        <value>Hidden</value>
+    </data>
+  <data name="XAML_SearchBar" xml:space="preserve">
         <value>Buscar mods (Nombre, Autor, Descripción)</value>
     </data>
 </root>
