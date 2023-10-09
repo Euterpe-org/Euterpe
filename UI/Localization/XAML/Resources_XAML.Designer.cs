@@ -69,7 +69,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analyzing Log.
+        ///   Looks up a localized string similar to Analyze Log.
         /// </summary>
         internal static string XAML_Analyze {
             get {
@@ -285,7 +285,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository)\nTake effect after restarting app.
+        ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app.
         /// </summary>
         internal static string XAML_CustomDownloadSourceFormat {
             get {
@@ -582,7 +582,16 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable dependency when deleting Mod.
+        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
+        /// </summary>
+        internal static string XAML_SearchBar {
+            get {
+                return ResourceManager.GetString("XAML_SearchBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable dependents when deleting Mod.
         /// </summary>
         internal static string XAML_Setting_DisableDependency_Delete {
             get {
@@ -591,7 +600,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable dependency when disabling Mod.
+        ///   Looks up a localized string similar to Disable dependents when disabling Mod.
         /// </summary>
         internal static string XAML_Setting_DisableDependency_Disable {
             get {
@@ -600,7 +609,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable dependency when enabling Mod.
+        ///   Looks up a localized string similar to Enable dependencies when enabling Mod.
         /// </summary>
         internal static string XAML_Setting_EnableDependency_Enable {
             get {
@@ -609,7 +618,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable dependency when installing Mod.
+        ///   Looks up a localized string similar to Enable dependencies when installing Mod.
         /// </summary>
         internal static string XAML_Setting_EnableDependency_Install {
             get {
@@ -663,7 +672,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trouble Shoot.
+        ///   Looks up a localized string similar to Troubleshoot.
         /// </summary>
         internal static string XAML_TroubleShoot {
             get {
