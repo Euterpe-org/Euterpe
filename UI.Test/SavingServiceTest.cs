@@ -40,7 +40,7 @@ public class SavingServiceTest
         {
             LocalService = new Mock<ILocalService>().Object,
             MessageBoxService = new Mock<IMessageBoxService>().Object,
-            SerializeService = new SerializeService(),
+            SerializationService = new SerializationService(),
             UpdateUIService = new Mock<IUpdateUIService>().Object
         };
         await savingService.InitializeSettings();

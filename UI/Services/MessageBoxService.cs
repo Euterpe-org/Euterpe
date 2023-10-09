@@ -53,7 +53,7 @@ public partial class MessageBoxService : IMessageBoxService
             .GetMessageBoxCustom(new MessageBoxCustomParams
             {
                 ContentTitle = title,
-                ContentMessage = content,
+                ContentMessage = content.NormalizeNewline(),
                 ButtonDefinitions = buttonDefinitions,
                 Icon = icon,
                 CanResize = true,

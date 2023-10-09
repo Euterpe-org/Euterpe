@@ -13,11 +13,16 @@ public class Setting
     public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(BuildInfo.Version);
     public bool DownloadPrerelease { get; set; }
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
+    public string? CustomDownloadSource { get; set; }
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenEnabling { get; set; } = AskType.Always;
     public AskType AskDisableDependenciesWhenDeleting { get; set; } = AskType.Always;
     public AskType AskDisableDependenciesWhenDisabling { get; set; } = AskType.Always;
+
+    [JsonIgnore]
+    public string CustomAlbumsFolder =>
+        !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "Custom_Albums") : string.Empty;
 
     [JsonIgnore]
     public string MuseDashExePath =>
@@ -51,5 +56,6 @@ public enum DownloadSources
 {
     Github,
     GithubMirror,
-    Gitee
+    Gitee,
+    Custom
 }

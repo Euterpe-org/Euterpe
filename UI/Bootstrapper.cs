@@ -18,6 +18,7 @@ public static class Bootstrapper
         builder.RegisterInstance(new HttpClient());
 
         // Services
+        builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
         builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
@@ -27,7 +28,7 @@ public static class Bootstrapper
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<SerializeService>().As<ISerializeService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SerializationService>().As<ISerializationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
 
         // Platform Service
@@ -41,6 +42,7 @@ public static class Bootstrapper
 
         // View Models
         builder.RegisterType<AboutViewModel>().As<IAboutViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<ChartDownloadViewModel>().As<IChartDownloadViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();

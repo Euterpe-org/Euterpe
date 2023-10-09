@@ -28,10 +28,35 @@
         <EmbeddedResource Remove="Mods\**"/>
         <None Remove="Mods\**"/>
         <None Remove=".gitignore"/>
-        <EmbeddedResource Update="Localization\Resources.resx">
+
+        <!--Localization Files-->
+        <EmbeddedResource Update="Localization\XAML\Resources_XAML.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources_XAML.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Update="Localization\XAML\Resources_XAML.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources_XAML.resx</DependentUpon>
+        </Compile>
+        <EmbeddedResource Update="Localization\Resources\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <Compile Update="Localization\Resources\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <EmbeddedResource Update="Localization\MsgBox\Resources_MsgBox.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources_MsgBox.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Update="Localization\MsgBox\Resources_MsgBox.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources_MsgBox.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -52,7 +77,7 @@
         <PackageReference Include="DialogHost.Avalonia" Version="0.7.7"/>
         <PackageReference Include="JetBrains.Annotations" Version="2023.2.0"/>
         <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1"/>
-        <PackageReference Include="Material.Avalonia" Version="3.0.1"/>
+        <PackageReference Include="Material.Avalonia" Version="3.0.1.39-nightly"/>
         <PackageReference Include="MessageBox.Avalonia" Version="3.1.4"/>
         <PackageReference Include="NuGet.Versioning" Version="6.7.0"/>
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Analyzers" Version="4.5.0">
@@ -63,7 +88,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Serilog" Version="3.0.2-dev-02056"/>
+        <PackageReference Include="Serilog" Version="3.1.0-dev-02072"/>
         <PackageReference Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00968"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
