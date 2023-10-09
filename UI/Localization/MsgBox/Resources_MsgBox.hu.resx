@@ -29,7 +29,7 @@
         <value>Igen</value>
     </data>
     <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
-        <value>A letöltött modjaid érvénytelenek\nHa van 0KB-os mod, akkor azt töröld ki\n{0}</value>
+        <value>A letöltött modjaid hibásak\nHa van 0KB-os mod, akkor azt töröld ki\n{0}</value>
     </data>
     <data name="MsgBox_Button_YesNoAsk" xml:space="preserve">
         <value>Igen és ne kérdezd újra</value>
@@ -56,16 +56,16 @@
         <value>Updater másolása sikertelen\n{0}</value>
     </data>
     <data name="MsgBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-        <value>Nem sikerült kitörölni MelonLoader.zip-et\n{0}\nHiba:{1}\nProbáld meg manuálisan</value>
+        <value>Nem sikerült kitörölni MelonLoader.zip-et itt:\n{0}\nHiba:{1}\nProbáld meg manuálisan</value>
     </data>
     <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
-        <value>{0} az a(z) {1}-nek a függősége\nBiztos hogy ki akarod törölni?</value>
+        <value>{1} függ a(z) {0} mod-tól\nBiztos hogy ki akarod törölni?</value>
     </data>
     <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
         <value>Ki akarod kapcsolni a(z) {0}-ra függő modokat?</value>
     </data>
     <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
-        <value>{0} az a(z) {1}-nek a függősége\nBiztos hogy ki akarod kapcsolni?</value>
+        <value>{1} függ a(z) {0} mod-tól\nBiztos hogy ki akarod kapcsolni?</value>
     </data>
     <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
         <value>Manuálisan válaszd ki és töröld ki a duplikált modot\n{0}</value>
@@ -83,7 +83,7 @@
         <value>Egyik forrásból sem sikerült lekérni a mod-listát</value>
     </data>
     <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
-        <value>Rossz MelonLoader verzió van telepítve: {0}\nHasználd a gombot a főoldalon a gombot MelonLoader 0.5.7 telepítésére</value>
+        <value>Rossz MelonLoader verzió van telepítve: {0}\nHasználd a gombot a főoldalon a MelonLoader 0.5.7 telepítésére</value>
     </data>
     <data name="MsgBox_Content_IncorrectVersion" xml:space="preserve">
         <value>MuseDash.exe az nem a megfelelő verzión van\nNem szeretjük ám a kalózokat :)</value>
@@ -92,7 +92,7 @@
         <value>Függőség {0} telepítése sikertelen\n{1}</value>
     </data>
     <data name="MsgBox_Content_InstallMelonLoader" xml:space="preserve">
-        <value>Nincsen a MelonLoader telepítve,\namely szükséges modok telepítéséhez\nTelepíted most?</value>
+        <value>Nincsen a MelonLoader telepítve,\namely szükséges modok futtatásához\nTelepíted most?</value>
     </data>
     <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
         <value>MelonLoader letöltés sikertelen\n{0}</value>
@@ -194,10 +194,10 @@
         <value>{0} sikeresen eltávolítva\n</value>
     </data>
     <data name="MsgBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
-        <value>Nem sikerült kicsomagolni MelonLoader.zip-et\n{0}\nHiba:{1}\nProbáld meg manuálisan</value>
+        <value>Nem sikerült kicsomagolni MelonLoader.zip-et\n{0}\nHiba: {1}\nProbáld meg manuálisan</value>
     </data>
     <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
-        <value>Az Updater nem található\nEllenőrizd a telepítésed</value>
+        <value>Az Updater nem található\nEllenőrizd a telepítésed és az antivírusod</value>
     </data>
     <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
         <value>Elemzés sikeres</value>

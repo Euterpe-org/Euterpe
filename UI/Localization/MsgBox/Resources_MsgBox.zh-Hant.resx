@@ -38,7 +38,7 @@
         <value>Mod 啟用/禁用失敗\n{0}</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-        <value>Mod 啟用/禁用失敗。遊戲是否正執行? \n{0}}</value>
+        <value>Mod 啟用/禁用失敗。遊戲是否正執行? \n{0}</value>
     </data>
     <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
         <value>Mod 啟用/禁用失敗。沒有權限\n{0}</value>

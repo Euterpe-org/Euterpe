@@ -157,4 +157,7 @@
     <data name="XAML_Update_Mod" xml:space="preserve">
         <value>Обновить</value>
     </data>
+    <data name="XAML_SearchBar" xml:space="preserve">
+        <value>Искать моды (Имя, Автор, Описания)</value>
+    </data>
 </root>

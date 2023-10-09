@@ -148,4 +148,7 @@
     <data name="XAML_Update_Mod" xml:space="preserve">
         <value>Actualizar</value>
     </data>
+    <data name="XAML_SearchBar" xml:space="preserve">
+        <value>Buscar mods (Nombre, Autor, Descripción)</value>
+    </data>
 </root>

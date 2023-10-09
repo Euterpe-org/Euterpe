@@ -160,4 +160,7 @@
     <data name="XAML_Update_Mod" xml:space="preserve">
         <value>更新</value>
     </data>
+    <data name="XAML_SearchBar" xml:space="preserve">
+        <value>搜尋模組    (名字,   作者,  描述)</value>
+    </data>
 </root>

@@ -96,7 +96,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your downloaded mods are broken\nPlease delete 0KB mod if it exist, then restart the application\n{0}.
+        ///   Looks up a localized string similar to Your downloaded mods are broken\nPlease delete 0KB mods if they exist, then restart the application\n{0}.
         /// </summary>
         internal static string MsgBox_Content_BrokenMods {
             get {
@@ -150,7 +150,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You haven&apos;t choose Muse Dash Folder\nPlease choose the folder.
+        ///   Looks up a localized string similar to You haven&apos;t chosen a Muse Dash Folder\nPlease choose the folder.
         /// </summary>
         internal static string MsgBox_Content_ChoosePath {
             get {
@@ -168,7 +168,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to delete MelonLoader.zip in\n{0}\nError:{1}\nTry manually delete.
+        ///   Looks up a localized string similar to Failed to delete MelonLoader.zip in\n{0}\nError:{1}\nTry to manually delete.
         /// </summary>
         internal static string MsgBox_Content_DeleteMelonLoaderZipFailed {
             get {
@@ -195,7 +195,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to disable the mods depend on {0}?.
+        ///   Looks up a localized string similar to Do you want to disable the mods dependent on {0}?.
         /// </summary>
         internal static string MsgBox_Content_DisableReverseDependency {
             get {
@@ -249,7 +249,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash\musedash.exe&quot;\nAre you using pirate version?.
+        ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash\musedash.exe&quot;\nAre you using a pirated version?.
         /// </summary>
         internal static string MsgBox_Content_GamePathError {
             get {
@@ -267,7 +267,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have incorrect MelonLoader version installed: {0}\nPlease use the button in ModManage window to install MelonLoader 0.5.7.
+        ///   Looks up a localized string similar to You have an incorrect MelonLoader version installed: {0}\nPlease use the button in the ModManage window to install MelonLoader 0.5.7.
         /// </summary>
         internal static string MsgBox_Content_IncorrectMelonLoaderVersion {
             get {
@@ -276,7 +276,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MuseDash.exe is not correct version \nAre you using a pirated or modified version?.
+        ///   Looks up a localized string similar to MuseDash.exe is not the correct version \nAre you using a pirated or modified version?.
         /// </summary>
         internal static string MsgBox_Content_IncorrectVersion {
             get {
@@ -294,7 +294,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You did not install MelonLoader\nWhich is needed to run all the mods\nInstall Now?.
+        ///   Looks up a localized string similar to You did not install MelonLoader\nThis is needed to run all the mods\nInstall Now?.
         /// </summary>
         internal static string MsgBox_Content_InstallMelonLoader {
             get {
@@ -366,7 +366,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You don&apos;t have MuseDashModTools mod installed\nWhich checks available update for all the mods when launching Muse Dash\nInstall Now?.
+        ///   Looks up a localized string similar to You don&apos;t have MuseDashModTools mod installed\nThis checks for available updates to all the mods when launching Muse Dash\nInstall Now?.
         /// </summary>
         internal static string MsgBox_Content_InstallModTools {
             get {
@@ -393,7 +393,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check update success\nYou are using the latest version of Muse Dash Mod Tools.
+        ///   Looks up a localized string similar to Update check successful\nYou are using the latest version of Muse Dash Mod Tools.
         /// </summary>
         internal static string MsgBox_Content_LatestVersion {
             get {
@@ -402,7 +402,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log analysis completed, no obvious errors are found in your log file\nIf you still have issues please go to trouble shoot channel.
+        ///   Looks up a localized string similar to Log analysis completed, no obvious errors are found in your log file\nIf you still have issues please go to troubleshoot channel.
         /// </summary>
         internal static string MsgBox_Content_LogAnalyzeComplete {
             get {
@@ -429,7 +429,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot find purchase record for Muse Dash&apos;s DLC\nYou have to buy it in order to play custom chart.
+        ///   Looks up a localized string similar to Cannot find purchase record for Muse Dash&apos;s DLC\nYou have to buy it in order to play custom charts.
         /// </summary>
         internal static string MsgBox_Content_NoDlcPurchased {
             get {
@@ -447,7 +447,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Couldn&apos;t find MuseDash.exe or GameAssembly.dll\nPlease choose the right folder.
+        ///   Looks up a localized string similar to Couldn&apos;t find MuseDash.exe and/or GameAssembly.dll\nPlease choose the right folder.
         /// </summary>
         internal static string MsgBox_Content_NoExeFound {
             get {
@@ -456,7 +456,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot verify you have bought the game on Steam\nAre you using pirate version?.
+        ///   Looks up a localized string similar to Cannot verify that you have bought the game on Steam\nAre you using a pirated version?.
         /// </summary>
         internal static string MsgBox_Content_NoInstallRecord {
             get {
@@ -519,7 +519,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot read current game version\nDo you fully installed Muse Dash?\nPlease check your globalgamemanagers file in\n{0}.
+        ///   Looks up a localized string similar to Cannot read current game version\nIs your Muse Dash installation complete?\nPlease check your globalgamemanagers file in\n{0}.
         /// </summary>
         internal static string MsgBox_Content_ReadGameVersionFailed {
             get {
@@ -528,7 +528,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have not registered Headquarters Mod\nPlease register in #bot-commands channel in MDMC discord.
+        ///   Looks up a localized string similar to You have not registered for Headquarters\nPlease register in #bot-commands channel in MDMC discord or mdmc.moe website.
         /// </summary>
         internal static string MsgBox_Content_RegisterHQ {
             get {
@@ -609,7 +609,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot unzip MelonLoader.zip in\n{0}\nError:{1}\nTry manually unzip?.
+        ///   Looks up a localized string similar to Cannot unzip MelonLoader.zip in\n{0}\nError:{1}\nTry to manually unzip?.
         /// </summary>
         internal static string MsgBox_Content_UnzipMelonLoaderFailed {
             get {
@@ -618,7 +618,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot find Updater\nPlease make sure you have downloaded full software.
+        ///   Looks up a localized string similar to Cannot find Updater\nPlease make sure you have downloaded full software,\nand check your antivirus.
         /// </summary>
         internal static string MsgBox_Content_UpdaterNotFound {
             get {
@@ -627,7 +627,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analyze Success.
+        ///   Looks up a localized string similar to Analysis successful.
         /// </summary>
         internal static string MsgBox_Title_AnalyzeSuccess {
             get {

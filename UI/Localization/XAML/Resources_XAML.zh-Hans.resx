@@ -232,4 +232,7 @@
     <data name="XAML_ChartFilterType_Master" xml:space="preserve">
         <value>大触</value>
     </data>
+    <data name="XAML_SearchBar" xml:space="preserve">
+        <value>搜索模组    （名字，作者，描述）</value>
+    </data>
 </root>

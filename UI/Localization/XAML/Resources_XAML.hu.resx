@@ -104,7 +104,7 @@
         <value>Helyi verzió: {0} (ATYA ÚRISTEN, ÖN FEJLESZTŐ?!)</value>
     </data>
     <data name="XAML_Mod_Normal" xml:space="preserve">
-        <value>Hely verzió: {0}</value>
+        <value>Helyi verzió: {0}</value>
     </data>
     <data name="XAML_Tab_About" xml:space="preserve">
         <value>A projektről</value>
@@ -125,10 +125,10 @@
         <value>Keresés</value>
     </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>Függőségek kikapcsolása mod törlésekor</value>
+        <value>Függő modok kikapcsolása mod törlésekor</value>
     </data>
     <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>Függőségek kikapcsolása mod kikapcsolásakor</value>
+        <value>Függő modok kikapcsolása mod kikapcsolásakor</value>
     </data>
     <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
         <value>Függőségek bekapcsolása mod bekapcsolásakor</value>
@@ -146,7 +146,7 @@
         <value>Beállítások</value>
     </data>
     <data name="XAML_TroubleShoot" xml:space="preserve">
-        <value>Hibakezelés</value>
+        <value>Hibakeresés</value>
     </data>
     <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
         <value>MelonLoader\nEltávolítása</value>
@@ -156,5 +156,32 @@
     </data>
     <data name="XAML_Update_Mod" xml:space="preserve">
         <value>Frissítés</value>
+    </data>
+    <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
+        <value>A linknek "/"-el kell végződnie, emellett elérhetőnek és értelemezhetőnek kell lennie úgy, hogy ha "ModLinks.json" van a végéhez fűzve (Ugyanaz mint egy GitHub projekt felépítése)\nÚjraindítás után lép életbe</value>
+    </data>
+    <data name="XAML_DownloadSource_Custom" xml:space="preserve">
+        <value>Egyéni forrás</value>
+    </data>
+    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+        <value>Gitee</value>
+    </data>
+    <data name="XAML_DownloadSource_Github" xml:space="preserve">
+        <value>Github</value>
+    </data>
+    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+        <value>Github tükörlink</value>
+    </data>
+    <data name="XAML_ReportBug" xml:space="preserve">
+        <value>Hibajelentés</value>
+    </data>
+    <data name="XAML_SearchBar" xml:space="preserve">
+        <value>Keresés</value>
+    </data>
+    <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
+        <value>Add meg az egyéni forrás linkjét</value>
+    </data>
+    <data name="XAML_UserDataFolder" xml:space="preserve">
+        <value>UserData</value>
     </data>
 </root>
