@@ -23,7 +23,7 @@
         <value>使用者文件</value>
     </data>
   <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
+        <value>回報Bug</value>
     </data>
   <data name="XAML_Check_Update" xml:space="preserve">
         <value>檢查更新</value>
@@ -122,7 +122,7 @@
         <value>你的版本: {0}</value>
     </data>
   <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
+        <value>關於</value>
     </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>你的版本: {0} (有新版本: {1})</value>
@@ -173,70 +173,70 @@
         <value>更新</value>
     </data>
   <data name="XAML_DownloadSource_Custom" xml:space="preserve">
-        <value>Custom</value>
+        <value>自訂義</value>
     </data>
   <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-        <value>Provide the link of custom download source</value>
+        <value>填寫一個自訂義的下載連結</value>
     </data>
   <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
+        <value>連接必須以''/''結尾,並且在連接後面加上''ModLinks.json''後必須可以訪問並解析 (即Github倉庫同樣結構) \n重啟應用生效</value>
     </data>
   <data name="XAML_Tab_ChartDownload" xml:space="preserve">
-        <value>Charts</value>
+        <value>譜面</value>
     </data>
   <data name="XAML_Chart_SearchBar" xml:space="preserve">
-        <value>Search Charts (Name, Author, Charter)</value>
+        <value>搜索譜面 (名稱，曲師，譜師)</value>
     </data>
   <data name="XAML_Download_Chart" xml:space="preserve">
-        <value>Download</value>
+        <value>下載</value>
     </data>
   <data name="XAML_Chart_Downloads" xml:space="preserve">
-        <value>Downloads: </value>
+        <value>下載次數: </value>
     </data>
   <data name="XAML_Chart_Likes" xml:space="preserve">
-        <value>Likes: </value>
+        <value>喜歡數: </value>
     </data>
   <data name="XAML_Charter" xml:space="preserve">
-        <value>Charter: </value>
+        <value>譜師: </value>
     </data>
   <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
-        <value>Open Custom_Albums Folder</value>
+        <value>打開自製譜文件夾</value>
     </data>
   <data name="XAML_ChartSortOptions" xml:space="preserve">
-        <value>Sort by: </value>
+        <value>排序: </value>
     </data>
   <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>Filter by</value>
+        <value>篩選</value>
     </data>
   <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>預設</value>
     </data>
   <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-        <value>Likes</value>
+        <value>喜歡次數</value>
     </data>
   <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-        <value>Downloads</value>
+        <value>下載</value>
     </data>
   <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-        <value>Latest</value>
+        <value>最新</value>
     </data>
   <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-        <value>Name</value>
+        <value>名稱</value>
     </data>
   <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-        <value>Level</value>
+        <value>等級</value>
     </data>
   <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
-        <value>Easy</value>
+        <value>萌新</value>
     </data>
   <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
-        <value>Hard</value>
+        <value>高手</value>
     </data>
   <data name="XAML_ChartFilterType_Master" xml:space="preserve">
-        <value>Master</value>
+        <value>大觸</value>
     </data>
   <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
-        <value>Hidden</value>
+        <value>隱藏</value>
     </data>
   <data name="XAML_SearchBar" xml:space="preserve">
         <value>搜尋模組    (名字,   作者,  描述)</value>

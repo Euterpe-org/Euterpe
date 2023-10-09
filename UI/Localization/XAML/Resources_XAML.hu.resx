@@ -182,61 +182,61 @@
         <value>A linknek "/"-el kell végződnie, emellett elérhetőnek és értelemezhetőnek kell lennie úgy, hogy ha "ModLinks.json" van a végéhez fűzve (Ugyanaz mint egy GitHub projekt felépítése)\nÚjraindítás után lép életbe</value>
     </data>
   <data name="XAML_Tab_ChartDownload" xml:space="preserve">
-        <value>Charts</value>
+        <value>Zenék</value>
     </data>
   <data name="XAML_Chart_SearchBar" xml:space="preserve">
-        <value>Search Charts (Name, Author, Charter)</value>
+        <value>Keresés</value>
     </data>
   <data name="XAML_Download_Chart" xml:space="preserve">
-        <value>Download</value>
+        <value>Letöltés</value>
     </data>
   <data name="XAML_Chart_Downloads" xml:space="preserve">
-        <value>Downloads: </value>
+        <value>Letöltések: </value>
     </data>
   <data name="XAML_Chart_Likes" xml:space="preserve">
-        <value>Likes: </value>
+        <value>Lájkok: </value>
     </data>
   <data name="XAML_Charter" xml:space="preserve">
-        <value>Charter: </value>
+        <value>Készítő: </value>
     </data>
   <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
-        <value>Open Custom_Albums Folder</value>
+        <value>Custom_Albums mappa</value>
     </data>
   <data name="XAML_ChartSortOptions" xml:space="preserve">
-        <value>Sort by: </value>
+        <value>Rendezés: </value>
     </data>
   <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>Filter by</value>
+        <value>Szűrés</value>
     </data>
   <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>Alapértelmezett</value>
     </data>
   <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-        <value>Likes</value>
+        <value>Lájkok</value>
     </data>
   <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-        <value>Downloads</value>
+        <value>Letöltések</value>
     </data>
   <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-        <value>Latest</value>
+        <value>Legújabb</value>
     </data>
   <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Név</value>
     </data>
   <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-        <value>Level</value>
+        <value>Nehézség</value>
     </data>
   <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
-        <value>Easy</value>
+        <value>Könnyű</value>
     </data>
   <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
-        <value>Hard</value>
+        <value>Nehéz</value>
     </data>
   <data name="XAML_ChartFilterType_Master" xml:space="preserve">
-        <value>Master</value>
+        <value>Mester</value>
     </data>
   <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
-        <value>Hidden</value>
+        <value>Rejtett</value>
     </data>
   <data name="XAML_SearchBar" xml:space="preserve">
         <value>Keresés</value>

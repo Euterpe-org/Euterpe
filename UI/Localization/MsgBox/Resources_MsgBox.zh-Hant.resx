@@ -77,7 +77,7 @@
         <value>驗證Muse Dash.exe失敗\n請確認你選擇了正確的資料夾</value>
     </data>
   <data name="MsgBox_Content_GamePathError" xml:space="preserve">
-        <value>Your game path doesn't contain "steamapps\common\Muse Dash\musedash.exe"\nAre you using a pirated version?</value>
+        <value>你的遊戲路徑沒有包含 ''steamapps\common\Muse Dash\musedash.exe''\n 是否使用盜版?</value>
     </data>
   <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
         <value>無法從任一下載源獲取Mod列表</value>
@@ -119,7 +119,7 @@
         <value>你沒有安裝 MuseDashModTools 的 Mod\n每次開啟 Muse Dash 的時候會自動檢查 Mod 更新\n是否現在安裝?</value>
     </data>
   <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
-        <value>Detected Muse Dash folder path is {0}\nIs this the correct game folder?</value>
+        <value>檢測到的 Muse Dash 文件夾為 {0}\n 是否為正確的遊戲文件夾?</value>
     </data>
   <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
         <value>你選擇的位置無效，請再次選擇</value>
@@ -128,7 +128,7 @@
         <value>檢查更新成功\nMuse Dash Mod Tools 已經是最新版本\n</value>
     </data>
   <data name="MsgBox_Content_LogAnalyzeComplete" xml:space="preserve">
-        <value>Log analysis completed, no obvious errors are found in your log file\nIf you still have issues please go to troubleshoot channel</value>
+        <value>日誌分析完成, 尚未從日誌中發現明顯錯誤\n如果扔然有問題請至 trouble shoot 頻道詢問</value>
     </data>
   <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
         <value>有新版本的 Muse Dash Mod Tools （{0}）已經發布\n\n你想要現在就安裝嗎\n\n發布標題：\n{1}\n\n發布内容：\n{2}</value>
@@ -215,12 +215,12 @@
         <value>警告</value>
     </data>
   <data name="MsgBox_Content_DownloadChartFailed" xml:space="preserve">
-        <value>Chart download failed\n{0}</value>
+        <value>譜面下載失敗\n{0}</value>
     </data>
   <data name="MsgBox_Content_DownloadChartSuccess" xml:space="preserve">
-        <value>Chart {0} has been successfully downloaded\n</value>
+        <value>譜面 {0} 已成功下載\n</value>
     </data>
   <data name="MsgBox_Content_OverrideChart" xml:space="preserve">
-        <value>You have already downloaded the chart {0}\nContinue downloading and overriding the existing file?</value>
+        <value>你已經下載了這張圖譜 {0}\n是否要覆蓋檔案?</value>
     </data>
 </root>

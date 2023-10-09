@@ -20,34 +20,34 @@
         </value>
   </resheader>
   <data name="MsgBox_Button_No" xml:space="preserve">
-        <value>No</value>
+        <value>いいえ</value>
     </data>
   <data name="MsgBox_Button_NoNoAsk" xml:space="preserve">
-        <value>No and Don't Ask Again</value>
+        <value>いいえ、そして問い合わせないで</value>
     </data>
   <data name="MsgBox_Button_Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>はい</value>
     </data>
   <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
-        <value>Your downloaded mods are broken\nPlease delete 0KB mods if they exist, then restart the application\n{0}</value>
+        <value>あなたのダウンロードは問題があります\nもし0KBのModはあれば、削除して再起動する\n{0}</value>
     </data>
   <data name="MsgBox_Button_YesNoAsk" xml:space="preserve">
-        <value>Yes and Don't Ask Again</value>
+        <value>はい、そして問い合わせないで</value>
     </data>
   <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
-        <value>Mod enable/disable failed\n{0}</value>
+        <value>Mod 起動/禁止失敗\n{0}</value>
     </data>
   <data name="MsgBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-        <value>Mod enable/disable failed. Is the game running?\n{0}</value>
+        <value>Mod 起動/禁止失敗。　ゲームは動いていますか?\n{0}</value>
     </data>
   <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-        <value>Mod enable/disable failed. Unauthorized\n{0}</value>
+        <value>Mod 起動/禁止失敗。權限がいません\n{0}</value>
     </data>
   <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
-        <value>Checking updates failed\nAre you online?</value>
+        <value>アップロード検査失敗\nインターネット接続いますか？</value>
     </data>
   <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
-        <value>Choose correct Muse Dash folder first!</value>
+        <value>正しいのMuse Dashデータ選んでください！</value>
     </data>
   <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
         <value>You haven't chosen a Muse Dash Folder\nPlease choose the folder</value>
