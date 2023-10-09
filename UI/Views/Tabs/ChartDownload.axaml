@@ -13,7 +13,7 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="60,*" ColumnDefinitions="365,280,*,260">
+        <Grid RowDefinitions="80,*" ColumnDefinitions="365,280,*,260">
             <Grid.Styles>
                 <Style Selector="StackPanel>PathIcon">
                     <Setter Property="Width" Value="30" />
@@ -116,6 +116,7 @@
             <!--Custom Albums folder-->
             <Button Grid.Row="0" Grid.Column="3"
                     FontSize="16"
+                    Height="60"
                     Classes="dark"
                     Margin="10,0,20,0"
                     Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
@@ -204,6 +205,9 @@
                                     <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                                         <StackPanel.Styles>
                                             <Style Selector="StackPanel">
+                                                <Setter Property="Margin" Value="5,0" />
+                                            </Style>
+                                            <Style Selector="Image">
                                                 <Setter Property="Margin" Value="5,0" />
                                             </Style>
                                             <Style Selector="TextBlock">
