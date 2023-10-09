@@ -184,23 +184,31 @@
                          AcceptsReturn="False">
 
                     <TextBox.InnerRightContent>
-                        <Image Source="/Assets/magnify.png" Height="30" Width="30" />
+                        <PathIcon Data="{StaticResource Magnify}" Height="30" Width="30" />
                     </TextBox.InnerRightContent>
                 </TextBox>
             </controls:Card>
 
             <!--About-->
             <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0">
+
                 <MenuItem Width="50" Height="50">
+                    <MenuItem.Styles>
+                        <Style Selector="PathIcon">
+                            <Setter Property="Width" Value="25" />
+                            <Setter Property="Height" Value="25" />
+                        </Style>
+                    </MenuItem.Styles>
+
                     <MenuItem.Header>
-                        <Image Source="/Assets/dots_vertical.png" Width="40" Height="40" />
+                        <PathIcon Data="{StaticResource VerticalDots}" Width="40" Height="40" />
                     </MenuItem.Header>
 
                     <!--Check Update-->
                     <MenuItem Header="{ext:LocalizeExtensions XAML_Check_Update}"
                               Command="{Binding CheckUpdateCommand}">
                         <MenuItem.Icon>
-                            <Image Source="/Assets/update.png" />
+                            <PathIcon Data="{StaticResource Update}" />
                         </MenuItem.Icon>
                     </MenuItem>
 
@@ -209,7 +217,7 @@
                               Command="{Binding OpenUrlCommand}"
                               CommandParameter="https://crowdin.com/project/musedashmodtools">
                         <MenuItem.Icon>
-                            <Image Source="/Assets/translate.png" />
+                            <PathIcon Data="{StaticResource Translate}" />
                         </MenuItem.Icon>
                     </MenuItem>
 
@@ -218,7 +226,7 @@
                               Command="{Binding OpenUrlCommand}"
                               CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose">
                         <MenuItem.Icon>
-                            <Image Source="/Assets/bug.png" />
+                            <PathIcon Data="{StaticResource Bug}" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>

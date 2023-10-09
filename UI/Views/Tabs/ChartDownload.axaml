@@ -15,7 +15,7 @@
     <controls:Card>
         <Grid RowDefinitions="60,*" ColumnDefinitions="365,280,*,280">
             <Grid.Styles>
-                <Style Selector="StackPanel>Image">
+                <Style Selector="StackPanel>PathIcon">
                     <Setter Property="Width" Value="30" />
                     <Setter Property="Height" Value="30" />
                 </Style>
@@ -46,14 +46,14 @@
                 </TextBox.Styles>
 
                 <TextBox.InnerRightContent>
-                    <Image Source="/Assets/magnify.png" Height="30" Width="30" />
+                    <PathIcon Data="{StaticResource Magnify}" Height="30" Width="30" />
                 </TextBox.InnerRightContent>
             </TextBox>
 
             <!--Sort Options-->
             <StackPanel Grid.Row="0" Grid.Column="1">
 
-                <Image Source="/Assets/sort.png" Margin="0,0,10,0" />
+                <PathIcon Data="{StaticResource Sort}" Margin="0,0,10,0" />
 
                 <TextBlock FontSize="20"
                            Text="{ext:LocalizeExtensions XAML_ChartSortOptions}"
@@ -71,7 +71,7 @@
                 <MenuItem>
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/filter.png" Margin="0,0,5,0" />
+                            <PathIcon Data="{StaticResource Filter}" Margin="0,0,5,0" />
                             <TextBlock Text="{ext:LocalizeExtensions XAML_ChartFilterTypes}"
                                        VerticalAlignment="Center" />
                         </StackPanel>
@@ -141,7 +141,7 @@
                                         <Style Selector="StackPanel">
                                             <Setter Property="Orientation" Value="Horizontal" />
                                         </Style>
-                                        <Style Selector="StackPanel>Image">
+                                        <Style Selector="StackPanel>PathIcon">
                                             <Setter Property="Width" Value="25" />
                                             <Setter Property="Height" Value="25" />
                                             <Setter Property="VerticalAlignment" Value="Center" />
@@ -187,9 +187,9 @@
                                                MinHeight="30"
                                                Margin="0,5">
 
-                                        <Image Height="30" Width="30"
-                                               Margin="0,0,5,0"
-                                               Source="/Assets/charter.png" />
+                                        <PathIcon Height="30" Width="30"
+                                                  Margin="0,0,5,0"
+                                                  Data="{StaticResource Charter}" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Charter}" />
                                         <TextBlock Text="{Binding Charter}"
                                                    TextTrimming="WordEllipsis" />
@@ -232,14 +232,14 @@
 
                                     <!--Likes-->
                                     <StackPanel Grid.Row="4" Grid.Column="0">
-                                        <Image Source="/Assets/like.png" />
+                                        <PathIcon Data="{StaticResource Heart}" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Likes}" />
                                         <TextBlock Text="{Binding Analytics.LikesCount}" />
                                     </StackPanel>
 
                                     <!--Downloads-->
                                     <StackPanel Grid.Row="4" Grid.Column="1">
-                                        <Image Source="/Assets/download.png" />
+                                        <PathIcon Data="{StaticResource Download}" />
                                         <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Downloads}" />
                                         <TextBlock Text="{Binding Analytics.Downloads}" />
                                     </StackPanel>
