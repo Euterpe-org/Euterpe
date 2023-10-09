@@ -139,7 +139,7 @@
                                     </Style>
                                 </controls:Card.Styles>
                                 <Grid HorizontalAlignment="Center"
-                                      RowDefinitions="200,Auto,45,35,35,80"
+                                      RowDefinitions="200,Auto,45,35,40,80"
                                       ColumnDefinitions="150,150">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
@@ -205,6 +205,9 @@
                                         <StackPanel.Styles>
                                             <Style Selector="StackPanel">
                                                 <Setter Property="Margin" Value="5,0" />
+                                            </Style>
+                                            <Style Selector="TextBlock">
+                                                <Setter Property="FontSize" Value="20" />
                                             </Style>
                                         </StackPanel.Styles>
 
