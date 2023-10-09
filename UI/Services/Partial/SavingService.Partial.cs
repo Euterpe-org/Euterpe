@@ -35,6 +35,17 @@ public partial class SavingService
     }
 
     /// <summary>
+    ///     Create saving folders in AppData
+    /// </summary>
+    private void CreateSavingFolders()
+    {
+        if (!Directory.Exists(ConfigFolderPath))
+            Directory.CreateDirectory(ConfigFolderPath);
+        if (!Directory.Exists(ChartFolderPath))
+            Directory.CreateDirectory(ChartFolderPath);
+    }
+
+    /// <summary>
     ///     If Updater files exist, delete them
     /// </summary>
     private void DeleteUpdater()
@@ -77,6 +88,7 @@ public partial class SavingService
     private async Task Load()
     {
         await LoadSavedSetting();
+        CreateSavingFolders();
         DeleteUpdater();
     }
 
