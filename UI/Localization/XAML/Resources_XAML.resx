@@ -186,7 +186,7 @@
         <value>Charts</value>
     </data>
     <data name="XAML_Chart_SearchBar" xml:space="preserve">
-        <value>Search Charts</value>
+        <value>Search Charts (Name, Author, Charter)</value>
     </data>
     <data name="XAML_Download_Chart" xml:space="preserve">
         <value>Download</value>

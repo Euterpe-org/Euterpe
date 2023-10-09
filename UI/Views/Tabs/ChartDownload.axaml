@@ -13,7 +13,7 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="60,*" ColumnDefinitions="365,280,*,280">
+        <Grid RowDefinitions="60,*" ColumnDefinitions="365,280,*,260">
             <Grid.Styles>
                 <Style Selector="StackPanel>PathIcon">
                     <Setter Property="Width" Value="30" />
@@ -59,7 +59,7 @@
                            Text="{ext:LocalizeExtensions XAML_ChartSortOptions}"
                            VerticalAlignment="Center" />
 
-                <ComboBox MinWidth="150"
+                <ComboBox MinWidth="160"
                           ItemsSource="{Binding SortOptions}"
                           SelectedIndex="{Binding CurrentSortOptionIndex}"
                           FontSize="18"
@@ -78,28 +78,32 @@
                     </MenuItem.Header>
 
                     <!--Easy-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}">
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
+                                         Command="{Binding FilterEasyCommand}">
                         <cc:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Easy.png" />
                         </cc:DifficultyFilter.Icon>
                     </cc:DifficultyFilter>
 
                     <!--Hard-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}">
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
+                                         Command="{Binding FilterHardCommand}">
                         <cc:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hard.png" />
                         </cc:DifficultyFilter.Icon>
                     </cc:DifficultyFilter>
 
                     <!--Master-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}">
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
+                                         Command="{Binding FilterMasterCommand}">
                         <cc:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Master.png" />
                         </cc:DifficultyFilter.Icon>
                     </cc:DifficultyFilter>
 
                     <!--Hidden-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}">
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
+                                         Command="{Binding FilterHiddenCommand}">
                         <cc:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hidden.png" />
                         </cc:DifficultyFilter.Icon>

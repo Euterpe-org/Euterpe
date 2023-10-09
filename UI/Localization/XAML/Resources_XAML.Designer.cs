@@ -141,7 +141,7 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search Charts.
+        ///   Looks up a localized string similar to Search Charts (Name, Author, Charter).
         /// </summary>
         internal static string XAML_Chart_SearchBar {
             get {

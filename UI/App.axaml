@@ -25,6 +25,8 @@
         <Style Selector="TemplatedControl">
             <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
         </Style>
+
+        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/DifficultyFilter.axaml" />
     </Application.Styles>
 
     <Application.Resources>

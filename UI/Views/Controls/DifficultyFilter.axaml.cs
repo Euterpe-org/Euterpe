@@ -1,4 +1,5 @@
 using Avalonia.Data;
+using Avalonia.Input;
 
 namespace MuseDashModToolsUI.Views.Controls;
 
@@ -12,5 +13,11 @@ public class DifficultyFilter : MenuItem
     {
         get => GetValue(IsCheckedProperty);
         set => SetValue(IsCheckedProperty, value);
+    }
+
+    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    {
+        base.OnPointerPressed(e);
+        IsChecked = !IsChecked;
     }
 }
