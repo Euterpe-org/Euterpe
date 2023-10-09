@@ -58,10 +58,10 @@
                     <Button Classes="dark"
                             Command="{Binding ChoosePathCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/folder.png"
-                                   Height="35"
-                                   Width="35"
-                                   VerticalAlignment="Center" />
+                            <PathIcon Data="{StaticResource Folder}"
+                                      Height="35"
+                                      Width="35"
+                                      VerticalAlignment="Center" />
                             <TextBlock Margin="5,0,0,0"
                                        Text="{ext:LocalizeExtensions XAML_ChangePath}" />
                         </StackPanel>
@@ -111,11 +111,11 @@
                              MinWidth="400"
                              Text="{Binding CustomDownloadSource}" />
 
-                    <Image Source="/Assets/alert_circle.png"
-                           Margin="20,0,0,0"
-                           Width="40"
-                           Height="40"
-                           ToolTip.Tip="{ext:LocalizeExtensions XAML_CustomDownloadSourceFormat}" />
+                    <PathIcon Data="{StaticResource AlertCircle}"
+                              Margin="20,0,0,0"
+                              Width="40"
+                              Height="40"
+                              ToolTip.Tip="{ext:LocalizeExtensions XAML_CustomDownloadSourceFormat}" />
                 </StackPanel>
 
             </controls:Card>

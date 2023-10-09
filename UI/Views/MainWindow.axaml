@@ -6,13 +6,14 @@
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-        Width="1000" Height="800"
-        MinWidth="880" MinHeight="680"
+        Width="1120" Height="850"
+        MinWidth="1000" MinHeight="800"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="#2D2D2D">
 
-    <Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150" Background="#2D2D2D">
+    <Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150">
         <Image Grid.Row="0" Grid.Column="0"
                Margin="15,0,0,0"
                Source="/Assets/Icon.ico"
@@ -22,8 +23,7 @@
                VerticalAlignment="Center" />
 
         <TextBlock Grid.Row="0" Grid.Column="0"
-                   Margin="80,25,0,0"
-                   Height="50"
+                   Margin="80,0,0,0"
                    FontSize="20"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"

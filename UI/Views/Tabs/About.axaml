@@ -29,14 +29,14 @@
                 <!--About Project-->
                 <Grid RowDefinitions="140,100" ColumnDefinitions="*,*,*" Margin="0,20">
                     <Grid.Styles>
-                        <Style Selector="Button">
+                        <Style Selector="Grid>Button">
                             <Setter Property="HorizontalAlignment" Value="Center" />
                             <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Width" Value="150" />
+                            <Setter Property="Height" Value="120" />
                         </Style>
                     </Grid.Styles>
                     <Button Grid.Row="0" Grid.Column="0"
-                            Width="150"
-                            Height="120"
                             Classes="Flat"
                             ToolTip.Tip="Muse Dash Modding Community Website"
                             CommandParameter="https://mdmc.moe/">
@@ -44,8 +44,6 @@
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="1"
-                            Width="120"
-                            Height="120"
                             Classes="Flat"
                             ToolTip.Tip="Muse Dash Mod Tools Project"
                             CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI">
@@ -53,8 +51,6 @@
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="2"
-                            Width="120"
-                            Height="120"
                             Classes="Flat"
                             ToolTip.Tip="Muse Dash Modding Community Discord"
                             CommandParameter="https://discord.gg/mdmc">
@@ -62,9 +58,11 @@
                     </Button>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top">
+
                         <TextBlock Classes="Headline3"
                                    Text="About Muse Dash Mod Tools"
                                    TextAlignment="Center" />
+
                         <TextBlock Classes="Headline5"
                                    Text="Muse Dash Mod Tools aims for making modding muse dash easier&#x0a;And its development cannot be done without those people's effort"
                                    TextWrapping="Wrap"
@@ -93,23 +91,24 @@
                             <Setter Property="TextAlignment" Value="Center" />
                             <Setter Property="Margin" Value="0,0,0,5" />
                         </Style>
-                        <Style Selector="MenuItem">
+                        <Style Selector="Menu">
                             <Setter Property="FontSize" Value="15" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
                         </Style>
                     </Grid.Styles>
 
                     <!--lxy-->
                     <controls:Card Grid.Row="0" Grid.Column="0">
                         <StackPanel>
-                            <Image Source="/Assets/lxy.png" />
+                            <Image Source="/Assets/Contributors/lxy.png" />
                             <TextBlock Classes="Headline6"
-                                       Text="Lxy" />
+                                       Text="lxy" />
                             <TextBlock Classes="Body2"
                                        Text="For planning and maintaining the project" />
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="0">
                         <!--Accounts-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="BiliBili"
@@ -152,7 +151,7 @@
                     <!--Super Pig-->
                     <controls:Card Grid.Row="0" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Super_Pig.png" />
+                            <Image Source="/Assets/Contributors/Super_Pig.png" />
                             <TextBlock Classes="Headline6"
                                        Text="Super Pig" />
                             <TextBlock Classes="Body2"
@@ -160,7 +159,7 @@
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="1">
                         <!--Account-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="BiliBili"
@@ -175,7 +174,7 @@
                     <!--Balint-->
                     <controls:Card Grid.Row="0" Grid.Column="2">
                         <StackPanel>
-                            <Image Source="/Assets/Balint.png" />
+                            <Image Source="/Assets/Contributors/Balint.png" />
                             <TextBlock Classes="Headline6"
                                        Text="Balint" />
                             <TextBlock Classes="Body2"
@@ -183,7 +182,7 @@
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="2">
                         <!--Account-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="Github"
@@ -198,7 +197,7 @@
                     <!--Ultra Rabbit-->
                     <controls:Card Grid.Row="0" Grid.Column="3">
                         <StackPanel>
-                            <Image Source="/Assets/Ultra_Rabbit.jpg" />
+                            <Image Source="/Assets/Contributors/Ultra_Rabbit.jpg" />
                             <TextBlock Classes="Headline6"
                                        Text="Ultra Rabbit" />
                             <TextBlock Classes="Body2"
@@ -206,7 +205,7 @@
                         </StackPanel>
                     </controls:Card>
 
-                    <Menu Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center">
+                    <Menu Grid.Row="1" Grid.Column="3">
                         <!--Account-->
                         <MenuItem Header="Social Account">
                             <MenuItem Header="Github"
@@ -234,6 +233,7 @@
                             <Setter Property="FontSize" Value="18" />
                             <Setter Property="TextAlignment" Value="Center" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="MinWidth" Value="100" />
                         </Style>
                         <Style Selector="Image">
                             <Setter Property="Height" Value="60" />
@@ -252,8 +252,8 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Chinese&#x0a;Simplified:" />
                     <controls:Card Grid.Row="0" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/lxymahatma.jpg" />
-                            <TextBlock>Lxymahatma</TextBlock>
+                            <Image Source="/Assets/Contributors/lxymahatma.jpg" />
+                            <TextBlock>lxymahatma</TextBlock>
                         </StackPanel>
                     </controls:Card>
 
@@ -261,14 +261,14 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Chinese&#x0a;Traditional:" />
                     <controls:Card Grid.Row="1" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Shiron_Lee.jpg" />
+                            <Image Source="/Assets/Contributors/Shiron_Lee.jpg" />
                             <TextBlock>Shiron_Lee</TextBlock>
                         </StackPanel>
                     </controls:Card>
 
                     <controls:Card Grid.Row="1" Grid.Column="2">
                         <StackPanel>
-                            <Image Source="/Assets/bigbeesushi.jpg" />
+                            <Image Source="/Assets/Contributors/bigbeesushi.jpg" />
                             <TextBlock>Bigbeesushi</TextBlock>
                         </StackPanel>
                     </controls:Card>
@@ -279,7 +279,7 @@
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Hungarian: " />
                     <controls:Card Grid.Row="2" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Balint.png" />
+                            <Image Source="/Assets/Contributors/Balint.png" />
                             <TextBlock>Balint</TextBlock>
                         </StackPanel>
                     </controls:Card>
@@ -292,14 +292,14 @@
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Russian: " />
                     <controls:Card Grid.Row="3" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/Ultra_Rabbit.jpg" />
+                            <Image Source="/Assets/Contributors/Ultra_Rabbit.jpg" />
                             <TextBlock>Ultra Rabbit</TextBlock>
                         </StackPanel>
                     </controls:Card>
 
                     <controls:Card Grid.Row="3" Grid.Column="2">
                         <StackPanel>
-                            <Image Source="/Assets/Ronner.jpg" />
+                            <Image Source="/Assets/Contributors/Ronner.jpg" />
                             <TextBlock>Ronner</TextBlock>
                         </StackPanel>
                     </controls:Card>
@@ -308,7 +308,7 @@
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Spanish: " />
                     <controls:Card Grid.Row="4" Grid.Column="1">
                         <StackPanel>
-                            <Image Source="/Assets/MNight4.png" />
+                            <Image Source="/Assets/Contributors/MNight4.png" />
                             <TextBlock>MNight4</TextBlock>
                         </StackPanel>
                     </controls:Card>

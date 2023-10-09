@@ -1,0 +1,269 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
+             xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
+             xmlns:ext="using:MuseDashModToolsUI.Extensions"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+             x:Class="MuseDashModToolsUI.Views.Tabs.ChartDownload"
+             x:DataType="tabs:ChartDownloadViewModel"
+             DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
+
+    <controls:Card>
+        <Grid RowDefinitions="60,*" ColumnDefinitions="365,280,*,260">
+            <Grid.Styles>
+                <Style Selector="StackPanel>PathIcon">
+                    <Setter Property="Width" Value="30" />
+                    <Setter Property="Height" Value="30" />
+                </Style>
+                <Style Selector="Grid>StackPanel">
+                    <Setter Property="Orientation" Value="Horizontal" />
+                    <Setter Property="Margin" Value="10,0" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </Grid.Styles>
+
+            <!--Search bar-->
+            <TextBox Grid.Row="0" Grid.Column="0"
+                     Height="40"
+                     Classes="Solo"
+                     Background="#505050"
+                     Margin="10,0"
+                     Text="{Binding Filter}"
+                     Watermark="{ext:LocalizeExtensions XAML_Chart_SearchBar}"
+                     BorderBrush="#999999"
+                     BorderThickness="1"
+                     CornerRadius="1"
+                     AcceptsReturn="False">
+
+                <TextBox.Styles>
+                    <Style Selector="TextBox Panel#PART_TextContainer">
+                        <Setter Property="Margin" Value="8,19,0,0" />
+                    </Style>
+                </TextBox.Styles>
+
+                <TextBox.InnerRightContent>
+                    <PathIcon Data="{StaticResource Magnify}" Height="30" Width="30" />
+                </TextBox.InnerRightContent>
+            </TextBox>
+
+            <!--Sort Options-->
+            <StackPanel Grid.Row="0" Grid.Column="1">
+
+                <PathIcon Data="{StaticResource Sort}" Margin="0,0,10,0" />
+
+                <TextBlock FontSize="20"
+                           Text="{ext:LocalizeExtensions XAML_ChartSortOptions}"
+                           VerticalAlignment="Center" />
+
+                <ComboBox MinWidth="160"
+                          ItemsSource="{Binding SortOptions}"
+                          SelectedIndex="{Binding CurrentSortOptionIndex}"
+                          FontSize="18"
+                          Theme="{StaticResource MaterialFilledComboBox}" />
+            </StackPanel>
+
+            <!--Filter Options-->
+            <Menu Grid.Row="0" Grid.Column="2" FontSize="20" HorizontalAlignment="Center">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon Data="{StaticResource Filter}" Margin="0,0,5,0" />
+                            <TextBlock Text="{ext:LocalizeExtensions XAML_ChartFilterTypes}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </MenuItem.Header>
+
+                    <!--Easy-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
+                                         Command="{Binding FilterEasyCommand}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Easy.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
+
+                    <!--Hard-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
+                                         Command="{Binding FilterHardCommand}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Hard.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
+
+                    <!--Master-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
+                                         Command="{Binding FilterMasterCommand}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Master.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
+
+                    <!--Hidden-->
+                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
+                                         Command="{Binding FilterHiddenCommand}">
+                        <cc:DifficultyFilter.Icon>
+                            <Image Source="/Assets/Difficulties/Hidden.png" />
+                        </cc:DifficultyFilter.Icon>
+                    </cc:DifficultyFilter>
+
+                </MenuItem>
+            </Menu>
+
+
+            <!--Custom Albums folder-->
+            <Button Grid.Row="0" Grid.Column="3"
+                    FontSize="16"
+                    Classes="dark"
+                    Margin="10,0,20,0"
+                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
+                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
+
+            <!--Chart list-->
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <ListBox ItemsSource="{Binding Charts}" Margin="0,0,10,0">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <controls:Card Background="#595959" BorderBrush="#999999">
+                                <controls:Card.Styles>
+                                    <Style Selector="controls|Card Border#PART_BackgroundBorder">
+                                        <Setter Property="BorderThickness" Value="2" />
+                                    </Style>
+                                </controls:Card.Styles>
+                                <Grid HorizontalAlignment="Center"
+                                      RowDefinitions="200,Auto,45,35,35,80"
+                                      ColumnDefinitions="150,150">
+                                    <Grid.Styles>
+                                        <Style Selector="StackPanel">
+                                            <Setter Property="Orientation" Value="Horizontal" />
+                                        </Style>
+                                        <Style Selector="StackPanel>PathIcon">
+                                            <Setter Property="Width" Value="25" />
+                                            <Setter Property="Height" Value="25" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Margin" Value="0,0,5,0" />
+                                        </Style>
+                                        <Style Selector="Grid>StackPanel">
+                                            <Setter Property="Margin" Value="0,10" />
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                        </Style>
+                                        <Style Selector="Grid>TextBlock">
+                                            <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="Margin" Value="0,5" />
+                                        </Style>
+                                        <Style Selector="StackPanel>TextBlock">
+                                            <Setter Property="FontSize" Value="18" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                        </Style>
+                                        <Style Selector="DockPanel>TextBlock">
+                                            <Setter Property="FontSize" Value="20" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                        </Style>
+                                    </Grid.Styles>
+
+                                    <!--Cover-->
+                                    <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                           Width="200" Height="200"
+                                           Source="{Binding Cover}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,5" />
+
+                                    <!--Name-->
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                               FontSize="30"
+                                               MinHeight="35"
+                                               MinWidth="200"
+                                               Text="{Binding Name}"
+                                               TextAlignment="Center" />
+
+                                    <!--Charter-->
+                                    <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                               HorizontalAlignment="Center"
+                                               MinHeight="30"
+                                               Margin="0,5">
+
+                                        <PathIcon Height="30" Width="30"
+                                                  Margin="0,0,5,0"
+                                                  Data="{StaticResource Charter}" />
+                                        <TextBlock Text="{ext:LocalizeExtensions XAML_Charter}" />
+                                        <TextBlock Text="{Binding Charter}"
+                                                   TextTrimming="WordEllipsis" />
+                                    </DockPanel>
+
+
+                                    <!--Difficulties-->
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <StackPanel.Styles>
+                                            <Style Selector="StackPanel">
+                                                <Setter Property="Margin" Value="5,0" />
+                                            </Style>
+                                        </StackPanel.Styles>
+
+                                        <!--Easy-->
+                                        <StackPanel IsVisible="{Binding HasEasy}">
+                                            <Image Source="/Assets/Difficulties/Easy.png" />
+                                            <TextBlock Text="{Binding EasyLevel}" />
+                                        </StackPanel>
+
+                                        <!--Hard-->
+                                        <StackPanel IsVisible="{Binding HasHard}">
+                                            <Image Source="/Assets/Difficulties/Hard.png" />
+                                            <TextBlock Text="{Binding HardLevel}" />
+                                        </StackPanel>
+
+                                        <!--Master-->
+                                        <StackPanel IsVisible="{Binding HasMaster}">
+                                            <Image Source="/Assets/Difficulties/Master.png" />
+                                            <TextBlock Text="{Binding MasterLevel}" />
+                                        </StackPanel>
+
+                                        <!--Hidden-->
+                                        <StackPanel IsVisible="{Binding HasHidden}">
+                                            <Image Source="/Assets/Difficulties/Hidden.png" />
+                                            <TextBlock Text="{Binding HiddenLevel}" />
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                    <!--Likes-->
+                                    <StackPanel Grid.Row="4" Grid.Column="0">
+                                        <PathIcon Data="{StaticResource Heart}" />
+                                        <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Likes}" />
+                                        <TextBlock Text="{Binding Analytics.LikesCount}" />
+                                    </StackPanel>
+
+                                    <!--Downloads-->
+                                    <StackPanel Grid.Row="4" Grid.Column="1">
+                                        <PathIcon Data="{StaticResource Download}" />
+                                        <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Downloads}" />
+                                        <TextBlock Text="{Binding Analytics.Downloads}" />
+                                    </StackPanel>
+
+                                    <!--Download button-->
+                                    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Classes="dark"
+                                            FontSize="25"
+                                            Margin="0,20,0,0"
+                                            Content="{ext:LocalizeExtensions XAML_Download_Chart}"
+                                            Command="{ReflectionBinding $parent[ListBox].DataContext.DownloadChartCommand}"
+                                            CommandParameter="{Binding .}" />
+                                </Grid>
+                            </controls:Card>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+    </controls:Card>
+
+</UserControl>

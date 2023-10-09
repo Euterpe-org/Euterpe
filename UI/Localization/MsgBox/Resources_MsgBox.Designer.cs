@@ -205,6 +205,24 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chart download failed\n{0}.
+        /// </summary>
+        internal static string MsgBox_Content_DownloadChartFailed {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DownloadChartFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart {0} has been successfully downloaded\n.
+        /// </summary>
+        internal static string MsgBox_Content_DownloadChartSuccess {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DownloadChartSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please manually choose and delete the duplicated mod\n{0}.
         /// </summary>
         internal static string MsgBox_Content_DuplicateMods {
@@ -489,6 +507,15 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         internal static string MsgBox_Content_OutdatedMod {
             get {
                 return ResourceManager.GetString("MsgBox_Content_OutdatedMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have already downloaded the chart {0}\nContinue downloading and overriding the existing file?.
+        /// </summary>
+        internal static string MsgBox_Content_OverrideChart {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_OverrideChart", resourceCulture);
             }
         }
         

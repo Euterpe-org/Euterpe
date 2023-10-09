@@ -124,6 +124,150 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloads: .
+        /// </summary>
+        internal static string XAML_Chart_Downloads {
+            get {
+                return ResourceManager.GetString("XAML_Chart_Downloads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Likes: .
+        /// </summary>
+        internal static string XAML_Chart_Likes {
+            get {
+                return ResourceManager.GetString("XAML_Chart_Likes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Charts (Name, Author, Charter).
+        /// </summary>
+        internal static string XAML_Chart_SearchBar {
+            get {
+                return ResourceManager.GetString("XAML_Chart_SearchBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Charter: .
+        /// </summary>
+        internal static string XAML_Charter {
+            get {
+                return ResourceManager.GetString("XAML_Charter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Easy.
+        /// </summary>
+        internal static string XAML_ChartFilterType_Easy {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterType_Easy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard.
+        /// </summary>
+        internal static string XAML_ChartFilterType_Hard {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterType_Hard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hidden.
+        /// </summary>
+        internal static string XAML_ChartFilterType_Hidden {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterType_Hidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master.
+        /// </summary>
+        internal static string XAML_ChartFilterType_Master {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterType_Master", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by.
+        /// </summary>
+        internal static string XAML_ChartFilterTypes {
+            get {
+                return ResourceManager.GetString("XAML_ChartFilterTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        internal static string XAML_ChartSortOption_Default {
+            get {
+                return ResourceManager.GetString("XAML_ChartSortOption_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloads.
+        /// </summary>
+        internal static string XAML_ChartSortOption_Downloads {
+            get {
+                return ResourceManager.GetString("XAML_ChartSortOption_Downloads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest.
+        /// </summary>
+        internal static string XAML_ChartSortOption_Latest {
+            get {
+                return ResourceManager.GetString("XAML_ChartSortOption_Latest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        internal static string XAML_ChartSortOption_Level {
+            get {
+                return ResourceManager.GetString("XAML_ChartSortOption_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Likes.
+        /// </summary>
+        internal static string XAML_ChartSortOption_Likes {
+            get {
+                return ResourceManager.GetString("XAML_ChartSortOption_Likes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string XAML_ChartSortOption_Name {
+            get {
+                return ResourceManager.GetString("XAML_ChartSortOption_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort by: .
+        /// </summary>
+        internal static string XAML_ChartSortOptions {
+            get {
+                return ResourceManager.GetString("XAML_ChartSortOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Update.
         /// </summary>
         internal static string XAML_Check_Update {
@@ -133,11 +277,29 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Custom_Albums Folder.
+        /// </summary>
+        internal static string XAML_CustomAlbumsFolder {
+            get {
+                return ResourceManager.GetString("XAML_CustomAlbumsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app.
         /// </summary>
         internal static string XAML_CustomDownloadSourceFormat {
             get {
                 return ResourceManager.GetString("XAML_CustomDownloadSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        internal static string XAML_Download_Chart {
+            get {
+                return ResourceManager.GetString("XAML_Download_Chart", resourceCulture);
             }
         }
         
@@ -367,6 +529,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
+        /// </summary>
+        internal static string XAML_Mod_SearchBar {
+            get {
+                return ResourceManager.GetString("XAML_Mod_SearchBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
         internal static string XAML_ModsFolder {
@@ -462,6 +633,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_Tab_About {
             get {
                 return ResourceManager.GetString("XAML_Tab_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Charts.
+        /// </summary>
+        internal static string XAML_Tab_ChartDownload {
+            get {
+                return ResourceManager.GetString("XAML_Tab_ChartDownload", resourceCulture);
             }
         }
         

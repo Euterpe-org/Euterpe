@@ -52,6 +52,12 @@ public interface ILocalService
     void OnLaunchGame(bool isModded);
 
     /// <summary>
+    ///     Open CustomAlbums folder
+    /// </summary>
+    /// <returns></returns>
+    Task OpenCustomAlbumsFolder();
+
+    /// <summary>
     ///     Open Mods folder
     /// </summary>
     /// <returns></returns>

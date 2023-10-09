@@ -1,7 +1,7 @@
 using System.IO;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text.RegularExpressions;
+using Avalonia.Media.Imaging;
 using DialogHostAvalonia;
 using NuGet.Versioning;
 
@@ -19,8 +19,11 @@ public partial class GitHubService
         var url = downloadSource + "ModLinks.json";
         try
         {
-            var mods = await Client.GetFromJsonAsync<List<Mod>>(url);
+            var modLinks = await Client.GetStringAsync(url);
             Logger.Information("Get mod list from {Url} success", url);
+
+            await File.WriteAllTextAsync(SavingService.Value.ModLinksPath, modLinks);
+            var mods = SerializationService.DeserializeModList();
             return mods;
         }
         catch
@@ -96,6 +99,55 @@ public partial class GitHubService
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }
+    }
+
+    /// <summary>
+    ///     Get chart covers
+    /// </summary>
+    /// <param name="charts"></param>
+    private async Task GetChartCovers(IEnumerable<Chart>? charts)
+    {
+        var semaphore = new SemaphoreSlim(20);
+        var tasks = charts?.Select(async chart =>
+        {
+            await semaphore.WaitAsync();
+
+            try
+            {
+                var stream = await LoadCoverAsync(chart);
+                chart.Cover = await Task.Run(() => Bitmap.DecodeToWidth(stream, 200));
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+        });
+
+        await Task.WhenAll(tasks!);
+    }
+
+    /// <summary>
+    ///     Get chart cover memory stream
+    /// </summary>
+    /// <param name="chart"></param>
+    /// <returns></returns>
+    private async Task<MemoryStream> LoadCoverAsync(Chart chart)
+    {
+        byte[] coverBytes;
+        var fileName = $"{chart.Id}-cover.png";
+        var filePath = Path.Combine(SavingService.Value.ChartFolderPath, fileName);
+
+        if (!File.Exists(filePath))
+        {
+            coverBytes = await Client.GetByteArrayAsync(string.Format(ChartCoverApi, chart.Id));
+            await File.WriteAllBytesAsync(filePath, coverBytes);
+        }
+        else
+        {
+            coverBytes = await File.ReadAllBytesAsync(filePath);
+        }
+
+        return new MemoryStream(coverBytes);
     }
 
     /// <summary>

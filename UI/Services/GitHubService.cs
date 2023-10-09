@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 using System.Net.Http.Json;
 
 #pragma warning disable CS8618
@@ -7,12 +8,17 @@ namespace MuseDashModToolsUI.Services;
 
 public partial class GitHubService : IGitHubService
 {
+    // Github Release APIs
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
 
+    // Chart APIs
+    private const string ChartListApi = "https://mdmc.moe/api/v1/charts";
+    private const string ChartCoverApi = "https://mdmc.moe/charts/{0}/cover.png";
+    private const string ChartDownloadApi = "https://mdmc.moe/download/{0}";
+
+    // ModLinks
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
-
     private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
-
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
     private HttpResponseMessage? _melonLoaderResponseMessage;
@@ -39,10 +45,13 @@ public partial class GitHubService : IGitHubService
     public IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
+    public ISerializationService SerializationService { get; init; }
 
     [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ISavingService> SavingService { get; init; }
 
     public async Task CheckUpdates(bool isUserClick = false)
     {
@@ -76,7 +85,24 @@ public partial class GitHubService : IGitHubService
         }
     }
 
-    public async Task DownloadModAsync(string link, string path)
+    public async Task DownloadChart(int id, string path)
+    {
+        var url = string.Format(ChartDownloadApi, id);
+        try
+        {
+            var result = await Client.GetAsync(url);
+            Logger.Information("Download chart from {Url} success", url);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await result.Content.CopyToAsync(fs);
+        }
+        catch (Exception ex)
+        {
+            Logger.Warning("Download chart from {Url} failed", url);
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_DownloadChartFailed, ex);
+        }
+    }
+
+    public async Task DownloadMod(string link, string path)
     {
         var defaultDownloadSource = DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
         var result = await DownloadModFromSourceAsync(defaultDownloadSource, link, path);
@@ -96,6 +122,22 @@ public partial class GitHubService : IGitHubService
         return await DownloadMelonLoaderFromSourceAsync(downloadProgress);
     }
 
+    public async Task<List<Chart>?> GetChartList()
+    {
+        try
+        {
+            var charts = await Client.GetFromJsonAsync<List<Chart>>(ChartListApi);
+            await GetChartCovers(charts);
+            Logger.Information("Get chart list success");
+            return charts;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Get chart list failed");
+            return null;
+        }
+    }
+
     public async Task<long?> GetMelonLoaderFileSize()
     {
         await GetMelonLoaderResponseMessage();
@@ -113,6 +155,14 @@ public partial class GitHubService : IGitHubService
             if (mods is not null) return mods;
         }
 
+        if (File.Exists(SavingService.Value.ModLinksPath))
+        {
+            Logger.Information("Get mod list from online source failed, deserializing local mod list");
+            mods = SerializationService.DeserializeModList();
+            if (mods is not null) return mods;
+        }
+
+        Logger.Error("Failed to get working mod list from any source");
         await MessageBoxService.ErrorMessageBox(MsgBox_Content_GetModListFailed);
         return null;
     }

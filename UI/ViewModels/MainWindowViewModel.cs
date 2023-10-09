@@ -1,3 +1,4 @@
+using System.Globalization;
 using Autofac;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -6,6 +7,7 @@ namespace MuseDashModToolsUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
+    private readonly ILocalService _localService;
     private readonly ILogger _logger;
     private readonly ISavingService _savingService;
     [ObservableProperty] private ViewModelBase _content;
@@ -15,12 +17,17 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     public MainWindowViewModel(IComponentContext context)
     {
+        _localService = context.Resolve<ILocalService>();
         _logger = context.Resolve<ILogger>();
         _savingService = context.Resolve<ISavingService>();
+
+        if (_savingService.Settings.LanguageCode is not null)
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);
 
         Tabs = new List<TabView>
         {
             new((ViewModelBase)context.Resolve<IModManageViewModel>(), XAML_Tab_ModManage, "ModManage"),
+            new((ViewModelBase)context.Resolve<IChartDownloadViewModel>(), XAML_Tab_ChartDownload, "ChartDownload"),
             new((ViewModelBase)context.Resolve<ILogAnalysisViewModel>(), XAML_Tab_LogAnalysis, "LogAnalysis"),
             new((ViewModelBase)context.Resolve<ISettingsViewModel>(), XAML_Tab_Setting, "Setting"),
             new((ViewModelBase)context.Resolve<IAboutViewModel>(), XAML_Tab_About, "About")
@@ -41,6 +48,12 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         var name = Tabs[SelectedTabIndex].Name;
         _logger.Information("Switching tab to {Name}", name);
     }
+
+    [RelayCommand]
+    private void OnLaunchVanillaGame() => _localService.OnLaunchGame(false);
+
+    [RelayCommand]
+    private void OnLaunchModdedGame() => _localService.OnLaunchGame(true);
 
     private void OnExit(object sender, EventArgs e) => _savingService.Save().Wait();
 }

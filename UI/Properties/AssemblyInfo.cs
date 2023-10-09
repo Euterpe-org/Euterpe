@@ -6,4 +6,4 @@ using MuseDashModToolsUI;
 [assembly: AssemblyDescription(BuildInfo.Description)]
 [assembly: AssemblyFileVersion(BuildInfo.Version)]
 [assembly: AssemblyProduct(BuildInfo.Name)]
-[assembly: AssemblyTitle(BuildInfo.Description)]
+[assembly: AssemblyTitle(BuildInfo.Name)]

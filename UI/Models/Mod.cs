@@ -5,13 +5,13 @@ namespace MuseDashModToolsUI.Models;
 public partial class Mod : ObservableObject
 {
     [ObservableProperty] private bool _isDisabled;
-    public string? Name { get; set; }
-    public string? Version { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Version { get; set; } = string.Empty;
     [JsonIgnore] public string? LocalVersion { get; set; }
     [JsonIgnore] public UpdateState State { get; set; }
     [JsonIgnore] public bool IsIncompatible { get; set; }
     [JsonIgnore] public bool IsUpdatable => IsLocal && State != UpdateState.Normal;
-    public string? Author { get; set; }
+    public string Author { get; set; } = string.Empty;
     [JsonIgnore] public string? FileName { get; set; }
     [JsonIgnore] public bool IsLocal => FileName is not null;
     [JsonIgnore] public bool IsInstallable => !IsLocal && !IsIncompatible;
@@ -77,21 +77,4 @@ public partial class Mod : ObservableObject
         SHA256 = null;
         return this;
     }
-}
-
-public enum UpdateState
-{
-    Outdated = -1,
-    Normal = 0,
-    Newer = 1,
-    Modified = 2
-}
-
-public enum FilterType
-{
-    All = 0,
-    Installed = 1,
-    Enabled = 2,
-    Outdated = 3,
-    Incompatible = 4
 }

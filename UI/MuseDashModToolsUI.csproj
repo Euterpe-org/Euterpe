@@ -28,6 +28,8 @@
         <EmbeddedResource Remove="Mods\**"/>
         <None Remove="Mods\**"/>
         <None Remove=".gitignore"/>
+
+        <!--Localization Files-->
         <EmbeddedResource Update="Localization\XAML\Resources_XAML.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources_XAML.Designer.cs</LastGenOutput>

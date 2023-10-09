@@ -8,6 +8,9 @@ public partial class UpdateUIService : IUpdateUIService
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
+    public Lazy<IChartDownloadViewModel> ChartDownloadViewModel { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
 
     [UsedImplicitly]
@@ -33,6 +36,7 @@ public partial class UpdateUIService : IUpdateUIService
     {
         SettingsViewModel.Value.Initialize();
         await ModManageViewModel.Value.Initialize();
+        await ChartDownloadViewModel.Value.Initialize();
         await LogAnalysisViewModel.Value.Initialize();
 
         Logger.Information("All Tabs initialized");
