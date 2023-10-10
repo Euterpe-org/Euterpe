@@ -133,12 +133,10 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <controls:Card Background="#595959" BorderBrush="#999999">
-                                <controls:Card.Styles>
-                                    <Style Selector="controls|Card Border#PART_BackgroundBorder">
-                                        <Setter Property="BorderThickness" Value="2" />
-                                    </Style>
-                                </controls:Card.Styles>
+                            <controls:Card Background="#595959"
+                                           BorderBrush="#999999"
+                                           BorderThickness="2">
+
                                 <Grid HorizontalAlignment="Center"
                                       RowDefinitions="200,Auto,45,35,40,80"
                                       ColumnDefinitions="150,150">
