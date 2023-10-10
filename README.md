@@ -11,21 +11,30 @@
 [中文说明](https://www.bilibili.com/read/cv22748380)
 
 ### What it can do
-1. Download and install MelonLoader from this app (which is needed for muse dash modding)
+1. Download and install MelonLoader from this app (Which is needed for muse dash modding)
 2. Install mods with a simple click.
-3. Disable/Enable mods with the toggle
+3. Disable/Enable mods with the toggle.
 4. Warn you with the different color button if your mod version is incorrect.
-5. Search the mod by name, author, and description using the search bar
-6. Different category filter types on the left side
-7. Roughly analyze your log file when launching the game meet problems
-8. Setting window for adjusting font and language at runtime
-9. Change download source of mods (Github,Github Mirror or Gitee)
-10. Download prerelease build of Muse Dash Mod Tools in setting window
+5. Search the mod by name, author, and description using the search bar.
+6. Different category filter types for mods on the Mod page left side.
+7. Download charts from the app (You can search, sort, and filter charts)
+8. Roughly analyze your log file when launching the game meet problems.
+9. Setting window for adjusting font and language, changing download source of mods (Github, Github Mirror, Gitee, or custom links)
 
 
 ### Screenshot
 
-![Screenshot](Intro/Screenshot.png)
+#### The Main View for Mod Tools
+![MainView](Intro/MainView.png)
+
+#### Charts Download Page
+![ChartsDownload](Intro/Charts.png)
+
+#### Log Analysis Page
+![LogAnalysis](Intro/Analysis.png)
+
+#### Setting Page
+![Setting](Intro/Setting.png)
 
 
 ### Translation
@@ -39,8 +48,20 @@
 5. Russian (Partial)
 6. Spanish (Partial)
 
+**If you want to contribute to translation, use [Crowdin](https://crowdin.com/project/musedashmodtools) to translate.** (If you cannot find the language you want to translate, ask me on Discord or create an issue.)
 
-**If you want to contribute to translation, use [Crowdin](https://crowdin.com/project/musedashmodtools) to translate.** (If you cannot find the language you want to translate, ask me on discord or create an issue)
+**Also, Notice That The Translation is not real-time updated. I have to update the translation file and release a new version manually.**
+
+
+### Nightly Versions
+#### The following links are the nightly builds from github action for this app from dev/rewrite branch. It may be unstable and have bugs. Use it at your own risk.
+
+* [Linux Build (Self Contained)](https://nightly.link/MDModsDev/MuseDashModToolsUI/workflows/build/dev%2Frewrite/MuseDashModToolsUI-Release-Linux-net7.0-x64-self-contained.zip)
+* [Windows Build (Self Contained)](https://nightly.link/MDModsDev/MuseDashModToolsUI/workflows/build/dev%2Frewrite/MuseDashModToolsUI-Release-Windows-net7.0-x64-self-contained.zip)
+* [Linux Build (Runtime Required)](https://nightly.link/MDModsDev/MuseDashModToolsUI/workflows/build/dev%2Frewrite/MuseDashModToolsUI-Release-Linux-net7.0-x64-runtime-required.zip)
+* [Windows Build (Runtime Required)](https://nightly.link/MDModsDev/MuseDashModToolsUI/workflows/build/dev%2Frewrite/MuseDashModToolsUI-Release-Windows-net7.0-x64-runtime-required.zip)
+
+*Self Contained means you don't need to install any other things to run this app, and Runtime Required means you need to install .NET 7.0 Runtime to run this app.*
 
 
 ### Contribution
