@@ -7,10 +7,11 @@
 [![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/stargazers)
 [![Release Version](https://img.shields.io/github/v/release/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/releases/latest)
 
-## A UI app for making muse dash modding easier
+**A UI app making muse dash modding easier**
+
 [中文说明](https://www.bilibili.com/read/cv22748380)
 
-### What it can do
+## Usage
 1. Download and install MelonLoader from this app (Which is needed for muse dash modding)
 2. Install mods with a simple click.
 3. Disable/Enable mods with the toggle.
@@ -22,24 +23,24 @@
 9. Setting window for adjusting font and language, changing download source of mods (Github, Github Mirror, Gitee, or custom links)
 
 
-### Screenshot
+## Screenshots
 
-#### The Main View for Mod Tools
+### Mod Manage Page
 ![MainView](Intro/MainView.png)
 
-#### Charts Download Page
+### Charts Download Page
 ![ChartsDownload](Intro/Charts.png)
 
-#### Log Analysis Page
+### Log Analysis Page
 ![LogAnalysis](Intro/Analysis.png)
 
-#### Setting Page
+### Setting Page
 ![Setting](Intro/Setting.png)
 
 
-### Translation
+## Translation
 
-#### Current Supported Languages:
+### Current Supported Languages:
 
 1. English (Default)
 2. Chinese Simplified (Full)
@@ -53,8 +54,8 @@
 **Also, Notice That The Translation is not real-time updated. I have to update the translation file and release a new version manually.**
 
 
-### Nightly Versions
-#### The following links are the nightly builds from github action for this app from dev/rewrite branch. It may be unstable and have bugs. Use it at your own risk.
+## Nightly Versions
+**The following links are the nightly builds from github action for this app from dev/rewrite branch. It may be unstable and have bugs. Use it at your own risk.**
 
 * [Linux Build (Self Contained)](https://nightly.link/MDModsDev/MuseDashModToolsUI/workflows/build/dev%2Frewrite/MuseDashModToolsUI-Release-Linux-net7.0-x64-self-contained.zip)
 * [Windows Build (Self Contained)](https://nightly.link/MDModsDev/MuseDashModToolsUI/workflows/build/dev%2Frewrite/MuseDashModToolsUI-Release-Windows-net7.0-x64-self-contained.zip)
@@ -64,5 +65,12 @@
 *Self Contained means you don't need to install any other things to run this app, and Runtime Required means you need to install .NET 7.0 Runtime to run this app.*
 
 
-### Contribution
+## Contribution
 ![Alt](https://repobeats.axiom.co/api/embed/383f9213373d55530c04c5bdec49e842cd5e17d7.svg)
+
+### Credits (See About Page)
+#### Developers
+![Developers](Intro/Developers.png)
+
+#### Translators
+![Translators](Intro/Translators.png)
