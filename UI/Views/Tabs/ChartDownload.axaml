@@ -270,7 +270,7 @@
                                     <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"
                                             Classes="dark"
                                             FontSize="25"
-                                            Margin="0,20,0,0"
+                                            Margin="0,10,0,5"
                                             Content="{ext:LocalizeExtensions XAML_Download_Chart}"
                                             Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.DownloadChartCommand}"
                                             CommandParameter="{Binding .}" />
