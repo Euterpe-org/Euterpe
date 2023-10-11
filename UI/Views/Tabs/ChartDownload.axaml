@@ -146,7 +146,7 @@
                                            BorderThickness="2">
 
                                 <Grid HorizontalAlignment="Center"
-                                      RowDefinitions="200,100,50,35,45,80"
+                                      RowDefinitions="200,*,50,35,45,80"
                                       ColumnDefinitions="160,160">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
