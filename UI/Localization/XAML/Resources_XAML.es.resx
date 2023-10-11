@@ -23,7 +23,7 @@
         <value>Carpeta de\najustes local</value>
     </data>
   <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
+        <value>Reporta un error</value>
     </data>
   <data name="XAML_Check_Update" xml:space="preserve">
         <value>Comprobar actualización</value>
@@ -80,7 +80,7 @@
         <value>Instalado</value>
     </data>
   <data name="XAML_Incompatible" xml:space="preserve">
-        <value>Incompatible</value>
+        <value>No compatible</value>
     </data>
   <data name="XAML_Install_MelonLoader" xml:space="preserve">
         <value>Instalar\nMelonLoader</value>
@@ -122,7 +122,7 @@
         <value>Versión instalada: {0}</value>
     </data>
   <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
+        <value>Créditos</value>
     </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Versión instalada: {0} (Nueva versión disponible: {1})</value>
@@ -176,67 +176,67 @@
         <value>Custom</value>
     </data>
   <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-        <value>Provide the link of custom download source</value>
+        <value>Ingresa el enlace de descarga</value>
     </data>
   <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
+        <value>El enlace debe terminar en una "/", ser público y ser compatible con "ModLinks.json" (La misma estructura que en Github)\n¡Tomará efecto al reiniciar el programa!</value>
     </data>
   <data name="XAML_Tab_ChartDownload" xml:space="preserve">
         <value>Charts</value>
     </data>
   <data name="XAML_Chart_SearchBar" xml:space="preserve">
-        <value>Search Charts (Name, Author, Charter)</value>
+        <value>Buscar (Canción, Autor, Diseñador)</value>
     </data>
   <data name="XAML_Download_Chart" xml:space="preserve">
-        <value>Download</value>
+        <value>Descargar</value>
     </data>
   <data name="XAML_Chart_Downloads" xml:space="preserve">
-        <value>Downloads: </value>
+        <value>Descargas: </value>
     </data>
   <data name="XAML_Chart_Likes" xml:space="preserve">
-        <value>Likes: </value>
+        <value>Favoritos: </value>
     </data>
   <data name="XAML_Charter" xml:space="preserve">
-        <value>Charter: </value>
+        <value>Diseñador: </value>
     </data>
   <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
-        <value>Open Custom_Albums Folder</value>
+        <value>Abrir carpeta\nde charts</value>
     </data>
   <data name="XAML_ChartSortOptions" xml:space="preserve">
-        <value>Sort by: </value>
+        <value>Ordenar por: </value>
     </data>
   <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>Filter by</value>
+        <value>Dificultad</value>
     </data>
   <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>N/A</value>
     </data>
   <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-        <value>Likes</value>
+        <value>Favoritos</value>
     </data>
   <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-        <value>Downloads</value>
+        <value>Descargas</value>
     </data>
   <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-        <value>Latest</value>
+        <value>Nuevos</value>
     </data>
   <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Nombre</value>
     </data>
   <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-        <value>Level</value>
+        <value>Dificultad</value>
     </data>
   <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
-        <value>Easy</value>
+        <value>Fácil</value>
     </data>
   <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
-        <value>Hard</value>
+        <value>Difícil</value>
     </data>
   <data name="XAML_ChartFilterType_Master" xml:space="preserve">
-        <value>Master</value>
+        <value>Maestro</value>
     </data>
   <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
-        <value>Hidden</value>
+        <value>Oculto</value>
     </data>
   <data name="XAML_SearchBar" xml:space="preserve">
         <value>Buscar mods (Nombre, Autor, Descripción)</value>

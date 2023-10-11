@@ -50,7 +50,7 @@
         <value>正しいのMuse Dashデータ選んでください！</value>
     </data>
   <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
-        <value>You haven't chosen a Muse Dash Folder\nPlease choose the folder</value>
+        <value>MuseDashのインストール先が指定されていません！\nインストール先のフォルダを選択してください。</value>
     </data>
   <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
         <value>Cannot copy Updater to target path\n{0}</value>

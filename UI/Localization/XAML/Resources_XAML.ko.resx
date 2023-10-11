@@ -20,37 +20,37 @@
         </value>
   </resheader>
   <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>UserData</value>
+        <value>유저데이터</value>
     </data>
   <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
+        <value>버그 신고</value>
     </data>
   <data name="XAML_Check_Update" xml:space="preserve">
-        <value>Check Update</value>
+        <value>업데이트 확인</value>
     </data>
   <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
         <value>Github Mirror</value>
     </data>
   <data name="XAML_Analyze" xml:space="preserve">
-        <value>Analyze Log</value>
+        <value>로그 분석</value>
     </data>
   <data name="XAML_Apply" xml:space="preserve">
-        <value>Apply</value>
+        <value>적용</value>
     </data>
   <data name="XAML_AskType_Always" xml:space="preserve">
-        <value>Always Ask</value>
+        <value>항상 묻기</value>
     </data>
   <data name="XAML_AskType_No" xml:space="preserve">
-        <value>No</value>
+        <value>아니요</value>
     </data>
   <data name="XAML_AskType_Yes" xml:space="preserve">
-        <value>Yes</value>
+        <value>네</value>
     </data>
   <data name="XAML_ChangePath" xml:space="preserve">
-        <value>Change Path</value>
+        <value>경로 변경</value>
     </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
-        <value>Download Prerelease: </value>
+        <value>체험판 다운로드: </value>
     </data>
   <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
         <value>Gitee</value>
@@ -59,186 +59,186 @@
         <value>Github</value>
     </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
-        <value>Download Source: </value>
+        <value>다운로드 소스: </value>
     </data>
   <data name="XAML_All" xml:space="preserve">
-        <value>All</value>
+        <value>모든</value>
     </data>
   <data name="XAML_Enabled" xml:space="preserve">
-        <value>Enabled</value>
+        <value>활성화</value>
     </data>
   <data name="XAML_Font" xml:space="preserve">
-        <value>Font:</value>
+        <value>폰트:</value>
     </data>
   <data name="XAML_HelpTranslate" xml:space="preserve">
-        <value>Help Translate</value>
+        <value>번역 도움</value>
     </data>
   <data name="XAML_HomePage" xml:space="preserve">
-        <value>HomePage</value>
+        <value>홈페이지</value>
     </data>
   <data name="XAML_Installed" xml:space="preserve">
-        <value>Installed</value>
+        <value>설치됨</value>
     </data>
   <data name="XAML_Incompatible" xml:space="preserve">
-        <value>Incompatible</value>
+        <value>호환되지 않음</value>
     </data>
   <data name="XAML_Install_MelonLoader" xml:space="preserve">
-        <value>Install\nMelonLoader</value>
+        <value>설치\nMelonLoader</value>
     </data>
   <data name="XAML_Install_Mod" xml:space="preserve">
-        <value>Install</value>
+        <value>설치</value>
     </data>
   <data name="XAML_Language" xml:space="preserve">
-        <value>Language: </value>
+        <value>언어: </value>
     </data>
   <data name="XAML_LogFolder" xml:space="preserve">
-        <value>Open Log Folder</value>
+        <value>로그 파일 열기</value>
     </data>
   <data name="XAML_ModsFolder" xml:space="preserve">
-        <value>Mods</value>
+        <value>모드</value>
     </data>
   <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
-        <value>All</value>
+        <value>모든</value>
     </data>
   <data name="XAML_Mod_Dependencies" xml:space="preserve">
-        <value>Dependencies: </value>
+        <value>하위: </value>
     </data>
   <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0} \n\nAuthor: {1} \nOnline Version: {2}\nCompatible Game Version: {3}</value>
+        <value>{0} \n\n작성자: {1} \n온라인 버전: {2}\n호환되는 게임 버전: {3}</value>
     </data>
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
-        <value>Duplicated by: </value>
+        <value>중복제작자: </value>
     </data>
   <data name="XAML_Mod_Incompatible" xml:space="preserve">
-        <value>{0}'s {1} version is incompatible with your game version</value>
+        <value>{0} 의 {1} 버전이 게임 버전과 호환되지 않습니다.</value>
     </data>
   <data name="XAML_Mod_Modified" xml:space="preserve">
-        <value>Local Version: {0} (Modified)</value>
+        <value>로컬 버전: {0} (수정됨)</value>
     </data>
   <data name="XAML_Mod_Newer" xml:space="preserve">
-        <value>Local Version: {0} (WOW MOD DEV)</value>
+        <value>로컬 버전: {0} (WOW MOD DEV)</value>
     </data>
   <data name="XAML_Mod_Normal" xml:space="preserve">
-        <value>Local Version: {0}</value>
+        <value>로컬 버전: {0}</value>
     </data>
   <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
+        <value>대해서</value>
     </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
-        <value>Local Version: {0} (Has a newer version: {1})</value>
+        <value>로컬 버전: {0} (최신 버전 있음: {1})</value>
     </data>
   <data name="XAML_Outdated" xml:space="preserve">
-        <value>Outdated</value>
+        <value>오래된</value>
     </data>
   <data name="XAML_Path" xml:space="preserve">
-        <value>Muse Dash Folder Path</value>
+        <value>Muse Dash 폴더 경로</value>
     </data>
   <data name="XAML_Reinstall_Mod" xml:space="preserve">
-        <value>Reinstall</value>
+        <value>재설치</value>
     </data>
   <data name="XAML_Mod_SearchBar" xml:space="preserve">
-        <value>Search Mods    (Name, Author, Descriptions)</value>
+        <value>모드 검색    (이름, 작성자, 설명)</value>
     </data>
   <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-        <value>Disable dependents when deleting Mod</value>
+        <value>Mod 삭제 시 하위 항목 비활성화</value>
     </data>
   <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-        <value>Disable dependents when disabling Mod</value>
+        <value>Mod 비활성화 시 하위 항목 비활성화</value>
     </data>
   <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-        <value>Enable dependencies when enabling Mod</value>
+        <value>Mod 활성화 시 하위항목 활성화</value>
     </data>
   <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-        <value>Enable dependencies when installing Mod</value>
+        <value>Mod 설치 시 하위항목 활성화</value>
     </data>
   <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
-        <value>Analysis</value>
+        <value>분석</value>
     </data>
   <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>Mods</value>
+        <value>모드</value>
     </data>
   <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>Setting</value>
+        <value>세팅</value>
     </data>
   <data name="XAML_TroubleShoot" xml:space="preserve">
-        <value>Troubleshoot</value>
+        <value>문제 해결</value>
     </data>
   <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-        <value>Uninstall\nMelonLoader</value>
+        <value>제거\nMelonLoader</value>
     </data>
   <data name="XAML_Uninstall_Mod" xml:space="preserve">
-        <value>Uninstall</value>
+        <value>제거</value>
     </data>
   <data name="XAML_Update_Mod" xml:space="preserve">
-        <value>Update</value>
+        <value>업데이트</value>
     </data>
   <data name="XAML_DownloadSource_Custom" xml:space="preserve">
-        <value>Custom</value>
+        <value>커스텀</value>
     </data>
   <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-        <value>Provide the link of custom download source</value>
+        <value>커스텀 다운로드 소스 링크 제공</value>
     </data>
   <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
+        <value>링크는 "/"로 끝나야 하며 주소 끝에 "ModLinks.json"을 추가할 때 액세스하고 구문 분석할 수 있어야 합니다(Github 저장소와 동일한 구조)\n앱을 다시 시작한 후 적용됩니다.</value>
     </data>
   <data name="XAML_Tab_ChartDownload" xml:space="preserve">
-        <value>Charts</value>
+        <value>차트</value>
     </data>
   <data name="XAML_Chart_SearchBar" xml:space="preserve">
-        <value>Search Charts (Name, Author, Charter)</value>
+        <value>차트 검색 (이름, 제작자, 차트 제작자)</value>
     </data>
   <data name="XAML_Download_Chart" xml:space="preserve">
-        <value>Download</value>
+        <value>다운로드</value>
     </data>
   <data name="XAML_Chart_Downloads" xml:space="preserve">
-        <value>Downloads: </value>
+        <value>다운로드: </value>
     </data>
   <data name="XAML_Chart_Likes" xml:space="preserve">
-        <value>Likes: </value>
+        <value>좋아요: </value>
     </data>
   <data name="XAML_Charter" xml:space="preserve">
-        <value>Charter: </value>
+        <value>차트 제작자: </value>
     </data>
   <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
-        <value>Open Custom_Albums Folder</value>
+        <value>Custom_Albums 폴더 열기</value>
     </data>
   <data name="XAML_ChartSortOptions" xml:space="preserve">
-        <value>Sort by: </value>
+        <value>정렬 기준: </value>
     </data>
   <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>Filter by</value>
+        <value>필터링 기준</value>
     </data>
   <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>기본</value>
     </data>
   <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-        <value>Likes</value>
+        <value>좋아요</value>
     </data>
   <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-        <value>Downloads</value>
+        <value>다운로드</value>
     </data>
   <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-        <value>Latest</value>
+        <value>최신</value>
     </data>
   <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-        <value>Name</value>
+        <value>이름</value>
     </data>
   <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-        <value>Level</value>
+        <value>레벨</value>
     </data>
   <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
-        <value>Easy</value>
+        <value>쉬움</value>
     </data>
   <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
-        <value>Hard</value>
+        <value>어려움</value>
     </data>
   <data name="XAML_ChartFilterType_Master" xml:space="preserve">
-        <value>Master</value>
+        <value>마스터</value>
     </data>
   <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
-        <value>Hidden</value>
+        <value>히든</value>
     </data>
   <data name="XAML_SearchBar" xml:space="preserve">
-        <value>Search Mods    (Name, Author, Descriptions)</value>
+        <value>모드 검색(이름, 제작자, 설명)</value>
     </data>
 </root>

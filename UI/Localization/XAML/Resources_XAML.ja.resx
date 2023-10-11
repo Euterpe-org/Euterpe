@@ -20,13 +20,13 @@
         </value>
   </resheader>
   <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>UserData</value>
+        <value>ユーザーデータ</value>
     </data>
   <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
+        <value>バグリポート</value>
     </data>
   <data name="XAML_Check_Update" xml:space="preserve">
-        <value>Check Update</value>
+        <value>アップデートを確認</value>
     </data>
   <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
         <value>Github Mirror</value>
@@ -35,13 +35,13 @@
         <value>Analyze Log</value>
     </data>
   <data name="XAML_Apply" xml:space="preserve">
-        <value>Apply</value>
+        <value>適用</value>
     </data>
   <data name="XAML_AskType_Always" xml:space="preserve">
-        <value>Always Ask</value>
+        <value>毎回表示</value>
     </data>
   <data name="XAML_AskType_No" xml:space="preserve">
-        <value>No</value>
+        <value>いいえ</value>
     </data>
   <data name="XAML_AskType_Yes" xml:space="preserve">
         <value>Yes</value>
@@ -50,7 +50,7 @@
         <value>Change Path</value>
     </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
-        <value>Download Prerelease: </value>
+        <value>プリリリースをダウンロード ：</value>
     </data>
   <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
         <value>Gitee</value>
@@ -59,25 +59,25 @@
         <value>Github</value>
     </data>
   <data name="XAML_DownloadSource" xml:space="preserve">
-        <value>Download Source: </value>
+        <value>ソースをダウンロードする </value>
     </data>
   <data name="XAML_All" xml:space="preserve">
-        <value>All</value>
+        <value>すべて</value>
     </data>
   <data name="XAML_Enabled" xml:space="preserve">
-        <value>Enabled</value>
+        <value>適用</value>
     </data>
   <data name="XAML_Font" xml:space="preserve">
-        <value>Font:</value>
+        <value>フォント</value>
     </data>
   <data name="XAML_HelpTranslate" xml:space="preserve">
-        <value>Help Translate</value>
+        <value>翻訳を手伝う</value>
     </data>
   <data name="XAML_HomePage" xml:space="preserve">
-        <value>HomePage</value>
+        <value>ホームページ</value>
     </data>
   <data name="XAML_Installed" xml:space="preserve">
-        <value>Installed</value>
+        <value>インストール</value>
     </data>
   <data name="XAML_Incompatible" xml:space="preserve">
         <value>Incompatible</value>
@@ -89,7 +89,7 @@
         <value>Install</value>
     </data>
   <data name="XAML_Language" xml:space="preserve">
-        <value>Language: </value>
+        <value>言語：</value>
     </data>
   <data name="XAML_LogFolder" xml:space="preserve">
         <value>Open Log Folder</value>
@@ -98,7 +98,7 @@
         <value>Mods</value>
     </data>
   <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
-        <value>All</value>
+        <value>すべて</value>
     </data>
   <data name="XAML_Mod_Dependencies" xml:space="preserve">
         <value>Dependencies: </value>
@@ -158,16 +158,16 @@
         <value>Mods</value>
     </data>
   <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>Setting</value>
+        <value>設定</value>
     </data>
   <data name="XAML_TroubleShoot" xml:space="preserve">
-        <value>Troubleshoot</value>
+        <value>トラブルシューティング</value>
     </data>
   <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-        <value>Uninstall\nMelonLoader</value>
+        <value>アンインストール\nメロンローダー</value>
     </data>
   <data name="XAML_Uninstall_Mod" xml:space="preserve">
-        <value>Uninstall</value>
+        <value>アンインストール</value>
     </data>
   <data name="XAML_Update_Mod" xml:space="preserve">
         <value>Update</value>
@@ -236,9 +236,9 @@
         <value>Master</value>
     </data>
   <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
-        <value>Hidden</value>
+        <value>隠し</value>
     </data>
   <data name="XAML_SearchBar" xml:space="preserve">
-        <value>Search Mods    (Name, Author, Descriptions)</value>
+        <value>Modsを探す （名前，作者，説明）</value>
     </data>
 </root>
