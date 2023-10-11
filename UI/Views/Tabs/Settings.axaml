@@ -17,7 +17,7 @@
                 <Setter Property="Margin" Value="0,1" />
             </Style>
             <Style Selector="StackPanel > controls|Card">
-                <Setter Property="Height" Value="80" />
+                <Setter Property="MinHeight" Value="80" />
             </Style>
             <Style Selector="TextBlock">
                 <Setter Property="FontSize" Value="16" />
