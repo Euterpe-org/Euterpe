@@ -287,26 +287,40 @@
                     <!--Japanese-->
 
                     <!--Korean-->
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Korean: " />
+                    <controls:Card Grid.Row="3" Grid.Column="1">
+                        <StackPanel>
+                            <Image Source="/Assets/Contributors/MEMOLie.png" />
+                            <TextBlock>MEMOLie</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
 
                     <!--Russian-->
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Russian: " />
-                    <controls:Card Grid.Row="3" Grid.Column="1">
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Russian: " />
+                    <controls:Card Grid.Row="4" Grid.Column="1">
                         <StackPanel>
                             <Image Source="/Assets/Contributors/Ultra_Rabbit.jpg" />
                             <TextBlock>Ultra Rabbit</TextBlock>
                         </StackPanel>
                     </controls:Card>
 
-                    <controls:Card Grid.Row="3" Grid.Column="2">
+                    <controls:Card Grid.Row="4" Grid.Column="2">
                         <StackPanel>
                             <Image Source="/Assets/Contributors/Ronner.jpg" />
                             <TextBlock>Ronner</TextBlock>
                         </StackPanel>
                     </controls:Card>
 
+                    <controls:Card Grid.Row="4" Grid.Column="3">
+                        <StackPanel>
+                            <Image Source="/Assets/Contributors/taypexx.jpg" />
+                            <TextBlock>taypexx</TextBlock>
+                        </StackPanel>
+                    </controls:Card>
+
                     <!--Spanish-->
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Spanish: " />
-                    <controls:Card Grid.Row="4" Grid.Column="1">
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Spanish: " />
+                    <controls:Card Grid.Row="5" Grid.Column="1">
                         <StackPanel>
                             <Image Source="/Assets/Contributors/MNight4.png" />
                             <TextBlock>MNight4</TextBlock>
