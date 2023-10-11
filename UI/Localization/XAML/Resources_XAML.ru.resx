@@ -20,10 +20,10 @@
         </value>
   </resheader>
   <data name="XAML_UserDataFolder" xml:space="preserve">
-        <value>Данные пользователя</value>
+        <value>UserData</value>
     </data>
   <data name="XAML_ReportBug" xml:space="preserve">
-        <value>Report Bug</value>
+        <value>Нашли баг?</value>
     </data>
   <data name="XAML_Check_Update" xml:space="preserve">
         <value>Проверить обновления</value>
@@ -32,7 +32,7 @@
         <value>Github Mirror</value>
     </data>
   <data name="XAML_Analyze" xml:space="preserve">
-        <value>Анализ журнала</value>
+        <value>Анализировать логи</value>
     </data>
   <data name="XAML_Apply" xml:space="preserve">
         <value>Применить</value>
@@ -50,7 +50,7 @@
         <value>Изменить путь</value>
     </data>
   <data name="XAML_DownloadPrerelease" xml:space="preserve">
-        <value>Скачать предварительный релиз: </value>
+        <value>Скачать пре-релиз: </value>
     </data>
   <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
         <value>Gitee</value>
@@ -92,7 +92,7 @@
         <value>Язык: </value>
     </data>
   <data name="XAML_LogFolder" xml:space="preserve">
-        <value>Открыть папку с журналами</value>
+        <value>Открыть папку с логами</value>
     </data>
   <data name="XAML_ModsFolder" xml:space="preserve">
         <value>Моды</value>
@@ -104,25 +104,25 @@
         <value>Зависимости:</value>
     </data>
   <data name="XAML_Mod_Description" xml:space="preserve">
-        <value>{0} \n\nАвтор: {1} \nОнлайн версия: {2}\nСовместимая версия игры: {3}</value>
+        <value>{0} \n\nАвтор: {1} \nПоследняя версия: {2}\nСовместимая версия игры: {3}</value>
     </data>
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
         <value>Дубликат к:</value>
     </data>
   <data name="XAML_Mod_Incompatible" xml:space="preserve">
-        <value>Версия {1} мода {0} является несовместимой с вашей версией игры</value>
+        <value>Версия {1} мода {0} несовместима с вашей версией игры</value>
     </data>
   <data name="XAML_Mod_Modified" xml:space="preserve">
-        <value>Локальная версия: {0} (Модифицирована)</value>
+        <value>Установленная версия: {0} (Модифицирована)</value>
     </data>
   <data name="XAML_Mod_Newer" xml:space="preserve">
-        <value>Локальная версия: {0} (ВАУ МОДОДЕЛ)</value>
+        <value>Установленная версия: {0} (ВАУ МОДОДЕЛ)</value>
     </data>
   <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>Локальная версия: {0}</value>
     </data>
   <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
+        <value>Инфо</value>
     </data>
   <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Локальная версия: {0} (Имеет новую версию: {1})</value>
@@ -173,70 +173,70 @@
         <value>Обновить</value>
     </data>
   <data name="XAML_DownloadSource_Custom" xml:space="preserve">
-        <value>Custom</value>
+        <value>Другой</value>
     </data>
   <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-        <value>Provide the link of custom download source</value>
+        <value>Ссылка на источник скачивания</value>
     </data>
   <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-        <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
+        <value>Ссылка должна заканчиваться на "/" и должна быть доступна и анализируема при добавлении "ModLinks.json" в конец адреса (та же структура, что и в репозитории Github)\nВступает в силу после перезапуска приложения</value>
     </data>
   <data name="XAML_Tab_ChartDownload" xml:space="preserve">
-        <value>Charts</value>
+        <value>Чарты</value>
     </data>
   <data name="XAML_Chart_SearchBar" xml:space="preserve">
-        <value>Search Charts (Name, Author, Charter)</value>
+        <value>Найти чарт (Имя, Автор, Создатель)</value>
     </data>
   <data name="XAML_Download_Chart" xml:space="preserve">
-        <value>Download</value>
+        <value>Скачать</value>
     </data>
   <data name="XAML_Chart_Downloads" xml:space="preserve">
-        <value>Downloads: </value>
+        <value>Скачиваний: </value>
     </data>
   <data name="XAML_Chart_Likes" xml:space="preserve">
-        <value>Likes: </value>
+        <value>Лайки: </value>
     </data>
   <data name="XAML_Charter" xml:space="preserve">
-        <value>Charter: </value>
+        <value>Создатель: </value>
     </data>
   <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
-        <value>Open Custom_Albums Folder</value>
+        <value>Открыть папку с чартами</value>
     </data>
   <data name="XAML_ChartSortOptions" xml:space="preserve">
-        <value>Sort by: </value>
+        <value>Сортировать по: </value>
     </data>
   <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>Filter by</value>
+        <value>Фильтровать по</value>
     </data>
   <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>По умолчанию</value>
     </data>
   <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-        <value>Likes</value>
+        <value>Лайки</value>
     </data>
   <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-        <value>Downloads</value>
+        <value>Скачивания</value>
     </data>
   <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-        <value>Latest</value>
+        <value>Последние</value>
     </data>
   <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-        <value>Name</value>
+        <value>Название</value>
     </data>
   <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-        <value>Level</value>
+        <value>Сложность</value>
     </data>
   <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
-        <value>Easy</value>
+        <value>Легко</value>
     </data>
   <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
-        <value>Hard</value>
+        <value>Сложно</value>
     </data>
   <data name="XAML_ChartFilterType_Master" xml:space="preserve">
-        <value>Master</value>
+        <value>Мастер</value>
     </data>
   <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
-        <value>Hidden</value>
+        <value>Скрытый</value>
     </data>
   <data name="XAML_SearchBar" xml:space="preserve">
         <value>Искать моды (Имя, Автор, Описания)</value>
