@@ -44,7 +44,7 @@
 
 1. English (Default)
 2. Chinese Simplified (Full)
-3. Chinese Traditional (Partial)
+3. Chinese Traditional (Full)
 4. French (None)
 5. Hungarian (Full)
 6. Japanese (Partial)
