@@ -49,7 +49,7 @@
 5. Hungarian (Full)
 6. Japanese (Partial)
 7. Korean (Full)
-8. Russian (Partial)
+8. Russian (Full)
 9. Spanish (Full)
 
 **If you want to contribute to translation, use [Crowdin](https://crowdin.com/project/musedashmodtools) to translate.** (If you cannot find the language you want to translate, ask me on Discord or create an issue.)
