@@ -14,7 +14,7 @@
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="80,*" ColumnDefinitions="365,280,*,Auto">
+        <Grid RowDefinitions="60,80,*" ColumnDefinitions="*,*">
             <Grid.Styles>
                 <Style Selector="StackPanel>PathIcon">
                     <Setter Property="Width" Value="30" />
@@ -29,6 +29,7 @@
 
             <!--Search bar-->
             <TextBox Grid.Row="0" Grid.Column="0"
+                     MinWidth="500"
                      Height="40"
                      Classes="Solo"
                      Background="#505050"
@@ -51,8 +52,18 @@
                 </TextBox.InnerRightContent>
             </TextBox>
 
+            <!--Custom Albums folder-->
+            <Button Grid.Row="0" Grid.Column="1"
+                    FontSize="16"
+                    Height="60"
+                    Classes="dark"
+                    MinWidth="260"
+                    Margin="80,0"
+                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
+                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
+
             <!--Sort Options-->
-            <StackPanel Grid.Row="0" Grid.Column="1">
+            <StackPanel Grid.Row="1" Grid.Column="0">
 
                 <PathIcon Data="{StaticResource Sort}" Margin="0,0,10,0" />
 
@@ -68,7 +79,7 @@
             </StackPanel>
 
             <!--Filter Options-->
-            <Menu Grid.Row="0" Grid.Column="2" FontSize="20" HorizontalAlignment="Center">
+            <Menu Grid.Row="1" Grid.Column="1" FontSize="20" HorizontalAlignment="Center">
                 <MenuItem>
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -113,19 +124,11 @@
                 </MenuItem>
             </Menu>
 
-
-            <!--Custom Albums folder-->
-            <Button Grid.Row="0" Grid.Column="3"
-                    FontSize="16"
-                    Height="60"
-                    Classes="dark"
-                    MinWidth="260"
-                    Margin="10,0,20,0"
-                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
-                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
-
             <!--Chart list-->
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Margin="0,20,0,0">
                 <ItemsRepeater ItemsSource="{Binding Charts}"
                                Margin="0,0,10,0">
 
@@ -143,7 +146,7 @@
 
                                 <Grid HorizontalAlignment="Center"
                                       RowDefinitions="200,Auto,Auto,35,Auto,80"
-                                      ColumnDefinitions="150,150">
+                                      ColumnDefinitions="150,150" ShowGridLines="True">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
                                             <Setter Property="Orientation" Value="Horizontal" />

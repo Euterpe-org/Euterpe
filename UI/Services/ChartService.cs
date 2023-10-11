@@ -34,7 +34,11 @@ public class ChartService : IChartService
     public async Task DownloadChart(Chart item)
     {
         var path = Path.Combine(SavingService.Settings.CustomAlbumsFolder, item.Name.RemoveInvalidChars() + ".mdm");
-        if (File.Exists(path)) await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_OverrideChart, item.Name);
+        if (File.Exists(path))
+        {
+            var result = await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_OverrideChart, item.Name);
+            if (!result) return;
+        }
 
         await GitHubService.DownloadChart(item.Id, path);
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
