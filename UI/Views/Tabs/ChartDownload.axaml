@@ -126,7 +126,8 @@
 
             <!--Chart list-->
             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <ItemsRepeater ItemsSource="{Binding Charts}" Margin="0,0,10,0">
+                <ItemsRepeater ItemsSource="{Binding Charts}"
+                               Margin="0,0,10,0">
 
                     <ItemsRepeater.Layout>
                         <UniformGridLayout ItemsStretch="Uniform"
@@ -141,7 +142,7 @@
                                            BorderThickness="2">
 
                                 <Grid HorizontalAlignment="Center"
-                                      RowDefinitions="200,Auto,45,35,40,80"
+                                      RowDefinitions="200,Auto,Auto,35,Auto,80"
                                       ColumnDefinitions="150,150">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
@@ -203,13 +204,16 @@
 
 
                                     <!--Difficulties-->
-                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                                MinHeight="40">
                                         <StackPanel.Styles>
                                             <Style Selector="StackPanel">
                                                 <Setter Property="Margin" Value="5,0" />
                                             </Style>
                                             <Style Selector="Image">
                                                 <Setter Property="Margin" Value="5,0" />
+                                                <Setter Property="Width" Value="30" />
+                                                <Setter Property="Height" Value="30" />
                                             </Style>
                                             <Style Selector="TextBlock">
                                                 <Setter Property="FontSize" Value="20" />
