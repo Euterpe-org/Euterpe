@@ -2,18 +2,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
+             xmlns:cc="using:MuseDashModToolsUI.Views.Controls"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:ext="using:MuseDashModToolsUI.Extensions"
+             xmlns:model="using:MuseDashModToolsUI.Models"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.ChartDownload"
              x:DataType="tabs:ChartDownloadViewModel"
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
     <controls:Card>
-        <Grid RowDefinitions="60,*" ColumnDefinitions="365,280,*,260">
+        <Grid RowDefinitions="60,80,*" ColumnDefinitions="*,*">
             <Grid.Styles>
                 <Style Selector="StackPanel>PathIcon">
                     <Setter Property="Width" Value="30" />
@@ -28,6 +29,7 @@
 
             <!--Search bar-->
             <TextBox Grid.Row="0" Grid.Column="0"
+                     MinWidth="500"
                      Height="40"
                      Classes="Solo"
                      Background="#505050"
@@ -50,8 +52,18 @@
                 </TextBox.InnerRightContent>
             </TextBox>
 
+            <!--Custom Albums folder-->
+            <Button Grid.Row="0" Grid.Column="1"
+                    FontSize="16"
+                    Height="60"
+                    Classes="dark"
+                    MinWidth="260"
+                    Margin="80,0"
+                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
+                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
+
             <!--Sort Options-->
-            <StackPanel Grid.Row="0" Grid.Column="1">
+            <StackPanel Grid.Row="1" Grid.Column="0">
 
                 <PathIcon Data="{StaticResource Sort}" Margin="0,0,10,0" />
 
@@ -67,7 +79,7 @@
             </StackPanel>
 
             <!--Filter Options-->
-            <Menu Grid.Row="0" Grid.Column="2" FontSize="20" HorizontalAlignment="Center">
+            <Menu Grid.Row="1" Grid.Column="1" FontSize="20" HorizontalAlignment="Center">
                 <MenuItem>
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -112,35 +124,30 @@
                 </MenuItem>
             </Menu>
 
-
-            <!--Custom Albums folder-->
-            <Button Grid.Row="0" Grid.Column="3"
-                    FontSize="16"
-                    Classes="dark"
-                    Margin="10,0,20,0"
-                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
-                    Command="{Binding OpenCustomAlbumsFolderCommand}" />
-
             <!--Chart list-->
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <ListBox ItemsSource="{Binding Charts}" Margin="0,0,10,0">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="3" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
+            <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          Margin="0,20,0,0">
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <controls:Card Background="#595959" BorderBrush="#999999">
-                                <controls:Card.Styles>
-                                    <Style Selector="controls|Card Border#PART_BackgroundBorder">
-                                        <Setter Property="BorderThickness" Value="2" />
-                                    </Style>
-                                </controls:Card.Styles>
+                <ItemsRepeater ItemsSource="{Binding Charts}"
+                               Margin="0,0,10,0">
+
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout ItemsStretch="Uniform"
+                                           MinColumnSpacing="10"
+                                           MinRowSpacing="10" />
+                    </ItemsRepeater.Layout>
+
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate DataType="model:Chart">
+                            <controls:Card Background="#595959"
+                                           BorderBrush="#999999"
+                                           BorderThickness="2">
+
                                 <Grid HorizontalAlignment="Center"
-                                      RowDefinitions="200,Auto,45,35,35,80"
-                                      ColumnDefinitions="150,150">
+                                      RowDefinitions="200,*,50,35,45,80"
+                                      ColumnDefinitions="160,160">
                                     <Grid.Styles>
                                         <Style Selector="StackPanel">
                                             <Setter Property="Orientation" Value="Horizontal" />
@@ -179,11 +186,13 @@
 
                                     <!--Name-->
                                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                               FontSize="30"
+                                               FontSize="26"
                                                MinHeight="35"
                                                MinWidth="200"
                                                Text="{Binding Name}"
-                                               TextAlignment="Center" />
+                                               TextAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"
+                                               VerticalAlignment="Center" />
 
                                     <!--Charter-->
                                     <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
@@ -201,10 +210,19 @@
 
 
                                     <!--Difficulties-->
-                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                                MinHeight="40">
                                         <StackPanel.Styles>
                                             <Style Selector="StackPanel">
                                                 <Setter Property="Margin" Value="5,0" />
+                                            </Style>
+                                            <Style Selector="Image">
+                                                <Setter Property="Margin" Value="5,0" />
+                                                <Setter Property="Width" Value="30" />
+                                                <Setter Property="Height" Value="30" />
+                                            </Style>
+                                            <Style Selector="TextBlock">
+                                                <Setter Property="FontSize" Value="20" />
                                             </Style>
                                         </StackPanel.Styles>
 
@@ -249,19 +267,18 @@
                                     </StackPanel>
 
                                     <!--Download button-->
-                                    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                                    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"
                                             Classes="dark"
                                             FontSize="25"
-                                            Margin="0,20,0,0"
+                                            Margin="0,10,0,5"
                                             Content="{ext:LocalizeExtensions XAML_Download_Chart}"
-                                            Command="{ReflectionBinding $parent[ListBox].DataContext.DownloadChartCommand}"
+                                            Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.DownloadChartCommand}"
                                             CommandParameter="{Binding .}" />
                                 </Grid>
                             </controls:Card>
-
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
             </ScrollViewer>
         </Grid>
     </controls:Card>

@@ -12,15 +12,8 @@ public partial class SavingService : ISavingService
     private readonly IPlatformService _platformService;
     private bool _isSavedLoaded;
 
-    private static string ConfigFolderPath
-    {
-        get
-        {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-            return path;
-        }
-    }
+    private static string ConfigFolderPath =>
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
 
     private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
 
@@ -46,16 +39,7 @@ public partial class SavingService : ISavingService
 
     public Setting Settings { get; } = new();
     public string ModLinksPath => Path.Combine(ConfigFolderPath, "ModLinks.json");
-
-    public string ChartFolderPath
-    {
-        get
-        {
-            var path = Path.Combine(ConfigFolderPath, "Charts");
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-            return path;
-        }
-    }
+    public string ChartFolderPath => Path.Combine(ConfigFolderPath, "Charts");
 
     public async Task InitializeSettings()
     {

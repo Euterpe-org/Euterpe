@@ -9,6 +9,7 @@
              xmlns:ext="using:MuseDashModToolsUI.Extensions"
              xmlns:converters="using:MuseDashModToolsUI.Converters"
              xmlns:dialogs="using:MuseDashModToolsUI.ViewModels.Dialogs"
+             xmlns:model="using:MuseDashModToolsUI.Models"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.ModManage"
              x:DataType="tabs:ModManageViewModel"
@@ -251,11 +252,11 @@
                     </StackPanel.Styles>
 
                     <!--Mod List-->
-                    <ItemsControl Foreground="Transparent" Background="Transparent"
-                                  ItemsSource="{Binding Mods}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Tag="{Binding Name}">
+                    <ItemsRepeater Background="Transparent"
+                                   ItemsSource="{Binding Mods}">
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate DataType="model:Mod">
+                                <Grid Tag="{Binding Name}" Margin="0,0.5">
                                     <Expander Margin="0,0,15,0.5">
                                         <Expander.Styles>
                                             <Style Selector="Expander ContentPresenter#PART_ContentPresenter">
@@ -366,8 +367,8 @@
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
