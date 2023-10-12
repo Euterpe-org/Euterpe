@@ -2,7 +2,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls1="clr-namespace:MuseDashModToolsUI.Views.Controls"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MuseDashModToolsUI.Views.Tabs.InfoJson">
-    Welcome to Avalonia!
+    <controls:Card Margin="10,0,10,10">
+        <Grid Margin="25,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Name="panel" x:FieldModifier="private">
+                <controls1:MapInfoEditor></controls1:MapInfoEditor>
+            </StackPanel>
+        </Grid>
+    </controls:Card>
 </UserControl>

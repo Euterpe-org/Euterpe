@@ -1,0 +1,22 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MuseDashModToolsUI.Views.Controls.MapInfoEditor">
+    <StackPanel Name="panel" x:FieldModifier="private">
+        <StackPanel.Styles>
+            <Style Selector="TextBox">
+                <Setter Property="Theme" Value="{StaticResource FilledTextBox}" />
+            </Style>
+        </StackPanel.Styles>
+        <TextBox Name="SongTitleTextBox" assists:TextFieldAssist.Label="曲目名" Margin="0,0,0,10"/>
+        <TextBox Name="AuthorTextBox" assists:TextFieldAssist.Label="艺术家/歌手" Margin="0,0,0,10" />
+        <TextBox Name="ChartDesignTextBox" assists:TextFieldAssist.Label="谱面设计" Margin="0,0,0,10"/>
+        <TextBox Name="SceneTextBox" assists:TextFieldAssist.Label="场景" Margin="0,0,0,10"/>
+        <TextBox Name="BpmTextBox" assists:TextFieldAssist.Label="BPM" Margin="0,0,0,10"/>
+        <TextBox Name="DifficultyTextBox" assists:TextFieldAssist.Label="难度" Margin="0,0,0,10"/>
+        <TextBox Name="LevelTextBox" assists:TextFieldAssist.Label="谱面等级" Margin="0,0,0,10"/>
+    </StackPanel>
+</UserControl>
