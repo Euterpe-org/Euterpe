@@ -242,4 +242,7 @@
     <data name="XAML_SearchBar" xml:space="preserve">
         <value>Search Mods    (Name, Author, Descriptions)</value>
     </data>
+    <data name="XAML_Tab_InfoJson" xml:space="preserve">
+        <value>InfoJson</value>
+    </data>
 </root>
