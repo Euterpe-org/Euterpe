@@ -13,6 +13,34 @@
              DataContext="{extensions:DependencyInjection Type=viewModels:IInfoJsonViewModel}">
 
     <controls:Card Margin="10,0,10,10">
-        <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_ChartName}" />
+        <StackPanel>
+            <StackPanel.Styles>
+                <Style Selector="cc|TitledTextBox">
+                    <Setter Property="TitleMargin" Value="0,0,20,0" />
+                    <Setter Property="TitleVerticalAlignment" Value="Center" />
+                    <Setter Property="ContentVerticalAlignment" Value="Center" />
+                    <Setter Property="ContentMinWidth" Value="80" />
+                </Style>
+            </StackPanel.Styles>
+
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_ChartName}"
+                              ContentText="{Binding Name}" />
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Author}"
+                              ContentText="{Binding Author}" />
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_BPM}"
+                              ContentText="{Binding Bpm}" />
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Scene}"
+                              ContentText="{Binding Scene}" />
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_SearchTags}"
+                              ContentText="{Binding SearchTags}" />
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMode}"
+                              ContentText="{Binding HideBmsMode}" />
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsDifficulty}"
+                              ContentText="{Binding HideBmsDifficulty}" />
+            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMessage}"
+                              ContentText="{Binding HideBmsMessage}" />
+
+        </StackPanel>
+
     </controls:Card>
 </UserControl>

@@ -11,8 +11,13 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{TemplateBinding TitleText}" />
-                    <TextBox Text="{TemplateBinding ContentText}" />
+                    <TextBlock VerticalAlignment="{TemplateBinding TitleVerticalAlignment}"
+                               Text="{TemplateBinding TitleText}"
+                               Margin="{TemplateBinding TitleMargin}" />
+
+                    <TextBox VerticalAlignment="{TemplateBinding ContentVerticalAlignment}"
+                             Text="{TemplateBinding ContentText}"
+                             MinWidth="{TemplateBinding ContentMinWidth}" />
                 </StackPanel>
             </ControlTemplate>
         </Setter>

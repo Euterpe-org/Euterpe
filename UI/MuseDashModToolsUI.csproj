@@ -57,9 +57,6 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources_MsgBox.resx</DependentUpon>
         </Compile>
-        <Compile Update="Views\Controls\TitledTextBox.cs">
-            <DependentUpon>TitledTextBox.axaml</DependentUpon>
-        </Compile>
     </ItemGroup>
 
     <ItemGroup>

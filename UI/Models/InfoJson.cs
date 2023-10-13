@@ -7,6 +7,9 @@ public class InfoJson
     [JsonPropertyName("name")]
     public string ChartName { get; set; } = string.Empty;
 
+    [JsonPropertyName("name_romanized")]
+    public string NameRomanized { get; set; } = string.Empty;
+
     [JsonPropertyName("author")]
     public string Author { get; set; } = string.Empty;
 

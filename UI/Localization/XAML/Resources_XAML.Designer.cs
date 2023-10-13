@@ -438,6 +438,33 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Bms Difficulty.
+        /// </summary>
+        internal static string XAML_InfoJson_HideBmsDifficulty {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_HideBmsDifficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Bms Message.
+        /// </summary>
+        internal static string XAML_InfoJson_HideBmsMessage {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_HideBmsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Bms Mode.
+        /// </summary>
+        internal static string XAML_InfoJson_HideBmsMode {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_HideBmsMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Level.
         /// </summary>
         internal static string XAML_InfoJson_Level {
@@ -461,6 +488,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_InfoJson_Scene {
             get {
                 return ResourceManager.GetString("XAML_InfoJson_Scene", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Tags.
+        /// </summary>
+        internal static string XAML_InfoJson_SearchTags {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_SearchTags", resourceCulture);
             }
         }
         
