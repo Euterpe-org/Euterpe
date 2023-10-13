@@ -4,15 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls1="clr-namespace:MuseDashModToolsUI.Views.Controls"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             xmlns:extensions="clr-namespace:MuseDashModToolsUI.Extensions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MuseDashModToolsUI.Views.Tabs.InfoJson">
     <controls:Card Margin="10,0,10,10">
         <Grid Margin="25,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
             <StackPanel Name="panel" x:FieldModifier="private">
-                <controls1:MapInfoEditor></controls1:MapInfoEditor>
+                <Grid ColumnDefinitions="7.5*,0.5*,2*">
+                    <TextBox Name="PathTextBox" assists:TextFieldAssist.Label="Path"></TextBox>
+                    <Button Classes="dark" Grid.Column="2" Click="Button_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon Data="{StaticResource Folder}"
+                                      Height="35"
+                                      Width="35"
+                                      VerticalAlignment="Center" />
+                            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center"
+                                       Text="{extensions:LocalizeExtensions XAML_ChangePath}" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <TabControl Name="TabControl"/>
             </StackPanel>
         </Grid>
     </controls:Card>
