@@ -1,0 +1,43 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
+        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <cc:Developer />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="cc|Developer">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <controls:Card Background="#595959"
+                               HorizontalAlignment="Center"
+                               Height="180"
+                               Width="180">
+
+                    <controls:Card.Styles>
+                        <Style Selector="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="0,0,0,5" />
+                        </Style>
+                    </controls:Card.Styles>
+
+                    <StackPanel>
+                        <Image Source="{TemplateBinding Source}"
+                               Height="70"
+                               Width="70"
+                               Margin="0,0,0,10" />
+
+                        <TextBlock Classes="Headline6"
+                                   Text="{TemplateBinding DeveloperName}" />
+
+                        <TextBlock Classes="Body2"
+                                   Text="{TemplateBinding ContributionText}" />
+                    </StackPanel>
+                </controls:Card>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

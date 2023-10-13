@@ -76,22 +76,6 @@
 
                 <Grid RowDefinitions="180,100" ColumnDefinitions="*,*,*,*" Margin="0,20">
                     <Grid.Styles>
-                        <Style Selector="Grid>controls|Card">
-                            <Setter Property="Background" Value="#595959" />
-                            <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Height" Value="180" />
-                            <Setter Property="Width" Value="180" />
-                        </Style>
-                        <Style Selector="StackPanel>Image">
-                            <Setter Property="Height" Value="70" />
-                            <Setter Property="Width" Value="70" />
-                            <Setter Property="Margin" Value="0,0,0,10" />
-                        </Style>
-                        <Style Selector="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap" />
-                            <Setter Property="TextAlignment" Value="Center" />
-                            <Setter Property="Margin" Value="0,0,0,5" />
-                        </Style>
                         <Style Selector="Menu">
                             <Setter Property="FontSize" Value="15" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -99,15 +83,10 @@
                     </Grid.Styles>
 
                     <!--lxy-->
-                    <controls:Card Grid.Row="0" Grid.Column="0">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/lxy.png" />
-                            <TextBlock Classes="Headline6"
-                                       Text="lxy" />
-                            <TextBlock Classes="Body2"
-                                       Text="For planning and maintaining the project" />
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Developer Grid.Row="0" Grid.Column="0"
+                                  Source="/Assets/Contributors/lxy.png"
+                                  DeveloperName="lxy"
+                                  ContributionText="For planning and maintaining the project" />
 
                     <Menu Grid.Row="1" Grid.Column="0">
                         <!--Accounts-->
@@ -150,15 +129,10 @@
                     </Menu>
 
                     <!--Super Pig-->
-                    <controls:Card Grid.Row="0" Grid.Column="1">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/Super_Pig.png" />
-                            <TextBlock Classes="Headline6"
-                                       Text="Super Pig" />
-                            <TextBlock Classes="Body2"
-                                       Text="For redrawing the Muse Dash Mod Tools icon" />
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Developer Grid.Row="0" Grid.Column="1"
+                                  Source="/Assets/Contributors/Super_Pig.png"
+                                  DeveloperName="Super Pig"
+                                  ContributionText="For redrawing the Muse Dash Mod Tools icon" />
 
                     <Menu Grid.Row="1" Grid.Column="1">
                         <!--Account-->
@@ -173,15 +147,10 @@
                     </Menu>
 
                     <!--Balint-->
-                    <controls:Card Grid.Row="0" Grid.Column="2">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/Balint.png" />
-                            <TextBlock Classes="Headline6"
-                                       Text="Balint" />
-                            <TextBlock Classes="Body2"
-                                       Text="For making the first version of the project" />
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Developer Grid.Row="0" Grid.Column="2"
+                                  Source="/Assets/Contributors/Balint.png"
+                                  DeveloperName="Balint"
+                                  ContributionText="For making the first version of the project" />
 
                     <Menu Grid.Row="1" Grid.Column="2">
                         <!--Account-->
@@ -196,15 +165,10 @@
                     </Menu>
 
                     <!--Ultra Rabbit-->
-                    <controls:Card Grid.Row="0" Grid.Column="3">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/Ultra_Rabbit.jpg" />
-                            <TextBlock Classes="Headline6"
-                                       Text="Ultra Rabbit" />
-                            <TextBlock Classes="Body2"
-                                       Text="For rewriting the first version of the project" />
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Developer Grid.Row="0" Grid.Column="3"
+                                  Source="/Assets/Contributors/Ultra_Rabbit.jpg"
+                                  DeveloperName="Ultra Rabbit"
+                                  ContributionText="For rewriting the first version of the project" />
 
                     <Menu Grid.Row="1" Grid.Column="3">
                         <!--Account-->
@@ -234,45 +198,54 @@
 
                     <!--Chinese Simplified-->
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Chinese&#x0a;Simplified:" />
-                    <cc:Contributor Grid.Row="0" Grid.Column="1" Source="/Assets/Contributors/lxymahatma.jpg"
+                    <cc:Contributor Grid.Row="0" Grid.Column="1"
+                                    Source="/Assets/Contributors/lxymahatma.jpg"
                                     Text="lxymahatma" />
 
                     <!--Chinese Traditional-->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Chinese&#x0a;Traditional:" />
-                    <cc:Contributor Grid.Row="1" Grid.Column="1" Source="/Assets/Contributors/Shiron_Lee.jpg"
+                    <cc:Contributor Grid.Row="1" Grid.Column="1"
+                                    Source="/Assets/Contributors/Shiron_Lee.jpg"
                                     Text="Shiron_Lee" />
 
-                    <cc:Contributor Grid.Row="1" Grid.Column="2" Source="/Assets/Contributors/bigbeesushi.jpg"
+                    <cc:Contributor Grid.Row="1" Grid.Column="2"
+                                    Source="/Assets/Contributors/bigbeesushi.jpg"
                                     Text="Bigbeesushi" />
 
                     <!--French-->
 
                     <!--Hungarian-->
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Hungarian: " />
-                    <cc:Contributor Grid.Row="2" Grid.Column="1" Source="/Assets/Contributors/Balint.png"
+                    <cc:Contributor Grid.Row="2" Grid.Column="1"
+                                    Source="/Assets/Contributors/Balint.png"
                                     Text="Balint" />
 
                     <!--Japanese-->
 
                     <!--Korean-->
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Korean: " />
-                    <cc:Contributor Grid.Row="3" Grid.Column="1" Source="/Assets/Contributors/MEMOLie.png"
+                    <cc:Contributor Grid.Row="3" Grid.Column="1"
+                                    Source="/Assets/Contributors/MEMOLie.png"
                                     Text="MEMOLie" />
 
                     <!--Russian-->
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Russian: " />
-                    <cc:Contributor Grid.Row="4" Grid.Column="1" Source="/Assets/Contributors/Ultra_Rabbit.jpg"
+                    <cc:Contributor Grid.Row="4" Grid.Column="1"
+                                    Source="/Assets/Contributors/Ultra_Rabbit.jpg"
                                     Text="Ultra Rabbit" />
 
-                    <cc:Contributor Grid.Row="4" Grid.Column="2" Source="/Assets/Contributors/Ronner.jpg"
+                    <cc:Contributor Grid.Row="4" Grid.Column="2"
+                                    Source="/Assets/Contributors/Ronner.jpg"
                                     Text="Ronner" />
 
-                    <cc:Contributor Grid.Row="4" Grid.Column="3" Source="/Assets/Contributors/taypexx.jpg"
+                    <cc:Contributor Grid.Row="4" Grid.Column="3"
+                                    Source="/Assets/Contributors/taypexx.jpg"
                                     Text="taypexx" />
 
                     <!--Spanish-->
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Spanish: " />
-                    <cc:Contributor Grid.Row="5" Grid.Column="1" Source="/Assets/Contributors/MNight4.png"
+                    <cc:Contributor Grid.Row="5" Grid.Column="1"
+                                    Source="/Assets/Contributors/MNight4.png"
                                     Text="MNight4" />
                 </Grid>
             </StackPanel>
