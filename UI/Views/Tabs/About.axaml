@@ -6,6 +6,7 @@
              xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:ext="using:MuseDashModToolsUI.Extensions"
+             xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.About"
              x:DataType="tabs:AboutViewModel"
@@ -229,103 +230,50 @@
                             <Setter Property="VerticalAlignment" Value="Center" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
                         </Style>
-                        <Style Selector="StackPanel>TextBlock">
-                            <Setter Property="FontSize" Value="18" />
-                            <Setter Property="TextAlignment" Value="Center" />
-                            <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="MinWidth" Value="100" />
-                        </Style>
-                        <Style Selector="Image">
-                            <Setter Property="Height" Value="60" />
-                            <Setter Property="Width" Value="60" />
-                            <Setter Property="Margin" Value="0,0,0,15" />
-                        </Style>
-                        <Style Selector="controls|Card">
-                            <Setter Property="Background" Value="#595959" />
-                            <Setter Property="Height" Value="120" />
-                            <Setter Property="Width" Value="140" />
-                            <Setter Property="Margin" Value="0,10" />
-                        </Style>
                     </Grid.Styles>
 
                     <!--Chinese Simplified-->
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Chinese&#x0a;Simplified:" />
-                    <controls:Card Grid.Row="0" Grid.Column="1">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/lxymahatma.jpg" />
-                            <TextBlock>lxymahatma</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="0" Grid.Column="1" Source="/Assets/Contributors/lxymahatma.jpg"
+                                    Text="lxymahatma" />
 
                     <!--Chinese Traditional-->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Chinese&#x0a;Traditional:" />
-                    <controls:Card Grid.Row="1" Grid.Column="1">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/Shiron_Lee.jpg" />
-                            <TextBlock>Shiron_Lee</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="1" Grid.Column="1" Source="/Assets/Contributors/Shiron_Lee.jpg"
+                                    Text="Shiron_Lee" />
 
-                    <controls:Card Grid.Row="1" Grid.Column="2">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/bigbeesushi.jpg" />
-                            <TextBlock>Bigbeesushi</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="1" Grid.Column="2" Source="/Assets/Contributors/bigbeesushi.jpg"
+                                    Text="Bigbeesushi" />
 
                     <!--French-->
 
                     <!--Hungarian-->
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Hungarian: " />
-                    <controls:Card Grid.Row="2" Grid.Column="1">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/Balint.png" />
-                            <TextBlock>Balint</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="2" Grid.Column="1" Source="/Assets/Contributors/Balint.png"
+                                    Text="Balint" />
 
                     <!--Japanese-->
 
                     <!--Korean-->
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Korean: " />
-                    <controls:Card Grid.Row="3" Grid.Column="1">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/MEMOLie.png" />
-                            <TextBlock>MEMOLie</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="3" Grid.Column="1" Source="/Assets/Contributors/MEMOLie.png"
+                                    Text="MEMOLie" />
 
                     <!--Russian-->
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Russian: " />
-                    <controls:Card Grid.Row="4" Grid.Column="1">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/Ultra_Rabbit.jpg" />
-                            <TextBlock>Ultra Rabbit</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="4" Grid.Column="1" Source="/Assets/Contributors/Ultra_Rabbit.jpg"
+                                    Text="Ultra Rabbit" />
 
-                    <controls:Card Grid.Row="4" Grid.Column="2">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/Ronner.jpg" />
-                            <TextBlock>Ronner</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="4" Grid.Column="2" Source="/Assets/Contributors/Ronner.jpg"
+                                    Text="Ronner" />
 
-                    <controls:Card Grid.Row="4" Grid.Column="3">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/taypexx.jpg" />
-                            <TextBlock>taypexx</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="4" Grid.Column="3" Source="/Assets/Contributors/taypexx.jpg"
+                                    Text="taypexx" />
 
                     <!--Spanish-->
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Spanish: " />
-                    <controls:Card Grid.Row="5" Grid.Column="1">
-                        <StackPanel>
-                            <Image Source="/Assets/Contributors/MNight4.png" />
-                            <TextBlock>MNight4</TextBlock>
-                        </StackPanel>
-                    </controls:Card>
+                    <cc:Contributor Grid.Row="5" Grid.Column="1" Source="/Assets/Contributors/MNight4.png"
+                                    Text="MNight4" />
                 </Grid>
             </StackPanel>
         </ScrollViewer>

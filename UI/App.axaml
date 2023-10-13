@@ -28,6 +28,7 @@
 
         <StyleInclude Source="avares://MuseDashModTools/Views/Controls/DifficultyFilter.axaml" />
         <StyleInclude Source="avares://MuseDashModTools/Views/Controls/TitledTextBox.axaml" />
+        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/Contributor.axaml" />
     </Application.Styles>
 
     <Application.Resources>
