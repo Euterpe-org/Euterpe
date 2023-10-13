@@ -245,4 +245,25 @@
     <data name="XAML_Tab_InfoJson" xml:space="preserve">
         <value>InfoJson</value>
     </data>
+    <data name="XAML_InfoJson_ChartName" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="XAML_InfoJson_Author" xml:space="preserve">
+        <value>Artist</value>
+    </data>
+    <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
+        <value>Level Designer</value>
+    </data>
+    <data name="XAML_InfoJson_Scene" xml:space="preserve">
+        <value>Scene</value>
+    </data>
+    <data name="XAML_InfoJson_BPM" xml:space="preserve">
+        <value>BPM</value>
+    </data>
+    <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
+        <value>Difficulty</value>
+    </data>
+    <data name="XAML_InfoJson_Level" xml:space="preserve">
+        <value>Level</value>
+    </data>
 </root>

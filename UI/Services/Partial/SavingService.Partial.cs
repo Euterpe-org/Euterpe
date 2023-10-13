@@ -71,7 +71,7 @@ public partial class SavingService
             _logger.Information("Showing choose folder dialogue");
 
             var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-                { AllowMultiple = false, Title = FolderDialog_Title });
+                { AllowMultiple = false, Title = FolderDialog_Title_ChooseMuseDashFolder });
 
             if (dialogue.Count != 0) return dialogue[0].TryGetLocalPath();
             if (!string.IsNullOrEmpty(Settings.MuseDashFolder)) return Settings.MuseDashFolder;

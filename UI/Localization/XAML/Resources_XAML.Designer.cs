@@ -402,6 +402,69 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Artist.
+        /// </summary>
+        internal static string XAML_InfoJson_Author {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BPM.
+        /// </summary>
+        internal static string XAML_InfoJson_BPM {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_BPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string XAML_InfoJson_ChartName {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_ChartName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Difficulty.
+        /// </summary>
+        internal static string XAML_InfoJson_Difficulty {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_Difficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        internal static string XAML_InfoJson_Level {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level Designer.
+        /// </summary>
+        internal static string XAML_InfoJson_LevelDesigner {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_LevelDesigner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scene.
+        /// </summary>
+        internal static string XAML_InfoJson_Scene {
+            get {
+                return ResourceManager.GetString("XAML_InfoJson_Scene", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Install\nMelonLoader.
         /// </summary>
         internal static string XAML_Install_MelonLoader {

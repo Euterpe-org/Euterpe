@@ -27,6 +27,7 @@
         </Style>
 
         <StyleInclude Source="avares://MuseDashModTools/Views/Controls/DifficultyFilter.axaml" />
+        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/TitledTextBox.axaml" />
     </Application.Styles>
 
     <Application.Resources>
