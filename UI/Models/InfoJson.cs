@@ -5,7 +5,7 @@ namespace MuseDashModToolsUI.Models;
 public class InfoJson
 {
     [JsonPropertyName("name")]
-    public string ChartName { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("name_romanized")]
     public string NameRomanized { get; set; } = string.Empty;
@@ -60,4 +60,7 @@ public class InfoJson
 
     [JsonPropertyName("unlockLevel")]
     public string UnlockLevel { get; set; } = string.Empty;
+
+    [JsonIgnore]
+    public string SearchTagsString { get; set; } = string.Empty;
 }

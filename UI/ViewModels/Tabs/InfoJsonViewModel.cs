@@ -3,14 +3,7 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class InfoJsonViewModel : ViewModelBase, IInfoJsonViewModel
 {
-    [ObservableProperty] private string _author;
-    [ObservableProperty] private string _bpm;
-    [ObservableProperty] private string _hideBmsDifficulty;
-    [ObservableProperty] private string _hideBmsMessage;
-    [ObservableProperty] private string _hideBmsMode;
-    [ObservableProperty] private string _name;
-    [ObservableProperty] private string _scene;
-    [ObservableProperty] private string _searchTags;
+    [ObservableProperty] private InfoJson _infoJson = new();
 
     [UsedImplicitly]
     public IChartService ChartService { get; init; }

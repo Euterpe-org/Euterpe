@@ -4,7 +4,7 @@
         xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI">
     <Design.PreviewWith>
         <Border Padding="20">
-            <mdmt:Translator />
+            <mdmt:Translator Text="lxymahatma" />
         </Border>
     </Design.PreviewWith>
 

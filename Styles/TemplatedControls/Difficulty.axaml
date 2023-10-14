@@ -3,7 +3,7 @@
         xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI">
     <Design.PreviewWith>
         <Border Padding="20">
-            <mdmt:Difficulty />
+            <mdmt:Difficulty Text="Text" />
         </Border>
     </Design.PreviewWith>
 

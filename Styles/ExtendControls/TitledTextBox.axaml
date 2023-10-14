@@ -2,9 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mdmt="clr-namespace:MuseDashModToolsUI.Styles.ExtendControls">
     <Design.PreviewWith>
-        <Border Padding="20">
-            <mdmt:TitledTextBox />
-        </Border>
+        <mdmt:TitledTextBox Width="200"
+                            TitleVerticalAlignment="Center"
+                            TitleMargin="20,0"
+                            TitleText="Title"
+                            ContentVerticalAlignment="Center"
+                            ContentText="Content" />
     </Design.PreviewWith>
 
     <Style Selector="mdmt|TitledTextBox">
