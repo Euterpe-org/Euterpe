@@ -75,6 +75,37 @@ public partial class ChartService : IChartService
         }
     }
 
+    public async Task<MapInfo?> ParseChart(string file)
+    {
+        var mapInfo = new MapInfo();
+        using (StreamReader sr = new StreamReader(file))
+        {
+            string? line;
+            while ((line = await sr.ReadLineAsync()) != null)
+            {
+                mapInfo.Difficulty = parseInfo("#RANK");
+                mapInfo.LevelDesigner = parseInfo("#LEVELDESIGN");
+
+                if (!string.IsNullOrEmpty(mapInfo.Difficulty) && !string.IsNullOrEmpty(mapInfo.LevelDesigner))
+                {
+                    return mapInfo;
+                }
+            }
+
+            string parseInfo(string keyword)
+            {
+                if (line.StartsWith(keyword))
+                {
+                    return line.Substring(keyword.Length).Trim();
+                }
+
+                return string.Empty;
+            }
+        }
+
+        return mapInfo;
+    }
+
     [GeneratedRegex("map[1-3].bms")]
     private static partial Regex MapRegex();
 }
