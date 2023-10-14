@@ -11,7 +11,7 @@ public partial class Mod : ObservableObject
     public string? DownloadLink { get; set; }
     public string HomePage { get; set; } = string.Empty;
     public string[]? GameVersion { get; set; }
-    public string? Description { get; set; }
+    public string Description { get; set; } = string.Empty;
     public List<string> DependentMods { get; set; } = new();
     public List<string> DependentLibs { get; set; } = new();
     public List<string> IncompatibleMods { get; set; } = new();
@@ -30,8 +30,7 @@ public partial class Mod : ObservableObject
 
     [JsonIgnore]
     public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
-        ModDescriptionProvider.Instance[$"{Name}"] ?? Description,
-        Author, Version, CompatibleGameVersion);
+        ModDescriptionProvider.GetDescription(this), Author, Version, CompatibleGameVersion);
 
     [JsonIgnore]
     public bool IsValidHomePage => !string.IsNullOrEmpty(HomePage) && Uri.TryCreate(HomePage, UriKind.Absolute, out var uriResult) &&

@@ -25,6 +25,4 @@ public interface IChartService
     /// </summary>
     /// <returns></returns>
     Task OnChooseChartFolder();
-
-    Task<MapInfo?> ParseChart(string file);
 }
