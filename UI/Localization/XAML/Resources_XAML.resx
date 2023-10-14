@@ -278,4 +278,7 @@
     <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
         <value>Hide Bms Message</value>
     </data>
+    <data name="XAML_ChooseChartPath" xml:space="preserve">
+        <value>Choose Chart Folder</value>
+    </data>
 </root>

@@ -276,6 +276,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose Chart Folder.
+        /// </summary>
+        internal static string XAML_ChooseChartPath {
+            get {
+                return ResourceManager.GetString("XAML_ChooseChartPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Custom_Albums Folder.
         /// </summary>
         internal static string XAML_CustomAlbumsFolder {

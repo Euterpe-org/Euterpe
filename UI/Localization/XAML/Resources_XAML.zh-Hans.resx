@@ -271,4 +271,7 @@
     <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
         <value>里谱解锁方式</value>
     </data>
+    <data name="XAML_ChooseChartPath" xml:space="preserve">
+        <value>选择谱面文件夹</value>
+    </data>
 </root>

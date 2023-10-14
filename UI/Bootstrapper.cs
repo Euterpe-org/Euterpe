@@ -20,6 +20,7 @@ public static class Bootstrapper
         // Services
         builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
+        builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();

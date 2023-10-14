@@ -12,5 +12,12 @@ public partial class InfoJsonViewModel : ViewModelBase, IInfoJsonViewModel
     [ObservableProperty] private string _scene;
     [ObservableProperty] private string _searchTags;
 
+    [UsedImplicitly]
+    public IChartService ChartService { get; init; }
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
+
+    [RelayCommand]
+    private async Task OnChooseChartFolder() => await ChartService.OnChooseChartFolder();
 }

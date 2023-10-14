@@ -6,6 +6,13 @@ namespace MuseDashModToolsUI.Contracts;
 public interface IChartService
 {
     /// <summary>
+    ///     Download Chart
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    Task DownloadChart(Chart item);
+
+    /// <summary>
     ///     Initialize Chart list
     /// </summary>
     /// <param name="sourceCache"></param>
@@ -14,9 +21,8 @@ public interface IChartService
     Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts);
 
     /// <summary>
-    ///     Download Chart
+    ///     Choose Chart folder
     /// </summary>
-    /// <param name="item"></param>
     /// <returns></returns>
-    Task DownloadChart(Chart item);
+    Task OnChooseChartFolder();
 }

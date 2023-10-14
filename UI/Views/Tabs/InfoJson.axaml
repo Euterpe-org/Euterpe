@@ -23,20 +23,30 @@
                 </Style>
             </StackPanel.Styles>
 
+            <Button Content="{extensions:LocalizeExtensions XAML_ChooseChartPath}"
+                    Command="{Binding ChooseChartFolderCommand}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_ChartName}"
                                 ContentText="{Binding Name}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Author}"
                                 ContentText="{Binding Author}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_BPM}"
                                 ContentText="{Binding Bpm}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Scene}"
                                 ContentText="{Binding Scene}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_SearchTags}"
                                 ContentText="{Binding SearchTags}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMode}"
                                 ContentText="{Binding HideBmsMode}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsDifficulty}"
                                 ContentText="{Binding HideBmsDifficulty}" />
+
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMessage}"
                                 ContentText="{Binding HideBmsMessage}" />
 
