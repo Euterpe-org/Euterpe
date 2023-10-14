@@ -1,9 +1,3 @@
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Media;
-using Avalonia.Metadata;
-
 namespace MuseDashModToolsUI.Styles.TemplatedControls;
 
 public class Translator : TemplatedControl
