@@ -294,7 +294,7 @@
                                                        Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                        Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
-                                            <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
+                                            <StackPanel IsVisible="{Binding HasDependency}" Margin="0,5,0,0">
                                                 <TextBlock Classes="Body2"
                                                            Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
                                                 <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
@@ -343,7 +343,7 @@
                                                       CommandParameter="{Binding .}"
                                                       Foreground="#DDD" />
 
-                                        <Button Classes="dark" IsVisible="{Binding !IsInstallable}"
+                                        <Button Classes="dark" IsVisible="{Binding IsInstallable}"
                                                 Tag="{Binding Name}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.InstallModCommand}"
                                                 CommandParameter="{Binding .}"

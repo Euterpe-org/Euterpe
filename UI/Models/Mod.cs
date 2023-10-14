@@ -46,10 +46,10 @@ public partial class Mod : ObservableObject
         }
     }
 
-    [JsonIgnore] public int DependencyCount => DependentMods.Count + DependentLibs.Count;
+    [JsonIgnore] public bool HasDependency => DependentMods.Count + DependentLibs.Count > 0;
 
     [JsonIgnore]
-    public string DependencyNames => DependencyCount == 0 ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
+    public string DependencyNames => !HasDependency ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
 
     public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : string.Empty);
 
