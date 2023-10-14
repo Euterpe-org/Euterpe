@@ -1,10 +1,12 @@
+using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Metadata;
 
-namespace MuseDashModToolsUI.Views.Controls;
+namespace MuseDashModToolsUI.Styles.TemplatedControls;
 
-public class Contributor : TemplatedControl
+public class Translator : TemplatedControl
 {
     public static readonly StyledProperty<IImage?> SourceProperty =
         AvaloniaProperty.Register<Image, IImage?>(nameof(Source));

@@ -1,14 +1,14 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
-        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles">
+        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI">
     <Design.PreviewWith>
         <Border Padding="20">
-            <cc:Developer />
+            <mdmt:Developer />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="cc|Developer">
+    <Style Selector="mdmt|Developer">
         <Setter Property="Template">
             <ControlTemplate>
                 <controls:Card Background="#595959"

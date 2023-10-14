@@ -97,4 +97,8 @@
         <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.69"/>
         <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MuseDashModToolsUI.Styles\MuseDashModToolsUI.Styles.csproj"/>
+    </ItemGroup>
 </Project>

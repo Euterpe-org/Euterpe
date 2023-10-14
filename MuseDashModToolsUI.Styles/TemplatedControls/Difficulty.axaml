@@ -1,13 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:cc="using:MuseDashModToolsUI.Views.Controls">
+        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI">
     <Design.PreviewWith>
         <Border Padding="20">
-            <cc:Difficulty />
+            <mdmt:Difficulty />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="cc|Difficulty">
+    <Style Selector="mdmt|Difficulty">
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel IsVisible="{TemplateBinding IsVisible}"

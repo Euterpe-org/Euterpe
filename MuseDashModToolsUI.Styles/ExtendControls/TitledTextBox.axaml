@@ -1,13 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:cc="using:MuseDashModToolsUI.Views.Controls">
+        xmlns:mdmt="clr-namespace:MuseDashModToolsUI.Styles.ExtendControls">
     <Design.PreviewWith>
         <Border Padding="20">
-            <cc:TitledTextBox />
+            <mdmt:TitledTextBox />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="cc|TitledTextBox">
+    <Style Selector="mdmt|TitledTextBox">
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Orientation="Horizontal">

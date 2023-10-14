@@ -6,7 +6,7 @@
              xmlns:extensions="clr-namespace:MuseDashModToolsUI.Extensions"
              xmlns:viewModels="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
-             xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
+             xmlns:extendControls="clr-namespace:MuseDashModToolsUI.Styles.ExtendControls;assembly=MuseDashModToolsUI.Styles"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MuseDashModToolsUI.Views.Tabs.InfoJson"
              x:DataType="tabs:InfoJsonViewModel"
@@ -15,7 +15,7 @@
     <controls:Card Margin="10,0,10,10">
         <StackPanel>
             <StackPanel.Styles>
-                <Style Selector="cc|TitledTextBox">
+                <Style Selector="extendControls|TitledTextBox">
                     <Setter Property="TitleMargin" Value="0,0,20,0" />
                     <Setter Property="TitleVerticalAlignment" Value="Center" />
                     <Setter Property="ContentVerticalAlignment" Value="Center" />
@@ -23,22 +23,22 @@
                 </Style>
             </StackPanel.Styles>
 
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_ChartName}"
-                              ContentText="{Binding Name}" />
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Author}"
-                              ContentText="{Binding Author}" />
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_BPM}"
-                              ContentText="{Binding Bpm}" />
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Scene}"
-                              ContentText="{Binding Scene}" />
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_SearchTags}"
-                              ContentText="{Binding SearchTags}" />
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMode}"
-                              ContentText="{Binding HideBmsMode}" />
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsDifficulty}"
-                              ContentText="{Binding HideBmsDifficulty}" />
-            <cc:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMessage}"
-                              ContentText="{Binding HideBmsMessage}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_ChartName}"
+                                          ContentText="{Binding Name}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Author}"
+                                          ContentText="{Binding Author}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_BPM}"
+                                          ContentText="{Binding Bpm}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Scene}"
+                                          ContentText="{Binding Scene}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_SearchTags}"
+                                          ContentText="{Binding SearchTags}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMode}"
+                                          ContentText="{Binding HideBmsMode}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsDifficulty}"
+                                          ContentText="{Binding HideBmsDifficulty}" />
+            <extendControls:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMessage}"
+                                          ContentText="{Binding HideBmsMessage}" />
 
         </StackPanel>
 

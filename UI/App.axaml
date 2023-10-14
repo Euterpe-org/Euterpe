@@ -13,6 +13,7 @@
         <FluentTheme />
         <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Grey" SecondaryColor="Indigo" />
         <StyleInclude Source="avares://DialogHost.Avalonia/Styles.xaml" />
+        <StyleInclude Source="avares://MuseDashModToolsUI.Styles/ModToolsStyles.axaml" />
         <Style Selector="TextBlock">
             <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
         </Style>
@@ -25,12 +26,6 @@
         <Style Selector="TemplatedControl">
             <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
         </Style>
-
-        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/DifficultyFilter.axaml" />
-        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/Difficulty.axaml" />
-        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/TitledTextBox.axaml" />
-        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/Contributor.axaml" />
-        <StyleInclude Source="avares://MuseDashModTools/Views/Controls/Developer.axaml" />
     </Application.Styles>
 
     <Application.Resources>

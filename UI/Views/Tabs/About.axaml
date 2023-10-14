@@ -6,7 +6,7 @@
              xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:ext="using:MuseDashModToolsUI.Extensions"
-             xmlns:cc="clr-namespace:MuseDashModToolsUI.Views.Controls"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.About"
              x:DataType="tabs:AboutViewModel"
@@ -83,10 +83,10 @@
                     </Grid.Styles>
 
                     <!--lxy-->
-                    <cc:Developer Grid.Row="0" Grid.Column="0"
-                                  Source="/Assets/Contributors/lxy.png"
-                                  DeveloperName="lxy"
-                                  ContributionText="For planning and maintaining the project" />
+                    <mdmt:Developer Grid.Row="0" Grid.Column="0"
+                                    Source="/Assets/Contributors/lxy.png"
+                                    DeveloperName="lxy"
+                                    ContributionText="For planning and maintaining the project" />
 
                     <Menu Grid.Row="1" Grid.Column="0">
                         <!--Accounts-->
@@ -129,10 +129,10 @@
                     </Menu>
 
                     <!--Super Pig-->
-                    <cc:Developer Grid.Row="0" Grid.Column="1"
-                                  Source="/Assets/Contributors/Super_Pig.png"
-                                  DeveloperName="Super Pig"
-                                  ContributionText="For redrawing the Muse Dash Mod Tools icon" />
+                    <mdmt:Developer Grid.Row="0" Grid.Column="1"
+                                    Source="/Assets/Contributors/Super_Pig.png"
+                                    DeveloperName="Super Pig"
+                                    ContributionText="For redrawing the Muse Dash Mod Tools icon" />
 
                     <Menu Grid.Row="1" Grid.Column="1">
                         <!--Account-->
@@ -147,10 +147,10 @@
                     </Menu>
 
                     <!--Balint-->
-                    <cc:Developer Grid.Row="0" Grid.Column="2"
-                                  Source="/Assets/Contributors/Balint.png"
-                                  DeveloperName="Balint"
-                                  ContributionText="For making the first version of the project" />
+                    <mdmt:Developer Grid.Row="0" Grid.Column="2"
+                                    Source="/Assets/Contributors/Balint.png"
+                                    DeveloperName="Balint"
+                                    ContributionText="For making the first version of the project" />
 
                     <Menu Grid.Row="1" Grid.Column="2">
                         <!--Account-->
@@ -165,10 +165,10 @@
                     </Menu>
 
                     <!--Ultra Rabbit-->
-                    <cc:Developer Grid.Row="0" Grid.Column="3"
-                                  Source="/Assets/Contributors/Ultra_Rabbit.jpg"
-                                  DeveloperName="Ultra Rabbit"
-                                  ContributionText="For rewriting the first version of the project" />
+                    <mdmt:Developer Grid.Row="0" Grid.Column="3"
+                                    Source="/Assets/Contributors/Ultra_Rabbit.jpg"
+                                    DeveloperName="Ultra Rabbit"
+                                    ContributionText="For rewriting the first version of the project" />
 
                     <Menu Grid.Row="1" Grid.Column="3">
                         <!--Account-->
@@ -198,55 +198,55 @@
 
                     <!--Chinese Simplified-->
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Chinese&#x0a;Simplified:" />
-                    <cc:Contributor Grid.Row="0" Grid.Column="1"
-                                    Source="/Assets/Contributors/lxymahatma.jpg"
-                                    Text="lxymahatma" />
+                    <mdmt:Translator Grid.Row="0" Grid.Column="1"
+                                     Source="/Assets/Contributors/lxymahatma.jpg"
+                                     Text="lxymahatma" />
 
                     <!--Chinese Traditional-->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Chinese&#x0a;Traditional:" />
-                    <cc:Contributor Grid.Row="1" Grid.Column="1"
-                                    Source="/Assets/Contributors/Shiron_Lee.jpg"
-                                    Text="Shiron_Lee" />
+                    <mdmt:Translator Grid.Row="1" Grid.Column="1"
+                                     Source="/Assets/Contributors/Shiron_Lee.jpg"
+                                     Text="Shiron_Lee" />
 
-                    <cc:Contributor Grid.Row="1" Grid.Column="2"
-                                    Source="/Assets/Contributors/bigbeesushi.jpg"
-                                    Text="Bigbeesushi" />
+                    <mdmt:Translator Grid.Row="1" Grid.Column="2"
+                                     Source="/Assets/Contributors/bigbeesushi.jpg"
+                                     Text="Bigbeesushi" />
 
                     <!--French-->
 
                     <!--Hungarian-->
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Hungarian: " />
-                    <cc:Contributor Grid.Row="2" Grid.Column="1"
-                                    Source="/Assets/Contributors/Balint.png"
-                                    Text="Balint" />
+                    <mdmt:Translator Grid.Row="2" Grid.Column="1"
+                                     Source="/Assets/Contributors/Balint.png"
+                                     Text="Balint" />
 
                     <!--Japanese-->
 
                     <!--Korean-->
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Korean: " />
-                    <cc:Contributor Grid.Row="3" Grid.Column="1"
-                                    Source="/Assets/Contributors/MEMOLie.png"
-                                    Text="MEMOLie" />
+                    <mdmt:Translator Grid.Row="3" Grid.Column="1"
+                                     Source="/Assets/Contributors/MEMOLie.png"
+                                     Text="MEMOLie" />
 
                     <!--Russian-->
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Russian: " />
-                    <cc:Contributor Grid.Row="4" Grid.Column="1"
-                                    Source="/Assets/Contributors/Ultra_Rabbit.jpg"
-                                    Text="Ultra Rabbit" />
+                    <mdmt:Translator Grid.Row="4" Grid.Column="1"
+                                     Source="/Assets/Contributors/Ultra_Rabbit.jpg"
+                                     Text="Ultra Rabbit" />
 
-                    <cc:Contributor Grid.Row="4" Grid.Column="2"
-                                    Source="/Assets/Contributors/Ronner.jpg"
-                                    Text="Ronner" />
+                    <mdmt:Translator Grid.Row="4" Grid.Column="2"
+                                     Source="/Assets/Contributors/Ronner.jpg"
+                                     Text="Ronner" />
 
-                    <cc:Contributor Grid.Row="4" Grid.Column="3"
-                                    Source="/Assets/Contributors/taypexx.jpg"
-                                    Text="taypexx" />
+                    <mdmt:Translator Grid.Row="4" Grid.Column="3"
+                                     Source="/Assets/Contributors/taypexx.jpg"
+                                     Text="taypexx" />
 
                     <!--Spanish-->
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Spanish: " />
-                    <cc:Contributor Grid.Row="5" Grid.Column="1"
-                                    Source="/Assets/Contributors/MNight4.png"
-                                    Text="MNight4" />
+                    <mdmt:Translator Grid.Row="5" Grid.Column="1"
+                                     Source="/Assets/Contributors/MNight4.png"
+                                     Text="MNight4" />
                 </Grid>
             </StackPanel>
         </ScrollViewer>
