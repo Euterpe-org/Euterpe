@@ -2,6 +2,8 @@ pull_request_title: '[skip ci] Update translations from Crowdin'
 commit_message: "[skip ci] Update translations %original_file_name%"
 append_commit_message: false
 files:
+  - source: /UI/Localization/ModDescription/Resources_ModDescription.resx
+    translation: /UI/Localization/ModDescription/%file_name%.%osx_locale%.resx
   - source: /UI/Localization/MsgBox/Resources_MsgBox.resx
     translation: /UI/Localization/MsgBox/%file_name%.%osx_locale%.resx
   - source: /UI/Localization/Resources/Resources.resx

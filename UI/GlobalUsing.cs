@@ -8,6 +8,7 @@ global using MuseDashModToolsUI.Contracts.ViewModels;
 global using MuseDashModToolsUI.Extensions;
 global using MuseDashModToolsUI.Models;
 global using MuseDashModToolsUI.Services;
+global using MuseDashModToolsUI.Utils;
 global using System;
 global using System.Collections.Generic;
 global using System.Linq;
