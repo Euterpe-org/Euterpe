@@ -343,9 +343,8 @@
                                                       CommandParameter="{Binding .}"
                                                       Foreground="#DDD" />
 
-                                        <Button Classes="dark" IsVisible="{Binding !IsLocal}"
+                                        <Button Classes="dark" IsVisible="{Binding !IsInstallable}"
                                                 Tag="{Binding Name}"
-                                                IsEnabled="{Binding IsInstallable}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.InstallModCommand}"
                                                 CommandParameter="{Binding .}"
                                                 Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
