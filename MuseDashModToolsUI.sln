@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModToolsUI.Updater"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModToolsUI.Test", "UI.Test\MuseDashModToolsUI.Test.csproj", "{DAC8DAA0-003E-485C-8600-84F4B5B8CEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModToolsUI.Styles", "MuseDashModToolsUI.Styles\MuseDashModToolsUI.Styles.csproj", "{84D1B409-1EED-4BF4-B144-2C16FD216A91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModToolsUI.Styles", "Styles\MuseDashModToolsUI.Styles.csproj", "{84D1B409-1EED-4BF4-B144-2C16FD216A91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
