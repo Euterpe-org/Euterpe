@@ -287,6 +287,7 @@
                                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                                 </Style>
                                             </StackPanel.Styles>
+
                                             <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
 
                                             <TextBlock Classes="Body2"

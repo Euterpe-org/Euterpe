@@ -30,7 +30,8 @@ public partial class Mod : ObservableObject
 
     [JsonIgnore]
     public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
-        Description, Author, Version, CompatibleGameVersion);
+        ModDescriptionProvider.Instance[$"{Name}"] ?? Description,
+        Author, Version, CompatibleGameVersion);
 
     [JsonIgnore]
     public bool IsValidHomePage => !string.IsNullOrEmpty(HomePage) && Uri.TryCreate(HomePage, UriKind.Absolute, out var uriResult) &&

@@ -16,14 +16,14 @@ public partial class LocalizationService : ILocalizationService, INotifyProperty
     [UsedImplicitly]
     public Lazy<IUpdateUIService> UpdateTextService { get; init; }
 
+    public string this[string resourceKey] =>
+        Resources_XAML.ResourceManager.GetString(resourceKey, Resources_XAML.Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
+
     public LocalizationService(ILogger logger)
     {
         _logger = logger;
         GetAvailableCultures();
     }
-
-    public string this[string resourceKey] =>
-        Resources_XAML.ResourceManager.GetString(resourceKey, Resources_XAML.Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
 
     public List<Language> AvailableLanguages { get; } = new();
 
