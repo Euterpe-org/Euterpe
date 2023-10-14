@@ -15,7 +15,7 @@ public partial class FontManageService : IFontManageService, INotifyPropertyChan
     public ISavingService SavingService { get; init; }
 
     public FontFamily this[string _] => new(SavingService.Settings.FontName!);
-    public static string DefaultFont => _skFontManager.GetFontFamilies()[0];
+    public static string DefaultFont => SKTypeface.Default.FamilyName;
 
     public FontManageService(ILogger logger)
     {
