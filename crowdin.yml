@@ -1,5 +1,5 @@
 pull_request_title: '[skip ci] Update translations from Crowdin'
-commit_message: "[skip ci] Update translations %original_file_name%"
+commit_message: "[skip ci] Update translations %original_file_name%.%osx_locale%.resx"
 append_commit_message: false
 files:
   - source: /UI/Localization/MsgBox/Resources_MsgBox.resx
