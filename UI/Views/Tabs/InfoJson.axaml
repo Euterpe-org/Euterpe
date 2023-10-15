@@ -2,11 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:extensions="clr-namespace:MuseDashModToolsUI.Extensions"
              xmlns:viewModels="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MuseDashModToolsUI.Views.Tabs.InfoJson"
              x:DataType="tabs:InfoJsonViewModel"
@@ -18,8 +18,8 @@
                 <Style Selector="mdmt|TitledTextBox">
                     <Setter Property="TitleMargin" Value="0,0,20,0" />
                     <Setter Property="TitleVerticalAlignment" Value="Center" />
-                    <Setter Property="ContentVerticalAlignment" Value="Center" />
-                    <Setter Property="ContentMinWidth" Value="80" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="MinWidth" Value="80" />
                 </Style>
             </StackPanel.Styles>
 
@@ -27,28 +27,28 @@
                     Command="{Binding ChooseChartFolderCommand}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_ChartName}"
-                                ContentText="{Binding InfoJson.Name}" />
+                                Text="{Binding InfoJson.Name}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Author}"
-                                ContentText="{Binding InfoJson.Author}" />
+                                Text="{Binding InfoJson.Author}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_BPM}"
-                                ContentText="{Binding InfoJson.Bpm}" />
+                                Text="{Binding InfoJson.Bpm}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_Scene}"
-                                ContentText="{Binding InfoJson.Scene}" />
+                                Text="{Binding InfoJson.Scene}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_SearchTags}"
-                                ContentText="{Binding InfoJson.SearchTagsString}" />
+                                Text="{Binding InfoJson.SearchTagsString}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMode}"
-                                ContentText="{Binding InfoJson.HideBmsMode}" />
+                                Text="{Binding InfoJson.HideBmsMode}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsDifficulty}"
-                                ContentText="{Binding InfoJson.HideBmsDifficulty}" />
+                                Text="{Binding InfoJson.HideBmsDifficulty}" />
 
             <mdmt:TitledTextBox TitleText="{extensions:LocalizeExtensions XAML_InfoJson_HideBmsMessage}"
-                                ContentText="{Binding InfoJson.HideBmsMessage}" />
+                                Text="{Binding InfoJson.HideBmsMessage}" />
 
         </StackPanel>
 
