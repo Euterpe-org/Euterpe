@@ -14,20 +14,4 @@
         <PackageReference Include="Avalonia" Version="11.0.4"/>
         <PackageReference Include="Material.Avalonia" Version="3.0.2"/>
     </ItemGroup>
-
-    <ItemGroup>
-        <Compile Update="ModToolsStyles.acs">
-            <DependentUpon>ModToolsStyles.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="ExtendControls\TitledTextBox.axaml.cs">
-            <DependentUpon>TitledTextBox.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Update="ExtendControls\DifficultyFilter.axaml.cs">
-            <DependentUpon>DifficultyFilter.axaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-    </ItemGroup>
-
-
 </Project>
