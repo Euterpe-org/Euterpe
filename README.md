@@ -56,6 +56,8 @@
 
 **Also, Notice That The Translation is not real-time updated. I have to update the translation file and release a new version manually.**
 
+## ChangeLog
+### See [CHANGELOG.md](CHANGELOG.md)
 
 ## Nightly Versions
 **The following links are the nightly builds from github action for this app from dev/rewrite branch. It may be unstable and have bugs. Use it at your own risk.**
@@ -71,9 +73,10 @@
 ## Contribution
 ![Alt](https://repobeats.axiom.co/api/embed/383f9213373d55530c04c5bdec49e842cd5e17d7.svg)
 
-### Credits (See About Page)
-#### Developers
+## Credits (See About Page)
+### Developers
 ![Developers](Intro/Developers.png)
 
-#### Translators
-![Translators](Intro/Translators.png)
+### Translators
+![Translators](Intro/Translator1.png)
+![Translators](Intro/Translator2.png)
