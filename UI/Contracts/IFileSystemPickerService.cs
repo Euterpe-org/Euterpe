@@ -6,6 +6,6 @@ public interface IFileSystemPickerService
     ///     Get single folder path with title
     /// </summary>
     /// <param name="title"></param>
-    /// <returns></returns>
+    /// <returns>Folder path</returns>
     Task<string?> GetSingleFolderPath(string title);
 }
