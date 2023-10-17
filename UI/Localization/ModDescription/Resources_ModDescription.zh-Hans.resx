@@ -13,4 +13,22 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="Accuracy Indicator" xml:space="preserve">
+        <value>在屏幕下方加入了一个更准确的准度指示条\n在结算画面会显示平均击打延迟（ms）</value>
+    </data>
+    <data name="AccuracyDisplay" xml:space="preserve">
+        <value>实时显示准度百分比</value>
+    </data>
+    <data name="Alt Tab Mute" xml:space="preserve">
+        <value>游戏界面不聚焦时静音游戏</value>
+    </data>
+    <data name="AlwaysAprilFool" xml:space="preserve">
+        <value>Boss 子弹为鸽子，开启愚人节新手教程和 Good Tek 里谱</value>
+    </data>
+    <data name="AlwaysBadApple" xml:space="preserve">
+        <value>在东方场景让背景和人物等变成黑白的</value>
+    </data>
+    <data name="AlwaysPigeons" xml:space="preserve">
+        <value>Boss 子弹为鸽子，请不要和 AlwaysAprilFool 一起使用</value>
+    </data>
 </root>
