@@ -160,7 +160,10 @@
   <data name="StricterJudge" xml:space="preserve">
         <value>严判 Mod，改变游戏判定区间\n可以在 Stricter Judge.cfg 的配置文件里修改判定区间</value>
     </data>
-    <data name="UI Disable" xml:space="preserve">
+  <data name="True rank for 999+" xml:space="preserve">
+        <value>在排名1000到2000的时候显示真实排名而不是 “999+”</value>
+    </data>
+  <data name="UI Disable" xml:space="preserve">
         <value>可禁用部分游戏元素（例：打击点）</value>
     </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
@@ -168,5 +171,8 @@
     </data>
   <data name="UnlockAll2" xml:space="preserve">
         <value>解锁所有大触难度（删除 Mod 即可移除效果）</value>
+    </data>
+  <data name="VictoryScreenSwitcher" xml:space="preserve">
+        <value>可以切换成 DJMAX 或者明日方舟的结算界面</value>
     </data>
 </root>

@@ -160,7 +160,10 @@
   <data name="StricterJudge" xml:space="preserve">
         <value>A mod which changes the judgement window and make the game harder\nYou can manually change the judgement range in Stricter Judge.cfg</value>
     </data>
-    <data name="UI Disable" xml:space="preserve">
+  <data name="True rank for 999+" xml:space="preserve">
+        <value>Displays actual ranking instead of "999+" for ranks 1000 to 2000</value>
+    </data>
+  <data name="UI Disable" xml:space="preserve">
         <value>Allows you to disable certain visual aspects of the game (example: hit circles)</value>
     </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
@@ -168,5 +171,8 @@
     </data>
   <data name="UnlockAll2" xml:space="preserve">
         <value>An alternative to UnlockAll.\nMaster's stay unlocked only for as long as the mod is installed.</value>
+    </data>
+  <data name="VictoryScreenSwitcher" xml:space="preserve">
+        <value>Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa.</value>
     </data>
 </root>
