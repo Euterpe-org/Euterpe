@@ -19,10 +19,4 @@ public interface IChartService
     /// <param name="charts"></param>
     /// <returns></returns>
     Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts);
-
-    /// <summary>
-    ///     Choose Chart folder
-    /// </summary>
-    /// <returns></returns>
-    Task OnChooseChartFolder();
 }

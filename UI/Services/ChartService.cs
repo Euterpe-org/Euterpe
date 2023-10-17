@@ -1,24 +1,20 @@
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Text.RegularExpressions;
 using DynamicData;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace MuseDashModToolsUI.Services;
 
-public partial class ChartService : IChartService
+public class ChartService : IChartService
 {
     private ReadOnlyObservableCollection<Chart> _charts;
-    private SourceCache<Chart, string> _sourceCache = new(x => x.Name);
-
-    [UsedImplicitly]
-    public IFileSystemPickerService FileSystemPickerService { get; init; }
+    private SourceCache<Chart, string> _sourceCache;
 
     [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
 
     [UsedImplicitly]
-    public ILocalService LocalService { get; init; }
+    public ILogger Logger { get; init; }
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
@@ -50,31 +46,4 @@ public partial class ChartService : IChartService
         var webCharts = await GitHubService.GetChartList();
         _sourceCache.AddOrUpdate(webCharts!);
     }
-
-    public async Task OnChooseChartFolder()
-    {
-        var chartFolder = await FileSystemPickerService.GetSingleFolderPath(FolderDialog_Title_ChooseChartFolder);
-        if (chartFolder is null)
-        {
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_InvalidPath);
-            return;
-        }
-
-        var bmsFiles = LocalService.GetBmsFiles(chartFolder).ToArray();
-        if (bmsFiles.Length == 0)
-        {
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoBmsFile);
-            return;
-        }
-
-        foreach (var bmsFile in bmsFiles)
-        {
-            if (MapRegex().Match(bmsFile).Success)
-            {
-            }
-        }
-    }
-
-    [GeneratedRegex("map([1-4]).bms")]
-    private static partial Regex MapRegex();
 }

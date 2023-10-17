@@ -1,6 +1,7 @@
 ﻿using System.IO.Abstractions;
 using System.Net.Http;
 using Autofac;
+using MuseDashModToolsUI.Extensions.MarkupExtensions;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
 using MuseDashModToolsUI.ViewModels.Tabs;
@@ -23,6 +24,7 @@ public static class Bootstrapper
         builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
+        builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();

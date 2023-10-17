@@ -3,14 +3,30 @@ namespace MuseDashModToolsUI.ViewModels.Tabs;
 
 public partial class InfoJsonViewModel : ViewModelBase, IInfoJsonViewModel
 {
+    [ObservableProperty] private string[] _hideBmsDifficulty;
+    [ObservableProperty] private string[] _hideBmsMode;
     [ObservableProperty] private InfoJson _infoJson = new();
+    [ObservableProperty] private int _selectedHideBmsDifficulty;
+    [ObservableProperty] private int _selectedHideBmsMode;
 
     [UsedImplicitly]
-    public IChartService ChartService { get; init; }
+    public IInfoJsonService InfoJsonService { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
 
+    [UsedImplicitly]
+    public ISerializationService SerializationService { get; init; }
+
+    public void Initialize()
+    {
+        InfoJsonService.Initialize(InfoJson);
+        /*Logger.Information("InfoJsonViewModel Initialized");*/
+    }
+
     [RelayCommand]
-    private async Task OnChooseChartFolder() => await ChartService.OnChooseChartFolder();
+    private async Task OnChooseChartFolder() => await InfoJsonService.OnChooseChartFolder();
 }

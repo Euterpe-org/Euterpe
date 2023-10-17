@@ -11,6 +11,9 @@ public partial class UpdateUIService : IUpdateUIService
     public Lazy<IChartDownloadViewModel> ChartDownloadViewModel { get; init; }
 
     [UsedImplicitly]
+    public Lazy<IInfoJsonViewModel> InfoJsonViewModel { get; init; }
+
+    [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
 
     [UsedImplicitly]
@@ -38,6 +41,7 @@ public partial class UpdateUIService : IUpdateUIService
         await ModManageViewModel.Value.Initialize();
         await ChartDownloadViewModel.Value.Initialize();
         await LogAnalysisViewModel.Value.Initialize();
+        InfoJsonViewModel.Value.Initialize();
 
         Logger.Information("All Tabs initialized");
     }

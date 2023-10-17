@@ -274,4 +274,28 @@
     <data name="XAML_ChooseChartPath" xml:space="preserve">
         <value>选择谱面文件夹</value>
     </data>
+    <data name="XAML_Scene_SpaceStation" xml:space="preserve">
+        <value>太空</value>
+    </data>
+    <data name="XAML_Scene_Touhou" xml:space="preserve">
+        <value>车万</value>
+    </data>
+    <data name="XAML_Scene_Retrocity" xml:space="preserve">
+        <value>都市</value>
+    </data>
+    <data name="XAML_Scene_Castle" xml:space="preserve">
+        <value>城堡</value>
+    </data>
+    <data name="XAML_Scene_Candyland" xml:space="preserve">
+        <value>糖果森林</value>
+    </data>
+    <data name="XAML_Scene_RainyNight" xml:space="preserve">
+        <value>雨夜街道</value>
+    </data>
+    <data name="XAML_Scene_Oriental" xml:space="preserve">
+        <value>和风</value>
+    </data>
+    <data name="XAML_Scene_LetsGroove" xml:space="preserve">
+        <value>一起过山车</value>
+    </data>
 </root>

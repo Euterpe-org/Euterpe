@@ -1,7 +1,7 @@
 ﻿using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 
-namespace MuseDashModToolsUI.Extensions;
+namespace MuseDashModToolsUI.Extensions.MarkupExtensions;
 
 public class LocalizeExtensions : MarkupExtension
 {

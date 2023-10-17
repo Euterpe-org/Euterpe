@@ -690,6 +690,87 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Candyland.
+        /// </summary>
+        internal static string XAML_Scene_Candyland {
+            get {
+                return ResourceManager.GetString("XAML_Scene_Candyland", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Castle.
+        /// </summary>
+        internal static string XAML_Scene_Castle {
+            get {
+                return ResourceManager.GetString("XAML_Scene_Castle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DJMAX.
+        /// </summary>
+        internal static string XAML_Scene_DJMAX {
+            get {
+                return ResourceManager.GetString("XAML_Scene_DJMAX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Let&apos;s Groove.
+        /// </summary>
+        internal static string XAML_Scene_LetsGroove {
+            get {
+                return ResourceManager.GetString("XAML_Scene_LetsGroove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oriental.
+        /// </summary>
+        internal static string XAML_Scene_Oriental {
+            get {
+                return ResourceManager.GetString("XAML_Scene_Oriental", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RainyNight.
+        /// </summary>
+        internal static string XAML_Scene_RainyNight {
+            get {
+                return ResourceManager.GetString("XAML_Scene_RainyNight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrocity.
+        /// </summary>
+        internal static string XAML_Scene_Retrocity {
+            get {
+                return ResourceManager.GetString("XAML_Scene_Retrocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Space Station.
+        /// </summary>
+        internal static string XAML_Scene_SpaceStation {
+            get {
+                return ResourceManager.GetString("XAML_Scene_SpaceStation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Touhou.
+        /// </summary>
+        internal static string XAML_Scene_Touhou {
+            get {
+                return ResourceManager.GetString("XAML_Scene_Touhou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
         /// </summary>
         internal static string XAML_SearchBar {

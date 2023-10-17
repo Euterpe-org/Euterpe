@@ -2,65 +2,65 @@
 
 namespace MuseDashModToolsUI.Models;
 
-public class InfoJson
+public partial class InfoJson : ObservableObject
 {
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty;
-
-    [JsonPropertyName("name_romanized")]
-    public string NameRomanized { get; set; } = string.Empty;
-
     [JsonPropertyName("author")]
-    public string Author { get; set; } = string.Empty;
+    [ObservableProperty] private string _author = string.Empty;
 
     [JsonPropertyName("bpm")]
-    public string Bpm { get; set; } = string.Empty;
-
-    [JsonPropertyName("scene")]
-    public string Scene { get; set; } = string.Empty;
-
-    [JsonPropertyName("searchTags")]
-    public string[] SearchTags { get; set; } = Array.Empty<string>();
-
-    [JsonPropertyName("levelDesigner")]
-    public string LevelDesigner { get; set; } = string.Empty;
-
-    [JsonPropertyName("levelDesigner1")]
-    public string LevelDesigner1 { get; set; } = string.Empty;
-
-    [JsonPropertyName("levelDesigner2")]
-    public string LevelDesigner2 { get; set; } = string.Empty;
-
-    [JsonPropertyName("levelDesigner3")]
-    public string LevelDesigner3 { get; set; } = string.Empty;
-
-    [JsonPropertyName("levelDesigner4")]
-    public string LevelDesigner4 { get; set; } = string.Empty;
+    [ObservableProperty] private string _bpm = string.Empty;
 
     [JsonPropertyName("difficulty1")]
-    public string Difficulty1 { get; set; } = string.Empty;
+    [ObservableProperty] private string _difficulty1 = string.Empty;
 
     [JsonPropertyName("difficulty2")]
-    public string Difficulty2 { get; set; } = string.Empty;
+    [ObservableProperty] private string _difficulty2 = string.Empty;
 
     [JsonPropertyName("difficulty3")]
-    public string Difficulty3 { get; set; } = string.Empty;
+    [ObservableProperty] private string _difficulty3 = string.Empty;
 
     [JsonPropertyName("difficulty4")]
-    public string Difficulty4 { get; set; } = string.Empty;
-
-    [JsonPropertyName("hideBmsMode")]
-    public string HideBmsMode { get; set; } = string.Empty;
+    [ObservableProperty] private string _difficulty4 = string.Empty;
 
     [JsonPropertyName("hideBmsDifficulty")]
-    public string HideBmsDifficulty { get; set; } = string.Empty;
+    [ObservableProperty] private string _hideBmsDifficulty = string.Empty;
 
     [JsonPropertyName("hideBmsMessage")]
-    public string HideBmsMessage { get; set; } = string.Empty;
+    [ObservableProperty] private string _hideBmsMessage = string.Empty;
 
-    [JsonPropertyName("unlockLevel")]
-    public string UnlockLevel { get; set; } = string.Empty;
+    [JsonPropertyName("hideBmsMode")]
+    [ObservableProperty] private string _hideBmsMode = string.Empty;
+
+    [JsonPropertyName("levelDesigner")]
+    [ObservableProperty] private string _levelDesigner = string.Empty;
+
+    [JsonPropertyName("levelDesigner1")]
+    [ObservableProperty] private string _levelDesigner1 = string.Empty;
+
+    [JsonPropertyName("levelDesigner2")]
+    [ObservableProperty] private string _levelDesigner2 = string.Empty;
+
+    [JsonPropertyName("levelDesigner3")]
+    [ObservableProperty] private string _levelDesigner3 = string.Empty;
+
+    [JsonPropertyName("levelDesigner4")]
+    [ObservableProperty] private string _levelDesigner4 = string.Empty;
+
+    [JsonPropertyName("name")]
+    [ObservableProperty] private string _name = string.Empty;
+
+    [JsonPropertyName("name_romanized")]
+    [ObservableProperty] private string _nameRomanized = string.Empty;
+
+    [JsonPropertyName("scene")]
+    [ObservableProperty] private string _scene = string.Empty;
+
+    [JsonPropertyName("searchTags")]
+    [ObservableProperty] private string[] _searchTags = Array.Empty<string>();
 
     [JsonIgnore]
-    public string SearchTagsString { get; set; } = string.Empty;
+    [ObservableProperty] private string _searchTagsString = string.Empty;
+
+    [JsonPropertyName("unlockLevel")]
+    [ObservableProperty] private string _unlockLevel = string.Empty;
 }
