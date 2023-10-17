@@ -162,7 +162,7 @@
         <value>A mod which changes the judgement window and make the game harder\nYou can manually change the judgement range in Stricter Judge.cfg</value>
     </data>
     <data name="True rank for 999+" xml:space="preserve">
-        <value>Displays actual ranking instead of \"999+\" for ranks 1000 to 2000</value>
+        <value>Displays actual ranking instead of "999+" for ranks 1000 to 2000</value>
     </data>
     <data name="UI Disable" xml:space="preserve">
         <value>Allows you to disable certain visual aspects of the game (example: hit circles)</value>
