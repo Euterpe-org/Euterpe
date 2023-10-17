@@ -834,15 +834,6 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to InfoJson.
-        /// </summary>
-        internal static string XAML_Tab_InfoJson {
-            get {
-                return ResourceManager.GetString("XAML_Tab_InfoJson", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Analysis.
         /// </summary>
         internal static string XAML_Tab_LogAnalysis {

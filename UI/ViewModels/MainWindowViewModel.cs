@@ -28,7 +28,6 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         {
             new((ViewModelBase)context.Resolve<IModManageViewModel>(), XAML_Tab_ModManage, "ModManage"),
             new((ViewModelBase)context.Resolve<IChartDownloadViewModel>(), XAML_Tab_ChartDownload, "ChartDownload"),
-            new((ViewModelBase)context.Resolve<IInfoJsonViewModel>(), XAML_Tab_InfoJson, "InfoJson"),
             new((ViewModelBase)context.Resolve<ILogAnalysisViewModel>(), XAML_Tab_LogAnalysis, "LogAnalysis"),
             new((ViewModelBase)context.Resolve<ISettingsViewModel>(), XAML_Tab_Setting, "Setting"),
             new((ViewModelBase)context.Resolve<IAboutViewModel>(), XAML_Tab_About, "About")
