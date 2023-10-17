@@ -160,10 +160,7 @@
   <data name="StricterJudge" xml:space="preserve">
         <value>严判 Mod，改变游戏判定区间\n可以在 Stricter Judge.cfg 的配置文件里修改判定区间</value>
     </data>
-  <data name="True rank for 999+" xml:space="preserve">
-        <value>Displays actual ranking instead of \"999+\" for ranks 1000 to 2000</value>
-    </data>
-  <data name="UI Disable" xml:space="preserve">
+    <data name="UI Disable" xml:space="preserve">
         <value>可禁用部分游戏元素（例：打击点）</value>
     </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
@@ -171,8 +168,5 @@
     </data>
   <data name="UnlockAll2" xml:space="preserve">
         <value>解锁所有大触难度（删除 Mod 即可移除效果）</value>
-    </data>
-  <data name="VictoryScreenSwitcher" xml:space="preserve">
-        <value>Allows you to switch victory screen in the settings menu either to DjMax or Arknights. Swaps original screen with arknights/djmax and vise versa.</value>
     </data>
 </root>
