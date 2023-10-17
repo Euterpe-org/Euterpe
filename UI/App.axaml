@@ -26,6 +26,9 @@
         <Style Selector="TemplatedControl">
             <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
         </Style>
+        <Style Selector="PathIcon">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
     </Application.Styles>
 
     <Application.Resources>

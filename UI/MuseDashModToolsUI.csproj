@@ -75,13 +75,13 @@
     <ItemGroup>
         <PackageReference Include="AssetsTools.NET" Version="3.0.0"/>
         <PackageReference Include="Autofac" Version="7.1.0"/>
-        <PackageReference Include="Avalonia" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.4"/>
+        <PackageReference Include="Avalonia" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.5"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.4"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.5"/>
         <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.2"/>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="DialogHost.Avalonia" Version="0.7.7"/>
@@ -99,7 +99,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Serilog" Version="3.1.0-dev-02078"/>
-        <PackageReference Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0-dev-00923"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00968"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
         <PackageReference Include="TestableIO.System.IO.Abstractions" Version="19.2.69"/>
