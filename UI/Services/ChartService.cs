@@ -8,28 +8,19 @@ namespace MuseDashModToolsUI.Services;
 public class ChartService : IChartService
 {
     private ReadOnlyObservableCollection<Chart> _charts;
-    private SourceCache<Chart, string> _sourceCache = new(x => x.Name);
+    private SourceCache<Chart, string> _sourceCache;
 
     [UsedImplicitly]
     public IGitHubService GitHubService { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
     public ISavingService SavingService { get; init; }
-
-    public async Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts)
-    {
-        _sourceCache = sourceCache;
-        _charts = charts;
-
-        if (!Directory.Exists(SavingService.Settings.CustomAlbumsFolder))
-            Directory.CreateDirectory(SavingService.Settings.CustomAlbumsFolder);
-
-        var webCharts = await GitHubService.GetChartList();
-        _sourceCache.AddOrUpdate(webCharts!);
-    }
 
     public async Task DownloadChart(Chart item)
     {
@@ -42,5 +33,17 @@ public class ChartService : IChartService
 
         await GitHubService.DownloadChart(item.Id, path);
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
+    }
+
+    public async Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts)
+    {
+        _sourceCache = sourceCache;
+        _charts = charts;
+
+        if (!Directory.Exists(SavingService.Settings.CustomAlbumsFolder))
+            Directory.CreateDirectory(SavingService.Settings.CustomAlbumsFolder);
+
+        var webCharts = await GitHubService.GetChartList();
+        _sourceCache.AddOrUpdate(webCharts!);
     }
 }

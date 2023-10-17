@@ -15,8 +15,8 @@ public interface ISavingService
     /// <summary>
     ///     Get muse dash folder path and Initialize tabs
     /// </summary>
-    /// <returns></returns>
-    Task OnChoosePath();
+    /// <returns>Is path changed</returns>
+    Task<bool> OnChoosePath();
 
     /// <summary>
     ///     Save Settings into Settings.json

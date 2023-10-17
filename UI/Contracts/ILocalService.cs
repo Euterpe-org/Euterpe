@@ -20,6 +20,13 @@ public interface ILocalService
     IEnumerable<string> GetModFiles(string path);
 
     /// <summary>
+    ///     Get Bms files
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    IEnumerable<string> GetBmsFiles(string path);
+
+    /// <summary>
     ///     Launch Updater
     /// </summary>
     /// <param name="link">Download link</param>

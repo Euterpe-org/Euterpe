@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:viewModels="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
+             xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI"
+             xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters.IValueConverters"
+             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MuseDashModToolsUI.Views.Tabs.InfoJson"
+             x:DataType="tabs:InfoJsonViewModel"
+             DataContext="{ext:DependencyInjection Type=viewModels:IInfoJsonViewModel}">
+
+    <UserControl.Resources>
+        <converters:ChartSceneConverter x:Key="ChartSceneConverter" />
+    </UserControl.Resources>
+
+    <controls:Card Margin="10,0,10,10">
+        <StackPanel>
+            <StackPanel.Styles>
+                <Style Selector="mdmt|TitledTextBox">
+                    <Setter Property="TitleMargin" Value="0,0,20,0" />
+                    <Setter Property="TitleVerticalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="MinWidth" Value="80" />
+                </Style>
+            </StackPanel.Styles>
+
+            <Button Content="{ext:LocalizeExtensions XAML_ChooseChartPath}"
+                    Command="{Binding ChooseChartFolderCommand}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_ChartName}"
+                                Text="{Binding InfoJson.Name}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_Author}"
+                                Text="{Binding InfoJson.Author}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_BPM}"
+                                Text="{Binding InfoJson.Bpm}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_Scene}"
+                                Text="{Binding InfoJson.Scene,Converter={StaticResource ChartSceneConverter}}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_SearchTags}"
+                                Text="{Binding InfoJson.SearchTagsString}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_HideBmsMode}"
+                                Text="{Binding InfoJson.HideBmsMode}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_HideBmsDifficulty}"
+                                Text="{Binding InfoJson.HideBmsDifficulty}" />
+
+            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_HideBmsMessage}"
+                                Text="{Binding InfoJson.HideBmsMessage}" />
+
+        </StackPanel>
+
+    </controls:Card>
+</UserControl>

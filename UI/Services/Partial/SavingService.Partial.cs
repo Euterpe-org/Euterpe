@@ -2,7 +2,6 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json.Nodes;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Platform.Storage;
 using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;
@@ -16,6 +15,26 @@ public partial class SavingService
     {
         await NullSettingsCatch();
         await LocalService.CheckValidPath();
+    }
+
+    /// <summary>
+    ///     Check whether the chosen muse dash folder is valid
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns>Is continue</returns>
+    private async Task<bool> CheckValidPath(string? path)
+    {
+        if (path is not null) return true;
+
+        if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
+        {
+            _logger.Information("Path not changed");
+            return false;
+        }
+
+        _logger.Error("Invalid path, showing error message box");
+        await MessageBoxService.ErrorMessageBox(MsgBox_Content_InvalidPath);
+        return false;
     }
 
     /// <summary>
@@ -70,14 +89,7 @@ public partial class SavingService
             if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
             _logger.Information("Showing choose folder dialogue");
 
-            var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-                { AllowMultiple = false, Title = FolderDialog_Title });
-
-            if (dialogue.Count != 0) return dialogue[0].TryGetLocalPath();
-            if (!string.IsNullOrEmpty(Settings.MuseDashFolder)) return Settings.MuseDashFolder;
-
-            _logger.Error("Invalid path, showing error message box");
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_InvalidPath);
+            return await FileSystemPickerService.GetSingleFolderPath(FolderDialog_Title_ChooseMuseDashFolder);
         }
     }
 

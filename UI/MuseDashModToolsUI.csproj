@@ -57,6 +57,15 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources_MsgBox.resx</DependentUpon>
         </Compile>
+        <EmbeddedResource Update="Localization\ModDescriptions\Resources_ModDescription.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources_ModDescription.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Update="Localization\ModDescriptions\Resources_ModDescription.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources_ModDescription.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -96,5 +105,9 @@
         <PackageReference Include="TestableIO.System.IO.Abstractions" Version="19.2.69"/>
         <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.69"/>
         <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Styles\MuseDashModToolsUI.Styles.csproj"/>
     </ItemGroup>
 </Project>

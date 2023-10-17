@@ -2,7 +2,6 @@
 
 public interface ILocalizationService
 {
-    string this[string resourceKey] { get; }
     List<Language> AvailableLanguages { get; }
 
     /// <summary>

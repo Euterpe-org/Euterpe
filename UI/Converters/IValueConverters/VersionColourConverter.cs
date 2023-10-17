@@ -4,7 +4,7 @@ using Avalonia.Media;
 
 // ReSharper disable InconsistentNaming
 
-namespace MuseDashModToolsUI.Converters;
+namespace MuseDashModToolsUI.Converters.IValueConverters;
 
 public class VersionColourConverter : IValueConverter
 {
@@ -16,27 +16,19 @@ public class VersionColourConverter : IValueConverter
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is Mod mod)
-        {
-            if (mod.IsIncompatible)
-                return Red;
-            switch (mod.State)
-            {
-                case UpdateState.Outdated:
-                    return Blue;
-                case UpdateState.Newer:
-                    return Purple;
-                case UpdateState.Modified:
-                    return Orange;
-                case UpdateState.Normal:
-                default:
-                {
-                    return Default;
-                }
-            }
-        }
+        if (value is not Mod mod) return Default;
 
-        return Default;
+        if (mod.IsIncompatible)
+            return Red;
+
+        return mod.State switch
+        {
+            UpdateState.Outdated => Blue,
+            UpdateState.Newer => Purple,
+            UpdateState.Modified => Orange,
+            UpdateState.Normal => Default,
+            _ => Default
+        };
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => value;
