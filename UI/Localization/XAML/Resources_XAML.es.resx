@@ -242,61 +242,61 @@
         <value>Buscar mods (Nombre, Autor, Descripción)</value>
     </data>
   <data name="XAML_InfoJson_ChartName" xml:space="preserve">
-        <value>Name</value>
+        <value>Canción</value>
     </data>
   <data name="XAML_InfoJson_Author" xml:space="preserve">
-        <value>Artist</value>
+        <value>Artista</value>
     </data>
   <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
-        <value>Level Designer</value>
+        <value>Diseñador</value>
     </data>
   <data name="XAML_InfoJson_Scene" xml:space="preserve">
-        <value>Scene</value>
+        <value>Escena</value>
     </data>
   <data name="XAML_InfoJson_BPM" xml:space="preserve">
         <value>BPM</value>
     </data>
   <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
-        <value>Difficulty</value>
+        <value>Dificultad</value>
     </data>
   <data name="XAML_InfoJson_Level" xml:space="preserve">
-        <value>Level</value>
+        <value>Nivel</value>
     </data>
   <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
-        <value>Search Tags</value>
+        <value>Buscar Tags</value>
     </data>
   <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
-        <value>Hide Bms Mode</value>
+        <value>Ocultar modo BMS</value>
     </data>
   <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
-        <value>Hide Bms Difficulty</value>
+        <value>Ocultar dificultad BMS</value>
     </data>
   <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
-        <value>Hide Bms Message</value>
+        <value>Ocultar mensaje BMS</value>
     </data>
   <data name="XAML_ChooseChartPath" xml:space="preserve">
-        <value>Choose Chart Folder</value>
+        <value>Elige la carpeta de Chart</value>
     </data>
   <data name="XAML_Scene_SpaceStation" xml:space="preserve">
-        <value>Space Station</value>
+        <value>Estación Espacial</value>
     </data>
   <data name="XAML_Scene_Retrocity" xml:space="preserve">
-        <value>Retrocity</value>
+        <value>Ciudad Retro</value>
     </data>
   <data name="XAML_Scene_Castle" xml:space="preserve">
-        <value>Castle</value>
+        <value>Castillo</value>
     </data>
   <data name="XAML_Scene_RainyNight" xml:space="preserve">
-        <value>RainyNight</value>
+        <value>Lluvia Nocturna</value>
     </data>
   <data name="XAML_Scene_Candyland" xml:space="preserve">
-        <value>Candyland</value>
+        <value>Bosque de caramelo</value>
     </data>
   <data name="XAML_Scene_Oriental" xml:space="preserve">
         <value>Oriental</value>
     </data>
   <data name="XAML_Scene_LetsGroove" xml:space="preserve">
-        <value>Let's Groove</value>
+        <value>Groove Coaster</value>
     </data>
   <data name="XAML_Scene_Touhou" xml:space="preserve">
         <value>Touhou</value>

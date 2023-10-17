@@ -25,6 +25,6 @@
         <value>Selecciona la carpeta de Muse Dash</value>
     </data>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-        <value>Choose Chart Folder</value>
+        <value>Selecciona la carpeta de Charts</value>
     </data>
 </root>
