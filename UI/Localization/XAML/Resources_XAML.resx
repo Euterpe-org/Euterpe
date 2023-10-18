@@ -260,9 +260,6 @@
     <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
         <value>Difficulty</value>
     </data>
-    <data name="XAML_InfoJson_Level" xml:space="preserve">
-        <value>Level</value>
-    </data>
     <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
         <value>Search Tags</value>
     </data>

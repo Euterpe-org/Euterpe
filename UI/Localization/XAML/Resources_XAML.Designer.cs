@@ -474,15 +474,6 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Level.
-        /// </summary>
-        internal static string XAML_InfoJson_Level {
-            get {
-                return ResourceManager.GetString("XAML_InfoJson_Level", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Level Designer.
         /// </summary>
         internal static string XAML_InfoJson_LevelDesigner {
