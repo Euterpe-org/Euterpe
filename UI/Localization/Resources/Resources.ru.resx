@@ -25,6 +25,6 @@
         <value>Выберите папку Muse Dash</value>
     </data>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-        <value>Choose Chart Folder</value>
+        <value>Выберите папку чарта</value>
     </data>
 </root>

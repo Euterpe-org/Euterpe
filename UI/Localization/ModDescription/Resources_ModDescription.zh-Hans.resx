@@ -26,28 +26,28 @@
         <value>实时显示准度百分比</value>
     </data>
   <data name="Alt Tab Mute" xml:space="preserve">
-        <value>游戏界面不聚焦时静音游戏</value>
+        <value>游戏被最小化或者游戏窗口在后台时静音</value>
     </data>
   <data name="AlwaysAprilFool" xml:space="preserve">
-        <value>Boss 子弹为鸽子，开启愚人节新手教程和 Good Tek 里谱</value>
+        <value>Boss 子弹改为鸽子，开启愚人节新手教程和 Good Tek 里谱</value>
     </data>
   <data name="AlwaysBadApple" xml:space="preserve">
-        <value>在东方场景让背景和人物等变成黑白的</value>
+        <value>在东方场景让背景和人物等变成黑白</value>
     </data>
   <data name="AlwaysPigeons" xml:space="preserve">
-        <value>Boss 子弹为鸽子，请不要和 AlwaysAprilFool 一起使用</value>
+        <value>Boss 子弹改为鸽子，请不要和 AlwaysAprilFool 同时使用</value>
     </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-        <value>在暂停界面显示最佳角色精灵组合\n一般来说显示的都是正确的，但是不能盲目相信\n有疑问就查看 CharacterScoreboard</value>
+        <value>在暂停界面显示当前谱面最佳角色精灵组合\n通常来说都是正确组合，但也不能盲目相信\n如果有任何疑问，请查看 CharacterScoreboard</value>
     </data>
   <data name="BPMDisplay" xml:space="preserve">
-        <value>在准备界面的 level designer 上方显示 BPM 信息</value>
+        <value>在准备界面的谱师上方显示 BPM 信息</value>
     </data>
   <data name="CharacterRandomizer" xml:space="preserve">
         <value>每次进入谱面都会随机选择角色和精灵</value>
     </data>
   <data name="CharacterScoreboard" xml:space="preserve">
-        <value>显示排行榜上的人的得分组合（OCS）\n显示你自己的分数和组合（LCS）</value>
+        <value>显示排行榜上玩家的得分组合（OCS）\n显示你自己的分数和组合（LCS）</value>
     </data>
   <data name="ChartDeleter" xml:space="preserve">
         <value>将谱面排入删除或移动队列，退出游戏时执行</value>
@@ -56,7 +56,7 @@
         <value>自动选择梦游少女，偏移为0，设置手动 fever，禁用部分 UI 元素\n可以在游戏内开关</value>
     </data>
   <data name="ChineseMode" xml:space="preserve">
-        <value>和谐游戏的部分内容（角色，插图等）</value>
+        <value>和谐部分游戏内容（角色，插图等）</value>
     </data>
   <data name="Cinema" xml:space="preserve">
         <value>可在自制谱背景播放视频</value>
@@ -71,7 +71,7 @@
         <value>可调整背景亮度低于40%</value>
     </data>
   <data name="CustomHitSound" xml:space="preserve">
-        <value>自制音效 Mod\n细节教程在 Github Readme 里</value>
+        <value>自制音效 Mod\n详细教程在 Github Readme 里</value>
     </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
         <value>可添加自定义加载界面（CustomLoadingScreens 文件夹）\n而且可以设置自定义加载消息(UserData/CustomLoadingScreens.cfg)\n消息可以和图片成对，也可以单独随机出现</value>
@@ -119,7 +119,7 @@
         <value>自动检测和输出可用 Mod 更新</value>
     </data>
   <data name="NoAutoPause" xml:space="preserve">
-        <value>禁止游戏在不聚焦时自动暂停</value>
+        <value>禁止游戏被最小化或者游戏窗口在后台时自动暂停</value>
     </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
         <value>跳过升级动画</value>
@@ -134,7 +134,7 @@
         <value>可禁用成绩上传\n仍然可以截屏</value>
     </data>
   <data name="QuickRestart" xml:space="preserve">
-        <value>可用 Delete 按键立刻退出谱面和用 Backspace 立刻重开谱面\n可在配置文件里设置自定义键位</value>
+        <value>用 Delete 按键立刻退出谱面和用 Backspace 立刻重开谱面\n可在配置文件里设置自定义键位</value>
     </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
         <value>可设置快捷键位来快切人物和精灵\n有内置 UI 界面 （默认键位 F11）</value>
@@ -155,7 +155,7 @@
         <value>SearchPlusPlus的扩展\n可以创建文件夹并在其中搜索歌曲</value>
     </data>
   <data name="Search++ Folder Tag" xml:space="preserve">
-        <value>包含你可能需要的所有搜索功能\n查看主页获取详细信息</value>
+        <value>包含你可能需要的所有搜索功能\n查看项目主页获取详细信息</value>
     </data>
   <data name="StricterJudge" xml:space="preserve">
         <value>严判 Mod，改变游戏判定区间\n可以在 Stricter Judge.cfg 的配置文件里修改判定区间</value>
@@ -164,7 +164,7 @@
         <value>在排名1000到2000的时候显示真实排名而不是 “999+”</value>
     </data>
   <data name="UI Disable" xml:space="preserve">
-        <value>可禁用部分游戏元素（例：打击点）</value>
+        <value>可禁用部分 UI 元素（例：打击点）</value>
     </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
         <value>让梦游少女打满沙包</value>
@@ -173,6 +173,6 @@
         <value>解锁所有大触难度（删除 Mod 即可移除效果）</value>
     </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
-        <value>可以切换成 DJMAX 或者明日方舟的结算界面</value>
+        <value>可以切换成 DJMAX 或者明日方舟的结算界面\n两个都不勾选则一直为普通结算界面</value>
     </data>
 </root>

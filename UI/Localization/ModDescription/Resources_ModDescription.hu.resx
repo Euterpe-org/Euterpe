@@ -20,142 +20,142 @@
         </value>
   </resheader>
   <data name="Accuracy Indicator" xml:space="preserve">
-        <value>Adds a more exact accuracy indicator on the bottom of the screen.\nAlso displays average accuracy in milliseconds at the end of the level.</value>
+        <value>Egy érintési hibamérőt rak a képernyőd aljára.\nA pálya végén láthatod az átlagos eltérést is.</value>
     </data>
   <data name="AccuracyDisplay" xml:space="preserve">
-        <value>A live accuracy display for your viewing pleasure.</value>
+        <value>Egy élő százalékos pontosság jelző a mi örömünkre.</value>
     </data>
   <data name="Alt Tab Mute" xml:space="preserve">
-        <value>Mutes the game when it's not focused.</value>
+        <value>Lenémítja a játékot, amikor az nincsen fókuszban.</value>
     </data>
   <data name="AlwaysAprilFool" xml:space="preserve">
-        <value>Boss always shoot pigeon and tutorial is always april fool's, activate good tek hidden</value>
+        <value>A Boss mindig galambokat lő ki, és elhiteti a játékkal, hogy április 1. van</value>
     </data>
   <data name="AlwaysBadApple" xml:space="preserve">
-        <value>A mod which changes the background and character etc into black and white in tohou scene</value>
+        <value>Egy mod ami átalakítja a hátteret, karaktert, stb., fekete fehérré a Touhou helyszínen</value>
     </data>
   <data name="AlwaysPigeons" xml:space="preserve">
-        <value>Boss always shoot pigeon, do not use AlwaysAprilFool at the same time</value>
+        <value>A Boss mindig galambokat lő, ne használd az AlwaysAprilFool mod-dal együtt</value>
     </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-        <value>Displays the best character combination for a level in the pause screen\nThe character combo displayed is usually correct, but don't put your blind faith in it\nWhen in doubt, refer to CharacterScoreboard</value>
+        <value>Kiírja a pályához a legjobb karakter kombinációt a Pause menüben\nEz a kombináció csak általában helyes, nem pedig mindig, nem bízz meg benne vakon\nHa nem vagy biztos, használd a CharacterScoreboard vagy ScoreboardCharacters mod-ot</value>
     </data>
   <data name="BPMDisplay" xml:space="preserve">
-        <value>A mod which displays the BPM info above level designer on preparation screen</value>
+        <value>Egy mod amely kiírja a főmenüben egy zenének a BPM-jét</value>
     </data>
   <data name="CharacterRandomizer" xml:space="preserve">
-        <value>Everytime you play a chart, a random character combination will be selected</value>
+        <value>Minden probálkozásnál véletlenszerűen kiválaszt egy karakter kombinációt</value>
     </data>
   <data name="CharacterScoreboard" xml:space="preserve">
-        <value>Displays which character a specific score was achieved with on the leaderboard (OCS)\nIt can also display your own local scores (LCS)</value>
+        <value>Kiírja hogy mely karakterekkel lett elérve egy rekord a ranglétra (OCS gomb)\nA saját helyi próbálkozásaidat is megjeleníti (LCS)</value>
     </data>
   <data name="ChartDeleter" xml:space="preserve">
-        <value>Allows you to queue custom charts to be deleted or moved when you exit the game.</value>
+        <value>Lehetővé teszi, hogy megjelölj pályákat kitörlésre vagy áthelyezésre miután a játékból kilépsz.</value>
     </data>
   <data name="ChartReview" xml:space="preserve">
-        <value>Automatically selects sleepwalker, sets offset to 0, sets fever to manual, disables certain UI elements.\nCan be toggled on/off while in-game</value>
+        <value>Automatikusan kiválasztja a Sleepwalker-t, a késleltetést (offset) 0-ra állítja, a Fever-t manuálisra, és bizonyos UI elemek kikapcsol.\nJáték közben ki-/bekapcsolható</value>
     </data>
   <data name="ChineseMode" xml:space="preserve">
-        <value>Censores certain aspects of the game (Characters, illustrations, etc)</value>
+        <value>A játék bizonyos részeit kicenzúrázza (Karakterek, illusztrációk, stb)</value>
     </data>
   <data name="Cinema" xml:space="preserve">
-        <value>The mod that allows you to see video backgrounds in custom charts</value>
+        <value>A mod amellyel videós háttéreket tudnak használni az egyéni pályák</value>
     </data>
   <data name="CustomAlbums" xml:space="preserve">
-        <value>The mod that allows you to load in custom charts</value>
+        <value>A mod amely lehetővé teszi az egyéni pályák betöltését</value>
     </data>
   <data name="CustomAnchorSupport" xml:space="preserve">
-        <value>Allows you to use add the streamer tag in your info.json to mark a song as copyright-free\n(for use with streamer mode)</value>
+        <value>Lehetővé teszi a "streamer" címke használatát az info.json fájlba hogy copyright-mentesnek jelölj egy zenét\n(streamer módra van kitalálva)</value>
     </data>
   <data name="CustomBGBrightness" xml:space="preserve">
-        <value>Allows you to adjust background brightness lower than 40%</value>
+        <value>Engedélyezi hogy 40%-nál alacsonyabbra állítsd a háttér fényerejét</value>
     </data>
   <data name="CustomHitSound" xml:space="preserve">
-        <value>Allows you to make custom hit sound\nDetailed instructions on github readme</value>
+        <value>Lehetővé teszi hogy saját hang-effektek adj meg\nRészletes leírás a github oldalán található</value>
     </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
-        <value>Allows you to add custom loading screens (CustomLoadingScreens folder)\nAlso allows you to add custom loading screen messages (UserData/CustomLoadingScreens.cfg)\nMessages can be paired with an image, or be left as random</value>
+        <value>Lehetővé teszi hogy saját betöltő képernyőket használj (CustomLoadingScreens mappa)\nSaját feliratokat is adhatsz meg (UserData/CustomLoadingScreens.cfg)\nEzeket lehet képpel párosítani, vagy véletlen kiíratni</value>
     </data>
   <data name="CustomResolution" xml:space="preserve">
-        <value>Adds a Custom option in resolution settings, which can be changed in the config</value>
+        <value>Egy egyéni ("Custom") beállítást rak a felbontás beállításokhoz, amelyet a config-ban változtathatsz </value>
     </data>
   <data name="EffectDisable" xml:space="preserve">
-        <value>Disables some in-game effects</value>
+        <value>Kikapcsol pár játék alatti effektet</value>
     </data>
   <data name="FavGirl" xml:space="preserve">
-        <value>Allows you to favorite characters and elfins\nThis will make you look like that character even if another character is selected.\nYou will have the abilities of the selected character &amp; your plays will be submitted as such</value>
+        <value>Lehetővé teszi hogy kedvencként jelölj egy karaktert és manót\nEzután úgy fogsz kinézni mint az a karakter még ha másik is van kijelölve\nA tényleges karaktered képességét fogod kapni és a ranglétrán is úgy fogsz megjelenni</value>
     </data>
   <data name="FC AP indicator" xml:space="preserve">
-        <value>Tells you whether you're on All Perfect/Full Combo pace, and displays the number of misses/greats</value>
+        <value>Kijelzi hogy Tökéletes vagy Hibamentes meneted van-e, és kiírja hogy hány hibád volt addig</value>
     </data>
   <data name="FeverEffectDisable" xml:space="preserve">
-        <value>Disables the fever background effect</value>
+        <value>Kikapcsolja a Fever-nek a hátterét</value>
     </data>
   <data name="Headquarters" xml:space="preserve">
-        <value>Allows you to submit scores on custom charts obtained from the MDMC website</value>
+        <value>Lehetővé teszi hogy egyedi pályák ranglétráját elérd</value>
     </data>
   <data name="HiddenQoL" xml:space="preserve">
-        <value>Adds a button to always show hidden difficulties.\nE.g. you don't need to spam click and such to unlock them before playing</value>
+        <value>Lerak egy gombot, amely láthatóvá teszi az összes rejtett pályát\nMagyarul, nem kell spam-elned vagy rajzolgatnod hogy megjelenjenek</value>
     </data>
   <data name="IntroSkip" xml:space="preserve">
-        <value>Skips the "PeroPero HasuHasu" and the opening scene.</value>
+        <value>Átugorja a "PeroPero HasuHasu" képernyőt és nyító animációt.</value>
     </data>
   <data name="KeybindManager" xml:space="preserve">
-        <value>A library for other mods to parse and listen to keybinds</value>
+        <value>Egy könyvtár más modoknak gomb-lenyomások érzékelésére és értelmezésére</value>
     </data>
   <data name="LocalizeLib" xml:space="preserve">
-        <value>A library for other mods to localize text</value>
+        <value>Egy könyvtár más modoknak hogy lokalizáljanak szöveget</value>
     </data>
   <data name="MDRPC" xml:space="preserve">
-        <value>Muse Dash Rich Presence, which is exactly what it says it is.</value>
+        <value>Muse Dash Rich Presence, pontosan az aminek hívja magát.</value>
     </data>
   <data name="ModManager" xml:space="preserve">
-        <value>Allows you to disable &amp; delete mods while in-game.</value>
+        <value>Lehetővé teszi hogy kitörölj/kikapcsolj modok játékon belül.</value>
     </data>
   <data name="Muse Dash Mirror" xml:space="preserve">
-        <value>A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.\nThis mod does nothing by itself.</value>
+        <value>Egy könyvtár más modoknak amely könnyebbé teszi a hozzáférést bizonyos adatok és UI elemek létrehozását.\nEgy magában nem csinál semmit.</value>
     </data>
   <data name="MuseDashModTools" xml:space="preserve">
-        <value>Automatically detects and logs available mod updates.</value>
+        <value>Automatikusan megnézi hogy vannak a modjaidnak elérhető frissítései.</value>
     </data>
   <data name="NoAutoPause" xml:space="preserve">
-        <value>Prevents the game from automatically pausing when the game loses focus.</value>
+        <value>Megakadályozza hogy a játék szüneteljen, amikor elveszti a fókuszt.</value>
     </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
-        <value>Level up animations take ages;\nLet's skip them.</value>
+        <value>A szint-lépés animáció évekig tart;\nUgorjuk át.</value>
     </data>
   <data name="PerfectDisable" xml:space="preserve">
-        <value>Allows you to disable the judgements in-game.\n(example: show early/late perfects but not pure perfects)\nInspired by ADOFAI Tweaks</value>
+        <value>Lehetővé teszi hogy kikapcsolj kiértékeléseket.\n(pl.: mutassa az Early/Late Perfect-et, de az igazi Perfect-et ne)\nADOFAI Tweaks inspirálta</value>
     </data>
   <data name="PopupLib" xml:space="preserve">
-        <value>A library for other mods to manage popups and windows</value>
+        <value>Egy könyvtár más modoknak hogy kezeljenek felugró ablakokat</value>
     </data>
   <data name="PreventLowAcc" xml:space="preserve">
-        <value>A mod that that allows let's you prevent a score from uploading,\nand still be able to take a screenshot.</value>
+        <value>Lehetővé teszi, hogy ne töltődjön fel a pontszámod,\nde ugyanúgy le tudd azt fotózni.</value>
     </data>
   <data name="QuickRestart" xml:space="preserve">
-        <value>Allows you to use Delete to instantly leave a chart &amp; Allows you to use Backspace to instantly restart a chart\nUpdate now allows you to set custom keybinds.</value>
+        <value>Lehetővé teszi, hogy Delete-el azonnal kilépj egy pályából &amp; Backspace-el azonnal újraindítsd\nA gombok tetszőlegesen állíthatóak.</value>
     </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-        <value>Allows you to set keybinds to quickly change your characters.\nNow has an in-game menu to add keybinds</value>
+        <value>Lehetővé teszi, hogy billentyű-kombinációkat állíts gyors karakter-váltásra\nElérhető egy játékon belüli menü</value>
     </data>
   <data name="SceneEggs" xml:space="preserve">
-        <value>Makes it possible for customs to use certain background decorations that the default charts use.</value>
+        <value>Lehetővé teszi egyedi pályáknak hogy bizonyos háttérdíszítéseket használjanak.</value>
     </data>
   <data name="Scoreboard characters and elfins" xml:space="preserve">
-        <value>Similar to CharacterScoreboard, however, it instead adds icon clickable icon representations,\nwhich automatically switches to the character combo when clicked.</value>
+        <value>Hasonló a CharacterScoreboard-hoz, de helyette kattintható ikonokat jelenít meg,\namely automatikusan arra a karakterkombinációra váltanak dupla kattintásra.</value>
     </data>
   <data name="ScrollSpeed" xml:space="preserve">
-        <value>Allows charters (not players) to set custom scroll speeds.\nIt's completely up to you whether you wanna use this, most charters don't use it though.</value>
+        <value>Lehetővé teszi pálya készítőknek hogy saját sebességet állítsanak.\nÁltalában nem használják.</value>
     </data>
   <data name="SearchPlusPlus" xml:space="preserve">
-        <value>Displays the title, artist, and difficulty of the song in the top-right corner during play.</value>
+        <value>Megjeleníti a zene címét, művészét és nehézségét a jobb felső sarokban a játék alatt.</value>
     </data>
   <data name="Song Desc" xml:space="preserve">
-        <value>An extension to SearchPlusPlus, allowing you to create folders\nand search for songs in said folders.</value>
+        <value>Egy SearchPlusPlus bővítmény, amely lehetővé teszi mappák létrehozását\nés azon mappákban lévő zenék keresését.</value>
     </data>
   <data name="Search++ Folder Tag" xml:space="preserve">
-        <value>Any search feature you will ever need (probably).\nCheck the homepage or in-game forum for more info.</value>
+        <value>Minden keresési funkció amire valaha szükséged lehet (talán).\nNézd meg a főoldalát további infóért.</value>
     </data>
   <data name="StricterJudge" xml:space="preserve">
         <value>A mod which changes the judgement window and make the game harder\nYou can manually change the judgement range in Stricter Judge.cfg</value>
