@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
         xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
-        xmlns:ext="using:MuseDashModToolsUI.Extensions"
+        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"

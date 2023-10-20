@@ -1,6 +1,6 @@
 ﻿using Avalonia.Markup.Xaml;
 
-namespace MuseDashModToolsUI.Extensions;
+namespace MuseDashModToolsUI.Extensions.MarkupExtensions;
 
 public class DependencyInjectionExtension : MarkupExtension
 {

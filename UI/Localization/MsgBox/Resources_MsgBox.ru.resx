@@ -223,4 +223,7 @@
   <data name="MsgBox_Content_OverrideChart" xml:space="preserve">
         <value>Вы уже скачивали чарт {0}\nПерезаписать уже существующий?</value>
     </data>
+  <data name="MsgBox_Content_NoBmsFile" xml:space="preserve">
+        <value>В этой папке нет чартов</value>
+    </data>
 </root>

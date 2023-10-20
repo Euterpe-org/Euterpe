@@ -223,4 +223,7 @@
   <data name="MsgBox_Content_OverrideChart" xml:space="preserve">
         <value>¡Hey! Ya tienes descargado este chart...\n¿Quieres sobreescribir el chart descargado?</value>
     </data>
+  <data name="MsgBox_Content_NoBmsFile" xml:space="preserve">
+        <value>No se encontraron charts en la carpeta</value>
+    </data>
 </root>

@@ -21,7 +21,10 @@
             PublicKeyToken=b77a5c561934e089
         </value>
   </resheader>
-  <data name="FolderDialog_Title" xml:space="preserve">
+  <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
         <value>Selecciona la carpeta de Muse Dash</value>
+    </data>
+  <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
+        <value>Selecciona la carpeta de Charts</value>
     </data>
 </root>

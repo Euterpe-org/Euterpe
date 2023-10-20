@@ -1,7 +1,4 @@
-using Avalonia.Data;
-using Avalonia.Input;
-
-namespace MuseDashModToolsUI.Views.Controls;
+namespace MuseDashModToolsUI.Styles.ExtendControls;
 
 public class DifficultyFilter : MenuItem
 {

@@ -2,7 +2,7 @@
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 
-namespace MuseDashModToolsUI.Converters;
+namespace MuseDashModToolsUI.Converters.IValueConverters;
 
 public class UninstallConverter : IValueConverter
 {

@@ -21,7 +21,10 @@
             PublicKeyToken=b77a5c561934e089
         </value>
   </resheader>
-  <data name="FolderDialog_Title" xml:space="preserve">
+  <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
         <value>Válaszd ki a Muse Dash mappát</value>
+    </data>
+  <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
+        <value>Válaszd ki a zene mappádat</value>
     </data>
 </root>

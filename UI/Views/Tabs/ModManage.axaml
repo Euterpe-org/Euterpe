@@ -6,10 +6,10 @@
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
-             xmlns:ext="using:MuseDashModToolsUI.Extensions"
-             xmlns:converters="using:MuseDashModToolsUI.Converters"
              xmlns:dialogs="using:MuseDashModToolsUI.ViewModels.Dialogs"
              xmlns:model="using:MuseDashModToolsUI.Models"
+             xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters.IValueConverters"
+             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.ModManage"
              x:DataType="tabs:ModManageViewModel"
@@ -287,6 +287,7 @@
                                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                                 </Style>
                                             </StackPanel.Styles>
+
                                             <TextBlock Classes="Body2" Text="{Binding XamlDescription}" />
 
                                             <TextBlock Classes="Body2"
@@ -294,7 +295,7 @@
                                                        Text="{Binding ., Converter={StaticResource VersionTextConverter}}"
                                                        Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}" />
 
-                                            <StackPanel IsVisible="{Binding DependencyCount}" Margin="0,5,0,0">
+                                            <StackPanel IsVisible="{Binding HasDependency}" Margin="0,5,0,0">
                                                 <TextBlock Classes="Body2"
                                                            Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
                                                 <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
@@ -343,9 +344,8 @@
                                                       CommandParameter="{Binding .}"
                                                       Foreground="#DDD" />
 
-                                        <Button Classes="dark" IsVisible="{Binding !IsLocal}"
+                                        <Button Classes="dark" IsVisible="{Binding IsInstallable}"
                                                 Tag="{Binding Name}"
-                                                IsEnabled="{Binding IsInstallable}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.InstallModCommand}"
                                                 CommandParameter="{Binding .}"
                                                 Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
