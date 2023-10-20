@@ -25,6 +25,6 @@
         <value>選擇 Muse Dash 文件夾</value>
     </data>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-        <value>Choose Chart Folder</value>
+        <value>選擇譜面文件夾</value>
     </data>
 </root>

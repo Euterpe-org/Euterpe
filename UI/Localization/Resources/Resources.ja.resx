@@ -25,6 +25,6 @@
         <value>Muse Dashのインストールフォルダを選んでね</value>
     </data>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-        <value>Choose Chart Folder</value>
+        <value>チャートフォルダを選択</value>
     </data>
 </root>

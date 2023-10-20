@@ -206,34 +206,34 @@
         <value>Sort by: </value>
     </data>
   <data name="XAML_ChartFilterTypes" xml:space="preserve">
-        <value>Filter by</value>
+        <value>選べる</value>
     </data>
   <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-        <value>Default</value>
+        <value>プリセット</value>
     </data>
   <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-        <value>Likes</value>
+        <value>好き</value>
     </data>
   <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-        <value>Downloads</value>
+        <value>ダウンロード</value>
     </data>
   <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-        <value>Latest</value>
+        <value>最新</value>
     </data>
   <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-        <value>Name</value>
+        <value>名前</value>
     </data>
   <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-        <value>Level</value>
+        <value>レベル</value>
     </data>
   <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
-        <value>Easy</value>
+        <value>普通</value>
     </data>
   <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
-        <value>Hard</value>
+        <value>玄人</value>
     </data>
   <data name="XAML_ChartFilterType_Master" xml:space="preserve">
-        <value>Master</value>
+        <value>達人</value>
     </data>
   <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
         <value>隠し</value>
@@ -242,10 +242,10 @@
         <value>Modsを探す （名前，作者，説明）</value>
     </data>
   <data name="XAML_InfoJson_ChartName" xml:space="preserve">
-        <value>Name</value>
+        <value>名前</value>
     </data>
   <data name="XAML_InfoJson_Author" xml:space="preserve">
-        <value>Artist</value>
+        <value>アーティスト</value>
     </data>
   <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
         <value>Level Designer</value>

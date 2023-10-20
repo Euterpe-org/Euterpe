@@ -158,21 +158,21 @@
         <value>Minden keresési funkció amire valaha szükséged lehet (talán).\nNézd meg a főoldalát további infóért.</value>
     </data>
   <data name="StricterJudge" xml:space="preserve">
-        <value>A mod which changes the judgement window and make the game harder\nYou can manually change the judgement range in Stricter Judge.cfg</value>
+        <value>Egy mod amely szigorúbbá teszi az időzítéseket.\nManuálisan megváltoztathatod a szigorítás mértékét a StricterJudge.cfg fájlban</value>
     </data>
   <data name="True rank for 999+" xml:space="preserve">
-        <value>Displays actual ranking instead of "999+" for ranks 1000 to 2000</value>
+        <value>"999+" helyett a tényleges 1000 és 2000 közti rangod megjeleníti</value>
     </data>
   <data name="UI Disable" xml:space="preserve">
-        <value>Allows you to disable certain visual aspects of the game (example: hit circles)</value>
+        <value>Lehetővé teszi néhány vizuális elem kikapcsolását (pl. időzítési körök)</value>
     </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
-        <value>Makes Sleepwalker Rin do mashers at max speed instead of the normal slow speed.</value>
+        <value>Kényszeríti Sleepwalker Rin-t arra hogy maximális sebességen csinálja a Masher-öket (amelyeken spam-elni kell).</value>
     </data>
   <data name="UnlockAll2" xml:space="preserve">
-        <value>An alternative to UnlockAll.\nMaster's stay unlocked only for as long as the mod is installed.</value>
+        <value>UnlockAll alternatívája\nAmíg a mod telepítve van, minden mester fokozat elérhető.</value>
     </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
-        <value>Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa.</value>
+        <value>Lehetővé teszi hogy megváltoztasd a győzelmi képernyő stílusát DJMAX-re vagy Arknights-ra.</value>
     </data>
 </root>

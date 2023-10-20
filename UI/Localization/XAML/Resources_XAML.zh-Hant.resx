@@ -242,61 +242,61 @@
         <value>搜尋模組    (名字,   作者,  描述)</value>
     </data>
   <data name="XAML_InfoJson_ChartName" xml:space="preserve">
-        <value>Name</value>
+        <value>譜面名稱</value>
     </data>
   <data name="XAML_InfoJson_Author" xml:space="preserve">
-        <value>Artist</value>
+        <value>曲師</value>
     </data>
   <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
-        <value>Level Designer</value>
+        <value>譜師</value>
     </data>
   <data name="XAML_InfoJson_Scene" xml:space="preserve">
-        <value>Scene</value>
+        <value>場景</value>
     </data>
   <data name="XAML_InfoJson_BPM" xml:space="preserve">
         <value>BPM</value>
     </data>
   <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
-        <value>Difficulty</value>
+        <value>難度</value>
     </data>
   <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
-        <value>Search Tags</value>
+        <value>搜索標籤</value>
     </data>
   <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
-        <value>Hide Bms Mode</value>
+        <value>里譜解鎖方式</value>
     </data>
   <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
-        <value>Hide Bms Difficulty</value>
+        <value>里譜解鎖難度</value>
     </data>
   <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
-        <value>Hide Bms Message</value>
+        <value>里譜解鎖訊息</value>
     </data>
   <data name="XAML_ChooseChartPath" xml:space="preserve">
-        <value>Choose Chart Folder</value>
+        <value>選擇譜面文件夾</value>
     </data>
   <data name="XAML_Scene_SpaceStation" xml:space="preserve">
-        <value>Space Station</value>
+        <value>太空</value>
     </data>
   <data name="XAML_Scene_Retrocity" xml:space="preserve">
-        <value>Retrocity</value>
+        <value>都市</value>
     </data>
   <data name="XAML_Scene_Castle" xml:space="preserve">
-        <value>Castle</value>
+        <value>城堡</value>
     </data>
   <data name="XAML_Scene_RainyNight" xml:space="preserve">
-        <value>RainyNight</value>
+        <value>雨夜街道</value>
     </data>
   <data name="XAML_Scene_Candyland" xml:space="preserve">
-        <value>Candyland</value>
+        <value>糖果森林</value>
     </data>
   <data name="XAML_Scene_Oriental" xml:space="preserve">
-        <value>Oriental</value>
+        <value>和風</value>
     </data>
   <data name="XAML_Scene_LetsGroove" xml:space="preserve">
-        <value>Let's Groove</value>
+        <value>一起過山車</value>
     </data>
   <data name="XAML_Scene_Touhou" xml:space="preserve">
-        <value>Touhou</value>
+        <value>車萬</value>
     </data>
   <data name="XAML_Scene_DJMAX" xml:space="preserve">
         <value>DJMAX</value>
