@@ -91,9 +91,9 @@ public partial class GitHubService : IGitHubService
         try
         {
             var result = await Client.GetAsync(url);
-            Logger.Information("Download chart from {Url} success", url);
             await using var fs = new FileStream(path, FileMode.OpenOrCreate);
             await result.Content.CopyToAsync(fs);
+            Logger.Information("Download chart from {Url} success", url);
         }
         catch (Exception ex)
         {

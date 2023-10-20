@@ -18,6 +18,9 @@ public partial class SavingService : ISavingService
     private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
 
     [UsedImplicitly]
+    public IFileSystemPickerService FileSystemPickerService { get; init; }
+
+    [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
@@ -68,19 +71,15 @@ public partial class SavingService : ISavingService
         _logger.Information("Settings saved to Settings.json");
     }
 
-    public async Task OnChoosePath()
+    public async Task<bool> OnChoosePath()
     {
         var path = await GetChosenPath();
-
-        if (path == Settings.MuseDashFolder)
-        {
-            _logger.Information("Path not changed");
-            return;
-        }
+        if (!await CheckValidPath(path)) return false;
 
         _logger.Information("User chose path {Path}", path);
         Settings.MuseDashFolder = path;
 
         await CheckSettingValidity();
+        return true;
     }
 }

@@ -241,4 +241,64 @@
   <data name="XAML_SearchBar" xml:space="preserve">
         <value>Keresés</value>
     </data>
+  <data name="XAML_InfoJson_ChartName" xml:space="preserve">
+        <value>Cím</value>
+    </data>
+  <data name="XAML_InfoJson_Author" xml:space="preserve">
+        <value>Zenész</value>
+    </data>
+  <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
+        <value>Készítő</value>
+    </data>
+  <data name="XAML_InfoJson_Scene" xml:space="preserve">
+        <value>Helyszín</value>
+    </data>
+  <data name="XAML_InfoJson_BPM" xml:space="preserve">
+        <value>BPM</value>
+    </data>
+  <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
+        <value>Nehézség</value>
+    </data>
+  <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
+        <value>Kereső címkék</value>
+    </data>
+  <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
+        <value>Rejtett BMS módszer</value>
+    </data>
+  <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
+        <value>Rejtett BMS helye</value>
+    </data>
+  <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
+        <value>Rejtett Bms üzenete</value>
+    </data>
+  <data name="XAML_ChooseChartPath" xml:space="preserve">
+        <value>Válaszd ki a zene mappádat</value>
+    </data>
+  <data name="XAML_Scene_SpaceStation" xml:space="preserve">
+        <value>Space Station</value>
+    </data>
+  <data name="XAML_Scene_Retrocity" xml:space="preserve">
+        <value>Retrocity</value>
+    </data>
+  <data name="XAML_Scene_Castle" xml:space="preserve">
+        <value>Castle</value>
+    </data>
+  <data name="XAML_Scene_RainyNight" xml:space="preserve">
+        <value>Rainy Night</value>
+    </data>
+  <data name="XAML_Scene_Candyland" xml:space="preserve">
+        <value>Candyland</value>
+    </data>
+  <data name="XAML_Scene_Oriental" xml:space="preserve">
+        <value>Oriental</value>
+    </data>
+  <data name="XAML_Scene_LetsGroove" xml:space="preserve">
+        <value>Let's Groove</value>
+    </data>
+  <data name="XAML_Scene_Touhou" xml:space="preserve">
+        <value>Touhou</value>
+    </data>
+  <data name="XAML_Scene_DJMAX" xml:space="preserve">
+        <value>DJMAX</value>
+    </data>
 </root>

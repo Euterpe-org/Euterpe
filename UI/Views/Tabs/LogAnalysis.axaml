@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
-             xmlns:ext="using:MuseDashModToolsUI.Extensions"
+             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.LogAnalysis"
              x:DataType="tabs:LogAnalysisViewModel"

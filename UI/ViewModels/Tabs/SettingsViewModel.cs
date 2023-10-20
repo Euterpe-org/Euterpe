@@ -70,7 +70,7 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private async Task OnChoosePath()
     {
         Logger.Information("Choose path button clicked");
-        await SavingService.OnChoosePath();
+        if (!await SavingService.OnChoosePath()) return;
         UpdatePath();
         await UpdateUIService.InitializeTabsOnChoosePath();
     }

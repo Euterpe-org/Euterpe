@@ -241,4 +241,64 @@
   <data name="XAML_SearchBar" xml:space="preserve">
         <value>搜尋模組    (名字,   作者,  描述)</value>
     </data>
+  <data name="XAML_InfoJson_ChartName" xml:space="preserve">
+        <value>譜面名稱</value>
+    </data>
+  <data name="XAML_InfoJson_Author" xml:space="preserve">
+        <value>曲師</value>
+    </data>
+  <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
+        <value>譜師</value>
+    </data>
+  <data name="XAML_InfoJson_Scene" xml:space="preserve">
+        <value>場景</value>
+    </data>
+  <data name="XAML_InfoJson_BPM" xml:space="preserve">
+        <value>BPM</value>
+    </data>
+  <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
+        <value>難度</value>
+    </data>
+  <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
+        <value>搜索標籤</value>
+    </data>
+  <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
+        <value>里譜解鎖方式</value>
+    </data>
+  <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
+        <value>里譜解鎖難度</value>
+    </data>
+  <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
+        <value>里譜解鎖訊息</value>
+    </data>
+  <data name="XAML_ChooseChartPath" xml:space="preserve">
+        <value>選擇譜面文件夾</value>
+    </data>
+  <data name="XAML_Scene_SpaceStation" xml:space="preserve">
+        <value>太空</value>
+    </data>
+  <data name="XAML_Scene_Retrocity" xml:space="preserve">
+        <value>都市</value>
+    </data>
+  <data name="XAML_Scene_Castle" xml:space="preserve">
+        <value>城堡</value>
+    </data>
+  <data name="XAML_Scene_RainyNight" xml:space="preserve">
+        <value>雨夜街道</value>
+    </data>
+  <data name="XAML_Scene_Candyland" xml:space="preserve">
+        <value>糖果森林</value>
+    </data>
+  <data name="XAML_Scene_Oriental" xml:space="preserve">
+        <value>和風</value>
+    </data>
+  <data name="XAML_Scene_LetsGroove" xml:space="preserve">
+        <value>一起過山車</value>
+    </data>
+  <data name="XAML_Scene_Touhou" xml:space="preserve">
+        <value>車萬</value>
+    </data>
+  <data name="XAML_Scene_DJMAX" xml:space="preserve">
+        <value>DJMAX</value>
+    </data>
 </root>

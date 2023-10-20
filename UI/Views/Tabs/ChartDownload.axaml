@@ -2,12 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:cc="using:MuseDashModToolsUI.Views.Controls"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
-             xmlns:ext="using:MuseDashModToolsUI.Extensions"
              xmlns:model="using:MuseDashModToolsUI.Models"
+             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Tabs.ChartDownload"
              x:DataType="tabs:ChartDownloadViewModel"
@@ -90,36 +90,36 @@
                     </MenuItem.Header>
 
                     <!--Easy-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
-                                         Command="{Binding FilterEasyCommand}">
-                        <cc:DifficultyFilter.Icon>
+                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
+                                           Command="{Binding FilterEasyCommand}">
+                        <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Easy.png" />
-                        </cc:DifficultyFilter.Icon>
-                    </cc:DifficultyFilter>
+                        </mdmt:DifficultyFilter.Icon>
+                    </mdmt:DifficultyFilter>
 
                     <!--Hard-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
-                                         Command="{Binding FilterHardCommand}">
-                        <cc:DifficultyFilter.Icon>
+                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
+                                           Command="{Binding FilterHardCommand}">
+                        <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hard.png" />
-                        </cc:DifficultyFilter.Icon>
-                    </cc:DifficultyFilter>
+                        </mdmt:DifficultyFilter.Icon>
+                    </mdmt:DifficultyFilter>
 
                     <!--Master-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
-                                         Command="{Binding FilterMasterCommand}">
-                        <cc:DifficultyFilter.Icon>
+                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
+                                           Command="{Binding FilterMasterCommand}">
+                        <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Master.png" />
-                        </cc:DifficultyFilter.Icon>
-                    </cc:DifficultyFilter>
+                        </mdmt:DifficultyFilter.Icon>
+                    </mdmt:DifficultyFilter>
 
                     <!--Hidden-->
-                    <cc:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
-                                         Command="{Binding FilterHiddenCommand}">
-                        <cc:DifficultyFilter.Icon>
+                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
+                                           Command="{Binding FilterHiddenCommand}">
+                        <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hidden.png" />
-                        </cc:DifficultyFilter.Icon>
-                    </cc:DifficultyFilter>
+                        </mdmt:DifficultyFilter.Icon>
+                    </mdmt:DifficultyFilter>
 
                 </MenuItem>
             </Menu>
@@ -212,43 +212,24 @@
                                     <!--Difficulties-->
                                     <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                                                 MinHeight="40">
-                                        <StackPanel.Styles>
-                                            <Style Selector="StackPanel">
-                                                <Setter Property="Margin" Value="5,0" />
-                                            </Style>
-                                            <Style Selector="Image">
-                                                <Setter Property="Margin" Value="5,0" />
-                                                <Setter Property="Width" Value="30" />
-                                                <Setter Property="Height" Value="30" />
-                                            </Style>
-                                            <Style Selector="TextBlock">
-                                                <Setter Property="FontSize" Value="20" />
-                                            </Style>
-                                        </StackPanel.Styles>
 
                                         <!--Easy-->
-                                        <StackPanel IsVisible="{Binding HasEasy}">
-                                            <Image Source="/Assets/Difficulties/Easy.png" />
-                                            <TextBlock Text="{Binding EasyLevel}" />
-                                        </StackPanel>
+                                        <mdmt:Difficulty IsVisible="{Binding HasEasy}"
+                                                         Source="/Assets/Difficulties/Easy.png"
+                                                         Text="{Binding EasyLevel}" />
 
                                         <!--Hard-->
-                                        <StackPanel IsVisible="{Binding HasHard}">
-                                            <Image Source="/Assets/Difficulties/Hard.png" />
-                                            <TextBlock Text="{Binding HardLevel}" />
-                                        </StackPanel>
-
+                                        <mdmt:Difficulty IsVisible="{Binding HasHard}"
+                                                         Source="/Assets/Difficulties/Hard.png"
+                                                         Text="{Binding HardLevel}" />
                                         <!--Master-->
-                                        <StackPanel IsVisible="{Binding HasMaster}">
-                                            <Image Source="/Assets/Difficulties/Master.png" />
-                                            <TextBlock Text="{Binding MasterLevel}" />
-                                        </StackPanel>
-
+                                        <mdmt:Difficulty IsVisible="{Binding HasMaster}"
+                                                         Source="/Assets/Difficulties/Master.png"
+                                                         Text="{Binding MasterLevel}" />
                                         <!--Hidden-->
-                                        <StackPanel IsVisible="{Binding HasHidden}">
-                                            <Image Source="/Assets/Difficulties/Hidden.png" />
-                                            <TextBlock Text="{Binding HiddenLevel}" />
-                                        </StackPanel>
+                                        <mdmt:Difficulty IsVisible="{Binding HasHidden}"
+                                                         Source="/Assets/Difficulties/Hidden.png"
+                                                         Text="{Binding HiddenLevel}" />
 
                                     </StackPanel>
 

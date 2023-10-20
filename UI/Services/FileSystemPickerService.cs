@@ -1,0 +1,14 @@
+using Avalonia.Platform.Storage;
+
+namespace MuseDashModToolsUI.Services;
+
+public class FileSystemPickerService : IFileSystemPickerService
+{
+    public async Task<string?> GetSingleFolderPath(string title)
+    {
+        var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+            { AllowMultiple = false, Title = title });
+
+        return dialogue.Count != 0 ? dialogue[0].TryGetLocalPath() : null;
+    }
+}
