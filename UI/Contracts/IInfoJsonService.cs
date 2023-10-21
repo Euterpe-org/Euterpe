@@ -12,5 +12,5 @@ public interface IInfoJsonService
     ///     Choose the chart folder
     /// </summary>
     /// <returns></returns>
-    Task OnChooseChartFolder();
+    Task OnChooseChartFolderAsync();
 }

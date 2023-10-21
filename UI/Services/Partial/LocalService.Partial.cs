@@ -43,7 +43,7 @@ public partial class LocalService
             {
                 Logger.Error("No game files found in {Path}, showing error message box...", SavingService.Value.Settings.MuseDashFolder);
                 await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoExeFound);
-                await SavingService.Value.OnChoosePath();
+                await SavingService.Value.OnChooseGamePathAsync();
             }
             else
             {

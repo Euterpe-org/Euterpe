@@ -5,12 +5,12 @@ public interface ILocalService
     /// <summary>
     ///     Check MelonLoader Install
     /// </summary>
-    Task CheckMelonLoaderInstall();
+    Task CheckMelonLoaderInstallAsync();
 
     /// <summary>
     ///     Check whether the chosen path is valid
     /// </summary>
-    Task CheckValidPath();
+    Task CheckValidPathAsync();
 
     /// <summary>
     ///     Get Mod dll paths
@@ -31,7 +31,7 @@ public interface ILocalService
     /// </summary>
     /// <param name="link">Download link</param>
     /// <returns>Launch Success</returns>
-    Task<bool> LaunchUpdater(string link);
+    Task<bool> LaunchUpdaterAsync(string link);
 
     /// <summary>
     ///     Load Mod
@@ -44,13 +44,13 @@ public interface ILocalService
     ///     Install MelonLoader
     /// </summary>
     /// <returns></returns>
-    Task OnInstallMelonLoader();
+    Task OnInstallMelonLoaderAsync();
 
     /// <summary>
     ///     Uninstall MelonLoader
     /// </summary>
     /// <returns></returns>
-    Task OnUninstallMelonLoader();
+    Task OnUninstallMelonLoaderAsync();
 
     /// <summary>
     ///     Launch Game
@@ -62,29 +62,29 @@ public interface ILocalService
     ///     Open CustomAlbums folder
     /// </summary>
     /// <returns></returns>
-    Task OpenCustomAlbumsFolder();
+    Task OpenCustomAlbumsFolderAsync();
 
     /// <summary>
     ///     Open Mods folder
     /// </summary>
     /// <returns></returns>
-    Task OpenModsFolder();
+    Task OpenModsFolderAsync();
 
     /// <summary>
     ///     Open UserData folder
     /// </summary>
     /// <returns></returns>
-    Task OpenUserDataFolder();
+    Task OpenUserDataFolderAsync();
 
     /// <summary>
     ///     Open Log folder
     /// </summary>
     /// <returns></returns>
-    Task OpenLogFolder();
+    Task OpenLogFolderAsync();
 
     /// <summary>
     ///     Read game version
     /// </summary>
     /// <returns>Game Version</returns>
-    Task<string> ReadGameVersion();
+    Task<string> ReadGameVersionAsync();
 }

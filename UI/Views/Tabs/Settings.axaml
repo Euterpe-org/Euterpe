@@ -56,7 +56,7 @@
                              MaxWidth="500" />
 
                     <Button Classes="dark"
-                            Command="{Binding ChoosePathCommand}">
+                            Command="{Binding ChooseGamePathCommand}">
                         <StackPanel Orientation="Horizontal">
                             <PathIcon Data="{StaticResource Folder}"
                                       Height="35"

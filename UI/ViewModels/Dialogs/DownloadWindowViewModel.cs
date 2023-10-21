@@ -27,7 +27,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
     {
         if (File.Exists(SavingService.Settings.MelonLoaderZipPath))
         {
-            var onlineSize = await GitHubService.GetMelonLoaderFileSize();
+            var onlineSize = await GitHubService.GetMelonLoaderFileSizeAsync();
             var zipInfo = new FileInfo(SavingService.Settings.MelonLoaderZipPath);
             if (onlineSize > zipInfo.Length && !await DownloadMelonLoaderZipFile()) return;
         }
@@ -48,7 +48,7 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
     {
         var downloadProgress = new Progress<double>(UpdateDownloadProgress);
         Logger.Information("Start downloading MelonLoader");
-        return await GitHubService.DownloadMelonLoader(downloadProgress);
+        return await GitHubService.DownloadMelonLoaderAsync(downloadProgress);
     }
 
     private async Task<bool> ExtractMelonLoaderZipFile()

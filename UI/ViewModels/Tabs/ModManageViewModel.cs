@@ -87,22 +87,22 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     #region Commands
 
     [RelayCommand]
-    private async Task OnInstallMod(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnInstallMod, item);
+    private async Task OnInstallModAsync(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnInstallModAsync, item);
 
     [RelayCommand]
-    private async Task OnReinstallMod(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnReinstallMod, item);
+    private async Task OnReinstallModAsync(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnReinstallModAsync, item);
 
     [RelayCommand]
-    private async Task OnToggleMod(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnToggleMod, item);
+    private async Task OnToggleModAsync(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnToggleModAsync, item);
 
     [RelayCommand]
-    private async Task OnDeleteMod(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnDeleteMod, item);
+    private async Task OnDeleteModAsync(Mod item) => await ExecuteWithWatcherDisabled(ModService.OnDeleteModAsync, item);
 
     [RelayCommand]
-    private async Task OnInstallMelonLoader() => await LocalService.OnInstallMelonLoader();
+    private async Task OnInstallMelonLoaderAsync() => await LocalService.OnInstallMelonLoaderAsync();
 
     [RelayCommand]
-    private async Task OnUninstallMelonLoader() => await LocalService.OnUninstallMelonLoader();
+    private async Task OnUninstallMelonLoaderAsync() => await LocalService.OnUninstallMelonLoaderAsync();
 
     [RelayCommand]
     private void OpenUrl(string path)
@@ -116,13 +116,13 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     }
 
     [RelayCommand]
-    private async Task OpenUserDataFolder() => await LocalService.OpenUserDataFolder();
+    private async Task OpenUserDataFolderAsync() => await LocalService.OpenUserDataFolderAsync();
 
     [RelayCommand]
-    private async Task OpenModsFolder() => await LocalService.OpenModsFolder();
+    private async Task OpenModsFolderAsync() => await LocalService.OpenModsFolderAsync();
 
     [RelayCommand]
-    private async Task OnCheckUpdate() => await GitHubService.CheckUpdates(true);
+    private async Task OnCheckUpdateAsync() => await GitHubService.CheckUpdates(true);
 
     [RelayCommand]
     private void OnFilterAll() => CategoryModFilterType = ModFilterType.All;

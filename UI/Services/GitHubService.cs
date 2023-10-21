@@ -74,7 +74,7 @@ public partial class GitHubService : IGitHubService
             if (!await UpdateRequired(release.TagName, title, body)) return;
 
             var link = GetDownloadLink(release.Assets);
-            if (!await LocalService.Value.LaunchUpdater(link)) return;
+            if (!await LocalService.Value.LaunchUpdaterAsync(link)) return;
             Logger.Information("Launch updater success, exit...");
             Environment.Exit(0);
         }
@@ -85,7 +85,7 @@ public partial class GitHubService : IGitHubService
         }
     }
 
-    public async Task DownloadChart(int id, string path)
+    public async Task DownloadChartAsync(int id, string path)
     {
         var url = string.Format(ChartDownloadApi, id);
         try
@@ -102,7 +102,7 @@ public partial class GitHubService : IGitHubService
         }
     }
 
-    public async Task DownloadMod(string link, string path)
+    public async Task DownloadModAsync(string link, string path)
     {
         var defaultDownloadSource = DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
         var result = await DownloadModFromSourceAsync(defaultDownloadSource, link, path);
@@ -115,14 +115,14 @@ public partial class GitHubService : IGitHubService
         }
     }
 
-    public async Task<bool> DownloadMelonLoader(IProgress<double> downloadProgress)
+    public async Task<bool> DownloadMelonLoaderAsync(IProgress<double> downloadProgress)
     {
         if (_melonLoaderResponseMessage is null) await GetMelonLoaderResponseMessage();
         if (_melonLoaderResponseMessage is null) return false;
         return await DownloadMelonLoaderFromSourceAsync(downloadProgress);
     }
 
-    public async Task<List<Chart>?> GetChartList()
+    public async Task<List<Chart>?> GetChartListAsync()
     {
         try
         {
@@ -138,7 +138,7 @@ public partial class GitHubService : IGitHubService
         }
     }
 
-    public async Task<long?> GetMelonLoaderFileSize()
+    public async Task<long?> GetMelonLoaderFileSizeAsync()
     {
         await GetMelonLoaderResponseMessage();
         return _melonLoaderResponseMessage is not null ? _melonLoaderResponseMessage.Content.Headers.ContentLength : 0;

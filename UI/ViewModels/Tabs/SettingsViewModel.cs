@@ -67,12 +67,12 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private void SetFont() => FontManageService.SetFont(AvailableFonts[CurrentFontIndex]);
 
     [RelayCommand]
-    private async Task OnChoosePath()
+    private async Task OnChooseGamePathAsync()
     {
         Logger.Information("Choose path button clicked");
-        if (!await SavingService.OnChoosePath()) return;
+        if (!await SavingService.OnChooseGamePathAsync()) return;
         UpdatePath();
-        await UpdateUIService.InitializeTabsOnChoosePath();
+        await UpdateUIService.InitializeTabsOnChoosePathAsync();
     }
 
     private void UpdatePath() => Path = SavingService.Settings.MuseDashFolder;

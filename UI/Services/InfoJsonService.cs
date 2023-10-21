@@ -20,9 +20,9 @@ public partial class InfoJsonService : IInfoJsonService
 
     public void Initialize(InfoJson infoJson) => _infoJson = infoJson;
 
-    public async Task OnChooseChartFolder()
+    public async Task OnChooseChartFolderAsync()
     {
-        var chartFolder = await FileSystemPickerService.GetSingleFolderPath(FolderDialog_Title_ChooseChartFolder);
+        var chartFolder = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseChartFolder);
         if (string.IsNullOrEmpty(chartFolder))
         {
             Logger.Information("Chosen chart folder is empty");

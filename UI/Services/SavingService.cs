@@ -44,7 +44,7 @@ public partial class SavingService : ISavingService
     public string ModLinksPath => Path.Combine(ConfigFolderPath, "ModLinks.json");
     public string ChartFolderPath => Path.Combine(ConfigFolderPath, "Charts");
 
-    public async Task InitializeSettings()
+    public async Task InitializeSettingsAsync()
     {
         _logger.Information("Initializing settings...");
 
@@ -54,24 +54,24 @@ public partial class SavingService : ISavingService
             if (!await TryGetGameFolderPath())
             {
                 await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
-                await OnChoosePath();
+                await OnChooseGamePathAsync();
             }
         }
 
         await CheckSettingValidity();
-        await UpdateUIService.InitializeAllTabs();
+        await UpdateUIService.InitializeAllTabsAsync();
 
         _logger.Information("Settings initialize finished");
     }
 
-    public async Task Save()
+    public async Task SaveAsync()
     {
         var json = SerializationService.SerializeSetting(Settings);
         await _fileSystem.File.WriteAllTextAsync(SettingPath, json);
         _logger.Information("Settings saved to Settings.json");
     }
 
-    public async Task<bool> OnChoosePath()
+    public async Task<bool> OnChooseGamePathAsync()
     {
         var path = await GetChosenPath();
         if (!await CheckValidPath(path)) return false;

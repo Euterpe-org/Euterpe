@@ -91,10 +91,10 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     #region Commands
 
     [RelayCommand]
-    private async Task DownloadChart(Chart item) => await ChartService.DownloadChart(item);
+    private async Task DownloadChartAsync(Chart item) => await ChartService.DownloadChartAsync(item);
 
     [RelayCommand]
-    private async Task OpenCustomAlbumsFolder() => await LocalService.OpenCustomAlbumsFolder();
+    private async Task OpenCustomAlbumsFolderAsync() => await LocalService.OpenCustomAlbumsFolderAsync();
 
     [RelayCommand]
     private void OnFilterEasy() => FilterBy(ChartFilterType.Easy);

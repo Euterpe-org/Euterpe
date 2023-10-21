@@ -19,21 +19,21 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 
     public async Task Initialize()
     {
-        LogContent = await LogAnalyzeService.LoadLog();
+        LogContent = await LogAnalyzeService.LoadLogAsync();
         Logger.Information("Log Analysis Window Initialized");
     }
 
     [RelayCommand]
-    private async Task AnalyzeLog()
+    private async Task AnalyzeLogAsync()
     {
         Logger.Information("Log Analysis Started...");
-        if (await LogAnalyzeService.CheckPirate()) return;
-        if (!await LogAnalyzeService.CheckMelonLoaderVersion()) return;
-        await LogAnalyzeService.AnalyzeLog();
+        if (await LogAnalyzeService.CheckPirateAsync()) return;
+        if (!await LogAnalyzeService.CheckMelonLoaderVersionAsync()) return;
+        await LogAnalyzeService.AnalyzeLogAsync();
     }
 
     [RelayCommand]
-    private async Task OpenLogFolder() => await LocalService.OpenLogFolder();
+    private async Task OpenLogFolderAsync() => await LocalService.OpenLogFolderAsync();
 
     [RelayCommand]
     private void OpenUrl(string path)

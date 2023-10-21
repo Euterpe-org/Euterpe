@@ -10,17 +10,17 @@ public interface ISavingService
     ///     Initialize Settings
     /// </summary>
     /// <returns></returns>
-    Task InitializeSettings();
+    Task InitializeSettingsAsync();
 
     /// <summary>
     ///     Get muse dash folder path and Initialize tabs
     /// </summary>
     /// <returns>Is path changed</returns>
-    Task<bool> OnChoosePath();
+    Task<bool> OnChooseGamePathAsync();
 
     /// <summary>
     ///     Save Settings into Settings.json
     /// </summary>
     /// <returns></returns>
-    Task Save();
+    Task SaveAsync();
 }

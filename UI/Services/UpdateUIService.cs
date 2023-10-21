@@ -35,7 +35,7 @@ public partial class UpdateUIService : IUpdateUIService
         RecoverOption();
     }
 
-    public async Task InitializeAllTabs()
+    public async Task InitializeAllTabsAsync()
     {
         SettingsViewModel.Value.Initialize();
         await ModManageViewModel.Value.Initialize();
@@ -46,7 +46,7 @@ public partial class UpdateUIService : IUpdateUIService
         Logger.Information("All Tabs initialized");
     }
 
-    public async Task InitializeTabsOnChoosePath()
+    public async Task InitializeTabsOnChoosePathAsync()
     {
         await ModManageViewModel.Value.Initialize();
         await LogAnalysisViewModel.Value.Initialize();

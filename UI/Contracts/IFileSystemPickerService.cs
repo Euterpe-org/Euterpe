@@ -7,5 +7,5 @@ public interface IFileSystemPickerService
     /// </summary>
     /// <param name="title"></param>
     /// <returns>Folder path</returns>
-    Task<string?> GetSingleFolderPath(string title);
+    Task<string?> GetSingleFolderPathAsync(string title);
 }

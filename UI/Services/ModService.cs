@@ -51,8 +51,8 @@ public partial class ModService : IModService
         Logger.Information("Initializing mod list...");
         _sourceCache = sourceCache;
         _mods = mods;
-        _currentGameVersion = await LocalService.ReadGameVersion();
-        await LocalService.CheckMelonLoaderInstall();
+        _currentGameVersion = await LocalService.ReadGameVersionAsync();
+        await LocalService.CheckMelonLoaderInstallAsync();
 
         _webMods ??= await GitHubService.GetModListAsync();
         if (_webMods is null) return;
@@ -65,7 +65,7 @@ public partial class ModService : IModService
         catch (Exception ex)
         {
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_BrokenMods, ex);
-            await LocalService.OpenModsFolder();
+            await LocalService.OpenModsFolderAsync();
             Logger.Fatal(ex, "Load local mods failed");
             Environment.Exit(0);
             return;
@@ -74,7 +74,7 @@ public partial class ModService : IModService
         await LoadModsToUI();
     }
 
-    public async Task OnInstallMod(Mod item)
+    public async Task OnInstallModAsync(Mod item)
     {
         if (item.DownloadLink is null)
         {
@@ -89,7 +89,7 @@ public partial class ModService : IModService
         {
             var path = Path.Join(SavingService.Settings.ModsFolder,
                 item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
-            await GitHubService.DownloadMod(item.DownloadLink, path);
+            await GitHubService.DownloadModAsync(item.DownloadLink, path);
 
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
@@ -118,12 +118,12 @@ public partial class ModService : IModService
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_InstallModSuccess, item.Name);
     }
 
-    public async Task OnReinstallMod(Mod item)
+    public async Task OnReinstallModAsync(Mod item)
     {
         if (item.State == UpdateState.Outdated)
         {
             Logger.Information("Updating mod {Name}", item.Name);
-            await OnInstallMod(item);
+            await OnInstallModAsync(item);
             return;
         }
 
@@ -131,10 +131,10 @@ public partial class ModService : IModService
         if (!reinstall) return;
         Logger.Information("Reinstalling mod {Name}", item.Name);
         File.Delete(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
-        await OnInstallMod(item);
+        await OnInstallModAsync(item);
     }
 
-    public async Task OnToggleMod(Mod item)
+    public async Task OnToggleModAsync(Mod item)
     {
         try
         {
@@ -163,12 +163,12 @@ public partial class ModService : IModService
         }
     }
 
-    public async Task OnDeleteMod(Mod item)
+    public async Task OnDeleteModAsync(Mod item)
     {
         if (item.IsDuplicated)
         {
             await MessageBoxService.FormatNoticeMessageBox(MsgBox_Content_DuplicateMods, item.DuplicatedModNames!);
-            await LocalService.OpenModsFolder();
+            await LocalService.OpenModsFolderAsync();
             return;
         }
 

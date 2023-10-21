@@ -15,7 +15,7 @@ public interface IGitHubService
     /// <param name="id"></param>
     /// <param name="path"></param>
     /// <returns></returns>
-    Task DownloadChart(int id, string path);
+    Task DownloadChartAsync(int id, string path);
 
     /// <summary>
     ///     Download Mod
@@ -23,26 +23,26 @@ public interface IGitHubService
     /// <param name="link">Download link</param>
     /// <param name="path">File path</param>
     /// <returns></returns>
-    Task DownloadMod(string link, string path);
+    Task DownloadModAsync(string link, string path);
 
     /// <summary>
     ///     Download MelonLoader
     /// </summary>
     /// <param name="downloadProgress"></param>
     /// <returns>Is success</returns>
-    Task<bool> DownloadMelonLoader(IProgress<double> downloadProgress);
+    Task<bool> DownloadMelonLoaderAsync(IProgress<double> downloadProgress);
 
     /// <summary>
     ///     Get Chart list
     /// </summary>
     /// <returns>Chart list</returns>
-    Task<List<Chart>?> GetChartList();
+    Task<List<Chart>?> GetChartListAsync();
 
     /// <summary>
     ///     Get MelonLoader File Size
     /// </summary>
     /// <returns>File size</returns>
-    Task<long?> GetMelonLoaderFileSize();
+    Task<long?> GetMelonLoaderFileSizeAsync();
 
     /// <summary>
     ///     Get Mod list
