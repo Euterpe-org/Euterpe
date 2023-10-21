@@ -28,5 +28,5 @@ public partial class InfoJsonViewModel : ViewModelBase, IInfoJsonViewModel
     }
 
     [RelayCommand]
-    private async Task OnChooseChartFolder() => await InfoJsonService.OnChooseChartFolder();
+    private async Task OnChooseChartFolderAsync() => await InfoJsonService.OnChooseChartFolderAsync();
 }

@@ -165,7 +165,7 @@ public partial class ModService
         if (SavingService.Settings.AskInstallMuseDashModTools != AskType.Always) return;
         if (mod.Name != "MuseDashModTools") return;
         var result = await MessageBoxService.CustomConfirmMessageBox(MsgBox_Content_InstallModTools, 3);
-        if (result == MsgBox_Button_Yes) await OnInstallMod(mod);
+        if (result == MsgBox_Button_Yes) await OnInstallModAsync(mod);
         else if (result == MsgBox_Button_NoNoAsk) SavingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
     }
 
@@ -197,7 +197,7 @@ public partial class ModService
             try
             {
                 var path = Path.Join(SavingService.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
-                await GitHubService.DownloadMod(dependency.DownloadLink, path);
+                await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
                 var downloadedMod = LocalService.LoadMod(path);
                 dependency.IsDisabled = downloadedMod!.IsDisabled;
                 dependency.FileName = downloadedMod.FileName;
@@ -332,7 +332,7 @@ public partial class ModService
         {
             if (dependency!.IsDisabled == turnOff) continue;
             dependency.IsDisabled = turnOff;
-            await OnToggleMod(dependency);
+            await OnToggleModAsync(dependency);
         }
     }
 

@@ -29,7 +29,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     private string LogContent { get; set; } = string.Empty;
     private StringBuilder LogErrorBuilder { get; } = new();
 
-    public async Task AnalyzeLog()
+    public async Task AnalyzeLogAsync()
     {
         CheckModVersion();
         CheckHeadQuarterRegister();
@@ -45,7 +45,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         }
     }
 
-    public async Task<bool> CheckPirate()
+    public async Task<bool> CheckPirateAsync()
     {
         if (!LogContent.Contains("ApplicationPath"))
         {
@@ -93,7 +93,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         return false;
     }
 
-    public async Task<bool> CheckMelonLoaderVersion()
+    public async Task<bool> CheckMelonLoaderVersionAsync()
     {
         var version = MelonLoaderVersionRegex().Match(LogContent);
         if (!version.Success)
@@ -115,7 +115,7 @@ public partial class LogAnalyzeService : ILogAnalyzeService
         return false;
     }
 
-    public async Task<string> LoadLog()
+    public async Task<string> LoadLogAsync()
     {
         if (!string.IsNullOrEmpty(SavingService.Settings.MelonLoaderFolder))
             LogPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");

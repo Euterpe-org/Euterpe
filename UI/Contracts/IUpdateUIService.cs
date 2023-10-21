@@ -11,11 +11,11 @@ public interface IUpdateUIService
     ///     Initialize All Tabs
     /// </summary>
     /// <returns></returns>
-    Task InitializeAllTabs();
+    Task InitializeAllTabsAsync();
 
     /// <summary>
     ///     Initialize ModManage and LogAnalysis tabs when path changed
     /// </summary>
     /// <returns></returns>
-    Task InitializeTabsOnChoosePath();
+    Task InitializeTabsOnChoosePathAsync();
 }

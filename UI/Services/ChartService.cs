@@ -22,7 +22,7 @@ public class ChartService : IChartService
     [UsedImplicitly]
     public ISavingService SavingService { get; init; }
 
-    public async Task DownloadChart(Chart item)
+    public async Task DownloadChartAsync(Chart item)
     {
         var path = Path.Combine(SavingService.Settings.CustomAlbumsFolder, item.Name.RemoveInvalidChars() + ".mdm");
         if (File.Exists(path))
@@ -31,7 +31,7 @@ public class ChartService : IChartService
             if (!result) return;
         }
 
-        await GitHubService.DownloadChart(item.Id, path);
+        await GitHubService.DownloadChartAsync(item.Id, path);
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
     }
 
@@ -43,7 +43,7 @@ public class ChartService : IChartService
         if (!Directory.Exists(SavingService.Settings.CustomAlbumsFolder))
             Directory.CreateDirectory(SavingService.Settings.CustomAlbumsFolder);
 
-        var webCharts = await GitHubService.GetChartList();
+        var webCharts = await GitHubService.GetChartListAsync();
         _sourceCache.AddOrUpdate(webCharts!);
     }
 }

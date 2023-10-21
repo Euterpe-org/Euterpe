@@ -31,5 +31,5 @@ public interface IPlatformService
     ///     Verify game exe version
     /// </summary>
     /// <returns>Is correct version</returns>
-    Task<bool> VerifyGameVersion();
+    Task<bool> VerifyGameVersionAsync();
 }

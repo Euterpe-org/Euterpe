@@ -36,7 +36,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 #if !DEBUG
         context.Resolve<IGitHubService>().CheckUpdates();
 #endif
-        _savingService.InitializeSettings().ConfigureAwait(false);
+        _savingService.InitializeSettingsAsync().ConfigureAwait(false);
         _logger.Information("Main Window initialized");
         AppDomain.CurrentDomain.ProcessExit += OnExit!;
     }
@@ -50,10 +50,10 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     }
 
     [RelayCommand]
-    private void OnLaunchVanillaGame() => _localService.OnLaunchGame(false);
+    private void OnLaunchVanillaGameAsync() => _localService.OnLaunchGame(false);
 
     [RelayCommand]
-    private void OnLaunchModdedGame() => _localService.OnLaunchGame(true);
+    private void OnLaunchModdedGameAsync() => _localService.OnLaunchGame(true);
 
-    private void OnExit(object sender, EventArgs e) => _savingService.Save().Wait();
+    private void OnExit(object sender, EventArgs e) => _savingService.SaveAsync().Wait();
 }

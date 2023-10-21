@@ -26,26 +26,26 @@ public interface IModService
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    Task OnInstallMod(Mod item);
+    Task OnInstallModAsync(Mod item);
 
     /// <summary>
     ///     Reinstall Mod
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    Task OnReinstallMod(Mod item);
+    Task OnReinstallModAsync(Mod item);
 
     /// <summary>
     ///     Toggle Mod
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    Task OnToggleMod(Mod item);
+    Task OnToggleModAsync(Mod item);
 
     /// <summary>
     ///     Delete Mod
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    Task OnDeleteMod(Mod item);
+    Task OnDeleteModAsync(Mod item);
 }

@@ -10,7 +10,7 @@ public interface IChartService
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    Task DownloadChart(Chart item);
+    Task DownloadChartAsync(Chart item);
 
     /// <summary>
     ///     Initialize Chart list

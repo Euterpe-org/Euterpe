@@ -43,7 +43,7 @@ public class SavingServiceTest
             SerializationService = new SerializationService(),
             UpdateUIService = new Mock<IUpdateUIService>().Object
         };
-        await savingService.InitializeSettings();
+        await savingService.InitializeSettingsAsync();
 
         Assert.Equal(CultureInfo.CurrentUICulture.Name, savingService.Settings.LanguageCode);
         Assert.Equal(FontManageService.DefaultFont, savingService.Settings.FontName);

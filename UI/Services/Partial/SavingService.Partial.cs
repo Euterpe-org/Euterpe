@@ -14,7 +14,7 @@ public partial class SavingService
     private async Task CheckSettingValidity()
     {
         await NullSettingsCatch();
-        await LocalService.CheckValidPath();
+        await LocalService.CheckValidPathAsync();
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public partial class SavingService
         if (!await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_InstallPathConfirm, folderPath))
         {
             _logger.Information("User canceled auto detect game path, asking user to choose path");
-            await OnChoosePath();
+            await OnChooseGamePathAsync();
             return;
         }
 
@@ -89,7 +89,7 @@ public partial class SavingService
             if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
             _logger.Information("Showing choose folder dialogue");
 
-            return await FileSystemPickerService.GetSingleFolderPath(FolderDialog_Title_ChooseMuseDashFolder);
+            return await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder);
         }
     }
 
@@ -148,7 +148,7 @@ public partial class SavingService
         {
             _logger.Error("Muse Dash path is empty, asking user to choose path");
             await MessageBoxService.WarningMessageBox(MsgBox_Content_NullPath);
-            await OnChoosePath();
+            await OnChooseGamePathAsync();
         }
 
         if (string.IsNullOrEmpty(Settings.LanguageCode))

@@ -28,24 +28,24 @@ public partial class LocalService : ILocalService
 
     private bool IsValidPath { get; set; }
 
-    public async Task CheckMelonLoaderInstall()
+    public async Task CheckMelonLoaderInstallAsync()
     {
         var melonLoaderFolder = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(SavingService.Value.Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
         var install = await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_InstallMelonLoader);
         if (install)
-            await OnInstallMelonLoader();
+            await OnInstallMelonLoaderAsync();
     }
 
-    public async Task CheckValidPath()
+    public async Task CheckValidPathAsync()
     {
         Logger.Information("Checking valid path...");
         await CheckGameFileExist();
 
         try
         {
-            if (!await PlatformService.VerifyGameVersion()) return;
+            if (!await PlatformService.VerifyGameVersionAsync()) return;
             await CreateFiles();
             IsValidPath = true;
             Logger.Information("Path verified {Path}", SavingService.Value.Settings.MuseDashFolder);
@@ -62,7 +62,7 @@ public partial class LocalService : ILocalService
 
     public IEnumerable<string> GetBmsFiles(string path) => Directory.GetFiles(path, "*.bms");
 
-    public async Task<bool> LaunchUpdater(string link)
+    public async Task<bool> LaunchUpdaterAsync(string link)
     {
         var currentDirectory = Directory.GetCurrentDirectory();
         var updaterTargetFolder = Path.Combine(currentDirectory, "Update");
@@ -110,7 +110,7 @@ public partial class LocalService : ILocalService
         return mod;
     }
 
-    public async Task OnInstallMelonLoader()
+    public async Task OnInstallMelonLoaderAsync()
     {
         if (!IsValidPath) return;
         Logger.Information("Showing MelonLoader download window...");
@@ -118,7 +118,7 @@ public partial class LocalService : ILocalService
             (object _, DialogOpenedEventArgs _) => DownloadWindowViewModel.Value.InstallMelonLoader());
     }
 
-    public async Task OnUninstallMelonLoader()
+    public async Task OnUninstallMelonLoaderAsync()
     {
         if (!IsValidPath) return;
         if (!await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_UninstallMelonLoader)) return;
@@ -157,7 +157,7 @@ public partial class LocalService : ILocalService
         });
     }
 
-    public async Task OpenCustomAlbumsFolder()
+    public async Task OpenCustomAlbumsFolderAsync()
     {
         if (!IsValidPath)
         {
@@ -174,7 +174,7 @@ public partial class LocalService : ILocalService
         });
     }
 
-    public async Task OpenModsFolder()
+    public async Task OpenModsFolderAsync()
     {
         if (!IsValidPath)
         {
@@ -191,7 +191,7 @@ public partial class LocalService : ILocalService
         });
     }
 
-    public async Task OpenUserDataFolder()
+    public async Task OpenUserDataFolderAsync()
     {
         if (!IsValidPath)
         {
@@ -208,7 +208,7 @@ public partial class LocalService : ILocalService
         });
     }
 
-    public async Task OpenLogFolder()
+    public async Task OpenLogFolderAsync()
     {
         if (!IsValidPath)
         {
@@ -222,7 +222,7 @@ public partial class LocalService : ILocalService
         PlatformService.OpenLogFolder(logPath);
     }
 
-    public async Task<string> ReadGameVersion()
+    public async Task<string> ReadGameVersionAsync()
     {
         var assetsManager = new AssetsManager();
         var bundlePath = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
