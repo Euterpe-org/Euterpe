@@ -259,9 +259,6 @@
                                 <Grid Tag="{Binding Name}" Margin="0,0.5">
                                     <Expander Margin="0,0,15,0.5">
                                         <Expander.Styles>
-                                            <Style Selector="Expander ContentPresenter#PART_ContentPresenter">
-                                                <Setter Property="HorizontalAlignment" Value="Left" />
-                                            </Style>
                                             <Style Selector="Expander ToggleButton#PART_ToggleButton">
                                                 <Setter Property="Height" Value="80" />
                                             </Style>
