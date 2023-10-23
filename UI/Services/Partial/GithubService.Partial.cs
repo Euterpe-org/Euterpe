@@ -117,6 +117,10 @@ public partial class GitHubService
                 var stream = await LoadCoverAsync(chart);
                 chart.Cover = await Task.Run(() => Bitmap.DecodeToWidth(stream, 200));
             }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, "Get chart cover failed");
+            }
             finally
             {
                 semaphore.Release();
