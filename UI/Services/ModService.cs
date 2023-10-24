@@ -76,9 +76,9 @@ public partial class ModService : IModService
 
     public async Task OnInstallModAsync(Mod item)
     {
-        if (item.DownloadLink is null)
+        if (!string.IsNullOrEmpty(item.DownloadLink))
         {
-            Logger.Error("Download link is null");
+            Logger.Error("Download link of mod {Name} is empty", item.Name);
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoDownloadLink);
             return;
         }
@@ -168,7 +168,7 @@ public partial class ModService : IModService
     {
         if (item.IsDuplicated)
         {
-            await MessageBoxService.FormatNoticeMessageBox(MsgBox_Content_DuplicateMods, item.DuplicatedModNames!);
+            await MessageBoxService.FormatNoticeMessageBox(MsgBox_Content_DuplicateMods, item.DuplicatedModNames);
             await LocalService.OpenModsFolderAsync();
             return;
         }

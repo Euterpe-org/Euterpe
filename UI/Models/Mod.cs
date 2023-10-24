@@ -8,15 +8,15 @@ public partial class Mod : ObservableObject
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
-    public string? DownloadLink { get; set; }
+    public string DownloadLink { get; set; } = string.Empty;
     public string HomePage { get; set; } = string.Empty;
-    public string[]? GameVersion { get; set; }
+    public string ConfigFile { get; set; } = string.Empty;
+    public string[] GameVersion { get; set; } = Array.Empty<string>();
     public string Description { get; set; } = string.Empty;
-    public string? ConfigFile { get; set; }
     public List<string> DependentMods { get; set; } = new();
     public List<string> DependentLibs { get; set; } = new();
     public List<string> IncompatibleMods { get; set; } = new();
-    public string? SHA256 { get; set; }
+    public string SHA256 { get; set; } = string.Empty;
     [JsonIgnore] public string? LocalVersion { get; set; }
     [JsonIgnore] public UpdateState State { get; set; }
     [JsonIgnore] public bool IsIncompatible { get; set; }
@@ -27,7 +27,7 @@ public partial class Mod : ObservableObject
     [JsonIgnore] public bool IsTracked { get; set; }
     [JsonIgnore] public bool IsShaMismatched { get; set; }
     [JsonIgnore] public bool IsDuplicated { get; set; }
-    [JsonIgnore] public string? DuplicatedModNames { get; set; }
+    [JsonIgnore] public string DuplicatedModNames { get; set; } = string.Empty;
 
     [JsonIgnore]
     public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
@@ -41,14 +41,7 @@ public partial class Mod : ObservableObject
                                    (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
     [JsonIgnore]
-    public string CompatibleGameVersion
-    {
-        get
-        {
-            if (GameVersion is null) return string.Empty;
-            return GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
-        }
-    }
+    public string CompatibleGameVersion => GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
 
     [JsonIgnore] public bool HasDependency => DependentMods.Count + DependentLibs.Count > 0;
 
@@ -79,7 +72,7 @@ public partial class Mod : ObservableObject
         IsShaMismatched = false;
         IsTracked = false;
         LocalVersion = null;
-        SHA256 = null;
+        SHA256 = string.Empty;
         return this;
     }
 }

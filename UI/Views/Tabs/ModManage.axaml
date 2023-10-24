@@ -304,25 +304,28 @@
                                                 <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
                                             </StackPanel>
 
-                                            <Button Classes="dark" IsVisible="{Binding IsValidConfigFile}"
-                                                    Command="{ReflectionBinding $parentp[ItemsRepeater].DataContext.OpenConfigFileCommand}"
-                                                    CommandParameter="{Binding .}"
-                                                    Width="120"
-                                                    Height="35"
-                                                    HorizontalAlignment="Left"
-                                                    HorizontalContentAlignment="Center"
-                                                    Margin="0,5,0,0"
-                                                    Content="{ext:LocalizeExtensions XAML_ConfigFile}"></Button>
-                                            
-                                            <Button Classes="dark" IsVisible="{Binding IsValidHomePage}"
-                                                    Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenUrlCommand}"
-                                                    CommandParameter="{Binding HomePage}"
-                                                    Width="120"
-                                                    Height="35"
-                                                    HorizontalAlignment="Left"
-                                                    HorizontalContentAlignment="Center"
-                                                    Margin="0,5,0,0"
-                                                    Content="{ext:LocalizeExtensions XAML_HomePage}" />
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <StackPanel.Styles>
+                                                    <Style Selector="Button">
+                                                        <Setter Property="Width" Value="120" />
+                                                        <Setter Property="Height" Value="35" />
+                                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                    </Style>
+                                                </StackPanel.Styles>
+
+                                                <Button Classes="dark" IsVisible="{Binding IsValidConfigFile}"
+                                                        Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenConfigFileCommand}"
+                                                        CommandParameter="{Binding ConfigFile}"
+                                                        Content="{ext:LocalizeExtensions XAML_ConfigFile}" />
+
+                                                <Button Classes="dark" IsVisible="{Binding IsValidHomePage}"
+                                                        Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenUrlCommand}"
+                                                        CommandParameter="{Binding HomePage}"
+                                                        Margin="10,0,0,0"
+                                                        Content="{ext:LocalizeExtensions XAML_HomePage}" />
+                                            </StackPanel>
+
+
                                         </StackPanel>
                                     </Expander>
 
