@@ -102,13 +102,7 @@ public partial class ModService
             _isTracked[localModIdx] = true;
             localMod.IsTracked = true;
             localMod.Version = webMod.Version;
-            localMod.GameVersion = webMod.GameVersion;
-            localMod.DependentLibs = webMod.DependentLibs;
-            localMod.DependentMods = webMod.DependentMods;
-            localMod.IncompatibleMods = webMod.IncompatibleMods;
-            localMod.DownloadLink = webMod.DownloadLink;
-            localMod.HomePage = webMod.HomePage;
-            localMod.Description = webMod.Description;
+            localMod.CloneOnlineInfo(webMod);
 
             CheckConfigFileExist(localMod);
             CheckVersionState(webMod, localMod);
@@ -125,8 +119,9 @@ public partial class ModService
     /// <param name="localMod"></param>
     private void CheckConfigFileExist(Mod localMod)
     {
-        if (localMod.ConfigFile is null) return;
-        var configFile = Path.Join(SavingService.Settings.ModsFolder, localMod.ConfigFile);
+        if (string.IsNullOrEmpty(localMod.ConfigFile)) return;
+        Logger.Debug(localMod.Name + " " + localMod.ConfigFile);
+        var configFile = Path.Join(SavingService.Settings.UserDataFolder, localMod.ConfigFile);
         localMod.IsValidConfigFile = File.Exists(configFile);
     }
 
@@ -187,7 +182,7 @@ public partial class ModService
     /// <param name="mod"></param>
     /// <returns></returns>
     private bool CheckCompatible(Mod mod) =>
-        mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion!.Contains(_currentGameVersion);
+        mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion.Contains(_currentGameVersion);
 
     #endregion
 
@@ -208,7 +203,7 @@ public partial class ModService
             if (installedMod is not null) continue;
             try
             {
-                var path = Path.Join(SavingService.Settings.ModsFolder, dependency.DownloadLink!.Split("/")[1]);
+                var path = Path.Join(SavingService.Settings.ModsFolder, dependency.DownloadLink.Split("/")[1]);
                 await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
                 var downloadedMod = LocalService.LoadMod(path);
                 dependency.IsDisabled = downloadedMod!.IsDisabled;
