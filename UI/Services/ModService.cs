@@ -96,6 +96,7 @@ public partial class ModService : IModService
             if (_webMods is null) return;
             var webMod = _webMods.Find(x => x.Name == downloadedMod.Name)!;
             downloadedMod.CloneOnlineInfo(webMod);
+            CheckConfigFileExist(webMod);
             CheckVersionState(webMod, downloadedMod);
 
             Logger.Information("Install mod {Name} success", downloadedMod.Name);
