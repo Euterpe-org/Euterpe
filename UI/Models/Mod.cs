@@ -11,7 +11,7 @@ public partial class Mod : ObservableObject
     public string DownloadLink { get; set; } = string.Empty;
     public string HomePage { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
-    public string[] GameVersion { get; set; } = Array.Empty<string>();
+    public string[]? GameVersion { get; set; }
     public string Description { get; set; } = string.Empty;
     public List<string> DependentMods { get; set; } = new();
     public List<string> DependentLibs { get; set; } = new();
@@ -41,7 +41,14 @@ public partial class Mod : ObservableObject
                                    (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
     [JsonIgnore]
-    public string CompatibleGameVersion => GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
+    public string CompatibleGameVersion
+    {
+        get
+        {
+            if (GameVersion is null) return string.Empty;
+            return GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
+        }
+    }
 
     [JsonIgnore] public bool HasDependency => DependentMods.Count + DependentLibs.Count > 0;
 

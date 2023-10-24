@@ -316,12 +316,12 @@
                                                 <Button Classes="dark" IsVisible="{Binding IsValidConfigFile}"
                                                         Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenConfigFileCommand}"
                                                         CommandParameter="{Binding ConfigFile}"
+                                                        Margin="0,0,10,0"
                                                         Content="{ext:LocalizeExtensions XAML_ConfigFile}" />
 
                                                 <Button Classes="dark" IsVisible="{Binding IsValidHomePage}"
                                                         Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenUrlCommand}"
                                                         CommandParameter="{Binding HomePage}"
-                                                        Margin="10,0,0,0"
                                                         Content="{ext:LocalizeExtensions XAML_HomePage}" />
                                             </StackPanel>
 
