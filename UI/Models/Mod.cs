@@ -12,6 +12,7 @@ public partial class Mod : ObservableObject
     public string HomePage { get; set; } = string.Empty;
     public string[]? GameVersion { get; set; }
     public string Description { get; set; } = string.Empty;
+    public string? ConfigFile { get; set; }
     public List<string> DependentMods { get; set; } = new();
     public List<string> DependentLibs { get; set; } = new();
     public List<string> IncompatibleMods { get; set; } = new();
@@ -31,6 +32,9 @@ public partial class Mod : ObservableObject
     [JsonIgnore]
     public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
         ModDescriptionProvider.GetDescription(this), Author, Version, CompatibleGameVersion);
+
+    [JsonIgnore]
+    public bool IsValidConfigFile { get; set; }
 
     [JsonIgnore]
     public bool IsValidHomePage => !string.IsNullOrEmpty(HomePage) && Uri.TryCreate(HomePage, UriKind.Absolute, out var uriResult) &&
@@ -56,6 +60,7 @@ public partial class Mod : ObservableObject
     public void CloneOnlineInfo(Mod webMod)
     {
         DownloadLink = webMod.DownloadLink;
+        ConfigFile = webMod.ConfigFile;
         HomePage = webMod.HomePage;
         GameVersion = webMod.GameVersion;
         Description = webMod.Description;
@@ -67,6 +72,7 @@ public partial class Mod : ObservableObject
     public Mod RemoveLocalInfo()
     {
         FileName = null;
+        IsValidConfigFile = false;
         IsDisabled = false;
         IsDuplicated = false;
         IsIncompatible = false;

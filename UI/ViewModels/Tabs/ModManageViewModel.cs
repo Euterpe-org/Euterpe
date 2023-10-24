@@ -105,6 +105,17 @@ public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
     private async Task OnUninstallMelonLoaderAsync() => await LocalService.OnUninstallMelonLoaderAsync();
 
     [RelayCommand]
+    private void OpenConfigFile(Mod item)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = Path.Combine(SavingService.Settings.UserDataFolder, item.ConfigFile!),
+            UseShellExecute = true
+        });
+        Logger.Information("Open config file: {ConfigFile}", item.ConfigFile);
+    }
+
+    [RelayCommand]
     private void OpenUrl(string path)
     {
         Process.Start(new ProcessStartInfo

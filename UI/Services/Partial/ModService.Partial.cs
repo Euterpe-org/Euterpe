@@ -110,12 +110,24 @@ public partial class ModService
             localMod.HomePage = webMod.HomePage;
             localMod.Description = webMod.Description;
 
+            CheckConfigFileExist(localMod);
             CheckVersionState(webMod, localMod);
             _sourceCache?.AddOrUpdate(localMod);
             Logger?.Information("Mod {Name} loaded to UI", localMod.Name);
         }
 
         CheckDuplicatedMods();
+    }
+
+    /// <summary>
+    ///     Check if the mod's config file path is valid
+    /// </summary>
+    /// <param name="localMod"></param>
+    private void CheckConfigFileExist(Mod localMod)
+    {
+        if (localMod.ConfigFile is null) return;
+        var configFile = Path.Join(SavingService.Settings.ModsFolder, localMod.ConfigFile);
+        localMod.IsValidConfigFile = File.Exists(configFile);
     }
 
     /// <summary>
@@ -203,6 +215,7 @@ public partial class ModService
                 dependency.FileName = downloadedMod.FileName;
                 dependency.LocalVersion = downloadedMod.LocalVersion;
                 dependency.SHA256 = downloadedMod.SHA256;
+                CheckConfigFileExist(dependency);
                 Logger.Information("Install dependency {Name} success", downloadedMod.Name);
                 _sourceCache.AddOrUpdate(dependency);
                 await CheckDependencyInstall(dependency);
