@@ -122,9 +122,6 @@
     <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>Local Version: {0}</value>
     </data>
-    <data name="XAML_Tab_About" xml:space="preserve">
-        <value>About</value>
-    </data>
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Local Version: {0} (Has a newer version: {1})</value>
     </data>
@@ -152,15 +149,6 @@
     <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
         <value>Enable dependencies when installing Mod</value>
     </data>
-    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
-        <value>Analysis</value>
-    </data>
-    <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>Mods</value>
-    </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>Setting</value>
-    </data>
     <data name="XAML_TroubleShoot" xml:space="preserve">
         <value>Troubleshoot</value>
     </data>
@@ -181,9 +169,6 @@
     </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
         <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
-    </data>
-    <data name="XAML_Tab_ChartDownload" xml:space="preserve">
-        <value>Charts</value>
     </data>
     <data name="XAML_Chart_SearchBar" xml:space="preserve">
         <value>Search Charts (Name, Author, Charter)</value>
@@ -310,5 +295,11 @@
     </data>
     <data name="XAML_LaunchModded" xml:space="preserve">
         <value>Launch Modded</value>
+    </data>
+    <data name="XAML_Back" xml:space="preserve">
+        <value>Back</value>
+    </data>
+    <data name="XAML_News" xml:space="preserve">
+        <value>News</value>
     </data>
 </root>

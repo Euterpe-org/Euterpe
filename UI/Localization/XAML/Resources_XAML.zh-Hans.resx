@@ -121,9 +121,6 @@
     <data name="XAML_Mod_Normal" xml:space="preserve">
         <value>本地版本：{0}</value>
     </data>
-    <data name="XAML_Tab_About" xml:space="preserve">
-        <value>关于</value>
-    </data>
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>本地版本：{0}（有新版本：{1}）</value>
     </data>
@@ -151,15 +148,6 @@
     <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
         <value>安装 Mod 时启用依赖</value>
     </data>
-    <data name="XAML_Tab_LogAnalysis" xml:space="preserve">
-        <value>分析</value>
-    </data>
-    <data name="XAML_Tab_ModManage" xml:space="preserve">
-        <value>模组</value>
-    </data>
-    <data name="XAML_Tab_Setting" xml:space="preserve">
-        <value>设置</value>
-    </data>
     <data name="XAML_TroubleShoot" xml:space="preserve">
         <value>报告未知问题</value>
     </data>
@@ -180,9 +168,6 @@
     </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
         <value>链接必须以 "/" 结尾，并且在链接后面加上 "ModLinks.json" 后必须可以访问并解析（即 Github 仓库同样结构）\n重启应用生效</value>
-    </data>
-    <data name="XAML_Tab_ChartDownload" xml:space="preserve">
-        <value>谱面</value>
     </data>
     <data name="XAML_Chart_SearchBar" xml:space="preserve">
         <value>搜索谱面 （名称，曲师，谱师）</value>
@@ -309,5 +294,11 @@
     </data>
     <data name="XAML_LaunchVanilla" xml:space="preserve">
         <value>启动原版</value>
+    </data>
+    <data name="XAML_Back" xml:space="preserve">
+        <value>返回</value>
+    </data>
+    <data name="XAML_News" xml:space="preserve">
+        <value>新闻</value>
     </data>
 </root>

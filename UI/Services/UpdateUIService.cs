@@ -32,7 +32,6 @@ public partial class UpdateUIService : IUpdateUIService
 
     public void UpdateText()
     {
-        ChangeTabName();
         ChangeOptionName();
         RecoverOption();
     }

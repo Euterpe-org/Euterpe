@@ -7,87 +7,62 @@
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-        Width="1000" Height="800"
+        Width="1100" Height="800"
         MinWidth="900" MinHeight="700"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterScreen">
 
-    <Grid RowDefinitions="40,*">
-        <Button Grid.Row="0" Grid.Column="0" Content="Back" />
-        <pages:MainMenu Grid.Row="1" />
-    </Grid>
+    <Grid RowDefinitions="50,*" ColumnDefinitions="4*,*">
+        <Grid Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <Button Height="50"
+                        VerticalAlignment="Center"
+                        Theme="{DynamicResource BorderlessButton}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon Width="25"
+                                      Height="25"
+                                      Data="{StaticResource Back}"
+                                      Foreground="{DynamicResource ButtonDefaultPrimaryForeground}" />
 
+                            <TextBlock Margin="10,2,0,0"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       Text="{ext:LocalizeExtensions XAML_Back}" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
 
-    <!--<Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150">
-        <Image Grid.Row="0" Grid.Column="0"
-               Margin="15,0,0,0"
-               Source="/Assets/Icon.ico"
-               Height="50"
-               Width="50"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Center" />
+                <ToggleSwitch Width="50"
+                              Height="50"
+                              VerticalAlignment="Center"
+                              Command="{Binding ChangeThemeCommand}"
+                              Theme="{DynamicResource ButtonToggleSwitch}">
 
-        <TextBlock Grid.Row="0" Grid.Column="0"
-                   Margin="80,0,0,0"
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Text="Muse Dash Mod Tools" />
+                    <ToggleSwitch.Styles>
+                        <Style Selector="PathIcon">
+                            <Setter Property="Width" Value="20" />
+                            <Setter Property="Height" Value="20" />
+                            <Setter Property="Foreground" Value="{DynamicResource ButtonDefaultTertiaryForeground}" />
+                        </Style>
+                    </ToggleSwitch.Styles>
 
-        <Button Grid.Row="0" Grid.Column="1" Command="{Binding ChangeThemeCommand}" />
+                    <ToggleSwitch.OnContent>
+                        <PathIcon Data="{StaticResource Light}" />
+                    </ToggleSwitch.OnContent>
+                    <ToggleSwitch.OffContent>
+                        <PathIcon Data="{StaticResource Dark}" />
+                    </ToggleSwitch.OffContent>
+                </ToggleSwitch>
+            </StackPanel>
 
-        <Button Grid.Row="1" Grid.Column="0"></Button>
-        
-        
-        ~1~<TabStrip Grid.Row="0" Grid.Column="1"
-                  HorizontalAlignment="Center"
-                  Margin="0,10,0,0"
-                  ItemsSource="{Binding Tabs}"
-                  SelectedIndex="{Binding SelectedTabIndex}">
-            <Interaction.Behaviors>
-                <ValueChangedTriggerBehavior Binding="{Binding SelectedTabIndex}">
-                    <InvokeCommandAction
-                        Command="{Binding SwitchTabCommand, Mode=OneWay}" />
-                </ValueChangedTriggerBehavior>
-            </Interaction.Behaviors>
-
-            <TabStrip.Styles>
-                <Style Selector="TabStripItem">
-                    <Setter Property="Height" Value="35" />
-                    <Setter Property="Background" Value="#4D4D4D" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                    <Setter Property="Margin" Value="0.5,0" />
-                </Style>
-                <Style Selector="TabStripItem:selected ContentPresenter">
-                    <Setter Property="Background" Value="#808080" />
-                </Style>
-                <Style Selector="TabStripItem:pointerover">
-                    <Setter Property="Background" Value="#595959" />
-                </Style>
-            </TabStrip.Styles>
-
-            <TabStrip.ItemTemplate>
-                <DataTemplate>
-                    <Label VerticalContentAlignment="Center"
-                           HorizontalContentAlignment="Center"
-                           FontSize="14"
-                           Foreground="#FFF">
-                        <TextBlock Text="{Binding DisplayName}" />
-                    </Label>
-                </DataTemplate>
-            </TabStrip.ItemTemplate>
-        </TabStrip>@1@
-
-        <Viewbox Grid.Row="0" Grid.Column="2" Margin="0,15,15,0">
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="25"
                        Text="{Binding Version}" />
-        </Viewbox>
+        </Grid>
 
-        ~1~<UserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                     Content="{Binding Content}" />@1@
-    </Grid>-->
+        <pages:MainMenu Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20" />
+    </Grid>
 </Window>

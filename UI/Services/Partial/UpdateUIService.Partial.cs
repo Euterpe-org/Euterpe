@@ -3,18 +3,6 @@ namespace MuseDashModToolsUI.Services;
 public partial class UpdateUIService
 {
     /// <summary>
-    ///     Change Main Window tab display name
-    /// </summary>
-    private void ChangeTabName()
-    {
-        MainWindowViewModel.Value.Tabs[0].DisplayName = XAML_Tab_ModManage;
-        MainWindowViewModel.Value.Tabs[1].DisplayName = XAML_Tab_ChartDownload;
-        MainWindowViewModel.Value.Tabs[2].DisplayName = XAML_Tab_LogAnalysis;
-        MainWindowViewModel.Value.Tabs[3].DisplayName = XAML_Tab_Setting;
-        MainWindowViewModel.Value.Tabs[4].DisplayName = XAML_Tab_About;
-    }
-
-    /// <summary>
     ///     Change Setting Window select option name
     /// </summary>
     private void ChangeOptionName()

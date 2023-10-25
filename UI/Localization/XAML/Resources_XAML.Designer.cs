@@ -114,6 +114,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string XAML_Back {
+            get {
+                return ResourceManager.GetString("XAML_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Path.
         /// </summary>
         internal static string XAML_ChangePath {
@@ -672,6 +681,15 @@ namespace MuseDashModToolsUI.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to News.
+        /// </summary>
+        internal static string XAML_News {
+            get {
+                return ResourceManager.GetString("XAML_News", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outdated.
         /// </summary>
         internal static string XAML_Outdated {
@@ -830,51 +848,6 @@ namespace MuseDashModToolsUI.Localization.XAML {
         internal static string XAML_Setting_EnableDependency_Install {
             get {
                 return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to About.
-        /// </summary>
-        internal static string XAML_Tab_About {
-            get {
-                return ResourceManager.GetString("XAML_Tab_About", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Charts.
-        /// </summary>
-        internal static string XAML_Tab_ChartDownload {
-            get {
-                return ResourceManager.GetString("XAML_Tab_ChartDownload", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Analysis.
-        /// </summary>
-        internal static string XAML_Tab_LogAnalysis {
-            get {
-                return ResourceManager.GetString("XAML_Tab_LogAnalysis", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mods.
-        /// </summary>
-        internal static string XAML_Tab_ModManage {
-            get {
-                return ResourceManager.GetString("XAML_Tab_ModManage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Setting.
-        /// </summary>
-        internal static string XAML_Tab_Setting {
-            get {
-                return ResourceManager.GetString("XAML_Tab_Setting", resourceCulture);
             }
         }
         

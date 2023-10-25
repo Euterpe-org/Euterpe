@@ -53,8 +53,7 @@
                              IsReadOnly="True"
                              MaxWidth="500" />
 
-                    <Button Classes="dark"
-                            Command="{Binding ChooseGamePathCommand}">
+                    <Button Command="{Binding ChooseGamePathCommand}">
                         <StackPanel Orientation="Horizontal">
                             <PathIcon Data="{StaticResource Folder}"
                                       Height="35"
@@ -82,8 +81,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                    <Button Classes="dark"
-                            Content="{ext:LocalizeExtensions XAML_Apply}"
+                    <Button Content="{ext:LocalizeExtensions XAML_Apply}"
                             Command="{Binding SetLanguageCommand}" />
                 </StackPanel>
             </Border>
@@ -136,8 +134,7 @@
                               ItemsSource="{Binding AvailableFonts}"
                               SelectedIndex="{Binding CurrentFontIndex}" />
 
-                    <Button Classes="dark"
-                            Content="{ext:LocalizeExtensions XAML_Apply}"
+                    <Button Content="{ext:LocalizeExtensions XAML_Apply}"
                             Command="{Binding SetFontCommand}" />
                 </StackPanel>
             </Border>

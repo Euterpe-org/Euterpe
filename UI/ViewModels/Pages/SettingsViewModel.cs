@@ -75,13 +75,6 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         await UpdateUIService.InitializeTabsOnChoosePathAsync();
     }
 
-    [RelayCommand]
-    private void OnChangeTheme()
-    {
-        var targetTheme = SavingService.Settings.Theme == "Dark" ? "Light" : "Dark";
-        UpdateUIService.ChangeTheme(targetTheme);
-    }
-
     private void UpdatePath() => Path = SavingService.Settings.MuseDashFolder;
 
     #region OnPropertyChanged
