@@ -16,7 +16,7 @@
         <converters:ChartSceneConverter x:Key="ChartSceneConverter" />
     </UserControl.Resources>
 
-    <controls:Card Margin="10,0,10,10">
+    <Border Margin="10,0,10,10">
         <StackPanel>
             <StackPanel.Styles>
                 <Style Selector="mdmt|TitledTextBox">
@@ -56,5 +56,5 @@
 
         </StackPanel>
 
-    </controls:Card>
+    </Border>
 </UserControl>

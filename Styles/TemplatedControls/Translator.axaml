@@ -1,6 +1,5 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
         xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI">
     <Design.PreviewWith>
         <Border Padding="20">
@@ -11,10 +10,10 @@
     <Style Selector="mdmt|Translator">
         <Setter Property="Template">
             <ControlTemplate>
-                <controls:Card Background="#595959"
-                               Height="120"
-                               Width="140"
-                               Margin="0,10">
+                <Border Background="#595959"
+                        Height="120"
+                        Width="140"
+                        Margin="0,10">
 
                     <StackPanel>
                         <Image Source="{TemplateBinding Source}"
@@ -28,7 +27,7 @@
                                    HorizontalAlignment="Center"
                                    MinWidth="100" />
                     </StackPanel>
-                </controls:Card>
+                </Border>
             </ControlTemplate>
         </Setter>
     </Style>

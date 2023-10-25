@@ -23,7 +23,7 @@
         </Style>
     </UserControl.Styles>
 
-    <controls:Card Background="#424242" Margin="10,0,10,10">
+    <Border Theme="{StaticResource CardBorder}" Background="#424242" Margin="10,0,10,10">
         <ScrollViewer>
             <StackPanel>
                 <!--About Project-->
@@ -250,7 +250,7 @@
             </StackPanel>
         </ScrollViewer>
 
-    </controls:Card>
+    </Border>
 
 
 </UserControl>

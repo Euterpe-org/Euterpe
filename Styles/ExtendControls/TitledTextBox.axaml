@@ -1,8 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mdmt="clr-namespace:MuseDashModToolsUI.Styles.ExtendControls"
-        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
-        xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles">
+        xmlns:mdmt="clr-namespace:MuseDashModToolsUI.Styles.ExtendControls">
     <Design.PreviewWith>
         <Border Padding="20">
             <mdmt:TitledTextBox TitleText="Title"
@@ -13,111 +11,7 @@
 
     <Style Selector="mdmt|TitledTextBox">
         <Setter Property="Template">
-            <ControlTemplate>
-                <Border Name="PART_RootBorder"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}">
-
-                    <DockPanel Name="PART_RootPanel">
-                        <TextBlock Name="PART_TitleText"
-                                   Text="{TemplateBinding TitleText}"
-                                   Margin="{TemplateBinding TitleMargin}"
-                                   VerticalAlignment="{TemplateBinding TitleVerticalAlignment}" />
-                        <TextBlock Name="PART_HintsText"
-                                   DockPanel.Dock="Bottom"
-                                   IsVisible="{TemplateBinding (assists:TextFieldAssist.Hints),
-                                       Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                                   Text="{TemplateBinding (assists:TextFieldAssist.Hints)}"
-                                   TextTrimming="CharacterEllipsis" />
-
-                        <DataValidationErrors Name="PART_DataValidation"
-                                              Errors="{TemplateBinding (DataValidationErrors.Errors)}">
-                            <Panel Name="PART_TextFieldPanel">
-                                <Border Name="PART_BackgroundTextField">
-                                    <Border.Styles>
-                                        <Style
-                                            Selector="TextBox.outline[UseFloatingWatermark=True] /template/
-                                                         Border#PART_BackgroundTextField">
-                                            <Setter Property="Clip">
-                                                <MultiBinding Converter="{StaticResource RectangleHollowGeometry}"
-                                                              ConverterParameter="{StaticResource OutlineTextBoxClippingParameter}"
-                                                              RelativeSource="{RelativeSource AncestorType=TextBox}">
-                                                    <Binding ElementName="PART_TextFieldPanel" Path="Bounds" />
-                                                    <Binding ElementName="PART_LabelRootBorder" Path="Bounds" />
-                                                    <Binding ElementName="PART_LabelRootBorder" Path="RenderTransform" />
-                                                </MultiBinding>
-                                            </Setter>
-                                        </Style>
-                                    </Border.Styles>
-                                </Border>
-
-                                <DockPanel Name="PART_InnerPanel">
-                                    <Panel Name="PART_TextContainer">
-                                        <TextBlock Name="PART_PlaceholderText"
-                                                   Text="{TemplateBinding Watermark}"
-                                                   FontFamily="{TemplateBinding FontFamily}"
-                                                   FontSize="{TemplateBinding FontSize}"
-                                                   FontStyle="{TemplateBinding FontStyle}"
-                                                   FontWeight="{TemplateBinding FontWeight}" />
-
-                                        <ScrollViewer Name="PART_ScrollViewer"
-                                                      HorizontalScrollBarVisibility="{TemplateBinding 
-                                                  (ScrollViewer.HorizontalScrollBarVisibility)}"
-
-                                                      VerticalScrollBarVisibility="{TemplateBinding 
-                                                  (ScrollViewer.VerticalScrollBarVisibility)}">
-                                            <TextPresenter Name="PART_TextPresenter"
-                                                           CaretBrush="{TemplateBinding CaretBrush}"
-                                                           CaretIndex="{TemplateBinding CaretIndex}"
-                                                           TextBlock.FontFamily="{TemplateBinding FontFamily}"
-                                                           TextBlock.FontSize="{TemplateBinding FontSize}"
-                                                           TextBlock.FontStyle="{TemplateBinding FontStyle}"
-                                                           TextBlock.FontWeight="{TemplateBinding FontWeight}"
-                                                           TextBlock.Foreground="{TemplateBinding Foreground}"
-                                                           InputMethod.IsInputMethodEnabled="{TemplateBinding 
-                                                               InputMethod.IsInputMethodEnabled}"
-                                                           PasswordChar="{TemplateBinding PasswordChar}"
-                                                           RevealPassword="{TemplateBinding RevealPassword}"
-                                                           SelectionBrush="{TemplateBinding SelectionBrush}"
-                                                           SelectionStart="{TemplateBinding SelectionStart}"
-                                                           SelectionEnd="{TemplateBinding SelectionEnd}"
-                                                           SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
-                                                           Text="{TemplateBinding Text, Mode=TwoWay}"
-                                                           TextAlignment="{TemplateBinding TextAlignment}"
-                                                           TextWrapping="{TemplateBinding TextWrapping}" />
-                                        </ScrollViewer>
-                                    </Panel>
-                                </DockPanel>
-
-                                <controls:MaterialUnderline Name="PART_Underline" />
-
-                                <Border Name="PART_LabelRootBorder">
-                                    <TextBlock Name="PART_LabelText"
-                                               Text="{TemplateBinding (assists:TextFieldAssist.Label)}" />
-                                </Border>
-                            </Panel>
-                        </DataValidationErrors>
-                    </DockPanel>
-                </Border>
-            </ControlTemplate>
+            <ControlTemplate />
         </Setter>
-    </Style>
-
-    <Style Selector="mdmt|TitledTextBox /template/ Border#PART_BackgroundTextField">
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Margin" Value="-1" />
-    </Style>
-
-    <Style Selector="mdmt|TitledTextBox /template/ TextBlock#PART_HintsText">
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="0,3,0,0" />
-        <Setter Property="FontSize" Value="12" />
-    </Style>
-
-    <Style Selector="mdmt|TitledTextBox /template/ controls|MaterialUnderline#PART_Underline">
-        <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
 </Styles>

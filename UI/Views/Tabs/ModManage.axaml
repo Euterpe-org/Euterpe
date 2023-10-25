@@ -41,7 +41,7 @@
                                    Text="Downloading MelonLoader" />
                     </Border>
 
-                    <controls:Card Grid.Row="1" Width="250" Height="80">
+                    <Border Grid.Row="1" Width="250" Height="80">
                         <StackPanel VerticalAlignment="Center">
                             <ProgressBar Margin="20,20,20,0"
                                          Value="{ReflectionBinding Percentage}" />
@@ -49,7 +49,7 @@
                                        TextAlignment="Center"
                                        Margin="0,10,0,0" />
                         </StackPanel>
-                    </controls:Card>
+                    </Border>
                 </Grid>
             </DataTemplate>
         </dialogHostAvalonia:DialogHost.DataTemplates>
@@ -58,7 +58,7 @@
         <Grid ColumnDefinitions="140,*">
 
             <!--The left navigation part-->
-            <controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True" LeftDrawerWidth="140">
+            <!--<controls:NavigationDrawer Grid.Column="0" Name="NavigationDrawer" LeftDrawerOpened="True" LeftDrawerWidth="140">
                 <controls:NavigationDrawer.LeftDrawerContent>
                     <ListBox Name="DrawerList" Focusable="{Binding ElementName=DrawerList}">
                         <ListBox.Styles>
@@ -122,7 +122,7 @@
                         </Label>
                     </ListBox>
                 </controls:NavigationDrawer.LeftDrawerContent>
-            </controls:NavigationDrawer>
+            </controls:NavigationDrawer>-->
 
             <!--Buttons-->
             <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -160,18 +160,18 @@
                        BorderBrush="#333333" />
 
             <!--Search bar-->
-            <controls:Card Grid.Column="1"
-                           VerticalAlignment="Top"
-                           Height="49"
-                           BorderBrush="#333333"
-                           BorderThickness="0,0,0,1"
-                           Margin="0,0,15,0">
+            <Border Grid.Column="1"
+                    VerticalAlignment="Top"
+                    Height="49"
+                    BorderBrush="#333333"
+                    BorderThickness="0,0,0,1"
+                    Margin="0,0,15,0">
 
-                <controls:Card.Styles>
+                <Border.Styles>
                     <Style Selector="TextBox Panel#PART_TextContainer">
                         <Setter Property="Margin" Value="8,19,0,0" />
                     </Style>
-                </controls:Card.Styles>
+                </Border.Styles>
 
                 <TextBox Classes="Solo"
                          Background="#505050"
@@ -187,7 +187,7 @@
                         <PathIcon Data="{StaticResource Magnify}" Height="30" Width="30" />
                     </TextBox.InnerRightContent>
                 </TextBox>
-            </controls:Card>
+            </Border>
 
             <!--About-->
             <Menu Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0">

@@ -12,10 +12,10 @@
 
     <ScrollViewer Background="#424242" Margin="10,0">
         <ScrollViewer.Styles>
-            <Style Selector="controls|Card">
+            <Style Selector="Border">
                 <Setter Property="Margin" Value="0,1" />
             </Style>
-            <Style Selector="StackPanel > controls|Card">
+            <Style Selector="StackPanel > Border">
                 <Setter Property="MinHeight" Value="80" />
             </Style>
             <Style Selector="TextBlock">
@@ -27,7 +27,7 @@
                 <Setter Property="Margin" Value="20,0,0,0" />
                 <Setter Property="Theme" Value="{StaticResource MaterialFilledComboBox}" />
             </Style>
-            <Style Selector="controls|Card > StackPanel">
+            <Style Selector="Border > StackPanel">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="Margin" Value="20,0,0,0" />
             </Style>
@@ -42,7 +42,7 @@
 
         <StackPanel Orientation="Vertical">
             <!--Muse Dash Folder Path-->
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_Path}" />
 
@@ -66,10 +66,10 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
             <!--Language-->
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
 
@@ -87,10 +87,10 @@
                             Content="{ext:LocalizeExtensions XAML_Apply}"
                             Command="{Binding SetLanguageCommand}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
             <!--Download Source-->
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
 
@@ -98,10 +98,10 @@
                               ItemsSource="{Binding DownloadSources}"
                               SelectedIndex="{Binding CurrentDownloadSource}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
             <!--Custom Download Link-->
-            <controls:Card IsVisible="{Binding IsUsingCustomDownloadSource}">
+            <Border IsVisible="{Binding IsUsingCustomDownloadSource}">
                 <StackPanel>
                     <TextBox Classes="outline"
                              Margin="0,0,0,7"
@@ -117,19 +117,19 @@
                               ToolTip.Tip="{ext:LocalizeExtensions XAML_CustomDownloadSourceFormat}" />
                 </StackPanel>
 
-            </controls:Card>
+            </Border>
 
             <!--Prerelease-->
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadPrerelease}" />
 
                     <ToggleSwitch Margin="20,0,0,0" IsChecked="{Binding DownloadPrerelease}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
             <!--Font-->
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
 
@@ -141,9 +141,9 @@
                             Content="{ext:LocalizeExtensions XAML_Apply}"
                             Command="{Binding SetFontCommand}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
 
@@ -151,9 +151,9 @@
                               ItemsSource="{Binding AskTypes}"
                               SelectedIndex="{Binding EnableDependenciesWhenInstalling}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
 
@@ -161,9 +161,9 @@
                               ItemsSource="{Binding AskTypes}"
                               SelectedIndex="{Binding EnableDependenciesWhenEnabling}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
 
@@ -171,9 +171,9 @@
                               ItemsSource="{Binding AskTypes}"
                               SelectedIndex="{Binding DisableDependenciesWhenDeleting}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
 
-            <controls:Card>
+            <Border>
                 <StackPanel>
                     <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
 
@@ -181,7 +181,7 @@
                               ItemsSource="{Binding AskTypes}"
                               SelectedIndex="{Binding DisableDependenciesWhenDisabling}" />
                 </StackPanel>
-            </controls:Card>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 

@@ -1,7 +1,5 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ripple="clr-namespace:Material.Ripple;assembly=Material.Ripple"
-        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         xmlns:mdmt="clr-namespace:MuseDashModToolsUI.Styles.ExtendControls">
     <Design.PreviewWith>
         <Menu Width="500" Height="400">
@@ -18,88 +16,8 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Foreground" Value="{DynamicResource MaterialBodyBrush}" />
         <Setter Property="Template">
-            <ControlTemplate>
-                <Border Name="PART_MenuItemRootBorder" Height="{TemplateBinding Height}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Width="200">
-                    <Panel>
-                        <Border Name="PART_MenuItemHighlighter"
-                                Background="{DynamicResource MaterialBodyBrush}" />
-                        <ripple:RippleEffect Name="PART_Ripple"
-                                             RippleFill="{DynamicResource MaterialFlatButtonRippleBrush}">
-                            <Grid Margin="{TemplateBinding Padding}" ColumnDefinitions="15,140,*">
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <ContentPresenter Name="PART_Icon"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"
-
-                                                      IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                                      Content="{TemplateBinding Icon}" />
-                                    <ContentPresenter Name="PART_HeaderPresenter"
-                                                      VerticalAlignment="Center"
-                                                      Content="{TemplateBinding Header}">
-                                        <ContentPresenter.DataTemplates>
-                                            <DataTemplate DataType="system:String">
-                                                <AccessText Name="PART_MenuItemText"
-                                                            Text="{CompiledBinding }">
-                                                    <AccessText.Styles>
-                                                        <Style Selector="AccessText">
-                                                            <Setter Property="FontSize" Value="16" />
-                                                            <Setter Property="FontWeight" Value="Regular" />
-                                                            <Setter Property="FontFamily" Value="avares://Material.Styles/Fonts/Roboto#Roboto" />
-                                                        </Style>
-                                                    </AccessText.Styles>
-                                                </AccessText>
-                                            </DataTemplate>
-                                        </ContentPresenter.DataTemplates>
-                                    </ContentPresenter>
-                                </StackPanel>
-
-                                <PathIcon Grid.Column="2"
-                                          Data="{StaticResource CheckMark}"
-                                          HorizontalAlignment="Center"
-                                          IsVisible="{TemplateBinding IsChecked}" />
-                            </Grid>
-                        </ripple:RippleEffect>
-                    </Panel>
-                </Border>
-            </ControlTemplate>
+            <ControlTemplate />
         </Setter>
 
-    </Style>
-
-
-    <Style Selector="mdmt|DifficultyFilter /template/ ContentPresenter#PART_Icon">
-        <Setter Property="Width" Value="24" />
-        <Setter Property="Height" Value="24" />
-        <Setter Property="Margin" Value="0, 0, 16, 0" />
-    </Style>
-
-    <Style Selector="mdmt|DifficultyFilter /template/ Border#PART_MenuItemHighlighter">
-        <Setter Property="Opacity" Value="0" />
-    </Style>
-
-    <Style Selector="mdmt|DifficultyFilter:not(.Menu):not(:disabled):selected /template/ Border#PART_MenuItemHighlighter">
-        <Setter Property="Opacity" Value="0.13" />
-    </Style>
-
-    <Style Selector="mdmt|DifficultyFilter:not(.Menu):disabled">
-        <Setter Property="Opacity" Value="0.56" />
-    </Style>
-
-    <Style Selector="mdmt|DifficultyFilter:empty /template/ Path#PART_RightArrow">
-        <Setter Property="IsVisible" Value="False" />
-    </Style>
-
-    <Style Selector="mdmt|DifficultyFilter:separator">
-        <Setter Property="Height" Value="NaN" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Separator Foreground="{DynamicResource MaterialDividerBrush}"
-                           Margin="0, 8"
-                           Height="1" />
-            </ControlTemplate>
-        </Setter>
     </Style>
 </Styles>

@@ -10,7 +10,7 @@
              x:DataType="tabs:LogAnalysisViewModel"
              DataContext="{ext:DependencyInjection Type=contract:ILogAnalysisViewModel}">
 
-    <controls:Card Margin="10,0,10,10">
+    <Border Margin="10,0,10,10">
         <Grid RowDefinitions="100,*" ColumnDefinitions="*,*,*">
             <Grid.Styles>
                 <Style Selector="Button">
@@ -54,6 +54,6 @@
                      AcceptsReturn="False"
                      IsReadOnly="True" />
         </Grid>
-    </controls:Card>
+    </Border>
 
 </UserControl>

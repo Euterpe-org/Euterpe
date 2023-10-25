@@ -12,7 +12,7 @@
              x:DataType="tabs:ChartDownloadViewModel"
              DataContext="{ext:DependencyInjection Type=contract:IChartDownloadViewModel}">
 
-    <controls:Card>
+    <Border Theme="{StaticResource CardBorder}">
         <Grid RowDefinitions="60,80,*" ColumnDefinitions="*,*">
             <Grid.Styles>
                 <Style Selector="StackPanel>PathIcon">
@@ -140,9 +140,9 @@
 
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate DataType="model:Chart">
-                            <controls:Card Background="#595959"
-                                           BorderBrush="#999999"
-                                           BorderThickness="2">
+                            <Border Background="#595959"
+                                    BorderBrush="#999999"
+                                    BorderThickness="2">
 
                                 <Grid HorizontalAlignment="Center"
                                       RowDefinitions="200,*,50,35,45,80"
@@ -255,12 +255,12 @@
                                             Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.DownloadChartCommand}"
                                             CommandParameter="{Binding .}" />
                                 </Grid>
-                            </controls:Card>
+                            </Border>
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>
             </ScrollViewer>
         </Grid>
-    </controls:Card>
+    </Border>
 
 </UserControl>

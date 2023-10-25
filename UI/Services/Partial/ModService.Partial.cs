@@ -182,7 +182,7 @@ public partial class ModService
     /// <param name="mod"></param>
     /// <returns></returns>
     private bool CheckCompatible(Mod mod) =>
-        mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion.Contains(_currentGameVersion);
+        mod.CompatibleGameVersion == XAML_Mod_CompatibleGameVersion || mod.GameVersion!.Contains(_currentGameVersion);
 
     #endregion
 
