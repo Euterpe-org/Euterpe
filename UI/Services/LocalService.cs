@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using AssetsTools.NET.Extra;
 using DialogHostAvalonia;
 using MelonLoader;
@@ -150,11 +151,19 @@ public partial class LocalService : ILocalService
 
     public void OnLaunchGame(bool isModded)
     {
+        var launchArguments = new StringBuilder();
+        if (!isModded)
+            launchArguments.Append("//--no-mods");
+        else if (!SavingService.Value.Settings.ShowConsole)
+            launchArguments.Append("//--melonloader.hideconsole");
+
         Process.Start(new ProcessStartInfo
         {
-            FileName = "steam://rungameid/774171" + (isModded ? string.Empty : "//--no-mods"),
+            FileName = "steam://rungameid/774171" + launchArguments,
             UseShellExecute = true
         });
+
+        Logger.Information("Launching game with launch arguments: {LaunchArguments}", launchArguments);
     }
 
     public async Task OpenCustomAlbumsFolderAsync()

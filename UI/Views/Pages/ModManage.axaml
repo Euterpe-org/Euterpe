@@ -3,15 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
-             xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:dialogs="using:MuseDashModToolsUI.ViewModels.Dialogs"
              xmlns:model="using:MuseDashModToolsUI.Models"
              xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters.IValueConverters"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+             xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
-             x:Class="MuseDashModToolsUI.Views.Tabs.ModManage"
-             x:DataType="tabs:ModManageViewModel"
+             x:Class="MuseDashModToolsUI.Views.Pages.ModManage"
+             x:DataType="pages:ModManageViewModel"
              DataContext="{ext:DependencyInjection Type=contract:IModManageViewModel}">
 
     <UserControl.Resources>

@@ -5,7 +5,7 @@ using DynamicData;
 
 #pragma warning disable CS8618
 
-namespace MuseDashModToolsUI.ViewModels.Tabs;
+namespace MuseDashModToolsUI.ViewModels.Pages;
 
 public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 {

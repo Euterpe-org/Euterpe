@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Views.Tabs;
+namespace MuseDashModToolsUI.Views.Pages;
 
 public partial class ModManage : UserControl
 {

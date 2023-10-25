@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
-namespace MuseDashModToolsUI.ViewModels.Tabs;
+namespace MuseDashModToolsUI.ViewModels.Pages;
 
 public partial class AboutViewModel : ViewModelBase, IAboutViewModel
 {

@@ -3,7 +3,7 @@ using DynamicData;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-namespace MuseDashModToolsUI.ViewModels.Tabs;
+namespace MuseDashModToolsUI.ViewModels.Pages;
 
 public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewModel
 {
@@ -28,8 +28,8 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     {
         _sourceCache.Connect().Filter(x => string.IsNullOrEmpty(Filter) ||
                                            x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
-                                           x.Author.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
-                                           x.Charter.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+                                           x.Author.Contains((string)Filter, StringComparison.OrdinalIgnoreCase) ||
+                                           x.Charter.Contains((string)Filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Easy) || x.HasEasy)
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Hard) || x.HasHard)
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Master) || x.HasMaster)

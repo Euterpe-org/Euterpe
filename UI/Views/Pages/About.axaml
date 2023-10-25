@@ -3,12 +3,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI"
-             xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+             xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
-             x:Class="MuseDashModToolsUI.Views.Tabs.About"
-             x:DataType="tabs:AboutViewModel"
+             x:Class="MuseDashModToolsUI.Views.Pages.About"
+             x:DataType="pages:AboutViewModel"
              DataContext="{ext:DependencyInjection Type=contract:IAboutViewModel}">
 
     <UserControl.Styles>

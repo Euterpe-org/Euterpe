@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
-             xmlns:tabs="using:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+             xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
-             x:Class="MuseDashModToolsUI.Views.Tabs.Settings"
-             x:DataType="tabs:SettingsViewModel"
+             x:Class="MuseDashModToolsUI.Views.Pages.Settings"
+             x:DataType="pages:SettingsViewModel"
              DataContext="{ext:DependencyInjection Type=contract:ISettingsViewModel}">
 
     <ScrollViewer Background="#424242" Margin="10,0">
@@ -25,7 +25,6 @@
             </Style>
             <Style Selector="ComboBox">
                 <Setter Property="Margin" Value="20,0,0,0" />
-                <Setter Property="Theme" Value="{StaticResource MaterialFilledComboBox}" />
             </Style>
             <Style Selector="Border > StackPanel">
                 <Setter Property="Orientation" Value="Horizontal" />

@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="using:MuseDashModToolsUI.ViewModels.Pages"
+             xmlns:ext="using:MuseDashModToolsUI.Extensions.MarkupExtensions"
+             xmlns:contracts="using:MuseDashModToolsUI.Contracts.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+             x:Class="MuseDashModToolsUI.Views.Pages.MainMenu"
+             x:DataType="pages:MainMenuViewModel"
+             DataContext="{ext:DependencyInjection Type=contracts:IMainMenuViewModel}">
+
+    <Grid RowDefinitions="200,*,*,*,*,*" ColumnDefinitions="4*,*">
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" Orientation="Horizontal">
+            <Image Source="/Assets/Icon.ico"
+                   Height="100"
+                   Width="100"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center" />
+
+            <TextBlock Margin="20,0,0,0"
+                       FontSize="30"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Text="Muse Dash Mod Tools" />
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnDefinitions="*,*">
+            <Button Grid.Column="0"
+                    Content="{ext:LocalizeExtensions XAML_LaunchVanilla}"
+                    Command="{Binding LaunchVanillaGameCommand}" />
+            <Button Grid.Column="1"
+                    Content="{ext:LocalizeExtensions XAML_LaunchModded}"
+                    Command="{Binding LaunchModdedGameCommand}" />
+        </Grid>
+        <Button Grid.Row="2" Grid.Column="0" Content="Manage Mods" />
+        <Button Grid.Row="3" Grid.Column="0" Content="Manage Charts" />
+        <Button Grid.Row="4" Grid.Column="0" Content="Charting Tools" />
+        <Button Grid.Row="5" Grid.Column="0" Content="Setting" />
+
+        <ListBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="5">
+            <Label>News</Label>
+        </ListBox>
+    </Grid>
+</UserControl>

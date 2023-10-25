@@ -15,6 +15,7 @@ public class Setting
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
     public string? CustomDownloadSource { get; set; }
     public string Theme { get; set; } = "Dark";
+    public bool ShowConsole { get; set; }
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenEnabling { get; set; } = AskType.Always;

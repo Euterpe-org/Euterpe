@@ -305,4 +305,10 @@
     <data name="XAML_ConfigFile" xml:space="preserve">
         <value>Config File</value>
     </data>
+    <data name="XAML_LaunchVanilla" xml:space="preserve">
+        <value>Launch Vanilla</value>
+    </data>
+    <data name="XAML_LaunchModded" xml:space="preserve">
+        <value>Launch Modded</value>
+    </data>
 </root>

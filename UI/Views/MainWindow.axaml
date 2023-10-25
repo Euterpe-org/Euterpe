@@ -3,16 +3,23 @@
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
         xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
         xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+        xmlns:pages="clr-namespace:MuseDashModToolsUI.Views.Pages"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-        Width="1100" Height="800"
-        MinWidth="1000" MinHeight="700"
+        Width="1000" Height="800"
+        MinWidth="900" MinHeight="700"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterScreen">
 
-    <Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150">
+    <Grid RowDefinitions="40,*">
+        <Button Grid.Row="0" Grid.Column="0" Content="Back" />
+        <pages:MainMenu Grid.Row="1" />
+    </Grid>
+
+
+    <!--<Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150">
         <Image Grid.Row="0" Grid.Column="0"
                Margin="15,0,0,0"
                Source="/Assets/Icon.ico"
@@ -30,7 +37,10 @@
 
         <Button Grid.Row="0" Grid.Column="1" Command="{Binding ChangeThemeCommand}" />
 
-        <!--<TabStrip Grid.Row="0" Grid.Column="1"
+        <Button Grid.Row="1" Grid.Column="0"></Button>
+        
+        
+        ~1~<TabStrip Grid.Row="0" Grid.Column="1"
                   HorizontalAlignment="Center"
                   Margin="0,10,0,0"
                   ItemsSource="{Binding Tabs}"
@@ -68,7 +78,7 @@
                     </Label>
                 </DataTemplate>
             </TabStrip.ItemTemplate>
-        </TabStrip>-->
+        </TabStrip>@1@
 
         <Viewbox Grid.Row="0" Grid.Column="2" Margin="0,15,15,0">
             <TextBlock HorizontalAlignment="Center"
@@ -77,7 +87,7 @@
                        Text="{Binding Version}" />
         </Viewbox>
 
-        <!--<UserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                     Content="{Binding Content}" />-->
-    </Grid>
+        ~1~<UserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                     Content="{Binding Content}" />@1@
+    </Grid>-->
 </Window>

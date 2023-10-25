@@ -3,13 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:MuseDashModToolsUI.Contracts.ViewModels"
-             xmlns:tabs="clr-namespace:MuseDashModToolsUI.ViewModels.Tabs"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI"
              xmlns:converters="clr-namespace:MuseDashModToolsUI.Converters.IValueConverters"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+             xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MuseDashModToolsUI.Views.Tabs.InfoJson"
-             x:DataType="tabs:InfoJsonViewModel"
+             x:Class="MuseDashModToolsUI.Views.Pages.InfoJson"
+             x:DataType="pages:InfoJsonViewModel"
              DataContext="{ext:DependencyInjection Type=viewModels:IInfoJsonViewModel}">
 
     <UserControl.Resources>

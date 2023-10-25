@@ -2,7 +2,7 @@
 
 #pragma warning disable CS8618
 
-namespace MuseDashModToolsUI.ViewModels.Tabs;
+namespace MuseDashModToolsUI.ViewModels.Pages;
 
 public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 {
@@ -73,6 +73,13 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
         if (!await SavingService.OnChooseGamePathAsync()) return;
         UpdatePath();
         await UpdateUIService.InitializeTabsOnChoosePathAsync();
+    }
+
+    [RelayCommand]
+    private void OnChangeTheme()
+    {
+        var targetTheme = SavingService.Settings.Theme == "Dark" ? "Light" : "Dark";
+        UpdateUIService.ChangeTheme(targetTheme);
     }
 
     private void UpdatePath() => Path = SavingService.Settings.MuseDashFolder;

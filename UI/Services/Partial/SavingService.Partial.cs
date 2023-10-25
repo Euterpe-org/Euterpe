@@ -128,6 +128,7 @@ public partial class SavingService
         Settings.DownloadPrerelease = bool.Parse(settings["DownloadPrerelease"]?.ToString()!);
         Settings.CustomDownloadSource = settings["CustomDownloadSource"]?.ToString();
         Settings.Theme = settings["Theme"]?.ToString()!;
+        Settings.ShowConsole = bool.Parse(settings["ShowConsole"]?.ToString()!);
         Settings.AskInstallMuseDashModTools = Enum.Parse<AskType>(settings["AskInstallMuseDashModTools"]?.ToString()!);
         Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenInstalling"]?.ToString()!);
         Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenEnabling"]?.ToString()!);
