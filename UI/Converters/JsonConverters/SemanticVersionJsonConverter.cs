@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using NuGet.Versioning;
 
-namespace MuseDashModToolsUI.Converters;
+namespace MuseDashModToolsUI.Converters.JsonConverters;
 
 public class SemanticVersionJsonConverter : JsonConverter<SemanticVersion>
 {

@@ -7,6 +7,8 @@ public interface IUpdateUIService
     /// </summary>
     void UpdateText();
 
+    void ChangeTheme(string themeName);
+
     /// <summary>
     ///     Initialize All Tabs
     /// </summary>

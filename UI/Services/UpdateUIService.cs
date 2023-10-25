@@ -1,4 +1,6 @@
-﻿#pragma warning disable CS8618
+﻿using Avalonia.Styling;
+
+#pragma warning disable CS8618
 
 namespace MuseDashModToolsUI.Services;
 
@@ -33,6 +35,21 @@ public partial class UpdateUIService : IUpdateUIService
         ChangeTabName();
         ChangeOptionName();
         RecoverOption();
+    }
+
+    public void ChangeTheme(string themeName)
+    {
+        var app = Application.Current;
+        if (app is null) return;
+
+        app.RequestedThemeVariant = themeName switch
+        {
+            "Dark" => ThemeVariant.Dark,
+            "Light" => ThemeVariant.Light,
+            _ => app.RequestedThemeVariant
+        };
+
+        SavingService.Value.Settings.Theme = themeName;
     }
 
     public async Task InitializeAllTabsAsync()

@@ -58,6 +58,7 @@ public partial class SavingService : ISavingService
             }
         }
 
+        UpdateUIService.ChangeTheme(Settings.Theme);
         await CheckSettingValidity();
         await UpdateUIService.InitializeAllTabsAsync();
 

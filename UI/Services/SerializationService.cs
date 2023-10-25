@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using MuseDashModToolsUI.Converters;
+using MuseDashModToolsUI.Converters.JsonConverters;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 

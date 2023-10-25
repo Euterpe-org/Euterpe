@@ -14,6 +14,7 @@ public class Setting
     public bool DownloadPrerelease { get; set; }
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
     public string? CustomDownloadSource { get; set; }
+    public string Theme { get; set; } = "Dark";
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;
     public AskType AskEnableDependenciesWhenEnabling { get; set; } = AskType.Always;
@@ -43,19 +44,4 @@ public class Setting
     [JsonIgnore]
     public string MelonLoaderZipPath =>
         !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, "MelonLoader.zip") : string.Empty;
-}
-
-public enum AskType
-{
-    Always,
-    YesAndNoAsk,
-    NoAndNoAsk
-}
-
-public enum DownloadSources
-{
-    Github,
-    GithubMirror,
-    Gitee,
-    Custom
 }

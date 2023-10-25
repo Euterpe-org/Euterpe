@@ -10,8 +10,7 @@
         MinWidth="1000" MinHeight="700"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaTitleBarHeightHint="-1"
-        WindowStartupLocation="CenterScreen"
-        Background="#2D2D2D">
+        WindowStartupLocation="CenterScreen">
 
     <Grid RowDefinitions="100,*" ColumnDefinitions="250,*,150">
         <Image Grid.Row="0" Grid.Column="0"
@@ -29,7 +28,9 @@
                    VerticalAlignment="Center"
                    Text="Muse Dash Mod Tools" />
 
-        <TabStrip Grid.Row="0" Grid.Column="1"
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding ChangeThemeCommand}" />
+
+        <!--<TabStrip Grid.Row="0" Grid.Column="1"
                   HorizontalAlignment="Center"
                   Margin="0,10,0,0"
                   ItemsSource="{Binding Tabs}"
@@ -67,7 +68,7 @@
                     </Label>
                 </DataTemplate>
             </TabStrip.ItemTemplate>
-        </TabStrip>
+        </TabStrip>-->
 
         <Viewbox Grid.Row="0" Grid.Column="2" Margin="0,15,15,0">
             <TextBlock HorizontalAlignment="Center"
@@ -76,7 +77,7 @@
                        Text="{Binding Version}" />
         </Viewbox>
 
-        <UserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                     Content="{Binding Content}" />
+        <!--<UserControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                     Content="{Binding Content}" />-->
     </Grid>
 </Window>
