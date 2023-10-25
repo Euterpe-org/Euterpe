@@ -1,7 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:MuseDashModToolsUI"
-             xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              x:Class="MuseDashModToolsUI.App">
     <Application.DataTemplates>
@@ -9,9 +8,7 @@
     </Application.DataTemplates>
 
     <Application.Styles>
-        <!--This should be removed after https://github.com/AvaloniaCommunity/Material.Avalonia/issues/246 fixed-->
-        <FluentTheme />
-        <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Grey" SecondaryColor="Indigo" />
+        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <StyleInclude Source="avares://DialogHost.Avalonia/Styles.xaml" />
         <StyleInclude Source="avares://MuseDashModToolsUI.Styles/ModToolsStyles.axaml" />
         <Style Selector="TextBlock">
