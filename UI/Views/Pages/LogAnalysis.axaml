@@ -27,20 +27,17 @@
             </Grid.Styles>
 
             <Button Grid.Row="0" Grid.Column="0"
-                    Classes="dark"
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"
                     Content="{ext:LocalizeExtensions XAML_Analyze}"
                     Command="{Binding AnalyzeLogCommand}" />
 
             <Button Grid.Row="0" Grid.Column="1"
-                    Classes="dark"
                     HorizontalAlignment="Center"
                     Content="{ext:LocalizeExtensions XAML_LogFolder}"
                     Command="{Binding OpenLogFolderCommand}" />
 
             <Button Grid.Row="0" Grid.Column="2"
-                    Classes="dark"
                     HorizontalAlignment="Right"
                     Margin="0,0,10,0"
                     Content="{ext:LocalizeExtensions XAML_TroubleShoot}"

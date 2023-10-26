@@ -312,13 +312,13 @@
                                                     </Style>
                                                 </StackPanel.Styles>
 
-                                                <Button Classes="dark" IsVisible="{Binding IsValidConfigFile}"
+                                                <Button IsVisible="{Binding IsValidConfigFile}"
                                                         Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenConfigFileCommand}"
                                                         CommandParameter="{Binding ConfigFile}"
                                                         Margin="0,0,10,0"
                                                         Content="{ext:LocalizeExtensions XAML_ConfigFile}" />
 
-                                                <Button Classes="dark" IsVisible="{Binding IsValidHomePage}"
+                                                <Button IsVisible="{Binding IsValidHomePage}"
                                                         Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenUrlCommand}"
                                                         CommandParameter="{Binding HomePage}"
                                                         Content="{ext:LocalizeExtensions XAML_HomePage}" />
@@ -353,20 +353,20 @@
                                                       CommandParameter="{Binding .}"
                                                       Foreground="#DDD" />
 
-                                        <Button Classes="dark" IsVisible="{Binding IsInstallable}"
+                                        <Button IsVisible="{Binding IsInstallable}"
                                                 Tag="{Binding Name}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.InstallModCommand}"
                                                 CommandParameter="{Binding .}"
                                                 Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
 
-                                        <Button Classes="dark" IsVisible="{Binding IsLocal}"
+                                        <Button IsVisible="{Binding IsLocal}"
                                                 Tag="{Binding Name}"
                                                 Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.DeleteModCommand}"
                                                 CommandParameter="{Binding .}"
                                                 Content="{ext:LocalizeExtensions XAML_Uninstall_Mod}" />
 
-                                        <Button Classes="dark" IsVisible="{Binding IsUpdatable}"
+                                        <Button IsVisible="{Binding IsUpdatable}"
                                                 Tag="{Binding Name}"
                                                 Foreground="{Binding ., Converter={StaticResource VersionColourConverter}}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.ReinstallModCommand}"

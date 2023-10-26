@@ -55,7 +55,6 @@
             <Button Grid.Row="0" Grid.Column="1"
                     FontSize="16"
                     Height="60"
-                    Classes="dark"
                     MinWidth="260"
                     Margin="80,0"
                     Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
@@ -248,7 +247,6 @@
 
                                     <!--Download button-->
                                     <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"
-                                            Classes="dark"
                                             FontSize="25"
                                             Margin="0,10,0,5"
                                             Content="{ext:LocalizeExtensions XAML_Download_Chart}"
