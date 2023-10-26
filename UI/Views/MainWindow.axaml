@@ -9,8 +9,6 @@
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
         Width="1100" Height="800"
         MinWidth="900" MinHeight="700"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaTitleBarHeightHint="-1"
         WindowStartupLocation="CenterScreen">
 
     <Grid RowDefinitions="50,*" ColumnDefinitions="4*,*">
