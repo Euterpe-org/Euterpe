@@ -9,6 +9,8 @@
              x:Class="MuseDashModToolsUI.Views.Pages.MainMenu"
              x:DataType="pages:MainMenuViewModel"
              DataContext="{ext:DependencyInjection Type=contracts:IMainMenuViewModel}">
+    <!-- ReSharper disable Xaml.StyleClassNotFound -->
+    <!-- ReSharper disable Xaml.StaticResourceNotResolved -->
 
     <Grid ColumnDefinitions="3*,*">
         <Grid.Styles>
@@ -23,6 +25,7 @@
                     <Style Selector="Button">
                         <Setter Property="Margin" Value="5" />
                         <Setter Property="FontSize" Value="25" />
+                        <Setter Property="Theme" Value="{DynamicResource SolidButton}" />
                     </Style>
                 </Grid.Styles>
 
@@ -42,25 +45,27 @@
 
                 <Grid Grid.Row="1" ColumnDefinitions="*,*">
                     <Button Grid.Column="0"
+                            Classes="Secondary"
                             Content="{ext:LocalizeExtensions XAML_LaunchVanilla}"
                             Command="{Binding LaunchVanillaGameCommand}" />
                     <Button Grid.Column="1"
+                            Classes="Secondary"
                             Content="{ext:LocalizeExtensions XAML_LaunchModded}"
                             Command="{Binding LaunchModdedGameCommand}" />
                 </Grid>
 
 
                 <Grid Grid.Row="2" ColumnDefinitions="*,*">
-                    <Button Grid.Column="0" Content="Download Charts" />
-                    <Button Grid.Column="1" Content="Charting Tools" />
+                    <Button Grid.Column="0" Classes="Secondary" Content="Download Charts" />
+                    <Button Grid.Column="1" Classes="Secondary" Content="Charting Tools" />
                 </Grid>
 
-                <Button Grid.Row="3" Content="Download and Manage Mods" />
+                <Button Grid.Row="3" Classes="Secondary" Content="Download and Manage Mods" />
 
                 <Grid Grid.Row="4" ColumnDefinitions="*,*,*">
-                    <Button Grid.Column="0" Content="Log Analysis" />
-                    <Button Grid.Column="1" Content="Setting" />
-                    <Button Grid.Column="2" Content="About" />
+                    <Button Grid.Column="0" Classes="Secondary" Content="Log Analysis" />
+                    <Button Grid.Column="1" Classes="Secondary" Content="Setting" />
+                    <Button Grid.Column="2" Classes="Secondary" Content="About" />
                 </Grid>
 
             </Grid>

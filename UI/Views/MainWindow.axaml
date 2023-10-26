@@ -15,6 +15,7 @@
         <Grid Grid.Row="0" Grid.Column="0">
             <StackPanel Orientation="Horizontal">
                 <Button Height="50"
+                        Classes="Secondary"
                         VerticalAlignment="Center"
                         Theme="{DynamicResource BorderlessButton}">
                     <Button.Content>
@@ -22,7 +23,7 @@
                             <PathIcon Width="25"
                                       Height="25"
                                       Data="{StaticResource Back}"
-                                      Foreground="{DynamicResource ButtonDefaultPrimaryForeground}" />
+                                      Foreground="{DynamicResource ButtonDefaultSecondaryForeground}" />
 
                             <TextBlock Margin="10,2,0,0"
                                        FontSize="18"
