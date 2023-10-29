@@ -3,12 +3,12 @@ using Avalonia.Markup.Xaml;
 
 namespace MuseDashModToolsUI.Extensions.MarkupExtensions;
 
-public class FontExtensions : MarkupExtension
+public class FontExtension : MarkupExtension
 {
-    private string? Key { get; }
+    private string Key { get; }
     public static IFontManageService? FontManageService { get; set; }
 
-    public FontExtensions(string key) => Key = key;
+    public FontExtension(string key) => Key = key;
 
     public override object ProvideValue(IServiceProvider serviceProvider) => new Binding
     {

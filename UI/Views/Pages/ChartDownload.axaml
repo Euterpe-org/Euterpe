@@ -34,7 +34,7 @@
                      Background="#505050"
                      Margin="10,0"
                      Text="{Binding Filter}"
-                     Watermark="{ext:LocalizeExtensions XAML_Chart_SearchBar}"
+                     Watermark="{ext:Localize XAML_Chart_SearchBar}"
                      BorderBrush="#999999"
                      BorderThickness="1"
                      CornerRadius="1"
@@ -57,7 +57,7 @@
                     Height="60"
                     MinWidth="260"
                     Margin="80,0"
-                    Content="{ext:LocalizeExtensions XAML_CustomAlbumsFolder}"
+                    Content="{ext:Localize XAML_CustomAlbumsFolder}"
                     Command="{Binding OpenCustomAlbumsFolderCommand}" />
 
             <!--Sort Options-->
@@ -66,7 +66,7 @@
                 <PathIcon Data="{StaticResource Sort}" Margin="0,0,10,0" />
 
                 <TextBlock FontSize="20"
-                           Text="{ext:LocalizeExtensions XAML_ChartSortOptions}"
+                           Text="{ext:Localize XAML_ChartSortOptions}"
                            VerticalAlignment="Center" />
 
                 <ComboBox MinWidth="160"
@@ -82,13 +82,13 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <PathIcon Data="{StaticResource Filter}" Margin="0,0,5,0" />
-                            <TextBlock Text="{ext:LocalizeExtensions XAML_ChartFilterTypes}"
+                            <TextBlock Text="{ext:Localize XAML_ChartFilterTypes}"
                                        VerticalAlignment="Center" />
                         </StackPanel>
                     </MenuItem.Header>
 
                     <!--Easy-->
-                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Easy}"
+                    <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Easy}"
                                            Command="{Binding FilterEasyCommand}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Easy.png" />
@@ -96,7 +96,7 @@
                     </mdmt:DifficultyFilter>
 
                     <!--Hard-->
-                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hard}"
+                    <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Hard}"
                                            Command="{Binding FilterHardCommand}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hard.png" />
@@ -104,7 +104,7 @@
                     </mdmt:DifficultyFilter>
 
                     <!--Master-->
-                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Master}"
+                    <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Master}"
                                            Command="{Binding FilterMasterCommand}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Master.png" />
@@ -112,7 +112,7 @@
                     </mdmt:DifficultyFilter>
 
                     <!--Hidden-->
-                    <mdmt:DifficultyFilter Header="{ext:LocalizeExtensions XAML_ChartFilterType_Hidden}"
+                    <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Hidden}"
                                            Command="{Binding FilterHiddenCommand}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hidden.png" />
@@ -201,7 +201,7 @@
                                         <PathIcon Height="30" Width="30"
                                                   Margin="0,0,5,0"
                                                   Data="{StaticResource Charter}" />
-                                        <TextBlock Text="{ext:LocalizeExtensions XAML_Charter}" />
+                                        <TextBlock Text="{ext:Localize XAML_Charter}" />
                                         <TextBlock Text="{Binding Charter}"
                                                    TextTrimming="WordEllipsis" />
                                     </DockPanel>
@@ -234,14 +234,14 @@
                                     <!--Likes-->
                                     <StackPanel Grid.Row="4" Grid.Column="0">
                                         <PathIcon Data="{StaticResource Heart}" />
-                                        <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Likes}" />
+                                        <TextBlock Text="{ext:Localize XAML_Chart_Likes}" />
                                         <TextBlock Text="{Binding Analytics.LikesCount}" />
                                     </StackPanel>
 
                                     <!--Downloads-->
                                     <StackPanel Grid.Row="4" Grid.Column="1">
                                         <PathIcon Data="{StaticResource Download}" />
-                                        <TextBlock Text="{ext:LocalizeExtensions XAML_Chart_Downloads}" />
+                                        <TextBlock Text="{ext:Localize XAML_Chart_Downloads}" />
                                         <TextBlock Text="{Binding Analytics.Downloads}" />
                                     </StackPanel>
 
@@ -249,7 +249,7 @@
                                     <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom"
                                             FontSize="25"
                                             Margin="0,10,0,5"
-                                            Content="{ext:LocalizeExtensions XAML_Download_Chart}"
+                                            Content="{ext:Localize XAML_Download_Chart}"
                                             Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.DownloadChartCommand}"
                                             CommandParameter="{Binding .}" />
                                 </Grid>

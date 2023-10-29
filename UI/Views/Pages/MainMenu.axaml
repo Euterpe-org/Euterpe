@@ -46,11 +46,11 @@
                 <Grid Grid.Row="1" ColumnDefinitions="*,*">
                     <Button Grid.Column="0"
                             Classes="Secondary"
-                            Content="{ext:LocalizeExtensions XAML_LaunchVanilla}"
+                            Content="{ext:Localize XAML_LaunchVanilla}"
                             Command="{Binding LaunchVanillaGameCommand}" />
                     <Button Grid.Column="1"
                             Classes="Secondary"
-                            Content="{ext:LocalizeExtensions XAML_LaunchModded}"
+                            Content="{ext:Localize XAML_LaunchModded}"
                             Command="{Binding LaunchModdedGameCommand}" />
                 </Grid>
 
@@ -73,7 +73,7 @@
 
         <Border Grid.Column="1" Classes="Shadow" Margin="10,4,0,4">
             <StackPanel>
-                <TextBlock FontSize="30" Text="{ext:LocalizeExtensions XAML_News}" />
+                <TextBlock FontSize="30" Text="{ext:Localize XAML_News}" />
                 <!--<ListBox>
                     <Label>News1</Label>
                     <Label>News2</Label>

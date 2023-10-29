@@ -43,7 +43,7 @@
             <!--Muse Dash Folder Path-->
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_Path}" />
+                    <TextBlock Text="{ext:Localize XAML_Path}" />
 
                     <TextBox Classes="outline"
                              Text="{Binding Path}"
@@ -60,7 +60,7 @@
                                       Width="35"
                                       VerticalAlignment="Center" />
                             <TextBlock Margin="5,0,0,0"
-                                       Text="{ext:LocalizeExtensions XAML_ChangePath}" />
+                                       Text="{ext:Localize XAML_ChangePath}" />
                         </StackPanel>
                     </Button>
                 </StackPanel>
@@ -69,7 +69,7 @@
             <!--Language-->
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_Language}" />
+                    <TextBlock Text="{ext:Localize XAML_Language}" />
 
                     <ComboBox MinWidth="200"
                               ItemsSource="{Binding AvailableLanguages}"
@@ -81,7 +81,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                    <Button Content="{ext:LocalizeExtensions XAML_Apply}"
+                    <Button Content="{ext:Localize XAML_Apply}"
                             Command="{Binding SetLanguageCommand}" />
                 </StackPanel>
             </Border>
@@ -89,7 +89,7 @@
             <!--Download Source-->
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadSource}" />
+                    <TextBlock Text="{ext:Localize XAML_DownloadSource}" />
 
                     <ComboBox MinWidth="180"
                               ItemsSource="{Binding DownloadSources}"
@@ -103,7 +103,7 @@
                     <TextBox Classes="outline"
                              Margin="0,0,0,7"
                              TextWrapping="WrapWithOverflow"
-                             Watermark="{ext:LocalizeExtensions XAML_UseCustomDownloadSource}"
+                             Watermark="{ext:Localize XAML_UseCustomDownloadSource}"
                              MinWidth="400"
                              Text="{Binding CustomDownloadSource}" />
 
@@ -111,7 +111,7 @@
                               Margin="20,0,0,0"
                               Width="40"
                               Height="40"
-                              ToolTip.Tip="{ext:LocalizeExtensions XAML_CustomDownloadSourceFormat}" />
+                              ToolTip.Tip="{ext:Localize XAML_CustomDownloadSourceFormat}" />
                 </StackPanel>
 
             </Border>
@@ -119,7 +119,7 @@
             <!--Prerelease-->
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_DownloadPrerelease}" />
+                    <TextBlock Text="{ext:Localize XAML_DownloadPrerelease}" />
 
                     <ToggleSwitch Margin="20,0,0,0" IsChecked="{Binding DownloadPrerelease}" />
                 </StackPanel>
@@ -128,20 +128,20 @@
             <!--Font-->
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_Font}" />
+                    <TextBlock Text="{ext:Localize XAML_Font}" />
 
                     <ComboBox MinWidth="300"
                               ItemsSource="{Binding AvailableFonts}"
                               SelectedIndex="{Binding CurrentFontIndex}" />
 
-                    <Button Content="{ext:LocalizeExtensions XAML_Apply}"
+                    <Button Content="{ext:Localize XAML_Apply}"
                             Command="{Binding SetFontCommand}" />
                 </StackPanel>
             </Border>
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Install}" />
+                    <TextBlock Text="{ext:Localize XAML_Setting_EnableDependency_Install}" />
 
                     <ComboBox MinWidth="150"
                               ItemsSource="{Binding AskTypes}"
@@ -151,7 +151,7 @@
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_EnableDependency_Enable}" />
+                    <TextBlock Text="{ext:Localize XAML_Setting_EnableDependency_Enable}" />
 
                     <ComboBox MinWidth="150"
                               ItemsSource="{Binding AskTypes}"
@@ -161,7 +161,7 @@
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Delete}" />
+                    <TextBlock Text="{ext:Localize XAML_Setting_DisableDependency_Delete}" />
 
                     <ComboBox MinWidth="150"
                               ItemsSource="{Binding AskTypes}"
@@ -171,7 +171,7 @@
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="{ext:LocalizeExtensions XAML_Setting_DisableDependency_Disable}" />
+                    <TextBlock Text="{ext:Localize XAML_Setting_DisableDependency_Disable}" />
 
                     <ComboBox MinWidth="150"
                               ItemsSource="{Binding AskTypes}"

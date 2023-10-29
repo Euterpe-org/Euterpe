@@ -141,13 +141,13 @@
                         <Setter Property="Background" Value="#808080" />
                     </Style>
                 </StackPanel.Styles>
-                <Button Content="{ext:LocalizeExtensions XAML_Install_MelonLoader}"
+                <Button Content="{ext:Localize XAML_Install_MelonLoader}"
                         Command="{Binding InstallMelonLoaderCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_Uninstall_MelonLoader}"
+                <Button Content="{ext:Localize XAML_Uninstall_MelonLoader}"
                         Command="{Binding UninstallMelonLoaderCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_UserDataFolder}"
+                <Button Content="{ext:Localize XAML_UserDataFolder}"
                         Command="{Binding OpenUserDataFolderCommand}" />
-                <Button Content="{ext:LocalizeExtensions XAML_ModsFolder}"
+                <Button Content="{ext:Localize XAML_ModsFolder}"
                         Command="{Binding OpenModsFolderCommand}" />
             </StackPanel>
 
@@ -177,7 +177,7 @@
                          Background="#505050"
                          Margin="12,0,200,0"
                          Text="{Binding Filter}"
-                         Watermark="{ext:LocalizeExtensions XAML_Mod_SearchBar}"
+                         Watermark="{ext:Localize XAML_Mod_SearchBar}"
                          BorderBrush="#999999"
                          BorderThickness="1"
                          CornerRadius="1"
@@ -205,7 +205,7 @@
                     </MenuItem.Header>
 
                     <!--Check Update-->
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_Check_Update}"
+                    <MenuItem Header="{ext:Localize XAML_Check_Update}"
                               Command="{Binding CheckUpdateCommand}">
                         <MenuItem.Icon>
                             <PathIcon Data="{StaticResource Update}" />
@@ -213,7 +213,7 @@
                     </MenuItem>
 
                     <!--Translate-->
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_HelpTranslate}"
+                    <MenuItem Header="{ext:Localize XAML_HelpTranslate}"
                               Command="{Binding OpenUrlCommand}"
                               CommandParameter="https://crowdin.com/project/musedashmodtools">
                         <MenuItem.Icon>
@@ -222,7 +222,7 @@
                     </MenuItem>
 
                     <!--Bug Report-->
-                    <MenuItem Header="{ext:LocalizeExtensions XAML_ReportBug}"
+                    <MenuItem Header="{ext:Localize XAML_ReportBug}"
                               Command="{Binding OpenUrlCommand}"
                               CommandParameter="https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose">
                         <MenuItem.Icon>
@@ -293,13 +293,13 @@
 
                                             <StackPanel IsVisible="{Binding HasDependency}" Margin="0,5,0,0">
                                                 <TextBlock Classes="Body2"
-                                                           Text="{ext:LocalizeExtensions XAML_Mod_Dependencies}" />
+                                                           Text="{ext:Localize XAML_Mod_Dependencies}" />
                                                 <TextBlock Classes="Body2" Text="{Binding DependencyNames}" />
                                             </StackPanel>
 
                                             <StackPanel IsVisible="{Binding IsDuplicated}" Margin="0,10,0,0">
                                                 <TextBlock Classes="Body2"
-                                                           Text="{ext:LocalizeExtensions XAML_Mod_Duplicate}" />
+                                                           Text="{ext:Localize XAML_Mod_Duplicate}" />
                                                 <TextBlock Classes="Body2" Text="{Binding DuplicatedModNames}" />
                                             </StackPanel>
 
@@ -316,12 +316,12 @@
                                                         Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenConfigFileCommand}"
                                                         CommandParameter="{Binding ConfigFile}"
                                                         Margin="0,0,10,0"
-                                                        Content="{ext:LocalizeExtensions XAML_ConfigFile}" />
+                                                        Content="{ext:Localize XAML_ConfigFile}" />
 
                                                 <Button IsVisible="{Binding IsValidHomePage}"
                                                         Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.OpenUrlCommand}"
                                                         CommandParameter="{Binding HomePage}"
-                                                        Content="{ext:LocalizeExtensions XAML_HomePage}" />
+                                                        Content="{ext:Localize XAML_HomePage}" />
                                             </StackPanel>
 
 
@@ -357,14 +357,14 @@
                                                 Tag="{Binding Name}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.InstallModCommand}"
                                                 CommandParameter="{Binding .}"
-                                                Content="{ext:LocalizeExtensions XAML_Install_Mod}" />
+                                                Content="{ext:Localize XAML_Install_Mod}" />
 
                                         <Button IsVisible="{Binding IsLocal}"
                                                 Tag="{Binding Name}"
                                                 Foreground="{Binding ., Converter={StaticResource UninstallConverter}}"
                                                 Command="{ReflectionBinding $parent[ItemsRepeater].DataContext.DeleteModCommand}"
                                                 CommandParameter="{Binding .}"
-                                                Content="{ext:LocalizeExtensions XAML_Uninstall_Mod}" />
+                                                Content="{ext:Localize XAML_Uninstall_Mod}" />
 
                                         <Button IsVisible="{Binding IsUpdatable}"
                                                 Tag="{Binding Name}"

@@ -12,16 +12,16 @@
         <StyleInclude Source="avares://DialogHost.Avalonia/Styles.xaml" />
         <StyleInclude Source="avares://MuseDashModToolsUI.Styles/ModToolsStyles.axaml" />
         <Style Selector="TextBlock">
-            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+            <Setter Property="FontFamily" Value="{ext:Font Font}" />
         </Style>
         <Style Selector="TextBox">
-            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+            <Setter Property="FontFamily" Value="{ext:Font Font}" />
         </Style>
         <Style Selector="Button ContentPresenter">
-            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+            <Setter Property="FontFamily" Value="{ext:Font Font}" />
         </Style>
         <Style Selector="TemplatedControl">
-            <Setter Property="FontFamily" Value="{ext:FontExtensions Font}" />
+            <Setter Property="FontFamily" Value="{ext:Font Font}" />
         </Style>
     </Application.Styles>
 

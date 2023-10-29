@@ -30,7 +30,7 @@
                             <TextBlock Margin="10,2,0,0"
                                        FontSize="18"
                                        VerticalAlignment="Center"
-                                       Text="{ext:LocalizeExtensions XAML_Back}" />
+                                       Text="{ext:Localize XAML_Back}" />
                         </StackPanel>
                     </Button.Content>
                 </Button>

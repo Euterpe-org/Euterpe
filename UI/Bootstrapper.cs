@@ -56,7 +56,7 @@ public static class Bootstrapper
 
         var container = builder.Build();
         DependencyInjectionExtension.Resolver = type => container.Resolve(type!);
-        LocalizeExtensions.LocalizationService = container.Resolve<ILocalizationService>();
-        FontExtensions.FontManageService = container.Resolve<IFontManageService>();
+        LocalizeExtension.LocalizationService = container.Resolve<ILocalizationService>();
+        FontExtension.FontManageService = container.Resolve<IFontManageService>();
     }
 }

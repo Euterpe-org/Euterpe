@@ -27,31 +27,31 @@
                 </Style>
             </StackPanel.Styles>
 
-            <Button Content="{ext:LocalizeExtensions XAML_ChooseChartPath}"
+            <Button Content="{ext:Localize XAML_ChooseChartPath}"
                     Command="{Binding ChooseChartFolderCommand}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_ChartName}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_ChartName}"
                                 Text="{Binding InfoJson.Name}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_Author}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_Author}"
                                 Text="{Binding InfoJson.Author}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_BPM}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_BPM}"
                                 Text="{Binding InfoJson.Bpm}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_Scene}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_Scene}"
                                 Text="{Binding InfoJson.Scene,Converter={StaticResource ChartSceneConverter}}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_SearchTags}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_SearchTags}"
                                 Text="{Binding InfoJson.SearchTagsString}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_HideBmsMode}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_HideBmsMode}"
                                 Text="{Binding InfoJson.HideBmsMode}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_HideBmsDifficulty}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_HideBmsDifficulty}"
                                 Text="{Binding InfoJson.HideBmsDifficulty}" />
 
-            <mdmt:TitledTextBox TitleText="{ext:LocalizeExtensions XAML_InfoJson_HideBmsMessage}"
+            <mdmt:TitledTextBox TitleText="{ext:Localize XAML_InfoJson_HideBmsMessage}"
                                 Text="{Binding InfoJson.HideBmsMessage}" />
 
         </StackPanel>

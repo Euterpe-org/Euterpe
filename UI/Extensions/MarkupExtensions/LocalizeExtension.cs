@@ -3,12 +3,12 @@ using Avalonia.Markup.Xaml;
 
 namespace MuseDashModToolsUI.Extensions.MarkupExtensions;
 
-public class LocalizeExtensions : MarkupExtension
+public class LocalizeExtension : MarkupExtension
 {
-    private string? Key { get; }
+    private string Key { get; }
     public static ILocalizationService? LocalizationService { get; set; }
 
-    public LocalizeExtensions(string key) => Key = key;
+    public LocalizeExtension(string key) => Key = key;
 
     public override object ProvideValue(IServiceProvider serviceProvider) => new Binding
     {
