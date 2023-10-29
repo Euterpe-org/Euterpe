@@ -9,6 +9,8 @@
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
         Width="1100" Height="800"
         MinWidth="900" MinHeight="700"
+        Icon="/Assets/Icon.ico"
+        Title="Muse Dash Mod Tools"
         WindowStartupLocation="CenterScreen">
 
     <Grid RowDefinitions="50,*" ColumnDefinitions="4*,*">
