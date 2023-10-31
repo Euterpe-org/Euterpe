@@ -196,7 +196,7 @@
     <value>Adds a button to always show hidden difficulties.\nE.g. you don't need to spam click and such to unlock them before playing</value>
   </data>
   <data name="IntroSkip" xml:space="preserve">
-    <value>Skips past opening scene by speeding the game up.\nYou can configure the speed and whether to skip past the animated illustration.\nSpiritual successor of RobotLucca's one-liner</value>
+    <value>Skips past opening scene by speeding the game up.\nYou can configure the speed and whether to skip past the animated illustration.\nSpiritual successor of RobotLucca's mod</value>
   </data>
   <data name="KeybindManager" xml:space="preserve">
     <value>A library for other mods to parse and listen to keybinds</value>
