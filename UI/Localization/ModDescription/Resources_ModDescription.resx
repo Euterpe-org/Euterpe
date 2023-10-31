@@ -247,13 +247,13 @@
     <value>Allows charters (not players) to set custom scroll speeds.\nIt's completely up to you whether you wanna use this, most charters don't use it though.</value>
   </data>
   <data name="SearchPlusPlus" xml:space="preserve">
-    <value>Displays the title, artist, and difficulty of the song in the top-right corner during play.</value>
+    <value>Any search feature you will ever need (probably).\nOptional dependencies: KeybindManager, CustomAlbums</value>
   </data>
   <data name="Song Desc" xml:space="preserve">
-    <value>An extension to SearchPlusPlus, allowing you to create folders\nand search for songs in said folders.</value>
+    <value>Displays the title, artist, and difficulty of the song in the top-right corner during play.</value>
   </data>
   <data name="Search++ Folder Tag" xml:space="preserve">
-    <value>Any search feature you will ever need (probably).\nCheck the homepage or in-game forum for more info.</value>
+    <value>An extension to SearchPlusPlus, allowing you to create folders\nand search for songs in said folders.</value>
   </data>
   <data name="StricterJudge" xml:space="preserve">
     <value>A mod which changes the judgement window and make the game harder\nYou can manually change the judgement range in Stricter Judge.cfg</value>
