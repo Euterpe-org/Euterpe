@@ -109,7 +109,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Semi.Avalonia" Version="11.0.1"/>
-        <PackageReference Include="Serilog" Version="3.1.0-dev-02083"/>
+        <PackageReference Include="Serilog" Version="3.1.0-dev-02086" />
         <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0-dev-00923"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00968"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
