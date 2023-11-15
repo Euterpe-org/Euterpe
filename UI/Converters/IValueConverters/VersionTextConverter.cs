@@ -7,10 +7,15 @@ public class VersionTextConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not Mod mod) return string.Empty;
+        if (value is not Mod mod)
+        {
+            return string.Empty;
+        }
 
         if (mod.IsIncompatible)
+        {
             return string.Format(XAML_Mod_Incompatible, mod.Name, mod.Version);
+        }
 
         switch (mod.State)
         {

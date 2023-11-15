@@ -118,8 +118,14 @@ public partial class LogAnalyzeService : ILogAnalyzeService
     public async Task<string> LoadLogAsync()
     {
         if (!string.IsNullOrEmpty(SavingService.Settings.MelonLoaderFolder))
+        {
             LogPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");
-        if (!File.Exists(LogPath)) return MsgBox_Content_NoLogFile.NormalizeNewline();
+        }
+
+        if (!File.Exists(LogPath))
+        {
+            return MsgBox_Content_NoLogFile.NormalizeNewline();
+        }
 
         try
         {

@@ -36,12 +36,18 @@ public static class Bootstrapper
 
         // Platform Service
         if (OperatingSystem.IsWindows())
+        {
             builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+        }
         else if (OperatingSystem.IsLinux())
+        {
             builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+        }
         // for macos development
         else if (OperatingSystem.IsMacOS())
+        {
             builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+        }
 
         // View Models
         builder.RegisterType<AboutViewModel>().As<IAboutViewModel>().PropertiesAutowired().SingleInstance();

@@ -75,7 +75,10 @@ public partial class SavingService : ISavingService
     public async Task<bool> OnChooseGamePathAsync()
     {
         var path = await GetChosenPath();
-        if (!await CheckValidPath(path)) return false;
+        if (!await CheckValidPath(path))
+        {
+            return false;
+        }
 
         _logger.Information("User chose path {Path}", path);
         Settings.MuseDashFolder = path;

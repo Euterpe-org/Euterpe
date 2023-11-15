@@ -38,7 +38,10 @@ public partial class ModService : IModService
     public bool CompareVersion(string modName, string modVersion)
     {
         var webMod = _webMods?.Find(x => x.Name == modName);
-        if (webMod is null) return false;
+        if (webMod is null)
+        {
+            return false;
+        }
 
         var webModVersion = SemanticVersion.Parse(webMod.Version);
         var loadedModVersion = SemanticVersion.Parse(modVersion);
@@ -55,7 +58,11 @@ public partial class ModService : IModService
         await LocalService.CheckMelonLoaderInstallAsync();
 
         _webMods ??= await GitHubService.GetModListAsync();
-        if (_webMods is null) return;
+        if (_webMods is null)
+        {
+            return;
+        }
+
         var localPaths = LocalService.GetModFiles(SavingService.Settings.ModsFolder);
         try
         {
@@ -93,7 +100,11 @@ public partial class ModService : IModService
 
             var downloadedMod = LocalService.LoadMod(path)!;
             _webMods ??= await GitHubService.GetModListAsync();
-            if (_webMods is null) return;
+            if (_webMods is null)
+            {
+                return;
+            }
+
             var webMod = _webMods.Find(x => x.Name == downloadedMod.Name)!;
             downloadedMod.CloneOnlineInfo(webMod);
             CheckConfigFileExist(webMod);
@@ -129,7 +140,11 @@ public partial class ModService : IModService
         }
 
         var reinstall = await MessageBoxService.FormatWarningConfirmMessageBox(MsgBox_Content_ReinstallMod, item.Name);
-        if (!reinstall) return;
+        if (!reinstall)
+        {
+            return;
+        }
+
         Logger.Information("Reinstalling mod {Name}", item.Name);
         File.Delete(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
         await OnInstallModAsync(item);
@@ -144,7 +159,9 @@ public partial class ModService : IModService
                 var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DisableModConfirm,
                     SavingService.Settings.AskDisableDependenciesWhenDisabling);
                 if (!result)
+                {
                     return;
+                }
 
                 SettingsViewModel.DisableDependenciesWhenDisabling = (int)askType;
             }
@@ -186,7 +203,9 @@ public partial class ModService : IModService
             var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DeleteModConfirm,
                 SavingService.Settings.AskDisableDependenciesWhenDeleting);
             if (!result)
+            {
                 return;
+            }
 
             SettingsViewModel.DisableDependenciesWhenDeleting = (int)askType;
             File.Delete(path);

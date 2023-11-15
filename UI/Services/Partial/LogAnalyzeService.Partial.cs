@@ -9,7 +9,11 @@ public partial class LogAnalyzeService
     /// </summary>
     private void CheckHeadQuarterRegister()
     {
-        if (!HeadQuarterRegisterRegex().Match(LogContent).Success) return;
+        if (!HeadQuarterRegisterRegex().Match(LogContent).Success)
+        {
+            return;
+        }
+
         Logger.Information("Didn't register HQ, showing message box");
         LogErrorBuilder.AppendLine(MsgBox_Content_RegisterHQ);
     }
@@ -20,7 +24,10 @@ public partial class LogAnalyzeService
     private void CheckModVersion()
     {
         var modVersionMatches = ModVersionRegex().Matches(LogContent);
-        if (modVersionMatches.Count == 0) return;
+        if (modVersionMatches.Count == 0)
+        {
+            return;
+        }
 
         foreach (var mod in modVersionMatches.Select(x => x.Groups))
         {
@@ -28,7 +35,11 @@ public partial class LogAnalyzeService
             var modVersion = mod[2].Value;
 
             var outdated = ModService.CompareVersion(modName, modVersion);
-            if (!outdated) continue;
+            if (!outdated)
+            {
+                continue;
+            }
+
             LogErrorBuilder.AppendFormat(MsgBox_Content_OutdatedMod, modName).AppendLine();
             Logger.Information("Outdated Mod: {ModName}", modName);
         }

@@ -29,7 +29,11 @@ public partial class LocalizationService : ILocalizationService, INotifyProperty
 
     public void SetLanguage(string language)
     {
-        if (CultureInfo.CurrentUICulture.Name == language) return;
+        if (CultureInfo.CurrentUICulture.Name == language)
+        {
+            return;
+        }
+
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
         SavingService.Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));

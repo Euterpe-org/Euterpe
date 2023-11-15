@@ -14,7 +14,9 @@ public class TestLogger : ILogger
     {
         TestOutputHelper.WriteLine(logEvent.MessageTemplate.Render(logEvent.Properties, CultureInfo.InvariantCulture));
         if (logEvent.Exception is not null)
+        {
             TestOutputHelper.WriteLine(logEvent.Exception.ToString());
+        }
     }
 
     public void DebugOutput(string output)

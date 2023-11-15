@@ -16,10 +16,15 @@ public class VersionColourConverter : IValueConverter
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not Mod mod) return Default;
+        if (value is not Mod mod)
+        {
+            return Default;
+        }
 
         if (mod.IsIncompatible)
+        {
             return Red;
+        }
 
         return mod.State switch
         {

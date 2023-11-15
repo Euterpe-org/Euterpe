@@ -25,7 +25,11 @@ public class LinuxService : IPlatformService
     public bool GetGamePath(out string? folderPath)
     {
         folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
-        if (folderPath is null) return false;
+        if (folderPath is null)
+        {
+            return false;
+        }
+
         Logger.Information("Auto detected game path on Linux {Path}", folderPath);
         return true;
     }

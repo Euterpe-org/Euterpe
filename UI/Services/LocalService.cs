@@ -33,10 +33,16 @@ public partial class LocalService : ILocalService
     {
         var melonLoaderFolder = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MelonLoader");
         var versionFile = Path.Join(SavingService.Value.Settings.MuseDashFolder, "version.dll");
-        if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile)) return;
+        if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile))
+        {
+            return;
+        }
+
         var install = await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_InstallMelonLoader);
         if (install)
+        {
             await OnInstallMelonLoaderAsync();
+        }
     }
 
     public async Task CheckValidPathAsync()
@@ -46,7 +52,11 @@ public partial class LocalService : ILocalService
 
         try
         {
-            if (!await PlatformService.VerifyGameVersionAsync()) return;
+            if (!await PlatformService.VerifyGameVersionAsync())
+            {
+                return;
+            }
+
             await CreateFiles();
             IsValidPath = true;
             Logger.Information("Path verified {Path}", SavingService.Value.Settings.MuseDashFolder);
@@ -70,7 +80,10 @@ public partial class LocalService : ILocalService
         var updaterFilePath = PlatformService.GetUpdaterFilePath(currentDirectory);
         var updaterTargetPath = PlatformService.GetUpdaterFilePath(updaterTargetFolder);
 
-        if (!await CheckUpdaterFilesExist(updaterFilePath, updaterTargetFolder)) return false;
+        if (!await CheckUpdaterFilesExist(updaterFilePath, updaterTargetFolder))
+        {
+            return false;
+        }
 
         try
         {
@@ -97,12 +110,18 @@ public partial class LocalService : ILocalService
         mod.FileName = mod.IsDisabled ? Path.GetFileName(filePath)[..^9] : Path.GetFileName(filePath);
         var assembly = Assembly.Load(File.ReadAllBytes(filePath));
         var attribute = MelonUtils.PullAttributeFromAssembly<MelonInfoAttribute>(assembly);
-        if (attribute is null) return null;
+        if (attribute is null)
+        {
+            return null;
+        }
 
         mod.Name = attribute.Name;
         mod.LocalVersion = attribute.Version;
 
-        if (mod.Name == null || mod.LocalVersion == null) return null;
+        if (mod.Name == null || mod.LocalVersion == null)
+        {
+            return null;
+        }
 
         mod.Author = attribute.Author;
         mod.HomePage = attribute.DownloadLink;
@@ -113,7 +132,11 @@ public partial class LocalService : ILocalService
 
     public async Task OnInstallMelonLoaderAsync()
     {
-        if (!IsValidPath) return;
+        if (!IsValidPath)
+        {
+            return;
+        }
+
         Logger.Information("Showing MelonLoader download window...");
         await DialogHost.Show(DownloadWindowViewModel.Value, "DownloadWindowDialog",
             (object _, DialogOpenedEventArgs _) => DownloadWindowViewModel.Value.InstallMelonLoader());
@@ -121,8 +144,16 @@ public partial class LocalService : ILocalService
 
     public async Task OnUninstallMelonLoaderAsync()
     {
-        if (!IsValidPath) return;
-        if (!await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_UninstallMelonLoader)) return;
+        if (!IsValidPath)
+        {
+            return;
+        }
+
+        if (!await MessageBoxService.WarningConfirmMessageBox(MsgBox_Content_UninstallMelonLoader))
+        {
+            return;
+        }
+
         var versionFile = Path.Join(SavingService.Value.Settings.MuseDashFolder, "version.dll");
         var noticeTxt = Path.Join(SavingService.Value.Settings.MuseDashFolder, "NOTICE.txt");
 
@@ -153,9 +184,13 @@ public partial class LocalService : ILocalService
     {
         var launchArguments = new StringBuilder();
         if (!isModded)
+        {
             launchArguments.Append("//--no-mods");
+        }
         else if (!SavingService.Value.Settings.ShowConsole)
+        {
             launchArguments.Append("//--melonloader.hideconsole");
+        }
 
         Process.Start(new ProcessStartInfo
         {
@@ -240,7 +275,10 @@ public partial class LocalService : ILocalService
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
             assetsManager.LoadIncludedClassPackage();
             if (!instance.file.Metadata.TypeTreeEnabled)
+            {
                 assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
+            }
+
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
 
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)?.Get("bundleVersion").AsString!;

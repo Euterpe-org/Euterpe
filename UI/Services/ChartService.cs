@@ -28,7 +28,10 @@ public class ChartService : IChartService
         if (File.Exists(path))
         {
             var result = await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_OverrideChart, item.Name);
-            if (!result) return;
+            if (!result)
+            {
+                return;
+            }
         }
 
         await GitHubService.DownloadChartAsync(item.Id, path);
@@ -41,7 +44,9 @@ public class ChartService : IChartService
         _charts = charts;
 
         if (!Directory.Exists(SavingService.Settings.CustomAlbumsFolder))
+        {
             Directory.CreateDirectory(SavingService.Settings.CustomAlbumsFolder);
+        }
 
         var webCharts = await GitHubService.GetChartListAsync();
         _sourceCache.AddOrUpdate(webCharts!);

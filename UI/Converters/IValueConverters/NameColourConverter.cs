@@ -12,9 +12,21 @@ public class NameColourConverter : IValueConverter
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not Mod mod) return Default;
-        if (mod.IsDuplicated) return Cyan;
-        if (mod.IsIncompatible) return Red;
+        if (value is not Mod mod)
+        {
+            return Default;
+        }
+
+        if (mod.IsDuplicated)
+        {
+            return Cyan;
+        }
+
+        if (mod.IsIncompatible)
+        {
+            return Red;
+        }
+
         return Default;
     }
 

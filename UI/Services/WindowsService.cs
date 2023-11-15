@@ -39,7 +39,11 @@ public class WindowsService : IPlatformService
 
         if (folderPath is null)
         {
-            if (!GetPathFromRegistry(out folderPath)) return false;
+            if (!GetPathFromRegistry(out folderPath))
+            {
+                return false;
+            }
+
             Logger.Information("Auto detected game path from Registry {Path}", folderPath);
             return true;
         }
@@ -79,7 +83,10 @@ public class WindowsService : IPlatformService
     {
         folderPath = string.Empty;
         if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null) is not string steamPath)
+        {
             return false;
+        }
+
         folderPath = Path.Combine(steamPath, "steamapps", "common", "Muse Dash");
         return Directory.Exists(folderPath);
     }

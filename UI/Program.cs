@@ -20,7 +20,11 @@ internal static class Program
     {
         // Prevent multiple launch
         using var mutex = new Mutex(true, "MuseDashModTools");
-        if (!mutex.WaitOne(TimeSpan.Zero, true)) return;
+        if (!mutex.WaitOne(TimeSpan.Zero, true))
+        {
+            return;
+        }
+
         CreateLogger();
         DeleteUnusedLogFile();
         RegisterDependencies();

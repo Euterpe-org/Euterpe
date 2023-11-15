@@ -24,7 +24,10 @@ public partial class SavingService
     /// <returns>Is continue</returns>
     private async Task<bool> CheckValidPath(string? path)
     {
-        if (path is not null) return true;
+        if (path is not null)
+        {
+            return true;
+        }
 
         if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
         {
@@ -59,9 +62,14 @@ public partial class SavingService
     private void CreateSavingFolders()
     {
         if (!Directory.Exists(ConfigFolderPath))
+        {
             Directory.CreateDirectory(ConfigFolderPath);
+        }
+
         if (!Directory.Exists(ChartFolderPath))
+        {
             Directory.CreateDirectory(ChartFolderPath);
+        }
     }
 
     /// <summary>
@@ -71,7 +79,10 @@ public partial class SavingService
     {
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
         var updaterPath = _platformService.GetUpdaterFilePath(updateDirectory);
-        if (!_fileSystem.File.Exists(updaterPath)) return;
+        if (!_fileSystem.File.Exists(updaterPath))
+        {
+            return;
+        }
 
         _fileSystem.File.Delete(updaterPath);
         _fileSystem.Directory.Delete(updateDirectory);
@@ -86,7 +97,11 @@ public partial class SavingService
     {
         while (true)
         {
-            if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime) continue;
+            if (Application.Current!.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime)
+            {
+                continue;
+            }
+
             _logger.Information("Showing choose folder dialogue");
 
             return await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder);
@@ -117,13 +132,19 @@ public partial class SavingService
 
         var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
         var settings = JsonNode.Parse(text);
-        if (settings is null) return;
+        if (settings is null)
+        {
+            return;
+        }
 
         Settings.MuseDashFolder = settings["MuseDashFolder"]?.ToString();
         Settings.LanguageCode = settings["LanguageCode"]?.ToString() ?? CultureInfo.CurrentUICulture.ToString();
         Settings.FontName = settings["FontName"]?.ToString() ?? FontManageService.DefaultFont;
         if (SemanticVersion.TryParse(settings["SkipVersion"]?.ToString()!, out var version))
+        {
             Settings.SkipVersion = version;
+        }
+
         Settings.DownloadSource = Enum.Parse<DownloadSources>(settings["DownloadSource"]?.ToString()!);
         Settings.DownloadPrerelease = bool.Parse(settings["DownloadPrerelease"]?.ToString()!);
         Settings.CustomDownloadSource = settings["CustomDownloadSource"]?.ToString();
@@ -174,7 +195,11 @@ public partial class SavingService
     {
         _logger.Information("Trying auto detect game path...");
 
-        if (!_platformService.GetGamePath(out var folderPath)) return false;
+        if (!_platformService.GetGamePath(out var folderPath))
+        {
+            return false;
+        }
+
         await ConfirmPath(folderPath!);
         return true;
     }

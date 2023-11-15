@@ -29,15 +29,25 @@ public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowVie
         {
             var onlineSize = await GitHubService.GetMelonLoaderFileSizeAsync();
             var zipInfo = new FileInfo(SavingService.Settings.MelonLoaderZipPath);
-            if (onlineSize > zipInfo.Length && !await DownloadMelonLoaderZipFile()) return;
+            if (onlineSize > zipInfo.Length && !await DownloadMelonLoaderZipFile())
+            {
+                return;
+            }
         }
         else if (!await DownloadMelonLoaderZipFile())
         {
             return;
         }
 
-        if (!await ExtractMelonLoaderZipFile()) return;
-        if (!await DeleteMelonLoaderZipFile()) return;
+        if (!await ExtractMelonLoaderZipFile())
+        {
+            return;
+        }
+
+        if (!await DeleteMelonLoaderZipFile())
+        {
+            return;
+        }
 
         Logger.Information("MelonLoader install success");
         await MessageBoxService.SuccessMessageBox(MsgBox_Content_InstallMelonLoaderSuccess);

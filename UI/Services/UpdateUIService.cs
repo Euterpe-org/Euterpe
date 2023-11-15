@@ -39,7 +39,10 @@ public partial class UpdateUIService : IUpdateUIService
     public void ChangeTheme(string themeName)
     {
         var app = Application.Current;
-        if (app is null) return;
+        if (app is null)
+        {
+            return;
+        }
 
         app.RequestedThemeVariant = themeName switch
         {

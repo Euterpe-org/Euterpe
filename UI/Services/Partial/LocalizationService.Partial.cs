@@ -25,7 +25,9 @@ public partial class LocalizationService
 
             var rs = rm.GetResourceSet(culture, true, false);
             if (rs != null)
+            {
                 AvailableLanguages.Add(new Language(culture));
+            }
         }
 
         _logger.Information("Available languages loaded: {AvailableLanguages}",

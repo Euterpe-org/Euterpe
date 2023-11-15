@@ -18,9 +18,14 @@ else
     Console.ReadKey();
 
     if (OperatingSystem.IsWindows())
+    {
         Process.Start(Path.Combine(args[1], "MuseDashModTools.exe"));
+    }
+
     if (OperatingSystem.IsLinux())
+    {
         Process.Start(Path.Combine(args[1], "MuseDashModTools"));
+    }
 }
 
 return;

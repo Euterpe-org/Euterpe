@@ -68,14 +68,24 @@ public partial class GitHubService : IGitHubService
             var release = SavingService.Value.Settings.DownloadPrerelease ? releases![0] : releases!.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
-            if (version is null || await SkipVersionCheck(version, BuildInfo.Version, isUserClick)) return;
+            if (version is null || await SkipVersionCheck(version, BuildInfo.Version, isUserClick))
+            {
+                return;
+            }
 
             var title = release.Name;
             var body = release.Body;
-            if (!await UpdateRequired(release.TagName, title, body)) return;
+            if (!await UpdateRequired(release.TagName, title, body))
+            {
+                return;
+            }
 
             var link = GetDownloadLink(release.Assets);
-            if (!await LocalService.Value.LaunchUpdaterAsync(link)) return;
+            if (!await LocalService.Value.LaunchUpdaterAsync(link))
+            {
+                return;
+            }
+
             Logger.Information("Launch updater success, exit...");
             Environment.Exit(0);
         }
@@ -107,19 +117,33 @@ public partial class GitHubService : IGitHubService
     {
         var defaultDownloadSource = DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
         var result = await DownloadModFromSourceAsync(defaultDownloadSource, link, path);
-        if (result is not null) return;
+        if (result is not null)
+        {
+            return;
+        }
 
         foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
         {
             result = await DownloadModFromSourceAsync(pair.Value, link, path);
-            if (result is not null) return;
+            if (result is not null)
+            {
+                return;
+            }
         }
     }
 
     public async Task<bool> DownloadMelonLoaderAsync(IProgress<double> downloadProgress)
     {
-        if (_melonLoaderResponseMessage is null) await GetMelonLoaderResponseMessage();
-        if (_melonLoaderResponseMessage is null) return false;
+        if (_melonLoaderResponseMessage is null)
+        {
+            await GetMelonLoaderResponseMessage();
+        }
+
+        if (_melonLoaderResponseMessage is null)
+        {
+            return false;
+        }
+
         return await DownloadMelonLoaderFromSourceAsync(downloadProgress);
     }
 
@@ -148,19 +172,28 @@ public partial class GitHubService : IGitHubService
     public async Task<List<Mod>?> GetModListAsync()
     {
         var mods = await GetModListFromSourceAsync(DefaultDownloadSource);
-        if (mods is not null) return mods;
+        if (mods is not null)
+        {
+            return mods;
+        }
 
         foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
         {
             mods = await GetModListFromSourceAsync(pair.Value);
-            if (mods is not null) return mods;
+            if (mods is not null)
+            {
+                return mods;
+            }
         }
 
         if (File.Exists(SavingService.Value.ModLinksPath))
         {
             Logger.Information("Get mod list from online source failed, deserializing local mod list");
             mods = SerializationService.DeserializeModList();
-            if (mods is not null) return mods;
+            if (mods is not null)
+            {
+                return mods;
+            }
         }
 
         Logger.Error("Failed to get working mod list from any source");

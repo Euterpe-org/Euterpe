@@ -41,7 +41,10 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     public void Initialize()
     {
         if (SavingService.Settings.LanguageCode is not null)
+        {
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(SavingService.Settings.LanguageCode);
+        }
+
         AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
         DownloadSources = new[]
             { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee, XAML_DownloadSource_Custom };
@@ -70,7 +73,11 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     private async Task OnChooseGamePathAsync()
     {
         Logger.Information("Choose path button clicked");
-        if (!await SavingService.OnChooseGamePathAsync()) return;
+        if (!await SavingService.OnChooseGamePathAsync())
+        {
+            return;
+        }
+
         UpdatePath();
         await UpdateUIService.InitializeTabsOnChoosePathAsync();
     }
@@ -83,7 +90,9 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     partial void OnCurrentDownloadSourceChanged(int value)
     {
         if (value != -1)
+        {
             SavingService.Settings.DownloadSource = (DownloadSources)value;
+        }
 
         IsUsingCustomDownloadSource = value == 3;
     }
@@ -92,28 +101,36 @@ public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
     partial void OnEnableDependenciesWhenInstallingChanged(int value)
     {
         if (value != -1)
+        {
             SavingService.Settings.AskEnableDependenciesWhenInstalling = (AskType)value;
+        }
     }
 
     [UsedImplicitly]
     partial void OnEnableDependenciesWhenEnablingChanged(int value)
     {
         if (value != -1)
+        {
             SavingService.Settings.AskEnableDependenciesWhenEnabling = (AskType)value;
+        }
     }
 
     [UsedImplicitly]
     partial void OnDisableDependenciesWhenDeletingChanged(int value)
     {
         if (value != -1)
+        {
             SavingService.Settings.AskDisableDependenciesWhenDeleting = (AskType)value;
+        }
     }
 
     [UsedImplicitly]
     partial void OnDisableDependenciesWhenDisablingChanged(int value)
     {
         if (value != -1)
+        {
             SavingService.Settings.AskDisableDependenciesWhenDisabling = (AskType)value;
+        }
     }
 
     [UsedImplicitly]

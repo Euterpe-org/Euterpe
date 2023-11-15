@@ -15,7 +15,9 @@ public static class StreamReaderExtensions
     public async static Task<string?[]> ReadLineAsync(this StreamReader streamReader, int startLine, int endLine)
     {
         if (startLine > endLine || startLine < 0)
+        {
             throw new ArgumentException("startLine must be less than or equal to endLine and non-negative");
+        }
 
         var lines = new List<string?>();
 
@@ -27,7 +29,10 @@ public static class StreamReaderExtensions
         for (var i = startLine; i <= endLine; i++)
         {
             var line = await streamReader.ReadLineAsync();
-            if (line is null) break;
+            if (line is null)
+            {
+                break;
+            }
 
             lines.Add(line);
         }

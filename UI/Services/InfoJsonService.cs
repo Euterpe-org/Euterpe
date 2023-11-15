@@ -41,7 +41,10 @@ public partial class InfoJsonService : IInfoJsonService
         foreach (var bmsFile in bmsFiles)
         {
             var match = MapRegex().Match(bmsFile);
-            if (!match.Success) continue;
+            if (!match.Success)
+            {
+                continue;
+            }
 
             var mapinfo = await ParseMapInfo(bmsFile);
             FillInfoJson(match.Groups[1].Value, mapinfo);

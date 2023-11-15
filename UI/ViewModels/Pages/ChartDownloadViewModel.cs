@@ -28,7 +28,7 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     {
         _sourceCache.Connect().Filter(x => string.IsNullOrEmpty(Filter) ||
                                            x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
-                                           x.Author.Contains((string)Filter, StringComparison.OrdinalIgnoreCase) ||
+                                           x.Author.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
                                            x.Charter.Contains((string)Filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Easy) || x.HasEasy)
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Hard) || x.HasHard)
@@ -70,9 +70,13 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     private void FilterBy(ChartFilterType filterType)
     {
         if (CategoryChartFilterTypes.Contains(filterType))
+        {
             CategoryChartFilterTypes.Remove(filterType);
+        }
         else
+        {
             CategoryChartFilterTypes.Add(filterType);
+        }
 
         _sourceCache.Refresh();
     }
@@ -80,7 +84,11 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
     [UsedImplicitly]
     partial void OnCurrentSortOptionIndexChanged(int value)
     {
-        if (value == -1) return;
+        if (value == -1)
+        {
+            return;
+        }
+
         SortOption = (ChartSortOptions)value;
         _sourceCache.Refresh();
     }

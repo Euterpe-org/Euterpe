@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>Updater</AssemblyName>
@@ -21,7 +21,7 @@
 
     <ItemGroup>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>
-        <PackageReference Include="Spectre.Console" Version="0.47.1-preview.0.27"/>
+        <PackageReference Include="Spectre.Console" Version="0.47.1-preview.0.38"/>
     </ItemGroup>
 
 </Project>

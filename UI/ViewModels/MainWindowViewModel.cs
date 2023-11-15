@@ -22,7 +22,9 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _updateUIService = context.Resolve<IUpdateUIService>();
 
         if (_savingService.Settings.LanguageCode is not null)
+        {
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);
+        }
 
 #if !DEBUG
         context.Resolve<IGitHubService>().CheckUpdates();

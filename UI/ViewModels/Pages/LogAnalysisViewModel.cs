@@ -27,8 +27,16 @@ public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
     private async Task AnalyzeLogAsync()
     {
         Logger.Information("Log Analysis Started...");
-        if (await LogAnalyzeService.CheckPirateAsync()) return;
-        if (!await LogAnalyzeService.CheckMelonLoaderVersionAsync()) return;
+        if (await LogAnalyzeService.CheckPirateAsync())
+        {
+            return;
+        }
+
+        if (!await LogAnalyzeService.CheckMelonLoaderVersionAsync())
+        {
+            return;
+        }
+
         await LogAnalyzeService.AnalyzeLogAsync();
     }
 

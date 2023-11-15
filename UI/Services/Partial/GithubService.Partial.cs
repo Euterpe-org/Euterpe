@@ -76,7 +76,10 @@ public partial class GitHubService
             while ((length = await contentStream.ReadAsync(buffer.AsMemory(0, buffer.Length), CancellationToken.None)) != 0)
             {
                 readLength += length;
-                if (totalLength > 0) downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
+                if (totalLength > 0)
+                {
+                    downloadProgress.Report(Math.Round((double)readLength / totalLength.Value * 100, 2));
+                }
 
                 fs.Write(buffer, 0, length);
             }
@@ -160,12 +163,18 @@ public partial class GitHubService
     private async Task GetMelonLoaderResponseMessage()
     {
         await GetMelonLoaderResponseFromSource(DefaultDownloadSource);
-        if (_melonLoaderResponseMessage is not null) return;
+        if (_melonLoaderResponseMessage is not null)
+        {
+            return;
+        }
 
         foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
         {
             await GetMelonLoaderResponseFromSource(pair.Value);
-            if (_melonLoaderResponseMessage is not null) return;
+            if (_melonLoaderResponseMessage is not null)
+            {
+                return;
+            }
         }
     }
 
@@ -198,8 +207,16 @@ public partial class GitHubService
     private SemanticVersion? GetVersionFromTag(string tagName)
     {
         var tag = VersionRegex().Match(tagName);
-        if (!tag.Success) return null;
-        if (!SemanticVersion.TryParse(tag.Groups[1].Value, out var version)) return null;
+        if (!tag.Success)
+        {
+            return null;
+        }
+
+        if (!SemanticVersion.TryParse(tag.Groups[1].Value, out var version))
+        {
+            return null;
+        }
+
         Logger.Information("Get latest version success: {Version}", version);
         return version;
     }
@@ -215,8 +232,16 @@ public partial class GitHubService
     private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool isUserClick)
     {
         var current = SemanticVersion.Parse(currentVersion);
-        if (!isUserClick) return version == SavingService.Value.Settings.SkipVersion || version <= current;
-        if (version > current) return false;
+        if (!isUserClick)
+        {
+            return version == SavingService.Value.Settings.SkipVersion || version <= current;
+        }
+
+        if (version > current)
+        {
+            return false;
+        }
+
         await MessageBoxService.SuccessMessageBox(MsgBox_Content_LatestVersion);
         return true;
     }

@@ -45,7 +45,11 @@ public partial class Mod : ObservableObject
     {
         get
         {
-            if (GameVersion is null) return string.Empty;
+            if (GameVersion is null)
+            {
+                return string.Empty;
+            }
+
             return GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
         }
     }

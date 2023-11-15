@@ -7,7 +7,11 @@ public class ChartSceneConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not string scene) return value;
+        if (value is not string scene)
+        {
+            return value;
+        }
+
         return scene switch
         {
             "scene_01" => XAML_Scene_SpaceStation,

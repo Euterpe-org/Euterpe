@@ -12,9 +12,21 @@ public class UninstallConverter : IValueConverter
 
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not Mod mod) return Default;
-        if (mod.IsIncompatible) return Red;
-        if (mod.IsDuplicated) return Cyan;
+        if (value is not Mod mod)
+        {
+            return Default;
+        }
+
+        if (mod.IsIncompatible)
+        {
+            return Red;
+        }
+
+        if (mod.IsDuplicated)
+        {
+            return Cyan;
+        }
+
         return Default;
     }
 

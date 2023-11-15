@@ -27,7 +27,11 @@ public partial class FontManageService : IFontManageService, INotifyPropertyChan
 
     public void SetFont(string fontName)
     {
-        if (SavingService.Settings.FontName == fontName) return;
+        if (SavingService.Settings.FontName == fontName)
+        {
+            return;
+        }
+
         SavingService.Settings.FontName = fontName;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
