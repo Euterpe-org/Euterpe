@@ -4,23 +4,16 @@ using Serilog.Events;
 
 namespace MuseDashModToolsUI.Test;
 
-public class TestLogger : ILogger
+public class TestLogger(ITestOutputHelper testOutputHelper) : ILogger
 {
-    private ITestOutputHelper TestOutputHelper { get; }
-
-    public TestLogger(ITestOutputHelper testOutputHelper) => TestOutputHelper = testOutputHelper;
-
     public void Write(LogEvent logEvent)
     {
-        TestOutputHelper.WriteLine(logEvent.MessageTemplate.Render(logEvent.Properties, CultureInfo.InvariantCulture));
+        testOutputHelper.WriteLine(logEvent.MessageTemplate.Render(logEvent.Properties, CultureInfo.InvariantCulture));
         if (logEvent.Exception is not null)
         {
-            TestOutputHelper.WriteLine(logEvent.Exception.ToString());
+            testOutputHelper.WriteLine(logEvent.Exception.ToString());
         }
     }
 
-    public void DebugOutput(string output)
-    {
-        TestOutputHelper.WriteLine(output);
-    }
+    public void DebugOutput(string output) => testOutputHelper.WriteLine(output);
 }

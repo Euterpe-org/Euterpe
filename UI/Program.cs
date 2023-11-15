@@ -70,7 +70,7 @@ internal static class Program
     private static void DeleteUnusedLogFile()
     {
         var logs = Directory.GetFiles("Logs", "*.log").OrderDescending().Skip(60);
-        Parallel.ForEachAsync(logs, async (log, c) => { await Task.Run(() => File.Delete(log), c); });
+        Parallel.ForEachAsync(logs, async (log, c) => await Task.Run(() => File.Delete(log), c));
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
