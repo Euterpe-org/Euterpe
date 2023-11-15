@@ -19,7 +19,7 @@ public partial class GitHubService : IGitHubService
 
     // ModLinks
     private const string PrimaryLink = "https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
-    private const string SecondaryLink = "https://ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
+    private const string SecondaryLink = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/MDModsDev/ModLinks/main/";
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
     private HttpResponseMessage? _melonLoaderResponseMessage;

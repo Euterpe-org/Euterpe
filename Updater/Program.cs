@@ -45,7 +45,7 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
         }
         catch
         {
-            result = await httpClient.GetAsync("https://ghproxy.com/" + downloadArgs[0], HttpCompletionOption.ResponseHeadersRead);
+            result = await httpClient.GetAsync("https://mirror.ghproxy.com/" + downloadArgs[0], HttpCompletionOption.ResponseHeadersRead);
         }
     }
 
