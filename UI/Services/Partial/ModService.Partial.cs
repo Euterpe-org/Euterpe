@@ -124,7 +124,6 @@ public partial class ModService
             return;
         }
 
-        Logger.Debug(localMod.Name + " " + localMod.ConfigFile);
         var configFile = Path.Join(SavingService.Settings.UserDataFolder, localMod.ConfigFile);
         localMod.IsValidConfigFile = File.Exists(configFile);
     }

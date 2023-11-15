@@ -29,7 +29,7 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
         _sourceCache.Connect().Filter(x => string.IsNullOrEmpty(Filter) ||
                                            x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
                                            x.Author.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
-                                           x.Charter.Contains((string)Filter, StringComparison.OrdinalIgnoreCase))
+                                           x.Charter.Contains(Filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Easy) || x.HasEasy)
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Hard) || x.HasHard)
             .Filter(x => !CategoryChartFilterTypes.Contains(ChartFilterType.Master) || x.HasMaster)

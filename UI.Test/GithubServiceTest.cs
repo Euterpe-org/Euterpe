@@ -3,18 +3,9 @@ using RichardSzalay.MockHttp;
 
 namespace MuseDashModToolsUI.Test;
 
-public class GithubServiceTest
+public class GithubServiceTest(ITestOutputHelper testOutputHelper)
 {
-    private const string LatestReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
-
-    private const string LatestReleaseInfo = """
-                                             {
-                                              "tag_name": "v1.10.0-rc1",
-                                              "name": "Test",
-                                              "body": "Test"
-                                             }
-                                             """;
 
     private const string ReleaseInfo = """
                                        [
@@ -26,20 +17,13 @@ public class GithubServiceTest
                                        ]
                                        """;
 
-    private readonly MockHttpMessageHandler _client;
+    private readonly MockHttpMessageHandler _client = new();
 
-    private readonly TestLogger _logger;
-
-    public GithubServiceTest(ITestOutputHelper testOutputHelper)
-    {
-        _client = new MockHttpMessageHandler();
-        _logger = new TestLogger(testOutputHelper);
-    }
+    private readonly TestLogger _logger = new(testOutputHelper);
 
     [Fact]
     public async Task VersionTest()
     {
-        _client.When(LatestReleaseInfoLink).Respond("application/json", LatestReleaseInfo);
         _client.When(ReleaseInfoLink).Respond("application/json", ReleaseInfo);
         var mockSavingService = new Mock<ISavingService>();
         var mockSettings = new Setting();

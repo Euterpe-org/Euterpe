@@ -3,7 +3,7 @@ using System.IO.Abstractions;
 
 namespace MuseDashModToolsUI.Test;
 
-public class SavingServiceTest
+public class SavingServiceTest(ITestOutputHelper testOutputHelper)
 {
     private const string SettingJson = """
                                        {
@@ -13,6 +13,9 @@ public class SavingServiceTest
                                         "SkipVersion": null,
                                         "DownloadPrerelease": false,
                                         "DownloadSource": 0,
+                                        "CustomDownloadSource": null,
+                                        "Theme": "Light",
+                                        "ShowConsole": false,
                                         "AskInstallMuseDashModTools": 0,
                                         "AskEnableDependenciesWhenInstalling": 0,
                                         "AskEnableDependenciesWhenEnabling": 0,
@@ -21,9 +24,7 @@ public class SavingServiceTest
                                        }
                                        """;
 
-    private readonly TestLogger _logger;
-
-    public SavingServiceTest(ITestOutputHelper testOutputHelper) => _logger = new TestLogger(testOutputHelper);
+    private readonly TestLogger _logger = new(testOutputHelper);
 
     [Fact]
     public async Task NullSettingTest()
