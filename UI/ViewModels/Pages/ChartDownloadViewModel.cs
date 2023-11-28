@@ -43,12 +43,12 @@ public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewM
 
     public async Task Initialize()
     {
-        SortOptions = new[]
-        {
+        SortOptions =
+        [
             XAML_ChartSortOption_Default, XAML_ChartSortOption_Name,
             XAML_ChartSortOption_Downloads, XAML_ChartSortOption_Likes,
             XAML_ChartSortOption_Level, XAML_ChartSortOption_Latest
-        };
+        ];
         await ChartService.InitializeChartList(_sourceCache, Charts);
         Logger.Information("Chart Download Window Initialized");
     }

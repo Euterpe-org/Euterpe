@@ -12,7 +12,7 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
     private readonly IUpdateUIService _updateUIService;
     [ObservableProperty] private ViewModelBase _content;
     [ObservableProperty] private int _selectedTabIndex;
-    [ObservableProperty] private List<TabView> _tabs = new();
+    [ObservableProperty] private List<TabView> _tabs = [];
     public static string Version => BuildInfo.Version;
 
     public MainWindowViewModel(IComponentContext context)
@@ -42,5 +42,5 @@ public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _logger.Information("Change Theme to {Theme}", targetTheme);
     }
 
-    private void OnExit(object sender, EventArgs e) => _savingService.SaveAsync().Wait();
+    private async void OnExit(object sender, EventArgs e) => await _savingService.SaveAsync();
 }

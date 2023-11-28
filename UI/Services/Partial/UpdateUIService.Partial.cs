@@ -7,15 +7,15 @@ public partial class UpdateUIService
     /// </summary>
     private void ChangeOptionName()
     {
-        SettingsViewModel.Value.AskTypes = new[] { XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No };
-        SettingsViewModel.Value.DownloadSources = new[]
-            { XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee, XAML_DownloadSource_Custom };
-        ChartDownloadViewModel.Value.SortOptions = new[]
-        {
+        SettingsViewModel.Value.AskTypes = [XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No];
+        SettingsViewModel.Value.DownloadSources =
+            [XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee, XAML_DownloadSource_Custom];
+        ChartDownloadViewModel.Value.SortOptions =
+        [
             XAML_ChartSortOption_Default, XAML_ChartSortOption_Name,
             XAML_ChartSortOption_Downloads, XAML_ChartSortOption_Likes,
             XAML_ChartSortOption_Level, XAML_ChartSortOption_Latest
-        };
+        ];
     }
 
     /// <summary>
