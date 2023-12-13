@@ -16,7 +16,7 @@ public class WindowsService : IPlatformService
             @"Program Files (x86)\Steam\steamapps\common\Muse Dash",
             @"Program Files\SteamLibrary\steamapps\common\Muse Dash",
             @"Program Files (x86)\SteamLibrary\steamapps\common\Muse Dash",
-            @"Steam/steamapps\common\Muse Dash",
+            @"Steam\steamapps\common\Muse Dash",
             @"SteamLibrary\steamapps\common\Muse Dash"
         }
         .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToImmutableList();
@@ -35,7 +35,7 @@ public class WindowsService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool GetGamePath(out string? folderPath)
     {
-        folderPath = WindowsPaths.FirstOrDefault(Directory.Exists);
+        folderPath = WindowsPaths.Find(Directory.Exists);
 
         if (folderPath is null)
         {
