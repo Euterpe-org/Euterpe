@@ -3,6 +3,12 @@
 public interface ILocalService
 {
     /// <summary>
+    ///     Check DotNet Runtime Install
+    /// </summary>
+    /// <returns></returns>
+    Task CheckDotNetRuntimeInstallAsync();
+
+    /// <summary>
     ///     Check MelonLoader Install
     /// </summary>
     Task CheckMelonLoaderInstallAsync();

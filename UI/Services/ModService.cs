@@ -55,6 +55,7 @@ public partial class ModService : IModService
         _sourceCache = sourceCache;
         _mods = mods;
         _currentGameVersion = await LocalService.ReadGameVersionAsync();
+        await LocalService.CheckDotNetRuntimeInstallAsync();
         await LocalService.CheckMelonLoaderInstallAsync();
 
         _webMods ??= await GitHubService.GetModListAsync();

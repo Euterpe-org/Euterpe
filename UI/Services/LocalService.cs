@@ -29,6 +29,27 @@ public partial class LocalService : ILocalService
 
     private bool IsValidPath { get; set; }
 
+    public async Task CheckDotNetRuntimeInstallAsync()
+    {
+        var process = Process.Start(new ProcessStartInfo
+        {
+            FileName = "dotnet",
+            Arguments = "--list-runtimes",
+            RedirectStandardOutput = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        });
+
+        await process?.WaitForExitAsync()!;
+        var output = await process.StandardOutput.ReadToEndAsync();
+
+        if (!DotNetRuntimeRegex().Match(output).Success)
+        {
+            Logger.Information("DotNet Runtime not found, showing error message box...");
+            await MessageBoxService.ErrorMessageBox(MsgBox_Content_DotNetRuntimeNotFound);
+        }
+    }
+
     public async Task CheckMelonLoaderInstallAsync()
     {
         var melonLoaderFolder = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MelonLoader");

@@ -204,6 +204,15 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string MsgBox_Content_DotNetRuntimeNotFound {
+            get {
+                return ResourceManager.GetString("MsgBox_Content_DotNetRuntimeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chart download failed\n{0}.
         /// </summary>
         internal static string MsgBox_Content_DownloadChartFailed {

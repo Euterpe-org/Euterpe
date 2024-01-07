@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -27,6 +28,9 @@ public partial class LocalService
 
         return true;
     }
+
+    [GeneratedRegex("Microsoft.WindowsDesktop.App 6.")]
+    private static partial Regex DotNetRuntimeRegex();
 
     #region CheckValidPath Private Methods
 

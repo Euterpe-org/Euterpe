@@ -227,4 +227,7 @@
     <data name="MsgBox_Content_NoBmsFile" xml:space="preserve">
         <value>No charts found in the folder</value>
     </data>
+    <data name="MsgBox_Content_DotNetRuntimeNotFound" xml:space="preserve">
+        <value/>
+    </data>
 </root>
