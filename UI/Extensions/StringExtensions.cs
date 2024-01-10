@@ -7,11 +7,12 @@ namespace MuseDashModToolsUI.Extensions;
 public static class StringExtensions
 {
     /// <summary>
-    ///     Convert string to IBrush
+    ///     Using span and IndexOf to check whether string contains value, slightly faster than Contains
     /// </summary>
     /// <param name="str"></param>
+    /// <param name="value"></param>
     /// <returns></returns>
-    public static IBrush ToBrush(this string str) => (IBrush)new BrushConverter().ConvertFromString(str)!;
+    public static bool ContainsString(this string str, string value) => str.AsSpan().IndexOf(value.AsSpan(), StringComparison.Ordinal) != -1;
 
     /// <summary>
     ///     Replace "\\n" with "\n" to normalize newline
@@ -19,6 +20,13 @@ public static class StringExtensions
     /// <param name="str"></param>
     /// <returns></returns>
     public static string NormalizeNewline(this string str) => str.Replace("\\n", "\n");
+
+    /// <summary>
+    ///     Parse level from string
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static int ParseLevel(this string str) => !int.TryParse(str, out var level) ? 0 : level;
 
     /// <summary>
     ///     Remove invalid chars for file names from string
@@ -33,9 +41,9 @@ public static class StringExtensions
     }
 
     /// <summary>
-    ///     Parse level from string
+    ///     Convert string to IBrush
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    public static int ParseLevel(this string str) => !int.TryParse(str, out var level) ? 0 : level;
+    public static IBrush ToBrush(this string str) => (IBrush)new BrushConverter().ConvertFromString(str)!;
 }

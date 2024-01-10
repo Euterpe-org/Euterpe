@@ -9,7 +9,7 @@ public sealed partial class LogAnalyzeService
     /// </summary>
     private void CheckHeadQuarterRegister()
     {
-        if (!HeadQuarterRegisterRegex().Match(LogContent).Success)
+        if (!LogContent.ContainsString("You have not registered for Headquarters"))
         {
             return;
         }
@@ -68,7 +68,4 @@ public sealed partial class LogAnalyzeService
 
     [GeneratedRegex(@"\b(?!MelonLoader\b)([\w\s]+) v(\d+\.\d+\.\d+)", RegexOptions.Multiline)]
     private static partial Regex ModVersionRegex();
-
-    [GeneratedRegex("You have not registered for Headquarters", RegexOptions.Multiline)]
-    private static partial Regex HeadQuarterRegisterRegex();
 }

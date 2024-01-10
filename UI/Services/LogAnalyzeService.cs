@@ -47,7 +47,7 @@ public sealed partial class LogAnalyzeService : ILogAnalyzeService
 
     public async Task<bool> CheckPirateAsync()
     {
-        if (!LogContent.Contains("ApplicationPath"))
+        if (!LogContent.ContainsString("ApplicationPath"))
         {
             await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoApplicationPath);
             return true;
@@ -75,7 +75,7 @@ public sealed partial class LogAnalyzeService : ILogAnalyzeService
         var kv = KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
         var data = kv.Deserialize<AppState>(stream);
 
-        if (data.Appid != 774171 || data.Name != "Muse Dash" || data.InstalledDepots.Keys.All(x => x != 774172))
+        if (data is not { Appid: 774171, Name: "Muse Dash" } || data.InstalledDepots.Keys.All(x => x != 774172))
         {
             await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoInstallRecord);
             Logger.Information("Cannot find Muse Dash download record in file");
