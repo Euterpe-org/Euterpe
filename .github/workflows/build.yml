@@ -65,14 +65,14 @@ jobs:
 
       - name: Upload Artifact on Windows
         if: matrix.target-os == 'windows-latest'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MuseDashModToolsUI-${{ matrix.build-type }}-Windows-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-${{ matrix.self-contained && 'self-contained' || 'runtime-required' }}
           path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/win-${{ matrix.target-arch }}/publish/*
 
       - name: Upload Artifact on Linux
         if: matrix.target-os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MuseDashModToolsUI-${{ matrix.build-type }}-Linux-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-${{ matrix.self-contained && 'self-contained' || 'runtime-required' }}
           path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
