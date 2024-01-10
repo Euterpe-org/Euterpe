@@ -3,7 +3,7 @@ using Avalonia.Data.Converters;
 
 namespace MuseDashModToolsUI.Converters.IValueConverters;
 
-public class InstallationTextConverter : IValueConverter
+public sealed class InstallationTextConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

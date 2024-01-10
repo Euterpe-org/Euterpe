@@ -4,7 +4,7 @@
 
 namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
+public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewModel
 {
     [ObservableProperty] private string[] _askTypes;
     [ObservableProperty] private int _currentDownloadSource;

@@ -5,7 +5,7 @@ using System.IO.Abstractions;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class SavingService : ISavingService
+public sealed partial class SavingService : ISavingService
 {
     private readonly IFileSystem _fileSystem;
     private readonly ILogger _logger;

@@ -7,7 +7,7 @@ using Microsoft.Win32;
 
 namespace MuseDashModToolsUI.Services;
 
-public class WindowsService : IPlatformService
+public sealed class WindowsService : IPlatformService
 {
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     private static readonly ImmutableList<string> WindowsPaths = new List<string>

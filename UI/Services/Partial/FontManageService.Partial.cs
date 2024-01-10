@@ -1,6 +1,6 @@
 namespace MuseDashModToolsUI.Services;
 
-public partial class FontManageService
+public sealed partial class FontManageService
 {
     /// <summary>
     ///     Get available fonts

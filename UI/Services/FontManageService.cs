@@ -6,7 +6,7 @@ using SkiaSharp;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class FontManageService : IFontManageService, INotifyPropertyChanged
+public sealed partial class FontManageService : IFontManageService, INotifyPropertyChanged
 {
     private static readonly SKFontManager _skFontManager = SKFontManager.Default;
     private readonly ILogger _logger;

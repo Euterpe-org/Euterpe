@@ -4,7 +4,7 @@ using Avalonia.Media;
 
 namespace MuseDashModToolsUI.Converters.IValueConverters;
 
-public class UninstallConverter : IValueConverter
+public sealed class UninstallConverter : IValueConverter
 {
     private readonly IBrush Cyan = "#75E3FF".ToBrush();
     private readonly IBrush Default = "#FEFEFE".ToBrush();

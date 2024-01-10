@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class InfoJsonService
+public sealed partial class InfoJsonService
 {
     /// <summary>
     ///     Parse map info from map file

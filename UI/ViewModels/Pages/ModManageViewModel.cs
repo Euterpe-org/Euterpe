@@ -7,7 +7,7 @@ using DynamicData;
 
 namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public partial class ModManageViewModel : ViewModelBase, IModManageViewModel
+public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewModel
 {
     private readonly ReadOnlyObservableCollection<Mod> _mods;
     private readonly SourceCache<Mod, string> _sourceCache = new(x => x.Name);

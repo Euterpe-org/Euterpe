@@ -6,7 +6,7 @@ using System.IO;
 
 namespace MuseDashModToolsUI.Services;
 
-public class LinuxService : IPlatformService
+public sealed class LinuxService : IPlatformService
 {
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     private static readonly ImmutableList<string> LinuxPaths = new List<string>

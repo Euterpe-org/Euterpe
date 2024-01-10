@@ -4,7 +4,7 @@
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class UpdateUIService : IUpdateUIService
+public sealed partial class UpdateUIService : IUpdateUIService
 {
     [UsedImplicitly]
     public ILogger Logger { get; init; }

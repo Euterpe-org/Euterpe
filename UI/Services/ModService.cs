@@ -8,7 +8,7 @@ using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class ModService : IModService
+public sealed partial class ModService : IModService
 {
     private string _currentGameVersion;
     private bool[] _isTracked;

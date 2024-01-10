@@ -5,7 +5,7 @@ using MuseDashModToolsUI.Views;
 
 namespace MuseDashModToolsUI;
 
-public class App : Application
+public sealed class App : Application
 {
     public override void Initialize()
     {

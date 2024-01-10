@@ -10,7 +10,7 @@ namespace MuseDashModToolsUI.Services;
 
 #pragma warning disable CS8618
 
-public partial class LocalService : ILocalService
+public sealed partial class LocalService : ILocalService
 {
     [UsedImplicitly]
     public ILogger Logger { get; init; }

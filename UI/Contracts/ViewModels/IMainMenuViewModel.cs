@@ -1,5 +1,3 @@
 namespace MuseDashModToolsUI.Contracts.ViewModels;
 
-public interface IMainMenuViewModel
-{
-}
+public interface IMainMenuViewModel;

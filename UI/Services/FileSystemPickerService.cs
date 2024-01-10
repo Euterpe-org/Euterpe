@@ -2,7 +2,7 @@ using Avalonia.Platform.Storage;
 
 namespace MuseDashModToolsUI.Services;
 
-public class FileSystemPickerService : IFileSystemPickerService
+public sealed class FileSystemPickerService : IFileSystemPickerService
 {
     public async Task<string?> GetSingleFolderPathAsync(string title)
     {

@@ -7,7 +7,7 @@ using MuseDashModToolsUI.Converters.JsonConverters;
 
 namespace MuseDashModToolsUI.Services;
 
-public class SerializationService : ISerializationService
+public sealed class SerializationService : ISerializationService
 {
     public ILogger Logger { get; init; }
 

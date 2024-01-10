@@ -6,7 +6,7 @@ using ValveKeyValue;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class LogAnalyzeService : ILogAnalyzeService
+public sealed partial class LogAnalyzeService : ILogAnalyzeService
 {
     private readonly FileSystemWatcher _watcher = new();
 

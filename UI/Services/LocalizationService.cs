@@ -6,7 +6,7 @@ using MuseDashModToolsUI.Localization.XAML;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class LocalizationService : ILocalizationService, INotifyPropertyChanged
+public sealed partial class LocalizationService : ILocalizationService, INotifyPropertyChanged
 {
     private readonly ILogger _logger;
 

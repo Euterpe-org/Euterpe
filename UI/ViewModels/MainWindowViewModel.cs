@@ -5,7 +5,7 @@ using Autofac;
 
 namespace MuseDashModToolsUI.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
+public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
     private readonly ILogger _logger;
     private readonly ISavingService _savingService;

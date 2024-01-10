@@ -1,5 +1,3 @@
 namespace MuseDashModToolsUI.ViewModels;
 
-public class ViewModelBase : ObservableObject
-{
-}
+public class ViewModelBase : ObservableObject;

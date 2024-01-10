@@ -6,7 +6,7 @@ using System.Net.Http.Json;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class GitHubService : IGitHubService
+public sealed partial class GitHubService : IGitHubService
 {
     // Github Release APIs
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";

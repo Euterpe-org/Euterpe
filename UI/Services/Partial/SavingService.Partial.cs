@@ -6,7 +6,7 @@ using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class SavingService
+public sealed partial class SavingService
 {
     /// <summary>
     ///     Check null setting and valid path

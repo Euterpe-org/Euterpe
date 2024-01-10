@@ -5,7 +5,7 @@ using DynamicData;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 namespace MuseDashModToolsUI.Services;
 
-public class ChartService : IChartService
+public sealed class ChartService : IChartService
 {
     private ReadOnlyObservableCollection<Chart> _charts;
     private SourceCache<Chart, string> _sourceCache;

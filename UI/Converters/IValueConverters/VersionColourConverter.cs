@@ -6,7 +6,7 @@ using Avalonia.Media;
 
 namespace MuseDashModToolsUI.Converters.IValueConverters;
 
-public class VersionColourConverter : IValueConverter
+public sealed class VersionColourConverter : IValueConverter
 {
     private readonly IBrush Blue = "#6D96FF".ToBrush();
     private readonly IBrush Default = "#CCC".ToBrush();

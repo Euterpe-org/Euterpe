@@ -9,7 +9,7 @@ using MsBox.Avalonia.Models;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class MessageBoxService : IMessageBoxService
+public sealed partial class MessageBoxService : IMessageBoxService
 {
     [UsedImplicitly]
     public Lazy<ISavingService>? SavingService { get; init; }

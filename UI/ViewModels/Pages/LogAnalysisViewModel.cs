@@ -4,7 +4,7 @@
 
 namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
+public sealed partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
 {
     [ObservableProperty] private string _logContent;
 

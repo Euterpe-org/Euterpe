@@ -2,7 +2,7 @@ using MsBox.Avalonia.Models;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class MessageBoxService
+public sealed partial class MessageBoxService
 {
     /// <summary>
     ///     Get button definition by button count

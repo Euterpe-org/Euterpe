@@ -7,7 +7,7 @@ using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class ModService
+public sealed partial class ModService
 {
     /// <summary>
     ///     Handle exception when install mod

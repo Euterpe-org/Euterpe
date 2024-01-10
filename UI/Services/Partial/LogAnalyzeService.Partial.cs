@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class LogAnalyzeService
+public sealed partial class LogAnalyzeService
 {
     /// <summary>
     ///     Check whether the user has registered HQ or not

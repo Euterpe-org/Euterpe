@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class LocalService
+public sealed partial class LocalService
 {
     /// <summary>
     ///     Check updater files exist and create updater target folder

@@ -5,7 +5,7 @@ using DynamicData;
 
 namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewModel
+public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownloadViewModel
 {
     private readonly ReadOnlyObservableCollection<Chart> _charts;
     private readonly SourceCache<Chart, string> _sourceCache = new(x => x.Name);

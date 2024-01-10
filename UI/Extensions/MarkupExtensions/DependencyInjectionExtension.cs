@@ -2,7 +2,7 @@
 
 namespace MuseDashModToolsUI.Extensions.MarkupExtensions;
 
-public class DependencyInjectionExtension : MarkupExtension
+public sealed class DependencyInjectionExtension : MarkupExtension
 {
     public static Func<Type?, object>? Resolver { get; set; }
     public Type? Type { get; set; }

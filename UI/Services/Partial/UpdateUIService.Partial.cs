@@ -1,6 +1,6 @@
 namespace MuseDashModToolsUI.Services;
 
-public partial class UpdateUIService
+public sealed partial class UpdateUIService
 {
     /// <summary>
     ///     Change Setting Window select option name

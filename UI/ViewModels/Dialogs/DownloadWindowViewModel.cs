@@ -6,7 +6,7 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace MuseDashModToolsUI.ViewModels.Dialogs;
 
-public partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowViewModel
+public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWindowViewModel
 {
     [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
     [ObservableProperty] private double _percentage;

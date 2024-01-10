@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public partial class AboutViewModel : ViewModelBase, IAboutViewModel
+public sealed partial class AboutViewModel : ViewModelBase, IAboutViewModel
 {
     [UsedImplicitly]
     public ILogger? Logger { get; init; }

@@ -4,7 +4,7 @@ using MuseDashModToolsUI.Localization.Resources;
 
 namespace MuseDashModToolsUI.Services;
 
-public partial class LocalizationService
+public sealed partial class LocalizationService
 {
     /// <summary>
     ///     Get all available cultures from the resources
