@@ -9,7 +9,7 @@ public sealed partial class LogAnalyzeService
     /// </summary>
     private void CheckHeadQuarterRegister()
     {
-        if (!LogContent.ContainsString("You have not registered for Headquarters"))
+        if (!LogContent.Contains("You have not registered for Headquarters"))
         {
             return;
         }

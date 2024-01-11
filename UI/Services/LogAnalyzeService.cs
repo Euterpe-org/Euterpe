@@ -47,7 +47,7 @@ public sealed partial class LogAnalyzeService : ILogAnalyzeService
 
     public async Task<bool> CheckPirateAsync()
     {
-        if (!LogContent.ContainsString("ApplicationPath"))
+        if (!LogContent.Contains("ApplicationPath"))
         {
             await MessageBoxService.AnalyzeSuccessMessageBox(MsgBox_Content_NoApplicationPath);
             return true;

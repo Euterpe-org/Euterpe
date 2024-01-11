@@ -7,14 +7,6 @@ namespace MuseDashModToolsUI.Extensions;
 public static class StringExtensions
 {
     /// <summary>
-    ///     Using span and IndexOf to check whether string contains value, slightly faster than Contains
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public static bool ContainsString(this string str, string value) => str.AsSpan().IndexOf(value.AsSpan(), StringComparison.Ordinal) != -1;
-
-    /// <summary>
     ///     Replace "\\n" with "\n" to normalize newline
     /// </summary>
     /// <param name="str"></param>

@@ -69,11 +69,7 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
 
     private void FilterBy(ChartFilterType filterType)
     {
-        if (CategoryChartFilterTypes.Contains(filterType))
-        {
-            CategoryChartFilterTypes.Remove(filterType);
-        }
-        else
+        if (!CategoryChartFilterTypes.Remove(filterType))
         {
             CategoryChartFilterTypes.Add(filterType);
         }

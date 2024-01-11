@@ -43,7 +43,7 @@ public sealed partial class LocalService : ILocalService
         await process?.WaitForExitAsync()!;
         var output = await process.StandardOutput.ReadToEndAsync();
 
-        if (!output.ContainsString("Microsoft.WindowsDesktop.App 6."))
+        if (!output.Contains("Microsoft.WindowsDesktop.App 6."))
         {
             Logger.Information("DotNet Runtime not found, showing error message box...");
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_DotNetRuntimeNotFound);
