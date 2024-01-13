@@ -89,7 +89,8 @@
 
                     <!--Easy-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Easy}"
-                                           Command="{Binding FilterEasyCommand}">
+                                           Command="{Binding FilterByCommand}"
+                                           CommandParameter="{x:Static model:ChartFilterType.Easy}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Easy.png" />
                         </mdmt:DifficultyFilter.Icon>
@@ -97,7 +98,8 @@
 
                     <!--Hard-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Hard}"
-                                           Command="{Binding FilterHardCommand}">
+                                           Command="{Binding FilterByCommand}"
+                                           CommandParameter="{x:Static model:ChartFilterType.Hard}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hard.png" />
                         </mdmt:DifficultyFilter.Icon>
@@ -105,7 +107,8 @@
 
                     <!--Master-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Master}"
-                                           Command="{Binding FilterMasterCommand}">
+                                           Command="{Binding FilterByCommand}"
+                                           CommandParameter="{x:Static model:ChartFilterType.Master}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Master.png" />
                         </mdmt:DifficultyFilter.Icon>
@@ -113,7 +116,8 @@
 
                     <!--Hidden-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Hidden}"
-                                           Command="{Binding FilterHiddenCommand}">
+                                           Command="{Binding FilterByCommand}"
+                                           CommandParameter="{x:Static model:ChartFilterType.Hidden}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hidden.png" />
                         </mdmt:DifficultyFilter.Icon>

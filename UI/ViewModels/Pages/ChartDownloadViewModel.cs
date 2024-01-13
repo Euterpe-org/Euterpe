@@ -67,16 +67,6 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
         };
     }
 
-    private void FilterBy(ChartFilterType filterType)
-    {
-        if (!CategoryChartFilterTypes.Remove(filterType))
-        {
-            CategoryChartFilterTypes.Add(filterType);
-        }
-
-        _sourceCache.Refresh();
-    }
-
     [UsedImplicitly]
     partial void OnCurrentSortOptionIndexChanged(int value)
     {
@@ -98,19 +88,18 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
     private async Task DownloadChartAsync(Chart item) => await ChartService.DownloadChartAsync(item);
 
     [RelayCommand]
+    private void FilterBy(ChartFilterType filterType)
+    {
+        if (!CategoryChartFilterTypes.Remove(filterType))
+        {
+            CategoryChartFilterTypes.Add(filterType);
+        }
+
+        _sourceCache.Refresh();
+    }
+
+    [RelayCommand]
     private async Task OpenCustomAlbumsFolderAsync() => await LocalService.OpenCustomAlbumsFolderAsync();
-
-    [RelayCommand]
-    private void OnFilterEasy() => FilterBy(ChartFilterType.Easy);
-
-    [RelayCommand]
-    private void OnFilterHard() => FilterBy(ChartFilterType.Hard);
-
-    [RelayCommand]
-    private void OnFilterMaster() => FilterBy(ChartFilterType.Master);
-
-    [RelayCommand]
-    private void OnFilterHidden() => FilterBy(ChartFilterType.Hidden);
 
     #endregion
 }
