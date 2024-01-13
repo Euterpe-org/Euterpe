@@ -17,10 +17,10 @@ public class SavingServiceTest(ITestOutputHelper testOutputHelper)
                                         "Theme": "Light",
                                         "ShowConsole": false,
                                         "AskInstallMuseDashModTools": 0,
-                                        "AskEnableDependenciesWhenInstalling": 0,
-                                        "AskEnableDependenciesWhenEnabling": 0,
-                                        "AskDisableDependenciesWhenDeleting": 0,
-                                        "AskDisableDependenciesWhenDisabling": 0
+                                        "AskEnableDepWhenInstall": 0,
+                                        "AskEnableDepWhenEnable": 0,
+                                        "AskDisableDepWhenDelete": 0,
+                                        "AskDisableDepWhenDisable": 0
                                        }
                                        """;
 

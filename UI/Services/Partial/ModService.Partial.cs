@@ -255,7 +255,7 @@ public sealed partial class ModService
         }
 
         SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
-            MsgBox_Content_EnableDependency, SavingService.Settings.AskEnableDependenciesWhenInstalling);
+            MsgBox_Content_EnableDependency, SavingService.Settings.AskEnableDepWhenInstall);
         return errors;
     }
 

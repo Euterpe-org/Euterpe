@@ -17,10 +17,10 @@ public class Setting
     public string Theme { get; set; } = "Dark";
     public bool ShowConsole { get; set; }
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
-    public AskType AskEnableDependenciesWhenInstalling { get; set; } = AskType.Always;
-    public AskType AskEnableDependenciesWhenEnabling { get; set; } = AskType.Always;
-    public AskType AskDisableDependenciesWhenDeleting { get; set; } = AskType.Always;
-    public AskType AskDisableDependenciesWhenDisabling { get; set; } = AskType.Always;
+    public AskType AskEnableDepWhenInstall { get; set; } = AskType.Always;
+    public AskType AskEnableDepWhenEnable { get; set; } = AskType.Always;
+    public AskType AskDisableDepWhenDelete { get; set; } = AskType.Always;
+    public AskType AskDisableDepWhenDisable { get; set; } = AskType.Always;
 
     [JsonIgnore]
     public string CustomAlbumsFolder =>

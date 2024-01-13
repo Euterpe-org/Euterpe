@@ -109,6 +109,33 @@ public sealed partial class SavingService
     }
 
     /// <summary>
+    ///     Get saved values from JsonNode
+    /// </summary>
+    /// <param name="savedSetting"></param>
+    private void GetSavedValues(JsonNode savedSetting)
+    {
+        Settings.MuseDashFolder = savedSetting.GetString(nameof(Setting.MuseDashFolder));
+        Settings.LanguageCode = savedSetting.GetString(nameof(Setting.LanguageCode), CultureInfo.CurrentUICulture.ToString());
+        Settings.FontName = savedSetting.GetString(nameof(Setting.FontName), FontManageService.DefaultFont);
+        if (SemanticVersion.TryParse(savedSetting.GetString(nameof(Setting.SkipVersion))!, out var version))
+        {
+            var currentVersion = SemanticVersion.Parse(BuildInfo.Version);
+            Settings.SkipVersion = currentVersion > version ? currentVersion : version;
+        }
+
+        Settings.DownloadSource = savedSetting.GetValue(nameof(Setting.DownloadSource), Enum.Parse<DownloadSources>);
+        Settings.DownloadPrerelease = savedSetting.GetValue(nameof(Setting.DownloadPrerelease), bool.Parse);
+        Settings.CustomDownloadSource = savedSetting.GetString(nameof(Setting.CustomDownloadSource));
+        Settings.Theme = savedSetting.GetString(nameof(Setting.Theme), "Dark")!;
+        Settings.ShowConsole = savedSetting.GetValue(nameof(Setting.ShowConsole), bool.Parse);
+        Settings.AskInstallMuseDashModTools = savedSetting.GetValue(nameof(Setting.AskInstallMuseDashModTools), Enum.Parse<AskType>);
+        Settings.AskEnableDepWhenInstall = savedSetting.GetValue(nameof(Setting.AskEnableDepWhenInstall), Enum.Parse<AskType>);
+        Settings.AskEnableDepWhenEnable = savedSetting.GetValue(nameof(Setting.AskEnableDepWhenEnable), Enum.Parse<AskType>);
+        Settings.AskDisableDepWhenDelete = savedSetting.GetValue(nameof(Setting.AskDisableDepWhenDelete), Enum.Parse<AskType>);
+        Settings.AskDisableDepWhenDisable = savedSetting.GetValue(nameof(Setting.AskDisableDepWhenDisable), Enum.Parse<AskType>);
+    }
+
+    /// <summary>
     ///     Load saved setting from Settings.json
     ///     Delete Updater
     /// </summary>
@@ -131,34 +158,17 @@ public sealed partial class SavingService
         }
 
         var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
-        var settings = JsonNode.Parse(text);
-        if (settings is null)
+        var savedSetting = JsonNode.Parse(text);
+        if (savedSetting is null)
         {
             return;
         }
 
-        Settings.MuseDashFolder = settings["MuseDashFolder"]?.ToString();
-        Settings.LanguageCode = settings["LanguageCode"]?.ToString() ?? CultureInfo.CurrentUICulture.ToString();
-        Settings.FontName = settings["FontName"]?.ToString() ?? FontManageService.DefaultFont;
-        if (SemanticVersion.TryParse(settings["SkipVersion"]?.ToString()!, out var version))
-        {
-            Settings.SkipVersion = version;
-        }
-
-        Settings.DownloadSource = Enum.Parse<DownloadSources>(settings["DownloadSource"]?.ToString()!);
-        Settings.DownloadPrerelease = bool.Parse(settings["DownloadPrerelease"]?.ToString()!);
-        Settings.CustomDownloadSource = settings["CustomDownloadSource"]?.ToString();
-        Settings.Theme = settings["Theme"]?.ToString()!;
-        Settings.ShowConsole = bool.Parse(settings["ShowConsole"]?.ToString()!);
-        Settings.AskInstallMuseDashModTools = Enum.Parse<AskType>(settings["AskInstallMuseDashModTools"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenInstalling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenInstalling"]?.ToString()!);
-        Settings.AskEnableDependenciesWhenEnabling = Enum.Parse<AskType>(settings["AskEnableDependenciesWhenEnabling"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDeleting = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDeleting"]?.ToString()!);
-        Settings.AskDisableDependenciesWhenDisabling = Enum.Parse<AskType>(settings["AskDisableDependenciesWhenDisabling"]?.ToString()!);
-
+        GetSavedValues(savedSetting);
         _isSavedLoaded = true;
         _logger.Information("Saved setting loaded from Settings.json");
     }
+
 
     /// <summary>
     ///     Catch null setting and ask user to choose path

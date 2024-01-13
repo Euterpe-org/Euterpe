@@ -100,11 +100,11 @@
         <PackageReference Include="Markdown.Avalonia" Version="11.0.2"/>
         <PackageReference Include="MessageBox.Avalonia" Version="3.1.5.1"/>
         <PackageReference Include="NuGet.Versioning" Version="6.8.0"/>
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Analyzers" Version="4.8.0">
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Analyzers" Version="4.9.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Formatting.Analyzers" Version="4.8.0">
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Roslynator.Formatting.Analyzers" Version="4.9.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

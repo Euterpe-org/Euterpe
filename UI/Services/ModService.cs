@@ -158,7 +158,7 @@ public sealed partial class ModService : IModService
             if (item.IsDisabled)
             {
                 var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DisableModConfirm,
-                    SavingService.Settings.AskDisableDependenciesWhenDisabling);
+                    SavingService.Settings.AskDisableDepWhenDisable);
                 if (!result)
                 {
                     return;
@@ -202,7 +202,7 @@ public sealed partial class ModService : IModService
         try
         {
             var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DeleteModConfirm,
-                SavingService.Settings.AskDisableDependenciesWhenDeleting);
+                SavingService.Settings.AskDisableDepWhenDelete);
             if (!result)
             {
                 return;
