@@ -7,6 +7,13 @@ public interface ISavingService
     public string ChartFolderPath { get; }
 
     /// <summary>
+    ///     Load saved setting from Settings.json
+    ///     Create config and chart folder if not exist
+    ///     Delete Updater
+    /// </summary>
+    void LoadSettings();
+
+    /// <summary>
     ///     Initialize Settings
     /// </summary>
     /// <returns></returns>

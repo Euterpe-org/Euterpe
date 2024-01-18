@@ -31,11 +31,11 @@ public sealed partial class SavingService
 
         if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
         {
-            _logger.Information("Path not changed");
+            Logger.Information("Path not changed");
             return false;
         }
 
-        _logger.Error("Invalid path, showing error message box");
+        Logger.Error("Invalid path, showing error message box");
         await MessageBoxService.ErrorMessageBox(MsgBox_Content_InvalidPath);
         return false;
     }
@@ -48,7 +48,7 @@ public sealed partial class SavingService
     {
         if (!await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_InstallPathConfirm, folderPath))
         {
-            _logger.Information("User canceled auto detect game path, asking user to choose path");
+            Logger.Information("User canceled auto detect game path, asking user to choose path");
             await OnChooseGamePathAsync();
             return;
         }
@@ -78,15 +78,15 @@ public sealed partial class SavingService
     private void DeleteUpdater()
     {
         var updateDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Update");
-        var updaterPath = _platformService.GetUpdaterFilePath(updateDirectory);
-        if (!_fileSystem.File.Exists(updaterPath))
+        var updaterPath = PlatformService.GetUpdaterFilePath(updateDirectory);
+        if (!FileSystem.File.Exists(updaterPath))
         {
             return;
         }
 
-        _fileSystem.File.Delete(updaterPath);
-        _fileSystem.Directory.Delete(updateDirectory);
-        _logger.Information("Updater found, deleting it");
+        FileSystem.File.Delete(updaterPath);
+        FileSystem.Directory.Delete(updateDirectory);
+        Logger.Information("Updater found, deleting it");
     }
 
     /// <summary>
@@ -102,7 +102,7 @@ public sealed partial class SavingService
                 continue;
             }
 
-            _logger.Information("Showing choose folder dialogue");
+            Logger.Information("Showing choose folder dialogue");
 
             return await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder);
         }
@@ -136,28 +136,24 @@ public sealed partial class SavingService
     }
 
     /// <summary>
-    ///     Load saved setting from Settings.json
-    ///     Delete Updater
-    /// </summary>
-    private async Task Load()
-    {
-        await LoadSavedSetting();
-        CreateSavingFolders();
-        DeleteUpdater();
-    }
-
-    /// <summary>
     ///     If Settings.json exists, load it
     /// </summary>
-    private async Task LoadSavedSetting()
+    private void LoadSavedSetting()
     {
-        if (!_fileSystem.File.Exists(SettingPath))
+        if (!FileSystem.File.Exists(SettingPath))
         {
-            _logger.Warning("Settings.json not found, skipping load");
+            Logger.Warning("Settings.json not found, skipping load");
             return;
         }
 
-        var text = await _fileSystem.File.ReadAllTextAsync(SettingPath);
+        Logger.Information("Found Settings.json, loading...");
+
+        var text = FileSystem.File.ReadAllText(SettingPath);
+        if (string.IsNullOrEmpty(text))
+        {
+            return;
+        }
+
         var savedSetting = JsonNode.Parse(text);
         if (savedSetting is null)
         {
@@ -166,9 +162,8 @@ public sealed partial class SavingService
 
         GetSavedValues(savedSetting);
         _isSavedLoaded = true;
-        _logger.Information("Saved setting loaded from Settings.json");
+        Logger.Information("Saved setting loaded from Settings.json");
     }
-
 
     /// <summary>
     ///     Catch null setting and ask user to choose path
@@ -176,10 +171,10 @@ public sealed partial class SavingService
     /// </summary>
     private async Task NullSettingsCatch()
     {
-        _logger.Information("Detecting null settings...");
+        Logger.Information("Detecting null settings...");
         if (string.IsNullOrEmpty(Settings.MuseDashFolder))
         {
-            _logger.Error("Muse Dash path is empty, asking user to choose path");
+            Logger.Error("Muse Dash path is empty, asking user to choose path");
             await MessageBoxService.WarningMessageBox(MsgBox_Content_NullPath);
             await OnChooseGamePathAsync();
         }
@@ -187,13 +182,13 @@ public sealed partial class SavingService
         if (string.IsNullOrEmpty(Settings.LanguageCode))
         {
             Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
-            _logger.Warning("Language code is empty, using system language");
+            Logger.Warning("Language code is empty, using system language");
         }
 
         if (string.IsNullOrEmpty(Settings.FontName))
         {
             Settings.FontName = FontManageService.DefaultFont;
-            _logger.Warning("Font name is empty, using default font");
+            Logger.Warning("Font name is empty, using default font");
         }
     }
 
@@ -203,9 +198,9 @@ public sealed partial class SavingService
     /// <returns>Is success</returns>
     private async Task<bool> TryGetGameFolderPath()
     {
-        _logger.Information("Trying auto detect game path...");
+        Logger.Information("Trying auto detect game path...");
 
-        if (!_platformService.GetGamePath(out var folderPath))
+        if (!PlatformService.GetGamePath(out var folderPath))
         {
             return false;
         }

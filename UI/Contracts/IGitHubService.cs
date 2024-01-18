@@ -7,7 +7,7 @@ public interface IGitHubService
     /// </summary>
     /// <param name="isUserClick"></param>
     /// <returns></returns>
-    Task CheckUpdates(bool isUserClick = false);
+    Task CheckUpdatesAsync(bool isUserClick = false);
 
     /// <summary>
     ///     Download Chart

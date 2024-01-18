@@ -197,7 +197,7 @@ public sealed partial class GitHubService
         }
     }
 
-    #region CheckUpdates Private Methods
+    #region CheckUpdatesAsync Private Methods
 
     /// <summary>
     ///     Get version number from github's tag name

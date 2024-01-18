@@ -35,6 +35,6 @@ public class GithubServiceTest(ITestOutputHelper testOutputHelper)
             MessageBoxService = new Mock<IMessageBoxService>().Object,
             SavingService = new Lazy<ISavingService>(() => mockSavingService.Object)
         };
-        await githubService.CheckUpdates();
+        await githubService.CheckUpdatesAsync();
     }
 }

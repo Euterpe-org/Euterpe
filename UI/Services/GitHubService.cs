@@ -54,7 +54,7 @@ public sealed partial class GitHubService : IGitHubService
     [UsedImplicitly]
     public Lazy<ISavingService> SavingService { get; init; }
 
-    public async Task CheckUpdates(bool isUserClick = false)
+    public async Task CheckUpdatesAsync(bool isUserClick = false)
     {
         Logger.Information("Checking updates...");
         Client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");

@@ -10,57 +10,90 @@ namespace MuseDashModToolsUI;
 
 public static class Bootstrapper
 {
+    private static readonly ContainerBuilder _builder = new();
+
+    /// <summary>
+    ///     Register all instances, services and view models
+    ///     Configure static resolvers
+    /// </summary>
     public static void Register()
     {
-        var builder = new ContainerBuilder();
+        RegisterInstances();
+        RegisterServices();
+        RegisterViewModels();
 
-        // Instances
-        builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
-        builder.RegisterInstance(new HttpClient());
+        var container = _builder.Build();
+        ConfigureStaticResolvers(container);
+    }
 
-        // Services
-        builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
-        builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
-        builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<SerializationService>().As<ISerializationService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
+    /// <summary>
+    ///     Register instances
+    /// </summary>
+    private static void RegisterInstances()
+    {
+        _builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
+        _builder.RegisterInstance(new HttpClient());
+    }
+
+    /// <summary>
+    ///     Register all services
+    /// </summary>
+    private static void RegisterServices()
+    {
+        _builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
+        _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<GitHubService>().As<IGitHubService>().PropertiesAutowired();
+        _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<SerializationService>().As<ISerializationService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
 
         // Platform Service
         if (OperatingSystem.IsWindows())
         {
-            builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+            _builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
         }
         else if (OperatingSystem.IsLinux())
         {
-            builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+            _builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
         }
         // for macos development
         else if (OperatingSystem.IsMacOS())
         {
-            builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+            _builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
         }
+    }
 
-        // View Models
-        builder.RegisterType<AboutViewModel>().As<IAboutViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<ChartDownloadViewModel>().As<IChartDownloadViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<InfoJsonViewModel>().As<IInfoJsonViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<MainMenuViewModel>().As<IMainMenuViewModel>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
+    /// <summary>
+    ///     Register all view models
+    /// </summary>
+    private static void RegisterViewModels()
+    {
+        _builder.RegisterType<AboutViewModel>().As<IAboutViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ChartDownloadViewModel>().As<IChartDownloadViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<InfoJsonViewModel>().As<IInfoJsonViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<MainMenuViewModel>().As<IMainMenuViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
+    }
 
-        var container = builder.Build();
+    /// <summary>
+    ///     Configure static resolvers
+    /// </summary>
+    /// <param name="container"></param>
+    private static void ConfigureStaticResolvers(IComponentContext container)
+    {
         DependencyInjectionExtension.Resolver = type => container.Resolve(type!);
         LocalizeExtension.LocalizationService = container.Resolve<ILocalizationService>();
         FontExtension.FontManageService = container.Resolve<IFontManageService>();

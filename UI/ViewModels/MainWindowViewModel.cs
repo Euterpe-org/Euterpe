@@ -21,11 +21,11 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
         _savingService = context.Resolve<ISavingService>();
         _updateUIService = context.Resolve<IUpdateUIService>();
 
+        _savingService.LoadSettings();
         if (_savingService.Settings.LanguageCode is not null)
         {
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);
         }
-
 #if !DEBUG
         context.Resolve<IGitHubService>().CheckUpdates();
 #endif

@@ -133,22 +133,10 @@ public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewMo
     private async Task OpenModsFolderAsync() => await LocalService.OpenModsFolderAsync();
 
     [RelayCommand]
-    private async Task OnCheckUpdateAsync() => await GitHubService.CheckUpdates(true);
+    private async Task OnCheckUpdateAsync() => await GitHubService.CheckUpdatesAsync(true);
 
     [RelayCommand]
-    private void OnFilterAll() => CategoryModFilterType = ModFilterType.All;
-
-    [RelayCommand]
-    private void OnFilterInstalled() => CategoryModFilterType = ModFilterType.Installed;
-
-    [RelayCommand]
-    private void OnFilterEnabled() => CategoryModFilterType = ModFilterType.Enabled;
-
-    [RelayCommand]
-    private void OnFilterOutdated() => CategoryModFilterType = ModFilterType.Outdated;
-
-    [RelayCommand]
-    private void OnFilterIncompatible() => CategoryModFilterType = ModFilterType.Incompatible;
+    private void OnFilterBy(ModFilterType modFilterType) => CategoryModFilterType = modFilterType;
 
     #endregion
 }

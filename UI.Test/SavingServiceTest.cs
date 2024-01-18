@@ -36,14 +36,20 @@ public class SavingServiceTest(ITestOutputHelper testOutputHelper)
         fs.Setup(f => f.File.Exists(settingPath)).Returns(true);
         fs.Setup(f => f.File.Exists(updaterPath)).Returns(false);
         fs.Setup(f => f.Directory.Exists(It.IsAny<string?>())).Returns(false);
-        fs.Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(SettingJson);
-        var savingService = new SavingService(fs.Object, _logger, new Mock<IPlatformService>().Object)
+        fs.Setup(f => f.File.ReadAllText(It.IsAny<string>())).Returns(SettingJson);
+        var savingService = new SavingService
         {
+            FileSystem = fs.Object,
+            FileSystemPickerService = new Mock<IFileSystemPickerService>().Object,
+            Logger = _logger,
             LocalService = new Mock<ILocalService>().Object,
             MessageBoxService = new Mock<IMessageBoxService>().Object,
+            PlatformService = new Mock<IPlatformService>().Object,
             SerializationService = new SerializationService(),
             UpdateUIService = new Mock<IUpdateUIService>().Object
         };
+
+        savingService.LoadSettings();
         await savingService.InitializeSettingsAsync();
 
         Assert.Equal(CultureInfo.CurrentUICulture.Name, savingService.Settings.LanguageCode);
