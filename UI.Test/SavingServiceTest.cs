@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.IO.Abstractions;
+using PrivateProxy;
 
 namespace MuseDashModToolsUI.Test;
 
@@ -30,13 +31,10 @@ public class SavingServiceTest(ITestOutputHelper testOutputHelper)
     public async Task NullSettingTest()
     {
         var fs = new Mock<IFileSystem>();
-        var settingPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools",
-            "Settings.json");
-        var updaterPath = Path.Combine(Directory.GetCurrentDirectory(), "Update", "Updater.exe");
+        var settingPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "MuseDashModTools", "Settings.json");
         fs.Setup(f => f.File.Exists(settingPath)).Returns(true);
-        fs.Setup(f => f.File.Exists(updaterPath)).Returns(false);
-        fs.Setup(f => f.Directory.Exists(It.IsAny<string?>())).Returns(false);
-        fs.Setup(f => f.File.ReadAllText(It.IsAny<string>())).Returns(SettingJson);
+        fs.Setup(f => f.File.ReadAllText(settingPath)).Returns(SettingJson);
         var savingService = new SavingService
         {
             FileSystem = fs.Object,
@@ -49,10 +47,13 @@ public class SavingServiceTest(ITestOutputHelper testOutputHelper)
             UpdateUIService = new Mock<IUpdateUIService>().Object
         };
 
-        savingService.LoadSettings();
+        savingService.AsPrivateProxy().LoadSavedSetting();
         await savingService.InitializeSettingsAsync();
 
         Assert.Equal(CultureInfo.CurrentUICulture.Name, savingService.Settings.LanguageCode);
         Assert.Equal(FontManageService.DefaultFont, savingService.Settings.FontName);
     }
 }
+
+[GeneratePrivateProxy(typeof(SavingService))]
+public partial class SavingServiceProxy;
