@@ -92,5 +92,5 @@ public interface ILocalService
     ///     Read game version
     /// </summary>
     /// <returns>Game Version</returns>
-    Task<string> ReadGameVersionAsync();
+    ValueTask<string> ReadGameVersionAsync();
 }

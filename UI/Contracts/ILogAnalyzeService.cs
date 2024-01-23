@@ -24,5 +24,5 @@ public interface ILogAnalyzeService
     ///     If there's log file, load it
     /// </summary>
     /// <returns>Log content</returns>
-    Task<string> LoadLogAsync();
+    ValueTask<string> LoadLogAsync();
 }

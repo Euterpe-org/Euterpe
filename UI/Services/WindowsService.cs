@@ -59,7 +59,7 @@ public sealed class WindowsService : IPlatformService
     public void OpenLogFolder(string logPath) => Process.Start("explorer.exe", "/select, " + logPath);
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public async Task<bool> VerifyGameVersionAsync()
+    public async ValueTask<bool> VerifyGameVersionAsync()
     {
         var version = FileVersionInfo.GetVersionInfo(SavingService.Value.Settings.MuseDashExePath).FileVersion;
         if (version is "2019.4.32.16288752")

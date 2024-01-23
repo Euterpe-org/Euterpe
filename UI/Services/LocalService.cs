@@ -287,7 +287,7 @@ public sealed partial class LocalService : ILocalService
         PlatformService.OpenLogFolder(logPath);
     }
 
-    public async Task<string> ReadGameVersionAsync()
+    public async ValueTask<string> ReadGameVersionAsync()
     {
         var assetsManager = new AssetsManager();
         var bundlePath = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");

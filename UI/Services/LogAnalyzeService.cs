@@ -115,7 +115,7 @@ public sealed partial class LogAnalyzeService : ILogAnalyzeService
         return false;
     }
 
-    public async Task<string> LoadLogAsync()
+    public async ValueTask<string> LoadLogAsync()
     {
         if (!string.IsNullOrEmpty(SavingService.Settings.MelonLoaderFolder))
         {

@@ -196,7 +196,7 @@ public sealed partial class SavingService
     ///     Try automatically find game folder path
     /// </summary>
     /// <returns>Is success</returns>
-    private async Task<bool> TryGetGameFolderPath()
+    private async ValueTask<bool> TryGetGameFolderPath()
     {
         Logger.Information("Trying auto detect game path...");
 

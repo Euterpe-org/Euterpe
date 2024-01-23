@@ -229,7 +229,7 @@ public sealed partial class GitHubService
     /// <param name="currentVersion"></param>
     /// <param name="isUserClick"></param>
     /// <returns>Is skip</returns>
-    private async Task<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool isUserClick)
+    private async ValueTask<bool> SkipVersionCheck(SemanticVersion version, string currentVersion, bool isUserClick)
     {
         var current = SemanticVersion.Parse(currentVersion);
         if (!isUserClick)
