@@ -85,7 +85,7 @@ public static class Bootstrapper
         _builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<MainMenuViewModel>().As<IMainMenuViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().SingleInstance();
+        _builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().PropertiesAutowired().SingleInstance();
     }
 
     /// <summary>

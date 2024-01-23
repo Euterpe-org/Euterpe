@@ -9,17 +9,20 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
 {
     private readonly ILogger _logger;
     private readonly ISavingService _savingService;
-    private readonly IUpdateUIService _updateUIService;
     [ObservableProperty] private ViewModelBase _content;
     [ObservableProperty] private int _selectedTabIndex;
     [ObservableProperty] private List<TabView> _tabs = [];
+
+    [UsedImplicitly]
+    public IUpdateUIService UpdateUIService { get; init; }
+
     public static string Version => BuildInfo.Version;
 
     public MainWindowViewModel(IComponentContext context)
     {
         _logger = context.Resolve<ILogger>();
         _savingService = context.Resolve<ISavingService>();
-        _updateUIService = context.Resolve<IUpdateUIService>();
+
 
         _savingService.LoadSettings();
         if (_savingService.Settings.LanguageCode is not null)
@@ -27,7 +30,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);
         }
 #if !DEBUG
-        context.Resolve<IGitHubService>().CheckUpdates();
+        context.Resolve<IGitHubService>().CheckUpdatesAsync();
 #endif
         _savingService.InitializeSettingsAsync().ConfigureAwait(false);
         _logger.Information("Main Window initialized");
@@ -38,7 +41,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
     private void OnChangeTheme()
     {
         var targetTheme = _savingService.Settings.Theme == "Dark" ? "Light" : "Dark";
-        _updateUIService.ChangeTheme(targetTheme);
+        UpdateUIService.ChangeTheme(targetTheme);
         _logger.Information("Change Theme to {Theme}", targetTheme);
     }
 
