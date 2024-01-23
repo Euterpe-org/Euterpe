@@ -9,23 +9,23 @@ public sealed partial class MessageBoxService
     /// </summary>
     /// <param name="buttonCount"></param>
     /// <returns></returns>
-    private static IEnumerable<ButtonDefinition> GetButtonDefinition(int buttonCount)
+    private static ButtonDefinition[] GetButtonDefinition(int buttonCount)
     {
         var buttonDefinitions = buttonCount switch
         {
-            3 => new[]
-            {
+            3 =>
+            [
                 new ButtonDefinition { Name = MsgBox_Button_Yes, IsDefault = true },
                 new ButtonDefinition { Name = MsgBox_Button_No, IsCancel = true },
                 new ButtonDefinition { Name = MsgBox_Button_NoNoAsk, IsCancel = true }
-            },
-            4 => new[]
-            {
+            ],
+            4 =>
+            [
                 new ButtonDefinition { Name = MsgBox_Button_Yes, IsDefault = true },
                 new ButtonDefinition { Name = MsgBox_Button_YesNoAsk, IsCancel = false },
                 new ButtonDefinition { Name = MsgBox_Button_No, IsCancel = true },
                 new ButtonDefinition { Name = MsgBox_Button_NoNoAsk, IsCancel = true }
-            },
+            ],
             _ => new[]
             {
                 new ButtonDefinition { Name = MsgBox_Button_Yes, IsDefault = true },

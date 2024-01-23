@@ -25,7 +25,7 @@ public sealed partial class LocalizationService : ILocalizationService, INotifyP
         GetAvailableCultures();
     }
 
-    public List<Language> AvailableLanguages { get; } = new();
+    public List<Language> AvailableLanguages { get; } = [];
 
     public void SetLanguage(string language)
     {

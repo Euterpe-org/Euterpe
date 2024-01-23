@@ -24,7 +24,7 @@ public sealed partial class LocalizationService
             }
 
             var rs = rm.GetResourceSet(culture, true, false);
-            if (rs != null)
+            if (rs is not null)
             {
                 AvailableLanguages.Add(new Language(culture));
             }

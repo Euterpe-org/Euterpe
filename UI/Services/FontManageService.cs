@@ -23,7 +23,7 @@ public sealed partial class FontManageService : IFontManageService, INotifyPrope
         GetAvailableFonts();
     }
 
-    public List<string> AvailableFonts { get; private set; } = new();
+    public List<string> AvailableFonts { get; private set; } = [];
 
     public void SetFont(string fontName)
     {
