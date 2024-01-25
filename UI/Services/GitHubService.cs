@@ -57,7 +57,7 @@ public sealed partial class GitHubService : IGitHubService
     public async Task CheckUpdatesAsync(bool isUserClick = false)
     {
         Logger.Information("Checking updates...");
-        Client.DefaultRequestHeaders.Add("User-Agent", "MuseDashModToolsUI");
+        Client.DefaultRequestHeaders.Add("User-Agent", Environment.UserName);
 
         Logger.Information("Get current version success: {Version}", BuildInfo.Version);
         try
