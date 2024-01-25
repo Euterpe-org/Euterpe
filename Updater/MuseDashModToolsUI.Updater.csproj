@@ -20,7 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="SharpZipLib" Version="1.4.2"/>
         <PackageReference Include="Spectre.Console" Version="0.48.1-preview.0.18"/>
     </ItemGroup>
 

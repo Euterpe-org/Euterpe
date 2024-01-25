@@ -1,6 +1,6 @@
 ﻿using System.IO;
+using System.IO.Compression;
 using DialogHostAvalonia;
-using ICSharpCode.SharpZipLib.Zip;
 
 #pragma warning disable CS8618
 
@@ -66,9 +66,7 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
         try
         {
             Logger.Information("Extracting MelonLoader.zip");
-            var fastZip = new FastZip();
-            fastZip.ExtractZip(SavingService.Settings.MelonLoaderZipPath, SavingService.Settings.MuseDashFolder, FastZip.Overwrite.Always,
-                null, null, null, true);
+            ZipFile.ExtractToDirectory(SavingService.Settings.MelonLoaderZipPath, SavingService.Settings.MuseDashFolder!, true);
             return true;
         }
         catch (Exception ex)

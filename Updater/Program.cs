@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using ICSharpCode.SharpZipLib.Zip;
+using System.IO.Compression;
 using Spectre.Console;
 
 HttpClient httpClient = new();
@@ -79,10 +79,9 @@ async Task DownloadUpdates(IReadOnlyList<string> downloadArgs)
 
 void Unzip(string zipPath, string targetPath)
 {
-    var fastZip = new FastZip();
     try
     {
-        fastZip.ExtractZip(zipPath, targetPath, FastZip.Overwrite.Always, null, null, null, true);
+        ZipFile.ExtractToDirectory(zipPath, targetPath, true);
     }
     catch (Exception ex)
     {
