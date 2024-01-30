@@ -30,7 +30,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);
         }
 #if !DEBUG
-        context.Resolve<IGitHubService>().CheckUpdatesAsync();
+        context.Resolve<IDownloadService>().CheckUpdatesAsync();
 #endif
         _savingService.InitializeSettingsAsync().ConfigureAwait(false);
         _logger.Information("Main Window initialized");

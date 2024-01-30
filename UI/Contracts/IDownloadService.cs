@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModToolsUI.Contracts;
 
-public interface IGitHubService
+public interface IDownloadService
 {
     /// <summary>
     ///     Check Mod Tools Updates

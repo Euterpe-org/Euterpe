@@ -28,7 +28,7 @@ public class GithubServiceTest(ITestOutputHelper testOutputHelper)
         var mockSavingService = new Mock<ISavingService>();
         var mockSettings = new Setting();
         mockSavingService.Setup(x => x.Settings).Returns(mockSettings);
-        var githubService = new GitHubService
+        var githubService = new DownloadService
         {
             Logger = _logger,
             Client = _client.ToHttpClient(),

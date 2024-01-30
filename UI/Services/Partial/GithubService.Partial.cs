@@ -7,7 +7,7 @@ using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;
 
-public sealed partial class GitHubService
+public sealed partial class DownloadService
 {
     /// <summary>
     ///     Get Mod list from download source

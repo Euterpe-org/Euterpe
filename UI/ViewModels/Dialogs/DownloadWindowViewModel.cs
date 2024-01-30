@@ -15,7 +15,7 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public IGitHubService GitHubService { get; init; }
+    public IDownloadService DownloadService { get; init; }
 
     [UsedImplicitly]
     public ILogger Logger { get; init; }
@@ -27,7 +27,7 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
     {
         if (File.Exists(SavingService.Settings.MelonLoaderZipPath))
         {
-            var onlineSize = await GitHubService.GetMelonLoaderFileSizeAsync();
+            var onlineSize = await DownloadService.GetMelonLoaderFileSizeAsync();
             var zipInfo = new FileInfo(SavingService.Settings.MelonLoaderZipPath);
             if (onlineSize > zipInfo.Length && !await DownloadMelonLoaderZipFile())
             {
@@ -58,7 +58,7 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
     {
         var downloadProgress = new Progress<double>(UpdateDownloadProgress);
         Logger.Information("Start downloading MelonLoader");
-        return await GitHubService.DownloadMelonLoaderAsync(downloadProgress);
+        return await DownloadService.DownloadMelonLoaderAsync(downloadProgress);
     }
 
     private async Task<bool> ExtractMelonLoaderZipFile()

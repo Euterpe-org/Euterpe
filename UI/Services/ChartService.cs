@@ -11,7 +11,7 @@ public sealed class ChartService : IChartService
     private SourceCache<Chart, string> _sourceCache;
 
     [UsedImplicitly]
-    public IGitHubService GitHubService { get; init; }
+    public IDownloadService DownloadService { get; init; }
 
     [UsedImplicitly]
     public ILogger Logger { get; init; }
@@ -34,7 +34,7 @@ public sealed class ChartService : IChartService
             }
         }
 
-        await GitHubService.DownloadChartAsync(item.Id, path);
+        await DownloadService.DownloadChartAsync(item.Id, path);
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
     }
 
@@ -48,7 +48,7 @@ public sealed class ChartService : IChartService
             Directory.CreateDirectory(SavingService.Settings.CustomAlbumsFolder);
         }
 
-        var webCharts = await GitHubService.GetChartListAsync();
+        var webCharts = await DownloadService.GetChartListAsync();
         _sourceCache.AddOrUpdate(webCharts!);
     }
 }

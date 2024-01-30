@@ -17,7 +17,7 @@ public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewMo
     public ReadOnlyObservableCollection<Mod> Mods => _mods;
 
     [UsedImplicitly]
-    public IGitHubService GitHubService { get; init; }
+    public IDownloadService DownloadService { get; init; }
 
     [UsedImplicitly]
     public ILocalService LocalService { get; init; }
@@ -133,7 +133,7 @@ public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewMo
     private async Task OpenModsFolderAsync() => await LocalService.OpenModsFolderAsync();
 
     [RelayCommand]
-    private async Task OnCheckUpdateAsync() => await GitHubService.CheckUpdatesAsync(true);
+    private async Task OnCheckUpdateAsync() => await DownloadService.CheckUpdatesAsync(true);
 
     [RelayCommand]
     private void OnFilterBy(ModFilterType modFilterType) => CategoryModFilterType = modFilterType;

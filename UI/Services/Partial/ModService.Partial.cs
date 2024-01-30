@@ -236,7 +236,7 @@ public sealed partial class ModService
             try
             {
                 var path = Path.Join(SavingService.Settings.ModsFolder, dependency.DownloadLink.Split("/")[1]);
-                await GitHubService.DownloadModAsync(dependency.DownloadLink, path);
+                await DownloadService.DownloadModAsync(dependency.DownloadLink, path);
                 var downloadedMod = LocalService.LoadMod(path);
                 dependency.IsDisabled = downloadedMod!.IsDisabled;
                 dependency.FileName = downloadedMod.FileName;
