@@ -23,7 +23,6 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
         _logger = context.Resolve<ILogger>();
         _savingService = context.Resolve<ISavingService>();
 
-
         _savingService.LoadSettings();
         if (_savingService.Settings.LanguageCode is not null)
         {
