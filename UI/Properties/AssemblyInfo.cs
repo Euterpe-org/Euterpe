@@ -1,9 +1,10 @@
 using System.Reflection;
 using MuseDashModToolsUI;
+using static MuseDashModToolsUI.BuildInfo;
 
-[assembly: AssemblyCopyright(BuildInfo.CopyRight)]
-[assembly: AssemblyCompany(BuildInfo.Company)]
-[assembly: AssemblyDescription(BuildInfo.Description)]
+[assembly: AssemblyCopyright(CopyRight)]
+[assembly: AssemblyCompany(Company)]
+[assembly: AssemblyDescription(Description)]
 [assembly: AssemblyFileVersion(BuildInfo.Version)]
-[assembly: AssemblyProduct(BuildInfo.Name)]
-[assembly: AssemblyTitle(BuildInfo.Name)]
+[assembly: AssemblyProduct(Name)]
+[assembly: AssemblyTitle(Name)]
