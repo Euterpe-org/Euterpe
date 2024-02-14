@@ -1,10 +1,9 @@
-﻿using System.Globalization;
-using Serilog;
+﻿using Serilog;
 using Serilog.Events;
 
 namespace MuseDashModToolsUI.Test;
 
-public class TestLogger(ITestOutputHelper testOutputHelper) : ILogger
+public sealed class TestLogger(ITestOutputHelper testOutputHelper) : ILogger
 {
     public void Write(LogEvent logEvent)
     {

@@ -1,10 +1,9 @@
-using System.Globalization;
 using System.IO.Abstractions;
 using PrivateProxy;
 
 namespace MuseDashModToolsUI.Test;
 
-public class SavingServiceTest(ITestOutputHelper testOutputHelper)
+public sealed class SavingServiceTest(ITestOutputHelper testOutputHelper)
 {
     private const string SettingJson = """
                                        {
