@@ -1,5 +1,3 @@
-using System.IO;
-using System.Net.Http;
 using System.Security;
 using System.Text;
 using DynamicData;
@@ -61,7 +59,7 @@ public sealed partial class ModService
     /// <param name="ex"></param>
     private async Task HandleDeleteModException(Mod item, Exception ex)
     {
-        var errorMsg = string.Format(
+        var errorMsg = ZString.Format(
             ex is UnauthorizedAccessException or IOException
                 ? MsgBox_Content_UninstallModFailed_Game
                 : MsgBox_Content_UninstallModFailed, ex);
@@ -277,7 +275,7 @@ public sealed partial class ModService
 
         var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
 
-        return await ChangeDependenciesState(string.Format(message, item.Name, disabledDependencyNames),
+        return await ChangeDependenciesState(ZString.Format(message, item.Name, disabledDependencyNames),
             disabledDependencies, askType, false);
     }
 
@@ -305,7 +303,7 @@ public sealed partial class ModService
             return (result, askType);
         }
 
-        return (true, await ChangeDependenciesState(string.Format(MsgBox_Content_DisableReverseDependency, item.Name),
+        return (true, await ChangeDependenciesState(ZString.Format(MsgBox_Content_DisableReverseDependency, item.Name),
             enabledReverseDependencies, askType, true));
     }
 

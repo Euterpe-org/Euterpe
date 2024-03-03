@@ -30,7 +30,7 @@ public partial class Mod : ObservableObject
     [JsonIgnore] public string DuplicatedModNames { get; set; } = string.Empty;
 
     [JsonIgnore]
-    public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
+    public string XamlDescription => ZString.Format(XAML_Mod_Description.NormalizeNewline(),
         ModDescriptionProvider.GetDescription(this), Author, Version, CompatibleGameVersion);
 
     [JsonIgnore]

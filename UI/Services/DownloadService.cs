@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 
 #pragma warning disable CS8618
 
@@ -98,7 +96,7 @@ public sealed partial class DownloadService : IDownloadService
 
     public async Task DownloadChartAsync(int id, string path)
     {
-        var url = string.Format(ChartDownloadApi, id);
+        var url = ZString.Format(ChartDownloadApi, id);
         try
         {
             var result = await Client.GetAsync(url);

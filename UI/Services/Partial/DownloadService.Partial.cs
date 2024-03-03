@@ -1,5 +1,3 @@
-using System.IO;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using Avalonia.Media.Imaging;
 using DialogHostAvalonia;
@@ -146,7 +144,7 @@ public sealed partial class DownloadService
 
         if (!File.Exists(filePath))
         {
-            coverBytes = await Client.GetByteArrayAsync(string.Format(ChartCoverApi, chart.Id));
+            coverBytes = await Client.GetByteArrayAsync(ZString.Format(ChartCoverApi, chart.Id));
             await File.WriteAllBytesAsync(filePath, coverBytes);
         }
         else
@@ -256,7 +254,7 @@ public sealed partial class DownloadService
     private async Task<bool> UpdateRequired(string version, string title, string body)
     {
         var update = await MessageBoxService.CustomMarkDownConfirmMessageBox(
-            string.Format(MsgBox_Content_NewerVersion, version, title, body), 3);
+            ZString.Format(MsgBox_Content_NewerVersion, version, title, body), 3);
 
         if (update == MsgBox_Button_NoNoAsk)
         {
