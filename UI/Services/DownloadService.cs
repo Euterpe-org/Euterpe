@@ -57,7 +57,7 @@ public sealed partial class DownloadService : IDownloadService
         Logger.Information("Checking updates...");
         Client.DefaultRequestHeaders.Add("User-Agent", Environment.UserName);
 
-        Logger.Information("Get current version success: {Version}", BuildInfo.Version);
+        Logger.Information("Get current version success: {Version}", AppVersion);
         try
         {
             var releases = await Client.GetFromJsonAsync<List<GithubRelease>>(ReleaseInfoLink);
@@ -66,7 +66,7 @@ public sealed partial class DownloadService : IDownloadService
             var release = SavingService.Value.Settings.DownloadPrerelease ? releases![0] : releases!.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
-            if (version is null || await SkipVersionCheck(version, BuildInfo.Version, isUserClick))
+            if (version is null || await SkipVersionCheck(version, AppVersion, isUserClick))
             {
                 return;
             }

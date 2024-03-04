@@ -6,5 +6,5 @@ public static class BuildInfo
     public const string CopyRight = "Copyright © 2024 MDModsDev";
     public const string Description = "A tool for Muse Dash modding";
     public const string Name = "MuseDashModTools";
-    public const string Version = "2.0.0";
+    public const string AppVersion = "2.0.0";
 }

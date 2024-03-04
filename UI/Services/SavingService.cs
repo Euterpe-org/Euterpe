@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.IO.Abstractions;
+﻿using System.IO.Abstractions;
 
 #pragma warning disable CS8618
 
@@ -13,30 +12,6 @@ public sealed partial class SavingService : ISavingService
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
 
     private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
-
-    [UsedImplicitly]
-    public IFileSystem FileSystem { get; init; }
-
-    [UsedImplicitly]
-    public IFileSystemPickerService FileSystemPickerService { get; init; }
-
-    [UsedImplicitly]
-    public ILocalService LocalService { get; init; }
-
-    [UsedImplicitly]
-    public ILogger Logger { get; init; }
-
-    [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; }
-
-    [UsedImplicitly]
-    public ISerializationService SerializationService { get; init; }
-
-    [UsedImplicitly]
-    public IUpdateUIService UpdateUIService { get; init; }
 
     public Setting Settings { get; } = new();
     public string ModLinksPath => Path.Combine(ConfigFolderPath, "ModLinks.json");
@@ -56,8 +31,8 @@ public sealed partial class SavingService : ISavingService
             }
         }
 
-        UpdateUIService.ChangeTheme(Settings.Theme);
         await CheckSettingValidity();
+        UpdateUIService.ChangeTheme(Settings.Theme);
         await UpdateUIService.InitializeAllTabsAsync();
 
         Logger.Information("Settings initialize finished");
@@ -91,4 +66,32 @@ public sealed partial class SavingService : ISavingService
         await CheckSettingValidity();
         return true;
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public IFileSystem FileSystem { get; init; }
+
+    [UsedImplicitly]
+    public IFileSystemPickerService FileSystemPickerService { get; init; }
+
+    [UsedImplicitly]
+    public ILocalService LocalService { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; }
+
+    [UsedImplicitly]
+    public ISerializationService SerializationService { get; init; }
+
+    [UsedImplicitly]
+    public IUpdateUIService UpdateUIService { get; init; }
+
+    #endregion
 }

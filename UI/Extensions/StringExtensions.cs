@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Avalonia.Media;
 
 namespace MuseDashModToolsUI.Extensions;

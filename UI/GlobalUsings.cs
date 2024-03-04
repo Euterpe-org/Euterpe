@@ -18,6 +18,7 @@ global using System.Runtime.InteropServices;
 global using System.Runtime.Versioning;
 global using Cysharp.Text;
 global using Serilog;
+global using static MuseDashModToolsUI.BuildInfo;
 global using static MuseDashModToolsUI.Localization.MsgBox.Resources_MsgBox;
 global using static MuseDashModToolsUI.Localization.Resources.Resources;
 global using static MuseDashModToolsUI.Localization.XAML.Resources_XAML;

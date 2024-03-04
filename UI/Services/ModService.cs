@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
 using DynamicData;
 using NuGet.Versioning;
 
@@ -91,7 +89,7 @@ public sealed partial class ModService : IModService
             return;
         }
 
-        var errors = new StringBuilder();
+        using var errors = ZString.CreateStringBuilder(true);
 
         try
         {
@@ -158,7 +156,7 @@ public sealed partial class ModService : IModService
             if (item.IsDisabled)
             {
                 var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DisableModConfirm,
-                    SavingService.Settings.AskDisableDepWhenDisable);
+                    SavingService.Settings.AskDisableDependencyWhenDisable);
                 if (!result)
                 {
                     return;
@@ -202,7 +200,7 @@ public sealed partial class ModService : IModService
         try
         {
             var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DeleteModConfirm,
-                SavingService.Settings.AskDisableDepWhenDelete);
+                SavingService.Settings.AskDisableDependencyWhenDelete);
             if (!result)
             {
                 return;

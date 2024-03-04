@@ -61,7 +61,7 @@
             <TextBlock HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="25"
-                       Text="{Binding Version}" />
+                       Text="{Binding AppVersion}" />
         </Grid>
 
         <pages:MainMenu Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20" />

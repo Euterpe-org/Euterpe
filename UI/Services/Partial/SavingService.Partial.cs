@@ -1,8 +1,5 @@
 using System.Globalization;
-using System.IO;
-using System.Text.Json.Nodes;
 using Avalonia.Controls.ApplicationLifetimes;
-using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -109,33 +106,6 @@ public sealed partial class SavingService
     }
 
     /// <summary>
-    ///     Get saved values from JsonNode
-    /// </summary>
-    /// <param name="savedSetting"></param>
-    private void GetSavedValues(JsonNode savedSetting)
-    {
-        Settings.MuseDashFolder = savedSetting.GetString(nameof(Setting.MuseDashFolder));
-        Settings.LanguageCode = savedSetting.GetString(nameof(Setting.LanguageCode), CultureInfo.CurrentUICulture.ToString());
-        Settings.FontName = savedSetting.GetString(nameof(Setting.FontName), FontManageService.DefaultFont);
-        if (SemanticVersion.TryParse(savedSetting.GetString(nameof(Setting.SkipVersion))!, out var version))
-        {
-            var currentVersion = SemanticVersion.Parse(BuildInfo.Version);
-            Settings.SkipVersion = currentVersion > version ? currentVersion : version;
-        }
-
-        Settings.DownloadSource = savedSetting.GetValue(nameof(Setting.DownloadSource), Enum.Parse<DownloadSources>);
-        Settings.DownloadPrerelease = savedSetting.GetValue(nameof(Setting.DownloadPrerelease), bool.Parse);
-        Settings.CustomDownloadSource = savedSetting.GetString(nameof(Setting.CustomDownloadSource));
-        Settings.Theme = savedSetting.GetString(nameof(Setting.Theme), "Dark")!;
-        Settings.ShowConsole = savedSetting.GetValue(nameof(Setting.ShowConsole), bool.Parse);
-        Settings.AskInstallMuseDashModTools = savedSetting.GetValue(nameof(Setting.AskInstallMuseDashModTools), Enum.Parse<AskType>);
-        Settings.AskEnableDepWhenInstall = savedSetting.GetValue(nameof(Setting.AskEnableDepWhenInstall), Enum.Parse<AskType>);
-        Settings.AskEnableDepWhenEnable = savedSetting.GetValue(nameof(Setting.AskEnableDepWhenEnable), Enum.Parse<AskType>);
-        Settings.AskDisableDepWhenDelete = savedSetting.GetValue(nameof(Setting.AskDisableDepWhenDelete), Enum.Parse<AskType>);
-        Settings.AskDisableDepWhenDisable = savedSetting.GetValue(nameof(Setting.AskDisableDepWhenDisable), Enum.Parse<AskType>);
-    }
-
-    /// <summary>
     ///     If Settings.json exists, load it
     /// </summary>
     private void LoadSavedSetting()
@@ -154,13 +124,13 @@ public sealed partial class SavingService
             return;
         }
 
-        var savedSetting = JsonNode.Parse(text);
+        var savedSetting = SerializationService.DeserializeSetting(text);
         if (savedSetting is null)
         {
             return;
         }
 
-        GetSavedValues(savedSetting);
+        Settings.Copy(savedSetting);
         _isSavedLoaded = true;
         Logger.Information("Saved setting loaded from Settings.json");
     }
@@ -189,6 +159,12 @@ public sealed partial class SavingService
         {
             Settings.FontName = FontManageService.DefaultFont;
             Logger.Warning("Font name is empty, using default font");
+        }
+
+        if (string.IsNullOrEmpty(Settings.Theme))
+        {
+            Settings.Theme = "Dark";
+            Logger.Warning("Theme is empty, using dark theme");
         }
     }
 

@@ -1,5 +1,4 @@
 ﻿using System.IO.Abstractions;
-using System.Net.Http;
 using Autofac;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
 using MuseDashModToolsUI.ViewModels;

@@ -1,5 +1,4 @@
 using System.Security;
-using System.Text;
 using DynamicData;
 using NuGet.Versioning;
 
@@ -12,22 +11,25 @@ public sealed partial class ModService
     /// </summary>
     /// <param name="ex"></param>
     /// <param name="errors"></param>
-    private static void HandleInstallModException(Exception ex, StringBuilder errors)
+    private static void HandleInstallModException(Exception ex, Utf16ValueStringBuilder errors)
     {
         switch (ex)
         {
             case HttpRequestException:
-                errors.AppendFormat(MsgBox_Content_InstallModFailed_Internet, ex).AppendLine();
+                errors.AppendFormat(MsgBox_Content_InstallModFailed_Internet, ex);
+                errors.AppendLine();
                 break;
 
             case SecurityException:
             case UnauthorizedAccessException:
             case IOException:
-                errors.AppendFormat(MsgBox_Content_InstallModFailed_Game, ex).AppendLine();
+                errors.AppendFormat(MsgBox_Content_InstallModFailed_Game, ex);
+                errors.AppendLine();
                 break;
 
             default:
-                errors.AppendFormat(MsgBox_Content_InstallModFailed, ex).AppendLine();
+                errors.AppendFormat(MsgBox_Content_InstallModFailed, ex);
+                errors.AppendLine();
                 break;
         }
     }
@@ -218,11 +220,11 @@ public sealed partial class ModService
     ///     Check if the mod's dependencies are installed
     /// </summary>
     /// <param name="item"></param>
-    /// <returns>StringBuilder for errors</returns>
-    private async Task<StringBuilder> CheckDependencyInstall(Mod item)
+    /// <returns>string for errors</returns>
+    private async Task<string> CheckDependencyInstall(Mod item)
     {
         var dependencies = SearchDependencies(item.Name).ToArray();
-        var errors = new StringBuilder();
+        using var errors = ZString.CreateStringBuilder(true);
         foreach (var dependency in dependencies)
         {
             var installedMod = _mods.FirstOrDefault(x => x.Name == dependency.Name && x.IsLocal);
@@ -247,14 +249,15 @@ public sealed partial class ModService
             }
             catch (Exception ex)
             {
-                errors.AppendFormat(MsgBox_Content_InstallDependencyFailed, dependency.Name, ex).AppendLine();
+                errors.AppendFormat(MsgBox_Content_InstallDependencyFailed, dependency.Name, ex);
+                errors.AppendLine();
                 Logger.Information(ex, "Install dependency {Name} failed", dependency.Name);
             }
         }
 
         SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
-            MsgBox_Content_EnableDependency, SavingService.Settings.AskEnableDepWhenInstall);
-        return errors;
+            MsgBox_Content_EnableDependency, SavingService.Settings.AskEnableDependencyWhenInstall);
+        return errors.ToString();
     }
 
     /// <summary>
@@ -273,7 +276,7 @@ public sealed partial class ModService
             return askType;
         }
 
-        var disabledDependencyNames = string.Join(", ", disabledDependencies.Select(x => x.Name));
+        var disabledDependencyNames = ZString.Join(", ", disabledDependencies.Select(x => x.Name));
 
         return await ChangeDependenciesState(ZString.Format(message, item.Name, disabledDependencyNames),
             disabledDependencies, askType, false);

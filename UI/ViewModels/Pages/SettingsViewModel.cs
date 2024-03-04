@@ -52,10 +52,10 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
         Path = SavingService.Settings.MuseDashFolder;
         CustomDownloadSource = SavingService.Settings.CustomDownloadSource;
         CurrentDownloadSource = (int)SavingService.Settings.DownloadSource;
-        EnableDependenciesWhenInstalling = (int)SavingService.Settings.AskEnableDepWhenInstall;
-        EnableDependenciesWhenEnabling = (int)SavingService.Settings.AskEnableDepWhenEnable;
-        DisableDependenciesWhenDeleting = (int)SavingService.Settings.AskDisableDepWhenDelete;
-        DisableDependenciesWhenDisabling = (int)SavingService.Settings.AskDisableDepWhenDisable;
+        EnableDependenciesWhenInstalling = (int)SavingService.Settings.AskEnableDependencyWhenInstall;
+        EnableDependenciesWhenEnabling = (int)SavingService.Settings.AskEnableDependencyWhenEnable;
+        DisableDependenciesWhenDeleting = (int)SavingService.Settings.AskDisableDependencyWhenDelete;
+        DisableDependenciesWhenDisabling = (int)SavingService.Settings.AskDisableDependencyWhenDisable;
         DownloadPrerelease = SavingService.Settings.DownloadPrerelease;
         IsUsingCustomDownloadSource = CurrentDownloadSource == 3;
 
@@ -101,7 +101,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskEnableDepWhenInstall = (AskType)value;
+            SavingService.Settings.AskEnableDependencyWhenInstall = (AskType)value;
         }
     }
 
@@ -110,7 +110,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskEnableDepWhenEnable = (AskType)value;
+            SavingService.Settings.AskEnableDependencyWhenEnable = (AskType)value;
         }
     }
 
@@ -119,7 +119,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskDisableDepWhenDelete = (AskType)value;
+            SavingService.Settings.AskDisableDependencyWhenDelete = (AskType)value;
         }
     }
 
@@ -128,7 +128,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskDisableDepWhenDisable = (AskType)value;
+            SavingService.Settings.AskDisableDependencyWhenDisable = (AskType)value;
         }
     }
 

@@ -16,7 +16,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
     [UsedImplicitly]
     public IUpdateUIService UpdateUIService { get; init; }
 
-    public static string Version => BuildInfo.Version;
+    public static string AppVersion => BuildInfo.AppVersion;
 
     public MainWindowViewModel(IComponentContext context)
     {
