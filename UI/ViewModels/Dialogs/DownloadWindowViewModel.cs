@@ -20,14 +20,14 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     public async Task InstallMelonLoader()
     {
-        if (File.Exists(SavingService.Settings.MelonLoaderZipPath))
+        if (File.Exists(Settings.MelonLoaderZipPath))
         {
             var onlineSize = await DownloadService.GetMelonLoaderFileSizeAsync();
-            var zipInfo = new FileInfo(SavingService.Settings.MelonLoaderZipPath);
+            var zipInfo = new FileInfo(Settings.MelonLoaderZipPath);
             if (onlineSize > zipInfo.Length && !await DownloadMelonLoaderZipFile())
             {
                 return;
@@ -65,13 +65,13 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
         try
         {
             Logger.Information("Extracting MelonLoader.zip");
-            ZipFile.ExtractToDirectory(SavingService.Settings.MelonLoaderZipPath, SavingService.Settings.MuseDashFolder!, true);
+            ZipFile.ExtractToDirectory(Settings.MelonLoaderZipPath, Settings.MuseDashFolder!, true);
             return true;
         }
         catch (Exception ex)
         {
             Logger.Error(ex, "Extracting MelonLoader.zip failed");
-            await MessageBoxService.FormatErrorMessageBox(MsgBox_Content_UnzipMelonLoaderFailed, SavingService.Settings.MelonLoaderZipPath, ex);
+            await MessageBoxService.FormatErrorMessageBox(MsgBox_Content_UnzipMelonLoaderFailed, Settings.MelonLoaderZipPath, ex);
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }
@@ -82,14 +82,14 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
         try
         {
             Logger.Information("Deleting MelonLoader.zip");
-            File.Delete(SavingService.Settings.MelonLoaderZipPath);
+            File.Delete(Settings.MelonLoaderZipPath);
             return true;
         }
         catch (Exception ex)
         {
             Logger.Error(ex, "Deleting MelonLoader.zip failed");
             await MessageBoxService.FormatErrorMessageBox(MsgBox_Content_DeleteMelonLoaderZipFailed,
-                SavingService.Settings.MelonLoaderZipPath, ex);
+                Settings.MelonLoaderZipPath, ex);
             DialogHost.GetDialogSession("DownloadWindowDialog")?.Close(false);
             return false;
         }

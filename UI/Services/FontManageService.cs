@@ -12,9 +12,9 @@ public sealed partial class FontManageService : IFontManageService, INotifyPrope
     private readonly ILogger _logger;
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Setting Settings { get; init; }
 
-    public FontFamily this[string _] => new(SavingService.Settings.FontName!);
+    public FontFamily this[string _] => new(Settings.FontName!);
     public static string DefaultFont => SKTypeface.Default.FamilyName;
 
     public FontManageService(ILogger logger)
@@ -27,12 +27,12 @@ public sealed partial class FontManageService : IFontManageService, INotifyPrope
 
     public void SetFont(string fontName)
     {
-        if (SavingService.Settings.FontName == fontName)
+        if (Settings.FontName == fontName)
         {
             return;
         }
 
-        SavingService.Settings.FontName = fontName;
+        Settings.FontName = fontName;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         _logger.Information("Font changed to {FontName}", fontName);

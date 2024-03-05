@@ -27,7 +27,7 @@ public sealed class WindowsService : IPlatformService
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     public string OsString => "Windows";
 
@@ -60,7 +60,7 @@ public sealed class WindowsService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public async ValueTask<bool> VerifyGameVersionAsync()
     {
-        var version = FileVersionInfo.GetVersionInfo(SavingService.Value.Settings.MuseDashExePath).FileVersion;
+        var version = FileVersionInfo.GetVersionInfo(Settings.MuseDashExePath).FileVersion;
         if (version is "2019.4.32.16288752")
         {
             Logger.Information("Correct game version {Version}", version);

@@ -7,28 +7,7 @@ namespace MuseDashModToolsUI.Services;
 public sealed partial class UpdateUIService : IUpdateUIService
 {
     [UsedImplicitly]
-    public ILogger Logger { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IChartDownloadViewModel> ChartDownloadViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IInfoJsonViewModel> InfoJsonViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IMainWindowViewModel> MainWindowViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     public void UpdateText()
     {
@@ -51,7 +30,7 @@ public sealed partial class UpdateUIService : IUpdateUIService
             _ => app.RequestedThemeVariant
         };
 
-        SavingService.Value.Settings.Theme = themeName;
+        Settings.Theme = themeName;
     }
 
     public async Task InitializeAllTabsAsync()
@@ -72,4 +51,29 @@ public sealed partial class UpdateUIService : IUpdateUIService
 
         Logger.Information("Path changed, ModManage and LogAnalysis tabs initialized");
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<IChartDownloadViewModel> ChartDownloadViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<IInfoJsonViewModel> InfoJsonViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<IMainWindowViewModel> MainWindowViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<IModManageViewModel> ModManageViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
+
+    #endregion
 }

@@ -23,11 +23,11 @@ public sealed partial class UpdateUIService
     /// </summary>
     private void RecoverOption()
     {
-        SettingsViewModel.Value.CurrentDownloadSource = (int)SavingService.Value.Settings.DownloadSource;
-        SettingsViewModel.Value.DisableDependenciesWhenDeleting = (int)SavingService.Value.Settings.AskDisableDependencyWhenDelete;
-        SettingsViewModel.Value.DisableDependenciesWhenDisabling = (int)SavingService.Value.Settings.AskDisableDependencyWhenDisable;
-        SettingsViewModel.Value.EnableDependenciesWhenEnabling = (int)SavingService.Value.Settings.AskEnableDependencyWhenEnable;
-        SettingsViewModel.Value.EnableDependenciesWhenInstalling = (int)SavingService.Value.Settings.AskEnableDependencyWhenInstall;
+        SettingsViewModel.Value.CurrentDownloadSource = (int)Settings.DownloadSource;
+        SettingsViewModel.Value.DisableDependenciesWhenDeleting = (int)Settings.AskDisableDependencyWhenDelete;
+        SettingsViewModel.Value.DisableDependenciesWhenDisabling = (int)Settings.AskDisableDependencyWhenDisable;
+        SettingsViewModel.Value.EnableDependenciesWhenEnabling = (int)Settings.AskEnableDependencyWhenEnable;
+        SettingsViewModel.Value.EnableDependenciesWhenInstalling = (int)Settings.AskEnableDependencyWhenInstall;
         ChartDownloadViewModel.Value.CurrentSortOptionIndex = (int)ChartDownloadViewModel.Value.SortOption;
     }
 }

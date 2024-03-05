@@ -21,36 +21,16 @@ public sealed partial class DownloadService : IDownloadService
     private const string ThirdLink = "https://gitee.com/lxymahatma/ModLinks/raw/main/";
 
     private HttpResponseMessage? _melonLoaderResponseMessage;
-    private string DefaultDownloadSource => DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
+    private string DefaultDownloadSource => DownloadSourceDictionary[Settings.DownloadSource];
 
     private Dictionary<DownloadSources, string> DownloadSourceDictionary => new()
     {
         { DownloadSources.Github, PrimaryLink },
         { DownloadSources.GithubMirror, SecondaryLink },
         { DownloadSources.Gitee, ThirdLink },
-        { DownloadSources.Custom, SavingService.Value.Settings.CustomDownloadSource! }
+        { DownloadSources.Custom, Settings.CustomDownloadSource! }
     };
 
-    [UsedImplicitly]
-    public HttpClient Client { get; init; }
-
-    [UsedImplicitly]
-    public ILogger Logger { get; init; }
-
-    [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; }
-
-    [UsedImplicitly]
-    public ISerializationService SerializationService { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ILocalService> LocalService { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
 
     public async Task CheckUpdatesAsync(bool isUserClick = false)
     {
@@ -63,7 +43,7 @@ public sealed partial class DownloadService : IDownloadService
             var releases = await Client.GetFromJsonAsync<List<GithubRelease>>(ReleaseInfoLink);
             Logger.Information("Get releases success");
 
-            var release = SavingService.Value.Settings.DownloadPrerelease ? releases![0] : releases!.Find(x => !x.Prerelease)!;
+            var release = Settings.DownloadPrerelease ? releases![0] : releases!.Find(x => !x.Prerelease)!;
 
             var version = GetVersionFromTag(release.TagName);
             if (version is null || await SkipVersionCheck(version, AppVersion, isUserClick))
@@ -113,14 +93,14 @@ public sealed partial class DownloadService : IDownloadService
 
     public async Task DownloadModAsync(string link, string path)
     {
-        var defaultDownloadSource = DownloadSourceDictionary[SavingService.Value.Settings.DownloadSource];
+        var defaultDownloadSource = DownloadSourceDictionary[Settings.DownloadSource];
         var result = await DownloadModFromSourceAsync(defaultDownloadSource, link, path);
         if (result is not null)
         {
             return;
         }
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != Settings.DownloadSource))
         {
             result = await DownloadModFromSourceAsync(pair.Value, link, path);
             if (result is not null)
@@ -175,7 +155,7 @@ public sealed partial class DownloadService : IDownloadService
             return mods;
         }
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != Settings.DownloadSource))
         {
             mods = await GetModListFromSourceAsync(pair.Value);
             if (mods is not null)
@@ -198,4 +178,32 @@ public sealed partial class DownloadService : IDownloadService
         await MessageBoxService.ErrorMessageBox(MsgBox_Content_GetModListFailed);
         return null;
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public HttpClient Client { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; }
+
+    [UsedImplicitly]
+    public ISerializationService SerializationService { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ILocalService> LocalService { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ISavingService> SavingService { get; init; }
+
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
+
+    #endregion
 }

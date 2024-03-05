@@ -50,7 +50,7 @@ public sealed partial class LogAnalyzeService
     /// </summary>
     private void StartLogFileMonitor()
     {
-        _watcher.Path = SavingService.Settings.MelonLoaderFolder;
+        _watcher.Path = Settings.MelonLoaderFolder;
         _watcher.Filter = "Latest.log";
         _watcher.Renamed += (_, _) => LogAnalysisViewModel.Value.Initialize();
         _watcher.Changed += (_, _) => LogAnalysisViewModel.Value.Initialize();

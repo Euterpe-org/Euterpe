@@ -12,7 +12,7 @@ namespace MuseDashModToolsUI.Services;
 public sealed partial class MessageBoxService : IMessageBoxService
 {
     [UsedImplicitly]
-    public Lazy<ISavingService>? SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     #region Custom Message Box
 
@@ -29,7 +29,7 @@ public sealed partial class MessageBoxService : IMessageBoxService
                 Icon = icon,
                 CanResize = true,
                 Topmost = true,
-                FontFamily = SavingService.Value.Settings.FontName,
+                FontFamily = Settings.FontName,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();
@@ -58,7 +58,7 @@ public sealed partial class MessageBoxService : IMessageBoxService
                 Icon = icon,
                 CanResize = true,
                 Topmost = true,
-                FontFamily = SavingService.Value.Settings.FontName,
+                FontFamily = Settings.FontName,
                 Markdown = true,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
@@ -90,7 +90,7 @@ public sealed partial class MessageBoxService : IMessageBoxService
                 ButtonDefinitions = button,
                 Icon = icon,
                 Topmost = true,
-                FontFamily = SavingService.Value.Settings.FontName,
+                FontFamily = Settings.FontName,
                 WindowStartupLocation = isMainWindow ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen
             });
         return isMainWindow ? await messageBox.ShowWindowDialogAsync(desktop!.MainWindow) : await messageBox.ShowAsync();

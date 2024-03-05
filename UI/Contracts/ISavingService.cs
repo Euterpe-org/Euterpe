@@ -2,7 +2,6 @@
 
 public interface ISavingService
 {
-    public Setting Settings { get; }
     public string ModLinksPath { get; }
     public string ChartFolderPath { get; }
 

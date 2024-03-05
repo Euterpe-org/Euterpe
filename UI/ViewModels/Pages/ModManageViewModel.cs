@@ -28,7 +28,7 @@ public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewMo
     public IModService ModService { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     public ModManageViewModel()
     {
@@ -72,7 +72,7 @@ public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewMo
     // TODO Only load added/removed/modified mods instead of all (lxy, 2023/9/23) Planning Time: 2 months
     private void StartModsDllMonitor()
     {
-        _watcher.Path = SavingService.Settings.ModsFolder;
+        _watcher.Path = Settings.ModsFolder;
         _watcher.Filters.Add("*.dll");
         _watcher.Filters.Add("*.disabled");
         _watcher.Renamed += async (_, _) => await ModService.InitializeModList(_sourceCache, Mods);
@@ -108,7 +108,7 @@ public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewMo
     {
         Process.Start(new ProcessStartInfo
         {
-            FileName = Path.Combine(SavingService.Settings.UserDataFolder, path),
+            FileName = Path.Combine(Settings.UserDataFolder, path),
             UseShellExecute = true
         });
         Logger.Information("Open config file: {ConfigFile}", path);

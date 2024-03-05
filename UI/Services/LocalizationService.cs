@@ -11,7 +11,7 @@ public sealed partial class LocalizationService : ILocalizationService, INotifyP
     private readonly ILogger _logger;
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     [UsedImplicitly]
     public Lazy<IUpdateUIService> UpdateTextService { get; init; }
@@ -35,7 +35,7 @@ public sealed partial class LocalizationService : ILocalizationService, INotifyP
         }
 
         CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(language);
-        SavingService.Settings.LanguageCode = language;
+        Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
         UpdateTextService.Value.UpdateText();

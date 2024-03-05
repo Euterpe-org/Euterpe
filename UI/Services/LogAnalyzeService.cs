@@ -19,7 +19,7 @@ public sealed partial class LogAnalyzeService : ILogAnalyzeService
     public IModService ModService { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     [UsedImplicitly]
     public Lazy<ILogAnalysisViewModel> LogAnalysisViewModel { get; init; }
@@ -116,9 +116,9 @@ public sealed partial class LogAnalyzeService : ILogAnalyzeService
 
     public async ValueTask<string> LoadLogAsync()
     {
-        if (!string.IsNullOrEmpty(SavingService.Settings.MelonLoaderFolder))
+        if (!string.IsNullOrEmpty(Settings.MelonLoaderFolder))
         {
-            LogPath = Path.Combine(SavingService.Settings.MelonLoaderFolder, "Latest.log");
+            LogPath = Path.Combine(Settings.MelonLoaderFolder, "Latest.log");
         }
 
         if (!File.Exists(LogPath))

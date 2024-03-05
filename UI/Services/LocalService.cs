@@ -26,6 +26,9 @@ public sealed partial class LocalService : ILocalService
     [UsedImplicitly]
     public Lazy<ISavingService> SavingService { get; init; }
 
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
+
     private bool IsValidPath { get; set; }
 
     public async Task CheckDotNetRuntimeInstallAsync()
@@ -51,8 +54,8 @@ public sealed partial class LocalService : ILocalService
 
     public async Task CheckMelonLoaderInstallAsync()
     {
-        var melonLoaderFolder = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MelonLoader");
-        var versionFile = Path.Join(SavingService.Value.Settings.MuseDashFolder, "version.dll");
+        var melonLoaderFolder = Path.Join(Settings.MuseDashFolder, "MelonLoader");
+        var versionFile = Path.Join(Settings.MuseDashFolder, "version.dll");
         if (Directory.Exists(melonLoaderFolder) && File.Exists(versionFile))
         {
             return;
@@ -79,7 +82,7 @@ public sealed partial class LocalService : ILocalService
 
             await CreateFiles();
             IsValidPath = true;
-            Logger.Information("Path verified {Path}", SavingService.Value.Settings.MuseDashFolder);
+            Logger.Information("Path verified {Path}", Settings.MuseDashFolder);
         }
         catch (Exception ex)
         {
@@ -174,14 +177,14 @@ public sealed partial class LocalService : ILocalService
             return;
         }
 
-        var versionFile = Path.Join(SavingService.Value.Settings.MuseDashFolder, "version.dll");
-        var noticeTxt = Path.Join(SavingService.Value.Settings.MuseDashFolder, "NOTICE.txt");
+        var versionFile = Path.Join(Settings.MuseDashFolder, "version.dll");
+        var noticeTxt = Path.Join(Settings.MuseDashFolder, "NOTICE.txt");
 
-        if (Directory.Exists(SavingService.Value.Settings.MelonLoaderFolder))
+        if (Directory.Exists(Settings.MelonLoaderFolder))
         {
             try
             {
-                Directory.Delete(SavingService.Value.Settings.MelonLoaderFolder, true);
+                Directory.Delete(Settings.MelonLoaderFolder, true);
                 File.Delete(versionFile);
                 File.Delete(noticeTxt);
                 Logger.Information("MelonLoader uninstalled successfully");
@@ -207,7 +210,7 @@ public sealed partial class LocalService : ILocalService
         {
             launchArguments.Append("//--no-mods");
         }
-        else if (!SavingService.Value.Settings.ShowConsole)
+        else if (!Settings.ShowConsole)
         {
             launchArguments.Append("//--melonloader.hideconsole");
         }
@@ -233,7 +236,7 @@ public sealed partial class LocalService : ILocalService
         Logger.Information("Opening Custom Albums folder...");
         Process.Start(new ProcessStartInfo
         {
-            FileName = SavingService.Value.Settings.CustomAlbumsFolder,
+            FileName = Settings.CustomAlbumsFolder,
             UseShellExecute = true
         });
     }
@@ -250,7 +253,7 @@ public sealed partial class LocalService : ILocalService
         Logger.Information("Opening mods folder...");
         Process.Start(new ProcessStartInfo
         {
-            FileName = SavingService.Value.Settings.ModsFolder,
+            FileName = Settings.ModsFolder,
             UseShellExecute = true
         });
     }
@@ -267,7 +270,7 @@ public sealed partial class LocalService : ILocalService
         Logger.Information("Opening UserData folder...");
         Process.Start(new ProcessStartInfo
         {
-            FileName = SavingService.Value.Settings.UserDataFolder,
+            FileName = Settings.UserDataFolder,
             UseShellExecute = true
         });
     }
@@ -281,7 +284,7 @@ public sealed partial class LocalService : ILocalService
             return;
         }
 
-        var logPath = Path.Combine(SavingService.Value.Settings.MelonLoaderFolder, "Latest.log");
+        var logPath = Path.Combine(Settings.MelonLoaderFolder, "Latest.log");
         Logger.Information("Opening Log folder...");
         PlatformService.OpenLogFolder(logPath);
     }
@@ -289,7 +292,7 @@ public sealed partial class LocalService : ILocalService
     public async ValueTask<string> ReadGameVersionAsync()
     {
         var assetsManager = new AssetsManager();
-        var bundlePath = Path.Join(SavingService.Value.Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        var bundlePath = Path.Join(Settings.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);

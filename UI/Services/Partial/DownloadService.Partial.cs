@@ -67,7 +67,7 @@ public sealed partial class DownloadService
         {
             var totalLength = _melonLoaderResponseMessage!.Content.Headers.ContentLength;
             var contentStream = await _melonLoaderResponseMessage.Content.ReadAsStreamAsync();
-            await using var fs = new FileStream(SavingService.Value.Settings.MelonLoaderZipPath, FileMode.OpenOrCreate);
+            await using var fs = new FileStream(Settings.MelonLoaderZipPath, FileMode.OpenOrCreate);
             var buffer = new byte[5 * 1024];
             var readLength = 0L;
             int length;
@@ -166,7 +166,7 @@ public sealed partial class DownloadService
             return;
         }
 
-        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != SavingService.Value.Settings.DownloadSource))
+        foreach (var pair in DownloadSourceDictionary.Where(pair => pair.Key != Settings.DownloadSource))
         {
             await GetMelonLoaderResponseFromSource(pair.Value);
             if (_melonLoaderResponseMessage is not null)
@@ -232,7 +232,7 @@ public sealed partial class DownloadService
         var current = SemanticVersion.Parse(currentVersion);
         if (!isUserClick)
         {
-            return version == SavingService.Value.Settings.SkipVersion || version <= current;
+            return version == Settings.SkipVersion || version <= current;
         }
 
         if (version > current)
@@ -258,7 +258,7 @@ public sealed partial class DownloadService
 
         if (update == MsgBox_Button_NoNoAsk)
         {
-            SavingService.Value.Settings.SkipVersion = SemanticVersion.Parse(version);
+            Settings.SkipVersion = SemanticVersion.Parse(version);
             return false;
         }
 

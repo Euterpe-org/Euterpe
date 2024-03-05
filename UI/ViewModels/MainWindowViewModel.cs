@@ -9,6 +9,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
 {
     private readonly ILogger _logger;
     private readonly ISavingService _savingService;
+    private readonly Setting _settings;
     [ObservableProperty] private ViewModelBase _content;
     [ObservableProperty] private int _selectedTabIndex;
     [ObservableProperty] private List<TabView> _tabs = [];
@@ -24,9 +25,10 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
         _savingService = context.Resolve<ISavingService>();
 
         _savingService.LoadSettings();
-        if (_savingService.Settings.LanguageCode is not null)
+        _settings = context.Resolve<Setting>();
+        if (_settings.LanguageCode is not null)
         {
-            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_savingService.Settings.LanguageCode);
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_settings.LanguageCode);
         }
 #if !DEBUG
         context.Resolve<IDownloadService>().CheckUpdatesAsync();
@@ -39,7 +41,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
     [RelayCommand]
     private void OnChangeTheme()
     {
-        var targetTheme = _savingService.Settings.Theme == "Dark" ? "Light" : "Dark";
+        var targetTheme = _settings.Theme == "Dark" ? "Light" : "Dark";
         UpdateUIService.ChangeTheme(targetTheme);
         _logger.Information("Change Theme to {Theme}", targetTheme);
     }

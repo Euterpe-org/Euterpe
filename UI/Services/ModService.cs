@@ -28,7 +28,7 @@ public sealed partial class ModService : IModService
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     [UsedImplicitly]
     public ISettingsViewModel SettingsViewModel { get; init; }
@@ -62,7 +62,7 @@ public sealed partial class ModService : IModService
             return;
         }
 
-        var localPaths = LocalService.GetModFiles(SavingService.Settings.ModsFolder);
+        var localPaths = LocalService.GetModFiles(Settings.ModsFolder);
         try
         {
             _localMods = localPaths.Select(LocalService.LoadMod).Where(mod => mod is not null).ToList()!;
@@ -93,7 +93,7 @@ public sealed partial class ModService : IModService
 
         try
         {
-            var path = Path.Join(SavingService.Settings.ModsFolder,
+            var path = Path.Join(Settings.ModsFolder,
                 item.IsLocal ? item.FileNameExtended() : item.DownloadLink.Split("/")[1]);
             await DownloadService.DownloadModAsync(item.DownloadLink, path);
 
@@ -145,7 +145,7 @@ public sealed partial class ModService : IModService
         }
 
         Logger.Information("Reinstalling mod {Name}", item.Name);
-        File.Delete(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
+        File.Delete(Path.Join(Settings.ModsFolder, item.FileNameExtended()));
         await OnInstallModAsync(item);
     }
 
@@ -156,7 +156,7 @@ public sealed partial class ModService : IModService
             if (item.IsDisabled)
             {
                 var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DisableModConfirm,
-                    SavingService.Settings.AskDisableDependencyWhenDisable);
+                    Settings.AskDisableDependencyWhenDisable);
                 if (!result)
                 {
                     return;
@@ -169,8 +169,8 @@ public sealed partial class ModService : IModService
                 await CheckDependencyInstall(item);
             }
 
-            File.Move(Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended(true)),
-                Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended()));
+            File.Move(Path.Join(Settings.ModsFolder, item.FileNameExtended(true)),
+                Path.Join(Settings.ModsFolder, item.FileNameExtended()));
             Logger.Information("Change mod {Name} state to {State}", item.Name,
                 item.IsDisabled ? "Disabled" : "Enabled");
         }
@@ -189,7 +189,7 @@ public sealed partial class ModService : IModService
             return;
         }
 
-        var path = Path.Join(SavingService.Settings.ModsFolder, item.FileNameExtended());
+        var path = Path.Join(Settings.ModsFolder, item.FileNameExtended());
         if (!File.Exists(path))
         {
             Logger.Error("Delete mod {Name} failed: File not found", item.Name);
@@ -200,7 +200,7 @@ public sealed partial class ModService : IModService
         try
         {
             var (result, askType) = await DisableReverseDependencies(item, MsgBox_Content_DeleteModConfirm,
-                SavingService.Settings.AskDisableDependencyWhenDelete);
+                Settings.AskDisableDependencyWhenDelete);
             if (!result)
             {
                 return;

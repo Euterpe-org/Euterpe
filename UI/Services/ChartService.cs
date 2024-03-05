@@ -19,11 +19,11 @@ public sealed class ChartService : IChartService
     public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     public async Task DownloadChartAsync(Chart item)
     {
-        var path = Path.Combine(SavingService.Settings.CustomAlbumsFolder, item.Name.RemoveInvalidChars() + ".mdm");
+        var path = Path.Combine(Settings.CustomAlbumsFolder, item.Name.RemoveInvalidChars() + ".mdm");
         if (File.Exists(path))
         {
             var result = await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_OverrideChart, item.Name);
@@ -42,9 +42,9 @@ public sealed class ChartService : IChartService
         _sourceCache = sourceCache;
         _charts = charts;
 
-        if (!Directory.Exists(SavingService.Settings.CustomAlbumsFolder))
+        if (!Directory.Exists(Settings.CustomAlbumsFolder))
         {
-            Directory.CreateDirectory(SavingService.Settings.CustomAlbumsFolder);
+            Directory.CreateDirectory(Settings.CustomAlbumsFolder);
         }
 
         var webCharts = await DownloadService.GetChartListAsync();

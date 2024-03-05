@@ -8,55 +8,41 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
 {
     [ObservableProperty] private string[] _askTypes;
     [ObservableProperty] private int _currentDownloadSource;
-    [ObservableProperty] private int _currentFontIndex;
-    [ObservableProperty] private int _currentLanguageIndex;
+    [ObservableProperty] private int _currentFontIndex, _currentLanguageIndex;
     [ObservableProperty] private string? _customDownloadSource;
-    [ObservableProperty] private int _disableDependenciesWhenDeleting;
-    [ObservableProperty] private int _disableDependenciesWhenDisabling;
+
+    [ObservableProperty] private int _disableDependenciesWhenDeleting,
+        _disableDependenciesWhenDisabling,
+        _enableDependenciesWhenEnabling,
+        _enableDependenciesWhenInstalling;
+
     [ObservableProperty] private bool _downloadPrerelease;
     [ObservableProperty] private string[] _downloadSources;
-    [ObservableProperty] private int _enableDependenciesWhenEnabling;
-    [ObservableProperty] private int _enableDependenciesWhenInstalling;
     [ObservableProperty] private bool _isUsingCustomDownloadSource;
     [ObservableProperty] private string? _path;
-
-    [UsedImplicitly]
-    public IFontManageService FontManageService { get; init; }
-
-    [UsedImplicitly]
-    public ILocalizationService LocalizationService { get; init; }
-
-    [UsedImplicitly]
-    public ILogger Logger { get; init; }
-
-    [UsedImplicitly]
-    public ISavingService SavingService { get; init; }
-
-    [UsedImplicitly]
-    public IUpdateUIService UpdateUIService { get; init; }
 
     public List<Language> AvailableLanguages => LocalizationService.AvailableLanguages;
     public List<string> AvailableFonts => FontManageService.AvailableFonts;
 
     public void Initialize()
     {
-        if (SavingService.Settings.LanguageCode is not null)
+        if (Settings.LanguageCode is not null)
         {
-            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(SavingService.Settings.LanguageCode);
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(Settings.LanguageCode);
         }
 
         AskTypes = [XAML_AskType_Always, XAML_AskType_Yes, XAML_AskType_No];
         DownloadSources = [XAML_DownloadSource_Github, XAML_DownloadSource_GithubMirror, XAML_DownloadSource_Gitee, XAML_DownloadSource_Custom];
         CurrentLanguageIndex = AvailableLanguages.FindIndex(x => x.Name == CultureInfo.CurrentUICulture.Name);
-        CurrentFontIndex = AvailableFonts.FindIndex(x => x == SavingService.Settings.FontName);
-        Path = SavingService.Settings.MuseDashFolder;
-        CustomDownloadSource = SavingService.Settings.CustomDownloadSource;
-        CurrentDownloadSource = (int)SavingService.Settings.DownloadSource;
-        EnableDependenciesWhenInstalling = (int)SavingService.Settings.AskEnableDependencyWhenInstall;
-        EnableDependenciesWhenEnabling = (int)SavingService.Settings.AskEnableDependencyWhenEnable;
-        DisableDependenciesWhenDeleting = (int)SavingService.Settings.AskDisableDependencyWhenDelete;
-        DisableDependenciesWhenDisabling = (int)SavingService.Settings.AskDisableDependencyWhenDisable;
-        DownloadPrerelease = SavingService.Settings.DownloadPrerelease;
+        CurrentFontIndex = AvailableFonts.FindIndex(x => x == Settings.FontName);
+        Path = Settings.MuseDashFolder;
+        CustomDownloadSource = Settings.CustomDownloadSource;
+        CurrentDownloadSource = (int)Settings.DownloadSource;
+        EnableDependenciesWhenInstalling = (int)Settings.AskEnableDependencyWhenInstall;
+        EnableDependenciesWhenEnabling = (int)Settings.AskEnableDependencyWhenEnable;
+        DisableDependenciesWhenDeleting = (int)Settings.AskDisableDependencyWhenDelete;
+        DisableDependenciesWhenDisabling = (int)Settings.AskDisableDependencyWhenDisable;
+        DownloadPrerelease = Settings.DownloadPrerelease;
         IsUsingCustomDownloadSource = CurrentDownloadSource == 3;
 
         Logger.Information("Settings Window initialized");
@@ -81,7 +67,29 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
         await UpdateUIService.InitializeTabsOnChoosePathAsync();
     }
 
-    private void UpdatePath() => Path = SavingService.Settings.MuseDashFolder;
+    private void UpdatePath() => Path = Settings.MuseDashFolder;
+
+    #region Services
+
+    [UsedImplicitly]
+    public IFontManageService FontManageService { get; init; }
+
+    [UsedImplicitly]
+    public ILocalizationService LocalizationService { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
+    public ISavingService SavingService { get; init; }
+
+    [UsedImplicitly]
+    public IUpdateUIService UpdateUIService { get; init; }
+
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
+
+    #endregion
 
     #region OnPropertyChanged
 
@@ -90,7 +98,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.DownloadSource = (DownloadSources)value;
+            Settings.DownloadSource = (DownloadSources)value;
         }
 
         IsUsingCustomDownloadSource = value == 3;
@@ -101,7 +109,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskEnableDependencyWhenInstall = (AskType)value;
+            Settings.AskEnableDependencyWhenInstall = (AskType)value;
         }
     }
 
@@ -110,7 +118,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskEnableDependencyWhenEnable = (AskType)value;
+            Settings.AskEnableDependencyWhenEnable = (AskType)value;
         }
     }
 
@@ -119,7 +127,7 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskDisableDependencyWhenDelete = (AskType)value;
+            Settings.AskDisableDependencyWhenDelete = (AskType)value;
         }
     }
 
@@ -128,15 +136,15 @@ public sealed partial class SettingsViewModel : ViewModelBase, ISettingsViewMode
     {
         if (value != -1)
         {
-            SavingService.Settings.AskDisableDependencyWhenDisable = (AskType)value;
+            Settings.AskDisableDependencyWhenDisable = (AskType)value;
         }
     }
 
     [UsedImplicitly]
-    partial void OnDownloadPrereleaseChanged(bool value) => SavingService.Settings.DownloadPrerelease = value;
+    partial void OnDownloadPrereleaseChanged(bool value) => Settings.DownloadPrerelease = value;
 
     [UsedImplicitly]
-    partial void OnCustomDownloadSourceChanged(string? value) => SavingService.Settings.CustomDownloadSource = value;
+    partial void OnCustomDownloadSourceChanged(string? value) => Settings.CustomDownloadSource = value;
 
     #endregion
 }

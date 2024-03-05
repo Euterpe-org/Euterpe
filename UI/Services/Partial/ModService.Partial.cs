@@ -124,7 +124,7 @@ public sealed partial class ModService
             return;
         }
 
-        var configFile = Path.Join(SavingService.Settings.UserDataFolder, localMod.ConfigFile);
+        var configFile = Path.Join(Settings.UserDataFolder, localMod.ConfigFile);
         localMod.IsValidConfigFile = File.Exists(configFile);
     }
 
@@ -183,7 +183,7 @@ public sealed partial class ModService
     /// <param name="mod"></param>
     private async Task CheckModToolsInstall(Mod mod)
     {
-        if (SavingService.Settings.AskInstallMuseDashModTools != AskType.Always)
+        if (Settings.AskInstallMuseDashModTools != AskType.Always)
         {
             return;
         }
@@ -200,7 +200,7 @@ public sealed partial class ModService
         }
         else if (result == MsgBox_Button_NoNoAsk)
         {
-            SavingService.Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
+            Settings.AskInstallMuseDashModTools = AskType.NoAndNoAsk;
         }
     }
 
@@ -235,7 +235,7 @@ public sealed partial class ModService
 
             try
             {
-                var path = Path.Join(SavingService.Settings.ModsFolder, dependency.DownloadLink.Split("/")[1]);
+                var path = Path.Join(Settings.ModsFolder, dependency.DownloadLink.Split("/")[1]);
                 await DownloadService.DownloadModAsync(dependency.DownloadLink, path);
                 var downloadedMod = LocalService.LoadMod(path);
                 dependency.IsDisabled = downloadedMod!.IsDisabled;
@@ -256,7 +256,7 @@ public sealed partial class ModService
         }
 
         SettingsViewModel.EnableDependenciesWhenInstalling = (int)await EnableDependencies(item, dependencies,
-            MsgBox_Content_EnableDependency, SavingService.Settings.AskEnableDependencyWhenInstall);
+            MsgBox_Content_EnableDependency, Settings.AskEnableDependencyWhenInstall);
         return errors.ToString();
     }
 

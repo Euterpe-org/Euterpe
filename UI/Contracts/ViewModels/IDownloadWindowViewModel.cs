@@ -2,5 +2,6 @@
 
 public interface IDownloadWindowViewModel
 {
+    Setting Settings { get; }
     Task InstallMelonLoader();
 }

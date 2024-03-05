@@ -18,6 +18,7 @@ public static class Bootstrapper
     public static void Register()
     {
         RegisterInstances();
+        RegisterComponents();
         RegisterServices();
         RegisterViewModels();
 
@@ -32,6 +33,14 @@ public static class Bootstrapper
     {
         _builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
         _builder.RegisterInstance(new HttpClient());
+    }
+
+    /// <summary>
+    ///     Register Frequently-Used Components
+    /// </summary>
+    private static void RegisterComponents()
+    {
+        _builder.RegisterType<Setting>().SingleInstance();
     }
 
     /// <summary>

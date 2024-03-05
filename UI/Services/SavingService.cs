@@ -13,7 +13,9 @@ public sealed partial class SavingService : ISavingService
 
     private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
 
-    public Setting Settings { get; } = new();
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
+
     public string ModLinksPath => Path.Combine(ConfigFolderPath, "ModLinks.json");
     public string ChartFolderPath => Path.Combine(ConfigFolderPath, "Charts");
 
