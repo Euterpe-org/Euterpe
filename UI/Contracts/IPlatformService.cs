@@ -28,6 +28,12 @@ public interface IPlatformService
     void OpenLogFolder(string logPath);
 
     /// <summary>
+    ///     Set MD_DIRECTORY environment variable
+    /// </summary>
+    /// <returns></returns>
+    bool SetPathEnvironmentVariable();
+
+    /// <summary>
     ///     Verify game exe version
     /// </summary>
     /// <returns>Is correct version</returns>

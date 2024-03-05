@@ -39,5 +39,7 @@ public sealed class LinuxService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public void OpenLogFolder(string logPath) => Process.Start("xdg-open", logPath);
 
+    public bool SetPathEnvironmentVariable() => false;
+
     public ValueTask<bool> VerifyGameVersionAsync() => ValueTask.FromResult(true);
 }

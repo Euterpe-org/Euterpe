@@ -58,6 +58,31 @@ public sealed class WindowsService : IPlatformService
     public void OpenLogFolder(string logPath) => Process.Start("explorer.exe", "/select, " + logPath);
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
+    public bool SetPathEnvironmentVariable()
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MD_NET6_DIRECTORY")))
+            {
+                Environment.SetEnvironmentVariable("MD_NET6_DIRECTORY", null);
+            }
+
+            if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Settings.MuseDashFolder)
+            {
+                return true;
+            }
+
+            Environment.SetEnvironmentVariable("MD_DIRECTORY", Settings.MuseDashFolder);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to set MD_DIRECTORY environment variable");
+            return false;
+        }
+    }
+
+    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public async ValueTask<bool> VerifyGameVersionAsync()
     {
         var version = FileVersionInfo.GetVersionInfo(Settings.MuseDashExePath).FileVersion;
