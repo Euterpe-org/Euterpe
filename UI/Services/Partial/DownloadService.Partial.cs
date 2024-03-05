@@ -21,7 +21,7 @@ public sealed partial class DownloadService
             Logger.Information("Get mod list from {Url} success", url);
 
             await File.WriteAllTextAsync(SavingService.Value.ModLinksPath, modLinks);
-            var mods = SerializationService.DeserializeModList();
+            var mods = await SerializationService.DeserializeModListAsync();
             return mods;
         }
         catch

@@ -32,7 +32,7 @@ public interface ISerializationService
     ///     Deserialize Mod list from Json
     /// </summary>
     /// <returns></returns>
-    List<Mod>? DeserializeModList();
+    Task<List<Mod>?> DeserializeModListAsync();
 
     /// <summary>
     ///     General serialize to Json method

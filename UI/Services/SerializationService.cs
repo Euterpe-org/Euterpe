@@ -25,11 +25,11 @@ public sealed class SerializationService : ISerializationService
             WriteIndented = true
         });
 
-    public List<Mod>? DeserializeModList()
+    public async Task<List<Mod>?> DeserializeModListAsync()
     {
         try
         {
-            var mods = DeserializeFromJson<List<Mod>>(File.ReadAllText(SavingService.Value.ModLinksPath));
+            var mods = DeserializeFromJson<List<Mod>>(await File.ReadAllTextAsync(SavingService.Value.ModLinksPath));
             Logger.Information("Mod list deserialized");
             return mods;
         }

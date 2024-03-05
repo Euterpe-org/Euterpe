@@ -166,7 +166,7 @@ public sealed partial class DownloadService : IDownloadService
         if (File.Exists(SavingService.Value.ModLinksPath))
         {
             Logger.Information("Get mod list from online source failed, deserializing local mod list");
-            mods = SerializationService.DeserializeModList();
+            mods = await SerializationService.DeserializeModListAsync();
             if (mods is not null)
             {
                 return mods;
