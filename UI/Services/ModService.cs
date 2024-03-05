@@ -15,24 +15,6 @@ public sealed partial class ModService : IModService
     private SourceCache<Mod, string> _sourceCache;
     private List<Mod>? _webMods;
 
-    [UsedImplicitly]
-    public IDownloadService DownloadService { get; init; }
-
-    [UsedImplicitly]
-    public ILocalService LocalService { get; init; }
-
-    [UsedImplicitly]
-    public ILogger Logger { get; init; }
-
-    [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
-    public Setting Settings { get; init; }
-
-    [UsedImplicitly]
-    public ISettingsViewModel SettingsViewModel { get; init; }
-
     public bool CompareVersion(string modName, string modVersion)
     {
         var webMod = _webMods?.Find(x => x.Name == modName);
@@ -218,4 +200,26 @@ public sealed partial class ModService : IModService
             await HandleDeleteModException(item, ex);
         }
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public IDownloadService DownloadService { get; init; }
+
+    [UsedImplicitly]
+    public ILocalService LocalService { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public ISettingsViewModel SettingsViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
+
+    #endregion
 }

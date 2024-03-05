@@ -11,24 +11,6 @@ namespace MuseDashModToolsUI.Services;
 
 public sealed partial class LocalService : ILocalService
 {
-    [UsedImplicitly]
-    public ILogger Logger { get; init; }
-
-    [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<IDownloadWindowViewModel> DownloadWindowViewModel { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
-
-    [UsedImplicitly]
-    public Setting Settings { get; init; }
-
     private bool IsValidPath { get; set; }
 
     public async Task CheckDotNetRuntimeInstallAsync()
@@ -317,4 +299,26 @@ public sealed partial class LocalService : ILocalService
 
         return string.Empty;
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<IDownloadWindowViewModel> DownloadWindowViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Lazy<ISavingService> SavingService { get; init; }
+
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
+
+    #endregion
 }

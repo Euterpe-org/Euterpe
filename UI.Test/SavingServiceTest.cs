@@ -55,4 +55,4 @@ public sealed class SavingServiceTest(ITestOutputHelper testOutputHelper)
 }
 
 [GeneratePrivateProxy(typeof(SavingService), PrivateProxyGenerateKinds.Method)]
-public class SavingServiceProxy;
+public partial class SavingServiceProxy;

@@ -14,7 +14,7 @@ public sealed partial class LocalizationService : ILocalizationService, INotifyP
     public Setting Settings { get; init; }
 
     [UsedImplicitly]
-    public Lazy<IUpdateUIService> UpdateTextService { get; init; }
+    public Lazy<IUpdateUIService> UpdateUIService { get; init; }
 
     public string this[string resourceKey] =>
         Resources_XAML.ResourceManager.GetString(resourceKey, Resources_XAML.Culture)?.Replace("\\n", "\n") ?? $"#{resourceKey}#";
@@ -38,7 +38,7 @@ public sealed partial class LocalizationService : ILocalizationService, INotifyP
         Settings.LanguageCode = language;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item[]"));
-        UpdateTextService.Value.UpdateText();
+        UpdateUIService.Value.UpdateText();
         _logger.Information("Language changed to {Language}", language);
     }
 

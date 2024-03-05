@@ -8,6 +8,7 @@ namespace MuseDashModToolsUI.Services;
 
 public sealed class SerializationService : ISerializationService
 {
+    [UsedImplicitly]
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]

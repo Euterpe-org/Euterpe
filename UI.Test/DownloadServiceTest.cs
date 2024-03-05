@@ -27,14 +27,14 @@ public sealed class DownloadServiceTest(ITestOutputHelper testOutputHelper)
         _client.When(ReleaseInfoLink).Respond("application/json", ReleaseInfo);
         var mockSavingService = new Mock<ISavingService>();
         var mockSettings = new Setting();
-        mockSavingService.Setup(x => x.Settings).Returns(mockSettings);
-        var githubService = new DownloadService
+        var downloadService = new DownloadService
         {
             Logger = _logger,
             Client = _client.ToHttpClient(),
             MessageBoxService = new Mock<IMessageBoxService>().Object,
+            Settings = mockSettings,
             SavingService = new Lazy<ISavingService>(() => mockSavingService.Object)
         };
-        await githubService.CheckUpdatesAsync();
+        await downloadService.CheckUpdatesAsync();
     }
 }

@@ -6,18 +6,6 @@ public sealed partial class InfoJsonService : IInfoJsonService
     private InfoJson _infoJson;
     private bool _isInfoJsonInitialized;
 
-    [UsedImplicitly]
-    public IFileSystemPickerService FileSystemPickerService { get; init; }
-
-    [UsedImplicitly]
-    public ILocalService LocalService { get; init; }
-
-    [UsedImplicitly]
-    public ILogger Logger { get; init; }
-
-    [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
-
     public void Initialize(InfoJson infoJson) => _infoJson = infoJson;
 
     public async Task OnChooseChartFolderAsync()
@@ -50,4 +38,20 @@ public sealed partial class InfoJsonService : IInfoJsonService
             FillInfoJson(match.Groups[1].Value, mapinfo);
         }
     }
+
+    #region Servies
+
+    [UsedImplicitly]
+    public IFileSystemPickerService FileSystemPickerService { get; init; }
+
+    [UsedImplicitly]
+    public ILocalService LocalService { get; init; }
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; }
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; }
+
+    #endregion
 }

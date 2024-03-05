@@ -31,7 +31,6 @@ public sealed partial class DownloadService : IDownloadService
         { DownloadSources.Custom, Settings.CustomDownloadSource! }
     };
 
-
     public async Task CheckUpdatesAsync(bool isUserClick = false)
     {
         Logger.Information("Checking updates...");
