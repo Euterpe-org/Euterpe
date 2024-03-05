@@ -14,7 +14,7 @@ public sealed partial class InfoJsonService
         using var streamReader = new StreamReader(filePath);
         if (!_isInfoJsonInitialized)
         {
-            var lines = await streamReader.ReadLineAsync(4, 9);
+            var lines = await streamReader.ReadLineAsync(4..9);
             _infoJson.Scene = lines[0]![7..];
             _infoJson.Name = lines[1]![7..];
             _infoJson.Author = lines[2]![8..];
@@ -30,7 +30,7 @@ public sealed partial class InfoJsonService
         }
         else
         {
-            var lines = await streamReader.ReadLineAsync(7, 9);
+            var lines = await streamReader.ReadLineAsync(7..9);
             return new MapInfo
             {
                 Difficulty = lines[2]![11..],

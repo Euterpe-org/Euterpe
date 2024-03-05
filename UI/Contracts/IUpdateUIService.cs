@@ -7,6 +7,10 @@ public interface IUpdateUIService
     /// </summary>
     void UpdateText();
 
+    /// <summary>
+    ///     Change the Theme of the Application
+    /// </summary>
+    /// <param name="themeName"></param>
     void ChangeTheme(string themeName);
 
     /// <summary>
