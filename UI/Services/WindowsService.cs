@@ -62,17 +62,12 @@ public sealed class WindowsService : IPlatformService
     {
         try
         {
-            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MD_NET6_DIRECTORY")))
-            {
-                Environment.SetEnvironmentVariable("MD_NET6_DIRECTORY", null);
-            }
-
             if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Settings.MuseDashFolder)
             {
                 return true;
             }
 
-            Environment.SetEnvironmentVariable("MD_DIRECTORY", Settings.MuseDashFolder);
+            Environment.SetEnvironmentVariable("MD_DIRECTORY", Settings.MuseDashFolder, EnvironmentVariableTarget.User);
             return true;
         }
         catch (Exception ex)
