@@ -2,7 +2,7 @@
 
 namespace MuseDashModToolsUI.Models;
 
-public partial class InfoJson : ObservableObject
+public sealed partial class InfoJson : ObservableObject
 {
     [JsonPropertyName("author")]
     [ObservableProperty] private string _author = string.Empty;

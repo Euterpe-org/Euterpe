@@ -2,7 +2,7 @@ using MuseDashModToolsUI.ViewModels;
 
 namespace MuseDashModToolsUI.Models;
 
-public partial class TabView : ObservableObject
+public sealed partial class TabView : ObservableObject
 {
     public readonly string Name;
     [ObservableProperty] private string _displayName;

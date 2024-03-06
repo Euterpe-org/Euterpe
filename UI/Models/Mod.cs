@@ -2,7 +2,7 @@
 
 namespace MuseDashModToolsUI.Models;
 
-public partial class Mod : ObservableObject
+public sealed partial class Mod : ObservableObject
 {
     [ObservableProperty] private bool _isDisabled;
     public string Name { get; set; } = string.Empty;
@@ -13,9 +13,9 @@ public partial class Mod : ObservableObject
     public string ConfigFile { get; set; } = string.Empty;
     public string[]? GameVersion { get; set; }
     public string Description { get; set; } = string.Empty;
-    public List<string> DependentMods { get; set; } = new();
-    public List<string> DependentLibs { get; set; } = new();
-    public List<string> IncompatibleMods { get; set; } = new();
+    public List<string> DependentMods { get; set; } = [];
+    public List<string> DependentLibs { get; set; } = [];
+    public List<string> IncompatibleMods { get; set; } = [];
     public string SHA256 { get; set; } = string.Empty;
     [JsonIgnore] public string? LocalVersion { get; set; }
     [JsonIgnore] public UpdateState State { get; set; }

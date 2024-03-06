@@ -1,5 +1,5 @@
 namespace MuseDashModToolsUI.Services;
 
-public class NavigationService : INavigationService
+public sealed class NavigationService : INavigationService
 {
 }

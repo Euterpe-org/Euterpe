@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModToolsUI.Models;
 
-public class AppState
+public sealed class AppState
 {
     public int Appid { get; set; }
     public string? Name { get; set; }

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace MuseDashModToolsUI.Models;
 
-public class GithubRelease
+public sealed class GithubRelease
 {
     [JsonPropertyName("url")] public string Url { get; set; }
 
@@ -41,7 +41,7 @@ public class GithubRelease
     [JsonPropertyName("body")] public string Body { get; set; }
 }
 
-public class GitHubReleaseAsset
+public sealed class GitHubReleaseAsset
 {
     [JsonPropertyName("url")] public string Url { get; set; }
 

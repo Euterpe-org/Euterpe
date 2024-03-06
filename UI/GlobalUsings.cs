@@ -17,6 +17,7 @@ global using System.Threading.Tasks;
 global using System.Runtime.InteropServices;
 global using System.Runtime.Versioning;
 global using Cysharp.Text;
+global using MuseDashModToolsUI.Models.Enums;
 global using Serilog;
 global using static MuseDashModToolsUI.BuildInfo;
 global using static MuseDashModToolsUI.Localization.MsgBox.Resources_MsgBox;

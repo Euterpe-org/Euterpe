@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Models;
+namespace MuseDashModToolsUI.Models.Enums;
 
 public enum ChartFilterType
 {

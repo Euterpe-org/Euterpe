@@ -5,7 +5,7 @@ using Avalonia.Media.Imaging;
 
 namespace MuseDashModToolsUI.Models;
 
-public class Chart
+public sealed class Chart
 {
     [JsonPropertyName("analytics")]
     public Analytic Analytics { get; set; }
@@ -71,7 +71,7 @@ public class Chart
     }
 }
 
-public class Analytic
+public sealed class Analytic
 {
     [JsonPropertyName("likes")]
     public string[] Likes { get; set; }

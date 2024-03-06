@@ -2,7 +2,7 @@
 
 namespace MuseDashModToolsUI.Models;
 
-public class Language
+public sealed class Language
 {
     public string? Name { get; set; }
     private string? DisplayName { get; }

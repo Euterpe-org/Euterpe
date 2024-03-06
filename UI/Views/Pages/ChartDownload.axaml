@@ -7,6 +7,7 @@
              xmlns:model="using:MuseDashModToolsUI.Models"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
+             xmlns:enums="clr-namespace:MuseDashModToolsUI.Models.Enums"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Pages.ChartDownload"
              x:DataType="pages:ChartDownloadViewModel"
@@ -90,7 +91,7 @@
                     <!--Easy-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Easy}"
                                            Command="{Binding FilterByCommand}"
-                                           CommandParameter="{x:Static model:ChartFilterType.Easy}">
+                                           CommandParameter="{x:Static enums:ChartFilterType.Easy}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Easy.png" />
                         </mdmt:DifficultyFilter.Icon>
@@ -99,7 +100,7 @@
                     <!--Hard-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Hard}"
                                            Command="{Binding FilterByCommand}"
-                                           CommandParameter="{x:Static model:ChartFilterType.Hard}">
+                                           CommandParameter="{x:Static enums:ChartFilterType.Hard}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hard.png" />
                         </mdmt:DifficultyFilter.Icon>
@@ -108,7 +109,7 @@
                     <!--Master-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Master}"
                                            Command="{Binding FilterByCommand}"
-                                           CommandParameter="{x:Static model:ChartFilterType.Master}">
+                                           CommandParameter="{x:Static enums:ChartFilterType.Master}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Master.png" />
                         </mdmt:DifficultyFilter.Icon>
@@ -117,7 +118,7 @@
                     <!--Hidden-->
                     <mdmt:DifficultyFilter Header="{ext:Localize XAML_ChartFilterType_Hidden}"
                                            Command="{Binding FilterByCommand}"
-                                           CommandParameter="{x:Static model:ChartFilterType.Hidden}">
+                                           CommandParameter="{x:Static enums:ChartFilterType.Hidden}">
                         <mdmt:DifficultyFilter.Icon>
                             <Image Source="/Assets/Difficulties/Hidden.png" />
                         </mdmt:DifficultyFilter.Icon>

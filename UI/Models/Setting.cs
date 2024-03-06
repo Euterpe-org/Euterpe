@@ -4,7 +4,7 @@ using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Models;
 
-public class Setting
+public sealed class Setting
 {
     public string? MuseDashFolder { get; set; }
     public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
