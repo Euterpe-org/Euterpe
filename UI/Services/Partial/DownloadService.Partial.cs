@@ -20,7 +20,7 @@ public sealed partial class DownloadService
             var modLinks = await Client.GetStringAsync(url);
             Logger.Information("Get mod list from {Url} success", url);
 
-            await File.WriteAllTextAsync(SavingService.Value.ModLinksPath, modLinks);
+            await File.WriteAllTextAsync(Settings.ModLinksPath, modLinks);
             var mods = await SerializationService.DeserializeModListAsync();
             return mods;
         }
@@ -140,7 +140,7 @@ public sealed partial class DownloadService
     {
         byte[] coverBytes;
         var fileName = $"{chart.Id}-cover.png";
-        var filePath = Path.Combine(SavingService.Value.ChartFolderPath, fileName);
+        var filePath = Path.Combine(Settings.ChartFolder, fileName);
 
         if (!File.Exists(filePath))
         {

@@ -2,9 +2,6 @@
 
 public interface ISavingService
 {
-    public string ModLinksPath { get; }
-    public string ChartFolderPath { get; }
-
     /// <summary>
     ///     Load saved setting from Settings.json
     ///     Create config and chart folder if not exist

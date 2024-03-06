@@ -12,7 +12,7 @@ public sealed class SerializationService : ISerializationService
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
+    public Setting Settings { get; init; }
 
     public T? DeserializeFromJson<T>(string json, JsonSerializerOptions options) => JsonSerializer.Deserialize<T>(json, options);
     public T? DeserializeFromJson<T>(string json) => JsonSerializer.Deserialize<T>(json);
@@ -29,7 +29,7 @@ public sealed class SerializationService : ISerializationService
     {
         try
         {
-            var mods = DeserializeFromJson<List<Mod>>(await File.ReadAllTextAsync(SavingService.Value.ModLinksPath));
+            var mods = DeserializeFromJson<List<Mod>>(await File.ReadAllTextAsync(Settings.ModLinksPath));
             Logger.Information("Mod list deserialized");
             return mods;
         }

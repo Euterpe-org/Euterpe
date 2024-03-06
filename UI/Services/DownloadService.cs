@@ -163,7 +163,7 @@ public sealed partial class DownloadService : IDownloadService
             }
         }
 
-        if (File.Exists(SavingService.Value.ModLinksPath))
+        if (File.Exists(Settings.ModLinksPath))
         {
             Logger.Information("Get mod list from online source failed, deserializing local mod list");
             mods = await SerializationService.DeserializeModListAsync();
@@ -197,9 +197,6 @@ public sealed partial class DownloadService : IDownloadService
 
     [UsedImplicitly]
     public Lazy<ILocalService> LocalService { get; init; }
-
-    [UsedImplicitly]
-    public Lazy<ISavingService> SavingService { get; init; }
 
     [UsedImplicitly]
     public Setting Settings { get; init; }

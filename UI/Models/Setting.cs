@@ -7,6 +7,10 @@ namespace MuseDashModToolsUI.Models;
 public sealed class Setting
 {
     public string? MuseDashFolder { get; set; } = string.Empty;
+
+    public string ConfigFolder { get; set; } =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
+
     public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
     public string? FontName { get; set; } = FontManageService.DefaultFont;
     public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(AppVersion);
@@ -20,6 +24,12 @@ public sealed class Setting
     public AskType AskEnableDependencyWhenEnable { get; set; } = AskType.Always;
     public AskType AskDisableDependencyWhenDelete { get; set; } = AskType.Always;
     public AskType AskDisableDependencyWhenDisable { get; set; } = AskType.Always;
+
+    [JsonIgnore]
+    public string ModLinksPath => Path.Combine(ConfigFolder, "ModLinks.json");
+
+    [JsonIgnore]
+    public string ChartFolder => Path.Combine(ConfigFolder, "Charts");
 
     [JsonIgnore]
     public string CustomAlbumsFolder => GetCombinedPath("Custom_Albums");

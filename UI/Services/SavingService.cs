@@ -7,17 +7,10 @@ namespace MuseDashModToolsUI.Services;
 public sealed partial class SavingService : ISavingService
 {
     private bool _isSavedLoaded;
-
-    private static string ConfigFolderPath =>
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
-
-    private static string SettingPath => Path.Combine(ConfigFolderPath, "Settings.json");
+    private string SettingPath => Path.Combine(Settings.ConfigFolder, "Settings.json");
 
     [UsedImplicitly]
     public Setting Settings { get; init; }
-
-    public string ModLinksPath => Path.Combine(ConfigFolderPath, "ModLinks.json");
-    public string ChartFolderPath => Path.Combine(ConfigFolderPath, "Charts");
 
     public async Task InitializeSettingsAsync()
     {

@@ -25,15 +25,13 @@ public sealed class DownloadServiceTest(ITestOutputHelper testOutputHelper)
     public async Task VersionTest()
     {
         _client.When(ReleaseInfoLink).Respond("application/json", ReleaseInfo);
-        var mockSavingService = new Mock<ISavingService>();
         var mockSettings = new Setting();
         var downloadService = new DownloadService
         {
             Logger = _logger,
             Client = _client.ToHttpClient(),
             MessageBoxService = new Mock<IMessageBoxService>().Object,
-            Settings = mockSettings,
-            SavingService = new Lazy<ISavingService>(() => mockSavingService.Object)
+            Settings = mockSettings
         };
         await downloadService.CheckUpdatesAsync();
     }
