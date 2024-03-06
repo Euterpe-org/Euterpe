@@ -2,15 +2,9 @@
 
 namespace MuseDashModToolsUI.Models;
 
-public sealed class Language
+public sealed class Language(CultureInfo cultureInfo)
 {
-    public string? Name { get; set; }
-    private string? DisplayName { get; }
+    public string? Name { get; } = cultureInfo.Name;
+    private string? DisplayName { get; } = cultureInfo.DisplayName;
     public string FullName => $"{Name} - {DisplayName}";
-
-    public Language(CultureInfo cultureInfo)
-    {
-        Name = cultureInfo.Name;
-        DisplayName = cultureInfo.DisplayName;
-    }
 }
