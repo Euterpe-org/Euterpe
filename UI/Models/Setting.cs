@@ -9,7 +9,7 @@ public sealed class Setting
     public string? MuseDashFolder { get; set; } = string.Empty;
 
     public string ConfigFolder { get; set; } =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
+        Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
 
     public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
     public string? FontName { get; set; } = FontManageService.DefaultFont;
@@ -26,28 +26,28 @@ public sealed class Setting
     public AskType AskDisableDependencyWhenDisable { get; set; } = AskType.Always;
 
     [JsonIgnore]
-    public string ModLinksPath => Path.Combine(ConfigFolder, "ModLinks.json");
+    public string ModLinksPath => GetCombinedPath(ConfigFolder, "ModLinks.json");
 
     [JsonIgnore]
-    public string ChartFolder => Path.Combine(ConfigFolder, "Charts");
+    public string ChartFolder => GetCombinedPath(ConfigFolder, "Charts");
 
     [JsonIgnore]
-    public string CustomAlbumsFolder => GetCombinedPath("Custom_Albums");
+    public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");
 
     [JsonIgnore]
-    public string MuseDashExePath => GetCombinedPath("MuseDash.exe");
+    public string MuseDashExePath => GetCombinedPath(MuseDashFolder, "MuseDash.exe");
 
     [JsonIgnore]
-    public string UserDataFolder => GetCombinedPath("UserData");
+    public string UserDataFolder => GetCombinedPath(MuseDashFolder, "UserData");
 
     [JsonIgnore]
-    public string ModsFolder => GetCombinedPath("Mods");
+    public string ModsFolder => GetCombinedPath(MuseDashFolder, "Mods");
 
     [JsonIgnore]
-    public string MelonLoaderFolder => GetCombinedPath("MelonLoader");
+    public string MelonLoaderFolder => GetCombinedPath(MuseDashFolder, "MelonLoader");
 
     [JsonIgnore]
-    public string MelonLoaderZipPath => GetCombinedPath("MelonLoader.zip");
+    public string MelonLoaderZipPath => GetCombinedPath(MuseDashFolder, "MelonLoader.zip");
 
     /// <summary>
     ///     Copy values from another Setting
@@ -71,6 +71,6 @@ public sealed class Setting
         AskDisableDependencyWhenDisable = setting.AskDisableDependencyWhenDisable;
     }
 
-    private string GetCombinedPath(string path) =>
-        !string.IsNullOrEmpty(MuseDashFolder) ? Path.Join(MuseDashFolder, path) : string.Empty;
+    private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
+        !string.IsNullOrEmpty(folderPath) ? Path.Join(folderPath, targetPath) : defaultPath;
 }
