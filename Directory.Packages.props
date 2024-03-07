@@ -1,0 +1,11 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="Avalonia" Version="11.0.10"/>
+        <PackageVersion Include="Semi.Avalonia" Version="11.0.7"/>
+        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.11.0"/>
+        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.11.0"/>
+    </ItemGroup>
+</Project>

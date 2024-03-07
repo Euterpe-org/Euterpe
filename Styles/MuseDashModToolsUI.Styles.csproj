@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.10"/>
-        <PackageReference Include="Semi.Avalonia" Version="11.0.7"/>
+        <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Semi.Avalonia"/>
     </ItemGroup>
 </Project>
