@@ -76,36 +76,36 @@
 
     <!--Hot Reload Packages-->
     <ItemGroup>
-        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader" Version="11.0.10"/>
-        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia" Version="1.0.1"/>
-        <PackageReference Include="HotAvalonia.Extensions" Version="1.0.1" PrivateAssets="All"/>
+        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
+        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
+        <PackageReference Include="HotAvalonia.Extensions" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AssetsTools.NET" Version="3.0.0"/>
-        <PackageReference Include="Autofac" Version="8.0.0"/>
+        <PackageReference Include="AssetsTools.NET"/>
+        <PackageReference Include="Autofac"/>
         <PackageReference Include="Avalonia"/>
-        <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
+        <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.10"/>
-        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.10"/>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2"/>
-        <PackageReference Include="DialogHost.Avalonia" Version="0.7.7"/>
-        <PackageReference Include="JetBrains.Annotations" Version="2023.3.0"/>
-        <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1"/>
-        <PackageReference Include="Markdown.Avalonia" Version="11.0.2"/>
-        <PackageReference Include="MessageBox.Avalonia" Version="3.1.5.1"/>
-        <PackageReference Include="NuGet.Versioning" Version="6.9.1"/>
-        <PackageReference Include="Samboy063.Tomlet" Version="5.3.0"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
+        <PackageReference Include="Avalonia.ReactiveUI"/>
+        <PackageReference Include="Avalonia.Xaml.Behaviors"/>
+        <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="DialogHost.Avalonia"/>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="LavaGang.MelonLoader"/>
+        <PackageReference Include="Markdown.Avalonia"/>
+        <PackageReference Include="MessageBox.Avalonia"/>
+        <PackageReference Include="NuGet.Versioning"/>
+        <PackageReference Include="Samboy063.Tomlet"/>
         <PackageReference Include="Semi.Avalonia"/>
-        <PackageReference Include="Serilog" Version="3.1.2-dev-02097"/>
-        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1"/>
-        <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00972"/>
-        <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="20.0.15"/>
-        <PackageReference Include="ValveKeyValue" Version="0.9.0.267"/>
-        <PackageReference Include="ZString" Version="2.5.1"/>
+        <PackageReference Include="Serilog"/>
+        <PackageReference Include="Serilog.Sinks.Console"/>
+        <PackageReference Include="Serilog.Sinks.File"/>
+        <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers"/>
+        <PackageReference Include="ValveKeyValue"/>
+        <PackageReference Include="ZString"/>
     </ItemGroup>
 
     <ItemGroup>
