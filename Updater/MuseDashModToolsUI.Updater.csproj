@@ -8,7 +8,7 @@
         <TrimMode>partial</TrimMode>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <DebugType>none</DebugType>
     </PropertyGroup>
 

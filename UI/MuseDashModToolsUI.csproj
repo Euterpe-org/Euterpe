@@ -14,7 +14,7 @@
         <DefineConstants>$(DefineConstants);ENABLE_XAML_HOT_RELOAD</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <DebugType>none</DebugType>
         <SelfContained>true</SelfContained>
         <PublishSingleFile>true</PublishSingleFile>
@@ -25,11 +25,7 @@
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
-        <AvaloniaXaml Remove="Mods\**"/>
-        <Compile Remove="Mods\**"/>
-        <EmbeddedResource Remove="Mods\**"/>
-        <None Remove="Mods\**"/>
-        <None Remove=".gitignore"/>
+        <Content Include="Assets\Icon.ico"/>
 
         <!--Localization Files-->
         <EmbeddedResource Update="Localization\XAML\Resources_XAML.resx">
@@ -68,10 +64,6 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources_ModDescription.resx</DependentUpon>
         </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="Assets\Icon.ico"/>
     </ItemGroup>
 
     <!--Hot Reload Packages-->
