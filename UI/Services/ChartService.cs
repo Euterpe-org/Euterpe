@@ -11,7 +11,7 @@ public sealed class ChartService : IChartService
 
     public async Task DownloadChartAsync(Chart item)
     {
-        var path = Path.Combine(Settings.CustomAlbumsFolder, item.Name.RemoveInvalidChars() + ".mdm");
+        var path = Path.Combine(Settings.CustomAlbumsFolder, $"{item.Name.RemoveInvalidChars()}.mdm");
         if (File.Exists(path))
         {
             var result = await MessageBoxService.FormatNoticeConfirmMessageBox(MsgBox_Content_OverrideChart, item.Name);

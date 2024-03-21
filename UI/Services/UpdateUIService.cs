@@ -6,9 +6,6 @@ namespace MuseDashModToolsUI.Services;
 
 public sealed partial class UpdateUIService : IUpdateUIService
 {
-    [UsedImplicitly]
-    public Setting Settings { get; init; }
-
     public void UpdateText()
     {
         ChangeOptionName();
@@ -74,6 +71,9 @@ public sealed partial class UpdateUIService : IUpdateUIService
 
     [UsedImplicitly]
     public Lazy<ISettingsViewModel> SettingsViewModel { get; init; }
+
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
 
     #endregion
 }

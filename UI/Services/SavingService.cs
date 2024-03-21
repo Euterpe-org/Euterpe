@@ -9,9 +9,6 @@ public sealed partial class SavingService : ISavingService
     private bool _isSavedLoaded;
     private string SettingPath => Path.Combine(Settings.ConfigFolder, "Settings.json");
 
-    [UsedImplicitly]
-    public Setting Settings { get; init; }
-
     public async Task InitializeSettingsAsync()
     {
         Logger.Information("Initializing settings...");
@@ -87,6 +84,9 @@ public sealed partial class SavingService : ISavingService
 
     [UsedImplicitly]
     public IUpdateUIService UpdateUIService { get; init; }
+
+    [UsedImplicitly]
+    public Setting Settings { get; init; }
 
     #endregion
 }

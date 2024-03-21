@@ -26,7 +26,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
 
         _savingService.LoadSettings();
         _settings = context.Resolve<Setting>();
-        if (_settings.LanguageCode is not null)
+        if (!string.IsNullOrEmpty(_settings.LanguageCode))
         {
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_settings.LanguageCode);
         }
@@ -35,7 +35,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
 #endif
         _savingService.InitializeSettingsAsync().ConfigureAwait(false);
         _logger.Information("Main Window initialized");
-        AppDomain.CurrentDomain.ProcessExit += OnExit!;
+        AppDomain.CurrentDomain.ProcessExit += OnExit;
     }
 
     [RelayCommand]
@@ -46,5 +46,5 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
         _logger.Information("Change Theme to {Theme}", targetTheme);
     }
 
-    private async void OnExit(object sender, EventArgs e) => await _savingService.SaveAsync();
+    private async void OnExit(object? sender, EventArgs e) => await _savingService.SaveAsync();
 }

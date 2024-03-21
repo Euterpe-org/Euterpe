@@ -3,6 +3,7 @@ using PrivateProxy;
 
 namespace MuseDashModToolsUI.Test;
 
+[TestSubject(typeof(SavingService))]
 public sealed class SavingServiceTest(ITestOutputHelper testOutputHelper)
 {
     private const string SettingJson = """

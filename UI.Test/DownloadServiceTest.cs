@@ -3,6 +3,7 @@ using RichardSzalay.MockHttp;
 
 namespace MuseDashModToolsUI.Test;
 
+[TestSubject(typeof(DownloadService))]
 public sealed class DownloadServiceTest(ITestOutputHelper testOutputHelper)
 {
     private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
