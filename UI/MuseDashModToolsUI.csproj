@@ -88,9 +88,9 @@
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="LavaGang.MelonLoader"/>
         <PackageReference Include="Markdown.Avalonia"/>
+        <PackageReference Include="MemoryPack"/>
         <PackageReference Include="MessageBox.Avalonia"/>
         <PackageReference Include="NuGet.Versioning"/>
-        <PackageReference Include="Samboy063.Tomlet"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.Sinks.Console"/>

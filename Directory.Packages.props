@@ -13,13 +13,17 @@
         <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.0.10"/>
         <PackageVersion Include="Autofac" Version="8.0.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.2"/>
-        <PackageVersion Include="coverlet.collector" Version="6.0.1"/>
+        <PackageVersion Include="coverlet.collector" Version="6.0.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageVersion>
         <PackageVersion Include="DialogHost.Avalonia" Version="0.7.7"/>
         <PackageVersion Include="HotAvalonia" Version="1.0.1"/>
         <PackageVersion Include="HotAvalonia.Extensions" Version="1.0.1" PrivateAssets="All"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2023.3.0"/>
         <PackageVersion Include="LavaGang.MelonLoader" Version="0.6.1"/>
         <PackageVersion Include="Markdown.Avalonia" Version="11.0.2"/>
+        <PackageVersion Include="MemoryPack" Version="1.20.4"/>
         <PackageVersion Include="MessageBox.Avalonia" Version="3.1.5.1"/>
         <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.1.0"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0"/>
@@ -29,18 +33,17 @@
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Roslynator.Analyzers" Version="4.11.0"/>
         <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.11.0"/>
-        <PackageVersion Include="Samboy063.Tomlet" Version="5.3.0"/>
         <PackageVersion Include="Semi.Avalonia" Version="11.0.7"/>
         <PackageVersion Include="Serilog" Version="3.1.2-dev-02097"/>
         <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1"/>
         <PackageVersion Include="Serilog.Sinks.File" Version="5.0.1-dev-00972"/>
         <PackageVersion Include="Spectre.Console" Version="0.48.1-preview.0.25"/>
-        <PackageVersion Include="TestableIO.System.IO.Abstractions.Wrappers" Version="20.0.15"/>
+        <PackageVersion Include="TestableIO.System.IO.Abstractions.Wrappers" Version="21.0.2"/>
         <PackageVersion Include="ValveKeyValue" Version="0.9.0.267"/>
         <PackageVersion Include="xunit" Version="2.7.0"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7"/>
         <PackageVersion Include="ZString" Version="2.5.1"/>
-        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.11.0"/>
-        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.11.0"/>
+        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.12.0"/>
+        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.0"/>
     </ItemGroup>
 </Project>

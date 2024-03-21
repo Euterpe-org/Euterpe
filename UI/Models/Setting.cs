@@ -1,10 +1,11 @@
 ﻿using System.Globalization;
-using System.Text.Json.Serialization;
+using MemoryPack;
 using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Models;
 
-public sealed class Setting
+[MemoryPackable]
+public sealed partial class Setting
 {
     public string? MuseDashFolder { get; set; } = string.Empty;
 
@@ -13,7 +14,10 @@ public sealed class Setting
 
     public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
     public string? FontName { get; set; } = FontManageService.DefaultFont;
+
+    [MemoryPackAllowSerialize]
     public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(AppVersion);
+
     public bool DownloadPrerelease { get; set; }
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
     public string? CustomDownloadSource { get; set; } = string.Empty;
@@ -25,28 +29,28 @@ public sealed class Setting
     public AskType AskDisableDependencyWhenDelete { get; set; } = AskType.Always;
     public AskType AskDisableDependencyWhenDisable { get; set; } = AskType.Always;
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string ModLinksPath => GetCombinedPath(ConfigFolder, "ModLinks.json");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string ChartFolder => GetCombinedPath(ConfigFolder, "Charts");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string MuseDashExePath => GetCombinedPath(MuseDashFolder, "MuseDash.exe");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string UserDataFolder => GetCombinedPath(MuseDashFolder, "UserData");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string ModsFolder => GetCombinedPath(MuseDashFolder, "Mods");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string MelonLoaderFolder => GetCombinedPath(MuseDashFolder, "MelonLoader");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string MelonLoaderZipPath => GetCombinedPath(MuseDashFolder, "MelonLoader.zip");
 
     /// <summary>
