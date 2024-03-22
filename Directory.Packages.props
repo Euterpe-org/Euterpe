@@ -23,7 +23,7 @@
         <PackageVersion Include="JetBrains.Annotations" Version="2023.3.0"/>
         <PackageVersion Include="LavaGang.MelonLoader" Version="0.6.1"/>
         <PackageVersion Include="Markdown.Avalonia" Version="11.0.2"/>
-        <PackageVersion Include="MemoryPack" Version="1.20.4"/>
+        <PackageVersion Include="MemoryPack" Version="1.20.5"/>
         <PackageVersion Include="MessageBox.Avalonia" Version="3.1.5.1"/>
         <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.1.0"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0"/>
@@ -31,8 +31,6 @@
         <PackageVersion Include="NuGet.Versioning" Version="6.9.1"/>
         <PackageVersion Include="PrivateProxy" Version="1.0.2"/>
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
-        <PackageVersion Include="Roslynator.Analyzers" Version="4.11.0"/>
-        <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.11.0"/>
         <PackageVersion Include="Semi.Avalonia" Version="11.0.7"/>
         <PackageVersion Include="Serilog" Version="3.1.2-dev-02097"/>
         <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1"/>

@@ -9,15 +9,10 @@ public sealed partial class Setting
 {
     public string? MuseDashFolder { get; set; } = string.Empty;
 
-    public string ConfigFolder { get; set; } =
-        Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
+    public string ConfigFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
 
     public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
     public string? FontName { get; set; } = FontManageService.DefaultFont;
-
-    [MemoryPackAllowSerialize]
-    public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(AppVersion);
-
     public bool DownloadPrerelease { get; set; }
     public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
     public string? CustomDownloadSource { get; set; } = string.Empty;
@@ -28,6 +23,9 @@ public sealed partial class Setting
     public AskType AskEnableDependencyWhenEnable { get; set; } = AskType.Always;
     public AskType AskDisableDependencyWhenDelete { get; set; } = AskType.Always;
     public AskType AskDisableDependencyWhenDisable { get; set; } = AskType.Always;
+
+    [MemoryPackAllowSerialize]
+    public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(AppVersion);
 
     [MemoryPackIgnore]
     public string ModLinksPath => GetCombinedPath(ConfigFolder, "ModLinks.json");
