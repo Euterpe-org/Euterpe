@@ -13,7 +13,10 @@
         <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.0.10"/>
         <PackageVersion Include="Autofac" Version="8.0.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.2"/>
-        <PackageVersion Include="coverlet.collector" Version="6.0.1"/>
+        <PackageVersion Include="coverlet.collector" Version="6.0.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageVersion>
         <PackageVersion Include="DialogHost.Avalonia" Version="0.7.7"/>
         <PackageVersion Include="HotAvalonia" Version="1.0.1"/>
         <PackageVersion Include="HotAvalonia.Extensions" Version="1.0.1" PrivateAssets="All"/>
@@ -32,7 +35,7 @@
         <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1"/>
         <PackageVersion Include="Serilog.Sinks.File" Version="5.0.1-dev-00972"/>
         <PackageVersion Include="Spectre.Console" Version="0.48.1-preview.0.25"/>
-        <PackageVersion Include="TestableIO.System.IO.Abstractions.Wrappers" Version="20.0.15"/>
+        <PackageVersion Include="TestableIO.System.IO.Abstractions.Wrappers" Version="21.0.2"/>
         <PackageVersion Include="ValveKeyValue" Version="0.9.0.267"/>
         <PackageVersion Include="xunit" Version="2.7.0"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7"/>
