@@ -55,7 +55,7 @@ public sealed partial class Setting
     ///     Copy values from another Setting
     /// </summary>
     /// <param name="setting"></param>
-    public void Copy(Setting setting)
+    public void CopyFrom(Setting setting)
     {
         MuseDashFolder = setting.MuseDashFolder;
         LanguageCode = setting.LanguageCode;

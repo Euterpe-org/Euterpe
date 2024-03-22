@@ -6,8 +6,9 @@ namespace MuseDashModToolsUI.Services;
 
 public sealed partial class SavingService : ISavingService
 {
+    private const string SettingFile = "Settings.cfg";
     private bool _isSavedLoaded;
-    private string SettingPath => Path.Combine(Settings.ConfigFolder, "Settings.json");
+    private string SettingPath => Path.Combine(Settings.ConfigFolder, SettingFile);
 
     public async Task InitializeSettingsAsync()
     {
@@ -15,7 +16,7 @@ public sealed partial class SavingService : ISavingService
 
         if (!_isSavedLoaded)
         {
-            Logger.Warning("Didn't load setting from Settings.json, getting game path...");
+            Logger.Warning("Didn't load setting from {SettingFile}, getting game path...", SettingFile);
             if (!await TryGetGameFolderPath())
             {
                 await MessageBoxService.WarningMessageBox(MsgBox_Content_ChoosePath);
@@ -39,9 +40,9 @@ public sealed partial class SavingService : ISavingService
 
     public async Task SaveAsync()
     {
-        var json = SerializationService.SerializeSetting(Settings);
-        await FileSystem.File.WriteAllTextAsync(SettingPath, json);
-        Logger.Information("Settings saved to Settings.json");
+        await using var stream = new FileStream(SettingPath, FileMode.OpenOrCreate, FileAccess.Write);
+        await SerializationService.SerializeSettingAsync(stream, Settings);
+        Logger.Information("Settings saved to {SettingFile}", SettingFile);
     }
 
     public async Task<bool> OnChooseGamePathAsync()

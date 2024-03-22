@@ -24,9 +24,11 @@ public interface ISerializationService
     /// <summary>
     ///     Deserialize Setting from Json
     /// </summary>
-    /// <param name="json"></param>
+    /// <param name="text"></param>
     /// <returns></returns>
-    Setting? DeserializeSetting(string json);
+    Setting? DeserializeSetting(byte[] text);
+
+    ValueTask<Setting?> DeserializeSettingAsync(Stream stream);
 
     /// <summary>
     ///     Deserialize Mod list from Json
@@ -54,5 +56,7 @@ public interface ISerializationService
     /// </summary>
     /// <param name="setting"></param>
     /// <returns></returns>
-    string SerializeSetting(Setting setting);
+    byte[] SerializeSetting(Setting setting);
+
+    ValueTask SerializeSettingAsync(Stream stream, Setting setting);
 }
