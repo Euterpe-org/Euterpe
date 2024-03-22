@@ -27,9 +27,6 @@
         <PackageVersion Include="NuGet.Versioning" Version="6.9.1"/>
         <PackageVersion Include="PrivateProxy" Version="1.0.2"/>
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
-        <PackageVersion Include="Roslynator.Analyzers" Version="4.11.0"/>
-        <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.11.0"/>
-        <PackageVersion Include="Samboy063.Tomlet" Version="5.3.0"/>
         <PackageVersion Include="Semi.Avalonia" Version="11.0.7"/>
         <PackageVersion Include="Serilog" Version="3.1.2-dev-02097"/>
         <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1"/>
@@ -40,7 +37,7 @@
         <PackageVersion Include="xunit" Version="2.7.0"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7"/>
         <PackageVersion Include="ZString" Version="2.5.1"/>
-        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.11.0"/>
-        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.11.0"/>
+        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.12.0"/>
+        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.0"/>
     </ItemGroup>
 </Project>
