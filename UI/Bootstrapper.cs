@@ -1,5 +1,7 @@
 ﻿using System.IO.Abstractions;
 using Autofac;
+using MemoryPack;
+using MuseDashModToolsUI.Converters;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
@@ -21,6 +23,7 @@ public static class Bootstrapper
         RegisterComponents();
         RegisterServices();
         RegisterViewModels();
+        RegisterFormatters();
 
         var container = _builder.Build();
         ConfigureStaticResolvers(container);
@@ -105,5 +108,10 @@ public static class Bootstrapper
         DependencyInjectionExtension.Resolver = type => container.Resolve(type!);
         LocalizeExtension.LocalizationService = container.Resolve<ILocalizationService>();
         FontExtension.FontManageService = container.Resolve<IFontManageService>();
+    }
+
+    private static void RegisterFormatters()
+    {
+        MemoryPackFormatterProvider.Register(new SemanticVersionFormatter());
     }
 }

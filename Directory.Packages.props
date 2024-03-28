@@ -23,7 +23,7 @@
         <PackageVersion Include="JetBrains.Annotations" Version="2023.3.0"/>
         <PackageVersion Include="LavaGang.MelonLoader" Version="0.6.1"/>
         <PackageVersion Include="Markdown.Avalonia" Version="11.0.2"/>
-        <PackageVersion Include="MemoryPack" Version="1.20.5"/>
+        <PackageVersion Include="MemoryPack" Version="1.21.0"/>
         <PackageVersion Include="MessageBox.Avalonia" Version="3.1.5.1"/>
         <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.1.0"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0"/>
