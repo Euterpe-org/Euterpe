@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text;
 using AssetsTools.NET.Extra;
+using CliWrap;
 using DialogHostAvalonia;
 using MelonLoader;
 
@@ -15,19 +16,13 @@ public sealed partial class LocalService : ILocalService
 
     public async Task CheckDotNetRuntimeInstallAsync()
     {
-        var process = Process.Start(new ProcessStartInfo
-        {
-            FileName = "dotnet",
-            Arguments = "--list-runtimes",
-            RedirectStandardOutput = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        });
+        var outputStringBuilder = new StringBuilder();
+        await Cli.Wrap("dotnet")
+            .WithArguments("--list-runtimes")
+            .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
+            .ExecuteAsync();
 
-        await process?.WaitForExitAsync()!;
-        var output = await process.StandardOutput.ReadToEndAsync();
-
-        if (!output.Contains("Microsoft.WindowsDesktop.App 6."))
+        if (!outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6."))
         {
             Logger.Information("DotNet Runtime not found, showing error message box...");
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_DotNetRuntimeNotFound);

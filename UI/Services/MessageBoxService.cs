@@ -101,36 +101,36 @@ public sealed partial class MessageBoxService : IMessageBoxService
         await MessageBox(MsgBox_Title_AnalyzeSuccess, content, Icon.Error);
 
     public async Task<ButtonResult> FormatAnalyzeSuccessMessageBox(string content, params object[] args) =>
-        await AnalyzeSuccessMessageBox(ZString.Format(content, args));
+        await AnalyzeSuccessMessageBox(string.Format(content, args));
 
     public async Task<ButtonResult> ErrorMessageBox(string content, Icon icon = Icon.Error) =>
         await MessageBox(MsgBox_Title_Failure, content, icon);
 
     public async Task<ButtonResult> ErrorMessageBox(string content, Exception ex) =>
-        await ErrorMessageBox(ZString.Format(content, ex));
+        await ErrorMessageBox(string.Format(content, ex));
 
     public async Task<ButtonResult> ErrorMessageBox(Exception ex) => await ErrorMessageBox(ex.ToString());
 
     public async Task<ButtonResult> FormatErrorMessageBox(string content, params object[] args) =>
-        await ErrorMessageBox(ZString.Format(content, args));
+        await ErrorMessageBox(string.Format(content, args));
 
     public async Task<ButtonResult> NoticeMessageBox(string content, Icon icon = Icon.Info) =>
         await MessageBox(MsgBox_Title_Notice, content, icon);
 
     public async Task<ButtonResult> FormatNoticeMessageBox(string content, params object[] args) =>
-        await NoticeMessageBox(ZString.Format(content, args));
+        await NoticeMessageBox(string.Format(content, args));
 
     public async Task<ButtonResult> SuccessMessageBox(string content, Icon icon = Icon.Success) =>
         await MessageBox(MsgBox_Title_Success, content, icon);
 
     public async Task<ButtonResult> FormatSuccessMessageBox(string content, params object[] args) =>
-        await SuccessMessageBox(ZString.Format(content, args));
+        await SuccessMessageBox(string.Format(content, args));
 
     public async Task<ButtonResult> WarningMessageBox(string content, Icon icon = Icon.Warning) =>
         await MessageBox(MsgBox_Title_Warning, content, icon);
 
     public async Task<ButtonResult> FormatWarningMessageBox(string content, params object[] args) =>
-        await WarningMessageBox(ZString.Format(content, args));
+        await WarningMessageBox(string.Format(content, args));
 
     public async Task<bool> ConfirmMessageBox(string title, string content, Icon icon)
     {
@@ -142,13 +142,13 @@ public sealed partial class MessageBoxService : IMessageBoxService
     public async Task<bool> NoticeConfirmMessageBox(string content) => await ConfirmMessageBox(MsgBox_Title_Notice, content, Icon.Info);
 
     public async Task<bool> FormatNoticeConfirmMessageBox(string content, params object[] args) =>
-        await NoticeConfirmMessageBox(ZString.Format(content, args));
+        await NoticeConfirmMessageBox(string.Format(content, args));
 
     public async Task<bool> WarningConfirmMessageBox(string title, string content) => await ConfirmMessageBox(title, content, Icon.Warning);
     public async Task<bool> WarningConfirmMessageBox(string content) => await WarningConfirmMessageBox(MsgBox_Title_Warning, content);
 
     public async Task<bool> FormatWarningConfirmMessageBox(string content, params object[] args) =>
-        await WarningConfirmMessageBox(ZString.Format(content, args));
+        await WarningConfirmMessageBox(string.Format(content, args));
 
     #endregion
 }
