@@ -14,16 +14,16 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
     [ObservableProperty] private string _filter;
     [ObservableProperty] private string[] _sortOptions;
     public ReadOnlyObservableCollection<Chart> Charts => _charts;
-    
+
     [UsedImplicitly]
     public IChartService ChartService { get; init; }
-    
+
     [UsedImplicitly]
     public ILocalService LocalService { get; init; }
-    
+
     [UsedImplicitly]
     public ILogger Logger { get; init; }
-    
+
     public ChartDownloadViewModel()
     {
         _sourceCache.Connect().Filter(x => string.IsNullOrEmpty(Filter) ||
@@ -38,9 +38,9 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
             .Bind(out _charts)
             .Subscribe();
     }
-    
+
     public ChartSortOptions SortOption { get; private set; }
-    
+
     public async Task Initialize()
     {
         SortOptions =
@@ -52,7 +52,7 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
         await ChartService.InitializeChartListAsync(_sourceCache, Charts);
         Logger.Information("Chart Download Window Initialized");
     }
-    
+
     private IComparable GetSortByOption(Chart chart)
     {
         return SortOption switch
@@ -66,7 +66,7 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
             _ => ChartSortOptions.Id
         };
     }
-    
+
     [UsedImplicitly]
     partial void OnCurrentSortOptionIndexChanged(int value)
     {
@@ -74,19 +74,19 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
         {
             return;
         }
-        
+
         SortOption = (ChartSortOptions)value;
         _sourceCache.Refresh();
     }
-    
+
     [UsedImplicitly]
     partial void OnFilterChanged(string value) => _sourceCache.Refresh();
-    
+
     #region Commands
-    
+
     [RelayCommand]
     private async Task DownloadChartAsync(Chart item) => await ChartService.DownloadChartAsync(item);
-    
+
     [RelayCommand]
     private void FilterBy(ChartFilterType filterType)
     {
@@ -94,12 +94,12 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
         {
             CategoryChartFilterTypes.Add(filterType);
         }
-        
+
         _sourceCache.Refresh();
     }
-    
+
     [RelayCommand]
     private async Task OpenCustomAlbumsFolderAsync() => await LocalService.OpenCustomAlbumsFolderAsync();
-    
+
     #endregion
 }

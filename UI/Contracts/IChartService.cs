@@ -11,7 +11,7 @@ public interface IChartService
     /// <param name="item"></param>
     /// <returns></returns>
     Task DownloadChartAsync(Chart item);
-    
+
     /// <summary>
     ///     Initialize Chart list
     /// </summary>

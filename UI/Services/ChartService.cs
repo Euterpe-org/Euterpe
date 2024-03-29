@@ -8,7 +8,7 @@ public sealed class ChartService : IChartService
 {
     private ReadOnlyObservableCollection<Chart> _charts;
     private SourceCache<Chart, string> _sourceCache;
-    
+
     public async Task DownloadChartAsync(Chart item)
     {
         var path = Path.Combine(Settings.CustomAlbumsFolder, $"{item.Name.RemoveInvalidChars()}.mdm");
@@ -20,38 +20,38 @@ public sealed class ChartService : IChartService
                 return;
             }
         }
-        
+
         await DownloadService.DownloadChartAsync(item.Id, path);
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
     }
-    
+
     public async Task InitializeChartListAsync(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts)
     {
         _sourceCache = sourceCache;
         _charts = charts;
-        
+
         if (!Directory.Exists(Settings.CustomAlbumsFolder))
         {
             Directory.CreateDirectory(Settings.CustomAlbumsFolder);
         }
-        
+
         var webCharts = await DownloadService.GetChartListAsync();
         _sourceCache.AddOrUpdate(webCharts!);
     }
-    
+
     #region Services
-    
+
     [UsedImplicitly]
     public IDownloadService DownloadService { get; init; }
-    
+
     [UsedImplicitly]
     public ILogger Logger { get; init; }
-    
+
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; }
-    
+
     [UsedImplicitly]
     public Setting Settings { get; init; }
-    
+
     #endregion
 }
