@@ -58,9 +58,9 @@ public sealed partial class SavingService
     /// </summary>
     private void CreateSavingFolders()
     {
-        if (!Directory.Exists(Settings.ConfigFolder))
+        if (!Directory.Exists(Settings.CacheFolder))
         {
-            Directory.CreateDirectory(Settings.ConfigFolder);
+            Directory.CreateDirectory(Settings.CacheFolder);
         }
 
         if (!Directory.Exists(Settings.ChartFolder))

@@ -18,8 +18,8 @@ public sealed partial class InfoJsonService : IInfoJsonService
             return;
         }
 
-        var bmsFiles = LocalService.GetBmsFiles(chartFolder).ToArray();
-        if (bmsFiles.Length == 0)
+        var bmsFiles = LocalService.GetBmsFiles(chartFolder);
+        if (bmsFiles is [])
         {
             Logger.Information("Chosen chart folder has no bms file");
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoBmsFile);

@@ -13,7 +13,7 @@ public sealed partial class Setting
 
     [MemoryPackOrder(1)]
     [SuppressDefaultInitialization]
-    public string ConfigFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
+    public string CacheFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
 
     // UI Settings
     [MemoryPackOrder(2)]
@@ -66,10 +66,10 @@ public sealed partial class Setting
 
     // Ignored Paths
     [MemoryPackIgnore]
-    public string ModLinksPath => GetCombinedPath(ConfigFolder, "ModLinks.json");
+    public string ModLinksPath => GetCombinedPath(CacheFolder, "ModLinks.json");
 
     [MemoryPackIgnore]
-    public string ChartFolder => GetCombinedPath(ConfigFolder, "Charts");
+    public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
 
     [MemoryPackIgnore]
     public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");

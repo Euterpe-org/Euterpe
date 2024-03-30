@@ -8,7 +8,9 @@ public sealed partial class SavingService : ISavingService
 {
     private const string SettingFile = "Settings.cfg";
     private bool _isSavedLoaded;
-    private string SettingPath => Path.Combine(Settings.ConfigFolder, SettingFile);
+
+    private static string SettingPath =>
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), SettingFile);
 
     public async Task InitializeSettingsAsync()
     {

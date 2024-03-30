@@ -71,7 +71,7 @@ public sealed partial class LocalService : ILocalService
     public IEnumerable<string> GetModFiles(string path) => Directory.GetFiles(path)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
 
-    public IEnumerable<string> GetBmsFiles(string path) => Directory.GetFiles(path, "*.bms");
+    public string[] GetBmsFiles(string path) => Directory.GetFiles(path, "*.bms");
 
     public async Task<bool> LaunchUpdaterAsync(string link)
     {

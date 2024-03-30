@@ -30,7 +30,7 @@ public interface ILocalService
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    IEnumerable<string> GetBmsFiles(string path);
+    string[] GetBmsFiles(string path);
 
     /// <summary>
     ///     Launch Updater
