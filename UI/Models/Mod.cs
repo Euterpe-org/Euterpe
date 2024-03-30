@@ -2,9 +2,9 @@
 
 namespace MuseDashModToolsUI.Models;
 
-public sealed partial class Mod : ObservableObject
+public sealed class Mod
 {
-    [ObservableProperty] private bool _isDisabled;
+    public bool IsDisabled { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
