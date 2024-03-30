@@ -1,7 +1,7 @@
 using MemoryPack;
 using NuGet.Versioning;
 
-namespace MuseDashModToolsUI.Converters;
+namespace MuseDashModToolsUI.Formatters;
 
 public sealed class SemanticVersionFormatter : MemoryPackFormatter<SemanticVersion>
 {
