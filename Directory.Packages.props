@@ -12,6 +12,7 @@
         <PackageVersion Include="Avalonia.ReactiveUI" Version="11.0.10"/>
         <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.0.10"/>
         <PackageVersion Include="Autofac" Version="8.0.0"/>
+        <PackageVersion Include="CliWrap" Version="3.6.6"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.2"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.2">
             <PrivateAssets>all</PrivateAssets>
@@ -37,10 +38,10 @@
         <PackageVersion Include="Serilog.Sinks.File" Version="5.0.1-dev-00972"/>
         <PackageVersion Include="Spectre.Console" Version="0.48.1-preview.0.25"/>
         <PackageVersion Include="TestableIO.System.IO.Abstractions.Wrappers" Version="21.0.2"/>
-        <PackageVersion Include="ValveKeyValue" Version="0.9.0.267"/>
+        <PackageVersion Include="ValveKeyValue" Version="0.10.0.360"/>
         <PackageVersion Include="xunit" Version="2.7.0"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7"/>
-        <PackageVersion Include="ZString" Version="2.5.1"/>
+        <PackageVersion Include="ZString" Version="2.6.0"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.12.0"/>
         <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.0"/>
     </ItemGroup>
