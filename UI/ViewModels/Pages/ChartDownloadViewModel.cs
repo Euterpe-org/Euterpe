@@ -49,7 +49,7 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
             XAML_ChartSortOption_Downloads, XAML_ChartSortOption_Likes,
             XAML_ChartSortOption_Level, XAML_ChartSortOption_Latest
         ];
-        await ChartService.InitializeChartList(_sourceCache, Charts);
+        await ChartService.InitializeChartListAsync(_sourceCache, Charts);
         Logger.Information("Chart Download Window Initialized");
     }
 

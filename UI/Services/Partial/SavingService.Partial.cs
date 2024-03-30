@@ -112,27 +112,27 @@ public sealed partial class SavingService
     {
         if (!FileSystem.File.Exists(SettingPath))
         {
-            Logger.Warning("Settings.json not found, skipping load");
+            Logger.Warning("{SettingFile} not found, skipping load", SettingFile);
             return;
         }
 
-        Logger.Information("Found Settings.json, loading...");
+        Logger.Information("Found {SettingFile}, loading...", SettingFile);
 
-        var text = FileSystem.File.ReadAllText(SettingPath);
-        if (string.IsNullOrEmpty(text))
+        var bytes = FileSystem.File.ReadAllBytes(SettingPath);
+        if (bytes is [])
         {
             return;
         }
 
-        var savedSetting = SerializationService.DeserializeSetting(text);
+        var savedSetting = SerializationService.DeserializeSetting(bytes);
         if (savedSetting is null)
         {
             return;
         }
 
-        Settings.Copy(savedSetting);
+        Settings.CopyFrom(savedSetting);
         _isSavedLoaded = true;
-        Logger.Information("Saved setting loaded from Settings.json");
+        Logger.Information("Saved setting loaded from {SettingFile}", SettingFile);
     }
 
     /// <summary>

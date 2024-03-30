@@ -25,7 +25,7 @@ public sealed class ChartService : IChartService
         await MessageBoxService.FormatSuccessMessageBox(MsgBox_Content_DownloadChartSuccess, item.Name);
     }
 
-    public async Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts)
+    public async Task InitializeChartListAsync(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts)
     {
         _sourceCache = sourceCache;
         _charts = charts;

@@ -18,5 +18,5 @@ public interface IChartService
     /// <param name="sourceCache"></param>
     /// <param name="charts"></param>
     /// <returns></returns>
-    Task InitializeChartList(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts);
+    Task InitializeChartListAsync(SourceCache<Chart, string> sourceCache, ReadOnlyObservableCollection<Chart> charts);
 }

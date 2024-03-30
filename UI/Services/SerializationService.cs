@@ -1,6 +1,5 @@
-using System.Text.Encodings.Web;
 using System.Text.Json;
-using MuseDashModToolsUI.Converters.JsonConverters;
+using MemoryPack;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -17,13 +16,8 @@ public sealed class SerializationService : ISerializationService
     public T? DeserializeFromJson<T>(string json, JsonSerializerOptions options) => JsonSerializer.Deserialize<T>(json, options);
     public T? DeserializeFromJson<T>(string json) => JsonSerializer.Deserialize<T>(json);
 
-    public Setting? DeserializeSetting(string json) => DeserializeFromJson<Setting>(
-        json, new JsonSerializerOptions
-        {
-            Converters = { new SemanticVersionJsonConverter() },
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            WriteIndented = true
-        });
+    public Setting? DeserializeSetting(byte[] text) => MemoryPackSerializer.Deserialize<Setting>(text);
+    public async ValueTask<Setting?> DeserializeSettingAsync(Stream stream) => await MemoryPackSerializer.DeserializeAsync<Setting>(stream);
 
     public async Task<List<Mod>?> DeserializeModListAsync()
     {
@@ -43,11 +37,6 @@ public sealed class SerializationService : ISerializationService
     public string SerializeToJson(object obj, JsonSerializerOptions options) => JsonSerializer.Serialize(obj, options);
     public string SerializeToJson(object obj) => JsonSerializer.Serialize(obj);
 
-    public string SerializeSetting(Setting setting) => SerializeToJson(
-        setting, new JsonSerializerOptions
-        {
-            Converters = { new SemanticVersionJsonConverter() },
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            WriteIndented = true
-        });
+    public byte[] SerializeSetting(Setting setting) => MemoryPackSerializer.Serialize(setting);
+    public async ValueTask SerializeSettingAsync(Stream stream, Setting setting) => await MemoryPackSerializer.SerializeAsync(stream, setting);
 }

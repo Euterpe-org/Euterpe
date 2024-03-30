@@ -1,59 +1,99 @@
 ﻿using System.Globalization;
-using System.Text.Json.Serialization;
+using MemoryPack;
 using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Models;
 
-public sealed class Setting
+[MemoryPackable]
+public sealed partial class Setting
 {
+    // Path Settings
+    [MemoryPackOrder(0)]
     public string? MuseDashFolder { get; set; } = string.Empty;
 
-    public string ConfigFolder { get; set; } =
-        Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
+    [MemoryPackOrder(1)]
+    [SuppressDefaultInitialization]
+    public string ConfigFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
 
+    // UI Settings
+    [MemoryPackOrder(2)]
+    [SuppressDefaultInitialization]
     public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
+
+    [MemoryPackOrder(3)]
+    [SuppressDefaultInitialization]
     public string? FontName { get; set; } = FontManageService.DefaultFont;
-    public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(AppVersion);
-    public bool DownloadPrerelease { get; set; }
-    public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
-    public string? CustomDownloadSource { get; set; } = string.Empty;
+
+    [MemoryPackOrder(4)]
+    [SuppressDefaultInitialization]
     public string Theme { get; set; } = "Dark";
+
+    // Download Settings
+    [MemoryPackOrder(5)]
+    [SuppressDefaultInitialization]
+    public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
+
+    [MemoryPackOrder(6)]
+    public string? CustomDownloadSource { get; set; } = string.Empty;
+
+    [MemoryPackOrder(7)]
+    public bool DownloadPrerelease { get; set; }
+
+    [MemoryPackOrder(8)]
+    [MemoryPackAllowSerialize]
+    [SuppressDefaultInitialization]
+    public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(AppVersion);
+
+    // Game Settings
+    [MemoryPackOrder(9)]
     public bool ShowConsole { get; set; }
+
+    // Message Box Settings
+    [MemoryPackOrder(10)]
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
+
+    [MemoryPackOrder(11)]
     public AskType AskEnableDependencyWhenInstall { get; set; } = AskType.Always;
+
+    [MemoryPackOrder(12)]
     public AskType AskEnableDependencyWhenEnable { get; set; } = AskType.Always;
+
+    [MemoryPackOrder(13)]
     public AskType AskDisableDependencyWhenDelete { get; set; } = AskType.Always;
+
+    [MemoryPackOrder(14)]
     public AskType AskDisableDependencyWhenDisable { get; set; } = AskType.Always;
 
-    [JsonIgnore]
+    // Ignored Paths
+    [MemoryPackIgnore]
     public string ModLinksPath => GetCombinedPath(ConfigFolder, "ModLinks.json");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string ChartFolder => GetCombinedPath(ConfigFolder, "Charts");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string MuseDashExePath => GetCombinedPath(MuseDashFolder, "MuseDash.exe");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string UserDataFolder => GetCombinedPath(MuseDashFolder, "UserData");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string ModsFolder => GetCombinedPath(MuseDashFolder, "Mods");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string MelonLoaderFolder => GetCombinedPath(MuseDashFolder, "MelonLoader");
 
-    [JsonIgnore]
+    [MemoryPackIgnore]
     public string MelonLoaderZipPath => GetCombinedPath(MuseDashFolder, "MelonLoader.zip");
 
     /// <summary>
     ///     Copy values from another Setting
     /// </summary>
     /// <param name="setting"></param>
-    public void Copy(Setting setting)
+    public void CopyFrom(Setting setting)
     {
         MuseDashFolder = setting.MuseDashFolder;
         LanguageCode = setting.LanguageCode;
