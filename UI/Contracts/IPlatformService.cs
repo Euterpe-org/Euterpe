@@ -22,10 +22,16 @@ public interface IPlatformService
     string GetUpdaterFilePath(string folderPath);
 
     /// <summary>
-    ///     Open folder of Latest.log
+    ///     Open file with path
     /// </summary>
-    /// <param name="logPath"></param>
-    void OpenLogFolder(string logPath);
+    /// <param name="path"></param>
+    void OpenFile(string path);
+
+    /// <summary>
+    ///     Open folder with path
+    /// </summary>
+    /// <param name="path"></param>
+    void OpenFolder(string path);
 
     /// <summary>
     ///     Set MD_DIRECTORY environment variable

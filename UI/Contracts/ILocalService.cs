@@ -86,7 +86,7 @@ public interface ILocalService
     ///     Open Log folder
     /// </summary>
     /// <returns></returns>
-    Task OpenLogFolderAsync();
+    Task OpenLogFileAsync();
 
     /// <summary>
     ///     Read game version

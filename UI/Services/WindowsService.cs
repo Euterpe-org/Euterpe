@@ -55,7 +55,15 @@ public sealed class WindowsService : IPlatformService
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater.exe");
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public void OpenLogFolder(string logPath) => Process.Start("explorer.exe", "/select, " + logPath);
+    public void OpenFile(string path) => Process.Start("explorer.exe", "/select, " + path);
+
+    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
+    public void OpenFolder(string path) => Process.Start(
+        new ProcessStartInfo
+        {
+            FileName = path,
+            UseShellExecute = true
+        });
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool SetPathEnvironmentVariable()

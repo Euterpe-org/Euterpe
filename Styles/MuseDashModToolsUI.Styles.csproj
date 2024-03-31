@@ -6,6 +6,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Semi.Avalonia"/>
     </ItemGroup>
 </Project>

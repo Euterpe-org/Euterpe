@@ -26,6 +26,18 @@ public sealed partial class LocalService
         return true;
     }
 
+    private async Task<bool> ValidatePathAsync()
+    {
+        if (IsValidPath)
+        {
+            return true;
+        }
+
+        Logger.Error("Not valid path, showing error message box...");
+        await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
+        return false;
+    }
+
     #region CheckValidPath Private Methods
 
     /// <summary>

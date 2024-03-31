@@ -21,6 +21,7 @@
         <PackageVersion Include="DialogHost.Avalonia" Version="0.7.7"/>
         <PackageVersion Include="HotAvalonia" Version="1.0.1"/>
         <PackageVersion Include="HotAvalonia.Extensions" Version="1.0.1" PrivateAssets="All"/>
+        <PackageVersion Include="Irihi.Ursa" Version="0.3.0-beta20240329"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2023.3.0"/>
         <PackageVersion Include="LavaGang.MelonLoader" Version="0.6.1"/>
         <PackageVersion Include="Mapster" Version="7.4.0"/>

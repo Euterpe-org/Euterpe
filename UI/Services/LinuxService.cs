@@ -37,7 +37,15 @@ public sealed class LinuxService : IPlatformService
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater");
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public void OpenLogFolder(string logPath) => Process.Start("xdg-open", logPath);
+    public void OpenFile(string path) => Process.Start("xdg-open", path);
+
+    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
+    public void OpenFolder(string path) => Process.Start(
+        new ProcessStartInfo
+        {
+            FileName = path,
+            UseShellExecute = true
+        });
 
     public bool SetPathEnvironmentVariable() => false;
 

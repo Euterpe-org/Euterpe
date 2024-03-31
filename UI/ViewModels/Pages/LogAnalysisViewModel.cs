@@ -41,7 +41,7 @@ public sealed partial class LogAnalysisViewModel : ViewModelBase, ILogAnalysisVi
     }
 
     [RelayCommand]
-    private async Task OpenLogFolderAsync() => await LocalService.OpenLogFolderAsync();
+    private async Task OpenLogFolderAsync() => await LocalService.OpenLogFileAsync();
 
     [RelayCommand]
     private void OpenUrl(string path)

@@ -182,7 +182,7 @@ public sealed partial class LocalService : ILocalService
 
     public void OnLaunchGame(bool isModded)
     {
-        var launchArguments = new StringBuilder();
+        using var launchArguments = ZString.CreateStringBuilder(true);
         if (!isModded)
         {
             launchArguments.Append("//--no-mods");
@@ -194,7 +194,7 @@ public sealed partial class LocalService : ILocalService
 
         Process.Start(new ProcessStartInfo
         {
-            FileName = "steam://rungameid/774171" + launchArguments,
+            FileName = $"steam://rungameid/774171{launchArguments}",
             UseShellExecute = true
         });
 
@@ -203,67 +203,47 @@ public sealed partial class LocalService : ILocalService
 
     public async Task OpenCustomAlbumsFolderAsync()
     {
-        if (!IsValidPath)
+        if (!await ValidatePathAsync())
         {
-            Logger.Error("Not valid path, showing error message box...");
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             return;
         }
 
         Logger.Information("Opening Custom Albums folder...");
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = Settings.CustomAlbumsFolder,
-            UseShellExecute = true
-        });
+        PlatformService.OpenFolder(Settings.CustomAlbumsFolder);
     }
 
     public async Task OpenModsFolderAsync()
     {
-        if (!IsValidPath)
+        if (!await ValidatePathAsync())
         {
-            Logger.Error("Not valid path, showing error message box...");
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             return;
         }
 
         Logger.Information("Opening mods folder...");
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = Settings.ModsFolder,
-            UseShellExecute = true
-        });
+        PlatformService.OpenFolder(Settings.ModsFolder);
     }
 
     public async Task OpenUserDataFolderAsync()
     {
-        if (!IsValidPath)
+        if (!await ValidatePathAsync())
         {
-            Logger.Error("Not valid path, showing error message box...");
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             return;
         }
 
         Logger.Information("Opening UserData folder...");
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = Settings.UserDataFolder,
-            UseShellExecute = true
-        });
+        PlatformService.OpenFolder(Settings.UserDataFolder);
     }
 
-    public async Task OpenLogFolderAsync()
+    public async Task OpenLogFileAsync()
     {
-        if (!IsValidPath)
+        if (!await ValidatePathAsync())
         {
-            Logger.Error("Not valid path, showing error message box...");
-            await MessageBoxService.ErrorMessageBox(MsgBox_Content_ChooseCorrectPath);
             return;
         }
 
         var logPath = Path.Combine(Settings.MelonLoaderFolder, "Latest.log");
-        Logger.Information("Opening Log folder...");
-        PlatformService.OpenLogFolder(logPath);
+        Logger.Information("Opening Log file...");
+        PlatformService.OpenFile(logPath);
     }
 
     public async ValueTask<string> ReadGameVersionAsync()
