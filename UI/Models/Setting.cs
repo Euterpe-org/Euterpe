@@ -112,5 +112,5 @@ public sealed partial class Setting
     }
 
     private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
-        !string.IsNullOrEmpty(folderPath) ? Path.Join(folderPath, targetPath) : defaultPath;
+        !folderPath.IsNullOrEmpty() ? Path.Join(folderPath, targetPath) : defaultPath;
 }

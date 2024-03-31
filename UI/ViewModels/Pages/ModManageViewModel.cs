@@ -33,7 +33,7 @@ public sealed partial class ModManageViewModel : ViewModelBase, IModManageViewMo
     public ModManageViewModel()
     {
         _sourceCache.Connect()
-            .Filter(x => string.IsNullOrEmpty(Filter) ||
+            .Filter(x => Filter.IsNullOrEmpty() ||
                          x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
                          x.XamlDescription.Contains(Filter, StringComparison.OrdinalIgnoreCase))
             .Filter(x => CategoryModFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })

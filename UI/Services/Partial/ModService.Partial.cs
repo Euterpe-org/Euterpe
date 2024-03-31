@@ -119,7 +119,7 @@ public sealed partial class ModService
     /// <param name="localMod"></param>
     private void CheckConfigFileExist(Mod localMod)
     {
-        if (string.IsNullOrEmpty(localMod.ConfigFile))
+        if (localMod.ConfigFile.IsNullOrEmpty())
         {
             return;
         }

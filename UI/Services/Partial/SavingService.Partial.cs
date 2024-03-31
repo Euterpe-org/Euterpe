@@ -26,7 +26,7 @@ public sealed partial class SavingService
             return true;
         }
 
-        if (!string.IsNullOrEmpty(Settings.MuseDashFolder))
+        if (!Settings.MuseDashFolder.IsNullOrEmpty())
         {
             Logger.Information("Path not changed");
             return false;
@@ -142,26 +142,26 @@ public sealed partial class SavingService
     private async Task NullSettingsCatch()
     {
         Logger.Information("Detecting null settings...");
-        if (string.IsNullOrEmpty(Settings.MuseDashFolder))
+        if (Settings.MuseDashFolder.IsNullOrEmpty())
         {
             Logger.Error("Muse Dash path is empty, asking user to choose path");
             await MessageBoxService.WarningMessageBox(MsgBox_Content_NullPath);
             await OnChooseGamePathAsync();
         }
 
-        if (string.IsNullOrEmpty(Settings.LanguageCode))
+        if (Settings.LanguageCode.IsNullOrEmpty())
         {
             Settings.LanguageCode = CultureInfo.CurrentUICulture.ToString();
             Logger.Warning("Language code is empty, using system language");
         }
 
-        if (string.IsNullOrEmpty(Settings.FontName))
+        if (Settings.FontName.IsNullOrEmpty())
         {
             Settings.FontName = FontManageService.DefaultFont;
             Logger.Warning("Font name is empty, using default font");
         }
 
-        if (string.IsNullOrEmpty(Settings.Theme))
+        if (Settings.Theme.IsNullOrEmpty())
         {
             Settings.Theme = "Dark";
             Logger.Warning("Theme is empty, using dark theme");

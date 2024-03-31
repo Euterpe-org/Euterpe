@@ -6,6 +6,13 @@ namespace MuseDashModToolsUI.Extensions;
 public static class StringExtensions
 {
     /// <summary>
+    ///     Check whether the string is null or empty
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static bool IsNullOrEmpty(this string? str) => string.IsNullOrEmpty(str);
+
+    /// <summary>
     ///     Replace "\\n" with "\n" to normalize newline
     /// </summary>
     /// <param name="str"></param>

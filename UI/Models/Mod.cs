@@ -37,7 +37,7 @@ public sealed class Mod
     public bool IsValidConfigFile { get; set; }
 
     [JsonIgnore]
-    public bool IsValidHomePage => !string.IsNullOrEmpty(HomePage) && Uri.TryCreate(HomePage, UriKind.Absolute, out var uriResult) &&
+    public bool IsValidHomePage => !HomePage.IsNullOrEmpty() && Uri.TryCreate(HomePage, UriKind.Absolute, out var uriResult) &&
                                    (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 
     [JsonIgnore]

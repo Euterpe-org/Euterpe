@@ -26,7 +26,7 @@ public sealed partial class ChartDownloadViewModel : ViewModelBase, IChartDownlo
 
     public ChartDownloadViewModel()
     {
-        _sourceCache.Connect().Filter(x => string.IsNullOrEmpty(Filter) ||
+        _sourceCache.Connect().Filter(x => Filter.IsNullOrEmpty() ||
                                            x.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
                                            x.Author.Contains(Filter, StringComparison.OrdinalIgnoreCase) ||
                                            x.Charter.Contains(Filter, StringComparison.OrdinalIgnoreCase))

@@ -26,9 +26,9 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
 
         _savingService.LoadSettings();
         _settings = context.Resolve<Setting>();
-        if (!string.IsNullOrEmpty(_settings.LanguageCode))
+        if (!_settings.LanguageCode.IsNullOrEmpty())
         {
-            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_settings.LanguageCode);
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(_settings.LanguageCode!);
         }
 #if !DEBUG
         context.Resolve<IDownloadService>().CheckUpdatesAsync();

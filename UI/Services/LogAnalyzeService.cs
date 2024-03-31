@@ -116,7 +116,7 @@ public sealed partial class LogAnalyzeService : ILogAnalyzeService
 
     public async ValueTask<string> LoadLogAsync()
     {
-        if (!string.IsNullOrEmpty(Settings.MelonLoaderFolder))
+        if (!Settings.MelonLoaderFolder.IsNullOrEmpty())
         {
             LogPath = Path.Combine(Settings.MelonLoaderFolder, "Latest.log");
         }

@@ -262,7 +262,7 @@ public sealed partial class DownloadService
             return false;
         }
 
-        return update != MsgBox_Button_No && !string.IsNullOrEmpty(update);
+        return update != MsgBox_Button_No && !update.IsNullOrEmpty();
     }
 
     /// <summary>

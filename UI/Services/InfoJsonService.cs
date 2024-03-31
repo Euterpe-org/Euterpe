@@ -11,14 +11,14 @@ public sealed partial class InfoJsonService : IInfoJsonService
     public async Task OnChooseChartFolderAsync()
     {
         var chartFolder = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseChartFolder);
-        if (string.IsNullOrEmpty(chartFolder))
+        if (chartFolder.IsNullOrEmpty())
         {
             Logger.Information("Chosen chart folder is empty");
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_InvalidPath);
             return;
         }
 
-        var bmsFiles = LocalService.GetBmsFiles(chartFolder);
+        var bmsFiles = LocalService.GetBmsFiles(chartFolder!);
         if (bmsFiles is [])
         {
             Logger.Information("Chosen chart folder has no bms file");
