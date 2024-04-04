@@ -10,7 +10,7 @@ public sealed partial class SavingService : ISavingService
     private bool _isSavedLoaded;
 
     private static string SettingPath =>
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), SettingFile);
+        Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name, SettingFile);
 
     public async Task InitializeSettingsAsync()
     {

@@ -13,7 +13,7 @@ public sealed partial class Setting
 
     [MemoryPackOrder(1)]
     [SuppressDefaultInitialization]
-    public string CacheFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools");
+    public string CacheFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name);
 
     // UI Settings
     [MemoryPackOrder(2)]
