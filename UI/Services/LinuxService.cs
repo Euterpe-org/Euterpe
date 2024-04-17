@@ -23,7 +23,7 @@ public sealed class LinuxService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool GetGamePath(out string? folderPath)
     {
-        folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
+        folderPath = LinuxPaths.Find(Directory.Exists);
         if (folderPath is null)
         {
             return false;
@@ -38,14 +38,6 @@ public sealed class LinuxService : IPlatformService
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public void OpenFile(string path) => Process.Start("xdg-open", path);
-
-    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public void OpenFolder(string path) => Process.Start(
-        new ProcessStartInfo
-        {
-            FileName = path,
-            UseShellExecute = true
-        });
 
     public bool SetPathEnvironmentVariable() => false;
 

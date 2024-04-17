@@ -58,14 +58,6 @@ public sealed class WindowsService : IPlatformService
     public void OpenFile(string path) => Process.Start("explorer.exe", "/select, " + path);
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public void OpenFolder(string path) => Process.Start(
-        new ProcessStartInfo
-        {
-            FileName = path,
-            UseShellExecute = true
-        });
-
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool SetPathEnvironmentVariable()
     {
         try

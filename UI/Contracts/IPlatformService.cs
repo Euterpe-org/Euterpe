@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace MuseDashModToolsUI.Contracts;
 
 public interface IPlatformService
@@ -31,7 +33,11 @@ public interface IPlatformService
     ///     Open folder with path
     /// </summary>
     /// <param name="path"></param>
-    void OpenFolder(string path);
+    void OpenFolder(string path) => Process.Start(new ProcessStartInfo
+    {
+        FileName = path,
+        UseShellExecute = true
+    });
 
     /// <summary>
     ///     Set MD_DIRECTORY environment variable
