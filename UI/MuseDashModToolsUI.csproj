@@ -69,7 +69,6 @@
     <!--Hot Reload Packages-->
     <ItemGroup>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
-        <PackageReference Include="CliWrap"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
         <PackageReference Include="HotAvalonia.Extensions" PrivateAssets="All"/>
     </ItemGroup>
@@ -85,6 +84,7 @@
         <PackageReference Include="Avalonia.ReactiveUI"/>
         <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="CliWrap"/>
         <PackageReference Include="DialogHost.Avalonia"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="JetBrains.Annotations"/>

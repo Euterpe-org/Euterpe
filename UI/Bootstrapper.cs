@@ -2,7 +2,6 @@
 using Autofac;
 using MemoryPack;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
-using MuseDashModToolsUI.Formatters;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
 using MuseDashModToolsUI.ViewModels.Pages;
