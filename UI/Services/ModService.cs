@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
 using System.Text;
 using DynamicData;
 using NuGet.Versioning;

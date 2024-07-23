@@ -1,5 +1,3 @@
-using System.IO;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using Avalonia.Media.Imaging;
 using DialogHostAvalonia;

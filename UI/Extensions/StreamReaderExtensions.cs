@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace MuseDashModToolsUI.Extensions;
 
 public static class StreamReaderExtensions

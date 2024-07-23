@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.IO;
 using System.Text.Json.Serialization;
 using NuGet.Versioning;
 

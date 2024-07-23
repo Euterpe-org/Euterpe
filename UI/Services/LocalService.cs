@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.IO;
 using System.Reflection;
 using AssetsTools.NET.Extra;
 using DialogHostAvalonia;

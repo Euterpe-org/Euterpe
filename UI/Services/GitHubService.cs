@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 
 #pragma warning disable CS8618
 

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -11,7 +11,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.5"/>
-        <PackageReference Include="Material.Avalonia" Version="3.0.2.42-nightly"/>
+        <PackageReference Include="Avalonia" Version="11.1.0"/>
+        <PackageReference Include="Material.Avalonia" Version="3.6.1-nightly.0.3"/>
     </ItemGroup>
 </Project>

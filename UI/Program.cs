@@ -1,8 +1,6 @@
 #if !DEBUG
 using System.Diagnostics;
 #endif
-using System.IO;
-
 namespace MuseDashModToolsUI;
 
 internal static class Program

@@ -9,8 +9,6 @@
     </Application.DataTemplates>
 
     <Application.Styles>
-        <!--This should be removed after https://github.com/AvaloniaCommunity/Material.Avalonia/issues/246 fixed-->
-        <FluentTheme />
         <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Grey" SecondaryColor="Indigo" />
         <StyleInclude Source="avares://DialogHost.Avalonia/Styles.xaml" />
         <StyleInclude Source="avares://MuseDashModToolsUI.Styles/ModToolsStyles.axaml" />

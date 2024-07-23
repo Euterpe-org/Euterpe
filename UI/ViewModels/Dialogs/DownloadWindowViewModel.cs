@@ -1,5 +1,4 @@
-﻿using System.IO;
-using DialogHostAvalonia;
+﻿using DialogHostAvalonia;
 using ICSharpCode.SharpZipLib.Zip;
 
 #pragma warning disable CS8618
