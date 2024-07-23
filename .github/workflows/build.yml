@@ -31,7 +31,7 @@ jobs:
           - x64
           # - arm64 # /usr/bin/ld: unrecognised emulation mode: aarch64linux
         dotnet-version:
-          - '7.0'
+          - '8.0'
         self-contained:
           - true
           - false
