@@ -27,7 +27,7 @@ public interface IPlatformService
     ///     Open file with path
     /// </summary>
     /// <param name="path"></param>
-    void OpenFile(string path);
+    void OpenOrSelectFile(string path);
 
     /// <summary>
     ///     Open folder with path

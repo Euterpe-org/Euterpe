@@ -1,7 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:MuseDashModToolsUI"
-             xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              x:Class="MuseDashModToolsUI.App">
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -10,18 +9,6 @@
     <Application.Styles>
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <StyleInclude Source="avares://MuseDashModToolsUI.Styles/ModToolsStyles.axaml" />
-        <Style Selector="TextBlock">
-            <Setter Property="FontFamily" Value="{ext:Font Font}" />
-        </Style>
-        <Style Selector="TextBox">
-            <Setter Property="FontFamily" Value="{ext:Font Font}" />
-        </Style>
-        <Style Selector="Button ContentPresenter">
-            <Setter Property="FontFamily" Value="{ext:Font Font}" />
-        </Style>
-        <Style Selector="TemplatedControl">
-            <Setter Property="FontFamily" Value="{ext:Font Font}" />
-        </Style>
     </Application.Styles>
 
     <TrayIcon.Icons>

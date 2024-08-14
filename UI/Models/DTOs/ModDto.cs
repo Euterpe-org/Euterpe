@@ -1,6 +1,6 @@
 using Mapster;
 
-namespace MuseDashModToolsUI.Models;
+namespace MuseDashModToolsUI.Models.DTOs;
 
 public sealed partial class ModDto : ObservableObject
 {

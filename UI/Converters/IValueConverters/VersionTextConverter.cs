@@ -14,21 +14,21 @@ public sealed class VersionTextConverter : IValueConverter
 
         if (mod.IsIncompatible)
         {
-            return ZString.Format(XAML_Mod_Incompatible, mod.Name, mod.Version);
+            return string.Format(XAML_Mod_Incompatible, mod.Name, mod.Version);
         }
 
         switch (mod.State)
         {
             case UpdateState.Outdated:
-                return ZString.Format(XAML_Mod_Outdated, mod.LocalVersion, mod.Version);
+                return string.Format(XAML_Mod_Outdated, mod.LocalVersion, mod.Version);
             case UpdateState.Newer:
-                return ZString.Format(XAML_Mod_Newer, mod.LocalVersion);
+                return string.Format(XAML_Mod_Newer, mod.LocalVersion);
             case UpdateState.Modified:
-                return ZString.Format(XAML_Mod_Modified, mod.LocalVersion);
+                return string.Format(XAML_Mod_Modified, mod.LocalVersion);
             case UpdateState.Normal:
             default:
                 return mod is { State: UpdateState.Normal, IsLocal: true }
-                    ? ZString.Format(XAML_Mod_Normal, mod.LocalVersion)
+                    ? string.Format(XAML_Mod_Normal, mod.LocalVersion)
                     : null;
         }
     }

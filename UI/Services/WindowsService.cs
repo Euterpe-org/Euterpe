@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using System.Collections.Frozen;
 using System.Diagnostics;
 using Microsoft.Win32;
 
@@ -9,7 +9,7 @@ namespace MuseDashModToolsUI.Services;
 public sealed class WindowsService : IPlatformService
 {
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    private static readonly ImmutableList<string> WindowsPaths = new List<string>
+    private static readonly FrozenSet<string> WindowsPaths = new[]
         {
             @"Program Files\Steam\steamapps\common\Muse Dash",
             @"Program Files (x86)\Steam\steamapps\common\Muse Dash",
@@ -18,7 +18,7 @@ public sealed class WindowsService : IPlatformService
             @"Steam\steamapps\common\Muse Dash",
             @"SteamLibrary\steamapps\common\Muse Dash"
         }
-        .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToImmutableList();
+        .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToFrozenSet();
 
     [UsedImplicitly]
     public ILogger Logger { get; init; }
@@ -31,20 +31,21 @@ public sealed class WindowsService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool GetGamePath(out string? folderPath)
     {
-        folderPath = WindowsPaths.Find(Directory.Exists);
+        folderPath = WindowsPaths.FirstOrDefault(Directory.Exists);
 
         if (folderPath is null)
         {
             if (!GetPathFromRegistry(out folderPath))
             {
+                Logger.Warning("Failed to auto detect game path on Windows");
                 return false;
             }
 
-            Logger.Information("Auto detected game path from Registry {Path}", folderPath);
+            Logger.Information("Auto detect steam install on common path failed.\r\nDetected game path from Registry: {Path}", folderPath);
             return true;
         }
 
-        Logger.Information("Auto detected game path on Windows {Path}", folderPath);
+        Logger.Information("Auto detected game path on Windows: {Path}", folderPath);
         return true;
     }
 
@@ -52,7 +53,7 @@ public sealed class WindowsService : IPlatformService
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater.exe");
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public void OpenFile(string path) => Process.Start("explorer.exe", "/select, " + path);
+    public void OpenOrSelectFile(string path) => Process.Start("explorer.exe", "/select, " + path);
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool SetPathEnvironmentVariable()
@@ -85,7 +86,7 @@ public sealed class WindowsService : IPlatformService
         }
 
         Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-        await MessageBoxService.ErrorMessageBox(MsgBox_Content_IncorrectVersion);
+        await MessageBoxUtils.ErrorMessageBoxAsync(MsgBox_Content_IncorrectVersion);
         return false;
     }
 

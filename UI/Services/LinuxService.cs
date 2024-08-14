@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using System.Collections.Frozen;
 using System.Diagnostics;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -8,12 +8,12 @@ namespace MuseDashModToolsUI.Services;
 public sealed class LinuxService : IPlatformService
 {
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    private static readonly ImmutableList<string> LinuxPaths = new List<string>
+    private static readonly FrozenSet<string> LinuxPaths = new[]
         {
             ".local/share/Steam/steamapps/common/Muse Dash",
             ".steam/steam/steamapps/common/Muse Dash"
         }
-        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToImmutableList();
+        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToFrozenSet();
 
     [UsedImplicitly]
     public ILogger Logger { get; init; }
@@ -23,13 +23,14 @@ public sealed class LinuxService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool GetGamePath(out string? folderPath)
     {
-        folderPath = LinuxPaths.Find(Directory.Exists);
+        folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
         if (folderPath is null)
         {
+            Logger.Warning("Failed to auto detect game path on Linux");
             return false;
         }
 
-        Logger.Information("Auto detected game path on Linux {Path}", folderPath);
+        Logger.Information("Auto detected game path on Linux: {Path}", folderPath);
         return true;
     }
 
@@ -37,7 +38,7 @@ public sealed class LinuxService : IPlatformService
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater");
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public void OpenFile(string path) => Process.Start("xdg-open", path);
+    public void OpenOrSelectFile(string path) => Process.Start("xdg-open", path);
 
     public bool SetPathEnvironmentVariable() => false;
 

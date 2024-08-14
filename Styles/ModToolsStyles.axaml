@@ -3,7 +3,6 @@
 
     <!--Extend Controls-->
     <StyleInclude Source="/ExtendControls/DifficultyFilter.axaml" />
-    <StyleInclude Source="/ExtendControls/TitledTextBox.axaml" />
 
     <!--Templated Controls-->
     <StyleInclude Source="/TemplatedControls/Developer.axaml" />
