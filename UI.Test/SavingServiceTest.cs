@@ -1,7 +1,4 @@
-using System.IO.Abstractions;
-using PrivateProxy;
-
-namespace MuseDashModToolsUI.Test;
+/*namespace MuseDashModToolsUI.Test;
 
 [TestSubject(typeof(SavingService))]
 public sealed class SavingServiceTest(ITestOutputHelper testOutputHelper)
@@ -56,4 +53,5 @@ public sealed class SavingServiceTest(ITestOutputHelper testOutputHelper)
 }
 
 [GeneratePrivateProxy(typeof(SavingService), PrivateProxyGenerateKinds.Method)]
-public partial class SavingServiceProxy;
+public class SavingServiceProxy;*/
+

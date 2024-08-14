@@ -10,47 +10,5 @@
              x:DataType="pages:LogAnalysisViewModel"
              DataContext="{ext:DependencyInjection Type=contract:ILogAnalysisViewModel}">
 
-    <Border Margin="10,0,10,10">
-        <Grid RowDefinitions="100,*" ColumnDefinitions="*,*,*">
-            <Grid.Styles>
-                <Style Selector="Button">
-                    <Setter Property="Height" Value="60" />
-                    <Setter Property="MinWidth" Value="150" />
-                </Style>
-                <Style Selector="TextBlock">
-                    <Setter Property="FontSize" Value="16" />
-                </Style>
-                <Style Selector="TextBox Panel#PART_TextContainer">
-                    <Setter Property="Margin" Value="10,25
-                    ,0,0" />
-                </Style>
-            </Grid.Styles>
-
-            <Button Grid.Row="0" Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    Margin="10,0,0,0"
-                    Content="{ext:Localize XAML_Analyze}"
-                    Command="{Binding AnalyzeLogCommand}" />
-
-            <Button Grid.Row="0" Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    Content="{ext:Localize XAML_LogFolder}"
-                    Command="{Binding OpenLogFolderCommand}" />
-
-            <Button Grid.Row="0" Grid.Column="2"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,10,0"
-                    Content="{ext:Localize XAML_TroubleShoot}"
-                    Command="{Binding OpenUrlCommand}"
-                    CommandParameter="https://discord.com/channels/812100927468470273/812771828514816040" />
-
-            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                     Margin="10,0"
-                     Classes="outline"
-                     Text="{Binding LogContent}"
-                     AcceptsReturn="False"
-                     IsReadOnly="True" />
-        </Grid>
-    </Border>
 
 </UserControl>

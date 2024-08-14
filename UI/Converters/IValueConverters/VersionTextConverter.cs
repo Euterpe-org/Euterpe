@@ -7,7 +7,7 @@ public sealed class VersionTextConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not Mod mod)
+        if (value is not ModDto mod)
         {
             return string.Empty;
         }

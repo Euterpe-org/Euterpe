@@ -47,20 +47,19 @@ public static class Bootstrapper
     /// </summary>
     private static void RegisterServices()
     {
-        _builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<FileSystem>().As<IFileSystem>().SingleInstance();
-        _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<DownloadService>().As<IDownloadService>().PropertiesAutowired();
-        _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<SerializationService>().As<ISerializationService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<DownloadService>().As<IDownloadService>().PropertiesAutowired();
+        // _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<SerializationService>().As<ISerializationService>().PropertiesAutowired().SingleInstance();
+        // _builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
 
         // Platform Service
         if (OperatingSystem.IsWindows())

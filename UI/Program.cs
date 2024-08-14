@@ -25,10 +25,10 @@ internal static class Program
         }
 
         CreateLogger();
-        AddExceptionHandler();
         DeleteUnusedLogFile();
         RegisterDependencies();
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        AddExceptionHandler();
     }
 
     private static void AddExceptionHandler()

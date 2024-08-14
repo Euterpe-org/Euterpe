@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
+        <xsd:element name="root" msdata:IsDataSet="true">
+
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="MsgBox_Button_No" xml:space="preserve">
+        <value>否</value>
+    </data>
+    <data name="MsgBox_Button_NoNoAsk" xml:space="preserve">
+        <value>否并且不再询问</value>
+    </data>
+    <data name="MsgBox_Button_Yes" xml:space="preserve">
+        <value>是</value>
+    </data>
+    <data name="MsgBox_Content_BrokenMods" xml:space="preserve">
+        <value>你下载的 Mod 有问题\n如果有0KB的 Mod，请删除之后重新启动应用\n{0}</value>
+    </data>
+    <data name="MsgBox_Button_YesNoAsk" xml:space="preserve">
+        <value>是并且不再询问</value>
+    </data>
+    <data name="MsgBox_Content_ChangeModStateFailed" xml:space="preserve">
+        <value>Mod启用/禁用失败\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
+        <value>Mod启用/禁用失败。游戏是否正在运行？\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
+        <value>Mod启用/禁用失败。没有权限\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_CheckUpdateFailed" xml:space="preserve">
+        <value>检查更新失败\n是否联网？</value>
+    </data>
+    <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
+        <value>先选择正确的 Muse Dash文件夹！</value>
+    </data>
+    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
+        <value>你还没有选择 Muse Dash 的文件夹\n请选择文件夹</value>
+    </data>
+    <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
+        <value>无法将 Updater 复制到目标文件夹\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
+        <value>无法删除 {0} 下的 MelonLoader.zip\n错误信息：\n{1}\n请尝试手动删除</value>
+    </data>
+    <data name="MsgBox_Content_DeleteModConfirm" xml:space="preserve">
+        <value>{0} 使用依赖 {1} \n你确定你想要删除这个mod吗？</value>
+    </data>
+    <data name="MsgBox_Content_DisableReverseDependency" xml:space="preserve">
+        <value>你想要禁用依赖于 {0} 的mod吗？</value>
+    </data>
+    <data name="MsgBox_Content_DisableModConfirm" xml:space="preserve">
+        <value>{0} 被 {1} 用作依赖\n你确定你想要禁用这个mod？</value>
+    </data>
+    <data name="MsgBox_Content_DuplicateMods" xml:space="preserve">
+        <value>请手动选择并且删除重复的mod\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_EnableDependency" xml:space="preserve">
+        <value>你想要启用 {0} 的依赖mod {1} 吗？</value>
+    </data>
+    <data name="MsgBox_Content_ExeVerifyFailed" xml:space="preserve">
+        <value>验证 MuseDash.exe 失败\n请确认你选择了正确的文件夹</value>
+    </data>
+    <data name="MsgBox_Content_GamePathError" xml:space="preserve">
+        <value>你的游戏路径没有包含"steamapps\common\Muse Dash\musedash.exe"\n你在使用盗版吗？</value>
+    </data>
+    <data name="MsgBox_Content_GetModListFailed" xml:space="preserve">
+        <value>无法从任一下载源获取 Mod 列表</value>
+    </data>
+    <data name="MsgBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
+        <value>你安装了错误版本的 MelonLoader：{0}\n请使用模组管理界面的按钮安装 MelonLoader 0.5.7</value>
+    </data>
+    <data name="MsgBox_Content_IncorrectVersion" xml:space="preserve">
+        <value>MuseDash.exe 并不是正确的版本\n你是否在使用破解版？</value>
+    </data>
+    <data name="MsgBox_Content_InstallDependencyFailed" xml:space="preserve">
+        <value>依赖 {0} 安装失败\n{1}</value>
+    </data>
+    <data name="MsgBox_Content_InstallMelonLoader" xml:space="preserve">
+        <value>你没有安装 MelonLoader\n需要安装之后才能运行所有的mod\n是否现在安装？</value>
+    </data>
+    <data name="MsgBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
+        <value>MelonLoader下载失败\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
+        <value>MelonLoader下载失败\n是否联网？\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
+        <value>MelonLoader 已经成功安装\n</value>
+    </data>
+    <data name="MsgBox_Content_InstallModFailed" xml:space="preserve">
+        <value>Mod安装失败\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_InstallModFailed_Game" xml:space="preserve">
+        <value>Mod安装失败。游戏是否正在运行？\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_InstallModFailed_Internet" xml:space="preserve">
+        <value>Mod安装失败。是否联网？\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_InstallModSuccess" xml:space="preserve">
+        <value>{0} 已成功安装\n</value>
+    </data>
+    <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
+        <value>你没有安装 MuseDashModTools 的mod\n每次开启 Muse Dash 的时候会自动检查mod更新\n是否现在安装？</value>
+    </data>
+    <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
+        <value>检测到的 Muse Dash 文件夹为 {0}\n这是正确的游戏文件夹吗</value>
+    </data>
+    <data name="MsgBox_Content_InvalidPath" xml:space="preserve">
+        <value>你选择的路径无效，请再次选择</value>
+    </data>
+    <data name="MsgBox_Content_LatestVersion" xml:space="preserve">
+        <value>检查更新成功\nMuse Dash Mod Tools已是最新版\n</value>
+    </data>
+    <data name="MsgBox_Content_LogAnalyzeComplete" xml:space="preserve">
+        <value>日志分析完成，未从日志中发现明显错误\n如果仍然有问题请去 trouble shoot 频道询问</value>
+    </data>
+    <data name="MsgBox_Content_NewerVersion" xml:space="preserve">
+        <value>有新版本的 Muse Dash Mod Tools （{0}）已经发布\n\n你想要现在就安装吗\n\n发布标题：\n{1}\n\n发布内容：\n{2}</value>
+    </data>
+    <data name="MsgBox_Content_NoApplicationPath" xml:space="preserve">
+        <value>你的日志中没有包含应用路径</value>
+    </data>
+    <data name="MsgBox_Content_NoDlcPurchased" xml:space="preserve">
+        <value>无法找到 Muse Dash DLC 的购买记录\n你需要购买以游玩自制谱</value>
+    </data>
+    <data name="MsgBox_Content_NoDownloadLink" xml:space="preserve">
+        <value>这个mod没有可用链接进行下载\n</value>
+    </data>
+    <data name="MsgBox_Content_NoExeFound" xml:space="preserve">
+        <value>无法找到 MuseDash.exe 或者 GameAssembly.dll\n请选择正确的文件夹</value>
+    </data>
+    <data name="MsgBox_Content_NoInstallRecord" xml:space="preserve">
+        <value>无法验证你在Steam上购买了此游戏\n你在使用盗版吗？</value>
+    </data>
+    <data name="MsgBox_Content_NoLogFile" xml:space="preserve">
+        <value>无法找到日志文件\n你需要在安装 MelonLoader 之后启动一次游戏来生成日志文件</value>
+    </data>
+    <data name="MsgBox_Content_NoMelonLoaderFolder" xml:space="preserve">
+        <value>无法找到 MelonLoader 文件夹\n你是否安装了 MelonLoader？</value>
+    </data>
+    <data name="MsgBox_Content_NoMelonLoaderVersion" xml:space="preserve">
+        <value>无法从日志中找到 MelonLoader的版本</value>
+    </data>
+    <data name="MsgBox_Content_NullPath" xml:space="preserve">
+        <value>你所存储的 Muse Dash 文件夹是空\n请选择正确的文件夹</value>
+    </data>
+    <data name="MsgBox_Content_OutdatedMod" xml:space="preserve">
+        <value>{0} 有更新，请使用 “模组” 页面更新</value>
+    </data>
+    <data name="MsgBox_Content_ReadGameVersionFailed" xml:space="preserve">
+        <value>无法读取当前游戏版本\n你是否完整下载了 Muse Dash？\n请检查你的globalgamemanagers文件在路径\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_RegisterHQ" xml:space="preserve">
+        <value>你还没有注册 Headquarters Mod\n请在 MDMC Discord 的 #bot-commands 频道注册</value>
+    </data>
+    <data name="MsgBox_Content_ReinstallMod" xml:space="preserve">
+        <value>你正在要求重装{0}\n请确认你的操作</value>
+    </data>
+    <data name="MsgBox_Content_UninstallMelonLoader" xml:space="preserve">
+        <value>你正在要求卸载 MelonLoader\n请确认你的操作</value>
+    </data>
+    <data name="MsgBox_Content_UninstallMelonLoaderFailed" xml:space="preserve">
+        <value>无法卸载 MelonLoader\n请确认你的游戏没有在运行！</value>
+    </data>
+    <data name="MsgBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
+        <value>MelonLoader 已经成功被卸载\n</value>
+    </data>
+    <data name="MsgBox_Content_UninstallModFailed" xml:space="preserve">
+        <value>Mod卸载失败。游戏是否正在运行？\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_UninstallModFailed_Game" xml:space="preserve">
+        <value>Mod卸载失败\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_UninstallModFailed_Null" xml:space="preserve">
+        <value>无法删除不存在的文件</value>
+    </data>
+    <data name="MsgBox_Content_UninstallModSuccess" xml:space="preserve">
+        <value>{0}已经被成功删除\n</value>
+    </data>
+    <data name="MsgBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
+        <value>无法解压路径 {0} 的 MelonLoader.zip\n错误信息：\n{1}\n尝试手动解压？</value>
+    </data>
+    <data name="MsgBox_Content_UpdaterNotFound" xml:space="preserve">
+        <value>无法找到 Updater\n请确认你下载了整个软件</value>
+    </data>
+    <data name="MsgBox_Title_AnalyzeSuccess" xml:space="preserve">
+        <value>分析成功</value>
+    </data>
+    <data name="MsgBox_Title_Failure" xml:space="preserve">
+        <value>失败</value>
+    </data>
+    <data name="MsgBox_Title_Notice" xml:space="preserve">
+        <value>注意</value>
+    </data>
+    <data name="MsgBox_Title_Success" xml:space="preserve">
+        <value>成功</value>
+    </data>
+    <data name="MsgBox_Title_Warning" xml:space="preserve">
+        <value>警告</value>
+    </data>
+    <data name="MsgBox_Content_DownloadChartFailed" xml:space="preserve">
+        <value>谱面下载失败\n{0}</value>
+    </data>
+    <data name="MsgBox_Content_DownloadChartSuccess" xml:space="preserve">
+        <value>谱面 {0} 已成功下载\n</value>
+    </data>
+    <data name="MsgBox_Content_OverrideChart" xml:space="preserve">
+        <value>你已经下载了谱面 {0}\n继续下载并覆盖吗？</value>
+    </data>
+    <data name="MsgBox_Content_NoBmsFile" xml:space="preserve">
+        <value>文件夹里没有找到谱面</value>
+    </data>
+</root>

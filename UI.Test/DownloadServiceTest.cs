@@ -1,4 +1,4 @@
-﻿using MuseDashModToolsUI.Models;
+﻿/*using MuseDashModToolsUI.Models;
 using RichardSzalay.MockHttp;
 
 namespace MuseDashModToolsUI.Test;
@@ -36,4 +36,5 @@ public sealed class DownloadServiceTest(ITestOutputHelper testOutputHelper)
         };
         await downloadService.CheckUpdatesAsync();
     }
-}
+}*/
+

@@ -3,7 +3,6 @@
         xmlns:vm="using:MuseDashModToolsUI.ViewModels"
         xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
         xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
-        xmlns:pages="clr-namespace:MuseDashModToolsUI.Views.Pages"
         x:Class="MuseDashModToolsUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
@@ -13,57 +12,4 @@
         Title="Muse Dash Mod Tools"
         WindowStartupLocation="CenterScreen">
 
-    <Grid RowDefinitions="50,*" ColumnDefinitions="4*,*">
-        <Grid Grid.Row="0" Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Button Height="50"
-                        Classes="Secondary"
-                        VerticalAlignment="Center"
-                        Theme="{DynamicResource BorderlessButton}">
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <PathIcon Width="25"
-                                      Height="25"
-                                      Data="{StaticResource Back}"
-                                      Foreground="{DynamicResource ButtonDefaultSecondaryForeground}" />
-
-                            <TextBlock Margin="10,2,0,0"
-                                       FontSize="18"
-                                       VerticalAlignment="Center"
-                                       Text="{ext:Localize XAML_Back}" />
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
-
-                <ToggleSwitch Width="50"
-                              Height="50"
-                              VerticalAlignment="Center"
-                              Command="{Binding ChangeThemeCommand}"
-                              Theme="{DynamicResource ButtonToggleSwitch}">
-
-                    <ToggleSwitch.Styles>
-                        <Style Selector="PathIcon">
-                            <Setter Property="Width" Value="20" />
-                            <Setter Property="Height" Value="20" />
-                            <Setter Property="Foreground" Value="{DynamicResource ButtonDefaultTertiaryForeground}" />
-                        </Style>
-                    </ToggleSwitch.Styles>
-
-                    <ToggleSwitch.OnContent>
-                        <PathIcon Data="{StaticResource Light}" />
-                    </ToggleSwitch.OnContent>
-                    <ToggleSwitch.OffContent>
-                        <PathIcon Data="{StaticResource Dark}" />
-                    </ToggleSwitch.OffContent>
-                </ToggleSwitch>
-            </StackPanel>
-
-            <TextBlock HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontSize="25"
-                       Text="{Binding AppVersion}" />
-        </Grid>
-
-        <pages:MainMenu Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20" />
-    </Grid>
 </Window>

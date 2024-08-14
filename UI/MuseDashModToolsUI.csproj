@@ -28,41 +28,41 @@
         <Content Include="Assets\Icon.ico"/>
 
         <!--Localization Files-->
-        <EmbeddedResource Update="Localization\XAML\Resources_XAML.resx">
+        <EmbeddedResource Update="Localization\XAML\XAML.resx">
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources_XAML.Designer.cs</LastGenOutput>
+            <LastGenOutput>XAML.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\XAML\Resources_XAML.Designer.cs">
+        <Compile Update="Localization\XAML\XAML.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources_XAML.resx</DependentUpon>
+            <DependentUpon>XAML.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Update="Localization\Resources\Resources.resx">
+        <EmbeddedResource Update="Localization\General\General.resx">
+            <LastGenOutput>General.Designer.cs</LastGenOutput>
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\Resources\Resources.Designer.cs">
+        <Compile Update="Localization\General\General.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
+            <DependentUpon>General.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Update="Localization\MsgBox\Resources_MsgBox.resx">
+        <EmbeddedResource Update="Localization\MsgBox\MsgBox.resx">
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources_MsgBox.Designer.cs</LastGenOutput>
+            <LastGenOutput>MsgBox.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\MsgBox\Resources_MsgBox.Designer.cs">
+        <Compile Update="Localization\MsgBox\MsgBox.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources_MsgBox.resx</DependentUpon>
+            <DependentUpon>MsgBox.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Update="Localization\ModDescriptions\Resources_ModDescription.resx">
+        <EmbeddedResource Update="Localization\ModDescriptions\ModDescription.resx">
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources_ModDescription.Designer.cs</LastGenOutput>
+            <LastGenOutput>ModDescription.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\ModDescriptions\Resources_ModDescription.Designer.cs">
+        <Compile Update="Localization\ModDescriptions\ModDescription.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources_ModDescription.resx</DependentUpon>
+            <DependentUpon>ModDescription.resx</DependentUpon>
         </Compile>
     </ItemGroup>
 

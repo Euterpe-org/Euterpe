@@ -1,89 +1,17 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MuseDashModToolsUI.Models;
+﻿namespace MuseDashModToolsUI.Models;
 
 public sealed class Mod
 {
-    public bool IsDisabled { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
     public string DownloadLink { get; set; } = string.Empty;
     public string HomePage { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
-    public string[]? GameVersion { get; set; }
+    public string[] GameVersion { get; set; } = [];
     public string Description { get; set; } = string.Empty;
-    public List<string> DependentMods { get; set; } = [];
-    public List<string> DependentLibs { get; set; } = [];
-    public List<string> IncompatibleMods { get; set; } = [];
+    public string[] DependentMods { get; set; } = [];
+    public string[] DependentLibs { get; set; } = [];
+    public string[] IncompatibleMods { get; set; } = [];
     public string SHA256 { get; set; } = string.Empty;
-    [JsonIgnore] public string? LocalVersion { get; set; }
-    [JsonIgnore] public UpdateState State { get; set; }
-    [JsonIgnore] public bool IsIncompatible { get; set; }
-    [JsonIgnore] public bool IsUpdatable => IsLocal && State != UpdateState.Normal;
-    [JsonIgnore] public string? FileName { get; set; }
-    [JsonIgnore] public bool IsLocal => FileName is not null;
-    [JsonIgnore] public bool IsInstallable => !IsLocal && !IsIncompatible;
-    [JsonIgnore] public bool IsTracked { get; set; }
-    [JsonIgnore] public bool IsShaMismatched { get; set; }
-    [JsonIgnore] public bool IsDuplicated { get; set; }
-    [JsonIgnore] public string DuplicatedModNames { get; set; } = string.Empty;
-
-    [JsonIgnore]
-    public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
-        ModDescriptionProvider.GetDescription(this), Author, Version, CompatibleGameVersion);
-
-    [JsonIgnore]
-    public bool IsValidConfigFile { get; set; }
-
-    [JsonIgnore]
-    public bool IsValidHomePage => !HomePage.IsNullOrEmpty() && Uri.TryCreate(HomePage, UriKind.Absolute, out var uriResult) &&
-                                   (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-
-    [JsonIgnore]
-    public string CompatibleGameVersion
-    {
-        get
-        {
-            if (GameVersion is null)
-            {
-                return string.Empty;
-            }
-
-            return GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
-        }
-    }
-
-    [JsonIgnore] public bool HasDependency => DependentMods.Count + DependentLibs.Count > 0;
-
-    [JsonIgnore]
-    public string DependencyNames => !HasDependency ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
-
-    public string FileNameExtended(bool reverse = false) => FileName + ((reverse ? !IsDisabled : IsDisabled) ? ".disabled" : string.Empty);
-
-    public void CloneOnlineInfo(Mod webMod)
-    {
-        DownloadLink = webMod.DownloadLink;
-        ConfigFile = webMod.ConfigFile;
-        HomePage = webMod.HomePage;
-        GameVersion = webMod.GameVersion;
-        Description = webMod.Description;
-        DependentMods = webMod.DependentMods;
-        DependentLibs = webMod.DependentLibs;
-        IncompatibleMods = webMod.IncompatibleMods;
-    }
-
-    public Mod RemoveLocalInfo()
-    {
-        FileName = null;
-        IsValidConfigFile = false;
-        IsDisabled = false;
-        IsDuplicated = false;
-        IsIncompatible = false;
-        IsShaMismatched = false;
-        IsTracked = false;
-        LocalVersion = null;
-        SHA256 = string.Empty;
-        return this;
-    }
 }
