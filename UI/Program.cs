@@ -6,9 +6,6 @@ namespace MuseDashModToolsUI;
 
 internal static class Program
 {
-    [UsedImplicitly]
-    private const string IssuePage = "https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose";
-
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
@@ -45,7 +42,7 @@ internal static class Program
                     Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = IssuePage,
+                    FileName = "https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose",
                     UseShellExecute = true
                 });
             }
