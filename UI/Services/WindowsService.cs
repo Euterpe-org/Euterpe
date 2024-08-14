@@ -24,9 +24,6 @@ public sealed class WindowsService : IPlatformService
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
     public Setting Settings { get; init; }
 
     public string OsString => "Windows";

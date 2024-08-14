@@ -1,6 +1,5 @@
 ﻿using System.IO.Abstractions;
 using Autofac;
-using MemoryPack;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
@@ -59,7 +58,6 @@ public static class Bootstrapper
         _builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();

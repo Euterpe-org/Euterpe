@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using DialogHostAvalonia;
 
 #pragma warning disable CS8618
 
@@ -9,9 +8,6 @@ public sealed partial class DownloadWindowViewModel : ViewModelBase, IDownloadWi
 {
     [ObservableProperty] private string _downloadProgress = "Download progress: 0%";
     [ObservableProperty] private double _percentage;
-
-    [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
     public IDownloadService DownloadService { get; init; }

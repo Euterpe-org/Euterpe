@@ -16,9 +16,6 @@ public sealed partial class InfoJsonViewModel : ViewModelBase, IInfoJsonViewMode
     public ILogger Logger { get; init; }
 
     [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
     public ISerializationService SerializationService { get; init; }
 
     public void Initialize()

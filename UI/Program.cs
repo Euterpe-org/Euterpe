@@ -25,18 +25,20 @@ internal static class Program
         }
 
         CreateLogger();
+        AddExceptionHandler();
         DeleteUnusedLogFile();
         RegisterDependencies();
-        try
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+    }
+
+    private static void AddExceptionHandler()
+    {
+        Dispatcher.UIThread.UnhandledException += (_, e) =>
         {
-            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        }
-        catch (Exception ex)
-        {
-            Log.Logger.Fatal(ex, "Unhandled exception");
+            Log.Logger.Fatal(e.Exception, "Unhandled exception");
+#if !DEBUG
             if (File.Exists(Path.Combine("Logs", LogFileName)))
             {
-#if !DEBUG
                 if (OperatingSystem.IsWindows())
                     Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
                 if (OperatingSystem.IsLinux())
@@ -46,9 +48,9 @@ internal static class Program
                     FileName = IssuePage,
                     UseShellExecute = true
                 });
-#endif
             }
-        }
+#endif
+        };
     }
 
     private static void RegisterDependencies() => Bootstrapper.Register();
@@ -72,9 +74,8 @@ internal static class Program
         Parallel.ForEachAsync(logs, async (log, c) => await Task.Run(() => File.Delete(log), c));
     }
 
-    // Avalonia configuration, don't remove; also used by visual designer.
-    private static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
-            .UsePlatformDetect()
-            .LogToTrace();
+// Avalonia configuration, don't remove; also used by visual designer.
+    private static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>()
+        .UsePlatformDetect()
+        .LogToTrace();
 }

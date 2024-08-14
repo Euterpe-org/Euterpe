@@ -81,26 +81,22 @@
         <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
-        <PackageReference Include="Avalonia.ReactiveUI"/>
         <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="CliWrap"/>
-        <PackageReference Include="DialogHost.Avalonia"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="LavaGang.MelonLoader"/>
         <PackageReference Include="Mapster"/>
         <PackageReference Include="Markdown.Avalonia"/>
-        <PackageReference Include="MemoryPack"/>
-        <PackageReference Include="MessageBox.Avalonia"/>
         <PackageReference Include="NuGet.Versioning"/>
+        <PackageReference Include="ReactiveUI"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Sinks.File"/>
         <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers"/>
         <PackageReference Include="ValveKeyValue"/>
-        <PackageReference Include="ZString"/>
     </ItemGroup>
 
     <ItemGroup>

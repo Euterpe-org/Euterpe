@@ -9,7 +9,6 @@
 
     <Application.Styles>
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
-        <StyleInclude Source="avares://DialogHost.Avalonia/Styles.xaml" />
         <StyleInclude Source="avares://MuseDashModToolsUI.Styles/ModToolsStyles.axaml" />
         <Style Selector="TextBlock">
             <Setter Property="FontFamily" Value="{ext:Font Font}" />
