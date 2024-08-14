@@ -75,7 +75,7 @@ public partial class ModService : IModService
 
     public async Task OnInstallModAsync(Mod item)
     {
-        if (!string.IsNullOrEmpty(item.DownloadLink))
+        if (string.IsNullOrEmpty(item.DownloadLink))
         {
             Logger.Error("Download link of mod {Name} is empty", item.Name);
             await MessageBoxService.ErrorMessageBox(MsgBox_Content_NoDownloadLink);
