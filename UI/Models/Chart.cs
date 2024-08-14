@@ -1,14 +1,12 @@
 using System.Text.Json.Serialization;
 using Avalonia.Media.Imaging;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-
 namespace MuseDashModToolsUI.Models;
 
 public sealed class Chart
 {
     [JsonPropertyName("analytics")]
-    public Analytic Analytics { get; set; }
+    public Analytic Analytics { get; set; } = null!;
 
     [JsonPropertyName("_id")]
     public string IdStr { get; set; } = string.Empty;
@@ -26,13 +24,13 @@ public sealed class Chart
     public string Bpm { get; set; } = string.Empty;
 
     [JsonPropertyName("difficulties")]
-    public string[] Difficulties { get; set; }
+    public string[] Difficulties { get; set; } = [];
 
     [JsonPropertyName("charter")]
     public string Charter { get; set; } = string.Empty;
 
     [JsonPropertyName("charter_id")]
-    public string[] CharterId { get; set; }
+    public string[] CharterId { get; set; } = [];
 
     [JsonPropertyName("__v")]
     public int V { get; set; }
@@ -52,18 +50,6 @@ public sealed class Chart
     [JsonIgnore]
     public string HiddenLevel => Difficulties[3];
 
-    [JsonIgnore]
-    public bool HasEasy => EasyLevel != "0";
-
-    [JsonIgnore]
-    public bool HasHard => HardLevel != "0";
-
-    [JsonIgnore]
-    public bool HasMaster => MasterLevel != "0";
-
-    [JsonIgnore]
-    public bool HasHidden => HiddenLevel != "0";
-
     public int GetHighestLevel()
     {
         var highestLevel = Difficulties.Max(x => x.ParseLevel());
@@ -74,7 +60,7 @@ public sealed class Chart
 public sealed class Analytic
 {
     [JsonPropertyName("likes")]
-    public string[] Likes { get; set; }
+    public string[] Likes { get; set; } = [];
 
     [JsonIgnore]
     public int LikesCount => Likes.Length;

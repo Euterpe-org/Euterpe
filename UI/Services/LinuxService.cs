@@ -1,8 +1,6 @@
 using System.Collections.Frozen;
 using System.Diagnostics;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-
 namespace MuseDashModToolsUI.Services;
 
 public sealed class LinuxService : IPlatformService
@@ -16,7 +14,7 @@ public sealed class LinuxService : IPlatformService
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToFrozenSet();
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; }
+    public ILogger Logger { get; init; } = null!;
 
     public string OsString => "Linux";
 

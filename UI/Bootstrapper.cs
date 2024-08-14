@@ -49,10 +49,8 @@ public static class Bootstrapper
     {
         // _builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<FontManageService>().As<IFontManageService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<DownloadService>().As<IDownloadService>().PropertiesAutowired();
         // _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();

@@ -2,8 +2,6 @@ using System.Collections.Frozen;
 using System.Diagnostics;
 using Microsoft.Win32;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-
 namespace MuseDashModToolsUI.Services;
 
 public sealed class WindowsService : IPlatformService
@@ -21,10 +19,10 @@ public sealed class WindowsService : IPlatformService
         .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToFrozenSet();
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; }
+    public ILogger Logger { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Settings { get; init; }
+    public Setting Settings { get; init; } = null!;
 
     public string OsString => "Windows";
 
