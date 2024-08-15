@@ -86,6 +86,7 @@
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="CliWrap"/>
         <PackageReference Include="Irihi.Ursa"/>
+        <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="LavaGang.MelonLoader"/>
         <PackageReference Include="Mapster"/>
@@ -101,9 +102,5 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Styles\MuseDashModToolsUI.Styles.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Services\"/>
     </ItemGroup>
 </Project>

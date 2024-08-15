@@ -21,6 +21,7 @@
         <PackageVersion Include="HotAvalonia" Version="1.1.1"/>
         <PackageVersion Include="HotAvalonia.Extensions" Version="1.1.1" PrivateAssets="All"/>
         <PackageVersion Include="Irihi.Ursa" Version="1.0.0"/>
+        <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.0.0"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2024.2.0"/>
         <PackageVersion Include="LavaGang.MelonLoader" Version="0.6.4"/>
         <PackageVersion Include="Mapster" Version="7.4.0"/>

@@ -1,6 +1,8 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:MuseDashModToolsUI"
+             xmlns:u-Semi="https://irihi.tech/ursa/themes/semi"
+             xmlns:semi="https://irihi.tech/semi"
              x:Class="MuseDashModToolsUI.App">
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -9,6 +11,8 @@
     <Application.Styles>
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <StyleInclude Source="avares://MuseDashModToolsUI.Styles/ModToolsStyles.axaml" />
+        <semi:SemiTheme Locale="zh-CN" />
+        <u-Semi:SemiTheme Locale="zh-CN" />
     </Application.Styles>
 
     <TrayIcon.Icons>

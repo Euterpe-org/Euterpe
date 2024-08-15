@@ -21,6 +21,7 @@ global using MuseDashModToolsUI.Services;
 global using MuseDashModToolsUI.Utils;
 global using MuseDashModToolsUI.Views;
 global using Serilog;
+global using Ursa.Controls;
 global using static MuseDashModToolsUI.BuildInfo;
 global using static MuseDashModToolsUI.Localization.MsgBox.MsgBox;
 global using static MuseDashModToolsUI.Localization.General.General;

@@ -48,7 +48,7 @@ public static class Bootstrapper
     private static void RegisterServices()
     {
         // _builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<DownloadService>().As<IDownloadService>().PropertiesAutowired();
         // _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();

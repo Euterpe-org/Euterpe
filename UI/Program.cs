@@ -24,21 +24,19 @@ internal static class Program
         CreateLogger();
         DeleteUnusedLogFile();
         RegisterDependencies();
-        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        AddExceptionHandler();
-    }
-
-    private static void AddExceptionHandler()
-    {
-        Dispatcher.UIThread.UnhandledException += (_, e) =>
+        try
         {
-            Log.Logger.Fatal(e.Exception, "Unhandled exception");
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Fatal(ex, "Unhandled exception");
 #if !DEBUG
             if (File.Exists(Path.Combine("Logs", LogFileName)))
             {
                 if (OperatingSystem.IsWindows())
                     Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
-                if (OperatingSystem.IsLinux())
+                else if (OperatingSystem.IsLinux())
                     Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
                 Process.Start(new ProcessStartInfo
                 {
@@ -47,7 +45,7 @@ internal static class Program
                 });
             }
 #endif
-        };
+        }
     }
 
     private static void RegisterDependencies() => Bootstrapper.Register();
