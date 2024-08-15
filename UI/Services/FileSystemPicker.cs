@@ -4,10 +4,10 @@ namespace MuseDashModToolsUI.Services;
 
 public sealed class FileSystemPickerService : IFileSystemPickerService
 {
-    public async Task<string?> GetSingleFolderPath(string title)
+    public async Task<string?> GetSingleFolderPath(string dialogTitle)
     {
-        var dialogue = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-            { AllowMultiple = false, Title = title });
+        var dialogue = await GetCurrentMainWindow().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+            { AllowMultiple = false, Title = dialogTitle });
 
         return dialogue is not [] ? dialogue[0].TryGetLocalPath() : null;
     }

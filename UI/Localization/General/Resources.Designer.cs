@@ -9,8 +9,8 @@
 
 namespace MuseDashModToolsUI.Localization.General {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -21,16 +21,16 @@ namespace MuseDashModToolsUI.Localization.General {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class General {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal General() {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -38,13 +38,13 @@ namespace MuseDashModToolsUI.Localization.General {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.General.General", typeof(General).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.General.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -58,7 +58,7 @@ namespace MuseDashModToolsUI.Localization.General {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose Chart Folder.
         /// </summary>
@@ -67,7 +67,7 @@ namespace MuseDashModToolsUI.Localization.General {
                 return ResourceManager.GetString("FolderDialog_Title_ChooseChartFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose Muse Dash Folder.
         /// </summary>

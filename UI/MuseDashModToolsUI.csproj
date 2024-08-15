@@ -28,47 +28,49 @@
         <Content Include="Assets\Icon.ico"/>
 
         <!--Localization Files-->
-        <EmbeddedResource Update="Localization\XAML\XAML.resx">
+        <EmbeddedResource Update="Localization\General\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>XAML.Designer.cs</LastGenOutput>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\XAML\XAML.Designer.cs">
+        <Compile Update="Localization\General\Resources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>XAML.resx</DependentUpon>
+            <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Update="Localization\General\General.resx">
-            <LastGenOutput>General.Designer.cs</LastGenOutput>
+
+        <EmbeddedResource Update="Localization\ModDescription\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\General\General.Designer.cs">
+        <Compile Update="Localization\ModDescription\Resources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>General.resx</DependentUpon>
+            <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Update="Localization\MsgBox\MsgBox.resx">
+
+        <EmbeddedResource Update="Localization\MsgBox\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>MsgBox.Designer.cs</LastGenOutput>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\MsgBox\MsgBox.Designer.cs">
+        <Compile Update="Localization\MsgBox\Resources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>MsgBox.resx</DependentUpon>
+            <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Update="Localization\ModDescriptions\ModDescription.resx">
+
+        <EmbeddedResource Update="Localization\XAML\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>ModDescription.Designer.cs</LastGenOutput>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <Compile Update="Localization\ModDescriptions\ModDescription.Designer.cs">
+        <Compile Update="Localization\XAML\Resources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>ModDescription.resx</DependentUpon>
+            <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
     </ItemGroup>
 
     <!--Hot Reload Packages-->
     <ItemGroup>
-        <PackageReference Include="Antelcat.I18N.Avalonia"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
         <PackageReference Include="HotAvalonia.Extensions" PrivateAssets="All"/>
@@ -76,6 +78,7 @@
 
     <ItemGroup>
         <PackageReference Include="AssetsTools.NET"/>
+        <PackageReference Include="Antelcat.I18N.Avalonia"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Avalonia"/>
         <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>

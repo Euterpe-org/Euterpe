@@ -21,14 +21,14 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MsgBox {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MsgBox() {
+        internal Resources() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.MsgBox.MsgBox", typeof(MsgBox).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.MsgBox.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

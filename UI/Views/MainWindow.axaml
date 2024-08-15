@@ -1,15 +1,21 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:MuseDashModToolsUI.ViewModels"
-        xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
-        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
-        x:Class="MuseDashModToolsUI.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-        Width="1100" Height="800"
-        MinWidth="900" MinHeight="700"
-        Icon="/Assets/Icon.ico"
-        Title="Muse Dash Mod Tools"
-        WindowStartupLocation="CenterScreen">
+<u:UrsaWindow xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:vm="using:MuseDashModToolsUI.ViewModels"
+              xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
+              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+              xmlns:u="https://irihi.tech/ursa"
+              x:Class="MuseDashModToolsUI.Views.MainWindow"
+              x:DataType="vm:MainWindowViewModel"
+              DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
+              Width="1100" Height="800"
+              MinWidth="900" MinHeight="700"
+              Icon="/Assets/Icon.ico"
+              Title="Muse Dash Mod Tools"
+              WindowStartupLocation="CenterScreen">
 
-</Window>
+    <u:UrsaWindow.RightContent>
+        <u:ThemeToggleButton Mode="Controller" />
+    </u:UrsaWindow.RightContent>
+
+
+</u:UrsaWindow>

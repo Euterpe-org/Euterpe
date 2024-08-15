@@ -21,14 +21,14 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources_ModDescription {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources_ModDescription() {
+        internal Resources() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.ModDescription.Resources_ModDescription", typeof(Resources_ModDescription).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.ModDescription.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -87,7 +87,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Boss always shoot pigeon and tutorial is always april fool&apos;s, activate good tek hidden.
+        ///   Looks up a localized string similar to Boss always shoots pigeons, tutorial is always april fool&apos;s version, and activates good tek hidden.
         /// </summary>
         internal static string AlwaysAprilFool {
             get {
@@ -105,7 +105,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Boss always shoot pigeon, do not use AlwaysAprilFool at the same time.
+        ///   Looks up a localized string similar to Boss always shoots pigeons, do not use AlwaysAprilFool at the same time.
         /// </summary>
         internal static string AlwaysPigeons {
             get {
@@ -141,7 +141,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Displays which character a specific score was achieved with on the leaderboard (OCS)\nIt can also display your own local scores (LCS).
+        ///   Looks up a localized string similar to Displays which character a specific score was achieved with on the leaderboard (OCS)\nIt can also display your own local scores (LCS)\nLCS and OCS have inconsistent behavior on custom songs..
         /// </summary>
         internal static string CharacterScoreboard {
             get {
@@ -213,7 +213,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allows you to make custom hit sound\nDetailed instructions on github readme.
+        ///   Looks up a localized string similar to Allows you to set custom hitsounds\nDetailed instructions in the github readme.
         /// </summary>
         internal static string CustomHitSound {
             get {
@@ -294,7 +294,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Skips the &quot;PeroPero HasuHasu&quot; and the opening scene..
+        ///   Looks up a localized string similar to Skips past opening scene by speeding the game up.\nYou can configure the speed and whether to skip past the animated illustration.\nSpiritual successor of RobotLucca&apos;s mod.
         /// </summary>
         internal static string IntroSkip {
             get {
@@ -447,7 +447,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Any search feature you will ever need (probably).\nCheck the homepage or in-game forum for more info..
+        ///   Looks up a localized string similar to An extension to SearchPlusPlus, allowing you to create folders\nand search for songs in said folders..
         /// </summary>
         internal static string Search___Folder_Tag {
             get {
@@ -456,7 +456,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Displays the title, artist, and difficulty of the song in the top-right corner during play..
+        ///   Looks up a localized string similar to Any search feature you will ever need (probably).\nOptional dependencies: KeybindManager, CustomAlbums.
         /// </summary>
         internal static string SearchPlusPlus {
             get {
@@ -465,7 +465,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An extension to SearchPlusPlus, allowing you to create folders\nand search for songs in said folders..
+        ///   Looks up a localized string similar to Displays the title, artist, and difficulty of the song in the top-right corner during play..
         /// </summary>
         internal static string Song_Desc {
             get {
@@ -483,7 +483,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Displays actual ranking instead of \&quot;999+\&quot; for ranks 1000 to 2000.
+        ///   Looks up a localized string similar to Displays actual ranking instead of &quot;999+&quot; for ranks 1000 to 2000.
         /// </summary>
         internal static string True_rank_for_999_ {
             get {
@@ -519,7 +519,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allows you to switch victory screen in the settings menu either to DjMax or Arknights. Swaps original screen with arknights/djmax and vise versa..
+        ///   Looks up a localized string similar to Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa..
         /// </summary>
         internal static string VictoryScreenSwitcher {
             get {

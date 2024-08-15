@@ -2,5 +2,5 @@ namespace MuseDashModToolsUI.Contracts;
 
 public interface IFileSystemPickerService
 {
-    Task<string?> GetSingleFolderPath(string title);
+    Task<string?> GetSingleFolderPath(string dialogTitle);
 }

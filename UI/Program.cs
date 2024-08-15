@@ -1,3 +1,4 @@
+using Avalonia.Dialogs;
 #if !DEBUG
 using System.Diagnostics;
 #endif
@@ -69,8 +70,10 @@ internal static class Program
         Parallel.ForEachAsync(logs, async (log, c) => await Task.Run(() => File.Delete(log), c));
     }
 
-// Avalonia configuration, don't remove; also used by visual designer.
+    // Avalonia configuration, don't remove; also used by visual designer.
+#pragma warning disable CA1416
     private static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>()
+        .UseManagedSystemDialogs()
         .UsePlatformDetect()
         .LogToTrace();
 }

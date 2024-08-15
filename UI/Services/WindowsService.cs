@@ -84,7 +84,7 @@ public sealed class WindowsService : IPlatformService
         }
 
         Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-        await MessageBoxUtils.ErrorMessageBoxAsync(MsgBox_Content_IncorrectVersion);
+        await ErrorMessageBoxAsync(MsgBox_Content_IncorrectVersion);
         return false;
     }
 
