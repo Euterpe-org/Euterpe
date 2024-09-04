@@ -66,8 +66,14 @@ internal static class Program
 
     private static void DeleteUnusedLogFile()
     {
-        var logs = Directory.GetFiles("Logs", "*.log").OrderDescending().Skip(60);
-        Parallel.ForEachAsync(logs, async (log, c) => await Task.Run(() => File.Delete(log), c));
+        var logFiles = Directory.GetFiles("Logs", "*.log").OrderDescending().Skip(60).ToArray();
+        if (logFiles is [])
+        {
+            return;
+        }
+
+        Parallel.ForEachAsync(logFiles, async (log, c) =>
+            await Task.Run(() => File.Delete(log), c).ConfigureAwait(false));
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
@@ -75,5 +81,6 @@ internal static class Program
     private static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>()
         .UseManagedSystemDialogs()
         .UsePlatformDetect()
+        .WithInterFont()
         .LogToTrace();
 }
