@@ -22,12 +22,12 @@ public static class StreamReaderExtensions
 
         for (var i = 0; i < startLine; i++)
         {
-            await streamReader.ReadLineAsync();
+            await streamReader.ReadLineAsync().ConfigureAwait(false);
         }
 
         for (var i = startLine; i <= endLine; i++)
         {
-            var line = await streamReader.ReadLineAsync();
+            var line = await streamReader.ReadLineAsync().ConfigureAwait(false);
             if (line is null)
             {
                 break;
@@ -60,12 +60,12 @@ public static class StreamReaderExtensions
 
         for (var i = 0; i < startLine; i++)
         {
-            await streamReader.ReadLineAsync();
+            await streamReader.ReadLineAsync().ConfigureAwait(false);
         }
 
         for (var i = startLine; i <= endLine; i++)
         {
-            var line = await streamReader.ReadLineAsync();
+            var line = await streamReader.ReadLineAsync().ConfigureAwait(false);
             if (line is null)
             {
                 break;
