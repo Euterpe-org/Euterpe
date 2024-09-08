@@ -71,8 +71,9 @@
 
     <!--Hot Reload Packages-->
     <ItemGroup>
-        <PackageReference Include="Avalonia.Fonts.Inter"/>
+        <PackageReference Include="AsmResolver.DotNet"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
+        <PackageReference Include="Downloader"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
         <PackageReference Include="HotAvalonia.Extensions" PrivateAssets="All"/>
     </ItemGroup>
@@ -86,18 +87,18 @@
         <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
+        <PackageReference Include="Avalonia.Fonts.Inter"/>
         <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="CliWrap"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="LavaGang.MelonLoader"/>
         <PackageReference Include="Mapster"/>
         <PackageReference Include="Markdown.Avalonia"/>
-        <PackageReference Include="NuGet.Versioning"/>
         <PackageReference Include="ReactiveUI"/>
         <PackageReference Include="Semi.Avalonia"/>
+        <PackageReference Include="Semver"/>
         <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Sinks.File"/>
