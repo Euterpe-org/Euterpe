@@ -1,5 +1,4 @@
 using System.Collections.Frozen;
-using System.Diagnostics;
 
 namespace MuseDashModToolsUI.Services;
 
@@ -38,7 +37,6 @@ public sealed class LinuxService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public void OpenOrSelectFile(string path) => Process.Start("xdg-open", path);
 
+    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool SetPathEnvironmentVariable() => false;
-
-    public ValueTask<bool> VerifyGameVersionAsync() => ValueTask.FromResult(true);
 }

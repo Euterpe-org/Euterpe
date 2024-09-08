@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace MuseDashModToolsUI.Contracts;
 
 public interface IPlatformService
@@ -44,10 +42,4 @@ public interface IPlatformService
     /// </summary>
     /// <returns></returns>
     bool SetPathEnvironmentVariable();
-
-    /// <summary>
-    ///     Verify game exe version
-    /// </summary>
-    /// <returns>Is correct version</returns>
-    ValueTask<bool> VerifyGameVersionAsync();
 }

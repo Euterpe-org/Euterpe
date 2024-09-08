@@ -1,5 +1,4 @@
 using System.Collections.Frozen;
-using System.Diagnostics;
 using Microsoft.Win32;
 
 namespace MuseDashModToolsUI.Services;
@@ -71,21 +70,6 @@ public sealed class WindowsService : IPlatformService
             Logger.Error(ex, "Failed to set MD_DIRECTORY environment variable");
             return false;
         }
-    }
-
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public async ValueTask<bool> VerifyGameVersionAsync()
-    {
-        var version = FileVersionInfo.GetVersionInfo(Settings.MuseDashExePath).FileVersion;
-        if (version is "2019.4.32.16288752")
-        {
-            Logger.Information("Correct game version {Version}", version);
-            return true;
-        }
-
-        Logger.Error("Incorrect game version {Version}, showing error message box...", version);
-        await ErrorMessageBoxAsync(MsgBox_Content_IncorrectVersion);
-        return false;
     }
 
     /// <summary>
