@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Text.Json.Serialization;
-using NuGet.Versioning;
 
 namespace MuseDashModToolsUI.Models;
 
@@ -34,7 +33,7 @@ public sealed class Setting
     public bool DownloadPrerelease { get; set; }
 
     [JsonPropertyOrder(8)]
-    public SemanticVersion? SkipVersion { get; set; } = SemanticVersion.Parse(AppVersion);
+    public SemVersion? SkipVersion { get; set; }
 
     // Game Settings
     [JsonPropertyOrder(9)]
