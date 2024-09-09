@@ -1,4 +1,5 @@
 global using System.Collections.Generic;
+global using System.Diagnostics;
 global using System.Linq;
 global using System.Runtime.InteropServices;
 global using System.Runtime.Versioning;
@@ -29,4 +30,5 @@ global using static MuseDashModToolsUI.Localization.MsgBox.Resources;
 global using static MuseDashModToolsUI.Localization.XAML.Resources;
 global using static MuseDashModToolsUI.Utils.DesktopUtils;
 global using static MuseDashModToolsUI.Utils.MessageBoxUtils;
+global using DownloadConfiguration = Downloader.DownloadConfiguration;
 global using MultiThreadDownloader = Downloader.DownloadService;
