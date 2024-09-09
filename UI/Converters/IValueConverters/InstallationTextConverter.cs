@@ -14,9 +14,9 @@ public sealed class InstallationTextConverter : IValueConverter
 
         return mod.State switch
         {
-            UpdateState.Outdated => XAML_Update_Mod,
-            UpdateState.Newer or UpdateState.Modified => XAML_Reinstall_Mod,
-            UpdateState.Normal => string.Empty,
+            ModState.Outdated => XAML_Update_Mod,
+            ModState.Newer or ModState.Modified => XAML_Reinstall_Mod,
+            ModState.Normal => string.Empty,
             _ => string.Empty
         };
     }
