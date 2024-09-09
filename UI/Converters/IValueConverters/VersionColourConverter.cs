@@ -2,8 +2,6 @@
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 
-// ReSharper disable InconsistentNaming
-
 namespace MuseDashModToolsUI.Converters.IValueConverters;
 
 public sealed class VersionColourConverter : IValueConverter
@@ -21,18 +19,14 @@ public sealed class VersionColourConverter : IValueConverter
             return Default;
         }
 
-        if (mod.IsIncompatible)
-        {
-            return Red;
-        }
-
         return mod.State switch
         {
-            UpdateState.Outdated => Blue,
-            UpdateState.Newer => Purple,
-            UpdateState.Modified => Orange,
-            UpdateState.Normal => Default,
-            _ => Default
+            ModState.Incompatible => Red,
+            ModState.Outdated => Blue,
+            ModState.Normal => Default,
+            ModState.Modified => Orange,
+            ModState.Newer => Purple,
+            _ => throw new UnreachableException()
         };
     }
 

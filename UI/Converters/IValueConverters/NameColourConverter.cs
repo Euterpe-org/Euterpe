@@ -22,7 +22,7 @@ public sealed class NameColourConverter : IValueConverter
             return Cyan;
         }
 
-        if (mod.IsIncompatible)
+        if (mod.State is ModState.Incompatible)
         {
             return Red;
         }

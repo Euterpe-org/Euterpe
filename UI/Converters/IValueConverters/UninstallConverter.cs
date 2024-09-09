@@ -17,14 +17,14 @@ public sealed class UninstallConverter : IValueConverter
             return Default;
         }
 
-        if (mod.IsIncompatible)
-        {
-            return Red;
-        }
-
         if (mod.IsDuplicated)
         {
             return Cyan;
+        }
+
+        if (mod.State is ModState.Incompatible)
+        {
+            return Red;
         }
 
         return Default;

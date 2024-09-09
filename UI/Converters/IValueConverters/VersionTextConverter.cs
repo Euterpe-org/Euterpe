@@ -12,25 +12,15 @@ public sealed class VersionTextConverter : IValueConverter
             return string.Empty;
         }
 
-        if (mod.IsIncompatible)
+        return mod.State switch
         {
-            return string.Format(XAML_Mod_Incompatible, mod.Name, mod.Version);
-        }
-
-        switch (mod.State)
-        {
-            case UpdateState.Outdated:
-                return string.Format(XAML_Mod_Outdated, mod.LocalVersion, mod.Version);
-            case UpdateState.Newer:
-                return string.Format(XAML_Mod_Newer, mod.LocalVersion);
-            case UpdateState.Modified:
-                return string.Format(XAML_Mod_Modified, mod.LocalVersion);
-            case UpdateState.Normal:
-            default:
-                return mod is { State: UpdateState.Normal, IsLocal: true }
-                    ? string.Format(XAML_Mod_Normal, mod.LocalVersion)
-                    : null;
-        }
+            ModState.Incompatible => string.Format(XAML_Mod_Incompatible, mod.Name, mod.Version),
+            ModState.Outdated => string.Format(XAML_Mod_Outdated, mod.LocalVersion, mod.Version),
+            ModState.Normal => mod.IsLocal ? string.Format(XAML_Mod_Normal, mod.LocalVersion) : null,
+            ModState.Modified => string.Format(XAML_Mod_Modified, mod.LocalVersion),
+            ModState.Newer => string.Format(XAML_Mod_Newer, mod.LocalVersion),
+            _ => throw new UnreachableException()
+        };
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => value;
