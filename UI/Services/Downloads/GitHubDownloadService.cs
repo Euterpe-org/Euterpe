@@ -8,9 +8,17 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
     private const string ReleaseGitHubUrl = "https://github.com/";
     private const string ModLinksUrl = RawGitHubUrl + ModLinksBaseUrl + "ModLinks.json";
     private const string MelonLoaderUrl = ReleaseGitHubUrl + MelonLoaderBaseUrl;
+    private const string UnityDependencyUrl = RawGitHubUrl + UnityDependencyBaseUrl;
+    private const string Cpp2ILUrl = ReleaseGitHubUrl + Cpp2ILBaseUrl;
 
     [UsedImplicitly]
     public HttpClient Client { get; init; } = null!;
+
+    [UsedImplicitly]
+    public MultiThreadDownloader Downloader { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;
@@ -29,6 +37,41 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
         {
             Logger.Error(ex, "Failed to fetch mods from GitHub");
             return null;
+        }
+    }
+
+    public async Task<bool> DownloadMelonLoaderAsync(CancellationToken cancellationToken = default)
+    {
+        Logger.Information("Downloading MelonLoader from GitHub {Url}...", MelonLoaderUrl);
+
+        try
+        {
+            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download MelonLoader from GitHub");
+            return false;
+        }
+    }
+
+    public async Task<bool> DownloadMelonLoaderDependenciesAsync(CancellationToken cancellationToken = default)
+    {
+        Logger.Information("Downloading MelonLoader Dependencies from GitHub {Unity}, {Cpp2IL}", UnityDependencyUrl, Cpp2ILUrl);
+
+        try
+        {
+            await Task.WhenAll(
+                Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken),
+                Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken)
+            ).ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download MelonLoader Dependencies from GitHub");
+            return false;
         }
     }
 }

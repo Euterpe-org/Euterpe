@@ -31,5 +31,4 @@ global using static MuseDashModToolsUI.Localization.MsgBox.Resources;
 global using static MuseDashModToolsUI.Localization.XAML.Resources;
 global using static MuseDashModToolsUI.Utils.DesktopUtils;
 global using static MuseDashModToolsUI.Utils.MessageBoxUtils;
-global using DownloadConfiguration = Downloader.DownloadConfiguration;
 global using MultiThreadDownloader = Downloader.DownloadService;

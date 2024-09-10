@@ -80,6 +80,15 @@ public sealed class Setting
     [JsonIgnore]
     public string MelonLoaderZipPath => GetCombinedPath(MuseDashFolder, "MelonLoader.zip");
 
+    [JsonIgnore]
+    private string Il2CppAssemblyGeneratorFolderPath => Path.Join(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
+
+    [JsonIgnore]
+    public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, "UnityDependencies_2019.4.32.zip");
+
+    [JsonIgnore]
+    public string Cpp2ILZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL_2022.1.0-pre-release.10.zip");
+
     /// <summary>
     ///     Copy values from another Setting
     /// </summary>
