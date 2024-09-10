@@ -1,6 +1,6 @@
 namespace MuseDashModToolsUI.Services.Downloads;
 
-public sealed class DownloadService : IDownloadService
+public sealed class DownloadManager : IDownloadManager
 {
     [UsedImplicitly]
     public IGitHubDownloadService GitHubDownloadService { get; init; } = null!;

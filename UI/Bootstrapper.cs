@@ -70,7 +70,7 @@ public static class Bootstrapper
 
         // Download Services
         _builder.RegisterType<CustomDownloadService>().As<ICustomDownloadService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<DownloadService>().As<IDownloadService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<GitHubDownloadService>().As<IGitHubDownloadService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<GitHubMirrorDownloadService>().As<IGitHubMirrorDownloadService>().PropertiesAutowired().SingleInstance();
 

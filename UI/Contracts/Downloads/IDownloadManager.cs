@@ -1,6 +1,6 @@
 namespace MuseDashModToolsUI.Contracts.Downloads;
 
-public interface IDownloadProvider
+public interface IDownloadManager
 {
     Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default);
 }
