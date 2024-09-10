@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
+using MuseDashModToolsUI.Services.Downloads;
 using MuseDashModToolsUI.ViewModels;
 using MuseDashModToolsUI.ViewModels.Dialogs;
 using MuseDashModToolsUI.ViewModels.Pages;
@@ -58,15 +59,20 @@ public static class Bootstrapper
     {
         // _builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<DownloadService>().As<IDownloadService>().PropertiesAutowired();
         // _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<SerializationService>().As<ISerializationService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
+
+        // Download Services
+        _builder.RegisterType<CustomDownloadService>().As<ICustomDownloadService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<DownloadService>().As<IDownloadService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<GitHubDownloadService>().As<IGitHubDownloadService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<GitHubMirrorDownloadService>().As<IGitHubMirrorDownloadService>().PropertiesAutowired().SingleInstance();
 
         // Platform Service
         if (OperatingSystem.IsWindows())

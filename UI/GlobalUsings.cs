@@ -12,6 +12,7 @@ global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 global using JetBrains.Annotations;
 global using MuseDashModToolsUI.Contracts;
+global using MuseDashModToolsUI.Contracts.Downloads;
 global using MuseDashModToolsUI.Contracts.ViewModels;
 global using MuseDashModToolsUI.Extensions;
 global using MuseDashModToolsUI.Formatters;
