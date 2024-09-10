@@ -35,4 +35,15 @@ public sealed class DownloadManager : IDownloadManager
             _ => throw new UnreachableException()
         };
     }
+
+    public Task<bool> DownloadMelonLoaderDependenciesAsync(CancellationToken cancellationToken = default)
+    {
+        return Setting.DownloadSource switch
+        {
+            DownloadSource.GitHub => GitHubDownloadService.DownloadMelonLoaderDependenciesAsync(cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderDependenciesAsync(cancellationToken),
+            DownloadSource.Custom => CustomDownloadService.DownloadMelonLoaderDependenciesAsync(cancellationToken),
+            _ => throw new UnreachableException()
+        };
+    }
 }
