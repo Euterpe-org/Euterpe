@@ -46,23 +46,8 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
 
         try
         {
-            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex, "Failed to download MelonLoader from GitHub");
-            return false;
-        }
-    }
-
-    public async Task<bool> DownloadMelonLoaderDependenciesAsync(CancellationToken cancellationToken = default)
-    {
-        Logger.Information("Downloading MelonLoader Dependencies from GitHub {Unity}, {Cpp2IL}", UnityDependencyUrl, Cpp2ILUrl);
-
-        try
-        {
             await Task.WhenAll(
+                Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken),
                 Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken),
                 Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken)
             ).ConfigureAwait(false);
@@ -70,7 +55,7 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to download MelonLoader Dependencies from GitHub");
+            Logger.Error(ex, "Failed to download MelonLoader from GitHub");
             return false;
         }
     }
