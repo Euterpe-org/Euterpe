@@ -1,21 +1,76 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:vm="using:MuseDashModToolsUI.ViewModels"
               xmlns:contract="using:MuseDashModToolsUI.Contracts.ViewModels"
-              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+              xmlns:ext="using:MuseDashModToolsUI.Extensions.MarkupExtensions"
+              xmlns:models="using:MuseDashModToolsUI.Models"
               xmlns:u="https://irihi.tech/ursa"
+              xmlns:vm="using:MuseDashModToolsUI.ViewModels"
               x:Class="MuseDashModToolsUI.Views.MainWindow"
               x:DataType="vm:MainWindowViewModel"
               DataContext="{ext:DependencyInjection Type=contract:IMainWindowViewModel}"
-              Width="1100" Height="800"
-              MinWidth="900" MinHeight="700"
-              Icon="/Assets/Icon.ico"
               Title="Muse Dash Mod Tools"
+              MinWidth="900"
+              MinHeight="700"
+              Icon="/Assets/Icon.ico"
               WindowStartupLocation="CenterScreen">
 
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
     <u:UrsaWindow.RightContent>
-        <u:ThemeToggleButton Mode="Controller" />
+        <u:ThemeToggleButton VerticalAlignment="Top"
+                             IsThreeState="False"
+                             Mode="Controller" />
     </u:UrsaWindow.RightContent>
 
+    <u:UrsaWindow.TitleBarContent>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+            <TextBlock HorizontalAlignment="Center"
+                       Classes="H5"
+                       Text="Muse Dash Mod Tools"
+                       TextAlignment="Center"
+                       Theme="{DynamicResource TitleTextBlock}" />
+            <TextBlock HorizontalAlignment="Center"
+                       Classes="H6"
+                       Text="{Binding Version}"
+                       TextAlignment="Center"
+                       Theme="{DynamicResource TitleTextBlock}" />
+        </StackPanel>
+
+
+    </u:UrsaWindow.TitleBarContent>
+
+    <Grid ColumnDefinitions="Auto,Auto">
+        <u:NavMenu Grid.Column="0"
+                   HeaderBinding="{Binding .}"
+                   IsHorizontalCollapsed="{Binding IsCollapsed, Mode=TwoWay}"
+                   ItemsSource="{Binding PageNavItems}">
+            <u:NavMenu.Header>
+                <DockPanel Margin="8" HorizontalAlignment="Center">
+                    <Image DockPanel.Dock="Left"
+                           Width="100"
+                           Height="100"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           u:NavMenu.CanToggle="True"
+                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                           Source="../Assets/Melon.png" />
+                    <TextBlock DockPanel.Dock="Right"
+                               VerticalAlignment="Center"
+                               Classes="H4"
+                               IsVisible="{Binding !IsCollapsed}"
+                               Text="MDMT"
+                               Theme="{DynamicResource TitleTextBlock}" />
+                </DockPanel>
+            </u:NavMenu.Header>
+
+            <u:NavMenu.HeaderTemplate>
+                <DataTemplate x:DataType="models:PageNavItem">
+                    <TextBlock FontSize="20" Text="{Binding Name}" />
+                </DataTemplate>
+            </u:NavMenu.HeaderTemplate>
+        </u:NavMenu>
+    </Grid>
 
 </u:UrsaWindow>
