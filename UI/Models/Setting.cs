@@ -24,7 +24,7 @@ public sealed class Setting
 
     // Download Settings
     [JsonPropertyOrder(5)]
-    public DownloadSources DownloadSource { get; set; } = DownloadSources.Github;
+    public DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
 
     [JsonPropertyOrder(6)]
     public string? CustomDownloadSource { get; set; } = string.Empty;
