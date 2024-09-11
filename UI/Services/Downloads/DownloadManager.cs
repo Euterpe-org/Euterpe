@@ -25,13 +25,16 @@ public sealed class DownloadManager : IDownloadManager
         };
     }
 
-    public Task<bool> DownloadMelonLoaderAsync(CancellationToken cancellationToken = default)
+    public Task<bool> DownloadMelonLoaderAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        IProgress<double> downloadProgress,
+        CancellationToken cancellationToken = default)
     {
         return Setting.DownloadSource switch
         {
-            DownloadSource.GitHub => GitHubDownloadService.DownloadMelonLoaderAsync(cancellationToken),
-            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(cancellationToken),
-            DownloadSource.Custom => CustomDownloadService.DownloadMelonLoaderAsync(cancellationToken),
+            DownloadSource.GitHub => GitHubDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
+            DownloadSource.Custom => CustomDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
             _ => throw new UnreachableException()
         };
     }

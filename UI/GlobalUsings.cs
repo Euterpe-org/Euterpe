@@ -10,6 +10,7 @@ global using Avalonia.Controls;
 global using Avalonia.Threading;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
+global using Downloader;
 global using JetBrains.Annotations;
 global using MuseDashModToolsUI.Contracts;
 global using MuseDashModToolsUI.Contracts.Downloads;

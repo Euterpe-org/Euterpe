@@ -40,9 +40,15 @@ public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirr
         }
     }
 
-    public async Task<bool> DownloadMelonLoaderAsync(CancellationToken cancellationToken = default)
+    public async Task<bool> DownloadMelonLoaderAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        IProgress<double> downloadProgress,
+        CancellationToken cancellationToken = default)
     {
-        Logger.Information("Downloading MelonLoader from GitHubMirror {Url}...", PrimaryMelonLoaderUrl);
+        Logger.Information("Downloading MelonLoader and Dependencies from GitHubMirror...");
+
+        Downloader.DownloadStarted += onDownloadStarted;
+        Downloader.DownloadProgressChanged += (_, e) => downloadProgress.Report(e.ProgressPercentage);
 
         try
         {
@@ -51,6 +57,7 @@ public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirr
                 Downloader.DownloadFileTaskAsync(PrimaryUnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken),
                 Downloader.DownloadFileTaskAsync(PrimaryCpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken)
             ).ConfigureAwait(false);
+            Logger.Information("MelonLoader and Dependencies downloaded from GitHubMirror successfully");
             return true;
         }
         catch (Exception ex)

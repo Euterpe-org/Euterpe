@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Downloader;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
 using MuseDashModToolsUI.Services.Downloads;
 using MuseDashModToolsUI.ViewModels;
