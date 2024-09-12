@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using MuseDashModToolsUI.Contracts.Serializations;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
 using MuseDashModToolsUI.Services.Downloads;
 using MuseDashModToolsUI.ViewModels;
@@ -64,8 +65,8 @@ public static class Bootstrapper
         // _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<SerializationService>().As<ISerializationService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
 
         // Download Services
