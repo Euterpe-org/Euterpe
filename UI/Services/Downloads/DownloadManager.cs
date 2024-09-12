@@ -2,18 +2,6 @@ namespace MuseDashModToolsUI.Services.Downloads;
 
 public sealed class DownloadManager : IDownloadManager
 {
-    [UsedImplicitly]
-    public IGitHubDownloadService GitHubDownloadService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public IGitHubMirrorDownloadService GitHubMirrorDownloadService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public ICustomDownloadService CustomDownloadService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
-
     public Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         return Setting.DownloadSource switch
@@ -38,4 +26,20 @@ public sealed class DownloadManager : IDownloadManager
             _ => throw new UnreachableException()
         };
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public ICustomDownloadService CustomDownloadService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IGitHubDownloadService GitHubDownloadService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IGitHubMirrorDownloadService GitHubMirrorDownloadService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    #endregion
 }

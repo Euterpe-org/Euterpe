@@ -11,18 +11,6 @@ public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirr
     private const string PrimaryUnityDependencyUrl = PrimaryRawMirrorUrl + UnityDependencyBaseUrl;
     private const string PrimaryCpp2ILUrl = PrimaryReleaseMirrorUrl + Cpp2ILBaseUrl;
 
-    [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
-
-    [UsedImplicitly]
-    public MultiThreadDownloader Downloader { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
-
-    [UsedImplicitly]
-    public HttpClient Client { get; init; } = null!;
-
     public async Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         Logger.Information("Fetching mods from GitHubMirror {Url}...", PrimaryModLinksUrl);
@@ -52,11 +40,9 @@ public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirr
 
         try
         {
-            await Task.WhenAll(
-                Downloader.DownloadFileTaskAsync(PrimaryMelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken),
-                Downloader.DownloadFileTaskAsync(PrimaryUnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken),
-                Downloader.DownloadFileTaskAsync(PrimaryCpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken)
-            ).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(PrimaryMelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(PrimaryUnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(PrimaryCpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
             Logger.Information("MelonLoader and Dependencies downloaded from GitHubMirror successfully");
             return true;
         }
@@ -66,4 +52,20 @@ public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirr
             return false;
         }
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public HttpClient Client { get; init; } = null!;
+
+    [UsedImplicitly]
+    public MultiThreadDownloader Downloader { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    #endregion
 }

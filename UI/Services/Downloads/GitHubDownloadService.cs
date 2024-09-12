@@ -11,17 +11,6 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
     private const string UnityDependencyUrl = RawGitHubUrl + UnityDependencyBaseUrl;
     private const string Cpp2ILUrl = ReleaseGitHubUrl + Cpp2ILBaseUrl;
 
-    [UsedImplicitly]
-    public HttpClient Client { get; init; } = null!;
-
-    [UsedImplicitly]
-    public MultiThreadDownloader Downloader { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
-
-    [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
 
     public async Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
     {
@@ -52,11 +41,9 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
 
         try
         {
-            await Task.WhenAll(
-                Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken),
-                Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken),
-                Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken)
-            ).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
             Logger.Information("MelonLoader and Dependencies downloaded from GitHub successfully");
             return true;
         }
@@ -66,4 +53,20 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
             return false;
         }
     }
+
+    #region Services
+
+    [UsedImplicitly]
+    public HttpClient Client { get; init; } = null!;
+
+    [UsedImplicitly]
+    public MultiThreadDownloader Downloader { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    #endregion
 }
