@@ -25,13 +25,16 @@
     </Interaction.Behaviors>
 
     <u:UrsaWindow.RightContent>
-        <u:ThemeToggleButton VerticalAlignment="Top"
+        <u:ThemeToggleButton Margin="0,1,0,0"
+                             VerticalAlignment="Top"
                              IsThreeState="False"
                              Mode="Controller" />
     </u:UrsaWindow.RightContent>
 
     <u:UrsaWindow.TitleBarContent>
-        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+        <StackPanel Margin="0,2,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical">
             <TextBlock HorizontalAlignment="Center"
                        Classes="H5"
                        Text="Muse Dash Mod Tools"
