@@ -27,7 +27,7 @@ public sealed class DownloadManager : IDownloadManager
         };
     }
 
-    #region Services
+    #region Injections
 
     [UsedImplicitly]
     public ICustomDownloadService CustomDownloadService { get; init; } = null!;
@@ -41,5 +41,5 @@ public sealed class DownloadManager : IDownloadManager
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;
 
-    #endregion
+    #endregion Injections
 }

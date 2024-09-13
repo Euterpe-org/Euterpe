@@ -1,10 +1,5 @@
 ﻿using Autofac;
-using MuseDashModToolsUI.Contracts.Serializations;
 using MuseDashModToolsUI.Extensions.MarkupExtensions;
-using MuseDashModToolsUI.Services.Downloads;
-using MuseDashModToolsUI.ViewModels;
-using MuseDashModToolsUI.ViewModels.Dialogs;
-using MuseDashModToolsUI.ViewModels.Pages;
 
 namespace MuseDashModToolsUI;
 

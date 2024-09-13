@@ -1,5 +1,3 @@
-using MuseDashModToolsUI.ViewModels;
-
 namespace MuseDashModToolsUI.Models;
 
 public sealed partial class TabView : ObservableObject

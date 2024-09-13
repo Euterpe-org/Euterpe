@@ -53,7 +53,7 @@ public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirr
         }
     }
 
-    #region Services
+    #region Injections
 
     [UsedImplicitly]
     public HttpClient Client { get; init; } = null!;
@@ -67,5 +67,5 @@ public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirr
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;
 
-    #endregion
+    #endregion Injections
 }

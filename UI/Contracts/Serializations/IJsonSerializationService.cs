@@ -11,11 +11,20 @@ public interface IJsonSerializationService : ISerializationService
         JsonSerializerOptions? options = default,
         CancellationToken cancellationToken = default);
 
+    ValueTask<T?> DeserializeIndentedAsync<T>(
+        Stream utf8Json,
+        CancellationToken cancellationToken = default);
+
     string Serialize<T>(T value, JsonSerializerOptions? options);
 
     Task SerializeAsync<T>(
         Stream utf8Json,
         T value,
         JsonSerializerOptions? options = default,
+        CancellationToken cancellationToken = default);
+
+    Task SerializeIndentedAsync<T>(
+        Stream utf8Json,
+        T value,
         CancellationToken cancellationToken = default);
 }

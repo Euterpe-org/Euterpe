@@ -54,7 +54,7 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
         }
     }
 
-    #region Services
+    #region Injections
 
     [UsedImplicitly]
     public HttpClient Client { get; init; } = null!;
@@ -68,5 +68,5 @@ public sealed class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadSe
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;
 
-    #endregion
+    #endregion Injections
 }

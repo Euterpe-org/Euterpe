@@ -1,10 +1,10 @@
 using System.Text.Json;
-using MuseDashModToolsUI.Contracts.Serializations;
 
 namespace MuseDashModToolsUI.Services;
 
 public sealed class JsonSerializationService : IJsonSerializationService
 {
+    private static readonly JsonSerializerOptions IndentedSerializerOptions = new() { WriteIndented = true };
     public T? Deserialize<T>(string text) => JsonSerializer.Deserialize<T>(text);
 
     public T? Deserialize<T>(string json, JsonSerializerOptions? options) =>
@@ -15,6 +15,9 @@ public sealed class JsonSerializationService : IJsonSerializationService
         JsonSerializerOptions? options = default,
         CancellationToken cancellationToken = default)
         => JsonSerializer.DeserializeAsync<T>(utf8Json, options, cancellationToken);
+
+    public ValueTask<T?> DeserializeIndentedAsync<T>(Stream utf8Json, CancellationToken cancellationToken = default) =>
+        JsonSerializer.DeserializeAsync<T>(utf8Json, IndentedSerializerOptions, cancellationToken);
 
     public string Serialize<T>(T value) => JsonSerializer.Serialize(value);
 
@@ -27,4 +30,10 @@ public sealed class JsonSerializationService : IJsonSerializationService
         JsonSerializerOptions? options = default,
         CancellationToken cancellationToken = default)
         => JsonSerializer.SerializeAsync(utf8Json, value, options, cancellationToken);
+
+    public Task SerializeIndentedAsync<T>(
+        Stream utf8Json,
+        T value,
+        CancellationToken cancellationToken = default)
+        => JsonSerializer.SerializeAsync(utf8Json, value, IndentedSerializerOptions, cancellationToken);
 }

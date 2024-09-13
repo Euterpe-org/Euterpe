@@ -1,5 +1,4 @@
 using Avalonia.Controls.Templates;
-using MuseDashModToolsUI.ViewModels;
 
 namespace MuseDashModToolsUI;
 
