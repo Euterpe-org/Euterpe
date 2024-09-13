@@ -18,6 +18,12 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Opened">
+            <InvokeCommandAction Command="{Binding AttachSavingOnExitEventCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
     <u:UrsaWindow.RightContent>
         <u:ThemeToggleButton VerticalAlignment="Top"
                              IsThreeState="False"

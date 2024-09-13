@@ -12,4 +12,19 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
         new() { Name = "Mod Manage" },
         new() { Name = "Setting" }
     ];
+    [RelayCommand]
+    private void AttachSavingOnExitEvent()
+    {
+        GetCurrentDesktop()!.Exit += (_, _) => SavingService.SaveSettingAsync();
+    }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public ILogger Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ISavingService SavingService { get; init; } = null!;
+
+    #endregion Injections
 }
