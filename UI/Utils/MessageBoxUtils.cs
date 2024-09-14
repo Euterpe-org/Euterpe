@@ -22,7 +22,7 @@ public static class MessageBoxUtils
 
     // Normal
     public static Task<MessageBoxResult> ErrorMessageBoxAsync(string message, string title = "Error") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Error, MessageBoxButton.OK);
+        MessageBox.ShowAsync(message, title, MessageBoxIcon.Error);
 
     public static Task<MessageBoxResult> FormatErrorMessageBoxAsync(Exception ex) =>
         ErrorMessageBoxAsync(ex.ToString());
@@ -46,7 +46,7 @@ public static class MessageBoxUtils
 
     // Normal
     public static Task<MessageBoxResult> NoticeMessageBoxAsync(string message, string title = "Notice") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Information, MessageBoxButton.OK);
+        MessageBox.ShowAsync(message, title, MessageBoxIcon.Information);
 
     public static Task<MessageBoxResult> FormatNoticeMessageBoxAsync(string message, params object[] args) =>
         NoticeMessageBoxAsync(string.Format(message, args));
@@ -61,7 +61,7 @@ public static class MessageBoxUtils
 
     // Normal
     public static Task<MessageBoxResult> SuccessMessageBoxAsync(string message, string title = "Success") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Success, MessageBoxButton.OK);
+        MessageBox.ShowAsync(message, title, MessageBoxIcon.Success);
 
     public static Task<MessageBoxResult> FormatSuccessMessageBoxAsync(string message, params object[] args) =>
         SuccessMessageBoxAsync(string.Format(message, args));
