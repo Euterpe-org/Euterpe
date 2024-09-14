@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="using:MuseDashModToolsUI.ViewModels.Pages"
              xmlns:ext="using:MuseDashModToolsUI.Extensions.MarkupExtensions"
-             xmlns:contracts="using:MuseDashModToolsUI.Contracts.ViewModels"
+             xmlns:contracts="clr-namespace:MuseDashModToolsUI.Contracts"
              mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
              x:Class="MuseDashModToolsUI.Views.Pages.MainMenu"
              x:DataType="pages:MainMenuViewModel"
