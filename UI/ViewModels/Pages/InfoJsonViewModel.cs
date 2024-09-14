@@ -1,5 +1,5 @@
 namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public sealed class InfoJsonViewModel : ViewModelBase, IInfoJsonViewModel
+public sealed class InfoJsonViewModel : ViewModelBase
 {
 }

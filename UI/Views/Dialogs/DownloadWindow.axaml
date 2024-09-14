@@ -1,13 +1,9 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dialogs="using:MuseDashModToolsUI.ViewModels.Dialogs"
-        xmlns:markupExtensions="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
-        xmlns:contracts="clr-namespace:MuseDashModToolsUI.Contracts"
+        xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
         x:Class="MuseDashModToolsUI.Views.Dialogs.DownloadWindow"
         x:DataType="dialogs:DownloadWindowViewModel"
-        DataContext="{markupExtensions:DependencyInjection Type=contracts:IDownloadWindowViewModel}"
+        DataContext="{ext:DependencyInjection Type=dialogs:DownloadWindowViewModel}"
         Title="DownloadWindow"
-        Width="320">
-
-
-</Window>
+        Width="320" />

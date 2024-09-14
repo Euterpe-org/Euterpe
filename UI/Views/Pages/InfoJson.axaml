@@ -1,16 +1,16 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
-             xmlns:contracts="clr-namespace:MuseDashModToolsUI.Contracts"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MuseDashModToolsUI.Views.Pages.InfoJson"
              x:DataType="pages:InfoJsonViewModel"
-             DataContext="{ext:DependencyInjection Type=contracts:IInfoJsonViewModel}">
+             DataContext="{ext:DependencyInjection Type=pages:InfoJsonViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
 
-    <UserControl.Resources>
-    </UserControl.Resources>
+    <UserControl.Resources />
 
 </UserControl>

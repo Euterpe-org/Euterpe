@@ -1,8 +1,8 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:MuseDashModToolsUI"
-             xmlns:u-Semi="https://irihi.tech/ursa/themes/semi"
              xmlns:semi="https://irihi.tech/semi"
+             xmlns:u-Semi="https://irihi.tech/ursa/themes/semi"
              x:Class="MuseDashModToolsUI.App">
     <Application.DataTemplates>
         <local:ViewLocator />
@@ -17,8 +17,7 @@
 
     <TrayIcon.Icons>
         <TrayIcons>
-            <TrayIcon Icon="/Assets/Icon.ico"
-                      ToolTipText="Muse Dash Mod Tools">
+            <TrayIcon Icon="/Assets/Icon.ico" ToolTipText="Muse Dash Mod Tools">
                 <TrayIcon.Menu>
                     <NativeMenu />
                 </TrayIcon.Menu>

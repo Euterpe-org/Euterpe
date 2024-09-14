@@ -1,5 +1,5 @@
 ﻿namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public sealed class LogAnalysisViewModel : ViewModelBase, ILogAnalysisViewModel
+public sealed class LogAnalysisViewModel : ViewModelBase
 {
 }

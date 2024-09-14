@@ -8,7 +8,7 @@ public sealed class Setting
 {
     // Path Settings
     [JsonPropertyOrder(0)]
-    public string? MuseDashFolder { get; set; } = "C:\\Users\\32626\\Desktop\\test";
+    public string? MuseDashFolder { get; set; } = string.Empty;
 
     [JsonPropertyOrder(1)]
     public string CacheFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name);

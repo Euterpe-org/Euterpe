@@ -1,6 +1,6 @@
 namespace MuseDashModToolsUI.ViewModels;
 
-public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
+public sealed partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
     private bool _isCollapsed;
@@ -19,7 +19,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
     ];
 
     [RelayCommand]
-    private void Test() => SavingService.LoadSettingAsync();
+    private Task Test() => SavingService.LoadSettingAsync();
 
     [RelayCommand]
     private void Test2() => Logger.Information(Setting.MuseDashFolder);
@@ -27,7 +27,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
     [RelayCommand]
     private async Task InitializeAsync()
     {
-        await SavingService.LoadSettingAsync().ConfigureAwait(false);
+        await SavingService.LoadSettingAsync().ConfigureAwait(true);
         GetCurrentDesktop()!.Exit += (_, _) => SavingService.SaveSettingAsync();
     }
 

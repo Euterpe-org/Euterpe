@@ -1,5 +1,5 @@
 ﻿namespace MuseDashModToolsUI.ViewModels.Pages;
 
-public sealed class SettingsViewModel : ViewModelBase, ISettingsViewModel
+public sealed class SettingsViewModel : ViewModelBase
 {
 }

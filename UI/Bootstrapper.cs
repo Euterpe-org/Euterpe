@@ -91,15 +91,15 @@ public static class Bootstrapper
     /// </summary>
     private static void RegisterViewModels()
     {
-        _builder.RegisterType<AboutViewModel>().As<IAboutViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<ChartDownloadViewModel>().As<IChartDownloadViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<DownloadWindowViewModel>().As<IDownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<InfoJsonViewModel>().As<IInfoJsonViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<LogAnalysisViewModel>().As<ILogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<ModManageViewModel>().As<IModManageViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<MainMenuViewModel>().As<IMainMenuViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<AboutViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ChartDownloadViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<DownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<InfoJsonViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ModManageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<SettingsViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<MainMenuViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<MainWindowViewModel>().PropertiesAutowired().SingleInstance();
     }
 
     /// <summary>
