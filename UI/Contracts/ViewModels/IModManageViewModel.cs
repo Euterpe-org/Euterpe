@@ -1,4 +1,4 @@
-﻿namespace MuseDashModToolsUI.Contracts.ViewModels;
+﻿namespace MuseDashModToolsUI.Contracts;
 
 public interface IModManageViewModel
 {

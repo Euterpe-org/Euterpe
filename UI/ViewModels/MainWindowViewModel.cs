@@ -7,13 +7,23 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
 
     public static string Version => $"v{AppVersion}";
 
+    public IDownloadManager DownloadManager { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
     public static PageNavItem[] PageNavItems =>
     [
         new() { Name = "Mod Manage" },
         new() { Name = "Setting" }
     ];
+
     [RelayCommand]
-    private void AttachSavingOnExitEvent()
+    private void Test() => SavingService.LoadSettingAsync();
+
+    [RelayCommand]
+    private void Test2() => Logger.Information(Setting.MuseDashFolder);
+
     [RelayCommand]
     private async Task InitializeAsync()
     {
