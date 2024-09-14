@@ -20,7 +20,7 @@
 
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Opened">
-            <InvokeCommandAction Command="{Binding AttachSavingOnExitEventCommand, Mode=OneTime}" />
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
         </EventTriggerBehavior>
     </Interaction.Behaviors>
 

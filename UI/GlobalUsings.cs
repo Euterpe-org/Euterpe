@@ -1,5 +1,6 @@
 global using System.Collections.Generic;
 global using System.Diagnostics;
+global using System.Diagnostics.CodeAnalysis;
 global using System.Linq;
 global using System.Runtime.InteropServices;
 global using System.Runtime.Versioning;
@@ -22,7 +23,6 @@ global using MuseDashModToolsUI.Models;
 global using MuseDashModToolsUI.Models.DTOs;
 global using MuseDashModToolsUI.Models.Enums;
 global using MuseDashModToolsUI.Services;
-global using MuseDashModToolsUI.Services.Downloads;
 global using MuseDashModToolsUI.Utils;
 global using MuseDashModToolsUI.ViewModels;
 global using MuseDashModToolsUI.ViewModels.Dialogs;

@@ -1,6 +1,6 @@
 using System.Net.Http.Json;
 
-namespace MuseDashModToolsUI.Services.Downloads;
+namespace MuseDashModToolsUI.Services;
 
 public sealed class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirrorDownloadService
 {

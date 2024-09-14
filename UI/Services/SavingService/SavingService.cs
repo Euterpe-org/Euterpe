@@ -1,6 +1,6 @@
 namespace MuseDashModToolsUI.Services;
 
-public sealed class SavingService : ISavingService
+public sealed partial class SavingService : ISavingService
 {
     private const string SettingFileName = "Setting.json";
     private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name);
@@ -20,6 +20,7 @@ public sealed class SavingService : ISavingService
 
             Setting.CopyFrom(savedSetting);
             Logger.Information("Setting loaded from {SettingPath} successfully", SettingPath);
+            await CheckValidSettingAsync().ConfigureAwait(false);
         }
         else
         {
@@ -38,6 +39,9 @@ public sealed class SavingService : ISavingService
 
     [UsedImplicitly]
     public IJsonSerializationService JsonSerializationService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILocalService LocalService { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;

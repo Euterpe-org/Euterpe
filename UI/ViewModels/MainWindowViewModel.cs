@@ -14,7 +14,10 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IMainWindowView
     ];
     [RelayCommand]
     private void AttachSavingOnExitEvent()
+    [RelayCommand]
+    private async Task InitializeAsync()
     {
+        await SavingService.LoadSettingAsync().ConfigureAwait(false);
         GetCurrentDesktop()!.Exit += (_, _) => SavingService.SaveSettingAsync();
     }
 

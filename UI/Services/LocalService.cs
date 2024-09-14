@@ -6,12 +6,6 @@ namespace MuseDashModToolsUI.Services;
 
 public sealed class LocalService : ILocalService
 {
-    [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
-
     public async Task CheckDotNetRuntimeInstallAsync()
     {
         var outputStringBuilder = new StringBuilder();
@@ -30,6 +24,18 @@ public sealed class LocalService : ILocalService
 
     public IEnumerable<string> GetModFiles(string folderPath) => Directory.GetFiles(folderPath)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
+
+    public async Task<string> GetMuseDashFolderAsync()
+    {
+        var path = string.Empty;
+        while (path.IsNullOrEmpty())
+        {
+            path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
+            Logger.Information("Selected MuseDash folder: {MuseDashFolder}", path);
+        }
+
+        return path;
+    }
 
     public async Task<ModDto?> LoadModFromPathAsync(string filePath)
     {
@@ -69,4 +75,19 @@ public sealed class LocalService : ILocalService
 
         Logger.Information("Launching game with launch arguments: {LaunchArguments}", launchArguments);
     }
+
+
+    #region Injections
+
+    [UsedImplicitly]
+
+    public ILogger Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IFileSystemPickerService FileSystemPickerService { get; init; } = null!;
+
+    #endregion Injections
 }
