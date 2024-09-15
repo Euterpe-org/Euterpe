@@ -4,7 +4,7 @@ using CliWrap;
 
 namespace MuseDashModToolsUI.Services;
 
-public sealed class LocalService : ILocalService
+public sealed partial class LocalService : ILocalService
 {
     public async Task CheckDotNetRuntimeInstallAsync()
     {
@@ -28,7 +28,8 @@ public sealed class LocalService : ILocalService
     public async Task<string> GetMuseDashFolderAsync()
     {
         var path = string.Empty;
-        while (path.IsNullOrEmpty())
+
+        while (path.IsNullOrEmpty() || !await CheckValidPathAsync(path).ConfigureAwait(true))
         {
             path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
             Logger.Information("Selected MuseDash folder: {MuseDashFolder}", path);
@@ -75,7 +76,6 @@ public sealed class LocalService : ILocalService
 
         Logger.Information("Launching game with launch arguments: {LaunchArguments}", launchArguments);
     }
-
 
     #region Injections
 
