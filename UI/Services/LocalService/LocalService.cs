@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using System.Text;
 using AsmResolver.DotNet;
 using CliWrap;
@@ -77,10 +78,23 @@ public sealed partial class LocalService : ILocalService
         Logger.Information("Launching game with launch arguments: {LaunchArguments}", launchArguments);
     }
 
+    public bool UnzipFile(string zipPath, string extractPath)
+    {
+        try
+        {
+            ZipFile.ExtractToDirectory(zipPath, extractPath, true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to unzip file {ZipPath} to {ExtractPath}", zipPath, extractPath);
+            return false;
+        }
+    }
+
     #region Injections
 
     [UsedImplicitly]
-
     public ILogger Logger { get; init; } = null!;
 
     [UsedImplicitly]

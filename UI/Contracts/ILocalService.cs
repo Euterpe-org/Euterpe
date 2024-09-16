@@ -7,4 +7,5 @@ public interface ILocalService
     IEnumerable<string> GetModFiles(string folderPath);
     Task<ModDto?> LoadModFromPathAsync(string filePath);
     void LaunchGame(bool isModded);
+    bool UnzipFile(string zipPath, string extractPath);
 }

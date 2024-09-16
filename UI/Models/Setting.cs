@@ -11,7 +11,7 @@ public sealed class Setting
     public string? MuseDashFolder { get; set; } = string.Empty;
 
     [JsonPropertyOrder(1)]
-    public string CacheFolder { get; set; } = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name);
+    public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name);
 
     // UI Settings
     [JsonPropertyOrder(2)]
@@ -64,9 +64,6 @@ public sealed class Setting
     public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");
 
     [JsonIgnore]
-    public string MuseDashExePath => GetCombinedPath(MuseDashFolder, "MuseDash.exe");
-
-    [JsonIgnore]
     public string UserDataFolder => GetCombinedPath(MuseDashFolder, "UserData");
 
     [JsonIgnore]
@@ -79,7 +76,10 @@ public sealed class Setting
     public string MelonLoaderZipPath => GetCombinedPath(MuseDashFolder, "MelonLoader.zip");
 
     [JsonIgnore]
-    private string Il2CppAssemblyGeneratorFolderPath => Path.Join(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
+    public string LatestLogPath => GetCombinedPath(MelonLoaderFolder, "Latest.log");
+
+    [JsonIgnore]
+    private string Il2CppAssemblyGeneratorFolderPath => Path.Combine(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
 
     [JsonIgnore]
     public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, "UnityDependencies_2019.4.32.zip");
@@ -90,5 +90,5 @@ public sealed class Setting
     public void CopyFrom(Setting setting) => setting.Adapt(this);
 
     private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
-        !folderPath.IsNullOrEmpty() ? Path.Join(folderPath, targetPath) : defaultPath;
+        !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;
 }

@@ -1,3 +1,5 @@
+using Avalonia.Platform.Storage;
+
 namespace MuseDashModToolsUI.Contracts;
 
 public interface IPlatformService
@@ -25,17 +27,19 @@ public interface IPlatformService
     ///     Open file with path
     /// </summary>
     /// <param name="path"></param>
-    void OpenOrSelectFile(string path);
+    Task OpenFileAsync(string path) => GetLauncher().LaunchFileInfoAsync(new FileInfo(path));
 
     /// <summary>
     ///     Open folder with path
     /// </summary>
     /// <param name="path"></param>
-    void OpenFolder(string path) => Process.Start(new ProcessStartInfo
-    {
-        FileName = path,
-        UseShellExecute = true
-    });
+    Task OpenFolderAsync(string path) => GetLauncher().LaunchDirectoryInfoAsync(new DirectoryInfo(path));
+
+    /// <summary>
+    ///     Reveal file with path
+    /// </summary>
+    /// <param name="path"></param>
+    void RevealFile(string path);
 
     /// <summary>
     ///     Set MD_DIRECTORY environment variable

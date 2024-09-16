@@ -1,4 +1,5 @@
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 
 namespace MuseDashModToolsUI.Utils;
 
@@ -22,4 +23,6 @@ public static class DesktopUtils
 
         return desktop.MainWindow;
     }
+
+    public static ILauncher GetLauncher() => GetCurrentMainWindow().Launcher;
 }
