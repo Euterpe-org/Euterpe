@@ -95,13 +95,13 @@ public sealed partial class LocalService : ILocalService
     #region Injections
 
     [UsedImplicitly]
+    public IFileSystemPickerService FileSystemPickerService { get; init; } = null!;
+
+    [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;
-
-    [UsedImplicitly]
-    public IFileSystemPickerService FileSystemPickerService { get; init; } = null!;
 
     #endregion Injections
 }

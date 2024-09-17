@@ -7,50 +7,33 @@ namespace MuseDashModToolsUI.Models;
 public sealed class Setting
 {
     // Path Settings
-    [JsonPropertyOrder(0)]
     public string? MuseDashFolder { get; set; } = string.Empty;
-
-    [JsonPropertyOrder(1)]
-    public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name);
+    public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
 
     // UI Settings
-    [JsonPropertyOrder(2)]
     public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
-
-    [JsonPropertyOrder(3)]
     public string Theme { get; set; } = "Dark";
 
     // Download Settings
-    [JsonPropertyOrder(4)]
     public DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
+    public string? GitHubToken { get; set; } = null;
 
-    [JsonPropertyOrder(5)]
     public string? CustomDownloadSource { get; set; } = string.Empty;
-
-    [JsonPropertyOrder(6)]
     public bool DownloadPrerelease { get; set; }
-
-    [JsonPropertyOrder(7)]
     public SemVersion? SkipVersion { get; set; }
 
     // Game Settings
-    [JsonPropertyOrder(8)]
     public bool ShowConsole { get; set; }
 
     // Message Box Settings
-    [JsonPropertyOrder(9)]
     public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
 
-    [JsonPropertyOrder(10)]
     public AskType AskEnableDependencyWhenInstall { get; set; } = AskType.Always;
 
-    [JsonPropertyOrder(11)]
     public AskType AskEnableDependencyWhenEnable { get; set; } = AskType.Always;
 
-    [JsonPropertyOrder(12)]
     public AskType AskDisableDependencyWhenDelete { get; set; } = AskType.Always;
 
-    [JsonPropertyOrder(13)]
     public AskType AskDisableDependencyWhenDisable { get; set; } = AskType.Always;
 
     // Ignored Paths

@@ -30,7 +30,7 @@ public sealed class GithubRelease
 
     [JsonPropertyName("published_at")] public DateTime PublishedAt { get; set; }
 
-    [JsonPropertyName("assets")] public List<GitHubReleaseAsset> Assets { get; set; } = [];
+    [JsonPropertyName("assets")] public GitHubReleaseAsset[] Assets { get; set; } = [];
 
     [JsonPropertyName("tarball_url")] public string TarballUrl { get; set; } = string.Empty;
 

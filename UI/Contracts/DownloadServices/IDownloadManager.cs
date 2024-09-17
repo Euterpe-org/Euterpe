@@ -1,5 +1,3 @@
 namespace MuseDashModToolsUI.Contracts;
 
-public interface IDownloadManager : IDownloadService
-{
-}
+public interface IDownloadManager : IDownloadService;

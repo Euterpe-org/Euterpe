@@ -4,5 +4,5 @@ using System.Reflection;
 [assembly: AssemblyCompany(Company)]
 [assembly: AssemblyDescription(Description)]
 [assembly: AssemblyFileVersion(AppVersion)]
-[assembly: AssemblyProduct(Name)]
-[assembly: AssemblyTitle(Name)]
+[assembly: AssemblyProduct(AppName)]
+[assembly: AssemblyTitle(AppName)]

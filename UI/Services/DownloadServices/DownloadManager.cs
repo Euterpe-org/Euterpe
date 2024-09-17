@@ -2,13 +2,13 @@ namespace MuseDashModToolsUI.Services;
 
 public sealed class DownloadManager : IDownloadManager
 {
-    public Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
+    public Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {
         return Setting.DownloadSource switch
         {
-            DownloadSource.GitHub => GitHubDownloadService.GetModListAsync(cancellationToken),
-            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.GetModListAsync(cancellationToken),
-            DownloadSource.Custom => CustomDownloadService.GetModListAsync(cancellationToken),
+            DownloadSource.GitHub => GitHubDownloadService.CheckForUpdatesAsync(cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.CheckForUpdatesAsync(cancellationToken),
+            DownloadSource.Custom => throw new NotSupportedException(),
             _ => throw new UnreachableException()
         };
     }
@@ -23,6 +23,28 @@ public sealed class DownloadManager : IDownloadManager
             DownloadSource.GitHub => GitHubDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
             DownloadSource.Custom => CustomDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
+            _ => throw new UnreachableException()
+        };
+    }
+
+    public Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
+    {
+        return Setting.DownloadSource switch
+        {
+            DownloadSource.GitHub => GitHubDownloadService.DownloadModAsync(mod, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadModAsync(mod, cancellationToken),
+            DownloadSource.Custom => CustomDownloadService.DownloadModAsync(mod, cancellationToken),
+            _ => throw new UnreachableException()
+        };
+    }
+
+    public Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
+    {
+        return Setting.DownloadSource switch
+        {
+            DownloadSource.GitHub => GitHubDownloadService.GetModListAsync(cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.GetModListAsync(cancellationToken),
+            DownloadSource.Custom => CustomDownloadService.GetModListAsync(cancellationToken),
             _ => throw new UnreachableException()
         };
     }

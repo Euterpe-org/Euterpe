@@ -3,7 +3,7 @@ namespace MuseDashModToolsUI.Services;
 public sealed partial class SavingService : ISavingService
 {
     private const string SettingFileName = "Setting.json";
-    private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Name);
+    private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
     private static readonly string SettingPath = Path.Combine(ConfigFolder, SettingFileName);
 
     public async Task LoadSettingAsync()
