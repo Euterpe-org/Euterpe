@@ -8,7 +8,8 @@ public sealed class DownloadManager : IDownloadManager
         {
             DownloadSource.GitHub => GitHubDownloadService.CheckForUpdatesAsync(cancellationToken),
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.CheckForUpdatesAsync(cancellationToken),
-            DownloadSource.Custom => throw new NotSupportedException(),
+            // For Custom Download Source, because they don't choose GitHub for other downloads, so we will check updates from GitHubMirror
+            DownloadSource.Custom => GitHubMirrorDownloadService.CheckForUpdatesAsync(cancellationToken),
             _ => throw new UnreachableException()
         };
     }
