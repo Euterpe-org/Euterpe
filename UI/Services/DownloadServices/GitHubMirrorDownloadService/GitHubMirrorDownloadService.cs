@@ -102,7 +102,7 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to download lib {LibName} from GitHubMirror", libFileName);
+            Logger.Error(ex, "Failed to download lib {LibName} from GitHubMirror", libFileName[..^4]);
             return false;
         }
     }

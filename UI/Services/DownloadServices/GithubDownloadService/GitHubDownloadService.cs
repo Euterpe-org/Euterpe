@@ -105,7 +105,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to download lib {LibName} from GitHub", libFileName);
+            Logger.Error(ex, "Failed to download lib {LibName} from GitHub", libFileName[..^4]);
             return false;
         }
     }
