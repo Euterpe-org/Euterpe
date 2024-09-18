@@ -28,6 +28,9 @@ public sealed partial class MainWindowViewModel : ViewModelBase
     private async Task InitializeAsync()
     {
         await SavingService.LoadSettingAsync().ConfigureAwait(true);
+#if !DEBUG
+        await DownloadManager.CheckForUpdatesAsync().ConfigureAwait(true);
+#endif
         GetCurrentDesktop()!.Exit += (_, _) => SavingService.SaveSettingAsync();
     }
 
