@@ -25,6 +25,7 @@ public sealed partial class SavingService : ISavingService
         else
         {
             Logger.Information("Setting file not found, using default settings");
+            await CheckValidSettingAsync().ConfigureAwait(true);
         }
     }
 
