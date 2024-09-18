@@ -47,10 +47,13 @@ public sealed class Setting
     public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");
 
     [JsonIgnore]
+    public string ModsFolder => GetCombinedPath(MuseDashFolder, "Mods");
+
+    [JsonIgnore]
     public string UserDataFolder => GetCombinedPath(MuseDashFolder, "UserData");
 
     [JsonIgnore]
-    public string ModsFolder => GetCombinedPath(MuseDashFolder, "Mods");
+    public string UserLibsFolder => GetCombinedPath(MuseDashFolder, "UserLibs");
 
     [JsonIgnore]
     public string MelonLoaderFolder => GetCombinedPath(MuseDashFolder, "MelonLoader");

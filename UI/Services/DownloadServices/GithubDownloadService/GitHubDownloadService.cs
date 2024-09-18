@@ -7,7 +7,10 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
 {
     private const string RawGitHubUrl = "https://raw.githubusercontent.com/";
     private const string ReleaseGitHubUrl = "https://github.com/";
-    private const string ModLinksUrl = RawGitHubUrl + ModLinksBaseUrl + "ModLinks.json";
+    private const string RawModLinksUrl = RawGitHubUrl + ModLinksBaseUrl;
+    private const string ModLinksUrl = RawModLinksUrl + "ModLinks.json";
+    private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
+    private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
     private const string MelonLoaderUrl = ReleaseGitHubUrl + MelonLoaderBaseUrl;
     private const string UnityDependencyUrl = RawGitHubUrl + UnityDependencyBaseUrl;
     private const string Cpp2ILUrl = ReleaseGitHubUrl + Cpp2ILBaseUrl;
@@ -61,7 +64,51 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
     }
 
-    public Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
+    {
+        Logger.Information("Downloading mod {ModName} from GitHub...", mod.Name);
+
+        if (mod.DownloadLink.IsNullOrEmpty())
+        {
+            Logger.Error("Mod {ModName} download link is empty", mod.Name);
+            return false;
+        }
+
+        var downloadLink = ModsFolderUrl + mod.DownloadLink;
+        var path = Path.Combine(Setting.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
+        try
+        {
+            var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download mod {ModName} from GitHub", mod.Name);
+            return false;
+        }
+    }
+
+    public async Task<bool> DownloadLibAsync(string libFileName, CancellationToken cancellationToken = default)
+    {
+        Logger.Information("Downloading lib {LibFileName} from GitHub...", libFileName[..^4]);
+
+        var downloadLink = LibsFolderUrl + libFileName;
+        var path = Path.Combine(Setting.UserLibsFolder, libFileName);
+        try
+        {
+            var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download lib {LibName} from GitHub", libFileName);
+            return false;
+        }
+    }
 
     public async Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
     {
@@ -79,6 +126,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
             return null;
         }
     }
+
 
     #region Injections
 

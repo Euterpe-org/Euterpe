@@ -19,13 +19,14 @@ public sealed class ModDto : ObservableObject
     public string SHA256 { get; set; } = string.Empty;
 
     // Dto Properties
-    public bool IsDisabled { get; set; }
+    public bool IsDisabled => FileExtension == ".disabled";
     public string LocalVersion { get; set; } = string.Empty;
     public ModState State { get; set; }
 
-    public string? FileName { get; set; }
+    public string? FileNameWithoutExtension { get; set; }
+    public string? FileExtension { get; set; }
 
-    public bool IsLocal => FileName is not null;
+    public bool IsLocal => FileNameWithoutExtension is not null;
 
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
@@ -72,7 +73,7 @@ public sealed class ModDto : ObservableObject
 
     public ModDto RemoveLocalInfo()
     {
-        FileName = null;
+        FileNameWithoutExtension = null;
         IsValidConfigFile = false;
         IsDuplicated = false;
         IsTracked = false;

@@ -7,7 +7,10 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
 {
     private const string PrimaryRawMirrorUrl = "https://raw.kkgithub.com/";
     private const string PrimaryReleaseMirrorUrl = "https://kkgithub.com/";
-    private const string PrimaryModLinksUrl = PrimaryRawMirrorUrl + ModLinksBaseUrl + "ModLinks.json";
+    private const string PrimaryRawModLinksUrl = PrimaryRawMirrorUrl + ModLinksBaseUrl;
+    private const string PrimaryModLinksUrl = PrimaryRawModLinksUrl + "ModLinks.json";
+    private const string PrimaryModsFolderUrl = PrimaryRawModLinksUrl + "Mods/";
+    private const string PrimaryLibsFolderUrl = PrimaryRawModLinksUrl + "Libs/";
     private const string PrimaryMelonLoaderUrl = PrimaryReleaseMirrorUrl + MelonLoaderBaseUrl;
     private const string PrimaryUnityDependencyUrl = PrimaryRawMirrorUrl + UnityDependencyBaseUrl;
     private const string PrimaryCpp2ILUrl = PrimaryReleaseMirrorUrl + Cpp2ILBaseUrl;
@@ -58,7 +61,51 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
     }
 
-    public Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
+    {
+        Logger.Information("Downloading mod {ModName} from GitHubMirror...", mod.Name);
+
+        if (mod.DownloadLink.IsNullOrEmpty())
+        {
+            Logger.Error("Mod {ModName} download link is empty", mod.Name);
+            return false;
+        }
+
+        var downloadLink = PrimaryModsFolderUrl + mod.DownloadLink;
+        var path = Path.Combine(Setting.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
+        try
+        {
+            var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download mod {ModName} from GitHubMirror", mod.Name);
+            return false;
+        }
+    }
+
+    public async Task<bool> DownloadLibAsync(string libFileName, CancellationToken cancellationToken = default)
+    {
+        Logger.Information("Downloading lib {LibName} from GitHubMirror...", libFileName[..^4]);
+
+        var downloadLink = PrimaryLibsFolderUrl + libFileName;
+        var path = Path.Combine(Setting.UserLibsFolder, libFileName);
+        try
+        {
+            var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
+            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download lib {LibName} from GitHubMirror", libFileName);
+            return false;
+        }
+    }
 
     public async Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
     {

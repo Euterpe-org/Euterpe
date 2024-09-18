@@ -43,8 +43,8 @@ public sealed partial class LocalService : ILocalService
     {
         var mod = new ModDto
         {
-            FileName = Path.GetFileNameWithoutExtension(filePath),
-            IsDisabled = Path.GetExtension(filePath) == ".disabled"
+            FileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath),
+            FileExtension = Path.GetExtension(filePath)
         };
 
         var module = ModuleDefinition.FromFile(filePath);

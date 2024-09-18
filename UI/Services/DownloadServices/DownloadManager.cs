@@ -39,6 +39,17 @@ public sealed class DownloadManager : IDownloadManager
         };
     }
 
+    public Task<bool> DownloadLibAsync(string libFileName, CancellationToken cancellationToken = default)
+    {
+        return Setting.DownloadSource switch
+        {
+            DownloadSource.GitHub => GitHubDownloadService.DownloadLibAsync(libFileName, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadLibAsync(libFileName, cancellationToken),
+            DownloadSource.Custom => CustomDownloadService.DownloadLibAsync(libFileName, cancellationToken),
+            _ => throw new UnreachableException()
+        };
+    }
+
     public Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         return Setting.DownloadSource switch
