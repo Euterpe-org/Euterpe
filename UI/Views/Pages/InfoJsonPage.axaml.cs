@@ -1,8 +1,8 @@
 namespace MuseDashModToolsUI.Views.Pages;
 
-public partial class ChartDownload : UserControl
+public partial class InfoJsonPage : UserControl
 {
-    public ChartDownload()
+    public InfoJsonPage()
     {
         InitializeComponent();
     }

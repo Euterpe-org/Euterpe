@@ -4,9 +4,9 @@
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
-             x:Class="MuseDashModToolsUI.Views.Pages.ChartDownload"
-             x:DataType="pages:ChartDownloadViewModel"
-             DataContext="{ext:DependencyInjection Type=pages:ChartDownloadViewModel}"
+             x:Class="MuseDashModToolsUI.Views.Pages.ChartManagePage"
+             x:DataType="pages:ChartManagePageViewModel"
+             DataContext="{ext:DependencyInjection Type=pages:ChartManagePageViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000" />

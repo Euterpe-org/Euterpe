@@ -1,8 +1,8 @@
 ﻿namespace MuseDashModToolsUI.Views.Pages;
 
-public partial class Settings : UserControl
+public partial class LogAnalysisPage : UserControl
 {
-    public Settings()
+    public LogAnalysisPage()
     {
         InitializeComponent();
     }

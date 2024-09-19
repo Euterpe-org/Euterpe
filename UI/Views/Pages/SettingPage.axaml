@@ -4,9 +4,9 @@
              xmlns:ext="clr-namespace:MuseDashModToolsUI.Extensions.MarkupExtensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:MuseDashModToolsUI.ViewModels.Pages"
-             x:Class="MuseDashModToolsUI.Views.Pages.LogAnalysis"
-             x:DataType="pages:LogAnalysisViewModel"
-             DataContext="{ext:DependencyInjection Type=pages:LogAnalysisViewModel}"
+             x:Class="MuseDashModToolsUI.Views.Pages.SettingPage"
+             x:DataType="pages:SettingPageViewModel"
+             DataContext="{ext:DependencyInjection Type=pages:SettingPageViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000" />

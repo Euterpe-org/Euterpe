@@ -1,8 +1,8 @@
 namespace MuseDashModToolsUI.Views.Dialogs;
 
-public partial class DownloadWindow : Window
+public partial class DownloadDialog : Window
 {
-    public DownloadWindow()
+    public DownloadDialog()
     {
         InitializeComponent();
     }

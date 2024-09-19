@@ -1,8 +1,8 @@
 namespace MuseDashModToolsUI.Views.Pages;
 
-public partial class About : UserControl
+public partial class ModManagePage : UserControl
 {
-    public About()
+    public ModManagePage()
     {
         InitializeComponent();
     }
