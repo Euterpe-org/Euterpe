@@ -23,8 +23,10 @@ public sealed partial class LocalService : ILocalService
         }
     }
 
-    public IEnumerable<string> GetModFiles(string folderPath) => Directory.GetFiles(folderPath)
+    public IEnumerable<string> GetModFilePaths() => Directory.GetFiles(Setting.ModsFolder)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
+
+    public HashSet<string?> GetLibFileNames() => Directory.GetFiles(Setting.UserLibsFolder).Select(Path.GetFileNameWithoutExtension).ToHashSet();
 
     public async Task<string> GetMuseDashFolderAsync()
     {
