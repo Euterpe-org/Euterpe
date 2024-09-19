@@ -72,8 +72,7 @@ internal static class Program
             return;
         }
 
-        Parallel.ForEachAsync(logFiles, async (log, c) =>
-            await Task.Run(() => File.Delete(log), c).ConfigureAwait(false));
+        Parallel.ForEach(logFiles, (log, _) => File.Delete(log));
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
