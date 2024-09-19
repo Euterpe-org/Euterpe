@@ -2,7 +2,7 @@ namespace MuseDashModToolsUI.Styles.ExtendControls;
 
 public class DifficultyFilter : MenuItem
 {
-    public static readonly StyledProperty<bool?> IsCheckedProperty =
+    /*public static readonly StyledProperty<bool?> IsCheckedProperty =
         AvaloniaProperty.Register<DifficultyFilter, bool?>(nameof(IsChecked), false,
             defaultBindingMode: BindingMode.TwoWay);
 
@@ -16,5 +16,5 @@ public class DifficultyFilter : MenuItem
     {
         base.OnPointerPressed(e);
         IsChecked = !IsChecked;
-    }
+    }*/
 }
