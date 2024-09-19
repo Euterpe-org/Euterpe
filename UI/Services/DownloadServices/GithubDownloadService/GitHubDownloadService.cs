@@ -90,10 +90,11 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
     }
 
-    public async Task<bool> DownloadLibAsync(string libFileName, CancellationToken cancellationToken = default)
+    public async Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default)
     {
-        Logger.Information("Downloading lib {LibFileName} from GitHub...", libFileName[..^4]);
+        Logger.Information("Downloading lib {LibName} from GitHub...", libName);
 
+        var libFileName = libName + ".dll";
         var downloadLink = LibsFolderUrl + libFileName;
         var path = Path.Combine(Setting.UserLibsFolder, libFileName);
         try
@@ -105,7 +106,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to download lib {LibName} from GitHub", libFileName[..^4]);
+            Logger.Error(ex, "Failed to download lib {LibName} from GitHub", libName);
             return false;
         }
     }

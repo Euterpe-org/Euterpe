@@ -39,13 +39,13 @@ public sealed class DownloadManager : IDownloadManager
         };
     }
 
-    public Task<bool> DownloadLibAsync(string libFileName, CancellationToken cancellationToken = default)
+    public Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default)
     {
         return Setting.DownloadSource switch
         {
-            DownloadSource.GitHub => GitHubDownloadService.DownloadLibAsync(libFileName, cancellationToken),
-            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadLibAsync(libFileName, cancellationToken),
-            DownloadSource.Custom => CustomDownloadService.DownloadLibAsync(libFileName, cancellationToken),
+            DownloadSource.GitHub => GitHubDownloadService.DownloadLibAsync(libName, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadLibAsync(libName, cancellationToken),
+            DownloadSource.Custom => CustomDownloadService.DownloadLibAsync(libName, cancellationToken),
             _ => throw new UnreachableException()
         };
     }

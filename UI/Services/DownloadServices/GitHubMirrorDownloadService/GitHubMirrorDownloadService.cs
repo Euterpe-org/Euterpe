@@ -87,10 +87,11 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
     }
 
-    public async Task<bool> DownloadLibAsync(string libFileName, CancellationToken cancellationToken = default)
+    public async Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default)
     {
-        Logger.Information("Downloading lib {LibName} from GitHubMirror...", libFileName[..^4]);
+        Logger.Information("Downloading lib {LibName} from GitHubMirror...", libName);
 
+        var libFileName = libName + ".dll";
         var downloadLink = PrimaryLibsFolderUrl + libFileName;
         var path = Path.Combine(Setting.UserLibsFolder, libFileName);
         try
@@ -102,7 +103,7 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to download lib {LibName} from GitHubMirror", libFileName[..^4]);
+            Logger.Error(ex, "Failed to download lib {LibName} from GitHubMirror", libName);
             return false;
         }
     }

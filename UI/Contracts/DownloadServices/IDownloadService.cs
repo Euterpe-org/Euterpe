@@ -10,6 +10,6 @@ public interface IDownloadService
         CancellationToken cancellationToken = default);
 
     Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default);
-    Task<bool> DownloadLibAsync(string libFileName, CancellationToken cancellationToken = default);
+    Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default);
     Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default);
 }
