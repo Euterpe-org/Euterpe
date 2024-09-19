@@ -72,7 +72,7 @@ internal static class Program
             return;
         }
 
-        Parallel.ForEach(logFiles, (log, _) => File.Delete(log));
+        Parallel.ForEach(logFiles, (logFile, _) => File.Delete(logFile));
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
