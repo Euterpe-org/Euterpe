@@ -1,7 +1,7 @@
 ﻿/*using MuseDashModToolsUI.Models;
 using RichardSzalay.MockHttp;
 
-namespace MuseDashModToolsUI.Test;
+namespace MuseDashModToolsUI.Tests;
 
 [TestSubject(typeof(DownloadService))]
 public sealed class DownloadServiceTest(ITestOutputHelper testOutputHelper)
