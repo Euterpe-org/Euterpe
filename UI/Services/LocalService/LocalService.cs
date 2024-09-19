@@ -48,7 +48,19 @@ public sealed partial class LocalService : ILocalService
         };
 
         var module = ModuleDefinition.FromFile(filePath);
-        var attribute = module.Assembly!.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").Single();
+        if (module.Assembly is null)
+        {
+            Logger.Error("Invalid mod file: {FilePath}", filePath);
+            return null;
+        }
+
+        var attribute = module.Assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").SingleOrDefault();
+        if (attribute is null)
+        {
+            Logger.Warning("{FilePath} is not a mod file but inside Mods folder", filePath);
+            return null;
+        }
+
         mod.Name = attribute.Signature!.FixedArguments[1].ToString();
         mod.Version = attribute.Signature!.FixedArguments[2].ToString();
         mod.Author = attribute.Signature!.FixedArguments[3].ToString();
