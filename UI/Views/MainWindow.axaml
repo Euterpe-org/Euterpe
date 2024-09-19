@@ -35,12 +35,12 @@
                     HorizontalAlignment="Center"
                     Orientation="Vertical">
             <TextBlock HorizontalAlignment="Center"
-                       Classes="H5"
+                       Classes="H6"
                        Text="Muse Dash Mod Tools"
                        TextAlignment="Center"
                        Theme="{DynamicResource TitleTextBlock}" />
             <TextBlock HorizontalAlignment="Center"
-                       Classes="H6"
+                       Classes="H8"
                        Text="{Binding Version}"
                        TextAlignment="Center"
                        Theme="{DynamicResource TitleTextBlock}" />
@@ -87,6 +87,9 @@
                 Margin="100,0,0,0"
                 Command="{Binding Test2Command}"
                 Content="BBB" />
+        <ContentControl Grid.Column="1"
+                        Margin="20,50,0,0"
+                        Content="{Binding Content}" />
     </Grid>
 
 </u:UrsaWindow>
