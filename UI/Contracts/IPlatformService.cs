@@ -36,6 +36,13 @@ public interface IPlatformService
     Task OpenFolderAsync(string path) => GetLauncher().LaunchDirectoryInfoAsync(new DirectoryInfo(path));
 
     /// <summary>
+    ///     Open a URL in the default browser
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    Task OpenUrlAsync(string url) => GetLauncher().LaunchUriAsync(new Uri(url));
+
+    /// <summary>
     ///     Reveal file with path
     /// </summary>
     /// <param name="path"></param>
