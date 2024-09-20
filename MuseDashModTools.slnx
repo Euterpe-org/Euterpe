@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".github\workflows\build.yml" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+    <File Path="Settings.XamlStyler" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" />
+    <Project Path="src\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj" />
+    <Project Path="src\MuseDashModTools.Updater\MuseDashModTools.Updater.csproj" />
+    <Project Path="src\MuseDashModTools\MuseDashModTools.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests\MuseDashModTools.Tests\MuseDashModTools.Tests.csproj" />
+  </Folder>
+  <Properties Name="Visual Studio">
+    <Property Name="OpenWith" Value="17" />
+  </Properties>
+</Solution>
