@@ -92,15 +92,20 @@ public static class Bootstrapper
     /// </summary>
     private static void RegisterViewModels()
     {
-        _builder.RegisterType<AboutViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<ChartDownloadViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<DownloadWindowViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<InfoJsonViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<LogAnalysisViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<ModManageViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<SettingsViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<MainMenuViewModel>().PropertiesAutowired().SingleInstance();
+        // Window
         _builder.RegisterType<MainWindowViewModel>().PropertiesAutowired().SingleInstance();
+
+        // Pages
+        _builder.RegisterType<AboutPageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ChartManagePageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<InfoJsonPageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LogAnalysisPageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ModManagePageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<SettingPageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<MainMenuPageViewModel>().PropertiesAutowired().SingleInstance();
+
+        // Dialog
+        _builder.RegisterType<DownloadDialogViewModel>().PropertiesAutowired().SingleInstance();
     }
 
     /// <summary>
