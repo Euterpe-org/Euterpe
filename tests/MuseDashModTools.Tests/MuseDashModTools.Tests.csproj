@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\UI\MuseDashModTools.csproj"/>
+        <ProjectReference Include="..\..\src\MuseDashModTools\MuseDashModTools.csproj"/>
     </ItemGroup>
 
 </Project>
