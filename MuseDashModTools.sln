@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CF8C9C1F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{362482F5-05F2-4963-85D8-33B67AF2DE72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Generators.Tests", "tests\MuseDashModTools.Generators.Tests\MuseDashModTools.Generators.Tests.csproj", "{29C77E1D-C79C-419A-B820-47F2772B28A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{9EFDB9EF-3EEC-4B7F-96FD-194BB5483522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EFDB9EF-3EEC-4B7F-96FD-194BB5483522}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EFDB9EF-3EEC-4B7F-96FD-194BB5483522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29C77E1D-C79C-419A-B820-47F2772B28A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C77E1D-C79C-419A-B820-47F2772B28A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C77E1D-C79C-419A-B820-47F2772B28A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C77E1D-C79C-419A-B820-47F2772B28A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,5 +83,6 @@ Global
 		{5784F437-80AA-4AE5-A6E2-E4C80AF7F3AE} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{84D1B409-1EED-4BF4-B144-2C16FD216A91} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{32E03077-D3BA-4309-AAE8-1FFC2F22A238} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
+		{29C77E1D-C79C-419A-B820-47F2772B28A8} = {CF8C9C1F-2C69-408A-8819-D3F3242AFC24}
 	EndGlobalSection
 EndGlobal
