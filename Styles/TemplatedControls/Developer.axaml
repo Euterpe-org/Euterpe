@@ -1,6 +1,6 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModToolsUI">
+        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
     <Design.PreviewWith>
         <Border Padding="20">
             <mdmt:Developer DeveloperName="lxy" />
@@ -10,10 +10,10 @@
     <Style Selector="mdmt|Developer">
         <Setter Property="Template">
             <ControlTemplate>
-                <Border Background="#595959"
-                        HorizontalAlignment="Center"
+                <Border Width="180"
                         Height="180"
-                        Width="180">
+                        HorizontalAlignment="Center"
+                        Background="#595959">
 
                     <Border.Styles>
                         <Style Selector="TextBlock">
@@ -24,16 +24,14 @@
                     </Border.Styles>
 
                     <StackPanel>
-                        <Image Source="{TemplateBinding Source}"
+                        <Image Width="70"
                                Height="70"
-                               Width="70"
-                               Margin="0,0,0,10" />
+                               Margin="0,0,0,10"
+                               Source="{TemplateBinding Source}" />
 
-                        <TextBlock Classes="Headline6"
-                                   Text="{TemplateBinding DeveloperName}" />
+                        <TextBlock Classes="Headline6" Text="{TemplateBinding DeveloperName}" />
 
-                        <TextBlock Classes="Body2"
-                                   Text="{TemplateBinding ContributionText}" />
+                        <TextBlock Classes="Body2" Text="{TemplateBinding ContributionText}" />
                     </StackPanel>
                 </Border>
             </ControlTemplate>

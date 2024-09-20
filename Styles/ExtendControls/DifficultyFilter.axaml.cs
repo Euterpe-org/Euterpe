@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Styles.ExtendControls;
+namespace MuseDashModTools.Styles.ExtendControls;
 
 public class DifficultyFilter : MenuItem
 {

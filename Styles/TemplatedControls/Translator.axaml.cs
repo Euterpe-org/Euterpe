@@ -1,6 +1,6 @@
-namespace MuseDashModToolsUI.Styles.TemplatedControls;
+namespace MuseDashModTools.Styles.TemplatedControls;
 
-public class Translator : TemplatedControl
+public sealed class Translator : TemplatedControl
 {
     public static readonly StyledProperty<IImage?> SourceProperty =
         AvaloniaProperty.Register<Image, IImage?>(nameof(Source));

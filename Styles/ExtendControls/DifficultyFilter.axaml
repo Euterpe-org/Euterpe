@@ -1,6 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mdmt="clr-namespace:MuseDashModToolsUI.Styles.ExtendControls">
+        xmlns:mdmt="clr-namespace:MuseDashModTools.Styles.ExtendControls">
     <Design.PreviewWith>
         <Menu Width="500" Height="400">
             <mdmt:DifficultyFilter />
