@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.SourceGenerators;
+namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class NavigationServiceGenerator : IIncrementalGenerator
@@ -26,7 +26,7 @@ public sealed class NavigationServiceGenerator : IIncrementalGenerator
         spc.AddSource("NavigationService.g.cs",
             Header +
             $$"""
-              namespace MuseDashModToolsUI.Services;
+              namespace MuseDashModTools.Services;
 
               partial class NavigationService
               {

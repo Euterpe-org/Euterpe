@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.SourceGenerators;
+namespace MuseDashModTools.Generators;
 
 internal static class SourceGenerationTexts
 {
