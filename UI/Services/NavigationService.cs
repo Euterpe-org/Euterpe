@@ -1,14 +1,9 @@
-using MuseDashModToolsUI.Views.Pages;
-
 namespace MuseDashModToolsUI.Services;
 
-public sealed class NavigationService : INavigationService
+public sealed partial class NavigationService : INavigationService
 {
-    private readonly Dictionary<Type, Type> _viewModelToViewMap = new()
-    {
-        { typeof(ModManagePageViewModel), typeof(ModManagePage) },
-        { typeof(SettingPageViewModel), typeof(SettingPage) }
-    };
+    private Control _currentView = null!;
+    private string _currentViewName = string.Empty;
 
     #region Injections
 
@@ -22,10 +17,18 @@ public sealed class NavigationService : INavigationService
         var viewModelType = typeof(TViewModel);
         var viewType = _viewModelToViewMap[viewModelType];
 
+        if (_currentViewName == viewType.Name)
+        {
+            Logger.Information("ViewModel: {ViewModel} is already navigated", viewModelType.Name);
+            return _currentView;
+        }
+
         Logger.Information("Navigating to ViewModel: {ViewModel}", viewModelType.Name);
+        _currentViewName = viewType.Name;
 
         if (Activator.CreateInstance(viewType) is Control view)
         {
+            _currentView = view;
             return view;
         }
 
@@ -35,14 +38,24 @@ public sealed class NavigationService : INavigationService
 
     public Control? NavigateToView<TView>() where TView : Control, new()
     {
-        Logger.Information("Navigating to View: {View}", typeof(TView).Name);
+        var viewType = typeof(TView);
+
+        if (_currentViewName == viewType.Name)
+        {
+            Logger.Information("View: {View} is already navigated", viewType.Name);
+            return _currentView;
+        }
+
+        Logger.Information("Navigating to View: {View}", viewType.Name);
+        _currentViewName = viewType.Name;
 
         if (Activator.CreateInstance<TView>() is Control view)
         {
+            _currentView = view;
             return view;
         }
 
-        Logger.Error("View not found for View: {View}", typeof(TView).Name);
+        Logger.Error("View not found for View: {View}", viewType.Name);
         return null;
     }
 }
