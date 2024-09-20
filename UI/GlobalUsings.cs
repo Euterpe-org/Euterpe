@@ -25,6 +25,7 @@ global using MuseDashModToolsUI.ViewModels;
 global using MuseDashModToolsUI.ViewModels.Dialogs;
 global using MuseDashModToolsUI.ViewModels.Pages;
 global using MuseDashModToolsUI.Views;
+global using MuseDashModToolsUI.Views.Pages;
 global using Semver;
 global using Serilog;
 global using Ursa.Controls;

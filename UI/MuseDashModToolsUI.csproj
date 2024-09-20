@@ -73,7 +73,7 @@
     <ItemGroup>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
-        <PackageReference Include="HotAvalonia.Extensions" PrivateAssets="All"/>
+        <PackageReference Include="HotAvalonia.Extensions"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -106,6 +106,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\SourceGenerators\MuseDashModToolsUI.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\Styles\MuseDashModToolsUI.Styles.csproj"/>
     </ItemGroup>
 </Project>
