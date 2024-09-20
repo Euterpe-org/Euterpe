@@ -1,4 +1,4 @@
-/*namespace MuseDashModToolsUI.Tests;
+/*namespace MuseDashModTools.Tests;
 
 [TestSubject(typeof(SavingService))]
 public sealed class SavingServiceTest(ITestOutputHelper testOutputHelper)

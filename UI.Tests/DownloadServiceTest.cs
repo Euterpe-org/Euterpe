@@ -1,12 +1,12 @@
-﻿/*using MuseDashModToolsUI.Models;
+﻿/*using MuseDashModTools.Models;
 using RichardSzalay.MockHttp;
 
-namespace MuseDashModToolsUI.Tests;
+namespace MuseDashModTools.Tests;
 
 [TestSubject(typeof(DownloadService))]
 public sealed class DownloadServiceTest(ITestOutputHelper testOutputHelper)
 {
-    private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
+    private const string ReleaseInfoLink = "https://api.github.com/repos/MDModsDev/MuseDashModTools/releases";
 
     private const string ReleaseInfo = """
                                        [

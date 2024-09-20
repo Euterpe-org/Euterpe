@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using Serilog.Events;
 
-namespace MuseDashModToolsUI.Tests;
+namespace MuseDashModTools.Tests;
 
 public sealed class TestLogger(ITestOutputHelper testOutputHelper) : ILogger
 {

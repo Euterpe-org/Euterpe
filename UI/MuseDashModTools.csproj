@@ -110,7 +110,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SourceGenerators\MuseDashModToolsUI.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\SourceGenerators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\Styles\MuseDashModTools.Styles.csproj"/>
     </ItemGroup>
 </Project>
