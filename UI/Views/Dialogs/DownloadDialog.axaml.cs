@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Views.Dialogs;
+namespace MuseDashModTools.Views.Dialogs;
 
 public partial class DownloadDialog : Window
 {

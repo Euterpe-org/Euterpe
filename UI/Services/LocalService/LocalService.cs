@@ -3,7 +3,7 @@ using System.Text;
 using AsmResolver.DotNet;
 using CliWrap;
 
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public sealed partial class LocalService : ILocalService
 {

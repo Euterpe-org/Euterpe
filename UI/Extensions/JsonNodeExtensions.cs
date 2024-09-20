@@ -1,6 +1,6 @@
 using System.Text.Json.Nodes;
 
-namespace MuseDashModToolsUI.Extensions;
+namespace MuseDashModTools.Extensions;
 
 public static class JsonNodeExtensions
 {

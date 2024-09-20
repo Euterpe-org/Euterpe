@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Views.Pages;
+namespace MuseDashModTools.Views.Pages;
 
 public partial class ChartManagePage : UserControl
 {

@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using MuseDashModToolsUI.Extensions.MarkupExtensions;
+using MuseDashModTools.Extensions.MarkupExtensions;
 
-namespace MuseDashModToolsUI;
+namespace MuseDashModTools;
 
 public static class Bootstrapper
 {

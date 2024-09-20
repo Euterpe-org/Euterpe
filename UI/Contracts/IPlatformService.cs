@@ -1,6 +1,6 @@
 using Avalonia.Platform.Storage;
 
-namespace MuseDashModToolsUI.Contracts;
+namespace MuseDashModTools.Contracts;
 
 public interface IPlatformService
 {

@@ -1,11 +1,11 @@
 using System.Net.Http.Json;
 
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public abstract class GitHubServiceBase
 {
-    private const string ReleaseApiUrl = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases";
-    private const string LatestReleaseApiUrl = "https://api.github.com/repos/MDModsDev/MuseDashModToolsUI/releases/latest";
+    private const string ReleaseApiUrl = "https://api.github.com/repos/MDModsDev/MuseDashModTools/releases";
+    private const string LatestReleaseApiUrl = "https://api.github.com/repos/MDModsDev/MuseDashModTools/releases/latest";
     protected const string ModLinksBaseUrl = "MDModsDev/ModLinks/main/";
     protected const string MelonLoaderBaseUrl = "LavaGang/MelonLoader/releases/download/v0.6.1/MelonLoader.x64.zip";
     protected const string UnityDependencyBaseUrl = "LavaGang/Unity-Runtime-Libraries/master/2019.4.32.zip";

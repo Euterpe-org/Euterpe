@@ -1,7 +1,7 @@
 using System.Globalization;
 using Avalonia.Data.Converters;
 
-namespace MuseDashModToolsUI.Converters.IValueConverters;
+namespace MuseDashModTools.Converters.IValueConverters;
 
 public sealed class ChartSceneConverter : IValueConverter
 {

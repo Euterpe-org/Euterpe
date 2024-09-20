@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public sealed class JsonSerializationService : IJsonSerializationService
 {

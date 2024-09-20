@@ -2,7 +2,7 @@
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 
-namespace MuseDashModToolsUI.Converters.IValueConverters;
+namespace MuseDashModTools.Converters.IValueConverters;
 
 public sealed class VersionColourConverter : IValueConverter
 {

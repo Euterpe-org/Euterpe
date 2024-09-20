@@ -1,6 +1,6 @@
 using Avalonia.Platform.Storage;
 
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public sealed class FileSystemPickerService : IFileSystemPickerService
 {

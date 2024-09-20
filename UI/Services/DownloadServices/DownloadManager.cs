@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public sealed class DownloadManager : IDownloadManager
 {

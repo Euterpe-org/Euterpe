@@ -1,4 +1,4 @@
-﻿namespace MuseDashModToolsUI.Models;
+﻿namespace MuseDashModTools.Models;
 
 public sealed class Mod
 {

@@ -3,7 +3,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using HotAvalonia;
 
-namespace MuseDashModToolsUI;
+namespace MuseDashModTools;
 
 public sealed class App : Application
 {

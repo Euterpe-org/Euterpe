@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Models.Enums;
+namespace MuseDashModTools.Models.Enums;
 
 public enum ModState
 {

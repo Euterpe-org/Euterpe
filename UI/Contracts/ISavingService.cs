@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Contracts;
+namespace MuseDashModTools.Contracts;
 
 public interface ISavingService
 {

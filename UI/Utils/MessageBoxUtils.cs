@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Utils;
+namespace MuseDashModTools.Utils;
 
 public static class MessageBoxUtils
 {

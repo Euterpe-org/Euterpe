@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI;
+namespace MuseDashModTools;
 
 public static class BuildInfo
 {

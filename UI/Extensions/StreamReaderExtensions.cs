@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Extensions;
+namespace MuseDashModTools.Extensions;
 
 public static class StreamReaderExtensions
 {

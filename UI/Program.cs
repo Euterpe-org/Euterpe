@@ -3,7 +3,7 @@ using Avalonia.Dialogs;
 using System.Diagnostics;
 #endif
 
-namespace MuseDashModToolsUI;
+namespace MuseDashModTools;
 
 internal static class Program
 {
@@ -41,7 +41,7 @@ internal static class Program
                     Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = "https://github.com/MDModsDev/MuseDashModToolsUI/issues/new/choose",
+                    FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
                     UseShellExecute = true
                 });
             }

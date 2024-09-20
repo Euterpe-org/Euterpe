@@ -1,6 +1,6 @@
-using MuseDashModToolsUI.Localization.ModDescription;
+using MuseDashModTools.Localization.ModDescription;
 
-namespace MuseDashModToolsUI.Utils;
+namespace MuseDashModTools.Utils;
 
 public static class ModDescriptionProvider
 {

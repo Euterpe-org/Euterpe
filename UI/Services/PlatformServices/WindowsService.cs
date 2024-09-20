@@ -1,7 +1,7 @@
 using System.Collections.Frozen;
 using Microsoft.Win32;
 
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public sealed class WindowsService : IPlatformService
 {

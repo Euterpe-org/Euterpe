@@ -1,4 +1,4 @@
-﻿namespace MuseDashModToolsUI.ViewModels.Dialogs;
+﻿namespace MuseDashModTools.ViewModels.Dialogs;
 
 public sealed class DownloadDialogViewModel : ViewModelBase
 {

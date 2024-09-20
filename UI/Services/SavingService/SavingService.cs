@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public sealed partial class SavingService : ISavingService
 {

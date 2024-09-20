@@ -1,6 +1,6 @@
 using System.Collections.Frozen;
 
-namespace MuseDashModToolsUI.Services;
+namespace MuseDashModTools.Services;
 
 public sealed class LinuxService : IPlatformService
 {

@@ -1,4 +1,4 @@
-namespace MuseDashModToolsUI.ViewModels;
+namespace MuseDashModTools.ViewModels;
 
 public sealed partial class MainWindowViewModel : ViewModelBase
 {

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Avalonia.Media.Imaging;
 
-namespace MuseDashModToolsUI.Models;
+namespace MuseDashModTools.Models;
 
 public sealed class Chart
 {

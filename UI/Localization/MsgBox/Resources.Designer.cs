@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MuseDashModToolsUI.Localization.MsgBox {
+namespace MuseDashModTools.Localization.MsgBox {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,18 +19,18 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [DebuggerNonUserCode()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -38,13 +38,13 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.MsgBox.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModTools.Localization.MsgBox.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -58,7 +58,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
@@ -67,7 +67,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Button_No", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to No and Don&apos;t Ask Again.
         /// </summary>
@@ -76,7 +76,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Button_NoNoAsk", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
@@ -85,7 +85,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Button_Yes", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Yes and Don&apos;t Ask Again.
         /// </summary>
@@ -94,7 +94,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Button_YesNoAsk", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Your downloaded mods are broken\nPlease delete 0KB mods if they exist, then restart the application\n{0}.
         /// </summary>
@@ -103,7 +103,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_BrokenMods", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod enable/disable failed\n{0}.
         /// </summary>
@@ -112,7 +112,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ChangeModStateFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod enable/disable failed. Is the game running?\n{0}.
         /// </summary>
@@ -121,7 +121,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ChangeModStateFailed_Game", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod enable/disable failed. Unauthorized\n{0}.
         /// </summary>
@@ -130,7 +130,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ChangeModStateFailed_Unauthorized", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Checking updates failed\nAre you online?.
         /// </summary>
@@ -139,7 +139,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_CheckUpdateFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Choose correct Muse Dash folder first!.
         /// </summary>
@@ -148,7 +148,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ChooseCorrectPath", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You haven&apos;t chosen a Muse Dash Folder\nPlease choose the folder.
         /// </summary>
@@ -157,7 +157,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ChoosePath", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot copy Updater to target path\n{0}.
         /// </summary>
@@ -166,7 +166,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_CopyUpdaterFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Failed to delete MelonLoader.zip in\n{0}\nError:{1}\nTry to manually delete.
         /// </summary>
@@ -175,7 +175,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DeleteMelonLoaderZipFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to delete this mod?.
         /// </summary>
@@ -184,7 +184,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DeleteModConfirm", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to {0} is used by {1} as dependency\nAre you sure you want to disable this mod?.
         /// </summary>
@@ -193,7 +193,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DisableModConfirm", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Do you want to disable the mods dependent on {0}?.
         /// </summary>
@@ -202,7 +202,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DisableReverseDependency", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
@@ -211,7 +211,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DotNetRuntimeNotFound", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Chart download failed\n{0}.
         /// </summary>
@@ -220,7 +220,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DownloadChartFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Chart {0} has been successfully downloaded\n.
         /// </summary>
@@ -229,7 +229,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DownloadChartSuccess", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Please manually choose and delete the duplicated mod\n{0}.
         /// </summary>
@@ -238,7 +238,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_DuplicateMods", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Do you want to enable {0}&apos;s dependency {1}?.
         /// </summary>
@@ -247,7 +247,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_EnableDependency", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Failed to verify MuseDash.exe\nMake sure you selected the right folder.
         /// </summary>
@@ -256,7 +256,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ExeVerifyFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Your game path doesn&apos;t contain &quot;steamapps\common\Muse Dash\musedash.exe&quot;\nAre you using a pirated version?.
         /// </summary>
@@ -265,7 +265,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_GamePathError", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Failed to get mod list from any source.
         /// </summary>
@@ -274,7 +274,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_GetModListFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You have an incorrect MelonLoader version installed: {0}\nPlease use the button in the ModManage window to install MelonLoader 0.5.7.
         /// </summary>
@@ -283,7 +283,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_IncorrectMelonLoaderVersion", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to MuseDash.exe is not the correct version \nAre you using a pirated or modified version?.
         /// </summary>
@@ -292,7 +292,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_IncorrectVersion", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Dependency {0} failed to install\n{1}.
         /// </summary>
@@ -301,7 +301,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallDependencyFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You did not install MelonLoader\nThis is needed to run all the mods\nInstall Now?.
         /// </summary>
@@ -310,7 +310,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallMelonLoader", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to MelonLoader download failed\n{0}.
         /// </summary>
@@ -319,7 +319,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallMelonLoaderFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to MelonLoader download failed due to internet\nAre you online?\n{0}.
         /// </summary>
@@ -328,7 +328,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallMelonLoaderFailed_Internet", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to MelonLoader has been successfully installed\n.
         /// </summary>
@@ -337,7 +337,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallMelonLoaderSuccess", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod installation failed\n{0}.
         /// </summary>
@@ -346,7 +346,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallModFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod installation failed. Is the game running?\n{0}.
         /// </summary>
@@ -355,7 +355,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallModFailed_Game", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod installation failed. Are you online?\n{0}.
         /// </summary>
@@ -364,7 +364,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallModFailed_Internet", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to {0} has been successfully installed\n.
         /// </summary>
@@ -373,7 +373,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallModSuccess", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You don&apos;t have MuseDashModTools mod installed\nThis checks for available updates to all the mods when launching Muse Dash\nInstall Now?.
         /// </summary>
@@ -382,7 +382,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallModTools", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Detected Muse Dash folder path is {0}\nIs this the correct game folder?.
         /// </summary>
@@ -391,7 +391,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InstallPathConfirm", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The path you have chosen is invalid. Try again.
         /// </summary>
@@ -400,7 +400,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_InvalidPath", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Update check successful\nYou are using the latest version of Muse Dash Mod Tools.
         /// </summary>
@@ -409,7 +409,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_LatestVersion", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Log analysis completed, no obvious errors are found in your log file\nIf you still have issues please go to troubleshoot channel.
         /// </summary>
@@ -418,7 +418,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_LogAnalyzeComplete", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A newer version of Muse Dash Mod Tools ({0}) is released\n\nDo you want to install it now?\n\nRelease Title:\n{1}\n\nRelease Info:\n{2}.
         /// </summary>
@@ -427,7 +427,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NewerVersion", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You don&apos;t have application path in the log.
         /// </summary>
@@ -436,7 +436,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoApplicationPath", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to No charts found in the folder.
         /// </summary>
@@ -445,7 +445,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoBmsFile", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot find purchase record for Muse Dash&apos;s DLC\nYou have to buy it in order to play custom charts.
         /// </summary>
@@ -454,7 +454,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoDlcPurchased", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to This mod does not have an available resource for download\n.
         /// </summary>
@@ -463,7 +463,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoDownloadLink", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t find MuseDash.exe and/or GameAssembly.dll\nPlease choose the right folder.
         /// </summary>
@@ -472,7 +472,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoExeFound", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot verify that you have bought the game on Steam\nAre you using a pirated version?.
         /// </summary>
@@ -481,7 +481,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoInstallRecord", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to No Log File Found\nYou have to launch the game once after installing MelonLoader to generate log.
         /// </summary>
@@ -490,7 +490,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoLogFile", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot find MelonLoader Folder\nHave you installed MelonLoader?.
         /// </summary>
@@ -499,7 +499,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoMelonLoaderFolder", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot find MelonLoader version from log.
         /// </summary>
@@ -508,7 +508,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NoMelonLoaderVersion", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Your stored Muse Dash Folder path is null\nPlease choose the correct folder.
         /// </summary>
@@ -517,7 +517,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_NullPath", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to {0} is outdated, please update using &quot;ModManage&quot;page.
         /// </summary>
@@ -526,7 +526,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_OutdatedMod", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You have already downloaded the chart {0}\nContinue downloading and overriding the existing file?.
         /// </summary>
@@ -535,7 +535,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_OverrideChart", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot read current game version\nIs your Muse Dash installation complete?\nPlease check your globalgamemanagers file in\n{0}.
         /// </summary>
@@ -544,7 +544,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ReadGameVersionFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You have not registered for Headquarters\nPlease register in #bot-commands channel in MDMC discord or mdmc.moe website.
         /// </summary>
@@ -553,7 +553,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_RegisterHQ", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You are asking to reinstall {0}\nPlease confirm your operation.
         /// </summary>
@@ -562,7 +562,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_ReinstallMod", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You are asking to uninstall MelonLoader\nPlease confirm your operation.
         /// </summary>
@@ -571,7 +571,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UninstallMelonLoader", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot uninstall MelonLoader\nPlease make sure your game is not running!.
         /// </summary>
@@ -580,7 +580,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UninstallMelonLoaderFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to MelonLoader has been successfully uninstalled\n.
         /// </summary>
@@ -589,7 +589,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UninstallMelonLoaderSuccess", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod uninstall failed. Is the game running?\n{0}.
         /// </summary>
@@ -598,7 +598,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UninstallModFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mod uninstall failed\n{0}.
         /// </summary>
@@ -607,7 +607,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UninstallModFailed_Game", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot delete file that doesn&apos;t exist.
         /// </summary>
@@ -616,7 +616,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UninstallModFailed_Null", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to {0} has been successfully deleted\n.
         /// </summary>
@@ -625,7 +625,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UninstallModSuccess", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot unzip MelonLoader.zip in\n{0}\nError:{1}\nTry to manually unzip?.
         /// </summary>
@@ -634,7 +634,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UnzipMelonLoaderFailed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cannot find Updater\nPlease make sure you have downloaded full software,\nand check your antivirus.
         /// </summary>
@@ -643,7 +643,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Content_UpdaterNotFound", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Analysis successful.
         /// </summary>
@@ -652,7 +652,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Title_AnalyzeSuccess", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Failure.
         /// </summary>
@@ -661,7 +661,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Title_Failure", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Notice.
         /// </summary>
@@ -670,7 +670,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Title_Notice", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
@@ -679,7 +679,7 @@ namespace MuseDashModToolsUI.Localization.MsgBox {
                 return ResourceManager.GetString("MsgBox_Title_Success", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Warning.
         /// </summary>

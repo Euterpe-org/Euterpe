@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using Mapster;
 
-namespace MuseDashModToolsUI.Models;
+namespace MuseDashModTools.Models;
 
 public sealed class Setting
 {

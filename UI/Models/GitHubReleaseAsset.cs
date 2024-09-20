@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace MuseDashModToolsUI.Models;
+namespace MuseDashModTools.Models;
 
 public sealed class GitHubReleaseAsset
 {

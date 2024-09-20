@@ -1,7 +1,7 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 
-namespace MuseDashModToolsUI.Utils;
+namespace MuseDashModTools.Utils;
 
 public static class DesktopUtils
 {

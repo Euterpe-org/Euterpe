@@ -2,7 +2,7 @@
 using Serilog.Events;
 using Serilog.Formatting;
 
-namespace MuseDashModToolsUI.Formatters;
+namespace MuseDashModTools.Formatters;
 
 public sealed class LogFileFormatter : ITextFormatter
 {

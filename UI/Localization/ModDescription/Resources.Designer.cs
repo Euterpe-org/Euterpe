@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MuseDashModToolsUI.Localization.ModDescription {
+namespace MuseDashModTools.Localization.ModDescription {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,18 +19,18 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [DebuggerNonUserCode()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -38,13 +38,13 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModToolsUI.Localization.ModDescription.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MuseDashModTools.Localization.ModDescription.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -58,7 +58,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Adds a more exact accuracy indicator on the bottom of the screen.\nAlso displays average accuracy in milliseconds at the end of the level..
         /// </summary>
@@ -67,7 +67,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Accuracy Indicator", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A live accuracy display for your viewing pleasure..
         /// </summary>
@@ -76,7 +76,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("AccuracyDisplay", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mutes the game when it&apos;s not focused..
         /// </summary>
@@ -85,7 +85,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Alt Tab Mute", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Boss always shoots pigeons, tutorial is always april fool&apos;s version, and activates good tek hidden.
         /// </summary>
@@ -94,7 +94,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("AlwaysAprilFool", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A mod which changes the background and character etc into black and white in tohou scene.
         /// </summary>
@@ -103,7 +103,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("AlwaysBadApple", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Boss always shoots pigeons, do not use AlwaysAprilFool at the same time.
         /// </summary>
@@ -112,7 +112,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("AlwaysPigeons", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Displays the best character combination for a level in the pause screen\nThe character combo displayed is usually correct, but don&apos;t put your blind faith in it\nWhen in doubt, refer to CharacterScoreboard.
         /// </summary>
@@ -121,7 +121,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("BestCombinationSuggest", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A mod which displays the BPM info above level designer on preparation screen.
         /// </summary>
@@ -130,7 +130,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("BPMDisplay", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Everytime you play a chart, a random character combination will be selected.
         /// </summary>
@@ -139,7 +139,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CharacterRandomizer", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Displays which character a specific score was achieved with on the leaderboard (OCS)\nIt can also display your own local scores (LCS)\nLCS and OCS have inconsistent behavior on custom songs..
         /// </summary>
@@ -148,7 +148,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CharacterScoreboard", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to queue custom charts to be deleted or moved when you exit the game..
         /// </summary>
@@ -157,7 +157,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("ChartDeleter", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Automatically selects sleepwalker, sets offset to 0, sets fever to manual, disables certain UI elements.\nCan be toggled on/off while in-game.
         /// </summary>
@@ -166,7 +166,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("ChartReview", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Censores certain aspects of the game (Characters, illustrations, etc).
         /// </summary>
@@ -175,7 +175,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("ChineseMode", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The mod that allows you to see video backgrounds in custom charts.
         /// </summary>
@@ -184,7 +184,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Cinema", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The mod that allows you to load in custom charts.
         /// </summary>
@@ -193,7 +193,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CustomAlbums", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to use add the streamer tag in your info.json to mark a song as copyright-free\n(for use with streamer mode).
         /// </summary>
@@ -202,7 +202,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CustomAnchorSupport", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to adjust background brightness lower than 40%.
         /// </summary>
@@ -211,7 +211,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CustomBGBrightness", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to set custom hitsounds\nDetailed instructions in the github readme.
         /// </summary>
@@ -220,7 +220,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CustomHitSound", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to add custom loading screens (CustomLoadingScreens folder)\nAlso allows you to add custom loading screen messages (UserData/CustomLoadingScreens.cfg)\nMessages can be paired with an image, or be left as random.
         /// </summary>
@@ -229,7 +229,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CustomLoadingScreens", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Adds a Custom option in resolution settings, which can be changed in the config.
         /// </summary>
@@ -238,7 +238,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("CustomResolution", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Disables some in-game effects.
         /// </summary>
@@ -247,7 +247,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("EffectDisable", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to favorite characters and elfins\nThis will make you look like that character even if another character is selected.\nYou will have the abilities of the selected character &amp; your plays will be submitted as such.
         /// </summary>
@@ -256,7 +256,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("FavGirl", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Tells you whether you&apos;re on All Perfect/Full Combo pace, and displays the number of misses/greats.
         /// </summary>
@@ -265,7 +265,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("FC AP indicator", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Disables the fever background effect.
         /// </summary>
@@ -274,7 +274,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("FeverEffectDisable", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to submit scores on custom charts obtained from the MDMC website.
         /// </summary>
@@ -283,7 +283,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Headquarters", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Adds a button to always show hidden difficulties.\nE.g. you don&apos;t need to spam click and such to unlock them before playing.
         /// </summary>
@@ -292,7 +292,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("HiddenQoL", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Skips past opening scene by speeding the game up.\nYou can configure the speed and whether to skip past the animated illustration.\nSpiritual successor of RobotLucca&apos;s mod.
         /// </summary>
@@ -301,7 +301,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("IntroSkip", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A library for other mods to parse and listen to keybinds.
         /// </summary>
@@ -310,7 +310,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("KeybindManager", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A library for other mods to localize text.
         /// </summary>
@@ -319,7 +319,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("LocalizeLib", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Muse Dash Rich Presence, which is exactly what it says it is..
         /// </summary>
@@ -328,7 +328,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("MDRPC", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to disable &amp; delete mods while in-game..
         /// </summary>
@@ -337,7 +337,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("ModManager", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.\nThis mod does nothing by itself..
         /// </summary>
@@ -346,7 +346,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Muse Dash Mirror", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Automatically detects and logs available mod updates..
         /// </summary>
@@ -355,7 +355,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("MuseDashModTools", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Prevents the game from automatically pausing when the game loses focus..
         /// </summary>
@@ -364,7 +364,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("NoAutoPause", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Level up animations take ages;\nLet&apos;s skip them..
         /// </summary>
@@ -373,7 +373,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("NoLevelUpAnimations", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to disable the judgements in-game.\n(example: show early/late perfects but not pure perfects)\nInspired by ADOFAI Tweaks.
         /// </summary>
@@ -382,7 +382,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("PerfectDisable", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A library for other mods to manage popups and windows.
         /// </summary>
@@ -391,7 +391,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("PopupLib", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A mod that that allows let&apos;s you prevent a score from uploading,\nand still be able to take a screenshot..
         /// </summary>
@@ -400,7 +400,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("PreventLowAcc", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to use Delete to instantly leave a chart &amp; Allows you to use Backspace to instantly restart a chart\nUpdate now allows you to set custom keybinds..
         /// </summary>
@@ -409,7 +409,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("QuickRestart", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to set keybinds to quickly change your characters.\nNow has an in-game menu to add keybinds.
         /// </summary>
@@ -418,7 +418,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("QuickSwitchCombination", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Makes it possible for customs to use certain background decorations that the default charts use..
         /// </summary>
@@ -427,7 +427,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("SceneEggs", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Similar to CharacterScoreboard, however, it instead adds icon clickable icon representations,\nwhich automatically switches to the character combo when clicked..
         /// </summary>
@@ -436,7 +436,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Scoreboard characters and elfins", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows charters (not players) to set custom scroll speeds.\nIt&apos;s completely up to you whether you wanna use this, most charters don&apos;t use it though..
         /// </summary>
@@ -445,7 +445,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("ScrollSpeed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to An extension to SearchPlusPlus, allowing you to create folders\nand search for songs in said folders..
         /// </summary>
@@ -454,7 +454,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Search++ Folder Tag", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Any search feature you will ever need (probably).\nOptional dependencies: KeybindManager, CustomAlbums.
         /// </summary>
@@ -463,7 +463,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("SearchPlusPlus", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Displays the title, artist, and difficulty of the song in the top-right corner during play..
         /// </summary>
@@ -472,7 +472,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("Song Desc", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A mod which changes the judgement window and make the game harder\nYou can manually change the judgement range in Stricter Judge.cfg.
         /// </summary>
@@ -481,7 +481,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("StricterJudge", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Displays actual ranking instead of &quot;999+&quot; for ranks 1000 to 2000.
         /// </summary>
@@ -490,7 +490,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("True rank for 999+", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to disable certain visual aspects of the game (example: hit circles).
         /// </summary>
@@ -499,7 +499,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("UI Disable", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Makes Sleepwalker Rin do mashers at max speed instead of the normal slow speed..
         /// </summary>
@@ -508,7 +508,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("UltraInstinctSleepwalking", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to An alternative to UnlockAll.\nMaster&apos;s stay unlocked only for as long as the mod is installed..
         /// </summary>
@@ -517,7 +517,7 @@ namespace MuseDashModToolsUI.Localization.ModDescription {
                 return ResourceManager.GetString("UnlockAll2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa..
         /// </summary>

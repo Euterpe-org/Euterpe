@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Avalonia.Media;
 
-namespace MuseDashModToolsUI.Extensions;
+namespace MuseDashModTools.Extensions;
 
 public static class StringExtensions
 {
