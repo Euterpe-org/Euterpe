@@ -80,13 +80,6 @@
             </u:NavMenu.HeaderTemplate>
         </u:NavMenu>
 
-        <Button Grid.Column="1"
-                Command="{Binding TestCommand}"
-                Content="AAA" />
-        <Button Grid.Column="1"
-                Margin="100,0,0,0"
-                Command="{Binding Test2Command}"
-                Content="BBB" />
         <ContentControl Grid.Column="1"
                         Margin="20,50,0,0"
                         Content="{Binding Content}" />

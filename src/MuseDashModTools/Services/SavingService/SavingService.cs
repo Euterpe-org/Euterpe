@@ -1,3 +1,5 @@
+using Avalonia.Styling;
+
 namespace MuseDashModTools.Services;
 
 public sealed partial class SavingService : ISavingService
@@ -31,6 +33,7 @@ public sealed partial class SavingService : ISavingService
 
     public async Task SaveSettingAsync()
     {
+        Setting.Theme = GetCurrentApplication().ActualThemeVariant == ThemeVariant.Light ? "Light" : "Dark";
         await using var stream = new FileStream(SettingPath, FileMode.OpenOrCreate, FileAccess.Write);
         await JsonSerializationService.SerializeIndentedAsync(stream, Setting).ConfigureAwait(false);
         Logger.Information("Setting saved to {SettingPath} successfully", SettingPath);
