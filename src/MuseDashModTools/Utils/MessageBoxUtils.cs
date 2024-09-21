@@ -24,18 +24,12 @@ public static class MessageBoxUtils
     public static Task<MessageBoxResult> ErrorMessageBoxAsync(string message, string title = "Error") =>
         MessageBox.ShowAsync(message, title, MessageBoxIcon.Error);
 
-    public static Task<MessageBoxResult> FormatErrorMessageBoxAsync(Exception ex) =>
-        ErrorMessageBoxAsync(ex.ToString());
-
     public static Task<MessageBoxResult> FormatErrorMessageBoxAsync(string message, params object[] args) =>
         ErrorMessageBoxAsync(string.Format(message, args));
 
     // Overlay
     public static Task<MessageBoxResult> ErrorMessageBoxOverlayAsync(string message, string title = "Error") =>
         MessageBox.ShowOverlayAsync(message, title, icon: MessageBoxIcon.Error, button: MessageBoxButton.OK);
-
-    public static Task<MessageBoxResult> FormatErrorMessageBoxOverlayAsync(Exception ex) =>
-        ErrorMessageBoxOverlayAsync(ex.ToString());
 
     public static Task<MessageBoxResult> FormatErrorMessageBoxOverlayAsync(string message, params object[] args) =>
         ErrorMessageBoxOverlayAsync(string.Format(message, args));
