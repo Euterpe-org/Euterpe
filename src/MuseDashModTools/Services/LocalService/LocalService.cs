@@ -28,6 +28,59 @@ public sealed partial class LocalService : ILocalService
 
     public HashSet<string?> GetLibFileNames() => Directory.GetFiles(Setting.UserLibsFolder).Select(Path.GetFileNameWithoutExtension).ToHashSet();
 
+    public async Task<bool> InstallMelonLoaderAsync()
+    {
+        if (!FileSystemService.CheckFileExists(Setting.MelonLoaderZipPath))
+        {
+            await ErrorMessageBoxAsync("MelonLoader zip file not found").ConfigureAwait(true);
+            return false;
+        }
+
+        if (!UnzipFile(Setting.MelonLoaderZipPath, Setting.MuseDashFolder))
+        {
+            await ErrorMessageBoxAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
+            return false;
+        }
+
+        if (!FileSystemService.TryDeleteFile(Setting.MelonLoaderZipPath))
+        {
+            await ErrorMessageBoxAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
+            return false;
+        }
+
+        Logger.Information("MelonLoader installed successfully");
+        await SuccessMessageBoxAsync("MelonLoader installed successfully").ConfigureAwait(true);
+        return true;
+    }
+
+    public async Task<bool> UninstallMelonLoaderAsync()
+    {
+        var dobbyPath = Path.Combine(Setting.MuseDashFolder, "dobby.dll");
+        var noticePath = Path.Combine(Setting.MuseDashFolder, "NOTICE.txt");
+        var versionPath = Path.Combine(Setting.MuseDashFolder, "version.dll");
+
+        foreach (var path in new[] { dobbyPath, noticePath, versionPath })
+        {
+            if (FileSystemService.TryDeleteFile(path))
+            {
+                continue;
+            }
+
+            await ErrorMessageBoxAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
+            return false;
+        }
+
+        if (!FileSystemService.TryDeleteDirectory(Setting.MelonLoaderFolder))
+        {
+            await ErrorMessageBoxAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
+            return false;
+        }
+
+        Logger.Information("MelonLoader uninstalled successfully");
+        await SuccessMessageBoxAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
+        return true;
+    }
+
     public async Task<string> GetMuseDashFolderAsync()
     {
         var path = string.Empty;
@@ -107,6 +160,9 @@ public sealed partial class LocalService : ILocalService
     }
 
     #region Injections
+
+    [UsedImplicitly]
+    public IFileSystemService FileSystemService { get; init; } = null!;
 
     [UsedImplicitly]
     public IFileSystemPickerService FileSystemPickerService { get; init; } = null!;
