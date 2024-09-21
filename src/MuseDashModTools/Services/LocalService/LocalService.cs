@@ -36,7 +36,7 @@ public sealed partial class LocalService : ILocalService
             return false;
         }
 
-        if (!UnzipFile(Setting.MelonLoaderZipPath, Setting.MuseDashFolder))
+        if (!ExtractZipFile(Setting.MelonLoaderZipPath, Setting.MuseDashFolder))
         {
             await ErrorMessageBoxAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
             return false;
@@ -145,7 +145,7 @@ public sealed partial class LocalService : ILocalService
         Logger.Information("Launching game with launch arguments: {LaunchArguments}", launchArguments);
     }
 
-    public bool UnzipFile(string zipPath, string extractPath)
+    public bool ExtractZipFile(string zipPath, string extractPath)
     {
         try
         {

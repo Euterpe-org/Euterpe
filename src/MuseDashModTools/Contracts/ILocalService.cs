@@ -10,5 +10,5 @@ public interface ILocalService
     Task<bool> UninstallMelonLoaderAsync();
     Task<ModDto?> LoadModFromPathAsync(string filePath);
     void LaunchGame(bool isModded);
-    bool UnzipFile(string zipPath, string extractPath);
+    bool ExtractZipFile(string zipPath, string extractPath);
 }
