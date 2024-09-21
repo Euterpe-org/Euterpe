@@ -20,8 +20,14 @@ public sealed class FileSystemService : IFileSystemService
         return false;
     }
 
-    public bool TryDeleteFile(string filePath)
+    public bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
+        if (deleteOption == DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
+        {
+            Logger.Warning("{FilePath} does not exists, skipping deletion", filePath);
+            return true;
+        }
+
         try
         {
             File.Delete(filePath);
@@ -45,8 +51,14 @@ public sealed class FileSystemService : IFileSystemService
         return false;
     }
 
-    public bool TryDeleteDirectory(string directoryPath)
+    public bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
+        if (deleteOption == DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
+        {
+            Logger.Warning("{DirectoryPath} does not exists, skipping deletion", directoryPath);
+            return true;
+        }
+
         try
         {
             Directory.Delete(directoryPath, true);

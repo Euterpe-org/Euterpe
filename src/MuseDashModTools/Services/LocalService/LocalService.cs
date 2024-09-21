@@ -61,13 +61,7 @@ public sealed partial class LocalService : ILocalService
 
         foreach (var path in new[] { dobbyPath, noticePath, versionPath })
         {
-            if (!File.Exists(path))
-            {
-                Logger.Warning("{Path} not found, skipping deletion", path);
-                continue;
-            }
-
-            if (FileSystemService.TryDeleteFile(path))
+            if (FileSystemService.TryDeleteFile(path, DeleteOption.IgnoreIfNotFound))
             {
                 continue;
             }
@@ -76,11 +70,7 @@ public sealed partial class LocalService : ILocalService
             return false;
         }
 
-        if (!Directory.Exists(Setting.MelonLoaderFolder))
-        {
-            Logger.Warning("MelonLoader folder not found, skipping deletion");
-        }
-        else if (!FileSystemService.TryDeleteDirectory(Setting.MelonLoaderFolder))
+        if (!FileSystemService.TryDeleteDirectory(Setting.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
             await ErrorMessageBoxAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
             return false;
