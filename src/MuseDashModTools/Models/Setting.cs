@@ -7,7 +7,7 @@ namespace MuseDashModTools.Models;
 public sealed class Setting
 {
     // Path Settings
-    public string? MuseDashFolder { get; set; } = string.Empty;
+    public string MuseDashFolder { get; set; } = string.Empty;
     public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
 
     // UI Settings
