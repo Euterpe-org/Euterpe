@@ -7,18 +7,22 @@ namespace MuseDashModTools.Models;
 public sealed class Setting
 {
     // Path Settings
+    [AllowNull]
     public string MuseDashFolder { get; set; } = string.Empty;
+
     public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
 
     // UI Settings
-    public string? LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
+    [AllowNull]
+    public string LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
+
     public string Theme { get; set; } = "Dark";
 
     // Download Settings
     public DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
     public string? GitHubToken { get; set; } = null;
 
-    public string? CustomDownloadSource { get; set; } = string.Empty;
+    public string? CustomDownloadSource { get; set; } = null;
     public bool DownloadPrerelease { get; set; }
     public SemVersion? SkipVersion { get; set; }
 
