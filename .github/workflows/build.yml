@@ -1,4 +1,4 @@
-name: Build Packages
+name: Build Project
 
 on:
   push:
@@ -15,6 +15,10 @@ on:
       - 'dev/rewrite'
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
     strategy:
@@ -23,57 +27,43 @@ jobs:
         build-type:
           - Debug
           - Release
-        target-os:
-          - ubuntu-latest
-          - windows-latest
-          # - osx-latest # Requires dotnet 8 and later
+        target-platform:
+          - { os: ubuntu-latest, name: linux }
+          - { os: windows-latest, name: win }
+          - { os: macos-latest, name: osx }
         target-arch:
           - x64
-          # - arm64 # /usr/bin/ld: unrecognised emulation mode: aarch64linux
+          - arm64 
         dotnet-version:
-          - '7.0'
+          - '8.0'
         self-contained:
           - true
           - false
-    runs-on: ${{ matrix.target-os }}
+    runs-on: ${{ matrix.target-platform.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-
-      - name: Install AOT Toolchain
-        if: matrix.target-os == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends clang zlib1g-dev
 
       - name: Build Project
         run: |
           dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} --self-contained=${{ matrix.self-contained }}
 
-      - name: List result on Windows
-        if: matrix.target-os == 'windows-latest'
-        run: ls -l bin\${{ matrix.build-type }}\net${{ matrix.dotnet-version }}\win-${{ matrix.target-arch }}\publish
+      - name: Test Project
+        run: |
+          dotnet test --configuration=${{ matrix.build-type }}
 
-      - name: List result on Linux
-        if: matrix.target-os == 'ubuntu-latest'
-        run: ls -l bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish
+      - name: List Result
+        working-directory: ./
+        run: |
+          ls -l bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/${{matrix.target-platform.name}}-${{ matrix.target-arch }}/publish
 
-      - name: Upload Artifact on Windows
-        if: matrix.target-os == 'windows-latest'
-        uses: actions/upload-artifact@v3
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          name: MuseDashModToolsUI-${{ matrix.build-type }}-Windows-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-${{ matrix.self-contained && 'self-contained' || 'runtime-required' }}
-          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/win-${{ matrix.target-arch }}/publish/*
-
-      - name: Upload Artifact on Linux
-        if: matrix.target-os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v3
-        with:
-          name: MuseDashModToolsUI-${{ matrix.build-type }}-Linux-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-${{ matrix.self-contained && 'self-contained' || 'runtime-required' }}
-          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/linux-${{ matrix.target-arch }}/publish/*
-        
+          name: MuseDashModTools-${{ matrix.build-type }}-${{matrix.target-platform.name}}-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-${{ matrix.self-contained && 'self-contained' || 'runtime-required' }}
+          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/${{matrix.target-platform.name}}-${{ matrix.target-arch }}/publish/*
