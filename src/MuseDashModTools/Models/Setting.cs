@@ -10,7 +10,7 @@ public sealed class Setting
     [AllowNull]
     public string MuseDashFolder { get; set; } = string.Empty;
 
-    public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
+    public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName, "Cache");
 
     // UI Settings
     [AllowNull]
