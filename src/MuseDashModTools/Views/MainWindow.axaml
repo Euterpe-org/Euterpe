@@ -82,7 +82,7 @@
 
         <ContentControl Grid.Column="1"
                         Margin="20,50,0,0"
-                        Content="{Binding Content}" />
+                        Content="{Binding NavigationService.Content}" />
     </Grid>
 
 </u:UrsaWindow>

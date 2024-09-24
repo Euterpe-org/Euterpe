@@ -1,8 +1,10 @@
 namespace MuseDashModTools.Services;
 
-public sealed partial class NavigationService : INavigationService
+public sealed partial class NavigationService : ObservableObject, INavigationService
 {
-    private Control _currentView = null!;
+    [ObservableProperty]
+    private Control? _content;
+
     private string _currentViewName = string.Empty;
 
     #region Injections
@@ -12,7 +14,7 @@ public sealed partial class NavigationService : INavigationService
 
     #endregion Injections
 
-    public Control? NavigateToViewModel<TViewModel>() where TViewModel : ViewModelBase, new()
+    public void NavigateToViewModel<TViewModel>() where TViewModel : ViewModelBase, new()
     {
         var viewModelType = typeof(TViewModel);
         var viewType = _viewModelToViewMap[viewModelType];
@@ -20,7 +22,7 @@ public sealed partial class NavigationService : INavigationService
         if (_currentViewName == viewType.Name)
         {
             Logger.Information("ViewModel: {ViewModel} is already navigated", viewModelType.Name);
-            return _currentView;
+            return;
         }
 
         Logger.Information("Navigating to ViewModel: {ViewModel}", viewModelType.Name);
@@ -28,22 +30,21 @@ public sealed partial class NavigationService : INavigationService
 
         if (Activator.CreateInstance(viewType) is Control view)
         {
-            _currentView = view;
-            return view;
+            Content = view;
+            return;
         }
 
         Logger.Error("View not found for ViewModel: {ViewModel}", viewModelType.Name);
-        return null;
     }
 
-    public Control? NavigateToView<TView>() where TView : Control, new()
+    public void NavigateToView<TView>() where TView : Control, new()
     {
         var viewType = typeof(TView);
 
         if (_currentViewName == viewType.Name)
         {
             Logger.Information("View: {View} is already navigated", viewType.Name);
-            return _currentView;
+            return;
         }
 
         Logger.Information("Navigating to View: {View}", viewType.Name);
@@ -51,11 +52,10 @@ public sealed partial class NavigationService : INavigationService
 
         if (Activator.CreateInstance<TView>() is Control view)
         {
-            _currentView = view;
-            return view;
+            Content = view;
+            return;
         }
 
         Logger.Error("View not found for View: {View}", viewType.Name);
-        return null;
     }
 }

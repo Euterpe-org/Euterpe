@@ -2,7 +2,8 @@ namespace MuseDashModTools.Contracts;
 
 public interface INavigationService
 {
-    Control? NavigateToViewModel<TViewModel>() where TViewModel : ViewModelBase, new();
+    Control? Content { get; }
+    void NavigateToViewModel<TViewModel>() where TViewModel : ViewModelBase, new();
 
-    Control? NavigateToView<TView>() where TView : Control, new();
+    void NavigateToView<TView>() where TView : Control, new();
 }
