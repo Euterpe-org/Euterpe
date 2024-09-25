@@ -111,23 +111,22 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
     }
 
-    public async Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         Logger.Information("Fetching mods from GitHub {Url}...", ModLinksUrl);
 
         try
         {
-            var mods = await Client.GetFromJsonAsync<Mod[]>(ModLinksUrl, cancellationToken).ConfigureAwait(false);
+            var mods = Client.GetFromJsonAsAsyncEnumerable<Mod>(ModLinksUrl, cancellationToken);
             Logger.Information("Mods fetched from GitHub successfully");
             return mods;
         }
         catch (Exception ex)
         {
             Logger.Error(ex, "Failed to fetch mods from GitHub");
-            return null;
+            return AsyncEnumerable.Empty<Mod?>();
         }
     }
-
 
     #region Injections
 

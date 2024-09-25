@@ -106,6 +106,7 @@
         <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Sinks.File"/>
+        <PackageReference Include="System.Linq.Async"/>
         <PackageReference Include="ValveKeyValue"/>
     </ItemGroup>
 

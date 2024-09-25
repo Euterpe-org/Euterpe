@@ -50,7 +50,7 @@ public sealed class DownloadManager : IDownloadManager
         };
     }
 
-    public Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         return Setting.DownloadSource switch
         {

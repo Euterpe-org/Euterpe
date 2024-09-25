@@ -108,20 +108,20 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
     }
 
-    public async Task<Mod[]?> GetModListAsync(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         Logger.Information("Fetching mods from GitHubMirror {Url}...", PrimaryModLinksUrl);
 
         try
         {
-            var mods = await Client.GetFromJsonAsync<Mod[]>(PrimaryModLinksUrl, cancellationToken).ConfigureAwait(false);
+            var mods = Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModLinksUrl, cancellationToken);
             Logger.Information("Mods fetched from GitHubMirror successfully");
             return mods;
         }
         catch (Exception ex)
         {
             Logger.Error(ex, "Failed to fetch mods from GitHubMirror");
-            return null;
+            return AsyncEnumerable.Empty<Mod?>();
         }
     }
 
