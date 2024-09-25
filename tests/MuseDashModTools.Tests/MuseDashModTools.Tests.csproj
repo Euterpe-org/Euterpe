@@ -5,12 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="coverlet.collector"/>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="Moq"/>
         <PackageReference Include="RichardSzalay.MockHttp"/>
         <PackageReference Include="TUnit"/>
-        <PackageReference Include="coverlet.collector"/>
     </ItemGroup>
 
     <ItemGroup>
