@@ -19,6 +19,7 @@ public sealed partial class ModManageService : IModManageService
             .Where(mod => mod is not null)!;
 
         _sourceCache.AddOrUpdate(localMods);
+        Logger.Information("Local mods loaded");
 
         await foreach (var webMod in DownloadManager.GetModListAsync())
         {
@@ -38,6 +39,8 @@ public sealed partial class ModManageService : IModManageService
                 sourceCache.AddOrUpdate(new ModDto(webMod));
             }
         }
+
+        Logger.Information("All mods initialized");
     }
 
     #region Injections
