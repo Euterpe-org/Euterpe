@@ -59,7 +59,7 @@ public static class Bootstrapper
         // _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<ModService>().As<IModService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         // _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
