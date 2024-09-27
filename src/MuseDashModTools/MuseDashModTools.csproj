@@ -7,7 +7,7 @@
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-        <NoWarn>CS7035</NoWarn>
+        <NoWarn>$(NoWarn);CS7035</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup>
