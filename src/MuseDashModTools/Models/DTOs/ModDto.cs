@@ -1,6 +1,6 @@
 using Mapster;
 
-namespace MuseDashModTools.Models.DTOs;
+namespace MuseDashModTools.Models;
 
 public sealed class ModDto : ObservableObject
 {
@@ -59,17 +59,11 @@ public sealed class ModDto : ObservableObject
 
     public string DependencyNames => !HasDependency ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
 
-    public void CloneOnlineInfo(Mod webMod)
+    public ModDto()
     {
-        DownloadLink = webMod.DownloadLink;
-        ConfigFile = webMod.ConfigFile;
-        HomePage = webMod.HomePage;
-        GameVersion = webMod.GameVersion;
-        Description = webMod.Description;
-        DependentMods = webMod.DependentMods;
-        DependentLibs = webMod.DependentLibs;
-        IncompatibleMods = webMod.IncompatibleMods;
     }
+
+    public ModDto(Mod mod) => UpdateFromMod(mod);
 
     public ModDto RemoveLocalInfo()
     {
@@ -82,5 +76,5 @@ public sealed class ModDto : ObservableObject
         return this;
     }
 
-    public void Apply(Mod mod) => mod.Adapt(this);
+    public void UpdateFromMod(Mod? mod) => mod.Adapt(this);
 }
