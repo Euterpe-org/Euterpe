@@ -4,22 +4,23 @@ namespace MuseDashModTools.Services;
 
 public sealed partial class ModManageService : IModManageService
 {
-    private string? _gameVersion;
-    private SourceCache<ModDto, string>? _sourceCache;
+    private string _gameVersion = null!;
+    private SourceCache<ModDto, string> _sourceCache = null!;
 
-    [MemberNotNull(nameof(_gameVersion))]
-    [MemberNotNull(nameof(_sourceCache))]
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
     {
         _sourceCache = sourceCache;
-        _gameVersion = await LocalService.ReadGameVersionAsync().ConfigureAwait(true);
+        _gameVersion = await LocalService.ReadGameVersionAsync().ConfigureAwait(false);
 
-        IEnumerable<ModDto> localMods = LocalService.GetModFilePaths()
+        ModDto[] localMods = LocalService.GetModFilePaths()
             .Select(LocalService.LoadModFromPath)
-            .Where(mod => mod is not null)!;
+            .Where(mod => mod is not null)
+            .ToArray()!;
 
         _sourceCache.AddOrUpdate(localMods);
-        Logger.Information("Local mods loaded");
+        Logger.Information("Local mods added to source cache");
+
+        CheckDuplicatedMods(localMods);
 
         await foreach (var webMod in DownloadManager.GetModListAsync())
         {
@@ -28,19 +29,19 @@ public sealed partial class ModManageService : IModManageService
                 continue;
             }
 
-            if (sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
+            if (_sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
             {
                 CheckModState(localMod, webMod);
                 localMod.UpdateFromMod(webMod);
-                sourceCache.AddOrUpdate(localMod);
+                _sourceCache.AddOrUpdate(localMod);
             }
             else
             {
-                sourceCache.AddOrUpdate(new ModDto(webMod));
+                _sourceCache.AddOrUpdate(new ModDto(webMod));
             }
         }
 
-        Logger.Information("All mods initialized");
+        Logger.Information("Updated mod info from web completed");
     }
 
     #region Injections

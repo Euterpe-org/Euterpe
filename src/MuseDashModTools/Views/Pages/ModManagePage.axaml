@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="clr-namespace:MuseDashModTools.Extensions.MarkupExtensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:MuseDashModTools.Models"
              xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
              x:Class="MuseDashModTools.Views.Pages.ModManagePage"
              x:DataType="pages:ModManagePageViewModel"
@@ -12,5 +13,27 @@
              d:DesignWidth="1000">
 
     <UserControl.Resources />
+
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Initialized">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
+    <ScrollViewer Width="500"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
+        <ItemsRepeater ItemsSource="{Binding Mods}">
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate x:DataType="models:ModDto">
+                    <StackPanel Margin="10" Orientation="Vertical">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding LocalVersion}" />
+                        <TextBlock Text="{Binding DuplicatedModPaths}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+    </ScrollViewer>
 
 </UserControl>

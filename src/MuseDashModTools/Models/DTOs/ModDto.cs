@@ -22,22 +22,19 @@ public sealed class ModDto : ObservableObject
     public bool IsDisabled => FileExtension == ".disabled";
     public string LocalVersion { get; set; } = string.Empty;
     public ModState State { get; set; }
-
+    public string FileName => FileNameWithoutExtension + FileExtension;
     public string? FileNameWithoutExtension { get; set; }
     public string? FileExtension { get; set; }
-
     public bool IsLocal => FileNameWithoutExtension is not null;
-
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
-    public bool IsTracked { get; set; }
-    public bool IsDuplicated { get; set; }
-    public string DuplicatedModNames { get; set; } = string.Empty;
+    public bool IsDuplicated => State is ModState.Duplicated;
+    public string? DuplicatedModPaths { get; set; }
 
     public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
         ModDescriptionProvider.GetDescription(this), Author, Version, CompatibleGameVersion);
 
-    public bool IsValidConfigFile { get; set; }
+    public bool IsValidConfigFile => !ConfigFile.IsNullOrEmpty() && File.Exists(ConfigFile);
 
     public bool IsValidHomePage => !HomePage.IsNullOrEmpty() && Uri.TryCreate(HomePage, UriKind.Absolute, out var uriResult) &&
                                    (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
@@ -68,9 +65,6 @@ public sealed class ModDto : ObservableObject
     public ModDto RemoveLocalInfo()
     {
         FileNameWithoutExtension = null;
-        IsValidConfigFile = false;
-        IsDuplicated = false;
-        IsTracked = false;
         LocalVersion = string.Empty;
         SHA256 = string.Empty;
         return this;
