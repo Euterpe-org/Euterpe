@@ -1,6 +1,7 @@
 using System.IO.Compression;
 using System.Text;
 using AsmResolver.DotNet;
+using AssetsTools.NET.Extra;
 using CliWrap;
 
 namespace MuseDashModTools.Services;
@@ -94,7 +95,7 @@ public sealed partial class LocalService : ILocalService
         return path;
     }
 
-    public async Task<ModDto?> LoadModFromPathAsync(string filePath)
+    public ModDto? LoadModFromPath(string filePath)
     {
         var mod = new ModDto
         {
@@ -117,9 +118,9 @@ public sealed partial class LocalService : ILocalService
         }
 
         mod.Name = attribute.Signature!.FixedArguments[1].ToString();
-        mod.Version = attribute.Signature!.FixedArguments[2].ToString();
+        mod.LocalVersion = attribute.Signature!.FixedArguments[2].ToString();
         mod.Author = attribute.Signature!.FixedArguments[3].ToString();
-        mod.SHA256 = await HashUtils.ComputeSHA256HashFromPathAsync(filePath).ConfigureAwait(false);
+        mod.SHA256 = HashUtils.ComputeSHA256HashFromPath(filePath);
 
         return mod;
     }
@@ -145,6 +146,32 @@ public sealed partial class LocalService : ILocalService
         Logger.Information("Launching game with launch arguments: {LaunchArguments}", launchArguments);
     }
 
+    public async ValueTask<string> ReadGameVersionAsync()
+    {
+        var assetsManager = new AssetsManager();
+        assetsManager.LoadClassPackage(ResourceUtils.GetResource("classdata.tpk"));
+        var bundlePath = Path.Combine(Setting.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        try
+        {
+            var instance = assetsManager.LoadAssetsFile(bundlePath, true);
+            assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
+            var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
+            var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
+
+            Logger.Information("Game version read successfully: {BundleVersion}", bundleVersion);
+            assetsManager.UnloadAll();
+            return bundleVersion;
+        }
+        catch (Exception ex)
+        {
+            Logger.Fatal(ex, "Read game version failed, showing error message box...");
+            await FormatErrorMessageBoxAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
+            Environment.Exit(0);
+        }
+
+        return string.Empty;
+    }
+
     public bool ExtractZipFile(string zipPath, string extractPath)
     {
         try
@@ -158,6 +185,7 @@ public sealed partial class LocalService : ILocalService
             return false;
         }
     }
+
 
     #region Injections
 

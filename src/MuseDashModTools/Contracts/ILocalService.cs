@@ -8,7 +8,8 @@ public interface ILocalService
     HashSet<string?> GetLibFileNames();
     Task<bool> InstallMelonLoaderAsync();
     Task<bool> UninstallMelonLoaderAsync();
-    Task<ModDto?> LoadModFromPathAsync(string filePath);
+    ModDto? LoadModFromPath(string filePath);
     void LaunchGame(bool isModded);
+    ValueTask<string> ReadGameVersionAsync();
     bool ExtractZipFile(string zipPath, string extractPath);
 }
