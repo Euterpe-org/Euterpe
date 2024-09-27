@@ -11,7 +11,7 @@ public sealed class ModDto : ObservableObject
     public string DownloadLink { get; set; } = string.Empty;
     public string HomePage { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
-    public string[]? GameVersion { get; set; } = [];
+    public string[] GameVersion { get; set; } = [];
     public string Description { get; set; } = string.Empty;
     public string[] DependentMods { get; set; } = [];
     public string[] DependentLibs { get; set; } = [];
@@ -46,7 +46,7 @@ public sealed class ModDto : ObservableObject
     {
         get
         {
-            if (GameVersion is null or [])
+            if (GameVersion is [])
             {
                 return "Unknown";
             }
