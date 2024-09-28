@@ -1,4 +1,7 @@
+using System.Collections.ObjectModel;
 using Avalonia.Styling;
+using CommunityToolkit.Mvvm.Messaging;
+using static MuseDashModTools.Models.Constants.PageNames;
 
 namespace MuseDashModTools.ViewModels;
 
@@ -9,11 +12,35 @@ public sealed partial class MainWindowViewModel : ViewModelBase
 
     public static string Version => $"v{AppVersion}";
 
-    public static PageNavItem[] PageNavItems =>
+    public static ObservableCollection<PageNavItem> PageNavItems =>
     [
-        new() { Name = "Mod Manage" },
-        new() { Name = "Setting" }
+        new(HomePageName),
+        new("Modding")
+        {
+            IsNavigable = false,
+            Children =
+            [
+                ModManagePageName,
+                ModDevelopPageName
+            ]
+        },
+        new("Charting")
+        {
+            IsNavigable = false,
+            Children =
+            [
+                ChartManagePageName,
+                ChartToolkitPageName
+            ]
+        },
+        new(AboutPageName),
+        new(SettingPageName)
     ];
+
+    public MainWindowViewModel()
+    {
+        WeakReferenceMessenger.Default.Register<MainWindowViewModel, string>(this, OnNavigation);
+    }
 
     [RelayCommand]
     private async Task InitializeAsync()
@@ -30,7 +57,38 @@ public sealed partial class MainWindowViewModel : ViewModelBase
         Logger.Information("MainWindow Initialized");
     }
 
+    private void OnNavigation(MainWindowViewModel vm, string pageName)
+    {
+        switch (pageName)
+        {
+            case HomePageName:
+                NavigationService.NavigateToView<HomePage>();
+                break;
+            case ModManagePageName:
+                NavigationService.NavigateToView<ModManagePage>();
+                break;
+            /*case PageNames.ModDevelopPage:
+                NavigationService.NavigateToView<ModDevelopPage>();
+                break;*/
+            case ChartManagePageName:
+                NavigationService.NavigateToView<ChartManagePage>();
+                break;
+            /*case PageNames.ChartToolkitPage:
+                NavigationService.NavigateToView<ChartToolkitPage>();
+                break;*/
+            case AboutPageName:
+                NavigationService.NavigateToView<AboutPage>();
+                break;
+            case SettingPageName:
+                NavigationService.NavigateToView<SettingPage>();
+                break;
+        }
+    }
+
     #region Injections
+
+    [UsedImplicitly]
+    public IDownloadManager DownloadManager { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;

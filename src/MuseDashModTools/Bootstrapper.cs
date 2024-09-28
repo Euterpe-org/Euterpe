@@ -97,13 +97,12 @@ public static class Bootstrapper
         _builder.RegisterType<MainWindowViewModel>().PropertiesAutowired().SingleInstance();
 
         // Pages
-        _builder.RegisterType<AboutPageViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<ChartManagePageViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<InfoJsonPageViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<LogAnalysisPageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<HomePageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<ModManagePageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ChartManagePageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<LogAnalysisPageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<AboutPageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<SettingPageViewModel>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<MainMenuPageViewModel>().PropertiesAutowired().SingleInstance();
 
         // Dialog
         _builder.RegisterType<DownloadDialogViewModel>().PropertiesAutowired().SingleInstance();

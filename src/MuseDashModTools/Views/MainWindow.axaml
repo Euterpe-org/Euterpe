@@ -51,9 +51,12 @@
 
     <Grid ColumnDefinitions="Auto,Auto">
         <u:NavMenu Grid.Column="0"
-                   HeaderBinding="{Binding .}"
+                   CommandBinding="{Binding NavigationCommand}"
+                   HeaderBinding="{Binding Name}"
                    IsHorizontalCollapsed="{Binding IsCollapsed, Mode=TwoWay}"
-                   ItemsSource="{Binding PageNavItems}">
+                   ItemsSource="{Binding PageNavItems}"
+                   SubMenuBinding="{Binding Children}">
+
             <u:NavMenu.Header>
                 <DockPanel Margin="8" HorizontalAlignment="Center">
                     <Image DockPanel.Dock="Left"
