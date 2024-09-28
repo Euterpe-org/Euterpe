@@ -14,7 +14,7 @@ public sealed class PageNavItem(string name)
 
     public ICommand NavigationCommand => new RelayCommand(() =>
     {
-        if (!IsNavigable)
+        if (IsSeparator || !IsNavigable)
         {
             return;
         }
