@@ -33,7 +33,7 @@ jobs:
           - { os: macos-latest, name: osx }
         target-arch:
           - x64
-          - arm64 
+          - arm64
         dotnet-version:
           - '8.0'
         self-contained:
