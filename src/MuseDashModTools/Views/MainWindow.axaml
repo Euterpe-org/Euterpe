@@ -57,6 +57,12 @@
                    ItemsSource="{Binding PageNavItems}"
                    SubMenuBinding="{Binding Children}">
 
+            <u:NavMenu.Styles>
+                <Style x:DataType="models:PageNavItem" Selector="u|NavMenuItem">
+                    <Setter Property="IsSeparator" Value="{Binding IsSeparator}"/>
+                </Style>
+            </u:NavMenu.Styles>
+
             <u:NavMenu.Header>
                 <DockPanel Margin="8" HorizontalAlignment="Center">
                     <Image DockPanel.Dock="Left"
