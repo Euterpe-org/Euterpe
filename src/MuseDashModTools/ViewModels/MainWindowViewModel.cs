@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.ViewModels;
 
-public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<SelectedPageChangedMessage>
+public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<string>
 {
     [ObservableProperty]
     private bool _isCollapsed;
@@ -38,7 +38,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<Sele
 
     public MainWindowViewModel()
     {
-        WeakReferenceMessenger.Default.Register(this);
+        WeakReferenceMessenger.Default.Register(this, "NavigatePage");
     }
 
     [RelayCommand]
