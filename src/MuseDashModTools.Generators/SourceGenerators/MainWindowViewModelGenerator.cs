@@ -47,9 +47,9 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
               partial class MainWindowViewModel
               {
                   {{GetGeneratedCodeAttribute(nameof(NavigationServiceGenerator))}}
-                  private void OnNavigation(MainWindowViewModel vm, string pageName)
+                  public void Receive(SelectedPageChangedMessage message)
                   {
-                      switch (pageName)
+                      switch (message.Value)
                       {
                           {{sb.ToString().TrimEnd()}}
                       }

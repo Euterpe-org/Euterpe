@@ -18,6 +18,7 @@ global using MuseDashModTools.Extensions;
 global using MuseDashModTools.Formatters;
 global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Enums;
+global using MuseDashModTools.Models.Messages;
 global using MuseDashModTools.Services;
 global using MuseDashModTools.Utils;
 global using MuseDashModTools.ViewModels;

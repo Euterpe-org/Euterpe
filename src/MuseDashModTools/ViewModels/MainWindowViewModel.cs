@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.ViewModels;
 
-public sealed partial class MainWindowViewModel : ViewModelBase
+public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<SelectedPageChangedMessage>
 {
     [ObservableProperty]
     private bool _isCollapsed;
@@ -14,7 +14,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase
     public static ObservableCollection<PageNavItem> PageNavItems =>
     [
         new(HomePageName),
-        new("Modding")
+        new(ModdingCategoryName)
         {
             IsNavigable = false,
             Children =
@@ -23,7 +23,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase
                 ModDevelopPageName
             ]
         },
-        new("Charting")
+        new(ChartingCategoryName)
         {
             IsNavigable = false,
             Children =
@@ -38,7 +38,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        WeakReferenceMessenger.Default.Register<MainWindowViewModel, string>(this, OnNavigation);
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     [RelayCommand]

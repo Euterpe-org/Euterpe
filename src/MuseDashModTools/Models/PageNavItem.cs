@@ -19,7 +19,7 @@ public sealed class PageNavItem(string name)
             return;
         }
 
-        WeakReferenceMessenger.Default.Send(Name);
+        WeakReferenceMessenger.Default.Send<SelectedPageChangedMessage>(Name);
     });
 
     public static implicit operator PageNavItem(string name) => new(name);
