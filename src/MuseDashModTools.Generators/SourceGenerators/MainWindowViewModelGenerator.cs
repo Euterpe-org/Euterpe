@@ -35,7 +35,7 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
             }
 
             sb.AppendLine($"case {name}Name:");
-            sb.AppendLine($"\tNavigationService.NavigateToView<{name}>();");
+            sb.AppendLine($"\tNavigationService.NavigateTo<{name}>();");
             sb.AppendLine("\tbreak;");
         }
 
@@ -46,7 +46,7 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
 
               partial class MainWindowViewModel
               {
-                  {{GetGeneratedCodeAttribute(nameof(NavigationServiceGenerator))}}
+                  {{GetGeneratedCodeAttribute(nameof(MainWindowViewModelGenerator))}}
                   public void Receive(SelectedPageChangedMessage message)
                   {
                       switch (message.Value)
