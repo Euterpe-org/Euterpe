@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using Avalonia.Styling;
 using CommunityToolkit.Mvvm.Messaging;
-using static MuseDashModTools.Models.Constants.PageNames;
 
 namespace MuseDashModTools.ViewModels;
 
@@ -55,34 +54,6 @@ public sealed partial class MainWindowViewModel : ViewModelBase
 #endif
         GetCurrentDesktop().Exit += (_, _) => SavingService.SaveSettingAsync();
         Logger.Information("MainWindow Initialized");
-    }
-
-    private void OnNavigation(MainWindowViewModel vm, string pageName)
-    {
-        switch (pageName)
-        {
-            case HomePageName:
-                NavigationService.NavigateToView<HomePage>();
-                break;
-            case ModManagePageName:
-                NavigationService.NavigateToView<ModManagePage>();
-                break;
-            /*case PageNames.ModDevelopPage:
-                NavigationService.NavigateToView<ModDevelopPage>();
-                break;*/
-            case ChartManagePageName:
-                NavigationService.NavigateToView<ChartManagePage>();
-                break;
-            /*case PageNames.ChartToolkitPage:
-                NavigationService.NavigateToView<ChartToolkitPage>();
-                break;*/
-            case AboutPageName:
-                NavigationService.NavigateToView<AboutPage>();
-                break;
-            case SettingPageName:
-                NavigationService.NavigateToView<SettingPage>();
-                break;
-        }
     }
 
     #region Injections
