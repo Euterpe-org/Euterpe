@@ -9,4 +9,10 @@
              DataContext="{ext:DependencyInjection Type=pages:ChartManagePageViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="700"
-             d:DesignWidth="1000" />
+             d:DesignWidth="1000">
+
+    <Design.DataContext>
+        <pages:ChartManagePageViewModel />
+    </Design.DataContext>
+
+</UserControl>

@@ -12,7 +12,9 @@
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
-    <UserControl.Resources />
+    <Design.DataContext>
+        <pages:ModManagePageViewModel />
+    </Design.DataContext>
 
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Initialized">

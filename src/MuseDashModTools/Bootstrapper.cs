@@ -99,7 +99,9 @@ public static class Bootstrapper
         // Pages
         _builder.RegisterType<HomePageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<ModManagePageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ModDevelopPageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<ChartManagePageViewModel>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterType<ChartToolkitPageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<LogAnalysisPageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<AboutPageViewModel>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<SettingPageViewModel>().PropertiesAutowired().SingleInstance();

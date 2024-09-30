@@ -4,15 +4,16 @@
              xmlns:ext="clr-namespace:MuseDashModTools.Extensions.MarkupExtensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
-             x:Class="MuseDashModTools.Views.Pages.AboutPage"
-             x:DataType="pages:AboutPageViewModel"
-             DataContext="{ext:DependencyInjection Type=pages:AboutPageViewModel}"
+             x:Class="MuseDashModTools.Views.Pages.ModDevelopPage"
+             x:DataType="pages:ModDevelopPageViewModel"
+             DataContext="{ext:DependencyInjection Type=pages:ModDevelopPageViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
 
     <Design.DataContext>
-        <pages:AboutPageViewModel />
+        <pages:ModDevelopPageViewModel />
     </Design.DataContext>
 
 </UserControl>
