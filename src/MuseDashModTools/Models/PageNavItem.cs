@@ -1,4 +1,3 @@
-using Avalonia.Media;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.Models;
@@ -8,17 +7,13 @@ public sealed partial class PageNavItem(string displayName, string key) : Observ
     public PageNavItem[] Children { get; set; } = [];
     public string DisplayName { get; set; } = displayName;
     public string Key { get; set; } = key;
+    public bool IsNavigable { get; init; } = true;
     public bool IsSeparator { get; set; }
-    public StreamGeometry? Icon { get; set; }
-
-    public PageNavItem(string displayName) : this(displayName, string.Empty)
-    {
-    }
 
     [RelayCommand]
     private void Navigation()
     {
-        if (Key.IsNullOrEmpty() || IsSeparator)
+        if (!IsNavigable || IsSeparator)
         {
             return;
         }

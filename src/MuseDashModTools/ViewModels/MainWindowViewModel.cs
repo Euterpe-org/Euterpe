@@ -14,16 +14,18 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
     public static ObservableCollection<PageNavItem> PageNavItems =>
     [
         new(XAML_Page_Home, HomePageName),
-        new(XAML_Page_Category_Modding)
+        new(XAML_Page_Category_Modding, ModdingCategoryName)
         {
+            IsNavigable = false,
             Children =
             [
                 new PageNavItem(XAML_Page_ModManage, ModManagePageName),
                 new PageNavItem(XAML_Page_ModDevelop, ModDevelopPageName)
             ]
         },
-        new(XAML_Page_Category_Charting)
+        new(XAML_Page_Category_Charting, ChartingCategoryName)
         {
+            IsNavigable = false,
             Children =
             [
                 new PageNavItem(XAML_Page_ChartManage, ChartManagePageName),

@@ -1,5 +1,6 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:converters="clr-namespace:MuseDashModTools.Converters.IValueConverters"
               xmlns:ext="using:MuseDashModTools.Extensions.MarkupExtensions"
               xmlns:models="using:MuseDashModTools.Models"
               xmlns:u="https://irihi.tech/ursa"
@@ -16,6 +17,10 @@
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
+
+    <u:UrsaWindow.Resources>
+        <converters:PageIconConverter x:Key="PageIconConverter" />
+    </u:UrsaWindow.Resources>
 
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Opened">
@@ -52,7 +57,8 @@
     <Grid ColumnDefinitions="Auto,Auto">
         <u:NavMenu Grid.Column="0"
                    CommandBinding="{Binding NavigationCommand, Mode=OneTime}"
-                   HeaderBinding="{Binding DisplayName, Mode=OneTime}"
+                   HeaderBinding="{Binding ., Mode=OneTime}"
+                   IconBinding="{Binding Key, Mode=OneTime}"
                    IsHorizontalCollapsed="{Binding IsCollapsed, Mode=TwoWay}"
                    ItemsSource="{Binding PageNavItems, Mode=OneTime}"
                    SubMenuBinding="{Binding Children, Mode=OneTime}">
@@ -62,6 +68,19 @@
                     <Setter Property="IsSeparator" Value="{Binding IsSeparator, Mode=OneWay}" />
                 </Style>
             </u:NavMenu.Styles>
+
+            <u:NavMenu.IconTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <u:TwoTonePathIcon Width="16"
+                                       Height="16"
+                                       ActiveForeground="{DynamicResource SemiBlue5}"
+                                       ActiveStrokeBrush="{DynamicResource SemiBlue5}"
+                                       Data="{Binding ., Converter={StaticResource PageIconConverter}}"
+                                       Foreground="{DynamicResource SemiGrey5}"
+                                       IsActive="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenuItem}, Path=IsHighlighted, Mode=TwoWay}"
+                                       StrokeBrush="{DynamicResource SemiGrey5}" />
+                </DataTemplate>
+            </u:NavMenu.IconTemplate>
 
             <u:NavMenu.Header>
                 <DockPanel Margin="8" HorizontalAlignment="Center">
@@ -84,7 +103,7 @@
 
             <u:NavMenu.HeaderTemplate>
                 <DataTemplate x:DataType="models:PageNavItem">
-                    <TextBlock FontSize="20" Text="{Binding Key, Mode=OneTime}" />
+                    <TextBlock FontSize="16" Text="{Binding DisplayName, Mode=OneTime}" />
                 </DataTemplate>
             </u:NavMenu.HeaderTemplate>
         </u:NavMenu>
