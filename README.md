@@ -7,6 +7,14 @@
 [![Star](https://img.shields.io/github/stars/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/stargazers)
 [![Release Version](https://img.shields.io/github/v/release/MDModsDev/MuseDashModToolsUI)](https://github.com/MDModsDev/MuseDashModToolsUI/releases/latest)
 
+> [!NOTE]
+> The Project is currently under completely rewrite, master branch is no longer maintained.
+> 
+> If you want to contribute to the project (Especially the UI part), see [rewrite branch](https://github.com/MDModsDev/MuseDashModTools/tree/rewrite) and contact [lxymahatma](https://github.com/lxymahatma) for more information.
+> 
+> Translations are currently stopped until the rewrite is finished.
+
+
 **A UI app making muse dash modding easier**
 
 [中文说明](https://www.bilibili.com/read/cv22748380)
