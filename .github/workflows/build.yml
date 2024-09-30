@@ -1,18 +1,19 @@
-name: Build Project
+name: Build and Test Project
 
 on:
   push:
     branches:
-      - 'main'
       - 'master'
-      - 'dev/rewrite'
+      - 'dev'
     tags:
       - 'v?[0-9]+.[0-9]+.[0-9]+'
+    paths:
+      - src/**
+      - tests/**
   pull_request:
     branches:
-      - 'main'
       - 'master'
-      - 'dev/rewrite'
+      - 'dev'
   workflow_dispatch:
 
 defaults:
@@ -51,11 +52,11 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish --configuration=${{ matrix.build-type }} --arch=${{ matrix.target-arch }} --self-contained=${{ matrix.self-contained }}
+          dotnet publish -a ${{ matrix.target-arch }} -c ${{ matrix.build-type }} --self-contained=${{ matrix.self-contained }}
 
       - name: Test Project
         run: |
-          dotnet test --configuration=${{ matrix.build-type }}
+          dotnet test -c ${{ matrix.build-type }}
 
       - name: List Result
         working-directory: ./
