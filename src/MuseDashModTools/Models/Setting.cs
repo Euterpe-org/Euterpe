@@ -30,15 +30,8 @@ public sealed class Setting
     public bool ShowConsole { get; set; }
 
     // Message Box Settings
-    public AskType AskInstallMuseDashModTools { get; set; } = AskType.Always;
-
-    public AskType AskEnableDependencyWhenInstall { get; set; } = AskType.Always;
-
-    public AskType AskEnableDependencyWhenEnable { get; set; } = AskType.Always;
-
-    public AskType AskDisableDependencyWhenDelete { get; set; } = AskType.Always;
-
-    public AskType AskDisableDependencyWhenDisable { get; set; } = AskType.Always;
+    public AskType AskEnableDependencyWhenEnableCurrent { get; set; } = AskType.Always;
+    public AskType AskDisableDependentWhenDisableCurrent { get; set; } = AskType.Always;
 
     // Ignored Paths
     [JsonIgnore]
