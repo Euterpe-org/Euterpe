@@ -73,9 +73,6 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>번역 도움</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>홈페이지</value>
-    </data>
     <data name="XAML_Installed" xml:space="preserve">
         <value>설치됨</value>
     </data>
@@ -285,5 +282,23 @@
     </data>
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
         <value>DJMAX</value>
+    </data>
+    <data name="XAML_Page_Home" xml:space="preserve">
+        <value>홈페이지</value>
+    </data>
+    <data name="XAML_Page_About" xml:space="preserve">
+        <value>대해서</value>
+    </data>
+    <data name="XAML_Page_ChartManage" xml:space="preserve">
+        <value>차트</value>
+    </data>
+    <data name="XAML_Page_LogAnalysis" xml:space="preserve">
+        <value>분석</value>
+    </data>
+    <data name="XAML_Page_ModManage" xml:space="preserve">
+        <value>모드</value>
+    </data>
+    <data name="XAML_Page_Setting" xml:space="preserve">
+        <value>세팅</value>
     </data>
 </root>

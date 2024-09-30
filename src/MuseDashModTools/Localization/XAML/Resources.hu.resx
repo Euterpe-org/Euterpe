@@ -73,9 +73,6 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>Közreműködés</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>Fő-oldal</value>
-    </data>
     <data name="XAML_Installed" xml:space="preserve">
         <value>Telepített</value>
     </data>
@@ -285,5 +282,23 @@
     </data>
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
         <value>DJMAX</value>
+    </data>
+    <data name="XAML_Page_Home" xml:space="preserve">
+        <value>Fő-oldal</value>
+    </data>
+    <data name="XAML_Page_About" xml:space="preserve">
+        <value>A projektről</value>
+    </data>
+    <data name="XAML_Page_ChartManage" xml:space="preserve">
+        <value>Zenék</value>
+    </data>
+    <data name="XAML_Page_LogAnalysis" xml:space="preserve">
+        <value>Elemzés</value>
+    </data>
+    <data name="XAML_Page_ModManage" xml:space="preserve">
+        <value>Modok</value>
+    </data>
+    <data name="XAML_Page_Setting" xml:space="preserve">
+        <value>Beállítások</value>
     </data>
 </root>

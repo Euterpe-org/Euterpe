@@ -73,9 +73,6 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>Помочь с переводом</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>Домашняя страница</value>
-    </data>
     <data name="XAML_Installed" xml:space="preserve">
         <value>Установленные</value>
     </data>
@@ -285,5 +282,23 @@
     </data>
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
         <value>DJMAX</value>
+    </data>
+    <data name="XAML_Page_Home" xml:space="preserve">
+        <value>Домашняя страница</value>
+    </data>
+    <data name="XAML_Page_About" xml:space="preserve">
+        <value>Инфо</value>
+    </data>
+    <data name="XAML_Page_ChartManage" xml:space="preserve">
+        <value>Чарты</value>
+    </data>
+    <data name="XAML_Page_LogAnalysis" xml:space="preserve">
+        <value>Анализ</value>
+    </data>
+    <data name="XAML_Page_ModManage" xml:space="preserve">
+        <value>Моды</value>
+    </data>
+    <data name="XAML_Page_Setting" xml:space="preserve">
+        <value>Настройки</value>
     </data>
 </root>

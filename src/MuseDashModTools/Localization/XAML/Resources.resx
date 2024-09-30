@@ -302,4 +302,34 @@
     <data name="XAML_News" xml:space="preserve">
         <value>News</value>
     </data>
+    <data name="XAML_Page_ModManage" xml:space="preserve">
+        <value>Mod Manage</value>
+    </data>
+    <data name="XAML_Page_About" xml:space="preserve">
+        <value>About</value>
+    </data>
+    <data name="XAML_Page_ChartManage" xml:space="preserve">
+        <value>Chart Manage</value>
+    </data>
+    <data name="XAML_Page_ChartToolkit" xml:space="preserve">
+        <value>Chart Toolkit</value>
+    </data>
+    <data name="XAML_Page_Home" xml:space="preserve">
+        <value>Home</value>
+    </data>
+    <data name="XAML_Page_ModDevelop" xml:space="preserve">
+        <value>Mod Develop</value>
+    </data>
+    <data name="XAML_Page_Setting" xml:space="preserve">
+        <value>Setting</value>
+    </data>
+    <data name="XAML_Page_LogAnalysis" xml:space="preserve">
+        <value>Log Analysis</value>
+    </data>
+    <data name="XAML_Page_Category_Modding" xml:space="preserve">
+        <value>Modding</value>
+    </data>
+    <data name="XAML_Page_Category_Charting" xml:space="preserve">
+        <value>Charting</value>
+    </data>
 </root>

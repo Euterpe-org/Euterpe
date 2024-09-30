@@ -1,26 +1,28 @@
-using System.Windows.Input;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.Models;
 
-public sealed class PageNavItem(string name)
+public sealed partial class PageNavItem(string displayName, string key) : ObservableObject
 {
     public PageNavItem[] Children { get; set; } = [];
-    public string Name { get; set; } = name;
+    public string DisplayName { get; set; } = displayName;
+    public string Key { get; set; } = key;
     public bool IsSeparator { get; set; }
-    public bool IsNavigable { get; init; } = true;
     public StreamGeometry? Icon { get; set; }
 
-    public ICommand NavigationCommand => new RelayCommand(() =>
+    public PageNavItem(string displayName) : this(displayName, string.Empty)
     {
-        if (IsSeparator || !IsNavigable)
+    }
+
+    [RelayCommand]
+    private void Navigation()
+    {
+        if (Key.IsNullOrEmpty() || IsSeparator)
         {
             return;
         }
 
-        WeakReferenceMessenger.Default.Send(Name, "NavigatePage");
-    });
-
-    public static implicit operator PageNavItem(string name) => new(name);
+        WeakReferenceMessenger.Default.Send(Key, "NavigatePage");
+    }
 }

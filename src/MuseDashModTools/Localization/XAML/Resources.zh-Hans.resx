@@ -73,9 +73,6 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>帮助翻译</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>主页</value>
-    </data>
     <data name="XAML_Installed" xml:space="preserve">
         <value>已安装</value>
     </data>
@@ -300,5 +297,35 @@
     </data>
     <data name="XAML_News" xml:space="preserve">
         <value>新闻</value>
+    </data>
+    <data name="XAML_Page_ModManage" xml:space="preserve">
+        <value>模组管理</value>
+    </data>
+    <data name="XAML_Page_ModDevelop" xml:space="preserve">
+        <value>模组开发</value>
+    </data>
+    <data name="XAML_Page_Home" xml:space="preserve">
+        <value>主页</value>
+    </data>
+    <data name="XAML_Page_ChartToolkit" xml:space="preserve">
+        <value>谱面工具</value>
+    </data>
+    <data name="XAML_Page_About" xml:space="preserve">
+        <value>关于</value>
+    </data>
+    <data name="XAML_Page_ChartManage" xml:space="preserve">
+        <value>谱面管理</value>
+    </data>
+    <data name="XAML_Page_Setting" xml:space="preserve">
+        <value>设置</value>
+    </data>
+    <data name="XAML_Page_Category_Charting" xml:space="preserve">
+        <value>谱面</value>
+    </data>
+    <data name="XAML_Page_Category_Modding" xml:space="preserve">
+        <value>模组</value>
+    </data>
+    <data name="XAML_Page_LogAnalysis" xml:space="preserve">
+        <value>日志分析</value>
     </data>
 </root>

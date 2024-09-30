@@ -52,7 +52,7 @@
     <Grid ColumnDefinitions="Auto,Auto">
         <u:NavMenu Grid.Column="0"
                    CommandBinding="{Binding NavigationCommand, Mode=OneTime}"
-                   HeaderBinding="{Binding Name, Mode=OneTime}"
+                   HeaderBinding="{Binding DisplayName, Mode=OneTime}"
                    IsHorizontalCollapsed="{Binding IsCollapsed, Mode=TwoWay}"
                    ItemsSource="{Binding PageNavItems, Mode=OneTime}"
                    SubMenuBinding="{Binding Children, Mode=OneTime}">
@@ -84,7 +84,7 @@
 
             <u:NavMenu.HeaderTemplate>
                 <DataTemplate x:DataType="models:PageNavItem">
-                    <TextBlock FontSize="20" Text="{Binding Name, Mode=OneTime}" />
+                    <TextBlock FontSize="20" Text="{Binding Key, Mode=OneTime}" />
                 </DataTemplate>
             </u:NavMenu.HeaderTemplate>
         </u:NavMenu>

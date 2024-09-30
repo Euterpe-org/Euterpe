@@ -73,9 +73,6 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>幫助翻譯</value>
     </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-        <value>主頁</value>
-    </data>
     <data name="XAML_Installed" xml:space="preserve">
         <value>已安裝</value>
     </data>
@@ -285,5 +282,20 @@
     </data>
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
         <value>DJMAX</value>
+    </data>
+    <data name="XAML_Page_Home" xml:space="preserve">
+        <value>主頁</value>
+    </data>
+    <data name="XAML_Page_Setting" xml:space="preserve">
+        <value>設置</value>
+    </data>
+    <data name="XAML_Page_Category_Charting" xml:space="preserve">
+        <value>譜面</value>
+    </data>
+    <data name="XAML_Page_Category_Modding" xml:space="preserve">
+        <value>模組</value>
+    </data>
+    <data name="XAML_Page_About" xml:space="preserve">
+        <value>關於</value>
     </data>
 </root>

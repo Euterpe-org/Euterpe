@@ -9,8 +9,8 @@
 
 namespace MuseDashModTools.Localization.XAML {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,18 +19,18 @@ namespace MuseDashModTools.Localization.XAML {
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
-    [DebuggerNonUserCode()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -44,7 +44,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -58,7 +58,7 @@ namespace MuseDashModTools.Localization.XAML {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
@@ -67,7 +67,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_All", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Analyze Log.
         /// </summary>
@@ -76,7 +76,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Analyze", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
@@ -85,7 +85,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Apply", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always Ask.
         /// </summary>
@@ -94,7 +94,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_AskType_Always", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
@@ -103,7 +103,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_AskType_No", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
@@ -112,7 +112,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_AskType_Yes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
@@ -121,7 +121,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Back", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Change Path.
         /// </summary>
@@ -130,7 +130,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChangePath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Downloads: .
         /// </summary>
@@ -139,7 +139,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Chart_Downloads", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Likes: .
         /// </summary>
@@ -148,7 +148,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Chart_Likes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search Charts (Name, Author, Charter).
         /// </summary>
@@ -157,7 +157,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Chart_SearchBar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Charter: .
         /// </summary>
@@ -166,7 +166,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Charter", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Easy.
         /// </summary>
@@ -175,7 +175,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartFilterType_Easy", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hard.
         /// </summary>
@@ -184,7 +184,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartFilterType_Hard", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hidden.
         /// </summary>
@@ -193,7 +193,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartFilterType_Hidden", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Master.
         /// </summary>
@@ -202,7 +202,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartFilterType_Master", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Filter by.
         /// </summary>
@@ -211,7 +211,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartFilterTypes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
@@ -220,7 +220,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartSortOption_Default", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Downloads.
         /// </summary>
@@ -229,7 +229,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartSortOption_Downloads", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Latest.
         /// </summary>
@@ -238,7 +238,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartSortOption_Latest", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Level.
         /// </summary>
@@ -247,7 +247,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartSortOption_Level", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Likes.
         /// </summary>
@@ -256,7 +256,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartSortOption_Likes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
@@ -265,7 +265,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartSortOption_Name", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sort by: .
         /// </summary>
@@ -274,7 +274,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChartSortOptions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check Update.
         /// </summary>
@@ -283,7 +283,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Check_Update", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose Chart Folder.
         /// </summary>
@@ -292,7 +292,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ChooseChartPath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config File.
         /// </summary>
@@ -301,7 +301,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ConfigFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open Custom_Albums Folder.
         /// </summary>
@@ -310,7 +310,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_CustomAlbumsFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app.
         /// </summary>
@@ -319,7 +319,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_CustomDownloadSourceFormat", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Download.
         /// </summary>
@@ -328,7 +328,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Download_Chart", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Download Prerelease: .
         /// </summary>
@@ -337,7 +337,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_DownloadPrerelease", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Download Source: .
         /// </summary>
@@ -346,7 +346,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_DownloadSource", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Custom.
         /// </summary>
@@ -355,7 +355,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_DownloadSource_Custom", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gitee.
         /// </summary>
@@ -364,7 +364,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_DownloadSource_Gitee", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Github.
         /// </summary>
@@ -373,7 +373,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_DownloadSource_Github", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Github Mirror.
         /// </summary>
@@ -382,7 +382,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_DownloadSource_GithubMirror", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
@@ -391,7 +391,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Enabled", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Font:.
         /// </summary>
@@ -400,7 +400,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Font", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Help Translate.
         /// </summary>
@@ -409,7 +409,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_HelpTranslate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to HomePage.
         /// </summary>
@@ -418,7 +418,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_HomePage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Incompatible.
         /// </summary>
@@ -427,7 +427,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Incompatible", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Artist.
         /// </summary>
@@ -436,7 +436,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_Author", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to BPM.
         /// </summary>
@@ -445,7 +445,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_BPM", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
@@ -454,7 +454,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_ChartName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Difficulty.
         /// </summary>
@@ -463,7 +463,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_Difficulty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hide Bms Difficulty.
         /// </summary>
@@ -472,7 +472,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_HideBmsDifficulty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hide Bms Message.
         /// </summary>
@@ -481,7 +481,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_HideBmsMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hide Bms Mode.
         /// </summary>
@@ -490,7 +490,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_HideBmsMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Level Designer.
         /// </summary>
@@ -499,7 +499,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_LevelDesigner", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Scene.
         /// </summary>
@@ -508,7 +508,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_Scene", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search Tags.
         /// </summary>
@@ -517,7 +517,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_InfoJson_SearchTags", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Install\nMelonLoader.
         /// </summary>
@@ -526,7 +526,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Install_MelonLoader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Install.
         /// </summary>
@@ -535,7 +535,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Install_Mod", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Installed.
         /// </summary>
@@ -544,7 +544,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Installed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Language: .
         /// </summary>
@@ -553,7 +553,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Language", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Launch Modded.
         /// </summary>
@@ -562,7 +562,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_LaunchModded", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Launch Vanilla.
         /// </summary>
@@ -571,7 +571,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_LaunchVanilla", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open Log Folder.
         /// </summary>
@@ -580,7 +580,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_LogFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
@@ -589,7 +589,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_CompatibleGameVersion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Dependencies: .
         /// </summary>
@@ -598,7 +598,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Dependencies", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} \n\nAuthor: {1} \nOnline Version: {2}\nCompatible Game Version: {3}.
         /// </summary>
@@ -607,7 +607,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Duplicated by: .
         /// </summary>
@@ -616,7 +616,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Duplicate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0}&apos;s {1} version is incompatible with your game version.
         /// </summary>
@@ -625,7 +625,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Incompatible", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Local Version: {0} (Modified).
         /// </summary>
@@ -634,7 +634,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Modified", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Local Version: {0} (WOW MOD DEV).
         /// </summary>
@@ -643,7 +643,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Newer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Local Version: {0}.
         /// </summary>
@@ -652,7 +652,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Normal", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Local Version: {0} (Has a newer version: {1}).
         /// </summary>
@@ -661,7 +661,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_Outdated", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
         /// </summary>
@@ -670,7 +670,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Mod_SearchBar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
@@ -679,7 +679,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ModsFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to News.
         /// </summary>
@@ -688,7 +688,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_News", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Outdated.
         /// </summary>
@@ -697,7 +697,97 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Outdated", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string XAML_Page_About {
+            get {
+                return ResourceManager.GetString("XAML_Page_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Charting.
+        /// </summary>
+        internal static string XAML_Page_Category_Charting {
+            get {
+                return ResourceManager.GetString("XAML_Page_Category_Charting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modding.
+        /// </summary>
+        internal static string XAML_Page_Category_Modding {
+            get {
+                return ResourceManager.GetString("XAML_Page_Category_Modding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart Manage.
+        /// </summary>
+        internal static string XAML_Page_ChartManage {
+            get {
+                return ResourceManager.GetString("XAML_Page_ChartManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart Toolkit.
+        /// </summary>
+        internal static string XAML_Page_ChartToolkit {
+            get {
+                return ResourceManager.GetString("XAML_Page_ChartToolkit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string XAML_Page_Home {
+            get {
+                return ResourceManager.GetString("XAML_Page_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log Analysis.
+        /// </summary>
+        internal static string XAML_Page_LogAnalysis {
+            get {
+                return ResourceManager.GetString("XAML_Page_LogAnalysis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Develop.
+        /// </summary>
+        internal static string XAML_Page_ModDevelop {
+            get {
+                return ResourceManager.GetString("XAML_Page_ModDevelop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Manage.
+        /// </summary>
+        internal static string XAML_Page_ModManage {
+            get {
+                return ResourceManager.GetString("XAML_Page_ModManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        internal static string XAML_Page_Setting {
+            get {
+                return ResourceManager.GetString("XAML_Page_Setting", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Muse Dash Folder Path.
         /// </summary>
@@ -706,7 +796,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Path", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reinstall.
         /// </summary>
@@ -715,7 +805,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Reinstall_Mod", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Report Bug.
         /// </summary>
@@ -724,7 +814,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_ReportBug", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Candyland.
         /// </summary>
@@ -733,7 +823,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_Candyland", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Castle.
         /// </summary>
@@ -742,7 +832,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_Castle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to DJMAX.
         /// </summary>
@@ -751,7 +841,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_DJMAX", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Let&apos;s Groove.
         /// </summary>
@@ -760,7 +850,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_LetsGroove", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Oriental.
         /// </summary>
@@ -769,7 +859,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_Oriental", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RainyNight.
         /// </summary>
@@ -778,7 +868,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_RainyNight", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Retrocity.
         /// </summary>
@@ -787,7 +877,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_Retrocity", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Space Station.
         /// </summary>
@@ -796,7 +886,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_SpaceStation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Touhou.
         /// </summary>
@@ -805,7 +895,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Scene_Touhou", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
         /// </summary>
@@ -814,7 +904,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_SearchBar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable dependents when deleting Mod.
         /// </summary>
@@ -823,7 +913,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Setting_DisableDependency_Delete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable dependents when disabling Mod.
         /// </summary>
@@ -832,7 +922,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Setting_DisableDependency_Disable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enable dependencies when enabling Mod.
         /// </summary>
@@ -841,7 +931,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Setting_EnableDependency_Enable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enable dependencies when installing Mod.
         /// </summary>
@@ -850,7 +940,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Troubleshoot.
         /// </summary>
@@ -859,7 +949,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_TroubleShoot", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Uninstall\nMelonLoader.
         /// </summary>
@@ -868,7 +958,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Uninstall_MelonLoader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Uninstall.
         /// </summary>
@@ -877,7 +967,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Uninstall_Mod", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
@@ -886,7 +976,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_Update_Mod", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Provide the link of custom download source.
         /// </summary>
@@ -895,7 +985,7 @@ namespace MuseDashModTools.Localization.XAML {
                 return ResourceManager.GetString("XAML_UseCustomDownloadSource", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to UserData.
         /// </summary>
