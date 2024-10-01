@@ -1,11 +1,12 @@
 using System.Net.Http.Json;
+using System.Text;
 
 namespace MuseDashModTools.Services;
 
 public abstract class GitHubServiceBase
 {
-    private const string ReleaseApiUrl = "https://api.github.com/repos/MDModsDev/MuseDashModTools/releases";
-    private const string LatestReleaseApiUrl = "https://api.github.com/repos/MDModsDev/MuseDashModTools/releases/latest";
+    private const string ReleaseApiUrl = GitHubApiBaseUrl + "MDModsDev/MuseDashModTools/releases";
+    private const string LatestReleaseApiUrl = GitHubApiBaseUrl + "MDModsDev/MuseDashModTools/releases/latest";
     protected const string ModLinksBaseUrl = "MDModsDev/ModLinks/main/";
     protected const string MelonLoaderBaseUrl = "LavaGang/MelonLoader/releases/download/v0.6.1/MelonLoader.x64.zip";
     protected const string UnityDependencyBaseUrl = "LavaGang/Unity-Runtime-Libraries/master/2019.4.32.zip";
@@ -13,19 +14,21 @@ public abstract class GitHubServiceBase
     protected const string Cpp2ILBaseUrl =
         "SamboyCoding/Cpp2IL/releases/download/2022.1.0-pre-release.10/Cpp2IL-2022.1.0-pre-release.10-Windows-Netframework472.zip";
 
+    protected readonly Dictionary<string, string> _readmeUrlCache = [];
+
     public abstract HttpClient Client { get; init; }
 
     public abstract ILogger Logger { get; init; }
 
     public abstract Setting Setting { get; init; }
 
-    protected abstract Task DownloadAssetAsync(GithubRelease release, CancellationToken cancellationToken = default);
+    protected abstract Task DownloadAssetAsync(GitHubRelease release, CancellationToken cancellationToken = default);
 
-    protected async Task<GithubRelease?> GetLatestReleaseAsync(CancellationToken cancellationToken = default)
+    protected async Task<GitHubRelease?> GetLatestReleaseAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            return await Client.GetFromJsonAsync<GithubRelease>(LatestReleaseApiUrl, cancellationToken).ConfigureAwait(true);
+            return await Client.GetFromJsonAsync<GitHubRelease>(LatestReleaseApiUrl, cancellationToken).ConfigureAwait(true);
         }
         catch (Exception ex)
         {
@@ -34,11 +37,11 @@ public abstract class GitHubServiceBase
         }
     }
 
-    protected async Task<GithubRelease?> GetPrereleaseAsync(CancellationToken cancellationToken = default)
+    protected async Task<GitHubRelease?> GetPrereleaseAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            var releases = await Client.GetFromJsonAsync<GithubRelease[]>(ReleaseApiUrl, cancellationToken).ConfigureAwait(true);
+            var releases = await Client.GetFromJsonAsync<GitHubRelease[]>(ReleaseApiUrl, cancellationToken).ConfigureAwait(true);
             if (releases is not null)
             {
                 return Array.Find(releases, x => x.Prerelease);
@@ -54,7 +57,7 @@ public abstract class GitHubServiceBase
         }
     }
 
-    protected async Task HandleReleaseAsync(GithubRelease? release, CancellationToken cancellationToken = default)
+    protected async Task HandleReleaseAsync(GitHubRelease? release, CancellationToken cancellationToken = default)
     {
         if (release is null)
         {
@@ -81,5 +84,27 @@ public abstract class GitHubServiceBase
 
         Logger.Information("User choose to skip this version: {Version}", releaseVersion);
         Setting.SkipVersion = releaseVersion;
+    }
+
+    protected async Task<string?> FetchReadmeFromApiAsync(string repoId, CancellationToken cancellationToken = default)
+    {
+        var url = $"{GitHubApiBaseUrl}{repoId}/readme";
+
+        try
+        {
+            var content = await Client.GetFromJsonAsync<ReadmeContent>(url, cancellationToken).ConfigureAwait(false);
+            if (content is null)
+            {
+                return null;
+            }
+
+            Logger.Information("Successfully fetched Readme from API for {Repo}", repoId);
+            return Encoding.UTF8.GetString(Convert.FromBase64String(content.Content));
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to fetch Readme from {Repo} using GitHub API", repoId);
+            return null;
+        }
     }
 }

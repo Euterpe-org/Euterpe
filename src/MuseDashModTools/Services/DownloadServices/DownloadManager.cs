@@ -14,6 +14,18 @@ public sealed partial class DownloadManager : IDownloadManager
         };
     }
 
+    public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
+    {
+        return Setting.DownloadSource switch
+        {
+            DownloadSource.GitHub => GitHubDownloadService.FetchReadmeAsync(repoId, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
+            // For Custom Download Source, because they don't choose GitHub for other downloads, so we will use GitHubMirror
+            DownloadSource.Custom => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
+            _ => throw new UnreachableException()
+        };
+    }
+
     #region Injections
 
     [UsedImplicitly]

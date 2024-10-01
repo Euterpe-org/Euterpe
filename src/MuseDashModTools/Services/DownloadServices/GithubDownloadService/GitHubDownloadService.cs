@@ -5,15 +5,13 @@ namespace MuseDashModTools.Services;
 
 public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadService
 {
-    private const string RawGitHubUrl = "https://raw.githubusercontent.com/";
-    private const string ReleaseGitHubUrl = "https://github.com/";
-    private const string RawModLinksUrl = RawGitHubUrl + ModLinksBaseUrl;
+    private const string RawModLinksUrl = GitHubRawContentBaseUrl + ModLinksBaseUrl;
     private const string ModLinksUrl = RawModLinksUrl + "ModLinks.json";
     private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
-    private const string MelonLoaderUrl = ReleaseGitHubUrl + MelonLoaderBaseUrl;
-    private const string UnityDependencyUrl = RawGitHubUrl + UnityDependencyBaseUrl;
-    private const string Cpp2ILUrl = ReleaseGitHubUrl + Cpp2ILBaseUrl;
+    private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
+    private const string UnityDependencyUrl = GitHubRawContentBaseUrl + UnityDependencyBaseUrl;
+    private const string Cpp2ILUrl = GitHubBaseUrl + Cpp2ILBaseUrl;
 
     public async Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {
@@ -126,6 +124,32 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
             Logger.Error(ex, "Failed to fetch mods from GitHub");
             return AsyncEnumerable.Empty<Mod?>();
         }
+    }
+
+    public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
+    {
+        if (_readmeUrlCache.TryGetValue(repoId, out var readme))
+        {
+            Logger.Information("Using cached Readme for {Repo}", repoId);
+            return readme;
+        }
+
+        Logger.Information("Attempting to fetch Readme for {Repo}", repoId);
+        readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken);
+        if (!string.IsNullOrEmpty(readme))
+        {
+            _readmeUrlCache[repoId] = readme;
+            return readme;
+        }
+
+        Logger.Information("Branch readme fetch failed, trying to access GitHub API for Readme");
+        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken);
+        if (!string.IsNullOrEmpty(readme))
+        {
+            _readmeUrlCache[repoId] = readme;
+        }
+
+        return readme;
     }
 
     #region Injections

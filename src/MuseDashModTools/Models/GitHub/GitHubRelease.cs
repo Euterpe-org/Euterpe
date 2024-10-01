@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace MuseDashModTools.Models;
+namespace MuseDashModTools.Models.GitHub;
 
-public sealed class GithubRelease
+public sealed class GitHubRelease
 {
     [JsonPropertyName("url")] public string Url { get; set; } = string.Empty;
 

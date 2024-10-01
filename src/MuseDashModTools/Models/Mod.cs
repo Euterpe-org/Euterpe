@@ -1,12 +1,13 @@
 ﻿namespace MuseDashModTools.Models;
 
+[UsedImplicitly]
 public sealed class Mod
 {
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
     public string DownloadLink { get; set; } = string.Empty;
-    public string HomePage { get; set; } = string.Empty;
+    public string RepositoryIdentifier { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
     public string[] GameVersion { get; set; } = [];
     public string Description { get; set; } = string.Empty;

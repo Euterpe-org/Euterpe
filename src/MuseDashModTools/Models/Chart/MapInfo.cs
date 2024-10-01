@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Models;
+﻿namespace MuseDashModTools.Models.Chart;
 
 public sealed class MapInfo
 {

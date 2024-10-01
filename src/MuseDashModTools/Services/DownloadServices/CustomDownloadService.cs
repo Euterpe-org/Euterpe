@@ -18,6 +18,7 @@ public sealed class CustomDownloadService : ICustomDownloadService
 
     public Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default) => throw new NotImplementedException();
     public Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
 }

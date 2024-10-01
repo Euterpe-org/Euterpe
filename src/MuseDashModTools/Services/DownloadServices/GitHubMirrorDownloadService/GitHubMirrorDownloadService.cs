@@ -108,6 +108,32 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
     }
 
+    public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
+    {
+        if (_readmeUrlCache.TryGetValue(repoId, out var readme))
+        {
+            Logger.Information("Using cached Readme for {Repo}", repoId);
+            return readme;
+        }
+
+        Logger.Information("Attempting to fetch Readme for {Repo}", repoId);
+        readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken);
+        if (!string.IsNullOrEmpty(readme))
+        {
+            _readmeUrlCache[repoId] = readme;
+            return readme;
+        }
+
+        Logger.Information("Branch readme fetch failed, trying to access GitHub API for Readme");
+        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken);
+        if (!string.IsNullOrEmpty(readme))
+        {
+            _readmeUrlCache[repoId] = readme;
+        }
+
+        return readme;
+    }
+
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         Logger.Information("Fetching mods from GitHubMirror {Url}...", PrimaryModLinksUrl);

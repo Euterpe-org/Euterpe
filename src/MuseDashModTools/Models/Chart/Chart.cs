@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Avalonia.Media.Imaging;
 
-namespace MuseDashModTools.Models;
+namespace MuseDashModTools.Models.Chart;
 
 public sealed class Chart
 {
@@ -55,22 +55,4 @@ public sealed class Chart
         var highestLevel = Difficulties.Max(x => x.ParseLevel());
         return highestLevel;
     }
-}
-
-public sealed class Analytic
-{
-    [JsonPropertyName("likes")]
-    public string[] Likes { get; set; } = [];
-
-    [JsonIgnore]
-    public int LikesCount => Likes.Length;
-
-    [JsonPropertyName("plays")]
-    public int Plays { get; set; }
-
-    [JsonPropertyName("views")]
-    public int Views { get; set; }
-
-    [JsonPropertyName("downloads")]
-    public int Downloads { get; set; }
 }

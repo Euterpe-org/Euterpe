@@ -11,5 +11,6 @@ public interface IDownloadService
 
     Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default);
     Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default);
+    Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default);
     IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default);
 }

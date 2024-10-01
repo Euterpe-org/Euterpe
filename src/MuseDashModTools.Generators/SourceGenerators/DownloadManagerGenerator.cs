@@ -6,7 +6,11 @@ namespace MuseDashModTools.Generators;
 [Generator(LanguageNames.CSharp)]
 public sealed class DownloadManagerGenerator : IIncrementalGenerator
 {
-    private static readonly ImmutableArray<string> IgnoredMethodNames = ["CheckForUpdatesAsync"];
+    private static readonly ImmutableArray<string> IgnoredMethodNames =
+    [
+        "CheckForUpdatesAsync",
+        "FetchReadmeAsync"
+    ];
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -66,13 +70,13 @@ public sealed class DownloadManagerGenerator : IIncrementalGenerator
             sb.AppendLine($"public {value.ReturnType} {value.MethodName}({value.MethodParameters})");
             sb.AppendLine($$"""
                             {
-                              return Setting.DownloadSource switch
-                                   {
-                                       DownloadSource.GitHub => GitHubDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
-                                       DownloadSource.GitHubMirror => GitHubMirrorDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
-                                       DownloadSource.Custom => CustomDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
-                                       _ => throw new UnreachableException()
-                                   };
+                                return Setting.DownloadSource switch
+                                {
+                                    DownloadSource.GitHub => GitHubDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
+                                    DownloadSource.GitHubMirror => GitHubMirrorDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
+                                    DownloadSource.Custom => CustomDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
+                                    _ => throw new UnreachableException()
+                                };
                             }
                             """);
         }
