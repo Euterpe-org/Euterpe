@@ -99,7 +99,14 @@
 
             <u:NavMenu.HeaderTemplate>
                 <DataTemplate x:DataType="models:PageNavItem">
-                    <TextBlock FontSize="16" Text="{Binding DisplayName, Mode=OneTime}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="16" Text="{Binding DisplayName, Mode=OneTime}" />
+                        <u:Badge
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            IsVisible="{Binding Status, Converter={x:Static ObjectConverters.IsNotNull}}"
+                            Header="{Binding Status}"/>
+                    </StackPanel>
                 </DataTemplate>
             </u:NavMenu.HeaderTemplate>
         </u:NavMenu>
