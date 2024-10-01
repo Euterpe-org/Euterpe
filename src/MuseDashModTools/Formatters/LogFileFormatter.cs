@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Serilog.Events;
+﻿using Serilog.Events;
 using Serilog.Formatting;
 
 namespace MuseDashModTools.Formatters;

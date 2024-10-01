@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace MuseDashModTools.Models;
+﻿namespace MuseDashModTools.Models;
 
 public sealed class Language(CultureInfo cultureInfo)
 {

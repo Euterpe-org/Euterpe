@@ -1,6 +1,6 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:converters="clr-namespace:MuseDashModTools.Converters.IValueConverters"
+              xmlns:converters="clr-namespace:MuseDashModTools.Converters"
               xmlns:ext="using:MuseDashModTools.Extensions.MarkupExtensions"
               xmlns:models="using:MuseDashModTools.Models"
               xmlns:u="https://irihi.tech/ursa"
@@ -17,10 +17,6 @@
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
-
-    <u:UrsaWindow.Resources>
-        <converters:PageIconConverter x:Key="PageIconConverter" />
-    </u:UrsaWindow.Resources>
 
     <Interaction.Behaviors>
         <EventTriggerBehavior EventName="Opened">
@@ -71,11 +67,11 @@
 
             <u:NavMenu.IconTemplate>
                 <DataTemplate x:DataType="x:String">
-                    <u:TwoTonePathIcon Width="16"
-                                       Height="16"
+                    <u:TwoTonePathIcon Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenu}, Path=IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
+                                       Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenu}, Path=IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
                                        ActiveForeground="{DynamicResource SemiBlue5}"
                                        ActiveStrokeBrush="{DynamicResource SemiBlue5}"
-                                       Data="{Binding ., Converter={StaticResource PageIconConverter}}"
+                                       Data="{Binding ., Converter={x:Static converters:FuncValueConverters.PageIconConverter}, Mode=OneWay}"
                                        Foreground="{DynamicResource SemiGrey5}"
                                        IsActive="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenuItem}, Path=IsHighlighted, Mode=TwoWay}"
                                        StrokeBrush="{DynamicResource SemiGrey5}" />
