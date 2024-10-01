@@ -101,11 +101,10 @@
                 <DataTemplate x:DataType="models:PageNavItem">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="16" Text="{Binding DisplayName, Mode=OneTime}" />
-                        <u:Badge
-                            Margin="10,0,0,0"
-                            HorizontalAlignment="Left"
-                            IsVisible="{Binding Status, Converter={x:Static ObjectConverters.IsNotNull}}"
-                            Header="{Binding Status}"/>
+                        <u:Badge Margin="10,0,0,0"
+                                 HorizontalAlignment="Left"
+                                 Header="{Binding Status, Mode=OneTime}"
+                                 IsVisible="{Binding Status, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}" />
                     </StackPanel>
                 </DataTemplate>
             </u:NavMenu.HeaderTemplate>
