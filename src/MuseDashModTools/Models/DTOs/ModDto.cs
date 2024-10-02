@@ -46,8 +46,7 @@ public sealed class ModDto : ObservableObject
     // GitHub Repo
     public string RepoPageUrl => GitHubBaseUrl + RepositoryIdentifier;
 
-    public bool IsValidHomePage => !RepoPageUrl.IsNullOrEmpty() && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out var uriResult) &&
-                                   (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+    public bool IsValidRepository => !RepoPageUrl.IsNullOrEmpty() && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
 
     // Compatible Information
     public string CompatibleGameVersion
@@ -66,7 +65,7 @@ public sealed class ModDto : ObservableObject
     // Dependencies
     public bool HasDependency => DependentMods.Length + DependentLibs.Length > 0;
 
-    public string DependencyNames => !HasDependency ? string.Empty : string.Join("\r\n", DependentMods.Concat(DependentLibs));
+    public string DependencyNames => !HasDependency ? string.Empty : string.Join(Environment.NewLine, DependentMods.Concat(DependentLibs));
 
     #endregion Dto Properties
 
