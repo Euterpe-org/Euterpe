@@ -67,8 +67,10 @@
 
             <u:NavMenu.IconTemplate>
                 <DataTemplate x:DataType="x:String">
-                    <u:TwoTonePathIcon Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenu}, Path=IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
-                                       Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenu}, Path=IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
+                    <u:TwoTonePathIcon Width="{Binding $parent[u:NavMenu].IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
+                                       Height="{Binding $parent[u:NavMenu].IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
                                        ActiveForeground="{DynamicResource SemiBlue5}"
                                        ActiveStrokeBrush="{DynamicResource SemiBlue5}"
                                        Data="{Binding ., Converter={x:Static converters:FuncValueConverters.PageIconConverter}, Mode=OneWay}"
@@ -100,8 +102,10 @@
             <u:NavMenu.HeaderTemplate>
                 <DataTemplate x:DataType="models:PageNavItem">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="16" Text="{Binding DisplayName, Mode=OneTime}" />
-                        <u:Badge Margin="10,0,0,0"
+                        <TextBlock Margin="0,0,6,0"
+                                   FontSize="16"
+                                   Text="{Binding DisplayName, Mode=OneTime}" />
+                        <u:Badge Margin="4,0,0,0"
                                  HorizontalAlignment="Left"
                                  Header="{Binding Status, Mode=OneTime}"
                                  IsVisible="{Binding Status, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}" />
