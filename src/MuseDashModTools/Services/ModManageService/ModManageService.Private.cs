@@ -27,16 +27,18 @@ public sealed partial class ModManageService
     {
         var duplicatedModGroups = localMods
             .GroupBy(mod => mod.Name)
-            .Where(group => group.Select(mod => mod.FileName).Distinct().Count() > 1)
-            .ToArray();
+            .Where(group => group.Select(mod => mod.FileName).Distinct().Count() > 1);
 
         foreach (var duplicatedModGroup in duplicatedModGroups)
         {
-            var localMod = _sourceCache.Lookup(duplicatedModGroup.Key).Value;
+            var modName = duplicatedModGroup.Key;
+            Logger.Information("Duplicated mod found {ModName}", modName);
+
+            var localMod = _sourceCache.Lookup(modName).Value;
             localMod.State = ModState.Duplicated;
             localMod.DuplicatedModPaths = string.Join(Environment.NewLine, duplicatedModGroup.Select(mod => mod.FileName));
         }
 
-        Logger.Information("Duplicated mods initialized");
+        Logger.Information("Checking duplicated mods finished");
     }
 }
