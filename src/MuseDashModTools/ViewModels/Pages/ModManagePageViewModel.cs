@@ -14,6 +14,7 @@ public sealed partial class ModManagePageViewModel : ViewModelBase
     public ModManagePageViewModel()
     {
         _sourceCache.Connect()
+            // TODO Try Search Values after .net9 (lxy, 2024/10/2)
             .Filter(x => SearchText.IsNullOrEmpty() ||
                          x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
                          x.XamlDescription.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
@@ -33,6 +34,9 @@ public sealed partial class ModManagePageViewModel : ViewModelBase
         await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
         Logger.Information("ModManagePageViewModel Initialized");
     }
+
+    [RelayCommand]
+    private void Search() => _sourceCache.Refresh();
 
     [RelayCommand]
     private void FilterMods(ModFilterType filterType) => _modFilterType = filterType;

@@ -22,20 +22,31 @@
         </EventTriggerBehavior>
     </Interaction.Behaviors>
 
-    <ScrollViewer Width="500"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch">
-        <ItemsRepeater ItemsSource="{Binding Mods}">
-            <ItemsRepeater.ItemTemplate>
-                <DataTemplate x:DataType="models:ModDto">
-                    <StackPanel Margin="10" Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="{Binding LocalVersion}" />
-                        <TextBlock Text="{Binding DuplicatedModPaths}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsRepeater.ItemTemplate>
-        </ItemsRepeater>
-    </ScrollViewer>
+    <UserControl.KeyBindings>
+        <KeyBinding Command="{Binding SearchCommand, Mode=OneWay}" Gesture="Enter" />
+    </UserControl.KeyBindings>
+
+    <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto">
+        <TextBox Grid.Row="0" Grid.Column="0"
+                 AcceptsReturn="False"
+                 Text="{Binding SearchText, Mode=TwoWay}" />
+
+        <ScrollViewer Grid.Row="1" Grid.Column="0"
+                      Width="500"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+            <ItemsRepeater ItemsSource="{Binding Mods, Mode=OneWay}">
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="models:ModDto">
+                        <StackPanel Margin="10" Orientation="Vertical">
+                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding LocalVersion}" />
+                            <TextBlock Text="{Binding DuplicatedModPaths}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+        </ScrollViewer>
+    </Grid>
 
 </UserControl>
