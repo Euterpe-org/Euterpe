@@ -8,7 +8,7 @@ public static class FuncValueConverters
 
     public static FuncValueConverter<string, StreamGeometry?> PageIconConverter { get; } = new(str =>
     {
-        if (str.IsNullOrEmpty() || !GetCurrentApplication().TryGetResource(str, out var result))
+        if (str.IsNullOrEmpty() || !GetCurrentApp().TryGetResource(str, out var result))
         {
             return null;
         }

@@ -8,7 +8,7 @@ namespace MuseDashModTools;
 public sealed class App : Application
 {
     public IContainer Container { get; } = Bootstrapper.Register();
-    public static new App Current => (App)Application.Current!;
+    public static new App? Current => Application.Current as App;
 
     public override void Initialize()
     {

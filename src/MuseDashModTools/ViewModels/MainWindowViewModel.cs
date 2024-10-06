@@ -47,13 +47,19 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
         await SavingService.LoadSettingAsync().ConfigureAwait(true);
         if (Setting.Theme == "Light")
         {
-            GetCurrentApplication().RequestedThemeVariant = ThemeVariant.Light;
+            GetCurrentApp().RequestedThemeVariant = ThemeVariant.Light;
         }
 #if !DEBUG
         await DownloadManager.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
-        GetCurrentDesktop().Exit += (_, _) => SavingService.SaveSettingAsync();
+        GetCurrentDesktop().Exit += (_, _) => OnExit();
         Logger.Information("MainWindow Initialized");
+    }
+
+    private void OnExit()
+    {
+        Setting.Theme = GetCurrentApp().ActualThemeVariant == ThemeVariant.Light ? "Light" : "Dark";
+        SavingService.SaveSettingAsync();
     }
 
     #region Injections
@@ -65,10 +71,10 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
     public ILogger Logger { get; init; } = null!;
 
     [UsedImplicitly]
-    public INavigationService NavigationService { get; init; } = null!;
+    public ISavingService SavingService { get; init; } = null!;
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; } = null!;
+    public NavigationService NavigationService { get; init; } = null!;
 
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;

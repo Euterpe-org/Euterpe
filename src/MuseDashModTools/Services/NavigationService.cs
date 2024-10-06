@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Services;
 
-public sealed partial class NavigationService : ObservableObject, INavigationService
+public sealed partial class NavigationService : ObservableObject
 {
     [ObservableProperty]
     private Control? _content;
@@ -15,6 +15,6 @@ public sealed partial class NavigationService : ObservableObject, INavigationSer
     public void NavigateTo<TView>() where TView : Control, new()
     {
         Logger.Information("Navigating to View: {View}", typeof(TView).Name);
-        Content = App.Current.Container.Resolve<TView>();
+        Content = GetCurrentApp().Container.Resolve<TView>();
     }
 }
