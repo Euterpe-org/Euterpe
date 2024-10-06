@@ -8,7 +8,7 @@ indent_size = 4
 
 # Microsoft .NET properties
 csharp_new_line_before_members_in_object_initializers = false
-csharp_preferred_modifier_order = private, protected, internal, public, async, file, new, sealed, abstract, virtual, static, override, extern, unsafe, volatile, readonly, required:suggestion
+csharp_preferred_modifier_order = private, protected, internal, public, async, file, static, new, sealed, abstract, virtual, override, extern, unsafe, volatile, readonly, required:suggestion
 csharp_style_prefer_utf8_string_literals = true:suggestion
 csharp_style_var_elsewhere = true:suggestion
 csharp_style_var_for_built_in_types = true:suggestion
