@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace MuseDashModTools.Contracts;
+namespace MuseDashModTools.Abstractions;
 
 public interface IJsonSerializationService : ISerializationService
 {

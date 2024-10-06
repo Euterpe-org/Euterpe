@@ -111,6 +111,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj"/>
+        <ProjectReference Include="..\MuseDashModTools.Core\MuseDashModTools.Core.csproj"/>
         <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj"/>
     </ItemGroup>

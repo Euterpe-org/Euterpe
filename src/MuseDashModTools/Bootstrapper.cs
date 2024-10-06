@@ -1,4 +1,5 @@
-﻿using MuseDashModTools.Views.Dialogs;
+﻿using MuseDashModTools.Core;
+using MuseDashModTools.Views.Dialogs;
 
 namespace MuseDashModTools;
 
@@ -52,18 +53,16 @@ public static class Bootstrapper
     /// </summary>
     private static void RegisterServices()
     {
-        // _builder.RegisterType<ChartService>().As<IChartService>().PropertiesAutowired().SingleInstance();
+        // Self Services
+        _builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
+
+        // Interface Services
         _builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<InfoJsonService>().As<IInfoJsonService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<LogAnalyzeService>().As<ILogAnalyzeService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<NavigationService>().As<INavigationService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
-        _builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
-        // _builder.RegisterType<UpdateUIService>().As<IUpdateUIService>().PropertiesAutowired().SingleInstance();
+        _builder.RegisterCoreServices();
 
         // Download Services
         _builder.RegisterType<CustomDownloadService>().As<ICustomDownloadService>().PropertiesAutowired().SingleInstance();

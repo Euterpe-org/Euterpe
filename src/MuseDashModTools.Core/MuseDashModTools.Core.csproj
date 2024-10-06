@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
+        <PackageReference Include="Mapster"/>
+        <PackageReference Include="Semver"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Models\Enums\"/>
+    </ItemGroup>
+</Project>
