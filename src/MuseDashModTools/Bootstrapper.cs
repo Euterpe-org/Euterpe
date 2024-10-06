@@ -1,5 +1,4 @@
-﻿using Autofac;
-using MuseDashModTools.Extensions.MarkupExtensions;
+﻿using MuseDashModTools.Views.Dialogs;
 
 namespace MuseDashModTools;
 
@@ -11,15 +10,15 @@ public static class Bootstrapper
     ///     Register all instances, services and view models
     ///     Configure static resolvers
     /// </summary>
-    public static void Register()
+    public static IContainer Register()
     {
         RegisterInstances();
         RegisterComponents();
         RegisterServices();
+        RegisterViews();
         RegisterViewModels();
 
-        var container = _builder.Build();
-        ConfigureStaticResolvers(container);
+        return _builder.Build();
     }
 
     /// <summary>
@@ -88,6 +87,25 @@ public static class Bootstrapper
         }
     }
 
+    private static void RegisterViews()
+    {
+        // Window
+        _builder.Register<MainWindow>(ctx => new MainWindow { DataContext = ctx.Resolve<MainWindowViewModel>() }).SingleInstance();
+
+        // Pages
+        _builder.Register<HomePage>(ctx => new HomePage { DataContext = ctx.Resolve<HomePageViewModel>() }).SingleInstance();
+        _builder.Register<ModManagePage>(ctx => new ModManagePage { DataContext = ctx.Resolve<ModManagePageViewModel>() }).SingleInstance();
+        _builder.Register<ModDevelopPage>(ctx => new ModDevelopPage { DataContext = ctx.Resolve<ModDevelopPageViewModel>() }).SingleInstance();
+        _builder.Register<ChartManagePage>(ctx => new ChartManagePage { DataContext = ctx.Resolve<ChartManagePageViewModel>() }).SingleInstance();
+        _builder.Register<ChartToolkitPage>(ctx => new ChartToolkitPage { DataContext = ctx.Resolve<ChartToolkitPageViewModel>() }).SingleInstance();
+        _builder.Register<LogAnalysisPage>(ctx => new LogAnalysisPage { DataContext = ctx.Resolve<LogAnalysisPageViewModel>() }).SingleInstance();
+        _builder.Register<AboutPage>(ctx => new AboutPage { DataContext = ctx.Resolve<AboutPageViewModel>() }).SingleInstance();
+        _builder.Register<SettingPage>(ctx => new SettingPage { DataContext = ctx.Resolve<SettingPageViewModel>() }).SingleInstance();
+
+        // Dialog
+        _builder.Register<DownloadDialog>(ctx => new DownloadDialog { DataContext = ctx.Resolve<DownloadDialogViewModel>() }).SingleInstance();
+    }
+
     /// <summary>
     ///     Register all view models
     /// </summary>
@@ -108,14 +126,5 @@ public static class Bootstrapper
 
         // Dialog
         _builder.RegisterType<DownloadDialogViewModel>().PropertiesAutowired().SingleInstance();
-    }
-
-    /// <summary>
-    ///     Configure static resolvers
-    /// </summary>
-    /// <param name="container"></param>
-    private static void ConfigureStaticResolvers(IComponentContext container)
-    {
-        DependencyInjectionExtension.Resolver = type => container.Resolve(type!);
     }
 }

@@ -24,7 +24,6 @@ internal static class Program
 
         CreateLogger();
         DeleteUnusedLogFile();
-        RegisterDependencies();
         try
         {
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
@@ -48,8 +47,6 @@ internal static class Program
 #endif
         }
     }
-
-    private static void RegisterDependencies() => Bootstrapper.Register();
 
     private static void CreateLogger()
     {

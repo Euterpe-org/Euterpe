@@ -7,6 +7,9 @@ namespace MuseDashModTools;
 
 public sealed class App : Application
 {
+    public IContainer Container { get; } = Bootstrapper.Register();
+    public static new App Current => (App)Application.Current!;
+
     public override void Initialize()
     {
         this.EnableHotReload();
@@ -20,7 +23,7 @@ public sealed class App : Application
             // Line below is needed to remove Avalonia data validation.
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
-            desktop.MainWindow = new MainWindow();
+            desktop.MainWindow = Container.Resolve<MainWindow>();
         }
 
         base.OnFrameworkInitializationCompleted();

@@ -1,13 +1,11 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ext="clr-namespace:MuseDashModTools.Extensions.MarkupExtensions"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:MuseDashModTools.Models"
              xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
              x:Class="MuseDashModTools.Views.Pages.ModManagePage"
              x:DataType="pages:ModManagePageViewModel"
-             DataContext="{ext:DependencyInjection Type=pages:ModManagePageViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
@@ -26,7 +24,7 @@
         <KeyBinding Command="{Binding SearchCommand, Mode=OneWay}" Gesture="Enter" />
     </UserControl.KeyBindings>
 
-    <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto">
+    <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,*">
         <TextBox Grid.Row="0" Grid.Column="0"
                  AcceptsReturn="False"
                  Text="{Binding SearchText, Mode=TwoWay}" />
