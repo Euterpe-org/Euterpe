@@ -1,4 +1,5 @@
 using Avalonia.Dialogs;
+using Directory = System.IO.Directory;
 #if !DEBUG
 using System.Diagnostics;
 #endif
@@ -26,7 +27,14 @@ internal static class Program
 
     private static void DeleteUnusedLogFile()
     {
-        var logFiles = Directory.GetFiles("Logs", "*.log").OrderDescending().Skip(60).ToArray();
+        const string logFolderName = "Logs";
+
+        if (!Directory.Exists(logFolderName))
+        {
+            return;
+        }
+
+        var logFiles = Directory.GetFiles(logFolderName, "*.log").OrderDescending().Skip(30).ToArray();
         if (logFiles is [])
         {
             return;
