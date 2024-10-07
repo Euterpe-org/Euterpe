@@ -1,9 +1,9 @@
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
 public sealed partial class SavingService : ISavingService
 {
     private const string SettingFileName = "Setting.json";
-    private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
+    private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(MuseDashModTools));
     private static readonly string SettingPath = Path.Combine(ConfigFolder, SettingFileName);
 
     public async Task LoadSettingAsync()
@@ -46,6 +46,9 @@ public sealed partial class SavingService : ISavingService
 
     [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; } = null!;
 
     [UsedImplicitly]
     public IPlatformService PlatformService { get; init; } = null!;

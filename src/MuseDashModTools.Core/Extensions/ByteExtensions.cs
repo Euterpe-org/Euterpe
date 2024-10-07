@@ -1,4 +1,4 @@
-namespace MuseDashModTools.Extensions;
+namespace MuseDashModTools.Core.Extensions;
 
 public static class ByteExtensions
 {

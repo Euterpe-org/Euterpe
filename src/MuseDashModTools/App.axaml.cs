@@ -2,13 +2,25 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using HotAvalonia;
+using MuseDashModTools.Core.Extensions;
 
 namespace MuseDashModTools;
 
 public sealed class App : Application
 {
-    public IContainer Container { get; } = Bootstrapper.Register();
+    public IContainer Container { get; } = ConfigureServices();
     public static new App? Current => Application.Current as App;
+
+    private static IContainer ConfigureServices()
+    {
+        var builder = new ContainerBuilder();
+        builder.RegisterLogger();
+        builder.RegisterCoreServices();
+        builder.RegisterInstances();
+        builder.RegisterServices();
+
+        return builder.Build();
+    }
 
     public override void Initialize()
     {

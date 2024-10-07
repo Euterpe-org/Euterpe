@@ -1,4 +1,6 @@
-namespace MuseDashModTools.Contracts;
+using Downloader;
+
+namespace MuseDashModTools.Abstractions;
 
 public interface IDownloadService
 {

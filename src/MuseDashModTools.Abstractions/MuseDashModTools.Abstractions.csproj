@@ -2,4 +2,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MuseDashModTools.Models\MuseDashModTools.Models.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Irihi.Ursa" />
+  </ItemGroup>
 </Project>

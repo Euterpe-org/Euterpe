@@ -4,7 +4,7 @@ using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
 using CliWrap;
 
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
 public sealed partial class LocalService : ILocalService
 {
@@ -20,7 +20,7 @@ public sealed partial class LocalService : ILocalService
         if (!outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6."))
         {
             Logger.Information("DotNet Runtime not found, showing error message box...");
-            await ErrorMessageBoxAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
+            await MessageBoxService.ErrorMessageBoxAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
         }
     }
 
@@ -33,24 +33,24 @@ public sealed partial class LocalService : ILocalService
     {
         if (!FileSystemService.CheckFileExists(Setting.MelonLoaderZipPath))
         {
-            await ErrorMessageBoxAsync("MelonLoader zip file not found").ConfigureAwait(true);
+            await MessageBoxService.ErrorMessageBoxAsync("MelonLoader zip file not found").ConfigureAwait(true);
             return false;
         }
 
         if (!ExtractZipFile(Setting.MelonLoaderZipPath, Setting.MuseDashFolder))
         {
-            await ErrorMessageBoxAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
+            await MessageBoxService.ErrorMessageBoxAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
             return false;
         }
 
         if (!FileSystemService.TryDeleteFile(Setting.MelonLoaderZipPath))
         {
-            await ErrorMessageBoxAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
+            await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
             return false;
         }
 
         Logger.Information("MelonLoader installed successfully");
-        await SuccessMessageBoxAsync("MelonLoader installed successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessMessageBoxAsync("MelonLoader installed successfully").ConfigureAwait(true);
         return true;
     }
 
@@ -67,18 +67,18 @@ public sealed partial class LocalService : ILocalService
                 continue;
             }
 
-            await ErrorMessageBoxAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
+            await MessageBoxService.ErrorMessageBoxAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
             return false;
         }
 
         if (!FileSystemService.TryDeleteDirectory(Setting.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
-            await ErrorMessageBoxAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
+            await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
             return false;
         }
 
         Logger.Information("MelonLoader uninstalled successfully");
-        await SuccessMessageBoxAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessMessageBoxAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
         return true;
     }
 
@@ -149,7 +149,7 @@ public sealed partial class LocalService : ILocalService
     public async ValueTask<string> ReadGameVersionAsync()
     {
         var assetsManager = new AssetsManager();
-        assetsManager.LoadClassPackage(ResourceUtils.GetResource("classdata.tpk"));
+        assetsManager.LoadClassPackage(ResourceService.GetAssetAsStream("classdata.tpk"));
         var bundlePath = Path.Combine(Setting.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
         try
         {
@@ -165,7 +165,7 @@ public sealed partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.Fatal(ex, "Read game version failed, showing error message box...");
-            await FormatErrorMessageBoxAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
+            await MessageBoxService.FormatErrorMessageBoxAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
             Environment.Exit(0);
         }
 
@@ -186,7 +186,6 @@ public sealed partial class LocalService : ILocalService
         }
     }
 
-
     #region Injections
 
     [UsedImplicitly]
@@ -197,6 +196,12 @@ public sealed partial class LocalService : ILocalService
 
     [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IResourceService ResourceService { get; init; } = null!;
 
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;

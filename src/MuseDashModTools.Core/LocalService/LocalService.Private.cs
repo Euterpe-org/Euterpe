@@ -1,4 +1,4 @@
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
 public sealed partial class LocalService
 {
@@ -10,7 +10,7 @@ public sealed partial class LocalService
         if (!File.Exists(exePath) || !File.Exists(dllPath))
         {
             Logger.Error("MuseDash.exe or GameAssembly.dll not found in {FolderPath}", folderPath);
-            await ErrorMessageBoxAsync(MsgBox_Content_InvalidPath).ConfigureAwait(true);
+            await MessageBoxService.ErrorMessageBoxAsync(MsgBox_Content_InvalidPath).ConfigureAwait(true);
             return false;
         }
 

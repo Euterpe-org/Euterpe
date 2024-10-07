@@ -1,4 +1,6 @@
-namespace MuseDashModTools.Services;
+using Ursa.Controls;
+
+namespace MuseDashModTools.Core;
 
 public sealed partial class SavingService
 {
@@ -17,7 +19,7 @@ public sealed partial class SavingService
             Logger.Error("MuseDash folder is null or empty");
             if (PlatformService.GetGamePath(out var folderPath))
             {
-                var result = await NoticeConfirmMessageBoxAsync($"Auto detected MuseDash folder\r\n{folderPath}").ConfigureAwait(true);
+                var result = await MessageBoxService.NoticeConfirmMessageBoxAsync($"Auto detected MuseDash folder\r\n{folderPath}").ConfigureAwait(true);
                 Setting.MuseDashFolder = result is MessageBoxResult.Yes ? folderPath : await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
             }
             else

@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace MuseDashModTools.Utils;
+namespace MuseDashModTools.Core.Utils;
 
 public static class HashUtils
 {
