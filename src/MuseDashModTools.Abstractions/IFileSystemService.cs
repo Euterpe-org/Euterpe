@@ -1,4 +1,6 @@
-﻿namespace MuseDashModTools.Contracts;
+﻿using MuseDashModTools.Abstractions.Enums;
+
+namespace MuseDashModTools.Abstractions;
 
 public interface IFileSystemService
 {

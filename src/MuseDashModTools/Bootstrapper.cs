@@ -56,7 +56,6 @@ public static class Bootstrapper
         _builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
 
         // Interface Services
-        _builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();

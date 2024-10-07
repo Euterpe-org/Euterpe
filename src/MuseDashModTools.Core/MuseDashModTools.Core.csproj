@@ -4,6 +4,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
+        <PackageReference Include="JetBrains.Annotations" />
         <PackageReference Include="Mapster"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="Serilog" />

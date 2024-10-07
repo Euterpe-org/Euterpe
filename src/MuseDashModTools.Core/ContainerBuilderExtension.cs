@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Serilog;
 
 namespace MuseDashModTools.Core;
 
@@ -26,6 +25,7 @@ public static class ContainerBuilderExtension
     }
     public static void RegisterCoreServices(this ContainerBuilder builder)
     {
+        builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
     }
 }

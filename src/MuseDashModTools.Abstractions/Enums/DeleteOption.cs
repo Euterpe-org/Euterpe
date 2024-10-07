@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Models.Enums;
+﻿namespace MuseDashModTools.Abstractions.Enums;
 
 public enum DeleteOption
 {
