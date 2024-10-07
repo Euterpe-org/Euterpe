@@ -16,6 +16,7 @@
         <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.1.0.4"/>
         <PackageVersion Include="Autofac" Version="8.1.0"/>
         <PackageVersion Include="CliWrap" Version="3.6.6"/>
+        <PackageVersion Include="Cocona" Version="2.2.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.2">
             <PrivateAssets>all</PrivateAssets>

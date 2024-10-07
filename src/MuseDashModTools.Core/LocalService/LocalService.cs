@@ -177,11 +177,12 @@ public sealed partial class LocalService : ILocalService
         try
         {
             ZipFile.ExtractToDirectory(zipPath, extractPath, true);
+            Logger.Information("Successfully extracted {ZipPath} to {ExtractPath}", zipPath, extractPath);
             return true;
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to unzip file {ZipPath} to {ExtractPath}", zipPath, extractPath);
+            Logger.Error(ex, "Failed to extract file {ZipPath} to {ExtractPath}", zipPath, extractPath);
             return false;
         }
     }

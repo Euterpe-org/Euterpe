@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <AssemblyName>Updater</AssemblyName>
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
         <PublishAot>true</PublishAot>
         <TrimMode>partial</TrimMode>
@@ -17,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Cocona"/>
         <PackageReference Include="Spectre.Console"/>
     </ItemGroup>
 
