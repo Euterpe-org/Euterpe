@@ -7,8 +7,6 @@ namespace MuseDashModTools;
 
 internal static class Program
 {
-    private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
-
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
     // yet and stuff might break.
@@ -16,13 +14,12 @@ internal static class Program
     public static void Main(string[] args)
     {
         // Prevent multiple launch
-        using var mutex = new Mutex(true, "MuseDashModTools");
+        using var mutex = new Mutex(true, AppName);
         if (!mutex.WaitOne(TimeSpan.Zero, true))
         {
             return;
         }
 
-        CreateLogger();
         DeleteUnusedLogFile();
         try
         {
@@ -46,19 +43,6 @@ internal static class Program
             }
 #endif
         }
-    }
-
-    private static void CreateLogger()
-    {
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-#if DEBUG
-            .WriteTo.Console()
-#endif
-            .WriteTo.File(new LogFileFormatter(),
-                Path.Combine("Logs", LogFileName),
-                rollingInterval: RollingInterval.Infinite)
-            .CreateLogger();
     }
 
     private static void DeleteUnusedLogFile()

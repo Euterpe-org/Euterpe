@@ -28,6 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{362482F5-05F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Generators.Tests", "tests\MuseDashModTools.Generators.Tests\MuseDashModTools.Generators.Tests.csproj", "{29C77E1D-C79C-419A-B820-47F2772B28A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Abstractions", "src\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj", "{383E728F-3414-4C13-8C23-05FA3238282B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Core", "src\MuseDashModTools.Core\MuseDashModTools.Core.csproj", "{930894CD-0974-451A-B429-5F526E9B6DFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +74,14 @@ Global
 		{29C77E1D-C79C-419A-B820-47F2772B28A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29C77E1D-C79C-419A-B820-47F2772B28A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29C77E1D-C79C-419A-B820-47F2772B28A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383E728F-3414-4C13-8C23-05FA3238282B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383E728F-3414-4C13-8C23-05FA3238282B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383E728F-3414-4C13-8C23-05FA3238282B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383E728F-3414-4C13-8C23-05FA3238282B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930894CD-0974-451A-B429-5F526E9B6DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930894CD-0974-451A-B429-5F526E9B6DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930894CD-0974-451A-B429-5F526E9B6DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930894CD-0974-451A-B429-5F526E9B6DFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +96,7 @@ Global
 		{84D1B409-1EED-4BF4-B144-2C16FD216A91} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{32E03077-D3BA-4309-AAE8-1FFC2F22A238} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{29C77E1D-C79C-419A-B820-47F2772B28A8} = {CF8C9C1F-2C69-408A-8819-D3F3242AFC24}
+		{383E728F-3414-4C13-8C23-05FA3238282B} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
+		{930894CD-0974-451A-B429-5F526E9B6DFC} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 	EndGlobalSection
 EndGlobal

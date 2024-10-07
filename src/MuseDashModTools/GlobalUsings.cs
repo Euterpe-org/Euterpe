@@ -19,7 +19,6 @@ global using JetBrains.Annotations;
 global using MuseDashModTools.Abstractions;
 global using MuseDashModTools.Contracts;
 global using MuseDashModTools.Extensions;
-global using MuseDashModTools.Formatters;
 global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Enums;
 global using MuseDashModTools.Models.GitHub;

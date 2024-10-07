@@ -27,7 +27,6 @@ public static class Bootstrapper
     /// </summary>
     private static void RegisterInstances()
     {
-        _builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
         _builder.RegisterInstance(new HttpClient());
         _builder.RegisterInstance(new MultiThreadDownloader(
             new DownloadConfiguration
