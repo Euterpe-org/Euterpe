@@ -4,15 +4,16 @@ namespace MuseDashModTools.Converters;
 
 public static class FuncValueConverters
 {
+    private static readonly IResourceService _resourceService = GetCurrentApp().Container.Resolve<IResourceService>();
     public static FuncValueConverter<bool, int> IconSizeConverter { get; } = new(b => b ? 24 : 16);
 
     public static FuncValueConverter<string, StreamGeometry?> PageIconConverter { get; } = new(str =>
     {
-        if (str.IsNullOrEmpty() || !GetCurrentApp().TryGetResource(str, out var result))
+        if (str.IsNullOrEmpty() || _resourceService.TryGetAppResource<StreamGeometry>(str) is not { } result)
         {
             return null;
         }
 
-        return result as StreamGeometry;
+        return result;
     });
 }
