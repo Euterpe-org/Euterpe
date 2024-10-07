@@ -11,7 +11,4 @@
         <PackageReference Include="Serilog.Sinks.Console" />
         <PackageReference Include="Serilog.Sinks.File" />
     </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Models\Enums\"/>
-    </ItemGroup>
 </Project>

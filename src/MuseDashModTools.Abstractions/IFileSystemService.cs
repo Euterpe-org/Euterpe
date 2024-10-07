@@ -1,6 +1,4 @@
-﻿using MuseDashModTools.Abstractions.Enums;
-
-namespace MuseDashModTools.Abstractions;
+﻿namespace MuseDashModTools.Abstractions;
 
 public interface IFileSystemService
 {

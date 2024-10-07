@@ -1,9 +1,9 @@
-﻿using System.Text.Json.Serialization;
-using Mapster;
-using MuseDashModTools.Core.Enums;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Text.Json.Serialization;
 using Semver;
 
-namespace MuseDashModTools.Core;
+namespace MuseDashModTools.Models;
 
 public sealed class Setting
 {
@@ -74,5 +74,5 @@ public sealed class Setting
     public void CopyFrom(Setting setting) => setting.Adapt(this);
 
     private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
-        !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;
+        !string.IsNullOrEmpty(folderPath) ? Path.Combine(folderPath, targetPath) : defaultPath;
 }

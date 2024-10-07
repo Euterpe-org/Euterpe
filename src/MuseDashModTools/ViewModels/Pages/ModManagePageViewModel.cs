@@ -16,8 +16,7 @@ public sealed partial class ModManagePageViewModel : ViewModelBase
         _sourceCache.Connect()
             // TODO Try Search Values after .net9 (lxy, 2024/10/2)
             .Filter(x => SearchText.IsNullOrEmpty() ||
-                         x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                         x.XamlDescription.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                         x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
             .Filter(x => _modFilterType != ModFilterType.Installed || x.IsLocal)
             .Filter(x => _modFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
             .Filter(x => _modFilterType != ModFilterType.Outdated || x.State == ModState.Outdated)

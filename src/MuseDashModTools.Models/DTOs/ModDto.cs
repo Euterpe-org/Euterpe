@@ -1,5 +1,3 @@
-using Mapster;
-
 namespace MuseDashModTools.Models;
 
 public sealed class ModDto : ObservableObject
@@ -37,30 +35,12 @@ public sealed class ModDto : ObservableObject
     public bool IsDuplicated => State is ModState.Duplicated;
     public string? DuplicatedModPaths { get; set; }
 
-    public bool IsValidConfigFile => !ConfigFile.IsNullOrEmpty() && File.Exists(ConfigFile);
-
-    // Description
-    public string XamlDescription => string.Format(XAML_Mod_Description.NormalizeNewline(),
-        ModDescriptionProvider.GetDescription(this), Author, Version, CompatibleGameVersion);
+    public bool IsValidConfigFile => !string.IsNullOrEmpty(ConfigFile) && File.Exists(ConfigFile);
 
     // GitHub Repo
-    public string RepoPageUrl => GitHubBaseUrl + RepositoryIdentifier;
+    public string RepoPageUrl => GitHubConstants.GitHubBaseUrl + RepositoryIdentifier;
 
-    public bool IsValidRepository => !RepoPageUrl.IsNullOrEmpty() && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
-
-    // Compatible Information
-    public string CompatibleGameVersion
-    {
-        get
-        {
-            if (GameVersion is [])
-            {
-                return "Unknown";
-            }
-
-            return GameVersion[0] == "*" ? XAML_Mod_CompatibleGameVersion : string.Join(", ", GameVersion);
-        }
-    }
+    public bool IsValidRepository => !string.IsNullOrEmpty(RepoPageUrl) && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
 
     // Dependencies
     public bool HasDependency => DependentMods.Length + DependentLibs.Length > 0;
