@@ -40,9 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AssetsTools.NET"/>
         <PackageReference Include="Antelcat.I18N.Avalonia"/>
-        <PackageReference Include="AsmResolver.DotNet"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Avalonia"/>
         <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
@@ -52,7 +50,6 @@
         <PackageReference Include="Avalonia.Fonts.Inter"/>
         <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
-        <PackageReference Include="CliWrap"/>
         <PackageReference Include="Downloader"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>

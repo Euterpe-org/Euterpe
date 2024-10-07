@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Mvvm" />
-        <PackageReference Include="JetBrains.Annotations" />
+        <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Mapster"/>
-        <PackageReference Include="Semver" />
+        <PackageReference Include="Semver"/>
     </ItemGroup>
+
 </Project>

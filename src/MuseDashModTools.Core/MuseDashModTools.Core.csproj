@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <ItemGroup>
         <ProjectReference Include="..\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj"/>
-        <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj" />
+        <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj"/>
     </ItemGroup>
+
     <ItemGroup>
-        <PackageReference Include="AsmResolver.DotNet" />
-        <PackageReference Include="AssetsTools.NET" />
+        <PackageReference Include="AsmResolver.DotNet"/>
+        <PackageReference Include="AssetsTools.NET"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
-        <PackageReference Include="CliWrap" />
-        <PackageReference Include="JetBrains.Annotations" />
-        <PackageReference Include="Mapster"/>
-        <PackageReference Include="Semver"/>
-        <PackageReference Include="Serilog" />
-        <PackageReference Include="Serilog.Sinks.Console" />
-        <PackageReference Include="Serilog.Sinks.File" />
+        <PackageReference Include="CliWrap"/>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Serilog"/>
+        <PackageReference Include="Serilog.Sinks.Console"/>
+        <PackageReference Include="Serilog.Sinks.File"/>
     </ItemGroup>
+
 </Project>

@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\MuseDashModTools.Models\MuseDashModTools.Models.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Irihi.Ursa" />
-  </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MuseDashModTools.Models\MuseDashModTools.Models.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Irihi.Ursa"/>
+    </ItemGroup>
+
 </Project>
