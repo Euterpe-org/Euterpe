@@ -1,6 +1,4 @@
-﻿using MuseDashModTools.Abstractions.Enums;
-
-namespace MuseDashModTools.Core;
+﻿namespace MuseDashModTools.Core;
 
 public sealed class FileSystemService : IFileSystemService
 {

@@ -1,7 +1,7 @@
 using System.Collections.Frozen;
 using Microsoft.Win32;
 
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
 public sealed class WindowsService : IPlatformService
 {
@@ -21,7 +21,7 @@ public sealed class WindowsService : IPlatformService
     public ILogger Logger { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Settings { get; init; } = null!;
+    public Setting Setting { get; init; } = null!;
 
     public string OsString => "Windows";
 
@@ -57,12 +57,12 @@ public sealed class WindowsService : IPlatformService
     {
         try
         {
-            if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Settings.MuseDashFolder)
+            if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Setting.MuseDashFolder)
             {
                 return true;
             }
 
-            Environment.SetEnvironmentVariable("MD_DIRECTORY", Settings.MuseDashFolder, EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable("MD_DIRECTORY", Setting.MuseDashFolder, EnvironmentVariableTarget.User);
             return true;
         }
         catch (Exception ex)

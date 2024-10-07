@@ -14,7 +14,6 @@ public static class Bootstrapper
     public static IContainer Register()
     {
         RegisterInstances();
-        RegisterComponents();
         RegisterServices();
         RegisterViews();
         RegisterViewModels();
@@ -40,14 +39,6 @@ public static class Bootstrapper
     }
 
     /// <summary>
-    ///     Register Frequently-Used Components
-    /// </summary>
-    private static void RegisterComponents()
-    {
-        _builder.RegisterType<Setting>().SingleInstance();
-    }
-
-    /// <summary>
     ///     Register all services
     /// </summary>
     private static void RegisterServices()
@@ -67,21 +58,6 @@ public static class Bootstrapper
         _builder.RegisterType<GitHubDownloadService>().As<IGitHubDownloadService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<GitHubMirrorDownloadService>().As<IGitHubMirrorDownloadService>().PropertiesAutowired().SingleInstance();
         _builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
-
-        // Platform Service
-        if (OperatingSystem.IsWindows())
-        {
-            _builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-        }
-        else if (OperatingSystem.IsLinux())
-        {
-            _builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-        }
-        // for macos development
-        else if (OperatingSystem.IsMacOS())
-        {
-            _builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-        }
     }
 
     private static void RegisterViews()

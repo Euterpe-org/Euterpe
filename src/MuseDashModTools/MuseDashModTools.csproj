@@ -97,7 +97,6 @@
         <PackageReference Include="Downloader"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
-        <PackageReference Include="Mapster"/>
         <PackageReference Include="Markdown.Avalonia"/>
         <PackageReference Include="ReactiveUI"/>
         <PackageReference Include="Semi.Avalonia"/>

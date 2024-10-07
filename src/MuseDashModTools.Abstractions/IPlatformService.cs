@@ -1,6 +1,4 @@
-using Avalonia.Platform.Storage;
-
-namespace MuseDashModTools.Contracts;
+namespace MuseDashModTools.Abstractions;
 
 public interface IPlatformService
 {
@@ -22,25 +20,6 @@ public interface IPlatformService
     /// <param name="folderPath">Created Updater folder path</param>
     /// <returns>Updater file path</returns>
     string GetUpdaterFilePath(string folderPath);
-
-    /// <summary>
-    ///     Open file with path
-    /// </summary>
-    /// <param name="path"></param>
-    Task OpenFileAsync(string path) => GetLauncher().LaunchFileInfoAsync(new FileInfo(path));
-
-    /// <summary>
-    ///     Open folder with path
-    /// </summary>
-    /// <param name="path"></param>
-    Task OpenFolderAsync(string path) => GetLauncher().LaunchDirectoryInfoAsync(new DirectoryInfo(path));
-
-    /// <summary>
-    ///     Open a URL in the default browser
-    /// </summary>
-    /// <param name="url"></param>
-    /// <returns></returns>
-    Task OpenUrlAsync(string url) => GetLauncher().LaunchUriAsync(new Uri(url));
 
     /// <summary>
     ///     Reveal file with path

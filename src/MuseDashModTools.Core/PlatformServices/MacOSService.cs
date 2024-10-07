@@ -1,4 +1,4 @@
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
 public sealed class MacOsService : IPlatformService
 {

@@ -1,6 +1,10 @@
-﻿global using System.Diagnostics.CodeAnalysis;
+﻿global using System.Diagnostics;
+global using System.Diagnostics.CodeAnalysis;
 global using System.Globalization;
+global using System.Runtime.InteropServices;
+global using System.Runtime.Versioning;
 global using JetBrains.Annotations;
 global using MuseDashModTools.Abstractions;
+global using MuseDashModTools.Abstractions.Enums;
 global using MuseDashModTools.Core.Extensions;
 global using Serilog;
