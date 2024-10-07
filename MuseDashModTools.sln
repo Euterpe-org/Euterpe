@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Core", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Models", "src\MuseDashModTools.Models\MuseDashModTools.Models.csproj", "{C158B2CF-4EDF-4C81-96BE-20DE44303C38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Localization", "src\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj", "{73D761AD-9898-4F32-BF81-0798E441527A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{C158B2CF-4EDF-4C81-96BE-20DE44303C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C158B2CF-4EDF-4C81-96BE-20DE44303C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C158B2CF-4EDF-4C81-96BE-20DE44303C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73D761AD-9898-4F32-BF81-0798E441527A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D761AD-9898-4F32-BF81-0798E441527A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D761AD-9898-4F32-BF81-0798E441527A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D761AD-9898-4F32-BF81-0798E441527A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,5 +111,6 @@ Global
 		{383E728F-3414-4C13-8C23-05FA3238282B} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{930894CD-0974-451A-B429-5F526E9B6DFC} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{C158B2CF-4EDF-4C81-96BE-20DE44303C38} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
+		{73D761AD-9898-4F32-BF81-0798E441527A} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 	EndGlobalSection
 EndGlobal
