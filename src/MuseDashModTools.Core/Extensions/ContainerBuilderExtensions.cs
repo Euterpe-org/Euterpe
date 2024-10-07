@@ -4,9 +4,7 @@ namespace MuseDashModTools.Core.Extensions;
 
 public static class ContainerBuilderExtensions
 {
-    private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
-
-    private　static void CreateLogger()
+    private static void CreateLogger(string logFileName)
     {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
@@ -14,14 +12,14 @@ public static class ContainerBuilderExtensions
             .WriteTo.Console()
 #endif
             .WriteTo.File(new LogFileFormatter(),
-                Path.Combine("Logs", LogFileName),
+                Path.Combine("Logs", logFileName),
                 rollingInterval: RollingInterval.Infinite)
             .CreateLogger();
     }
 
-    public static void RegisterLogger(this ContainerBuilder builder)
+    public static void RegisterLogger(this ContainerBuilder builder, string logFileName)
     {
-        CreateLogger();
+        CreateLogger(logFileName);
         builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
     }
 

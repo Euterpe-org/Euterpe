@@ -21,28 +21,7 @@ internal static class Program
         }
 
         DeleteUnusedLogFile();
-        try
-        {
-            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        }
-        catch (Exception ex)
-        {
-            Log.Logger.Fatal(ex, "Unhandled exception");
-#if !DEBUG
-            if (File.Exists(Path.Combine("Logs", LogFileName)))
-            {
-                if (OperatingSystem.IsWindows())
-                    Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
-                else if (OperatingSystem.IsLinux())
-                    Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
-                    UseShellExecute = true
-                });
-            }
-#endif
-        }
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
 
     private static void DeleteUnusedLogFile()

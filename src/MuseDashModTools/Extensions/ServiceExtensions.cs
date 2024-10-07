@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Extensions;
 
-public static class ServiceExtensions
+public static partial class ServiceExtensions
 {
     public static void RegisterInstances(this ContainerBuilder builder)
     {
@@ -16,7 +16,7 @@ public static class ServiceExtensions
             }));
     }
 
-    public static void RegisterServices(this ContainerBuilder builder)
+    public static void RegisterInternalServices(this ContainerBuilder builder)
     {
         // Self Services
         builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
@@ -24,6 +24,7 @@ public static class ServiceExtensions
         // Interface Services
         builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
 
         // Download Services
         builder.RegisterType<CustomDownloadService>().As<ICustomDownloadService>().PropertiesAutowired().SingleInstance();

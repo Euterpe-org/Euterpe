@@ -8,16 +8,19 @@ namespace MuseDashModTools;
 
 public sealed class App : Application
 {
-    public IContainer Container { get; } = ConfigureServices();
+    private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
+    public readonly IContainer Container = ConfigureServices();
     public static new App? Current => Application.Current as App;
 
     private static IContainer ConfigureServices()
     {
         var builder = new ContainerBuilder();
-        builder.RegisterLogger();
+
+        builder.RegisterLogger(LogFileName);
         builder.RegisterCoreServices();
         builder.RegisterInstances();
-        builder.RegisterServices();
+        builder.RegisterInternalServices();
+        builder.RegisterViewAndViewModels();
 
         return builder.Build();
     }
@@ -30,6 +33,8 @@ public sealed class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        Dispatcher.UIThread.UnhandledException += LogException;
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Line below is needed to remove Avalonia data validation.
@@ -39,5 +44,24 @@ public sealed class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        Log.Logger.Fatal(e.Exception, "Unhandled exception");
+#if !DEBUG
+        if (File.Exists(Path.Combine("Logs", LogFileName)))
+        {
+            if (OperatingSystem.IsWindows())
+                Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
+            else if (OperatingSystem.IsLinux())
+                Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
+                UseShellExecute = true
+            });
+        }
+#endif
     }
 }
