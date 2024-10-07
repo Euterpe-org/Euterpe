@@ -66,8 +66,8 @@ public sealed class DownloadManagerGenerator : IIncrementalGenerator
         var sb = new StringBuilder();
         foreach (var value in methodDeclarationDict.Values)
         {
-            sb.AppendLine($"{GetGeneratedCodeAttribute(nameof(DownloadManagerGenerator))}");
-            sb.AppendLine($"public {value.ReturnType} {value.MethodName}({value.MethodParameters})");
+            sb.AppendLine($"\t{GetGeneratedCodeAttribute(nameof(DownloadManagerGenerator))}");
+            sb.AppendLine($"\tpublic {value.ReturnType} {value.MethodName}({value.MethodParameters})");
             sb.AppendLine($$"""
                             {
                                 return Setting.DownloadSource switch
@@ -88,7 +88,7 @@ public sealed class DownloadManagerGenerator : IIncrementalGenerator
 
               partial class DownloadManager
               {
-                  {{sb.ToString().TrimEnd()}}
+              {{sb.ToString().TrimEnd()}}
               }
               """);
     }

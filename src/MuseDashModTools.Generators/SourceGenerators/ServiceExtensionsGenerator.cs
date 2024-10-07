@@ -33,8 +33,8 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
                 continue;
             }
 
-            sb.AppendLine($"builder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
-            sb.AppendLine($"builder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+            sb.AppendLine($"\t\tbuilder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
+            sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
             sb.AppendLine();
         }
 
@@ -48,7 +48,7 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
                   {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
                   public static void RegisterViewAndViewModels(this ContainerBuilder builder)
                   {
-                      {{sb.ToString().TrimEnd()}}
+              {{sb.ToString().TrimEnd()}}
                   }
               }
               """

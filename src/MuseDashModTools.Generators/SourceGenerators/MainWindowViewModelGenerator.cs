@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 
 namespace MuseDashModTools.Generators;
 
@@ -34,9 +34,9 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
                 continue;
             }
 
-            sb.AppendLine($"case {name}Name:");
-            sb.AppendLine($"\tNavigationService.NavigateTo<{name}>();");
-            sb.AppendLine("\tbreak;");
+            sb.AppendLine($"\t\t\tcase {name}Name:");
+            sb.AppendLine($"\t\t\t\tNavigationService.NavigateTo<{name}>();");
+            sb.AppendLine("\t\t\t\tbreak;");
         }
 
         spc.AddSource("MainWindowViewModel.g.cs",
@@ -51,7 +51,7 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
                   {
                       switch (pageName)
                       {
-                          {{sb.ToString().TrimEnd()}}
+              {{sb.ToString().TrimEnd()}}
                       }
                   }
               }
