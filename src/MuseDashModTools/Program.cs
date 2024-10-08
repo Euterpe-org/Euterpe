@@ -1,8 +1,4 @@
 using Avalonia.Dialogs;
-using Directory = System.IO.Directory;
-#if !DEBUG
-using System.Diagnostics;
-#endif
 
 namespace MuseDashModTools;
 

@@ -33,8 +33,9 @@ public sealed class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+#if RELEASE
         Dispatcher.UIThread.UnhandledException += LogException;
-
+#endif
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Line below is needed to remove Avalonia data validation.
@@ -46,22 +47,23 @@ public sealed class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
+#if RELEASE
     private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         Log.Logger.Fatal(e.Exception, "Unhandled exception");
-#if !DEBUG
-        if (File.Exists(Path.Combine("Logs", LogFileName)))
+     if (OperatingSystem.IsWindows())
         {
-            if (OperatingSystem.IsWindows())
-                Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
-            else if (OperatingSystem.IsLinux())
-                Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
-                UseShellExecute = true
-            });
+            Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
         }
-#endif
+        else if (OperatingSystem.IsLinux())
+        {
+            Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
+        }
+     Process.Start(new ProcessStartInfo
+        {
+            FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
+            UseShellExecute = true
+        });
     }
+#endif
 }

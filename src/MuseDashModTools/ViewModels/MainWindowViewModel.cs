@@ -49,7 +49,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
         {
             GetCurrentApp().RequestedThemeVariant = ThemeVariant.Light;
         }
-#if !DEBUG
+#if RELEASE
         await DownloadManager.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         GetCurrentDesktop().Exit += (_, _) => OnExit();

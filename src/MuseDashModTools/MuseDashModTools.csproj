@@ -25,6 +25,7 @@
         <PublishTrimmed>false</PublishTrimmed>
         <PublishReadyToRun>false</PublishReadyToRun>
         <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
