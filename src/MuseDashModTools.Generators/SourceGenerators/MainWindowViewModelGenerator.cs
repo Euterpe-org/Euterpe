@@ -34,9 +34,9 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
                 continue;
             }
 
-            sb.AppendLine($"\t\t\tcase {name}Name:");
-            sb.AppendLine($"\t\t\t\tNavigationService.NavigateTo<{name}>();");
-            sb.AppendLine("\t\t\t\tbreak;");
+            sb.AppendLine($"case {name}Name:");
+            sb.AppendLine($"\tNavigationService.NavigateTo<{name}>();");
+            sb.AppendLine("\tbreak;");
         }
 
         spc.AddSource("MainWindowViewModel.g.cs",
@@ -51,7 +51,7 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
                   {
                       switch (pageName)
                       {
-              {{sb.ToString().TrimEnd()}}
+                          {{sb.ToString().TrimEnd()}}
                       }
                   }
               }
