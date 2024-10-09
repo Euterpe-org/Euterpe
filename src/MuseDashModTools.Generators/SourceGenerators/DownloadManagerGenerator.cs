@@ -21,21 +21,22 @@ public sealed class DownloadManagerGenerator : IIncrementalGenerator
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
-        node is InterfaceDeclarationSyntax { Identifier.Text: "IDownloadService" };
+        node is ClassDeclarationSyntax { Identifier.Text: "DownloadManager" };
 
-    private static IDownloadServiceData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
+    private static DownloadServiceMethodData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
     {
         if (context is not
             {
-                Node: InterfaceDeclarationSyntax interfaceDeclaration,
+                Node: ClassDeclarationSyntax classDeclarationSyntax,
                 SemanticModel: var semanticModel
             })
         {
             return null;
         }
 
-        var symbol = semanticModel.GetDeclaredSymbol(interfaceDeclaration)!;
-        var methods = symbol.GetMembers().OfType<IMethodSymbol>();
+        var symbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax)!;
+        var interfaceSymbol = symbol.AllInterfaces.Single(x => x.Name == "IDownloadService");
+        var methods = interfaceSymbol.GetMembers().OfType<IMethodSymbol>();
 
         var methodDeclarationDict = new Dictionary<string, MethodData>();
 
@@ -48,10 +49,10 @@ public sealed class DownloadManagerGenerator : IIncrementalGenerator
             methodDeclarationDict.Add(methodName, new MethodData(methodName, parameters, parameterNames, returnType));
         }
 
-        return new IDownloadServiceData(methodDeclarationDict);
+        return new DownloadServiceMethodData(methodDeclarationDict);
     }
 
-    private static void GenerateFromData(SourceProductionContext spc, IDownloadServiceData? data)
+    private static void GenerateFromData(SourceProductionContext spc, DownloadServiceMethodData? data)
     {
         if (data is not var (methodDeclarationDict))
         {
@@ -66,8 +67,8 @@ public sealed class DownloadManagerGenerator : IIncrementalGenerator
         var sb = new StringBuilder();
         foreach (var value in methodDeclarationDict.Values)
         {
-            sb.AppendLine($"\t{GetGeneratedCodeAttribute(nameof(DownloadManagerGenerator))}");
-            sb.AppendLine($"\tpublic {value.ReturnType} {value.MethodName}({value.MethodParameters})");
+            sb.AppendLine($"{GetGeneratedCodeAttribute(nameof(DownloadManagerGenerator))}");
+            sb.AppendLine($"public {value.ReturnType} {value.MethodName}({value.MethodParameters})");
             sb.AppendLine($$"""
                             {
                                 return Setting.DownloadSource switch
@@ -88,12 +89,12 @@ public sealed class DownloadManagerGenerator : IIncrementalGenerator
 
               partial class DownloadManager
               {
-              {{sb.ToString().TrimEnd()}}
+                  {{sb.ToString().TrimEnd()}}
               }
               """);
     }
 
-    private record IDownloadServiceData(Dictionary<string, MethodData> Methods);
+    private sealed record DownloadServiceMethodData(Dictionary<string, MethodData> Methods);
 
-    private record MethodData(string MethodName, string MethodParameters, string MethodParameterNames, string ReturnType);
+    private sealed record MethodData(string MethodName, string MethodParameters, string MethodParameterNames, string ReturnType);
 }
