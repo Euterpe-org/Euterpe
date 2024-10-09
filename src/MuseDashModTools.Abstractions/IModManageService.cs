@@ -1,6 +1,6 @@
 ﻿using DynamicData;
 
-namespace MuseDashModTools.Contracts;
+namespace MuseDashModTools.Abstractions;
 
 public interface IModManageService
 {

@@ -23,7 +23,6 @@ public static partial class ServiceExtensions
 
         // Interface Services
         builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
 
         // Download Services

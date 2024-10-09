@@ -9,6 +9,7 @@ global using MuseDashModTools.Core.Extensions;
 global using MuseDashModTools.Core.Utils;
 global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Enums;
+global using Semver;
 global using Serilog;
 global using static MuseDashModTools.Localization.MsgBox.Resources;
 global using static MuseDashModTools.Localization.General.Resources;
