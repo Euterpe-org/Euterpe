@@ -9,8 +9,7 @@ namespace MuseDashModTools;
 public sealed class App : Application
 {
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
-    public readonly IContainer Container = ConfigureServices();
-    public static new App? Current => Application.Current as App;
+    public static readonly IContainer Container = ConfigureServices();
 
     private static IContainer ConfigureServices()
     {
@@ -51,7 +50,8 @@ public sealed class App : Application
     private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         Log.Logger.Fatal(e.Exception, "Unhandled exception");
-     if (OperatingSystem.IsWindows())
+
+        if (OperatingSystem.IsWindows())
         {
             Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
         }
@@ -59,7 +59,8 @@ public sealed class App : Application
         {
             Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
         }
-     Process.Start(new ProcessStartInfo
+
+        Process.Start(new ProcessStartInfo
         {
             FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
             UseShellExecute = true

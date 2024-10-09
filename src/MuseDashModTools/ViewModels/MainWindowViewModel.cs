@@ -47,7 +47,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
         await SavingService.LoadSettingAsync().ConfigureAwait(true);
         if (Setting.Theme == "Light")
         {
-            GetCurrentApp().RequestedThemeVariant = ThemeVariant.Light;
+            GetCurrentApplication().RequestedThemeVariant = ThemeVariant.Light;
         }
 #if RELEASE
         await DownloadManager.CheckForUpdatesAsync().ConfigureAwait(true);
@@ -58,7 +58,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
 
     private void OnExit()
     {
-        Setting.Theme = GetCurrentApp().ActualThemeVariant == ThemeVariant.Light ? "Light" : "Dark";
+        Setting.Theme = GetCurrentApplication().ActualThemeVariant == ThemeVariant.Light ? "Light" : "Dark";
         SavingService.SaveSettingAsync();
     }
 

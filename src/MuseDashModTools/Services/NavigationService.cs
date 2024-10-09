@@ -15,6 +15,6 @@ public sealed partial class NavigationService : ObservableObject
     public void NavigateTo<TView>() where TView : Control, new()
     {
         Logger.Information("Navigating to View: {View}", typeof(TView).Name);
-        Content = GetCurrentApp().Container.Resolve<TView>();
+        Content = App.Container.Resolve<TView>();
     }
 }

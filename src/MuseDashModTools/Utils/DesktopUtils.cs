@@ -5,9 +5,9 @@ namespace MuseDashModTools.Utils;
 
 public static class DesktopUtils
 {
-    public static App GetCurrentApp()
+    public static Application GetCurrentApplication()
     {
-        var app = App.Current;
+        var app = Application.Current;
         if (app is null)
         {
             throw new InvalidOperationException("Application is null.");
@@ -18,7 +18,7 @@ public static class DesktopUtils
 
     public static IClassicDesktopStyleApplicationLifetime GetCurrentDesktop()
     {
-        if (GetCurrentApp().ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
+        if (GetCurrentApplication().ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
         {
             throw new InvalidOperationException("Desktop is null.");
         }

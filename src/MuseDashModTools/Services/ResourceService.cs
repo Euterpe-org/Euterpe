@@ -8,7 +8,7 @@ public sealed class ResourceService : IResourceService
 
     public T? TryGetAppResource<T>(string key) where T : class
     {
-        if (!GetCurrentApp().TryGetResource(key, out var result))
+        if (!GetCurrentApplication().TryGetResource(key, out var result))
         {
             return null;
         }
