@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="IndexRange"/>
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers"/>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp"/>
         <PackageReference Include="Roslynator.CodeAnalysis.Analyzers"/>

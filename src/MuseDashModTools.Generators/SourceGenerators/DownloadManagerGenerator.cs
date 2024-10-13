@@ -1,5 +1,4 @@
 using System.Text;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace MuseDashModTools.Generators;
 

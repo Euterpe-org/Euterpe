@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.Core.Extensions;
 
-public static class ContainerBuilderExtensions
+public static class CoreServiceExtensions
 {
     private static void CreateLogger(string logFileName)
     {
@@ -30,6 +30,7 @@ public static class ContainerBuilderExtensions
         builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
 

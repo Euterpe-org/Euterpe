@@ -11,5 +11,6 @@ global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Enums;
 global using Semver;
 global using Serilog;
+global using Ursa.Controls;
 global using static MuseDashModTools.Localization.MsgBox.Resources;
 global using static MuseDashModTools.Localization.General.Resources;
