@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace MuseDashModTools.Tests;
 
 [TestSubject(typeof(JsonSerializationService))]
@@ -48,9 +50,43 @@ public sealed class JsonSerializationServiceTest
     }
 
     [Test]
+    public async Task DeserializeIndentedTest()
+    {
+        var result = _jsonSerializationService.DeserializeIndented<Mod>(ModJson);
+        await Verify(result);
+    }
+
+    [Test]
+    public async Task DeserializeAsyncTest()
+    {
+        var memoryStream = new MemoryStream();
+        await memoryStream.WriteAsync(Encoding.UTF8.GetBytes(ModJson).AsMemory());
+        memoryStream.Position = 0;
+        var result = await _jsonSerializationService.DeserializeAsync<Mod>(memoryStream);
+        await Verify(result);
+    }
+
+    [Test]
     public async Task SerializeTest()
     {
         var result = _jsonSerializationService.Serialize(_mod);
+        await Verify(result);
+    }
+
+    [Test]
+    public async Task SerializeAsyncTest()
+    {
+        var memoryStream = new MemoryStream();
+        await _jsonSerializationService.SerializeAsync(memoryStream, _mod);
+        memoryStream.Position = 0;
+        var result = await new StreamReader(memoryStream).ReadToEndAsync();
+        await Verify(result);
+    }
+
+    [Test]
+    public async Task SerializeIndentedTest()
+    {
+        var result = _jsonSerializationService.SerializeIndented(_mod);
         await Verify(result);
     }
 }

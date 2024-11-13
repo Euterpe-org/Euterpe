@@ -6,13 +6,18 @@ public sealed class JsonSerializationService : IJsonSerializationService
 {
     private static readonly JsonSerializerOptions IndentedSerializerOptions = new()
     {
-        WriteIndented = true
+        WriteIndented = true,
+        IndentCharacter = ' ',
+        IndentSize = 4
     };
 
     public T? Deserialize<T>(string text) => JsonSerializer.Deserialize<T>(text);
 
     public T? Deserialize<T>(string json, JsonSerializerOptions? options) =>
         JsonSerializer.Deserialize<T>(json, options);
+
+    public T? DeserializeIndented<T>(string json) =>
+        JsonSerializer.Deserialize<T>(json, IndentedSerializerOptions);
 
     public ValueTask<T?> DeserializeAsync<T>(
         Stream utf8Json,
@@ -27,6 +32,9 @@ public sealed class JsonSerializationService : IJsonSerializationService
 
     public string Serialize<T>(T value, JsonSerializerOptions? options) =>
         JsonSerializer.Serialize(value, options);
+
+    public string SerializeIndented<T>(T value) =>
+        JsonSerializer.Serialize(value, IndentedSerializerOptions);
 
     public Task SerializeAsync<T>(
         Stream utf8Json,

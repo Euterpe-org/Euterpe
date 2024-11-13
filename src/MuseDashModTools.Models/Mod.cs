@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Models;
 
-[UsedImplicitly]
+[PublicAPI]
 public sealed class Mod
 {
     public string Name { get; set; } = string.Empty;

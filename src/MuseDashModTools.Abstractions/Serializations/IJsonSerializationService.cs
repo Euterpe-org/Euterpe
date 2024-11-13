@@ -5,6 +5,7 @@ namespace MuseDashModTools.Abstractions;
 public interface IJsonSerializationService : ISerializationService
 {
     T? Deserialize<T>(string json, JsonSerializerOptions? options);
+    T? DeserializeIndented<T>(string json);
 
     ValueTask<T?> DeserializeAsync<T>(
         Stream utf8Json,
@@ -16,6 +17,7 @@ public interface IJsonSerializationService : ISerializationService
         CancellationToken cancellationToken = default);
 
     string Serialize<T>(T value, JsonSerializerOptions? options);
+    string SerializeIndented<T>(T value);
 
     Task SerializeAsync<T>(
         Stream utf8Json,
