@@ -4,7 +4,11 @@ namespace MuseDashModTools.Core;
 
 public sealed class JsonSerializationService : IJsonSerializationService
 {
-    private static readonly JsonSerializerOptions IndentedSerializerOptions = new() { WriteIndented = true };
+    private static readonly JsonSerializerOptions IndentedSerializerOptions = new()
+    {
+        WriteIndented = true
+    };
+
     public T? Deserialize<T>(string text) => JsonSerializer.Deserialize<T>(text);
 
     public T? Deserialize<T>(string json, JsonSerializerOptions? options) =>

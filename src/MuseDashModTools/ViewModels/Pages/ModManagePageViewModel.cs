@@ -8,7 +8,10 @@ public sealed partial class ModManagePageViewModel : ViewModelBase
     private readonly ReadOnlyObservableCollection<ModDto> _mods;
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
     private ModFilterType _modFilterType;
-    [ObservableProperty] private string? _searchText;
+
+    [ObservableProperty]
+    public partial string? SearchText { get; set; }
+
     public ReadOnlyObservableCollection<ModDto> Mods => _mods;
 
     public ModManagePageViewModel()

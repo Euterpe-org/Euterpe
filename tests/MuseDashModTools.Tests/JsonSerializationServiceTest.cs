@@ -44,23 +44,13 @@ public sealed class JsonSerializationServiceTest
     public async Task DeserializeTest()
     {
         var result = _jsonSerializationService.Deserialize<Mod>(ModJson);
-        await AssertResult(result);
+        await Verify(result);
     }
 
-    private async Task AssertResult(Mod? mod)
+    [Test]
+    public async Task SerializeTest()
     {
-        await Assert.That(mod).IsNotNull();
-        await Assert.That(_mod.Author).IsEqualTo(mod.Author);
-        await Assert.That(_mod.ConfigFile).IsEqualTo(mod.ConfigFile);
-        await Assert.That(_mod.DependentLibs).IsEquivalentTo(mod.DependentLibs);
-        await Assert.That(_mod.DependentMods).IsEquivalentTo(mod.DependentMods);
-        await Assert.That(_mod.Description).IsEqualTo(mod.Description);
-        await Assert.That(_mod.DownloadLink).IsEqualTo(mod.DownloadLink);
-        await Assert.That(_mod.GameVersion).IsEquivalentTo(mod.GameVersion);
-        await Assert.That(_mod.IncompatibleMods).IsEquivalentTo(mod.IncompatibleMods);
-        await Assert.That(_mod.Name).IsEqualTo(mod.Name);
-        await Assert.That(_mod.RepositoryIdentifier).IsEqualTo(mod.RepositoryIdentifier);
-        await Assert.That(_mod.SHA256).IsEqualTo(mod.SHA256);
-        await Assert.That(_mod.Version).IsEqualTo(mod.Version);
+        var result = _jsonSerializationService.Serialize(_mod);
+        await Verify(result);
     }
 }

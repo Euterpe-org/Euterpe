@@ -3,7 +3,7 @@ namespace MuseDashModTools.Services;
 public sealed partial class NavigationService : ObservableObject
 {
     [ObservableProperty]
-    private Control? _content;
+    public partial Control? Content { get; private set; }
 
     #region Injections
 

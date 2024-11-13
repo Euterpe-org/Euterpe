@@ -7,7 +7,7 @@ namespace MuseDashModTools.ViewModels;
 public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<string>
 {
     [ObservableProperty]
-    private bool _isCollapsed;
+    public partial bool IsCollapsed { get; set; }
 
     public static string Version => $"v{AppVersion}";
 
