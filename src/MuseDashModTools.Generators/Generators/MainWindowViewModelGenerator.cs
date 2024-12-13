@@ -39,7 +39,7 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
             sb.AppendLine("\tbreak;");
         }
 
-        spc.AddSource("MainWindowViewModel.g.cs",
+        spc.AddSource("MainWindowViewModel.Receive.g.cs",
             Header +
             $$"""
               namespace MuseDashModTools.ViewModels;
