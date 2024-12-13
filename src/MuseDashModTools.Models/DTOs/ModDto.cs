@@ -2,12 +2,6 @@ namespace MuseDashModTools.Models;
 
 public sealed class ModDto : ObservableObject
 {
-    public ModDto()
-    {
-    }
-
-    public ModDto(Mod mod) => UpdateFromMod(mod);
-
     public ModDto RemoveLocalInfo()
     {
         FileNameWithoutExtension = null;
@@ -15,8 +9,6 @@ public sealed class ModDto : ObservableObject
         SHA256 = string.Empty;
         return this;
     }
-
-    public void UpdateFromMod(Mod? mod) => mod.Adapt(this);
 
     #region Dto Properties
 

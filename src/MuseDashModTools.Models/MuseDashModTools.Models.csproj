@@ -3,7 +3,7 @@
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="Mapster"/>
+        <PackageReference Include="Riok.Mapperly"/>
         <PackageReference Include="Semver"/>
     </ItemGroup>
 
