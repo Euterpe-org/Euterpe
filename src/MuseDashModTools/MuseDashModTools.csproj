@@ -44,6 +44,7 @@
         <PackageReference Include="Antelcat.I18N.Avalonia"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.AvaloniaEdit"/>
         <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
         <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -54,7 +55,6 @@
         <PackageReference Include="Downloader"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
-        <PackageReference Include="Markdown.Avalonia"/>
         <PackageReference Include="ReactiveUI"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>

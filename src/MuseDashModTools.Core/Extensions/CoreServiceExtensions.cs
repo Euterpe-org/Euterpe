@@ -11,9 +11,9 @@ public static class CoreServiceExtensions
 #if DEBUG
             .WriteTo.Console()
 #endif
-            .WriteTo.File(new LogFileFormatter(),
+            .WriteTo.Async(cfg => cfg.File(new LogFileFormatter(),
                 Path.Combine("Logs", logFileName),
-                rollingInterval: RollingInterval.Infinite)
+                rollingInterval: RollingInterval.Infinite))
             .CreateLogger();
     }
 

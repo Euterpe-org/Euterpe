@@ -44,7 +44,7 @@ public abstract class GitHubServiceBase
             var releases = await Client.GetFromJsonAsync<GitHubRelease[]>(ReleaseApiUrl, cancellationToken).ConfigureAwait(true);
             if (releases is not null)
             {
-                return Array.Find(releases, x => x.Prerelease);
+                return releases.FirstOrDefault(x => x.Prerelease);
             }
 
             Logger.Warning("Fetched releases from GitHub is null");

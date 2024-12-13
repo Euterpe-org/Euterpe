@@ -11,7 +11,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
 
     public static string Version => $"v{AppVersion}";
 
-    public static ObservableCollection<PageNavItem> PageNavItems =>
+    public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
         new(XAML_Page_Home, HomePageName),
         new(XAML_Page_Category_Modding, ModdingCategoryName)
@@ -52,14 +52,15 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
 #if RELEASE
         await DownloadManager.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
-        GetCurrentDesktop().Exit += (_, _) => OnExit();
+        GetCurrentDesktop().Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
         Logger.Information("MainWindow Initialized");
     }
 
-    private void OnExit()
+    private async Task OnExitAsync()
     {
         Setting.Theme = GetCurrentApplication().ActualThemeVariant == ThemeVariant.Light ? "Light" : "Dark";
-        SavingService.SaveSettingAsync();
+        await SavingService.SaveSettingAsync().ConfigureAwait(false);
+        await Log.CloseAndFlushAsync().ConfigureAwait(false);
     }
 
     #region Injections

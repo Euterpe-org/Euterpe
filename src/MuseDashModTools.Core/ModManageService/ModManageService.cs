@@ -37,7 +37,7 @@ public sealed partial class ModManageService : IModManageService
             }
             else
             {
-                _sourceCache.AddOrUpdate(new ModDto(webMod));
+                _sourceCache.AddOrUpdate(webMod.ToDto());
             }
         }
 

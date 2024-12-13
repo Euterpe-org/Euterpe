@@ -6,7 +6,7 @@ public sealed partial class GitHubDownloadService
 {
     protected async override Task DownloadAssetAsync(GitHubRelease release, CancellationToken cancellationToken = default)
     {
-        var asset = Array.Find(release.Assets, x => x.Name.Contains(PlatformService.OsString, StringComparison.OrdinalIgnoreCase));
+        var asset = release.Assets.FirstOrDefault(x => x.Name.Contains(PlatformService.OsString, StringComparison.OrdinalIgnoreCase));
         if (asset is null)
         {
             Logger.Warning("No asset found for current OS: {OS}", PlatformService.OsString);
@@ -32,7 +32,7 @@ public sealed partial class GitHubDownloadService
         try
         {
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = await Client.SendAsync(request, cancellationToken);
+            var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Forbidden)
             {
@@ -42,7 +42,7 @@ public sealed partial class GitHubDownloadService
             response.EnsureSuccessStatusCode();
 
             Logger.Information("Successfully fetched Readme from branch {Branch} of {Repo} from GitHubMirror", branch, repoId);
-            return await response.Content.ReadAsStringAsync(cancellationToken);
+            return await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -57,7 +57,7 @@ public sealed partial class GitHubDownloadService
 
         foreach (var branch in branches)
         {
-            var readme = await FetchReadmeFromBranchAsync(repoId, branch, cancellationToken);
+            var readme = await FetchReadmeFromBranchAsync(repoId, branch, cancellationToken).ConfigureAwait(false);
             if (!string.IsNullOrEmpty(readme))
             {
                 return readme;

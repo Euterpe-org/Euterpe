@@ -13,6 +13,7 @@
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="Serilog"/>
+        <PackageReference Include="Serilog.Sinks.Async"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Sinks.File"/>
     </ItemGroup>

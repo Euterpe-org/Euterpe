@@ -15,6 +15,9 @@ public sealed partial class SavingService : ISavingService
             if (savedSetting is null)
             {
                 Logger.Error("Saved setting is null");
+                await MessageBoxService.ErrorMessageBoxAsync("Failed to load setting, please delete the setting file and restart the application")
+                    .ConfigureAwait(true);
+                PlatformService.RevealFile(SettingPath);
                 return;
             }
 
