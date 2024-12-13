@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<linker>
-    <assembly fullname="Cocona" preserve="all"/>
-    <assembly fullname="Cocona.Core" preserve="all"/>
-    <assembly fullname="MuseDashModTools.Updater" preserve="all"/>
-    <assembly fullname="Spectre.Console" preserve="all"/>
-</linker>

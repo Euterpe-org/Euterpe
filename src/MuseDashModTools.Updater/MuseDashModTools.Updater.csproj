@@ -5,6 +5,7 @@
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
         <PublishAot>true</PublishAot>
         <TrimMode>partial</TrimMode>
+        <AssemblyName>Updater</AssemblyName>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -12,12 +13,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Cocona"/>
+        <PackageReference Include="ConsoleAppFramework">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Spectre.Console"/>
+        <PackageReference Include="ZLogger"/>
     </ItemGroup>
 
 </Project>

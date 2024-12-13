@@ -1,20 +1,23 @@
-﻿using Cocona;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ZLogger;
 
-var builder = CoconaApp.CreateBuilder();
-builder.Services.AddSingleton<ILocalService, LocalService>();
-
+var services = new ServiceCollection();
+services.AddSingleton<ILocalService, LocalService>();
+services.AddLogging(x =>
+{
+    x.ClearProviders();
 #if DEBUG
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
+    x.SetMinimumLevel(LogLevel.Trace);
 #else
-builder.Logging.SetMinimumLevel(LogLevel.Information);
+    x.SetMinimumLevel(LogLevel.Information);
 #endif
+    x.AddZLoggerConsole();
+});
 
-builder.Logging.AddConsole();
+await using var serviceProvider = services.BuildServiceProvider();
+ConsoleApp.ServiceProvider = serviceProvider;
 
-var app = builder.Build();
+var app = ConsoleApp.Create();
 
-app.AddCommands<Commands>();
-
-await app.RunAsync();
+await app.RunAsync(args).ConfigureAwait(false);
