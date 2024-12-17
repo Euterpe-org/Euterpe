@@ -13,10 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ConsoleAppFramework">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="ConsoleAppFramework"/>
         <PackageReference Include="Spectre.Console"/>
         <PackageReference Include="ZLogger"/>
     </ItemGroup>
