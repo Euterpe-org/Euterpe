@@ -1,6 +1,7 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:converters="clr-namespace:MuseDashModTools.Converters"
+              xmlns:local="clr-namespace:MuseDashModTools"
               xmlns:models="using:MuseDashModTools.Models"
               xmlns:u="https://irihi.tech/ursa"
               xmlns:vm="using:MuseDashModTools.ViewModels"
@@ -40,7 +41,7 @@
                        Theme="{DynamicResource TitleTextBlock}" />
             <TextBlock HorizontalAlignment="Center"
                        Classes="H8"
-                       Text="{Binding Version, Mode=OneTime}"
+                       Text="{x:Static local:BuildInfo.DisplayVersion}"
                        TextAlignment="Center"
                        Theme="{DynamicResource TitleTextBlock}" />
         </StackPanel>
