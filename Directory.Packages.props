@@ -14,10 +14,10 @@
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.2"/>
         <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="11.2.2"/>
         <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.2.0.1"/>
-        <PackageVersion Include="Autofac" Version="8.1.1"/>
+        <PackageVersion Include="Autofac" Version="8.2.0"/>
         <PackageVersion Include="CliWrap" Version="3.7.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
-        <PackageVersion Include="ConsoleAppFramework" Version="5.3.0">
+        <PackageVersion Include="ConsoleAppFramework" Version="5.3.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
@@ -44,7 +44,7 @@
         <PackageVersion Include="ReactiveUI" Version="20.1.63"/>
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.1.1"/>
-        <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.12.9">
+        <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.12.10">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
@@ -65,8 +65,8 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
-        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.12.9"/>
-        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.9"/>
         <PackageVersion Include="ZLogger" Version="2.5.9"/>
+        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.12.10"/>
+        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.10"/>
     </ItemGroup>
 </Project>
