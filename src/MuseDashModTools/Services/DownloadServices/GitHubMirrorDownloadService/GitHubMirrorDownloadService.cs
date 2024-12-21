@@ -1,4 +1,3 @@
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace MuseDashModTools.Services;
@@ -14,27 +13,6 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
     private const string PrimaryMelonLoaderUrl = PrimaryReleaseMirrorUrl + MelonLoaderBaseUrl;
     private const string PrimaryUnityDependencyUrl = PrimaryRawMirrorUrl + UnityDependencyBaseUrl;
     private const string PrimaryCpp2ILUrl = PrimaryReleaseMirrorUrl + Cpp2ILBaseUrl;
-
-    public async Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
-    {
-        var currentVersion = SemVersion.Parse(AppVersion);
-        Logger.Information("Checking for updates from GitHub... Current version: {Version}", currentVersion);
-
-        Client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(AppName, AppVersion));
-        Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Setting.GitHubToken);
-
-        if (!Setting.DownloadPrerelease)
-        {
-            var latestRelease = await GetLatestReleaseAsync(cancellationToken).ConfigureAwait(true);
-            await HandleReleaseAsync(latestRelease, cancellationToken).ConfigureAwait(true);
-        }
-        else
-        {
-            var prerelease = await GetPrereleaseAsync(cancellationToken).ConfigureAwait(true);
-            await HandleReleaseAsync(prerelease, cancellationToken).ConfigureAwait(true);
-        }
-    }
 
     public async Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
@@ -108,6 +86,23 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
     }
 
+    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    {
+        var releaseBaseUrl = ReleaseDownloadBaseUrl.Replace(GitHubBaseUrl, PrimaryReleaseMirrorUrl);
+        var downloadUrl = $"{releaseBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+
+        try
+        {
+            await Downloader.DownloadFileTaskAsync(downloadUrl,
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, tag),
+                cancellationToken).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download new version from GitHubMirror");
+        }
+    }
+
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
         if (_readmeUrlCache.TryGetValue(repoId, out var readme))
@@ -117,7 +112,7 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
 
         Logger.Information("Attempting to fetch Readme for {Repo}", repoId);
-        readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken);
+        readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(readme))
         {
             _readmeUrlCache[repoId] = readme;
@@ -125,7 +120,7 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         }
 
         Logger.Information("Branch readme fetch failed, trying to access GitHub API for Readme");
-        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken);
+        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(readme))
         {
             _readmeUrlCache[repoId] = readme;
@@ -166,7 +161,7 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
     public IPlatformService PlatformService { get; init; } = null!;
 
     [UsedImplicitly]
-    public override Setting Setting { get; init; } = null!;
+    public Setting Setting { get; init; } = null!;
 
     #endregion Injections
 }

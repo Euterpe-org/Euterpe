@@ -26,6 +26,7 @@ public static partial class ServiceExtensions
             .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
             .SingleInstance();
         builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
 
         // Download Services
         builder.RegisterType<CustomDownloadService>().As<ICustomDownloadService>().PropertiesAutowired().SingleInstance();

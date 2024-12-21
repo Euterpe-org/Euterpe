@@ -21,9 +21,9 @@ public sealed class Setting
 
     // Download Settings
     public DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
-    public string? GitHubToken { get; set; } = null;
-
-    public string? CustomDownloadSource { get; set; } = null;
+    public UpdateSource UpdateSource { get; set; } = UpdateSource.GitHubRSS;
+    public string? GitHubToken { get; set; }
+    public string? CustomDownloadSource { get; set; }
     public bool DownloadPrerelease { get; set; }
     public SemVersion? SkipVersion { get; set; }
 

@@ -1,18 +1,24 @@
 namespace MuseDashModTools.Services;
 
-public sealed partial class DownloadManager : IDownloadManager
+public sealed class DownloadManager : IDownloadManager
 {
-    public Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
+    private IDownloadService CurrentDownloadService => Setting.DownloadSource switch
     {
-        return Setting.DownloadSource switch
-        {
-            DownloadSource.GitHub => GitHubDownloadService.CheckForUpdatesAsync(cancellationToken),
-            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.CheckForUpdatesAsync(cancellationToken),
-            // For Custom Download Source, because they don't choose GitHub for other downloads, so we will check updates from GitHubMirror
-            DownloadSource.Custom => GitHubMirrorDownloadService.CheckForUpdatesAsync(cancellationToken),
-            _ => throw new UnreachableException()
-        };
-    }
+        DownloadSource.GitHub => GitHubDownloadService,
+        DownloadSource.GitHubMirror => GitHubMirrorDownloadService,
+        DownloadSource.Custom => CustomDownloadService,
+        _ => throw new UnreachableException()
+    };
+
+    public Task<bool> DownloadMelonLoaderAsync(EventHandler<DownloadStartedEventArgs> onDownloadStarted, IProgress<double> downloadProgress,
+        CancellationToken cancellationToken = default) =>
+        CurrentDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken);
+
+    public Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default) =>
+        CurrentDownloadService.DownloadModAsync(mod, cancellationToken);
+
+    public Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default) =>
+        CurrentDownloadService.DownloadLibAsync(libName, cancellationToken);
 
     public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
@@ -25,6 +31,9 @@ public sealed partial class DownloadManager : IDownloadManager
             _ => throw new UnreachableException()
         };
     }
+
+    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default) =>
+        CurrentDownloadService.GetModListAsync(cancellationToken);
 
     #region Injections
 

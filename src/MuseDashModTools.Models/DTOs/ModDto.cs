@@ -30,7 +30,7 @@ public sealed class ModDto : ObservableObject
     public bool IsValidConfigFile => !string.IsNullOrEmpty(ConfigFile) && File.Exists(ConfigFile);
 
     // GitHub Repo
-    public string RepoPageUrl => GitHubConstants.GitHubBaseUrl + RepositoryIdentifier;
+    public string RepoPageUrl => GitHubBaseUrl + RepositoryIdentifier;
 
     public bool IsValidRepository => !string.IsNullOrEmpty(RepoPageUrl) && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
 

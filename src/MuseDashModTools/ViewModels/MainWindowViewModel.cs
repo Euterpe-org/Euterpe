@@ -48,7 +48,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
             GetCurrentApplication().RequestedThemeVariant = ThemeVariant.Light;
         }
 #if RELEASE
-        await DownloadManager.CheckForUpdatesAsync().ConfigureAwait(true);
+        await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         GetCurrentDesktop().Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
         Logger.Information("MainWindow Initialized");
@@ -74,6 +74,9 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
 
     [UsedImplicitly]
     public NavigationService NavigationService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IUpdateService UpdateService { get; init; } = null!;
 
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;

@@ -4,8 +4,6 @@ namespace MuseDashModTools.Abstractions;
 
 public interface IDownloadService
 {
-    Task CheckForUpdatesAsync(CancellationToken cancellationToken = default);
-
     Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         IProgress<double> downloadProgress,

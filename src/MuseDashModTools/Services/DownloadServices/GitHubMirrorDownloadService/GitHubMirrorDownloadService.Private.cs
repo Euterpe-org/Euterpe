@@ -4,28 +4,6 @@ namespace MuseDashModTools.Services;
 
 public sealed partial class GitHubMirrorDownloadService
 {
-    protected async override Task DownloadAssetAsync(GitHubRelease release, CancellationToken cancellationToken = default)
-    {
-        var asset = release.Assets.FirstOrDefault(x => x.Name.Contains(PlatformService.OsString, StringComparison.OrdinalIgnoreCase));
-        if (asset is null)
-        {
-            Logger.Warning("No asset found for current OS: {OS}", PlatformService.OsString);
-            return;
-        }
-
-        try
-        {
-            var downloadUrl = asset.BrowserDownloadUrl.Replace("https://github.com/", PrimaryReleaseMirrorUrl);
-            await Downloader.DownloadFileTaskAsync(downloadUrl,
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, release.Name),
-                cancellationToken).ConfigureAwait(true);
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex, "Failed to download new version from GitHubMirror");
-        }
-    }
-
     private async Task<string?> FetchReadmeFromBranchAsync(string repoId, string branch, CancellationToken cancellationToken = default)
     {
         var url = $"{PrimaryRawMirrorUrl}{repoId}/{branch}/README.md";

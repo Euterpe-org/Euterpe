@@ -1,4 +1,3 @@
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace MuseDashModTools.Services;
@@ -12,30 +11,6 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
     private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
     private const string UnityDependencyUrl = GitHubRawContentBaseUrl + UnityDependencyBaseUrl;
     private const string Cpp2ILUrl = GitHubBaseUrl + Cpp2ILBaseUrl;
-
-    public async Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
-    {
-        var currentVersion = SemVersion.Parse(AppVersion);
-        Logger.Information("Checking for updates from GitHub... Current version: {Version}", currentVersion);
-
-        Client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(AppName, AppVersion));
-        Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        if (!Setting.GitHubToken.IsNullOrEmpty())
-        {
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Setting.GitHubToken);
-        }
-
-        if (!Setting.DownloadPrerelease)
-        {
-            var latestRelease = await GetLatestReleaseAsync(cancellationToken).ConfigureAwait(true);
-            await HandleReleaseAsync(latestRelease, cancellationToken).ConfigureAwait(true);
-        }
-        else
-        {
-            var prerelease = await GetPrereleaseAsync(cancellationToken).ConfigureAwait(true);
-            await HandleReleaseAsync(prerelease, cancellationToken).ConfigureAwait(true);
-        }
-    }
 
     public async Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
@@ -109,6 +84,22 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
     }
 
+    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    {
+        var downloadUrl = $"{ReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+
+        try
+        {
+            await Downloader.DownloadFileTaskAsync(downloadUrl,
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, tag),
+                cancellationToken).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Failed to download new version from GitHub");
+        }
+    }
+
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
         Logger.Information("Fetching mods from GitHub {Url}...", ModLinksUrl);
@@ -135,7 +126,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
 
         Logger.Information("Attempting to fetch Readme for {Repo}", repoId);
-        readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken);
+        readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(readme))
         {
             _readmeUrlCache[repoId] = readme;
@@ -143,7 +134,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         }
 
         Logger.Information("Branch readme fetch failed, trying to access GitHub API for Readme");
-        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken);
+        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(readme))
         {
             _readmeUrlCache[repoId] = readme;
@@ -151,6 +142,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
 
         return readme;
     }
+
 
     #region Injections
 
@@ -167,7 +159,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
     public IPlatformService PlatformService { get; init; } = null!;
 
     [UsedImplicitly]
-    public override Setting Setting { get; init; } = null!;
+    public Setting Setting { get; init; } = null!;
 
     #endregion Injections
 }

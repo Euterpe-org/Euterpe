@@ -40,4 +40,5 @@ global using static MuseDashModTools.Models.Constants.GitHubConstants;
 global using static MuseDashModTools.Models.Constants.PageNames;
 global using static MuseDashModTools.Utils.DesktopUtils;
 global using static MuseDashModTools.Utils.MessageBoxUtils;
+global using IDownloadService = MuseDashModTools.Abstractions.IDownloadService;
 global using MultiThreadDownloader = Downloader.DownloadService;

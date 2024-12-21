@@ -59,6 +59,7 @@
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="System.Linq.Async"/>
+        <PackageReference Include="System.ServiceModel.Syndication"/>
         <PackageReference Include="ValveKeyValue"/>
     </ItemGroup>
 
