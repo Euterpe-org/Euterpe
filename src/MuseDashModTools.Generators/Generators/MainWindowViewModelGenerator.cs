@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
@@ -25,8 +23,22 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
 
     private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<PageData?> dataList)
     {
-        var sb = new StringBuilder();
+        var sb = new IndentedStringBuilder();
 
+        sb.AppendLine(Header);
+        sb.AppendLine($$"""
+                        namespace MuseDashModTools.ViewModels;
+
+                        partial class MainWindowViewModel
+                        {
+                            {{GetGeneratedCodeAttribute(nameof(MainWindowViewModelGenerator))}}
+                            public void Receive(string pageName)
+                            {
+                                switch (pageName)
+                                {
+                        """);
+
+        sb.IncreaseIndent(3);
         foreach (var data in dataList)
         {
             if (data is not var (name))
@@ -39,24 +51,13 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
             sb.AppendLine("\tbreak;");
         }
 
-        spc.AddSource("MainWindowViewModel.Receive.g.cs",
-            Header +
-            $$"""
-              namespace MuseDashModTools.ViewModels;
-
-              partial class MainWindowViewModel
-              {
-                  {{GetGeneratedCodeAttribute(nameof(MainWindowViewModelGenerator))}}
-                  public void Receive(string pageName)
-                  {
-                      switch (pageName)
-                      {
-                          {{sb.ToString().TrimEnd()}}
+        sb.ResetIndent();
+        sb.AppendLine("""
+                              }
+                          }
                       }
-                  }
-              }
-              """
-        );
+                      """);
+        spc.AddSource("MainWindowViewModel.Receive.g.cs", sb.ToString());
     }
 
     private sealed record PageData(string Name);

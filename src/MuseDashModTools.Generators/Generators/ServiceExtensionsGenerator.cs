@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace MuseDashModTools.Generators;
+﻿namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
@@ -24,8 +22,19 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
     private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataList)
     {
-        var sb = new StringBuilder();
+        var sb = new IndentedStringBuilder();
+        sb.AppendLine(Header);
+        sb.AppendLine($$"""
+                        namespace MuseDashModTools.Extensions;
 
+                        partial class ServiceExtensions
+                        {
+                            {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
+                            public static void RegisterViewAndViewModels(this ContainerBuilder builder)
+                            {
+                        """);
+
+        sb.IncreaseIndent(2);
         foreach (var data in dataList)
         {
             if (data is not var (name))
@@ -35,24 +44,15 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
             sb.AppendLine($"builder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
             sb.AppendLine($"builder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
-            sb.AppendLine();
         }
 
-        spc.AddSource("ServiceExtensions.g.cs",
-            Header +
-            $$"""
-              namespace MuseDashModTools.Extensions;
+        sb.ResetIndent();
+        sb.AppendLine("""
+                          }
+                      }
+                      """);
 
-              partial class ServiceExtensions
-              {
-                  {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
-                  public static void RegisterViewAndViewModels(this ContainerBuilder builder)
-                  {
-                      {{sb.ToString().TrimEnd()}}
-                  }
-              }
-              """
-        );
+        spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
     }
 
     private sealed record ViewData(string Name);
