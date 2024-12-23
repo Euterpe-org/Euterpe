@@ -8,14 +8,6 @@ public sealed partial class UpdateService : IUpdateService
 
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
 
-    private IGitHubServiceBase CurrentDownloadService => Setting.DownloadSource switch
-    {
-        DownloadSource.GitHub => GitHubDownloadService,
-        DownloadSource.GitHubMirror => GitHubMirrorDownloadService,
-        DownloadSource.Custom => GitHubMirrorDownloadService,
-        _ => throw new UnreachableException()
-    };
-
     public Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {
         return Setting.UpdateSource switch
@@ -35,10 +27,7 @@ public sealed partial class UpdateService : IUpdateService
     public MultiThreadDownloader Downloader { get; init; } = null!;
 
     [UsedImplicitly]
-    public IGitHubDownloadService GitHubDownloadService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public IGitHubMirrorDownloadService GitHubMirrorDownloadService { get; init; } = null!;
+    public IDownloadManager DownloadManager { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;

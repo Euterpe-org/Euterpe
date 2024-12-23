@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 
 namespace MuseDashModTools.Services;
 
-public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGitHubMirrorDownloadService
+public sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloadService
 {
     private const string PrimaryRawMirrorUrl = "https://raw.kkgithub.com/";
     private const string PrimaryReleaseMirrorUrl = "https://kkgithub.com/";
@@ -105,7 +105,7 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
 
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
-        if (_readmeUrlCache.TryGetValue(repoId, out var readme))
+        if (ReadmeCache.TryGetValue(repoId, out var readme))
         {
             Logger.Information("Using cached Readme for {Repo}", repoId);
             return readme;
@@ -115,18 +115,12 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
         readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(readme))
         {
-            _readmeUrlCache[repoId] = readme;
+            ReadmeCache[repoId] = readme;
             return readme;
         }
 
-        Logger.Information("Branch readme fetch failed, trying to access GitHub API for Readme");
-        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken).ConfigureAwait(false);
-        if (!string.IsNullOrEmpty(readme))
-        {
-            _readmeUrlCache[repoId] = readme;
-        }
-
-        return readme;
+        Logger.Information("Branch readme fetch failed");
+        return null;
     }
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
@@ -149,13 +143,13 @@ public sealed partial class GitHubMirrorDownloadService : GitHubServiceBase, IGi
     #region Injections
 
     [UsedImplicitly]
-    public override HttpClient Client { get; init; } = null!;
+    public HttpClient Client { get; init; } = null!;
 
     [UsedImplicitly]
     public MultiThreadDownloader Downloader { get; init; } = null!;
 
     [UsedImplicitly]
-    public override ILogger Logger { get; init; } = null!;
+    public ILogger Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IPlatformService PlatformService { get; init; } = null!;

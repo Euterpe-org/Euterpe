@@ -38,6 +38,7 @@ global using static MuseDashModTools.Localization.MsgBox.Resources;
 global using static MuseDashModTools.Localization.XAML.Resources;
 global using static MuseDashModTools.Models.Constants.GitHubConstants;
 global using static MuseDashModTools.Models.Constants.PageNames;
+global using static MuseDashModTools.Models.GitHubResources;
 global using static MuseDashModTools.Utils.DesktopUtils;
 global using static MuseDashModTools.Utils.MessageBoxUtils;
 global using IDownloadService = MuseDashModTools.Abstractions.IDownloadService;

@@ -1,3 +1,3 @@
 namespace MuseDashModTools.Abstractions;
 
-public interface IGitHubMirrorDownloadService : IDownloadService, IGitHubServiceBase;
+public interface IGitHubMirrorDownloadService : IDownloadService;

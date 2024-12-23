@@ -100,7 +100,7 @@ public sealed partial class UpdateService
 
         if (result == MessageBoxResult.Yes)
         {
-            await CurrentDownloadService.DownloadReleaseByTagAsync(release.Version.ToString(), cancellationToken).ConfigureAwait(true);
+            await DownloadManager.DownloadReleaseByTagAsync(release.Version.ToString(), cancellationToken).ConfigureAwait(true);
             return;
         }
 
@@ -191,7 +191,7 @@ public sealed partial class UpdateService
 
         if (result == MessageBoxResult.Yes)
         {
-            await CurrentDownloadService.DownloadReleaseByTagAsync(release.TagName, cancellationToken).ConfigureAwait(true);
+            await DownloadManager.DownloadReleaseByTagAsync(release.TagName, cancellationToken).ConfigureAwait(true);
             return;
         }
 

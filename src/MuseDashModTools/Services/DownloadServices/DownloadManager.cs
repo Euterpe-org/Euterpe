@@ -20,6 +20,18 @@ public sealed class DownloadManager : IDownloadManager
     public Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default) =>
         CurrentDownloadService.DownloadLibAsync(libName, cancellationToken);
 
+    public Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    {
+        return Setting.DownloadSource switch
+        {
+            DownloadSource.GitHub => GitHubDownloadService.DownloadReleaseByTagAsync(tag, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadReleaseByTagAsync(tag, cancellationToken),
+            // For Custom Download Source, because they don't choose GitHub for other downloads, so we will use GitHubMirror
+            DownloadSource.Custom => GitHubMirrorDownloadService.DownloadReleaseByTagAsync(tag, cancellationToken),
+            _ => throw new UnreachableException()
+        };
+    }
+
     public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
         return Setting.DownloadSource switch

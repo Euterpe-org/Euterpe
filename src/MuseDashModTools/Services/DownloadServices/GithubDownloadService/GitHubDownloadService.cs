@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 
 namespace MuseDashModTools.Services;
 
-public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDownloadService
+public sealed partial class GitHubDownloadService : IGitHubDownloadService
 {
     private const string RawModLinksUrl = GitHubRawContentBaseUrl + ModLinksBaseUrl;
     private const string ModLinksUrl = RawModLinksUrl + "ModLinks.json";
@@ -119,7 +119,7 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
 
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
-        if (_readmeUrlCache.TryGetValue(repoId, out var readme))
+        if (ReadmeCache.TryGetValue(repoId, out var readme))
         {
             Logger.Information("Using cached Readme for {Repo}", repoId);
             return readme;
@@ -129,31 +129,24 @@ public sealed partial class GitHubDownloadService : GitHubServiceBase, IGitHubDo
         readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(readme))
         {
-            _readmeUrlCache[repoId] = readme;
+            ReadmeCache[repoId] = readme;
             return readme;
         }
 
-        Logger.Information("Branch readme fetch failed, trying to access GitHub API for Readme");
-        readme = await FetchReadmeFromApiAsync(repoId, cancellationToken).ConfigureAwait(false);
-        if (!string.IsNullOrEmpty(readme))
-        {
-            _readmeUrlCache[repoId] = readme;
-        }
-
-        return readme;
+        Logger.Information("Branch readme fetch failed");
+        return null;
     }
-
 
     #region Injections
 
     [UsedImplicitly]
-    public override HttpClient Client { get; init; } = null!;
+    public HttpClient Client { get; init; } = null!;
 
     [UsedImplicitly]
     public MultiThreadDownloader Downloader { get; init; } = null!;
 
     [UsedImplicitly]
-    public override ILogger Logger { get; init; } = null!;
+    public ILogger Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IPlatformService PlatformService { get; init; } = null!;

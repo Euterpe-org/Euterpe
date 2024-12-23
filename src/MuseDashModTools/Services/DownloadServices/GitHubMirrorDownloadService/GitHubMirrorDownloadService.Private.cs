@@ -4,10 +4,8 @@ namespace MuseDashModTools.Services;
 
 public sealed partial class GitHubMirrorDownloadService
 {
-    private async Task<string?> FetchReadmeFromBranchAsync(string repoId, string branch, CancellationToken cancellationToken = default)
+    private async Task<string?> TryFetchContentAsync(string url, CancellationToken cancellationToken)
     {
-        var url = $"{PrimaryRawMirrorUrl}{repoId}/{branch}/README.md";
-
         try
         {
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -20,21 +18,36 @@ public sealed partial class GitHubMirrorDownloadService
 
             response.EnsureSuccessStatusCode();
 
-            Logger.Information("Successfully fetched Readme from branch {Branch} of {Repo} from GitHub", branch, repoId);
             return await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to fetch Readme from {Repo} on branch {Branch} from GitHub", repoId, branch);
+            Logger.Error(ex, "Failed to fetch content from URL: {Url}", url);
             return null;
         }
     }
 
+    private async Task<string?> FetchReadmeFromBranchAsync(string repoId, string branch, CancellationToken cancellationToken = default)
+    {
+        foreach (var url in CommonReadmeNames.Select(readmeName => $"{PrimaryRawMirrorUrl}{repoId}/{branch}/{readmeName}"))
+        {
+            var content = await TryFetchContentAsync(url, cancellationToken).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(content))
+            {
+                continue;
+            }
+
+            Logger.Information("Successfully fetched Readme from branch {Branch} of {Repo} using URL: {Url}", branch, repoId, url);
+            return content;
+        }
+
+        return null;
+    }
+
     private async Task<string?> FetchReadmeFromBranchesAsync(string repoId, CancellationToken cancellationToken)
     {
-        var branches = new[] { "master", "main" };
-
-        foreach (var branch in branches)
+        foreach (var branch in Branches)
         {
             var readme = await FetchReadmeFromBranchAsync(repoId, branch, cancellationToken).ConfigureAwait(false);
             if (!string.IsNullOrEmpty(readme))
@@ -43,7 +56,7 @@ public sealed partial class GitHubMirrorDownloadService
             }
         }
 
-        Logger.Information("No Readme found in branches for {Repo}", repoId);
+        Logger.Information("No Readme found in any branches for {Repo}", repoId);
         return null;
     }
 }
