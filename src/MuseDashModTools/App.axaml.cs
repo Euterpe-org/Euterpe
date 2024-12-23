@@ -2,7 +2,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using HotAvalonia;
-using MuseDashModTools.Core.Extensions;
 
 namespace MuseDashModTools;
 
