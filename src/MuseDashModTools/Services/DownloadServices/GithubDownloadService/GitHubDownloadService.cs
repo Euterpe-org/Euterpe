@@ -91,7 +91,7 @@ public sealed partial class GitHubDownloadService : IGitHubDownloadService
         try
         {
             await Downloader.DownloadFileTaskAsync(downloadUrl,
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, tag),
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MuseDashModTools.zip"),
                 cancellationToken).ConfigureAwait(true);
         }
         catch (Exception ex)
