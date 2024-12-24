@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using System.ServiceModel.Syndication;
 using System.Xml;
 
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core.UpdateService;
 
 public sealed partial class UpdateService
 {
@@ -96,7 +96,8 @@ public sealed partial class UpdateService
             return;
         }
 
-        var result = await NoticeConfirmMessageBoxAsync($"New version available: {releaseVersion}, do you want to upgrade?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmMessageBoxAsync($"New version available: {releaseVersion}, do you want to upgrade?")
+            .ConfigureAwait(true);
 
         if (result == MessageBoxResult.Yes)
         {
@@ -187,7 +188,8 @@ public sealed partial class UpdateService
             return;
         }
 
-        var result = await NoticeConfirmMessageBoxAsync($"New version available: {releaseVersion}, do you want to upgrade?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmMessageBoxAsync($"New version available: {releaseVersion}, do you want to upgrade?")
+            .ConfigureAwait(true);
 
         if (result == MessageBoxResult.Yes)
         {

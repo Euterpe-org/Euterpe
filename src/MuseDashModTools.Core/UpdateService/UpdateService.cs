@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Services;
+﻿namespace MuseDashModTools.Core.UpdateService;
 
 public sealed partial class UpdateService : IUpdateService
 {
@@ -24,13 +24,13 @@ public sealed partial class UpdateService : IUpdateService
     public HttpClient Client { get; init; } = null!;
 
     [UsedImplicitly]
-    public MultiThreadDownloader Downloader { get; init; } = null!;
-
-    [UsedImplicitly]
     public IDownloadManager DownloadManager { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; } = null!;
 
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;

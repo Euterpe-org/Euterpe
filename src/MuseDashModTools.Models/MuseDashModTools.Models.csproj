@@ -7,4 +7,8 @@
         <PackageReference Include="Semver"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\MuseDashModTools.Constants\MuseDashModTools.Constants.csproj"/>
+    </ItemGroup>
+
 </Project>

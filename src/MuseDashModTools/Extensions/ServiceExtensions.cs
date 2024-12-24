@@ -1,3 +1,5 @@
+using MuseDashModTools.Core.UpdateService;
+
 namespace MuseDashModTools.Extensions;
 
 public static partial class ServiceExtensions

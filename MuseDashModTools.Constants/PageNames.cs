@@ -1,4 +1,4 @@
-namespace MuseDashModTools.Models.Constants;
+namespace MuseDashModTools.Constants;
 
 public static class PageNames
 {
