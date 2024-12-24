@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Models", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Localization", "src\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj", "{73D761AD-9898-4F32-BF81-0798E441527A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Constants", "MuseDashModTools.Constants\MuseDashModTools.Constants.csproj", "{AFDDD358-DCB4-46C2-BFF3-66D9142E4ACC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Constants", "src\MuseDashModTools.Constants\MuseDashModTools.Constants.csproj", "{AFDDD358-DCB4-46C2-BFF3-66D9142E4ACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
