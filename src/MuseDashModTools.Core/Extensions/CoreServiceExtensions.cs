@@ -33,6 +33,7 @@ public static class CoreServiceExtensions
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
 
         // Platform Service
         if (OperatingSystem.IsWindows())

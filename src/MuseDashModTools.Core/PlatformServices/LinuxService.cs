@@ -2,7 +2,7 @@ using System.Collections.Frozen;
 
 namespace MuseDashModTools.Core;
 
-public sealed class LinuxService : IPlatformService
+internal sealed class LinuxService : IPlatformService
 {
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     private static readonly FrozenSet<string> LinuxPaths = new[]

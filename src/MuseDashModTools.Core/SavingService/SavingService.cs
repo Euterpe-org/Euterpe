@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Core;
 
-public sealed partial class SavingService : ISavingService
+internal sealed partial class SavingService : ISavingService
 {
     private const string SettingFileName = "Setting.json";
     private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(MuseDashModTools));

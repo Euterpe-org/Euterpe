@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Core;
 
-public sealed class MacOsService : IPlatformService
+internal sealed class MacOsService : IPlatformService
 {
     public string OsString => "MacOS";
     public bool GetGamePath([NotNullWhen(true)] out string? folderPath) => throw new NotImplementedException();

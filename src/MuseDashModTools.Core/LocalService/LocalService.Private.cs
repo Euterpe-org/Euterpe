@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Core;
 
-public sealed partial class LocalService
+internal sealed partial class LocalService
 {
     private async Task<bool> CheckValidPathAsync(string folderPath)
     {

@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.Core;
 
-public sealed partial class ModManageService : IModManageService
+internal sealed partial class ModManageService : IModManageService
 {
     private string _gameVersion = null!;
     private SourceCache<ModDto, string> _sourceCache = null!;

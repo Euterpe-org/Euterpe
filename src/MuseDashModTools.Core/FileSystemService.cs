@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Core;
 
-public sealed class FileSystemService : IFileSystemService
+internal sealed class FileSystemService : IFileSystemService
 {
     #region Injections
 

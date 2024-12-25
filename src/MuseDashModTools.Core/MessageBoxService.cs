@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Core;
 
-public sealed class MessageBoxService : IMessageBoxService
+internal sealed class MessageBoxService : IMessageBoxService
 {
     #region Confirm MessageBox
 

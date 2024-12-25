@@ -3,9 +3,9 @@ using System.Net.Http.Json;
 using System.ServiceModel.Syndication;
 using System.Xml;
 
-namespace MuseDashModTools.Core.UpdateService;
+namespace MuseDashModTools.Core;
 
-public sealed partial class UpdateService
+internal sealed partial class UpdateService
 {
     #region GitHub RSS
 

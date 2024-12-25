@@ -6,7 +6,7 @@ using CliWrap;
 
 namespace MuseDashModTools.Core;
 
-public sealed partial class LocalService : ILocalService
+internal sealed partial class LocalService : ILocalService
 {
     public async Task CheckDotNetRuntimeInstallAsync()
     {

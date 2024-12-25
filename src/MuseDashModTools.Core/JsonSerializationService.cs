@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace MuseDashModTools.Core;
 
-public sealed class JsonSerializationService : IJsonSerializationService
+internal sealed class JsonSerializationService : IJsonSerializationService
 {
     private static readonly JsonSerializerOptions IndentedSerializerOptions = new()
     {

@@ -3,7 +3,7 @@ using Microsoft.Win32;
 
 namespace MuseDashModTools.Core;
 
-public sealed class WindowsService : IPlatformService
+internal sealed class WindowsService : IPlatformService
 {
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     private static readonly FrozenSet<string> WindowsPaths = new[]

@@ -1,6 +1,6 @@
-﻿namespace MuseDashModTools.Core.UpdateService;
+﻿namespace MuseDashModTools.Core;
 
-public sealed partial class UpdateService : IUpdateService
+internal sealed partial class UpdateService : IUpdateService
 {
     private const string ReleaseAPIUrl = GitHubAPIBaseUrl + RepoIdentifier + "releases";
     private const string LatestReleaseAPIUrl = GitHubAPIBaseUrl + RepoIdentifier + "releases/latest";

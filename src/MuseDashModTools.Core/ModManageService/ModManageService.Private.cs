@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Core;
 
-public sealed partial class ModManageService
+internal sealed partial class ModManageService
 {
     private void CheckModState(ModDto localMod, Mod webMod)
     {
