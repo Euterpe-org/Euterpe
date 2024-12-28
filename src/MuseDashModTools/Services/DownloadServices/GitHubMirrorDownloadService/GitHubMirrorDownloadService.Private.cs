@@ -22,7 +22,7 @@ public sealed partial class GitHubMirrorDownloadService
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to fetch content from URL: {Url}", url);
+            Logger.ZLogError(ex, $"Failed to fetch content from URL: {url}");
             return null;
         }
     }
@@ -38,7 +38,7 @@ public sealed partial class GitHubMirrorDownloadService
                 continue;
             }
 
-            Logger.Information("Successfully fetched Readme from branch {Branch} of {Repo} using URL: {Url}", branch, repoId, url);
+            Logger.ZLogInformation($"Successfully fetched Readme from branch {branch} of {repoId} using URL: {url}");
             return content;
         }
 
@@ -56,7 +56,7 @@ public sealed partial class GitHubMirrorDownloadService
             }
         }
 
-        Logger.Information("No Readme found in any branches for {Repo}", repoId);
+        Logger.ZLogInformation($"No Readme found in any branches for {repoId}");
         return null;
     }
 }

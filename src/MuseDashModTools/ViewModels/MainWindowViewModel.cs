@@ -51,14 +51,13 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         GetCurrentDesktop().Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
-        Logger.Information("MainWindow Initialized");
+        Logger.ZLogInformation($"MainWindow Initialized");
     }
 
-    private async Task OnExitAsync()
+    private Task OnExitAsync()
     {
         Setting.Theme = GetCurrentApplication().ActualThemeVariant == ThemeVariant.Light ? "Light" : "Dark";
-        await SavingService.SaveSettingAsync().ConfigureAwait(false);
-        await Log.CloseAndFlushAsync().ConfigureAwait(false);
+        return SavingService.SaveSettingAsync();
     }
 
     #region Injections
@@ -67,7 +66,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
     public IDownloadManager DownloadManager { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<MainWindowViewModel> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public ISavingService SavingService { get; init; } = null!;

@@ -11,12 +11,17 @@
         <PackageReference Include="Autofac"/>
         <PackageReference Include="CliWrap"/>
         <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="Serilog"/>
-        <PackageReference Include="Serilog.Sinks.Async"/>
-        <PackageReference Include="Serilog.Sinks.Console"/>
-        <PackageReference Include="Serilog.Sinks.File"/>
         <PackageReference Include="System.ServiceModel.Syndication"/>
+        <PackageReference Include="ZLogger"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="BannedSymbols.txt"/>
     </ItemGroup>
 
 </Project>

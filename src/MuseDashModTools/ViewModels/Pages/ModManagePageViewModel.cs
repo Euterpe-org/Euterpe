@@ -32,9 +32,9 @@ public sealed partial class ModManagePageViewModel : ViewModelBase
     [RelayCommand]
     private async Task InitializeAsync()
     {
-        Logger.Information("Initializing ModManagePageViewModel");
+        Logger.ZLogInformation($"Initializing ModManagePageViewModel");
         await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
-        Logger.Information("ModManagePageViewModel Initialized");
+        Logger.ZLogInformation($"ModManagePageViewModel Initialized");
     }
 
     [RelayCommand]
@@ -46,7 +46,7 @@ public sealed partial class ModManagePageViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<ModManagePageViewModel> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IModManageService ModManageService { get; init; } = null!;

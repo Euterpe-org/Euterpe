@@ -14,7 +14,7 @@ internal sealed partial class SavingService : ISavingService
             var savedSetting = await JsonSerializationService.DeserializeIndentedAsync<Setting>(stream).ConfigureAwait(true);
             if (savedSetting is null)
             {
-                Logger.Error("Saved setting is null");
+                Logger.ZLogError($"Saved setting is null");
                 await MessageBoxService.ErrorMessageBoxAsync("Failed to load setting, please delete the setting file and restart the application")
                     .ConfigureAwait(true);
                 PlatformService.RevealFile(SettingPath);
@@ -22,12 +22,12 @@ internal sealed partial class SavingService : ISavingService
             }
 
             Setting.CopyFrom(savedSetting);
-            Logger.Information("Setting loaded from {SettingPath} successfully", SettingPath);
+            Logger.ZLogInformation($"Setting loaded from {SettingPath} successfully");
             await CheckValidSettingAsync().ConfigureAwait(true);
         }
         else
         {
-            Logger.Information("Setting file not found, using default settings");
+            Logger.ZLogInformation($"Setting file not found, using default settings");
             await CheckValidSettingAsync().ConfigureAwait(true);
         }
     }
@@ -36,7 +36,7 @@ internal sealed partial class SavingService : ISavingService
     {
         await using var stream = new FileStream(SettingPath, FileMode.OpenOrCreate, FileAccess.Write);
         await JsonSerializationService.SerializeIndentedAsync(stream, Setting).ConfigureAwait(false);
-        Logger.Information("Setting saved to {SettingPath} successfully", SettingPath);
+        Logger.ZLogInformation($"Setting saved to {SettingPath} successfully");
     }
 
     #region Injections
@@ -48,7 +48,7 @@ internal sealed partial class SavingService : ISavingService
     public ILocalService LocalService { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<SavingService> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; } = null!;

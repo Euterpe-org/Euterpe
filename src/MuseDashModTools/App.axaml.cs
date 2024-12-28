@@ -1,7 +1,9 @@
+using Autofac.Extensions.DependencyInjection;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using HotAvalonia;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MuseDashModTools;
 
@@ -12,14 +14,16 @@ public sealed class App : Application
 
     private static IContainer ConfigureServices()
     {
-        var builder = new ContainerBuilder();
+        var services = new ServiceCollection();
+        services.RegisterLogger(LogFileName);
 
-        builder.RegisterLogger(LogFileName);
+        var builder = new ContainerBuilder();
         builder.RegisterCoreServices();
         builder.RegisterInstances();
         builder.RegisterInternalServices();
         builder.RegisterViewAndViewModels();
 
+        builder.Populate(services);
         return builder.Build();
     }
 

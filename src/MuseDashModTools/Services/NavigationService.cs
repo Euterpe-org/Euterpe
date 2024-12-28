@@ -8,13 +8,13 @@ public sealed partial class NavigationService : ObservableObject
     #region Injections
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<NavigationService> Logger { get; init; } = null!;
 
     #endregion Injections
 
     public void NavigateTo<TView>() where TView : Control, new()
     {
-        Logger.Information("Navigating to View: {View}", typeof(TView).Name);
+        Logger.ZLogInformation($"Navigating to View: {typeof(TView).Name}");
         Content = App.Container.Resolve<TView>();
     }
 }

@@ -32,13 +32,13 @@ internal sealed partial class ModManageService
         foreach (var duplicatedModGroup in duplicatedModGroups)
         {
             var modName = duplicatedModGroup.Key;
-            Logger.Information("Duplicated mod found {ModName}", modName);
+            Logger.ZLogInformation($"Duplicated mod found {modName}");
 
             var localMod = _sourceCache.Lookup(modName).Value;
             localMod.State = ModState.Duplicated;
             localMod.DuplicatedModPaths = string.Join(Environment.NewLine, duplicatedModGroup.Select(mod => mod.FileName));
         }
 
-        Logger.Information("Checking duplicated mods finished");
+        Logger.ZLogInformation($"Checking duplicated mods finished");
     }
 }

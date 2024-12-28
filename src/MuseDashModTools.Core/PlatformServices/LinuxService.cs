@@ -13,7 +13,7 @@ internal sealed class LinuxService : IPlatformService
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToFrozenSet();
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<LinuxService> Logger { get; init; } = null!;
 
     public string OsString => "Linux";
 
@@ -23,11 +23,11 @@ internal sealed class LinuxService : IPlatformService
         folderPath = LinuxPaths.FirstOrDefault(Directory.Exists);
         if (folderPath is null)
         {
-            Logger.Warning("Failed to auto detect game path on Linux");
+            Logger.ZLogWarning($"Failed to auto detect game path on Linux");
             return false;
         }
 
-        Logger.Information("Auto detected game path on Linux: {Path}", folderPath);
+        Logger.ZLogInformation($"Auto detected game path on Linux: {folderPath}");
         return true;
     }
 

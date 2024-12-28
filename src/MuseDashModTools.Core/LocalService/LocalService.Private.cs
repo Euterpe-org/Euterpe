@@ -9,12 +9,12 @@ internal sealed partial class LocalService
 
         if (!File.Exists(exePath) || !File.Exists(dllPath))
         {
-            Logger.Error("MuseDash.exe or GameAssembly.dll not found in {FolderPath}", folderPath);
+            Logger.ZLogError($"MuseDash.exe or GameAssembly.dll not found in {folderPath}");
             await MessageBoxService.ErrorMessageBoxAsync(MsgBox_Content_InvalidPath).ConfigureAwait(true);
             return false;
         }
 
-        Logger.Information("MuseDash.exe and GameAssembly.dll found in {FolderPath}", folderPath);
+        Logger.ZLogInformation($"MuseDash.exe and GameAssembly.dll found in {folderPath}");
         return true;
     }
 }

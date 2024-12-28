@@ -4,23 +4,24 @@ namespace MuseDashModTools.Core.Extensions;
 
 public static class CoreServiceExtensions
 {
-    private static void CreateLogger(string logFileName)
+    public static void RegisterLogger(this ServiceCollection services, string logFileName)
     {
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-#if DEBUG
-            .WriteTo.Console()
-#endif
-            .WriteTo.Async(cfg => cfg.File(new LogFileFormatter(),
-                Path.Combine("Logs", logFileName),
-                rollingInterval: RollingInterval.Infinite))
-            .CreateLogger();
-    }
-
-    public static void RegisterLogger(this ContainerBuilder builder, string logFileName)
-    {
-        CreateLogger(logFileName);
-        builder.RegisterInstance(Log.Logger).As<ILogger>().SingleInstance();
+        services.AddLogging(x =>
+        {
+            x.ClearProviders();
+            x.SetMinimumLevel(LogLevel.Debug);
+            x.AddZLoggerConsole(options =>
+            {
+                options.ConfigureEnableAnsiEscapeCode = true;
+                options.UseFormatter(() => new LogConsoleFormatter());
+            });
+            x.AddZLoggerFile((options, _) =>
+            {
+                options.FileShared = true;
+                options.UseFormatter(() => new LogFileFormatter());
+                return Path.Combine("Logs", logFileName);
+            });
+        });
     }
 
     public static void RegisterCoreServices(this ContainerBuilder builder)

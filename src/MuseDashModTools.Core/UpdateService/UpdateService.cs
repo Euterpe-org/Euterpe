@@ -27,7 +27,7 @@ internal sealed partial class UpdateService : IUpdateService
     public IDownloadManager DownloadManager { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<UpdateService> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; } = null!;

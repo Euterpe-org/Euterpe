@@ -18,7 +18,7 @@ internal sealed class WindowsService : IPlatformService
         .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToFrozenSet();
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<WindowsService> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;
@@ -34,15 +34,15 @@ internal sealed class WindowsService : IPlatformService
         {
             if (!GetPathFromRegistry(out folderPath))
             {
-                Logger.Warning("Failed to auto detect game path on Windows");
+                Logger.ZLogWarning($"Failed to auto detect game path on Windows");
                 return false;
             }
 
-            Logger.Information("Auto detect steam install on common path failed.\r\nDetected game path from Registry: {Path}", folderPath);
+            Logger.ZLogInformation($"Auto detect steam install on common path failed.\r\nDetected game path from Registry: {folderPath}");
             return true;
         }
 
-        Logger.Information("Auto detected game path on Windows: {Path}", folderPath);
+        Logger.ZLogInformation($"Auto detected game path on Windows: {folderPath}");
         return true;
     }
 
@@ -67,7 +67,7 @@ internal sealed class WindowsService : IPlatformService
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to set MD_DIRECTORY environment variable");
+            Logger.ZLogError(ex, $"Failed to set MD_DIRECTORY environment variable");
             return false;
         }
     }

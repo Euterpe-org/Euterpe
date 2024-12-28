@@ -43,6 +43,7 @@
     <ItemGroup>
         <PackageReference Include="Antelcat.I18N.Avalonia"/>
         <PackageReference Include="Autofac"/>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
         <PackageReference Include="Avalonia"/>
         <PackageReference Include="Avalonia.AvaloniaEdit"/>
         <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
@@ -55,6 +56,10 @@
         <PackageReference Include="Downloader"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="ReactiveUI"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
@@ -67,5 +72,9 @@
         <ProjectReference Include="..\MuseDashModTools.Core\MuseDashModTools.Core.csproj"/>
         <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="BannedSymbols.txt"/>
     </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@ internal sealed class FileSystemService : IFileSystemService
     #region Injections
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<FileSystemService> Logger { get; init; } = null!;
 
     #endregion Injections
 
@@ -16,7 +16,7 @@ internal sealed class FileSystemService : IFileSystemService
             return true;
         }
 
-        Logger.Error("{File} does not exists on {Path}", Path.GetFileName(filePath), filePath);
+        Logger.ZLogError($"{Path.GetFileName(filePath)} does not exists on {filePath}");
         return false;
     }
 
@@ -24,7 +24,7 @@ internal sealed class FileSystemService : IFileSystemService
     {
         if (deleteOption == DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
         {
-            Logger.Warning("{FilePath} does not exists, skipping deletion", filePath);
+            Logger.ZLogWarning($"{filePath} does not exists, skipping deletion");
             return true;
         }
 
@@ -35,7 +35,7 @@ internal sealed class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to delete file {FilePath}", filePath);
+            Logger.ZLogError(ex, $"Failed to delete file {filePath}");
             return false;
         }
     }
@@ -47,7 +47,7 @@ internal sealed class FileSystemService : IFileSystemService
             return true;
         }
 
-        Logger.Error("{Directory} does not exists on {Path}", Path.GetDirectoryName(directoryPath), directoryPath);
+        Logger.ZLogError($"{Path.GetDirectoryName(directoryPath)} does not exists on {directoryPath}");
         return false;
     }
 
@@ -55,7 +55,7 @@ internal sealed class FileSystemService : IFileSystemService
     {
         if (deleteOption == DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
         {
-            Logger.Warning("{DirectoryPath} does not exists, skipping deletion", directoryPath);
+            Logger.ZLogWarning($"{directoryPath} does not exists, skipping deletion");
             return true;
         }
 
@@ -66,7 +66,7 @@ internal sealed class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to delete directory {DirectoryPath}", directoryPath);
+            Logger.ZLogError(ex, $"Failed to delete directory {directoryPath}");
             return false;
         }
     }

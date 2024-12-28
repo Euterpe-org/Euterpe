@@ -1,0 +1,2 @@
+T:Microsoft.Extensions.Logging.LoggerExtensions;Don't use this, use ZLog*** instead.
+T:System.Console;Don't use this, use logger instead.

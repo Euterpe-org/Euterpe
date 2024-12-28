@@ -19,7 +19,7 @@ internal sealed partial class LocalService : ILocalService
 
         if (!outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6."))
         {
-            Logger.Information("DotNet Runtime not found, showing error message box...");
+            Logger.ZLogInformation($"DotNet Runtime not found, showing error message box...");
             await MessageBoxService.ErrorMessageBoxAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
         }
     }
@@ -49,7 +49,7 @@ internal sealed partial class LocalService : ILocalService
             return false;
         }
 
-        Logger.Information("MelonLoader installed successfully");
+        Logger.ZLogInformation($"MelonLoader installed successfully");
         await MessageBoxService.SuccessMessageBoxAsync("MelonLoader installed successfully").ConfigureAwait(true);
         return true;
     }
@@ -77,7 +77,7 @@ internal sealed partial class LocalService : ILocalService
             return false;
         }
 
-        Logger.Information("MelonLoader uninstalled successfully");
+        Logger.ZLogInformation($"MelonLoader uninstalled successfully");
         await MessageBoxService.SuccessMessageBoxAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
         return true;
     }
@@ -89,7 +89,7 @@ internal sealed partial class LocalService : ILocalService
         while (path.IsNullOrEmpty() || !await CheckValidPathAsync(path).ConfigureAwait(true))
         {
             path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
-            Logger.Information("Selected MuseDash folder: {MuseDashFolder}", path);
+            Logger.ZLogInformation($"Selected MuseDash folder: {path}");
         }
 
         return path;
@@ -106,14 +106,14 @@ internal sealed partial class LocalService : ILocalService
         var module = ModuleDefinition.FromFile(filePath);
         if (module.Assembly is null)
         {
-            Logger.Error("Invalid mod file: {FilePath}", filePath);
+            Logger.ZLogError($"Invalid mod file: {filePath}");
             return null;
         }
 
         var attribute = module.Assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").SingleOrDefault();
         if (attribute is null)
         {
-            Logger.Warning("{FilePath} is not a mod file but inside Mods folder", filePath);
+            Logger.ZLogWarning($"{filePath} is not a mod file but inside Mods folder");
             return null;
         }
 
@@ -143,7 +143,7 @@ internal sealed partial class LocalService : ILocalService
             UseShellExecute = true
         });
 
-        Logger.Information("Launching game with launch arguments: {LaunchArguments}", launchArguments);
+        Logger.ZLogInformation($"Launching game with launch arguments: {launchArguments}");
     }
 
     public async ValueTask<string> ReadGameVersionAsync()
@@ -158,13 +158,13 @@ internal sealed partial class LocalService : ILocalService
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
 
-            Logger.Information("Game version read successfully: {BundleVersion}", bundleVersion);
+            Logger.ZLogInformation($"Game version read successfully: {bundleVersion}");
             assetsManager.UnloadAll();
             return bundleVersion;
         }
         catch (Exception ex)
         {
-            Logger.Fatal(ex, "Read game version failed, showing error message box...");
+            Logger.ZLogCritical(ex, $"Read game version failed, showing error message box...");
             await MessageBoxService.FormatErrorMessageBoxAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
             Environment.Exit(0);
         }
@@ -177,12 +177,12 @@ internal sealed partial class LocalService : ILocalService
         try
         {
             ZipFile.ExtractToDirectory(zipPath, extractPath, true);
-            Logger.Information("Successfully extracted {ZipPath} to {ExtractPath}", zipPath, extractPath);
+            Logger.ZLogInformation($"Successfully extracted {zipPath} to {extractPath}");
             return true;
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to extract file {ZipPath} to {ExtractPath}", zipPath, extractPath);
+            Logger.ZLogError(ex, $"Failed to extract file {zipPath} to {extractPath}");
             return false;
         }
     }
@@ -196,7 +196,7 @@ internal sealed partial class LocalService : ILocalService
     public IFileSystemPickerService FileSystemPickerService { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<LocalService> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; } = null!;

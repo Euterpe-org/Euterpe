@@ -11,8 +11,8 @@ internal sealed partial class UpdateService
 
     private async Task CheckGitHubRSSForUpdatesAsync(CancellationToken cancellationToken = default)
     {
-        Logger.Information("Get Current version: {Version}", _currentVersion);
-        Logger.Information("Checking for updates from GitHub RSS...");
+        Logger.ZLogInformation($"Get Current version: {_currentVersion}");
+        Logger.ZLogInformation($"Checking for updates from GitHub RSS...");
 
         GitHubRSS? release;
         if (!Setting.DownloadPrerelease)
@@ -37,7 +37,7 @@ internal sealed partial class UpdateService
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to fetch release from GitHub RSS");
+            Logger.ZLogError(ex, $"Failed to fetch release from GitHub RSS");
             return null;
         }
     }
@@ -83,16 +83,16 @@ internal sealed partial class UpdateService
     {
         if (release is null)
         {
-            Logger.Warning("Fetched release from GitHub RSS is null");
+            Logger.ZLogWarning($"Fetched release from GitHub RSS is null");
             return;
         }
 
         var releaseVersion = release.Version;
-        Logger.Information("Release version parsed: {Version}", releaseVersion);
+        Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
 
         if (Setting.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
         {
-            Logger.Information("No new version available");
+            Logger.ZLogInformation($"No new version available");
             return;
         }
 
@@ -105,7 +105,7 @@ internal sealed partial class UpdateService
             return;
         }
 
-        Logger.Information("User choose to skip this version: {Version}", releaseVersion);
+        Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
         Setting.SkipVersion = releaseVersion;
     }
 
@@ -115,8 +115,8 @@ internal sealed partial class UpdateService
 
     private async Task CheckGitHubAPIForUpdatesAsync(CancellationToken cancellationToken = default)
     {
-        Logger.Information("Get Current version: {Version}", _currentVersion);
-        Logger.Information("Checking for updates from GitHub API...");
+        Logger.ZLogInformation($"Get Current version: {_currentVersion}");
+        Logger.ZLogInformation($"Checking for updates from GitHub API...");
 
         Client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(AppName, AppVersion));
         Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -146,7 +146,7 @@ internal sealed partial class UpdateService
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to fetch latest release from GitHub API");
+            Logger.ZLogError(ex, $"Failed to fetch latest release from GitHub API");
             return null;
         }
     }
@@ -161,12 +161,12 @@ internal sealed partial class UpdateService
                 return releases[0];
             }
 
-            Logger.Warning("Fetched releases from GitHub API is null");
+            Logger.ZLogWarning($"Fetched releases from GitHub API is null");
             return null;
         }
         catch (Exception ex)
         {
-            Logger.Error(ex, "Failed to fetch prerelease from GitHub API");
+            Logger.ZLogError(ex, $"Failed to fetch prerelease from GitHub API");
             return null;
         }
     }
@@ -175,16 +175,16 @@ internal sealed partial class UpdateService
     {
         if (release is null)
         {
-            Logger.Warning("Fetched release from GitHub API is null");
+            Logger.ZLogWarning($"Fetched release from GitHub API is null");
             return;
         }
 
         var releaseVersion = SemVersion.Parse(release.TagName, SemVersionStyles.AllowV);
-        Logger.Information("Release version parsed: {Version}", releaseVersion);
+        Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
 
         if (Setting.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
         {
-            Logger.Information("No new version available");
+            Logger.ZLogInformation($"No new version available");
             return;
         }
 
@@ -197,7 +197,7 @@ internal sealed partial class UpdateService
             return;
         }
 
-        Logger.Information("User choose to skip this version: {Version}", releaseVersion);
+        Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
         Setting.SkipVersion = releaseVersion;
     }
 

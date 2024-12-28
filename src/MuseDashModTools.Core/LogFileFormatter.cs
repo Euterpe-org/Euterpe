@@ -1,20 +1,22 @@
-﻿using Serilog.Events;
-using Serilog.Formatting;
+﻿using System.Buffers;
+using Utf8StringInterpolation;
 
 namespace MuseDashModTools.Core;
 
-public sealed class LogFileFormatter : ITextFormatter
+public sealed class LogFileFormatter : IZLoggerFormatter
 {
-    public void Format(LogEvent logEvent, TextWriter output)
+    public void FormatLogEntry(IBufferWriter<byte> writer, IZLoggerEntry entry)
     {
-        output.WriteLine($"[{logEvent.Timestamp:HH:mm:ss.fff zzz}] [{logEvent.Level}]");
-        output.WriteLine(logEvent.MessageTemplate.Render(logEvent.Properties, CultureInfo.InvariantCulture));
-        if (logEvent.Exception is not null)
-        {
-            output.WriteLine(logEvent.Exception.ToString());
-        }
+        using var utf8Writer = new Utf8StringWriter<IBufferWriter<byte>>(writer);
 
-        output.WriteLine("------------------------------");
-        output.Write(output.NewLine);
+        utf8Writer.AppendLine($"[{entry.LogInfo.Timestamp.Local:HH:mm:ss.fff zzz}] [{entry.LogInfo.LogLevel}] ({entry.LogInfo.Category})");
+        utf8Writer.AppendLine(entry.ToString());
+
+        if (entry.LogInfo.Exception is { } ex)
+        {
+            utf8Writer.AppendLine(ex.ToString());
+        }
     }
+
+    public bool WithLineBreak => true;
 }
