@@ -2,13 +2,6 @@ namespace MuseDashModTools.Services;
 
 public sealed class CustomDownloadService : ICustomDownloadService
 {
-    #region Injections
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
-
-    #endregion Injections
-
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         IProgress<double> downloadProgress,
@@ -21,4 +14,14 @@ public sealed class CustomDownloadService : ICustomDownloadService
     public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
+
+    #region Injections
+
+    [UsedImplicitly]
+    public ILogger<CustomDownloadService> Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    #endregion Injections
 }

@@ -146,7 +146,7 @@ public sealed partial class GitHubDownloadService : IGitHubDownloadService
     public MultiThreadDownloader Downloader { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILogger Logger { get; init; } = null!;
+    public ILogger<GitHubDownloadService> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IPlatformService PlatformService { get; init; } = null!;
