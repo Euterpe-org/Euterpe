@@ -3,6 +3,7 @@ using System.Text;
 using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
 using CliWrap;
+using MuseDashModTools.Common.Extensions;
 
 namespace MuseDashModTools.Core;
 

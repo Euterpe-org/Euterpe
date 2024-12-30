@@ -17,5 +17,5 @@ global using Ursa.Controls;
 global using ZLogger;
 global using static MuseDashModTools.Localization.MsgBox.Resources;
 global using static MuseDashModTools.Localization.General.Resources;
-global using static MuseDashModTools.Constants.BuildInfo;
-global using static MuseDashModTools.Constants.GitHubConstants;
+global using static MuseDashModTools.Common.BuildInfo;
+global using static MuseDashModTools.Common.GitHubConstants;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace MuseDashModTools.Constants;
+namespace MuseDashModTools.Common;
 
 public static class GitHubResources
 {

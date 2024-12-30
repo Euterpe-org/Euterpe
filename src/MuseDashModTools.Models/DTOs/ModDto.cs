@@ -27,12 +27,12 @@ public sealed class ModDto : ObservableObject
     public bool IsDuplicated => State is ModState.Duplicated;
     public string? DuplicatedModPaths { get; set; }
 
-    public bool IsValidConfigFile => !string.IsNullOrEmpty(ConfigFile) && File.Exists(ConfigFile);
+    public bool IsValidConfigFile => !ConfigFile.IsNullOrEmpty() && File.Exists(ConfigFile);
 
     // GitHub Repo
     public string RepoPageUrl => GitHubBaseUrl + RepositoryIdentifier;
 
-    public bool IsValidRepository => !string.IsNullOrEmpty(RepoPageUrl) && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
+    public bool IsValidRepository => !RepoPageUrl.IsNullOrEmpty() && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
 
     // Dependencies
     public bool HasDependency => DependentMods.Length + DependentLibs.Length > 0;

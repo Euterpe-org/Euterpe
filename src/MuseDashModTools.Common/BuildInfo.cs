@@ -1,4 +1,4 @@
-namespace MuseDashModTools.Constants;
+namespace MuseDashModTools.Common;
 
 public static class BuildInfo
 {

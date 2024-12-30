@@ -1,6 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
-namespace MuseDashModTools.Core.Extensions;
+namespace MuseDashModTools.Common.Extensions;
 
 public static class StringExtensions
 {

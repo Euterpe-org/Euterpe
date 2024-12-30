@@ -1,6 +1,6 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:constants="clr-namespace:MuseDashModTools.Constants;assembly=MuseDashModTools.Constants"
+              xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
               xmlns:converters="clr-namespace:MuseDashModTools.Converters"
               xmlns:models="using:MuseDashModTools.Models"
               xmlns:u="https://irihi.tech/ursa"
