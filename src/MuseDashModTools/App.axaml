@@ -7,7 +7,6 @@
              RequestedThemeVariant="Dark">
 
     <Application.Styles>
-        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <StyleInclude Source="avares://MuseDashModTools.Styles/ModToolsStyles.axaml" />
         <semi:SemiTheme Locale="zh-CN" />
         <u-Semi:SemiTheme Locale="zh-CN" />
