@@ -9,12 +9,16 @@ public static class CoreServiceExtensions
         services.AddLogging(x =>
         {
             x.ClearProviders();
-            x.SetMinimumLevel(LogLevel.Debug);
+#if DEBUG
+            x.SetMinimumLevel(LogLevel.Trace);
             x.AddZLoggerConsole(options =>
             {
                 options.ConfigureEnableAnsiEscapeCode = true;
                 options.UseFormatter(() => new LogConsoleFormatter());
             });
+#else
+            x.SetMinimumLevel(LogLevel.Information);
+#endif
             x.AddZLoggerFile((options, _) =>
             {
                 options.FileShared = true;
