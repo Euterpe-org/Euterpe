@@ -18,9 +18,9 @@
     </Design.DataContext>
 
     <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Opened">
+        <RoutedEventTriggerBehavior RoutedEvent="{x:Static Control.LoadedEvent}">
             <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </EventTriggerBehavior>
+        </RoutedEventTriggerBehavior>
     </Interaction.Behaviors>
 
     <u:UrsaWindow.RightContent>
