@@ -53,7 +53,7 @@
         <u:NavMenu Grid.Column="0"
                    CommandBinding="{Binding NavigationCommand, Mode=OneTime}"
                    HeaderBinding="{Binding ., Mode=OneTime}"
-                   IconBinding="{Binding Key, Mode=OneTime}"
+                   IconBinding="{Binding IconResourceKey, Mode=OneTime}"
                    IsHorizontalCollapsed="{Binding IsCollapsed, Mode=TwoWay}"
                    ItemsSource="{Binding PageNavItems, Mode=OneTime}"
                    SubMenuBinding="{Binding Children, Mode=OneTime}">
@@ -72,7 +72,7 @@
                                        VerticalAlignment="Center"
                                        ActiveForeground="{DynamicResource SemiBlue5}"
                                        ActiveStrokeBrush="{DynamicResource SemiBlue5}"
-                                       Data="{Binding ., Converter={x:Static converters:FuncValueConverters.PageIconConverter}, Mode=OneWay}"
+                                       Data="{Binding ., Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneWay}"
                                        Foreground="{DynamicResource SemiGrey5}"
                                        IsActive="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenuItem}, Path=IsHighlighted, Mode=TwoWay}"
                                        StrokeBrush="{DynamicResource SemiGrey5}" />

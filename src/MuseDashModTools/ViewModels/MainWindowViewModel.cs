@@ -10,27 +10,27 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
 
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new(XAML_Page_Home, HomePageName),
-        new(XAML_Page_Category_Modding, ModdingCategoryName)
+        new(XAML_Page_Home, "Home", HomePageName),
+        new(XAML_Page_Category_Modding, "Wrench", ModdingCategoryName)
         {
             IsNavigable = false,
             Children =
             [
-                new PageNavItem(XAML_Page_ModManage, ModManagePageName),
-                new PageNavItem(XAML_Page_ModDevelop, ModDevelopPageName) { Status = "WIP" }
+                new PageNavItem(XAML_Page_ModManage, "GridView", ModManagePageName),
+                new PageNavItem(XAML_Page_ModDevelop, "Code", ModDevelopPageName) { Status = "WIP" }
             ]
         },
-        new(XAML_Page_Category_Charting, ChartingCategoryName)
+        new(XAML_Page_Category_Charting, "Disc", ChartingCategoryName)
         {
             IsNavigable = false,
             Children =
             [
-                new PageNavItem(XAML_Page_ChartManage, ChartManagePageName) { Status = "WIP" },
-                new PageNavItem(XAML_Page_ChartToolkit, ChartToolkitPageName) { Status = "WIP" }
+                new PageNavItem(XAML_Page_ChartManage, "Song", ChartManagePageName) { Status = "WIP" },
+                new PageNavItem(XAML_Page_ChartToolkit, "Briefcase", ChartToolkitPageName) { Status = "WIP" }
             ]
         },
-        new(XAML_Page_About, AboutPageName),
-        new(XAML_Page_Setting, SettingPageName)
+        new(XAML_Page_About, "InfoCircle", AboutPageName),
+        new(XAML_Page_Setting, "Setting", SettingPageName)
     ];
 
     public MainWindowViewModel()
