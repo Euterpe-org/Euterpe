@@ -36,7 +36,9 @@ public sealed class LogConsoleFormatter : IZLoggerFormatter
                 throw new UnreachableException();
         }
 
-        utf8Writer.Append($" ({entry.LogInfo.Category}) ");
+        utf8Writer.AppendUtf8("("u8);
+        utf8Writer.AppendUtf8(entry.LogInfo.Category.Utf8Span[17..]);
+        utf8Writer.AppendUtf8(") "u8);
         utf8Writer.Append(entry.ToString());
 
         if (entry.LogInfo.Exception is not { } ex)
