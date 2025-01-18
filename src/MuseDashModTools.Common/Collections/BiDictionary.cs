@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Frozen;
 using System.Runtime.CompilerServices;
 
 namespace MuseDashModTools.Common.Collections;
@@ -127,6 +128,8 @@ public sealed class BiDictionary<T1, T2> : IEnumerable<KeyValuePair<T1, T2>>
         _forward.Clear();
         _reverse.Clear();
     }
+
+    public FrozenBiDictionary<T1, T2> ToFrozenBiDictionary() => new(_forward.ToFrozenDictionary(), _reverse.ToFrozenDictionary());
 }
 
 public static class BiDictionary
