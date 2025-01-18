@@ -1,6 +1,5 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
              xmlns:semi="https://irihi.tech/semi"
              xmlns:u-Semi="https://irihi.tech/ursa/themes/semi"
              x:Class="MuseDashModTools.App"
@@ -8,8 +7,9 @@
 
     <Application.Styles>
         <StyleInclude Source="avares://MuseDashModTools.Styles/ModToolsStyles.axaml" />
-        <semi:SemiTheme Locale="zh-CN" />
-        <u-Semi:SemiTheme Locale="zh-CN" />
+        <semi:SemiTheme />
+        <semi:SemiPopupAnimations />
+        <u-Semi:SemiTheme />
     </Application.Styles>
 
     <TrayIcon.Icons>
