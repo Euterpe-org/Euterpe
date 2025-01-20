@@ -44,7 +44,6 @@
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
         <PackageReference Include="Avalonia"/>
-        <PackageReference Include="Avalonia.AvaloniaEdit"/>
         <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
         <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
