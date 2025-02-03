@@ -45,8 +45,6 @@
                        TextAlignment="Center"
                        Theme="{DynamicResource TitleTextBlock}" />
         </StackPanel>
-
-
     </u:UrsaWindow.TitleBarContent>
 
     <Grid ColumnDefinitions="Auto,Auto">

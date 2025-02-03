@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace MuseDashModTools.Models.GitHub;
 
 public sealed class GitHubRelease

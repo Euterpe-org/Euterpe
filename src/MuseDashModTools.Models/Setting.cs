@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.Json.Serialization;
 using Semver;
 
 namespace MuseDashModTools.Models;
