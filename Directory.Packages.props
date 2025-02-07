@@ -17,7 +17,7 @@
         <PackageVersion Include="Autofac" Version="8.2.0"/>
         <PackageVersion Include="CliWrap" Version="3.7.1"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
-        <PackageVersion Include="ConsoleAppFramework" Version="5.3.4">
+        <PackageVersion Include="ConsoleAppFramework" Version="5.4.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
@@ -63,7 +63,7 @@
         <PackageVersion Include="Verify" Version="28.9.0"/>
         <PackageVersion Include="Verify.TUnit" Version="28.9.0"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
-        <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.1">
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>

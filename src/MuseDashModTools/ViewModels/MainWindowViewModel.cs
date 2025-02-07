@@ -46,14 +46,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
-        GetCurrentDesktop().Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
         Logger.ZLogInformation($"MainWindow Initialized");
-    }
-
-    private Task OnExitAsync()
-    {
-        Setting.Theme = AvaloniaResources.ThemeVariants[GetCurrentApplication().ActualThemeVariant];
-        return SavingService.SaveSettingAsync();
     }
 
     #region Injections

@@ -20,13 +20,21 @@ public sealed class BiDictionary<T1, T2> : IEnumerable<KeyValuePair<T1, T2>>
     public T2 this[T1 key]
     {
         get => _forward[key];
-        set => _forward[key] = value;
+        set
+        {
+            _forward[key] = value;
+            _reverse[value] = key;
+        }
     }
 
     public T1 this[T2 key]
     {
         get => _reverse[key];
-        set => _reverse[key] = value;
+        set
+        {
+            _reverse[key] = value;
+            _forward[value] = key;
+        }
     }
 
     /// <summary>
