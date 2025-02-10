@@ -5,9 +5,6 @@ namespace MuseDashModTools.ViewModels;
 
 public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<string>
 {
-    [ObservableProperty]
-    public partial bool IsCollapsed { get; set; }
-
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
         new(XAML_Page_Home, "Home", HomePageName),
@@ -16,8 +13,8 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
             IsNavigable = false,
             Children =
             [
-                new PageNavItem(XAML_Page_ModManage, "GridView", ModManagePageName),
-                new PageNavItem(XAML_Page_ModDevelop, "Code", ModDevelopPageName) { Status = "WIP" }
+                new(XAML_Page_ModManage, "GridView", ModManagePageName),
+                new(XAML_Page_ModDevelop, "Code", ModDevelopPageName) { Status = "WIP" }
             ]
         },
         new(XAML_Page_Category_Charting, "Disc", ChartingCategoryName)
@@ -25,8 +22,8 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
             IsNavigable = false,
             Children =
             [
-                new PageNavItem(XAML_Page_ChartManage, "Song", ChartManagePageName) { Status = "WIP" },
-                new PageNavItem(XAML_Page_ChartToolkit, "Briefcase", ChartToolkitPageName) { Status = "WIP" }
+                new(XAML_Page_ChartManage, "Song", ChartManagePageName) { Status = "WIP" },
+                new(XAML_Page_ChartToolkit, "Briefcase", ChartToolkitPageName) { Status = "WIP" }
             ]
         },
         new(XAML_Page_About, "InfoCircle", AboutPageName),

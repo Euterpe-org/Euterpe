@@ -30,29 +30,12 @@
                              Mode="Controller" />
     </u:UrsaWindow.RightContent>
 
-    <u:UrsaWindow.TitleBarContent>
-        <StackPanel Margin="0,2,0,0"
-                    HorizontalAlignment="Center"
-                    Orientation="Vertical">
-            <TextBlock HorizontalAlignment="Center"
-                       Classes="H6"
-                       Text="Muse Dash Mod Tools"
-                       TextAlignment="Center"
-                       Theme="{DynamicResource TitleTextBlock}" />
-            <TextBlock HorizontalAlignment="Center"
-                       Classes="H8"
-                       Text="{x:Static constants:BuildInfo.DisplayVersion}"
-                       TextAlignment="Center"
-                       Theme="{DynamicResource TitleTextBlock}" />
-        </StackPanel>
-    </u:UrsaWindow.TitleBarContent>
-
     <Grid ColumnDefinitions="Auto,Auto">
         <u:NavMenu Grid.Column="0"
                    CommandBinding="{Binding NavigationCommand, Mode=OneTime}"
                    HeaderBinding="{Binding ., Mode=OneTime}"
                    IconBinding="{Binding IconResourceKey, Mode=OneTime}"
-                   IsHorizontalCollapsed="{Binding IsCollapsed, Mode=TwoWay}"
+                   IsHorizontalCollapsed="true"
                    ItemsSource="{Binding PageNavItems, Mode=OneTime}"
                    SubMenuBinding="{Binding Children, Mode=OneTime}">
 
@@ -79,19 +62,19 @@
 
             <u:NavMenu.Header>
                 <DockPanel Margin="8" HorizontalAlignment="Center">
-                    <Image DockPanel.Dock="Left"
-                           Width="100"
-                           Height="100"
+                    <Image DockPanel.Dock="Top"
+                           Width="70"
+                           Height="70"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           u:NavMenu.CanToggle="True"
+                           u:NavMenu.CanToggle="False"
                            RenderOptions.BitmapInterpolationMode="HighQuality"
                            Source="../Assets/Melon.png" />
-                    <TextBlock DockPanel.Dock="Right"
+                    <TextBlock DockPanel.Dock="Bottom"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               Classes="H4"
-                               IsVisible="{Binding !IsCollapsed, Mode=OneWay}"
-                               Text="MDMT"
+                               Classes="H6"
+                               Text="{x:Static constants:BuildInfo.DisplayVersion}"
                                Theme="{DynamicResource TitleTextBlock}" />
                 </DockPanel>
             </u:NavMenu.Header>
