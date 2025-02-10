@@ -4,13 +4,13 @@ using WeakReferenceMessenger = CommunityToolkit.Mvvm.Messaging.WeakReferenceMess
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed class SettingPageViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class SettingPageViewModel : ViewModelBase, IRecipient<string>
 {
     private const string Token = "NavigatePanelSetting";
 
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new("About", "", AboutPanelName, Token),
+        new("About", "", AboutPanelName, Token) { Selected = true },
         new("Appearance", "", AppearancePanelName, Token),
         new("Experience", "", ExperiencePanelName, Token),
         new("Download", "", DownloadPanelName, Token),
@@ -45,4 +45,7 @@ public sealed class SettingPageViewModel : ViewModelBase, IRecipient<string>
                 break;
         }
     }
+
+    [RelayCommand]
+    private async Task InitializeAsync() => Receive(PageNavItems.FirstOrDefault()?.NavigateKey ?? string.Empty);
 }

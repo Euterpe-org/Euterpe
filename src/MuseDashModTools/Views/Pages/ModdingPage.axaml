@@ -14,6 +14,12 @@
         <pages:ModdingPageViewModel />
     </Design.DataContext>
 
+    <Interaction.Behaviors>
+        <RoutedEventTriggerBehavior RoutedEvent="{x:Static Control.LoadedEvent}">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </RoutedEventTriggerBehavior>
+    </Interaction.Behaviors>
+
     <Grid RowDefinitions="Auto, *">
         <Border Grid.Row="0"
                 Margin="0,0,20,10"

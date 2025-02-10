@@ -4,13 +4,13 @@ using WeakReferenceMessenger = CommunityToolkit.Mvvm.Messaging.WeakReferenceMess
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed class ChartingPageViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class ChartingPageViewModel : ViewModelBase, IRecipient<string>
 {
     private const string Token = "NavigatePanelCharting";
 
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new("Charts", "", ChartsPanelName, Token),
+        new("Charts", "", ChartsPanelName, Token) { Selected = true },
         new("Charter", "", CharterPanelName, Token)
     ];
 
@@ -33,4 +33,7 @@ public sealed class ChartingPageViewModel : ViewModelBase, IRecipient<string>
                 break;
         }
     }
+
+    [RelayCommand]
+    private async Task InitializeAsync() => Receive(PageNavItems.FirstOrDefault()?.NavigateKey ?? string.Empty);
 }

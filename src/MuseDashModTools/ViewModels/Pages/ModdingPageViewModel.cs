@@ -3,13 +3,13 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed class ModdingPageViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class ModdingPageViewModel : ViewModelBase, IRecipient<string>
 {
     private const string Token = "NavigatePanelModding";
 
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new("Mods", "", ModsPanelName, Token),
+        new("Mods", "", ModsPanelName, Token) { Selected = true },
         new("Framework", "", FrameworkPanelName, Token),
         new("Develop", "", DevelopPanelName, Token)
     ];
@@ -36,4 +36,7 @@ public sealed class ModdingPageViewModel : ViewModelBase, IRecipient<string>
                 break;
         }
     }
+
+    [RelayCommand]
+    private async Task InitializeAsync() => Receive(PageNavItems.FirstOrDefault()?.NavigateKey ?? string.Empty);
 }
