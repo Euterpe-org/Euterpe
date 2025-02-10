@@ -10,7 +10,7 @@ public sealed partial class SettingPageViewModel : ViewModelBase, IRecipient<str
 
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new("About", "", AboutPanelName, Token) { Selected = true },
+        new("About", "", AboutPanelName, Token),
         new("Appearance", "", AppearancePanelName, Token),
         new("Experience", "", ExperiencePanelName, Token),
         new("Download", "", DownloadPanelName, Token),
@@ -26,6 +26,11 @@ public sealed partial class SettingPageViewModel : ViewModelBase, IRecipient<str
 
     public void Receive(string message)
     {
+        foreach (var item in PageNavItems.Where(x => x.Selected))
+        {
+            item.Selected = false;
+        }
+
         switch (message)
         {
             case AboutPanelName:
@@ -44,8 +49,29 @@ public sealed partial class SettingPageViewModel : ViewModelBase, IRecipient<str
                 NavigationService.NavigateToPanel<AdvancedPanel>(Token);
                 break;
         }
+
+        var newItem = PageNavItems.FirstOrDefault(x => x.NavigateKey == message);
+        if (newItem != null)
+        {
+            newItem.Selected = true;
+        }
     }
 
     [RelayCommand]
-    private async Task InitializeAsync() => Receive(PageNavItems.FirstOrDefault()?.NavigateKey ?? string.Empty);
+    private async Task InitializeAsync()
+    {
+        if (PageNavItems.Any(x => x.Selected))
+        {
+            return;
+        }
+
+        var firstItem = PageNavItems.FirstOrDefault();
+        if (firstItem == null)
+        {
+            return;
+        }
+
+        Receive(firstItem.NavigateKey);
+        firstItem.Selected = true;
+    }
 }

@@ -10,7 +10,7 @@ public sealed partial class ChartingPageViewModel : ViewModelBase, IRecipient<st
 
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new("Charts", "", ChartsPanelName, Token) { Selected = true },
+        new("Charts", "", ChartsPanelName, Token),
         new("Charter", "", CharterPanelName, Token)
     ];
 
@@ -23,6 +23,11 @@ public sealed partial class ChartingPageViewModel : ViewModelBase, IRecipient<st
 
     public void Receive(string message)
     {
+        foreach (var item in PageNavItems.Where(x => x.Selected))
+        {
+            item.Selected = false;
+        }
+
         switch (message)
         {
             case ChartsPanelName:
@@ -32,8 +37,29 @@ public sealed partial class ChartingPageViewModel : ViewModelBase, IRecipient<st
                 NavigationService.NavigateToPanel<CharterPanel>(Token);
                 break;
         }
+
+        var newItem = PageNavItems.FirstOrDefault(x => x.NavigateKey == message);
+        if (newItem != null)
+        {
+            newItem.Selected = true;
+        }
     }
 
     [RelayCommand]
-    private async Task InitializeAsync() => Receive(PageNavItems.FirstOrDefault()?.NavigateKey ?? string.Empty);
+    private async Task InitializeAsync()
+    {
+        if (PageNavItems.Any(x => x.Selected))
+        {
+            return;
+        }
+
+        var firstItem = PageNavItems.FirstOrDefault();
+        if (firstItem == null)
+        {
+            return;
+        }
+
+        Receive(firstItem.NavigateKey);
+        firstItem.Selected = true;
+    }
 }

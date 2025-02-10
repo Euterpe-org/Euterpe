@@ -33,7 +33,8 @@
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="models:PageNavItem">
                             <Button Command="{Binding NavigationCommand, Mode=OneTime}"
-                                    Content="{Binding DisplayName}"
+                                    Content="{Binding DisplayName, Mode=OneTime}"
+                                    IsEnabled="{Binding !Selected, Mode=OneWay}"
                                     Theme="{StaticResource BorderlessButton}" />
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>

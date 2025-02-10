@@ -4,6 +4,9 @@ namespace MuseDashModTools.Models;
 
 public sealed partial class PageNavItem(string displayName, string iconResourceKey, string navigateKey, string token) : ObservableObject
 {
+    [ObservableProperty]
+    public partial bool Selected { get; set; }
+
     public PageNavItem[] Children { get; init; } = [];
     public string DisplayName { get; set; } = displayName;
     public string IconResourceKey { get; set; } = iconResourceKey;
@@ -11,7 +14,6 @@ public sealed partial class PageNavItem(string displayName, string iconResourceK
     public string? Status { get; init; }
     public bool IsNavigable { get; init; } = true;
     public bool IsSeparator { get; init; }
-    public bool Selected { get; set; }
     public string? Token { get; init; } = token;
 
     [RelayCommand]
@@ -22,7 +24,6 @@ public sealed partial class PageNavItem(string displayName, string iconResourceK
             return;
         }
 
-        Selected = true;
         WeakReferenceMessenger.Default.Send(NavigateKey, Token ?? string.Empty);
     }
 }
