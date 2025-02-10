@@ -36,7 +36,8 @@
                    HeaderBinding="{Binding ., Mode=OneTime}"
                    IconBinding="{Binding IconResourceKey, Mode=OneTime}"
                    IsHorizontalCollapsed="true"
-                   ItemsSource="{Binding PageNavItems, Mode=OneTime}">
+                   ItemsSource="{Binding PageNavItems, Mode=OneTime}"
+                   SelectedItem="{Binding PageNavItems[0], Mode=OneTime}">
 
             <u:NavMenu.Styles>
                 <Style x:DataType="models:PageNavItem" Selector="u|NavMenuItem">

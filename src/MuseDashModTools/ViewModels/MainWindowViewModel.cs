@@ -29,6 +29,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         Logger.ZLogInformation($"MainWindow Initialized");
+        NavigationService.NavigateToPage<HomePage>();
     }
 
     #region Injections
