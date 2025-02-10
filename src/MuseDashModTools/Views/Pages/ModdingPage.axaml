@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:MuseDashModTools.Models"
              xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
-             x:Class="MuseDashModTools.Views.Pages.SettingPage"
-             x:DataType="pages:SettingPageViewModel"
+             x:Class="MuseDashModTools.Views.Pages.ModdingPage"
+             x:DataType="pages:ModdingPageViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:SettingPageViewModel />
+        <pages:ModdingPageViewModel />
     </Design.DataContext>
 
     <Grid RowDefinitions="Auto, *">
@@ -33,13 +33,13 @@
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button Content="Apply" Theme="{StaticResource BorderlessButton}" />
+                    <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}">Open</DropDownButton>
                 </StackPanel>
             </Panel>
         </Border>
         <ContentControl Grid.Row="1"
                         Margin="10"
-                        Content="{Binding NavigationService.PanelSettingContent, Mode=OneWay}" />
+                        Content="{Binding NavigationService.PanelModdingContent, Mode=OneWay}" />
     </Grid>
 
 </UserControl>

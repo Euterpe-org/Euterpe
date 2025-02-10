@@ -326,10 +326,10 @@
     <data name="XAML_Page_LogAnalysis" xml:space="preserve">
         <value>Log Analysis</value>
     </data>
-    <data name="XAML_Page_Category_Modding" xml:space="preserve">
+    <data name="XAML_Page_Modding" xml:space="preserve">
         <value>Modding</value>
     </data>
-    <data name="XAML_Page_Category_Charting" xml:space="preserve">
+    <data name="XAML_Page_Charting" xml:space="preserve">
         <value>Charting</value>
     </data>
 </root>

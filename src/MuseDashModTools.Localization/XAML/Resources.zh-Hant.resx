@@ -289,10 +289,10 @@
     <data name="XAML_Page_Setting" xml:space="preserve">
         <value>設置</value>
     </data>
-    <data name="XAML_Page_Category_Charting" xml:space="preserve">
+    <data name="XAML_Page_Charting" xml:space="preserve">
         <value>譜面</value>
     </data>
-    <data name="XAML_Page_Category_Modding" xml:space="preserve">
+    <data name="XAML_Page_Modding" xml:space="preserve">
         <value>模組</value>
     </data>
     <data name="XAML_Page_About" xml:space="preserve">

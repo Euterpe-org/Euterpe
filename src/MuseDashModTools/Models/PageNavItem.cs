@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.Models;
 
-public sealed partial class PageNavItem(string displayName, string iconResourceKey, string navigateKey) : ObservableObject
+public sealed partial class PageNavItem(string displayName, string iconResourceKey, string navigateKey, string token) : ObservableObject
 {
     public PageNavItem[] Children { get; init; } = [];
     public string DisplayName { get; set; } = displayName;
@@ -11,6 +11,7 @@ public sealed partial class PageNavItem(string displayName, string iconResourceK
     public string? Status { get; init; }
     public bool IsNavigable { get; init; } = true;
     public bool IsSeparator { get; init; }
+    public string? Token { get; init; } = token;
 
     [RelayCommand]
     private void Navigation()
@@ -20,6 +21,6 @@ public sealed partial class PageNavItem(string displayName, string iconResourceK
             return;
         }
 
-        WeakReferenceMessenger.Default.Send(NavigateKey, "NavigatePage");
+        WeakReferenceMessenger.Default.Send(NavigateKey, Token ?? string.Empty);
     }
 }

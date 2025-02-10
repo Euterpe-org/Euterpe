@@ -7,7 +7,8 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
     {
         context.RegisterSourceOutput(
             context.SyntaxProvider.CreateSyntaxProvider(
-                FilterNode, ExtractDataFromContext).Collect(),
+                FilterNode,
+                ExtractDataFromContext).Collect(),
             GenerateFromData);
     }
 
@@ -32,9 +33,9 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
                         partial class MainWindowViewModel
                         {
                             {{GetGeneratedCodeAttribute(nameof(MainWindowViewModelGenerator))}}
-                            public void Receive(string pageName)
+                            public void Receive(string message)
                             {
-                                switch (pageName)
+                                switch (message)
                                 {
                         """);
 
@@ -47,7 +48,7 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
             }
 
             sb.AppendLine($"case {name}Name:");
-            sb.AppendLine($"\tNavigationService.NavigateTo<{name}>();");
+            sb.AppendLine($"\tNavigationService.NavigateToPage<{name}>();");
             sb.AppendLine("\tbreak;");
         }
 

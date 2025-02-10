@@ -5,34 +5,19 @@ namespace MuseDashModTools.ViewModels;
 
 public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<string>
 {
+    private const string Token = "NavigatePage";
+
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new(XAML_Page_Home, "Home", HomePageName),
-        new(XAML_Page_Category_Modding, "Wrench", ModdingCategoryName)
-        {
-            IsNavigable = false,
-            Children =
-            [
-                new(XAML_Page_ModManage, "GridView", ModManagePageName),
-                new(XAML_Page_ModDevelop, "Code", ModDevelopPageName) { Status = "WIP" }
-            ]
-        },
-        new(XAML_Page_Category_Charting, "Disc", ChartingCategoryName)
-        {
-            IsNavigable = false,
-            Children =
-            [
-                new(XAML_Page_ChartManage, "Song", ChartManagePageName) { Status = "WIP" },
-                new(XAML_Page_ChartToolkit, "Briefcase", ChartToolkitPageName) { Status = "WIP" }
-            ]
-        },
-        new(XAML_Page_About, "InfoCircle", AboutPageName),
-        new(XAML_Page_Setting, "Setting", SettingPageName)
+        new(XAML_Page_Home, "Home", HomePageName, Token),
+        new(XAML_Page_Modding, "Wrench", ModdingPageName, Token),
+        new(XAML_Page_Charting, "Disc", ChartingPageName, Token),
+        new(XAML_Page_Setting, "Setting", SettingPageName, Token)
     ];
 
     public MainWindowViewModel()
     {
-        WeakReferenceMessenger.Default.Register(this, "NavigatePage");
+        WeakReferenceMessenger.Default.Register(this, Token);
     }
 
     [RelayCommand]

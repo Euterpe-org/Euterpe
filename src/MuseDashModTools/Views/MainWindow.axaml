@@ -30,14 +30,13 @@
                              Mode="Controller" />
     </u:UrsaWindow.RightContent>
 
-    <Grid ColumnDefinitions="Auto,Auto">
+    <Grid ColumnDefinitions="Auto,*">
         <u:NavMenu Grid.Column="0"
                    CommandBinding="{Binding NavigationCommand, Mode=OneTime}"
                    HeaderBinding="{Binding ., Mode=OneTime}"
                    IconBinding="{Binding IconResourceKey, Mode=OneTime}"
                    IsHorizontalCollapsed="true"
-                   ItemsSource="{Binding PageNavItems, Mode=OneTime}"
-                   SubMenuBinding="{Binding Children, Mode=OneTime}">
+                   ItemsSource="{Binding PageNavItems, Mode=OneTime}">
 
             <u:NavMenu.Styles>
                 <Style x:DataType="models:PageNavItem" Selector="u|NavMenuItem">
@@ -47,8 +46,8 @@
 
             <u:NavMenu.IconTemplate>
                 <DataTemplate x:DataType="x:String">
-                    <u:TwoTonePathIcon Width="{Binding $parent[u:NavMenu].IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
-                                       Height="{Binding $parent[u:NavMenu].IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
+                    <u:TwoTonePathIcon Width="20"
+                                       Height="20"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        ActiveForeground="{DynamicResource SemiBlue5}"
@@ -62,18 +61,18 @@
 
             <u:NavMenu.Header>
                 <DockPanel Margin="8" HorizontalAlignment="Center">
-                    <Image DockPanel.Dock="Top"
-                           Width="70"
+                    <Image Width="70"
                            Height="70"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            u:NavMenu.CanToggle="False"
+                           DockPanel.Dock="Top"
                            RenderOptions.BitmapInterpolationMode="HighQuality"
                            Source="../Assets/Melon.png" />
-                    <TextBlock DockPanel.Dock="Bottom"
-                               HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Classes="H6"
+                               DockPanel.Dock="Bottom"
                                Text="{x:Static constants:BuildInfo.DisplayVersion}"
                                Theme="{DynamicResource TitleTextBlock}" />
                 </DockPanel>
@@ -95,8 +94,8 @@
         </u:NavMenu>
 
         <ContentControl Grid.Column="1"
-                        Margin="20,50,0,0"
-                        Content="{Binding NavigationService.Content, Mode=OneWay}" />
+                        Margin="10,40,0,0"
+                        Content="{Binding NavigationService.PageContent, Mode=OneWay}" />
     </Grid>
 
 </u:UrsaWindow>

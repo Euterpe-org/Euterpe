@@ -1,8 +1,8 @@
 ﻿namespace MuseDashModTools.Views.Pages;
 
-public partial class ModDevelopPage : UserControl
+public partial class ChartingPage : UserControl
 {
-    public ModDevelopPage()
+    public ChartingPage()
     {
         InitializeComponent();
     }
