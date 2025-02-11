@@ -42,6 +42,17 @@
                 <Style x:DataType="models:NavItem" Selector="u|NavMenuItem">
                     <Setter Property="IsSeparator" Value="{Binding IsSeparator, Mode=OneWay}" />
                 </Style>
+                <Style Selector="u|NavMenuItem /template/ Border">
+                    <Setter Property="CornerRadius" Value="10" />
+                    <Setter Property="Margin" Value="10, 3, 10, 3" />
+                    <Setter Property="Padding" Value="0, -2, 0, -2" />
+                </Style>
+                <Style Selector="u|NavMenuItem:pointerover /template/ Border">
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
+                <Style Selector="u|NavMenuItem:selected /template/ Border">
+                    <Setter Property="CornerRadius" Value="10" />
+                </Style>
             </u:NavMenu.Styles>
 
             <u:NavMenu.IconTemplate>
