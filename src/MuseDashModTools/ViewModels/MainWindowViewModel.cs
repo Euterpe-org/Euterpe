@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace MuseDashModTools.ViewModels;
 
-public sealed partial class MainWindowViewModel : PageViewModelBase
+public sealed class MainWindowViewModel : PageViewModelBase
 {
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
@@ -24,7 +24,7 @@ public sealed partial class MainWindowViewModel : PageViewModelBase
         SelectedItem = PageNavItems[0];
     }
 
-    partial void OnSelectedItemChanged(PageNavItem? value)
+    protected override void Navigate(PageNavItem? value)
     {
         Content = value?.NavigateKey switch
         {
