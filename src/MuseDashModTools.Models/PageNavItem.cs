@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.Models;
@@ -11,19 +12,21 @@ public sealed partial class PageNavItem(string displayName, string iconResourceK
     public string DisplayName { get; set; } = displayName;
     public string IconResourceKey { get; set; } = iconResourceKey;
     public string NavigateKey { get; init; } = navigateKey;
+    public string Token { get; init; } = token;
     public string? Status { get; init; }
     public bool IsNavigable { get; init; } = true;
     public bool IsSeparator { get; init; }
-    public string? Token { get; init; } = token;
 
     [RelayCommand]
-    private void Navigation()
+    private void Navigate()
     {
         if (!IsNavigable || IsSeparator)
         {
             return;
         }
 
-        WeakReferenceMessenger.Default.Send(NavigateKey, Token ?? string.Empty);
+        Selected = true;
+
+        WeakReferenceMessenger.Default.Send(NavigateKey, Token);
     }
 }

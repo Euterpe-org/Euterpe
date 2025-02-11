@@ -48,7 +48,7 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
             }
 
             sb.AppendLine($"case {name}Name:");
-            sb.AppendLine($"\tNavigationService.NavigateToPage<{name}>();");
+            sb.AppendLine($"\tContent = NavigationService.NavigateTo<{name}>();");
             sb.AppendLine("\tbreak;");
         }
 

@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:MuseDashModTools.Models"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
              x:Class="MuseDashModTools.Views.Pages.ChartingPage"
              x:DataType="pages:ChartingPageViewModel"
@@ -15,30 +15,17 @@
     </Design.DataContext>
 
     <Interaction.Behaviors>
-        <RoutedEventTriggerBehavior RoutedEvent="{x:Static Control.LoadedEvent}">
+        <EventTriggerBehavior EventName="Initialized">
             <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </RoutedEventTriggerBehavior>
+        </EventTriggerBehavior>
     </Interaction.Behaviors>
 
     <Grid RowDefinitions="Auto, *">
-        <Border Grid.Row="0"
-                Margin="0,0,20,10"
+        <Border Margin="0,0,20,10"
                 Padding="12,4"
                 Theme="{DynamicResource CardBorder}">
             <Panel>
-                <ItemsRepeater ItemsSource="{Binding PageNavItems, Mode=OneWay}">
-                    <ItemsRepeater.Layout>
-                        <StackLayout Orientation="Horizontal" Spacing="10" />
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate x:DataType="models:PageNavItem">
-                            <Button Command="{Binding NavigationCommand, Mode=OneTime}"
-                                    Content="{Binding DisplayName, Mode=OneTime}"
-                                    IsEnabled="{Binding !Selected, Mode=OneWay}"
-                                    Theme="{StaticResource BorderlessButton}" />
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
+                <mdmt:PageHeaderControl Grid.Row="0" ItemsSource="{Binding PanelNavItems}" SelectedItem="{Binding SelectedItem  }" />
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}">Open</DropDownButton>
                 </StackPanel>
@@ -46,7 +33,7 @@
         </Border>
         <ContentControl Grid.Row="1"
                         Margin="10"
-                        Content="{Binding NavigationService.PanelChartingContent, Mode=OneWay}" />
+                        Content="{Binding Content, Mode=OneWay}" />
     </Grid>
 
 </UserControl>

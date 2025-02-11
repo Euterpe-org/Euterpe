@@ -1,14 +1,19 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Messaging;
-using WeakReferenceMessenger = CommunityToolkit.Mvvm.Messaging.WeakReferenceMessenger;
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class SettingPageViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class SettingPageViewModel : ViewModelBase
 {
     private const string Token = "NavigatePanelSetting";
+    public NavigationService NavigationService { get; init; } = null!;
 
-    public static ObservableCollection<PageNavItem> PageNavItems { get; } =
+    [ObservableProperty]
+    public partial Control? Content { get; set; }
+
+    [ObservableProperty]
+    public partial PageNavItem? SelectedItem { get; set; }
+
+    public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
     [
         new("About", "", AboutPanelName, Token),
         new("Appearance", "", AppearancePanelName, Token),
@@ -17,61 +22,22 @@ public sealed partial class SettingPageViewModel : ViewModelBase, IRecipient<str
         new("Advanced", "", AdvancedPanelName, Token)
     ];
 
-    public NavigationService NavigationService { get; init; } = null!;
-
-    public SettingPageViewModel()
-    {
-        WeakReferenceMessenger.Default.Register(this, Token);
-    }
-
-    public void Receive(string message)
-    {
-        foreach (var item in PageNavItems.Where(x => x.Selected))
-        {
-            item.Selected = false;
-        }
-
-        switch (message)
-        {
-            case AboutPanelName:
-                NavigationService.NavigateToPanel<AboutPanel>(Token);
-                break;
-            case AppearancePanelName:
-                NavigationService.NavigateToPanel<AppearancePanel>(Token);
-                break;
-            case ExperiencePanelName:
-                NavigationService.NavigateToPanel<ExperiencePanel>(Token);
-                break;
-            case DownloadPanelName:
-                NavigationService.NavigateToPanel<DownloadPanel>(Token);
-                break;
-            case AdvancedPanelName:
-                NavigationService.NavigateToPanel<AdvancedPanel>(Token);
-                break;
-        }
-
-        var newItem = PageNavItems.FirstOrDefault(x => x.NavigateKey == message);
-        if (newItem != null)
-        {
-            newItem.Selected = true;
-        }
-    }
-
     [RelayCommand]
-    private async Task InitializeAsync()
+    private void Initialize()
     {
-        if (PageNavItems.Any(x => x.Selected))
-        {
-            return;
-        }
+        SelectedItem = PanelNavItems[0];
+    }
 
-        var firstItem = PageNavItems.FirstOrDefault();
-        if (firstItem == null)
+    partial void OnSelectedItemChanged(PageNavItem? value)
+    {
+        Content = value?.NavigateKey switch
         {
-            return;
-        }
-
-        Receive(firstItem.NavigateKey);
-        firstItem.Selected = true;
+            AboutPanelName => NavigationService.NavigateTo<AboutPanel>(),
+            AppearancePanelName => NavigationService.NavigateTo<AppearancePanel>(),
+            ExperiencePanelName => NavigationService.NavigateTo<ExperiencePanel>(),
+            DownloadPanelName => NavigationService.NavigateTo<DownloadPanel>(),
+            AdvancedPanelName => NavigationService.NavigateTo<AdvancedPanel>(),
+            _ => Content
+        };
     }
 }

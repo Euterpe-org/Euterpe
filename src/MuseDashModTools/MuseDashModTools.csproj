@@ -72,4 +72,8 @@
     <ItemGroup>
         <AdditionalFiles Include="BannedSymbols.txt"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <UpToDateCheckInput Remove="Views\Controls\PageHeaderControl.axaml"/>
+    </ItemGroup>
 </Project>

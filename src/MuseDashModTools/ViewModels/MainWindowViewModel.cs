@@ -7,6 +7,9 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
 {
     private const string Token = "NavigatePage";
 
+    [ObservableProperty]
+    public partial Control? Content { get; set; }
+
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
         new(XAML_Page_Home, "Home", HomePageName, Token),
@@ -29,7 +32,7 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         Logger.ZLogInformation($"MainWindow Initialized");
-        NavigationService.NavigateToPage<HomePage>();
+        Content = NavigationService.NavigateTo<HomePage>();
     }
 
     #region Injections

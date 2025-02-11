@@ -6,7 +6,20 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
+        <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Semi.Avalonia"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MuseDashModTools.Models\MuseDashModTools.Models.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="ExtendControls\PageHeaderControl.axaml.cs">
+            <DependentUpon>PageHeaderControl.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 </Project>

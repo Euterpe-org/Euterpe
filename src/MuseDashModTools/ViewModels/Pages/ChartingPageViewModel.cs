@@ -1,65 +1,37 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Messaging;
-using WeakReferenceMessenger = CommunityToolkit.Mvvm.Messaging.WeakReferenceMessenger;
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class ChartingPageViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class ChartingPageViewModel : ViewModelBase /*, IRecipient<string>*/
 {
     private const string Token = "NavigatePanelCharting";
+    public NavigationService NavigationService { get; init; } = null!;
 
-    public static ObservableCollection<PageNavItem> PageNavItems { get; } =
+    [ObservableProperty]
+    public partial Control? Content { get; set; }
+
+    [ObservableProperty]
+    public partial PageNavItem? SelectedItem { get; set; }
+
+    public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
     [
         new("Charts", "", ChartsPanelName, Token),
         new("Charter", "", CharterPanelName, Token)
     ];
 
-    public NavigationService NavigationService { get; init; } = null!;
-
-    public ChartingPageViewModel()
-    {
-        WeakReferenceMessenger.Default.Register(this, Token);
-    }
-
-    public void Receive(string message)
-    {
-        foreach (var item in PageNavItems.Where(x => x.Selected))
-        {
-            item.Selected = false;
-        }
-
-        switch (message)
-        {
-            case ChartsPanelName:
-                NavigationService.NavigateToPanel<ChartsPanel>(Token);
-                break;
-            case CharterPanelName:
-                NavigationService.NavigateToPanel<CharterPanel>(Token);
-                break;
-        }
-
-        var newItem = PageNavItems.FirstOrDefault(x => x.NavigateKey == message);
-        if (newItem != null)
-        {
-            newItem.Selected = true;
-        }
-    }
-
     [RelayCommand]
-    private async Task InitializeAsync()
+    private void Initialize()
     {
-        if (PageNavItems.Any(x => x.Selected))
-        {
-            return;
-        }
+        SelectedItem = PanelNavItems[0];
+    }
 
-        var firstItem = PageNavItems.FirstOrDefault();
-        if (firstItem == null)
+    partial void OnSelectedItemChanged(PageNavItem? value)
+    {
+        Content = value?.NavigateKey switch
         {
-            return;
-        }
-
-        Receive(firstItem.NavigateKey);
-        firstItem.Selected = true;
+            ChartsPanelName => NavigationService.NavigateTo<ChartsPanel>(),
+            CharterPanelName => NavigationService.NavigateTo<CharterPanel>(),
+            _ => Content
+        };
     }
 }

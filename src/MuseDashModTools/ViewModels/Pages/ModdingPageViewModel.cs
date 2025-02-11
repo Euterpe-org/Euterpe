@@ -1,68 +1,40 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class ModdingPageViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class ModdingPageViewModel : ViewModelBase /*, IRecipient<string>*/
 {
     private const string Token = "NavigatePanelModding";
+    public NavigationService NavigationService { get; init; } = null!;
+    public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
 
-    public static ObservableCollection<PageNavItem> PageNavItems { get; } =
+    [ObservableProperty]
+    public partial Control? Content { get; set; }
+
+    [ObservableProperty]
+    public partial PageNavItem? SelectedItem { get; set; }
+
+    public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
     [
         new("Mods", "", ModsPanelName, Token),
         new("Framework", "", FrameworkPanelName, Token),
         new("Develop", "", DevelopPanelName, Token)
     ];
 
-    public NavigationService NavigationService { get; init; } = null!;
-
-    public ModdingPageViewModel()
-    {
-        WeakReferenceMessenger.Default.Register(this, Token);
-    }
-
-    public void Receive(string message)
-    {
-        foreach (var item in PageNavItems.Where(x => x.Selected))
-        {
-            item.Selected = false;
-        }
-
-        switch (message)
-        {
-            case ModsPanelName:
-                NavigationService.NavigateToPanel<ModsPanel>(Token);
-                break;
-            case FrameworkPanelName:
-                NavigationService.NavigateToPanel<FrameworkPanel>(Token);
-                break;
-            case DevelopPanelName:
-                NavigationService.NavigateToPanel<DevelopPanel>(Token);
-                break;
-        }
-
-        var newItem = PageNavItems.FirstOrDefault(x => x.NavigateKey == message);
-        if (newItem != null)
-        {
-            newItem.Selected = true;
-        }
-    }
-
     [RelayCommand]
-    private async Task InitializeAsync()
+    private void Initialize()
     {
-        if (PageNavItems.Any(x => x.Selected))
-        {
-            return;
-        }
+        SelectedItem = PanelNavItems[0];
+    }
 
-        var firstItem = PageNavItems.FirstOrDefault();
-        if (firstItem == null)
+    partial void OnSelectedItemChanged(PageNavItem? value)
+    {
+        Content = value?.NavigateKey switch
         {
-            return;
-        }
-
-        Receive(firstItem.NavigateKey);
-        firstItem.Selected = true;
+            ModsPanelName => NavigationService.NavigateTo<ModsPanel>(),
+            FrameworkPanelName => NavigationService.NavigateTo<FrameworkPanel>(),
+            DevelopPanelName => NavigationService.NavigateTo<DevelopPanel>(),
+            _ => Content
+        };
     }
 }

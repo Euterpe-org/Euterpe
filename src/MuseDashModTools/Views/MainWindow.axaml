@@ -32,7 +32,7 @@
 
     <Grid ColumnDefinitions="Auto,*">
         <u:NavMenu Grid.Column="0"
-                   CommandBinding="{Binding NavigationCommand, Mode=OneTime}"
+                   CommandBinding="{Binding NavigateCommand, Mode=OneTime}"
                    HeaderBinding="{Binding ., Mode=OneTime}"
                    IconBinding="{Binding IconResourceKey, Mode=OneTime}"
                    IsHorizontalCollapsed="true"
@@ -62,18 +62,18 @@
 
             <u:NavMenu.Header>
                 <DockPanel Margin="8" HorizontalAlignment="Center">
-                    <Image Width="70"
+                    <Image DockPanel.Dock="Top"
+                           Width="70"
                            Height="70"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            u:NavMenu.CanToggle="False"
-                           DockPanel.Dock="Top"
                            RenderOptions.BitmapInterpolationMode="HighQuality"
                            Source="../Assets/Melon.png" />
-                    <TextBlock HorizontalAlignment="Center"
+                    <TextBlock DockPanel.Dock="Bottom"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Classes="H6"
-                               DockPanel.Dock="Bottom"
                                Text="{x:Static constants:BuildInfo.DisplayVersion}"
                                Theme="{DynamicResource TitleTextBlock}" />
                 </DockPanel>
@@ -96,7 +96,7 @@
 
         <ContentControl Grid.Column="1"
                         Margin="10,40,0,0"
-                        Content="{Binding NavigationService.PageContent, Mode=OneWay}" />
+                        Content="{Binding Content, Mode=OneWay}" />
     </Grid>
 
 </u:UrsaWindow>

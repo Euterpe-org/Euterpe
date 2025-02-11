@@ -5,7 +5,6 @@
         <Menu Width="500" Height="400">
             <mdmt:DifficultyFilter />
         </Menu>
-
     </Design.PreviewWith>
 
     <Style Selector="mdmt|DifficultyFilter">

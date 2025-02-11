@@ -1,10 +1,10 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--Extend Controls-->
+    <!--  Extend Controls  -->
     <StyleInclude Source="/ExtendControls/DifficultyFilter.axaml" />
+    <StyleInclude Source="/ExtendControls/PageHeaderControl.axaml"/>
 
-    <!--Templated Controls-->
+    <!--  Templated Controls  -->
     <StyleInclude Source="/TemplatedControls/Developer.axaml" />
     <StyleInclude Source="/TemplatedControls/Difficulty.axaml" />
     <StyleInclude Source="/TemplatedControls/Translator.axaml" />
