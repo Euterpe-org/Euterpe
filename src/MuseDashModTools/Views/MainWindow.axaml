@@ -72,14 +72,13 @@
                 </u:NavMenu.IconTemplate>
 
                 <u:NavMenu.Header>
-                    <Image Width="70"
-                           Height="70"
+                    <Image Height="55"
                            Margin="0, 15, 0,10"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            u:NavMenu.CanToggle="False"
                            RenderOptions.BitmapInterpolationMode="HighQuality"
-                           Source="../Assets/Melon.png" />
+                           Source="../Assets/Logo.webp" />
                 </u:NavMenu.Header>
 
                 <u:NavMenu.HeaderTemplate>
@@ -104,7 +103,7 @@
                        Margin="0,0,0, 2"
                        HorizontalAlignment="Center"
                        RenderOptions.BitmapInterpolationMode="HighQuality"
-                       Source="../Assets/MDMT.png" />
+                       Source="../Assets/Title.webp" />
                 <Label Classes="Blue"
                        HorizontalAlignment="Center"
                        Theme="{StaticResource TagLabel}"
