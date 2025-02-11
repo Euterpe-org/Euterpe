@@ -2,9 +2,9 @@ using System.Collections.ObjectModel;
 
 namespace MuseDashModTools.ViewModels;
 
-public sealed class MainWindowViewModel : PageViewModelBase
+public sealed partial class MainWindowViewModel : PageViewModelBase
 {
-    public static ObservableCollection<PageNavItem> PageNavItems { get; } =
+    public override ObservableCollection<NavItem> NavItems { get; } =
     [
         new(XAML_Page_Home, "Home", HomePageName),
         new(XAML_Page_Modding, "Wrench", ModdingPageName),
@@ -15,16 +15,16 @@ public sealed class MainWindowViewModel : PageViewModelBase
     [RelayCommand]
     private async Task InitializeAsync()
     {
+        Initialize();
         await SavingService.LoadSettingAsync().ConfigureAwait(true);
         GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Setting.Theme];
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         Logger.ZLogInformation($"MainWindow Initialized");
-        SelectedItem = PageNavItems[0];
     }
 
-    protected override void Navigate(PageNavItem? value)
+    protected override void Navigate(NavItem? value)
     {
         Content = value?.NavigateKey switch
         {

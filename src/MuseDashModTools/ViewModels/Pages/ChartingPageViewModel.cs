@@ -2,29 +2,22 @@ using System.Collections.ObjectModel;
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class ChartingPageViewModel : ViewModelBase
+public sealed partial class ChartingPageViewModel : PageViewModelBase
 {
-    public NavigationService NavigationService { get; init; } = null!;
-
-    [ObservableProperty]
-    public partial Control? Content { get; set; }
-
-    [ObservableProperty]
-    public partial PageNavItem? SelectedItem { get; set; }
-
-    public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
+    public override ObservableCollection<NavItem> NavItems { get; } =
     [
         new("Charts", "", ChartsPanelName),
         new("Charter", "", CharterPanelName)
     ];
 
     [RelayCommand]
-    private void Initialize()
+    protected override void Initialize()
     {
-        SelectedItem = PanelNavItems[0];
+        base.Initialize();
+        Logger.ZLogInformation($"ChartingPage Initialized");
     }
 
-    partial void OnSelectedItemChanged(PageNavItem? value)
+    protected override void Navigate(NavItem? value)
     {
         Content = value?.NavigateKey switch
         {
@@ -33,4 +26,14 @@ public sealed partial class ChartingPageViewModel : ViewModelBase
             _ => Content
         };
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public NavigationService NavigationService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger<ChartingPageViewModel> Logger { get; init; } = null!;
+
+    #endregion Injections
 }

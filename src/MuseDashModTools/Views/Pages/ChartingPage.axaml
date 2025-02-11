@@ -25,7 +25,7 @@
                 Padding="12,4"
                 Theme="{DynamicResource CardBorder}">
             <Panel>
-                <mdmt:PageHeaderControl Grid.Row="0" ItemsSource="{Binding PanelNavItems}" SelectedItem="{Binding SelectedItem  }" />
+                <mdmt:PageHeaderControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}">Open</DropDownButton>
                 </StackPanel>

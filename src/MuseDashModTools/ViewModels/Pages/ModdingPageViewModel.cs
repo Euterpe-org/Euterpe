@@ -2,18 +2,9 @@
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class ModdingPageViewModel : ViewModelBase /*, IRecipient<string>*/
+public sealed partial class ModdingPageViewModel : PageViewModelBase
 {
-    public NavigationService NavigationService { get; init; } = null!;
-    public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
-
-    [ObservableProperty]
-    public partial Control? Content { get; set; }
-
-    [ObservableProperty]
-    public partial PageNavItem? SelectedItem { get; set; }
-
-    public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
+    public override ObservableCollection<NavItem> NavItems { get; } =
     [
         new("Mods", "", ModsPanelName),
         new("Framework", "", FrameworkPanelName),
@@ -21,12 +12,13 @@ public sealed partial class ModdingPageViewModel : ViewModelBase /*, IRecipient<
     ];
 
     [RelayCommand]
-    private void Initialize()
+    protected override void Initialize()
     {
-        SelectedItem = PanelNavItems[0];
+        base.Initialize();
+        Logger.ZLogInformation($"ModdingPage Initialized");
     }
 
-    partial void OnSelectedItemChanged(PageNavItem? value)
+    protected override void Navigate(NavItem? value)
     {
         Content = value?.NavigateKey switch
         {
@@ -36,4 +28,14 @@ public sealed partial class ModdingPageViewModel : ViewModelBase /*, IRecipient<
             _ => Content
         };
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public NavigationService NavigationService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
+
+    #endregion Injections
 }

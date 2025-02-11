@@ -1,4 +1,4 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
+<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
         xmlns:models="clr-namespace:MuseDashModTools.Models;assembly=MuseDashModTools.Models">
@@ -9,16 +9,15 @@
     <Style Selector="mdmt|PageHeaderControl">
         <Setter Property="Template">
             <ControlTemplate>
-                <ListBox ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}"
-                         SelectedItem="{TemplateBinding SelectedItem, Mode=TwoWay}">
+                <ListBox ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}" SelectedItem="{TemplateBinding SelectedItem, Mode=TwoWay}">
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
-                            <Setter Property="CornerRadius" Value="4"/>
-                            <Setter Property="Margin" Value="5,2"/>
-                            <Setter Property="Padding" Value="12,4"/>
+                            <Setter Property="CornerRadius" Value="4" />
+                            <Setter Property="Margin" Value="5,2" />
+                            <Setter Property="Padding" Value="12,4" />
                         </Style>
                         <Style Selector="ListBoxItem:selected Label">
-                            <Setter Property="Foreground" Value="#A5A8AD"/>
+                            <Setter Property="Foreground" Value="#A5A8AD" />
                         </Style>
                     </ListBox.Styles>
                     <ListBox.ItemsPanel>
@@ -27,9 +26,8 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="models:PageNavItem">
-                            <Label Content="{Binding DisplayName, Mode=OneTime}"
-                                   Theme="{StaticResource BorderlessButton}"/>
+                        <DataTemplate x:DataType="models:NavItem">
+                            <Label Content="{Binding DisplayName, Mode=OneTime}" Theme="{StaticResource BorderlessButton}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

@@ -2,17 +2,9 @@
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class SettingPageViewModel : ViewModelBase
+public sealed partial class SettingPageViewModel : PageViewModelBase
 {
-    public NavigationService NavigationService { get; init; } = null!;
-
-    [ObservableProperty]
-    public partial Control? Content { get; set; }
-
-    [ObservableProperty]
-    public partial PageNavItem? SelectedItem { get; set; }
-
-    public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
+    public override ObservableCollection<NavItem> NavItems { get; } =
     [
         new("About", "", AboutPanelName),
         new("Appearance", "", AppearancePanelName),
@@ -22,12 +14,13 @@ public sealed partial class SettingPageViewModel : ViewModelBase
     ];
 
     [RelayCommand]
-    private void Initialize()
+    protected override void Initialize()
     {
-        SelectedItem = PanelNavItems[0];
+        base.Initialize();
+        Logger.ZLogInformation($"SettingPage Initialized");
     }
 
-    partial void OnSelectedItemChanged(PageNavItem? value)
+    protected override void Navigate(NavItem? value)
     {
         Content = value?.NavigateKey switch
         {
@@ -39,4 +32,14 @@ public sealed partial class SettingPageViewModel : ViewModelBase
             _ => Content
         };
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public NavigationService NavigationService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger<SettingPageViewModel> Logger { get; init; } = null!;
+
+    #endregion Injections
 }

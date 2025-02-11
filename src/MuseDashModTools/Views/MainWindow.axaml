@@ -35,11 +35,11 @@
                    HeaderBinding="{Binding ., Mode=OneTime}"
                    IconBinding="{Binding IconResourceKey, Mode=OneTime}"
                    IsHorizontalCollapsed="true"
-                   ItemsSource="{Binding PageNavItems, Mode=OneTime}"
-                   SelectedItem="{Binding SelectedItem, Mode=OneTime}">
+                   ItemsSource="{Binding NavItems, Mode=OneTime}"
+                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
             <u:NavMenu.Styles>
-                <Style x:DataType="models:PageNavItem" Selector="u|NavMenuItem">
+                <Style x:DataType="models:NavItem" Selector="u|NavMenuItem">
                     <Setter Property="IsSeparator" Value="{Binding IsSeparator, Mode=OneWay}" />
                 </Style>
             </u:NavMenu.Styles>
@@ -79,7 +79,7 @@
             </u:NavMenu.Header>
 
             <u:NavMenu.HeaderTemplate>
-                <DataTemplate x:DataType="models:PageNavItem">
+                <DataTemplate x:DataType="models:NavItem">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,0,6,0"
                                    FontSize="16"
