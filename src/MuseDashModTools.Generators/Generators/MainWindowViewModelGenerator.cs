@@ -1,4 +1,4 @@
-namespace MuseDashModTools.Generators;
+/*namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
@@ -62,4 +62,5 @@ public sealed class MainWindowViewModelGenerator : IIncrementalGenerator
     }
 
     private sealed record PageData(string Name);
-}
+}*/
+

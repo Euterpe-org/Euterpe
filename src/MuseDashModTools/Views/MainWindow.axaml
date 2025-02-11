@@ -32,12 +32,11 @@
 
     <Grid ColumnDefinitions="Auto,*">
         <u:NavMenu Grid.Column="0"
-                   CommandBinding="{Binding NavigateCommand, Mode=OneTime}"
                    HeaderBinding="{Binding ., Mode=OneTime}"
                    IconBinding="{Binding IconResourceKey, Mode=OneTime}"
                    IsHorizontalCollapsed="true"
                    ItemsSource="{Binding PageNavItems, Mode=OneTime}"
-                   SelectedItem="{Binding PageNavItems[0], Mode=OneTime}">
+                   SelectedItem="{Binding SelectedItem, Mode=OneTime}">
 
             <u:NavMenu.Styles>
                 <Style x:DataType="models:PageNavItem" Selector="u|NavMenuItem">

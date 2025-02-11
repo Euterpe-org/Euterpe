@@ -4,7 +4,6 @@ namespace MuseDashModTools.ViewModels.Pages;
 
 public sealed partial class SettingPageViewModel : ViewModelBase
 {
-    private const string Token = "NavigatePanelSetting";
     public NavigationService NavigationService { get; init; } = null!;
 
     [ObservableProperty]
@@ -15,11 +14,11 @@ public sealed partial class SettingPageViewModel : ViewModelBase
 
     public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
     [
-        new("About", "", AboutPanelName, Token),
-        new("Appearance", "", AppearancePanelName, Token),
-        new("Experience", "", ExperiencePanelName, Token),
-        new("Download", "", DownloadPanelName, Token),
-        new("Advanced", "", AdvancedPanelName, Token)
+        new("About", "", AboutPanelName),
+        new("Appearance", "", AppearancePanelName),
+        new("Experience", "", ExperiencePanelName),
+        new("Download", "", DownloadPanelName),
+        new("Advanced", "", AdvancedPanelName)
     ];
 
     [RelayCommand]

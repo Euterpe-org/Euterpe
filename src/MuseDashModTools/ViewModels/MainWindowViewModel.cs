@@ -1,27 +1,16 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Messaging;
 
 namespace MuseDashModTools.ViewModels;
 
-public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class MainWindowViewModel : PageViewModelBase
 {
-    private const string Token = "NavigatePage";
-
-    [ObservableProperty]
-    public partial Control? Content { get; set; }
-
     public static ObservableCollection<PageNavItem> PageNavItems { get; } =
     [
-        new(XAML_Page_Home, "Home", HomePageName, Token),
-        new(XAML_Page_Modding, "Wrench", ModdingPageName, Token),
-        new(XAML_Page_Charting, "Disc", ChartingPageName, Token),
-        new(XAML_Page_Setting, "Setting", SettingPageName, Token)
+        new(XAML_Page_Home, "Home", HomePageName),
+        new(XAML_Page_Modding, "Wrench", ModdingPageName),
+        new(XAML_Page_Charting, "Disc", ChartingPageName),
+        new(XAML_Page_Setting, "Setting", SettingPageName)
     ];
-
-    public MainWindowViewModel()
-    {
-        WeakReferenceMessenger.Default.Register(this, Token);
-    }
 
     [RelayCommand]
     private async Task InitializeAsync()
@@ -32,7 +21,19 @@ public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<stri
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         Logger.ZLogInformation($"MainWindow Initialized");
-        Content = NavigationService.NavigateTo<HomePage>();
+        SelectedItem = PageNavItems[0];
+    }
+
+    partial void OnSelectedItemChanged(PageNavItem? value)
+    {
+        Content = value?.NavigateKey switch
+        {
+            HomePageName => NavigationService.NavigateTo<HomePage>(),
+            ModdingPageName => NavigationService.NavigateTo<ModdingPage>(),
+            ChartingPageName => NavigationService.NavigateTo<ChartingPage>(),
+            SettingPageName => NavigationService.NavigateTo<SettingPage>(),
+            _ => Content
+        };
     }
 
     #region Injections

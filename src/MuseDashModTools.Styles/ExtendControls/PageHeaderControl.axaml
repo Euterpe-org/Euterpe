@@ -18,7 +18,7 @@
                             <Setter Property="Padding" Value="12,4"/>
                         </Style>
                         <Style Selector="ListBoxItem:selected Label">
-                            <Setter Property="Foreground" Value="#a5a8ad"/>
+                            <Setter Property="Foreground" Value="#A5A8AD"/>
                         </Style>
                     </ListBox.Styles>
                     <ListBox.ItemsPanel>

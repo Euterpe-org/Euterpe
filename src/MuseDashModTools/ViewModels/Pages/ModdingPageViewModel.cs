@@ -4,7 +4,6 @@ namespace MuseDashModTools.ViewModels.Pages;
 
 public sealed partial class ModdingPageViewModel : ViewModelBase /*, IRecipient<string>*/
 {
-    private const string Token = "NavigatePanelModding";
     public NavigationService NavigationService { get; init; } = null!;
     public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
 
@@ -16,9 +15,9 @@ public sealed partial class ModdingPageViewModel : ViewModelBase /*, IRecipient<
 
     public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
     [
-        new("Mods", "", ModsPanelName, Token),
-        new("Framework", "", FrameworkPanelName, Token),
-        new("Develop", "", DevelopPanelName, Token)
+        new("Mods", "", ModsPanelName),
+        new("Framework", "", FrameworkPanelName),
+        new("Develop", "", DevelopPanelName)
     ];
 
     [RelayCommand]

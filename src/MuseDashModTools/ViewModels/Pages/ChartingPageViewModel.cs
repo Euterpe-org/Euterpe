@@ -2,9 +2,8 @@ using System.Collections.ObjectModel;
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class ChartingPageViewModel : ViewModelBase /*, IRecipient<string>*/
+public sealed partial class ChartingPageViewModel : ViewModelBase
 {
-    private const string Token = "NavigatePanelCharting";
     public NavigationService NavigationService { get; init; } = null!;
 
     [ObservableProperty]
@@ -15,8 +14,8 @@ public sealed partial class ChartingPageViewModel : ViewModelBase /*, IRecipient
 
     public static ObservableCollection<PageNavItem> PanelNavItems { get; } =
     [
-        new("Charts", "", ChartsPanelName, Token),
-        new("Charter", "", CharterPanelName, Token)
+        new("Charts", "", ChartsPanelName),
+        new("Charter", "", CharterPanelName)
     ];
 
     [RelayCommand]
