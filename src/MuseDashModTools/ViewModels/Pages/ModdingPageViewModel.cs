@@ -18,17 +18,6 @@ public sealed partial class ModdingPageViewModel : PageViewModelBase
         Logger.ZLogInformation($"ModdingPage Initialized");
     }
 
-    protected override void Navigate(NavItem? value)
-    {
-        Content = value?.NavigateKey switch
-        {
-            ModsPanelName => NavigationService.NavigateTo<ModsPanel>(),
-            FrameworkPanelName => NavigationService.NavigateTo<FrameworkPanel>(),
-            DevelopPanelName => NavigationService.NavigateTo<DevelopPanel>(),
-            _ => throw new UnreachableException()
-        };
-    }
-
     #region Injections
 
     [UsedImplicitly]

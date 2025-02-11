@@ -20,19 +20,6 @@ public sealed partial class SettingPageViewModel : PageViewModelBase
         Logger.ZLogInformation($"SettingPage Initialized");
     }
 
-    protected override void Navigate(NavItem? value)
-    {
-        Content = value?.NavigateKey switch
-        {
-            AboutPanelName => NavigationService.NavigateTo<AboutPanel>(),
-            AppearancePanelName => NavigationService.NavigateTo<AppearancePanel>(),
-            ExperiencePanelName => NavigationService.NavigateTo<ExperiencePanel>(),
-            DownloadPanelName => NavigationService.NavigateTo<DownloadPanel>(),
-            AdvancedPanelName => NavigationService.NavigateTo<AdvancedPanel>(),
-            _ => throw new UnreachableException()
-        };
-    }
-
     #region Injections
 
     [UsedImplicitly]

@@ -17,16 +17,6 @@ public sealed partial class ChartingPageViewModel : PageViewModelBase
         Logger.ZLogInformation($"ChartingPage Initialized");
     }
 
-    protected override void Navigate(NavItem? value)
-    {
-        Content = value?.NavigateKey switch
-        {
-            ChartsPanelName => NavigationService.NavigateTo<ChartsPanel>(),
-            CharterPanelName => NavigationService.NavigateTo<CharterPanel>(),
-            _ => throw new UnreachableException()
-        };
-    }
-
     #region Injections
 
     [UsedImplicitly]

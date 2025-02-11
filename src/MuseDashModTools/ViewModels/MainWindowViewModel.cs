@@ -24,18 +24,6 @@ public sealed partial class MainWindowViewModel : PageViewModelBase
         Logger.ZLogInformation($"MainWindow Initialized");
     }
 
-    protected override void Navigate(NavItem? value)
-    {
-        Content = value?.NavigateKey switch
-        {
-            HomePageName => NavigationService.NavigateTo<HomePage>(),
-            ModdingPageName => NavigationService.NavigateTo<ModdingPage>(),
-            ChartingPageName => NavigationService.NavigateTo<ChartingPage>(),
-            SettingPageName => NavigationService.NavigateTo<SettingPage>(),
-            _ => throw new UnreachableException()
-        };
-    }
-
     #region Injections
 
     [UsedImplicitly]
