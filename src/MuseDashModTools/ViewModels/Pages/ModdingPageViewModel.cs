@@ -25,7 +25,7 @@ public sealed partial class ModdingPageViewModel : PageViewModelBase
             ModsPanelName => NavigationService.NavigateTo<ModsPanel>(),
             FrameworkPanelName => NavigationService.NavigateTo<FrameworkPanel>(),
             DevelopPanelName => NavigationService.NavigateTo<DevelopPanel>(),
-            _ => Content
+            _ => throw new UnreachableException()
         };
     }
 

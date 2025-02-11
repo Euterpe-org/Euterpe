@@ -32,7 +32,7 @@ public sealed partial class MainWindowViewModel : PageViewModelBase
             ModdingPageName => NavigationService.NavigateTo<ModdingPage>(),
             ChartingPageName => NavigationService.NavigateTo<ChartingPage>(),
             SettingPageName => NavigationService.NavigateTo<SettingPage>(),
-            _ => Content
+            _ => throw new UnreachableException()
         };
     }
 

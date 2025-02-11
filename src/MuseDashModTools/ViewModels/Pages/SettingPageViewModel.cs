@@ -29,7 +29,7 @@ public sealed partial class SettingPageViewModel : PageViewModelBase
             ExperiencePanelName => NavigationService.NavigateTo<ExperiencePanel>(),
             DownloadPanelName => NavigationService.NavigateTo<DownloadPanel>(),
             AdvancedPanelName => NavigationService.NavigateTo<AdvancedPanel>(),
-            _ => Content
+            _ => throw new UnreachableException()
         };
     }
 

@@ -23,7 +23,7 @@ public sealed partial class ChartingPageViewModel : PageViewModelBase
         {
             ChartsPanelName => NavigationService.NavigateTo<ChartsPanel>(),
             CharterPanelName => NavigationService.NavigateTo<CharterPanel>(),
-            _ => Content
+            _ => throw new UnreachableException()
         };
     }
 
