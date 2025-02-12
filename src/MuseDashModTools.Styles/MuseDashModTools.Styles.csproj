@@ -17,8 +17,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="ExtendControls\PageHeaderControl.axaml.cs">
+        <Compile Update="ExtendControls\NaviPanelListControl.axaml.cs">
             <DependentUpon>PageHeaderControl.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="TemplatedControls\NaviButtonsControl.axaml.cs">
+            <DependentUpon>NaviButtonsControl.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
     </ItemGroup>

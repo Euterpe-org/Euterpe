@@ -10,10 +10,18 @@ public sealed partial class ChartingPageViewModel : PageViewModelBase
         new("Charter", "", CharterPanelName)
     ];
 
+    public ObservableCollection<DropDownButtonItem> DropDownButtons { get; } = [];
+
     [RelayCommand]
     protected override void Initialize()
     {
         base.Initialize();
+
+        DropDownButtons.Add(new("Browse",
+        [
+            new DropDownItem("CustomAlbums Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.CustomAlbumsFolder)))
+        ]));
+
         Logger.ZLogInformation($"ChartingPage Initialized");
     }
 
@@ -23,7 +31,13 @@ public sealed partial class ChartingPageViewModel : PageViewModelBase
     public NavigationService NavigationService { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILogger<ChartingPageViewModel> Logger { get; init; } = null!;
+    public ILocalService LocalService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
 
     #endregion Injections
 }

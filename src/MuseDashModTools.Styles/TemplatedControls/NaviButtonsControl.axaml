@@ -1,0 +1,43 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+        xmlns:models="clr-namespace:MuseDashModTools.Models;assembly=MuseDashModTools.Models">
+    <Design.PreviewWith>
+        <mdmt:NaviButtonsControl />
+    </Design.PreviewWith>
+
+    <Style Selector="mdmt|NaviButtonsControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <ItemsControl ItemsSource="{TemplateBinding Source, Mode=OneWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:DropDownButtonItem">
+                                <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}"
+                                                Content="{Binding Text}">
+                                    <DropDownButton.Flyout>
+                                        <MenuFlyout>
+                                            <ItemsControl ItemsSource="{Binding Items}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <MenuItem Header="{Binding Text}"
+                                                                  Command="{Binding Command}"/>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </MenuFlyout>
+                                    </DropDownButton.Flyout>
+                                </DropDownButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

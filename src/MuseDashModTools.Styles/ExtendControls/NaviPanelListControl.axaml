@@ -3,10 +3,10 @@
         xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
         xmlns:models="clr-namespace:MuseDashModTools.Models;assembly=MuseDashModTools.Models">
     <Design.PreviewWith>
-        <mdmt:PageHeaderControl />
+        <mdmt:NaviPanelListControl />
     </Design.PreviewWith>
 
-    <Style Selector="mdmt|PageHeaderControl">
+    <Style Selector="mdmt|NaviPanelListControl">
         <Setter Property="Template">
             <ControlTemplate>
                 <ListBox ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}" SelectedItem="{TemplateBinding SelectedItem, Mode=TwoWay}">

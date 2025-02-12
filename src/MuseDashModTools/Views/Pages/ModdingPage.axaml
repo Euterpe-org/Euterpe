@@ -25,10 +25,8 @@
                 Padding="12,4"
                 Theme="{DynamicResource CardBorder}">
             <Panel>
-                <mdmt:PageHeaderControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}">Browse</DropDownButton>
-                </StackPanel>
+                <mdmt:NaviPanelListControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                <mdmt:NaviButtonsControl Source="{Binding DropDownButtons}" />
             </Panel>
         </Border>
         <ContentControl Grid.Row="1"
