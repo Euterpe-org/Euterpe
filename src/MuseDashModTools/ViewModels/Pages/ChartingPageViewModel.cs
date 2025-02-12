@@ -6,22 +6,22 @@ public sealed partial class ChartingPageViewModel : PageViewModelBase
 {
     public override ObservableCollection<NavItem> NavItems { get; } =
     [
-        new("Charts", "", ChartsPanelName),
-        new("Charter", "", CharterPanelName)
+        new("Charts", ChartsPanelName),
+        new("Charter", CharterPanelName)
     ];
 
-    public ObservableCollection<DropDownButtonItem> DropDownButtons { get; } = [];
+    public ObservableCollection<DropDownButtonItem> DropDownButtons =>
+    [
+        new("Open",
+        [
+            new DropDownMenuItem("CustomAlbums Folder", OpenFolderCommand, Setting.CustomAlbumsFolder)
+        ])
+    ];
 
     [RelayCommand]
     protected override void Initialize()
     {
         base.Initialize();
-
-        DropDownButtons.Add(new("Browse",
-        [
-            new DropDownMenuItem("CustomAlbums Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.CustomAlbumsFolder)))
-        ]));
-
         Logger.ZLogInformation($"ChartingPage Initialized");
     }
 

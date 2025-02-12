@@ -1,4 +1,4 @@
-﻿using MuseDashModTools.Models;
+﻿using MuseDashModTools.Models.Controls;
 
 namespace MuseDashModTools.Styles.TemplatedControls;
 

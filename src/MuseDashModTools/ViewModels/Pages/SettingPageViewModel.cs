@@ -6,11 +6,11 @@ public sealed partial class SettingPageViewModel : PageViewModelBase
 {
     public override ObservableCollection<NavItem> NavItems { get; } =
     [
-        new("About", "", AboutPanelName),
-        new("Appearance", "", AppearancePanelName),
-        new("Experience", "", ExperiencePanelName),
-        new("Download", "", DownloadPanelName),
-        new("Advanced", "", AdvancedPanelName)
+        new("About", AboutPanelName),
+        new("Appearance", AppearancePanelName),
+        new("Experience", ExperiencePanelName),
+        new("Download", DownloadPanelName),
+        new("Advanced", AdvancedPanelName)
     ];
 
     [RelayCommand]

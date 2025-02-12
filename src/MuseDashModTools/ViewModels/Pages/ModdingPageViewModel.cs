@@ -6,32 +6,25 @@ public sealed partial class ModdingPageViewModel : PageViewModelBase
 {
     public override ObservableCollection<NavItem> NavItems { get; } =
     [
-        new("Mods", "", ModsPanelName),
-        new("Framework", "", FrameworkPanelName),
-        new("Develop", "", DevelopPanelName)
+        new("Mods", ModsPanelName),
+        new("Framework", FrameworkPanelName),
+        new("Develop", DevelopPanelName)
     ];
 
-    public ObservableCollection<DropDownButtonItem> DropDownButtons { get; } = [];
+    public ObservableCollection<DropDownButtonItem> DropDownButtons =>
+    [
+        new("Open",
+        [
+            new("Mods Folder", OpenFolderCommand, Setting.ModsFolder),
+            new("UserData Folder", OpenFolderCommand, Setting.UserDataFolder),
+            new("UserLib Folder", OpenFolderCommand, Setting.UserLibsFolder)
+        ])
+    ];
 
     [RelayCommand]
     protected override void Initialize()
     {
         base.Initialize();
-
-        DropDownButtons.Add(new("Browse",
-        [
-            new DropDownMenuItem("Mods Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.ModsFolder))),
-            new DropDownMenuItem("UserData Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserDataFolder))),
-            new DropDownMenuItem("UserLib Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserLibsFolder)))
-        ]));
-
-        DropDownButtons.Add(new("Links",
-        [
-            new DropDownMenuItem("Upload Mod", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.ModsFolder))),
-            new DropDownMenuItem("UserData Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserDataFolder))),
-            new DropDownMenuItem("UserLib Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserLibsFolder)))
-        ]));
-
         Logger.ZLogInformation($"ModdingPage Initialized");
     }
 

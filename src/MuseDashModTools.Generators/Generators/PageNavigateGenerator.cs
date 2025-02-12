@@ -14,7 +14,7 @@ public sealed class PageNavigateGenerator : IIncrementalGenerator
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax { BaseList.Types: var types } classDeclarationSyntax
-        && types.Any(x => x.Type.ToString() == "PageViewModelBase")
+        && types.Any(x => x.Type.ToString() is "PageViewModelBase" or "NavViewModelBase")
         && classDeclarationSyntax.Identifier.Text.EndsWith("ViewModel");
 
     private static ViewModelData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
@@ -46,10 +46,10 @@ public sealed class PageNavigateGenerator : IIncrementalGenerator
 
         var navigateKeys = collectionExpression.Elements
             .Select(element => element.ChildNodes().OfType<ImplicitObjectCreationExpressionSyntax>().Single())
-            .Select(node => node.ArgumentList.Arguments[2].ToString())
+            .Select(node => node.ArgumentList.Arguments[1].ToString())
             .ToArray();
 
-        return new ViewModelData(classSymbol.ContainingNamespace.ToDisplayString(), classSymbol.Name, navigateKeys);
+        return new(classSymbol.ContainingNamespace.ToDisplayString(), classSymbol.Name, navigateKeys);
     }
 
     private static void GenerateFromData(SourceProductionContext spc, ViewModelData? data)

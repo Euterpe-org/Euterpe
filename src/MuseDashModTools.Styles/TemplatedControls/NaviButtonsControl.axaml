@@ -1,7 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-        xmlns:models="clr-namespace:MuseDashModTools.Models;assembly=MuseDashModTools.Models">
+        xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models">
     <Design.PreviewWith>
         <mdmt:NaviButtonsControl />
     </Design.PreviewWith>
@@ -21,15 +21,15 @@
                                 <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}"
                                                 Content="{Binding Text, Mode=OneTime}">
                                     <DropDownButton.Flyout>
-                                        <MenuFlyout>
-                                            <MenuFlyout.ItemsSource>
-                                                <Binding Path="Items" Mode="OneWay"/>
-                                            </MenuFlyout.ItemsSource>
+                                        <MenuFlyout Placement="BottomEdgeAlignedRight" ItemsSource="{Binding MenuItems, Mode=OneTime}">
                                             <MenuFlyout.ItemTemplate>
                                                 <DataTemplate x:DataType="models:DropDownMenuItem">
-                                                    <MenuItem Header="{Binding Text, Mode=OneTime}"
-                                                              IsEnabled="True"
-                                                              Command="{Binding Command, Mode=OneWay}"/>
+                                                    <Menu>
+                                                        <MenuItem Header="{Binding Text, Mode=OneTime}"
+                                                                  Command="{Binding Command, Mode=OneTime}"
+                                                                  CommandParameter="{Binding CommandParameter, Mode=OneTime}">
+                                                        </MenuItem>
+                                                    </Menu>
                                                 </DataTemplate>
                                             </MenuFlyout.ItemTemplate>
                                         </MenuFlyout>

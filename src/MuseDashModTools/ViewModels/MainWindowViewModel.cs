@@ -2,14 +2,14 @@ using System.Collections.ObjectModel;
 
 namespace MuseDashModTools.ViewModels;
 
-public sealed partial class MainWindowViewModel : PageViewModelBase
+public sealed partial class MainWindowViewModel : NavViewModelBase
 {
     public override ObservableCollection<NavItem> NavItems { get; } =
     [
-        new(XAML_Page_Home, "Home", HomePageName),
-        new(XAML_Page_Modding, "Wrench", ModdingPageName),
-        new(XAML_Page_Charting, "Disc", ChartingPageName),
-        new(XAML_Page_Setting, "Setting", SettingPageName)
+        new(XAML_Page_Home, HomePageName, "Home"),
+        new(XAML_Page_Modding, ModdingPageName, "Wrench"),
+        new(XAML_Page_Charting, ChartingPageName, "Disc"),
+        new(XAML_Page_Setting, SettingPageName, "Setting")
     ];
 
     [RelayCommand]

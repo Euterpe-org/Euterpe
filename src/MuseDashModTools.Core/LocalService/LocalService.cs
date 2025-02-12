@@ -1,5 +1,4 @@
 using System.IO.Compression;
-using System.Security;
 using System.Text;
 using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
@@ -30,53 +29,6 @@ internal sealed partial class LocalService : ILocalService
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
 
     public HashSet<string?> GetLibFileNames() => Directory.GetFiles(Setting.UserLibsFolder).Select(Path.GetFileNameWithoutExtension).ToHashSet();
-
-    public async Task BrowseFolderAsync(string path, string? selectedFileName = null)
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                throw new ArgumentException(@"Path cannot be empty or null", nameof(path));
-            }
-
-            if (!Directory.Exists(path))
-            {
-                Logger.ZLogError($"Directory not found: {path}");
-                throw new DirectoryNotFoundException($"Directory not found: {path}");
-            }
-
-            var psi = new ProcessStartInfo
-            {
-                FileName = "explorer.exe"
-            };
-
-            if (!string.IsNullOrWhiteSpace(selectedFileName))
-            {
-                var fullPath = Path.Combine(path, selectedFileName);
-                if (File.Exists(fullPath))
-                {
-                    psi.Arguments = $"/select,\"{fullPath}\"";
-                }
-                else
-                {
-                    Logger.ZLogWarning($"Selected file not found: {fullPath}");
-                    psi.Arguments = $"\"{path}\"";
-                }
-            }
-            else
-            {
-                psi.Arguments = $"\"{path}\"";
-            }
-
-            await Task.Run(() => Process.Start(psi));
-        }
-        catch (Exception ex) when (ex is ArgumentException or DirectoryNotFoundException or SecurityException)
-        {
-            Logger.ZLogError(ex, $"Failed to browse folder: {path}");
-            throw;
-        }
-    }
 
     public async Task<bool> InstallMelonLoaderAsync()
     {

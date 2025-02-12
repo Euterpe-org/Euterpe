@@ -6,7 +6,6 @@ public interface ILocalService
     Task<string> GetMuseDashFolderAsync();
     IEnumerable<string> GetModFilePaths();
     HashSet<string?> GetLibFileNames();
-    Task BrowseFolderAsync(string path, string? selectedFileName = null);
     Task<bool> InstallMelonLoaderAsync();
     Task<bool> UninstallMelonLoaderAsync();
     ModDto? LoadModFromPath(string filePath);

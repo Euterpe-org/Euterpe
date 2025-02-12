@@ -4,7 +4,7 @@ namespace MuseDashModTools.Services;
 
 public sealed class ResourceService : IResourceService
 {
-    public Stream GetAssetAsStream(string fileName) => AssetLoader.Open(new Uri($"avares://{nameof(MuseDashModTools)}/Assets/{fileName}"));
+    public Stream GetAssetAsStream(string fileName) => AssetLoader.Open(new($"avares://{nameof(MuseDashModTools)}/Assets/{fileName}"));
 
     public T? TryGetAppResource<T>(string key) where T : class
     {

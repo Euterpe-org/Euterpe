@@ -10,7 +10,7 @@ public sealed class FileSystemPickerService : IFileSystemPickerService
     public async Task<string?> GetSingleFolderPathAsync(string dialogTitle)
     {
         var dialogue = await TopLevel.StorageProvider.OpenFolderPickerAsync(
-            new FolderPickerOpenOptions
+            new()
             {
                 AllowMultiple = false,
                 Title = dialogTitle

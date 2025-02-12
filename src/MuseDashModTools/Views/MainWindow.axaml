@@ -5,6 +5,7 @@
               xmlns:models="using:MuseDashModTools.Models"
               xmlns:u="https://irihi.tech/ursa"
               xmlns:vm="using:MuseDashModTools.ViewModels"
+              xmlns:controls="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
               x:Class="MuseDashModTools.Views.MainWindow"
               x:DataType="vm:MainWindowViewModel"
               Title="Muse Dash Mod Tools"
@@ -40,7 +41,7 @@
                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
                 <u:NavMenu.Styles>
-                    <Style x:DataType="models:NavItem" Selector="u|NavMenuItem">
+                    <Style x:DataType="controls:NavItem" Selector="u|NavMenuItem">
                         <Setter Property="IsSeparator" Value="{Binding IsSeparator, Mode=OneWay}" />
                     </Style>
                     <Style Selector="u|NavMenuItem /template/ Border">
@@ -82,7 +83,7 @@
                 </u:NavMenu.Header>
 
                 <u:NavMenu.HeaderTemplate>
-                    <DataTemplate x:DataType="models:NavItem">
+                    <DataTemplate x:DataType="controls:NavItem">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Margin="0,0,6,0"
                                        FontSize="16"
