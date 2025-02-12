@@ -13,23 +13,24 @@
                     <ItemsControl ItemsSource="{TemplateBinding Source, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
+                                <StackPanel Orientation="Horizontal" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="models:DropDownButtonItem">
-                                <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}"
-                                                Content="{Binding Text, Mode=OneTime}">
+                                <DropDownButton Content="{Binding Text, Mode=OneTime}" Theme="{DynamicResource BorderlessDropDownButton}">
+                                    <DropDownButton.Styles>
+                                        <Style x:DataType="models:DropDownMenuItem" Selector="MenuItem">
+                                            <Setter Property="Header" Value="{Binding Text, Mode=OneTime}" />
+                                            <Setter Property="Command" Value="{Binding Command, Mode=OneTime}" />
+                                            <Setter Property="CommandParameter" Value="{Binding CommandParameter, Mode=OneTime}" />
+                                        </Style>
+                                    </DropDownButton.Styles>
                                     <DropDownButton.Flyout>
-                                        <MenuFlyout Placement="BottomEdgeAlignedRight" ItemsSource="{Binding MenuItems, Mode=OneTime}">
+                                        <MenuFlyout ItemsSource="{Binding MenuItems, Mode=OneTime}" Placement="BottomEdgeAlignedRight">
                                             <MenuFlyout.ItemTemplate>
                                                 <DataTemplate x:DataType="models:DropDownMenuItem">
-                                                    <Menu>
-                                                        <MenuItem Header="{Binding Text, Mode=OneTime}"
-                                                                  Command="{Binding Command, Mode=OneTime}"
-                                                                  CommandParameter="{Binding CommandParameter, Mode=OneTime}">
-                                                        </MenuItem>
-                                                    </Menu>
+                                                    <MenuItem />
                                                 </DataTemplate>
                                             </MenuFlyout.ItemTemplate>
                                         </MenuFlyout>
