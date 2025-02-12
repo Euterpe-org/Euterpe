@@ -19,17 +19,19 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="models:DropDownButtonItem">
                                 <DropDownButton Theme="{DynamicResource BorderlessDropDownButton}"
-                                                Content="{Binding Text}">
+                                                Content="{Binding Text, Mode=OneTime}">
                                     <DropDownButton.Flyout>
                                         <MenuFlyout>
-                                            <ItemsControl ItemsSource="{Binding Items}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <MenuItem Header="{Binding Text}"
-                                                                  Command="{Binding Command}"/>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
+                                            <MenuFlyout.ItemsSource>
+                                                <Binding Path="Items" Mode="OneWay"/>
+                                            </MenuFlyout.ItemsSource>
+                                            <MenuFlyout.ItemTemplate>
+                                                <DataTemplate x:DataType="models:DropDownMenuItem">
+                                                    <MenuItem Header="{Binding Text, Mode=OneTime}"
+                                                              IsEnabled="True"
+                                                              Command="{Binding Command, Mode=OneWay}"/>
+                                                </DataTemplate>
+                                            </MenuFlyout.ItemTemplate>
                                         </MenuFlyout>
                                     </DropDownButton.Flyout>
                                 </DropDownButton>

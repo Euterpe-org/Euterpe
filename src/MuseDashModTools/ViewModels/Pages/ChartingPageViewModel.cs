@@ -19,7 +19,7 @@ public sealed partial class ChartingPageViewModel : PageViewModelBase
 
         DropDownButtons.Add(new("Browse",
         [
-            new DropDownItem("CustomAlbums Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.CustomAlbumsFolder)))
+            new DropDownMenuItem("CustomAlbums Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.CustomAlbumsFolder)))
         ]));
 
         Logger.ZLogInformation($"ChartingPage Initialized");

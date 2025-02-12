@@ -2,8 +2,8 @@
 
 namespace MuseDashModTools.Models;
 
-public sealed class DropDownButtonItem(string text, ObservableCollection<DropDownItem>? items)
+public sealed class DropDownButtonItem(string text, ObservableCollection<DropDownMenuItem>? items)
 {
     public string Text { get; init; } = text;
-    public ObservableCollection<DropDownItem>? Items { get; init; } = items;
+    public ObservableCollection<DropDownMenuItem>? Items { get; init; } = items;
 }

@@ -20,9 +20,16 @@ public sealed partial class ModdingPageViewModel : PageViewModelBase
 
         DropDownButtons.Add(new("Browse",
         [
-            new DropDownItem("Mods Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.ModsFolder))),
-            new DropDownItem("UserData Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserDataFolder))),
-            new DropDownItem("UserLib Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserLibsFolder)))
+            new DropDownMenuItem("Mods Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.ModsFolder))),
+            new DropDownMenuItem("UserData Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserDataFolder))),
+            new DropDownMenuItem("UserLib Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserLibsFolder)))
+        ]));
+
+        DropDownButtons.Add(new("Links",
+        [
+            new DropDownMenuItem("Upload Mod", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.ModsFolder))),
+            new DropDownMenuItem("UserData Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserDataFolder))),
+            new DropDownMenuItem("UserLib Folder", new RelayCommand(() => LocalService.BrowseFolderAsync(Setting.UserLibsFolder)))
         ]));
 
         Logger.ZLogInformation($"ModdingPage Initialized");
