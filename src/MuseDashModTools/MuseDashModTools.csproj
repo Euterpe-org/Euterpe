@@ -28,8 +28,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**" />
-        <AvaloniaResource Remove="Assets\Raw\**" />
+        <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Remove="Assets\Raw\**"/>
         <Content Include="Assets\Icon.ico"/>
     </ItemGroup>
 
@@ -72,9 +72,5 @@
 
     <ItemGroup>
         <AdditionalFiles Include="BannedSymbols.txt"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <UpToDateCheckInput Remove="Views\Controls\PageHeaderControl.axaml"/>
     </ItemGroup>
 </Project>
