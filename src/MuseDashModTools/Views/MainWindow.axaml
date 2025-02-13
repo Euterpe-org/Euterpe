@@ -23,19 +23,6 @@
         </RoutedEventTriggerBehavior>
     </Interaction.Behaviors>
 
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <Bitmap x:Key="AppTitleImage">avares://MuseDashModTools/Assets/Title-Light.webp</Bitmap>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Dark">
-                    <Bitmap x:Key="AppTitleImage">avares://MuseDashModTools/Assets/Title-Dark.webp</Bitmap>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-
     <u:UrsaWindow.RightContent>
         <u:ThemeToggleButton Margin="0,1,0,0"
                              VerticalAlignment="Top"
@@ -112,10 +99,7 @@
             <StackPanel DockPanel.Dock="Bottom"
                         Margin="8,12, 8, 12"
                         VerticalAlignment="Bottom">
-                <Image Height="20" Margin="0,0,0,2" HorizontalAlignment="Center">
-                    <Image.Source>
-                        <DynamicResource ResourceKey="AppTitleImage" />
-                    </Image.Source>
+                <Image Height="20" Margin="0,0,0,2" HorizontalAlignment="Center" Source="{DynamicResource AppTitleImage}">
                 </Image>
                 <Label Classes="Blue"
                        HorizontalAlignment="Center"
