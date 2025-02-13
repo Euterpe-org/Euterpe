@@ -2,7 +2,6 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
               xmlns:converters="clr-namespace:MuseDashModTools.Converters"
-              xmlns:models="using:MuseDashModTools.Models"
               xmlns:u="https://irihi.tech/ursa"
               xmlns:vm="using:MuseDashModTools.ViewModels"
               xmlns:controls="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
@@ -24,6 +23,19 @@
         </RoutedEventTriggerBehavior>
     </Interaction.Behaviors>
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Bitmap x:Key="AppTitleImage">avares://MuseDashModTools/Assets/Title-Light.webp</Bitmap>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <Bitmap x:Key="AppTitleImage">avares://MuseDashModTools/Assets/Title-Dark.webp</Bitmap>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <u:UrsaWindow.RightContent>
         <u:ThemeToggleButton Margin="0,1,0,0"
                              VerticalAlignment="Top"
@@ -34,11 +46,11 @@
     <Grid ColumnDefinitions="Auto,*">
         <DockPanel Grid.Column="0" Width="85">
             <u:NavMenu DockPanel.Dock="Top"
-                   HeaderBinding="{Binding ., Mode=OneTime}"
-                   IconBinding="{Binding IconResourceKey, Mode=OneTime}"
-                   IsHorizontalCollapsed="true"
-                   ItemsSource="{Binding NavItems, Mode=OneTime}"
-                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                       HeaderBinding="{Binding ., Mode=OneTime}"
+                       IconBinding="{Binding IconResourceKey, Mode=OneTime}"
+                       IsHorizontalCollapsed="true"
+                       ItemsSource="{Binding NavItems, Mode=OneTime}"
+                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
                 <u:NavMenu.Styles>
                     <Style x:DataType="controls:NavItem" Selector="u|NavMenuItem">
@@ -100,11 +112,11 @@
             <StackPanel DockPanel.Dock="Bottom"
                         Margin="8,12, 8, 12"
                         VerticalAlignment="Bottom">
-                <Image Height="20"
-                       Margin="0,0,0, 2"
-                       HorizontalAlignment="Center"
-                       RenderOptions.BitmapInterpolationMode="HighQuality"
-                       Source="../Assets/Title.webp" />
+                <Image Height="20" Margin="0,0,0,2" HorizontalAlignment="Center">
+                    <Image.Source>
+                        <DynamicResource ResourceKey="AppTitleImage" />
+                    </Image.Source>
+                </Image>
                 <Label Classes="Blue"
                        HorizontalAlignment="Center"
                        Theme="{StaticResource TagLabel}"
