@@ -1,10 +1,7 @@
 namespace MuseDashModTools.Models.Controls;
 
-public sealed partial class NavItem(string displayName, string navigateKey, string iconResourceKey = "") : ObservableObject
+public sealed class NavItem(string displayName, string navigateKey, string iconResourceKey = "") : ObservableObject
 {
-    [ObservableProperty]
-    public partial bool Selected { get; set; }
-
     public NavItem[] Children { get; init; } = [];
     public string DisplayName { get; set; } = displayName;
     public string NavigateKey { get; init; } = navigateKey;

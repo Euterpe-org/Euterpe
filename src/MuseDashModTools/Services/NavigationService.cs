@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Services;
 
-public sealed class NavigationService : ObservableObject
+public sealed class NavigationService
 {
     #region Injections
 
