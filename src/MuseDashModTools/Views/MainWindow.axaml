@@ -1,10 +1,10 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
+              xmlns:controls="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
               xmlns:converters="clr-namespace:MuseDashModTools.Converters"
               xmlns:u="https://irihi.tech/ursa"
               xmlns:vm="using:MuseDashModTools.ViewModels"
-              xmlns:controls="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
               x:Class="MuseDashModTools.Views.MainWindow"
               x:DataType="vm:MainWindowViewModel"
               Title="Muse Dash Mod Tools"
@@ -73,7 +73,7 @@
 
                 <u:NavMenu.Header>
                     <Image Height="55"
-                           Margin="0, 15, 0,10"
+                           Margin="0,15,0,10"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            u:NavMenu.CanToggle="False"
@@ -97,14 +97,16 @@
             </u:NavMenu>
 
             <StackPanel DockPanel.Dock="Bottom"
-                        Margin="8,12, 8, 12"
+                        Margin="8,12,8,12"
                         VerticalAlignment="Bottom">
-                <Image Height="20" Margin="0,0,0,2" HorizontalAlignment="Center" Source="{DynamicResource AppTitleImage}">
-                </Image>
-                <Label Classes="Blue"
+                <Image Height="20"
+                       Margin="0,0,0,2"
                        HorizontalAlignment="Center"
-                       Theme="{StaticResource TagLabel}"
-                       Content="{Binding Source={x:Static constants:BuildInfo.DisplayVersion}}" />
+                       Source="{DynamicResource AppTitleImage}" />
+                <Label HorizontalAlignment="Center"
+                       Classes="Blue"
+                       Content="{x:Static constants:BuildInfo.DisplayVersion}"
+                       Theme="{StaticResource TagLabel}" />
             </StackPanel>
 
         </DockPanel>
