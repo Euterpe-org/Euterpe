@@ -120,8 +120,7 @@
                 <Label Classes="Blue"
                        HorizontalAlignment="Center"
                        Theme="{StaticResource TagLabel}"
-                       Content="{Binding Source={x:Static constants:BuildInfo.DisplayVersion}}">
-                </Label>
+                       Content="{Binding Source={x:Static constants:BuildInfo.DisplayVersion}}" />
             </StackPanel>
 
         </DockPanel>

@@ -28,7 +28,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Include="Assets\**" />
+        <AvaloniaResource Remove="Assets\Raw\**" />
         <Content Include="Assets\Icon.ico"/>
     </ItemGroup>
 
