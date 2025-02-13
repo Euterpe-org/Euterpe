@@ -14,7 +14,7 @@ public sealed class PageNavigateGenerator : IIncrementalGenerator
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax { BaseList.Types: var types } classDeclarationSyntax
-        && types.Any(x => x.Type.ToString() is "PageViewModelBase" or "NavViewModelBase")
+        && types.Any(x => x.Type.ToString() is "NavViewModelBase")
         && classDeclarationSyntax.Identifier.Text.EndsWith("ViewModel");
 
     private static ViewModelData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)

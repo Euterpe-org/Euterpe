@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using Avalonia.Controls;
 
 namespace MuseDashModTools.Core;
 
@@ -11,9 +12,6 @@ internal sealed class LinuxService : IPlatformService
             ".steam/steam/steamapps/common/Muse Dash"
         }
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToFrozenSet();
-
-    [UsedImplicitly]
-    public ILogger<LinuxService> Logger { get; init; } = null!;
 
     public string OsString => "Linux";
 
@@ -39,4 +37,14 @@ internal sealed class LinuxService : IPlatformService
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool SetPathEnvironmentVariable() => false;
+
+    #region Injections
+
+    [UsedImplicitly]
+    public ILogger<LinuxService> Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public TopLevel TopLevel { get; init; } = null!;
+
+    #endregion Injections
 }

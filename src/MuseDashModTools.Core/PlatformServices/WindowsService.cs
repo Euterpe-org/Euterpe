@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using Avalonia.Controls;
 using Microsoft.Win32;
 
 namespace MuseDashModTools.Core;
@@ -16,12 +17,6 @@ internal sealed class WindowsService : IPlatformService
             @"SteamLibrary\steamapps\common\Muse Dash"
         }
         .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToFrozenSet();
-
-    [UsedImplicitly]
-    public ILogger<WindowsService> Logger { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
 
     public string OsString => "Windows";
 
@@ -89,4 +84,17 @@ internal sealed class WindowsService : IPlatformService
         folderPath = Path.Combine(steamPath, "steamapps", "common", "Muse Dash");
         return Directory.Exists(folderPath);
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public ILogger<WindowsService> Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    [UsedImplicitly]
+    public TopLevel TopLevel { get; init; } = null!;
+
+    #endregion Injections
 }

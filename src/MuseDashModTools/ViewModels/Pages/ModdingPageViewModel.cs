@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class ModdingPageViewModel : PageViewModelBase
+public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
     public override ObservableCollection<NavItem> NavItems { get; } =
     [
@@ -28,19 +28,22 @@ public sealed partial class ModdingPageViewModel : PageViewModelBase
         Logger.ZLogInformation($"ModdingPage Initialized");
     }
 
+    [RelayCommand]
+    private void OpenFolder(string folderPath) => PlatformService.OpenFolder(folderPath);
+
     #region Injections
+
+    [UsedImplicitly]
+    public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; } = null!;
 
     [UsedImplicitly]
     public NavigationService NavigationService { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILocalService LocalService { get; init; } = null!;
-
-    [UsedImplicitly]
     public Setting Setting { get; init; } = null!;
-
-    [UsedImplicitly]
-    public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
 
     #endregion Injections
 }

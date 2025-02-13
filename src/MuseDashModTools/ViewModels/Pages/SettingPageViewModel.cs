@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.ViewModels.Pages;
 
-public sealed partial class SettingPageViewModel : PageViewModelBase
+public sealed partial class SettingPageViewModel : NavViewModelBase
 {
     public override ObservableCollection<NavItem> NavItems { get; } =
     [
@@ -23,10 +23,10 @@ public sealed partial class SettingPageViewModel : PageViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public NavigationService NavigationService { get; init; } = null!;
+    public ILogger<SettingPageViewModel> Logger { get; init; } = null!;
 
     [UsedImplicitly]
-    public ILogger<SettingPageViewModel> Logger { get; init; } = null!;
+    public NavigationService NavigationService { get; init; } = null!;
 
     #endregion Injections
 }

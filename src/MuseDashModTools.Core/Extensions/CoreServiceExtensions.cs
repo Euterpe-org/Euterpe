@@ -43,15 +43,21 @@ public static class CoreServiceExtensions
         // Platform Service
         if (OperatingSystem.IsWindows())
         {
-            builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsService>().As<IPlatformService>()
+                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
+                .SingleInstance();
         }
         else if (OperatingSystem.IsLinux())
         {
-            builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxService>().As<IPlatformService>()
+                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
+                .SingleInstance();
         }
         else if (OperatingSystem.IsMacOS())
         {
-            builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsService>().As<IPlatformService>()
+                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
+                .SingleInstance();
         }
     }
 }
