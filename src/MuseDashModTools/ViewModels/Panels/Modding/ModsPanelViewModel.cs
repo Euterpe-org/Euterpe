@@ -1,4 +1,55 @@
-﻿namespace MuseDashModTools.ViewModels.Panels.Modding;
+﻿using System.Collections.ObjectModel;
+using DynamicData;
 
-public sealed class ModsPanelViewModel : ViewModelBase
-{ }
+namespace MuseDashModTools.ViewModels.Panels.Modding;
+
+public sealed partial class ModsPanelViewModel : ViewModelBase
+{
+    private readonly ReadOnlyObservableCollection<ModDto> _mods;
+    private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
+    private ModFilterType _modFilterType;
+
+    [ObservableProperty]
+    public partial string? SearchText { get; set; }
+
+    public ReadOnlyObservableCollection<ModDto> Mods => _mods;
+
+    public ModsPanelViewModel()
+    {
+        _sourceCache.Connect()
+            // TODO Try Search Values after .net9 (lxy, 2024/10/2)
+            .Filter(x => SearchText.IsNullOrEmpty() ||
+                         x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+            .Filter(x => _modFilterType != ModFilterType.Installed || x.IsLocal)
+            .Filter(x => _modFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
+            .Filter(x => _modFilterType != ModFilterType.Outdated || x.State == ModState.Outdated)
+            .Filter(x => _modFilterType != ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
+            .SortBy(x => x.Name)
+            .Bind(out _mods)
+            .Subscribe();
+    }
+
+    [RelayCommand]
+    private async Task InitializeAsync()
+    {
+        Logger.ZLogInformation($"Initializing ModManagePageViewModel");
+        await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
+        Logger.ZLogInformation($"ModManagePageViewModel Initialized");
+    }
+
+    [RelayCommand]
+    private void Search() => _sourceCache.Refresh();
+
+    [RelayCommand]
+    private void FilterMods(ModFilterType filterType) => _modFilterType = filterType;
+
+    #region Injections
+
+    [UsedImplicitly]
+    public ILogger<ModsPanelViewModel> Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IModManageService ModManageService { get; init; } = null!;
+
+    #endregion Injections
+}
