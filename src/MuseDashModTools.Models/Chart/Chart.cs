@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Avalonia.Media.Imaging;
 
 namespace MuseDashModTools.Models.Chart;

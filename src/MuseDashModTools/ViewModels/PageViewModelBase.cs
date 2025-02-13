@@ -8,5 +8,5 @@ public partial class PageViewModelBase : NavViewModelBase
     public TopLevel TopLevel { get; init; } = null!;
 
     [RelayCommand]
-    private void OpenFolder(string folderPath) => TopLevel.Launcher.LaunchDirectoryInfoAsync(new(folderPath));
+    private void OpenFolder(string folderPath) => TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
 }

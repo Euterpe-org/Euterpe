@@ -49,7 +49,7 @@ public sealed class PageNavigateGenerator : IIncrementalGenerator
             .Select(node => node.ArgumentList.Arguments[1].ToString())
             .ToArray();
 
-        return new(classSymbol.ContainingNamespace.ToDisplayString(), classSymbol.Name, navigateKeys);
+        return new ViewModelData(classSymbol.ContainingNamespace.ToDisplayString(), classSymbol.Name, navigateKeys);
     }
 
     private static void GenerateFromData(SourceProductionContext spc, ViewModelData? data)

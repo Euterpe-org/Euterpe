@@ -15,9 +15,9 @@ public sealed partial class ModdingPageViewModel : PageViewModelBase
     [
         new("Open",
         [
-            new("Mods Folder", OpenFolderCommand, Setting.ModsFolder),
-            new("UserData Folder", OpenFolderCommand, Setting.UserDataFolder),
-            new("UserLib Folder", OpenFolderCommand, Setting.UserLibsFolder)
+            new DropDownMenuItem("Mods Folder", OpenFolderCommand, Setting.ModsFolder),
+            new DropDownMenuItem("UserData Folder", OpenFolderCommand, Setting.UserDataFolder),
+            new DropDownMenuItem("UserLib Folder", OpenFolderCommand, Setting.UserLibsFolder)
         ])
     ];
 

@@ -1,12 +1,11 @@
-| Versions        | | | |
-|-----------------| ------ | ------ | ------ |
-|  |  |  | [v1.3.0](#v130) |
+| Versions        |                 |                 |                 |
+|-----------------|-----------------|-----------------|-----------------|
+|                 |                 |                 | [v1.3.0](#v130) |
 | [v1.2.7](#v127) | [v1.2.6](#v126) | [v1.2.5](#v125) | [v1.2.4](#v124) |
 | [v1.2.3](#v123) | [v1.2.2](#v122) | [v1.2.1](#v121) | [v1.2.0](#v120) |
 | [v1.1.2](#v112) | [v1.1.0](#v110) | [v1.0.9](#v109) | [v1.0.8](#v108) |
 | [v1.0.7](#v107) | [v1.0.6](#v106) | [v1.0.5](#v105) | [v1.0.4](#v104) |
 | [v1.0.3](#v103) | [v1.0.2](#v102) | [v1.0.1](#v101) | [v1.0.0](#v100) |
-
 
 ---
 
@@ -52,6 +51,7 @@
 ## v1.2.4
 
 ### Changes
+
 1. **With the "Chart" tab, you can sort, filter, search and download charts directly**
 2. If you set the download source to custom, you can use the custom mod links
 3. Mod Tools can load mods when offline but can't download mods, of course
@@ -157,8 +157,6 @@
 
 1. Add file system watcher to monitor the file changes in mods folder and refresh the mod list.
 2. The update shows the GitHub release info
-
-
 
 ### Bug fixes
 

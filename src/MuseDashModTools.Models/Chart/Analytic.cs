@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MuseDashModTools.Models.Chart;
+﻿namespace MuseDashModTools.Models.Chart;
 
 [UsedImplicitly]
 public sealed class Analytic
