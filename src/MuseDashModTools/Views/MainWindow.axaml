@@ -8,7 +8,7 @@
               x:Class="MuseDashModTools.Views.MainWindow"
               x:DataType="vm:MainWindowViewModel"
               Title="Muse Dash Mod Tools"
-              MinWidth="900"
+              MinWidth="1100"
               MinHeight="700"
               Icon="/Assets/Icon.ico"
               WindowStartupLocation="CenterScreen">
