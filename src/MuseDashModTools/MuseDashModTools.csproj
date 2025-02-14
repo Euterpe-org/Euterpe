@@ -59,7 +59,6 @@
         <PackageReference Include="ReactiveUI"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="System.Linq.Async"/>
         <PackageReference Include="ValveKeyValue"/>
     </ItemGroup>
 

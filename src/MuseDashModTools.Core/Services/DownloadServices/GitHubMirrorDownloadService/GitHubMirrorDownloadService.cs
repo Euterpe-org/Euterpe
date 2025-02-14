@@ -1,8 +1,8 @@
 using System.Net.Http.Json;
 
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
-public sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloadService
+internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloadService
 {
     private const string PrimaryRawMirrorUrl = "https://raw.kkgithub.com/";
     private const string PrimaryReleaseMirrorUrl = "https://kkgithub.com/";

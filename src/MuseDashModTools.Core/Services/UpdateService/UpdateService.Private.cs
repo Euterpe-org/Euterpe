@@ -2,7 +2,6 @@
 using System.Net.Http.Json;
 using System.ServiceModel.Syndication;
 using System.Xml;
-using MuseDashModTools.Common.Extensions;
 
 namespace MuseDashModTools.Core;
 

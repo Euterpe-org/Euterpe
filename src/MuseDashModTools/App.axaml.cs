@@ -18,8 +18,8 @@ public sealed class App : Application
         services.RegisterLogger(LogFileName);
 
         var builder = new ContainerBuilder();
-        builder.RegisterCoreServices();
         builder.RegisterInstances();
+        builder.RegisterCoreServices();
         builder.RegisterInternalServices();
         builder.RegisterLazyProxies();
         builder.RegisterViewAndViewModels();

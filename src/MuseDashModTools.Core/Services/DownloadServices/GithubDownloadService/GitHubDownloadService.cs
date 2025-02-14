@@ -1,8 +1,8 @@
 using System.Net.Http.Json;
 
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
-public sealed partial class GitHubDownloadService : IGitHubDownloadService
+internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 {
     private const string RawModLinksUrl = GitHubRawContentBaseUrl + ModLinksBaseUrl;
     private const string ModLinksUrl = RawModLinksUrl + "ModLinks.json";

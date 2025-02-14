@@ -1,6 +1,6 @@
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
-public sealed class DownloadManager : IDownloadManager
+internal sealed class DownloadManager : IDownloadManager
 {
     private IDownloadService CurrentDownloadService => Setting.DownloadSource switch
     {

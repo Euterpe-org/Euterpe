@@ -1,6 +1,6 @@
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
-public sealed class CustomDownloadService : ICustomDownloadService
+internal sealed class CustomDownloadService : ICustomDownloadService
 {
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,

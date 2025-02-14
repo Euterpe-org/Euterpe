@@ -1,8 +1,8 @@
 using System.Net;
 
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
-public sealed partial class GitHubMirrorDownloadService
+internal sealed partial class GitHubDownloadService
 {
     private async Task<string?> TryFetchContentAsync(string url, CancellationToken cancellationToken)
     {
@@ -29,7 +29,7 @@ public sealed partial class GitHubMirrorDownloadService
 
     private async Task<string?> FetchReadmeFromBranchAsync(string repoId, string branch, CancellationToken cancellationToken = default)
     {
-        foreach (var url in CommonReadmeNames.Select(readmeName => $"{PrimaryRawMirrorUrl}{repoId}/{branch}/{readmeName}"))
+        foreach (var url in CommonReadmeNames.Select(readmeName => $"{GitHubRawContentBaseUrl}{repoId}/{branch}/{readmeName}"))
         {
             var content = await TryFetchContentAsync(url, cancellationToken).ConfigureAwait(false);
 
