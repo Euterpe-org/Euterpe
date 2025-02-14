@@ -24,15 +24,22 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
 
     public ModsPanelViewModel()
     {
+        var comparer = SortExpressionComparer<ModDto>
+            .Descending(x => x.IsDuplicated)
+            .ThenByDescending(x => x is { IsLocal: true, IsDisabled: false })
+            .ThenByDescending(x => x.IsLocal)
+            .ThenByDescending(x => x.IsInstallable)
+            .ThenByAscending(x => x.Name);
+
         _sourceCache.Connect()
-            // TODO Try Search Values after .net9 (lxy, 2024/10/2)
-            .Filter(x => SearchText.IsNullOrEmpty() ||
-                         x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => _modFilterType != ModFilterType.Installed || x.IsLocal)
-            .Filter(x => _modFilterType != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
-            .Filter(x => _modFilterType != ModFilterType.Outdated || x.State == ModState.Outdated)
-            .Filter(x => _modFilterType != ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
-            .SortBy(x => x.Name)
+            .Filter(x => SearchText.IsNullOrEmpty()
+                         || x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+                         || x.Author.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+            .Filter(x => ModFilter != ModFilterType.Installed || x.IsLocal)
+            .Filter(x => ModFilter != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
+            .Filter(x => ModFilter != ModFilterType.Outdated || x.State == ModState.Outdated)
+            .Filter(x => ModFilter != ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
+            .Sort(comparer)
             .Bind(out _mods)
             .Subscribe();
     }
