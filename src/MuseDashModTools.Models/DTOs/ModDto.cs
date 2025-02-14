@@ -25,7 +25,6 @@ public sealed class ModDto : ObservableObject
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
     public bool IsDuplicated => State is ModState.Duplicated;
-    public bool HasUpdate => State is ModState.Newer && IsInstallable;
     public string? DuplicatedModPaths { get; set; }
 
     public bool IsValidConfigFile => !ConfigFile.IsNullOrEmpty() && File.Exists(ConfigFile);

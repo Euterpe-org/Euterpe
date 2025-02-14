@@ -99,7 +99,7 @@
                                                        Content="{Binding LocalVersion, Mode=OneWay}"
                                                        Theme="{StaticResource TagLabel}" />
                                                 <StackPanel Orientation="Horizontal"
-                                                            IsVisible="{Binding HasUpdate, Mode=OneWay}"
+                                                            IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
                                                             Spacing="8">
                                                     <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                                     <Label Classes="Ghost Green"
@@ -168,7 +168,7 @@
                                 </Button>
                                 <Separator Classes="Vertical" />
                                 <Button Classes="Primary"
-                                        IsVisible="{Binding SelectedMod.HasUpdate, Mode=OneWay}"
+                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
                                         Command="{Binding UpdateMod}">
                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                         <PathIcon Data="{StaticResource SemiIconRefresh}" Height="15" />
@@ -198,7 +198,7 @@
                                            Content="Installed"
                                            Theme="{StaticResource TagLabel}" />
                                     <Label Classes="Ghost Green"
-                                           IsVisible="{Binding SelectedMod.HasUpdate, Mode=OneWay}"
+                                           IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
                                            Content="Update Available"
                                            Theme="{StaticResource TagLabel}" />
                                     <Label Classes="Ghost Orange"
@@ -215,7 +215,7 @@
                                            Content="{Binding SelectedMod.LocalVersion, StringFormat='Version {0}', Mode=OneWay}"
                                            Theme="{StaticResource TagLabel}" />
                                     <StackPanel Orientation="Horizontal"
-                                              IsVisible="{Binding SelectedMod.HasUpdate, Mode=OneWay}"
+                                              IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
                                               Spacing="8">
                                         <PathIcon Height="10"
                                                   Data="{StaticResource SemiIconArrowRight}" />
