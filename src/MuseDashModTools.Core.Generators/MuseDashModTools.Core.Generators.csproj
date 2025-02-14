@@ -15,5 +15,5 @@
         </PackageReference>
         <PackageReference Include="Roslynator.CodeAnalysis.Analyzers"/>
     </ItemGroup>
-    
+
 </Project>
