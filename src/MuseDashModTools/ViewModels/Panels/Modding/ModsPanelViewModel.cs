@@ -87,6 +87,11 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     {
     }
 
+    [RelayCommand]
+    private void ToggleModState(ModDto mod)
+    {
+    }
+
     partial void OnModFilterChanged(ModFilterType value) => _sourceCache.Refresh();
 
     partial void OnSearchTextChanged(string value) => _sourceCache.Refresh();
