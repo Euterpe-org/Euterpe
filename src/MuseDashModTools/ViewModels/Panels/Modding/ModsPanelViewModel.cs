@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 using DynamicData;
+using DynamicData.Binding;
 
 namespace MuseDashModTools.ViewModels.Panels.Modding;
 
@@ -7,11 +9,17 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
 {
     private readonly ReadOnlyObservableCollection<ModDto> _mods;
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
-    private ModFilterType _modFilterType;
 
     [ObservableProperty]
     public partial string? SearchText { get; set; }
 
+    [ObservableProperty]
+    public partial ModDto? SelectedMod { get; set; }
+
+    [ObservableProperty]
+    public partial ModFilterType ModFilter { get; set; } =  ModFilterType.All;
+
+    public static Array ModFilterTypes => Enum.GetValues<ModFilterType>();
     public ReadOnlyObservableCollection<ModDto> Mods => _mods;
 
     public ModsPanelViewModel()
@@ -38,10 +46,43 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void Search() => _sourceCache.Refresh();
+    private void OpenConfigFile()
+    {
+    }
 
     [RelayCommand]
-    private void FilterMods(ModFilterType filterType) => _modFilterType = filterType;
+    private void UpdateMod()
+    {
+    }
+
+    [RelayCommand]
+    private void InstallMod()
+    {
+    }
+
+    [RelayCommand]
+    private void ReinstallMod()
+    {
+    }
+
+    [RelayCommand]
+    private void UninstallMod()
+    {
+    }
+
+    [RelayCommand]
+    private void OpenDownloadLink()
+    {
+    }
+
+    [RelayCommand]
+    private void OpenGitHubRepo()
+    {
+    }
+
+    partial void OnModFilterChanged(ModFilterType value) => _sourceCache.Refresh();
+
+    partial void OnSearchTextChanged(string value) => _sourceCache.Refresh();
 
     #region Injections
 

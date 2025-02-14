@@ -3,6 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Modding"
+             xmlns:enums="clr-namespace:MuseDashModTools.Models.Enums;assembly=MuseDashModTools.Models"
+             xmlns:converters="clr-namespace:MuseDashModTools.Converters.IValueConverters"
+             xmlns:u="https://irihi.tech/ursa"
              x:Class="MuseDashModTools.Views.Panels.Modding.ModsPanel"
              x:DataType="pages:ModsPanelViewModel"
              mc:Ignorable="d"
@@ -12,9 +15,326 @@
     <Design.DataContext>
         <pages:ModsPanelViewModel />
     </Design.DataContext>
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
-        ModsPanel still work in progress...
-    </TextBlock>
+
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Initialized">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
+    <UserControl.Resources>
+        <converters:ModFilterTypeConverter x:Key="ModFilterConverter" />
+    </UserControl.Resources>
+
+    <Grid ColumnDefinitions="Auto, *">
+
+        <Border Width="380"
+                Margin="0,0,20,10"
+                Padding="12,4"
+                Background="{DynamicResource SecondaryCardColor}"
+                Theme="{DynamicResource CardBorder}">
+                <Panel>
+                    <DockPanel>
+
+                        <Grid DockPanel.Dock="Top"
+                              ColumnDefinitions="*, Auto"
+                              Margin="0, 10, 0, 10">
+                            <TextBox Classes="ClearButton"
+                                     Margin="0, 0, 10, 0"
+                                     AcceptsReturn="False"
+                                     AcceptsTab="False"
+                                     HorizontalAlignment="Stretch"
+                                     MaxLength="30"
+                                     Watermark="Search by name or author"
+                                     Text="{Binding SearchText}">
+                                <TextBox.InnerLeftContent>
+                                    <PathIcon Data="{StaticResource SemiIconSearch}" Height="18" />
+                                </TextBox.InnerLeftContent>
+                            </TextBox>
+                            <ComboBox Grid.Column="1"
+                                      HorizontalAlignment="Right"
+                                      ItemsSource="{Binding ModFilterTypes, Converter={StaticResource ModFilterConverter}, Mode=OneWay}"
+                                      SelectedItem="{Binding ModFilter, Converter={StaticResource ModFilterConverter}, Mode=TwoWay}" />
+                        </Grid>
+
+                        <ScrollViewer DockPanel.Dock="Bottom"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch">
+                            <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}"
+                                             SelectedItem="{Binding SelectedMod, Mode=TwoWay}">
+                                <u:SelectionList.Indicator>
+                                    <Border Background="Transparent" CornerRadius="4">
+                                        <Border
+                                            Width="4"
+                                            Margin="0,8"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Stretch"
+                                            Background="{DynamicResource SemiBlue6}"
+                                            CornerRadius="4" />
+                                        </Border>
+                                </u:SelectionList.Indicator>
+                                <u:SelectionList.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Height="60"
+                                                    Margin="8,5"
+                                                    VerticalAlignment="Center"
+                                                    Orientation="Vertical"
+                                                    Spacing="5">
+                                            <TextBlock
+                                                Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
+                                                Text="{Binding Name, Mode=OneWay}">
+                                                <TextBlock.Styles>
+                                                    <Style Selector="TextBlock.Active">
+                                                        <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
+                                                    </Style>
+                                                </TextBlock.Styles>
+                                            </TextBlock>
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <Label Classes="Ghost Gray"
+                                                       IsVisible="{Binding IsLocal, Converter={x:Static BoolConverters.Not}, Mode=OneWay}"
+                                                       Content="{Binding Version, Mode=OneWay}"
+                                                       Theme="{StaticResource TagLabel}" />
+                                                <Label Classes="Ghost Indigo"
+                                                       IsVisible="{Binding IsLocal, Mode=OneWay}"
+                                                       Content="{Binding LocalVersion, Mode=OneWay}"
+                                                       Theme="{StaticResource TagLabel}" />
+                                                <StackPanel Orientation="Horizontal"
+                                                            IsVisible="{Binding HasUpdate, Mode=OneWay}"
+                                                            Spacing="8">
+                                                    <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
+                                                    <Label Classes="Ghost Green"
+                                                           Content="{Binding Version, Mode=OneWay}"
+                                                           Theme="{StaticResource TagLabel}" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </u:SelectionList.ItemTemplate>
+                            </u:SelectionList>
+                        </ScrollViewer>
+
+                    </DockPanel>
+                </Panel>
+            </Border>
+
+        <Panel Grid.Column="1"
+                Margin="0, 0, 10, 10"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch" >
+
+            <Image Height="220"
+                   Margin="0, 20, 0, 0"
+                   Source="avares://MuseDashModTools/Assets/Watermark.webp"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"/>
+
+            <ScrollViewer IsVisible="{Binding SelectedMod, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
+                <StackPanel Spacing="16" Margin="24">
+
+                    <Border Height="200">
+                        <Carousel Theme="{DynamicResource FullCarousel}">
+                            <Border Background="#4053b7" CornerRadius="10">
+                                <TextBlock HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Text="Banner (WIP)" />
+                            </Border>
+                            <Border Background="#233448" CornerRadius="10">
+                                <TextBlock HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Text="Still work in progress" />
+                            </Border>
+                        </Carousel>
+                    </Border>
+
+                    <Border Padding="16">
+                        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+
+                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                     Text="{Binding SelectedMod.Name, Mode=OneWay}"
+                                     Classes="h2"
+                                     FontSize="24"
+                                     FontWeight="Bold"
+                                     Margin="0,0,0,8"/>
+
+                            <StackPanel Grid.Row="0" Grid.Column="1"
+                                      Orientation="Horizontal"
+                                      Spacing="8">
+                                <Button Theme="{StaticResource GhostButton}"
+                                        ToolTip.Tip="Edit mod config file"
+                                        Command="{Binding OpenConfigFile}"
+                                        IsVisible="{Binding SelectedMod.IsValidConfigFile, Mode=OneWay}">
+                                    <PathIcon Data="{StaticResource SemiIconSetting}" Height="18"/>
+                                </Button>
+                                <Separator Classes="Vertical" />
+                                <Button Classes="Primary"
+                                        IsVisible="{Binding SelectedMod.HasUpdate, Mode=OneWay}"
+                                        Command="{Binding UpdateMod}">
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <PathIcon Data="{StaticResource SemiIconRefresh}" Height="15" />
+                                        <TextBlock Text="Update"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Content="Install"
+                                        IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}"
+                                        Command="{Binding InstallMod}"/>
+                                <Button Content="Reinstall"
+                                        IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}"
+                                        Command="{Binding ReinstallMod}"/>
+                                <Button Content="Uninstall"
+                                        Classes="Danger"
+                                        IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}"
+                                        Command="{Binding UninstallMod}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="0"
+                                      Grid.ColumnSpan="2"
+                                      Spacing="8"
+                                      Margin="0,8">
+
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Label Classes="Ghost Blue"
+                                           IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}"
+                                           Content="Installed"
+                                           Theme="{StaticResource TagLabel}" />
+                                    <Label Classes="Ghost Green"
+                                           IsVisible="{Binding SelectedMod.HasUpdate, Mode=OneWay}"
+                                           Content="Update Available"
+                                           Theme="{StaticResource TagLabel}" />
+                                    <Label Classes="Ghost Orange"
+                                           IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
+                                           Content="Incompatible"
+                                           Theme="{StaticResource TagLabel}" />
+
+                                    <Label Classes="Ghost Gray"
+                                           IsVisible="{Binding SelectedMod.IsLocal, Converter={x:Static BoolConverters.Not}, Mode=OneWay}"
+                                           Content="{Binding SelectedMod.Version, StringFormat='Version {0}', Mode=OneWay}"
+                                           Theme="{StaticResource TagLabel}" />
+                                    <Label Classes="Ghost Indigo"
+                                           IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}"
+                                           Content="{Binding SelectedMod.LocalVersion, StringFormat='Version {0}', Mode=OneWay}"
+                                           Theme="{StaticResource TagLabel}" />
+                                    <StackPanel Orientation="Horizontal"
+                                              IsVisible="{Binding SelectedMod.HasUpdate, Mode=OneWay}"
+                                              Spacing="8">
+                                        <PathIcon Height="10"
+                                                  Data="{StaticResource SemiIconArrowRight}" />
+                                        <Label Classes="Ghost Green"
+                                               Content="{Binding SelectedMod.Version, Mode=OneWay}"
+                                               Theme="{StaticResource TagLabel}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="2" Grid.ColumnSpan="2"
+                                     Text="{Binding SelectedMod.Description, Mode=OneWay}"
+                                     TextWrapping="Wrap"
+                                     Margin="0,8,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Padding="16">
+                        <StackPanel Spacing="16">
+                            <TextBlock Text="Details"
+                                     FontSize="18"
+                                     FontWeight="SemiBold"/>
+
+                            <Grid ColumnDefinitions="130,*"
+                                  RowDefinitions="Auto,Auto,Auto,Auto">
+
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                         Text="Author:"
+                                         Margin="0,0,16,14"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1"
+                                         Text="{Binding SelectedMod.Author, Mode=OneWay}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                         Text="Supported:"
+                                         Margin="0,0,16,14"/>
+                                <ItemsControl Grid.Row="1" Grid.Column="1"
+                                            ItemsSource="{Binding SelectedMod.GameVersion, Mode=OneWay}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Classes="Ghost"
+                                                   Content="{Binding Mode=OneWay}"
+                                                   Theme="{StaticResource TagLabel}"
+                                                   Margin="0,0,8,4"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0"
+                                         Text="Links:"
+                                         Margin="0,0,16,8"/>
+                                <StackPanel Grid.Row="2" Grid.Column="1"
+                                          Orientation="Horizontal"
+                                          Spacing="8">
+                                    <Button Theme="{StaticResource GhostButton}"
+                                            Classes="Small"
+                                            Command="{Binding OpenDownloadLink}"
+                                            IsVisible="{Binding SelectedMod.DownloadLink, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
+                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <PathIcon Data="{StaticResource SemiIconLink}" Height="15" />
+                                            <TextBlock Text="Download" FontSize="13" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Theme="{StaticResource GhostButton}"
+                                            Classes="Small"
+                                            Command="{Binding OpenGitHubRepo}"
+                                            IsVisible="{Binding SelectedMod.IsValidRepository, Mode=OneWay}">
+                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <PathIcon Data="{StaticResource SemiIconGithubLogo}" Height="15" />
+                                            <TextBlock Text="Repository" FontSize="13" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{DynamicResource CardBackground}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="16"
+                            IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
+                        <StackPanel Spacing="16">
+                            <TextBlock Text="Dependencies"
+                                     FontSize="18"
+                                     FontWeight="SemiBold"/>
+                            <ItemsControl ItemsSource="{Binding SelectedMod.DependentMods, Mode=OneWay}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Classes="Ghost Primary"
+                                               Content="{Binding Mode=OneWay}"
+                                               Theme="{StaticResource TagLabel}"
+                                               Margin="0,0,0,4"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{DynamicResource CardBackground}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="16">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="SHA256"
+                                     Foreground="{DynamicResource TextForegroundBrush}"/>
+                            <TextBlock Text="{Binding SelectedMod.SHA256, Mode=OneWay}"
+                                     FontSize="12"
+                                     Foreground="{DynamicResource TextForegroundBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Panel>
+    </Grid>
 </UserControl>
