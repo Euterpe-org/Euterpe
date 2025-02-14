@@ -15,9 +15,10 @@
                             <Setter Property="CornerRadius" Value="4" />
                             <Setter Property="Margin" Value="5,2" />
                             <Setter Property="Padding" Value="12,4" />
+                            <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonUncheckedForeground}" />
                         </Style>
                         <Style Selector="ListBoxItem:selected Label">
-                            <Setter Property="Foreground" Value="#A5A8AD" />
+                            <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
                         </Style>
                     </ListBox.Styles>
                     <ListBox.ItemsPanel>
