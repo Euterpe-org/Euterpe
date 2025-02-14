@@ -20,7 +20,7 @@ public sealed class ModDto : ObservableObject
     public string? FileExtension { get; set; }
 
     // Binding Boolean Properties
-    public bool IsDisabled => FileExtension == ".disabled";
+    public bool IsDisabled => !IsLocal || FileExtension == ".disabled";
     public bool IsLocal => FileNameWithoutExtension is not null;
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
