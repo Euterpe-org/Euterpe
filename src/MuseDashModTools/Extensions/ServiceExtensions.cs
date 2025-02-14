@@ -22,9 +22,6 @@ public static partial class ServiceExtensions
         builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
 
         // Interface Services
-        builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>()
-            .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
-            .SingleInstance();
         builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
 
         // Download Services

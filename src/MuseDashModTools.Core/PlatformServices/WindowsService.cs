@@ -1,5 +1,5 @@
 using System.Collections.Frozen;
-using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using Microsoft.Win32;
 
 namespace MuseDashModTools.Core;
@@ -67,6 +67,10 @@ internal sealed class WindowsService : IPlatformService
         }
     }
 
+    public void OpenFolder(string folderPath) => TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+
+    public void OpenFile(string filePath) => TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+
     /// <summary>
     ///     Get game folder path from Registry
     /// </summary>
@@ -94,7 +98,7 @@ internal sealed class WindowsService : IPlatformService
     public Setting Setting { get; init; } = null!;
 
     [UsedImplicitly]
-    public TopLevel TopLevel { get; init; } = null!;
+    public TopLevelProxy TopLevel { get; init; } = null!;
 
     #endregion Injections
 }

@@ -1,5 +1,5 @@
 using System.Collections.Frozen;
-using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 
 namespace MuseDashModTools.Core;
 
@@ -38,13 +38,17 @@ internal sealed class LinuxService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool SetPathEnvironmentVariable() => false;
 
+    public void OpenFolder(string folderPath) => TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+
+    public void OpenFile(string filePath) => TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+
     #region Injections
 
     [UsedImplicitly]
     public ILogger<LinuxService> Logger { get; init; } = null!;
 
     [UsedImplicitly]
-    public TopLevel TopLevel { get; init; } = null!;
+    public TopLevelProxy TopLevel { get; init; } = null!;
 
     #endregion Injections
 }

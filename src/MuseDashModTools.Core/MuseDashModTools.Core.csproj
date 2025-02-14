@@ -21,4 +21,8 @@
         <AdditionalFiles Include="BannedSymbols.txt"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\MuseDashModTools.Core.Generators\MuseDashModTools.Core.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+    </ItemGroup>
+
 </Project>

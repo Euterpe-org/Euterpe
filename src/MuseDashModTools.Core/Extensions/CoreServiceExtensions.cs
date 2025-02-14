@@ -1,6 +1,4 @@
-﻿using Autofac;
-
-namespace MuseDashModTools.Core.Extensions;
+﻿namespace MuseDashModTools.Core.Extensions;
 
 public static class CoreServiceExtensions
 {
@@ -33,6 +31,7 @@ public static class CoreServiceExtensions
         builder.RegisterType<Setting>().SingleInstance();
 
         builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
@@ -43,21 +42,15 @@ public static class CoreServiceExtensions
         // Platform Service
         if (OperatingSystem.IsWindows())
         {
-            builder.RegisterType<WindowsService>().As<IPlatformService>()
-                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
-                .SingleInstance();
+            builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
         }
         else if (OperatingSystem.IsLinux())
         {
-            builder.RegisterType<LinuxService>().As<IPlatformService>()
-                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
-                .SingleInstance();
+            builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
         }
         else if (OperatingSystem.IsMacOS())
         {
-            builder.RegisterType<MacOsService>().As<IPlatformService>()
-                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies)
-                .SingleInstance();
+            builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
         }
     }
 }

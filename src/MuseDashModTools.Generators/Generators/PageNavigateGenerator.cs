@@ -77,13 +77,10 @@ public sealed class PageNavigateGenerator : IIncrementalGenerator
         sb.IncreaseIndent(3);
         foreach (var navigateKey in navigateKeys)
         {
-            sb.AppendLine($"\t{navigateKey} => NavigationService.NavigateTo<{navigateKey[..^4]}>(),");
+            sb.AppendLine($"{navigateKey} => NavigationService.NavigateTo<{navigateKey[..^4]}>(),");
         }
 
-        sb.AppendLine("""
-                      _ => throw new UnreachableException()
-                      """
-        );
+        sb.AppendLine("_ => throw new UnreachableException()");
 
         sb.ResetIndent();
         sb.AppendLine("""

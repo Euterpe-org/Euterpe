@@ -1,12 +1,7 @@
-using Avalonia.Controls;
-using Avalonia.Platform.Storage;
-
 namespace MuseDashModTools.Abstractions;
 
 public interface IPlatformService
 {
-    public TopLevel TopLevel { get; init; }
-
     /// <summary>
     ///     Get OS string for download link
     /// </summary>
@@ -42,11 +37,11 @@ public interface IPlatformService
     ///     Open Folder
     /// </summary>
     /// <param name="folderPath"></param>
-    void OpenFolder(string folderPath) => TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+    void OpenFolder(string folderPath);
 
     /// <summary>
     ///     Open File
     /// </summary>
     /// <param name="filePath"></param>
-    void OpenFile(string filePath) => TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+    void OpenFile(string filePath);
 }

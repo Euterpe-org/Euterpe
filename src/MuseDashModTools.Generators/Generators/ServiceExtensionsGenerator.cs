@@ -44,6 +44,7 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
             sb.AppendLine($"builder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
             sb.AppendLine($"builder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+            sb.AppendLine();
         }
 
         sb.ResetIndent();

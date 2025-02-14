@@ -21,6 +21,7 @@ public sealed class App : Application
         builder.RegisterCoreServices();
         builder.RegisterInstances();
         builder.RegisterInternalServices();
+        builder.RegisterLazyProxies();
         builder.RegisterViewAndViewModels();
 
         builder.Populate(services);
