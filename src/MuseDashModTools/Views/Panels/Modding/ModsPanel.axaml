@@ -90,7 +90,13 @@
                                                         </Style>
                                                     </TextBlock.Styles>
                                                 </TextBlock>
-                                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <Label Classes="Ghost Red"
+                                                       Content="Modified"
+                                                       Theme="{StaticResource TagLabel}"
+                                                       IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"/>
+                                                <StackPanel Orientation="Horizontal"
+                                                            Spacing="8"
+                                                            IsVisible="{Binding State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}">
                                                     <Label Classes="Ghost Gray"
                                                            IsVisible="{Binding IsLocal, Converter={x:Static BoolConverters.Not}, Mode=OneWay}"
                                                            Content="{Binding Version, Mode=OneWay}"
@@ -201,7 +207,21 @@
                                       Spacing="8"
                                       Margin="0,8">
 
-                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="8"
+                                            IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}">
+                                    <Label Classes="Ghost Blue"
+                                           Content="Installed"
+                                           Theme="{StaticResource TagLabel}"/>
+
+                                    <Label Classes="Ghost Red"
+                                           Content="Modified"
+                                           Theme="{StaticResource TagLabel}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="8"
+                                            IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}">
                                     <Label Classes="Ghost Blue"
                                            IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}"
                                            Content="Installed"
