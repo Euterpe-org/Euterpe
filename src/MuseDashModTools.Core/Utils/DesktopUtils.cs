@@ -1,6 +1,7 @@
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 
-namespace MuseDashModTools.Utils;
+namespace MuseDashModTools.Core.Utils;
 
 public static class DesktopUtils
 {

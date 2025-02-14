@@ -21,9 +21,6 @@ public static partial class ServiceExtensions
         // Self Services
         builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
 
-        // Interface Services
-        builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
-
         // Download Services
         builder.RegisterType<CustomDownloadService>().As<ICustomDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubDownloadService>().As<IGitHubDownloadService>().PropertiesAutowired().SingleInstance();

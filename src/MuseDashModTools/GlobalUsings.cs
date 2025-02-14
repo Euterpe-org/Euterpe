@@ -49,6 +49,6 @@ global using static MuseDashModTools.Localization.XAML.Resources;
 global using static MuseDashModTools.Common.GitHubConstants;
 global using static MuseDashModTools.Common.PageNames;
 global using static MuseDashModTools.Common.GitHubResources;
-global using static MuseDashModTools.Utils.DesktopUtils;
+global using static MuseDashModTools.Core.Utils.DesktopUtils;
 global using IDownloadService = MuseDashModTools.Abstractions.IDownloadService;
 global using MultiThreadDownloader = Downloader.DownloadService;

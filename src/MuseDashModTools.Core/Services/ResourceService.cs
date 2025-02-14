@@ -1,8 +1,8 @@
 ﻿using Avalonia.Platform;
 
-namespace MuseDashModTools.Services;
+namespace MuseDashModTools.Core;
 
-public sealed class ResourceService : IResourceService
+internal sealed class ResourceService : IResourceService
 {
     public Stream GetAssetAsStream(string fileName) => AssetLoader.Open(new Uri($"avares://{nameof(MuseDashModTools)}/Assets/{fileName}"));
 
