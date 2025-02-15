@@ -26,7 +26,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
     }
 
     [RelayCommand]
-    private void OpenFolder(string folderPath) => PlatformService.OpenFolder(folderPath);
+    private async Task OpenFolder(string folderPath) => await PlatformService.OpenFolderAsync(folderPath);
 
     #region Injections
 

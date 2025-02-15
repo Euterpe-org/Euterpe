@@ -42,16 +42,22 @@ internal sealed class LinuxService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool SetPathEnvironmentVariable() => false;
 
-    public void OpenFolder(string folderPath)
+    public async Task OpenFolderAsync(string folderPath)
     {
-        TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+        await TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
         Logger.ZLogInformation($"Open folder: {folderPath}");
     }
 
-    public void OpenFile(string filePath)
+    public async Task OpenFileAsync(string filePath)
     {
-        TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+        await TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
         Logger.ZLogInformation($"Open file: {filePath}");
+    }
+
+    public async Task OpenUriAsync(string uri)
+    {
+        await TopLevel.Launcher.LaunchUriAsync(new Uri(uri));
+        Logger.ZLogInformation($"Open uri: {uri}");
     }
 
     #region Injections

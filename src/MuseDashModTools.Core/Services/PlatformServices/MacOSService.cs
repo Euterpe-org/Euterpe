@@ -7,6 +7,7 @@ internal sealed class MacOsService : IPlatformService
     public string GetUpdaterFilePath(string folderPath) => throw new NotImplementedException();
     public void RevealFile(string filePath) => throw new NotImplementedException();
     public bool SetPathEnvironmentVariable() => throw new NotImplementedException();
-    public void OpenFolder(string folderPath) => throw new NotImplementedException();
-    public void OpenFile(string filePath) => throw new NotImplementedException();
+    public Task OpenFolderAsync(string folderPath) => throw new NotImplementedException();
+    public Task OpenFileAsync(string filePath) => throw new NotImplementedException();
+    public Task OpenUriAsync(string uri) => throw new NotImplementedException();
 }

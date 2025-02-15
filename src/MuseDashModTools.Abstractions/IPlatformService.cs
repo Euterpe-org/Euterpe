@@ -37,11 +37,20 @@ public interface IPlatformService
     ///     Open Folder
     /// </summary>
     /// <param name="folderPath"></param>
-    void OpenFolder(string folderPath);
+    /// <returns></returns>
+    Task OpenFolderAsync(string folderPath);
 
     /// <summary>
     ///     Open File
     /// </summary>
     /// <param name="filePath"></param>
-    void OpenFile(string filePath);
+    /// <returns></returns>
+    Task OpenFileAsync(string filePath);
+
+    /// <summary>
+    ///     Open Uri
+    /// </summary>
+    /// <param name="uri"></param>
+    /// <returns></returns>
+    Task OpenUriAsync(string uri);
 }

@@ -63,7 +63,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void OpenConfigFile(string filePath) => PlatformService.OpenFile(Path.Combine(Setting.UserDataFolder, filePath));
+    private async Task OpenConfigFile(string filePath) => await PlatformService.OpenFileAsync(Path.Combine(Setting.UserDataFolder, filePath));
 
     [RelayCommand]
     private void UpdateMod()
@@ -86,14 +86,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void OpenDownloadLink()
-    {
-    }
-
-    [RelayCommand]
-    private void OpenGitHubRepo()
-    {
-    }
+    private async Task OpenUrl(string url) => await PlatformService.OpenUriAsync(url);
 
     [RelayCommand]
     private void ToggleModState(ModDto mod)
