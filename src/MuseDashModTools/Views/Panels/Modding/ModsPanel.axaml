@@ -123,7 +123,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    RenderOptions.BitmapInterpolationMode="HighQuality"
-                   Source="/Assets/Watermark.webp" />
+                   Source="/Assets/Neko_Blur.webp" />
 
             <ScrollViewer IsVisible="{Binding SelectedMod, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
                 <StackPanel Margin="24" Spacing="16">
