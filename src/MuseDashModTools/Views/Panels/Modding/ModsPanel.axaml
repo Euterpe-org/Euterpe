@@ -29,7 +29,7 @@
                 Background="{DynamicResource SecondaryCardColor}"
                 Theme="{DynamicResource CardBorder}">
             <DockPanel>
-                <!-- Search Bar and Filter -->
+                <!--  Search Bar and Filter  -->
                 <Grid DockPanel.Dock="Top"
                       Margin="0,10"
                       ColumnDefinitions="*,Auto">
@@ -50,7 +50,7 @@
                               SelectedIndex="{Binding SelectedModFilterIndex, Mode=TwoWay}" />
                 </Grid>
 
-                <!-- Mod List -->
+                <!--  Mod List  -->
                 <ScrollViewer DockPanel.Dock="Bottom">
                     <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
                         <u:SelectionList.Indicator>
@@ -115,9 +115,9 @@
             </DockPanel>
         </Border>
 
-        <!-- Mod Detail -->
+        <!--  Mod Detail  -->
         <Panel Grid.Column="1" Margin="0,0,10,10">
-            <!-- Background -->
+            <!--  Background  -->
             <Image Height="220"
                    Margin="0,20,0,0"
                    HorizontalAlignment="Center"
@@ -128,7 +128,7 @@
             <ScrollViewer IsVisible="{Binding SelectedMod, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
                 <StackPanel Margin="24" Spacing="16">
 
-                    <!-- Banner -->
+                    <!--  Banner  -->
                     <Border Height="200">
                         <Carousel Theme="{DynamicResource FullCarousel}">
                             <Border Background="#4053b7" CornerRadius="10">
@@ -156,8 +156,10 @@
                             <StackPanel Grid.Row="0" Grid.Column="1"
                                         Orientation="Horizontal"
                                         Spacing="8">
-                                <Button Command="{Binding OpenConfigFileCommand}"
-                                        CommandParameter="{Binding SelectedMod.ConfigFile,Mode=OneWay}"
+
+                                <!--  Config File  -->
+                                <Button Command="{Binding OpenConfigFileCommand, Mode=OneTime}"
+                                        CommandParameter="{Binding SelectedMod.ConfigFile, Mode=OneWay}"
                                         IsVisible="{Binding SelectedMod.IsValidConfigFile, Mode=OneWay}"
                                         Theme="{StaticResource GhostButton}"
                                         ToolTip.Tip="Edit mod config file">
@@ -166,20 +168,28 @@
                                     </Button.Content>
                                 </Button>
                                 <Separator Classes="Vertical" />
+
+                                <!--  Update Mod  -->
                                 <Button Classes="Primary"
-                                        Command="{Binding UpdateModCommand}"
+                                        Command="{Binding UpdateModCommand, Mode=OneTime}"
                                         IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                         <PathIcon Height="15" Data="{StaticResource SemiIconRefresh}" />
                                         <TextBlock Text="Update" />
                                     </StackPanel>
                                 </Button>
+
+                                <!--  Install Mod  -->
                                 <Button Command="{Binding InstallModCommand}"
                                         Content="Install"
                                         IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}" />
+
+                                <!--  Reinstall Mod  -->
                                 <Button Command="{Binding ReinstallModCommand}"
                                         Content="Reinstall"
                                         IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}" />
+
+                                <!--  Uninstall Mod  -->
                                 <Button Classes="Danger"
                                         Command="{Binding UninstallModCommand}"
                                         Content="Uninstall"
@@ -235,8 +245,8 @@
                                 </StackPanel>
                             </StackPanel>
 
-                            <TextBlock Grid.Row="2"
-                                       Grid.ColumnSpan="2" Grid.Column="0"
+                            <TextBlock Grid.Row="2" Grid.Column="0"
+                                       Grid.ColumnSpan="2"
                                        Margin="0,8,0,0"
                                        Text="{Binding SelectedMod.Description, Mode=OneWay}"
                                        TextWrapping="Wrap" />
@@ -297,6 +307,7 @@
                         </StackPanel>
                     </Border>
 
+                    <!--  Dependencies  -->
                     <Border Padding="16"
                             Background="{DynamicResource CardBackground}"
                             BorderBrush="{DynamicResource BorderBrush}"
@@ -320,6 +331,7 @@
                         </StackPanel>
                     </Border>
 
+                    <!--  SHA256  -->
                     <Border Padding="16"
                             Background="{DynamicResource CardBackground}"
                             BorderBrush="{DynamicResource BorderBrush}"
