@@ -22,10 +22,6 @@
         </EventTriggerBehavior>
     </Interaction.Behaviors>
 
-    <UserControl.Resources>
-        <converters:ModFilterTypeConverter x:Key="ModFilterConverter" />
-    </UserControl.Resources>
-
     <Grid ColumnDefinitions="380,*">
         <Border Grid.Column="0"
                 Margin="0,0,20,10"
@@ -33,6 +29,7 @@
                 Background="{DynamicResource SecondaryCardColor}"
                 Theme="{DynamicResource CardBorder}">
             <DockPanel>
+                <!-- Search Bar and Filter -->
                 <Grid DockPanel.Dock="Top"
                       Margin="0,10"
                       ColumnDefinitions="*,Auto">
@@ -53,6 +50,7 @@
                               SelectedIndex="{Binding SelectedModFilterIndex, Mode=TwoWay}" />
                 </Grid>
 
+                <!-- Mod List -->
                 <ScrollViewer DockPanel.Dock="Bottom">
                     <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
                         <u:SelectionList.Indicator>
@@ -117,7 +115,9 @@
             </DockPanel>
         </Border>
 
+        <!-- Mod Detail -->
         <Panel Grid.Column="1" Margin="0,0,10,10">
+            <!-- Background -->
             <Image Height="220"
                    Margin="0,20,0,0"
                    HorizontalAlignment="Center"
@@ -127,6 +127,8 @@
 
             <ScrollViewer IsVisible="{Binding SelectedMod, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
                 <StackPanel Margin="24" Spacing="16">
+
+                    <!-- Banner -->
                     <Border Height="200">
                         <Carousel Theme="{DynamicResource FullCarousel}">
                             <Border Background="#4053b7" CornerRadius="10">
@@ -155,6 +157,7 @@
                                         Orientation="Horizontal"
                                         Spacing="8">
                                 <Button Command="{Binding OpenConfigFileCommand}"
+                                        CommandParameter="{Binding SelectedMod.ConfigFile,Mode=OneWay}"
                                         IsVisible="{Binding SelectedMod.IsValidConfigFile, Mode=OneWay}"
                                         Theme="{StaticResource GhostButton}"
                                         ToolTip.Tip="Edit mod config file">

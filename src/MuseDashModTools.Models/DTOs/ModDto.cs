@@ -27,7 +27,7 @@ public sealed class ModDto : ObservableObject
     public bool IsDuplicated => State is ModState.Duplicated;
     public string? DuplicatedModPaths { get; set; }
 
-    public bool IsValidConfigFile => !ConfigFile.IsNullOrEmpty() && File.Exists(ConfigFile);
+    public bool IsValidConfigFile { get; set; }
 
     // GitHub Repo
     public string RepoPageUrl => GitHubBaseUrl + RepositoryIdentifier;

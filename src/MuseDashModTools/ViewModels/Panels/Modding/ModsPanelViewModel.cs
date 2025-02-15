@@ -12,18 +12,18 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
 
     public static string[] ModFilterTypes { get; } =
     [
-        XAML_All,
-        XAML_Installed,
-        XAML_Enabled,
-        XAML_Outdated,
-        XAML_Incompatible
+        XAML_ModFilterType_All,
+        XAML_ModFilterType_Installed,
+        XAML_ModFilterType_Enabled,
+        XAML_ModFilterType_Outdated,
+        XAML_ModFilterType_Incompatible
     ];
 
     [ObservableProperty]
     public partial string? SearchText { get; set; }
 
     [ObservableProperty]
-    public partial ModDto? SelectedMod { get; set; }
+    public partial ModDto SelectedMod { get; set; } = null!;
 
     [ObservableProperty]
     public partial int SelectedModFilterIndex { get; set; }
@@ -63,9 +63,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void OpenConfigFile()
-    {
-    }
+    private void OpenConfigFile(string filePath) => PlatformService.OpenFile(Path.Combine(Setting.UserDataFolder, filePath));
 
     [RelayCommand]
     private void UpdateMod()
@@ -115,10 +113,16 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    [UsedImplicitly]
     public ILogger<ModsPanelViewModel> Logger { get; init; } = null!;
 
     [UsedImplicitly]
     public IModManageService ModManageService { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; } = null!;
 
     #endregion Injections
 }
