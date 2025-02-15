@@ -39,6 +39,9 @@ public sealed class ModDto : ObservableObject
 
     public string[] DependencyNames => !HasDependency ? [] : [..DependentMods, ..DependentLibs];
 
+    // Compatible
+    public string CompatibleGameVersions => GameVersion == "*" ? XAML_Mod_CompatibleGameVersion : GameVersion;
+
     #endregion Dto Properties
 
     #region Mod Properties
@@ -49,7 +52,7 @@ public sealed class ModDto : ObservableObject
     public string DownloadLink { get; set; } = string.Empty;
     public string RepositoryIdentifier { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
-    public string[] GameVersion { get; set; } = [];
+    public string GameVersion { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string[] DependentMods { get; set; } = [];
     public string[] DependentLibs { get; set; } = [];

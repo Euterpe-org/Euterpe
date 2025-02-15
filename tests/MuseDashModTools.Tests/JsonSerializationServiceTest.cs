@@ -13,9 +13,7 @@ public sealed class JsonSerializationServiceTest
                                        "DownloadLink": "Test Mod.dll",
                                        "RepositoryIdentifier": "Org/Repo",
                                        "ConfigFile": "Config.cfg",
-                                       "GameVersion": [
-                                         "*"
-                                       ],
+                                       "GameVersion": "*",
                                        "Description": "A Test Mod",
                                        "DependentMods": [],
                                        "DependentLibs": [],
@@ -34,7 +32,7 @@ public sealed class JsonSerializationServiceTest
         DependentMods = [],
         Description = "A Test Mod",
         DownloadLink = "Test Mod.dll",
-        GameVersion = ["*"],
+        GameVersion = "*",
         IncompatibleMods = [],
         Name = "TestMod",
         RepositoryIdentifier = "Org/Repo",

@@ -9,7 +9,7 @@ public sealed class Mod
     public string DownloadLink { get; set; } = string.Empty;
     public string RepositoryIdentifier { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
-    public string[] GameVersion { get; set; } = [];
+    public string GameVersion { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string[] DependentMods { get; set; } = [];
     public string[] DependentLibs { get; set; } = [];
