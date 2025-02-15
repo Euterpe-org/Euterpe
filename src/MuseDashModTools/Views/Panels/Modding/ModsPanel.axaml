@@ -90,13 +90,13 @@
                                                    Content="Modified"
                                                    IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
                                                    Theme="{StaticResource TagLabel}" />
-                                            <StackPanel IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
+                                            <StackPanel Spacing="8"
                                                         Orientation="Horizontal"
-                                                        Spacing="8">
+                                                        IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                                 <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                                 <Label Classes="Ghost Green"
-                                                       Content="{Binding Version, Mode=OneWay}"
-                                                       Theme="{StaticResource TagLabel}" />
+                                                       Theme="{StaticResource TagLabel}"
+                                                       Content="{Binding Version, Mode=OneWay}" />
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
@@ -200,31 +200,23 @@
                                         Grid.ColumnSpan="2"
                                         Margin="0,8"
                                         Spacing="8">
-                                <StackPanel IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
-                                            Orientation="Horizontal"
-                                            Spacing="8">
-                                    <Label Classes="Ghost Blue"
-                                           Content="Installed"
+                                <StackPanel Spacing="8"
+                                            Orientation="Horizontal">
+                                    <Label Classes="Ghost Orange"
+                                           Content="Incompatible"
+                                           IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
                                            Theme="{StaticResource TagLabel}" />
-                                    <Label Classes="Ghost Red"
-                                           Content="Modified"
-                                           Theme="{StaticResource TagLabel}" />
-                                </StackPanel>
-
-                                <StackPanel IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
-                                            Orientation="Horizontal"
-                                            Spacing="8">
                                     <Label Classes="Ghost Blue"
                                            Content="Installed"
                                            IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}"
                                            Theme="{StaticResource TagLabel}" />
+                                    <Label Classes="Ghost Red"
+                                           Content="Modified"
+                                           IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
+                                           Theme="{StaticResource TagLabel}" />
                                     <Label Classes="Ghost Green"
                                            Content="Update Available"
                                            IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
-                                           Theme="{StaticResource TagLabel}" />
-                                    <Label Classes="Ghost Orange"
-                                           Content="Incompatible"
-                                           IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
                                            Theme="{StaticResource TagLabel}" />
                                     <Label Classes="Ghost Gray"
                                            Content="{Binding SelectedMod.Version, StringFormat='Version {0}', Mode=OneWay}"
