@@ -256,45 +256,25 @@
                                            Margin="0,0,16,14"
                                            Text="Author:" />
                                 <TextBlock Grid.Row="0" Grid.Column="1"
+                                           Margin="0,0,0,14"
                                            Text="{Binding SelectedMod.Author, Mode=OneWay}" />
 
                                 <TextBlock Grid.Row="1" Grid.Column="0"
                                            Margin="0,0,16,14"
                                            Text="Supported:" />
-                                <ItemsControl Grid.Row="1" Grid.Column="1"
-                                              ItemsSource="{Binding SelectedMod.CompatibleGameVersions, Mode=OneWay}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Margin="0,0,8,4"
-                                                   Classes="Ghost"
-                                                   Content="{Binding Mode=OneWay}"
-                                                   Theme="{StaticResource TagLabel}" />
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <Label Grid.Row="1" Grid.Column="1"
+                                       Margin="0,0,0,14"
+                                       Classes="Ghost"
+                                       Content="{Binding SelectedMod.CompatibleGameVersions, Mode=OneWay}"
+                                       Theme="{StaticResource TagLabel}" />
 
                                 <TextBlock Grid.Row="2" Grid.Column="0"
-                                           Margin="0,0,16,8"
-                                           Text="Links:" />
-                                <StackPanel Grid.Row="2" Grid.Column="1"
-                                            Orientation="Horizontal"
-                                            Spacing="8">
-                                    <Button Classes="Small"
-                                            Command="{Binding OpenUrlCommand}"
-                                            CommandParameter="{Binding SelectedMod.RepoPageUrl, Mode=OneWay}"
-                                            IsVisible="{Binding SelectedMod.IsValidRepository, Mode=OneWay}"
-                                            Theme="{StaticResource GhostButton}">
-                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                            <PathIcon Height="15" Data="{StaticResource SemiIconGithubLogo}" />
-                                            <TextBlock FontSize="13" Text="Repository" />
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
+                                           Margin="0,0,16,14"
+                                           Text="Repository:" />
+                                <HyperlinkButton Grid.Row="2" Grid.Column="1"
+                                                 Classes="WithIcon Underline"
+                                                 NavigateUri="{Binding SelectedMod.RepoPageUrl, Mode=OneWay}"
+                                                 Content="Link" />
                             </Grid>
                         </StackPanel>
                     </Border>
