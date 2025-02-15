@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\MuseDashModTools.Common\MuseDashModTools.Common.csproj"/>
+        <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj"/>
     </ItemGroup>
 
 </Project>

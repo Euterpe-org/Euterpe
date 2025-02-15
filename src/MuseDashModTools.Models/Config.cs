@@ -4,7 +4,7 @@ using Semver;
 
 namespace MuseDashModTools.Models;
 
-public sealed class Setting
+public sealed class Config
 {
     // Path Settings
     [AllowNull]

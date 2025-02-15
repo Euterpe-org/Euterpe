@@ -18,7 +18,7 @@ internal sealed partial class ModManageService
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
-            _ when webMod.GameVersion is not ["*"] && !webMod.GameVersion.Contains(_gameVersion) => ModState.Incompatible,
+            _ when webMod.GameVersion != "*" && webMod.GameVersion != _gameVersion => ModState.Incompatible,
             _ => ModState.Normal
         };
     }
@@ -30,7 +30,7 @@ internal sealed partial class ModManageService
             return;
         }
 
-        var configFilePath = Path.Combine(Setting.UserDataFolder, localMod.ConfigFile);
+        var configFilePath = Path.Combine(Config.UserDataFolder, localMod.ConfigFile);
         if (File.Exists(configFilePath))
         {
             localMod.IsValidConfigFile = true;

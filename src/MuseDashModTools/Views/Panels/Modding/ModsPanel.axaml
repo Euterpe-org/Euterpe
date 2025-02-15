@@ -270,7 +270,7 @@
                                            Margin="0,0,16,14"
                                            Text="Supported:" />
                                 <ItemsControl Grid.Row="1" Grid.Column="1"
-                                              ItemsSource="{Binding SelectedMod.GameVersion, Mode=OneWay}">
+                                              ItemsSource="{Binding SelectedMod.CompatibleGameVersions, Mode=OneWay}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <WrapPanel />

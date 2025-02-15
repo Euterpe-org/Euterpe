@@ -26,9 +26,9 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
         try
         {
-            await Downloader.DownloadFileTaskAsync(PrimaryMelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(PrimaryUnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(PrimaryCpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(PrimaryMelonLoaderUrl, Config.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(PrimaryUnityDependencyUrl, Config.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(PrimaryCpp2ILUrl, Config.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
             Logger.ZLogInformation($"MelonLoader and Dependencies downloaded from GitHubMirror successfully");
             return true;
         }
@@ -50,7 +50,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         }
 
         var downloadLink = PrimaryModsFolderUrl + mod.DownloadLink;
-        var path = Path.Combine(Setting.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
+        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -71,7 +71,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
         var libFileName = libName + ".dll";
         var downloadLink = PrimaryLibsFolderUrl + libFileName;
-        var path = Path.Combine(Setting.UserLibsFolder, libFileName);
+        var path = Path.Combine(Config.UserLibsFolder, libFileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -155,7 +155,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     public IPlatformService PlatformService { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     #endregion Injections
 }

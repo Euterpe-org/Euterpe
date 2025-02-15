@@ -17,7 +17,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     {
         Initialize();
         await SavingService.LoadSettingAsync().ConfigureAwait(true);
-        GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Setting.Theme];
+        GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
@@ -42,7 +42,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     public IUpdateService UpdateService { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     #endregion Injections
 }

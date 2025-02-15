@@ -24,26 +24,26 @@ internal sealed partial class LocalService : ILocalService
         }
     }
 
-    public IEnumerable<string> GetModFilePaths() => Directory.GetFiles(Setting.ModsFolder)
+    public IEnumerable<string> GetModFilePaths() => Directory.GetFiles(Config.ModsFolder)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
 
-    public HashSet<string?> GetLibFileNames() => Directory.GetFiles(Setting.UserLibsFolder).Select(Path.GetFileNameWithoutExtension).ToHashSet();
+    public HashSet<string?> GetLibFileNames() => Directory.GetFiles(Config.UserLibsFolder).Select(Path.GetFileNameWithoutExtension).ToHashSet();
 
     public async Task<bool> InstallMelonLoaderAsync()
     {
-        if (!FileSystemService.CheckFileExists(Setting.MelonLoaderZipPath))
+        if (!FileSystemService.CheckFileExists(Config.MelonLoaderZipPath))
         {
             await MessageBoxService.ErrorMessageBoxAsync("MelonLoader zip file not found").ConfigureAwait(true);
             return false;
         }
 
-        if (!ExtractZipFile(Setting.MelonLoaderZipPath, Setting.MuseDashFolder))
+        if (!ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder))
         {
             await MessageBoxService.ErrorMessageBoxAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
             return false;
         }
 
-        if (!FileSystemService.TryDeleteFile(Setting.MelonLoaderZipPath))
+        if (!FileSystemService.TryDeleteFile(Config.MelonLoaderZipPath))
         {
             await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
             return false;
@@ -56,9 +56,9 @@ internal sealed partial class LocalService : ILocalService
 
     public async Task<bool> UninstallMelonLoaderAsync()
     {
-        var dobbyPath = Path.Combine(Setting.MuseDashFolder, "dobby.dll");
-        var noticePath = Path.Combine(Setting.MuseDashFolder, "NOTICE.txt");
-        var versionPath = Path.Combine(Setting.MuseDashFolder, "version.dll");
+        var dobbyPath = Path.Combine(Config.MuseDashFolder, "dobby.dll");
+        var noticePath = Path.Combine(Config.MuseDashFolder, "NOTICE.txt");
+        var versionPath = Path.Combine(Config.MuseDashFolder, "version.dll");
 
         foreach (var path in new[] { dobbyPath, noticePath, versionPath })
         {
@@ -71,7 +71,7 @@ internal sealed partial class LocalService : ILocalService
             return false;
         }
 
-        if (!FileSystemService.TryDeleteDirectory(Setting.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
+        if (!FileSystemService.TryDeleteDirectory(Config.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
             await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
             return false;
@@ -132,7 +132,7 @@ internal sealed partial class LocalService : ILocalService
         {
             launchArguments.Append("//--no-mods");
         }
-        else if (!Setting.ShowConsole)
+        else if (!Config.ShowConsole)
         {
             launchArguments.Append("//--melonloader.hideconsole");
         }
@@ -150,7 +150,7 @@ internal sealed partial class LocalService : ILocalService
     {
         var assetsManager = new AssetsManager();
         assetsManager.LoadClassPackage(ResourceService.GetAssetAsStream("classdata.tpk"));
-        var bundlePath = Path.Combine(Setting.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        var bundlePath = Path.Combine(Config.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
@@ -190,7 +190,7 @@ internal sealed partial class LocalService : ILocalService
     #region Injections
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     [UsedImplicitly]
     public IFileSystemService FileSystemService { get; init; } = null!;

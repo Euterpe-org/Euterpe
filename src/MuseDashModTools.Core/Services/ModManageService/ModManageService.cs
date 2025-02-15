@@ -48,7 +48,7 @@ internal sealed partial class ModManageService : IModManageService
     #region Injections
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     [UsedImplicitly]
     public IDownloadManager DownloadManager { get; init; } = null!;

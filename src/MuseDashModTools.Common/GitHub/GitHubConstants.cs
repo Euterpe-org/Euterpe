@@ -7,7 +7,7 @@ public static class GitHubConstants
     public const string GitHubRawContentBaseUrl = "https://raw.githubusercontent.com/";
     public const string RepoIdentifier = "MDModsDev/MuseDashModTools/";
     public const string ReleaseDownloadBaseUrl = GitHubBaseUrl + RepoIdentifier + "releases/download/";
-    public const string ModLinksBaseUrl = "MDModsDev/ModLinks/main/";
+    public const string ModLinksBaseUrl = "MDModsDev/ModLinks/dev/";
     public const string MelonLoaderBaseUrl = "LavaGang/MelonLoader/releases/download/v0.6.1/MelonLoader.x64.zip";
     public const string UnityDependencyBaseUrl = "LavaGang/Unity-Runtime-Libraries/master/2019.4.32.zip";
 

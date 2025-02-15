@@ -15,9 +15,9 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     [
         new("Open",
         [
-            new DropDownMenuItem("Mods Folder", OpenFolderCommand, Setting.ModsFolder),
-            new DropDownMenuItem("UserData Folder", OpenFolderCommand, Setting.UserDataFolder),
-            new DropDownMenuItem("UserLib Folder", OpenFolderCommand, Setting.UserLibsFolder)
+            new DropDownMenuItem("Mods Folder", OpenFolderCommand, Config.ModsFolder),
+            new DropDownMenuItem("UserData Folder", OpenFolderCommand, Config.UserDataFolder),
+            new DropDownMenuItem("UserLib Folder", OpenFolderCommand, Config.UserLibsFolder)
         ])
     ];
 
@@ -43,7 +43,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     public NavigationService NavigationService { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     #endregion Injections
 }

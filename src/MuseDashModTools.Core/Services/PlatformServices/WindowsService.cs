@@ -56,12 +56,12 @@ internal sealed class WindowsService : IPlatformService
     {
         try
         {
-            if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Setting.MuseDashFolder)
+            if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Config.MuseDashFolder)
             {
                 return true;
             }
 
-            Environment.SetEnvironmentVariable("MD_DIRECTORY", Setting.MuseDashFolder, EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable("MD_DIRECTORY", Config.MuseDashFolder, EnvironmentVariableTarget.User);
             return true;
         }
         catch (Exception ex)
@@ -113,7 +113,7 @@ internal sealed class WindowsService : IPlatformService
     public TopLevelProxy TopLevel { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger<WindowsService> Logger { get; init; } = null!;

@@ -24,9 +24,9 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 
         try
         {
-            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Setting.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Setting.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Setting.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Config.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Config.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
             Logger.ZLogInformation($"MelonLoader and Dependencies downloaded from GitHub successfully");
             return true;
         }
@@ -48,7 +48,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
 
         var downloadLink = ModsFolderUrl + mod.DownloadLink;
-        var path = Path.Combine(Setting.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
+        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -69,7 +69,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 
         var libFileName = libName + ".dll";
         var downloadLink = LibsFolderUrl + libFileName;
-        var path = Path.Combine(Setting.UserLibsFolder, libFileName);
+        var path = Path.Combine(Config.UserLibsFolder, libFileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -152,7 +152,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     public IPlatformService PlatformService { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     #endregion Injections
 }

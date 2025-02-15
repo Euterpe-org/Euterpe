@@ -21,7 +21,7 @@ internal sealed class CustomDownloadService : ICustomDownloadService
     public ILogger<CustomDownloadService> Logger { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     #endregion Injections
 }

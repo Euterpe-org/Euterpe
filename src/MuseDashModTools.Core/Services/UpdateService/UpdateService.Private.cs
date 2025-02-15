@@ -15,7 +15,7 @@ internal sealed partial class UpdateService
         Logger.ZLogInformation($"Checking for updates from GitHub RSS...");
 
         GitHubRSS? release;
-        if (!Setting.DownloadPrerelease)
+        if (!Config.DownloadPrerelease)
         {
             release = await GetLatestReleaseFromRSSAsync(cancellationToken).ConfigureAwait(true);
         }
@@ -90,7 +90,7 @@ internal sealed partial class UpdateService
         var releaseVersion = release.Version;
         Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
 
-        if (Setting.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
+        if (Config.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
         {
             Logger.ZLogInformation($"No new version available");
             return;
@@ -106,7 +106,7 @@ internal sealed partial class UpdateService
         }
 
         Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
-        Setting.SkipVersion = releaseVersion;
+        Config.SkipVersion = releaseVersion;
     }
 
     #endregion GitHub RSS
@@ -120,13 +120,13 @@ internal sealed partial class UpdateService
 
         Client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(AppName, AppVersion));
         Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        if (!Setting.GitHubToken.IsNullOrEmpty())
+        if (!Config.GitHubToken.IsNullOrEmpty())
         {
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Setting.GitHubToken);
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Config.GitHubToken);
         }
 
         GitHubRelease? release;
-        if (!Setting.DownloadPrerelease)
+        if (!Config.DownloadPrerelease)
         {
             release = await GetLatestReleaseFromAPIAsync(cancellationToken).ConfigureAwait(true);
         }
@@ -182,7 +182,7 @@ internal sealed partial class UpdateService
         var releaseVersion = SemVersion.Parse(release.TagName, SemVersionStyles.AllowV);
         Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
 
-        if (Setting.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
+        if (Config.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
         {
             Logger.ZLogInformation($"No new version available");
             return;
@@ -198,7 +198,7 @@ internal sealed partial class UpdateService
         }
 
         Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
-        Setting.SkipVersion = releaseVersion;
+        Config.SkipVersion = releaseVersion;
     }
 
     #endregion GitHub API

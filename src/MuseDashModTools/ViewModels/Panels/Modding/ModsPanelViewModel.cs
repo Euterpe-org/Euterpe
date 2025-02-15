@@ -63,7 +63,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task OpenConfigFile(string filePath) => await PlatformService.OpenFileAsync(Path.Combine(Setting.UserDataFolder, filePath));
+    private async Task OpenConfigFile(string filePath) => await PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, filePath));
 
     [RelayCommand]
     private void UpdateMod()
@@ -106,7 +106,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger<ModsPanelViewModel> Logger { get; init; } = null!;

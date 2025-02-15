@@ -10,7 +10,7 @@ internal sealed partial class UpdateService : IUpdateService
 
     public Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {
-        return Setting.UpdateSource switch
+        return Config.UpdateSource switch
         {
             UpdateSource.GitHubAPI => CheckGitHubAPIForUpdatesAsync(cancellationToken),
             UpdateSource.GitHubRSS => CheckGitHubRSSForUpdatesAsync(cancellationToken),
@@ -24,7 +24,7 @@ internal sealed partial class UpdateService : IUpdateService
     public HttpClient Client { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     [UsedImplicitly]
     public IDownloadManager DownloadManager { get; init; } = null!;

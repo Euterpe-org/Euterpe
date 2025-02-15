@@ -53,7 +53,7 @@ public sealed class App : Application
 
     private static Task OnExitAsync()
     {
-        Container.Resolve<Setting>().Theme = AvaloniaResources.ThemeVariants[GetCurrentApplication().ActualThemeVariant];
+        Container.Resolve<Config>().Theme = AvaloniaResources.ThemeVariants[GetCurrentApplication().ActualThemeVariant];
         return Container.Resolve<ISavingService>().SaveSettingAsync();
     }
 

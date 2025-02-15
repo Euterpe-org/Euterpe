@@ -11,7 +11,7 @@ internal sealed partial class SavingService : ISavingService
         if (File.Exists(SettingPath))
         {
             await using var stream = new FileStream(SettingPath, FileMode.Open, FileAccess.Read);
-            var savedSetting = await JsonSerializationService.DeserializeIndentedAsync<Setting>(stream).ConfigureAwait(true);
+            var savedSetting = await JsonSerializationService.DeserializeIndentedAsync<Config>(stream).ConfigureAwait(true);
             if (savedSetting is null)
             {
                 Logger.ZLogError($"Saved setting is null");
@@ -21,7 +21,7 @@ internal sealed partial class SavingService : ISavingService
                 return;
             }
 
-            Setting.CopyFrom(savedSetting);
+            Config.CopyFrom(savedSetting);
             Logger.ZLogInformation($"Setting loaded from {SettingPath} successfully");
             await CheckValidSettingAsync().ConfigureAwait(true);
         }
@@ -35,14 +35,14 @@ internal sealed partial class SavingService : ISavingService
     public async Task SaveSettingAsync()
     {
         await using var stream = new FileStream(SettingPath, FileMode.OpenOrCreate, FileAccess.Write);
-        await JsonSerializationService.SerializeIndentedAsync(stream, Setting).ConfigureAwait(false);
+        await JsonSerializationService.SerializeIndentedAsync(stream, Config).ConfigureAwait(false);
         Logger.ZLogInformation($"Setting saved to {SettingPath} successfully");
     }
 
     #region Injections
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     [UsedImplicitly]
     public IJsonSerializationService JsonSerializationService { get; init; } = null!;

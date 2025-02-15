@@ -2,7 +2,7 @@ namespace MuseDashModTools.Core;
 
 internal sealed class DownloadManager : IDownloadManager
 {
-    private IDownloadService CurrentDownloadService => Setting.DownloadSource switch
+    private IDownloadService CurrentDownloadService => Config.DownloadSource switch
     {
         DownloadSource.GitHub => GitHubDownloadService,
         DownloadSource.GitHubMirror => GitHubMirrorDownloadService,
@@ -22,7 +22,7 @@ internal sealed class DownloadManager : IDownloadManager
 
     public Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
     {
-        return Setting.DownloadSource switch
+        return Config.DownloadSource switch
         {
             DownloadSource.GitHub => GitHubDownloadService.DownloadReleaseByTagAsync(tag, cancellationToken),
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadReleaseByTagAsync(tag, cancellationToken),
@@ -34,7 +34,7 @@ internal sealed class DownloadManager : IDownloadManager
 
     public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
-        return Setting.DownloadSource switch
+        return Config.DownloadSource switch
         {
             DownloadSource.GitHub => GitHubDownloadService.FetchReadmeAsync(repoId, cancellationToken),
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
@@ -59,7 +59,7 @@ internal sealed class DownloadManager : IDownloadManager
     public IGitHubMirrorDownloadService GitHubMirrorDownloadService { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     #endregion Injections
 }

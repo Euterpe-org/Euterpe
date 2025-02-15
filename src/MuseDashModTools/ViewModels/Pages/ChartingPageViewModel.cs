@@ -14,7 +14,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
     [
         new("Open",
         [
-            new DropDownMenuItem("CustomAlbums Folder", OpenFolderCommand, Setting.CustomAlbumsFolder)
+            new DropDownMenuItem("CustomAlbums Folder", OpenFolderCommand, Config.CustomAlbumsFolder)
         ])
     ];
 
@@ -40,7 +40,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
     public NavigationService NavigationService { get; init; } = null!;
 
     [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public Config Config { get; init; } = null!;
 
     #endregion Injections
 }
