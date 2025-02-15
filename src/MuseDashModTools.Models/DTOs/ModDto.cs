@@ -37,7 +37,7 @@ public sealed class ModDto : ObservableObject
     // Dependencies
     public bool HasDependency => DependentMods.Length + DependentLibs.Length > 0;
 
-    public string DependencyNames => !HasDependency ? string.Empty : string.Join(Environment.NewLine, DependentMods.Concat(DependentLibs));
+    public string[] DependencyNames => !HasDependency ? [] : [..DependentMods, ..DependentLibs];
 
     #endregion Dto Properties
 
