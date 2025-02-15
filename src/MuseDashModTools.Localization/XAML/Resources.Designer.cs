@@ -60,15 +60,6 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All.
-        /// </summary>
-        public static string XAML_All {
-            get {
-                return ResourceManager.GetString("XAML_All", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Analyze Log.
         /// </summary>
         public static string XAML_Analyze {
@@ -384,15 +375,6 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabled.
-        /// </summary>
-        public static string XAML_Enabled {
-            get {
-                return ResourceManager.GetString("XAML_Enabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Font:.
         /// </summary>
         public static string XAML_Font {
@@ -416,15 +398,6 @@ namespace MuseDashModTools.Localization.XAML {
         public static string XAML_HomePage {
             get {
                 return ResourceManager.GetString("XAML_HomePage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Incompatible.
-        /// </summary>
-        public static string XAML_Incompatible {
-            get {
-                return ResourceManager.GetString("XAML_Incompatible", resourceCulture);
             }
         }
         
@@ -533,15 +506,6 @@ namespace MuseDashModTools.Localization.XAML {
         public static string XAML_Install_Mod {
             get {
                 return ResourceManager.GetString("XAML_Install_Mod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Installed.
-        /// </summary>
-        public static string XAML_Installed {
-            get {
-                return ResourceManager.GetString("XAML_Installed", resourceCulture);
             }
         }
         
@@ -672,6 +636,51 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string XAML_ModFilterType_All {
+            get {
+                return ResourceManager.GetString("XAML_ModFilterType_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string XAML_ModFilterType_Enabled {
+            get {
+                return ResourceManager.GetString("XAML_ModFilterType_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatible.
+        /// </summary>
+        public static string XAML_ModFilterType_Incompatible {
+            get {
+                return ResourceManager.GetString("XAML_ModFilterType_Incompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installed.
+        /// </summary>
+        public static string XAML_ModFilterType_Installed {
+            get {
+                return ResourceManager.GetString("XAML_ModFilterType_Installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outdated.
+        /// </summary>
+        public static string XAML_ModFilterType_Outdated {
+            get {
+                return ResourceManager.GetString("XAML_ModFilterType_Outdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
         public static string XAML_ModsFolder {
@@ -686,15 +695,6 @@ namespace MuseDashModTools.Localization.XAML {
         public static string XAML_News {
             get {
                 return ResourceManager.GetString("XAML_News", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Outdated.
-        /// </summary>
-        public static string XAML_Outdated {
-            get {
-                return ResourceManager.GetString("XAML_Outdated", resourceCulture);
             }
         }
         

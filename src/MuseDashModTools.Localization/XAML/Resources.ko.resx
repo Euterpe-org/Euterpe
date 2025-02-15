@@ -61,10 +61,10 @@
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>다운로드 소스: </value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+    <data name="XAML_ModFilterType_All" xml:space="preserve">
         <value>모든</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
         <value>활성화</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -73,10 +73,10 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>번역 도움</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
         <value>설치됨</value>
     </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
+    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
         <value>호환되지 않음</value>
     </data>
     <data name="XAML_Install_MelonLoader" xml:space="preserve">
@@ -121,7 +121,7 @@
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>로컬 버전: {0} (최신 버전 있음: {1})</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
         <value>오래된</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">

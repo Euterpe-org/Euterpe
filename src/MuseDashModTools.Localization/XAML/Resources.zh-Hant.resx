@@ -61,10 +61,10 @@
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>下載源: </value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+    <data name="XAML_ModFilterType_All" xml:space="preserve">
         <value>全部</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
         <value>已啟用</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -73,10 +73,10 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>幫助翻譯</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
         <value>已安裝</value>
     </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
+    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
         <value>不相容</value>
     </data>
     <data name="XAML_Install_MelonLoader" xml:space="preserve">
@@ -121,7 +121,7 @@
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>你的版本: {0} (有新版本: {1})</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
         <value>有更新</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
