@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="using:MuseDashModTools.ViewModels.Pages"
+             xmlns:u="https://irihi.tech/ursa"
              x:Class="MuseDashModTools.Views.Pages.HomePage"
              x:DataType="pages:HomePageViewModel"
              mc:Ignorable="d"
@@ -12,9 +13,198 @@
     <Design.DataContext>
         <pages:HomePageViewModel />
     </Design.DataContext>
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
-        HomePage still work in progress...
-    </TextBlock>
+
+    <Grid>
+        <Image Source="{DynamicResource BackgroundImage}" Stretch="UniformToFill" />
+
+        <Image Margin="50, 60"
+               Height="120"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Source="/Assets/MDMC_Title.webp" />
+
+        <SplitButton Classes="Success"
+                     Content="Play"
+                     Command="{Binding LaunchModdedGameCommand}"
+                     Theme="{DynamicResource SolidSplitButton}"
+                     Width="230"
+                     Height="60"
+                     ClipToBounds="False"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Margin="0, 0, 120, 80">
+            <SplitButton.Styles>
+                <Style Selector="SplitButton.Success /template/ Button#PART_PrimaryButton">
+                    <Setter Property="Width" Value="185"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                <GradientStop Offset="0" Color="#54a9ff"/>
+                                <GradientStop Offset="1" Color="#7fc1ff"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Transitions">
+                        <Transitions>
+                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut"/>
+                        </Transitions>
+                    </Setter>
+                    <Setter Property="Template">
+                        <ControlTemplate>
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="18,0,0,18">
+                                <ContentPresenter x:Name="PART_ContentPresenter"
+                                                Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                Padding="{TemplateBinding Padding}"
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter>
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+
+                    <Style Selector="^:pointerover">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Offset="0" Color="#7fc1ff"/>
+                                    <GradientStop Offset="1" Color="#a1d4ff"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="RenderTransform" Value="scale(1.01)"/>
+                    </Style>
+
+                    <Style Selector="^:pressed">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Offset="0" Color="#4096ff"/>
+                                    <GradientStop Offset="1" Color="#54a9ff"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="RenderTransform" Value="scale(0.97)"/>
+                    </Style>
+                </Style>
+
+                <Style Selector="SplitButton.Success /template/ Button#PART_SecondaryButton">
+                    <Setter Property="Width" Value="45"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                <GradientStop Offset="0" Color="#4096ff"/>
+                                <GradientStop Offset="1" Color="#54a9ff"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Transitions">
+                        <Transitions>
+                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" Easing="CubicEaseOut"/>
+                        </Transitions>
+                    </Setter>
+                    <Setter Property="Template">
+                        <ControlTemplate>
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="0,18,18,0">
+                                <ContentPresenter x:Name="PART_ContentPresenter"
+                                                Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                Padding="{TemplateBinding Padding}"
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter>
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+
+                    <Style Selector="^:pointerover">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Offset="0" Color="#54a9ff"/>
+                                    <GradientStop Offset="1" Color="#7fc1ff"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="RenderTransform" Value="scale(1.01)"/>
+                    </Style>
+
+                    <Style Selector="^:pressed">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                    <GradientStop Offset="0" Color="#2b7ad2"/>
+                                    <GradientStop Offset="1" Color="#4096ff"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="RenderTransform" Value="scale(0.97)"/>
+                    </Style>
+                </Style>
+
+                <Style Selector="SplitButton /template/ DockPanel">
+                    <Setter Property="Width" Value="230"/>
+                </Style>
+
+                <Style Selector="SplitButton /template/ Rectangle#SeparatorBorder">
+                    <Setter Property="Width" Value="0"/>
+                </Style>
+            </SplitButton.Styles>
+
+            <SplitButton.Flyout>
+                <MenuFlyout Placement="BottomEdgeAlignedRight">
+                    <MenuItem Header="Play Vanilla"
+                             Command="{Binding LaunchVanillaGameCommand}"/>
+                </MenuFlyout>
+            </SplitButton.Flyout>
+        </SplitButton>
+
+        <!-- GENSHIN START!!! -->
+        <Button Margin="0, 60, 90, 0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderThickness="0"
+                Padding="0"
+                Command="{Binding ShowDonationDrawerCommand}">
+            <Button.Styles>
+                <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+                <Style Selector="Button">
+                    <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                    <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                    <Setter Property="Transitions">
+                        <Transitions>
+                            <TransformOperationsTransition
+                                Property="RenderTransform"
+                                Duration="0:0:0.2"
+                                Easing="ExponentialEaseOut"/>
+                        </Transitions>
+                    </Setter>
+                </Style>
+                <Style Selector="Button:pointerover">
+                    <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)"/>
+                </Style>
+                <Style Selector="Button:pressed">
+                    <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)"/>
+                </Style>
+            </Button.Styles>
+
+            <Image Height="100"
+                   Source="/Assets/Genshin.webp"/>
+        </Button>
+
+        <u:OverlayDialogHost HostId="DonationDrawerHost" />
+    </Grid>
+
 </UserControl>
