@@ -78,7 +78,7 @@
                            VerticalAlignment="Center"
                            u:NavMenu.CanToggle="False"
                            RenderOptions.BitmapInterpolationMode="HighQuality"
-                           Source="../Assets/Logo.webp" />
+                           Source="../Assets/Melon.webp" />
                 </u:NavMenu.Header>
 
                 <u:NavMenu.HeaderTemplate>
