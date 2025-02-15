@@ -45,7 +45,11 @@ internal sealed class WindowsService : IPlatformService
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater.exe");
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public void RevealFile(string path) => Process.Start("explorer.exe", "/select, " + path);
+    public void RevealFile(string filePath)
+    {
+        Process.Start("explorer.exe", "/select, " + filePath);
+        Logger.ZLogInformation($"Reveal file: {filePath}");
+    }
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool SetPathEnvironmentVariable()
@@ -67,9 +71,17 @@ internal sealed class WindowsService : IPlatformService
         }
     }
 
-    public void OpenFolder(string folderPath) => TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+    public void OpenFolder(string folderPath)
+    {
+        TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+        Logger.ZLogInformation($"Open folder: {folderPath}");
+    }
 
-    public void OpenFile(string filePath) => TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+    public void OpenFile(string filePath)
+    {
+        TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+        Logger.ZLogInformation($"Open file: {filePath}");
+    }
 
     /// <summary>
     ///     Get game folder path from Registry

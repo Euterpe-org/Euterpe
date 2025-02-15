@@ -24,8 +24,8 @@ public interface IPlatformService
     /// <summary>
     ///     Reveal file with path
     /// </summary>
-    /// <param name="path"></param>
-    void RevealFile(string path);
+    /// <param name="filePath"></param>
+    void RevealFile(string filePath);
 
     /// <summary>
     ///     Set MD_DIRECTORY environment variable

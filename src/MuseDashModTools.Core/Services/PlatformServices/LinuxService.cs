@@ -33,14 +33,26 @@ internal sealed class LinuxService : IPlatformService
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater");
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public void RevealFile(string path) => Process.Start("xdg-open", path);
+    public void RevealFile(string filePath)
+    {
+        Process.Start("xdg-open", filePath);
+        Logger.ZLogInformation($"Reveal file: {filePath}");
+    }
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool SetPathEnvironmentVariable() => false;
 
-    public void OpenFolder(string folderPath) => TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+    public void OpenFolder(string folderPath)
+    {
+        TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath));
+        Logger.ZLogInformation($"Open folder: {folderPath}");
+    }
 
-    public void OpenFile(string filePath) => TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+    public void OpenFile(string filePath)
+    {
+        TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath));
+        Logger.ZLogInformation($"Open file: {filePath}");
+    }
 
     #region Injections
 
