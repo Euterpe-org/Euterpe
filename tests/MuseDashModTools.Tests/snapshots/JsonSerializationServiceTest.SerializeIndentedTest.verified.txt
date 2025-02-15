@@ -5,9 +5,7 @@
     "DownloadLink": "Test Mod.dll",
     "RepositoryIdentifier": "Org/Repo",
     "ConfigFile": "Config.cfg",
-    "GameVersion": [
-        "*"
-    ],
+    "GameVersion": "*",
     "Description": "A Test Mod",
     "DependentMods": [],
     "DependentLibs": [],
