@@ -1,4 +1,5 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Bitmap x:Key="AppTitleImage">avares://MuseDashModTools/Assets/Title-Light.webp</Bitmap>
+    <Bitmap x:Key="BackgroundImage">avares://MuseDashModTools/Assets/Background-Light.webp</Bitmap>
     <Color x:Key="SecondaryCardColor">#FAFAFA</Color>
 </ResourceDictionary>
