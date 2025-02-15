@@ -24,6 +24,9 @@ internal sealed partial class UpdateService : IUpdateService
     public HttpClient Client { get; init; } = null!;
 
     [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    [UsedImplicitly]
     public IDownloadManager DownloadManager { get; init; } = null!;
 
     [UsedImplicitly]
@@ -31,9 +34,6 @@ internal sealed partial class UpdateService : IUpdateService
 
     [UsedImplicitly]
     public IMessageBoxService MessageBoxService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
 
     #endregion Injections
 }

@@ -92,13 +92,13 @@ internal sealed class WindowsService : IPlatformService
     #region Injections
 
     [UsedImplicitly]
-    public ILogger<WindowsService> Logger { get; init; } = null!;
+    public TopLevelProxy TopLevel { get; init; } = null!;
 
     [UsedImplicitly]
     public Setting Setting { get; init; } = null!;
 
     [UsedImplicitly]
-    public TopLevelProxy TopLevel { get; init; } = null!;
+    public ILogger<WindowsService> Logger { get; init; } = null!;
 
     #endregion Injections
 }

@@ -23,6 +23,20 @@ internal sealed partial class ModManageService
         };
     }
 
+    private void CheckConfigFile(ModDto localMod)
+    {
+        if (localMod.ConfigFile.IsNullOrEmpty())
+        {
+            return;
+        }
+
+        var configFilePath = Path.Combine(Setting.UserDataFolder, localMod.ConfigFile);
+        if (File.Exists(configFilePath))
+        {
+            localMod.IsValidConfigFile = true;
+        }
+    }
+
     private void CheckDuplicatedMods(ModDto[] localMods)
     {
         var duplicatedModGroups = localMods

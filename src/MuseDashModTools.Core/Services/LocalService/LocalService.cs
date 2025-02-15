@@ -190,6 +190,9 @@ internal sealed partial class LocalService : ILocalService
     #region Injections
 
     [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    [UsedImplicitly]
     public IFileSystemService FileSystemService { get; init; } = null!;
 
     [UsedImplicitly]
@@ -203,9 +206,6 @@ internal sealed partial class LocalService : ILocalService
 
     [UsedImplicitly]
     public IResourceService ResourceService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
 
     #endregion Injections
 }

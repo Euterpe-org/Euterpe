@@ -45,10 +45,10 @@ internal sealed class LinuxService : IPlatformService
     #region Injections
 
     [UsedImplicitly]
-    public ILogger<LinuxService> Logger { get; init; } = null!;
+    public TopLevelProxy TopLevel { get; init; } = null!;
 
     [UsedImplicitly]
-    public TopLevelProxy TopLevel { get; init; } = null!;
+    public ILogger<LinuxService> Logger { get; init; } = null!;
 
     #endregion Injections
 }

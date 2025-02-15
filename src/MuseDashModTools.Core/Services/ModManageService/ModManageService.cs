@@ -33,6 +33,7 @@ internal sealed partial class ModManageService : IModManageService
             {
                 CheckModState(localMod, webMod);
                 localMod.UpdateFromMod(webMod);
+                CheckConfigFile(localMod);
                 _sourceCache.AddOrUpdate(localMod);
             }
             else
@@ -45,6 +46,9 @@ internal sealed partial class ModManageService : IModManageService
     }
 
     #region Injections
+
+    [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
 
     [UsedImplicitly]
     public IDownloadManager DownloadManager { get; init; } = null!;

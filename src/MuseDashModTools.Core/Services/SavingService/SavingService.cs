@@ -42,6 +42,9 @@ internal sealed partial class SavingService : ISavingService
     #region Injections
 
     [UsedImplicitly]
+    public Setting Setting { get; init; } = null!;
+
+    [UsedImplicitly]
     public IJsonSerializationService JsonSerializationService { get; init; } = null!;
 
     [UsedImplicitly]
@@ -55,9 +58,6 @@ internal sealed partial class SavingService : ISavingService
 
     [UsedImplicitly]
     public IPlatformService PlatformService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
 
     #endregion Injections
 }
