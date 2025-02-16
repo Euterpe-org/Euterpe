@@ -1,4 +1,4 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,35 +7,50 @@
              d:DesignHeight="450"
              d:DesignWidth="800">
 
-    <StackPanel Spacing="20" Margin="20">
-        <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="14"
-                   Text="本软件是基于开源项目原神的二次创作，我们耗费数个月才打造出如此3A大作。"/>
-        <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="16"
-                   Text="3A是骗你的，心血是真的，无论捐赠与否，我们都感谢您的支持！"/>
-        <Grid Margin="0, 15"
-              Width="500"
+    <StackPanel Margin="20" Spacing="20">
+        <TextBlock FontSize="14"
+                   Text="本软件是基于开源项目原神的二次创作，我们耗费数个月才打造出如此3A大作。"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+
+        <TextBlock FontSize="16"
+                   Text="3A是骗你的，心血是真的，无论捐赠与否，我们都感谢您的支持！"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+
+        <Grid Width="500"
+              Margin="0,15"
               ColumnDefinitions="*,*"
               RowDefinitions="*, *">
+
             <Border Grid.Row="0" Grid.Column="0"
+                    Width="230"
                     Margin="10"
                     ClipToBounds="True"
-                    CornerRadius="20"
-                    Width="230">
-                <Image Source="/Assets/DonationQRs/Wechat.webp" Width="230" Stretch="Uniform"/>
+                    CornerRadius="20">
+                <Image Width="230"
+                       Source="/Assets/DonationQRs/Wechat.webp"
+                       Stretch="Uniform" />
             </Border>
+
             <Border Grid.Row="0" Grid.Column="1"
+                    Width="230"
                     Margin="10"
                     ClipToBounds="True"
-                    CornerRadius="20"
-                    Width="230">
-                <Image Source="/Assets/DonationQRs/Alipay.webp" Width="230" Stretch="Uniform"/>
+                    CornerRadius="20">
+                <Image Width="230"
+                       Source="/Assets/DonationQRs/Alipay.webp"
+                       Stretch="Uniform" />
             </Border>
+
             <Border Grid.Row="1" Grid.Column="0"
+                    Width="230"
                     Margin="10"
                     ClipToBounds="True"
-                    CornerRadius="20"
-                    Width="230">
-                <Image Source="/Assets/DonationQRs/Paypal.webp" Width="230" Stretch="Uniform"/>
+                    CornerRadius="20">
+                <Image Width="230"
+                       Source="/Assets/DonationQRs/Paypal.webp"
+                       Stretch="Uniform" />
             </Border>
         </Grid>
     </StackPanel>

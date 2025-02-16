@@ -63,7 +63,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task OpenConfigFile(string filePath) => await PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, filePath));
+    private async Task OpenConfigFile() => await PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, SelectedMod.ConfigFile));
 
     [RelayCommand]
     private void UpdateMod()
