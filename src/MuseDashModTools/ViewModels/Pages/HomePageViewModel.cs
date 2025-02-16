@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using Ursa.Common;
 using Ursa.Controls.Options;
 
@@ -21,7 +20,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
             CanResize = false
         };
 
-        await Drawer.ShowModal<DonationDialog, DonationDialogViewModel>(new DonationDialogViewModel(), "DonationDrawerHost", options);
+        await Drawer.ShowModal<DonationDialog, DonationDialogViewModel>(DonationDialogViewModel, "DonationDrawerHost", options);
     }
 
     [RelayCommand]
@@ -33,4 +32,14 @@ public sealed partial class HomePageViewModel : ViewModelBase
     private void LaunchVanillaGame()
     {
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public DonationDialogViewModel DonationDialogViewModel { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger<HomePageViewModel> Logger { get; init; } = null!;
+
+    #endregion Injections
 }
