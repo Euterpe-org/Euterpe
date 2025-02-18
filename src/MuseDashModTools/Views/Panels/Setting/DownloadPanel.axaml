@@ -14,6 +14,12 @@
         <pages:DownloadPanelViewModel />
     </Design.DataContext>
 
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Initialized">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
     <StackPanel Orientation="Vertical"
                 Spacing="50"
                 Margin="30"
@@ -29,7 +35,7 @@
                        Text="Download Source" />
             <StackPanel Orientation="Horizontal" Spacing="10">
                 <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}"
-                          SelectedItem="{Binding Config.DownloadSource, Mode=TwoWay}"/>
+                          SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
                 <TextBox Classes="ClearButton"
                          Foreground="Gray"
                          MinWidth="200"
@@ -46,7 +52,7 @@
                        Theme="{StaticResource TitleTextBlock}"
                        Text="Update Source" />
             <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}"
-                      SelectedItem="{Binding Config.UpdateSource, Mode=TwoWay}"/>
+                      SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
         </StackPanel>
 
         <!-- GitHub Token -->
