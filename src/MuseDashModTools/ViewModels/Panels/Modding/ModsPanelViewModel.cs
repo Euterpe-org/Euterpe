@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using DynamicData;
 using DynamicData.Binding;
 
@@ -63,17 +63,13 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task OpenConfigFile() => await PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, SelectedMod.ConfigFile));
+    private Task OpenConfigFile() => PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, SelectedMod.ConfigFile));
 
     [RelayCommand]
-    private void UpdateMod()
-    {
-    }
+    private Task UpdateMod() => ModManageService.UpdateModAsync(SelectedMod);
 
     [RelayCommand]
-    private void InstallMod()
-    {
-    }
+    private Task InstallMod() => ModManageService.InstallModAsync(SelectedMod);
 
     [RelayCommand]
     private void ReinstallMod()
@@ -81,17 +77,13 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void UninstallMod()
-    {
-    }
+    private Task UninstallMod() => ModManageService.UninstallModAsync(SelectedMod);
 
     [RelayCommand]
-    private async Task OpenUrl(string url) => await PlatformService.OpenUriAsync(url);
+    private Task OpenUrl(string url) => PlatformService.OpenUriAsync(url);
 
     [RelayCommand]
-    private void ToggleModState(ModDto mod)
-    {
-    }
+    private Task ToggleMod(ModDto mod) => ModManageService.ToggleModAsync(mod);
 
     [UsedImplicitly]
     partial void OnSelectedModFilterIndexChanged(int value)

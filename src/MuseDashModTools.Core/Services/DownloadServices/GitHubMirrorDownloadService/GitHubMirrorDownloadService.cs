@@ -50,7 +50,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         }
 
         var downloadLink = PrimaryModsFolderUrl + mod.DownloadLink;
-        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
+        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileName : mod.DownloadLink);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -127,17 +127,12 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Fetching mods from GitHubMirror {PrimaryModLinksUrl}...");
 
-        try
-        {
-            var mods = Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModLinksUrl, cancellationToken);
-            Logger.ZLogInformation($"Mods fetched from GitHubMirror successfully");
-            return mods;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to fetch mods from GitHubMirror");
-            return AsyncEnumerable.Empty<Mod?>();
-        }
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModLinksUrl, cancellationToken)
+            .Catch<Mod?, Exception>(ex =>
+            {
+                Logger.ZLogError(ex, $"Failed to fetch mods from GitHubMirror");
+                return AsyncEnumerable.Empty<Mod?>();
+            });
     }
 
     #region Injections

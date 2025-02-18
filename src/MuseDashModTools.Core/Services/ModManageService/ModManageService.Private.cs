@@ -31,10 +31,7 @@ internal sealed partial class ModManageService
         }
 
         var configFilePath = Path.Combine(Config.UserDataFolder, localMod.ConfigFile);
-        if (File.Exists(configFilePath))
-        {
-            localMod.IsValidConfigFile = true;
-        }
+        localMod.IsValidConfigFile = File.Exists(configFilePath);
     }
 
     private void CheckDuplicatedMods(ModDto[] localMods)
@@ -54,5 +51,83 @@ internal sealed partial class ModManageService
         }
 
         Logger.ZLogInformation($"Checking duplicated mods finished");
+    }
+
+    private async Task CheckLibDependencies(ModDto mod)
+    {
+        foreach (var lib in mod.DependentLibs)
+        {
+            if (_libNames.Contains(lib))
+            {
+                continue;
+            }
+
+            await DownloadManager.DownloadLibAsync(lib);
+            _libNames.Add(lib);
+        }
+    }
+
+    private async Task EnableModAsync(ModDto mod)
+    {
+        File.Move(Path.Combine(Config.ModsFolder, mod.FileName),
+            Path.Combine(Config.ModsFolder, mod.ReversedFileName));
+
+        await CheckLibDependencies(mod);
+
+        var modDependencies = FindModDependencies(mod);
+        foreach (var dependency in modDependencies)
+        {
+            if (dependency is { IsDisabled: true, IsLocal: true })
+            {
+                await EnableModAsync(dependency);
+            }
+            else if (!dependency.IsLocal)
+            {
+                await InstallModAsync(dependency);
+            }
+        }
+
+        Logger.ZLogInformation($"Change mod {mod.Name} state to enabled");
+        mod.IsDisabled = false;
+    }
+
+    private async Task DisableModAsync(ModDto mod)
+    {
+        File.Move(Path.Combine(Config.ModsFolder, mod.FileName),
+            Path.Combine(Config.ModsFolder, mod.ReversedFileName));
+
+        var modDependents = FindModDependents(mod);
+        foreach (var dependent in modDependents)
+        {
+            if (dependent is { IsDisabled: false, IsLocal: true })
+            {
+                await DisableModAsync(dependent);
+            }
+        }
+
+        Logger.ZLogInformation($"Change mod {mod.Name} state to disabled");
+        mod.IsDisabled = true;
+    }
+
+    /// <summary>
+    ///     Find mods that the given mod depends on
+    /// </summary>
+    /// <param name="mod"></param>
+    /// <returns></returns>
+    private IEnumerable<ModDto> FindModDependencies(ModDto mod)
+    {
+        Logger.ZLogInformation($"Finding mod dependencies for {mod.Name}");
+        return mod.DependentMods.Select(x => _sourceCache.Lookup(x).Value);
+    }
+
+    /// <summary>
+    ///     Find mods that depend on the given mod
+    /// </summary>
+    /// <param name="mod"></param>
+    /// <returns></returns>
+    private IEnumerable<ModDto> FindModDependents(ModDto mod)
+    {
+        Logger.ZLogInformation($"Finding mod dependents for {mod.Name}");
+        return _sourceCache.Items.Where(x => x.DependentMods.Contains(mod.Name));
     }
 }

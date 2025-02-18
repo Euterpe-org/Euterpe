@@ -13,6 +13,7 @@
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
         <PackageReference Include="Semver"/>
+        <PackageReference Include="System.Interactive.Async"/>
         <PackageReference Include="System.Linq.Async"/>
         <PackageReference Include="System.ServiceModel.Syndication"/>
         <PackageReference Include="ZLogger"/>

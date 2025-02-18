@@ -5,12 +5,14 @@ namespace MuseDashModTools.Core;
 internal sealed partial class ModManageService : IModManageService
 {
     private string _gameVersion = null!;
+    private HashSet<string> _libNames = [];
     private SourceCache<ModDto, string> _sourceCache = null!;
 
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
     {
         _sourceCache = sourceCache;
         _gameVersion = await LocalService.ReadGameVersionAsync().ConfigureAwait(false);
+        _libNames = LocalService.GetLibFileNames().ToHashSet();
 
         ModDto[] localMods = LocalService.GetModFilePaths()
             .Select(LocalService.LoadModFromPath)
@@ -45,6 +47,17 @@ internal sealed partial class ModManageService : IModManageService
         Logger.ZLogInformation($"Updated mod info from web completed");
     }
 
+    public async Task InstallModAsync(ModDto mod)
+    {
+        await DownloadManager.DownloadModAsync(mod);
+    }
+
+    public Task UninstallModAsync(ModDto mod) => throw new NotImplementedException();
+
+    public Task UpdateModAsync(ModDto mod) => throw new NotImplementedException();
+
+    public Task ToggleModAsync(ModDto mod) => mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
+
     #region Injections
 
     [UsedImplicitly]
@@ -58,6 +71,9 @@ internal sealed partial class ModManageService : IModManageService
 
     [UsedImplicitly]
     public ILogger<ModManageService> Logger { get; init; } = null!;
+
+    [UsedImplicitly]
+    public IMessageBoxService MessageBoxService { get; init; } = null!;
 
     #endregion Injections
 }

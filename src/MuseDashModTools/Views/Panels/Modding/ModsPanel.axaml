@@ -3,16 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:enums="clr-namespace:MuseDashModTools.Models.Enums;assembly=MuseDashModTools.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Modding"
+             xmlns:moddingPanels="using:MuseDashModTools.ViewModels.Panels.Modding"
              xmlns:u="https://irihi.tech/ursa"
              x:Class="MuseDashModTools.Views.Panels.Modding.ModsPanel"
-             x:DataType="pages:ModsPanelViewModel"
+             x:DataType="moddingPanels:ModsPanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:ModsPanelViewModel />
+        <moddingPanels:ModsPanelViewModel />
     </Design.DataContext>
 
     <Interaction.Behaviors>
@@ -114,6 +114,8 @@
                                                   Margin="0,0,4,0"
                                                   HorizontalAlignment="Right"
                                                   VerticalAlignment="Center"
+                                                  Command="{Binding $parent[UserControl].((moddingPanels:ModsPanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
+                                                  CommandParameter="{Binding ., Mode=TwoWay}"
                                                   IsChecked="{Binding !IsDisabled, Mode=OneWay}"
                                                   IsVisible="{Binding IsLocal, Mode=OneWay}" />
                                 </Grid>
@@ -185,7 +187,7 @@
 
                                 <!--  Update Mod  -->
                                 <Button Classes="Primary"
-                                        Command="{Binding UpdateModCommand, Mode=OneTime}"
+                                        Command="{Binding InstallModCommand, Mode=OneTime}"
                                         IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                     <StackPanel Spacing="6">
                                         <PathIcon Height="15" Data="{StaticResource SemiIconRefresh}" />

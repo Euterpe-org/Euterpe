@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Models;
 
-public sealed class ModDto : ObservableObject
+public sealed partial class ModDto : ObservableObject
 {
     public ModDto RemoveLocalInfo()
     {
@@ -15,12 +15,14 @@ public sealed class ModDto : ObservableObject
     // Local Information
     public string LocalVersion { get; set; } = string.Empty;
     public ModState State { get; set; }
-    public string FileName => FileNameWithoutExtension + FileExtension;
     public string? FileNameWithoutExtension { get; set; }
-    public string? FileExtension { get; set; }
+    public string FileName => FileNameWithoutExtension + (IsDisabled ? ".disabled" : ".dll");
+    public string ReversedFileName => FileNameWithoutExtension + (IsDisabled ? ".dll" : ".disabled");
 
     // Binding Boolean Properties
-    public bool IsDisabled => !IsLocal || FileExtension == ".disabled";
+    [ObservableProperty]
+    public partial bool IsDisabled { get; set; }
+
     public bool IsLocal => FileNameWithoutExtension is not null;
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
@@ -30,7 +32,7 @@ public sealed class ModDto : ObservableObject
     public bool IsValidConfigFile { get; set; }
 
     // GitHub Repo
-    public string RepoPageUrl => GitHubBaseUrl + RepositoryIdentifier;
+    public string RepoPageUrl => GitHubBaseUrl + Repository;
 
     public bool IsValidRepository => !RepoPageUrl.IsNullOrEmpty() && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
 
@@ -50,7 +52,7 @@ public sealed class ModDto : ObservableObject
     public string Version { get; set; } = "Unknown";
     public string Author { get; set; } = string.Empty;
     public string DownloadLink { get; set; } = string.Empty;
-    public string RepositoryIdentifier { get; set; } = string.Empty;
+    public string Repository { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
     public string GameVersion { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
