@@ -6,7 +6,7 @@ public sealed class Mod
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
-    public string DownloadLink { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
     public string Repository { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
     public string GameVersion { get; set; } = string.Empty;

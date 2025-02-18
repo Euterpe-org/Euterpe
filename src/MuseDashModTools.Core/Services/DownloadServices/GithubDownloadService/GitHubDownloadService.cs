@@ -5,7 +5,7 @@ namespace MuseDashModTools.Core;
 internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 {
     private const string RawModLinksUrl = GitHubRawContentBaseUrl + ModLinksBaseUrl;
-    private const string ModLinksUrl = RawModLinksUrl + "ModLinks.json";
+    private const string ModLinksUrl = RawModLinksUrl + "Mods.json";
     private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
     private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
@@ -41,14 +41,14 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     {
         Logger.ZLogInformation($"Downloading mod {mod.Name} from GitHub...");
 
-        if (mod.DownloadLink.IsNullOrEmpty())
+        if (mod.FileName.IsNullOrEmpty())
         {
             Logger.ZLogError($"Mod {mod.Name} download link is empty");
             return false;
         }
 
-        var downloadLink = ModsFolderUrl + mod.DownloadLink;
-        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileName : mod.DownloadLink);
+        var downloadLink = ModsFolderUrl + mod.FileName;
+        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.LocalFileName : mod.FileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);

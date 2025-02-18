@@ -81,5 +81,5 @@ public sealed partial class Config : ObservableObject
     public string Cpp2ILZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL_2022.1.0-pre-release.10.zip");
 
     private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
-        !string.IsNullOrEmpty(folderPath) ? Path.Combine(folderPath, targetPath) : defaultPath;
+        !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;
 }

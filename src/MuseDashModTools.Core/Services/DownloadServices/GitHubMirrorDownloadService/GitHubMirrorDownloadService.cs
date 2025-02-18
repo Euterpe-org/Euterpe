@@ -7,7 +7,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     private const string PrimaryRawMirrorUrl = "https://raw.kkgithub.com/";
     private const string PrimaryReleaseMirrorUrl = "https://kkgithub.com/";
     private const string PrimaryRawModLinksUrl = PrimaryRawMirrorUrl + ModLinksBaseUrl;
-    private const string PrimaryModLinksUrl = PrimaryRawModLinksUrl + "ModLinks.json";
+    private const string PrimaryModLinksUrl = PrimaryRawModLinksUrl + "Mods.json";
     private const string PrimaryModsFolderUrl = PrimaryRawModLinksUrl + "Mods/";
     private const string PrimaryLibsFolderUrl = PrimaryRawModLinksUrl + "Libs/";
     private const string PrimaryMelonLoaderUrl = PrimaryReleaseMirrorUrl + MelonLoaderBaseUrl;
@@ -43,14 +43,14 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Downloading mod {mod.Name} from GitHubMirror...");
 
-        if (mod.DownloadLink.IsNullOrEmpty())
+        if (mod.FileName.IsNullOrEmpty())
         {
             Logger.ZLogError($"Mod {mod.Name} download link is empty");
             return false;
         }
 
-        var downloadLink = PrimaryModsFolderUrl + mod.DownloadLink;
-        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileName : mod.DownloadLink);
+        var downloadLink = PrimaryModsFolderUrl + mod.FileName;
+        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.LocalFileName : mod.FileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
