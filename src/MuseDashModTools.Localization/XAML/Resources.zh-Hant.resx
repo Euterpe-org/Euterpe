@@ -298,4 +298,10 @@
     <data name="XAML_Page_About" xml:space="preserve">
         <value>關於</value>
     </data>
+    <data name="XAML_UpdateSources_GithubAPI" xml:space="preserve">
+        <value>Github API</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
+        <value>Github RSS</value>
+    </data>
 </root>
