@@ -17,6 +17,7 @@ public static class PageNames
     public const string AboutPanelName = "About";
     public const string AppearancePanelName = "Appearance";
     public const string ExperiencePanelName = "Experience";
+    public const string FileManagementPanelName = "File Management";
     public const string DownloadPanelName = "Download";
     public const string AdvancedPanelName = "Advanced";
 

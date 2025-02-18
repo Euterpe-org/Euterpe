@@ -9,6 +9,7 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
         new("About", AboutPanelName),
         new("Appearance", AppearancePanelName),
         new("Experience", ExperiencePanelName),
+        new("File Management", FileManagementPanelName),
         new("Download", DownloadPanelName),
         new("Advanced", AdvancedPanelName)
     ];

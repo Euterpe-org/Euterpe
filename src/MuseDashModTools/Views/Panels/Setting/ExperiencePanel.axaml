@@ -12,9 +12,26 @@
     <Design.DataContext>
         <pages:ExperiencePanelViewModel />
     </Design.DataContext>
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
-        ExperiencePanel still work in progress...
-    </TextBlock>
+
+    <StackPanel Orientation="Vertical"
+                Spacing="50"
+                Margin="30"
+                HorizontalAlignment="Left"
+                MaxWidth="800"
+                MinWidth="600">
+
+        <!-- Show Console -->
+        <StackPanel Orientation="Vertical"
+                    Spacing="15">
+            <TextBlock Classes="H4"
+                       Theme="{StaticResource TitleTextBlock}"
+                       Text="Show Console" />
+            <TextBlock Margin="0, -10, 0, 0"
+                       Foreground="Gray"
+                       TextWrapping="Wrap"
+                       Text="Whether to display the console after the game is launched" />
+            <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
+        </StackPanel>
+
+    </StackPanel>
 </UserControl>
