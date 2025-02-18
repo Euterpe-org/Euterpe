@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:enums="clr-namespace:MuseDashModTools.Models.Enums;assembly=MuseDashModTools.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.DownloadPanel"
@@ -12,9 +13,70 @@
     <Design.DataContext>
         <pages:DownloadPanelViewModel />
     </Design.DataContext>
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
-        DownloadPanel still work in progress...
-    </TextBlock>
+
+    <StackPanel Orientation="Vertical"
+                Spacing="50"
+                Margin="30"
+                HorizontalAlignment="Left"
+                MaxWidth="800"
+                MinWidth="600">
+
+        <!-- Download Source -->
+        <StackPanel Orientation="Vertical"
+                    Spacing="15">
+            <TextBlock Classes="H4"
+                       Theme="{StaticResource TitleTextBlock}"
+                       Text="Download Source" />
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}"
+                          SelectedItem="{Binding Config.DownloadSource, Mode=TwoWay}"/>
+                <TextBox Classes="ClearButton"
+                         Foreground="Gray"
+                         MinWidth="200"
+                         Watermark="Input link here"
+                         IsVisible="{Binding Config.DownloadSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:DownloadSource.Custom}, Mode=OneWay}"
+                         Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Update Source -->
+        <StackPanel Orientation="Vertical"
+                    Spacing="15">
+            <TextBlock Classes="H4"
+                       Theme="{StaticResource TitleTextBlock}"
+                       Text="Update Source" />
+            <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}"
+                      SelectedItem="{Binding Config.UpdateSource, Mode=TwoWay}"/>
+        </StackPanel>
+
+        <!-- GitHub Token -->
+        <StackPanel Orientation="Vertical"
+                    Spacing="15">
+            <TextBlock Classes="H4"
+                       Theme="{StaticResource TitleTextBlock}"
+                       Text="GitHub Token" />
+            <TextBlock Margin="0, -10, 0, 0"
+                       Foreground="Gray"
+                       TextWrapping="Wrap"
+                       Text="Desc desc desc desc desc desc..." />
+            <TextBox Classes="ClearButton"
+                     Foreground="Gray"
+                     Watermark="Leave blank if no need"
+                     Text="{Binding Config.GitHubToken, Mode=TwoWay}" />
+        </StackPanel>
+
+        <!-- Download Prerelease -->
+        <StackPanel Orientation="Vertical"
+                    Spacing="15">
+            <TextBlock Classes="H4"
+                       Theme="{StaticResource TitleTextBlock}"
+                       Text="Download Prerelease" />
+            <TextBlock Margin="0, -10, 0, 0"
+                       Foreground="Gray"
+                       TextWrapping="Wrap"
+                       Text="Check for pre-release versions when checking for MDMT updates" />
+            <ToggleSwitch IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
+        </StackPanel>
+
+    </StackPanel>
 </UserControl>

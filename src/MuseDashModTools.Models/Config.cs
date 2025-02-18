@@ -6,7 +6,7 @@ namespace MuseDashModTools.Models;
 
 public sealed partial class Config : ObservableObject
 {
-    // Path Settings
+    // File Management Settings
     [AllowNull]
     [ObservableProperty]
     public partial string MuseDashFolder { get; set; } = string.Empty;
@@ -15,11 +15,15 @@ public sealed partial class Config : ObservableObject
     public partial string CacheFolder { get; set; } =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(MuseDashModTools), "Cache");
 
-    // UI Settings
+    // Appearance Settings
     [AllowNull]
     public string LanguageCode { get; set; } = CultureInfo.CurrentUICulture.ToString();
 
     public string Theme { get; set; } = "Dark";
+
+    // Experience Settings
+    [ObservableProperty]
+    public partial bool ShowConsole { get; set; }
 
     // Download Settings
     [ObservableProperty]
@@ -38,10 +42,6 @@ public sealed partial class Config : ObservableObject
     public partial bool DownloadPrerelease { get; set; }
 
     public SemVersion? SkipVersion { get; set; }
-
-    // Game Settings
-    [ObservableProperty]
-    public partial bool ShowConsole { get; set; }
 
     // Ignored Paths
     [JsonIgnore]
