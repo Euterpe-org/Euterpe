@@ -54,7 +54,7 @@ public sealed partial class ModDto : ObservableObject
     public string DownloadLink { get; set; } = string.Empty;
     public string Repository { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
-    public string GameVersion { get; set; } = string.Empty;
+    public string GameVersion { get; set; } = "Unknown";
     public string Description { get; set; } = string.Empty;
     public string[] DependentMods { get; set; } = [];
     public string[] DependentLibs { get; set; } = [];
