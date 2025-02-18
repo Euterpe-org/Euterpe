@@ -1,0 +1,64 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Modding"
+             x:Class="MuseDashModTools.Views.Panels.Modding.MelonLoaderPanel"
+             x:DataType="pages:MelonLoaderPanelViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             d:DesignWidth="1000">
+
+    <Design.DataContext>
+        <pages:MelonLoaderPanelViewModel />
+    </Design.DataContext>
+
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="0, 0, 0, 40"
+                Spacing="10">
+        <StackPanel Orientation="Horizontal"
+                    Spacing="20">
+            <Image Height="50"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Source="/Assets/ML_Icon.png" />
+            <Image Height="40"
+                   RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Source="/Assets/ML_Text.png" />
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Center"
+                   Foreground="Gray"
+                   Text="MelonLoader installation is required to play with mods" />
+
+        <Border Margin="30"
+                Theme="{DynamicResource CardBorder}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center"
+                           Margin="5"
+                           Foreground="Gainsboro"
+                           FontSize="16"
+                           Text="Installed ">
+                    <Label Classes="Ghost Green" Theme="{StaticResource TagLabel}">v0.6.1</Label>
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Center"
+                           Foreground="LimeGreen"
+                           FontSize="16"
+                           Text="You're up to date" />
+                <StackPanel Margin="20, 30, 20, 10"
+                            Orientation="Horizontal"
+                            Spacing="30"
+                            HorizontalAlignment="Center">
+                    <Button Classes="Large"
+                            Width="130"
+                            Command="{Binding InstallMelonLoaderCommand, Mode=OneTime}"
+                            Content="Install" />
+                    <Button Classes="Large Danger"
+                            Width="100"
+                            Command="{Binding UninstallMelonLoaderCommand, Mode=OneTime}"
+                            Content="Uninstall" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
