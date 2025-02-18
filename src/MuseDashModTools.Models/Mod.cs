@@ -11,8 +11,8 @@ public sealed class Mod
     public string ConfigFile { get; set; } = string.Empty;
     public string GameVersion { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public string[] DependentMods { get; set; } = [];
-    public string[] DependentLibs { get; set; } = [];
+    public string[] ModDependencies { get; set; } = [];
+    public string[] LibDependencies { get; set; } = [];
     public string[] IncompatibleMods { get; set; } = [];
     public string SHA256 { get; set; } = string.Empty;
 }

@@ -55,7 +55,7 @@ internal sealed partial class ModManageService
 
     private async Task CheckLibDependencies(ModDto mod)
     {
-        foreach (var lib in mod.DependentLibs)
+        foreach (var lib in mod.LibDependencies)
         {
             if (_libNames.Contains(lib))
             {
@@ -117,7 +117,7 @@ internal sealed partial class ModManageService
     private IEnumerable<ModDto> FindModDependencies(ModDto mod)
     {
         Logger.ZLogInformation($"Finding mod dependencies for {mod.Name}");
-        return mod.DependentMods.Select(x => _sourceCache.Lookup(x).Value);
+        return mod.ModDependencies.Select(x => _sourceCache.Lookup(x).Value);
     }
 
     /// <summary>
@@ -128,6 +128,6 @@ internal sealed partial class ModManageService
     private IEnumerable<ModDto> FindModDependents(ModDto mod)
     {
         Logger.ZLogInformation($"Finding mod dependents for {mod.Name}");
-        return _sourceCache.Items.Where(x => x.DependentMods.Contains(mod.Name));
+        return _sourceCache.Items.Where(x => x.ModDependencies.Contains(mod.Name));
     }
 }
