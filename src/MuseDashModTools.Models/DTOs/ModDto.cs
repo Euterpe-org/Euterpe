@@ -21,12 +21,12 @@ public sealed partial class ModDto : ObservableObject
 
     // Binding Boolean Properties
     [ObservableProperty]
-    public partial bool IsDisabled { get; set; }
+    public partial bool IsDisabled { get; set; } = true;
 
     public bool IsLocal => FileNameWithoutExtension is not null;
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
-    public bool IsDuplicated => State is ModState.Duplicated;
+
     public string? DuplicatedModPaths { get; set; }
 
     public bool IsValidConfigFile { get; set; }

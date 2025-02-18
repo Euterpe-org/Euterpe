@@ -4,7 +4,7 @@ internal sealed partial class ModManageService
 {
     private void CheckModState(ModDto localMod, Mod webMod)
     {
-        if (localMod.IsDuplicated)
+        if (localMod.State == ModState.Duplicated)
         {
             return;
         }
