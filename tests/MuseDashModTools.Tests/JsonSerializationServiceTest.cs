@@ -28,8 +28,8 @@ public sealed class JsonSerializationServiceTest
     {
         Author = "test",
         ConfigFile = "Config.cfg",
-        DependentLibs = [],
-        DependentMods = [],
+        LibDependencies = [],
+        ModDependencies = [],
         Description = "A Test Mod",
         FileName = "Test Mod.dll",
         GameVersion = "*",

@@ -38,7 +38,7 @@
                              AcceptsTab="False"
                              Classes="ClearButton"
                              MaxLength="30"
-                             Text="{Binding SearchText, Mode=TwoWay}"
+                             Text="{Binding SearchText, Mode=OneWayToSource}"
                              Watermark="Search by name or author">
                         <TextBox.InnerLeftContent>
                             <PathIcon Height="18" Data="{StaticResource SemiIconSearch}" />
