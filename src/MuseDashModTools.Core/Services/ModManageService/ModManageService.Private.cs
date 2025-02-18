@@ -38,7 +38,7 @@ internal sealed partial class ModManageService
     {
         var duplicatedModGroups = localMods
             .GroupBy(mod => mod.Name)
-            .Where(group => group.Select(mod => mod.FileName).Distinct().Count() > 1);
+            .Where(group => group.Select(mod => mod.LocalFileName).Distinct().Count() > 1);
 
         foreach (var duplicatedModGroup in duplicatedModGroups)
         {
@@ -47,7 +47,7 @@ internal sealed partial class ModManageService
 
             var localMod = _sourceCache.Lookup(modName).Value;
             localMod.State = ModState.Duplicated;
-            localMod.DuplicatedModPaths = string.Join(Environment.NewLine, duplicatedModGroup.Select(mod => mod.FileName));
+            localMod.DuplicatedModPaths = string.Join(Environment.NewLine, duplicatedModGroup.Select(mod => mod.LocalFileName));
         }
 
         Logger.ZLogInformation($"Checking duplicated mods finished");
@@ -69,7 +69,7 @@ internal sealed partial class ModManageService
 
     private async Task EnableModAsync(ModDto mod)
     {
-        File.Move(Path.Combine(Config.ModsFolder, mod.FileName),
+        File.Move(Path.Combine(Config.ModsFolder, mod.LocalFileName),
             Path.Combine(Config.ModsFolder, mod.ReversedFileName));
 
         await CheckLibDependencies(mod);
@@ -93,7 +93,7 @@ internal sealed partial class ModManageService
 
     private async Task DisableModAsync(ModDto mod)
     {
-        File.Move(Path.Combine(Config.ModsFolder, mod.FileName),
+        File.Move(Path.Combine(Config.ModsFolder, mod.LocalFileName),
             Path.Combine(Config.ModsFolder, mod.ReversedFileName));
 
         var modDependents = FindModDependents(mod);

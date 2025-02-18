@@ -31,7 +31,7 @@ public sealed class JsonSerializationServiceTest
         DependentLibs = [],
         DependentMods = [],
         Description = "A Test Mod",
-        DownloadLink = "Test Mod.dll",
+        FileName = "Test Mod.dll",
         GameVersion = "*",
         IncompatibleMods = [],
         Name = "TestMod",

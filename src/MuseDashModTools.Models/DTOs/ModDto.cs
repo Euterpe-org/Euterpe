@@ -16,7 +16,7 @@ public sealed partial class ModDto : ObservableObject
     public string LocalVersion { get; set; } = string.Empty;
     public ModState State { get; set; }
     public string? FileNameWithoutExtension { get; set; }
-    public string FileName => FileNameWithoutExtension + (IsDisabled ? ".disabled" : ".dll");
+    public string LocalFileName => FileNameWithoutExtension + (IsDisabled ? ".disabled" : ".dll");
     public string ReversedFileName => FileNameWithoutExtension + (IsDisabled ? ".dll" : ".disabled");
 
     // Binding Boolean Properties
@@ -26,7 +26,6 @@ public sealed partial class ModDto : ObservableObject
     public bool IsLocal => FileNameWithoutExtension is not null;
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
-
     public string? DuplicatedModPaths { get; set; }
 
     public bool IsValidConfigFile { get; set; }
@@ -51,7 +50,7 @@ public sealed partial class ModDto : ObservableObject
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = "Unknown";
     public string Author { get; set; } = string.Empty;
-    public string DownloadLink { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
     public string Repository { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
     public string GameVersion { get; set; } = "Unknown";
