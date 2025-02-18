@@ -4,13 +4,16 @@ using Semver;
 
 namespace MuseDashModTools.Models;
 
-public sealed class Config
+public sealed partial class Config : ObservableObject
 {
     // Path Settings
     [AllowNull]
-    public string MuseDashFolder { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string MuseDashFolder { get; set; } = string.Empty;
 
-    public string CacheFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MuseDashModTools", "Cache");
+    [ObservableProperty]
+    public partial string CacheFolder { get; set; } =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(MuseDashModTools), "Cache");
 
     // UI Settings
     [AllowNull]
@@ -19,19 +22,26 @@ public sealed class Config
     public string Theme { get; set; } = "Dark";
 
     // Download Settings
-    public DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
-    public UpdateSource UpdateSource { get; set; } = UpdateSource.GitHubRSS;
-    public string? GitHubToken { get; set; }
-    public string? CustomDownloadSource { get; set; }
-    public bool DownloadPrerelease { get; set; }
+    [ObservableProperty]
+    public partial DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
+
+    [ObservableProperty]
+    public partial UpdateSource UpdateSource { get; set; } = UpdateSource.GitHubRSS;
+
+    [ObservableProperty]
+    public partial string? GitHubToken { get; set; }
+
+    [ObservableProperty]
+    public partial string? CustomDownloadSource { get; set; }
+
+    [ObservableProperty]
+    public partial bool DownloadPrerelease { get; set; }
+
     public SemVersion? SkipVersion { get; set; }
 
     // Game Settings
-    public bool ShowConsole { get; set; }
-
-    // Message Box Settings
-    public AskType AskEnableDependencyWhenEnableCurrent { get; set; } = AskType.Always;
-    public AskType AskDisableDependentWhenDisableCurrent { get; set; } = AskType.Always;
+    [ObservableProperty]
+    public partial bool ShowConsole { get; set; }
 
     // Ignored Paths
     [JsonIgnore]

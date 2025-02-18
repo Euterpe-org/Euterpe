@@ -48,7 +48,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
 
         var downloadLink = ModsFolderUrl + mod.DownloadLink;
-        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileNameWithoutExtension + mod.FileExtension : mod.DownloadLink);
+        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.FileName : mod.DownloadLink);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -104,17 +104,12 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     {
         Logger.ZLogInformation($"Fetching mods from GitHub {ModLinksUrl}...");
 
-        try
-        {
-            var mods = Client.GetFromJsonAsAsyncEnumerable<Mod>(ModLinksUrl, cancellationToken);
-            Logger.ZLogInformation($"Mods fetched from GitHub successfully");
-            return mods;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to fetch mods from GitHub");
-            return AsyncEnumerable.Empty<Mod?>();
-        }
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModLinksUrl, cancellationToken)
+            .Catch<Mod?, Exception>(ex =>
+            {
+                Logger.ZLogError(ex, $"Failed to fetch mods from GitHub");
+                return AsyncEnumerable.Empty<Mod?>();
+            });
     }
 
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
