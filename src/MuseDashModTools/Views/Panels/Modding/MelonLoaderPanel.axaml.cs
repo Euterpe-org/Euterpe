@@ -1,8 +1,8 @@
 ﻿namespace MuseDashModTools.Views.Panels.Modding;
 
-public partial class FrameworkPanel : UserControl
+public partial class MelonLoaderPanel : UserControl
 {
-    public FrameworkPanel()
+    public MelonLoaderPanel()
     {
         InitializeComponent();
     }

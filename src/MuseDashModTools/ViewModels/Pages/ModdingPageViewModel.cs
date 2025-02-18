@@ -7,7 +7,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     public override ObservableCollection<NavItem> NavItems { get; } =
     [
         new("Mods", ModsPanelName),
-        new("Framework", FrameworkPanelName),
+        new("Melon Loader", MelonLoaderPanelName),
         new("Develop", DevelopPanelName)
     ];
 

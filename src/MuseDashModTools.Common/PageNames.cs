@@ -6,7 +6,7 @@ public static class PageNames
 
     public const string ModdingPageName = "Modding";
     public const string ModsPanelName = "Mods";
-    public const string FrameworkPanelName = "Framework";
+    public const string MelonLoaderPanelName = "Melon Loader";
     public const string DevelopPanelName = "Develop";
 
     public const string ChartingPageName = "Charting";
