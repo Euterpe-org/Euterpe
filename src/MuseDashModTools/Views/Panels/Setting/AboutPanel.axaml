@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AboutPanel"
              x:DataType="pages:AboutPanelViewModel"
@@ -12,9 +14,142 @@
     <Design.DataContext>
         <pages:AboutPanelViewModel />
     </Design.DataContext>
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
-        AboutPanel still work in progress...
-    </TextBlock>
+
+    <ScrollViewer>
+        <DockPanel Margin="20">
+
+            <StackPanel DockPanel.Dock="Top"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal"
+                        Spacing="20">
+                <Image Source="/Assets/Melon.webp"
+                       Height="120"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       Classes="animate-scale">
+                    <Image.Styles>
+                        <Style Selector="Image.animate-scale">
+                            <Style.Animations>
+                                <Animation Duration="0:0:0.3"
+                                           FillMode="Forward">
+                                    <KeyFrame Cue="0%">
+                                        <Setter Property="ScaleTransform.ScaleX" Value="0.8"/>
+                                        <Setter Property="ScaleTransform.ScaleY" Value="0.8"/>
+                                        <Setter Property="Opacity" Value="0"/>
+                                    </KeyFrame>
+                                    <KeyFrame Cue="100%">
+                                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
+                                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </KeyFrame>
+                                </Animation>
+                            </Style.Animations>
+                        </Style>
+                    </Image.Styles>
+                </Image>
+
+                <StackPanel VerticalAlignment="Center" Spacing="3">
+                    <TextBlock Text="Muse Dash Mod Tools"
+                               Classes="H1"
+                               Theme="{StaticResource TitleTextBlock}"
+                               HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="10">
+                        <Label Classes="Blue"
+                               Height="10"
+                               Content="{x:Static constants:BuildInfo.DisplayVersion}"
+                               Theme="{StaticResource TagLabel}" />
+                        <TextBlock Foreground="Gray"
+                                   Text="{x:Static constants:BuildInfo.CopyRight}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Bottom"
+                   Margin="10, 25, 37, 0"
+                   Orientation="Vertical"
+                   Spacing="10">
+
+                <Border Theme="{DynamicResource CardBorder}">
+                    <StackPanel Orientation="Vertical" Spacing="20">
+
+                        <TextBlock Margin="13, 3, 13, 0"
+                                   Foreground="LightSlateGray">
+                            <TextBlock.Inlines>
+                                <Run Text="Muse Dash Mod Tools is licensed under the" />
+                                <InlineUIContainer>
+                                    <Image Height="13"
+                                           Margin="3,0"
+                                           Source="/Assets/MIT_Logo.png"
+                                           Cursor="Hand">
+                                        <Interaction.Behaviors>
+                                            <EventTriggerBehavior EventName="Tapped">
+                                            </EventTriggerBehavior>
+                                        </Interaction.Behaviors>
+                                    </Image>
+                                </InlineUIContainer>
+                                <Run Text="license." />
+                                <Run Text="Powered by" />
+                                <InlineUIContainer>
+                                    <Image Height="18"
+                                           Margin="3,0"
+                                           Source="/Assets/DotNet_Logo.png"
+                                           Cursor="Hand">
+                                    </Image>
+                                </InlineUIContainer>
+                                <Run Text="9.0 &amp;" />
+                                <InlineUIContainer>
+                                    <Image Height="18"
+                                           Margin="3,0"
+                                           Source="/Assets/Avalonia_Logo.png"
+                                           Cursor="Hand">
+                                    </Image>
+                                </InlineUIContainer>
+                                <Run Text="Avalonia 11.2.4." />
+                            </TextBlock.Inlines>
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Spacing="15">
+                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Content="Check Update" />
+                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Content="Source Code" />
+                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Content="Crowdin Translate" />
+                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Content="MDMC Website" />
+                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Content="MDMC Discord" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <ItemsControl VerticalAlignment="Stretch" ItemsSource="{Binding ContributorGroups, Mode=OneTime}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0 16">
+                                <TextBlock Text="{Binding GroupName, Mode=OneTime}"
+                                           Theme="{StaticResource TitleTextBlock}"
+                                           Classes="H4"/>
+                                <ItemsControl ItemsSource="{Binding Contributors, Mode=OneTime}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <mdmt:ContributorProfileCard
+                                                Source="{Binding ., Mode=OneTime}"
+                                                Margin="8"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </StackPanel>
+        </DockPanel>
+    </ScrollViewer>
 </UserControl>

@@ -338,4 +338,25 @@
     <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
         <value>Github RSS</value>
     </data>
+    <data name="XAML_Developer" xml:space="preserve">
+        <value>Developer</value>
+    </data>
+    <data name="XAML_Artist" xml:space="preserve">
+        <value>Artist</value>
+    </data>
+    <data name="XAML_ChineseTraditional" xml:space="preserve">
+        <value>Chinese Traditional</value>
+    </data>
+    <data name="XAML_Hungarian" xml:space="preserve">
+        <value>Hungarian</value>
+    </data>
+    <data name="XAML_Korean" xml:space="preserve">
+        <value>Korean</value>
+    </data>
+    <data name="XAML_Russian" xml:space="preserve">
+        <value>Russian</value>
+    </data>
+    <data name="XAML_Spanish" xml:space="preserve">
+        <value>Spanish</value>
+    </data>
 </root>
