@@ -15,6 +15,15 @@
         <pages:AboutPanelViewModel />
     </Design.DataContext>
 
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+        </Style>
+        <Style Selector="InvokeCommandAction">
+            <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+        </Style>
+    </UserControl.Styles>
+
     <ScrollViewer>
         <DockPanel Margin="20">
 
@@ -83,6 +92,7 @@
                                            Cursor="Hand">
                                         <Interaction.Behaviors>
                                             <EventTriggerBehavior EventName="Tapped">
+                                                <InvokeCommandAction CommandParameter="https://github.com/MDModsDev/MuseDashModTools?tab=MIT-1-ov-file#MIT-1-ov-file" />
                                             </EventTriggerBehavior>
                                         </Interaction.Behaviors>
                                     </Image>
@@ -94,6 +104,11 @@
                                            Margin="3,0"
                                            Source="/Assets/DotNet_Logo.png"
                                            Cursor="Hand">
+                                        <Interaction.Behaviors>
+                                            <EventTriggerBehavior EventName="Tapped">
+                                                <InvokeCommandAction CommandParameter="https://dotnet.microsoft.com" />
+                                            </EventTriggerBehavior>
+                                        </Interaction.Behaviors>
                                     </Image>
                                 </InlineUIContainer>
                                 <Run Text="9.0 &amp;" />
@@ -102,6 +117,11 @@
                                            Margin="3,0"
                                            Source="/Assets/Avalonia_Logo.png"
                                            Cursor="Hand">
+                                        <Interaction.Behaviors>
+                                            <EventTriggerBehavior EventName="Tapped">
+                                                <InvokeCommandAction CommandParameter="https://avaloniaui.net" />
+                                            </EventTriggerBehavior>
+                                        </Interaction.Behaviors>
                                     </Image>
                                 </InlineUIContainer>
                                 <Run Text="Avalonia 11.2.4." />
@@ -110,15 +130,20 @@
 
                         <StackPanel Orientation="Horizontal" Spacing="15">
                             <Button Theme="{DynamicResource BorderlessButton}"
-                                    Content="Check Update" />
+                                    Content="Check Update"
+                                    Command="{Binding CheckUpdateCommand, Mode=OneTime}"/>
                             <Button Theme="{DynamicResource BorderlessButton}"
-                                    Content="Source Code" />
+                                    Content="Source Code"
+                                    CommandParameter="https://github.com/MDModsDev/MuseDashModTools" />
                             <Button Theme="{DynamicResource BorderlessButton}"
-                                    Content="Crowdin Translate" />
+                                    Content="Crowdin Translate"
+                                    CommandParameter="https://crowdin.com/project/musedashmodtools" />
                             <Button Theme="{DynamicResource BorderlessButton}"
-                                    Content="MDMC Website" />
+                                    Content="MDMC Website"
+                                    CommandParameter="https://mdmc.moe/" />
                             <Button Theme="{DynamicResource BorderlessButton}"
-                                    Content="MDMC Discord" />
+                                    Content="MDMC Discord"
+                                    CommandParameter="https://discord.gg/mdmc" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
