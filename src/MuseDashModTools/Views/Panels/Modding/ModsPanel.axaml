@@ -68,7 +68,8 @@
                                     <StackPanel Height="60"
                                                 Margin="8,5"
                                                 Spacing="5">
-                                        <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}">
+                                        <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
+                                                   Text="{Binding Name, Mode=OneWay}">
                                             <TextBlock.Styles>
                                                 <Style Selector="TextBlock.Active">
                                                     <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
@@ -92,15 +93,16 @@
                                                    Theme="{StaticResource TagLabel}" />
 
                                             <!--  Modified  -->
-                                            <Label Classes="Ghost Red"
+                                            <Label Classes="Ghost Orange"
                                                    Content="Modified"
                                                    IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
                                                    Theme="{StaticResource TagLabel}" />
 
                                             <!--  Update Arrow  -->
-                                            <StackPanel IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
-                                                        Orientation="Horizontal"
-                                                        Spacing="8">
+                                            <StackPanel
+                                                IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
+                                                Orientation="Horizontal"
+                                                Spacing="8">
                                                 <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                                 <Label Classes="Ghost Green"
                                                        Content="{Binding Version, Mode=OneWay}"
@@ -218,7 +220,7 @@
                                    Margin="0,8">
                                 <StackPanel>
                                     <!--  Incompatible  -->
-                                    <Label Classes="Ghost Orange"
+                                    <Label Classes="Ghost Red"
                                            Content="Incompatible"
                                            IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
                                            Theme="{StaticResource TagLabel}" />
@@ -230,7 +232,7 @@
                                            Theme="{StaticResource TagLabel}" />
 
                                     <!--  Modified  -->
-                                    <Label Classes="Ghost Red"
+                                    <Label Classes="Ghost Orange"
                                            Content="Modified"
                                            IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
                                            Theme="{StaticResource TagLabel}" />
@@ -254,7 +256,8 @@
                                            Theme="{StaticResource TagLabel}" />
 
                                     <!--  Update Arrow  -->
-                                    <StackPanel IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                    <StackPanel
+                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                         <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                         <Label Classes="Ghost Green"
                                                Content="{Binding SelectedMod.Version, Mode=OneWay}"
