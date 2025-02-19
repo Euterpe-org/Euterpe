@@ -1,87 +1,66 @@
-﻿using System.Collections.ObjectModel;
-using Avalonia.Media.Imaging;
-
-namespace MuseDashModTools.ViewModels.Panels.Setting;
+﻿namespace MuseDashModTools.ViewModels.Panels.Setting;
 
 // ReSharper disable StringLiteralTypo
 public sealed partial class AboutPanelViewModel : ViewModelBase
 {
-    private static readonly Dictionary<string, ContributorInfo> Contributors = new()
+    public class ContributorGroup(string name, List<ContributorCardItem> contributors)
     {
-        ["lxy"] = new ContributorInfo(
-            "For planning and maintaining the project",
-            [
-                ("Bilibili", "https://space.bilibili.com/255895683"),
-                ("Github", "https://github.com/lxymahatma"),
-                ("Twitch", "https://www.twitch.tv/lxymahatma")
-            ]),
-
-        ["KARPED1EM"] = new ContributorInfo(
-            "", // TODO: write desc for KARPED1EM
-            [
-                ("Github", "https://github.com/KARPED1EM"),
-                ("Bilibili", "https://space.bilibili.com/312252452")
-            ]),
-
-        ["Balint"] = new ContributorInfo(
-            "For making the first version of the project",
-            [("Github", "https://github.com/Balint817")]
-        ),
-
-        ["Ultra Rabbit"] = new ContributorInfo(
-            "For rewriting the first version of the project",
-            [("Github", "https://github.com/TheBunnies")]
-        ),
-
-        ["Super Pig"] = new ContributorInfo(
-            "For redrawing the Muse Dash Mod Tools icon",
-            [("Bilibili", "https://space.bilibili.com/252615263")]
-        ),
-
-        ["Shiron_Lee"] = new ContributorInfo(),
-        ["Bigbeesushi"] = new ContributorInfo(),
-        ["MEMOLie"] = new ContributorInfo(),
-        ["Ronner"] = new ContributorInfo(),
-        ["taypexx"] = new ContributorInfo(),
-        ["MNight4"] = new ContributorInfo()
-    };
-
-    private static readonly (string GroupName, string[] Members)[] Groups =
-    [
-        (XAML_Developer, ["lxy", "KARPED1EM", "Balint", "Ultra Rabbit"]),
-        (XAML_Artist, ["Super Pig"]),
-        (XAML_ChineseTraditional, ["Shiron_Lee", "Bigbeesushi"]),
-        (XAML_Hungarian, ["Balint"]),
-        (XAML_Korean, ["MEMOLie"]),
-        (XAML_Russian, ["Ultra Rabbit", "Ronner", "taypexx"]),
-        (XAML_Spanish, ["MNight4"])
-    ];
-
-    public ObservableCollection<ContributorGroup> ContributorGroups => new(
-        Groups.Select(g => new ContributorGroup(
-            g.GroupName,
-            new ObservableCollection<ContributorCardItem>(
-                g.Members.Select(m => CreateCard(m, Contributors[m]))
-            )
-        ))
-    );
-
-    private ContributorCardItem CreateCard(string name, ContributorInfo info)
-    {
-        var links = info.Links?.Length > 0
-            ? new ObservableCollection<ContributorCardLinkItem>(
-                info.Links.Select(l => new ContributorCardLinkItem(l.Type, l.Url)))
-            : null;
-
-        var avatar = ResourceService.TryGetAppResource<Bitmap>(
-            $"avares://MuseDashModTools/Assets/Contributors/{name.Replace(' ', '_')}.webp");
-
-        return new ContributorCardItem(name, info.Description, avatar, links);
+        public string Name { get; } = name;
+        public List<ContributorCardItem> Contributors { get; } = contributors;
     }
 
-    private sealed record ContributorInfo(
-        string? Description = null,
-        (string Type, string Url)[]? Links = null);
+    public List<ContributorGroup> ContributorGroups { get; } =
+    [
+        // Core Team
+        new(XAML_Developer, [
+            new ContributorCardItem("lxy",
+                "For planning and maintaining the project",
+                links:
+                [
+                    ("Bilibili", "https://space.bilibili.com/255895683"),
+                    ("Github", "https://github.com/lxymahatma"),
+                    ("Twitch", "https://www.twitch.tv/lxymahatma")
+                ]),
+            new ContributorCardItem("KARPED1EM",
+                links:
+                [
+                    ("Github", "https://github.com/KARPED1EM"),
+                    ("Bilibili", "https://space.bilibili.com/312252452")
+                ]),
+            new ContributorCardItem("Balint",
+                "For making the first version of the project",
+                links: [("Github", "https://github.com/Balint817")]),
+            new ContributorCardItem("Ultra Rabbit",
+                "For rewriting the first version of the project",
+                links: [("Github", "https://github.com/TheBunnies")])
+        ]),
+        new(XAML_Artist, [
+            new ContributorCardItem("Super Pig",
+                "For redrawing the Muse Dash Mod Tools icon",
+                links: [("Bilibili", "https://space.bilibili.com/252615263")])
+        ]),
+        // Translators
+        new(XAML_ChineseTraditional, [
+            new ContributorCardItem("Shiron_Lee"),
+            new ContributorCardItem("Bigbeesushi")
+        ]),
+        new(XAML_Hungarian, [
+            new ContributorCardItem("Balint",
+                links: [("Github", "https://github.com/Balint817")])
+        ]),
+        new(XAML_Korean, [
+            new ContributorCardItem("MEMOLie")
+        ]),
+        new(XAML_Russian, [
+            new ContributorCardItem("Ultra Rabbit",
+                links: [("Github", "https://github.com/TheBunnies")]),
+            new ContributorCardItem("Ronner"),
+            new ContributorCardItem("taypexx")
+        ]),
+        new(XAML_Spanish, [
+            new ContributorCardItem("MNight4")
+        ])
+    ];
 
     [RelayCommand]
     private Task OpenUrl(string url) => PlatformService.OpenUriAsync(url);
@@ -104,5 +83,3 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
 
     #endregion Injections
 }
-
-public record ContributorGroup(string GroupName, ObservableCollection<ContributorCardItem> Contributors);

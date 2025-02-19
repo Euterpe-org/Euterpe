@@ -2,10 +2,10 @@
 
 namespace MuseDashModTools.Styles.TemplatedControls;
 
-public class ContributorProfileCard : TemplatedControl
+public class ContributorCardControl : TemplatedControl
 {
     public static readonly StyledProperty<ContributorCardItem> SourceProperty =
-        AvaloniaProperty.Register<ContributorProfileCard, ContributorCardItem>(nameof(Source));
+        AvaloniaProperty.Register<ContributorCardControl, ContributorCardItem>(nameof(Source));
 
     [Content]
     public ContributorCardItem Source
