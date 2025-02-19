@@ -1,0 +1,90 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="SplitButton.Success /template/ Button#PART_PrimaryButton">
+        <Setter Property="Width" Value="185" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform"
+                                               Duration="0:0:0.15"
+                                               Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="18,0,0,18">
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Padding="{TemplateBinding Padding}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+    </Style>
+
+    <Style Selector="SplitButton.Success /template/ Button#PART_PrimaryButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonHoverGradient}" />
+        <Setter Property="RenderTransform" Value="scale(1.01)" />
+    </Style>
+
+    <Style Selector="SplitButton.Success /template/ Button#PART_PrimaryButton:pressed">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonPressedGradient}" />
+        <Setter Property="RenderTransform" Value="scale(0.97)" />
+    </Style>
+
+    <Style Selector="SplitButton.Success /template/ Button#PART_SecondaryButton">
+        <Setter Property="Width" Value="45" />
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform"
+                                               Duration="0:0:0.15"
+                                               Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="0,18,18,0">
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Padding="{TemplateBinding Padding}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+    </Style>
+
+    <Style Selector="SplitButton.Success /template/ Button#PART_SecondaryButton:pointerover">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonHoverGradient}" />
+        <Setter Property="RenderTransform" Value="scale(1.01)" />
+    </Style>
+
+    <Style Selector="SplitButton.Success /template/ Button#PART_SecondaryButton:pressed">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonPressedGradient}" />
+        <Setter Property="RenderTransform" Value="scale(0.97)" />
+    </Style>
+
+    <Style Selector="SplitButton /template/ DockPanel">
+        <Setter Property="Width" Value="230" />
+    </Style>
+
+    <Style Selector="SplitButton /template/ Rectangle#SeparatorBorder">
+        <Setter Property="Width" Value="0" />
+    </Style>
+
+</Styles>
