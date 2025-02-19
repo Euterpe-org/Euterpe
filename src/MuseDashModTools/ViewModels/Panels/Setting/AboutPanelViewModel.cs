@@ -4,7 +4,7 @@ using Avalonia.Media.Imaging;
 namespace MuseDashModTools.ViewModels.Panels.Setting;
 
 // ReSharper disable StringLiteralTypo
-public sealed class AboutPanelViewModel : ViewModelBase
+public sealed partial class AboutPanelViewModel : ViewModelBase
 {
     private static readonly Dictionary<string, ContributorInfo> Contributors = new()
     {
@@ -83,10 +83,21 @@ public sealed class AboutPanelViewModel : ViewModelBase
         string? Description = null,
         (string Type, string Url)[]? Links = null);
 
+    [RelayCommand]
+    private Task OpenUrl(string url) => PlatformService.OpenUriAsync(url);
+
+    [RelayCommand]
+    private void CheckUpdate()
+    {
+    }
+
     #region Injections
 
     [UsedImplicitly]
     public IResourceService ResourceService { get; set; } = null!;
+
+    [UsedImplicitly]
+    public IPlatformService PlatformService { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger<ModsPanelViewModel> Logger { get; init; } = null!;
