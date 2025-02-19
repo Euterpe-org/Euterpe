@@ -78,6 +78,15 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Artist.
+        /// </summary>
+        public static string XAML_Artist {
+            get {
+                return ResourceManager.GetString("XAML_Artist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Always Ask.
         /// </summary>
         public static string XAML_AskType_Always {
@@ -276,6 +285,15 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chinese Traditional.
+        /// </summary>
+        public static string XAML_ChineseTraditional {
+            get {
+                return ResourceManager.GetString("XAML_ChineseTraditional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose Chart Folder.
         /// </summary>
         public static string XAML_ChooseChartPath {
@@ -308,6 +326,15 @@ namespace MuseDashModTools.Localization.XAML {
         public static string XAML_CustomDownloadSourceFormat {
             get {
                 return ResourceManager.GetString("XAML_CustomDownloadSourceFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Developer.
+        /// </summary>
+        public static string XAML_Developer {
+            get {
+                return ResourceManager.GetString("XAML_Developer", resourceCulture);
             }
         }
         
@@ -398,6 +425,15 @@ namespace MuseDashModTools.Localization.XAML {
         public static string XAML_HomePage {
             get {
                 return ResourceManager.GetString("XAML_HomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hungarian.
+        /// </summary>
+        public static string XAML_Hungarian {
+            get {
+                return ResourceManager.GetString("XAML_Hungarian", resourceCulture);
             }
         }
         
@@ -506,6 +542,15 @@ namespace MuseDashModTools.Localization.XAML {
         public static string XAML_Install_Mod {
             get {
                 return ResourceManager.GetString("XAML_Install_Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korean.
+        /// </summary>
+        public static string XAML_Korean {
+            get {
+                return ResourceManager.GetString("XAML_Korean", resourceCulture);
             }
         }
         
@@ -816,6 +861,15 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Russian.
+        /// </summary>
+        public static string XAML_Russian {
+            get {
+                return ResourceManager.GetString("XAML_Russian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Candyland.
         /// </summary>
         public static string XAML_Scene_Candyland {
@@ -938,6 +992,15 @@ namespace MuseDashModTools.Localization.XAML {
         public static string XAML_Setting_EnableDependency_Install {
             get {
                 return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spanish.
+        /// </summary>
+        public static string XAML_Spanish {
+            get {
+                return ResourceManager.GetString("XAML_Spanish", resourceCulture);
             }
         }
         
