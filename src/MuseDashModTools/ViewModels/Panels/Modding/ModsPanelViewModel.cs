@@ -73,6 +73,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     [RelayCommand]
     private void ReinstallMod()
     {
+        // TODO
     }
 
     [RelayCommand]
