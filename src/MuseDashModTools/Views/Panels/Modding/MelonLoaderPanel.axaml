@@ -18,6 +18,8 @@
                 HorizontalAlignment="Center"
                 Margin="0, 0, 0, 40"
                 Spacing="10">
+
+        <!-- Melon Loader Logo & Title -->
         <StackPanel Orientation="Horizontal"
                     Spacing="20">
             <Image Height="50"
@@ -34,6 +36,8 @@
         <Border Margin="30"
                 Theme="{DynamicResource CardBorder}">
             <StackPanel Orientation="Vertical">
+
+                <!-- Current Version -->
                 <!-- TODO: Change install button text depends on status -->
                 <TextBlock HorizontalAlignment="Center"
                            Margin="5"
@@ -42,11 +46,15 @@
                            Text="Installed ">
                     <Label Classes="Ghost Green" Theme="{StaticResource TagLabel}">v0.6.1</Label>
                 </TextBlock>
+
+                <!-- Update Status -->
                 <!-- TODO: Change text depends on status -->
                 <TextBlock HorizontalAlignment="Center"
                            Foreground="LimeGreen"
                            FontSize="16"
                            Text="You're up to date" />
+
+                <!-- Buttons -->
                 <StackPanel Margin="20, 30, 20, 10"
                             Orientation="Horizontal"
                             Spacing="30"
@@ -60,6 +68,7 @@
                             Command="{Binding UninstallMelonLoaderCommand, Mode=OneTime}"
                             Content="Uninstall" />
                 </StackPanel>
+
             </StackPanel>
         </Border>
     </StackPanel>
