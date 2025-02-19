@@ -14,9 +14,7 @@
     <StyleInclude Source="/ExtendControls/NaviPanelListControl.axaml" />
 
     <!--  Templated Controls  -->
-    <StyleInclude Source="/TemplatedControls/Developer.axaml" />
     <StyleInclude Source="/TemplatedControls/Difficulty.axaml" />
-    <StyleInclude Source="/TemplatedControls/Translator.axaml" />
     <StyleInclude Source="/TemplatedControls/NaviButtonsControl.axaml" />
     <StyleInclude Source="/TemplatedControls/ContributorCardControl.axaml" />
 </Styles>
