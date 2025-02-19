@@ -2,8 +2,6 @@
 
 public class ContributorCardItem
 {
-    public readonly record struct Link(string Name, string Url);
-
     public string Name { get; init; }
     public string? Description { get; init; }
     public string? AvatarPath { get; init; }
@@ -16,4 +14,6 @@ public class ContributorCardItem
         AvatarPath = avatarPath ?? $"avares://MuseDashModTools/Assets/Contributors/{name.Replace(' ', '_')}.webp";
         Links = links?.Select(x => new Link(x.Item1, x.Item2)).ToList();
     }
+
+    public readonly record struct Link(string Name, string Url);
 }

@@ -3,12 +3,6 @@
 // ReSharper disable StringLiteralTypo
 public sealed partial class AboutPanelViewModel : ViewModelBase
 {
-    public class ContributorGroup(string name, List<ContributorCardItem> contributors)
-    {
-        public string Name { get; } = name;
-        public List<ContributorCardItem> Contributors { get; } = contributors;
-    }
-
     public List<ContributorGroup> ContributorGroups { get; } =
     [
         // Core Team
@@ -70,16 +64,16 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
     {
     }
 
+    public class ContributorGroup(string name, List<ContributorCardItem> contributors)
+    {
+        public string Name { get; } = name;
+        public List<ContributorCardItem> Contributors { get; } = contributors;
+    }
+
     #region Injections
 
     [UsedImplicitly]
-    public IResourceService ResourceService { get; set; } = null!;
-
-    [UsedImplicitly]
     public IPlatformService PlatformService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public ILogger<ModsPanelViewModel> Logger { get; init; } = null!;
 
     #endregion Injections
 }

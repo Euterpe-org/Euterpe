@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <LinearGradientBrush x:Key="PrimaryButtonGradient" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#54a9ff" />
+        <GradientStop Offset="1" Color="#7fc1ff" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PrimaryButtonHoverGradient" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#7fc1ff" />
+        <GradientStop Offset="1" Color="#a1d4ff" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PrimaryButtonPressedGradient" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#4096ff" />
+        <GradientStop Offset="1" Color="#54a9ff" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SecondaryButtonGradient" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#4096ff" />
+        <GradientStop Offset="1" Color="#54a9ff" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SecondaryButtonHoverGradient" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#54a9ff" />
+        <GradientStop Offset="1" Color="#7fc1ff" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SecondaryButtonPressedGradient" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Offset="0" Color="#2b7ad2" />
+        <GradientStop Offset="1" Color="#4096ff" />
+    </LinearGradientBrush>
+
+</ResourceDictionary>

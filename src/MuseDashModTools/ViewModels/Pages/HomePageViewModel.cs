@@ -26,11 +26,13 @@ public sealed partial class HomePageViewModel : ViewModelBase
     [RelayCommand]
     private void LaunchModdedGame()
     {
+        // TODO
     }
 
     [RelayCommand]
     private void LaunchVanillaGame()
     {
+        // TODO
     }
 
     #region Injections
