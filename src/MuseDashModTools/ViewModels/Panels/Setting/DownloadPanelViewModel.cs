@@ -6,12 +6,13 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [
         XAML_DownloadSource_Github,
         XAML_DownloadSource_GithubMirror,
-        XAML_DownloadSource_Custom,
+        XAML_DownloadSource_Custom
     ];
+
     public static string[] UpdateSources { get; } =
     [
         XAML_UpdateSources_GithubAPI,
-        XAML_UpdateSources_GithubRSS,
+        XAML_UpdateSources_GithubRSS
     ];
 
     [ObservableProperty]

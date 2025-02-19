@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.ViewModels.Panels.Setting;
 
-public sealed partial class ExperiencePanelViewModel : ViewModelBase
+public sealed class ExperiencePanelViewModel : ViewModelBase
 {
     #region Injections
 
