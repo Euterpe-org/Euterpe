@@ -34,6 +34,7 @@
         <Border Margin="30"
                 Theme="{DynamicResource CardBorder}">
             <StackPanel Orientation="Vertical">
+                <!-- TODO: Change install button text depends on status -->
                 <TextBlock HorizontalAlignment="Center"
                            Margin="5"
                            Foreground="Gainsboro"
@@ -41,6 +42,7 @@
                            Text="Installed ">
                     <Label Classes="Ghost Green" Theme="{StaticResource TagLabel}">v0.6.1</Label>
                 </TextBlock>
+                <!-- TODO: Change text depends on status -->
                 <TextBlock HorizontalAlignment="Center"
                            Foreground="LimeGreen"
                            FontSize="16"
