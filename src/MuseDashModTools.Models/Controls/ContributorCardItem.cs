@@ -1,12 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using Avalonia.Media.Imaging;
+﻿namespace MuseDashModTools.Models.Controls;
 
-namespace MuseDashModTools.Models.Controls;
-
-public sealed class ContributorCardItem(string name, string? description = null, Bitmap? avatar = null, ObservableCollection<ContributorCardLinkItem>? links = null)
+public class ContributorCardItem
 {
-    public string Name { get; } = name;
-    public string? Description { get; init; } = description;
-    public Bitmap? Avatar { get; init; } = avatar;
-    public ObservableCollection<ContributorCardLinkItem>? Links { get; init; } = links;
+    public readonly record struct Link(string Name, string Url);
+
+    public string Name { get; init; }
+    public string? Description { get; init; }
+    public string? AvatarPath { get; init; }
+    public List<Link>? Links { get; init; }
+
+    public ContributorCardItem(string name, string? description = null, string? avatarPath = null, List<(string, string)>? links = null)
+    {
+        Name = name;
+        Description = description;
+        AvatarPath = avatarPath ?? $"avares://MuseDashModTools/Assets/Contributors/{name.Replace(' ', '_')}.webp";
+        Links = links?.Select(x => new Link(x.Item1, x.Item2)).ToList();
+    }
 }

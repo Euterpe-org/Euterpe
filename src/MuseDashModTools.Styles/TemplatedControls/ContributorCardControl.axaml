@@ -1,36 +1,31 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-        xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models">
+        xmlns:controls="using:MuseDashModTools.Models.Controls">
     <Design.PreviewWith>
-        <mdmt:ContributorProfileCard />
+        <mdmt:ContributorCardControl />
     </Design.PreviewWith>
 
     <Style Selector="ContentPresenter">
         <Setter Property="CornerRadius" Value="8" />
     </Style>
 
-    <Style Selector="mdmt|ContributorProfileCard">
+    <Style Selector="mdmt|ContributorCardControl">
         <Setter Property="Width" Value="320" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Border Width="320"
-                        Theme="{DynamicResource CardBorder}">
+                <Border Width="320" Theme="{DynamicResource CardBorder}">
                     <Expander>
                         <Expander.Header>
-                            <StackPanel Orientation="Horizontal"
-                                        Spacing="10">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
 
-                                <Border Width="64"
-                                        Height="64">
+                                <!-- Avatar -->
+                                <Border Width="64" Height="64">
                                     <Image Stretch="UniformToFill"
-                                           Source="avares://MuseDashModTools/Assets/Contributors/lxy.webp">
-                                           <!-- Source="{Binding Source.Avatar, Mode=OneTime}"> -->
-                                           <!-- TODO: Bind actual avatar -->
+                                           Source="{Binding Source.AvatarPath, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}">
+                                        <!-- TODO: Fix avatar binding -->
                                         <Image.Clip>
-                                            <EllipseGeometry RadiusX="32"
-                                                             RadiusY="32"
-                                                             Center="32,32"/>
+                                            <EllipseGeometry RadiusX="32" RadiusY="32" Center="32,32" />
                                         </Image.Clip>
                                     </Image>
                                 </Border>
@@ -39,9 +34,11 @@
                                             VerticalAlignment="Center"
                                             Orientation="Vertical"
                                             Spacing="3">
+                                    <!-- Name -->
                                     <TextBlock Text="{Binding Source.Name, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
                                                FontSize="16"
                                                FontWeight="SemiBold" />
+                                    <!-- Description -->
                                     <TextBlock Width="150"
                                                TextWrapping="Wrap"
                                                IsVisible="{Binding Source.Description, Converter={x:Static ObjectConverters.IsNotNull}, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
@@ -53,29 +50,27 @@
                         </Expander.Header>
 
                         <Panel>
+                            <!-- Links -->
                             <ItemsControl ItemsSource="{Binding Source.Links, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
                                           IsVisible="{Binding Source.Links, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel HorizontalAlignment="Center"
-                                                   Margin="0,8"/>
+                                        <WrapPanel HorizontalAlignment="Center" Margin="0,8" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
 
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate x:DataType="models:ContributorCardLinkItem">
-                                        <Button CommandParameter="{Binding Url, Mode=OneTime}"
-                                                Margin="4">
-                                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                                <PathIcon IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}"
-                                                          Data="{Binding Icon, Mode=OneTime}" />
-                                                <TextBlock Text="{Binding DisplayName, Mode=OneTime}" />
-                                            </StackPanel>
+                                    <DataTemplate x:DataType="controls:ContributorCardItem+Link">
+                                        <!-- TODO: Bind command for links -->
+                                        <Button Margin="4"
+                                                CommandParameter="{Binding Path=Url, Mode=OneTime}">
+                                            <TextBlock Text="{Binding Path=Name, Mode=OneTime}" />
                                         </Button>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
 
+                            <!-- Text When No Links -->
                             <TextBlock HorizontalAlignment="Center"
                                        Foreground="Gray"
                                        Text="No links available"

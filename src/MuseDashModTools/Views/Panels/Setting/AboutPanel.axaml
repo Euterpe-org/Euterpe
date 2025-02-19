@@ -27,10 +27,13 @@
     <ScrollViewer>
         <DockPanel Margin="20">
 
+            <!-- Header -->
             <StackPanel DockPanel.Dock="Top"
                         HorizontalAlignment="Left"
                         Orientation="Horizontal"
                         Spacing="20">
+
+                <!-- LOGO -->
                 <Image Source="/Assets/Melon.webp"
                        Height="120"
                        RenderOptions.BitmapInterpolationMode="HighQuality"
@@ -41,14 +44,14 @@
                                 <Animation Duration="0:0:0.3"
                                            FillMode="Forward">
                                     <KeyFrame Cue="0%">
-                                        <Setter Property="ScaleTransform.ScaleX" Value="0.8"/>
-                                        <Setter Property="ScaleTransform.ScaleY" Value="0.8"/>
-                                        <Setter Property="Opacity" Value="0"/>
+                                        <Setter Property="ScaleTransform.ScaleX" Value="0.8" />
+                                        <Setter Property="ScaleTransform.ScaleY" Value="0.8" />
+                                        <Setter Property="Opacity" Value="0" />
                                     </KeyFrame>
                                     <KeyFrame Cue="100%">
-                                        <Setter Property="ScaleTransform.ScaleX" Value="1"/>
-                                        <Setter Property="ScaleTransform.ScaleY" Value="1"/>
-                                        <Setter Property="Opacity" Value="1"/>
+                                        <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                                        <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                                        <Setter Property="Opacity" Value="1" />
                                     </KeyFrame>
                                 </Animation>
                             </Style.Animations>
@@ -56,11 +59,12 @@
                     </Image.Styles>
                 </Image>
 
+                <!-- Title & Version & Copyright -->
                 <StackPanel VerticalAlignment="Center" Spacing="3">
                     <TextBlock Text="Muse Dash Mod Tools"
                                Classes="H1"
                                Theme="{StaticResource TitleTextBlock}"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center" />
                     <StackPanel Orientation="Horizontal"
                                 Spacing="10">
                         <Label Classes="Blue"
@@ -68,19 +72,20 @@
                                Content="{x:Static constants:BuildInfo.DisplayVersion}"
                                Theme="{StaticResource TagLabel}" />
                         <TextBlock Foreground="Gray"
-                                   Text="{x:Static constants:BuildInfo.CopyRight}"></TextBlock>
+                                   Text="{x:Static constants:BuildInfo.CopyRight}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
 
+            <!-- Others -->
             <StackPanel DockPanel.Dock="Bottom"
-                   Margin="10, 25, 37, 0"
-                   Orientation="Vertical"
-                   Spacing="10">
+                        Margin="10, 25, 37, 0"
+                        Orientation="Vertical"
+                        Spacing="10">
 
+                <!-- About -->
                 <Border Theme="{DynamicResource CardBorder}">
                     <StackPanel Orientation="Vertical" Spacing="20">
-
                         <TextBlock Margin="13, 3, 13, 0"
                                    Foreground="LightSlateGray">
                             <TextBlock.Inlines>
@@ -92,7 +97,8 @@
                                            Cursor="Hand">
                                         <Interaction.Behaviors>
                                             <EventTriggerBehavior EventName="Tapped">
-                                                <InvokeCommandAction CommandParameter="https://github.com/MDModsDev/MuseDashModTools?tab=MIT-1-ov-file#MIT-1-ov-file" />
+                                                <InvokeCommandAction
+                                                    CommandParameter="https://github.com/MDModsDev/MuseDashModTools?tab=MIT-1-ov-file#MIT-1-ov-file" />
                                             </EventTriggerBehavior>
                                         </Interaction.Behaviors>
                                     </Image>
@@ -128,10 +134,11 @@
                             </TextBlock.Inlines>
                         </TextBlock>
 
+                        <!-- Links -->
                         <StackPanel Orientation="Horizontal" Spacing="15">
                             <Button Theme="{DynamicResource BorderlessButton}"
                                     Content="Check Update"
-                                    Command="{Binding CheckUpdateCommand, Mode=OneTime}"/>
+                                    Command="{Binding CheckUpdateCommand, Mode=OneTime}" />
                             <Button Theme="{DynamicResource BorderlessButton}"
                                     Content="Source Code"
                                     CommandParameter="https://github.com/MDModsDev/MuseDashModTools" />
@@ -148,13 +155,14 @@
                     </StackPanel>
                 </Border>
 
-                <ItemsControl VerticalAlignment="Stretch" ItemsSource="{Binding ContributorGroups, Mode=OneTime}">
+                <!-- Contributor Cards -->
+                <ItemsControl ItemsSource="{Binding ContributorGroups, Mode=OneTime}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0 16">
-                                <TextBlock Text="{Binding GroupName, Mode=OneTime}"
+                                <TextBlock Text="{Binding Name, Mode=OneTime}"
                                            Theme="{StaticResource TitleTextBlock}"
-                                           Classes="H4"/>
+                                           Classes="H4" />
                                 <ItemsControl ItemsSource="{Binding Contributors, Mode=OneTime}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -163,9 +171,9 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <mdmt:ContributorProfileCard
+                                            <mdmt:ContributorCardControl
                                                 Source="{Binding ., Mode=OneTime}"
-                                                Margin="8"/>
+                                                Margin="8" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

@@ -18,5 +18,5 @@
     <StyleInclude Source="/TemplatedControls/Difficulty.axaml" />
     <StyleInclude Source="/TemplatedControls/Translator.axaml" />
     <StyleInclude Source="/TemplatedControls/NaviButtonsControl.axaml" />
-    <StyleInclude Source="/TemplatedControls/ContributorProfileCard.axaml" />
+    <StyleInclude Source="/TemplatedControls/ContributorCardControl.axaml" />
 </Styles>
