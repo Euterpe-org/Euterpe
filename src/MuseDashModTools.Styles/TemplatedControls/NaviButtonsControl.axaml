@@ -11,14 +11,17 @@
             <ControlTemplate>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <ItemsControl ItemsSource="{TemplateBinding Source, Mode=OneWay}">
+
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
+
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="models:DropDownButtonItem">
                                 <DropDownButton Content="{Binding Text, Mode=OneTime}" Theme="{DynamicResource BorderlessDropDownButton}">
+
                                     <DropDownButton.Styles>
                                         <Style x:DataType="models:DropDownMenuItem" Selector="MenuItem">
                                             <Setter Property="Header" Value="{Binding Text, Mode=OneTime}" />
@@ -26,6 +29,7 @@
                                             <Setter Property="CommandParameter" Value="{Binding CommandParameter, Mode=OneTime}" />
                                         </Style>
                                     </DropDownButton.Styles>
+
                                     <DropDownButton.Flyout>
                                         <MenuFlyout ItemsSource="{Binding MenuItems, Mode=OneTime}" Placement="BottomEdgeAlignedRight">
                                             <MenuFlyout.ItemTemplate>
@@ -35,9 +39,11 @@
                                             </MenuFlyout.ItemTemplate>
                                         </MenuFlyout>
                                     </DropDownButton.Flyout>
+
                                 </DropDownButton>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
+
                     </ItemsControl>
                 </StackPanel>
             </ControlTemplate>

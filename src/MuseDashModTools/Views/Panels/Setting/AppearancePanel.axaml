@@ -21,6 +21,7 @@
                 MinWidth="600">
 
         <!-- Language -->
+        <!-- TODO: Implement languages switch -->
         <StackPanel Orientation="Vertical"
                     Spacing="15">
             <TextBlock Classes="H4"

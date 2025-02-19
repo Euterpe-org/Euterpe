@@ -10,6 +10,7 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <ListBox ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}" SelectedItem="{TemplateBinding SelectedItem, Mode=TwoWay}">
+
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
                             <Setter Property="CornerRadius" Value="4" />
@@ -21,16 +22,19 @@
                             <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
                         </Style>
                     </ListBox.Styles>
+
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
+
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="models:NavItem">
                             <Label Content="{Binding DisplayName, Mode=OneTime}" Theme="{StaticResource BorderlessButton}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+
                 </ListBox>
             </ControlTemplate>
         </Setter>

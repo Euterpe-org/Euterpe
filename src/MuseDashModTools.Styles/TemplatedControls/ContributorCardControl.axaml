@@ -34,10 +34,12 @@
                                             VerticalAlignment="Center"
                                             Orientation="Vertical"
                                             Spacing="3">
+
                                     <!-- Name -->
                                     <TextBlock Text="{Binding Source.Name, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
                                                FontSize="16"
                                                FontWeight="SemiBold" />
+
                                     <!-- Description -->
                                     <TextBlock Width="150"
                                                TextWrapping="Wrap"
@@ -50,6 +52,7 @@
                         </Expander.Header>
 
                         <Panel>
+
                             <!-- Links -->
                             <ItemsControl ItemsSource="{Binding Source.Links, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
                                           IsVisible="{Binding Source.Links, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}">
@@ -75,6 +78,7 @@
                                        Foreground="Gray"
                                        Text="No links available"
                                        IsVisible="{Binding Source.Links, Converter={x:Static ObjectConverters.IsNull}, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}" />
+
                         </Panel>
                     </Expander>
                 </Border>
