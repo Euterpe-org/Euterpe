@@ -14,8 +14,18 @@ public sealed partial class ModDto : ObservableObject
 
     // Local Information
     public string LocalVersion { get; set; } = string.Empty;
-    public ModState State { get; set; }
-    public string? FileNameWithoutExtension { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsInstallable))]
+    [NotifyPropertyChangedFor(nameof(IsReinstallable))]
+    public partial ModState State { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsLocal))]
+    [NotifyPropertyChangedFor(nameof(IsInstallable))]
+    [NotifyPropertyChangedFor(nameof(IsReinstallable))]
+    public partial string? FileNameWithoutExtension { get; set; }
+
     public string LocalFileName => FileNameWithoutExtension + (IsDisabled ? ".disabled" : ".dll");
     public string ReversedFileName => FileNameWithoutExtension + (IsDisabled ? ".dll" : ".disabled");
 
@@ -23,14 +33,9 @@ public sealed partial class ModDto : ObservableObject
     [ObservableProperty]
     public partial bool IsDisabled { get; set; } = true;
 
-    [ObservableProperty]
-    public partial bool IsLocal { get; set; }
-
-    [ObservableProperty]
-    public partial bool IsInstallable { get; set; }
-
-    [ObservableProperty]
-    public partial bool IsReinstallable { get; set; }
+    public bool IsLocal => FileNameWithoutExtension is not null;
+    public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
+    public bool IsReinstallable => IsLocal && State is not (ModState.Outdated or ModState.Normal or ModState.Newer);
 
     [ObservableProperty]
     public partial bool IsValidConfigFile { get; set; }

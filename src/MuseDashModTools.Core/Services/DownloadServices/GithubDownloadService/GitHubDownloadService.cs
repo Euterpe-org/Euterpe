@@ -44,7 +44,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 
         if (mod.FileName.IsNullOrEmpty())
         {
-            Logger.ZLogError($"Mod {mod.Name} download link is empty");
+            Logger.ZLogError($"Mod {mod.Name} does not have file name");
             return false;
         }
 

@@ -22,7 +22,9 @@ internal sealed partial class ModManageService : IModManageService
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
     }
 
-    public Task UninstallModAsync(ModDto mod) => throw new NotImplementedException();
+    public async Task UninstallModAsync(ModDto mod) =>
+        // File.Delete(Path.Join(Config.ModsFolder, mod.LocalFileName));
+        mod.RemoveLocalInfo();
 
     public Task ToggleModAsync(ModDto mod) => mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
 

@@ -101,7 +101,6 @@ internal sealed partial class LocalService : ILocalService
         {
             FileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath),
             IsDisabled = Path.GetExtension(filePath) == ".disabled",
-            IsLocal = true
         };
 
         var module = ModuleDefinition.FromFile(filePath);
