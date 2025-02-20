@@ -23,17 +23,22 @@ public sealed partial class ModDto : ObservableObject
     [ObservableProperty]
     public partial bool IsDisabled { get; set; } = true;
 
-    public bool IsLocal => FileNameWithoutExtension is not null;
-    public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
-    public bool IsReinstallable => IsLocal && State is not (ModState.Normal or ModState.Newer);
-    public string? DuplicatedModPaths { get; set; }
+    [ObservableProperty]
+    public partial bool IsLocal { get; set; }
 
-    public bool IsValidConfigFile { get; set; }
+    [ObservableProperty]
+    public partial bool IsInstallable { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsReinstallable { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsValidConfigFile { get; set; }
+
+    public string[] DuplicatedModPaths { get; set; } = [];
 
     // GitHub Repo
     public string RepoPageUrl => GitHubBaseUrl + Repository;
-
-    public bool IsValidRepository => !RepoPageUrl.IsNullOrEmpty() && Uri.TryCreate(RepoPageUrl, UriKind.Absolute, out _);
 
     // Dependencies
     public bool HasDependency => ModDependencies.Length + LibDependencies.Length > 0;
