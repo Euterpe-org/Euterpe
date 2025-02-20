@@ -80,7 +80,14 @@ internal sealed partial class ModManageService
             Path.Combine(Config.ModsFolder, mod.ReversedFileName));
 
         await CheckLibDependenciesAsync(mod).ConfigureAwait(false);
+        await EnableModDependenciesAsync(mod).ConfigureAwait(false);
 
+        Logger.ZLogInformation($"Change mod {mod.Name} state to enabled");
+        mod.IsDisabled = false;
+    }
+
+    private async Task EnableModDependenciesAsync(ModDto mod)
+    {
         var modDependencies = FindModDependencies(mod);
         foreach (var dependency in modDependencies)
         {
@@ -93,9 +100,6 @@ internal sealed partial class ModManageService
                 await InstallModAsync(dependency).ConfigureAwait(false);
             }
         }
-
-        Logger.ZLogInformation($"Change mod {mod.Name} state to enabled");
-        mod.IsDisabled = false;
     }
 
     private async Task DisableModAsync(ModDto mod)
@@ -103,6 +107,14 @@ internal sealed partial class ModManageService
         File.Move(Path.Combine(Config.ModsFolder, mod.LocalFileName),
             Path.Combine(Config.ModsFolder, mod.ReversedFileName));
 
+        await DisableModDependentsAsync(mod).ConfigureAwait(false);
+
+        Logger.ZLogInformation($"Change mod {mod.Name} state to disabled");
+        mod.IsDisabled = true;
+    }
+
+    private async Task DisableModDependentsAsync(ModDto mod)
+    {
         var modDependents = FindModDependents(mod);
         foreach (var dependent in modDependents)
         {
@@ -111,9 +123,6 @@ internal sealed partial class ModManageService
                 await DisableModAsync(dependent).ConfigureAwait(false);
             }
         }
-
-        Logger.ZLogInformation($"Change mod {mod.Name} state to disabled");
-        mod.IsDisabled = true;
     }
 
     #endregion Toggle Mod

@@ -2,18 +2,27 @@ namespace MuseDashModTools.Models;
 
 public sealed partial class ModDto : ObservableObject
 {
-    public ModDto RemoveLocalInfo()
+    public void RemoveLocalInfo()
     {
-        FileNameWithoutExtension = null;
         LocalVersion = string.Empty;
-        SHA256 = string.Empty;
-        return this;
+        State = ModState.Normal;
+        FileNameWithoutExtension = null;
+        IsDisabled = true;
+    }
+
+    public void AddLocalInfo()
+    {
+        LocalVersion = Version;
+        State = ModState.Normal;
+        FileNameWithoutExtension = FileName[..^4];
+        IsDisabled = false;
     }
 
     #region Dto Properties
 
     // Local Information
-    public string LocalVersion { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string LocalVersion { get; set; } = string.Empty;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsInstallable))]
