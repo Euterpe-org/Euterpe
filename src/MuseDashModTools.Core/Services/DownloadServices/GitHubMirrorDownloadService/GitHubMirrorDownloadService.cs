@@ -46,7 +46,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
         if (mod.FileName.IsNullOrEmpty())
         {
-            Logger.ZLogError($"Mod {mod.Name} download link is empty");
+            Logger.ZLogError($"Mod {mod.Name} does not have file name");
             return false;
         }
 
