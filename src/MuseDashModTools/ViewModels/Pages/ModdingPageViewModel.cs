@@ -29,7 +29,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     }
 
     [RelayCommand]
-    private async Task OpenFolder(string folderPath) => await PlatformService.OpenFolderAsync(folderPath);
+    private Task OpenFolderAsync(string folderPath) => PlatformService.OpenFolderAsync(folderPath);
 
     #region Injections
 
