@@ -16,12 +16,6 @@
         <pages:AboutPanelViewModel />
     </Design.DataContext>
 
-    <UserControl.Styles>
-        <Style Selector="InvokeCommandAction">
-            <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
-        </Style>
-    </UserControl.Styles>
-
     <ScrollViewer>
         <DockPanel Margin="20">
 
@@ -82,6 +76,16 @@
                 <Border Theme="{DynamicResource CardBorder}">
                     <StackPanel Orientation="Vertical" Spacing="20">
                         <TextBlock Margin="13,3,13,0" Foreground="LightSlateGray">
+
+                            <TextBlock.Styles>
+                                <Style Selector="Image &gt; EventTriggerBehavior">
+                                    <Setter Property="EventName" Value="Tapped" />
+                                </Style>
+                                <Style Selector="EventTriggerBehavior &gt; InvokeCommandAction">
+                                    <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                                </Style>
+                            </TextBlock.Styles>
+
                             <TextBlock.Inlines>
                                 <Run Text="Muse Dash Mod Tools is licensed under the" />
                                 <InlineUIContainer>
@@ -90,8 +94,8 @@
                                            Cursor="Hand"
                                            Source="/Assets/MIT_Logo.png">
                                         <Interaction.Behaviors>
-                                            <EventTriggerBehavior EventName="Tapped">
-                                                <InvokeCommandAction CommandParameter="https://github.com/MDModsDev/MuseDashModTools?tab=MIT-1-ov-file" />
+                                            <EventTriggerBehavior>
+                                                <InvokeCommandAction CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt" />
                                             </EventTriggerBehavior>
                                         </Interaction.Behaviors>
                                     </Image>
@@ -104,7 +108,7 @@
                                            Cursor="Hand"
                                            Source="/Assets/DotNet_Logo.png">
                                         <Interaction.Behaviors>
-                                            <EventTriggerBehavior EventName="Tapped">
+                                            <EventTriggerBehavior>
                                                 <InvokeCommandAction CommandParameter="https://dotnet.microsoft.com" />
                                             </EventTriggerBehavior>
                                         </Interaction.Behaviors>
@@ -117,7 +121,7 @@
                                            Cursor="Hand"
                                            Source="/Assets/Avalonia_Logo.png">
                                         <Interaction.Behaviors>
-                                            <EventTriggerBehavior EventName="Tapped">
+                                            <EventTriggerBehavior>
                                                 <InvokeCommandAction CommandParameter="https://avaloniaui.net" />
                                             </EventTriggerBehavior>
                                         </Interaction.Behaviors>
