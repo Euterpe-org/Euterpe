@@ -1,8 +1,8 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AboutPanel"
@@ -16,9 +16,6 @@
     </Design.DataContext>
 
     <UserControl.Styles>
-        <Style Selector="Button">
-            <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
-        </Style>
         <Style Selector="InvokeCommandAction">
             <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
         </Style>
@@ -27,22 +24,21 @@
     <ScrollViewer>
         <DockPanel Margin="20">
 
-            <!-- Header -->
+            <!--  Header  -->
             <StackPanel DockPanel.Dock="Top"
                         HorizontalAlignment="Left"
                         Orientation="Horizontal"
                         Spacing="20">
 
-                <!-- LOGO -->
-                <Image Source="/Assets/Melon.webp"
-                       Height="120"
+                <!--  LOGO  -->
+                <Image Height="120"
+                       Classes="animate-scale"
                        RenderOptions.BitmapInterpolationMode="HighQuality"
-                       Classes="animate-scale">
+                       Source="/Assets/Melon.webp">
                     <Image.Styles>
                         <Style Selector="Image.animate-scale">
                             <Style.Animations>
-                                <Animation Duration="0:0:0.3"
-                                           FillMode="Forward">
+                                <Animation Duration="0:0:0.3" FillMode="Forward">
                                     <KeyFrame Cue="0%">
                                         <Setter Property="ScaleTransform.ScaleX" Value="0.8" />
                                         <Setter Property="ScaleTransform.ScaleY" Value="0.8" />
@@ -59,46 +55,42 @@
                     </Image.Styles>
                 </Image>
 
-                <!-- Title & Version & Copyright -->
+                <!--  Title & Version & Copyright  -->
                 <StackPanel VerticalAlignment="Center" Spacing="3">
-                    <TextBlock Text="Muse Dash Mod Tools"
+                    <TextBlock HorizontalAlignment="Center"
                                Classes="H1"
-                               Theme="{StaticResource TitleTextBlock}"
-                               HorizontalAlignment="Center" />
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="10">
-                        <Label Classes="Blue"
-                               Height="10"
+                               Text="Muse Dash Mod Tools"
+                               Theme="{StaticResource TitleTextBlock}" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Label Height="10"
+                               Classes="Blue"
                                Content="{x:Static constants:BuildInfo.DisplayVersion}"
                                Theme="{StaticResource TagLabel}" />
-                        <TextBlock Foreground="Gray"
-                                   Text="{x:Static constants:BuildInfo.CopyRight}" />
+                        <TextBlock Foreground="Gray" Text="{x:Static constants:BuildInfo.CopyRight}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
 
-            <!-- Others -->
+            <!--  Others  -->
             <StackPanel DockPanel.Dock="Bottom"
-                        Margin="10, 25, 37, 0"
+                        Margin="10,25,37,0"
                         Orientation="Vertical"
                         Spacing="10">
 
-                <!-- About -->
+                <!--  About  -->
                 <Border Theme="{DynamicResource CardBorder}">
                     <StackPanel Orientation="Vertical" Spacing="20">
-                        <TextBlock Margin="13, 3, 13, 0"
-                                   Foreground="LightSlateGray">
+                        <TextBlock Margin="13,3,13,0" Foreground="LightSlateGray">
                             <TextBlock.Inlines>
                                 <Run Text="Muse Dash Mod Tools is licensed under the" />
                                 <InlineUIContainer>
                                     <Image Height="13"
                                            Margin="3,0"
-                                           Source="/Assets/MIT_Logo.png"
-                                           Cursor="Hand">
+                                           Cursor="Hand"
+                                           Source="/Assets/MIT_Logo.png">
                                         <Interaction.Behaviors>
                                             <EventTriggerBehavior EventName="Tapped">
-                                                <InvokeCommandAction
-                                                    CommandParameter="https://github.com/MDModsDev/MuseDashModTools?tab=MIT-1-ov-file#MIT-1-ov-file" />
+                                                <InvokeCommandAction CommandParameter="https://github.com/MDModsDev/MuseDashModTools?tab=MIT-1-ov-file" />
                                             </EventTriggerBehavior>
                                         </Interaction.Behaviors>
                                     </Image>
@@ -108,8 +100,8 @@
                                 <InlineUIContainer>
                                     <Image Height="18"
                                            Margin="3,0"
-                                           Source="/Assets/DotNet_Logo.png"
-                                           Cursor="Hand">
+                                           Cursor="Hand"
+                                           Source="/Assets/DotNet_Logo.png">
                                         <Interaction.Behaviors>
                                             <EventTriggerBehavior EventName="Tapped">
                                                 <InvokeCommandAction CommandParameter="https://dotnet.microsoft.com" />
@@ -121,8 +113,8 @@
                                 <InlineUIContainer>
                                     <Image Height="18"
                                            Margin="3,0"
-                                           Source="/Assets/Avalonia_Logo.png"
-                                           Cursor="Hand">
+                                           Cursor="Hand"
+                                           Source="/Assets/Avalonia_Logo.png">
                                         <Interaction.Behaviors>
                                             <EventTriggerBehavior EventName="Tapped">
                                                 <InvokeCommandAction CommandParameter="https://avaloniaui.net" />
@@ -134,35 +126,46 @@
                             </TextBlock.Inlines>
                         </TextBlock>
 
-                        <!-- Links -->
+                        <!--  Links  -->
                         <StackPanel Orientation="Horizontal" Spacing="15">
-                            <Button Theme="{DynamicResource BorderlessButton}"
+                            <StackPanel.Styles>
+                                <Style Selector="Button">
+                                    <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                                </Style>
+                            </StackPanel.Styles>
+
+                            <Button Command="{Binding CheckUpdateCommand, Mode=OneTime}"
                                     Content="Check Update"
-                                    Command="{Binding CheckUpdateCommand, Mode=OneTime}" />
-                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Theme="{DynamicResource BorderlessButton}" />
+
+                            <Button CommandParameter="https://github.com/MDModsDev/MuseDashModTools"
                                     Content="Source Code"
-                                    CommandParameter="https://github.com/MDModsDev/MuseDashModTools" />
-                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Theme="{DynamicResource BorderlessButton}" />
+
+                            <Button CommandParameter="https://crowdin.com/project/musedashmodtools"
                                     Content="Crowdin Translate"
-                                    CommandParameter="https://crowdin.com/project/musedashmodtools" />
-                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Theme="{DynamicResource BorderlessButton}" />
+
+                            <Button CommandParameter="https://mdmc.moe/"
                                     Content="MDMC Website"
-                                    CommandParameter="https://mdmc.moe/" />
-                            <Button Theme="{DynamicResource BorderlessButton}"
+                                    Theme="{DynamicResource BorderlessButton}" />
+
+                            <Button CommandParameter="https://discord.gg/mdmc"
                                     Content="MDMC Discord"
-                                    CommandParameter="https://discord.gg/mdmc" />
+                                    Theme="{DynamicResource BorderlessButton}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
 
-                <!-- Contributor Cards -->
+                <!--  Contributor Cards  -->
                 <ItemsControl ItemsSource="{Binding ContributorGroups, Mode=OneTime}">
+
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0 16">
-                                <TextBlock Text="{Binding Name, Mode=OneTime}"
-                                           Theme="{StaticResource TitleTextBlock}"
-                                           Classes="H4" />
+                            <StackPanel Margin="0,16">
+                                <TextBlock Classes="H4"
+                                           Text="{Binding Name, Mode=OneTime}"
+                                           Theme="{StaticResource TitleTextBlock}" />
                                 <ItemsControl ItemsSource="{Binding Contributors, Mode=OneTime}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -171,9 +174,12 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <mdmt:ContributorCardControl
-                                                Source="{Binding ., Mode=OneTime}"
-                                                Margin="8" />
+                                            <mdmt:ContributorCardControl Margin="8"
+                                                                         Avatar="{Binding AvatarPath, Mode=OneTime}"
+                                                                         ButtonCommand="{Binding $parent[UserControl].((pages:AboutPanelViewModel)DataContext).OpenUrlCommand, Mode=OneTime, FallbackValue=null}"
+                                                                         ContributorDescription="{Binding Description, Mode=OneTime}"
+                                                                         ContributorName="{Binding Name, Mode=OneTime}"
+                                                                         Links="{Binding Links, Mode=OneTime}" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

@@ -57,9 +57,6 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
     ];
 
     [RelayCommand]
-    private Task OpenUrl(string url) => PlatformService.OpenUriAsync(url);
-
-    [RelayCommand]
     private void CheckUpdate()
     {
     }
@@ -69,11 +66,4 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         public string Name { get; } = name;
         public List<ContributorCardItem> Contributors { get; } = contributors;
     }
-
-    #region Injections
-
-    [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; } = null!;
-
-    #endregion Injections
 }

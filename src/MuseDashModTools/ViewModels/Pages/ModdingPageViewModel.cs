@@ -28,16 +28,10 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
         Logger.ZLogInformation($"ModdingPage Initialized");
     }
 
-    [RelayCommand]
-    private Task OpenFolderAsync(string folderPath) => PlatformService.OpenFolderAsync(folderPath);
-
     #region Injections
 
     [UsedImplicitly]
     public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
-
-    [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; } = null!;
 
     [UsedImplicitly]
     public NavigationService NavigationService { get; init; } = null!;

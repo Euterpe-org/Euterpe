@@ -62,28 +62,42 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private Task OpenConfigFile() => PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, SelectedMod.ConfigFile));
-
-    [RelayCommand]
-    private Task UpdateMod() => ModManageService.UpdateModAsync(SelectedMod);
-
-    [RelayCommand]
-    private Task InstallMod() => ModManageService.InstallModAsync(SelectedMod);
-
-    [RelayCommand]
-    private void ReinstallMod()
+    private Task OpenConfigFileAsync()
     {
-        // TODO
+        Logger.ZLogInformation($"Opening config file for mod: {SelectedMod.Name}");
+        return PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, SelectedMod.ConfigFile));
     }
 
     [RelayCommand]
-    private Task UninstallMod() => ModManageService.UninstallModAsync(SelectedMod);
+    private Task UpdateModAsync()
+    {
+        Logger.ZLogInformation($"Updating mod: {SelectedMod.Name} from version {SelectedMod.LocalVersion} to version {SelectedMod.Version}");
+        return ModManageService.UpdateModAsync(SelectedMod);
+    }
 
     [RelayCommand]
-    private Task OpenUrl(string url) => PlatformService.OpenUriAsync(url);
+    private Task InstallModAsync()
+    {
+        Logger.ZLogInformation($"Installing mod: {SelectedMod.Name}");
+        return ModManageService.InstallModAsync(SelectedMod);
+    }
 
     [RelayCommand]
-    private Task ToggleMod(ModDto mod) => ModManageService.ToggleModAsync(mod);
+    private async Task ReinstallModAsync() => Logger.ZLogInformation($"Reinstalling mod: {SelectedMod.Name}");
+
+    [RelayCommand]
+    private Task UninstallModAsync()
+    {
+        Logger.ZLogInformation($"Uninstalling mod: {SelectedMod.Name}");
+        return ModManageService.UninstallModAsync(SelectedMod);
+    }
+
+    [RelayCommand]
+    private Task ToggleModAsync(ModDto mod)
+    {
+        Logger.ZLogInformation($"Toggling mod: {mod.Name}");
+        return ModManageService.ToggleModAsync(mod);
+    }
 
     [UsedImplicitly]
     partial void OnSelectedModFilterIndexChanged(int value)
@@ -105,9 +119,6 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
 
     [UsedImplicitly]
     public IModManageService ModManageService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; } = null!;
 
     #endregion Injections
 }
