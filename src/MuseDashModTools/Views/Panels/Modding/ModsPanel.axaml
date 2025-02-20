@@ -229,8 +229,9 @@
                                 <Separator Classes="Vertical" />
 
                                 <!--  Mod Management Buttons  -->
+                                <!--  Update  -->
                                 <Button Classes="Primary"
-                                        Command="{Binding InstallModCommand, Mode=OneTime}"
+                                        Command="{Binding UpdateModCommand, Mode=OneTime}"
                                         IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                     <StackPanel Classes="ActionButtonsContainer">
                                         <PathIcon Height="15" Data="{StaticResource SemiIconRefresh}" />
@@ -238,14 +239,17 @@
                                     </StackPanel>
                                 </Button>
 
+                                <!--  Install  -->
                                 <Button Command="{Binding InstallModCommand, Mode=OneTime}"
                                         Content="Install"
                                         IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}" />
 
+                                <!--  Reinstall  -->
                                 <Button Command="{Binding ReinstallModCommand, Mode=OneTime}"
                                         Content="Reinstall"
                                         IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}" />
 
+                                <!--  Uninstall  -->
                                 <Button Classes="Danger"
                                         Command="{Binding UninstallModCommand, Mode=OneTime}"
                                         Content="Uninstall"
