@@ -63,7 +63,7 @@
                                 </ItemsControl.ItemsPanel>
 
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate x:DataType="controls:ContributorCardItem+Link">
+                                    <DataTemplate x:DataType="controls:ContributorLink">
                                         <Button Margin="4"
                                                 Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=mdmt:ContributorCardControl}, Mode=OneTime}"
                                                 CommandParameter="{Binding Url, Mode=OneTime}">
@@ -78,7 +78,6 @@
                                        Foreground="Gray"
                                        IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNull}, Mode=OneWay}"
                                        Text="No links available" />
-
                         </Panel>
                     </Expander>
                 </Border>

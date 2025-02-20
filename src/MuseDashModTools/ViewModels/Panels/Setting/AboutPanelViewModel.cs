@@ -3,67 +3,73 @@
 // ReSharper disable StringLiteralTypo
 public sealed partial class AboutPanelViewModel : ViewModelBase
 {
-    public List<ContributorGroup> ContributorGroups { get; } =
+    public ContributorGroup[] ContributorGroups { get; } =
     [
-        // Core Team
-        new(XAML_Developer, [
+        // Developer Team
+        new(XAML_Contributor_Developer, [
             new ContributorCardItem("lxy",
-                "For planning and maintaining the project",
-                links:
+                "Planning and maintaining the project",
                 [
-                    ("Bilibili", "https://space.bilibili.com/255895683"),
-                    ("Github", "https://github.com/lxymahatma"),
-                    ("Twitch", "https://www.twitch.tv/lxymahatma")
+                    ("GitHub", "https://github.com/lxymahatma"),
+                    ("Bilibili", "https://space.bilibili.com/255895683")
                 ]),
             new ContributorCardItem("KARPED1EM",
-                links:
+                "Remaking UI",
                 [
-                    ("Github", "https://github.com/KARPED1EM"),
+                    ("GitHub", "https://github.com/KARPED1EM"),
                     ("Bilibili", "https://space.bilibili.com/312252452")
                 ]),
             new ContributorCardItem("Balint",
-                "For making the first version of the project",
-                links: [("Github", "https://github.com/Balint817")]),
+                "Making the first version of the project",
+                [("GitHub", "https://github.com/Balint817")]),
             new ContributorCardItem("Ultra Rabbit",
-                "For rewriting the first version of the project",
-                links: [("Github", "https://github.com/TheBunnies")])
+                "Rewriting the first version of the project",
+                [("GitHub", "https://github.com/TheBunnies")])
         ]),
-        new(XAML_Artist, [
+
+        // Artist
+        new(XAML_Contributor_Artist, [
             new ContributorCardItem("Super Pig",
-                "For redrawing the Muse Dash Mod Tools icon",
-                links: [("Bilibili", "https://space.bilibili.com/252615263")])
+                "Drawing the MDMT application icon",
+                [("Bilibili", "https://space.bilibili.com/252615263")]),
+            new ContributorCardItem("aquawtf",
+                "Drawing the MDMT icon"),
+            new ContributorCardItem("Bigbeesushi",
+                "Drawing the MDMT background",
+                [("YouTube", "https://www.youtube.com/@%E9%AD%94%E6%B3%95%E5%B8%AB%E7%8E%A5%E6%9C%88")])
         ]),
+
         // Translators
-        new(XAML_ChineseTraditional, [
-            new ContributorCardItem("Shiron_Lee"),
+        new(XAML_Translator_ChineseSimplified, [
+            new ContributorCardItem("lxymahatma")
+        ]),
+        new(XAML_Translator_ChineseTraditional, [
+            new ContributorCardItem("Shiron Lee"),
             new ContributorCardItem("Bigbeesushi")
         ]),
-        new(XAML_Hungarian, [
-            new ContributorCardItem("Balint",
-                links: [("Github", "https://github.com/Balint817")])
+        new(XAML_Translator_Hungarian, [
+            new ContributorCardItem("Balint")
         ]),
-        new(XAML_Korean, [
+        new(XAML_Translator_Korean, [
             new ContributorCardItem("MEMOLie")
         ]),
-        new(XAML_Russian, [
-            new ContributorCardItem("Ultra Rabbit",
-                links: [("Github", "https://github.com/TheBunnies")]),
+        new(XAML_Translator_Russian, [
+            new ContributorCardItem("Ultra Rabbit"),
             new ContributorCardItem("Ronner"),
             new ContributorCardItem("taypexx")
         ]),
-        new(XAML_Spanish, [
+        new(XAML_Translator_Spanish, [
             new ContributorCardItem("MNight4")
         ])
     ];
 
-    [RelayCommand]
-    private void CheckUpdate()
-    {
-    }
+    #region Injections
 
-    public class ContributorGroup(string name, List<ContributorCardItem> contributors)
-    {
-        public string Name { get; } = name;
-        public List<ContributorCardItem> Contributors { get; } = contributors;
-    }
+    [UsedImplicitly]
+    public IUpdateService UpdateService { get; init; } = null!;
+
+    #endregion Injections
+
+    [RelayCommand]
+    private Task CheckUpdateAsync() => UpdateService.CheckForUpdatesAsync();
 }

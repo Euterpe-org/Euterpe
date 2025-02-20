@@ -1,19 +1,22 @@
-﻿namespace MuseDashModTools.Models.Controls;
+﻿using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
-public class ContributorCardItem
+namespace MuseDashModTools.Models.Controls;
+
+public sealed class ContributorCardItem
 {
-    public string Name { get; init; }
-    public string? Description { get; init; }
-    public string? AvatarPath { get; init; }
-    public List<Link>? Links { get; init; }
+    public string Name { get; }
+    public Bitmap Avatar { get; }
+    public string? Description { get; }
+    public ContributorLink[]? Links { get; }
 
-    public ContributorCardItem(string name, string? description = null, string? avatarPath = null, List<(string, string)>? links = null)
+    public ContributorCardItem(string name, string? description = null, ContributorLink[]? links = null, string? avatarName = null)
     {
         Name = name;
         Description = description;
-        AvatarPath = avatarPath ?? $"avares://MuseDashModTools/Assets/Contributors/{name.Replace(' ', '_')}.webp";
-        Links = links?.Select(x => new Link(x.Item1, x.Item2)).ToList();
-    }
+        Links = links;
 
-    public readonly record struct Link(string Name, string Url);
+        var avatarPath = avatarName is null ? $"{name}.webp" : $"{avatarName}.webp";
+        Avatar = new Bitmap(AssetLoader.Open(new Uri($"avares://{nameof(MuseDashModTools)}/Assets/Contributors/{avatarPath}")));
+    }
 }
