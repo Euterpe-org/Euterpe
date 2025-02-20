@@ -24,8 +24,6 @@ internal sealed partial class ModManageService : IModManageService
 
     public Task UninstallModAsync(ModDto mod) => throw new NotImplementedException();
 
-    public Task UpdateModAsync(ModDto mod) => throw new NotImplementedException();
-
     public Task ToggleModAsync(ModDto mod) => mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
 
     #region Injections
