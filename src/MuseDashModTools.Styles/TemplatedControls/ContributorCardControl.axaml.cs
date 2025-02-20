@@ -14,8 +14,8 @@ public class ContributorCardControl : TemplatedControl
     public static readonly StyledProperty<string?> ContributorDescriptionProperty =
         AvaloniaProperty.Register<TextBlock, string?>(nameof(ContributorDescription));
 
-    public static readonly StyledProperty<IEnumerable<ContributorCardItem.Link>?> LinksProperty =
-        AvaloniaProperty.Register<ContributorCardControl, IEnumerable<ContributorCardItem.Link>?>(nameof(Links));
+    public static readonly StyledProperty<IEnumerable<ContributorLink>?> LinksProperty =
+        AvaloniaProperty.Register<ContributorCardControl, IEnumerable<ContributorLink>?>(nameof(Links));
 
     public static readonly StyledProperty<ICommand> ButtonCommandProperty =
         AvaloniaProperty.Register<ContributorCardControl, ICommand>(nameof(ButtonCommand));
@@ -39,7 +39,7 @@ public class ContributorCardControl : TemplatedControl
         set => SetValue(ContributorDescriptionProperty, value);
     }
 
-    public IEnumerable<ContributorCardItem.Link>? Links
+    public IEnumerable<ContributorLink>? Links
     {
         get => GetValue(LinksProperty);
         set => SetValue(LinksProperty, value);
