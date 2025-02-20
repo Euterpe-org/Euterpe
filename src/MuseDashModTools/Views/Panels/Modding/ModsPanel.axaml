@@ -304,30 +304,34 @@
                     <Border Classes="DetailContainer">
                         <StackPanel Spacing="16">
                             <TextBlock Classes="SectionTitle" Text="Details" />
-                            <Grid ColumnDefinitions="130,*" RowDefinitions="Auto,Auto,Auto">
 
-                                <!--  Author Info  -->
-                                <TextBlock Grid.Row="0" Grid.Column="0"
+                            <!--  Author Info  -->
+                            <Grid ColumnDefinitions="130,*">
+                                <TextBlock Grid.Column="0"
                                            Classes="DetailRowText"
                                            Text="Author:" />
-                                <TextBlock Grid.Row="0" Grid.Column="1"
+                                <TextBlock Grid.Column="1"
                                            Margin="0,0,0,14"
                                            Text="{Binding SelectedMod.Author, Mode=OneWay}" />
+                            </Grid>
 
-                                <!--  Game Version Support  -->
-                                <TextBlock Grid.Row="1" Grid.Column="0"
+                            <!--  Game Version Support  -->
+                            <Grid ColumnDefinitions="130,*">
+                                <TextBlock Grid.Column="0"
                                            Classes="DetailRowText"
                                            Text="Supported:" />
-                                <Label Grid.Row="1" Grid.Column="1"
+                                <Label Grid.Column="1"
                                        Margin="0,0,0,14"
                                        Classes="Ghost StateLabel"
                                        Content="{Binding SelectedMod.CompatibleGameVersion, Mode=OneWay}" />
+                            </Grid>
 
-                                <!--  Repository Link  -->
-                                <TextBlock Grid.Row="2" Grid.Column="0"
+                            <!--  Repository Link  -->
+                            <Grid ColumnDefinitions="130,*" IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
+                                <TextBlock Grid.Column="0"
                                            Classes="DetailRowText"
                                            Text="Repository:" />
-                                <HyperlinkButton Grid.Row="2" Grid.Column="1"
+                                <HyperlinkButton Grid.Column="1"
                                                  Classes="WithIcon Underline"
                                                  Content="Link"
                                                  NavigateUri="{Binding SelectedMod.RepoPageUrl, Mode=OneWay}" />
