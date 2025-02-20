@@ -1,7 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-        xmlns:controls="using:MuseDashModTools.Models.Controls">
+        xmlns:controls="using:MuseDashModTools.Models.Controls"
+        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
     <Design.PreviewWith>
         <mdmt:ContributorCardControl />
     </Design.PreviewWith>
@@ -19,65 +19,65 @@
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal" Spacing="10">
 
-                                <!-- Avatar -->
+                                <!--  Avatar  -->
                                 <Border Width="64" Height="64">
-                                    <Image Stretch="UniformToFill"
-                                           Source="{Binding Source.AvatarPath, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}">
-                                        <!-- TODO: Fix avatar binding -->
+                                    <Image Source="{TemplateBinding Avatar, Mode=OneWay}" Stretch="UniformToFill">
                                         <Image.Clip>
-                                            <EllipseGeometry RadiusX="32" RadiusY="32" Center="32,32" />
+                                            <EllipseGeometry Center="32,32"
+                                                             RadiusX="32"
+                                                             RadiusY="32" />
                                         </Image.Clip>
                                     </Image>
                                 </Border>
 
-                                <StackPanel Margin="0, -3, 0, 0"
+                                <StackPanel Margin="0,-3,0,0"
                                             VerticalAlignment="Center"
                                             Orientation="Vertical"
                                             Spacing="3">
 
-                                    <!-- Name -->
-                                    <TextBlock Text="{Binding Source.Name, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
-                                               FontSize="16"
-                                               FontWeight="SemiBold" />
+                                    <!--  Name  -->
+                                    <TextBlock FontSize="16"
+                                               FontWeight="SemiBold"
+                                               Text="{TemplateBinding ContributorName, Mode=OneWay}" />
 
-                                    <!-- Description -->
+                                    <!--  Description  -->
                                     <TextBlock Width="150"
-                                               TextWrapping="Wrap"
-                                               IsVisible="{Binding Source.Description, Converter={x:Static ObjectConverters.IsNotNull}, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
-                                               Text="{Binding Source.Description, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
                                                FontSize="10"
-                                               Foreground="Gray" />
+                                               Foreground="Gray"
+                                               IsVisible="{TemplateBinding ContributorDescription, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                                               Text="{TemplateBinding ContributorDescription, Mode=OneWay}"
+                                               TextWrapping="Wrap" />
                                 </StackPanel>
                             </StackPanel>
                         </Expander.Header>
 
                         <Panel>
 
-                            <!-- Links -->
-                            <ItemsControl ItemsSource="{Binding Source.Links, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
-                                          IsVisible="{Binding Source.Links, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}">
+                            <!--  Links  -->
+                            <ItemsControl IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}" ItemsSource="{TemplateBinding Links, Mode=OneWay}">
+
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel HorizontalAlignment="Center" Margin="0,8" />
+                                        <WrapPanel Margin="0,8" HorizontalAlignment="Center" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate x:DataType="controls:ContributorCardItem+Link">
-                                        <!-- TODO: Bind command for links -->
                                         <Button Margin="4"
-                                                CommandParameter="{Binding Path=Url, Mode=OneTime}">
-                                            <TextBlock Text="{Binding Path=Name, Mode=OneTime}" />
+                                                Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=mdmt:ContributorCardControl}, Mode=OneTime}"
+                                                CommandParameter="{Binding Url, Mode=OneTime}">
+                                            <TextBlock Text="{Binding Name, Mode=OneTime}" />
                                         </Button>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
 
-                            <!-- Text When No Links -->
+                            <!--  Text When No Links  -->
                             <TextBlock HorizontalAlignment="Center"
                                        Foreground="Gray"
-                                       Text="No links available"
-                                       IsVisible="{Binding Source.Links, Converter={x:Static ObjectConverters.IsNull}, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}" />
+                                       IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNull}, Mode=OneWay}"
+                                       Text="No links available" />
 
                         </Panel>
                     </Expander>
