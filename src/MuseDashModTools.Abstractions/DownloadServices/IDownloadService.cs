@@ -14,4 +14,5 @@ public interface IDownloadService
     Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default);
     Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default);
     IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default);
+    IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default);
 }

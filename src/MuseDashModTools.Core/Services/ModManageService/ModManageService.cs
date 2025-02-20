@@ -5,51 +5,21 @@ namespace MuseDashModTools.Core;
 internal sealed partial class ModManageService : IModManageService
 {
     private string _gameVersion = null!;
-    private HashSet<string> _libNames = [];
+    private Dictionary<string, LibDto> _libsDict = [];
     private SourceCache<ModDto, string> _sourceCache = null!;
 
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
     {
         _sourceCache = sourceCache;
         _gameVersion = await LocalService.ReadGameVersionAsync().ConfigureAwait(false);
-        _libNames = LocalService.GetLibFileNames().ToHashSet();
 
-        ModDto[] localMods = LocalService.GetModFilePaths()
-            .Select(LocalService.LoadModFromPath)
-            .Where(mod => mod is not null)
-            .ToArray()!;
-
-        _sourceCache.AddOrUpdate(localMods);
-        Logger.ZLogInformation($"Local mods added to source cache");
-
-        CheckDuplicatedMods(localMods);
-
-        await foreach (var webMod in DownloadManager.GetModListAsync())
-        {
-            if (webMod is null)
-            {
-                continue;
-            }
-
-            if (_sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
-            {
-                CheckModState(localMod, webMod);
-                localMod.UpdateFromMod(webMod);
-                CheckConfigFile(localMod);
-                _sourceCache.AddOrUpdate(localMod);
-            }
-            else
-            {
-                _sourceCache.AddOrUpdate(webMod.ToDto());
-            }
-        }
-
-        Logger.ZLogInformation($"Updated mod info from web completed");
+        await LoadModsAsync().ConfigureAwait(false);
+        await LoadLibsAsync().ConfigureAwait(false);
     }
 
     public async Task InstallModAsync(ModDto mod)
     {
-        await DownloadManager.DownloadModAsync(mod);
+        await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
     }
 
     public Task UninstallModAsync(ModDto mod) => throw new NotImplementedException();
@@ -62,6 +32,9 @@ internal sealed partial class ModManageService : IModManageService
 
     [UsedImplicitly]
     public Config Config { get; init; } = null!;
+
+    [UsedImplicitly]
+    public WindowNotificationManager WindowNotificationManager { get; init; } = null!;
 
     [UsedImplicitly]
     public IDownloadManager DownloadManager { get; init; } = null!;

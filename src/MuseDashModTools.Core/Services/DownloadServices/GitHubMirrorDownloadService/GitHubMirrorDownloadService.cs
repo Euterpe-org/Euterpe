@@ -7,7 +7,8 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     private const string PrimaryRawMirrorUrl = "https://raw.kkgithub.com/";
     private const string PrimaryReleaseMirrorUrl = "https://kkgithub.com/";
     private const string PrimaryRawModLinksUrl = PrimaryRawMirrorUrl + ModLinksBaseUrl;
-    private const string PrimaryModLinksUrl = PrimaryRawModLinksUrl + "Mods.json";
+    private const string PrimaryModJsonUrl = PrimaryRawModLinksUrl + "Mods.json";
+    private const string PrimaryLibJsonUrl = PrimaryRawModLinksUrl + "Libs.json";
     private const string PrimaryModsFolderUrl = PrimaryRawModLinksUrl + "Mods/";
     private const string PrimaryLibsFolderUrl = PrimaryRawModLinksUrl + "Libs/";
     private const string PrimaryMelonLoaderUrl = PrimaryReleaseMirrorUrl + MelonLoaderBaseUrl;
@@ -125,13 +126,25 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods from GitHubMirror {PrimaryModLinksUrl}...");
+        Logger.ZLogInformation($"Fetching mods from GitHubMirror {PrimaryModJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModLinksUrl, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModJsonUrl, cancellationToken)
             .Catch<Mod?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch mods from GitHubMirror");
                 return AsyncEnumerable.Empty<Mod?>();
+            });
+    }
+
+    public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
+    {
+        Logger.ZLogInformation($"Fetching libs from GitHubMirror {PrimaryLibJsonUrl}...");
+
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(PrimaryLibJsonUrl, cancellationToken)
+            .Catch<Lib?, Exception>(ex =>
+            {
+                Logger.ZLogError(ex, $"Failed to fetch libs from GitHubMirror");
+                return AsyncEnumerable.Empty<Lib?>();
             });
     }
 

@@ -27,8 +27,7 @@ internal sealed partial class LocalService : ILocalService
     public IEnumerable<string> GetModFilePaths() => Directory.GetFiles(Config.ModsFolder)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
 
-    public IEnumerable<string> GetLibFileNames() => Directory.GetFiles(Config.UserLibsFolder)
-        .Select(Path.GetFileNameWithoutExtension)!;
+    public IEnumerable<string> GetLibFilePaths() => Directory.GetFiles(Config.UserLibsFolder);
 
     public async Task<bool> InstallMelonLoaderAsync()
     {
@@ -101,7 +100,8 @@ internal sealed partial class LocalService : ILocalService
         var mod = new ModDto
         {
             FileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath),
-            IsDisabled = Path.GetExtension(filePath) == ".disabled"
+            IsDisabled = Path.GetExtension(filePath) == ".disabled",
+            IsLocal = true
         };
 
         var module = ModuleDefinition.FromFile(filePath);
@@ -125,6 +125,14 @@ internal sealed partial class LocalService : ILocalService
 
         return mod;
     }
+
+    public LibDto LoadLibFromPath(string filePath) =>
+        new()
+        {
+            Name = Path.GetFileNameWithoutExtension(filePath),
+            SHA256 = HashUtils.ComputeSHA256HashFromPath(filePath),
+            IsLocal = true
+        };
 
     public void LaunchGame(bool isModded)
     {

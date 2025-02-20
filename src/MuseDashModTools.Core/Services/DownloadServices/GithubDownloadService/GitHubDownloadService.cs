@@ -5,7 +5,8 @@ namespace MuseDashModTools.Core;
 internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 {
     private const string RawModLinksUrl = GitHubRawContentBaseUrl + ModLinksBaseUrl;
-    private const string ModLinksUrl = RawModLinksUrl + "Mods.json";
+    private const string ModJsonUrl = RawModLinksUrl + "Mods.json";
+    private const string LibJsonUrl = RawModLinksUrl + "Libs.json";
     private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
     private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
@@ -100,18 +101,6 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
     }
 
-    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
-    {
-        Logger.ZLogInformation($"Fetching mods from GitHub {ModLinksUrl}...");
-
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModLinksUrl, cancellationToken)
-            .Catch<Mod?, Exception>(ex =>
-            {
-                Logger.ZLogError(ex, $"Failed to fetch mods from GitHub");
-                return AsyncEnumerable.Empty<Mod?>();
-            });
-    }
-
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
         if (ReadmeCache.TryGetValue(repoId, out var readme))
@@ -130,6 +119,30 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 
         Logger.ZLogInformation($"Branch readme fetch failed");
         return null;
+    }
+
+    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
+    {
+        Logger.ZLogInformation($"Fetching mods from GitHub {ModJsonUrl}...");
+
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, cancellationToken)
+            .Catch<Mod?, Exception>(ex =>
+            {
+                Logger.ZLogError(ex, $"Failed to fetch mods from GitHub");
+                return AsyncEnumerable.Empty<Mod?>();
+            });
+    }
+
+    public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
+    {
+        Logger.ZLogInformation($"Fetching libs from GitHub {LibJsonUrl}...");
+
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, cancellationToken)
+            .Catch<Lib?, Exception>(ex =>
+            {
+                Logger.ZLogError(ex, $"Failed to fetch libs from GitHub");
+                return AsyncEnumerable.Empty<Lib?>();
+            });
     }
 
     #region Injections

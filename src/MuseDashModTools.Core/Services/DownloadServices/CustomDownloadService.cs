@@ -14,6 +14,7 @@ internal sealed class CustomDownloadService : ICustomDownloadService
     public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
     #region Injections
 

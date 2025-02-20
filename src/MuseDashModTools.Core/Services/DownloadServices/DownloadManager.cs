@@ -47,6 +47,9 @@ internal sealed class DownloadManager : IDownloadManager
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default) =>
         CurrentDownloadService.GetModListAsync(cancellationToken);
 
+    public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default) =>
+        CurrentDownloadService.GetLibListAsync(cancellationToken);
+
     #region Injections
 
     [UsedImplicitly]
