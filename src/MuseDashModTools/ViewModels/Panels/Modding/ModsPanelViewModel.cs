@@ -72,7 +72,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     private Task UpdateModAsync()
     {
         Logger.ZLogInformation($"Updating mod: {SelectedMod.Name} from version {SelectedMod.LocalVersion} to version {SelectedMod.Version}");
-        return ModManageService.UpdateModAsync(SelectedMod);
+        return ModManageService.InstallModAsync(SelectedMod);
     }
 
     [RelayCommand]
@@ -83,7 +83,11 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task ReinstallModAsync() => Logger.ZLogInformation($"Reinstalling mod: {SelectedMod.Name}");
+    private Task ReinstallModAsync()
+    {
+        Logger.ZLogInformation($"Reinstalling mod: {SelectedMod.Name}");
+        return ModManageService.InstallModAsync(SelectedMod);
+    }
 
     [RelayCommand]
     private Task UninstallModAsync()
