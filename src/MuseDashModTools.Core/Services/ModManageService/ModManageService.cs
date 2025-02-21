@@ -1,11 +1,12 @@
-﻿using DynamicData;
+﻿using System.Collections.Concurrent;
+using DynamicData;
 
 namespace MuseDashModTools.Core;
 
 internal sealed partial class ModManageService : IModManageService
 {
     private string _gameVersion = null!;
-    private Dictionary<string, LibDto> _libsDict = [];
+    private ConcurrentDictionary<string, LibDto> _libsDict = [];
     private SourceCache<ModDto, string> _sourceCache = null!;
 
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)

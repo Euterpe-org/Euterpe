@@ -1,12 +1,109 @@
-﻿using DynamicData;
+﻿using System.Collections.Concurrent;
+using DynamicData;
 
 namespace MuseDashModTools.Core;
 
 internal sealed partial class ModManageService
 {
+    #region Load Mods
+
+    private async Task LoadModsAsync()
+    {
+        ModDto[] localMods = LocalService.GetModFilePaths()
+            .Select(LocalService.LoadModFromPath)
+            .Where(mod => mod is not null)
+            .ToArray()!;
+
+        _sourceCache.AddOrUpdate(localMods);
+        Logger.ZLogInformation($"Local mods added to source cache");
+
+        CheckDuplicatedMods(localMods);
+
+        await foreach (var webMod in DownloadManager.GetModListAsync())
+        {
+            if (webMod is null)
+            {
+                continue;
+            }
+
+            if (_sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
+            {
+                CheckModState(localMod, webMod);
+                localMod.UpdateFromMod(webMod);
+                CheckConfigFile(localMod);
+                _sourceCache.AddOrUpdate(localMod);
+            }
+            else
+            {
+                _sourceCache.AddOrUpdate(webMod.ToDto());
+            }
+        }
+
+        // TODO Notification (lxy, 2025/2/21)
+        Logger.ZLogInformation($"All mods loaded");
+    }
+
+    private void CheckModState(ModDto localMod, Mod webMod)
+    {
+        if (localMod.State == ModState.Duplicated)
+        {
+            return;
+        }
+
+        var localVersion = SemVersion.Parse(localMod.LocalVersion);
+        var webVersion = SemVersion.Parse(webMod.Version);
+        var versionComparison = localVersion.ComparePrecedenceTo(webVersion);
+
+        localMod.State = versionComparison switch
+        {
+            < 0 => ModState.Outdated,
+            > 0 => ModState.Newer,
+            _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
+            _ when webMod.GameVersion != "*" && webMod.GameVersion != _gameVersion => ModState.Incompatible,
+            _ => ModState.Normal
+        };
+    }
+
+    private void CheckConfigFile(ModDto localMod)
+    {
+        if (localMod.ConfigFile.IsNullOrEmpty())
+        {
+            return;
+        }
+
+        var configFilePath = Path.Combine(Config.UserDataFolder, localMod.ConfigFile);
+        localMod.IsValidConfigFile = File.Exists(configFilePath);
+    }
+
+    private void CheckDuplicatedMods(ModDto[] localMods)
+    {
+        var duplicatedModGroups = localMods
+            .GroupBy(mod => mod.Name)
+            .Where(group => group.Select(mod => mod.LocalFileName).Distinct().Count() > 1);
+
+        foreach (var duplicatedModGroup in duplicatedModGroups)
+        {
+            var modName = duplicatedModGroup.Key;
+            Logger.ZLogInformation($"Duplicated mod found {modName}");
+
+            var localMod = _sourceCache.Lookup(modName).Value;
+            localMod.State = ModState.Duplicated;
+            localMod.DuplicatedModPaths = duplicatedModGroup.Select(mod => mod.LocalFileName).ToArray();
+        }
+
+        Logger.ZLogInformation($"Checking duplicated mods finished");
+    }
+
+    #endregion Load Mods #region Toggle Mod
+
+    #region Load Libs
+
     private async Task LoadLibsAsync()
     {
-        _libsDict = LocalService.GetLibFilePaths().Select(LocalService.LoadLibFromPath).ToDictionary(x => x.Name, x => x);
+        _libsDict = new ConcurrentDictionary<string, LibDto>(
+            LocalService.GetLibFilePaths()
+                .Select(LocalService.LoadLibFromPath)
+                .Select(x => new KeyValuePair<string, LibDto>(x.FileName, x)));
 
         await foreach (var webLib in DownloadManager.GetLibListAsync())
         {
@@ -15,36 +112,41 @@ internal sealed partial class ModManageService
                 continue;
             }
 
-            if (_libsDict.TryGetValue(webLib.Name, out var localLib))
+            if (_libsDict.TryGetValue(webLib.FileName, out var localLib))
             {
                 if (localLib.SHA256 == webLib.SHA256)
                 {
                     continue;
                 }
 
-                await DownloadManager.DownloadLibAsync(webLib.Name).ConfigureAwait(false);
-                _libsDict[webLib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, webLib.Name));
+                // TODO MessageBox (lxy, 2025/2/21)
+                await DownloadManager.DownloadLibAsync(webLib.FileName).ConfigureAwait(false);
+                _libsDict[webLib.FileName] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, webLib.FileName));
             }
             else
             {
-                _libsDict[webLib.Name] = webLib.ToDto();
+                _libsDict[webLib.FileName] = webLib.ToDto();
             }
         }
+
+        Logger.ZLogInformation($"All libs loaded");
     }
 
     private async Task CheckLibDependenciesAsync(ModDto mod)
     {
-        foreach (var lib in mod.LibDependencies)
+        foreach (var libName in mod.LibDependencies)
         {
-            if (_libsDict.ContainsKey(lib))
+            if (_libsDict.TryGetValue(libName, out var lib) && lib.IsLocal)
             {
                 continue;
             }
 
-            await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
-            _libsDict[lib] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, lib));
+            await DownloadManager.DownloadLibAsync(libName).ConfigureAwait(false);
+            _libsDict[libName] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, libName));
         }
     }
+
+    #endregion Load Libs
 
     #region Dependencies and Dependents
 
@@ -126,94 +228,4 @@ internal sealed partial class ModManageService
     }
 
     #endregion Toggle Mod
-
-    #region Load Mods
-
-    private async Task LoadModsAsync()
-    {
-        ModDto[] localMods = LocalService.GetModFilePaths()
-            .Select(LocalService.LoadModFromPath)
-            .Where(mod => mod is not null)
-            .ToArray()!;
-
-        _sourceCache.AddOrUpdate(localMods);
-        Logger.ZLogInformation($"Local mods added to source cache");
-
-        CheckDuplicatedMods(localMods);
-
-        await foreach (var webMod in DownloadManager.GetModListAsync())
-        {
-            if (webMod is null)
-            {
-                continue;
-            }
-
-            if (_sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
-            {
-                CheckModState(localMod, webMod);
-                localMod.UpdateFromMod(webMod);
-                CheckConfigFile(localMod);
-                _sourceCache.AddOrUpdate(localMod);
-            }
-            else
-            {
-                _sourceCache.AddOrUpdate(webMod.ToDto());
-            }
-        }
-
-        Logger.ZLogInformation($"All mods loaded");
-    }
-
-    private void CheckModState(ModDto localMod, Mod webMod)
-    {
-        if (localMod.State == ModState.Duplicated)
-        {
-            return;
-        }
-
-        var localVersion = SemVersion.Parse(localMod.LocalVersion);
-        var webVersion = SemVersion.Parse(webMod.Version);
-        var versionComparison = localVersion.ComparePrecedenceTo(webVersion);
-
-        localMod.State = versionComparison switch
-        {
-            < 0 => ModState.Outdated,
-            > 0 => ModState.Newer,
-            _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
-            _ when webMod.GameVersion != "*" && webMod.GameVersion != _gameVersion => ModState.Incompatible,
-            _ => ModState.Normal
-        };
-    }
-
-    private void CheckConfigFile(ModDto localMod)
-    {
-        if (localMod.ConfigFile.IsNullOrEmpty())
-        {
-            return;
-        }
-
-        var configFilePath = Path.Combine(Config.UserDataFolder, localMod.ConfigFile);
-        localMod.IsValidConfigFile = File.Exists(configFilePath);
-    }
-
-    private void CheckDuplicatedMods(ModDto[] localMods)
-    {
-        var duplicatedModGroups = localMods
-            .GroupBy(mod => mod.Name)
-            .Where(group => group.Select(mod => mod.LocalFileName).Distinct().Count() > 1);
-
-        foreach (var duplicatedModGroup in duplicatedModGroups)
-        {
-            var modName = duplicatedModGroup.Key;
-            Logger.ZLogInformation($"Duplicated mod found {modName}");
-
-            var localMod = _sourceCache.Lookup(modName).Value;
-            localMod.State = ModState.Duplicated;
-            localMod.DuplicatedModPaths = duplicatedModGroup.Select(mod => mod.LocalFileName).ToArray();
-        }
-
-        Logger.ZLogInformation($"Checking duplicated mods finished");
-    }
-
-    #endregion Load Mods
 }
