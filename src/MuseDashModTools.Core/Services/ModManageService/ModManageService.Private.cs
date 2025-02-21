@@ -103,7 +103,7 @@ internal sealed partial class ModManageService
         _libsDict = new ConcurrentDictionary<string, LibDto>(
             LocalService.GetLibFilePaths()
                 .Select(LocalService.LoadLibFromPath)
-                .Select(x => new KeyValuePair<string, LibDto>(x.FileName, x)));
+                .Select(x => new KeyValuePair<string, LibDto>(x.Name, x)));
 
         await foreach (var webLib in DownloadManager.GetLibListAsync())
         {
@@ -112,7 +112,7 @@ internal sealed partial class ModManageService
                 continue;
             }
 
-            if (_libsDict.TryGetValue(webLib.FileName, out var localLib))
+            if (_libsDict.TryGetValue(webLib.Name, out var localLib))
             {
                 if (localLib.SHA256 == webLib.SHA256)
                 {
@@ -121,11 +121,11 @@ internal sealed partial class ModManageService
 
                 // TODO MessageBox (lxy, 2025/2/21)
                 await DownloadManager.DownloadLibAsync(webLib.FileName).ConfigureAwait(false);
-                _libsDict[webLib.FileName] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, webLib.FileName));
+                _libsDict[webLib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, webLib.FileName));
             }
             else
             {
-                _libsDict[webLib.FileName] = webLib.ToDto();
+                _libsDict[webLib.Name] = webLib.ToDto();
             }
         }
 
