@@ -49,7 +49,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
 
         var downloadLink = ModsFolderUrl + mod.FileName;
-        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.LocalFileName : mod.FileName);
+        var path = Path.Combine(Config.ModsFolder, mod.FileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);

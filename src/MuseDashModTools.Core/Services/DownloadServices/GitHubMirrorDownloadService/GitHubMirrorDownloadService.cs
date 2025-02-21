@@ -51,7 +51,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         }
 
         var downloadLink = PrimaryModsFolderUrl + mod.FileName;
-        var path = Path.Combine(Config.ModsFolder, mod.IsLocal ? mod.LocalFileName : mod.FileName);
+        var path = Path.Combine(Config.ModsFolder, mod.FileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
