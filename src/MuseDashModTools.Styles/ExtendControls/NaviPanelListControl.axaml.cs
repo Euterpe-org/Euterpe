@@ -1,3 +1,3 @@
 ﻿namespace MuseDashModTools.Styles.ExtendControls;
 
-public class NaviPanelListControl : ListBox;
+public sealed class NaviPanelListControl : ListBox;
