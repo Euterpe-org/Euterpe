@@ -1,0 +1,24 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Title text styles  -->
+    <Style Selector="TextBlock.PanelTitle">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+    <Style Selector="TextBlock.SectionTitle">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+    </Style>
+
+    <!--  Detail row text style  -->
+    <Style Selector="TextBlock.DetailRowText">
+        <Setter Property="Margin" Value="0,0,16,14" />
+    </Style>
+
+    <Style Selector="TextBlock.Active">
+        <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
+    </Style>
+
+</Styles>

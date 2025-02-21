@@ -21,46 +21,6 @@
         </EventTriggerBehavior>
     </Interaction.Behaviors>
 
-    <UserControl.Styles>
-
-        <!--  Action buttons container style  -->
-        <Style Selector="StackPanel.ActionButtonsContainer">
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="Spacing" Value="8" />
-        </Style>
-
-        <!--  Title text styles  -->
-        <Style Selector="TextBlock.PanelTitle">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="Margin" Value="0,0,0,8" />
-        </Style>
-        <Style Selector="TextBlock.SectionTitle">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Margin" Value="0,0,0,16" />
-        </Style>
-
-        <!--  Details container style  -->
-        <Style Selector="Border.DetailContainer">
-            <Setter Property="Padding" Value="16" />
-            <Setter Property="Background" Value="{DynamicResource CardBackground}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
-        </Style>
-
-        <!--  Label styles for different states  -->
-        <Style Selector="Label.StateLabel">
-            <Setter Property="Theme" Value="{StaticResource TagLabel}" />
-        </Style>
-
-        <!--  Detail row text style  -->
-        <Style Selector="TextBlock.DetailRowText">
-            <Setter Property="Margin" Value="0,0,16,14" />
-        </Style>
-    </UserControl.Styles>
-
     <!--  Main Layout Grid  -->
     <Grid ColumnDefinitions="380,*">
 
@@ -122,13 +82,7 @@
                                                 Spacing="5">
 
                                         <!--  Mod Name  -->
-                                        <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}">
-                                            <TextBlock.Styles>
-                                                <Style Selector="TextBlock.Active">
-                                                    <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
-                                                </Style>
-                                            </TextBlock.Styles>
-                                        </TextBlock>
+                                        <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
 
                                         <!--  Mod Status Tags  -->
                                         <StackPanel Classes="ActionButtonsContainer">
