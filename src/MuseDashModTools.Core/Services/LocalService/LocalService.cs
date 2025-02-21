@@ -100,7 +100,7 @@ internal sealed partial class LocalService : ILocalService
         var mod = new ModDto
         {
             FileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath),
-            IsDisabled = Path.GetExtension(filePath) == ".disabled",
+            IsDisabled = Path.GetExtension(filePath) == ".disabled"
         };
 
         var module = ModuleDefinition.FromFile(filePath);
@@ -128,7 +128,7 @@ internal sealed partial class LocalService : ILocalService
     public LibDto LoadLibFromPath(string filePath) =>
         new()
         {
-            Name = Path.GetFileNameWithoutExtension(filePath),
+            FileName = Path.GetFileName(filePath),
             SHA256 = HashUtils.ComputeSHA256HashFromPath(filePath),
             IsLocal = true
         };

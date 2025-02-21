@@ -6,7 +6,7 @@ public sealed class LibDto
 
     #region Lib Properties
 
-    public string Name { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
     public string SHA256 { get; set; } = string.Empty;
 
     #endregion Lib Properties
