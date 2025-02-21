@@ -1,7 +1,0 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:dialogs="using:MuseDashModTools.ViewModels.Dialogs"
-        x:Class="MuseDashModTools.Views.Dialogs.DownloadDialog"
-        x:DataType="dialogs:DownloadDialogViewModel"
-        Title="DownloadWindow"
-        Width="320" />
