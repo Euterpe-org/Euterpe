@@ -1,0 +1,6 @@
+﻿<linker>
+    <assembly fullname="AutoFac" preserve="all"/>
+    <assembly fullname="AutoFac.Extensions.DependencyInjection" preserve="all"/>
+    <assembly fullname="Avalonia.Xaml.Behaviors" preserve="all"/>
+    <assembly fullname="MuseDashModTools" preserve="all"/>
+</linker>

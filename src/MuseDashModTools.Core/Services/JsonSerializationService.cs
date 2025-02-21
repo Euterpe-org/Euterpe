@@ -4,6 +4,15 @@ namespace MuseDashModTools.Core;
 
 internal sealed class JsonSerializationService : IJsonSerializationService
 {
+    #region AOT Compatible
+
+    public ValueTask<Config?> DeserializeConfigAsync(Stream utf8Json, CancellationToken cancellationToken = default) =>
+        JsonSerializer.DeserializeAsync(utf8Json, SourceGenerationContext.Default.Config, cancellationToken);
+
+    #endregion AOT Compatible
+
+    #region AOT Incompatible
+
     private static readonly JsonSerializerOptions IndentedSerializerOptions = new()
     {
         WriteIndented = true,
@@ -21,7 +30,7 @@ internal sealed class JsonSerializationService : IJsonSerializationService
 
     public ValueTask<T?> DeserializeAsync<T>(
         Stream utf8Json,
-        JsonSerializerOptions? options = default,
+        JsonSerializerOptions? options = null,
         CancellationToken cancellationToken = default)
         => JsonSerializer.DeserializeAsync<T>(utf8Json, options, cancellationToken);
 
@@ -39,7 +48,7 @@ internal sealed class JsonSerializationService : IJsonSerializationService
     public Task SerializeAsync<T>(
         Stream utf8Json,
         T value,
-        JsonSerializerOptions? options = default,
+        JsonSerializerOptions? options = null,
         CancellationToken cancellationToken = default)
         => JsonSerializer.SerializeAsync(utf8Json, value, options, cancellationToken);
 
@@ -48,4 +57,6 @@ internal sealed class JsonSerializationService : IJsonSerializationService
         T value,
         CancellationToken cancellationToken = default)
         => JsonSerializer.SerializeAsync(utf8Json, value, IndentedSerializerOptions, cancellationToken);
+
+    #endregion AOT Incompatible
 }
