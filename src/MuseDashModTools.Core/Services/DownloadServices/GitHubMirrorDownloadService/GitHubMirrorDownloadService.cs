@@ -128,7 +128,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Fetching mods from GitHubMirror {PrimaryModJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModJsonUrl, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModJsonUrl, SourceGenerationContext.Default.Mod, cancellationToken)
             .Catch<Mod?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch mods from GitHubMirror");
@@ -140,7 +140,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Fetching libs from GitHubMirror {PrimaryLibJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(PrimaryLibJsonUrl, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(PrimaryLibJsonUrl, SourceGenerationContext.Default.Lib, cancellationToken)
             .Catch<Lib?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch libs from GitHubMirror");

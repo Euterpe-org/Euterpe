@@ -11,7 +11,7 @@ internal sealed partial class SavingService : ISavingService
         if (File.Exists(ConfigPath))
         {
             await using var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
-            var savedConfig = await JsonSerializationService.DeserializeIndentedAsync<Config>(stream).ConfigureAwait(true);
+            var savedConfig = await JsonSerializationService.DeserializeConfigAsync(stream).ConfigureAwait(true);
             if (savedConfig is null)
             {
                 Logger.ZLogError($"Saved setting is null");

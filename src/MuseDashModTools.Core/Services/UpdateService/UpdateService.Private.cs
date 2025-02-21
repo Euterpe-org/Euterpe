@@ -142,7 +142,8 @@ internal sealed partial class UpdateService
     {
         try
         {
-            return await Client.GetFromJsonAsync<GitHubRelease>(LatestReleaseAPIUrl, cancellationToken).ConfigureAwait(true);
+            return await Client.GetFromJsonAsync<GitHubRelease>(LatestReleaseAPIUrl, Default.GitHubRelease, cancellationToken)
+                .ConfigureAwait(true);
         }
         catch (Exception ex)
         {
@@ -155,7 +156,7 @@ internal sealed partial class UpdateService
     {
         try
         {
-            var releases = await Client.GetFromJsonAsync<GitHubRelease[]>(ReleaseAPIUrl, cancellationToken).ConfigureAwait(true);
+            var releases = await Client.GetFromJsonAsync<GitHubRelease[]>(ReleaseAPIUrl, Default.GitHubReleaseArray, cancellationToken).ConfigureAwait(true);
             if (releases is not (null or []))
             {
                 return releases[0];

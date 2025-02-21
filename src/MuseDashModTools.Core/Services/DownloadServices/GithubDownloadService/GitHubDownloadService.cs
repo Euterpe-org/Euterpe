@@ -125,7 +125,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     {
         Logger.ZLogInformation($"Fetching mods from GitHub {ModJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, SourceGenerationContext.Default.Mod, cancellationToken)
             .Catch<Mod?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch mods from GitHub");
@@ -137,7 +137,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     {
         Logger.ZLogInformation($"Fetching libs from GitHub {LibJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, SourceGenerationContext.Default.Lib, cancellationToken)
             .Catch<Lib?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch libs from GitHub");
