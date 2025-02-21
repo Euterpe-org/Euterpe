@@ -21,7 +21,12 @@
     <StyleInclude Source="/TemplatedControls/NaviButtonsControl.axaml" />
     <StyleInclude Source="/TemplatedControls/ContributorCardControl.axaml" />
 
-    <!-- Styles -->
-    <StyleInclude Source="/Styles/PlayButtonStyle.axaml" />
-    <StyleInclude Source="/Styles/DonationButtonStyle.axaml" />
+    <!--  Styles  -->
+    <StyleInclude Source="/Styles/BorderStyles.axaml" />
+    <StyleInclude Source="/Styles/ButtonStyles.axaml" />
+    <StyleInclude Source="/Styles/ImageStyles.axaml" />
+    <StyleInclude Source="/Styles/LabelStyles.axaml" />
+    <StyleInclude Source="/Styles/SplitButtonStyles.axaml" />
+    <StyleInclude Source="/Styles/StackPanelStyles.axaml" />
+    <StyleInclude Source="/Styles/TextBlockStyles.axaml" />
 </Styles>
