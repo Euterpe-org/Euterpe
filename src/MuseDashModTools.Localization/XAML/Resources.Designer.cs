@@ -663,6 +663,15 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        public static string XAML_ModFilterType_Disabled {
+            get {
+                return ResourceManager.GetString("XAML_ModFilterType_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
         public static string XAML_ModFilterType_Enabled {
