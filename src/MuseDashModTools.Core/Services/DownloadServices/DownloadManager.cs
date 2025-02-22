@@ -17,8 +17,8 @@ internal sealed class DownloadManager : IDownloadManager
     public Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default) =>
         CurrentDownloadService.DownloadModAsync(mod, cancellationToken);
 
-    public Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default) =>
-        CurrentDownloadService.DownloadLibAsync(libName, cancellationToken);
+    public Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default) =>
+        CurrentDownloadService.DownloadLibAsync(lib, cancellationToken);
 
     public Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
     {

@@ -120,7 +120,7 @@ internal sealed partial class ModManageService
                 }
 
                 // TODO MessageBox (lxy, 2025/2/21)
-                await DownloadManager.DownloadLibAsync(webLib.FileName).ConfigureAwait(false);
+                await DownloadManager.DownloadLibAsync(webLib.ToDto()).ConfigureAwait(false);
                 _libsDict[webLib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, webLib.FileName));
             }
             else
@@ -136,13 +136,14 @@ internal sealed partial class ModManageService
     {
         foreach (var libName in mod.LibDependencies)
         {
-            if (_libsDict.TryGetValue(libName, out var lib) && lib.IsLocal)
+            var lib = _libsDict[libName];
+            if (lib.IsLocal)
             {
                 continue;
             }
 
-            await DownloadManager.DownloadLibAsync(libName).ConfigureAwait(false);
-            _libsDict[libName] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, libName));
+            await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
+            _libsDict[libName] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, lib.FileName));
         }
     }
 
