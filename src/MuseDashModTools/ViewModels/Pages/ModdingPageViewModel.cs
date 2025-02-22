@@ -21,11 +21,10 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
         ])
     ];
 
-    [RelayCommand]
     protected override void Initialize()
     {
         base.Initialize();
-        Logger.ZLogInformation($"ModdingPage Initialized");
+        Logger.ZLogInformation($"{nameof(ModdingPageViewModel)} Initialized");
     }
 
     #region Injections

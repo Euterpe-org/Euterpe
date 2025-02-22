@@ -14,73 +14,61 @@
         <pages:DownloadPanelViewModel />
     </Design.DataContext>
 
-    <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Initialized">
-            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </EventTriggerBehavior>
-    </Interaction.Behaviors>
-
-    <StackPanel Orientation="Vertical"
-                Spacing="50"
+    <StackPanel MinWidth="600"
+                MaxWidth="800"
                 Margin="30"
                 HorizontalAlignment="Left"
-                MaxWidth="800"
-                MinWidth="600">
+                Orientation="Vertical"
+                Spacing="50">
 
-        <!-- Download Source -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
+        <!--  Download Source  -->
+        <StackPanel Orientation="Vertical" Spacing="15">
             <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Download Source" />
+                       Text="Download Source"
+                       Theme="{StaticResource TitleTextBlock}" />
             <StackPanel Orientation="Horizontal" Spacing="10">
-                <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}"
-                          SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
-                <TextBox Classes="ClearButton"
+                <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}" SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
+                <TextBox MinWidth="200"
+                         Classes="ClearButton"
                          Foreground="Gray"
-                         MinWidth="200"
-                         Watermark="Input link here"
                          IsVisible="{Binding Config.DownloadSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:DownloadSource.Custom}, Mode=OneWay}"
-                         Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}" />
+                         Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}"
+                         Watermark="Input link here" />
             </StackPanel>
         </StackPanel>
 
-        <!-- Update Source -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
+        <!--  Update Source  -->
+        <StackPanel Orientation="Vertical" Spacing="15">
             <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Update Source" />
-            <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}"
-                      SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
+                       Text="Update Source"
+                       Theme="{StaticResource TitleTextBlock}" />
+            <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}" SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
         </StackPanel>
 
-        <!-- GitHub Token -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
+        <!--  GitHub Token  -->
+        <StackPanel Orientation="Vertical" Spacing="15">
             <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="GitHub Token" />
-            <TextBlock Margin="0, -10, 0, 0"
+                       Text="GitHub Token"
+                       Theme="{StaticResource TitleTextBlock}" />
+            <TextBlock Margin="0,-10,0,0"
                        Foreground="Gray"
-                       TextWrapping="Wrap"
-                       Text="Desc desc desc desc desc desc..." />
+                       Text="Desc desc desc desc desc desc..."
+                       TextWrapping="Wrap" />
             <TextBox Classes="ClearButton"
                      Foreground="Gray"
-                     Watermark="Leave blank if no need"
-                     Text="{Binding Config.GitHubToken, Mode=TwoWay}" />
+                     Text="{Binding Config.GitHubToken, Mode=TwoWay}"
+                     Watermark="Leave blank if no need" />
         </StackPanel>
 
-        <!-- Download Prerelease -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
+        <!--  Download Prerelease  -->
+        <StackPanel Orientation="Vertical" Spacing="15">
             <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Download Prerelease" />
-            <TextBlock Margin="0, -10, 0, 0"
+                       Text="Download Prerelease"
+                       Theme="{StaticResource TitleTextBlock}" />
+            <TextBlock Margin="0,-10,0,0"
                        Foreground="Gray"
-                       TextWrapping="Wrap"
-                       Text="Check for pre-release versions when checking for MDMT updates" />
+                       Text="Check for pre-release versions when checking for MDMT updates"
+                       TextWrapping="Wrap" />
             <ToggleSwitch IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
         </StackPanel>
 

@@ -15,12 +15,6 @@
         <moddingPanels:ModsPanelViewModel />
     </Design.DataContext>
 
-    <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Initialized">
-            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </EventTriggerBehavior>
-    </Interaction.Behaviors>
-
     <!--  Main Layout Grid  -->
     <Grid ColumnDefinitions="380,*">
 

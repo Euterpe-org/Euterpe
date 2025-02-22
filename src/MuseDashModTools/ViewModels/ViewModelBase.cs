@@ -1,6 +1,8 @@
+using ReactiveUI;
+
 namespace MuseDashModTools.ViewModels;
 
-public partial class ViewModelBase : ObservableObject
+public partial class ViewModelBase : ObservableObject, IActivatableViewModel
 {
     #region Injections
 
@@ -8,6 +10,12 @@ public partial class ViewModelBase : ObservableObject
     public IPlatformService PlatformService { get; init; } = null!;
 
     #endregion Injections
+
+    public ViewModelActivator Activator { get; } = new();
+
+    protected virtual void Initialize()
+    {
+    }
 
     [RelayCommand]
     private Task OpenFileAsync(string filePath) => PlatformService.OpenFileAsync(filePath);

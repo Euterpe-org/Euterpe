@@ -15,7 +15,7 @@
         "xmlns:*",
         "x:Class, x:DataType",
         "DataContext",
-        "x:Key, Key, x:Name, Name, x:Uid, Uid, Title",
+        "x:Key, Key, x:Name, Name, x:Uid, Uid, x:*, Title",
         "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan, DockPanel.Dock, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
         "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight",
         "Margin, Padding, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",

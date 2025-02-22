@@ -18,11 +18,10 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
         ])
     ];
 
-    [RelayCommand]
     protected override void Initialize()
     {
         base.Initialize();
-        Logger.ZLogInformation($"ChartingPage Initialized");
+        Logger.ZLogInformation($"{nameof(ChartingPageViewModel)} Initialized");
     }
 
     #region Injections

@@ -14,6 +14,7 @@
         <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.4"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.4"/>
         <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="11.2.4"/>
+        <PackageVersion Include="Avalonia.ReactiveUI" Version="11.2.4"/>
         <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.2.0.9"/>
         <PackageVersion Include="Autofac" Version="8.2.0"/>
         <PackageVersion Include="CliWrap" Version="3.8.0"/>
@@ -30,6 +31,7 @@
         <PackageVersion Include="HotAvalonia" Version="2.1.0"/>
         <PackageVersion Include="HotAvalonia.Extensions" Version="2.1.0" PrivateAssets="all"/>
         <PackageVersion Include="Irihi.Ursa" Version="1.8.1"/>
+        <PackageVersion Include="Irihi.Ursa.ReactiveUIExtension" Version="1.0.1"/>
         <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.8.1"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0"/>
         <PackageVersion Include="MessagePipe" Version="1.8.1"/>
@@ -51,7 +53,6 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
         <PackageVersion Include="PublishAotCompressed" Version="1.0.3"/>
-        <PackageVersion Include="ReactiveUI" Version="20.1.63"/>
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.1.1"/>
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.13.0">
@@ -64,7 +65,7 @@
         <PackageVersion Include="System.Interactive.Async" Version="6.0.1"/>
         <PackageVersion Include="System.Linq.Async" Version="6.0.1"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.2"/>
-        <PackageVersion Include="TUnit" Version="0.13.9"/>
+        <PackageVersion Include="TUnit" Version="0.14.0"/>
         <PackageVersion Include="ValveKeyValue" Version="0.12.0.391"/>
         <PackageVersion Include="Verify" Version="28.11.0"/>
         <PackageVersion Include="Verify.TUnit" Version="28.11.0"/>
