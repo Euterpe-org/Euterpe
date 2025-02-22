@@ -362,4 +362,7 @@
     <data name="XAML_Translator_ChineseSimplified" xml:space="preserve">
         <value>Chinese Simplified</value>
     </data>
+    <data name="XAML_ModFilterType_Disabled" xml:space="preserve">
+        <value>Disabled</value>
+    </data>
 </root>

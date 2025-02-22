@@ -15,6 +15,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
         XAML_ModFilterType_All,
         XAML_ModFilterType_Installed,
         XAML_ModFilterType_Enabled,
+        XAML_ModFilterType_Disabled,
         XAML_ModFilterType_Outdated,
         XAML_ModFilterType_Incompatible
     ];
@@ -47,6 +48,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
                          || x.Author.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
             .Filter(x => _modFilter != ModFilterType.Installed || x.IsLocal)
             .Filter(x => _modFilter != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
+            .Filter(x => _modFilter != ModFilterType.Disabled || x is { IsDisabled: true, IsLocal: true })
             .Filter(x => _modFilter != ModFilterType.Outdated || x.State == ModState.Outdated)
             .Filter(x => _modFilter != ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
             .SortAndBind(out _mods, comparer)

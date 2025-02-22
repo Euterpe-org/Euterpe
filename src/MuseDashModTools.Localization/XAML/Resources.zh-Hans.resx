@@ -352,4 +352,7 @@
     <data name="XAML_Translator_Spanish" xml:space="preserve">
         <value>西班牙语</value>
     </data>
+    <data name="XAML_ModFilterType_Disabled" xml:space="preserve">
+        <value>已禁用</value>
+    </data>
 </root>
