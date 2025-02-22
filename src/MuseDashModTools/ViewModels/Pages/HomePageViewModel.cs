@@ -6,7 +6,7 @@ namespace MuseDashModTools.ViewModels.Pages;
 public sealed partial class HomePageViewModel : ViewModelBase
 {
     [RelayCommand]
-    private async Task ShowDonationDrawer()
+    private Task<DialogResult> ShowDonationDrawerAsync()
     {
         var options = new DrawerOptions
         {
@@ -20,7 +20,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
             CanResize = false
         };
 
-        await Drawer.ShowModal<DonationDialog, DonationDialogViewModel>(DonationDialogViewModel, "DonationDrawerHost", options);
+        return Drawer.ShowModal<DonationDialog, DonationDialogViewModel>(DonationDialogViewModel, "DonationDrawerHost", options);
     }
 
     [RelayCommand]

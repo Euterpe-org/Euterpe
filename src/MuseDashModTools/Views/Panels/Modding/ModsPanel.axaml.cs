@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Panels.Modding;
 
-public partial class ModsPanel : UserControl
+public partial class ModsPanel : ReactiveUserControl<ModsPanelViewModel>
 {
     public ModsPanel()
     {

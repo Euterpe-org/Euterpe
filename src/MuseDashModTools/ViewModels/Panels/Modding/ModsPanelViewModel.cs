@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
+using System.Reactive.Disposables;
 using DynamicData;
 using DynamicData.Binding;
+using ReactiveUI;
 
 namespace MuseDashModTools.ViewModels.Panels.Modding;
 
@@ -53,14 +55,24 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
             .Filter(x => _modFilter != ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
             .SortAndBind(out _mods, comparer)
             .Subscribe();
+
+        this.WhenActivated(async void (CompositeDisposable _) =>
+        {
+            try
+            {
+                await InitializeAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Logger.ZLogError(ex, $"{nameof(ModsPanelViewModel)} Initialize Error");
+            }
+        });
     }
 
-    [RelayCommand]
     private async Task InitializeAsync()
     {
-        Logger.ZLogInformation($"Initializing ModManagePageViewModel");
         await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
-        Logger.ZLogInformation($"ModManagePageViewModel Initialized");
+        Logger.ZLogInformation($"{nameof(ModsPanelViewModel)} Initialized");
     }
 
     [RelayCommand]

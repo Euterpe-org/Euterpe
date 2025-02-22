@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.Reactive.Disposables;
+using ReactiveUI;
 
 namespace MuseDashModTools.ViewModels;
 
@@ -12,7 +14,21 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         new(XAML_Page_Setting, SettingPageName, "Setting")
     ];
 
-    [RelayCommand]
+    public MainWindowViewModel()
+    {
+        this.WhenActivated(async void (CompositeDisposable _) =>
+        {
+            try
+            {
+                await InitializeAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Logger.ZLogError(ex, $"MainWindow Initialize Error");
+            }
+        });
+    }
+
     private async Task InitializeAsync()
     {
         Initialize();

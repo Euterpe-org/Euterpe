@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Pages;
 
-public partial class SettingPage : UserControl
+public partial class SettingPage : ReactiveUserControl<SettingPageViewModel>
 {
     public SettingPage()
     {

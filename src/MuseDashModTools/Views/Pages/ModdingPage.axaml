@@ -14,16 +14,10 @@
         <pages:ModdingPageViewModel />
     </Design.DataContext>
 
-    <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Initialized">
-            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </EventTriggerBehavior>
-    </Interaction.Behaviors>
-
     <Grid RowDefinitions="Auto, *">
-        <Border Margin="0,0,20,10"
+        <Border Height="41"
+                Margin="0,0,20,10"
                 Padding="12,4"
-                Height="41"
                 Theme="{DynamicResource CardBorder}">
             <Panel>
                 <mdmt:NaviPanelListControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
@@ -31,7 +25,7 @@
             </Panel>
         </Border>
         <ContentControl Grid.Row="1"
-                        Margin="0, 10, 10, 10"
+                        Margin="0,10,10,10"
                         Content="{Binding Content, Mode=OneWay}" />
     </Grid>
 

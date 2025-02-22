@@ -14,11 +14,10 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
         new("Advanced", AdvancedPanelName)
     ];
 
-    [RelayCommand]
     protected override void Initialize()
     {
         base.Initialize();
-        Logger.ZLogInformation($"SettingPage Initialized");
+        Logger.ZLogInformation($"{nameof(SettingPageViewModel)} Initialized");
     }
 
     #region Injections

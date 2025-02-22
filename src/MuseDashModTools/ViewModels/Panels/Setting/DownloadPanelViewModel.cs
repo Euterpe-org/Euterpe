@@ -21,22 +21,22 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedUpdateSourceIndex { get; set; }
 
-    [RelayCommand]
-    private Task InitializeAsync()
-    {
-        SelectedDownloadSourceIndex = (int)Config.DownloadSource;
-        SelectedUpdateSourceIndex = (int)Config.UpdateSource;
-        return Task.CompletedTask;
-    }
-
-    partial void OnSelectedDownloadSourceIndexChanged(int value) => Config.DownloadSource = (DownloadSource)value;
-
-    partial void OnSelectedUpdateSourceIndexChanged(int value) => Config.UpdateSource = (UpdateSource)value;
-
     #region Injections
 
     [UsedImplicitly]
     public Config Config { get; init; } = null!;
 
     #endregion Injections
+
+    protected override void Initialize()
+    {
+        SelectedDownloadSourceIndex = (int)Config.DownloadSource;
+        SelectedUpdateSourceIndex = (int)Config.UpdateSource;
+    }
+
+    [UsedImplicitly]
+    partial void OnSelectedDownloadSourceIndexChanged(int value) => Config.DownloadSource = (DownloadSource)value;
+
+    [UsedImplicitly]
+    partial void OnSelectedUpdateSourceIndexChanged(int value) => Config.UpdateSource = (UpdateSource)value;
 }
