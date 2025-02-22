@@ -7,7 +7,7 @@ internal sealed class JsonSerializationService : IJsonSerializationService
     #region AOT Compatible
 
     public ValueTask<Config?> DeserializeConfigAsync(Stream utf8Json, CancellationToken cancellationToken = default) =>
-        JsonSerializer.DeserializeAsync(utf8Json, SourceGenerationContext.Default.Config, cancellationToken);
+        JsonSerializer.DeserializeAsync(utf8Json, Default.Config, cancellationToken);
 
     #endregion AOT Compatible
 
@@ -19,6 +19,8 @@ internal sealed class JsonSerializationService : IJsonSerializationService
         IndentCharacter = ' ',
         IndentSize = 4
     };
+
+#pragma warning disable IL2026, IL3050
 
     public T? Deserialize<T>(string text) => JsonSerializer.Deserialize<T>(text);
 
@@ -57,6 +59,8 @@ internal sealed class JsonSerializationService : IJsonSerializationService
         T value,
         CancellationToken cancellationToken = default)
         => JsonSerializer.SerializeAsync(utf8Json, value, IndentedSerializerOptions, cancellationToken);
+
+#pragma warning restore IL3050, IL2026
 
     #endregion AOT Incompatible
 }
