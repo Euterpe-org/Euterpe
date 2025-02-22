@@ -73,6 +73,15 @@
         <ProjectReference Include="..\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj"/>
     </ItemGroup>
 
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+        <DirectPInvoke Include="av_libglesv2"/>
+        <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <DirectPInvoke Include="libHarfBuzzSharp"/>
+        <NativeLibrary Include="Native\libHarfBuzzSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <DirectPInvoke Include="libSkiaSharp"/>
+        <NativeLibrary Include="Native\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+    </ItemGroup>
+
     <ItemGroup>
         <AdditionalFiles Include="BannedSymbols.txt"/>
     </ItemGroup>
