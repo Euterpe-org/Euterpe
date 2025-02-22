@@ -1,7 +1,7 @@
 ﻿using System.Buffers;
 using Utf8StringInterpolation;
 
-namespace MuseDashModTools.Core;
+namespace MuseDashModTools.Core.Logger;
 
 public sealed class LogFileFormatter : IZLoggerFormatter
 {

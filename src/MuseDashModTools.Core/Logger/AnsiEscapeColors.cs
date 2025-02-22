@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Core;
+﻿namespace MuseDashModTools.Core.Logger;
 
 public static class AnsiEscapeColors
 {

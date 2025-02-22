@@ -1,8 +1,8 @@
 ﻿using System.Buffers;
 using Utf8StringInterpolation;
-using static MuseDashModTools.Core.AnsiEscapeColors;
+using static MuseDashModTools.Core.Logger.AnsiEscapeColors;
 
-namespace MuseDashModTools.Core;
+namespace MuseDashModTools.Core.Logger;
 
 public sealed class LogConsoleFormatter : IZLoggerFormatter
 {
