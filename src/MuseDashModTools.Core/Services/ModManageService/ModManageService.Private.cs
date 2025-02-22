@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using AsyncAwaitBestPractices;
 using DynamicData;
 
 namespace MuseDashModTools.Core;
@@ -126,7 +127,7 @@ internal sealed partial class ModManageService
                 }
 
                 // TODO MessageBox (lxy, 2025/2/21)
-                _libDownloadTasks.Add(DownloadLibAsync(webLib.ToDto()));
+                DownloadLibAsync(webLib.ToDto()).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Name} failed"));
             }
             else
             {
@@ -147,7 +148,7 @@ internal sealed partial class ModManageService
                 continue;
             }
 
-            _libDownloadTasks.Add(DownloadLibAsync(lib));
+            DownloadLibAsync(lib).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {libName} failed"));
         }
     }
 
@@ -155,6 +156,7 @@ internal sealed partial class ModManageService
     {
         await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
         _libsDict[lib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, lib.FileName));
+        Logger.ZLogInformation($"Lib {lib.Name} download finished");
     }
 
     #endregion Load Libs

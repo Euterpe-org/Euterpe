@@ -12,6 +12,7 @@
     <ItemGroup>
         <PackageReference Include="AsmResolver.DotNet"/>
         <PackageReference Include="AssetsTools.NET"/>
+        <PackageReference Include="AsyncAwaitBestPractices"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="CliWrap"/>
         <PackageReference Include="JetBrains.Annotations"/>
