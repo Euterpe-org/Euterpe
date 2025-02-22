@@ -44,7 +44,7 @@ public sealed partial class ModDto : ObservableObject
 
     public bool IsLocal => FileNameWithoutExtension is not null;
     public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
-    public bool IsReinstallable => IsLocal && State is not (ModState.Outdated or ModState.Normal or ModState.Newer);
+    public bool IsReinstallable => IsLocal && State is ModState.Modified;
 
     [ObservableProperty]
     public partial bool IsValidConfigFile { get; set; }
