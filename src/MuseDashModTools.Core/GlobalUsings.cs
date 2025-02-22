@@ -12,6 +12,7 @@ global using Microsoft.Extensions.Logging;
 global using MuseDashModTools.Abstractions;
 global using MuseDashModTools.Common.Extensions;
 global using MuseDashModTools.Core.Extensions;
+global using MuseDashModTools.Core.Logger;
 global using MuseDashModTools.Core.Proxies;
 global using MuseDashModTools.Core.Utils;
 global using MuseDashModTools.Models;
