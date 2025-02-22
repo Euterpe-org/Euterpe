@@ -2,7 +2,7 @@
 
 public static class CoreServiceExtensions
 {
-    public static void RegisterLogger(this ServiceCollection services, string logFileName)
+    public static void RegisterLogger(this IServiceCollection services, string logFileName)
     {
         services.AddLogging(x =>
         {
