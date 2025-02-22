@@ -60,7 +60,7 @@ public sealed class App : Application
 #if RELEASE
     private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-        Container.Resolve<ILogger>().ZLogError(e.Exception, $"Unhandled exception");
+        Container.Resolve<ILogger<App>>().ZLogError(e.Exception, $"Unhandled exception");
 
         if (OperatingSystem.IsWindows())
         {
