@@ -8,6 +8,7 @@ internal sealed partial class SavingService : ISavingService
 
     public async Task LoadSettingAsync()
     {
+        Directory.CreateDirectory(ConfigFolder);
         if (File.Exists(ConfigPath))
         {
             await using var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
