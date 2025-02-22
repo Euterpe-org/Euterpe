@@ -7,6 +7,7 @@ public interface IJsonSerializationService : ISerializationService
     #region AOT Compatible
 
     ValueTask<Config?> DeserializeConfigAsync(Stream utf8Json, CancellationToken cancellationToken = default);
+    Task SerializeConfigAsync(Stream utf8Json, Config value, CancellationToken cancellationToken = default);
 
     #endregion AOT Compatible
 

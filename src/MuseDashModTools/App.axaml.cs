@@ -45,7 +45,7 @@ public sealed class App : Application
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
             desktop.MainWindow = Container.Resolve<MainWindow>();
-            desktop.Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
+            desktop.Exit += (_, _) => OnExitAsync().GetAwaiter().GetResult();
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -61,21 +61,8 @@ public sealed class App : Application
     private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         Container.Resolve<ILogger<App>>().ZLogError(e.Exception, $"Unhandled exception");
-
-        if (OperatingSystem.IsWindows())
-        {
-            Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
-        }
-        else if (OperatingSystem.IsLinux())
-        {
-            Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
-        }
-
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
-            UseShellExecute = true
-        });
+        Container.Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
+        Container.Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
     }
 #endif
 }
