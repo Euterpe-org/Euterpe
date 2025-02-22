@@ -14,13 +14,14 @@ internal sealed partial class ModManageService : IModManageService
         _sourceCache = sourceCache;
         _gameVersion = await LocalService.ReadGameVersionAsync().ConfigureAwait(false);
 
-        await LoadModsAsync().ConfigureAwait(false);
         await LoadLibsAsync().ConfigureAwait(false);
+        await LoadModsAsync().ConfigureAwait(false);
     }
 
     public async Task InstallModAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
+        await CheckLibDependenciesAsync(mod).ConfigureAwait(false);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
     }

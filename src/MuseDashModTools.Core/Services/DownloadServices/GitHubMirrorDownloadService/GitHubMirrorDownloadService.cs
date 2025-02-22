@@ -66,13 +66,12 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         }
     }
 
-    public async Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default)
+    public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading lib {libName} from GitHubMirror...");
+        Logger.ZLogInformation($"Downloading lib {lib.Name} from GitHubMirror...");
 
-        var libFileName = libName + ".dll";
-        var downloadLink = PrimaryLibsFolderUrl + libFileName;
-        var path = Path.Combine(Config.UserLibsFolder, libFileName);
+        var downloadLink = PrimaryLibsFolderUrl + lib.FileName;
+        var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -82,7 +81,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download lib {libName} from GitHubMirror");
+            Logger.ZLogError(ex, $"Failed to download lib {lib.Name} from GitHubMirror");
             return false;
         }
     }
@@ -128,7 +127,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Fetching mods from GitHubMirror {PrimaryModJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModJsonUrl, SourceGenerationContext.Default.Mod, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModJsonUrl, Default.Mod, cancellationToken)
             .Catch<Mod?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch mods from GitHubMirror");
@@ -140,7 +139,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Fetching libs from GitHubMirror {PrimaryLibJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(PrimaryLibJsonUrl, SourceGenerationContext.Default.Lib, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(PrimaryLibJsonUrl, Default.Lib, cancellationToken)
             .Catch<Lib?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch libs from GitHubMirror");

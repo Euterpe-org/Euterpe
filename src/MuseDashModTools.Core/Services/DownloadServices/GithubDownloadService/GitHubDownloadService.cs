@@ -64,13 +64,12 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
     }
 
-    public async Task<bool> DownloadLibAsync(string libName, CancellationToken cancellationToken = default)
+    public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading lib {libName} from GitHub...");
+        Logger.ZLogInformation($"Downloading lib {lib.Name} from GitHub...");
 
-        var libFileName = libName + ".dll";
-        var downloadLink = LibsFolderUrl + libFileName;
-        var path = Path.Combine(Config.UserLibsFolder, libFileName);
+        var downloadLink = LibsFolderUrl + lib.FileName;
+        var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
@@ -80,7 +79,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download lib {libName} from GitHub");
+            Logger.ZLogError(ex, $"Failed to download lib {lib.Name} from GitHub");
             return false;
         }
     }
@@ -125,7 +124,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     {
         Logger.ZLogInformation($"Fetching mods from GitHub {ModJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, SourceGenerationContext.Default.Mod, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken)
             .Catch<Mod?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch mods from GitHub");
@@ -137,7 +136,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     {
         Logger.ZLogInformation($"Fetching libs from GitHub {LibJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, SourceGenerationContext.Default.Lib, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken)
             .Catch<Lib?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch libs from GitHub");
