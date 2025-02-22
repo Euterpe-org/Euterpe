@@ -6,6 +6,7 @@
         <PackageVersion Include="Antelcat.I18N.Avalonia" Version="1.0.3"/>
         <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.2"/>
         <PackageVersion Include="AssetsTools.NET" Version="3.0.0"/>
+        <PackageVersion Include="AsyncAwaitBestPractices" Version="9.0.0"/>
         <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
         <PackageVersion Include="Avalonia" Version="11.2.4"/>
         <PackageVersion Include="Avalonia.Controls.ItemsRepeater" Version="11.1.5"/>
@@ -45,7 +46,7 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0"/>
         <PackageVersion Include="Moq" Version="4.20.72"/>
-        <PackageVersion Include="Polyfill" Version="7.17.0">
+        <PackageVersion Include="Polyfill" Version="7.18.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
