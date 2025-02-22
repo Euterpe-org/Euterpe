@@ -31,6 +31,12 @@ internal sealed partial class ModManageService
                 CheckModState(localMod, webMod);
                 localMod.UpdateFromMod(webMod);
                 CheckConfigFile(localMod);
+
+                if (!localMod.IsDisabled)
+                {
+                    CheckLibDependencies(localMod);
+                }
+
                 _sourceCache.AddOrUpdate(localMod);
             }
             else
@@ -120,8 +126,7 @@ internal sealed partial class ModManageService
                 }
 
                 // TODO MessageBox (lxy, 2025/2/21)
-                await DownloadManager.DownloadLibAsync(webLib.ToDto()).ConfigureAwait(false);
-                _libsDict[webLib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, webLib.FileName));
+                _libDownloadTasks.Add(DownloadLibAsync(webLib.ToDto()));
             }
             else
             {
@@ -132,7 +137,7 @@ internal sealed partial class ModManageService
         Logger.ZLogInformation($"All libs loaded");
     }
 
-    private async Task CheckLibDependenciesAsync(ModDto mod)
+    private void CheckLibDependencies(ModDto mod)
     {
         foreach (var libName in mod.LibDependencies)
         {
@@ -142,9 +147,14 @@ internal sealed partial class ModManageService
                 continue;
             }
 
-            await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
-            _libsDict[libName] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, lib.FileName));
+            _libDownloadTasks.Add(DownloadLibAsync(lib));
         }
+    }
+
+    private async Task DownloadLibAsync(LibDto lib)
+    {
+        await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
+        _libsDict[lib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, lib.FileName));
     }
 
     #endregion Load Libs
@@ -182,7 +192,7 @@ internal sealed partial class ModManageService
         File.Move(Path.Combine(Config.ModsFolder, mod.LocalFileName),
             Path.Combine(Config.ModsFolder, mod.ReversedFileName));
 
-        await CheckLibDependenciesAsync(mod).ConfigureAwait(false);
+        CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
 
         Logger.ZLogInformation($"Change mod {mod.Name} state to enabled");

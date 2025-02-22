@@ -5,6 +5,7 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class ModManageService : IModManageService
 {
+    private readonly List<Task> _libDownloadTasks = [];
     private string _gameVersion = null!;
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
     private SourceCache<ModDto, string> _sourceCache = null!;
@@ -16,12 +17,14 @@ internal sealed partial class ModManageService : IModManageService
 
         await LoadLibsAsync().ConfigureAwait(false);
         await LoadModsAsync().ConfigureAwait(false);
+
+        await Task.WhenAll(_libDownloadTasks).ConfigureAwait(false);
     }
 
     public async Task InstallModAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
-        await CheckLibDependenciesAsync(mod).ConfigureAwait(false);
+        CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
     }
