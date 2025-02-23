@@ -1,3 +1,4 @@
+using System.Reactive.Disposables;
 using ReactiveUI;
 
 namespace MuseDashModTools.ViewModels;
@@ -10,6 +11,11 @@ public partial class ViewModelBase : ObservableObject, IActivatableViewModel
     public IPlatformService PlatformService { get; init; } = null!;
 
     #endregion Injections
+
+    public ViewModelBase()
+    {
+        this.WhenActivated((CompositeDisposable _) => Initialize());
+    }
 
     public ViewModelActivator Activator { get; } = new();
 

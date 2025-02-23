@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Reactive.Disposables;
-using ReactiveUI;
 
 namespace MuseDashModTools.ViewModels;
 
@@ -14,11 +12,6 @@ public partial class NavViewModelBase : ViewModelBase
 
     [UsedImplicitly]
     public virtual ObservableCollection<NavItem> NavItems { get; } = null!;
-
-    public NavViewModelBase()
-    {
-        this.WhenActivated((CompositeDisposable _) => Initialize());
-    }
 
     protected virtual void Navigate(NavItem? value)
     {

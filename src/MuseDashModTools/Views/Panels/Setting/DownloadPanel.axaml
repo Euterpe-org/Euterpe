@@ -46,13 +46,15 @@
         </StackPanel>
 
         <!--  GitHub Token  -->
-        <StackPanel Orientation="Vertical" Spacing="15">
+        <StackPanel IsVisible="{Binding Config.UpdateSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:UpdateSource.GitHubAPI}, Mode=OneWay}"
+                    Orientation="Vertical"
+                    Spacing="15">
             <TextBlock Classes="H4"
                        Text="GitHub Token"
                        Theme="{StaticResource TitleTextBlock}" />
             <TextBlock Margin="0,-10,0,0"
                        Foreground="Gray"
-                       Text="Desc desc desc desc desc desc..."
+                       Text="GitHub Token used for GitHub API access, required for GitHub API update source"
                        TextWrapping="Wrap" />
             <TextBox Classes="ClearButton"
                      Foreground="Gray"

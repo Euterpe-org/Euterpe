@@ -26,7 +26,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     [RelayCommand]
     private void LaunchModdedGame()
     {
-        // TODO
+        LocalService.LaunchGame(true);
     }
 
     [RelayCommand]
@@ -39,6 +39,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public DonationDialogViewModel DonationDialogViewModel { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILocalService LocalService { get; init; } = null!;
 
     [UsedImplicitly]
     public ILogger<HomePageViewModel> Logger { get; init; } = null!;
