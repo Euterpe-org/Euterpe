@@ -21,13 +21,6 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedUpdateSourceIndex { get; set; }
 
-    #region Injections
-
-    [UsedImplicitly]
-    public Config Config { get; init; } = null!;
-
-    #endregion Injections
-
     protected override void Initialize()
     {
         SelectedDownloadSourceIndex = (int)Config.DownloadSource;
@@ -39,4 +32,14 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
 
     [UsedImplicitly]
     partial void OnSelectedUpdateSourceIndexChanged(int value) => Config.UpdateSource = (UpdateSource)value;
+
+    #region Injections
+
+    [UsedImplicitly]
+    public Config Config { get; init; } = null!;
+
+    [UsedImplicitly]
+    public ILogger<DownloadPanelViewModel> Logger { get; init; } = null!;
+
+    #endregion Injections
 }
