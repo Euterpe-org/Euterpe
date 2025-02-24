@@ -5,5 +5,6 @@ public enum DownloadSource
 {
     GitHub,
     GitHubMirror,
+    Gitee,
     Custom
 }

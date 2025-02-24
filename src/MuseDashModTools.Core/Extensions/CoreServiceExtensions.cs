@@ -57,6 +57,7 @@ public static class CoreServiceExtensions
 
         // Download Services
         builder.RegisterType<CustomDownloadService>().As<ICustomDownloadService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<GiteeDownloadService>().As<IGiteeDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubDownloadService>().As<IGitHubDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubMirrorDownloadService>().As<IGitHubMirrorDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();

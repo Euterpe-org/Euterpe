@@ -88,7 +88,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
     public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
     {
-        var releaseBaseUrl = ReleaseDownloadBaseUrl.Replace(GitHubBaseUrl, PrimaryReleaseMirrorUrl);
+        var releaseBaseUrl = ModToolsReleaseDownloadBaseUrl.Replace(GitHubBaseUrl, PrimaryReleaseMirrorUrl);
         var downloadUrl = $"{releaseBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
 
         try

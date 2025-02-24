@@ -1,46 +1,25 @@
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 
 namespace MuseDashModTools.Core;
 
-internal sealed partial class GitHubDownloadService : IGitHubDownloadService
+public sealed class GiteeDownloadService : IGiteeDownloadService
 {
-    private const string RawModLinksUrl = GitHubRawContentBaseUrl + ModLinksBaseUrl;
+    private const string GiteeBaseUrl = "https://gitee.com/";
+    private const string RawModLinksUrl = GiteeBaseUrl + "lxymahatma/ModLinks/raw/" + ModLinksBranch;
     private const string ModJsonUrl = RawModLinksUrl + "Mods.json";
     private const string LibJsonUrl = RawModLinksUrl + "Libs.json";
     private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
-    private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
-    private const string UnityDependencyUrl = GitHubRawContentBaseUrl + UnityDependencyBaseUrl;
-    private const string Cpp2ILUrl = GitHubBaseUrl + Cpp2ILBaseUrl;
+    private const string ModToolsReleaseDownloadBaseUrl = GiteeBaseUrl + "lxymahatma/MuseDashModTools/releases/download/";
 
-    public async Task<bool> DownloadMelonLoaderAsync(
+    public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         IProgress<double> downloadProgress,
-        CancellationToken cancellationToken = default)
-    {
-        Logger.ZLogInformation($"Downloading MelonLoader and Dependencies from GitHub...");
-
-        Downloader.DownloadStarted += onDownloadStarted;
-        Downloader.DownloadProgressChanged += (_, e) => downloadProgress.Report(e.ProgressPercentage);
-
-        try
-        {
-            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Config.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Config.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
-            Logger.ZLogInformation($"MelonLoader and Dependencies downloaded from GitHub successfully");
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to download MelonLoader from GitHub");
-            return false;
-        }
-    }
+        CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading mod {mod.Name} from GitHub...");
+        Logger.ZLogInformation($"Downloading mod {mod.Name} from Gitee...");
 
         if (mod.FileName.IsNullOrEmpty())
         {
@@ -59,14 +38,14 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download mod {mod.Name} from GitHub");
+            Logger.ZLogError(ex, $"Failed to download mod {mod.Name} from Gitee");
             return false;
         }
     }
 
     public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading lib {lib.Name} from GitHub...");
+        Logger.ZLogInformation($"Downloading lib {lib.Name} from Gitee...");
 
         var downloadLink = LibsFolderUrl + lib.FileName;
         var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
@@ -79,7 +58,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download lib {lib.Name} from GitHub");
+            Logger.ZLogError(ex, $"Failed to download lib {lib.Name} from Gitee");
             return false;
         }
     }
@@ -96,50 +75,32 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download new version from GitHub");
+            Logger.ZLogError(ex, $"Failed to download new version from Gitee");
         }
     }
 
-    public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
-    {
-        if (ReadmeCache.TryGetValue(repoId, out var readme))
-        {
-            Logger.ZLogInformation($"Using cached Readme for {repoId}");
-            return readme;
-        }
-
-        Logger.ZLogInformation($"Attempting to fetch Readme for {repoId}");
-        readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken).ConfigureAwait(false);
-        if (!string.IsNullOrEmpty(readme))
-        {
-            ReadmeCache[repoId] = readme;
-            return readme;
-        }
-
-        Logger.ZLogInformation($"Branch readme fetch failed");
-        return null;
-    }
+    public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods from GitHub {ModJsonUrl}...");
+        Logger.ZLogInformation($"Fetching mod list from Gitee {ModJsonUrl} ...");
 
         return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken)
             .Catch<Mod?, Exception>(ex =>
             {
-                Logger.ZLogError(ex, $"Failed to fetch mods from GitHub");
+                Logger.ZLogError(ex, $"Failed to fetch mod list from Gitee");
                 return AsyncEnumerable.Empty<Mod?>();
             });
     }
 
     public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching libs from GitHub {LibJsonUrl}...");
+        Logger.ZLogInformation($"Fetching lib list from Gitee {LibJsonUrl} ...");
 
         return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken)
             .Catch<Lib?, Exception>(ex =>
             {
-                Logger.ZLogError(ex, $"Failed to fetch libs from GitHub");
+                Logger.ZLogError(ex, $"Failed to fetch lib list from Gitee");
                 return AsyncEnumerable.Empty<Lib?>();
             });
     }
@@ -156,7 +117,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     public required MultiThreadDownloader Downloader { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<GitHubDownloadService> Logger { get; init; }
+    public required ILogger<GiteeDownloadService> Logger { get; init; }
 
     [UsedImplicitly]
     public required IPlatformService PlatformService { get; init; }
