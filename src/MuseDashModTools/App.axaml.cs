@@ -4,6 +4,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using HotAvalonia;
 using Microsoft.Extensions.DependencyInjection;
+using ReactiveUI;
 
 namespace MuseDashModTools;
 
@@ -48,14 +49,13 @@ public sealed class App : Application
             desktop.Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
         }
 
+        this.WhenAnyValue(x => x.ActualThemeVariant)
+            .Subscribe(theme => Container.Resolve<Config>().Theme = AvaloniaResources.ThemeVariants[theme]);
+
         base.OnFrameworkInitializationCompleted();
     }
 
-    private static Task OnExitAsync()
-    {
-        Container.Resolve<Config>().Theme = AvaloniaResources.ThemeVariants[GetCurrentApplication().ActualThemeVariant];
-        return Container.Resolve<ISavingService>().SaveSettingAsync();
-    }
+    private static Task OnExitAsync() => Container.Resolve<ISettingService>().SaveAsync();
 
 #if RELEASE
     private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
