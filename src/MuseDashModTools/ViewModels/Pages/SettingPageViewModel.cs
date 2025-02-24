@@ -1,10 +1,8 @@
-﻿using System.Collections.ObjectModel;
-
-namespace MuseDashModTools.ViewModels.Pages;
+﻿namespace MuseDashModTools.ViewModels.Pages;
 
 public sealed partial class SettingPageViewModel : NavViewModelBase
 {
-    public override ObservableCollection<NavItem> NavItems { get; } =
+    public override IReadOnlyList<NavItem> NavItems { get; } =
     [
         new("About", AboutPanelName),
         new("Appearance", AppearancePanelName),
@@ -14,10 +12,12 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
         new("Advanced", AdvancedPanelName)
     ];
 
-    protected override void Initialize()
+    protected override Task OnActivatedAsync(CompositeDisposable disposables)
     {
-        base.Initialize();
+        base.OnActivatedAsync(disposables);
+
         Logger.ZLogInformation($"{nameof(SettingPageViewModel)} Initialized");
+        return Task.CompletedTask;
     }
 
     #region Injections

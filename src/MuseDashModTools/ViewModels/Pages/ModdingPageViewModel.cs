@@ -4,7 +4,7 @@ namespace MuseDashModTools.ViewModels.Pages;
 
 public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
-    public override ObservableCollection<NavItem> NavItems { get; } =
+    public override IReadOnlyList<NavItem> NavItems { get; } =
     [
         new("Mods", ModsPanelName),
         new("Melon Loader", MelonLoaderPanelName),
@@ -21,10 +21,12 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
         ])
     ];
 
-    protected override void Initialize()
+    protected override Task OnActivatedAsync(CompositeDisposable disposables)
     {
-        base.Initialize();
+        base.OnActivatedAsync(disposables);
+
         Logger.ZLogInformation($"{nameof(ModdingPageViewModel)} Initialized");
+        return Task.CompletedTask;
     }
 
     #region Injections

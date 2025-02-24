@@ -21,10 +21,15 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedUpdateSourceIndex { get; set; }
 
-    protected override void Initialize()
+    protected override Task OnActivatedAsync(CompositeDisposable disposables)
     {
+        base.OnActivatedAsync(disposables);
+
         SelectedDownloadSourceIndex = (int)Config.DownloadSource;
         SelectedUpdateSourceIndex = (int)Config.UpdateSource;
+
+        Logger.ZLogInformation($"{nameof(DownloadPanelViewModel)} Initialized");
+        return Task.CompletedTask;
     }
 
     [UsedImplicitly]

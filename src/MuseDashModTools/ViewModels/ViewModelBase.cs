@@ -1,4 +1,4 @@
-using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using ReactiveUI;
 
 namespace MuseDashModTools.ViewModels;
@@ -14,12 +14,22 @@ public partial class ViewModelBase : ObservableObject, IActivatableViewModel
 
     public ViewModelBase()
     {
-        this.WhenActivated((CompositeDisposable _) => Initialize());
+        this.WhenActivated(disposables =>
+        {
+            Observable.FromAsync(() => OnActivatedAsync(disposables))
+                .Subscribe()
+                .DisposeWith(disposables);
+
+            Disposable.Create(OnDeactivated)
+                .DisposeWith(disposables);
+        });
     }
 
     public ViewModelActivator Activator { get; } = new();
 
-    protected virtual void Initialize()
+    protected virtual Task OnActivatedAsync(CompositeDisposable disposables) => Task.CompletedTask;
+
+    protected virtual void OnDeactivated()
     {
     }
 

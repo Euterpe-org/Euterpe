@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Core;
 
-internal sealed partial class SavingService
+internal sealed partial class SettingService
 {
     private async Task CheckValidSettingAsync()
     {
