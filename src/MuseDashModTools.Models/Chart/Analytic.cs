@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Models.Chart;
+﻿namespace MuseDashModTools.Models;
 
 [UsedImplicitly]
 public sealed class Analytic

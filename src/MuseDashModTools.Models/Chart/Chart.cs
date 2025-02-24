@@ -1,6 +1,6 @@
 using Avalonia.Media.Imaging;
 
-namespace MuseDashModTools.Models.Chart;
+namespace MuseDashModTools.Models;
 
 public sealed class Chart
 {

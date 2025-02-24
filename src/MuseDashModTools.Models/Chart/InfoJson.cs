@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Models.Chart;
+﻿namespace MuseDashModTools.Models;
 
 public sealed partial class InfoJson : ObservableObject
 {
