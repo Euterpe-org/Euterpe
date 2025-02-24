@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace MuseDashModTools.ViewModels;
+﻿namespace MuseDashModTools.ViewModels;
 
 public partial class NavViewModelBase : ViewModelBase
 {
@@ -11,15 +9,18 @@ public partial class NavViewModelBase : ViewModelBase
     public partial NavItem? SelectedItem { get; set; }
 
     [UsedImplicitly]
-    public virtual ObservableCollection<NavItem> NavItems { get; } = null!;
+    public virtual IReadOnlyList<NavItem> NavItems { get; } = null!;
 
     protected virtual void Navigate(NavItem? value)
     {
     }
 
-    protected override void Initialize()
+    protected override Task OnActivatedAsync(CompositeDisposable disposables)
     {
+        base.OnActivatedAsync(disposables);
+
         SelectedItem = NavItems[0];
+        return Task.CompletedTask;
     }
 
     [UsedImplicitly]

@@ -1,12 +1,12 @@
 namespace MuseDashModTools.Core;
 
-internal sealed partial class SavingService : ISavingService
+internal sealed partial class SettingService : ISettingService
 {
     private const string ConfigFileName = "Config.json";
     private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(MuseDashModTools));
     private static readonly string ConfigPath = Path.Combine(ConfigFolder, ConfigFileName);
 
-    public async Task LoadSettingAsync()
+    public async Task LoadAsync()
     {
         Directory.CreateDirectory(ConfigFolder);
         if (File.Exists(ConfigPath))
@@ -33,7 +33,7 @@ internal sealed partial class SavingService : ISavingService
         }
     }
 
-    public async Task SaveSettingAsync()
+    public async Task SaveAsync()
     {
         await using var stream = new FileStream(ConfigPath, FileMode.OpenOrCreate, FileAccess.Write);
         await JsonSerializationService.SerializeConfigAsync(stream, Config).ConfigureAwait(false);
@@ -52,7 +52,7 @@ internal sealed partial class SavingService : ISavingService
     public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<SavingService> Logger { get; init; }
+    public required ILogger<SettingService> Logger { get; init; }
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }

@@ -52,7 +52,7 @@ public static class CoreServiceExtensions
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<SavingService>().As<ISavingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
 
         // Download Services
