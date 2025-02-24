@@ -59,7 +59,7 @@
                         <TextBlock Margin="13,3,13,0" Foreground="LightSlateGray">
 
                             <TextBlock.Styles>
-                                <Style Selector="mdmt|ButtonImage">
+                                <Style Selector="mdmt|ImageButton">
                                     <Setter Property="ImageCursor" Value="Hand" />
                                     <Setter Property="ImageMargin" Value="3,0" />
                                     <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
@@ -69,20 +69,20 @@
                             <TextBlock.Inlines>
                                 <Run Text="Muse Dash Mod Tools is licensed under the" />
                                 <InlineUIContainer>
-                                    <mdmt:ButtonImage CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
+                                    <mdmt:ImageButton CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
                                                       ImageHeight="13"
                                                       ImageSource="/Assets/MIT_Logo.png" />
                                 </InlineUIContainer>
                                 <Run Text="license." />
                                 <Run Text="Powered by" />
                                 <InlineUIContainer>
-                                    <mdmt:ButtonImage CommandParameter="https://dotnet.microsoft.com"
+                                    <mdmt:ImageButton CommandParameter="https://dotnet.microsoft.com"
                                                       ImageHeight="18"
                                                       ImageSource="/Assets/DotNet_Logo.png" />
                                 </InlineUIContainer>
                                 <Run Text="9.0 &amp;" />
                                 <InlineUIContainer>
-                                    <mdmt:ButtonImage CommandParameter="https://avaloniaui.net"
+                                    <mdmt:ImageButton CommandParameter="https://avaloniaui.net"
                                                       ImageHeight="18"
                                                       ImageSource="/Assets/Avalonia_Logo.png" />
                                 </InlineUIContainer>

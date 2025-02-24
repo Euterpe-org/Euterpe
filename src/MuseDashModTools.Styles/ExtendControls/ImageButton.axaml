@@ -2,10 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:MuseDashModTools.Styles.ExtendControls">
     <Design.PreviewWith>
-        <controls:ButtonImage />
+        <controls:ImageButton />
     </Design.PreviewWith>
 
-    <Style Selector="controls|ButtonImage">
+    <Style Selector="controls|ImageButton">
         <Setter Property="Template">
             <ControlTemplate>
                 <Button Padding="0"
