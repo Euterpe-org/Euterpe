@@ -1,0 +1,36 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:MuseDashModTools.Styles.ExtendControls">
+    <Design.PreviewWith>
+        <controls:ButtonImage />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|ButtonImage">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Button Padding="0"
+                        VerticalAlignment="Bottom"
+                        Command="{TemplateBinding Command, Mode=OneWay}"
+                        CommandParameter="{TemplateBinding CommandParameter, Mode=OneWay}">
+                    <Button.Styles>
+                        <Style Selector="Button">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                        <Style Selector="Button:pressed">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </Button.Styles>
+                    <Button.Content>
+                        <Image Height="{TemplateBinding ImageHeight, Mode=OneWay}"
+                               Margin="{TemplateBinding ImageMargin, Mode=OneWay}"
+                               Cursor="{TemplateBinding ImageCursor, Mode=OneWay}"
+                               Source="{TemplateBinding ImageSource, Mode=OneWay}" />
+                    </Button.Content>
+                </Button>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

@@ -6,13 +6,13 @@ namespace MuseDashModTools.Styles.TemplatedControls;
 public class ContributorCardControl : TemplatedControl
 {
     public static readonly StyledProperty<IImage> AvatarProperty =
-        AvaloniaProperty.Register<Image, IImage>(nameof(Avatar));
+        AvaloniaProperty.Register<ContributorCardControl, IImage>(nameof(Avatar));
 
     public static readonly StyledProperty<string> ContributorNameProperty =
-        AvaloniaProperty.Register<TextBlock, string>(nameof(ContributorName));
+        AvaloniaProperty.Register<ContributorCardControl, string>(nameof(ContributorName));
 
     public static readonly StyledProperty<string?> ContributorDescriptionProperty =
-        AvaloniaProperty.Register<TextBlock, string?>(nameof(ContributorDescription));
+        AvaloniaProperty.Register<ContributorCardControl, string?>(nameof(ContributorDescription));
 
     public static readonly StyledProperty<IEnumerable<ContributorLink>?> LinksProperty =
         AvaloniaProperty.Register<ContributorCardControl, IEnumerable<ContributorLink>?>(nameof(Links));

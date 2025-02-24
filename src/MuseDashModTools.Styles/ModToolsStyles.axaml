@@ -17,6 +17,7 @@
     </Styles.Resources>
 
     <!--  Extend Controls  -->
+    <StyleInclude Source="/ExtendControls/ButtonImage.axaml" />
     <StyleInclude Source="/ExtendControls/DifficultyFilter.axaml" />
     <StyleInclude Source="/ExtendControls/NaviPanelListControl.axaml" />
 

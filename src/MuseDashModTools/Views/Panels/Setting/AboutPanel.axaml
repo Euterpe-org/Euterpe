@@ -59,10 +59,9 @@
                         <TextBlock Margin="13,3,13,0" Foreground="LightSlateGray">
 
                             <TextBlock.Styles>
-                                <Style Selector="Image &gt; EventTriggerBehavior">
-                                    <Setter Property="EventName" Value="Tapped" />
-                                </Style>
-                                <Style Selector="EventTriggerBehavior &gt; InvokeCommandAction">
+                                <Style Selector="mdmt|ButtonImage">
+                                    <Setter Property="ImageCursor" Value="Hand" />
+                                    <Setter Property="ImageMargin" Value="3,0" />
                                     <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
                                 </Style>
                             </TextBlock.Styles>
@@ -70,43 +69,22 @@
                             <TextBlock.Inlines>
                                 <Run Text="Muse Dash Mod Tools is licensed under the" />
                                 <InlineUIContainer>
-                                    <Image Height="13"
-                                           Margin="3,0"
-                                           Cursor="Hand"
-                                           Source="/Assets/MIT_Logo.png">
-                                        <Interaction.Behaviors>
-                                            <EventTriggerBehavior>
-                                                <InvokeCommandAction CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt" />
-                                            </EventTriggerBehavior>
-                                        </Interaction.Behaviors>
-                                    </Image>
+                                    <mdmt:ButtonImage CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
+                                                      ImageHeight="13"
+                                                      ImageSource="/Assets/MIT_Logo.png" />
                                 </InlineUIContainer>
                                 <Run Text="license." />
                                 <Run Text="Powered by" />
                                 <InlineUIContainer>
-                                    <Image Height="18"
-                                           Margin="3,0"
-                                           Cursor="Hand"
-                                           Source="/Assets/DotNet_Logo.png">
-                                        <Interaction.Behaviors>
-                                            <EventTriggerBehavior>
-                                                <InvokeCommandAction CommandParameter="https://dotnet.microsoft.com" />
-                                            </EventTriggerBehavior>
-                                        </Interaction.Behaviors>
-                                    </Image>
+                                    <mdmt:ButtonImage CommandParameter="https://dotnet.microsoft.com"
+                                                      ImageHeight="18"
+                                                      ImageSource="/Assets/DotNet_Logo.png" />
                                 </InlineUIContainer>
                                 <Run Text="9.0 &amp;" />
                                 <InlineUIContainer>
-                                    <Image Height="18"
-                                           Margin="3,0"
-                                           Cursor="Hand"
-                                           Source="/Assets/Avalonia_Logo.png">
-                                        <Interaction.Behaviors>
-                                            <EventTriggerBehavior>
-                                                <InvokeCommandAction CommandParameter="https://avaloniaui.net" />
-                                            </EventTriggerBehavior>
-                                        </Interaction.Behaviors>
-                                    </Image>
+                                    <mdmt:ButtonImage CommandParameter="https://avaloniaui.net"
+                                                      ImageHeight="18"
+                                                      ImageSource="/Assets/Avalonia_Logo.png" />
                                 </InlineUIContainer>
                                 <Run Text="Avalonia 11.2.4." />
                             </TextBlock.Inlines>
