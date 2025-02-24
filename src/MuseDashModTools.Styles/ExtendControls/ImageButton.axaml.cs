@@ -1,18 +1,18 @@
 ﻿namespace MuseDashModTools.Styles.ExtendControls;
 
-public sealed class ButtonImage : Button
+public sealed class ImageButton : Button
 {
     public static readonly StyledProperty<IImage> ImageSourceProperty =
-        AvaloniaProperty.Register<ButtonImage, IImage>(nameof(ImageSource));
+        AvaloniaProperty.Register<ImageButton, IImage>(nameof(ImageSource));
 
     public static readonly StyledProperty<double> ImageHeightProperty =
-        AvaloniaProperty.Register<ButtonImage, double>(nameof(ImageHeight));
+        AvaloniaProperty.Register<ImageButton, double>(nameof(ImageHeight));
 
     public static readonly StyledProperty<Thickness> ImageMarginProperty =
-        AvaloniaProperty.Register<ButtonImage, Thickness>(nameof(ImageMargin));
+        AvaloniaProperty.Register<ImageButton, Thickness>(nameof(ImageMargin));
 
-    public static readonly StyledProperty<Cursor> ImageCursorProperty =
-        AvaloniaProperty.Register<ButtonImage, Cursor>(nameof(ImageCursor));
+    public static readonly StyledProperty<Cursor?> ImageCursorProperty =
+        AvaloniaProperty.Register<ImageButton, Cursor?>(nameof(ImageCursor));
 
     [Content]
     public IImage ImageSource
@@ -33,7 +33,7 @@ public sealed class ButtonImage : Button
         set => SetValue(ImageMarginProperty, value);
     }
 
-    public Cursor ImageCursor
+    public Cursor? ImageCursor
     {
         get => GetValue(ImageCursorProperty);
         set => SetValue(ImageCursorProperty, value);
