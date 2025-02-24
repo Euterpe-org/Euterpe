@@ -64,7 +64,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
             }
             catch (Exception ex)
             {
-                Logger.ZLogError(ex, $"{nameof(ModsPanelViewModel)} Initialize Error");
+                App.Container.Resolve<ILogger<ModsPanelViewModel>>().ZLogError(ex, $"{nameof(ModsPanelViewModel)} Initialize Error");
             }
         });
     }
@@ -136,13 +136,13 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public ILogger<ModsPanelViewModel> Logger { get; init; } = null!;
+    public required ILogger<ModsPanelViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public IModManageService ModManageService { get; init; } = null!;
+    public required IModManageService ModManageService { get; init; }
 
     #endregion Injections
 }

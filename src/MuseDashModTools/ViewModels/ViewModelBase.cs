@@ -8,7 +8,7 @@ public partial class ViewModelBase : ObservableObject, IActivatableViewModel
     #region Injections
 
     [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; } = null!;
+    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 

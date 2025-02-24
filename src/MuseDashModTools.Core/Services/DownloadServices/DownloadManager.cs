@@ -53,16 +53,16 @@ internal sealed class DownloadManager : IDownloadManager
     #region Injections
 
     [UsedImplicitly]
-    public ICustomDownloadService CustomDownloadService { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public IGitHubDownloadService GitHubDownloadService { get; init; } = null!;
+    public required ICustomDownloadService CustomDownloadService { get; init; }
 
     [UsedImplicitly]
-    public IGitHubMirrorDownloadService GitHubMirrorDownloadService { get; init; } = null!;
+    public required IGitHubDownloadService GitHubDownloadService { get; init; }
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required IGitHubMirrorDownloadService GitHubMirrorDownloadService { get; init; }
 
     #endregion Injections
 }

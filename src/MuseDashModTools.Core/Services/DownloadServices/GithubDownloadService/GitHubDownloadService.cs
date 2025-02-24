@@ -147,19 +147,19 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     #region Injections
 
     [UsedImplicitly]
-    public HttpClient Client { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public MultiThreadDownloader Downloader { get; init; } = null!;
+    public required HttpClient Client { get; init; }
 
     [UsedImplicitly]
-    public ILogger<GitHubDownloadService> Logger { get; init; } = null!;
+    public required MultiThreadDownloader Downloader { get; init; }
 
     [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; } = null!;
+    public required ILogger<GitHubDownloadService> Logger { get; init; }
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }

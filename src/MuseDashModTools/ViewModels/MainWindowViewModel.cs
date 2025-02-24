@@ -24,7 +24,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
             }
             catch (Exception ex)
             {
-                Logger.ZLogError(ex, $"MainWindow Initialize Error");
+                App.Container.Resolve<ILogger<MainWindowViewModel>>().ZLogError(ex, $"{nameof(MainWindowViewModel)} Initialize Error");
             }
         });
     }
@@ -43,22 +43,22 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public IDownloadManager DownloadManager { get; init; } = null!;
+    public required IDownloadManager DownloadManager { get; init; }
 
     [UsedImplicitly]
-    public ILogger<MainWindowViewModel> Logger { get; init; } = null!;
+    public required ILogger<MainWindowViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; } = null!;
+    public required ISavingService SavingService { get; init; }
 
     [UsedImplicitly]
-    public NavigationService NavigationService { get; init; } = null!;
+    public required NavigationService NavigationService { get; init; }
 
     [UsedImplicitly]
-    public IUpdateService UpdateService { get; init; } = null!;
+    public required IUpdateService UpdateService { get; init; }
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     #endregion Injections
 }

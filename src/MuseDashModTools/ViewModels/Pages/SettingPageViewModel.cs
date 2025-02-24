@@ -23,10 +23,10 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public ILogger<SettingPageViewModel> Logger { get; init; } = null!;
+    public required ILogger<SettingPageViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public NavigationService NavigationService { get; init; } = null!;
+    public required NavigationService NavigationService { get; init; }
 
     #endregion Injections
 }

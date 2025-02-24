@@ -36,10 +36,10 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public ILogger<DownloadPanelViewModel> Logger { get; init; } = null!;
+    public required ILogger<DownloadPanelViewModel> Logger { get; init; }
 
     #endregion Injections
 }

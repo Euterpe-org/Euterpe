@@ -43,6 +43,7 @@ public static class CoreServiceExtensions
     public static void RegisterCoreServices(this ContainerBuilder builder)
     {
         builder.RegisterType<Config>().SingleInstance();
+        builder.RegisterType<WindowNotificationManager>().SingleInstance();
 
         builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();

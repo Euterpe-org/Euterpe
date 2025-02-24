@@ -38,22 +38,22 @@ internal sealed partial class ModManageService : IModManageService
     #region Injections
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public WindowNotificationManager WindowNotificationManager { get; init; } = null!;
+    public required WindowNotificationManager WindowNotificationManager { get; init; }
 
     [UsedImplicitly]
-    public IDownloadManager DownloadManager { get; init; } = null!;
+    public required IDownloadManager DownloadManager { get; init; }
 
     [UsedImplicitly]
-    public ILocalService LocalService { get; init; } = null!;
+    public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
-    public ILogger<ModManageService> Logger { get; init; } = null!;
+    public required ILogger<ModManageService> Logger { get; init; }
 
     [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; } = null!;
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections
 }

@@ -199,22 +199,22 @@ internal sealed partial class LocalService : ILocalService
     #region Injections
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public IFileSystemService FileSystemService { get; init; } = null!;
+    public required IFileSystemService FileSystemService { get; init; }
 
     [UsedImplicitly]
-    public IFileSystemPickerService FileSystemPickerService { get; init; } = null!;
+    public required IFileSystemPickerService FileSystemPickerService { get; init; }
 
     [UsedImplicitly]
-    public ILogger<LocalService> Logger { get; init; } = null!;
+    public required ILogger<LocalService> Logger { get; init; }
 
     [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; } = null!;
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public IResourceService ResourceService { get; init; } = null!;
+    public required IResourceService ResourceService { get; init; }
 
     #endregion Injections
 }
