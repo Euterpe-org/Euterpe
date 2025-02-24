@@ -1,5 +1,4 @@
 using System.Reactive.Linq;
-using ReactiveUI;
 
 namespace MuseDashModTools.ViewModels;
 

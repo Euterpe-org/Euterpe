@@ -27,13 +27,13 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     public required Config Config { get; init; }
 
     [UsedImplicitly]
+    public required NavigationService NavigationService { get; init; }
+
+    [UsedImplicitly]
     public required ILogger<MainWindowViewModel> Logger { get; init; }
 
     [UsedImplicitly]
     public required ISettingService SettingService { get; init; }
-
-    [UsedImplicitly]
-    public required NavigationService NavigationService { get; init; }
 
 #if RELEASE
     [UsedImplicitly]
