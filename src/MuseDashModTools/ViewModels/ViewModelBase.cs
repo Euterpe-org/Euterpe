@@ -1,3 +1,4 @@
+using System.Reactive;
 using System.Reactive.Linq;
 
 namespace MuseDashModTools.ViewModels;
@@ -16,7 +17,7 @@ public partial class ViewModelBase : ObservableObject, IActivatableViewModel
         this.WhenActivated(disposables =>
         {
             Observable.FromAsync(() => OnActivatedAsync(disposables))
-                .Subscribe()
+                .Subscribe(OnNext, OnError, OnCompleted)
                 .DisposeWith(disposables);
 
             Disposable.Create(OnDeactivated)
@@ -27,6 +28,18 @@ public partial class ViewModelBase : ObservableObject, IActivatableViewModel
     public ViewModelActivator Activator { get; } = new();
 
     protected virtual Task OnActivatedAsync(CompositeDisposable disposables) => Task.CompletedTask;
+
+    protected virtual void OnNext(Unit unit)
+    {
+    }
+
+    protected virtual void OnError(Exception ex)
+    {
+    }
+
+    protected virtual void OnCompleted()
+    {
+    }
 
     protected virtual void OnDeactivated()
     {
