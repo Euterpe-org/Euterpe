@@ -2,9 +2,9 @@
 
 internal sealed partial class UpdateService : IUpdateService
 {
-    private const string ReleaseAPIUrl = GitHubAPIBaseUrl + RepoIdentifier + "releases";
-    private const string LatestReleaseAPIUrl = GitHubAPIBaseUrl + RepoIdentifier + "releases/latest";
-    private const string TagsRSSUrl = GitHubBaseUrl + RepoIdentifier + "tags.atom";
+    private const string ReleaseAPIUrl = GitHubAPIBaseUrl + ModToolsRepoIdentifier + "releases";
+    private const string LatestReleaseAPIUrl = GitHubAPIBaseUrl + ModToolsRepoIdentifier + "releases/latest";
+    private const string TagsRSSUrl = GitHubBaseUrl + ModToolsRepoIdentifier + "tags.atom";
 
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
 
@@ -22,6 +22,7 @@ internal sealed partial class UpdateService : IUpdateService
 
     [UsedImplicitly]
     public required HttpClient Client { get; init; }
+
     [UsedImplicitly]
     public required Config Config { get; init; }
 

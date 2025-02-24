@@ -6,6 +6,7 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [
         XAML_DownloadSource_Github,
         XAML_DownloadSource_GithubMirror,
+        XAML_DownloadSource_Gitee,
         XAML_DownloadSource_Custom
     ];
 
