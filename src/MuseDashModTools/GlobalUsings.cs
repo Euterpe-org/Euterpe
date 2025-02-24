@@ -42,6 +42,7 @@ global using MuseDashModTools.Views.Pages;
 global using MuseDashModTools.Views.Panels.Charting;
 global using MuseDashModTools.Views.Panels.Modding;
 global using MuseDashModTools.Views.Panels.Setting;
+global using ReactiveUI;
 global using Ursa.Controls;
 global using Ursa.ReactiveUIExtension;
 global using ZLogger;
