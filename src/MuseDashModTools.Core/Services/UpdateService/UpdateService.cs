@@ -21,19 +21,18 @@ internal sealed partial class UpdateService : IUpdateService
     #region Injections
 
     [UsedImplicitly]
-    public HttpClient Client { get; init; } = null!;
+    public required HttpClient Client { get; init; }
+    [UsedImplicitly]
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required IDownloadManager DownloadManager { get; init; }
 
     [UsedImplicitly]
-    public IDownloadManager DownloadManager { get; init; } = null!;
+    public required ILogger<UpdateService> Logger { get; init; }
 
     [UsedImplicitly]
-    public ILogger<UpdateService> Logger { get; init; } = null!;
-
-    [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; } = null!;
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections
 }

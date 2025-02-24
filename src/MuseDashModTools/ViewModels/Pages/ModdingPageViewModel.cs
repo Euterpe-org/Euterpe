@@ -30,13 +30,13 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public ILogger<ModdingPageViewModel> Logger { get; init; } = null!;
+    public required ILogger<ModdingPageViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public NavigationService NavigationService { get; init; } = null!;
+    public required NavigationService NavigationService { get; init; }
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     #endregion Injections
 }

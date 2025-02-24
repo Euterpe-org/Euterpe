@@ -5,7 +5,7 @@ public sealed class FileManagementPanelViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     #endregion Injections
 }

@@ -38,13 +38,13 @@ public sealed partial class HomePageViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public DonationDialogViewModel DonationDialogViewModel { get; init; } = null!;
+    public required DonationDialogViewModel DonationDialogViewModel { get; init; }
 
     [UsedImplicitly]
-    public ILocalService LocalService { get; init; } = null!;
+    public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
-    public ILogger<HomePageViewModel> Logger { get; init; } = null!;
+    public required ILogger<HomePageViewModel> Logger { get; init; }
 
     #endregion Injections
 }

@@ -150,19 +150,19 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     #region Injections
 
     [UsedImplicitly]
-    public HttpClient Client { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public MultiThreadDownloader Downloader { get; init; } = null!;
+    public required HttpClient Client { get; init; }
 
     [UsedImplicitly]
-    public ILogger<GitHubMirrorDownloadService> Logger { get; init; } = null!;
+    public required MultiThreadDownloader Downloader { get; init; }
 
     [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; } = null!;
+    public required ILogger<GitHubMirrorDownloadService> Logger { get; init; }
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }

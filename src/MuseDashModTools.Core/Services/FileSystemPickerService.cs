@@ -5,7 +5,7 @@ namespace MuseDashModTools.Core;
 internal sealed class FileSystemPickerService : IFileSystemPickerService
 {
     [UsedImplicitly]
-    public TopLevelProxy TopLevel { get; init; } = null!;
+    public required TopLevelProxy TopLevel { get; init; }
 
     public async Task<string?> GetSingleFolderPathAsync(string dialogTitle)
     {

@@ -43,22 +43,22 @@ internal sealed partial class SavingService : ISavingService
     #region Injections
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public IJsonSerializationService JsonSerializationService { get; init; } = null!;
+    public required IJsonSerializationService JsonSerializationService { get; init; }
 
     [UsedImplicitly]
-    public ILocalService LocalService { get; init; } = null!;
+    public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
-    public ILogger<SavingService> Logger { get; init; } = null!;
+    public required ILogger<SavingService> Logger { get; init; }
 
     [UsedImplicitly]
-    public IMessageBoxService MessageBoxService { get; init; } = null!;
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public IPlatformService PlatformService { get; init; } = null!;
+    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }
