@@ -24,7 +24,7 @@
                Margin="50,60"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Source="/Assets/MDMC_Title.webp" />
+               Source="{DynamicResource Title Image}" />
 
         <!-- Play Button -->
         <SplitButton Width="230"
@@ -40,6 +40,8 @@
             <SplitButton.Flyout>
                 <MenuFlyout Placement="BottomEdgeAlignedRight">
                     <MenuItem Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}"
+                              Width="220"
+                              Height="50"
                               Header="Play Vanilla" />
                 </MenuFlyout>
             </SplitButton.Flyout>
