@@ -13,7 +13,7 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax { BaseList.Types: var types } &&
-        types.Any(x => x.Type.ToString() == "UserControl" || x.Type.ToString().EndsWith("Window"));
+        types.Any(x => x.Type.ToString().Contains("UserControl") || x.Type.ToString().Contains("Window"));
 
     private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _) =>
         context.Node is not ClassDeclarationSyntax classDeclaration
@@ -44,6 +44,7 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
             sb.AppendLine($"builder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
             sb.AppendLine($"builder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+            sb.AppendLine();
         }
 
         sb.ResetIndent();

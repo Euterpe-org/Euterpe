@@ -61,10 +61,10 @@
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>下载源：</value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+    <data name="XAML_ModFilterType_All" xml:space="preserve">
         <value>全部</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
         <value>已启用</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -73,10 +73,10 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>帮助翻译</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
         <value>已安装</value>
     </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
+    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
         <value>不兼容</value>
     </data>
     <data name="XAML_Install_MelonLoader" xml:space="preserve">
@@ -121,7 +121,7 @@
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>本地版本：{0}（有新版本：{1}）</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
         <value>有更新</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
@@ -319,13 +319,40 @@
     <data name="XAML_Page_Setting" xml:space="preserve">
         <value>设置</value>
     </data>
-    <data name="XAML_Page_Category_Charting" xml:space="preserve">
+    <data name="XAML_Page_Charting" xml:space="preserve">
         <value>谱面</value>
     </data>
-    <data name="XAML_Page_Category_Modding" xml:space="preserve">
+    <data name="XAML_Page_Modding" xml:space="preserve">
         <value>模组</value>
     </data>
     <data name="XAML_Page_LogAnalysis" xml:space="preserve">
         <value>日志分析</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubAPI" xml:space="preserve">
+        <value>Github API</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
+        <value>Github RSS</value>
+    </data>
+    <data name="XAML_Translator_ChineseSimplified" xml:space="preserve">
+        <value>简体中文</value>
+    </data>
+    <data name="XAML_Translator_ChineseTraditional" xml:space="preserve">
+        <value>繁体中文</value>
+    </data>
+    <data name="XAML_Translator_Hungarian" xml:space="preserve">
+        <value>匈牙利语</value>
+    </data>
+    <data name="XAML_Translator_Korean" xml:space="preserve">
+        <value>韩语</value>
+    </data>
+    <data name="XAML_Translator_Russian" xml:space="preserve">
+        <value>俄语</value>
+    </data>
+    <data name="XAML_Translator_Spanish" xml:space="preserve">
+        <value>西班牙语</value>
+    </data>
+    <data name="XAML_ModFilterType_Disabled" xml:space="preserve">
+        <value>已禁用</value>
     </data>
 </root>

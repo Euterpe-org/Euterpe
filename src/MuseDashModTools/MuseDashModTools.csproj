@@ -19,22 +19,28 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <SelfContained>true</SelfContained>
-        <PublishSingleFile>true</PublishSingleFile>
-        <PublishTrimmed>false</PublishTrimmed>
-        <PublishReadyToRun>false</PublishReadyToRun>
-        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <PublishAot>true</PublishAot>
+        <PublishLzmaCompressed>true</PublishLzmaCompressed>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <TrimMode>link</TrimMode>
+        <TrimmerSingleWarn>false</TrimmerSingleWarn>
         <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
     </PropertyGroup>
 
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+        <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
+    </ItemGroup>
+
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Remove="Assets\Raw\**"/>
         <Content Include="Assets\Icon.ico"/>
     </ItemGroup>
 
     <!--Hot Reload Packages-->
     <ItemGroup>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
+        <PackageReference Include="Avalonia.ReactiveUI"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
         <PackageReference Include="HotAvalonia.Extensions"/>
     </ItemGroup>
@@ -49,16 +55,15 @@
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
-        <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Downloader"/>
         <PackageReference Include="Irihi.Ursa"/>
+        <PackageReference Include="Irihi.Ursa.ReactiveUIExtension"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
-        <PackageReference Include="ReactiveUI"/>
+        <PackageReference Include="PublishAotCompressed"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="System.Linq.Async"/>
         <PackageReference Include="ValveKeyValue"/>
     </ItemGroup>
 
@@ -67,6 +72,15 @@
         <ProjectReference Include="..\MuseDashModTools.Core\MuseDashModTools.Core.csproj"/>
         <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+        <DirectPInvoke Include="av_libglesv2"/>
+        <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <DirectPInvoke Include="libHarfBuzzSharp"/>
+        <NativeLibrary Include="Native\libHarfBuzzSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <DirectPInvoke Include="libSkiaSharp"/>
+        <NativeLibrary Include="Native\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
     </ItemGroup>
 
     <ItemGroup>

@@ -62,10 +62,10 @@
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Download Source: </value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+    <data name="XAML_ModFilterType_All" xml:space="preserve">
         <value>All</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
         <value>Enabled</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -77,10 +77,10 @@
     <data name="XAML_HomePage" xml:space="preserve">
         <value>HomePage</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
         <value>Installed</value>
     </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
+    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
         <value>Incompatible</value>
     </data>
     <data name="XAML_Install_MelonLoader" xml:space="preserve">
@@ -125,7 +125,7 @@
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Local Version: {0} (Has a newer version: {1})</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
         <value>Outdated</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
@@ -326,10 +326,43 @@
     <data name="XAML_Page_LogAnalysis" xml:space="preserve">
         <value>Log Analysis</value>
     </data>
-    <data name="XAML_Page_Category_Modding" xml:space="preserve">
+    <data name="XAML_Page_Modding" xml:space="preserve">
         <value>Modding</value>
     </data>
-    <data name="XAML_Page_Category_Charting" xml:space="preserve">
+    <data name="XAML_Page_Charting" xml:space="preserve">
         <value>Charting</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubAPI" xml:space="preserve">
+        <value>Github API</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
+        <value>Github RSS</value>
+    </data>
+    <data name="XAML_Contributor_Developer" xml:space="preserve">
+        <value>Developer</value>
+    </data>
+    <data name="XAML_Contributor_Artist" xml:space="preserve">
+        <value>Artist</value>
+    </data>
+    <data name="XAML_Translator_ChineseTraditional" xml:space="preserve">
+        <value>Chinese Traditional</value>
+    </data>
+    <data name="XAML_Translator_Hungarian" xml:space="preserve">
+        <value>Hungarian</value>
+    </data>
+    <data name="XAML_Translator_Korean" xml:space="preserve">
+        <value>Korean</value>
+    </data>
+    <data name="XAML_Translator_Russian" xml:space="preserve">
+        <value>Russian</value>
+    </data>
+    <data name="XAML_Translator_Spanish" xml:space="preserve">
+        <value>Spanish</value>
+    </data>
+    <data name="XAML_Translator_ChineseSimplified" xml:space="preserve">
+        <value>Chinese Simplified</value>
+    </data>
+    <data name="XAML_ModFilterType_Disabled" xml:space="preserve">
+        <value>Disabled</value>
     </data>
 </root>

@@ -61,10 +61,10 @@
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Letöltési forrás: </value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+    <data name="XAML_ModFilterType_All" xml:space="preserve">
         <value>Mind</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
         <value>Bekapcsolt</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -73,10 +73,10 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>Közreműködés</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
         <value>Telepített</value>
     </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
+    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
         <value>Nem működik</value>
     </data>
     <data name="XAML_Install_MelonLoader" xml:space="preserve">
@@ -121,7 +121,7 @@
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Helyi verzió: {0} (Újabb elérhető: {1})</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
         <value>Elavult</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
@@ -300,5 +300,11 @@
     </data>
     <data name="XAML_Page_Setting" xml:space="preserve">
         <value>Beállítások</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubAPI" xml:space="preserve">
+        <value>Github API</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
+        <value>Github RSS</value>
     </data>
 </root>

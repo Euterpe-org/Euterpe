@@ -4,7 +4,7 @@
         <OutputType>Exe</OutputType>
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
         <PublishAot>true</PublishAot>
-        <TrimMode>partial</TrimMode>
+        <PublishLzmaCompressed>true</PublishLzmaCompressed>
         <AssemblyName>Updater</AssemblyName>
     </PropertyGroup>
 
@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <PackageReference Include="ConsoleAppFramework"/>
+        <PackageReference Include="PublishAotCompressed"/>
         <PackageReference Include="Spectre.Console"/>
         <PackageReference Include="ZLogger"/>
     </ItemGroup>

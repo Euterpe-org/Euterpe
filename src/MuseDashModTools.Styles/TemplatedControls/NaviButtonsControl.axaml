@@ -1,0 +1,52 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+        xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models">
+    <Design.PreviewWith>
+        <mdmt:NaviButtonsControl />
+    </Design.PreviewWith>
+
+    <Style Selector="mdmt|NaviButtonsControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <ItemsControl ItemsSource="{TemplateBinding Source, Mode=OneWay}">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:DropDownButtonItem">
+                                <DropDownButton Content="{Binding Text, Mode=OneTime}" Theme="{DynamicResource BorderlessDropDownButton}">
+
+                                    <DropDownButton.Styles>
+                                        <Style x:DataType="models:DropDownMenuItem" Selector="MenuItem">
+                                            <Setter Property="Header" Value="{Binding Text, Mode=OneTime}" />
+                                            <Setter Property="Command" Value="{Binding Command, Mode=OneTime}" />
+                                            <Setter Property="CommandParameter" Value="{Binding CommandParameter, Mode=OneTime}" />
+                                        </Style>
+                                    </DropDownButton.Styles>
+
+                                    <DropDownButton.Flyout>
+                                        <MenuFlyout ItemsSource="{Binding MenuItems, Mode=OneTime}" Placement="BottomEdgeAlignedRight">
+                                            <MenuFlyout.ItemTemplate>
+                                                <DataTemplate x:DataType="models:DropDownMenuItem">
+                                                    <MenuItem />
+                                                </DataTemplate>
+                                            </MenuFlyout.ItemTemplate>
+                                        </MenuFlyout>
+                                    </DropDownButton.Flyout>
+
+                                </DropDownButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

@@ -1,0 +1,28 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="Button.DonationButton">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform"
+                                               Duration="0:0:0.2"
+                                               Easing="ExponentialEaseOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button.DonationButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style Selector="Button.DonationButton:pointerover">
+        <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)" />
+    </Style>
+
+    <Style Selector="Button.DonationButton:pressed">
+        <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)" />
+    </Style>
+
+</Styles>
