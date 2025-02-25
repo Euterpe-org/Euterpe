@@ -2,8 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:u="https://irihi.tech/ursa"
              xmlns:pages="using:MuseDashModTools.ViewModels.Pages"
+             xmlns:u="https://irihi.tech/ursa"
              x:Class="MuseDashModTools.Views.Pages.HomePage"
              x:DataType="pages:HomePageViewModel"
              mc:Ignorable="d"
@@ -16,17 +16,17 @@
 
     <Grid>
 
-        <!-- Background Image -->
+        <!--  Background Image  -->
         <Image Source="{DynamicResource BackgroundImage}" Stretch="UniformToFill" />
 
-        <!-- Title Image -->
+        <!--  Title Image  -->
         <Image Height="120"
                Margin="50,60"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Source="{DynamicResource Title Image}" />
+               Source="{DynamicResource TitleImage}" />
 
-        <!-- Play Button -->
+        <!--  Play Button  -->
         <SplitButton Width="230"
                      Height="60"
                      Margin="0,0,120,80"
@@ -39,24 +39,24 @@
                      Theme="{DynamicResource SolidSplitButton}">
             <SplitButton.Flyout>
                 <MenuFlyout Placement="BottomEdgeAlignedRight">
-                    <MenuItem Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}"
-                              Width="220"
+                    <MenuItem Width="220"
                               Height="50"
+                              Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}"
                               Header="Play Vanilla" />
                 </MenuFlyout>
             </SplitButton.Flyout>
         </SplitButton>
 
-        <!-- Donation Button -->
-        <Button Classes="DonationButton"
-                Margin="0,60,90,0"
+        <!--  Donation Button  -->
+        <Button Margin="0,60,90,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
+                Classes="DonationButton"
                 Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
             <Image Height="100" Source="/Assets/Genshin.webp" />
         </Button>
 
-        <!-- Donation Drawer -->
+        <!--  Donation Drawer  -->
         <u:OverlayDialogHost HostId="DonationDrawerHost" />
 
     </Grid>
