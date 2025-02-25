@@ -9,7 +9,6 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Button Padding="0"
-                        VerticalAlignment="Bottom"
                         Command="{TemplateBinding Command, Mode=OneWay}"
                         CommandParameter="{TemplateBinding CommandParameter, Mode=OneWay}">
                     <Button.Styles>
