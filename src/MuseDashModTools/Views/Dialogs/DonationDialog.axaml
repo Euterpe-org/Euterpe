@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="MuseDashModTools.Views.Dialogs.DonationDialog"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <x:Double x:Key="QrImageSize">230</x:Double>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="Border.qr-container">
+            <Setter Property="Width" Value="{StaticResource QrImageSize}" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="CornerRadius" Value="20" />
+        </Style>
+        <Style Selector="Image.qr-image">
+            <Setter Property="Width" Value="{StaticResource QrImageSize}" />
+            <Setter Property="Stretch" Value="Uniform" />
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel Margin="20" Spacing="20">
+        <TextBlock FontSize="14"
+                   Text="本软件是基于开源项目原神的二次创作，我们耗费数个月才打造出如此3A大作。"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+
+        <TextBlock FontSize="16"
+                   Text="3A是骗你的，心血是真的，无论捐赠与否，我们都感谢您的支持！"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" />
+
+        <UniformGrid Width="500"
+                     Margin="0,15"
+                     Columns="2"
+                     Rows="2">
+            <Border Classes="qr-container">
+                <Image Classes="qr-image"
+                       Source="/Assets/DonationQRs/Wechat.webp" />
+            </Border>
+
+            <Border Classes="qr-container">
+                <Image Classes="qr-image"
+                       Source="/Assets/DonationQRs/Alipay.webp" />
+            </Border>
+
+            <Border Classes="qr-container">
+                <Image Classes="qr-image"
+                       Source="/Assets/DonationQRs/Paypal.webp" />
+            </Border>
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

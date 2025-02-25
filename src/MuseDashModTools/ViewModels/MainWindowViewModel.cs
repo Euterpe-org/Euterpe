@@ -1,73 +1,44 @@
-using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Messaging;
-
 namespace MuseDashModTools.ViewModels;
 
-public sealed partial class MainWindowViewModel : ViewModelBase, IRecipient<string>
+public sealed partial class MainWindowViewModel : NavViewModelBase
 {
-    [ObservableProperty]
-    public partial bool IsCollapsed { get; set; }
-
-    public static ObservableCollection<PageNavItem> PageNavItems { get; } =
+    public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(XAML_Page_Home, "Home", HomePageName),
-        new(XAML_Page_Category_Modding, "Wrench", ModdingCategoryName)
-        {
-            IsNavigable = false,
-            Children =
-            [
-                new PageNavItem(XAML_Page_ModManage, "GridView", ModManagePageName),
-                new PageNavItem(XAML_Page_ModDevelop, "Code", ModDevelopPageName) { Status = "WIP" }
-            ]
-        },
-        new(XAML_Page_Category_Charting, "Disc", ChartingCategoryName)
-        {
-            IsNavigable = false,
-            Children =
-            [
-                new PageNavItem(XAML_Page_ChartManage, "Song", ChartManagePageName) { Status = "WIP" },
-                new PageNavItem(XAML_Page_ChartToolkit, "Briefcase", ChartToolkitPageName) { Status = "WIP" }
-            ]
-        },
-        new(XAML_Page_About, "InfoCircle", AboutPageName),
-        new(XAML_Page_Setting, "Setting", SettingPageName)
+        new(XAML_Page_Home, HomePageName, "Home"),
+        new(XAML_Page_Modding, ModdingPageName, "Wrench"),
+        new(XAML_Page_Charting, ChartingPageName, "Disc"),
+        new(XAML_Page_Setting, SettingPageName, "Setting")
     ];
 
-    public MainWindowViewModel()
+    protected override async Task OnActivatedAsync(CompositeDisposable disposables)
     {
-        WeakReferenceMessenger.Default.Register(this, "NavigatePage");
-    }
-
-    [RelayCommand]
-    private async Task InitializeAsync()
-    {
-        await SavingService.LoadSettingAsync().ConfigureAwait(true);
-        GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Setting.Theme];
+        await base.OnActivatedAsync(disposables).ConfigureAwait(true);
+        await SettingService.LoadAsync().ConfigureAwait(true);
+        GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
-        Logger.ZLogInformation($"MainWindow Initialized");
+        Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 
     #region Injections
 
     [UsedImplicitly]
-    public IDownloadManager DownloadManager { get; init; } = null!;
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public ILogger<MainWindowViewModel> Logger { get; init; } = null!;
+    public required NavigationService NavigationService { get; init; }
 
     [UsedImplicitly]
-    public ISavingService SavingService { get; init; } = null!;
+    public required ILogger<MainWindowViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public NavigationService NavigationService { get; init; } = null!;
+    public required ISettingService SettingService { get; init; }
 
+#if RELEASE
     [UsedImplicitly]
-    public IUpdateService UpdateService { get; init; } = null!;
-
-    [UsedImplicitly]
-    public Setting Setting { get; init; } = null!;
+    public required IUpdateService UpdateService { get; init; }
+#endif
 
     #endregion Injections
 }

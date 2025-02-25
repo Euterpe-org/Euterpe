@@ -2,12 +2,21 @@
 
 public static class GitHubConstants
 {
+    // GitHub Urls
     public const string GitHubBaseUrl = "https://github.com/";
     public const string GitHubAPIBaseUrl = "https://api.github.com/repos/";
     public const string GitHubRawContentBaseUrl = "https://raw.githubusercontent.com/";
-    public const string RepoIdentifier = "MDModsDev/MuseDashModTools/";
-    public const string ReleaseDownloadBaseUrl = GitHubBaseUrl + RepoIdentifier + "releases/download/";
-    public const string ModLinksBaseUrl = "MDModsDev/ModLinks/main/";
+
+    // Mod Tools Urls
+    public const string ModToolsRepoIdentifier = "MDModsDev/MuseDashModTools/";
+    public const string ModToolsReleaseDownloadBaseUrl = GitHubBaseUrl + ModToolsRepoIdentifier + "releases/download/";
+
+    // Mod Links Urls
+    public const string ModLinksRepoIdentifier = "MDModsDev/ModLinks/";
+    public const string ModLinksBranch = "dev/";
+    public const string ModLinksBaseUrl = ModLinksRepoIdentifier + ModLinksBranch;
+
+    // Download File Urls
     public const string MelonLoaderBaseUrl = "LavaGang/MelonLoader/releases/download/v0.6.1/MelonLoader.x64.zip";
     public const string UnityDependencyBaseUrl = "LavaGang/Unity-Runtime-Libraries/master/2019.4.32.zip";
 

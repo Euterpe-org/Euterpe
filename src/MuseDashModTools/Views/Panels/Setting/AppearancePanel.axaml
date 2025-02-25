@@ -1,0 +1,37 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
+             x:Class="MuseDashModTools.Views.Panels.Setting.AppearancePanel"
+             x:DataType="pages:AppearancePanelViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             d:DesignWidth="1000">
+
+    <Design.DataContext>
+        <pages:AppearancePanelViewModel />
+    </Design.DataContext>
+
+    <StackPanel Orientation="Vertical"
+                Spacing="50"
+                Margin="30"
+                HorizontalAlignment="Left"
+                MaxWidth="800"
+                MinWidth="600">
+
+        <!-- Language -->
+        <!-- TODO: Implement languages switch -->
+        <StackPanel Orientation="Vertical"
+                    Spacing="15">
+            <TextBlock Classes="H4"
+                       Theme="{StaticResource TitleTextBlock}"
+                       Text="Language" />
+            <TextBlock Margin="0, -10, 0, 0"
+                       Foreground="Gray"
+                       TextWrapping="Wrap"
+                       Text="The current version does not support switching languages." />
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>

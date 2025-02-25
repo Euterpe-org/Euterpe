@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup>
+        <IsAotCompatible>true</IsAotCompatible>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="JetBrains.Annotations"/>
@@ -9,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\MuseDashModTools.Common\MuseDashModTools.Common.csproj"/>
+        <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj"/>
     </ItemGroup>
 
 </Project>

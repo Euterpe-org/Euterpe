@@ -13,9 +13,7 @@ public sealed class JsonSerializationServiceTest
                                        "DownloadLink": "Test Mod.dll",
                                        "RepositoryIdentifier": "Org/Repo",
                                        "ConfigFile": "Config.cfg",
-                                       "GameVersion": [
-                                         "*"
-                                       ],
+                                       "GameVersion": "*",
                                        "Description": "A Test Mod",
                                        "DependentMods": [],
                                        "DependentLibs": [],
@@ -30,14 +28,14 @@ public sealed class JsonSerializationServiceTest
     {
         Author = "test",
         ConfigFile = "Config.cfg",
-        DependentLibs = [],
-        DependentMods = [],
+        LibDependencies = [],
+        ModDependencies = [],
         Description = "A Test Mod",
-        DownloadLink = "Test Mod.dll",
-        GameVersion = ["*"],
+        FileName = "Test Mod.dll",
+        GameVersion = "*",
         IncompatibleMods = [],
         Name = "TestMod",
-        RepositoryIdentifier = "Org/Repo",
+        Repository = "Org/Repo",
         SHA256 = "9fa86686c2a2f256d052e5319b0e7fded0d1ba9a95fd35113d499a28663b40e7",
         Version = "1.0.0-beta"
     };

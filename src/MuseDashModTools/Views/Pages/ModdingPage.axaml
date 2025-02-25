@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+             xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
+             x:Class="MuseDashModTools.Views.Pages.ModdingPage"
+             x:DataType="pages:ModdingPageViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             d:DesignWidth="1000">
+
+    <Design.DataContext>
+        <pages:ModdingPageViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto, *">
+        <Border Height="41"
+                Margin="0,0,20,10"
+                Padding="12,4"
+                Theme="{DynamicResource CardBorder}">
+            <Panel>
+                <mdmt:NaviPanelListControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                <mdmt:NaviButtonsControl Source="{Binding DropDownButtons, Mode=OneTime}" />
+            </Panel>
+        </Border>
+        <ContentControl Grid.Row="1"
+                        Margin="0,10,10,10"
+                        Content="{Binding Content, Mode=OneWay}" />
+    </Grid>
+
+</UserControl>

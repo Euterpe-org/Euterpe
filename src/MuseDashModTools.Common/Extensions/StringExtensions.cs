@@ -13,6 +13,13 @@ public static class StringExtensions
     public static bool IsNullOrEmpty([NotNullWhen(false)] this string? str) => string.IsNullOrEmpty(str);
 
     /// <summary>
+    ///     Parse level from string
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static int ParseLevel(this string str) => !int.TryParse(str, out var level) ? 0 : level;
+
+    /// <summary>
     ///     Remove invalid chars for file names from string
     /// </summary>
     /// <param name="str"></param>

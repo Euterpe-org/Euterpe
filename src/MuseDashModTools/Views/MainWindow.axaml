@@ -1,14 +1,14 @@
 <u:UrsaWindow xmlns="https://github.com/avaloniaui"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
+              xmlns:controls="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
               xmlns:converters="clr-namespace:MuseDashModTools.Converters"
-              xmlns:models="using:MuseDashModTools.Models"
               xmlns:u="https://irihi.tech/ursa"
               xmlns:vm="using:MuseDashModTools.ViewModels"
               x:Class="MuseDashModTools.Views.MainWindow"
               x:DataType="vm:MainWindowViewModel"
               Title="Muse Dash Mod Tools"
-              MinWidth="900"
+              MinWidth="1100"
               MinHeight="700"
               Icon="/Assets/Icon.ico"
               WindowStartupLocation="CenterScreen">
@@ -17,12 +17,6 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Interaction.Behaviors>
-        <RoutedEventTriggerBehavior RoutedEvent="{x:Static Control.LoadedEvent}">
-            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </RoutedEventTriggerBehavior>
-    </Interaction.Behaviors>
-
     <u:UrsaWindow.RightContent>
         <u:ThemeToggleButton Margin="0,1,0,0"
                              VerticalAlignment="Top"
@@ -30,90 +24,89 @@
                              Mode="Controller" />
     </u:UrsaWindow.RightContent>
 
-    <u:UrsaWindow.TitleBarContent>
-        <StackPanel Margin="0,2,0,0"
-                    HorizontalAlignment="Center"
-                    Orientation="Vertical">
-            <TextBlock HorizontalAlignment="Center"
-                       Classes="H6"
-                       Text="Muse Dash Mod Tools"
-                       TextAlignment="Center"
-                       Theme="{DynamicResource TitleTextBlock}" />
-            <TextBlock HorizontalAlignment="Center"
-                       Classes="H8"
-                       Text="{x:Static constants:BuildInfo.DisplayVersion}"
-                       TextAlignment="Center"
-                       Theme="{DynamicResource TitleTextBlock}" />
-        </StackPanel>
-    </u:UrsaWindow.TitleBarContent>
+    <Grid ColumnDefinitions="Auto,*">
+        <DockPanel Grid.Column="0" Width="85">
+            <u:NavMenu DockPanel.Dock="Top"
+                       HeaderBinding="{Binding ., Mode=OneTime}"
+                       IconBinding="{Binding IconResourceKey, Mode=OneTime}"
+                       IsHorizontalCollapsed="true"
+                       ItemsSource="{Binding NavItems, Mode=OneTime}"
+                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
-    <Grid ColumnDefinitions="Auto,Auto">
-        <u:NavMenu Grid.Column="0"
-                   CommandBinding="{Binding NavigationCommand, Mode=OneTime}"
-                   HeaderBinding="{Binding ., Mode=OneTime}"
-                   IconBinding="{Binding IconResourceKey, Mode=OneTime}"
-                   IsHorizontalCollapsed="{Binding IsCollapsed, Mode=TwoWay}"
-                   ItemsSource="{Binding PageNavItems, Mode=OneTime}"
-                   SubMenuBinding="{Binding Children, Mode=OneTime}">
+                <u:NavMenu.Styles>
+                    <Style x:DataType="controls:NavItem" Selector="u|NavMenuItem">
+                        <Setter Property="IsSeparator" Value="{Binding IsSeparator, Mode=OneWay}" />
+                    </Style>
+                    <Style Selector="u|NavMenuItem /template/ Border">
+                        <Setter Property="CornerRadius" Value="10" />
+                        <Setter Property="Margin" Value="10, 3, 10, 3" />
+                        <Setter Property="Padding" Value="0, -2, 0, -2" />
+                    </Style>
+                    <Style Selector="u|NavMenuItem:pointerover /template/ Border">
+                        <Setter Property="CornerRadius" Value="10" />
+                    </Style>
+                    <Style Selector="u|NavMenuItem:selected /template/ Border">
+                        <Setter Property="CornerRadius" Value="10" />
+                    </Style>
+                </u:NavMenu.Styles>
 
-            <u:NavMenu.Styles>
-                <Style x:DataType="models:PageNavItem" Selector="u|NavMenuItem">
-                    <Setter Property="IsSeparator" Value="{Binding IsSeparator, Mode=OneWay}" />
-                </Style>
-            </u:NavMenu.Styles>
+                <u:NavMenu.IconTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <u:TwoTonePathIcon Width="20"
+                                           Height="20"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           ActiveForeground="{DynamicResource SemiBlue5}"
+                                           ActiveStrokeBrush="{DynamicResource SemiBlue5}"
+                                           Data="{Binding ., Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneWay}"
+                                           Foreground="{DynamicResource SemiGrey5}"
+                                           IsActive="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenuItem}, Path=IsHighlighted, Mode=TwoWay}"
+                                           StrokeBrush="{DynamicResource SemiGrey5}" />
+                    </DataTemplate>
+                </u:NavMenu.IconTemplate>
 
-            <u:NavMenu.IconTemplate>
-                <DataTemplate x:DataType="x:String">
-                    <u:TwoTonePathIcon Width="{Binding $parent[u:NavMenu].IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
-                                       Height="{Binding $parent[u:NavMenu].IsHorizontalCollapsed, Converter={x:Static converters:FuncValueConverters.IconSizeConverter}, Mode=OneWay}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       ActiveForeground="{DynamicResource SemiBlue5}"
-                                       ActiveStrokeBrush="{DynamicResource SemiBlue5}"
-                                       Data="{Binding ., Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneWay}"
-                                       Foreground="{DynamicResource SemiGrey5}"
-                                       IsActive="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=u:NavMenuItem}, Path=IsHighlighted, Mode=TwoWay}"
-                                       StrokeBrush="{DynamicResource SemiGrey5}" />
-                </DataTemplate>
-            </u:NavMenu.IconTemplate>
-
-            <u:NavMenu.Header>
-                <DockPanel Margin="8" HorizontalAlignment="Center">
-                    <Image DockPanel.Dock="Left"
-                           Width="100"
-                           Height="100"
+                <u:NavMenu.Header>
+                    <Image Height="55"
+                           Margin="0,15,0,10"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           u:NavMenu.CanToggle="True"
+                           u:NavMenu.CanToggle="False"
                            RenderOptions.BitmapInterpolationMode="HighQuality"
-                           Source="../Assets/Melon.png" />
-                    <TextBlock DockPanel.Dock="Right"
-                               VerticalAlignment="Center"
-                               Classes="H4"
-                               IsVisible="{Binding !IsCollapsed, Mode=OneWay}"
-                               Text="MDMT"
-                               Theme="{DynamicResource TitleTextBlock}" />
-                </DockPanel>
-            </u:NavMenu.Header>
+                           Source="../Assets/Melon.webp" />
+                </u:NavMenu.Header>
 
-            <u:NavMenu.HeaderTemplate>
-                <DataTemplate x:DataType="models:PageNavItem">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="0,0,6,0"
-                                   FontSize="16"
-                                   Text="{Binding DisplayName, Mode=OneTime}" />
-                        <u:Badge Margin="4,0,0,0"
-                                 HorizontalAlignment="Left"
-                                 Header="{Binding Status, Mode=OneTime}"
-                                 IsVisible="{Binding Status, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}" />
-                    </StackPanel>
-                </DataTemplate>
-            </u:NavMenu.HeaderTemplate>
-        </u:NavMenu>
+                <u:NavMenu.HeaderTemplate>
+                    <DataTemplate x:DataType="controls:NavItem">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0,0,6,0"
+                                       FontSize="16"
+                                       Text="{Binding DisplayName, Mode=OneTime}" />
+                            <u:Badge Margin="4,0,0,0"
+                                     HorizontalAlignment="Left"
+                                     Header="{Binding Status, Mode=OneTime}"
+                                     IsVisible="{Binding Status, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneTime}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </u:NavMenu.HeaderTemplate>
+            </u:NavMenu>
 
+            <StackPanel DockPanel.Dock="Bottom"
+                        Margin="8,12,8,12"
+                        VerticalAlignment="Bottom">
+                <Image Height="20"
+                       Margin="0,0,0,2"
+                       HorizontalAlignment="Center"
+                       Source="{DynamicResource AppTitleImage}" />
+                <Label HorizontalAlignment="Center"
+                       Classes="Blue"
+                       Content="{x:Static constants:BuildInfo.DisplayVersion}"
+                       Theme="{StaticResource TagLabel}" />
+            </StackPanel>
+
+        </DockPanel>
         <ContentControl Grid.Column="1"
-                        Margin="20,50,0,0"
-                        Content="{Binding NavigationService.Content, Mode=OneWay}" />
+                        Margin="10,40,0,0"
+                        Content="{Binding Content, Mode=OneWay}" />
     </Grid>
 
 </u:UrsaWindow>

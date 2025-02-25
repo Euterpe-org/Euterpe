@@ -61,10 +61,10 @@
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>ソースをダウンロードする </value>
     </data>
-    <data name="XAML_All" xml:space="preserve">
+    <data name="XAML_ModFilterType_All" xml:space="preserve">
         <value>すべて</value>
     </data>
-    <data name="XAML_Enabled" xml:space="preserve">
+    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
         <value>適用</value>
     </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -73,10 +73,10 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
         <value>翻訳を手伝う</value>
     </data>
-    <data name="XAML_Installed" xml:space="preserve">
+    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
         <value>インストール</value>
     </data>
-    <data name="XAML_Incompatible" xml:space="preserve">
+    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
         <value>Incompatible</value>
     </data>
     <data name="XAML_Install_MelonLoader" xml:space="preserve">
@@ -121,7 +121,7 @@
     <data name="XAML_Mod_Outdated" xml:space="preserve">
         <value>Local Version: {0} (Has a newer version: {1})</value>
     </data>
-    <data name="XAML_Outdated" xml:space="preserve">
+    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
         <value>Outdated</value>
     </data>
     <data name="XAML_Path" xml:space="preserve">
@@ -288,5 +288,11 @@
     </data>
     <data name="XAML_Page_Setting" xml:space="preserve">
         <value>設定</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubAPI" xml:space="preserve">
+        <value>Github API</value>
+    </data>
+    <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
+        <value>Github RSS</value>
     </data>
 </root>

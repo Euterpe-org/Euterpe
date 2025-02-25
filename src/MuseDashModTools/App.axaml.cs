@@ -18,9 +18,10 @@ public sealed class App : Application
         services.RegisterLogger(LogFileName);
 
         var builder = new ContainerBuilder();
-        builder.RegisterCoreServices();
         builder.RegisterInstances();
+        builder.RegisterCoreServices();
         builder.RegisterInternalServices();
+        builder.RegisterLazyProxies();
         builder.RegisterViewAndViewModels();
 
         builder.Populate(services);
@@ -47,34 +48,20 @@ public sealed class App : Application
             desktop.Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
         }
 
+        this.WhenAnyValue(x => x.ActualThemeVariant)
+            .Subscribe(theme => Container.Resolve<Config>().Theme = AvaloniaResources.ThemeVariants[theme]);
+
         base.OnFrameworkInitializationCompleted();
     }
 
-    private static Task OnExitAsync()
-    {
-        Container.Resolve<Setting>().Theme = AvaloniaResources.ThemeVariants[GetCurrentApplication().ActualThemeVariant];
-        return Container.Resolve<ISavingService>().SaveSettingAsync();
-    }
+    private static Task OnExitAsync() => Container.Resolve<ISettingService>().SaveAsync();
 
 #if RELEASE
     private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-        Container.Resolve<ILogger>().ZLogError(e.Exception, $"Unhandled exception");
-
-        if (OperatingSystem.IsWindows())
-        {
-            Process.Start("explorer.exe", "/select, " + Path.Combine("Logs", LogFileName));
-        }
-        else if (OperatingSystem.IsLinux())
-        {
-            Process.Start("xdg-open", Path.Combine("Logs", LogFileName));
-        }
-
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "https://github.com/MDModsDev/MuseDashModTools/issues/new/choose",
-            UseShellExecute = true
-        });
+        Container.Resolve<ILogger<App>>().ZLogError(e.Exception, $"Unhandled exception");
+        Container.Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
+        Container.Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
     }
 #endif
 }
