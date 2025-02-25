@@ -31,7 +31,6 @@ jobs:
         target-platform:
           - { os: ubuntu-latest, name: linux }
           - { os: windows-latest, name: win }
-          - { os: macos-latest, name: osx }
         target-arch:
           - x64
           - arm64
