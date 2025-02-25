@@ -36,10 +36,7 @@ jobs:
           - x64
           - arm64
         dotnet-version:
-          - '8.0'
-        self-contained:
-          - true
-          - false
+          - '9.0'
     runs-on: ${{ matrix.target-platform.os }}
     steps:
       - name: Checkout
@@ -52,7 +49,7 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish -a ${{ matrix.target-arch }} -c ${{ matrix.build-type }} --self-contained=${{ matrix.self-contained }}
+          dotnet publish -a ${{ matrix.target-arch }} -c ${{ matrix.build-type }}
 
       - name: Test Project
         run: |
@@ -66,5 +63,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: MuseDashModTools-${{ matrix.build-type }}-${{matrix.target-platform.name}}-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}-${{ matrix.self-contained && 'self-contained' || 'runtime-required' }}
+          name: MuseDashModTools-${{ matrix.build-type }}-${{matrix.target-platform.name}}-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
           path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/${{matrix.target-platform.name}}-${{ matrix.target-arch }}/publish/*
