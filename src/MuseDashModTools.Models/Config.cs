@@ -23,7 +23,7 @@ public sealed partial class Config : ObservableObject
 
     // Experience Settings
     [ObservableProperty]
-    public partial bool ShowConsole { get; set; }
+    public partial bool ShowConsole { get; set; } = true;
 
     // Download Settings
     [ObservableProperty]
