@@ -21,6 +21,12 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 
+    protected override void OnError(Exception ex)
+    {
+        base.OnError(ex);
+        Logger.ZLogError(ex, $"{nameof(MainWindowViewModel)} Initialize Failed");
+    }
+
     #region Injections
 
     [UsedImplicitly]

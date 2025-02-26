@@ -63,6 +63,12 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
         Logger.ZLogInformation($"{nameof(ModsPanelViewModel)} Initialized");
     }
 
+    protected override void OnError(Exception ex)
+    {
+        base.OnError(ex);
+        Logger.ZLogError(ex, $"{nameof(ModsPanelViewModel)} Initialize Failed");
+    }
+
     [RelayCommand]
     private Task OpenConfigFileAsync()
     {
