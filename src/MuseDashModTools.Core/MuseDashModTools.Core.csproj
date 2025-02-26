@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <IsAotCompatible>true</IsAotCompatible>
-    </PropertyGroup>
-
     <ItemGroup>
         <ProjectReference Include="..\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj"/>
         <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj"/>
