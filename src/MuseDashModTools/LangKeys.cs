@@ -1,11 +1,8 @@
-﻿/*
-using Antelcat.I18N.Attributes;
-using MuseDashModTools.Localization.XAML;
+/*using Antelcat.I18N.Attributes;
+using MuseDashModTools.Localization;
 
 namespace MuseDashModTools;
 
-[ResourceKeysOf(typeof(Resources))]
+[ResourceKeysOf(typeof(XAML))]
 [UsedImplicitly]
-public partial class LangKeys;
-*/
-
+public partial class LangKeys;*/

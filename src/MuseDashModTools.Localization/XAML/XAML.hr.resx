@@ -1,393 +1,393 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
+    <!--
+      Microsoft ResX Schema
 
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
+      Version 2.0
+
+      The primary goals of this format is to allow a simple XML format
+      that is mostly human readable. The generation and parsing of the
+      various data types are done through the TypeConverter classes
+      associated with the data types.
+
+      Example:
+
+      ... ado.net/XML headers & schema ...
+      <resheader name="resmimetype">text/microsoft-resx</resheader>
+      <resheader name="version">2.0</resheader>
+      <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+      <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+      <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+      <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+      <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+          <value>[base64 mime encoded serialized .NET Framework object]</value>
+      </data>
+      <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+          <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+          <comment>This is a comment</comment>
+      </data>
+
+      There are any number of "resheader" rows that contain simple
+      name/value pairs.
+
+      Each data row contains a name, and value. The row also contains a
+      type or mimetype. Type corresponds to a .NET class that support
+      text/value conversion through the TypeConverter architecture.
+      Classes that don't support this are serialized and stored with the
+      mimetype set.
+
+      The mimetype is used for serialized objects, and tells the
+      ResXResourceReader how to depersist the object. This is currently not
+      extensible. For a given mimetype the value must be set accordingly:
+
+      Note - application/x-microsoft.net.object.binary.base64 is the format
+      that the ResXResourceWriter will generate, however the reader can
+      read any of the formats listed below.
+
+      mimetype: application/x-microsoft.net.object.binary.base64
+      value   : The object must be serialized with
+              : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+              : and then encoded with base64 encoding.
+
+      mimetype: application/x-microsoft.net.object.soap.base64
+      value   : The object must be serialized with
+              : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+              : and then encoded with base64 encoding.
+
+      mimetype: application/x-microsoft.net.object.bytearray.base64
+      value   : The object must be serialized into a byte array
+              : using a System.ComponentModel.TypeConverter
+              : and then encoded with base64 encoding.
+      -->
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root" xmlns="">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
             </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="XAML_UserDataFolder" xml:space="preserve">
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="XAML_Folder_UserData" xml:space="preserve">
     <value>UserData</value>
   </data>
-  <data name="XAML_ReportBug" xml:space="preserve">
+    <data name="XAML_ReportBug" xml:space="preserve">
     <value>Report Bug</value>
   </data>
-  <data name="XAML_Check_Update" xml:space="preserve">
+    <data name="XAML_Check_Update" xml:space="preserve">
     <value>Check Update</value>
   </data>
-  <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
+    <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub Mirror</value>
   </data>
-  <data name="XAML_Analyze" xml:space="preserve">
+    <data name="XAML_Analyze" xml:space="preserve">
     <value>Analyze Log</value>
   </data>
-  <data name="XAML_Apply" xml:space="preserve">
+    <data name="XAML_Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
-  <data name="XAML_AskType_Always" xml:space="preserve">
+    <data name="XAML_AskType_Always" xml:space="preserve">
     <value>Always Ask</value>
   </data>
-  <data name="XAML_AskType_No" xml:space="preserve">
+    <data name="XAML_AskType_No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="XAML_AskType_Yes" xml:space="preserve">
+    <data name="XAML_AskType_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="XAML_ChangePath" xml:space="preserve">
+    <data name="XAML_ChangePath" xml:space="preserve">
     <value>Change Path</value>
   </data>
-  <data name="XAML_DownloadPrerelease" xml:space="preserve">
+    <data name="XAML_DownloadPrerelease" xml:space="preserve">
     <value>Download Prerelease: </value>
   </data>
-  <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
   </data>
-  <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
+    <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
-  <data name="XAML_DownloadSource" xml:space="preserve">
+    <data name="XAML_DownloadSource" xml:space="preserve">
     <value>Download Source: </value>
   </data>
-  <data name="XAML_ModFilterType_All" xml:space="preserve">
+    <data name="XAML_ModFilterType_All" xml:space="preserve">
     <value>All</value>
   </data>
-  <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
+    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
-  <data name="XAML_Font" xml:space="preserve">
+    <data name="XAML_Font" xml:space="preserve">
     <value>Font:</value>
   </data>
-  <data name="XAML_HelpTranslate" xml:space="preserve">
+    <data name="XAML_HelpTranslate" xml:space="preserve">
     <value>Help Translate</value>
   </data>
-  <data name="XAML_HomePage" xml:space="preserve">
+    <data name="XAML_HomePage" xml:space="preserve">
     <value>HomePage</value>
   </data>
-  <data name="XAML_ModFilterType_Installed" xml:space="preserve">
+    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
     <value>Installed</value>
   </data>
-  <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
+    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
     <value>Incompatible</value>
   </data>
-  <data name="XAML_Install_MelonLoader" xml:space="preserve">
+    <data name="XAML_Install_MelonLoader" xml:space="preserve">
     <value>Install\nMelonLoader</value>
   </data>
-  <data name="XAML_Install_Mod" xml:space="preserve">
+    <data name="XAML_Install_Mod" xml:space="preserve">
     <value>Install</value>
   </data>
-  <data name="XAML_Language" xml:space="preserve">
+    <data name="XAML_Language" xml:space="preserve">
     <value>Language: </value>
   </data>
-  <data name="XAML_LogFolder" xml:space="preserve">
+    <data name="XAML_Folder_Log" xml:space="preserve">
     <value>Open Log Folder</value>
   </data>
-  <data name="XAML_ModsFolder" xml:space="preserve">
+    <data name="XAML_Folder_Mods" xml:space="preserve">
     <value>Mods</value>
   </data>
-  <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
+    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
     <value>All</value>
   </data>
-  <data name="XAML_Mod_Dependencies" xml:space="preserve">
+    <data name="XAML_Mod_Dependencies" xml:space="preserve">
     <value>Dependencies: </value>
   </data>
-  <data name="XAML_Mod_Description" xml:space="preserve">
+    <data name="XAML_Mod_Description" xml:space="preserve">
     <value>{0} \n\nAuthor: {1} \nOnline Version: {2}\nCompatible Game Version: {3}</value>
   </data>
-  <data name="XAML_Mod_Duplicate" xml:space="preserve">
+    <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Duplicated by: </value>
   </data>
-  <data name="XAML_Mod_Incompatible" xml:space="preserve">
+    <data name="XAML_Mod_Incompatible" xml:space="preserve">
     <value>{0}'s {1} version is incompatible with your game version</value>
   </data>
-  <data name="XAML_Mod_Modified" xml:space="preserve">
+    <data name="XAML_Mod_Modified" xml:space="preserve">
     <value>Local Version: {0} (Modified)</value>
   </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
+    <data name="XAML_Mod_Newer" xml:space="preserve">
     <value>Local Version: {0} (WOW MOD DEV)</value>
   </data>
-  <data name="XAML_Mod_Normal" xml:space="preserve">
+    <data name="XAML_Mod_Normal" xml:space="preserve">
     <value>Local Version: {0}</value>
   </data>
-  <data name="XAML_Mod_Outdated" xml:space="preserve">
+    <data name="XAML_Mod_Outdated" xml:space="preserve">
     <value>Local Version: {0} (Has a newer version: {1})</value>
   </data>
-  <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
+    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
     <value>Outdated</value>
   </data>
-  <data name="XAML_Path" xml:space="preserve">
+    <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash Folder Path</value>
   </data>
-  <data name="XAML_Reinstall_Mod" xml:space="preserve">
+    <data name="XAML_Reinstall_Mod" xml:space="preserve">
     <value>Reinstall</value>
   </data>
-  <data name="XAML_Mod_SearchBar" xml:space="preserve">
+    <data name="XAML_Mod_SearchBar" xml:space="preserve">
     <value>Search Mods    (Name, Author, Descriptions)</value>
   </data>
-  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
     <value>Disable dependents when deleting Mod</value>
   </data>
-  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
     <value>Disable dependents when disabling Mod</value>
   </data>
-  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
     <value>Enable dependencies when enabling Mod</value>
   </data>
-  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
     <value>Enable dependencies when installing Mod</value>
   </data>
-  <data name="XAML_TroubleShoot" xml:space="preserve">
+    <data name="XAML_TroubleShoot" xml:space="preserve">
     <value>Troubleshoot</value>
   </data>
-  <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
+    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
     <value>Uninstall\nMelonLoader</value>
   </data>
-  <data name="XAML_Uninstall_Mod" xml:space="preserve">
+    <data name="XAML_Uninstall_Mod" xml:space="preserve">
     <value>Uninstall</value>
   </data>
-  <data name="XAML_Update_Mod" xml:space="preserve">
+    <data name="XAML_Update_Mod" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="XAML_DownloadSource_Custom" xml:space="preserve">
+    <data name="XAML_DownloadSource_Custom" xml:space="preserve">
     <value>Custom</value>
   </data>
-  <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
+    <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
     <value>Provide the link of custom download source</value>
   </data>
-  <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
+    <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
     <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
   </data>
-  <data name="XAML_Chart_SearchBar" xml:space="preserve">
+    <data name="XAML_Chart_SearchBar" xml:space="preserve">
     <value>Search Charts (Name, Author, Charter)</value>
   </data>
-  <data name="XAML_Download_Chart" xml:space="preserve">
+    <data name="XAML_Download_Chart" xml:space="preserve">
     <value>Download</value>
   </data>
-  <data name="XAML_Chart_Downloads" xml:space="preserve">
+    <data name="XAML_Chart_Downloads" xml:space="preserve">
     <value>Downloads: </value>
   </data>
-  <data name="XAML_Chart_Likes" xml:space="preserve">
+    <data name="XAML_Chart_Likes" xml:space="preserve">
     <value>Likes: </value>
   </data>
-  <data name="XAML_Charter" xml:space="preserve">
+    <data name="XAML_Charter" xml:space="preserve">
     <value>Charter: </value>
   </data>
-  <data name="XAML_CustomAlbumsFolder" xml:space="preserve">
+    <data name="XAML_Folder_CustomAlbums" xml:space="preserve">
     <value>Open Custom_Albums Folder</value>
   </data>
-  <data name="XAML_ChartSortOptions" xml:space="preserve">
+    <data name="XAML_ChartSortOptions" xml:space="preserve">
     <value>Sort by: </value>
   </data>
-  <data name="XAML_ChartFilterTypes" xml:space="preserve">
+    <data name="XAML_ChartFilterTypes" xml:space="preserve">
     <value>Filter by</value>
   </data>
-  <data name="XAML_ChartSortOption_Default" xml:space="preserve">
+    <data name="XAML_ChartSortOption_Default" xml:space="preserve">
     <value>Default</value>
   </data>
-  <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
+    <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
     <value>Likes</value>
   </data>
-  <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
+    <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
     <value>Downloads</value>
   </data>
-  <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
+    <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
     <value>Latest</value>
   </data>
-  <data name="XAML_ChartSortOption_Name" xml:space="preserve">
+    <data name="XAML_ChartSortOption_Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="XAML_ChartSortOption_Level" xml:space="preserve">
+    <data name="XAML_ChartSortOption_Level" xml:space="preserve">
     <value>Level</value>
   </data>
-  <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
     <value>Easy</value>
   </data>
-  <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
     <value>Hard</value>
   </data>
-  <data name="XAML_ChartFilterType_Master" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Master" xml:space="preserve">
     <value>Master</value>
   </data>
-  <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
+    <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
     <value>Hidden</value>
   </data>
-  <data name="XAML_SearchBar" xml:space="preserve">
+    <data name="XAML_SearchBar" xml:space="preserve">
     <value>Search Mods    (Name, Author, Descriptions)</value>
   </data>
-  <data name="XAML_InfoJson_ChartName" xml:space="preserve">
+    <data name="XAML_InfoJson_ChartName" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="XAML_InfoJson_Author" xml:space="preserve">
+    <data name="XAML_InfoJson_Author" xml:space="preserve">
     <value>Artist</value>
   </data>
-  <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
+    <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
     <value>Level Designer</value>
   </data>
-  <data name="XAML_InfoJson_Scene" xml:space="preserve">
+    <data name="XAML_InfoJson_Scene" xml:space="preserve">
     <value>Scene</value>
   </data>
-  <data name="XAML_InfoJson_BPM" xml:space="preserve">
+    <data name="XAML_InfoJson_BPM" xml:space="preserve">
     <value>BPM</value>
   </data>
-  <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
+    <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
     <value>Difficulty</value>
   </data>
-  <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
+    <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
     <value>Search Tags</value>
   </data>
-  <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
+    <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
     <value>Hide Bms Mode</value>
   </data>
-  <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
+    <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
     <value>Hide Bms Difficulty</value>
   </data>
-  <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
+    <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
     <value>Hide Bms Message</value>
   </data>
-  <data name="XAML_ChooseChartPath" xml:space="preserve">
+    <data name="XAML_ChooseChartPath" xml:space="preserve">
     <value>Choose Chart Folder</value>
   </data>
-  <data name="XAML_Scene_SpaceStation" xml:space="preserve">
+    <data name="XAML_Scene_SpaceStation" xml:space="preserve">
     <value>Space Station</value>
   </data>
-  <data name="XAML_Scene_Retrocity" xml:space="preserve">
+    <data name="XAML_Scene_Retrocity" xml:space="preserve">
     <value>Retrocity</value>
   </data>
-  <data name="XAML_Scene_Castle" xml:space="preserve">
+    <data name="XAML_Scene_Castle" xml:space="preserve">
     <value>Castle</value>
   </data>
-  <data name="XAML_Scene_RainyNight" xml:space="preserve">
+    <data name="XAML_Scene_RainyNight" xml:space="preserve">
     <value>RainyNight</value>
   </data>
-  <data name="XAML_Scene_Candyland" xml:space="preserve">
+    <data name="XAML_Scene_Candyland" xml:space="preserve">
     <value>Candyland</value>
   </data>
-  <data name="XAML_Scene_Oriental" xml:space="preserve">
+    <data name="XAML_Scene_Oriental" xml:space="preserve">
     <value>Oriental</value>
   </data>
-  <data name="XAML_Scene_LetsGroove" xml:space="preserve">
+    <data name="XAML_Scene_LetsGroove" xml:space="preserve">
     <value>Let's Groove</value>
   </data>
-  <data name="XAML_Scene_Touhou" xml:space="preserve">
+    <data name="XAML_Scene_Touhou" xml:space="preserve">
     <value>Touhou</value>
   </data>
-  <data name="XAML_Scene_DJMAX" xml:space="preserve">
+    <data name="XAML_Scene_DJMAX" xml:space="preserve">
     <value>DJMAX</value>
   </data>
-  <data name="XAML_UpdateSources_GitHubAPI" xml:space="preserve">
+    <data name="XAML_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
-  <data name="XAML_UpdateSources_GitHubRSS" xml:space="preserve">
+    <data name="XAML_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
   </data>
 </root>

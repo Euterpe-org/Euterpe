@@ -15,9 +15,9 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     [
         new("Open",
         [
-            new DropDownMenuItem("Mods Folder", OpenFolderCommand, Config.ModsFolder),
-            new DropDownMenuItem("UserData Folder", OpenFolderCommand, Config.UserDataFolder),
-            new DropDownMenuItem("UserLib Folder", OpenFolderCommand, Config.UserLibsFolder)
+            new DropDownMenuItem(XAML_Folder_Mods, OpenFolderCommand, Config.ModsFolder),
+            new DropDownMenuItem(XAML_Folder_UserData, OpenFolderCommand, Config.UserDataFolder),
+            new DropDownMenuItem(XAML_Folder_UserLibs, OpenFolderCommand, Config.UserLibsFolder)
         ])
     ];
 
