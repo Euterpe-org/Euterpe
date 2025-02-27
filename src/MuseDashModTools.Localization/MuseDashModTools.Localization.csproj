@@ -36,7 +36,7 @@
 
         <EmbeddedResource Update="XAML\XAML.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <LastGenOutput>XAML.Designer.cs</LastGenOutput>
             <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
         <Compile Update="XAML\XAML.Designer.cs">

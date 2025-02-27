@@ -1,180 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns="" id="root">
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>1.3</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-        </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-        </value>
-    </resheader>
-    <data name="Accuracy Indicator" xml:space="preserve">
-        <value>Añade un medidor de precisión en arriba de la barra de vida,\ny muestra al final del nivel un gráfico de tu media de precisión durante la canción.</value>
-    </data>
-    <data name="AccuracyDisplay" xml:space="preserve">
-        <value>Un medidor de precisión a tiempo real en la parte superior izquierda de tu pantalla.</value>
-    </data>
-    <data name="Alt Tab Mute" xml:space="preserve">
-        <value>Silencia Muse Dash cuando no está enfocado.</value>
-    </data>
-    <data name="AlwaysAprilFool" xml:space="preserve">
-        <value>Todos los Jefes van a disparar ataques con Palomas y el Tutorial mantendrá activo su modo oculto.</value>
-    </data>
-    <data name="AlwaysBadApple" xml:space="preserve">
-        <value>Un mod que activará el modo Bad Apple en todos los escenarios de Touhou.</value>
-    </data>
-    <data name="AlwaysPigeons" xml:space="preserve">
-        <value>¡Los Jefes empezarán a disparar Palomas!\n
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accuracy Indicator" xml:space="preserve">
+    <value>Añade un medidor de precisión en arriba de la barra de vida,\ny muestra al final del nivel un gráfico de tu media de precisión durante la canción.</value>
+  </data>
+  <data name="AccuracyDisplay" xml:space="preserve">
+    <value>Un medidor de precisión a tiempo real en la parte superior izquierda de tu pantalla.</value>
+  </data>
+  <data name="Alt Tab Mute" xml:space="preserve">
+    <value>Silencia Muse Dash cuando no está enfocado.</value>
+  </data>
+  <data name="AlwaysAprilFool" xml:space="preserve">
+    <value>Todos los Jefes van a disparar ataques con Palomas y el Tutorial mantendrá activo su modo oculto.</value>
+  </data>
+  <data name="AlwaysBadApple" xml:space="preserve">
+    <value>Un mod que activará el modo Bad Apple en todos los escenarios de Touhou.</value>
+  </data>
+  <data name="AlwaysPigeons" xml:space="preserve">
+    <value>¡Los Jefes empezarán a disparar Palomas!\n
 Pequeño recordatorio: NO uses el mod AlwaysAprilFool con ESTE mod.</value>
-    </data>
-    <data name="BestCombinationSuggest" xml:space="preserve">
-        <value>Este mod calculará cuál es la mejor combinación posible para cada Canción y Dificultad\nEntra a una canción y al pausar, podras ver la sugerencia de personajes.\n¡Pero! Toma en cuenta que el mod puede no ser preciso en muchos casos.</value>
-    </data>
-    <data name="BPMDisplay" xml:space="preserve">
-        <value>Este mod muestra el BPM de cada canción en la pantalla de selección de dificultad.</value>
-    </data>
-    <data name="CharacterRandomizer" xml:space="preserve">
-        <value>Cada vez que juegues una canción, un personaje aleatorio será seleccionado.</value>
-    </data>
-    <data name="CharacterScoreboard" xml:space="preserve">
-        <value>(OCS)Muestra la combinación de personajes utilizados por otros jugadores en el Leaderboard\n(LCS)Permite mostrar los scores conseguidos de manera local</value>
-    </data>
-    <data name="ChartDeleter" xml:space="preserve">
-        <value>Permite hacer una lista de charts que desees eliminar o mover, cuando cierres Muse Dash.</value>
-    </data>
-    <data name="ChartReview" xml:space="preserve">
-        <value>Automáticamente selecciona a Rin Sleepwalker, establece el offset a 0,\ndesactiva el Auto-Fever y Oculta elementos de la interfaz.\n¡Además! Tienes un botón in-game para poder desactivar esto cuando quieras.</value>
-    </data>
-    <data name="ChineseMode" xml:space="preserve">
-        <value>Permite activar Muse Dash en modo Chino. Esto modifica contenido del juego como:\n-  Modelos de los Personajes\n- Ilustraciones\n- Escenarios\n- Y otras características exclusivas</value>
-    </data>
-    <data name="Cinema" xml:space="preserve">
-        <value>El mod permite a ciertos charts, reproducir un video en reemplazo del Fondo de Escenario.</value>
-    </data>
-    <data name="CustomAlbums" xml:space="preserve">
-        <value>Este mod permite la carga de Custom Charts(O canciones customs).</value>
-    </data>
-    <data name="CustomAnchorSupport" xml:space="preserve">
-        <value>Este mod permite que algunos Custom Charts estén disponibles en el Modo Streamer.\n
+  </data>
+  <data name="BestCombinationSuggest" xml:space="preserve">
+    <value>Este mod calculará cuál es la mejor combinación posible para cada Canción y Dificultad\nEntra a una canción y al pausar, podras ver la sugerencia de personajes.\n¡Pero! Toma en cuenta que el mod puede no ser preciso en muchos casos.</value>
+  </data>
+  <data name="BPMDisplay" xml:space="preserve">
+    <value>Este mod muestra el BPM de cada canción en la pantalla de selección de dificultad.</value>
+  </data>
+  <data name="CharacterRandomizer" xml:space="preserve">
+    <value>Cada vez que juegues una canción, un personaje aleatorio será seleccionado.</value>
+  </data>
+  <data name="CharacterScoreboard" xml:space="preserve">
+    <value>(OCS)Muestra la combinación de personajes utilizados por otros jugadores en el Leaderboard\n(LCS)Permite mostrar los scores conseguidos de manera local</value>
+  </data>
+  <data name="ChartDeleter" xml:space="preserve">
+    <value>Permite hacer una lista de charts que desees eliminar o mover, cuando cierres Muse Dash.</value>
+  </data>
+  <data name="ChartReview" xml:space="preserve">
+    <value>Automáticamente selecciona a Rin Sleepwalker, establece el offset a 0,\ndesactiva el Auto-Fever y Oculta elementos de la interfaz.\n¡Además! Tienes un botón in-game para poder desactivar esto cuando quieras.</value>
+  </data>
+  <data name="ChineseMode" xml:space="preserve">
+    <value>Permite activar Muse Dash en modo Chino. Esto modifica contenido del juego como:\n-  Modelos de los Personajes\n- Ilustraciones\n- Escenarios\n- Y otras características exclusivas</value>
+  </data>
+  <data name="Cinema" xml:space="preserve">
+    <value>El mod permite a ciertos charts, reproducir un video en reemplazo del Fondo de Escenario.</value>
+  </data>
+  <data name="CustomAlbums" xml:space="preserve">
+    <value>Este mod permite la carga de Custom Charts(O canciones customs).</value>
+  </data>
+  <data name="CustomAnchorSupport" xml:space="preserve">
+    <value>Este mod permite que algunos Custom Charts estén disponibles en el Modo Streamer.\n
 ¡Esto permite jugar Canciones NO Oficiales, sabiendo que No tienen reclamación por Copyright!</value>
-    </data>
-    <data name="CustomBGBrightness" xml:space="preserve">
-        <value>Permite bajar el brillo del escenario a menos del 40%</value>
-    </data>
-    <data name="CustomHitSound" xml:space="preserve">
-        <value>Permite añadir o crear tus propios Hit Sounds\nMas detalles en Github.</value>
-    </data>
-    <data name="CustomLoadingScreens" xml:space="preserve">
-        <value>Permite tener Pantallas de Carga y Mensajes de Carga customizables.\nLos mensajes pueden estar vinculados a las imágenes que añadas\no dejar que se activen de manera aleatoria.\nMás información en: UserData/CustomLoadingScreens.cfg </value>
-    </data>
-    <data name="CustomResolution" xml:space="preserve">
-        <value>Permite ajustar la resolución de Muse Dash a uno que tú prefieras desde la configuración.</value>
-    </data>
-    <data name="EffectDisable" xml:space="preserve">
-        <value>Desactiva algunos efectos in-game</value>
-    </data>
-    <data name="FavGirl" xml:space="preserve">
-        <value>Permite el reemplazar las habilidades de los Personajes y Elfins por otros.\nEl personaje/elfin que selecciones abajo a la derecha será la habilidad seleccionada,\nmientras que el Personaje/Elfin seleccionado con el corazón de arriba a la izquierda, será la apariencia que desees usar.</value>
-    </data>
-    <data name="FC AP indicator" xml:space="preserve">
-        <value>Este mod mostrará cuando estés en una ruta AP(Todo Perfecto), FC(Full Combo) o La cantidad de Fallas y Greats registrados.</value>
-    </data>
-    <data name="FeverEffectDisable" xml:space="preserve">
-        <value>Desactiva el fondo del modo Fever</value>
-    </data>
-    <data name="Headquarters" xml:space="preserve">
-        <value>Permite acceder al Ranking de MDMC a todas las canciones descargadas desde la web MDMC.</value>
-    </data>
-    <data name="HiddenQoL" xml:space="preserve">
-        <value>Permite añadir un botón el cual permite activar/desactivar el modo Hidden de las canciones.\nBastante útil para saltarte los pasos de desbloquearlos</value>
-    </data>
-    <data name="IntroSkip" xml:space="preserve">
-        <value>Salta la intro de "PeroPero HasuHasu" y la pantalla de bienvenida.</value>
-    </data>
-    <data name="KeybindManager" xml:space="preserve">
-        <value>Una librería que permite a otros mods comprender y detectar muchas más teclas.</value>
-    </data>
-    <data name="LocalizeLib" xml:space="preserve">
-        <value>Una librería que permite a otros mods detectar texto</value>
-    </data>
-    <data name="MDRPC" xml:space="preserve">
-        <value>Muse Dash Rich Presence. Un mod que permite mostrar que canción estás jugando en Discord.</value>
-    </data>
-    <data name="ModManager" xml:space="preserve">
-        <value>Un mod que te permite activar/desactivar mods mientras esta in-game.</value>
-    </data>
-    <data name="Muse Dash Mirror" xml:space="preserve">
-        <value>Una librería que permite acceder a Datos del Jugador, Componentes de Batalla y Crear elementos de Interfaz.</value>
-    </data>
-    <data name="MuseDashModTools" xml:space="preserve">
-        <value>Automáticamente analiza todos los mods y detecta posibles actualizaciones de cada una.</value>
-    </data>
-    <data name="NoAutoPause" xml:space="preserve">
-        <value>Evita que la Auto Pausa de Muse Dash sea active al cambiar de pestaña. </value>
-    </data>
-    <data name="NoLevelUpAnimations" xml:space="preserve">
-        <value>Permite saltarte la animación de Subiste de Nivel</value>
-    </data>
-    <data name="PerfectDisable" xml:space="preserve">
-        <value>Permite ocultar como el juego juzga cada objeto que golpees.\nPor ejemplo, en ADOFAI se muestran los avisos de Early/Late, pero no se\nmuestra nada cuando es un Perfecto Exacto.</value>
-    </data>
-    <data name="PopupLib" xml:space="preserve">
-        <value>Una librería que permite gestionar Ventanas y Popups</value>
-    </data>
-    <data name="PreventLowAcc" xml:space="preserve">
-        <value>Un mod que previene enviar puntajes al leaderboard,\npero permite sacar screenshots del intento.</value>
-    </data>
-    <data name="QuickRestart" xml:space="preserve">
-        <value>Pulsar la tecla [Supr] te dejará abandonar el chart\nPulsar la tecla [ ← ] te dejará reiniciar el chart\n¡Y ahora puedes customizar que tecla usar para cada acción!</value>
-    </data>
-    <data name="QuickSwitchCombination" xml:space="preserve">
-        <value>Permite asignar una tecla para seleccionar personajes rápidamente.\nAhora dispone de una interfaz para editar.</value>
-    </data>
-    <data name="SceneEggs" xml:space="preserve">
-        <value>Hace posible que Custom Charts puedan utilizar escenarios con decoración especial.</value>
-    </data>
-    <data name="Scoreboard characters and elfins" xml:space="preserve">
-        <value>Igual que CharacterScoreboard, pero permite ver un icono de los personajes utilizados,\nlos cuales puedes pulsar para seleccionar.</value>
-    </data>
-    <data name="ScrollSpeed" xml:space="preserve">
-        <value>Permite a los Diseñadores poder asignar velocidades custom a los charts.\nEs completamente opcional el utilizar este mod.</value>
-    </data>
-    <data name="SearchPlusPlus" xml:space="preserve">
-        <value>Muestra la canción, artista y dificultad de la canción que estás jugando en la esquina superior derecha.</value>
-    </data>
-    <data name="Song Desc" xml:space="preserve">
-        <value>Una extensión de SearchPlusPlus, que permite crear carpetas\ny buscar por canciones dentro de estas carpetas.</value>
-    </data>
-    <data name="Search++ Folder Tag" xml:space="preserve">
-        <value>Permite expandir el sistema de búsqueda del juego.\nDispones de filtros extras que el propio juego no dispone como: BPM, Traducciones extras, Dificultad, Escenario, etc.</value>
-    </data>
-    <data name="StricterJudge" xml:space="preserve">
-        <value>Este mod aumenta la dificultad de Muse Dash, reduciendo el área de hit de los objetos del chart.</value>
-    </data>
-    <data name="True rank for 999+" xml:space="preserve">
-        <value>Permite mostrar una mayor cantidad del ranking, en lugar del limitado "+999"</value>
-    </data>
-    <data name="UI Disable" xml:space="preserve">
-        <value>Permite ocultar elementos de la interfaz de Muse Dash (Por ejemplo, los círculos de golpe)</value>
-    </data>
-    <data name="UltraInstinctSleepwalking" xml:space="preserve">
-        <value>Este mod permite que Sleepwalker Rin pueda alcanzar el hit máximo de todos los smashers.</value>
-    </data>
-    <data name="UnlockAll2" xml:space="preserve">
-        <value>Permite desbloquear todas las dificultades Master automáticamente,\n solo mientras el mod esté instalado.</value>
-    </data>
-    <data name="VictoryScreenSwitcher" xml:space="preserve">
-        <value>Permite reemplazar la Pantalla de Victoria al modo DJMAX o ARKNIGHTS.</value>
-    </data>
+  </data>
+  <data name="CustomBGBrightness" xml:space="preserve">
+    <value>Permite bajar el brillo del escenario a menos del 40%</value>
+  </data>
+  <data name="CustomHitSound" xml:space="preserve">
+    <value>Permite añadir o crear tus propios Hit Sounds\nMas detalles en Github.</value>
+  </data>
+  <data name="CustomLoadingScreens" xml:space="preserve">
+    <value>Permite tener Pantallas de Carga y Mensajes de Carga customizables.\nLos mensajes pueden estar vinculados a las imágenes que añadas\no dejar que se activen de manera aleatoria.\nMás información en: UserData/CustomLoadingScreens.cfg </value>
+  </data>
+  <data name="CustomResolution" xml:space="preserve">
+    <value>Permite ajustar la resolución de Muse Dash a uno que tú prefieras desde la configuración.</value>
+  </data>
+  <data name="EffectDisable" xml:space="preserve">
+    <value>Desactiva algunos efectos in-game</value>
+  </data>
+  <data name="FavGirl" xml:space="preserve">
+    <value>Permite el reemplazar las habilidades de los Personajes y Elfins por otros.\nEl personaje/elfin que selecciones abajo a la derecha será la habilidad seleccionada,\nmientras que el Personaje/Elfin seleccionado con el corazón de arriba a la izquierda, será la apariencia que desees usar.</value>
+  </data>
+  <data name="FC AP indicator" xml:space="preserve">
+    <value>Este mod mostrará cuando estés en una ruta AP(Todo Perfecto), FC(Full Combo) o La cantidad de Fallas y Greats registrados.</value>
+  </data>
+  <data name="FeverEffectDisable" xml:space="preserve">
+    <value>Desactiva el fondo del modo Fever</value>
+  </data>
+  <data name="Headquarters" xml:space="preserve">
+    <value>Permite acceder al Ranking de MDMC a todas las canciones descargadas desde la web MDMC.</value>
+  </data>
+  <data name="HiddenQoL" xml:space="preserve">
+    <value>Permite añadir un botón el cual permite activar/desactivar el modo Hidden de las canciones.\nBastante útil para saltarte los pasos de desbloquearlos</value>
+  </data>
+  <data name="IntroSkip" xml:space="preserve">
+    <value>Salta la intro de "PeroPero HasuHasu" y la pantalla de bienvenida.</value>
+  </data>
+  <data name="KeybindManager" xml:space="preserve">
+    <value>Una librería que permite a otros mods comprender y detectar muchas más teclas.</value>
+  </data>
+  <data name="LocalizeLib" xml:space="preserve">
+    <value>Una librería que permite a otros mods detectar texto</value>
+  </data>
+  <data name="MDRPC" xml:space="preserve">
+    <value>Muse Dash Rich Presence. Un mod que permite mostrar que canción estás jugando en Discord.</value>
+  </data>
+  <data name="ModManager" xml:space="preserve">
+    <value>Un mod que te permite activar/desactivar mods mientras esta in-game.</value>
+  </data>
+  <data name="Muse Dash Mirror" xml:space="preserve">
+    <value>Una librería que permite acceder a Datos del Jugador, Componentes de Batalla y Crear elementos de Interfaz.</value>
+  </data>
+  <data name="MuseDashModTools" xml:space="preserve">
+    <value>Automáticamente analiza todos los mods y detecta posibles actualizaciones de cada una.</value>
+  </data>
+  <data name="NoAutoPause" xml:space="preserve">
+    <value>Evita que la Auto Pausa de Muse Dash sea active al cambiar de pestaña. </value>
+  </data>
+  <data name="NoLevelUpAnimations" xml:space="preserve">
+    <value>Permite saltarte la animación de Subiste de Nivel</value>
+  </data>
+  <data name="PerfectDisable" xml:space="preserve">
+    <value>Permite ocultar como el juego juzga cada objeto que golpees.\nPor ejemplo, en ADOFAI se muestran los avisos de Early/Late, pero no se\nmuestra nada cuando es un Perfecto Exacto.</value>
+  </data>
+  <data name="PopupLib" xml:space="preserve">
+    <value>Una librería que permite gestionar Ventanas y Popups</value>
+  </data>
+  <data name="PreventLowAcc" xml:space="preserve">
+    <value>Un mod que previene enviar puntajes al leaderboard,\npero permite sacar screenshots del intento.</value>
+  </data>
+  <data name="QuickRestart" xml:space="preserve">
+    <value>Pulsar la tecla [Supr] te dejará abandonar el chart\nPulsar la tecla [ ← ] te dejará reiniciar el chart\n¡Y ahora puedes customizar que tecla usar para cada acción!</value>
+  </data>
+  <data name="QuickSwitchCombination" xml:space="preserve">
+    <value>Permite asignar una tecla para seleccionar personajes rápidamente.\nAhora dispone de una interfaz para editar.</value>
+  </data>
+  <data name="SceneEggs" xml:space="preserve">
+    <value>Hace posible que Custom Charts puedan utilizar escenarios con decoración especial.</value>
+  </data>
+  <data name="Scoreboard characters and elfins" xml:space="preserve">
+    <value>Igual que CharacterScoreboard, pero permite ver un icono de los personajes utilizados,\nlos cuales puedes pulsar para seleccionar.</value>
+  </data>
+  <data name="ScrollSpeed" xml:space="preserve">
+    <value>Permite a los Diseñadores poder asignar velocidades custom a los charts.\nEs completamente opcional el utilizar este mod.</value>
+  </data>
+  <data name="SearchPlusPlus" xml:space="preserve">
+    <value>Muestra la canción, artista y dificultad de la canción que estás jugando en la esquina superior derecha.</value>
+  </data>
+  <data name="Song Desc" xml:space="preserve">
+    <value>Una extensión de SearchPlusPlus, que permite crear carpetas\ny buscar por canciones dentro de estas carpetas.</value>
+  </data>
+  <data name="Search++ Folder Tag" xml:space="preserve">
+    <value>Permite expandir el sistema de búsqueda del juego.\nDispones de filtros extras que el propio juego no dispone como: BPM, Traducciones extras, Dificultad, Escenario, etc.</value>
+  </data>
+  <data name="StricterJudge" xml:space="preserve">
+    <value>Este mod aumenta la dificultad de Muse Dash, reduciendo el área de hit de los objetos del chart.</value>
+  </data>
+  <data name="True rank for 999+" xml:space="preserve">
+    <value>Permite mostrar una mayor cantidad del ranking, en lugar del limitado "+999"</value>
+  </data>
+  <data name="UI Disable" xml:space="preserve">
+    <value>Permite ocultar elementos de la interfaz de Muse Dash (Por ejemplo, los círculos de golpe)</value>
+  </data>
+  <data name="UltraInstinctSleepwalking" xml:space="preserve">
+    <value>Este mod permite que Sleepwalker Rin pueda alcanzar el hit máximo de todos los smashers.</value>
+  </data>
+  <data name="UnlockAll2" xml:space="preserve">
+    <value>Permite desbloquear todas las dificultades Master automáticamente,\n solo mientras el mod esté instalado.</value>
+  </data>
+  <data name="VictoryScreenSwitcher" xml:space="preserve">
+    <value>Permite reemplazar la Pantalla de Victoria al modo DJMAX o ARKNIGHTS.</value>
+  </data>
 </root>
