@@ -375,7 +375,7 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Github.
+        ///   Looks up a localized string similar to GitHub.
         /// </summary>
         public static string XAML_DownloadSource_GitHub {
             get {
@@ -384,7 +384,7 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Github Mirror.
+        ///   Looks up a localized string similar to GitHub Mirror.
         /// </summary>
         public static string XAML_DownloadSource_GitHubMirror {
             get {
