@@ -14,7 +14,9 @@
         <Setter Property="Width" Value="320" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Border Width="320" Theme="{DynamicResource CardBorder}">
+                <Border Width="320"
+                        Theme="{DynamicResource CardBorder}"
+                        VerticalAlignment="Top">
                     <Expander>
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal" Spacing="10">
@@ -54,7 +56,8 @@
                         <Panel>
 
                             <!--  Links  -->
-                            <ItemsControl IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}" ItemsSource="{TemplateBinding Links, Mode=OneWay}">
+                            <ItemsControl IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                                          ItemsSource="{TemplateBinding Links, Mode=OneWay}">
 
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
