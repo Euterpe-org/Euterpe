@@ -28,7 +28,7 @@
     <data name="XAML_Check_Update" xml:space="preserve">
         <value>檢查更新</value>
     </data>
-    <data name="XAML_DownloadSource_GithubMirror" xml:space="preserve">
+    <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
         <value>Github 鏡像</value>
     </data>
     <data name="XAML_Analyze" xml:space="preserve">
@@ -55,7 +55,7 @@
     <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
         <value>Gitee</value>
     </data>
-    <data name="XAML_DownloadSource_Github" xml:space="preserve">
+    <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
         <value>Github</value>
     </data>
     <data name="XAML_DownloadSource" xml:space="preserve">

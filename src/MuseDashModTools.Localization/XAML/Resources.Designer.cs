@@ -377,18 +377,18 @@ namespace MuseDashModTools.Localization.XAML {
         /// <summary>
         ///   Looks up a localized string similar to Github.
         /// </summary>
-        public static string XAML_DownloadSource_Github {
+        public static string XAML_DownloadSource_GitHub {
             get {
-                return ResourceManager.GetString("XAML_DownloadSource_Github", resourceCulture);
+                return ResourceManager.GetString("XAML_DownloadSource_GitHub", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Github Mirror.
         /// </summary>
-        public static string XAML_DownloadSource_GithubMirror {
+        public static string XAML_DownloadSource_GitHubMirror {
             get {
-                return ResourceManager.GetString("XAML_DownloadSource_GithubMirror", resourceCulture);
+                return ResourceManager.GetString("XAML_DownloadSource_GitHubMirror", resourceCulture);
             }
         }
         

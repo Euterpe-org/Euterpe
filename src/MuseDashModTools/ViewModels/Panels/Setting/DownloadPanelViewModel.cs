@@ -4,8 +4,8 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
 {
     public static string[] DownloadSources { get; } =
     [
-        XAML_DownloadSource_Github,
-        XAML_DownloadSource_GithubMirror,
+        XAML_DownloadSource_GitHub,
+        XAML_DownloadSource_GitHubMirror,
         XAML_DownloadSource_Gitee,
         XAML_DownloadSource_Custom
     ];
