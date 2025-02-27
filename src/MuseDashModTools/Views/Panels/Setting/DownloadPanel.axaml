@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:enums="clr-namespace:MuseDashModTools.Models.Enums;assembly=MuseDashModTools.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.DownloadPanel"
              x:DataType="pages:DownloadPanelViewModel"
@@ -22,57 +23,45 @@
                 Spacing="50">
 
         <!--  Download Source  -->
-        <StackPanel Orientation="Vertical" Spacing="15">
-            <TextBlock Classes="H4"
-                       Text="Download Source"
-                       Theme="{StaticResource TitleTextBlock}" />
-            <StackPanel Orientation="Horizontal" Spacing="10">
-                <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}" SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
-                <TextBox MinWidth="200"
-                         Classes="ClearButton"
-                         Foreground="Gray"
-                         IsVisible="{Binding Config.DownloadSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:DownloadSource.Custom}, Mode=OneWay}"
-                         Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}"
-                         Watermark="Input link here" />
-            </StackPanel>
-        </StackPanel>
+        <mdmt:SettingItem Title="Download Source" Description="Source to get mod list and downloads">
+            <mdmt:SettingItem.Content>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}" SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
+                    <TextBox MinWidth="200"
+                             Classes="ClearButton"
+                             Foreground="Gray"
+                             IsVisible="{Binding Config.DownloadSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:DownloadSource.Custom}, Mode=OneWay}"
+                             Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}"
+                             Watermark="Input link here" />
+                </StackPanel>
+            </mdmt:SettingItem.Content>
+        </mdmt:SettingItem>
 
         <!--  Update Source  -->
-        <StackPanel Orientation="Vertical" Spacing="15">
-            <TextBlock Classes="H4"
-                       Text="Update Source"
-                       Theme="{StaticResource TitleTextBlock}" />
-            <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}" SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
-        </StackPanel>
+        <mdmt:SettingItem Title="Update Source" Description="Source to check for MDMT updates">
+            <mdmt:SettingItem.Content>
+                <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}" SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
+            </mdmt:SettingItem.Content>
+        </mdmt:SettingItem>
 
         <!--  GitHub Token  -->
-        <StackPanel IsVisible="{Binding Config.UpdateSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:UpdateSource.GitHubAPI}, Mode=OneWay}"
-                    Orientation="Vertical"
-                    Spacing="15">
-            <TextBlock Classes="H4"
-                       Text="GitHub Token"
-                       Theme="{StaticResource TitleTextBlock}" />
-            <TextBlock Margin="0,-10,0,0"
-                       Foreground="Gray"
-                       Text="GitHub Token used for GitHub API access, required for GitHub API update source"
-                       TextWrapping="Wrap" />
-            <TextBox Classes="ClearButton"
-                     Foreground="Gray"
-                     Text="{Binding Config.GitHubToken, Mode=TwoWay}"
-                     Watermark="Leave blank if no need" />
-        </StackPanel>
+        <mdmt:SettingItem Title="GitHub Token"
+                          Description="GitHub Token used for GitHub API access, required for GitHub API update source"
+                          IsVisible="{Binding Config.UpdateSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:UpdateSource.GitHubAPI}, Mode=OneWay}">
+            <mdmt:SettingItem.Content>
+                <TextBox Classes="ClearButton"
+                         Foreground="Gray"
+                         Text="{Binding Config.GitHubToken, Mode=TwoWay}"
+                         Watermark="Leave blank if no need" />
+            </mdmt:SettingItem.Content>
+        </mdmt:SettingItem>
 
         <!--  Download Prerelease  -->
-        <StackPanel Orientation="Vertical" Spacing="15">
-            <TextBlock Classes="H4"
-                       Text="Download Prerelease"
-                       Theme="{StaticResource TitleTextBlock}" />
-            <TextBlock Margin="0,-10,0,0"
-                       Foreground="Gray"
-                       Text="Check for pre-release versions when checking for MDMT updates"
-                       TextWrapping="Wrap" />
-            <ToggleSwitch IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
-        </StackPanel>
+        <mdmt:SettingItem Title="Download Prerelease" Description="Check for pre-release versions when checking for MDMT updates">
+            <mdmt:SettingItem.Content>
+                <ToggleSwitch IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
+            </mdmt:SettingItem.Content>
+        </mdmt:SettingItem>
 
     </StackPanel>
 </UserControl>

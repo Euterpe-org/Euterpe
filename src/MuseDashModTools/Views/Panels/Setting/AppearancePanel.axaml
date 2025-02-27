@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AppearancePanel"
              x:DataType="pages:AppearancePanelViewModel"
@@ -13,25 +14,22 @@
         <pages:AppearancePanelViewModel />
     </Design.DataContext>
 
-    <StackPanel Orientation="Vertical"
-                Spacing="50"
+    <StackPanel MinWidth="600"
+                MaxWidth="800"
                 Margin="30"
                 HorizontalAlignment="Left"
-                MaxWidth="800"
-                MinWidth="600">
+                Orientation="Vertical"
+                Spacing="50">
 
-        <!-- Language -->
-        <!-- TODO: Implement languages switch -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
-            <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Language" />
-            <TextBlock Margin="0, -10, 0, 0"
-                       Foreground="Gray"
-                       TextWrapping="Wrap"
-                       Text="The current version does not support switching languages." />
-        </StackPanel>
+        <!--  Language  -->
+        <!--  TODO: Implement languages switch  -->
+        <mdmt:SettingItem Title="Language" Description="The current version does not support switching languages.">
+            <mdmt:SettingItem.Content>
+                <ComboBox IsEnabled="False" SelectedIndex="0">
+                    <ComboBoxItem Content="English" />
+                </ComboBox>
+            </mdmt:SettingItem.Content>
+        </mdmt:SettingItem>
 
     </StackPanel>
 </UserControl>
