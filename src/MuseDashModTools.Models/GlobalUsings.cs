@@ -4,4 +4,4 @@ global using JetBrains.Annotations;
 global using MuseDashModTools.Common.Extensions;
 global using MuseDashModTools.Models.Enums;
 global using static MuseDashModTools.Common.GitHubConstants;
-global using static MuseDashModTools.Localization.XAML.Resources;
+global using static MuseDashModTools.Localization.XAML;
