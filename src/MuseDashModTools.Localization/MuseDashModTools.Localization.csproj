@@ -3,7 +3,7 @@
     <ItemGroup>
         <EmbeddedResource Update="General\General.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <LastGenOutput>General.Designer.cs</LastGenOutput>
             <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
         <Compile Update="General\General.Designer.cs">
@@ -14,7 +14,7 @@
 
         <EmbeddedResource Update="ModDescription\ModDescription">
             <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <LastGenOutput>ModDescription.Designer.cs</LastGenOutput>
             <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
         <Compile Update="ModDescription\ModDescripion.Designer.cs">
@@ -25,7 +25,7 @@
 
         <EmbeddedResource Update="MsgBox\MsgBox.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <LastGenOutput>MsgBox.Designer.cs</LastGenOutput>
             <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
         <Compile Update="MsgBox\MsgBox.Designer.cs">
