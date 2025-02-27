@@ -14,7 +14,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
     [
         new("Open",
         [
-            new DropDownMenuItem("CustomAlbums Folder", OpenFolderCommand, Config.CustomAlbumsFolder)
+            new DropDownMenuItem(XAML_Folder_CustomAlbums, OpenFolderCommand, Config.CustomAlbumsFolder)
         ])
     ];
 
