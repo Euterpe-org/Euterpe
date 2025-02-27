@@ -286,10 +286,10 @@
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
         <value>DJMAX</value>
     </data>
-    <data name="XAML_UpdateSources_GithubAPI" xml:space="preserve">
-        <value>Github API</value>
+    <data name="XAML_UpdateSources_GitHubAPI" xml:space="preserve">
+        <value>GitHub API</value>
     </data>
-    <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
-        <value>Github RSS</value>
+    <data name="XAML_UpdateSources_GitHubRSS" xml:space="preserve">
+        <value>GitHub RSS</value>
     </data>
 </root>
