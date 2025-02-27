@@ -29,7 +29,7 @@
         <value>Frissítés</value>
     </data>
     <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
-        <value>Github tükörlink</value>
+        <value>GitHub tükörlink</value>
     </data>
     <data name="XAML_Analyze" xml:space="preserve">
         <value>Log elemzése</value>
@@ -56,7 +56,7 @@
         <value>Gitee</value>
     </data>
     <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
-        <value>Github</value>
+        <value>GitHub</value>
     </data>
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Letöltési forrás: </value>

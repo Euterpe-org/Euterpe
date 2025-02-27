@@ -29,7 +29,7 @@
         <value>檢查更新</value>
     </data>
     <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
-        <value>Github 鏡像</value>
+        <value>GitHub 鏡像</value>
     </data>
     <data name="XAML_Analyze" xml:space="preserve">
         <value>分析日誌</value>
@@ -56,7 +56,7 @@
         <value>Gitee</value>
     </data>
     <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
-        <value>Github</value>
+        <value>GitHub</value>
     </data>
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>下載源: </value>

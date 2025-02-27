@@ -30,7 +30,7 @@
         <value>Check Update</value>
     </data>
     <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
-        <value>Github Mirror</value>
+        <value>GitHub Mirror</value>
     </data>
     <data name="XAML_Analyze" xml:space="preserve">
         <value>Analyze Log</value>
@@ -57,7 +57,7 @@
         <value>Gitee</value>
     </data>
     <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
-        <value>Github</value>
+        <value>GitHub</value>
     </data>
     <data name="XAML_DownloadSource" xml:space="preserve">
         <value>Download Source: </value>
