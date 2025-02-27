@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.FileManagementPanel"
              x:DataType="pages:FileManagementPanelViewModel"
@@ -13,43 +14,41 @@
         <pages:FileManagementPanelViewModel />
     </Design.DataContext>
 
-    <StackPanel Orientation="Vertical"
-                Spacing="50"
+    <StackPanel MinWidth="600"
+                MaxWidth="800"
                 Margin="30"
                 HorizontalAlignment="Left"
-                MaxWidth="800"
-                MinWidth="600">
+                Orientation="Vertical"
+                Spacing="50">
 
-        <!-- MuseDash Game Folder -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
+        <!--  MuseDash Game Folder  -->
+        <StackPanel Orientation="Vertical" Spacing="15">
             <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Muse Dash Game Folder" />
-            <TextBox IsReadOnly="True"
-                     Foreground="Gray"
+                       Text="Muse Dash Game Folder"
+                       Theme="{StaticResource TitleTextBlock}" />
+            <TextBox Foreground="Gray"
+                     IsReadOnly="True"
                      Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
-            <Button Theme="{DynamicResource OutlineButton}"
+            <Button HorizontalAlignment="Left"
                     Content="Reselect"
-                    HorizontalAlignment="Left" />
+                    Theme="{DynamicResource OutlineButton}" />
         </StackPanel>
 
-        <!-- Cache Folder -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
+        <!--  Cache Folder  -->
+        <StackPanel Orientation="Vertical" Spacing="15">
             <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Cache Folder" />
-            <TextBlock Margin="0, -10, 0, 0"
+                       Text="Cache Folder"
+                       Theme="{StaticResource TitleTextBlock}" />
+            <TextBlock Margin="0,-10,0,0"
                        Foreground="Gray"
-                       TextWrapping="Wrap"
-                       Text="This includes the cache when you download files. Please do not change this when performing other operations" />
-            <TextBox IsReadOnly="True"
-                     Foreground="Gray"
+                       Text="This includes the cache when you download files. Please do not change this when performing other operations"
+                       TextWrapping="Wrap" />
+            <TextBox Foreground="Gray"
+                     IsReadOnly="True"
                      Text="{Binding Config.CacheFolder, Mode=OneWay}" />
-            <Button Theme="{DynamicResource OutlineButton}"
+            <Button HorizontalAlignment="Left"
                     Content="Reselect"
-                    HorizontalAlignment="Left" />
+                    Theme="{DynamicResource OutlineButton}" />
         </StackPanel>
 
     </StackPanel>

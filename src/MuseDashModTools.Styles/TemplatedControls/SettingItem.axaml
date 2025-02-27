@@ -1,0 +1,28 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:MuseDashModTools.Styles.TemplatedControls">
+    <Design.PreviewWith>
+        <controls:SettingItem Title="Setting" Description="Description">
+            <TextBox Text="Content" />
+        </controls:SettingItem>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|SettingItem">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel IsVisible="{TemplateBinding IsVisible, Mode=OneWay}"
+                            Orientation="Vertical"
+                            Spacing="15">
+                    <TextBlock Classes="H4"
+                               Text="{TemplateBinding Title, Mode=OneWay}"
+                               Theme="{StaticResource TitleTextBlock}" />
+                    <TextBlock Margin="0,-10,0,0"
+                               Foreground="Gray"
+                               Text="{TemplateBinding Description, Mode=OneWay}"
+                               TextWrapping="Wrap" />
+                    <ContentPresenter Content="{TemplateBinding Content, Mode=OneWay}" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
