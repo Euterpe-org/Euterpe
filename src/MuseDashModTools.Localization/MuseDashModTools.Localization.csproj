@@ -1,44 +1,48 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <EmbeddedResource Update="General\Resources.resx">
+        <EmbeddedResource Update="General\General.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
-        <Compile Update="General\Resources.Designer.cs">
+        <Compile Update="General\General.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
+            <DependentUpon>General.resx</DependentUpon>
         </Compile>
 
-        <EmbeddedResource Update="ModDescription\Resources.resx">
+        <EmbeddedResource Update="ModDescription\ModDescription">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
-        <Compile Update="ModDescription\Resources.Designer.cs">
+        <Compile Update="ModDescription\ModDescripion.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
+            <DependentUpon>ModDescription.resx</DependentUpon>
         </Compile>
 
-        <EmbeddedResource Update="MsgBox\Resources.resx">
+        <EmbeddedResource Update="MsgBox\MsgBox.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
-        <Compile Update="MsgBox\Resources.Designer.cs">
+        <Compile Update="MsgBox\MsgBox.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
+            <DependentUpon>MsgBox.resx</DependentUpon>
         </Compile>
 
-        <EmbeddedResource Update="XAML\Resources.resx">
+        <EmbeddedResource Update="XAML\XAML.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <CustomToolNamespace>MuseDashModTools.Localization</CustomToolNamespace>
         </EmbeddedResource>
-        <Compile Update="XAML\Resources.Designer.cs">
+        <Compile Update="XAML\XAML.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
+            <DependentUpon>XAML.resx</DependentUpon>
         </Compile>
     </ItemGroup>
 
