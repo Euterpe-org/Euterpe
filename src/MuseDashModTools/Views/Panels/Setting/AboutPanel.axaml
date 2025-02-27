@@ -62,6 +62,7 @@
                                 <Style Selector="mdmt|ImageButton">
                                     <Setter Property="ImageCursor" Value="Hand" />
                                     <Setter Property="ImageMargin" Value="3,0" />
+                                    <Setter Property="Height" Value="18" />
                                     <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
                                 </Style>
                             </TextBlock.Styles>
