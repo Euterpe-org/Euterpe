@@ -15,7 +15,7 @@
     </Design.DataContext>
 
     <Grid RowDefinitions="Auto, *">
-        <Border Height="41"
+        <Border Height="45"
                 Margin="0,0,20,10"
                 Padding="12,4"
                 Theme="{DynamicResource CardBorder}">
