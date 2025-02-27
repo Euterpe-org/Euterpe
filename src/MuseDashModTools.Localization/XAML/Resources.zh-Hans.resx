@@ -328,11 +328,11 @@
     <data name="XAML_Page_LogAnalysis" xml:space="preserve">
         <value>日志分析</value>
     </data>
-    <data name="XAML_UpdateSources_GithubAPI" xml:space="preserve">
-        <value>Github API</value>
+    <data name="XAML_UpdateSources_GitHubAPI" xml:space="preserve">
+        <value>GitHub API</value>
     </data>
-    <data name="XAML_UpdateSources_GithubRSS" xml:space="preserve">
-        <value>Github RSS</value>
+    <data name="XAML_UpdateSources_GitHubRSS" xml:space="preserve">
+        <value>GitHub RSS</value>
     </data>
     <data name="XAML_Translator_ChineseSimplified" xml:space="preserve">
         <value>简体中文</value>

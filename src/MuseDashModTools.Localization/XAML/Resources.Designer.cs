@@ -1059,20 +1059,20 @@ namespace MuseDashModTools.Localization.XAML {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Github API.
+        ///   Looks up a localized string similar to GitHub API.
         /// </summary>
-        public static string XAML_UpdateSources_GithubAPI {
+        public static string XAML_UpdateSources_GitHubAPI {
             get {
-                return ResourceManager.GetString("XAML_UpdateSources_GithubAPI", resourceCulture);
+                return ResourceManager.GetString("XAML_UpdateSources_GitHubAPI", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Github RSS.
+        ///   Looks up a localized string similar to GitHub RSS.
         /// </summary>
-        public static string XAML_UpdateSources_GithubRSS {
+        public static string XAML_UpdateSources_GitHubRSS {
             get {
-                return ResourceManager.GetString("XAML_UpdateSources_GithubRSS", resourceCulture);
+                return ResourceManager.GetString("XAML_UpdateSources_GitHubRSS", resourceCulture);
             }
         }
         
