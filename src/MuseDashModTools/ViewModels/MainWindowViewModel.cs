@@ -6,7 +6,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     [
         new(XAML_Page_Home, HomePageName, "Home"),
         new(XAML_Page_Modding, ModdingPageName, "Wrench"),
-        new(XAML_Page_Charting, ChartingPageName, "Disc"),
+        new(XAML_Page_Charting, ChartingPageName, "Music"),
         new(XAML_Page_Setting, SettingPageName, "Setting")
     ];
 
