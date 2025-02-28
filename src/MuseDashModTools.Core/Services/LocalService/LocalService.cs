@@ -160,6 +160,28 @@ internal sealed partial class LocalService : ILocalService
         return string.Empty;
     }
 
+    public string? ReadMelonLoaderVersion()
+    {
+        var paths = new[]
+        {
+            Path.Combine(Config.MelonLoaderFolder, "net6", "MelonLoader.dll"),
+            Path.Combine(Config.MelonLoaderFolder, "MelonLoader.dll")
+        };
+
+        foreach (var path in paths)
+        {
+            if (!File.Exists(path))
+            {
+                continue;
+            }
+
+            return ReadFileVersion(path);
+        }
+
+        Logger.ZLogError($"MelonLoader.dll not found");
+        return null;
+    }
+
     public bool ExtractZipFile(string zipPath, string extractPath)
     {
         try

@@ -11,5 +11,6 @@ public interface ILocalService
     ModDto? LoadModFromPath(string filePath);
     LibDto LoadLibFromPath(string filePath);
     ValueTask<string> ReadGameVersionAsync();
+    string? ReadMelonLoaderVersion();
     bool ExtractZipFile(string zipPath, string extractPath);
 }
