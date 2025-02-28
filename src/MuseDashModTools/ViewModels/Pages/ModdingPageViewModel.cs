@@ -21,9 +21,10 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
         ])
     ];
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    [RelayCommand]
+    protected override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         Logger.ZLogInformation($"{nameof(ModdingPageViewModel)} Initialized");
         return Task.CompletedTask;

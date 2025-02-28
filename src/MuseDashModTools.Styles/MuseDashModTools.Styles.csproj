@@ -10,7 +10,6 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
-        <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Semi.Avalonia"/>
     </ItemGroup>

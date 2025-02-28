@@ -14,6 +14,12 @@
         <pages:ChartingPageViewModel />
     </Design.DataContext>
 
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Initialized">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
     <Grid RowDefinitions="Auto, *">
         <Border Height="45"
                 Margin="0,0,20,10"

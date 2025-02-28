@@ -10,21 +10,16 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         new(XAML_Page_Setting, SettingPageName, "Setting")
     ];
 
-    protected override async Task OnActivatedAsync(CompositeDisposable disposables)
+    [RelayCommand]
+    protected override async Task InitializeAsync()
     {
-        await base.OnActivatedAsync(disposables).ConfigureAwait(true);
+        await base.InitializeAsync().ConfigureAwait(true);
         await SettingService.LoadAsync().ConfigureAwait(true);
         GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
-    }
-
-    protected override void OnError(Exception ex)
-    {
-        base.OnError(ex);
-        Logger.ZLogError(ex, $"{nameof(MainWindowViewModel)} Initialize Failed");
     }
 
     #region Injections
