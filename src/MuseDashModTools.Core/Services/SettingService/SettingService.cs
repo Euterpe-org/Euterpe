@@ -35,7 +35,7 @@ internal sealed partial class SettingService : ISettingService
 
     public async Task SaveAsync()
     {
-        await using var stream = new FileStream(ConfigPath, FileMode.OpenOrCreate, FileAccess.Write);
+        await using var stream = new FileStream(ConfigPath, FileMode.Create, FileAccess.Write);
         await JsonSerializationService.SerializeConfigAsync(stream, Config).ConfigureAwait(false);
         Logger.ZLogInformation($"Setting saved to {ConfigPath} successfully");
     }
