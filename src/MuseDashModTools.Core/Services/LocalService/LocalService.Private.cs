@@ -17,4 +17,10 @@ internal sealed partial class LocalService
         Logger.ZLogInformation($"MuseDash.exe and GameAssembly.dll found in {folderPath}");
         return true;
     }
+
+    private string? ReadFileVersion(string filePath)
+    {
+        var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
+        return versionInfo.FileVersion;
+    }
 }

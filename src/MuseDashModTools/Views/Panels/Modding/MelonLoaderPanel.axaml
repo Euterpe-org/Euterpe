@@ -13,15 +13,20 @@
         <pages:MelonLoaderPanelViewModel />
     </Design.DataContext>
 
-    <StackPanel Orientation="Vertical"
-                VerticalAlignment="Center"
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Initialized">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
+    <StackPanel Margin="0,0,0,40"
                 HorizontalAlignment="Center"
-                Margin="0, 0, 0, 40"
+                VerticalAlignment="Center"
+                Orientation="Vertical"
                 Spacing="10">
 
-        <!-- Melon Loader Logo & Title -->
-        <StackPanel Orientation="Horizontal"
-                    Spacing="20">
+        <!--  Melon Loader Logo & Title  -->
+        <StackPanel Orientation="Horizontal" Spacing="20">
             <Image Height="50"
                    RenderOptions.BitmapInterpolationMode="HighQuality"
                    Source="/Assets/ML_Icon.png" />
@@ -33,38 +38,39 @@
                    Foreground="Gray"
                    Text="MelonLoader installation is required to play with mods" />
 
-        <Border Margin="30"
-                Theme="{DynamicResource CardBorder}">
+        <Border Margin="30" Theme="{DynamicResource CardBorder}">
             <StackPanel Orientation="Vertical">
 
-                <!-- Current Version -->
-                <!-- TODO: Change install button text depends on status -->
-                <TextBlock HorizontalAlignment="Center"
-                           Margin="5"
-                           Foreground="Gainsboro"
+                <!--  Current Version  -->
+                <!--  TODO: Change install button text depends on status  -->
+                <TextBlock Margin="5"
+                           HorizontalAlignment="Center"
                            FontSize="16"
+                           Foreground="Gainsboro"
                            Text="Installed ">
-                    <Label Classes="Ghost Green" Theme="{StaticResource TagLabel}">v0.6.1</Label>
+                    <Label Classes="Ghost Green"
+                           Content="{Binding MelonLoaderVersion, StringFormat='v{0}'}"
+                           Theme="{StaticResource TagLabel}" />
                 </TextBlock>
 
-                <!-- Update Status -->
-                <!-- TODO: Change text depends on status -->
+                <!--  Update Status  -->
+                <!--  TODO: Change text depends on status  -->
                 <TextBlock HorizontalAlignment="Center"
-                           Foreground="LimeGreen"
                            FontSize="16"
+                           Foreground="LimeGreen"
                            Text="You're up to date" />
 
-                <!-- Buttons -->
-                <StackPanel Margin="20, 30, 20, 10"
+                <!--  Buttons  -->
+                <StackPanel Margin="20,30,20,10"
+                            HorizontalAlignment="Center"
                             Orientation="Horizontal"
-                            Spacing="30"
-                            HorizontalAlignment="Center">
-                    <Button Classes="Large"
-                            Width="130"
+                            Spacing="30">
+                    <Button Width="130"
+                            Classes="Large"
                             Command="{Binding InstallMelonLoaderCommand, Mode=OneTime}"
                             Content="Install" />
-                    <Button Classes="Large Danger"
-                            Width="100"
+                    <Button Width="100"
+                            Classes="Large Danger"
                             Command="{Binding UninstallMelonLoaderCommand, Mode=OneTime}"
                             Content="Uninstall" />
                 </StackPanel>
