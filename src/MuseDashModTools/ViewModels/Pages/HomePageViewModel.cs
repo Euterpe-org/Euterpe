@@ -26,13 +26,13 @@ public sealed partial class HomePageViewModel : ViewModelBase
     [RelayCommand]
     private void LaunchModdedGame()
     {
-        LocalService.LaunchGame(true);
+        GameService.LaunchModdedGame();
     }
 
     [RelayCommand]
     private void LaunchVanillaGame()
     {
-        // TODO
+        GameService.LaunchVanillaGame();
     }
 
     #region Injections
@@ -41,7 +41,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required DonationDialogViewModel DonationDialogViewModel { get; init; }
 
     [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
+    public required IGameService GameService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<HomePageViewModel> Logger { get; init; }
