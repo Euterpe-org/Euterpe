@@ -134,27 +134,6 @@ internal sealed partial class LocalService : ILocalService
             IsLocal = true
         };
 
-    public void LaunchGame(bool isModded)
-    {
-        var launchArguments = new StringBuilder();
-        if (!isModded)
-        {
-            launchArguments.Append("//--no-mods");
-        }
-        else if (!Config.ShowConsole)
-        {
-            launchArguments.Append("//--melonloader.hideconsole");
-        }
-
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "steam://rungameid/774171" + launchArguments,
-            UseShellExecute = true
-        });
-
-        Logger.ZLogInformation($"Launching game with launch arguments: {launchArguments}");
-    }
-
     public async ValueTask<string> ReadGameVersionAsync()
     {
         var assetsManager = new AssetsManager();
