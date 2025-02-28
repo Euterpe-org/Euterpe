@@ -15,9 +15,9 @@ public partial class NavViewModelBase : ViewModelBase
     {
     }
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    protected override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         SelectedItem = NavItems[0];
         return Task.CompletedTask;

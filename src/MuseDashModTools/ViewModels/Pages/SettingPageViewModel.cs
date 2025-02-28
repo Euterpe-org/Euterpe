@@ -12,9 +12,10 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
         new("Advanced", AdvancedPanelName)
     ];
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    [RelayCommand]
+    protected override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         Logger.ZLogInformation($"{nameof(SettingPageViewModel)} Initialized");
         return Task.CompletedTask;

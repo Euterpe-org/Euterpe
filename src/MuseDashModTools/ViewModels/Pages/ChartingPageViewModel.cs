@@ -18,9 +18,10 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
         ])
     ];
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    [RelayCommand]
+    protected override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         Logger.ZLogInformation($"{nameof(ChartingPageViewModel)} Initialized");
         return Task.CompletedTask;

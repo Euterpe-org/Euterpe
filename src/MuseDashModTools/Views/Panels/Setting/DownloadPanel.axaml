@@ -15,6 +15,12 @@
         <pages:DownloadPanelViewModel />
     </Design.DataContext>
 
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Initialized">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
     <StackPanel MinWidth="600"
                 MaxWidth="800"
                 Margin="30"

@@ -55,18 +55,13 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
             .Subscribe();
     }
 
-    protected override async Task OnActivatedAsync(CompositeDisposable disposables)
+    [RelayCommand]
+    protected override async Task InitializeAsync()
     {
-        await base.OnActivatedAsync(disposables).ConfigureAwait(false);
+        await base.InitializeAsync().ConfigureAwait(false);
 
         await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
         Logger.ZLogInformation($"{nameof(ModsPanelViewModel)} Initialized");
-    }
-
-    protected override void OnError(Exception ex)
-    {
-        base.OnError(ex);
-        Logger.ZLogError(ex, $"{nameof(ModsPanelViewModel)} Initialize Failed");
     }
 
     [RelayCommand]

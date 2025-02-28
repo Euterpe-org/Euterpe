@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Pages;
 
-public partial class ChartingPage : ReactiveUserControl<ChartingPageViewModel>
+public partial class ChartingPage : UserControl
 {
     public ChartingPage()
     {

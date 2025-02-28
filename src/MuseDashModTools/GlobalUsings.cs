@@ -44,7 +44,6 @@ global using MuseDashModTools.Views.Panels.Modding;
 global using MuseDashModTools.Views.Panels.Setting;
 global using ReactiveUI;
 global using Ursa.Controls;
-global using Ursa.ReactiveUIExtension;
 global using ZLogger;
 global using static MuseDashModTools.Common.BuildInfo;
 global using static MuseDashModTools.Common.PageNames;

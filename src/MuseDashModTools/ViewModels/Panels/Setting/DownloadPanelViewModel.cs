@@ -22,9 +22,10 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedUpdateSourceIndex { get; set; }
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    [RelayCommand]
+    protected override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         SelectedDownloadSourceIndex = (int)Config.DownloadSource;
         SelectedUpdateSourceIndex = (int)Config.UpdateSource;
