@@ -3,7 +3,7 @@
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     </PropertyGroup>
     <ItemGroup>
-        <PackageVersion Include="Antelcat.I18N.Avalonia" Version="1.0.3"/>
+        <PackageVersion Include="Antelcat.I18N.Avalonia" Version="1.1.0"/>
         <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.2"/>
         <PackageVersion Include="AssetsTools.NET" Version="3.0.0"/>
         <PackageVersion Include="AsyncAwaitBestPractices" Version="9.0.0"/>
