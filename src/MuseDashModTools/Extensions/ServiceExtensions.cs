@@ -7,6 +7,8 @@ public static partial class ServiceExtensions
         // Self Services
         builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
 
+        builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
+
         // TopLevel
         builder.Register(context => context.Resolve<MainWindow>().GetTopLevel()).As<TopLevel>().SingleInstance();
     }

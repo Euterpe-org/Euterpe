@@ -132,7 +132,7 @@
     <data name="XAML_Analyze" xml:space="preserve">
     <value>Analyze Log</value>
   </data>
-    <data name="XAML_Apply" xml:space="preserve">
+    <data name="XAML_Button_Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
     <data name="XAML_AskType_Always" xml:space="preserve">
@@ -180,14 +180,8 @@
     <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
     <value>Incompatible</value>
   </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
-    <value>Install\nMelonLoader</value>
-  </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
+    <data name="XAML_Button_Install" xml:space="preserve">
     <value>Install</value>
-  </data>
-    <data name="XAML_Language" xml:space="preserve">
-    <value>Language: </value>
   </data>
     <data name="XAML_Folder_Log" xml:space="preserve">
     <value>Open Log Folder</value>
@@ -195,7 +189,7 @@
     <data name="XAML_Folder_Mods" xml:space="preserve">
     <value>Mods</value>
   </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
+    <data name="XAML_Mod_AllGameVersionCompatible" xml:space="preserve">
     <value>All</value>
   </data>
     <data name="XAML_Mod_Dependencies" xml:space="preserve">
@@ -207,20 +201,11 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Duplicated by: </value>
   </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
+    <data name="XAML_ModState_Incompatible" xml:space="preserve">
     <value>{0}'s {1} version is incompatible with your game version</value>
-  </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
-    <value>Local Version: {0} (Modified)</value>
   </data>
     <data name="XAML_Mod_Newer" xml:space="preserve">
     <value>Local Version: {0} (WOW MOD DEV)</value>
-  </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
-    <value>Local Version: {0}</value>
-  </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
-    <value>Local Version: {0} (Has a newer version: {1})</value>
   </data>
     <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
     <value>Outdated</value>
@@ -228,10 +213,10 @@
     <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash Folder Path</value>
   </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
+    <data name="XAML_Button_Reinstall" xml:space="preserve">
     <value>Reinstall</value>
   </data>
-    <data name="XAML_Mod_SearchBar" xml:space="preserve">
+    <data name="XAML_SearchBarWatermark_Mod" xml:space="preserve">
     <value>Search Mods    (Name, Author, Descriptions)</value>
   </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
@@ -249,10 +234,7 @@
     <data name="XAML_TroubleShoot" xml:space="preserve">
     <value>Troubleshoot</value>
   </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-    <value>Uninstall\nMelonLoader</value>
-  </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
+    <data name="XAML_Button_Uninstall" xml:space="preserve">
     <value>Uninstall</value>
   </data>
     <data name="XAML_Update_Mod" xml:space="preserve">

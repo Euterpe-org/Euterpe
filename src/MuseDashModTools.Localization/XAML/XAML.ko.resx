@@ -132,7 +132,7 @@
     <data name="XAML_Analyze" xml:space="preserve">
     <value>로그 분석</value>
   </data>
-    <data name="XAML_Apply" xml:space="preserve">
+    <data name="XAML_Button_Apply" xml:space="preserve">
     <value>적용</value>
   </data>
     <data name="XAML_AskType_Always" xml:space="preserve">
@@ -177,22 +177,19 @@
     <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
     <value>호환되지 않음</value>
   </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
-    <value>설치\nMelonLoader</value>
-  </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
+    <data name="XAML_Button_Install" xml:space="preserve">
     <value>설치</value>
   </data>
-    <data name="XAML_Language" xml:space="preserve">
-    <value>언어: </value>
-  </data>
+    <data name="XAML_Setting_Title_Language" xml:space="preserve">
+        <value>언어</value>
+    </data>
     <data name="XAML_Folder_Log" xml:space="preserve">
     <value>로그 파일 열기</value>
   </data>
     <data name="XAML_Folder_Mods" xml:space="preserve">
     <value>모드</value>
   </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
+    <data name="XAML_Mod_AllGameVersionCompatible" xml:space="preserve">
     <value>모든</value>
   </data>
     <data name="XAML_Mod_Dependencies" xml:space="preserve">
@@ -204,20 +201,14 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>중복제작자: </value>
   </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
+    <data name="XAML_ModState_Incompatible" xml:space="preserve">
     <value>{0} 의 {1} 버전이 게임 버전과 호환되지 않습니다.</value>
   </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
-    <value>로컬 버전: {0} (수정됨)</value>
-  </data>
+    <data name="XAML_ModState_Modified" xml:space="preserve">
+        <value>수정됨</value>
+    </data>
     <data name="XAML_Mod_Newer" xml:space="preserve">
     <value>로컬 버전: {0} (WOW MOD DEV)</value>
-  </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
-    <value>로컬 버전: {0}</value>
-  </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
-    <value>로컬 버전: {0} (최신 버전 있음: {1})</value>
   </data>
     <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
     <value>오래된</value>
@@ -225,10 +216,10 @@
     <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash 폴더 경로</value>
   </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
+    <data name="XAML_Button_Reinstall" xml:space="preserve">
     <value>재설치</value>
   </data>
-    <data name="XAML_Mod_SearchBar" xml:space="preserve">
+    <data name="XAML_SearchBarWatermark_Mod" xml:space="preserve">
     <value>모드 검색    (이름, 작성자, 설명)</value>
   </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
@@ -246,10 +237,7 @@
     <data name="XAML_TroubleShoot" xml:space="preserve">
     <value>문제 해결</value>
   </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-    <value>제거\nMelonLoader</value>
-  </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
+    <data name="XAML_Button_Uninstall" xml:space="preserve">
     <value>제거</value>
   </data>
     <data name="XAML_Update_Mod" xml:space="preserve">
