@@ -1,8 +1,10 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:MuseDashModTools"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+             xmlns:models="clr-namespace:MuseDashModTools.Models;assembly=MuseDashModTools.Models"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AppearancePanel"
              x:DataType="pages:AppearancePanelViewModel"
@@ -14,6 +16,12 @@
         <pages:AppearancePanelViewModel />
     </Design.DataContext>
 
+    <Interaction.Behaviors>
+        <EventTriggerBehavior EventName="Initialized">
+            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
+        </EventTriggerBehavior>
+    </Interaction.Behaviors>
+
     <StackPanel MinWidth="600"
                 MaxWidth="800"
                 Margin="30"
@@ -22,12 +30,18 @@
                 Spacing="50">
 
         <!--  Language  -->
-        <!--  TODO: Implement languages switch  -->
-        <mdmt:SettingItem Title="Language" Description="The current version does not support switching languages.">
+        <mdmt:SettingItem Title="{I18N {x:Static local:LangKeys.XAML_Setting_Title_Language}}" Description="The current version does not support switching languages.">
             <mdmt:SettingItem.Content>
-                <ComboBox IsEnabled="False" SelectedIndex="0">
-                    <ComboBoxItem Content="English" />
-                </ComboBox>
+                <StackPanel IsEnabled="False"
+                            Orientation="Horizontal"
+                            Spacing="20">
+                    <ComboBox MinWidth="200"
+                              ItemsSource="{Binding AvailableLanguages}"
+                              SelectedIndex="{Binding CurrentLanguageIndex}" />
+
+                    <Button Command="{Binding ApplyLanguageCommand}" Content="{I18N {x:Static local:LangKeys.XAML_Button_Apply}}" />
+                </StackPanel>
+
             </mdmt:SettingItem.Content>
         </mdmt:SettingItem>
 

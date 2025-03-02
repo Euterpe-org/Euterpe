@@ -29,7 +29,7 @@
                 <Image Height="120"
                        Classes="animate-scale"
                        RenderOptions.BitmapInterpolationMode="HighQuality"
-                       Source="/Assets/Melon.webp" />
+                       Source="/Assets/Logo.webp" />
 
                 <!--  Title & Version & Copyright  -->
                 <StackPanel VerticalAlignment="Center" Spacing="3">

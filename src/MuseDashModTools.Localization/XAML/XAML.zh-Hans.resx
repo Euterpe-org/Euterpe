@@ -132,7 +132,7 @@
     <data name="XAML_Analyze" xml:space="preserve">
     <value>分析日志</value>
   </data>
-    <data name="XAML_Apply" xml:space="preserve">
+    <data name="XAML_Button_Apply" xml:space="preserve">
     <value>应用</value>
   </data>
     <data name="XAML_AskType_Always" xml:space="preserve">
@@ -180,22 +180,19 @@
     <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
     <value>不兼容</value>
   </data>
-    <data name="XAML_Install_MelonLoader" xml:space="preserve">
-    <value>安装\nMelonLoader</value>
-  </data>
-    <data name="XAML_Install_Mod" xml:space="preserve">
+    <data name="XAML_Button_Install" xml:space="preserve">
     <value>安装</value>
   </data>
-    <data name="XAML_Language" xml:space="preserve">
-    <value>语言：</value>
-  </data>
+    <data name="XAML_Setting_Title_Language" xml:space="preserve">
+        <value>语言</value>
+    </data>
     <data name="XAML_Folder_Log" xml:space="preserve">
     <value>打开日志文件夹</value>
   </data>
     <data name="XAML_Folder_Mods" xml:space="preserve">
     <value>模组文件夹</value>
   </data>
-    <data name="XAML_Mod_CompatibleGameVersion" xml:space="preserve">
+    <data name="XAML_Mod_AllGameVersionCompatible" xml:space="preserve">
     <value>全部</value>
   </data>
     <data name="XAML_Mod_Dependencies" xml:space="preserve">
@@ -207,31 +204,31 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>重复：</value>
   </data>
-    <data name="XAML_Mod_Incompatible" xml:space="preserve">
+    <data name="XAML_ModState_Incompatible" xml:space="preserve">
     <value>{0} 的 {1} 版本和你的游戏版本不兼容</value>
   </data>
-    <data name="XAML_Mod_Modified" xml:space="preserve">
-    <value>本地版本：{0}（修改）</value>
-  </data>
+    <data name="XAML_ModState_Modified" xml:space="preserve">
+        <value>被修改</value>
+    </data>
     <data name="XAML_Mod_Newer" xml:space="preserve">
     <value>本地版本：{0}（WOW MOD开发者）</value>
   </data>
-    <data name="XAML_Mod_Normal" xml:space="preserve">
-    <value>本地版本：{0}</value>
-  </data>
-    <data name="XAML_Mod_Outdated" xml:space="preserve">
-    <value>本地版本：{0}（有新版本：{1}）</value>
-  </data>
+    <data name="XAML_ModState_Normal" xml:space="preserve">
+        <value>已安装</value>
+    </data>
+    <data name="XAML_ModState_Outdated" xml:space="preserve">
+        <value>有新版本</value>
+    </data>
     <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
     <value>有更新</value>
   </data>
     <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash 文件夹路径</value>
   </data>
-    <data name="XAML_Reinstall_Mod" xml:space="preserve">
+    <data name="XAML_Button_Reinstall" xml:space="preserve">
     <value>重装</value>
   </data>
-    <data name="XAML_Mod_SearchBar" xml:space="preserve">
+    <data name="XAML_SearchBarWatermark_Mod" xml:space="preserve">
     <value>搜索模组    （名字，作者，描述）</value>
   </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
@@ -249,10 +246,7 @@
     <data name="XAML_TroubleShoot" xml:space="preserve">
     <value>报告未知问题</value>
   </data>
-    <data name="XAML_Uninstall_MelonLoader" xml:space="preserve">
-    <value>卸载\nMelonLoader</value>
-  </data>
-    <data name="XAML_Uninstall_Mod" xml:space="preserve">
+    <data name="XAML_Button_Uninstall" xml:space="preserve">
     <value>卸载</value>
   </data>
     <data name="XAML_Update_Mod" xml:space="preserve">
@@ -387,10 +381,10 @@
     <data name="XAML_ConfigFile" xml:space="preserve">
     <value>配置文件</value>
   </data>
-    <data name="XAML_LaunchVanilla" xml:space="preserve">
+    <data name="XAML_Button_LaunchVanilla" xml:space="preserve">
     <value>启动原版</value>
   </data>
-    <data name="XAML_LaunchModded" xml:space="preserve">
+    <data name="XAML_Button_LaunchModded" xml:space="preserve">
     <value>启动 Mod 版</value>
   </data>
     <data name="XAML_Back" xml:space="preserve">

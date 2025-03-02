@@ -45,7 +45,7 @@ public sealed class App : Application
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
             desktop.MainWindow = Container.Resolve<MainWindow>();
-            desktop.Exit += async (_, _) => await OnExitAsync().ConfigureAwait(false);
+            desktop.Exit += async delegate { await OnExitAsync().ConfigureAwait(false); };
         }
 
         this.WhenAnyValue(x => x.ActualThemeVariant)

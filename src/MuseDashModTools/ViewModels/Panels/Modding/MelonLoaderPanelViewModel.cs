@@ -25,8 +25,8 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         var downloadProgress = new Progress<double>(value => DownloadProgress = value);
         await DownloadManager
             .DownloadMelonLoaderAsync((_, args) => Logger.ZLogInformation($"Downloading File Size: {args.TotalBytesToReceive}"), downloadProgress)
-            .ConfigureAwait(false);
-        LocalService.ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder);
+            .ConfigureAwait(true);
+        await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
         MelonLoaderVersion = "0.6.1";
         Logger.ZLogInformation($"MelonLoader has been successfully installed");
     }

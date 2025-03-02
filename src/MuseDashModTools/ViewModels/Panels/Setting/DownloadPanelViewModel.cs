@@ -2,7 +2,7 @@
 
 public sealed partial class DownloadPanelViewModel : ViewModelBase
 {
-    public static string[] DownloadSources { get; } =
+    public static IReadOnlyList<string> DownloadSources { get; } =
     [
         XAML_DownloadSource_GitHub,
         XAML_DownloadSource_GitHubMirror,
@@ -10,7 +10,7 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
         XAML_DownloadSource_Custom
     ];
 
-    public static string[] UpdateSources { get; } =
+    public static IReadOnlyList<string> UpdateSources { get; } =
     [
         XAML_UpdateSources_GitHubAPI,
         XAML_UpdateSources_GitHubRSS

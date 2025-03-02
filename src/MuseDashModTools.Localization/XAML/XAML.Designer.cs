@@ -69,15 +69,6 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply.
-        /// </summary>
-        public static string XAML_Apply {
-            get {
-                return ResourceManager.GetString("XAML_Apply", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Always Ask.
         /// </summary>
         public static string XAML_AskType_Always {
@@ -110,6 +101,60 @@ namespace MuseDashModTools.Localization {
         public static string XAML_Back {
             get {
                 return ResourceManager.GetString("XAML_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string XAML_Button_Apply {
+            get {
+                return ResourceManager.GetString("XAML_Button_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install.
+        /// </summary>
+        public static string XAML_Button_Install {
+            get {
+                return ResourceManager.GetString("XAML_Button_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launch Modded.
+        /// </summary>
+        public static string XAML_Button_LaunchModded {
+            get {
+                return ResourceManager.GetString("XAML_Button_LaunchModded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launch Vanilla.
+        /// </summary>
+        public static string XAML_Button_LaunchVanilla {
+            get {
+                return ResourceManager.GetString("XAML_Button_LaunchVanilla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reinstall.
+        /// </summary>
+        public static string XAML_Button_Reinstall {
+            get {
+                return ResourceManager.GetString("XAML_Button_Reinstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uninstall.
+        /// </summary>
+        public static string XAML_Button_Uninstall {
+            get {
+                return ResourceManager.GetString("XAML_Button_Uninstall", resourceCulture);
             }
         }
         
@@ -546,56 +591,11 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install\nMelonLoader.
-        /// </summary>
-        public static string XAML_Install_MelonLoader {
-            get {
-                return ResourceManager.GetString("XAML_Install_MelonLoader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install.
-        /// </summary>
-        public static string XAML_Install_Mod {
-            get {
-                return ResourceManager.GetString("XAML_Install_Mod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language: .
-        /// </summary>
-        public static string XAML_Language {
-            get {
-                return ResourceManager.GetString("XAML_Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Launch Modded.
-        /// </summary>
-        public static string XAML_LaunchModded {
-            get {
-                return ResourceManager.GetString("XAML_LaunchModded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Launch Vanilla.
-        /// </summary>
-        public static string XAML_LaunchVanilla {
-            get {
-                return ResourceManager.GetString("XAML_LaunchVanilla", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
-        public static string XAML_Mod_CompatibleGameVersion {
+        public static string XAML_Mod_AllGameVersionCompatible {
             get {
-                return ResourceManager.GetString("XAML_Mod_CompatibleGameVersion", resourceCulture);
+                return ResourceManager.GetString("XAML_Mod_AllGameVersionCompatible", resourceCulture);
             }
         }
         
@@ -627,56 +627,11 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}&apos;s {1} version is incompatible with your game version.
-        /// </summary>
-        public static string XAML_Mod_Incompatible {
-            get {
-                return ResourceManager.GetString("XAML_Mod_Incompatible", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Local Version: {0} (Modified).
-        /// </summary>
-        public static string XAML_Mod_Modified {
-            get {
-                return ResourceManager.GetString("XAML_Mod_Modified", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Local Version: {0} (WOW MOD DEV).
         /// </summary>
         public static string XAML_Mod_Newer {
             get {
                 return ResourceManager.GetString("XAML_Mod_Newer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Local Version: {0}.
-        /// </summary>
-        public static string XAML_Mod_Normal {
-            get {
-                return ResourceManager.GetString("XAML_Mod_Normal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Local Version: {0} (Has a newer version: {1}).
-        /// </summary>
-        public static string XAML_Mod_Outdated {
-            get {
-                return ResourceManager.GetString("XAML_Mod_Outdated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
-        /// </summary>
-        public static string XAML_Mod_SearchBar {
-            get {
-                return ResourceManager.GetString("XAML_Mod_SearchBar", resourceCulture);
             }
         }
         
@@ -731,6 +686,42 @@ namespace MuseDashModTools.Localization {
         public static string XAML_ModFilterType_Outdated {
             get {
                 return ResourceManager.GetString("XAML_ModFilterType_Outdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}&apos;s {1} version is incompatible with your game version.
+        /// </summary>
+        public static string XAML_ModState_Incompatible {
+            get {
+                return ResourceManager.GetString("XAML_ModState_Incompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modified.
+        /// </summary>
+        public static string XAML_ModState_Modified {
+            get {
+                return ResourceManager.GetString("XAML_ModState_Modified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installed.
+        /// </summary>
+        public static string XAML_ModState_Normal {
+            get {
+                return ResourceManager.GetString("XAML_ModState_Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Available.
+        /// </summary>
+        public static string XAML_ModState_Outdated {
+            get {
+                return ResourceManager.GetString("XAML_ModState_Outdated", resourceCulture);
             }
         }
         
@@ -843,15 +834,6 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reinstall.
-        /// </summary>
-        public static string XAML_Reinstall_Mod {
-            get {
-                return ResourceManager.GetString("XAML_Reinstall_Mod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Report Bug.
         /// </summary>
         public static string XAML_ReportBug {
@@ -951,6 +933,15 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
+        /// </summary>
+        public static string XAML_SearchBarWatermark_Mod {
+            get {
+                return ResourceManager.GetString("XAML_SearchBarWatermark_Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable dependents when deleting Mod.
         /// </summary>
         public static string XAML_Setting_DisableDependency_Delete {
@@ -983,6 +974,15 @@ namespace MuseDashModTools.Localization {
         public static string XAML_Setting_EnableDependency_Install {
             get {
                 return ResourceManager.GetString("XAML_Setting_EnableDependency_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string XAML_Setting_Title_Language {
+            get {
+                return ResourceManager.GetString("XAML_Setting_Title_Language", resourceCulture);
             }
         }
         
@@ -1046,24 +1046,6 @@ namespace MuseDashModTools.Localization {
         public static string XAML_TroubleShoot {
             get {
                 return ResourceManager.GetString("XAML_TroubleShoot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uninstall\nMelonLoader.
-        /// </summary>
-        public static string XAML_Uninstall_MelonLoader {
-            get {
-                return ResourceManager.GetString("XAML_Uninstall_MelonLoader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uninstall.
-        /// </summary>
-        public static string XAML_Uninstall_Mod {
-            get {
-                return ResourceManager.GetString("XAML_Uninstall_Mod", resourceCulture);
             }
         }
         
