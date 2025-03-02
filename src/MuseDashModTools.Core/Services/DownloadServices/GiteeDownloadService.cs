@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.Core;
 
-public sealed class GiteeDownloadService : IGiteeDownloadService
+internal sealed class GiteeDownloadService : IGiteeDownloadService
 {
     private const string GiteeBaseUrl = "https://gitee.com/";
     private const string RawModLinksUrl = GiteeBaseUrl + "lxymahatma/ModLinks/raw/" + ModLinksBranch;
