@@ -468,4 +468,7 @@
     <data name="Panel_Setting_Appearance" xml:space="preserve">
         <value>外观</value>
     </data>
+    <data name="Panel_Setting_Experience" xml:space="preserve">
+        <value>体验</value>
+    </data>
 </root>

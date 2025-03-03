@@ -60,7 +60,7 @@
                 </Grid>
 
                 <!--  Mod List  -->
-                <ScrollViewer DockPanel.Dock="Bottom">
+                <ScrollViewer DockPanel.Dock="Bottom" AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
                     <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
                         <!--  Selection Indicator  -->
@@ -97,6 +97,11 @@
                                             <Label Classes="Ghost Indigo StateLabel"
                                                    Content="{Binding LocalVersion, Mode=OneWay}"
                                                    IsVisible="{Binding IsLocal, Mode=OneWay}" />
+
+                                            <!--  Incompatible State  -->
+                                            <Label Classes="Ghost Red StateLabel"
+                                                   Content="{I18N {x:Static local:LangKeys.ModState_Incompatible}}"
+                                                   IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
 
                                             <!--  Modified State  -->
                                             <Label Classes="Ghost Orange StateLabel"

@@ -23,9 +23,11 @@
 
         <!--  Show Console  -->
         <mdmt:SettingItem Title="Show Console" Description="Whether to display the console after the game is launched">
-            <mdmt:SettingItem.Content>
-                <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
-            </mdmt:SettingItem.Content>
+            <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=OneWayToSource}" />
+        </mdmt:SettingItem>
+
+        <mdmt:SettingItem Title="Always Show ScrollBar" Description="Always show scrollbar for mod list">
+            <ToggleSwitch IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=OneWayToSource}" />
         </mdmt:SettingItem>
 
     </StackPanel>
