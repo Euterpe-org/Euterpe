@@ -117,7 +117,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="XAML_Folder_UserData" xml:space="preserve">
+    <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
   </data>
     <data name="XAML_ReportBug" xml:space="preserve">
@@ -126,13 +126,13 @@
     <data name="XAML_Check_Update" xml:space="preserve">
     <value>Проверить обновления</value>
   </data>
-    <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
+    <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub Mirror</value>
   </data>
     <data name="XAML_Analyze" xml:space="preserve">
     <value>Анализировать логи</value>
   </data>
-    <data name="XAML_Button_Apply" xml:space="preserve">
+    <data name="Button_Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
     <data name="XAML_AskType_Always" xml:space="preserve">
@@ -147,22 +147,22 @@
     <data name="XAML_ChangePath" xml:space="preserve">
     <value>Изменить путь</value>
   </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
+    <data name="Setting_DownloadPrerelease" xml:space="preserve">
     <value>Скачать пре-релиз: </value>
   </data>
-    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+    <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
   </data>
-    <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
+    <data name="Setting_DownloadSource_GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
-    <data name="XAML_DownloadSource" xml:space="preserve">
+    <data name="Setting_DownloadSource" xml:space="preserve">
     <value>Источник скачивания: </value>
   </data>
-    <data name="XAML_ModFilterType_All" xml:space="preserve">
+    <data name="ModFilterType_All" xml:space="preserve">
     <value>Все</value>
   </data>
-    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
+    <data name="ModFilterType_Enabled" xml:space="preserve">
     <value>Включенные</value>
   </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -171,25 +171,25 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
     <value>Помочь с переводом</value>
   </data>
-    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
+    <data name="ModFilterType_Installed" xml:space="preserve">
     <value>Установленные</value>
   </data>
-    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
+    <data name="ModFilterType_Incompatible" xml:space="preserve">
     <value>Несовместимые</value>
   </data>
-    <data name="XAML_Button_Install" xml:space="preserve">
+    <data name="Button_Install" xml:space="preserve">
     <value>Установить</value>
   </data>
-    <data name="XAML_Setting_Title_Language" xml:space="preserve">
+    <data name="Setting_Title_Language" xml:space="preserve">
         <value>Язык</value>
     </data>
     <data name="XAML_Folder_Log" xml:space="preserve">
     <value>Открыть папку с логами</value>
   </data>
-    <data name="XAML_Folder_Mods" xml:space="preserve">
+    <data name="Folder_Mods" xml:space="preserve">
     <value>Моды</value>
   </data>
-    <data name="XAML_Mod_AllGameVersionCompatible" xml:space="preserve">
+    <data name="AllGameVersionCompatible" xml:space="preserve">
     <value>Все</value>
   </data>
     <data name="XAML_Mod_Dependencies" xml:space="preserve">
@@ -201,25 +201,22 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Дубликат к:</value>
   </data>
-    <data name="XAML_ModState_Incompatible" xml:space="preserve">
-    <value>Версия {1} мода {0} несовместима с вашей версией игры</value>
-  </data>
-    <data name="XAML_ModState_Modified" xml:space="preserve">
+    <data name="ModState_Modified" xml:space="preserve">
         <value>Модифицирована</value>
     </data>
     <data name="XAML_Mod_Newer" xml:space="preserve">
     <value>Установленная версия: {0} (ВАУ МОДОДЕЛ)</value>
   </data>
-    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
+    <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>Устаревшие</value>
   </data>
     <data name="XAML_Path" xml:space="preserve">
     <value>Путь к папке Muse Dash</value>
   </data>
-    <data name="XAML_Button_Reinstall" xml:space="preserve">
+    <data name="Button_Reinstall" xml:space="preserve">
     <value>Переустановить</value>
   </data>
-    <data name="XAML_SearchBarWatermark_Mod" xml:space="preserve">
+    <data name="SearchBarWatermark_Mod" xml:space="preserve">
     <value>Искать моды (Имя, Автор, Описания)</value>
   </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
@@ -237,13 +234,13 @@
     <data name="XAML_TroubleShoot" xml:space="preserve">
     <value>Поиск неисправностей</value>
   </data>
-    <data name="XAML_Button_Uninstall" xml:space="preserve">
+    <data name="Button_Uninstall" xml:space="preserve">
     <value>Удалить</value>
   </data>
-    <data name="XAML_Button_Update" xml:space="preserve">
+    <data name="Button_Update" xml:space="preserve">
     <value>Обновить</value>
   </data>
-    <data name="XAML_DownloadSource_Custom" xml:space="preserve">
+    <data name="Setting_DownloadSource_Custom" xml:space="preserve">
     <value>Другой</value>
   </data>
     <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
@@ -267,7 +264,7 @@
     <data name="XAML_Charter" xml:space="preserve">
     <value>Создатель: </value>
   </data>
-    <data name="XAML_Folder_CustomAlbums" xml:space="preserve">
+    <data name="Folder_CustomAlbums" xml:space="preserve">
     <value>Открыть папку с чартами</value>
   </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
@@ -366,28 +363,28 @@
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
     <value>DJMAX</value>
   </data>
-    <data name="XAML_Panel_Modding_ModManage" xml:space="preserve">
+    <data name="Panel_Modding_ModManage" xml:space="preserve">
     <value>Моды</value>
   </data>
-    <data name="XAML_Panel_Setting_About" xml:space="preserve">
+    <data name="Panel_Setting_About" xml:space="preserve">
     <value>Инфо</value>
   </data>
-    <data name="XAML_Panel_Charting_ChartManage" xml:space="preserve">
+    <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>Чарты</value>
   </data>
-    <data name="XAML_Page_Home" xml:space="preserve">
+    <data name="Page_Home" xml:space="preserve">
     <value>Домашняя страница</value>
   </data>
-    <data name="XAML_Page_Setting" xml:space="preserve">
+    <data name="Page_Setting" xml:space="preserve">
     <value>Настройки</value>
   </data>
-    <data name="XAML_Page_LogAnalysis" xml:space="preserve">
+    <data name="Page_LogAnalysis" xml:space="preserve">
     <value>Анализ</value>
   </data>
-    <data name="XAML_UpdateSources_GitHubAPI" xml:space="preserve">
+    <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
-    <data name="XAML_UpdateSources_GitHubRSS" xml:space="preserve">
+    <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
   </data>
 </root>

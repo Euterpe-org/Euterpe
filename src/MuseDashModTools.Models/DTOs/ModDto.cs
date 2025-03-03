@@ -60,7 +60,7 @@ public sealed partial class ModDto : ObservableObject
     public string[] DependencyNames => !HasDependency ? [] : [..ModDependencies, ..LibDependencies];
 
     // Compatible
-    public string CompatibleGameVersion => GameVersion == "*" ? XAML_Mod_AllGameVersionCompatible : GameVersion;
+    public string CompatibleGameVersion => GameVersion == "*" ? AllGameVersionCompatible : GameVersion;
 
     #endregion Dto Properties
 

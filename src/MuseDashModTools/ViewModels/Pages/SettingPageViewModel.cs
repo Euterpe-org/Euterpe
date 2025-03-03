@@ -4,12 +4,12 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(XAML_Panel_Setting_About, AboutPanelName),
-        new(XAML_Panel_Setting_Appearance, AppearancePanelName),
-        new(XAML_Panel_Setting_Experience, ExperiencePanelName),
-        new(XAML_Panel_Setting_FileManagement, FileManagementPanelName),
-        new(XAML_Panel_Setting_Download, DownloadPanelName),
-        new(XAML_Panel_Setting_Advanced, AdvancedPanelName)
+        new(Panel_Setting_About, AboutPanelName),
+        new(Panel_Setting_Appearance, AppearancePanelName),
+        new(Panel_Setting_Experience, ExperiencePanelName),
+        new(Panel_Setting_FileManagement, FileManagementPanelName),
+        new(Panel_Setting_Download, DownloadPanelName),
+        new(Panel_Setting_Advanced, AdvancedPanelName)
     ];
 
     [RelayCommand]

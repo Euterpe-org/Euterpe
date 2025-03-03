@@ -46,7 +46,7 @@
                              Classes="ClearButton"
                              MaxLength="30"
                              Text="{Binding SearchText, Mode=OneWayToSource}"
-                             Watermark="{I18N {x:Static local:LangKeys.XAML_SearchBarWatermark_Mod}}">
+                             Watermark="{I18N {x:Static local:LangKeys.SearchBarWatermark_Mod}}">
                         <TextBox.InnerLeftContent>
                             <PathIcon Height="18" Data="{StaticResource SemiIconSearch}" />
                         </TextBox.InnerLeftContent>
@@ -100,7 +100,7 @@
 
                                             <!--  Modified State  -->
                                             <Label Classes="Ghost Orange StateLabel"
-                                                   Content="{I18N {x:Static local:LangKeys.XAML_ModState_Modified}}"
+                                                   Content="{I18N {x:Static local:LangKeys.ModState_Modified}}"
                                                    IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
 
                                             <!--  Update Status  -->
@@ -190,24 +190,24 @@
                                         IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                     <StackPanel Classes="ActionButtonsContainer">
                                         <PathIcon Height="15" Data="{StaticResource SemiIconRefresh}" />
-                                        <TextBlock Text="{I18N {x:Static local:LangKeys.XAML_Button_Update}}" />
+                                        <TextBlock Text="{I18N {x:Static local:LangKeys.Button_Update}}" />
                                     </StackPanel>
                                 </Button>
 
                                 <!--  Install  -->
                                 <Button Command="{Binding InstallModCommand, Mode=OneTime}"
-                                        Content="{I18N {x:Static local:LangKeys.XAML_Button_Install}}"
+                                        Content="{I18N {x:Static local:LangKeys.Button_Install}}"
                                         IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}" />
 
                                 <!--  Reinstall  -->
                                 <Button Command="{Binding ReinstallModCommand, Mode=OneTime}"
-                                        Content="{I18N {x:Static local:LangKeys.XAML_Button_Reinstall}}"
+                                        Content="{I18N {x:Static local:LangKeys.Button_Reinstall}}"
                                         IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}" />
 
                                 <!--  Uninstall  -->
                                 <Button Classes="Danger"
                                         Command="{Binding UninstallModCommand, Mode=OneTime}"
-                                        Content="{I18N {x:Static local:LangKeys.XAML_Button_Uninstall}}"
+                                        Content="{I18N {x:Static local:LangKeys.Button_Uninstall}}"
                                         IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
                             </StackPanel>
 
@@ -219,19 +219,19 @@
 
                                 <!--  Status Labels  -->
                                 <Label Classes="Ghost Red StateLabel"
-                                       Content="{I18N {x:Static local:LangKeys.XAML_ModState_Incompatible}}"
+                                       Content="{I18N {x:Static local:LangKeys.ModState_Incompatible}}"
                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
 
                                 <Label Classes="Ghost Blue StateLabel"
-                                       Content="{I18N {x:Static local:LangKeys.XAML_ModState_Normal}}"
+                                       Content="{I18N {x:Static local:LangKeys.ModState_Normal}}"
                                        IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
 
                                 <Label Classes="Ghost Orange StateLabel"
-                                       Content="{I18N {x:Static local:LangKeys.XAML_ModState_Modified}}"
+                                       Content="{I18N {x:Static local:LangKeys.ModState_Modified}}"
                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
 
                                 <Label Classes="Ghost Green StateLabel"
-                                       Content="{I18N {x:Static local:LangKeys.XAML_ModState_Outdated}}"
+                                       Content="{I18N {x:Static local:LangKeys.ModState_Outdated}}"
                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}" />
 
                                 <!--  Version Labels  -->

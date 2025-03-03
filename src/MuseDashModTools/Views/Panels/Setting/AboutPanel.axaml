@@ -87,7 +87,7 @@
                                                       ImageHeight="18"
                                                       ImageSource="/Assets/Avalonia_Logo.png" />
                                 </InlineUIContainer>
-                                <Run Text="Avalonia 11.2.4." />
+                                <Run Text="Avalonia 11.2.5." />
                             </TextBlock.Inlines>
                         </TextBlock>
 

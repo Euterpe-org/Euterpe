@@ -40,7 +40,6 @@
     <!--Hot Reload Packages-->
     <ItemGroup>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
-        <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
         <PackageReference Include="HotAvalonia.Extensions"/>
     </ItemGroup>
@@ -55,6 +54,7 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
         <PackageReference Include="Avalonia.ReactiveUI"/>
+        <PackageReference Include="Avalonia.Xaml.Behaviors"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Downloader"/>
         <PackageReference Include="Irihi.Ursa"/>

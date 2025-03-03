@@ -30,7 +30,7 @@
                 Spacing="50">
 
         <!--  Language  -->
-        <mdmt:SettingItem Title="{I18N {x:Static local:LangKeys.XAML_Setting_Title_Language}}" Description="The current version does not support switching languages.">
+        <mdmt:SettingItem Title="{I18N {x:Static local:LangKeys.Setting_Title_Language}}" Description="The current version does not support switching languages.">
             <mdmt:SettingItem.Content>
                 <StackPanel IsEnabled="False"
                             Orientation="Horizontal"
@@ -39,7 +39,7 @@
                               ItemsSource="{Binding AvailableLanguages}"
                               SelectedIndex="{Binding CurrentLanguageIndex}" />
 
-                    <Button Command="{Binding ApplyLanguageCommand}" Content="{I18N {x:Static local:LangKeys.XAML_Button_Apply}}" />
+                    <Button Command="{Binding ApplyLanguageCommand}" Content="{I18N {x:Static local:LangKeys.Button_Apply}}" />
                 </StackPanel>
 
             </mdmt:SettingItem.Content>
