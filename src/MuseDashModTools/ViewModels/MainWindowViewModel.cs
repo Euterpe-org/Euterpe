@@ -4,10 +4,10 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(XAML_Page_Home, HomePageName, "Home"),
-        new(XAML_Page_Modding, ModdingPageName, "Wrench"),
-        new(XAML_Page_Charting, ChartingPageName, "Music"),
-        new(XAML_Page_Setting, SettingPageName, "Setting")
+        new(Page_Home, HomePageName, "Home"),
+        new(Page_Modding, ModdingPageName, "Wrench"),
+        new(Page_Charting, ChartingPageName, "Music"),
+        new(Page_Setting, SettingPageName, "Setting")
     ];
 
     [RelayCommand]

@@ -12,12 +12,12 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
     public static string[] ModFilterTypes { get; } =
     [
-        XAML_ModFilterType_All,
-        XAML_ModFilterType_Installed,
-        XAML_ModFilterType_Enabled,
-        XAML_ModFilterType_Disabled,
-        XAML_ModFilterType_Outdated,
-        XAML_ModFilterType_Incompatible
+        ModFilterType_All,
+        ModFilterType_Installed,
+        ModFilterType_Enabled,
+        ModFilterType_Disabled,
+        ModFilterType_Outdated,
+        ModFilterType_Incompatible
     ];
 
     [ObservableProperty]

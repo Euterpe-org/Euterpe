@@ -60,6 +60,510 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string AllGameVersionCompatible {
+            get {
+                return ResourceManager.GetString("AllGameVersionCompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string Button_Apply {
+            get {
+                return ResourceManager.GetString("Button_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install.
+        /// </summary>
+        public static string Button_Install {
+            get {
+                return ResourceManager.GetString("Button_Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launch Modded.
+        /// </summary>
+        public static string Button_LaunchModded {
+            get {
+                return ResourceManager.GetString("Button_LaunchModded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launch Vanilla.
+        /// </summary>
+        public static string Button_LaunchVanilla {
+            get {
+                return ResourceManager.GetString("Button_LaunchVanilla", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reinstall.
+        /// </summary>
+        public static string Button_Reinstall {
+            get {
+                return ResourceManager.GetString("Button_Reinstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uninstall.
+        /// </summary>
+        public static string Button_Uninstall {
+            get {
+                return ResourceManager.GetString("Button_Uninstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Button_Update {
+            get {
+                return ResourceManager.GetString("Button_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artist.
+        /// </summary>
+        public static string Contributor_Artist {
+            get {
+                return ResourceManager.GetString("Contributor_Artist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Developer.
+        /// </summary>
+        public static string Contributor_Developer {
+            get {
+                return ResourceManager.GetString("Contributor_Developer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Albums.
+        /// </summary>
+        public static string Folder_CustomAlbums {
+            get {
+                return ResourceManager.GetString("Folder_CustomAlbums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mods.
+        /// </summary>
+        public static string Folder_Mods {
+            get {
+                return ResourceManager.GetString("Folder_Mods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserData.
+        /// </summary>
+        public static string Folder_UserData {
+            get {
+                return ResourceManager.GetString("Folder_UserData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserLibs.
+        /// </summary>
+        public static string Folder_UserLibs {
+            get {
+                return ResourceManager.GetString("Folder_UserLibs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string ModFilterType_All {
+            get {
+                return ResourceManager.GetString("ModFilterType_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        public static string ModFilterType_Disabled {
+            get {
+                return ResourceManager.GetString("ModFilterType_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabled.
+        /// </summary>
+        public static string ModFilterType_Enabled {
+            get {
+                return ResourceManager.GetString("ModFilterType_Enabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatible.
+        /// </summary>
+        public static string ModFilterType_Incompatible {
+            get {
+                return ResourceManager.GetString("ModFilterType_Incompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installed.
+        /// </summary>
+        public static string ModFilterType_Installed {
+            get {
+                return ResourceManager.GetString("ModFilterType_Installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outdated.
+        /// </summary>
+        public static string ModFilterType_Outdated {
+            get {
+                return ResourceManager.GetString("ModFilterType_Outdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incompatible.
+        /// </summary>
+        public static string ModState_Incompatible {
+            get {
+                return ResourceManager.GetString("ModState_Incompatible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modified.
+        /// </summary>
+        public static string ModState_Modified {
+            get {
+                return ResourceManager.GetString("ModState_Modified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installed.
+        /// </summary>
+        public static string ModState_Normal {
+            get {
+                return ResourceManager.GetString("ModState_Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Available.
+        /// </summary>
+        public static string ModState_Outdated {
+            get {
+                return ResourceManager.GetString("ModState_Outdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Charting.
+        /// </summary>
+        public static string Page_Charting {
+            get {
+                return ResourceManager.GetString("Page_Charting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Page_Home {
+            get {
+                return ResourceManager.GetString("Page_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log Analysis.
+        /// </summary>
+        public static string Page_LogAnalysis {
+            get {
+                return ResourceManager.GetString("Page_LogAnalysis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modding.
+        /// </summary>
+        public static string Page_Modding {
+            get {
+                return ResourceManager.GetString("Page_Modding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        public static string Page_Setting {
+            get {
+                return ResourceManager.GetString("Page_Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart Toolkit.
+        /// </summary>
+        public static string Panel_Charting_CharterToolkit {
+            get {
+                return ResourceManager.GetString("Panel_Charting_CharterToolkit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart Manage.
+        /// </summary>
+        public static string Panel_Charting_ChartManage {
+            get {
+                return ResourceManager.GetString("Panel_Charting_ChartManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Melon Loader.
+        /// </summary>
+        public static string Panel_Modding_MelonLoader {
+            get {
+                return ResourceManager.GetString("Panel_Modding_MelonLoader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Develop.
+        /// </summary>
+        public static string Panel_Modding_ModDevelop {
+            get {
+                return ResourceManager.GetString("Panel_Modding_ModDevelop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Manage.
+        /// </summary>
+        public static string Panel_Modding_ModManage {
+            get {
+                return ResourceManager.GetString("Panel_Modding_ModManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string Panel_Setting_About {
+            get {
+                return ResourceManager.GetString("Panel_Setting_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string Panel_Setting_Advanced {
+            get {
+                return ResourceManager.GetString("Panel_Setting_Advanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appearance.
+        /// </summary>
+        public static string Panel_Setting_Appearance {
+            get {
+                return ResourceManager.GetString("Panel_Setting_Appearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        public static string Panel_Setting_Download {
+            get {
+                return ResourceManager.GetString("Panel_Setting_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Experience.
+        /// </summary>
+        public static string Panel_Setting_Experience {
+            get {
+                return ResourceManager.GetString("Panel_Setting_Experience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Management.
+        /// </summary>
+        public static string Panel_Setting_FileManagement {
+            get {
+                return ResourceManager.GetString("Panel_Setting_FileManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
+        /// </summary>
+        public static string SearchBarWatermark_Mod {
+            get {
+                return ResourceManager.GetString("SearchBarWatermark_Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Prerelease: .
+        /// </summary>
+        public static string Setting_DownloadPrerelease {
+            get {
+                return ResourceManager.GetString("Setting_DownloadPrerelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Source: .
+        /// </summary>
+        public static string Setting_DownloadSource {
+            get {
+                return ResourceManager.GetString("Setting_DownloadSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        public static string Setting_DownloadSource_Custom {
+            get {
+                return ResourceManager.GetString("Setting_DownloadSource_Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gitee.
+        /// </summary>
+        public static string Setting_DownloadSource_Gitee {
+            get {
+                return ResourceManager.GetString("Setting_DownloadSource_Gitee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GitHub.
+        /// </summary>
+        public static string Setting_DownloadSource_GitHub {
+            get {
+                return ResourceManager.GetString("Setting_DownloadSource_GitHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GitHub Mirror.
+        /// </summary>
+        public static string Setting_DownloadSource_GitHubMirror {
+            get {
+                return ResourceManager.GetString("Setting_DownloadSource_GitHubMirror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Setting_Title_Language {
+            get {
+                return ResourceManager.GetString("Setting_Title_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GitHub API.
+        /// </summary>
+        public static string Setting_UpdateSources_GitHubAPI {
+            get {
+                return ResourceManager.GetString("Setting_UpdateSources_GitHubAPI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GitHub RSS.
+        /// </summary>
+        public static string Setting_UpdateSources_GitHubRSS {
+            get {
+                return ResourceManager.GetString("Setting_UpdateSources_GitHubRSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese Simplified.
+        /// </summary>
+        public static string Translator_ChineseSimplified {
+            get {
+                return ResourceManager.GetString("Translator_ChineseSimplified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese Traditional.
+        /// </summary>
+        public static string Translator_ChineseTraditional {
+            get {
+                return ResourceManager.GetString("Translator_ChineseTraditional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hungarian.
+        /// </summary>
+        public static string Translator_Hungarian {
+            get {
+                return ResourceManager.GetString("Translator_Hungarian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korean.
+        /// </summary>
+        public static string Translator_Korean {
+            get {
+                return ResourceManager.GetString("Translator_Korean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Russian.
+        /// </summary>
+        public static string Translator_Russian {
+            get {
+                return ResourceManager.GetString("Translator_Russian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spanish.
+        /// </summary>
+        public static string Translator_Spanish {
+            get {
+                return ResourceManager.GetString("Translator_Spanish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analyze Log.
         /// </summary>
         public static string XAML_Analyze {
@@ -101,69 +605,6 @@ namespace MuseDashModTools.Localization {
         public static string XAML_Back {
             get {
                 return ResourceManager.GetString("XAML_Back", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply.
-        /// </summary>
-        public static string XAML_Button_Apply {
-            get {
-                return ResourceManager.GetString("XAML_Button_Apply", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Install.
-        /// </summary>
-        public static string XAML_Button_Install {
-            get {
-                return ResourceManager.GetString("XAML_Button_Install", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Launch Modded.
-        /// </summary>
-        public static string XAML_Button_LaunchModded {
-            get {
-                return ResourceManager.GetString("XAML_Button_LaunchModded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Launch Vanilla.
-        /// </summary>
-        public static string XAML_Button_LaunchVanilla {
-            get {
-                return ResourceManager.GetString("XAML_Button_LaunchVanilla", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reinstall.
-        /// </summary>
-        public static string XAML_Button_Reinstall {
-            get {
-                return ResourceManager.GetString("XAML_Button_Reinstall", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uninstall.
-        /// </summary>
-        public static string XAML_Button_Uninstall {
-            get {
-                return ResourceManager.GetString("XAML_Button_Uninstall", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update.
-        /// </summary>
-        public static string XAML_Button_Update {
-            get {
-                return ResourceManager.GetString("XAML_Button_Update", resourceCulture);
             }
         }
         
@@ -348,24 +789,6 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Artist.
-        /// </summary>
-        public static string XAML_Contributor_Artist {
-            get {
-                return ResourceManager.GetString("XAML_Contributor_Artist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Developer.
-        /// </summary>
-        public static string XAML_Contributor_Developer {
-            get {
-                return ResourceManager.GetString("XAML_Contributor_Developer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The link must end in &quot;/&quot;, and must be accessible and parsable when appending &quot;ModLinks.json&quot; to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app.
         /// </summary>
         public static string XAML_CustomDownloadSourceFormat {
@@ -384,101 +807,11 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download Prerelease: .
-        /// </summary>
-        public static string XAML_DownloadPrerelease {
-            get {
-                return ResourceManager.GetString("XAML_DownloadPrerelease", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download Source: .
-        /// </summary>
-        public static string XAML_DownloadSource {
-            get {
-                return ResourceManager.GetString("XAML_DownloadSource", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Custom.
-        /// </summary>
-        public static string XAML_DownloadSource_Custom {
-            get {
-                return ResourceManager.GetString("XAML_DownloadSource_Custom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gitee.
-        /// </summary>
-        public static string XAML_DownloadSource_Gitee {
-            get {
-                return ResourceManager.GetString("XAML_DownloadSource_Gitee", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GitHub.
-        /// </summary>
-        public static string XAML_DownloadSource_GitHub {
-            get {
-                return ResourceManager.GetString("XAML_DownloadSource_GitHub", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GitHub Mirror.
-        /// </summary>
-        public static string XAML_DownloadSource_GitHubMirror {
-            get {
-                return ResourceManager.GetString("XAML_DownloadSource_GitHubMirror", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Custom Albums.
-        /// </summary>
-        public static string XAML_Folder_CustomAlbums {
-            get {
-                return ResourceManager.GetString("XAML_Folder_CustomAlbums", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open Log Folder.
         /// </summary>
         public static string XAML_Folder_Log {
             get {
                 return ResourceManager.GetString("XAML_Folder_Log", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mods.
-        /// </summary>
-        public static string XAML_Folder_Mods {
-            get {
-                return ResourceManager.GetString("XAML_Folder_Mods", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UserData.
-        /// </summary>
-        public static string XAML_Folder_UserData {
-            get {
-                return ResourceManager.GetString("XAML_Folder_UserData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UserLibs.
-        /// </summary>
-        public static string XAML_Folder_UserLibs {
-            get {
-                return ResourceManager.GetString("XAML_Folder_UserLibs", resourceCulture);
             }
         }
         
@@ -497,15 +830,6 @@ namespace MuseDashModTools.Localization {
         public static string XAML_HelpTranslate {
             get {
                 return ResourceManager.GetString("XAML_HelpTranslate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to HomePage.
-        /// </summary>
-        public static string XAML_HomePage {
-            get {
-                return ResourceManager.GetString("XAML_HomePage", resourceCulture);
             }
         }
         
@@ -600,15 +924,6 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All.
-        /// </summary>
-        public static string XAML_Mod_AllGameVersionCompatible {
-            get {
-                return ResourceManager.GetString("XAML_Mod_AllGameVersionCompatible", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Dependencies: .
         /// </summary>
         public static string XAML_Mod_Dependencies {
@@ -645,245 +960,11 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All.
-        /// </summary>
-        public static string XAML_ModFilterType_All {
-            get {
-                return ResourceManager.GetString("XAML_ModFilterType_All", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disabled.
-        /// </summary>
-        public static string XAML_ModFilterType_Disabled {
-            get {
-                return ResourceManager.GetString("XAML_ModFilterType_Disabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enabled.
-        /// </summary>
-        public static string XAML_ModFilterType_Enabled {
-            get {
-                return ResourceManager.GetString("XAML_ModFilterType_Enabled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Incompatible.
-        /// </summary>
-        public static string XAML_ModFilterType_Incompatible {
-            get {
-                return ResourceManager.GetString("XAML_ModFilterType_Incompatible", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Installed.
-        /// </summary>
-        public static string XAML_ModFilterType_Installed {
-            get {
-                return ResourceManager.GetString("XAML_ModFilterType_Installed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Outdated.
-        /// </summary>
-        public static string XAML_ModFilterType_Outdated {
-            get {
-                return ResourceManager.GetString("XAML_ModFilterType_Outdated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}&apos;s {1} version is incompatible with your game version.
-        /// </summary>
-        public static string XAML_ModState_Incompatible {
-            get {
-                return ResourceManager.GetString("XAML_ModState_Incompatible", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Modified.
-        /// </summary>
-        public static string XAML_ModState_Modified {
-            get {
-                return ResourceManager.GetString("XAML_ModState_Modified", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Installed.
-        /// </summary>
-        public static string XAML_ModState_Normal {
-            get {
-                return ResourceManager.GetString("XAML_ModState_Normal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update Available.
-        /// </summary>
-        public static string XAML_ModState_Outdated {
-            get {
-                return ResourceManager.GetString("XAML_ModState_Outdated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to News.
         /// </summary>
         public static string XAML_News {
             get {
                 return ResourceManager.GetString("XAML_News", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Charting.
-        /// </summary>
-        public static string XAML_Page_Charting {
-            get {
-                return ResourceManager.GetString("XAML_Page_Charting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home.
-        /// </summary>
-        public static string XAML_Page_Home {
-            get {
-                return ResourceManager.GetString("XAML_Page_Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Log Analysis.
-        /// </summary>
-        public static string XAML_Page_LogAnalysis {
-            get {
-                return ResourceManager.GetString("XAML_Page_LogAnalysis", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Modding.
-        /// </summary>
-        public static string XAML_Page_Modding {
-            get {
-                return ResourceManager.GetString("XAML_Page_Modding", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Setting.
-        /// </summary>
-        public static string XAML_Page_Setting {
-            get {
-                return ResourceManager.GetString("XAML_Page_Setting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chart Toolkit.
-        /// </summary>
-        public static string XAML_Panel_Charting_CharterToolkit {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Charting_CharterToolkit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chart Manage.
-        /// </summary>
-        public static string XAML_Panel_Charting_ChartManage {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Charting_ChartManage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Melon Loader.
-        /// </summary>
-        public static string XAML_Panel_Modding_MelonLoader {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Modding_MelonLoader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mod Develop.
-        /// </summary>
-        public static string XAML_Panel_Modding_ModDevelop {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Modding_ModDevelop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mod Manage.
-        /// </summary>
-        public static string XAML_Panel_Modding_ModManage {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Modding_ModManage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to About.
-        /// </summary>
-        public static string XAML_Panel_Setting_About {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Setting_About", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Advanced.
-        /// </summary>
-        public static string XAML_Panel_Setting_Advanced {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Setting_Advanced", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Appearance.
-        /// </summary>
-        public static string XAML_Panel_Setting_Appearance {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Setting_Appearance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download.
-        /// </summary>
-        public static string XAML_Panel_Setting_Download {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Setting_Download", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Experience.
-        /// </summary>
-        public static string XAML_Panel_Setting_Experience {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Setting_Experience", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File Management.
-        /// </summary>
-        public static string XAML_Panel_Setting_FileManagement {
-            get {
-                return ResourceManager.GetString("XAML_Panel_Setting_FileManagement", resourceCulture);
             }
         }
         
@@ -987,15 +1068,6 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
-        /// </summary>
-        public static string XAML_SearchBarWatermark_Mod {
-            get {
-                return ResourceManager.GetString("XAML_SearchBarWatermark_Mod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disable dependents when deleting Mod.
         /// </summary>
         public static string XAML_Setting_DisableDependency_Delete {
@@ -1032,92 +1104,11 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language.
-        /// </summary>
-        public static string XAML_Setting_Title_Language {
-            get {
-                return ResourceManager.GetString("XAML_Setting_Title_Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chinese Simplified.
-        /// </summary>
-        public static string XAML_Translator_ChineseSimplified {
-            get {
-                return ResourceManager.GetString("XAML_Translator_ChineseSimplified", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chinese Traditional.
-        /// </summary>
-        public static string XAML_Translator_ChineseTraditional {
-            get {
-                return ResourceManager.GetString("XAML_Translator_ChineseTraditional", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hungarian.
-        /// </summary>
-        public static string XAML_Translator_Hungarian {
-            get {
-                return ResourceManager.GetString("XAML_Translator_Hungarian", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Korean.
-        /// </summary>
-        public static string XAML_Translator_Korean {
-            get {
-                return ResourceManager.GetString("XAML_Translator_Korean", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Russian.
-        /// </summary>
-        public static string XAML_Translator_Russian {
-            get {
-                return ResourceManager.GetString("XAML_Translator_Russian", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Spanish.
-        /// </summary>
-        public static string XAML_Translator_Spanish {
-            get {
-                return ResourceManager.GetString("XAML_Translator_Spanish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Troubleshoot.
         /// </summary>
         public static string XAML_TroubleShoot {
             get {
                 return ResourceManager.GetString("XAML_TroubleShoot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GitHub API.
-        /// </summary>
-        public static string XAML_UpdateSources_GitHubAPI {
-            get {
-                return ResourceManager.GetString("XAML_UpdateSources_GitHubAPI", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GitHub RSS.
-        /// </summary>
-        public static string XAML_UpdateSources_GitHubRSS {
-            get {
-                return ResourceManager.GetString("XAML_UpdateSources_GitHubRSS", resourceCulture);
             }
         }
         

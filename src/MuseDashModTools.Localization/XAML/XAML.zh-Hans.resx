@@ -117,7 +117,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="XAML_Folder_UserData" xml:space="preserve">
+    <data name="Folder_UserData" xml:space="preserve">
     <value>配置文件夹</value>
   </data>
     <data name="XAML_ReportBug" xml:space="preserve">
@@ -126,13 +126,13 @@
     <data name="XAML_Check_Update" xml:space="preserve">
     <value>检查更新</value>
   </data>
-    <data name="XAML_DownloadSource_GitHubMirror" xml:space="preserve">
+    <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub 镜像</value>
   </data>
     <data name="XAML_Analyze" xml:space="preserve">
     <value>分析日志</value>
   </data>
-    <data name="XAML_Button_Apply" xml:space="preserve">
+    <data name="Button_Apply" xml:space="preserve">
     <value>应用</value>
   </data>
     <data name="XAML_AskType_Always" xml:space="preserve">
@@ -147,22 +147,22 @@
     <data name="XAML_ChangePath" xml:space="preserve">
     <value>更改路径</value>
   </data>
-    <data name="XAML_DownloadPrerelease" xml:space="preserve">
+    <data name="Setting_DownloadPrerelease" xml:space="preserve">
     <value>下载预发行版本：</value>
   </data>
-    <data name="XAML_DownloadSource_Gitee" xml:space="preserve">
+    <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
   </data>
-    <data name="XAML_DownloadSource_GitHub" xml:space="preserve">
+    <data name="Setting_DownloadSource_GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
-    <data name="XAML_DownloadSource" xml:space="preserve">
+    <data name="Setting_DownloadSource" xml:space="preserve">
     <value>下载源：</value>
   </data>
-    <data name="XAML_ModFilterType_All" xml:space="preserve">
+    <data name="ModFilterType_All" xml:space="preserve">
     <value>全部</value>
   </data>
-    <data name="XAML_ModFilterType_Enabled" xml:space="preserve">
+    <data name="ModFilterType_Enabled" xml:space="preserve">
     <value>已启用</value>
   </data>
     <data name="XAML_Font" xml:space="preserve">
@@ -171,28 +171,25 @@
     <data name="XAML_HelpTranslate" xml:space="preserve">
     <value>帮助翻译</value>
   </data>
-    <data name="XAML_HomePage" xml:space="preserve">
-    <value>主页</value>
-  </data>
-    <data name="XAML_ModFilterType_Installed" xml:space="preserve">
+    <data name="ModFilterType_Installed" xml:space="preserve">
     <value>已安装</value>
   </data>
-    <data name="XAML_ModFilterType_Incompatible" xml:space="preserve">
+    <data name="ModFilterType_Incompatible" xml:space="preserve">
     <value>不兼容</value>
   </data>
-    <data name="XAML_Button_Install" xml:space="preserve">
+    <data name="Button_Install" xml:space="preserve">
     <value>安装</value>
   </data>
-    <data name="XAML_Setting_Title_Language" xml:space="preserve">
+    <data name="Setting_Title_Language" xml:space="preserve">
         <value>语言</value>
     </data>
     <data name="XAML_Folder_Log" xml:space="preserve">
     <value>打开日志文件夹</value>
   </data>
-    <data name="XAML_Folder_Mods" xml:space="preserve">
+    <data name="Folder_Mods" xml:space="preserve">
     <value>模组文件夹</value>
   </data>
-    <data name="XAML_Mod_AllGameVersionCompatible" xml:space="preserve">
+    <data name="AllGameVersionCompatible" xml:space="preserve">
     <value>全部</value>
   </data>
     <data name="XAML_Mod_Dependencies" xml:space="preserve">
@@ -204,31 +201,31 @@
     <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>重复：</value>
   </data>
-    <data name="XAML_ModState_Incompatible" xml:space="preserve">
-    <value>{0} 的 {1} 版本和你的游戏版本不兼容</value>
-  </data>
-    <data name="XAML_ModState_Modified" xml:space="preserve">
+    <data name="ModState_Incompatible" xml:space="preserve">
+        <value>不兼容</value>
+    </data>
+    <data name="ModState_Modified" xml:space="preserve">
         <value>被修改</value>
     </data>
     <data name="XAML_Mod_Newer" xml:space="preserve">
     <value>本地版本：{0}（WOW MOD开发者）</value>
   </data>
-    <data name="XAML_ModState_Normal" xml:space="preserve">
+    <data name="ModState_Normal" xml:space="preserve">
         <value>已安装</value>
     </data>
-    <data name="XAML_ModState_Outdated" xml:space="preserve">
+    <data name="ModState_Outdated" xml:space="preserve">
         <value>有新版本</value>
     </data>
-    <data name="XAML_ModFilterType_Outdated" xml:space="preserve">
+    <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>有更新</value>
   </data>
     <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash 文件夹路径</value>
   </data>
-    <data name="XAML_Button_Reinstall" xml:space="preserve">
+    <data name="Button_Reinstall" xml:space="preserve">
     <value>重装</value>
   </data>
-    <data name="XAML_SearchBarWatermark_Mod" xml:space="preserve">
+    <data name="SearchBarWatermark_Mod" xml:space="preserve">
     <value>搜索模组    （名字，作者，描述）</value>
   </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
@@ -246,13 +243,13 @@
     <data name="XAML_TroubleShoot" xml:space="preserve">
     <value>报告未知问题</value>
   </data>
-    <data name="XAML_Button_Uninstall" xml:space="preserve">
+    <data name="Button_Uninstall" xml:space="preserve">
     <value>卸载</value>
   </data>
-    <data name="XAML_Button_Update" xml:space="preserve">
+    <data name="Button_Update" xml:space="preserve">
     <value>更新</value>
   </data>
-    <data name="XAML_DownloadSource_Custom" xml:space="preserve">
+    <data name="Setting_DownloadSource_Custom" xml:space="preserve">
     <value>自定义</value>
   </data>
     <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
@@ -276,7 +273,7 @@
     <data name="XAML_Charter" xml:space="preserve">
     <value>谱师：</value>
   </data>
-    <data name="XAML_Folder_CustomAlbums" xml:space="preserve">
+    <data name="Folder_CustomAlbums" xml:space="preserve">
         <value>自制谱文件夹</value>
     </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
@@ -378,10 +375,10 @@
     <data name="XAML_ConfigFile" xml:space="preserve">
     <value>配置文件</value>
   </data>
-    <data name="XAML_Button_LaunchVanilla" xml:space="preserve">
+    <data name="Button_LaunchVanilla" xml:space="preserve">
     <value>启动原版</value>
   </data>
-    <data name="XAML_Button_LaunchModded" xml:space="preserve">
+    <data name="Button_LaunchModded" xml:space="preserve">
     <value>启动 Mod 版</value>
   </data>
     <data name="XAML_Back" xml:space="preserve">
@@ -390,85 +387,85 @@
     <data name="XAML_News" xml:space="preserve">
     <value>新闻</value>
   </data>
-    <data name="XAML_Panel_Modding_ModManage" xml:space="preserve">
+    <data name="Panel_Modding_ModManage" xml:space="preserve">
     <value>模组管理</value>
   </data>
-    <data name="XAML_Panel_Setting_About" xml:space="preserve">
+    <data name="Panel_Setting_About" xml:space="preserve">
     <value>关于</value>
   </data>
-    <data name="XAML_Panel_Charting_ChartManage" xml:space="preserve">
+    <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>谱面管理</value>
   </data>
-    <data name="XAML_Panel_Charting_CharterToolkit" xml:space="preserve">
+    <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
         <value>谱师工具</value>
     </data>
-    <data name="XAML_Page_Home" xml:space="preserve">
+    <data name="Page_Home" xml:space="preserve">
     <value>主页</value>
   </data>
-    <data name="XAML_Page_Setting" xml:space="preserve">
+    <data name="Page_Setting" xml:space="preserve">
     <value>设置</value>
   </data>
-    <data name="XAML_Page_LogAnalysis" xml:space="preserve">
+    <data name="Page_LogAnalysis" xml:space="preserve">
     <value>日志分析</value>
   </data>
-    <data name="XAML_Page_Modding" xml:space="preserve">
+    <data name="Page_Modding" xml:space="preserve">
     <value>模组</value>
   </data>
-    <data name="XAML_Page_Charting" xml:space="preserve">
+    <data name="Page_Charting" xml:space="preserve">
     <value>谱面</value>
   </data>
-    <data name="XAML_UpdateSources_GitHubAPI" xml:space="preserve">
+    <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
-    <data name="XAML_UpdateSources_GitHubRSS" xml:space="preserve">
+    <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
   </data>
-    <data name="XAML_Contributor_Developer" xml:space="preserve">
+    <data name="Contributor_Developer" xml:space="preserve">
     <value>开发者</value>
   </data>
-    <data name="XAML_Contributor_Artist" xml:space="preserve">
+    <data name="Contributor_Artist" xml:space="preserve">
     <value>艺术家</value>
   </data>
-    <data name="XAML_Translator_ChineseTraditional" xml:space="preserve">
+    <data name="Translator_ChineseTraditional" xml:space="preserve">
     <value>繁体中文</value>
   </data>
-    <data name="XAML_Translator_Hungarian" xml:space="preserve">
+    <data name="Translator_Hungarian" xml:space="preserve">
     <value>匈牙利语</value>
   </data>
-    <data name="XAML_Translator_Korean" xml:space="preserve">
+    <data name="Translator_Korean" xml:space="preserve">
     <value>韩语</value>
   </data>
-    <data name="XAML_Translator_Russian" xml:space="preserve">
+    <data name="Translator_Russian" xml:space="preserve">
     <value>俄语</value>
   </data>
-    <data name="XAML_Translator_Spanish" xml:space="preserve">
+    <data name="Translator_Spanish" xml:space="preserve">
     <value>西班牙语</value>
   </data>
-    <data name="XAML_Translator_ChineseSimplified" xml:space="preserve">
+    <data name="Translator_ChineseSimplified" xml:space="preserve">
     <value>简体中文</value>
   </data>
-    <data name="XAML_ModFilterType_Disabled" xml:space="preserve">
+    <data name="ModFilterType_Disabled" xml:space="preserve">
     <value>已禁用</value>
   </data>
-    <data name="XAML_Folder_UserLibs" xml:space="preserve">
+    <data name="Folder_UserLibs" xml:space="preserve">
         <value>依赖文件夹</value>
     </data>
-    <data name="XAML_Panel_Modding_MelonLoader" xml:space="preserve">
+    <data name="Panel_Modding_MelonLoader" xml:space="preserve">
         <value>模组加载器</value>
     </data>
-    <data name="XAML_Panel_Modding_ModDevelop" xml:space="preserve">
+    <data name="Panel_Modding_ModDevelop" xml:space="preserve">
         <value>模组开发</value>
     </data>
-    <data name="XAML_Panel_Setting_Download" xml:space="preserve">
+    <data name="Panel_Setting_Download" xml:space="preserve">
         <value>下载</value>
     </data>
-    <data name="XAML_Panel_Setting_FileManagement" xml:space="preserve">
+    <data name="Panel_Setting_FileManagement" xml:space="preserve">
         <value>文件管理</value>
     </data>
-    <data name="XAML_Panel_Setting_Advanced" xml:space="preserve">
+    <data name="Panel_Setting_Advanced" xml:space="preserve">
         <value>高级</value>
     </data>
-    <data name="XAML_Panel_Setting_Appearance" xml:space="preserve">
+    <data name="Panel_Setting_Appearance" xml:space="preserve">
         <value>外观</value>
     </data>
 </root>
