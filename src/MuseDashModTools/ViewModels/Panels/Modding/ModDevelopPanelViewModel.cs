@@ -1,5 +1,5 @@
 ﻿namespace MuseDashModTools.ViewModels.Panels.Modding;
 
-public sealed class DevelopPanelViewModel : ViewModelBase
+public sealed class ModDevelopPanelViewModel : ViewModelBase
 {
 }

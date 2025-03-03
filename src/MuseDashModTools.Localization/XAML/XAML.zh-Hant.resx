@@ -240,7 +240,7 @@
     <data name="XAML_Button_Uninstall" xml:space="preserve">
     <value>解除安裝</value>
   </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
+    <data name="XAML_Button_Update" xml:space="preserve">
     <value>更新</value>
   </data>
     <data name="XAML_DownloadSource_Custom" xml:space="preserve">
@@ -306,9 +306,6 @@
     <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
     <value>隱藏</value>
   </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
-    <value>搜尋模組    (名字,   作者,  描述)</value>
-  </data>
     <data name="XAML_InfoJson_ChartName" xml:space="preserve">
     <value>譜面名稱</value>
   </data>
@@ -369,7 +366,7 @@
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
     <value>DJMAX</value>
   </data>
-    <data name="XAML_Page_About" xml:space="preserve">
+    <data name="XAML_Panel_Setting_About" xml:space="preserve">
     <value>關於</value>
   </data>
     <data name="XAML_Page_Home" xml:space="preserve">

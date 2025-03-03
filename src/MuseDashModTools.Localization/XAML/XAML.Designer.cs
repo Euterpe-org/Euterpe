@@ -159,6 +159,15 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string XAML_Button_Update {
+            get {
+                return ResourceManager.GetString("XAML_Button_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Path.
         /// </summary>
         public static string XAML_ChangePath {
@@ -735,38 +744,11 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About.
-        /// </summary>
-        public static string XAML_Page_About {
-            get {
-                return ResourceManager.GetString("XAML_Page_About", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Charting.
         /// </summary>
         public static string XAML_Page_Charting {
             get {
                 return ResourceManager.GetString("XAML_Page_Charting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chart Manage.
-        /// </summary>
-        public static string XAML_Page_ChartManage {
-            get {
-                return ResourceManager.GetString("XAML_Page_ChartManage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chart Toolkit.
-        /// </summary>
-        public static string XAML_Page_ChartToolkit {
-            get {
-                return ResourceManager.GetString("XAML_Page_ChartToolkit", resourceCulture);
             }
         }
         
@@ -789,15 +771,6 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mod Develop.
-        /// </summary>
-        public static string XAML_Page_ModDevelop {
-            get {
-                return ResourceManager.GetString("XAML_Page_ModDevelop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Modding.
         /// </summary>
         public static string XAML_Page_Modding {
@@ -807,20 +780,110 @@ namespace MuseDashModTools.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mod Manage.
-        /// </summary>
-        public static string XAML_Page_ModManage {
-            get {
-                return ResourceManager.GetString("XAML_Page_ModManage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Setting.
         /// </summary>
         public static string XAML_Page_Setting {
             get {
                 return ResourceManager.GetString("XAML_Page_Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart Toolkit.
+        /// </summary>
+        public static string XAML_Panel_Charting_CharterToolkit {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Charting_CharterToolkit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chart Manage.
+        /// </summary>
+        public static string XAML_Panel_Charting_ChartManage {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Charting_ChartManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Melon Loader.
+        /// </summary>
+        public static string XAML_Panel_Modding_MelonLoader {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Modding_MelonLoader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Develop.
+        /// </summary>
+        public static string XAML_Panel_Modding_ModDevelop {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Modding_ModDevelop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mod Manage.
+        /// </summary>
+        public static string XAML_Panel_Modding_ModManage {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Modding_ModManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string XAML_Panel_Setting_About {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Setting_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string XAML_Panel_Setting_Advanced {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Setting_Advanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Appearance.
+        /// </summary>
+        public static string XAML_Panel_Setting_Appearance {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Setting_Appearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        public static string XAML_Panel_Setting_Download {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Setting_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Experience.
+        /// </summary>
+        public static string XAML_Panel_Setting_Experience {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Setting_Experience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Management.
+        /// </summary>
+        public static string XAML_Panel_Setting_FileManagement {
+            get {
+                return ResourceManager.GetString("XAML_Panel_Setting_FileManagement", resourceCulture);
             }
         }
         
@@ -920,15 +983,6 @@ namespace MuseDashModTools.Localization {
         public static string XAML_Scene_Touhou {
             get {
                 return ResourceManager.GetString("XAML_Scene_Touhou", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Search Mods    (Name, Author, Descriptions).
-        /// </summary>
-        public static string XAML_SearchBar {
-            get {
-                return ResourceManager.GetString("XAML_SearchBar", resourceCulture);
             }
         }
         
@@ -1046,15 +1100,6 @@ namespace MuseDashModTools.Localization {
         public static string XAML_TroubleShoot {
             get {
                 return ResourceManager.GetString("XAML_TroubleShoot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update.
-        /// </summary>
-        public static string XAML_Update_Mod {
-            get {
-                return ResourceManager.GetString("XAML_Update_Mod", resourceCulture);
             }
         }
         

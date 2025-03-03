@@ -6,8 +6,8 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new("Charts", ChartsPanelName),
-        new("Charter", CharterPanelName)
+        new(XAML_Panel_Charting_ChartManage, ChartManagePanelName),
+        new(XAML_Panel_Charting_CharterToolkit, CharterToolkitPanelName)
     ];
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>

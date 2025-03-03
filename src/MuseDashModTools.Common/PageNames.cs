@@ -5,13 +5,13 @@ public static class PageNames
     public const string HomePageName = "Home";
 
     public const string ModdingPageName = "Modding";
-    public const string ModsPanelName = "Mods";
+    public const string ModManagePanelName = "Mod Manage";
     public const string MelonLoaderPanelName = "Melon Loader";
-    public const string DevelopPanelName = "Develop";
+    public const string ModDevelopPanelName = "Mod Develop";
 
     public const string ChartingPageName = "Charting";
-    public const string ChartsPanelName = "Charts";
-    public const string CharterPanelName = "Charter";
+    public const string ChartManagePanelName = "Chart Manage";
+    public const string CharterToolkitPanelName = "Charter Toolkit";
 
     public const string SettingPageName = "Setting";
     public const string AboutPanelName = "About";

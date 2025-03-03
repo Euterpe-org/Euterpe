@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Antelcat.I18N.Avalonia"/>
         <PackageReference Include="Avalonia"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Semi.Avalonia"/>

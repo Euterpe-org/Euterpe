@@ -249,7 +249,7 @@
     <data name="XAML_Button_Uninstall" xml:space="preserve">
     <value>Uninstall</value>
   </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
+    <data name="XAML_Button_Update" xml:space="preserve">
     <value>Update</value>
   </data>
     <data name="XAML_DownloadSource_Custom" xml:space="preserve">
@@ -314,9 +314,6 @@
   </data>
     <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
     <value>Hidden</value>
-  </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
-    <value>Search Mods    (Name, Author, Descriptions)</value>
   </data>
     <data name="XAML_InfoJson_ChartName" xml:space="preserve">
     <value>Name</value>
@@ -393,23 +390,20 @@
     <data name="XAML_News" xml:space="preserve">
     <value>News</value>
   </data>
-    <data name="XAML_Page_ModManage" xml:space="preserve">
+    <data name="XAML_Panel_Modding_ModManage" xml:space="preserve">
     <value>Mod Manage</value>
   </data>
-    <data name="XAML_Page_About" xml:space="preserve">
+    <data name="XAML_Panel_Setting_About" xml:space="preserve">
     <value>About</value>
   </data>
-    <data name="XAML_Page_ChartManage" xml:space="preserve">
+    <data name="XAML_Panel_Charting_ChartManage" xml:space="preserve">
     <value>Chart Manage</value>
   </data>
-    <data name="XAML_Page_ChartToolkit" xml:space="preserve">
+    <data name="XAML_Panel_Charting_CharterToolkit" xml:space="preserve">
     <value>Chart Toolkit</value>
   </data>
     <data name="XAML_Page_Home" xml:space="preserve">
     <value>Home</value>
-  </data>
-    <data name="XAML_Page_ModDevelop" xml:space="preserve">
-    <value>Mod Develop</value>
   </data>
     <data name="XAML_Page_Setting" xml:space="preserve">
     <value>Setting</value>
@@ -458,5 +452,26 @@
   </data>
     <data name="XAML_Folder_UserLibs" xml:space="preserve">
         <value>UserLibs</value>
+    </data>
+    <data name="XAML_Panel_Modding_MelonLoader" xml:space="preserve">
+        <value>Melon Loader</value>
+    </data>
+    <data name="XAML_Panel_Modding_ModDevelop" xml:space="preserve">
+        <value>Mod Develop</value>
+    </data>
+    <data name="XAML_Panel_Setting_Download" xml:space="preserve">
+        <value>Download</value>
+    </data>
+    <data name="XAML_Panel_Setting_Appearance" xml:space="preserve">
+        <value>Appearance</value>
+    </data>
+    <data name="XAML_Panel_Setting_Experience" xml:space="preserve">
+        <value>Experience</value>
+    </data>
+    <data name="XAML_Panel_Setting_FileManagement" xml:space="preserve">
+        <value>File Management</value>
+    </data>
+    <data name="XAML_Panel_Setting_Advanced" xml:space="preserve">
+        <value>Advanced</value>
     </data>
 </root>

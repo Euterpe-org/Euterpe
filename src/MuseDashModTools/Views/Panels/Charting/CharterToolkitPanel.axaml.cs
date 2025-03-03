@@ -1,8 +1,8 @@
 ﻿namespace MuseDashModTools.Views.Panels.Charting;
 
-public partial class CharterPanel : UserControl
+public partial class CharterToolkitPanel : UserControl
 {
-    public CharterPanel()
+    public CharterToolkitPanel()
     {
         InitializeComponent();
     }

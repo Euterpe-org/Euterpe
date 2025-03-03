@@ -240,7 +240,7 @@
     <data name="XAML_Button_Uninstall" xml:space="preserve">
     <value>제거</value>
   </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
+    <data name="XAML_Button_Update" xml:space="preserve">
     <value>업데이트</value>
   </data>
     <data name="XAML_DownloadSource_Custom" xml:space="preserve">
@@ -306,9 +306,6 @@
     <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
     <value>히든</value>
   </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
-    <value>모드 검색(이름, 제작자, 설명)</value>
-  </data>
     <data name="XAML_InfoJson_ChartName" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -369,13 +366,13 @@
     <data name="XAML_Scene_DJMAX" xml:space="preserve">
     <value>DJMAX</value>
   </data>
-    <data name="XAML_Page_ModManage" xml:space="preserve">
+    <data name="XAML_Panel_Modding_ModManage" xml:space="preserve">
     <value>모드</value>
   </data>
-    <data name="XAML_Page_About" xml:space="preserve">
+    <data name="XAML_Panel_Setting_About" xml:space="preserve">
     <value>대해서</value>
   </data>
-    <data name="XAML_Page_ChartManage" xml:space="preserve">
+    <data name="XAML_Panel_Charting_ChartManage" xml:space="preserve">
     <value>차트</value>
   </data>
     <data name="XAML_Page_Home" xml:space="preserve">

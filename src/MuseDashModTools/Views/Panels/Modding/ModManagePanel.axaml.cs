@@ -1,8 +1,8 @@
 ﻿namespace MuseDashModTools.Views.Panels.Modding;
 
-public partial class DevelopPanel : UserControl
+public partial class ModManagePanel : UserControl
 {
-    public DevelopPanel()
+    public ModManagePanel()
     {
         InitializeComponent();
     }

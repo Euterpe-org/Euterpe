@@ -3,14 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Charting"
-             x:Class="MuseDashModTools.Views.Panels.Charting.CharterPanel"
-             x:DataType="pages:CharterPanelViewModel"
+             x:Class="MuseDashModTools.Views.Panels.Charting.CharterToolkitPanel"
+             x:DataType="pages:CharterToolkitPanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:CharterPanelViewModel />
+        <pages:CharterToolkitPanelViewModel />
     </Design.DataContext>
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"
