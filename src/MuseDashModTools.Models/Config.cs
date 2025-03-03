@@ -25,6 +25,9 @@ public sealed partial class Config : ObservableObject
     [ObservableProperty]
     public partial bool ShowConsole { get; set; } = true;
 
+    [ObservableProperty]
+    public partial bool AlwaysShowScrollBar { get; set; } = true;
+
     // Download Settings
     [ObservableProperty]
     public partial DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
