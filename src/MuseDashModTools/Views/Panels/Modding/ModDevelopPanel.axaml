@@ -3,14 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Modding"
-             x:Class="MuseDashModTools.Views.Panels.Modding.DevelopPanel"
-             x:DataType="pages:DevelopPanelViewModel"
+             x:Class="MuseDashModTools.Views.Panels.Modding.ModDevelopPanel"
+             x:DataType="pages:ModDevelopPanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:DevelopPanelViewModel />
+        <pages:ModDevelopPanelViewModel />
     </Design.DataContext>
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"

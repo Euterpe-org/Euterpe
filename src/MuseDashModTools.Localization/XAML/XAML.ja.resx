@@ -217,8 +217,8 @@
     <value>Reinstall</value>
   </data>
     <data name="XAML_SearchBarWatermark_Mod" xml:space="preserve">
-    <value>Search Mods    (Name, Author, Descriptions)</value>
-  </data>
+        <value>Modsを探す （名前，作者，説明）</value>
+    </data>
     <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
     <value>Disable dependents when deleting Mod</value>
   </data>
@@ -237,7 +237,7 @@
     <data name="XAML_Button_Uninstall" xml:space="preserve">
     <value>アンインストール</value>
   </data>
-    <data name="XAML_Update_Mod" xml:space="preserve">
+    <data name="XAML_Button_Update" xml:space="preserve">
     <value>Update</value>
   </data>
     <data name="XAML_DownloadSource_Custom" xml:space="preserve">
@@ -302,9 +302,6 @@
   </data>
     <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
     <value>隠し</value>
-  </data>
-    <data name="XAML_SearchBar" xml:space="preserve">
-    <value>Modsを探す （名前，作者，説明）</value>
   </data>
     <data name="XAML_InfoJson_ChartName" xml:space="preserve">
     <value>名前</value>

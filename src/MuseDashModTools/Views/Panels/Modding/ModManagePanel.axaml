@@ -6,14 +6,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:moddingPanels="using:MuseDashModTools.ViewModels.Panels.Modding"
              xmlns:u="https://irihi.tech/ursa"
-             x:Class="MuseDashModTools.Views.Panels.Modding.ModsPanel"
-             x:DataType="moddingPanels:ModsPanelViewModel"
+             x:Class="MuseDashModTools.Views.Panels.Modding.ModManagePanel"
+             x:DataType="moddingPanels:ModManagePanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <moddingPanels:ModsPanelViewModel />
+        <moddingPanels:ModManagePanelViewModel />
     </Design.DataContext>
 
     <Interaction.Behaviors>
@@ -117,7 +117,7 @@
                                                   Margin="0,0,4,0"
                                                   HorizontalAlignment="Right"
                                                   VerticalAlignment="Center"
-                                                  Command="{Binding $parent[UserControl].((moddingPanels:ModsPanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
+                                                  Command="{Binding $parent[UserControl].((moddingPanels:ModManagePanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
                                                   CommandParameter="{Binding ., Mode=OneWay}"
                                                   IsChecked="{Binding !IsDisabled, Mode=OneWay}"
                                                   IsVisible="{Binding IsLocal, Mode=OneWay}" />
@@ -190,7 +190,7 @@
                                         IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                     <StackPanel Classes="ActionButtonsContainer">
                                         <PathIcon Height="15" Data="{StaticResource SemiIconRefresh}" />
-                                        <TextBlock Text="Update" />
+                                        <TextBlock Text="{I18N {x:Static local:LangKeys.XAML_Button_Update}}" />
                                     </StackPanel>
                                 </Button>
 

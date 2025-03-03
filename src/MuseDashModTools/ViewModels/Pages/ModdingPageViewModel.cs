@@ -6,9 +6,9 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new("Mods", ModsPanelName),
-        new("Melon Loader", MelonLoaderPanelName),
-        new("Develop", DevelopPanelName)
+        new(XAML_Panel_Modding_ModManage, ModManagePanelName),
+        new(XAML_Panel_Modding_MelonLoader, MelonLoaderPanelName),
+        new(XAML_Panel_Modding_ModDevelop, ModDevelopPanelName)
     ];
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>

@@ -4,7 +4,7 @@ using DynamicData.Binding;
 
 namespace MuseDashModTools.ViewModels.Panels.Modding;
 
-public sealed partial class ModsPanelViewModel : ViewModelBase
+public sealed partial class ModManagePanelViewModel : ViewModelBase
 {
     private readonly ReadOnlyObservableCollection<ModDto> _mods;
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
@@ -31,7 +31,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
 
     public ReadOnlyObservableCollection<ModDto> Mods => _mods;
 
-    public ModsPanelViewModel()
+    public ModManagePanelViewModel()
     {
         var comparer = SortExpressionComparer<ModDto>
             .Descending(x => x.State is ModState.Duplicated)
@@ -61,7 +61,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
         await base.InitializeAsync().ConfigureAwait(false);
 
         await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
-        Logger.ZLogInformation($"{nameof(ModsPanelViewModel)} Initialized");
+        Logger.ZLogInformation($"{nameof(ModManagePanelViewModel)} Initialized");
     }
 
     [RelayCommand]
@@ -128,7 +128,7 @@ public sealed partial class ModsPanelViewModel : ViewModelBase
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<ModsPanelViewModel> Logger { get; init; }
+    public required ILogger<ModManagePanelViewModel> Logger { get; init; }
 
     [UsedImplicitly]
     public required IModManageService ModManageService { get; init; }

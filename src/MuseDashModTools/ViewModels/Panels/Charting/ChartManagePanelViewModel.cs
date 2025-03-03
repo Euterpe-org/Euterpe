@@ -1,5 +1,5 @@
 ﻿namespace MuseDashModTools.ViewModels.Panels.Charting;
 
-public sealed class CharterPanelViewModel : ViewModelBase
+public sealed class ChartManagePanelViewModel : ViewModelBase
 {
 }
