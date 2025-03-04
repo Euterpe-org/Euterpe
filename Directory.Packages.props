@@ -13,7 +13,6 @@
         <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.5"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.5"/>
         <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="11.2.5"/>
-        <PackageVersion Include="Avalonia.ReactiveUI" Version="11.2.5"/>
         <PackageVersion Include="Autofac" Version="8.2.0"/>
         <PackageVersion Include="CliWrap" Version="3.8.1"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
@@ -50,6 +49,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
         <PackageVersion Include="PublishAotCompressed" Version="1.0.3"/>
+        <PackageVersion Include="ReactiveUI" Version="20.1.63"/>
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.1.1"/>
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.13.1">
