@@ -22,7 +22,6 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedUpdateSourceIndex { get; set; }
 
-    [RelayCommand]
     public override Task InitializeAsync()
     {
         base.InitializeAsync();

@@ -1,11 +1,17 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dialogs="clr-namespace:MuseDashModTools.ViewModels.Dialogs"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="MuseDashModTools.Views.Dialogs.DonationDialog"
+             x:DataType="dialogs:DonationDialogViewModel"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
+
+    <Design.DataContext>
+        <dialogs:DonationDialogViewModel />
+    </Design.DataContext>
 
     <UserControl.Resources>
         <x:Double x:Key="QrImageSize">230</x:Double>
@@ -40,18 +46,15 @@
                      Columns="2"
                      Rows="2">
             <Border Classes="qr-container">
-                <Image Classes="qr-image"
-                       Source="/Assets/DonationQRs/Wechat.webp" />
+                <Image Classes="qr-image" Source="/Assets/DonationQRs/Wechat.webp" />
             </Border>
 
             <Border Classes="qr-container">
-                <Image Classes="qr-image"
-                       Source="/Assets/DonationQRs/Alipay.webp" />
+                <Image Classes="qr-image" Source="/Assets/DonationQRs/Alipay.webp" />
             </Border>
 
             <Border Classes="qr-container">
-                <Image Classes="qr-image"
-                       Source="/Assets/DonationQRs/Paypal.webp" />
+                <Image Classes="qr-image" Source="/Assets/DonationQRs/Paypal.webp" />
             </Border>
         </UniformGrid>
     </StackPanel>
