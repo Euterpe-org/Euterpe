@@ -63,6 +63,12 @@
                 <ScrollViewer DockPanel.Dock="Bottom" AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
                     <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
+                        <u:SelectionList.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </u:SelectionList.ItemsPanel>
+
                         <!--  Selection Indicator  -->
                         <u:SelectionList.Indicator>
                             <Border Background="Transparent" CornerRadius="4">
@@ -171,12 +177,14 @@
                         <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
 
                             <!--  Mod Title  -->
-                            <TextBlock Grid.Row="0" Grid.Column="0"
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="0"
                                        Classes="PanelTitle"
                                        Text="{Binding SelectedMod.Name, Mode=OneWay}" />
 
                             <!--  Action Buttons  -->
-                            <StackPanel Grid.Row="0" Grid.Column="1"
+                            <StackPanel Grid.Row="0"
+                                        Grid.Column="1"
                                         Classes="ActionButtonsContainer">
 
                                 <!--  Config Button  -->
@@ -217,7 +225,8 @@
                             </StackPanel>
 
                             <!--  Mod Status Tags  -->
-                            <StackPanel Grid.Row="1" Grid.Column="0"
+                            <StackPanel Grid.Row="1"
+                                        Grid.Column="0"
                                         Grid.ColumnSpan="2"
                                         Margin="0,8"
                                         Classes="ActionButtonsContainer">
@@ -256,7 +265,8 @@
                             </StackPanel>
 
                             <!--  Description  -->
-                            <TextBlock Grid.Row="2" Grid.Column="0"
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="0"
                                        Grid.ColumnSpan="2"
                                        Margin="0,8,0,0"
                                        Text="{Binding SelectedMod.Description, Mode=OneWay}"
