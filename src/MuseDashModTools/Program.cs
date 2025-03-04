@@ -45,6 +45,5 @@ internal static class Program
         .UseManagedSystemDialogs()
         .UsePlatformDetect()
         .WithInterFont()
-        .LogToTrace()
-        .UseReactiveUI();
+        .LogToTrace();
 }

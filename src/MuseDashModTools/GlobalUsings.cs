@@ -12,7 +12,6 @@ global using Autofac;
 global using Avalonia;
 global using Avalonia.Controls;
 global using Avalonia.Data.Converters;
-global using Avalonia.ReactiveUI;
 global using Avalonia.Threading;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
