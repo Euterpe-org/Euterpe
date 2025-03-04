@@ -8,7 +8,7 @@ public sealed partial class AppearancePanelViewModel : ViewModelBase
     public Language[] AvailableLanguages => LocalizationService.AvailableLanguages;
 
     [RelayCommand]
-    protected override Task InitializeAsync()
+    public override Task InitializeAsync()
     {
         base.InitializeAsync();
 

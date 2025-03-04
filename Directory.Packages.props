@@ -15,7 +15,6 @@
         <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="11.2.5"/>
         <PackageVersion Include="Avalonia.ReactiveUI" Version="11.2.5"/>
         <PackageVersion Include="Autofac" Version="8.2.0"/>
-        <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.2.0.9"/>
         <PackageVersion Include="CliWrap" Version="3.8.1"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.4.1">

@@ -8,8 +8,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial double DownloadProgress { get; set; }
 
-    [RelayCommand]
-    protected override Task InitializeAsync()
+    public override Task InitializeAsync()
     {
         base.InitializeAsync();
 

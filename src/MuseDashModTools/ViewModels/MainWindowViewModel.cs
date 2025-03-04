@@ -10,8 +10,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         new(Page_Setting, SettingPageName, "Setting")
     ];
 
-    [RelayCommand]
-    protected override async Task InitializeAsync()
+    public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(true);
         await SettingService.LoadAsync().ConfigureAwait(true);

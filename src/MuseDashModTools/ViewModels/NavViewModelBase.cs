@@ -15,7 +15,7 @@ public partial class NavViewModelBase : ViewModelBase
     {
     }
 
-    protected override Task InitializeAsync()
+    public override Task InitializeAsync()
     {
         base.InitializeAsync();
 
