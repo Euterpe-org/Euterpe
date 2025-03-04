@@ -12,8 +12,7 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
         new(Panel_Setting_Advanced, AdvancedPanelName)
     ];
 
-    [RelayCommand]
-    protected override Task InitializeAsync()
+    public override Task InitializeAsync()
     {
         base.InitializeAsync();
 

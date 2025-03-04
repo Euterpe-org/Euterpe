@@ -1,5 +1,5 @@
 ﻿namespace MuseDashModTools.ViewModels.Dialogs;
 
-public class DonationDialogViewModel : ObservableObject
+public sealed class DonationDialogViewModel : ViewModelBase
 {
 }

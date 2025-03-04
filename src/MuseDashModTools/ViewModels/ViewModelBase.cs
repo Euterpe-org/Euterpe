@@ -9,7 +9,7 @@ public partial class ViewModelBase : ObservableObject
 
     #endregion Injections
 
-    protected virtual Task InitializeAsync() => Task.CompletedTask;
+    public virtual Task InitializeAsync() => Task.CompletedTask;
 
     [RelayCommand]
     private Task OpenFileAsync(string filePath) => PlatformService.OpenFileAsync(filePath);

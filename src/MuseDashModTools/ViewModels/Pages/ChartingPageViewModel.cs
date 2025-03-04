@@ -18,8 +18,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
         ])
     ];
 
-    [RelayCommand]
-    protected override Task InitializeAsync()
+    public override Task InitializeAsync()
     {
         base.InitializeAsync();
 

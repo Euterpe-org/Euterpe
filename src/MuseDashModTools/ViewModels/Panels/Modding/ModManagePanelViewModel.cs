@@ -55,8 +55,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
             .Subscribe();
     }
 
-    [RelayCommand]
-    protected override async Task InitializeAsync()
+    public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(false);
 

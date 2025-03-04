@@ -23,7 +23,7 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     public partial int SelectedUpdateSourceIndex { get; set; }
 
     [RelayCommand]
-    protected override Task InitializeAsync()
+    public override Task InitializeAsync()
     {
         base.InitializeAsync();
 

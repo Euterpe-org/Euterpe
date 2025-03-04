@@ -17,12 +17,6 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Interaction.Behaviors>
-        <RoutedEventTriggerBehavior RoutedEvent="{x:Static Control.LoadedEvent}">
-            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </RoutedEventTriggerBehavior>
-    </Interaction.Behaviors>
-
     <u:UrsaWindow.RightContent>
         <u:ThemeToggleButton Margin="0,1,0,0"
                              VerticalAlignment="Top"

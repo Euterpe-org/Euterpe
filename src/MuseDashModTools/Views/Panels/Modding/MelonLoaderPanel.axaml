@@ -13,12 +13,6 @@
         <pages:MelonLoaderPanelViewModel />
     </Design.DataContext>
 
-    <Interaction.Behaviors>
-        <EventTriggerBehavior EventName="Initialized">
-            <InvokeCommandAction Command="{Binding InitializeCommand, Mode=OneTime}" />
-        </EventTriggerBehavior>
-    </Interaction.Behaviors>
-
     <StackPanel Margin="0,0,0,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"

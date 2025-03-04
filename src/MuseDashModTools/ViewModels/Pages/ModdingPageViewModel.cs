@@ -21,8 +21,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
         ])
     ];
 
-    [RelayCommand]
-    protected override Task InitializeAsync()
+    public override Task InitializeAsync()
     {
         base.InitializeAsync();
 
