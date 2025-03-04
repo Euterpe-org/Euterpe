@@ -7,17 +7,17 @@ internal sealed class LocalizationService : ILocalizationService
 {
     public Language[] AvailableLanguages { get; } =
     [
-        new("en"),
-        new("de"),
-        new("es"),
-        new("fr"),
-        new("hr"),
-        new("hu"),
-        new("ja"),
-        new("ko"),
-        new("ru"),
-        new("zh-Hans"),
-        new("zh-Hant")
+        "en",
+        "de",
+        "es",
+        "fr",
+        "hr",
+        "hu",
+        "ja",
+        "ko",
+        "ru",
+        "zh-Hans",
+        "zh-Hant"
     ];
 
     public int GetCurrentLanguageIndex()
