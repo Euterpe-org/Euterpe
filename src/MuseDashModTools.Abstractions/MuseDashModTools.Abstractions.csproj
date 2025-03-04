@@ -5,9 +5,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.ReactiveUI"/>
         <PackageReference Include="Downloader"/>
         <PackageReference Include="Irihi.Ursa"/>
+        <PackageReference Include="ReactiveUI"/>
     </ItemGroup>
 
 </Project>
