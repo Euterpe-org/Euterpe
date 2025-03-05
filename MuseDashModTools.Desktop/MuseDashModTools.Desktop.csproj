@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia.Desktop"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\src\MuseDashModTools\MuseDashModTools.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+        <DirectPInvoke Include="av_libglesv2"/>
+        <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <DirectPInvoke Include="libHarfBuzzSharp"/>
+        <NativeLibrary Include="Native\libHarfBuzzSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <DirectPInvoke Include="libSkiaSharp"/>
+        <NativeLibrary Include="Native\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+    </ItemGroup>
+
+</Project>
