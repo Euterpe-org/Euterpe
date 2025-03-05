@@ -3,7 +3,8 @@
 public sealed partial class AppearancePanelViewModel : ViewModelBase
 {
     [ObservableProperty]
-    public partial int CurrentLanguageIndex { get; set; }
+    [NotifyCanExecuteChangedFor(nameof(ApplyLanguageCommand))]
+    public partial Language? CurrentLanguage { get; set; }
 
     public Language[] AvailableLanguages => LocalizationService.AvailableLanguages;
 
@@ -12,14 +13,16 @@ public sealed partial class AppearancePanelViewModel : ViewModelBase
     {
         base.InitializeAsync();
 
-        CurrentLanguageIndex = LocalizationService.GetCurrentLanguageIndex();
+        CurrentLanguage = LocalizationService.GetCurrentLanguage();
 
         Logger.ZLogInformation($"{nameof(AppearancePanelViewModel)} Initialized");
         return Task.CompletedTask;
     }
 
-    [RelayCommand]
-    private void ApplyLanguage() => LocalizationService.SetLanguage(AvailableLanguages[CurrentLanguageIndex].Name);
+    [RelayCommand(CanExecute = nameof(CanExecuteApplyLanguage))]
+    private void ApplyLanguage() => LocalizationService.SetLanguage(CurrentLanguage!.Name);
+
+    private bool CanExecuteApplyLanguage() => CurrentLanguage is not null;
 
     #region Injections
 
