@@ -20,7 +20,7 @@ internal sealed class LocalizationService : ILocalizationService
         "zh-Hant"
     ];
 
-    public int GetCurrentLanguageIndex()
+    public Language GetCurrentLanguage()
     {
         CultureInfo currentCulture;
 
@@ -36,19 +36,19 @@ internal sealed class LocalizationService : ILocalizationService
 
         foreach (var cultureName in CreateCultureFallbackChain(currentCulture).Select(x => x.Name))
         {
-            var index = Array.FindIndex(AvailableLanguages, x => x.Name == cultureName);
-            if (index is -1)
+            var language = AvailableLanguages.FirstOrDefault(x => x.Name == cultureName);
+            if (language is null)
             {
                 continue;
             }
 
             Config.LanguageCode = cultureName;
-            return index;
+            return language;
         }
 
         Logger.ZLogError($"No matching language found for {currentCulture.Name}, falling back to English");
         Config.LanguageCode = "en";
-        return 0;
+        return "en";
     }
 
     public void SetLanguage(string language)
@@ -78,7 +78,6 @@ internal sealed class LocalizationService : ILocalizationService
 
         yield return CultureInfo.InvariantCulture;
     }
-
 
     #region Injections
 

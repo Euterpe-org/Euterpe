@@ -30,8 +30,8 @@
                             Orientation="Horizontal"
                             Spacing="20">
                     <ComboBox MinWidth="200"
-                              ItemsSource="{Binding AvailableLanguages}"
-                              SelectedIndex="{Binding CurrentLanguageIndex}" />
+                              ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
+                              SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}" />
 
                     <Button Command="{Binding ApplyLanguageCommand}" Content="{I18N {x:Static local:LangKeys.Button_Apply}}" />
                 </StackPanel>
