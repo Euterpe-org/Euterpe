@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
         <AssemblyName>MuseDashModTools</AssemblyName>
@@ -49,7 +48,6 @@
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
         <PackageReference Include="Avalonia"/>
-        <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
@@ -69,15 +67,6 @@
         <ProjectReference Include="..\MuseDashModTools.Core\MuseDashModTools.Core.csproj"/>
         <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)' == 'Release'">
-        <DirectPInvoke Include="av_libglesv2"/>
-        <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
-        <DirectPInvoke Include="libHarfBuzzSharp"/>
-        <NativeLibrary Include="Native\libHarfBuzzSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
-        <DirectPInvoke Include="libSkiaSharp"/>
-        <NativeLibrary Include="Native\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
     </ItemGroup>
 
     <ItemGroup>

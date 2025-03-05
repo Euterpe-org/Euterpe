@@ -1,6 +1,7 @@
+using Avalonia;
 using Avalonia.Dialogs;
 
-namespace MuseDashModTools;
+namespace MuseDashModTools.Desktop;
 
 internal static class Program
 {
