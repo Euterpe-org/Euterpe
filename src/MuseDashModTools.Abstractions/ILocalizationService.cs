@@ -3,6 +3,6 @@
 public interface ILocalizationService
 {
     Language[] AvailableLanguages { get; }
-    int GetCurrentLanguageIndex();
+    Language GetCurrentLanguage();
     void SetLanguage(string language);
 }
