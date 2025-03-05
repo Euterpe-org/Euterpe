@@ -2,17 +2,27 @@
     <PropertyGroup>
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     </PropertyGroup>
+
+    <!-- Package Group Versions -->
+    <PropertyGroup>
+        <AvaloniaVersion>11.2.5</AvaloniaVersion>
+        <HotAvaloniaVersion>2.1.0</HotAvaloniaVersion>
+        <UrsaVersion>1.9.0</UrsaVersion>
+        <VerifyVersion>28.13.0</VerifyVersion>
+        <RoslynatorAnalyzersVersion>4.13.1</RoslynatorAnalyzersVersion>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageVersion Include="Antelcat.I18N.Avalonia" Version="1.1.0"/>
         <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.2"/>
         <PackageVersion Include="AssetsTools.NET" Version="3.0.0"/>
         <PackageVersion Include="AsyncAwaitBestPractices" Version="9.0.0"/>
         <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
-        <PackageVersion Include="Avalonia" Version="11.2.5"/>
-        <PackageVersion Include="Avalonia.Desktop" Version="11.2.5"/>
-        <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.5"/>
-        <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.5"/>
-        <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="11.2.5"/>
+        <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)"/>
+        <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)"/>
+        <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
+        <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
+        <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Autofac" Version="8.2.0"/>
         <PackageVersion Include="CliWrap" Version="3.8.1"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
@@ -25,10 +35,10 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
         <PackageVersion Include="Downloader" Version="3.3.3"/>
-        <PackageVersion Include="HotAvalonia" Version="2.1.0"/>
-        <PackageVersion Include="HotAvalonia.Extensions" Version="2.1.0" PrivateAssets="all"/>
-        <PackageVersion Include="Irihi.Ursa" Version="1.9.0"/>
-        <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.9.0"/>
+        <PackageVersion Include="HotAvalonia" Version="$(HotAvaloniaVersion)"/>
+        <PackageVersion Include="HotAvalonia.Extensions" Version="$(HotAvaloniaVersion)" PrivateAssets="all"/>
+        <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)"/>
+        <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="$(UrsaVersion)"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0"/>
         <PackageVersion Include="MessagePipe" Version="1.8.1"/>
         <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.3.0"/>
@@ -52,7 +62,7 @@
         <PackageVersion Include="ReactiveUI" Version="20.1.63"/>
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.1.1"/>
-        <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.13.1">
+        <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
@@ -64,15 +74,15 @@
         <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.2"/>
         <PackageVersion Include="TUnit" Version="0.14.0"/>
         <PackageVersion Include="ValveKeyValue" Version="0.12.0.391"/>
-        <PackageVersion Include="Verify" Version="28.13.0"/>
-        <PackageVersion Include="Verify.TUnit" Version="28.13.0"/>
+        <PackageVersion Include="Verify" Version="$(VerifyVersion)"/>
+        <PackageVersion Include="Verify.TUnit" Version="$(VerifyVersion)"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
-        <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.13.1"/>
-        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="4.13.1"/>
+        <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
+        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
     </ItemGroup>
 </Project>
