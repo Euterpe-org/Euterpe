@@ -1,20 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <Import Condition="'$(Configuration)' == 'Release'" Project="$(SolutionDir)Release.props"/>
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
-        <PublishAot>true</PublishAot>
-        <PublishLzmaCompressed>true</PublishLzmaCompressed>
         <AssemblyName>Updater</AssemblyName>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <DebugType>none</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="ConsoleAppFramework"/>
-        <PackageReference Include="PublishAotCompressed"/>
         <PackageReference Include="Spectre.Console"/>
         <PackageReference Include="ZLogger"/>
     </ItemGroup>

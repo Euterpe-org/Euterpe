@@ -264,9 +264,6 @@
     <data name="XAML_Charter" xml:space="preserve">
     <value>차트 제작자: </value>
   </data>
-    <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Custom_Albums 폴더 열기</value>
-  </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
     <value>정렬 기준: </value>
   </data>

@@ -264,9 +264,6 @@
     <data name="XAML_Charter" xml:space="preserve">
     <value>Создатель: </value>
   </data>
-    <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Открыть папку с чартами</value>
-  </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
     <value>Сортировать по: </value>
   </data>

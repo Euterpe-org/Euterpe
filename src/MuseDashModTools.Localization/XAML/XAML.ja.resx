@@ -261,9 +261,6 @@
     <data name="XAML_Charter" xml:space="preserve">
     <value>Charter: </value>
   </data>
-    <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Open Custom_Albums Folder</value>
-  </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
     <value>Sort by: </value>
   </data>

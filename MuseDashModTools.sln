@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Packages.props = Directory.Packages.props
 		README.md = README.md
 		Settings.XamlStyler = Settings.XamlStyler
+		Release.props = Release.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CF8C9C1F-2C69-408A-8819-D3F3242AFC24}"
@@ -39,8 +40,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Common", "src\MuseDashModTools.Common\MuseDashModTools.Common.csproj", "{AFDDD358-DCB4-46C2-BFF3-66D9142E4ACC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Core.Generators", "src\MuseDashModTools.Core.Generators\MuseDashModTools.Core.Generators.csproj", "{5F36B64A-7F4B-4898-AC3A-99A56CE913B8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Desktop", "src\MuseDashModTools.Desktop\MuseDashModTools.Desktop.csproj", "{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,10 +107,6 @@ Global
 		{5F36B64A-7F4B-4898-AC3A-99A56CE913B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F36B64A-7F4B-4898-AC3A-99A56CE913B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F36B64A-7F4B-4898-AC3A-99A56CE913B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +127,5 @@ Global
 		{73D761AD-9898-4F32-BF81-0798E441527A} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{AFDDD358-DCB4-46C2-BFF3-66D9142E4ACC} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 		{5F36B64A-7F4B-4898-AC3A-99A56CE913B8} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
-		{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A} = {362482F5-05F2-4963-85D8-33B67AF2DE72}
 	EndGlobalSection
 EndGlobal

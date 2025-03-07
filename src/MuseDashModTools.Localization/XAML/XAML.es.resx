@@ -117,9 +117,6 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Folder_UserData" xml:space="preserve">
-    <value>Carpeta de\najustes local</value>
-  </data>
     <data name="XAML_ReportBug" xml:space="preserve">
     <value>Reporta un error</value>
   </data>
@@ -185,9 +182,6 @@
     </data>
     <data name="XAML_Folder_Log" xml:space="preserve">
     <value>Ir a mi Log</value>
-  </data>
-    <data name="Folder_Mods" xml:space="preserve">
-    <value>Carpeta de\nmods</value>
   </data>
     <data name="AllGameVersionCompatible" xml:space="preserve">
     <value>Todas</value>
@@ -266,9 +260,6 @@
   </data>
     <data name="XAML_Charter" xml:space="preserve">
     <value>Diseñador: </value>
-  </data>
-    <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Abrir carpeta\nde charts</value>
   </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
     <value>Ordenar por: </value>
