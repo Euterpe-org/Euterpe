@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\src\MuseDashModTools\MuseDashModTools.csproj"/>
+        <ProjectReference Include="..\MuseDashModTools\MuseDashModTools.csproj"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(Configuration)' == 'Release'">
