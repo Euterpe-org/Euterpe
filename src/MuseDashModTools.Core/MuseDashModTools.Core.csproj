@@ -13,6 +13,7 @@
         <PackageReference Include="CliWrap"/>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
+        <PackageReference Include="R3"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="System.Interactive.Async"/>
         <PackageReference Include="System.Linq.Async"/>
