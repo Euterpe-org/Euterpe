@@ -1,0 +1,27 @@
+<Project>
+    <PropertyGroup>
+        <PublishAot>true</PublishAot>
+        <PublishLzmaCompressed>true</PublishLzmaCompressed>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="PublishAotCompressed"/>
+    </ItemGroup>
+
+    <Target Name="Copy Builds" AfterTargets="Publish">
+        <PropertyGroup>
+            <NativeDir>$(OutputPath)native\</NativeDir>
+            <PublishDir>$(OutputPath)publish\</PublishDir>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <PublishedFiles Include="$(NativeDir)*.*" Condition="Exists('$(NativeDir)')"/>
+            <PublishedFiles Include="$(PublishDir)*.*" Condition="!Exists('$(NativeDir)')"/>
+        </ItemGroup>
+
+        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(SolutionDir)bin" SkipUnchangedFiles="true"/>
+    </Target>
+</Project>

@@ -264,9 +264,6 @@
     <data name="XAML_Charter" xml:space="preserve">
     <value>Készítő: </value>
   </data>
-    <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Custom_Albums mappa</value>
-  </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
     <value>Rendezés: </value>
   </data>

@@ -1,19 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project>
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <TrimMode>link</TrimMode>
+        <TrimmerSingleWarn>false</TrimmerSingleWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia.Desktop"/>
+        <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\MuseDashModTools\MuseDashModTools.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)\Native')">
         <DirectPInvoke Include="av_libglesv2"/>
         <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
         <DirectPInvoke Include="libHarfBuzzSharp"/>
@@ -21,5 +16,4 @@
         <DirectPInvoke Include="libSkiaSharp"/>
         <NativeLibrary Include="Native\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
     </ItemGroup>
-
 </Project>

@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Condition="'$(Configuration)' == 'Release'" Project="$(SolutionDir)Release.props"/>
+    <Import Condition="'$(Configuration)' == 'Release'" Project="AOT.props"/>
+
     <PropertyGroup>
-        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <OutputType>WinExe</OutputType>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
-        <AssemblyName>MuseDashModTools</AssemblyName>
-        <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-        <NoWarn>$(NoWarn);CS7035</NoWarn>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -16,19 +17,6 @@
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <DefineConstants>$(DefineConstants);ENABLE_XAML_HOT_RELOAD</DefineConstants>
     </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <PublishAot>true</PublishAot>
-        <PublishLzmaCompressed>true</PublishLzmaCompressed>
-        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
-        <TrimMode>link</TrimMode>
-        <TrimmerSingleWarn>false</TrimmerSingleWarn>
-        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
-    </PropertyGroup>
-
-    <ItemGroup Condition="'$(Configuration)' == 'Release'">
-        <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
-    </ItemGroup>
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
@@ -48,6 +36,7 @@
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
         <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.Desktop"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
@@ -56,7 +45,6 @@
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
-        <PackageReference Include="PublishAotCompressed"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="ValveKeyValue"/>
