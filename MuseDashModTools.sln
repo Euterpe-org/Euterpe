@@ -40,7 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Common", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Core.Generators", "src\MuseDashModTools.Core.Generators\MuseDashModTools.Core.Generators.csproj", "{5F36B64A-7F4B-4898-AC3A-99A56CE913B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Desktop", "MuseDashModTools.Desktop\MuseDashModTools.Desktop.csproj", "{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseDashModTools.Desktop", "src\MuseDashModTools.Desktop\MuseDashModTools.Desktop.csproj", "{0D15C503-1F0A-40D1-B7C1-5AAD57D1059A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
