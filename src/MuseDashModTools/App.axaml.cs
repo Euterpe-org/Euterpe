@@ -48,7 +48,7 @@ public sealed class App : Application
             desktop.Exit += async delegate { await OnExitAsync().ConfigureAwait(false); };
         }
 
-        this.WhenAnyValue(x => x.ActualThemeVariant)
+        this.ObservePropertyChanged(x => x.ActualThemeVariant)
             .Subscribe(theme => Container.Resolve<Config>().Theme = AvaloniaResources.ThemeVariants[theme]);
 
         base.OnFrameworkInitializationCompleted();

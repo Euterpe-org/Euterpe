@@ -6,8 +6,8 @@
 
     <ItemGroup>
         <PackageReference Include="Downloader"/>
+        <PackageReference Include="DynamicData"/>
         <PackageReference Include="Irihi.Ursa"/>
-        <PackageReference Include="ReactiveUI"/>
     </ItemGroup>
 
 </Project>
