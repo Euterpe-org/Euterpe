@@ -1,16 +1,17 @@
-namespace MuseDashModTools.Core.Generators;
+namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class LazyProxyGenerator : IIncrementalGenerator
+public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 {
     private const string LazyProxyAttributeName = "MuseDashModTools.Common.Attributes.LazyProxyAttribute";
 
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
+
+    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
-        context.RegisterSourceOutput(
-            context.SyntaxProvider.ForAttributeWithMetadataName(
-                LazyProxyAttributeName, FilterNode, ExtractDataFromContext),
-            GenerateFromData);
+        var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
+            LazyProxyAttributeName, FilterNode, ExtractDataFromContext);
+        context.RegisterSourceOutput(WithCondition(syntaxProvider, isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>

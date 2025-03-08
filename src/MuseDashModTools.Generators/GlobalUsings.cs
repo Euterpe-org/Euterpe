@@ -4,3 +4,4 @@ global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;
 global using static MuseDashModTools.Generators.BuildInfo;
 global using static MuseDashModTools.Generators.SourceGenerationTexts;
+global using static MuseDashModTools.Generators.SourceGeneratorHelper;

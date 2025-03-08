@@ -1,16 +1,17 @@
-﻿namespace MuseDashModTools.Core.Generators;
+﻿namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class LazyProxyExtensionsGenerator : IIncrementalGenerator
+public sealed class LazyProxyExtensionsGenerator : IncrementalGeneratorBase
 {
     private const string LazyProxyAttributeName = "MuseDashModTools.Common.Attributes.LazyProxyAttribute";
 
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
+
+    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
-        context.RegisterSourceOutput(
-            context.SyntaxProvider.ForAttributeWithMetadataName(
-                LazyProxyAttributeName, FilterNode, ExtractDataFromContext).Collect(),
-            GenerateFromData);
+        var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
+            LazyProxyAttributeName, FilterNode, ExtractDataFromContext).Collect();
+        context.RegisterSourceOutput(WithCollectionCondition(syntaxProvider, isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
@@ -21,8 +22,13 @@ public sealed class LazyProxyExtensionsGenerator : IIncrementalGenerator
             ? null
             : new ClassData(symbol.ContainingNamespace.ToDisplayString(), symbol.Name);
 
-    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ClassData?> dataList)
+    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ClassData?> dataCollection)
     {
+        if (dataCollection is [])
+        {
+            return;
+        }
+
         var sb = new IndentedStringBuilder();
 
         sb.AppendLine(Header);
@@ -37,7 +43,7 @@ public sealed class LazyProxyExtensionsGenerator : IIncrementalGenerator
                         """);
 
         sb.IncreaseIndent(2);
-        foreach (var data in dataList)
+        foreach (var data in dataCollection)
         {
             if (data is not var (nameSpace, className))
             {
