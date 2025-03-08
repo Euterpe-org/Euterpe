@@ -19,21 +19,4 @@ public abstract class IncrementalGeneratorBase : IIncrementalGenerator
     protected abstract void InitializeCore(
         IncrementalGeneratorInitializationContext context,
         IncrementalValueProvider<bool> isValidProvider);
-
-    protected static IncrementalValuesProvider<T> WithCondition<T>(
-        IncrementalValuesProvider<T> data,
-        IncrementalValueProvider<bool> condition) =>
-        data.Combine(condition)
-            .Where(static tuple => tuple.Right)
-            .Select((tuple, _) => tuple.Left);
-
-    protected static IncrementalValueProvider<ImmutableArray<T>> WithCollectionCondition<T>(
-        IncrementalValueProvider<ImmutableArray<T>> collectedData,
-        IncrementalValueProvider<bool> condition)
-    {
-        return collectedData
-            .Combine(condition)
-            .Select(static (tuple, _) =>
-                tuple.Right ? tuple.Left : ImmutableArray<T>.Empty);
-    }
 }

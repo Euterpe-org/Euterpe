@@ -11,7 +11,7 @@ public sealed class PageNavigateGenerator : IncrementalGeneratorBase
     {
         var syntaxProvider = context.SyntaxProvider
             .CreateSyntaxProvider(FilterNode, ExtractDataFromContext);
-        context.RegisterSourceOutput(WithCondition(syntaxProvider, isValidProvider), GenerateFromData);
+        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
