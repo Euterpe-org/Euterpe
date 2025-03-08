@@ -1,14 +1,15 @@
 ﻿namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
+public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
 {
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    protected override string ExpectedRootNamespace => MuseDashModToolsNamespace;
+
+    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
-        context.RegisterSourceOutput(
-            context.SyntaxProvider.CreateSyntaxProvider(
-                FilterNode, ExtractDataFromContext).Collect(),
-            GenerateFromData);
+        var syntaxProvider = context.SyntaxProvider.CreateSyntaxProvider(
+            FilterNode, ExtractDataFromContext).Collect();
+        context.RegisterSourceOutput(WithCollectionCondition(syntaxProvider, isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
@@ -20,8 +21,13 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
             ? null
             : new ViewData(classDeclaration.Identifier.Text);
 
-    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataList)
+    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataCollection)
     {
+        if (dataCollection is [])
+        {
+            return;
+        }
+
         var sb = new IndentedStringBuilder();
         sb.AppendLine(Header);
         sb.AppendLine($$"""
@@ -35,7 +41,7 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
                         """);
 
         sb.IncreaseIndent(2);
-        foreach (var data in dataList)
+        foreach (var data in dataCollection)
         {
             if (data is not var (name))
             {

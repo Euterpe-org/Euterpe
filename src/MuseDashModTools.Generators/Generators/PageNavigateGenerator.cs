@@ -1,15 +1,17 @@
 namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class PageNavigateGenerator : IIncrementalGenerator
+public sealed class PageNavigateGenerator : IncrementalGeneratorBase
 {
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    protected override string ExpectedRootNamespace => MuseDashModToolsNamespace;
+
+    protected override void InitializeCore(
+        IncrementalGeneratorInitializationContext context,
+        IncrementalValueProvider<bool> isValidProvider)
     {
-        context.RegisterSourceOutput(
-            context.SyntaxProvider.CreateSyntaxProvider(
-                FilterNode,
-                ExtractDataFromContext),
-            GenerateFromData);
+        var syntaxProvider = context.SyntaxProvider
+            .CreateSyntaxProvider(FilterNode, ExtractDataFromContext);
+        context.RegisterSourceOutput(WithCondition(syntaxProvider, isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
