@@ -9,7 +9,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
     {
         var syntaxProvider = context.SyntaxProvider.CreateSyntaxProvider(
             FilterNode, ExtractDataFromContext).Collect();
-        context.RegisterSourceOutput(WithCollectionCondition(syntaxProvider, isValidProvider), GenerateFromData);
+        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>

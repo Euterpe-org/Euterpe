@@ -11,7 +11,7 @@ public sealed class LazyProxyExtensionsGenerator : IncrementalGeneratorBase
     {
         var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
             LazyProxyAttributeName, FilterNode, ExtractDataFromContext).Collect();
-        context.RegisterSourceOutput(WithCollectionCondition(syntaxProvider, isValidProvider), GenerateFromData);
+        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
