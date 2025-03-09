@@ -7,10 +7,11 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 
     protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
 
-    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
+    protected override void InitializeCore(IncrementalGeneratorInitializationContext context,
+        IncrementalValueProvider<bool> isValidProvider)
     {
         var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
-            LazyProxyAttributeName, FilterNode, ExtractDataFromContext);
+            LazyProxyAttributeName, FilterNode, ExtractDataFromContext).Collect();
         context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
     }
 
@@ -34,13 +35,50 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
             : new ClassData(symbol.ContainingNamespace.ToDisplayString(), symbol.Name, baseType);
     }
 
-    private static void GenerateFromData(SourceProductionContext spc, ClassData? data)
+    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ClassData?> dataCollection)
     {
-        if (data is not var (nameSpace, className, baseType))
+        if (dataCollection is [])
         {
             return;
         }
 
+        var sb = new IndentedStringBuilder();
+
+        sb.AppendLine(Header);
+        sb.AppendLine($$"""
+                        namespace MuseDashModTools.Core.Extensions;
+
+                        public static class LazyProxyExtensions
+                        {
+                            {{GetGeneratedCodeAttribute(nameof(LazyProxyGenerator))}}
+                            public static void RegisterLazyProxies(this ContainerBuilder builder)
+                            {
+                        """);
+
+        sb.IncreaseIndent(2);
+        foreach (var data in dataCollection)
+        {
+            if (data is not var (nameSpace, className, baseType))
+            {
+                continue;
+            }
+
+            GenerateSingleProxyClass(spc, nameSpace, className, baseType);
+
+            sb.AppendLine($"builder.RegisterType<{nameSpace}.{className}>().PropertiesAutowired().SingleInstance();");
+        }
+
+        sb.ResetIndent();
+        sb.AppendLine("""
+                          }
+                      }
+                      """);
+
+        spc.AddSource("LazyProxyExtensions.g.cs", sb.ToString());
+    }
+
+    private static void GenerateSingleProxyClass(SourceProductionContext spc, string nameSpace, string className, INamedTypeSymbol baseType)
+    {
         var sb = new IndentedStringBuilder();
 
         var typeName = baseType.Name;
