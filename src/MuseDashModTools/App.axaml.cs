@@ -44,7 +44,7 @@ public sealed class App : Application
             // Line below is needed to remove Avalonia data validation.
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
-            desktop.MainWindow = Container.Resolve<MainWindow>();
+            desktop.MainWindow = Container.Resolve<WizardWindow>();
             desktop.Exit += async delegate { await OnExitAsync().ConfigureAwait(false); };
         }
 

@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Views.Dialogs;
+﻿namespace MuseDashModTools.Views.Components;
 
 public partial class DonationDialog : UserControl
 {
