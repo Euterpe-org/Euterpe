@@ -1,16 +1,16 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:components="clr-namespace:MuseDashModTools.ViewModels.Components"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dialogs="clr-namespace:MuseDashModTools.ViewModels.Dialogs"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="MuseDashModTools.Views.Dialogs.DonationDialog"
-             x:DataType="dialogs:DonationDialogViewModel"
+             x:Class="MuseDashModTools.Views.Components.DonationDialog"
+             x:DataType="components:DonationDialogViewModel"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
 
     <Design.DataContext>
-        <dialogs:DonationDialogViewModel />
+        <components:DonationDialogViewModel />
     </Design.DataContext>
 
     <UserControl.Resources>
