@@ -14,7 +14,7 @@
 
     <ItemGroup>
         <PackageVersion Include="Antelcat.I18N.Avalonia" Version="1.1.0"/>
-        <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.2"/>
+        <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.3"/>
         <PackageVersion Include="AssetsTools.NET" Version="3.0.0"/>
         <PackageVersion Include="AsyncAwaitBestPractices" Version="9.0.0"/>
         <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
@@ -34,7 +34,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
-        <PackageVersion Include="Downloader" Version="3.3.3"/>
+        <PackageVersion Include="Downloader" Version="3.3.4"/>
         <PackageVersion Include="DynamicData" Version="9.1.2"/>
         <PackageVersion Include="HotAvalonia" Version="$(HotAvaloniaVersion)"/>
         <PackageVersion Include="HotAvalonia.Extensions" Version="$(HotAvaloniaVersion)" PrivateAssets="all"/>
