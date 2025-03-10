@@ -1,378 +1,274 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <!--
-      Microsoft ResX Schema
-
-      Version 2.0
-
-      The primary goals of this format is to allow a simple XML format
-      that is mostly human readable. The generation and parsing of the
-      various data types are done through the TypeConverter classes
-      associated with the data types.
-
-      Example:
-
-      ... ado.net/XML headers & schema ...
-      <resheader name="resmimetype">text/microsoft-resx</resheader>
-      <resheader name="version">2.0</resheader>
-      <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-      <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-      <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-      <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-      <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-          <value>[base64 mime encoded serialized .NET Framework object]</value>
-      </data>
-      <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-          <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-          <comment>This is a comment</comment>
-      </data>
-
-      There are any number of "resheader" rows that contain simple
-      name/value pairs.
-
-      Each data row contains a name, and value. The row also contains a
-      type or mimetype. Type corresponds to a .NET class that support
-      text/value conversion through the TypeConverter architecture.
-      Classes that don't support this are serialized and stored with the
-      mimetype set.
-
-      The mimetype is used for serialized objects, and tells the
-      ResXResourceReader how to depersist the object. This is currently not
-      extensible. For a given mimetype the value must be set accordingly:
-
-      Note - application/x-microsoft.net.object.binary.base64 is the format
-      that the ResXResourceWriter will generate, however the reader can
-      read any of the formats listed below.
-
-      mimetype: application/x-microsoft.net.object.binary.base64
-      value   : The object must be serialized with
-              : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-              : and then encoded with base64 encoding.
-
-      mimetype: application/x-microsoft.net.object.soap.base64
-      value   : The object must be serialized with
-              : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-              : and then encoded with base64 encoding.
-
-      mimetype: application/x-microsoft.net.object.bytearray.base64
-      value   : The object must be serialized into a byte array
-              : using a System.ComponentModel.TypeConverter
-              : and then encoded with base64 encoding.
-      -->
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root" xmlns="">
-        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-        <xsd:element name="root" msdata:IsDataSet="true">
-            <xsd:complexType>
-                <xsd:choice maxOccurs="unbounded">
-                    <xsd:element name="metadata">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" use="required" type="xsd:string"/>
-                            <xsd:attribute name="type" type="xsd:string"/>
-                            <xsd:attribute name="mimetype" type="xsd:string"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="assembly">
-                        <xsd:complexType>
-                            <xsd:attribute name="alias" type="xsd:string"/>
-                            <xsd:attribute name="name" type="xsd:string"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="data">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="resheader">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                </xsd:choice>
-            </xsd:complexType>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <data name="XAML_ReportBug" xml:space="preserve">
-    <value>Reporta un error</value>
-  </data>
-    <data name="XAML_Check_Update" xml:space="preserve">
-    <value>Comprobar actualización</value>
-  </data>
-    <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub Mirror</value>
-  </data>
-    <data name="XAML_Analyze" xml:space="preserve">
-    <value>Analizar\neste log</value>
-  </data>
-    <data name="Button_Apply" xml:space="preserve">
-    <value>Aplicar</value>
-  </data>
-    <data name="XAML_AskType_Always" xml:space="preserve">
-    <value>Preguntar primero</value>
-  </data>
-    <data name="XAML_AskType_No" xml:space="preserve">
-    <value>No</value>
-  </data>
-    <data name="XAML_AskType_Yes" xml:space="preserve">
-    <value>Sí</value>
-  </data>
-    <data name="XAML_ChangePath" xml:space="preserve">
-    <value>Modificar carpeta</value>
-  </data>
-    <data name="Setting_DownloadPrerelease" xml:space="preserve">
-    <value>Descargar versión de pre-estable: </value>
-  </data>
-    <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
-    <value>Gitee</value>
-  </data>
-    <data name="Setting_DownloadSource_GitHub" xml:space="preserve">
-    <value>GitHub</value>
-  </data>
-    <data name="Setting_DownloadSource" xml:space="preserve">
-    <value>Descarga Oficial:</value>
-  </data>
-    <data name="ModFilterType_All" xml:space="preserve">
-    <value>Mostrar todo</value>
-  </data>
-    <data name="ModFilterType_Enabled" xml:space="preserve">
-    <value>Activo</value>
-  </data>
-    <data name="XAML_Font" xml:space="preserve">
-    <value>Fuente:</value>
-  </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
-    <value>¡Ayuda a traducir!</value>
-  </data>
-    <data name="ModFilterType_Installed" xml:space="preserve">
-    <value>Instalado</value>
-  </data>
-    <data name="ModFilterType_Incompatible" xml:space="preserve">
-    <value>No compatible</value>
-  </data>
-    <data name="Button_Install" xml:space="preserve">
-    <value>Instalar</value>
-  </data>
-    <data name="Setting_Title_Language" xml:space="preserve">
-        <value>Idioma</value>
-    </data>
-    <data name="XAML_Folder_Log" xml:space="preserve">
-    <value>Ir a mi Log</value>
-  </data>
-    <data name="AllGameVersionCompatible" xml:space="preserve">
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllGameVersionCompatible" xml:space="preserve">
     <value>Todas</value>
   </data>
-    <data name="XAML_Mod_Dependencies" xml:space="preserve">
-    <value>Dependencias:</value>
+  <data name="Button_Apply" xml:space="preserve">
+    <value>Aplicar</value>
   </data>
-    <data name="XAML_Mod_Description" xml:space="preserve">
-    <value>{0} \n\nAutor: {1} \nUltima versión: {2} \nVersiones de Muse Dash compatibles: {3}</value>
+  <data name="Button_Install" xml:space="preserve">
+    <value>Instalar</value>
   </data>
-    <data name="XAML_Mod_Duplicate" xml:space="preserve">
-    <value>Duplicado de:</value>
-  </data>
-    <data name="ModState_Modified" xml:space="preserve">
-        <value>Modificado</value>
-    </data>
-    <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>Versión instalada: {0} (MODO DESARROLLADOR)</value>
-  </data>
-    <data name="ModState_Normal" xml:space="preserve">
-        <value>instalada</value>
-    </data>
-    <data name="ModFilterType_Outdated" xml:space="preserve">
-    <value>Desactualizado</value>
-  </data>
-    <data name="XAML_Path" xml:space="preserve">
-    <value>Carpeta de Muse Dash</value>
-  </data>
-    <data name="Button_Reinstall" xml:space="preserve">
+  <data name="Button_Reinstall" xml:space="preserve">
     <value>Reinstalar</value>
   </data>
-    <data name="SearchBarWatermark_Mod" xml:space="preserve">
-    <value>Buscar mods (Nombre, Autor, Descripción)</value>
-  </data>
-    <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-    <value>Desactivar dependencia al eliminar un Mod</value>
-  </data>
-    <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-    <value>Desactivar dependencia al desactivar un Mod</value>
-  </data>
-    <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-    <value>Activar dependencias al activar un Mod</value>
-  </data>
-    <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-    <value>Activar dependencias al instalar un Mod</value>
-  </data>
-    <data name="XAML_TroubleShoot" xml:space="preserve">
-    <value>Reportar un\nproblema</value>
-  </data>
-    <data name="Button_Uninstall" xml:space="preserve">
+  <data name="Button_Uninstall" xml:space="preserve">
     <value>Desinstalar</value>
   </data>
-    <data name="Button_Update" xml:space="preserve">
+  <data name="Button_Update" xml:space="preserve">
     <value>Actualizar</value>
   </data>
-    <data name="Setting_DownloadSource_Custom" xml:space="preserve">
-    <value>Custom</value>
+  <data name="ModFilterType_All" xml:space="preserve">
+    <value>Mostrar todo</value>
   </data>
-    <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-    <value>Ingresa el enlace de descarga</value>
+  <data name="ModFilterType_Enabled" xml:space="preserve">
+    <value>Activo</value>
   </data>
-    <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>El enlace debe terminar en una "/", ser público y ser compatible con "ModLinks.json" (La misma estructura que en Github)\n¡Tomará efecto al reiniciar el programa!</value>
+  <data name="ModFilterType_Incompatible" xml:space="preserve">
+    <value>No compatible</value>
   </data>
-    <data name="XAML_Chart_SearchBar" xml:space="preserve">
-    <value>Buscar (Canción, Autor, Diseñador)</value>
+  <data name="ModFilterType_Installed" xml:space="preserve">
+    <value>Instalado</value>
   </data>
-    <data name="XAML_Download_Chart" xml:space="preserve">
-    <value>Descargar</value>
+  <data name="ModFilterType_Outdated" xml:space="preserve">
+    <value>Desactualizado</value>
   </data>
-    <data name="XAML_Chart_Downloads" xml:space="preserve">
-    <value>Descargas: </value>
-  </data>
-    <data name="XAML_Chart_Likes" xml:space="preserve">
-    <value>Favoritos: </value>
-  </data>
-    <data name="XAML_Charter" xml:space="preserve">
-    <value>Diseñador: </value>
-  </data>
-    <data name="XAML_ChartSortOptions" xml:space="preserve">
-    <value>Ordenar por: </value>
-  </data>
-    <data name="XAML_ChartFilterTypes" xml:space="preserve">
-    <value>Dificultad</value>
-  </data>
-    <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-    <value>N/A</value>
-  </data>
-    <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-    <value>Favoritos</value>
-  </data>
-    <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-    <value>Descargas</value>
-  </data>
-    <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-    <value>Nuevos</value>
-  </data>
-    <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-    <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-    <value>Dificultad</value>
-  </data>
-    <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
-    <value>Fácil</value>
-  </data>
-    <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
-    <value>Difícil</value>
-  </data>
-    <data name="XAML_ChartFilterType_Master" xml:space="preserve">
-    <value>Maestro</value>
-  </data>
-    <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
-    <value>Oculto</value>
-  </data>
-    <data name="XAML_InfoJson_ChartName" xml:space="preserve">
-    <value>Canción</value>
-  </data>
-    <data name="XAML_InfoJson_Author" xml:space="preserve">
-    <value>Artista</value>
-  </data>
-    <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
-    <value>Diseñador</value>
-  </data>
-    <data name="XAML_InfoJson_Scene" xml:space="preserve">
-    <value>Escena</value>
-  </data>
-    <data name="XAML_InfoJson_BPM" xml:space="preserve">
-    <value>BPM</value>
-  </data>
-    <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
-    <value>Dificultad</value>
-  </data>
-    <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
-    <value>Buscar Tags</value>
-  </data>
-    <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
-    <value>Ocultar modo BMS</value>
-  </data>
-    <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
-    <value>Ocultar dificultad BMS</value>
-  </data>
-    <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
-    <value>Ocultar mensaje BMS</value>
-  </data>
-    <data name="XAML_ChooseChartPath" xml:space="preserve">
-    <value>Elige la carpeta de Chart</value>
-  </data>
-    <data name="XAML_Scene_SpaceStation" xml:space="preserve">
-    <value>Estación Espacial</value>
-  </data>
-    <data name="XAML_Scene_Retrocity" xml:space="preserve">
-    <value>Ciudad Retro</value>
-  </data>
-    <data name="XAML_Scene_Castle" xml:space="preserve">
-    <value>Castillo</value>
-  </data>
-    <data name="XAML_Scene_RainyNight" xml:space="preserve">
-    <value>Lluvia Nocturna</value>
-  </data>
-    <data name="XAML_Scene_Candyland" xml:space="preserve">
-    <value>Bosque de caramelo</value>
-  </data>
-    <data name="XAML_Scene_Oriental" xml:space="preserve">
-    <value>Oriental</value>
-  </data>
-    <data name="XAML_Scene_LetsGroove" xml:space="preserve">
-    <value>Groove Coaster</value>
-  </data>
-    <data name="XAML_Scene_Touhou" xml:space="preserve">
-    <value>Touhou</value>
-  </data>
-    <data name="XAML_Scene_DJMAX" xml:space="preserve">
-    <value>DJMAX</value>
-  </data>
-    <data name="Panel_Setting_About" xml:space="preserve">
-    <value>Créditos</value>
-  </data>
-    <data name="Page_Home" xml:space="preserve">
+  <data name="ModState_Modified" xml:space="preserve">
+        <value>Modificado</value>
+    </data>
+  <data name="ModState_Normal" xml:space="preserve">
+        <value>instalada</value>
+    </data>
+  <data name="Page_Home" xml:space="preserve">
     <value>Más información</value>
   </data>
-    <data name="Page_Setting" xml:space="preserve">
-    <value>Ajustes</value>
-  </data>
-    <data name="Page_LogAnalysis" xml:space="preserve">
+  <data name="Page_LogAnalysis" xml:space="preserve">
     <value>Analizar</value>
   </data>
-    <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
+  <data name="Page_Setting" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="Panel_Setting_About" xml:space="preserve">
+    <value>Créditos</value>
+  </data>
+  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+    <value>Buscar mods (Nombre, Autor, Descripción)</value>
+  </data>
+  <data name="Setting_DownloadPrerelease" xml:space="preserve">
+    <value>Descargar versión de pre-estable: </value>
+  </data>
+  <data name="Setting_DownloadSource" xml:space="preserve">
+    <value>Descarga Oficial:</value>
+  </data>
+  <data name="Setting_DownloadSource_Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
+    <value>Gitee</value>
+  </data>
+  <data name="Setting_DownloadSource_GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
+    <value>GitHub Mirror</value>
+  </data>
+  <data name="Setting_Title_Language" xml:space="preserve">
+        <value>Idioma</value>
+    </data>
+  <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
-    <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
+  <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
+  </data>
+  <data name="XAML_Analyze" xml:space="preserve">
+    <value>Analizar\neste log</value>
+  </data>
+  <data name="XAML_AskType_Always" xml:space="preserve">
+    <value>Preguntar primero</value>
+  </data>
+  <data name="XAML_AskType_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="XAML_AskType_Yes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="XAML_ChangePath" xml:space="preserve">
+    <value>Modificar carpeta</value>
+  </data>
+  <data name="XAML_Charter" xml:space="preserve">
+    <value>Diseñador: </value>
+  </data>
+  <data name="XAML_ChartFilterTypes" xml:space="preserve">
+    <value>Dificultad</value>
+  </data>
+  <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
+    <value>Fácil</value>
+  </data>
+  <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
+    <value>Difícil</value>
+  </data>
+  <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
+    <value>Oculto</value>
+  </data>
+  <data name="XAML_ChartFilterType_Master" xml:space="preserve">
+    <value>Maestro</value>
+  </data>
+  <data name="XAML_ChartSortOptions" xml:space="preserve">
+    <value>Ordenar por: </value>
+  </data>
+  <data name="XAML_ChartSortOption_Default" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
+    <value>Descargas</value>
+  </data>
+  <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
+    <value>Nuevos</value>
+  </data>
+  <data name="XAML_ChartSortOption_Level" xml:space="preserve">
+    <value>Dificultad</value>
+  </data>
+  <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
+    <value>Favoritos</value>
+  </data>
+  <data name="XAML_ChartSortOption_Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="XAML_Chart_Downloads" xml:space="preserve">
+    <value>Descargas: </value>
+  </data>
+  <data name="XAML_Chart_Likes" xml:space="preserve">
+    <value>Favoritos: </value>
+  </data>
+  <data name="XAML_Chart_SearchBar" xml:space="preserve">
+    <value>Buscar (Canción, Autor, Diseñador)</value>
+  </data>
+  <data name="XAML_Check_Update" xml:space="preserve">
+    <value>Comprobar actualización</value>
+  </data>
+  <data name="XAML_ChooseChartPath" xml:space="preserve">
+    <value>Elige la carpeta de Chart</value>
+  </data>
+  <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
+    <value>El enlace debe terminar en una "/", ser público y ser compatible con "ModLinks.json" (La misma estructura que en Github)\n¡Tomará efecto al reiniciar el programa!</value>
+  </data>
+  <data name="XAML_Download_Chart" xml:space="preserve">
+    <value>Descargar</value>
+  </data>
+  <data name="XAML_Folder_Log" xml:space="preserve">
+    <value>Ir a mi Log</value>
+  </data>
+  <data name="XAML_Font" xml:space="preserve">
+    <value>Fuente:</value>
+  </data>
+  <data name="XAML_HelpTranslate" xml:space="preserve">
+    <value>¡Ayuda a traducir!</value>
+  </data>
+  <data name="XAML_InfoJson_Author" xml:space="preserve">
+    <value>Artista</value>
+  </data>
+  <data name="XAML_InfoJson_BPM" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="XAML_InfoJson_ChartName" xml:space="preserve">
+    <value>Canción</value>
+  </data>
+  <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
+    <value>Dificultad</value>
+  </data>
+  <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
+    <value>Ocultar dificultad BMS</value>
+  </data>
+  <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
+    <value>Ocultar mensaje BMS</value>
+  </data>
+  <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
+    <value>Ocultar modo BMS</value>
+  </data>
+  <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
+    <value>Diseñador</value>
+  </data>
+  <data name="XAML_InfoJson_Scene" xml:space="preserve">
+    <value>Escena</value>
+  </data>
+  <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
+    <value>Buscar Tags</value>
+  </data>
+  <data name="XAML_Mod_Dependencies" xml:space="preserve">
+    <value>Dependencias:</value>
+  </data>
+  <data name="XAML_Mod_Description" xml:space="preserve">
+    <value>{0} \n\nAutor: {1} \nUltima versión: {2} \nVersiones de Muse Dash compatibles: {3}</value>
+  </data>
+  <data name="XAML_Mod_Duplicate" xml:space="preserve">
+    <value>Duplicado de:</value>
+  </data>
+  <data name="XAML_Mod_Newer" xml:space="preserve">
+    <value>Versión instalada: {0} (MODO DESARROLLADOR)</value>
+  </data>
+  <data name="XAML_Path" xml:space="preserve">
+    <value>Carpeta de Muse Dash</value>
+  </data>
+  <data name="XAML_ReportBug" xml:space="preserve">
+    <value>Reporta un error</value>
+  </data>
+  <data name="XAML_Scene_Candyland" xml:space="preserve">
+    <value>Bosque de caramelo</value>
+  </data>
+  <data name="XAML_Scene_Castle" xml:space="preserve">
+    <value>Castillo</value>
+  </data>
+  <data name="XAML_Scene_DJMAX" xml:space="preserve">
+    <value>DJMAX</value>
+  </data>
+  <data name="XAML_Scene_LetsGroove" xml:space="preserve">
+    <value>Groove Coaster</value>
+  </data>
+  <data name="XAML_Scene_Oriental" xml:space="preserve">
+    <value>Oriental</value>
+  </data>
+  <data name="XAML_Scene_RainyNight" xml:space="preserve">
+    <value>Lluvia Nocturna</value>
+  </data>
+  <data name="XAML_Scene_Retrocity" xml:space="preserve">
+    <value>Ciudad Retro</value>
+  </data>
+  <data name="XAML_Scene_SpaceStation" xml:space="preserve">
+    <value>Estación Espacial</value>
+  </data>
+  <data name="XAML_Scene_Touhou" xml:space="preserve">
+    <value>Touhou</value>
+  </data>
+  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+    <value>Desactivar dependencia al eliminar un Mod</value>
+  </data>
+  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+    <value>Desactivar dependencia al desactivar un Mod</value>
+  </data>
+  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+    <value>Activar dependencias al activar un Mod</value>
+  </data>
+  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+    <value>Activar dependencias al instalar un Mod</value>
+  </data>
+  <data name="XAML_TroubleShoot" xml:space="preserve">
+    <value>Reportar un\nproblema</value>
+  </data>
+  <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
+    <value>Ingresa el enlace de descarga</value>
   </data>
 </root>
