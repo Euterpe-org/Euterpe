@@ -4011,3 +4011,10 @@ indent_style = unset
 insert_final_newline = false
 tab_width = unset
 trim_trailing_whitespace = false
+
+# RESX
+[*.resx]
+resx_formatter_sort_entries = true
+resx_formatter_remove_xsd_schema = true
+resx_formatter_remove_documentation_comment = true
+resx_formatter_sort_comparer = OrdinalIgnoreCase
