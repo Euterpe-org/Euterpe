@@ -2,15 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Modding"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Modding"
              x:Class="MuseDashModTools.Views.Panels.Modding.MelonLoaderPanel"
-             x:DataType="pages:MelonLoaderPanelViewModel"
+             x:DataType="vm:MelonLoaderPanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:MelonLoaderPanelViewModel />
+        <vm:MelonLoaderPanelViewModel />
     </Design.DataContext>
 
     <StackPanel Margin="0,0,0,40"

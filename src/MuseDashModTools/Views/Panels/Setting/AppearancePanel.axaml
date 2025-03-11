@@ -5,15 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:models="clr-namespace:MuseDashModTools.Models;assembly=MuseDashModTools.Models"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AppearancePanel"
-             x:DataType="pages:AppearancePanelViewModel"
+             x:DataType="vm:AppearancePanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:AppearancePanelViewModel />
+        <vm:AppearancePanelViewModel />
     </Design.DataContext>
 
     <StackPanel MinWidth="600"

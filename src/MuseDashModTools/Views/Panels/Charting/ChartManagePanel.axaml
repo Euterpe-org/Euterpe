@@ -2,15 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Charting"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Charting"
              x:Class="MuseDashModTools.Views.Panels.Charting.ChartManagePanel"
-             x:DataType="pages:ChartManagePanelViewModel"
+             x:DataType="vm:ChartManagePanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:ChartManagePanelViewModel />
+        <vm:ChartManagePanelViewModel />
     </Design.DataContext>
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"

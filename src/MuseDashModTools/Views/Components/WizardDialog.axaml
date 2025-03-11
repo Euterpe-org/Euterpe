@@ -1,16 +1,13 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:MuseDashModTools.ViewModels.Components"
-        x:Class="MuseDashModTools.Views.Components.WizardDialog"
-        x:DataType="vm:WizardDialogViewModel"
-        MinWidth="1100"
-        MinHeight="700"
-        mc:Ignorable="d"
-        d:DesignHeight="450"
-        d:DesignWidth="800"
-        WindowStartupLocation="CenterScreen">
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Components"
+             x:Class="MuseDashModTools.Views.Components.WizardDialog"
+             x:DataType="vm:WizardDialogViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
 
     <Design.DataContext>
         <vm:WizardDialogViewModel />
@@ -22,4 +19,4 @@
         <Button Grid.Row="2">Modder</Button>
         <Button Grid.Row="3" Command="{Binding SkipWizardCommand}">Skip</Button>
     </Grid>
-</Window>
+</UserControl>

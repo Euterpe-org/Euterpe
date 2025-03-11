@@ -2,15 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AdvancedPanel"
-             x:DataType="pages:AdvancedPanelViewModel"
+             x:DataType="vm:AdvancedPanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:AdvancedPanelViewModel />
+        <vm:AdvancedPanelViewModel />
     </Design.DataContext>
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"

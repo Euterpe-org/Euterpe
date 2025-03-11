@@ -4,16 +4,16 @@
              xmlns:enums="clr-namespace:MuseDashModTools.Models.Enums;assembly=MuseDashModTools.Models"
              xmlns:local="clr-namespace:MuseDashModTools"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:moddingPanels="using:MuseDashModTools.ViewModels.Panels.Modding"
              xmlns:u="https://irihi.tech/ursa"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Modding"
              x:Class="MuseDashModTools.Views.Panels.Modding.ModManagePanel"
-             x:DataType="moddingPanels:ModManagePanelViewModel"
+             x:DataType="vm:ModManagePanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <moddingPanels:ModManagePanelViewModel />
+        <vm:ModManagePanelViewModel />
     </Design.DataContext>
 
     <!--  Main Layout Grid  -->
@@ -122,7 +122,7 @@
                                                   Margin="0,0,4,0"
                                                   HorizontalAlignment="Right"
                                                   VerticalAlignment="Center"
-                                                  Command="{Binding $parent[UserControl].((moddingPanels:ModManagePanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
+                                                  Command="{Binding $parent[UserControl].((vm:ModManagePanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
                                                   CommandParameter="{Binding ., Mode=OneWay}"
                                                   IsChecked="{Binding !IsDisabled, Mode=OneWay}"
                                                   IsVisible="{Binding IsLocal, Mode=OneWay}" />
@@ -171,14 +171,12 @@
                         <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
 
                             <!--  Mod Title  -->
-                            <TextBlock Grid.Row="0"
-                                       Grid.Column="0"
+                            <TextBlock Grid.Row="0" Grid.Column="0"
                                        Classes="PanelTitle"
                                        Text="{Binding SelectedMod.Name, Mode=OneWay}" />
 
                             <!--  Action Buttons  -->
-                            <StackPanel Grid.Row="0"
-                                        Grid.Column="1"
+                            <StackPanel Grid.Row="0" Grid.Column="1"
                                         Classes="ActionButtonsContainer">
 
                                 <!--  Config Button  -->
@@ -219,8 +217,7 @@
                             </StackPanel>
 
                             <!--  Mod Status Tags  -->
-                            <StackPanel Grid.Row="1"
-                                        Grid.Column="0"
+                            <StackPanel Grid.Row="1" Grid.Column="0"
                                         Grid.ColumnSpan="2"
                                         Margin="0,8"
                                         Classes="ActionButtonsContainer">
@@ -259,8 +256,7 @@
                             </StackPanel>
 
                             <!--  Description  -->
-                            <TextBlock Grid.Row="2"
-                                       Grid.Column="0"
+                            <TextBlock Grid.Row="2" Grid.Column="0"
                                        Grid.ColumnSpan="2"
                                        Margin="0,8,0,0"
                                        Text="{Binding SelectedMod.Description, Mode=OneWay}"

@@ -3,15 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.ExperiencePanel"
-             x:DataType="pages:ExperiencePanelViewModel"
+             x:DataType="vm:ExperiencePanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:ExperiencePanelViewModel />
+        <vm:ExperiencePanelViewModel />
     </Design.DataContext>
 
     <StackPanel MinWidth="600"

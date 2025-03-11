@@ -3,15 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
              x:Class="MuseDashModTools.Views.Pages.SettingPage"
-             x:DataType="pages:SettingPageViewModel"
+             x:DataType="vm:SettingPageViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:SettingPageViewModel />
+        <vm:SettingPageViewModel />
     </Design.DataContext>
 
     <Grid RowDefinitions="Auto, *">

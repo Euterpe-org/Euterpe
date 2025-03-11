@@ -5,15 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AboutPanel"
-             x:DataType="pages:AboutPanelViewModel"
+             x:DataType="vm:AboutPanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:AboutPanelViewModel />
+        <vm:AboutPanelViewModel />
     </Design.DataContext>
 
     <ScrollViewer>
@@ -143,7 +143,7 @@
                                         <DataTemplate x:DataType="models:ContributorCardItem">
                                             <mdmt:ContributorCardControl Margin="8"
                                                                          Avatar="{Binding Avatar, Mode=OneTime}"
-                                                                         ButtonCommand="{Binding $parent[UserControl].((pages:AboutPanelViewModel)DataContext).OpenUrlCommand, Mode=OneTime, FallbackValue=null}"
+                                                                         ButtonCommand="{Binding $parent[UserControl].((vm:AboutPanelViewModel)DataContext).OpenUrlCommand, Mode=OneTime, FallbackValue=null}"
                                                                          ContributorDescription="{Binding Description, Mode=OneTime}"
                                                                          ContributorName="{Binding Name, Mode=OneTime}"
                                                                          Links="{Binding Links, Mode=OneTime}" />
