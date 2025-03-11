@@ -13,6 +13,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(true);
+        await SettingService.LoadAsync().ConfigureAwait(false);
+        GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
+        LocalizationService.SetLanguage(Config.LanguageCode);
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
@@ -22,7 +25,13 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     #region Injections
 
     [UsedImplicitly]
+    public required Config Config { get; init; }
+
+    [UsedImplicitly]
     public required NavigationService NavigationService { get; init; }
+
+    [UsedImplicitly]
+    public required ILocalizationService LocalizationService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<MainWindowViewModel> Logger { get; init; }
@@ -31,6 +40,8 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     [UsedImplicitly]
     public required IUpdateService UpdateService { get; init; }
 #endif
+    [UsedImplicitly]
+    public required ISettingService SettingService { get; init; }
 
     #endregion Injections
 }
