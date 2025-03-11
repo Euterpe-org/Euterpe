@@ -6,9 +6,8 @@ public class IndentedStringBuilder
 {
     private const byte IndentSize = 4;
     private readonly StringBuilder _stringBuilder = new();
-    private bool _indentPending = true;
 
-    public int IndentCount { get; private set; }
+    private int IndentCount { get; set; }
 
     public IndentedStringBuilder Append(string value)
     {
@@ -44,7 +43,7 @@ public class IndentedStringBuilder
         return this;
     }
 
-    public IndentedStringBuilder Append(IEnumerable<char> value)
+    public IndentedStringBuilder Append(ReadOnlySpan<char> value)
     {
         DoIndent();
         foreach (var chr in value)
@@ -57,20 +56,15 @@ public class IndentedStringBuilder
 
     public IndentedStringBuilder AppendLine()
     {
-        AppendLine(string.Empty);
+        _stringBuilder.AppendLine();
 
         return this;
     }
 
     public IndentedStringBuilder AppendLine(string value)
     {
-        if (value.Length != 0)
-        {
-            DoIndent();
-        }
-
+        DoIndent();
         _stringBuilder.AppendLine(value);
-        _indentPending = true;
 
         return this;
     }
@@ -79,7 +73,7 @@ public class IndentedStringBuilder
     {
         DoIndent();
         _stringBuilder.Append(value);
-        _indentPending = true;
+        _stringBuilder.AppendLine();
 
         return this;
     }
@@ -107,11 +101,9 @@ public class IndentedStringBuilder
 
     private void DoIndent()
     {
-        if (_indentPending && IndentCount > 0)
+        if (IndentCount > 0)
         {
             _stringBuilder.Append(' ', IndentCount * IndentSize);
         }
-
-        _indentPending = false;
     }
 }
