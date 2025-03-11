@@ -2,6 +2,12 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="R3"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj"/>
     </ItemGroup>
 
 </Project>
