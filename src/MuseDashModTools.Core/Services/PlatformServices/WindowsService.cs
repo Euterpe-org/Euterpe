@@ -27,13 +27,14 @@ internal sealed class WindowsService : IPlatformService
 
         if (folderPath is null)
         {
+            Logger.ZLogWarning($"Auto detect steam install on common path failed.");
             if (!GetPathFromRegistry(out folderPath))
             {
                 Logger.ZLogWarning($"Failed to auto detect game path on Windows");
                 return false;
             }
 
-            Logger.ZLogInformation($"Auto detect steam install on common path failed.\r\nDetected game path from Registry: {folderPath}");
+            Logger.ZLogInformation($"Detected game path from Registry: {folderPath}");
             return true;
         }
 
