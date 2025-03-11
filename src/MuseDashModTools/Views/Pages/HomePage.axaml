@@ -2,16 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Pages"
              xmlns:u="https://irihi.tech/ursa"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
              x:Class="MuseDashModTools.Views.Pages.HomePage"
-             x:DataType="pages:HomePageViewModel"
+             x:DataType="vm:HomePageViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:HomePageViewModel />
+        <vm:HomePageViewModel />
     </Design.DataContext>
 
     <Grid>

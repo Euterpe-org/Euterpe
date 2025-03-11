@@ -2,15 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="clr-namespace:MuseDashModTools.ViewModels.Pages"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
              x:Class="MuseDashModTools.Views.Pages.LogAnalysisPage"
-             x:DataType="pages:LogAnalysisPageViewModel"
+             x:DataType="vm:LogAnalysisPageViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:LogAnalysisPageViewModel />
+        <vm:LogAnalysisPageViewModel />
     </Design.DataContext>
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"

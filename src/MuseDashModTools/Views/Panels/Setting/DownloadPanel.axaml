@@ -4,15 +4,15 @@
              xmlns:enums="clr-namespace:MuseDashModTools.Models.Enums;assembly=MuseDashModTools.Models"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
+             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.DownloadPanel"
-             x:DataType="pages:DownloadPanelViewModel"
+             x:DataType="vm:DownloadPanelViewModel"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="1000">
 
     <Design.DataContext>
-        <pages:DownloadPanelViewModel />
+        <vm:DownloadPanelViewModel />
     </Design.DataContext>
 
     <StackPanel MinWidth="600"
