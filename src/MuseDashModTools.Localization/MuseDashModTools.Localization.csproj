@@ -1,49 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+    <Target Name="AddNoCultureResxFilesAsAdditionalFiles"
+            BeforeTargets="GenerateMSBuildEditorConfigFileCore;CoreCompile"
+            Condition="'@(EmbeddedResource)' != ''">
+        <ItemGroup>
+            <ResxResources Include="@(EmbeddedResource)" Condition="'%(Extension)' == '.resx'"/>
+        </ItemGroup>
+        <AssignCulture Files="@(ResxResources)">
+            <Output TaskParameter="AssignedFilesWithCulture" ItemName="ResxWithCulture"/>
+            <Output TaskParameter="AssignedFilesWithNoCulture" ItemName="ResxWithNoCulture"/>
+        </AssignCulture>
+        <ItemGroup>
+            <AdditionalFiles Include="@(ResxWithNoCulture)"/>
+        </ItemGroup>
+    </Target>
+
     <ItemGroup>
-        <EmbeddedResource Update="General\General.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>General.Designer.cs</LastGenOutput>
-            <CustomToolNamespace>$(RootNamespace)</CustomToolNamespace>
-        </EmbeddedResource>
-        <Compile Update="General\General.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>General.resx</DependentUpon>
-        </Compile>
-
-        <EmbeddedResource Update="ModDescription\ModDescription.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>ModDescription.Designer.cs</LastGenOutput>
-            <CustomToolNamespace>$(RootNamespace)</CustomToolNamespace>
-        </EmbeddedResource>
-        <Compile Update="ModDescription\ModDescription.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>ModDescription.resx</DependentUpon>
-        </Compile>
-
-        <EmbeddedResource Update="MsgBox\MsgBox.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>MsgBox.Designer.cs</LastGenOutput>
-            <CustomToolNamespace>$(RootNamespace)</CustomToolNamespace>
-        </EmbeddedResource>
-        <Compile Update="MsgBox\MsgBox.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>MsgBox.resx</DependentUpon>
-        </Compile>
-
-        <EmbeddedResource Update="XAML\XAML.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>XAML.Designer.cs</LastGenOutput>
-            <CustomToolNamespace>$(RootNamespace)</CustomToolNamespace>
-        </EmbeddedResource>
-        <Compile Update="XAML\XAML.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>XAML.resx</DependentUpon>
-        </Compile>
+        <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     </ItemGroup>
 
 </Project>

@@ -8,6 +8,10 @@
     "DebugMuseDashModToolsCoreSourceGenerator": {
       "commandName": "DebugRoslynComponent",
       "targetProject": "../MuseDashModTools.Core/MuseDashModTools.Core.csproj"
+    },
+    "DebugMuseDashModToolsLocalizationSourceGenerator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "../MuseDashModTools.Localization/MuseDashModTools.Localization.csproj"
     }
   }
 }
