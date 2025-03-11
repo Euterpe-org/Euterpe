@@ -45,7 +45,14 @@ public sealed class App : Application
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
             desktop.MainWindow = Container.Resolve<WizardWindow>();
-            desktop.Exit += async delegate { await OnExitAsync().ConfigureAwait(false); };
+
+            Observable.FromEventHandler<ControlledApplicationLifetimeExitEventArgs>(
+                    handler => desktop.Exit += handler,
+                    handler => desktop.Exit -= handler)
+                .OnErrorResumeAsFailure()
+                .SubscribeAwait((_, _) => new ValueTask(OnExitAsync()),
+                    result => Container.Resolve<ILogger<App>>().ZLogError(result.Exception, $"Exception when saving Setting"),
+                    configureAwait: false);
         }
 
         this.ObservePropertyChanged(x => x.ActualThemeVariant)
