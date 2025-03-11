@@ -1,8 +1,8 @@
 ﻿namespace MuseDashModTools.Views.Components;
 
-public partial class WizardWindow : UserControl
+public partial class WizardDialog : UserControl
 {
-    public WizardWindow()
+    public WizardDialog()
     {
         InitializeComponent();
     }

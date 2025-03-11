@@ -52,7 +52,7 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
             sb.AppendLine($$"""
                             public static global::System.Resources.ResourceManager ResourceManager =>
                             field ??= new global::System.Resources.ResourceManager(
-                                "{{MuseDashModToolsLocalizationNamespace}}.{{className}}",
+                                "{{MuseDashModToolsLocalizationNamespace}}.{{className}}.{{className}}",
                                 typeof({{className}}).Assembly
                             );
 
