@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.ViewModels.Components;
 
-public sealed partial class WizardWindowViewModel : ViewModelBase, IDialogContext
+public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
     [ObservableProperty]
     public partial double Progress { get; set; }
@@ -17,7 +17,7 @@ public sealed partial class WizardWindowViewModel : ViewModelBase, IDialogContex
         await SettingService.LoadAsync().ConfigureAwait(false);
         GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
         LocalizationService.SetLanguage(Config.LanguageCode);
-        Logger.ZLogInformation($"{nameof(WizardWindowViewModel)} Initialized");
+        Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
 
     [RelayCommand]
@@ -32,7 +32,7 @@ public sealed partial class WizardWindowViewModel : ViewModelBase, IDialogContex
     public required ILocalizationService LocalizationService { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<WizardWindowViewModel> Logger { get; init; }
+    public required ILogger<WizardDialogViewModel> Logger { get; init; }
 
     [UsedImplicitly]
     public required ISettingService SettingService { get; init; }

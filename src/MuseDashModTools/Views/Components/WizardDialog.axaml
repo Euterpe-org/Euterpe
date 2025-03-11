@@ -3,8 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:MuseDashModTools.ViewModels.Components"
-        x:Class="MuseDashModTools.Views.Components.WizardWindow"
-        x:DataType="vm:WizardWindowViewModel"
+        x:Class="MuseDashModTools.Views.Components.WizardDialog"
+        x:DataType="vm:WizardDialogViewModel"
         MinWidth="1100"
         MinHeight="700"
         mc:Ignorable="d"
@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
-        <vm:WizardWindowViewModel />
+        <vm:WizardDialogViewModel />
     </Design.DataContext>
 
     <Grid RowDefinitions="*,*,*,*">
