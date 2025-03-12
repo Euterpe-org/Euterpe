@@ -24,9 +24,9 @@
                 <mdmt:NaviButtonsControl Source="{Binding DropDownButtons, Mode=OneTime}" />
             </Panel>
         </Border>
-        <ContentControl Grid.Row="1"
-                        Margin="0,10,10,10"
-                        Content="{Binding Content, Mode=OneWay}" />
+        <TransitioningContentControl Grid.Row="1"
+                                     Margin="0,10,10,10"
+                                     Content="{Binding Content, Mode=OneWay}" />
     </Grid>
 
 </UserControl>
