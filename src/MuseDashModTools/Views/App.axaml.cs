@@ -12,6 +12,8 @@ public sealed class App : Application
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
     public static readonly IContainer Container = ConfigureServices();
 
+    public App() => DataContext = Container.Resolve<AppViewModel>();
+
     private static IContainer ConfigureServices()
     {
         var services = new ServiceCollection();
@@ -28,8 +30,6 @@ public sealed class App : Application
         return builder.Build();
     }
 
-    public App() => DataContext = Container.Resolve<AppViewModel>();
-
     public override void Initialize()
     {
         this.EnableHotReload();
@@ -42,23 +42,13 @@ public sealed class App : Application
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
 #if RELEASE
-        Dispatcher.UIThread.UnhandledException += LogException;
+        HandleUIThreadException();
 #endif
-        var config = Container.Resolve<Config>();
-        RequestedThemeVariant = AvaloniaResources.ThemeVariants[config.Theme];
-        Container.Resolve<LocalizationService>().SetLanguage(config.LanguageCode);
-
+        ApplyConfig();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Container.Resolve<MainWindow>();
-
-            Observable.FromEventHandler<ControlledApplicationLifetimeExitEventArgs>(
-                    handler => desktop.Exit += handler,
-                    handler => desktop.Exit -= handler)
-                .OnErrorResumeAsFailure()
-                .SubscribeAwait((_, _) => new ValueTask(OnExitAsync()),
-                    result => Container.Resolve<ILogger<App>>().ZLogError(result.Exception, $"Exception when saving Setting"),
-                    configureAwait: false);
+            HandleDesktopExit(desktop);
         }
 
         this.ObservePropertyChanged(x => x.ActualThemeVariant)
@@ -67,14 +57,37 @@ public sealed class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    private static Task OnExitAsync() => Container.Resolve<ISettingService>().SaveAsync();
+    private void ApplyConfig()
+    {
+        var config = Container.Resolve<Config>();
+        RequestedThemeVariant = AvaloniaResources.ThemeVariants[config.Theme];
+        Container.Resolve<LocalizationService>().SetLanguage(config.LanguageCode);
+    }
+
+    private static void HandleDesktopExit(IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        Observable.FromEventHandler<ControlledApplicationLifetimeExitEventArgs>(
+                handler => desktop.Exit += handler,
+                handler => desktop.Exit -= handler)
+            .OnErrorResumeAsFailure()
+            .SubscribeAwait((_, _) => new ValueTask(Container.Resolve<ISettingService>().SaveAsync()),
+                result => Container.Resolve<ILogger<App>>().ZLogError(result.Exception, $"Exception when saving Setting"),
+                configureAwait: false);
+    }
 
 #if RELEASE
-    private static void LogException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    private static void HandleUIThreadException()
     {
-        Container.Resolve<ILogger<App>>().ZLogError(e.Exception, $"Unhandled exception");
-        Container.Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
-        Container.Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
+        Observable.FromEvent<DispatcherUnhandledExceptionEventHandler, DispatcherUnhandledExceptionEventArgs>(
+                handler => (sender, args) => handler(args),
+                handler => Dispatcher.UIThread.UnhandledException += handler,
+                handler => Dispatcher.UIThread.UnhandledException -= handler)
+            .Subscribe(e =>
+            {
+                Container.Resolve<ILogger<App>>().ZLogError(e.Exception, $"Unhandled exception");
+                Container.Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
+                Container.Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
+            });
     }
 #endif
 }
