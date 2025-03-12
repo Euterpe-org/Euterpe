@@ -100,11 +100,11 @@
                        Content="{x:Static constants:BuildInfo.DisplayVersion}"
                        Theme="{StaticResource TagLabel}" />
             </StackPanel>
-
         </DockPanel>
-        <ContentControl Grid.Column="1"
-                        Margin="10,40,0,0"
-                        Content="{Binding Content, Mode=OneWay}" />
+
+        <TransitioningContentControl Grid.Column="1"
+                                     Margin="10,40,0,0"
+                                     Content="{Binding Content, Mode=OneWay}" />
     </Grid>
 
 </u:UrsaWindow>

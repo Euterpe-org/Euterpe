@@ -23,9 +23,9 @@
                 <mdmt:NaviPanelListControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
             </Panel>
         </Border>
-        <ContentControl Grid.Row="1"
-                        Margin="0,10,10,10"
-                        Content="{Binding Content, Mode=OneWay}" />
+        <TransitioningContentControl Grid.Row="1"
+                                     Margin="0,10,10,10"
+                                     Content="{Binding Content, Mode=OneWay}" />
     </Grid>
 
 </UserControl>
