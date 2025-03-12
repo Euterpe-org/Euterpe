@@ -73,21 +73,15 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
                 continue;
             }
 
-            if (controlType is not ControlType.Application)
+            if (controlType is ControlType.Application)
             {
-                sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
-                GenerateViewRegistration(sb, name, controlType);
+                sb.AppendLine(
+                    $"builder.RegisterType<{name}ViewModel>().OnActivated(x => new ValueTask(x.Instance.InitializeAsync())).PropertiesAutowired().SingleInstance();");
             }
             else
             {
-                sb.AppendLine($"""
-                               builder.RegisterType<{name}ViewModel>()
-                               .OnActivated(x => Observable.FromEventHandler(
-                                   h => App.Initialized += h,
-                                   h => App.Initialized -= h)
-                               .SubscribeAwait((_, _) => new ValueTask(App.Container.Resolve<AppViewModel>().InitializeAsync())))
-                               .PropertiesAutowired().SingleInstance();
-                               """);
+                sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+                GenerateViewRegistration(sb, name, controlType);
             }
 
             sb.AppendLine();
