@@ -32,6 +32,25 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
             return;
         }
 
+        var sb = new IndentedStringBuilder();
+        sb.AppendLine(Header);
+        sb.AppendLine($$"""
+                        namespace {{MuseDashModToolsLocalizationNamespace}};
+
+                        public static class LocalizationManager
+                        {
+                            public static event EventHandler? CultureChanged;
+
+                            public static global::System.Globalization.CultureInfo? Culture
+                            {
+                                get => field;
+                                set
+                                {
+                                    field = value;
+                                    CultureChanged?.Invoke(null, EventArgs.Empty);
+                        """);
+
+        sb.IncreaseIndent(3);
         foreach (var data in dataCollection)
         {
             if (data is not var (resourceFile, className))
@@ -39,30 +58,38 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
                 continue;
             }
 
+            sb.AppendLine($"{className}.Culture = Culture;");
             GenerateDesignerFile(spc, resourceFile, className);
         }
+
+        sb.ResetIndent();
+        sb.AppendLine("""
+                              }
+                          }
+                      }
+                      """);
+
+        spc.AddSource("LocalizationManager.cs", sb.ToString());
     }
 
     private static void GenerateDesignerFile(SourceProductionContext spc, AdditionalText resourceFile, string className)
     {
-        var sb = new IndentedStringBuilder();
+        var sb = new StringBuilder();
         sb.AppendLine(Header);
         sb.AppendLine($$"""
-                        namespace {{MuseDashModToolsLocalizationNamespace}}
+                        namespace {{MuseDashModToolsLocalizationNamespace}};
+
+                        public static partial class {{className}}
                         {
-                            public static partial class {{className}}
-                            {
-                        """);
+                            [field: global::System.Diagnostics.CodeAnalysis.AllowNullAttribute()] [field: global::System.Diagnostics.CodeAnalysis.MaybeNullAttribute()]
+                            public static global::System.Resources.ResourceManager ResourceManager =>
+                                field ??= new global::System.Resources.ResourceManager("{{MuseDashModToolsLocalizationNamespace}}.{{className}}.{{className}}", typeof({{className}}).Assembly);
 
-        sb.AppendLine($$"""
-                        [field: global::System.Diagnostics.CodeAnalysis.AllowNullAttribute()] [field: global::System.Diagnostics.CodeAnalysis.MaybeNullAttribute()]
-                        public static global::System.Resources.ResourceManager ResourceManager =>
-                        field ??= new global::System.Resources.ResourceManager("{{MuseDashModToolsLocalizationNamespace}}.{{className}}.{{className}}", typeof({{className}}).Assembly);
+                            public static global::System.Globalization.CultureInfo? Culture { get; set; }
 
-                        public static global::System.Globalization.CultureInfo? Culture { get; set; }
+                            public static string GetResourceString(string resourceKey) =>
+                                ResourceManager.GetString(resourceKey, Culture) ?? $"#{resourceKey}#";
 
-                        public static string GetResourceString(string resourceKey, string? defaultValue = null) =>
-                            ResourceManager.GetString(resourceKey, Culture) ?? $"#{resourceKey}#";
                         """);
 
         var xdoc = XDocument.Parse(resourceFile.GetText()!.ToString());
@@ -74,18 +101,16 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
             var value = element.Element("value")!.Value.Trim();
 
             sb.AppendLine($"""
-                           /// <summary>
-                           /// {value.EscapeXmlDoc()}
-                           /// </summary>
-                           public static string {name.GetValidIdentifier()} => GetResourceString("{name}");
+                               /// <summary>
+                               ///     {value.EscapeXmlDoc()}
+                               /// </summary>
+                               public static string {name.GetValidIdentifier()} => GetResourceString("{name}");
+
+                               public const string {name.GetValidIdentifier()}Literal = "{name}";
                            """);
         }
 
-        sb.ResetIndent();
-        sb.AppendLine("""
-                          }
-                      }
-                      """);
+        sb.AppendLine("}");
         spc.AddSource($"{className}.Designer.cs", sb.ToString());
     }
 

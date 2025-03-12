@@ -31,7 +31,7 @@ public sealed partial class AppearancePanelViewModel : ViewModelBase
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required ILocalizationService LocalizationService { get; init; }
+    public required LocalizationService LocalizationService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<AppearancePanelViewModel> Logger { get; init; }

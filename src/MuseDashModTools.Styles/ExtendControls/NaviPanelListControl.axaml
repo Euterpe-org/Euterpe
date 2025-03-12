@@ -31,9 +31,9 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="models:NavItem">
-                            <Label Theme="{StaticResource BorderlessButton}"
-                                   VerticalAlignment="Center"
-                                   Content="{Binding DisplayName, Mode=OneTime}" />
+                            <Label VerticalAlignment="Center"
+                                   Content="{Binding DisplayName.Value, Mode=OneWay}"
+                                   Theme="{StaticResource BorderlessButton}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
 

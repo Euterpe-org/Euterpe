@@ -46,7 +46,7 @@ public sealed class App : Application
 #endif
         var config = Container.Resolve<Config>();
         RequestedThemeVariant = AvaloniaResources.ThemeVariants[config.Theme];
-        Container.Resolve<ILocalizationService>().SetLanguage(config.LanguageCode);
+        Container.Resolve<LocalizationService>().SetLanguage(config.LanguageCode);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

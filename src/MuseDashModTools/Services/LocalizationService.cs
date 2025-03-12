@@ -3,7 +3,7 @@ using Ursa.Themes.Semi;
 
 namespace MuseDashModTools.Services;
 
-internal sealed class LocalizationService : ILocalizationService
+public sealed class LocalizationService
 {
     public Language[] AvailableLanguages { get; } =
     [
@@ -61,6 +61,7 @@ internal sealed class LocalizationService : ILocalizationService
         var culture = CultureInfo.GetCultureInfo(language);
         I18NExtension.Culture = culture;
         CultureInfo.CurrentUICulture = culture;
+        LocalizationManager.Culture = culture;
         SemiTheme.OverrideLocaleResources(GetCurrentApplication(), culture);
 
         Config.LanguageCode = language;

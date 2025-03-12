@@ -1,5 +1,3 @@
-using MuseDashModTools.Localization;
-
 namespace MuseDashModTools.Utils;
 
 public static class ModDescriptionProvider

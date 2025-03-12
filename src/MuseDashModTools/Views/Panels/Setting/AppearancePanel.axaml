@@ -26,9 +26,7 @@
         <!--  Language  -->
         <mdmt:SettingItem Title="{I18N {x:Static local:LangKeys.Setting_Title_Language}}" Description="The current version does not support switching languages.">
             <mdmt:SettingItem.Content>
-                <StackPanel IsEnabled="False"
-                            Orientation="Horizontal"
-                            Spacing="20">
+                <StackPanel Orientation="Horizontal" Spacing="20">
                     <ComboBox MinWidth="200"
                               ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
                               SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}" />
