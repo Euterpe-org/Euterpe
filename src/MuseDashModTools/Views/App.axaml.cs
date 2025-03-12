@@ -11,7 +11,6 @@ public sealed class App : Application
 {
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
     public static readonly IContainer Container = ConfigureServices();
-    public static event EventHandler? Initialized;
 
     private static IContainer ConfigureServices()
     {
@@ -35,7 +34,6 @@ public sealed class App : Application
     {
         this.EnableHotReload();
         AvaloniaXamlLoader.Load(this);
-        Initialized?.Invoke(this, EventArgs.Empty);
     }
 
     public override void OnFrameworkInitializationCompleted()
