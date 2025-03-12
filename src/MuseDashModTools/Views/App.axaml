@@ -19,7 +19,8 @@
             <TrayIcon Icon="/Assets/Icon.ico" ToolTipText="Muse Dash Mod Tools">
                 <TrayIcon.Menu>
                     <NativeMenu>
-                        <NativeMenuItem Header="Show" />
+                        <NativeMenuItem Command="{Binding ShowCommand}" Header="Show" />
+                        <NativeMenuItem Command="{Binding ExitCommand}" Header="Exit" />
                     </NativeMenu>
                 </TrayIcon.Menu>
             </TrayIcon>
