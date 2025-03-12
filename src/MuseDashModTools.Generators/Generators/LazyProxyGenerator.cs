@@ -88,7 +88,7 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 
                         partial class {{className}}
                         {
-                            public Lazy<{{typeName}}> {{typeName}} { get; init; } = null!;
+                            public required Lazy<{{typeName}}> {{typeName}} { get; init; }
 
                         """);
         sb.IncreaseIndent();
