@@ -13,10 +13,12 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(true);
+
         await SettingService.ValidateAsync().ConfigureAwait(true);
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
+
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 

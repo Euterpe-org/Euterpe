@@ -21,9 +21,9 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="models:DropDownButtonItem">
 
-                                <DropDownButton Content="{Binding Text, Mode=OneTime}"
-                                                Theme="{DynamicResource BorderlessDropDownButton}"
-                                                VerticalAlignment="Center">
+                                <DropDownButton VerticalAlignment="Center"
+                                                Content="{Binding Text.Value, Mode=OneWay}"
+                                                Theme="{DynamicResource BorderlessDropDownButton}">
 
                                     <DropDownButton.Styles>
                                         <Style x:DataType="models:DropDownMenuItem" Selector="MenuItem">
@@ -34,8 +34,7 @@
                                     </DropDownButton.Styles>
 
                                     <DropDownButton.Flyout>
-                                        <MenuFlyout ItemsSource="{Binding MenuItems, Mode=OneTime}"
-                                                    Placement="BottomEdgeAlignedRight">
+                                        <MenuFlyout ItemsSource="{Binding MenuItems, Mode=OneTime}" Placement="BottomEdgeAlignedRight">
                                             <MenuFlyout.ItemTemplate>
                                                 <DataTemplate x:DataType="models:DropDownMenuItem">
                                                     <MenuItem />
