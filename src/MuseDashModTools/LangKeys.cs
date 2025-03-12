@@ -1,5 +1,4 @@
 using Antelcat.I18N.Attributes;
-using MuseDashModTools.Localization;
 
 namespace MuseDashModTools;
 

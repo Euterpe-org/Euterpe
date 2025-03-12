@@ -23,6 +23,7 @@ global using MuseDashModTools.Common;
 global using MuseDashModTools.Common.Extensions;
 global using MuseDashModTools.Core.Extensions;
 global using MuseDashModTools.Extensions;
+global using MuseDashModTools.Localization;
 global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Controls;
 global using MuseDashModTools.Models.Enums;
