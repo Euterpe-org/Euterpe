@@ -17,9 +17,9 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         types.Any(x => x.Type.ToString().Contains("UserControl") || x.Type.ToString().Contains("Window"));
 
     private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _) =>
-        context.Node is not ClassDeclarationSyntax classDeclaration
+        context.Node is not ClassDeclarationSyntax { BaseList.Types: var types } classDeclaration
             ? null
-            : new ViewData(classDeclaration.Identifier.Text);
+            : new ViewData(classDeclaration.Identifier.Text, types.Any(x => x.Type.ToString().Contains("Window")));
 
     private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataCollection)
     {
@@ -31,6 +31,8 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         var sb = new IndentedStringBuilder();
         sb.AppendLine(Header);
         sb.AppendLine($$"""
+                        using global::Avalonia.Interactivity;
+
                         namespace MuseDashModTools.Extensions;
 
                         partial class ServiceExtensions
@@ -43,14 +45,25 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         sb.IncreaseIndent(2);
         foreach (var data in dataCollection)
         {
-            if (data is not var (name))
+            if (data is not var (name, isWindow))
             {
                 continue;
             }
 
-            sb.AppendLine($"builder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
-            sb.AppendLine(
-                $"builder.RegisterType<{name}ViewModel>().OnActivating(x => ValueTask.FromResult(x.Instance.InitializeAsync())).PropertiesAutowired().SingleInstance();");
+            var (eventName, eventArgs) = isWindow
+                ? ("Loaded", "<RoutedEventArgs>")
+                : ("Initialized", "");
+
+            sb.AppendLine($$"""
+                            builder.Register<{{name}}>(ctx => new {{name}}{ DataContext = ctx.Resolve<{{name}}ViewModel>() })
+                            .OnActivated(x => Observable.FromEventHandler{{eventArgs}}(
+                                    h => x.Instance.{{eventName}} += h,
+                                    h => x.Instance.{{eventName}} -= h)
+                                .SubscribeAwait((_, _) => new ValueTask(App.Container.Resolve<{{name}}ViewModel>().InitializeAsync())))
+                            .SingleInstance();
+                            """);
+
+            sb.AppendLine($"builder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
             sb.AppendLine();
         }
 
@@ -63,5 +76,5 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
     }
 
-    private sealed record ViewData(string Name);
+    private sealed record ViewData(string Name, bool IsWindow);
 }

@@ -13,7 +13,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(true);
-        await SettingService.LoadAsync().ConfigureAwait(false);
+        await SettingService.LoadAsync().ConfigureAwait(true);
         GetCurrentApplication().RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
         LocalizationService.SetLanguage(Config.LanguageCode);
 #if RELEASE
