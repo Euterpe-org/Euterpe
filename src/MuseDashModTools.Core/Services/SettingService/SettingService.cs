@@ -24,12 +24,10 @@ internal sealed partial class SettingService : ISettingService
 
             Config.CopyFrom(savedConfig);
             Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
-            await CheckValidSettingAsync().ConfigureAwait(true);
         }
         else
         {
             Logger.ZLogInformation($"Setting file not found, using default settings");
-            await CheckValidSettingAsync().ConfigureAwait(true);
         }
     }
 
@@ -38,6 +36,14 @@ internal sealed partial class SettingService : ISettingService
         await using var stream = new FileStream(ConfigPath, FileMode.Create, FileAccess.Write);
         await JsonSerializationService.SerializeConfigAsync(stream, Config).ConfigureAwait(false);
         Logger.ZLogInformation($"Setting saved to {ConfigPath} successfully");
+    }
+
+    public async Task ValidateAsync()
+    {
+        Logger.ZLogInformation($"Checking for valid setting...");
+        await CheckMuseDashFolderAsync().ConfigureAwait(true);
+
+        Logger.ZLogInformation($"Checking for valid setting done");
     }
 
     #region Injections

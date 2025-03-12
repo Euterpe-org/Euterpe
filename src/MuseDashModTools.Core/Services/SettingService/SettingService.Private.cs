@@ -2,14 +2,6 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class SettingService
 {
-    private async Task CheckValidSettingAsync()
-    {
-        Logger.ZLogInformation($"Checking for valid setting...");
-        await CheckMuseDashFolderAsync().ConfigureAwait(true);
-
-        Logger.ZLogInformation($"Checking for valid setting done");
-    }
-
     private async Task CheckMuseDashFolderAsync()
     {
         if (Config.MuseDashFolder.IsNullOrEmpty())

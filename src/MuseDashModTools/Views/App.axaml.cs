@@ -5,12 +5,13 @@ using Avalonia.Markup.Xaml;
 using HotAvalonia;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MuseDashModTools;
+namespace MuseDashModTools.Views;
 
 public sealed class App : Application
 {
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
     public static readonly IContainer Container = ConfigureServices();
+    public static event EventHandler? Initialized;
 
     private static IContainer ConfigureServices()
     {
@@ -28,10 +29,13 @@ public sealed class App : Application
         return builder.Build();
     }
 
+    public App() => DataContext = Container.Resolve<AppViewModel>();
+
     public override void Initialize()
     {
         this.EnableHotReload();
         AvaloniaXamlLoader.Load(this);
+        Initialized?.Invoke(this, EventArgs.Empty);
     }
 
     public override void OnFrameworkInitializationCompleted()
@@ -42,6 +46,10 @@ public sealed class App : Application
 #if RELEASE
         Dispatcher.UIThread.UnhandledException += LogException;
 #endif
+        var config = Container.Resolve<Config>();
+        RequestedThemeVariant = AvaloniaResources.ThemeVariants[config.Theme];
+        Container.Resolve<ILocalizationService>().SetLanguage(config.LanguageCode);
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Container.Resolve<MainWindow>();

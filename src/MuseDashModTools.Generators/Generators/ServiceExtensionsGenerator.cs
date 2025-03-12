@@ -13,13 +13,37 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
-        node is ClassDeclarationSyntax { BaseList.Types: var types } &&
-        types.Any(x => x.Type.ToString().Contains("UserControl") || x.Type.ToString().Contains("Window"));
+        node is ClassDeclarationSyntax { BaseList.Types: var types }
+        && types[0].ToString() is var baseTypeName
+        && (baseTypeName.Contains("UserControl")
+            || baseTypeName.Contains("Window")
+            || baseTypeName.Contains("Application"));
 
-    private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _) =>
-        context.Node is not ClassDeclarationSyntax { BaseList.Types: var types } classDeclaration
-            ? null
-            : new ViewData(classDeclaration.Identifier.Text, types.Any(x => x.Type.ToString().Contains("Window")));
+    private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
+    {
+        if (context.Node is not ClassDeclarationSyntax { BaseList.Types: var types } classDeclaration)
+        {
+            return null;
+        }
+
+        var controlType = ControlType.UserControl;
+        var baseTypeName = types[0].ToString();
+
+        if (baseTypeName.Contains("UserControl"))
+        {
+            controlType = ControlType.UserControl;
+        }
+        else if (baseTypeName.Contains("Window"))
+        {
+            controlType = ControlType.Window;
+        }
+        else if (baseTypeName.Contains("Application"))
+        {
+            controlType = ControlType.Application;
+        }
+
+        return new ViewData(classDeclaration.Identifier.Text, controlType);
+    }
 
     private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataCollection)
     {
@@ -28,7 +52,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
             return;
         }
 
-        var sb = new IndentedStringBuilder();
+        var sb = new StringBuilder();
         sb.AppendLine(Header);
         sb.AppendLine($$"""
                         using global::Avalonia.Interactivity;
@@ -42,32 +66,33 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
                             {
                         """);
 
-        sb.IncreaseIndent(2);
         foreach (var data in dataCollection)
         {
-            if (data is not var (name, isWindow))
+            if (data is not var (name, controlType))
             {
                 continue;
             }
 
-            var (eventName, eventArgs) = isWindow
-                ? ("Loaded", "<RoutedEventArgs>")
-                : ("Initialized", "");
+            if (controlType is not ControlType.Application)
+            {
+                sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+                GenerateViewRegistration(sb, name, controlType);
+            }
+            else
+            {
+                sb.AppendLine($"""
+                               builder.RegisterType<{name}ViewModel>()
+                               .OnActivated(x => Observable.FromEventHandler(
+                                   h => App.Initialized += h,
+                                   h => App.Initialized -= h)
+                               .SubscribeAwait((_, _) => new ValueTask(App.Container.Resolve<AppViewModel>().InitializeAsync())))
+                               .PropertiesAutowired().SingleInstance();
+                               """);
+            }
 
-            sb.AppendLine($$"""
-                            builder.Register<{{name}}>(ctx => new {{name}}{ DataContext = ctx.Resolve<{{name}}ViewModel>() })
-                            .OnActivated(x => Observable.FromEventHandler{{eventArgs}}(
-                                    h => x.Instance.{{eventName}} += h,
-                                    h => x.Instance.{{eventName}} -= h)
-                                .SubscribeAwait((_, _) => new ValueTask(App.Container.Resolve<{{name}}ViewModel>().InitializeAsync())))
-                            .SingleInstance();
-                            """);
-
-            sb.AppendLine($"builder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
             sb.AppendLine();
         }
 
-        sb.ResetIndent();
         sb.AppendLine("""
                           }
                       }
@@ -76,5 +101,31 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
     }
 
-    private sealed record ViewData(string Name, bool IsWindow);
+    private static void GenerateViewRegistration(StringBuilder sb, string name, ControlType controlType)
+    {
+        var (eventName, eventArgs) = controlType switch
+        {
+            ControlType.UserControl => ("Initialized", ""),
+            ControlType.Window => ("Loaded", "<RoutedEventArgs>"),
+            _ => throw new UnreachableException()
+        };
+
+        sb.AppendLine($$"""
+                                builder.Register<{{name}}>(ctx => new {{name}}{ DataContext = ctx.Resolve<{{name}}ViewModel>() })
+                                .OnActivated(x => Observable.FromEventHandler{{eventArgs}}(
+                                        h => x.Instance.{{eventName}} += h,
+                                        h => x.Instance.{{eventName}} -= h)
+                                    .SubscribeAwait((_, _) => new ValueTask(App.Container.Resolve<{{name}}ViewModel>().InitializeAsync())))
+                                .SingleInstance();
+                        """);
+    }
+
+    private enum ControlType
+    {
+        UserControl,
+        Window,
+        Application
+    }
+
+    private sealed record ViewData(string Name, ControlType ControlType);
 }

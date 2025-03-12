@@ -2,7 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:semi="https://irihi.tech/semi"
              xmlns:u-Semi="https://irihi.tech/ursa/themes/semi"
-             x:Class="MuseDashModTools.App"
+             xmlns:vm="using:MuseDashModTools.ViewModels"
+             x:Class="MuseDashModTools.Views.App"
+             x:DataType="vm:AppViewModel"
              RequestedThemeVariant="Dark">
 
     <Application.Styles>
@@ -16,7 +18,9 @@
         <TrayIcons>
             <TrayIcon Icon="/Assets/Icon.ico" ToolTipText="Muse Dash Mod Tools">
                 <TrayIcon.Menu>
-                    <NativeMenu />
+                    <NativeMenu>
+                        <NativeMenuItem Header="Show" />
+                    </NativeMenu>
                 </TrayIcon.Menu>
             </TrayIcon>
         </TrayIcons>

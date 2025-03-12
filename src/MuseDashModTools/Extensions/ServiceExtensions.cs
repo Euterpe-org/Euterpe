@@ -10,6 +10,6 @@ public static partial class ServiceExtensions
         builder.RegisterType<LocalizationService>().As<ILocalizationService>().PropertiesAutowired().SingleInstance();
 
         // TopLevel
-        builder.Register(context => context.Resolve<MainWindow>().GetTopLevel()).As<TopLevel>().SingleInstance();
+        builder.Register<TopLevel>(context => context.Resolve<MainWindow>().GetTopLevel()).SingleInstance();
     }
 }

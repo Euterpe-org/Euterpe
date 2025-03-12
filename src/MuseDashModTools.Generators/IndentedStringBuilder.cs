@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace MuseDashModTools.Generators;
+﻿namespace MuseDashModTools.Generators;
 
 public class IndentedStringBuilder
 {
