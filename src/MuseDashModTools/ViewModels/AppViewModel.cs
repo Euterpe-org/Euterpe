@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.ViewModels;
 
-public sealed class AppViewModel : ViewModelBase
+public sealed partial class AppViewModel : ViewModelBase
 {
     public override async Task InitializeAsync()
     {
@@ -10,6 +10,14 @@ public sealed class AppViewModel : ViewModelBase
 
         Logger.ZLogInformation($"{nameof(AppViewModel)} Initialized");
     }
+
+    [RelayCommand]
+    private static void Show()
+    {
+    }
+
+    [RelayCommand]
+    private static void Exit() => GetCurrentDesktop().Shutdown();
 
     #region Injections
 
