@@ -13,11 +13,11 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>
     [
-        new("Open",
+        new(DropDownButton_OpenLiteral,
         [
-            new DropDownMenuItem(Folder_Mods, OpenFolderCommand, Config.ModsFolder),
-            new DropDownMenuItem(Folder_UserData, OpenFolderCommand, Config.UserDataFolder),
-            new DropDownMenuItem(Folder_UserLibs, OpenFolderCommand, Config.UserLibsFolder)
+            new DropDownMenuItem(Folder_ModsLiteral, OpenFolderCommand, Config.ModsFolder),
+            new DropDownMenuItem(Folder_UserDataLiteral, OpenFolderCommand, Config.UserDataFolder),
+            new DropDownMenuItem(Folder_UserLibsLiteral, OpenFolderCommand, Config.UserLibsFolder)
         ])
     ];
 

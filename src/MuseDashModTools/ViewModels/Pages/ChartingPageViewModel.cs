@@ -12,9 +12,9 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>
     [
-        new("Open",
+        new(DropDownButton_OpenLiteral,
         [
-            new DropDownMenuItem(Folder_CustomAlbums, OpenFolderCommand, Config.CustomAlbumsFolder)
+            new DropDownMenuItem(Folder_CustomAlbumsLiteral, OpenFolderCommand, Config.CustomAlbumsFolder)
         ])
     ];
 

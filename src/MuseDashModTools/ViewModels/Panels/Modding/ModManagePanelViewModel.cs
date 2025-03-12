@@ -60,6 +60,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         await base.InitializeAsync().ConfigureAwait(false);
 
         await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
+
         Logger.ZLogInformation($"{nameof(ModManagePanelViewModel)} Initialized");
     }
 

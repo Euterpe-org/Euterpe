@@ -5,7 +5,9 @@ public sealed class AppViewModel : ViewModelBase
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(false);
+
         await SettingService.LoadAsync().ConfigureAwait(false);
+
         Logger.ZLogInformation($"{nameof(AppViewModel)} Initialized");
     }
 
