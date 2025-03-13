@@ -6,7 +6,13 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     public partial string? MelonLoaderVersion { get; set; }
 
     [ObservableProperty]
+    public partial string? InstallStatus { get; set; }
+
+    [ObservableProperty]
     public partial double DownloadProgress { get; set; }
+
+    [ObservableProperty]
+    public partial bool Downloading { get; set; }
 
     public override Task InitializeAsync()
     {
@@ -18,16 +24,38 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         return Task.CompletedTask;
     }
 
+    private void UpdateDownloadingStatus(DownloadStartedEventArgs args)
+    {
+        var fileName = Path.GetFileName(args.FileName);
+        var mbSize = args.TotalBytesToReceive / (1024.0 * 1024.0);
+        InstallStatus = $"Downloading {fileName}: {mbSize:F2}MB";
+        Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
+    }
+
     [RelayCommand]
     private async Task InstallMelonLoaderAsync()
     {
-        var downloadProgress = new Progress<double>(value => DownloadProgress = value);
-        await DownloadManager
-            .DownloadMelonLoaderAsync((_, args) => Logger.ZLogInformation($"Downloading File Size: {args.TotalBytesToReceive}"), downloadProgress)
-            .ConfigureAwait(true);
-        await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
+        Downloading = true;
+        InstallStatus = "Preparing...";
+
+        try
+        {
+            var downloadProgress = new Progress<double>(value => DownloadProgress = value);
+            await DownloadManager
+                .DownloadMelonLoaderAsync(
+                    (_, args) => UpdateDownloadingStatus(args),
+                    downloadProgress)
+                .ConfigureAwait(true);
+            await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
+        }
+        catch
+        {
+            Downloading = false;
+            return;
+        }
+
         MelonLoaderVersion = "0.6.1";
-        Logger.ZLogInformation($"MelonLoader has been successfully installed");
+        Downloading = false;
     }
 
     [RelayCommand]
@@ -42,9 +70,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     [UsedImplicitly]
     partial void OnMelonLoaderVersionChanged(string? value)
     {
-        if (value.IsNullOrEmpty())
-        {
-        }
+        InstallStatus = value.IsNullOrEmpty() ? "Not Installed" : "Installed";
     }
 
     #region Injections
