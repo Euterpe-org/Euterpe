@@ -82,7 +82,10 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
         builder.AppendLine("""
                            using global::System.Diagnostics;
                            using global::Avalonia.Data;
+                           using global::Avalonia.Data.Core;
                            using global::Avalonia.Markup.Xaml;
+                           using global::Avalonia.Markup.Xaml.MarkupExtensions;
+                           using global::Avalonia.Markup.Xaml.MarkupExtensions.CompiledBindings;
                            using global::MuseDashModTools.Localization;
 
                            namespace MuseDashModTools.Extensions.MarkupExtensions;
@@ -91,13 +94,18 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
                            {
                                private readonly ILocalizedString? _localizedString;
 
-                               public override Binding ProvideValue(IServiceProvider serviceProvider) =>
-                                   new()
+                               public override CompiledBindingExtension ProvideValue(IServiceProvider serviceProvider)
+                               {
+                                   var builder = new CompiledBindingPathBuilder();
+                                   var clrProperty = new ClrPropertyInfo("Value", o => ((ILocalizedString)o).Value, null, typeof(ILocalizedString));
+                                   builder.Property(clrProperty, PropertyInfoAccessorFactory.CreateInpcPropertyAccessor);
+                                   return new CompiledBindingExtension
                                    {
                                        Mode = BindingMode.OneWay,
                                        Source = _localizedString,
-                                       Path = "Value"
+                                       Path = builder.Build()
                                    };
+                               }
 
                                public LocalizeExtension(string resourceKey) => _localizedString = new XAMLLiteral.LocalizedString(resourceKey);
 
@@ -234,7 +242,10 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
     {
         spc.AddSource("ILocalizedString.cs",
             """
-            public interface ILocalizedString;
+            public interface ILocalizedString
+            {
+                string Value { get; }
+            }
             """);
     }
 
