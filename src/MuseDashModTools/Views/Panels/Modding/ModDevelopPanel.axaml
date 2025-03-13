@@ -12,9 +12,264 @@
     <Design.DataContext>
         <vm:ModDevelopPanelViewModel />
     </Design.DataContext>
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
-        DevelopPanel still work in progress...
-    </TextBlock>
+
+    <UserControl.Styles>
+        <Style Selector="Border.card-base">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Theme" Value="{DynamicResource CardBorder}" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Border.hover-card">
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="RenderTransform" Value="none" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Duration="0:0:0.2" Property="Background" />
+                    <TransformOperationsTransition Duration="0:0:0.2" Property="RenderTransform" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.card-button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Button.card-button /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+
+        <Style Selector="Button.card-button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="Button.card-button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="Button:pointerover > Border.ide-card">
+            <Setter Property="RenderTransform" Value="scale(1.02)" />
+        </Style>
+
+        <Style Selector="Button:pointerover > Border.modlinks-card">
+            <Setter Property="Background" Value="#B32E29" />
+            <Setter Property="RenderTransform" Value="scale(1.004)" />
+        </Style>
+
+        <Style Selector="Button:pointerover > Border.rider-card">
+            <Setter Property="Background" Value="#FC1886" />
+        </Style>
+
+        <Style Selector="Button:pointerover > Border.dotnet-card">
+            <Setter Property="Background" Value="#7B2CBF" />
+            <Setter Property="RenderTransform" Value="scale(1.004)" />
+        </Style>
+
+        <Style Selector="Button:pointerover > Border.template-card">
+            <Setter Property="Background" Value="#4B49AC" />
+            <Setter Property="RenderTransform" Value="scale(1.004)" />
+        </Style>
+
+        <Style Selector="Button:pointerover > Border.vs-card">
+            <Setter Property="Background" Value="#5C2D91" />
+        </Style>
+
+        <Style Selector="Button:pointerover > Border.vscode-card">
+            <Setter Property="Background" Value="#0066B8" />
+        </Style>
+
+        <Style Selector="TextBlock.card-description">
+            <Setter Property="Foreground" Value="DarkGray" />
+            <Setter Property="Margin" Value="0,10" />
+            <Setter Property="Opacity" Value="0.7" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style Selector="TextBlock.card-title">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Theme" Value="{StaticResource TitleTextBlock}" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <TextBlock Classes="H4"
+                       Margin="0,0,0,10"
+                       Text="Development Environment"
+                       Theme="{StaticResource TitleTextBlock}" />
+
+            <Grid ColumnDefinitions="*,*" Margin="5,0,10,40">
+                <Button Grid.Column="0"
+                        Classes="card-button"
+                        CommandParameter="https://dotnet.microsoft.com/download/dotnet/6.0">
+                    <Border Classes="card-base hover-card dotnet-card">
+                        <DockPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Classes="card-title" Text=".NET 6 SDK">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush EndPoint="100%,100%" StartPoint="0%,0%">
+                                            <GradientStop Color="#AA7AE0" Offset="0" />
+                                            <GradientStop Color="#D36BD0" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock Classes="card-description"
+                                           Text="Required for mod development" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Right"
+                                        HorizontalAlignment="Right"
+                                        Margin="30,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10"
+                                        VerticalAlignment="Center">
+                                <TextBlock Classes="card-description"
+                                           IsVisible="{Binding !DotNetSdkInstalled, Mode=OneWay}"
+                                           Text="Not Installed"
+                                           VerticalAlignment="Center" />
+                                <PathIcon Data="{StaticResource SemiIconVerify}"
+                                          Foreground="Green"
+                                          Height="30"
+                                          IsVisible="{Binding DotNetSdkInstalled, Mode=OneWay}" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </Button>
+
+                <Button Grid.Column="1"
+                        Classes="card-button"
+                        CommandParameter="https://baidu.com">
+                    <Border Classes="card-base hover-card template-card">
+                        <DockPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Classes="card-title" Text="Mod Template Nuget">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush EndPoint="100%,100%" StartPoint="0%,0%">
+                                            <GradientStop Color="#7F7FD5" Offset="0" />
+                                            <GradientStop Color="#86A8E7" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock Classes="card-description"
+                                           Text="For quick mod project creation" />
+                            </StackPanel>
+                            <StackPanel DockPanel.Dock="Right"
+                                        HorizontalAlignment="Right"
+                                        Margin="30,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10"
+                                        VerticalAlignment="Center">
+                                <TextBlock Classes="card-description"
+                                           IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
+                                           Text="Not Installed"
+                                           VerticalAlignment="Center" />
+                                <PathIcon Data="{StaticResource SemiIconVerify}"
+                                          Foreground="Green"
+                                          Height="30"
+                                          IsVisible="{Binding ModTemplateInstalled, Mode=OneWay}" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </Button>
+            </Grid>
+
+            <TextBlock Classes="H4"
+                       Margin="0,0,0,10"
+                       Text="Submit Your Mod"
+                       Theme="{StaticResource TitleTextBlock}" />
+
+            <Button Classes="card-button"
+                    CommandParameter="https://github.com/MDModsDev/ModLinks"
+                    Margin="5,0,10,40">
+                <Border Classes="card-base hover-card modlinks-card">
+                    <Grid ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+                        <Image Grid.Column="0"
+                               Height="64"
+                               Margin="0,0,20,0"
+                               Source="/Assets/MDModsDev_Logo.png"
+                               Width="64" />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Classes="card-title" Text="ModLinks Repository">
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush EndPoint="100%,100%" StartPoint="0%,0%">
+                                        <GradientStop Color="#FF9966" Offset="0" />
+                                        <GradientStop Color="#FF5E62" Offset="1" />
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock Classes="card-description"
+                                       Text="Submit your mod to MDMT's mod list" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Button>
+
+            <TextBlock Classes="H4"
+                       Margin="0,0,0,10"
+                       Text="Recommended IDEs"
+                       Theme="{StaticResource TitleTextBlock}" />
+
+            <UniformGrid Columns="3"
+                         Margin="5,0,10,20">
+                <Button Classes="card-button"
+                        CommandParameter="https://code.visualstudio.com">
+                    <Border Classes="card-base hover-card ide-card vscode-card">
+                        <StackPanel HorizontalAlignment="Center"
+                                    Orientation="Vertical"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                            <Image Height="58"
+                                   Source="/Assets/VSCode_Logo.png" />
+                            <TextBlock Margin="0,0,0,15"
+                                       Text="Visual Studio Code" />
+                        </StackPanel>
+                    </Border>
+                </Button>
+
+                <Button Classes="card-button"
+                        CommandParameter="https://www.jetbrains.com/rider">
+                    <Border Classes="card-base hover-card ide-card rider-card">
+                        <StackPanel HorizontalAlignment="Center"
+                                    Orientation="Vertical"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                            <Image Height="58"
+                                   Source="/Assets/Rider_Logo.png" />
+                            <TextBlock Margin="0,0,0,15"
+                                       Text="JetBrains Rider" />
+                        </StackPanel>
+                    </Border>
+                </Button>
+
+                <Button Classes="card-button"
+                        CommandParameter="https://visualstudio.microsoft.com">
+                    <Border Classes="card-base hover-card ide-card vs-card">
+                        <StackPanel HorizontalAlignment="Center"
+                                    Orientation="Vertical"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                            <Image Height="58"
+                                   Source="/Assets/VS_Logo.png" />
+                            <TextBlock Margin="0,0,0,15"
+                                       Text="Visual Studio" />
+                        </StackPanel>
+                    </Border>
+                </Button>
+            </UniformGrid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
