@@ -6,7 +6,7 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
     public ContributorGroup[] ContributorGroups { get; } =
     [
         // Developer Team
-        new(Contributor_Developer, [
+        new(Contributor_DeveloperLiteral, [
             new ContributorCardItem("lxy",
                 "Planning and maintaining the project",
                 [
@@ -28,7 +28,7 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         ]),
 
         // Artist
-        new(Contributor_Artist, [
+        new(Contributor_ArtistLiteral, [
             new ContributorCardItem("Super Pig",
                 "Drawing the MDMT application icon",
                 [("Bilibili", "https://space.bilibili.com/252615263")]),
@@ -40,25 +40,25 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         ]),
 
         // Translators
-        new(Translator_ChineseSimplified, [
+        new(Translator_ChineseSimplifiedLiteral, [
             new ContributorCardItem("lxymahatma")
         ]),
-        new(Translator_ChineseTraditional, [
+        new(Translator_ChineseTraditionalLiteral, [
             new ContributorCardItem("Shiron Lee"),
             new ContributorCardItem("Bigbeesushi")
         ]),
-        new(Translator_Hungarian, [
+        new(Translator_HungarianLiteral, [
             new ContributorCardItem("Balint")
         ]),
-        new(Translator_Korean, [
+        new(Translator_KoreanLiteral, [
             new ContributorCardItem("MEMOLie")
         ]),
-        new(Translator_Russian, [
+        new(Translator_RussianLiteral, [
             new ContributorCardItem("Ultra Rabbit"),
             new ContributorCardItem("Ronner"),
             new ContributorCardItem("taypexx")
         ]),
-        new(Translator_Spanish, [
+        new(Translator_SpanishLiteral, [
             new ContributorCardItem("MNight4")
         ])
     ];
