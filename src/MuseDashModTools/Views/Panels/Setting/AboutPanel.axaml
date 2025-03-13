@@ -27,7 +27,6 @@
 
                 <!--  LOGO  -->
                 <Image Height="120"
-                       Classes="animate-scale"
                        RenderOptions.BitmapInterpolationMode="HighQuality"
                        Source="/Assets/Logo.webp" />
 
@@ -70,9 +69,10 @@
                             <TextBlock.Inlines>
                                 <Run Text="Muse Dash Mod Tools is licensed under the" />
                                 <InlineUIContainer>
-                                    <mdmt:ImageButton CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
-                                                      ImageHeight="13"
-                                                      ImageSource="/Assets/MIT_Logo.png" />
+                                    <mdmt:ImageButton
+                                        CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
+                                        ImageHeight="13"
+                                        ImageSource="/Assets/MIT_Logo.png" />
                                 </InlineUIContainer>
                                 <Run Text="license." />
                                 <Run Text="Powered by" />
