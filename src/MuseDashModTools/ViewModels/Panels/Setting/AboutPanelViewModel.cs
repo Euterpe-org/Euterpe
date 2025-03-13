@@ -1,12 +1,12 @@
 ﻿namespace MuseDashModTools.ViewModels.Panels.Setting;
 
-// ReSharper disable StringLiteralTypo
+// ReSharper disable StringTypo
 public sealed partial class AboutPanelViewModel : ViewModelBase
 {
     public ContributorGroup[] ContributorGroups { get; } =
     [
         // Developer Team
-        new(Contributor_DeveloperLiteral, [
+        new(Contributor_Developer, [
             new ContributorCardItem("lxy",
                 "Planning and maintaining the project",
                 [
@@ -28,7 +28,7 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         ]),
 
         // Artist
-        new(Contributor_ArtistLiteral, [
+        new(Contributor_Artist, [
             new ContributorCardItem("Super Pig",
                 "Drawing the MDMT application icon",
                 [("Bilibili", "https://space.bilibili.com/252615263")]),
@@ -40,25 +40,25 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         ]),
 
         // Translators
-        new(Translator_ChineseSimplifiedLiteral, [
+        new(Translator_ChineseSimplified, [
             new ContributorCardItem("lxymahatma")
         ]),
-        new(Translator_ChineseTraditionalLiteral, [
+        new(Translator_ChineseTraditional, [
             new ContributorCardItem("Shiron Lee"),
             new ContributorCardItem("Bigbeesushi")
         ]),
-        new(Translator_HungarianLiteral, [
+        new(Translator_Hungarian, [
             new ContributorCardItem("Balint")
         ]),
-        new(Translator_KoreanLiteral, [
+        new(Translator_Korean, [
             new ContributorCardItem("MEMOLie")
         ]),
-        new(Translator_RussianLiteral, [
+        new(Translator_Russian, [
             new ContributorCardItem("Ultra Rabbit"),
             new ContributorCardItem("Ronner"),
             new ContributorCardItem("taypexx")
         ]),
-        new(Translator_SpanishLiteral, [
+        new(Translator_Spanish, [
             new ContributorCardItem("MNight4")
         ])
     ];

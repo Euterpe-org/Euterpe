@@ -41,9 +41,10 @@ public sealed class App : Application
         // Line below is needed to remove Avalonia data validation.
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
-#if RELEASE
-        HandleUIThreadException();
-#endif
+
+        Dispatcher.UIThread.UnhandledException += (_, e) => Container.Resolve<ILogger<App>>().ZLogError(e.Exception, $"Unhandled exception");
+        // HandleUIThreadException();
+
         ApplyConfig();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -69,13 +70,14 @@ public sealed class App : Application
         Observable.FromEventHandler<ControlledApplicationLifetimeExitEventArgs>(
                 handler => desktop.Exit += handler,
                 handler => desktop.Exit -= handler)
+            .Take(1)
             .OnErrorResumeAsFailure()
             .SubscribeAwait((_, _) => new ValueTask(Container.Resolve<ISettingService>().SaveAsync()),
-                result => Container.Resolve<ILogger<App>>().ZLogError(result.Exception, $"Exception when saving Setting"),
+                result => Container.Resolve<ILogger<App>>().ZLogError(result.Exception, $"{result.IsFailure}"),
                 configureAwait: false);
     }
 
-#if RELEASE
+
     private static void HandleUIThreadException()
     {
         Observable.FromEvent<DispatcherUnhandledExceptionEventHandler, DispatcherUnhandledExceptionEventArgs>(
@@ -89,5 +91,4 @@ public sealed class App : Application
                 Container.Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
             });
     }
-#endif
 }

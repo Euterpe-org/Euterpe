@@ -4,10 +4,10 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(Page_HomeLiteral, HomePageName, "Home"),
-        new(Page_ModdingLiteral, ModdingPageName, "Wrench"),
-        new(Page_ChartingLiteral, ChartingPageName, "Music"),
-        new(Page_SettingLiteral, SettingPageName, "Setting")
+        new(Page_Home, HomePageName, "Home"),
+        new(Page_Modding, ModdingPageName, "Wrench"),
+        new(Page_Charting, ChartingPageName, "Music"),
+        new(Page_Setting, SettingPageName, "Setting")
     ];
 
     public override async Task InitializeAsync()

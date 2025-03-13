@@ -59,7 +59,6 @@ public sealed class LocalizationService
         }
 
         var culture = CultureInfo.GetCultureInfo(language);
-        I18NExtension.Culture = culture;
         CultureInfo.CurrentUICulture = culture;
         LocalizationManager.Culture = culture;
         SemiTheme.OverrideLocaleResources(GetCurrentApplication(), culture);

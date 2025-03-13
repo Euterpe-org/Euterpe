@@ -12,12 +12,12 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
     public static IReadOnlyList<LocalizedString> ModFilterTypes { get; } =
     [
-        ModFilterType_AllLiteral,
-        ModFilterType_InstalledLiteral,
-        ModFilterType_EnabledLiteral,
-        ModFilterType_DisabledLiteral,
-        ModFilterType_OutdatedLiteral,
-        ModFilterType_IncompatibleLiteral
+        ModFilterType_All,
+        ModFilterType_Installed,
+        ModFilterType_Enabled,
+        ModFilterType_Disabled,
+        ModFilterType_Outdated,
+        ModFilterType_Incompatible
     ];
 
     [ObservableProperty]

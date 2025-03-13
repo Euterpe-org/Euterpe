@@ -1,10 +1,9 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:MuseDashModTools"
+             xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:models="clr-namespace:MuseDashModTools.Models;assembly=MuseDashModTools.Models"
              xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AppearancePanel"
              x:DataType="vm:AppearancePanelViewModel"
@@ -24,14 +23,14 @@
                 Spacing="50">
 
         <!--  Language  -->
-        <mdmt:SettingItem Title="{I18N {x:Static local:LangKeys.Setting_Title_Language}}" Description="The current version does not support switching languages.">
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}" Description="The current version does not support switching languages.">
             <mdmt:SettingItem.Content>
                 <StackPanel Orientation="Horizontal" Spacing="20">
                     <ComboBox MinWidth="200"
                               ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
                               SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}" />
 
-                    <Button Command="{Binding ApplyLanguageCommand}" Content="{I18N {x:Static local:LangKeys.Button_Apply}}" />
+                    <Button Command="{Binding ApplyLanguageCommand}" Content="{Localize {x:Static loc:XAMLLiteral.Button_Apply}}" />
                 </StackPanel>
 
             </mdmt:SettingItem.Content>
