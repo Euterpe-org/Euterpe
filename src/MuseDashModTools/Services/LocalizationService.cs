@@ -1,5 +1,4 @@
-﻿using Avalonia.Markup.Xaml.MarkupExtensions;
-using Ursa.Themes.Semi;
+﻿using Ursa.Themes.Semi;
 
 namespace MuseDashModTools.Services;
 
@@ -53,13 +52,12 @@ public sealed class LocalizationService
 
     public void SetLanguage(string language)
     {
-        if (CultureInfo.CurrentUICulture.Name == language)
+        if (Config.LanguageCode == language)
         {
             return;
         }
 
         var culture = CultureInfo.GetCultureInfo(language);
-        CultureInfo.CurrentUICulture = culture;
         LocalizationManager.Culture = culture;
         SemiTheme.OverrideLocaleResources(GetCurrentApplication(), culture);
 
