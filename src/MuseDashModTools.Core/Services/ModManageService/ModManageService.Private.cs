@@ -46,7 +46,6 @@ internal sealed partial class ModManageService
             }
         }
 
-        // TODO Notification (lxy, 2025/2/21)
         Logger.ZLogInformation($"All mods loaded");
     }
 
