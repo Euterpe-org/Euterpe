@@ -22,14 +22,15 @@
         <!--  Left Panel: Mod List Section  -->
         <Border Grid.Column="0"
                 Margin="0,0,20,10"
-                Padding="12"
+                Padding="0"
                 Background="{DynamicResource SecondaryCardColor}"
                 Theme="{DynamicResource CardBorder}">
-            <DockPanel>
+
+            <Grid RowDefinitions="Auto,*">
 
                 <!--  Search and Filter Section  -->
-                <Grid DockPanel.Dock="Top"
-                      Margin="0,10"
+                <Grid Grid.Row="0"
+                      Margin="15,15, 15, 10"
                       ColumnDefinitions="*,Auto">
 
                     <!--  Search Box  -->
@@ -54,91 +55,95 @@
                 </Grid>
 
                 <!--  Mod List  -->
-                <ScrollViewer DockPanel.Dock="Bottom"
-                              AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
-                    <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}"
-                                     SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
+                <u:LoadingContainer Grid.Row="1"
+                                    LoadingMessage="Loading..."
+                                    IsLoading="{Binding !AllModsLoaded, Mode=OneWay}">
+                    <ScrollViewer Margin="12, 0, 12, 12"
+                                  AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
+                        <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}"
+                                         SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
-                        <u:SelectionList.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel Orientation="Vertical" />
-                            </ItemsPanelTemplate>
-                        </u:SelectionList.ItemsPanel>
+                            <u:SelectionList.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </u:SelectionList.ItemsPanel>
 
-                        <!--  Selection Indicator  -->
-                        <u:SelectionList.Indicator>
-                            <Border Background="Transparent" CornerRadius="4">
-                                <Border Width="4"
-                                        Margin="0,8"
-                                        HorizontalAlignment="Left"
-                                        Background="{DynamicResource SemiBlue6}"
-                                        CornerRadius="4" />
-                            </Border>
-                        </u:SelectionList.Indicator>
+                            <!--  Selection Indicator  -->
+                            <u:SelectionList.Indicator>
+                                <Border Background="Transparent" CornerRadius="4">
+                                    <Border Width="4"
+                                            Margin="0,8"
+                                            HorizontalAlignment="Left"
+                                            Background="{DynamicResource SemiBlue6}"
+                                            CornerRadius="4" />
+                                </Border>
+                            </u:SelectionList.Indicator>
 
-                        <!--  Mod Item Template  -->
-                        <u:SelectionList.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Width="320" ColumnDefinitions="*,60">
-                                    <StackPanel Height="60"
-                                                Margin="8,5"
-                                                Spacing="5">
+                            <!--  Mod Item Template  -->
+                            <u:SelectionList.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="320" ColumnDefinitions="*,60">
+                                        <StackPanel Height="60"
+                                                    Margin="8,5"
+                                                    Spacing="5">
 
-                                        <!--  Mod Name  -->
-                                        <TextBlock
-                                            Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
-                                            Text="{Binding Name, Mode=OneWay}" />
+                                            <!--  Mod Name  -->
+                                            <TextBlock
+                                                Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
+                                                Text="{Binding Name, Mode=OneWay}" />
 
-                                        <!--  Mod Status Tags  -->
-                                        <StackPanel Classes="ActionButtonsContainer">
+                                            <!--  Mod Status Tags  -->
+                                            <StackPanel Classes="ActionButtonsContainer">
 
-                                            <!--  Online Version  -->
-                                            <Label Classes="Ghost StateLabel"
-                                                   Content="{Binding Version, Mode=OneWay}"
-                                                   IsVisible="{Binding !IsLocal, Mode=OneWay}" />
+                                                <!--  Online Version  -->
+                                                <Label Classes="Ghost StateLabel"
+                                                       Content="{Binding Version, Mode=OneWay}"
+                                                       IsVisible="{Binding !IsLocal, Mode=OneWay}" />
 
-                                            <!--  Local Version  -->
-                                            <Label Classes="Ghost Indigo StateLabel"
-                                                   Content="{Binding LocalVersion, Mode=OneWay}"
-                                                   IsVisible="{Binding IsLocal, Mode=OneWay}" />
+                                                <!--  Local Version  -->
+                                                <Label Classes="Ghost Indigo StateLabel"
+                                                       Content="{Binding LocalVersion, Mode=OneWay}"
+                                                       IsVisible="{Binding IsLocal, Mode=OneWay}" />
 
-                                            <!--  Incompatible State  -->
-                                            <Label Classes="Ghost Red StateLabel"
-                                                   Content="{I18N {x:Static local:LangKeys.ModState_Incompatible}}"
-                                                   IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
+                                                <!--  Incompatible State  -->
+                                                <Label Classes="Ghost Red StateLabel"
+                                                       Content="{I18N {x:Static local:LangKeys.ModState_Incompatible}}"
+                                                       IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
 
-                                            <!--  Modified State  -->
-                                            <Label Classes="Ghost Orange StateLabel"
-                                                   Content="{I18N {x:Static local:LangKeys.ModState_Modified}}"
-                                                   IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
+                                                <!--  Modified State  -->
+                                                <Label Classes="Ghost Orange StateLabel"
+                                                       Content="{I18N {x:Static local:LangKeys.ModState_Modified}}"
+                                                       IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
 
-                                            <!--  Update Status  -->
-                                            <StackPanel Classes="ActionButtonsContainer"
-                                                        IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
-                                                <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
-                                                <Label Classes="Ghost Green StateLabel"
-                                                       Content="{Binding Version, Mode=OneWay}" />
+                                                <!--  Update Status  -->
+                                                <StackPanel Classes="ActionButtonsContainer"
+                                                            IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                                    <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
+                                                    <Label Classes="Ghost Green StateLabel"
+                                                           Content="{Binding Version, Mode=OneWay}" />
+                                                </StackPanel>
+
                                             </StackPanel>
-
                                         </StackPanel>
-                                    </StackPanel>
 
-                                    <!--  Mod Toggle Switch  -->
-                                    <ToggleSwitch Grid.Column="1"
-                                                  Margin="0,0,4,0"
-                                                  HorizontalAlignment="Right"
-                                                  VerticalAlignment="Center"
-                                                  Command="{Binding $parent[UserControl].((vm:ModManagePanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
-                                                  CommandParameter="{Binding ., Mode=OneWay}"
-                                                  IsChecked="{Binding !IsDisabled, Mode=OneWay}"
-                                                  IsVisible="{Binding IsLocal, Mode=OneWay}" />
+                                        <!--  Mod Toggle Switch  -->
+                                        <ToggleSwitch Grid.Column="1"
+                                                      Margin="0,0,4,0"
+                                                      HorizontalAlignment="Right"
+                                                      VerticalAlignment="Center"
+                                                      Command="{Binding $parent[UserControl].((vm:ModManagePanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
+                                                      CommandParameter="{Binding ., Mode=OneWay}"
+                                                      IsChecked="{Binding !IsDisabled, Mode=OneWay}"
+                                                      IsVisible="{Binding IsLocal, Mode=OneWay}" />
 
-                                </Grid>
-                            </DataTemplate>
-                        </u:SelectionList.ItemTemplate>
-                    </u:SelectionList>
-                </ScrollViewer>
-            </DockPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </u:SelectionList.ItemTemplate>
+                        </u:SelectionList>
+                    </ScrollViewer>
+                </u:LoadingContainer>
+            </Grid>
         </Border>
 
         <!--  Right Panel: Mod Details Section  -->

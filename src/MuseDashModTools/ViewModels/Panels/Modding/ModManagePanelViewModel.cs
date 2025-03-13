@@ -29,6 +29,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedModFilterIndex { get; set; }
 
+    [ObservableProperty]
+    public partial bool AllModsLoaded { get; set; }
+
     public ReadOnlyObservableCollection<ModDto> Mods => _mods;
 
     public ModManagePanelViewModel()
@@ -58,9 +61,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(false);
-
         await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
 
+        AllModsLoaded = true;
         Logger.ZLogInformation($"{nameof(ModManagePanelViewModel)} Initialized");
     }
 
