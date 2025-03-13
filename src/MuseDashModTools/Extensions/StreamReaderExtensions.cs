@@ -11,7 +11,7 @@ public static class StreamReaderExtensions
     /// <param name="endLine"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public async static Task<string?[]> ReadLineAsync(this StreamReader streamReader, int startLine, int endLine)
+    public static async Task<string?[]> ReadLineAsync(this StreamReader streamReader, int startLine, int endLine)
     {
         if (startLine > endLine || startLine < 1)
         {
@@ -47,7 +47,7 @@ public static class StreamReaderExtensions
     /// <param name="range"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public async static Task<string?[]> ReadLineAsync(this StreamReader streamReader, Range range)
+    public static async Task<string?[]> ReadLineAsync(this StreamReader streamReader, Range range)
     {
         var startLine = range.Start.Value;
         var endLine = range.End.Value;
