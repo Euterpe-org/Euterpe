@@ -6,15 +6,15 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(Panel_Charting_ChartManageLiteral, ChartManagePanelName),
-        new(Panel_Charting_CharterToolkitLiteral, CharterToolkitPanelName)
+        new(Panel_Charting_ChartManage, ChartManagePanelName),
+        new(Panel_Charting_CharterToolkit, CharterToolkitPanelName)
     ];
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>
     [
-        new(DropDownButton_OpenLiteral,
+        new(DropDownButton_Open,
         [
-            new DropDownMenuItem(Folder_CustomAlbumsLiteral, OpenFolderCommand, Config.CustomAlbumsFolder)
+            new DropDownMenuItem(Folder_CustomAlbums, OpenFolderCommand, Config.CustomAlbumsFolder)
         ])
     ];
 

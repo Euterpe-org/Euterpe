@@ -4,12 +4,12 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(Panel_Setting_AboutLiteral, AboutPanelName),
-        new(Panel_Setting_AppearanceLiteral, AppearancePanelName),
-        new(Panel_Setting_ExperienceLiteral, ExperiencePanelName),
-        new(Panel_Setting_FileManagementLiteral, FileManagementPanelName),
-        new(Panel_Setting_DownloadLiteral, DownloadPanelName),
-        new(Panel_Setting_AdvancedLiteral, AdvancedPanelName)
+        new(Panel_Setting_About, AboutPanelName),
+        new(Panel_Setting_Appearance, AppearancePanelName),
+        new(Panel_Setting_Experience, ExperiencePanelName),
+        new(Panel_Setting_FileManagement, FileManagementPanelName),
+        new(Panel_Setting_Download, DownloadPanelName),
+        new(Panel_Setting_Advanced, AdvancedPanelName)
     ];
 
     public override Task InitializeAsync()

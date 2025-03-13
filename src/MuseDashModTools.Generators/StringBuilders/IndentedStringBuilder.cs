@@ -1,9 +1,9 @@
-﻿namespace MuseDashModTools.Generators;
+﻿namespace MuseDashModTools.Generators.StringBuilders;
 
 public class IndentedStringBuilder
 {
     private const byte IndentSize = 4;
-    private readonly StringBuilder _stringBuilder = new();
+    protected readonly StringBuilder _stringBuilder = new();
 
     private int IndentCount { get; set; }
 

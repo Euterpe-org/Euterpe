@@ -42,9 +42,8 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
             return;
         }
 
-        var sb = new IndentedStringBuilder();
+        var sb = new IndentedGeneratorStringBuilder();
 
-        sb.AppendLine(Header);
         sb.AppendLine($$"""
                         namespace MuseDashModTools.Core.Extensions;
 
@@ -79,10 +78,9 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 
     private static void GenerateSingleProxyClass(SourceProductionContext spc, string nameSpace, string className, INamedTypeSymbol baseType)
     {
-        var sb = new IndentedStringBuilder();
+        var sb = new IndentedGeneratorStringBuilder();
 
         var typeName = baseType.Name;
-        sb.AppendLine(Header);
         sb.AppendLine($$"""
                         namespace {{nameSpace}};
 

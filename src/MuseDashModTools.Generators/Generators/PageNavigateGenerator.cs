@@ -61,9 +61,8 @@ public sealed class PageNavigateGenerator : IncrementalGeneratorBase
             return;
         }
 
-        var sb = new IndentedStringBuilder();
+        var sb = new IndentedGeneratorStringBuilder();
 
-        sb.AppendLine(Header);
         sb.AppendLine($$"""
                         namespace {{nameSpace}};
 

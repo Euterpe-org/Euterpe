@@ -6,18 +6,18 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(Panel_Modding_ModManageLiteral, ModManagePanelName),
-        new(Panel_Modding_MelonLoaderLiteral, MelonLoaderPanelName),
-        new(Panel_Modding_ModDevelopLiteral, ModDevelopPanelName)
+        new(Panel_Modding_ModManage, ModManagePanelName),
+        new(Panel_Modding_MelonLoader, MelonLoaderPanelName),
+        new(Panel_Modding_ModDevelop, ModDevelopPanelName)
     ];
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>
     [
-        new(DropDownButton_OpenLiteral,
+        new(DropDownButton_Open,
         [
-            new DropDownMenuItem(Folder_ModsLiteral, OpenFolderCommand, Config.ModsFolder),
-            new DropDownMenuItem(Folder_UserDataLiteral, OpenFolderCommand, Config.UserDataFolder),
-            new DropDownMenuItem(Folder_UserLibsLiteral, OpenFolderCommand, Config.UserLibsFolder)
+            new DropDownMenuItem(Folder_Mods, OpenFolderCommand, Config.ModsFolder),
+            new DropDownMenuItem(Folder_UserData, OpenFolderCommand, Config.UserDataFolder),
+            new DropDownMenuItem(Folder_UserLibs, OpenFolderCommand, Config.UserLibsFolder)
         ])
     ];
 
