@@ -30,7 +30,7 @@
 
                 <!--  Search and Filter Section  -->
                 <Grid Grid.Row="0"
-                      Margin="15,15, 15, 10"
+                      Margin="15,15,15,10"
                       ColumnDefinitions="*,Auto">
 
                     <!--  Search Box  -->
@@ -49,19 +49,17 @@
 
                     <!--  Filter Dropdown  -->
                     <ComboBox Grid.Column="1"
-                              ItemsSource="{Binding ModFilterTypes, Mode=TwoWay}"
+                              ItemsSource="{Binding ModFilterTypes, Mode=OneTime}"
                               SelectedIndex="{Binding SelectedModFilterIndex, Mode=TwoWay}" />
 
                 </Grid>
 
                 <!--  Mod List  -->
                 <u:LoadingContainer Grid.Row="1"
-                                    LoadingMessage="Loading..."
-                                    IsLoading="{Binding !AllModsLoaded, Mode=OneWay}">
-                    <ScrollViewer Margin="12, 0, 12, 12"
-                                  AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
-                        <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}"
-                                         SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
+                                    IsLoading="{Binding !AllModsLoaded, Mode=OneWay}"
+                                    LoadingMessage="Loading...">
+                    <ScrollViewer Margin="12,0,12,12" AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
+                        <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
                             <u:SelectionList.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -89,9 +87,7 @@
                                                     Spacing="5">
 
                                             <!--  Mod Name  -->
-                                            <TextBlock
-                                                Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
-                                                Text="{Binding Name, Mode=OneWay}" />
+                                            <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
 
                                             <!--  Mod Status Tags  -->
                                             <StackPanel Classes="ActionButtonsContainer">
@@ -117,11 +113,9 @@
                                                        IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
 
                                                 <!--  Update Status  -->
-                                                <StackPanel Classes="ActionButtonsContainer"
-                                                            IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                                <StackPanel Classes="ActionButtonsContainer" IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                                     <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
-                                                    <Label Classes="Ghost Green StateLabel"
-                                                           Content="{Binding Version, Mode=OneWay}" />
+                                                    <Label Classes="Ghost Green StateLabel" Content="{Binding Version, Mode=OneWay}" />
                                                 </StackPanel>
 
                                             </StackPanel>
@@ -158,8 +152,7 @@
                    Source="/Assets/Neko_Blur.webp" />
 
             <!--  Details Content  -->
-            <ScrollViewer
-                IsVisible="{Binding SelectedMod, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
+            <ScrollViewer IsVisible="{Binding SelectedMod, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
                 <StackPanel Margin="24" Spacing="16">
 
                     <!--  Banner Carousel  -->
@@ -192,9 +185,9 @@
                                         Classes="ActionButtonsContainer">
 
                                 <!--  Config Button  -->
-                                <StackPanel Orientation="Horizontal"
-                                            Spacing="10"
-                                            IsVisible="{Binding SelectedMod.IsValidConfigFile, Mode=OneWay}">
+                                <StackPanel IsVisible="{Binding SelectedMod.IsValidConfigFile, Mode=OneWay}"
+                                            Orientation="Horizontal"
+                                            Spacing="10">
                                     <Button Command="{Binding OpenConfigFileCommand, Mode=OneTime}"
                                             Theme="{StaticResource GhostButton}"
                                             ToolTip.Tip="Edit mod config file">
@@ -264,11 +257,9 @@
                                        IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
 
                                 <!--  Update Version Indicator  -->
-                                <StackPanel Classes="ActionButtonsContainer"
-                                            IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                <StackPanel Classes="ActionButtonsContainer" IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                     <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
-                                    <Label Classes="Ghost Green StateLabel"
-                                           Content="{Binding SelectedMod.Version, Mode=OneWay}" />
+                                    <Label Classes="Ghost Green StateLabel" Content="{Binding SelectedMod.Version, Mode=OneWay}" />
                                 </StackPanel>
                             </StackPanel>
 
@@ -308,8 +299,7 @@
                             </Grid>
 
                             <!--  Repository Link  -->
-                            <Grid ColumnDefinitions="130,*"
-                                  IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
+                            <Grid ColumnDefinitions="130,*" IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
                                 <TextBlock Grid.Column="0"
                                            Classes="DetailRowText"
                                            Text="Repository:" />

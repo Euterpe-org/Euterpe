@@ -10,14 +10,14 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
     private ModFilterType _modFilter = ModFilterType.All;
 
-    public static string[] ModFilterTypes { get; } =
+    public static IReadOnlyList<LocalizedString> ModFilterTypes { get; } =
     [
-        ModFilterType_All,
-        ModFilterType_Installed,
-        ModFilterType_Enabled,
-        ModFilterType_Disabled,
-        ModFilterType_Outdated,
-        ModFilterType_Incompatible
+        ModFilterType_AllLiteral,
+        ModFilterType_InstalledLiteral,
+        ModFilterType_EnabledLiteral,
+        ModFilterType_DisabledLiteral,
+        ModFilterType_OutdatedLiteral,
+        ModFilterType_IncompatibleLiteral
     ];
 
     [ObservableProperty]
