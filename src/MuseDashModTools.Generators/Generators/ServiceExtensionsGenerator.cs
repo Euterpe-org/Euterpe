@@ -52,8 +52,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
             return;
         }
 
-        var sb = new StringBuilder();
-        sb.AppendLine(Header);
+        var sb = new GeneratorStringBuilder();
         sb.AppendLine($$"""
                         using global::Avalonia.Interactivity;
 
@@ -95,7 +94,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
     }
 
-    private static void GenerateViewRegistration(StringBuilder sb, string name, ControlType controlType)
+    private static void GenerateViewRegistration(GeneratorStringBuilder sb, string name, ControlType controlType)
     {
         var (eventName, eventArgs) = controlType switch
         {
