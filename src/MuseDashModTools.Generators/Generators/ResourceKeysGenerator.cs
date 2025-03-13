@@ -77,6 +77,10 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
         var sb = new StringBuilder();
         sb.AppendLine(Header);
         sb.AppendLine($$"""
+                        using global::System.ComponentModel;
+                        using global::System.Runtime.CompilerServices;
+                        using global::R3;
+
                         namespace {{MuseDashModToolsLocalizationNamespace}};
 
                         public static partial class {{className}}
@@ -107,9 +111,34 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
                                public static string {name.GetValidIdentifier()} => GetResourceString("{name}");
 
                                public const string {name.GetValidIdentifier()}Literal = "{name}";
+
                            """);
         }
 
+        sb.AppendLine($$"""
+                            public sealed class LocalizedString : INotifyPropertyChanged
+                            {
+                                public string Value => {{className}}.GetResourceString(field);
+
+                                private LocalizedString(string resourceKey)
+                                {
+                                    Value = resourceKey;
+                                    Observable.FromEventHandler(
+                                            h => LocalizationManager.CultureChanged += h,
+                                            h => LocalizationManager.CultureChanged -= h)
+                                        .Subscribe(this, (_, state) => state.OnPropertyChanged(nameof(Value)));
+                                }
+
+                                public event PropertyChangedEventHandler? PropertyChanged;
+
+                                public override string ToString() => Value;
+
+                                public static implicit operator LocalizedString(string resourceKey) => new(resourceKey);
+
+                                private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+                                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                            }
+                        """);
         sb.AppendLine("}");
         spc.AddSource($"{className}.Designer.cs", sb.ToString());
     }
