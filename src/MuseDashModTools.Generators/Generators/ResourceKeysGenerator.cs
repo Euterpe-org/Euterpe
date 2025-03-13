@@ -196,7 +196,7 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
         foreach (var (name, _) in ExtractResourceData(resourceFile))
         {
             literalBuilder.AppendLine($"""
-                                         public const string {name.GetValidIdentifier()} = "{name}";
+                                           public const string {name.GetValidIdentifier()} = "{name}";
 
                                        """);
         }
