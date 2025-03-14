@@ -21,37 +21,28 @@
 
         <!--  Title Image  -->
         <Image Height="120"
-               Margin="50,60"
                HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Source="{DynamicResource TitleImage}" />
+               Margin="50,60"
+               Source="{DynamicResource TitleImage}"
+               VerticalAlignment="Top" />
 
         <!--  Play Button  -->
-        <SplitButton Width="230"
-                     Height="60"
-                     Margin="0,0,120,80"
-                     HorizontalAlignment="Right"
-                     VerticalAlignment="Bottom"
-                     Classes="PageHomePlay"
-                     ClipToBounds="False"
+        <SplitButton Classes="PageHomePlay"
                      Command="{Binding LaunchModdedGameCommand, Mode=OneTime}"
-                     Content="Play"
-                     Theme="{DynamicResource SolidSplitButton}">
+                     Content="Play">
             <SplitButton.Flyout>
                 <MenuFlyout Placement="BottomEdgeAlignedRight">
-                    <MenuItem Width="220"
-                              Height="50"
-                              Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}"
-                              Header="Play Vanilla" />
+                    <MenuItem Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}">
+                        <MenuItem.Header>
+                            <TextBlock Text="Play Vanilla" />
+                        </MenuItem.Header>
+                    </MenuItem>
                 </MenuFlyout>
             </SplitButton.Flyout>
         </SplitButton>
 
         <!--  Donation Button  -->
-        <Button Margin="0,60,90,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Classes="PageHomeDonation"
+        <Button Classes="PageHomeDonation"
                 Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
             <Image Height="100" Source="/Assets/Genshin.webp" />
         </Button>
