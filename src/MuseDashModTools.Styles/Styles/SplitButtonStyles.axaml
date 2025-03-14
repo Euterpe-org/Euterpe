@@ -1,6 +1,15 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--  Play Button  -->
+    <Style Selector="SplitButton.PageHomePlay">
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="0,0,120,80" />
+        <Setter Property="Theme" Value="{DynamicResource SolidSplitButton}" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Width" Value="230" />
+    </Style>
     <Style Selector="SplitButton.PageHomePlay /template/ Button#PART_PrimaryButton">
         <Setter Property="Width" Value="185" />
         <Setter Property="FontSize" Value="20" />
@@ -79,6 +88,22 @@
     </Style>
     <Style Selector="SplitButton.PageHomePlay /template/ Rectangle#SeparatorBorder">
         <Setter Property="Width" Value="0" />
+    </Style>
+    <Style Selector="SplitButton.PageHomePlay MenuFlyoutPresenter">
+        <Setter Property="Background" Value="#3B5BB2" />
+        <Setter Property="Height" Value="56" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Width" Value="188" />
+    </Style>
+    <Style Selector="SplitButton.PageHomePlay MenuItem">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Height" Value="45" />
+    </Style>
+    <Style Selector="SplitButton.PageHomePlay TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
 </Styles>
