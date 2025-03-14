@@ -196,6 +196,7 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
         literalBuilder.AppendLine($$"""
                                     using global::System.ComponentModel;
                                     using global::System.Runtime.CompilerServices;
+                                    using global::Avalonia.Threading;
                                     using global::R3;
 
                                     namespace {{MuseDashModToolsLocalizationNamespace}};
@@ -233,7 +234,7 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
                                             public static implicit operator LocalizedString(string resourceKey) => new(resourceKey);
 
                                             private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-                                                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                                                Dispatcher.UIThread.Post(() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)));
                                         }
                                     }
                                     """);
