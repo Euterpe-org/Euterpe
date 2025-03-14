@@ -12,9 +12,11 @@
     <Design.DataContext>
         <vm:LogAnalysisPageViewModel />
     </Design.DataContext>
+
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"
                TextAlignment="Center">
         LogAnalysisPage still work in progress...
     </TextBlock>
+
 </UserControl>

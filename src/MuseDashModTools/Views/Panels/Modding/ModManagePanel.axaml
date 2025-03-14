@@ -87,35 +87,37 @@
                                                     Spacing="5">
 
                                             <!--  Mod Name  -->
-                                            <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
+                                            <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
+                                                       Text="{Binding Name, Mode=OneWay}" />
 
                                             <!--  Mod Status Tags  -->
-                                            <StackPanel Classes="ActionButtonsContainer">
+                                            <StackPanel Classes="SharedControlsHorizontal">
 
                                                 <!--  Online Version  -->
-                                                <Label Classes="Ghost StateLabel"
+                                                <Label Classes="Ghost SharedStateLabel"
                                                        Content="{Binding Version, Mode=OneWay}"
                                                        IsVisible="{Binding !IsLocal, Mode=OneWay}" />
 
                                                 <!--  Local Version  -->
-                                                <Label Classes="Ghost Indigo StateLabel"
+                                                <Label Classes="Ghost Indigo SharedStateLabel"
                                                        Content="{Binding LocalVersion, Mode=OneWay}"
                                                        IsVisible="{Binding IsLocal, Mode=OneWay}" />
 
                                                 <!--  Incompatible State  -->
-                                                <Label Classes="Ghost Red StateLabel"
+                                                <Label Classes="Ghost Red SharedStateLabel"
                                                        Content="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}"
                                                        IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
 
                                                 <!--  Modified State  -->
-                                                <Label Classes="Ghost Orange StateLabel"
+                                                <Label Classes="Ghost Orange SharedStateLabel"
                                                        Content="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}"
                                                        IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
 
                                                 <!--  Update Status  -->
-                                                <StackPanel Classes="ActionButtonsContainer" IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                                <StackPanel Classes="SharedControlsHorizontal"
+                                                            IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                                     <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
-                                                    <Label Classes="Ghost Green StateLabel" Content="{Binding Version, Mode=OneWay}" />
+                                                    <Label Classes="Ghost Green SharedStateLabel" Content="{Binding Version, Mode=OneWay}" />
                                                 </StackPanel>
 
                                             </StackPanel>
@@ -153,10 +155,10 @@
 
             <!--  Details Content  -->
             <ScrollViewer IsVisible="{Binding SelectedMod, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
-                <StackPanel Margin="24" Spacing="16">
+                <StackPanel Margin="54,24,54,24" Spacing="45">
 
                     <!--  Banner Carousel  -->
-                    <Border Height="200">
+                    <Border Height="200" Margin="-30,0,-30,0">
                         <Carousel Theme="{DynamicResource FullCarousel}">
                             <Border Background="#4053b7" CornerRadius="10">
                                 <TextBlock HorizontalAlignment="Center"
@@ -172,168 +174,164 @@
                     </Border>
 
                     <!--  Main Info Section  -->
-                    <Border Classes="DetailContainer">
-                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
 
-                            <!--  Mod Title  -->
-                            <TextBlock Grid.Row="0" Grid.Column="0"
-                                       Classes="PanelTitle"
-                                       Text="{Binding SelectedMod.Name, Mode=OneWay}" />
+                        <!--  Mod Title  -->
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Classes="PanelTitle"
+                                   Text="{Binding SelectedMod.Name, Mode=OneWay}" />
 
-                            <!--  Action Buttons  -->
-                            <StackPanel Grid.Row="0" Grid.Column="1"
-                                        Classes="ActionButtonsContainer">
+                        <!--  Action Buttons  -->
+                        <StackPanel Grid.Row="0" Grid.Column="1"
+                                    Classes="SharedControlsHorizontal">
 
-                                <!--  Config Button  -->
-                                <StackPanel IsVisible="{Binding SelectedMod.IsValidConfigFile, Mode=OneWay}"
-                                            Orientation="Horizontal"
-                                            Spacing="10">
-                                    <Button Command="{Binding OpenConfigFileCommand, Mode=OneTime}"
-                                            Theme="{StaticResource GhostButton}"
-                                            ToolTip.Tip="Edit mod config file">
-                                        <PathIcon Height="18" Data="{StaticResource SemiIconSetting}" />
-                                    </Button>
-                                    <Separator Classes="Vertical" />
-                                </StackPanel>
-
-                                <!--  Mod Management Buttons  -->
-                                <!--  Update  -->
-                                <Button Classes="Primary"
-                                        Command="{Binding UpdateModCommand, Mode=OneTime}"
-                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
-                                    <StackPanel Classes="ActionButtonsContainer">
-                                        <PathIcon Height="15" Data="{StaticResource SemiIconRefresh}" />
-                                        <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.Button_Update}}" />
-                                    </StackPanel>
+                            <!--  Config Button  -->
+                            <StackPanel IsVisible="{Binding SelectedMod.IsValidConfigFile, Mode=OneWay}"
+                                        Orientation="Horizontal"
+                                        Spacing="10">
+                                <Button Command="{Binding OpenConfigFileCommand, Mode=OneTime}"
+                                        Theme="{StaticResource GhostButton}"
+                                        ToolTip.Tip="Edit mod config file">
+                                    <PathIcon Height="18" Data="{StaticResource SemiIconSetting}" />
                                 </Button>
-
-                                <!--  Install  -->
-                                <Button Command="{Binding InstallModCommand, Mode=OneTime}"
-                                        Content="{Localize {x:Static loc:XAMLLiteral.Button_Install}}"
-                                        IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}" />
-
-                                <!--  Reinstall  -->
-                                <Button Command="{Binding ReinstallModCommand, Mode=OneTime}"
-                                        Content="{Localize {x:Static loc:XAMLLiteral.Button_Reinstall}}"
-                                        IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}" />
-
-                                <!--  Uninstall  -->
-                                <Button Classes="Danger"
-                                        Command="{Binding UninstallModCommand, Mode=OneTime}"
-                                        Content="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}"
-                                        IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+                                <Separator Classes="Vertical" />
                             </StackPanel>
 
-                            <!--  Mod Status Tags  -->
-                            <StackPanel Grid.Row="1" Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        Margin="0,8"
-                                        Classes="ActionButtonsContainer">
-
-                                <!--  Status Labels  -->
-                                <Label Classes="Ghost Red StateLabel"
-                                       Content="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}"
-                                       IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
-
-                                <Label Classes="Ghost Blue StateLabel"
-                                       Content="{Localize {x:Static loc:XAMLLiteral.ModState_Normal}}"
-                                       IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
-
-                                <Label Classes="Ghost Orange StateLabel"
-                                       Content="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}"
-                                       IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
-
-                                <Label Classes="Ghost Green StateLabel"
-                                       Content="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}"
-                                       IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}" />
-
-                                <!--  Version Labels  -->
-                                <Label Classes="Ghost Gray StateLabel"
-                                       Content="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}"
-                                       IsVisible="{Binding !SelectedMod.IsLocal, Mode=OneWay}" />
-
-                                <Label Classes="Ghost Indigo StateLabel"
-                                       Content="{Binding SelectedMod.LocalVersion, StringFormat='v{0}', Mode=OneWay}"
-                                       IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
-
-                                <!--  Update Version Indicator  -->
-                                <StackPanel Classes="ActionButtonsContainer" IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
-                                    <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
-                                    <Label Classes="Ghost Green StateLabel" Content="{Binding SelectedMod.Version, Mode=OneWay}" />
+                            <!--  Mod Management Buttons  -->
+                            <!--  Update  -->
+                            <Button Classes="Primary"
+                                    Command="{Binding UpdateModCommand, Mode=OneTime}"
+                                    IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                <StackPanel Classes="SharedControlsHorizontal">
+                                    <PathIcon Height="15" Data="{StaticResource SemiIconRefresh}" />
+                                    <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.Button_Update}}" />
                                 </StackPanel>
-                            </StackPanel>
+                            </Button>
 
-                            <!--  Description  -->
-                            <TextBlock Grid.Row="2" Grid.Column="0"
-                                       Grid.ColumnSpan="2"
-                                       Margin="0,8,0,0"
-                                       Text="{Binding SelectedMod.Description, Mode=OneWay}"
-                                       TextWrapping="Wrap" />
-                        </Grid>
-                    </Border>
+                            <!--  Install  -->
+                            <Button Command="{Binding InstallModCommand, Mode=OneTime}"
+                                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Install}}"
+                                    IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}" />
+
+                            <!--  Reinstall  -->
+                            <Button Command="{Binding ReinstallModCommand, Mode=OneTime}"
+                                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Reinstall}}"
+                                    IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}" />
+
+                            <!--  Uninstall  -->
+                            <Button Classes="Danger"
+                                    Command="{Binding UninstallModCommand, Mode=OneTime}"
+                                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}"
+                                    IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+                        </StackPanel>
+
+                        <!--  Mod Status Tags  -->
+                        <StackPanel Grid.Row="1" Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,8"
+                                    Classes="SharedControlsHorizontal">
+
+                            <!--  Status Labels  -->
+                            <Label Classes="Ghost Red SharedStateLabel"
+                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}"
+                                   IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
+
+                            <Label Classes="Ghost Blue SharedStateLabel"
+                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Normal}}"
+                                   IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+
+                            <Label Classes="Ghost Orange SharedStateLabel"
+                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}"
+                                   IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
+
+                            <Label Classes="Ghost Green SharedStateLabel"
+                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}"
+                                   IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}" />
+
+                            <!--  Version Labels  -->
+                            <Label Classes="Ghost Gray SharedStateLabel"
+                                   Content="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}"
+                                   IsVisible="{Binding !SelectedMod.IsLocal, Mode=OneWay}" />
+
+                            <Label Classes="Ghost Indigo SharedStateLabel"
+                                   Content="{Binding SelectedMod.LocalVersion, StringFormat='v{0}', Mode=OneWay}"
+                                   IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+
+                            <!--  Update Version Indicator  -->
+                            <StackPanel Classes="SharedControlsHorizontal"
+                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
+                                <Label Classes="Ghost Green SharedStateLabel" Content="{Binding SelectedMod.Version, Mode=OneWay}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!--  Description  -->
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Margin="0,8,0,0"
+                                   Text="{Binding SelectedMod.Description, Mode=OneWay}"
+                                   TextWrapping="Wrap" />
+                    </Grid>
 
                     <!--  Details Section  -->
-                    <Border Classes="DetailContainer">
-                        <StackPanel Spacing="16">
-                            <TextBlock Classes="SectionTitle" Text="Details" />
+                    <StackPanel>
+                        <TextBlock Classes="SectionTitle" Text="Details" />
 
-                            <!--  Author Info  -->
-                            <Grid ColumnDefinitions="130,*">
-                                <TextBlock Grid.Column="0"
-                                           Classes="DetailRowText"
-                                           Text="Author:" />
-                                <TextBlock Grid.Column="1"
-                                           Margin="0,0,0,14"
-                                           Text="{Binding SelectedMod.Author, Mode=OneWay}" />
-                            </Grid>
-
-                            <!--  Game Version Support  -->
-                            <Grid ColumnDefinitions="130,*">
-                                <TextBlock Grid.Column="0"
-                                           Classes="DetailRowText"
-                                           Text="Supported:" />
-                                <Label Grid.Column="1"
+                        <!--  Author Info  -->
+                        <Grid ColumnDefinitions="130,*">
+                            <TextBlock Grid.Column="0"
+                                       Classes="DetailRowText"
+                                       Text="Author:" />
+                            <TextBlock Grid.Column="1"
                                        Margin="0,0,0,14"
-                                       Classes="Ghost StateLabel"
-                                       Content="{Binding SelectedMod.CompatibleGameVersion, Mode=OneWay}" />
-                            </Grid>
+                                       Text="{Binding SelectedMod.Author, Mode=OneWay}" />
+                        </Grid>
 
-                            <!--  Repository Link  -->
-                            <Grid ColumnDefinitions="130,*" IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
-                                <TextBlock Grid.Column="0"
-                                           Classes="DetailRowText"
-                                           Text="Repository:" />
-                                <HyperlinkButton Grid.Column="1"
-                                                 Classes="WithIcon Underline"
-                                                 Content="Link"
-                                                 NavigateUri="{Binding SelectedMod.RepoPageUrl, Mode=OneWay}" />
-                            </Grid>
-                        </StackPanel>
-                    </Border>
+                        <!--  Game Version Support  -->
+                        <Grid ColumnDefinitions="130,*">
+                            <TextBlock Grid.Column="0"
+                                       Classes="DetailRowText"
+                                       Text="Supported:" />
+                            <Label Grid.Column="1"
+                                   Margin="0,0,0,14"
+                                   Classes="Ghost SharedStateLabel"
+                                   Content="{Binding SelectedMod.CompatibleGameVersion, Mode=OneWay}" />
+                        </Grid>
+
+                        <!--  Repository Link  -->
+                        <Grid ColumnDefinitions="130,*"
+                              IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
+                            <TextBlock Grid.Column="0"
+                                       Classes="DetailRowText"
+                                       Text="Repository:" />
+                            <HyperlinkButton Grid.Column="1"
+                                             Classes="WithIcon Underline"
+                                             Content="Visit"
+                                             NavigateUri="{Binding SelectedMod.RepoPageUrl, Mode=OneWay}" />
+                        </Grid>
+                    </StackPanel>
 
                     <!--  Dependencies Section  -->
-                    <Border Classes="DetailContainer" IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
+                    <Panel IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
                         <StackPanel Spacing="16">
                             <TextBlock Classes="SectionTitle" Text="Dependencies" />
                             <ItemsControl ItemsSource="{Binding SelectedMod.DependencyNames, Mode=OneWay}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Label Margin="0,0,0,4"
-                                               Classes="Ghost Primary StateLabel"
+                                               Classes="Ghost Primary SharedStateLabel"
                                                Content="{Binding ., Mode=OneWay}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
-                    </Border>
+                    </Panel>
 
                     <!--  SHA256 Section  -->
-                    <Border Classes="DetailContainer">
-                        <StackPanel Spacing="8">
-                            <TextBlock Text="SHA256" />
-                            <TextBlock FontSize="12" Text="{Binding SelectedMod.SHA256, Mode=OneWay}" />
-                        </StackPanel>
-                    </Border>
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="SHA256" />
+                        <TextBlock FontSize="12" Text="{Binding SelectedMod.SHA256, Mode=OneWay}" />
+                    </StackPanel>
 
                 </StackPanel>
             </ScrollViewer>

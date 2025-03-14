@@ -1,6 +1,29 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--  Title text styles  -->
+    <!--  Common Description Text  -->
+    <Style Selector="TextBlock.SharedDesc">
+        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="Margin" Value="0, -10, 0, 0" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!--  Card Description Text  -->
+    <Style Selector="TextBlock.SharedCardDesc">
+        <Setter Property="Foreground" Value="DarkGray" />
+        <Setter Property="Margin" Value="0,10" />
+        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!--  Card Title Text  -->
+    <Style Selector="TextBlock.SharedCardTitle">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Theme" Value="{StaticResource TitleTextBlock}" />
+    </Style>
+
+    <!--  Title Text Styles  -->
     <Style Selector="TextBlock.PanelTitle">
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="24" />
@@ -12,11 +35,12 @@
         <Setter Property="Margin" Value="0,0,0,16" />
     </Style>
 
-    <!--  Detail row text style  -->
+    <!--  Detail Row Text Style  -->
     <Style Selector="TextBlock.DetailRowText">
         <Setter Property="Margin" Value="0,0,16,14" />
     </Style>
 
+    <!--  Override Active Style  -->
     <Style Selector="TextBlock.Active">
         <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
     </Style>

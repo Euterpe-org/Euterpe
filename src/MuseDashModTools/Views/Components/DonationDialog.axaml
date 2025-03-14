@@ -13,24 +13,8 @@
         <vm:DonationDialogViewModel />
     </Design.DataContext>
 
-    <UserControl.Resources>
-        <x:Double x:Key="QrImageSize">230</x:Double>
-    </UserControl.Resources>
-
-    <UserControl.Styles>
-        <Style Selector="Border.qr-container">
-            <Setter Property="Width" Value="{StaticResource QrImageSize}" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="ClipToBounds" Value="True" />
-            <Setter Property="CornerRadius" Value="20" />
-        </Style>
-        <Style Selector="Image.qr-image">
-            <Setter Property="Width" Value="{StaticResource QrImageSize}" />
-            <Setter Property="Stretch" Value="Uniform" />
-        </Style>
-    </UserControl.Styles>
-
     <StackPanel Margin="20" Spacing="20">
+
         <TextBlock FontSize="14"
                    Text="本软件是基于开源项目原神的二次创作，我们耗费数个月才打造出如此3A大作。"
                    TextAlignment="Center"
@@ -45,17 +29,19 @@
                      Margin="0,15"
                      Columns="2"
                      Rows="2">
-            <Border Classes="qr-container">
-                <Image Classes="qr-image" Source="/Assets/DonationQRs/Wechat.webp" />
+
+            <Border Classes="DialogDonationQr">
+                <Image Classes="DialogDonationQr" Source="/Assets/DonationQRs/Wechat.webp" />
             </Border>
 
-            <Border Classes="qr-container">
-                <Image Classes="qr-image" Source="/Assets/DonationQRs/Alipay.webp" />
+            <Border Classes="DialogDonationQr">
+                <Image Classes="DialogDonationQr" Source="/Assets/DonationQRs/Alipay.webp" />
             </Border>
 
-            <Border Classes="qr-container">
-                <Image Classes="qr-image" Source="/Assets/DonationQRs/Paypal.webp" />
+            <Border Classes="DialogDonationQr">
+                <Image Classes="DialogDonationQr" Source="/Assets/DonationQRs/Paypal.webp" />
             </Border>
+
         </UniformGrid>
     </StackPanel>
 </UserControl>

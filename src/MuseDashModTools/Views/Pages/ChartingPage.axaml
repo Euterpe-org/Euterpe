@@ -15,10 +15,7 @@
     </Design.DataContext>
 
     <Grid RowDefinitions="Auto, *">
-        <Border Height="45"
-                Margin="0,0,20,10"
-                Padding="12,4"
-                Theme="{DynamicResource CardBorder}">
+        <Border Classes="WinMainNav">
             <Panel>
                 <mdmt:NaviPanelListControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
                 <mdmt:NaviButtonsControl Source="{Binding DropDownButtons, Mode=OneTime}" />

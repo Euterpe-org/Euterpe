@@ -15,25 +15,17 @@
         <vm:AppearancePanelViewModel />
     </Design.DataContext>
 
-    <StackPanel MinWidth="600"
-                MaxWidth="800"
-                Margin="30"
-                HorizontalAlignment="Left"
-                Orientation="Vertical"
-                Spacing="50">
+    <StackPanel Classes="SharedContentListRoot">
 
         <!--  Language  -->
-        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}" Description="The current version does not support switching languages.">
-            <mdmt:SettingItem.Content>
-                <StackPanel Orientation="Horizontal" Spacing="20">
-                    <ComboBox MinWidth="200"
-                              ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
-                              SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}" />
-
-                    <Button Command="{Binding ApplyLanguageCommand}" Content="{Localize {x:Static loc:XAMLLiteral.Button_Apply}}" />
-                </StackPanel>
-
-            </mdmt:SettingItem.Content>
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}"
+                          Description="The current version does not support switching languages.">
+            <StackPanel Classes="SharedContentListItemHorizontal">
+                <ComboBox MinWidth="200"
+                          ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
+                          SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}" />
+                <Button Command="{Binding ApplyLanguageCommand}" Content="{Localize {x:Static loc:XAMLLiteral.Button_Apply}}" />
+            </StackPanel>
         </mdmt:SettingItem>
 
     </StackPanel>

@@ -1,20 +1,9 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style Selector="Image.animate-scale">
-        <Style.Animations>
-            <Animation Duration="0:0:0.3" FillMode="Forward">
-                <KeyFrame Cue="0%">
-                    <Setter Property="ScaleTransform.ScaleX" Value="0.8" />
-                    <Setter Property="ScaleTransform.ScaleY" Value="0.8" />
-                    <Setter Property="Opacity" Value="0" />
-                </KeyFrame>
-                <KeyFrame Cue="100%">
-                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
-                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
-                    <Setter Property="Opacity" Value="1" />
-                </KeyFrame>
-            </Animation>
-        </Style.Animations>
+    <!-- Dialog Donation Qr-->
+    <Style Selector="Image.DialogDonationQr">
+        <Setter Property="Width" Value="230" />
+        <Setter Property="Stretch" Value="Uniform" />
     </Style>
 
 </Styles>

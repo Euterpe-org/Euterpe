@@ -15,52 +15,39 @@
         <vm:DownloadPanelViewModel />
     </Design.DataContext>
 
-    <StackPanel MinWidth="600"
-                MaxWidth="800"
-                Margin="30"
-                HorizontalAlignment="Left"
-                Orientation="Vertical"
-                Spacing="50">
+    <StackPanel Classes="SharedContentListRoot">
 
         <!--  Download Source  -->
         <mdmt:SettingItem Title="Download Source" Description="Source to get mod list and downloads">
-            <mdmt:SettingItem.Content>
-                <StackPanel Orientation="Horizontal" Spacing="10">
-                    <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}" SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
-                    <TextBox MinWidth="200"
-                             Classes="ClearButton"
-                             Foreground="Gray"
-                             IsVisible="{Binding Config.DownloadSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:DownloadSource.Custom}, Mode=OneWay}"
-                             Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}"
-                             Watermark="Input link here" />
-                </StackPanel>
-            </mdmt:SettingItem.Content>
+            <StackPanel Classes="SharedContentListItemHorizontal">
+                <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}" SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
+                <TextBox MinWidth="200"
+                         Classes="ClearButton"
+                         Foreground="Gray"
+                         IsVisible="{Binding Config.DownloadSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:DownloadSource.Custom}, Mode=OneWay}"
+                         Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}"
+                         Watermark="Input link here" />
+            </StackPanel>
         </mdmt:SettingItem>
 
         <!--  Update Source  -->
         <mdmt:SettingItem Title="Update Source" Description="Source to check for MDMT updates">
-            <mdmt:SettingItem.Content>
-                <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}" SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
-            </mdmt:SettingItem.Content>
+            <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}" SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
         </mdmt:SettingItem>
 
         <!--  GitHub Token  -->
         <mdmt:SettingItem Title="GitHub Token"
                           Description="GitHub Token used for GitHub API access, required for GitHub API update source"
                           IsVisible="{Binding Config.UpdateSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:UpdateSource.GitHubAPI}, Mode=OneWay}">
-            <mdmt:SettingItem.Content>
-                <TextBox Classes="ClearButton"
-                         Foreground="Gray"
-                         Text="{Binding Config.GitHubToken, Mode=TwoWay}"
-                         Watermark="Leave blank if no need" />
-            </mdmt:SettingItem.Content>
+            <TextBox Classes="ClearButton"
+                     Foreground="Gray"
+                     Text="{Binding Config.GitHubToken, Mode=TwoWay}"
+                     Watermark="Leave blank if no need" />
         </mdmt:SettingItem>
 
         <!--  Download Prerelease  -->
         <mdmt:SettingItem Title="Download Prerelease" Description="Check for pre-release versions when checking for MDMT updates">
-            <mdmt:SettingItem.Content>
-                <ToggleSwitch IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
-            </mdmt:SettingItem.Content>
+            <ToggleSwitch IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
         </mdmt:SettingItem>
 
     </StackPanel>
