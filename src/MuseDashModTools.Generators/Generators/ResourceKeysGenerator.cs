@@ -122,20 +122,22 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
     {
         var builder = new IndentedGeneratorStringBuilder();
         builder.AppendLine($$"""
+                             using global::System.Globalization;
+
                              namespace {{MuseDashModToolsLocalizationNamespace}};
 
                              public static class LocalizationManager
                              {
-                                 private static global::System.Globalization.CultureInfo? _currentCulture;
                                  public static event EventHandler? CultureChanged;
 
                                  public static global::System.Globalization.CultureInfo? Culture
                                  {
-                                     get => _currentCulture;
+                                     get => field;
                                      set
                                      {
-                                         _currentCulture = value;
+                                         field = value;
                                          CultureChanged?.Invoke(null, EventArgs.Empty);
+                                         CultureInfo.CurrentUICulture = value;
                              """);
         builder.IncreaseIndent(3);
         return builder;

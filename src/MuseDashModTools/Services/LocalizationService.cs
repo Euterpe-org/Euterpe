@@ -52,7 +52,7 @@ public sealed class LocalizationService
 
     public void SetLanguage(string language)
     {
-        if (Config.LanguageCode == language)
+        if (CultureInfo.CurrentUICulture.Name == language)
         {
             return;
         }
