@@ -1,26 +1,27 @@
-﻿<Solution>
+<Solution>
     <Folder Name="/Solution Items/">
         <File Path=".editorconfig"/>
-        <File Path=".github\workflows\build.yml"/>
+        <File Path=".github/workflows/build.yml"/>
         <File Path="Directory.Build.props"/>
         <File Path="Directory.Packages.props"/>
+        <File Path="global.json"/>
         <File Path="README.md"/>
+        <File Path="Release.props"/>
         <File Path="Settings.XamlStyler"/>
     </Folder>
     <Folder Name="/src/">
-        <Project Path="src\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj" Type="Classic C#"/>
-        <Project Path="src\MuseDashModTools.Common\MuseDashModTools.Common.csproj" Type="Classic C#"/>
-        <Project Path="src\MuseDashModTools.Core.Generators\MuseDashModTools.Core.Generators.csproj" Type="Classic C#"/>
-        <Project Path="src\MuseDashModTools.Core\MuseDashModTools.Core.csproj" Type="Classic C#"/>
-        <Project Path="src\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" Type="Classic C#"/>
-        <Project Path="src\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj" Type="Classic C#"/>
-        <Project Path="src\MuseDashModTools.Models\MuseDashModTools.Models.csproj" Type="Classic C#"/>
-        <Project Path="src\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj"/>
-        <Project Path="src\MuseDashModTools.Updater\MuseDashModTools.Updater.csproj"/>
-        <Project Path="src\MuseDashModTools\MuseDashModTools.csproj"/>
+        <Project Path="src/MuseDashModTools.Abstractions/MuseDashModTools.Abstractions.csproj"/>
+        <Project Path="src/MuseDashModTools.Common/MuseDashModTools.Common.csproj"/>
+        <Project Path="src/MuseDashModTools.Core/MuseDashModTools.Core.csproj"/>
+        <Project Path="src/MuseDashModTools.Generators/MuseDashModTools.Generators.csproj"/>
+        <Project Path="src/MuseDashModTools.Localization/MuseDashModTools.Localization.csproj"/>
+        <Project Path="src/MuseDashModTools.Models/MuseDashModTools.Models.csproj"/>
+        <Project Path="src/MuseDashModTools.Styles/MuseDashModTools.Styles.csproj"/>
+        <Project Path="src/MuseDashModTools.Updater/MuseDashModTools.Updater.csproj"/>
+        <Project Path="src/MuseDashModTools/MuseDashModTools.csproj"/>
     </Folder>
     <Folder Name="/tests/">
-        <Project Path="tests\MuseDashModTools.Generators.Tests\MuseDashModTools.Generators.Tests.csproj" Type="Classic C#"/>
-        <Project Path="tests\MuseDashModTools.Tests\MuseDashModTools.Tests.csproj"/>
+        <Project Path="tests/MuseDashModTools.Generators.Tests/MuseDashModTools.Generators.Tests.csproj"/>
+        <Project Path="tests/MuseDashModTools.Tests/MuseDashModTools.Tests.csproj"/>
     </Folder>
 </Solution>
