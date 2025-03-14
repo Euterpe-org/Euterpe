@@ -133,7 +133,7 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
                                  [field: global::System.Diagnostics.CodeAnalysis.AllowNullAttribute()] [field: global::System.Diagnostics.CodeAnalysis.MaybeNullAttribute()]
                                  public static global::System.Globalization.CultureInfo Culture
                                  {
-                                     get => CultureInfo.CurrentUICulture;
+                                     get => field ??= CultureInfo.CurrentUICulture;
                                      set
                                      {
                                          field = value;
