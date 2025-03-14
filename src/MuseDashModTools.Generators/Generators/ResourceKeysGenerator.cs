@@ -130,9 +130,10 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
                              {
                                  public static event EventHandler? CultureChanged;
 
-                                 public static global::System.Globalization.CultureInfo? Culture
+                                 [field: global::System.Diagnostics.CodeAnalysis.AllowNullAttribute()] [field: global::System.Diagnostics.CodeAnalysis.MaybeNullAttribute()]
+                                 public static global::System.Globalization.CultureInfo Culture
                                  {
-                                     get => field;
+                                     get => CultureInfo.CurrentUICulture;
                                      set
                                      {
                                          field = value;
