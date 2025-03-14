@@ -12,9 +12,11 @@
     <Design.DataContext>
         <vm:AdvancedPanelViewModel />
     </Design.DataContext>
+
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"
                TextAlignment="Center">
         AdvancedPanel still work in progress...
     </TextBlock>
+
 </UserControl>

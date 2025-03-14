@@ -10,14 +10,14 @@
     <Style Selector="controls|SettingItem">
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel IsVisible="{TemplateBinding IsVisible, Mode=OneWay}"
-                            Orientation="Vertical"
-                            Spacing="15">
+                <StackPanel Classes="SharedContentListItem"
+                            IsVisible="{TemplateBinding IsVisible, Mode=OneWay}">
                     <TextBlock Classes="H4"
                                Text="{TemplateBinding Title, Mode=OneWay}"
                                Theme="{StaticResource TitleTextBlock}" />
-                    <TextBlock Margin="0,-10,0,0"
-                               Foreground="Gray"
+                    <TextBlock Foreground="Gray"
+                               IsVisible="{TemplateBinding Description, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                               Margin="0,-10,0,0"
                                Text="{TemplateBinding Description, Mode=OneWay}"
                                TextWrapping="Wrap" />
                     <ContentPresenter Content="{TemplateBinding Content, Mode=OneWay}" />

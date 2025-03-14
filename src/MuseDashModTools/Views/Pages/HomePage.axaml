@@ -32,7 +32,7 @@
                      Margin="0,0,120,80"
                      HorizontalAlignment="Right"
                      VerticalAlignment="Bottom"
-                     Classes="Success"
+                     Classes="PageHomePlay"
                      ClipToBounds="False"
                      Command="{Binding LaunchModdedGameCommand, Mode=OneTime}"
                      Content="Play"
@@ -51,7 +51,7 @@
         <Button Margin="0,60,90,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Classes="DonationButton"
+                Classes="PageHomeDonation"
                 Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
             <Image Height="100" Source="/Assets/Genshin.webp" />
         </Button>

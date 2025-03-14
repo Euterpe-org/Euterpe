@@ -1,7 +1,34 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--  Action buttons container style  -->
-    <Style Selector="StackPanel.ActionButtonsContainer">
+    <!--  Root Content List Container  -->
+    <Style Selector="StackPanel.SharedContentListRoot">
+        <Setter Property="Margin" Value="30" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="Spacing" Value="50" />
+    </Style>
+
+    <!--  Content List Item Container  -->
+    <Style Selector="StackPanel.SharedContentListItem">
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="Spacing" Value="15" />
+    </Style>
+
+    <!--  Content List item (vertical layout)  -->
+    <Style Selector="StackPanel.SharedContentListItemVertical">
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="Spacing" Value="10" />
+    </Style>
+
+    <!--  Content List Item (Horizontal Layout)  -->
+    <Style Selector="StackPanel.SharedContentListItemHorizontal">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Spacing" Value="10" />
+    </Style>
+
+    <!--  Controls Container (Horizontal Layout)  -->
+    <Style Selector="StackPanel.SharedControlsHorizontal">
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="Spacing" Value="8" />
     </Style>

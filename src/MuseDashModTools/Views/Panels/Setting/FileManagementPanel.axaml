@@ -14,42 +14,32 @@
         <vm:FileManagementPanelViewModel />
     </Design.DataContext>
 
-    <StackPanel MinWidth="600"
-                MaxWidth="800"
-                Margin="30"
-                HorizontalAlignment="Left"
-                Orientation="Vertical"
-                Spacing="50">
+    <StackPanel Classes="SharedContentListRoot">
 
         <!--  MuseDash Game Folder  -->
-        <StackPanel Orientation="Vertical" Spacing="15">
-            <TextBlock Classes="H4"
-                       Text="Muse Dash Game Folder"
-                       Theme="{StaticResource TitleTextBlock}" />
-            <TextBox Foreground="Gray"
-                     IsReadOnly="True"
-                     Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
-            <Button HorizontalAlignment="Left"
-                    Content="Reselect"
-                    Theme="{DynamicResource OutlineButton}" />
-        </StackPanel>
+        <mdmt:SettingItem Title="Muse Dash Game Folder">
+            <StackPanel Classes="SharedContentListItemVertical">
+                <TextBox Classes="SharedDesc"
+                         IsReadOnly="True"
+                         Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
+                <Button Content="Reselect"
+                        HorizontalAlignment="Left"
+                        Theme="{DynamicResource OutlineButton}" />
+            </StackPanel>
+        </mdmt:SettingItem>
 
         <!--  Cache Folder  -->
-        <StackPanel Orientation="Vertical" Spacing="15">
-            <TextBlock Classes="H4"
-                       Text="Cache Folder"
-                       Theme="{StaticResource TitleTextBlock}" />
-            <TextBlock Margin="0,-10,0,0"
-                       Foreground="Gray"
-                       Text="This includes the cache when you download files. Please do not change this when performing other operations"
-                       TextWrapping="Wrap" />
-            <TextBox Foreground="Gray"
-                     IsReadOnly="True"
-                     Text="{Binding Config.CacheFolder, Mode=OneWay}" />
-            <Button HorizontalAlignment="Left"
-                    Content="Reselect"
-                    Theme="{DynamicResource OutlineButton}" />
-        </StackPanel>
+        <mdmt:SettingItem Title="Cache Folder"
+                          Description="This includes the cache when you download files. Please do not change this when performing other operations">
+            <StackPanel Classes="SharedContentListItemVertical">
+                <TextBox Foreground="Gray"
+                         IsReadOnly="True"
+                         Text="{Binding Config.CacheFolder, Mode=OneWay}" />
+                <Button Content="Reselect"
+                        HorizontalAlignment="Left"
+                        Theme="{DynamicResource OutlineButton}" />
+            </StackPanel>
+        </mdmt:SettingItem>
 
     </StackPanel>
 </UserControl>

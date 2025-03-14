@@ -14,18 +14,14 @@
         <vm:ExperiencePanelViewModel />
     </Design.DataContext>
 
-    <StackPanel MinWidth="600"
-                MaxWidth="800"
-                Margin="30"
-                HorizontalAlignment="Left"
-                Orientation="Vertical"
-                Spacing="50">
+    <StackPanel Classes="SharedContentListRoot">
 
         <!--  Show Console  -->
         <mdmt:SettingItem Title="Show Console" Description="Whether to display the console after the game is launched">
             <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=OneWayToSource}" />
         </mdmt:SettingItem>
 
+        <!-- Always Show ScrollBar -->
         <mdmt:SettingItem Title="Always Show ScrollBar" Description="Always show scrollbar for mod list">
             <ToggleSwitch IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=OneWayToSource}" />
         </mdmt:SettingItem>
