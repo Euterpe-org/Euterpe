@@ -14,7 +14,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accuracy Indicator" xml:space="preserve">
-    <value>Adds a more exact accuracy indicator on the bottom of the screen.\nAlso displays average accuracy in milliseconds at the end of the level.</value>
+    <value>Adds a more exact accuracy indicator on the bottom of the screen.
+Also displays average accuracy in milliseconds at the end of the level.</value>
   </data>
   <data name="AccuracyDisplay" xml:space="preserve">
     <value>A live accuracy display for your viewing pleasure.</value>
@@ -32,7 +33,9 @@
     <value>Boss always shoots pigeons, do not use AlwaysAprilFool at the same time</value>
   </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-    <value>Displays the best character combination for a level in the pause screen\nThe character combo displayed is usually correct, but don't put your blind faith in it\nWhen in doubt, refer to CharacterScoreboard</value>
+    <value>Displays the best character combination for a level in the pause screen
+The character combo displayed is usually correct, but don't put your blind faith in it
+When in doubt, refer to CharacterScoreboard</value>
   </data>
   <data name="BPMDisplay" xml:space="preserve">
     <value>A mod which displays the BPM info above level designer on preparation screen</value>
@@ -41,13 +44,16 @@
     <value>Everytime you play a chart, a random character combination will be selected</value>
   </data>
   <data name="CharacterScoreboard" xml:space="preserve">
-    <value>Displays which character a specific score was achieved with on the leaderboard (OCS)\nIt can also display your own local scores (LCS)\nLCS and OCS have inconsistent behavior on custom songs.</value>
+    <value>Displays which character a specific score was achieved with on the leaderboard (OCS)
+It can also display your own local scores (LCS)
+LCS and OCS have inconsistent behavior on custom songs.</value>
   </data>
   <data name="ChartDeleter" xml:space="preserve">
     <value>Allows you to queue custom charts to be deleted or moved when you exit the game.</value>
   </data>
   <data name="ChartReview" xml:space="preserve">
-    <value>Automatically selects sleepwalker, sets offset to 0, sets fever to manual, disables certain UI elements.\nCan be toggled on/off while in-game</value>
+    <value>Automatically selects sleepwalker, sets offset to 0, sets fever to manual, disables certain UI elements.
+Can be toggled on/off while in-game</value>
   </data>
   <data name="ChineseMode" xml:space="preserve">
     <value>Censores certain aspects of the game (Characters, illustrations, etc)</value>
@@ -59,16 +65,20 @@
     <value>The mod that allows you to load in custom charts</value>
   </data>
   <data name="CustomAnchorSupport" xml:space="preserve">
-    <value>Allows you to use add the streamer tag in your info.json to mark a song as copyright-free\n(for use with streamer mode)</value>
+    <value>Allows you to use add the streamer tag in your info.json to mark a song as copyright-free
+(for use with streamer mode)</value>
   </data>
   <data name="CustomBGBrightness" xml:space="preserve">
     <value>Allows you to adjust background brightness lower than 40%</value>
   </data>
   <data name="CustomHitSound" xml:space="preserve">
-    <value>Allows you to set custom hitsounds\nDetailed instructions in the github readme</value>
+    <value>Allows you to set custom hitsounds
+Detailed instructions in the github readme</value>
   </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
-    <value>Allows you to add custom loading screens (CustomLoadingScreens folder)\nAlso allows you to add custom loading screen messages (UserData/CustomLoadingScreens.cfg)\nMessages can be paired with an image, or be left as random</value>
+    <value>Allows you to add custom loading screens (CustomLoadingScreens folder)
+Also allows you to add custom loading screen messages (UserData/CustomLoadingScreens.cfg)
+Messages can be paired with an image, or be left as random</value>
   </data>
   <data name="CustomResolution" xml:space="preserve">
     <value>Adds a Custom option in resolution settings, which can be changed in the config</value>
@@ -77,7 +87,9 @@
     <value>Disables some in-game effects</value>
   </data>
   <data name="FavGirl" xml:space="preserve">
-    <value>Allows you to favorite characters and elfins\nThis will make you look like that character even if another character is selected.\nYou will have the abilities of the selected character &amp; your plays will be submitted as such</value>
+    <value>Allows you to favorite characters and elfins
+This will make you look like that character even if another character is selected.
+You will have the abilities of the selected character &amp; your plays will be submitted as such</value>
   </data>
   <data name="FC AP indicator" xml:space="preserve">
     <value>Tells you whether you're on All Perfect/Full Combo pace, and displays the number of misses/greats</value>
@@ -89,10 +101,13 @@
     <value>Allows you to submit scores on custom charts obtained from the MDMC website</value>
   </data>
   <data name="HiddenQoL" xml:space="preserve">
-    <value>Adds a button to always show hidden difficulties.\nE.g. you don't need to spam click and such to unlock them before playing</value>
+    <value>Adds a button to always show hidden difficulties.
+E.g. you don't need to spam click and such to unlock them before playing</value>
   </data>
   <data name="IntroSkip" xml:space="preserve">
-    <value>Skips past opening scene by speeding the game up.\nYou can configure the speed and whether to skip past the animated illustration.\nSpiritual successor of RobotLucca's mod</value>
+    <value>Skips past opening scene by speeding the game up.
+You can configure the speed and whether to skip past the animated illustration.
+Spiritual successor of RobotLucca's mod</value>
   </data>
   <data name="KeybindManager" xml:space="preserve">
     <value>A library for other mods to parse and listen to keybinds</value>
@@ -107,7 +122,8 @@
     <value>Allows you to disable &amp; delete mods while in-game.</value>
   </data>
   <data name="Muse Dash Mirror" xml:space="preserve">
-    <value>A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.\nThis mod does nothing by itself.</value>
+    <value>A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.
+This mod does nothing by itself.</value>
   </data>
   <data name="MuseDashModTools" xml:space="preserve">
     <value>Automatically detects and logs available mod updates.</value>
@@ -116,43 +132,54 @@
     <value>Prevents the game from automatically pausing when the game loses focus.</value>
   </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
-    <value>Level up animations take ages;\nLet's skip them.</value>
+    <value>Level up animations take ages;
+Let's skip them.</value>
   </data>
   <data name="PerfectDisable" xml:space="preserve">
-    <value>Allows you to disable the judgements in-game.\n(example: show early/late perfects but not pure perfects)\nInspired by ADOFAI Tweaks</value>
+    <value>Allows you to disable the judgements in-game.
+(example: show early/late perfects but not pure perfects)
+Inspired by ADOFAI Tweaks</value>
   </data>
   <data name="PopupLib" xml:space="preserve">
     <value>A library for other mods to manage popups and windows</value>
   </data>
   <data name="PreventLowAcc" xml:space="preserve">
-    <value>A mod that that allows let's you prevent a score from uploading,\nand still be able to take a screenshot.</value>
+    <value>A mod that that allows let's you prevent a score from uploading,
+and still be able to take a screenshot.</value>
   </data>
   <data name="QuickRestart" xml:space="preserve">
-    <value>Allows you to use Delete to instantly leave a chart &amp; Allows you to use Backspace to instantly restart a chart\nUpdate now allows you to set custom keybinds.</value>
+    <value>Allows you to use Delete to instantly leave a chart &amp; Allows you to use Backspace to instantly restart a chart
+Update now allows you to set custom keybinds.</value>
   </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-    <value>Allows you to set keybinds to quickly change your characters.\nNow has an in-game menu to add keybinds</value>
+    <value>Allows you to set keybinds to quickly change your characters.
+Now has an in-game menu to add keybinds</value>
   </data>
   <data name="SceneEggs" xml:space="preserve">
     <value>Makes it possible for customs to use certain background decorations that the default charts use.</value>
   </data>
   <data name="Scoreboard characters and elfins" xml:space="preserve">
-    <value>Similar to CharacterScoreboard, however, it instead adds icon clickable icon representations,\nwhich automatically switches to the character combo when clicked.</value>
+    <value>Similar to CharacterScoreboard, however, it instead adds icon clickable icon representations,
+which automatically switches to the character combo when clicked.</value>
   </data>
   <data name="ScrollSpeed" xml:space="preserve">
-    <value>Allows charters (not players) to set custom scroll speeds.\nIt's completely up to you whether you wanna use this, most charters don't use it though.</value>
+    <value>Allows charters (not players) to set custom scroll speeds.
+It's completely up to you whether you wanna use this, most charters don't use it though.</value>
   </data>
   <data name="Search++ Folder Tag" xml:space="preserve">
-    <value>An extension to SearchPlusPlus, allowing you to create folders\nand search for songs in said folders.</value>
+    <value>An extension to SearchPlusPlus, allowing you to create folders
+and search for songs in said folders.</value>
   </data>
   <data name="SearchPlusPlus" xml:space="preserve">
-    <value>Any search feature you will ever need (probably).\nOptional dependencies: KeybindManager, CustomAlbums</value>
+    <value>Any search feature you will ever need (probably).
+Optional dependencies: KeybindManager, CustomAlbums</value>
   </data>
   <data name="Song Desc" xml:space="preserve">
     <value>Displays the title, artist, and difficulty of the song in the top-right corner during play.</value>
   </data>
   <data name="StricterJudge" xml:space="preserve">
-    <value>A mod which changes the judgement window and make the game harder\nYou can manually change the judgement range in Stricter Judge.cfg</value>
+    <value>A mod which changes the judgement window and make the game harder
+You can manually change the judgement range in Stricter Judge.cfg</value>
   </data>
   <data name="True rank for 999+" xml:space="preserve">
     <value>Displays actual ranking instead of "999+" for ranks 1000 to 2000</value>
@@ -164,7 +191,8 @@
     <value>Makes Sleepwalker Rin do mashers at max speed instead of the normal slow speed.</value>
   </data>
   <data name="UnlockAll2" xml:space="preserve">
-    <value>An alternative to UnlockAll.\nMaster's stay unlocked only for as long as the mod is installed.</value>
+    <value>An alternative to UnlockAll.
+Master's stay unlocked only for as long as the mod is installed.</value>
   </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
     <value>Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa.</value>
