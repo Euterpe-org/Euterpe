@@ -9,7 +9,7 @@ internal sealed partial class SettingService
             Logger.ZLogError($"MuseDash folder is null or empty");
             if (PlatformService.GetGamePath(out var folderPath))
             {
-                var result = await MessageBoxService.NoticeConfirmMessageBoxAsync($"Auto detected MuseDash folder\r\n{folderPath}").ConfigureAwait(true);
+                var result = await MessageBoxService.NoticeConfirmAsync($"Auto detected MuseDash folder\r\n{folderPath}").ConfigureAwait(true);
                 Config.MuseDashFolder = result is MessageBoxResult.Yes ? folderPath : await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
             }
             else

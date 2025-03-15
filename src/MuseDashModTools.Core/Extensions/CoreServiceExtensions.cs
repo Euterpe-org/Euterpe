@@ -45,6 +45,7 @@ public static class CoreServiceExtensions
         builder.RegisterType<Config>().SingleInstance();
         builder.RegisterType<WindowNotificationManager>().SingleInstance();
 
+        builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GameService>().As<IGameService>().PropertiesAutowired().SingleInstance();
@@ -52,6 +53,7 @@ public static class CoreServiceExtensions
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<NotificationService>().As<INotificationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();

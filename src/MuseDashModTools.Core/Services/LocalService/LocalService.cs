@@ -20,7 +20,7 @@ internal sealed partial class LocalService : ILocalService
         if (!outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6."))
         {
             Logger.ZLogInformation($"DotNet Runtime not found, showing error message box...");
-            await MessageBoxService.ErrorMessageBoxAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
         }
     }
 
@@ -33,24 +33,24 @@ internal sealed partial class LocalService : ILocalService
     {
         if (!FileSystemService.CheckFileExists(Config.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("MelonLoader zip file not found").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("MelonLoader zip file not found").ConfigureAwait(true);
             return false;
         }
 
         if (!ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
             return false;
         }
 
         if (!FileSystemService.TryDeleteFile(Config.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
             return false;
         }
 
         Logger.ZLogInformation($"MelonLoader installed successfully");
-        await MessageBoxService.SuccessMessageBoxAsync("MelonLoader installed successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessAsync("MelonLoader installed successfully").ConfigureAwait(true);
         return true;
     }
 
@@ -67,18 +67,18 @@ internal sealed partial class LocalService : ILocalService
                 continue;
             }
 
-            await MessageBoxService.ErrorMessageBoxAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
             return false;
         }
 
         if (!FileSystemService.TryDeleteDirectory(Config.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
             return false;
         }
 
         Logger.ZLogInformation($"MelonLoader uninstalled successfully");
-        await MessageBoxService.SuccessMessageBoxAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
         return true;
     }
 
@@ -153,7 +153,7 @@ internal sealed partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.ZLogCritical(ex, $"Read game version failed, showing error message box...");
-            await MessageBoxService.FormatErrorMessageBoxAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
             Environment.Exit(0);
         }
 
