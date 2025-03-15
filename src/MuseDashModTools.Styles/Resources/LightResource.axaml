@@ -3,4 +3,5 @@
     <Bitmap x:Key="BackgroundImage">avares://MuseDashModTools/Assets/Background-Light.webp</Bitmap>
     <Bitmap x:Key="TitleImage">avares://MuseDashModTools/Assets/MDMC_Title_Light.webp</Bitmap>
     <Color x:Key="SecondaryCardColor">#FAFAFA</Color>
+    <Color x:Key="PrimaryTitleColor">#1F2024</Color>
 </ResourceDictionary>

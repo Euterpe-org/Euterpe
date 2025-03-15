@@ -17,7 +17,15 @@
                 <Border Width="320"
                         Theme="{DynamicResource CardBorder}"
                         VerticalAlignment="Top">
-                    <Expander>
+                    <Expander IsEnabled="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}">
+                        <Expander.Styles>
+                            <Style Selector="PathIcon:disabled">
+                                <Setter Property="IsVisible" Value="False" />
+                            </Style>
+                            <Style Selector="Border:disabled">
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Style>
+                        </Expander.Styles>
                         <Expander.Header>
                             <StackPanel Orientation="Horizontal" Spacing="10">
 
@@ -40,15 +48,32 @@
                                     <!--  Name  -->
                                     <TextBlock FontSize="16"
                                                FontWeight="SemiBold"
-                                               Text="{TemplateBinding ContributorName, Mode=OneWay}" />
+                                               Foreground="{DynamicResource PrimaryTitleColor}"
+                                               Text="{TemplateBinding ContributorName, Mode=OneWay}">
+                                        <TextBlock.Styles>
+                                            <Style Selector="TextBlock:disabled">
+                                                <Style.Setters>
+                                                    <Setter Property="Foreground" Value="{DynamicResource PrimaryTitleColor}" />
+                                                </Style.Setters>
+                                            </Style>
+                                        </TextBlock.Styles>
+                                    </TextBlock>
 
                                     <!--  Description  -->
                                     <TextBlock Width="150"
                                                FontSize="10"
-                                               Foreground="Gray"
+                                               Foreground="LightSlateGray"
                                                IsVisible="{TemplateBinding ContributorDescription, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
                                                Text="{TemplateBinding ContributorDescription, Mode=OneWay}"
-                                               TextWrapping="Wrap" />
+                                               TextWrapping="Wrap">
+                                        <TextBlock.Styles>
+                                            <Style Selector="TextBlock:disabled">
+                                                <Style.Setters>
+                                                    <Setter Property="Foreground" Value="LightSlateGray" />
+                                                </Style.Setters>
+                                            </Style>
+                                        </TextBlock.Styles>
+                                    </TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </Expander.Header>
@@ -76,11 +101,6 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
 
-                            <!--  Text When No Links  -->
-                            <TextBlock HorizontalAlignment="Center"
-                                       Foreground="Gray"
-                                       IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNull}, Mode=OneWay}"
-                                       Text="No links available" />
                         </Panel>
                     </Expander>
                 </Border>
