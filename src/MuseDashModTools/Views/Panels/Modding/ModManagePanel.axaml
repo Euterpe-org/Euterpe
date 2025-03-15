@@ -275,13 +275,13 @@
 
                     <!--  Details Section  -->
                     <StackPanel>
-                        <TextBlock Classes="SectionTitle" Text="Details" />
+                        <TextBlock Classes="SectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Details}}" />
 
                         <!--  Author Info  -->
                         <Grid ColumnDefinitions="130,*">
                             <TextBlock Grid.Column="0"
                                        Classes="DetailRowText"
-                                       Text="Author:" />
+                                       Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
                             <TextBlock Grid.Column="1"
                                        Margin="0,0,0,14"
                                        Text="{Binding SelectedMod.Author, Mode=OneWay}" />
@@ -291,7 +291,7 @@
                         <Grid ColumnDefinitions="130,*">
                             <TextBlock Grid.Column="0"
                                        Classes="DetailRowText"
-                                       Text="Supported:" />
+                                       Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_SupportedGameVersion}}" />
                             <Label Grid.Column="1"
                                    Margin="0,0,0,14"
                                    Classes="Ghost SharedStateLabel"
@@ -303,10 +303,10 @@
                               IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
                             <TextBlock Grid.Column="0"
                                        Classes="DetailRowText"
-                                       Text="Repository:" />
+                                       Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}" />
                             <HyperlinkButton Grid.Column="1"
                                              Classes="WithIcon Underline"
-                                             Content="Visit"
+                                             Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_Visit}}"
                                              NavigateUri="{Binding SelectedMod.RepoPageUrl, Mode=OneWay}" />
                         </Grid>
                     </StackPanel>
@@ -314,7 +314,7 @@
                     <!--  Dependencies Section  -->
                     <Panel IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
                         <StackPanel Spacing="16">
-                            <TextBlock Classes="SectionTitle" Text="Dependencies" />
+                            <TextBlock Classes="SectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Dependencies}}" />
                             <ItemsControl ItemsSource="{Binding SelectedMod.DependencyNames, Mode=OneWay}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -326,12 +326,6 @@
                             </ItemsControl>
                         </StackPanel>
                     </Panel>
-
-                    <!--  SHA256 Section  -->
-                    <StackPanel Spacing="8">
-                        <TextBlock Text="SHA256" />
-                        <TextBlock FontSize="12" Text="{Binding SelectedMod.SHA256, Mode=OneWay}" />
-                    </StackPanel>
 
                 </StackPanel>
             </ScrollViewer>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+             xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
              x:Class="MuseDashModTools.Views.Panels.Setting.ExperiencePanel"
              x:DataType="vm:ExperiencePanelViewModel"
              mc:Ignorable="d"
@@ -17,13 +18,13 @@
     <StackPanel Classes="SharedContentListRoot">
 
         <!--  Show Console  -->
-        <mdmt:SettingItem Title="Show Console" Description="Whether to display the console after the game is launched">
-            <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=OneWayToSource}" />
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowConsole}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowConsole}}">
+            <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
         </mdmt:SettingItem>
 
         <!-- Always Show ScrollBar -->
-        <mdmt:SettingItem Title="Always Show ScrollBar" Description="Always show scrollbar for mod list">
-            <ToggleSwitch IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=OneWayToSource}" />
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_AlwaysShowScrollBar}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}">
+            <ToggleSwitch IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=TwoWay}" />
         </mdmt:SettingItem>
 
     </StackPanel>

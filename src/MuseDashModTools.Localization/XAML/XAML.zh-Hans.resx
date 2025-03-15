@@ -134,14 +134,14 @@
         <value>文件管理</value>
     </data>
     <data name="SearchBarWatermark_Mod" xml:space="preserve">
-    <value>搜索模组    （名字，作者，描述）</value>
-  </data>
-    <data name="Setting_DownloadPrerelease" xml:space="preserve">
-    <value>下载预发行版本：</value>
-  </data>
-    <data name="Setting_DownloadSource" xml:space="preserve">
-    <value>下载源：</value>
-  </data>
+        <value>搜索模组    （名字，作者）</value>
+    </data>
+    <data name="Setting_Title_DownloadPrerelease" xml:space="preserve">
+        <value>下载预发行版本</value>
+    </data>
+    <data name="Setting_Title_DownloadSource" xml:space="preserve">
+        <value>下载源</value>
+    </data>
     <data name="Setting_DownloadSource_Custom" xml:space="preserve">
     <value>自定义</value>
   </data>
@@ -370,4 +370,40 @@
     <data name="DropDownButton_Open" xml:space="preserve">
       <value>打开</value>
   </data>
+    <data name="Setting_Description_DownloadSource" xml:space="preserve">
+        <value>模组列表和下载的源</value>
+    </data>
+    <data name="Setting_Description_Language" xml:space="preserve">
+        <value>界面语言</value>
+    </data>
+    <data name="Setting_Title_UpdateSource" xml:space="preserve">
+        <value>更新源</value>
+    </data>
+    <data name="Setting_Description_DownloadPrerelease" xml:space="preserve">
+        <value>检查 MDMT 更新的时候检查预发行版本</value>
+    </data>
+    <data name="Setting_Title_ShowConsole" xml:space="preserve">
+        <value>显示控制台</value>
+    </data>
+    <data name="Setting_Title_GitHubToken" xml:space="preserve">
+        <value>GitHub令牌</value>
+    </data>
+    <data name="ModInfo_Author" xml:space="preserve">
+        <value>作者</value>
+    </data>
+    <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+        <value>支持游戏版本</value>
+    </data>
+    <data name="ModInfo_Repository" xml:space="preserve">
+        <value>仓库</value>
+    </data>
+    <data name="ModInfo_Dependencies" xml:space="preserve">
+        <value>依赖</value>
+    </data>
+    <data name="ModInfo_Details" xml:space="preserve">
+        <value>详情</value>
+    </data>
+    <data name="HyperLinkButton_Visit" xml:space="preserve">
+        <value>访问</value>
+    </data>
 </root>

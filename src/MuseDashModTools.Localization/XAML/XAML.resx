@@ -134,14 +134,14 @@
         <value>File Management</value>
     </data>
     <data name="SearchBarWatermark_Mod" xml:space="preserve">
-    <value>Search Mods    (Name, Author, Descriptions)</value>
-  </data>
-    <data name="Setting_DownloadPrerelease" xml:space="preserve">
-    <value>Download Prerelease: </value>
-  </data>
-    <data name="Setting_DownloadSource" xml:space="preserve">
-    <value>Download Source: </value>
-  </data>
+        <value>Search Mods    (Name, Author)</value>
+    </data>
+    <data name="Setting_Title_DownloadPrerelease" xml:space="preserve">
+        <value>Download Prerelease</value>
+    </data>
+    <data name="Setting_Title_DownloadSource" xml:space="preserve">
+        <value>Download Source</value>
+    </data>
     <data name="Setting_DownloadSource_Custom" xml:space="preserve">
     <value>Custom</value>
   </data>
@@ -370,4 +370,55 @@
     <data name="DropDownButton_Open" xml:space="preserve">
       <value>Open</value>
   </data>
+    <data name="Setting_Description_DownloadSource" xml:space="preserve">
+        <value>Source for Mod List and Downloads</value>
+    </data>
+    <data name="Setting_Description_Language" xml:space="preserve">
+        <value>UI Language</value>
+    </data>
+    <data name="Setting_Title_UpdateSource" xml:space="preserve">
+        <value>Update Source</value>
+    </data>
+    <data name="Setting_Description_DownloadPrerelease" xml:space="preserve">
+        <value>Check for pre-release versions when checking for MDMT updates</value>
+    </data>
+    <data name="Setting_Title_GitHubToken" xml:space="preserve">
+        <value>GitHub Token</value>
+    </data>
+    <data name="Setting_Description_GitHubToken" xml:space="preserve">
+        <value>GitHub Token used for GitHub API access, required for GitHub API update source</value>
+    </data>
+    <data name="Setting_Description_UpdateSource" xml:space="preserve">
+        <value>Source to check for MDMT updates</value>
+    </data>
+    <data name="Setting_Title_ShowConsole" xml:space="preserve">
+        <value>Show Console</value>
+    </data>
+    <data name="Setting_Description_ShowConsole" xml:space="preserve">
+        <value>Whether to display the console after the game is launched</value>
+    </data>
+    <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+        <value>Always Show ScrollBar</value>
+    </data>
+    <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+        <value>Always show scrollbar for list</value>
+    </data>
+    <data name="ModInfo_Author" xml:space="preserve">
+        <value>Author</value>
+    </data>
+    <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+        <value>Supported Game Version</value>
+    </data>
+    <data name="ModInfo_Repository" xml:space="preserve">
+        <value>Repository</value>
+    </data>
+    <data name="ModInfo_Dependencies" xml:space="preserve">
+        <value>Dependencies</value>
+    </data>
+    <data name="ModInfo_Details" xml:space="preserve">
+        <value>Details</value>
+    </data>
+    <data name="HyperLinkButton_Visit" xml:space="preserve">
+        <value>Visit</value>
+    </data>
 </root>
