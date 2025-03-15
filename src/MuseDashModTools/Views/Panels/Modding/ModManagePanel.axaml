@@ -57,7 +57,7 @@
                 <!--  Mod List  -->
                 <u:LoadingContainer Grid.Row="1"
                                     IsLoading="{Binding !AllModsLoaded, Mode=OneWay}"
-                                    LoadingMessage="Loading...">
+                                    LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}">
                     <ScrollViewer Margin="12,0,12,12" AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
                         <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
