@@ -172,7 +172,7 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
                                          public static global::System.Globalization.CultureInfo? Culture { get; set; }
 
                                          public static string GetResourceString(string resourceKey) =>
-                                             ResourceManager.GetString(resourceKey, Culture) ?? $"#{resourceKey}#";
+                                             ResourceManager.GetString(resourceKey, Culture) ?? resourceKey;
 
                                      """);
 
