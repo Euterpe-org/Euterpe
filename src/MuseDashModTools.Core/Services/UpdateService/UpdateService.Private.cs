@@ -96,7 +96,7 @@ internal sealed partial class UpdateService
             return;
         }
 
-        var result = await MessageBoxService.NoticeConfirmMessageBoxAsync($"New version available: {releaseVersion}, do you want to upgrade?")
+        var result = await MessageBoxService.NoticeConfirmAsync($"New version available: {releaseVersion}, do you want to upgrade?")
             .ConfigureAwait(true);
 
         if (result == MessageBoxResult.Yes)
@@ -189,7 +189,7 @@ internal sealed partial class UpdateService
             return;
         }
 
-        var result = await MessageBoxService.NoticeConfirmMessageBoxAsync($"New version available: {releaseVersion}, do you want to upgrade?")
+        var result = await MessageBoxService.NoticeConfirmAsync($"New version available: {releaseVersion}, do you want to upgrade?")
             .ConfigureAwait(true);
 
         if (result == MessageBoxResult.Yes)

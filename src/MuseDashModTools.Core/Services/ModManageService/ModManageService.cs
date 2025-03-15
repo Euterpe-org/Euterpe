@@ -41,9 +41,6 @@ internal sealed partial class ModManageService : IModManageService
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required WindowNotificationManager WindowNotificationManager { get; init; }
-
-    [UsedImplicitly]
     public required IDownloadManager DownloadManager { get; init; }
 
     [UsedImplicitly]
