@@ -1,3 +1,5 @@
+using MuseDashModTools.Localization;
+
 namespace MuseDashModTools.Models;
 
 public sealed partial class ModDto : ObservableObject
@@ -59,8 +61,11 @@ public sealed partial class ModDto : ObservableObject
 
     public string[] DependencyNames => !HasDependency ? [] : [..ModDependencies, ..LibDependencies];
 
-    // Compatible
-    public LocalizedString CompatibleGameVersion => GameVersion == "*" ? AllGameVersionCompatible : GameVersion;
+    // LocalizedStrings
+    public LocalizedString LocalizedCompatibleGameVersion => GameVersion == "*" ? AllGameVersionCompatible : GameVersion;
+
+    public ModDescriptionLiteral.LocalizedString LocalizedModDescription =>
+        ModDescription.ResourceManager.GetString(Name) is null ? Description : new ModDescriptionLiteral.LocalizedString(Name);
 
     #endregion Dto Properties
 

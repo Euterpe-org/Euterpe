@@ -24,7 +24,6 @@ global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Controls;
 global using MuseDashModTools.Models.Enums;
 global using MuseDashModTools.Services;
-global using MuseDashModTools.Utils;
 global using MuseDashModTools.ViewModels;
 global using MuseDashModTools.ViewModels.Components;
 global using MuseDashModTools.ViewModels.Pages;
