@@ -159,7 +159,7 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
 
     private static void GenerateDesignerFile(SourceProductionContext spc, AdditionalText resourceFile, string className)
     {
-        var designerBuilder = new GeneratorStringBuilder();
+        var designerBuilder = new IndentedGeneratorStringBuilder();
         designerBuilder.AppendLine($$"""
                                      namespace {{MuseDashModToolsLocalizationNamespace}};
 
@@ -176,16 +176,20 @@ public sealed class ResourceKeysGenerator : IncrementalGeneratorBase
 
                                      """);
 
+        designerBuilder.IncreaseIndent();
         foreach (var (name, value) in ExtractResourceData(resourceFile))
         {
-            designerBuilder.AppendLine($"""
-                                            /// <summary>
-                                            ///     {value.EscapeXmlDoc()}
-                                            /// </summary>
-                                            public static string {name.GetValidIdentifier()} => GetResourceString("{name}");
-                                        """);
+            designerBuilder.AppendLine("/// <summary>");
+            foreach (var str in value.Split('\n'))
+            {
+                designerBuilder.AppendLine($"/// \t{str.EscapeXmlDoc()}");
+            }
+
+            designerBuilder.AppendLine("/// </summary>");
+            designerBuilder.AppendLine($"public static string {name.GetValidIdentifier()} => GetResourceString(\"{name}\");");
         }
 
+        designerBuilder.ResetIndent();
         designerBuilder.AppendLine("}");
         spc.AddSource($"{className}.Designer.cs", designerBuilder.ToString());
     }
