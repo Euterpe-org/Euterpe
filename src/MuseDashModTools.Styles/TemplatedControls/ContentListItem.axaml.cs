@@ -1,12 +1,12 @@
 ﻿namespace MuseDashModTools.Styles.TemplatedControls;
 
-public sealed class SettingItem : ContentControl
+public sealed class ContentListItem : ContentControl
 {
     public static readonly StyledProperty<string> TitleProperty =
-        AvaloniaProperty.Register<SettingItem, string>(nameof(Title));
+        AvaloniaProperty.Register<ContentListItem, string>(nameof(Title));
 
     public static readonly StyledProperty<string> DescriptionProperty =
-        AvaloniaProperty.Register<SettingItem, string>(nameof(Description));
+        AvaloniaProperty.Register<ContentListItem, string>(nameof(Description));
 
     public string Title
     {

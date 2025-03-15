@@ -18,15 +18,15 @@
     <StackPanel Classes="SharedContentListRoot">
 
         <!--  Language  -->
-        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}"
-                          Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_Language}}">
+        <mdmt:ContentListItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}"
+                              Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_Language}}">
             <StackPanel Classes="SharedContentListItemHorizontal">
                 <ComboBox MinWidth="200"
                           ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
                           SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}" />
                 <Button Command="{Binding ApplyLanguageCommand}" Content="{Localize {x:Static loc:XAMLLiteral.Button_Apply}}" />
             </StackPanel>
-        </mdmt:SettingItem>
+        </mdmt:ContentListItem>
 
     </StackPanel>
 </UserControl>

@@ -22,7 +22,7 @@
                 </Style>
             </StackPanel.Styles>
 
-            <mdmt:SettingItem Title="Development Environment">
+            <mdmt:ContentListItem Title="Development Environment">
                 <Grid ColumnDefinitions="*,*" Margin="5,0,10,0">
                     <Button Grid.Column="0"
                             Classes="SharedTransparent SharedCard"
@@ -108,9 +108,9 @@
                         </Border>
                     </Button>
                 </Grid>
-            </mdmt:SettingItem>
+            </mdmt:ContentListItem>
 
-            <mdmt:SettingItem Title="Submit Your Mod">
+            <mdmt:ContentListItem Title="Submit Your Mod">
                 <Button Classes="SharedTransparent SharedCard"
                         CommandParameter="https://github.com/MDModsDev/ModLinks"
                         Margin="5,0,10,0">
@@ -141,9 +141,9 @@
                         </Grid>
                     </Border>
                 </Button>
-            </mdmt:SettingItem>
+            </mdmt:ContentListItem>
 
-            <mdmt:SettingItem Title="Recommended IDEs">
+            <mdmt:ContentListItem Title="Recommended IDEs">
                 <UniformGrid Columns="3"
                              Margin="5,0,10,0">
                     <Button Classes="SharedTransparent SharedCard"
@@ -209,7 +209,7 @@
                         </Border>
                     </Button>
                 </UniformGrid>
-            </mdmt:SettingItem>
+            </mdmt:ContentListItem>
 
         </StackPanel>
     </ScrollViewer>
