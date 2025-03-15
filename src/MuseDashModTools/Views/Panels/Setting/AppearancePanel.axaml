@@ -19,7 +19,7 @@
 
         <!--  Language  -->
         <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}"
-                          Description="The current version does not support switching languages.">
+                          Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_Language}}">
             <StackPanel Classes="SharedContentListItemHorizontal">
                 <ComboBox MinWidth="200"
                           ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"

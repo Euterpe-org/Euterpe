@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+             xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
              x:Class="MuseDashModTools.Views.Panels.Setting.DownloadPanel"
              x:DataType="vm:DownloadPanelViewModel"
              mc:Ignorable="d"
@@ -18,7 +19,7 @@
     <StackPanel Classes="SharedContentListRoot">
 
         <!--  Download Source  -->
-        <mdmt:SettingItem Title="Download Source" Description="Source to get mod list and downloads">
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_DownloadSource}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_DownloadSource}}">
             <StackPanel Classes="SharedContentListItemHorizontal">
                 <ComboBox ItemsSource="{Binding DownloadSources, Mode=OneTime}" SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
                 <TextBox MinWidth="200"
@@ -31,22 +32,21 @@
         </mdmt:SettingItem>
 
         <!--  Update Source  -->
-        <mdmt:SettingItem Title="Update Source" Description="Source to check for MDMT updates">
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_UpdateSource}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_UpdateSource}}">
             <ComboBox ItemsSource="{Binding UpdateSources, Mode=OneTime}" SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}" />
         </mdmt:SettingItem>
 
         <!--  GitHub Token  -->
-        <mdmt:SettingItem Title="GitHub Token"
-                          Description="GitHub Token used for GitHub API access, required for GitHub API update source"
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_GitHubToken}}"
+                          Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_GitHubToken}}"
                           IsVisible="{Binding Config.UpdateSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:UpdateSource.GitHubAPI}, Mode=OneWay}">
             <TextBox Classes="ClearButton"
                      Foreground="Gray"
-                     Text="{Binding Config.GitHubToken, Mode=TwoWay}"
-                     Watermark="Leave blank if no need" />
+                     Text="{Binding Config.GitHubToken, Mode=TwoWay}"/>
         </mdmt:SettingItem>
 
         <!--  Download Prerelease  -->
-        <mdmt:SettingItem Title="Download Prerelease" Description="Check for pre-release versions when checking for MDMT updates">
+        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_DownloadPrerelease}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_DownloadPrerelease}}">
             <ToggleSwitch IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
         </mdmt:SettingItem>
 
