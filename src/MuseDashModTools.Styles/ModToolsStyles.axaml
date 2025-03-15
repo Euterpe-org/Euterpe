@@ -25,7 +25,7 @@
     <StyleInclude Source="/TemplatedControls/Difficulty.axaml" />
     <StyleInclude Source="/TemplatedControls/NaviButtonsControl.axaml" />
     <StyleInclude Source="/TemplatedControls/ContributorCardControl.axaml" />
-    <StyleInclude Source="/TemplatedControls/SettingItem.axaml" />
+    <StyleInclude Source="/TemplatedControls/ContentListItem.axaml" />
 
     <!--  Styles  -->
     <StyleInclude Source="/Styles/BorderStyles.axaml" />

@@ -18,14 +18,16 @@
     <StackPanel Classes="SharedContentListRoot">
 
         <!--  Show Console  -->
-        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowConsole}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowConsole}}">
+        <mdmt:ContentListItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowConsole}}"
+                              Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowConsole}}">
             <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
-        </mdmt:SettingItem>
+        </mdmt:ContentListItem>
 
         <!-- Always Show ScrollBar -->
-        <mdmt:SettingItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_AlwaysShowScrollBar}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}">
+        <mdmt:ContentListItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_AlwaysShowScrollBar}}"
+                              Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}">
             <ToggleSwitch IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=TwoWay}" />
-        </mdmt:SettingItem>
+        </mdmt:ContentListItem>
 
     </StackPanel>
 </UserControl>

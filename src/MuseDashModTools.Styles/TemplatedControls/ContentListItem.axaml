@@ -2,12 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:MuseDashModTools.Styles.TemplatedControls">
     <Design.PreviewWith>
-        <controls:SettingItem Title="Setting" Description="Description">
+        <controls:ContentListItem Title="Setting" Description="Description">
             <TextBox Text="Content" />
-        </controls:SettingItem>
+        </controls:ContentListItem>
     </Design.PreviewWith>
 
-    <Style Selector="controls|SettingItem">
+    <Style Selector="controls|ContentListItem">
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel Classes="SharedContentListItem"

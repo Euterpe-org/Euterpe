@@ -17,7 +17,7 @@
     <StackPanel Classes="SharedContentListRoot">
 
         <!--  MuseDash Game Folder  -->
-        <mdmt:SettingItem Title="Muse Dash Game Folder">
+        <mdmt:ContentListItem Title="Muse Dash Game Folder">
             <StackPanel Classes="SharedContentListItemVertical">
                 <TextBox Classes="SharedDesc"
                          IsReadOnly="True"
@@ -26,11 +26,11 @@
                         HorizontalAlignment="Left"
                         Theme="{DynamicResource OutlineButton}" />
             </StackPanel>
-        </mdmt:SettingItem>
+        </mdmt:ContentListItem>
 
         <!--  Cache Folder  -->
-        <mdmt:SettingItem Title="Cache Folder"
-                          Description="This includes the cache when you download files. Please do not change this when performing other operations">
+        <mdmt:ContentListItem Title="Cache Folder"
+                              Description="This includes the cache when you download files. Please do not change this when performing other operations">
             <StackPanel Classes="SharedContentListItemVertical">
                 <TextBox Foreground="Gray"
                          IsReadOnly="True"
@@ -39,7 +39,7 @@
                         HorizontalAlignment="Left"
                         Theme="{DynamicResource OutlineButton}" />
             </StackPanel>
-        </mdmt:SettingItem>
+        </mdmt:ContentListItem>
 
     </StackPanel>
 </UserControl>
