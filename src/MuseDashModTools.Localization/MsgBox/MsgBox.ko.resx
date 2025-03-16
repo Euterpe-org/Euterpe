@@ -43,9 +43,6 @@
     <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
     <value>먼저 정확한 뮤즈대쉬 폴더를 골라주세요!</value>
   </data>
-    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
-    <value>뮤즈대쉬 폴더를 잘못 골랐습니다\n폴더를 다시 골라주세요</value>
-  </data>
     <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
     <value>업데이터를 대상 경로에 복사할수없습니다\n{0}</value>
   </data>
@@ -118,7 +115,7 @@
     <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
     <value>MuseDashModTools 모드가 설치되어 있지 않습니다.\nMuse Dash를 시작할 때 모든 모드에 사용 가능한 업데이트가 있는지 확인합니다.\n지금 설치하시겠습니까?</value>
   </data>
-    <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
+    <data name="MsgBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>감지된 Muse Dash 폴더 경로는 {0} 입니다.\n 이것이 올바른 게임 폴더인가 맞나요?</value>
   </data>
     <data name="MsgBox_Content_InvalidPath" xml:space="preserve">

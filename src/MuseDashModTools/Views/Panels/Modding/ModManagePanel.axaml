@@ -187,7 +187,7 @@
                                         Spacing="10">
                                 <Button Command="{Binding OpenConfigFileCommand, Mode=OneTime}"
                                         Theme="{StaticResource GhostButton}"
-                                        ToolTip.Tip="Edit mod config file">
+                                        ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ToolTip_EditModConfig}}">
                                     <PathIcon Height="18" Data="{StaticResource SemiIconSetting}" />
                                 </Button>
                                 <Separator Classes="Vertical" />

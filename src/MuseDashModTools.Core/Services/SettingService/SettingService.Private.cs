@@ -7,14 +7,22 @@ internal sealed partial class SettingService
         if (Config.MuseDashFolder.IsNullOrEmpty())
         {
             Logger.ZLogError($"MuseDash folder is null or empty");
+
+            var useDetectedPath = false;
             if (PlatformService.GetGamePath(out var folderPath))
             {
-                var result = await MessageBoxService.NoticeConfirmAsync($"Auto detected MuseDash folder\r\n{folderPath}").ConfigureAwait(true);
-                Config.MuseDashFolder = result is MessageBoxResult.Yes ? folderPath : await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
+                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MsgBox_Content_Confirm_DetectedMuseDashPath, folderPath).ConfigureAwait(true);
+                useDetectedPath = result is MessageBoxResult.Yes;
+            }
+
+            if (useDetectedPath)
+            {
+                Config.MuseDashFolder = folderPath;
             }
             else
             {
                 Logger.ZLogInformation($"Letting user choose MuseDash folder...");
+                await MessageBoxService.NoticeOverlayAsync(MsgBox_Content_Notice_ChooseMuseDashPath).ConfigureAwait(true);
                 Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
             }
         }
