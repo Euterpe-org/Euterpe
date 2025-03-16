@@ -38,9 +38,10 @@
                 <Image Classes="DialogDonationQr" Source="/Assets/DonationQRs/Alipay.webp" />
             </Border>
 
-            <Border Classes="DialogDonationQr">
-                <Image Classes="DialogDonationQr" Source="/Assets/DonationQRs/Paypal.webp" />
-            </Border>
+            <HyperlinkButton HorizontalAlignment="Center"
+                             Classes="Underline"
+                             Content="PayPal"
+                             NavigateUri="https://paypal.me/lxymahatma" />
 
         </UniformGrid>
     </StackPanel>
