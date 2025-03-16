@@ -223,9 +223,6 @@
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>중복제작자: </value>
   </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>로컬 버전: {0} (WOW MOD DEV)</value>
-  </data>
   <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash 폴더 경로</value>
   </data>

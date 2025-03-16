@@ -214,9 +214,6 @@
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Duplicado de:</value>
   </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>Versión instalada: {0} (MODO DESARROLLADOR)</value>
-  </data>
   <data name="XAML_Path" xml:space="preserve">
     <value>Carpeta de Muse Dash</value>
   </data>

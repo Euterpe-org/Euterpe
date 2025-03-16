@@ -223,9 +223,6 @@
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Дубликат к:</value>
   </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>Установленная версия: {0} (ВАУ МОДОДЕЛ)</value>
-  </data>
   <data name="XAML_Path" xml:space="preserve">
     <value>Путь к папке Muse Dash</value>
   </data>

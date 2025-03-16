@@ -91,28 +91,38 @@
 
                                             <!--  Mod Status Tags  -->
                                             <StackPanel Classes="SharedControlsHorizontal">
+                                                <StackPanel.Styles>
+                                                    <Style Selector="Label.Gray">
+                                                        <Setter Property="Content" Value="{Binding Version, Mode=OneWay}" />
+                                                    </Style>
+                                                    <Style Selector="Label.Indigo">
+                                                        <Setter Property="Content" Value="{Binding LocalVersion, Mode=OneWay}" />
+                                                    </Style>
+                                                    <Style Selector="Label.Orange">
+                                                        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}" />
+                                                    </Style>
+                                                    <Style Selector="Label.Red">
+                                                        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}" />
+                                                    </Style>
+                                                    <Style Selector="Label.Purple">
+                                                        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Newer}}" />
+                                                    </Style>
+                                                    <Style Selector="Label.Green">
+                                                        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}" />
+                                                    </Style>
+                                                </StackPanel.Styles>
 
-                                                <!--  Online Version  -->
                                                 <Label Classes="Ghost SharedStateLabel"
-                                                       Content="{Binding Version, Mode=OneWay}"
-                                                       IsVisible="{Binding !IsLocal, Mode=OneWay}" />
+                                                       Classes.Gray="{Binding !IsLocal, Mode=OneWay}"
+                                                       Classes.Indigo="{Binding IsLocal, Mode=OneWay}" />
 
-                                                <!--  Local Version  -->
-                                                <Label Classes="Ghost Indigo SharedStateLabel"
-                                                       Content="{Binding LocalVersion, Mode=OneWay}"
-                                                       IsVisible="{Binding IsLocal, Mode=OneWay}" />
+                                                <Label Classes="Ghost SharedStateLabel"
+                                                       Classes.Green="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
+                                                       Classes.Orange="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
+                                                       Classes.Purple="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
+                                                       Classes.Red="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
+                                                       IsVisible="{Binding State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:ModState.Normal}, Mode=OneWay}" />
 
-                                                <!--  Incompatible State  -->
-                                                <Label Classes="Ghost Red SharedStateLabel"
-                                                       Content="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}"
-                                                       IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
-
-                                                <!--  Modified State  -->
-                                                <Label Classes="Ghost Orange SharedStateLabel"
-                                                       Content="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}"
-                                                       IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
-
-                                                <!--  Update Status  -->
                                                 <StackPanel Classes="SharedControlsHorizontal" IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                                     <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                                     <Label Classes="Ghost Green SharedStateLabel" Content="{Binding Version, Mode=OneWay}" />
@@ -228,32 +238,43 @@
                                     Grid.ColumnSpan="2"
                                     Margin="0,8"
                                     Classes="SharedControlsHorizontal">
+                            <StackPanel.Styles>
+                                <Style Selector="Label.Gray">
+                                    <Setter Property="Content" Value="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}" />
+                                </Style>
+                                <Style Selector="Label.Indigo">
+                                    <Setter Property="Content" Value="{Binding SelectedMod.LocalVersion, StringFormat='v{0}', Mode=OneWay}" />
+                                </Style>
+                                <Style Selector="Label.Orange">
+                                    <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}" />
+                                </Style>
+                                <Style Selector="Label.Red">
+                                    <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}" />
+                                </Style>
+                                <Style Selector="Label.Purple">
+                                    <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Newer}}" />
+                                </Style>
+                                <Style Selector="Label.Green">
+                                    <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}" />
+                                </Style>
+                            </StackPanel.Styles>
+
+                            <!--  Version Label  -->
+                            <Label Classes="Ghost SharedStateLabel"
+                                   Classes.Gray="{Binding !SelectedMod.IsLocal, Mode=OneWay}"
+                                   Classes.Indigo="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
 
                             <!--  Status Labels  -->
-                            <Label Classes="Ghost Red SharedStateLabel"
-                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}"
-                                   IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}" />
-
                             <Label Classes="Ghost Blue SharedStateLabel"
                                    Content="{Localize {x:Static loc:XAMLLiteral.ModState_Normal}}"
                                    IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
 
-                            <Label Classes="Ghost Orange SharedStateLabel"
-                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}"
-                                   IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}" />
-
-                            <Label Classes="Ghost Green SharedStateLabel"
-                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}"
-                                   IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}" />
-
-                            <!--  Version Labels  -->
-                            <Label Classes="Ghost Gray SharedStateLabel"
-                                   Content="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}"
-                                   IsVisible="{Binding !SelectedMod.IsLocal, Mode=OneWay}" />
-
-                            <Label Classes="Ghost Indigo SharedStateLabel"
-                                   Content="{Binding SelectedMod.LocalVersion, StringFormat='v{0}', Mode=OneWay}"
-                                   IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+                            <Label Classes="Ghost SharedStateLabel"
+                                   Classes.Green="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
+                                   Classes.Orange="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
+                                   Classes.Purple="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
+                                   Classes.Red="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
+                                   IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:ModState.Normal}, Mode=OneWay}" />
 
                             <!--  Update Version Indicator  -->
                             <StackPanel Classes="SharedControlsHorizontal" IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">

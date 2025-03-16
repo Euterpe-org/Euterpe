@@ -223,9 +223,6 @@
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Duplikálja:</value>
   </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>Helyi verzió: {0} (ATYA ÚRISTEN, ÖN FEJLESZTŐ?!)</value>
-  </data>
   <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash mappa</value>
   </data>
