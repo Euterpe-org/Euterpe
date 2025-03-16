@@ -6,6 +6,7 @@ global using System.Runtime.Versioning;
 global using Autofac;
 global using Avalonia.Controls;
 global using Downloader;
+global using DynamicData;
 global using JetBrains.Annotations;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;

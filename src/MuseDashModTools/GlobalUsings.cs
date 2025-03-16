@@ -12,6 +12,7 @@ global using Avalonia.Threading;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 global using Downloader;
+global using DynamicData;
 global using JetBrains.Annotations;
 global using Microsoft.Extensions.Logging;
 global using MuseDashModTools.Abstractions;

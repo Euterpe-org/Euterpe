@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using DynamicData;
 using DynamicData.Binding;
 
 namespace MuseDashModTools.ViewModels.Panels.Modding;
