@@ -1,10 +1,12 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
              xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
+             xmlns:u="https://irihi.tech/ursa"
              xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
              x:Class="MuseDashModTools.Views.Panels.Setting.AboutPanel"
              x:DataType="vm:AboutPanelViewModel"
@@ -69,10 +71,9 @@
                             <TextBlock.Inlines>
                                 <Run Text="Muse Dash Mod Tools is licensed under the" />
                                 <InlineUIContainer>
-                                    <mdmt:ImageButton
-                                        CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
-                                        ImageHeight="13"
-                                        ImageSource="/Assets/MIT_Logo.png" />
+                                    <mdmt:ImageButton CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
+                                                      ImageHeight="13"
+                                                      ImageSource="/Assets/MIT_Logo.png" />
                                 </InlineUIContainer>
                                 <Run Text="license." />
                                 <Run Text="Powered by" />
@@ -94,30 +95,25 @@
                         <!--  Links  -->
                         <StackPanel Orientation="Horizontal" Spacing="15">
                             <StackPanel.Styles>
-                                <Style Selector="Button">
+                                <Style Selector="u|IconButton">
                                     <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                                    <Setter Property="IconPlacement" Value="Left" />
                                 </Style>
                             </StackPanel.Styles>
 
-                            <Button Command="{Binding CheckUpdateCommand, Mode=OneTime}"
-                                    Content="Check Update"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton Command="{Binding CheckUpdateCommand, Mode=OneTime}" Content="{Localize {x:Static loc:XAMLLiteral.Button_CheckUpdate}}" />
 
-                            <Button CommandParameter="https://github.com/MDModsDev/MuseDashModTools"
-                                    Content="Source Code"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton CommandParameter="https://github.com/MDModsDev/MuseDashModTools"
+                                          Content="{Localize {x:Static loc:XAMLLiteral.Button_SourceCode}}"
+                                          Icon="{StaticResource SemiIconCode}" />
 
-                            <Button CommandParameter="https://crowdin.com/project/musedashmodtools"
-                                    Content="Crowdin Translate"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton CommandParameter="https://crowdin.com/project/musedashmodtools"
+                                          Content="{Localize {x:Static loc:XAMLLiteral.Button_HelpTranslate}}"
+                                          Icon="{StaticResource SemiIconLanguage}" />
 
-                            <Button CommandParameter="https://mdmc.moe/"
-                                    Content="MDMC Website"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton CommandParameter="https://mdmc.moe/" Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Website}}" />
 
-                            <Button CommandParameter="https://discord.gg/mdmc"
-                                    Content="MDMC Discord"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton CommandParameter="https://discord.gg/mdmc" Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Discord}}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>

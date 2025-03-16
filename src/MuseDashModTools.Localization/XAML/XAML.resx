@@ -179,8 +179,8 @@
     <value>UI Language</value>
   </data>
     <data name="Setting_Description_ShowConsole" xml:space="preserve">
-    <value>Whether to display the console after the game is launched</value>
-  </data>
+        <value>Whether to display the console when the game is launched</value>
+    </data>
     <data name="Setting_Description_UpdateSource" xml:space="preserve">
     <value>Source to check for MDMT updates</value>
   </data>
@@ -265,16 +265,16 @@
     <data name="XAML_ChartFilterTypes" xml:space="preserve">
     <value>Filter by</value>
   </data>
-    <data name="XAML_ChartFilterType_Easy" xml:space="preserve">
+    <data name="ChartFilterType_Easy" xml:space="preserve">
     <value>Easy</value>
   </data>
-    <data name="XAML_ChartFilterType_Hard" xml:space="preserve">
+    <data name="ChartFilterType_Hard" xml:space="preserve">
     <value>Hard</value>
   </data>
-    <data name="XAML_ChartFilterType_Hidden" xml:space="preserve">
+    <data name="ChartFilterType_Hidden" xml:space="preserve">
     <value>Hidden</value>
   </data>
-    <data name="XAML_ChartFilterType_Master" xml:space="preserve">
+    <data name="ChartFilterType_Master" xml:space="preserve">
     <value>Master</value>
   </data>
     <data name="XAML_ChartSortOptions" xml:space="preserve">
@@ -304,10 +304,10 @@
     <data name="XAML_Chart_Likes" xml:space="preserve">
     <value>Likes: </value>
   </data>
-    <data name="XAML_Chart_SearchBar" xml:space="preserve">
+    <data name="SearchBarWatermark_Chart" xml:space="preserve">
     <value>Search Charts (Name, Author, Charter)</value>
   </data>
-    <data name="XAML_Check_Update" xml:space="preserve">
+    <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Check Update</value>
   </data>
     <data name="XAML_ChooseChartPath" xml:space="preserve">
@@ -328,7 +328,7 @@
     <data name="XAML_Font" xml:space="preserve">
     <value>Font:</value>
   </data>
-    <data name="XAML_HelpTranslate" xml:space="preserve">
+    <data name="Button_HelpTranslate" xml:space="preserve">
     <value>Help Translate</value>
   </data>
     <data name="XAML_InfoJson_Author" xml:space="preserve">
@@ -367,7 +367,7 @@
     <data name="XAML_News" xml:space="preserve">
     <value>News</value>
   </data>
-    <data name="XAML_Path" xml:space="preserve">
+    <data name="Path_Folder_MuseDash" xml:space="preserve">
     <value>Muse Dash Folder Path</value>
   </data>
     <data name="XAML_ReportBug" xml:space="preserve">
@@ -421,4 +421,16 @@
     <data name="ToolTip_EditModConfig" xml:space="preserve">
       <value>Edit Mod Config</value>
   </data>
+    <data name="Path_Folder_Cache" xml:space="preserve">
+        <value/>
+    </data>
+    <data name="Button_SourceCode" xml:space="preserve">
+        <value>Source Code</value>
+    </data>
+    <data name="Button_MDMC_Website" xml:space="preserve">
+        <value>MDMC Website</value>
+    </data>
+    <data name="Button_MDMC_Discord" xml:space="preserve">
+        <value>MDMC Discord</value>
+    </data>
 </root>
