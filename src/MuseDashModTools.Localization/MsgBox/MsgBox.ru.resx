@@ -43,9 +43,6 @@
     <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
     <value>Выберите правильную папку к Muse Dash!</value>
   </data>
-    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
-    <value>Вы не выбрали папку Muse Dash\nПожалуйста, выберите её</value>
-  </data>
     <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
     <value>Невозможно скопировать Updater в выбранную папку\n{0}</value>
   </data>
@@ -118,7 +115,7 @@
     <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
     <value>Вы не установили мод MuseDashModTools\nОн проверяет обновления для модов во время запуска Muse Dash\nУстановить его?</value>
   </data>
-    <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
+    <data name="MsgBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Обнаружен путь к папке Muse Dash - {0}\nЭто правильная папка игры?</value>
   </data>
     <data name="MsgBox_Content_InvalidPath" xml:space="preserve">

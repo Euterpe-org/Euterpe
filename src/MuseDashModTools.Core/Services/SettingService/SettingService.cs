@@ -15,10 +15,7 @@ internal sealed partial class SettingService : ISettingService
             var savedConfig = await JsonSerializationService.DeserializeConfigAsync(stream).ConfigureAwait(true);
             if (savedConfig is null)
             {
-                Logger.ZLogError($"Saved setting is null");
-                await MessageBoxService.ErrorAsync("Failed to load setting, please delete the setting file and restart the application")
-                    .ConfigureAwait(true);
-                PlatformService.RevealFile(ConfigPath);
+                Logger.ZLogError($"Saved setting is null, using default settings");
                 return;
             }
 

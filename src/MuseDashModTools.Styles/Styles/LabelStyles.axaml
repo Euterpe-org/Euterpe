@@ -2,20 +2,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization">
 
-    <!--  Label Styles for Different States  -->
-    <Style Selector="Label.TagLabel">
-        <Setter Property="Theme" Value="{StaticResource TagLabel}" />
+    <Style Selector="Label">
+        <!--  Label Styles for Different States  -->
+        <Style Selector="^.TagLabel">
+            <Setter Property="Theme" Value="{StaticResource TagLabel}" />
+        </Style>
+        <Style Selector="^.Orange">
+            <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}" />
+        </Style>
+        <Style Selector="^.Red">
+            <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}" />
+        </Style>
+        <Style Selector="^.Purple">
+            <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Newer}}" />
+        </Style>
+        <Style Selector="^.Green">
+            <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}" />
+        </Style>
     </Style>
-    <Style Selector="Label.Orange">
-        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}" />
-    </Style>
-    <Style Selector="Label.Red">
-        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}" />
-    </Style>
-    <Style Selector="Label.Purple">
-        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Newer}}" />
-    </Style>
-    <Style Selector="Label.Green">
-        <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}" />
-    </Style>
+
 </Styles>

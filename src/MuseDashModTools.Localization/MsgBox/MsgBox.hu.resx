@@ -43,9 +43,6 @@
     <data name="MsgBox_Content_ChooseCorrectPath" xml:space="preserve">
     <value>Válaszd ki a Muse Dash mappát!</value>
   </data>
-    <data name="MsgBox_Content_ChoosePath" xml:space="preserve">
-    <value>Még nem választottal Muse Dash mappát\nVálaszd ki a mappát</value>
-  </data>
     <data name="MsgBox_Content_CopyUpdaterFailed" xml:space="preserve">
     <value>Updater másolása sikertelen\n{0}</value>
   </data>
@@ -118,7 +115,7 @@
     <data name="MsgBox_Content_InstallModTools" xml:space="preserve">
     <value>Nincsen feltelepítve a MuseDashModTools mod,\namely minden indításnál ellenőrzi a modok verzióját\nTelepíted most?</value>
   </data>
-    <data name="MsgBox_Content_InstallPathConfirm" xml:space="preserve">
+    <data name="MsgBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Érzékelt Muse Dash mappa: {0}\nEz a helyes mappa?</value>
   </data>
     <data name="MsgBox_Content_InvalidPath" xml:space="preserve">

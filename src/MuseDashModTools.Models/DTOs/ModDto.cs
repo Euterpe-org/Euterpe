@@ -65,7 +65,7 @@ public sealed partial class ModDto : ObservableObject
     public LocalizedString LocalizedCompatibleGameVersion => GameVersion == "*" ? AllGameVersionCompatible : GameVersion;
 
     public ModDescriptionLiteral.LocalizedString LocalizedModDescription =>
-        ModDescription.ResourceManager.GetString(Name) is null ? Description : new ModDescriptionLiteral.LocalizedString(Name);
+        ModDescription.ResourceManager.GetString(Name) is null ? Description : Name;
 
     #endregion Dto Properties
 

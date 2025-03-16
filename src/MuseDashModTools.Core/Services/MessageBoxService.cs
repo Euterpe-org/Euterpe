@@ -4,6 +4,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 {
     #region Confirm MessageBox
 
+    // Normal
     public Task<MessageBoxResult> WarningConfirmAsync(string message) =>
         MessageBox.ShowAsync(message, MsgBox_Title_Warning, MessageBoxIcon.Warning, MessageBoxButton.YesNo);
 
@@ -15,6 +16,13 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     public Task<MessageBoxResult> NoticeConfirmAsync(string message, params ReadOnlySpan<object> args) =>
         NoticeConfirmAsync(string.Format(message, args));
+
+    // Overlay
+    public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message) =>
+        MessageBox.ShowOverlayAsync(message, MsgBox_Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.YesNo);
+
+    public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message, params ReadOnlySpan<object> args) =>
+        NoticeConfirmOverlayAsync(string.Format(message, args));
 
     #endregion
 
