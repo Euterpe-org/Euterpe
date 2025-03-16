@@ -103,6 +103,9 @@
   <data name="ModState_Modified" xml:space="preserve">
     <value>被修改</value>
   </data>
+  <data name="ModState_Newer" xml:space="preserve">
+        <value>开发版</value>
+    </data>
   <data name="ModState_Normal" xml:space="preserve">
     <value>已安装</value>
   </data>
@@ -345,9 +348,6 @@
   </data>
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>重复：</value>
-  </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>本地版本：{0}（WOW MOD开发者）</value>
   </data>
   <data name="XAML_News" xml:space="preserve">
     <value>新闻</value>

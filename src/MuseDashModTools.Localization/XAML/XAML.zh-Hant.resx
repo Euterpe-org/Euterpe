@@ -226,9 +226,6 @@
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>重複:</value>
   </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>你的版本: {0} (WOW MOD開發者)</value>
-  </data>
   <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash 文件路徑</value>
   </data>

@@ -187,9 +187,6 @@
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Duplicated by: </value>
   </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>Local Version: {0} (WOW MOD DEV)</value>
-  </data>
   <data name="XAML_Path" xml:space="preserve">
     <value>Muse Dash Folder Path</value>
   </data>

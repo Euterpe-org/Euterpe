@@ -103,6 +103,9 @@
   <data name="ModState_Modified" xml:space="preserve">
     <value>Modified</value>
   </data>
+  <data name="ModState_Newer" xml:space="preserve">
+      <value>Newer</value>
+  </data>
   <data name="ModState_Normal" xml:space="preserve">
     <value>Installed</value>
   </data>
@@ -360,9 +363,6 @@
   </data>
   <data name="XAML_Mod_Duplicate" xml:space="preserve">
     <value>Duplicated by: </value>
-  </data>
-  <data name="XAML_Mod_Newer" xml:space="preserve">
-    <value>Local Version: {0} (WOW MOD DEV)</value>
   </data>
   <data name="XAML_News" xml:space="preserve">
     <value>News</value>
