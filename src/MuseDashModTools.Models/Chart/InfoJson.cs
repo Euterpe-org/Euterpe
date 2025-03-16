@@ -3,62 +3,82 @@
 public sealed partial class InfoJson : ObservableObject
 {
     [JsonPropertyName("author")]
-    [ObservableProperty] private string _author = string.Empty;
+    [ObservableProperty]
+    public partial string Author { get; set; } = string.Empty;
 
     [JsonPropertyName("bpm")]
-    [ObservableProperty] private string _bpm = string.Empty;
+    [ObservableProperty]
+    public partial string Bpm { get; set; } = string.Empty;
 
     [JsonPropertyName("difficulty1")]
-    [ObservableProperty] private string _difficulty1 = string.Empty;
+    [ObservableProperty]
+    public partial string Difficulty1 { get; set; } = string.Empty;
 
     [JsonPropertyName("difficulty2")]
-    [ObservableProperty] private string _difficulty2 = string.Empty;
+    [ObservableProperty]
+    public partial string Difficulty2 { get; set; } = string.Empty;
 
     [JsonPropertyName("difficulty3")]
-    [ObservableProperty] private string _difficulty3 = string.Empty;
+    [ObservableProperty]
+    public partial string Difficulty3 { get; set; } = string.Empty;
 
     [JsonPropertyName("difficulty4")]
-    [ObservableProperty] private string _difficulty4 = string.Empty;
+    [ObservableProperty]
+    public partial string Difficulty4 { get; set; } = string.Empty;
 
     [JsonPropertyName("hideBmsDifficulty")]
-    [ObservableProperty] private string _hideBmsDifficulty = string.Empty;
+    [ObservableProperty]
+    public partial string HideBmsDifficulty { get; set; } = string.Empty;
 
     [JsonPropertyName("hideBmsMessage")]
-    [ObservableProperty] private string _hideBmsMessage = string.Empty;
+    [ObservableProperty]
+    public partial string HideBmsMessage { get; set; } = string.Empty;
 
     [JsonPropertyName("hideBmsMode")]
-    [ObservableProperty] private string _hideBmsMode = string.Empty;
+    [ObservableProperty]
+    public partial string HideBmsMode { get; set; } = string.Empty;
 
     [JsonPropertyName("levelDesigner")]
-    [ObservableProperty] private string _levelDesigner = string.Empty;
+    [ObservableProperty]
+    public partial string LevelDesigner { get; set; } = string.Empty;
 
     [JsonPropertyName("levelDesigner1")]
-    [ObservableProperty] private string _levelDesigner1 = string.Empty;
+    [ObservableProperty]
+    public partial string LevelDesigner1 { get; set; } = string.Empty;
 
     [JsonPropertyName("levelDesigner2")]
-    [ObservableProperty] private string _levelDesigner2 = string.Empty;
+    [ObservableProperty]
+    public partial string LevelDesigner2 { get; set; } = string.Empty;
 
     [JsonPropertyName("levelDesigner3")]
-    [ObservableProperty] private string _levelDesigner3 = string.Empty;
+    [ObservableProperty]
+    public partial string LevelDesigner3 { get; set; } = string.Empty;
 
     [JsonPropertyName("levelDesigner4")]
-    [ObservableProperty] private string _levelDesigner4 = string.Empty;
+    [ObservableProperty]
+    public partial string LevelDesigner4 { get; set; } = string.Empty;
 
     [JsonPropertyName("name")]
-    [ObservableProperty] private string _name = string.Empty;
+    [ObservableProperty]
+    public partial string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("name_romanized")]
-    [ObservableProperty] private string _nameRomanized = string.Empty;
+    [ObservableProperty]
+    public partial string NameRomanized { get; set; } = string.Empty;
 
     [JsonPropertyName("scene")]
-    [ObservableProperty] private string _scene = string.Empty;
+    [ObservableProperty]
+    public partial string Scene { get; set; } = string.Empty;
 
     [JsonPropertyName("searchTags")]
-    [ObservableProperty] private string[] _searchTags = Array.Empty<string>();
+    [ObservableProperty]
+    public partial string[] SearchTags { get; set; } = [];
 
     [JsonIgnore]
-    [ObservableProperty] private string _searchTagsString = string.Empty;
+    [ObservableProperty]
+    public partial string SearchTagsString { get; set; } = string.Empty;
 
     [JsonPropertyName("unlockLevel")]
-    [ObservableProperty] private string _unlockLevel = string.Empty;
+    [ObservableProperty]
+    public partial string UnlockLevel { get; set; } = string.Empty;
 }

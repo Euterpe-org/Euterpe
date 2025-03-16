@@ -1,20 +1,20 @@
 ﻿namespace MuseDashModTools.Models;
 
-[UsedImplicitly]
+[PublicAPI]
 public sealed class Analytic
 {
     [JsonPropertyName("likes")]
-    public string[] Likes { get; set; } = [];
-
-    [JsonIgnore]
-    public int LikesCount => Likes.Length;
+    public int[] Likes { get; set; } = [];
 
     [JsonPropertyName("plays")]
     public int Plays { get; set; }
 
+    [JsonPropertyName("downloads")]
+    public int Downloads { get; set; }
+
     [JsonPropertyName("views")]
     public int Views { get; set; }
 
-    [JsonPropertyName("downloads")]
-    public int Downloads { get; set; }
+    [JsonIgnore]
+    public int LikesCount => Likes.Length;
 }
