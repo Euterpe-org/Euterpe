@@ -28,7 +28,7 @@
                             Classes="SharedTransparent SharedCard"
                             CommandParameter="https://dotnet.microsoft.com/download/dotnet/6.0">
                         <Button.Styles>
-                            <Style Selector="Button:pointerover Border">
+                            <Style Selector="Button:pointerover Border.SharedHover">
                                 <Setter Property="Background" Value="#7B2CBF" />
                                 <Setter Property="RenderTransform" Value="scale(1.004)" />
                             </Style>
@@ -70,7 +70,7 @@
                             Classes="SharedTransparent SharedCard"
                             CommandParameter="https://baidu.com">
                         <Button.Styles>
-                            <Style Selector="Button:pointerover Border">
+                            <Style Selector="Button:pointerover Border.SharedHover">
                                 <Setter Property="Background" Value="#4B49AC" />
                                 <Setter Property="RenderTransform" Value="scale(1.004)" />
                             </Style>
@@ -115,7 +115,7 @@
                         CommandParameter="https://github.com/MDModsDev/ModLinks"
                         Margin="5,0,10,0">
                     <Button.Styles>
-                        <Style Selector="Button:pointerover Border">
+                        <Style Selector="Button:pointerover Border.SharedHover">
                             <Setter Property="Background" Value="#B32E29" />
                             <Setter Property="RenderTransform" Value="scale(1.004)" />
                         </Style>
@@ -149,7 +149,7 @@
                     <Button Classes="SharedTransparent SharedCard"
                             CommandParameter="https://code.visualstudio.com">
                         <Button.Styles>
-                            <Style Selector="Button:pointerover Border">
+                            <Style Selector="Button:pointerover Border.SharedHover">
                                 <Setter Property="Background" Value="#0066B8" />
                                 <Setter Property="RenderTransform" Value="scale(1.02)" />
                             </Style>
@@ -170,7 +170,7 @@
                     <Button Classes="SharedTransparent SharedCard"
                             CommandParameter="https://www.jetbrains.com/rider">
                         <Button.Styles>
-                            <Style Selector="Button:pointerover Border">
+                            <Style Selector="Button:pointerover Border.SharedHover">
                                 <Setter Property="Background" Value="#FC1886" />
                                 <Setter Property="RenderTransform" Value="scale(1.02)" />
                             </Style>
@@ -191,7 +191,7 @@
                     <Button Classes="SharedTransparent SharedCard"
                             CommandParameter="https://visualstudio.microsoft.com">
                         <Button.Styles>
-                            <Style Selector="Button:pointerover Border">
+                            <Style Selector="Button:pointerover Border.SharedHover">
                                 <Setter Property="Background" Value="#5C2D91" />
                                 <Setter Property="RenderTransform" Value="scale(1.02)" />
                             </Style>
