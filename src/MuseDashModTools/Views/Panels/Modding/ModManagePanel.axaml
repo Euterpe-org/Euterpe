@@ -57,31 +57,36 @@
                 <!--  Mod List  -->
                 <u:LoadingContainer Grid.Row="1"
                                     IsLoading="{Binding !AllModsLoaded, Mode=OneWay}"
-                                    LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}">
-                    <ScrollViewer Margin="12,0,12,12" AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
-                        <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
+                                    LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}"
+                                    VerticalAlignment="Stretch"
+                                    VerticalContentAlignment="Top">
+                    <ScrollViewer AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}"
+                                  Margin="12,0,12,12">
+                        <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}"
+                                         SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
                             <u:SelectionList.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Orientation="Vertical" />
+                                    <VirtualizingStackPanel Orientation="Vertical"
+                                                            VerticalAlignment="Top" />
                                 </ItemsPanelTemplate>
                             </u:SelectionList.ItemsPanel>
 
                             <!--  Selection Indicator  -->
                             <u:SelectionList.Indicator>
                                 <Border Background="Transparent" CornerRadius="4">
-                                    <Border Width="4"
-                                            Margin="0,8"
+                                    <Border Background="{DynamicResource SemiBlue6}"
+                                            CornerRadius="4"
                                             HorizontalAlignment="Left"
-                                            Background="{DynamicResource SemiBlue6}"
-                                            CornerRadius="4" />
+                                            Margin="0,8"
+                                            Width="4" />
                                 </Border>
                             </u:SelectionList.Indicator>
 
                             <!--  Mod Item Template  -->
                             <u:SelectionList.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="320" ColumnDefinitions="*,60">
+                                    <Grid ColumnDefinitions="*,60" Width="320">
                                         <StackPanel Height="60"
                                                     Margin="8,5"
                                                     Spacing="5">
