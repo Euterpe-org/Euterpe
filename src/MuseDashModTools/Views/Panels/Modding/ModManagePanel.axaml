@@ -87,7 +87,8 @@
                                                     Spacing="5">
 
                                             <!--  Mod Name  -->
-                                            <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
+                                            <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
+                                                       Text="{Binding Name, Mode=OneWay}" />
 
                                             <!--  Mod Status Tags  -->
                                             <StackPanel Classes="SharedControlsHorizontal">
@@ -104,17 +105,27 @@
                                                        Classes.Gray="{Binding !IsLocal, Mode=OneWay}"
                                                        Classes.Indigo="{Binding IsLocal, Mode=OneWay}" />
 
-                                                <Label Classes="Ghost TagLabel"
-                                                       Classes.Green="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
-                                                       Classes.Orange="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
-                                                       Classes.Purple="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
-                                                       Classes.Red="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
-                                                       IsVisible="{Binding State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:ModState.Normal}, Mode=OneWay}" />
-
-                                                <StackPanel Classes="SharedControlsHorizontal" IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                                <StackPanel Classes="SharedControlsHorizontal"
+                                                            IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                                     <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                                     <Label Classes="Ghost Green TagLabel" Content="{Binding Version, Mode=OneWay}" />
                                                 </StackPanel>
+
+                                                <Label Classes="Ghost TagLabel"
+                                                       Classes.Orange="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Modified}, Mode=OneWay}"
+                                                       Classes.Purple="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
+                                                       Classes.Red="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}">
+                                                    <Label.IsVisible>
+                                                        <MultiBinding Converter="{x:Static BoolConverters.And}">
+                                                            <Binding Path="State"
+                                                                     Converter="{x:Static ObjectConverters.NotEqual}"
+                                                                     ConverterParameter="{x:Static enums:ModState.Normal}" />
+                                                            <Binding Path="State"
+                                                                     Converter="{x:Static ObjectConverters.NotEqual}"
+                                                                     ConverterParameter="{x:Static enums:ModState.Outdated}" />
+                                                        </MultiBinding>
+                                                    </Label.IsVisible>
+                                                </Label>
 
                                             </StackPanel>
                                         </StackPanel>
@@ -235,15 +246,22 @@
                                 </Style>
                             </StackPanel.Styles>
 
+                            <!--  Status Labels  -->
+                            <Label Classes="Ghost Blue TagLabel"
+                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Normal}}"
+                                   IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+
                             <!--  Version Label  -->
                             <Label Classes="Ghost TagLabel"
                                    Classes.Gray="{Binding !SelectedMod.IsLocal, Mode=OneWay}"
                                    Classes.Indigo="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
 
-                            <!--  Status Labels  -->
-                            <Label Classes="Ghost Blue TagLabel"
-                                   Content="{Localize {x:Static loc:XAMLLiteral.ModState_Normal}}"
-                                   IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+                            <!--  Update Version Indicator  -->
+                            <StackPanel Classes="SharedControlsHorizontal"
+                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
+                                <Label Classes="Ghost Green TagLabel" Content="{Binding SelectedMod.Version, Mode=OneWay}" />
+                            </StackPanel>
 
                             <Label Classes="Ghost TagLabel"
                                    Classes.Green="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}"
@@ -251,12 +269,6 @@
                                    Classes.Purple="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Newer}, Mode=OneWay}"
                                    Classes.Red="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}"
                                    IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:ModState.Normal}, Mode=OneWay}" />
-
-                            <!--  Update Version Indicator  -->
-                            <StackPanel Classes="SharedControlsHorizontal" IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
-                                <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
-                                <Label Classes="Ghost Green TagLabel" Content="{Binding SelectedMod.Version, Mode=OneWay}" />
-                            </StackPanel>
                         </StackPanel>
 
                         <!--  Description  -->
@@ -293,7 +305,8 @@
                         </Grid>
 
                         <!--  Repository Link  -->
-                        <Grid ColumnDefinitions="130,*" IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
+                        <Grid ColumnDefinitions="130,*"
+                              IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
                             <TextBlock Grid.Column="0"
                                        Classes="DetailRowText"
                                        Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}" />
