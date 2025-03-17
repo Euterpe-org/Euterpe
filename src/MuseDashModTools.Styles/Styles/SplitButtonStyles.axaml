@@ -106,7 +106,6 @@
         <Style Selector="^.PageHomePlay TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
-
     </Style>
 
 </Styles>

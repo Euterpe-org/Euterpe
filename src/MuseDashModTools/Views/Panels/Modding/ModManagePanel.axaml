@@ -235,8 +235,8 @@
                         <!--  Mod Status Tags  -->
                         <StackPanel Grid.Row="1" Grid.Column="0"
                                     Grid.ColumnSpan="2"
-                                    Margin="0,8"
-                                    Classes="SharedControlsHorizontal">
+                                    Classes="SharedControlsHorizontal"
+                                    Margin="0,8">
                             <StackPanel.Styles>
                                 <Style Selector="Label.Gray">
                                     <Setter Property="Content" Value="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}" />
@@ -280,58 +280,43 @@
                     </Grid>
 
                     <!--  Details Section  -->
-                    <StackPanel>
+                    <StackPanel HorizontalAlignment="Left">
                         <TextBlock Classes="SectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Details}}" />
 
-                        <!--  Author Info  -->
-                        <Grid ColumnDefinitions="130,*">
-                            <TextBlock Grid.Column="0"
-                                       Classes="DetailRowText"
-                                       Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
-                            <TextBlock Grid.Column="1"
-                                       Margin="0,0,0,14"
-                                       Text="{Binding SelectedMod.Author, Mode=OneWay}" />
-                        </Grid>
+                        <UniformGrid Classes="PanelModManageDetails">
 
-                        <!--  Game Version Support  -->
-                        <Grid ColumnDefinitions="130,*">
-                            <TextBlock Grid.Column="0"
-                                       Classes="DetailRowText"
-                                       Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_SupportedGameVersion}}" />
-                            <Label Grid.Column="1"
-                                   Margin="0,0,0,14"
-                                   Classes="Ghost TagLabel"
-                                   Content="{Binding SelectedMod.LocalizedCompatibleGameVersion, Mode=OneWay}" />
-                        </Grid>
+                            <!-- Author -->
+                            <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
+                            <TextBlock Text="{Binding SelectedMod.Author}" />
 
-                        <!--  Repository Link  -->
-                        <Grid ColumnDefinitions="130,*"
-                              IsVisible="{Binding SelectedMod.Repository, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}">
-                            <TextBlock Grid.Column="0"
-                                       Classes="DetailRowText"
-                                       Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}" />
-                            <HyperlinkButton Grid.Column="1"
-                                             Classes="WithIcon Underline"
+                            <!-- Game Version -->
+                            <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_SupportedGameVersion}}" />
+                            <Label Classes="Ghost TagLabel"
+                                   Content="{Binding SelectedMod.LocalizedCompatibleGameVersion}"
+                                   Margin="0,-12,0,0" />
+
+                            <!-- Repository -->
+                            <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}" />
+                            <HyperlinkButton Classes="WithIcon Underline"
                                              Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_Visit}}"
-                                             NavigateUri="{Binding SelectedMod.RepoPageUrl, Mode=OneWay}" />
-                        </Grid>
+                                             NavigateUri="{Binding SelectedMod.RepoPageUrl}" />
+                        </UniformGrid>
                     </StackPanel>
 
                     <!--  Dependencies Section  -->
-                    <Panel IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
-                        <StackPanel Spacing="16">
-                            <TextBlock Classes="SectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Dependencies}}" />
-                            <ItemsControl ItemsSource="{Binding SelectedMod.DependencyNames, Mode=OneWay}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Margin="0,0,0,4"
-                                               Classes="Ghost Primary TagLabel"
-                                               Content="{Binding ., Mode=OneWay}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </Panel>
+
+                    <StackPanel IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
+                        <TextBlock Classes="SectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Dependencies}}" />
+                        <ItemsControl ItemsSource="{Binding SelectedMod.DependencyNames, Mode=OneWay}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Margin="0,0,0,4"
+                                           Classes="Ghost Primary TagLabel"
+                                           Content="{Binding ., Mode=OneWay}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
 
                 </StackPanel>
             </ScrollViewer>

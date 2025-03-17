@@ -3,7 +3,6 @@
         xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization">
 
     <Style Selector="Label">
-
         <!--  Label Styles for Different States  -->
         <Style Selector="^.TagLabel">
             <Setter Property="Theme" Value="{StaticResource TagLabel}" />
