@@ -185,7 +185,7 @@
 
                         <!--  Mod Title  -->
                         <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Classes="PanelTitle"
+                                   Classes="PanelModManageModTitle"
                                    Text="{Binding SelectedMod.Name, Mode=OneWay}" />
 
                         <!--  Action Buttons  -->
@@ -281,7 +281,7 @@
 
                     <!--  Details Section  -->
                     <StackPanel HorizontalAlignment="Left">
-                        <TextBlock Classes="SectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Details}}" />
+                        <TextBlock Classes="PanelModManageSectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Details}}" />
 
                         <UniformGrid Classes="PanelModManageDetails">
 
@@ -306,7 +306,7 @@
                     <!--  Dependencies Section  -->
 
                     <StackPanel IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
-                        <TextBlock Classes="SectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Dependencies}}" />
+                        <TextBlock Classes="PanelModManageSectionTitle" Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Dependencies}}" />
                         <ItemsControl ItemsSource="{Binding SelectedMod.DependencyNames, Mode=OneWay}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
