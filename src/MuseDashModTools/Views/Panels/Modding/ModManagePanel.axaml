@@ -260,7 +260,7 @@
                             <StackPanel Classes="SharedControlsHorizontal"
                                         IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                 <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
-                                <Label Classes="Ghost Green TagLabel" Content="{Binding SelectedMod.Version, Mode=OneWay}" />
+                                <Label Classes="Ghost Green TagLabel" Content="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}" />
                             </StackPanel>
 
                             <Label Classes="Ghost TagLabel"
