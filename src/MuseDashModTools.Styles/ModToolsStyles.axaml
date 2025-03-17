@@ -35,4 +35,5 @@
     <StyleInclude Source="/Styles/SplitButtonStyles.axaml" />
     <StyleInclude Source="/Styles/StackPanelStyles.axaml" />
     <StyleInclude Source="/Styles/TextBlockStyles.axaml" />
+    <StyleInclude Source="/Styles/UniformGridStyles.axaml" />
 </Styles>
