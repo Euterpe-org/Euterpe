@@ -56,44 +56,40 @@
 
                 <!--  Mod List  -->
                 <u:LoadingContainer Grid.Row="1"
-                                    IsLoading="{Binding !AllModsLoaded, Mode=OneWay}"
-                                    LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}"
                                     VerticalAlignment="Stretch"
-                                    VerticalContentAlignment="Top">
-                    <ScrollViewer AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}"
-                                  Margin="12,0,12,12">
-                        <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}"
-                                         SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
+                                    VerticalContentAlignment="Top"
+                                    IsLoading="{Binding !AllModsLoaded, Mode=OneWay}"
+                                    LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}">
+                    <ScrollViewer Margin="12,0,12,12" AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}">
+                        <u:SelectionList ItemsSource="{Binding Mods, Mode=OneWay}" SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
                             <u:SelectionList.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Orientation="Vertical"
-                                                            VerticalAlignment="Top" />
+                                    <VirtualizingStackPanel VerticalAlignment="Top" Orientation="Vertical" />
                                 </ItemsPanelTemplate>
                             </u:SelectionList.ItemsPanel>
 
                             <!--  Selection Indicator  -->
                             <u:SelectionList.Indicator>
                                 <Border Background="Transparent" CornerRadius="4">
-                                    <Border Background="{DynamicResource SemiBlue6}"
-                                            CornerRadius="4"
-                                            HorizontalAlignment="Left"
+                                    <Border Width="4"
                                             Margin="0,8"
-                                            Width="4" />
+                                            HorizontalAlignment="Left"
+                                            Background="{DynamicResource SemiBlue6}"
+                                            CornerRadius="4" />
                                 </Border>
                             </u:SelectionList.Indicator>
 
                             <!--  Mod Item Template  -->
                             <u:SelectionList.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid ColumnDefinitions="*,60" Width="320">
+                                    <Grid Width="320" ColumnDefinitions="*,60">
                                         <StackPanel Height="60"
                                                     Margin="8,5"
                                                     Spacing="5">
 
                                             <!--  Mod Name  -->
-                                            <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
-                                                       Text="{Binding Name, Mode=OneWay}" />
+                                            <TextBlock Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
 
                                             <!--  Mod Status Tags  -->
                                             <StackPanel Classes="SharedControlsHorizontal">
@@ -110,8 +106,7 @@
                                                        Classes.Gray="{Binding !IsLocal, Mode=OneWay}"
                                                        Classes.Indigo="{Binding IsLocal, Mode=OneWay}" />
 
-                                                <StackPanel Classes="SharedControlsHorizontal"
-                                                            IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                                                <StackPanel Classes="SharedControlsHorizontal" IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                                     <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                                     <Label Classes="Ghost Green TagLabel" Content="{Binding Version, Mode=OneWay}" />
                                                 </StackPanel>
@@ -122,12 +117,12 @@
                                                        Classes.Red="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Incompatible}, Mode=OneWay}">
                                                     <Label.IsVisible>
                                                         <MultiBinding Converter="{x:Static BoolConverters.And}">
-                                                            <Binding Path="State"
-                                                                     Converter="{x:Static ObjectConverters.NotEqual}"
-                                                                     ConverterParameter="{x:Static enums:ModState.Normal}" />
-                                                            <Binding Path="State"
-                                                                     Converter="{x:Static ObjectConverters.NotEqual}"
-                                                                     ConverterParameter="{x:Static enums:ModState.Outdated}" />
+                                                            <Binding Converter="{x:Static ObjectConverters.NotEqual}"
+                                                                     ConverterParameter="{x:Static enums:ModState.Normal}"
+                                                                     Path="State" />
+                                                            <Binding Converter="{x:Static ObjectConverters.NotEqual}"
+                                                                     ConverterParameter="{x:Static enums:ModState.Outdated}"
+                                                                     Path="State" />
                                                         </MultiBinding>
                                                     </Label.IsVisible>
                                                 </Label>
@@ -240,8 +235,8 @@
                         <!--  Mod Status Tags  -->
                         <StackPanel Grid.Row="1" Grid.Column="0"
                                     Grid.ColumnSpan="2"
-                                    Classes="SharedControlsHorizontal"
-                                    Margin="0,8">
+                                    Margin="0,8"
+                                    Classes="SharedControlsHorizontal">
                             <StackPanel.Styles>
                                 <Style Selector="Label.Gray">
                                     <Setter Property="Content" Value="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}" />
@@ -262,8 +257,7 @@
                                    Classes.Indigo="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
 
                             <!--  Update Version Indicator  -->
-                            <StackPanel Classes="SharedControlsHorizontal"
-                                        IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
+                            <StackPanel Classes="SharedControlsHorizontal" IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                 <PathIcon Height="10" Data="{StaticResource SemiIconArrowRight}" />
                                 <Label Classes="Ghost Green TagLabel" Content="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}" />
                             </StackPanel>
@@ -290,17 +284,17 @@
 
                         <UniformGrid Classes="PanelModManageDetails">
 
-                            <!-- Author -->
+                            <!--  Author  -->
                             <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
                             <TextBlock Text="{Binding SelectedMod.Author}" />
 
-                            <!-- Game Version -->
+                            <!--  Game Version  -->
                             <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_SupportedGameVersion}}" />
-                            <Label Classes="Ghost TagLabel"
-                                   Content="{Binding SelectedMod.LocalizedCompatibleGameVersion}"
-                                   Margin="0,-12,0,0" />
+                            <Label Margin="0,-12,0,0"
+                                   Classes="Ghost TagLabel"
+                                   Content="{Binding SelectedMod.LocalizedCompatibleGameVersion}" />
 
-                            <!-- Repository -->
+                            <!--  Repository  -->
                             <TextBlock Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}" />
                             <HyperlinkButton Classes="WithIcon Underline"
                                              Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_Visit}}"
