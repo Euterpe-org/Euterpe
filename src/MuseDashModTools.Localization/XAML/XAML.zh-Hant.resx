@@ -179,7 +179,8 @@
     <value>選擇譜面文件夾</value>
   </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>連接必須以''/''結尾,並且在連接後面加上''ModLinks.json''後必須可以訪問並解析 (即Github倉庫同樣結構) \n重啟應用生效</value>
+    <value>連接必須以''/''結尾,並且在連接後面加上''ModLinks.json''後必須可以訪問並解析 (即Github倉庫同樣結構)
+重啟應用生效</value>
   </data>
     <data name="XAML_Download_Chart" xml:space="preserve">
     <value>下載</value>

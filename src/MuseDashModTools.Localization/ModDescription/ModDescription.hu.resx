@@ -14,7 +14,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accuracy Indicator" xml:space="preserve">
-    <value>Egy érintési hibamérőt rak a képernyőd aljára.\nA pálya végén láthatod az átlagos eltérést is.</value>
+    <value>Egy érintési hibamérőt rak a képernyőd aljára.
+A pálya végén láthatod az átlagos eltérést is.</value>
   </data>
   <data name="AccuracyDisplay" xml:space="preserve">
     <value>Egy élő százalékos pontosság jelző a mi örömünkre.</value>
@@ -32,7 +33,9 @@
     <value>A Boss mindig galambokat lő, ne használd az AlwaysAprilFool mod-dal együtt</value>
   </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-    <value>Kiírja a pályához a legjobb karakter kombinációt a Pause menüben\nEz a kombináció csak általában helyes, nem pedig mindig, nem bízz meg benne vakon\nHa nem vagy biztos, használd a CharacterScoreboard vagy ScoreboardCharacters mod-ot</value>
+    <value>Kiírja a pályához a legjobb karakter kombinációt a Pause menüben
+Ez a kombináció csak általában helyes, nem pedig mindig, nem bízz meg benne vakon
+Ha nem vagy biztos, használd a CharacterScoreboard vagy ScoreboardCharacters mod-ot</value>
   </data>
   <data name="BPMDisplay" xml:space="preserve">
     <value>Egy mod amely kiírja a főmenüben egy zenének a BPM-jét</value>
@@ -41,13 +44,15 @@
     <value>Minden probálkozásnál véletlenszerűen kiválaszt egy karakter kombinációt</value>
   </data>
   <data name="CharacterScoreboard" xml:space="preserve">
-    <value>Kiírja hogy mely karakterekkel lett elérve egy rekord a ranglétra (OCS gomb)\nA saját helyi próbálkozásaidat is megjeleníti (LCS)</value>
+    <value>Kiírja hogy mely karakterekkel lett elérve egy rekord a ranglétra (OCS gomb)
+A saját helyi próbálkozásaidat is megjeleníti (LCS)</value>
   </data>
   <data name="ChartDeleter" xml:space="preserve">
     <value>Lehetővé teszi, hogy megjelölj pályákat kitörlésre vagy áthelyezésre miután a játékból kilépsz.</value>
   </data>
   <data name="ChartReview" xml:space="preserve">
-    <value>Automatikusan kiválasztja a Sleepwalker-t, a késleltetést (offset) 0-ra állítja, a Fever-t manuálisra, és bizonyos UI elemek kikapcsol.\nJáték közben ki-/bekapcsolható</value>
+    <value>Automatikusan kiválasztja a Sleepwalker-t, a késleltetést (offset) 0-ra állítja, a Fever-t manuálisra, és bizonyos UI elemek kikapcsol.
+Játék közben ki-/bekapcsolható</value>
   </data>
   <data name="ChineseMode" xml:space="preserve">
     <value>A játék bizonyos részeit kicenzúrázza (Karakterek, illusztrációk, stb)</value>
@@ -59,16 +64,20 @@
     <value>A mod amely lehetővé teszi az egyéni pályák betöltését</value>
   </data>
   <data name="CustomAnchorSupport" xml:space="preserve">
-    <value>Lehetővé teszi a "streamer" címke használatát az info.json fájlba hogy copyright-mentesnek jelölj egy zenét\n(streamer módra van kitalálva)</value>
+    <value>Lehetővé teszi a "streamer" címke használatát az info.json fájlba hogy copyright-mentesnek jelölj egy zenét
+(streamer módra van kitalálva)</value>
   </data>
   <data name="CustomBGBrightness" xml:space="preserve">
     <value>Engedélyezi hogy 40%-nál alacsonyabbra állítsd a háttér fényerejét</value>
   </data>
   <data name="CustomHitSound" xml:space="preserve">
-    <value>Lehetővé teszi hogy saját hang-effektek adj meg\nRészletes leírás a github oldalán található</value>
+    <value>Lehetővé teszi hogy saját hang-effektek adj meg
+Részletes leírás a github oldalán található</value>
   </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
-    <value>Lehetővé teszi hogy saját betöltő képernyőket használj (CustomLoadingScreens mappa)\nSaját feliratokat is adhatsz meg (UserData/CustomLoadingScreens.cfg)\nEzeket lehet képpel párosítani, vagy véletlen kiíratni</value>
+    <value>Lehetővé teszi hogy saját betöltő képernyőket használj (CustomLoadingScreens mappa)
+Saját feliratokat is adhatsz meg (UserData/CustomLoadingScreens.cfg)
+Ezeket lehet képpel párosítani, vagy véletlen kiíratni</value>
   </data>
   <data name="CustomResolution" xml:space="preserve">
     <value>Egy egyéni ("Custom") beállítást rak a felbontás beállításokhoz, amelyet a config-ban változtathatsz </value>
@@ -77,7 +86,9 @@
     <value>Kikapcsol pár játék alatti effektet</value>
   </data>
   <data name="FavGirl" xml:space="preserve">
-    <value>Lehetővé teszi hogy kedvencként jelölj egy karaktert és manót\nEzután úgy fogsz kinézni mint az a karakter még ha másik is van kijelölve\nA tényleges karaktered képességét fogod kapni és a ranglétrán is úgy fogsz megjelenni</value>
+    <value>Lehetővé teszi hogy kedvencként jelölj egy karaktert és manót
+Ezután úgy fogsz kinézni mint az a karakter még ha másik is van kijelölve
+A tényleges karaktered képességét fogod kapni és a ranglétrán is úgy fogsz megjelenni</value>
   </data>
   <data name="FC AP indicator" xml:space="preserve">
     <value>Kijelzi hogy Tökéletes vagy Hibamentes meneted van-e, és kiírja hogy hány hibád volt addig</value>
@@ -89,7 +100,8 @@
     <value>Lehetővé teszi hogy egyedi pályák ranglétráját elérd</value>
   </data>
   <data name="HiddenQoL" xml:space="preserve">
-    <value>Lerak egy gombot, amely láthatóvá teszi az összes rejtett pályát\nMagyarul, nem kell spam-elned vagy rajzolgatnod hogy megjelenjenek</value>
+    <value>Lerak egy gombot, amely láthatóvá teszi az összes rejtett pályát
+Magyarul, nem kell spam-elned vagy rajzolgatnod hogy megjelenjenek</value>
   </data>
   <data name="IntroSkip" xml:space="preserve">
     <value>Átugorja a "PeroPero HasuHasu" képernyőt és nyító animációt.</value>
@@ -107,7 +119,8 @@
     <value>Lehetővé teszi hogy kitörölj/kikapcsolj modok játékon belül.</value>
   </data>
   <data name="Muse Dash Mirror" xml:space="preserve">
-    <value>Egy könyvtár más modoknak amely könnyebbé teszi a hozzáférést bizonyos adatok és UI elemek létrehozását.\nEgy magában nem csinál semmit.</value>
+    <value>Egy könyvtár más modoknak amely könnyebbé teszi a hozzáférést bizonyos adatok és UI elemek létrehozását.
+Egy magában nem csinál semmit.</value>
   </data>
   <data name="MuseDashModTools" xml:space="preserve">
     <value>Automatikusan megnézi hogy vannak a modjaidnak elérhető frissítései.</value>
@@ -116,43 +129,54 @@
     <value>Megakadályozza hogy a játék szüneteljen, amikor elveszti a fókuszt.</value>
   </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
-    <value>A szint-lépés animáció évekig tart;\nUgorjuk át.</value>
+    <value>A szint-lépés animáció évekig tart;
+Ugorjuk át.</value>
   </data>
   <data name="PerfectDisable" xml:space="preserve">
-    <value>Lehetővé teszi hogy kikapcsolj kiértékeléseket.\n(pl.: mutassa az Early/Late Perfect-et, de az igazi Perfect-et ne)\nADOFAI Tweaks inspirálta</value>
+    <value>Lehetővé teszi hogy kikapcsolj kiértékeléseket.
+(pl.: mutassa az Early/Late Perfect-et, de az igazi Perfect-et ne)
+ADOFAI Tweaks inspirálta</value>
   </data>
   <data name="PopupLib" xml:space="preserve">
     <value>Egy könyvtár más modoknak hogy kezeljenek felugró ablakokat</value>
   </data>
   <data name="PreventLowAcc" xml:space="preserve">
-    <value>Lehetővé teszi, hogy ne töltődjön fel a pontszámod,\nde ugyanúgy le tudd azt fotózni.</value>
+    <value>Lehetővé teszi, hogy ne töltődjön fel a pontszámod,
+de ugyanúgy le tudd azt fotózni.</value>
   </data>
   <data name="QuickRestart" xml:space="preserve">
-    <value>Lehetővé teszi, hogy Delete-el azonnal kilépj egy pályából &amp; Backspace-el azonnal újraindítsd\nA gombok tetszőlegesen állíthatóak.</value>
+    <value>Lehetővé teszi, hogy Delete-el azonnal kilépj egy pályából &amp; Backspace-el azonnal újraindítsd
+A gombok tetszőlegesen állíthatóak.</value>
   </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-    <value>Lehetővé teszi, hogy billentyű-kombinációkat állíts gyors karakter-váltásra\nElérhető egy játékon belüli menü</value>
+    <value>Lehetővé teszi, hogy billentyű-kombinációkat állíts gyors karakter-váltásra
+Elérhető egy játékon belüli menü</value>
   </data>
   <data name="SceneEggs" xml:space="preserve">
     <value>Lehetővé teszi egyedi pályáknak hogy bizonyos háttérdíszítéseket használjanak.</value>
   </data>
   <data name="Scoreboard characters and elfins" xml:space="preserve">
-    <value>Hasonló a CharacterScoreboard-hoz, de helyette kattintható ikonokat jelenít meg,\namely automatikusan arra a karakterkombinációra váltanak dupla kattintásra.</value>
+    <value>Hasonló a CharacterScoreboard-hoz, de helyette kattintható ikonokat jelenít meg,
+amely automatikusan arra a karakterkombinációra váltanak dupla kattintásra.</value>
   </data>
   <data name="ScrollSpeed" xml:space="preserve">
-    <value>Lehetővé teszi pálya készítőknek hogy saját sebességet állítsanak.\nÁltalában nem használják.</value>
+    <value>Lehetővé teszi pálya készítőknek hogy saját sebességet állítsanak.
+Általában nem használják.</value>
   </data>
   <data name="Search++ Folder Tag" xml:space="preserve">
-    <value>Minden keresési funkció amire valaha szükséged lehet (talán).\nNézd meg a főoldalát további infóért.</value>
+    <value>Minden keresési funkció amire valaha szükséged lehet (talán).
+Nézd meg a főoldalát további infóért.</value>
   </data>
   <data name="SearchPlusPlus" xml:space="preserve">
     <value>Megjeleníti a zene címét, művészét és nehézségét a jobb felső sarokban a játék alatt.</value>
   </data>
   <data name="Song Desc" xml:space="preserve">
-    <value>Egy SearchPlusPlus bővítmény, amely lehetővé teszi mappák létrehozását\nés azon mappákban lévő zenék keresését.</value>
+    <value>Egy SearchPlusPlus bővítmény, amely lehetővé teszi mappák létrehozását
+és azon mappákban lévő zenék keresését.</value>
   </data>
   <data name="StricterJudge" xml:space="preserve">
-    <value>Egy mod amely szigorúbbá teszi az időzítéseket.\nManuálisan megváltoztathatod a szigorítás mértékét a StricterJudge.cfg fájlban</value>
+    <value>Egy mod amely szigorúbbá teszi az időzítéseket.
+Manuálisan megváltoztathatod a szigorítás mértékét a StricterJudge.cfg fájlban</value>
   </data>
   <data name="True rank for 999+" xml:space="preserve">
     <value>"999+" helyett a tényleges 1000 és 2000 közti rangod megjeleníti</value>
@@ -164,7 +188,8 @@
     <value>Kényszeríti Sleepwalker Rin-t arra hogy maximális sebességen csinálja a Masher-öket (amelyeken spam-elni kell).</value>
   </data>
   <data name="UnlockAll2" xml:space="preserve">
-    <value>UnlockAll alternatívája\nAmíg a mod telepítve van, minden mester fokozat elérhető.</value>
+    <value>UnlockAll alternatívája
+Amíg a mod telepítve van, minden mester fokozat elérhető.</value>
   </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
     <value>Lehetővé teszi hogy megváltoztasd a győzelmi képernyő stílusát DJMAX-re vagy Arknights-ra.</value>

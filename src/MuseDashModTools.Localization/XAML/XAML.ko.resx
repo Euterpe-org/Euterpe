@@ -176,7 +176,8 @@
     <value>Choose Chart Folder</value>
   </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>링크는 "/"로 끝나야 하며 주소 끝에 "ModLinks.json"을 추가할 때 액세스하고 구문 분석할 수 있어야 합니다(Github 저장소와 동일한 구조)\n앱을 다시 시작한 후 적용됩니다.</value>
+    <value>링크는 "/"로 끝나야 하며 주소 끝에 "ModLinks.json"을 추가할 때 액세스하고 구문 분석할 수 있어야 합니다(Github 저장소와 동일한 구조)
+앱을 다시 시작한 후 적용됩니다.</value>
   </data>
     <data name="XAML_Download_Chart" xml:space="preserve">
     <value>다운로드</value>

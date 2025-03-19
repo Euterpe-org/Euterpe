@@ -317,7 +317,8 @@
     <value>Config File</value>
   </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)\nTakes effect after restarting app</value>
+    <value>The link must end in "/", and must be accessible and parsable when appending "ModLinks.json" to the end of the address (The same structure as the Github repository)
+Takes effect after restarting app</value>
   </data>
     <data name="XAML_Download_Chart" xml:space="preserve">
     <value>Download</value>

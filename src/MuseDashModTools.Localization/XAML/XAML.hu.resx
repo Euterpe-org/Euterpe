@@ -176,7 +176,8 @@
     <value>Válaszd ki a zene mappádat</value>
   </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>A linknek "/"-el kell végződnie, emellett elérhetőnek és értelemezhetőnek kell lennie úgy, hogy ha "ModLinks.json" van a végéhez fűzve (Ugyanaz mint egy GitHub projekt felépítése)\nÚjraindítás után lép életbe</value>
+    <value>A linknek "/"-el kell végződnie, emellett elérhetőnek és értelemezhetőnek kell lennie úgy, hogy ha "ModLinks.json" van a végéhez fűzve (Ugyanaz mint egy GitHub projekt felépítése)
+Újraindítás után lép életbe</value>
   </data>
     <data name="XAML_Download_Chart" xml:space="preserve">
     <value>Letöltés</value>
