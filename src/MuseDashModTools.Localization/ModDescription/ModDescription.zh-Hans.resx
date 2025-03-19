@@ -71,7 +71,8 @@
     <value>可调整背景亮度低于40%</value>
   </data>
   <data name="CustomHitSound" xml:space="preserve">
-    <value>自制音效 Mod\n详细教程在 Github Readme 里</value>
+    <value>自制音效 Mod
+详细教程在 Github Readme 里</value>
   </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
     <value>可添加自定义加载界面（CustomLoadingScreens 文件夹）
@@ -146,7 +147,8 @@
 可在配置文件里设置自定义键位</value>
   </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-    <value>可设置快捷键位来快切人物和精灵\n有内置 UI 界面 （默认键位 F11）</value>
+    <value>可设置快捷键位来快切人物和精灵
+有内置 UI 界面 （默认键位 F11）</value>
   </data>
   <data name="SceneEggs" xml:space="preserve">
     <value>使自制谱能使用一些彩蛋背景装饰</value>

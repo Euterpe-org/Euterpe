@@ -98,7 +98,8 @@
     <value>GitHub RSS</value>
   </data>
     <data name="XAML_Analyze" xml:space="preserve">
-    <value>Analizar\neste log</value>
+    <value>Analizar
+este log</value>
   </data>
     <data name="XAML_AskType_Always" xml:space="preserve">
     <value>Preguntar primero</value>
@@ -167,7 +168,8 @@
     <value>Elige la carpeta de Chart</value>
   </data>
     <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>El enlace debe terminar en una "/", ser público y ser compatible con "ModLinks.json" (La misma estructura que en Github)\n¡Tomará efecto al reiniciar el programa!</value>
+    <value>El enlace debe terminar en una "/", ser público y ser compatible con "ModLinks.json" (La misma estructura que en Github)
+¡Tomará efecto al reiniciar el programa!</value>
   </data>
     <data name="XAML_Download_Chart" xml:space="preserve">
     <value>Descargar</value>
@@ -260,7 +262,8 @@
     <value>Activar dependencias al instalar un Mod</value>
   </data>
     <data name="XAML_TroubleShoot" xml:space="preserve">
-    <value>Reportar un\nproblema</value>
+    <value>Reportar un
+problema</value>
   </data>
     <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
     <value>Ingresa el enlace de descarga</value>
