@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <Import Condition="'$(Configuration)' == 'Release'" Project="$(SolutionDir)Release.props"/>
-    <Import Condition="'$(Configuration)' == 'Release'" Project="AOT.props"/>
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
