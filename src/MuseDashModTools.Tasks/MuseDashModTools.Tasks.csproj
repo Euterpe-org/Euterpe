@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IsAotCompatible>false</IsAotCompatible>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Microsoft.Build.Utilities.Core"/>
+        <PackageReference Include="Polyfill"/>
+    </ItemGroup>
+
+    <Target Name="Copy Builds" AfterTargets="Build">
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)bin\ExternalBuilds" SkipUnchangedFiles="true"/>
+    </Target>
+
+</Project>

@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\MuseDashModTools.Tasks\MuseDashModTools.Tasks.targets"/>
 
     <PropertyGroup>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <DebugType>none</DebugType>
-    </PropertyGroup>
+    <Target Name="GenerateModToolsStyles" BeforeTargets="Build">
+        <GenerateModToolsStyles AvaloniaResourceFiles="@(AvaloniaXaml)"/>
+    </Target>
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
@@ -16,5 +17,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\MuseDashModTools.Models\MuseDashModTools.Models.csproj"/>
+        <ProjectReference Include="..\MuseDashModTools.Tasks\MuseDashModTools.Tasks.csproj"/>
     </ItemGroup>
 </Project>

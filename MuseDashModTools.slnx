@@ -19,6 +19,7 @@
         <Project Path="src/MuseDashModTools.Styles/MuseDashModTools.Styles.csproj"/>
         <Project Path="src/MuseDashModTools.Updater/MuseDashModTools.Updater.csproj"/>
         <Project Path="src/MuseDashModTools/MuseDashModTools.csproj"/>
+        <Project Path="src/MuseDashModTools.Tasks/MuseDashModTools.Tasks.csproj"/>
     </Folder>
     <Folder Name="/tests/">
         <Project Path="tests/MuseDashModTools.Generators.Tests/MuseDashModTools.Generators.Tests.csproj"/>

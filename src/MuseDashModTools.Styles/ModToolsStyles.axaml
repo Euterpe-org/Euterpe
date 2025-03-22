@@ -16,18 +16,18 @@
         </ResourceDictionary>
     </Styles.Resources>
 
-    <!--  Extend Controls  -->
-    <StyleInclude Source="/ExtendControls/DifficultyFilter.axaml" />
-    <StyleInclude Source="/ExtendControls/ImageButton.axaml" />
-    <StyleInclude Source="/ExtendControls/NaviPanelListControl.axaml" />
+    <!--  Extended Controls  -->
+    <StyleInclude Source="/ExtendedControls/DifficultyFilter.axaml" />
+    <StyleInclude Source="/ExtendedControls/ImageButton.axaml" />
+    <StyleInclude Source="/ExtendedControls/NaviPanelListControl.axaml" />
 
     <!--  Templated Controls  -->
+    <StyleInclude Source="/TemplatedControls/ContentListItem.axaml" />
+    <StyleInclude Source="/TemplatedControls/ContributorCardControl.axaml" />
     <StyleInclude Source="/TemplatedControls/Difficulty.axaml" />
     <StyleInclude Source="/TemplatedControls/NaviButtonsControl.axaml" />
-    <StyleInclude Source="/TemplatedControls/ContributorCardControl.axaml" />
-    <StyleInclude Source="/TemplatedControls/ContentListItem.axaml" />
 
-    <!--  Styles  -->
+    <!--  Control Styles  -->
     <StyleInclude Source="/Styles/BorderStyles.axaml" />
     <StyleInclude Source="/Styles/ButtonStyles.axaml" />
     <StyleInclude Source="/Styles/ImageStyles.axaml" />
@@ -35,5 +35,6 @@
     <StyleInclude Source="/Styles/SplitButtonStyles.axaml" />
     <StyleInclude Source="/Styles/StackPanelStyles.axaml" />
     <StyleInclude Source="/Styles/TextBlockStyles.axaml" />
+    <StyleInclude Source="/Styles/TextBoxStyles.axaml" />
     <StyleInclude Source="/Styles/UniformGridStyles.axaml" />
 </Styles>
