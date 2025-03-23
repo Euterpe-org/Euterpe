@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <Target Name="Copy Builds" AfterTargets="Build">
-        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)bin\ExternalBuilds" SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ExternalBuildsFolder)" SkipUnchangedFiles="true"/>
     </Target>
 
 </Project>
