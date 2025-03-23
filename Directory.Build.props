@@ -6,5 +6,6 @@
         <Nullable>enable</Nullable>
         <IsAotCompatible>true</IsAotCompatible>
         <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
+        <ExternalBuildsFolder>$(SolutionDir)bin\ExternalBuilds\</ExternalBuildsFolder>
     </PropertyGroup>
 </Project>

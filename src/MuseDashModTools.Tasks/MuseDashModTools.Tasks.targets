@@ -1,6 +1,6 @@
 ﻿<Project>
     <PropertyGroup>
-        <AssemblyPath>$(SolutionDir)bin\ExternalBuilds\$(MSBuildThisFileName).dll</AssemblyPath>
+        <AssemblyPath>$(ExternalBuildsFolder)$(MSBuildThisFileName).dll</AssemblyPath>
     </PropertyGroup>
 
     <UsingTask TaskName="$(MSBuildThisFileName).GenerateModToolsStyles"
