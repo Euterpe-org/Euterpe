@@ -97,9 +97,6 @@
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>關於</value>
   </data>
-  <data name="Path_Folder_MuseDash" xml:space="preserve">
-    <value>Muse Dash 文件路徑</value>
-  </data>
   <data name="SearchBarWatermark_Chart" xml:space="preserve">
         <value>搜索譜面  (名稱，曲師，譜師)</value>
     </data>
@@ -126,6 +123,9 @@
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>語言</value>
+  </data>
+  <data name="Setting_Title_MuseDashFolderPath" xml:space="preserve">
+    <value>Muse Dash 文件路徑</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>

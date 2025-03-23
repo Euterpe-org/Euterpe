@@ -94,9 +94,6 @@
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>A projektről</value>
   </data>
-  <data name="Path_Folder_MuseDash" xml:space="preserve">
-    <value>Muse Dash mappa</value>
-  </data>
   <data name="Setting_DownloadSource_Custom" xml:space="preserve">
     <value>Egyéni forrás</value>
   </data>
@@ -117,6 +114,9 @@
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>Nyelv</value>
+  </data>
+  <data name="Setting_Title_MuseDashFolderPath" xml:space="preserve">
+    <value>Muse Dash mappa</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
