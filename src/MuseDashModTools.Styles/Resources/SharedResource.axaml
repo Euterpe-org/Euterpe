@@ -1,4 +1,6 @@
-﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <LinearGradientBrush x:Key="PrimaryButtonGradient" StartPoint="0%,0%" EndPoint="100%,100%">
         <GradientStop Offset="0" Color="#54A9FF" />

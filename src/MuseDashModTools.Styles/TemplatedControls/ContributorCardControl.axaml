@@ -1,57 +1,74 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:MuseDashModTools.Models.Controls"
-        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MuseDashModTools.Models.Controls"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
     <Design.PreviewWith>
         <mdmt:ContributorCardControl />
     </Design.PreviewWith>
 
-    <Style Selector="ContentPresenter">
+    <Style
+        Selector="ContentPresenter">
         <Setter Property="CornerRadius" Value="8" />
     </Style>
 
-    <Style Selector="mdmt|ContributorCardControl">
+    <Style
+        Selector="mdmt|ContributorCardControl">
         <Setter Property="Width" Value="320" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Border Width="320"
-                        Theme="{DynamicResource CardBorder}"
-                        VerticalAlignment="Top">
-                    <Expander IsEnabled="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}">
+                <Border
+                    Theme="{DynamicResource CardBorder}"
+                    VerticalAlignment="Top"
+                    Width="320">
+                    <Expander
+                        IsEnabled="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}">
                         <Expander.Styles>
-                            <Style Selector="PathIcon:disabled">
+                            <Style
+                                Selector="PathIcon:disabled">
                                 <Setter Property="IsVisible" Value="False" />
                             </Style>
-                            <Style Selector="Border:disabled">
+                            <Style
+                                Selector="Border:disabled">
                                 <Setter Property="BorderThickness" Value="0" />
                             </Style>
                         </Expander.Styles>
                         <Expander.Header>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Spacing="10">
 
                                 <!--  Avatar  -->
-                                <Border Width="64" Height="64">
-                                    <Image Source="{TemplateBinding Avatar, Mode=OneWay}" Stretch="UniformToFill">
+                                <Border
+                                    Height="64"
+                                    Width="64">
+                                    <Image
+                                        Source="{TemplateBinding Avatar, Mode=OneWay}"
+                                        Stretch="UniformToFill">
                                         <Image.Clip>
-                                            <EllipseGeometry Center="32,32"
-                                                             RadiusX="32"
-                                                             RadiusY="32" />
+                                            <EllipseGeometry
+                                                Center="32,32"
+                                                RadiusX="32"
+                                                RadiusY="32" />
                                         </Image.Clip>
                                     </Image>
                                 </Border>
 
-                                <StackPanel Margin="0,-3,0,0"
-                                            VerticalAlignment="Center"
-                                            Orientation="Vertical"
-                                            Spacing="3">
+                                <StackPanel
+                                    Margin="0,-3,0,0"
+                                    Orientation="Vertical"
+                                    Spacing="3"
+                                    VerticalAlignment="Center">
 
                                     <!--  Name  -->
-                                    <TextBlock FontSize="16"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource PrimaryTitleColor}"
-                                               Text="{TemplateBinding ContributorName, Mode=OneWay}">
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource PrimaryTitleColor}"
+                                        Text="{TemplateBinding ContributorName, Mode=OneWay}">
                                         <TextBlock.Styles>
-                                            <Style Selector="TextBlock:disabled">
+                                            <Style
+                                                Selector="TextBlock:disabled">
                                                 <Style.Setters>
                                                     <Setter Property="Foreground" Value="{DynamicResource PrimaryTitleColor}" />
                                                 </Style.Setters>
@@ -60,14 +77,16 @@
                                     </TextBlock>
 
                                     <!--  Description  -->
-                                    <TextBlock Width="150"
-                                               FontSize="10"
-                                               Foreground="LightSlateGray"
-                                               IsVisible="{TemplateBinding ContributorDescription, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
-                                               Text="{TemplateBinding ContributorDescription, Mode=OneWay}"
-                                               TextWrapping="Wrap">
+                                    <TextBlock
+                                        FontSize="10"
+                                        Foreground="LightSlateGray"
+                                        IsVisible="{TemplateBinding ContributorDescription, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                                        Text="{TemplateBinding ContributorDescription, Mode=OneWay}"
+                                        TextWrapping="Wrap"
+                                        Width="150">
                                         <TextBlock.Styles>
-                                            <Style Selector="TextBlock:disabled">
+                                            <Style
+                                                Selector="TextBlock:disabled">
                                                 <Style.Setters>
                                                     <Setter Property="Foreground" Value="LightSlateGray" />
                                                 </Style.Setters>
@@ -81,21 +100,27 @@
                         <Panel>
 
                             <!--  Links  -->
-                            <ItemsControl IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
-                                          ItemsSource="{TemplateBinding Links, Mode=OneWay}">
+                            <ItemsControl
+                                IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                                ItemsSource="{TemplateBinding Links, Mode=OneWay}">
 
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel Margin="0,8" HorizontalAlignment="Center" />
+                                        <WrapPanel
+                                            HorizontalAlignment="Center"
+                                            Margin="0,8" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
 
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate x:DataType="controls:ContributorLink">
-                                        <Button Margin="4"
-                                                Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=mdmt:ContributorCardControl}, Mode=OneTime}"
-                                                CommandParameter="{Binding Url, Mode=OneTime}">
-                                            <TextBlock Text="{Binding Name, Mode=OneTime}" />
+                                    <DataTemplate
+                                        x:DataType="controls:ContributorLink">
+                                        <Button
+                                            Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=mdmt:ContributorCardControl}, Mode=OneTime}"
+                                            CommandParameter="{Binding Url, Mode=OneTime}"
+                                            Margin="4">
+                                            <TextBlock
+                                                Text="{Binding Name, Mode=OneTime}" />
                                         </Button>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

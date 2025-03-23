@@ -1,32 +1,38 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
-             xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
-             x:Class="MuseDashModTools.Views.Panels.Setting.ExperiencePanel"
-             x:DataType="vm:ExperiencePanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+    x:Class="MuseDashModTools.Views.Panels.Setting.ExperiencePanel"
+    x:DataType="vm:ExperiencePanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:ExperiencePanelViewModel />
     </Design.DataContext>
 
-    <StackPanel Classes="SharedContentListRoot">
+    <StackPanel
+        Classes="SharedContentListRoot">
 
         <!--  Show Console  -->
-        <mdmt:ContentListItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowConsole}}"
-                              Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowConsole}}">
-            <ToggleSwitch IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowConsole}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowConsole}}">
+            <ToggleSwitch
+                IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
         </mdmt:ContentListItem>
 
-        <!-- Always Show ScrollBar -->
-        <mdmt:ContentListItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_AlwaysShowScrollBar}}"
-                              Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}">
-            <ToggleSwitch IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=TwoWay}" />
+        <!--  Always Show ScrollBar  -->
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_AlwaysShowScrollBar}}">
+            <ToggleSwitch
+                IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=TwoWay}" />
         </mdmt:ContentListItem>
 
     </StackPanel>

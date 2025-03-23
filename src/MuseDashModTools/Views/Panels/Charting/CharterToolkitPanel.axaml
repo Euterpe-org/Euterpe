@@ -1,21 +1,23 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Charting"
-             x:Class="MuseDashModTools.Views.Panels.Charting.CharterToolkitPanel"
-             x:DataType="vm:CharterToolkitPanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Charting"
+    x:Class="MuseDashModTools.Views.Panels.Charting.CharterToolkitPanel"
+    x:DataType="vm:CharterToolkitPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:CharterToolkitPanelViewModel />
     </Design.DataContext>
 
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
+    <TextBlock
+        HorizontalAlignment="Center"
+        TextAlignment="Center"
+        VerticalAlignment="Center">
         CharterPanel still work in progress...
     </TextBlock>
 

@@ -1,15 +1,20 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style Selector="TextBlock">
+    <Style
+        Selector="TextBlock">
         <!--  Common Description Text  -->
-        <Style Selector="^.SharedDesc">
+        <Style
+            Selector="^.SharedDesc">
             <Setter Property="Foreground" Value="Gray" />
             <Setter Property="Margin" Value="0, -10, 0, 0" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
         <!--  Card Description Text  -->
-        <Style Selector="^.SharedCardDesc">
+        <Style
+            Selector="^.SharedCardDesc">
             <Setter Property="Foreground" Value="DarkGray" />
             <Setter Property="Margin" Value="0,10" />
             <Setter Property="Opacity" Value="0.7" />
@@ -17,7 +22,8 @@
         </Style>
 
         <!--  Card Title Text  -->
-        <Style Selector="^.SharedCardTitle">
+        <Style
+            Selector="^.SharedCardTitle">
             <Setter Property="FontSize" Value="24" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="White" />
@@ -25,19 +31,22 @@
         </Style>
 
         <!--  Title Text Styles  -->
-        <Style Selector="^.PanelModManageModTitle">
+        <Style
+            Selector="^.PanelModManageModTitle">
             <Setter Property="FontSize" Value="24" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Margin" Value="0,0,0,8" />
         </Style>
-        <Style Selector="^.PanelModManageSectionTitle">
+        <Style
+            Selector="^.PanelModManageSectionTitle">
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Margin" Value="0,0,0,16" />
         </Style>
 
         <!--  Override Active Style  -->
-        <Style Selector="^.Active">
+        <Style
+            Selector="^.Active">
             <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
         </Style>
     </Style>

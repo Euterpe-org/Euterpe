@@ -1,40 +1,54 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
-             x:Class="MuseDashModTools.Views.Panels.Setting.FileManagementPanel"
-             x:DataType="vm:FileManagementPanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+    x:Class="MuseDashModTools.Views.Panels.Setting.FileManagementPanel"
+    x:DataType="vm:FileManagementPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:FileManagementPanelViewModel />
     </Design.DataContext>
 
     <!--  TODO: u:PathPicker  -->
-    <StackPanel Classes="SharedContentListRoot">
+    <StackPanel
+        Classes="SharedContentListRoot">
 
         <!--  MuseDash Game Folder  -->
-        <mdmt:ContentListItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolderPath}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolderPath}}">
-            <StackPanel Classes="SharedContentListItemVertical">
-                <TextBox Classes="SharedDesc" Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
-                <Button HorizontalAlignment="Left"
-                        Content="Reselect"
-                        Theme="{DynamicResource OutlineButton}" />
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolderPath}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolderPath}}">
+            <StackPanel
+                Classes="SharedContentListItemVertical">
+                <TextBox
+                    Classes="SharedDesc"
+                    Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
+                <Button
+                    Content="Reselect"
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource OutlineButton}" />
             </StackPanel>
         </mdmt:ContentListItem>
 
         <!--  Cache Folder  -->
-        <mdmt:ContentListItem Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolderPath}}" Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolderPath}}">
-            <StackPanel Classes="SharedContentListItemVertical">
-                <TextBox Classes="SharedDesc" Text="{Binding Config.CacheFolder, Mode=OneWay}" />
-                <Button HorizontalAlignment="Left"
-                        Content="Reselect"
-                        Theme="{DynamicResource OutlineButton}" />
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolderPath}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolderPath}}">
+            <StackPanel
+                Classes="SharedContentListItemVertical">
+                <TextBox
+                    Classes="SharedDesc"
+                    Text="{Binding Config.CacheFolder, Mode=OneWay}" />
+                <Button
+                    Content="Reselect"
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource OutlineButton}" />
             </StackPanel>
         </mdmt:ContentListItem>
 

@@ -1,22 +1,29 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization">
 
-    <Style Selector="Label">
+    <Style
+        Selector="Label">
         <!--  Label Styles for Different States  -->
-        <Style Selector="^.TagLabel">
+        <Style
+            Selector="^.TagLabel">
             <Setter Property="Theme" Value="{StaticResource TagLabel}" />
         </Style>
-        <Style Selector="^.Orange">
+        <Style
+            Selector="^.Orange">
             <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}" />
         </Style>
-        <Style Selector="^.Red">
+        <Style
+            Selector="^.Red">
             <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}" />
         </Style>
-        <Style Selector="^.Purple">
+        <Style
+            Selector="^.Purple">
             <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Newer}}" />
         </Style>
-        <Style Selector="^.Green">
+        <Style
+            Selector="^.Green">
             <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}" />
         </Style>
     </Style>
