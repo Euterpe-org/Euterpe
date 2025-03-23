@@ -1,0 +1,16 @@
+﻿<Project>
+    <Target Name="AddNoCultureResxFilesAsAdditionalFiles"
+            BeforeTargets="GenerateMSBuildEditorConfigFileCore;CoreCompile"
+            Condition="'@(EmbeddedResource)' != ''">
+        <ItemGroup>
+            <ResxResources Include="@(EmbeddedResource)" Condition="'%(Extension)' == '.resx'"/>
+        </ItemGroup>
+        <AssignCulture Files="@(ResxResources)">
+            <Output TaskParameter="AssignedFilesWithCulture" ItemName="ResxWithCulture"/>
+            <Output TaskParameter="AssignedFilesWithNoCulture" ItemName="ResxWithNoCulture"/>
+        </AssignCulture>
+        <ItemGroup>
+            <AdditionalFiles Include="@(ResxWithNoCulture)"/>
+        </ItemGroup>
+    </Target>
+</Project>
