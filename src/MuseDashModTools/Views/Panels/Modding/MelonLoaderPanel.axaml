@@ -1,87 +1,103 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Modding"
-             x:Class="MuseDashModTools.Views.Panels.Modding.MelonLoaderPanel"
-             x:DataType="vm:MelonLoaderPanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Modding"
+    x:Class="MuseDashModTools.Views.Panels.Modding.MelonLoaderPanel"
+    x:DataType="vm:MelonLoaderPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:MelonLoaderPanelViewModel />
     </Design.DataContext>
 
-    <StackPanel Margin="0,0,0,40"
-                MinWidth="400"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Vertical"
-                Spacing="15">
+    <StackPanel
+        HorizontalAlignment="Center"
+        Margin="0,0,0,40"
+        MinWidth="400"
+        Orientation="Vertical"
+        Spacing="15"
+        VerticalAlignment="Center">
 
-        <!-- Logo & Title -->
-        <StackPanel Orientation="Horizontal"
-                    Spacing="25"
-                    HorizontalAlignment="Center">
-            <Image Height="50"
-                   RenderOptions.BitmapInterpolationMode="HighQuality"
-                   Source="/Assets/ML_Icon.png" />
-            <Image Height="40"
-                   RenderOptions.BitmapInterpolationMode="HighQuality"
-                   Source="/Assets/ML_Text.png" />
+        <!--  Logo & Title  -->
+        <StackPanel
+            HorizontalAlignment="Center"
+            Orientation="Horizontal"
+            Spacing="25">
+            <Image
+                Height="50"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="/Assets/ML_Icon.png" />
+            <Image
+                Height="40"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="/Assets/ML_Text.png" />
         </StackPanel>
 
-        <TextBlock HorizontalAlignment="Center"
-                   Foreground="Gray"
-                   Text="MelonLoader installation is required to play with mods" />
+        <TextBlock
+            Foreground="Gray"
+            HorizontalAlignment="Center"
+            Text="MelonLoader installation is required to play with mods" />
 
-        <Border Margin="30"
-                Padding="20"
-                MinWidth="300"
-                Theme="{DynamicResource CardBorder}">
-            <StackPanel Orientation="Vertical">
+        <Border
+            Margin="30"
+            MinWidth="300"
+            Padding="20"
+            Theme="{DynamicResource CardBorder}">
+            <StackPanel
+                Orientation="Vertical">
 
-                <!-- Status Area -->
-                <DockPanel HorizontalAlignment="Center"
-                           Margin="20,10,20, 15">
-                    <TextBlock Margin="0, 0, 6, 0"
-                               VerticalAlignment="Center"
-                               FontSize="16"
-                               Foreground="Gainsboro"
-                               Text="{Binding InstallStatus, Mode=OneWay}" />
-                    <Label Classes="Ghost Green"
-                           IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
-                           Content="{Binding MelonLoaderVersion, StringFormat='v{0}', Mode=OneWay}"
-                           Theme="{StaticResource TagLabel}" />
+                <!--  Status Area  -->
+                <DockPanel
+                    HorizontalAlignment="Center"
+                    Margin="20,10,20,15">
+                    <TextBlock
+                        FontSize="16"
+                        Foreground="Gainsboro"
+                        Margin="0,0,6,0"
+                        Text="{Binding InstallStatus, Mode=OneWay}"
+                        VerticalAlignment="Center" />
+                    <Label
+                        Classes="Ghost Green"
+                        Content="{Binding MelonLoaderVersion, StringFormat='v{0}', Mode=OneWay}"
+                        IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
+                        Theme="{StaticResource TagLabel}" />
                 </DockPanel>
 
-                <!-- Action Area -->
-                <Grid Height="60"
-                      HorizontalAlignment="Center">
+                <!--  Action Area  -->
+                <Grid
+                    Height="60"
+                    HorizontalAlignment="Center">
 
-                    <!-- Buttons -->
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="30"
-                                IsVisible="{Binding !Downloading}">
-                        <Button Width="100"
-                                Classes="Large"
-                                Command="{Binding InstallMelonLoaderCommand}"
-                                Content="Install"
-                                IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNullOrEmpty}, Mode=OneWay}" />
-                        <Button Width="100"
-                                Classes="Large Danger"
-                                Command="{Binding UninstallMelonLoaderCommand}"
-                                Content="Uninstall"
-                                IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}" />
+                    <!--  Buttons  -->
+                    <StackPanel
+                        IsVisible="{Binding !Downloading}"
+                        Orientation="Horizontal"
+                        Spacing="30">
+                        <Button
+                            Classes="Large"
+                            Command="{Binding InstallMelonLoaderCommand}"
+                            Content="Install"
+                            IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNullOrEmpty}, Mode=OneWay}"
+                            Width="100" />
+                        <Button
+                            Classes="Large Danger"
+                            Command="{Binding UninstallMelonLoaderCommand}"
+                            Content="Uninstall"
+                            IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
+                            Width="100" />
                     </StackPanel>
 
-                    <!-- Progress Bar -->
-                    <ProgressBar Width="260"
-                                 Height="4"
-                                 VerticalAlignment="Center"
-                                 IsVisible="{Binding Downloading, Mode=OneWay}"
-                                 Value="{Binding DownloadProgress, Mode=OneWay}" />
+                    <!--  Progress Bar  -->
+                    <ProgressBar
+                        Value="{Binding DownloadProgress, Mode=OneWay}"
+                        Height="4"
+                        IsVisible="{Binding Downloading, Mode=OneWay}"
+                        VerticalAlignment="Center"
+                        Width="260" />
 
                 </Grid>
             </StackPanel>

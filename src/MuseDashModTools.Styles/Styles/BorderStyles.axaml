@@ -1,15 +1,20 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style Selector="Border">
+    <Style
+        Selector="Border">
         <!--  Card  -->
-        <Style Selector="^.SharedCard">
+        <Style
+            Selector="^.SharedCard">
             <Setter Property="Background" Value="{DynamicResource CardBackground}" />
             <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
             <Setter Property="Padding" Value="20" />
         </Style>
 
         <!--  Hover  -->
-        <Style Selector="^.SharedHover">
+        <Style
+            Selector="^.SharedHover">
             <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
             <Setter Property="ClipToBounds" Value="True" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -19,14 +24,19 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="Transitions">
                 <Transitions>
-                    <BrushTransition Property="Background" Duration="0:0:0.2" />
-                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" />
+                    <BrushTransition
+                        Property="Background"
+                        Duration="0:0:0.2" />
+                    <TransformOperationsTransition
+                        Property="RenderTransform"
+                        Duration="0:0:0.2" />
                 </Transitions>
             </Setter>
         </Style>
 
         <!--  Dialog Donation Qr Container  -->
-        <Style Selector="^.DialogDonationQr">
+        <Style
+            Selector="^.DialogDonationQr">
             <Setter Property="Width" Value="230" />
             <Setter Property="Margin" Value="10" />
             <Setter Property="ClipToBounds" Value="True" />
@@ -34,7 +44,8 @@
         </Style>
 
         <!--  Navigation  -->
-        <Style Selector="^.WinMainNav">
+        <Style
+            Selector="^.WinMainNav">
             <Setter Property="Height" Value="45" />
             <Setter Property="Margin" Value="0,0,20,10" />
             <Setter Property="Padding" Value="12,4" />

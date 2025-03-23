@@ -1,28 +1,34 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
-             x:Class="MuseDashModTools.Views.Pages.SettingPage"
-             x:DataType="vm:SettingPageViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
+    x:Class="MuseDashModTools.Views.Pages.SettingPage"
+    x:DataType="vm:SettingPageViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:SettingPageViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="Auto, *">
-        <Border Classes="WinMainNav">
+    <Grid
+        RowDefinitions="Auto, *">
+        <Border
+            Classes="WinMainNav">
             <Panel>
-                <mdmt:NaviPanelListControl ItemsSource="{Binding NavItems, Mode=OneTime}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                <mdmt:NaviPanelListControl
+                    ItemsSource="{Binding NavItems, Mode=OneTime}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
             </Panel>
         </Border>
-        <TransitioningContentControl Grid.Row="1"
-                                     Margin="0,10,10,10"
-                                     Content="{Binding Content, Mode=OneWay}" />
+        <TransitioningContentControl
+            Grid.Row="1"
+            Content="{Binding Content, Mode=OneWay}"
+            Margin="0,10,10,10" />
     </Grid>
 
 </UserControl>

@@ -1,26 +1,35 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:MuseDashModTools.Styles.TemplatedControls">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MuseDashModTools.Styles.TemplatedControls">
     <Design.PreviewWith>
-        <controls:ContentListItem Title="Setting" Description="Description">
-            <TextBox Text="Content" />
+        <controls:ContentListItem
+            Description="Description"
+            Title="Setting">
+            <TextBox
+                Text="Content" />
         </controls:ContentListItem>
     </Design.PreviewWith>
 
-    <Style Selector="controls|ContentListItem">
+    <Style
+        Selector="controls|ContentListItem">
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel Classes="SharedContentListItem"
-                            IsVisible="{TemplateBinding IsVisible, Mode=OneWay}">
-                    <TextBlock Classes="H4"
-                               Text="{TemplateBinding Title, Mode=OneWay}"
-                               Theme="{StaticResource TitleTextBlock}" />
-                    <TextBlock Foreground="Gray"
-                               IsVisible="{TemplateBinding Description, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
-                               Margin="0,-10,0,0"
-                               Text="{TemplateBinding Description, Mode=OneWay}"
-                               TextWrapping="Wrap" />
-                    <ContentPresenter Content="{TemplateBinding Content, Mode=OneWay}" />
+                <StackPanel
+                    Classes="SharedContentListItem"
+                    IsVisible="{TemplateBinding IsVisible, Mode=OneWay}">
+                    <TextBlock
+                        Classes="H4"
+                        Text="{TemplateBinding Title, Mode=OneWay}"
+                        Theme="{StaticResource TitleTextBlock}" />
+                    <TextBlock
+                        Foreground="Gray"
+                        IsVisible="{TemplateBinding Description, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                        Margin="0,-10,0,0"
+                        Text="{TemplateBinding Description, Mode=OneWay}"
+                        TextWrapping="Wrap" />
+                    <ContentPresenter
+                        Content="{TemplateBinding Content, Mode=OneWay}" />
                 </StackPanel>
             </ControlTemplate>
         </Setter>

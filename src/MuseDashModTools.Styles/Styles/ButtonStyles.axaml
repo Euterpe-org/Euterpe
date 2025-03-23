@@ -1,37 +1,47 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style Selector="Button">
+    <Style
+        Selector="Button">
         <!--  Transparent Button  -->
-        <Style Selector="^.SharedTransparent">
+        <Style
+            Selector="^.SharedTransparent">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-        <Style Selector="^.SharedTransparent /template/ ContentPresenter">
+        <Style
+            Selector="^.SharedTransparent /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-        <Style Selector="^.SharedTransparent:pointerover /template/ ContentPresenter">
+        <Style
+            Selector="^.SharedTransparent:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
         </Style>
-        <Style Selector="^.SharedTransparent:pressed /template/ ContentPresenter">
+        <Style
+            Selector="^.SharedTransparent:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
         </Style>
 
         <!--  Card Button  -->
-        <Style Selector="^.SharedCard">
+        <Style
+            Selector="^.SharedCard">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
         </Style>
-        <Style Selector="^.SharedCard /template/ ContentPresenter">
+        <Style
+            Selector="^.SharedCard /template/ ContentPresenter">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
 
         <!--  Donation Button  -->
-        <Style Selector="^.PageHomeDonation">
+        <Style
+            Selector="^.PageHomeDonation">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -40,19 +50,23 @@
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Transitions">
                 <Transitions>
-                    <TransformOperationsTransition Property="RenderTransform"
-                                                   Duration="0:0:0.2"
-                                                   Easing="ExponentialEaseOut" />
+                    <TransformOperationsTransition
+                        Property="RenderTransform"
+                        Duration="0:0:0.2"
+                        Easing="ExponentialEaseOut" />
                 </Transitions>
             </Setter>
         </Style>
-        <Style Selector="^.PageHomeDonation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Style
+            Selector="^.PageHomeDonation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
         </Style>
-        <Style Selector="^.PageHomeDonation:pointerover">
+        <Style
+            Selector="^.PageHomeDonation:pointerover">
             <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)" />
         </Style>
-        <Style Selector="^.PageHomeDonation:pressed">
+        <Style
+            Selector="^.PageHomeDonation:pressed">
             <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)" />
         </Style>
     </Style>

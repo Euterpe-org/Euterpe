@@ -1,21 +1,23 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
-             x:Class="MuseDashModTools.Views.Panels.Setting.AdvancedPanel"
-             x:DataType="vm:AdvancedPanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+    x:Class="MuseDashModTools.Views.Panels.Setting.AdvancedPanel"
+    x:DataType="vm:AdvancedPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:AdvancedPanelViewModel />
     </Design.DataContext>
 
-    <TextBlock HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               TextAlignment="Center">
+    <TextBlock
+        HorizontalAlignment="Center"
+        TextAlignment="Center"
+        VerticalAlignment="Center">
         AdvancedPanel still work in progress...
     </TextBlock>
 

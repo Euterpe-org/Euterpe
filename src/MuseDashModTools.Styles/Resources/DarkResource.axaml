@@ -1,7 +1,24 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Bitmap x:Key="AppTitleImage">avares://MuseDashModTools/Assets/Title-Dark.webp</Bitmap>
-    <Bitmap x:Key="BackgroundImage">avares://MuseDashModTools/Assets/Background-Dark.webp</Bitmap>
-    <Bitmap x:Key="TitleImage">avares://MuseDashModTools/Assets/MDMC_Title_Dark.webp</Bitmap>
-    <Color x:Key="SecondaryCardColor">#1F2024</Color>
-    <Color x:Key="PrimaryTitleColor">#FAFAFA</Color>
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Bitmap
+        x:Key="AppTitleImage">
+        avares://MuseDashModTools/Assets/Title-Dark.webp
+    </Bitmap>
+    <Bitmap
+        x:Key="BackgroundImage">
+        avares://MuseDashModTools/Assets/Background-Dark.webp
+    </Bitmap>
+    <Bitmap
+        x:Key="TitleImage">
+        avares://MuseDashModTools/Assets/MDMC_Title_Dark.webp
+    </Bitmap>
+    <Color
+        x:Key="SecondaryCardColor">
+        #1F2024
+    </Color>
+    <Color
+        x:Key="PrimaryTitleColor">
+        #FAFAFA
+    </Color>
 </ResourceDictionary>

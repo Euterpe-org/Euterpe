@@ -1,14 +1,15 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:u="https://irihi.tech/ursa"
-             xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
-             x:Class="MuseDashModTools.Views.Pages.HomePage"
-             x:DataType="vm:HomePageViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
+    x:Class="MuseDashModTools.Views.Pages.HomePage"
+    x:DataType="vm:HomePageViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:HomePageViewModel />
@@ -17,24 +18,31 @@
     <Grid>
 
         <!--  Background Image  -->
-        <Image Source="{DynamicResource BackgroundImage}" Stretch="UniformToFill" />
+        <Image
+            Source="{DynamicResource BackgroundImage}"
+            Stretch="UniformToFill" />
 
         <!--  Title Image  -->
-        <Image Height="120"
-               HorizontalAlignment="Left"
-               Margin="50,60"
-               Source="{DynamicResource TitleImage}"
-               VerticalAlignment="Top" />
+        <Image
+            Height="120"
+            HorizontalAlignment="Left"
+            Margin="50,60"
+            Source="{DynamicResource TitleImage}"
+            VerticalAlignment="Top" />
 
         <!--  Play Button  -->
-        <SplitButton Classes="PageHomePlay"
-                     Command="{Binding LaunchModdedGameCommand, Mode=OneTime}"
-                     Content="Play">
+        <SplitButton
+            Classes="PageHomePlay"
+            Command="{Binding LaunchModdedGameCommand, Mode=OneTime}"
+            Content="Play">
             <SplitButton.Flyout>
-                <MenuFlyout Placement="BottomEdgeAlignedRight">
-                    <MenuItem Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}">
+                <MenuFlyout
+                    Placement="BottomEdgeAlignedRight">
+                    <MenuItem
+                        Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}">
                         <MenuItem.Header>
-                            <TextBlock Text="Play Vanilla" />
+                            <TextBlock
+                                Text="Play Vanilla" />
                         </MenuItem.Header>
                     </MenuItem>
                 </MenuFlyout>
@@ -42,13 +50,17 @@
         </SplitButton>
 
         <!--  Donation Button  -->
-        <Button Classes="PageHomeDonation"
-                Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
-            <Image Height="100" Source="/Assets/Genshin.webp" />
+        <Button
+            Classes="PageHomeDonation"
+            Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
+            <Image
+                Height="100"
+                Source="/Assets/Genshin.webp" />
         </Button>
 
         <!--  Donation Drawer  -->
-        <u:OverlayDialogHost HostId="DonationDrawerHost" />
+        <u:OverlayDialogHost
+            HostId="DonationDrawerHost" />
 
     </Grid>
 </UserControl>

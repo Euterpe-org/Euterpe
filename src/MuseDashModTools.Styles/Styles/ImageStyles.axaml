@@ -1,8 +1,12 @@
-<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style Selector="Image">
+    <Style
+        Selector="Image">
         <!--  Dialog Donation Qr  -->
-        <Style Selector="^.DialogDonationQr">
+        <Style
+            Selector="^.DialogDonationQr">
             <Setter Property="Width" Value="230" />
             <Setter Property="Stretch" Value="Uniform" />
         </Style>
