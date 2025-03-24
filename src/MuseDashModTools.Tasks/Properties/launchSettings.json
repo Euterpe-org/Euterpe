@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DebugMuseDashModToolsStylesTasks": {
+      "commandName": "Executable",
+      "commandLineArgs": "msbuild /m:1 /p:OutputPath=$(OutputPath) /p:ExternalBuildsFolder=$(ExternalBuildsFolder)",
+      "executablePath": "$(DOTNET_ROOT)/dotnet.exe",
+      "environmentVariables": {
+        "MSBUILDDEBUGONSTART": "1"
+      },
+      "workingDirectory": "$(SolutionDir)src/MuseDashModTools.Styles"
+    }
+  }
+}
