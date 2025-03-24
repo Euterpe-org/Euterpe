@@ -8,12 +8,13 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class LocalService : ILocalService
 {
-    public async Task CheckDotNetRuntimeInstallAsync()
+    public async Task CheckDotNetRuntimeInstalledAsync()
     {
         var outputStringBuilder = new StringBuilder();
         await Cli.Wrap("dotnet")
             .WithArguments("--list-runtimes")
             .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
+            .WithStandardErrorPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
             .ExecuteAsync()
             .ConfigureAwait(false);
 
@@ -21,6 +22,23 @@ internal sealed partial class LocalService : ILocalService
         {
             Logger.ZLogInformation($"DotNet Runtime not found, showing error message box...");
             await MessageBoxService.ErrorAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
+        }
+    }
+
+    public async Task CheckDotNetSdkInstalledAsync()
+    {
+        var outputStringBuilder = new StringBuilder();
+        await Cli.Wrap("dotnet")
+            .WithArguments("--list-sdks")
+            .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
+            .WithStandardErrorPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
+            .ExecuteAsync()
+            .ConfigureAwait(false);
+
+        if (outputStringBuilder.ToString().IsNullOrEmpty())
+        {
+            Logger.ZLogInformation($"DotNet SDK not found, showing error message box...");
+            await MessageBoxService.ErrorAsync(MsgBox_Content_DotNetSDKNotFound).ConfigureAwait(true);
         }
     }
 
