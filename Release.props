@@ -7,10 +7,6 @@
         <DebugType>none</DebugType>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <DebugType>none</DebugType>
-    </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="PublishAotCompressed"/>
     </ItemGroup>
@@ -29,6 +25,6 @@
             <PublishedFiles Include="$(PublishDir)*.*" Condition="!Exists('$(NativeDir)')"/>
         </ItemGroup>
 
-        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(SolutionDir)bin" SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(BaseOutputPath)" SkipUnchangedFiles="true"/>
     </Target>
 </Project>
