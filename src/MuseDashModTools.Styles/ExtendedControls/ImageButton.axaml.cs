@@ -1,4 +1,4 @@
-﻿namespace MuseDashModTools.Styles.ExtendControls;
+﻿namespace MuseDashModTools.Styles.ExtendedControls;
 
 public sealed class ImageButton : Button
 {

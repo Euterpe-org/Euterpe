@@ -1,13 +1,13 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:MuseDashModTools.Styles.ExtendControls">
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
     <Design.PreviewWith>
-        <controls:ImageButton />
+        <mdmt:ImageButton />
     </Design.PreviewWith>
 
     <Style
-        Selector="controls|ImageButton">
+        Selector="mdmt|ImageButton">
         <Setter Property="Template">
             <ControlTemplate>
                 <Button
