@@ -1,10 +1,8 @@
-<Styles
+﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:semi="https://irihi.tech/semi">
-
     <semi:SemiTheme />
-
     <Styles.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
@@ -21,7 +19,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
-
     <!--  Extended Controls  -->
     <StyleInclude
         Source="/ExtendedControls/DifficultyFilter.axaml" />
@@ -29,7 +26,6 @@
         Source="/ExtendedControls/ImageButton.axaml" />
     <StyleInclude
         Source="/ExtendedControls/NaviPanelListControl.axaml" />
-
     <!--  Templated Controls  -->
     <StyleInclude
         Source="/TemplatedControls/ContentListItem.axaml" />
@@ -39,7 +35,6 @@
         Source="/TemplatedControls/Difficulty.axaml" />
     <StyleInclude
         Source="/TemplatedControls/NaviButtonsControl.axaml" />
-
     <!--  Control Styles  -->
     <StyleInclude
         Source="/Styles/BorderStyles.axaml" />
