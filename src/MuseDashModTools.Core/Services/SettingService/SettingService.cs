@@ -30,6 +30,7 @@ internal sealed partial class SettingService : ISettingService
 
     public async Task SaveAsync()
     {
+        throw new Exception("Test Exception");
         await using var stream = new FileStream(ConfigPath, FileMode.Create, FileAccess.Write);
         await JsonSerializationService.SerializeConfigAsync(stream, Config).ConfigureAwait(false);
         Logger.ZLogInformation($"Setting saved to {ConfigPath} successfully");
