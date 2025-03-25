@@ -17,7 +17,7 @@ internal sealed class NotificationService : INotificationService
 
     // Normal
     public void Success(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Success, content, NotificationType.Success));
+        WindowNotificationManager.Show(new Notification(Title_Success, content), NotificationType.Success);
 
     public void Success(string content, params ReadOnlySpan<object> args) =>
         Success(string.Format(content, args));
@@ -35,7 +35,7 @@ internal sealed class NotificationService : INotificationService
 
     // Normal
     public void Notice(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Notice, content));
+        WindowNotificationManager.Show(new Notification(Title_Notice, content), NotificationType.Information);
 
     public void Notice(string content, params ReadOnlySpan<object> args) =>
         Notice(string.Format(content, args));
@@ -53,7 +53,7 @@ internal sealed class NotificationService : INotificationService
 
     // Normal
     public void Error(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Error, content, NotificationType.Error));
+        WindowNotificationManager.Show(new Notification(Title_Error, content), NotificationType.Error);
 
     public void Error(string content, params ReadOnlySpan<object> args) =>
         Error(string.Format(content, args));
@@ -71,7 +71,7 @@ internal sealed class NotificationService : INotificationService
 
     // Normal
     public void Warning(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Warning, content, NotificationType.Warning));
+        WindowNotificationManager.Show(new Notification(Title_Warning, content), NotificationType.Warning);
 
     public void Warning(string content, params ReadOnlySpan<object> args) =>
         Warning(string.Format(content, args));
