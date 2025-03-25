@@ -4,7 +4,7 @@ namespace MuseDashModTools.Abstractions;
 
 public interface IMessageBoxService
 {
-    #region Confirm MessageBox
+    #region Confirm
 
     // Normal
     Task<MessageBoxResult> WarningConfirmAsync(string message);
@@ -18,7 +18,7 @@ public interface IMessageBoxService
 
     #endregion
 
-    #region Error MessageBox
+    #region Error
 
     // Normal
     Task<MessageBoxResult> ErrorAsync(string message);
@@ -30,7 +30,7 @@ public interface IMessageBoxService
 
     #endregion
 
-    #region Notice MessageBox
+    #region Notice
 
     // Normal
     Task<MessageBoxResult> NoticeAsync(string message);
@@ -41,7 +41,7 @@ public interface IMessageBoxService
 
     #endregion
 
-    #region Success MessageBox
+    #region Success
 
     // Normal
     Task<MessageBoxResult> SuccessAsync(string message);

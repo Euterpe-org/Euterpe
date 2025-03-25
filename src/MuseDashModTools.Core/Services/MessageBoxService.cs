@@ -2,7 +2,7 @@
 
 internal sealed class MessageBoxService : IMessageBoxService
 {
-    #region Confirm MessageBox
+    #region Confirm
 
     // Normal
     public Task<MessageBoxResult> WarningConfirmAsync(string message) =>
@@ -26,7 +26,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     #endregion
 
-    #region Error MessageBox
+    #region Error
 
     // Normal
     public Task<MessageBoxResult> ErrorAsync(string message) =>
@@ -44,7 +44,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     #endregion
 
-    #region Notice MessageBox
+    #region Notice
 
     // Normal
     public Task<MessageBoxResult> NoticeAsync(string message) =>
@@ -59,7 +59,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     #endregion
 
-    #region Success MessageBox
+    #region Success
 
     // Normal
     public Task<MessageBoxResult> SuccessAsync(string message) =>
