@@ -27,7 +27,6 @@ global using static MuseDashModTools.Common.GitHubConstants;
 global using static MuseDashModTools.Common.GitHubResources;
 global using static MuseDashModTools.Core.SourceGenerationContext;
 global using static MuseDashModTools.Core.Utils.DesktopUtils;
-global using static MuseDashModTools.Localization.General;
-global using static MuseDashModTools.Localization.MsgBox;
+global using static MuseDashModTools.Localization.Interaction;
 global using IDownloadService = MuseDashModTools.Abstractions.IDownloadService;
 global using MultiThreadDownloader = Downloader.DownloadService;
