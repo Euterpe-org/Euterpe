@@ -47,6 +47,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         var sb = new GeneratorStringBuilder();
         sb.AppendLine($$"""
                         using global::Avalonia.Interactivity;
+                        using static global::MuseDashModTools.IocContainer;
 
                         namespace MuseDashModTools.Extensions;
 
@@ -100,7 +101,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
                                 .OnActivated(x => Observable.FromEventHandler{{eventArgs}}(
                                         h => x.Instance.{{eventName}} += h,
                                         h => x.Instance.{{eventName}} -= h)
-                                    .SubscribeAwait((_, _) => new ValueTask(App.Container.Resolve<{{name}}ViewModel>().InitializeAsync())))
+                                    .SubscribeAwait((_, _) => new ValueTask(Resolve<{{name}}ViewModel>().InitializeAsync())))
                                 .SingleInstance();
                         """);
     }
