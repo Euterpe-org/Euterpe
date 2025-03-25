@@ -33,6 +33,7 @@
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
+        <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="ValveKeyValue"/>
