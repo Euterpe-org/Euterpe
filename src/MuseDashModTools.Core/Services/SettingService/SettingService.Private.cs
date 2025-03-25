@@ -11,7 +11,8 @@ internal sealed partial class SettingService
             var useDetectedPath = false;
             if (PlatformService.GetGamePath(out var folderPath))
             {
-                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MsgBox_Content_Confirm_DetectedMuseDashPath, folderPath).ConfigureAwait(true);
+                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_Confirm_DetectedMuseDashPath, folderPath)
+                    .ConfigureAwait(true);
                 useDetectedPath = result is MessageBoxResult.Yes;
             }
 
@@ -22,7 +23,7 @@ internal sealed partial class SettingService
             else
             {
                 Logger.ZLogInformation($"Letting user choose MuseDash folder...");
-                await MessageBoxService.NoticeOverlayAsync(MsgBox_Content_Notice_ChooseMuseDashPath).ConfigureAwait(true);
+                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseMuseDashPath).ConfigureAwait(true);
                 Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
             }
         }

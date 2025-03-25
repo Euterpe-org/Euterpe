@@ -21,7 +21,7 @@ internal sealed partial class LocalService : ILocalService
         if (!outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6."))
         {
             Logger.ZLogInformation($"DotNet Runtime not found, showing error message box...");
-            await MessageBoxService.ErrorAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
         }
     }
 
@@ -38,7 +38,7 @@ internal sealed partial class LocalService : ILocalService
         if (outputStringBuilder.ToString().IsNullOrEmpty())
         {
             Logger.ZLogInformation($"DotNet SDK not found, showing error message box...");
-            await MessageBoxService.ErrorAsync(MsgBox_Content_DotNetSDKNotFound).ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDKNotFound).ConfigureAwait(true);
         }
     }
 
