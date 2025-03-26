@@ -148,10 +148,6 @@
     <value>Mod 安裝失敗。是否有連上網路?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModSuccess" xml:space="preserve">
-    <value>{0} 已成功安裝
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
     <value>你沒有安裝 MuseDashModTools 的 Mod
 每次開啟 Muse Dash 的時候會自動檢查 Mod 更新
@@ -263,10 +259,6 @@ Muse Dash Mod Tools 已經是最新版本
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>無法刪除不存在的文件</value>
-  </data>
-  <data name="MessageBox_Content_UninstallModSuccess" xml:space="preserve">
-    <value>{0} 已經被成功刪除
-</value>
   </data>
   <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
     <value>無法解壓路徑 {0} 的MelonLoader.zip

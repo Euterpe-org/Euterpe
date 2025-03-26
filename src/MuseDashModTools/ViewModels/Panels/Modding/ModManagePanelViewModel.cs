@@ -77,8 +77,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     private async Task InstallModAsync()
     {
         Logger.ZLogInformation($"Installing mod: {SelectedMod.Name}");
-        await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(false);
+        await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully installed");
+        NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, SelectedMod.Name);
     }
 
     [RelayCommand]
@@ -86,8 +87,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     {
         Logger.ZLogInformation($"Updating mod: {SelectedMod.Name} from version {SelectedMod.LocalVersion} to version {SelectedMod.Version}");
         File.Delete(Path.Combine(Config.ModsFolder, SelectedMod.LocalFileName));
-        await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(false);
+        await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully updated to version {SelectedMod.Version}");
+        NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, SelectedMod.Name);
     }
 
     [RelayCommand]
@@ -95,16 +97,18 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     {
         Logger.ZLogInformation($"Reinstalling mod: {SelectedMod.Name}");
         File.Delete(Path.Combine(Config.ModsFolder, SelectedMod.LocalFileName));
-        await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(false);
+        await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully reinstalled");
+        NotificationService.SuccessLight(Notification_Content_Mod_Reinstall_Success, SelectedMod.Name);
     }
 
     [RelayCommand]
     private async Task UninstallModAsync()
     {
         Logger.ZLogInformation($"Uninstalling mod: {SelectedMod.Name}");
-        await ModManageService.UninstallModAsync(SelectedMod).ConfigureAwait(false);
+        await ModManageService.UninstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully uninstalled");
+        NotificationService.SuccessLight(Notification_Content_Mod_Uninstall_Success, SelectedMod.Name);
     }
 
     [RelayCommand]
@@ -134,6 +138,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required IModManageService ModManageService { get; init; }
+
+    [UsedImplicitly]
+    public required INotificationService NotificationService { get; init; }
 
     #endregion Injections
 }

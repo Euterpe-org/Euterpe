@@ -149,10 +149,6 @@
     <value>Mod安装失败。是否联网？
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModSuccess" xml:space="preserve">
-    <value>{0} 已成功安装
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
     <value>你没有安装 MuseDashModTools 的mod
 每次开启 Muse Dash 的时候会自动检查mod更新
@@ -265,10 +261,6 @@ Muse Dash Mod Tools已是最新版
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>无法删除不存在的文件</value>
   </data>
-  <data name="MessageBox_Content_UninstallModSuccess" xml:space="preserve">
-    <value>{0}已经被成功删除
-</value>
-  </data>
   <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
     <value>无法解压路径 {0} 的 MelonLoader.zip
 错误信息：
@@ -282,6 +274,21 @@ Muse Dash Mod Tools已是最新版
   <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
     <value>分析成功</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+        <value>模组 {0} 安装成功
+</value>
+    </data>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+        <value>模组 {0} 重装成功
+</value>
+    </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+        <value>模组 {0} 删除成功</value>
+    </data>
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
+        <value>模组 {0} 更新成功
+</value>
+    </data>
   <data name="Title_Error" xml:space="preserve">
       <value>错误</value>
   </data>

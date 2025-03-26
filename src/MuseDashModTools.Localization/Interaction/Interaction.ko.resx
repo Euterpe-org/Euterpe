@@ -145,10 +145,6 @@ MelonLoader 0.5.7을 설치하려면 ModManage window 의 버튼을 누르세요
     <value>모드 설치에 실패했습니다. 네트워크에 연결되있나요?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModSuccess" xml:space="preserve">
-    <value>{0} 성공적으로 설치되었습니다.
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
     <value>MuseDashModTools 모드가 설치되어 있지 않습니다.
 Muse Dash를 시작할 때 모든 모드에 사용 가능한 업데이트가 있는지 확인합니다.
@@ -256,10 +252,6 @@ MDMC discord 또는 mdmc.moe 웹사이트의 #bot-commands 채널에 등록해�
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>존재하지 않는 파일은 삭제할 수 없습니다.</value>
-  </data>
-  <data name="MessageBox_Content_UninstallModSuccess" xml:space="preserve">
-    <value>{0} 이 성공적으로 삭제되었습니다.
-</value>
   </data>
   <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
     <value>MelonLoader.zip 압축해제를 할 수 없습니다

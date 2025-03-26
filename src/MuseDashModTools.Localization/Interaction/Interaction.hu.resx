@@ -148,10 +148,6 @@ Online vagy?
     <value>Mod telepítés sikertelen. Online vagy?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModSuccess" xml:space="preserve">
-    <value>{0} sikeresen telepítve
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
     <value>Nincsen feltelepítve a MuseDashModTools mod,
 amely minden indításnál ellenőrzi a modok verzióját
@@ -259,10 +255,6 @@ Ellenőrizd, hogy nem fut-e a játék!</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>Nem lehet egy nem létező fájlt törölni</value>
-  </data>
-  <data name="MessageBox_Content_UninstallModSuccess" xml:space="preserve">
-    <value>{0} sikeresen eltávolítva
-</value>
   </data>
   <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
     <value>Nem sikerült kicsomagolni MelonLoader.zip-et
