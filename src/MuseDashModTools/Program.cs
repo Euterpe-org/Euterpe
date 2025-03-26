@@ -52,8 +52,10 @@ internal static class Program
         .LogToTrace()
         .UseR3(ex =>
         {
-            Resolve<ILogger<App>>().ZLogError(ex, $"Unhandled exception from UI Thread");
+            Resolve<ILogger<App>>().ZLogError(ex, $"Unhandled exception");
+#if RELEASE
             Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
             Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
+#endif
         });
 }
