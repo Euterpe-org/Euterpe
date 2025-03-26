@@ -155,10 +155,6 @@ Are you online?
     <value>Mod installation failed. Are you online?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModSuccess" xml:space="preserve">
-    <value>{0} has been successfully installed
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
     <value>You don't have MuseDashModTools mod installed
 This checks for available updates to all the mods when launching Muse Dash
@@ -270,10 +266,6 @@ Please make sure your game is not running!</value>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>Cannot delete file that doesn't exist</value>
   </data>
-  <data name="MessageBox_Content_UninstallModSuccess" xml:space="preserve">
-    <value>{0} has been successfully deleted
-</value>
-  </data>
   <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
     <value>Cannot unzip MelonLoader.zip in
 {0}
@@ -288,6 +280,18 @@ and check your antivirus</value>
   <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
     <value>Analysis successful</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+        <value>Mod {0} successfully installed</value>
+    </data>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+        <value>Mod {0} successfully reinstalled</value>
+    </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+        <value>Mod {0} successfully uninstalled</value>
+    </data>
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
+        <value>Mod {0} successfully updated</value>
+    </data>
   <data name="Title_Error" xml:space="preserve">
       <value>Error</value>
   </data>

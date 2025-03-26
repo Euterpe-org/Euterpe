@@ -148,10 +148,6 @@
     <value>Не удалось установить мод. Вы подключены к интернету?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModSuccess" xml:space="preserve">
-    <value>{0} был успешно установлен
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
     <value>Вы не установили мод MuseDashModTools
 Он проверяет обновления для модов во время запуска Muse Dash
@@ -259,10 +255,6 @@
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>Невозможно удалить файл, которого не существует</value>
-  </data>
-  <data name="MessageBox_Content_UninstallModSuccess" xml:space="preserve">
-    <value>{0} был успешно удалён
-</value>
   </data>
   <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
     <value>Невозможно разархивировать MelonLoader.zip в

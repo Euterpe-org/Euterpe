@@ -148,10 +148,6 @@ Este programa se encarga de activar los mods
     <value>La instalación del mod fallo. ¿Hay conexión a internet?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModSuccess" xml:space="preserve">
-    <value>¡{0} fue instalado!
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
     <value>¡No tienes instalado el mod MuseDashModTools!
 Este mod comprueba las actualizaciones de otros mods al abrir Muse Dash
@@ -260,10 +256,6 @@ Recuerda hacer esto, mientras el juego esté cerrado</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>No se puede borrar un archivo que no existe</value>
-  </data>
-  <data name="MessageBox_Content_UninstallModSuccess" xml:space="preserve">
-    <value>¡{0} fue removido!
-</value>
   </data>
   <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
     <value>No se pudo descomprimir MelonLoader.zip en

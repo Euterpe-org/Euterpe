@@ -68,7 +68,12 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
             if (controlType is ControlType.Application)
             {
                 sb.AppendLine(
-                    $"builder.RegisterType<{name}ViewModel>().OnActivated(x => new ValueTask(x.Instance.InitializeAsync())).PropertiesAutowired().SingleInstance();");
+                    $"""
+                     builder.RegisterType<{name}ViewModel>()
+                        .OnActivated(x => new ValueTask(x.Instance.InitializeAsync()))
+                        .PropertiesAutowired()
+                        .SingleInstance();
+                     """);
             }
             else
             {
