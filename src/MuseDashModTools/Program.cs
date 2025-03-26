@@ -1,4 +1,3 @@
-using Avalonia.Dialogs;
 using static MuseDashModTools.IocContainer;
 
 namespace MuseDashModTools;
@@ -44,9 +43,7 @@ internal static class Program
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
-#pragma warning disable CA1416
     private static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>()
-        .UseManagedSystemDialogs()
         .UsePlatformDetect()
         .WithInterFont()
         .LogToTrace()
