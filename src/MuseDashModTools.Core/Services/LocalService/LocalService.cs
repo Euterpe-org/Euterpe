@@ -14,7 +14,6 @@ internal sealed partial class LocalService : ILocalService
         await Cli.Wrap("dotnet")
             .WithArguments("--list-runtimes")
             .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
-            .WithStandardErrorPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
             .ExecuteAsync()
             .ConfigureAwait(false);
 
@@ -31,7 +30,6 @@ internal sealed partial class LocalService : ILocalService
         await Cli.Wrap("dotnet")
             .WithArguments("--list-sdks")
             .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
-            .WithStandardErrorPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
             .ExecuteAsync()
             .ConfigureAwait(false);
 
