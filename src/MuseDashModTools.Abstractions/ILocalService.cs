@@ -9,8 +9,8 @@ public interface ILocalService
     IEnumerable<string> GetLibFilePaths();
     Task<bool> InstallMelonLoaderAsync();
     Task<bool> UninstallMelonLoaderAsync();
-    ModDto? LoadModFromPath(string filePath);
-    LibDto LoadLibFromPath(string filePath);
+    Task<ModDto?> LoadModFromPathAsync(string filePath);
+    Task<LibDto> LoadLibFromPathAsync(string filePath);
     ValueTask<string> ReadGameVersionAsync();
     string? ReadMelonLoaderVersion();
     bool ExtractZipFile(string zipPath, string extractPath);

@@ -9,8 +9,8 @@ internal sealed partial class ModManageService
 
     private async Task LoadModsAsync()
     {
-        ModDto[] localMods = LocalService.GetModFilePaths()
-            .Select(LocalService.LoadModFromPath)
+        ModDto[] localMods = (await Task.WhenAll(LocalService.GetModFilePaths()
+                .Select(LocalService.LoadModFromPathAsync)).ConfigureAwait(false))
             .Where(mod => mod is not null)
             .ToArray()!;
 
@@ -106,9 +106,9 @@ internal sealed partial class ModManageService
     private async Task LoadLibsAsync()
     {
         _libsDict = new ConcurrentDictionary<string, LibDto>(
-            LocalService.GetLibFilePaths()
-                .Select(LocalService.LoadLibFromPath)
-                .Select(x => new KeyValuePair<string, LibDto>(x.Name, x)));
+            (await Task.WhenAll(LocalService.GetLibFilePaths()
+                .Select(LocalService.LoadLibFromPathAsync)))
+            .Select(x => new KeyValuePair<string, LibDto>(x.Name, x)));
 
         await foreach (var webLib in DownloadManager.GetLibListAsync())
         {
@@ -124,7 +124,6 @@ internal sealed partial class ModManageService
                     continue;
                 }
 
-                // TODO MessageBox (lxy, 2025/2/21)
                 DownloadLibAsync(webLib.ToDto()).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Name} failed"));
             }
             else
@@ -153,7 +152,7 @@ internal sealed partial class ModManageService
     private async Task DownloadLibAsync(LibDto lib)
     {
         await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
-        _libsDict[lib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, lib.FileName));
+        _libsDict[lib.Name] = await LocalService.LoadLibFromPathAsync(Path.Combine(Config.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
         Logger.ZLogInformation($"Lib {lib.Name} download finished");
     }
 

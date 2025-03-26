@@ -111,7 +111,7 @@ internal sealed partial class LocalService : ILocalService
         return path;
     }
 
-    public ModDto? LoadModFromPath(string filePath)
+    public async Task<ModDto?> LoadModFromPathAsync(string filePath)
     {
         var mod = new ModDto
         {
@@ -119,14 +119,15 @@ internal sealed partial class LocalService : ILocalService
             IsDisabled = Path.GetExtension(filePath) == ".disabled"
         };
 
-        var module = ModuleDefinition.FromFile(filePath);
+        var bytes = await File.ReadAllBytesAsync(filePath).ConfigureAwait(false);
+        var module = ModuleDefinition.FromBytes(bytes);
         if (module.Assembly is null)
         {
             Logger.ZLogError($"Invalid mod file: {filePath}");
             return null;
         }
 
-        var attribute = module.Assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").SingleOrDefault();
+        var attribute = module.Assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
         if (attribute is null)
         {
             Logger.ZLogWarning($"{filePath} is not a mod file but inside Mods folder");
@@ -136,17 +137,17 @@ internal sealed partial class LocalService : ILocalService
         mod.Name = attribute.Signature!.FixedArguments[1].ToString();
         mod.LocalVersion = attribute.Signature!.FixedArguments[2].ToString();
         mod.Author = attribute.Signature!.FixedArguments[3].ToString();
-        mod.SHA256 = HashUtils.ComputeSHA256HashFromPath(filePath);
+        mod.SHA256 = HashUtils.ComputeSHA256HashFromBytes(bytes);
 
         return mod;
     }
 
-    public LibDto LoadLibFromPath(string filePath) =>
+    public async Task<LibDto> LoadLibFromPathAsync(string filePath) =>
         new()
         {
             Name = Path.GetFileNameWithoutExtension(filePath),
             FileName = Path.GetFileName(filePath),
-            SHA256 = HashUtils.ComputeSHA256HashFromPath(filePath),
+            SHA256 = await HashUtils.ComputeSHA256HashFromPathAsync(filePath).ConfigureAwait(false),
             IsLocal = true
         };
 
