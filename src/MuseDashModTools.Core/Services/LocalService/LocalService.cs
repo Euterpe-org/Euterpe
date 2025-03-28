@@ -120,14 +120,9 @@ internal sealed partial class LocalService : ILocalService
         };
 
         var bytes = await File.ReadAllBytesAsync(filePath).ConfigureAwait(false);
-        var module = ModuleDefinition.FromBytes(bytes);
-        if (module.Assembly is null)
-        {
-            Logger.ZLogError($"Invalid mod file: {filePath}");
-            return null;
-        }
+        var assembly = AssemblyDefinition.FromBytes(bytes);
 
-        var attribute = module.Assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
+        var attribute = assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
         if (attribute is null)
         {
             Logger.ZLogWarning($"{filePath} is not a mod file but inside Mods folder");
