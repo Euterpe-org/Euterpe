@@ -1,5 +1,3 @@
-using Avalonia.Media.Imaging;
-
 namespace MuseDashModTools.Models;
 
 [PublicAPI]
@@ -46,23 +44,4 @@ public sealed class Chart
 
     [JsonPropertyName("__v")]
     public int V { get; set; }
-
-    [JsonIgnore]
-    public Bitmap? Cover { get; set; }
-
-    [JsonIgnore]
-    public string EasyLevel => Sheets[0].Difficulty;
-
-    [JsonIgnore]
-    public string HardLevel => Sheets[1].Difficulty;
-
-    [JsonIgnore]
-    public string MasterLevel => Sheets[2].Difficulty;
-
-    [JsonIgnore]
-    public string HiddenLevel => Sheets[3].Difficulty;
-
-    public int GetHighestLevel() =>
-        Sheets.Select(x => x.Difficulty)
-            .Max(x => x.ParseLevel());
 }
