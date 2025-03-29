@@ -5,7 +5,7 @@
     <!-- Package Group Versions -->
     <PropertyGroup>
         <AvaloniaVersion>11.2.5</AvaloniaVersion>
-        <UrsaVersion>1.9.0</UrsaVersion>
+        <UrsaVersion>1.10.0</UrsaVersion>
         <VerifyVersion>28.16.0</VerifyVersion>
         <RoslynatorAnalyzersVersion>4.13.1</RoslynatorAnalyzersVersion>
     </PropertyGroup>
@@ -68,7 +68,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
-        <PackageVersion Include="Semi.Avalonia" Version="11.2.1.5"/>
+        <PackageVersion Include="Semi.Avalonia" Version="11.2.1.6"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="Spectre.Console" Version="0.49.2-preview.0.69"/>
         <PackageVersion Include="System.Interactive.Async" Version="6.0.1"/>
