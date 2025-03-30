@@ -9,9 +9,9 @@ internal sealed partial class ModManageService
 
     private async Task LoadModsAsync()
     {
-        ModDto[] localMods = (await Task.WhenAll(LocalService.GetModFilePaths()
-                .Select(LocalService.LoadModFromPathAsync)).ConfigureAwait(false))
-            .Where(mod => mod is not null)
+        ModDto[] localMods = (await LocalService.GetModFilePaths()
+                .WhenAllAsync(LocalService.LoadModFromPathAsync).ConfigureAwait(false))
+            .Where(x => x is not null)
             .ToArray()!;
 
         _sourceCache.AddOrUpdate(localMods);
@@ -106,9 +106,9 @@ internal sealed partial class ModManageService
     private async Task LoadLibsAsync()
     {
         _libsDict = new ConcurrentDictionary<string, LibDto>(
-            (await Task.WhenAll(LocalService.GetLibFilePaths()
-                .Select(LocalService.LoadLibFromPathAsync)))
-            .Select(x => new KeyValuePair<string, LibDto>(x.Name, x)));
+            (await LocalService.GetLibFilePaths()
+                .WhenAllAsync(LocalService.LoadLibFromPathAsync!).ConfigureAwait(false))
+            .Select(x => new KeyValuePair<string, LibDto>(x!.Name, x)));
 
         await foreach (var webLib in DownloadManager.GetLibListAsync())
         {
