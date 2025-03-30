@@ -4,7 +4,7 @@
     </PropertyGroup>
     <!-- Package Group Versions -->
     <PropertyGroup>
-        <AvaloniaVersion>11.2.5</AvaloniaVersion>
+        <AvaloniaVersion>11.2.6</AvaloniaVersion>
         <UrsaVersion>1.10.0</UrsaVersion>
         <VerifyVersion>28.16.0</VerifyVersion>
         <RoslynatorAnalyzersVersion>4.13.1</RoslynatorAnalyzersVersion>
