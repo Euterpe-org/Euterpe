@@ -42,8 +42,12 @@ internal sealed partial class LocalService : ILocalService
 
     public IEnumerable<string> GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
+        .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll")
+        .ToArray();
 
     public IEnumerable<string> GetLibFilePaths() => Directory.EnumerateFiles(Config.UserLibsFolder);
+        .Where(x => Path.GetExtension(x) == ".dll")
+        .ToArray();
 
     public async Task<bool> InstallMelonLoaderAsync()
     {
