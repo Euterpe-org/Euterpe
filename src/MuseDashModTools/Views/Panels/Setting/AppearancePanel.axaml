@@ -17,14 +17,14 @@
     </Design.DataContext>
 
     <StackPanel
-        Classes="SharedContentListRoot">
+        Classes="ContentListRoot">
 
         <!--  Language  -->
         <mdmt:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_Language}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}">
             <StackPanel
-                Classes="SharedContentListItemHorizontal">
+                Classes="ContentListItemHorizontal">
                 <ComboBox
                     ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
                     MinWidth="200"

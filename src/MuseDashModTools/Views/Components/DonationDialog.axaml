@@ -14,6 +14,30 @@
         <vm:DonationDialogViewModel />
     </Design.DataContext>
 
+    <UserControl.Styles>
+        <Style
+            Selector="Border">
+            <!--  Dialog Donation Qr Container  -->
+            <Style
+                Selector="^.DialogDonationQr">
+                <Setter Property="Width" Value="230" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="ClipToBounds" Value="True" />
+                <Setter Property="CornerRadius" Value="20" />
+            </Style>
+        </Style>
+
+        <Style
+            Selector="Image">
+            <!--  Dialog Donation Qr  -->
+            <Style
+                Selector="^.DialogDonationQr">
+                <Setter Property="Width" Value="230" />
+                <Setter Property="Stretch" Value="Uniform" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+
     <StackPanel
         Margin="20"
         Spacing="20">

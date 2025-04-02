@@ -18,6 +18,7 @@
     <Grid
         RowDefinitions="Auto, *">
         <Border
+            Grid.Row="0"
             Classes="WinMainNav">
             <Panel>
                 <mdmt:NaviPanelListControl

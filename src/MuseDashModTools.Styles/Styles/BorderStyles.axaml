@@ -6,7 +6,7 @@
         Selector="Border">
         <!--  Card  -->
         <Style
-            Selector="^.SharedCard">
+            Selector="^.Card">
             <Setter Property="Background" Value="{DynamicResource CardBackground}" />
             <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
             <Setter Property="Padding" Value="20" />
@@ -14,7 +14,7 @@
 
         <!--  Hover  -->
         <Style
-            Selector="^.SharedHover">
+            Selector="^.Hover">
             <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
             <Setter Property="ClipToBounds" Value="True" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -32,15 +32,6 @@
                         Duration="0:0:0.2" />
                 </Transitions>
             </Setter>
-        </Style>
-
-        <!--  Dialog Donation Qr Container  -->
-        <Style
-            Selector="^.DialogDonationQr">
-            <Setter Property="Width" Value="230" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="ClipToBounds" Value="True" />
-            <Setter Property="CornerRadius" Value="20" />
         </Style>
 
         <!--  Navigation  -->

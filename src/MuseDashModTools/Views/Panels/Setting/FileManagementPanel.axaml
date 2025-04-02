@@ -18,16 +18,16 @@
 
     <!--  TODO: u:PathPicker  -->
     <StackPanel
-        Classes="SharedContentListRoot">
+        Classes="ContentListRoot">
 
         <!--  MuseDash Game Folder  -->
         <mdmt:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolderPath}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolderPath}}">
             <StackPanel
-                Classes="SharedContentListItemVertical">
+                Classes="ContentListItemVertical">
                 <TextBox
-                    Classes="SharedDesc"
+                    Classes="Desc"
                     Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
                 <Button
                     Content="Reselect"
@@ -41,9 +41,9 @@
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolderPath}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolderPath}}">
             <StackPanel
-                Classes="SharedContentListItemVertical">
+                Classes="ContentListItemVertical">
                 <TextBox
-                    Classes="SharedDesc"
+                    Classes="Desc"
                     Text="{Binding Config.CacheFolder, Mode=OneWay}" />
                 <Button
                     Content="Reselect"

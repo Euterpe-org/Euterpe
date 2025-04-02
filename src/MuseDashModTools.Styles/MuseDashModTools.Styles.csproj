@@ -5,7 +5,7 @@
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
-    <Target Name="GenerateModToolsStyles" BeforeTargets="Build">
+    <Target Name="GenerateModToolsStyles" BeforeTargets="BeforeBuild">
         <GenerateModToolsStyles AvaloniaResourceFiles="@(AvaloniaXaml)"/>
     </Target>
 

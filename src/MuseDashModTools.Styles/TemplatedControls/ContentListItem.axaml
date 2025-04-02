@@ -16,7 +16,7 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel
-                    Classes="SharedContentListItem"
+                    Classes="ContentListItem"
                     IsVisible="{TemplateBinding IsVisible, Mode=OneWay}">
                     <TextBlock
                         Classes="H4"

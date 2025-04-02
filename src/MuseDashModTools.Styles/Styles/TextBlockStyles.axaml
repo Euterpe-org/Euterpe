@@ -6,7 +6,7 @@
         Selector="TextBlock">
         <!--  Common Description Text  -->
         <Style
-            Selector="^.SharedDesc">
+            Selector="^.Desc">
             <Setter Property="Foreground" Value="Gray" />
             <Setter Property="Margin" Value="0, -10, 0, 0" />
             <Setter Property="TextWrapping" Value="Wrap" />
@@ -14,7 +14,7 @@
 
         <!--  Card Description Text  -->
         <Style
-            Selector="^.SharedCardDesc">
+            Selector="^.CardDesc">
             <Setter Property="Foreground" Value="DarkGray" />
             <Setter Property="Margin" Value="0,10" />
             <Setter Property="Opacity" Value="0.7" />
@@ -23,7 +23,7 @@
 
         <!--  Card Title Text  -->
         <Style
-            Selector="^.SharedCardTitle">
+            Selector="^.CardTitle">
             <Setter Property="FontSize" Value="24" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="White" />

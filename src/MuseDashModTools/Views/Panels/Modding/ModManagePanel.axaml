@@ -17,6 +17,28 @@
         <vm:ModManagePanelViewModel />
     </Design.DataContext>
 
+    <UserControl.Styles>
+        <Style
+            Selector="Label">
+            <Style
+                Selector="^.Orange">
+                <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}" />
+            </Style>
+            <Style
+                Selector="^.Red">
+                <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Incompatible}}" />
+            </Style>
+            <Style
+                Selector="^.Purple">
+                <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Newer}}" />
+            </Style>
+            <Style
+                Selector="^.Green">
+                <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Outdated}}" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+
     <!--  Main Layout Grid  -->
     <Grid
         ColumnDefinitions="380,*">
@@ -117,7 +139,7 @@
 
                                             <!--  Mod Status Tags  -->
                                             <StackPanel
-                                                Classes="SharedControlsHorizontal">
+                                                Classes="ControlsHorizontal">
                                                 <StackPanel.Styles>
                                                     <Style
                                                         Selector="Label.Gray">
@@ -135,7 +157,7 @@
                                                     Classes.Indigo="{Binding IsLocal, Mode=OneWay}" />
 
                                                 <StackPanel
-                                                    Classes="SharedControlsHorizontal"
+                                                    Classes="ControlsHorizontal"
                                                     IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                                     <PathIcon
                                                         Data="{StaticResource SemiIconArrowRight}"
@@ -250,7 +272,7 @@
                         <StackPanel
                             Grid.Row="0"
                             Grid.Column="1"
-                            Classes="SharedControlsHorizontal">
+                            Classes="ControlsHorizontal">
 
                             <!--  Config Button  -->
                             <StackPanel
@@ -276,7 +298,7 @@
                                 Command="{Binding UpdateModCommand, Mode=OneTime}"
                                 IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                 <StackPanel
-                                    Classes="SharedControlsHorizontal">
+                                    Classes="ControlsHorizontal">
                                     <PathIcon
                                         Data="{StaticResource SemiIconRefresh}"
                                         Height="15" />
@@ -310,7 +332,7 @@
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
-                            Classes="SharedControlsHorizontal"
+                            Classes="ControlsHorizontal"
                             Margin="0,8">
                             <StackPanel.Styles>
                                 <Style
@@ -337,7 +359,7 @@
 
                             <!--  Update Version Indicator  -->
                             <StackPanel
-                                Classes="SharedControlsHorizontal"
+                                Classes="ControlsHorizontal"
                                 IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                 <PathIcon
                                     Data="{StaticResource SemiIconArrowRight}"
