@@ -18,14 +18,14 @@
     </Design.DataContext>
 
     <StackPanel
-        Classes="SharedContentListRoot">
+        Classes="ContentListRoot">
 
         <!--  Download Source  -->
         <mdmt:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_DownloadSource}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_DownloadSource}}">
             <StackPanel
-                Classes="SharedContentListItemHorizontal">
+                Classes="ContentListItemHorizontal">
                 <ComboBox
                     ItemsSource="{Binding DownloadSources, Mode=OneTime}"
                     SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />

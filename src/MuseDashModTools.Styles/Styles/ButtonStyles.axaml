@@ -6,27 +6,27 @@
         Selector="Button">
         <!--  Transparent Button  -->
         <Style
-            Selector="^.SharedTransparent">
+            Selector="^.Transparent">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
         <Style
-            Selector="^.SharedTransparent /template/ ContentPresenter">
+            Selector="^.Transparent /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
         <Style
-            Selector="^.SharedTransparent:pointerover /template/ ContentPresenter">
+            Selector="^.Transparent:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
         </Style>
         <Style
-            Selector="^.SharedTransparent:pressed /template/ ContentPresenter">
+            Selector="^.Transparent:pressed /template/ ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
         </Style>
 
         <!--  Card Button  -->
         <Style
-            Selector="^.SharedCard">
+            Selector="^.Card">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="0" />
@@ -34,40 +34,9 @@
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
         </Style>
         <Style
-            Selector="^.SharedCard /template/ ContentPresenter">
+            Selector="^.Card /template/ ContentPresenter">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
-        </Style>
-
-        <!--  Donation Button  -->
-        <Style
-            Selector="^.PageHomeDonation">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="0,60,90,0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition
-                        Property="RenderTransform"
-                        Duration="0:0:0.2"
-                        Easing="ExponentialEaseOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style
-            Selector="^.PageHomeDonation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-        <Style
-            Selector="^.PageHomeDonation:pointerover">
-            <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)" />
-        </Style>
-        <Style
-            Selector="^.PageHomeDonation:pressed">
-            <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)" />
         </Style>
     </Style>
 

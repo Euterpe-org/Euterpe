@@ -6,7 +6,7 @@
         Selector="StackPanel">
         <!--  Root Content List Container  -->
         <Style
-            Selector="^.SharedContentListRoot">
+            Selector="^.ContentListRoot">
             <Setter Property="Margin" Value="30" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -16,28 +16,28 @@
 
         <!--  Content List Item Container  -->
         <Style
-            Selector="^.SharedContentListItem">
+            Selector="^.ContentListItem">
             <Setter Property="Orientation" Value="Vertical" />
             <Setter Property="Spacing" Value="15" />
         </Style>
 
         <!--  Content List Item (vertical layout)  -->
         <Style
-            Selector="^.SharedContentListItemVertical">
+            Selector="^.ContentListItemVertical">
             <Setter Property="Orientation" Value="Vertical" />
             <Setter Property="Spacing" Value="10" />
         </Style>
 
         <!--  Content List Item (Horizontal Layout)  -->
         <Style
-            Selector="^.SharedContentListItemHorizontal">
+            Selector="^.ContentListItemHorizontal">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Spacing" Value="10" />
         </Style>
 
         <!--  Controls Container (Horizontal Layout)  -->
         <Style
-            Selector="^.SharedControlsHorizontal">
+            Selector="^.ControlsHorizontal">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Spacing" Value="8" />
         </Style>

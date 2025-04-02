@@ -17,7 +17,7 @@
 
     <ScrollViewer>
         <StackPanel
-            Classes="SharedContentListRoot"
+            Classes="ContentListRoot"
             HorizontalAlignment="Stretch">
             <StackPanel.Styles>
                 <Style
@@ -33,22 +33,22 @@
                     Margin="5,0,10,0">
                     <Button
                         Grid.Column="0"
-                        Classes="SharedTransparent SharedCard"
+                        Classes="Transparent Card"
                         CommandParameter="https://dotnet.microsoft.com/download/dotnet/6.0">
                         <Button.Styles>
                             <Style
-                                Selector="Button:pointerover Border.SharedHover">
+                                Selector="Button:pointerover Border.Hover">
                                 <Setter Property="Background" Value="#7B2CBF" />
                                 <Setter Property="RenderTransform" Value="scale(1.004)" />
                             </Style>
                         </Button.Styles>
                         <Border
-                            Classes="SharedHover">
+                            Classes="Hover">
                             <DockPanel>
                                 <StackPanel
                                     Orientation="Vertical">
                                     <TextBlock
-                                        Classes="SharedCardTitle"
+                                        Classes="CardTitle"
                                         Text=".NET 6 SDK">
                                         <TextBlock.Foreground>
                                             <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
@@ -58,7 +58,7 @@
                                         </TextBlock.Foreground>
                                     </TextBlock>
                                     <TextBlock
-                                        Classes="SharedCardDesc"
+                                        Classes="CardDesc"
                                         Text="Required for mod development" />
                                 </StackPanel>
                                 <StackPanel
@@ -69,7 +69,7 @@
                                     Spacing="10"
                                     VerticalAlignment="Center">
                                     <TextBlock
-                                        Classes="SharedCardDesc"
+                                        Classes="CardDesc"
                                         IsVisible="{Binding !DotNetSdkInstalled, Mode=OneWay}"
                                         Text="Not Installed"
                                         VerticalAlignment="Center" />
@@ -85,22 +85,22 @@
 
                     <Button
                         Grid.Column="1"
-                        Classes="SharedTransparent SharedCard"
+                        Classes="Transparent Card"
                         CommandParameter="https://baidu.com">
                         <Button.Styles>
                             <Style
-                                Selector="Button:pointerover Border.SharedHover">
+                                Selector="Button:pointerover Border.Hover">
                                 <Setter Property="Background" Value="#4B49AC" />
                                 <Setter Property="RenderTransform" Value="scale(1.004)" />
                             </Style>
                         </Button.Styles>
                         <Border
-                            Classes="SharedHover">
+                            Classes="Hover">
                             <DockPanel>
                                 <StackPanel
                                     Orientation="Vertical">
                                     <TextBlock
-                                        Classes="SharedCardTitle"
+                                        Classes="CardTitle"
                                         Text="Mod Template Nuget">
                                         <TextBlock.Foreground>
                                             <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
@@ -110,7 +110,7 @@
                                         </TextBlock.Foreground>
                                     </TextBlock>
                                     <TextBlock
-                                        Classes="SharedCardDesc"
+                                        Classes="CardDesc"
                                         Text="For quick mod project creation" />
                                 </StackPanel>
                                 <StackPanel
@@ -121,7 +121,7 @@
                                     Spacing="10"
                                     VerticalAlignment="Center">
                                     <TextBlock
-                                        Classes="SharedCardDesc"
+                                        Classes="CardDesc"
                                         IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
                                         Text="Not Installed"
                                         VerticalAlignment="Center" />
@@ -140,18 +140,18 @@
             <mdmt:ContentListItem
                 Title="Submit Your Mod">
                 <Button
-                    Classes="SharedTransparent SharedCard"
+                    Classes="Transparent Card"
                     CommandParameter="https://github.com/MDModsDev/ModLinks"
                     Margin="5,0,10,0">
                     <Button.Styles>
                         <Style
-                            Selector="Button:pointerover Border.SharedHover">
+                            Selector="Button:pointerover Border.Hover">
                             <Setter Property="Background" Value="#B32E29" />
                             <Setter Property="RenderTransform" Value="scale(1.004)" />
                         </Style>
                     </Button.Styles>
                     <Border
-                        Classes="SharedHover">
+                        Classes="Hover">
                         <Grid
                             ColumnDefinitions="Auto,*"
                             HorizontalAlignment="Center">
@@ -163,7 +163,7 @@
                             <StackPanel
                                 Grid.Column="1">
                                 <TextBlock
-                                    Classes="SharedCardTitle"
+                                    Classes="CardTitle"
                                     Text="ModLinks Repository">
                                     <TextBlock.Foreground>
                                         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
@@ -173,7 +173,7 @@
                                     </TextBlock.Foreground>
                                 </TextBlock>
                                 <TextBlock
-                                    Classes="SharedCardDesc"
+                                    Classes="CardDesc"
                                     Text="Submit your mod to MDMT's mod list" />
                             </StackPanel>
                         </Grid>
@@ -187,17 +187,17 @@
                     Columns="3"
                     Margin="5,0,10,0">
                     <Button
-                        Classes="SharedTransparent SharedCard"
+                        Classes="Transparent Card"
                         CommandParameter="https://code.visualstudio.com">
                         <Button.Styles>
                             <Style
-                                Selector="Button:pointerover Border.SharedHover">
+                                Selector="Button:pointerover Border.Hover">
                                 <Setter Property="Background" Value="#0066B8" />
                                 <Setter Property="RenderTransform" Value="scale(1.02)" />
                             </Style>
                         </Button.Styles>
                         <Border
-                            Classes="SharedHover">
+                            Classes="Hover">
                             <StackPanel
                                 HorizontalAlignment="Center"
                                 Orientation="Vertical"
@@ -214,17 +214,17 @@
                     </Button>
 
                     <Button
-                        Classes="SharedTransparent SharedCard"
+                        Classes="Transparent Card"
                         CommandParameter="https://www.jetbrains.com/rider">
                         <Button.Styles>
                             <Style
-                                Selector="Button:pointerover Border.SharedHover">
+                                Selector="Button:pointerover Border.Hover">
                                 <Setter Property="Background" Value="#FC1886" />
                                 <Setter Property="RenderTransform" Value="scale(1.02)" />
                             </Style>
                         </Button.Styles>
                         <Border
-                            Classes="SharedHover">
+                            Classes="Hover">
                             <StackPanel
                                 HorizontalAlignment="Center"
                                 Orientation="Vertical"
@@ -241,17 +241,17 @@
                     </Button>
 
                     <Button
-                        Classes="SharedTransparent SharedCard"
+                        Classes="Transparent Card"
                         CommandParameter="https://visualstudio.microsoft.com">
                         <Button.Styles>
                             <Style
-                                Selector="Button:pointerover Border.SharedHover">
+                                Selector="Button:pointerover Border.Hover">
                                 <Setter Property="Background" Value="#5C2D91" />
                                 <Setter Property="RenderTransform" Value="scale(1.02)" />
                             </Style>
                         </Button.Styles>
                         <Border
-                            Classes="SharedHover">
+                            Classes="Hover">
                             <StackPanel
                                 HorizontalAlignment="Center"
                                 Orientation="Vertical"

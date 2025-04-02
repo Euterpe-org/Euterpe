@@ -41,11 +41,7 @@
     <StyleInclude
         Source="/Styles/ButtonStyles.axaml" />
     <StyleInclude
-        Source="/Styles/ImageStyles.axaml" />
-    <StyleInclude
         Source="/Styles/LabelStyles.axaml" />
-    <StyleInclude
-        Source="/Styles/SplitButtonStyles.axaml" />
     <StyleInclude
         Source="/Styles/StackPanelStyles.axaml" />
     <StyleInclude

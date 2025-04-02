@@ -17,7 +17,7 @@
     </Design.DataContext>
 
     <StackPanel
-        Classes="SharedContentListRoot">
+        Classes="ContentListRoot">
 
         <!--  Show Console  -->
         <mdmt:ContentListItem

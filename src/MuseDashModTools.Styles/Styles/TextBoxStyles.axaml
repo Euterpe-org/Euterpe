@@ -5,7 +5,7 @@
     <Style
         Selector="TextBox">
         <Style
-            Selector="^.SharedDesc">
+            Selector="^.Desc">
             <Setter Property="Foreground" Value="Gray" />
             <Setter Property="IsReadOnly" Value="True" />
         </Style>
