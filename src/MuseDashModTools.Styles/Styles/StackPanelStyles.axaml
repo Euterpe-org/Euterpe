@@ -14,13 +14,6 @@
             <Setter Property="Spacing" Value="50" />
         </Style>
 
-        <!--  Content List Item Container  -->
-        <Style
-            Selector="^.ContentListItem">
-            <Setter Property="Orientation" Value="Vertical" />
-            <Setter Property="Spacing" Value="15" />
-        </Style>
-
         <!--  Content List Item (vertical layout)  -->
         <Style
             Selector="^.ContentListItemVertical">
