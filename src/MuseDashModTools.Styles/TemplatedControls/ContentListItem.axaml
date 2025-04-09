@@ -16,8 +16,9 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel
-                    Classes="ContentListItem"
-                    IsVisible="{TemplateBinding IsVisible, Mode=OneWay}">
+                    IsVisible="{TemplateBinding IsVisible, Mode=OneWay}"
+                    Orientation="Vertical"
+                    Spacing="15">
                     <TextBlock
                         Classes="H4"
                         Text="{TemplateBinding Title, Mode=OneWay}"
