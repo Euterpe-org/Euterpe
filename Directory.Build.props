@@ -8,4 +8,14 @@
         <BaseOutputPath>$(SolutionDir)bin\</BaseOutputPath>
         <ExternalBuildsFolder>$(BaseOutputPath)ExternalBuilds\</ExternalBuildsFolder>
     </PropertyGroup>
+
+    <PropertyGroup>
+        <IsWindows Condition="'$([System.OperatingSystem]::IsWindows())' == 'true'">true</IsWindows>
+        <IsLinux Condition="'$([System.OperatingSystem]::IsLinux())' == 'true'">true</IsLinux>
+        <IsMacOS Condition="'$([System.OperatingSystem]::IsMacOS()))' == 'true'">true</IsMacOS>
+
+        <DefineConstants Condition="'$(IsWindows)' == 'true'">WINDOWS</DefineConstants>
+        <DefineConstants Condition="'$(IsLinux)' == 'true'">LINUX</DefineConstants>
+        <DefineConstants Condition="'$(IsMacOS)' == 'true'">MACOS</DefineConstants>
+    </PropertyGroup>
 </Project>
