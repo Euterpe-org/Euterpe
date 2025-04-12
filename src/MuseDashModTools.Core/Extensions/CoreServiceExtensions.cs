@@ -66,17 +66,12 @@ public static class CoreServiceExtensions
         builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
 
         // Platform Service
-        if (OperatingSystem.IsWindows())
-        {
-            builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-        }
-        else if (OperatingSystem.IsLinux())
-        {
-            builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-        }
-        else if (OperatingSystem.IsMacOS())
-        {
-            builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-        }
+#if WINDOWS
+        builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+#elif LINUX
+        builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+#elif MACOS
+        builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
+#endif
     }
 }
