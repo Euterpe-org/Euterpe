@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\MuseDashModTools.Generators\MuseDashModTools.Generators.targets"/>
 
-    <ItemGroup>
-        <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
-    </ItemGroup>
+    <PropertyGroup>
+        <XmlnsDefinitionNamespace>https://github.com/MDModsDev/MuseDashModTools/Localization</XmlnsDefinitionNamespace>
+        <DefaultLocalizationProvider>XAML</DefaultLocalizationProvider>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
-        <PackageReference Include="R3"/>
+        <PackageReference Include="ResXLocalize.Avalonia.R3"/>
     </ItemGroup>
 
 </Project>
