@@ -29,10 +29,13 @@
         <PackageReference Include="Avalonia.Fonts.Inter"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Downloader"/>
-        <PackageReference Include="HotAvalonia"/>
+        <PackageReference Include="HotAvalonia" PrivateAssets="all"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>

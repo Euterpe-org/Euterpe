@@ -6,7 +6,10 @@
         <PackageReference Include="AsyncAwaitBestPractices"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="CliWrap"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Semver"/>
         <PackageReference Include="System.Interactive.Async"/>
         <PackageReference Include="System.Linq.Async"/>
