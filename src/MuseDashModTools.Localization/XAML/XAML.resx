@@ -91,6 +91,18 @@
   <data name="LoadingMessage" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+        <value>Downloading {0}: {1} MB</value>
+    </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+      <value>Installed</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+      <value>Not Installed</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+        <value>Preparing...</value>
+    </data>
   <data name="ModFilterType_All" xml:space="preserve">
     <value>All</value>
   </data>

@@ -64,12 +64,6 @@ Is this the correct game folder?</value>
     <value>Cannot copy Updater to target path
 {0}</value>
   </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-    <value>Failed to delete MelonLoader.zip in
-{0}
-Error:{1}
-Try to manually delete</value>
-  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{0} is used by {1} as dependency
 Are you sure you want to delete this mod?</value>
@@ -139,10 +133,6 @@ Install Now?</value>
 Are you online?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
-    <value>MelonLoader has been successfully installed
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
     <value>Mod installation failed
 {0}</value>
@@ -155,11 +145,6 @@ Are you online?
     <value>Mod installation failed. Are you online?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
-    <value>You don't have MuseDashModTools mod installed
-This checks for available updates to all the mods when launching Muse Dash
-Install Now?</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>The path you have chosen is invalid. Try again</value>
   </data>
@@ -170,6 +155,15 @@ You are using the latest version of Muse Dash Mod Tools</value>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>Log analysis completed, no obvious errors are found in your log file
 If you still have issues please go to troubleshoot channel</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+        <value>Failed to delete MelonLoader.zip in
+{0}
+Try to manually delete</value>
+    </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader has been successfully installed
+</value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
     <value>A newer version of Muse Dash Mod Tools ({0}) is released

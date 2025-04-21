@@ -2,6 +2,8 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:MuseDashModTools.Models.Enums;assembly=MuseDashModTools.Models"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Modding"
     x:Class="MuseDashModTools.Views.Panels.Modding.MelonLoaderPanel"
@@ -54,16 +56,38 @@
                 <DockPanel
                     HorizontalAlignment="Center"
                     Margin="20,10,20,15">
+                    <DockPanel.Styles>
+                        <Style
+                            Selector="TextBlock.Installed">
+                            <Setter Property="Text" Value="{Localize {x:Static loc:XAMLLiteral.MelonLoader_State_Installed}}" />
+                        </Style>
+                        <Style
+                            Selector="TextBlock.NotInstalled">
+                            <Setter Property="Text" Value="{Localize {x:Static loc:XAMLLiteral.MelonLoader_State_NotInstalled}}" />
+                        </Style>
+                    </DockPanel.Styles>
+
+                    <TextBlock
+                        Classes.Installed="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Installed}, Mode=OneWay}"
+                        Classes.NotInstalled="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.NotInstalled}, Mode=OneWay}"
+                        FontSize="16"
+                        Foreground="Gainsboro"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
+                        Margin="0,0,6,0"
+                        VerticalAlignment="Center" />
+
                     <TextBlock
                         FontSize="16"
                         Foreground="Gainsboro"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
                         Margin="0,0,6,0"
-                        Text="{Binding InstallStatus, Mode=OneWay}"
+                        Text="{Binding DownloadText, Mode=OneWay}"
                         VerticalAlignment="Center" />
+
                     <Label
                         Classes="Ghost Green"
-                        Content="{Binding MelonLoaderVersion, StringFormat='v{0}', Mode=OneWay}"
-                        IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
+                        Content="{Binding InstalledMelonLoaderVersion, StringFormat='v{0}', Mode=OneWay}"
+                        IsVisible="{Binding InstalledMelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
                         Theme="{StaticResource TagLabel}" />
                 </DockPanel>
 
@@ -74,28 +98,29 @@
 
                     <!--  Buttons  -->
                     <StackPanel
-                        IsVisible="{Binding !Downloading}"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
                         Orientation="Horizontal"
                         Spacing="30">
                         <Button
                             Classes="Large"
                             Command="{Binding InstallMelonLoaderCommand}"
-                            Content="Install"
-                            IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNullOrEmpty}, Mode=OneWay}"
+                            Content="{Localize {x:Static loc:XAMLLiteral.Button_Install}}"
+                            IsVisible="{Binding InstalledMelonLoaderVersion, Converter={x:Static StringConverters.IsNullOrEmpty}, Mode=OneWay}"
                             Width="100" />
                         <Button
                             Classes="Large Danger"
                             Command="{Binding UninstallMelonLoaderCommand}"
-                            Content="Uninstall"
-                            IsVisible="{Binding MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
+                            Content="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}"
+                            IsVisible="{Binding InstalledMelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
                             Width="100" />
                     </StackPanel>
 
                     <!--  Progress Bar  -->
                     <ProgressBar
                         Value="{Binding DownloadProgress, Mode=OneWay}"
-                        Height="4"
-                        IsVisible="{Binding Downloading, Mode=OneWay}"
+                        Classes="Primary"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
+                        ShowProgressText="True"
                         VerticalAlignment="Center"
                         Width="260" />
 

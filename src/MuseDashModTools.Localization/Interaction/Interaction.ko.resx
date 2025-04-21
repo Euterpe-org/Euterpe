@@ -60,12 +60,6 @@
     <value>업데이터를 대상 경로에 복사할수없습니다
 {0}</value>
   </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-    <value>MelonLoader.zip 파일을 지우는데 실패했습니다. in
-{0}
-Error:{1}
- 수동으로 지워주세요.</value>
-  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{0} 은 {1} 에 의해 부가적으로 사용됩니다.
 이 모드를 삭제하시겠습니까?</value>
@@ -129,10 +123,6 @@ MelonLoader 0.5.7을 설치하려면 ModManage window 의 버튼을 누르세요
  네트워크에 연결되있나요?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
-    <value>MelonLoader가 성공적으로 설치되었습니다.
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
     <value>모드 설치에 실패했습니다
 {0}</value>
@@ -145,11 +135,6 @@ MelonLoader 0.5.7을 설치하려면 ModManage window 의 버튼을 누르세요
     <value>모드 설치에 실패했습니다. 네트워크에 연결되있나요?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
-    <value>MuseDashModTools 모드가 설치되어 있지 않습니다.
-Muse Dash를 시작할 때 모든 모드에 사용 가능한 업데이트가 있는지 확인합니다.
-지금 설치하시겠습니까?</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>선택한 경로가 잘못되었습니다. 다시 시도해주세요.</value>
   </data>
@@ -160,6 +145,15 @@ Muse Dash를 시작할 때 모든 모드에 사용 가능한 업데이트가 있
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>로그 분석이 완료되었습니다. 로그 파일에 명백한 오류가 없습니다.
 여전히 문제가 있는 경우 문제 해결 채널로 이동해주세요.</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+        <value>MelonLoader.zip 파일을 지우는데 실패했습니다. in
+{0}
+ 수동으로 지워주세요.</value>
+    </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader가 성공적으로 설치되었습니다.
+</value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
     <value>Muse Dash Mod Tools({0}) 의 최신 버전이 출시되었습니다.

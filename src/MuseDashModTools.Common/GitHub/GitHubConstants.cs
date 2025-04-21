@@ -13,13 +13,10 @@ public static class GitHubConstants
 
     // Mod Links Urls
     public const string ModLinksRepoIdentifier = "MDModsDev/ModLinks/";
-    public const string ModLinksBranch = "dev/";
     public const string ModLinksBaseUrl = ModLinksRepoIdentifier + ModLinksBranch;
 
     // Download File Urls
-    public const string MelonLoaderBaseUrl = "LavaGang/MelonLoader/releases/download/v0.6.1/MelonLoader.x64.zip";
-    public const string UnityDependencyBaseUrl = "LavaGang/Unity-Runtime-Libraries/master/2019.4.32.zip";
-
-    public const string Cpp2ILBaseUrl =
-        "SamboyCoding/Cpp2IL/releases/download/2022.1.0-pre-release.10/Cpp2IL-2022.1.0-pre-release.10-Windows-Netframework472.zip";
+    public const string MelonLoaderBaseUrl = $"LavaGang/MelonLoader/releases/download/v{MelonLoaderVersion}/MelonLoader.x64.zip";
+    public const string UnityDependencyBaseUrl = $"LavaGang/Unity-Runtime-Libraries/master/{UnityDependencyVersion}.zip";
+    public const string Cpp2ILBaseUrl = $"SamboyCoding/Cpp2IL/releases/download/{Cpp2ILVersion}/Cpp2IL-{Cpp2ILVersion}-Windows-Netframework472.zip";
 }

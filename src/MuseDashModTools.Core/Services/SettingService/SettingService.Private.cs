@@ -28,4 +28,11 @@ internal sealed partial class SettingService
             }
         }
     }
+
+    private void CreateNecessaryFolders()
+    {
+        Directory.CreateDirectory(Config.ModsFolder);
+        Directory.CreateDirectory(Config.UserLibsFolder);
+        Directory.CreateDirectory(Config.CustomAlbumsFolder);
+    }
 }

@@ -3,74 +3,67 @@
 public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 {
     [ObservableProperty]
-    public partial string? MelonLoaderVersion { get; set; }
+    public partial string? InstalledMelonLoaderVersion { get; set; }
 
     [ObservableProperty]
-    public partial string? InstallStatus { get; set; }
+    public partial InstallStatus MelonLoaderInstallStatus { get; set; }
+
+    [ObservableProperty]
+    public partial LocalizedString? DownloadText { get; set; }
 
     [ObservableProperty]
     public partial double DownloadProgress { get; set; }
-
-    [ObservableProperty]
-    public partial bool Downloading { get; set; }
 
     public override Task InitializeAsync()
     {
         base.InitializeAsync();
 
-        MelonLoaderVersion = LocalService.ReadMelonLoaderVersion();
+        InstalledMelonLoaderVersion = LocalService.ReadMelonLoaderVersion();
+        MelonLoaderInstallStatus = InstalledMelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
 
         Logger.ZLogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
         return Task.CompletedTask;
     }
 
-    private void UpdateDownloadingStatus(DownloadStartedEventArgs args)
-    {
-        var fileName = Path.GetFileName(args.FileName);
-        var mbSize = args.TotalBytesToReceive / (1024.0 * 1024.0);
-        InstallStatus = $"Downloading {fileName}: {mbSize:F2}MB";
-        Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
-    }
-
     [RelayCommand]
     private async Task InstallMelonLoaderAsync()
     {
-        Downloading = true;
-        InstallStatus = "Preparing...";
-
         try
         {
+            MelonLoaderInstallStatus = InstallStatus.Downloading;
             var downloadProgress = new Progress<double>(value => DownloadProgress = value);
             await DownloadManager
-                .DownloadMelonLoaderAsync(
-                    (_, args) => UpdateDownloadingStatus(args),
-                    downloadProgress)
+                .DownloadMelonLoaderAsync(OnDownloadStarted, downloadProgress)
                 .ConfigureAwait(true);
             await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
         }
-        catch
+        catch (Exception ex)
         {
-            Downloading = false;
+            await MessageBoxService.ErrorAsync("Failed to install MelonLoader: {0}", ex).ConfigureAwait(false);
+            Logger.ZLogError(ex, $"Failed to install MelonLoader");
+            MelonLoaderInstallStatus = InstallStatus.NotInstalled;
             return;
         }
 
-        MelonLoaderVersion = "0.6.1";
-        Downloading = false;
+        InstalledMelonLoaderVersion = MelonLoaderVersion;
+        MelonLoaderInstallStatus = InstallStatus.Installed;
     }
 
     [RelayCommand]
     private async Task UninstallMelonLoaderAsync()
     {
-        // TODO
-
-        MelonLoaderVersion = null;
+        await LocalService.UninstallMelonLoaderAsync().ConfigureAwait(false);
+        InstalledMelonLoaderVersion = null;
+        MelonLoaderInstallStatus = InstallStatus.NotInstalled;
         Logger.ZLogInformation($"MelonLoader has been successfully uninstalled");
     }
 
-    [UsedImplicitly]
-    partial void OnMelonLoaderVersionChanged(string? value)
+    private void OnDownloadStarted(object? sender, DownloadStartedEventArgs args)
     {
-        InstallStatus = value.IsNullOrEmpty() ? "Not Installed" : "Installed";
+        var fileName = Path.GetFileName(args.FileName);
+        var mbSize = args.TotalBytesToReceive / (1024.0 * 1024.0);
+        DownloadText = string.Format(XAML.MelonLoader_State_Downloading, fileName, $"{mbSize:F2}");
+        Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
     }
 
     #region Injections
@@ -86,6 +79,9 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required ILogger<MelonLoaderPanelViewModel> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections
 }
