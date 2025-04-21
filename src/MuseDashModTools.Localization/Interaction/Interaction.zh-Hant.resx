@@ -63,12 +63,6 @@
     <value>無法將 Updater 複製到目標文件夾
 {0}</value>
   </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-    <value>無法刪除 {0} 下的 MelonLoader.zip
-錯誤訊息:
-{1}
-請嘗試手動刪除</value>
-  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{0} 使用依賴 {1}
 你確定你想要刪除這個 mod 嗎？</value>
@@ -132,10 +126,6 @@
 是否連上網路?
 {0}}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
-    <value>MelonLoader 已經成功安裝
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
     <value>Mod 安裝失敗
 {0}</value>
@@ -148,11 +138,6 @@
     <value>Mod 安裝失敗。是否有連上網路?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
-    <value>你沒有安裝 MuseDashModTools 的 Mod
-每次開啟 Muse Dash 的時候會自動檢查 Mod 更新
-是否現在安裝?</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>你選擇的位置無效，請再次選擇</value>
   </data>
@@ -164,6 +149,14 @@ Muse Dash Mod Tools 已經是最新版本
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>日誌分析完成, 尚未從日誌中發現明顯錯誤
 如果扔然有問題請至 trouble shoot 頻道詢問</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+        <value>無法刪除 {0} 下的 MelonLoader.zip
+請嘗試手動刪除</value>
+    </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader 已經成功安裝
+</value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
     <value>有新版本的 Muse Dash Mod Tools （{0}）已經發布

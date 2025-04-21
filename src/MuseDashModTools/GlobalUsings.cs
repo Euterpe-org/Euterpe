@@ -41,6 +41,7 @@ global using R3;
 global using Ursa.Controls;
 global using ZLogger;
 global using static MuseDashModTools.Common.BuildInfo;
+global using static MuseDashModTools.Common.GlobalConstants;
 global using static MuseDashModTools.Common.PageNames;
 global using static MuseDashModTools.Core.Utils.DesktopUtils;
 global using static MuseDashModTools.Localization.Interaction;

@@ -25,6 +25,7 @@ global using ZLogger;
 global using static MuseDashModTools.Common.BuildInfo;
 global using static MuseDashModTools.Common.GitHubConstants;
 global using static MuseDashModTools.Common.GitHubResources;
+global using static MuseDashModTools.Common.GlobalConstants;
 global using static MuseDashModTools.Core.SourceGenerationContext;
 global using static MuseDashModTools.Core.Utils.DesktopUtils;
 global using static MuseDashModTools.Localization.Interaction;

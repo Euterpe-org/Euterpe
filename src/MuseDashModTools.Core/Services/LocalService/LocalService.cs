@@ -40,6 +40,10 @@ internal sealed partial class LocalService : ILocalService
         }
     }
 
+    public Task InstallDotNetRuntimeAsync() => throw new NotImplementedException();
+
+    public Task InstallDotNetSdkAsync() => throw new NotImplementedException();
+
     public string[] GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
         .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll")
         .ToArray();
@@ -52,24 +56,24 @@ internal sealed partial class LocalService : ILocalService
     {
         if (!FileSystemService.CheckFileExists(Config.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorAsync("MelonLoader zip file not found").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("MelonLoader zip file not found").ConfigureAwait(false);
             return false;
         }
 
         if (!ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder))
         {
-            await MessageBoxService.ErrorAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Failed to unzip MelonLoader").ConfigureAwait(false);
             return false;
         }
 
         if (!FileSystemService.TryDeleteFile(Config.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_DeleteZip_Failed, Config.MelonLoaderZipPath).ConfigureAwait(false);
             return false;
         }
 
         Logger.ZLogInformation($"MelonLoader installed successfully");
-        await MessageBoxService.SuccessAsync("MelonLoader installed successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Install_Success).ConfigureAwait(false);
         return true;
     }
 

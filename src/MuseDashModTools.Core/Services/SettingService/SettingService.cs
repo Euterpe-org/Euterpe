@@ -39,6 +39,7 @@ internal sealed partial class SettingService : ISettingService
     {
         Logger.ZLogInformation($"Checking for valid setting...");
         await CheckMuseDashFolderAsync().ConfigureAwait(true);
+        CreateNecessaryFolders();
 
         Logger.ZLogInformation($"Checking for valid setting done");
     }

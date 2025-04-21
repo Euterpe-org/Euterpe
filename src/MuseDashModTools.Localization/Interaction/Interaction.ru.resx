@@ -63,12 +63,6 @@
     <value>Невозможно скопировать Updater в выбранную папку
 {0}</value>
   </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-    <value>Невозможно удалить MelonLoader.zip в
-{0}
-Ошибка:{1}
-Попробуйте удалить файл вручную</value>
-  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{1} использует {0} как библиотеку
 Вы действительно хотите удалить данный мод?</value>
@@ -132,10 +126,6 @@
 Вы подключены к интернету?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
-    <value>MelonLoader был успешно установлен
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
     <value>Не удалось установить мод
 {0}</value>
@@ -148,11 +138,6 @@
     <value>Не удалось установить мод. Вы подключены к интернету?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
-    <value>Вы не установили мод MuseDashModTools
-Он проверяет обновления для модов во время запуска Muse Dash
-Установить его?</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Выбран неверный путь. Попробуйте другой</value>
   </data>
@@ -163,6 +148,15 @@
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>Анализ логов завершен, ошибок не найдено
 Если у вас есть проблемы, то перейдите в канал устранения неполадок</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+        <value>Невозможно удалить MelonLoader.zip в
+{0}
+Попробуйте удалить файл вручную</value>
+    </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader был успешно установлен
+</value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
     <value>Найдена новая версия Muse Dash Mod Tools ({0})

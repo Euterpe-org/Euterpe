@@ -63,12 +63,6 @@ Ez a helyes mappa?</value>
     <value>Updater másolása sikertelen
 {0}</value>
   </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-    <value>Nem sikerült kitörölni MelonLoader.zip-et itt:
-{0}
-Hiba:{1}
-Probáld meg manuálisan</value>
-  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{1} függ a(z) {0} mod-tól
 Biztos hogy ki akarod törölni?</value>
@@ -132,10 +126,6 @@ Telepíted most?</value>
 Online vagy?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
-    <value>MelonLoader sikeresen települt
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
     <value>Mod telepítés sikertelen
 {0}</value>
@@ -148,11 +138,6 @@ Online vagy?
     <value>Mod telepítés sikertelen. Online vagy?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
-    <value>Nincsen feltelepítve a MuseDashModTools mod,
-amely minden indításnál ellenőrzi a modok verzióját
-Telepíted most?</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Ez a mappa érvénytelen. Próbáld újra</value>
   </data>
@@ -163,6 +148,15 @@ Muse Dash Mod Tools legfrissebb verzióját használod</value>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>A log elemzése befejeződött, nincsen benne egyértelmű hiba
 Ha mégis van problémád, fordulj a "Hibakezelés"-hez</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+        <value>Nem sikerült kitörölni MelonLoader.zip-et itt:
+{0}
+Probáld meg manuálisan</value>
+    </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader sikeresen települt
+</value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
     <value>Egy újabb verzió ({0}) elérhető

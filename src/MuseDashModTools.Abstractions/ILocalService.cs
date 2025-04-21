@@ -4,6 +4,8 @@ public interface ILocalService
 {
     Task CheckDotNetRuntimeInstalledAsync();
     Task CheckDotNetSdkInstalledAsync();
+    Task InstallDotNetRuntimeAsync();
+    Task InstallDotNetSdkAsync();
     Task<string> GetMuseDashFolderAsync();
     string[] GetModFilePaths();
     string[] GetLibFilePaths();

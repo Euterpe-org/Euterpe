@@ -63,12 +63,6 @@ Por favor, borra cualquier mod que tengas instalado que pese 0KB, y reinicia el 
     <value>No se pudo copiar Updater a la carpeta
 {0}</value>
   </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderZipFailed" xml:space="preserve">
-    <value>No se pudo eliminar MelonLoader.zip en
-{0}
-Error: {1}
-¿Podrías borrarlo manualmente?</value>
-  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{0} es usado por {1} como dependencia
 ¿Estás seguro de intentar borrarlo?</value>
@@ -132,10 +126,6 @@ Este programa se encarga de activar los mods
 ¿Hay conexión a internet?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoaderSuccess" xml:space="preserve">
-    <value>¡MelonLoader se ha instalado!
-</value>
-  </data>
   <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
     <value>La instalación del mod fallo
 {0}</value>
@@ -148,11 +138,6 @@ Este programa se encarga de activar los mods
     <value>La instalación del mod fallo. ¿Hay conexión a internet?
 {0}</value>
   </data>
-  <data name="MessageBox_Content_InstallModTools" xml:space="preserve">
-    <value>¡No tienes instalado el mod MuseDashModTools!
-Este mod comprueba las actualizaciones de otros mods al abrir Muse Dash
-¿Quieres instalar el mod ahora?</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>¡La ruta seleccionada no es válida! Prueba de nuevo</value>
   </data>
@@ -163,6 +148,15 @@ Usas la última versión de Muse Dash Mod Tools</value>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>No se pudieron encontrar errores obvios
 ¡Si hay alguno sería útil que lo avises en el Discord de MDMC!</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+        <value>No se pudo eliminar MelonLoader.zip en
+{0}
+¿Podrías borrarlo manualmente?</value>
+    </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>¡MelonLoader se ha instalado!
+</value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
     <value>¡Hay una nueva versión de Muse Dash Mod Tools({0})!
