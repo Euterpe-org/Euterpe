@@ -16,7 +16,7 @@ internal sealed class WindowsService : IPlatformService
             @"Steam\steamapps\common\Muse Dash",
             @"SteamLibrary\steamapps\common\Muse Dash"
         }
-        .SelectMany(path => DriveInfo.GetDrives().Select(drive => Path.Combine(drive.Name, path))).ToFrozenSet();
+        .SelectMany(path => Environment.GetLogicalDrives().Select(drive => Path.Combine(drive, path))).ToFrozenSet();
 
     public string OsString => "Windows";
 
