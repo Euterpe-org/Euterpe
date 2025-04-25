@@ -21,7 +21,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         Logger.ZLogInformation($"Downloading MelonLoader and Dependencies from GitHub...");
 
         Downloader.DownloadStarted += onDownloadStarted;
-        Downloader.DownloadProgressChanged += (_, e) => downloadProgress.Report(e.ProgressPercentage);
+        Downloader.DownloadProgressChanged += ReportProgress;
 
         try
         {
@@ -36,6 +36,13 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
             Logger.ZLogError(ex, $"Failed to download MelonLoader from GitHub");
             return false;
         }
+        finally
+        {
+            Downloader.DownloadStarted -= onDownloadStarted;
+            Downloader.DownloadProgressChanged -= ReportProgress;
+        }
+
+        void ReportProgress(object? sender, DownloadProgressChangedEventArgs args) => downloadProgress.Report(args.ProgressPercentage);
     }
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)

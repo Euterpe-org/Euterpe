@@ -61,7 +61,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     private void OnDownloadStarted(object? sender, DownloadStartedEventArgs args)
     {
         var fileName = Path.GetFileName(args.FileName);
-        var mbSize = args.TotalBytesToReceive / (1024.0 * 1024.0);
+        var mbSize = args.TotalBytesToReceive / (1024d * 1024d);
         DownloadText = string.Format(XAML.MelonLoader_State_Downloading, fileName, $"{mbSize:F2}");
         Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
     }

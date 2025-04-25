@@ -197,7 +197,7 @@ internal sealed partial class LocalService : ILocalService
             return ReadFileVersion(path);
         }
 
-        Logger.ZLogError($"MelonLoader.dll not found");
+        Logger.ZLogInformation($"MelonLoader.dll not found");
         return null;
     }
 
