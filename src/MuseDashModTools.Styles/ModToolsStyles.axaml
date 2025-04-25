@@ -23,8 +23,6 @@
     <StyleInclude
         Source="/ExtendedControls/DifficultyFilter.axaml" />
     <StyleInclude
-        Source="/ExtendedControls/ImageButton.axaml" />
-    <StyleInclude
         Source="/ExtendedControls/NaviPanelListControl.axaml" />
     <!--  Templated Controls  -->
     <StyleInclude
