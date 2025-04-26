@@ -47,12 +47,19 @@ internal static class Program
         .UsePlatformDetect()
         .WithInterFont()
         .LogToTrace()
-        .UseR3(ex =>
+        .UseR3(ReportException)
+        .HandleUIThreadException(ex =>
         {
-            Resolve<ILogger<App>>().ZLogError(ex, $"Unhandled exception");
-#if RELEASE
-            Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
-            Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
-#endif
+            ReportException(ex.Exception);
+            ex.Handled = true;
         });
+
+    private static void ReportException(Exception ex)
+    {
+        Resolve<ILogger<App>>().ZLogError(ex, $"Unhandled exception");
+#if RELEASE
+        Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
+        Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");
+#endif
+    }
 }
