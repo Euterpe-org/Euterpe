@@ -2,7 +2,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
     xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
     x:Class="MuseDashModTools.Views.Panels.Setting.AdvancedPanel"
     x:DataType="vm:AdvancedPanelViewModel"
@@ -14,11 +16,14 @@
         <vm:AdvancedPanelViewModel />
     </Design.DataContext>
 
-    <TextBlock
-        HorizontalAlignment="Center"
-        TextAlignment="Center"
-        VerticalAlignment="Center">
-        AdvancedPanel still work in progress...
-    </TextBlock>
+    <StackPanel
+        Classes="ContentListRoot">
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_IgnoreException}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_IgnoreException}}">
+            <ToggleSwitch
+                IsChecked="{Binding Config.IgnoreException, Mode=TwoWay}" />
+        </mdmt:ContentListItem>
+    </StackPanel>
 
 </UserControl>
