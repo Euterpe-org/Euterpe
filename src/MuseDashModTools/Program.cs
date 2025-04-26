@@ -51,7 +51,7 @@ internal static class Program
         .HandleUIThreadException(ex =>
         {
             ReportException(ex.Exception);
-            ex.Handled = true;
+            ex.Handled = Resolve<Config>().IgnoreException;
         });
 
     private static void ReportException(Exception ex)

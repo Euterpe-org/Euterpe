@@ -46,6 +46,10 @@ public sealed partial class Config : ObservableObject
 
     public SemVersion? SkipVersion { get; set; }
 
+    // Advanced Settings
+    [ObservableProperty]
+    public partial bool IgnoreException { get; set; }
+
     // Ignored Paths
     [JsonIgnore]
     public string ModLinksPath => GetCombinedPath(CacheFolder, "ModLinks.json");
