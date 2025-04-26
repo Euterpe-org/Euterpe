@@ -5,6 +5,7 @@
         <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
         <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
         <DebugType>none</DebugType>
+        <DebuggerSupport>false</DebuggerSupport>
     </PropertyGroup>
 
     <ItemGroup>
