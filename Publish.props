@@ -1,0 +1,29 @@
+﻿<Project>
+    <PropertyGroup>
+        <PublishAot>true</PublishAot>
+        <PublishLzmaCompressed>true</PublishLzmaCompressed>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <DebuggerSupport>false</DebuggerSupport>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="PublishAotCompressed"/>
+    </ItemGroup>
+
+    <Import Project="$(MSBuildProjectDirectory)\$(MSBuildProjectName).props"
+            Condition="Exists('$(MSBuildProjectDirectory)\$(MSBuildProjectName).props')"/>
+
+    <Target Name="Copy Builds" AfterTargets="Publish">
+        <PropertyGroup>
+            <NativeDir>$(OutputPath)native\</NativeDir>
+            <PublishDir>$(OutputPath)publish\</PublishDir>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <PublishedFiles Include="$(NativeDir)*.*" Condition="Exists('$(NativeDir)')"/>
+            <PublishedFiles Include="$(PublishDir)*.*" Condition="!Exists('$(NativeDir)')"/>
+        </ItemGroup>
+
+        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(BaseOutputPath)" SkipUnchangedFiles="true"/>
+    </Target>
+</Project>
