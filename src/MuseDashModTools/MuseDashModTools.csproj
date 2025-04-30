@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <Import Condition="'$(Configuration)' == 'Release'" Project="$(SolutionDir)Release.props"/>
+    <Import Condition="'$(IsPublishing)' == 'true'" Project="$(SolutionDir)Publish.props"/>
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>

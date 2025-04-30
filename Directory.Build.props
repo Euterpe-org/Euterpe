@@ -7,6 +7,9 @@
         <IsAotCompatible>true</IsAotCompatible>
         <BaseOutputPath>$(SolutionDir)bin\</BaseOutputPath>
         <ExternalBuildsFolder>$(BaseOutputPath)ExternalBuilds\</ExternalBuildsFolder>
+        <IsPublishing Condition="$(_IsPublishing) != '' and $(IsPublishing) == ''">$(_IsPublishing)</IsPublishing>
+        <DefineConstants Condition="'$(Configuration)' == 'Release'">$(DefineConstants);RELEASE</DefineConstants>
+        <DefineConstants Condition="'$(IsPublishing)' == 'true'">$(DefineConstants);PUBLISH</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -14,8 +17,10 @@
         <IsLinux Condition="'$([System.OperatingSystem]::IsLinux())' == 'true'">true</IsLinux>
         <IsMacOS Condition="'$([System.OperatingSystem]::IsMacOS()))' == 'true'">true</IsMacOS>
 
-        <DefineConstants Condition="'$(IsWindows)' == 'true'">WINDOWS</DefineConstants>
-        <DefineConstants Condition="'$(IsLinux)' == 'true'">LINUX</DefineConstants>
-        <DefineConstants Condition="'$(IsMacOS)' == 'true'">MACOS</DefineConstants>
+        <DefineConstants Condition="'$(IsWindows)' == 'true'">$(DefineConstants);WINDOWS</DefineConstants>
+        <DefineConstants Condition="'$(IsLinux)' == 'true'">$(DefineConstants);LINUX</DefineConstants>
+        <DefineConstants Condition="'$(IsMacOS)' == 'true'">$(DefineConstants);MACOS</DefineConstants>
     </PropertyGroup>
+
+    <Import Condition="'$(Configuration)' == 'Release'" Project="Release.props"/>
 </Project>
