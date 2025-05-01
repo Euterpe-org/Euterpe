@@ -193,7 +193,7 @@
                                         <!--  Mod Toggle Switch  -->
                                         <ToggleSwitch
                                             Grid.Column="1"
-                                            Command="{Binding $parent[UserControl].((vm:ModManagePanelViewModel)DataContext).ToggleModCommand, Mode=OneTime, FallbackValue=null}"
+                                            Command="{Binding $parent[UserControl].DataContext.ToggleModCommand, Mode=OneTime}"
                                             CommandParameter="{Binding ., Mode=OneWay}"
                                             HorizontalAlignment="Right"
                                             IsChecked="{Binding !IsDisabled, Mode=OneWay}"
