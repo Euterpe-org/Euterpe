@@ -210,7 +210,7 @@
                                             x:DataType="models:ContributorCardItem">
                                             <mdmt:ContributorCardControl
                                                 Avatar="{Binding Avatar, Mode=OneTime}"
-                                                ButtonCommand="{Binding $parent[UserControl].((vm:AboutPanelViewModel)DataContext).OpenUrlCommand, Mode=OneTime, FallbackValue=null}"
+                                                ButtonCommand="{Binding $parent[UserControl].DataContext.OpenUrlCommand, Mode=OneTime}"
                                                 ContributorDescription="{Binding Description, Mode=OneTime}"
                                                 ContributorName="{Binding Name, Mode=OneTime}"
                                                 Links="{Binding Links, Mode=OneTime}"

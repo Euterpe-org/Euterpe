@@ -4,9 +4,9 @@
     </PropertyGroup>
     <!-- Package Group Versions -->
     <PropertyGroup>
-        <AvaloniaVersion>11.2.8</AvaloniaVersion>
+        <AvaloniaVersion>11.3.0</AvaloniaVersion>
         <UrsaVersion>1.11.0</UrsaVersion>
-        <VerifyVersion>29.3.0</VerifyVersion>
+        <VerifyVersion>29.5.0</VerifyVersion>
         <RoslynatorAnalyzersVersion>4.13.1</RoslynatorAnalyzersVersion>
     </PropertyGroup>
     <ItemGroup>
@@ -27,7 +27,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageVersion>
         <PackageVersion Include="Downloader" Version="3.3.4"/>
-        <PackageVersion Include="DynamicData" Version="9.2.1"/>
+        <PackageVersion Include="DynamicData" Version="9.2.2"/>
         <PackageVersion Include="HotAvalonia" Version="3.0.0"/>
         <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)"/>
         <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="$(UrsaVersion)"/>
