@@ -181,11 +181,11 @@ internal sealed partial class LocalService : ILocalService
 
     public string? ReadMelonLoaderVersion()
     {
-        var paths = new[]
-        {
+        ReadOnlySpan<string> paths =
+        [
             Path.Combine(Config.MelonLoaderFolder, "net6", "MelonLoader.dll"),
             Path.Combine(Config.MelonLoaderFolder, "MelonLoader.dll")
-        };
+        ];
 
         foreach (var path in paths)
         {
