@@ -15,6 +15,6 @@ public static class ParallelExtension
                 return ValueTask.CompletedTask;
             }).ConfigureAwait(false);
 
-        return await Task.WhenAll(tasks);
+        return await Task.WhenAll(tasks).ConfigureAwait(false);
     }
 }

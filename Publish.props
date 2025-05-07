@@ -1,14 +1,15 @@
 ﻿<Project>
     <PropertyGroup>
+        <IsPublishing Condition="$(_IsPublishing) != '' And $(IsPublishing) == ''">$(_IsPublishing)</IsPublishing>
+        <DefineConstants Condition="'$(IsPublishing)' == 'true'">$(DefineConstants);PUBLISH</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup>
         <PublishAot>true</PublishAot>
         <PublishLzmaCompressed>true</PublishLzmaCompressed>
         <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
         <DebuggerSupport>false</DebuggerSupport>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="PublishAotCompressed"/>
-    </ItemGroup>
 
     <Import Project="$(MSBuildProjectDirectory)\$(MSBuildProjectName).props"
             Condition="Exists('$(MSBuildProjectDirectory)\$(MSBuildProjectName).props')"/>

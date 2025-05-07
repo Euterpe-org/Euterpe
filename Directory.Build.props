@@ -7,9 +7,12 @@
         <IsAotCompatible>true</IsAotCompatible>
         <BaseOutputPath>$(SolutionDir)bin\</BaseOutputPath>
         <ExternalBuildsFolder>$(BaseOutputPath)ExternalBuilds\</ExternalBuildsFolder>
-        <IsPublishing Condition="$(_IsPublishing) != '' and $(IsPublishing) == ''">$(_IsPublishing)</IsPublishing>
-        <DefineConstants Condition="'$(Configuration)' == 'Release'">$(DefineConstants);RELEASE</DefineConstants>
-        <DefineConstants Condition="'$(IsPublishing)' == 'true'">$(DefineConstants);PUBLISH</DefineConstants>
+    </PropertyGroup>
+
+    <!-- Third Party Library Properties-->
+    <PropertyGroup>
+        <MeziantouAnalysisMode>None</MeziantouAnalysisMode>
+        <MvvmToolkitEnableINotifyPropertyChangingSupport>false</MvvmToolkitEnableINotifyPropertyChangingSupport>
     </PropertyGroup>
 
     <PropertyGroup>
