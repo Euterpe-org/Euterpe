@@ -9,10 +9,6 @@
         <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <MvvmToolkitEnableINotifyPropertyChangingSupport>false</MvvmToolkitEnableINotifyPropertyChangingSupport>
-    </PropertyGroup>
-
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
         <AvaloniaResource Remove="Assets\Raw\**"/>
@@ -36,6 +32,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="PublishAotCompressed"/>
         <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
