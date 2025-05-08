@@ -9,7 +9,7 @@ internal sealed partial class ChartManageService : IChartManageService
     {
         _sourceCache = sourceCache;
 
-        await foreach (var chart in GetChartListAsync())
+        await foreach (var chart in GetChartListAsync().ConfigureAwait(false))
         {
             if (chart is null)
             {

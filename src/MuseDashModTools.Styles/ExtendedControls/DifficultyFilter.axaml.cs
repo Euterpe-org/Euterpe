@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Styles.ExtendedControls;
 
-public class DifficultyFilter : MenuItem
+public sealed class DifficultyFilter : MenuItem
 {
     /*public static readonly StyledProperty<bool?> IsCheckedProperty =
         AvaloniaProperty.Register<DifficultyFilter, bool?>(nameof(IsChecked), false,

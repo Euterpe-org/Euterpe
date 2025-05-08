@@ -19,7 +19,7 @@ internal sealed partial class ModManageService
 
         CheckDuplicatedMods(localMods);
 
-        await foreach (var webMod in DownloadManager.GetModListAsync())
+        await foreach (var webMod in DownloadManager.GetModListAsync().ConfigureAwait(false))
         {
             if (webMod is null)
             {
@@ -64,7 +64,7 @@ internal sealed partial class ModManageService
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
-            _ when webMod.GameVersion != "*" && webMod.GameVersion != _gameVersion => ModState.Incompatible,
+            _ when webMod.GameVersion is not "*" && webMod.GameVersion != _gameVersion => ModState.Incompatible,
             _ => ModState.Normal
         };
     }
@@ -110,7 +110,7 @@ internal sealed partial class ModManageService
                 .WhenAllAsync(LocalService.LoadLibFromPathAsync!).ConfigureAwait(false))
             .Select(x => new KeyValuePair<string, LibDto>(x!.Name, x)));
 
-        await foreach (var webLib in DownloadManager.GetLibListAsync())
+        await foreach (var webLib in DownloadManager.GetLibListAsync().ConfigureAwait(false))
         {
             if (webLib is null)
             {

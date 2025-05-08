@@ -60,9 +60,12 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {
@@ -80,9 +83,12 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {

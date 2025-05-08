@@ -11,16 +11,19 @@ internal sealed partial class SettingService : ISettingService
         Directory.CreateDirectory(ConfigFolder);
         if (File.Exists(ConfigPath))
         {
-            await using var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
-            var savedConfig = await JsonSerializationService.DeserializeConfigAsync(stream).ConfigureAwait(true);
-            if (savedConfig is null)
+            var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
+            await using (stream.ConfigureAwait(false))
             {
-                Logger.ZLogError($"Saved setting is null, using default settings");
-                return;
-            }
+                var savedConfig = await JsonSerializationService.DeserializeConfigAsync(stream).ConfigureAwait(true);
+                if (savedConfig is null)
+                {
+                    Logger.ZLogError($"Saved setting is null, using default settings");
+                    return;
+                }
 
-            Config.CopyFrom(savedConfig);
-            Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
+                Config.CopyFrom(savedConfig);
+                Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
+            }
         }
         else
         {
@@ -30,9 +33,12 @@ internal sealed partial class SettingService : ISettingService
 
     public async Task SaveAsync()
     {
-        await using var stream = new FileStream(ConfigPath, FileMode.Create, FileAccess.Write);
-        await JsonSerializationService.SerializeConfigAsync(stream, Config).ConfigureAwait(false);
-        Logger.ZLogInformation($"Setting saved to {ConfigPath} successfully");
+        var stream = new FileStream(ConfigPath, FileMode.Create, FileAccess.Write);
+        await using (stream.ConfigureAwait(false))
+        {
+            await JsonSerializationService.SerializeConfigAsync(stream, Config).ConfigureAwait(false);
+            Logger.ZLogInformation($"Setting saved to {ConfigPath} successfully");
+        }
     }
 
     public async Task ValidateAsync()

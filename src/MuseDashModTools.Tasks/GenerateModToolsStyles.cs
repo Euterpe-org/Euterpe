@@ -122,7 +122,7 @@ public sealed class GenerateModToolsStyles : Task
         styles.Save(writer);
     }
 
-    private class CategoryInfo(string comment)
+    private sealed class CategoryInfo(string comment)
     {
         public string Comment { get; } = comment;
         public List<string> Sources { get; } = [];

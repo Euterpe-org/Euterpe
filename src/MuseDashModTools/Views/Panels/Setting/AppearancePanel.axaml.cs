@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Panels.Setting;
 
-public partial class AppearancePanel : UserControl
+public sealed partial class AppearancePanel : UserControl
 {
     public AppearancePanel()
     {
