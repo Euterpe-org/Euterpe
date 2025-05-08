@@ -15,9 +15,11 @@ services.AddLogging(x =>
     x.AddZLoggerConsole();
 });
 
-await using var serviceProvider = services.BuildServiceProvider();
-ConsoleApp.ServiceProvider = serviceProvider;
+var serviceProvider = services.BuildServiceProvider();
+await using (serviceProvider.ConfigureAwait(false))
+{
+    ConsoleApp.ServiceProvider = serviceProvider;
 
-var app = ConsoleApp.Create();
-
-await app.RunAsync(args).ConfigureAwait(false);
+    var app = ConsoleApp.Create();
+    await app.RunAsync(args).ConfigureAwait(false);
+}
