@@ -4141,6 +4141,7 @@ dotnet_diagnostic.MA0164.severity = warning
 dotnet_diagnostic.MA0168.severity = suggestion
 
 # Meziantou.Analyzer Configuration
+MA0004.report = DetectContext
 MA0053.public_class_should_be_sealed = true
 
 # RESX

@@ -31,9 +31,12 @@ internal sealed partial class UpdateService
     {
         try
         {
-            await using var stream = await Client.GetStreamAsync(TagsRSSUrl, cancellationToken).ConfigureAwait(false);
-            using var reader = XmlReader.Create(stream);
-            return SyndicationFeed.Load(reader);
+            var stream = await Client.GetStreamAsync(TagsRSSUrl, cancellationToken).ConfigureAwait(false);
+            await using (stream.ConfigureAwait(false))
+            {
+                using var reader = XmlReader.Create(stream);
+                return SyndicationFeed.Load(reader);
+            }
         }
         catch (Exception ex)
         {

@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Panels.Setting;
 
-public partial class DownloadPanel : UserControl
+public sealed partial class DownloadPanel : UserControl
 {
     public DownloadPanel()
     {
