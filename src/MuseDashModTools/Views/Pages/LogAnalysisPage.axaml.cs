@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Pages;
 
-public partial class LogAnalysisPage : UserControl
+public sealed partial class LogAnalysisPage : UserControl
 {
     public LogAnalysisPage()
     {

@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Views;
 
-public partial class MainWindow : UrsaWindow
+public sealed partial class MainWindow : UrsaWindow
 {
     public MainWindow()
     {
