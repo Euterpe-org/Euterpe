@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Panels.Setting;
 
-public partial class AdvancedPanel : UserControl
+public sealed partial class AdvancedPanel : UserControl
 {
     public AdvancedPanel()
     {

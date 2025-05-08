@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Components;
 
-public partial class DonationDialog : UserControl
+public sealed partial class DonationDialog : UserControl
 {
     public DonationDialog()
     {
