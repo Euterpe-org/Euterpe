@@ -18,7 +18,7 @@
         <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
-        <PackageVersion Include="Autofac" Version="8.2.1"/>
+        <PackageVersion Include="Autofac" Version="8.3.0"/>
         <PackageVersion Include="CliWrap" Version="3.8.2"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.4.1"/>
