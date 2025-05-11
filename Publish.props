@@ -1,6 +1,5 @@
 ﻿<Project>
     <PropertyGroup>
-        <IsPublishing Condition="$(_IsPublishing) != '' And $(IsPublishing) == ''">$(_IsPublishing)</IsPublishing>
         <DefineConstants Condition="'$(IsPublishing)' == 'true'">$(DefineConstants);PUBLISH</DefineConstants>
     </PropertyGroup>
 
