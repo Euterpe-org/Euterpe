@@ -9,6 +9,10 @@
         <ExternalBuildsFolder>$(BaseOutputPath)ExternalBuilds\</ExternalBuildsFolder>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <IsPublishing Condition="$(_IsPublishing) != '' And $(IsPublishing) == ''">$(_IsPublishing)</IsPublishing>
+    </PropertyGroup>
+
     <!-- Third Party Library Properties-->
     <PropertyGroup>
         <MeziantouAnalysisMode>None</MeziantouAnalysisMode>
