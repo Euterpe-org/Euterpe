@@ -20,8 +20,6 @@
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
         <PackageReference Include="Avalonia"/>
         <PackageReference Include="Avalonia.Desktop"/>
-        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Downloader"/>
@@ -37,6 +35,12 @@
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="ValveKeyValue"/>
+    </ItemGroup>
+
+    <!-- Avalonia Diagnostics Package-->
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+        <PackageReference Condition="'$(AvAccelerateKey)' == ''" Include="Avalonia.Diagnostics"/>
+        <PackageReference Condition="'$(AvAccelerateKey)' != ''" Include="AvaloniaUI.DiagnosticsSupport"/>
     </ItemGroup>
 
     <ItemGroup>
