@@ -47,6 +47,9 @@ internal static class Program
         .UsePlatformDetect()
         .WithInterFont()
         .LogToTrace()
+#if (DEBUG && ACCELERATE)
+        .WithDeveloperTools()
+#endif
         .UseR3(ReportException)
         .HandleUIThreadException(ex =>
         {

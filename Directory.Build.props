@@ -19,6 +19,7 @@
         <MvvmToolkitEnableINotifyPropertyChangingSupport>false</MvvmToolkitEnableINotifyPropertyChangingSupport>
     </PropertyGroup>
 
+    <!-- Platform Properties -->
     <PropertyGroup>
         <IsWindows Condition="'$([System.OperatingSystem]::IsWindows())' == 'true'">true</IsWindows>
         <IsLinux Condition="'$([System.OperatingSystem]::IsLinux())' == 'true'">true</IsLinux>
@@ -27,6 +28,14 @@
         <DefineConstants Condition="'$(IsWindows)' == 'true'">$(DefineConstants);WINDOWS</DefineConstants>
         <DefineConstants Condition="'$(IsLinux)' == 'true'">$(DefineConstants);LINUX</DefineConstants>
         <DefineConstants Condition="'$(IsMacOS)' == 'true'">$(DefineConstants);MACOS</DefineConstants>
+    </PropertyGroup>
+
+    <!-- Avalonia Accelerate -->
+    <ItemGroup>
+        <AvaloniaUILicenseKey Include="$(AvAccelerateKey)"/>
+    </ItemGroup>
+    <PropertyGroup>
+        <DefineConstants Condition="'$(AvAccelerateKey)' != ''">$(DefineConstants);ACCELERATE</DefineConstants>
     </PropertyGroup>
 
     <Import Condition="'$(Configuration)' == 'Release'" Project="Release.props"/>
