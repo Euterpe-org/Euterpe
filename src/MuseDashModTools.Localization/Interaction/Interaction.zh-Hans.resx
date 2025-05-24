@@ -268,20 +268,17 @@ Muse Dash Mod Tools已是最新版
     <value>分析成功</value>
   </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
-        <value>模组 {0} 安装成功
-</value>
-    </data>
+      <value>模组 {0} 安装成功</value>
+  </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
-        <value>模组 {0} 重装成功
-</value>
-    </data>
+      <value>模组 {0} 重装成功</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
         <value>模组 {0} 删除成功</value>
     </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
-        <value>模组 {0} 更新成功
-</value>
-    </data>
+      <value>模组 {0} 更新成功</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
       <value>错误</value>
   </data>
