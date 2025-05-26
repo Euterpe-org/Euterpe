@@ -5,6 +5,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="CliWrap"/>
         <PackageReference Include="Downloader"/>
         <PackageReference Include="DynamicData"/>
         <PackageReference Include="Irihi.Ursa"/>
