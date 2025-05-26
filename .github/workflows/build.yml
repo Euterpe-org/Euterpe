@@ -5,6 +5,7 @@ on:
     branches:
       - 'master'
       - 'dev'
+      - 'rw-ui'
     tags:
       - 'v?[0-9]+.[0-9]+.[0-9]+'
     paths:
@@ -25,9 +26,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build-type:
-          - Debug
-          - Release
         target-platform:
           - { os: ubuntu-latest, name: linux }
           - { os: windows-latest, name: win }
@@ -36,6 +34,7 @@ jobs:
           - arm64
         dotnet-version:
           - '9.0'
+
     runs-on: ${{ matrix.target-platform.os }}
     steps:
       - name: Checkout
@@ -48,19 +47,14 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish -a ${{ matrix.target-arch }} -c ${{ matrix.build-type }}
+          dotnet publish -a ${{ matrix.target-arch }}
 
       - name: Test Project
         run: |
-          dotnet test -c ${{ matrix.build-type }}
-
-      - name: List Result
-        working-directory: ./
-        run: |
-          ls -l bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/${{matrix.target-platform.name}}-${{ matrix.target-arch }}/publish
+          dotnet test -c Release
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: MuseDashModTools-${{ matrix.build-type }}-${{matrix.target-platform.name}}-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
-          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/${{matrix.target-platform.name}}-${{ matrix.target-arch }}/publish/*
+          name: MuseDashModTools-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
+          path: bin/*.exe
