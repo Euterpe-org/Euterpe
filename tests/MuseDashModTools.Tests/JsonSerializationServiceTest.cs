@@ -10,13 +10,13 @@ public sealed class JsonSerializationServiceTest
                                        "Name": "TestMod",
                                        "Version": "1.0.0-beta",
                                        "Author": "test",
-                                       "DownloadLink": "Test Mod.dll",
-                                       "RepositoryIdentifier": "Org/Repo",
+                                       "FileName": "Test Mod.dll",
+                                       "Repository": "Org/Repo",
                                        "ConfigFile": "Config.cfg",
                                        "GameVersion": "*",
                                        "Description": "A Test Mod",
-                                       "DependentMods": [],
-                                       "DependentLibs": [],
+                                       "ModDependencies": [],
+                                       "LibDependencies": [],
                                        "IncompatibleMods": [],
                                        "SHA256": "9fa86686c2a2f256d052e5319b0e7fded0d1ba9a95fd35113d499a28663b40e7"
                                    }
@@ -26,18 +26,18 @@ public sealed class JsonSerializationServiceTest
 
     private readonly Mod _mod = new()
     {
-        Author = "test",
-        ConfigFile = "Config.cfg",
-        LibDependencies = [],
-        ModDependencies = [],
-        Description = "A Test Mod",
-        FileName = "Test Mod.dll",
-        GameVersion = "*",
-        IncompatibleMods = [],
         Name = "TestMod",
+        Version = "1.0.0-beta",
+        Author = "test",
+        FileName = "Test Mod.dll",
         Repository = "Org/Repo",
-        SHA256 = "9fa86686c2a2f256d052e5319b0e7fded0d1ba9a95fd35113d499a28663b40e7",
-        Version = "1.0.0-beta"
+        ConfigFile = "Config.cfg",
+        GameVersion = "*",
+        Description = "A Test Mod",
+        ModDependencies = [],
+        LibDependencies = [],
+        IncompatibleMods = [],
+        SHA256 = "9fa86686c2a2f256d052e5319b0e7fded0d1ba9a95fd35113d499a28663b40e7"
     };
 
     [Test]
