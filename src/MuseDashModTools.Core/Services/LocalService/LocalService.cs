@@ -8,48 +8,49 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class LocalService : ILocalService
 {
-    public async Task CheckDotNetRuntimeInstalledAsync()
+    public async Task<bool> CheckDotNetRuntimeInstalledAsync()
     {
         var outputStringBuilder = new StringBuilder();
-        await Cli.Wrap("dotnet")
+        var result = await Cli.Wrap("dotnet")
             .WithArguments("--list-runtimes")
+            .WithValidation(CommandResultValidation.None)
             .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        if (!outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6."))
-        {
-            Logger.ZLogInformation($"DotNet Runtime not found, showing error message box...");
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
-        }
+        return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6.");
     }
 
-    public async Task CheckDotNetSdkInstalledAsync()
+    public async Task<bool> CheckDotNetSdkInstalledAsync()
     {
         var outputStringBuilder = new StringBuilder();
-        await Cli.Wrap("dotnet")
+        var result = await Cli.Wrap("dotnet")
             .WithArguments("--list-sdks")
+            .WithValidation(CommandResultValidation.None)
             .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        if (outputStringBuilder.ToString().IsNullOrEmpty())
-        {
-            Logger.ZLogInformation($"DotNet SDK not found, showing error message box...");
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDKNotFound).ConfigureAwait(true);
-        }
+        return result.IsSuccess && !outputStringBuilder.ToString().IsNullOrEmpty();
     }
 
-    public Task InstallDotNetRuntimeAsync() => throw new NotImplementedException();
+    public async Task<bool> CheckModTemplateInstalledAsync()
+    {
+        var result = await Cli.Wrap("dotnet")
+            .WithArguments(["new", "list", "musedashmod"])
+            .WithValidation(CommandResultValidation.None)
+            .ExecuteAsync()
+            .ConfigureAwait(false);
 
-    public Task InstallDotNetSdkAsync() => throw new NotImplementedException();
+        return result.IsSuccess;
+    }
 
     public string[] GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
-        .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll")
+        .Where(x => Path.GetExtension(x) is ".disabled" || Path.GetExtension(x) is ".dll")
         .ToArray();
 
     public string[] GetLibFilePaths() => Directory.EnumerateFiles(Config.UserLibsFolder)
-        .Where(x => Path.GetExtension(x) == ".dll")
+        .Where(x => Path.GetExtension(x) is ".dll")
         .ToArray();
 
     public async Task<bool> InstallMelonLoaderAsync()
@@ -123,7 +124,7 @@ internal sealed partial class LocalService : ILocalService
         var mod = new ModDto
         {
             FileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath),
-            IsDisabled = Path.GetExtension(filePath) == ".disabled"
+            IsDisabled = Path.GetExtension(filePath) is ".disabled"
         };
 
         var bytes = await File.ReadAllBytesAsync(filePath).ConfigureAwait(false);

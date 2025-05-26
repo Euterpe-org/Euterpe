@@ -2,10 +2,9 @@ namespace MuseDashModTools.Abstractions;
 
 public interface ILocalService
 {
-    Task CheckDotNetRuntimeInstalledAsync();
-    Task CheckDotNetSdkInstalledAsync();
-    Task InstallDotNetRuntimeAsync();
-    Task InstallDotNetSdkAsync();
+    Task<bool> CheckDotNetRuntimeInstalledAsync();
+    Task<bool> CheckDotNetSdkInstalledAsync();
+    Task<bool> CheckModTemplateInstalledAsync();
     Task<string> GetMuseDashFolderAsync();
     string[] GetModFilePaths();
     string[] GetLibFilePaths();

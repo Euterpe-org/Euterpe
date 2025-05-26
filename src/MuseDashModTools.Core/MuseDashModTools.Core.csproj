@@ -5,7 +5,6 @@
         <PackageReference Include="AssetsTools.NET"/>
         <PackageReference Include="AsyncAwaitBestPractices"/>
         <PackageReference Include="Autofac"/>
-        <PackageReference Include="CliWrap"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
