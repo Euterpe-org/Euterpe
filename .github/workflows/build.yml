@@ -48,7 +48,7 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish -a ${{ matrix.target-arch }}
+          dotnet publish
 
       - name: Test Project
         run: |
