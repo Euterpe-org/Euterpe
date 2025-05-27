@@ -35,6 +35,8 @@ jobs:
           - '9.0'
 
     runs-on: ${{ matrix.target-platform.os }}
+    env:
+      AvAccelerateKey = ${{ secrets.AVACCELERATEKEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
