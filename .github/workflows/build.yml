@@ -56,4 +56,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MuseDashModTools-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
-          path: bin/*.exe
+          path: bin/Output/*

@@ -24,6 +24,6 @@
             <PublishedFiles Include="$(PublishDir)*.*" Condition="!Exists('$(NativeDir)')"/>
         </ItemGroup>
 
-        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(BaseOutputPath)" SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(BaseOutputPath)\Output" SkipUnchangedFiles="true"/>
     </Target>
 </Project>
