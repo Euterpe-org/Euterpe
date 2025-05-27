@@ -20,10 +20,10 @@
         </PropertyGroup>
 
         <ItemGroup>
-            <PublishedFiles Include="$(NativeDir)*.*" Condition="Exists('$(NativeDir)')"/>
-            <PublishedFiles Include="$(PublishDir)*.*" Condition="!Exists('$(NativeDir)')"/>
+            <PublishedFiles Include="$(NativeDir)*.*" Condition="Exists('$(SolutionDir)Native')"/>
+            <PublishedFiles Include="$(PublishDir)*.*" Condition="!Exists('$(SolutionDir)Native')"/>
         </ItemGroup>
 
-        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(BaseOutputPath)\Output" SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(BaseOutputPath)Output" SkipUnchangedFiles="true"/>
     </Target>
 </Project>

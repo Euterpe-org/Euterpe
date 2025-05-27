@@ -8,7 +8,7 @@
         <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
     </ItemGroup>
 
-    <ItemGroup Condition="Exists('$(MSBuildProjectDirectory)\Native')">
+    <ItemGroup Condition="Exists('$(SolutionDir)Native')">
         <DirectPInvoke Include="av_libglesv2"/>
         <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
         <DirectPInvoke Include="libHarfBuzzSharp"/>
