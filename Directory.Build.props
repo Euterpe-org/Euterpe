@@ -11,6 +11,7 @@
 
     <PropertyGroup>
         <IsPublishing Condition="$(_IsPublishing) != '' And $(IsPublishing) == ''">$(_IsPublishing)</IsPublishing>
+        <NativeLibraryDir Condition="'$(NativeLibraryDir)' == ''">$(SolutionDir)Native\</NativeLibraryDir>
     </PropertyGroup>
 
     <!-- Third Party Library Properties-->

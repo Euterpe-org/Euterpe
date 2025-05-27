@@ -15,15 +15,15 @@
 
     <Target Name="Copy Builds" AfterTargets="Publish">
         <PropertyGroup>
-            <NativeDir>$(OutputPath)native\</NativeDir>
-            <PublishDir>$(OutputPath)publish\</PublishDir>
+            <_NativeDir>$(OutputPath)native\</_NativeDir>
+            <_PublishDir>$(OutputPath)publish\</_PublishDir>
         </PropertyGroup>
 
         <ItemGroup>
-            <PublishedFiles Include="$(NativeDir)*.*" Condition="Exists('$(SolutionDir)Native')"/>
-            <PublishedFiles Include="$(PublishDir)*.*" Condition="!Exists('$(SolutionDir)Native')"/>
+            <_PublishedFiles Include="$(_NativeDir)*.*" Condition="Exists('$(NativeLibraryDir)')"/>
+            <_PublishedFiles Include="$(_PublishDir)*.*" Condition="!Exists('$(NativeLibraryDir)')"/>
         </ItemGroup>
 
-        <Copy SourceFiles="@(PublishedFiles)" DestinationFolder="$(BaseOutputPath)Output" SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="@(_PublishedFiles)" DestinationFolder="$(BaseOutputPath)Output" SkipUnchangedFiles="true"/>
     </Target>
 </Project>
