@@ -30,7 +30,7 @@ jobs:
           - { os: windows-latest, name: win }
         target-arch:
           - x64
-          - arm64
+          # - arm64
         dotnet-version:
           - '9.0'
 
