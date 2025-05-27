@@ -8,12 +8,12 @@
         <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
     </ItemGroup>
 
-    <ItemGroup Condition="Exists('$(SolutionDir)Native')">
+    <ItemGroup Condition="Exists('$(NativeLibraryDir)') And '$(IsWindows)' == 'true'">
         <DirectPInvoke Include="av_libglesv2"/>
-        <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\av_libglesv2.lib"/>
         <DirectPInvoke Include="libHarfBuzzSharp"/>
-        <NativeLibrary Include="Native\libHarfBuzzSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\libHarfBuzzSharp.lib"/>
         <DirectPInvoke Include="libSkiaSharp"/>
-        <NativeLibrary Include="Native\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\libSkiaSharp.lib"/>
     </ItemGroup>
 </Project>
