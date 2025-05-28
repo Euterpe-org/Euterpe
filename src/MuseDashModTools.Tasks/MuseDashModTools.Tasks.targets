@@ -8,5 +8,6 @@
     </Target>
 
     <UsingTask TaskName="$(MSBuildThisFileName).GenerateModToolsStyles"
-               AssemblyFile="$(AssemblyPath)"/>
+               AssemblyFile="$(AssemblyPath)"
+               TaskFactory="TaskHostFactory"/>
 </Project>
