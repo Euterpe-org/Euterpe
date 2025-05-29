@@ -54,7 +54,7 @@ jobs:
 
       - name: Test Project
         run: |
-          dotnet test -c Release
+          dotnet test -c Release --no-build
 
       - name: List Output Directory
         run: |
