@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <IsTestProject>true</IsTestProject>
-        <PublishAot>true</PublishAot>
     </PropertyGroup>
 
     <ItemGroup>
