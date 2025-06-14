@@ -1,7 +1,6 @@
 ﻿<Project>
     <PropertyGroup>
         <TrimMode>link</TrimMode>
-        <TrimmerSingleWarn>false</TrimmerSingleWarn>
     </PropertyGroup>
 
     <ItemGroup>
