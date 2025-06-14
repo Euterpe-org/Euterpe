@@ -5,9 +5,11 @@
 
     <PropertyGroup>
         <PublishAot>true</PublishAot>
+        <PublishTrimmed>true</PublishTrimmed>
         <PublishLzmaCompressed>true</PublishLzmaCompressed>
         <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
         <DebuggerSupport>false</DebuggerSupport>
+        <TrimmerSingleWarn>false</TrimmerSingleWarn>
     </PropertyGroup>
 
     <Import Project="$(MSBuildProjectDirectory)\$(MSBuildProjectName).props"
