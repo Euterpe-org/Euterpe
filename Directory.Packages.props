@@ -4,9 +4,9 @@
     </PropertyGroup>
     <!-- Package Group Versions -->
     <PropertyGroup>
-        <AvaloniaVersion>11.3.1</AvaloniaVersion>
+        <AvaloniaVersion>11.3.2</AvaloniaVersion>
         <UrsaVersion>1.11.1</UrsaVersion>
-        <VerifyVersion>30.3.1</VerifyVersion>
+        <VerifyVersion>30.4.0</VerifyVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.13.1</RoslynatorAnalyzersVersion>
     </PropertyGroup>
@@ -20,10 +20,10 @@
         <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Autofac" Version="8.3.0"/>
-        <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.0.3"/>
+        <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.0.4"/>
         <PackageVersion Include="CliWrap" Version="3.9.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
-        <PackageVersion Include="ConsoleAppFramework" Version="5.4.1"/>
+        <PackageVersion Include="ConsoleAppFramework" Version="5.5.0"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.4"/>
         <PackageVersion Include="Downloader" Version="3.3.4"/>
         <PackageVersion Include="DynamicData" Version="9.4.1"/>
@@ -39,7 +39,7 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
         <PackageVersion Include="Moq" Version="4.20.72"/>
-        <PackageVersion Include="Polyfill" Version="8.0.0"/>
+        <PackageVersion Include="Polyfill" Version="8.0.1"/>
         <PackageVersion Include="PublishAotCompressed" Version="1.0.5"/>
         <PackageVersion Include="R3" Version="1.3.0"/>
         <PackageVersion Include="R3Extensions.Avalonia" Version="1.3.0"/>
@@ -51,8 +51,8 @@
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="Spectre.Console" Version="0.50.0"/>
         <PackageVersion Include="Spectre.Console.Analyzer" Version="1.0.0"/>
-        <PackageVersion Include="System.Interactive.Async" Version="6.0.1"/>
-        <PackageVersion Include="System.Linq.Async" Version="6.0.1"/>
+        <PackageVersion Include="System.Interactive.Async" Version="6.0.3"/>
+        <PackageVersion Include="System.Linq.Async" Version="6.0.3"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.2"/>
         <PackageVersion Include="TUnit" Version="0.25.21"/>
         <PackageVersion Include="ValveKeyValue" Version="0.13.1.398"/>
@@ -61,7 +61,7 @@
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.1"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
-        <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.201"/>
+        <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.202"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
         <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
     </ItemGroup>
