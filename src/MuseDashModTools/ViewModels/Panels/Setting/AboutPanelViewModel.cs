@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.ViewModels.Panels.Setting;
 
-// ReSharper disable StringTypo
+// ReSharper disable StringLiteralTypo
 public sealed partial class AboutPanelViewModel : ViewModelBase
 {
     public ContributorGroup[] ContributorGroups { get; } =
