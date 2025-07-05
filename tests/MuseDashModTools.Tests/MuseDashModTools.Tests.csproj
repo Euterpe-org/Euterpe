@@ -11,6 +11,7 @@
         </PackageReference>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Moq"/>
+        <PackageReference Include="NetArchTest.eNhancedEdition"/>
         <PackageReference Include="RichardSzalay.MockHttp"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="Verify"/>
