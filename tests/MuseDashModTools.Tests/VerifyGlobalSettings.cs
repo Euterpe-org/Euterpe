@@ -8,5 +8,6 @@ public static class VerifyGlobalSettings
     public static void Initialize()
     {
         UseProjectRelativeDirectory("snapshots");
+        VerifierSettings.AddScrubber(sb => sb.Replace('\\', '/'));
     }
 }

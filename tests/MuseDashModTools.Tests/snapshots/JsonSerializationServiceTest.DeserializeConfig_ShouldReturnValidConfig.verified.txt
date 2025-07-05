@@ -1,5 +1,5 @@
 ﻿{
-  MuseDashFolder: SteamLibrary\steamapps\common\Muse Dash,
+  MuseDashFolder: SteamLibrary/steamapps/common/Muse Dash,
   CacheFolder: Cache,
   LanguageCode: zh-Hans,
   Theme: Dark,
@@ -8,15 +8,14 @@
   UpdateSource: GitHubRSS,
   DownloadPrerelease: false,
   IgnoreException: false,
-  ModLinksPath: Cache\ModLinks.json,
-  ChartFolder: Cache\Charts,
-  CustomAlbumsFolder: SteamLibrary\steamapps\common\Muse Dash\Custom_Albums,
-  ModsFolder: SteamLibrary\steamapps\common\Muse Dash\Mods,
-  UserDataFolder: SteamLibrary\steamapps\common\Muse Dash\UserData,
-  UserLibsFolder: SteamLibrary\steamapps\common\Muse Dash\UserLibs,
-  MelonLoaderFolder: SteamLibrary\steamapps\common\Muse Dash\MelonLoader,
-  MelonLoaderZipPath: SteamLibrary\steamapps\common\Muse Dash\MelonLoader.zip,
-  LatestLogPath: SteamLibrary\steamapps\common\Muse Dash\MelonLoader\Latest.log,
-  UnityDependencyZipPath: SteamLibrary\steamapps\common\Muse Dash\MelonLoader\Dependencies\Il2CppAssemblyGenerator\UnityDependencies_2019.4.32.zip,
-  Cpp2ILZipPath: SteamLibrary\steamapps\common\Muse Dash\MelonLoader\Dependencies\Il2CppAssemblyGenerator\Cpp2IL_2022.1.0-pre-release.10.zip
+  ChartFolder: Cache/Charts,
+  CustomAlbumsFolder: SteamLibrary/steamapps/common/Muse Dash/Custom_Albums,
+  ModsFolder: SteamLibrary/steamapps/common/Muse Dash/Mods,
+  UserDataFolder: SteamLibrary/steamapps/common/Muse Dash/UserData,
+  UserLibsFolder: SteamLibrary/steamapps/common/Muse Dash/UserLibs,
+  MelonLoaderFolder: SteamLibrary/steamapps/common/Muse Dash/MelonLoader,
+  MelonLoaderZipPath: SteamLibrary/steamapps/common/Muse Dash/MelonLoader.zip,
+  LatestLogPath: SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Latest.log,
+  UnityDependencyZipPath: SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/UnityDependencies_2019.4.32.zip,
+  Cpp2ILZipPath: SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL_2022.1.0-pre-release.10.zip
 }
