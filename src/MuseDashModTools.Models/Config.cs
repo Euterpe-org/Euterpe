@@ -52,9 +52,6 @@ public sealed partial class Config : ObservableObject
 
     // Ignored Paths
     [JsonIgnore]
-    public string ModLinksPath => GetCombinedPath(CacheFolder, "ModLinks.json");
-
-    [JsonIgnore]
     public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
 
     [JsonIgnore]

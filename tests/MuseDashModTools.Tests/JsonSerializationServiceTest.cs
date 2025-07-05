@@ -48,7 +48,8 @@ public sealed class JsonSerializationServiceTest
 
         var stream = new MemoryStream();
         await _jsonSerializationService.SerializeConfigAsync(stream, config);
-        await Verify(stream, "json");
+        stream.Position = 0;
+        await VerifyJson(stream);
     }
 
     [Test]
