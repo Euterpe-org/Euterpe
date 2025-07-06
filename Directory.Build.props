@@ -10,6 +10,7 @@
         <ExternalBuildsFolder>$(BaseOutputPath)ExternalBuilds\</ExternalBuildsFolder>
     </PropertyGroup>
 
+    <!-- Publishing Properties -->
     <PropertyGroup>
         <IsPublishing Condition="'$(_IsPublishing)' != '' And '$(IsPublishing)' == ''">$(_IsPublishing)</IsPublishing>
         <NativeLibraryDir Condition="'$(NativeLibraryDir)' == ''">$(SolutionDir)Native\</NativeLibraryDir>
