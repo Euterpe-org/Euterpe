@@ -3,6 +3,7 @@
 public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 {
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(InstallModTemplateCommand))]
     public partial bool DotNetSdkInstalled { get; set; }
 
     [ObservableProperty]
@@ -19,21 +20,25 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task InstallDotNetSdkAsync()
     {
+        Logger.ZLogInformation($"Installing DotNet SDK...");
         var result = await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(false);
         if (!result)
         {
             await MessageBoxService.ErrorAsync("Failed to install DotNet SDK").ConfigureAwait(false);
         }
 
+        Logger.ZLogInformation($"DotNet SDK installed successfully");
         DotNetSdkInstalled = true;
     }
 
     [RelayCommand(CanExecute = nameof(DotNetSdkInstalled))]
     private async Task InstallModTemplateAsync()
     {
+        Logger.ZLogInformation($"Installing Mod Template...");
         try
         {
             await PlatformService.InstallModTemplateAsync().ConfigureAwait(false);
+            Logger.ZLogInformation($"Mod Template installed successfully");
             ModTemplateInstalled = true;
         }
         catch (Exception ex)
