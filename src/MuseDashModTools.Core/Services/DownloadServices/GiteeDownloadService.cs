@@ -69,9 +69,9 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
@@ -124,9 +124,6 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
 
     [UsedImplicitly]
     public required ILogger<GiteeDownloadService> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }

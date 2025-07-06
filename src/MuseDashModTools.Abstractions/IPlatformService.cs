@@ -21,17 +21,44 @@ public interface IPlatformService
     /// <returns>Updater file path</returns>
     string GetUpdaterFilePath(string folderPath);
 
+    #region Mod Develop
+
     /// <summary>
-    ///     Reveal file with path
+    ///     Install dotnet runtime
     /// </summary>
-    /// <param name="filePath"></param>
-    void RevealFile(string filePath);
+    /// <returns></returns>
+    Task<bool> InstallDotNetRuntimeAsync();
+
+    /// <summary>
+    ///     Install dotnet sdk
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> InstallDotNetSdkAsync();
+
+    /// <summary>
+    ///     Install Mod Template
+    /// </summary>
+    /// <returns></returns>
+    Task InstallModTemplateAsync() =>
+        Cli.Wrap("dotnet")
+            .WithArguments(["new", "install", "MuseDash.Mod.Template"])
+            .ExecuteAsync();
 
     /// <summary>
     ///     Set MD_DIRECTORY environment variable
     /// </summary>
     /// <returns></returns>
     bool SetPathEnvironmentVariable();
+
+    #endregion Mod Develop
+
+    #region File Operations
+
+    /// <summary>
+    ///     Reveal file with path
+    /// </summary>
+    /// <param name="filePath"></param>
+    void RevealFile(string filePath);
 
     /// <summary>
     ///     Open Folder
@@ -53,4 +80,6 @@ public interface IPlatformService
     /// <param name="uri"></param>
     /// <returns></returns>
     Task OpenUriAsync(string uri);
+
+    #endregion File Operations
 }

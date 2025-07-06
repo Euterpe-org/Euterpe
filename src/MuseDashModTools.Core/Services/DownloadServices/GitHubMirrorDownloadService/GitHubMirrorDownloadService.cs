@@ -92,10 +92,10 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
     {
         var releaseBaseUrl = ModToolsReleaseDownloadBaseUrl.Replace(GitHubBaseUrl, PrimaryReleaseMirrorUrl);
-        var downloadUrl = $"{releaseBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+        var downloadUrl = $"{releaseBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
@@ -166,9 +166,6 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
     [UsedImplicitly]
     public required ILogger<GitHubMirrorDownloadService> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }
