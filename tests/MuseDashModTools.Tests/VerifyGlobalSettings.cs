@@ -8,6 +8,7 @@ public static class VerifyGlobalSettings
     public static void Initialize()
     {
         UseProjectRelativeDirectory("snapshots");
+        // Make path separators consistent across platforms
         VerifierSettings.AddScrubber(sb => sb.Replace('\\', '/'));
     }
 }

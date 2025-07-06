@@ -47,6 +47,8 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
         InstalledMelonLoaderVersion = MelonLoaderVersion;
         MelonLoaderInstallStatus = InstallStatus.Installed;
+
+        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
     }
 
     [RelayCommand]
@@ -64,6 +66,27 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         var mbSize = args.TotalBytesToReceive / (1024d * 1024d);
         DownloadText = string.Format(XAML.MelonLoader_State_Downloading, fileName, $"{mbSize:F2}");
         Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
+    }
+
+    private async Task CheckAndInstallDotNetRuntimeAsync()
+    {
+        var runtimeInstalled = await LocalService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true);
+        if (runtimeInstalled)
+        {
+            return;
+        }
+
+        var result = await MessageBoxService.NoticeAsync("MelonLoader requires .NET Runtime to run properly. Click OK to install it.")
+            .ConfigureAwait(true);
+
+        if (result is MessageBoxResult.OK)
+        {
+            var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
+            if (!success)
+            {
+                await MessageBoxService.ErrorAsync("Failed to install .NET Runtime").ConfigureAwait(false);
+            }
+        }
     }
 
     #region Injections

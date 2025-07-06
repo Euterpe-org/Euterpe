@@ -34,7 +34,8 @@
                     <Button
                         Grid.Column="0"
                         Classes="Transparent Card"
-                        CommandParameter="https://dotnet.microsoft.com/download/dotnet/6.0">
+                        Command="{Binding InstallDotNetSdkCommand}"
+                        IsEnabled="{Binding !DotNetSdkInstalled}">
                         <Button.Styles>
                             <Style
                                 Selector="Button:pointerover Border.Hover">
@@ -49,7 +50,7 @@
                                     Orientation="Vertical">
                                     <TextBlock
                                         Classes="CardTitle"
-                                        Text=".NET 6 SDK">
+                                        Text=".NET 8 SDK">
                                         <TextBlock.Foreground>
                                             <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                                 <GradientStop Offset="0" Color="#AA7AE0" />
@@ -86,7 +87,8 @@
                     <Button
                         Grid.Column="1"
                         Classes="Transparent Card"
-                        CommandParameter="https://baidu.com">
+                        Command="{Binding InstallModTemplateCommand}"
+                        IsEnabled="{Binding !ModTemplateInstalled}">
                         <Button.Styles>
                             <Style
                                 Selector="Button:pointerover Border.Hover">

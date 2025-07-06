@@ -6,6 +6,9 @@ namespace MuseDashModTools.Core;
 
 internal sealed class WindowsService : IPlatformService
 {
+    private const string DotnetRuntimeUrl = "https://aka.ms/dotnet/6.0/dotnet-runtime-win-x64.exe";
+    private const string DotnetSdkUrl = "https://aka.ms/dotnet/8.0/dotnet-sdk-win-x64.exe";
+
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     private static readonly FrozenSet<string> WindowsPaths = new[]
         {
@@ -45,10 +48,58 @@ internal sealed class WindowsService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater.exe");
 
+    public async Task<bool> InstallDotNetRuntimeAsync()
+    {
+        try
+        {
+            var tempFilePath = Path.GetTempFileName();
+            await DownloadManager.DownloadFileAsync(DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+            Process.Start(
+                new ProcessStartInfo(tempFilePath)
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to install .NET Runtime");
+            return false;
+        }
+    }
+
+    public async Task<bool> InstallDotNetSdkAsync()
+    {
+        try
+        {
+            var tempFilePath = Path.GetTempFileName();
+            await DownloadManager.DownloadFileAsync(DotnetSdkUrl, tempFilePath).ConfigureAwait(false);
+            Process.Start(
+                new ProcessStartInfo(tempFilePath)
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to install .NET SDK");
+            return false;
+        }
+    }
+
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public void RevealFile(string filePath)
     {
-        Process.Start("explorer.exe", "/select, " + filePath);
+        Process.Start(
+            new ProcessStartInfo("explorer.exe", $"/select, {filePath}")
+            {
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        );
         Logger.ZLogInformation($"Reveal file: {filePath}");
     }
 
@@ -115,6 +166,9 @@ internal sealed class WindowsService : IPlatformService
 
     [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }
+
+    [UsedImplicitly]
+    public required IDownloadManager DownloadManager { get; init; }
 
     [UsedImplicitly]
     public required ILogger<WindowsService> Logger { get; init; }

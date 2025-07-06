@@ -35,5 +35,8 @@ internal sealed partial class UpdateService : IUpdateService
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
 
+    [UsedImplicitly]
+    public required IPlatformService PlatformService { get; init; }
+
     #endregion Injections
 }

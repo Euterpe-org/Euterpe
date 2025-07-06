@@ -97,9 +97,9 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
@@ -170,9 +170,6 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 
     [UsedImplicitly]
     public required ILogger<GitHubDownloadService> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }
