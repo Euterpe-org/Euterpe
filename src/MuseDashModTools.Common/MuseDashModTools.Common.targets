@@ -30,6 +30,7 @@ public static partial class BuildInfo
 namespace $(RootNamespace)%3B
 public static partial class GlobalConstants
 {
+    public const string DotNetVersion = "$(TargetFrameworkVersion)"%3B;
     public const string AvaloniaVersion = "$(AvaloniaVersion)"%3B
 }
       ]]></GeneratedText>
