@@ -157,8 +157,8 @@
   <data name="Page_Home" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="Page_LogAnalysis" xml:space="preserve">
-    <value>Log Analysis</value>
+  <data name="Page_Logging" xml:space="preserve">
+      <value>Logging</value>
   </data>
   <data name="Page_Modding" xml:space="preserve">
     <value>Modding</value>

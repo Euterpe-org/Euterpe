@@ -38,7 +38,7 @@ public sealed class PageNavigateGenerator : IncrementalGeneratorBase
 
         var propertyDeclaration = classDeclaration.ChildNodes()
             .OfType<PropertyDeclarationSyntax>()
-            .Single(x => x.Identifier.Text == "NavItems");
+            .Single(x => x.Identifier.Text is "NavItems");
 
         var initializer = propertyDeclaration?.Initializer?.Value;
         if (initializer is not CollectionExpressionSyntax collectionExpression)
@@ -68,6 +68,10 @@ public sealed class PageNavigateGenerator : IncrementalGeneratorBase
 
                         partial class {{className}}
                         {
+                            {{GetGeneratedCodeAttribute(nameof(PageNavigateGenerator))}}
+                            [UsedImplicitly]
+                            public required NavigationService NavigationService { get; init; }
+
                             {{GetGeneratedCodeAttribute(nameof(PageNavigateGenerator))}}
                             protected override void Navigate(NavItem? value)
                             {

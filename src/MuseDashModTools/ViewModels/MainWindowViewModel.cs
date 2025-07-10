@@ -31,9 +31,6 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     public required LocalizationService LocalizationService { get; init; }
 
     [UsedImplicitly]
-    public required NavigationService NavigationService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<MainWindowViewModel> Logger { get; init; }
 
 #if RELEASE
