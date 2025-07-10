@@ -14,15 +14,16 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial double DownloadProgress { get; set; }
 
-    public override Task InitializeAsync()
+    public override async Task InitializeAsync()
     {
-        base.InitializeAsync();
+        await base.InitializeAsync().ConfigureAwait(true);
 
         InstalledMelonLoaderVersion = LocalService.ReadMelonLoaderVersion();
         MelonLoaderInstallStatus = InstalledMelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
 
+        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
+
         Logger.ZLogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
-        return Task.CompletedTask;
     }
 
     [RelayCommand]
@@ -47,8 +48,6 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
         InstalledMelonLoaderVersion = MelonLoaderVersion;
         MelonLoaderInstallStatus = InstallStatus.Installed;
-
-        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
     }
 
     [RelayCommand]
@@ -76,16 +75,16 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        var result = await MessageBoxService.NoticeAsync("MelonLoader requires .NET Runtime to run properly. Click OK to install it.")
-            .ConfigureAwait(true);
-
-        if (result is MessageBoxResult.OK)
+        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_DotNetRuntime_Install).ConfigureAwait(true);
+        if (result is not MessageBoxResult.OK)
         {
-            var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
-            if (!success)
-            {
-                await MessageBoxService.ErrorAsync("Failed to install .NET Runtime").ConfigureAwait(false);
-            }
+            return;
+        }
+
+        var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
+        if (!success)
+        {
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntime_Install_Failed).ConfigureAwait(false);
         }
     }
 
