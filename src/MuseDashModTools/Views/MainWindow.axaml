@@ -28,7 +28,7 @@
         ColumnDefinitions="Auto,*">
         <DockPanel
             Grid.Column="0"
-            Width="85">
+            MinWidth="85">
             <u:NavMenu
                 DockPanel.Dock="Top"
                 HeaderBinding="{Binding ., Mode=OneTime}"
