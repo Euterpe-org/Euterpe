@@ -21,8 +21,8 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     private async Task InstallDotNetSdkAsync()
     {
         Logger.ZLogInformation($"Installing DotNet SDK...");
-        var result = await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(false);
-        if (!result)
+        var success = await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(false);
+        if (!success)
         {
             await MessageBoxService.ErrorAsync("Failed to install DotNet SDK").ConfigureAwait(false);
         }

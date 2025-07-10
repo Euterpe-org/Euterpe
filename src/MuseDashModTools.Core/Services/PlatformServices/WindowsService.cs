@@ -56,14 +56,23 @@ internal sealed class WindowsService : IPlatformService
             Logger.ZLogInformation($"Downloading .NET Runtime from {DotnetRuntimeUrl} to {tempFilePath}");
             await DownloadManager.DownloadFileAsync(DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
 
-            Logger.ZLogInformation($"Starting .NET Runtime installer: {tempFilePath}");
-            Process.Start(
+            Logger.ZLogInformation($"Launching .NET Runtime installer: {tempFilePath}");
+            using var process = Process.Start(
                 new ProcessStartInfo(tempFilePath)
                 {
                     UseShellExecute = false,
                     CreateNoWindow = true
                 });
-            return true;
+
+            if (process is null)
+            {
+                return false;
+            }
+
+            await process.WaitForExitAsync().ConfigureAwait(false);
+            Logger.ZLogInformation($".NET Runtime installer finished with exit code: {process.ExitCode}");
+
+            return process.ExitCode is 0;
         }
         catch (Exception ex)
         {
@@ -77,14 +86,26 @@ internal sealed class WindowsService : IPlatformService
         try
         {
             var tempFilePath = Path.GetTempFileName();
+            Logger.ZLogInformation($"Downloading .NET SDK from {DotnetSdkUrl} to {tempFilePath}");
             await DownloadManager.DownloadFileAsync(DotnetSdkUrl, tempFilePath).ConfigureAwait(false);
-            Process.Start(
+
+            Logger.ZLogInformation($"Launching .NET SDK installer: {tempFilePath}");
+            using var process = Process.Start(
                 new ProcessStartInfo(tempFilePath)
                 {
                     UseShellExecute = false,
                     CreateNoWindow = true
                 });
-            return true;
+
+            if (process is null)
+            {
+                return false;
+            }
+
+            await process.WaitForExitAsync().ConfigureAwait(false);
+            Logger.ZLogInformation($".NET SDK installer finished with exit code: {process.ExitCode}");
+
+            return process.ExitCode is 0;
         }
         catch (Exception ex)
         {
