@@ -53,7 +53,10 @@ internal sealed class WindowsService : IPlatformService
         try
         {
             var tempFilePath = Path.GetTempFileName();
+            Logger.ZLogInformation($"Downloading .NET Runtime from {DotnetRuntimeUrl} to {tempFilePath}");
             await DownloadManager.DownloadFileAsync(DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+
+            Logger.ZLogInformation($"Starting .NET Runtime installer: {tempFilePath}");
             Process.Start(
                 new ProcessStartInfo(tempFilePath)
                 {

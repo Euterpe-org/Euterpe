@@ -291,4 +291,11 @@ Muse Dash Mod Tools已是最新版
   <data name="Title_Warning" xml:space="preserve">
     <value>警告</value>
   </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+      <value>未找到 .Net 6 Runtime
+点击确定安装</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+      <value>无法安装 .Net 6 Runtime</value>
+  </data>
 </root>

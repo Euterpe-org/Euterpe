@@ -75,8 +75,9 @@ Are you sure you want to disable this mod?</value>
   <data name="MessageBox_Content_DisableReverseDependency" xml:space="preserve">
     <value>Do you want to disable the mods dependent on {0}?</value>
   </data>
-  <data name="MessageBox_Content_DotNetRuntimeNotFound" xml:space="preserve">
-      <value>.NET 6 Runtime not found</value>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+      <value>.NET 6 Runtime not found
+Click OK to install</value>
   </data>
   <data name="MessageBox_Content_DotNetSDKNotFound" xml:space="preserve">
       <value>.NET SDK not found</value>
@@ -297,5 +298,8 @@ and check your antivirus</value>
   </data>
   <data name="Title_Warning" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+      <value>Failed to install .NET 6 Runtime</value>
   </data>
 </root>
