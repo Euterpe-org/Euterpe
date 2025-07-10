@@ -79,9 +79,6 @@
   <data name="Page_Home" xml:space="preserve">
     <value>Домашняя страница</value>
   </data>
-  <data name="Page_LogAnalysis" xml:space="preserve">
-    <value>Анализ</value>
-  </data>
   <data name="Page_Setting" xml:space="preserve">
     <value>Настройки</value>
   </data>

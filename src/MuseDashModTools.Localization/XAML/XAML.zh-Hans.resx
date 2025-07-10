@@ -157,8 +157,8 @@
   <data name="Page_Home" xml:space="preserve">
     <value>主页</value>
   </data>
-  <data name="Page_LogAnalysis" xml:space="preserve">
-    <value>日志分析</value>
+  <data name="Page_Logging" xml:space="preserve">
+      <value>日志</value>
   </data>
   <data name="Page_Modding" xml:space="preserve">
     <value>模组</value>

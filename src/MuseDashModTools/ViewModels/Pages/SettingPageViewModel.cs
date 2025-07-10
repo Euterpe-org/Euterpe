@@ -12,6 +12,13 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
         new(Panel_Setting_Advanced, AdvancedPanelName)
     ];
 
+    #region Injections
+
+    [UsedImplicitly]
+    public required ILogger<SettingPageViewModel> Logger { get; init; }
+
+    #endregion Injections
+
     public override Task InitializeAsync()
     {
         base.InitializeAsync();
@@ -19,14 +26,4 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
         Logger.ZLogInformation($"{nameof(SettingPageViewModel)} Initialized");
         return Task.CompletedTask;
     }
-
-    #region Injections
-
-    [UsedImplicitly]
-    public required ILogger<SettingPageViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required NavigationService NavigationService { get; init; }
-
-    #endregion Injections
 }
