@@ -18,7 +18,7 @@ internal sealed partial class LocalService : ILocalService
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6.");
+        return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.NETCore.App 6.");
     }
 
     public async Task<bool> CheckDotNetSdkInstalledAsync()
