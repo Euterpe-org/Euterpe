@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Tests;
 
-public class VerifyChecksTests
+public sealed class VerifyChecksTests
 {
     /*[Test]
     public Task Run() => VerifyChecks.Run();*/
