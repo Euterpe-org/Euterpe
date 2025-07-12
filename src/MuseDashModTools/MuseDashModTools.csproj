@@ -22,7 +22,6 @@
         <PackageReference Include="Avalonia.Desktop"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
-        <PackageReference Include="Downloader"/>
         <PackageReference Include="HotAvalonia" PrivateAssets="all"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
