@@ -1,0 +1,8 @@
+﻿{
+    "schedule": "daily",
+    "ignoredFiles": [
+        "/src/MuseDashModTools/Assets/Raw/*"
+    ],
+    "aggressiveCompression": "false",
+    "minKBReduced": 500
+}
