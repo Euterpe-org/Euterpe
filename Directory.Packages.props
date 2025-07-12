@@ -5,7 +5,7 @@
     <!-- Package Group Versions -->
     <PropertyGroup>
         <AvaloniaVersion>11.3.2</AvaloniaVersion>
-        <UrsaVersion>1.11.1</UrsaVersion>
+        <UrsaVersion>1.12.0</UrsaVersion>
         <VerifyVersion>30.4.0</VerifyVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.13.1</RoslynatorAnalyzersVersion>
@@ -25,7 +25,7 @@
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.5.0"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.4"/>
-        <PackageVersion Include="Downloader" Version="3.3.4"/>
+        <PackageVersion Include="Downloader" Version="4.0.2"/>
         <PackageVersion Include="DynamicData" Version="9.4.1"/>
         <PackageVersion Include="HotAvalonia" Version="3.0.0"/>
         <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)"/>
@@ -48,7 +48,7 @@
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.2.1"/>
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
-        <PackageVersion Include="Semi.Avalonia" Version="11.2.1.8"/>
+        <PackageVersion Include="Semi.Avalonia" Version="11.2.1.9"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="Spectre.Console" Version="0.50.0"/>
         <PackageVersion Include="Spectre.Console.Analyzer" Version="1.0.0"/>
