@@ -25,6 +25,9 @@ public sealed partial class Config : ObservableObject
     [ObservableProperty]
     public partial bool ShowConsole { get; set; } = true;
 
+    [ObservableProperty]
+    public partial bool AlwaysShowScrollBar { get; set; } = true;
+
     // Download Settings
     [ObservableProperty]
     public partial DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
@@ -43,10 +46,11 @@ public sealed partial class Config : ObservableObject
 
     public SemVersion? SkipVersion { get; set; }
 
-    // Ignored Paths
-    [JsonIgnore]
-    public string ModLinksPath => GetCombinedPath(CacheFolder, "ModLinks.json");
+    // Advanced Settings
+    [ObservableProperty]
+    public partial bool IgnoreException { get; set; }
 
+    // Ignored Paths
     [JsonIgnore]
     public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
 

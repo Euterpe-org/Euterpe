@@ -2,18 +2,18 @@
 
 public sealed partial class DownloadPanelViewModel : ViewModelBase
 {
-    public static string[] DownloadSources { get; } =
+    public static IReadOnlyList<LocalizedString> DownloadSources { get; } =
     [
-        XAML_DownloadSource_Github,
-        XAML_DownloadSource_GithubMirror,
-        XAML_DownloadSource_Gitee,
-        XAML_DownloadSource_Custom
+        Setting_DownloadSource_GitHub,
+        Setting_DownloadSource_GitHubMirror,
+        Setting_DownloadSource_Gitee,
+        Setting_DownloadSource_Custom
     ];
 
-    public static string[] UpdateSources { get; } =
+    public static IReadOnlyList<LocalizedString> UpdateSources { get; } =
     [
-        XAML_UpdateSources_GithubAPI,
-        XAML_UpdateSources_GithubRSS
+        Setting_UpdateSources_GitHubAPI,
+        Setting_UpdateSources_GitHubRSS
     ];
 
     [ObservableProperty]
@@ -22,9 +22,9 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedUpdateSourceIndex { get; set; }
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    public override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         SelectedDownloadSourceIndex = (int)Config.DownloadSource;
         SelectedUpdateSourceIndex = (int)Config.UpdateSource;

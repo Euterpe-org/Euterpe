@@ -8,49 +8,73 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class LocalService : ILocalService
 {
-    public async Task CheckDotNetRuntimeInstallAsync()
+    public async Task<bool> CheckDotNetRuntimeInstalledAsync()
     {
         var outputStringBuilder = new StringBuilder();
-        await Cli.Wrap("dotnet")
+        var result = await Cli.Wrap("dotnet")
             .WithArguments("--list-runtimes")
+            .WithValidation(CommandResultValidation.None)
             .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        if (!outputStringBuilder.ToString().Contains("Microsoft.WindowsDesktop.App 6."))
-        {
-            Logger.ZLogInformation($"DotNet Runtime not found, showing error message box...");
-            await MessageBoxService.ErrorMessageBoxAsync(MsgBox_Content_DotNetRuntimeNotFound).ConfigureAwait(true);
-        }
+        return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.NETCore.App 6.");
     }
 
-    public IEnumerable<string> GetModFilePaths() => Directory.GetFiles(Config.ModsFolder)
-        .Where(x => Path.GetExtension(x) == ".disabled" || Path.GetExtension(x) == ".dll");
+    public async Task<bool> CheckDotNetSdkInstalledAsync()
+    {
+        var outputStringBuilder = new StringBuilder();
+        var result = await Cli.Wrap("dotnet")
+            .WithArguments("--list-sdks")
+            .WithValidation(CommandResultValidation.None)
+            .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
+            .ExecuteAsync()
+            .ConfigureAwait(false);
 
-    public IEnumerable<string> GetLibFilePaths() => Directory.GetFiles(Config.UserLibsFolder);
+        return result.IsSuccess && !outputStringBuilder.ToString().IsNullOrEmpty();
+    }
+
+    public async Task<bool> CheckModTemplateInstalledAsync()
+    {
+        var result = await Cli.Wrap("dotnet")
+            .WithArguments(["new", "list", "musedashmod"])
+            .WithValidation(CommandResultValidation.None)
+            .ExecuteAsync()
+            .ConfigureAwait(false);
+
+        return result.IsSuccess;
+    }
+
+    public string[] GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
+        .Where(x => Path.GetExtension(x) is ".disabled" || Path.GetExtension(x) is ".dll")
+        .ToArray();
+
+    public string[] GetLibFilePaths() => Directory.EnumerateFiles(Config.UserLibsFolder)
+        .Where(x => Path.GetExtension(x) is ".dll")
+        .ToArray();
 
     public async Task<bool> InstallMelonLoaderAsync()
     {
         if (!FileSystemService.CheckFileExists(Config.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("MelonLoader zip file not found").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("MelonLoader zip file not found").ConfigureAwait(false);
             return false;
         }
 
         if (!ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("Failed to unzip MelonLoader").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Failed to unzip MelonLoader").ConfigureAwait(false);
             return false;
         }
 
         if (!FileSystemService.TryDeleteFile(Config.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader zip file").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_DeleteZip_Failed, Config.MelonLoaderZipPath).ConfigureAwait(false);
             return false;
         }
 
         Logger.ZLogInformation($"MelonLoader installed successfully");
-        await MessageBoxService.SuccessMessageBoxAsync("MelonLoader installed successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Install_Success).ConfigureAwait(false);
         return true;
     }
 
@@ -67,18 +91,18 @@ internal sealed partial class LocalService : ILocalService
                 continue;
             }
 
-            await MessageBoxService.ErrorMessageBoxAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
             return false;
         }
 
         if (!FileSystemService.TryDeleteDirectory(Config.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
-            await MessageBoxService.ErrorMessageBoxAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
             return false;
         }
 
         Logger.ZLogInformation($"MelonLoader uninstalled successfully");
-        await MessageBoxService.SuccessMessageBoxAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
         return true;
     }
 
@@ -95,22 +119,18 @@ internal sealed partial class LocalService : ILocalService
         return path;
     }
 
-    public ModDto? LoadModFromPath(string filePath)
+    public async Task<ModDto?> LoadModFromPathAsync(string filePath)
     {
         var mod = new ModDto
         {
             FileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath),
-            IsDisabled = Path.GetExtension(filePath) == ".disabled"
+            IsDisabled = Path.GetExtension(filePath) is ".disabled"
         };
 
-        var module = ModuleDefinition.FromFile(filePath);
-        if (module.Assembly is null)
-        {
-            Logger.ZLogError($"Invalid mod file: {filePath}");
-            return null;
-        }
+        var bytes = await File.ReadAllBytesAsync(filePath).ConfigureAwait(false);
+        var assembly = AssemblyDefinition.FromBytes(bytes);
 
-        var attribute = module.Assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").SingleOrDefault();
+        var attribute = assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
         if (attribute is null)
         {
             Logger.ZLogWarning($"{filePath} is not a mod file but inside Mods folder");
@@ -120,40 +140,19 @@ internal sealed partial class LocalService : ILocalService
         mod.Name = attribute.Signature!.FixedArguments[1].ToString();
         mod.LocalVersion = attribute.Signature!.FixedArguments[2].ToString();
         mod.Author = attribute.Signature!.FixedArguments[3].ToString();
-        mod.SHA256 = HashUtils.ComputeSHA256HashFromPath(filePath);
+        mod.SHA256 = HashUtils.ComputeSHA256HashFromBytes(bytes);
 
         return mod;
     }
 
-    public LibDto LoadLibFromPath(string filePath) =>
+    public async Task<LibDto> LoadLibFromPathAsync(string filePath) =>
         new()
         {
             Name = Path.GetFileNameWithoutExtension(filePath),
             FileName = Path.GetFileName(filePath),
-            SHA256 = HashUtils.ComputeSHA256HashFromPath(filePath),
+            SHA256 = await HashUtils.ComputeSHA256HashFromPathAsync(filePath).ConfigureAwait(false),
             IsLocal = true
         };
-
-    public void LaunchGame(bool isModded)
-    {
-        var launchArguments = new StringBuilder();
-        if (!isModded)
-        {
-            launchArguments.Append("//--no-mods");
-        }
-        else if (!Config.ShowConsole)
-        {
-            launchArguments.Append("//--melonloader.hideconsole");
-        }
-
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "steam://rungameid/774171" + launchArguments,
-            UseShellExecute = true
-        });
-
-        Logger.ZLogInformation($"Launching game with launch arguments: {launchArguments}");
-    }
 
     public async ValueTask<string> ReadGameVersionAsync()
     {
@@ -174,11 +173,33 @@ internal sealed partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.ZLogCritical(ex, $"Read game version failed, showing error message box...");
-            await MessageBoxService.FormatErrorMessageBoxAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
             Environment.Exit(0);
         }
 
         return string.Empty;
+    }
+
+    public string? ReadMelonLoaderVersion()
+    {
+        ReadOnlySpan<string> paths =
+        [
+            Path.Combine(Config.MelonLoaderFolder, "net6", "MelonLoader.dll"),
+            Path.Combine(Config.MelonLoaderFolder, "MelonLoader.dll")
+        ];
+
+        foreach (var path in paths)
+        {
+            if (!File.Exists(path))
+            {
+                continue;
+            }
+
+            return ReadFileVersion(path);
+        }
+
+        Logger.ZLogInformation($"MelonLoader.dll not found");
+        return null;
     }
 
     public bool ExtractZipFile(string zipPath, string extractPath)

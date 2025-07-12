@@ -1,6 +1,4 @@
-﻿using DynamicData;
-
-namespace MuseDashModTools.Abstractions;
+﻿namespace MuseDashModTools.Abstractions;
 
 public interface IModManageService
 {

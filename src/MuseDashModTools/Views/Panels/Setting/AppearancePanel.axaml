@@ -1,37 +1,39 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
-             x:Class="MuseDashModTools.Views.Panels.Setting.AppearancePanel"
-             x:DataType="pages:AppearancePanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+    x:Class="MuseDashModTools.Views.Panels.Setting.AppearancePanel"
+    x:DataType="vm:AppearancePanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
-        <pages:AppearancePanelViewModel />
+        <vm:AppearancePanelViewModel />
     </Design.DataContext>
 
-    <StackPanel Orientation="Vertical"
-                Spacing="50"
-                Margin="30"
-                HorizontalAlignment="Left"
-                MaxWidth="800"
-                MinWidth="600">
+    <StackPanel
+        Classes="ContentListRoot">
 
-        <!-- Language -->
-        <!-- TODO: Implement languages switch -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
-            <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Language" />
-            <TextBlock Margin="0, -10, 0, 0"
-                       Foreground="Gray"
-                       TextWrapping="Wrap"
-                       Text="The current version does not support switching languages." />
-        </StackPanel>
+        <!--  Language  -->
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_Language}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}">
+            <StackPanel
+                Classes="ContentListItemHorizontal">
+                <ComboBox
+                    ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
+                    MinWidth="200"
+                    SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}" />
+                <Button
+                    Command="{Binding ApplyLanguageCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Apply}}" />
+            </StackPanel>
+        </mdmt:ContentListItem>
 
     </StackPanel>
 </UserControl>

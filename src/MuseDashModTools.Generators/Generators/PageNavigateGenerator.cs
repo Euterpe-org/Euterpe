@@ -1,15 +1,17 @@
 namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class PageNavigateGenerator : IIncrementalGenerator
+public sealed class PageNavigateGenerator : IncrementalGeneratorBase
 {
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    protected override string ExpectedRootNamespace => MuseDashModToolsNamespace;
+
+    protected override void InitializeCore(
+        IncrementalGeneratorInitializationContext context,
+        IncrementalValueProvider<bool> isValidProvider)
     {
-        context.RegisterSourceOutput(
-            context.SyntaxProvider.CreateSyntaxProvider(
-                FilterNode,
-                ExtractDataFromContext),
-            GenerateFromData);
+        var syntaxProvider = context.SyntaxProvider
+            .CreateSyntaxProvider(FilterNode, ExtractDataFromContext);
+        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
@@ -36,7 +38,7 @@ public sealed class PageNavigateGenerator : IIncrementalGenerator
 
         var propertyDeclaration = classDeclaration.ChildNodes()
             .OfType<PropertyDeclarationSyntax>()
-            .Single(x => x.Identifier.Text == "NavItems");
+            .Single(x => x.Identifier.Text is "NavItems");
 
         var initializer = propertyDeclaration?.Initializer?.Value;
         if (initializer is not CollectionExpressionSyntax collectionExpression)
@@ -59,14 +61,17 @@ public sealed class PageNavigateGenerator : IIncrementalGenerator
             return;
         }
 
-        var sb = new IndentedStringBuilder();
+        var sb = new IndentedGeneratorStringBuilder();
 
-        sb.AppendLine(Header);
         sb.AppendLine($$"""
                         namespace {{nameSpace}};
 
                         partial class {{className}}
                         {
+                            {{GetGeneratedCodeAttribute(nameof(PageNavigateGenerator))}}
+                            [UsedImplicitly]
+                            public required NavigationService NavigationService { get; init; }
+
                             {{GetGeneratedCodeAttribute(nameof(PageNavigateGenerator))}}
                             protected override void Navigate(NavItem? value)
                             {

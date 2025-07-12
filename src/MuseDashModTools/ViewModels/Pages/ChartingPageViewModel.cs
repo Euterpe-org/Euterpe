@@ -6,21 +6,21 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new("Charts", ChartsPanelName),
-        new("Charter", CharterPanelName)
+        new(Panel_Charting_ChartManage, ChartManagePanelName),
+        new(Panel_Charting_CharterToolkit, CharterToolkitPanelName)
     ];
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>
     [
-        new("Open",
+        new(DropDownButton_Open,
         [
-            new DropDownMenuItem("CustomAlbums Folder", OpenFolderCommand, Config.CustomAlbumsFolder)
+            new DropDownMenuItem(Folder_CustomAlbums, OpenFolderCommand, Config.CustomAlbumsFolder)
         ])
     ];
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    public override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         Logger.ZLogInformation($"{nameof(ChartingPageViewModel)} Initialized");
         return Task.CompletedTask;
@@ -30,9 +30,6 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required ILogger<ModdingPageViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required NavigationService NavigationService { get; init; }
 
     [UsedImplicitly]
     public required Config Config { get; init; }

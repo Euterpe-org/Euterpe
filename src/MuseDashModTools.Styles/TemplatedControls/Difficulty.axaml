@@ -1,23 +1,32 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
     <Design.PreviewWith>
-        <Border Padding="20">
-            <mdmt:Difficulty Text="Text" />
+        <Border
+            Padding="20">
+            <mdmt:Difficulty
+                Text="Text" />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="mdmt|Difficulty">
+    <Style
+        Selector="mdmt|Difficulty">
         <Setter Property="Template">
             <ControlTemplate>
-                <StackPanel Margin="5,0" IsVisible="{TemplateBinding IsVisible}">
+                <StackPanel
+                    IsVisible="{TemplateBinding IsVisible}"
+                    Margin="5,0">
 
-                    <Image Width="30"
-                           Height="30"
-                           Margin="5,0"
-                           Source="{TemplateBinding Source}" />
+                    <Image
+                        Height="30"
+                        Margin="5,0"
+                        Source="{TemplateBinding Source}"
+                        Width="30" />
 
-                    <TextBlock FontSize="20" Text="{TemplateBinding Text}" />
+                    <TextBlock
+                        FontSize="20"
+                        Text="{TemplateBinding Text}" />
                 </StackPanel>
             </ControlTemplate>
         </Setter>

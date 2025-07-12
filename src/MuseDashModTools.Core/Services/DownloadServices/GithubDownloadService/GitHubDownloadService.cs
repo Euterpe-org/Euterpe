@@ -21,7 +21,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         Logger.ZLogInformation($"Downloading MelonLoader and Dependencies from GitHub...");
 
         Downloader.DownloadStarted += onDownloadStarted;
-        Downloader.DownloadProgressChanged += (_, e) => downloadProgress.Report(e.ProgressPercentage);
+        Downloader.DownloadProgressChanged += ReportProgress;
 
         try
         {
@@ -36,6 +36,13 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
             Logger.ZLogError(ex, $"Failed to download MelonLoader from GitHub");
             return false;
         }
+        finally
+        {
+            Downloader.DownloadStarted -= onDownloadStarted;
+            Downloader.DownloadProgressChanged -= ReportProgress;
+        }
+
+        void ReportProgress(object? sender, DownloadProgressChangedEventArgs args) => downloadProgress.Report(args.ProgressPercentage);
     }
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
@@ -53,9 +60,12 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {
@@ -73,9 +83,12 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {
@@ -84,9 +97,9 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
@@ -157,9 +170,6 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 
     [UsedImplicitly]
     public required ILogger<GitHubDownloadService> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }

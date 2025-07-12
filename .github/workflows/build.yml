@@ -7,9 +7,11 @@ on:
       - 'dev'
     tags:
       - 'v?[0-9]+.[0-9]+.[0-9]+'
-    paths:
-      - src/**
-      - tests/**
+    paths-ignore:
+      - 'assets/**'
+      - 'CHANGELOG.md'
+      - 'LICENSE.txt'
+      - 'README.md'
   pull_request:
     branches:
       - 'master'
@@ -25,18 +27,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build-type:
-          - Debug
-          - Release
         target-platform:
           - { os: ubuntu-latest, name: linux }
           - { os: windows-latest, name: win }
         target-arch:
           - x64
-          - arm64
+          # - arm64
         dotnet-version:
           - '9.0'
+
     runs-on: ${{ matrix.target-platform.os }}
+    env:
+      AvAccelerateKey: ${{ secrets.AVACCELERATEKEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,19 +50,18 @@ jobs:
 
       - name: Build Project
         run: |
-          dotnet publish -a ${{ matrix.target-arch }} -c ${{ matrix.build-type }}
+          dotnet publish
 
       - name: Test Project
         run: |
-          dotnet test -c ${{ matrix.build-type }}
+          dotnet test -c Release --no-build
 
-      - name: List Result
-        working-directory: ./
+      - name: List Output Directory
         run: |
-          ls -l bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/${{matrix.target-platform.name}}-${{ matrix.target-arch }}/publish
+          ls -la bin/Output
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: MuseDashModTools-${{ matrix.build-type }}-${{matrix.target-platform.name}}-net${{ matrix.dotnet-version }}-${{ matrix.target-arch }}
-          path: bin/${{ matrix.build-type }}/net${{ matrix.dotnet-version }}/${{matrix.target-platform.name}}-${{ matrix.target-arch }}/publish/*
+          name: MuseDashModTools-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
+          path: bin/Output/*

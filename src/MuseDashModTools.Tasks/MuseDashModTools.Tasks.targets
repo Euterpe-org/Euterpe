@@ -1,0 +1,13 @@
+﻿<Project>
+    <PropertyGroup>
+        <AssemblyPath>$(ExternalBuildsFolder)$(MSBuildThisFileName).dll</AssemblyPath>
+    </PropertyGroup>
+
+    <Target Name="BuildTaskDll" BeforeTargets="BeforeBuild">
+        <MSBuild Projects="..\MuseDashModTools.Tasks\MuseDashModTools.Tasks.csproj" Targets="Build"/>
+    </Target>
+
+    <UsingTask TaskName="$(MSBuildThisFileName).GenerateModToolsStyles"
+               AssemblyFile="$(AssemblyPath)"
+               TaskFactory="TaskHostFactory"/>
+</Project>

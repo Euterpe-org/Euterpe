@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Pages;
 
-public partial class ModdingPage : ReactiveUserControl<ModdingPageViewModel>
+public sealed partial class ModdingPage : UserControl
 {
     public ModdingPage()
     {

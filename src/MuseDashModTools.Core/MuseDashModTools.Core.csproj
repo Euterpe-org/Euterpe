@@ -1,18 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <ProjectReference Include="..\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj"/>
-        <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="AsmResolver.DotNet"/>
         <PackageReference Include="AssetsTools.NET"/>
         <PackageReference Include="AsyncAwaitBestPractices"/>
         <PackageReference Include="Autofac"/>
-        <PackageReference Include="CliWrap"/>
-        <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Semver"/>
         <PackageReference Include="System.Interactive.Async"/>
         <PackageReference Include="System.Linq.Async"/>
@@ -25,7 +21,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\MuseDashModTools.Core.Generators\MuseDashModTools.Core.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\MuseDashModTools.Abstractions\MuseDashModTools.Abstractions.csproj"/>
+        <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\MuseDashModTools.Localization\MuseDashModTools.Localization.csproj"/>
     </ItemGroup>
 
 </Project>

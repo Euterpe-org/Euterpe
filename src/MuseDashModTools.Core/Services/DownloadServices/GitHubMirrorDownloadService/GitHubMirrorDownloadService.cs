@@ -55,9 +55,12 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {
@@ -75,9 +78,12 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {
@@ -86,10 +92,10 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
     {
         var releaseBaseUrl = ModToolsReleaseDownloadBaseUrl.Replace(GitHubBaseUrl, PrimaryReleaseMirrorUrl);
-        var downloadUrl = $"{releaseBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+        var downloadUrl = $"{releaseBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
@@ -160,9 +166,6 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
     [UsedImplicitly]
     public required ILogger<GitHubMirrorDownloadService> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }

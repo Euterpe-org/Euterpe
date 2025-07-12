@@ -1,0 +1,15 @@
+﻿{
+  MuseDashFolder: SteamLibrary/steamapps/common/Muse Dash,
+  CacheFolder: Cache,
+  LanguageCode: zh-Hans,
+  Theme: Dark,
+  ShowConsole: true,
+  AlwaysShowScrollBar: true,
+  DownloadSource: GitHub,
+  UpdateSource: GitHubRSS,
+  GitHubToken: null,
+  CustomDownloadSource: null,
+  DownloadPrerelease: false,
+  SkipVersion: null,
+  IgnoreException: false
+}

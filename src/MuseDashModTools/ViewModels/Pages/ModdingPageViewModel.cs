@@ -6,24 +6,24 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new("Mods", ModsPanelName),
-        new("Melon Loader", MelonLoaderPanelName),
-        new("Develop", DevelopPanelName)
+        new(Panel_Modding_ModManage, ModManagePanelName),
+        new(Panel_Modding_MelonLoader, MelonLoaderPanelName),
+        new(Panel_Modding_ModDevelop, ModDevelopPanelName)
     ];
 
     public ObservableCollection<DropDownButtonItem> DropDownButtons =>
     [
-        new("Open",
+        new(DropDownButton_Open,
         [
-            new DropDownMenuItem("Mods Folder", OpenFolderCommand, Config.ModsFolder),
-            new DropDownMenuItem("UserData Folder", OpenFolderCommand, Config.UserDataFolder),
-            new DropDownMenuItem("UserLib Folder", OpenFolderCommand, Config.UserLibsFolder)
+            new DropDownMenuItem(Folder_Mods, OpenFolderCommand, Config.ModsFolder),
+            new DropDownMenuItem(Folder_UserData, OpenFolderCommand, Config.UserDataFolder),
+            new DropDownMenuItem(Folder_UserLibs, OpenFolderCommand, Config.UserLibsFolder)
         ])
     ];
 
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
+    public override Task InitializeAsync()
     {
-        base.OnActivatedAsync(disposables);
+        base.InitializeAsync();
 
         Logger.ZLogInformation($"{nameof(ModdingPageViewModel)} Initialized");
         return Task.CompletedTask;
@@ -33,9 +33,6 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required ILogger<ModdingPageViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required NavigationService NavigationService { get; init; }
 
     [UsedImplicitly]
     public required Config Config { get; init; }

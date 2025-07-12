@@ -5,7 +5,7 @@ namespace MuseDashModTools.Converters;
 public static class FuncValueConverters
 {
     private const string IconPrefix = "SemiIcon";
-    private static readonly IResourceService _resourceService = App.Container.Resolve<IResourceService>();
+    private static readonly IResourceService _resourceService = IocContainer.Resolve<IResourceService>();
 
     public static FuncValueConverter<string, StreamGeometry?> SemiIconConverter { get; } = new(iconKeyName =>
     {

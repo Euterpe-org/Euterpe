@@ -4,29 +4,26 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new("About", AboutPanelName),
-        new("Appearance", AppearancePanelName),
-        new("Experience", ExperiencePanelName),
-        new("File Management", FileManagementPanelName),
-        new("Download", DownloadPanelName),
-        new("Advanced", AdvancedPanelName)
+        new(Panel_Setting_About, AboutPanelName),
+        new(Panel_Setting_Appearance, AppearancePanelName),
+        new(Panel_Setting_Experience, ExperiencePanelName),
+        new(Panel_Setting_FileManagement, FileManagementPanelName),
+        new(Panel_Setting_Download, DownloadPanelName),
+        new(Panel_Setting_Advanced, AdvancedPanelName)
     ];
-
-    protected override Task OnActivatedAsync(CompositeDisposable disposables)
-    {
-        base.OnActivatedAsync(disposables);
-
-        Logger.ZLogInformation($"{nameof(SettingPageViewModel)} Initialized");
-        return Task.CompletedTask;
-    }
 
     #region Injections
 
     [UsedImplicitly]
     public required ILogger<SettingPageViewModel> Logger { get; init; }
 
-    [UsedImplicitly]
-    public required NavigationService NavigationService { get; init; }
-
     #endregion Injections
+
+    public override Task InitializeAsync()
+    {
+        base.InitializeAsync();
+
+        Logger.ZLogInformation($"{nameof(SettingPageViewModel)} Initialized");
+        return Task.CompletedTask;
+    }
 }

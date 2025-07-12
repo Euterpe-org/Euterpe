@@ -1,9 +1,6 @@
-using System.Reactive;
-using System.Reactive.Linq;
-
 namespace MuseDashModTools.ViewModels;
 
-public partial class ViewModelBase : ObservableObject, IActivatableViewModel
+public partial class ViewModelBase : ObservableObject
 {
     #region Injections
 
@@ -12,38 +9,7 @@ public partial class ViewModelBase : ObservableObject, IActivatableViewModel
 
     #endregion Injections
 
-    public ViewModelBase()
-    {
-        this.WhenActivated(disposables =>
-        {
-            Observable.FromAsync(() => OnActivatedAsync(disposables))
-                .Subscribe(OnNext, OnError, OnCompleted)
-                .DisposeWith(disposables);
-
-            Disposable.Create(OnDeactivated)
-                .DisposeWith(disposables);
-        });
-    }
-
-    public ViewModelActivator Activator { get; } = new();
-
-    protected virtual Task OnActivatedAsync(CompositeDisposable disposables) => Task.CompletedTask;
-
-    protected virtual void OnNext(Unit unit)
-    {
-    }
-
-    protected virtual void OnError(Exception ex)
-    {
-    }
-
-    protected virtual void OnCompleted()
-    {
-    }
-
-    protected virtual void OnDeactivated()
-    {
-    }
+    public virtual Task InitializeAsync() => Task.CompletedTask;
 
     [RelayCommand]
     private Task OpenFileAsync(string filePath) => PlatformService.OpenFileAsync(filePath);

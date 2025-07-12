@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllGameVersionCompatible" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="Button_Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="Button_CheckUpdate" xml:space="preserve">
+    <value>Проверить обновления</value>
+  </data>
+  <data name="Button_HelpTranslate" xml:space="preserve">
+    <value>Помочь с переводом</value>
+  </data>
+  <data name="Button_Install" xml:space="preserve">
+    <value>Установить</value>
+  </data>
+  <data name="Button_Reinstall" xml:space="preserve">
+    <value>Переустановить</value>
+  </data>
+  <data name="Button_Uninstall" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Button_Update" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="ChartFilterType_Easy" xml:space="preserve">
+    <value>Легко</value>
+  </data>
+  <data name="ChartFilterType_Hard" xml:space="preserve">
+    <value>Сложно</value>
+  </data>
+  <data name="ChartFilterType_Hidden" xml:space="preserve">
+    <value>Скрытый</value>
+  </data>
+  <data name="ChartFilterType_Master" xml:space="preserve">
+    <value>Мастер</value>
+  </data>
+  <data name="Folder_Mods" xml:space="preserve">
+    <value>Моды</value>
+  </data>
+  <data name="Folder_UserData" xml:space="preserve">
+    <value>UserData</value>
+  </data>
+  <data name="ModFilterType_All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="ModFilterType_Enabled" xml:space="preserve">
+    <value>Включенные</value>
+  </data>
+  <data name="ModFilterType_Incompatible" xml:space="preserve">
+    <value>Несовместимые</value>
+  </data>
+  <data name="ModFilterType_Installed" xml:space="preserve">
+    <value>Установленные</value>
+  </data>
+  <data name="ModFilterType_Outdated" xml:space="preserve">
+    <value>Устаревшие</value>
+  </data>
+  <data name="ModInfo_Dependencies" xml:space="preserve">
+      <value>Зависимости</value>
+  </data>
+  <data name="ModState_Modified" xml:space="preserve">
+    <value>Модифицирована</value>
+  </data>
+  <data name="Page_Home" xml:space="preserve">
+    <value>Домашняя страница</value>
+  </data>
+  <data name="Page_Setting" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>Чарты</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>Моды</value>
+  </data>
+  <data name="Panel_Setting_About" xml:space="preserve">
+    <value>Инфо</value>
+  </data>
+  <data name="SearchBarWatermark_Chart" xml:space="preserve">
+        <value>Найти чарт  (Имя, Автор, Создатель)</value>
+    </data>
+  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+        <value>Искать моды  (Имя, Автор)</value>
+    </data>
+  <data name="Setting_DownloadSource_Custom" xml:space="preserve">
+    <value>Другой</value>
+  </data>
+  <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
+    <value>Gitee</value>
+  </data>
+  <data name="Setting_DownloadSource_GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
+    <value>GitHub Mirror</value>
+  </data>
+  <data name="Setting_Title_DownloadPrerelease" xml:space="preserve">
+    <value>Скачать пре-релиз</value>
+  </data>
+  <data name="Setting_Title_DownloadSource" xml:space="preserve">
+    <value>Источник скачивания</value>
+  </data>
+  <data name="Setting_Title_Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Setting_Title_MuseDashFolderPath" xml:space="preserve">
+    <value>Путь к папке Muse Dash</value>
+  </data>
+  <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
+    <value>GitHub API</value>
+  </data>
+  <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
+    <value>GitHub RSS</value>
+  </data>
+  <data name="XAML_Analyze" xml:space="preserve">
+    <value>Анализировать логи</value>
+  </data>
+  <data name="XAML_AskType_Always" xml:space="preserve">
+    <value>Всегда спрашивать</value>
+  </data>
+  <data name="XAML_AskType_No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="XAML_AskType_Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="XAML_ChangePath" xml:space="preserve">
+    <value>Изменить путь</value>
+  </data>
+  <data name="XAML_Charter" xml:space="preserve">
+    <value>Создатель: </value>
+  </data>
+  <data name="XAML_ChartFilterTypes" xml:space="preserve">
+    <value>Фильтровать по</value>
+  </data>
+  <data name="XAML_ChartSortOptions" xml:space="preserve">
+    <value>Сортировать по: </value>
+  </data>
+  <data name="XAML_ChartSortOption_Default" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
+    <value>Скачивания</value>
+  </data>
+  <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
+    <value>Последние</value>
+  </data>
+  <data name="XAML_ChartSortOption_Level" xml:space="preserve">
+    <value>Сложность</value>
+  </data>
+  <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
+    <value>Лайки</value>
+  </data>
+  <data name="XAML_ChartSortOption_Name" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="XAML_Chart_Downloads" xml:space="preserve">
+    <value>Скачиваний: </value>
+  </data>
+  <data name="XAML_Chart_Likes" xml:space="preserve">
+    <value>Лайки: </value>
+  </data>
+  <data name="XAML_ChooseChartPath" xml:space="preserve">
+    <value>Выберите папку чарта</value>
+  </data>
+  <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
+    <value>Ссылка должна заканчиваться на "/" и должна быть доступна и анализируема при добавлении "ModLinks.json" в конец адреса (та же структура, что и в репозитории Github)
+Вступает в силу после перезапуска приложения</value>
+  </data>
+  <data name="XAML_Download_Chart" xml:space="preserve">
+    <value>Скачать</value>
+  </data>
+  <data name="XAML_Folder_Log" xml:space="preserve">
+    <value>Открыть папку с логами</value>
+  </data>
+  <data name="XAML_Font" xml:space="preserve">
+    <value>Шрифт:</value>
+  </data>
+  <data name="XAML_InfoJson_Author" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="XAML_InfoJson_BPM" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="XAML_InfoJson_ChartName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
+    <value>Сложность</value>
+  </data>
+  <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
+    <value>Hide Bms Difficulty</value>
+  </data>
+  <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
+    <value>Hide Bms Message</value>
+  </data>
+  <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
+    <value>Hide Bms Mode</value>
+  </data>
+  <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
+    <value>Создатель чарта</value>
+  </data>
+  <data name="XAML_InfoJson_Scene" xml:space="preserve">
+    <value>Сцена</value>
+  </data>
+  <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
+    <value>Теги для поиска</value>
+  </data>
+  <data name="XAML_Mod_Duplicate" xml:space="preserve">
+    <value>Дубликат к:</value>
+  </data>
+  <data name="XAML_ReportBug" xml:space="preserve">
+    <value>Нашли баг?</value>
+  </data>
+  <data name="XAML_Scene_Candyland" xml:space="preserve">
+    <value>Candyland</value>
+  </data>
+  <data name="XAML_Scene_Castle" xml:space="preserve">
+    <value>Castle</value>
+  </data>
+  <data name="XAML_Scene_DJMAX" xml:space="preserve">
+    <value>DJMAX</value>
+  </data>
+  <data name="XAML_Scene_LetsGroove" xml:space="preserve">
+    <value>Let's Groove</value>
+  </data>
+  <data name="XAML_Scene_Oriental" xml:space="preserve">
+    <value>Oriental</value>
+  </data>
+  <data name="XAML_Scene_RainyNight" xml:space="preserve">
+    <value>RainyNight</value>
+  </data>
+  <data name="XAML_Scene_Retrocity" xml:space="preserve">
+    <value>Retrocity</value>
+  </data>
+  <data name="XAML_Scene_SpaceStation" xml:space="preserve">
+    <value>Space Station</value>
+  </data>
+  <data name="XAML_Scene_Touhou" xml:space="preserve">
+    <value>Touhou</value>
+  </data>
+  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
+    <value>Отключение зависимости при удалении мода</value>
+  </data>
+  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
+    <value>Отключение зависимости при отключении мода</value>
+  </data>
+  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
+    <value>Включение зависимости при включении мода</value>
+  </data>
+  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
+    <value>Включение зависимости при установке мода</value>
+  </data>
+  <data name="XAML_TroubleShoot" xml:space="preserve">
+    <value>Поиск неисправностей</value>
+  </data>
+  <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
+    <value>Ссылка на источник скачивания</value>
+  </data>
+</root>

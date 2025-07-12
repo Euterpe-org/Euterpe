@@ -1,57 +1,47 @@
-using Avalonia.Media.Imaging;
-
 namespace MuseDashModTools.Models;
 
+[PublicAPI]
 public sealed class Chart
 {
     [JsonPropertyName("analytics")]
     public Analytic Analytics { get; set; } = null!;
 
     [JsonPropertyName("_id")]
-    public string IdStr { get; set; } = string.Empty;
+    public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("id")]
-    public int Id { get; set; }
+    [JsonPropertyName("title")]
+    public string Title { get; set; } = string.Empty;
 
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("title_romanized")]
+    public string? TitleRomanized { get; set; }
 
-    [JsonPropertyName("author")]
-    public string Author { get; set; } = string.Empty;
-
-    [JsonPropertyName("bpm")]
-    public string Bpm { get; set; } = string.Empty;
-
-    [JsonPropertyName("difficulties")]
-    public string[] Difficulties { get; set; } = [];
+    [JsonPropertyName("artist")]
+    public string Artist { get; set; } = string.Empty;
 
     [JsonPropertyName("charter")]
     public string Charter { get; set; } = string.Empty;
 
-    [JsonPropertyName("charter_id")]
-    public string[] CharterId { get; set; } = [];
+    [JsonPropertyName("bpm")]
+    public string Bpm { get; set; } = string.Empty;
+
+    [JsonPropertyName("length")]
+    public float Length { get; set; }
+
+    [JsonPropertyName("owner_uid")]
+    public int OwnerUid { get; set; }
+
+    [JsonPropertyName("sheets")]
+    public Sheet[] Sheets { get; set; } = [];
+
+    [JsonPropertyName("ranked")]
+    public bool Ranked { get; set; }
+
+    [JsonPropertyName("searchTags")]
+    public string[] SearchTags { get; set; } = [];
+
+    [JsonPropertyName("timestamp")]
+    public DateTime Timestamp { get; set; }
 
     [JsonPropertyName("__v")]
     public int V { get; set; }
-
-    [JsonIgnore]
-    public Bitmap? Cover { get; set; }
-
-    [JsonIgnore]
-    public string EasyLevel => Difficulties[0];
-
-    [JsonIgnore]
-    public string HardLevel => Difficulties[1];
-
-    [JsonIgnore]
-    public string MasterLevel => Difficulties[2];
-
-    [JsonIgnore]
-    public string HiddenLevel => Difficulties[3];
-
-    public int GetHighestLevel()
-    {
-        var highestLevel = Difficulties.Max(x => x.ParseLevel());
-        return highestLevel;
-    }
 }

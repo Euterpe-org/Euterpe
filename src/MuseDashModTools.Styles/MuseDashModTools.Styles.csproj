@@ -1,21 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\MuseDashModTools.Tasks\MuseDashModTools.Tasks.targets"/>
 
     <PropertyGroup>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <DebugType>none</DebugType>
-    </PropertyGroup>
+    <Target Name="GenerateModToolsStyles" BeforeTargets="BeforeBuild">
+        <GenerateModToolsStyles AvaloniaResourceFiles="@(AvaloniaXaml)"/>
+    </Target>
 
     <ItemGroup>
         <PackageReference Include="Avalonia"/>
-        <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Semi.Avalonia"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\MuseDashModTools.Models\MuseDashModTools.Models.csproj"/>
+        <ProjectReference Include="..\MuseDashModTools.Tasks\MuseDashModTools.Tasks.csproj"/>
     </ItemGroup>
 </Project>

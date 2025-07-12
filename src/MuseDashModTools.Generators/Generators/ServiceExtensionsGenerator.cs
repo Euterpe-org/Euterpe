@@ -1,30 +1,54 @@
 ﻿namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
+public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
 {
-    public void Initialize(IncrementalGeneratorInitializationContext context)
+    protected override string ExpectedRootNamespace => MuseDashModToolsNamespace;
+
+    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
-        context.RegisterSourceOutput(
-            context.SyntaxProvider.CreateSyntaxProvider(
-                FilterNode, ExtractDataFromContext).Collect(),
-            GenerateFromData);
+        var syntaxProvider = context.SyntaxProvider.CreateSyntaxProvider(
+            FilterNode, ExtractDataFromContext).Collect();
+        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
-        node is ClassDeclarationSyntax { BaseList.Types: var types } &&
-        types.Any(x => x.Type.ToString().Contains("UserControl") || x.Type.ToString().Contains("Window"));
+        node is ClassDeclarationSyntax { BaseList.Types: var types }
+        && types[0].ToString() is "UserControl" or "Window" or "UrsaWindow" or "Application";
 
-    private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _) =>
-        context.Node is not ClassDeclarationSyntax classDeclaration
-            ? null
-            : new ViewData(classDeclaration.Identifier.Text);
-
-    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataList)
+    private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
     {
-        var sb = new IndentedStringBuilder();
-        sb.AppendLine(Header);
+        if (context.Node is not ClassDeclarationSyntax { BaseList.Types: var types } classDeclaration)
+        {
+            return null;
+        }
+
+        var controlType = ControlType.UserControl;
+        var baseTypeName = types[0].ToString();
+
+        controlType = baseTypeName switch
+        {
+            "UserControl" => ControlType.UserControl,
+            "Window" or "UrsaWindow" => ControlType.Window,
+            "Application" => ControlType.Application,
+            _ => controlType
+        };
+
+        return new ViewData(classDeclaration.Identifier.Text, controlType);
+    }
+
+    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataCollection)
+    {
+        if (dataCollection is [])
+        {
+            return;
+        }
+
+        var sb = new GeneratorStringBuilder();
         sb.AppendLine($$"""
+                        using global::Avalonia.Interactivity;
+                        using static global::MuseDashModTools.IocContainer;
+
                         namespace MuseDashModTools.Extensions;
 
                         partial class ServiceExtensions
@@ -34,20 +58,32 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
                             {
                         """);
 
-        sb.IncreaseIndent(2);
-        foreach (var data in dataList)
+        foreach (var data in dataCollection)
         {
-            if (data is not var (name))
+            if (data is not var (name, controlType))
             {
                 continue;
             }
 
-            sb.AppendLine($"builder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
-            sb.AppendLine($"builder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+            if (controlType is ControlType.Application)
+            {
+                sb.AppendLine(
+                    $"""
+                     builder.RegisterType<{name}ViewModel>()
+                        .OnActivated(x => new ValueTask(x.Instance.InitializeAsync()))
+                        .PropertiesAutowired()
+                        .SingleInstance();
+                     """);
+            }
+            else
+            {
+                sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+                GenerateViewRegistration(sb, name, controlType);
+            }
+
             sb.AppendLine();
         }
 
-        sb.ResetIndent();
         sb.AppendLine("""
                           }
                       }
@@ -56,5 +92,31 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
         spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
     }
 
-    private sealed record ViewData(string Name);
+    private static void GenerateViewRegistration(GeneratorStringBuilder sb, string name, ControlType controlType)
+    {
+        var (eventName, eventArgs) = controlType switch
+        {
+            ControlType.UserControl => ("Initialized", ""),
+            ControlType.Window => ("Loaded", "<RoutedEventArgs>"),
+            _ => throw new UnreachableException()
+        };
+
+        sb.AppendLine($$"""
+                                builder.Register<{{name}}>(ctx => new {{name}}{ DataContext = ctx.Resolve<{{name}}ViewModel>() })
+                                .OnActivated(x => Observable.FromEventHandler{{eventArgs}}(
+                                        h => x.Instance.{{eventName}} += h,
+                                        h => x.Instance.{{eventName}} -= h)
+                                    .SubscribeAwait((_, _) => new ValueTask(Resolve<{{name}}ViewModel>().InitializeAsync())))
+                                .SingleInstance();
+                        """);
+    }
+
+    private enum ControlType
+    {
+        UserControl,
+        Window,
+        Application
+    }
+
+    private sealed record ViewData(string Name, ControlType ControlType);
 }

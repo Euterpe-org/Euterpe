@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.Styles.TemplatedControls;
 
-public class NaviButtonsControl : TemplatedControl
+public sealed class NaviButtonsControl : TemplatedControl
 {
     public static readonly StyledProperty<IEnumerable<DropDownButtonItem>> SourceProperty =
         AvaloniaProperty.Register<NaviButtonsControl, IEnumerable<DropDownButtonItem>>(nameof(Source));

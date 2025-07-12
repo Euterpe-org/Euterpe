@@ -1,37 +1,51 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:semi="https://irihi.tech/semi">
-
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:semi="https://irihi.tech/semi">
     <semi:SemiTheme />
-
     <Styles.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
-                <ResourceInclude x:Key="Light" Source="/Resources/LightResource.axaml" />
-                <ResourceInclude x:Key="Dark" Source="/Resources/DarkResource.axaml" />
+                <ResourceInclude
+                    x:Key="Light"
+                    Source="/Resources/LightResource.axaml" />
+                <ResourceInclude
+                    x:Key="Dark"
+                    Source="/Resources/DarkResource.axaml" />
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="/Resources/SharedResource.axaml" />
+                <ResourceInclude
+                    Source="/Resources/SharedResource.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
-
-    <!--  Extend Controls  -->
-    <StyleInclude Source="/ExtendControls/DifficultyFilter.axaml" />
-    <StyleInclude Source="/ExtendControls/ImageButton.axaml" />
-    <StyleInclude Source="/ExtendControls/NaviPanelListControl.axaml" />
-
+    <!--  Extended Controls  -->
+    <StyleInclude
+        Source="/ExtendedControls/DifficultyFilter.axaml" />
+    <StyleInclude
+        Source="/ExtendedControls/NaviPanelListControl.axaml" />
     <!--  Templated Controls  -->
-    <StyleInclude Source="/TemplatedControls/Difficulty.axaml" />
-    <StyleInclude Source="/TemplatedControls/NaviButtonsControl.axaml" />
-    <StyleInclude Source="/TemplatedControls/ContributorCardControl.axaml" />
-
-    <!--  Styles  -->
-    <StyleInclude Source="/Styles/BorderStyles.axaml" />
-    <StyleInclude Source="/Styles/ButtonStyles.axaml" />
-    <StyleInclude Source="/Styles/ImageStyles.axaml" />
-    <StyleInclude Source="/Styles/LabelStyles.axaml" />
-    <StyleInclude Source="/Styles/SplitButtonStyles.axaml" />
-    <StyleInclude Source="/Styles/StackPanelStyles.axaml" />
-    <StyleInclude Source="/Styles/TextBlockStyles.axaml" />
+    <StyleInclude
+        Source="/TemplatedControls/ContentListItem.axaml" />
+    <StyleInclude
+        Source="/TemplatedControls/ContributorCardControl.axaml" />
+    <StyleInclude
+        Source="/TemplatedControls/Difficulty.axaml" />
+    <StyleInclude
+        Source="/TemplatedControls/NaviButtonsControl.axaml" />
+    <!--  Control Styles  -->
+    <StyleInclude
+        Source="/Styles/BorderStyles.axaml" />
+    <StyleInclude
+        Source="/Styles/ButtonStyles.axaml" />
+    <StyleInclude
+        Source="/Styles/LabelStyles.axaml" />
+    <StyleInclude
+        Source="/Styles/StackPanelStyles.axaml" />
+    <StyleInclude
+        Source="/Styles/TextBlockStyles.axaml" />
+    <StyleInclude
+        Source="/Styles/TextBoxStyles.axaml" />
+    <StyleInclude
+        Source="/Styles/UniformGridStyles.axaml" />
 </Styles>

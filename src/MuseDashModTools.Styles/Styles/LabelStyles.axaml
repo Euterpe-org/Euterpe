@@ -1,8 +1,14 @@
-﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--  Label styles for different states  -->
-    <Style Selector="Label.StateLabel">
-        <Setter Property="Theme" Value="{StaticResource TagLabel}" />
+    <Style
+        Selector="Label">
+        <!--  Label Styles for Different States  -->
+        <Style
+            Selector="^.TagLabel">
+            <Setter Property="Theme" Value="{StaticResource TagLabel}" />
+        </Style>
     </Style>
 
 </Styles>

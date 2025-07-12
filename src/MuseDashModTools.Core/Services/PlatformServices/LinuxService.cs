@@ -32,15 +32,25 @@ internal sealed class LinuxService : IPlatformService
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater");
 
+    public Task<bool> InstallDotNetRuntimeAsync() => throw new NotSupportedException();
+
+    public Task<bool> InstallDotNetSdkAsync() => throw new NotSupportedException();
+
+    public bool SetPathEnvironmentVariable() => throw new NotSupportedException();
+
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public void RevealFile(string filePath)
     {
-        Process.Start("xdg-open", filePath);
+        Process.Start(
+            new ProcessStartInfo("xdg-open", filePath)
+            {
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        );
+
         Logger.ZLogInformation($"Reveal file: {filePath}");
     }
-
-    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public bool SetPathEnvironmentVariable() => false;
 
     public async Task OpenFolderAsync(string folderPath)
     {
