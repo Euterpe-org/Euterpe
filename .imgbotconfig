@@ -4,5 +4,5 @@
         "/src/MuseDashModTools/Assets/Raw/*"
     ],
     "aggressiveCompression": "false",
-    "minKBReduced": 500
+    "minKBReduced": 10
 }
