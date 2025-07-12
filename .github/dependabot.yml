@@ -1,14 +1,7 @@
 version: 2
 updates:
-  - package-ecosystem: "nuget"
-    target-branch: "dev/rewrite"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-
   - package-ecosystem: "github-actions"
-    target-branch: "dev/rewrite"
+    target-branch: "dev"
     directory: "/"
     schedule:
       interval: "daily"
