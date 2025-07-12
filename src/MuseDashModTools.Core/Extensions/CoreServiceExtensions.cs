@@ -33,7 +33,7 @@ public static class CoreServiceExtensions
             new DownloadConfiguration
             {
                 ChunkCount = 8,
-                MaxTryAgainOnFailover = 4,
+                MaxTryAgainOnFailure = 4,
                 ParallelCount = 4,
                 ParallelDownload = true,
                 Timeout = 3000
