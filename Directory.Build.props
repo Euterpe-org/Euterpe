@@ -1,13 +1,45 @@
 <Project>
     <PropertyGroup>
+        <Version>2.0.0-beta1</Version>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>preview</LangVersion>
         <Nullable>enable</Nullable>
         <IsAotCompatible>true</IsAotCompatible>
+        <BaseOutputPath>$(SolutionDir)bin\</BaseOutputPath>
+        <ExternalBuildsFolder>$(BaseOutputPath)ExternalBuilds\</ExternalBuildsFolder>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <DebugType>none</DebugType>
+    <!-- Publishing Properties -->
+    <PropertyGroup>
+        <IsPublishing Condition="'$(_IsPublishing)' != '' And '$(IsPublishing)' == ''">$(_IsPublishing)</IsPublishing>
+        <NativeLibraryDir Condition="'$(NativeLibraryDir)' == ''">$(SolutionDir)Native\</NativeLibraryDir>
     </PropertyGroup>
+
+    <!-- Third Party Library Properties-->
+    <PropertyGroup>
+        <MeziantouAnalysisMode>None</MeziantouAnalysisMode>
+        <MvvmToolkitEnableINotifyPropertyChangingSupport>false</MvvmToolkitEnableINotifyPropertyChangingSupport>
+    </PropertyGroup>
+
+    <!-- Platform Properties -->
+    <PropertyGroup>
+        <IsWindows Condition="'$([System.OperatingSystem]::IsWindows())' == 'true'">true</IsWindows>
+        <IsLinux Condition="'$([System.OperatingSystem]::IsLinux())' == 'true'">true</IsLinux>
+        <IsMacOS Condition="'$([System.OperatingSystem]::IsMacOS())' == 'true'">true</IsMacOS>
+
+        <DefineConstants Condition="'$(IsWindows)' == 'true'">$(DefineConstants);WINDOWS</DefineConstants>
+        <DefineConstants Condition="'$(IsLinux)' == 'true'">$(DefineConstants);LINUX</DefineConstants>
+        <DefineConstants Condition="'$(IsMacOS)' == 'true'">$(DefineConstants);MACOS</DefineConstants>
+    </PropertyGroup>
+
+    <!-- Avalonia Accelerate -->
+    <ItemGroup>
+        <AvaloniaUILicenseKey Include="$(AvAccelerateKey)"/>
+    </ItemGroup>
+    <PropertyGroup>
+        <DefineConstants Condition="'$(AvAccelerateKey)' != ''">$(DefineConstants);ACCELERATE</DefineConstants>
+    </PropertyGroup>
+
+    <Import Condition="'$(Configuration)' == 'Release'" Project="Release.props"/>
 </Project>

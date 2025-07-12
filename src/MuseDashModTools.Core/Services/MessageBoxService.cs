@@ -2,70 +2,78 @@
 
 internal sealed class MessageBoxService : IMessageBoxService
 {
-    #region Confirm MessageBox
+    #region Confirm
 
-    public Task<MessageBoxResult> WarningConfirmMessageBoxAsync(string message, string title = "Warning") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Warning, MessageBoxButton.YesNo);
+    // Normal
+    public Task<MessageBoxResult> WarningConfirmAsync(string message) =>
+        MessageBox.ShowAsync(message, Title_Warning, MessageBoxIcon.Warning, MessageBoxButton.YesNo);
 
-    public Task<MessageBoxResult> FormatWarningConfirmMessageBoxAsync(string message, params ReadOnlySpan<object?> args) =>
-        WarningConfirmMessageBoxAsync(string.Format(message, args));
+    public Task<MessageBoxResult> WarningConfirmAsync(string message, params ReadOnlySpan<object> args) =>
+        WarningConfirmAsync(string.Format(message, args));
 
-    public Task<MessageBoxResult> NoticeConfirmMessageBoxAsync(string message, string title = "Notice") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Information, MessageBoxButton.YesNo);
+    public Task<MessageBoxResult> NoticeConfirmAsync(string message) =>
+        MessageBox.ShowAsync(message, Title_Notice, MessageBoxIcon.Information, MessageBoxButton.YesNo);
 
-    public Task<MessageBoxResult> FormatNoticeConfirmMessageBoxAsync(string message, params ReadOnlySpan<object?> args) =>
-        NoticeConfirmMessageBoxAsync(string.Format(message, args));
+    public Task<MessageBoxResult> NoticeConfirmAsync(string message, params ReadOnlySpan<object> args) =>
+        NoticeConfirmAsync(string.Format(message, args));
+
+    // Overlay
+    public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message) =>
+        MessageBox.ShowOverlayAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.YesNo);
+
+    public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message, params ReadOnlySpan<object> args) =>
+        NoticeConfirmOverlayAsync(string.Format(message, args));
 
     #endregion
 
-    #region Error MessageBox
+    #region Error
 
     // Normal
-    public Task<MessageBoxResult> ErrorMessageBoxAsync(string message, string title = "Error") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Error);
+    public Task<MessageBoxResult> ErrorAsync(string message) =>
+        MessageBox.ShowAsync(message, Title_Error, MessageBoxIcon.Error);
 
-    public Task<MessageBoxResult> FormatErrorMessageBoxAsync(string message, params ReadOnlySpan<object?> args) =>
-        ErrorMessageBoxAsync(string.Format(message, args));
+    public Task<MessageBoxResult> ErrorAsync(string message, params ReadOnlySpan<object> args) =>
+        ErrorAsync(string.Format(message, args));
 
     // Overlay
-    public Task<MessageBoxResult> ErrorMessageBoxOverlayAsync(string message, string title = "Error") =>
-        MessageBox.ShowOverlayAsync(message, title, icon: MessageBoxIcon.Error, button: MessageBoxButton.OK);
+    public Task<MessageBoxResult> ErrorOverlayAsync(string message) =>
+        MessageBox.ShowOverlayAsync(message, Title_Error, icon: MessageBoxIcon.Error, button: MessageBoxButton.OK);
 
-    public Task<MessageBoxResult> FormatErrorMessageBoxOverlayAsync(string message, params ReadOnlySpan<object?> args) =>
-        ErrorMessageBoxOverlayAsync(string.Format(message, args));
+    public Task<MessageBoxResult> ErrorOverlayAsync(string message, params ReadOnlySpan<object> args) =>
+        ErrorOverlayAsync(string.Format(message, args));
 
     #endregion
 
-    #region Notice MessageBox
+    #region Notice
 
     // Normal
-    public Task<MessageBoxResult> NoticeMessageBoxAsync(string message, string title = "Notice") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Information);
+    public Task<MessageBoxResult> NoticeAsync(string message) =>
+        MessageBox.ShowAsync(message, Title_Notice, MessageBoxIcon.Information);
 
-    public Task<MessageBoxResult> FormatNoticeMessageBoxAsync(string message, params ReadOnlySpan<object?> args) =>
-        NoticeMessageBoxAsync(string.Format(message, args));
+    public Task<MessageBoxResult> NoticeAsync(string message, params ReadOnlySpan<object> args) =>
+        NoticeAsync(string.Format(message, args));
 
     // Overlay
-    public Task<MessageBoxResult> NoticeMessageBoxOverlayAsync(string message, string title = "Notice") =>
-        MessageBox.ShowOverlayAsync(message, title, icon: MessageBoxIcon.Information, button: MessageBoxButton.OK);
+    public Task<MessageBoxResult> NoticeOverlayAsync(string message) =>
+        MessageBox.ShowOverlayAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.OK);
 
     #endregion
 
-    #region Success MessageBox
+    #region Success
 
     // Normal
-    public Task<MessageBoxResult> SuccessMessageBoxAsync(string message, string title = "Success") =>
-        MessageBox.ShowAsync(message, title, MessageBoxIcon.Success);
+    public Task<MessageBoxResult> SuccessAsync(string message) =>
+        MessageBox.ShowAsync(message, Title_Success, MessageBoxIcon.Success);
 
-    public Task<MessageBoxResult> FormatSuccessMessageBoxAsync(string message, params ReadOnlySpan<object?> args) =>
-        SuccessMessageBoxAsync(string.Format(message, args));
+    public Task<MessageBoxResult> SuccessAsync(string message, params ReadOnlySpan<object> args) =>
+        SuccessAsync(string.Format(message, args));
 
     // Overlay
-    public Task<MessageBoxResult> SuccessMessageBoxOverlayAsync(string message, string title = "Success") =>
-        MessageBox.ShowOverlayAsync(message, title, icon: MessageBoxIcon.Success, button: MessageBoxButton.OK);
+    public Task<MessageBoxResult> SuccessOverlayAsync(string message) =>
+        MessageBox.ShowOverlayAsync(message, Title_Success, icon: MessageBoxIcon.Success, button: MessageBoxButton.OK);
 
-    public Task<MessageBoxResult> FormatSuccessMessageBoxOverlayAsync(string message, params ReadOnlySpan<object?> args) =>
-        SuccessMessageBoxOverlayAsync(string.Format(message, args));
+    public Task<MessageBoxResult> SuccessOverlayAsync(string message, params ReadOnlySpan<object> args) =>
+        SuccessOverlayAsync(string.Format(message, args));
 
     #endregion
 }

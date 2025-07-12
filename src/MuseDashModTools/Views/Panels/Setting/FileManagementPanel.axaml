@@ -1,56 +1,56 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
-             x:Class="MuseDashModTools.Views.Panels.Setting.FileManagementPanel"
-             x:DataType="pages:FileManagementPanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+    x:Class="MuseDashModTools.Views.Panels.Setting.FileManagementPanel"
+    x:DataType="vm:FileManagementPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
-        <pages:FileManagementPanelViewModel />
+        <vm:FileManagementPanelViewModel />
     </Design.DataContext>
 
-    <StackPanel Orientation="Vertical"
-                Spacing="50"
-                Margin="30"
-                HorizontalAlignment="Left"
-                MaxWidth="800"
-                MinWidth="600">
+    <!--  TODO: u:PathPicker  -->
+    <StackPanel
+        Classes="ContentListRoot">
 
-        <!-- MuseDash Game Folder -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
-            <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Muse Dash Game Folder" />
-            <TextBox IsReadOnly="True"
-                     Foreground="Gray"
-                     Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
-            <Button Theme="{DynamicResource OutlineButton}"
+        <!--  MuseDash Game Folder  -->
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolderPath}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolderPath}}">
+            <StackPanel
+                Classes="ContentListItemVertical">
+                <TextBox
+                    Classes="Desc"
+                    Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
+                <Button
                     Content="Reselect"
-                    HorizontalAlignment="Left" />
-        </StackPanel>
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource OutlineButton}" />
+            </StackPanel>
+        </mdmt:ContentListItem>
 
-        <!-- Cache Folder -->
-        <StackPanel Orientation="Vertical"
-                    Spacing="15">
-            <TextBlock Classes="H4"
-                       Theme="{StaticResource TitleTextBlock}"
-                       Text="Cache Folder" />
-            <TextBlock Margin="0, -10, 0, 0"
-                       Foreground="Gray"
-                       TextWrapping="Wrap"
-                       Text="This includes the cache when you download files. Please do not change this when performing other operations" />
-            <TextBox IsReadOnly="True"
-                     Foreground="Gray"
-                     Text="{Binding Config.CacheFolder, Mode=OneWay}" />
-            <Button Theme="{DynamicResource OutlineButton}"
+        <!--  Cache Folder  -->
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolderPath}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolderPath}}">
+            <StackPanel
+                Classes="ContentListItemVertical">
+                <TextBox
+                    Classes="Desc"
+                    Text="{Binding Config.CacheFolder, Mode=OneWay}" />
+                <Button
                     Content="Reselect"
-                    HorizontalAlignment="Left" />
-        </StackPanel>
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource OutlineButton}" />
+            </StackPanel>
+        </mdmt:ContentListItem>
 
     </StackPanel>
 </UserControl>

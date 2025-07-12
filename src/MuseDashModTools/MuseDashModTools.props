@@ -1,0 +1,28 @@
+﻿<Project>
+    <PropertyGroup>
+        <TrimMode>link</TrimMode>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('$(NativeLibraryDir)') And '$(IsWindows)' == 'true'">
+        <DirectPInvoke Include="av_libglesv2"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\libANGLE_static.lib"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\libGLESv2_static.lib"/>
+        <NativeLibrary Include="d3d9.lib"/>
+        <NativeLibrary Include="dxguid.lib"/>
+        <NativeLibrary Include="dxgi.lib"/>
+        <NativeLibrary Include="Synchronization.lib"/>
+        <NativeLibrary Include="user32.lib"/>
+        <NativeLibrary Include="gdi32.lib"/>
+
+        <DirectPInvoke Include="libHarfBuzzSharp"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\libHarfBuzzSharp.lib"/>
+
+        <DirectPInvoke Include="libSkiaSharp"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\skia.lib"/>
+        <NativeLibrary Include="$(NativeLibraryDir)\SkiaSharp.lib"/>
+    </ItemGroup>
+</Project>

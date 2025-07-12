@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Views.Panels.Setting;
 
-public partial class FileManagementPanel : UserControl
+public sealed partial class FileManagementPanel : UserControl
 {
     public FileManagementPanel()
     {

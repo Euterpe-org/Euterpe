@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using DynamicData;
 
 namespace MuseDashModTools.Core;
 
@@ -39,9 +38,6 @@ internal sealed partial class ModManageService : IModManageService
 
     [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
-    public required WindowNotificationManager WindowNotificationManager { get; init; }
 
     [UsedImplicitly]
     public required IDownloadManager DownloadManager { get; init; }

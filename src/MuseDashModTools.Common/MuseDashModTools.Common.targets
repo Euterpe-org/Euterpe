@@ -1,0 +1,47 @@
+<Project>
+    <Target Name="GenerateBuildInfo" BeforeTargets="BeforeCompile;CoreCompile" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)AssemblyInfo.cs">
+        <PropertyGroup>
+            <GeneratedText><![CDATA[
+namespace $(RootNamespace)%3B
+public static partial class BuildInfo
+{
+    public const string Company = "MDModsDev"%3B
+    public const string CopyRight = "Copyright © 2023-2025 MDModsDev"%3B
+    public const string Description = "A tool for Muse Dash modding"%3B
+    public const string AppName = "MuseDashModTools"%3B
+    public const string AppVersion = "$(Version)"%3B
+    public const string DisplayVersion = $"v{AppVersion}"%3B
+}
+      ]]></GeneratedText>
+            <GeneratedFilePath>$(IntermediateOutputPath)BuildInfo.g.cs</GeneratedFilePath>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <Compile Include="$(GeneratedFilePath)"/>
+            <FileWrites Include="$(GeneratedFilePath)"/>
+        </ItemGroup>
+
+        <WriteLinesToFile Lines="$(GeneratedText)" File="$(GeneratedFilePath)" WriteOnlyWhenDifferent="true" Overwrite="true"/>
+    </Target>
+
+    <Target Name="GenerateGlobalConstants" BeforeTargets="BeforeCompile;CoreCompile" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)AssemblyInfo.cs">
+        <PropertyGroup>
+            <GeneratedText><![CDATA[
+namespace $(RootNamespace)%3B
+public static partial class GlobalConstants
+{
+    public const string DotNetVersion = "$(TargetFrameworkVersion)"%3B;
+    public const string AvaloniaVersion = "$(AvaloniaVersion)"%3B
+}
+      ]]></GeneratedText>
+            <GeneratedFilePath>$(IntermediateOutputPath)GlobalConstants.g.cs</GeneratedFilePath>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <Compile Include="$(GeneratedFilePath)"/>
+            <FileWrites Include="$(GeneratedFilePath)"/>
+        </ItemGroup>
+
+        <WriteLinesToFile Lines="$(GeneratedText)" File="$(GeneratedFilePath)" WriteOnlyWhenDifferent="true" Overwrite="true"/>
+    </Target>
+</Project>

@@ -1,0 +1,85 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Components"
+    x:Class="MuseDashModTools.Views.Components.DonationDialog"
+    x:DataType="vm:DonationDialogViewModel"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:DonationDialogViewModel />
+    </Design.DataContext>
+
+    <UserControl.Styles>
+        <Style
+            Selector="Border">
+            <!--  Dialog Donation Qr Container  -->
+            <Style
+                Selector="^.DialogDonationQr">
+                <Setter Property="Width" Value="230" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="ClipToBounds" Value="True" />
+                <Setter Property="CornerRadius" Value="20" />
+            </Style>
+        </Style>
+
+        <Style
+            Selector="Image">
+            <!--  Dialog Donation Qr  -->
+            <Style
+                Selector="^.DialogDonationQr">
+                <Setter Property="Width" Value="230" />
+                <Setter Property="Stretch" Value="Uniform" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel
+        Margin="20"
+        Spacing="20">
+
+        <TextBlock
+            FontSize="14"
+            Text="本软件是基于开源项目原神的二次创作，我们耗费数个月才打造出如此3A大作。"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+
+        <TextBlock
+            FontSize="16"
+            Text="3A是骗你的，心血是真的，无论捐赠与否，我们都感谢您的支持！"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+
+        <UniformGrid
+            Columns="2"
+            Margin="0,15"
+            Rows="2"
+            Width="500">
+
+            <Border
+                Classes="DialogDonationQr">
+                <Image
+                    Classes="DialogDonationQr"
+                    Source="/Assets/DonationQRs/Wechat.webp" />
+            </Border>
+
+            <Border
+                Classes="DialogDonationQr">
+                <Image
+                    Classes="DialogDonationQr"
+                    Source="/Assets/DonationQRs/Alipay.webp" />
+            </Border>
+
+            <HyperlinkButton
+                Classes="Underline"
+                Content="PayPal"
+                HorizontalAlignment="Center"
+                NavigateUri="https://paypal.me/lxymahatma" />
+
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

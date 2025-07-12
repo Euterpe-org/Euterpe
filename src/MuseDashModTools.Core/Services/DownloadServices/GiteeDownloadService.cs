@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.Core;
 
-public sealed class GiteeDownloadService : IGiteeDownloadService
+internal sealed class GiteeDownloadService : IGiteeDownloadService
 {
     private const string GiteeBaseUrl = "https://gitee.com/";
     private const string RawModLinksUrl = GiteeBaseUrl + "lxymahatma/ModLinks/raw/" + ModLinksBranch;
@@ -15,7 +15,7 @@ public sealed class GiteeDownloadService : IGiteeDownloadService
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         IProgress<double> downloadProgress,
-        CancellationToken cancellationToken = default) => throw new NotImplementedException();
+        CancellationToken cancellationToken = default) => throw new NotSupportedException();
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
@@ -32,9 +32,12 @@ public sealed class GiteeDownloadService : IGiteeDownloadService
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {
@@ -52,9 +55,12 @@ public sealed class GiteeDownloadService : IGiteeDownloadService
         try
         {
             var stream = await Client.GetStreamAsync(downloadLink, cancellationToken).ConfigureAwait(false);
-            await using var fs = new FileStream(path, FileMode.OpenOrCreate);
-            await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-            return true;
+            var fs = new FileStream(path, FileMode.OpenOrCreate);
+            await using (fs.ConfigureAwait(false))
+            {
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                return true;
+            }
         }
         catch (Exception ex)
         {
@@ -63,9 +69,9 @@ public sealed class GiteeDownloadService : IGiteeDownloadService
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{PlatformService.OsString}.zip";
+        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
@@ -79,7 +85,7 @@ public sealed class GiteeDownloadService : IGiteeDownloadService
         }
     }
 
-    public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default) => throw new NotSupportedException();
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
@@ -118,9 +124,6 @@ public sealed class GiteeDownloadService : IGiteeDownloadService
 
     [UsedImplicitly]
     public required ILogger<GiteeDownloadService> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }

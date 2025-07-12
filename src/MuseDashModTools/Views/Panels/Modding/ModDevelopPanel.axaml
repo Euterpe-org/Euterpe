@@ -1,0 +1,276 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Modding"
+    x:Class="MuseDashModTools.Views.Panels.Modding.ModDevelopPanel"
+    x:DataType="vm:ModDevelopPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:ModDevelopPanelViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <StackPanel
+            Classes="ContentListRoot"
+            HorizontalAlignment="Stretch">
+            <StackPanel.Styles>
+                <Style
+                    Selector="Button">
+                    <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                </Style>
+            </StackPanel.Styles>
+
+            <mdmt:ContentListItem
+                Title="Development Environment">
+                <Grid
+                    ColumnDefinitions="*,*"
+                    Margin="5,0,10,0">
+                    <Button
+                        Grid.Column="0"
+                        Classes="Transparent Card"
+                        Command="{Binding InstallDotNetSdkCommand}"
+                        IsEnabled="{Binding !DotNetSdkInstalled}">
+                        <Button.Styles>
+                            <Style
+                                Selector="Button:pointerover Border.Hover">
+                                <Setter Property="Background" Value="#7B2CBF" />
+                                <Setter Property="RenderTransform" Value="scale(1.004)" />
+                            </Style>
+                        </Button.Styles>
+                        <Border
+                            Classes="Hover">
+                            <DockPanel>
+                                <StackPanel
+                                    Orientation="Vertical">
+                                    <TextBlock
+                                        Classes="CardTitle"
+                                        Text=".NET 8 SDK">
+                                        <TextBlock.Foreground>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                <GradientStop Offset="0" Color="#AA7AE0" />
+                                                <GradientStop Offset="1" Color="#D36BD0" />
+                                            </LinearGradientBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <TextBlock
+                                        Classes="CardDesc"
+                                        Text="Required for mod development" />
+                                </StackPanel>
+                                <StackPanel
+                                    DockPanel.Dock="Right"
+                                    HorizontalAlignment="Right"
+                                    Margin="30,0"
+                                    Orientation="Horizontal"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                                    <TextBlock
+                                        Classes="CardDesc"
+                                        IsVisible="{Binding !DotNetSdkInstalled, Mode=OneWay}"
+                                        Text="Not Installed"
+                                        VerticalAlignment="Center" />
+                                    <PathIcon
+                                        Data="{StaticResource SemiIconVerify}"
+                                        Foreground="Green"
+                                        Height="30"
+                                        IsVisible="{Binding DotNetSdkInstalled, Mode=OneWay}" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </Button>
+
+                    <Button
+                        Grid.Column="1"
+                        Classes="Transparent Card"
+                        Command="{Binding InstallModTemplateCommand}"
+                        IsEnabled="{Binding !ModTemplateInstalled}">
+                        <Button.Styles>
+                            <Style
+                                Selector="Button:pointerover Border.Hover">
+                                <Setter Property="Background" Value="#4B49AC" />
+                                <Setter Property="RenderTransform" Value="scale(1.004)" />
+                            </Style>
+                        </Button.Styles>
+                        <Border
+                            Classes="Hover">
+                            <DockPanel>
+                                <StackPanel
+                                    Orientation="Vertical">
+                                    <TextBlock
+                                        Classes="CardTitle"
+                                        Text="Mod Template Nuget">
+                                        <TextBlock.Foreground>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                <GradientStop Offset="0" Color="#7F7FD5" />
+                                                <GradientStop Offset="1" Color="#86A8E7" />
+                                            </LinearGradientBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <TextBlock
+                                        Classes="CardDesc"
+                                        Text="For quick mod project creation" />
+                                </StackPanel>
+                                <StackPanel
+                                    DockPanel.Dock="Right"
+                                    HorizontalAlignment="Right"
+                                    Margin="30,0"
+                                    Orientation="Horizontal"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                                    <TextBlock
+                                        Classes="CardDesc"
+                                        IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
+                                        Text="Not Installed"
+                                        VerticalAlignment="Center" />
+                                    <PathIcon
+                                        Data="{StaticResource SemiIconVerify}"
+                                        Foreground="Green"
+                                        Height="30"
+                                        IsVisible="{Binding ModTemplateInstalled, Mode=OneWay}" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </Button>
+                </Grid>
+            </mdmt:ContentListItem>
+
+            <mdmt:ContentListItem
+                Title="Submit Your Mod">
+                <Button
+                    Classes="Transparent Card"
+                    CommandParameter="https://github.com/MDModsDev/ModLinks"
+                    Margin="5,0,10,0">
+                    <Button.Styles>
+                        <Style
+                            Selector="Button:pointerover Border.Hover">
+                            <Setter Property="Background" Value="#B32E29" />
+                            <Setter Property="RenderTransform" Value="scale(1.004)" />
+                        </Style>
+                    </Button.Styles>
+                    <Border
+                        Classes="Hover">
+                        <Grid
+                            ColumnDefinitions="Auto,*"
+                            HorizontalAlignment="Center">
+                            <Image
+                                Grid.Column="0"
+                                Height="64"
+                                Margin="0,0,20,0"
+                                Source="/Assets/MDModsDev_Logo.png" />
+                            <StackPanel
+                                Grid.Column="1">
+                                <TextBlock
+                                    Classes="CardTitle"
+                                    Text="ModLinks Repository">
+                                    <TextBlock.Foreground>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                            <GradientStop Offset="0" Color="#FF9966" />
+                                            <GradientStop Offset="1" Color="#FF5E62" />
+                                        </LinearGradientBrush>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                                <TextBlock
+                                    Classes="CardDesc"
+                                    Text="Submit your mod to MDMT's mod list" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Button>
+            </mdmt:ContentListItem>
+
+            <mdmt:ContentListItem
+                Title="Recommended IDEs">
+                <UniformGrid
+                    Columns="3"
+                    Margin="5,0,10,0">
+                    <Button
+                        Classes="Transparent Card"
+                        CommandParameter="https://code.visualstudio.com">
+                        <Button.Styles>
+                            <Style
+                                Selector="Button:pointerover Border.Hover">
+                                <Setter Property="Background" Value="#0066B8" />
+                                <Setter Property="RenderTransform" Value="scale(1.02)" />
+                            </Style>
+                        </Button.Styles>
+                        <Border
+                            Classes="Hover">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="10"
+                                VerticalAlignment="Center">
+                                <Image
+                                    Height="58"
+                                    Source="/Assets/VSCode_Logo.png" />
+                                <TextBlock
+                                    Margin="0,0,0,15"
+                                    Text="Visual Studio Code" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                    <Button
+                        Classes="Transparent Card"
+                        CommandParameter="https://www.jetbrains.com/rider">
+                        <Button.Styles>
+                            <Style
+                                Selector="Button:pointerover Border.Hover">
+                                <Setter Property="Background" Value="#FC1886" />
+                                <Setter Property="RenderTransform" Value="scale(1.02)" />
+                            </Style>
+                        </Button.Styles>
+                        <Border
+                            Classes="Hover">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="10"
+                                VerticalAlignment="Center">
+                                <Image
+                                    Height="58"
+                                    Source="/Assets/Rider_Logo.png" />
+                                <TextBlock
+                                    Margin="0,0,0,15"
+                                    Text="JetBrains Rider" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                    <Button
+                        Classes="Transparent Card"
+                        CommandParameter="https://visualstudio.microsoft.com">
+                        <Button.Styles>
+                            <Style
+                                Selector="Button:pointerover Border.Hover">
+                                <Setter Property="Background" Value="#5C2D91" />
+                                <Setter Property="RenderTransform" Value="scale(1.02)" />
+                            </Style>
+                        </Button.Styles>
+                        <Border
+                            Classes="Hover">
+                            <StackPanel
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                Spacing="10"
+                                VerticalAlignment="Center">
+                                <Image
+                                    Height="58"
+                                    Source="/Assets/VS_Logo.png" />
+                                <TextBlock
+                                    Margin="0,0,0,15"
+                                    Text="Visual Studio" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                </UniformGrid>
+            </mdmt:ContentListItem>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

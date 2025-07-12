@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+</Project>

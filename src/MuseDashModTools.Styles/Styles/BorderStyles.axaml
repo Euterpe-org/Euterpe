@@ -1,12 +1,47 @@
-﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--  Details container style  -->
-    <Style Selector="Border.DetailContainer">
-        <Setter Property="Padding" Value="16" />
-        <Setter Property="Background" Value="{DynamicResource CardBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="8" />
+    <Style
+        Selector="Border">
+        <!--  Card  -->
+        <Style
+            Selector="^.Card">
+            <Setter Property="Background" Value="{DynamicResource CardBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+            <Setter Property="Padding" Value="20" />
+        </Style>
+
+        <!--  Hover  -->
+        <Style
+            Selector="^.Hover">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="ClipToBounds" Value="True" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="RenderTransform" Value="none" />
+            <Setter Property="Theme" Value="{DynamicResource CardBorder}" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition
+                        Property="Background"
+                        Duration="0:0:0.2" />
+                    <TransformOperationsTransition
+                        Property="RenderTransform"
+                        Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <!--  Navigation  -->
+        <Style
+            Selector="^.WinMainNav">
+            <Setter Property="Height" Value="45" />
+            <Setter Property="Margin" Value="0,0,20,10" />
+            <Setter Property="Padding" Value="12,4" />
+            <Setter Property="Theme" Value="{DynamicResource CardBorder}" />
+        </Style>
     </Style>
 
 </Styles>

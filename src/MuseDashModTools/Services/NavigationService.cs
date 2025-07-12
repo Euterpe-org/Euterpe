@@ -12,6 +12,6 @@ public sealed class NavigationService
     public Control NavigateTo<TView>() where TView : Control, new()
     {
         Logger.ZLogInformation($"Navigating to View: {typeof(TView).Name}");
-        return App.Container.Resolve<TView>();
+        return IocContainer.Resolve<TView>();
     }
 }

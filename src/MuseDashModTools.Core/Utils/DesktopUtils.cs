@@ -8,12 +8,7 @@ public static class DesktopUtils
     public static Application GetCurrentApplication()
     {
         var app = Application.Current;
-        if (app is null)
-        {
-            throw new InvalidOperationException("Application is null.");
-        }
-
-        return app;
+        return app ?? throw new InvalidOperationException("Application is null.");
     }
 
     public static IClassicDesktopStyleApplicationLifetime GetCurrentDesktop()

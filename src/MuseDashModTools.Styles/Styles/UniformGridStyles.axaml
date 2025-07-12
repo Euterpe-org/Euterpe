@@ -1,0 +1,28 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style
+        Selector="UniformGrid">
+        <!--  Mod Details  -->
+        <Style
+            Selector="^.PanelModManageDetails">
+            <Setter Property="Columns" Value="2" />
+            <Setter Property="MaxWidth" Value="450" />
+        </Style>
+        <Style
+            Selector="^.PanelModManageDetails TextBlock:nth-child(2n+1)">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="0,0,28,0" />
+        </Style>
+        <Style
+            Selector="^.PanelModManageDetails TextBlock:nth-child(2n)">
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+        <Style
+            Selector="^.PanelModManageDetails Control:nth-child(2n)">
+            <Setter Property="Margin" Value="0,0,0,14" />
+        </Style>
+    </Style>
+
+</Styles>

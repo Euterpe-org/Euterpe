@@ -3,7 +3,7 @@ using MuseDashModTools.Models.Controls;
 
 namespace MuseDashModTools.Styles.TemplatedControls;
 
-public class ContributorCardControl : TemplatedControl
+public sealed class ContributorCardControl : TemplatedControl
 {
     public static readonly StyledProperty<IImage> AvatarProperty =
         AvaloniaProperty.Register<ContributorCardControl, IImage>(nameof(Avatar));

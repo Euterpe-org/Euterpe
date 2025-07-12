@@ -1,151 +1,220 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:constants="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-             xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
-             xmlns:pages="using:MuseDashModTools.ViewModels.Panels.Setting"
-             x:Class="MuseDashModTools.Views.Panels.Setting.AboutPanel"
-             x:DataType="pages:AboutPanelViewModel"
-             mc:Ignorable="d"
-             d:DesignHeight="700"
-             d:DesignWidth="1000">
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:const="clr-namespace:MuseDashModTools.Common;assembly=MuseDashModTools.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Setting"
+    x:Class="MuseDashModTools.Views.Panels.Setting.AboutPanel"
+    x:DataType="vm:AboutPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
 
     <Design.DataContext>
-        <pages:AboutPanelViewModel />
+        <vm:AboutPanelViewModel />
     </Design.DataContext>
 
     <ScrollViewer>
-        <DockPanel Margin="20">
+        <DockPanel
+            Margin="20">
 
             <!--  Header  -->
-            <StackPanel DockPanel.Dock="Top"
-                        HorizontalAlignment="Left"
-                        Orientation="Horizontal"
-                        Spacing="20">
+            <StackPanel
+                DockPanel.Dock="Top"
+                HorizontalAlignment="Left"
+                Orientation="Horizontal"
+                Spacing="20">
 
                 <!--  LOGO  -->
-                <Image Height="120"
-                       Classes="animate-scale"
-                       RenderOptions.BitmapInterpolationMode="HighQuality"
-                       Source="/Assets/Melon.webp" />
+                <Image
+                    Height="120"
+                    RenderOptions.BitmapInterpolationMode="HighQuality"
+                    Source="/Assets/Logo.webp" />
 
                 <!--  Title & Version & Copyright  -->
-                <StackPanel VerticalAlignment="Center" Spacing="3">
-                    <TextBlock HorizontalAlignment="Center"
-                               Classes="H1"
-                               Text="Muse Dash Mod Tools"
-                               Theme="{StaticResource TitleTextBlock}" />
-                    <StackPanel Orientation="Horizontal" Spacing="10">
-                        <Label Height="10"
-                               Classes="Blue"
-                               Content="{x:Static constants:BuildInfo.DisplayVersion}"
-                               Theme="{StaticResource TagLabel}" />
-                        <TextBlock Foreground="Gray" Text="{x:Static constants:BuildInfo.CopyRight}" />
+                <StackPanel
+                    Spacing="3"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        Classes="H1"
+                        HorizontalAlignment="Center"
+                        Text="Muse Dash Mod Tools"
+                        Theme="{StaticResource TitleTextBlock}" />
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <Label
+                            Classes="Blue"
+                            Content="{x:Static const:BuildInfo.DisplayVersion}"
+                            Height="10"
+                            Theme="{StaticResource TagLabel}" />
+                        <TextBlock
+                            Foreground="Gray"
+                            Text="{x:Static const:BuildInfo.CopyRight}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
 
             <!--  Others  -->
-            <StackPanel DockPanel.Dock="Bottom"
-                        Margin="10,25,37,0"
-                        Orientation="Vertical"
-                        Spacing="10">
+            <StackPanel
+                DockPanel.Dock="Bottom"
+                Margin="10,25,37,0"
+                Orientation="Vertical"
+                Spacing="10">
 
                 <!--  About  -->
-                <Border Theme="{DynamicResource CardBorder}">
-                    <StackPanel Orientation="Vertical" Spacing="20">
-                        <TextBlock Margin="13,3,13,0" Foreground="LightSlateGray">
+                <Border
+                    Theme="{DynamicResource CardBorder}">
+                    <StackPanel
+                        Orientation="Vertical"
+                        Spacing="20">
+                        <TextBlock
+                            Foreground="LightSlateGray"
+                            Margin="13,3,13,0">
 
                             <TextBlock.Styles>
-                                <Style Selector="mdmt|ImageButton">
-                                    <Setter Property="ImageCursor" Value="Hand" />
-                                    <Setter Property="ImageMargin" Value="3,0" />
+                                <Style
+                                    Selector="Run">
+                                    <Setter Property="BaselineAlignment" Value="Center" />
+                                </Style>
+                                <Style
+                                    Selector="u|IconButton">
+                                    <Setter Property="Background" Value="Transparent" />
                                     <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                                    <Setter Property="Theme" Value="{StaticResource BorderlessIconButton}" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Style
+                                        Selector="^ Image">
+                                        <Setter Property="Height" Value="20" />
+                                    </Style>
+                                    <Style
+                                        Selector="^:pointerover">
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </Style>
                                 </Style>
                             </TextBlock.Styles>
 
                             <TextBlock.Inlines>
-                                <Run Text="Muse Dash Mod Tools is licensed under the" />
+                                <Run
+                                    Text="Muse Dash Mod Tools is licensed under the " />
                                 <InlineUIContainer>
-                                    <mdmt:ImageButton CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt"
-                                                      ImageHeight="13"
-                                                      ImageSource="/Assets/MIT_Logo.png" />
+                                    <u:IconButton
+                                        CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt">
+                                        <u:IconButton.Icon>
+                                            <Image
+                                                Source="/Assets/MIT_Logo.png" />
+                                        </u:IconButton.Icon>
+                                    </u:IconButton>
                                 </InlineUIContainer>
-                                <Run Text="license." />
-                                <Run Text="Powered by" />
+                                <Run
+                                    Text=" license." />
+                                <Run
+                                    Text="Powered by" />
                                 <InlineUIContainer>
-                                    <mdmt:ImageButton CommandParameter="https://dotnet.microsoft.com"
-                                                      ImageHeight="18"
-                                                      ImageSource="/Assets/DotNet_Logo.png" />
+                                    <u:IconButton
+                                        CommandParameter="https://dotnet.microsoft.com">
+                                        <u:IconButton.Icon>
+                                            <Image
+                                                Source="/Assets/DotNet_Logo.png" />
+                                        </u:IconButton.Icon>
+                                    </u:IconButton>
                                 </InlineUIContainer>
-                                <Run Text="9.0 &amp;" />
+                                <Run
+                                    Text="{x:Static const:GlobalConstants.DotNetVersion}" />
+                                <Run
+                                    Text="&amp;" />
                                 <InlineUIContainer>
-                                    <mdmt:ImageButton CommandParameter="https://avaloniaui.net"
-                                                      ImageHeight="18"
-                                                      ImageSource="/Assets/Avalonia_Logo.png" />
+                                    <u:IconButton
+                                        CommandParameter="https://avaloniaui.net">
+                                        <u:IconButton.Icon>
+                                            <Image
+                                                Source="/Assets/Avalonia_Logo.png" />
+                                        </u:IconButton.Icon>
+                                    </u:IconButton>
                                 </InlineUIContainer>
-                                <Run Text="Avalonia 11.2.4." />
+                                <Run
+                                    Text="Avalonia " />
+                                <Run
+                                    Text="{x:Static const:GlobalConstants.AvaloniaVersion}" />
                             </TextBlock.Inlines>
                         </TextBlock>
 
                         <!--  Links  -->
-                        <StackPanel Orientation="Horizontal" Spacing="15">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            Spacing="15">
                             <StackPanel.Styles>
-                                <Style Selector="Button">
+                                <Style
+                                    Selector="u|IconButton">
                                     <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                                    <Setter Property="IconPlacement" Value="Left" />
                                 </Style>
                             </StackPanel.Styles>
 
-                            <Button Command="{Binding CheckUpdateCommand, Mode=OneTime}"
-                                    Content="Check Update"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton
+                                Command="{Binding CheckUpdateCommand, Mode=OneTime}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_CheckUpdate}}" />
 
-                            <Button CommandParameter="https://github.com/MDModsDev/MuseDashModTools"
-                                    Content="Source Code"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton
+                                CommandParameter="https://github.com/MDModsDev/MuseDashModTools"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_SourceCode}}"
+                                Icon="{StaticResource SemiIconCode}" />
 
-                            <Button CommandParameter="https://crowdin.com/project/musedashmodtools"
-                                    Content="Crowdin Translate"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton
+                                CommandParameter="https://crowdin.com/project/musedashmodtools"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_HelpTranslate}}"
+                                Icon="{StaticResource SemiIconLanguage}" />
 
-                            <Button CommandParameter="https://mdmc.moe/"
-                                    Content="MDMC Website"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton
+                                CommandParameter="https://mdmc.moe/"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Website}}" />
 
-                            <Button CommandParameter="https://discord.gg/mdmc"
-                                    Content="MDMC Discord"
-                                    Theme="{DynamicResource BorderlessButton}" />
+                            <u:IconButton
+                                CommandParameter="https://discord.gg/mdmc"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Discord}}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
 
                 <!--  Contributor Cards  -->
-                <ItemsControl ItemsSource="{Binding ContributorGroups, Mode=OneTime}">
+                <ItemsControl
+                    ItemsSource="{Binding ContributorGroups, Mode=OneTime}">
 
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="models:ContributorGroup">
-                            <StackPanel Margin="0,16">
-                                <TextBlock Classes="H4"
-                                           Text="{Binding GroupName, Mode=OneTime}"
-                                           Theme="{StaticResource TitleTextBlock}" />
-                                <ItemsControl ItemsSource="{Binding Contributors, Mode=OneTime}">
+                        <DataTemplate
+                            x:DataType="models:ContributorGroup">
+                            <StackPanel
+                                Margin="0,16">
+                                <TextBlock
+                                    Classes="H4"
+                                    Text="{Binding GroupName, Mode=OneTime}"
+                                    Theme="{StaticResource TitleTextBlock}" />
+                                <ItemsControl
+                                    ItemsSource="{Binding Contributors, Mode=OneTime}">
 
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal" />
+                                            <WrapPanel
+                                                Orientation="Horizontal" />
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
 
                                     <ItemsControl.ItemTemplate>
-                                        <DataTemplate x:DataType="models:ContributorCardItem">
-                                            <mdmt:ContributorCardControl Margin="8"
-                                                                         Avatar="{Binding Avatar, Mode=OneTime}"
-                                                                         ButtonCommand="{Binding $parent[UserControl].((pages:AboutPanelViewModel)DataContext).OpenUrlCommand, Mode=OneTime, FallbackValue=null}"
-                                                                         ContributorDescription="{Binding Description, Mode=OneTime}"
-                                                                         ContributorName="{Binding Name, Mode=OneTime}"
-                                                                         Links="{Binding Links, Mode=OneTime}" />
+                                        <DataTemplate
+                                            x:DataType="models:ContributorCardItem">
+                                            <mdmt:ContributorCardControl
+                                                Avatar="{Binding Avatar, Mode=OneTime}"
+                                                ButtonCommand="{Binding $parent[UserControl].DataContext.OpenUrlCommand, Mode=OneTime}"
+                                                ContributorDescription="{Binding Description, Mode=OneTime}"
+                                                ContributorName="{Binding Name, Mode=OneTime}"
+                                                Links="{Binding Links, Mode=OneTime}"
+                                                Margin="8" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
 

@@ -1,0 +1,31 @@
+﻿<Project>
+    <PropertyGroup>
+        <DefineConstants Condition="'$(IsPublishing)' == 'true'">$(DefineConstants);PUBLISH</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PublishAot>true</PublishAot>
+        <PublishTrimmed>true</PublishTrimmed>
+        <PublishLzmaCompressed>true</PublishLzmaCompressed>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <DebuggerSupport>false</DebuggerSupport>
+        <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    </PropertyGroup>
+
+    <Import Project="$(MSBuildProjectDirectory)\$(MSBuildProjectName).props"
+            Condition="Exists('$(MSBuildProjectDirectory)\$(MSBuildProjectName).props')"/>
+
+    <Target Name="Copy Builds" AfterTargets="Publish">
+        <PropertyGroup>
+            <_NativeDir>$(OutputPath)native\</_NativeDir>
+            <_PublishDir>$(OutputPath)publish\</_PublishDir>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <_PublishedFiles Include="$(_NativeDir)*.*" Condition="Exists('$(NativeLibraryDir)')"/>
+            <_PublishedFiles Include="$(_PublishDir)*.*" Condition="!Exists('$(NativeLibraryDir)')"/>
+        </ItemGroup>
+
+        <Copy SourceFiles="@(_PublishedFiles)" DestinationFolder="$(BaseOutputPath)Output" SkipUnchangedFiles="true"/>
+    </Target>
+</Project>

@@ -4,4 +4,4 @@ namespace MuseDashModTools.Core.Proxies;
 
 [LazyProxy(typeof(TopLevel))]
 [UsedImplicitly]
-public sealed partial class TopLevelProxy;
+internal sealed partial class TopLevelProxy;

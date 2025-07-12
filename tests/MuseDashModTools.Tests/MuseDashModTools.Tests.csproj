@@ -5,9 +5,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="coverlet.collector">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Moq"/>
+        <PackageReference Include="NetArchTest.eNhancedEdition"/>
         <PackageReference Include="RichardSzalay.MockHttp"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="Verify"/>

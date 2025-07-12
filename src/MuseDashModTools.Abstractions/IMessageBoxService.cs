@@ -4,54 +4,52 @@ namespace MuseDashModTools.Abstractions;
 
 public interface IMessageBoxService
 {
-    #region Confirm MessageBox
+    #region Confirm
 
-    public Task<MessageBoxResult> WarningConfirmMessageBoxAsync(string message, string title = "Warning");
+    // Normal
+    Task<MessageBoxResult> WarningConfirmAsync(string message);
+    Task<MessageBoxResult> WarningConfirmAsync(string message, params ReadOnlySpan<object> args);
+    Task<MessageBoxResult> NoticeConfirmAsync(string message);
+    Task<MessageBoxResult> NoticeConfirmAsync(string message, params ReadOnlySpan<object> args);
 
-    public Task<MessageBoxResult> FormatWarningConfirmMessageBoxAsync(string message, params ReadOnlySpan<object?> args);
-
-    public Task<MessageBoxResult> NoticeConfirmMessageBoxAsync(string message, string title = "Notice");
-
-    public Task<MessageBoxResult> FormatNoticeConfirmMessageBoxAsync(string message, params ReadOnlySpan<object?> args);
+    // Overlay
+    Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message);
+    Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message, params ReadOnlySpan<object> args);
 
     #endregion
 
-    #region Error MessageBox
+    #region Error
 
     // Normal
-    public Task<MessageBoxResult> ErrorMessageBoxAsync(string message, string title = "Error");
-
-    public Task<MessageBoxResult> FormatErrorMessageBoxAsync(string message, params ReadOnlySpan<object?> args);
+    Task<MessageBoxResult> ErrorAsync(string message);
+    Task<MessageBoxResult> ErrorAsync(string message, params ReadOnlySpan<object> args);
 
     // Overlay
-    public Task<MessageBoxResult> ErrorMessageBoxOverlayAsync(string message, string title = "Error");
-
-    public Task<MessageBoxResult> FormatErrorMessageBoxOverlayAsync(string message, params ReadOnlySpan<object?> args);
+    Task<MessageBoxResult> ErrorOverlayAsync(string message);
+    Task<MessageBoxResult> ErrorOverlayAsync(string message, params ReadOnlySpan<object> args);
 
     #endregion
 
-    #region Notice MessageBox
+    #region Notice
 
     // Normal
-    public Task<MessageBoxResult> NoticeMessageBoxAsync(string message, string title = "Notice");
-
-    public Task<MessageBoxResult> FormatNoticeMessageBoxAsync(string message, params ReadOnlySpan<object?> args);
+    Task<MessageBoxResult> NoticeAsync(string message);
+    Task<MessageBoxResult> NoticeAsync(string message, params ReadOnlySpan<object> args);
 
     // Overlay
-    public Task<MessageBoxResult> NoticeMessageBoxOverlayAsync(string message, string title = "Notice");
+    Task<MessageBoxResult> NoticeOverlayAsync(string message);
 
     #endregion
 
-    #region Success MessageBox
+    #region Success
 
     // Normal
-    public Task<MessageBoxResult> SuccessMessageBoxAsync(string message, string title = "Success");
-
-    public Task<MessageBoxResult> FormatSuccessMessageBoxAsync(string message, params ReadOnlySpan<object?> args);
+    Task<MessageBoxResult> SuccessAsync(string message);
+    Task<MessageBoxResult> SuccessAsync(string message, params ReadOnlySpan<object> args);
 
     // Overlay
-    public Task<MessageBoxResult> SuccessMessageBoxOverlayAsync(string message, string title = "Success");
-    public Task<MessageBoxResult> FormatSuccessMessageBoxOverlayAsync(string message, params ReadOnlySpan<object?> args);
+    Task<MessageBoxResult> SuccessOverlayAsync(string message);
+    Task<MessageBoxResult> SuccessOverlayAsync(string message, params ReadOnlySpan<object> args);
 
     #endregion
 }

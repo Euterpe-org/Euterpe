@@ -2,15 +2,17 @@ namespace MuseDashModTools.Abstractions;
 
 public interface ILocalService
 {
-    Task CheckDotNetRuntimeInstallAsync();
+    Task<bool> CheckDotNetRuntimeInstalledAsync();
+    Task<bool> CheckDotNetSdkInstalledAsync();
+    Task<bool> CheckModTemplateInstalledAsync();
     Task<string> GetMuseDashFolderAsync();
-    IEnumerable<string> GetModFilePaths();
-    IEnumerable<string> GetLibFilePaths();
+    string[] GetModFilePaths();
+    string[] GetLibFilePaths();
     Task<bool> InstallMelonLoaderAsync();
     Task<bool> UninstallMelonLoaderAsync();
-    ModDto? LoadModFromPath(string filePath);
-    LibDto LoadLibFromPath(string filePath);
-    void LaunchGame(bool isModded);
+    Task<ModDto?> LoadModFromPathAsync(string filePath);
+    Task<LibDto> LoadLibFromPathAsync(string filePath);
     ValueTask<string> ReadGameVersionAsync();
+    string? ReadMelonLoaderVersion();
     bool ExtractZipFile(string zipPath, string extractPath);
 }

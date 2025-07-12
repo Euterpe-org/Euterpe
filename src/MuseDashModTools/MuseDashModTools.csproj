@@ -1,35 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Condition="'$(IsPublishing)' == 'true'" Project="$(SolutionDir)Publish.props"/>
+
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
-        <AssemblyName>MuseDashModTools</AssemblyName>
-        <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-        <NoWarn>$(NoWarn);CS7035</NoWarn>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
-
-    <PropertyGroup>
-        <MvvmToolkitEnableINotifyPropertyChangingSupport>false</MvvmToolkitEnableINotifyPropertyChangingSupport>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-        <DefineConstants>$(DefineConstants);ENABLE_XAML_HOT_RELOAD</DefineConstants>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <PublishAot>true</PublishAot>
-        <PublishLzmaCompressed>true</PublishLzmaCompressed>
-        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
-        <TrimMode>link</TrimMode>
-        <TrimmerSingleWarn>false</TrimmerSingleWarn>
-        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
-    </PropertyGroup>
-
-    <ItemGroup Condition="'$(Configuration)' == 'Release'">
-        <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
-    </ItemGroup>
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
@@ -37,34 +15,32 @@
         <Content Include="Assets\Icon.ico"/>
     </ItemGroup>
 
-    <!--Hot Reload Packages-->
     <ItemGroup>
-        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader"/>
-        <PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia"/>
-        <PackageReference Include="HotAvalonia.Extensions"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Antelcat.I18N.Avalonia"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
         <PackageReference Include="Avalonia"/>
-        <PackageReference Include="Avalonia.Controls.ItemsRepeater"/>
         <PackageReference Include="Avalonia.Desktop"/>
-        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
-        <PackageReference Include="Avalonia.ReactiveUI"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Downloader"/>
+        <PackageReference Include="HotAvalonia" PrivateAssets="all"/>
         <PackageReference Include="Irihi.Ursa"/>
-        <PackageReference Include="Irihi.Ursa.ReactiveUIExtension"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="PublishAotCompressed"/>
+        <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="ValveKeyValue"/>
+    </ItemGroup>
+
+    <!-- Avalonia Diagnostics Package-->
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+        <PackageReference Condition="'$(AvAccelerateKey)' == ''" Include="Avalonia.Diagnostics"/>
+        <PackageReference Condition="'$(AvAccelerateKey)' != ''" Include="AvaloniaUI.DiagnosticsSupport"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -72,15 +48,6 @@
         <ProjectReference Include="..\MuseDashModTools.Core\MuseDashModTools.Core.csproj"/>
         <ProjectReference Include="..\MuseDashModTools.Generators\MuseDashModTools.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\MuseDashModTools.Styles\MuseDashModTools.Styles.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(Configuration)' == 'Release'">
-        <DirectPInvoke Include="av_libglesv2"/>
-        <NativeLibrary Include="Native\av_libglesv2.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
-        <DirectPInvoke Include="libHarfBuzzSharp"/>
-        <NativeLibrary Include="Native\libHarfBuzzSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
-        <DirectPInvoke Include="libSkiaSharp"/>
-        <NativeLibrary Include="Native\libSkiaSharp.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))"/>
     </ItemGroup>
 
     <ItemGroup>

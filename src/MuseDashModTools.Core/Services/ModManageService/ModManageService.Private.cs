@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 using AsyncAwaitBestPractices;
-using DynamicData;
 
 namespace MuseDashModTools.Core;
 
@@ -10,9 +9,9 @@ internal sealed partial class ModManageService
 
     private async Task LoadModsAsync()
     {
-        ModDto[] localMods = LocalService.GetModFilePaths()
-            .Select(LocalService.LoadModFromPath)
-            .Where(mod => mod is not null)
+        ModDto[] localMods = (await LocalService.GetModFilePaths()
+                .WhenAllAsync(LocalService.LoadModFromPathAsync).ConfigureAwait(false))
+            .Where(x => x is not null)
             .ToArray()!;
 
         _sourceCache.AddOrUpdate(localMods);
@@ -20,7 +19,7 @@ internal sealed partial class ModManageService
 
         CheckDuplicatedMods(localMods);
 
-        await foreach (var webMod in DownloadManager.GetModListAsync())
+        await foreach (var webMod in DownloadManager.GetModListAsync().ConfigureAwait(false))
         {
             if (webMod is null)
             {
@@ -46,7 +45,6 @@ internal sealed partial class ModManageService
             }
         }
 
-        // TODO Notification (lxy, 2025/2/21)
         Logger.ZLogInformation($"All mods loaded");
     }
 
@@ -66,7 +64,7 @@ internal sealed partial class ModManageService
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
-            _ when webMod.GameVersion != "*" && webMod.GameVersion != _gameVersion => ModState.Incompatible,
+            _ when webMod.GameVersion is not "*" && webMod.GameVersion != _gameVersion => ModState.Incompatible,
             _ => ModState.Normal
         };
     }
@@ -108,11 +106,11 @@ internal sealed partial class ModManageService
     private async Task LoadLibsAsync()
     {
         _libsDict = new ConcurrentDictionary<string, LibDto>(
-            LocalService.GetLibFilePaths()
-                .Select(LocalService.LoadLibFromPath)
-                .Select(x => new KeyValuePair<string, LibDto>(x.Name, x)));
+            (await LocalService.GetLibFilePaths()
+                .WhenAllAsync(LocalService.LoadLibFromPathAsync!).ConfigureAwait(false))
+            .Select(x => new KeyValuePair<string, LibDto>(x!.Name, x)));
 
-        await foreach (var webLib in DownloadManager.GetLibListAsync())
+        await foreach (var webLib in DownloadManager.GetLibListAsync().ConfigureAwait(false))
         {
             if (webLib is null)
             {
@@ -126,7 +124,6 @@ internal sealed partial class ModManageService
                     continue;
                 }
 
-                // TODO MessageBox (lxy, 2025/2/21)
                 DownloadLibAsync(webLib.ToDto()).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Name} failed"));
             }
             else
@@ -155,7 +152,7 @@ internal sealed partial class ModManageService
     private async Task DownloadLibAsync(LibDto lib)
     {
         await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
-        _libsDict[lib.Name] = LocalService.LoadLibFromPath(Path.Combine(Config.UserLibsFolder, lib.FileName));
+        _libsDict[lib.Name] = await LocalService.LoadLibFromPathAsync(Path.Combine(Config.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
         Logger.ZLogInformation($"Lib {lib.Name} download finished");
     }
 
