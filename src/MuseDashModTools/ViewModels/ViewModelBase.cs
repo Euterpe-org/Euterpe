@@ -9,6 +9,7 @@ public partial class ViewModelBase : ObservableObject
 
     #endregion Injections
 
+    [RelayCommand]
     public virtual Task InitializeAsync() => Task.CompletedTask;
 
     [RelayCommand]
