@@ -11,8 +11,8 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
     public override async Task InitializeAsync()
     {
-        DotNetSdkInstalled = await LocalService.CheckDotNetSdkInstalledAsync().ConfigureAwait(false);
-        ModTemplateInstalled = await LocalService.CheckModTemplateInstalledAsync().ConfigureAwait(false);
+        DotNetSdkInstalled = await LocalService.CheckDotNetSdkInstalledAsync().ConfigureAwait(true);
+        ModTemplateInstalled = await LocalService.CheckModTemplateInstalledAsync().ConfigureAwait(true);
 
         Logger.ZLogInformation($"{nameof(ModDevelopPanelViewModel)} Initialized");
     }
