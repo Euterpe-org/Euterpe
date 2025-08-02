@@ -45,6 +45,15 @@ public interface IPlatformService
             .ExecuteAsync();
 
     /// <summary>
+    ///     Uninstall Mod Template
+    /// </summary>
+    /// <returns></returns>
+    Task UninstallModTemplateAsync() =>
+        Cli.Wrap("dotnet")
+            .WithArguments(["new", "uninstall", "MuseDash.Mod.Template"])
+            .ExecuteAsync();
+
+    /// <summary>
     ///     Set MD_DIRECTORY environment variable
     /// </summary>
     /// <returns></returns>
