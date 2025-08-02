@@ -14,31 +14,6 @@
         <vm:DonationDialogViewModel />
     </Design.DataContext>
 
-    <UserControl.Styles>
-        <Style
-            Selector="Border">
-
-            <!--  Dialog Donation Qr Container  -->
-            <Style
-                Selector="^.DialogDonationQr">
-                <Setter Property="Width" Value="230" />
-                <Setter Property="Margin" Value="10" />
-                <Setter Property="ClipToBounds" Value="True" />
-                <Setter Property="CornerRadius" Value="20" />
-            </Style>
-        </Style>
-
-        <Style
-            Selector="Image">
-            <!--  Dialog Donation Qr  -->
-            <Style
-                Selector="^.DialogDonationQr">
-                <Setter Property="Width" Value="230" />
-                <Setter Property="Stretch" Value="Uniform" />
-            </Style>
-        </Style>
-    </UserControl.Styles>
-
     <StackPanel
         Margin="20"
         Spacing="20">
@@ -56,31 +31,112 @@
             TextWrapping="Wrap" />
 
         <UniformGrid
-            Columns="2"
+            Columns="3"
             Margin="0,15"
-            Rows="2"
-            Width="500">
+            Rows="1"
+            Width="600">
 
-            <Border
-                Classes="DialogDonationQr">
-                <Image
-                    Classes="DialogDonationQr"
-                    Source="avares://MuseDashModTools/Assets/DonationQRs/Wechat.webp" />
-            </Border>
-
-            <Border
-                Classes="DialogDonationQr">
-                <Image
-                    Classes="DialogDonationQr"
-                    Source="avares://MuseDashModTools/Assets/DonationQRs/Alipay.webp" />
-            </Border>
-
-            <HyperlinkButton
-                Classes="Underline"
-                Content="PayPal"
+            <!--  WeChat Pay  -->
+            <StackPanel
                 HorizontalAlignment="Center"
-                NavigateUri="https://paypal.me/lxymahatma" />
+                Spacing="10">
+                <Border
+                    Classes="DialogDonationQr">
+                    <Image
+                        Classes="DialogDonationQr"
+                        Source="avares://MuseDashModTools/Assets/Donation/WeChatPay.webp" />
+                </Border>
+            </StackPanel>
+
+            <!--  AliPay  -->
+            <StackPanel
+                HorizontalAlignment="Center"
+                Spacing="10">
+                <Border
+                    Classes="DialogDonationQr">
+                    <Image
+                        Classes="DialogDonationQr"
+                        Source="avares://MuseDashModTools/Assets/Donation/AliPay.webp" />
+                </Border>
+            </StackPanel>
+
+            <!--  PayPal  -->
+            <StackPanel
+                HorizontalAlignment="Center"
+                Spacing="10">
+                <Border
+                    Classes="DialogDonationCard">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        Spacing="5"
+                        VerticalAlignment="Center">
+                        <Image
+                            Height="28"
+                            Source="avares://MuseDashModTools/Assets/Donation/PayPal.webp" />
+                        <HyperlinkButton
+                            Classes="PaypalButton"
+                            Content="点击捐赠"
+                            FontSize="14"
+                            HorizontalAlignment="Center"
+                            Margin="0,8,0,0"
+                            NavigateUri="https://paypal.me/lxymahatma" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
 
         </UniformGrid>
     </StackPanel>
+
+    <UserControl.Styles>
+        <Style
+            Selector="Border">
+
+            <!--  QR Code Container Style  -->
+            <Style
+                Selector="^.DialogDonationQr">
+                <Setter Property="Width" Value="160" />
+                <Setter Property="Height" Value="170" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="ClipToBounds" Value="True" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="BoxShadow" Value="0 2 8 #20000000" />
+            </Style>
+
+            <!--  PayPal Card Style  -->
+            <Style
+                Selector="^.DialogDonationCard">
+                <Setter Property="Width" Value="160" />
+                <Setter Property="Height" Value="170" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="Background" Value="#0070ba" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="BoxShadow" Value="0 2 8 #20000000" />
+            </Style>
+
+        </Style>
+
+        <!--  Unified Image Style  -->
+        <Style
+            Selector="Image">
+            <Style
+                Selector="^.DialogDonationQr">
+                <Setter Property="Width" Value="160" />
+                <Setter Property="Height" Value="170" />
+                <Setter Property="Stretch" Value="UniformToFill" />
+            </Style>
+        </Style>
+
+        <!--  Unified Hyperlink Style  -->
+        <Style
+            Selector="HyperlinkButton">
+            <Style
+                Selector="^.PaypalButton">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+        </Style>
+
+    </UserControl.Styles>
+
 </UserControl>
