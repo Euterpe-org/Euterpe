@@ -34,7 +34,7 @@
                                                 Margin="4,2">
                                                 <PathIcon
                                                     Grid.Column="0"
-                                                    Data="M 2 6 L 6 10 L 14 2"
+                                                    Data="{StaticResource CheckMark}"
                                                     Height="20"
                                                     HorizontalAlignment="Left"
                                                     IsVisible="{Binding $parent[ListBoxItem].IsSelected}"
