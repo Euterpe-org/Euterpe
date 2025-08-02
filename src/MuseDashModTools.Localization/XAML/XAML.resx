@@ -28,12 +28,6 @@
   <data name="Button_Install" xml:space="preserve">
     <value>Install</value>
   </data>
-  <data name="Button_LaunchModded" xml:space="preserve">
-    <value>Launch Modded</value>
-  </data>
-  <data name="Button_LaunchVanilla" xml:space="preserve">
-    <value>Launch Vanilla</value>
-  </data>
   <data name="Button_MDMC_Discord" xml:space="preserve">
         <value>MDMC Discord</value>
     </data>
@@ -457,5 +451,14 @@ Takes effect after restarting app</value>
   </data>
   <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
     <value>Provide the link of custom download source</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+      <value>Modded</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+      <value>Vanilla</value>
+  </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+      <value>Play</value>
   </data>
 </root>
