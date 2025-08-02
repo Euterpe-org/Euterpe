@@ -87,8 +87,7 @@
                     <Button
                         Grid.Column="1"
                         Classes="Transparent Card"
-                        Command="{Binding InstallModTemplateCommand}"
-                        IsEnabled="{Binding !ModTemplateInstalled}">
+                        Command="{Binding ToggleModTemplateInstallCommand}">
                         <Button.Styles>
                             <Style
                                 Selector="Button:pointerover Border.Hover">
