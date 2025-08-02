@@ -49,5 +49,7 @@
     <StyleInclude
         Source="/Styles/TextBoxStyles.axaml" />
     <StyleInclude
+        Source="/Styles/ToggleButtonStyles.axaml" />
+    <StyleInclude
         Source="/Styles/UniformGridStyles.axaml" />
 </Styles>

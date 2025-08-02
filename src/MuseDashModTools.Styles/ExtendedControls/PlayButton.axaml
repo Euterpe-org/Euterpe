@@ -9,51 +9,108 @@
 
     <Style
         Selector="mdmt|PlayButton">
+        <!--  Play Button Container  -->
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="230" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="0,0,120,80" />
+        <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid
-                    ColumnDefinitions="*,Auto">
-                    <Button
-                        Command="{TemplateBinding Command, Mode=OneWay}"
-                        Content="{TemplateBinding Content, Mode=OneWay}" />
-                    <ToggleButton
-                        Grid.Column="1">
-                        <PathIcon
-                            Data="M 0 0 L 8 0 L 4 5 Z"
-                            Height="5"
-                            Width="8" />
-                        <ToggleButton.Flyout>
-                            <Flyout>
-                                <ListBox
-                                    ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}"
-                                    SelectedIndex="{TemplateBinding SelectedIndex, Mode=TwoWay}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid
-                                                ColumnDefinitions="20,*"
-                                                Margin="4,2">
-                                                <PathIcon
-                                                    Grid.Column="0"
-                                                    Data="{StaticResource CheckMark}"
-                                                    Height="20"
-                                                    HorizontalAlignment="Left"
-                                                    IsVisible="{Binding $parent[ListBoxItem].IsSelected}"
-                                                    VerticalAlignment="Center"
-                                                    Width="20" />
+                <Border
+                    Background="Transparent"
+                    CornerRadius="18">
+                    <!--  Visual Separator Shadow  -->
+                    <Border.Effect>
+                        <DropShadowEffect
+                            Color="Black"
+                            BlurRadius="10"
+                            OffsetX="0"
+                            OffsetY="2"
+                            Opacity="0.3" />
+                    </Border.Effect>
 
-                                                <TextBlock
-                                                    Grid.Column="1"
-                                                    Margin="4,0,0,0"
-                                                    Text="{Binding .}"
-                                                    VerticalAlignment="Center" />
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </Flyout>
-                        </ToggleButton.Flyout>
-                    </ToggleButton>
-                </Grid>
+                    <Grid
+                        ColumnDefinitions="Auto,45"
+                        ColumnSpacing="1">
+                        <!--  Main Play Button  -->
+                        <Button
+                            Grid.Column="0"
+                            Classes="Play"
+                            Command="{TemplateBinding Command, Mode=OneWay}"
+                            Content="{TemplateBinding Content, Mode=OneWay}" />
+
+                        <!--  Dropdown Toggle Button  -->
+                        <ToggleButton
+                            Grid.Column="1"
+                            Classes="SelectPlayVersion">
+                            <!--  Dropdown Arrow Icon  -->
+                            <PathIcon
+                                Data="M 0 0 L 8 0 L 4 5 Z"
+                                Foreground="White"
+                                Height="5"
+                                Width="8" />
+
+                            <!--  Dropdown Flyout  -->
+                            <ToggleButton.Flyout>
+                                <Flyout
+                                    Placement="Bottom">
+                                    <Border
+                                        CornerRadius="8">
+                                        <ListBox
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}"
+                                            SelectedIndex="{TemplateBinding SelectedIndex, Mode=TwoWay}">
+                                            <!--  Game Mode Item Template  -->
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid
+                                                        ColumnDefinitions="20,*"
+                                                        Margin="8,4"
+                                                        MinWidth="100">
+                                                        <!--  Selection Checkmark  -->
+                                                        <PathIcon
+                                                            Grid.Column="0"
+                                                            Data="{StaticResource CheckMark}"
+                                                            Foreground="White"
+                                                            Height="16"
+                                                            HorizontalAlignment="Left"
+                                                            IsVisible="{Binding $parent[ListBoxItem].IsSelected}"
+                                                            VerticalAlignment="Center"
+                                                            Width="16" />
+
+                                                        <!--  Game Mode Text  -->
+                                                        <TextBlock
+                                                            Grid.Column="1"
+                                                            FontSize="14"
+                                                            FontWeight="SemiBold"
+                                                            Foreground="White"
+                                                            HorizontalAlignment="Center"
+                                                            Margin="8,0,0,0"
+                                                            Text="{Binding .}"
+                                                            VerticalAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                            <!--  ListBox Item Style  -->
+                                            <ListBox.Styles>
+                                                <Style
+                                                    Selector="ListBoxItem">
+                                                    <Setter Property="Background" Value="Transparent" />
+                                                    <Setter Property="Padding" Value="6" />
+                                                    <Setter Property="Margin" Value="0,4" />
+                                                    <Setter Property="CornerRadius" Value="4" />
+                                                </Style>
+                                            </ListBox.Styles>
+                                        </ListBox>
+                                    </Border>
+                                </Flyout>
+                            </ToggleButton.Flyout>
+                        </ToggleButton>
+                    </Grid>
+                </Border>
             </ControlTemplate>
         </Setter>
     </Style>
