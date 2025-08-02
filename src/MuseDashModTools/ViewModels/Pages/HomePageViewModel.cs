@@ -41,7 +41,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     [RelayCommand]
     private void LaunchGame()
     {
-        switch (Enum.GetValues<GameMode>()[SelectedGameModeIndex])
+        switch (Config.GameMode)
         {
             case GameMode.Modded:
                 GameService.LaunchModdedGame();
