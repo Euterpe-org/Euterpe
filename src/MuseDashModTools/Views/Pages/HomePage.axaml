@@ -2,7 +2,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:MuseDashModTools.ViewModels.Pages"
     x:Class="MuseDashModTools.Views.Pages.HomePage"
@@ -193,23 +195,11 @@
             VerticalAlignment="Top" />
 
         <!--  Play Button  -->
-        <SplitButton
-            Classes="Play"
-            Command="{Binding LaunchModdedGameCommand, Mode=OneTime}"
-            Content="Play">
-            <SplitButton.Flyout>
-                <MenuFlyout
-                    Placement="BottomEdgeAlignedRight">
-                    <MenuItem
-                        Command="{Binding LaunchVanillaGameCommand, Mode=OneTime}">
-                        <MenuItem.Header>
-                            <TextBlock
-                                Text="Play Vanilla" />
-                        </MenuItem.Header>
-                    </MenuItem>
-                </MenuFlyout>
-            </SplitButton.Flyout>
-        </SplitButton>
+        <mdmt:PlayButton
+            Command="{Binding LaunchGameCommand, Mode=OneTime}"
+            Content="{Localize {x:Static loc:XAMLLiteral.Button_LaunchGame}}"
+            ItemsSource="{Binding GameModes, Mode=OneTime}"
+            SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}" />
 
         <!--  Donation Button  -->
         <Button

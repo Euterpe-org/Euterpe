@@ -1,0 +1,60 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
+
+    <Design.PreviewWith>
+        <mdmt:PlayButton />
+    </Design.PreviewWith>
+
+    <Style
+        Selector="mdmt|PlayButton">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid
+                    ColumnDefinitions="*,Auto">
+                    <Button
+                        Command="{TemplateBinding Command, Mode=OneWay}"
+                        Content="{TemplateBinding Content, Mode=OneWay}" />
+                    <ToggleButton
+                        Grid.Column="1">
+                        <PathIcon
+                            Data="M 0 0 L 8 0 L 4 5 Z"
+                            Height="5"
+                            Width="8" />
+                        <ToggleButton.Flyout>
+                            <Flyout>
+                                <ListBox
+                                    ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}"
+                                    SelectedIndex="{TemplateBinding SelectedIndex, Mode=TwoWay}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid
+                                                ColumnDefinitions="20,*"
+                                                Margin="4,2">
+                                                <PathIcon
+                                                    Grid.Column="0"
+                                                    Data="M 2 6 L 6 10 L 14 2"
+                                                    Height="20"
+                                                    HorizontalAlignment="Left"
+                                                    IsVisible="{Binding $parent[ListBoxItem].IsSelected}"
+                                                    VerticalAlignment="Center"
+                                                    Width="20" />
+
+                                                <TextBlock
+                                                    Grid.Column="1"
+                                                    Margin="4,0,0,0"
+                                                    Text="{Binding .}"
+                                                    VerticalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Flyout>
+                        </ToggleButton.Flyout>
+                    </ToggleButton>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

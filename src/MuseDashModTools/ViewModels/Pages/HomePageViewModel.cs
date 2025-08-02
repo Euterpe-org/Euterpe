@@ -5,6 +5,21 @@ namespace MuseDashModTools.ViewModels.Pages;
 
 public sealed partial class HomePageViewModel : ViewModelBase
 {
+    public IReadOnlyList<LocalizedString> GameModes { get; } =
+    [
+        Dropdown_Modded,
+        Dropdown_Vanilla
+    ];
+
+    [ObservableProperty]
+    public partial int SelectedGameModeIndex { get; set; }
+
+    public override Task InitializeAsync()
+    {
+        SelectedGameModeIndex = (int)Config.GameMode;
+        return base.InitializeAsync();
+    }
+
     [RelayCommand]
     private Task<DialogResult> ShowDonationDrawerAsync()
     {
@@ -24,18 +39,28 @@ public sealed partial class HomePageViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void LaunchModdedGame()
+    private void LaunchGame()
     {
-        GameService.LaunchModdedGame();
+        switch (Enum.GetValues<GameMode>()[SelectedGameModeIndex])
+        {
+            case GameMode.Modded:
+                GameService.LaunchModdedGame();
+                break;
+            case GameMode.Vanilla:
+                GameService.LaunchVanillaGame();
+                break;
+            default:
+                throw new UnreachableException();
+        }
     }
 
-    [RelayCommand]
-    private void LaunchVanillaGame()
-    {
-        GameService.LaunchVanillaGame();
-    }
+    [UsedImplicitly]
+    partial void OnSelectedGameModeIndexChanged(int value) => Config.GameMode = (GameMode)value;
 
     #region Injections
+
+    [UsedImplicitly]
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
     public required DonationDialogViewModel DonationDialogViewModel { get; init; }

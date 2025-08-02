@@ -24,6 +24,8 @@
         Source="/ExtendedControls/DifficultyFilter.axaml" />
     <StyleInclude
         Source="/ExtendedControls/NaviPanelListControl.axaml" />
+    <StyleInclude
+        Source="/ExtendedControls/PlayButton.axaml" />
     <!--  Templated Controls  -->
     <StyleInclude
         Source="/TemplatedControls/ContentListItem.axaml" />
