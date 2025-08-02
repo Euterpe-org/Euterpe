@@ -1,4 +1,5 @@
-﻿using Ursa.Themes.Semi;
+﻿using SemiTheme = Semi.Avalonia.SemiTheme;
+using UrsaSemiTheme = Ursa.Themes.Semi.SemiTheme;
 
 namespace MuseDashModTools.Services;
 
@@ -18,6 +19,21 @@ public sealed class LocalizationService
         "zh-Hans",
         "zh-Hant"
     ];
+
+    private Dictionary<string, string> SemiLanguageMaps { get; } = new()
+    {
+        ["en"] = "en-US",
+        ["de"] = "de-de",
+        ["es"] = "es-es",
+        ["fr"] = "fr-fr",
+        ["hr"] = "hr",
+        ["hu"] = "hu",
+        ["ja"] = "ja-jp",
+        ["ko"] = "ko",
+        ["ru"] = "ru-ru",
+        ["zh-Hans"] = "zh-CN",
+        ["zh-Hant"] = "zh-TW"
+    };
 
     public Language GetCurrentLanguage()
     {
@@ -59,7 +75,10 @@ public sealed class LocalizationService
 
         var culture = CultureInfo.GetCultureInfo(language);
         LocalizationManager.Culture = culture;
-        SemiTheme.OverrideLocaleResources(GetCurrentApplication(), culture);
+
+        var semiCulture = CultureInfo.GetCultureInfo(SemiLanguageMaps[culture.Name]);
+        SemiTheme.OverrideLocaleResources(GetCurrentApplication(), semiCulture);
+        UrsaSemiTheme.OverrideLocaleResources(GetCurrentApplication(), semiCulture);
 
         Config.LanguageCode = language;
         Logger.ZLogInformation($"Language set to {language}");
