@@ -17,6 +17,7 @@
     <UserControl.Styles>
         <Style
             Selector="Border">
+
             <!--  Dialog Donation Qr Container  -->
             <Style
                 Selector="^.DialogDonationQr">
@@ -64,14 +65,14 @@
                 Classes="DialogDonationQr">
                 <Image
                     Classes="DialogDonationQr"
-                    Source="/Assets/DonationQRs/Wechat.webp" />
+                    Source="avares://MuseDashModTools/Assets/DonationQRs/Wechat.webp" />
             </Border>
 
             <Border
                 Classes="DialogDonationQr">
                 <Image
                     Classes="DialogDonationQr"
-                    Source="/Assets/DonationQRs/Alipay.webp" />
+                    Source="avares://MuseDashModTools/Assets/DonationQRs/Alipay.webp" />
             </Border>
 
             <HyperlinkButton

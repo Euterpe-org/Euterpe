@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:semi="https://irihi.tech/semi">
     <semi:SemiTheme />
+
+    <!--  Resources  -->
     <Styles.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
@@ -19,6 +21,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
+
     <!--  Extended Controls  -->
     <StyleInclude
         Source="/ExtendedControls/DifficultyFilter.axaml" />
@@ -26,6 +29,7 @@
         Source="/ExtendedControls/NaviPanelListControl.axaml" />
     <StyleInclude
         Source="/ExtendedControls/PlayButton.axaml" />
+
     <!--  Templated Controls  -->
     <StyleInclude
         Source="/TemplatedControls/ContentListItem.axaml" />
@@ -35,6 +39,7 @@
         Source="/TemplatedControls/Difficulty.axaml" />
     <StyleInclude
         Source="/TemplatedControls/NaviButtonsControl.axaml" />
+
     <!--  Control Styles  -->
     <StyleInclude
         Source="/Styles/BorderStyles.axaml" />
@@ -49,7 +54,6 @@
     <StyleInclude
         Source="/Styles/TextBoxStyles.axaml" />
     <StyleInclude
-        Source="/Styles/ToggleButtonStyles.axaml" />
-    <StyleInclude
         Source="/Styles/UniformGridStyles.axaml" />
+
 </Styles>

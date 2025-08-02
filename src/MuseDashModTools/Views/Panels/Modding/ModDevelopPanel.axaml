@@ -15,10 +15,13 @@
         <vm:ModDevelopPanelViewModel />
     </Design.DataContext>
 
+    <!--  Main scrollable container  -->
     <ScrollViewer>
         <StackPanel
             Classes="ContentListRoot"
             HorizontalAlignment="Stretch">
+
+            <!--  Global button style for URL opening  -->
             <StackPanel.Styles>
                 <Style
                     Selector="Button">
@@ -26,11 +29,14 @@
                 </Style>
             </StackPanel.Styles>
 
+            <!--  Development Environment Section  -->
             <mdmt:ContentListItem
                 Title="Development Environment">
                 <Grid
                     ColumnDefinitions="*,*"
                     Margin="5,0,10,0">
+
+                    <!--  .NET SDK Installation Card  -->
                     <Button
                         Grid.Column="0"
                         Classes="Transparent Card"
@@ -62,6 +68,8 @@
                                         Classes="CardDesc"
                                         Text="Required for mod development" />
                                 </StackPanel>
+
+                                <!--  Installation status indicator  -->
                                 <StackPanel
                                     DockPanel.Dock="Right"
                                     HorizontalAlignment="Right"
@@ -84,6 +92,7 @@
                         </Border>
                     </Button>
 
+                    <!--  Mod Template NuGet Card  -->
                     <Button
                         Grid.Column="1"
                         Classes="Transparent Card"
@@ -114,6 +123,8 @@
                                         Classes="CardDesc"
                                         Text="For quick mod project creation" />
                                 </StackPanel>
+
+                                <!--  Installation status indicator  -->
                                 <StackPanel
                                     DockPanel.Dock="Right"
                                     HorizontalAlignment="Right"
@@ -138,6 +149,7 @@
                 </Grid>
             </mdmt:ContentListItem>
 
+            <!--  Mod Submission Section  -->
             <mdmt:ContentListItem
                 Title="Submit Your Mod">
                 <Button
@@ -156,11 +168,13 @@
                         <Grid
                             ColumnDefinitions="Auto,*"
                             HorizontalAlignment="Center">
+
+                            <!--  MDModsDev logo  -->
                             <Image
                                 Grid.Column="0"
                                 Height="64"
                                 Margin="0,0,20,0"
-                                Source="/Assets/MDModsDev_Logo.png" />
+                                Source="avares://MuseDashModTools/Assets/MDModsDev_Logo.png" />
                             <StackPanel
                                 Grid.Column="1">
                                 <TextBlock
@@ -182,11 +196,16 @@
                 </Button>
             </mdmt:ContentListItem>
 
+            <!--  Recommended IDEs Section  -->
             <mdmt:ContentListItem
                 Title="Recommended IDEs">
+
+                <!--  3-column grid for IDE options  -->
                 <UniformGrid
                     Columns="3"
                     Margin="5,0,10,0">
+
+                    <!--  VS Code  -->
                     <Button
                         Classes="Transparent Card"
                         CommandParameter="https://code.visualstudio.com">
@@ -206,7 +225,7 @@
                                 VerticalAlignment="Center">
                                 <Image
                                     Height="58"
-                                    Source="/Assets/VSCode_Logo.png" />
+                                    Source="avares://MuseDashModTools/Assets/VSCode_Logo.png" />
                                 <TextBlock
                                     Margin="0,0,0,15"
                                     Text="Visual Studio Code" />
@@ -214,6 +233,7 @@
                         </Border>
                     </Button>
 
+                    <!--  JetBrains Rider  -->
                     <Button
                         Classes="Transparent Card"
                         CommandParameter="https://www.jetbrains.com/rider">
@@ -233,7 +253,7 @@
                                 VerticalAlignment="Center">
                                 <Image
                                     Height="58"
-                                    Source="/Assets/Rider_Logo.png" />
+                                    Source="avares://MuseDashModTools/Assets/Rider_Logo.png" />
                                 <TextBlock
                                     Margin="0,0,0,15"
                                     Text="JetBrains Rider" />
@@ -241,6 +261,7 @@
                         </Border>
                     </Button>
 
+                    <!--  Visual Studio  -->
                     <Button
                         Classes="Transparent Card"
                         CommandParameter="https://visualstudio.microsoft.com">
@@ -260,16 +281,17 @@
                                 VerticalAlignment="Center">
                                 <Image
                                     Height="58"
-                                    Source="/Assets/VS_Logo.png" />
+                                    Source="avares://MuseDashModTools/Assets/VS_Logo.png" />
                                 <TextBlock
                                     Margin="0,0,0,15"
                                     Text="Visual Studio" />
                             </StackPanel>
                         </Border>
                     </Button>
+
                 </UniformGrid>
             </mdmt:ContentListItem>
-
         </StackPanel>
     </ScrollViewer>
+
 </UserControl>

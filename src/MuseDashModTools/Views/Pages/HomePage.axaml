@@ -13,6 +13,7 @@
     </Design.DataContext>
 
     <Grid>
+
         <!--  Background Image  -->
         <Image
             Source="{DynamicResource BackgroundImage}"
@@ -39,7 +40,7 @@
             Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
             <Image
                 Height="100"
-                Source="/Assets/Genshin.webp" />
+                Source="avares://MuseDashModTools/Assets/Genshin.webp" />
         </Button>
 
         <!--  Donation Drawer  -->
@@ -47,4 +48,39 @@
             HostId="DonationDrawerHost" />
 
     </Grid>
+
+    <UserControl.Styles>
+
+        <!--  Donation Button Style  -->
+        <Style
+            Selector="Button.Donation">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="0,60,90,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition
+                        Property="RenderTransform"
+                        Duration="0:0:0.2"
+                        Easing="ExponentialEaseOut" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style
+            Selector="Button.Donation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style
+            Selector="Button.Donation:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)" />
+        </Style>
+        <Style
+            Selector="Button.Donation:pressed">
+            <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)" />
+        </Style>
+    </UserControl.Styles>
+
 </UserControl>

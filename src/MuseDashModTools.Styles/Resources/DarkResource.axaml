@@ -1,6 +1,8 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Bitmaps  -->
     <Bitmap
         x:Key="AppTitleImage">
         avares://MuseDashModTools/Assets/Title-Dark.webp
@@ -13,6 +15,8 @@
         x:Key="TitleImage">
         avares://MuseDashModTools/Assets/MDMC_Title_Dark.webp
     </Bitmap>
+
+    <!--  Corlors  -->
     <Color
         x:Key="SecondaryCardColor">
         #1F2024
@@ -21,4 +25,5 @@
         x:Key="PrimaryTitleColor">
         #FAFAFA
     </Color>
+
 </ResourceDictionary>

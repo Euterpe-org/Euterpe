@@ -4,6 +4,7 @@
 
     <Style
         Selector="TextBlock">
+
         <!--  Common Description Text  -->
         <Style
             Selector="^.Desc">
@@ -49,6 +50,6 @@
             Selector="^.Active">
             <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
         </Style>
-    </Style>
 
+    </Style>
 </Styles>

@@ -4,6 +4,7 @@
 
     <Style
         Selector="StackPanel">
+
         <!--  Root Content List Container  -->
         <Style
             Selector="^.ContentListRoot">
@@ -34,6 +35,6 @@
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Spacing" Value="8" />
         </Style>
-    </Style>
 
+    </Style>
 </Styles>

@@ -1,39 +1,48 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-        xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
+    xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models">
     <Design.PreviewWith>
         <mdmt:NaviPanelListControl />
     </Design.PreviewWith>
 
-    <Style Selector="mdmt|NaviPanelListControl">
+    <Style
+        Selector="mdmt|NaviPanelListControl">
         <Setter Property="Template">
             <ControlTemplate>
-                <ListBox ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}" SelectedItem="{TemplateBinding SelectedItem, Mode=TwoWay}">
+                <ListBox
+                    ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}"
+                    SelectedItem="{TemplateBinding SelectedItem, Mode=TwoWay}">
 
                     <ListBox.Styles>
-                        <Style Selector="ListBoxItem">
+                        <Style
+                            Selector="ListBoxItem">
                             <Setter Property="CornerRadius" Value="4" />
                             <Setter Property="Margin" Value="5,2" />
                             <Setter Property="Padding" Value="12,4" />
                             <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonUncheckedForeground}" />
                         </Style>
-                        <Style Selector="ListBoxItem:selected Label">
+                        <Style
+                            Selector="ListBoxItem:selected Label">
                             <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
                         </Style>
                     </ListBox.Styles>
 
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
+                            <StackPanel
+                                Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
 
                     <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="models:NavItem">
-                            <Label VerticalAlignment="Center"
-                                   Content="{Binding DisplayName.Value, Mode=OneWay}"
-                                   Theme="{StaticResource BorderlessButton}" />
+                        <DataTemplate
+                            x:DataType="models:NavItem">
+                            <Label
+                                Content="{Binding DisplayName.Value, Mode=OneWay}"
+                                Theme="{StaticResource BorderlessButton}"
+                                VerticalAlignment="Center" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
 
@@ -41,4 +50,5 @@
             </ControlTemplate>
         </Setter>
     </Style>
+
 </Styles>
