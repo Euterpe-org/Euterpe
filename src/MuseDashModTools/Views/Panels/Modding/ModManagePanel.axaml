@@ -221,7 +221,7 @@
                 HorizontalAlignment="Center"
                 Margin="0,20,0,0"
                 RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="/Assets/Neko_Blur.webp"
+                Source="avares://MuseDashModTools/Assets/Neko_Blur.webp"
                 VerticalAlignment="Center" />
 
             <!--  Details Content  -->
@@ -446,4 +446,5 @@
             </ScrollViewer>
         </Panel>
     </Grid>
+
 </UserControl>

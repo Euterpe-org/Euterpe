@@ -4,10 +4,13 @@
 
     <Style
         Selector="TextBox">
+
+        <!--  Description  -->
         <Style
             Selector="^.Desc">
             <Setter Property="Foreground" Value="Gray" />
             <Setter Property="IsReadOnly" Value="True" />
         </Style>
+
     </Style>
 </Styles>

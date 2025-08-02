@@ -4,11 +4,12 @@
 
     <Style
         Selector="Label">
+
         <!--  Label Styles for Different States  -->
         <Style
             Selector="^.TagLabel">
             <Setter Property="Theme" Value="{StaticResource TagLabel}" />
         </Style>
-    </Style>
 
+    </Style>
 </Styles>

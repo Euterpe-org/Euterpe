@@ -4,6 +4,7 @@
 
     <Style
         Selector="Border">
+
         <!--  Card  -->
         <Style
             Selector="^.Card">
@@ -42,6 +43,6 @@
             <Setter Property="Padding" Value="12,4" />
             <Setter Property="Theme" Value="{DynamicResource CardBorder}" />
         </Style>
-    </Style>
 
+    </Style>
 </Styles>

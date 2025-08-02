@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
     xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models">
+
     <Design.PreviewWith>
         <mdmt:NaviButtonsControl />
     </Design.PreviewWith>
@@ -59,10 +60,10 @@
                                 </DropDownButton>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-
                     </ItemsControl>
                 </StackPanel>
             </ControlTemplate>
         </Setter>
     </Style>
+
 </Styles>

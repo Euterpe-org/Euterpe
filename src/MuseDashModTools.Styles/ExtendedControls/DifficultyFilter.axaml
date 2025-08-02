@@ -1,13 +1,17 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
     <Design.PreviewWith>
-        <Menu Width="500" Height="400">
+        <Menu
+            Height="400"
+            Width="500">
             <mdmt:DifficultyFilter />
         </Menu>
     </Design.PreviewWith>
 
-    <Style Selector="mdmt|DifficultyFilter">
+    <Style
+        Selector="mdmt|DifficultyFilter">
         <Setter Property="Height" Value="48" />
         <Setter Property="MinWidth" Value="112" />
         <Setter Property="Padding" Value="0" />
@@ -17,6 +21,6 @@
         <Setter Property="Template">
             <ControlTemplate />
         </Setter>
-
     </Style>
+
 </Styles>

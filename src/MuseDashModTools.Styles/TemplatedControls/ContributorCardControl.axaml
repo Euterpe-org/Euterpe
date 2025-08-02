@@ -3,14 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:MuseDashModTools.Models.Controls"
     xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
+
     <Design.PreviewWith>
         <mdmt:ContributorCardControl />
     </Design.PreviewWith>
-
-    <Style
-        Selector="ContentPresenter">
-        <Setter Property="CornerRadius" Value="8" />
-    </Style>
 
     <Style
         Selector="mdmt|ContributorCardControl">
@@ -132,4 +128,11 @@
             </ControlTemplate>
         </Setter>
     </Style>
+
+    <!--  Apply rounded corner design  -->
+    <Style
+        Selector="ContentPresenter">
+        <Setter Property="CornerRadius" Value="8" />
+    </Style>
+
 </Styles>

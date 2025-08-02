@@ -19,7 +19,7 @@
     <TrayIcon.Icons>
         <TrayIcons>
             <TrayIcon
-                Icon="/Assets/Icon.ico"
+                Icon="avares://MuseDashModTools/Assets/Icon.ico"
                 ToolTipText="Muse Dash Mod Tools">
                 <TrayIcon.Menu>
                     <NativeMenu>

@@ -4,6 +4,7 @@
 
     <Style
         Selector="Button">
+
         <!--  Transparent Button  -->
         <Style
             Selector="^.Transparent">
@@ -39,89 +40,5 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
 
-        <Style
-            Selector="^.Donation">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="0,60,90,0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition
-                        Property="RenderTransform"
-                        Duration="0:0:0.2"
-                        Easing="ExponentialEaseOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style
-            Selector="^.Donation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-        <Style
-            Selector="^.Donation:pointerover">
-            <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)" />
-        </Style>
-        <Style
-            Selector="^.Donation:pressed">
-            <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)" />
-        </Style>
-
-        <!--  Play Button  -->
-        <Style
-            Selector="^.Play">
-            <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Width" Value="200" />
-            <Setter Property="Height" Value="60" />
-            <Setter Property="CornerRadius" Value="18,0,0,18" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition
-                        Property="RenderTransform"
-                        Duration="0:0:0.2"
-                        Easing="CubicEaseOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-
-        <Style
-            Selector="^.Play /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition
-                        Property="Background"
-                        Duration="0:0:0.15"
-                        Easing="CubicEaseInOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-
-        <Style
-            Selector="^.Play:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource PrimaryButtonHoverGradient}" />
-        </Style>
-
-        <Style
-            Selector="^.Play:pointerover">
-            <Setter Property="RenderTransform" Value="scale(1.01)" />
-        </Style>
-
-        <Style
-            Selector="^.Play:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource PrimaryButtonPressedGradient}" />
-        </Style>
-
-        <Style
-            Selector="^.Play:pressed">
-            <Setter Property="RenderTransform" Value="scale(0.95)" />
-        </Style>
     </Style>
 </Styles>

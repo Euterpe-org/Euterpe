@@ -34,7 +34,7 @@
                 <Image
                     Height="120"
                     RenderOptions.BitmapInterpolationMode="HighQuality"
-                    Source="/Assets/Logo.webp" />
+                    Source="avares://MuseDashModTools/Assets/Logo.webp" />
 
                 <!--  Title & Version & Copyright  -->
                 <StackPanel
@@ -108,7 +108,7 @@
                                         CommandParameter="https://github.com/MDModsDev/MuseDashModTools/blob/master/LICENSE.txt">
                                         <u:IconButton.Icon>
                                             <Image
-                                                Source="/Assets/MIT_Logo.png" />
+                                                Source="avares://MuseDashModTools/Assets/MIT_Logo.png" />
                                         </u:IconButton.Icon>
                                     </u:IconButton>
                                 </InlineUIContainer>
@@ -121,7 +121,7 @@
                                         CommandParameter="https://dotnet.microsoft.com">
                                         <u:IconButton.Icon>
                                             <Image
-                                                Source="/Assets/DotNet_Logo.png" />
+                                                Source="avares://MuseDashModTools/Assets/DotNet_Logo.png" />
                                         </u:IconButton.Icon>
                                     </u:IconButton>
                                 </InlineUIContainer>
@@ -134,7 +134,7 @@
                                         CommandParameter="https://avaloniaui.net">
                                         <u:IconButton.Icon>
                                             <Image
-                                                Source="/Assets/Avalonia_Logo.png" />
+                                                Source="avares://MuseDashModTools/Assets/Avalonia_Logo.png" />
                                         </u:IconButton.Icon>
                                     </u:IconButton>
                                 </InlineUIContainer>
@@ -223,8 +223,8 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-
             </StackPanel>
         </DockPanel>
     </ScrollViewer>
+
 </UserControl>

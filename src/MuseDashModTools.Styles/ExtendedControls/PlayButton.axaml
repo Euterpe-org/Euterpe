@@ -9,7 +9,6 @@
 
     <Style
         Selector="mdmt|PlayButton">
-        <!--  Play Button Container  -->
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="230" />
         <Setter Property="HorizontalAlignment" Value="Right" />
@@ -21,7 +20,6 @@
                 <Border
                     Background="Transparent"
                     CornerRadius="18">
-                    <!--  Visual Separator Shadow  -->
                     <Border.Effect>
                         <DropShadowEffect
                             Color="Black"
@@ -34,17 +32,19 @@
                     <Grid
                         ColumnDefinitions="Auto,45"
                         ColumnSpacing="1">
-                        <!--  Main Play Button  -->
+
+                        <!--  Play Button  -->
                         <Button
                             Grid.Column="0"
                             Classes="Play"
                             Command="{TemplateBinding Command, Mode=OneWay}"
                             Content="{TemplateBinding Content, Mode=OneWay}" />
 
-                        <!--  Dropdown Toggle Button  -->
+                        <!--  Dropdown Button  -->
                         <ToggleButton
                             Grid.Column="1"
                             Classes="SelectPlayVersion">
+
                             <!--  Dropdown Arrow Icon  -->
                             <PathIcon
                                 Data="M 0 0 L 8 0 L 4 5 Z"
@@ -63,6 +63,7 @@
                                             BorderThickness="0"
                                             ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}"
                                             SelectedIndex="{TemplateBinding SelectedIndex, Mode=TwoWay}">
+
                                             <!--  Game Mode Item Template  -->
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
@@ -70,6 +71,7 @@
                                                         ColumnDefinitions="20,*"
                                                         Margin="8,4"
                                                         MinWidth="100">
+
                                                         <!--  Selection Checkmark  -->
                                                         <PathIcon
                                                             Grid.Column="0"
@@ -94,6 +96,7 @@
                                                     </Grid>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
+
                                             <!--  ListBox Item Style  -->
                                             <ListBox.Styles>
                                                 <Style
@@ -104,6 +107,7 @@
                                                     <Setter Property="CornerRadius" Value="4" />
                                                 </Style>
                                             </ListBox.Styles>
+
                                         </ListBox>
                                     </Border>
                                 </Flyout>
@@ -114,4 +118,106 @@
             </ControlTemplate>
         </Setter>
     </Style>
+
+    <!--  Play Button Style  -->
+    <Style
+        Selector="Button.Play">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="CornerRadius" Value="18,0,0,18" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="Button.Play /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.15"
+                    Easing="CubicEaseInOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="Button.Play:pointerover">
+        <Setter Property="RenderTransform" Value="scale(1.01)" />
+    </Style>
+    <Style
+        Selector="Button.Play:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonHoverGradient}" />
+    </Style>
+    <Style
+        Selector="Button.Play:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.95)" />
+    </Style>
+    <Style
+        Selector="Button.Play:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonPressedGradient}" />
+    </Style>
+
+    <!--  Dropdown Button Style  -->
+    <Style
+        Selector="ToggleButton.SelectPlayVersion">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="45" />
+        <Setter Property="CornerRadius" Value="0,18,18,0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.15"
+                    Easing="CubicEaseInOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pointerover">
+        <Setter Property="RenderTransform" Value="scale(1.02)" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonHoverGradient}" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.95)" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonPressedGradient}" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
+    </Style>
+
 </Styles>
