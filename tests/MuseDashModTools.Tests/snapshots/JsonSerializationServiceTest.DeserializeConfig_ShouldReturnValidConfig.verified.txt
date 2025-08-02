@@ -1,6 +1,7 @@
 ﻿{
   MuseDashFolder: SteamLibrary/steamapps/common/Muse Dash,
   CacheFolder: Cache,
+  GameMode: Vanilla,
   LanguageCode: zh-Hans,
   Theme: Dark,
   ShowConsole: true,
