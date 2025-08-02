@@ -10,6 +10,7 @@ public sealed class JsonSerializationServiceTest
                                       {
                                           "MuseDashFolder": "SteamLibrary\\steamapps\\common\\Muse Dash",
                                           "CacheFolder": "Cache",
+                                          "GameMode": "Vanilla",
                                           "LanguageCode": "zh-Hans",
                                           "Theme": "Dark",
                                           "ShowConsole": true,
@@ -33,6 +34,7 @@ public sealed class JsonSerializationServiceTest
         {
             MuseDashFolder = "SteamLibrary\\steamapps\\common\\Muse Dash",
             CacheFolder = "Cache",
+            GameMode = GameMode.Vanilla,
             LanguageCode = "zh-Hans",
             Theme = "Dark",
             ShowConsole = true,
