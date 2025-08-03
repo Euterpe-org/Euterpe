@@ -16,7 +16,7 @@
         avares://MuseDashModTools/Assets/MDMC_Title_Dark.webp
     </Bitmap>
 
-    <!--  Corlors  -->
+    <!--  Colors  -->
     <Color
         x:Key="SecondaryCardColor">
         #1F2024
