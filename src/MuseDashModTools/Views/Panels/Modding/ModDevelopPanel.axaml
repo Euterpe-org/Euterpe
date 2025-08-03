@@ -174,7 +174,7 @@
                                 Grid.Column="0"
                                 Height="64"
                                 Margin="0,0,20,0"
-                                Source="avares://MuseDashModTools/Assets/MDModsDev_Logo.png" />
+                                Source="/Assets/MDModsDev_Logo.png" />
                             <StackPanel
                                 Grid.Column="1">
                                 <TextBlock
@@ -225,7 +225,7 @@
                                 VerticalAlignment="Center">
                                 <Image
                                     Height="58"
-                                    Source="avares://MuseDashModTools/Assets/VSCode_Logo.png" />
+                                    Source="/Assets/VSCode_Logo.png" />
                                 <TextBlock
                                     Margin="0,0,0,15"
                                     Text="Visual Studio Code" />
@@ -253,7 +253,7 @@
                                 VerticalAlignment="Center">
                                 <Image
                                     Height="58"
-                                    Source="avares://MuseDashModTools/Assets/Rider_Logo.png" />
+                                    Source="/Assets/Rider_Logo.png" />
                                 <TextBlock
                                     Margin="0,0,0,15"
                                     Text="JetBrains Rider" />
@@ -281,7 +281,7 @@
                                 VerticalAlignment="Center">
                                 <Image
                                     Height="58"
-                                    Source="avares://MuseDashModTools/Assets/VS_Logo.png" />
+                                    Source="/Assets/VS_Logo.png" />
                                 <TextBlock
                                     Margin="0,0,0,15"
                                     Text="Visual Studio" />

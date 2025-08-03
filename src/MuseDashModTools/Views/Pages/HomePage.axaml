@@ -40,7 +40,7 @@
             Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
             <Image
                 Height="100"
-                Source="avares://MuseDashModTools/Assets/Genshin.webp" />
+                Source="/Assets/Genshin.webp" />
         </Button>
 
         <!--  Donation Drawer  -->

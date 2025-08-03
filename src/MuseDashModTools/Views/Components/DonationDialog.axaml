@@ -44,7 +44,7 @@
                     Classes="DialogDonationQr">
                     <Image
                         Classes="DialogDonationQr"
-                        Source="avares://MuseDashModTools/Assets/Donation/WeChatPay.webp" />
+                        Source="/Assets/Donation/WeChatPay.webp" />
                 </Border>
             </StackPanel>
 
@@ -56,7 +56,7 @@
                     Classes="DialogDonationQr">
                     <Image
                         Classes="DialogDonationQr"
-                        Source="avares://MuseDashModTools/Assets/Donation/AliPay.webp" />
+                        Source="/Assets/Donation/AliPay.webp" />
                 </Border>
             </StackPanel>
 
@@ -72,7 +72,7 @@
                         VerticalAlignment="Center">
                         <Image
                             Height="28"
-                            Source="avares://MuseDashModTools/Assets/Donation/PayPal.webp" />
+                            Source="/Assets/Donation/PayPal.webp" />
                         <HyperlinkButton
                             Classes="PaypalButton"
                             Content="点击捐赠"

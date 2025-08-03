@@ -221,7 +221,7 @@
                 HorizontalAlignment="Center"
                 Margin="0,20,0,0"
                 RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="avares://MuseDashModTools/Assets/Neko_Blur.webp"
+                Source="/Assets/Neko_Blur.webp"
                 VerticalAlignment="Center" />
 
             <!--  Details Content  -->
