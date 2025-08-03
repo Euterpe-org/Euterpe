@@ -32,11 +32,11 @@
             <Image
                 Height="50"
                 RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="avares://MuseDashModTools/Assets/ML_Icon.png" />
+                Source="/Assets/ML_Icon.png" />
             <Image
                 Height="40"
                 RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="avares://MuseDashModTools/Assets/ML_Text.png" />
+                Source="/Assets/ML_Text.png" />
         </StackPanel>
 
         <TextBlock

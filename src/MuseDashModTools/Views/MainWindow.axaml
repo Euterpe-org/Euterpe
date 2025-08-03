@@ -83,7 +83,7 @@
                         HorizontalAlignment="Center"
                         Margin="0,15,0,10"
                         RenderOptions.BitmapInterpolationMode="HighQuality"
-                        Source="avares://MuseDashModTools/Assets/Logo.webp"
+                        Source="/Assets/Logo.webp"
                         VerticalAlignment="Center" />
                 </u:NavMenu.Header>
 
