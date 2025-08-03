@@ -16,7 +16,7 @@
         avares://MuseDashModTools/Assets/MDMC_Title_Light.webp
     </Bitmap>
 
-    <!--  Corlors  -->
+    <!--  Colors  -->
     <Color
         x:Key="SecondaryCardColor">
         #FAFAFA
