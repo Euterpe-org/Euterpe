@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
   "automergeType": "pr",
-  "automergeStrategy": "rebase",
+  "automergeStrategy": "squash",
   "baseBranchPatterns": [
     "dev"
   ],
