@@ -1,7 +1,8 @@
 ﻿{
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
-  "automergeType": "branch",
+  "automergeType": "pr",
+  "automergeStrategy": "rebase",
   "baseBranchPatterns": [
     "dev"
   ],
