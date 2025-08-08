@@ -6,7 +6,7 @@
     <PropertyGroup>
         <AvaloniaVersion>11.3.3</AvaloniaVersion>
         <UrsaVersion>1.12.0</UrsaVersion>
-        <VerifyVersion>30.4.0</VerifyVersion>
+        <VerifyVersion>30.6.1</VerifyVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.14.0</RoslynatorAnalyzersVersion>
     </PropertyGroup>
