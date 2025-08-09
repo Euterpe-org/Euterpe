@@ -25,7 +25,7 @@
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.5.0"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.4"/>
-        <PackageVersion Include="Downloader" Version="4.0.2"/>
+        <PackageVersion Include="Downloader" Version="4.0.3"/>
         <PackageVersion Include="DynamicData" Version="9.4.1"/>
         <PackageVersion Include="HotAvalonia" Version="3.0.0"/>
         <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)"/>
