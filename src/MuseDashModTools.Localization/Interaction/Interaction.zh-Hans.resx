@@ -75,6 +75,13 @@
   <data name="MessageBox_Content_DisableReverseDependency" xml:space="preserve">
     <value>你想要禁用依赖于 {0} 的mod吗？</value>
   </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+      <value>未找到 .Net 6 Runtime
+点击确定安装</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+      <value>无法安装 .Net 6 Runtime</value>
+  </data>
   <data name="MessageBox_Content_DownloadChartFailed" xml:space="preserve">
     <value>谱面下载失败
 {0}</value>
@@ -290,12 +297,5 @@ Muse Dash Mod Tools已是最新版
   </data>
   <data name="Title_Warning" xml:space="preserve">
     <value>警告</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-      <value>未找到 .Net 6 Runtime
-点击确定安装</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-      <value>无法安装 .Net 6 Runtime</value>
   </data>
 </root>

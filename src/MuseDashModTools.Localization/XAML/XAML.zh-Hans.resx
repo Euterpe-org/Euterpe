@@ -28,6 +28,9 @@
   <data name="Button_Install" xml:space="preserve">
     <value>安装</value>
   </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+      <value>开始游戏</value>
+  </data>
   <data name="Button_MDMC_Discord" xml:space="preserve">
         <value>MDMC Discord</value>
     </data>
@@ -66,6 +69,12 @@
   </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>打开</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+      <value>Mod 版</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+      <value>原版</value>
   </data>
   <data name="Folder_CustomAlbums" xml:space="preserve">
     <value>自制谱文件夹</value>
@@ -445,14 +454,5 @@
   </data>
   <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
     <value>填写一个自定义的下载链接</value>
-  </data>
-  <data name="Dropdown_Vanilla" xml:space="preserve">
-      <value>原版</value>
-  </data>
-  <data name="Dropdown_Modded" xml:space="preserve">
-      <value>Mod 版</value>
-  </data>
-  <data name="Button_LaunchGame" xml:space="preserve">
-      <value>开始游戏</value>
   </data>
 </root>
