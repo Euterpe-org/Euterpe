@@ -28,6 +28,9 @@
   <data name="Button_Install" xml:space="preserve">
     <value>Install</value>
   </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+      <value>Play</value>
+  </data>
   <data name="Button_MDMC_Discord" xml:space="preserve">
         <value>MDMC Discord</value>
     </data>
@@ -66,6 +69,12 @@
   </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>Open</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+      <value>Modded</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+      <value>Vanilla</value>
   </data>
   <data name="Folder_CustomAlbums" xml:space="preserve">
     <value>Custom Albums</value>
@@ -451,14 +460,5 @@ Takes effect after restarting app</value>
   </data>
   <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
     <value>Provide the link of custom download source</value>
-  </data>
-  <data name="Dropdown_Modded" xml:space="preserve">
-      <value>Modded</value>
-  </data>
-  <data name="Dropdown_Vanilla" xml:space="preserve">
-      <value>Vanilla</value>
-  </data>
-  <data name="Button_LaunchGame" xml:space="preserve">
-      <value>Play</value>
   </data>
 </root>

@@ -79,6 +79,9 @@ Are you sure you want to disable this mod?</value>
       <value>.NET 6 Runtime not found
 Click OK to install</value>
   </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+      <value>Failed to install .NET 6 Runtime</value>
+  </data>
   <data name="MessageBox_Content_DotNetSDKNotFound" xml:space="preserve">
       <value>.NET SDK not found</value>
   </data>
@@ -298,8 +301,5 @@ and check your antivirus</value>
   </data>
   <data name="Title_Warning" xml:space="preserve">
     <value>Warning</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-      <value>Failed to install .NET 6 Runtime</value>
   </data>
 </root>
