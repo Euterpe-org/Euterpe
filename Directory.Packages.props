@@ -56,7 +56,7 @@
         <PackageVersion Include="System.Interactive.Async" Version="6.0.3"/>
         <PackageVersion Include="System.Linq.Async" Version="6.0.3"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.8"/>
-        <PackageVersion Include="TUnit" Version="0.55.6"/>
+        <PackageVersion Include="TUnit" Version="0.55.23"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify" Version="$(VerifyVersion)"/>
         <PackageVersion Include="Verify.TUnit" Version="$(VerifyVersion)"/>
