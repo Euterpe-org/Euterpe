@@ -22,6 +22,7 @@ internal sealed class WindowsService : IPlatformService
         .SelectMany(path => Environment.GetLogicalDrives().Select(drive => Path.Combine(drive, path))).ToFrozenSet();
 
     public string OsString => "Windows";
+    public string UpdaterFileName => "Updater.exe";
 
     [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool GetGamePath([NotNullWhen(true)] out string? folderPath)
@@ -44,9 +45,6 @@ internal sealed class WindowsService : IPlatformService
         Logger.ZLogInformation($"Auto detected game path on Windows: {folderPath}");
         return true;
     }
-
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater.exe");
 
     public async Task<bool> InstallDotNetRuntimeAsync()
     {

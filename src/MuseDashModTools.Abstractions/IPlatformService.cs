@@ -8,18 +8,16 @@ public interface IPlatformService
     string OsString { get; }
 
     /// <summary>
+    ///     Get Updater file name
+    /// </summary>
+    string UpdaterFileName { get; }
+
+    /// <summary>
     ///     Get game folder path
     /// </summary>
     /// <param name="folderPath"></param>
     /// <returns>Is success</returns>
     bool GetGamePath([NotNullWhen(true)] out string? folderPath);
-
-    /// <summary>
-    ///     Get Updater file path
-    /// </summary>
-    /// <param name="folderPath">Created Updater folder path</param>
-    /// <returns>Updater file path</returns>
-    string GetUpdaterFilePath(string folderPath);
 
     #region Mod Develop
 
