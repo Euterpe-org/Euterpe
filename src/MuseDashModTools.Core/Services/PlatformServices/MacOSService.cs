@@ -3,8 +3,8 @@ namespace MuseDashModTools.Core;
 internal sealed class MacOsService : IPlatformService
 {
     public string OsString => "MacOS";
+    public string UpdaterFileName => "Updater";
     public bool GetGamePath([NotNullWhen(true)] out string? folderPath) => throw new NotSupportedException();
-    public string GetUpdaterFilePath(string folderPath) => throw new NotSupportedException();
     public Task<bool> InstallDotNetRuntimeAsync() => throw new NotSupportedException();
     public Task<bool> InstallDotNetSdkAsync() => throw new NotSupportedException();
     public void RevealFile(string filePath) => throw new NotSupportedException();

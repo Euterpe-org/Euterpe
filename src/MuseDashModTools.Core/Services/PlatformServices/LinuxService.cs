@@ -14,6 +14,7 @@ internal sealed class LinuxService : IPlatformService
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToFrozenSet();
 
     public string OsString => "Linux";
+    public string UpdaterFileName => "Updater";
 
     [SupportedOSPlatform(nameof(OSPlatform.Linux))]
     public bool GetGamePath([NotNullWhen(true)] out string? folderPath)
@@ -28,9 +29,6 @@ internal sealed class LinuxService : IPlatformService
         Logger.ZLogInformation($"Auto detected game path on Linux: {folderPath}");
         return true;
     }
-
-    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-    public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater");
 
     public Task<bool> InstallDotNetRuntimeAsync() => throw new NotSupportedException();
 
@@ -69,6 +67,9 @@ internal sealed class LinuxService : IPlatformService
         await TopLevel.Launcher.LaunchUriAsync(new Uri(uri)).ConfigureAwait(false);
         Logger.ZLogInformation($"Open uri: {uri}");
     }
+
+    [SupportedOSPlatform(nameof(OSPlatform.Linux))]
+    public string GetUpdaterFilePath(string folderPath) => Path.Combine(folderPath, "Updater");
 
     #region Injections
 

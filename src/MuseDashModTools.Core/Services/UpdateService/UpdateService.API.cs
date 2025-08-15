@@ -86,7 +86,13 @@ internal sealed partial class UpdateService
 
         if (result is MessageBoxResult.Yes)
         {
-            await DownloadManager.DownloadReleaseByTagAsync(release.TagName, PlatformService.OsString, cancellationToken).ConfigureAwait(true);
+            await DownloadManager.DownloadReleaseByTagAsync(release.TagName, PlatformService.OsString, cancellationToken).ConfigureAwait(false);
+            Process.Start(
+                new ProcessStartInfo
+                {
+                    FileName = PlatformService.UpdaterFileName,
+                    UseShellExecute = true
+                });
             return;
         }
 
