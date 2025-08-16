@@ -11,7 +11,7 @@ public sealed class Commands
     /// <param name="localService"></param>
     /// <param name="sourcePath">-p, Source path.</param>
     /// <param name="fromVersion">-fv, From which version.</param>
-    /// <param name="pid"></param>
+    /// <param name="pid">-pid, Process ID.</param>
     [Command("update")]
     public async Task UpdateAsync(
         [FromServices] ILogger<Commands> logger,
@@ -35,17 +35,16 @@ public sealed class Commands
         Directory.CreateDirectory(Path.Combine(sourcePath, $"backup-{fromVersion}"));
         logger.ZLogInformation($"Backup folder created at {sourcePath} for version {fromVersion}");
 
-        foreach (var filePath in Directory.GetFiles(sourcePath))
+        localService.CopyDirectory(sourcePath, Path.Combine(sourcePath, $"backup-{fromVersion}"));
+        logger.ZLogInformation($"Backup completed for version {fromVersion}");
+
+        if (!localService.ExtractZipFile("MuseDashModTools.zip", sourcePath))
         {
-            var fileName = Path.GetFileName(filePath);
-            var destinationPath = Path.Combine(sourcePath, $"backup-{fromVersion}", fileName);
-            File.Copy(filePath, destinationPath, true);
+            return;
         }
 
-        logger.ZLogInformation($"Backup completed at {sourcePath} for version {fromVersion}");
-
-        localService.ExtractZipFile("MuseDashModTools.zip", sourcePath);
         logger.ZLogInformation($"Updated files extracted to {sourcePath}");
+        logger.ZLogInformation($"Update completed successfully!");
 
         Console.ReadKey();
     }

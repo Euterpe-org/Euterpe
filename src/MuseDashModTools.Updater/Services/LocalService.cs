@@ -20,4 +20,16 @@ public sealed class LocalService(ILogger<LocalService> logger) : ILocalService
             return false;
         }
     }
+
+    public void CopyDirectory(string sourceDir, string destinationDir)
+    {
+        foreach (var filePath in Directory.GetFiles(sourceDir))
+        {
+            var fileName = Path.GetFileName(filePath);
+            var destinationPath = Path.Combine(destinationDir, fileName);
+            File.Copy(filePath, destinationPath, true);
+        }
+
+        _logger.ZLogInformation($"Directory copied from {sourceDir} to {destinationDir}");
+    }
 }
