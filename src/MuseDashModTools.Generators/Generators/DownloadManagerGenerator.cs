@@ -3,23 +3,24 @@
 [Generator(LanguageNames.CSharp)]
 public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
 {
+    private const string DownloadManagerAttributeName = "MuseDashModTools.Common.Attributes.DownloadManagerAttribute";
     protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
 
     protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
-        var syntaxProvider = context.SyntaxProvider
-            .CreateSyntaxProvider(FilterNode, ExtractDataFromContext);
+        var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
+            DownloadManagerAttributeName, FilterNode, ExtractDataFromContext);
         context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
-        node is ClassDeclarationSyntax { Identifier.Text: "DownloadManager" };
+        node is ClassDeclarationSyntax;
 
-    private static DownloadServiceMethodData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
+    private static DownloadServiceMethodData? ExtractDataFromContext(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
         if (context is not
             {
-                Node: ClassDeclarationSyntax classDeclarationSyntax,
+                TargetNode: ClassDeclarationSyntax classDeclarationSyntax,
                 SemanticModel: var semanticModel
             })
         {
@@ -27,7 +28,7 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
         }
 
         var symbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax)!;
-        var interfaceSymbol = symbol.AllInterfaces.Single(x => x.Name == "IDownloadService");
+        var interfaceSymbol = symbol.AllInterfaces.Single(x => x.Name is "IDownloadService");
         var methods = interfaceSymbol.GetMembers().OfType<IMethodSymbol>();
 
         var methodDeclarationDict = new Dictionary<string, MethodData>();

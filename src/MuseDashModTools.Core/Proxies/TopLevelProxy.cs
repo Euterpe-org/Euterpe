@@ -1,6 +1,4 @@
-﻿using MuseDashModTools.Common.Attributes;
-
-namespace MuseDashModTools.Core.Proxies;
+﻿namespace MuseDashModTools.Core.Proxies;
 
 [LazyProxy(typeof(TopLevel))]
 [UsedImplicitly]

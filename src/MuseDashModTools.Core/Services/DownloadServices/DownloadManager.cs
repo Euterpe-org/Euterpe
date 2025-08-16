@@ -1,5 +1,6 @@
 namespace MuseDashModTools.Core;
 
+[DownloadManager]
 internal sealed partial class DownloadManager : IDownloadManager
 {
     public async Task<bool> DownloadFileAsync(
