@@ -5,9 +5,7 @@ public sealed class PageNavigateGenerator : IncrementalGeneratorBase
 {
     protected override string ExpectedRootNamespace => MuseDashModToolsNamespace;
 
-    protected override void InitializeCore(
-        IncrementalGeneratorInitializationContext context,
-        IncrementalValueProvider<bool> isValidProvider)
+    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
         var syntaxProvider = context.SyntaxProvider
             .CreateSyntaxProvider(FilterNode, ExtractDataFromContext);

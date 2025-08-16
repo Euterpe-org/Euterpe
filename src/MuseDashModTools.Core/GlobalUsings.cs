@@ -11,6 +11,7 @@ global using JetBrains.Annotations;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using MuseDashModTools.Abstractions;
+global using MuseDashModTools.Common.Attributes;
 global using MuseDashModTools.Common.Extensions;
 global using MuseDashModTools.Core.Extensions;
 global using MuseDashModTools.Core.Logger;

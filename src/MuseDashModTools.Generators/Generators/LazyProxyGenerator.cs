@@ -7,8 +7,7 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 
     protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
 
-    protected override void InitializeCore(IncrementalGeneratorInitializationContext context,
-        IncrementalValueProvider<bool> isValidProvider)
+    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
         var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
             LazyProxyAttributeName, FilterNode, ExtractDataFromContext).Collect();
