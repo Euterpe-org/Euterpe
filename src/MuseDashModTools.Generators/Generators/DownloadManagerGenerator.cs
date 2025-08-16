@@ -27,32 +27,21 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
             return null;
         }
 
-        var symbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax)!;
-        var interfaceSymbol = symbol.AllInterfaces.Single(x => x.Name is "IDownloadService");
-        var methods = interfaceSymbol.GetMembers().OfType<IMethodSymbol>();
+        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax)!;
+        var interfaceSymbol = classSymbol.AllInterfaces.Single(x => x.Name is "IDownloadService");
 
-        var methodDeclarationDict = new Dictionary<string, MethodData>();
+        var methodsToImplement = interfaceSymbol.GetMembers()
+            .OfType<IMethodSymbol>()
+            .Where(method => classSymbol.FindImplementationForInterfaceMember(method) is not { DeclaringSyntaxReferences.IsEmpty: false })
+            .Select(method => new MethodData(
+                method.Name,
+                string.Join(", ", method.Parameters.Select(p => p.ToDisplayString())),
+                string.Join(", ", method.Parameters.Select(p => p.Name)),
+                method.ReturnType.ToDisplayString()
+            ))
+            .ToDictionary(m => m.MethodName, m => m);
 
-        foreach (var method in methods)
-        {
-            var implementingMember = symbol.FindImplementationForInterfaceMember(method);
-
-            var isUserImplemented = implementingMember is { DeclaringSyntaxReferences.IsEmpty: false };
-
-            if (isUserImplemented)
-            {
-                continue;
-            }
-
-            var methodName = method.Name;
-            var parameters = string.Join(", ", method.Parameters.Select(p => p.ToString()));
-            var parameterNames = string.Join(", ", method.Parameters.Select(p => p.Name));
-            var returnType = method.ReturnType.ToDisplayString();
-            methodDeclarationDict.Add(methodName, new MethodData(methodName, parameters, parameterNames, returnType));
-        }
-
-
-        return new DownloadServiceMethodData(methodDeclarationDict);
+        return new DownloadServiceMethodData(methodsToImplement);
     }
 
     private static void GenerateFromData(SourceProductionContext spc, DownloadServiceMethodData? data)
@@ -62,7 +51,15 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
             return;
         }
 
-        var sb = new StringBuilder();
+        var sb = new IndentedGeneratorStringBuilder();
+        sb.AppendLine("""
+                      namespace MuseDashModTools.Core;
+
+                      partial class DownloadManager
+                      {
+                      """);
+
+        sb.IncreaseIndent();
         foreach (var value in methodDeclarationDict.Values)
         {
             sb.AppendLine($"{GetGeneratedCodeAttribute(nameof(DownloadManagerGenerator))}");
@@ -81,16 +78,10 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
                             """);
         }
 
-        spc.AddSource("DownloadManager.g.cs",
-            Header +
-            $$"""
-              namespace MuseDashModTools.Core;
+        sb.ResetIndent();
+        sb.AppendLine("}");
 
-              partial class DownloadManager
-              {
-                  {{sb.ToString().TrimEnd()}}
-              }
-              """);
+        spc.AddSource("DownloadManager.g.cs", sb.ToString());
     }
 
     private sealed record DownloadServiceMethodData(Dictionary<string, MethodData> Methods);
