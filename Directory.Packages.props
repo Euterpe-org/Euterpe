@@ -41,7 +41,7 @@
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
         <PackageVersion Include="Moq" Version="4.20.72"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
-        <PackageVersion Include="Polyfill" Version="8.7.4"/>
+        <PackageVersion Include="Polyfill" Version="8.8.0"/>
         <PackageVersion Include="PublishAotCompressed" Version="1.0.5"/>
         <PackageVersion Include="R3" Version="1.3.0"/>
         <PackageVersion Include="R3Extensions.Avalonia" Version="1.3.0"/>
