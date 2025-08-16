@@ -23,7 +23,7 @@ public sealed class LocalService(ILogger<LocalService> logger) : ILocalService
 
     public void CopyDirectory(string sourceDir, string destinationDir)
     {
-        foreach (var filePath in Directory.GetFiles(sourceDir))
+        foreach (var filePath in Directory.EnumerateFiles(sourceDir))
         {
             var fileName = Path.GetFileName(filePath);
             var destinationPath = Path.Combine(destinationDir, fileName);

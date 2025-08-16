@@ -20,6 +20,7 @@ internal static class Program
         }
 
         DeleteUnusedLogFile();
+        DeleteOldBackupFiles();
         ConfigureContainer(LogFileName);
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
@@ -33,13 +34,24 @@ internal static class Program
             return;
         }
 
-        var logFiles = Directory.GetFiles(logFolderName, "*.log").OrderDescending().Skip(30).ToArray();
+        var logFiles = Directory.EnumerateFiles(logFolderName, "*.log").OrderDescending().Skip(30).ToArray();
         if (logFiles is [])
         {
             return;
         }
 
         Parallel.ForEach(logFiles, (logFile, _) => File.Delete(logFile));
+    }
+
+    private static void DeleteOldBackupFiles()
+    {
+        var directories = Directory.GetDirectories(".", "backup-*");
+        if (directories is [] or { Length: 1 })
+        {
+            return;
+        }
+
+        Parallel.ForEach(directories.OrderDescending().Skip(1), (directory, _) => Directory.Delete(directory));
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
