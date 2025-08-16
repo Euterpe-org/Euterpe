@@ -69,14 +69,14 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
     {
         var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
             await Downloader.DownloadFileTaskAsync(downloadUrl,
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MuseDashModTools.zip"),
+                Path.Combine(updateFolder, "MuseDashModTools.zip"),
                 cancellationToken).ConfigureAwait(true);
         }
         catch (Exception ex)

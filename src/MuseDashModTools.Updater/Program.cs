@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using ZLogger;
 
 var services = new ServiceCollection();
 services.AddSingleton<ILocalService, LocalService>();
@@ -21,5 +19,6 @@ await using (serviceProvider.ConfigureAwait(false))
     ConsoleApp.ServiceProvider = serviceProvider;
 
     var app = ConsoleApp.Create();
+    app.Add<Commands>();
     await app.RunAsync(args).ConfigureAwait(false);
 }
