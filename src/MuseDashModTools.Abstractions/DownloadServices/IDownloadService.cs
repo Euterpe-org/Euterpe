@@ -9,7 +9,7 @@ public interface IDownloadService
 
     Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default);
     Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default);
-    Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default);
+    Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default);
     Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default);
     IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default);
     IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default);

@@ -86,14 +86,8 @@ internal sealed partial class UpdateService
 
         if (result is MessageBoxResult.Yes)
         {
-            await DownloadManager.DownloadReleaseByTagAsync(release.TagName, PlatformService.OsString, cancellationToken).ConfigureAwait(false);
-            Process.Start(
-                new ProcessStartInfo
-                {
-                    FileName = PlatformService.UpdaterFileName,
-                    UseShellExecute = true
-                });
-            return;
+            await StartUpdateProcessAsync(release.TagName, cancellationToken).ConfigureAwait(false);
+            Environment.Exit(0);
         }
 
         Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");

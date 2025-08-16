@@ -77,15 +77,15 @@ internal sealed class DownloadManager : IDownloadManager
     public Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default) =>
         CurrentDownloadService.DownloadLibAsync(lib, cancellationToken);
 
-    public Task DownloadReleaseByTagAsync(string tag, string osString, CancellationToken cancellationToken = default)
+    public Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
     {
         return Config.DownloadSource switch
         {
-            DownloadSource.GitHub => GitHubDownloadService.DownloadReleaseByTagAsync(tag, osString, cancellationToken),
-            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadReleaseByTagAsync(tag, osString, cancellationToken),
-            DownloadSource.Gitee => GiteeDownloadService.DownloadReleaseByTagAsync(tag, osString, cancellationToken),
+            DownloadSource.GitHub => GitHubDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
+            DownloadSource.Gitee => GiteeDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
             // For Custom Download Source, because they don't choose GitHub or GitHub Mirror for other downloads, so we will use Gitee
-            DownloadSource.Custom => GiteeDownloadService.DownloadReleaseByTagAsync(tag, osString, cancellationToken),
+            DownloadSource.Custom => GiteeDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
             _ => throw new UnreachableException()
         };
     }

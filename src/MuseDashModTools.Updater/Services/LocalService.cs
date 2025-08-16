@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using Microsoft.Extensions.Logging;
 
 namespace MuseDashModTools.Updater.Services;
 
@@ -12,12 +11,12 @@ public sealed class LocalService(ILogger<LocalService> logger) : ILocalService
         try
         {
             ZipFile.ExtractToDirectory(zipPath, extractPath, true);
-            _logger.LogInformation("Successfully extracted {ZipPath} to {ExtractPath}", zipPath, extractPath);
+            _logger.ZLogInformation($"Successfully extracted {zipPath} to {extractPath}");
             return true;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to extract file {ZipPath} to {ExtractPath}", zipPath, extractPath);
+            _logger.ZLogError(ex, $"Failed to extract file {zipPath} to {extractPath}");
             return false;
         }
     }
