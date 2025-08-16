@@ -1,16 +1,7 @@
 namespace MuseDashModTools.Core;
 
-internal sealed class DownloadManager : IDownloadManager
+internal sealed partial class DownloadManager : IDownloadManager
 {
-    private IDownloadService CurrentDownloadService => Config.DownloadSource switch
-    {
-        DownloadSource.GitHub => GitHubDownloadService,
-        DownloadSource.GitHubMirror => GitHubMirrorDownloadService,
-        DownloadSource.Gitee => GiteeDownloadService,
-        DownloadSource.Custom => CustomDownloadService,
-        _ => throw new UnreachableException()
-    };
-
     public async Task<bool> DownloadFileAsync(
         string url,
         string filePath,
@@ -71,12 +62,6 @@ internal sealed class DownloadManager : IDownloadManager
         };
     }
 
-    public Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default) =>
-        CurrentDownloadService.DownloadModAsync(mod, cancellationToken);
-
-    public Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default) =>
-        CurrentDownloadService.DownloadLibAsync(lib, cancellationToken);
-
     public Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
     {
         return Config.DownloadSource switch
@@ -102,12 +87,6 @@ internal sealed class DownloadManager : IDownloadManager
             _ => throw new UnreachableException()
         };
     }
-
-    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default) =>
-        CurrentDownloadService.GetModListAsync(cancellationToken);
-
-    public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default) =>
-        CurrentDownloadService.GetLibListAsync(cancellationToken);
 
     #region Injections
 
