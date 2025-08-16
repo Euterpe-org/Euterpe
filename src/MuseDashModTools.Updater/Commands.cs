@@ -9,16 +9,16 @@ public sealed class Commands
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="localService"></param>
-    /// <param name="sourcePath">-p, Source path.</param>
-    /// <param name="fromVersion">-fv, From which version.</param>
+    /// <param name="sourceDirectory">-d, Source directory where the application is.</param>
+    /// <param name="oldVersion">-ov, Current version of the application.</param>
     /// <param name="pid">-pid, Process ID.</param>
     [Command("update")]
     public async Task UpdateAsync(
         [FromServices] ILogger<Commands> logger,
         [FromServices] ILocalService localService,
-        [Argument] string sourcePath,
-        [Argument] string fromVersion,
-        [Argument] int pid)
+        string sourceDirectory,
+        string oldVersion,
+        int pid)
     {
         try
         {
@@ -32,18 +32,18 @@ public sealed class Commands
             logger.ZLogInformation($"Process with ID {pid} has already exited.");
         }
 
-        Directory.CreateDirectory(Path.Combine(sourcePath, $"backup-{fromVersion}"));
-        logger.ZLogInformation($"Backup folder created at {sourcePath} for version {fromVersion}");
+        Directory.CreateDirectory(Path.Combine(sourceDirectory, $"backup-{oldVersion}"));
+        logger.ZLogInformation($"Backup folder created at {sourceDirectory} for version {oldVersion}");
 
-        localService.CopyDirectory(sourcePath, Path.Combine(sourcePath, $"backup-{fromVersion}"));
-        logger.ZLogInformation($"Backup completed for version {fromVersion}");
+        localService.CopyDirectory(sourceDirectory, Path.Combine(sourceDirectory, $"backup-{oldVersion}"));
+        logger.ZLogInformation($"Backup completed for version {oldVersion}");
 
-        if (!localService.ExtractZipFile("MuseDashModTools.zip", sourcePath))
+        if (!localService.ExtractZipFile("MuseDashModTools.zip", sourceDirectory))
         {
             return;
         }
 
-        logger.ZLogInformation($"Updated files extracted to {sourcePath}");
+        logger.ZLogInformation($"Updated files extracted to {sourceDirectory}");
         logger.ZLogInformation($"Update completed successfully!");
 
         Console.ReadKey();

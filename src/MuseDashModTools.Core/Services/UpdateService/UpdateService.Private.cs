@@ -22,7 +22,7 @@ internal sealed partial class UpdateService
             new ProcessStartInfo
             {
                 FileName = updaterTargetPath,
-                Arguments = $"update {AppDomain.CurrentDomain.BaseDirectory} {AppVersion} {Environment.ProcessId}",
+                Arguments = $"update -d {AppDomain.CurrentDomain.BaseDirectory} -ov {AppVersion} -pid {Environment.ProcessId}",
                 WorkingDirectory = updateFolder,
                 UseShellExecute = false
             });
