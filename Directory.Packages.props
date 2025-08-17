@@ -59,7 +59,7 @@
         <PackageVersion Include="Verify" Version="$(VerifyVersion)"/>
         <PackageVersion Include="Verify.TUnit" Version="$(VerifyVersion)"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
-        <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.3"/>
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.212"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
