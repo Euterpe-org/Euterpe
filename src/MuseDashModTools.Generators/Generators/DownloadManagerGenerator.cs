@@ -16,7 +16,7 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax;
 
-    private static DownloadServiceMethodData? ExtractDataFromContext(GeneratorAttributeSyntaxContext context, CancellationToken _)
+    private static MethodData[]? ExtractDataFromContext(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
         if (context is not
             {
@@ -39,14 +39,14 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
                 string.Join(", ", method.Parameters.Select(p => p.Name)),
                 method.ReturnType.ToDisplayString()
             ))
-            .ToDictionary(m => m.MethodName, m => m);
+            .ToArray();
 
-        return new DownloadServiceMethodData(methodsToImplement);
+        return methodsToImplement;
     }
 
-    private static void GenerateFromData(SourceProductionContext spc, DownloadServiceMethodData? data)
+    private static void GenerateFromData(SourceProductionContext spc, MethodData[]? dataCollection)
     {
-        if (data is not var (methodDeclarationDict))
+        if (dataCollection is null or [])
         {
             return;
         }
@@ -60,22 +60,21 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
                       """);
 
         sb.IncreaseIndent();
-        foreach (var value in methodDeclarationDict.Values)
+        foreach (var method in dataCollection)
         {
             sb.AppendLine($"{GetGeneratedCodeAttribute(nameof(DownloadManagerGenerator))}");
-            sb.AppendLine($"public {value.ReturnType} {value.MethodName}({value.MethodParameters})");
+            sb.AppendLine($"public {method.ReturnType} {method.MethodName}({method.MethodParameters}) =>");
             sb.AppendLine($$"""
-                            {
-                                return Config.DownloadSource switch
+                                Config.DownloadSource switch
                                 {
-                                    DownloadSource.GitHub => GitHubDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
-                                    DownloadSource.GitHubMirror => GitHubMirrorDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
-                                    DownloadSource.Gitee => GiteeDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
-                                    DownloadSource.Custom => CustomDownloadService.{{value.MethodName}}({{value.MethodParameterNames}}),
+                                    DownloadSource.GitHub => GitHubDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
+                                    DownloadSource.GitHubMirror => GitHubMirrorDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
+                                    DownloadSource.Gitee => GiteeDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
+                                    DownloadSource.Custom => CustomDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
                                     _ => throw new UnreachableException()
                                 };
-                            }
                             """);
+            sb.AppendLine();
         }
 
         sb.ResetIndent();
@@ -83,8 +82,6 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
 
         spc.AddSource("DownloadManager.g.cs", sb.ToString());
     }
-
-    private sealed record DownloadServiceMethodData(Dictionary<string, MethodData> Methods);
 
     private sealed record MethodData(string MethodName, string MethodParameters, string MethodParameterNames, string ReturnType);
 }

@@ -21,10 +21,10 @@ internal sealed class CustomDownloadService : ICustomDownloadService
     #region Injections
 
     [UsedImplicitly]
-    public ILogger<CustomDownloadService> Logger { get; init; } = null!;
+    public required ILogger<CustomDownloadService> Logger { get; init; }
 
     [UsedImplicitly]
-    public Config Config { get; init; } = null!;
+    public required Config Config { get; init; }
 
     #endregion Injections
 }
