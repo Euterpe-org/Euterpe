@@ -5,7 +5,7 @@ public sealed class NavigationService
     #region Injections
 
     [UsedImplicitly]
-    public ILogger<NavigationService> Logger { get; init; } = null!;
+    public required ILogger<NavigationService> Logger { get; init; }
 
     #endregion Injections
 
