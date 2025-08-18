@@ -1,9 +1,17 @@
-﻿namespace MuseDashModTools.Generators;
+namespace MuseDashModTools.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
 {
     private const string DownloadManagerAttributeName = "MuseDashModTools.Common.Attributes.DownloadManagerAttribute";
+
+    private static readonly SymbolDisplayFormat _formatWithDefaultValue = new(
+        parameterOptions:
+        SymbolDisplayParameterOptions.IncludeType |
+        SymbolDisplayParameterOptions.IncludeName |
+        SymbolDisplayParameterOptions.IncludeDefaultValue
+    );
+
     protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
 
     protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
@@ -16,7 +24,7 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax;
 
-    private static MethodData[]? ExtractDataFromContext(GeneratorAttributeSyntaxContext context, CancellationToken _)
+    private static MethodData[]? ExtractDataFromContext(GeneratorAttributeSyntaxContext context, CancellationToken ct)
     {
         if (context is not
             {
@@ -27,7 +35,7 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
             return null;
         }
 
-        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax)!;
+        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax, ct)!;
         var interfaceSymbol = classSymbol.AllInterfaces.Single(x => x.Name is "IDownloadService");
 
         var methodsToImplement = interfaceSymbol.GetMembers()
@@ -35,7 +43,7 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
             .Where(method => classSymbol.FindImplementationForInterfaceMember(method) is not { DeclaringSyntaxReferences.IsEmpty: false })
             .Select(method => new MethodData(
                 method.Name,
-                string.Join(", ", method.Parameters.Select(p => p.ToDisplayString())),
+                string.Join(", ", method.Parameters.Select(p => p.ToDisplayString(_formatWithDefaultValue))),
                 string.Join(", ", method.Parameters.Select(p => p.Name)),
                 method.ReturnType.ToDisplayString()
             ))

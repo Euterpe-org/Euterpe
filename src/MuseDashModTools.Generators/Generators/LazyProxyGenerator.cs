@@ -92,9 +92,8 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 
         var methods = baseType.GetMembers()
             .OfType<IMethodSymbol>()
-            .Where(m =>
-                m.MethodKind == MethodKind.Ordinary &&
-                m is { DeclaredAccessibility: Accessibility.Public, IsStatic: false });
+            .Where(m => m.MethodKind is MethodKind.Ordinary &&
+                        m is { DeclaredAccessibility: Accessibility.Public, IsStatic: false });
 
         foreach (var method in methods)
         {

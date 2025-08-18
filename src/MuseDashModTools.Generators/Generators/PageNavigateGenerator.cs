@@ -17,7 +17,7 @@ public sealed class PageNavigateGenerator : IncrementalGeneratorBase
         && types.Any(x => x.Type.ToString() is "NavViewModelBase")
         && classDeclarationSyntax.Identifier.Text.EndsWith("ViewModel");
 
-    private static ViewModelData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
+    private static ViewModelData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken ct)
     {
         if (context is not
             {
@@ -28,11 +28,7 @@ public sealed class PageNavigateGenerator : IncrementalGeneratorBase
             return null;
         }
 
-        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
-        if (classSymbol is null)
-        {
-            return null;
-        }
+        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration, ct)!;
 
         var propertyDeclaration = classDeclaration.ChildNodes()
             .OfType<PropertyDeclarationSyntax>()
