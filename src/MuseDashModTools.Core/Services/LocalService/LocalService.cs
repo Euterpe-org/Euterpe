@@ -3,6 +3,7 @@ using System.Text;
 using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
 using CliWrap;
+using CliWrap.Exceptions;
 
 namespace MuseDashModTools.Core;
 
@@ -10,39 +11,63 @@ internal sealed partial class LocalService : ILocalService
 {
     public async Task<bool> CheckDotNetRuntimeInstalledAsync()
     {
-        var outputStringBuilder = new StringBuilder();
-        var result = await Cli.Wrap("dotnet")
-            .WithArguments("--list-runtimes")
-            .WithValidation(CommandResultValidation.None)
-            .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
-            .ExecuteAsync()
-            .ConfigureAwait(false);
+        try
+        {
+            var outputStringBuilder = new StringBuilder();
+            var result = await Cli.Wrap("dotnet")
+                .WithArguments("--list-runtimes")
+                .WithValidation(CommandResultValidation.None)
+                .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
+                .ExecuteAsync()
+                .ConfigureAwait(false);
 
-        return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.NETCore.App 6.");
+            return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.NETCore.App 6.");
+        }
+        catch (CommandExecutionException ex)
+        {
+            Logger.ZLogError(ex, $"Failed to check .NET runtime installation");
+            return false;
+        }
     }
 
     public async Task<bool> CheckDotNetSdkInstalledAsync()
     {
-        var outputStringBuilder = new StringBuilder();
-        var result = await Cli.Wrap("dotnet")
-            .WithArguments("--list-sdks")
-            .WithValidation(CommandResultValidation.None)
-            .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
-            .ExecuteAsync()
-            .ConfigureAwait(false);
+        try
+        {
+            var outputStringBuilder = new StringBuilder();
+            var result = await Cli.Wrap("dotnet")
+                .WithArguments("--list-sdks")
+                .WithValidation(CommandResultValidation.None)
+                .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
+                .ExecuteAsync()
+                .ConfigureAwait(false);
 
-        return result.IsSuccess && !outputStringBuilder.ToString().IsNullOrEmpty();
+            return result.IsSuccess && !outputStringBuilder.ToString().IsNullOrEmpty();
+        }
+        catch (CommandExecutionException ex)
+        {
+            Logger.ZLogError(ex, $"Failed to check .NET SDK installation");
+            return false;
+        }
     }
 
     public async Task<bool> CheckModTemplateInstalledAsync()
     {
-        var result = await Cli.Wrap("dotnet")
-            .WithArguments(["new", "list", "musedashmod"])
-            .WithValidation(CommandResultValidation.None)
-            .ExecuteAsync()
-            .ConfigureAwait(false);
+        try
+        {
+            var result = await Cli.Wrap("dotnet")
+                .WithArguments(["new", "list", "musedashmod"])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteAsync()
+                .ConfigureAwait(false);
 
-        return result.IsSuccess;
+            return result.IsSuccess;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to check Mod Template installation");
+            return false;
+        }
     }
 
     public string[] GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
