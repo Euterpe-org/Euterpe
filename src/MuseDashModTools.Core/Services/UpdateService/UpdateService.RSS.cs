@@ -13,7 +13,7 @@ internal sealed partial class UpdateService
         GitHubRSS? release;
         if (!Config.DownloadPrerelease)
         {
-            release = await GetLatestReleaseFromRSSAsync(cancellationToken).ConfigureAwait(true);
+            release = await GetStableReleaseFromRSSAsync(cancellationToken).ConfigureAwait(true);
         }
         else
         {
@@ -41,23 +41,27 @@ internal sealed partial class UpdateService
         }
     }
 
-    private async Task<GitHubRSS?> GetLatestReleaseFromRSSAsync(CancellationToken cancellationToken = default)
+    private async Task<GitHubRSS?> GetStableReleaseFromRSSAsync(CancellationToken cancellationToken = default)
     {
         var feed = await GetGitHubRSSFeedAsync(cancellationToken).ConfigureAwait(false);
 
         if (feed is null)
         {
+            Logger.ZLogWarning($"Fetched stable release from GitHub RSS is null");
             return null;
         }
 
         foreach (var item in feed.Items)
         {
             var versionText = item.Title.Text;
+            var version = SemVersion.Parse(versionText, SemVersionStyles.AllowV);
 
-            if (SemVersion.TryParse(versionText, SemVersionStyles.AllowV, out var version) && !version.IsPrerelease)
+            if (!version.IsPrerelease)
             {
                 return new GitHubRSS(version);
             }
+
+            Logger.ZLogWarning($"Fetched stable release from GitHub RSS is a prerelease: {version}");
         }
 
         return null;
@@ -69,42 +73,31 @@ internal sealed partial class UpdateService
 
         if (feed is null)
         {
+            Logger.ZLogWarning($"Fetched prerelease from GitHub RSS is null");
             return null;
         }
 
         var release = feed.Items.First();
-        return SemVersion.TryParse(release.Title.Text, SemVersionStyles.AllowV, out var version)
-            ? new GitHubRSS(version)
-            : null;
+        return new GitHubRSS(SemVersion.Parse(release.Title.Text));
     }
 
     private async Task HandleRSSReleaseAsync(GitHubRSS? release, CancellationToken cancellationToken = default)
     {
         if (release is null)
         {
-            Logger.ZLogWarning($"Fetched release from GitHub RSS is null");
             return;
         }
 
         var releaseVersion = release.Version;
         Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
 
-        if (Config.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
+        var shouldUpdate = await ShouldUpdateAsync(releaseVersion).ConfigureAwait(false);
+        if (!shouldUpdate)
         {
-            Logger.ZLogInformation($"No new version available");
             return;
         }
 
-        var result = await MessageBoxService.NoticeConfirmAsync($"New version available: {releaseVersion}, do you want to upgrade?")
-            .ConfigureAwait(true);
-
-        if (result is MessageBoxResult.Yes)
-        {
-            await StartUpdateProcessAsync(releaseVersion.ToString(), cancellationToken).ConfigureAwait(false);
-            Environment.Exit(0);
-        }
-
-        Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
-        Config.SkipVersion = releaseVersion;
+        await StartUpdateProcessAsync(releaseVersion.ToString(), cancellationToken).ConfigureAwait(false);
+        Environment.Exit(0);
     }
 }

@@ -2,6 +2,33 @@
 
 internal sealed partial class UpdateService
 {
+    private async Task<bool> ShouldUpdateAsync(SemVersion releaseVersion)
+    {
+        if (Config.SkipVersion == releaseVersion)
+        {
+            Logger.ZLogInformation($"New version is skipped by user configuration");
+            return false;
+        }
+
+        if (releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
+        {
+            Logger.ZLogInformation($"No new version available");
+            return false;
+        }
+
+        var result = await MessageBoxService.NoticeConfirmAsync($"New version available: {releaseVersion}, do you want to upgrade?")
+            .ConfigureAwait(true);
+
+        if (result is MessageBoxResult.Yes)
+        {
+            return true;
+        }
+
+        Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
+        Config.SkipVersion = releaseVersion;
+        return false;
+    }
+
     private static string GetUpdateTempPath()
     {
         var updateTempPath = Path.Combine(Path.GetTempPath(), AppName, "Update");

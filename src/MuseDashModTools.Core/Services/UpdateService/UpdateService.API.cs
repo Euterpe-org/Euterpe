@@ -20,7 +20,7 @@ internal sealed partial class UpdateService
         GitHubRelease? release;
         if (!Config.DownloadPrerelease)
         {
-            release = await GetLatestReleaseFromAPIAsync(cancellationToken).ConfigureAwait(true);
+            release = await GetStableReleaseFromAPIAsync(cancellationToken).ConfigureAwait(true);
         }
         else
         {
@@ -30,16 +30,30 @@ internal sealed partial class UpdateService
         await HandleAPIReleaseAsync(release, cancellationToken).ConfigureAwait(true);
     }
 
-    private async Task<GitHubRelease?> GetLatestReleaseFromAPIAsync(CancellationToken cancellationToken = default)
+    private async Task<GitHubRelease?> GetStableReleaseFromAPIAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            return await Client.GetFromJsonAsync<GitHubRelease>(LatestReleaseAPIUrl, Default.GitHubRelease, cancellationToken)
-                .ConfigureAwait(true);
+            var release = await Client.GetFromJsonAsync<GitHubRelease>(LatestReleaseAPIUrl, Default.GitHubRelease, cancellationToken).ConfigureAwait(false);
+
+            if (release is not null)
+            {
+                var version = SemVersion.Parse(release.TagName, SemVersionStyles.AllowV);
+                if (!version.IsPrerelease)
+                {
+                    return release;
+                }
+
+                Logger.ZLogWarning($"Fetched stable release from GitHub API is a prerelease: {version}");
+                return null;
+            }
+
+            Logger.ZLogWarning($"Fetched stable release from GitHub API is null");
+            return null;
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to fetch latest release from GitHub API");
+            Logger.ZLogError(ex, $"Failed to fetch stable release from GitHub API");
             return null;
         }
     }
@@ -48,7 +62,7 @@ internal sealed partial class UpdateService
     {
         try
         {
-            var releases = await Client.GetFromJsonAsync<GitHubRelease[]>(ReleaseAPIUrl, Default.GitHubReleaseArray, cancellationToken).ConfigureAwait(true);
+            var releases = await Client.GetFromJsonAsync<GitHubRelease[]>(ReleaseAPIUrl, Default.GitHubReleaseArray, cancellationToken).ConfigureAwait(false);
             if (releases is not (null or []))
             {
                 return releases[0];
@@ -68,29 +82,19 @@ internal sealed partial class UpdateService
     {
         if (release is null)
         {
-            Logger.ZLogWarning($"Fetched release from GitHub API is null");
             return;
         }
 
         var releaseVersion = SemVersion.Parse(release.TagName, SemVersionStyles.AllowV);
         Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
 
-        if (Config.SkipVersion == releaseVersion || releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
+        var shouldUpdate = await ShouldUpdateAsync(releaseVersion).ConfigureAwait(false);
+        if (!shouldUpdate)
         {
-            Logger.ZLogInformation($"No new version available");
             return;
         }
 
-        var result = await MessageBoxService.NoticeConfirmAsync($"New version available: {releaseVersion}, do you want to upgrade?")
-            .ConfigureAwait(true);
-
-        if (result is MessageBoxResult.Yes)
-        {
-            await StartUpdateProcessAsync(release.TagName, cancellationToken).ConfigureAwait(false);
-            Environment.Exit(0);
-        }
-
-        Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
-        Config.SkipVersion = releaseVersion;
+        await StartUpdateProcessAsync(release.TagName, cancellationToken).ConfigureAwait(false);
+        Environment.Exit(0);
     }
 }

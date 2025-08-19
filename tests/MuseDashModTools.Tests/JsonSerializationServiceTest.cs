@@ -1,8 +1,8 @@
 using System.Text;
-using MuseDashModTools.Models.Enums;
 
 namespace MuseDashModTools.Tests;
 
+[Category("JsonSerializationServiceTests")]
 [TestSubject(typeof(JsonSerializationService))]
 public sealed class JsonSerializationServiceTest
 {
