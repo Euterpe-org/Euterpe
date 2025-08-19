@@ -8,7 +8,7 @@ public sealed class ArchitectureTests
     private static readonly Types Types = Types.InCurrentDomain();
 
     [Test]
-    public async Task Abstractions_ShouldBePublicAndInterfaces()
+    public async Task Abstractions_ClassesArePublicAndInterfaces_ReturnsTrue()
     {
         var result = Types.That()
             .ResideInNamespace("MuseDashModTools.Abstractions")
@@ -22,7 +22,7 @@ public sealed class ArchitectureTests
     }
 
     [Test]
-    public async Task CoreServices_ShouldBeInternalAndSealed()
+    public async Task CoreServices_ClassesAreInternalAndSealed_ReturnsTrue()
     {
         var result = Types.That()
             .ResideInNamespaceMatching("^MuseDashModTools.Core$")
@@ -36,7 +36,7 @@ public sealed class ArchitectureTests
     }
 
     [Test]
-    public async Task Common_ShouldBePublic()
+    public async Task Common_ClassesArePublic_ReturnsTrue()
     {
         var result = Types.That()
             .ResideInNamespace("MuseDashModTools.Common")
@@ -48,7 +48,7 @@ public sealed class ArchitectureTests
     }
 
     [Test]
-    public async Task Models_ShouldBePublic()
+    public async Task Models_ClassesArePublic_ReturnsTrue()
     {
         var result = Types.That()
             .ResideInNamespace("MuseDashModTools.Models")
