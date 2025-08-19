@@ -41,7 +41,7 @@ public sealed class GitHubApiSourceTests : UpdateServiceTestBase
 
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Release version parsed: {LowerStableVersion}")
-            .Contains("No new version available");
+            .And.Contains("No new version available");
     }
 
     [Test]
@@ -77,7 +77,7 @@ public sealed class GitHubApiSourceTests : UpdateServiceTestBase
 
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Release version parsed: {LowerPrereleaseVersion}")
-            .Contains("No new version available");
+            .And.Contains("No new version available");
     }
 
     [Test]
@@ -106,7 +106,7 @@ public sealed class GitHubApiSourceTests : UpdateServiceTestBase
 
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Release version parsed: {AppVersion}")
-            .Contains("No new version available");
+            .And.Contains("No new version available");
     }
 
     [Test]
