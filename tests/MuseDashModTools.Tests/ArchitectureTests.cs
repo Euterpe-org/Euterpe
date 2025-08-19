@@ -2,7 +2,8 @@
 
 namespace MuseDashModTools.Tests;
 
-public sealed class ArchTests
+[Category("ArchitectureTests")]
+public sealed class ArchitectureTests
 {
     private static readonly Types Types = Types.InCurrentDomain();
 
