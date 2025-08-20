@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using static MuseDashModTools.Core.JsonContexts.CamelCaseJsonContext;
 
 namespace MuseDashModTools.Core;
 

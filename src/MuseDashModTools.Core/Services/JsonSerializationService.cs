@@ -1,4 +1,5 @@
 using System.Text.Json;
+using static MuseDashModTools.Core.JsonContexts.PascalCaseJsonContext;
 
 namespace MuseDashModTools.Core;
 
