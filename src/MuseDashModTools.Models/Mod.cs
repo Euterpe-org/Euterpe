@@ -14,5 +14,7 @@ public sealed class Mod
     public string[] ModDependencies { get; set; } = [];
     public string[] LibDependencies { get; set; } = [];
     public string[] IncompatibleMods { get; set; } = [];
+
+    [JsonPropertyName("sha256")]
     public string SHA256 { get; set; } = string.Empty;
 }
