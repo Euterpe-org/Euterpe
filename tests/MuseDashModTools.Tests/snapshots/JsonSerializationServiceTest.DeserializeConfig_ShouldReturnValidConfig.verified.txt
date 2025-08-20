@@ -7,7 +7,6 @@
   ShowConsole: true,
   AlwaysShowScrollBar: true,
   UpdateSource: GitHubRSS,
-  DownloadPrerelease: false,
   IgnoreException: false,
   ChartFolder: Cache/Charts,
   CustomAlbumsFolder: SteamLibrary/steamapps/common/Muse Dash/Custom_Albums,

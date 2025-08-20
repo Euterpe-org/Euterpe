@@ -18,15 +18,12 @@ internal sealed partial class UpdateService
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Config.GitHubToken);
         }
 
-        GitHubRelease? release;
-        if (!Config.DownloadPrerelease)
+        var release = Config.UpdateChannel switch
         {
-            release = await GetStableReleaseFromAPIAsync(cancellationToken).ConfigureAwait(true);
-        }
-        else
-        {
-            release = await GetPrereleaseFromAPIAsync(cancellationToken).ConfigureAwait(true);
-        }
+            UpdateChannel.Stable => await GetStableReleaseFromAPIAsync(cancellationToken).ConfigureAwait(true),
+            UpdateChannel.Prerelease => await GetPrereleaseFromAPIAsync(cancellationToken).ConfigureAwait(true),
+            _ => throw new UnreachableException()
+        };
 
         return await HandleAPIReleaseAsync(release, cancellationToken).ConfigureAwait(false);
     }

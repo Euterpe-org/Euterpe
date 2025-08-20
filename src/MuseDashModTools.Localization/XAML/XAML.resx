@@ -214,9 +214,6 @@
   <data name="Setting_Description_CacheFolderPath" xml:space="preserve">
         <value>This includes the cache when you download files. Please do not change this when performing other operations</value>
     </data>
-  <data name="Setting_Description_DownloadPrerelease" xml:space="preserve">
-    <value>Check for pre-release versions when checking for MDMT updates</value>
-  </data>
   <data name="Setting_Description_DownloadSource" xml:space="preserve">
     <value>Source for Mod List and Downloads</value>
   </data>
@@ -235,6 +232,9 @@
   <data name="Setting_Description_ShowConsole" xml:space="preserve">
         <value>Whether to display the console when the game is launched</value>
     </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+      <value>Update channel for MDMT</value>
+  </data>
   <data name="Setting_Description_UpdateSource" xml:space="preserve">
     <value>Source to check for MDMT updates</value>
   </data>
@@ -256,9 +256,6 @@
   <data name="Setting_Title_CacheFolderPath" xml:space="preserve">
         <value>Cache Folder Path</value>
     </data>
-  <data name="Setting_Title_DownloadPrerelease" xml:space="preserve">
-    <value>Download Prerelease</value>
-  </data>
   <data name="Setting_Title_DownloadSource" xml:space="preserve">
     <value>Download Source</value>
   </data>
@@ -277,8 +274,17 @@
   <data name="Setting_Title_ShowConsole" xml:space="preserve">
     <value>Show Console</value>
   </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+      <value>Update Channel</value>
+  </data>
   <data name="Setting_Title_UpdateSource" xml:space="preserve">
     <value>Update Source</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+      <value>Prerelease</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+      <value>Stable</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
@@ -457,8 +463,5 @@ Takes effect after restarting app</value>
   </data>
   <data name="XAML_TroubleShoot" xml:space="preserve">
     <value>Troubleshoot</value>
-  </data>
-  <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-    <value>Provide the link of custom download source</value>
   </data>
 </root>

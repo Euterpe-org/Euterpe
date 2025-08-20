@@ -211,9 +211,6 @@
   <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
         <value>始终显示列表滚动条</value>
     </data>
-  <data name="Setting_Description_DownloadPrerelease" xml:space="preserve">
-        <value>检查 MDMT 更新时包含预发行版本</value>
-    </data>
   <data name="Setting_Description_DownloadSource" xml:space="preserve">
     <value>模组列表和下载的源</value>
   </data>
@@ -229,6 +226,9 @@
   <data name="Setting_Description_ShowConsole" xml:space="preserve">
         <value>游戏启动时是否显示控制台</value>
     </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+      <value>检查 MDMT 更新的频道</value>
+  </data>
   <data name="Setting_Description_UpdateSource" xml:space="preserve">
         <value>检查 MDMT 更新的来源</value>
     </data>
@@ -250,9 +250,6 @@
   <data name="Setting_Title_CacheFolderPath" xml:space="preserve">
         <value>缓存文件夹路径</value>
     </data>
-  <data name="Setting_Title_DownloadPrerelease" xml:space="preserve">
-    <value>下载预发行版本</value>
-  </data>
   <data name="Setting_Title_DownloadSource" xml:space="preserve">
     <value>下载源</value>
   </data>
@@ -271,8 +268,17 @@
   <data name="Setting_Title_ShowConsole" xml:space="preserve">
     <value>显示控制台</value>
   </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+      <value>更新频道</value>
+  </data>
   <data name="Setting_Title_UpdateSource" xml:space="preserve">
     <value>更新源</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+      <value>测试版</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+      <value>稳定版</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>

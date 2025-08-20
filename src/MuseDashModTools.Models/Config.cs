@@ -43,7 +43,7 @@ public sealed partial class Config : ObservableObject
     public partial string? GitHubToken { get; set; }
 
     [ObservableProperty]
-    public partial bool DownloadPrerelease { get; set; }
+    public partial UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
 
     public SemVersion? SkipVersion { get; set; }
 
