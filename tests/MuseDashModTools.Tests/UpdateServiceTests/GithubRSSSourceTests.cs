@@ -335,9 +335,10 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
 
         await updateService.CheckForUpdatesAsync();
 
+        using var _ = Assert.Multiple();
+
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"User choose to skip this version: {HigherPrereleaseVersion}");
-
         await Assert.That(Config.SkipVersion).IsEqualTo(SemVersion.Parse(HigherPrereleaseVersion));
     }
 }
