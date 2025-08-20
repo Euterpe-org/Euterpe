@@ -29,7 +29,7 @@ internal sealed partial class GitHubMirrorDownloadService
 
     private async Task<string?> FetchReadmeFromBranchAsync(string repoId, string branch, CancellationToken cancellationToken = default)
     {
-        foreach (var url in CommonReadmeNames.Select(readmeName => $"{PrimaryRawMirrorUrl}{repoId}/{branch}/{readmeName}"))
+        foreach (var url in CommonReadmeNames.Select(readmeName => $"{RawMirrorUrl}{repoId}/{branch}/{readmeName}"))
         {
             var content = await TryFetchContentAsync(url, cancellationToken).ConfigureAwait(false);
 
