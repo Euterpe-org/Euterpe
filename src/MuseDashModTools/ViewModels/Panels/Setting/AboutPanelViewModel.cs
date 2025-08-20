@@ -63,13 +63,23 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         ])
     ];
 
+    [RelayCommand]
+    private async Task CheckUpdateAsync()
+    {
+        var hasUpdate = await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
+        if (!hasUpdate)
+        {
+            await MessageBoxService.SuccessAsync("No updates available").ConfigureAwait(false);
+        }
+    }
+
     #region Injections
 
     [UsedImplicitly]
     public required IUpdateService UpdateService { get; init; }
 
-    #endregion Injections
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 
-    [RelayCommand]
-    private Task CheckUpdateAsync() => UpdateService.CheckForUpdatesAsync();
+    #endregion Injections
 }

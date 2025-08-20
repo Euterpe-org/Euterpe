@@ -6,7 +6,7 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class UpdateService
 {
-    private async Task CheckGitHubAPIForUpdatesAsync(CancellationToken cancellationToken = default)
+    private async Task<bool> CheckGitHubAPIForUpdatesAsync(CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Get Current version: {_currentVersion}");
         Logger.ZLogInformation($"Checking for updates from GitHub API...");
@@ -28,7 +28,7 @@ internal sealed partial class UpdateService
             release = await GetPrereleaseFromAPIAsync(cancellationToken).ConfigureAwait(true);
         }
 
-        await HandleAPIReleaseAsync(release, cancellationToken).ConfigureAwait(true);
+        return await HandleAPIReleaseAsync(release, cancellationToken).ConfigureAwait(false);
     }
 
     private async Task<GitHubRelease?> GetStableReleaseFromAPIAsync(CancellationToken cancellationToken = default)
@@ -79,11 +79,11 @@ internal sealed partial class UpdateService
         }
     }
 
-    private async Task HandleAPIReleaseAsync(GitHubRelease? release, CancellationToken cancellationToken = default)
+    private async Task<bool> HandleAPIReleaseAsync(GitHubRelease? release, CancellationToken cancellationToken = default)
     {
         if (release is null)
         {
-            return;
+            return false;
         }
 
         var releaseVersion = SemVersion.Parse(release.TagName, SemVersionStyles.AllowV);
@@ -92,10 +92,11 @@ internal sealed partial class UpdateService
         var shouldUpdate = await ShouldUpdateAsync(releaseVersion).ConfigureAwait(false);
         if (!shouldUpdate)
         {
-            return;
+            return false;
         }
 
         await StartUpdateProcessAsync(release.TagName, cancellationToken).ConfigureAwait(false);
         Environment.Exit(0);
+        return true;
     }
 }
