@@ -48,11 +48,11 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
             .Filter(x => SearchText.IsNullOrEmpty()
                          || x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
                          || x.Author.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => _modFilter != ModFilterType.Installed || x.IsLocal)
-            .Filter(x => _modFilter != ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
-            .Filter(x => _modFilter != ModFilterType.Disabled || x is { IsDisabled: true, IsLocal: true })
-            .Filter(x => _modFilter != ModFilterType.Outdated || x.State == ModState.Outdated)
-            .Filter(x => _modFilter != ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
+            .Filter(x => _modFilter is not ModFilterType.Installed || x.IsLocal)
+            .Filter(x => _modFilter is not ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
+            .Filter(x => _modFilter is not ModFilterType.Disabled || x is { IsDisabled: true, IsLocal: true })
+            .Filter(x => _modFilter is not ModFilterType.Outdated || x.State is ModState.Outdated)
+            .Filter(x => _modFilter is not ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
             .SortAndBind(out _mods, comparer)
             .Subscribe();
     }
