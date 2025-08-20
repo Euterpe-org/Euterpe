@@ -29,13 +29,6 @@
                 <ComboBox
                     ItemsSource="{Binding DownloadSources, Mode=OneTime}"
                     SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}" />
-                <TextBox
-                    Classes="ClearButton"
-                    Foreground="Gray"
-                    IsVisible="{Binding Config.DownloadSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:DownloadSource.Custom}, Mode=OneWay}"
-                    MinWidth="200"
-                    Text="{Binding Config.CustomDownloadSource, Mode=TwoWay}"
-                    Watermark="Input link here" />
             </StackPanel>
         </mdmt:ContentListItem>
 

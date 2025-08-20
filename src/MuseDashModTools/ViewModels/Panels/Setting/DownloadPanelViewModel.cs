@@ -7,7 +7,7 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
         Setting_DownloadSource_GitHub,
         Setting_DownloadSource_GitHubMirror,
         Setting_DownloadSource_Gitee,
-        Setting_DownloadSource_Custom
+        Setting_DownloadSource_Website
     ];
 
     public static IReadOnlyList<LocalizedString> UpdateSources { get; } =

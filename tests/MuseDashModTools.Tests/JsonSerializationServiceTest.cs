@@ -18,7 +18,6 @@ public sealed class JsonSerializationServiceTest
                                           "DownloadSource": "GitHub",
                                           "UpdateSource": "GitHubRSS",
                                           "GitHubToken": null,
-                                          "CustomDownloadSource": null,
                                           "DownloadPrerelease": false,
                                           "SkipVersion": null,
                                           "IgnoreException": false
@@ -42,7 +41,6 @@ public sealed class JsonSerializationServiceTest
             DownloadSource = DownloadSource.GitHub,
             UpdateSource = UpdateSource.GitHubRSS,
             GitHubToken = null,
-            CustomDownloadSource = null,
             DownloadPrerelease = false,
             SkipVersion = null,
             IgnoreException = false

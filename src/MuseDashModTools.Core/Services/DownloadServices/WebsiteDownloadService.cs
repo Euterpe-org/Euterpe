@@ -1,6 +1,6 @@
 namespace MuseDashModTools.Core;
 
-internal sealed class CustomDownloadService : ICustomDownloadService
+internal sealed class WebsiteDownloadService : IWebsiteDownloadService
 {
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
@@ -21,7 +21,7 @@ internal sealed class CustomDownloadService : ICustomDownloadService
     #region Injections
 
     [UsedImplicitly]
-    public required ILogger<CustomDownloadService> Logger { get; init; }
+    public required ILogger<WebsiteDownloadService> Logger { get; init; }
 
     [UsedImplicitly]
     public required Config Config { get; init; }

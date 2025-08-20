@@ -9,7 +9,6 @@
   DownloadSource: GitHub,
   UpdateSource: GitHubRSS,
   GitHubToken: null,
-  CustomDownloadSource: null,
   DownloadPrerelease: false,
   SkipVersion: null,
   IgnoreException: false
