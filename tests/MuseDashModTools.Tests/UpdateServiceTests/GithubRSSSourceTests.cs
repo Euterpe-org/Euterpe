@@ -39,8 +39,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Release version parsed: {LowerStableVersion}")
             .And.Contains("No new version available");
@@ -74,8 +75,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Release version parsed: {LowerPrereleaseVersion}")
             .And.Contains("No new version available");
@@ -106,8 +108,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Release version parsed: {AppVersion}")
             .And.Contains("No new version available");
@@ -137,8 +140,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Fetched stable release from GitHub RSS is a prerelease: {LowerPrereleaseVersion}");
     }
@@ -167,8 +171,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Fetched stable release from GitHub RSS is a prerelease: {HigherPrereleaseVersion}");
     }
@@ -198,8 +203,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"Fetched stable release from GitHub RSS is a prerelease: {AppVersion}");
     }
@@ -229,8 +235,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains("New version is skipped by user configuration");
     }
@@ -264,8 +271,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains("New version is skipped by user configuration");
     }
@@ -297,11 +305,11 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
+        using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"User choose to skip this version: {HigherStableVersion}");
-
         await Assert.That(Config.SkipVersion).IsEqualTo(SemVersion.Parse(HigherStableVersion));
     }
 
@@ -333,10 +341,9 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
             PlatformService = Mock.Of<IPlatformService>()
         };
 
-        await updateService.CheckForUpdatesAsync();
-
         using var _ = Assert.Multiple();
 
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
             .Contains($"User choose to skip this version: {HigherPrereleaseVersion}");
         await Assert.That(Config.SkipVersion).IsEqualTo(SemVersion.Parse(HigherPrereleaseVersion));
