@@ -43,8 +43,11 @@ internal sealed partial class UpdateService
         var updaterTargetPath = Path.Combine(updateFolder, PlatformService.UpdaterFileName);
 
         await DownloadManager.DownloadReleaseByTagAsync(version, PlatformService.OsString, updateFolder, cancellationToken).ConfigureAwait(false);
+        Logger.ZLogInformation($"Release {version} download finished");
+
         File.Copy(PlatformService.UpdaterFileName, updaterTargetPath, true);
 
+        Logger.ZLogInformation($"Starting updater process");
         Process.Start(
             new ProcessStartInfo
             {

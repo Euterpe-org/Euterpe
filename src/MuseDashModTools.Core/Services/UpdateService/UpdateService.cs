@@ -8,7 +8,7 @@ internal sealed partial class UpdateService : IUpdateService
 
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
 
-    public Task CheckForUpdatesAsync(CancellationToken cancellationToken = default)
+    public Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {
         return Config.UpdateSource switch
         {
