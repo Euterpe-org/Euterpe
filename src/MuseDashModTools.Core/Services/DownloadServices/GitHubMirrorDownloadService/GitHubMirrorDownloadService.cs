@@ -5,16 +5,16 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloadService
 {
-    private const string PrimaryRawMirrorUrl = "https://raw.kkgithub.com/";
-    private const string PrimaryReleaseMirrorUrl = "https://kkgithub.com/";
-    private const string PrimaryRawModLinksUrl = PrimaryRawMirrorUrl + ModLinksBaseUrl;
-    private const string PrimaryModJsonUrl = PrimaryRawModLinksUrl + "Mods.json";
-    private const string PrimaryLibJsonUrl = PrimaryRawModLinksUrl + "Libs.json";
-    private const string PrimaryModsFolderUrl = PrimaryRawModLinksUrl + "Mods/";
-    private const string PrimaryLibsFolderUrl = PrimaryRawModLinksUrl + "Libs/";
-    private const string PrimaryMelonLoaderUrl = PrimaryReleaseMirrorUrl + MelonLoaderBaseUrl;
-    private const string PrimaryUnityDependencyUrl = PrimaryRawMirrorUrl + UnityDependencyBaseUrl;
-    private const string PrimaryCpp2ILUrl = PrimaryReleaseMirrorUrl + Cpp2ILBaseUrl;
+    private const string RawMirrorUrl = "https://raw.kkgithub.com/";
+    private const string ReleaseMirrorUrl = "https://kkgithub.com/";
+    private const string RawModLinksUrl = RawMirrorUrl + ModLinksBaseUrl;
+    private const string ModJsonUrl = RawModLinksUrl + "Mods.json";
+    private const string LibJsonUrl = RawModLinksUrl + "Libs.json";
+    private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
+    private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
+    private const string MelonLoaderUrl = ReleaseMirrorUrl + MelonLoaderBaseUrl;
+    private const string UnityDependencyUrl = RawMirrorUrl + UnityDependencyBaseUrl;
+    private const string Cpp2ILUrl = ReleaseMirrorUrl + Cpp2ILBaseUrl;
 
     public async Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
@@ -28,9 +28,9 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
         try
         {
-            await Downloader.DownloadFileTaskAsync(PrimaryMelonLoaderUrl, Config.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(PrimaryUnityDependencyUrl, Config.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(PrimaryCpp2ILUrl, Config.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Config.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
+            await Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Config.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
             Logger.ZLogInformation($"MelonLoader and Dependencies downloaded from GitHubMirror successfully");
             return true;
         }
@@ -51,7 +51,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
             return false;
         }
 
-        var downloadLink = PrimaryModsFolderUrl + mod.FileName;
+        var downloadLink = ModsFolderUrl + mod.FileName;
         var path = Path.Combine(Config.ModsFolder, mod.FileName);
         try
         {
@@ -74,7 +74,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Downloading lib {lib.Name} from GitHubMirror...");
 
-        var downloadLink = PrimaryLibsFolderUrl + lib.FileName;
+        var downloadLink = LibsFolderUrl + lib.FileName;
         var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
         try
         {
@@ -95,7 +95,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
     public async Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
     {
-        var releaseBaseUrl = ModToolsReleaseDownloadBaseUrl.Replace(GitHubBaseUrl, PrimaryReleaseMirrorUrl);
+        var releaseBaseUrl = ModToolsReleaseDownloadBaseUrl.Replace(GitHubBaseUrl, ReleaseMirrorUrl);
         var downloadUrl = $"{releaseBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
@@ -132,9 +132,9 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods from GitHubMirror {PrimaryModJsonUrl}...");
+        Logger.ZLogInformation($"Fetching mods from GitHubMirror {ModJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(PrimaryModJsonUrl, Default.Mod, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken)
             .Catch<Mod?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch mods from GitHubMirror");
@@ -144,9 +144,9 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
 
     public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching libs from GitHubMirror {PrimaryLibJsonUrl}...");
+        Logger.ZLogInformation($"Fetching libs from GitHubMirror {LibJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(PrimaryLibJsonUrl, Default.Lib, cancellationToken)
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken)
             .Catch<Lib?, Exception>(ex =>
             {
                 Logger.ZLogError(ex, $"Failed to fetch libs from GitHubMirror");
