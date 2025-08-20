@@ -5,11 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
         <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
         <PackageReference Include="Moq"/>
         <PackageReference Include="NetArchTest.eNhancedEdition"/>
         <PackageReference Include="RichardSzalay.MockHttp"/>

@@ -39,6 +39,7 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1"/>
+        <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.14.2"/>
         <PackageVersion Include="Moq" Version="4.20.72"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="Polyfill" Version="8.8.0"/>
