@@ -50,7 +50,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindPrerelease_LowerPrereleaseVersion_ShouldNotFindUpdate()
     {
-        Config.DownloadPrerelease = true;
+        Config.UpdateChannel = UpdateChannel.Prerelease;
         MockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
@@ -245,7 +245,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindPrerelease_WhenHigherPrereleaseVersionIsSkipped_ShouldSkipVersion()
     {
-        Config.DownloadPrerelease = true;
+        Config.UpdateChannel = UpdateChannel.Prerelease;
         Config.SkipVersion = SemVersion.Parse(HigherPrereleaseVersion);
         MockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
@@ -316,7 +316,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindPrerelease_WhenMessageBoxResultNo_ShouldSkipVersion()
     {
-        Config.DownloadPrerelease = true;
+        Config.UpdateChannel = UpdateChannel.Prerelease;
         MockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""

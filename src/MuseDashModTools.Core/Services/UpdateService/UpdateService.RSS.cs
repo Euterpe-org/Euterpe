@@ -10,15 +10,12 @@ internal sealed partial class UpdateService
         Logger.ZLogInformation($"Get Current version: {_currentVersion}");
         Logger.ZLogInformation($"Checking for updates from GitHub RSS...");
 
-        GitHubRSS? release;
-        if (!Config.DownloadPrerelease)
+        var release = Config.UpdateChannel switch
         {
-            release = await GetStableReleaseFromRSSAsync(cancellationToken).ConfigureAwait(true);
-        }
-        else
-        {
-            release = await GetPrereleaseFromRSSAsync(cancellationToken).ConfigureAwait(true);
-        }
+            UpdateChannel.Stable => await GetStableReleaseFromRSSAsync(cancellationToken).ConfigureAwait(true),
+            UpdateChannel.Prerelease => await GetPrereleaseFromRSSAsync(cancellationToken).ConfigureAwait(true),
+            _ => throw new UnreachableException()
+        };
 
         return await HandleRSSReleaseAsync(release, cancellationToken).ConfigureAwait(false);
     }

@@ -97,9 +97,6 @@
   <data name="SearchBarWatermark_Mod" xml:space="preserve">
         <value>Искать моды  (Имя, Автор)</value>
     </data>
-  <data name="Setting_DownloadSource_Custom" xml:space="preserve">
-    <value>Другой</value>
-  </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
   </data>
@@ -108,9 +105,6 @@
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub Mirror</value>
-  </data>
-  <data name="Setting_Title_DownloadPrerelease" xml:space="preserve">
-    <value>Скачать пре-релиз</value>
   </data>
   <data name="Setting_Title_DownloadSource" xml:space="preserve">
     <value>Источник скачивания</value>

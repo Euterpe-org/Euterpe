@@ -9,7 +9,7 @@
   DownloadSource: GitHub,
   UpdateSource: GitHubRSS,
   GitHubToken: null,
-  DownloadPrerelease: false,
+  UpdateChannel: Stable,
   SkipVersion: null,
   IgnoreException: false
 }

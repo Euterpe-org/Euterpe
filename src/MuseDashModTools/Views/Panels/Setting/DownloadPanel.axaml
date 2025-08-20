@@ -54,10 +54,11 @@
 
         <!--  Download Prerelease  -->
         <mdmt:ContentListItem
-            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_DownloadPrerelease}}"
-            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_DownloadPrerelease}}">
-            <ToggleSwitch
-                IsChecked="{Binding Config.DownloadPrerelease, Mode=TwoWay}" />
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_UpdateChannel}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_UpdateChannel}}">
+            <ComboBox
+                ItemsSource="{Binding UpdateChannels, Mode=OneTime}"
+                SelectedIndex="{Binding SelectedUpdateChannelIndex, Mode=TwoWay}" />
         </mdmt:ContentListItem>
 
     </StackPanel>

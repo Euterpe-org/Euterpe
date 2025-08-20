@@ -48,7 +48,7 @@ public sealed class GitHubApiSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindPrerelease_LowerPrereleaseVersion_ShouldNotFindUpdate()
     {
-        Config.DownloadPrerelease = true;
+        Config.UpdateChannel = UpdateChannel.Prerelease;
         MockHttp.When(ReleaseAPIUrl)
             .Respond("application/json",
                 $$"""
@@ -229,7 +229,7 @@ public sealed class GitHubApiSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindPrerelease_WhenHigherPrereleaseVersionIsSkipped_ShouldSkipVersion()
     {
-        Config.DownloadPrerelease = true;
+        Config.UpdateChannel = UpdateChannel.Prerelease;
         Config.SkipVersion = SemVersion.Parse(HigherPrereleaseVersion);
         MockHttp.When(ReleaseAPIUrl)
             .Respond("application/json",
@@ -298,7 +298,7 @@ public sealed class GitHubApiSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindPrerelease_WhenMessageBoxResultNo_ShouldSkipVersion()
     {
-        Config.DownloadPrerelease = true;
+        Config.UpdateChannel = UpdateChannel.Prerelease;
         MockHttp.When(ReleaseAPIUrl)
             .Respond("application/json",
                 $$"""
