@@ -43,9 +43,6 @@ public sealed partial class Config : ObservableObject
     public partial string? GitHubToken { get; set; }
 
     [ObservableProperty]
-    public partial string? CustomDownloadSource { get; set; }
-
-    [ObservableProperty]
     public partial bool DownloadPrerelease { get; set; }
 
     public SemVersion? SkipVersion { get; set; }

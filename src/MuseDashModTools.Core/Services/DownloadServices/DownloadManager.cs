@@ -56,22 +56,9 @@ internal sealed partial class DownloadManager : IDownloadManager
         {
             DownloadSource.GitHub => GitHubDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
-            // For Gitee and Custom Download Source, because they don't choose GitHub for other downloads, so we will use GitHubMirror
+            // For Gitee Download Source, because users don't choose GitHub for other downloads, so we will use GitHubMirror
             DownloadSource.Gitee => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
-            DownloadSource.Custom => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
-            _ => throw new UnreachableException()
-        };
-    }
-
-    public Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
-    {
-        return Config.DownloadSource switch
-        {
-            DownloadSource.GitHub => GitHubDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
-            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
-            DownloadSource.Gitee => GiteeDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
-            // For Custom Download Source, because they don't choose GitHub or GitHub Mirror for other downloads, so we will use Gitee
-            DownloadSource.Custom => GiteeDownloadService.DownloadReleaseByTagAsync(tag, osString, updateFolder, cancellationToken),
+            DownloadSource.Website => WebsiteDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
             _ => throw new UnreachableException()
         };
     }
@@ -82,9 +69,9 @@ internal sealed partial class DownloadManager : IDownloadManager
         {
             DownloadSource.GitHub => GitHubDownloadService.FetchReadmeAsync(repoId, cancellationToken),
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
-            // For Gitee and Custom Download Source, because they don't choose GitHub for other downloads, so we will use GitHubMirror
+            // For Gitee Download Source, because users don't choose GitHub for other downloads, so we will use GitHubMirror
             DownloadSource.Gitee => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
-            DownloadSource.Custom => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
+            DownloadSource.Website => WebsiteDownloadService.FetchReadmeAsync(repoId, cancellationToken),
             _ => throw new UnreachableException()
         };
     }
@@ -98,7 +85,7 @@ internal sealed partial class DownloadManager : IDownloadManager
     public required MultiThreadDownloader Downloader { get; init; }
 
     [UsedImplicitly]
-    public required ICustomDownloadService CustomDownloadService { get; init; }
+    public required IWebsiteDownloadService WebsiteDownloadService { get; init; }
 
     [UsedImplicitly]
     public required IGiteeDownloadService GiteeDownloadService { get; init; }
