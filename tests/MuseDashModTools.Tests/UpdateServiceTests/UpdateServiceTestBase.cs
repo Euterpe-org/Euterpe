@@ -5,8 +5,8 @@ namespace MuseDashModTools.Tests.UpdateServiceTests;
 public abstract class UpdateServiceTestBase : IDisposable
 {
     protected const string AppVersion = BuildInfo.AppVersion;
-    protected const string LowerStableVersion = "1.0.0";
-    protected const string LowerPrereleaseVersion = "1.0.1-rc1";
+    protected const string LowerStableVersion = "0.0.1";
+    protected const string LowerPrereleaseVersion = "0.0.1-rc1";
     protected const string HigherStableVersion = "999.0.0";
     protected const string HigherPrereleaseVersion = "999.0.1-rc1";
 
