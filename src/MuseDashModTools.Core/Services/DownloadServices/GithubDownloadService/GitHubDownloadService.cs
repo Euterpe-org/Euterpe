@@ -14,37 +14,23 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     private const string UnityDependencyUrl = GitHubRawContentBaseUrl + UnityDependencyBaseUrl;
     private const string Cpp2ILUrl = GitHubBaseUrl + Cpp2ILBaseUrl;
 
-    public async Task<bool> DownloadMelonLoaderAsync(
+    public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        IProgress<double> downloadProgress,
-        CancellationToken cancellationToken = default)
-    {
-        Logger.ZLogInformation($"Downloading MelonLoader and Dependencies from GitHub...");
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        DownloadAsync(MelonLoaderUrl, Config.MelonLoaderZipPath, "MelonLoader", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
-        Downloader.DownloadStarted += onDownloadStarted;
-        Downloader.DownloadProgressChanged += ReportProgress;
+    public Task<bool> DownloadUnityDependencyAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        DownloadAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
-        try
-        {
-            await Downloader.DownloadFileTaskAsync(MelonLoaderUrl, Config.MelonLoaderZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, cancellationToken).ConfigureAwait(false);
-            await Downloader.DownloadFileTaskAsync(Cpp2ILUrl, Config.Cpp2ILZipPath, cancellationToken).ConfigureAwait(false);
-            Logger.ZLogInformation($"MelonLoader and Dependencies downloaded from GitHub successfully");
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to download MelonLoader from GitHub");
-            return false;
-        }
-        finally
-        {
-            Downloader.DownloadStarted -= onDownloadStarted;
-            Downloader.DownloadProgressChanged -= ReportProgress;
-        }
-
-        void ReportProgress(object? sender, DownloadProgressChangedEventArgs args) => downloadProgress.Report(args.ProgressPercentage);
-    }
+    public Task<bool> DownloadCpp2ILAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        DownloadAsync(Cpp2ILUrl, Config.Cpp2ILZipPath, "Cpp2IL", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {

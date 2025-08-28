@@ -19,6 +19,7 @@ global using MuseDashModTools.Abstractions;
 global using MuseDashModTools.Common;
 global using MuseDashModTools.Common.Extensions;
 global using MuseDashModTools.Core.Extensions;
+global using MuseDashModTools.Core.Utils;
 global using MuseDashModTools.Extensions;
 global using MuseDashModTools.Localization;
 global using MuseDashModTools.Models;

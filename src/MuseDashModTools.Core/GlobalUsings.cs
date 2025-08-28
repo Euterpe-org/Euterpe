@@ -20,6 +20,7 @@ global using MuseDashModTools.Core.Utils;
 global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Enums;
 global using MuseDashModTools.Models.GitHub;
+global using R3;
 global using Semver;
 global using Ursa.Controls;
 global using ZLogger;
