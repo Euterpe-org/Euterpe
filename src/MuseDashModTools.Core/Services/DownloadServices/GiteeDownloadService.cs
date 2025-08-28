@@ -15,8 +15,21 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
 
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        IProgress<double> downloadProgress,
-        CancellationToken cancellationToken = default) => throw new NotSupportedException();
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        throw new NotSupportedException();
+
+    public Task<bool> DownloadUnityDependencyAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        throw new NotSupportedException();
+
+    public Task<bool> DownloadCpp2ILAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        throw new NotSupportedException();
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {

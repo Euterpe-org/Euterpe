@@ -1,9 +1,41 @@
 using System.Net;
+using DownloadProgressChangedEventArgs = Downloader.DownloadProgressChangedEventArgs;
 
 namespace MuseDashModTools.Core;
 
 internal sealed partial class GitHubMirrorDownloadService
 {
+    private async Task<bool> DownloadAsync(
+        string url,
+        string path,
+        string itemName,
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default)
+    {
+        Logger.ZLogInformation($"Downloading {itemName} from GitHubMirror...");
+
+        Downloader.DownloadStarted += onDownloadStarted;
+        Downloader.DownloadProgressChanged += onDownloadProgressChanged;
+
+        try
+        {
+            await Downloader.DownloadFileTaskAsync(url, path, cancellationToken).ConfigureAwait(false);
+            Logger.ZLogInformation($"{itemName} downloaded from GitHubMirror successfully");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to download {itemName} from GitHubMirror");
+            return false;
+        }
+        finally
+        {
+            Downloader.DownloadStarted -= onDownloadStarted;
+            Downloader.DownloadProgressChanged -= onDownloadProgressChanged;
+        }
+    }
+
     private async Task<string?> TryFetchContentAsync(string url, CancellationToken cancellationToken)
     {
         try
