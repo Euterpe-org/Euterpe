@@ -4,8 +4,8 @@ public sealed class IndentedGeneratorStringBuilder : IndentedStringBuilder
 {
     public IndentedGeneratorStringBuilder()
     {
-        _stringBuilder.AppendLine(Header);
+        StringBuilder.AppendLine(Header);
     }
 
-    public override string ToString() => _stringBuilder.ToString();
+    public override string ToString() => StringBuilder.ToString();
 }

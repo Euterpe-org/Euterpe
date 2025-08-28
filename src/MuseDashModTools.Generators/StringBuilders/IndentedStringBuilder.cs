@@ -3,21 +3,21 @@
 public class IndentedStringBuilder
 {
     private const byte IndentSize = 4;
-    protected readonly StringBuilder _stringBuilder = new();
+    protected readonly StringBuilder StringBuilder = new();
 
     private int IndentCount { get; set; }
 
     public IndentedStringBuilder Append(string value)
     {
         DoIndent();
-        _stringBuilder.Append(value);
+        StringBuilder.Append(value);
         return this;
     }
 
     public IndentedStringBuilder Append(FormattableString value)
     {
         DoIndent();
-        _stringBuilder.Append(value);
+        StringBuilder.Append(value);
 
         return this;
     }
@@ -25,7 +25,7 @@ public class IndentedStringBuilder
     public IndentedStringBuilder Append(char value)
     {
         DoIndent();
-        _stringBuilder.Append(value);
+        StringBuilder.Append(value);
 
         return this;
     }
@@ -35,7 +35,7 @@ public class IndentedStringBuilder
         DoIndent();
         foreach (var str in value)
         {
-            _stringBuilder.Append(str);
+            StringBuilder.Append(str);
         }
 
         return this;
@@ -46,7 +46,7 @@ public class IndentedStringBuilder
         DoIndent();
         foreach (var chr in value)
         {
-            _stringBuilder.Append(chr);
+            StringBuilder.Append(chr);
         }
 
         return this;
@@ -54,7 +54,7 @@ public class IndentedStringBuilder
 
     public IndentedStringBuilder AppendLine()
     {
-        _stringBuilder.AppendLine();
+        StringBuilder.AppendLine();
 
         return this;
     }
@@ -62,7 +62,7 @@ public class IndentedStringBuilder
     public IndentedStringBuilder AppendLine(string value)
     {
         DoIndent();
-        _stringBuilder.AppendLine(value);
+        StringBuilder.AppendLine(value);
 
         return this;
     }
@@ -70,8 +70,8 @@ public class IndentedStringBuilder
     public IndentedStringBuilder AppendLine(FormattableString value)
     {
         DoIndent();
-        _stringBuilder.Append(value);
-        _stringBuilder.AppendLine();
+        StringBuilder.Append(value);
+        StringBuilder.AppendLine();
 
         return this;
     }
@@ -95,13 +95,13 @@ public class IndentedStringBuilder
 
     public void ResetIndent() => IndentCount = 0;
 
-    public override string ToString() => _stringBuilder.ToString();
+    public override string ToString() => StringBuilder.ToString();
 
     private void DoIndent()
     {
         if (IndentCount > 0)
         {
-            _stringBuilder.Append(' ', IndentCount * IndentSize);
+            StringBuilder.Append(' ', IndentCount * IndentSize);
         }
     }
 }
