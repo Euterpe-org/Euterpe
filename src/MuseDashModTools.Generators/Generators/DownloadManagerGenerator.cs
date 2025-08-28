@@ -6,6 +6,8 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
     private const string DownloadManagerAttributeName = "MuseDashModTools.Common.Attributes.DownloadManagerAttribute";
 
     private static readonly SymbolDisplayFormat _formatWithDefaultValue = new(
+        genericsOptions:
+        SymbolDisplayGenericsOptions.IncludeTypeParameters,
         parameterOptions:
         SymbolDisplayParameterOptions.IncludeType |
         SymbolDisplayParameterOptions.IncludeName |
