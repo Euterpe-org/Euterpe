@@ -4253,7 +4253,6 @@ dotnet_diagnostic.ma0103.severity = warning
 dotnet_diagnostic.ma0105.severity = suggestion
 dotnet_diagnostic.ma0106.severity = suggestion
 dotnet_diagnostic.ma0108.severity = suggestion
-dotnet_diagnostic.ma0109.severity = suggestion
 dotnet_diagnostic.ma0110.severity = suggestion
 dotnet_diagnostic.ma0111.severity = suggestion
 dotnet_diagnostic.ma0112.severity = suggestion
