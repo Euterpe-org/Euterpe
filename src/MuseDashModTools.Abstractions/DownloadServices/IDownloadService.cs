@@ -4,7 +4,17 @@ public interface IDownloadService
 {
     Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        IProgress<double> downloadProgress,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> DownloadUnityDependencyAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> DownloadCpp2ILAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default);
 
     Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default);

@@ -165,7 +165,7 @@ internal sealed partial class LocalService : ILocalService
         mod.Name = attribute.Signature!.FixedArguments[1].ToString();
         mod.LocalVersion = attribute.Signature!.FixedArguments[2].ToString();
         mod.Author = attribute.Signature!.FixedArguments[3].ToString();
-        mod.SHA256 = HashUtils.ComputeSHA256HashFromBytes(bytes);
+        mod.SHA256 = SHA256Utils.HexLowerFromBytes(bytes);
 
         return mod;
     }
@@ -175,7 +175,7 @@ internal sealed partial class LocalService : ILocalService
         {
             Name = Path.GetFileNameWithoutExtension(filePath),
             FileName = Path.GetFileName(filePath),
-            SHA256 = await HashUtils.ComputeSHA256HashFromPathAsync(filePath).ConfigureAwait(false),
+            SHA256 = await SHA256Utils.HexLowerFromPathAsync(filePath).ConfigureAwait(false),
             IsLocal = true
         };
 
@@ -209,18 +209,19 @@ internal sealed partial class LocalService : ILocalService
     {
         ReadOnlySpan<string> paths =
         [
+            Path.Combine(Config.MuseDashFolder, "version.dll"),
             Path.Combine(Config.MelonLoaderFolder, "net6", "MelonLoader.dll"),
             Path.Combine(Config.MelonLoaderFolder, "MelonLoader.dll")
         ];
 
         foreach (var path in paths)
         {
-            if (!File.Exists(path))
+            if (!File.Exists(path) || ReadFileVersion(path) is not { } version)
             {
                 continue;
             }
 
-            return ReadFileVersion(path);
+            return version;
         }
 
         Logger.ZLogInformation($"MelonLoader.dll not found");

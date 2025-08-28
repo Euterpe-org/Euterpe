@@ -49,16 +49,16 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        IProgress<double> downloadProgress,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default)
     {
         return Config.DownloadSource switch
         {
-            DownloadSource.GitHub => GitHubDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
-            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
+            DownloadSource.GitHub => GitHubDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, onDownloadProgressChanged, cancellationToken),
+            DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, onDownloadProgressChanged, cancellationToken),
             // For Gitee Download Source, because users don't choose GitHub for other downloads, so we will use GitHubMirror
-            DownloadSource.Gitee => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
-            DownloadSource.Website => WebsiteDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, downloadProgress, cancellationToken),
+            DownloadSource.Gitee => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, onDownloadProgressChanged, cancellationToken),
+            DownloadSource.Website => WebsiteDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, onDownloadProgressChanged, cancellationToken),
             _ => throw new UnreachableException()
         };
     }
