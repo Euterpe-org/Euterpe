@@ -2,25 +2,27 @@
 
 namespace MuseDashModTools.Core;
 
-internal sealed partial class GameService : IGameService
+internal sealed class GameService : IGameService
 {
-    public void LaunchModdedGame()
+    private const string MuseDashGameId = "774171";
+
+    public async Task LaunchModdedGameAsync()
     {
         var launchArguments = new StringBuilder();
         if (!Config.ShowConsole)
         {
-            launchArguments.Append("//--melonloader.hideconsole");
+            launchArguments.Append("--melonloader.hideconsole");
         }
 
-        LaunchGame(launchArguments.ToString());
+        await PlatformService.LaunchGameWithArgsAsync(MuseDashGameId, launchArguments.ToString()).ConfigureAwait(false);
     }
 
-    public void LaunchVanillaGame()
+    public async Task LaunchVanillaGameAsync()
     {
         var launchArguments = new StringBuilder();
-        launchArguments.Append("//--no-mods");
+        launchArguments.Append("--no-mods");
 
-        LaunchGame(launchArguments.ToString());
+        await PlatformService.LaunchGameWithArgsAsync(MuseDashGameId, launchArguments.ToString()).ConfigureAwait(false);
     }
 
     #region Injections
@@ -30,6 +32,9 @@ internal sealed partial class GameService : IGameService
 
     [UsedImplicitly]
     public required ILogger<GameService> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required IPlatformService PlatformService { get; init; }
 
     #endregion Injections
 }

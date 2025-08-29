@@ -33,7 +33,6 @@
         <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="ValveKeyValue"/>
     </ItemGroup>
 
     <!-- Avalonia Diagnostics Package-->

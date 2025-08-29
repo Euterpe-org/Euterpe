@@ -19,6 +19,9 @@
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
       <value>Choose Muse Dash Folder</value>
   </data>
+  <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
+      <value>Choose Steam Folder</value>
+  </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -213,9 +216,12 @@ Have you installed MelonLoader?</value>
   <data name="MessageBox_Content_NoMelonLoaderVersion" xml:space="preserve">
     <value>Cannot find MelonLoader version from log</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseMuseDashPath" xml:space="preserve">
+  <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
         <value>Please choose Muse Dash folder</value>
     </data>
+  <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
+      <value>Please choose Steam folder</value>
+  </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">
     <value>Your stored Muse Dash Folder path is null
 Please choose the correct folder</value>

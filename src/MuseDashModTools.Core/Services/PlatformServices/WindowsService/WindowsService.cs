@@ -1,48 +1,110 @@
 using System.Collections.Frozen;
 using Avalonia.Platform.Storage;
-using Microsoft.Win32;
+using CliWrap;
 
 namespace MuseDashModTools.Core;
 
-internal sealed class WindowsService : IPlatformService
+[SupportedOSPlatform(nameof(OSPlatform.Windows))]
+internal sealed partial class WindowsService : IPlatformService
 {
     private const string DotnetRuntimeUrl = "https://aka.ms/dotnet/6.0/dotnet-runtime-win-x64.exe";
     private const string DotnetSdkUrl = "https://aka.ms/dotnet/8.0/dotnet-sdk-win-x64.exe";
 
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     private static readonly FrozenSet<string> WindowsPaths = new[]
         {
-            @"Program Files\Steam\steamapps\common\Muse Dash",
-            @"Program Files (x86)\Steam\steamapps\common\Muse Dash",
-            @"Program Files\SteamLibrary\steamapps\common\Muse Dash",
-            @"Program Files (x86)\SteamLibrary\steamapps\common\Muse Dash",
-            @"Steam\steamapps\common\Muse Dash",
-            @"SteamLibrary\steamapps\common\Muse Dash"
+            @"Program Files\Steam",
+            @"Program Files (x86)\Steam",
+            @"Program Files\SteamLibrary",
+            @"Program Files (x86)\SteamLibrary",
+            @"Steam",
+            @"SteamLibrary"
         }
         .SelectMany(path => Environment.GetLogicalDrives().Select(drive => Path.Combine(drive, path))).ToFrozenSet();
 
     public string OsString => "Windows";
     public string UpdaterFileName => "Updater.exe";
 
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    public bool GetGamePath([NotNullWhen(true)] out string? folderPath)
+    public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder)
     {
-        folderPath = WindowsPaths.FirstOrDefault(Directory.Exists);
-
-        if (folderPath is null)
+        if (TryGetSteamFolderFromRegistry(out steamFolder))
         {
-            Logger.ZLogWarning($"Auto detect steam install on common path failed.");
-            if (!GetPathFromRegistry(out folderPath))
-            {
-                Logger.ZLogWarning($"Failed to auto detect game path on Windows");
-                return false;
-            }
-
-            Logger.ZLogInformation($"Detected game path from Registry: {folderPath}");
+            Logger.ZLogInformation($"Detected steam folder from Registry: {steamFolder}");
             return true;
         }
 
-        Logger.ZLogInformation($"Auto detected game path on Windows: {folderPath}");
+        Logger.ZLogWarning($"Failed to get steam folder from Registry");
+
+        steamFolder = WindowsPaths.FirstOrDefault(Directory.Exists);
+        if (steamFolder is not null && CheckIsValidSteamFolder(steamFolder))
+        {
+            Logger.ZLogInformation($"Auto detected steam folder on Windows: {steamFolder}");
+            return true;
+        }
+
+        Logger.ZLogWarning($"Auto detect steam install on common path failed.");
+        return false;
+    }
+
+    public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
+    {
+        gameFolder = GetSteamLibraries()
+            .Select(x => Path.Combine(x, @"steamapps\common\Muse Dash"))
+            .FirstOrDefault(Directory.Exists);
+
+        if (gameFolder is not null)
+        {
+            Logger.ZLogInformation($"Auto detected game path on Windows: {gameFolder}");
+            return true;
+        }
+
+        Logger.ZLogWarning($"Failed to auto detect game path on Windows");
+        return false;
+    }
+
+    public bool CheckIsValidSteamFolder(string folderPath)
+    {
+        var exePath = Path.Combine(folderPath, "steam.exe");
+        if (File.Exists(exePath))
+        {
+            Logger.ZLogInformation($"steam.exe found in {folderPath}");
+            return true;
+        }
+
+        Logger.ZLogError($"steam.exe not found in {folderPath}");
+        return false;
+    }
+
+    public bool CheckIsValidGameFolder(string folderPath)
+    {
+        var exePath = Path.Combine(folderPath, "MuseDash.exe");
+        var dllPath = Path.Combine(folderPath, "GameAssembly.dll");
+
+        if (File.Exists(exePath) && File.Exists(dllPath))
+        {
+            Logger.ZLogInformation($"MuseDash.exe and GameAssembly.dll found in {folderPath}");
+            return true;
+        }
+
+        Logger.ZLogError($"MuseDash.exe or GameAssembly.dll not found in {folderPath}");
+        return false;
+    }
+
+    public async Task<bool> LaunchGameWithArgsAsync(string gameId, string launchArguments)
+    {
+        var steamPath = Path.Combine(Config.SteamFolder, "steam.exe");
+        if (!File.Exists(steamPath))
+        {
+            Logger.ZLogError($"Steam executable not found at {steamPath}");
+            return false;
+        }
+
+        await Cli.Wrap(steamPath)
+            .WithArguments(["-applaunch", gameId, launchArguments])
+            .WithValidation(CommandResultValidation.None)
+            .ExecuteAsync()
+            .ConfigureAwait(false);
+
+        Logger.ZLogInformation($"Launching game {gameId} with launch arguments: {launchArguments}");
         return true;
     }
 
@@ -69,6 +131,8 @@ internal sealed class WindowsService : IPlatformService
 
             await process.WaitForExitAsync().ConfigureAwait(false);
             Logger.ZLogInformation($".NET Runtime installer finished with exit code: {process.ExitCode}");
+
+            File.Delete(tempFilePath);
 
             return process.ExitCode is 0;
         }
@@ -102,6 +166,8 @@ internal sealed class WindowsService : IPlatformService
 
             await process.WaitForExitAsync().ConfigureAwait(false);
             Logger.ZLogInformation($".NET SDK installer finished with exit code: {process.ExitCode}");
+
+            File.Delete(tempFilePath);
 
             return process.ExitCode is 0;
         }
@@ -163,24 +229,6 @@ internal sealed class WindowsService : IPlatformService
         Logger.ZLogInformation($"Open uri: {uri}");
     }
 
-    /// <summary>
-    ///     Get game folder path from Registry
-    /// </summary>
-    /// <param name="folderPath"></param>
-    /// <returns>Is success</returns>
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-    private static bool GetPathFromRegistry(out string folderPath)
-    {
-        folderPath = string.Empty;
-        if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null) is not string steamPath)
-        {
-            return false;
-        }
-
-        folderPath = Path.Combine(steamPath, "steamapps", "common", "Muse Dash");
-        return Directory.Exists(folderPath);
-    }
-
     #region Injections
 
     [UsedImplicitly]
@@ -194,6 +242,9 @@ internal sealed class WindowsService : IPlatformService
 
     [UsedImplicitly]
     public required ILogger<WindowsService> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections
 }

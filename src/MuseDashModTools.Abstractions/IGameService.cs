@@ -2,6 +2,6 @@
 
 public interface IGameService
 {
-    void LaunchModdedGame();
-    void LaunchVanillaGame();
+    Task LaunchModdedGameAsync();
+    Task LaunchVanillaGameAsync();
 }
