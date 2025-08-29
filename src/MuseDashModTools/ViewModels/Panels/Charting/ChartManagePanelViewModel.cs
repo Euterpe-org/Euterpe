@@ -19,7 +19,7 @@ public sealed class ChartManagePanelViewModel : ViewModelBase
     {
         await base.InitializeAsync().ConfigureAwait(false);
 
-        await ChartManageService.InitializeChartsAsync(_sourceCache).ConfigureAwait(false);
+        // await ChartManageService.InitializeChartsAsync(_sourceCache).ConfigureAwait(false);
 
         Logger.ZLogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
     }
