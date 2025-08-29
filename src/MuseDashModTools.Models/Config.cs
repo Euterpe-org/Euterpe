@@ -9,6 +9,10 @@ public sealed partial class Config : ObservableObject
     // File Management Settings
     [AllowNull]
     [ObservableProperty]
+    public partial string SteamFolder { get; set; } = string.Empty;
+
+    [AllowNull]
+    [ObservableProperty]
     public partial string MuseDashFolder { get; set; } = string.Empty;
 
     [ObservableProperty]

@@ -1,8 +1,8 @@
 using System.IO.Compression;
-using System.Text;
 using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
 using CliWrap;
+using CliWrap.Buffered;
 
 namespace MuseDashModTools.Core;
 
@@ -12,15 +12,13 @@ internal sealed partial class LocalService : ILocalService
     {
         try
         {
-            var outputStringBuilder = new StringBuilder();
             var result = await Cli.Wrap("dotnet")
                 .WithArguments("--list-runtimes")
                 .WithValidation(CommandResultValidation.None)
-                .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
-                .ExecuteAsync()
+                .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
 
-            return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.NETCore.App 6.");
+            return result.IsSuccess && result.StandardOutput.Contains("Microsoft.NETCore.App 6.");
         }
         catch (Exception ex)
         {
@@ -33,15 +31,13 @@ internal sealed partial class LocalService : ILocalService
     {
         try
         {
-            var outputStringBuilder = new StringBuilder();
             var result = await Cli.Wrap("dotnet")
                 .WithArguments("--list-sdks")
                 .WithValidation(CommandResultValidation.None)
-                .WithStandardOutputPipe(PipeTarget.ToStringBuilder(outputStringBuilder))
-                .ExecuteAsync()
+                .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
 
-            return result.IsSuccess && !outputStringBuilder.ToString().IsNullOrEmpty();
+            return result.IsSuccess && !result.StandardOutput.IsNullOrEmpty();
         }
         catch (Exception ex)
         {
@@ -67,6 +63,32 @@ internal sealed partial class LocalService : ILocalService
             Logger.ZLogError(ex, $"Failed to check Mod Template installation");
             return false;
         }
+    }
+
+    public async Task<string> GetSteamFolderAsync()
+    {
+        var path = string.Empty;
+
+        while (path.IsNullOrEmpty() || !await EnsureValidSteamFolderAsync(path).ConfigureAwait(true))
+        {
+            path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseSteamFolder).ConfigureAwait(true);
+            Logger.ZLogInformation($"Selected Steam folder: {path}");
+        }
+
+        return path;
+    }
+
+    public async Task<string> GetMuseDashFolderAsync()
+    {
+        var path = string.Empty;
+
+        while (path.IsNullOrEmpty() || !await EnsureValidGameFolderAsync(path).ConfigureAwait(true))
+        {
+            path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
+            Logger.ZLogInformation($"Selected MuseDash folder: {path}");
+        }
+
+        return path;
     }
 
     public string[] GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
@@ -128,19 +150,6 @@ internal sealed partial class LocalService : ILocalService
         Logger.ZLogInformation($"MelonLoader uninstalled successfully");
         await MessageBoxService.SuccessAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
         return true;
-    }
-
-    public async Task<string> GetMuseDashFolderAsync()
-    {
-        var path = string.Empty;
-
-        while (path.IsNullOrEmpty() || !await CheckValidPathAsync(path).ConfigureAwait(true))
-        {
-            path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected MuseDash folder: {path}");
-        }
-
-        return path;
     }
 
     public async Task<ModDto?> LoadModFromPathAsync(string filePath)
@@ -258,6 +267,9 @@ internal sealed partial class LocalService : ILocalService
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public required IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
     public required IResourceService ResourceService { get; init; }

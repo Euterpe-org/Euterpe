@@ -202,7 +202,7 @@ Muse Dash Mod Tools 已經是最新版本
   <data name="MessageBox_Content_NoMelonLoaderVersion" xml:space="preserve">
     <value>無法從日誌中找到 MelonLoader的版本</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseMuseDashPath" xml:space="preserve">
+  <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
         <value>請選擇 Muse Dash 文件夾</value>
     </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">

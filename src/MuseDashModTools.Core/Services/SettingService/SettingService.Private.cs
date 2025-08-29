@@ -2,28 +2,46 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class SettingService
 {
+    private async Task CheckSteamFolderAsync()
+    {
+        if (Config.SteamFolder.IsNullOrEmpty() || !PlatformService.CheckIsValidSteamFolder(Config.SteamFolder))
+        {
+            Logger.ZLogError($"Stored Steam folder is invalid");
+
+            if (PlatformService.TryGetSteamFolder(out var steamFolder))
+            {
+                Config.SteamFolder = steamFolder;
+            }
+            else
+            {
+                Logger.ZLogInformation($"Letting user choose Steam folder...");
+                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseSteamFolder).ConfigureAwait(true);
+                Config.SteamFolder = await LocalService.GetSteamFolderAsync().ConfigureAwait(true);
+            }
+        }
+    }
+
     private async Task CheckMuseDashFolderAsync()
     {
-        if (Config.MuseDashFolder.IsNullOrEmpty())
+        if (Config.MuseDashFolder.IsNullOrEmpty() || !PlatformService.CheckIsValidGameFolder(Config.MuseDashFolder))
         {
-            Logger.ZLogError($"MuseDash folder is null or empty");
+            Logger.ZLogError($"Stored MuseDash folder is invalid");
 
             var useDetectedPath = false;
-            if (PlatformService.GetGamePath(out var folderPath))
+            if (PlatformService.TryGetGameFolder(out var gameFolder))
             {
-                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_Confirm_DetectedMuseDashPath, folderPath)
-                    .ConfigureAwait(true);
+                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_Confirm_DetectedMuseDashPath, gameFolder).ConfigureAwait(true);
                 useDetectedPath = result is MessageBoxResult.Yes;
             }
 
             if (useDetectedPath)
             {
-                Config.MuseDashFolder = folderPath;
+                Config.MuseDashFolder = gameFolder;
             }
             else
             {
                 Logger.ZLogInformation($"Letting user choose MuseDash folder...");
-                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseMuseDashPath).ConfigureAwait(true);
+                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseMuseDashFolder).ConfigureAwait(true);
                 Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
             }
         }
