@@ -3,7 +3,6 @@ using System.Text;
 using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
 using CliWrap;
-using CliWrap.Exceptions;
 
 namespace MuseDashModTools.Core;
 
@@ -23,7 +22,7 @@ internal sealed partial class LocalService : ILocalService
 
             return result.IsSuccess && outputStringBuilder.ToString().Contains("Microsoft.NETCore.App 6.");
         }
-        catch (CommandExecutionException ex)
+        catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to check .NET runtime installation");
             return false;
@@ -44,7 +43,7 @@ internal sealed partial class LocalService : ILocalService
 
             return result.IsSuccess && !outputStringBuilder.ToString().IsNullOrEmpty();
         }
-        catch (CommandExecutionException ex)
+        catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to check .NET SDK installation");
             return false;
