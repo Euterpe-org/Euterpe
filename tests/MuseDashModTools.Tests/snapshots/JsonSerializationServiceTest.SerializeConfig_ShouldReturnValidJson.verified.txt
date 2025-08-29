@@ -1,5 +1,6 @@
 ﻿{
-  MuseDashFolder: SteamLibrary/steamapps/common/Muse Dash,
+  SteamFolder: C:/Program Files (x86)/SteamLibrary,
+  MuseDashFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash,
   CacheFolder: Cache,
   GameMode: Vanilla,
   LanguageCode: zh-Hans,
