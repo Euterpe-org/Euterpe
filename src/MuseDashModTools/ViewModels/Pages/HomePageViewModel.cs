@@ -39,19 +39,14 @@ public sealed partial class HomePageViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void LaunchGame()
+    private Task LaunchGameAsync()
     {
-        switch (Config.GameMode)
+        return Config.GameMode switch
         {
-            case GameMode.Modded:
-                GameService.LaunchModdedGame();
-                break;
-            case GameMode.Vanilla:
-                GameService.LaunchVanillaGame();
-                break;
-            default:
-                throw new UnreachableException();
-        }
+            GameMode.Modded => GameService.LaunchModdedGameAsync(),
+            GameMode.Vanilla => GameService.LaunchVanillaGameAsync(),
+            _ => throw new UnreachableException()
+        };
     }
 
     [UsedImplicitly]

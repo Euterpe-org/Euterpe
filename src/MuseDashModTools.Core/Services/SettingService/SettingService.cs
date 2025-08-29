@@ -44,6 +44,7 @@ internal sealed partial class SettingService : ISettingService
     public async Task ValidateAsync()
     {
         Logger.ZLogInformation($"Checking for valid setting...");
+        await CheckSteamFolderAsync().ConfigureAwait(true);
         await CheckMuseDashFolderAsync().ConfigureAwait(true);
         CreateNecessaryFolders();
 

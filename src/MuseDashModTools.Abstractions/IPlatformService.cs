@@ -13,11 +13,29 @@ public interface IPlatformService
     string UpdaterFileName { get; }
 
     /// <summary>
+    ///     Get steam folder path
+    /// </summary>
+    /// <param name="steamFolder"></param>
+    /// <returns>Is success</returns>
+    bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder);
+
+    /// <summary>
     ///     Get game folder path
     /// </summary>
-    /// <param name="folderPath"></param>
+    /// <param name="gameFolder"></param>
     /// <returns>Is success</returns>
-    bool GetGamePath([NotNullWhen(true)] out string? folderPath);
+    bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder);
+
+    bool CheckIsValidSteamFolder(string folderPath);
+    bool CheckIsValidGameFolder(string folderPath);
+
+    /// <summary>
+    ///     Launch game with arguments
+    /// </summary>
+    /// <param name="gameId"></param>
+    /// <param name="launchArguments"></param>
+    /// <returns></returns>
+    Task<bool> LaunchGameWithArgsAsync(string gameId, string launchArguments);
 
     #region Mod Develop
 

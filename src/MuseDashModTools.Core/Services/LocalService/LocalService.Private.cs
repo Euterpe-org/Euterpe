@@ -2,20 +2,26 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class LocalService
 {
-    private async Task<bool> CheckValidPathAsync(string folderPath)
+    private async Task<bool> EnsureValidSteamFolderAsync(string folderPath)
     {
-        var exePath = Path.Combine(folderPath, "MuseDash.exe");
-        var dllPath = Path.Combine(folderPath, "GameAssembly.dll");
-
-        if (!File.Exists(exePath) || !File.Exists(dllPath))
+        if (PlatformService.CheckIsValidSteamFolder(folderPath))
         {
-            Logger.ZLogError($"MuseDash.exe or GameAssembly.dll not found in {folderPath}");
-            await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
-            return false;
+            return true;
         }
 
-        Logger.ZLogInformation($"MuseDash.exe and GameAssembly.dll found in {folderPath}");
-        return true;
+        await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
+        return false;
+    }
+
+    private async Task<bool> EnsureValidGameFolderAsync(string folderPath)
+    {
+        if (PlatformService.CheckIsValidGameFolder(folderPath))
+        {
+            return true;
+        }
+
+        await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
+        return false;
     }
 
     private static string? ReadFileVersion(string filePath)
