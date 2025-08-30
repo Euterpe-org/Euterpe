@@ -2,7 +2,7 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class LocalService
 {
-    private async Task<bool> EnsureValidSteamFolderAsync(string folderPath)
+    private async ValueTask<bool> EnsureValidSteamFolderAsync(string folderPath)
     {
         if (PlatformService.CheckIsValidSteamFolder(folderPath))
         {
@@ -13,7 +13,7 @@ internal sealed partial class LocalService
         return false;
     }
 
-    private async Task<bool> EnsureValidGameFolderAsync(string folderPath)
+    private async ValueTask<bool> EnsureValidGameFolderAsync(string folderPath)
     {
         if (PlatformService.CheckIsValidGameFolder(folderPath))
         {
