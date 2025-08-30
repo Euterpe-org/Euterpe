@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using ObservableCollections;
 
 namespace MuseDashModTools.ViewModels.Panels.Logging;
 
 public sealed class LogViewerPanelViewModel : ViewModelBase
 {
-    public ObservableCollection<string> LogContents => LiveLogService.LogContents;
+    public INotifyCollectionChangedSynchronizedViewList<string> LogMessagesView => LiveLogService.LogMessagesView;
 
     [UsedImplicitly]
     public required ILogger<LogViewerPanelViewModel> Logger { get; init; }
