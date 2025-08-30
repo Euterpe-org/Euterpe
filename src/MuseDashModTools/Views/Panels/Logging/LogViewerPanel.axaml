@@ -15,7 +15,7 @@
     </Design.DataContext>
 
     <ListBox
-        ItemsSource="{Binding LogContents}">
+        ItemsSource="{Binding LogMessagesView}">
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <TextBlock
