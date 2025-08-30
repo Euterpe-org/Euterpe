@@ -84,7 +84,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_DotNetRuntime_Install).ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_Notice_DotNetRuntime_Install).ConfigureAwait(true);
         if (result is not MessageBoxResult.OK)
         {
             return;
@@ -93,7 +93,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
         if (!success)
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntime_Install_Failed).ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DotNetRuntime_Install_Failed).ConfigureAwait(false);
         }
     }
 

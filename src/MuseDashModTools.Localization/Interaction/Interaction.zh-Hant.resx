@@ -14,10 +14,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-      <value>選擇譜面文件夾</value>
+    <value>選擇譜面文件夾</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-      <value>選擇 Muse Dash 文件夾</value>
+    <value>選擇 Muse Dash 文件夾</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>否</value>
@@ -30,11 +30,6 @@
   </data>
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>是，並且不再詢問</value>
-  </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>你下載的 Mod 有問題
-如果有 0KB 的 Mod ，請刪除後再重新啟動程式
-{0}</value>
   </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod 啟用/禁用失敗
@@ -51,9 +46,6 @@
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
     <value>檢查更新失敗
 是否已連網?</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>請選擇正確的 Muse Dash 文件夾!</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>檢測到的 Muse Dash 文件夾為 {0}
@@ -151,9 +143,9 @@ Muse Dash Mod Tools 已經是最新版本
 如果扔然有問題請至 trouble shoot 頻道詢問</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-        <value>無法刪除 {0} 下的 MelonLoader.zip
+    <value>無法刪除 {0} 下的 MelonLoader.zip
 請嘗試手動刪除</value>
-    </data>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader 已經成功安裝
 </value>
@@ -183,10 +175,6 @@ Muse Dash Mod Tools 已經是最新版本
     <value>這個 Mod 沒有可用連結進行下載
 </value>
   </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>無法找到 Muse Dash.exe 或 GameAssmbly.dll
-請選擇正確的文件夾</value>
-  </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>無法認證你在Steam上購買了此遊戲
 你在使用盜版嗎?</value>
@@ -203,8 +191,8 @@ Muse Dash Mod Tools 已經是最新版本
     <value>無法從日誌中找到 MelonLoader的版本</value>
   </data>
   <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-        <value>請選擇 Muse Dash 文件夾</value>
-    </data>
+    <value>請選擇 Muse Dash 文件夾</value>
+  </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">
     <value>你儲存的 Muse Dash 文件夾是空的
 請選擇正確的文件夾</value>
