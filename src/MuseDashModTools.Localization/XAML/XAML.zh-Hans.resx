@@ -178,6 +178,9 @@
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>谱面管理</value>
   </data>
+  <data name="Panel_Logging_LogViewer" xml:space="preserve">
+      <value>日志查看</value>
+  </data>
   <data name="Panel_Modding_MelonLoader" xml:space="preserve">
     <value>模组加载器</value>
   </data>

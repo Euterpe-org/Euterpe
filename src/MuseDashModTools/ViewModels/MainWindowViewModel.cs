@@ -7,6 +7,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         new(Page_Home, HomePageName, "Home"),
         new(Page_Modding, ModdingPageName, "Wrench"),
         new(Page_Charting, ChartingPageName, "Music"),
+        new(Page_Logging, LoggingPageName, "Terminal"),
         new(Page_Setting, SettingPageName, "Setting")
     ];
 
