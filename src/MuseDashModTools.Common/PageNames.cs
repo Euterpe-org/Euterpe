@@ -17,6 +17,8 @@ public static class PageNames
 
     // Logging
     public const string LoggingPageName = "Logging";
+    public const string LogViewerPanelName = "Log Viewer";
+    public const string LogAnalysisPanelName = "Log Analysis";
 
     // Settings
     public const string SettingPageName = "Setting";
