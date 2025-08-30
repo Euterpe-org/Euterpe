@@ -14,10 +14,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-      <value>チャートフォルダを選択</value>
+    <value>チャートフォルダを選択</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-      <value>Muse Dashのインストールフォルダを選んでね</value>
+    <value>Muse Dashのインストールフォルダを選んでね</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>いいえ</value>
@@ -30,11 +30,6 @@
   </data>
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>はい、そして問い合わせないで</value>
-  </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>あなたのダウンロードは問題があります
-もし0KBのModはあれば、削除して再起動する
-{0}</value>
   </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod 起動/禁止失敗
@@ -51,9 +46,6 @@
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
     <value>アップロード検査失敗
 インターネット接続いますか？</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>正しいのMuse Dashデータ選んでください！</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Detected Muse Dash folder path is {0}
@@ -150,10 +142,10 @@ You are using the latest version of Muse Dash Mod Tools</value>
 If you still have issues please go to troubleshoot channel</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-        <value>Failed to delete MelonLoader.zip in
+    <value>Failed to delete MelonLoader.zip in
 {0}
 Try to manually delete</value>
-    </data>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader has been successfully installed
 </value>
@@ -182,10 +174,6 @@ You have to buy it in order to play custom charts</value>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>This mod does not have an available resource for download
 </value>
-  </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>Couldn't find MuseDash.exe and/or GameAssembly.dll
-Please choose the right folder</value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Cannot verify that you have bought the game on Steam

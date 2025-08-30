@@ -14,16 +14,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
-      <value>选择缓存文件夹</value>
+    <value>选择缓存文件夹</value>
   </data>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-      <value>选择谱面文件夹</value>
+    <value>选择谱面文件夹</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-      <value>选择 Muse Dash 文件夹</value>
+    <value>选择 Muse Dash 文件夹</value>
   </data>
   <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
-      <value>选择 Steam 文件夹</value>
+    <value>选择 Steam 文件夹</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>否</value>
@@ -37,11 +37,6 @@
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>是并且不再询问</value>
   </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>你下载的 Mod 有问题
-如果有0KB的 Mod，请删除之后重新启动应用
-{0}</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod启用/禁用失败
 {0}</value>
@@ -53,13 +48,6 @@
   <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
     <value>Mod启用/禁用失败。没有权限
 {0}</value>
-  </data>
-  <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
-    <value>检查更新失败
-是否联网？</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>先选择正确的 Muse Dash文件夹！</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>检测到的 Muse Dash 文件夹为
@@ -81,13 +69,6 @@
   <data name="MessageBox_Content_DisableReverseDependency" xml:space="preserve">
     <value>你想要禁用依赖于 {0} 的mod吗？</value>
   </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-      <value>未找到 .Net 6 Runtime
-点击确定安装</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-      <value>无法安装 .Net 6 Runtime</value>
-  </data>
   <data name="MessageBox_Content_DownloadChartFailed" xml:space="preserve">
     <value>谱面下载失败
 {0}</value>
@@ -102,6 +83,12 @@
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>你想要启用 {0} 的依赖mod {1} 吗？</value>
+  </data>
+  <data name="MessageBox_Content_Error_DotNetRuntime_Install_Failed" xml:space="preserve">
+    <value>无法安装 .Net 6 Runtime</value>
+  </data>
+  <data name="MessageBox_Content_Error_DotNetSDK_Install_Failed" xml:space="preserve">
+      <value>无法安装 .Net 8 SDK</value>
   </data>
   <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
     <value>验证 MuseDash.exe 失败
@@ -165,9 +152,9 @@ Muse Dash Mod Tools已是最新版
 如果仍然有问题请去 trouble shoot 频道询问</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-        <value>无法删除 {0} 下的 MelonLoader.zip
+    <value>无法删除 {0} 下的 MelonLoader.zip
 请尝试手动删除</value>
-    </data>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader 已经成功安装
 </value>
@@ -197,10 +184,6 @@ Muse Dash Mod Tools已是最新版
     <value>这个mod没有可用链接进行下载
 </value>
   </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>无法找到 MuseDash.exe 或者 GameAssembly.dll
-请选择正确的文件夹</value>
-  </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>无法验证你在Steam上购买了此游戏
 你在使用盗版吗？</value>
@@ -216,11 +199,18 @@ Muse Dash Mod Tools已是最新版
   <data name="MessageBox_Content_NoMelonLoaderVersion" xml:space="preserve">
     <value>无法从日志中找到 MelonLoader的版本</value>
   </data>
+  <data name="MessageBox_Content_NoticeConfirm_DotNetSDK_Install" xml:space="preserve">
+      <value>你确定要安装 .Net SDK？</value>
+  </data>
   <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-        <value>请选择 Muse Dash 文件夹</value>
-    </data>
+    <value>请选择 Muse Dash 文件夹</value>
+  </data>
   <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
-      <value>请选择 Steam 文件夹</value>
+    <value>请选择 Steam 文件夹</value>
+  </data>
+  <data name="MessageBox_Content_Notice_DotNetRuntime_Install" xml:space="preserve">
+    <value>未找到 .Net 6 Runtime
+点击确定安装</value>
   </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">
     <value>你所存储的 Muse Dash 文件夹是空
@@ -246,6 +236,9 @@ Muse Dash Mod Tools已是最新版
   <data name="MessageBox_Content_ReinstallMod" xml:space="preserve">
     <value>你正在要求重装{0}
 请确认你的操作</value>
+  </data>
+  <data name="MessageBox_Content_Success_NoUpdatesFound" xml:space="preserve">
+    <value>无可用的更新</value>
   </data>
   <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
     <value>你正在要求卸载 MelonLoader
@@ -284,19 +277,19 @@ Muse Dash Mod Tools已是最新版
     <value>分析成功</value>
   </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
-      <value>模组 {0} 安装成功</value>
+    <value>模组 {0} 安装成功</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
-      <value>模组 {0} 重装成功</value>
+    <value>模组 {0} 重装成功</value>
   </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
-        <value>模组 {0} 删除成功</value>
-    </data>
+    <value>模组 {0} 删除成功</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
-      <value>模组 {0} 更新成功</value>
+    <value>模组 {0} 更新成功</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
-      <value>错误</value>
+    <value>错误</value>
   </data>
   <data name="Title_Notice" xml:space="preserve">
     <value>注意</value>

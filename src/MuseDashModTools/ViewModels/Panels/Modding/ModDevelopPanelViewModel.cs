@@ -20,7 +20,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task InstallDotNetSdkAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to install the DotNet SDK?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_NoticeConfirm_DotNetSDK_Install).ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;
@@ -30,7 +30,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         var success = await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(true);
         if (!success)
         {
-            await MessageBoxService.ErrorAsync("Failed to install DotNet SDK").ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DotNetSDK_Install_Failed).ConfigureAwait(false);
             return;
         }
 
