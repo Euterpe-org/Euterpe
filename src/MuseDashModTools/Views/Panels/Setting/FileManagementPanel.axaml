@@ -16,21 +16,38 @@
         <vm:FileManagementPanelViewModel />
     </Design.DataContext>
 
-    <!--  TODO: u:PathPicker  -->
     <StackPanel
         Classes="ContentListRoot">
 
-        <!--  MuseDash Game Folder  -->
+        <!--  Steam Folder  -->
         <mdmt:ContentListItem
-            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolderPath}}"
-            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolderPath}}">
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_SteamFolder}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_SteamFolder}}">
+            <StackPanel
+                Classes="ContentListItemVertical">
+                <TextBox
+                    Classes="Desc"
+                    Text="{Binding Config.SteamFolder, Mode=OneWay}" />
+                <Button
+                    Command="{Binding ChangeSteamFolderCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Reselect}}"
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource OutlineButton}" />
+            </StackPanel>
+        </mdmt:ContentListItem>
+
+        <!--  MuseDash Folder  -->
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolder}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolder}}">
             <StackPanel
                 Classes="ContentListItemVertical">
                 <TextBox
                     Classes="Desc"
                     Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
                 <Button
-                    Content="Reselect"
+                    Command="{Binding ChangeMuseDashFolderCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Reselect}}"
                     HorizontalAlignment="Left"
                     Theme="{DynamicResource OutlineButton}" />
             </StackPanel>
@@ -38,15 +55,16 @@
 
         <!--  Cache Folder  -->
         <mdmt:ContentListItem
-            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolderPath}}"
-            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolderPath}}">
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolder}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolder}}">
             <StackPanel
                 Classes="ContentListItemVertical">
                 <TextBox
                     Classes="Desc"
                     Text="{Binding Config.CacheFolder, Mode=OneWay}" />
                 <Button
-                    Content="Reselect"
+                    Command="{Binding ChangeCacheFolderCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Reselect}}"
                     HorizontalAlignment="Left"
                     Theme="{DynamicResource OutlineButton}" />
             </StackPanel>

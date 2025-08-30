@@ -91,6 +91,18 @@ internal sealed partial class LocalService : ILocalService
         return path;
     }
 
+    public async Task<string> GetCacheFolderAsync()
+    {
+        var path = string.Empty;
+        while (path.IsNullOrEmpty())
+        {
+            path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseCacheFolder).ConfigureAwait(true);
+            Logger.ZLogInformation($"Selected Cache folder: {path}");
+        }
+
+        return path;
+    }
+
     public string[] GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
         .Where(x => Path.GetExtension(x) is ".disabled" || Path.GetExtension(x) is ".dll")
         .ToArray();
