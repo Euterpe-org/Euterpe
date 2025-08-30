@@ -7,6 +7,7 @@ public interface ILocalService
     Task<bool> CheckModTemplateInstalledAsync();
     Task<string> GetSteamFolderAsync();
     Task<string> GetMuseDashFolderAsync();
+    Task<string> GetCacheFolderAsync();
     string[] GetModFilePaths();
     string[] GetLibFilePaths();
     Task<bool> InstallMelonLoaderAsync();
