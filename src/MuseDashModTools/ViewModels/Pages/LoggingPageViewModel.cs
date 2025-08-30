@@ -4,7 +4,7 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(Page_Logging, LoggingPageName)
+        new(Panel_Logging_LogViewer, LogViewerPanelName)
     ];
 
     #region Injections

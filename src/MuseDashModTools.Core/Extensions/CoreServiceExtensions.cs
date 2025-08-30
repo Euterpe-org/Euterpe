@@ -23,6 +23,7 @@ public static class CoreServiceExtensions
                 options.UseFormatter(() => new LogFileFormatter());
                 return Path.Combine("Logs", logFileName);
             });
+            x.AddZLoggerInMemory();
         });
     }
 
@@ -50,6 +51,7 @@ public static class CoreServiceExtensions
         builder.RegisterType<GameService>().As<IGameService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<LoggerDisplayService>().As<ILoggerDisplayService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<NotificationService>().As<INotificationService>().PropertiesAutowired().SingleInstance();
