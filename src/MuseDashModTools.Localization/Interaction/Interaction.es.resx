@@ -14,10 +14,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-      <value>Selecciona la carpeta de Charts</value>
+    <value>Selecciona la carpeta de Charts</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-      <value>Selecciona la carpeta de Muse Dash</value>
+    <value>Selecciona la carpeta de Muse Dash</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>No</value>
@@ -30,11 +30,6 @@
   </data>
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>Si y no preguntes de nuevo</value>
-  </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>¡Aviso de mods corruptos!
-Por favor, borra cualquier mod que tengas instalado que pese 0KB, y reinicia el programa
-{0}</value>
   </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>No se pudo activar/desactivar el mod.
@@ -51,9 +46,6 @@ Por favor, borra cualquier mod que tengas instalado que pese 0KB, y reinicia el 
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
     <value>Comprobación de parche fallida
 ¿Tienes conexión a internet?</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>¡Selecciona la carpeta de Muse Dash!</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>¿Tienes Muse Dash instalado en esta carpeta?
@@ -150,10 +142,10 @@ Usas la última versión de Muse Dash Mod Tools</value>
 ¡Si hay alguno sería útil que lo avises en el Discord de MDMC!</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-        <value>No se pudo eliminar MelonLoader.zip en
+    <value>No se pudo eliminar MelonLoader.zip en
 {0}
 ¿Podrías borrarlo manualmente?</value>
-    </data>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>¡MelonLoader se ha instalado!
 </value>
@@ -182,10 +174,6 @@ Esto es necesario para poder jugar Custom Charts</value>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>¡Uy! Este mod no tiene una fuente oficial de descarga
 </value>
-  </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>No se pudo encontrar MuseDash.exe o GameAssembly.dll
-Asegurate de elegir la carpeta correcta</value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Steam no pudo verificar donde has instalado Muse Dash

@@ -25,11 +25,6 @@
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>Ja und frag nicht wieder</value>
   </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>Deine heruntergeladenen Mods sind kaputt
-Bitte löschen Sie 0-KB-Mods, falls vorhanden, und starten Sie dann die Anwendung neu
-{0}</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod aktivieren/deaktivieren fehlgeschlagen
 {0}</value>
@@ -45,9 +40,6 @@ Bitte löschen Sie 0-KB-Mods, falls vorhanden, und starten Sie dann die Anwendun
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
     <value>Überprüfung der Updates fehlgeschlagen
 . Bist du online?</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>Wählen Sie zuerst den richtigen Muse Dash Ordner!</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Detected Muse Dash folder path is {0}
@@ -171,10 +163,6 @@ You have to buy it in order to play custom charts</value>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>This mod does not have an available resource for download
 </value>
-  </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>Couldn't find MuseDash.exe and/or GameAssembly.dll
-Please choose the right folder</value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Cannot verify that you have bought the game on Steam

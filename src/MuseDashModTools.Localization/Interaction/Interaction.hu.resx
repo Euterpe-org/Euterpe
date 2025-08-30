@@ -14,10 +14,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-      <value>Válaszd ki a zene mappádat</value>
+    <value>Válaszd ki a zene mappádat</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-      <value>Válaszd ki a Muse Dash mappát</value>
+    <value>Válaszd ki a Muse Dash mappát</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>Nem</value>
@@ -30,11 +30,6 @@
   </data>
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>Igen és ne kérdezd újra</value>
-  </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>A letöltött modjaid hibásak
-Ha van 0KB-os mod, akkor azt töröld ki
-{0}</value>
   </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod be-/kikapcsolás sikertelen
@@ -51,9 +46,6 @@ Ha van 0KB-os mod, akkor azt töröld ki
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
     <value>Ellenőrzés sikertelen
 Biztos hogy online vagy?</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>Válaszd ki a Muse Dash mappát!</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Érzékelt Muse Dash mappa: {0}
@@ -150,10 +142,10 @@ Muse Dash Mod Tools legfrissebb verzióját használod</value>
 Ha mégis van problémád, fordulj a "Hibakezelés"-hez</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-        <value>Nem sikerült kitörölni MelonLoader.zip-et itt:
+    <value>Nem sikerült kitörölni MelonLoader.zip-et itt:
 {0}
 Probáld meg manuálisan</value>
-    </data>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader sikeresen települt
 </value>
@@ -182,10 +174,6 @@ Meg kell venned a CustomAlbums mod-hoz</value>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>Ehhez a modhoz nem tartozik letölthető fájl
 </value>
-  </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>MuseDash.exe vagy GameAssembly.dll nem található
-Válaszd ki a helyes mappát</value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Nem sikerült igazolni hogy birtoklod Steam-en a játékot

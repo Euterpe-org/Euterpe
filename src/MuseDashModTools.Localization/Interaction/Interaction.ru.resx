@@ -14,10 +14,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-      <value>Выберите папку чарта</value>
+    <value>Выберите папку чарта</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-      <value>Выберите папку Muse Dash</value>
+    <value>Выберите папку Muse Dash</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>Нет</value>
@@ -30,11 +30,6 @@
   </data>
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>Да, больше не спрашивать</value>
-  </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>Ваши установленные моды сломаны
-Пожалуйста, удалите все моды весящие 0KB, затем, перезапустите приложение
-{0}</value>
   </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Не удалось включить/выключить мод
@@ -51,9 +46,6 @@
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
     <value>Не удалось проверить обновления
 Вы подключены к интернету?</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>Выберите правильную папку к Muse Dash!</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Обнаружен путь к папке Muse Dash - {0}
@@ -150,10 +142,10 @@
 Если у вас есть проблемы, то перейдите в канал устранения неполадок</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-        <value>Невозможно удалить MelonLoader.zip в
+    <value>Невозможно удалить MelonLoader.zip в
 {0}
 Попробуйте удалить файл вручную</value>
-    </data>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader был успешно установлен
 </value>
@@ -182,10 +174,6 @@
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>У этого мода нет доступных ресурсов для скачки
 </value>
-  </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>MuseDash.exe или GameAssembly.dll не были найдены
-Пожалуйста, выберите правильную папку</value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Невозможно проверить, что вы купили игру в Steam

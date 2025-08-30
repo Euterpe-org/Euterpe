@@ -14,16 +14,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
-      <value>Choose Cache Folder</value>
+    <value>Choose Cache Folder</value>
   </data>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-      <value>Choose Chart Folder</value>
+    <value>Choose Chart Folder</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-      <value>Choose Muse Dash Folder</value>
+    <value>Choose Muse Dash Folder</value>
   </data>
   <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
-      <value>Choose Steam Folder</value>
+    <value>Choose Steam Folder</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>No</value>
@@ -37,11 +37,6 @@
   <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
     <value>Yes and Don't Ask Again</value>
   </data>
-  <data name="MessageBox_Content_BrokenMods" xml:space="preserve">
-    <value>Your downloaded mods are broken
-Please delete 0KB mods if they exist, then restart the application
-{0}</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod enable/disable failed
 {0}</value>
@@ -53,13 +48,6 @@ Please delete 0KB mods if they exist, then restart the application
   <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
     <value>Mod enable/disable failed. Unauthorized
 {0}</value>
-  </data>
-  <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
-    <value>Checking updates failed
-Are you online?</value>
-  </data>
-  <data name="MessageBox_Content_ChooseCorrectPath" xml:space="preserve">
-    <value>Choose correct Muse Dash folder first!</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Detected Muse Dash folder path is
@@ -81,16 +69,6 @@ Are you sure you want to disable this mod?</value>
   <data name="MessageBox_Content_DisableReverseDependency" xml:space="preserve">
     <value>Do you want to disable the mods dependent on {0}?</value>
   </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-      <value>.NET 6 Runtime not found
-Click OK to install</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-      <value>Failed to install .NET 6 Runtime</value>
-  </data>
-  <data name="MessageBox_Content_DotNetSDKNotFound" xml:space="preserve">
-      <value>.NET SDK not found</value>
-  </data>
   <data name="MessageBox_Content_DownloadChartFailed" xml:space="preserve">
     <value>Chart download failed
 {0}</value>
@@ -105,6 +83,12 @@ Click OK to install</value>
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>Do you want to enable {0}'s dependency {1}?</value>
+  </data>
+  <data name="MessageBox_Content_Error_DotNetRuntime_Install_Failed" xml:space="preserve">
+    <value>Failed to install .NET 6 Runtime</value>
+  </data>
+  <data name="MessageBox_Content_Error_DotNetSDK_Install_Failed" xml:space="preserve">
+      <value>Failed to install .NET 8 SDK</value>
   </data>
   <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
     <value>Failed to verify MuseDash.exe
@@ -167,10 +151,10 @@ You are using the latest version of Muse Dash Mod Tools</value>
 If you still have issues please go to troubleshoot channel</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-        <value>Failed to delete MelonLoader.zip in
+    <value>Failed to delete MelonLoader.zip in
 {0}
 Try to manually delete</value>
-    </data>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader has been successfully installed
 </value>
@@ -200,10 +184,6 @@ You have to buy it in order to play custom charts</value>
     <value>This mod does not have an available resource for download
 </value>
   </data>
-  <data name="MessageBox_Content_NoExeFound" xml:space="preserve">
-    <value>Couldn't find MuseDash.exe and/or GameAssembly.dll
-Please choose the right folder</value>
-  </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Cannot verify that you have bought the game on Steam
 Are you using a pirated version?</value>
@@ -219,11 +199,18 @@ Have you installed MelonLoader?</value>
   <data name="MessageBox_Content_NoMelonLoaderVersion" xml:space="preserve">
     <value>Cannot find MelonLoader version from log</value>
   </data>
+  <data name="MessageBox_Content_NoticeConfirm_DotNetSDK_Install" xml:space="preserve">
+      <value>Are you sure you want to install the .Net SDK?</value>
+  </data>
   <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-        <value>Please choose Muse Dash folder</value>
-    </data>
+    <value>Please choose Muse Dash folder</value>
+  </data>
   <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
-      <value>Please choose Steam folder</value>
+    <value>Please choose Steam folder</value>
+  </data>
+  <data name="MessageBox_Content_Notice_DotNetRuntime_Install" xml:space="preserve">
+    <value>.NET 6 Runtime not found
+Click OK to install</value>
   </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">
     <value>Your stored Muse Dash Folder path is null
@@ -249,6 +236,9 @@ Please register in #bot-commands channel in MDMC discord or mdmc.moe website</va
   <data name="MessageBox_Content_ReinstallMod" xml:space="preserve">
     <value>You are asking to reinstall {0}
 Please confirm your operation</value>
+  </data>
+  <data name="MessageBox_Content_Success_NoUpdatesFound" xml:space="preserve">
+    <value>No updates available</value>
   </data>
   <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
     <value>You are asking to uninstall MelonLoader
@@ -288,19 +278,19 @@ and check your antivirus</value>
     <value>Analysis successful</value>
   </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
-        <value>Mod {0} successfully installed</value>
-    </data>
+    <value>Mod {0} successfully installed</value>
+  </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
-        <value>Mod {0} successfully reinstalled</value>
-    </data>
+    <value>Mod {0} successfully reinstalled</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
-        <value>Mod {0} successfully uninstalled</value>
-    </data>
+    <value>Mod {0} successfully uninstalled</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
-        <value>Mod {0} successfully updated</value>
-    </data>
+    <value>Mod {0} successfully updated</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
-      <value>Error</value>
+    <value>Error</value>
   </data>
   <data name="Title_Notice" xml:space="preserve">
     <value>Notice</value>
