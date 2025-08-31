@@ -23,7 +23,7 @@ public static class CoreServiceExtensions
                 options.UseFormatter(() => new LogFileFormatter());
                 return Path.Combine("Logs", logFileName);
             });
-            x.AddZLoggerInMemory();
+            x.AddZLoggerInMemory((options, _) => options.UseFormatter(() => new LogMemoryFormatter()), _ => { });
         });
     }
 

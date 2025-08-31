@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:log="clr-namespace:Microsoft.Extensions.Logging;assembly=Microsoft.Extensions.Logging.Abstractions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Logging"
     x:Class="MuseDashModTools.Views.Panels.Logging.LogViewerPanel"
@@ -14,15 +15,53 @@
         <vm:LogViewerPanelViewModel />
     </Design.DataContext>
 
-    <ListBox
-        ItemsSource="{Binding LogMessagesView}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <TextBlock
-                    Text="{Binding}"
-                    TextWrapping="Wrap" />
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+    <UserControl.Styles>
+        <Style
+            Selector="TextBlock">
+            <Style
+                Selector="^.TRC">
+                <Setter Property="Foreground" Value="{DynamicResource SemiGrey5}" />
+            </Style>
+            <Style
+                Selector="^.DBG">
+                <Setter Property="Foreground" Value="{DynamicResource SemiBlue5}" />
+            </Style>
+            <Style
+                Selector="^.INF">
+                <Setter Property="Foreground" Value="{DynamicResource SemiColorText0}" />
+            </Style>
+            <Style
+                Selector="^.WRN">
+                <Setter Property="Foreground" Value="{DynamicResource SemiYellow5}" />
+            </Style>
+            <Style
+                Selector="^.ERR">
+                <Setter Property="Foreground" Value="{DynamicResource SemiRed5}" />
+            </Style>
+            <Style
+                Selector="^.CRT">
+                <Setter Property="Foreground" Value="{DynamicResource SemiPurple5}" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer>
+        <ListBox
+            ItemsSource="{Binding LogMessagesView}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Classes.CRT="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Critical}, Mode=OneWay}"
+                        Classes.DBG="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Debug}, Mode=OneWay}"
+                        Classes.ERR="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Error}, Mode=OneWay}"
+                        Classes.INF="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Information}, Mode=OneWay}"
+                        Classes.TRC="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Trace}, Mode=OneWay}"
+                        Classes.WRN="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Warning}, Mode=OneWay}"
+                        Text="{Binding Message}"
+                        TextWrapping="Wrap" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </ScrollViewer>
 
 </UserControl>

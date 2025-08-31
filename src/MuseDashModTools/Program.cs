@@ -71,7 +71,7 @@ internal static class Program
 
     private static void ReportException(Exception ex)
     {
-        Resolve<ILogger<App>>().ZLogError(ex, $"Unhandled exception");
+        Resolve<ILogger<App>>().ZLogCritical(ex, $"Unhandled exception");
 #if PUBLISH
         Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
         Resolve<IPlatformService>().OpenUriAsync("https://github.com/MDModsDev/MuseDashModTools/issues/new/choose");

@@ -3,7 +3,7 @@ using Utf8StringInterpolation;
 
 namespace MuseDashModTools.Core.Logger;
 
-public sealed class LogFileFormatter : IZLoggerFormatter
+internal sealed class LogFileFormatter : IZLoggerFormatter
 {
     public void FormatLogEntry(IBufferWriter<byte> writer, IZLoggerEntry entry)
     {
