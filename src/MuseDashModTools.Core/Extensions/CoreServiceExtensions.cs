@@ -66,6 +66,7 @@ public static class CoreServiceExtensions
         builder.RegisterType<GitHubMirrorDownloadService>().As<IGitHubMirrorDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
 
+#pragma warning disable CA1416
         // Platform Service
 #if WINDOWS
         builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
@@ -74,5 +75,6 @@ public static class CoreServiceExtensions
 #elif MACOS
         builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
 #endif
+#pragma warning restore CA1416
     }
 }

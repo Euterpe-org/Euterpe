@@ -1,5 +1,6 @@
 namespace MuseDashModTools.Core;
 
+[SupportedOSPlatform(nameof(OSPlatform.OSX))]
 internal sealed class MacOsService : IPlatformService
 {
     public string OsString => "MacOS";
