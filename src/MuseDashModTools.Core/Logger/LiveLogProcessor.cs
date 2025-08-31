@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Core.Logger;
 
-public sealed class MemoryLogProcessor : IAsyncLogProcessor
+public sealed class LiveLogProcessor : IAsyncLogProcessor
 {
     public void Post(IZLoggerEntry log)
     {
