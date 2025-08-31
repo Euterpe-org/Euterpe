@@ -4,6 +4,7 @@ public static class CoreServiceExtensions
 {
     public static void RegisterLogger(this IServiceCollection services, string logFileName)
     {
+        services.AddSingleton<MemoryLogProcessor>();
         services.AddLogging(x =>
         {
             x.ClearProviders();
@@ -23,7 +24,7 @@ public static class CoreServiceExtensions
                 options.UseFormatter(() => new LogFileFormatter());
                 return Path.Combine("Logs", logFileName);
             });
-            x.AddZLoggerInMemory((options, _) => options.UseFormatter(() => new LogMemoryFormatter()), _ => { });
+            x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<MemoryLogProcessor>());
         });
     }
 
@@ -51,7 +52,6 @@ public static class CoreServiceExtensions
         builder.RegisterType<GameService>().As<IGameService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<LoggerDisplayService>().As<ILoggerDisplayService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<NotificationService>().As<INotificationService>().PropertiesAutowired().SingleInstance();

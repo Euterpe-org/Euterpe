@@ -57,7 +57,7 @@
                         Classes.INF="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Information}, Mode=OneWay}"
                         Classes.TRC="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Trace}, Mode=OneWay}"
                         Classes.WRN="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Warning}, Mode=OneWay}"
-                        Text="{Binding Message}"
+                        Text="{Binding .}"
                         TextWrapping="Wrap" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
