@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-
 namespace MuseDashModTools.ViewModels.Pages;
 
 public sealed partial class ChartingPageViewModel : NavViewModelBase
@@ -10,7 +8,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
         new(Panel_Charting_CharterToolkit, CharterToolkitPanelName)
     ];
 
-    public ObservableCollection<DropDownButtonItem> DropDownButtons =>
+    public IReadOnlyList<DropDownButtonItem> DropDownButtons =>
     [
         new(DropDownButton_Open,
         [
