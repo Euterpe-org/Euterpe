@@ -4,7 +4,7 @@ public static class CoreServiceExtensions
 {
     public static void RegisterLogger(this IServiceCollection services, string logFileName)
     {
-        services.AddSingleton<MemoryLogProcessor>();
+        services.AddSingleton<LiveLogProcessor>();
         services.AddLogging(x =>
         {
             x.ClearProviders();
@@ -24,7 +24,7 @@ public static class CoreServiceExtensions
                 options.UseFormatter(() => new LogFileFormatter());
                 return Path.Combine("Logs", logFileName);
             });
-            x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<MemoryLogProcessor>());
+            x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<LiveLogProcessor>());
         });
     }
 
