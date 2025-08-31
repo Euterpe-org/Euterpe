@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace MuseDashModTools.ViewModels.Pages;
+﻿namespace MuseDashModTools.ViewModels.Pages;
 
 public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
@@ -11,7 +9,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
         new(Panel_Modding_ModDevelop, ModDevelopPanelName)
     ];
 
-    public ObservableCollection<DropDownButtonItem> DropDownButtons =>
+    public IReadOnlyList<DropDownButtonItem> DropDownButtons =>
     [
         new(DropDownButton_Open,
         [

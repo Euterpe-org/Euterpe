@@ -79,6 +79,9 @@
   <data name="Dropdown_Vanilla" xml:space="preserve">
       <value>原版</value>
   </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+      <value>应用日志</value>
+  </data>
   <data name="Folder_CustomAlbums" xml:space="preserve">
     <value>自制谱文件夹</value>
   </data>
