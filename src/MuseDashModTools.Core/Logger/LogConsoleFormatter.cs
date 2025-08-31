@@ -4,38 +4,23 @@ using static MuseDashModTools.Core.Logger.AnsiEscapeColors;
 
 namespace MuseDashModTools.Core.Logger;
 
-public sealed class LogConsoleFormatter : IZLoggerFormatter
+internal sealed class LogConsoleFormatter : IZLoggerFormatter
 {
+    private static readonly Dictionary<LogLevel, string> _levelPrefixes = new()
+    {
+        [LogLevel.Trace] = $"{Blue}[TRC]{Reset}",
+        [LogLevel.Debug] = $"{BrightGreen}[DBG]{Reset}",
+        [LogLevel.Information] = $"{BrightCyan}[INF]{Reset}",
+        [LogLevel.Warning] = $"{Yellow}[WRN]{Reset}",
+        [LogLevel.Error] = $"{Red}[ERR]{Reset}",
+        [LogLevel.Critical] = $"{BrightRed}[CRT]{Reset}"
+    };
+
     public void FormatLogEntry(IBufferWriter<byte> writer, IZLoggerEntry entry)
     {
         using var utf8Writer = new Utf8StringWriter<IBufferWriter<byte>>(writer);
-        switch (entry.LogInfo.LogLevel)
-        {
-            case LogLevel.Trace:
-                utf8Writer.Append($"{Blue}[TRC]{Reset}");
-                break;
-            case LogLevel.Debug:
-                utf8Writer.Append($"{BrightGreen}[DBG]{Reset}");
-                break;
-            case LogLevel.Information:
-                utf8Writer.Append($"{BrightCyan}[INF]{Reset}");
-                break;
-            case LogLevel.Warning:
-                utf8Writer.Append($"{Yellow}[WRN]{Reset}");
-                break;
-            case LogLevel.Error:
-                utf8Writer.Append($"{Red}[ERR]{Reset}");
-                break;
-            case LogLevel.Critical:
-                utf8Writer.Append($"{BrightRed}[CRT]{Reset}");
-                break;
-            case LogLevel.None:
-                utf8Writer.Append("[NON]");
-                break;
-            default:
-                throw new UnreachableException();
-        }
 
+        utf8Writer.Append(_levelPrefixes[entry.LogInfo.LogLevel]);
         utf8Writer.AppendUtf8("("u8);
         utf8Writer.AppendUtf8(entry.LogInfo.Category.Utf8Span[17..]);
         utf8Writer.AppendUtf8(") "u8);
