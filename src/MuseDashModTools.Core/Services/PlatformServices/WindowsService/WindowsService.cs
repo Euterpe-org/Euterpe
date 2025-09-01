@@ -47,9 +47,7 @@ internal sealed partial class WindowsService : IPlatformService
 
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
     {
-        gameFolder = GetSteamLibraries()
-            .Select(x => Path.Combine(x, @"steamapps\common\Muse Dash"))
-            .FirstOrDefault(Directory.Exists);
+        gameFolder = GetCandidateFolders().FirstOrDefault(x => Directory.Exists(Path.Combine(x, @"steamapps\common\Muse Dash")));
 
         if (gameFolder is not null)
         {
