@@ -6,6 +6,13 @@ namespace MuseDashModTools.Common.Extensions;
 public static class StringExtensions
 {
     /// <summary>
+    ///     Replace "\\" with "\" to normalize slashes in path
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static string NormalizeSlashes(this string str) => str.Replace(@"\\", @"\");
+
+    /// <summary>
     ///     Check whether the string is null or empty
     /// </summary>
     /// <param name="str"></param>

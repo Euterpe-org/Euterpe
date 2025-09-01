@@ -47,11 +47,24 @@ internal sealed partial class WindowsService : IPlatformService
 
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
     {
-        gameFolder = GetCandidateFolders().FirstOrDefault(x => Directory.Exists(Path.Combine(x, @"steamapps\common\Muse Dash")));
+        const string appId = "774171";
+        const string relativePath = @"steamapps\common\Muse Dash";
 
-        if (gameFolder is not null)
+        if (TryGetAllSteamLibraries(out var libraryFolders))
         {
-            Logger.ZLogInformation($"Auto detected game path on Windows: {gameFolder}");
+            if (TryGetGameFolderForApp(libraryFolders, appId, relativePath, out gameFolder))
+            {
+                return true;
+            }
+
+            if (TryGetGameFolderFromLibraries(libraryFolders, relativePath, out gameFolder))
+            {
+                return true;
+            }
+        }
+
+        if (TryGetGameFolderFromCommonPaths(relativePath, out gameFolder))
+        {
             return true;
         }
 
