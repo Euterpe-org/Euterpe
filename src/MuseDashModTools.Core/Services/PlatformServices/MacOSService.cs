@@ -3,6 +3,12 @@ namespace MuseDashModTools.Core;
 [SupportedOSPlatform(nameof(OSPlatform.OSX))]
 internal sealed class MacOsService : IPlatformService
 {
+    private static readonly string[] MacOsPaths = new[]
+        {
+            "Library/Application Support/Steam"
+        }
+        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToArray();
+
     public string OsString => "MacOS";
     public string UpdaterFileName => "Updater";
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder) => throw new NotSupportedException();

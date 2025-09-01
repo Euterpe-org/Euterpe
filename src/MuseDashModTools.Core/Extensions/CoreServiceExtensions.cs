@@ -50,14 +50,18 @@ public static class CoreServiceExtensions
         builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GameService>().As<IGameService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
         builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<NotificationService>().As<INotificationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
+
+        // Serialization Services
+        builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<VdfSerializationService>().As<IVdfSerializationService>().PropertiesAutowired().SingleInstance();
 
         // Download Services
         builder.RegisterType<WebsiteDownloadService>().As<IWebsiteDownloadService>().PropertiesAutowired().SingleInstance();

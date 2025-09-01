@@ -4,8 +4,6 @@ namespace MuseDashModTools.Core;
 
 internal sealed class GameService : IGameService
 {
-    private const string MuseDashGameId = "774171";
-
     public async Task LaunchModdedGameAsync()
     {
         var launchArguments = new StringBuilder();

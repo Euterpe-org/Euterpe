@@ -1,19 +1,20 @@
-using System.Collections.Frozen;
 using Avalonia.Platform.Storage;
 using CliWrap;
-using ZLinq;
 
 namespace MuseDashModTools.Core;
 
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
 internal sealed partial class LinuxService : IPlatformService
 {
-    private static readonly FrozenSet<string> LinuxPaths = new[]
+    private static readonly string[] LinuxPaths = new[]
         {
-            ".local/share/Steam/steamapps/common/Muse Dash",
-            ".steam/steam/steamapps/common/Muse Dash"
+            ".local/share/Steam/steamapps",
+            ".steam/steam/steamapps",
+            ".var/app/ocm.valvesoftware.Steam/data/Steam",
+            ".steam/steam",
+            ".steam/root"
         }
-        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToFrozenSet();
+        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToArray();
 
     public string OsString => "Linux";
     public string UpdaterFileName => "Updater";
@@ -33,14 +34,17 @@ internal sealed partial class LinuxService : IPlatformService
 
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
     {
-        gameFolder = GetSteamLibraries()
-            .AsValueEnumerable()
-            .Select(x => Path.Combine(x, @"steamapps/common/Muse Dash"))
-            .FirstOrDefault(Directory.Exists);
+        const string relativePath = @"steamapps/common/Muse Dash";
 
-        if (gameFolder is not null)
+        if (GamePathService.TryGetGameFolderFromVdf(MuseDashGameId, relativePath, out gameFolder))
         {
-            Logger.ZLogInformation($"Auto detected game path on Linux: {gameFolder}");
+            return true;
+        }
+
+        Logger.ZLogInformation($"Could not get game folder from libraryfolders.vdf");
+
+        if (GamePathService.TryGetGameFolderFromCommonPaths(LinuxPaths, relativePath, out gameFolder))
+        {
             return true;
         }
 
@@ -144,7 +148,7 @@ internal sealed partial class LinuxService : IPlatformService
     public required ILogger<LinuxService> Logger { get; init; }
 
     [UsedImplicitly]
-    public required IMessageBoxService MessageBoxService { get; init; }
+    public required IGamePathService GamePathService { get; init; }
 
     #endregion Injections
 }
