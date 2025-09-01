@@ -10,8 +10,10 @@ public sealed class LiveLogService
     public LiveLogService(LiveLogProcessor processor)
     {
         processor.OnLogMessageReceived += logMessage => _logMessages.AddLast(logMessage);
+
         var view = _logMessages.CreateView(x => x);
         view.AttachFilter(x => !(x.Category.Name is "MuseDashModTools.Services.NavigationService" || x.Message.Contains("Initialized")));
+
         LogMessagesView = view.ToNotifyCollectionChanged();
     }
 }
