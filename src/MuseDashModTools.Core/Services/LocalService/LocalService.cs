@@ -248,6 +248,26 @@ internal sealed partial class LocalService : ILocalService
         return null;
     }
 
+    public bool CreateZipFile(string sourceFolder, string zipPath)
+    {
+        try
+        {
+            if (File.Exists(zipPath))
+            {
+                File.Delete(zipPath);
+            }
+
+            ZipFile.CreateFromDirectory(sourceFolder, zipPath, CompressionLevel.Optimal, false);
+            Logger.ZLogInformation($"Successfully created {zipPath} from {sourceFolder}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to create zip file {zipPath} from {sourceFolder}");
+            return false;
+        }
+    }
+
     public bool ExtractZipFile(string zipPath, string extractPath)
     {
         try
