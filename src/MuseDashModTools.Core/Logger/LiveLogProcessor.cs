@@ -7,6 +7,7 @@ public sealed class LiveLogProcessor : IAsyncLogProcessor
         var logMessage = new LogMessage(
             log.LogInfo.Timestamp.Local,
             log.LogInfo.LogLevel,
+            log.LogInfo.Category,
             log.ToString()
         );
 
