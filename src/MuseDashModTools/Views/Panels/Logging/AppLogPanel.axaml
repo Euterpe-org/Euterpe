@@ -5,14 +5,14 @@
     xmlns:log="clr-namespace:Microsoft.Extensions.Logging;assembly=Microsoft.Extensions.Logging.Abstractions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:MuseDashModTools.ViewModels.Panels.Logging"
-    x:Class="MuseDashModTools.Views.Panels.Logging.LogViewerPanel"
-    x:DataType="vm:LogViewerPanelViewModel"
+    x:Class="MuseDashModTools.Views.Panels.Logging.AppLogPanel"
+    x:DataType="vm:AppLogPanelViewModel"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
     <Design.DataContext>
-        <vm:LogViewerPanelViewModel />
+        <vm:AppLogPanelViewModel />
     </Design.DataContext>
 
     <UserControl.Styles>

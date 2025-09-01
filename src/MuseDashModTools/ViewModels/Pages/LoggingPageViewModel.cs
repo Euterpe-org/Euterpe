@@ -4,7 +4,8 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
 {
     public override IReadOnlyList<NavItem> NavItems { get; } =
     [
-        new(Panel_Logging_LogViewer, LogViewerPanelName)
+        new(Panel_Logging_AppLog, AppLogPanelName),
+        new(Panel_Logging_MelonLoaderLog, MelonLoaderLogPanelName)
     ];
 
     public IReadOnlyList<DropDownButtonItem> DropDownButtons =>

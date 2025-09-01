@@ -1,8 +1,8 @@
 ﻿namespace MuseDashModTools.Views.Panels.Logging;
 
-public sealed partial class LogViewerPanel : UserControl
+public sealed partial class AppLogPanel : UserControl
 {
-    public LogViewerPanel()
+    public AppLogPanel()
     {
         InitializeComponent();
     }

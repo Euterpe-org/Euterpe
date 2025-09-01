@@ -80,7 +80,7 @@
       <value>原版</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
-      <value>应用日志</value>
+      <value>应用日志文件夹</value>
   </data>
   <data name="Folder_CustomAlbums" xml:space="preserve">
     <value>自制谱文件夹</value>
@@ -181,8 +181,11 @@
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>谱面管理</value>
   </data>
-  <data name="Panel_Logging_LogViewer" xml:space="preserve">
-      <value>日志查看</value>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+      <value>应用日志</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+      <value>模组日志</value>
   </data>
   <data name="Panel_Modding_MelonLoader" xml:space="preserve">
     <value>模组加载器</value>
