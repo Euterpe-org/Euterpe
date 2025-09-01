@@ -1,6 +1,7 @@
 using System.Collections.Frozen;
 using Avalonia.Platform.Storage;
 using CliWrap;
+using ZLinq;
 
 namespace MuseDashModTools.Core;
 
@@ -33,6 +34,7 @@ internal sealed partial class LinuxService : IPlatformService
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
     {
         gameFolder = GetSteamLibraries()
+            .AsValueEnumerable()
             .Select(x => Path.Combine(x, @"steamapps/common/Muse Dash"))
             .FirstOrDefault(Directory.Exists);
 
