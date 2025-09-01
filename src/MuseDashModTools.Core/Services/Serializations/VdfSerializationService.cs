@@ -2,7 +2,7 @@
 
 namespace MuseDashModTools.Core;
 
-public sealed class VdfSerializationService : IVdfSerializationService
+internal sealed class VdfSerializationService : IVdfSerializationService
 {
     public T DeserializeFromStream<[DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicConstructors |
