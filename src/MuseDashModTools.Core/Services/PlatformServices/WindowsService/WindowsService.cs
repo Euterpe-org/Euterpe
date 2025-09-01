@@ -1,4 +1,3 @@
-using System.Collections.Frozen;
 using Avalonia.Platform.Storage;
 using CliWrap;
 
@@ -10,7 +9,7 @@ internal sealed partial class WindowsService : IPlatformService
     private const string DotnetRuntimeUrl = "https://aka.ms/dotnet/6.0/dotnet-runtime-win-x64.exe";
     private const string DotnetSdkUrl = "https://aka.ms/dotnet/8.0/dotnet-sdk-win-x64.exe";
 
-    private static readonly FrozenSet<string> WindowsPaths = new[]
+    private static readonly string[] WindowsPaths = new[]
         {
             @"Program Files\Steam",
             @"Program Files (x86)\Steam",
@@ -19,7 +18,7 @@ internal sealed partial class WindowsService : IPlatformService
             @"Steam",
             @"SteamLibrary"
         }
-        .SelectMany(path => Environment.GetLogicalDrives().Select(drive => Path.Combine(drive, path))).ToFrozenSet();
+        .SelectMany(path => Environment.GetLogicalDrives().Select(drive => Path.Combine(drive, path))).ToArray();
 
     public string OsString => "Windows";
     public string UpdaterFileName => "Updater.exe";
@@ -47,23 +46,16 @@ internal sealed partial class WindowsService : IPlatformService
 
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
     {
-        const string appId = "774171";
         const string relativePath = @"steamapps\common\Muse Dash";
 
-        if (TryGetAllSteamLibraries(out var libraryFolders))
+        if (GamePathService.TryGetGameFolderFromVdf(MuseDashGameId, relativePath, out gameFolder))
         {
-            if (TryGetGameFolderForApp(libraryFolders, appId, relativePath, out gameFolder))
-            {
-                return true;
-            }
-
-            if (TryGetGameFolderFromLibraries(libraryFolders, relativePath, out gameFolder))
-            {
-                return true;
-            }
+            return true;
         }
 
-        if (TryGetGameFolderFromCommonPaths(relativePath, out gameFolder))
+        Logger.ZLogInformation($"Could not get game folder from libraryfolders.vdf");
+
+        if (GamePathService.TryGetGameFolderFromCommonPaths(WindowsPaths, relativePath, out gameFolder))
         {
             return true;
         }
@@ -255,7 +247,7 @@ internal sealed partial class WindowsService : IPlatformService
     public required ILogger<WindowsService> Logger { get; init; }
 
     [UsedImplicitly]
-    public required IMessageBoxService MessageBoxService { get; init; }
+    public required IGamePathService GamePathService { get; init; }
 
     #endregion Injections
 }

@@ -7,6 +7,8 @@ public static partial class GlobalConstants
     public const string Cpp2ILVersion = "2022.1.0-pre-release.10";
     public const string UnityDependencyVersion = "2019.4.32";
 
+    public const string MuseDashGameId = "774171";
+
     public const string MelonLoaderZipHash =
         "16B8A52589C3BF32B8D37C0AC939C27F99166435580828E3E4BC442DE9C963EC6C4E630DC146F3F6A4E93E4F22B839BE4518A8916906795E739BF873A5B1D066";
 
