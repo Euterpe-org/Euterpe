@@ -2,12 +2,12 @@
 
 namespace MuseDashModTools.ViewModels.Panels.Logging;
 
-public sealed class LogViewerPanelViewModel : ViewModelBase
+public sealed class AppLogPanelViewModel : ViewModelBase
 {
     public INotifyCollectionChangedSynchronizedViewList<LogMessage> LogMessagesView => LiveLogService.LogMessagesView;
 
     [UsedImplicitly]
-    public required ILogger<LogViewerPanelViewModel> Logger { get; init; }
+    public required ILogger<AppLogPanelViewModel> Logger { get; init; }
 
     [UsedImplicitly]
     public required LiveLogService LiveLogService { get; init; }

@@ -181,11 +181,14 @@
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>Chart Manage</value>
   </data>
-  <data name="Panel_Logging_LogViewer" xml:space="preserve">
-      <value>Log Viewer</value>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+      <value>App Log</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+      <value>MelonLoader Log</value>
   </data>
   <data name="Panel_Modding_MelonLoader" xml:space="preserve">
-    <value>Melon Loader</value>
+      <value>MelonLoader</value>
   </data>
   <data name="Panel_Modding_ModDevelop" xml:space="preserve">
     <value>Mod Develop</value>

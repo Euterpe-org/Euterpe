@@ -7,7 +7,7 @@ public static class PageNames
     // Modding
     public const string ModdingPageName = "Modding";
     public const string ModManagePanelName = "Mod Manage";
-    public const string MelonLoaderPanelName = "Melon Loader";
+    public const string MelonLoaderPanelName = "MelonLoader";
     public const string ModDevelopPanelName = "Mod Develop";
 
     // Charting
@@ -17,8 +17,8 @@ public static class PageNames
 
     // Logging
     public const string LoggingPageName = "Logging";
-    public const string LogViewerPanelName = "Log Viewer";
-    public const string LogAnalysisPanelName = "Log Analysis";
+    public const string AppLogPanelName = "App Log";
+    public const string MelonLoaderLogPanelName = "MelonLoader Log";
 
     // Settings
     public const string SettingPageName = "Setting";
