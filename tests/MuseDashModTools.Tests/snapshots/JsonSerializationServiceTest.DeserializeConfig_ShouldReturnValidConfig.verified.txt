@@ -6,6 +6,7 @@
   LanguageCode: zh-Hans,
   Theme: Dark,
   ShowConsole: true,
+  ShowStartScreen: true,
   AlwaysShowScrollBar: true,
   UpdateSource: GitHubRSS,
   IgnoreException: false,
