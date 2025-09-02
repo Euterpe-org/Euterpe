@@ -181,7 +181,6 @@ internal sealed partial class WindowsService : IPlatformService
         }
     }
 
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public void RevealFile(string filePath)
     {
         Process.Start(
@@ -194,7 +193,6 @@ internal sealed partial class WindowsService : IPlatformService
         Logger.ZLogInformation($"Reveal file: {filePath}");
     }
 
-    [SupportedOSPlatform(nameof(OSPlatform.Windows))]
     public bool SetPathEnvironmentVariable()
     {
         try
