@@ -80,7 +80,10 @@ internal sealed partial class LinuxService : IPlatformService
         return true;
     }
 
-    public async Task<bool> LaunchGameWithArgsAsync(string gameId, string launchArguments)
+    public Task<bool> LaunchGameWithArgAsync(string gameId, string launchArgument) =>
+        LaunchGameWithArgsAsync(gameId, [launchArgument]);
+
+    public async Task<bool> LaunchGameWithArgsAsync(string gameId, IEnumerable<string> launchArguments)
     {
         var steamPath = Path.Combine(Config.SteamFolder, "steam");
         if (!File.Exists(steamPath))
@@ -90,7 +93,13 @@ internal sealed partial class LinuxService : IPlatformService
         }
 
         await Cli.Wrap(steamPath)
-            .WithArguments(["-applaunch", gameId, launchArguments])
+            .WithArguments(args =>
+                {
+                    args.Add("-applaunch");
+                    args.Add(gameId);
+                    args.Add(launchArguments);
+                }
+            )
             .WithValidation(CommandResultValidation.None)
             .ExecuteAsync()
             .ConfigureAwait(false);

@@ -34,6 +34,9 @@ public sealed partial class Config : ObservableObject
     public partial bool ShowConsole { get; set; } = true;
 
     [ObservableProperty]
+    public partial bool ShowStartScreen { get; set; } = true;
+
+    [ObservableProperty]
     public partial bool AlwaysShowScrollBar { get; set; } = true;
 
     // Download Settings
