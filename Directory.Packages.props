@@ -30,7 +30,7 @@
         <PackageVersion Include="HotAvalonia" Version="3.0.0"/>
         <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)"/>
         <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="$(UrsaVersion)"/>
-        <PackageVersion Include="JetBrains.Annotations" Version="2025.2.1"/>
+        <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2"/>
         <PackageVersion Include="JetBrains.Annotations.Sources" Version="2025.2.1"/>
         <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.3.0"/>
         <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.14.8"/>
