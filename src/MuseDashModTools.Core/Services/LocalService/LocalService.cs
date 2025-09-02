@@ -217,7 +217,7 @@ internal sealed partial class LocalService : ILocalService
         }
         catch (Exception ex)
         {
-            Logger.ZLogCritical(ex, $"Read game version failed, showing error message box...");
+            Logger.ZLogCritical(ex, $"Read game version failed");
             await MessageBoxService.ErrorAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
             Environment.Exit(0);
         }
@@ -244,7 +244,7 @@ internal sealed partial class LocalService : ILocalService
             return version;
         }
 
-        Logger.ZLogInformation($"MelonLoader.dll not found");
+        Logger.ZLogInformation($"MelonLoader not installed");
         return null;
     }
 
