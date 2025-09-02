@@ -1,26 +1,27 @@
-﻿using System.Text;
-
-namespace MuseDashModTools.Core;
+﻿namespace MuseDashModTools.Core;
 
 internal sealed class GameService : IGameService
 {
     public async Task LaunchModdedGameAsync()
     {
-        var launchArguments = new StringBuilder();
+        var launchArguments = new List<string>();
         if (!Config.ShowConsole)
         {
-            launchArguments.Append("--melonloader.hideconsole");
+            launchArguments.Add("--melonloader.hideconsole");
         }
 
-        await PlatformService.LaunchGameWithArgsAsync(MuseDashGameId, launchArguments.ToString()).ConfigureAwait(false);
+        if (!Config.ShowStartScreen)
+        {
+            launchArguments.Add("--melonloader.disablestartscreen");
+        }
+
+        await PlatformService.LaunchGameWithArgsAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
     }
 
     public async Task LaunchVanillaGameAsync()
     {
-        var launchArguments = new StringBuilder();
-        launchArguments.Append("--no-mods");
-
-        await PlatformService.LaunchGameWithArgsAsync(MuseDashGameId, launchArguments.ToString()).ConfigureAwait(false);
+        const string launchArguments = "--no-mods";
+        await PlatformService.LaunchGameWithArgAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
     }
 
     #region Injections

@@ -27,6 +27,14 @@
                 IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
         </mdmt:ContentListItem>
 
+        <!--  Show Start Screen  -->
+        <mdmt:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowStartScreen}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowStartScreen}}">
+            <ToggleSwitch
+                IsChecked="{Binding Config.ShowStartScreen, Mode=TwoWay}" />
+        </mdmt:ContentListItem>
+
         <!--  Always Show ScrollBar  -->
         <mdmt:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}"

@@ -30,12 +30,20 @@ public interface IPlatformService
     bool CheckIsValidGameFolder(string folderPath);
 
     /// <summary>
+    ///     Launch game with argument
+    /// </summary>
+    /// <param name="gameId"></param>
+    /// <param name="launchArgument"></param>
+    /// <returns></returns>
+    Task<bool> LaunchGameWithArgAsync(string gameId, string launchArgument);
+
+    /// <summary>
     ///     Launch game with arguments
     /// </summary>
     /// <param name="gameId"></param>
     /// <param name="launchArguments"></param>
     /// <returns></returns>
-    Task<bool> LaunchGameWithArgsAsync(string gameId, string launchArguments);
+    Task<bool> LaunchGameWithArgsAsync(string gameId, IEnumerable<string> launchArguments);
 
     #region Mod Develop
 
