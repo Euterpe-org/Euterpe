@@ -13,6 +13,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
+      <value>选择谱面文件</value>
+  </data>
+  <data name="FilePickerFileType_AllFiles" xml:space="preserve">
+      <value>所有文件</value>
+  </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>选择缓存文件夹</value>
   </data>
