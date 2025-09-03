@@ -1,4 +1,3 @@
-using System.IO.Compression;
 using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
 using CliWrap;
@@ -119,7 +118,7 @@ internal sealed partial class LocalService : ILocalService
             return false;
         }
 
-        if (!ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder))
+        if (!ArchiveService.ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder))
         {
             await MessageBoxService.ErrorAsync("Failed to unzip MelonLoader").ConfigureAwait(false);
             return false;
@@ -248,45 +247,13 @@ internal sealed partial class LocalService : ILocalService
         return null;
     }
 
-    public bool CreateZipFile(string sourceFolder, string zipPath)
-    {
-        try
-        {
-            if (File.Exists(zipPath))
-            {
-                File.Delete(zipPath);
-            }
-
-            ZipFile.CreateFromDirectory(sourceFolder, zipPath, CompressionLevel.Optimal, false);
-            Logger.ZLogInformation($"Successfully created {zipPath} from {sourceFolder}");
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to create zip file {zipPath} from {sourceFolder}");
-            return false;
-        }
-    }
-
-    public bool ExtractZipFile(string zipPath, string extractPath)
-    {
-        try
-        {
-            ZipFile.ExtractToDirectory(zipPath, extractPath, true);
-            Logger.ZLogInformation($"Successfully extracted {zipPath} to {extractPath}");
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to extract file {zipPath} to {extractPath}");
-            return false;
-        }
-    }
-
     #region Injections
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required IArchiveService ArchiveService { get; init; }
 
     [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }

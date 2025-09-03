@@ -16,6 +16,4 @@ public interface ILocalService
     Task<LibDto> LoadLibFromPathAsync(string filePath);
     ValueTask<string> ReadGameVersionAsync();
     string? ReadMelonLoaderVersion();
-    bool CreateZipFile(string sourceFolder, string zipPath);
-    bool ExtractZipFile(string zipPath, string extractPath);
 }

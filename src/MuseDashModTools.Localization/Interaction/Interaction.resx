@@ -13,6 +13,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
+      <value>Choose Chart File</value>
+  </data>
+  <data name="FilePickerFileType_AllFiles" xml:space="preserve">
+      <value>All Files</value>
+  </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>Choose Cache Folder</value>
   </data>
