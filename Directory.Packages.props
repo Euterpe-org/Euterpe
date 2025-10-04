@@ -51,7 +51,7 @@
         <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.2.1"/>
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
-        <PackageVersion Include="Semi.Avalonia" Version="11.2.1.10"/>
+        <PackageVersion Include="Semi.Avalonia" Version="11.3.7"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="System.Interactive.Async" Version="6.0.3"/>
         <PackageVersion Include="System.Linq.Async" Version="6.0.3"/>
