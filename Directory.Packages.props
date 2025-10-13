@@ -6,9 +6,9 @@
     <PropertyGroup>
         <AvaloniaVersion>11.3.7</AvaloniaVersion>
         <UrsaVersion>1.13.0</UrsaVersion>
-        <VerifyVersion>30.6.1</VerifyVersion>
+        <VerifyVersion>31.0.1</VerifyVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
-        <RoslynatorAnalyzersVersion>4.14.0</RoslynatorAnalyzersVersion>
+        <RoslynatorAnalyzersVersion>4.14.1</RoslynatorAnalyzersVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.4"/>
@@ -20,7 +20,7 @@
         <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Autofac" Version="8.4.0"/>
-        <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.0.4"/>
+        <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.0"/>
         <PackageVersion Include="CliWrap" Version="3.9.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.6.1"/>
@@ -39,7 +39,7 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0"/>
-        <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.0.4"/>
+        <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.1.0"/>
         <PackageVersion Include="Moq" Version="4.20.72"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="ObservableCollections" Version="3.3.4"/>
@@ -56,7 +56,7 @@
         <PackageVersion Include="System.Interactive.Async" Version="6.0.3"/>
         <PackageVersion Include="System.Linq.Async" Version="6.0.3"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.9"/>
-        <PackageVersion Include="TUnit" Version="0.63.3"/>
+        <PackageVersion Include="TUnit" Version="0.67.19"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify" Version="$(VerifyVersion)"/>
         <PackageVersion Include="Verify.TUnit" Version="$(VerifyVersion)"/>
