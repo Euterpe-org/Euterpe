@@ -127,24 +127,14 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     {
         Logger.ZLogInformation($"Fetching mods from GitHubMirror {ModJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken)
-            .Catch<Mod?, Exception>(ex =>
-            {
-                Logger.ZLogError(ex, $"Failed to fetch mods from GitHubMirror");
-                return AsyncEnumerable.Empty<Mod?>();
-            });
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken);
     }
 
     public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Fetching libs from GitHubMirror {LibJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken)
-            .Catch<Lib?, Exception>(ex =>
-            {
-                Logger.ZLogError(ex, $"Failed to fetch libs from GitHubMirror");
-                return AsyncEnumerable.Empty<Lib?>();
-            });
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken);
     }
 
     #region Injections
