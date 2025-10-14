@@ -20,7 +20,6 @@ internal sealed partial class GamePathService
             var data = VdfSerializationService.DeserializeFromFile<Dictionary<string, LibraryFolder>>(vdfPath);
 
             libraryFolders = data.Values
-                .AsValueEnumerable()
                 .Select(library =>
                 {
                     library.Path = library.Path.NormalizeSlashes();
@@ -41,7 +40,6 @@ internal sealed partial class GamePathService
         gameFolder = null;
 
         var targetLibrary = libraryFolders
-            .AsValueEnumerable()
             .FirstOrDefault(library => library.Apps.ContainsKey(appId));
 
         if (targetLibrary is null)
