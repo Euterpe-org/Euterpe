@@ -1,8 +1,8 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools"
-    xmlns:models="clr-namespace:MuseDashModTools.Models.Controls;assembly=MuseDashModTools.Models">
+    xmlns:controls="using:MuseDashModTools.Models.Controls"
+    xmlns:mdmt="https://github.com/MDModsDev/MuseDashModTools">
 
     <Design.PreviewWith>
         <mdmt:NaviButtonsControl />
@@ -27,7 +27,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate
-                                x:DataType="models:DropDownButtonItem">
+                                x:DataType="controls:DropDownButtonItem">
 
                                 <DropDownButton
                                     Content="{Binding Text.Value, Mode=OneWay}"
@@ -36,7 +36,7 @@
 
                                     <DropDownButton.Styles>
                                         <Style
-                                            x:DataType="models:DropDownMenuItem"
+                                            x:DataType="controls:DropDownMenuItem"
                                             Selector="MenuItem">
                                             <Setter Property="Header" Value="{Binding Text, Mode=OneTime}" />
                                             <Setter Property="Command" Value="{Binding Command, Mode=OneTime}" />
@@ -50,7 +50,7 @@
                                             Placement="BottomEdgeAlignedRight">
                                             <MenuFlyout.ItemTemplate>
                                                 <DataTemplate
-                                                    x:DataType="models:DropDownMenuItem">
+                                                    x:DataType="controls:DropDownMenuItem">
                                                     <MenuItem />
                                                 </DataTemplate>
                                             </MenuFlyout.ItemTemplate>
