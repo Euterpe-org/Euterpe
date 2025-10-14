@@ -23,7 +23,6 @@ global using MuseDashModTools.Models.GitHub;
 global using R3;
 global using Semver;
 global using Ursa.Controls;
-global using ZLinq;
 global using ZLogger;
 global using static MuseDashModTools.Common.BuildInfo;
 global using static MuseDashModTools.Common.GitHubConstants;

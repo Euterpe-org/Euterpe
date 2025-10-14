@@ -12,7 +12,6 @@
         <PackageReference Include="Semver"/>
         <PackageReference Include="System.ServiceModel.Syndication"/>
         <PackageReference Include="ValveKeyValue"/>
-        <PackageReference Include="ZLinq"/>
         <PackageReference Include="ZLogger"/>
     </ItemGroup>
 
