@@ -10,8 +10,6 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="System.Interactive.Async"/>
-        <PackageReference Include="System.Linq.Async"/>
         <PackageReference Include="System.ServiceModel.Syndication"/>
         <PackageReference Include="ValveKeyValue"/>
         <PackageReference Include="ZLinq"/>

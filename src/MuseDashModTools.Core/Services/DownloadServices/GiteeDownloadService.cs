@@ -105,24 +105,14 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
     {
         Logger.ZLogInformation($"Fetching mod list from Gitee {ModJsonUrl} ...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken)
-            .Catch<Mod?, Exception>(ex =>
-            {
-                Logger.ZLogError(ex, $"Failed to fetch mod list from Gitee");
-                return AsyncEnumerable.Empty<Mod?>();
-            });
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken);
     }
 
     public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Fetching lib list from Gitee {LibJsonUrl} ...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken)
-            .Catch<Lib?, Exception>(ex =>
-            {
-                Logger.ZLogError(ex, $"Failed to fetch lib list from Gitee");
-                return AsyncEnumerable.Empty<Lib?>();
-            });
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken);
     }
 
     #region Injections
