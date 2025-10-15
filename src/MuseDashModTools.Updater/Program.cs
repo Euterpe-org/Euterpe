@@ -1,24 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
-var services = new ServiceCollection();
-services.AddSingleton<ILocalService, LocalService>();
-services.AddLogging(x =>
-{
-    x.ClearProviders();
+var app = ConsoleApp.Create()
+    .ConfigureServices(services => services.AddSingleton<ILocalService, LocalService>())
+    .ConfigureLogging(logging =>
+    {
+        logging.ClearProviders();
 #if DEBUG
-    x.SetMinimumLevel(LogLevel.Trace);
+        logging.SetMinimumLevel(LogLevel.Trace);
 #else
-    x.SetMinimumLevel(LogLevel.Information);
+        logging.SetMinimumLevel(LogLevel.Information);
 #endif
-    x.AddZLoggerConsole();
-});
+        logging.AddZLoggerConsole();
+    });
 
-var serviceProvider = services.BuildServiceProvider();
-await using (serviceProvider.ConfigureAwait(false))
-{
-    ConsoleApp.ServiceProvider = serviceProvider;
-
-    var app = ConsoleApp.Create();
-    app.Add<Commands>();
-    await app.RunAsync(args).ConfigureAwait(false);
-}
+app.Add<Commands>();
+await app.RunAsync(args).ConfigureAwait(false);
