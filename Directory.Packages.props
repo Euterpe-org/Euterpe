@@ -33,7 +33,7 @@
         <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2"/>
         <PackageVersion Include="JetBrains.Annotations.Sources" Version="2025.2.2"/>
         <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.3.0"/>
-        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.14.8"/>
+        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.14.28"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)"/>
@@ -55,7 +55,7 @@
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="System.Interactive.Async" Version="6.0.3"/>
         <PackageVersion Include="System.Linq.Async" Version="6.0.3"/>
-        <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.9"/>
+        <PackageVersion Include="System.ServiceModel.Syndication" Version="9.0.10"/>
         <PackageVersion Include="TUnit" Version="0.75.30"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify" Version="$(VerifyVersion)"/>
