@@ -60,7 +60,7 @@ jobs:
           ls -la bin/Output
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: MuseDashModTools-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
           path: bin/Output/*
