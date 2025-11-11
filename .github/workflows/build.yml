@@ -33,7 +33,7 @@ jobs:
           - x64
           # - arm64
         dotnet-version:
-          - '9.0'
+          - '10.0'
 
     runs-on: ${{ matrix.target-platform.os }}
     env:
