@@ -9,5 +9,6 @@
 
     <UsingTask TaskName="$(MSBuildThisFileName).GenerateModToolsStyles"
                AssemblyFile="$(AssemblyPath)"
+               Runtime="NET"
                TaskFactory="TaskHostFactory"/>
 </Project>
