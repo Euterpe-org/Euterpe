@@ -6,14 +6,14 @@
     <PropertyGroup>
         <AvaloniaVersion>11.3.8</AvaloniaVersion>
         <UrsaVersion>1.13.0</UrsaVersion>
-        <VerifyVersion>31.5.3</VerifyVersion>
+        <VerifyVersion>31.6.0</VerifyVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.14.1</RoslynatorAnalyzersVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.4"/>
         <PackageVersion Include="AssetsTools.NET" Version="3.0.2"/>
-        <PackageVersion Include="AsyncAwaitBestPractices" Version="9.0.0"/>
+        <PackageVersion Include="AsyncAwaitBestPractices" Version="10.0.0"/>
         <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
         <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Controls.Markdown" Version="11.3.0"/>
@@ -25,7 +25,7 @@
         <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.0"/>
         <PackageVersion Include="CliWrap" Version="3.9.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
-        <PackageVersion Include="ConsoleAppFramework" Version="5.7.2"/>
+        <PackageVersion Include="ConsoleAppFramework" Version="5.7.3"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.4"/>
         <PackageVersion Include="Downloader" Version="4.0.3"/>
         <PackageVersion Include="DynamicData" Version="9.4.1"/>
@@ -45,7 +45,7 @@
         <PackageVersion Include="Moq" Version="4.20.72"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="ObservableCollections" Version="3.3.4"/>
-        <PackageVersion Include="Polyfill" Version="8.9.0"/>
+        <PackageVersion Include="Polyfill" Version="9.0.1"/>
         <PackageVersion Include="PublishAotCompressed" Version="1.0.5"/>
         <PackageVersion Include="R3" Version="1.3.0"/>
         <PackageVersion Include="R3Extensions.Avalonia" Version="1.3.0"/>
@@ -56,14 +56,14 @@
         <PackageVersion Include="Semi.Avalonia" Version="11.3.7"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.0"/>
-        <PackageVersion Include="TUnit" Version="1.0.48"/>
+        <PackageVersion Include="TUnit" Version="1.0.78"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify" Version="$(VerifyVersion)"/>
         <PackageVersion Include="Verify.TUnit" Version="$(VerifyVersion)"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
-        <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.250"/>
+        <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.252"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
         <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
     </ItemGroup>
