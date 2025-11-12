@@ -80,7 +80,7 @@ public sealed class GenerateModToolsStyles : Task
             var fileName = file.GetMetadata("Filename");
             var relativePath = $"/{directory}/{fileName}.axaml";
 
-            if (_categories.TryGetValue(directory, out var category))
+            if (_categories.TryGetValue(directory!, out var category))
             {
                 category.Sources.Add(relativePath);
             }
