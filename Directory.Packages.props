@@ -23,7 +23,7 @@
         <PackageVersion Include="Autofac" Version="8.4.0"/>
         <PackageVersion Include="Avalonia.Labs.Controls" Version="11.3.1"/>
         <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.0"/>
-        <PackageVersion Include="CliWrap" Version="3.9.0"/>
+        <PackageVersion Include="CliWrap" Version="3.10.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.7.4"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.4"/>
