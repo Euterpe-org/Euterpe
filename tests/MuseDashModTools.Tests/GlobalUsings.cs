@@ -7,5 +7,4 @@ global using MuseDashModTools.Common;
 global using MuseDashModTools.Core;
 global using MuseDashModTools.Models;
 global using MuseDashModTools.Models.Enums;
-global using MuseDashModTools.Services;
 global using MuseDashModTools.Tests.Attributes;
