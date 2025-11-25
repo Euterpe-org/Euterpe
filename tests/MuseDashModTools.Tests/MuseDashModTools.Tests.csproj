@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <IsTestProject>true</IsTestProject>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,7 +11,6 @@
         <PackageReference Include="NetArchTest.eNhancedEdition"/>
         <PackageReference Include="RichardSzalay.MockHttp"/>
         <PackageReference Include="TUnit"/>
-        <PackageReference Include="Verify"/>
         <PackageReference Include="Verify.TUnit"/>
     </ItemGroup>
 
