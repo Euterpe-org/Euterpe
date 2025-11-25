@@ -53,7 +53,7 @@ jobs:
 
       - name: Test Project
         run: |
-          dotnet test -c Release --no-build
+          dotnet test -c Release --no-build --report-trx --coverage
 
       - name: List Output Directory
         run: |
