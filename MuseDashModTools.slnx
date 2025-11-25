@@ -25,7 +25,6 @@
         <Project Path="src/MuseDashModTools/MuseDashModTools.csproj"/>
     </Folder>
     <Folder Name="/tests/">
-        <Project Path="tests/MuseDashModTools.Generators.Tests/MuseDashModTools.Generators.Tests.csproj"/>
         <Project Path="tests/MuseDashModTools.Tests/MuseDashModTools.Tests.csproj"/>
     </Folder>
 </Solution>

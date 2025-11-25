@@ -6,7 +6,6 @@
     <PropertyGroup>
         <AvaloniaVersion>11.3.9</AvaloniaVersion>
         <UrsaVersion>1.14.0</UrsaVersion>
-        <VerifyVersion>31.7.2</VerifyVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.14.1</RoslynatorAnalyzersVersion>
     </PropertyGroup>
@@ -18,11 +17,10 @@
         <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Controls.Markdown" Version="11.3.2"/>
         <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)"/>
-        <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Autofac" Version="9.0.0"/>
         <PackageVersion Include="Avalonia.Labs.Controls" Version="11.3.1"/>
-        <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.0"/>
+        <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.1"/>
         <PackageVersion Include="CliWrap" Version="3.10.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.7.12"/>
@@ -58,8 +56,7 @@
         <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.0"/>
         <PackageVersion Include="TUnit" Version="1.2.11"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
-        <PackageVersion Include="Verify" Version="$(VerifyVersion)"/>
-        <PackageVersion Include="Verify.TUnit" Version="$(VerifyVersion)"/>
+        <PackageVersion Include="Verify.TUnit" Version="31.7.2"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
