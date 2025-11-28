@@ -118,7 +118,7 @@ internal sealed partial class LocalService : ILocalService
             return false;
         }
 
-        if (!ArchiveService.ExtractZipFile(Config.MelonLoaderZipPath, Config.MuseDashFolder))
+        if (!await ArchiveService.ExtractZipFileAsync(Config.MelonLoaderZipPath, Config.MuseDashFolder).ConfigureAwait(true))
         {
             await MessageBoxService.ErrorAsync("Failed to unzip MelonLoader").ConfigureAwait(false);
             return false;
@@ -206,6 +206,7 @@ internal sealed partial class LocalService : ILocalService
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
+            Logger.ZLogInformation($"Unity Version: {instance.file.Metadata.UnityVersion}");
             assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;

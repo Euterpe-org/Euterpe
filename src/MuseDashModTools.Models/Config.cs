@@ -87,10 +87,10 @@ public sealed partial class Config : ObservableObject
     private string Il2CppAssemblyGeneratorFolderPath => Path.Combine(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
 
     [JsonIgnore]
-    public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, "UnityDependencies_2019.4.32.zip");
+    public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityDependencyVersion}.zip");
 
     [JsonIgnore]
-    public string Cpp2ILZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL_2022.1.0-pre-release.10.zip");
+    public string Cpp2ILZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"Cpp2IL_{Cpp2ILVersion}.zip");
 
     private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
         !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;
