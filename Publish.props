@@ -26,6 +26,6 @@
             <_PublishedFiles Include="$(_PublishDir)*.*" Condition="!Exists('$(NativeLibraryDir)')"/>
         </ItemGroup>
 
-        <Copy SourceFiles="@(_PublishedFiles)" DestinationFolder="$(BaseOutputPath)Output" SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="@(_PublishedFiles)" DestinationFolder="$(ArtifactsPath)Output" SkipUnchangedFiles="true"/>
     </Target>
 </Project>
