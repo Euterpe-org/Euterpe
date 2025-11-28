@@ -1,68 +1,67 @@
 <Project>
-    <PropertyGroup>
-        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    </PropertyGroup>
-    <!-- Package Group Versions -->
-    <PropertyGroup>
-        <AvaloniaVersion>11.3.9</AvaloniaVersion>
-        <JetBrainsAnnotationsVersion>2025.2.4</JetBrainsAnnotationsVersion>
-        <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
-        <RoslynatorAnalyzersVersion>4.14.1</RoslynatorAnalyzersVersion>
-        <UrsaVersion>1.14.0</UrsaVersion>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.5"/>
-        <PackageVersion Include="AssetsTools.NET" Version="3.0.2"/>
-        <PackageVersion Include="AsyncAwaitBestPractices" Version="10.0.0"/>
-        <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
-        <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)"/>
-        <PackageVersion Include="Avalonia.Controls.Markdown" Version="11.3.2"/>
-        <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)"/>
-        <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
-        <PackageVersion Include="Autofac" Version="9.0.0"/>
-        <PackageVersion Include="Avalonia.Labs.Controls" Version="11.3.1"/>
-        <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.1"/>
-        <PackageVersion Include="CliWrap" Version="3.10.0"/>
-        <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
-        <PackageVersion Include="ConsoleAppFramework" Version="5.7.13"/>
-        <PackageVersion Include="coverlet.collector" Version="6.0.4"/>
-        <PackageVersion Include="Downloader" Version="4.0.3"/>
-        <PackageVersion Include="DynamicData" Version="9.4.1"/>
-        <PackageVersion Include="HotAvalonia" Version="3.0.0"/>
-        <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)"/>
-        <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="$(UrsaVersion)"/>
-        <PackageVersion Include="JetBrains.Annotations" Version="$(JetBrainsAnnotationsVersion)"/>
-        <PackageVersion Include="JetBrains.Annotations.Sources" Version="$(JetBrainsAnnotationsVersion)"/>
-        <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.3.0"/>
-        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.0.2"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
-        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1"/>
-        <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.1.0"/>
-        <PackageVersion Include="Moq" Version="4.20.72"/>
-        <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
-        <PackageVersion Include="ObservableCollections" Version="3.3.4"/>
-        <PackageVersion Include="Polyfill" Version="9.3.0"/>
-        <PackageVersion Include="PublishAotCompressed" Version="1.0.5"/>
-        <PackageVersion Include="R3" Version="1.3.0"/>
-        <PackageVersion Include="R3Extensions.Avalonia" Version="1.3.0"/>
-        <PackageVersion Include="ResXLocalize.Avalonia.R3" Version="1.0.1"/>
-        <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
-        <PackageVersion Include="Riok.Mapperly" Version="4.3.0"/>
-        <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
-        <PackageVersion Include="Semi.Avalonia" Version="11.3.7.1"/>
-        <PackageVersion Include="Semver" Version="3.0.0"/>
-        <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.0"/>
-        <PackageVersion Include="TUnit" Version="1.2.11"/>
-        <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
-        <PackageVersion Include="Verify.TUnit" Version="31.7.2"/>
-        <PackageVersion Include="xunit" Version="2.9.3"/>
-        <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
-        <PackageVersion Include="ZLogger" Version="2.5.10"/>
-        <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.257"/>
-        <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
-        <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
-    </ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!-- Package Group Versions -->
+  <PropertyGroup>
+    <AvaloniaVersion>11.3.9</AvaloniaVersion>
+    <JetBrainsAnnotationsVersion>2025.2.4</JetBrainsAnnotationsVersion>
+    <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
+    <RoslynatorAnalyzersVersion>4.14.1</RoslynatorAnalyzersVersion>
+    <UrsaVersion>1.14.0</UrsaVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-beta.5" />
+    <PackageVersion Include="AssetsTools.NET" Version="3.0.2" />
+    <PackageVersion Include="AsyncAwaitBestPractices" Version="10.0.0" />
+    <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Controls.Markdown" Version="11.3.2" />
+    <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Autofac" Version="9.0.0" />
+    <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.1.1" />
+    <PackageVersion Include="CliWrap" Version="3.10.0" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageVersion Include="ConsoleAppFramework" Version="5.7.13" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="Downloader" Version="4.0.3" />
+    <PackageVersion Include="DynamicData" Version="9.4.1" />
+    <PackageVersion Include="HotAvalonia" Version="3.0.0" />
+    <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)" />
+    <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="$(UrsaVersion)" />
+    <PackageVersion Include="JetBrains.Annotations" Version="$(JetBrainsAnnotationsVersion)" />
+    <PackageVersion Include="JetBrains.Annotations.Sources" Version="$(JetBrainsAnnotationsVersion)" />
+    <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.3.0" />
+    <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.0.2" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="$(MicrosoftCodeAnalysisVersion)" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.1.0" />
+    <PackageVersion Include="Moq" Version="4.20.72" />
+    <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5" />
+    <PackageVersion Include="ObservableCollections" Version="3.3.4" />
+    <PackageVersion Include="Polyfill" Version="9.3.0" />
+    <PackageVersion Include="PublishAotCompressed" Version="1.0.5" />
+    <PackageVersion Include="R3" Version="1.3.0" />
+    <PackageVersion Include="R3Extensions.Avalonia" Version="1.3.0" />
+    <PackageVersion Include="ResXLocalize.Avalonia.R3" Version="1.0.1" />
+    <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0" />
+    <PackageVersion Include="Riok.Mapperly" Version="4.3.0" />
+    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)" />
+    <PackageVersion Include="Semi.Avalonia" Version="11.3.7.1" />
+    <PackageVersion Include="Semver" Version="3.0.0" />
+    <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.0" />
+    <PackageVersion Include="TUnit" Version="1.2.11" />
+    <PackageVersion Include="ValveKeyValue" Version="0.20.0.417" />
+    <PackageVersion Include="Verify.TUnit" Version="31.7.2" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="ZLogger" Version="2.5.10" />
+    <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.257" />
+    <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)" />
+    <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="$(RoslynatorAnalyzersVersion)" />
+  </ItemGroup>
 </Project>
