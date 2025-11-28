@@ -10,6 +10,8 @@
   AlwaysShowScrollBar: true,
   UpdateSource: GitHubRSS,
   IgnoreException: false,
+  GameVersion: ,
+  UnityVersion: ,
   ChartFolder: Cache/Charts,
   CustomAlbumsFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/Custom_Albums,
   ModsFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/Mods,
@@ -18,6 +20,6 @@
   MelonLoaderFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader,
   MelonLoaderZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader.zip,
   LatestLogPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Latest.log,
-  UnityDependencyZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/UnityDependencies_2019.4.41.zip,
+  UnityDependencyZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/UnityDependencies_.zip,
   Cpp2ILZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL_2022.1.0-pre-release.19.zip
 }
