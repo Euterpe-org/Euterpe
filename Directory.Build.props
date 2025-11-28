@@ -10,7 +10,7 @@
         <!-- Artifacts Properties -->
         <UseArtifactsOutput>true</UseArtifactsOutput>
         <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts\</ArtifactsPath>
-        <ExternalBuildsFolder>$(ArtifactsPath)ExternalBuilds\</ExternalBuildsFolder>
+        <ExternalBuildsFolder>$(ArtifactsPath)externalbuilds\</ExternalBuildsFolder>
     </PropertyGroup>
 
     <!-- Publishing Properties -->
