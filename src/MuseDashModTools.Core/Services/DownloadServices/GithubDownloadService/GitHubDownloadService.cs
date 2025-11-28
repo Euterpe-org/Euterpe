@@ -11,7 +11,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
     private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
-    private const string UnityDependencyUrl = GitHubRawContentBaseUrl + UnityDependencyBaseUrl;
+    private const string UnityDependencyUrl = GitHubBaseUrl + UnityDependencyBaseUrl;
     private const string Cpp2ILUrl = GitHubBaseUrl + Cpp2ILBaseUrl;
 
     public Task<bool> DownloadMelonLoaderAsync(
@@ -23,8 +23,11 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     public Task<bool> DownloadUnityDependencyAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default) =>
-        DownloadAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+        CancellationToken cancellationToken = default)
+    {
+        var unityDependencyUrl = $"{UnityDependencyUrl}{Config.UnityVersion}/Managed.zip";
+        return DownloadAsync(unityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+    }
 
     public Task<bool> DownloadCpp2ILAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
@@ -84,14 +87,14 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, string osString, string updaterFolder, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
     {
         var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/MuseDashModTools-{osString}.zip";
 
         try
         {
             await Downloader.DownloadFileTaskAsync(downloadUrl,
-                Path.Combine(updaterFolder, "MuseDashModTools.zip"),
+                Path.Combine(updateFolder, "MuseDashModTools.zip"),
                 cancellationToken).ConfigureAwait(true);
         }
         catch (Exception ex)

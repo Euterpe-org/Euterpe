@@ -198,7 +198,7 @@ internal sealed partial class LocalService : ILocalService
             IsLocal = true
         };
 
-    public async ValueTask<string> ReadGameVersionAsync()
+    public async ValueTask ReadGameInformationAsync()
     {
         var assetsManager = new AssetsManager();
         assetsManager.LoadClassPackage(ResourceService.GetAssetAsStream("classdata.tpk"));
@@ -206,23 +206,23 @@ internal sealed partial class LocalService : ILocalService
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
-            Logger.ZLogInformation($"Unity Version: {instance.file.Metadata.UnityVersion}");
-            assetsManager.LoadClassDatabaseFromPackage(instance.file.Metadata.UnityVersion);
+            var unityVersion = instance.file.Metadata.UnityVersion;
+            assetsManager.LoadClassDatabaseFromPackage(unityVersion);
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
 
-            Logger.ZLogInformation($"Game version read successfully: {bundleVersion}");
+            Config.GameVersion = bundleVersion;
+            Config.UnityVersion = unityVersion;
+
+            Logger.ZLogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
             assetsManager.UnloadAll();
-            return bundleVersion;
         }
         catch (Exception ex)
         {
-            Logger.ZLogCritical(ex, $"Read game version failed");
-            await MessageBoxService.ErrorAsync("Reading Game Version failed", bundlePath).ConfigureAwait(true);
+            Logger.ZLogCritical(ex, $"Read game information failed");
+            await MessageBoxService.ErrorAsync("Reading Game Information failed", bundlePath).ConfigureAwait(true);
             Environment.Exit(0);
         }
-
-        return string.Empty;
     }
 
     public string? ReadMelonLoaderVersion()

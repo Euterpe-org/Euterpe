@@ -13,7 +13,7 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
     private const string MelonLoaderUrl = ReleaseMirrorUrl + MelonLoaderBaseUrl;
-    private const string UnityDependencyUrl = RawMirrorUrl + UnityDependencyBaseUrl;
+    private const string UnityDependencyUrl = ReleaseMirrorUrl + UnityDependencyBaseUrl;
     private const string Cpp2ILUrl = ReleaseMirrorUrl + Cpp2ILBaseUrl;
 
     public Task<bool> DownloadMelonLoaderAsync(
@@ -25,8 +25,11 @@ internal sealed partial class GitHubMirrorDownloadService : IGitHubMirrorDownloa
     public Task<bool> DownloadUnityDependencyAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default) =>
-        DownloadAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+        CancellationToken cancellationToken = default)
+    {
+        var unityDependencyUrl = $"{UnityDependencyUrl}{Config.UnityVersion}/Managed.zip";
+        return DownloadAsync(unityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+    }
 
     public Task<bool> DownloadCpp2ILAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,

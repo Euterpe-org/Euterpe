@@ -4,14 +4,12 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class ModManageService : IModManageService
 {
-    private string _gameVersion = null!;
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
     private SourceCache<ModDto, string> _sourceCache = null!;
 
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
     {
         _sourceCache = sourceCache;
-        _gameVersion = await LocalService.ReadGameVersionAsync().ConfigureAwait(false);
 
         await LoadLibsAsync().ConfigureAwait(false);
         await LoadModsAsync().ConfigureAwait(false);

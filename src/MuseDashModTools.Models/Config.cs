@@ -58,6 +58,13 @@ public sealed partial class Config : ObservableObject
     [ObservableProperty]
     public partial bool IgnoreException { get; set; }
 
+    // Game Information
+    [JsonIgnore]
+    public string GameVersion { get; set; } = string.Empty;
+
+    [JsonIgnore]
+    public string UnityVersion { get; set; } = string.Empty;
+
     // Ignored Paths
     [JsonIgnore]
     public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
@@ -87,7 +94,7 @@ public sealed partial class Config : ObservableObject
     private string Il2CppAssemblyGeneratorFolderPath => Path.Combine(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
 
     [JsonIgnore]
-    public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityDependencyVersion}.zip");
+    public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityVersion}.zip");
 
     [JsonIgnore]
     public string Cpp2ILZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"Cpp2IL_{Cpp2ILVersion}.zip");
