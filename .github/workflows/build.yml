@@ -53,14 +53,14 @@ jobs:
 
       - name: Test Project
         run: |
-          dotnet test -c Release --no-build --report-trx --coverage
+          dotnet test -c Release --no-build --report-trx
 
       - name: List Output Directory
         run: |
-          ls -la artifacts/Output
+          ls -la artifacts/output
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v5
         with:
           name: MuseDashModTools-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
-          path: artifacts/Output/*
+          path: artifacts/output/*

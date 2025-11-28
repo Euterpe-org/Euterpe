@@ -15,10 +15,10 @@
     <Import Project="$(MSBuildProjectDirectory)\$(MSBuildProjectName).props"
             Condition="Exists('$(MSBuildProjectDirectory)\$(MSBuildProjectName).props')"/>
 
-    <Target Name="Copy Builds" AfterTargets="Publish">
+    <Target Name="Copy Builds" AfterTargets="UpxCompress">
         <PropertyGroup>
             <_NativeDir>$(OutputPath)native\</_NativeDir>
-            <_PublishDir>$(OutputPath)publish\</_PublishDir>
+            <_PublishDir>$(PublishDir)</_PublishDir>
         </PropertyGroup>
 
         <ItemGroup>
@@ -26,6 +26,6 @@
             <_PublishedFiles Include="$(_PublishDir)*.*" Condition="!Exists('$(NativeLibraryDir)')"/>
         </ItemGroup>
 
-        <Copy SourceFiles="@(_PublishedFiles)" DestinationFolder="$(ArtifactsPath)Output" SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="@(_PublishedFiles)" DestinationFolder="$(ArtifactsPath)output" SkipUnchangedFiles="true"/>
     </Target>
 </Project>
