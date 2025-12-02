@@ -130,15 +130,15 @@ internal sealed partial class LinuxService : IPlatformService
 
     public async Task<bool> InstallDotNetRuntimeAsync()
     {
-        if (!await CheckProtontricksExistsAsync().ConfigureAwait(true))
+        if (!await CheckProtontricksInstalledAsync().ConfigureAwait(true))
         {
             await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_Protontricks_Not_Installed).ConfigureAwait(false);
             return false;
         }
 
-        if (!await RunProtontricksWineCfgAsync().ConfigureAwait(true))
+        if (!await ConfigureWinePrefixAsync().ConfigureAwait(true))
         {
-            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_Protontricks_Winecfg_Failed).ConfigureAwait(false);
+            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_Protontricks_Wineprefix_Failed).ConfigureAwait(false);
             return false;
         }
 
@@ -147,7 +147,7 @@ internal sealed partial class LinuxService : IPlatformService
             var result = await Cli.Wrap("protontricks")
                 .WithArguments([MuseDashGameId, "dotnetdesktop6"])
                 .WithValidation(CommandResultValidation.None)
-                .ExecuteAsync()
+                .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
 
             if (result.ExitCode is 0)
@@ -216,7 +216,7 @@ internal sealed partial class LinuxService : IPlatformService
     public required IGamePathService GamePathService { get; init; }
 
     [UsedImplicitly]
-    public required MessageBoxService MessageBoxService { get; init; }
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections
 }
