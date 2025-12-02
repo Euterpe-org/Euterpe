@@ -9,6 +9,7 @@ public sealed class JsonSerializationServiceTest
     private const string ConfigJson = """
                                       {
                                           "SteamFolder": "C:\\Program Files (x86)\\SteamLibrary",
+                                          "SteamExecPath": "C:\\Program Files (x86)\\SteamLibrary\\steam.exe",
                                           "MuseDashFolder": "C:\\Program Files (x86)\\SteamLibrary\\steamapps\\common\\Muse Dash",
                                           "CacheFolder": "Cache",
                                           "GameMode": "Vanilla",
@@ -33,6 +34,7 @@ public sealed class JsonSerializationServiceTest
         var config = new Config
         {
             SteamFolder = @"C:\Program Files (x86)\SteamLibrary",
+            SteamExecPath = @"C:\Program Files (x86)\SteamLibrary\steam.exe",
             MuseDashFolder = @"C:\Program Files (x86)\SteamLibrary\steamapps\common\Muse Dash",
             CacheFolder = "Cache",
             GameMode = GameMode.Vanilla,

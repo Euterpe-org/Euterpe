@@ -1,5 +1,6 @@
 ﻿{
   SteamFolder: C:/Program Files (x86)/SteamLibrary,
+  SteamExecPath: C:/Program Files (x86)/SteamLibrary/steam.exe,
   MuseDashFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash,
   CacheFolder: Cache,
   GameMode: Vanilla,
