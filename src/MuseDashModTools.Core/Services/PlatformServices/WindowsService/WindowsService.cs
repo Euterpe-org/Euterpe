@@ -7,7 +7,7 @@ namespace MuseDashModTools.Core;
 internal sealed partial class WindowsService : IPlatformService
 {
     private const string DotnetRuntimeUrl = "https://aka.ms/dotnet/6.0/dotnet-runtime-win-x64.exe";
-    private const string DotnetSdkUrl = "https://aka.ms/dotnet/8.0/dotnet-sdk-win-x64.exe";
+    private const string DotnetSdkUrl = "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x64.exe";
 
     private static readonly string[] WindowsPaths = new[]
         {
