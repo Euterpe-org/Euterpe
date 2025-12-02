@@ -128,7 +128,43 @@ internal sealed partial class LinuxService : IPlatformService
         }
     }
 
-    public Task<bool> InstallDotNetRuntimeAsync() => throw new NotSupportedException();
+    public async Task<bool> InstallDotNetRuntimeAsync()
+    {
+        if (!await CheckProtontricksExistsAsync().ConfigureAwait(true))
+        {
+            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_Protontricks_Not_Installed).ConfigureAwait(false);
+            return false;
+        }
+
+        if (!await RunProtontricksWineCfgAsync().ConfigureAwait(true))
+        {
+            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_Protontricks_Winecfg_Failed).ConfigureAwait(false);
+            return false;
+        }
+
+        try
+        {
+            var result = await Cli.Wrap("protontricks")
+                .WithArguments([MuseDashGameId, "dotnetdesktop6"])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteAsync()
+                .ConfigureAwait(false);
+
+            if (result.ExitCode is 0)
+            {
+                Logger.ZLogInformation($".NET Runtime installed successfully via protontricks");
+                return true;
+            }
+
+            Logger.ZLogError($".NET Runtime installation failed with exit code: {result.ExitCode}");
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to install .NET Runtime");
+            return false;
+        }
+    }
 
     public Task<bool> InstallDotNetSdkAsync() => throw new NotSupportedException();
 
@@ -178,6 +214,9 @@ internal sealed partial class LinuxService : IPlatformService
 
     [UsedImplicitly]
     public required IGamePathService GamePathService { get; init; }
+
+    [UsedImplicitly]
+    public required MessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections
 }
