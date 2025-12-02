@@ -230,6 +230,13 @@ Have you installed MelonLoader?</value>
     <value>.NET 6 Runtime not found
 Click OK to install</value>
   </data>
+  <data name="MessageBox_Content_Notice_SetPathEnvironment_Linux" xml:space="preserve">
+      <value>Copy the following line and add it to your /etc/environment file:
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_Notice_SetPathEnvironment_Windows" xml:space="preserve">
+      <value>MD_DIRECTORY environment variable successfully set to {0}</value>
+  </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">
     <value>Your stored Muse Dash Folder path is null
 Please choose the correct folder</value>
