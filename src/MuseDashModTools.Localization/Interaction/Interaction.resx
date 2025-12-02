@@ -99,6 +99,12 @@ Are you sure you want to disable this mod?</value>
   <data name="MessageBox_Content_Error_DotNetSDK_Install_Failed" xml:space="preserve">
       <value>Failed to install .NET 8 SDK</value>
   </data>
+  <data name="MessageBox_Content_Error_Protontricks_Not_Installed" xml:space="preserve">
+      <value>protontricks is not installed. Please install protontricks to proceed.</value>
+  </data>
+  <data name="MessageBox_Content_Error_Protontricks_Winecfg_Failed" xml:space="preserve">
+      <value>Failed to run winecfg via protontricks. Cannot proceed with .NET Runtime installation.</value>
+  </data>
   <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
     <value>Failed to verify MuseDash.exe
 Make sure you selected the right folder</value>
