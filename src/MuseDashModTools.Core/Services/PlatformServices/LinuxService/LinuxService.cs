@@ -1,6 +1,6 @@
-using System.Text;
 using Avalonia.Platform.Storage;
 using CliWrap;
+using CliWrap.Buffered;
 
 namespace MuseDashModTools.Core;
 
@@ -33,38 +33,17 @@ internal sealed partial class LinuxService : IPlatformService
         return false;
     }
 
-    public async Task<string?> GetSteamExecPathAsync()
+    public bool CheckIsValidSteamFolder(string folderPath)
     {
-        var stdOutBuffer = new StringBuilder();
-
-        try
+        var steamAppsPath = Path.Combine(folderPath, "steamapps");
+        if (Directory.Exists(steamAppsPath))
         {
-            var result = await Cli.Wrap("which")
-                .WithArguments("steam")
-                .WithStandardOutputPipe(PipeTarget.ToStringBuilder(stdOutBuffer))
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteAsync()
-                .ConfigureAwait(false);
-
-            if (result.ExitCode is not 0)
-            {
-                return null;
-            }
-
-            var path = stdOutBuffer.ToString().Trim();
-            if (path.IsNullOrEmpty() || !File.Exists(path))
-            {
-                return null;
-            }
-
-            Logger.ZLogInformation($"Found steam executable via 'which': {path}");
-            return path;
+            Logger.ZLogInformation($"Valid Steam folder: {folderPath}");
+            return true;
         }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to run 'which steam'");
-            return null;
-        }
+
+        Logger.ZLogError($"Invalid Steam folder: {folderPath}");
+        return false;
     }
 
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
@@ -87,17 +66,50 @@ internal sealed partial class LinuxService : IPlatformService
         return false;
     }
 
-    public bool CheckIsValidSteamFolder(string folderPath)
+    public bool CheckIsValidGameFolder(string folderPath)
     {
-        var steamAppsPath = Path.Combine(folderPath, "steamapps");
-        if (Directory.Exists(steamAppsPath))
+        var exePath = Path.Combine(folderPath, "MuseDash.exe");
+        var dllPath = Path.Combine(folderPath, "GameAssembly.dll");
+
+        if (!File.Exists(exePath) || !File.Exists(dllPath))
         {
-            Logger.ZLogInformation($"Valid Steam folder: {folderPath}");
-            return true;
+            Logger.ZLogError($"MuseDash.exe or GameAssembly.dll not found in {folderPath}");
+            return false;
         }
 
-        Logger.ZLogError($"Invalid Steam folder: {folderPath}");
-        return false;
+        Logger.ZLogInformation($"MuseDash.exe and GameAssembly.dll found in {folderPath}");
+        return true;
+    }
+
+    public async Task<string?> GetSteamExecPathAsync()
+    {
+        try
+        {
+            var result = await Cli.Wrap("which")
+                .WithArguments("steam")
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (result.ExitCode is not 0)
+            {
+                return null;
+            }
+
+            var path = result.StandardOutput.Trim();
+            if (path.IsNullOrEmpty() || !File.Exists(path))
+            {
+                return null;
+            }
+
+            Logger.ZLogInformation($"Found steam executable via 'which': {path}");
+            return path;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to run 'which steam'");
+            return null;
+        }
     }
 
     public bool CheckIsValidSteamExecPath(string filePath)
@@ -114,21 +126,6 @@ internal sealed partial class LinuxService : IPlatformService
         {
             return false;
         }
-    }
-
-    public bool CheckIsValidGameFolder(string folderPath)
-    {
-        var exePath = Path.Combine(folderPath, "MuseDash.exe");
-        var dllPath = Path.Combine(folderPath, "GameAssembly.dll");
-
-        if (!File.Exists(exePath) || !File.Exists(dllPath))
-        {
-            Logger.ZLogError($"MuseDash.exe or GameAssembly.dll not found in {folderPath}");
-            return false;
-        }
-
-        Logger.ZLogInformation($"MuseDash.exe and GameAssembly.dll found in {folderPath}");
-        return true;
     }
 
     public Task<bool> InstallDotNetRuntimeAsync() => throw new NotSupportedException();
