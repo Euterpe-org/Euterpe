@@ -208,10 +208,14 @@ internal sealed partial class WindowsService : IPlatformService
         {
             if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Config.MuseDashFolder)
             {
+                Logger.ZLogInformation($"MD_DIRECTORY environment variable is already set to: {Config.MuseDashFolder}");
                 return true;
             }
 
             Environment.SetEnvironmentVariable("MD_DIRECTORY", Config.MuseDashFolder, EnvironmentVariableTarget.User);
+
+            Logger.ZLogInformation($"Set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
+            MessageBoxService.SuccessOverlayAsync(MessageBox_Content_Notice_SetPathEnvironment_Windows, Config.MuseDashFolder).ConfigureAwait(false);
             return true;
         }
         catch (Exception ex)
@@ -256,6 +260,9 @@ internal sealed partial class WindowsService : IPlatformService
 
     [UsedImplicitly]
     public required IGamePathService GamePathService { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections
 }
