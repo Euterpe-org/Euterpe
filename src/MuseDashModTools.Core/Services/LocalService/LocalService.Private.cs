@@ -13,6 +13,17 @@ internal sealed partial class LocalService
         return false;
     }
 
+    private async ValueTask<bool> EnsureValidSteamExecPathAsync(string execPath)
+    {
+        if (PlatformService.CheckIsValidSteamExecPath(execPath))
+        {
+            return true;
+        }
+
+        await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
+        return false;
+    }
+
     private async ValueTask<bool> EnsureValidGameFolderAsync(string folderPath)
     {
         if (PlatformService.CheckIsValidGameFolder(folderPath))

@@ -1,6 +1,6 @@
 ﻿namespace MuseDashModTools.Core;
 
-internal sealed class GameService : IGameService
+internal sealed partial class GameService : IGameService
 {
     public async Task LaunchModdedGameAsync()
     {
@@ -15,13 +15,13 @@ internal sealed class GameService : IGameService
             launchArguments.Add("--melonloader.disablestartscreen");
         }
 
-        await PlatformService.LaunchGameWithArgsAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
+        await LaunchGameWithArgsAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
     }
 
     public async Task LaunchVanillaGameAsync()
     {
         const string launchArguments = "--no-mods";
-        await PlatformService.LaunchGameWithArgAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
+        await LaunchGameWithArgAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
     }
 
     #region Injections

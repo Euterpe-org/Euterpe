@@ -6,6 +6,7 @@ public interface ILocalService
     Task<bool> CheckDotNetSdkInstalledAsync();
     Task<bool> CheckModTemplateInstalledAsync();
     Task<string> GetSteamFolderAsync();
+    Task<string> GetSteamExecPathAsync();
     Task<string> GetMuseDashFolderAsync();
     Task<string> GetCacheFolderAsync();
     string[] GetModFilePaths();

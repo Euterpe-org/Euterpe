@@ -77,6 +77,19 @@ internal sealed partial class LocalService : ILocalService
         return path;
     }
 
+    public async Task<string> GetSteamExecPathAsync()
+    {
+        var path = string.Empty;
+
+        while (path.IsNullOrEmpty() || !await EnsureValidSteamExecPathAsync(path).ConfigureAwait(true))
+        {
+            path = await FileSystemPickerService.GetSingleFilePathAsync(FileDialog_Title_ChooseSteamExec).ConfigureAwait(true);
+            Logger.ZLogInformation($"Selected Steam executable: {path}");
+        }
+
+        return path;
+    }
+
     public async Task<string> GetMuseDashFolderAsync()
     {
         var path = string.Empty;

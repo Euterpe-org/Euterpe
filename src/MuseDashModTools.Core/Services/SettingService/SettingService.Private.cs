@@ -21,6 +21,26 @@ internal sealed partial class SettingService
         }
     }
 
+    private async Task CheckSteamExecPathAsync()
+    {
+        if (Config.SteamExecPath.IsNullOrEmpty() || !PlatformService.CheckIsValidSteamExecPath(Config.SteamExecPath))
+        {
+            Logger.ZLogError($"Stored Steam executable is invalid");
+
+            var detectedPath = await PlatformService.GetSteamExecPathAsync().ConfigureAwait(true);
+            if (!detectedPath.IsNullOrEmpty())
+            {
+                Config.SteamExecPath = detectedPath;
+            }
+            else
+            {
+                Logger.ZLogInformation($"Letting user choose Steam executable...");
+                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseSteamExec).ConfigureAwait(true);
+                Config.SteamExecPath = await LocalService.GetSteamExecPathAsync().ConfigureAwait(true);
+            }
+        }
+    }
+
     private async Task CheckMuseDashFolderAsync()
     {
         if (Config.MuseDashFolder.IsNullOrEmpty() || !PlatformService.CheckIsValidGameFolder(Config.MuseDashFolder))
