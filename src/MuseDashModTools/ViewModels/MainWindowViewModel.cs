@@ -19,7 +19,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
-
+        await LocalService.ReadGameInformationAsync().ConfigureAwait(false);
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 
@@ -27,6 +27,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
     public required LocalizationService LocalizationService { get; init; }
