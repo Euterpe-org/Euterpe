@@ -8,8 +8,8 @@ internal sealed partial class LinuxService : IPlatformService
 {
     private static readonly string[] LinuxPaths = new[]
         {
-            ".local/share/Steam/steamapps",
-            ".steam/steam/steamapps",
+            ".local/share/Steam",
+            ".steam/steam",
             ".var/app/ocm.valvesoftware.Steam/data/Steam",
             ".steam/steam",
             ".steam/root"
@@ -22,7 +22,7 @@ internal sealed partial class LinuxService : IPlatformService
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder)
     {
         steamFolder = LinuxPaths.FirstOrDefault(Directory.Exists);
-        if (steamFolder is not null)
+        if (steamFolder is not null && CheckIsValidSteamFolder(steamFolder))
         {
             Logger.ZLogInformation($"Auto detected steam folder on Linux: {steamFolder}");
             return true;
