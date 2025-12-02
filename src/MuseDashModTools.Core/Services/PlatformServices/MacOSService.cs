@@ -12,8 +12,10 @@ internal sealed class MacOsService : IPlatformService
     public string OsString => "MacOS";
     public string UpdaterFileName => "Updater";
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder) => throw new NotSupportedException();
+    public Task<string?> GetSteamExecPathAsync() => throw new NotSupportedException();
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder) => throw new NotSupportedException();
     public bool CheckIsValidSteamFolder(string folderPath) => throw new NotSupportedException();
+    public bool CheckIsValidSteamExecPath(string filePath) => throw new NotSupportedException();
     public bool CheckIsValidGameFolder(string folderPath) => throw new NotSupportedException();
     public Task<bool> LaunchGameWithArgAsync(string gameId, string launchArgument) => throw new NotSupportedException();
     public Task<bool> LaunchGameWithArgsAsync(string gameId, IEnumerable<string> launchArguments) => throw new NotSupportedException();

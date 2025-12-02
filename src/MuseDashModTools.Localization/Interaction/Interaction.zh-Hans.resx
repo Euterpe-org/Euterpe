@@ -16,6 +16,9 @@
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
       <value>选择谱面文件</value>
   </data>
+  <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
+      <value>选择 Steam 可执行文件</value>
+  </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
       <value>所有文件</value>
   </data>
@@ -210,6 +213,9 @@ Muse Dash Mod Tools已是最新版
   </data>
   <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
     <value>请选择 Muse Dash 文件夹</value>
+  </data>
+  <data name="MessageBox_Content_Notice_ChooseSteamExec" xml:space="preserve">
+      <value>请选择 Steam 可执行文件</value>
   </data>
   <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
     <value>请选择 Steam 文件夹</value>
