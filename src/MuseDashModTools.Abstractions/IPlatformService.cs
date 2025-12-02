@@ -20,6 +20,12 @@ public interface IPlatformService
     bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder);
 
     /// <summary>
+    ///     Get steam executable path
+    /// </summary>
+    /// <returns></returns>
+    Task<string?> GetSteamExecPathAsync();
+
+    /// <summary>
     ///     Get game folder path
     /// </summary>
     /// <param name="gameFolder"></param>
@@ -27,23 +33,8 @@ public interface IPlatformService
     bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder);
 
     bool CheckIsValidSteamFolder(string folderPath);
+    bool CheckIsValidSteamExecPath(string filePath);
     bool CheckIsValidGameFolder(string folderPath);
-
-    /// <summary>
-    ///     Launch game with argument
-    /// </summary>
-    /// <param name="gameId"></param>
-    /// <param name="launchArgument"></param>
-    /// <returns></returns>
-    Task<bool> LaunchGameWithArgAsync(string gameId, string launchArgument);
-
-    /// <summary>
-    ///     Launch game with arguments
-    /// </summary>
-    /// <param name="gameId"></param>
-    /// <param name="launchArguments"></param>
-    /// <returns></returns>
-    Task<bool> LaunchGameWithArgsAsync(string gameId, IEnumerable<string> launchArguments);
 
     #region Mod Develop
 

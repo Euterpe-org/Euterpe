@@ -1,5 +1,4 @@
 using Avalonia.Platform.Storage;
-using CliWrap;
 
 namespace MuseDashModTools.Core;
 
@@ -27,21 +26,34 @@ internal sealed partial class WindowsService : IPlatformService
     {
         if (TryGetSteamFolderFromRegistry(out steamFolder))
         {
-            Logger.ZLogInformation($"Detected steam folder from Registry: {steamFolder}");
+            Logger.ZLogInformation($"Detected Steam folder from Registry: {steamFolder}");
             return true;
         }
 
-        Logger.ZLogWarning($"Failed to get steam folder from Registry");
+        Logger.ZLogWarning($"Failed to get Steam folder from Registry");
 
         steamFolder = WindowsPaths.FirstOrDefault(Directory.Exists);
         if (steamFolder is not null && CheckIsValidSteamFolder(steamFolder))
         {
-            Logger.ZLogInformation($"Auto detected steam folder on Windows: {steamFolder}");
+            Logger.ZLogInformation($"Auto detected Steam folder on Windows: {steamFolder}");
             return true;
         }
 
-        Logger.ZLogWarning($"Auto detect steam install on common path failed.");
+        Logger.ZLogWarning($"Auto detect Steam install on common path failed.");
         return false;
+    }
+
+    public async Task<string?> GetSteamExecPathAsync()
+    {
+        var steamExecPath = Path.Combine(Config.SteamFolder, "steam.exe");
+        if (File.Exists(steamExecPath))
+        {
+            Logger.ZLogInformation($"steam.exe found at: {steamExecPath}");
+            return steamExecPath;
+        }
+
+        Logger.ZLogError($"steam.exe not found at: {steamExecPath}");
+        return null;
     }
 
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
@@ -66,15 +78,31 @@ internal sealed partial class WindowsService : IPlatformService
 
     public bool CheckIsValidSteamFolder(string folderPath)
     {
-        var exePath = Path.Combine(folderPath, "steam.exe");
-        if (File.Exists(exePath))
+        var steamAppsPath = Path.Combine(folderPath, "steamapps");
+        if (Directory.Exists(steamAppsPath))
         {
-            Logger.ZLogInformation($"steam.exe found in {folderPath}");
+            Logger.ZLogInformation($"Valid Steam folder: {folderPath}");
             return true;
         }
 
-        Logger.ZLogError($"steam.exe not found in {folderPath}");
+        Logger.ZLogError($"Invalid Steam folder: {folderPath}");
         return false;
+    }
+
+    public bool CheckIsValidSteamExecPath(string filePath)
+    {
+        try
+        {
+            var info = FileVersionInfo.GetVersionInfo(filePath);
+            var isValve = info.CompanyName?.Contains("Valve", StringComparison.OrdinalIgnoreCase) ?? false;
+            var isSteam = info.ProductName?.Contains("Steam", StringComparison.OrdinalIgnoreCase) ?? false;
+
+            return isValve || isSteam;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public bool CheckIsValidGameFolder(string folderPath)
@@ -90,34 +118,6 @@ internal sealed partial class WindowsService : IPlatformService
 
         Logger.ZLogError($"MuseDash.exe or GameAssembly.dll not found in {folderPath}");
         return false;
-    }
-
-    public Task<bool> LaunchGameWithArgAsync(string gameId, string launchArgument) =>
-        LaunchGameWithArgsAsync(gameId, [launchArgument]);
-
-    public async Task<bool> LaunchGameWithArgsAsync(string gameId, IEnumerable<string> launchArguments)
-    {
-        var steamPath = Path.Combine(Config.SteamFolder, "steam.exe");
-        if (!File.Exists(steamPath))
-        {
-            Logger.ZLogError($"Steam executable not found at {steamPath}");
-            return false;
-        }
-
-        await Cli.Wrap(steamPath)
-            .WithArguments(args =>
-                {
-                    args.Add("-applaunch");
-                    args.Add(gameId);
-                    args.Add(launchArguments);
-                }
-            )
-            .WithValidation(CommandResultValidation.None)
-            .ExecuteAsync()
-            .ConfigureAwait(false);
-
-        Logger.ZLogInformation($"Launching game {gameId} with launch arguments: {launchArguments}");
-        return true;
     }
 
     public async Task<bool> InstallDotNetRuntimeAsync()

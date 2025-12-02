@@ -16,6 +16,9 @@
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
       <value>Choose Chart File</value>
   </data>
+  <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
+      <value>Choose Steam Executable</value>
+  </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
       <value>All Files</value>
   </data>
@@ -210,6 +213,9 @@ Have you installed MelonLoader?</value>
   </data>
   <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
     <value>Please choose Muse Dash folder</value>
+  </data>
+  <data name="MessageBox_Content_Notice_ChooseSteamExec" xml:space="preserve">
+      <value>Please choose Steam executable</value>
   </data>
   <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
     <value>Please choose Steam folder</value>

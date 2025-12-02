@@ -13,6 +13,10 @@ public sealed partial class Config : ObservableObject
 
     [AllowNull]
     [ObservableProperty]
+    public partial string SteamExecPath { get; set; } = string.Empty;
+
+    [AllowNull]
+    [ObservableProperty]
     public partial string MuseDashFolder { get; set; } = string.Empty;
 
     [ObservableProperty]
