@@ -17,6 +17,10 @@ public static class GitHubConstants
 
     // Download File Urls
     public const string MelonLoaderBaseUrl = $"LavaGang/MelonLoader/releases/download/v{MelonLoaderVersion}/MelonLoader.x64.zip";
+
     public const string UnityDependencyBaseUrl = "LavaGang/MelonLoader.UnityDependencies/releases/download/";
-    public const string Cpp2ILBaseUrl = $"SamboyCoding/Cpp2IL/releases/download/{Cpp2ILVersion}/Cpp2IL-{Cpp2ILVersion}-Windows-Netframework472.zip";
+
+    private const string Cpp2ILBaseUrl = $"SamboyCoding/Cpp2IL/releases/download/{Cpp2ILVersion}/";
+    public const string Cpp2ILExecutableBaseUrl = $"{Cpp2ILBaseUrl}Cpp2IL-{Cpp2ILVersion}-Windows.exe";
+    public const string Cpp2ILPluginBaseUrl = $"{Cpp2ILBaseUrl}Cpp2IL.Plugin.StrippedCodeRegSupport.dll";
 }

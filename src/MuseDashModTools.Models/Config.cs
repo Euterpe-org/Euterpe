@@ -105,7 +105,10 @@ public sealed partial class Config : ObservableObject
     public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityVersion}.zip");
 
     [JsonIgnore]
-    public string Cpp2ILZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"Cpp2IL_{Cpp2ILVersion}.zip");
+    public string Cpp2ILExecutablePath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, Path.Combine("Cpp2IL", "Cpp2IL.exe"));
+
+    [JsonIgnore]
+    public string Cpp2ILPluginPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, Path.Combine("Cpp2IL", "Plugins", "Cpp2IL.Plugin.StrippedCodeRegSupport.dll"));
 
     private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
         !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;
