@@ -19,23 +19,6 @@
     <StackPanel
         Classes="ContentListRoot">
 
-        <!--  Steam Folder  -->
-        <mdmt:ContentListItem
-            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_SteamFolder}}"
-            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_SteamFolder}}">
-            <StackPanel
-                Classes="ContentListItemVertical">
-                <TextBox
-                    Classes="Desc"
-                    Text="{Binding Config.SteamFolder, Mode=OneWay}" />
-                <Button
-                    Command="{Binding ChangeSteamFolderCommand}"
-                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Reselect}}"
-                    HorizontalAlignment="Left"
-                    Theme="{DynamicResource OutlineButton}" />
-            </StackPanel>
-        </mdmt:ContentListItem>
-
         <!--  MuseDash Folder  -->
         <mdmt:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolder}}"
