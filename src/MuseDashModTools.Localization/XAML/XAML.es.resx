@@ -65,7 +65,7 @@
     <value>Desactualizado</value>
   </data>
   <data name="ModInfo_Dependencies" xml:space="preserve">
-      <value>Dependencias</value>
+    <value>Dependencias</value>
   </data>
   <data name="ModState_Modified" xml:space="preserve">
     <value>Modificado</value>
@@ -83,11 +83,11 @@
     <value>Créditos</value>
   </data>
   <data name="SearchBarWatermark_Chart" xml:space="preserve">
-        <value>Buscar  (Canción, Autor, Diseñador)</value>
-    </data>
+    <value>Buscar  (Canción, Autor, Diseñador)</value>
+  </data>
   <data name="SearchBarWatermark_Mod" xml:space="preserve">
-        <value>Buscar mods  (Nombre, Autor)</value>
-    </data>
+    <value>Buscar mods  (Nombre, Autor)</value>
+  </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
   </data>
@@ -114,152 +114,5 @@
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
-  </data>
-  <data name="XAML_Analyze" xml:space="preserve">
-    <value>Analizar
-este log</value>
-  </data>
-  <data name="XAML_AskType_Always" xml:space="preserve">
-    <value>Preguntar primero</value>
-  </data>
-  <data name="XAML_AskType_No" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="XAML_AskType_Yes" xml:space="preserve">
-    <value>Sí</value>
-  </data>
-  <data name="XAML_ChangePath" xml:space="preserve">
-    <value>Modificar carpeta</value>
-  </data>
-  <data name="XAML_Charter" xml:space="preserve">
-    <value>Diseñador: </value>
-  </data>
-  <data name="XAML_ChartFilterTypes" xml:space="preserve">
-    <value>Dificultad</value>
-  </data>
-  <data name="XAML_ChartSortOptions" xml:space="preserve">
-    <value>Ordenar por: </value>
-  </data>
-  <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-    <value>N/A</value>
-  </data>
-  <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-    <value>Descargas</value>
-  </data>
-  <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-    <value>Nuevos</value>
-  </data>
-  <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-    <value>Dificultad</value>
-  </data>
-  <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-    <value>Favoritos</value>
-  </data>
-  <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="XAML_Chart_Downloads" xml:space="preserve">
-    <value>Descargas: </value>
-  </data>
-  <data name="XAML_Chart_Likes" xml:space="preserve">
-    <value>Favoritos: </value>
-  </data>
-  <data name="XAML_ChooseChartPath" xml:space="preserve">
-    <value>Elige la carpeta de Chart</value>
-  </data>
-  <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>El enlace debe terminar en una "/", ser público y ser compatible con "ModLinks.json" (La misma estructura que en Github)
-¡Tomará efecto al reiniciar el programa!</value>
-  </data>
-  <data name="XAML_Download_Chart" xml:space="preserve">
-    <value>Descargar</value>
-  </data>
-  <data name="XAML_Folder_Log" xml:space="preserve">
-    <value>Ir a mi Log</value>
-  </data>
-  <data name="XAML_Font" xml:space="preserve">
-    <value>Fuente:</value>
-  </data>
-  <data name="XAML_InfoJson_Author" xml:space="preserve">
-    <value>Artista</value>
-  </data>
-  <data name="XAML_InfoJson_BPM" xml:space="preserve">
-    <value>BPM</value>
-  </data>
-  <data name="XAML_InfoJson_ChartName" xml:space="preserve">
-    <value>Canción</value>
-  </data>
-  <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
-    <value>Dificultad</value>
-  </data>
-  <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
-    <value>Ocultar dificultad BMS</value>
-  </data>
-  <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
-    <value>Ocultar mensaje BMS</value>
-  </data>
-  <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
-    <value>Ocultar modo BMS</value>
-  </data>
-  <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
-    <value>Diseñador</value>
-  </data>
-  <data name="XAML_InfoJson_Scene" xml:space="preserve">
-    <value>Escena</value>
-  </data>
-  <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
-    <value>Buscar Tags</value>
-  </data>
-  <data name="XAML_Mod_Duplicate" xml:space="preserve">
-    <value>Duplicado de:</value>
-  </data>
-  <data name="XAML_ReportBug" xml:space="preserve">
-    <value>Reporta un error</value>
-  </data>
-  <data name="XAML_Scene_Candyland" xml:space="preserve">
-    <value>Bosque de caramelo</value>
-  </data>
-  <data name="XAML_Scene_Castle" xml:space="preserve">
-    <value>Castillo</value>
-  </data>
-  <data name="XAML_Scene_DJMAX" xml:space="preserve">
-    <value>DJMAX</value>
-  </data>
-  <data name="XAML_Scene_LetsGroove" xml:space="preserve">
-    <value>Groove Coaster</value>
-  </data>
-  <data name="XAML_Scene_Oriental" xml:space="preserve">
-    <value>Oriental</value>
-  </data>
-  <data name="XAML_Scene_RainyNight" xml:space="preserve">
-    <value>Lluvia Nocturna</value>
-  </data>
-  <data name="XAML_Scene_Retrocity" xml:space="preserve">
-    <value>Ciudad Retro</value>
-  </data>
-  <data name="XAML_Scene_SpaceStation" xml:space="preserve">
-    <value>Estación Espacial</value>
-  </data>
-  <data name="XAML_Scene_Touhou" xml:space="preserve">
-    <value>Touhou</value>
-  </data>
-  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-    <value>Desactivar dependencia al eliminar un Mod</value>
-  </data>
-  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-    <value>Desactivar dependencia al desactivar un Mod</value>
-  </data>
-  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-    <value>Activar dependencias al activar un Mod</value>
-  </data>
-  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-    <value>Activar dependencias al instalar un Mod</value>
-  </data>
-  <data name="XAML_TroubleShoot" xml:space="preserve">
-    <value>Reportar un
-problema</value>
-  </data>
-  <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-    <value>Ingresa el enlace de descarga</value>
   </data>
 </root>
