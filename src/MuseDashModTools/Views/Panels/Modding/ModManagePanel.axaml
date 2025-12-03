@@ -18,6 +18,8 @@
     </Design.DataContext>
 
     <UserControl.Styles>
+        <StyleInclude
+            Source="avares://MuseDashModTools.Styles/Styles/Panels/ModManagePanelStyles.axaml" />
         <Style
             Selector="Label">
             <Style
@@ -265,7 +267,7 @@
                         <TextBlock
                             Grid.Row="0"
                             Grid.Column="0"
-                            Classes="PanelModManageModTitle"
+                            Classes="ModTitle"
                             Text="{Binding SelectedMod.Name, Mode=OneWay}" />
 
                         <!--  Action Buttons  -->
@@ -392,11 +394,11 @@
                     <StackPanel
                         HorizontalAlignment="Left">
                         <TextBlock
-                            Classes="PanelModManageSectionTitle"
+                            Classes="SectionTitle"
                             Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Details}}" />
 
                         <UniformGrid
-                            Classes="PanelModManageDetails">
+                            Classes="Details">
 
                             <!--  Author  -->
                             <TextBlock
@@ -435,7 +437,7 @@
                     <StackPanel
                         IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
                         <TextBlock
-                            Classes="PanelModManageSectionTitle"
+                            Classes="SectionTitle"
                             Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Dependencies}}" />
                         <ItemsControl
                             ItemsSource="{Binding SelectedMod.DependencyNames, Mode=OneWay}">
