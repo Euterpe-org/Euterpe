@@ -142,6 +142,9 @@
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>仓库</value>
   </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+      <value>需要加载器版本</value>
+  </data>
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>支持游戏版本</value>
   </data>
