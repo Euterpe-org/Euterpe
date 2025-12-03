@@ -13,7 +13,6 @@
     </Design.DataContext>
 
     <Grid>
-
         <!--  Background Image  -->
         <Image
             Source="{DynamicResource BackgroundImage}"
