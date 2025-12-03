@@ -3,10 +3,6 @@
 public sealed partial class FileManagementPanelViewModel : ViewModelBase
 {
     [RelayCommand]
-    private async Task ChangeSteamFolderAsync() =>
-        Config.SteamFolder = await LocalService.GetSteamFolderAsync().ConfigureAwait(false);
-
-    [RelayCommand]
     private async Task ChangeMuseDashFolderAsync() =>
         Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(false);
 
@@ -18,9 +14,6 @@ public sealed partial class FileManagementPanelViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
-    public required IFileSystemPickerService FileSystemPickerService { get; init; }
 
     [UsedImplicitly]
     public required ILocalService LocalService { get; init; }
