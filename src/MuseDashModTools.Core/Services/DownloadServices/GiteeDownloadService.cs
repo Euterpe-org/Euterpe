@@ -25,7 +25,13 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
         CancellationToken cancellationToken = default) =>
         throw new NotSupportedException();
 
-    public Task<bool> DownloadCpp2ILAsync(
+    public Task<bool> DownloadCpp2ILExecutableAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        throw new NotSupportedException();
+
+    public Task<bool> DownloadCpp2ILPluginAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default) =>

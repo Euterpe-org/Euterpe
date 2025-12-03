@@ -14,7 +14,13 @@ internal sealed class WebsiteDownloadService : IWebsiteDownloadService
         CancellationToken cancellationToken = default) =>
         throw new NotImplementedException();
 
-    public Task<bool> DownloadCpp2ILAsync(
+    public Task<bool> DownloadCpp2ILExecutableAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        throw new NotImplementedException();
+
+    public Task<bool> DownloadCpp2ILPluginAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default) =>

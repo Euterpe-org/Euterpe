@@ -12,7 +12,8 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
     private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
     private const string UnityDependencyUrl = GitHubBaseUrl + UnityDependencyBaseUrl;
-    private const string Cpp2ILUrl = GitHubBaseUrl + Cpp2ILBaseUrl;
+    private const string Cpp2ILExecutableUrl = GitHubBaseUrl + Cpp2ILExecutableBaseUrl;
+    private const string Cpp2ILPluginUrl = GitHubBaseUrl + Cpp2ILPluginBaseUrl;
 
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
@@ -29,11 +30,17 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         return DownloadAsync(unityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
     }
 
-    public Task<bool> DownloadCpp2ILAsync(
+    public Task<bool> DownloadCpp2ILExecutableAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default) =>
-        DownloadAsync(Cpp2ILUrl, Config.Cpp2ILZipPath, "Cpp2IL", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+        DownloadAsync(Cpp2ILExecutableUrl, Config.Cpp2ILExecutablePath, "Cpp2IL", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+
+    public Task<bool> DownloadCpp2ILPluginAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default) =>
+        DownloadAsync(Cpp2ILPluginUrl, Config.Cpp2ILPluginPath, "Cpp2IL Plugin", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {

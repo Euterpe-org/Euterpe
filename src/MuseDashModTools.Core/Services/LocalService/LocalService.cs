@@ -225,7 +225,7 @@ internal sealed partial class LocalService : ILocalService
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
 
             Config.GameVersion = bundleVersion;
-            Config.UnityVersion = unityVersion;
+            Config.UnityVersion = unityVersion[..^2];
 
             Logger.ZLogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
             assetsManager.UnloadAll();

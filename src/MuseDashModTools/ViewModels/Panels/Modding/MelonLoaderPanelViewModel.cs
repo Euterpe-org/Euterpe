@@ -43,10 +43,16 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
                 "UnityDependency").ConfigureAwait(true);
 
             await EnsureValidFileAsync(
-                Config.Cpp2ILZipPath,
-                Cpp2ILZipHash,
-                DownloadManager.DownloadCpp2ILAsync,
+                Config.Cpp2ILExecutablePath,
+                Cpp2ILExecutableHash,
+                DownloadManager.DownloadCpp2ILExecutableAsync,
                 "Cpp2IL").ConfigureAwait(true);
+
+            await EnsureValidFileAsync(
+                Config.Cpp2ILPluginPath,
+                Cpp2ILPluginHash,
+                DownloadManager.DownloadCpp2ILPluginAsync,
+                "Cpp2IL Plugin").ConfigureAwait(true);
 
             await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
         }
@@ -117,14 +123,21 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         for (var attempt = 1; attempt <= MaxRetries; attempt++)
         {
             var success = await downloadFunc(OnDownloadStarted, OnDownloadProgressChanged).ConfigureAwait(false);
+            var hash = await SHA512Utils.HexFromPathAsync(filePath).ConfigureAwait(false);
 
-            if (success)
+            if (!success)
+            {
+                Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: Download of {displayName} failed");
+            }
+            else if (hash != expectedHash)
+            {
+                Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: {displayName} hash mismatch after download\r\nExpected: {expectedHash}\r\nActual: {hash}");
+            }
+            else
             {
                 Logger.ZLogInformation($"{displayName} download completed successfully");
                 return;
             }
-
-            Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: Download of {displayName} failed");
         }
 
         throw new InvalidOperationException($"Failed to download a valid {displayName} after {MaxRetries} attempts.");
