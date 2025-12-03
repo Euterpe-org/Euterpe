@@ -16,5 +16,5 @@ public interface ILocalService
     Task<ModDto?> LoadModFromPathAsync(string filePath);
     Task<LibDto> LoadLibFromPathAsync(string filePath);
     ValueTask ReadGameInformationAsync();
-    string? ReadMelonLoaderVersion();
+    void ReadMelonLoaderVersion();
 }
