@@ -69,6 +69,10 @@ public sealed partial class Config : ObservableObject
     [JsonIgnore]
     public string UnityVersion { get; set; } = string.Empty;
 
+    [JsonIgnore]
+    [ObservableProperty]
+    public partial string? MelonLoaderVersion { get; set; }
+
     // Ignored Paths
     [JsonIgnore]
     public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
