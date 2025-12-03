@@ -7,25 +7,6 @@ namespace MuseDashModTools.Core;
 
 internal sealed partial class LocalService : ILocalService
 {
-    public async Task<bool> CheckDotNetRuntimeInstalledAsync()
-    {
-        try
-        {
-            var result = await Cli.Wrap("dotnet")
-                .WithArguments("--list-runtimes")
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync()
-                .ConfigureAwait(false);
-
-            return result.IsSuccess && result.StandardOutput.Contains("Microsoft.NETCore.App 6.");
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to check .NET runtime installation");
-            return false;
-        }
-    }
-
     public async Task<bool> CheckDotNetSdkInstalledAsync()
     {
         try
