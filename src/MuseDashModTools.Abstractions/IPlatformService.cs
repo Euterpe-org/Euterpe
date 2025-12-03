@@ -56,6 +56,12 @@ public interface IPlatformService
     #region Mod Develop
 
     /// <summary>
+    ///     Check dotnet runtime installed
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> CheckDotNetRuntimeInstalledAsync();
+
+    /// <summary>
     ///     Install dotnet runtime
     /// </summary>
     /// <returns></returns>

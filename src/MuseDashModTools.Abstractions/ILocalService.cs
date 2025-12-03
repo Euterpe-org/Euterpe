@@ -2,7 +2,6 @@ namespace MuseDashModTools.Abstractions;
 
 public interface ILocalService
 {
-    Task<bool> CheckDotNetRuntimeInstalledAsync();
     Task<bool> CheckDotNetSdkInstalledAsync();
     Task<bool> CheckModTemplateInstalledAsync();
     Task<string> GetSteamFolderAsync();

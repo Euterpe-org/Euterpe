@@ -16,6 +16,7 @@ internal sealed class MacOsService : IPlatformService
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder) => throw new NotSupportedException();
     public bool CheckIsValidSteamFolder(string folderPath) => throw new NotSupportedException();
     public bool CheckIsValidSteamExecPath(string filePath) => throw new NotSupportedException();
+    public Task<bool> CheckDotNetRuntimeInstalledAsync() => throw new NotSupportedException();
     public bool CheckIsValidGameFolder(string folderPath) => throw new NotSupportedException();
     public Task<bool> InstallDotNetRuntimeAsync() => throw new NotSupportedException();
     public Task<bool> InstallDotNetSdkAsync() => throw new NotSupportedException();

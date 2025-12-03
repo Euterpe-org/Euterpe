@@ -79,7 +79,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
     private async Task CheckAndInstallDotNetRuntimeAsync()
     {
-        var runtimeInstalled = await LocalService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true);
+        var runtimeInstalled = await PlatformService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true);
         if (runtimeInstalled)
         {
             return;
