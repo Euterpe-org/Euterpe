@@ -36,11 +36,26 @@ internal sealed partial class ModManageService
             }
             else
             {
-                _sourceCache.AddOrUpdate(webMod.ToDto());
+                var webModDto = webMod.ToDto();
+                webModDto.State = IsModIncompatible(webMod) ? ModState.Incompatible : ModState.Normal;
+                _sourceCache.AddOrUpdate(webModDto);
             }
         }
 
         Logger.ZLogInformation($"All mods loaded");
+    }
+
+    private bool IsModIncompatible(Mod mod)
+    {
+        if (_melonLoaderVersion is not null
+            && !string.IsNullOrEmpty(mod.MelonVersion)
+            && SemVersionRange.TryParse($"^{mod.MelonVersion}", out var range)
+            && !range.Contains(_melonLoaderVersion))
+        {
+            return true;
+        }
+
+        return mod.GameVersion is not "*" && mod.GameVersion != Config.GameVersion;
     }
 
     private void CheckModState(ModDto localMod, Mod webMod)
@@ -56,11 +71,7 @@ internal sealed partial class ModManageService
 
         localMod.State = versionComparison switch
         {
-            _ when _melonLoaderVersion is not null
-                   && SemVersionRange.TryParse($"^{webMod.MelonVersion}", out var range)
-                   && !range.Contains(_melonLoaderVersion)
-                => ModState.Incompatible,
-            _ when webMod.GameVersion is not "*" && webMod.GameVersion != Config.GameVersion => ModState.Incompatible,
+            _ when IsModIncompatible(webMod) => ModState.Incompatible,
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
