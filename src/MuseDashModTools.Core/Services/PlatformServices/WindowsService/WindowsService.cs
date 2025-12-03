@@ -1,4 +1,6 @@
 using Avalonia.Platform.Storage;
+using CliWrap;
+using CliWrap.Buffered;
 
 namespace MuseDashModTools.Core;
 
@@ -116,6 +118,25 @@ internal sealed partial class WindowsService : IPlatformService
         }
         catch
         {
+            return false;
+        }
+    }
+
+    public async Task<bool> CheckDotNetRuntimeInstalledAsync()
+    {
+        try
+        {
+            var result = await Cli.Wrap("dotnet")
+                .WithArguments("--list-runtimes")
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            return result.IsSuccess && result.StandardOutput.Contains("Microsoft.NETCore.App 6.");
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to check .NET runtime installation");
             return false;
         }
     }
