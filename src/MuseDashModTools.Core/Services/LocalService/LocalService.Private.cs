@@ -9,7 +9,7 @@ internal sealed partial class LocalService
             return true;
         }
 
-        await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
+        await MessageBoxService.ErrorAsync(MessageBox_Content_Error_InvalidPath).ConfigureAwait(true);
         return false;
     }
 
@@ -20,7 +20,7 @@ internal sealed partial class LocalService
             return true;
         }
 
-        await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
+        await MessageBoxService.ErrorAsync(MessageBox_Content_Error_InvalidPath).ConfigureAwait(true);
         return false;
     }
 
@@ -31,7 +31,7 @@ internal sealed partial class LocalService
             return true;
         }
 
-        await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
+        await MessageBoxService.ErrorAsync(MessageBox_Content_Error_InvalidPath).ConfigureAwait(true);
         return false;
     }
 
