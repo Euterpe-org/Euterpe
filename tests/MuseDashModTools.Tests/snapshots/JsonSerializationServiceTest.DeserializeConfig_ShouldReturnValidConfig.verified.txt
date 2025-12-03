@@ -22,5 +22,6 @@
   MelonLoaderZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader.zip,
   LatestLogPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Latest.log,
   UnityDependencyZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/UnityDependencies_.zip,
-  Cpp2ILZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL_2022.1.0-pre-release.19.zip
+  Cpp2ILExecutablePath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Cpp2IL.exe,
+  Cpp2ILPluginPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Plugins/Cpp2IL.Plugin.StrippedCodeRegSupport.dll
 }
