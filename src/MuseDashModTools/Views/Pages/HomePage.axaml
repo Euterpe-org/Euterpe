@@ -12,6 +12,11 @@
         <vm:HomePageViewModel />
     </Design.DataContext>
 
+    <UserControl.Styles>
+        <StyleInclude
+            Source="avares://MuseDashModTools.Styles/Styles/Pages/HomePageStyles.axaml" />
+    </UserControl.Styles>
+
     <Grid>
         <!--  Background Image  -->
         <Image
@@ -45,41 +50,6 @@
         <!--  Donation Drawer  -->
         <u:OverlayDialogHost
             HostId="DonationDrawerHost" />
-
     </Grid>
-
-    <UserControl.Styles>
-
-        <!--  Donation Button Style  -->
-        <Style
-            Selector="Button.Donation">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="0,60,90,0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition
-                        Property="RenderTransform"
-                        Duration="0:0:0.2"
-                        Easing="ExponentialEaseOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style
-            Selector="Button.Donation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-        <Style
-            Selector="Button.Donation:pointerover">
-            <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)" />
-        </Style>
-        <Style
-            Selector="Button.Donation:pressed">
-            <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)" />
-        </Style>
-    </UserControl.Styles>
 
 </UserControl>
