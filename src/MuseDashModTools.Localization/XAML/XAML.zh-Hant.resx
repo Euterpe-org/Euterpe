@@ -74,14 +74,14 @@
     <value>有更新</value>
   </data>
   <data name="ModInfo_Dependencies" xml:space="preserve">
-      <value>依賴</value>
+    <value>依賴</value>
   </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>不相容</value>
   </data>
   <data name="ModState_Outdated" xml:space="preserve">
-        <value>有新版</value>
-    </data>
+    <value>有新版</value>
+  </data>
   <data name="Page_Charting" xml:space="preserve">
     <value>譜面</value>
   </data>
@@ -98,11 +98,11 @@
     <value>關於</value>
   </data>
   <data name="SearchBarWatermark_Chart" xml:space="preserve">
-        <value>搜索譜面  (名稱，曲師，譜師)</value>
-    </data>
+    <value>搜索譜面  (名稱，曲師，譜師)</value>
+  </data>
   <data name="SearchBarWatermark_Mod" xml:space="preserve">
-        <value>搜尋模組  (名字,   作者)</value>
-    </data>
+    <value>搜尋模組  (名字,   作者)</value>
+  </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
   </data>
@@ -126,150 +126,5 @@
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
-  </data>
-  <data name="XAML_Analyze" xml:space="preserve">
-    <value>分析日誌</value>
-  </data>
-  <data name="XAML_AskType_Always" xml:space="preserve">
-    <value>總是詢問</value>
-  </data>
-  <data name="XAML_AskType_No" xml:space="preserve">
-    <value>否</value>
-  </data>
-  <data name="XAML_AskType_Yes" xml:space="preserve">
-    <value>是</value>
-  </data>
-  <data name="XAML_ChangePath" xml:space="preserve">
-    <value>更改路徑</value>
-  </data>
-  <data name="XAML_Charter" xml:space="preserve">
-    <value>譜師: </value>
-  </data>
-  <data name="XAML_ChartFilterTypes" xml:space="preserve">
-    <value>篩選</value>
-  </data>
-  <data name="XAML_ChartSortOptions" xml:space="preserve">
-    <value>排序: </value>
-  </data>
-  <data name="XAML_ChartSortOption_Default" xml:space="preserve">
-    <value>預設</value>
-  </data>
-  <data name="XAML_ChartSortOption_Downloads" xml:space="preserve">
-    <value>下載</value>
-  </data>
-  <data name="XAML_ChartSortOption_Latest" xml:space="preserve">
-    <value>最新</value>
-  </data>
-  <data name="XAML_ChartSortOption_Level" xml:space="preserve">
-    <value>等級</value>
-  </data>
-  <data name="XAML_ChartSortOption_Likes" xml:space="preserve">
-    <value>喜歡次數</value>
-  </data>
-  <data name="XAML_ChartSortOption_Name" xml:space="preserve">
-    <value>名稱</value>
-  </data>
-  <data name="XAML_Chart_Downloads" xml:space="preserve">
-    <value>下載次數: </value>
-  </data>
-  <data name="XAML_Chart_Likes" xml:space="preserve">
-    <value>喜歡數: </value>
-  </data>
-  <data name="XAML_ChooseChartPath" xml:space="preserve">
-    <value>選擇譜面文件夾</value>
-  </data>
-  <data name="XAML_CustomDownloadSourceFormat" xml:space="preserve">
-    <value>連接必須以''/''結尾,並且在連接後面加上''ModLinks.json''後必須可以訪問並解析 (即Github倉庫同樣結構)
-重啟應用生效</value>
-  </data>
-  <data name="XAML_Download_Chart" xml:space="preserve">
-    <value>下載</value>
-  </data>
-  <data name="XAML_Folder_Log" xml:space="preserve">
-    <value>打開日誌文件夾</value>
-  </data>
-  <data name="XAML_Font" xml:space="preserve">
-    <value>字體:</value>
-  </data>
-  <data name="XAML_InfoJson_Author" xml:space="preserve">
-    <value>曲師</value>
-  </data>
-  <data name="XAML_InfoJson_BPM" xml:space="preserve">
-    <value>BPM</value>
-  </data>
-  <data name="XAML_InfoJson_ChartName" xml:space="preserve">
-    <value>譜面名稱</value>
-  </data>
-  <data name="XAML_InfoJson_Difficulty" xml:space="preserve">
-    <value>難度</value>
-  </data>
-  <data name="XAML_InfoJson_HideBmsDifficulty" xml:space="preserve">
-    <value>里譜解鎖難度</value>
-  </data>
-  <data name="XAML_InfoJson_HideBmsMessage" xml:space="preserve">
-    <value>里譜解鎖訊息</value>
-  </data>
-  <data name="XAML_InfoJson_HideBmsMode" xml:space="preserve">
-    <value>里譜解鎖方式</value>
-  </data>
-  <data name="XAML_InfoJson_LevelDesigner" xml:space="preserve">
-    <value>譜師</value>
-  </data>
-  <data name="XAML_InfoJson_Scene" xml:space="preserve">
-    <value>場景</value>
-  </data>
-  <data name="XAML_InfoJson_SearchTags" xml:space="preserve">
-    <value>搜索標籤</value>
-  </data>
-  <data name="XAML_Mod_Duplicate" xml:space="preserve">
-    <value>重複:</value>
-  </data>
-  <data name="XAML_ReportBug" xml:space="preserve">
-    <value>回報Bug</value>
-  </data>
-  <data name="XAML_Scene_Candyland" xml:space="preserve">
-    <value>糖果森林</value>
-  </data>
-  <data name="XAML_Scene_Castle" xml:space="preserve">
-    <value>城堡</value>
-  </data>
-  <data name="XAML_Scene_DJMAX" xml:space="preserve">
-    <value>DJMAX</value>
-  </data>
-  <data name="XAML_Scene_LetsGroove" xml:space="preserve">
-    <value>一起過山車</value>
-  </data>
-  <data name="XAML_Scene_Oriental" xml:space="preserve">
-    <value>和風</value>
-  </data>
-  <data name="XAML_Scene_RainyNight" xml:space="preserve">
-    <value>雨夜街道</value>
-  </data>
-  <data name="XAML_Scene_Retrocity" xml:space="preserve">
-    <value>都市</value>
-  </data>
-  <data name="XAML_Scene_SpaceStation" xml:space="preserve">
-    <value>太空</value>
-  </data>
-  <data name="XAML_Scene_Touhou" xml:space="preserve">
-    <value>車萬</value>
-  </data>
-  <data name="XAML_Setting_DisableDependency_Delete" xml:space="preserve">
-    <value>刪除Mod時禁用依賴</value>
-  </data>
-  <data name="XAML_Setting_DisableDependency_Disable" xml:space="preserve">
-    <value>禁用Mod時禁用依賴</value>
-  </data>
-  <data name="XAML_Setting_EnableDependency_Enable" xml:space="preserve">
-    <value>啟用Mod時啟用依賴</value>
-  </data>
-  <data name="XAML_Setting_EnableDependency_Install" xml:space="preserve">
-    <value>安裝Mod時啟用依賴</value>
-  </data>
-  <data name="XAML_TroubleShoot" xml:space="preserve">
-    <value>報告未知問題</value>
-  </data>
-  <data name="XAML_UseCustomDownloadSource" xml:space="preserve">
-    <value>填寫一個自訂義的下載連結</value>
   </data>
 </root>
