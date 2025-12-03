@@ -31,20 +31,6 @@
             <Setter Property="Theme" Value="{StaticResource TitleTextBlock}" />
         </Style>
 
-        <!--  Title Text Styles  -->
-        <Style
-            Selector="^.PanelModManageModTitle">
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="0,0,0,8" />
-        </Style>
-        <Style
-            Selector="^.PanelModManageSectionTitle">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Margin" Value="0,0,0,16" />
-        </Style>
-
         <!--  Override Active Style  -->
         <Style
             Selector="^.Active">
