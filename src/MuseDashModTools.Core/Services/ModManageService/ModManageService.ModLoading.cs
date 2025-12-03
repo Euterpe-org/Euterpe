@@ -56,10 +56,14 @@ internal sealed partial class ModManageService
 
         localMod.State = versionComparison switch
         {
+            _ when _melonLoaderVersion is not null
+                   && SemVersionRange.TryParse($"^{webMod.MelonVersion}", out var range)
+                   && !range.Contains(_melonLoaderVersion)
+                => ModState.Incompatible,
+            _ when webMod.GameVersion is not "*" && webMod.GameVersion != Config.GameVersion => ModState.Incompatible,
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
-            _ when webMod.GameVersion is not "*" && webMod.GameVersion != Config.GameVersion => ModState.Incompatible,
             _ => ModState.Normal
         };
     }

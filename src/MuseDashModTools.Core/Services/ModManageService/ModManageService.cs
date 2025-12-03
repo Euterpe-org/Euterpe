@@ -5,11 +5,14 @@ namespace MuseDashModTools.Core;
 internal sealed partial class ModManageService : IModManageService
 {
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
+    private SemVersion? _melonLoaderVersion;
     private SourceCache<ModDto, string> _sourceCache = null!;
 
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
     {
         _sourceCache = sourceCache;
+
+        _melonLoaderVersion = SemVersion.TryParse(Config.MelonLoaderVersion, out var parsedVersion) ? parsedVersion : null;
 
         await LoadLibsAsync().ConfigureAwait(false);
         await LoadModsAsync().ConfigureAwait(false);
