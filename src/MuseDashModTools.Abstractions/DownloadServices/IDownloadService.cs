@@ -12,7 +12,12 @@ public interface IDownloadService
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default);
 
-    Task<bool> DownloadCpp2ILAsync(
+    Task<bool> DownloadCpp2ILExecutableAsync(
+        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
+        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+        CancellationToken cancellationToken = default);
+
+    Task<bool> DownloadCpp2ILPluginAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default);
