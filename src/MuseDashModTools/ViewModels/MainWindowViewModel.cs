@@ -20,6 +20,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         await LocalService.ReadGameInformationAsync().ConfigureAwait(false);
+        LocalService.ReadMelonLoaderVersion();
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 

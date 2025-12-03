@@ -5,9 +5,6 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     private const int MaxRetries = 3;
 
     [ObservableProperty]
-    public partial string? InstalledMelonLoaderVersion { get; set; }
-
-    [ObservableProperty]
     public partial InstallStatus MelonLoaderInstallStatus { get; set; }
 
     [ObservableProperty]
@@ -20,9 +17,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     {
         await base.InitializeAsync().ConfigureAwait(true);
 
-        InstalledMelonLoaderVersion = LocalService.ReadMelonLoaderVersion();
-        MelonLoaderInstallStatus = InstalledMelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
-
+        MelonLoaderInstallStatus = Config.MelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
         await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
 
         Logger.ZLogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
@@ -63,7 +58,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        InstalledMelonLoaderVersion = MelonLoaderVersion;
+        Config.MelonLoaderVersion = MelonLoaderVersion;
         MelonLoaderInstallStatus = InstallStatus.Installed;
     }
 
@@ -71,7 +66,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     private async Task UninstallMelonLoaderAsync()
     {
         await LocalService.UninstallMelonLoaderAsync().ConfigureAwait(false);
-        InstalledMelonLoaderVersion = null;
+        Config.MelonLoaderVersion = null;
         MelonLoaderInstallStatus = InstallStatus.NotInstalled;
         Logger.ZLogInformation($"MelonLoader has been successfully uninstalled");
     }

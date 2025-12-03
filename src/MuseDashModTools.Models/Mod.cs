@@ -10,6 +10,7 @@ public sealed class Mod
     public string Repository { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
     public string GameVersion { get; set; } = string.Empty;
+    public string MelonVersion { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string[] ModDependencies { get; set; } = [];
     public string[] LibDependencies { get; set; } = [];

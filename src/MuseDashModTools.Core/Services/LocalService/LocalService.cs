@@ -238,7 +238,7 @@ internal sealed partial class LocalService : ILocalService
         }
     }
 
-    public string? ReadMelonLoaderVersion()
+    public void ReadMelonLoaderVersion()
     {
         ReadOnlySpan<string> paths =
         [
@@ -254,11 +254,10 @@ internal sealed partial class LocalService : ILocalService
                 continue;
             }
 
-            return version;
+            Config.MelonLoaderVersion = version[..^2];
         }
 
         Logger.ZLogInformation($"MelonLoader not installed");
-        return null;
     }
 
     #region Injections

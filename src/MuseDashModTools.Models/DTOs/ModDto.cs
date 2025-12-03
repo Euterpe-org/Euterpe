@@ -62,7 +62,7 @@ public sealed partial class ModDto : ObservableObject
     public string[] DependencyNames => !HasDependency ? [] : [..ModDependencies, ..LibDependencies];
 
     // LocalizedStrings
-    public LocalizedString LocalizedCompatibleGameVersion => GameVersion == "*" ? AllGameVersionCompatible : GameVersion;
+    public LocalizedString LocalizedCompatibleGameVersion => GameVersion is "*" ? AllGameVersionCompatible : GameVersion;
 
     public ModDescriptionLiteral.LocalizedString LocalizedModDescription =>
         ModDescription.ResourceManager.GetString(Name) is null ? Description : Name;
@@ -78,6 +78,7 @@ public sealed partial class ModDto : ObservableObject
     public string Repository { get; set; } = string.Empty;
     public string ConfigFile { get; set; } = string.Empty;
     public string GameVersion { get; set; } = "Unknown";
+    public string MelonVersion { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string[] ModDependencies { get; set; } = [];
     public string[] LibDependencies { get; set; } = [];
