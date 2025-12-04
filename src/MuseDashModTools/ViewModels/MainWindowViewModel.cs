@@ -21,7 +21,31 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 #endif
         await LocalService.ReadGameInformationAsync().ConfigureAwait(false);
         LocalService.ReadMelonLoaderVersion();
+
+        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
+
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
+    }
+
+    private async Task CheckAndInstallDotNetRuntimeAsync()
+    {
+        var runtimeInstalled = await PlatformService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true);
+        if (runtimeInstalled)
+        {
+            return;
+        }
+
+        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_Notice_DotNetRuntime_Install).ConfigureAwait(true);
+        if (result is not MessageBoxResult.OK)
+        {
+            return;
+        }
+
+        var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
+        if (!success)
+        {
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DotNetRuntime_Install_Failed).ConfigureAwait(false);
+        }
     }
 
     #region Injections
@@ -38,6 +62,8 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     [UsedImplicitly]
     public required ILogger<MainWindowViewModel> Logger { get; init; }
 
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 #if RELEASE
     [UsedImplicitly]
     public required IUpdateService UpdateService { get; init; }
