@@ -18,7 +18,6 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         await base.InitializeAsync().ConfigureAwait(true);
 
         MelonLoaderInstallStatus = Config.MelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
-        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
 
         Logger.ZLogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
     }
@@ -75,27 +74,6 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         Config.MelonLoaderVersion = null;
         MelonLoaderInstallStatus = InstallStatus.NotInstalled;
         Logger.ZLogInformation($"MelonLoader has been successfully uninstalled");
-    }
-
-    private async Task CheckAndInstallDotNetRuntimeAsync()
-    {
-        var runtimeInstalled = await PlatformService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true);
-        if (runtimeInstalled)
-        {
-            return;
-        }
-
-        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_Notice_DotNetRuntime_Install).ConfigureAwait(true);
-        if (result is not MessageBoxResult.OK)
-        {
-            return;
-        }
-
-        var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
-        if (!success)
-        {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DotNetRuntime_Install_Failed).ConfigureAwait(false);
-        }
     }
 
     private async Task EnsureValidFileAsync(
