@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using IDownloadService = MuseDashModTools.Abstractions.IDownloadService;
 using static MuseDashModTools.Core.JsonContexts.CamelCaseJsonContext;
 
 namespace MuseDashModTools.Core;
@@ -13,28 +14,28 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
     private const string ModToolsReleaseDownloadBaseUrl = GiteeBaseUrl + "lxymahatma/MuseDashModTools/releases/download/";
 
-    public Task<bool> DownloadMelonLoaderAsync(
+    Task<bool> IDownloadService.DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default) =>
+        CancellationToken cancellationToken) =>
         throw new NotSupportedException();
 
-    public Task<bool> DownloadUnityDependencyAsync(
+    Task<bool> IDownloadService.DownloadUnityDependencyAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default) =>
+        CancellationToken cancellationToken) =>
         throw new NotSupportedException();
 
-    public Task<bool> DownloadCpp2ILExecutableAsync(
+    Task<bool> IDownloadService.DownloadCpp2ILExecutableAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default) =>
+        CancellationToken cancellationToken) =>
         throw new NotSupportedException();
 
-    public Task<bool> DownloadCpp2ILPluginAsync(
+    Task<bool> IDownloadService.DownloadCpp2ILPluginAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default) =>
+        CancellationToken cancellationToken) =>
         throw new NotSupportedException();
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
@@ -105,7 +106,7 @@ internal sealed class GiteeDownloadService : IGiteeDownloadService
         }
     }
 
-    public Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default) => throw new NotSupportedException();
+    Task<string?> IDownloadService.FetchReadmeAsync(string repoId, CancellationToken cancellationToken) => throw new NotSupportedException();
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
