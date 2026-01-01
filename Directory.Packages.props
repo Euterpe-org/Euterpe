@@ -60,7 +60,7 @@
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
-        <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.266"/>
+        <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.267"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
         <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
     </ItemGroup>
