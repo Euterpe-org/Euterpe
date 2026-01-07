@@ -54,7 +54,7 @@
         <PackageVersion Include="Semi.Avalonia" Version="11.3.7.2"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.1"/>
-        <PackageVersion Include="TUnit" Version="1.9.2"/>
+        <PackageVersion Include="TUnit" Version="1.9.17"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify.TUnit" Version="31.9.3"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
