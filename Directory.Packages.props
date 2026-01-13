@@ -56,7 +56,7 @@
         <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.1"/>
         <PackageVersion Include="TUnit" Version="1.9.85"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
-        <PackageVersion Include="Verify.TUnit" Version="31.9.3"/>
+        <PackageVersion Include="Verify.TUnit" Version="31.9.4"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
