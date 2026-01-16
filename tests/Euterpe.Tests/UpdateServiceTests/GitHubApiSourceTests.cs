@@ -8,8 +8,8 @@ namespace Euterpe.Tests.UpdateServiceTests;
 [TestSubject(typeof(UpdateService))]
 public sealed class GitHubApiSourceTests : UpdateServiceTestBase
 {
-    private const string ReleaseAPIUrl = "https://api.github.com/repos/MDModsDev/Euterpe/releases";
-    private const string LatestReleaseAPIUrl = "https://api.github.com/repos/MDModsDev/Euterpe/releases/latest";
+    private const string ReleaseAPIUrl = "https://api.github.com/repos/Euterpe-org/Euterpe/releases";
+    private const string LatestReleaseAPIUrl = "https://api.github.com/repos/Euterpe-org/Euterpe/releases/latest";
 
     protected override Config Config { get; } = new()
     {

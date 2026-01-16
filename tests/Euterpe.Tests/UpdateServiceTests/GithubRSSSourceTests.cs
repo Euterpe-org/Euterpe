@@ -8,7 +8,7 @@ namespace Euterpe.Tests.UpdateServiceTests;
 [TestSubject(typeof(UpdateService))]
 public sealed class GithubRSSSourceTests : UpdateServiceTestBase
 {
-    private const string TagsRSSUrl = "https://github.com/MDModsDev/Euterpe/releases.atom";
+    private const string TagsRSSUrl = "https://github.com/Euterpe-org/Euterpe/releases.atom";
 
     protected override Config Config { get; } = new()
     {

@@ -8,11 +8,11 @@ public static class GitHubConstants
     public const string GitHubRawContentBaseUrl = "https://raw.githubusercontent.com/";
 
     // Mod Tools Urls
-    public const string ModToolsRepoIdentifier = "MDModsDev/Euterpe/";
+    public const string ModToolsRepoIdentifier = "Euterpe-org/Euterpe/";
     public const string ModToolsReleaseDownloadBaseUrl = GitHubBaseUrl + ModToolsRepoIdentifier + "releases/download/";
 
     // Mod Links Urls
-    public const string ModLinksRepoIdentifier = "MDModsDev/ModLinks/";
+    public const string ModLinksRepoIdentifier = "Euterpe-org/ModLinks/";
     public const string ModLinksBaseUrl = ModLinksRepoIdentifier + ModLinksBranch;
 
     // Download File Urls

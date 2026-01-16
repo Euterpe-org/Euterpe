@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <XmlnsDefinitionNamespace>https://github.com/MDModsDev/MuseDashModTools/Localization</XmlnsDefinitionNamespace>
+        <XmlnsDefinitionNamespace>https://github.com/Euterpe-org/Euterpe/Localization</XmlnsDefinitionNamespace>
         <DefaultLocalizationProvider>XAML</DefaultLocalizationProvider>
     </PropertyGroup>
 
