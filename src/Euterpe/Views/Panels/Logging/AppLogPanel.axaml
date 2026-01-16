@@ -1,0 +1,42 @@
+﻿<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:log="using:Microsoft.Extensions.Logging"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.ViewModels.Panels.Logging"
+    x:Class="Euterpe.Views.Panels.Logging.AppLogPanel"
+    x:DataType="vm:AppLogPanelViewModel"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:AppLogPanelViewModel />
+    </Design.DataContext>
+
+    <UserControl.Styles>
+        <StyleInclude
+            Source="avares://Euterpe.Styles/Styles/Panels/AppLogPanelStyles.axaml" />
+    </UserControl.Styles>
+
+    <ScrollViewer>
+        <ListBox
+            ItemsSource="{Binding LogMessagesView}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Classes.CRT="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Critical}, Mode=OneWay}"
+                        Classes.DBG="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Debug}, Mode=OneWay}"
+                        Classes.ERR="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Error}, Mode=OneWay}"
+                        Classes.INF="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Information}, Mode=OneWay}"
+                        Classes.TRC="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Trace}, Mode=OneWay}"
+                        Classes.WRN="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Warning}, Mode=OneWay}"
+                        Text="{Binding .}"
+                        TextWrapping="Wrap" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </ScrollViewer>
+
+</UserControl>

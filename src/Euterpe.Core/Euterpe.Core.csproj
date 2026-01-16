@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="AsmResolver.DotNet"/>
+        <PackageReference Include="AssetsTools.NET"/>
+        <PackageReference Include="AsyncAwaitBestPractices"/>
+        <PackageReference Include="Autofac"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Semver"/>
+        <PackageReference Include="System.ServiceModel.Syndication"/>
+        <PackageReference Include="ValveKeyValue"/>
+        <PackageReference Include="ZLogger"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="BannedSymbols.txt"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Euterpe.Abstractions\Euterpe.Abstractions.csproj"/>
+        <ProjectReference Include="..\Euterpe.Generators\Euterpe.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\Euterpe.Localization\Euterpe.Localization.csproj"/>
+    </ItemGroup>
+
+</Project>

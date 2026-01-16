@@ -1,0 +1,14 @@
+﻿<Project>
+    <PropertyGroup>
+        <AssemblyPath>$(ExternalBuildsFolder)$(MSBuildThisFileName).dll</AssemblyPath>
+    </PropertyGroup>
+
+    <Target Name="BuildTaskDll" BeforeTargets="BeforeBuild">
+        <MSBuild Projects="..\Euterpe.Tasks\Euterpe.Tasks.csproj" Targets="Build"/>
+    </Target>
+
+    <UsingTask TaskName="$(MSBuildThisFileName).GenerateStyles"
+               AssemblyFile="$(AssemblyPath)"
+               Runtime="NET"
+               TaskFactory="TaskHostFactory"/>
+</Project>
