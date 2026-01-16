@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="using:Euterpe.Models.Enums"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
-    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Setting"
     x:Class="Euterpe.Views.Panels.Setting.DownloadPanel"

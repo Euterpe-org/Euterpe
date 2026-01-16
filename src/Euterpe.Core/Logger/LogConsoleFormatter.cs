@@ -22,7 +22,7 @@ internal sealed class LogConsoleFormatter : IZLoggerFormatter
 
         utf8Writer.Append(_levelPrefixes[entry.LogInfo.LogLevel]);
         utf8Writer.AppendUtf8("("u8);
-        utf8Writer.AppendUtf8(entry.LogInfo.Category.Utf8Span[17..]);
+        utf8Writer.AppendUtf8(entry.LogInfo.Category.Utf8Span[8..]);
         utf8Writer.AppendUtf8(") "u8);
         utf8Writer.Append(entry.ToString());
 
