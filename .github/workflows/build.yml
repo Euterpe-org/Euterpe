@@ -62,5 +62,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v6
         with:
-          name: MuseDashModTools-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
+          name: Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
           path: artifacts/output/*

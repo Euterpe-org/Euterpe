@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\Euterpe.Tasks\Euterpe.Tasks.targets"/>
+
+    <PropertyGroup>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <Target Name="GenerateStyles" BeforeTargets="BeforeBuild">
+        <GenerateStyles AvaloniaResourceFiles="@(AvaloniaXaml)"/>
+    </Target>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Irihi.Ursa"/>
+        <PackageReference Include="Semi.Avalonia"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Euterpe.Models\Euterpe.Models.csproj"/>
+        <ProjectReference Include="..\Euterpe.Tasks\Euterpe.Tasks.csproj"/>
+    </ItemGroup>
+</Project>

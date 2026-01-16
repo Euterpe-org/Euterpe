@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Condition="'$(IsPublishing)' == 'true'" Project="$(SolutionDir)Publish.props"/>
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Remove="Assets\Raw\**"/>
+        <Content Include="Assets\Icon.ico"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Autofac"/>
+        <PackageReference Include="Autofac.Extensions.DependencyInjection"/>
+        <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.Controls.Markdown"/>
+        <PackageReference Include="Avalonia.Desktop"/>
+        <PackageReference Include="Avalonia.Fonts.Inter"/>
+        <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="HotAvalonia" PrivateAssets="all"/>
+        <PackageReference Include="Irihi.Ursa"/>
+        <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="ObservableCollections"/>
+        <PackageReference Include="PublishAotCompressed"/>
+        <PackageReference Include="R3Extensions.Avalonia"/>
+        <PackageReference Include="Semi.Avalonia"/>
+        <PackageReference Include="Semver"/>
+    </ItemGroup>
+
+    <!-- Avalonia Diagnostics Package-->
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+        <PackageReference Condition="'$(AvAccelerateKey)' == ''" Include="Avalonia.Diagnostics"/>
+        <PackageReference Condition="'$(AvAccelerateKey)' != ''" Include="AvaloniaUI.DiagnosticsSupport"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Euterpe.Abstractions\Euterpe.Abstractions.csproj"/>
+        <ProjectReference Include="..\Euterpe.Core\Euterpe.Core.csproj"/>
+        <ProjectReference Include="..\Euterpe.Generators\Euterpe.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <ProjectReference Include="..\Euterpe.Styles\Euterpe.Styles.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="BannedSymbols.txt"/>
+    </ItemGroup>
+</Project>

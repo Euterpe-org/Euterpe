@@ -1,0 +1,58 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.ViewModels.Panels.Setting"
+    x:Class="Euterpe.Views.Panels.Setting.FileManagementPanel"
+    x:DataType="vm:FileManagementPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:FileManagementPanelViewModel />
+    </Design.DataContext>
+
+    <StackPanel
+        Classes="ContentListRoot">
+
+        <!--  MuseDash Folder  -->
+        <euterpe:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolder}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolder}}">
+            <StackPanel
+                Classes="ContentListItemVertical">
+                <TextBox
+                    Classes="Desc"
+                    Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
+                <Button
+                    Command="{Binding ChangeMuseDashFolderCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Reselect}}"
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource OutlineButton}" />
+            </StackPanel>
+        </euterpe:ContentListItem>
+
+        <!--  Cache Folder  -->
+        <euterpe:ContentListItem
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolder}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolder}}">
+            <StackPanel
+                Classes="ContentListItemVertical">
+                <TextBox
+                    Classes="Desc"
+                    Text="{Binding Config.CacheFolder, Mode=OneWay}" />
+                <Button
+                    Command="{Binding ChangeCacheFolderCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Reselect}}"
+                    HorizontalAlignment="Left"
+                    Theme="{DynamicResource OutlineButton}" />
+            </StackPanel>
+        </euterpe:ContentListItem>
+
+    </StackPanel>
+
+</UserControl>
