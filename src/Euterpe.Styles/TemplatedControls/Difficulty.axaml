@@ -1,0 +1,36 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
+
+    <Design.PreviewWith>
+        <Border
+            Padding="20">
+            <euterpe:Difficulty
+                Text="Text" />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style
+        Selector="euterpe|Difficulty">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel
+                    IsVisible="{TemplateBinding IsVisible}"
+                    Margin="5,0">
+
+                    <Image
+                        Height="30"
+                        Margin="5,0"
+                        Source="{TemplateBinding Source}"
+                        Width="30" />
+
+                    <TextBlock
+                        FontSize="20"
+                        Text="{TemplateBinding Text}" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

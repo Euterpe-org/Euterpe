@@ -1,0 +1,223 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
+
+    <Design.PreviewWith>
+        <euterpe:PlayButton />
+    </Design.PreviewWith>
+
+    <Style
+        Selector="euterpe|PlayButton">
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="230" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="0,0,120,80" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Background="Transparent"
+                    CornerRadius="18">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            Color="Black"
+                            BlurRadius="10"
+                            OffsetX="0"
+                            OffsetY="2"
+                            Opacity="0.3" />
+                    </Border.Effect>
+
+                    <Grid
+                        ColumnDefinitions="Auto,45"
+                        ColumnSpacing="1">
+
+                        <!--  Play Button  -->
+                        <Button
+                            Grid.Column="0"
+                            Classes="Play"
+                            Command="{TemplateBinding Command, Mode=OneWay}"
+                            Content="{TemplateBinding Content, Mode=OneWay}" />
+
+                        <!--  Dropdown Button  -->
+                        <ToggleButton
+                            Grid.Column="1"
+                            Classes="SelectPlayVersion">
+
+                            <!--  Dropdown Arrow Icon  -->
+                            <PathIcon
+                                Data="M 0 0 L 8 0 L 4 5 Z"
+                                Foreground="White"
+                                Height="5"
+                                Width="8" />
+
+                            <!--  Dropdown Flyout  -->
+                            <ToggleButton.Flyout>
+                                <Flyout
+                                    Placement="Bottom">
+                                    <Border
+                                        CornerRadius="8">
+                                        <ListBox
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            ItemsSource="{TemplateBinding ItemsSource, Mode=OneWay}"
+                                            SelectedIndex="{TemplateBinding SelectedIndex, Mode=TwoWay}">
+
+                                            <!--  Game Mode Item Template  -->
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid
+                                                        ColumnDefinitions="20,*"
+                                                        Margin="8,4"
+                                                        MinWidth="100">
+
+                                                        <!--  Selection Checkmark  -->
+                                                        <PathIcon
+                                                            Grid.Column="0"
+                                                            Data="{StaticResource CheckMark}"
+                                                            Foreground="White"
+                                                            Height="16"
+                                                            HorizontalAlignment="Left"
+                                                            IsVisible="{Binding $parent[ListBoxItem].IsSelected}"
+                                                            VerticalAlignment="Center"
+                                                            Width="16" />
+
+                                                        <!--  Game Mode Text  -->
+                                                        <TextBlock
+                                                            Grid.Column="1"
+                                                            FontSize="14"
+                                                            FontWeight="SemiBold"
+                                                            Foreground="White"
+                                                            HorizontalAlignment="Center"
+                                                            Margin="8,0,0,0"
+                                                            Text="{Binding .}"
+                                                            VerticalAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+
+                                            <!--  ListBox Item Style  -->
+                                            <ListBox.Styles>
+                                                <Style
+                                                    Selector="ListBoxItem">
+                                                    <Setter Property="Background" Value="Transparent" />
+                                                    <Setter Property="Padding" Value="6" />
+                                                    <Setter Property="Margin" Value="0,4" />
+                                                    <Setter Property="CornerRadius" Value="4" />
+                                                </Style>
+                                            </ListBox.Styles>
+
+                                        </ListBox>
+                                    </Border>
+                                </Flyout>
+                            </ToggleButton.Flyout>
+                        </ToggleButton>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!--  Play Button Style  -->
+    <Style
+        Selector="Button.Play">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="CornerRadius" Value="18,0,0,18" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="Button.Play /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.15"
+                    Easing="CubicEaseInOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="Button.Play:pointerover">
+        <Setter Property="RenderTransform" Value="scale(1.01)" />
+    </Style>
+    <Style
+        Selector="Button.Play:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonHoverGradient}" />
+    </Style>
+    <Style
+        Selector="Button.Play:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.95)" />
+    </Style>
+    <Style
+        Selector="Button.Play:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryButtonPressedGradient}" />
+    </Style>
+
+    <!--  Dropdown Button Style  -->
+    <Style
+        Selector="ToggleButton.SelectPlayVersion">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="45" />
+        <Setter Property="CornerRadius" Value="0,18,18,0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.15"
+                    Easing="CubicEaseInOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pointerover">
+        <Setter Property="RenderTransform" Value="scale(1.02)" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonHoverGradient}" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pressed">
+        <Setter Property="RenderTransform" Value="scale(0.95)" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonPressedGradient}" />
+    </Style>
+    <Style
+        Selector="ToggleButton.SelectPlayVersion:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
+    </Style>
+
+</Styles>

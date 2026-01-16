@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\Euterpe.Models\Euterpe.Models.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CliWrap"/>
+        <PackageReference Include="Downloader"/>
+        <PackageReference Include="DynamicData"/>
+        <PackageReference Include="Irihi.Ursa"/>
+    </ItemGroup>
+
+</Project>
