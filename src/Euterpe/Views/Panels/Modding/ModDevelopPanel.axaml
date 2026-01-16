@@ -154,7 +154,7 @@
                 Title="Submit Your Mod">
                 <Button
                     Classes="Transparent Card"
-                    CommandParameter="https://github.com/MDModsDev/ModLinks"
+                    CommandParameter="https://github.com/Euterpe-org/ModLinks"
                     Margin="5,0,10,0">
                     <Button.Styles>
                         <Style
@@ -169,7 +169,7 @@
                             ColumnDefinitions="Auto,*"
                             HorizontalAlignment="Center">
 
-                            <!--  MDModsDev logo  -->
+                            <!--  Euterpe logo  -->
                             <Image
                                 Grid.Column="0"
                                 Height="64"

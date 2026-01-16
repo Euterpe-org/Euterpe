@@ -4,7 +4,7 @@
     xmlns:const="using:Euterpe.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
-    xmlns:loc="https://github.com/MDModsDev/MuseDashModTools/Localization"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Euterpe.Models.Controls"
     xmlns:u="https://irihi.tech/ursa"
@@ -105,7 +105,7 @@
                                     Text="Muse Dash Mod Tools is licensed under the " />
                                 <InlineUIContainer>
                                     <u:IconButton
-                                        CommandParameter="https://github.com/MDModsDev/Euterpe/blob/master/LICENSE.txt">
+                                        CommandParameter="https://github.com/Euterpe-org/Euterpe/blob/master/LICENSE.txt">
                                         <u:IconButton.Icon>
                                             <Image
                                                 Source="/Assets/MIT_Logo.png" />
@@ -162,7 +162,7 @@
                                 Content="{Localize {x:Static loc:XAMLLiteral.Button_CheckUpdate}}" />
 
                             <u:IconButton
-                                CommandParameter="https://github.com/MDModsDev/Euterpe"
+                                CommandParameter="https://github.com/Euterpe-org/Euterpe"
                                 Content="{Localize {x:Static loc:XAMLLiteral.Button_SourceCode}}"
                                 Icon="{StaticResource SemiIconCode}" />
 
