@@ -37,7 +37,7 @@
     </PropertyGroup>
 
     <!-- Avalonia Accelerate -->
-    <ItemGroup>
+    <ItemGroup Condition="'$(AvAccelerateKey)' != ''">
         <AvaloniaUILicenseKey Include="$(AvAccelerateKey)"/>
     </ItemGroup>
     <PropertyGroup>
