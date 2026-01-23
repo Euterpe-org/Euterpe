@@ -12,7 +12,7 @@ public static class GitHubConstants
     public const string ModToolsReleaseDownloadBaseUrl = GitHubBaseUrl + ModToolsRepoIdentifier + "releases/download/";
 
     // Mod Links Urls
-    public const string ModLinksRepoIdentifier = "Euterpe-org/ModLinks/";
+    public const string ModLinksRepoIdentifier = "Euterpe-org/Euterpe.Assets/";
     public const string ModLinksBaseUrl = ModLinksRepoIdentifier + ModLinksBranch;
 
     // Download File Urls
