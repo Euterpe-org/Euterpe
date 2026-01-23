@@ -24,6 +24,7 @@ global using R3;
 global using Semver;
 global using Ursa.Controls;
 global using ZLogger;
+global using static Euterpe.Common.ApiConstants;
 global using static Euterpe.Common.BuildInfo;
 global using static Euterpe.Common.GitHubConstants;
 global using static Euterpe.Common.GitHubResources;

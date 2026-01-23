@@ -21,6 +21,7 @@ internal sealed partial class ModManageService : IModManageService
     public async Task InstallModAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
+        StatisticsService.RecordDownload(mod.Name, mod.Author);
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
@@ -45,6 +46,9 @@ internal sealed partial class ModManageService : IModManageService
 
     [UsedImplicitly]
     public required ILocalService LocalService { get; init; }
+
+    [UsedImplicitly]
+    public required IStatisticsService StatisticsService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<ModManageService> Logger { get; init; }
