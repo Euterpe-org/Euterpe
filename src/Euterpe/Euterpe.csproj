@@ -38,8 +38,7 @@
 
     <!-- Avalonia Diagnostics Package-->
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-        <PackageReference Condition="'$(AvAccelerateKey)' == ''" Include="Avalonia.Diagnostics"/>
-        <PackageReference Condition="'$(AvAccelerateKey)' != ''" Include="AvaloniaUI.DiagnosticsSupport"/>
+        <PackageReference Include="AvaloniaUI.DiagnosticsSupport"/>
     </ItemGroup>
 
     <ItemGroup>

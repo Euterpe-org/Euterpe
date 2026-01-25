@@ -59,7 +59,7 @@ internal static class Program
         .UsePlatformDetect()
         .WithInterFont()
         .LogToTrace()
-#if (DEBUG && ACCELERATE)
+#if DEBUG
         .WithDeveloperTools()
 #endif
         .UseR3(ReportException)
