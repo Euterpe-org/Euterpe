@@ -154,7 +154,7 @@
                 Title="Submit Your Mod">
                 <Button
                     Classes="Transparent Card"
-                    CommandParameter="https://github.com/Euterpe-org/ModLinks"
+                    CommandParameter="https://euterpe-org.com"
                     Margin="5,0,10,0">
                     <Button.Styles>
                         <Style
@@ -179,7 +179,7 @@
                                 Grid.Column="1">
                                 <TextBlock
                                     Classes="CardTitle"
-                                    Text="ModLinks Repository">
+                                    Text="Euterpe Website">
                                     <TextBlock.Foreground>
                                         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                             <GradientStop Offset="0" Color="#FF9966" />
@@ -189,7 +189,7 @@
                                 </TextBlock>
                                 <TextBlock
                                     Classes="CardDesc"
-                                    Text="Submit your mod to euterpe's mod list" />
+                                    Text="Manage your mods on euterpe official website" />
                             </StackPanel>
                         </Grid>
                     </Border>
