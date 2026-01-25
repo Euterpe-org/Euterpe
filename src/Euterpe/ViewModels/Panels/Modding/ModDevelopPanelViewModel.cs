@@ -9,10 +9,14 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial bool ModTemplateInstalled { get; set; }
 
+    [ObservableProperty]
+    public partial bool EnvVariableSet { get; set; }
+
     public override async Task InitializeAsync()
     {
         DotNetSdkInstalled = await LocalService.CheckDotNetSdkInstalledAsync().ConfigureAwait(true);
         ModTemplateInstalled = await LocalService.CheckModTemplateInstalledAsync().ConfigureAwait(true);
+        EnvVariableSet = PlatformService.CheckPathEnvironmentVariableSet();
 
         Logger.ZLogInformation($"{nameof(ModDevelopPanelViewModel)} Initialized");
     }
@@ -83,6 +87,29 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         {
             Logger.ZLogError(ex, $"Failed to uninstall Mod Template");
             await MessageBoxService.ErrorAsync("Failed to uninstall Mod Template").ConfigureAwait(false);
+        }
+    }
+
+    [RelayCommand]
+    private async Task SetEnvVariableAsync()
+    {
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to set MD_DIRECTORY environment variable?").ConfigureAwait(true);
+        if (result is not MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        Logger.ZLogInformation($"Setting MD_DIRECTORY environment variable...");
+        var success = PlatformService.SetPathEnvironmentVariable();
+        if (success)
+        {
+            EnvVariableSet = true;
+            Logger.ZLogInformation($"MD_DIRECTORY environment variable set successfully");
+        }
+        else
+        {
+            Logger.ZLogError($"Failed to set MD_DIRECTORY environment variable");
+            await MessageBoxService.ErrorAsync("Failed to set MD_DIRECTORY environment variable").ConfigureAwait(false);
         }
     }
 

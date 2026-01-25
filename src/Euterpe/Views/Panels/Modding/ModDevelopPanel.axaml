@@ -32,13 +32,12 @@
             <!--  Development Environment Section  -->
             <euterpe:ContentListItem
                 Title="Development Environment">
-                <Grid
-                    ColumnDefinitions="*,*"
-                    Margin="5,0,10,0">
+                <StackPanel
+                    Margin="5,0,10,0"
+                    Spacing="10">
 
-                    <!--  .NET SDK Installation Card  -->
+                    <!--  .NET SDK Installation Card (Full Width)  -->
                     <Button
-                        Grid.Column="0"
                         Classes="Transparent Card"
                         Command="{Binding InstallDotNetSdkCommand}"
                         IsEnabled="{Binding !DotNetSdkInstalled}">
@@ -92,61 +91,122 @@
                         </Border>
                     </Button>
 
-                    <!--  Mod Template NuGet Card  -->
-                    <Button
-                        Grid.Column="1"
-                        Classes="Transparent Card"
-                        Command="{Binding ToggleModTemplateInstallCommand}">
-                        <Button.Styles>
-                            <Style
-                                Selector="Button:pointerover Border.Hover">
-                                <Setter Property="Background" Value="#4B49AC" />
-                                <Setter Property="RenderTransform" Value="scale(1.004)" />
-                            </Style>
-                        </Button.Styles>
-                        <Border
-                            Classes="Hover">
-                            <DockPanel>
-                                <StackPanel
-                                    Orientation="Vertical">
-                                    <TextBlock
-                                        Classes="CardTitle"
-                                        Text="Mod Template Nuget">
-                                        <TextBlock.Foreground>
-                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                                                <GradientStop Offset="0" Color="#7F7FD5" />
-                                                <GradientStop Offset="1" Color="#86A8E7" />
-                                            </LinearGradientBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                    <TextBlock
-                                        Classes="CardDesc"
-                                        Text="For quick mod project creation" />
-                                </StackPanel>
+                    <!--  Second Row: Mod Template and Environment Variable Cards  -->
+                    <Grid
+                        ColumnDefinitions="*,*">
 
-                                <!--  Installation status indicator  -->
-                                <StackPanel
-                                    DockPanel.Dock="Right"
-                                    HorizontalAlignment="Right"
-                                    Margin="30,0"
-                                    Orientation="Horizontal"
-                                    Spacing="10"
-                                    VerticalAlignment="Center">
-                                    <TextBlock
-                                        Classes="CardDesc"
-                                        IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
-                                        Text="Not Installed"
-                                        VerticalAlignment="Center" />
-                                    <PathIcon
-                                        Data="{StaticResource SemiIconVerify}"
-                                        Foreground="Green"
-                                        Height="30"
-                                        IsVisible="{Binding ModTemplateInstalled, Mode=OneWay}" />
-                                </StackPanel>
-                            </DockPanel>
-                        </Border>
-                    </Button>
-                </Grid>
+                        <!--  Mod Template NuGet Card  -->
+                        <Button
+                            Grid.Column="0"
+                            Classes="Transparent Card"
+                            Command="{Binding ToggleModTemplateInstallCommand}">
+                            <Button.Styles>
+                                <Style
+                                    Selector="Button:pointerover Border.Hover">
+                                    <Setter Property="Background" Value="#4B49AC" />
+                                    <Setter Property="RenderTransform" Value="scale(1.004)" />
+                                </Style>
+                            </Button.Styles>
+                            <Border
+                                Classes="Hover">
+                                <DockPanel>
+                                    <StackPanel
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Classes="CardTitle"
+                                            Text="Mod Template Nuget">
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                    <GradientStop Offset="0" Color="#7F7FD5" />
+                                                    <GradientStop Offset="1" Color="#86A8E7" />
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            Text="For quick mod project creation" />
+                                    </StackPanel>
+
+                                    <!--  Installation status indicator  -->
+                                    <StackPanel
+                                        DockPanel.Dock="Right"
+                                        HorizontalAlignment="Right"
+                                        Margin="30,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
+                                            Text="Not Installed"
+                                            VerticalAlignment="Center" />
+                                        <PathIcon
+                                            Data="{StaticResource SemiIconVerify}"
+                                            Foreground="Green"
+                                            Height="30"
+                                            IsVisible="{Binding ModTemplateInstalled, Mode=OneWay}" />
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                        </Button>
+
+                        <!--  Environment Variable Card  -->
+                        <Button
+                            Grid.Column="1"
+                            Classes="Transparent Card"
+                            Command="{Binding SetEnvVariableCommand}"
+                            IsEnabled="{Binding !EnvVariableSet}">
+                            <Button.Styles>
+                                <Style
+                                    Selector="Button:pointerover Border.Hover">
+                                    <Setter Property="Background" Value="#047857" />
+                                    <Setter Property="RenderTransform" Value="scale(1.004)" />
+                                </Style>
+                            </Button.Styles>
+                            <Border
+                                Classes="Hover">
+                                <DockPanel>
+                                    <StackPanel
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Classes="CardTitle"
+                                            Text="Set Environment Variable">
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                    <GradientStop Offset="0" Color="#059669" />
+                                                    <GradientStop Offset="1" Color="#10B981" />
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            Text="Enables build tools to locate game files" />
+                                    </StackPanel>
+
+                                    <!--  Status indicator  -->
+                                    <StackPanel
+                                        DockPanel.Dock="Right"
+                                        HorizontalAlignment="Right"
+                                        Margin="30,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            IsVisible="{Binding !EnvVariableSet, Mode=OneWay}"
+                                            Text="Not Set"
+                                            VerticalAlignment="Center" />
+                                        <PathIcon
+                                            Data="{StaticResource SemiIconVerify}"
+                                            Foreground="Green"
+                                            Height="30"
+                                            IsVisible="{Binding EnvVariableSet, Mode=OneWay}" />
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                        </Button>
+                    </Grid>
+                </StackPanel>
             </euterpe:ContentListItem>
 
             <!--  Mod Submission Section  -->

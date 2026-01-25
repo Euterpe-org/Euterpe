@@ -194,6 +194,12 @@ internal sealed partial class LinuxService : IPlatformService
 
     public Task<bool> InstallDotNetSdkAsync() => throw new NotSupportedException();
 
+    public bool CheckPathEnvironmentVariableSet()
+    {
+        var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
+        return !string.IsNullOrEmpty(envValue) && envValue == Config.MuseDashFolder;
+    }
+
     public bool SetPathEnvironmentVariable()
     {
         Logger.ZLogInformation($"Ask user to set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
