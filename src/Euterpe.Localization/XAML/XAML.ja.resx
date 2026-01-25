@@ -100,4 +100,43 @@
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
   </data>
+  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
+    <value>開発環境</value>
+  </data>
+  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
+    <value>Modを提出</value>
+  </data>
+  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
+    <value>推奨 IDE</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
+    <value>.NET 8 SDK</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
+    <value>Mod開発に必要</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
+    <value>Modテンプレート Nuget</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
+    <value>Modプロジェクトを素早く作成</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
+    <value>環境変数を設定</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
+    <value>ビルドツールがゲームファイルを見つけられるようにする</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
+    <value>Euterpe Mod ハブ</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
+    <value>Modをアップロードして管理するためにアカウントを作成</value>
+  </data>
+  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
+    <value>未インストール</value>
+  </data>
+  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
+    <value>未設定</value>
+  </data>
 </root>
