@@ -42,8 +42,8 @@
                     VerticalAlignment="Center">
                     <TextBlock
                         Classes="H1"
-                        HorizontalAlignment="Center"
-                        Text="Muse Dash Mod Tools"
+                        HorizontalAlignment="Left"
+                        Text="Euterpe"
                         Theme="{StaticResource TitleTextBlock}" />
                     <StackPanel
                         Orientation="Horizontal"
@@ -102,7 +102,7 @@
 
                             <TextBlock.Inlines>
                                 <Run
-                                    Text="Muse Dash Mod Tools is licensed under the " />
+                                    Text="Euterpe is licensed under the " />
                                 <InlineUIContainer>
                                     <u:IconButton
                                         CommandParameter="https://github.com/Euterpe-org/Euterpe/blob/master/LICENSE.txt">

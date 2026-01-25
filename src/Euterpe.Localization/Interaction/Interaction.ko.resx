@@ -132,7 +132,7 @@ MelonLoader 0.5.7을 설치하려면 ModManage window 의 버튼을 누르세요
   </data>
   <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
     <value>업데이트 확인 성공
-최신 버전의 Muse Dash Mod Tools를 사용하고 있습니다.</value>
+최신 버전의 Euterpe 를 사용하고 있습니다.</value>
   </data>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>로그 분석이 완료되었습니다. 로그 파일에 명백한 오류가 없습니다.
@@ -148,7 +148,7 @@ MelonLoader 0.5.7을 설치하려면 ModManage window 의 버튼을 누르세요
 </value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>Muse Dash Mod Tools({0}) 의 최신 버전이 출시되었습니다.
+    <value>Euterpe ({0}) 의 최신 버전이 출시되었습니다.
 
 지금 설치하시겠습니까?
 
