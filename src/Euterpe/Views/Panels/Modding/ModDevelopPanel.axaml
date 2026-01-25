@@ -93,7 +93,7 @@
 
                     <!--  Second Row: Mod Template and Environment Variable Cards  -->
                     <Grid
-                        ColumnDefinitions="*,*">
+                        ColumnDefinitions="*,10,*">
 
                         <!--  Mod Template NuGet Card  -->
                         <Button
@@ -152,7 +152,7 @@
 
                         <!--  Environment Variable Card  -->
                         <Button
-                            Grid.Column="1"
+                            Grid.Column="2"
                             Classes="Transparent Card"
                             Command="{Binding SetEnvVariableCommand}"
                             IsEnabled="{Binding !EnvVariableSet}">
@@ -261,12 +261,13 @@
                 Title="Recommended IDEs">
 
                 <!--  3-column grid for IDE options  -->
-                <UniformGrid
-                    Columns="3"
+                <Grid
+                    ColumnDefinitions="*,10,*,10,*"
                     Margin="5,0,10,0">
 
                     <!--  VS Code  -->
                     <Button
+                        Grid.Column="0"
                         Classes="Transparent Card"
                         CommandParameter="https://code.visualstudio.com">
                         <Button.Styles>
@@ -295,6 +296,7 @@
 
                     <!--  JetBrains Rider  -->
                     <Button
+                        Grid.Column="2"
                         Classes="Transparent Card"
                         CommandParameter="https://www.jetbrains.com/rider">
                         <Button.Styles>
@@ -323,6 +325,7 @@
 
                     <!--  Visual Studio  -->
                     <Button
+                        Grid.Column="4"
                         Classes="Transparent Card"
                         CommandParameter="https://visualstudio.microsoft.com">
                         <Button.Styles>
@@ -349,7 +352,7 @@
                         </Border>
                     </Button>
 
-                </UniformGrid>
+                </Grid>
             </euterpe:ContentListItem>
         </StackPanel>
     </ScrollViewer>
