@@ -160,4 +160,7 @@
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
     <value>Не задано</value>
   </data>
+  <data name="MelonLoader_InstallationRequired" xml:space="preserve">
+    <value>Для использования модов требуется установка MelonLoader</value>
+  </data>
 </root>

@@ -376,4 +376,7 @@
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
     <value>未设置</value>
   </data>
+  <data name="MelonLoader_InstallationRequired" xml:space="preserve">
+    <value>需要安装 MelonLoader 才能使用模组</value>
+  </data>
 </root>

@@ -238,6 +238,61 @@ Try to manually unzip?</value>
 Please make sure you have downloaded full software,
 and check your antivirus</value>
   </data>
+  <data name="MessageBox_Content_Confirm_InstallModTemplate" xml:space="preserve">
+    <value>Voulez-vous vraiment installer le modèle de mod ?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Voulez-vous vraiment définir la variable d'environnement MD_DIRECTORY ?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_UninstallModTemplate" xml:space="preserve">
+    <value>Voulez-vous vraiment désinstaller le modèle de mod ?</value>
+  </data>
+  <data name="MessageBox_Content_Error_CreateMdmFile_Failed" xml:space="preserve">
+    <value>Échec de la création du fichier MDM</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteFile_Failed" xml:space="preserve">
+    <value>Échec de la suppression de {0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Échec de la suppression du dossier MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_Error_ExtractMdmFile_Failed" xml:space="preserve">
+    <value>Échec de l'extraction du fichier MDM</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallMelonLoader_Failed" xml:space="preserve">
+    <value>Échec de l'installation de MelonLoader : {0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallModTemplate_Failed" xml:space="preserve">
+    <value>Échec de l'installation du modèle de mod</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Échec de la décompression de MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>Fichier zip de MelonLoader introuvable</value>
+  </data>
+  <data name="MessageBox_Content_Error_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Échec de la lecture des informations du jeu
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Échec de la définition de la variable d'environnement MD_DIRECTORY</value>
+  </data>
+  <data name="MessageBox_Content_Error_UninstallModTemplate_Failed" xml:space="preserve">
+    <value>Échec de la désinstallation du modèle de mod</value>
+  </data>
+  <data name="MessageBox_Content_Notice_NewVersionAvailable" xml:space="preserve">
+    <value>Nouvelle version disponible : {0}. Voulez-vous mettre à jour ?</value>
+  </data>
+  <data name="MessageBox_Content_Success_CreateMdmFile" xml:space="preserve">
+    <value>Fichiers MDM créés avec succès</value>
+  </data>
+  <data name="MessageBox_Content_Success_ExtractMdmFile" xml:space="preserve">
+    <value>Fichiers MDM extraits avec succès</value>
+  </data>
+  <data name="MessageBox_Content_Success_MelonLoader_Uninstall" xml:space="preserve">
+    <value>MelonLoader désinstallé avec succès</value>
+  </data>
   <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
     <value>Analysis successful</value>
   </data>

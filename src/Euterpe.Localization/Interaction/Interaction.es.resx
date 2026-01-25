@@ -249,6 +249,61 @@ Error: {1}
     <value>¡No se pudo encontrar el actualizador del programa!
 Asegúrate de haber instalado el programa de forma correcta</value>
   </data>
+  <data name="MessageBox_Content_Confirm_InstallModTemplate" xml:space="preserve">
+    <value>¿Seguro que quieres instalar la plantilla de mod?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>¿Seguro que quieres establecer la variable de entorno MD_DIRECTORY?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_UninstallModTemplate" xml:space="preserve">
+    <value>¿Seguro que quieres desinstalar la plantilla de mod?</value>
+  </data>
+  <data name="MessageBox_Content_Error_CreateMdmFile_Failed" xml:space="preserve">
+    <value>No se pudo crear el archivo MDM</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteFile_Failed" xml:space="preserve">
+    <value>No se pudo eliminar {0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>No se pudo eliminar la carpeta de MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_Error_ExtractMdmFile_Failed" xml:space="preserve">
+    <value>No se pudo extraer el archivo MDM</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallMelonLoader_Failed" xml:space="preserve">
+    <value>No se pudo instalar MelonLoader: {0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallModTemplate_Failed" xml:space="preserve">
+    <value>No se pudo instalar la plantilla de mod</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>No se pudo descomprimir MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>No se encontró el archivo zip de MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_Error_ReadGameInformation_Failed" xml:space="preserve">
+    <value>No se pudo leer la información del juego
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>No se pudo establecer la variable de entorno MD_DIRECTORY</value>
+  </data>
+  <data name="MessageBox_Content_Error_UninstallModTemplate_Failed" xml:space="preserve">
+    <value>No se pudo desinstalar la plantilla de mod</value>
+  </data>
+  <data name="MessageBox_Content_Notice_NewVersionAvailable" xml:space="preserve">
+    <value>Nueva versión disponible: {0}. ¿Quieres actualizar?</value>
+  </data>
+  <data name="MessageBox_Content_Success_CreateMdmFile" xml:space="preserve">
+    <value>Los archivos MDM se crearon correctamente</value>
+  </data>
+  <data name="MessageBox_Content_Success_ExtractMdmFile" xml:space="preserve">
+    <value>Los archivos MDM se extrajeron correctamente</value>
+  </data>
+  <data name="MessageBox_Content_Success_MelonLoader_Uninstall" xml:space="preserve">
+    <value>MelonLoader se desinstaló correctamente</value>
+  </data>
   <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
     <value>Análisis completado</value>
   </data>

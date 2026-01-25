@@ -108,13 +108,13 @@ internal sealed partial class LocalService : ILocalService
     {
         if (!FileSystemService.CheckFileExists(Config.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorAsync("MelonLoader zip file not found").ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_MelonLoader_Zip_NotFound).ConfigureAwait(false);
             return false;
         }
 
         if (!await ArchiveService.ExtractZipFileAsync(Config.MelonLoaderZipPath, Config.MuseDashFolder).ConfigureAwait(true))
         {
-            await MessageBoxService.ErrorAsync("Failed to unzip MelonLoader").ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_MelonLoader_Unzip_Failed).ConfigureAwait(false);
             return false;
         }
 
@@ -142,18 +142,18 @@ internal sealed partial class LocalService : ILocalService
                 continue;
             }
 
-            await MessageBoxService.ErrorAsync($"Failed to delete {Path.GetFileName(path)}").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DeleteFile_Failed, Path.GetFileName(path)).ConfigureAwait(true);
             return false;
         }
 
         if (!FileSystemService.TryDeleteDirectory(Config.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
-            await MessageBoxService.ErrorAsync("Failed to delete MelonLoader folder").ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DeleteMelonLoaderFolder_Failed).ConfigureAwait(true);
             return false;
         }
 
         Logger.ZLogInformation($"MelonLoader uninstalled successfully");
-        await MessageBoxService.SuccessAsync("MelonLoader uninstalled successfully").ConfigureAwait(true);
+        await MessageBoxService.SuccessAsync(MessageBox_Content_Success_MelonLoader_Uninstall).ConfigureAwait(true);
         return true;
     }
 
@@ -214,7 +214,7 @@ internal sealed partial class LocalService : ILocalService
         catch (Exception ex)
         {
             Logger.ZLogCritical(ex, $"Read game information failed");
-            await MessageBoxService.ErrorAsync("Reading Game Information failed", bundlePath).ConfigureAwait(true);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_ReadGameInformation_Failed, bundlePath).ConfigureAwait(true);
             Environment.Exit(0);
         }
     }

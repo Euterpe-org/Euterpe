@@ -42,7 +42,7 @@
         <TextBlock
             Foreground="Gray"
             HorizontalAlignment="Center"
-            Text="MelonLoader installation is required to play with mods" />
+            Text="{Localize {x:Static loc:XAMLLiteral.MelonLoader_InstallationRequired}}" />
 
         <Border
             Margin="30"

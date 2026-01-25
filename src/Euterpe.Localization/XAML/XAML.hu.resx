@@ -157,4 +157,7 @@
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
     <value>Nincs beállítva</value>
   </data>
+  <data name="MelonLoader_InstallationRequired" xml:space="preserve">
+    <value>A MelonLoader telepítése szükséges a modokkal való játékhoz</value>
+  </data>
 </root>

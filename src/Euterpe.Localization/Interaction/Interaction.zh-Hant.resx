@@ -251,6 +251,61 @@ Euterpe 已經是最新版本
     <value>無法找到 Updater
 請確認你下載了整個軟體</value>
   </data>
+  <data name="MessageBox_Content_Confirm_InstallModTemplate" xml:space="preserve">
+    <value>確定要安裝 Mod 模板嗎？</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>確定要設定 MD_DIRECTORY 環境變數嗎？</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_UninstallModTemplate" xml:space="preserve">
+    <value>確定要解除安裝 Mod 模板嗎？</value>
+  </data>
+  <data name="MessageBox_Content_Error_CreateMdmFile_Failed" xml:space="preserve">
+    <value>建立 MDM 檔案失敗</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteFile_Failed" xml:space="preserve">
+    <value>刪除 {0} 失敗</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>刪除 MelonLoader 資料夾失敗</value>
+  </data>
+  <data name="MessageBox_Content_Error_ExtractMdmFile_Failed" xml:space="preserve">
+    <value>解壓 MDM 檔案失敗</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallMelonLoader_Failed" xml:space="preserve">
+    <value>安裝 MelonLoader 失敗：{0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallModTemplate_Failed" xml:space="preserve">
+    <value>安裝 Mod 模板失敗</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>解壓 MelonLoader 失敗</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>找不到 MelonLoader 壓縮檔</value>
+  </data>
+  <data name="MessageBox_Content_Error_ReadGameInformation_Failed" xml:space="preserve">
+    <value>讀取遊戲資訊失敗
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>設定 MD_DIRECTORY 環境變數失敗</value>
+  </data>
+  <data name="MessageBox_Content_Error_UninstallModTemplate_Failed" xml:space="preserve">
+    <value>解除安裝 Mod 模板失敗</value>
+  </data>
+  <data name="MessageBox_Content_Notice_NewVersionAvailable" xml:space="preserve">
+    <value>發現新版本：{0}，是否升級？</value>
+  </data>
+  <data name="MessageBox_Content_Success_CreateMdmFile" xml:space="preserve">
+    <value>MDM 檔案建立成功</value>
+  </data>
+  <data name="MessageBox_Content_Success_ExtractMdmFile" xml:space="preserve">
+    <value>MDM 檔案解壓成功</value>
+  </data>
+  <data name="MessageBox_Content_Success_MelonLoader_Uninstall" xml:space="preserve">
+    <value>MelonLoader 已成功解除安裝</value>
+  </data>
   <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
     <value>分析成功</value>
   </data>

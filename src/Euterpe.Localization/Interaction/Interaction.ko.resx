@@ -246,6 +246,61 @@ MDMC discord 또는 mdmc.moe 웹사이트의 #bot-commands 채널에 등록해�
 전체 소프트웨어를 다운로드했는지 확인하고
 바이러스 백신을 확인해주세요.</value>
   </data>
+  <data name="MessageBox_Content_Confirm_InstallModTemplate" xml:space="preserve">
+    <value>모드 템플릿을 설치하시겠습니까?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>MD_DIRECTORY 환경 변수를 설정하시겠습니까?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_UninstallModTemplate" xml:space="preserve">
+    <value>모드 템플릿을 제거하시겠습니까?</value>
+  </data>
+  <data name="MessageBox_Content_Error_CreateMdmFile_Failed" xml:space="preserve">
+    <value>MDM 파일 생성에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteFile_Failed" xml:space="preserve">
+    <value>{0} 삭제에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>MelonLoader 폴더 삭제에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_ExtractMdmFile_Failed" xml:space="preserve">
+    <value>MDM 파일 추출에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallMelonLoader_Failed" xml:space="preserve">
+    <value>MelonLoader 설치에 실패했습니다: {0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallModTemplate_Failed" xml:space="preserve">
+    <value>모드 템플릿 설치에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>MelonLoader 압축 해제에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>MelonLoader zip 파일을 찾을 수 없습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_ReadGameInformation_Failed" xml:space="preserve">
+    <value>게임 정보 읽기에 실패했습니다
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>MD_DIRECTORY 환경 변수 설정에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Error_UninstallModTemplate_Failed" xml:space="preserve">
+    <value>모드 템플릿 제거에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_Notice_NewVersionAvailable" xml:space="preserve">
+    <value>새 버전 사용 가능: {0}. 업그레이드하시겠습니까?</value>
+  </data>
+  <data name="MessageBox_Content_Success_CreateMdmFile" xml:space="preserve">
+    <value>MDM 파일이 성공적으로 생성되었습니다</value>
+  </data>
+  <data name="MessageBox_Content_Success_ExtractMdmFile" xml:space="preserve">
+    <value>MDM 파일이 성공적으로 추출되었습니다</value>
+  </data>
+  <data name="MessageBox_Content_Success_MelonLoader_Uninstall" xml:space="preserve">
+    <value>MelonLoader가 성공적으로 제거되었습니다</value>
+  </data>
   <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
     <value>분석 성공</value>
   </data>

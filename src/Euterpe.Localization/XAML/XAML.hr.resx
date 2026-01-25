@@ -127,4 +127,7 @@
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
     <value>Nije postavljeno</value>
   </data>
+  <data name="MelonLoader_InstallationRequired" xml:space="preserve">
+    <value>Instalacija MelonLoadera je potrebna za igranje s modovima</value>
+  </data>
 </root>

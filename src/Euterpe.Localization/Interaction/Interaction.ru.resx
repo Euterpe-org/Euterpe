@@ -248,6 +248,61 @@
     <value>Не удалось найти Updater.exe
 Убедитесь, что вы установили программу полностью</value>
   </data>
+  <data name="MessageBox_Content_Confirm_InstallModTemplate" xml:space="preserve">
+    <value>Установить шаблон мода?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Установить переменную окружения MD_DIRECTORY?</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_UninstallModTemplate" xml:space="preserve">
+    <value>Удалить шаблон мода?</value>
+  </data>
+  <data name="MessageBox_Content_Error_CreateMdmFile_Failed" xml:space="preserve">
+    <value>Не удалось создать файл MDM</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteFile_Failed" xml:space="preserve">
+    <value>Не удалось удалить {0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Не удалось удалить папку MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_Error_ExtractMdmFile_Failed" xml:space="preserve">
+    <value>Не удалось извлечь файл MDM</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallMelonLoader_Failed" xml:space="preserve">
+    <value>Не удалось установить MelonLoader: {0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_InstallModTemplate_Failed" xml:space="preserve">
+    <value>Не удалось установить шаблон мода</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Не удалось распаковать MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_Error_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>Файл MelonLoader.zip не найден</value>
+  </data>
+  <data name="MessageBox_Content_Error_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Не удалось прочитать информацию об игре
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_Error_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Не удалось установить переменную окружения MD_DIRECTORY</value>
+  </data>
+  <data name="MessageBox_Content_Error_UninstallModTemplate_Failed" xml:space="preserve">
+    <value>Не удалось удалить шаблон мода</value>
+  </data>
+  <data name="MessageBox_Content_Notice_NewVersionAvailable" xml:space="preserve">
+    <value>Доступна новая версия: {0}. Обновить?</value>
+  </data>
+  <data name="MessageBox_Content_Success_CreateMdmFile" xml:space="preserve">
+    <value>Файлы MDM успешно созданы</value>
+  </data>
+  <data name="MessageBox_Content_Success_ExtractMdmFile" xml:space="preserve">
+    <value>Файлы MDM успешно извлечены</value>
+  </data>
+  <data name="MessageBox_Content_Success_MelonLoader_Uninstall" xml:space="preserve">
+    <value>MelonLoader успешно удален</value>
+  </data>
   <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
     <value>Успешный анализ</value>
   </data>

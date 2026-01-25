@@ -139,4 +139,7 @@
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
     <value>未設定</value>
   </data>
+  <data name="MelonLoader_InstallationRequired" xml:space="preserve">
+    <value>Modを使用するにはMelonLoaderのインストールが必要です</value>
+  </data>
 </root>

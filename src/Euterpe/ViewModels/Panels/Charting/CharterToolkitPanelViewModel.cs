@@ -39,11 +39,11 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
             catch (Exception ex)
             {
                 Logger.ZLogError(ex, $"Failed to create MDM file {fileName} from folder: {folder.Name}");
-                await MessageBoxService.ErrorOverlayAsync("Failed to create MDM file").ConfigureAwait(false);
+                await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_CreateMdmFile_Failed).ConfigureAwait(false);
             }
         }
 
-        await MessageBoxService.SuccessOverlayAsync("MDM files created successfully").ConfigureAwait(false);
+        await MessageBoxService.SuccessOverlayAsync(MessageBox_Content_Success_CreateMdmFile).ConfigureAwait(false);
     }
 
     [RelayCommand]
@@ -79,11 +79,11 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
             catch (Exception ex)
             {
                 Logger.ZLogError(ex, $"Failed to extract MDM file {file.Name} to folder: {folderName}");
-                await MessageBoxService.ErrorOverlayAsync("Failed to extract MDM file").ConfigureAwait(false);
+                await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_ExtractMdmFile_Failed).ConfigureAwait(false);
             }
         }
 
-        await MessageBoxService.SuccessOverlayAsync("MDM files extracted successfully").ConfigureAwait(false);
+        await MessageBoxService.SuccessOverlayAsync(MessageBox_Content_Success_ExtractMdmFile).ConfigureAwait(false);
     }
 
     #region Injections

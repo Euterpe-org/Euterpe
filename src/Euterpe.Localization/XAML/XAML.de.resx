@@ -127,4 +127,7 @@
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
     <value>Nicht festgelegt</value>
   </data>
+  <data name="MelonLoader_InstallationRequired" xml:space="preserve">
+    <value>MelonLoader-Installation ist erforderlich, um mit Mods zu spielen</value>
+  </data>
 </root>
