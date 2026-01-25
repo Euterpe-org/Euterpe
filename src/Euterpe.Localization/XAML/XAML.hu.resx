@@ -55,6 +55,45 @@
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
   </data>
+  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
+    <value>Szükséges a mod fejlesztéshez</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
+    <value>.NET 10 SDK</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
+    <value>Lehetővé teszi a build eszközöknek a játékfájlok megtalálását</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
+    <value>Környezeti változó beállítása</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
+    <value>Fiók létrehozása modok feltöltéséhez és kezeléséhez</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
+    <value>Euterpe Mod Hub</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
+    <value>Gyors mod projekt létrehozásához</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
+    <value>Mod sablon Nuget</value>
+  </data>
+  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
+    <value>Fejlesztői környezet</value>
+  </data>
+  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
+    <value>Ajánlott IDE-k</value>
+  </data>
+  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
+    <value>Mod beküldése</value>
+  </data>
+  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
+    <value>Nincs telepítve</value>
+  </data>
+  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
+    <value>Nincs beállítva</value>
+  </data>
   <data name="ModFilterType_All" xml:space="preserve">
     <value>Mind</value>
   </data>
@@ -117,44 +156,5 @@
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
-  </data>
-  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
-    <value>Fejlesztői környezet</value>
-  </data>
-  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
-    <value>Mod beküldése</value>
-  </data>
-  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
-    <value>Ajánlott IDE-k</value>
-  </data>
-  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
-    <value>.NET 8 SDK</value>
-  </data>
-  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
-    <value>Szükséges a mod fejlesztéshez</value>
-  </data>
-  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Mod sablon Nuget</value>
-  </data>
-  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
-    <value>Gyors mod projekt létrehozásához</value>
-  </data>
-  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
-    <value>Környezeti változó beállítása</value>
-  </data>
-  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
-    <value>Lehetővé teszi a build eszközöknek a játékfájlok megtalálását</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe Mod Hub</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
-    <value>Fiók létrehozása modok feltöltéséhez és kezeléséhez</value>
-  </data>
-  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
-    <value>Nincs telepítve</value>
-  </data>
-  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
-    <value>Nincs beállítva</value>
   </data>
 </root>

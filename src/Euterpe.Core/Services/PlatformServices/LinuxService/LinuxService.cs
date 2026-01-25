@@ -197,7 +197,7 @@ internal sealed partial class LinuxService : IPlatformService
     public bool CheckPathEnvironmentVariableSet()
     {
         var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
-        return !string.IsNullOrEmpty(envValue) && envValue == Config.MuseDashFolder;
+        return !envValue.IsNullOrEmpty() && envValue == Config.MuseDashFolder;
     }
 
     public bool SetPathEnvironmentVariable()

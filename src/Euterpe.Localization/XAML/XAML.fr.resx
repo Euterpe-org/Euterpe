@@ -55,6 +55,45 @@
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
   </data>
+  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
+    <value>Requis pour le développement de mods</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
+    <value>.NET 10 SDK</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
+    <value>Permet aux outils de build de localiser les fichiers du jeu</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
+    <value>Définir la variable d'environnement</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
+    <value>Créer un compte pour télécharger et gérer vos mods</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
+    <value>Euterpe Mod Hub</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
+    <value>Pour créer rapidement un projet de mod</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
+    <value>Modèle de Mod Nuget</value>
+  </data>
+  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
+    <value>Environnement de développement</value>
+  </data>
+  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
+    <value>IDE recommandés</value>
+  </data>
+  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
+    <value>Soumettre un mod</value>
+  </data>
+  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
+    <value>Non installé</value>
+  </data>
+  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
+    <value>Non défini</value>
+  </data>
   <data name="ModFilterType_All" xml:space="preserve">
     <value>All</value>
   </data>
@@ -87,44 +126,5 @@
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
-  </data>
-  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
-    <value>Environnement de développement</value>
-  </data>
-  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
-    <value>Soumettre un mod</value>
-  </data>
-  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
-    <value>IDE recommandés</value>
-  </data>
-  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
-    <value>.NET 8 SDK</value>
-  </data>
-  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
-    <value>Requis pour le développement de mods</value>
-  </data>
-  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Modèle de Mod Nuget</value>
-  </data>
-  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
-    <value>Pour créer rapidement un projet de mod</value>
-  </data>
-  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
-    <value>Définir la variable d'environnement</value>
-  </data>
-  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
-    <value>Permet aux outils de build de localiser les fichiers du jeu</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe Mod Hub</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
-    <value>Créer un compte pour télécharger et gérer vos mods</value>
-  </data>
-  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
-    <value>Non installé</value>
-  </data>
-  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
-    <value>Non défini</value>
   </data>
 </root>
