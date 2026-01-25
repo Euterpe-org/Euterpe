@@ -223,11 +223,31 @@ internal sealed partial class WindowsService : IPlatformService
         Logger.ZLogInformation($"Reveal file: {filePath}");
     }
 
+    public bool CheckPathEnvironmentVariableSet()
+    {
+        try
+        {
+            var userValue = Environment.GetEnvironmentVariable("MD_DIRECTORY", EnvironmentVariableTarget.User);
+            if (userValue == Config.MuseDashFolder)
+            {
+                return true;
+            }
+
+            var machineValue = Environment.GetEnvironmentVariable("MD_DIRECTORY", EnvironmentVariableTarget.Machine);
+            return machineValue == Config.MuseDashFolder;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to read MD_DIRECTORY environment variable");
+            return false;
+        }
+    }
+
     public bool SetPathEnvironmentVariable()
     {
         try
         {
-            if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Config.MuseDashFolder)
+            if (CheckPathEnvironmentVariableSet())
             {
                 Logger.ZLogInformation($"MD_DIRECTORY environment variable is already set to: {Config.MuseDashFolder}");
                 return true;
