@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Modding"
     x:Class="Euterpe.Views.Panels.Modding.ModDevelopPanel"
@@ -31,7 +32,7 @@
 
             <!--  Development Environment Section  -->
             <euterpe:ContentListItem
-                Title="Development Environment">
+                Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_DevelopmentEnvironment}}">
                 <StackPanel
                     Margin="5,0,10,0"
                     Spacing="10">
@@ -55,7 +56,7 @@
                                     Orientation="Vertical">
                                     <TextBlock
                                         Classes="CardTitle"
-                                        Text=".NET 8 SDK">
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_DotNetSDK_Title}}">
                                         <TextBlock.Foreground>
                                             <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                                 <GradientStop Offset="0" Color="#AA7AE0" />
@@ -65,7 +66,7 @@
                                     </TextBlock>
                                     <TextBlock
                                         Classes="CardDesc"
-                                        Text="Required for mod development" />
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_DotNetSDK_Description}}" />
                                 </StackPanel>
 
                                 <!--  Installation status indicator  -->
@@ -79,7 +80,7 @@
                                     <TextBlock
                                         Classes="CardDesc"
                                         IsVisible="{Binding !DotNetSdkInstalled, Mode=OneWay}"
-                                        Text="Not Installed"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Status_NotInstalled}}"
                                         VerticalAlignment="Center" />
                                     <PathIcon
                                         Data="{StaticResource SemiIconVerify}"
@@ -114,7 +115,7 @@
                                         Orientation="Vertical">
                                         <TextBlock
                                             Classes="CardTitle"
-                                            Text="Mod Template Nuget">
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_ModTemplate_Title}}">
                                             <TextBlock.Foreground>
                                                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                                     <GradientStop Offset="0" Color="#7F7FD5" />
@@ -124,7 +125,7 @@
                                         </TextBlock>
                                         <TextBlock
                                             Classes="CardDesc"
-                                            Text="For quick mod project creation" />
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_ModTemplate_Description}}" />
                                     </StackPanel>
 
                                     <!--  Installation status indicator  -->
@@ -138,7 +139,7 @@
                                         <TextBlock
                                             Classes="CardDesc"
                                             IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
-                                            Text="Not Installed"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Status_NotInstalled}}"
                                             VerticalAlignment="Center" />
                                         <PathIcon
                                             Data="{StaticResource SemiIconVerify}"
@@ -170,7 +171,7 @@
                                         Orientation="Vertical">
                                         <TextBlock
                                             Classes="CardTitle"
-                                            Text="Set Environment Variable">
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EnvVariable_Title}}">
                                             <TextBlock.Foreground>
                                                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                                     <GradientStop Offset="0" Color="#059669" />
@@ -180,7 +181,7 @@
                                         </TextBlock>
                                         <TextBlock
                                             Classes="CardDesc"
-                                            Text="Enables build tools to locate game files" />
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EnvVariable_Description}}" />
                                     </StackPanel>
 
                                     <!--  Status indicator  -->
@@ -194,7 +195,7 @@
                                         <TextBlock
                                             Classes="CardDesc"
                                             IsVisible="{Binding !EnvVariableSet, Mode=OneWay}"
-                                            Text="Not Set"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Status_NotSet}}"
                                             VerticalAlignment="Center" />
                                         <PathIcon
                                             Data="{StaticResource SemiIconVerify}"
@@ -211,7 +212,7 @@
 
             <!--  Mod Submission Section  -->
             <euterpe:ContentListItem
-                Title="Submit Your Mod">
+                Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_SubmitMod}}">
                 <Button
                     Classes="Transparent Card"
                     CommandParameter="https://euterpe-org.com"
@@ -239,7 +240,7 @@
                                 Grid.Column="1">
                                 <TextBlock
                                     Classes="CardTitle"
-                                    Text="Euterpe Website">
+                                    Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EuterpeHub_Title}}">
                                     <TextBlock.Foreground>
                                         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                             <GradientStop Offset="0" Color="#FF9966" />
@@ -249,7 +250,7 @@
                                 </TextBlock>
                                 <TextBlock
                                     Classes="CardDesc"
-                                    Text="Manage your mods on euterpe official website" />
+                                    Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EuterpeHub_Description}}" />
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -258,7 +259,7 @@
 
             <!--  Recommended IDEs Section  -->
             <euterpe:ContentListItem
-                Title="Recommended IDEs">
+                Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_RecommendedIDEs}}">
 
                 <!--  3-column grid for IDE options  -->
                 <Grid
