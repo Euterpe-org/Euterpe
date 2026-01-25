@@ -21,6 +21,7 @@ internal sealed class MacOsService : IPlatformService
     public Task<bool> InstallDotNetRuntimeAsync() => throw new NotSupportedException();
     public Task<bool> InstallDotNetSdkAsync() => throw new NotSupportedException();
     public void RevealFile(string filePath) => throw new NotSupportedException();
+    public bool CheckPathEnvironmentVariableSet() => throw new NotSupportedException();
     public bool SetPathEnvironmentVariable() => throw new NotSupportedException();
     public Task OpenFolderAsync(string folderPath) => throw new NotSupportedException();
     public Task OpenFileAsync(string filePath) => throw new NotSupportedException();

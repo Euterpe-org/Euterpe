@@ -92,6 +92,12 @@ public interface IPlatformService
             .ExecuteAsync();
 
     /// <summary>
+    ///     Check if MD_DIRECTORY environment variable exists
+    /// </summary>
+    /// <returns></returns>
+    bool CheckPathEnvironmentVariableSet();
+
+    /// <summary>
     ///     Set MD_DIRECTORY environment variable
     /// </summary>
     /// <returns></returns>
