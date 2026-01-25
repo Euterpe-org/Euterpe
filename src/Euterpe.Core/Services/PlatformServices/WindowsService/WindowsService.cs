@@ -225,34 +225,14 @@ internal sealed partial class WindowsService : IPlatformService
 
     public bool CheckPathEnvironmentVariableSet()
     {
-        try
-        {
-            var userValue = Environment.GetEnvironmentVariable("MD_DIRECTORY", EnvironmentVariableTarget.User);
-            if (userValue == Config.MuseDashFolder)
-            {
-                return true;
-            }
-
-            var machineValue = Environment.GetEnvironmentVariable("MD_DIRECTORY", EnvironmentVariableTarget.Machine);
-            return machineValue == Config.MuseDashFolder;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to read MD_DIRECTORY environment variable");
-            return false;
-        }
+        var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
+        return !envValue.IsNullOrEmpty() && envValue == Config.MuseDashFolder;
     }
 
     public bool SetPathEnvironmentVariable()
     {
         try
         {
-            if (CheckPathEnvironmentVariableSet())
-            {
-                Logger.ZLogInformation($"MD_DIRECTORY environment variable is already set to: {Config.MuseDashFolder}");
-                return true;
-            }
-
             Environment.SetEnvironmentVariable("MD_DIRECTORY", Config.MuseDashFolder, EnvironmentVariableTarget.User);
 
             Logger.ZLogInformation($"Set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
