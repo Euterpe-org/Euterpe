@@ -129,7 +129,7 @@ Are you online?
   </data>
   <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
     <value>Update check successful
-You are using the latest version of Muse Dash Mod Tools</value>
+You are using the latest version of Euterpe</value>
   </data>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>Log analysis completed, no obvious errors are found in your log file
@@ -140,7 +140,7 @@ If you still have issues please go to troubleshoot channel</value>
 </value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>A newer version of Muse Dash Mod Tools ({0}) is released
+    <value>A newer version of Euterpe ({0}) is released
 
 Do you want to install it now?
 

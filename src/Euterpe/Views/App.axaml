@@ -20,7 +20,7 @@
         <TrayIcons>
             <TrayIcon
                 Icon="/Assets/Icon.ico"
-                ToolTipText="Muse Dash Mod Tools">
+                ToolTipText="Euterpe">
                 <TrayIcon.Menu>
                     <NativeMenu>
                         <NativeMenuItem

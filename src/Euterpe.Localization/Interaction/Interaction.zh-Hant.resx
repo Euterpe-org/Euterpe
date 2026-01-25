@@ -135,7 +135,7 @@
   </data>
   <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
     <value>檢查更新成功
-Muse Dash Mod Tools 已經是最新版本
+Euterpe 已經是最新版本
 </value>
   </data>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
@@ -151,7 +151,7 @@ Muse Dash Mod Tools 已經是最新版本
 </value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>有新版本的 Muse Dash Mod Tools （{0}）已經發布
+    <value>有新版本的 Euterpe（{0}）已經發布
 
 你想要現在就安裝嗎
 
