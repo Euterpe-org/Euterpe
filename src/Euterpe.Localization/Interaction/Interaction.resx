@@ -76,7 +76,7 @@ Try to manually delete</value>
 </value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>A newer version of Muse Dash Mod Tools ({0}) is released
+    <value>A newer version of Euterpe ({0}) is released
 
 Do you want to install it now?
 

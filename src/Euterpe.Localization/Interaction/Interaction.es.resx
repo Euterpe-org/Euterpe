@@ -135,7 +135,7 @@ Este programa se encarga de activar los mods
   </data>
   <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
     <value>Comprobación de parche finalizada
-Usas la última versión de Muse Dash Mod Tools</value>
+Usas la última versión de Euterpe</value>
   </data>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>No se pudieron encontrar errores obvios
@@ -151,7 +151,7 @@ Usas la última versión de Muse Dash Mod Tools</value>
 </value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>¡Hay una nueva versión de Muse Dash Mod Tools({0})!
+    <value>¡Hay una nueva versión de Euterpe ({0})!
 
 ¿Te gustaría poder instalarlo ahora?
 

@@ -135,7 +135,7 @@
   </data>
   <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
     <value>Успешная проверка обновлений
-Вы используете последнюю версию Muse Dash Mod Tools</value>
+Вы используете последнюю версию Euterpe</value>
   </data>
   <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
     <value>Анализ логов завершен, ошибок не найдено
@@ -151,7 +151,7 @@
 </value>
   </data>
   <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>Найдена новая версия Muse Dash Mod Tools ({0})
+    <value>Найдена новая версия Euterpe ({0})
 
 Хотите установить её?
 
