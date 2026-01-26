@@ -14,13 +14,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
-      <value>选择谱面文件</value>
+    <value>选择谱面文件</value>
   </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
-      <value>选择 Steam 可执行文件</value>
+    <value>选择 Steam 可执行文件</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
-      <value>所有文件</value>
+    <value>所有文件</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>选择缓存文件夹</value>
@@ -44,7 +44,7 @@
     <value>请选择 Muse Dash 文件夹</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
-      <value>请选择 Steam 可执行文件</value>
+    <value>请选择 Steam 可执行文件</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>请选择 Steam 文件夹</value>
@@ -58,17 +58,17 @@
     <value>未找到 .Net 6 Runtime
 点击确定安装</value>
   </data>
-  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
-      <value>你确定要安装 .Net SDK？</value>
-  </data>
-  <data name="MessageBox_Content_Error_DotNetRuntime_Install_Failed" xml:space="preserve">
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
     <value>无法安装 .Net 6 Runtime</value>
   </data>
-  <data name="MessageBox_Content_Error_DotNetSDK_Install_Failed" xml:space="preserve">
-      <value>无法安装 .Net 8 SDK</value>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>你确定要安装 .Net SDK？</value>
   </data>
-  <data name="MessageBox_Content_Error_InvalidPath" xml:space="preserve">
-      <value>你选择的路径无效，请再次选择</value>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>无法安装 .Net 8 SDK</value>
+  </data>
+  <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
+    <value>你选择的路径无效，请再次选择</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>无法删除 {0} 下的 MelonLoader.zip
@@ -77,17 +77,6 @@
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader 已经成功安装
 </value>
-  </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>有新版本的 Euterpe （{0}）已经发布
-
-你想要现在就安装吗
-
-发布标题：
-{1}
-
-发布内容：
-{2}</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>无可用的更新</value>

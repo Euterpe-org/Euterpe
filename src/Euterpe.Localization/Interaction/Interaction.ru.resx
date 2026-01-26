@@ -22,25 +22,11 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>Нет</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>Нет, больше не спрашивать</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Да</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>Да, больше не спрашивать</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Не удалось включить/выключить мод
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-    <value>Не удалось включить/выключить мод. Запущена ли игра?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-    <value>Не удалось включить/выключить мод. Недостаточно прав
 {0}</value>
   </data>
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
@@ -80,10 +66,6 @@
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>Включить библиотеку {1} мода {0}?</value>
-  </data>
-  <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
-    <value>Не удалось найти MuseDash.exe
-Убедитесь, что Вы выбрали правильную папку</value>
   </data>
   <data name="MessageBox_Content_GamePathError" xml:space="preserve">
     <value>Ваш путь к игре не содержит "steamapps\common\Muse Dash\musedash.exe"
@@ -137,10 +119,6 @@
     <value>Успешная проверка обновлений
 Вы используете последнюю версию Euterpe</value>
   </data>
-  <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
-    <value>Анализ логов завершен, ошибок не найдено
-Если у вас есть проблемы, то перейдите в канал устранения неполадок</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>Невозможно удалить MelonLoader.zip в
 {0}
@@ -149,17 +127,6 @@
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader был успешно установлен
 </value>
-  </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>Найдена новая версия Euterpe ({0})
-
-Хотите установить её?
-
-Имя релиза:
-{1}
-
-Инфо релиза:
-{2}</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>В логах отсутствует путь к приложению</value>
@@ -247,9 +214,6 @@
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>Не удалось найти Updater.exe
 Убедитесь, что вы установили программу полностью</value>
-  </data>
-  <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
-    <value>Успешный анализ</value>
   </data>
   <data name="Title_Notice" xml:space="preserve">
     <value>Уведомление</value>
