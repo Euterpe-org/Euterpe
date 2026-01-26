@@ -3,7 +3,7 @@ namespace Euterpe.Generators;
 [Generator(LanguageNames.CSharp)]
 public sealed class PageNavigateGenerator : IncrementalGeneratorBase
 {
-    protected override string ExpectedRootNamespace => MuseDashModToolsNamespace;
+    protected override string ExpectedRootNamespace => EuterpeNamespace;
 
     protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {

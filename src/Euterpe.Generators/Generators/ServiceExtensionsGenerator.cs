@@ -3,7 +3,7 @@
 [Generator(LanguageNames.CSharp)]
 public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
 {
-    protected override string ExpectedRootNamespace => MuseDashModToolsNamespace;
+    protected override string ExpectedRootNamespace => EuterpeNamespace;
 
     protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {

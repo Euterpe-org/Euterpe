@@ -15,7 +15,7 @@ body:
     id: checking2
     attributes:
       label: There are no similar issues on the issue list
-      description: https://github.com/MDModsDev/MuseDashModToolsUI/issues
+      description: https://github.com/Euterpe-org/Euterpe/issues
       options:
         - label: "Yes"
           required: true
@@ -46,7 +46,7 @@ body:
     attributes:
       label: Screenshots (Optional)
       placeholder: |-
-        Clicking on this box and drag your screenshots or videos here to upload. 
+        Clicking on this box and drag your screenshots or videos here to upload.
         Make sure the screenshots or videos are displayed normally after submitting the issue
     validations:
       required: false
@@ -56,7 +56,7 @@ body:
     attributes:
       label: Logs
       placeholder: |-
-        1. Go to Logs folder under the application folder (usually MuseDashModToolsUI\Logs) and choose the bottom file.
+        1. Go to Logs folder under the application folder (usually Euterpe\Logs) and choose the bottom file.
         2. If the application crashed, it should automatically open the folder and select the log file
         3. Drag and drop the log file (*.log) here
     validations:
