@@ -100,11 +100,12 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         }
 
         Logger.ZLogInformation($"Setting MD_DIRECTORY environment variable...");
+
         var success = PlatformService.SetPathEnvironmentVariable();
         if (success)
         {
-            EnvVariableSet = true;
             Logger.ZLogInformation($"MD_DIRECTORY environment variable set successfully");
+            EnvVariableSet = true;
         }
         else
         {
