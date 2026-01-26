@@ -24,7 +24,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task InstallDotNetSdkAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_NoticeConfirm_DotNetSDK_Install).ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_DotNetSDK_Install).ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;

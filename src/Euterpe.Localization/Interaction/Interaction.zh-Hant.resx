@@ -47,6 +47,9 @@
     <value>檢查更新失敗
 是否已連網?</value>
   </data>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>請選擇 Muse Dash 文件夾</value>
+  </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>檢測到的 Muse Dash 文件夾為 {0}
 是否為正確的遊戲文件夾?</value>
@@ -189,9 +192,6 @@ Euterpe 已經是最新版本
   </data>
   <data name="MessageBox_Content_NoMelonLoaderVersion" xml:space="preserve">
     <value>無法從日誌中找到 MelonLoader的版本</value>
-  </data>
-  <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-    <value>請選擇 Muse Dash 文件夾</value>
   </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">
     <value>你儲存的 Muse Dash 文件夾是空的

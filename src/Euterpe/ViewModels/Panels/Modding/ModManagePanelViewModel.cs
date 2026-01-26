@@ -79,7 +79,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         Logger.ZLogInformation($"Installing mod: {SelectedMod.Name}");
         await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully installed");
-        NotificationService.SuccessLight(Notification_Content_Success_Mod_Install, SelectedMod.Name);
+        NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, SelectedMod.Name);
     }
 
     [RelayCommand]
@@ -89,7 +89,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         File.Delete(Path.Combine(Config.ModsFolder, SelectedMod.LocalFileName));
         await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully updated to version {SelectedMod.Version}");
-        NotificationService.SuccessLight(Notification_Content_Success_Mod_Update, SelectedMod.Name);
+        NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, SelectedMod.Name);
     }
 
     [RelayCommand]
@@ -99,7 +99,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         File.Delete(Path.Combine(Config.ModsFolder, SelectedMod.LocalFileName));
         await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully reinstalled");
-        NotificationService.SuccessLight(Notification_Content_SuccessMod_Reinstall, SelectedMod.Name);
+        NotificationService.SuccessLight(Notification_Content_Mod_Reinstall_Success, SelectedMod.Name);
     }
 
     [RelayCommand]
@@ -108,7 +108,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         Logger.ZLogInformation($"Uninstalling mod: {SelectedMod.Name}");
         await ModManageService.UninstallModAsync(SelectedMod).ConfigureAwait(true);
         Logger.ZLogInformation($"Mod {SelectedMod.Name} successfully uninstalled");
-        NotificationService.SuccessLight(Notification_Content_Success_Mod_Uninstall, SelectedMod.Name);
+        NotificationService.SuccessLight(Notification_Content_Mod_Uninstall_Success, SelectedMod.Name);
     }
 
     [RelayCommand]

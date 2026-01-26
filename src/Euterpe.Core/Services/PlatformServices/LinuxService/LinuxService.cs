@@ -203,7 +203,7 @@ internal sealed partial class LinuxService : IPlatformService
     public bool SetPathEnvironmentVariable()
     {
         Logger.ZLogInformation($"Ask user to set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
-        MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_Notice_SetPathEnvironment_Linux, Config.MuseDashFolder).ConfigureAwait(false);
+        MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, Config.MuseDashFolder).ConfigureAwait(false);
         return true;
     }
 

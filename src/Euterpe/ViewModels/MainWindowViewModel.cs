@@ -35,7 +35,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
             return;
         }
 
-        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_Notice_DotNetRuntime_Install).ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_DotNetRuntime_Install).ConfigureAwait(true);
         if (result is not MessageBoxResult.OK)
         {
             return;
