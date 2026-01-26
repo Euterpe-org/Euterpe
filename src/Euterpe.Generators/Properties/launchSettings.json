@@ -1,17 +1,17 @@
 {
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "DebugMuseDashModToolsSourceGenerator": {
+    "DebugEuterpeSourceGenerator": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "../MuseDashModTools/MuseDashModTools.csproj"
+      "targetProject": "../Euterpe/Euterpe.csproj"
     },
-    "DebugMuseDashModToolsCoreSourceGenerator": {
+    "DebugEuterpeCoreSourceGenerator": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "../MuseDashModTools.Core/MuseDashModTools.Core.csproj"
+      "targetProject": "../Euterpe.Core/Euterpe.Core.csproj"
     },
-    "DebugMuseDashModToolsLocalizationSourceGenerator": {
+    "DebugEuterpeLocalizationSourceGenerator": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "../MuseDashModTools.Localization/MuseDashModTools.Localization.csproj"
+      "targetProject": "../Euterpe.Localization/Euterpe.Localization.csproj"
     }
   }
 }
