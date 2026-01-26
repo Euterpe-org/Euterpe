@@ -125,11 +125,8 @@ Bastante útil para saltarte los pasos de desbloquearlos</value>
   <data name="ModManager" xml:space="preserve">
     <value>Un mod que te permite activar/desactivar mods mientras esta in-game.</value>
   </data>
-  <data name="Muse Dash Mirror" xml:space="preserve">
+  <data name="MuseDashMirror" xml:space="preserve">
     <value>Una librería que permite acceder a Datos del Jugador, Componentes de Batalla y Crear elementos de Interfaz.</value>
-  </data>
-  <data name="MuseDashModTools" xml:space="preserve">
-    <value>Automáticamente analiza todos los mods y detecta posibles actualizaciones de cada una.</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
     <value>Evita que la Auto Pausa de Muse Dash sea active al cambiar de pestaña. </value>
