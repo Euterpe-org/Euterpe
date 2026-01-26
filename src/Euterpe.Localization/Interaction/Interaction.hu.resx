@@ -22,25 +22,11 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>Nem</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>Nem és ne kérdezd újra</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Igen</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>Igen és ne kérdezd újra</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod be-/kikapcsolás sikertelen
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-    <value>Mod be-/kikapcsolás sikertelen. Fut a játék?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-    <value>Mod be-/kikapcsolás sikertelen. Nincs jogosultság.
 {0}</value>
   </data>
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
@@ -80,10 +66,6 @@ Biztos hogy ki akarod kapcsolni?</value>
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>Szeretnéd bekapcsolni {0} függőségét, {1}-et?</value>
-  </data>
-  <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
-    <value>MuseDash.exe érvényesítése sikertelen
-Ellenőrizd, hogy a megfelelő mappát választottad</value>
   </data>
   <data name="MessageBox_Content_GamePathError" xml:space="preserve">
     <value>A játék útvonalad gyanús!
@@ -137,10 +119,6 @@ Online vagy?
     <value>Ellenőrzés sikeres
 Euterpe legfrissebb verzióját használod</value>
   </data>
-  <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
-    <value>A log elemzése befejeződött, nincsen benne egyértelmű hiba
-Ha mégis van problémád, fordulj a "Hibakezelés"-hez</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>Nem sikerült kitörölni MelonLoader.zip-et itt:
 {0}
@@ -149,17 +127,6 @@ Probáld meg manuálisan</value>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader sikeresen települt
 </value>
-  </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>Egy újabb verzió ({0}) elérhető
-
-Szeretnéd telepíteni?
-
-Cím:
-{1}
-
-Infó:
-{2}</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>Az útvonalad nincsen a log-ban</value>
@@ -247,9 +214,6 @@ Probáld meg manuálisan</value>
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>Az Updater nem található
 Ellenőrizd a telepítésed és az antivírusod</value>
-  </data>
-  <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
-    <value>Elemzés sikeres</value>
   </data>
   <data name="Title_Notice" xml:space="preserve">
     <value>Figyelmeztetés</value>

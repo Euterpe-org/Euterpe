@@ -44,7 +44,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
         if (!success)
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DotNetRuntime_Install_Failed).ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntime_Install_Failed).ConfigureAwait(false);
         }
     }
 

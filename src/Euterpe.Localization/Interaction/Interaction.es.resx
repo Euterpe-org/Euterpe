@@ -22,25 +22,11 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>No y no preguntes de nuevo</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>Si y no preguntes de nuevo</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>No se pudo activar/desactivar el mod.
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-    <value>No se pudo activar/desactivar el mod. ¿Estás jugando Muse Dash?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-    <value>No se pudo activar/desactivar el mod. ¡Permisos insuficientes!
 {0}</value>
   </data>
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
@@ -80,10 +66,6 @@
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>¿Quieres activar el mod {1}? Es una dependencia del mod {0}</value>
-  </data>
-  <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
-    <value>MuseDash.exe no se pudo verificar
-Asegurate de seleccionar la carpeta correcta</value>
   </data>
   <data name="MessageBox_Content_GamePathError" xml:space="preserve">
     <value>Se detectó a Muse Dash fuera de "steamapps\common\Muse Dash"
@@ -137,10 +119,6 @@ Este programa se encarga de activar los mods
     <value>Comprobación de parche finalizada
 Usas la última versión de Euterpe</value>
   </data>
-  <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
-    <value>No se pudieron encontrar errores obvios
-¡Si hay alguno sería útil que lo avises en el Discord de MDMC!</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>No se pudo eliminar MelonLoader.zip en
 {0}
@@ -149,17 +127,6 @@ Usas la última versión de Euterpe</value>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>¡MelonLoader se ha instalado!
 </value>
-  </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>¡Hay una nueva versión de Euterpe ({0})!
-
-¿Te gustaría poder instalarlo ahora?
-
-Título del parche:
-{1}
-
-Notas del parche:
-{2}</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>¡El Log no ha registrado donde tienes instalado el juego!</value>
@@ -248,9 +215,6 @@ Error: {1}
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>¡No se pudo encontrar el actualizador del programa!
 Asegúrate de haber instalado el programa de forma correcta</value>
-  </data>
-  <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
-    <value>Análisis completado</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Error</value>

@@ -22,25 +22,11 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>否</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>否，並且不在詢問</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>是</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>是，並且不再詢問</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod 啟用/禁用失敗
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-    <value>Mod 啟用/禁用失敗。遊戲是否正執行?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-    <value>Mod 啟用/禁用失敗。沒有權限
 {0}</value>
   </data>
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
@@ -83,10 +69,6 @@
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>你想要啟用 {0} 的依賴 Mod {1} 嗎?</value>
-  </data>
-  <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
-    <value>驗證Muse Dash.exe失敗
-請確認你選擇了正確的資料夾</value>
   </data>
   <data name="MessageBox_Content_GamePathError" xml:space="preserve">
     <value>你的遊戲路徑沒有包含 ''steamapps\common\Muse Dash\musedash.exe''
@@ -141,10 +123,6 @@
 Euterpe 已經是最新版本
 </value>
   </data>
-  <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
-    <value>日誌分析完成, 尚未從日誌中發現明顯錯誤
-如果扔然有問題請至 trouble shoot 頻道詢問</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>無法刪除 {0} 下的 MelonLoader.zip
 請嘗試手動刪除</value>
@@ -152,17 +130,6 @@ Euterpe 已經是最新版本
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader 已經成功安裝
 </value>
-  </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>有新版本的 Euterpe（{0}）已經發布
-
-你想要現在就安裝嗎
-
-發布標題：
-{1}
-
-發布内容：
-{2}</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>你的日誌中沒有包含應用路徑</value>
@@ -250,9 +217,6 @@ Euterpe 已經是最新版本
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>無法找到 Updater
 請確認你下載了整個軟體</value>
-  </data>
-  <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
-    <value>分析成功</value>
   </data>
   <data name="Title_Notice" xml:space="preserve">
     <value>注意</value>

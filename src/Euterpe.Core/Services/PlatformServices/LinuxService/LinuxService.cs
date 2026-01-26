@@ -132,7 +132,7 @@ internal sealed partial class LinuxService : IPlatformService
     {
         if (!await CheckProtontricksInstalledAsync().ConfigureAwait(true))
         {
-            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_Protontricks_Not_Installed).ConfigureAwait(false);
+            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Not_Installed).ConfigureAwait(false);
             return false;
         }
 
@@ -164,7 +164,7 @@ internal sealed partial class LinuxService : IPlatformService
     {
         if (!await ConfigureWinePrefixAsync().ConfigureAwait(true))
         {
-            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Error_Protontricks_Wineprefix_Failed).ConfigureAwait(false);
+            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Wineprefix_Failed).ConfigureAwait(false);
             return false;
         }
 
@@ -203,7 +203,8 @@ internal sealed partial class LinuxService : IPlatformService
     public bool SetPathEnvironmentVariable()
     {
         Logger.ZLogInformation($"Ask user to set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
-        MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, Config.MuseDashFolder).ConfigureAwait(false);
+        MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, Config.MuseDashFolder)
+            .ConfigureAwait(false);
         return true;
     }
 

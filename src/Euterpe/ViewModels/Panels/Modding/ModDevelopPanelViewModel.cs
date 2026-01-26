@@ -1,4 +1,4 @@
-﻿namespace Euterpe.ViewModels.Panels.Modding;
+namespace Euterpe.ViewModels.Panels.Modding;
 
 public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 {
@@ -34,7 +34,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         var success = await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(true);
         if (!success)
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DotNetSDK_Install_Failed).ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDK_Install_Failed).ConfigureAwait(false);
             return;
         }
 
@@ -48,7 +48,8 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
     private async Task InstallModTemplateAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to install the Mod Template?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to install the Mod Template?")
+            .ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;
@@ -70,7 +71,8 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
     private async Task UninstallModTemplateAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to uninstall the Mod Template?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to uninstall the Mod Template?")
+            .ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;
@@ -93,7 +95,8 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task SetEnvVariableAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to set MD_DIRECTORY environment variable?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to set MD_DIRECTORY environment variable?")
+            .ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;
