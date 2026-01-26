@@ -235,7 +235,7 @@ internal sealed partial class WindowsService : IPlatformService
         {
             Logger.ZLogInformation($"Set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
             Environment.SetEnvironmentVariable("MD_DIRECTORY", Config.MuseDashFolder, EnvironmentVariableTarget.User);
-            MessageBoxService.SuccessOverlayAsync(MessageBox_Content_Notice_SetPathEnvironment_Windows, Config.MuseDashFolder).ConfigureAwait(false);
+            MessageBoxService.SuccessOverlayAsync(MessageBox_Content_SetPathEnvironment_Windows, Config.MuseDashFolder).ConfigureAwait(false);
             return true;
         }
         catch (Exception ex)

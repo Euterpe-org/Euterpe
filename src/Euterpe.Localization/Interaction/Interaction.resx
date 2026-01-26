@@ -37,19 +37,29 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>No and Don't Ask Again</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>Yes and Don't Ask Again</value>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Please choose Muse Dash folder</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+      <value>Please choose Steam executable</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>Please choose Steam folder</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Detected Muse Dash folder path is
 {0}
 Is this the correct game folder?</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+    <value>.NET 6 Runtime not found
+Click OK to install</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+      <value>Are you sure you want to install the .Net SDK?</value>
   </data>
   <data name="MessageBox_Content_Error_DotNetRuntime_Install_Failed" xml:space="preserve">
     <value>Failed to install .NET 6 Runtime</value>
@@ -86,42 +96,26 @@ Release Title:
 Release Info:
 {2}</value>
   </data>
-  <data name="MessageBox_Content_NoticeConfirm_DotNetSDK_Install" xml:space="preserve">
-      <value>Are you sure you want to install the .Net SDK?</value>
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
+    <value>No updates available</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Please choose Muse Dash folder</value>
-  </data>
-  <data name="MessageBox_Content_Notice_ChooseSteamExec" xml:space="preserve">
-      <value>Please choose Steam executable</value>
-  </data>
-  <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
-    <value>Please choose Steam folder</value>
-  </data>
-  <data name="MessageBox_Content_Notice_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime not found
-Click OK to install</value>
-  </data>
-  <data name="MessageBox_Content_Notice_SetPathEnvironment_Linux" xml:space="preserve">
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
       <value>Copy the following line and add it to your /etc/environment file:
 {0}</value>
   </data>
-  <data name="MessageBox_Content_Notice_SetPathEnvironment_Windows" xml:space="preserve">
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
       <value>MD_DIRECTORY environment variable successfully set to {0}</value>
   </data>
-  <data name="MessageBox_Content_Success_NoUpdatesFound" xml:space="preserve">
-    <value>No updates available</value>
-  </data>
-  <data name="Notification_Content_SuccessMod_Reinstall" xml:space="preserve">
-    <value>Mod {0} successfully reinstalled</value>
-  </data>
-  <data name="Notification_Content_Success_Mod_Install" xml:space="preserve">
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} successfully installed</value>
   </data>
-  <data name="Notification_Content_Success_Mod_Uninstall" xml:space="preserve">
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>Mod {0} successfully reinstalled</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} successfully uninstalled</value>
   </data>
-  <data name="Notification_Content_Success_Mod_Update" xml:space="preserve">
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} successfully updated</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
