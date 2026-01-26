@@ -117,12 +117,9 @@
   <data name="ModManager" xml:space="preserve">
     <value>Позволяет выключать и удалять моды прямо в игре</value>
   </data>
-  <data name="Muse Dash Mirror" xml:space="preserve">
+  <data name="MuseDashMirror" xml:space="preserve">
     <value>Библиотека, позволяющая проще получать доступ к PlayerData, BattleComponents информации и создавать интерфейсы.
 Сам мод ничего не делает</value>
-  </data>
-  <data name="MuseDashModTools" xml:space="preserve">
-    <value>Автоматически находит и записывает в логи доступные обновления модов</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
     <value>Не даёт игре уйти в паузу при сворачивании игры</value>

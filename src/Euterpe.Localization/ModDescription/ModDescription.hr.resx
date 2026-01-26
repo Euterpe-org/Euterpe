@@ -101,12 +101,9 @@ E.g. you don't need to spam click and such to unlock them before playing</value>
   <data name="ModManager" xml:space="preserve">
     <value>Allows you to disable &amp; delete mods while in-game.</value>
   </data>
-  <data name="Muse Dash Mirror" xml:space="preserve">
+  <data name="MuseDashMirror" xml:space="preserve">
     <value>A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.
 This mod does nothing by itself.</value>
-  </data>
-  <data name="MuseDashModTools" xml:space="preserve">
-    <value>Automatically detects and logs available mod updates.</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
     <value>Prevents the game from automatically pausing when the game loses focus.</value>
