@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
-    xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Pages"
     x:Class="Euterpe.Views.Pages.HomePage"
     x:DataType="vm:HomePageViewModel">
@@ -41,15 +40,12 @@
         <!--  Donation Button  -->
         <Button
             Classes="Donation"
-            Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
+            Command="{Binding OpenUrlCommand, Mode=OneTime}"
+            CommandParameter="https://euterpe-org.com/sponsors">
             <Image
                 Height="100"
                 Source="/Assets/Genshin.webp" />
         </Button>
-
-        <!--  Donation Drawer  -->
-        <u:OverlayDialogHost
-            HostId="DonationDrawerHost" />
     </Grid>
 
 </UserControl>
