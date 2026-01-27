@@ -1,13 +1,13 @@
 <div align="right">
 
-English | [简体中文](README.zh-CN.md)
+[English](README.md) | 简体中文
 
 </div>
 
 <div align="center">
   <img src="assets/Logo.webp" width="120" alt="Euterpe Logo" />
   <h1>Euterpe</h1>
-  <p><strong>A modern platform to discover, share, and manage Muse Dash mods.</strong></p>
+  <p><strong>发现、分享和管理 Muse Dash 模组的现代化平台</strong></p>
 </div>
 
 <div align="center">
@@ -22,56 +22,56 @@ English | [简体中文](README.zh-CN.md)
 </br>
 
 <div align="center">
-  <img src="assets/Preview.webp" width="600" alt="Euterpe Preview" />
+  <img src="assets/Preview.webp" width="600" alt="Euterpe 预览" />
 </div>
 
 </br>
 
-## 📥 Download
+## 📥 下载
 
-- **Release:** The stable build for most users.  
-  [Go to GitHub Releases](https://github.com/Euterpe-org/Euterpe/releases)
-- **CI:** For specific commits only. Open Actions, pick the workflow run, then download from **Artifacts**.  
-  [Open GitHub Actions](https://github.com/Euterpe-org/Euterpe/actions)
+- **正式版：** 适合大多数用户的稳定版本。
+  [前往 GitHub Releases](https://github.com/Euterpe-org/Euterpe/releases)
+- **CI 版：** 仅针对特定提交。打开 Actions，选择工作流运行，然后从 **Artifacts** 下载。
+  [打开 GitHub Actions](https://github.com/Euterpe-org/Euterpe/actions)
 
 </br>
 
 ## 🌐 Euterpe Hub
 
-The heart of the ecosystem — browse every mod anytime.  
-Developers can create accounts to upload and manage mods in one click.
+生态系统的核心 - 随时浏览所有模组。
+开发者可以创建账户，一键上传和管理模组。
 
-[![Euterpe Hub](https://img.shields.io/badge/Euterpe%20Hub-Visit%20Site-0ea5e9?style=for-the-badge&logo=safari&logoColor=white&labelColor=1f2937)](https://euterpe-org.com)
+[![Euterpe Hub](https://img.shields.io/badge/Euterpe%20Hub-访问网站-0ea5e9?style=for-the-badge&logo=safari&logoColor=white&labelColor=1f2937)](https://euterpe-org.com)
 
 </br>
 
 ## 💬 Discord
 
-Join the official Discord server for updates, support, and community.
+加入官方 Discord 服务器，获取更新、支持和社区交流。
 
-[![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=for-the-badge&logo=discord&logoColor=white&labelColor=1f2937)](https://discord.gg/2rzjcga3nr)
+[![Discord](https://img.shields.io/badge/Discord-加入服务器-5865F2?style=for-the-badge&logo=discord&logoColor=white&labelColor=1f2937)](https://discord.gg/2rzjcga3nr)
 
 </br>
 
-## 🤝 Contributors
+## 🤝 贡献者
 
 [![Contributors](https://contrib.rocks/image?repo=Euterpe-org/Euterpe)](https://github.com/Euterpe-org/Euterpe/graphs/contributors)
 
 </br>
 
-## 📜 License
+## 📜 许可证
 
-This project is licensed under the [MIT License](LICENSE).
+本项目基于 [MIT 许可证](LICENSE) 开源。
 
 <details>
-<summary><b>Third-Party Notices</b></summary>
+<summary><b>第三方声明</b></summary>
 
 </br>
 
-### Libraries
+### 库
 
-| Library | License |
-|---------|---------|
+| 库 | 许可证 |
+|---|--------|
 | [AsmResolver](https://github.com/Washi1337/AsmResolver) | [MIT](https://github.com/Washi1337/AsmResolver/blob/master/LICENSE.md) |
 | [AssetsTools.NET](https://github.com/nesrak1/AssetsTools.NET) | [MIT](https://github.com/nesrak1/AssetsTools.NET/blob/master/LICENSE) |
 | [AsyncAwaitBestPractices](https://github.com/brminnick/AsyncAwaitBestPractices) | [MIT](https://github.com/brminnick/AsyncAwaitBestPractices/blob/main/LICENSE) |
@@ -95,16 +95,16 @@ This project is licensed under the [MIT License](LICENSE).
 | [ValveKeyValue](https://github.com/ValveResourceFormat/ValveKeyValue) | [MIT](https://github.com/ValveResourceFormat/ValveKeyValue/blob/master/LICENSE) |
 | [ZLogger](https://github.com/Cysharp/ZLogger) | [MIT](https://github.com/Cysharp/ZLogger/blob/master/LICENSE) |
 
-### Fonts
+### 字体
 
-| Font | License |
-|------|---------|
+| 字体 | 许可证 |
+|-----|--------|
 | [Inter](https://github.com/rsms/inter) | [SIL OFL 1.1](https://github.com/rsms/inter/blob/master/LICENSE.txt) |
 
-### Tools
+### 工具
 
-| Tool | License |
-|------|---------|
+| 工具 | 许可证 |
+|-----|--------|
 | [MelonLoader](https://github.com/LavaGang/MelonLoader) | [Apache-2.0](https://github.com/LavaGang/MelonLoader/blob/master/LICENSE.md) |
 
 </details>
