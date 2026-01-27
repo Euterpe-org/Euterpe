@@ -36,7 +36,7 @@ English | [简体中文](README.zh-CN.md)
 
 </br>
 
-## 🌐 Euterpe Hub
+## 🍉 Euterpe Hub
 
 The heart of the ecosystem — browse every mod anytime.  
 Developers can create accounts to upload and manage mods in one click.
