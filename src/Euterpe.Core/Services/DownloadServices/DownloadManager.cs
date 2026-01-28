@@ -58,7 +58,6 @@ internal sealed partial class DownloadManager : IDownloadManager
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, onDownloadProgressChanged, cancellationToken),
             // For Gitee Download Source, because users don't choose GitHub for other downloads, so we will use GitHubMirror
             DownloadSource.Gitee => GitHubMirrorDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, onDownloadProgressChanged, cancellationToken),
-            DownloadSource.Website => WebsiteDownloadService.DownloadMelonLoaderAsync(onDownloadStarted, onDownloadProgressChanged, cancellationToken),
             _ => throw new UnreachableException()
         };
     }
@@ -71,7 +70,7 @@ internal sealed partial class DownloadManager : IDownloadManager
             DownloadSource.GitHubMirror => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
             // For Gitee Download Source, because users don't choose GitHub for other downloads, so we will use GitHubMirror
             DownloadSource.Gitee => GitHubMirrorDownloadService.FetchReadmeAsync(repoId, cancellationToken),
-            DownloadSource.Website => WebsiteDownloadService.FetchReadmeAsync(repoId, cancellationToken),
+
             _ => throw new UnreachableException()
         };
     }
@@ -83,9 +82,6 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     [UsedImplicitly]
     public required MultiThreadDownloader Downloader { get; init; }
-
-    [UsedImplicitly]
-    public required IWebsiteDownloadService WebsiteDownloadService { get; init; }
 
     [UsedImplicitly]
     public required IGiteeDownloadService GiteeDownloadService { get; init; }
