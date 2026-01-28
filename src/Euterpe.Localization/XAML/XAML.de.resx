@@ -59,7 +59,7 @@
     <value>Erforderlich für Mod-Entwicklung</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
-      <value>.NET 10 SDK</value>
+    <value>.NET 10 SDK</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
     <value>Ermöglicht Build-Tools, Spieldateien zu finden</value>
