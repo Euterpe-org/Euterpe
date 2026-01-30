@@ -55,28 +55,32 @@
                 </StackPanel.Styles>
 
                 <!--  Header with Close Button  -->
-                <Grid ColumnDefinitions="Auto,*,Auto">
+                <Grid ColumnDefinitions="*,Auto,*">
+                    <!--  Left: Emoji  -->
                     <TextBlock
                         Grid.Column="0"
                         Classes="SupportEmoji"
                         Text="✨"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Center" />
 
+                    <!--  Center: Title  -->
                     <TextBlock
                         Grid.Column="1"
                         Classes="SupportTitle"
                         Text="{Localize {x:Static loc:XAMLLiteral.HomePage_SupportTitle}}"
-                        TextAlignment="Center"
                         VerticalAlignment="Center" />
 
+                    <!--  Right: Close Button  -->
                     <Button
                         x:Name="CloseButton"
                         Grid.Column="2"
-                        Classes="Transparent"
+                        Classes="SupportCloseButton"
+                        HorizontalAlignment="Right"
                         Padding="4"
                         VerticalAlignment="Center"
                         Click="CloseButton_Click">
-                        <TextBlock Text="✕" FontSize="14" Opacity="0.6" />
+                        <TextBlock Text="✕" FontSize="14" />
                     </Button>
                 </Grid>
 

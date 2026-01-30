@@ -20,14 +20,13 @@
 
     <!--  Support Emoji  -->
     <Style Selector="TextBlock.SupportEmoji">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="FontSize" Value="17" />
     </Style>
 
     <!--  Support Title Text  -->
     <Style Selector="TextBlock.SupportTitle">
-        <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Foreground" Value="{DynamicResource PrimaryTitleColor}" />
     </Style>
 
@@ -36,6 +35,32 @@
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="DarkGray" />
         <Setter Property="Opacity" Value="0.85" />
+    </Style>
+
+    <!--  Support Close Button  -->
+    <Style Selector="Button.SupportCloseButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Opacity" Duration="0:0:0.15" Easing="LinearEasing" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style Selector="Button.SupportCloseButton /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Button.SupportCloseButton TextBlock">
+        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Opacity" Duration="0:0:0.15" Easing="LinearEasing" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style Selector="Button.SupportCloseButton:pointerover TextBlock">
+        <Setter Property="Opacity" Value="1" />
     </Style>
 
 </Styles>
