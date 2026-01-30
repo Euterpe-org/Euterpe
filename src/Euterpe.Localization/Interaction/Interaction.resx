@@ -41,13 +41,14 @@
     <value>Yes</value>
   </data>
   <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Please choose Muse Dash folder</value>
+    <value>Please select Muse Dash folder
+Do you have Muse Dash installed on this computer?</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
-    <value>Please choose Steam executable</value>
+    <value>Please select Steam executable</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
-    <value>Please choose Steam folder</value>
+    <value>Please select Steam folder</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Detected Muse Dash folder path is

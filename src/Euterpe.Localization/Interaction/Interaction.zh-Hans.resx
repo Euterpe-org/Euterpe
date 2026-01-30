@@ -41,7 +41,8 @@
     <value>是</value>
   </data>
   <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>请选择 Muse Dash 文件夹</value>
+    <value>请选择 Muse Dash 文件夹
+此电脑上是否安装了 Muse Dash？</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>请选择 Steam 可执行文件</value>

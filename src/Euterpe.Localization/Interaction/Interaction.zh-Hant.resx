@@ -13,6 +13,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
     <value>選擇譜面文件夾</value>
   </data>
@@ -33,8 +34,8 @@
     <value>檢查更新失敗
 是否已連網?</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>請選擇 Muse Dash 文件夾</value>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>檢測到的 Muse Dash 文件夾為 {0}

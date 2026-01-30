@@ -61,7 +61,13 @@ internal sealed partial class SettingService
             else
             {
                 Logger.ZLogInformation($"Letting user choose MuseDash folder...");
-                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseMuseDashFolder).ConfigureAwait(true);
+                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_ChooseMuseDashFolder).ConfigureAwait(true);
+                if (result is not MessageBoxResult.Yes)
+                {
+                    Logger.ZLogInformation($"User cancelled MuseDash folder selection. Exiting application.");
+                    Environment.Exit(0);
+                }
+
                 Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
             }
         }
