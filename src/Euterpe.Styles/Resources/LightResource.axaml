@@ -19,11 +19,37 @@
     <!--  Colors  -->
     <Color
         x:Key="SecondaryCardColor">
-        #FAFAFA
+        #EDF2F7
     </Color>
     <Color
         x:Key="PrimaryTitleColor">
-        #1F2024
+        #1A365D
     </Color>
+    <Color
+        x:Key="SecondaryTextColor">
+        #4A5568
+    </Color>
+
+    <!--  Override Semi Design Global Background Colors  -->
+    <Color
+        x:Key="SemiGrey0">
+        #F0F4F8
+    </Color>
+    <SolidColorBrush
+        x:Key="CardBackground">
+        #F8FAFB
+    </SolidColorBrush>
+    <SolidColorBrush
+        x:Key="BorderBrush">
+        #E1E8ED
+    </SolidColorBrush>
+    <SolidColorBrush
+        x:Key="RegionBrush">
+        #F0F4F8
+    </SolidColorBrush>
+    <SolidColorBrush
+        x:Key="ControlFillColorDefaultBrush">
+        #F8FAFB
+    </SolidColorBrush>
 
 </ResourceDictionary>

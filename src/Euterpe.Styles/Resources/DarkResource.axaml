@@ -25,5 +25,9 @@
         x:Key="PrimaryTitleColor">
         #FAFAFA
     </Color>
+    <Color
+        x:Key="SecondaryTextColor">
+        #9CA3AF
+    </Color>
 
 </ResourceDictionary>

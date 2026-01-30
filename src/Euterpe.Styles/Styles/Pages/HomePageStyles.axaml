@@ -59,8 +59,7 @@
     <!--  Support Description Text  -->
     <Style Selector="TextBlock.SupportDescription">
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="Foreground" Value="DarkGray" />
-        <Setter Property="Opacity" Value="0.85" />
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}" />
     </Style>
 
     <!--  Support Close Button  -->
@@ -78,15 +77,15 @@
         <Setter Property="Background" Value="Transparent" />
     </Style>
     <Style Selector="Button.SupportCloseButton TextBlock">
-        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}" />
         <Setter Property="Transitions">
             <Transitions>
-                <DoubleTransition Property="Opacity" Duration="0:0:0.15" Easing="LinearEasing" />
+                <BrushTransition Property="Foreground" Duration="0:0:0.15" Easing="LinearEasing" />
             </Transitions>
         </Setter>
     </Style>
     <Style Selector="Button.SupportCloseButton:pointerover TextBlock">
-        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryTitleColor}" />
     </Style>
 
 </Styles>
