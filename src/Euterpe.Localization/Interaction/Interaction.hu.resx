@@ -41,6 +41,12 @@ Ez a helyes mappa?</value>
     <value>Updater másolása sikertelen
 {0}</value>
   </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>{0} törlése sikertelen</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>A MelonLoader mappa törlése sikertelen</value>
+  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{1} függ a(z) {0} mod-tól
 Biztos hogy ki akarod törölni?</value>
@@ -58,7 +64,7 @@ Biztos hogy ki akarod kapcsolni?</value>
   </data>
   <data name="MessageBox_Content_DownloadChartSuccess" xml:space="preserve">
     <value>Zene {0} sikeresen letöltve
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_DuplicateMods" xml:space="preserve">
     <value>Manuálisan válaszd ki és töröld ki a duplikált modot
@@ -86,32 +92,6 @@ Nem szeretjük ám a kalózokat :)</value>
     <value>Függőség {0} telepítése sikertelen
 {1}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoader" xml:space="preserve">
-    <value>Nincsen a MelonLoader telepítve,
-amely szükséges modok futtatásához
-Telepíted most?</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
-    <value>MelonLoader letöltés sikertelen
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
-    <value>MelonLoader letöltés sikertelen
-Online vagy?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
-    <value>Mod telepítés sikertelen
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Game" xml:space="preserve">
-    <value>Mod telepítés sikertelen. Fut a játék?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Internet" xml:space="preserve">
-    <value>Mod telepítés sikertelen. Online vagy?
-{0}</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Ez a mappa érvénytelen. Próbáld újra</value>
   </data>
@@ -119,14 +99,62 @@ Online vagy?
     <value>Ellenőrzés sikeres
 Euterpe legfrissebb verzióját használod</value>
   </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>MDM fájl létrehozása sikertelen</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM fájlok sikeresen létrehozva</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>MDM fájl kibontása sikertelen</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM fájlok sikeresen kibontva</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>Nem sikerült kitörölni MelonLoader.zip-et itt:
 {0}
 Probáld meg manuálisan</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Install" xml:space="preserve">
+    <value>Nincsen a MelonLoader telepítve,
+amely szükséges modok futtatásához
+Telepíted most?</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>A MelonLoader telepítése sikertelen: {0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader sikeresen települt
-</value>
+    </value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>A MelonLoader sikeresen el lett távolítva</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>A MelonLoader kicsomagolása sikertelen</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>A MelonLoader zip fájl nem található</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Biztosan telepíteni szeretnéd a mod sablont?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>A mod sablon telepítése sikertelen</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Biztosan el szeretnéd távolítani a mod sablont?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>A mod sablon eltávolítása sikertelen</value>
+  </data>
+  <data name="MessageBox_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Mod telepítés sikertelen
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Új verzió elérhető: {0}. Szeretnél frissíteni?</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>Az útvonalad nincsen a log-ban</value>
@@ -140,7 +168,7 @@ Meg kell venned a CustomAlbums mod-hoz</value>
   </data>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>Ehhez a modhoz nem tartozik letölthető fájl
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Nem sikerült igazolni hogy birtoklod Steam-en a játékot
@@ -168,6 +196,10 @@ Válaszd ki a helyes mappát</value>
     <value>Egy '{0}' nevű zene már le van töltve
 Biztos letöltöd ezt és felülírod a meglévőt?</value>
   </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>A játékinformáció olvasása sikertelen
+  {0}</value>
+  </data>
   <data name="MessageBox_Content_ReadGameVersionFailed" xml:space="preserve">
     <value>Nem sikerült leolvasni a játékverziót
 Teljes a telepítésed?
@@ -182,6 +214,12 @@ Regisztrálj a mod közösség (MDMC) discord-ban, vagy annak weboldalán</value
     <value>{0} újra lesz telepítve
 Erősítsd meg a műveletet</value>
   </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Biztosan be szeretnéd állítani az MD_DIRECTORY környezeti változót?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Az MD_DIRECTORY környezeti változó beállítása sikertelen</value>
+  </data>
   <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
     <value>MelonLoader el lesz távolítva
 Erősítsd meg a műveletet</value>
@@ -191,8 +229,7 @@ Erősítsd meg a műveletet</value>
 Ellenőrizd, hogy nem fut-e a játék!</value>
   </data>
   <data name="MessageBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
-    <value>MelonLoader sikeresen eltávolítva
-</value>
+    <value>MelonLoader sikeresen eltávolítva</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed" xml:space="preserve">
     <value>Mod eltávolítás sikertelen. Fut a játék?
@@ -204,12 +241,6 @@ Ellenőrizd, hogy nem fut-e a játék!</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>Nem lehet egy nem létező fájlt törölni</value>
-  </data>
-  <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
-    <value>Nem sikerült kicsomagolni MelonLoader.zip-et
-{0}
-Hiba: {1}
-Probáld meg manuálisan</value>
   </data>
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>Az Updater nem található

@@ -35,6 +35,12 @@ Is this the correct game folder?</value>
     <value>Cannot copy Updater to target path
 {0}</value>
   </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>Löschen von {0} fehlgeschlagen</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>MelonLoader-Ordner konnte nicht gelöscht werden</value>
+  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{0} is used by {1} as dependency
 Are you sure you want to delete this mod?</value>
@@ -51,8 +57,7 @@ Are you sure you want to disable this mod?</value>
 {0}</value>
   </data>
   <data name="MessageBox_Content_DownloadChartSuccess" xml:space="preserve">
-    <value>Chart {0} has been successfully downloaded
-</value>
+    <value>Chart {0} has been successfully downloaded</value>
   </data>
   <data name="MessageBox_Content_DuplicateMods" xml:space="preserve">
     <value>Please manually choose and delete the duplicated mod
@@ -80,32 +85,6 @@ Are you using a pirated or modified version?</value>
     <value>Dependency {0} failed to install
 {1}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoader" xml:space="preserve">
-    <value>You did not install MelonLoader
-This is needed to run all the mods
-Install Now?</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
-    <value>MelonLoader download failed
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
-    <value>MelonLoader download failed due to internet
-Are you online?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
-    <value>Mod installation failed
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Game" xml:space="preserve">
-    <value>Mod installation failed. Is the game running?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Internet" xml:space="preserve">
-    <value>Mod installation failed. Are you online?
-{0}</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>The path you have chosen is invalid. Try again</value>
   </data>
@@ -113,9 +92,57 @@ Are you online?
     <value>Update check successful
 You are using the latest version of Euterpe</value>
   </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>MDM-Datei konnte nicht erstellt werden</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM-Dateien erfolgreich erstellt</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>MDM-Datei konnte nicht entpackt werden</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM-Dateien erfolgreich entpackt</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install" xml:space="preserve">
+    <value>You did not install MelonLoader
+This is needed to run all the mods
+Install Now?</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>MelonLoader konnte nicht installiert werden: {0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader has been successfully installed
-</value>
+    </value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader wurde erfolgreich deinstalliert</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>MelonLoader konnte nicht entpackt werden</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>MelonLoader-Zip-Datei nicht gefunden</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Möchten Sie die Mod-Vorlage wirklich installieren?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Installation der Mod-Vorlage fehlgeschlagen</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Möchten Sie die Mod-Vorlage wirklich deinstallieren?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Deinstallation der Mod-Vorlage fehlgeschlagen</value>
+  </data>
+  <data name="MessageBox_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Mod installation failed
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Neue Version verfügbar: {0}. Möchten Sie aktualisieren?</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>You don't have application path in the log</value>
@@ -129,7 +156,7 @@ You have to buy it in order to play custom charts</value>
   </data>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>This mod does not have an available resource for download
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Cannot verify that you have bought the game on Steam
@@ -157,6 +184,10 @@ Please choose the correct folder</value>
     <value>You have already downloaded the chart {0}
 Continue downloading and overriding the existing file?</value>
   </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Lesen der Spielinformationen fehlgeschlagen
+  {0}</value>
+  </data>
   <data name="MessageBox_Content_ReadGameVersionFailed" xml:space="preserve">
     <value>Cannot read current game version
 Is your Muse Dash installation complete?
@@ -171,6 +202,12 @@ Please register in #bot-commands channel in MDMC discord or mdmc.moe website</va
     <value>You are asking to reinstall {0}
 Please confirm your operation</value>
   </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Möchten Sie die Umgebungsvariable MD_DIRECTORY wirklich setzen?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>MD_DIRECTORY-Umgebungsvariable konnte nicht gesetzt werden</value>
+  </data>
   <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
     <value>You are asking to uninstall MelonLoader
 Please confirm your operation</value>
@@ -181,7 +218,7 @@ Please make sure your game is not running!</value>
   </data>
   <data name="MessageBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
     <value>MelonLoader has been successfully uninstalled
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed" xml:space="preserve">
     <value>Mod uninstall failed. Is the game running?
@@ -193,12 +230,6 @@ Please make sure your game is not running!</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>Cannot delete file that doesn't exist</value>
-  </data>
-  <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
-    <value>Cannot unzip MelonLoader.zip in
-{0}
-Error:{1}
-Try to manually unzip?</value>
   </data>
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>Cannot find Updater

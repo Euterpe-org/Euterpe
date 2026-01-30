@@ -54,6 +54,12 @@
 {0}
 Is this the correct game folder?</value>
   </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>Failed to delete {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Failed to delete MelonLoader folder</value>
+  </data>
   <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
     <value>.NET 6 Runtime not found
 Click OK to install</value>
@@ -70,14 +76,52 @@ Click OK to install</value>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>The path you have chosen is invalid. Try again</value>
   </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>Failed to create MDM file</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM files created successfully</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>Failed to extract MDM file</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM files extracted successfully</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>Failed to delete MelonLoader.zip in
 {0}
 Try to manually delete</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>Failed to install MelonLoader: {0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
-    <value>MelonLoader has been successfully installed
-</value>
+    <value>MelonLoader has been successfully installed</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader uninstalled successfully</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Failed to unzip MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>MelonLoader zip file not found</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Are you sure you want to install the Mod Template?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Failed to install Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Are you sure you want to uninstall the Mod Template?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Failed to uninstall Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>New version available: {0}, do you want to upgrade?</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>No updates available</value>
@@ -87,6 +131,16 @@ Try to manually delete</value>
   </data>
   <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
     <value>Failed to run wine prefix commands via protontricks. Cannot proceed with .NET Runtime installation.</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Reading Game Information failed
+  {0}</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Are you sure you want to set MD_DIRECTORY environment variable?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Failed to set MD_DIRECTORY environment variable</value>
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
     <value>Copy the following line and add it to your /etc/environment file:

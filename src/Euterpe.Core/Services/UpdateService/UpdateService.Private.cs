@@ -16,9 +16,7 @@ internal sealed partial class UpdateService
             return false;
         }
 
-        var result = await MessageBoxService.NoticeConfirmAsync($"New version available: {releaseVersion}, do you want to upgrade?")
-            .ConfigureAwait(true);
-
+        var result = await MessageBoxService.NoticeConfirmAsync(MessageBox_Content_NewVersionAvailable, releaseVersion).ConfigureAwait(true);
         if (result is MessageBoxResult.Yes)
         {
             return true;

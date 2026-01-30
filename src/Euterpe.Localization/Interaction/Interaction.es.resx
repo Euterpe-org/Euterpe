@@ -41,6 +41,12 @@
     <value>No se pudo copiar Updater a la carpeta
 {0}</value>
   </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>No se pudo eliminar {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>No se pudo eliminar la carpeta de MelonLoader</value>
+  </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{0} es usado por {1} como dependencia
 ¿Estás seguro de intentar borrarlo?</value>
@@ -86,32 +92,6 @@ Ve a la pestaña de MODS → Instalar MelonLoader</value>
     <value>La dependencia {0} ha tenido un error
 {1}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoader" xml:space="preserve">
-    <value>¡No tienes instalado MelonLoader!
-Este programa se encarga de activar los mods
-¿Quieres instalar el programa ahora?</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
-    <value>MelonLoader fallo en descargar
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
-    <value>MelonLoader fallo en descargar por problemas de conexión
-¿Hay conexión a internet?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
-    <value>La instalación del mod fallo
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Game" xml:space="preserve">
-    <value>La instalación del mod fallo. ¿Estás jugando ahora MuseDash?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Internet" xml:space="preserve">
-    <value>La instalación del mod fallo. ¿Hay conexión a internet?
-{0}</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>¡La ruta seleccionada no es válida! Prueba de nuevo</value>
   </data>
@@ -119,14 +99,62 @@ Este programa se encarga de activar los mods
     <value>Comprobación de parche finalizada
 Usas la última versión de Euterpe</value>
   </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>No se pudo crear el archivo MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>Los archivos MDM se crearon correctamente</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>No se pudo extraer el archivo MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>Los archivos MDM se extrajeron correctamente</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>No se pudo eliminar MelonLoader.zip en
 {0}
 ¿Podrías borrarlo manualmente?</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Install" xml:space="preserve">
+    <value>¡No tienes instalado MelonLoader!
+Este programa se encarga de activar los mods
+¿Quieres instalar el programa ahora?</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>No se pudo instalar MelonLoader: {0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>¡MelonLoader se ha instalado!
-</value>
+    </value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader se desinstaló correctamente</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>No se pudo descomprimir MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>No se encontró el archivo zip de MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>¿Seguro que quieres instalar la plantilla de mod?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>No se pudo instalar la plantilla de mod</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>¿Seguro que quieres desinstalar la plantilla de mod?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>No se pudo desinstalar la plantilla de mod</value>
+  </data>
+  <data name="MessageBox_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>La instalación del mod fallo
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Nueva versión disponible: {0}. ¿Quieres actualizar?</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>¡El Log no ha registrado donde tienes instalado el juego!</value>
@@ -140,7 +168,7 @@ Esto es necesario para poder jugar Custom Charts</value>
   </data>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>¡Uy! Este mod no tiene una fuente oficial de descarga
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Steam no pudo verificar donde has instalado Muse Dash
@@ -169,6 +197,10 @@ Selecciona nuevamente la carpeta correcta</value>
     <value>¡Hey! Ya tienes descargado este chart...
 ¿Quieres sobreescribir el chart descargado?</value>
   </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>No se pudo leer la información del juego
+  {0}</value>
+  </data>
   <data name="MessageBox_Content_ReadGameVersionFailed" xml:space="preserve">
     <value>No se pudo identificar la versión del juego
 ¿Has instalado el Muse Dash de manera correcta?
@@ -183,6 +215,12 @@ En el Discord de MDMC, usa el comando /register</value>
     <value>¡Estas por reinstalar {0}!
 ¿Podrías confirmar esta acción?</value>
   </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>¿Seguro que quieres establecer la variable de entorno MD_DIRECTORY?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>No se pudo establecer la variable de entorno MD_DIRECTORY</value>
+  </data>
   <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
     <value>¡Estas por desinstalar MelonLoader!
 ¿Podrías confirmar esta acción?</value>
@@ -193,7 +231,7 @@ Recuerda hacer esto, mientras el juego esté cerrado</value>
   </data>
   <data name="MessageBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
     <value>MelonLoader fue removido correctamente
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed" xml:space="preserve">
     <value>La desinstalación del mod fallo. ¿Estás jugando Muse Dash?
@@ -205,12 +243,6 @@ Recuerda hacer esto, mientras el juego esté cerrado</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>No se puede borrar un archivo que no existe</value>
-  </data>
-  <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
-    <value>No se pudo descomprimir MelonLoader.zip en
-{0}
-Error: {1}
-¿Podrías descomprimirlo manualmente?</value>
   </data>
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>¡No se pudo encontrar el actualizador del programa!

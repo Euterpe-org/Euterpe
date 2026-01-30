@@ -57,7 +57,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            await MessageBoxService.ErrorAsync("Failed to install MelonLoader: {0}", ex).ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Install_Failed, ex).ConfigureAwait(false);
             Logger.ZLogError(ex, $"Failed to install MelonLoader");
             MelonLoaderInstallStatus = InstallStatus.NotInstalled;
             return;
