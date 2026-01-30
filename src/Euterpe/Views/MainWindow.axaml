@@ -8,8 +8,10 @@
     xmlns:vm="using:Euterpe.ViewModels"
     x:Class="Euterpe.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
-    MinHeight="700"
+    Height="700"
+    MinHeight="600"
     MinWidth="1100"
+    Width="1150"
     WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
