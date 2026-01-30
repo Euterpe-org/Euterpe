@@ -13,4 +13,9 @@ public sealed partial class HomePage : UserControl
     {
         SupportCard.IsVisible = false;
     }
+
+    private void TitleButton_Click(object? sender, RoutedEventArgs e)
+    {
+        // Just for visual effect, no actual action
+    }
 }
