@@ -52,6 +52,18 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% Free &amp; Open Source</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Enjoying Euterpe? Here's how you can help</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>Star on GitHub</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
   <data name="ChartFilterType_Easy" xml:space="preserve">
     <value>Easy</value>
   </data>

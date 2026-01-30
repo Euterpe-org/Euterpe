@@ -52,6 +52,18 @@
   <data name="Button_Update" xml:space="preserve">
     <value>更新</value>
   </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% 免费 · 开源</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>喜欢 Euterpe 吗？您可以用以下方式支持我们</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>在 GitHub 点 Star</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>赞助</value>
+  </data>
   <data name="ChartFilterType_Easy" xml:space="preserve">
     <value>萌新</value>
   </data>

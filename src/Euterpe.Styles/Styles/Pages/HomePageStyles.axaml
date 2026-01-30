@@ -2,38 +2,40 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--  Donation Button Style  -->
-    <Style
-        Selector="Button">
-        <Style
-            Selector="^.Donation">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Margin" Value="0,60,90,0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition
-                        Property="RenderTransform"
-                        Duration="0:0:0.2"
-                        Easing="ExponentialEaseOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style
-            Selector="^.Donation:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-        <Style
-            Selector="^.Donation:pointerover">
-            <Setter Property="RenderTransform" Value="scale(1.2) rotate(40deg)" />
-        </Style>
-        <Style
-            Selector="^.Donation:pressed">
-            <Setter Property="RenderTransform" Value="scale(1.1) rotate(40deg)" />
-        </Style>
+    <!--  Support Card Container  -->
+    <Style Selector="Border.SupportCard">
+        <Setter Property="Padding" Value="20" />
+        <Setter Property="MaxWidth" Value="340" />
+        <Setter Property="Opacity" Value="0.95" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Opacity" Duration="0:0:0.2" Easing="ExponentialEaseOut" />
+                <BrushTransition Property="Background" Duration="0:0:0.2" Easing="ExponentialEaseOut" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style Selector="Border.SupportCard:pointerover">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <!--  Support Emoji  -->
+    <Style Selector="TextBlock.SupportEmoji">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+    </Style>
+
+    <!--  Support Title Text  -->
+    <Style Selector="TextBlock.SupportTitle">
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryTitleColor}" />
+    </Style>
+
+    <!--  Support Description Text  -->
+    <Style Selector="TextBlock.SupportDescription">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="DarkGray" />
+        <Setter Property="Opacity" Value="0.85" />
     </Style>
 
 </Styles>

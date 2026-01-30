@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Pages"
     x:Class="Euterpe.Views.Pages.HomePage"
     x:DataType="vm:HomePageViewModel">
@@ -37,15 +38,73 @@
             ItemsSource="{Binding GameModes, Mode=OneTime}"
             SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}" />
 
-        <!--  Donation Button  -->
-        <Button
-            Classes="Donation"
-            Command="{Binding OpenUrlCommand, Mode=OneTime}"
-            CommandParameter="https://euterpe-org.com/sponsors">
-            <Image
-                Height="100"
-                Source="/Assets/Genshin.webp" />
-        </Button>
+        <!--  Support Card  -->
+        <Border
+            x:Name="SupportCard"
+            Classes="SupportCard"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,60,90,0"
+            Theme="{DynamicResource CardBorder}">
+            <StackPanel Orientation="Vertical" Spacing="15">
+                <StackPanel.Styles>
+                    <Style Selector="u|IconButton">
+                        <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                        <Setter Property="IconPlacement" Value="Left" />
+                    </Style>
+                </StackPanel.Styles>
+
+                <!--  Header with Close Button  -->
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <TextBlock
+                        Grid.Column="0"
+                        Classes="SupportEmoji"
+                        Text="✨"
+                        VerticalAlignment="Center" />
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Classes="SupportTitle"
+                        Text="{Localize {x:Static loc:XAMLLiteral.HomePage_SupportTitle}}"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center" />
+
+                    <Button
+                        x:Name="CloseButton"
+                        Grid.Column="2"
+                        Classes="Transparent"
+                        Padding="4"
+                        VerticalAlignment="Center"
+                        Click="CloseButton_Click">
+                        <TextBlock Text="✕" FontSize="14" Opacity="0.6" />
+                    </Button>
+                </Grid>
+
+                <!--  Support Description  -->
+                <TextBlock
+                    Classes="SupportDescription"
+                    Text="{Localize {x:Static loc:XAMLLiteral.HomePage_SupportDescription}}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+
+                <!--  Action Buttons  -->
+                <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                    <u:IconButton CommandParameter="https://github.com/Euterpe-org/Euterpe">
+                        <TextBlock>
+                            <Run Text="⭐ " />
+                            <Run Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_GitHubStar}}" />
+                        </TextBlock>
+                    </u:IconButton>
+
+                    <u:IconButton CommandParameter="https://euterpe-org.com/sponsors">
+                        <TextBlock>
+                            <Run Text="💖 " />
+                            <Run Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_Sponsor}}" />
+                        </TextBlock>
+                    </u:IconButton>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 
 </UserControl>
