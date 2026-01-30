@@ -16,9 +16,8 @@
         <!--  Card Description Text  -->
         <Style
             Selector="^.CardDesc">
-            <Setter Property="Foreground" Value="DarkGray" />
+            <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}" />
             <Setter Property="Margin" Value="0,10" />
-            <Setter Property="Opacity" Value="0.7" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
 
