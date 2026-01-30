@@ -16,7 +16,7 @@
         avares://Euterpe/Assets/MDMC_Title_Dark.webp
     </Bitmap>
 
-    <!--  Colors  -->
+    <!--  General Colors  -->
     <Color
         x:Key="SecondaryCardColor">
         #1F2024
@@ -28,6 +28,82 @@
     <Color
         x:Key="SecondaryTextColor">
         #9CA3AF
+    </Color>
+
+    <!--  Button Colors  -->
+    <Color
+        x:Key="PrimaryButtonStart">
+        #54A9FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonEnd">
+        #7FC1FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonHoverStart">
+        #7FC1FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonHoverEnd">
+        #A1D4FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonPressedStart">
+        #4096FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonPressedEnd">
+        #54A9FF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonStart">
+        #4096FF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonEnd">
+        #54A9FF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonHoverStart">
+        #54A9FF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonHoverEnd">
+        #7FC1FF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonPressedStart">
+        #2B7AD2
+    </Color>
+    <Color
+        x:Key="SecondaryButtonPressedEnd">
+        #4096FF
+    </Color>
+
+    <!--  Flyout Colors  -->
+    <Color
+        x:Key="FlyoutBackground">
+        #1F2024
+    </Color>
+    <Color
+        x:Key="FlyoutBorder">
+        #2A2D33
+    </Color>
+    <Color
+        x:Key="FlyoutItemHoverBackground">
+        #2B2F36
+    </Color>
+    <Color
+        x:Key="FlyoutItemSelectedBackground">
+        #343A45
+    </Color>
+    <Color
+        x:Key="FlyoutForeground">
+        #FAFAFA
+    </Color>
+    <Color
+        x:Key="FlyoutIconForeground">
+        #FAFAFA
     </Color>
 
 </ResourceDictionary>

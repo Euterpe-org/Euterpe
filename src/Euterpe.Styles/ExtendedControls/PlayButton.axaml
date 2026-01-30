@@ -3,6 +3,58 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
 
+    <Styles.Resources>
+        <ControlTheme
+            x:Key="PlayFlyoutPresenterNoChrome"
+            TargetType="FlyoutPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </ControlTheme>
+        <LinearGradientBrush
+            x:Key="PrimaryButtonGradient"
+            StartPoint="0%,0%"
+            EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="{DynamicResource PrimaryButtonStart}" />
+            <GradientStop Offset="1" Color="{DynamicResource PrimaryButtonEnd}" />
+        </LinearGradientBrush>
+        <LinearGradientBrush
+            x:Key="PrimaryButtonHoverGradient"
+            StartPoint="0%,0%"
+            EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="{DynamicResource PrimaryButtonHoverStart}" />
+            <GradientStop Offset="1" Color="{DynamicResource PrimaryButtonHoverEnd}" />
+        </LinearGradientBrush>
+        <LinearGradientBrush
+            x:Key="PrimaryButtonPressedGradient"
+            StartPoint="0%,0%"
+            EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="{DynamicResource PrimaryButtonPressedStart}" />
+            <GradientStop Offset="1" Color="{DynamicResource PrimaryButtonPressedEnd}" />
+        </LinearGradientBrush>
+        <LinearGradientBrush
+            x:Key="SecondaryButtonGradient"
+            StartPoint="0%,0%"
+            EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="{DynamicResource SecondaryButtonStart}" />
+            <GradientStop Offset="1" Color="{DynamicResource SecondaryButtonEnd}" />
+        </LinearGradientBrush>
+        <LinearGradientBrush
+            x:Key="SecondaryButtonHoverGradient"
+            StartPoint="0%,0%"
+            EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="{DynamicResource SecondaryButtonHoverStart}" />
+            <GradientStop Offset="1" Color="{DynamicResource SecondaryButtonHoverEnd}" />
+        </LinearGradientBrush>
+        <LinearGradientBrush
+            x:Key="SecondaryButtonPressedGradient"
+            StartPoint="0%,0%"
+            EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="{DynamicResource SecondaryButtonPressedStart}" />
+            <GradientStop Offset="1" Color="{DynamicResource SecondaryButtonPressedEnd}" />
+        </LinearGradientBrush>
+    </Styles.Resources>
+
     <Design.PreviewWith>
         <euterpe:PlayButton />
     </Design.PreviewWith>
@@ -55,9 +107,14 @@
                             <!--  Dropdown Flyout  -->
                             <ToggleButton.Flyout>
                                 <Flyout
+                                    FlyoutPresenterTheme="{StaticResource PlayFlyoutPresenterNoChrome}"
                                     Placement="Bottom">
                                     <Border
-                                        CornerRadius="8">
+                                        Background="{DynamicResource FlyoutBackground}"
+                                        BorderBrush="{DynamicResource FlyoutBorder}"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        Padding="6">
                                         <ListBox
                                             Background="Transparent"
                                             BorderThickness="0"
@@ -76,7 +133,7 @@
                                                         <PathIcon
                                                             Grid.Column="0"
                                                             Data="{StaticResource CheckMark}"
-                                                            Foreground="White"
+                                                            Foreground="{DynamicResource FlyoutIconForeground}"
                                                             Height="16"
                                                             HorizontalAlignment="Left"
                                                             IsVisible="{Binding $parent[ListBoxItem].IsSelected}"
@@ -88,7 +145,7 @@
                                                             Grid.Column="1"
                                                             FontSize="14"
                                                             FontWeight="SemiBold"
-                                                            Foreground="White"
+                                                            Foreground="{DynamicResource FlyoutForeground}"
                                                             HorizontalAlignment="Center"
                                                             Margin="8,0,0,0"
                                                             Text="{Binding .}"
@@ -103,8 +160,16 @@
                                                     Selector="ListBoxItem">
                                                     <Setter Property="Background" Value="Transparent" />
                                                     <Setter Property="Padding" Value="6" />
-                                                    <Setter Property="Margin" Value="0,4" />
+                                                    <Setter Property="Margin" Value="0,2" />
                                                     <Setter Property="CornerRadius" Value="4" />
+                                                </Style>
+                                                <Style
+                                                    Selector="ListBoxItem:pointerover">
+                                                    <Setter Property="Background" Value="{DynamicResource FlyoutItemHoverBackground}" />
+                                                </Style>
+                                                <Style
+                                                    Selector="ListBoxItem:selected">
+                                                    <Setter Property="Background" Value="{DynamicResource FlyoutItemSelectedBackground}" />
                                                 </Style>
                                             </ListBox.Styles>
 

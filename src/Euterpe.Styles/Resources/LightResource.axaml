@@ -16,7 +16,7 @@
         avares://Euterpe/Assets/MDMC_Title_Light.webp
     </Bitmap>
 
-    <!--  Colors  -->
+    <!--  General Colors  -->
     <Color
         x:Key="SecondaryCardColor">
         #EDF2F7
@@ -30,26 +30,80 @@
         #4A5568
     </Color>
 
-    <!--  Override Semi Design Global Background Colors  -->
+    <!--  Button Colors  -->
     <Color
-        x:Key="SemiGrey0">
-        #F0F4F8
+        x:Key="PrimaryButtonStart">
+        #3B8BFF
     </Color>
-    <SolidColorBrush
-        x:Key="CardBackground">
+    <Color
+        x:Key="PrimaryButtonEnd">
+        #66B1FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonHoverStart">
+        #59A6FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonHoverEnd">
+        #7EC0FF
+    </Color>
+    <Color
+        x:Key="PrimaryButtonPressedStart">
+        #2F78E6
+    </Color>
+    <Color
+        x:Key="PrimaryButtonPressedEnd">
+        #3B8BFF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonStart">
+        #2F78E6
+    </Color>
+    <Color
+        x:Key="SecondaryButtonEnd">
+        #3B8BFF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonHoverStart">
+        #3B8BFF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonHoverEnd">
+        #59A6FF
+    </Color>
+    <Color
+        x:Key="SecondaryButtonPressedStart">
+        #286AD8
+    </Color>
+    <Color
+        x:Key="SecondaryButtonPressedEnd">
+        #2F78E6
+    </Color>
+
+    <!--  Flyout Colors  -->
+    <Color
+        x:Key="FlyoutBackground">
         #F8FAFB
-    </SolidColorBrush>
-    <SolidColorBrush
-        x:Key="BorderBrush">
+    </Color>
+    <Color
+        x:Key="FlyoutBorder">
         #E1E8ED
-    </SolidColorBrush>
-    <SolidColorBrush
-        x:Key="RegionBrush">
-        #F0F4F8
-    </SolidColorBrush>
-    <SolidColorBrush
-        x:Key="ControlFillColorDefaultBrush">
-        #F8FAFB
-    </SolidColorBrush>
+    </Color>
+    <Color
+        x:Key="FlyoutItemHoverBackground">
+        #E6EEF8
+    </Color>
+    <Color
+        x:Key="FlyoutItemSelectedBackground">
+        #D8E7FB
+    </Color>
+    <Color
+        x:Key="FlyoutForeground">
+        #1A365D
+    </Color>
+    <Color
+        x:Key="FlyoutIconForeground">
+        #1A365D
+    </Color>
 
 </ResourceDictionary>
