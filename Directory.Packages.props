@@ -39,7 +39,6 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1"/>
         <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.3.2"/>
-        <PackageVersion Include="Moq" Version="4.20.72"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="ObservableCollections" Version="3.3.4"/>
         <PackageVersion Include="Polyfill" Version="9.7.7"/>
@@ -56,6 +55,7 @@
         <PackageVersion Include="TUnit" Version="1.12.93"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify.TUnit" Version="31.10.0"/>
+        <PackageVersion Include="Rocks" Version="10.0.0"/>
         <PackageVersion Include="xunit" Version="2.9.3"/>
         <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>

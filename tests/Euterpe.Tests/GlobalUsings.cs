@@ -1,10 +1,10 @@
 global using System.Diagnostics;
 global using System.Globalization;
 global using JetBrains.Annotations;
-global using Moq;
 global using Euterpe.Abstractions;
 global using Euterpe.Common;
 global using Euterpe.Core;
 global using Euterpe.Models;
 global using Euterpe.Models.Enums;
 global using Euterpe.Tests.Attributes;
+global using Rocks;
