@@ -1,16 +1,23 @@
-﻿using NetArchTest.Rules;
+using NetArchTest.Rules;
+using Assembly = System.Reflection.Assembly;
 
 namespace Euterpe.Tests;
 
 [Category("ArchitectureTests")]
 public sealed class ArchitectureTests
 {
-    private static readonly Types Types = Types.InCurrentDomain();
+    private static readonly Types AbstractionsTypes = Types.InAssembly(Assembly.Load("Euterpe.Abstractions"));
+
+    private static readonly Types CoreTypes = Types.InAssembly(Assembly.Load("Euterpe.Core"));
+
+    private static readonly Types CommonTypes = Types.InAssembly(Assembly.Load("Euterpe.Common"));
+
+    private static readonly Types ModelsTypes = Types.InAssembly(Assembly.Load("Euterpe.Models"));
 
     [Test]
     public async Task Abstractions_ClassesArePublicAndInterfaces_ReturnsTrue()
     {
-        var result = Types.That()
+        var result = AbstractionsTypes.That()
             .ResideInNamespace("Euterpe.Abstractions")
             .Should()
             .BePublic()
@@ -24,7 +31,7 @@ public sealed class ArchitectureTests
     [Test]
     public async Task CoreServices_ClassesAreInternalAndSealed_ReturnsTrue()
     {
-        var result = Types.That()
+        var result = CoreTypes.That()
             .ResideInNamespaceMatching("^Euterpe.Core$")
             .Should()
             .BeInternal()
@@ -38,7 +45,7 @@ public sealed class ArchitectureTests
     [Test]
     public async Task Common_ClassesArePublic_ReturnsTrue()
     {
-        var result = Types.That()
+        var result = CommonTypes.That()
             .ResideInNamespace("Euterpe.Common")
             .Should()
             .BePublic()
@@ -50,7 +57,7 @@ public sealed class ArchitectureTests
     [Test]
     public async Task Models_ClassesArePublic_ReturnsTrue()
     {
-        var result = Types.That()
+        var result = ModelsTypes.That()
             .ResideInNamespace("Euterpe.Models")
             .And()
             .AreNotStatic()
