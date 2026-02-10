@@ -37,7 +37,7 @@ public static class CoreServiceExtensions
                 ChunkCount = 8,
                 MaxTryAgainOnFailure = 4,
                 ParallelDownload = true,
-                Timeout = 3000
+                BlockTimeout = 3000
             }));
     }
 
