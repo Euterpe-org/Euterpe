@@ -51,7 +51,7 @@
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
         <PackageVersion Include="Semi.Avalonia" Version="11.3.7.3"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
-        <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.2"/>
+        <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.3"/>
         <PackageVersion Include="TUnit" Version="1.13.11"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify.TUnit" Version="31.12.4"/>
