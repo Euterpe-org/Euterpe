@@ -32,7 +32,7 @@
         <PackageVersion Include="JetBrains.Annotations" Version="$(JetBrainsAnnotationsVersion)"/>
         <PackageVersion Include="JetBrains.Annotations.Sources" Version="$(JetBrainsAnnotationsVersion)"/>
         <PackageVersion Include="Meziantou.Xunit.ParallelTestFramework" Version="2.3.0"/>
-        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.0.2"/>
+        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.3.3"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0"/>
