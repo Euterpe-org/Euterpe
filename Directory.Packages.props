@@ -4,7 +4,7 @@
     </PropertyGroup>
     <!-- Package Group Versions -->
     <PropertyGroup>
-        <AvaloniaVersion>11.3.11</AvaloniaVersion>
+        <AvaloniaVersion>11.3.12</AvaloniaVersion>
         <JetBrainsAnnotationsVersion>2025.2.4</JetBrainsAnnotationsVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
