@@ -34,9 +34,6 @@
     <value>檢查更新失敗
 是否已連網?</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>檢測到的 Muse Dash 文件夾為 {0}
 是否為正確的遊戲文件夾?</value>
@@ -238,7 +235,7 @@ Euterpe 已經是最新版本
   </data>
   <data name="MessageBox_Content_UninstallModFailed" xml:space="preserve">
     <value>Mod 安裝失敗。遊戲是否正執行?
-{0}}</value>
+{0}</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Game" xml:space="preserve">
     <value>Mod 請除安裝失敗
