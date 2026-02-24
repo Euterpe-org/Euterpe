@@ -11,9 +11,6 @@ public sealed class LiveLogService
     {
         processor.OnLogMessageReceived += logMessage => _logMessages.AddLast(logMessage);
 
-        var view = _logMessages.CreateView(x => x);
-        view.AttachFilter(x => !(x.Category.Name is "Euterpe.Services.NavigationService" || x.Message.Contains("Initialized")));
-
-        LogMessagesView = view.ToNotifyCollectionChanged();
+        LogMessagesView = _logMessages.CreateView(x => x).ToNotifyCollectionChanged();
     }
 }
