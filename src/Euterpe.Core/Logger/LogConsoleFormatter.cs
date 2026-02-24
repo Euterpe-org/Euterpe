@@ -1,26 +1,18 @@
 ﻿using System.Buffers;
 using Utf8StringInterpolation;
 using static Euterpe.Core.Logger.AnsiEscapeColors;
+using static Euterpe.Core.Logger.LoggingConstants;
 
 namespace Euterpe.Core.Logger;
 
 internal sealed class LogConsoleFormatter : IZLoggerFormatter
 {
-    private static readonly Dictionary<LogLevel, string> _levelPrefixes = new()
-    {
-        [LogLevel.Trace] = $"{Blue}[TRC]{Reset}",
-        [LogLevel.Debug] = $"{BrightGreen}[DBG]{Reset}",
-        [LogLevel.Information] = $"{BrightCyan}[INF]{Reset}",
-        [LogLevel.Warning] = $"{Yellow}[WRN]{Reset}",
-        [LogLevel.Error] = $"{Red}[ERR]{Reset}",
-        [LogLevel.Critical] = $"{BrightRed}[CRT]{Reset}"
-    };
-
     public void FormatLogEntry(IBufferWriter<byte> writer, IZLoggerEntry entry)
     {
         using var utf8Writer = new Utf8StringWriter<IBufferWriter<byte>>(writer);
 
-        utf8Writer.Append(_levelPrefixes[entry.LogInfo.LogLevel]);
+        var logLevel = (int)entry.LogInfo.LogLevel;
+        utf8Writer.Append($"{LevelColors[logLevel]}[{LevelAbbreviations[logLevel]}]{Reset}");
         utf8Writer.AppendUtf8("("u8);
         utf8Writer.AppendUtf8(entry.LogInfo.Category.Utf8Span[8..]);
         utf8Writer.AppendUtf8(") "u8);
