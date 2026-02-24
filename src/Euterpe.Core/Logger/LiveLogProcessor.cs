@@ -4,14 +4,25 @@ public sealed class LiveLogProcessor : IAsyncLogProcessor
 {
     public void Post(IZLoggerEntry log)
     {
+        var category = log.LogInfo.Category;
+
+        if (category.Name is "Euterpe.Services.NavigationService")
+        {
+            log.Return();
+            return;
+        }
+
         var logMessage = new LogMessage(
             log.LogInfo.Timestamp.Local,
             log.LogInfo.LogLevel,
-            log.LogInfo.Category,
+            category,
             log.ToString()
         );
 
         log.Return();
+
+        if (logMessage.Message.Contains("Initialized"))
+            return;
 
         OnLogMessageReceived?.Invoke(logMessage);
     }
