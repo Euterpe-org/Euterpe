@@ -52,7 +52,7 @@
                             Classes.WRN="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Warning}, Mode=OneTime}">
                             <TextBlock
                                 Classes="LogLevelText"
-                                Text="{Binding LevelAbbreviation, Mode=OneTime}" />
+                                Text="{Binding LogLevelAbbreviation, Mode=OneTime}" />
                         </Border>
 
                         <!--  Message  -->
