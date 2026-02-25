@@ -235,7 +235,7 @@ internal sealed partial class LocalService : ILocalService
                 continue;
             }
 
-            Config.MelonLoaderVersion = version[..^2];
+            Config.MelonLoaderVersion = Version.Parse(version).ToString(3);
             Logger.ZLogInformation($"MelonLoader version detected: {Config.MelonLoaderVersion}");
             return;
         }
