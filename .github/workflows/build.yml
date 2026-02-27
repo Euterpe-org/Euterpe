@@ -58,9 +58,9 @@ jobs:
           ls -la artifacts/output
 
       - name: Create Archive
-        working-directory: ./
+        working-directory: artifacts/output
         run: |
-          7z a -tzip Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip artifacts/output
+          7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip" *
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
