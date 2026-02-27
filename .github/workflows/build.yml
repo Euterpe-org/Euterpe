@@ -57,8 +57,13 @@ jobs:
         run: |
           ls -la artifacts/output
 
+      - name: Create Archive
+        working-directory: ./
+        run: |
+          7z a -tzip Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip artifacts/output
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
-          path: artifacts/output/*
+          path: Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip
+          archive: false
