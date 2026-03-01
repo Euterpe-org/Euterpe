@@ -7,6 +7,7 @@ public sealed partial class AppViewModel : ViewModelBase
         await base.InitializeAsync().ConfigureAwait(false);
 
         await SettingService.LoadAsync().ConfigureAwait(false);
+        await StatisticsService.RecordVisitorAsync().ConfigureAwait(false);
 
         Logger.ZLogInformation($"{nameof(AppViewModel)} Initialized");
     }
@@ -26,6 +27,9 @@ public sealed partial class AppViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required ISettingService SettingService { get; init; }
+
+    [UsedImplicitly]
+    public required IStatisticsService StatisticsService { get; init; }
 
     #endregion Injections
 }
