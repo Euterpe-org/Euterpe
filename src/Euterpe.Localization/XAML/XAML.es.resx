@@ -121,10 +121,10 @@
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>Créditos</value>
   </data>
-  <data name="SearchBarWatermark_Chart" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
     <value>Buscar  (Canción, Autor, Diseñador)</value>
   </data>
-  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Buscar mods  (Nombre, Autor)</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">

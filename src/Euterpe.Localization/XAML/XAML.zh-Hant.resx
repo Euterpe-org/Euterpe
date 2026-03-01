@@ -136,10 +136,10 @@
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>關於</value>
   </data>
-  <data name="SearchBarWatermark_Chart" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
     <value>搜索譜面  (名稱，曲師，譜師)</value>
   </data>
-  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>搜尋模組  (名字,   作者)</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">

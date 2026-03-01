@@ -130,10 +130,10 @@
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>Инфо</value>
   </data>
-  <data name="SearchBarWatermark_Chart" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
     <value>Найти чарт  (Имя, Автор, Создатель)</value>
   </data>
-  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Искать моды  (Имя, Автор)</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">

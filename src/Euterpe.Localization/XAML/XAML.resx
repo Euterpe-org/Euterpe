@@ -268,10 +268,10 @@
   <data name="Panel_Setting_FileManagement" xml:space="preserve">
     <value>File Management</value>
   </data>
-  <data name="SearchBarWatermark_Chart" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
     <value>Search Charts  (Name, Author, Charter)</value>
   </data>
-  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Search Mods  (Name, Author)</value>
   </data>
   <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">

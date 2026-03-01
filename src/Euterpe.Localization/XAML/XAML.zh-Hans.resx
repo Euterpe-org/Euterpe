@@ -268,10 +268,10 @@
   <data name="Panel_Setting_FileManagement" xml:space="preserve">
     <value>文件管理</value>
   </data>
-  <data name="SearchBarWatermark_Chart" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
     <value>搜索谱面  （名称，曲师，谱师）</value>
   </data>
-  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>搜索模组  （名字，作者）</value>
   </data>
   <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">

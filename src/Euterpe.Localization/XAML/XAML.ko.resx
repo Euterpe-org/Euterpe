@@ -130,10 +130,10 @@
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>대해서</value>
   </data>
-  <data name="SearchBarWatermark_Chart" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
     <value>차트 검색  (이름, 제작자, 차트 제작자)</value>
   </data>
-  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>모드 검색  (이름, 작성자)</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">

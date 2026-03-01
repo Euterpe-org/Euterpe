@@ -51,7 +51,7 @@
                         Classes="ClearButton"
                         Margin="0,0,10,0"
                         MaxLength="30"
-                        PlaceholderText="{Localize {x:Static loc:XAMLLiteral.SearchBarWatermark_Mod}}"
+                        PlaceholderText="{Localize {x:Static loc:XAMLLiteral.SearchBarPlaceholder_Mod}}"
                         Text="{Binding SearchText, Mode=OneWayToSource}">
                         <TextBox.InnerLeftContent>
                             <PathIcon

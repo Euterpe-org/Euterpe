@@ -115,7 +115,7 @@
   <data name="Page_Setting" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="SearchBarWatermark_Mod" xml:space="preserve">
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Modsを探す （名前，作者）</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
