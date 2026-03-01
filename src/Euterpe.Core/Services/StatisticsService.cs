@@ -6,34 +6,28 @@ namespace Euterpe.Core;
 
 internal sealed class StatisticsService : IStatisticsService
 {
-    public void RecordVisitor()
+    public async Task RecordVisitorAsync()
     {
-        _ = Task.Run(async () =>
+        try
         {
-            try
-            {
-                await SendRecordVisitorAsync().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.ZLogWarning($"Failed to record visitor statistics: {ex.Message}");
-            }
-        });
+            await SendRecordVisitorAsync().ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning($"Failed to record visitor statistics: {ex.Message}");
+        }
     }
 
-    public void RecordDownload(string modName, string modAuthor)
+    public async Task RecordDownloadAsync(string modName, string modAuthor)
     {
-        _ = Task.Run(async () =>
+        try
         {
-            try
-            {
-                await SendRecordDownloadAsync(modName, modAuthor).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.ZLogWarning($"Failed to record download statistics: {ex.Message}");
-            }
-        });
+            await SendRecordDownloadAsync(modName, modAuthor).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning($"Failed to record download statistics: {ex.Message}");
+        }
     }
 
     private async Task SendRecordVisitorAsync()
@@ -81,7 +75,7 @@ internal sealed class StatisticsService : IStatisticsService
         };
     }
 
-    private static string GenerateRequestId() => Guid.NewGuid().ToString();
+    private static string GenerateRequestId() => Guid.CreateVersion7().ToString();
 
     #region Injections
 

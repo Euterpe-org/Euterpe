@@ -57,9 +57,9 @@ public static class CoreServiceExtensions
         builder.RegisterType<NotificationService>().As<INotificationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<StatisticsService>().As<IStatisticsService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<StatisticsService>().As<IStatisticsService>().PropertiesAutowired().SingleInstance();
 
         // Serialization Services
         builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
