@@ -14,7 +14,7 @@ internal sealed class StatisticsService : IStatisticsService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning($"Failed to record visitor statistics: {ex.Message}");
+            Logger.ZLogWarning(ex, $"Failed to record visitor statistics");
         }
     }
 
@@ -26,7 +26,7 @@ internal sealed class StatisticsService : IStatisticsService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning($"Failed to record download statistics: {ex.Message}");
+            Logger.ZLogWarning(ex, $"Failed to record download statistics");
         }
     }
 

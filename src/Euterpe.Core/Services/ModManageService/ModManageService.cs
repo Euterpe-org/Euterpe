@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using AsyncAwaitBestPractices;
 
 namespace Euterpe.Core;
 
@@ -21,7 +22,7 @@ internal sealed partial class ModManageService : IModManageService
     public async Task InstallModAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
-        await StatisticsService.RecordDownloadAsync(mod.Name, mod.Author).ConfigureAwait(false);
+        StatisticsService.RecordDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
