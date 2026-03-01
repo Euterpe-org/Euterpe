@@ -36,13 +36,5 @@
         <DefineConstants Condition="'$(IsMacOS)' == 'true'">$(DefineConstants);MACOS</DefineConstants>
     </PropertyGroup>
 
-    <!-- Avalonia Accelerate -->
-    <ItemGroup Condition="'$(AvAccelerateKey)' != ''">
-        <AvaloniaUILicenseKey Include="$(AvAccelerateKey)"/>
-    </ItemGroup>
-    <PropertyGroup>
-        <DefineConstants Condition="'$(AvAccelerateKey)' != ''">$(DefineConstants);ACCELERATE</DefineConstants>
-    </PropertyGroup>
-
     <Import Condition="'$(Configuration)' == 'Release'" Project="Release.props"/>
 </Project>

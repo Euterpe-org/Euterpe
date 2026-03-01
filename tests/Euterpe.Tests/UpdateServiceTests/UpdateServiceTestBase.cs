@@ -19,4 +19,19 @@ public abstract class UpdateServiceTestBase : IDisposable
         Logger.Dispose();
         MockHttp.Dispose();
     }
+
+    internal UpdateService CreateUpdateService(
+        Config? config = null,
+        IDownloadManager? downloadManager = null,
+        IMessageBoxService? messageBoxService = null,
+        IPlatformService? platformService = null) =>
+        new()
+        {
+            Config = config ?? Config,
+            Client = MockHttp.ToHttpClient(),
+            Logger = Logger,
+            DownloadManager = downloadManager ?? new IDownloadManagerMakeExpectations().Instance(),
+            MessageBoxService = messageBoxService ?? new IMessageBoxServiceMakeExpectations().Instance(),
+            PlatformService = platformService ?? new IPlatformServiceMakeExpectations().Instance()
+        };
 }

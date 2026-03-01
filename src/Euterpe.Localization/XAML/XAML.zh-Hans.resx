@@ -94,6 +94,18 @@
   <data name="Folder_UserLibs" xml:space="preserve">
     <value>依赖文件夹</value>
   </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>点个 Star</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>赞助</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>喜欢 Euterpe 吗？您可以用以下方式支持我们</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% 免费 · 开源</value>
+  </data>
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>访问</value>
   </data>
@@ -111,6 +123,45 @@
   </data>
   <data name="MelonLoader_State_Preparing" xml:space="preserve">
     <value>准备中...</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
+    <value>模组开发所需</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
+    <value>.NET 10 SDK</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
+    <value>使构建工具能够定位游戏文件</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
+    <value>设置环境变量</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
+    <value>创建账户以上传和管理您的模组</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
+    <value>Euterpe 模组中心</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
+    <value>快速创建模组项目</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
+    <value>模组模板 Nuget</value>
+  </data>
+  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
+    <value>开发环境</value>
+  </data>
+  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
+    <value>推荐的 IDE</value>
+  </data>
+  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
+    <value>提交模组</value>
+  </data>
+  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
+    <value>未安装</value>
+  </data>
+  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
+    <value>未设置</value>
   </data>
   <data name="ModFilterType_All" xml:space="preserve">
     <value>全部</value>
@@ -143,7 +194,7 @@
     <value>仓库</value>
   </data>
   <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
-      <value>需要加载器版本</value>
+    <value>需要加载器版本</value>
   </data>
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>支持游戏版本</value>
@@ -264,9 +315,6 @@
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub 镜像</value>
-  </data>
-  <data name="Setting_DownloadSource_Website" xml:space="preserve">
-    <value>网站</value>
   </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>始终显示滚动条</value>

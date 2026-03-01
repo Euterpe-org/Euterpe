@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Modding"
     x:Class="Euterpe.Views.Panels.Modding.ModDevelopPanel"
@@ -31,14 +32,13 @@
 
             <!--  Development Environment Section  -->
             <euterpe:ContentListItem
-                Title="Development Environment">
-                <Grid
-                    ColumnDefinitions="*,*"
-                    Margin="5,0,10,0">
+                Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_DevelopmentEnvironment}}">
+                <StackPanel
+                    Margin="5,0,10,0"
+                    Spacing="10">
 
-                    <!--  .NET SDK Installation Card  -->
+                    <!--  .NET SDK Installation Card (Full Width)  -->
                     <Button
-                        Grid.Column="0"
                         Classes="Transparent Card"
                         Command="{Binding InstallDotNetSdkCommand}"
                         IsEnabled="{Binding !DotNetSdkInstalled}">
@@ -56,7 +56,7 @@
                                     Orientation="Vertical">
                                     <TextBlock
                                         Classes="CardTitle"
-                                        Text=".NET 8 SDK">
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_DotNetSDK_Title}}">
                                         <TextBlock.Foreground>
                                             <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                                 <GradientStop Offset="0" Color="#AA7AE0" />
@@ -66,7 +66,7 @@
                                     </TextBlock>
                                     <TextBlock
                                         Classes="CardDesc"
-                                        Text="Required for mod development" />
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_DotNetSDK_Description}}" />
                                 </StackPanel>
 
                                 <!--  Installation status indicator  -->
@@ -80,7 +80,7 @@
                                     <TextBlock
                                         Classes="CardDesc"
                                         IsVisible="{Binding !DotNetSdkInstalled, Mode=OneWay}"
-                                        Text="Not Installed"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Status_NotInstalled}}"
                                         VerticalAlignment="Center" />
                                     <PathIcon
                                         Data="{StaticResource SemiIconVerify}"
@@ -92,69 +92,130 @@
                         </Border>
                     </Button>
 
-                    <!--  Mod Template NuGet Card  -->
-                    <Button
-                        Grid.Column="1"
-                        Classes="Transparent Card"
-                        Command="{Binding ToggleModTemplateInstallCommand}">
-                        <Button.Styles>
-                            <Style
-                                Selector="Button:pointerover Border.Hover">
-                                <Setter Property="Background" Value="#4B49AC" />
-                                <Setter Property="RenderTransform" Value="scale(1.004)" />
-                            </Style>
-                        </Button.Styles>
-                        <Border
-                            Classes="Hover">
-                            <DockPanel>
-                                <StackPanel
-                                    Orientation="Vertical">
-                                    <TextBlock
-                                        Classes="CardTitle"
-                                        Text="Mod Template Nuget">
-                                        <TextBlock.Foreground>
-                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
-                                                <GradientStop Offset="0" Color="#7F7FD5" />
-                                                <GradientStop Offset="1" Color="#86A8E7" />
-                                            </LinearGradientBrush>
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                    <TextBlock
-                                        Classes="CardDesc"
-                                        Text="For quick mod project creation" />
-                                </StackPanel>
+                    <!--  Second Row: Mod Template and Environment Variable Cards  -->
+                    <Grid
+                        ColumnDefinitions="*,10,*">
 
-                                <!--  Installation status indicator  -->
-                                <StackPanel
-                                    DockPanel.Dock="Right"
-                                    HorizontalAlignment="Right"
-                                    Margin="30,0"
-                                    Orientation="Horizontal"
-                                    Spacing="10"
-                                    VerticalAlignment="Center">
-                                    <TextBlock
-                                        Classes="CardDesc"
-                                        IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
-                                        Text="Not Installed"
-                                        VerticalAlignment="Center" />
-                                    <PathIcon
-                                        Data="{StaticResource SemiIconVerify}"
-                                        Foreground="Green"
-                                        Height="30"
-                                        IsVisible="{Binding ModTemplateInstalled, Mode=OneWay}" />
-                                </StackPanel>
-                            </DockPanel>
-                        </Border>
-                    </Button>
-                </Grid>
+                        <!--  Mod Template NuGet Card  -->
+                        <Button
+                            Grid.Column="0"
+                            Classes="Transparent Card"
+                            Command="{Binding ToggleModTemplateInstallCommand}">
+                            <Button.Styles>
+                                <Style
+                                    Selector="Button:pointerover Border.Hover">
+                                    <Setter Property="Background" Value="#4B49AC" />
+                                    <Setter Property="RenderTransform" Value="scale(1.004)" />
+                                </Style>
+                            </Button.Styles>
+                            <Border
+                                Classes="Hover">
+                                <DockPanel>
+                                    <StackPanel
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Classes="CardTitle"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_ModTemplate_Title}}">
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                    <GradientStop Offset="0" Color="#7F7FD5" />
+                                                    <GradientStop Offset="1" Color="#86A8E7" />
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_ModTemplate_Description}}" />
+                                    </StackPanel>
+
+                                    <!--  Installation status indicator  -->
+                                    <StackPanel
+                                        DockPanel.Dock="Right"
+                                        HorizontalAlignment="Right"
+                                        Margin="30,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            IsVisible="{Binding !ModTemplateInstalled, Mode=OneWay}"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Status_NotInstalled}}"
+                                            VerticalAlignment="Center" />
+                                        <PathIcon
+                                            Data="{StaticResource SemiIconVerify}"
+                                            Foreground="Green"
+                                            Height="30"
+                                            IsVisible="{Binding ModTemplateInstalled, Mode=OneWay}" />
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                        </Button>
+
+                        <!--  Environment Variable Card  -->
+                        <Button
+                            Grid.Column="2"
+                            Classes="Transparent Card"
+                            Command="{Binding SetEnvVariableCommand}"
+                            IsEnabled="{Binding !EnvVariableSet}">
+                            <Button.Styles>
+                                <Style
+                                    Selector="Button:pointerover Border.Hover">
+                                    <Setter Property="Background" Value="#047857" />
+                                    <Setter Property="RenderTransform" Value="scale(1.004)" />
+                                </Style>
+                            </Button.Styles>
+                            <Border
+                                Classes="Hover">
+                                <DockPanel>
+                                    <StackPanel
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Classes="CardTitle"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EnvVariable_Title}}">
+                                            <TextBlock.Foreground>
+                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                    <GradientStop Offset="0" Color="#059669" />
+                                                    <GradientStop Offset="1" Color="#10B981" />
+                                                </LinearGradientBrush>
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EnvVariable_Description}}" />
+                                    </StackPanel>
+
+                                    <!--  Status indicator  -->
+                                    <StackPanel
+                                        DockPanel.Dock="Right"
+                                        HorizontalAlignment="Right"
+                                        Margin="30,0"
+                                        Orientation="Horizontal"
+                                        Spacing="10"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            Classes="CardDesc"
+                                            IsVisible="{Binding !EnvVariableSet, Mode=OneWay}"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Status_NotSet}}"
+                                            VerticalAlignment="Center" />
+                                        <PathIcon
+                                            Data="{StaticResource SemiIconVerify}"
+                                            Foreground="Green"
+                                            Height="30"
+                                            IsVisible="{Binding EnvVariableSet, Mode=OneWay}" />
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                        </Button>
+                    </Grid>
+                </StackPanel>
             </euterpe:ContentListItem>
 
             <!--  Mod Submission Section  -->
             <euterpe:ContentListItem
-                Title="Submit Your Mod">
+                Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_SubmitMod}}">
                 <Button
                     Classes="Transparent Card"
-                    CommandParameter="https://github.com/Euterpe-org/ModLinks"
+                    CommandParameter="https://euterpe-org.com"
                     Margin="5,0,10,0">
                     <Button.Styles>
                         <Style
@@ -179,7 +240,7 @@
                                 Grid.Column="1">
                                 <TextBlock
                                     Classes="CardTitle"
-                                    Text="ModLinks Repository">
+                                    Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EuterpeHub_Title}}">
                                     <TextBlock.Foreground>
                                         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                             <GradientStop Offset="0" Color="#FF9966" />
@@ -189,7 +250,7 @@
                                 </TextBlock>
                                 <TextBlock
                                     Classes="CardDesc"
-                                    Text="Submit your mod to euterpe's mod list" />
+                                    Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EuterpeHub_Description}}" />
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -198,15 +259,16 @@
 
             <!--  Recommended IDEs Section  -->
             <euterpe:ContentListItem
-                Title="Recommended IDEs">
+                Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_RecommendedIDEs}}">
 
                 <!--  3-column grid for IDE options  -->
-                <UniformGrid
-                    Columns="3"
+                <Grid
+                    ColumnDefinitions="*,10,*,10,*"
                     Margin="5,0,10,0">
 
                     <!--  VS Code  -->
                     <Button
+                        Grid.Column="0"
                         Classes="Transparent Card"
                         CommandParameter="https://code.visualstudio.com">
                         <Button.Styles>
@@ -235,6 +297,7 @@
 
                     <!--  JetBrains Rider  -->
                     <Button
+                        Grid.Column="2"
                         Classes="Transparent Card"
                         CommandParameter="https://www.jetbrains.com/rider">
                         <Button.Styles>
@@ -263,6 +326,7 @@
 
                     <!--  Visual Studio  -->
                     <Button
+                        Grid.Column="4"
                         Classes="Transparent Card"
                         CommandParameter="https://visualstudio.microsoft.com">
                         <Button.Styles>
@@ -289,7 +353,7 @@
                         </Border>
                     </Button>
 
-                </UniformGrid>
+                </Grid>
             </euterpe:ContentListItem>
         </StackPanel>
     </ScrollViewer>

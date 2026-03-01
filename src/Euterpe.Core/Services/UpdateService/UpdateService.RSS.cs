@@ -51,7 +51,7 @@ internal sealed partial class UpdateService
         foreach (var item in feed.Items)
         {
             var versionText = item.Title.Text;
-            var version = SemVersion.Parse(versionText, SemVersionStyles.AllowV);
+            var version = SemVersion.Parse(versionText);
 
             if (!version.IsPrerelease)
             {

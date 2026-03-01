@@ -7,12 +7,12 @@ namespace Euterpe.Core;
 internal sealed class GiteeDownloadService : IGiteeDownloadService
 {
     private const string GiteeBaseUrl = "https://gitee.com/";
-    private const string RawModLinksUrl = GiteeBaseUrl + "lxymahatma/ModLinks/raw/" + ModLinksBranch;
+    private const string RawModLinksUrl = GiteeBaseUrl + "euterpe-org/Euterpe.Assets/raw/" + ModLinksBranch;
     private const string ModJsonUrl = RawModLinksUrl + "Mods.json";
     private const string LibJsonUrl = RawModLinksUrl + "Libs.json";
     private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
     private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
-    private const string ModToolsReleaseDownloadBaseUrl = GiteeBaseUrl + "lxymahatma/Euterpe/releases/download/";
+    private const string ModToolsReleaseDownloadBaseUrl = GiteeBaseUrl + "euterpe-org/Euterpe/releases/download/";
 
     Task<bool> IDownloadService.DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,

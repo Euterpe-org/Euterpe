@@ -14,13 +14,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
-      <value>选择谱面文件</value>
+    <value>选择谱面文件</value>
   </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
-      <value>选择 Steam 可执行文件</value>
+    <value>选择 Steam 可执行文件</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
-      <value>所有文件</value>
+    <value>所有文件</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>选择缓存文件夹</value>
@@ -37,78 +37,116 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>否</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>否并且不再询问</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>是</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>是并且不再询问</value>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>请选择 Muse Dash 文件夹
+此电脑上是否安装了 Muse Dash？</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+    <value>请选择 Steam 可执行文件</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>请选择 Steam 文件夹</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>检测到的 Muse Dash 文件夹为
 {0}
 这是正确的游戏文件夹吗</value>
   </data>
-  <data name="MessageBox_Content_Error_DotNetRuntime_Install_Failed" xml:space="preserve">
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>{0} 删除失败</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>MelonLoader 文件夹删除失败</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+    <value>未找到 .Net 6 Runtime
+点击确定安装</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
     <value>无法安装 .Net 6 Runtime</value>
   </data>
-  <data name="MessageBox_Content_Error_DotNetSDK_Install_Failed" xml:space="preserve">
-      <value>无法安装 .Net 8 SDK</value>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>你确定要安装 .Net SDK？</value>
   </data>
-  <data name="MessageBox_Content_Error_InvalidPath" xml:space="preserve">
-      <value>你选择的路径无效，请再次选择</value>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>无法安装 .Net 8 SDK</value>
+  </data>
+  <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
+    <value>你选择的路径无效，请再次选择</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>MDM 文件创建失败</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM 文件创建成功</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>MDM 文件解压失败</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM 文件解压成功</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>无法删除 {0} 下的 MelonLoader.zip
 请尝试手动删除</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>MelonLoader 安装失败：{0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
-    <value>MelonLoader 已经成功安装
-</value>
+    <value>MelonLoader 安装成功</value>
   </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>有新版本的 Muse Dash Mod Tools （{0}）已经发布
-
-你想要现在就安装吗
-
-发布标题：
-{1}
-
-发布内容：
-{2}</value>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader 卸载成功</value>
   </data>
-  <data name="MessageBox_Content_NoticeConfirm_DotNetSDK_Install" xml:space="preserve">
-      <value>你确定要安装 .Net SDK？</value>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>MelonLoader 解压失败</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-    <value>请选择 Muse Dash 文件夹</value>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>未找到 MelonLoader 压缩包</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseSteamExec" xml:space="preserve">
-      <value>请选择 Steam 可执行文件</value>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>确定要安装 Mod 模板吗？</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
-    <value>请选择 Steam 文件夹</value>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Mod 模板安装失败</value>
   </data>
-  <data name="MessageBox_Content_Notice_DotNetRuntime_Install" xml:space="preserve">
-    <value>未找到 .Net 6 Runtime
-点击确定安装</value>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>确定要卸载 Mod 模板吗？</value>
   </data>
-  <data name="MessageBox_Content_Success_NoUpdatesFound" xml:space="preserve">
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Mod 模板卸载失败</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>发现新版本：{0}，是否升级？</value>
+  </data>
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>无可用的更新</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>读取游戏信息失败
+  {0}</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>确定要设置 MD_DIRECTORY 环境变量吗？</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>MD_DIRECTORY 环境变量设置失败</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+    <value>模组 {0} 安装成功</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>模组 {0} 重装成功</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+    <value>模组 {0} 删除成功</value>
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>模组 {0} 更新成功</value>
-  </data>
-  <data name="Notification_Content_SuccessMod_Reinstall" xml:space="preserve">
-    <value>模组 {0} 重装成功</value>
-  </data>
-  <data name="Notification_Content_Success_Mod_Install" xml:space="preserve">
-    <value>模组 {0} 安装成功</value>
-  </data>
-  <data name="Notification_Content_Success_Mod_Uninstall" xml:space="preserve">
-    <value>模组 {0} 删除成功</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>错误</value>

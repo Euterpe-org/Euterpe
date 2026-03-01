@@ -40,7 +40,7 @@
         </StackPanel>
 
         <TextBlock
-            Foreground="Gray"
+            Foreground="{DynamicResource SecondaryTextColor}"
             HorizontalAlignment="Center"
             Text="MelonLoader installation is required to play with mods" />
 
@@ -71,14 +71,14 @@
                         Classes.Installed="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Installed}, Mode=OneWay}"
                         Classes.NotInstalled="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.NotInstalled}, Mode=OneWay}"
                         FontSize="16"
-                        Foreground="Gainsboro"
+                        Foreground="{DynamicResource SecondaryTextColor}"
                         IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center" />
 
                     <TextBlock
                         FontSize="16"
-                        Foreground="Gainsboro"
+                        Foreground="{DynamicResource SecondaryTextColor}"
                         IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
                         Margin="0,0,6,0"
                         Text="{Binding DownloadText, Mode=OneWay}"

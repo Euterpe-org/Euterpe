@@ -5,7 +5,7 @@ public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 {
     private const string LazyProxyAttributeName = "Euterpe.Common.Attributes.LazyProxyAttribute";
 
-    protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
+    protected override string ExpectedRootNamespace => EuterpeCoreNamespace;
 
     protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {

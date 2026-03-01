@@ -118,12 +118,9 @@ Magyarul, nem kell spam-elned vagy rajzolgatnod hogy megjelenjenek</value>
   <data name="ModManager" xml:space="preserve">
     <value>Lehetővé teszi hogy kitörölj/kikapcsolj modok játékon belül.</value>
   </data>
-  <data name="Muse Dash Mirror" xml:space="preserve">
+  <data name="MuseDashMirror" xml:space="preserve">
     <value>Egy könyvtár más modoknak amely könnyebbé teszi a hozzáférést bizonyos adatok és UI elemek létrehozását.
 Egy magában nem csinál semmit.</value>
-  </data>
-  <data name="MuseDashModTools" xml:space="preserve">
-    <value>Automatikusan megnézi hogy vannak a modjaidnak elérhető frissítései.</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
     <value>Megakadályozza hogy a játék szüneteljen, amikor elveszti a fókuszt.</value>

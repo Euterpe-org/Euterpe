@@ -15,7 +15,7 @@ internal sealed partial class SettingService
             else
             {
                 Logger.ZLogInformation($"Letting user choose Steam folder...");
-                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseSteamFolder).ConfigureAwait(true);
+                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamFolder).ConfigureAwait(true);
                 Config.SteamFolder = await LocalService.GetSteamFolderAsync().ConfigureAwait(true);
             }
         }
@@ -35,7 +35,7 @@ internal sealed partial class SettingService
             else
             {
                 Logger.ZLogInformation($"Letting user choose Steam executable...");
-                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseSteamExec).ConfigureAwait(true);
+                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamExec).ConfigureAwait(true);
                 Config.SteamExecPath = await LocalService.GetSteamExecPathAsync().ConfigureAwait(true);
             }
         }
@@ -61,7 +61,13 @@ internal sealed partial class SettingService
             else
             {
                 Logger.ZLogInformation($"Letting user choose MuseDash folder...");
-                await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_Notice_ChooseMuseDashFolder).ConfigureAwait(true);
+                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_ChooseMuseDashFolder).ConfigureAwait(true);
+                if (result is not MessageBoxResult.Yes)
+                {
+                    Logger.ZLogInformation($"User cancelled MuseDash folder selection. Exiting application.");
+                    Environment.Exit(0);
+                }
+
                 Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
             }
         }

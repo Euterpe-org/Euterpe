@@ -119,12 +119,9 @@
   <data name="ModManager" xml:space="preserve">
     <value>可以在遊戲內禁用或刪除 Mod</value>
   </data>
-  <data name="Muse Dash Mirror" xml:space="preserve">
+  <data name="MuseDashMirror" xml:space="preserve">
     <value>讓其他 Mod 更容易獲取 PlayerData 和 BattleComponents 信息, 以及創建 UI元素的庫.
  它不執行任何操作</value>
-  </data>
-  <data name="MuseDashModTools" xml:space="preserve">
-    <value>自動檢測和輸出可用Mod更新</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
     <value>禁止遊戲被最小化或者遊戲窗口在後台時自動暫停</value>

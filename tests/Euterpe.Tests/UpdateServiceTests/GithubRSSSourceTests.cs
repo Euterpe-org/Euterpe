@@ -1,4 +1,5 @@
 ﻿using RichardSzalay.MockHttp;
+using Rocks;
 using Semver;
 using Ursa.Controls;
 
@@ -29,15 +30,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -65,15 +58,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -98,15 +83,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -130,15 +107,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -161,15 +130,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -193,15 +154,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -225,15 +178,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -261,15 +206,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = Mock.Of<IMessageBoxService>(),
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService();
 
         using var _ = Assert.Multiple();
 
@@ -292,18 +229,13 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var messageBoxService = Mock.Of<IMessageBoxService>(m =>
-            m.NoticeConfirmAsync(It.IsAny<string>()) == Task.FromResult(MessageBoxResult.No));
+        var expectations = new IMessageBoxServiceCreateExpectations();
+        expectations.Setups
+            .NoticeConfirmAsync(Arg.Any<string>(), new RefStructArgument<ReadOnlySpan<object>>())
+            .ReturnValue(Task.FromResult(MessageBoxResult.No));
+        var messageBoxService = expectations.Instance();
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = messageBoxService,
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService(messageBoxService: messageBoxService);
 
         using var _ = Assert.Multiple();
 
@@ -328,18 +260,13 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
                  </feed>
                  """);
 
-        var messageBoxService = Mock.Of<IMessageBoxService>(m =>
-            m.NoticeConfirmAsync(It.IsAny<string>()) == Task.FromResult(MessageBoxResult.No));
+        var expectations = new IMessageBoxServiceCreateExpectations();
+        expectations.Setups
+            .NoticeConfirmAsync(Arg.Any<string>(), new RefStructArgument<ReadOnlySpan<object>>())
+            .ReturnValue(Task.FromResult(MessageBoxResult.No));
+        var messageBoxService = expectations.Instance();
 
-        var updateService = new UpdateService
-        {
-            Config = Config,
-            Client = MockHttp.ToHttpClient(),
-            Logger = Logger,
-            DownloadManager = Mock.Of<IDownloadManager>(),
-            MessageBoxService = messageBoxService,
-            PlatformService = Mock.Of<IPlatformService>()
-        };
+        var updateService = CreateUpdateService(messageBoxService: messageBoxService);
 
         using var _ = Assert.Multiple();
 

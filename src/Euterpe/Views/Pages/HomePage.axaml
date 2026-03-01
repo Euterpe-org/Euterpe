@@ -24,12 +24,16 @@
             Stretch="UniformToFill" />
 
         <!--  Title Image  -->
-        <Image
-            Height="120"
+        <Button
+            Classes="TitleButton"
+            Click="TitleButton_Click"
             HorizontalAlignment="Left"
-            Margin="50,60"
-            Source="{DynamicResource TitleImage}"
-            VerticalAlignment="Top" />
+            Margin="60,70"
+            VerticalAlignment="Top">
+            <Image
+                Height="140"
+                Source="{DynamicResource TitleImage}" />
+        </Button>
 
         <!--  Play Button  -->
         <euterpe:PlayButton
@@ -38,18 +42,92 @@
             ItemsSource="{Binding GameModes, Mode=OneTime}"
             SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}" />
 
-        <!--  Donation Button  -->
-        <Button
-            Classes="Donation"
-            Command="{Binding ShowDonationDrawerCommand, Mode=OneTime}">
-            <Image
-                Height="100"
-                Source="/Assets/Genshin.webp" />
-        </Button>
+        <!--  Support Card  -->
+        <Border
+            x:Name="SupportCard"
+            Classes="SupportCard"
+            HorizontalAlignment="Right"
+            Margin="0,60,90,0"
+            Theme="{DynamicResource CardBorder}"
+            VerticalAlignment="Top">
+            <StackPanel
+                Orientation="Vertical"
+                Spacing="15">
+                <StackPanel.Styles>
+                    <Style
+                        Selector="u|IconButton">
+                        <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                        <Setter Property="IconPlacement" Value="Left" />
+                    </Style>
+                </StackPanel.Styles>
 
-        <!--  Donation Drawer  -->
-        <u:OverlayDialogHost
-            HostId="DonationDrawerHost" />
+                <!--  Header with Close Button  -->
+                <Grid
+                    ColumnDefinitions="*,Auto,*">
+                    <!--  Left: Emoji  -->
+                    <TextBlock
+                        Grid.Column="0"
+                        Classes="SupportEmoji"
+                        HorizontalAlignment="Left"
+                        Text="✨"
+                        VerticalAlignment="Center" />
+
+                    <!--  Center: Title  -->
+                    <TextBlock
+                        Grid.Column="1"
+                        Classes="SupportTitle"
+                        Text="{Localize {x:Static loc:XAMLLiteral.HomePage_SupportTitle}}"
+                        VerticalAlignment="Center" />
+
+                    <!--  Right: Close Button  -->
+                    <Button
+                        x:Name="CloseButton"
+                        Grid.Column="2"
+                        Classes="SupportCloseButton"
+                        Click="CloseButton_Click"
+                        HorizontalAlignment="Right"
+                        Padding="4"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="14"
+                            Text="✕" />
+                    </Button>
+                </Grid>
+
+                <!--  Support Description  -->
+                <TextBlock
+                    Classes="SupportDescription"
+                    Text="{Localize {x:Static loc:XAMLLiteral.HomePage_SupportDescription}}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+
+                <!--  Action Buttons  -->
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <u:IconButton
+                        CommandParameter="https://github.com/Euterpe-org/Euterpe">
+                        <TextBlock>
+                            <Run
+                                Text="⭐ " />
+                            <Run
+                                Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_GitHubStar}}" />
+                        </TextBlock>
+                    </u:IconButton>
+
+                    <u:IconButton
+                        CommandParameter="https://euterpe-org.com/sponsors">
+                        <TextBlock>
+                            <Run
+                                Text="💖 " />
+                            <Run
+                                Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_Sponsor}}" />
+                        </TextBlock>
+                    </u:IconButton>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 
 </UserControl>

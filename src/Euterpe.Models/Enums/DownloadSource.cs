@@ -6,5 +6,4 @@ public enum DownloadSource
     GitHub,
     GitHubMirror,
     Gitee,
-    Website
 }

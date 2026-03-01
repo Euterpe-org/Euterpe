@@ -1,4 +1,4 @@
-﻿namespace Euterpe.ViewModels.Panels.Modding;
+namespace Euterpe.ViewModels.Panels.Modding;
 
 public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 {
@@ -9,10 +9,14 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial bool ModTemplateInstalled { get; set; }
 
+    [ObservableProperty]
+    public partial bool EnvVariableSet { get; set; }
+
     public override async Task InitializeAsync()
     {
         DotNetSdkInstalled = await LocalService.CheckDotNetSdkInstalledAsync().ConfigureAwait(true);
         ModTemplateInstalled = await LocalService.CheckModTemplateInstalledAsync().ConfigureAwait(true);
+        EnvVariableSet = PlatformService.CheckPathEnvironmentVariableSet();
 
         Logger.ZLogInformation($"{nameof(ModDevelopPanelViewModel)} Initialized");
     }
@@ -20,7 +24,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task InstallDotNetSdkAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_NoticeConfirm_DotNetSDK_Install).ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_DotNetSDK_Install).ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;
@@ -30,7 +34,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         var success = await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(true);
         if (!success)
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_Error_DotNetSDK_Install_Failed).ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDK_Install_Failed).ConfigureAwait(false);
             return;
         }
 
@@ -44,7 +48,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
     private async Task InstallModTemplateAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to install the Mod Template?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_ModTemplate_Install).ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;
@@ -60,13 +64,13 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to install Mod Template");
-            await MessageBoxService.ErrorAsync("Failed to install Mod Template").ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_ModTemplate_Install_Failed).ConfigureAwait(false);
         }
     }
 
     private async Task UninstallModTemplateAsync()
     {
-        var result = await MessageBoxService.NoticeConfirmOverlayAsync("Are you sure you want to uninstall the Mod Template?").ConfigureAwait(true);
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_ModTemplate_Uninstall).ConfigureAwait(true);
         if (result is not MessageBoxResult.Yes)
         {
             return;
@@ -82,7 +86,32 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to uninstall Mod Template");
-            await MessageBoxService.ErrorAsync("Failed to uninstall Mod Template").ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_ModTemplate_Uninstall_Failed).ConfigureAwait(false);
+        }
+    }
+
+    [RelayCommand]
+    private async Task SetEnvVariableAsync()
+    {
+        var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetMdDirectoryEnvironment)
+            .ConfigureAwait(true);
+        if (result is not MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        Logger.ZLogInformation($"Setting MD_DIRECTORY environment variable...");
+
+        var success = PlatformService.SetPathEnvironmentVariable();
+        if (success)
+        {
+            Logger.ZLogInformation($"MD_DIRECTORY environment variable set successfully");
+            EnvVariableSet = true;
+        }
+        else
+        {
+            Logger.ZLogError($"Failed to set MD_DIRECTORY environment variable");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_SetMdDirectoryEnvironment_Failed).ConfigureAwait(false);
         }
     }
 

@@ -36,7 +36,7 @@ internal sealed partial class UpdateService
 
             if (release is not null)
             {
-                var version = SemVersion.Parse(release.TagName, SemVersionStyles.AllowV);
+                var version = SemVersion.Parse(release.TagName);
                 if (!version.IsPrerelease)
                 {
                     return release;
@@ -83,7 +83,7 @@ internal sealed partial class UpdateService
             return false;
         }
 
-        var releaseVersion = SemVersion.Parse(release.TagName, SemVersionStyles.AllowV);
+        var releaseVersion = SemVersion.Parse(release.TagName);
         Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
 
         var shouldUpdate = await ShouldUpdateAsync(releaseVersion).ConfigureAwait(false);

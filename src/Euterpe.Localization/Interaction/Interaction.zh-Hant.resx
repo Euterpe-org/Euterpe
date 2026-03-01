@@ -13,6 +13,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
     <value>選擇譜面文件夾</value>
   </data>
@@ -22,25 +23,11 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>否</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>否，並且不在詢問</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>是</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>是，並且不再詢問</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Mod 啟用/禁用失敗
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-    <value>Mod 啟用/禁用失敗。遊戲是否正執行?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-    <value>Mod 啟用/禁用失敗。沒有權限
 {0}</value>
   </data>
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
@@ -54,6 +41,12 @@
   <data name="MessageBox_Content_CopyUpdaterFailed" xml:space="preserve">
     <value>無法將 Updater 複製到目標文件夾
 {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>刪除 {0} 失敗</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>刪除 MelonLoader 資料夾失敗</value>
   </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{0} 使用依賴 {1}
@@ -72,7 +65,7 @@
   </data>
   <data name="MessageBox_Content_DownloadChartSuccess" xml:space="preserve">
     <value>譜面 {0} 已成功下載
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_DuplicateMods" xml:space="preserve">
     <value>請手動選擇並且刪除重複的 mod
@@ -80,10 +73,6 @@
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>你想要啟用 {0} 的依賴 Mod {1} 嗎?</value>
-  </data>
-  <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
-    <value>驗證Muse Dash.exe失敗
-請確認你選擇了正確的資料夾</value>
   </data>
   <data name="MessageBox_Content_GamePathError" xml:space="preserve">
     <value>你的遊戲路徑沒有包含 ''steamapps\common\Muse Dash\musedash.exe''
@@ -104,62 +93,69 @@
     <value>依賴 {0} 安裝失敗
 {1}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoader" xml:space="preserve">
-    <value>你沒有安裝 MelonLoader
-需要安裝之後才能運行所有的Mod
-是否現在安裝?</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
-    <value>MelonLoader 下載失敗
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
-    <value>MelonLoader 下載失敗
-是否連上網路?
-{0}}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
-    <value>Mod 安裝失敗
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Game" xml:space="preserve">
-    <value>Mod 安裝失敗。遊戲是否正執行?
-{0}}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Internet" xml:space="preserve">
-    <value>Mod 安裝失敗。是否有連上網路?
-{0}</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>你選擇的位置無效，請再次選擇</value>
   </data>
   <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
     <value>檢查更新成功
-Muse Dash Mod Tools 已經是最新版本
-</value>
+Euterpe 已經是最新版本
+    </value>
   </data>
-  <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
-    <value>日誌分析完成, 尚未從日誌中發現明顯錯誤
-如果扔然有問題請至 trouble shoot 頻道詢問</value>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>建立 MDM 檔案失敗</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM 檔案建立成功</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>解壓 MDM 檔案失敗</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM 檔案解壓成功</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>無法刪除 {0} 下的 MelonLoader.zip
 請嘗試手動刪除</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Install" xml:space="preserve">
+    <value>你沒有安裝 MelonLoader
+需要安裝之後才能運行所有的Mod
+是否現在安裝?</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>安裝 MelonLoader 失敗：{0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader 已經成功安裝
-</value>
+    </value>
   </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>有新版本的 Muse Dash Mod Tools （{0}）已經發布
-
-你想要現在就安裝嗎
-
-發布標題：
-{1}
-
-發布内容：
-{2}</value>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader 已成功解除安裝</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>解壓 MelonLoader 失敗</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>找不到 MelonLoader 壓縮檔</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>確定要安裝 Mod 模板嗎？</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>安裝 Mod 模板失敗</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>確定要解除安裝 Mod 模板嗎？</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>解除安裝 Mod 模板失敗</value>
+  </data>
+  <data name="MessageBox_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Mod 安裝失敗
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>發現新版本：{0}，是否升級？</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>你的日誌中沒有包含應用路徑</value>
@@ -173,7 +169,7 @@ Muse Dash Mod Tools 已經是最新版本
   </data>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>這個 Mod 沒有可用連結進行下載
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>無法認證你在Steam上購買了此遊戲
@@ -190,9 +186,6 @@ Muse Dash Mod Tools 已經是最新版本
   <data name="MessageBox_Content_NoMelonLoaderVersion" xml:space="preserve">
     <value>無法從日誌中找到 MelonLoader的版本</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-    <value>請選擇 Muse Dash 文件夾</value>
-  </data>
   <data name="MessageBox_Content_NullPath" xml:space="preserve">
     <value>你儲存的 Muse Dash 文件夾是空的
 請選擇正確的文件夾</value>
@@ -203,6 +196,10 @@ Muse Dash Mod Tools 已經是最新版本
   <data name="MessageBox_Content_OverrideChart" xml:space="preserve">
     <value>你已經下載了這張圖譜 {0}
 是否要覆蓋檔案?</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>讀取遊戲資訊失敗
+  {0}</value>
   </data>
   <data name="MessageBox_Content_ReadGameVersionFailed" xml:space="preserve">
     <value>無法讀取當前的遊戲版本
@@ -218,6 +215,12 @@ Muse Dash Mod Tools 已經是最新版本
     <value>你正在要求重新安裝 {0}
 請確認你的操作</value>
   </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>確定要設定 MD_DIRECTORY 環境變數嗎？</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>設定 MD_DIRECTORY 環境變數失敗</value>
+  </data>
   <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
     <value>你正在要求解除安裝 MelonLoader
 請確認你的操作</value>
@@ -228,11 +231,11 @@ Muse Dash Mod Tools 已經是最新版本
   </data>
   <data name="MessageBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
     <value>MelonLoader 已經解除安裝
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed" xml:space="preserve">
     <value>Mod 安裝失敗。遊戲是否正執行?
-{0}}</value>
+{0}</value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed_Game" xml:space="preserve">
     <value>Mod 請除安裝失敗
@@ -241,18 +244,9 @@ Muse Dash Mod Tools 已經是最新版本
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>無法刪除不存在的文件</value>
   </data>
-  <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
-    <value>無法解壓路徑 {0} 的MelonLoader.zip
-錯誤訊息:
-{1}
-嘗試手動解壓?</value>
-  </data>
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>無法找到 Updater
 請確認你下載了整個軟體</value>
-  </data>
-  <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
-    <value>分析成功</value>
   </data>
   <data name="Title_Notice" xml:space="preserve">
     <value>注意</value>

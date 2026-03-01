@@ -1,9 +1,10 @@
-﻿namespace Euterpe.Views.Panels.Logging;
+namespace Euterpe.Views.Panels.Logging;
 
 public sealed partial class AppLogPanel : UserControl
 {
     public AppLogPanel()
     {
         InitializeComponent();
+        LogListBox.Loaded += (_, _) => LogListBox.ScrollIntoView(LogListBox.ItemCount - 1);
     }
 }

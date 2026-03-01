@@ -14,13 +14,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
-      <value>Choose Chart File</value>
+    <value>Choose Chart File</value>
   </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
-      <value>Choose Steam Executable</value>
+    <value>Choose Steam Executable</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
-      <value>All Files</value>
+    <value>All Files</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>Choose Cache Folder</value>
@@ -37,91 +37,129 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>No and Don't Ask Again</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>Yes and Don't Ask Again</value>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Please select Muse Dash folder
+Do you have Muse Dash installed on this computer?</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+    <value>Please select Steam executable</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>Please select Steam folder</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>Detected Muse Dash folder path is
 {0}
 Is this the correct game folder?</value>
   </data>
-  <data name="MessageBox_Content_Error_DotNetRuntime_Install_Failed" xml:space="preserve">
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>Failed to delete {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Failed to delete MelonLoader folder</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+    <value>.NET 6 Runtime not found
+Click OK to install</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
     <value>Failed to install .NET 6 Runtime</value>
   </data>
-  <data name="MessageBox_Content_Error_DotNetSDK_Install_Failed" xml:space="preserve">
-      <value>Failed to install .NET 8 SDK</value>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>Are you sure you want to install the .Net SDK?</value>
   </data>
-  <data name="MessageBox_Content_Error_InvalidPath" xml:space="preserve">
-      <value>The path you have chosen is invalid. Try again</value>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>Failed to install .NET 8 SDK</value>
   </data>
-  <data name="MessageBox_Content_Error_Protontricks_Not_Installed" xml:space="preserve">
-      <value>protontricks is not installed. Please install protontricks to proceed.</value>
+  <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
+    <value>The path you have chosen is invalid. Try again</value>
   </data>
-  <data name="MessageBox_Content_Error_Protontricks_Wineprefix_Failed" xml:space="preserve">
-      <value>Failed to run wine prefix commands via protontricks. Cannot proceed with .NET Runtime installation.</value>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>Failed to create MDM file</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM files created successfully</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>Failed to extract MDM file</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM files extracted successfully</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>Failed to delete MelonLoader.zip in
 {0}
 Try to manually delete</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>Failed to install MelonLoader: {0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
-    <value>MelonLoader has been successfully installed
-</value>
+    <value>MelonLoader has been successfully installed</value>
   </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>A newer version of Muse Dash Mod Tools ({0}) is released
-
-Do you want to install it now?
-
-Release Title:
-{1}
-
-Release Info:
-{2}</value>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader uninstalled successfully</value>
   </data>
-  <data name="MessageBox_Content_NoticeConfirm_DotNetSDK_Install" xml:space="preserve">
-      <value>Are you sure you want to install the .Net SDK?</value>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Failed to unzip MelonLoader</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Please choose Muse Dash folder</value>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>MelonLoader zip file not found</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseSteamExec" xml:space="preserve">
-      <value>Please choose Steam executable</value>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Are you sure you want to install the Mod Template?</value>
   </data>
-  <data name="MessageBox_Content_Notice_ChooseSteamFolder" xml:space="preserve">
-    <value>Please choose Steam folder</value>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Failed to install Mod Template</value>
   </data>
-  <data name="MessageBox_Content_Notice_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime not found
-Click OK to install</value>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Are you sure you want to uninstall the Mod Template?</value>
   </data>
-  <data name="MessageBox_Content_Notice_SetPathEnvironment_Linux" xml:space="preserve">
-      <value>Copy the following line and add it to your /etc/environment file:
-{0}</value>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Failed to uninstall Mod Template</value>
   </data>
-  <data name="MessageBox_Content_Notice_SetPathEnvironment_Windows" xml:space="preserve">
-      <value>MD_DIRECTORY environment variable successfully set to {0}</value>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>New version available: {0}, do you want to upgrade?</value>
   </data>
-  <data name="MessageBox_Content_Success_NoUpdatesFound" xml:space="preserve">
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>No updates available</value>
   </data>
-  <data name="Notification_Content_SuccessMod_Reinstall" xml:space="preserve">
-    <value>Mod {0} successfully reinstalled</value>
+  <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
+    <value>protontricks is not installed. Please install protontricks to proceed.</value>
   </data>
-  <data name="Notification_Content_Success_Mod_Install" xml:space="preserve">
+  <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
+    <value>Failed to run wine prefix commands via protontricks. Cannot proceed with .NET Runtime installation.</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Reading Game Information failed
+  {0}</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Are you sure you want to set MD_DIRECTORY environment variable?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Failed to set MD_DIRECTORY environment variable</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
+    <value>Copy the following line and add it to your /etc/environment file:
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
+    <value>MD_DIRECTORY environment variable successfully set to {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} successfully installed</value>
   </data>
-  <data name="Notification_Content_Success_Mod_Uninstall" xml:space="preserve">
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>Mod {0} successfully reinstalled</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} successfully uninstalled</value>
   </data>
-  <data name="Notification_Content_Success_Mod_Update" xml:space="preserve">
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} successfully updated</value>
   </data>
   <data name="Title_Error" xml:space="preserve">

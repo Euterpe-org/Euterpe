@@ -14,7 +14,7 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
         SymbolDisplayParameterOptions.IncludeDefaultValue
     );
 
-    protected override string ExpectedRootNamespace => MuseDashModToolsCoreNamespace;
+    protected override string ExpectedRootNamespace => EuterpeCoreNamespace;
 
     protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
     {
@@ -80,7 +80,6 @@ public sealed class DownloadManagerGenerator : IncrementalGeneratorBase
                                     DownloadSource.GitHub => GitHubDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
                                     DownloadSource.GitHubMirror => GitHubMirrorDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
                                     DownloadSource.Gitee => GiteeDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
-                                    DownloadSource.Website => WebsiteDownloadService.{{method.MethodName}}({{method.MethodParameterNames}}),
                                     _ => throw new UnreachableException()
                                 };
                             """);

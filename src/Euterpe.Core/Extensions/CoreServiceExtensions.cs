@@ -37,7 +37,7 @@ public static class CoreServiceExtensions
                 ChunkCount = 8,
                 MaxTryAgainOnFailure = 4,
                 ParallelDownload = true,
-                Timeout = 3000
+                BlockTimeout = 3000
             }));
     }
 
@@ -66,7 +66,6 @@ public static class CoreServiceExtensions
         builder.RegisterType<VdfSerializationService>().As<IVdfSerializationService>().PropertiesAutowired().SingleInstance();
 
         // Download Services
-        builder.RegisterType<WebsiteDownloadService>().As<IWebsiteDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GiteeDownloadService>().As<IGiteeDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubDownloadService>().As<IGitHubDownloadService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<GitHubMirrorDownloadService>().As<IGitHubMirrorDownloadService>().PropertiesAutowired().SingleInstance();

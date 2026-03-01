@@ -1,10 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <Import Project="..\Euterpe.Tasks\Euterpe.Tasks.targets"/>
 
-    <PropertyGroup>
-        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    </PropertyGroup>
-
     <Target Name="GenerateStyles" BeforeTargets="BeforeBuild">
         <GenerateStyles AvaloniaResourceFiles="@(AvaloniaXaml)"/>
     </Target>

@@ -22,25 +22,11 @@
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>Нет</value>
   </data>
-  <data name="MessageBox_Button_NoNoAsk" xml:space="preserve">
-    <value>Нет, больше не спрашивать</value>
-  </data>
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Да</value>
   </data>
-  <data name="MessageBox_Button_YesNoAsk" xml:space="preserve">
-    <value>Да, больше не спрашивать</value>
-  </data>
   <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
     <value>Не удалось включить/выключить мод
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Game" xml:space="preserve">
-    <value>Не удалось включить/выключить мод. Запущена ли игра?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_ChangeModStateFailed_Unauthorized" xml:space="preserve">
-    <value>Не удалось включить/выключить мод. Недостаточно прав
 {0}</value>
   </data>
   <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
@@ -54,6 +40,12 @@
   <data name="MessageBox_Content_CopyUpdaterFailed" xml:space="preserve">
     <value>Невозможно скопировать Updater в выбранную папку
 {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>Не удалось удалить {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Не удалось удалить папку MelonLoader</value>
   </data>
   <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
     <value>{1} использует {0} как библиотеку
@@ -72,7 +64,7 @@
   </data>
   <data name="MessageBox_Content_DownloadChartSuccess" xml:space="preserve">
     <value>Чарт {0} был успешно установлен
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_DuplicateMods" xml:space="preserve">
     <value>Пожалуйста, выберите и удалите дубликат мода вручную
@@ -80,10 +72,6 @@
   </data>
   <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
     <value>Включить библиотеку {1} мода {0}?</value>
-  </data>
-  <data name="MessageBox_Content_ExeVerifyFailed" xml:space="preserve">
-    <value>Не удалось найти MuseDash.exe
-Убедитесь, что Вы выбрали правильную папку</value>
   </data>
   <data name="MessageBox_Content_GamePathError" xml:space="preserve">
     <value>Ваш путь к игре не содержит "steamapps\common\Muse Dash\musedash.exe"
@@ -104,62 +92,69 @@
     <value>Не удалось установить библиотеку {0}
 {1}</value>
   </data>
-  <data name="MessageBox_Content_InstallMelonLoader" xml:space="preserve">
-    <value>Вы не установили MelonLoader
-Он нужен для запуска модов
-Установить его?</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed" xml:space="preserve">
-    <value>Не удалось установить MelonLoader
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallMelonLoaderFailed_Internet" xml:space="preserve">
-    <value>Неуспешная установка MelonLoader, связанная с подключением к сети Интернет
-Вы подключены к интернету?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed" xml:space="preserve">
-    <value>Не удалось установить мод
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Game" xml:space="preserve">
-    <value>Не удалось установить мод. Запущена ли игра?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_InstallModFailed_Internet" xml:space="preserve">
-    <value>Не удалось установить мод. Вы подключены к интернету?
-{0}</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Выбран неверный путь. Попробуйте другой</value>
   </data>
   <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
     <value>Успешная проверка обновлений
-Вы используете последнюю версию Muse Dash Mod Tools</value>
+Вы используете последнюю версию Euterpe</value>
   </data>
-  <data name="MessageBox_Content_LogAnalyzeComplete" xml:space="preserve">
-    <value>Анализ логов завершен, ошибок не найдено
-Если у вас есть проблемы, то перейдите в канал устранения неполадок</value>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>Не удалось создать файл MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>Файлы MDM успешно созданы</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>Не удалось извлечь файл MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>Файлы MDM успешно извлечены</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>Невозможно удалить MelonLoader.zip в
 {0}
 Попробуйте удалить файл вручную</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Install" xml:space="preserve">
+    <value>Вы не установили MelonLoader
+Он нужен для запуска модов
+Установить его?</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>Не удалось установить MelonLoader: {0}</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader был успешно установлен
-</value>
+    </value>
   </data>
-  <data name="MessageBox_Content_NewerVersion" xml:space="preserve">
-    <value>Найдена новая версия Muse Dash Mod Tools ({0})
-
-Хотите установить её?
-
-Имя релиза:
-{1}
-
-Инфо релиза:
-{2}</value>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader успешно удален</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Не удалось распаковать MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>Файл MelonLoader.zip не найден</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Установить шаблон мода?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Не удалось установить шаблон мода</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Удалить шаблон мода?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Не удалось удалить шаблон мода</value>
+  </data>
+  <data name="MessageBox_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Не удалось установить мод
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Доступна новая версия: {0}. Обновить?</value>
   </data>
   <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
     <value>В логах отсутствует путь к приложению</value>
@@ -173,7 +168,7 @@
   </data>
   <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
     <value>У этого мода нет доступных ресурсов для скачки
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
     <value>Невозможно проверить, что вы купили игру в Steam
@@ -201,6 +196,10 @@
     <value>Вы уже скачивали чарт {0}
 Перезаписать уже существующий?</value>
   </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Не удалось прочитать информацию об игре
+  {0}</value>
+  </data>
   <data name="MessageBox_Content_ReadGameVersionFailed" xml:space="preserve">
     <value>Невозможно найти текущую версию игры
 Полностью ли установленна игра?
@@ -215,6 +214,12 @@
     <value>Вы хотите переустановить {0}
 Продолжить?</value>
   </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Установить переменную окружения MD_DIRECTORY?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Не удалось установить переменную окружения MD_DIRECTORY</value>
+  </data>
   <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
     <value>Вы хотите удалить MelonLoader
 Продолжить?</value>
@@ -225,7 +230,7 @@
   </data>
   <data name="MessageBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
     <value>MelonLoader был успешно удалён
-</value>
+    </value>
   </data>
   <data name="MessageBox_Content_UninstallModFailed" xml:space="preserve">
     <value>Не удалось удалить мод. Проверьте, запущена ли сейчас игра
@@ -238,18 +243,9 @@
   <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
     <value>Невозможно удалить файл, которого не существует</value>
   </data>
-  <data name="MessageBox_Content_UnzipMelonLoaderFailed" xml:space="preserve">
-    <value>Невозможно разархивировать MelonLoader.zip в
-{0}
-Ошибка:{1}
-Попробуйте разархивировать файл вручную</value>
-  </data>
   <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
     <value>Не удалось найти Updater.exe
 Убедитесь, что вы установили программу полностью</value>
-  </data>
-  <data name="MessageBox_Title_AnalyzeSuccess" xml:space="preserve">
-    <value>Успешный анализ</value>
   </data>
   <data name="Title_Notice" xml:space="preserve">
     <value>Уведомление</value>

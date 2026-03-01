@@ -5,7 +5,6 @@
         <OutputType>WinExe</OutputType>
         <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
         <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
 
@@ -22,7 +21,6 @@
         <PackageReference Include="Avalonia.Desktop"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
-        <PackageReference Include="HotAvalonia" PrivateAssets="all"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
@@ -38,8 +36,7 @@
 
     <!-- Avalonia Diagnostics Package-->
     <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-        <PackageReference Condition="'$(AvAccelerateKey)' == ''" Include="Avalonia.Diagnostics"/>
-        <PackageReference Condition="'$(AvAccelerateKey)' != ''" Include="AvaloniaUI.DiagnosticsSupport"/>
+        <PackageReference Include="AvaloniaUI.DiagnosticsSupport"/>
     </ItemGroup>
 
     <ItemGroup>

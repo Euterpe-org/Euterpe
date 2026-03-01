@@ -94,6 +94,18 @@
   <data name="Folder_UserLibs" xml:space="preserve">
     <value>UserLibs</value>
   </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>Star on GitHub</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Enjoying Euterpe? Here's how you can help</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% Free &amp; Open Source</value>
+  </data>
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Visit</value>
   </data>
@@ -111,6 +123,45 @@
   </data>
   <data name="MelonLoader_State_Preparing" xml:space="preserve">
     <value>Preparing...</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
+    <value>Required for mod development</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
+    <value>.NET 10 SDK</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
+    <value>Enables build tools to locate game files</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
+    <value>Set Environment Variable</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
+    <value>Create an account to upload and manage your mods</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
+    <value>Euterpe Hub</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
+    <value>For quick mod project creation</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
+    <value>Mod Template Nuget</value>
+  </data>
+  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
+    <value>Development Environment</value>
+  </data>
+  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
+    <value>Recommended IDEs</value>
+  </data>
+  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
+    <value>Submit a Mod</value>
+  </data>
+  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
+    <value>Not Installed</value>
+  </data>
+  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
+    <value>Not Set</value>
   </data>
   <data name="ModFilterType_All" xml:space="preserve">
     <value>All</value>
@@ -143,7 +194,7 @@
     <value>Repository</value>
   </data>
   <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
-      <value>Required Loader Version</value>
+    <value>Required Loader Version</value>
   </data>
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>Supported Game Version</value>
@@ -267,9 +318,6 @@
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub Mirror</value>
-  </data>
-  <data name="Setting_DownloadSource_Website" xml:space="preserve">
-    <value>Website</value>
   </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>Always Show ScrollBar</value>

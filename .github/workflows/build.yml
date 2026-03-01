@@ -8,9 +8,8 @@ on:
       - 'v?[0-9]+.[0-9]+.[0-9]+'
     paths-ignore:
       - 'assets/**'
-      - 'CHANGELOG.md'
-      - 'LICENSE.txt'
-      - 'README.md'
+      - 'LICENSE'
+      - '**/*.md'
   pull_request:
     branches:
       - 'main'
@@ -36,8 +35,6 @@ jobs:
           - '10.0'
 
     runs-on: ${{ matrix.target-platform.os }}
-    env:
-      AvAccelerateKey: ${{ secrets.AVACCELERATEKEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -59,8 +56,13 @@ jobs:
         run: |
           ls -la artifacts/output
 
+      - name: Create Archive
+        working-directory: artifacts/output
+        run: |
+          7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip" *
+
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
-          name: Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}
-          path: artifacts/output/*
+          path: Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip
+          archive: false

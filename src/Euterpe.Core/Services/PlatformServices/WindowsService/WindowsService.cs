@@ -223,20 +223,19 @@ internal sealed partial class WindowsService : IPlatformService
         Logger.ZLogInformation($"Reveal file: {filePath}");
     }
 
+    public bool CheckPathEnvironmentVariableSet()
+    {
+        var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
+        return !envValue.IsNullOrEmpty() && envValue == Config.MuseDashFolder;
+    }
+
     public bool SetPathEnvironmentVariable()
     {
         try
         {
-            if (Environment.GetEnvironmentVariable("MD_DIRECTORY") == Config.MuseDashFolder)
-            {
-                Logger.ZLogInformation($"MD_DIRECTORY environment variable is already set to: {Config.MuseDashFolder}");
-                return true;
-            }
-
-            Environment.SetEnvironmentVariable("MD_DIRECTORY", Config.MuseDashFolder, EnvironmentVariableTarget.User);
-
             Logger.ZLogInformation($"Set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
-            MessageBoxService.SuccessOverlayAsync(MessageBox_Content_Notice_SetPathEnvironment_Windows, Config.MuseDashFolder).ConfigureAwait(false);
+            Environment.SetEnvironmentVariable("MD_DIRECTORY", Config.MuseDashFolder, EnvironmentVariableTarget.User);
+            MessageBoxService.SuccessOverlayAsync(MessageBox_Content_SetPathEnvironment_Windows, Config.MuseDashFolder).ConfigureAwait(false);
             return true;
         }
         catch (Exception ex)
