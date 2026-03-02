@@ -277,12 +277,6 @@
   <data name="Setting_Description_CacheFolder" xml:space="preserve">
     <value>파일 다운로드 시 사용되는 캐시 폴더입니다. 다른 작업 중에는 변경하지 마세요</value>
   </data>
-  <data name="Setting_Description_DownloadSource" xml:space="preserve">
-    <value>모드 목록 및 다운로드 출처</value>
-  </data>
-  <data name="Setting_Description_GitHubToken" xml:space="preserve">
-    <value>GitHub API 접근에 사용되는 토큰. GitHub API 업데이트 소스에 필요합니다</value>
-  </data>
   <data name="Setting_Description_IgnoreException" xml:space="preserve">
     <value>오류 발생 시 앱을 종료하지 않습니다 (무엇을 하는지 알고 있을 때만 활성화하세요!)</value>
   </data>
@@ -304,23 +298,11 @@
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
     <value>Euterpe 업데이트 채널</value>
   </data>
-  <data name="Setting_Description_UpdateSource" xml:space="preserve">
-    <value>Euterpe 업데이트 확인 출처</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub 미러</value>
-  </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>스크롤바 항상 표시</value>
   </data>
   <data name="Setting_Title_CacheFolder" xml:space="preserve">
     <value>캐시 폴더</value>
-  </data>
-  <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>다운로드 소스</value>
-  </data>
-  <data name="Setting_Title_GitHubToken" xml:space="preserve">
-    <value>GitHub 토큰</value>
   </data>
   <data name="Setting_Title_IgnoreException" xml:space="preserve">
     <value>오류 무시</value>
@@ -342,9 +324,6 @@
   </data>
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
     <value>업데이트 채널</value>
-  </data>
-  <data name="Setting_Title_UpdateSource" xml:space="preserve">
-    <value>업데이트 소스</value>
   </data>
   <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
     <value>사전 릴리스</value>

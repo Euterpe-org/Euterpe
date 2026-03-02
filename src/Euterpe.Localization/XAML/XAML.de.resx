@@ -277,12 +277,6 @@
   <data name="Setting_Description_CacheFolder" xml:space="preserve">
     <value>Enthält den Cache beim Herunterladen von Dateien. Bitte nicht ändern, während andere Vorgänge laufen</value>
   </data>
-  <data name="Setting_Description_DownloadSource" xml:space="preserve">
-    <value>Quelle für Mod-Liste und Downloads</value>
-  </data>
-  <data name="Setting_Description_GitHubToken" xml:space="preserve">
-    <value>GitHub-Token für den API-Zugriff, erforderlich für die GitHub-API-Updatequelle</value>
-  </data>
   <data name="Setting_Description_IgnoreException" xml:space="preserve">
     <value>Verhindert, dass die Anwendung bei einem Fehler beendet wird (Nur aktivieren, wenn du weißt, was du tust!)</value>
   </data>
@@ -304,23 +298,11 @@
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
     <value>Update-Kanal für Euterpe</value>
   </data>
-  <data name="Setting_Description_UpdateSource" xml:space="preserve">
-    <value>Quelle für Euterpe-Updates</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub-Spiegel</value>
-  </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>Scrollleiste immer anzeigen</value>
   </data>
   <data name="Setting_Title_CacheFolder" xml:space="preserve">
     <value>Cache-Ordner</value>
-  </data>
-  <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>Download-Quelle</value>
-  </data>
-  <data name="Setting_Title_GitHubToken" xml:space="preserve">
-    <value>GitHub-Token</value>
   </data>
   <data name="Setting_Title_IgnoreException" xml:space="preserve">
     <value>Fehler ignorieren</value>
@@ -342,9 +324,6 @@
   </data>
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
     <value>Update-Kanal</value>
-  </data>
-  <data name="Setting_Title_UpdateSource" xml:space="preserve">
-    <value>Update-Quelle</value>
   </data>
   <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
     <value>Vorabversion</value>

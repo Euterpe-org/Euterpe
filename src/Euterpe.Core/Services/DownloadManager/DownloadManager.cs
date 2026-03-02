@@ -3,17 +3,63 @@ using static Euterpe.Core.JsonContexts.CamelCaseJsonContext;
 
 namespace Euterpe.Core;
 
-internal sealed partial class GitHubDownloadService : IGitHubDownloadService
+internal sealed partial class DownloadManager : IDownloadManager
 {
-    private const string RawModLinksUrl = GitHubRawContentBaseUrl + ModLinksBaseUrl;
-    private const string ModJsonUrl = RawModLinksUrl + "Mods.json";
-    private const string LibJsonUrl = RawModLinksUrl + "Libs.json";
-    private const string ModsFolderUrl = RawModLinksUrl + "Mods/";
-    private const string LibsFolderUrl = RawModLinksUrl + "Libs/";
-    private const string MelonLoaderUrl = GitHubBaseUrl + MelonLoaderBaseUrl;
-    private const string UnityDependencyUrl = GitHubBaseUrl + UnityDependencyBaseUrl;
-    private const string Cpp2ILExecutableUrl = GitHubBaseUrl + Cpp2ILExecutableBaseUrl;
-    private const string Cpp2ILPluginUrl = GitHubBaseUrl + Cpp2ILPluginBaseUrl;
+    // Dependency URLs
+    private const string MelonLoaderUrl = $"{DependenciesBaseUrl}/MelonLoader/{MelonLoaderVersion}/MelonLoader.x64.zip";
+    private const string UnityDependencyUrl = $"{DependenciesBaseUrl}/UnityDependencies/";
+    private const string Cpp2ILExecutableUrl = $"{DependenciesBaseUrl}/Cpp2IL/{Cpp2ILVersion}/Cpp2IL-{Cpp2ILVersion}-Windows.exe";
+    private const string Cpp2ILPluginUrl = $"{DependenciesBaseUrl}/Cpp2IL/{Cpp2ILVersion}/Cpp2IL.Plugin.StrippedCodeRegSupport.dll";
+
+    // Mod URLs
+    private const string ModJsonUrl = $"{AssetsBaseUrl}Mods.json";
+    private const string LibJsonUrl = $"{AssetsBaseUrl}Libs.json";
+    private const string ModsFolderUrl = $"{AssetsBaseUrl}Mods/";
+    private const string LibsFolderUrl = $"{AssetsBaseUrl}Libs/";
+
+    public async Task<bool> DownloadFileAsync(
+        string url,
+        string filePath,
+        EventHandler<DownloadStartedEventArgs>? onDownloadStarted = null,
+        IProgress<double>? downloadProgress = null,
+        CancellationToken cancellationToken = default)
+    {
+        EventHandler<DownloadProgressChangedEventArgs>? progressHandler = null;
+
+        if (onDownloadStarted is not null)
+        {
+            DownloadService.DownloadStarted += onDownloadStarted;
+        }
+
+        if (downloadProgress is not null)
+        {
+            progressHandler = (_, e) => downloadProgress.Report(e.ProgressPercentage);
+            DownloadService.DownloadProgressChanged += progressHandler;
+        }
+
+        try
+        {
+            await DownloadService.DownloadFileTaskAsync(url, filePath, cancellationToken).ConfigureAwait(false);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to download file from {url} to {filePath}");
+            return false;
+        }
+        finally
+        {
+            if (onDownloadStarted is not null)
+            {
+                DownloadService.DownloadStarted -= onDownloadStarted;
+            }
+
+            if (progressHandler is not null)
+            {
+                DownloadService.DownloadProgressChanged -= progressHandler;
+            }
+        }
+    }
 
     public Task<bool> DownloadMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
@@ -44,7 +90,7 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading mod {mod.Name} from GitHub...");
+        Logger.ZLogInformation($"Downloading mod {mod.Name} ...");
 
         if (mod.FileName.IsNullOrEmpty())
         {
@@ -66,14 +112,14 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download mod {mod.Name} from GitHub");
+            Logger.ZLogError(ex, $"Failed to download mod {mod.Name}");
             return false;
         }
     }
 
     public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading lib {lib.Name} from GitHub...");
+        Logger.ZLogInformation($"Downloading lib {lib.Name} ...");
 
         var downloadLink = LibsFolderUrl + lib.FileName;
         var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
@@ -89,24 +135,24 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download lib {lib.Name} from GitHub");
+            Logger.ZLogError(ex, $"Failed to download lib {lib.Name}");
             return false;
         }
     }
 
     public async Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{ModToolsReleaseDownloadBaseUrl}{tag}/Euterpe-{osString}.zip";
+        var downloadUrl = $"{ReleasesBaseUrl}{tag}/Euterpe-{osString}.zip";
 
         try
         {
-            await Downloader.DownloadFileTaskAsync(downloadUrl,
+            await DownloadService.DownloadFileTaskAsync(downloadUrl,
                 Path.Combine(updateFolder, "Euterpe.zip"),
                 cancellationToken).ConfigureAwait(true);
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download new version from GitHub");
+            Logger.ZLogError(ex, $"Failed to download new version");
         }
     }
 
@@ -153,10 +199,10 @@ internal sealed partial class GitHubDownloadService : IGitHubDownloadService
     public required HttpClient Client { get; init; }
 
     [UsedImplicitly]
-    public required MultiThreadDownloader Downloader { get; init; }
+    public required IDownloadService DownloadService { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<GitHubDownloadService> Logger { get; init; }
+    public required ILogger<DownloadManager> Logger { get; init; }
 
     #endregion Injections
 }

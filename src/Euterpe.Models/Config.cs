@@ -45,15 +45,6 @@ public sealed partial class Config : ObservableObject
 
     // Download Settings
     [ObservableProperty]
-    public partial DownloadSource DownloadSource { get; set; } = DownloadSource.GitHub;
-
-    [ObservableProperty]
-    public partial UpdateSource UpdateSource { get; set; } = UpdateSource.GitHubRSS;
-
-    [ObservableProperty]
-    public partial string? GitHubToken { get; set; }
-
-    [ObservableProperty]
     public partial UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
 
     public SemVersion? SkipVersion { get; set; }

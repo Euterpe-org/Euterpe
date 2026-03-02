@@ -1,9 +1,9 @@
-using System.Net;
+﻿using System.Net;
 using DownloadProgressChangedEventArgs = Downloader.DownloadProgressChangedEventArgs;
 
 namespace Euterpe.Core;
 
-internal sealed partial class GitHubMirrorDownloadService
+internal sealed partial class DownloadManager
 {
     private async Task<bool> DownloadAsync(
         string url,
@@ -13,26 +13,26 @@ internal sealed partial class GitHubMirrorDownloadService
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading {itemName} from GitHubMirror...");
+        Logger.ZLogInformation($"Downloading {itemName} ...");
 
-        Downloader.DownloadStarted += onDownloadStarted;
-        Downloader.DownloadProgressChanged += onDownloadProgressChanged;
+        DownloadService.DownloadStarted += onDownloadStarted;
+        DownloadService.DownloadProgressChanged += onDownloadProgressChanged;
 
         try
         {
-            await Downloader.DownloadFileTaskAsync(url, path, cancellationToken).ConfigureAwait(false);
-            Logger.ZLogInformation($"{itemName} downloaded from GitHubMirror successfully");
+            await DownloadService.DownloadFileTaskAsync(url, path, cancellationToken).ConfigureAwait(false);
+            Logger.ZLogInformation($"{itemName} downloaded successfully");
             return true;
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download {itemName} from GitHubMirror");
+            Logger.ZLogError(ex, $"Failed to download {itemName}");
             return false;
         }
         finally
         {
-            Downloader.DownloadStarted -= onDownloadStarted;
-            Downloader.DownloadProgressChanged -= onDownloadProgressChanged;
+            DownloadService.DownloadStarted -= onDownloadStarted;
+            DownloadService.DownloadProgressChanged -= onDownloadProgressChanged;
         }
     }
 
@@ -61,7 +61,7 @@ internal sealed partial class GitHubMirrorDownloadService
 
     private async Task<string?> FetchReadmeFromBranchAsync(string repoId, string branch, CancellationToken cancellationToken = default)
     {
-        foreach (var url in CommonReadmeNames.Select(readmeName => $"{RawMirrorUrl}{repoId}/{branch}/{readmeName}"))
+        foreach (var url in CommonReadmeNames.Select(readmeName => $"{GitHubRawContentBaseUrl}{repoId}/{branch}/{readmeName}"))
         {
             var content = await TryFetchContentAsync(url, cancellationToken).ConfigureAwait(false);
 

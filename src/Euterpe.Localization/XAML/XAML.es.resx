@@ -277,12 +277,6 @@
   <data name="Setting_Description_CacheFolder" xml:space="preserve">
     <value>Incluye la caché de descarga de archivos. No cambies esto mientras se realicen otras operaciones</value>
   </data>
-  <data name="Setting_Description_DownloadSource" xml:space="preserve">
-    <value>Origen de la lista de mods y las descargas</value>
-  </data>
-  <data name="Setting_Description_GitHubToken" xml:space="preserve">
-    <value>Token de GitHub para el acceso a la API, necesario para la fuente de actualización por GitHub API</value>
-  </data>
   <data name="Setting_Description_IgnoreException" xml:space="preserve">
     <value>Evita que la aplicación se cierre al producirse un error (¡Actívalo solo si sabes lo que haces!)</value>
   </data>
@@ -304,23 +298,11 @@
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
     <value>Canal de actualización de Euterpe</value>
   </data>
-  <data name="Setting_Description_UpdateSource" xml:space="preserve">
-    <value>Origen para buscar actualizaciones de Euterpe</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>Espejo de GitHub</value>
-  </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>Mostrar siempre la barra de desplazamiento</value>
   </data>
   <data name="Setting_Title_CacheFolder" xml:space="preserve">
     <value>Carpeta de caché</value>
-  </data>
-  <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>Origen de descarga</value>
-  </data>
-  <data name="Setting_Title_GitHubToken" xml:space="preserve">
-    <value>Token de GitHub</value>
   </data>
   <data name="Setting_Title_IgnoreException" xml:space="preserve">
     <value>Ignorar errores</value>
@@ -342,9 +324,6 @@
   </data>
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
     <value>Canal de actualización</value>
-  </data>
-  <data name="Setting_Title_UpdateSource" xml:space="preserve">
-    <value>Origen de actualización</value>
   </data>
   <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
     <value>Prelanzamiento</value>

@@ -5,22 +5,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class UpdateService
 {
-    private async Task<bool> CheckGitHubRSSForUpdatesAsync(CancellationToken cancellationToken = default)
-    {
-        Logger.ZLogInformation($"Get Current version: {_currentVersion}");
-        Logger.ZLogInformation($"Checking for updates from GitHub RSS...");
-
-        var release = Config.UpdateChannel switch
-        {
-            UpdateChannel.Stable => await GetStableReleaseFromRSSAsync(cancellationToken).ConfigureAwait(true),
-            UpdateChannel.Prerelease => await GetPrereleaseFromRSSAsync(cancellationToken).ConfigureAwait(true),
-            _ => throw new UnreachableException()
-        };
-
-        return await HandleRSSReleaseAsync(release, cancellationToken).ConfigureAwait(false);
-    }
-
-    private async Task<SyndicationFeed?> GetGitHubRSSFeedAsync(CancellationToken cancellationToken = default)
+    private async Task<SyndicationFeed?> GetRSSFeedAsync(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -33,18 +18,18 @@ internal sealed partial class UpdateService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to fetch release from GitHub RSS");
+            Logger.ZLogError(ex, $"Failed to fetch release from RSS");
             return null;
         }
     }
 
-    private async Task<GitHubRSS?> GetStableReleaseFromRSSAsync(CancellationToken cancellationToken = default)
+    private async Task<ReleaseInfo?> GetStableReleaseFromRSSAsync(CancellationToken cancellationToken = default)
     {
-        var feed = await GetGitHubRSSFeedAsync(cancellationToken).ConfigureAwait(false);
+        var feed = await GetRSSFeedAsync(cancellationToken).ConfigureAwait(false);
 
         if (feed is null)
         {
-            Logger.ZLogWarning($"Fetched stable release from GitHub RSS is null");
+            Logger.ZLogWarning($"Fetched stable release from RSS is null");
             return null;
         }
 
@@ -55,30 +40,30 @@ internal sealed partial class UpdateService
 
             if (!version.IsPrerelease)
             {
-                return new GitHubRSS(version);
+                return new ReleaseInfo(version);
             }
 
-            Logger.ZLogWarning($"Fetched stable release from GitHub RSS is a prerelease: {version}");
+            Logger.ZLogWarning($"Fetched stable release from RSS is a prerelease: {version}");
         }
 
         return null;
     }
 
-    private async Task<GitHubRSS?> GetPrereleaseFromRSSAsync(CancellationToken cancellationToken = default)
+    private async Task<ReleaseInfo?> GetPrereleaseFromRSSAsync(CancellationToken cancellationToken = default)
     {
-        var feed = await GetGitHubRSSFeedAsync(cancellationToken).ConfigureAwait(false);
+        var feed = await GetRSSFeedAsync(cancellationToken).ConfigureAwait(false);
 
         if (feed is null)
         {
-            Logger.ZLogWarning($"Fetched prerelease from GitHub RSS is null");
+            Logger.ZLogWarning($"Fetched prerelease from RSS is null");
             return null;
         }
 
         var release = feed.Items.First();
-        return new GitHubRSS(SemVersion.Parse(release.Title.Text));
+        return new ReleaseInfo(SemVersion.Parse(release.Title.Text));
     }
 
-    private async Task<bool> HandleRSSReleaseAsync(GitHubRSS? release, CancellationToken cancellationToken = default)
+    private async Task<bool> HandleRSSReleaseAsync(ReleaseInfo? release, CancellationToken cancellationToken = default)
     {
         if (release is null)
         {

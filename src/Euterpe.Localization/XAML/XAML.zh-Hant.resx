@@ -277,12 +277,6 @@
   <data name="Setting_Description_CacheFolder" xml:space="preserve">
     <value>此處包含下載檔案時的快取。進行其他操作時請勿變更此設定</value>
   </data>
-  <data name="Setting_Description_DownloadSource" xml:space="preserve">
-    <value>模組列表及下載的來源</value>
-  </data>
-  <data name="Setting_Description_GitHubToken" xml:space="preserve">
-    <value>用於存取 GitHub API 的權杖，GitHub API 更新來源必須使用</value>
-  </data>
   <data name="Setting_Description_IgnoreException" xml:space="preserve">
     <value>發生例外狀況時不退出應用程式（僅在你清楚自己在做什麼時才啟用！）</value>
   </data>
@@ -304,23 +298,11 @@
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
     <value>Euterpe 的更新頻道</value>
   </data>
-  <data name="Setting_Description_UpdateSource" xml:space="preserve">
-    <value>檢查 Euterpe 更新的來源</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub 鏡像</value>
-  </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>始終顯示捲軸</value>
   </data>
   <data name="Setting_Title_CacheFolder" xml:space="preserve">
     <value>快取資料夾</value>
-  </data>
-  <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>下載來源</value>
-  </data>
-  <data name="Setting_Title_GitHubToken" xml:space="preserve">
-    <value>GitHub 權杖</value>
   </data>
   <data name="Setting_Title_IgnoreException" xml:space="preserve">
     <value>忽略例外</value>
@@ -342,9 +324,6 @@
   </data>
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
     <value>更新頻道</value>
-  </data>
-  <data name="Setting_Title_UpdateSource" xml:space="preserve">
-    <value>更新來源</value>
   </data>
   <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
     <value>測試版</value>

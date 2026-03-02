@@ -20,52 +20,6 @@
     <StackPanel
         Classes="ContentListRoot">
 
-        <!--  Download Source  -->
-        <euterpe:ContentListItem
-            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_DownloadSource}}"
-            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_DownloadSource}}">
-            <StackPanel
-                Classes="ContentListItemHorizontal">
-                <ComboBox
-                    SelectedIndex="{Binding SelectedDownloadSourceIndex, Mode=TwoWay}">
-                    <ComboBoxItem
-                        Content="{Localize {x:Static loc:XAMLLiteral.Setting_DownloadSource_Official}}" />
-                    <ComboBoxItem
-                        Content="GitHub" />
-                    <ComboBoxItem
-                        Content="Gitee" />
-                    <ComboBoxItem
-                        Content="{Localize {x:Static loc:XAMLLiteral.Setting_DownloadSource_GitHubMirror}}" />
-                </ComboBox>
-            </StackPanel>
-        </euterpe:ContentListItem>
-
-        <!--  Update Source  -->
-        <euterpe:ContentListItem
-            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_UpdateSource}}"
-            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_UpdateSource}}">
-            <ComboBox
-                SelectedIndex="{Binding SelectedUpdateSourceIndex, Mode=TwoWay}">
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.Setting_UpdateSource_Official}}" />
-                <ComboBoxItem
-                    Content="GitHub API" />
-                <ComboBoxItem
-                    Content="GitHub RSS" />
-            </ComboBox>
-        </euterpe:ContentListItem>
-
-        <!--  GitHub Token  -->
-        <euterpe:ContentListItem
-            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_GitHubToken}}"
-            IsVisible="{Binding Config.UpdateSource, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:UpdateSource.GitHubAPI}, Mode=OneWay}"
-            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_GitHubToken}}">
-            <TextBox
-                Classes="ClearButton"
-                Foreground="Gray"
-                Text="{Binding Config.GitHubToken, Mode=TwoWay}" />
-        </euterpe:ContentListItem>
-
         <!--  Download Prerelease  -->
         <euterpe:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_UpdateChannel}}"

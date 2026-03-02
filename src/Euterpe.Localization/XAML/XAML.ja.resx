@@ -277,12 +277,6 @@
   <data name="Setting_Description_CacheFolder" xml:space="preserve">
     <value>ダウンロード時のキャッシュを含みます。他の操作中は変更しないでください</value>
   </data>
-  <data name="Setting_Description_DownloadSource" xml:space="preserve">
-    <value>Modリストとダウンロードの取得元</value>
-  </data>
-  <data name="Setting_Description_GitHubToken" xml:space="preserve">
-    <value>GitHub APIアクセス用のトークン。GitHub API更新ソースに必要です</value>
-  </data>
   <data name="Setting_Description_IgnoreException" xml:space="preserve">
     <value>例外発生時にアプリを終了しない（何をしているか理解している場合のみ有効にしてください！）</value>
   </data>
@@ -304,23 +298,11 @@
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
     <value>Euterpeの更新チャンネル</value>
   </data>
-  <data name="Setting_Description_UpdateSource" xml:space="preserve">
-    <value>Euterpeの更新を確認するソース</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHubミラー</value>
-  </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>スクロールバーを常に表示</value>
   </data>
   <data name="Setting_Title_CacheFolder" xml:space="preserve">
     <value>キャッシュフォルダー</value>
-  </data>
-  <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>ダウンロードソース</value>
-  </data>
-  <data name="Setting_Title_GitHubToken" xml:space="preserve">
-    <value>GitHubトークン</value>
   </data>
   <data name="Setting_Title_IgnoreException" xml:space="preserve">
     <value>例外を無視</value>
@@ -342,9 +324,6 @@
   </data>
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
     <value>更新チャンネル</value>
-  </data>
-  <data name="Setting_Title_UpdateSource" xml:space="preserve">
-    <value>更新ソース</value>
   </data>
   <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
     <value>プレリリース</value>

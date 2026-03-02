@@ -17,7 +17,6 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
         await SettingService.ValidateAsync().ConfigureAwait(true);
 #if RELEASE
-        await UpdateService.ConfigureDownloadSourceAsync().ConfigureAwait(true);
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
         await LocalService.ReadGameInformationAsync().ConfigureAwait(false);

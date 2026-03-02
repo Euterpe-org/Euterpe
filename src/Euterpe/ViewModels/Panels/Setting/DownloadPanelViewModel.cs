@@ -9,33 +9,18 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     ];
 
     [ObservableProperty]
-    public partial int SelectedDownloadSourceIndex { get; set; }
-
-    [ObservableProperty]
     public partial int SelectedUpdateChannelIndex { get; set; }
-
-    [ObservableProperty]
-    public partial int SelectedUpdateSourceIndex { get; set; }
 
     public override Task InitializeAsync()
     {
         base.InitializeAsync();
-
-        SelectedDownloadSourceIndex = (int)Config.DownloadSource;
-        SelectedUpdateSourceIndex = (int)Config.UpdateSource;
 
         Logger.ZLogInformation($"{nameof(DownloadPanelViewModel)} Initialized");
         return Task.CompletedTask;
     }
 
     [UsedImplicitly]
-    partial void OnSelectedDownloadSourceIndexChanged(int value) => Config.DownloadSource = (DownloadSource)value;
-
-    [UsedImplicitly]
     partial void OnSelectedUpdateChannelIndexChanged(int value) => Config.UpdateChannel = (UpdateChannel)value;
-
-    [UsedImplicitly]
-    partial void OnSelectedUpdateSourceIndexChanged(int value) => Config.UpdateSource = (UpdateSource)value;
 
     #region Injections
 

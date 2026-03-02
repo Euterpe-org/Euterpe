@@ -2,7 +2,10 @@
 
 public static partial class GlobalConstants
 {
-    public const string ModLinksBranch = "main/";
+    public const string AssetsBaseUrl = "https://assets.euterpe-org.com/";
+    public const string ReleasesBaseUrl = "https://releases.euterpe-org.com/";
+    public const string DependenciesBaseUrl = "https://dependencies.euterpe-org.com/";
+
     public const string MelonLoaderVersion = "0.7.0";
     public const string Cpp2ILVersion = "2022.1.0-pre-release.19";
 

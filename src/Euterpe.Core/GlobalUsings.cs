@@ -31,4 +31,3 @@ global using static Euterpe.Common.GitHubResources;
 global using static Euterpe.Common.GlobalConstants;
 global using static Euterpe.Core.Utils.DesktopUtils;
 global using static Euterpe.Localization.Interaction;
-global using MultiThreadDownloader = Downloader.DownloadService;

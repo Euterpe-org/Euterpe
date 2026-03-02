@@ -2,39 +2,23 @@ namespace Euterpe.Core;
 
 internal sealed partial class UpdateService : IUpdateService
 {
-    private const string ReleaseAPIUrl = GitHubAPIBaseUrl + ModToolsRepoIdentifier + "releases";
-    private const string LatestReleaseAPIUrl = GitHubAPIBaseUrl + ModToolsRepoIdentifier + "releases/latest";
-    private const string TagsRSSUrl = GitHubBaseUrl + ModToolsRepoIdentifier + "releases.atom";
-    private const string GeoDetectionUrl = "https://ipinfo.io/country";
+    private const string TagsRSSUrl = ReleasesBaseUrl + "releases.atom";
 
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
 
-    public Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
+    public async Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {
-        return Config.UpdateSource switch
+        Logger.ZLogInformation($"Get Current version: {_currentVersion}");
+        Logger.ZLogInformation($"Checking for updates from RSS...");
+
+        var release = Config.UpdateChannel switch
         {
-            UpdateSource.GitHubAPI => CheckGitHubAPIForUpdatesAsync(cancellationToken),
-            UpdateSource.GitHubRSS => CheckGitHubRSSForUpdatesAsync(cancellationToken),
+            UpdateChannel.Stable => await GetStableReleaseFromRSSAsync(cancellationToken).ConfigureAwait(true),
+            UpdateChannel.Prerelease => await GetPrereleaseFromRSSAsync(cancellationToken).ConfigureAwait(true),
             _ => throw new UnreachableException()
         };
-    }
 
-    public async Task ConfigureDownloadSourceAsync(CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            var country = await Client.GetStringAsync(GeoDetectionUrl, cancellationToken).ConfigureAwait(false);
-            var downloadSource = country.Trim().Equals("CN", StringComparison.OrdinalIgnoreCase)
-                ? DownloadSource.Gitee
-                : DownloadSource.GitHub;
-
-            Config.DownloadSource = downloadSource;
-            Logger.ZLogInformation($"Download source configured to {downloadSource} based on geo-detection");
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogWarning(ex, $"Failed to detect geo location, keeping current download source");
-        }
+        return await HandleRSSReleaseAsync(release, cancellationToken).ConfigureAwait(false);
     }
 
     #region Injections

@@ -277,12 +277,6 @@
   <data name="Setting_Description_CacheFolder" xml:space="preserve">
     <value>Contient le cache des fichiers téléchargés. Ne modifiez pas ce réglage pendant d'autres opérations</value>
   </data>
-  <data name="Setting_Description_DownloadSource" xml:space="preserve">
-    <value>Source de la liste de mods et des téléchargements</value>
-  </data>
-  <data name="Setting_Description_GitHubToken" xml:space="preserve">
-    <value>Jeton GitHub pour l'accès à l'API, requis pour la source de mise à jour par API GitHub</value>
-  </data>
   <data name="Setting_Description_IgnoreException" xml:space="preserve">
     <value>Empêche l'application de se fermer en cas d'erreur (N'activez ceci que si vous savez ce que vous faites !)</value>
   </data>
@@ -304,23 +298,11 @@
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
     <value>Canal de mise à jour d'Euterpe</value>
   </data>
-  <data name="Setting_Description_UpdateSource" xml:space="preserve">
-    <value>Source de vérification des mises à jour d'Euterpe</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>Miroir GitHub</value>
-  </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>Toujours afficher la barre de défilement</value>
   </data>
   <data name="Setting_Title_CacheFolder" xml:space="preserve">
     <value>Dossier de cache</value>
-  </data>
-  <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>Source de téléchargement</value>
-  </data>
-  <data name="Setting_Title_GitHubToken" xml:space="preserve">
-    <value>Jeton GitHub</value>
   </data>
   <data name="Setting_Title_IgnoreException" xml:space="preserve">
     <value>Ignorer les erreurs</value>
@@ -342,9 +324,6 @@
   </data>
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
     <value>Canal de mise à jour</value>
-  </data>
-  <data name="Setting_Title_UpdateSource" xml:space="preserve">
-    <value>Source de mise à jour</value>
   </data>
   <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
     <value>Préversion</value>
