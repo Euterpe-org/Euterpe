@@ -105,10 +105,10 @@
                                     Text="Euterpe is licensed under the " />
                                 <InlineUIContainer>
                                     <u:IconButton
-                                        CommandParameter="https://github.com/Euterpe-org/Euterpe/blob/master/LICENSE.txt">
+                                        CommandParameter="https://github.com/Euterpe-org/Euterpe/blob/master/LICENSE">
                                         <u:IconButton.Icon>
                                             <Image
-                                                Source="/Assets/MIT_Logo.png" />
+                                                Source="/Assets/GPLv3_Logo.png" />
                                         </u:IconButton.Icon>
                                     </u:IconButton>
                                 </InlineUIContainer>
