@@ -140,9 +140,9 @@ internal sealed partial class DownloadManager : IDownloadManager
         }
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, string osString, string updateFolder, CancellationToken cancellationToken = default)
+    public async Task DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{ReleasesBaseUrl}{tag}/Euterpe-{osString}.zip";
+        var downloadUrl = $"{ReleasesBaseUrl}{tag}/Euterpe-{runtimeIdentifier}.zip";
 
         try
         {

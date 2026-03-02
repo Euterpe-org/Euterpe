@@ -36,8 +36,8 @@ internal sealed class StatisticsService : IStatisticsService
         var payload = new RecordVisitorRequest
         {
             Country = RegionInfo.CurrentRegion.TwoLetterISORegionName,
-            Platform = PlatformService.OsString.ToLowerInvariant(),
-            Arch = GetArchitecture(),
+            Platform = PlatformService.OsString,
+            Arch = PlatformService.ArchitectureString,
             AppVersion = AppVersion
         };
 
@@ -62,17 +62,6 @@ internal sealed class StatisticsService : IStatisticsService
         request.Content = JsonContent.Create(payload, Default.RecordDownloadRequest);
 
         using var response = await Client.SendAsync(request).ConfigureAwait(false);
-    }
-
-    private static string GetArchitecture()
-    {
-        return RuntimeInformation.ProcessArchitecture switch
-        {
-            Architecture.X64 => "x64",
-            Architecture.X86 => "x86",
-            Architecture.Arm64 => "arm64",
-            _ => "unknown"
-        };
     }
 
     private static string GenerateRequestId() => Guid.CreateVersion7().ToString();

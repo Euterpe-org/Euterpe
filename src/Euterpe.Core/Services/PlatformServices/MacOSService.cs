@@ -9,7 +9,7 @@ internal sealed class MacOsService : IPlatformService
         }
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToArray();
 
-    public string OsString => "MacOS";
+    public string OsString => "osx";
     public string UpdaterFileName => "Updater";
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder) => throw new NotSupportedException();
     public Task<string?> GetSteamExecPathAsync() => throw new NotSupportedException();

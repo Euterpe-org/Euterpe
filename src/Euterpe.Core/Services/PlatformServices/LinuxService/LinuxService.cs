@@ -17,7 +17,7 @@ internal sealed partial class LinuxService : IPlatformService
         }
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToArray();
 
-    public string OsString => "Linux";
+    public string OsString => "linux";
     public string UpdaterFileName => "Updater";
 
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder)

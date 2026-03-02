@@ -21,7 +21,7 @@ internal sealed partial class WindowsService : IPlatformService
         }
         .SelectMany(path => Environment.GetLogicalDrives().Select(drive => Path.Combine(drive, path))).ToArray();
 
-    public string OsString => "Windows";
+    public string OsString => "win";
     public string UpdaterFileName => "Updater.exe";
 
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder)
