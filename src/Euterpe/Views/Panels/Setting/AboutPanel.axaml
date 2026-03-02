@@ -189,7 +189,7 @@
 
                             <u:IconButton
                                 CommandParameter="https://discord.gg/mdmc"
-                                Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Discord}}"
+                                Content="MDMC Discord"
                                 Opacity="0.9" />
                         </StackPanel>
                     </StackPanel>

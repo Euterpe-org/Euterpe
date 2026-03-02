@@ -31,9 +31,6 @@
   <data name="Button_LaunchGame" xml:space="preserve">
     <value>Jouer</value>
   </data>
-  <data name="Button_MDMC_Discord" xml:space="preserve">
-    <value>MDMC Discord</value>
-  </data>
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>Site MDMC</value>
   </data>
