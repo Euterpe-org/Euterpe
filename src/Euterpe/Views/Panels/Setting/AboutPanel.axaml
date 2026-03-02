@@ -159,7 +159,8 @@
 
                             <u:IconButton
                                 Command="{Binding CheckUpdateCommand, Mode=OneTime}"
-                                Content="{Localize {x:Static loc:XAMLLiteral.Button_CheckUpdate}}" />
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_CheckUpdate}}"
+                                Icon="{StaticResource SemiIconRefresh}" />
 
                             <u:IconButton
                                 CommandParameter="https://github.com/Euterpe-org/Euterpe"
@@ -172,12 +173,24 @@
                                 Icon="{StaticResource SemiIconLanguage}" />
 
                             <u:IconButton
+                                CommandParameter="https://discord.gg/2rzjcga3nr"
+                                Content="Discord"
+                                Icon="{StaticResource SemiIconUserGroup}" />
+
+                            <Border
+                                Width="1"
+                                Margin="2,4"
+                                Background="{DynamicResource SemiColorBorder}" />
+
+                            <u:IconButton
                                 CommandParameter="https://mdmc.moe/"
-                                Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Website}}" />
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Website}}"
+                                Opacity="0.9" />
 
                             <u:IconButton
                                 CommandParameter="https://discord.gg/mdmc"
-                                Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Discord}}" />
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_MDMC_Discord}}"
+                                Opacity="0.9" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
