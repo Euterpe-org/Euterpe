@@ -307,12 +307,6 @@
   <data name="Setting_Description_UpdateSource" xml:space="preserve">
     <value>Origen para buscar actualizaciones de Euterpe</value>
   </data>
-  <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
-    <value>Gitee</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHub" xml:space="preserve">
-    <value>GitHub</value>
-  </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>Espejo de GitHub</value>
   </data>
@@ -357,12 +351,6 @@
   </data>
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>Estable</value>
-  </data>
-  <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
-    <value>GitHub API</value>
-  </data>
-  <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
-    <value>GitHub RSS</value>
   </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>Editar configuración del mod</value>

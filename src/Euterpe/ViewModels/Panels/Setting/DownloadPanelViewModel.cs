@@ -2,23 +2,10 @@
 
 public sealed partial class DownloadPanelViewModel : ViewModelBase
 {
-    public static IReadOnlyList<LocalizedString> DownloadSources { get; } =
-    [
-        Setting_DownloadSource_GitHub,
-        Setting_DownloadSource_GitHubMirror,
-        Setting_DownloadSource_Gitee
-    ];
-
     public static IReadOnlyList<LocalizedString> UpdateChannels { get; } =
     [
         Setting_UpdateChannel_Stable,
         Setting_UpdateChannel_Prerelease
-    ];
-
-    public static IReadOnlyList<LocalizedString> UpdateSources { get; } =
-    [
-        Setting_UpdateSources_GitHubAPI,
-        Setting_UpdateSources_GitHubRSS
     ];
 
     [ObservableProperty]

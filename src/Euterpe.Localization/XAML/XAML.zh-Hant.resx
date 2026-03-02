@@ -307,12 +307,6 @@
   <data name="Setting_Description_UpdateSource" xml:space="preserve">
     <value>檢查 Euterpe 更新的來源</value>
   </data>
-  <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
-    <value>Gitee</value>
-  </data>
-  <data name="Setting_DownloadSource_GitHub" xml:space="preserve">
-    <value>GitHub</value>
-  </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub 鏡像</value>
   </data>
@@ -357,12 +351,6 @@
   </data>
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>穩定版</value>
-  </data>
-  <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
-    <value>GitHub API</value>
-  </data>
-  <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
-    <value>GitHub RSS</value>
   </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>編輯模組設定</value>
