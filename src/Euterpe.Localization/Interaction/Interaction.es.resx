@@ -13,11 +13,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
+    <value>Seleccionar archivo de chart</value>
+  </data>
+  <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
+    <value>Seleccionar ejecutable de Steam</value>
+  </data>
+  <data name="FilePickerFileType_AllFiles" xml:space="preserve">
+    <value>Todos los archivos</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
+    <value>Seleccionar carpeta de caché</value>
+  </data>
   <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
-    <value>Selecciona la carpeta de Charts</value>
+    <value>Seleccionar carpeta de charts</value>
   </data>
   <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Selecciona la carpeta de Muse Dash</value>
+    <value>Seleccionar carpeta de Muse Dash</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
+    <value>Seleccionar carpeta de Steam</value>
   </data>
   <data name="MessageBox_Button_No" xml:space="preserve">
     <value>No</value>
@@ -25,21 +40,20 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Sí</value>
   </data>
-  <data name="MessageBox_Content_ChangeModStateFailed" xml:space="preserve">
-    <value>No se pudo activar/desactivar el mod.
-{0}</value>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Selecciona la carpeta de Muse Dash
+¿Tienes Muse Dash instalado en este equipo?</value>
   </data>
-  <data name="MessageBox_Content_CheckUpdateFailed" xml:space="preserve">
-    <value>Comprobación de parche fallida
-¿Tienes conexión a internet?</value>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+    <value>Selecciona el ejecutable de Steam</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>Selecciona la carpeta de Steam</value>
   </data>
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
-    <value>¿Tienes Muse Dash instalado en esta carpeta?
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_CopyUpdaterFailed" xml:space="preserve">
-    <value>No se pudo copiar Updater a la carpeta
-{0}</value>
+    <value>Se detectó la carpeta de Muse Dash en:
+{0}
+¿Es la carpeta correcta del juego?</value>
   </data>
   <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
     <value>No se pudo eliminar {0}</value>
@@ -47,57 +61,21 @@
   <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
     <value>No se pudo eliminar la carpeta de MelonLoader</value>
   </data>
-  <data name="MessageBox_Content_DeleteModConfirm" xml:space="preserve">
-    <value>{0} es usado por {1} como dependencia
-¿Estás seguro de intentar borrarlo?</value>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+    <value>No se encontró .NET 6 Runtime
+Haz clic en Aceptar para instalarlo</value>
   </data>
-  <data name="MessageBox_Content_DisableModConfirm" xml:space="preserve">
-    <value>{0} es usado por {1} como dependencia
-¿Estás seguro de intentar desactivarlo?</value>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+    <value>No se pudo instalar .NET 6 Runtime</value>
   </data>
-  <data name="MessageBox_Content_DisableReverseDependency" xml:space="preserve">
-    <value>¿Quieres desactivar los mods que dependan de {0}?</value>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>¿Quieres instalar el .NET SDK?</value>
   </data>
-  <data name="MessageBox_Content_DownloadChartFailed" xml:space="preserve">
-    <value>Ha ocurrido un error al descargar
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_DownloadChartSuccess" xml:space="preserve">
-    <value>Se ha descargado el chart
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_DuplicateMods" xml:space="preserve">
-    <value>Por favor, borra manualmente este mod duplicado
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_EnableDependency" xml:space="preserve">
-    <value>¿Quieres activar el mod {1}? Es una dependencia del mod {0}</value>
-  </data>
-  <data name="MessageBox_Content_GamePathError" xml:space="preserve">
-    <value>Se detectó a Muse Dash fuera de "steamapps\common\Muse Dash"
-¿Has pirateado el juego?</value>
-  </data>
-  <data name="MessageBox_Content_GetModListFailed" xml:space="preserve">
-    <value>¡No se pudo obtener la lista de mods!</value>
-  </data>
-  <data name="MessageBox_Content_IncorrectMelonLoaderVersion" xml:space="preserve">
-    <value>¡MelonLoader {0}, no es compatible!
-Ve a la pestaña de MODS → Instalar MelonLoader</value>
-  </data>
-  <data name="MessageBox_Content_IncorrectVersion" xml:space="preserve">
-    <value>MuseDash.exe no está en la versión correcta...
-¿Estás usando una versión pirateada/alterada?</value>
-  </data>
-  <data name="MessageBox_Content_InstallDependencyFailed" xml:space="preserve">
-    <value>La dependencia {0} ha tenido un error
-{1}</value>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>No se pudo instalar .NET 8 SDK</value>
   </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
-    <value>¡La ruta seleccionada no es válida! Prueba de nuevo</value>
-  </data>
-  <data name="MessageBox_Content_LatestVersion" xml:space="preserve">
-    <value>Comprobación de parche finalizada
-Usas la última versión de Euterpe</value>
+    <value>La ruta seleccionada no es válida. Inténtalo de nuevo</value>
   </data>
   <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
     <value>No se pudo crear el archivo MDM</value>
@@ -114,19 +92,13 @@ Usas la última versión de Euterpe</value>
   <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
     <value>No se pudo eliminar MelonLoader.zip en
 {0}
-¿Podrías borrarlo manualmente?</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Install" xml:space="preserve">
-    <value>¡No tienes instalado MelonLoader!
-Este programa se encarga de activar los mods
-¿Quieres instalar el programa ahora?</value>
+Intenta eliminarlo manualmente</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>No se pudo instalar MelonLoader: {0}</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
-    <value>¡MelonLoader se ha instalado!
-    </value>
+    <value>MelonLoader se instaló correctamente</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader se desinstaló correctamente</value>
@@ -138,115 +110,57 @@ Este programa se encarga de activar los mods
     <value>No se encontró el archivo zip de MelonLoader</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
-    <value>¿Seguro que quieres instalar la plantilla de mod?</value>
+    <value>¿Quieres instalar la plantilla de mod?</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
     <value>No se pudo instalar la plantilla de mod</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
-    <value>¿Seguro que quieres desinstalar la plantilla de mod?</value>
+    <value>¿Quieres desinstalar la plantilla de mod?</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
     <value>No se pudo desinstalar la plantilla de mod</value>
   </data>
-  <data name="MessageBox_Content_Mod_Install_Failed" xml:space="preserve">
-    <value>La instalación del mod fallo
-{0}</value>
-  </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
     <value>Nueva versión disponible: {0}. ¿Quieres actualizar?</value>
   </data>
-  <data name="MessageBox_Content_NoApplicationPath" xml:space="preserve">
-    <value>¡El Log no ha registrado donde tienes instalado el juego!</value>
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
+    <value>No hay actualizaciones disponibles</value>
   </data>
-  <data name="MessageBox_Content_NoBmsFile" xml:space="preserve">
-    <value>No se encontraron charts en la carpeta</value>
+  <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
+    <value>protontricks no está instalado. Instala protontricks para continuar.</value>
   </data>
-  <data name="MessageBox_Content_NoDlcPurchased" xml:space="preserve">
-    <value>¡No se detectó el Pase [Just as Planned]!
-Esto es necesario para poder jugar Custom Charts</value>
-  </data>
-  <data name="MessageBox_Content_NoDownloadLink" xml:space="preserve">
-    <value>¡Uy! Este mod no tiene una fuente oficial de descarga
-    </value>
-  </data>
-  <data name="MessageBox_Content_NoInstallRecord" xml:space="preserve">
-    <value>Steam no pudo verificar donde has instalado Muse Dash
-¿Has pirateado el juego?</value>
-  </data>
-  <data name="MessageBox_Content_NoLogFile" xml:space="preserve">
-    <value>¡No se encontró tu archivo Log!
-Debes lanzar el juego luego de instalar MelonLoader,
-para que este pueda crear un archivo Log</value>
-  </data>
-  <data name="MessageBox_Content_NoMelonLoaderFolder" xml:space="preserve">
-    <value>La carpeta de MelonLoader no se pudo encontrar
-¿Estás seguro de que instalaste MelonLoader?</value>
-  </data>
-  <data name="MessageBox_Content_NoMelonLoaderVersion" xml:space="preserve">
-    <value>¡La versión de MelonLoader no fue detectada en tu Log!</value>
-  </data>
-  <data name="MessageBox_Content_NullPath" xml:space="preserve">
-    <value>Tu carpeta de Muse Dash está vacía
-Selecciona nuevamente la carpeta correcta</value>
-  </data>
-  <data name="MessageBox_Content_OutdatedMod" xml:space="preserve">
-    <value>¡{0} tiene una actualización disponible!</value>
-  </data>
-  <data name="MessageBox_Content_OverrideChart" xml:space="preserve">
-    <value>¡Hey! Ya tienes descargado este chart...
-¿Quieres sobreescribir el chart descargado?</value>
+  <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
+    <value>Error al ejecutar los comandos de wine prefix a través de protontricks. No se puede continuar con la instalación de .NET Runtime.</value>
   </data>
   <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
     <value>No se pudo leer la información del juego
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReadGameVersionFailed" xml:space="preserve">
-    <value>No se pudo identificar la versión del juego
-¿Has instalado el Muse Dash de manera correcta?
-Comprueba que el archivo globalgamemanagers exista en
-{0}</value>
-  </data>
-  <data name="MessageBox_Content_RegisterHQ" xml:space="preserve">
-    <value>¡Estás jugando sin una cuenta de MDMC!
-En el Discord de MDMC, usa el comando /register</value>
-  </data>
-  <data name="MessageBox_Content_ReinstallMod" xml:space="preserve">
-    <value>¡Estas por reinstalar {0}!
-¿Podrías confirmar esta acción?</value>
-  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
-    <value>¿Seguro que quieres establecer la variable de entorno MD_DIRECTORY?</value>
+    <value>¿Quieres establecer la variable de entorno MD_DIRECTORY?</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
     <value>No se pudo establecer la variable de entorno MD_DIRECTORY</value>
   </data>
-  <data name="MessageBox_Content_UninstallMelonLoader" xml:space="preserve">
-    <value>¡Estas por desinstalar MelonLoader!
-¿Podrías confirmar esta acción?</value>
-  </data>
-  <data name="MessageBox_Content_UninstallMelonLoaderFailed" xml:space="preserve">
-    <value>¡MelonLoader no se pudo remover!
-Recuerda hacer esto, mientras el juego esté cerrado</value>
-  </data>
-  <data name="MessageBox_Content_UninstallMelonLoaderSuccess" xml:space="preserve">
-    <value>MelonLoader fue removido correctamente
-    </value>
-  </data>
-  <data name="MessageBox_Content_UninstallModFailed" xml:space="preserve">
-    <value>La desinstalación del mod fallo. ¿Estás jugando Muse Dash?
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
+    <value>Copia la siguiente línea y agrégala a tu archivo /etc/environment:
 {0}</value>
   </data>
-  <data name="MessageBox_Content_UninstallModFailed_Game" xml:space="preserve">
-    <value>La desinstalación del mod fallo
-{0}</value>
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
+    <value>La variable de entorno MD_DIRECTORY se estableció a {0}</value>
   </data>
-  <data name="MessageBox_Content_UninstallModFailed_Null" xml:space="preserve">
-    <value>No se puede borrar un archivo que no existe</value>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+    <value>Mod {0} instalado correctamente</value>
   </data>
-  <data name="MessageBox_Content_UpdaterNotFound" xml:space="preserve">
-    <value>¡No se pudo encontrar el actualizador del programa!
-Asegúrate de haber instalado el programa de forma correcta</value>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>Mod {0} reinstalado correctamente</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+    <value>Mod {0} desinstalado correctamente</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
+    <value>Mod {0} actualizado correctamente</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Error</value>
@@ -255,7 +169,7 @@ Asegúrate de haber instalado el programa de forma correcta</value>
     <value>Aviso</value>
   </data>
   <data name="Title_Success" xml:space="preserve">
-    <value>Todo listo</value>
+    <value>Correcto</value>
   </data>
   <data name="Title_Warning" xml:space="preserve">
     <value>Advertencia</value>

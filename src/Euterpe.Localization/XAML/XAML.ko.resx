@@ -14,7 +14,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AllGameVersionCompatible" xml:space="preserve">
-    <value>모든</value>
+    <value>전체</value>
   </data>
   <data name="Button_Apply" xml:space="preserve">
     <value>적용</value>
@@ -23,13 +23,28 @@
     <value>업데이트 확인</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
-    <value>번역 도움</value>
+    <value>번역 참여</value>
   </data>
   <data name="Button_Install" xml:space="preserve">
     <value>설치</value>
   </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>게임 시작</value>
+  </data>
+  <data name="Button_MDMC_Discord" xml:space="preserve">
+    <value>MDMC Discord</value>
+  </data>
+  <data name="Button_MDMC_Website" xml:space="preserve">
+    <value>MDMC 웹사이트</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>재설치</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>다시 선택</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>소스 코드</value>
   </data>
   <data name="Button_Uninstall" xml:space="preserve">
     <value>제거</value>
@@ -49,11 +64,68 @@
   <data name="ChartFilterType_Master" xml:space="preserve">
     <value>마스터</value>
   </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>아티스트</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>개발자</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>열기</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+    <value>모드 적용</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+    <value>바닐라</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>앱 로그</value>
+  </data>
+  <data name="Folder_CustomAlbums" xml:space="preserve">
+    <value>커스텀 채보</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
-    <value>모드</value>
+    <value>모드 폴더</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
-    <value>유저데이터</value>
+    <value>UserData</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>UserLibs</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>GitHub에서 Star</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>후원하기</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Euterpe가 마음에 드셨나요? 이런 방법으로 도움을 주실 수 있습니다</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% 무료 · 오픈소스</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>방문</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>로딩 중...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>모드를 사용하려면 MelonLoader 설치가 필요합니다</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>{0} 다운로드 중: {1} MB</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>설치됨</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>미설치</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+    <value>준비 중...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>모드 개발에 필요</value>
@@ -62,16 +134,13 @@
     <value>.NET 10 SDK</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
-    <value>빌드 도구가 게임 파일을 찾을 수 있도록 함</value>
+    <value>빌드 도구가 게임 파일을 찾을 수 있도록 설정</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
     <value>환경 변수 설정</value>
   </data>
   <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
-    <value>모드를 업로드하고 관리하기 위한 계정 생성</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe 모드 허브</value>
+    <value>계정을 만들어 모드를 업로드하고 관리하세요</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
     <value>모드 프로젝트를 빠르게 생성</value>
@@ -89,52 +158,157 @@
     <value>모드 제출</value>
   </data>
   <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
-    <value>설치되지 않음</value>
+    <value>미설치</value>
   </data>
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
-    <value>설정되지 않음</value>
+    <value>미설정</value>
   </data>
   <data name="ModFilterType_All" xml:space="preserve">
-    <value>모든</value>
+    <value>전체</value>
+  </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>비활성</value>
   </data>
   <data name="ModFilterType_Enabled" xml:space="preserve">
-    <value>활성화</value>
+    <value>활성</value>
   </data>
   <data name="ModFilterType_Incompatible" xml:space="preserve">
-    <value>호환되지 않음</value>
+    <value>호환 불가</value>
   </data>
   <data name="ModFilterType_Installed" xml:space="preserve">
     <value>설치됨</value>
   </data>
   <data name="ModFilterType_Outdated" xml:space="preserve">
-    <value>오래된</value>
+    <value>업데이트 있음</value>
+  </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>작성자</value>
   </data>
   <data name="ModInfo_Dependencies" xml:space="preserve">
-    <value>하위</value>
+    <value>의존성</value>
+  </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>상세 정보</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>저장소</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>필요한 로더 버전</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>지원 게임 버전</value>
+  </data>
+  <data name="ModState_Incompatible" xml:space="preserve">
+    <value>호환 불가</value>
   </data>
   <data name="ModState_Modified" xml:space="preserve">
     <value>수정됨</value>
   </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>개발 버전</value>
+  </data>
+  <data name="ModState_Normal" xml:space="preserve">
+    <value>설치됨</value>
+  </data>
+  <data name="ModState_Outdated" xml:space="preserve">
+    <value>업데이트 있음</value>
+  </data>
+  <data name="Page_Charting" xml:space="preserve">
+    <value>채보</value>
+  </data>
   <data name="Page_Home" xml:space="preserve">
-    <value>홈페이지</value>
+    <value>홈</value>
   </data>
-  <data name="Page_Setting" xml:space="preserve">
-    <value>세팅</value>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>로그</value>
   </data>
-  <data name="Panel_Charting_ChartManage" xml:space="preserve">
-    <value>차트</value>
-  </data>
-  <data name="Panel_Modding_ModManage" xml:space="preserve">
+  <data name="Page_Modding" xml:space="preserve">
     <value>모드</value>
   </data>
+  <data name="Page_Setting" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>채보 도구</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>채보 관리</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>앱 로그</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>MelonLoader 로그</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>모드 개발</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>모드 관리</value>
+  </data>
   <data name="Panel_Setting_About" xml:space="preserve">
-    <value>대해서</value>
+    <value>정보</value>
+  </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>고급</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>외관</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>다운로드</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>사용 환경</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>파일 관리</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>차트 검색  (이름, 제작자, 차트 제작자)</value>
+    <value>채보 검색  (곡명, 아티스트, 채보 제작자)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>모드 검색  (이름, 작성자)</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>목록의 스크롤바를 항상 표시</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>파일 다운로드 시 사용되는 캐시 폴더입니다. 다른 작업 중에는 변경하지 마세요</value>
+  </data>
+  <data name="Setting_Description_DownloadSource" xml:space="preserve">
+    <value>모드 목록 및 다운로드 출처</value>
+  </data>
+  <data name="Setting_Description_GitHubToken" xml:space="preserve">
+    <value>GitHub API 접근에 사용되는 토큰. GitHub API 업데이트 소스에 필요합니다</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>오류 발생 시 앱을 종료하지 않습니다 (무엇을 하는지 알고 있을 때만 활성화하세요!)</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>UI 언어</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Muse Dash 실행 파일이 있는 폴더</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>게임 실행 시 콘솔 표시 여부</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>게임 실행 시 시작 화면 표시 여부</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Steam 실행 파일이 있는 폴더</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Euterpe 업데이트 채널</value>
+  </data>
+  <data name="Setting_Description_UpdateSource" xml:space="preserve">
+    <value>Euterpe 업데이트 확인 출처</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
@@ -143,21 +317,75 @@
     <value>GitHub</value>
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub Mirror</value>
+    <value>GitHub 미러</value>
+  </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>스크롤바 항상 표시</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>캐시 폴더</value>
   </data>
   <data name="Setting_Title_DownloadSource" xml:space="preserve">
     <value>다운로드 소스</value>
+  </data>
+  <data name="Setting_Title_GitHubToken" xml:space="preserve">
+    <value>GitHub 토큰</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>오류 무시</value>
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>언어</value>
   </data>
   <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
-    <value>Muse Dash 폴더 경로</value>
+    <value>Muse Dash 폴더</value>
+  </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>콘솔 표시</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>시작 화면 표시</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Steam 폴더</value>
+  </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+    <value>업데이트 채널</value>
+  </data>
+  <data name="Setting_Title_UpdateSource" xml:space="preserve">
+    <value>업데이트 소스</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>사전 릴리스</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>안정 버전</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>모드 설정 편집</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>중국어(간체)</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>중국어(번체)</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>헝가리어</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>러시아어</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>스페인어</value>
   </data>
 </root>

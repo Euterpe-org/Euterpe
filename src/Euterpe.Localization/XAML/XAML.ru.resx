@@ -28,8 +28,23 @@
   <data name="Button_Install" xml:space="preserve">
     <value>Установить</value>
   </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>Играть</value>
+  </data>
+  <data name="Button_MDMC_Discord" xml:space="preserve">
+    <value>MDMC Discord</value>
+  </data>
+  <data name="Button_MDMC_Website" xml:space="preserve">
+    <value>Сайт MDMC</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Переустановить</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>Выбрать заново</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>Исходный код</value>
   </data>
   <data name="Button_Uninstall" xml:space="preserve">
     <value>Удалить</value>
@@ -49,11 +64,68 @@
   <data name="ChartFilterType_Master" xml:space="preserve">
     <value>Мастер</value>
   </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>Художник</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>Разработчик</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+    <value>С модами</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+    <value>Без модов</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>Логи приложения</value>
+  </data>
+  <data name="Folder_CustomAlbums" xml:space="preserve">
+    <value>Пользовательские чарты</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Моды</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>UserLibs</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>Звезда на GitHub</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>Поддержать</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Нравится Euterpe? Вот как вы можете помочь</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% бесплатно и с открытым кодом</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>Перейти</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>Загрузка...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>Для использования модов необходимо установить MelonLoader</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>Скачивание {0}: {1} МБ</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>Установлен</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>Не установлен</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+    <value>Подготовка...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>Необходимо для разработки модов</value>
@@ -69,9 +141,6 @@
   </data>
   <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
     <value>Создайте аккаунт для загрузки и управления модами</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe Hub</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
     <value>Для быстрого создания проекта мода</value>
@@ -97,8 +166,11 @@
   <data name="ModFilterType_All" xml:space="preserve">
     <value>Все</value>
   </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>Отключённые</value>
+  </data>
   <data name="ModFilterType_Enabled" xml:space="preserve">
-    <value>Включенные</value>
+    <value>Включённые</value>
   </data>
   <data name="ModFilterType_Incompatible" xml:space="preserve">
     <value>Несовместимые</value>
@@ -109,32 +181,134 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>Устаревшие</value>
   </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>Автор</value>
+  </data>
   <data name="ModInfo_Dependencies" xml:space="preserve">
     <value>Зависимости</value>
   </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>Подробности</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>Репозиторий</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>Требуемая версия загрузчика</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>Поддерживаемая версия игры</value>
+  </data>
+  <data name="ModState_Incompatible" xml:space="preserve">
+    <value>Несовместим</value>
+  </data>
   <data name="ModState_Modified" xml:space="preserve">
-    <value>Модифицирована</value>
+    <value>Изменён</value>
+  </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>Новее</value>
+  </data>
+  <data name="ModState_Normal" xml:space="preserve">
+    <value>Установлен</value>
+  </data>
+  <data name="ModState_Outdated" xml:space="preserve">
+    <value>Есть обновление</value>
+  </data>
+  <data name="Page_Charting" xml:space="preserve">
+    <value>Чарты</value>
   </data>
   <data name="Page_Home" xml:space="preserve">
-    <value>Домашняя страница</value>
+    <value>Главная</value>
+  </data>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>Логи</value>
+  </data>
+  <data name="Page_Modding" xml:space="preserve">
+    <value>Моды</value>
   </data>
   <data name="Page_Setting" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>Инструменты чартера</value>
+  </data>
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
-    <value>Чарты</value>
+    <value>Управление чартами</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>Лог приложения</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>Лог MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>Разработка модов</value>
   </data>
   <data name="Panel_Modding_ModManage" xml:space="preserve">
-    <value>Моды</value>
+    <value>Управление модами</value>
   </data>
   <data name="Panel_Setting_About" xml:space="preserve">
-    <value>Инфо</value>
+    <value>О программе</value>
+  </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>Расширенные</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>Внешний вид</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>Загрузка</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>Интерфейс</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>Управление файлами</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Найти чарт  (Имя, Автор, Создатель)</value>
+    <value>Поиск чартов  (Название, Артист, Чартер)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
-    <value>Искать моды  (Имя, Автор)</value>
+    <value>Поиск модов  (Название, Автор)</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Всегда показывать полосу прокрутки в списках</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>Содержит кэш загруженных файлов. Не меняйте во время других операций</value>
+  </data>
+  <data name="Setting_Description_DownloadSource" xml:space="preserve">
+    <value>Источник списка модов и загрузок</value>
+  </data>
+  <data name="Setting_Description_GitHubToken" xml:space="preserve">
+    <value>Токен GitHub для доступа к API, необходим для источника обновлений GitHub API</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>Не закрывать приложение при возникновении ошибки (Включайте только если понимаете, что делаете!)</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>Язык интерфейса</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Папка с исполняемым файлом Muse Dash</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>Показывать консоль при запуске игры</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>Показывать заставку при запуске игры</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Папка с исполняемым файлом Steam</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Канал обновлений Euterpe</value>
+  </data>
+  <data name="Setting_Description_UpdateSource" xml:space="preserve">
+    <value>Источник проверки обновлений Euterpe</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
@@ -143,21 +317,75 @@
     <value>GitHub</value>
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub Mirror</value>
+    <value>Зеркало GitHub</value>
+  </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Всегда показывать полосу прокрутки</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>Папка кэша</value>
   </data>
   <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>Источник скачивания</value>
+    <value>Источник загрузки</value>
+  </data>
+  <data name="Setting_Title_GitHubToken" xml:space="preserve">
+    <value>Токен GitHub</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>Игнорировать ошибки</value>
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>Язык</value>
   </data>
   <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
-    <value>Путь к папке Muse Dash</value>
+    <value>Папка Muse Dash</value>
+  </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>Показывать консоль</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>Показывать заставку</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Папка Steam</value>
+  </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+    <value>Канал обновлений</value>
+  </data>
+  <data name="Setting_Title_UpdateSource" xml:space="preserve">
+    <value>Источник обновлений</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>Предварительный выпуск</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>Стабильный</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Изменить конфигурацию мода</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Упрощённый китайский</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Традиционный китайский</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Венгерский</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Корейский</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Испанский</value>
   </data>
 </root>

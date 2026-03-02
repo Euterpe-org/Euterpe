@@ -14,186 +14,176 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accuracy Indicator" xml:space="preserve">
-    <value>Añade un medidor de precisión en arriba de la barra de vida,
-y muestra al final del nivel un gráfico de tu media de precisión durante la canción.</value>
+    <value>Añade un indicador de precisión más exacto en la parte inferior de la pantalla.
+Muestra la precisión promedio en milisegundos al final del nivel.</value>
   </data>
   <data name="AccuracyDisplay" xml:space="preserve">
-    <value>Un medidor de precisión a tiempo real en la parte superior izquierda de tu pantalla.</value>
+    <value>Muestra la precisión en tiempo real como porcentaje.</value>
   </data>
   <data name="Alt Tab Mute" xml:space="preserve">
-    <value>Silencia Muse Dash cuando no está enfocado.</value>
+    <value>Silencia el juego cuando pierde el foco.</value>
   </data>
   <data name="AlwaysAprilFool" xml:space="preserve">
-    <value>Todos los Jefes van a disparar ataques con Palomas y el Tutorial mantendrá activo su modo oculto.</value>
+    <value>El boss siempre dispara palomas, activa el tutorial de April Fools y Good Tek Hidden</value>
   </data>
   <data name="AlwaysBadApple" xml:space="preserve">
-    <value>Un mod que activará el modo Bad Apple en todos los escenarios de Touhou.</value>
+    <value>Cambia el fondo y los personajes a blanco y negro en el escenario Touhou</value>
   </data>
   <data name="AlwaysPigeons" xml:space="preserve">
-    <value>¡Los Jefes empezarán a disparar Palomas!
-Pequeño recordatorio: NO uses el mod AlwaysAprilFool con ESTE mod.</value>
+    <value>El boss siempre dispara palomas (no usar junto con AlwaysAprilFool)</value>
   </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-    <value>Este mod calculará cuál es la mejor combinación posible para cada Canción y Dificultad
-Entra a una canción y al pausar, podras ver la sugerencia de personajes.
-¡Pero! Toma en cuenta que el mod puede no ser preciso en muchos casos.</value>
+    <value>Muestra la mejor combinación de personaje en la pantalla de pausa
+Suele ser correcto, pero no confíes ciegamente
+En caso de duda, consulta CharacterScoreboard</value>
   </data>
   <data name="BPMDisplay" xml:space="preserve">
-    <value>Este mod muestra el BPM de cada canción en la pantalla de selección de dificultad.</value>
+    <value>Muestra información de BPM sobre el nombre del charter en la pantalla de preparación</value>
   </data>
   <data name="CharacterRandomizer" xml:space="preserve">
-    <value>Cada vez que juegues una canción, un personaje aleatorio será seleccionado.</value>
+    <value>Selecciona personaje y elfín aleatorios cada vez que juegas un chart</value>
   </data>
   <data name="CharacterScoreboard" xml:space="preserve">
-    <value>(OCS)Muestra la combinación de personajes utilizados por otros jugadores en el Leaderboard
-(LCS)Permite mostrar los scores conseguidos de manera local</value>
+    <value>Muestra el personaje usado para cada puntuación en el ranking (OCS)
+También puede mostrar tus puntuaciones locales (LCS)
+En charts personalizados, LCS y OCS pueden no coincidir</value>
   </data>
   <data name="ChartDeleter" xml:space="preserve">
-    <value>Permite hacer una lista de charts que desees eliminar o mover, cuando cierres Muse Dash.</value>
+    <value>Permite poner charts personalizados en cola para eliminar o mover al salir del juego</value>
   </data>
   <data name="ChartReview" xml:space="preserve">
-    <value>Automáticamente selecciona a Rin Sleepwalker, establece el offset a 0,
-desactiva el Auto-Fever y Oculta elementos de la interfaz.
-¡Además! Tienes un botón in-game para poder desactivar esto cuando quieras.</value>
+    <value>Selecciona automáticamente Sleepwalker, offset 0, fever manual, desactiva ciertos elementos de UI
+Se puede activar/desactivar durante el juego</value>
   </data>
   <data name="ChineseMode" xml:space="preserve">
-    <value>Permite activar Muse Dash en modo Chino. Esto modifica contenido del juego como:
--  Modelos de los Personajes
-- Ilustraciones
-- Escenarios
-- Y otras características exclusivas</value>
+    <value>Censura ciertos aspectos del juego (personajes, ilustraciones, etc.)</value>
   </data>
   <data name="Cinema" xml:space="preserve">
-    <value>El mod permite a ciertos charts, reproducir un video en reemplazo del Fondo de Escenario.</value>
+    <value>Permite ver fondos de vídeo en charts personalizados</value>
   </data>
   <data name="CustomAlbums" xml:space="preserve">
-    <value>Este mod permite la carga de Custom Charts(O canciones customs).</value>
+    <value>El mod que permite cargar charts personalizados</value>
   </data>
   <data name="CustomAnchorSupport" xml:space="preserve">
-    <value>Este mod permite que algunos Custom Charts estén disponibles en el Modo Streamer.
-¡Esto permite jugar Canciones NO Oficiales, sabiendo que No tienen reclamación por Copyright!</value>
+    <value>Permite agregar la etiqueta streamer en info.json para marcar canciones sin copyright
+(para uso con el modo streamer)</value>
   </data>
   <data name="CustomBGBrightness" xml:space="preserve">
-    <value>Permite bajar el brillo del escenario a menos del 40%</value>
+    <value>Permite ajustar el brillo del fondo por debajo del 40%</value>
   </data>
   <data name="CustomHitSound" xml:space="preserve">
-    <value>Permite añadir o crear tus propios Hit Sounds
-Mas detalles en Github.</value>
+    <value>Permite establecer sonidos de golpe personalizados
+Instrucciones detalladas en el README de GitHub</value>
   </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
-    <value>Permite tener Pantallas de Carga y Mensajes de Carga customizables.
-Los mensajes pueden estar vinculados a las imágenes que añadas
-o dejar que se activen de manera aleatoria.
-Más información en: UserData/CustomLoadingScreens.cfg </value>
+    <value>Permite agregar pantallas de carga personalizadas (carpeta CustomLoadingScreens)
+También mensajes personalizados (UserData/CustomLoadingScreens.cfg)
+Los mensajes pueden vincularse a una imagen o mostrarse aleatoriamente</value>
   </data>
   <data name="CustomResolution" xml:space="preserve">
-    <value>Permite ajustar la resolución de Muse Dash a uno que tú prefieras desde la configuración.</value>
+    <value>Agrega una opción personalizada en la configuración de resolución (configurable en el archivo de config)</value>
   </data>
   <data name="EffectDisable" xml:space="preserve">
-    <value>Desactiva algunos efectos in-game</value>
+    <value>Desactiva algunos efectos del juego</value>
   </data>
   <data name="FavGirl" xml:space="preserve">
-    <value>Permite el reemplazar las habilidades de los Personajes y Elfins por otros.
-El personaje/elfin que selecciones abajo a la derecha será la habilidad seleccionada,
-mientras que el Personaje/Elfin seleccionado con el corazón de arriba a la izquierda, será la apariencia que desees usar.</value>
+    <value>Permite marcar personajes y elfines como favoritos para cambiar su apariencia
+Las habilidades y puntuaciones se basan en el personaje seleccionado</value>
   </data>
   <data name="FC AP indicator" xml:space="preserve">
-    <value>Este mod mostrará cuando estés en una ruta AP(Todo Perfecto), FC(Full Combo) o La cantidad de Fallas y Greats registrados.</value>
+    <value>Indica si vas en ritmo de All Perfect/Full Combo y muestra la cantidad de misses/greats</value>
   </data>
   <data name="FeverEffectDisable" xml:space="preserve">
-    <value>Desactiva el fondo del modo Fever</value>
+    <value>Desactiva el efecto de fondo del fever</value>
   </data>
   <data name="Headquarters" xml:space="preserve">
-    <value>Permite acceder al Ranking de MDMC a todas las canciones descargadas desde la web MDMC.</value>
+    <value>Permite enviar puntuaciones en charts personalizados del sitio web MDMC</value>
   </data>
   <data name="HiddenQoL" xml:space="preserve">
-    <value>Permite añadir un botón el cual permite activar/desactivar el modo Hidden de las canciones.
-Bastante útil para saltarte los pasos de desbloquearlos</value>
+    <value>Agrega un botón para mostrar siempre las dificultades ocultas
+Ya no necesitas hacer clic repetidamente para desbloquearlas</value>
   </data>
   <data name="IntroSkip" xml:space="preserve">
-    <value>Salta la intro de "PeroPero HasuHasu" y la pantalla de bienvenida.</value>
+    <value>Salta la escena de apertura acelerando el juego
+Velocidad e ilustración animada configurables</value>
   </data>
   <data name="KeybindManager" xml:space="preserve">
-    <value>Una librería que permite a otros mods comprender y detectar muchas más teclas.</value>
+    <value>Una librería para que otros mods procesen atajos de teclado</value>
   </data>
   <data name="LocalizeLib" xml:space="preserve">
-    <value>Una librería que permite a otros mods detectar texto</value>
+    <value>Una librería para que otros mods localicen texto</value>
   </data>
   <data name="MDRPC" xml:space="preserve">
-    <value>Muse Dash Rich Presence. Un mod que permite mostrar que canción estás jugando en Discord.</value>
+    <value>Muse Dash Discord Rich Presence</value>
   </data>
   <data name="ModManager" xml:space="preserve">
-    <value>Un mod que te permite activar/desactivar mods mientras esta in-game.</value>
+    <value>Permite desactivar y eliminar mods dentro del juego</value>
   </data>
   <data name="MuseDashMirror" xml:space="preserve">
-    <value>Una librería que permite acceder a Datos del Jugador, Componentes de Batalla y Crear elementos de Interfaz.</value>
+    <value>Una librería para acceder fácilmente a PlayerData, BattleComponents y crear elementos de UI</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
-    <value>Evita que la Auto Pausa de Muse Dash sea active al cambiar de pestaña. </value>
+    <value>Evita que el juego se pause automáticamente al perder el foco</value>
   </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
-    <value>Permite saltarte la animación de Subiste de Nivel</value>
+    <value>Salta las animaciones de subida de nivel</value>
   </data>
   <data name="PerfectDisable" xml:space="preserve">
-    <value>Permite ocultar como el juego juzga cada objeto que golpees.
-Por ejemplo, en ADOFAI se muestran los avisos de Early/Late, pero no se
-muestra nada cuando es un Perfecto Exacto.</value>
+    <value>Permite desactivar efectos de juicio individuales
+(ej: mostrar solo early/late perfects, ocultar pure perfects)</value>
   </data>
   <data name="PopupLib" xml:space="preserve">
-    <value>Una librería que permite gestionar Ventanas y Popups</value>
+    <value>Una librería para que otros mods gestionen ventanas emergentes</value>
   </data>
   <data name="PreventLowAcc" xml:space="preserve">
-    <value>Un mod que previene enviar puntajes al leaderboard,
-pero permite sacar screenshots del intento.</value>
+    <value>Evita la subida de puntuación, pero aún permite tomar capturas de pantalla</value>
   </data>
   <data name="QuickRestart" xml:space="preserve">
-    <value>Pulsar la tecla [Supr] te dejará abandonar el chart
-Pulsar la tecla [ ← ] te dejará reiniciar el chart
-¡Y ahora puedes customizar que tecla usar para cada acción!</value>
+    <value>Suprimir para salir inmediatamente, Retroceso para reiniciar inmediatamente
+Atajos de teclado personalizables</value>
   </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-    <value>Permite asignar una tecla para seleccionar personajes rápidamente.
-Ahora dispone de una interfaz para editar.</value>
+    <value>Atajos de teclado para cambiar rápidamente de personaje
+Menú de configuración dentro del juego</value>
   </data>
   <data name="SceneEggs" xml:space="preserve">
-    <value>Hace posible que Custom Charts puedan utilizar escenarios con decoración especial.</value>
+    <value>Permite que los charts personalizados usen decoraciones de fondo especiales de los charts oficiales</value>
   </data>
   <data name="Scoreboard characters and elfins" xml:space="preserve">
-    <value>Igual que CharacterScoreboard, pero permite ver un icono de los personajes utilizados,
-los cuales puedes pulsar para seleccionar.</value>
+    <value>Similar a CharacterScoreboard, pero muestra iconos clicables
+Al hacer clic, cambia automáticamente a la combinación de personajes</value>
   </data>
   <data name="ScrollSpeed" xml:space="preserve">
-    <value>Permite a los Diseñadores poder asignar velocidades custom a los charts.
-Es completamente opcional el utilizar este mod.</value>
+    <value>Permite a los charters establecer velocidades de scroll personalizadas (no para jugadores)</value>
   </data>
   <data name="Search++ Folder Tag" xml:space="preserve">
-    <value>Permite expandir el sistema de búsqueda del juego.
-Dispones de filtros extras que el propio juego no dispone como: BPM, Traducciones extras, Dificultad, Escenario, etc.</value>
+    <value>Extensión de SearchPlusPlus
+Crear carpetas y buscar canciones dentro de ellas</value>
   </data>
   <data name="SearchPlusPlus" xml:space="preserve">
-    <value>Muestra la canción, artista y dificultad de la canción que estás jugando en la esquina superior derecha.</value>
+    <value>Todas las funciones de búsqueda que necesitas
+Dependencias opcionales: KeybindManager, CustomAlbums</value>
   </data>
   <data name="Song Desc" xml:space="preserve">
-    <value>Una extensión de SearchPlusPlus, que permite crear carpetas
-y buscar por canciones dentro de estas carpetas.</value>
+    <value>Muestra el título, artista y dificultad en la esquina superior derecha durante el juego</value>
   </data>
   <data name="StricterJudge" xml:space="preserve">
-    <value>Este mod aumenta la dificultad de Muse Dash, reduciendo el área de hit de los objetos del chart.</value>
+    <value>Mod de juicio estricto que modifica la ventana de juicio
+Personalizable en Stricter Judge.cfg</value>
   </data>
   <data name="True rank for 999+" xml:space="preserve">
-    <value>Permite mostrar una mayor cantidad del ranking, en lugar del limitado "+999"</value>
+    <value>Muestra el ranking real en lugar de "999+" para los puestos 1000 a 2000</value>
   </data>
   <data name="UI Disable" xml:space="preserve">
-    <value>Permite ocultar elementos de la interfaz de Muse Dash (Por ejemplo, los círculos de golpe)</value>
+    <value>Permite desactivar ciertos elementos visuales (ej: círculos de golpe)</value>
   </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
-    <value>Este mod permite que Sleepwalker Rin pueda alcanzar el hit máximo de todos los smashers.</value>
+    <value>Hace que Sleepwalker golpee los mashers a velocidad máxima</value>
   </data>
   <data name="UnlockAll2" xml:space="preserve">
-    <value>Permite desbloquear todas las dificultades Master automáticamente,
-solo mientras el mod esté instalado.</value>
+    <value>Desbloquea todas las dificultades Master (se revierten al desinstalar el mod)</value>
   </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
-    <value>Permite reemplazar la Pantalla de Victoria al modo DJMAX o ARKNIGHTS.</value>
+    <value>Permite cambiar la pantalla de victoria a estilo DJMAX o Arknights en los ajustes</value>
   </data>
 </root>

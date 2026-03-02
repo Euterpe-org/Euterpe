@@ -14,153 +14,176 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accuracy Indicator" xml:space="preserve">
-    <value>Adds a more exact accuracy indicator on the bottom of the screen.
-Also displays average accuracy in milliseconds at the end of the level.</value>
+    <value>Dodaje precizniji indikator točnosti na dnu ekrana.
+Prikazuje prosječnu točnost u milisekundama na kraju razine.</value>
   </data>
   <data name="AccuracyDisplay" xml:space="preserve">
-    <value>A live accuracy display for your viewing pleasure.</value>
+    <value>Prikazuje točnost u stvarnom vremenu kao postotak.</value>
   </data>
   <data name="Alt Tab Mute" xml:space="preserve">
-    <value>Mutes the game when it's not focused.</value>
+    <value>Utišava igru kad nije u fokusu.</value>
+  </data>
+  <data name="AlwaysAprilFool" xml:space="preserve">
+    <value>Boss uvijek puca golubove, aktivira prvoaprilski tutorial i Good Tek Hidden</value>
   </data>
   <data name="AlwaysBadApple" xml:space="preserve">
-    <value>A mod which changes the background and character etc into black and white in tohou scene</value>
+    <value>Mijenja pozadinu i likove u crno-bijelo na Touhou sceni</value>
+  </data>
+  <data name="AlwaysPigeons" xml:space="preserve">
+    <value>Boss uvijek puca golubove (ne koristiti istovremeno s AlwaysAprilFool)</value>
   </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-    <value>Displays the best character combination for a level in the pause screen
-The character combo displayed is usually correct, but don't put your blind faith in it
-When in doubt, refer to CharacterScoreboard</value>
+    <value>Prikazuje najbolju kombinaciju likova za razinu na ekranu pauze
+Obično je točno, ali ne vjerujte slijepo
+U slučaju sumnje pogledajte CharacterScoreboard</value>
   </data>
   <data name="BPMDisplay" xml:space="preserve">
-    <value>A mod which displays the BPM info above level designer on preparation screen</value>
+    <value>Prikazuje BPM informacije iznad imena autora charta na ekranu pripreme</value>
   </data>
   <data name="CharacterRandomizer" xml:space="preserve">
-    <value>Everytime you play a chart, a random character combination will be selected</value>
+    <value>Nasumično odabire lik i elfina svaki put kad igrate chart</value>
+  </data>
+  <data name="CharacterScoreboard" xml:space="preserve">
+    <value>Prikazuje koji lik je korišten za svaki rezultat na ljestvici (OCS)
+Može prikazati i vaše lokalne rezultate (LCS)
+Na prilagođenim chartovima LCS i OCS se mogu razlikovati</value>
   </data>
   <data name="ChartDeleter" xml:space="preserve">
-    <value>Allows you to queue custom charts to be deleted or moved when you exit the game.</value>
+    <value>Omogućuje stavljanje prilagođenih chartova u red za brisanje ili premještanje pri izlasku iz igre</value>
   </data>
   <data name="ChartReview" xml:space="preserve">
-    <value>Automatically selects sleepwalker, sets offset to 0, sets fever to manual, disables certain UI elements.
-Can be toggled on/off while in-game</value>
+    <value>Automatski odabire Sleepwalker, postavlja offset na 0, fever na ručno, onemogućuje neke UI elemente
+Može se uključiti/isključiti tijekom igre</value>
   </data>
   <data name="ChineseMode" xml:space="preserve">
-    <value>Censores certain aspects of the game (Characters, illustrations, etc)</value>
+    <value>Cenzurira određene aspekte igre (likovi, ilustracije itd.)</value>
   </data>
   <data name="Cinema" xml:space="preserve">
-    <value>The mod that allows you to see video backgrounds in custom charts</value>
+    <value>Omogućuje reprodukciju video pozadina u prilagođenim chartovima</value>
   </data>
   <data name="CustomAlbums" xml:space="preserve">
-    <value>The mod that allows you to load in custom charts</value>
+    <value>Mod koji omogućuje učitavanje prilagođenih chartova</value>
   </data>
   <data name="CustomAnchorSupport" xml:space="preserve">
-    <value>Allows you to use add the streamer tag in your info.json to mark a song as copyright-free
-(for use with streamer mode)</value>
+    <value>Omogućuje dodavanje streamer oznake u info.json za označavanje pjesama bez autorskih prava
+(za korištenje sa streamer načinom rada)</value>
   </data>
   <data name="CustomBGBrightness" xml:space="preserve">
-    <value>Allows you to adjust background brightness lower than 40%</value>
+    <value>Omogućuje podešavanje svjetline pozadine ispod 40%</value>
+  </data>
+  <data name="CustomHitSound" xml:space="preserve">
+    <value>Omogućuje postavljanje prilagođenih zvukova udarca
+Detaljne upute u GitHub README datoteci</value>
   </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
-    <value>Allows you to add custom loading screens (CustomLoadingScreens folder)
-Also allows you to add custom loading screen messages (UserData/CustomLoadingScreens.cfg)
-Messages can be paired with an image, or be left as random</value>
+    <value>Omogućuje dodavanje prilagođenih ekrana učitavanja (mapa CustomLoadingScreens)
+Prilagođene poruke učitavanja (UserData/CustomLoadingScreens.cfg)
+Poruke se mogu povezati sa slikom ili prikazivati nasumično</value>
   </data>
   <data name="CustomResolution" xml:space="preserve">
-    <value>Adds a Custom option in resolution settings, which can be changed in the config</value>
+    <value>Dodaje prilagođenu opciju u postavke rezolucije (promjenjivo u konfiguracijskoj datoteci)</value>
   </data>
   <data name="EffectDisable" xml:space="preserve">
-    <value>Disables some in-game effects</value>
+    <value>Onemogućuje neke efekte u igri</value>
   </data>
   <data name="FavGirl" xml:space="preserve">
-    <value>Allows you to favorite characters and elfins
-This will make you look like that character even if another character is selected.
-You will have the abilities of the selected character &amp; your plays will be submitted as such</value>
+    <value>Omogućuje označavanje omiljenih likova i elfina za promjenu izgleda
+Sposobnosti i rezultati temelje se na odabranom liku</value>
   </data>
   <data name="FC AP indicator" xml:space="preserve">
-    <value>Tells you whether you're on All Perfect/Full Combo pace, and displays the number of misses/greats</value>
+    <value>Pokazuje jeste li na putu prema All Perfect/Full Combo i prikazuje broj promašaja/greatova</value>
   </data>
   <data name="FeverEffectDisable" xml:space="preserve">
-    <value>Disables the fever background effect</value>
+    <value>Onemogućuje pozadinski efekt fevera</value>
   </data>
   <data name="Headquarters" xml:space="preserve">
-    <value>Allows you to submit scores on custom charts obtained from the MDMC website</value>
+    <value>Omogućuje slanje rezultata na prilagođenim chartovima s MDMC web stranice</value>
   </data>
   <data name="HiddenQoL" xml:space="preserve">
-    <value>Adds a button to always show hidden difficulties.
-E.g. you don't need to spam click and such to unlock them before playing</value>
+    <value>Dodaje gumb za trajno prikazivanje skrivenih težina
+Više nije potrebno brzo klikati za otključavanje</value>
+  </data>
+  <data name="IntroSkip" xml:space="preserve">
+    <value>Preskače uvodnu scenu ubrzavanjem igre
+Brzina i preskakanje animirane ilustracije su podesivi</value>
   </data>
   <data name="KeybindManager" xml:space="preserve">
-    <value>A library for other mods to parse and listen to keybinds</value>
+    <value>Biblioteka koja omogućuje drugim modovima obradu tipkovničkih prečaca</value>
   </data>
   <data name="LocalizeLib" xml:space="preserve">
-    <value>A library for other mods to localize text</value>
+    <value>Biblioteka koja omogućuje drugim modovima lokalizaciju teksta</value>
   </data>
   <data name="MDRPC" xml:space="preserve">
-    <value>Muse Dash Rich Presence, which is exactly what it says it is.</value>
+    <value>Muse Dash Discord Rich Presence</value>
   </data>
   <data name="ModManager" xml:space="preserve">
-    <value>Allows you to disable &amp; delete mods while in-game.</value>
+    <value>Omogućuje onemogućavanje i brisanje modova unutar igre</value>
   </data>
   <data name="MuseDashMirror" xml:space="preserve">
-    <value>A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.
-This mod does nothing by itself.</value>
+    <value>Biblioteka za lakši pristup PlayerData, BattleComponents podacima i izradu UI elemenata</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
-    <value>Prevents the game from automatically pausing when the game loses focus.</value>
+    <value>Sprječava automatsko pauziranje igre kad izgubi fokus</value>
   </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
-    <value>Level up animations take ages;
-Let's skip them.</value>
+    <value>Preskače animacije napredovanja razine</value>
   </data>
   <data name="PerfectDisable" xml:space="preserve">
-    <value>Allows you to disable the judgements in-game.
-(example: show early/late perfects but not pure perfects)
-Inspired by ADOFAI Tweaks</value>
+    <value>Omogućuje pojedinačno onemogućavanje efekata procjene
+(npr. prikazati samo early/late perfect, sakriti pure perfect)</value>
   </data>
   <data name="PopupLib" xml:space="preserve">
-    <value>A library for other mods to manage popups and windows</value>
+    <value>Biblioteka koja omogućuje drugim modovima upravljanje skočnim prozorima</value>
   </data>
   <data name="PreventLowAcc" xml:space="preserve">
-    <value>A mod that that allows let's you prevent a score from uploading,
-and still be able to take a screenshot.</value>
+    <value>Sprječava prijenos rezultata, ali i dalje omogućuje snimanje zaslona</value>
   </data>
   <data name="QuickRestart" xml:space="preserve">
-    <value>Allows you to use Delete to instantly leave a chart &amp; Allows you to use Backspace to instantly restart a chart
-Update now allows you to set custom keybinds.</value>
+    <value>Delete za trenutni izlazak, Backspace za trenutni restart
+Tipkovnički prečaci su prilagodljivi</value>
   </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-    <value>Allows you to set keybinds to quickly change your characters.
-Now has an in-game menu to add keybinds</value>
+    <value>Tipkovnički prečaci za brzu promjenu likova
+Izbornik za konfiguraciju dostupan u igri</value>
   </data>
   <data name="SceneEggs" xml:space="preserve">
-    <value>Makes it possible for customs to use certain background decorations that the default charts use.</value>
+    <value>Omogućuje prilagođenim chartovima korištenje posebnih pozadinskih ukrasa iz službenih chartova</value>
   </data>
   <data name="Scoreboard characters and elfins" xml:space="preserve">
-    <value>Similar to CharacterScoreboard, however, it instead adds icon clickable icon representations,
-which automatically switches to the character combo when clicked.</value>
+    <value>Slično CharacterScoreboardu, ali prikazuje klikabilne ikone
+Klikom se automatski prebacuje na odgovarajuću kombinaciju likova</value>
   </data>
   <data name="ScrollSpeed" xml:space="preserve">
-    <value>Allows charters (not players) to set custom scroll speeds.
-It's completely up to you whether you wanna use this, most charters don't use it though.</value>
+    <value>Omogućuje autorima chartova postavljanje prilagođenih brzina pomicanja (nije za igrače)</value>
+  </data>
+  <data name="Search++ Folder Tag" xml:space="preserve">
+    <value>Proširenje za SearchPlusPlus
+Omogućuje izradu mapa i pretraživanje pjesama unutar njih</value>
+  </data>
+  <data name="SearchPlusPlus" xml:space="preserve">
+    <value>Sve funkcije pretraživanja koje su vam potrebne
+Opcionalne ovisnosti: KeybindManager, CustomAlbums</value>
+  </data>
+  <data name="Song Desc" xml:space="preserve">
+    <value>Prikazuje naslov, izvođača i težinu pjesme u gornjem desnom kutu tijekom igre</value>
   </data>
   <data name="StricterJudge" xml:space="preserve">
-    <value>A mod which changes the judgement window and make the game harder
-You can manually change the judgement range in Stricter Judge.cfg</value>
+    <value>Mod koji mijenja prozor procjene i čini igru težom
+Raspon procjene prilagodljiv u Stricter Judge.cfg</value>
   </data>
   <data name="True rank for 999+" xml:space="preserve">
-    <value>Displays actual ranking instead of "999+" for ranks 1000 to 2000</value>
+    <value>Prikazuje stvarni rang umjesto „999+" za rangove od 1000 do 2000</value>
   </data>
   <data name="UI Disable" xml:space="preserve">
-    <value>Allows you to disable certain visual aspects of the game (example: hit circles)</value>
+    <value>Omogućuje onemogućavanje pojedinih vizualnih elemenata (npr. krugovi udarca)</value>
   </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
-    <value>Makes Sleepwalker Rin do mashers at max speed instead of the normal slow speed.</value>
+    <value>Sleepwalker udara mashere maksimalnom brzinom</value>
   </data>
   <data name="UnlockAll2" xml:space="preserve">
-    <value>An alternative to UnlockAll.
-Master's stay unlocked only for as long as the mod is installed.</value>
+    <value>Otključava sve Master težine (vraća se pri uklanjanju moda)</value>
   </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
-    <value>Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa.</value>
+    <value>Omogućuje promjenu ekrana pobjede na DJMAX ili Arknights stil u postavkama</value>
   </data>
 </root>

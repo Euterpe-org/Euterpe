@@ -14,28 +14,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AllGameVersionCompatible" xml:space="preserve">
-    <value>All</value>
+    <value>Sve</value>
   </data>
   <data name="Button_Apply" xml:space="preserve">
-    <value>Apply</value>
+    <value>Primijeni</value>
   </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
-    <value>Check Update</value>
+    <value>Provjeri ažuriranja</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
-    <value>Help Translate</value>
+    <value>Pomozi s prijevodom</value>
   </data>
   <data name="Button_Install" xml:space="preserve">
-    <value>Install</value>
+    <value>Instaliraj</value>
+  </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>Igraj</value>
+  </data>
+  <data name="Button_MDMC_Discord" xml:space="preserve">
+    <value>MDMC Discord</value>
+  </data>
+  <data name="Button_MDMC_Website" xml:space="preserve">
+    <value>MDMC web-stranica</value>
   </data>
   <data name="Button_Reinstall" xml:space="preserve">
-    <value>Reinstall</value>
+    <value>Ponovno instaliraj</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>Ponovno odaberi</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>Izvorni kod</value>
   </data>
   <data name="Button_Uninstall" xml:space="preserve">
-    <value>Uninstall</value>
+    <value>Deinstaliraj</value>
   </data>
   <data name="Button_Update" xml:space="preserve">
-    <value>Update</value>
+    <value>Ažuriraj</value>
   </data>
   <data name="ChartFilterType_Easy" xml:space="preserve">
     <value>Easy</value>
@@ -49,11 +64,68 @@
   <data name="ChartFilterType_Master" xml:space="preserve">
     <value>Master</value>
   </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>Umjetnik</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>Programer</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>Otvori</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+    <value>S modovima</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+    <value>Bez modova</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>Zapisnici aplikacije</value>
+  </data>
+  <data name="Folder_CustomAlbums" xml:space="preserve">
+    <value>Prilagođeni chartovi</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mods</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>UserLibs</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>Zvjezdica na GitHubu</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>Sponzoriraj</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Sviđa ti se Euterpe? Evo kako možeš pomoći</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100 % besplatno i otvorenog koda</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>Posjeti</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>Učitavanje...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>Za igranje s modovima potrebna je instalacija MelonLoadera</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>Preuzimanje {0}: {1} MB</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>Instalirano</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>Nije instalirano</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+    <value>Priprema...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>Potrebno za razvoj modova</value>
@@ -69,9 +141,6 @@
   </data>
   <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
     <value>Napravite račun za prijenos i upravljanje modovima</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe Hub</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
     <value>Za brzo stvaranje projekta moda</value>
@@ -95,19 +164,151 @@
     <value>Nije postavljeno</value>
   </data>
   <data name="ModFilterType_All" xml:space="preserve">
-    <value>All</value>
+    <value>Sve</value>
+  </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>Onemogućeni</value>
   </data>
   <data name="ModFilterType_Enabled" xml:space="preserve">
-    <value>Enabled</value>
+    <value>Omogućeni</value>
   </data>
   <data name="ModFilterType_Incompatible" xml:space="preserve">
-    <value>Incompatible</value>
+    <value>Nekompatibilni</value>
   </data>
   <data name="ModFilterType_Installed" xml:space="preserve">
-    <value>Installed</value>
+    <value>Instalirani</value>
   </data>
   <data name="ModFilterType_Outdated" xml:space="preserve">
-    <value>Outdated</value>
+    <value>Zastarjeli</value>
+  </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="ModInfo_Dependencies" xml:space="preserve">
+    <value>Ovisnosti</value>
+  </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>Detalji</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>Repozitorij</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>Potrebna verzija loadera</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>Podržana verzija igre</value>
+  </data>
+  <data name="ModState_Incompatible" xml:space="preserve">
+    <value>Nekompatibilan</value>
+  </data>
+  <data name="ModState_Modified" xml:space="preserve">
+    <value>Izmijenjen</value>
+  </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>Noviji</value>
+  </data>
+  <data name="ModState_Normal" xml:space="preserve">
+    <value>Instalirano</value>
+  </data>
+  <data name="ModState_Outdated" xml:space="preserve">
+    <value>Dostupno ažuriranje</value>
+  </data>
+  <data name="Page_Charting" xml:space="preserve">
+    <value>Chartovi</value>
+  </data>
+  <data name="Page_Home" xml:space="preserve">
+    <value>Početna</value>
+  </data>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>Zapisnici</value>
+  </data>
+  <data name="Page_Modding" xml:space="preserve">
+    <value>Modovi</value>
+  </data>
+  <data name="Page_Setting" xml:space="preserve">
+    <value>Postavke</value>
+  </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>Alati za chartove</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>Upravljanje chartovima</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>Zapisnik aplikacije</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>MelonLoader zapisnik</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>Razvoj modova</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>Upravljanje modovima</value>
+  </data>
+  <data name="Panel_Setting_About" xml:space="preserve">
+    <value>O programu</value>
+  </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>Napredno</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>Izgled</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>Preuzimanje</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>Iskustvo</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>Upravljanje datotekama</value>
+  </data>
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
+    <value>Pretraži chartove  (Naziv, Izvođač, Kreator)</value>
+  </data>
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
+    <value>Pretraži modove  (Naziv, Autor)</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Uvijek prikaži traku za pomicanje u popisima</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>Uključuje privremenu memoriju za preuzimanje datoteka. Ne mijenjajte ovo tijekom drugih operacija</value>
+  </data>
+  <data name="Setting_Description_DownloadSource" xml:space="preserve">
+    <value>Izvor popisa modova i preuzimanja</value>
+  </data>
+  <data name="Setting_Description_GitHubToken" xml:space="preserve">
+    <value>GitHub token za pristup API-ju, potreban za GitHub API izvor ažuriranja</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>Sprječava zatvaranje aplikacije kada dođe do pogreške (Omogućite samo ako znate što radite!)</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>Jezik sučelja</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Mapa s izvršnom datotekom Muse Dash</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>Prikaži konzolu pri pokretanju igre</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>Prikaži početni zaslon pri pokretanju igre</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Mapa s izvršnom datotekom Steam</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Kanal ažuriranja za Euterpe</value>
+  </data>
+  <data name="Setting_Description_UpdateSource" xml:space="preserve">
+    <value>Izvor za provjeru ažuriranja Euterpe</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
@@ -116,15 +317,75 @@
     <value>GitHub</value>
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub Mirror</value>
+    <value>GitHub zrcalo</value>
+  </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Uvijek prikaži traku za pomicanje</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>Mapa privremene memorije</value>
+  </data>
+  <data name="Setting_Title_DownloadSource" xml:space="preserve">
+    <value>Izvor preuzimanja</value>
+  </data>
+  <data name="Setting_Title_GitHubToken" xml:space="preserve">
+    <value>GitHub token</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>Zanemari pogreške</value>
+  </data>
+  <data name="Setting_Title_Language" xml:space="preserve">
+    <value>Jezik</value>
   </data>
   <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
-    <value>Muse Dash Folder Path</value>
+    <value>Muse Dash mapa</value>
+  </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>Prikaži konzolu</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>Prikaži početni zaslon</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Steam mapa</value>
+  </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+    <value>Kanal ažuriranja</value>
+  </data>
+  <data name="Setting_Title_UpdateSource" xml:space="preserve">
+    <value>Izvor ažuriranja</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>Pretpremijerno</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>Stabilno</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Uredi konfiguraciju moda</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Pojednostavljeni kineski</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Tradicionalni kineski</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Mađarski</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Korejski</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Ruski</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Španjolski</value>
   </data>
 </root>
