@@ -14,153 +14,176 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accuracy Indicator" xml:space="preserve">
-    <value>Adds a more exact accuracy indicator on the bottom of the screen.
-Also displays average accuracy in milliseconds at the end of the level.</value>
+    <value>Ajoute un indicateur de précision plus exact en bas de l'écran.
+Affiche la précision moyenne en millisecondes à la fin du niveau.</value>
   </data>
   <data name="AccuracyDisplay" xml:space="preserve">
-    <value>A live accuracy display for your viewing pleasure.</value>
+    <value>Affiche la précision en temps réel sous forme de pourcentage.</value>
   </data>
   <data name="Alt Tab Mute" xml:space="preserve">
-    <value>Mutes the game when it's not focused.</value>
+    <value>Coupe le son du jeu lorsqu'il n'est pas au premier plan.</value>
+  </data>
+  <data name="AlwaysAprilFool" xml:space="preserve">
+    <value>Le boss tire toujours des pigeons, active le tutoriel du poisson d'avril et Good Tek Hidden</value>
   </data>
   <data name="AlwaysBadApple" xml:space="preserve">
-    <value>A mod which changes the background and character etc into black and white in tohou scene</value>
+    <value>Rend le fond et les personnages en noir et blanc dans la scène Touhou</value>
+  </data>
+  <data name="AlwaysPigeons" xml:space="preserve">
+    <value>Le boss tire toujours des pigeons (ne pas utiliser avec AlwaysAprilFool)</value>
   </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-    <value>Displays the best character combination for a level in the pause screen
-The character combo displayed is usually correct, but don't put your blind faith in it
-When in doubt, refer to CharacterScoreboard</value>
+    <value>Affiche la meilleure combinaison de personnages dans l'écran de pause
+Généralement correct, mais ne faites pas aveuglément confiance
+En cas de doute, consultez CharacterScoreboard</value>
   </data>
   <data name="BPMDisplay" xml:space="preserve">
-    <value>A mod which displays the BPM info above level designer on preparation screen</value>
+    <value>Affiche les informations BPM au-dessus du nom du charteur sur l'écran de préparation</value>
   </data>
   <data name="CharacterRandomizer" xml:space="preserve">
-    <value>Everytime you play a chart, a random character combination will be selected</value>
+    <value>Sélectionne aléatoirement un personnage et un elfin à chaque chart</value>
+  </data>
+  <data name="CharacterScoreboard" xml:space="preserve">
+    <value>Affiche le personnage utilisé pour chaque score dans le classement (OCS)
+Peut aussi afficher vos scores locaux (LCS)
+Sur les charts personnalisés, LCS et OCS peuvent diverger</value>
   </data>
   <data name="ChartDeleter" xml:space="preserve">
-    <value>Allows you to queue custom charts to be deleted or moved when you exit the game.</value>
+    <value>Permet de mettre en file d'attente des charts personnalisés pour suppression ou déplacement à la fermeture du jeu</value>
   </data>
   <data name="ChartReview" xml:space="preserve">
-    <value>Automatically selects sleepwalker, sets offset to 0, sets fever to manual, disables certain UI elements.
-Can be toggled on/off while in-game</value>
+    <value>Sélectionne automatiquement Sleepwalker, offset à 0, fever manuel, désactive certains éléments d'interface
+Activable/désactivable en jeu</value>
   </data>
   <data name="ChineseMode" xml:space="preserve">
-    <value>Censores certain aspects of the game (Characters, illustrations, etc)</value>
+    <value>Censure certains aspects du jeu (personnages, illustrations, etc.)</value>
   </data>
   <data name="Cinema" xml:space="preserve">
-    <value>The mod that allows you to see video backgrounds in custom charts</value>
+    <value>Permet de lire des vidéos en arrière-plan dans les charts personnalisés</value>
   </data>
   <data name="CustomAlbums" xml:space="preserve">
-    <value>The mod that allows you to load in custom charts</value>
+    <value>Le mod qui permet de charger des charts personnalisés</value>
   </data>
   <data name="CustomAnchorSupport" xml:space="preserve">
-    <value>Allows you to use add the streamer tag in your info.json to mark a song as copyright-free
-(for use with streamer mode)</value>
+    <value>Permet d'ajouter un tag streamer dans info.json pour indiquer les morceaux libres de droits
+(pour le mode streamer)</value>
   </data>
   <data name="CustomBGBrightness" xml:space="preserve">
-    <value>Allows you to adjust background brightness lower than 40%</value>
+    <value>Permet de régler la luminosité du fond en dessous de 40%</value>
+  </data>
+  <data name="CustomHitSound" xml:space="preserve">
+    <value>Permet de définir des sons de frappe personnalisés
+Instructions détaillées dans le README GitHub</value>
   </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
-    <value>Allows you to add custom loading screens (CustomLoadingScreens folder)
-Also allows you to add custom loading screen messages (UserData/CustomLoadingScreens.cfg)
-Messages can be paired with an image, or be left as random</value>
+    <value>Permet d'ajouter des écrans de chargement personnalisés (dossier CustomLoadingScreens)
+Messages personnalisés configurables (UserData/CustomLoadingScreens.cfg)
+Les messages peuvent être associés à une image ou affichés aléatoirement</value>
   </data>
   <data name="CustomResolution" xml:space="preserve">
-    <value>Adds a Custom option in resolution settings, which can be changed in the config</value>
+    <value>Ajoute une option personnalisée dans les paramètres de résolution (modifiable dans la config)</value>
   </data>
   <data name="EffectDisable" xml:space="preserve">
-    <value>Disables some in-game effects</value>
+    <value>Désactive certains effets en jeu</value>
   </data>
   <data name="FavGirl" xml:space="preserve">
-    <value>Allows you to favorite characters and elfins
-This will make you look like that character even if another character is selected.
-You will have the abilities of the selected character &amp; your plays will be submitted as such</value>
+    <value>Permet de mettre en favori des personnages et elfins pour l'apparence
+Les compétences et scores restent ceux du personnage sélectionné</value>
   </data>
   <data name="FC AP indicator" xml:space="preserve">
-    <value>Tells you whether you're on All Perfect/Full Combo pace, and displays the number of misses/greats</value>
+    <value>Indique si vous êtes en rythme All Perfect/Full Combo et affiche le nombre de misses/greats</value>
   </data>
   <data name="FeverEffectDisable" xml:space="preserve">
-    <value>Disables the fever background effect</value>
+    <value>Désactive l'effet de fond du fever</value>
   </data>
   <data name="Headquarters" xml:space="preserve">
-    <value>Allows you to submit scores on custom charts obtained from the MDMC website</value>
+    <value>Permet de soumettre des scores sur les charts personnalisés du site MDMC</value>
   </data>
   <data name="HiddenQoL" xml:space="preserve">
-    <value>Adds a button to always show hidden difficulties.
-E.g. you don't need to spam click and such to unlock them before playing</value>
+    <value>Ajoute un bouton pour toujours afficher les difficultés cachées
+Plus besoin de cliquer frénétiquement pour les débloquer</value>
+  </data>
+  <data name="IntroSkip" xml:space="preserve">
+    <value>Passe l'intro en accélérant le jeu
+Vitesse et saut de l'illustration animée configurables</value>
   </data>
   <data name="KeybindManager" xml:space="preserve">
-    <value>A library for other mods to parse and listen to keybinds</value>
+    <value>Une bibliothèque pour que d'autres mods puissent gérer les raccourcis clavier</value>
   </data>
   <data name="LocalizeLib" xml:space="preserve">
-    <value>A library for other mods to localize text</value>
+    <value>Une bibliothèque pour que d'autres mods puissent localiser du texte</value>
   </data>
   <data name="MDRPC" xml:space="preserve">
-    <value>Muse Dash Rich Presence, which is exactly what it says it is.</value>
+    <value>Muse Dash Discord Rich Presence</value>
   </data>
   <data name="ModManager" xml:space="preserve">
-    <value>Allows you to disable &amp; delete mods while in-game.</value>
+    <value>Permet de désactiver et supprimer des mods en jeu</value>
   </data>
   <data name="MuseDashMirror" xml:space="preserve">
-    <value>A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.
-This mod does nothing by itself.</value>
+    <value>Une bibliothèque facilitant l'accès aux données joueur, composants de combat et création d'interface</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
-    <value>Prevents the game from automatically pausing when the game loses focus.</value>
+    <value>Empêche la pause automatique quand le jeu perd le focus</value>
   </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
-    <value>Level up animations take ages;
-Let's skip them.</value>
+    <value>Passe les animations de montée de niveau</value>
   </data>
   <data name="PerfectDisable" xml:space="preserve">
-    <value>Allows you to disable the judgements in-game.
-(example: show early/late perfects but not pure perfects)
-Inspired by ADOFAI Tweaks</value>
+    <value>Permet de désactiver les effets de jugement individuellement
+(ex : afficher uniquement les early/late perfects, masquer les pure perfects)</value>
   </data>
   <data name="PopupLib" xml:space="preserve">
-    <value>A library for other mods to manage popups and windows</value>
+    <value>Une bibliothèque pour que d'autres mods puissent gérer les fenêtres pop-up</value>
   </data>
   <data name="PreventLowAcc" xml:space="preserve">
-    <value>A mod that that allows let's you prevent a score from uploading,
-and still be able to take a screenshot.</value>
+    <value>Empêche l'envoi du score tout en permettant les captures d'écran</value>
   </data>
   <data name="QuickRestart" xml:space="preserve">
-    <value>Allows you to use Delete to instantly leave a chart &amp; Allows you to use Backspace to instantly restart a chart
-Update now allows you to set custom keybinds.</value>
+    <value>Suppr pour quitter instantanément, Retour arrière pour redémarrer instantanément
+Raccourcis personnalisables</value>
   </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-    <value>Allows you to set keybinds to quickly change your characters.
-Now has an in-game menu to add keybinds</value>
+    <value>Raccourcis clavier pour changer rapidement de personnage
+Menu de configuration en jeu</value>
   </data>
   <data name="SceneEggs" xml:space="preserve">
-    <value>Makes it possible for customs to use certain background decorations that the default charts use.</value>
+    <value>Permet aux charts personnalisés d'utiliser les décorations de fond spéciales des charts officiels</value>
   </data>
   <data name="Scoreboard characters and elfins" xml:space="preserve">
-    <value>Similar to CharacterScoreboard, however, it instead adds icon clickable icon representations,
-which automatically switches to the character combo when clicked.</value>
+    <value>Similaire à CharacterScoreboard, mais affiche des icônes cliquables
+Cliquer bascule automatiquement vers la combinaison de personnages</value>
   </data>
   <data name="ScrollSpeed" xml:space="preserve">
-    <value>Allows charters (not players) to set custom scroll speeds.
-It's completely up to you whether you wanna use this, most charters don't use it though.</value>
+    <value>Permet aux charteurs de définir des vitesses de défilement personnalisées (pas pour les joueurs)</value>
+  </data>
+  <data name="Search++ Folder Tag" xml:space="preserve">
+    <value>Extension de SearchPlusPlus
+Créer des dossiers et rechercher des chansons dedans</value>
+  </data>
+  <data name="SearchPlusPlus" xml:space="preserve">
+    <value>Toutes les fonctions de recherche dont vous avez besoin
+Dépendances optionnelles : KeybindManager, CustomAlbums</value>
+  </data>
+  <data name="Song Desc" xml:space="preserve">
+    <value>Affiche le titre, l'artiste et la difficulté en haut à droite pendant le jeu</value>
   </data>
   <data name="StricterJudge" xml:space="preserve">
-    <value>A mod which changes the judgement window and make the game harder
-You can manually change the judgement range in Stricter Judge.cfg</value>
+    <value>Mod de jugement strict modifiant la fenêtre de jugement
+Personnalisable dans Stricter Judge.cfg</value>
   </data>
   <data name="True rank for 999+" xml:space="preserve">
-    <value>Displays actual ranking instead of "999+" for ranks 1000 to 2000</value>
+    <value>Affiche le rang réel au lieu de « 999+ » pour les rangs 1000 à 2000</value>
   </data>
   <data name="UI Disable" xml:space="preserve">
-    <value>Allows you to disable certain visual aspects of the game (example: hit circles)</value>
+    <value>Permet de désactiver certains éléments visuels (ex : cercles de frappe)</value>
   </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
-    <value>Makes Sleepwalker Rin do mashers at max speed instead of the normal slow speed.</value>
+    <value>Sleepwalker frappe les mashers à vitesse maximale</value>
   </data>
   <data name="UnlockAll2" xml:space="preserve">
-    <value>An alternative to UnlockAll.
-Master's stay unlocked only for as long as the mod is installed.</value>
+    <value>Débloque toutes les difficultés Master (verrouillées à nouveau si le mod est retiré)</value>
   </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
-    <value>Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa.</value>
+    <value>Permet de changer l'écran de victoire en style DJMAX ou Arknights dans les paramètres</value>
   </data>
 </root>

@@ -20,16 +20,31 @@
     <value>Aplicar</value>
   </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
-    <value>Comprobar actualización</value>
+    <value>Buscar actualizaciones</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
-    <value>¡Ayuda a traducir!</value>
+    <value>Ayudar a traducir</value>
   </data>
   <data name="Button_Install" xml:space="preserve">
     <value>Instalar</value>
   </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>Jugar</value>
+  </data>
+  <data name="Button_MDMC_Discord" xml:space="preserve">
+    <value>MDMC Discord</value>
+  </data>
+  <data name="Button_MDMC_Website" xml:space="preserve">
+    <value>Web de MDMC</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Reinstalar</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>Seleccionar de nuevo</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>Código fuente</value>
   </data>
   <data name="Button_Uninstall" xml:space="preserve">
     <value>Desinstalar</value>
@@ -49,8 +64,71 @@
   <data name="ChartFilterType_Master" xml:space="preserve">
     <value>Maestro</value>
   </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>Artista</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>Desarrollador</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+    <value>Con mods</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+    <value>Sin mods</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>Registros de la app</value>
+  </data>
+  <data name="Folder_CustomAlbums" xml:space="preserve">
+    <value>Charts personalizados</value>
+  </data>
+  <data name="Folder_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="Folder_UserData" xml:space="preserve">
+    <value>UserData</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>UserLibs</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>Dar estrella en GitHub</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>Patrocinar</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>¿Te gusta Euterpe? Así puedes ayudar</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100 % gratuito y de código abierto</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>Visitar</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>Cargando...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>Se requiere instalar MelonLoader para jugar con mods</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>Descargando {0}: {1} MB</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>Instalado</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>No instalado</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+    <value>Preparando...</value>
+  </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
-    <value>Requerido para el desarrollo de mods</value>
+    <value>Necesario para el desarrollo de mods</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
     <value>.NET 10 SDK</value>
@@ -59,19 +137,16 @@
     <value>Permite que las herramientas de compilación localicen archivos del juego</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
-    <value>Establecer variable de entorno</value>
+    <value>Configurar variable de entorno</value>
   </data>
   <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
-    <value>Crear una cuenta para subir y gestionar tus mods</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe Hub</value>
+    <value>Crea una cuenta para subir y gestionar tus mods</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
-    <value>Para crear proyectos de mod rápidamente</value>
+    <value>Para crear proyectos de mods rápidamente</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Plantilla de Mod Nuget</value>
+    <value>Plantilla de mod Nuget</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>Entorno de desarrollo</value>
@@ -86,46 +161,154 @@
     <value>No instalado</value>
   </data>
   <data name="ModDevelop_Status_NotSet" xml:space="preserve">
-    <value>No establecido</value>
+    <value>No configurado</value>
   </data>
   <data name="ModFilterType_All" xml:space="preserve">
-    <value>Mostrar todo</value>
+    <value>Todos</value>
+  </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>Desactivados</value>
   </data>
   <data name="ModFilterType_Enabled" xml:space="preserve">
-    <value>Activo</value>
+    <value>Activados</value>
   </data>
   <data name="ModFilterType_Incompatible" xml:space="preserve">
-    <value>No compatible</value>
+    <value>Incompatibles</value>
   </data>
   <data name="ModFilterType_Installed" xml:space="preserve">
-    <value>Instalado</value>
+    <value>Instalados</value>
   </data>
   <data name="ModFilterType_Outdated" xml:space="preserve">
-    <value>Desactualizado</value>
+    <value>Desactualizados</value>
+  </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>Autor</value>
   </data>
   <data name="ModInfo_Dependencies" xml:space="preserve">
     <value>Dependencias</value>
   </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>Repositorio</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>Versión del cargador requerida</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>Versión del juego compatible</value>
+  </data>
+  <data name="ModState_Incompatible" xml:space="preserve">
+    <value>Incompatible</value>
+  </data>
   <data name="ModState_Modified" xml:space="preserve">
     <value>Modificado</value>
   </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>Más reciente</value>
+  </data>
   <data name="ModState_Normal" xml:space="preserve">
-    <value>instalada</value>
+    <value>Instalado</value>
+  </data>
+  <data name="ModState_Outdated" xml:space="preserve">
+    <value>Actualización disponible</value>
+  </data>
+  <data name="Page_Charting" xml:space="preserve">
+    <value>Charts</value>
   </data>
   <data name="Page_Home" xml:space="preserve">
-    <value>Más información</value>
+    <value>Inicio</value>
+  </data>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>Registros</value>
+  </data>
+  <data name="Page_Modding" xml:space="preserve">
+    <value>Mods</value>
   </data>
   <data name="Page_Setting" xml:space="preserve">
     <value>Ajustes</value>
   </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>Herramientas de charts</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>Gestión de charts</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>Registro de la app</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>Registro de MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>Desarrollo de mods</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>Gestión de mods</value>
+  </data>
   <data name="Panel_Setting_About" xml:space="preserve">
-    <value>Créditos</value>
+    <value>Acerca de</value>
+  </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>Avanzado</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>Descarga</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>Experiencia</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>Gestión de archivos</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Buscar  (Canción, Autor, Diseñador)</value>
+    <value>Buscar charts  (Nombre, Artista, Creador)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Buscar mods  (Nombre, Autor)</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Mostrar siempre la barra de desplazamiento en las listas</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>Incluye la caché de descarga de archivos. No cambies esto mientras se realicen otras operaciones</value>
+  </data>
+  <data name="Setting_Description_DownloadSource" xml:space="preserve">
+    <value>Origen de la lista de mods y las descargas</value>
+  </data>
+  <data name="Setting_Description_GitHubToken" xml:space="preserve">
+    <value>Token de GitHub para el acceso a la API, necesario para la fuente de actualización por GitHub API</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>Evita que la aplicación se cierre al producirse un error (¡Actívalo solo si sabes lo que haces!)</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>Idioma de la interfaz</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Carpeta del ejecutable de Muse Dash</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>Mostrar la consola al iniciar el juego</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>Mostrar la pantalla de inicio al lanzar el juego</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Carpeta del ejecutable de Steam</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Canal de actualización de Euterpe</value>
+  </data>
+  <data name="Setting_Description_UpdateSource" xml:space="preserve">
+    <value>Origen para buscar actualizaciones de Euterpe</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
@@ -134,10 +317,22 @@
     <value>GitHub</value>
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub Mirror</value>
+    <value>Espejo de GitHub</value>
+  </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Mostrar siempre la barra de desplazamiento</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>Carpeta de caché</value>
   </data>
   <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>Descarga Oficial</value>
+    <value>Origen de descarga</value>
+  </data>
+  <data name="Setting_Title_GitHubToken" xml:space="preserve">
+    <value>Token de GitHub</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>Ignorar errores</value>
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>Idioma</value>
@@ -145,13 +340,52 @@
   <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
     <value>Carpeta de Muse Dash</value>
   </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>Mostrar consola</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>Mostrar pantalla de inicio</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Carpeta de Steam</value>
+  </data>
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
-    <value>Descargar versión de pre-estable</value>
+    <value>Canal de actualización</value>
+  </data>
+  <data name="Setting_Title_UpdateSource" xml:space="preserve">
+    <value>Origen de actualización</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>Prelanzamiento</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>Estable</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Editar configuración del mod</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Chino simplificado</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Chino tradicional</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Húngaro</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Coreano</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Ruso</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Español</value>
   </data>
 </root>

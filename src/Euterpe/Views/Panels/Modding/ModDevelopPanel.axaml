@@ -240,7 +240,7 @@
                                 Grid.Column="1">
                                 <TextBlock
                                     Classes="CardTitle"
-                                    Text="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Card_EuterpeHub_Title}}">
+                                    Text="Euterpe Hub">
                                     <TextBlock.Foreground>
                                         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                             <GradientStop Offset="0" Color="#FF9966" />

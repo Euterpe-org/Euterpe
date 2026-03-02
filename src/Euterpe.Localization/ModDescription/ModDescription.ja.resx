@@ -14,153 +14,176 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Accuracy Indicator" xml:space="preserve">
-    <value>Adds a more exact accuracy indicator on the bottom of the screen.
-Also displays average accuracy in milliseconds at the end of the level.</value>
+    <value>画面下部により正確な精度インジケーターを追加
+リザルト画面で平均打鍵誤差（ミリ秒）を表示</value>
   </data>
   <data name="AccuracyDisplay" xml:space="preserve">
-    <value>A live accuracy display for your viewing pleasure.</value>
+    <value>精度をリアルタイムでパーセント表示</value>
   </data>
   <data name="Alt Tab Mute" xml:space="preserve">
-    <value>Mutes the game when it's not focused.</value>
+    <value>ゲームがバックグラウンドになった時に自動ミュート</value>
+  </data>
+  <data name="AlwaysAprilFool" xml:space="preserve">
+    <value>ボスの弾をハトに変更、エイプリルフールのチュートリアルと Good Tek 隠し譜面を有効化</value>
   </data>
   <data name="AlwaysBadApple" xml:space="preserve">
-    <value>A mod which changes the background and character etc into black and white in tohou scene</value>
+    <value>東方シーンで背景やキャラクターなどを白黒にする</value>
+  </data>
+  <data name="AlwaysPigeons" xml:space="preserve">
+    <value>ボスの弾をハトに変更（AlwaysAprilFool との併用不可）</value>
   </data>
   <data name="BestCombinationSuggest" xml:space="preserve">
-    <value>Displays the best character combination for a level in the pause screen
-The character combo displayed is usually correct, but don't put your blind faith in it
-When in doubt, refer to CharacterScoreboard</value>
+    <value>ポーズ画面で現在の譜面に最適なキャラ＆エルフィンの組み合わせを表示
+通常は正確ですが、過信は禁物です
+不安な場合は CharacterScoreboard を参照</value>
   </data>
   <data name="BPMDisplay" xml:space="preserve">
-    <value>A mod which displays the BPM info above level designer on preparation screen</value>
+    <value>準備画面の譜面作成者名の上に BPM 情報を表示</value>
   </data>
   <data name="CharacterRandomizer" xml:space="preserve">
-    <value>Everytime you play a chart, a random character combination will be selected</value>
+    <value>譜面を始めるたびにキャラとエルフィンをランダム選択</value>
+  </data>
+  <data name="CharacterScoreboard" xml:space="preserve">
+    <value>リーダーボードにスコア達成時の使用キャラを表示（OCS）
+ローカルスコアの表示にも対応（LCS）
+カスタム譜面では LCS と OCS の挙動が異なる場合があります</value>
   </data>
   <data name="ChartDeleter" xml:space="preserve">
-    <value>Allows you to queue custom charts to be deleted or moved when you exit the game.</value>
+    <value>カスタム譜面の削除・移動をキューに入れ、ゲーム終了時に実行</value>
   </data>
   <data name="ChartReview" xml:space="preserve">
-    <value>Automatically selects sleepwalker, sets offset to 0, sets fever to manual, disables certain UI elements.
-Can be toggled on/off while in-game</value>
+    <value>自動でスリープウォーカーを選択、オフセット0、手動フィーバー、一部UI無効化
+ゲーム内でオン/オフ切替可能</value>
   </data>
   <data name="ChineseMode" xml:space="preserve">
-    <value>Censores certain aspects of the game (Characters, illustrations, etc)</value>
+    <value>ゲーム内の一部コンテンツを規制（キャラクター、イラストなど）</value>
   </data>
   <data name="Cinema" xml:space="preserve">
-    <value>The mod that allows you to see video backgrounds in custom charts</value>
+    <value>カスタム譜面の背景に動画を再生可能にする</value>
   </data>
   <data name="CustomAlbums" xml:space="preserve">
-    <value>The mod that allows you to load in custom charts</value>
+    <value>カスタム譜面を読み込むための必須Mod</value>
   </data>
   <data name="CustomAnchorSupport" xml:space="preserve">
-    <value>Allows you to use add the streamer tag in your info.json to mark a song as copyright-free
-(for use with streamer mode)</value>
+    <value>info.json に streamer タグを追加して著作権フリーの曲を指定可能
+配信者モード用</value>
   </data>
   <data name="CustomBGBrightness" xml:space="preserve">
-    <value>Allows you to adjust background brightness lower than 40%</value>
+    <value>背景の明るさを40%未満に調整可能</value>
+  </data>
+  <data name="CustomHitSound" xml:space="preserve">
+    <value>打鍵音をカスタマイズ可能
+詳しくは GitHub の README を参照</value>
   </data>
   <data name="CustomLoadingScreens" xml:space="preserve">
-    <value>Allows you to add custom loading screens (CustomLoadingScreens folder)
-Also allows you to add custom loading screen messages (UserData/CustomLoadingScreens.cfg)
-Messages can be paired with an image, or be left as random</value>
+    <value>カスタムロード画面を追加可能（CustomLoadingScreens フォルダー）
+カスタムメッセージも設定可能（UserData/CustomLoadingScreens.cfg）
+メッセージは画像と紐付け、またはランダム表示が可能</value>
   </data>
   <data name="CustomResolution" xml:space="preserve">
-    <value>Adds a Custom option in resolution settings, which can be changed in the config</value>
+    <value>解像度設定にカスタムオプションを追加（設定ファイルで変更可能）</value>
   </data>
   <data name="EffectDisable" xml:space="preserve">
-    <value>Disables some in-game effects</value>
+    <value>一部のゲーム内エフェクトを無効化</value>
   </data>
   <data name="FavGirl" xml:space="preserve">
-    <value>Allows you to favorite characters and elfins
-This will make you look like that character even if another character is selected.
-You will have the abilities of the selected character &amp; your plays will be submitted as such</value>
+    <value>キャラとエルフィンをお気に入り登録し、見た目のみ変更
+スキルは選択中のキャラが適用され、スコアも通常通り送信されます</value>
   </data>
   <data name="FC AP indicator" xml:space="preserve">
-    <value>Tells you whether you're on All Perfect/Full Combo pace, and displays the number of misses/greats</value>
+    <value>All Perfect / Full Combo の状態を表示し、Miss と Great の数を表示</value>
   </data>
   <data name="FeverEffectDisable" xml:space="preserve">
-    <value>Disables the fever background effect</value>
+    <value>フィーバー時の背景エフェクトを無効化</value>
   </data>
   <data name="Headquarters" xml:space="preserve">
-    <value>Allows you to submit scores on custom charts obtained from the MDMC website</value>
+    <value>MDMC サイトのカスタム譜面にスコアを送信可能</value>
   </data>
   <data name="HiddenQoL" xml:space="preserve">
-    <value>Adds a button to always show hidden difficulties.
-E.g. you don't need to spam click and such to unlock them before playing</value>
+    <value>隠し難易度を常に表示するボタンを追加
+連打で解禁する必要がなくなります</value>
+  </data>
+  <data name="IntroSkip" xml:space="preserve">
+    <value>ゲーム起動時のオープニングを高速スキップ
+速度やアニメーションイラストのスキップを設定可能</value>
   </data>
   <data name="KeybindManager" xml:space="preserve">
-    <value>A library for other mods to parse and listen to keybinds</value>
+    <value>他のModがキーバインドを監視・解析するためのライブラリ</value>
   </data>
   <data name="LocalizeLib" xml:space="preserve">
-    <value>A library for other mods to localize text</value>
+    <value>他のModがテキストをローカライズするためのライブラリ</value>
   </data>
   <data name="MDRPC" xml:space="preserve">
-    <value>Muse Dash Rich Presence, which is exactly what it says it is.</value>
+    <value>Muse Dash の Discord Rich Presence Mod</value>
   </data>
   <data name="ModManager" xml:space="preserve">
-    <value>Allows you to disable &amp; delete mods while in-game.</value>
+    <value>ゲーム内からModの無効化・削除が可能</value>
   </data>
   <data name="MuseDashMirror" xml:space="preserve">
-    <value>A library that makes it easier to access PlayerData, BattleComponents info and create UI elements.
-This mod does nothing by itself.</value>
+    <value>PlayerData や BattleComponents の情報取得、UI 要素の作成を容易にするライブラリ</value>
   </data>
   <data name="NoAutoPause" xml:space="preserve">
-    <value>Prevents the game from automatically pausing when the game loses focus.</value>
+    <value>ゲームがフォーカスを失った時の自動ポーズを無効化</value>
   </data>
   <data name="NoLevelUpAnimations" xml:space="preserve">
-    <value>Level up animations take ages;
-Let's skip them.</value>
+    <value>レベルアップアニメーションをスキップ</value>
   </data>
   <data name="PerfectDisable" xml:space="preserve">
-    <value>Allows you to disable the judgements in-game.
-(example: show early/late perfects but not pure perfects)
-Inspired by ADOFAI Tweaks</value>
+    <value>判定エフェクトの表示を個別に無効化
+（例：early/late Perfect のみ表示し、Pure Perfect は非表示）</value>
   </data>
   <data name="PopupLib" xml:space="preserve">
-    <value>A library for other mods to manage popups and windows</value>
+    <value>他のModがポップアップやウィンドウを管理するためのライブラリ</value>
   </data>
   <data name="PreventLowAcc" xml:space="preserve">
-    <value>A mod that that allows let's you prevent a score from uploading,
-and still be able to take a screenshot.</value>
+    <value>スコアのアップロードを防止しつつスクリーンショットは撮影可能</value>
   </data>
   <data name="QuickRestart" xml:space="preserve">
-    <value>Allows you to use Delete to instantly leave a chart &amp; Allows you to use Backspace to instantly restart a chart
-Update now allows you to set custom keybinds.</value>
+    <value>Delete キーで即座に退出、Backspace キーで即座にリスタート
+カスタムキーバインド設定可能</value>
   </data>
   <data name="QuickSwitchCombination" xml:space="preserve">
-    <value>Allows you to set keybinds to quickly change your characters.
-Now has an in-game menu to add keybinds</value>
+    <value>ショートカットキーでキャラを素早く切り替え
+ゲーム内メニューからキーバインド設定可能</value>
   </data>
   <data name="SceneEggs" xml:space="preserve">
-    <value>Makes it possible for customs to use certain background decorations that the default charts use.</value>
+    <value>カスタム譜面で公式譜面の特殊背景装飾を使用可能に</value>
   </data>
   <data name="Scoreboard characters and elfins" xml:space="preserve">
-    <value>Similar to CharacterScoreboard, however, it instead adds icon clickable icon representations,
-which automatically switches to the character combo when clicked.</value>
+    <value>CharacterScoreboard に似た機能だが、クリック可能なアイコンで表示
+クリックすると対応するキャラ組み合わせに自動切替</value>
   </data>
   <data name="ScrollSpeed" xml:space="preserve">
-    <value>Allows charters (not players) to set custom scroll speeds.
-It's completely up to you whether you wanna use this, most charters don't use it though.</value>
+    <value>譜面作成者がカスタムスクロール速度を設定可能（プレイヤー向けではありません）</value>
+  </data>
+  <data name="Search++ Folder Tag" xml:space="preserve">
+    <value>SearchPlusPlus の拡張機能
+フォルダーを作成して曲を分類・検索可能</value>
+  </data>
+  <data name="SearchPlusPlus" xml:space="preserve">
+    <value>あらゆる検索機能を提供
+任意の依存：KeybindManager、CustomAlbums</value>
+  </data>
+  <data name="Song Desc" xml:space="preserve">
+    <value>プレイ中に画面右上に曲名・アーティスト・難易度を表示</value>
   </data>
   <data name="StricterJudge" xml:space="preserve">
-    <value>A mod which changes the judgement window and make the game harder
-You can manually change the judgement range in Stricter Judge.cfg</value>
+    <value>判定をより厳しくするMod
+Stricter Judge.cfg で判定範囲をカスタマイズ可能</value>
   </data>
   <data name="True rank for 999+" xml:space="preserve">
-    <value>Displays actual ranking instead of "999+" for ranks 1000 to 2000</value>
+    <value>ランキング1000位～2000位で「999+」の代わりに実際の順位を表示</value>
   </data>
   <data name="UI Disable" xml:space="preserve">
-    <value>Allows you to disable certain visual aspects of the game (example: hit circles)</value>
+    <value>一部のUI要素を無効化（例：ヒットサークル）</value>
   </data>
   <data name="UltraInstinctSleepwalking" xml:space="preserve">
-    <value>Makes Sleepwalker Rin do mashers at max speed instead of the normal slow speed.</value>
+    <value>スリープウォーカーがマッシャーを最高速で叩くように変更</value>
   </data>
   <data name="UnlockAll2" xml:space="preserve">
-    <value>An alternative to UnlockAll.
-Master's stay unlocked only for as long as the mod is installed.</value>
+    <value>全ての達人難易度を解放（Modを外すと元に戻ります）</value>
   </data>
   <data name="VictoryScreenSwitcher" xml:space="preserve">
-    <value>Allows you to switch victory screen in the settings menu either to DJMAX or Arknights. Swaps original screen with arknights/djmax and vise versa.</value>
+    <value>設定でリザルト画面を DJMAX 風またはアークナイツ風に切替可能</value>
   </data>
 </root>

@@ -17,19 +17,34 @@
     <value>全部</value>
   </data>
   <data name="Button_Apply" xml:space="preserve">
-    <value>應用</value>
+    <value>套用</value>
   </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>檢查更新</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
-    <value>幫助翻譯</value>
+    <value>協助翻譯</value>
   </data>
   <data name="Button_Install" xml:space="preserve">
     <value>安裝</value>
   </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>啟動遊戲</value>
+  </data>
+  <data name="Button_MDMC_Discord" xml:space="preserve">
+    <value>MDMC Discord</value>
+  </data>
+  <data name="Button_MDMC_Website" xml:space="preserve">
+    <value>MDMC 網站</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>重新安裝</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>重新選擇</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>原始碼</value>
   </data>
   <data name="Button_Uninstall" xml:space="preserve">
     <value>解除安裝</value>
@@ -49,32 +64,83 @@
   <data name="ChartFilterType_Master" xml:space="preserve">
     <value>大觸</value>
   </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>美術設計</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>開發者</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>開啟</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+    <value>模組版</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+    <value>原版</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>應用程式記錄檔</value>
+  </data>
   <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>自製譜文件夾</value>
+    <value>自製譜資料夾</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
-    <value>模組文件夾</value>
+    <value>模組資料夾</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
-    <value>使用者文件</value>
+    <value>使用者資料</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>依賴資料夾</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>給顆 Star</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>贊助</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>喜歡 Euterpe 嗎？您可以透過以下方式支持我們</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% 免費 · 開源</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>前往</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>載入中...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>需要安裝 MelonLoader 才能使用模組</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>正在下載 {0}：{1} MB</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>已安裝</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>未安裝</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+    <value>準備中...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
-    <value>模組開發所需</value>
+    <value>模組開發必備</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
     <value>.NET 10 SDK</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
-    <value>使建置工具能夠定位遊戲檔案</value>
+    <value>讓建置工具能夠定位遊戲檔案</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
     <value>設定環境變數</value>
   </data>
   <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
-    <value>建立帳戶以上傳和管理您的模組</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe 模組中心</value>
+    <value>建立帳號以上傳和管理您的模組</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
     <value>快速建立模組專案</value>
@@ -100,6 +166,9 @@
   <data name="ModFilterType_All" xml:space="preserve">
     <value>全部</value>
   </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>已停用</value>
+  </data>
   <data name="ModFilterType_Enabled" xml:space="preserve">
     <value>已啟用</value>
   </data>
@@ -112,35 +181,134 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>有更新</value>
   </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
   <data name="ModInfo_Dependencies" xml:space="preserve">
-    <value>依賴</value>
+    <value>依賴項</value>
+  </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>詳細資訊</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>儲存庫</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>需要的載入器版本</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>支援的遊戲版本</value>
   </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>不相容</value>
   </data>
+  <data name="ModState_Modified" xml:space="preserve">
+    <value>已修改</value>
+  </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>開發版</value>
+  </data>
+  <data name="ModState_Normal" xml:space="preserve">
+    <value>已安裝</value>
+  </data>
   <data name="ModState_Outdated" xml:space="preserve">
-    <value>有新版</value>
+    <value>有新版本</value>
   </data>
   <data name="Page_Charting" xml:space="preserve">
     <value>譜面</value>
   </data>
   <data name="Page_Home" xml:space="preserve">
-    <value>主頁</value>
+    <value>首頁</value>
+  </data>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>記錄檔</value>
   </data>
   <data name="Page_Modding" xml:space="preserve">
     <value>模組</value>
   </data>
   <data name="Page_Setting" xml:space="preserve">
-    <value>設置</value>
+    <value>設定</value>
+  </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>譜師工具</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>譜面管理</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>應用程式記錄</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>模組記錄</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>模組載入器</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>模組開發</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>模組管理</value>
   </data>
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>關於</value>
   </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>進階</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>外觀</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>下載</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>體驗</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>檔案管理</value>
+  </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>搜索譜面  (名稱，曲師，譜師)</value>
+    <value>搜尋譜面  （名稱、曲師、譜師）</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
-    <value>搜尋模組  (名字,   作者)</value>
+    <value>搜尋模組  （名稱、作者）</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>始終顯示列表捲軸</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>此處包含下載檔案時的快取。進行其他操作時請勿變更此設定</value>
+  </data>
+  <data name="Setting_Description_DownloadSource" xml:space="preserve">
+    <value>模組列表及下載的來源</value>
+  </data>
+  <data name="Setting_Description_GitHubToken" xml:space="preserve">
+    <value>用於存取 GitHub API 的權杖，GitHub API 更新來源必須使用</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>發生例外狀況時不退出應用程式（僅在你清楚自己在做什麼時才啟用！）</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>介面語言</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Muse Dash 執行檔所在資料夾</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>啟動遊戲時是否顯示主控台</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>啟動遊戲時是否顯示啟動畫面</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Steam 執行檔所在資料夾</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Euterpe 的更新頻道</value>
+  </data>
+  <data name="Setting_Description_UpdateSource" xml:space="preserve">
+    <value>檢查 Euterpe 更新的來源</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
@@ -151,19 +319,73 @@
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
     <value>GitHub 鏡像</value>
   </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>始終顯示捲軸</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>快取資料夾</value>
+  </data>
   <data name="Setting_Title_DownloadSource" xml:space="preserve">
-    <value>下載源</value>
+    <value>下載來源</value>
+  </data>
+  <data name="Setting_Title_GitHubToken" xml:space="preserve">
+    <value>GitHub 權杖</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>忽略例外</value>
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>語言</value>
   </data>
   <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
-    <value>Muse Dash 文件路徑</value>
+    <value>Muse Dash 資料夾</value>
+  </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>顯示主控台</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>顯示啟動畫面</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Steam 資料夾</value>
+  </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+    <value>更新頻道</value>
+  </data>
+  <data name="Setting_Title_UpdateSource" xml:space="preserve">
+    <value>更新來源</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>測試版</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>穩定版</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>編輯模組設定</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>簡體中文</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>繁體中文</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>匈牙利文</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>韓文</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>俄文</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>西班牙文</value>
   </data>
 </root>

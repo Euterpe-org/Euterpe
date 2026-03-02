@@ -53,7 +53,7 @@
   <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
     <value>检测到的 Muse Dash 文件夹为
 {0}
-这是正确的游戏文件夹吗</value>
+这是正确的游戏文件夹吗？</value>
   </data>
   <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
     <value>{0} 删除失败</value>
@@ -62,20 +62,20 @@
     <value>MelonLoader 文件夹删除失败</value>
   </data>
   <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-    <value>未找到 .Net 6 Runtime
-点击确定安装</value>
+    <value>未找到 .NET 6 Runtime
+点击确定以安装</value>
   </data>
   <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-    <value>无法安装 .Net 6 Runtime</value>
+    <value>安装 .NET 6 Runtime 失败</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
-    <value>你确定要安装 .Net SDK？</value>
+    <value>确定要安装 .NET SDK 吗？</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
-    <value>无法安装 .Net 8 SDK</value>
+    <value>安装 .NET 8 SDK 失败</value>
   </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
-    <value>你选择的路径无效，请再次选择</value>
+    <value>选择的路径无效，请重新选择</value>
   </data>
   <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
     <value>MDM 文件创建失败</value>
@@ -126,6 +126,12 @@
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>无可用的更新</value>
   </data>
+  <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
+    <value>未安装 protontricks，请先安装 protontricks 再继续。</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
+    <value>通过 protontricks 运行 wine prefix 命令失败，无法继续安装 .NET Runtime。</value>
+  </data>
   <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
     <value>读取游戏信息失败
   {0}</value>
@@ -136,6 +142,13 @@
   <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
     <value>MD_DIRECTORY 环境变量设置失败</value>
   </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
+    <value>请复制以下内容并添加到 /etc/environment 文件中：
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
+    <value>已成功将 MD_DIRECTORY 环境变量设置为 {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>模组 {0} 安装成功</value>
   </data>
@@ -143,7 +156,7 @@
     <value>模组 {0} 重装成功</value>
   </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
-    <value>模组 {0} 删除成功</value>
+    <value>模组 {0} 卸载成功</value>
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>模组 {0} 更新成功</value>

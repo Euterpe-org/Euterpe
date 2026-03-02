@@ -112,6 +112,9 @@
   <data name="LoadingMessage" xml:space="preserve">
     <value>加载中...</value>
   </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>需要安装 MelonLoader 才能使用模组</value>
+  </data>
   <data name="MelonLoader_State_Downloading" xml:space="preserve">
     <value>正在下载 {0}: {1} MB</value>
   </data>
@@ -138,9 +141,6 @@
   </data>
   <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
     <value>创建账户以上传和管理您的模组</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe 模组中心</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
     <value>快速创建模组项目</value>
@@ -276,6 +276,9 @@
   </data>
   <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
     <value>始终显示列表滚动条</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>包含下载文件时的缓存，请勿在执行其他操作时更改此项</value>
   </data>
   <data name="Setting_Description_DownloadSource" xml:space="preserve">
     <value>模组列表和下载的源</value>

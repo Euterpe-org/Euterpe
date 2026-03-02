@@ -23,19 +23,34 @@
     <value>アップデートを確認</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
-    <value>翻訳を手伝う</value>
+    <value>翻訳に協力</value>
   </data>
   <data name="Button_Install" xml:space="preserve">
-    <value>Install</value>
+    <value>インストール</value>
+  </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>ゲーム開始</value>
+  </data>
+  <data name="Button_MDMC_Discord" xml:space="preserve">
+    <value>MDMC Discord</value>
+  </data>
+  <data name="Button_MDMC_Website" xml:space="preserve">
+    <value>MDMC ウェブサイト</value>
   </data>
   <data name="Button_Reinstall" xml:space="preserve">
-    <value>Reinstall</value>
+    <value>再インストール</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>再選択</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>ソースコード</value>
   </data>
   <data name="Button_Uninstall" xml:space="preserve">
     <value>アンインストール</value>
   </data>
   <data name="Button_Update" xml:space="preserve">
-    <value>Update</value>
+    <value>アップデート</value>
   </data>
   <data name="ChartFilterType_Easy" xml:space="preserve">
     <value>普通</value>
@@ -49,11 +64,68 @@
   <data name="ChartFilterType_Master" xml:space="preserve">
     <value>達人</value>
   </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>アーティスト</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>開発者</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+    <value>Mod版</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+    <value>バニラ</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>アプリログ</value>
+  </data>
+  <data name="Folder_CustomAlbums" xml:space="preserve">
+    <value>カスタム譜面</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mods</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
-    <value>ユーザーデータ</value>
+    <value>UserData</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>UserLibs</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>GitHubでStarする</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>スポンサー</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Euterpeを気に入りましたか？こちらから応援できます</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% 無料・オープンソース</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>アクセス</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>読み込み中...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>Modを使用するには MelonLoader のインストールが必要です</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>{0} をダウンロード中: {1} MB</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>インストール済み</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>未インストール</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+    <value>準備中...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>Mod開発に必要</value>
@@ -62,19 +134,16 @@
     <value>.NET 10 SDK</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
-    <value>ビルドツールがゲームファイルを見つけられるようにする</value>
+    <value>ビルドツールがゲームファイルを参照できるようにする</value>
   </data>
   <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
     <value>環境変数を設定</value>
   </data>
   <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
-    <value>Modをアップロードして管理するためにアカウントを作成</value>
-  </data>
-  <data name="ModDevelop_Card_EuterpeHub_Title" xml:space="preserve">
-    <value>Euterpe Mod ハブ</value>
+    <value>アカウントを作成してModをアップロード・管理</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
-    <value>Modプロジェクトを素早く作成</value>
+    <value>Modプロジェクトをすばやく作成</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
     <value>Modテンプレート Nuget</value>
@@ -83,7 +152,7 @@
     <value>開発環境</value>
   </data>
   <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
-    <value>推奨 IDE</value>
+    <value>推奨IDE</value>
   </data>
   <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
     <value>Modを提出</value>
@@ -97,26 +166,149 @@
   <data name="ModFilterType_All" xml:space="preserve">
     <value>すべて</value>
   </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>無効</value>
+  </data>
   <data name="ModFilterType_Enabled" xml:space="preserve">
-    <value>適用</value>
+    <value>有効</value>
   </data>
   <data name="ModFilterType_Incompatible" xml:space="preserve">
-    <value>Incompatible</value>
+    <value>非互換</value>
   </data>
   <data name="ModFilterType_Installed" xml:space="preserve">
-    <value>インストール</value>
+    <value>インストール済み</value>
   </data>
   <data name="ModFilterType_Outdated" xml:space="preserve">
-    <value>Outdated</value>
+    <value>更新あり</value>
+  </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="ModInfo_Dependencies" xml:space="preserve">
+    <value>依存関係</value>
+  </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>リポジトリ</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>必要なローダーバージョン</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>対応ゲームバージョン</value>
+  </data>
+  <data name="ModState_Incompatible" xml:space="preserve">
+    <value>非互換</value>
+  </data>
+  <data name="ModState_Modified" xml:space="preserve">
+    <value>変更済み</value>
+  </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>開発版</value>
+  </data>
+  <data name="ModState_Normal" xml:space="preserve">
+    <value>インストール済み</value>
+  </data>
+  <data name="ModState_Outdated" xml:space="preserve">
+    <value>更新あり</value>
+  </data>
+  <data name="Page_Charting" xml:space="preserve">
+    <value>譜面</value>
   </data>
   <data name="Page_Home" xml:space="preserve">
     <value>ホーム</value>
   </data>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>ログ</value>
+  </data>
+  <data name="Page_Modding" xml:space="preserve">
+    <value>Mod</value>
+  </data>
   <data name="Page_Setting" xml:space="preserve">
     <value>設定</value>
   </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>譜面ツール</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>譜面管理</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>アプリログ</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>MelonLoaderログ</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>Mod開発</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>Mod管理</value>
+  </data>
+  <data name="Panel_Setting_About" xml:space="preserve">
+    <value>このアプリについて</value>
+  </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>詳細設定</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>外観</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>操作性</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>ファイル管理</value>
+  </data>
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
+    <value>譜面を検索  （曲名、アーティスト、譜面作者）</value>
+  </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
-    <value>Modsを探す （名前，作者）</value>
+    <value>Modを検索  （名前、作者）</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>リストのスクロールバーを常に表示する</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>ダウンロード時のキャッシュを含みます。他の操作中は変更しないでください</value>
+  </data>
+  <data name="Setting_Description_DownloadSource" xml:space="preserve">
+    <value>Modリストとダウンロードの取得元</value>
+  </data>
+  <data name="Setting_Description_GitHubToken" xml:space="preserve">
+    <value>GitHub APIアクセス用のトークン。GitHub API更新ソースに必要です</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>例外発生時にアプリを終了しない（何をしているか理解している場合のみ有効にしてください！）</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>表示言語</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Muse Dashの実行ファイルがあるフォルダー</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>ゲーム起動時にコンソールを表示するか</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>ゲーム起動時にスタート画面を表示するか</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Steamの実行ファイルがあるフォルダー</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Euterpeの更新チャンネル</value>
+  </data>
+  <data name="Setting_Description_UpdateSource" xml:space="preserve">
+    <value>Euterpeの更新を確認するソース</value>
   </data>
   <data name="Setting_DownloadSource_Gitee" xml:space="preserve">
     <value>Gitee</value>
@@ -125,18 +317,75 @@
     <value>GitHub</value>
   </data>
   <data name="Setting_DownloadSource_GitHubMirror" xml:space="preserve">
-    <value>GitHub Mirror</value>
+    <value>GitHubミラー</value>
+  </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>スクロールバーを常に表示</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>キャッシュフォルダー</value>
+  </data>
+  <data name="Setting_Title_DownloadSource" xml:space="preserve">
+    <value>ダウンロードソース</value>
+  </data>
+  <data name="Setting_Title_GitHubToken" xml:space="preserve">
+    <value>GitHubトークン</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>例外を無視</value>
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>言語</value>
   </data>
   <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
-    <value>Muse Dash Folder Path</value>
+    <value>Muse Dashフォルダー</value>
+  </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>コンソールを表示</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>スタート画面を表示</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Steamフォルダー</value>
+  </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+    <value>更新チャンネル</value>
+  </data>
+  <data name="Setting_Title_UpdateSource" xml:space="preserve">
+    <value>更新ソース</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>プレリリース</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>安定版</value>
   </data>
   <data name="Setting_UpdateSources_GitHubAPI" xml:space="preserve">
     <value>GitHub API</value>
   </data>
   <data name="Setting_UpdateSources_GitHubRSS" xml:space="preserve">
     <value>GitHub RSS</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Mod設定を編集</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>簡体字中国語</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>繁体字中国語</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>ハンガリー語</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>韓国語</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>ロシア語</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>スペイン語</value>
   </data>
 </root>
