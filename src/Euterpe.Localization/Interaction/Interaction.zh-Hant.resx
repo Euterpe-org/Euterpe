@@ -72,7 +72,7 @@
     <value>確定要安裝 .NET SDK 嗎？</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
-    <value>安裝 .NET 8 SDK 失敗</value>
+    <value>安裝 .NET 10 SDK 失敗</value>
   </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>選擇的路徑無效，請重新選擇</value>

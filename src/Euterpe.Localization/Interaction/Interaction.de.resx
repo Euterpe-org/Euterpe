@@ -72,7 +72,7 @@ Klicke auf OK, um sie zu installieren</value>
     <value>Möchtest du das .NET SDK installieren?</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
-    <value>Installation des .NET 8 SDK fehlgeschlagen</value>
+    <value>Installation des .NET 10 SDK fehlgeschlagen</value>
   </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Der gewählte Pfad ist ungültig. Bitte versuche es erneut</value>

@@ -72,7 +72,7 @@ Klikni OK za instalaciju</value>
     <value>Želiš li instalirati .NET SDK?</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
-    <value>Instalacija .NET 8 SDK-a nije uspjela</value>
+    <value>Instalacija .NET 10 SDK-a nije uspjela</value>
   </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Odabrana putanja nije valjana. Pokušaj ponovo</value>
