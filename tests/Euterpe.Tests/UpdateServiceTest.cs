@@ -1,25 +1,47 @@
 ﻿using RichardSzalay.MockHttp;
-using Rocks;
 using Semver;
 using Ursa.Controls;
 
-namespace Euterpe.Tests.UpdateServiceTests;
+namespace Euterpe.Tests;
 
-[Category("UpdateServiceTests")]
-[TestSubject(typeof(UpdateService))]
-public sealed class GithubRSSSourceTests : UpdateServiceTestBase
+public sealed class UpdateServiceTest : IDisposable
 {
-    private const string TagsRSSUrl = "https://github.com/Euterpe-org/Euterpe/releases.atom";
+    private const string AppVersion = BuildInfo.AppVersion;
+    private const string LowerStableVersion = "0.0.1";
+    private const string LowerPrereleaseVersion = "0.0.1-rc1";
+    private const string HigherStableVersion = "999.0.0";
+    private const string HigherPrereleaseVersion = "999.0.1-rc1";
+    private const string TagsRSSUrl = "https://releases.euterpe-org.com/releases.atom";
 
-    protected override Config Config { get; } = new()
+    private readonly TestLogger<UpdateService> _logger = new();
+    private readonly MockHttpMessageHandler _mockHttp = new();
+    private Config Config { get; } = new();
+
+    public void Dispose()
     {
-        UpdateSource = UpdateSource.GitHubRSS
-    };
+        _logger.Dispose();
+        _mockHttp.Dispose();
+    }
+
+    private UpdateService CreateUpdateService(
+        Config? config = null,
+        IDownloadManager? downloadManager = null,
+        IMessageBoxService? messageBoxService = null,
+        IPlatformService? platformService = null) =>
+        new()
+        {
+            Config = config ?? Config,
+            Client = _mockHttp.ToHttpClient(),
+            Logger = _logger,
+            DownloadManager = downloadManager ?? new IDownloadManagerMakeExpectations().Instance(),
+            MessageBoxService = messageBoxService ?? new IMessageBoxServiceMakeExpectations().Instance(),
+            PlatformService = platformService ?? new IPlatformServiceMakeExpectations().Instance()
+        };
 
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_LowerStableVersion_ShouldNotFindUpdate()
     {
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -44,7 +66,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     public async Task CheckForUpdatesAsync_FindPrerelease_LowerPrereleaseVersion_ShouldNotFindUpdate()
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -72,7 +94,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     [StableReleaseOnly]
     public async Task CheckForUpdatesAsync_FindStable_StableCurrentVersion_ShouldNotFindUpdate()
     {
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -96,7 +118,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_LowerPrereleaseVersion_ShouldBeIgnoredAsPrerelease()
     {
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -113,13 +135,13 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Fetched stable release from GitHub RSS is a prerelease: {LowerPrereleaseVersion}");
+            .Contains($"Fetched stable release from RSS is a prerelease: {LowerPrereleaseVersion}");
     }
 
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_HigherPrereleaseVersion_ShouldBeIgnoredAsPrerelease()
     {
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -136,14 +158,14 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Fetched stable release from GitHub RSS is a prerelease: {HigherPrereleaseVersion}");
+            .Contains($"Fetched stable release from RSS is a prerelease: {HigherPrereleaseVersion}");
     }
 
     [Test]
     [PrereleaseOnly]
     public async Task CheckForUpdatesAsync_FindStable_PrereleaseCurrentVersion_ShouldBeIgnoredAsPrerelease()
     {
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -160,14 +182,14 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Fetched stable release from GitHub RSS is a prerelease: {AppVersion}");
+            .Contains($"Fetched stable release from RSS is a prerelease: {AppVersion}");
     }
 
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_WhenHigherStableVersionIsSkipped_ShouldSkipVersion()
     {
         Config.SkipVersion = SemVersion.Parse(HigherStableVersion);
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -192,7 +214,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
         Config.SkipVersion = SemVersion.Parse(HigherPrereleaseVersion);
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -218,7 +240,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_WhenMessageBoxResultNo_ShouldSkipVersion()
     {
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
@@ -249,7 +271,7 @@ public sealed class GithubRSSSourceTests : UpdateServiceTestBase
     public async Task CheckForUpdatesAsync_FindPrerelease_WhenMessageBoxResultNo_ShouldSkipVersion()
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
-        MockHttp.When(TagsRSSUrl)
+        _mockHttp.When(TagsRSSUrl)
             .Respond("application/rss+xml",
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>

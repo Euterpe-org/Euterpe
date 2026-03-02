@@ -9,9 +9,6 @@
   ShowConsole: true,
   ShowStartScreen: true,
   AlwaysShowScrollBar: true,
-  DownloadSource: GitHub,
-  UpdateSource: GitHubRSS,
-  GitHubToken: null,
   UpdateChannel: Stable,
   SkipVersion: null,
   IgnoreException: false

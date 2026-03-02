@@ -9,8 +9,6 @@
   ShowConsole: true,
   ShowStartScreen: true,
   AlwaysShowScrollBar: true,
-  DownloadSource: GitHub,
-  UpdateSource: GitHubRSS,
   IgnoreException: false,
   GameVersion: ,
   UnityVersion: ,

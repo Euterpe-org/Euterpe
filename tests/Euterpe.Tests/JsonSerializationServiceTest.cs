@@ -42,9 +42,6 @@ public sealed class JsonSerializationServiceTest
             Theme = "Dark",
             ShowConsole = true,
             AlwaysShowScrollBar = true,
-            DownloadSource = DownloadSource.GitHub,
-            UpdateSource = UpdateSource.GitHubRSS,
-            GitHubToken = null,
             UpdateChannel = UpdateChannel.Stable,
             SkipVersion = null,
             IgnoreException = false
