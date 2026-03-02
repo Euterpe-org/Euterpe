@@ -167,7 +167,7 @@
                                 Icon="{StaticResource SemiIconCode}" />
 
                             <u:IconButton
-                                CommandParameter="https://crowdin.com/project/musedashmodtools"
+                                CommandParameter="https://translate.euterpe-org.com"
                                 Content="{Localize {x:Static loc:XAMLLiteral.Button_HelpTranslate}}"
                                 Icon="{StaticResource SemiIconLanguage}" />
 
