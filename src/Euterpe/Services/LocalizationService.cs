@@ -22,17 +22,17 @@ public sealed class LocalizationService
 
     private Dictionary<string, string> SemiLanguageMaps { get; } = new()
     {
-        ["en"] = "en-US",
+        ["en"] = "en-us",
         ["de"] = "de-de",
         ["es"] = "es-es",
         ["fr"] = "fr-fr",
         ["hr"] = "hr",
         ["hu"] = "hu",
         ["ja"] = "ja-jp",
-        ["ko"] = "ko",
+        ["ko"] = "ko-kr",
         ["ru"] = "ru-ru",
-        ["zh-Hans"] = "zh-CN",
-        ["zh-Hant"] = "zh-TW"
+        ["zh-Hans"] = "zh-cn",
+        ["zh-Hant"] = "zh-tw"
     };
 
     public Language GetCurrentLanguage()
