@@ -4,10 +4,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class GameService
 {
-    private Task<bool> LaunchGameWithArgAsync(string gameId, string launchArgument) =>
-        LaunchGameWithArgsAsync(gameId, [launchArgument]);
-
-    private async Task<bool> LaunchGameWithArgsAsync(string gameId, IEnumerable<string> launchArguments)
+    private async Task LaunchGameAsync(string gameId, params IEnumerable<string> launchArguments)
     {
         await Cli.Wrap(Config.SteamExecPath)
             .WithArguments(args =>
@@ -21,7 +18,6 @@ internal sealed partial class GameService
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        Logger.ZLogInformation($"Launching game {gameId} with launch arguments: {launchArguments}");
-        return true;
+        Logger.ZLogInformation($"Launching game {gameId} with launch arguments: {string.Join(' ', launchArguments)}");
     }
 }

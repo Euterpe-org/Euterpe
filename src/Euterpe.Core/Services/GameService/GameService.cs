@@ -15,13 +15,13 @@ internal sealed partial class GameService : IGameService
             launchArguments.Add("--melonloader.disablestartscreen");
         }
 
-        await LaunchGameWithArgsAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
+        await LaunchGameAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
     }
 
     public async Task LaunchVanillaGameAsync()
     {
         const string launchArguments = "--no-mods";
-        await LaunchGameWithArgAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
+        await LaunchGameAsync(MuseDashGameId, launchArguments).ConfigureAwait(false);
     }
 
     #region Injections
