@@ -34,13 +34,18 @@ internal static class Program
             return;
         }
 
-        var logFiles = Directory.EnumerateFiles(logFolderName, "*.log").OrderDescending().Skip(30).ToArray();
-        if (logFiles is [])
+        var logFiles = Directory.EnumerateFiles(logFolderName, "*.log").OrderDescending().Skip(30);
+        foreach (var logFile in logFiles)
         {
-            return;
+            try
+            {
+                File.Delete(logFile);
+            }
+            catch (Exception ex)
+            {
+                Resolve<ILogger<App>>().ZLogWarning(ex, $"Failed to delete log file: {logFile}");
+            }
         }
-
-        Parallel.ForEach(logFiles, (logFile, _) => File.Delete(logFile));
     }
 
     private static void DeleteOldBackupFiles()
