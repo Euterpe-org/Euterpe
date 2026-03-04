@@ -7,7 +7,7 @@ internal sealed partial class DownloadManager : IDownloadManager
 {
     // Dependency URLs
     private const string MelonLoaderUrl = $"{DependenciesBaseUrl}/MelonLoader/{MelonLoaderVersion}/MelonLoader.x64.zip";
-    private const string UnityDependencyUrl = $"{DependenciesBaseUrl}/UnityDependencies/";
+    private const string UnityDependencyUrl = $"{DependenciesBaseUrl}/UnityDependencies/{UnityDependencyVersion}/Managed.zip";
     private const string Cpp2ILExecutableUrl = $"{DependenciesBaseUrl}/Cpp2IL/{Cpp2ILVersion}/Cpp2IL-{Cpp2ILVersion}-Windows.exe";
     private const string Cpp2ILPluginUrl = $"{DependenciesBaseUrl}/Cpp2IL/{Cpp2ILVersion}/Cpp2IL.Plugin.StrippedCodeRegSupport.dll";
 
@@ -70,11 +70,8 @@ internal sealed partial class DownloadManager : IDownloadManager
     public Task<bool> DownloadUnityDependencyAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default)
-    {
-        var unityDependencyUrl = $"{UnityDependencyUrl}{Config.UnityVersion}/Managed.zip";
-        return DownloadAsync(unityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
-    }
+        CancellationToken cancellationToken = default) =>
+        DownloadAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
     public Task<bool> DownloadCpp2ILExecutableAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
