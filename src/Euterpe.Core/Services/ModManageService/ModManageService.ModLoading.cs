@@ -94,7 +94,7 @@ internal sealed partial class ModManageService
     {
         var duplicatedModGroups = localMods
             .GroupBy(mod => mod.Name)
-            .Where(group => group.Select(mod => mod.LocalFileName).Distinct().Count() > 1);
+            .Where(group => group.Select(mod => mod.LocalFileName).Distinct().Skip(1).Any());
 
         foreach (var duplicatedModGroup in duplicatedModGroups)
         {
