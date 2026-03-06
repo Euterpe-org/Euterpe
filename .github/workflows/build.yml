@@ -30,9 +30,9 @@ jobs:
       matrix:
         platform:
           - { os: ubuntu-latest, name: linux, arch: x64 }
-          - { os: ubuntu-24.04-arm, name: linux, arch: arm64 }
+          # - { os: ubuntu-24.04-arm, name: linux, arch: arm64 }
           - { os: windows-latest, name: win, arch: x64 }
-          - { os: windows-11-arm, name: win, arch: arm64 }
+          # - { os: windows-11-arm, name: win, arch: arm64 }
 
     runs-on: ${{ matrix.platform.os }}
     steps:
