@@ -3,38 +3,38 @@ name: Build and Test Project
 on:
   push:
     branches:
-      - 'dev'
+      - "dev"
     tags:
-      - 'v?[0-9]+.[0-9]+.[0-9]+'
+      - "v?[0-9]+.[0-9]+.[0-9]+"
     paths-ignore:
-      - 'assets/**'
-      - 'LICENSE'
-      - '**/*.md'
+      - "assets/**"
+      - "LICENSE"
+      - "**/*.md"
   pull_request:
     branches:
-      - 'main'
-      - 'dev'
+      - "main"
+      - "dev"
   workflow_dispatch:
 
 defaults:
   run:
     shell: bash
 
+env:
+  DOTNET_VERSION: "10.0"
+
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
-        target-platform:
-          - { os: ubuntu-latest, name: linux }
-          - { os: windows-latest, name: win }
-        target-arch:
-          - x64
-          # - arm64
-        dotnet-version:
-          - '10.0'
+        platform:
+          - { os: ubuntu-latest, name: linux, arch: x64 }
+          - { os: ubuntu-24.04-arm, name: linux, arch: arm64 }
+          - { os: windows-latest, name: win, arch: x64 }
+          - { os: windows-11-arm, name: win, arch: arm64 }
 
-    runs-on: ${{ matrix.target-platform.os }}
+    runs-on: ${{ matrix.platform.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -42,7 +42,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build Project
         run: |
@@ -59,10 +59,10 @@ jobs:
       - name: Create Archive
         working-directory: artifacts/output
         run: |
-          7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip" *
+          7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{matrix.platform.name}}-${{ matrix.platform.arch }}.zip" *
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          path: Euterpe-${{matrix.target-platform.name}}-${{ matrix.target-arch }}.zip
+          path: Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip
           archive: false
