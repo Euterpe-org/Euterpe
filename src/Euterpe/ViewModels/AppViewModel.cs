@@ -15,6 +15,14 @@ public sealed partial class AppViewModel : ViewModelBase
     [RelayCommand]
     private static void Show()
     {
+        var mainWindow = GetCurrentMainWindow();
+        if (mainWindow.WindowState is WindowState.Minimized)
+        {
+            mainWindow.WindowState = WindowState.Normal;
+            mainWindow.ShowInTaskbar = true;
+        }
+
+        mainWindow.Activate();
     }
 
     [RelayCommand]

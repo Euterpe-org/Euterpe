@@ -11,13 +11,14 @@ public static class DesktopUtils
         return app ?? throw new InvalidOperationException("Application is null.");
     }
 
-    public static IClassicDesktopStyleApplicationLifetime GetCurrentDesktop()
-    {
-        if (GetCurrentApplication().ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            throw new InvalidOperationException("Desktop is null.");
-        }
+    public static IClassicDesktopStyleApplicationLifetime GetCurrentDesktop() =>
+        GetCurrentApplication().ApplicationLifetime as IClassicDesktopStyleApplicationLifetime
+        ?? throw new InvalidOperationException("Desktop is null.");
 
-        return desktop;
+    public static Window GetCurrentMainWindow()
+    {
+        var desktop = GetCurrentDesktop();
+        var mainWindow = desktop.MainWindow;
+        return mainWindow ?? throw new InvalidOperationException("MainWindow is null.");
     }
 }

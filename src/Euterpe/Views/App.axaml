@@ -18,15 +18,16 @@
     <TrayIcon.Icons>
         <TrayIcons>
             <TrayIcon
+                Command="{Binding ShowCommand, Mode=OneTime}"
                 Icon="/Assets/Icon.ico"
                 ToolTipText="Euterpe">
                 <TrayIcon.Menu>
                     <NativeMenu>
                         <NativeMenuItem
-                            Command="{Binding ShowCommand}"
+                            Command="{Binding ShowCommand, Mode=OneTime}"
                             Header="Show" />
                         <NativeMenuItem
-                            Command="{Binding ExitCommand}"
+                            Command="{Binding ExitCommand, Mode=OneTime}"
                             Header="Exit" />
                     </NativeMenu>
                 </TrayIcon.Menu>
