@@ -1,5 +1,6 @@
 ﻿using Semver;
 using TUnit.Mocks.Http;
+using TUnit.Mocks.Logging;
 using Ursa.Controls;
 
 namespace Euterpe.Tests;
@@ -13,13 +14,12 @@ public sealed class UpdateServiceTest : IDisposable
     private const string HigherPrereleaseVersion = "999.0.1-rc1";
     private const string TagsRSSUrl = "https://releases.euterpe-org.com/releases.atom";
 
-    private readonly TestLogger<UpdateService> _logger = new();
+    private readonly MockLogger<UpdateService> _logger = Mock.Logger<UpdateService>();
     private readonly MockHttpHandler _mockHttp = new();
     private Config Config { get; } = new();
 
     public void Dispose()
     {
-        _logger.Dispose();
         _mockHttp.Dispose();
     }
 
@@ -58,9 +58,9 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Release version parsed: {LowerStableVersion}")
-            .And.Contains("No new version available");
+        _logger.VerifyLog()
+            .ContainingMessage($"Release version parsed: {LowerStableVersion}")
+            .ContainingMessage("No new version available");
     }
 
     [Test]
@@ -87,9 +87,9 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Release version parsed: {LowerPrereleaseVersion}")
-            .And.Contains("No new version available");
+        _logger.VerifyLog()
+            .ContainingMessage($"Release version parsed: {LowerPrereleaseVersion}")
+            .ContainingMessage("No new version available");
     }
 
     [Test]
@@ -113,9 +113,9 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Release version parsed: {AppVersion}")
-            .And.Contains("No new version available");
+        _logger.VerifyLog()
+            .ContainingMessage($"Release version parsed: {AppVersion}")
+            .ContainingMessage("No new version available");
     }
 
     [Test]
@@ -138,8 +138,8 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Fetched stable release from RSS is a prerelease: {LowerPrereleaseVersion}");
+        _logger.VerifyLog()
+            .ContainingMessage($"Fetched stable release from RSS is a prerelease: {LowerPrereleaseVersion}");
     }
 
     [Test]
@@ -162,8 +162,8 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Fetched stable release from RSS is a prerelease: {HigherPrereleaseVersion}");
+        _logger.VerifyLog()
+            .ContainingMessage($"Fetched stable release from RSS is a prerelease: {HigherPrereleaseVersion}");
     }
 
     [Test]
@@ -187,8 +187,8 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"Fetched stable release from RSS is a prerelease: {AppVersion}");
+        _logger.VerifyLog()
+            .ContainingMessage($"Fetched stable release from RSS is a prerelease: {AppVersion}");
     }
 
     [Test]
@@ -212,8 +212,8 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains("New version is skipped by user configuration");
+        _logger.VerifyLog()
+            .ContainingMessage("New version is skipped by user configuration");
     }
 
     [Test]
@@ -241,8 +241,8 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains("New version is skipped by user configuration");
+        _logger.VerifyLog()
+            .ContainingMessage("New version is skipped by user configuration");
     }
 
     [Test]
@@ -269,8 +269,8 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"User choose to skip this version: {HigherStableVersion}");
+        _logger.VerifyLog()
+            .ContainingMessage($"User choose to skip this version: {HigherStableVersion}");
         await Assert.That(Config.SkipVersion).IsEqualTo(SemVersion.Parse(HigherStableVersion));
     }
 
@@ -299,8 +299,8 @@ public sealed class UpdateServiceTest : IDisposable
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        await Assert.That(TestContext.Current?.GetStandardOutput())
-            .Contains($"User choose to skip this version: {HigherPrereleaseVersion}");
+        _logger.VerifyLog()
+            .ContainingMessage($"User choose to skip this version: {HigherPrereleaseVersion}");
         await Assert.That(Config.SkipVersion).IsEqualTo(SemVersion.Parse(HigherPrereleaseVersion));
     }
 }
