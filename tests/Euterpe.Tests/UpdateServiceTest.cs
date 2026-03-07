@@ -1,5 +1,5 @@
-﻿using RichardSzalay.MockHttp;
-using Semver;
+﻿using Semver;
+using TUnit.Mocks.Http;
 using Ursa.Controls;
 
 namespace Euterpe.Tests;
@@ -14,7 +14,7 @@ public sealed class UpdateServiceTest : IDisposable
     private const string TagsRSSUrl = "https://releases.euterpe-org.com/releases.atom";
 
     private readonly TestLogger<UpdateService> _logger = new();
-    private readonly MockHttpMessageHandler _mockHttp = new();
+    private readonly MockHttpHandler _mockHttp = new();
     private Config Config { get; } = new();
 
     public void Dispose()
@@ -31,18 +31,18 @@ public sealed class UpdateServiceTest : IDisposable
         new()
         {
             Config = config ?? Config,
-            Client = _mockHttp.ToHttpClient(),
+            Client = _mockHttp.CreateClient(),
             Logger = _logger,
-            DownloadManager = downloadManager ?? new IDownloadManagerMakeExpectations().Instance(),
-            MessageBoxService = messageBoxService ?? new IMessageBoxServiceMakeExpectations().Instance(),
-            PlatformService = platformService ?? new IPlatformServiceMakeExpectations().Instance()
+            DownloadManager = downloadManager ?? Mock.Of<IDownloadManager>().Object,
+            MessageBoxService = messageBoxService ?? Mock.Of<IMessageBoxService>().Object,
+            PlatformService = platformService ?? Mock.Of<IPlatformService>().Object
         };
 
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_LowerStableVersion_ShouldNotFindUpdate()
     {
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -50,7 +50,8 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{LowerStableVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -66,8 +67,8 @@ public sealed class UpdateServiceTest : IDisposable
     public async Task CheckForUpdatesAsync_FindPrerelease_LowerPrereleaseVersion_ShouldNotFindUpdate()
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -78,7 +79,8 @@ public sealed class UpdateServiceTest : IDisposable
                         <title>{LowerStableVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -94,8 +96,8 @@ public sealed class UpdateServiceTest : IDisposable
     [StableReleaseOnly]
     public async Task CheckForUpdatesAsync_FindStable_StableCurrentVersion_ShouldNotFindUpdate()
     {
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -103,7 +105,8 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{AppVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -118,8 +121,8 @@ public sealed class UpdateServiceTest : IDisposable
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_LowerPrereleaseVersion_ShouldBeIgnoredAsPrerelease()
     {
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -127,7 +130,8 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{LowerPrereleaseVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -141,8 +145,8 @@ public sealed class UpdateServiceTest : IDisposable
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_HigherPrereleaseVersion_ShouldBeIgnoredAsPrerelease()
     {
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -150,7 +154,8 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{HigherPrereleaseVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -165,8 +170,8 @@ public sealed class UpdateServiceTest : IDisposable
     [PrereleaseOnly]
     public async Task CheckForUpdatesAsync_FindStable_PrereleaseCurrentVersion_ShouldBeIgnoredAsPrerelease()
     {
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -174,7 +179,8 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{AppVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -189,8 +195,8 @@ public sealed class UpdateServiceTest : IDisposable
     public async Task CheckForUpdatesAsync_FindStable_WhenHigherStableVersionIsSkipped_ShouldSkipVersion()
     {
         Config.SkipVersion = SemVersion.Parse(HigherStableVersion);
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -198,7 +204,8 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{HigherStableVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -214,8 +221,8 @@ public sealed class UpdateServiceTest : IDisposable
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
         Config.SkipVersion = SemVersion.Parse(HigherPrereleaseVersion);
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -226,7 +233,8 @@ public sealed class UpdateServiceTest : IDisposable
                         <title>{HigherStableVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
         var updateService = CreateUpdateService();
 
@@ -240,8 +248,8 @@ public sealed class UpdateServiceTest : IDisposable
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_WhenMessageBoxResultNo_ShouldSkipVersion()
     {
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -249,15 +257,14 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{HigherStableVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
-        var expectations = new IMessageBoxServiceCreateExpectations();
-        expectations.Setups
-            .NoticeConfirmAsync(Arg.Any<string>(), new RefStructArgument<ReadOnlySpan<object>>())
-            .ReturnValue(Task.FromResult(MessageBoxResult.No));
-        var messageBoxService = expectations.Instance();
+        var messageBoxServiceMock = Mock.Of<IMessageBoxService>();
+        messageBoxServiceMock.NoticeConfirmAsync(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any)
+            .Returns(MessageBoxResult.No);
 
-        var updateService = CreateUpdateService(messageBoxService: messageBoxService);
+        var updateService = CreateUpdateService(messageBoxService: messageBoxServiceMock.Object);
 
         using var _ = Assert.Multiple();
 
@@ -271,8 +278,8 @@ public sealed class UpdateServiceTest : IDisposable
     public async Task CheckForUpdatesAsync_FindPrerelease_WhenMessageBoxResultNo_ShouldSkipVersion()
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
-        _mockHttp.When(TagsRSSUrl)
-            .Respond("application/rss+xml",
+        _mockHttp.OnGet(TagsRSSUrl)
+            .RespondWithString(
                 $"""
                  <?xml version="1.0" encoding="UTF-8"?>
                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
@@ -280,15 +287,14 @@ public sealed class UpdateServiceTest : IDisposable
                          <title>{HigherPrereleaseVersion}</title>
                      </entry>
                  </feed>
-                 """);
+                 """)
+            .WithHeader("Content-Type", "application/rss+xml");
 
-        var expectations = new IMessageBoxServiceCreateExpectations();
-        expectations.Setups
-            .NoticeConfirmAsync(Arg.Any<string>(), new RefStructArgument<ReadOnlySpan<object>>())
-            .ReturnValue(Task.FromResult(MessageBoxResult.No));
-        var messageBoxService = expectations.Instance();
+        var messageBoxServiceMock = Mock.Of<IMessageBoxService>();
+        messageBoxServiceMock.NoticeConfirmAsync(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any)
+            .Returns(MessageBoxResult.No);
 
-        var updateService = CreateUpdateService(messageBoxService: messageBoxService);
+        var updateService = CreateUpdateService(messageBoxService: messageBoxServiceMock.Object);
 
         using var _ = Assert.Multiple();
 

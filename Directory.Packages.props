@@ -8,6 +8,7 @@
         <JetBrainsAnnotationsVersion>2025.2.4</JetBrainsAnnotationsVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
+        <TUnitVersion>1.19.0</TUnitVersion>
         <UrsaVersion>2.0.0-preview1</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
@@ -44,16 +45,16 @@
         <PackageVersion Include="R3" Version="1.3.0"/>
         <PackageVersion Include="R3Extensions.Avalonia" Version="1.3.0"/>
         <PackageVersion Include="ResXLocalize.Avalonia.R3" Version="2.0.0-preview1"/>
-        <PackageVersion Include="RichardSzalay.MockHttp" Version="7.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.3.1"/>
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
         <PackageVersion Include="Semi.Avalonia" Version="12.0.0-preview1"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.3"/>
-        <PackageVersion Include="TUnit" Version="1.19.0"/>
+        <PackageVersion Include="TUnit" Version="$(TUnitVersion)"/>
+        <PackageVersion Include="TUnit.Mocks" Version="$(TUnitVersion)"/>
+        <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)"/>
         <PackageVersion Include="ValveKeyValue" Version="0.20.0.417"/>
         <PackageVersion Include="Verify.TUnit" Version="31.13.2"/>
-        <PackageVersion Include="Rocks" Version="10.1.0"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.19"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
