@@ -24,7 +24,7 @@
         <PackageVersion Include="CliWrap" Version="3.10.0"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.7.13"/>
-        <PackageVersion Include="Downloader" Version="4.1.1"/>
+        <PackageVersion Include="Downloader" Version="5.0.0"/>
         <PackageVersion Include="DynamicData" Version="9.4.31"/>
         <PackageVersion Include="HotAvalonia" Version="3.1.0"/>
         <PackageVersion Include="Irihi.Ursa" Version="$(UrsaVersion)"/>
