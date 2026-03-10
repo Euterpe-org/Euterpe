@@ -22,7 +22,7 @@ internal sealed partial class ModManageService : IModManageService
     public async Task InstallModAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
-        StatisticsService.RecordDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
+        TelemetryService.TrackDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
@@ -55,7 +55,7 @@ internal sealed partial class ModManageService : IModManageService
     public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public required IStatisticsService StatisticsService { get; init; }
+    public required ITelemetryService TelemetryService { get; init; }
 
     #endregion Injections
 }

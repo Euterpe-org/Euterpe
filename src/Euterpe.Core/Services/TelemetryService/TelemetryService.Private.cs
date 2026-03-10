@@ -1,35 +1,11 @@
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using Euterpe.Models.Statistics;
 using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
 
 namespace Euterpe.Core;
 
-internal sealed class StatisticsService : IStatisticsService
+internal sealed partial class TelemetryService
 {
-    public async Task RecordVisitorAsync()
-    {
-        try
-        {
-            await SendRecordVisitorAsync().ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogWarning(ex, $"Failed to record visitor statistics");
-        }
-    }
-
-    public async Task RecordDownloadAsync(string modName, string modAuthor)
-    {
-        try
-        {
-            await SendRecordDownloadAsync(modName, modAuthor).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogWarning(ex, $"Failed to record download statistics");
-        }
-    }
-
     private async Task SendRecordVisitorAsync()
     {
         const string url = StatisticsApiHost + RecordVisitorEndpoint;
@@ -65,17 +41,4 @@ internal sealed class StatisticsService : IStatisticsService
     }
 
     private static string GenerateRequestId() => Guid.CreateVersion7().ToString();
-
-    #region Injections
-
-    [UsedImplicitly]
-    public required HttpClient Client { get; init; }
-
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
-
-    [UsedImplicitly]
-    public required ILogger<StatisticsService> Logger { get; init; }
-
-    #endregion Injections
 }
