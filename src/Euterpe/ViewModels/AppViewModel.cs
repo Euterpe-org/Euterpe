@@ -7,7 +7,9 @@ public sealed partial class AppViewModel : ViewModelBase
         await base.InitializeAsync().ConfigureAwait(false);
 
         await SettingService.LoadAsync().ConfigureAwait(false);
+#if PUBLISH
         await StatisticsService.RecordVisitorAsync().ConfigureAwait(false);
+#endif
 
         Logger.ZLogInformation($"{nameof(AppViewModel)} Initialized");
     }
