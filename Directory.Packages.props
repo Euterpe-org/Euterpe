@@ -4,11 +4,11 @@
     </PropertyGroup>
     <!-- Package Group Versions -->
     <PropertyGroup>
-        <AvaloniaVersion>12.0.0-preview1</AvaloniaVersion>
+        <AvaloniaVersion>12.0.0-preview2</AvaloniaVersion>
         <JetBrainsAnnotationsVersion>2025.2.4</JetBrainsAnnotationsVersion>
         <MicrosoftCodeAnalysisVersion>4.14.0</MicrosoftCodeAnalysisVersion>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
-        <TUnitVersion>1.19.0</TUnitVersion>
+        <TUnitVersion>1.19.22</TUnitVersion>
         <UrsaVersion>2.0.0-preview1</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
@@ -31,10 +31,10 @@
         <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="$(UrsaVersion)"/>
         <PackageVersion Include="JetBrains.Annotations" Version="$(JetBrainsAnnotationsVersion)"/>
         <PackageVersion Include="JetBrains.Annotations.Sources" Version="$(JetBrainsAnnotationsVersion)"/>
-        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.3.3"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
+        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.4.0"/>
+        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.3.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
-        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0"/>
+        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
         <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.3.0"/>
         <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.5.2"/>
