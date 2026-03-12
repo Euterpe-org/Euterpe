@@ -1,22 +1,11 @@
 using System.Net.Http.Json;
+using static Euterpe.Common.DependencyConstants;
 using static Euterpe.Core.JsonContexts.CamelCaseJsonContext;
 
 namespace Euterpe.Core;
 
 internal sealed partial class DownloadManager : IDownloadManager
 {
-    // Dependency URLs
-    private const string MelonLoaderUrl = $"{DependenciesBaseUrl}/MelonLoader/{MelonLoaderVersion}/MelonLoader.x64.zip";
-    private const string UnityDependencyUrl = $"{DependenciesBaseUrl}/UnityDependencies/{UnityDependencyVersion}/Managed.zip";
-    private const string Cpp2ILExecutableUrl = $"{DependenciesBaseUrl}/Cpp2IL/{Cpp2ILVersion}/Cpp2IL-{Cpp2ILVersion}-Windows.exe";
-    private const string Cpp2ILPluginUrl = $"{DependenciesBaseUrl}/Cpp2IL/{Cpp2ILVersion}/Cpp2IL.Plugin.StrippedCodeRegSupport.dll";
-
-    // Mod URLs
-    private const string ModJsonUrl = $"{AssetsBaseUrl}Mods.json";
-    private const string LibJsonUrl = $"{AssetsBaseUrl}Libs.json";
-    private const string ModsFolderUrl = $"{AssetsBaseUrl}Mods/";
-    private const string LibsFolderUrl = $"{AssetsBaseUrl}Libs/";
-
     public async Task<bool> DownloadFileAsync(
         string url,
         string filePath,
@@ -65,25 +54,25 @@ internal sealed partial class DownloadManager : IDownloadManager
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default) =>
-        DownloadAsync(MelonLoaderUrl, Config.MelonLoaderZipPath, "MelonLoader", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+        DownloadAsync(MelonLoader.Url, Config.MelonLoaderZipPath, "MelonLoader", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
     public Task<bool> DownloadUnityDependencyAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default) =>
-        DownloadAsync(UnityDependencyUrl, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+        DownloadAsync(UnityRuntime.Url, Config.UnityDependencyZipPath, "Unity Dependency", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
     public Task<bool> DownloadCpp2ILExecutableAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default) =>
-        DownloadAsync(Cpp2ILExecutableUrl, Config.Cpp2ILExecutablePath, "Cpp2IL", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+        DownloadAsync(Cpp2IL.ExecutableUrl, Config.Cpp2ILExecutablePath, "Cpp2IL", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
     public Task<bool> DownloadCpp2ILPluginAsync(
         EventHandler<DownloadStartedEventArgs> onDownloadStarted,
         EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
         CancellationToken cancellationToken = default) =>
-        DownloadAsync(Cpp2ILPluginUrl, Config.Cpp2ILPluginPath, "Cpp2IL Plugin", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
+        DownloadAsync(Cpp2IL.PluginUrl, Config.Cpp2ILPluginPath, "Cpp2IL Plugin", onDownloadStarted, onDownloadProgressChanged, cancellationToken);
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
@@ -95,7 +84,7 @@ internal sealed partial class DownloadManager : IDownloadManager
             return false;
         }
 
-        var downloadLink = ModsFolderUrl + mod.FileName;
+        var downloadLink = EuterpeUrls.Assets.ModsBaseUrl + mod.FileName;
         var path = Path.Combine(Config.ModsFolder, mod.FileName);
         try
         {
@@ -118,7 +107,7 @@ internal sealed partial class DownloadManager : IDownloadManager
     {
         Logger.ZLogInformation($"Downloading lib {lib.Name} ...");
 
-        var downloadLink = LibsFolderUrl + lib.FileName;
+        var downloadLink = EuterpeUrls.Assets.LibsBaseUrl + lib.FileName;
         var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
         try
         {
@@ -139,7 +128,7 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public async Task DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{ReleasesBaseUrl}{tag}/Euterpe-{runtimeIdentifier}.zip";
+        var downloadUrl = $"{EuterpeUrls.Releases.BaseUrl}{tag}/Euterpe-{runtimeIdentifier}.zip";
 
         try
         {
@@ -175,16 +164,16 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods from GitHub {ModJsonUrl}...");
+        Logger.ZLogInformation($"Fetching mods from GitHub {EuterpeUrls.Assets.ModsJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(ModJsonUrl, Default.Mod, cancellationToken);
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(EuterpeUrls.Assets.ModsJsonUrl, Default.Mod, cancellationToken);
     }
 
     public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching libs from GitHub {LibJsonUrl}...");
+        Logger.ZLogInformation($"Fetching libs from GitHub {EuterpeUrls.Assets.LibsJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(LibJsonUrl, Default.Lib, cancellationToken);
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(EuterpeUrls.Assets.LibsJsonUrl, Default.Lib, cancellationToken);
     }
 
     #region Injections

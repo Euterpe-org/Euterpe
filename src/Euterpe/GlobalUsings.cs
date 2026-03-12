@@ -45,7 +45,6 @@ global using R3;
 global using Ursa.Controls;
 global using ZLogger;
 global using static Euterpe.Common.BuildInfo;
-global using static Euterpe.Common.GlobalConstants;
 global using static Euterpe.Common.PageNames;
 global using static Euterpe.Common.PathConstants;
 global using static Euterpe.Core.Utils.DesktopUtils;

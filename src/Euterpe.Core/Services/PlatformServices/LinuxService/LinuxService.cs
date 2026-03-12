@@ -50,7 +50,7 @@ internal sealed partial class LinuxService : IPlatformService
     {
         const string relativePath = @"steamapps/common/Muse Dash";
 
-        if (GamePathService.TryGetGameFolderFromVdf(MuseDashGameId, relativePath, out gameFolder))
+        if (GamePathService.TryGetGameFolderFromVdf(GameConstants.MuseDashSteamAppId, relativePath, out gameFolder))
         {
             return true;
         }
@@ -139,7 +139,7 @@ internal sealed partial class LinuxService : IPlatformService
         try
         {
             var result = await Cli.Wrap("protontricks")
-                .WithArguments([MuseDashGameId, "list-installed"])
+                .WithArguments([GameConstants.MuseDashSteamAppId, "list-installed"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -171,7 +171,7 @@ internal sealed partial class LinuxService : IPlatformService
         try
         {
             var result = await Cli.Wrap("protontricks")
-                .WithArguments([MuseDashGameId, "dotnetdesktop6"])
+                .WithArguments([GameConstants.MuseDashSteamAppId, "dotnetdesktop6"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);

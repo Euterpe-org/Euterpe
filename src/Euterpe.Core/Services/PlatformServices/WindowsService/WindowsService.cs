@@ -62,7 +62,7 @@ internal sealed partial class WindowsService : IPlatformService
     {
         const string relativePath = @"steamapps\common\Muse Dash";
 
-        if (GamePathService.TryGetGameFolderFromVdf(MuseDashGameId, relativePath, out gameFolder))
+        if (GamePathService.TryGetGameFolderFromVdf(GameConstants.MuseDashSteamAppId, relativePath, out gameFolder))
         {
             return true;
         }

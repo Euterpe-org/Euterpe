@@ -36,7 +36,7 @@ internal sealed partial class LinuxService
         try
         {
             var winVersionResult = await Cli.Wrap("protontricks")
-                .WithArguments([MuseDashGameId, "win10"])
+                .WithArguments([GameConstants.MuseDashSteamAppId, "win10"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -51,7 +51,7 @@ internal sealed partial class LinuxService
 
             const string dllOverrideCommand = @"wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v version /t REG_SZ /d native,builtin /f";
             var dllOverrideResult = await Cli.Wrap("protontricks")
-                .WithArguments(["-c", dllOverrideCommand, MuseDashGameId])
+                .WithArguments(["-c", dllOverrideCommand, GameConstants.MuseDashSteamAppId])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);

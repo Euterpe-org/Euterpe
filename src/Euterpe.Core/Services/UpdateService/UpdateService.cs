@@ -2,7 +2,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class UpdateService : IUpdateService
 {
-    private const string TagsRSSUrl = ReleasesBaseUrl + "releases.atom";
+    private const string TagsRSSUrl = Euterpe.Common.EuterpeUrls.Releases.TagsRssUrl;
 
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
 

@@ -31,25 +31,25 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
             await EnsureValidFileAsync(
                 Config.MelonLoaderZipPath,
-                MelonLoaderZipHash,
+                DependencyConstants.MelonLoader.ZipHash,
                 DownloadManager.DownloadMelonLoaderAsync,
                 "MelonLoader").ConfigureAwait(true);
 
             await EnsureValidFileAsync(
                 Config.UnityDependencyZipPath,
-                UnityDependencyZipHash,
+                DependencyConstants.UnityRuntime.ZipHash,
                 DownloadManager.DownloadUnityDependencyAsync,
                 "UnityDependency").ConfigureAwait(true);
 
             await EnsureValidFileAsync(
                 Config.Cpp2ILExecutablePath,
-                Cpp2ILExecutableHash,
+                DependencyConstants.Cpp2IL.ExecutableHash,
                 DownloadManager.DownloadCpp2ILExecutableAsync,
                 "Cpp2IL").ConfigureAwait(true);
 
             await EnsureValidFileAsync(
                 Config.Cpp2ILPluginPath,
-                Cpp2ILPluginHash,
+                DependencyConstants.Cpp2IL.PluginHash,
                 DownloadManager.DownloadCpp2ILPluginAsync,
                 "Cpp2IL Plugin").ConfigureAwait(true);
 
@@ -63,7 +63,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        Config.MelonLoaderVersion = MelonLoaderVersion;
+        Config.MelonLoaderVersion = DependencyConstants.MelonLoader.Version;
         MelonLoaderInstallStatus = InstallStatus.Installed;
     }
 
