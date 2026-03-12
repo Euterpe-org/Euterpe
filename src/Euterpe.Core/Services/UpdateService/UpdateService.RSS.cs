@@ -1,5 +1,6 @@
 ﻿using System.ServiceModel.Syndication;
 using System.Xml;
+using static Euterpe.Common.EuterpeCdn;
 
 namespace Euterpe.Core;
 
@@ -9,7 +10,7 @@ internal sealed partial class UpdateService
     {
         try
         {
-            var stream = await Client.GetStreamAsync(TagsRSSUrl, cancellationToken).ConfigureAwait(false);
+            var stream = await Client.GetStreamAsync(Releases.TagsRssUrl, cancellationToken).ConfigureAwait(false);
             await using (stream.ConfigureAwait(false))
             {
                 using var reader = XmlReader.Create(stream);

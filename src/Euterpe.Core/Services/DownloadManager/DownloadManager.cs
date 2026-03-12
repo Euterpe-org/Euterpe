@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using static Euterpe.Common.DependencyConstants;
+using static Euterpe.Common.EuterpeCdn;
 using static Euterpe.Core.JsonContexts.CamelCaseJsonContext;
 
 namespace Euterpe.Core;
@@ -84,7 +85,7 @@ internal sealed partial class DownloadManager : IDownloadManager
             return false;
         }
 
-        var downloadLink = EuterpeUrls.Assets.ModsBaseUrl + mod.FileName;
+        var downloadLink = Assets.ModsBaseUrl + mod.FileName;
         var path = Path.Combine(Config.ModsFolder, mod.FileName);
         try
         {
@@ -107,7 +108,7 @@ internal sealed partial class DownloadManager : IDownloadManager
     {
         Logger.ZLogInformation($"Downloading lib {lib.Name} ...");
 
-        var downloadLink = EuterpeUrls.Assets.LibsBaseUrl + lib.FileName;
+        var downloadLink = Assets.LibsBaseUrl + lib.FileName;
         var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
         try
         {
@@ -128,7 +129,7 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public async Task DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{EuterpeUrls.Releases.BaseUrl}{tag}/Euterpe-{runtimeIdentifier}.zip";
+        var downloadUrl = $"{Releases.BaseUrl}{tag}/Euterpe-{runtimeIdentifier}.zip";
 
         try
         {
@@ -164,16 +165,16 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods from GitHub {EuterpeUrls.Assets.ModsJsonUrl}...");
+        Logger.ZLogInformation($"Fetching mods from GitHub {Assets.ModsJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(EuterpeUrls.Assets.ModsJsonUrl, Default.Mod, cancellationToken);
+        return Client.GetFromJsonAsAsyncEnumerable<Mod>(Assets.ModsJsonUrl, Default.Mod, cancellationToken);
     }
 
     public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching libs from GitHub {EuterpeUrls.Assets.LibsJsonUrl}...");
+        Logger.ZLogInformation($"Fetching libs from GitHub {Assets.LibsJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(EuterpeUrls.Assets.LibsJsonUrl, Default.Lib, cancellationToken);
+        return Client.GetFromJsonAsAsyncEnumerable<Lib>(Assets.LibsJsonUrl, Default.Lib, cancellationToken);
     }
 
     #region Injections

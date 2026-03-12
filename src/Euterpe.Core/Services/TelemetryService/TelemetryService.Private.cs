@@ -9,7 +9,6 @@ internal sealed partial class TelemetryService
 {
     private async Task PostVisitorTelemetryAsync()
     {
-        const string url = ApiConstants.BaseUrl + ApiEndpoints.Telemetry.Visitor;
         var payload = new VisitorTelemetryRequest
         {
             Country = RegionInfo.CurrentRegion.TwoLetterISORegionName,
@@ -18,19 +17,18 @@ internal sealed partial class TelemetryService
             AppVersion = AppVersion
         };
 
-        await PostTelemetryAsync(url, payload, Default.VisitorTelemetryRequest).ConfigureAwait(false);
+        await PostTelemetryAsync(VisitorTelemetryUrl, payload, Default.VisitorTelemetryRequest).ConfigureAwait(false);
     }
 
     private async Task PostDownloadTelemetryAsync(string modName, string modAuthor)
     {
-        const string url = ApiConstants.BaseUrl + ApiEndpoints.Telemetry.Download;
         var payload = new DownloadTelemetryRequest
         {
             ModName = modName,
             ModAuthor = modAuthor
         };
 
-        await PostTelemetryAsync(url, payload, Default.DownloadTelemetryRequest).ConfigureAwait(false);
+        await PostTelemetryAsync(DownloadTelemetryUrl, payload, Default.DownloadTelemetryRequest).ConfigureAwait(false);
     }
 
     private async Task PostTelemetryAsync<T>(string url, T payload, JsonTypeInfo<T> jsonTypeInfo)

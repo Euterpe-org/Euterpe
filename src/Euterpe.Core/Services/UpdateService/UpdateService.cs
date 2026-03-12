@@ -2,8 +2,6 @@ namespace Euterpe.Core;
 
 internal sealed partial class UpdateService : IUpdateService
 {
-    private const string TagsRSSUrl = Euterpe.Common.EuterpeUrls.Releases.TagsRssUrl;
-
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
 
     public async Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)

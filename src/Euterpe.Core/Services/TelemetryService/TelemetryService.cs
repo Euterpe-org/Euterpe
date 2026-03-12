@@ -1,7 +1,12 @@
+using static Euterpe.Common.EuterpeApi;
+
 namespace Euterpe.Core;
 
 internal sealed partial class TelemetryService : ITelemetryService
 {
+    private const string VisitorTelemetryUrl = BaseUrl + Telemetry.VisitorPath;
+    private const string DownloadTelemetryUrl = BaseUrl + Telemetry.DownloadPath;
+
     public async Task TrackVisitorAsync()
     {
         try

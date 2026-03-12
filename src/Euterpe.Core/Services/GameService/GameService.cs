@@ -1,4 +1,6 @@
-﻿namespace Euterpe.Core;
+﻿using static Euterpe.Common.GameConstants;
+
+namespace Euterpe.Core;
 
 internal sealed partial class GameService : IGameService
 {
@@ -15,13 +17,13 @@ internal sealed partial class GameService : IGameService
             launchArguments.Add("--melonloader.disablestartscreen");
         }
 
-        await LaunchGameAsync(GameConstants.MuseDashSteamAppId, launchArguments).ConfigureAwait(false);
+        await LaunchGameAsync(MuseDashSteamAppId, launchArguments).ConfigureAwait(false);
     }
 
     public async Task LaunchVanillaGameAsync()
     {
         const string launchArguments = "--no-mods";
-        await LaunchGameAsync(GameConstants.MuseDashSteamAppId, launchArguments).ConfigureAwait(false);
+        await LaunchGameAsync(MuseDashSteamAppId, launchArguments).ConfigureAwait(false);
     }
 
     #region Injections

@@ -1,6 +1,6 @@
-﻿namespace Euterpe.Common;
+namespace Euterpe.Common;
 
-public static class EuterpeUrls
+public static class EuterpeCdn
 {
     public static class Assets
     {
