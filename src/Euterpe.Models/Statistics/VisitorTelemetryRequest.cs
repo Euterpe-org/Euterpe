@@ -3,8 +3,8 @@ namespace Euterpe.Models.Statistics;
 [PublicAPI]
 public sealed class VisitorTelemetryRequest
 {
-    public string? Country { get; set; }
-    public string? Platform { get; set; }
-    public string? Architecture { get; set; }
-    public string? AppVersion { get; set; }
+    public required string Country { get; set; }
+    public required string Platform { get; set; }
+    public required string Architecture { get; set; }
+    public required string AppVersion { get; set; }
 }
