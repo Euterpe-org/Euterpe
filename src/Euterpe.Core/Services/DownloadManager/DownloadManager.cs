@@ -7,6 +7,8 @@ namespace Euterpe.Core;
 
 internal sealed partial class DownloadManager : IDownloadManager
 {
+    private HttpClient Client => HttpClientFactory.CreateClient();
+
     public async Task<bool> DownloadFileAsync(
         string url,
         string filePath,
@@ -163,14 +165,14 @@ internal sealed partial class DownloadManager : IDownloadManager
         return null;
     }
 
-    public IAsyncEnumerable<Mod?> GetModListAsync(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<Mod?> FetchModListAsync(CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Fetching mods from GitHub {Assets.ModsJsonUrl}...");
 
         return Client.GetFromJsonAsAsyncEnumerable<Mod>(Assets.ModsJsonUrl, Default.Mod, cancellationToken);
     }
 
-    public IAsyncEnumerable<Lib?> GetLibListAsync(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<Lib?> FetchLibListAsync(CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Fetching libs from GitHub {Assets.LibsJsonUrl}...");
 
@@ -183,7 +185,7 @@ internal sealed partial class DownloadManager : IDownloadManager
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required HttpClient Client { get; init; }
+    public required IHttpClientFactory HttpClientFactory { get; init; }
 
     [UsedImplicitly]
     public required IDownloadService DownloadService { get; init; }

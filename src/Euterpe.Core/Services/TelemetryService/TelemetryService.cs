@@ -1,11 +1,8 @@
-using static Euterpe.Common.EuterpeApi;
-
 namespace Euterpe.Core;
 
 internal sealed partial class TelemetryService : ITelemetryService
 {
-    private const string VisitorTelemetryUrl = BaseUrl + Telemetry.VisitorPath;
-    private const string DownloadTelemetryUrl = BaseUrl + Telemetry.DownloadPath;
+    private HttpClient ApiClient => HttpClientFactory.CreateClient(EuterpeApi.HttpClientName);
 
     public async Task TrackVisitorAsync()
     {
@@ -34,7 +31,7 @@ internal sealed partial class TelemetryService : ITelemetryService
     #region Injections
 
     [UsedImplicitly]
-    public required HttpClient Client { get; init; }
+    public required IHttpClientFactory HttpClientFactory { get; init; }
 
     [UsedImplicitly]
     public required IPlatformService PlatformService { get; init; }

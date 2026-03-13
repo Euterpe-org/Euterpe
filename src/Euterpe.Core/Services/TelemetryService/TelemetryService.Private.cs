@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization.Metadata;
 using Euterpe.Models.Statistics;
 using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
+using static Euterpe.Common.EuterpeApi;
 
 namespace Euterpe.Core;
 
@@ -17,7 +18,7 @@ internal sealed partial class TelemetryService
             AppVersion = AppVersion
         };
 
-        await PostTelemetryAsync(VisitorTelemetryUrl, payload, Default.VisitorTelemetryRequest).ConfigureAwait(false);
+        await PostTelemetryAsync(Telemetry.VisitorPath, payload, Default.VisitorTelemetryRequest).ConfigureAwait(false);
     }
 
     private async Task PostDownloadTelemetryAsync(string modName, string modAuthor)
@@ -28,7 +29,7 @@ internal sealed partial class TelemetryService
             ModAuthor = modAuthor
         };
 
-        await PostTelemetryAsync(DownloadTelemetryUrl, payload, Default.DownloadTelemetryRequest).ConfigureAwait(false);
+        await PostTelemetryAsync(Telemetry.DownloadPath, payload, Default.DownloadTelemetryRequest).ConfigureAwait(false);
     }
 
     private async Task PostTelemetryAsync<T>(string url, T payload, JsonTypeInfo<T> jsonTypeInfo)
@@ -37,7 +38,7 @@ internal sealed partial class TelemetryService
         request.Headers.Add("x-request-id", GenerateRequestId());
         request.Content = JsonContent.Create(payload, jsonTypeInfo);
 
-        using var response = await Client.SendAsync(request).ConfigureAwait(false);
+        using var response = await ApiClient.SendAsync(request).ConfigureAwait(false);
     }
 
     private static string GenerateRequestId() => Guid.CreateVersion7().ToString();

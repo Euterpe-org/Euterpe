@@ -2,37 +2,45 @@
 
 public static class CoreServiceExtensions
 {
-    public static void RegisterLogger(this IServiceCollection services, string logFileName)
+    extension(IServiceCollection services)
     {
-        services.AddSingleton<LiveLogProcessor>();
-        services.AddLogging(x =>
+        public void RegisterLogger(string logFileName)
         {
-            x.ClearProviders();
+            services.AddSingleton<LiveLogProcessor>();
+            services.AddLogging(x =>
+            {
+                x.ClearProviders();
 #if DEBUG
-            x.SetMinimumLevel(LogLevel.Trace);
-            x.AddZLoggerConsole(options =>
-            {
-                options.ConfigureEnableAnsiEscapeCode = true;
-                options.UseFormatter(() => new LogConsoleFormatter());
-            });
+                x.SetMinimumLevel(LogLevel.Debug);
+                x.AddZLoggerConsole(options =>
+                {
+                    options.ConfigureEnableAnsiEscapeCode = true;
+                    options.UseFormatter(() => new LogConsoleFormatter());
+                });
 #else
-            x.SetMinimumLevel(LogLevel.Information);
+                x.SetMinimumLevel(LogLevel.Information);
 #endif
-            x.AddZLoggerFile((options, _) =>
-            {
-                options.FileShared = true;
-                options.UseFormatter(() => new LogFileFormatter());
-                return Path.Combine("Logs", logFileName);
+                x.AddZLoggerFile((options, _) =>
+                {
+                    options.FileShared = true;
+                    options.UseFormatter(() => new LogFileFormatter());
+                    return Path.Combine("Logs", logFileName);
+                });
+                x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<LiveLogProcessor>());
             });
-            x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<LiveLogProcessor>());
-        });
+        }
+
+        public void RegisterHttpClients()
+        {
+            services.AddHttpClient();
+            services.AddHttpClient(EuterpeApi.HttpClientName, client => client.BaseAddress = new Uri(EuterpeApi.BaseUrl));
+        }
     }
 
     extension(ContainerBuilder builder)
     {
         public void RegisterInstances()
         {
-            builder.RegisterInstance(new HttpClient());
             builder.RegisterInstance(new DownloadService(
                     new DownloadConfiguration
                     {

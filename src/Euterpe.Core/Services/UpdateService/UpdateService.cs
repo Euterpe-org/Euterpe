@@ -3,6 +3,7 @@ namespace Euterpe.Core;
 internal sealed partial class UpdateService : IUpdateService
 {
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
+    private HttpClient Client => HttpClientFactory.CreateClient();
 
     public async Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {
@@ -22,13 +23,13 @@ internal sealed partial class UpdateService : IUpdateService
     #region Injections
 
     [UsedImplicitly]
-    public required HttpClient Client { get; init; }
-
-    [UsedImplicitly]
     public required Config Config { get; init; }
 
     [UsedImplicitly]
     public required IDownloadManager DownloadManager { get; init; }
+
+    [UsedImplicitly]
+    public required IHttpClientFactory HttpClientFactory { get; init; }
 
     [UsedImplicitly]
     public required ILogger<UpdateService> Logger { get; init; }

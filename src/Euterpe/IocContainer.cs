@@ -13,6 +13,7 @@ public static class IocContainer
     {
         var services = new ServiceCollection();
         services.RegisterLogger(logFileName);
+        services.RegisterHttpClients();
 
         var builder = new ContainerBuilder();
         builder.RegisterInstances();
