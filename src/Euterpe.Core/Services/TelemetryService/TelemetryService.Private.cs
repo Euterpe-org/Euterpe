@@ -35,7 +35,7 @@ internal sealed partial class TelemetryService
     private async Task PostAsync<T>(string url, T payload, JsonTypeInfo<T> jsonTypeInfo)
     {
         using var request = new HttpRequestMessage(HttpMethod.Post, url);
-        request.Headers.Add("x-request-id", GenerateRequestId());
+        request.Headers.Add("X-Request-Id", GenerateRequestId());
         request.Content = JsonContent.Create(payload, jsonTypeInfo);
 
         using var response = await ApiClient.SendAsync(request).ConfigureAwait(false);
