@@ -2,7 +2,6 @@ namespace Euterpe.Shared;
 
 public static class EuterpeApi
 {
-    public const string HttpClientName = "EuterpeApi";
     public const string BaseUrl = "https://euterpe-org.com/api/";
 
     public static class Telemetry

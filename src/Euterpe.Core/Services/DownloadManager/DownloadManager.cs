@@ -7,8 +7,6 @@ namespace Euterpe.Core;
 
 internal sealed partial class DownloadManager : IDownloadManager
 {
-    private HttpClient Client => HttpClientFactory.CreateClient();
-
     public async Task<bool> DownloadFileAsync(
         string url,
         string filePath,
@@ -185,7 +183,7 @@ internal sealed partial class DownloadManager : IDownloadManager
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required IHttpClientFactory HttpClientFactory { get; init; }
+    public required HttpClient Client { get; init; }
 
     [UsedImplicitly]
     public required IDownloadService DownloadService { get; init; }
