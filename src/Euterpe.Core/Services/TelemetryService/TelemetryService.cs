@@ -12,19 +12,19 @@ internal sealed partial class TelemetryService : ITelemetryService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to record visitor statistics");
+            Logger.ZLogWarning(ex, $"Failed to track visitor telemetry");
         }
     }
 
-    public async Task TrackDownloadAsync(string modName, string modAuthor)
+    public async Task TrackModDownloadAsync(string modName, string modAuthor)
     {
         try
         {
-            await PostDownloadAsync(modName, modAuthor).ConfigureAwait(false);
+            await PostModDownloadAsync(modName, modAuthor).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to record download statistics");
+            Logger.ZLogWarning(ex, $"Failed to track mod download telemetry");
         }
     }
 

@@ -21,15 +21,15 @@ internal sealed partial class TelemetryService
         await PostAsync(Telemetry.VisitorPath, payload, Default.VisitorEvent).ConfigureAwait(false);
     }
 
-    private async Task PostDownloadAsync(string modName, string modAuthor)
+    private async Task PostModDownloadAsync(string modName, string modAuthor)
     {
-        var payload = new DownloadEvent
+        var payload = new ModDownloadEvent
         {
             ModName = modName,
             ModAuthor = modAuthor
         };
 
-        await PostAsync(Telemetry.DownloadPath, payload, Default.DownloadEvent).ConfigureAwait(false);
+        await PostAsync(Telemetry.DownloadPath, payload, Default.ModDownloadEvent).ConfigureAwait(false);
     }
 
     private async Task PostAsync<T>(string url, T payload, JsonTypeInfo<T> jsonTypeInfo)

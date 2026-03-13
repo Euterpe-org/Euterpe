@@ -22,7 +22,7 @@ internal sealed partial class ModManageService : IModManageService
     public async Task InstallModAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
-        TelemetryService.TrackDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
+        TelemetryService.TrackModDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
