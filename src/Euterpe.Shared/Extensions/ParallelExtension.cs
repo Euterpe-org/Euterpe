@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Common.Extensions;
+﻿namespace Euterpe.Shared.Extensions;
 
 public static class ParallelExtension
 {

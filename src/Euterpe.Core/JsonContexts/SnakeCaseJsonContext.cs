@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using Euterpe.Models.Statistics;
+using Euterpe.Contracts.Telemetry;
 
 namespace Euterpe.Core.JsonContexts;
 

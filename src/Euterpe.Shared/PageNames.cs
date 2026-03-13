@@ -1,4 +1,4 @@
-namespace Euterpe.Common;
+namespace Euterpe.Shared;
 
 public static class PageNames
 {

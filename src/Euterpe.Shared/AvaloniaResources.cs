@@ -1,7 +1,7 @@
 ﻿using Avalonia.Styling;
-using Euterpe.Common.Collections;
+using Euterpe.Shared.Collections;
 
-namespace Euterpe.Common;
+namespace Euterpe.Shared;
 
 public static class AvaloniaResources
 {

@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json.Serialization.Metadata;
-using Euterpe.Models.Statistics;
+using Euterpe.Contracts.Telemetry;
 using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
-using static Euterpe.Common.EuterpeApi;
+using static Euterpe.Shared.EuterpeApi;
 
 namespace Euterpe.Core;
 

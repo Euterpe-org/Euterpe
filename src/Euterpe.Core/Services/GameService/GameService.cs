@@ -1,4 +1,4 @@
-﻿using static Euterpe.Common.GameConstants;
+﻿using static Euterpe.Shared.GameConstants;
 
 namespace Euterpe.Core;
 

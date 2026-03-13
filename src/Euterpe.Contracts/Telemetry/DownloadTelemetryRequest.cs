@@ -1,4 +1,4 @@
-namespace Euterpe.Models.Statistics;
+namespace Euterpe.Contracts.Telemetry;
 
 [PublicAPI]
 public sealed class DownloadTelemetryRequest

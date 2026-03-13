@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Frozen;
 
-namespace Euterpe.Common.Collections;
+namespace Euterpe.Shared.Collections;
 
 public sealed class FrozenBiDictionary<T1, T2>(FrozenDictionary<T1, T2> forward, FrozenDictionary<T2, T1> reverse)
     : IEnumerable<KeyValuePair<T1, T2>>

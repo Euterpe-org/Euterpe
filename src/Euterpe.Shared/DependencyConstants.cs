@@ -1,6 +1,6 @@
-﻿using static Euterpe.Common.EuterpeCdn;
+﻿using static Euterpe.Shared.EuterpeCdn;
 
-namespace Euterpe.Common;
+namespace Euterpe.Shared;
 
 public static class DependencyConstants
 {

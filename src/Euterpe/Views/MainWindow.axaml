@@ -1,7 +1,7 @@
 <u:UrsaWindow
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:constants="using:Euterpe.Common"
+    xmlns:constants="using:Euterpe.Shared"
     xmlns:controls="using:Euterpe.Models.Controls"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:u="https://irihi.tech/ursa"

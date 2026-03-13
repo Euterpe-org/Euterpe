@@ -2,7 +2,7 @@
 using System.Collections.Frozen;
 using System.Runtime.CompilerServices;
 
-namespace Euterpe.Common.Collections;
+namespace Euterpe.Shared.Collections;
 
 /// <summary>
 ///     A bidirectional dictionary that can retrieve a value by key or a key by value.

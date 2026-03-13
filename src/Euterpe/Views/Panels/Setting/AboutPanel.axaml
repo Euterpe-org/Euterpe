@@ -1,7 +1,7 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:const="using:Euterpe.Common"
+    xmlns:constants="using:Euterpe.Shared"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
@@ -50,12 +50,12 @@
                         Spacing="10">
                         <Label
                             Classes="Blue"
-                            Content="{x:Static const:BuildInfo.DisplayVersion}"
+                            Content="{x:Static constants:BuildInfo.DisplayVersion}"
                             Height="10"
                             Theme="{StaticResource TagLabel}" />
                         <TextBlock
                             Foreground="Gray"
-                            Text="{x:Static const:BuildInfo.CopyRight}" />
+                            Text="{x:Static constants:BuildInfo.CopyRight}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -126,7 +126,7 @@
                                     </u:IconButton>
                                 </InlineUIContainer>
                                 <Run
-                                    Text="{x:Static const:BuildInfo.DotNetVersion}" />
+                                    Text="{x:Static constants:BuildInfo.DotNetVersion}" />
                                 <Run
                                     Text="&amp;" />
                                 <InlineUIContainer>
@@ -141,7 +141,7 @@
                                 <Run
                                     Text="Avalonia " />
                                 <Run
-                                    Text="{x:Static const:BuildInfo.AvaloniaVersion}" />
+                                    Text="{x:Static constants:BuildInfo.AvaloniaVersion}" />
                             </TextBlock.Inlines>
                         </TextBlock>
 

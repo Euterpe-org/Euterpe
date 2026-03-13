@@ -1,6 +1,6 @@
 using System.Net.Http.Json;
-using static Euterpe.Common.DependencyConstants;
-using static Euterpe.Common.EuterpeCdn;
+using static Euterpe.Shared.DependencyConstants;
+using static Euterpe.Shared.EuterpeCdn;
 using static Euterpe.Core.JsonContexts.CamelCaseJsonContext;
 
 namespace Euterpe.Core;

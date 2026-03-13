@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel.Syndication;
 using System.Xml;
-using static Euterpe.Common.EuterpeCdn;
+using static Euterpe.Shared.EuterpeCdn;
 
 namespace Euterpe.Core;
 

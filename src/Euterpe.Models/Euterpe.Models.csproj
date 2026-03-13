@@ -7,7 +7,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Euterpe.Common\Euterpe.Common.csproj"/>
+        <ProjectReference Include="..\Euterpe.Shared\Euterpe.Shared.csproj"/>
         <ProjectReference Include="..\Euterpe.Localization\Euterpe.Localization.csproj"/>
     </ItemGroup>
 
