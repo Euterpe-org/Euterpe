@@ -13,13 +13,9 @@ public sealed class UpdateServiceTest : IDisposable
     private const string HigherStableVersion = "999.0.0";
     private const string HigherPrereleaseVersion = "999.0.1-rc1";
     private const string TagsRSSUrl = "https://releases.euterpe-org.com/releases.atom";
-    private readonly IHttpClientFactory _httpClientFactory;
-
     private readonly MockLogger<UpdateService> _logger = Mock.Logger<UpdateService>();
     private readonly MockHttpHandler _mockHttp = new();
     private Config Config { get; } = new();
-
-    public UpdateServiceTest() => _httpClientFactory = new StaticHttpClientFactory(_mockHttp.CreateClient());
 
     public void Dispose()
     {
@@ -34,7 +30,7 @@ public sealed class UpdateServiceTest : IDisposable
         new()
         {
             Config = config ?? Config,
-            HttpClientFactory = _httpClientFactory,
+            Client = _mockHttp.CreateClient(),
             Logger = _logger,
             DownloadManager = downloadManager ?? Mock.Of<IDownloadManager>().Object,
             MessageBoxService = messageBoxService ?? Mock.Of<IMessageBoxService>().Object,
@@ -306,10 +302,5 @@ public sealed class UpdateServiceTest : IDisposable
         _logger.VerifyLog()
             .ContainingMessage($"User choose to skip this version: {HigherPrereleaseVersion}");
         await Assert.That(Config.SkipVersion).IsEqualTo(SemVersion.Parse(HigherPrereleaseVersion));
-    }
-
-    private sealed class StaticHttpClientFactory(HttpClient client) : IHttpClientFactory
-    {
-        public HttpClient CreateClient(string name) => client;
     }
 }
