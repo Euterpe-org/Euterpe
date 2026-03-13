@@ -8,7 +8,7 @@ internal sealed partial class TelemetryService : ITelemetryService
     {
         try
         {
-            await PostVisitorTelemetryAsync().ConfigureAwait(false);
+            await PostVisitorAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -20,7 +20,7 @@ internal sealed partial class TelemetryService : ITelemetryService
     {
         try
         {
-            await PostDownloadTelemetryAsync(modName, modAuthor).ConfigureAwait(false);
+            await PostDownloadAsync(modName, modAuthor).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

@@ -8,9 +8,9 @@ namespace Euterpe.Core;
 
 internal sealed partial class TelemetryService
 {
-    private async Task PostVisitorTelemetryAsync()
+    private async Task PostVisitorAsync()
     {
-        var payload = new VisitorTelemetryRequest
+        var payload = new VisitorEvent
         {
             Country = RegionInfo.CurrentRegion.TwoLetterISORegionName,
             Platform = PlatformService.OsString,
@@ -18,21 +18,21 @@ internal sealed partial class TelemetryService
             AppVersion = AppVersion
         };
 
-        await PostTelemetryAsync(Telemetry.VisitorPath, payload, Default.VisitorTelemetryRequest).ConfigureAwait(false);
+        await PostAsync(Telemetry.VisitorPath, payload, Default.VisitorEvent).ConfigureAwait(false);
     }
 
-    private async Task PostDownloadTelemetryAsync(string modName, string modAuthor)
+    private async Task PostDownloadAsync(string modName, string modAuthor)
     {
-        var payload = new DownloadTelemetryRequest
+        var payload = new DownloadEvent
         {
             ModName = modName,
             ModAuthor = modAuthor
         };
 
-        await PostTelemetryAsync(Telemetry.DownloadPath, payload, Default.DownloadTelemetryRequest).ConfigureAwait(false);
+        await PostAsync(Telemetry.DownloadPath, payload, Default.DownloadEvent).ConfigureAwait(false);
     }
 
-    private async Task PostTelemetryAsync<T>(string url, T payload, JsonTypeInfo<T> jsonTypeInfo)
+    private async Task PostAsync<T>(string url, T payload, JsonTypeInfo<T> jsonTypeInfo)
     {
         using var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Headers.Add("x-request-id", GenerateRequestId());

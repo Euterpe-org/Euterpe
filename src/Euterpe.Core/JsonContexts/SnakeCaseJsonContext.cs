@@ -5,6 +5,6 @@ namespace Euterpe.Core.JsonContexts;
 
 [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower)]
 [JsonSerializable(typeof(GitHubRelease[]))]
-[JsonSerializable(typeof(VisitorTelemetryRequest))]
-[JsonSerializable(typeof(DownloadTelemetryRequest))]
+[JsonSerializable(typeof(VisitorEvent))]
+[JsonSerializable(typeof(DownloadEvent))]
 internal sealed partial class SnakeCaseJsonContext : JsonSerializerContext;

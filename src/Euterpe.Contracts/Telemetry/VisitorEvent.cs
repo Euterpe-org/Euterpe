@@ -1,7 +1,7 @@
 namespace Euterpe.Contracts.Telemetry;
 
 [PublicAPI]
-public sealed class VisitorTelemetryRequest
+public sealed class VisitorEvent
 {
     public required string Country { get; set; }
     public required string Platform { get; set; }
