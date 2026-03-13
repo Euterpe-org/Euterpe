@@ -33,7 +33,9 @@ public static class CoreServiceExtensions
         public void RegisterHttpClients()
         {
             services.AddHttpClient();
-            services.AddHttpClient<TelemetryApiClient>(client => client.BaseAddress = new Uri(EuterpeApi.BaseUrl));
+            services.AddHttpClient<TelemetryApiClient>(client =>
+                    client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Telemetry.BasePath}"))
+                .AddHttpMessageHandler<XRequestIdHandler>();
         }
     }
 
