@@ -2,11 +2,11 @@ namespace Euterpe.Common;
 
 public static class EuterpeApi
 {
-    public const string BaseUrl = "https://euterpe-org.com";
+    public const string BaseUrl = "https://euterpe-org.com/api/";
 
     public static class Telemetry
     {
-        public const string VisitorPath = "/api/open/v1/record-visitor";
-        public const string DownloadPath = "/api/open/v1/record-download";
+        public const string VisitorPath = "open/v1/record-visitor";
+        public const string DownloadPath = "open/v1/record-download";
     }
 }
