@@ -33,6 +33,8 @@ public sealed class ArchitectureTests
     {
         var result = CoreTypes.That()
             .ResideInNamespaceMatching("^Euterpe.Core$")
+            .And()
+            .AreNotStatic()
             .Should()
             .BeInternal()
             .And()

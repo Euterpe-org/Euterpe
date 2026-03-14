@@ -2,9 +2,9 @@
 
 namespace Euterpe.Core;
 
-public static class GitHubResources
+internal static class GitHubResources
 {
-    public static readonly Dictionary<string, string> ReadmeCache = [];
-    public static ImmutableArray<string> CommonReadmeNames { get; } = ["README.md", "readme.md", "Readme.md", "ReadMe.md", "README.MD"];
-    public static ImmutableArray<string> Branches { get; } = ["main", "master"];
+    internal static readonly Dictionary<string, string> ReadmeCache = [];
+    internal static ImmutableArray<string> CommonReadmeNames { get; } = ["README.md", "readme.md", "Readme.md", "ReadMe.md", "README.MD"];
+    internal static ImmutableArray<string> Branches { get; } = ["main", "master"];
 }
