@@ -42,7 +42,7 @@ public static class CoreServiceExtensions
                 .AddRefitClient<ITelemetryApiClient>(new RefitSettings
                 {
                     ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                })
+                }, nameof(EuterpeApi.Telemetry))
                 .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Telemetry.BasePath}"))
                 .AddHttpMessageHandler<XRequestIdHandler>();
         }
