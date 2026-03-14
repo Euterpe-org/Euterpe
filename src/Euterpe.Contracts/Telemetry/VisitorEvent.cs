@@ -1,10 +1,4 @@
 namespace Euterpe.Contracts.Telemetry;
 
 [PublicAPI]
-public sealed class VisitorEvent
-{
-    public required string Country { get; set; }
-    public required string Platform { get; set; }
-    public required string Architecture { get; set; }
-    public required string AppVersion { get; set; }
-}
+public readonly record struct VisitorEvent(string CountryCode, string Platform, string Architecture, string AppVersion);
