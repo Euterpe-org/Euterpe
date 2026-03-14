@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace Euterpe.Shared;
+namespace Euterpe.Core;
 
 public static class GitHubResources
 {

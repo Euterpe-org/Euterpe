@@ -1,4 +1,4 @@
-namespace Euterpe.Models.Controls;
+namespace Euterpe.Styles.Models;
 
 public sealed class NavItem(string displayName, string navigateKey, string iconResourceKey = "") : ObservableObject
 {

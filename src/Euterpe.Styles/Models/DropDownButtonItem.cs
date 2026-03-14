@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Euterpe.Models.Controls;
+namespace Euterpe.Styles.Models;
 
 public sealed class DropDownButtonItem(string text, ObservableCollection<DropDownMenuItem>? menuItems)
 {

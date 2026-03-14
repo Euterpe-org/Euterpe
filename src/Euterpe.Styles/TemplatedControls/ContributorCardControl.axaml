@@ -1,7 +1,7 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Euterpe.Models.Controls"
+    xmlns:models="using:Euterpe.Styles.Models"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
 
     <Design.PreviewWith>
@@ -110,7 +110,7 @@
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate
-                                        x:DataType="controls:ContributorLink">
+                                        x:DataType="models:ContributorLink">
                                         <Button
                                             Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=euterpe:ContributorCardControl}, Mode=OneTime}"
                                             CommandParameter="{Binding Url, Mode=OneTime}"

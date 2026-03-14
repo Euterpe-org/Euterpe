@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Euterpe.Models.Controls;
+namespace Euterpe.Styles.Models;
 
 public sealed class DropDownMenuItem(string text, ICommand command, string? commandParameter = null)
 {

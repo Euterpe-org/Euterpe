@@ -1,3 +1,5 @@
+using Euterpe.Models.Dependencies;
+
 namespace Euterpe.Abstractions;
 
 public interface IDownloadManager

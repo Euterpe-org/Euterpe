@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using Euterpe.Models.Dependencies;
 using static Euterpe.Shared.EuterpeCdn;
 using static Euterpe.Core.JsonContexts.CamelCaseJsonContext;
 

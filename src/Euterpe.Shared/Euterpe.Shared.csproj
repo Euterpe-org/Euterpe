@@ -2,9 +2,7 @@
     <Import Project="Euterpe.Common.targets"/>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia"/>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="R3"/>
     </ItemGroup>
 
 </Project>

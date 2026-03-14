@@ -1,6 +1,4 @@
-﻿using static Euterpe.Shared.DependencyConstants;
-
-namespace Euterpe.ViewModels.Panels.Modding;
+﻿namespace Euterpe.ViewModels.Panels.Modding;
 
 public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 {
@@ -12,14 +10,6 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
     [ObservableProperty]
     public partial double DownloadProgress { get; set; }
-
-    private DependencySpec[] GetMelonLoaderDependencies() =>
-    [
-        new("MelonLoader", MelonLoader.Url, Config.MelonLoaderZipPath, MelonLoader.ZipHash),
-        new("UnityDependency", UnityRuntime.Url, Config.UnityDependencyZipPath, UnityRuntime.ZipHash),
-        new("Cpp2IL", Cpp2IL.ExecutableUrl, Config.Cpp2ILExecutablePath, Cpp2IL.ExecutableHash),
-        new("Cpp2IL Plugin", Cpp2IL.PluginUrl, Config.Cpp2ILPluginPath, Cpp2IL.PluginHash)
-    ];
 
     public override async Task InitializeAsync()
     {
@@ -38,11 +28,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             MelonLoaderInstallStatus = InstallStatus.Downloading;
 
             var progress = new Progress<double>(value => DownloadProgress = value);
-            foreach (var dependency in GetMelonLoaderDependencies())
-            {
-                await DependencyAcquireService.EnsureValidAsync(dependency, OnDownloadStarted, progress).ConfigureAwait(true);
-            }
-
+            await DependencyAcquireService.AcquireForMelonLoaderAsync(OnDownloadStarted, progress).ConfigureAwait(true);
             await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
@@ -53,7 +39,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        Config.MelonLoaderVersion = MelonLoader.Version;
+        Config.MelonLoaderVersion = DependencyConstants.MelonLoader.Version;
         MelonLoaderInstallStatus = InstallStatus.Installed;
     }
 

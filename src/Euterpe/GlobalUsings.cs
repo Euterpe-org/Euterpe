@@ -21,7 +21,7 @@ global using Euterpe.Core.Utils;
 global using Euterpe.Extensions;
 global using Euterpe.Localization;
 global using Euterpe.Models;
-global using Euterpe.Models.Controls;
+global using Euterpe.Styles.Models;
 global using Euterpe.Models.Enums;
 global using Euterpe.Services;
 global using Euterpe.Shared;
