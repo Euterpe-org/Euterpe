@@ -1,19 +1,20 @@
 ﻿using System.Collections.Concurrent;
 using AsyncAwaitBestPractices;
+using R3;
 
 namespace Euterpe.Core;
 
 internal sealed partial class ModManageService : IModManageService
 {
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
-    private SemVersion? _melonLoaderVersion;
     private SourceCache<ModDto, string> _sourceCache = null!;
 
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
     {
         _sourceCache = sourceCache;
 
-        _melonLoaderVersion = SemVersion.TryParse(Config.MelonLoaderVersion, out var parsedVersion) ? parsedVersion : null;
+        Config.ObservePropertyChanged(x => x.MelonLoaderVersion)
+            .Subscribe(this, (_, self) => self.RefreshModStates());
 
         await LoadLibsAsync().ConfigureAwait(false);
         await LoadModsAsync().ConfigureAwait(false);
