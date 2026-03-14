@@ -24,7 +24,7 @@ internal sealed partial class UpdateService
         }
     }
 
-    private async Task<ReleaseInfo?> GetStableReleaseFromRSSAsync(CancellationToken cancellationToken = default)
+    private async Task<SemVersion?> GetStableReleaseFromRSSAsync(CancellationToken cancellationToken = default)
     {
         var feed = await GetRSSFeedAsync(cancellationToken).ConfigureAwait(false);
 
@@ -41,7 +41,7 @@ internal sealed partial class UpdateService
 
             if (!version.IsPrerelease)
             {
-                return new ReleaseInfo(version);
+                return version;
             }
 
             Logger.ZLogWarning($"Fetched stable release from RSS is a prerelease: {version}");
@@ -50,7 +50,7 @@ internal sealed partial class UpdateService
         return null;
     }
 
-    private async Task<ReleaseInfo?> GetPrereleaseFromRSSAsync(CancellationToken cancellationToken = default)
+    private async Task<SemVersion?> GetPrereleaseFromRSSAsync(CancellationToken cancellationToken = default)
     {
         var feed = await GetRSSFeedAsync(cancellationToken).ConfigureAwait(false);
 
@@ -61,26 +61,25 @@ internal sealed partial class UpdateService
         }
 
         var release = feed.Items.First();
-        return new ReleaseInfo(SemVersion.Parse(release.Title.Text));
+        return SemVersion.Parse(release.Title.Text);
     }
 
-    private async Task<bool> HandleRSSReleaseAsync(ReleaseInfo? release, CancellationToken cancellationToken = default)
+    private async Task<bool> HandleRSSReleaseAsync(SemVersion? release, CancellationToken cancellationToken = default)
     {
         if (release is null)
         {
             return false;
         }
 
-        var releaseVersion = release.Version;
-        Logger.ZLogInformation($"Release version parsed: {releaseVersion}");
+        Logger.ZLogInformation($"Release version parsed: {release}");
 
-        var shouldUpdate = await ShouldUpdateAsync(releaseVersion).ConfigureAwait(false);
+        var shouldUpdate = await ShouldUpdateAsync(release).ConfigureAwait(false);
         if (!shouldUpdate)
         {
             return false;
         }
 
-        await StartUpdateProcessAsync(releaseVersion.ToString(), cancellationToken).ConfigureAwait(false);
+        await StartUpdateProcessAsync(release.ToString(), cancellationToken).ConfigureAwait(false);
         Environment.Exit(0);
         return true;
     }
