@@ -18,7 +18,7 @@ public sealed class ArchitectureTests
     public async Task Abstractions_ClassesArePublicAndInterfaces_ReturnsTrue()
     {
         var result = AbstractionsTypes.That()
-            .ResideInNamespace("Euterpe.Abstractions")
+            .ResideInNamespace("^Euterpe.Abstractions$")
             .Should()
             .BePublic()
             .And()
