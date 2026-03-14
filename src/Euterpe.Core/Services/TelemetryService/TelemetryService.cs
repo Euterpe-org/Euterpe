@@ -29,7 +29,7 @@ internal sealed partial class TelemetryService : ITelemetryService
     #region Injections
 
     [UsedImplicitly]
-    public required TelemetryApiClient TelemetryApiClient { get; init; }
+    public required ITelemetryApiClient TelemetryApiClient { get; init; }
 
     [UsedImplicitly]
     public required IPlatformService PlatformService { get; init; }

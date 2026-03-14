@@ -10,6 +10,8 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Http"/>
+        <PackageReference Include="Refit"/>
+        <PackageReference Include="Refit.HttpClientFactory"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="System.ServiceModel.Syndication"/>
         <PackageReference Include="ValveKeyValue"/>
@@ -22,7 +24,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Euterpe.Abstractions\Euterpe.Abstractions.csproj"/>
-        <ProjectReference Include="..\Euterpe.Contracts\Euterpe.Contracts.csproj"/>
         <ProjectReference Include="..\Euterpe.Generators\Euterpe.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
         <ProjectReference Include="..\Euterpe.Localization\Euterpe.Localization.csproj"/>
     </ItemGroup>
