@@ -84,12 +84,6 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
-        if (mod.FileName.IsNullOrEmpty())
-        {
-            Logger.ZLogError($"Mod {mod.Name} does not have file name");
-            return false;
-        }
-
         var downloadLink = Assets.ModsBaseUrl + mod.FileName;
         var path = Path.Combine(Config.ModsFolder, mod.FileName);
 
