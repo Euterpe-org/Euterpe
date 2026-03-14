@@ -6,9 +6,9 @@ public static class EuterpeApi
 
     public static class Telemetry
     {
-        public const string BasePath = "telemetry/v1/";
+        public const string BasePath = "telemetry/v1";
 
-        public const string Visitor = "visitor";
-        public const string ModDownload = "mod/download";
+        public const string Visitor = "/visitor";
+        public const string ModDownload = "/mod/download";
     }
 }

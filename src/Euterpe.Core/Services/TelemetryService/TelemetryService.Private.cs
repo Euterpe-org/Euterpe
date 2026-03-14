@@ -1,5 +1,4 @@
 ﻿using Euterpe.Contracts.Telemetry;
-using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
 
 namespace Euterpe.Core;
 
@@ -15,7 +14,7 @@ internal sealed partial class TelemetryService
             AppVersion = AppVersion
         };
 
-        using var response = await TelemetryApiClient.PostVisitorAsync(payload, Default.VisitorEvent).ConfigureAwait(false);
+        using var response = await TelemetryApiClient.PostVisitorAsync(payload).ConfigureAwait(false);
     }
 
     private async Task PostModDownloadAsync(string modName, string modAuthor)
@@ -26,6 +25,6 @@ internal sealed partial class TelemetryService
             ModAuthor = modAuthor
         };
 
-        using var response = await TelemetryApiClient.PostModDownloadAsync(payload, Default.ModDownloadEvent).ConfigureAwait(false);
+        using var response = await TelemetryApiClient.PostModDownloadAsync(payload).ConfigureAwait(false);
     }
 }

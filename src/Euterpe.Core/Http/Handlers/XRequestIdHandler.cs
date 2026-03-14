@@ -1,4 +1,4 @@
-namespace Euterpe.Core;
+namespace Euterpe.Core.Http.Handlers;
 
 internal sealed class XRequestIdHandler : DelegatingHandler
 {

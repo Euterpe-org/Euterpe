@@ -4,6 +4,7 @@ global using System.Globalization;
 global using System.Linq;
 global using System.Threading;
 global using System.Threading.Tasks;
+global using AsyncAwaitBestPractices;
 global using Autofac;
 global using Avalonia;
 global using Avalonia.Controls;

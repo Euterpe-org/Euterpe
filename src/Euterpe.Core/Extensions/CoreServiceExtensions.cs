@@ -1,4 +1,8 @@
-﻿namespace Euterpe.Core.Extensions;
+﻿using Euterpe.Core.Http.Handlers;
+using Euterpe.Core.JsonContexts;
+using Refit;
+
+namespace Euterpe.Core.Extensions;
 
 public static class CoreServiceExtensions
 {
@@ -32,9 +36,14 @@ public static class CoreServiceExtensions
 
         public void RegisterHttpClients()
         {
+            services.AddTransient<XRequestIdHandler>();
             services.AddHttpClient();
-            services.AddHttpClient<TelemetryApiClient>(client =>
-                    client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Telemetry.BasePath}"))
+            services
+                .AddRefitClient<ITelemetryApiClient>(new RefitSettings
+                {
+                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
+                })
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Telemetry.BasePath}"))
                 .AddHttpMessageHandler<XRequestIdHandler>();
         }
     }
