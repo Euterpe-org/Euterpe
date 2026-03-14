@@ -1,5 +1,6 @@
-﻿namespace Euterpe.Models.GitHub;
+﻿namespace Euterpe.Contracts.GitHub;
 
+[PublicAPI]
 public sealed class GitHubRepoContentLinks
 {
     [JsonPropertyName("self")] public string Self { get; set; } = string.Empty;

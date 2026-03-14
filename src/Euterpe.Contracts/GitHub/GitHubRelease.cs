@@ -1,4 +1,4 @@
-namespace Euterpe.Models.GitHub;
+namespace Euterpe.Contracts.GitHub;
 
 [PublicAPI]
 public sealed class GitHubRelease
