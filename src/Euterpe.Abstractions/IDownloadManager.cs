@@ -18,26 +18,13 @@ public interface IDownloadManager
         IProgress<double>? downloadProgress = null,
         CancellationToken cancellationToken = default);
 
-    Task<bool> DownloadMelonLoaderAsync(
-        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
+    Task<bool> DownloadDependencyAsync(
+        DependencySpec spec,
+        EventHandler<DownloadStartedEventArgs>? onDownloadStarted = null,
+        IProgress<double>? progress = null,
         CancellationToken cancellationToken = default);
 
-    Task<bool> DownloadUnityDependencyAsync(
-        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default);
-
-    Task<bool> DownloadCpp2ILExecutableAsync(
-        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default);
-
-    Task<bool> DownloadCpp2ILPluginAsync(
-        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default);
-
+    Task<bool> DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default);
     Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default);
     Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default);
     Task DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default);
