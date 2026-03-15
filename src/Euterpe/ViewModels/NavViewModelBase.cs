@@ -23,7 +23,6 @@ public partial class NavViewModelBase : ViewModelBase
         return Task.CompletedTask;
     }
 
-    [UsedImplicitly]
     partial void OnSelectedItemChanged(NavItem? value)
     {
         Navigate(value);

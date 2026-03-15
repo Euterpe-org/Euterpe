@@ -118,7 +118,6 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         return ModManageService.ToggleModAsync(mod);
     }
 
-    [UsedImplicitly]
     partial void OnSelectedModFilterIndexChanged(int value)
     {
         _modFilter = (ModFilterType)value;

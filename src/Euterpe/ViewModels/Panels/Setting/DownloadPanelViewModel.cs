@@ -19,7 +19,6 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
         return Task.CompletedTask;
     }
 
-    [UsedImplicitly]
     partial void OnSelectedUpdateChannelIndexChanged(int value) => Config.UpdateChannel = (UpdateChannel)value;
 
     #region Injections
