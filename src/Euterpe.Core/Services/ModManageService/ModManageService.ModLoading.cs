@@ -113,7 +113,7 @@ internal sealed partial class ModManageService
     {
         foreach (var modDto in _sourceCache.Items)
         {
-            if (modDto.State is not (ModState.Normal or ModState.Incompatible))
+            if (!modDto.HasDownloadSource || modDto.State is not (ModState.Normal or ModState.Incompatible))
             {
                 continue;
             }
