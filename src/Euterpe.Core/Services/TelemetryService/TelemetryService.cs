@@ -2,11 +2,11 @@ namespace Euterpe.Core;
 
 internal sealed partial class TelemetryService : ITelemetryService
 {
-    public async Task TrackVisitorAsync()
+    public async Task TrackSessionAsync()
     {
         try
         {
-            await PostVisitorAsync().ConfigureAwait(false);
+            await PostSessionAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {

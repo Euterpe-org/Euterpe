@@ -4,15 +4,15 @@ namespace Euterpe.Core;
 
 internal sealed partial class TelemetryService
 {
-    private async Task PostVisitorAsync()
+    private async Task PostSessionAsync()
     {
-        var payload = new VisitorEvent(
+        var payload = new SessionEvent(
             RegionInfo.CurrentRegion.TwoLetterISORegionName,
             PlatformService.OsString,
             PlatformService.ArchitectureString,
             AppVersion);
 
-        using var response = await TelemetryApiClient.PostVisitorAsync(payload).ConfigureAwait(false);
+        using var response = await TelemetryApiClient.PostSessionAsync(payload).ConfigureAwait(false);
     }
 
     private async Task PostModDownloadAsync(string modName, string modAuthor)
