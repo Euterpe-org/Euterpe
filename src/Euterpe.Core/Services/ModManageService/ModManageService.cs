@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using AsyncAwaitBestPractices;
 using R3;
 
 namespace Euterpe.Core;
@@ -19,6 +18,9 @@ internal sealed partial class ModManageService : IModManageService
         await LoadLibsAsync().ConfigureAwait(false);
         await LoadModsAsync().ConfigureAwait(false);
     }
+
+    public ModDto? FindModByName(string name) =>
+        _sourceCache.Lookup(name) is { HasValue: true, Value: var mod } ? mod : null;
 
     public async Task InstallModAsync(ModDto mod)
     {
@@ -57,15 +59,6 @@ internal sealed partial class ModManageService : IModManageService
     }
 
     public Task ToggleModAsync(ModDto mod) => mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
-
-    private async Task DownloadModCoreAsync(ModDto mod)
-    {
-        await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
-        TelemetryService.TrackModDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
-        CheckLibDependencies(mod);
-        await EnableModDependenciesAsync(mod).ConfigureAwait(false);
-        mod.AddLocalInfo();
-    }
 
     #region Injections
 

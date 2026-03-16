@@ -1,7 +1,18 @@
-﻿namespace Euterpe.Core;
+﻿using AsyncAwaitBestPractices;
+
+namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
+    private async Task DownloadModCoreAsync(ModDto mod)
+    {
+        await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
+        TelemetryService.TrackModDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
+        CheckLibDependencies(mod);
+        await EnableModDependenciesAsync(mod).ConfigureAwait(false);
+        mod.AddLocalInfo();
+    }
+
     private async Task EnableModAsync(ModDto mod)
     {
         File.Move(Path.Combine(Config.ModsFolder, mod.LocalFileName),

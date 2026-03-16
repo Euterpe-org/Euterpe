@@ -1,6 +1,6 @@
 namespace Euterpe.Services;
 
-public sealed class DeepLinkService
+public sealed partial class DeepLinkService
 {
     public async Task SetupAsync()
     {
@@ -35,6 +35,10 @@ public sealed class DeepLinkService
 
         switch (action)
         {
+            case "mod":
+                HandleModActionAsync(path).SafeFireAndForget();
+                break;
+
             default:
                 Logger.ZLogWarning($"Unknown deep link action: {action}");
                 break;
@@ -45,6 +49,9 @@ public sealed class DeepLinkService
 
     [UsedImplicitly]
     public required ILogger<DeepLinkService> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required IModManageService ModManageService { get; init; }
 
     [UsedImplicitly]
     public required IPlatformService PlatformService { get; init; }

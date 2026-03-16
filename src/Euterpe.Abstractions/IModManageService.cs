@@ -3,6 +3,7 @@
 public interface IModManageService
 {
     Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache);
+    ModDto? FindModByName(string name);
     Task InstallModAsync(ModDto mod);
     Task UpdateModAsync(ModDto mod);
     Task ReinstallModAsync(ModDto mod);
