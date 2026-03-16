@@ -2,5 +2,5 @@
 
 public static class PathConstants
 {
-    public static string AppLogsFolder => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+    public static string AppLogsFolder => Path.Combine(AppContext.BaseDirectory, "Logs");
 }

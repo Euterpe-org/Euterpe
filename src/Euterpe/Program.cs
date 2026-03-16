@@ -5,6 +5,7 @@ namespace Euterpe;
 internal static class Program
 {
     private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
+    private static readonly string LogFilePath = Path.Combine(AppLogsFolder, LogFileName);
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
@@ -21,20 +22,18 @@ internal static class Program
 
         DeleteUnusedLogFile();
         DeleteOldBackupFiles();
-        ConfigureContainer(LogFileName);
+        ConfigureContainer(LogFilePath);
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
 
     private static void DeleteUnusedLogFile()
     {
-        const string logFolderName = "Logs";
-
-        if (!Directory.Exists(logFolderName))
+        if (!Directory.Exists(AppLogsFolder))
         {
             return;
         }
 
-        var logFiles = Directory.EnumerateFiles(logFolderName, "*.log").OrderDescending().Skip(30);
+        var logFiles = Directory.EnumerateFiles(AppLogsFolder, "*.log").OrderDescending().Skip(30);
         foreach (var logFile in logFiles)
         {
             try

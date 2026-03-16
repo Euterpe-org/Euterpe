@@ -16,6 +16,7 @@ public sealed class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         ApplyConfig();
+        SetupDeepLinkAsync().SafeFireAndForget();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Resolve<MainWindow>();
@@ -33,6 +34,12 @@ public sealed class App : Application
         var config = Resolve<Config>();
         RequestedThemeVariant = AvaloniaResources.ThemeVariants[config.Theme];
         Resolve<LocalizationService>().SetLanguage(config.LanguageCode);
+    }
+
+    private static async Task SetupDeepLinkAsync()
+    {
+        var platformService = Resolve<IPlatformService>();
+        await platformService.SetupDeepLinkAsync(Environment.ProcessPath ?? throw new InvalidOperationException("Process path is null")).ConfigureAwait(false);
     }
 
     private static void HandleDesktopExit(IClassicDesktopStyleApplicationLifetime desktop)
