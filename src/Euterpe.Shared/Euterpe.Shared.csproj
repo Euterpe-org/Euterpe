@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="Euterpe.Common.targets"/>
+    <Import Project="Euterpe.Shared.targets"/>
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations"/>

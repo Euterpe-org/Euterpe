@@ -55,7 +55,7 @@
                             Theme="{StaticResource TagLabel}" />
                         <TextBlock
                             Foreground="Gray"
-                            Text="{x:Static constants:BuildInfo.CopyRight}" />
+                            Text="{x:Static constants:BuildInfo.Copyright}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
