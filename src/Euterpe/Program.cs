@@ -1,3 +1,4 @@
+using static Euterpe.Bootstrapper;
 using static Euterpe.IocContainer;
 
 namespace Euterpe;
@@ -13,65 +14,40 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        // Prevent multiple launch
-        using var mutex = new Mutex(true, AppName);
-        if (!mutex.WaitOne(TimeSpan.Zero, true))
+        using var mutex = new Mutex(true, AppName, out var createdNew);
+        if (!createdNew)
         {
+            if (args is not [])
+            {
+                SendArgsToPrimaryInstance(args);
+            }
+
             return;
         }
 
-        DeleteUnusedLogFile();
-        DeleteOldBackupFiles();
+        CleanupLogFiles();
+        CleanupBackupFiles();
         ConfigureContainer(LogFilePath);
+        StartDeepLinkPipeServer();
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-    }
-
-    private static void DeleteUnusedLogFile()
-    {
-        if (!Directory.Exists(AppLogsFolder))
-        {
-            return;
-        }
-
-        var logFiles = Directory.EnumerateFiles(AppLogsFolder, "*.log").OrderDescending().Skip(30);
-        foreach (var logFile in logFiles)
-        {
-            try
-            {
-                File.Delete(logFile);
-            }
-            catch (Exception ex)
-            {
-                Resolve<ILogger<App>>().ZLogWarning(ex, $"Failed to delete log file: {logFile}");
-            }
-        }
-    }
-
-    private static void DeleteOldBackupFiles()
-    {
-        var directories = Directory.GetDirectories(".", "backup-*");
-        if (directories is [] or { Length: 1 })
-        {
-            return;
-        }
-
-        Parallel.ForEach(directories.OrderDescending().Skip(1), (directory, _) => Directory.Delete(directory));
+        StopDeepLinkPipeServer();
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
-    private static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>()
-        .UsePlatformDetect()
-        .WithInterFont()
-        .LogToTrace()
+    private static AppBuilder BuildAvaloniaApp() =>
+        AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .WithInterFont()
+            .LogToTrace()
 #if DEBUG
-        .WithDeveloperTools()
+            .WithDeveloperTools()
 #endif
-        .UseR3(ReportException)
-        .HandleUIThreadException(ex =>
-        {
-            ReportException(ex.Exception);
-            ex.Handled = Resolve<Config>().IgnoreException;
-        });
+            .UseR3(ReportException)
+            .HandleUIThreadException(ex =>
+            {
+                ReportException(ex.Exception);
+                ex.Handled = Resolve<Config>().IgnoreException;
+            });
 
     private static void ReportException(Exception ex)
     {

@@ -5,6 +5,7 @@ public static partial class ServiceExtensions
     public static void RegisterInternalServices(this ContainerBuilder builder)
     {
         // Self Services
+        builder.RegisterType<DeepLinkService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<LocalizationService>().PropertiesAutowired().SingleInstance();
 
