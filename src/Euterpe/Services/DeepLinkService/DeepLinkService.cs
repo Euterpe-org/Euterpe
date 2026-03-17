@@ -28,6 +28,8 @@ public sealed partial class DeepLinkService
             return;
         }
 
+        ActivateMainWindow(true);
+
         var action = parsed.Host;
         var path = parsed.AbsolutePath.Trim('/');
 
