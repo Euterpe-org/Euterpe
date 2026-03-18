@@ -22,27 +22,31 @@ public sealed partial class DeepLinkService
     {
         Logger.ZLogInformation($"Deep link received: {uri}");
 
-        if (!Uri.TryCreate(uri, UriKind.Absolute, out var parsed) || parsed.Scheme != IPlatformService.DeepLinkScheme)
+        if (!Uri.TryCreate(uri, UriKind.Absolute, out var parsed) || parsed.Scheme is not IPlatformService.DeepLinkScheme)
         {
-            Logger.ZLogWarning($"Invalid deep link URI: {uri}");
+            Logger.ZLogWarning($"Invalid deep link: {uri}");
             return;
         }
 
         ActivateMainWindow(true);
 
         var action = parsed.Host;
-        var path = parsed.AbsolutePath.Trim('/');
+        var path = parsed.AbsolutePath.TrimStart('/');
+        var query = parsed.Query.TrimStart('?');
 
-        Logger.ZLogInformation($"Deep link action: {action}, path: {path}");
+        HandleActionAsync(action, path, query).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {uri}"));
+    }
 
+    private async Task HandleActionAsync(string action, string path, string query)
+    {
         switch (action)
         {
             case "mod":
-                HandleModActionAsync(path).SafeFireAndForget();
+                await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
 
             default:
-                Logger.ZLogWarning($"Unknown deep link action: {action}");
+                Logger.ZLogWarning($"Unknown deep link action '{action}' with path '{path}' and query '{query}'");
                 break;
         }
     }
