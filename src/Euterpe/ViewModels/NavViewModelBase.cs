@@ -15,7 +15,9 @@ public abstract partial class NavViewModelBase : ViewModelBase
     partial void OnSelectedItemChanged(NavItem? value)
     {
         if (value is not null)
+        {
             Content = ResolveRoute(value.NavigateKey);
+        }
     }
 
     public override Task InitializeAsync()

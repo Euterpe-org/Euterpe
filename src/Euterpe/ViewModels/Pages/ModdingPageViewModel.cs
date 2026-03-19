@@ -1,4 +1,4 @@
-namespace Euterpe.ViewModels.Pages;
+﻿namespace Euterpe.ViewModels.Pages;
 
 public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
