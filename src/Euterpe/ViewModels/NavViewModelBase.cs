@@ -1,6 +1,6 @@
-﻿namespace Euterpe.ViewModels;
+namespace Euterpe.ViewModels;
 
-public partial class NavViewModelBase : ViewModelBase
+public abstract partial class NavViewModelBase : ViewModelBase
 {
     [ObservableProperty]
     public partial Control? Content { get; set; }
@@ -8,23 +8,20 @@ public partial class NavViewModelBase : ViewModelBase
     [ObservableProperty]
     public partial NavItem? SelectedItem { get; set; }
 
-    [UsedImplicitly]
-    public virtual IReadOnlyList<NavItem> NavItems { get; } = null!;
+    public abstract IReadOnlyList<NavItem> NavItems { get; }
 
-    protected virtual void Navigate(NavItem? value)
+    protected abstract Control ResolveRoute(string route);
+
+    partial void OnSelectedItemChanged(NavItem? value)
     {
+        if (value is not null)
+            Content = ResolveRoute(value.NavigateKey);
     }
 
     public override Task InitializeAsync()
     {
         base.InitializeAsync();
-
         SelectedItem = NavItems[0];
         return Task.CompletedTask;
-    }
-
-    partial void OnSelectedItemChanged(NavItem? value)
-    {
-        Navigate(value);
     }
 }

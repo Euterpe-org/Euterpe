@@ -1,13 +1,7 @@
-﻿namespace Euterpe.ViewModels.Pages;
+namespace Euterpe.ViewModels.Pages;
 
 public sealed partial class LoggingPageViewModel : NavViewModelBase
 {
-    public override IReadOnlyList<NavItem> NavItems { get; } =
-    [
-        new(Panel_Logging_AppLog, AppLogPanelName),
-        new(Panel_Logging_MelonLoaderLog, MelonLoaderLogPanelName)
-    ];
-
     public IReadOnlyList<DropDownButtonItem> DropDownButtons =>
     [
         new(DropDownButton_Open,
