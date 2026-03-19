@@ -2,15 +2,6 @@ namespace Euterpe.ViewModels;
 
 public sealed partial class MainWindowViewModel : NavViewModelBase
 {
-    public override IReadOnlyList<NavItem> NavItems { get; } =
-    [
-        new(Page_Home, HomePageName, "Home"),
-        new(Page_Modding, ModdingPageName, "Wrench"),
-        new(Page_Charting, ChartingPageName, "Music"),
-        new(Page_Logging, LoggingPageName, "Terminal"),
-        new(Page_Setting, SettingPageName, "Setting")
-    ];
-
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(true);

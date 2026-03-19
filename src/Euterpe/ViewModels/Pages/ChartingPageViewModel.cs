@@ -2,12 +2,6 @@ namespace Euterpe.ViewModels.Pages;
 
 public sealed partial class ChartingPageViewModel : NavViewModelBase
 {
-    public override IReadOnlyList<NavItem> NavItems { get; } =
-    [
-        new(Panel_Charting_ChartManage, ChartManagePanelName),
-        new(Panel_Charting_CharterToolkit, CharterToolkitPanelName)
-    ];
-
     public IReadOnlyList<DropDownButtonItem> DropDownButtons =>
     [
         new(DropDownButton_Open,

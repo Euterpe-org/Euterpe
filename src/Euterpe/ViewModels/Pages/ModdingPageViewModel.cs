@@ -1,14 +1,7 @@
-﻿namespace Euterpe.ViewModels.Pages;
+namespace Euterpe.ViewModels.Pages;
 
 public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
-    public override IReadOnlyList<NavItem> NavItems { get; } =
-    [
-        new(Panel_Modding_ModManage, ModManagePanelName),
-        new(Panel_Modding_MelonLoader, MelonLoaderPanelName),
-        new(Panel_Modding_ModDevelop, ModDevelopPanelName)
-    ];
-
     public IReadOnlyList<DropDownButtonItem> DropDownButtons =>
     [
         new(DropDownButton_Open,
