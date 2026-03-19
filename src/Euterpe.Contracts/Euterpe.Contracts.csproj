@@ -3,5 +3,5 @@
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations"/>
     </ItemGroup>
-    
+
 </Project>

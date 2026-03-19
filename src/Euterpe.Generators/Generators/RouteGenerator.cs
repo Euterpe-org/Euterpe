@@ -23,6 +23,29 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
         context.RegisterSourceOutput(combined.WithCondition(isValidProvider), GenerateFromData);
     }
 
+    #region Helpers
+
+    private static string GetParentPath(string path, RouteData[] allRoutes)
+    {
+        var bestMatch = "/";
+        foreach (var route in allRoutes)
+        {
+            if (route.Path == path)
+            {
+                continue;
+            }
+
+            if (path.StartsWith(route.Path + "/", StringComparison.Ordinal) && route.Path.Length > bestMatch.Length)
+            {
+                bestMatch = route.Path;
+            }
+        }
+
+        return bestMatch;
+    }
+
+    #endregion
+
     #region Filters
 
     private static bool FilterRouteNode(SyntaxNode node, CancellationToken _) =>
@@ -39,21 +62,29 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
     private static RouteData? ExtractRouteData(GeneratorSyntaxContext context, CancellationToken ct)
     {
         if (context.Node is not ClassDeclarationSyntax classDeclaration)
+        {
             return null;
+        }
 
         var symbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration, ct);
         if (symbol is null)
+        {
             return null;
+        }
 
         var routeAttribute = symbol.GetAttributes()
             .FirstOrDefault(a => a.AttributeClass?.Name is "RouteAttribute");
 
         if (routeAttribute is null)
+        {
             return null;
+        }
 
         var path = routeAttribute.ConstructorArguments[0].Value as string;
         if (path is null)
+        {
             return null;
+        }
 
         var displayName = "";
         var icon = "";
@@ -82,11 +113,15 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
     private static ViewModelInfo? ExtractViewModelData(GeneratorSyntaxContext context, CancellationToken ct)
     {
         if (context.Node is not ClassDeclarationSyntax classDeclaration)
+        {
             return null;
+        }
 
         var symbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration, ct);
         if (symbol is null)
+        {
             return null;
+        }
 
         return new ViewModelInfo(symbol.Name, symbol.ContainingNamespace.ToDisplayString());
     }
@@ -110,7 +145,9 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
             .ToDictionary(x => x.Name, x => x.Namespace);
 
         if (routes is [])
+        {
             return;
+        }
 
         // Build parent-child relationships based on path hierarchy
         var childrenByParent = new Dictionary<string, List<RouteData>>();
@@ -130,7 +167,9 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
 
         // Sort children by order within each parent
         foreach (var list in childrenByParent.Values)
+        {
             list.Sort((a, b) => a.Order.CompareTo(b.Order));
+        }
 
         // Determine which ViewModels own which children
         var viewModelGroups = new Dictionary<string, (string ViewModelName, string ViewModelNamespace, List<RouteData> Children)>();
@@ -146,7 +185,10 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
             {
                 var parentRoute = routes.FirstOrDefault(r => r.Path == parentPath);
                 if (parentRoute is null)
+                {
                     continue;
+                }
+
                 viewModelName = parentRoute.ClassName + "ViewModel";
             }
 
@@ -215,8 +257,8 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
 
         sb.ResetIndent();
         sb.AppendLine("""
-                                }.ToFrozenDictionary();
-                        """);
+                              }.ToFrozenDictionary();
+                      """);
 
         sb.AppendLine($$"""
                             {{GetGeneratedCodeAttribute(nameof(RouteGenerator))}}
@@ -251,6 +293,7 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
             {
                 GenerateRouteNode(sb, child, allRoutes, childrenByParent, viewModelGroups);
             }
+
             sb.ResetIndent();
         }
 
@@ -274,7 +317,9 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
         var parentPath = GetParentPath(route.Path, allRoutes);
 
         if (!viewModelGroups.TryGetValue(parentPath, out var group))
+        {
             return;
+        }
 
         var indexInParent = group.Children.IndexOf(route);
         var vmFullName = $"global::{group.ViewModelNamespace}.{group.ViewModelName}";
@@ -304,28 +349,10 @@ public sealed class RouteGenerator : IncrementalGeneratorBase
 
     #endregion
 
-    #region Helpers
-
-    private static string GetParentPath(string path, RouteData[] allRoutes)
-    {
-        var bestMatch = "/";
-        foreach (var route in allRoutes)
-        {
-            if (route.Path == path)
-                continue;
-
-            if (path.StartsWith(route.Path + "/", StringComparison.Ordinal) && route.Path.Length > bestMatch.Length)
-                bestMatch = route.Path;
-        }
-
-        return bestMatch;
-    }
-
-    #endregion
-
     #region Records
 
     private sealed record RouteData(string ClassName, string ViewNamespace, string Path, string DisplayName, string Icon, int Order);
+
     private sealed record ViewModelInfo(string Name, string Namespace);
 
     #endregion
