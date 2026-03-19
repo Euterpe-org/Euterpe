@@ -45,6 +45,10 @@ public sealed partial class DeepLinkService
                 await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
 
+            case "go":
+                NavigationService.NavigateTo($"/{path}");
+                break;
+
             default:
                 Logger.ZLogWarning($"Unknown deep link action '{action}' with path '{path}' and query '{query}'");
                 break;
@@ -52,6 +56,9 @@ public sealed partial class DeepLinkService
     }
 
     #region Injections
+
+    [UsedImplicitly]
+    public required NavigationService NavigationService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<DeepLinkService> Logger { get; init; }
