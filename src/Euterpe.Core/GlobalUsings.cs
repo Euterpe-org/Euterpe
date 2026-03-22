@@ -18,6 +18,7 @@ global using Euterpe.Models.Enums;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;
 global using Euterpe.Shared.Extensions;
+global using Euterpe.Shared.Primitives;
 global using JetBrains.Annotations;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;

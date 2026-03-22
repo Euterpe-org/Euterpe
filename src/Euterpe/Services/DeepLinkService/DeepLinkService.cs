@@ -42,11 +42,13 @@ public sealed partial class DeepLinkService
         switch (action)
         {
             case "mod":
+                await NavigationService.NavigateToAsync("/modding/manage").ConfigureAwait(true);
+                await ModManageService.Ready.WaitAsync().ConfigureAwait(true);
                 await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
 
             case "go":
-                NavigationService.NavigateTo($"/{path}");
+                await NavigationService.NavigateToAsync($"/{path}").ConfigureAwait(false);
                 break;
 
             default:

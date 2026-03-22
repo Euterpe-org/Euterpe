@@ -8,6 +8,8 @@ internal sealed partial class ModManageService : IModManageService
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
     private SourceCache<ModDto, string> _sourceCache = null!;
 
+    public AsyncGate Ready { get; } = new();
+
     public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
     {
         _sourceCache = sourceCache;
@@ -17,6 +19,8 @@ internal sealed partial class ModManageService : IModManageService
 
         await LoadLibsAsync().ConfigureAwait(false);
         await LoadModsAsync().ConfigureAwait(false);
+
+        Ready.Open();
     }
 
     public ModDto? FindModByName(string name) =>

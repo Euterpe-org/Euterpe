@@ -15,6 +15,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
         await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
 
+        NavigationService.Ready.Open();
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 

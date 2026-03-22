@@ -2,6 +2,8 @@ namespace Euterpe.Services;
 
 public sealed class NavigationService
 {
+    public AsyncGate Ready { get; } = new();
+
     #region Injections
 
     [UsedImplicitly]
@@ -17,45 +19,20 @@ public sealed class NavigationService
 
     public void NavigateTo(string route)
     {
-        var chain = Match(RouteTree.Root, route);
-        if (chain is null)
-        {
-            Logger.ZLogWarning($"Route not found: {route}");
-            return;
-        }
+        var node = RouteTree.Root;
 
-        foreach (var node in chain)
+        while (node.Children.FirstOrDefault(x => route.StartsWith(x.Path)) is { } child)
         {
-            node.Select?.Invoke();
+            child.Select?.Invoke();
+            node = child;
         }
 
         Logger.ZLogInformation($"Navigated to: {route}");
     }
 
-    private static List<RouteNode>? Match(RouteNode node, string route)
+    public async Task NavigateToAsync(string route)
     {
-        foreach (var child in node.Children)
-        {
-            if (child.Path == route)
-            {
-                return [child];
-            }
-
-            if (!route.StartsWith(child.Path + "/", StringComparison.Ordinal))
-            {
-                continue;
-            }
-
-            var rest = Match(child, route);
-            if (rest is null)
-            {
-                continue;
-            }
-
-            rest.Insert(0, child);
-            return rest;
-        }
-
-        return null;
+        await Ready.WaitAsync().ConfigureAwait(true);
+        NavigateTo(route);
     }
 }
