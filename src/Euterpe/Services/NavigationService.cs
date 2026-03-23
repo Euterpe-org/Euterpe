@@ -4,6 +4,8 @@ public sealed class NavigationService
 {
     public AsyncGate Ready { get; } = new();
 
+    public string? CurrentRoute { get; private set; }
+
     #region Injections
 
     [UsedImplicitly]
@@ -19,14 +21,21 @@ public sealed class NavigationService
 
     public void NavigateTo(string route)
     {
+        if (string.Equals(CurrentRoute, route, StringComparison.Ordinal))
+        {
+            Logger.ZLogDebug($"Already at route: {route}, skipping navigation");
+            return;
+        }
+
         var node = RouteTree.Root;
 
-        while (node.Children.FirstOrDefault(x => route.StartsWith(x.Path)) is { } child)
+        while (node.Children.FirstOrDefault(x => route.StartsWith(x.Path, StringComparison.Ordinal)) is { } child)
         {
             child.Select?.Invoke();
             node = child;
         }
 
+        CurrentRoute = route;
         Logger.ZLogInformation($"Navigated to: {route}");
     }
 
