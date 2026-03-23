@@ -8,7 +8,7 @@ public static class CoreServiceExtensions
 {
     extension(IServiceCollection services)
     {
-        public void RegisterLogger(string logFileName)
+        public void RegisterLogger(string logFilePath)
         {
             services.AddSingleton<LiveLogProcessor>();
             services.AddLogging(x =>
@@ -28,7 +28,7 @@ public static class CoreServiceExtensions
                 {
                     options.FileShared = true;
                     options.UseFormatter(() => new LogFileFormatter());
-                    return Path.Combine("Logs", logFileName);
+                    return logFilePath;
                 });
                 x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<LiveLogProcessor>());
             });
