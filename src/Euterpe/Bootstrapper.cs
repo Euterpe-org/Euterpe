@@ -82,7 +82,7 @@ internal static class Bootstrapper
         {
             try
             {
-                var server = new NamedPipeServerStream(PipeName, PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
+                var server = new NamedPipeServerStream(PipeName, PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly);
                 await using (server.ConfigureAwait(false))
                 {
                     await server.WaitForConnectionAsync(ct).ConfigureAwait(false);
