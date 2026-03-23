@@ -31,8 +31,8 @@ public sealed partial class DeepLinkService
         ActivateMainWindow(true);
 
         var action = parsed.Host;
-        var path = parsed.AbsolutePath.TrimStart('/');
-        var query = parsed.Query.TrimStart('?');
+        var path = Uri.UnescapeDataString(parsed.AbsolutePath.TrimStart('/'));
+        var query = Uri.UnescapeDataString(parsed.Query.TrimStart('?'));
 
         HandleActionAsync(action, path, query).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {uri}"));
     }
