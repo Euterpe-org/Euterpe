@@ -3,7 +3,7 @@ namespace Euterpe.Generators;
 [Generator(LanguageNames.CSharp)]
 public sealed class LazyProxyGenerator : IncrementalGeneratorBase
 {
-    private const string LazyProxyAttributeName = "Euterpe.Common.Attributes.LazyProxyAttribute";
+    private const string LazyProxyAttributeName = "Euterpe.Shared.Attributes.LazyProxyAttribute";
 
     protected override string ExpectedRootNamespace => EuterpeCoreNamespace;
 

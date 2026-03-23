@@ -14,7 +14,7 @@ internal sealed class LogConsoleFormatter : IZLoggerFormatter
         var logLevel = (int)entry.LogInfo.LogLevel;
         utf8Writer.Append($"{LevelColors[logLevel]}[{LevelAbbreviations[logLevel]}]{Reset}");
         utf8Writer.AppendUtf8("("u8);
-        utf8Writer.AppendUtf8(entry.LogInfo.Category.Utf8Span[8..]);
+        utf8Writer.AppendUtf8(entry.LogInfo.Category.Utf8Span);
         utf8Writer.AppendUtf8(") "u8);
         utf8Writer.Append(entry.ToString());
 

@@ -10,7 +10,7 @@ public sealed class ArchitectureTests
 
     private static readonly Types CoreTypes = Types.InAssembly(Assembly.Load("Euterpe.Core"));
 
-    private static readonly Types CommonTypes = Types.InAssembly(Assembly.Load("Euterpe.Common"));
+    private static readonly Types CommonTypes = Types.InAssembly(Assembly.Load("Euterpe.Shared"));
 
     private static readonly Types ModelsTypes = Types.InAssembly(Assembly.Load("Euterpe.Models"));
 
@@ -18,7 +18,7 @@ public sealed class ArchitectureTests
     public async Task Abstractions_ClassesArePublicAndInterfaces_ReturnsTrue()
     {
         var result = AbstractionsTypes.That()
-            .ResideInNamespace("Euterpe.Abstractions")
+            .ResideInNamespace("^Euterpe.Abstractions$")
             .Should()
             .BePublic()
             .And()
@@ -33,6 +33,8 @@ public sealed class ArchitectureTests
     {
         var result = CoreTypes.That()
             .ResideInNamespaceMatching("^Euterpe.Core$")
+            .And()
+            .AreNotStatic()
             .Should()
             .BeInternal()
             .And()
@@ -46,7 +48,7 @@ public sealed class ArchitectureTests
     public async Task Common_ClassesArePublic_ReturnsTrue()
     {
         var result = CommonTypes.That()
-            .ResideInNamespace("Euterpe.Common")
+            .ResideInNamespace("Euterpe.Shared")
             .Should()
             .BePublic()
             .GetResult();

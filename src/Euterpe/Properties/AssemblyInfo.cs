@@ -1,6 +1,6 @@
 using System.Reflection;
 
-[assembly: AssemblyCopyright(CopyRight)]
+[assembly: AssemblyCopyright(Copyright)]
 [assembly: AssemblyCompany(Company)]
 [assembly: AssemblyDescription(Description)]
 [assembly: AssemblyFileVersion(AppVersion)]

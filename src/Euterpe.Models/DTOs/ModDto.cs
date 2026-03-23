@@ -45,7 +45,8 @@ public sealed partial class ModDto : ObservableObject
     public partial bool IsDisabled { get; set; } = true;
 
     public bool IsLocal => FileNameWithoutExtension is not null;
-    public bool IsInstallable => !IsLocal && State is not ModState.Incompatible;
+    public bool HasDownloadSource => !FileName.IsNullOrEmpty();
+    public bool IsInstallable => !IsLocal && HasDownloadSource && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is ModState.Modified;
 
     [ObservableProperty]

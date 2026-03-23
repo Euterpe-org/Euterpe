@@ -16,9 +16,14 @@ public sealed class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         ApplyConfig();
+
+        var deepLinkService = Resolve<DeepLinkService>();
+        deepLinkService.SetupAsync().SafeFireAndForget();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Resolve<MainWindow>();
+            deepLinkService.HandleStartupArgs(desktop.Args!);
             HandleDesktopExit(desktop);
         }
 

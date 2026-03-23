@@ -1,38 +1,57 @@
-﻿namespace Euterpe.Core.Extensions;
+﻿using Euterpe.Core.Http.Handlers;
+using Euterpe.Core.JsonContexts;
+using Refit;
+
+namespace Euterpe.Core.Extensions;
 
 public static class CoreServiceExtensions
 {
-    public static void RegisterLogger(this IServiceCollection services, string logFileName)
+    extension(IServiceCollection services)
     {
-        services.AddSingleton<LiveLogProcessor>();
-        services.AddLogging(x =>
+        public void RegisterLogger(string logFilePath)
         {
-            x.ClearProviders();
+            services.AddSingleton<LiveLogProcessor>();
+            services.AddLogging(x =>
+            {
+                x.ClearProviders();
 #if DEBUG
-            x.SetMinimumLevel(LogLevel.Trace);
-            x.AddZLoggerConsole(options =>
-            {
-                options.ConfigureEnableAnsiEscapeCode = true;
-                options.UseFormatter(() => new LogConsoleFormatter());
-            });
+                x.SetMinimumLevel(LogLevel.Debug);
+                x.AddZLoggerConsole(options =>
+                {
+                    options.ConfigureEnableAnsiEscapeCode = true;
+                    options.UseFormatter(() => new LogConsoleFormatter());
+                });
 #else
-            x.SetMinimumLevel(LogLevel.Information);
+                x.SetMinimumLevel(LogLevel.Information);
 #endif
-            x.AddZLoggerFile((options, _) =>
-            {
-                options.FileShared = true;
-                options.UseFormatter(() => new LogFileFormatter());
-                return Path.Combine("Logs", logFileName);
+                x.AddZLoggerFile((options, _) =>
+                {
+                    options.FileShared = true;
+                    options.UseFormatter(() => new LogFileFormatter());
+                    return logFilePath;
+                });
+                x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<LiveLogProcessor>());
             });
-            x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<LiveLogProcessor>());
-        });
+        }
+
+        public void RegisterHttpClients()
+        {
+            services.AddTransient<XRequestIdHandler>();
+            services.AddHttpClient();
+            services
+                .AddRefitClient<ITelemetryApiClient>(new RefitSettings
+                {
+                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
+                }, nameof(EuterpeApi.Telemetry))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Telemetry.BasePath}"))
+                .AddHttpMessageHandler<XRequestIdHandler>();
+        }
     }
 
     extension(ContainerBuilder builder)
     {
         public void RegisterInstances()
         {
-            builder.RegisterInstance(new HttpClient());
             builder.RegisterInstance(new DownloadService(
                     new DownloadConfiguration
                     {
@@ -51,6 +70,7 @@ public static class CoreServiceExtensions
 
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();

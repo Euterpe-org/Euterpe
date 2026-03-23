@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
-    xmlns:models="using:Euterpe.Models.Controls">
+    xmlns:models="using:Euterpe.Styles.Models">
     <Design.PreviewWith>
         <euterpe:NaviPanelListControl />
     </Design.PreviewWith>

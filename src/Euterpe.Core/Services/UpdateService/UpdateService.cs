@@ -2,8 +2,6 @@ namespace Euterpe.Core;
 
 internal sealed partial class UpdateService : IUpdateService
 {
-    private const string TagsRSSUrl = ReleasesBaseUrl + "releases.atom";
-
     private static readonly SemVersion _currentVersion = SemVersion.Parse(AppVersion);
 
     public async Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
@@ -24,10 +22,10 @@ internal sealed partial class UpdateService : IUpdateService
     #region Injections
 
     [UsedImplicitly]
-    public required HttpClient Client { get; init; }
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required HttpClient Client { get; init; }
 
     [UsedImplicitly]
     public required IDownloadManager DownloadManager { get; init; }

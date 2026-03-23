@@ -2,6 +2,6 @@ namespace Euterpe.Abstractions;
 
 public interface ITelemetryService
 {
-    Task TrackVisitorAsync();
-    Task TrackDownloadAsync(string modName, string modAuthor);
+    Task TrackSessionAsync();
+    Task TrackModDownloadAsync(string modName, string modAuthor);
 }

@@ -2,8 +2,6 @@
 
 public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 {
-    private const int MaxRetries = 3;
-
     [ObservableProperty]
     public partial InstallStatus MelonLoaderInstallStatus { get; set; }
 
@@ -29,30 +27,8 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         {
             MelonLoaderInstallStatus = InstallStatus.Downloading;
 
-            await EnsureValidFileAsync(
-                Config.MelonLoaderZipPath,
-                MelonLoaderZipHash,
-                DownloadManager.DownloadMelonLoaderAsync,
-                "MelonLoader").ConfigureAwait(true);
-
-            await EnsureValidFileAsync(
-                Config.UnityDependencyZipPath,
-                UnityDependencyZipHash,
-                DownloadManager.DownloadUnityDependencyAsync,
-                "UnityDependency").ConfigureAwait(true);
-
-            await EnsureValidFileAsync(
-                Config.Cpp2ILExecutablePath,
-                Cpp2ILExecutableHash,
-                DownloadManager.DownloadCpp2ILExecutableAsync,
-                "Cpp2IL").ConfigureAwait(true);
-
-            await EnsureValidFileAsync(
-                Config.Cpp2ILPluginPath,
-                Cpp2ILPluginHash,
-                DownloadManager.DownloadCpp2ILPluginAsync,
-                "Cpp2IL Plugin").ConfigureAwait(true);
-
+            var progress = new Progress<double>(value => DownloadProgress = value);
+            await DependencyAcquireService.AcquireForMelonLoaderAsync(OnDownloadStarted, progress).ConfigureAwait(true);
             await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
@@ -63,7 +39,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        Config.MelonLoaderVersion = MelonLoaderVersion;
+        Config.MelonLoaderVersion = DependencyConstants.MelonLoader.Version;
         MelonLoaderInstallStatus = InstallStatus.Installed;
     }
 
@@ -76,51 +52,6 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         Logger.ZLogInformation($"MelonLoader has been successfully uninstalled");
     }
 
-    private async Task EnsureValidFileAsync(
-        string filePath,
-        string expectedHash,
-        DownloadFunc downloadFunc,
-        string displayName)
-    {
-        if (File.Exists(filePath))
-        {
-            var hash = await SHA512Utils.HexFromPathAsync(filePath).ConfigureAwait(false);
-            if (hash == expectedHash)
-            {
-                Logger.ZLogInformation($"{displayName} already exists and hash matches, skipping download");
-                return;
-            }
-
-            Logger.ZLogInformation($"{displayName} hash mismatch, re-downloading...");
-        }
-        else
-        {
-            Logger.ZLogInformation($"{displayName} file does not exist, downloading...");
-        }
-
-        for (var attempt = 1; attempt <= MaxRetries; attempt++)
-        {
-            var success = await downloadFunc(OnDownloadStarted, OnDownloadProgressChanged).ConfigureAwait(false);
-            var hash = await SHA512Utils.HexFromPathAsync(filePath).ConfigureAwait(false);
-
-            if (!success)
-            {
-                Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: Download of {displayName} failed");
-            }
-            else if (hash != expectedHash)
-            {
-                Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: {displayName} hash mismatch after download\r\nExpected: {expectedHash}\r\nActual: {hash}");
-            }
-            else
-            {
-                Logger.ZLogInformation($"{displayName} download completed successfully");
-                return;
-            }
-        }
-
-        throw new InvalidOperationException($"Failed to download a valid {displayName} after {MaxRetries} attempts.");
-    }
-
     private void OnDownloadStarted(object? sender, DownloadStartedEventArgs args)
     {
         var fileName = Path.GetFileName(args.FileName);
@@ -129,23 +60,13 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
     }
 
-    private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs args)
-    {
-        DownloadProgress = args.ProgressPercentage;
-    }
-
-    private delegate Task<bool> DownloadFunc(
-        EventHandler<DownloadStartedEventArgs> onDownloadStarted,
-        EventHandler<DownloadProgressChangedEventArgs> onDownloadProgressChanged,
-        CancellationToken cancellationToken = default);
-
     #region Injections
 
     [UsedImplicitly]
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
+    public required IDependencyAcquireService DependencyAcquireService { get; init; }
 
     [UsedImplicitly]
     public required ILocalService LocalService { get; init; }

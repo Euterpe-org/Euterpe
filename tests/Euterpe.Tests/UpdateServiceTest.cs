@@ -13,7 +13,6 @@ public sealed class UpdateServiceTest : IDisposable
     private const string HigherStableVersion = "999.0.0";
     private const string HigherPrereleaseVersion = "999.0.1-rc1";
     private const string TagsRSSUrl = "https://releases.euterpe-org.com/releases.atom";
-
     private readonly MockLogger<UpdateService> _logger = Mock.Logger<UpdateService>();
     private readonly MockHttpHandler _mockHttp = new();
     private Config Config { get; } = new();
@@ -37,6 +36,7 @@ public sealed class UpdateServiceTest : IDisposable
             MessageBoxService = messageBoxService ?? Mock.Of<IMessageBoxService>().Object,
             PlatformService = platformService ?? Mock.Of<IPlatformService>().Object
         };
+
 
     [Test]
     public async Task CheckForUpdatesAsync_FindStable_LowerStableVersion_ShouldNotFindUpdate()

@@ -64,6 +64,9 @@ public sealed partial class Config : ObservableObject
     [ObservableProperty]
     public partial string? MelonLoaderVersion { get; set; }
 
+    [JsonIgnore]
+    public SemVersion? MelonLoaderSemVersion { get; private set; }
+
     // Ignored Paths
     [JsonIgnore]
     public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
@@ -100,6 +103,9 @@ public sealed partial class Config : ObservableObject
 
     [JsonIgnore]
     public string Cpp2ILPluginPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, Path.Combine("Cpp2IL", "Plugins", "Cpp2IL.Plugin.StrippedCodeRegSupport.dll"));
+
+    partial void OnMelonLoaderVersionChanged(string? value) =>
+        MelonLoaderSemVersion = SemVersion.TryParse(value, out var version) ? version : null;
 
     private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
         !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;

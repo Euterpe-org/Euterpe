@@ -7,6 +7,8 @@ namespace Euterpe.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
 internal sealed partial class LinuxService : IPlatformService
 {
+    private const string DeepLinkDesktopFileName = "com.euterpe_org.euterpe.desktop";
+
     private static readonly string[] LinuxPaths = new[]
         {
             ".local/share/Steam",
@@ -19,6 +21,47 @@ internal sealed partial class LinuxService : IPlatformService
 
     public string OsString => "linux";
     public string UpdaterFileName => "Updater";
+
+    public async Task SetupDeepLinkAsync(string processPath)
+    {
+        try
+        {
+            var applicationsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "applications");
+            var desktopFilePath = Path.Combine(applicationsPath, DeepLinkDesktopFileName);
+            Directory.CreateDirectory(applicationsPath);
+
+            var content =
+                $"""
+                 [Desktop Entry]
+                 Type=Application
+                 Name=Euterpe URL Handler
+                 Exec="{processPath.EscapeShellArgument()}" %u
+                 NoDisplay=true
+                 MimeType=x-scheme-handler/{IPlatformService.DeepLinkScheme};
+                 Terminal=false
+                 """;
+
+            await File.WriteAllTextAsync(desktopFilePath, content).ConfigureAwait(false);
+
+            var result = await Cli.Wrap("xdg-mime")
+                .WithArguments(["default", DeepLinkDesktopFileName, $"x-scheme-handler/{IPlatformService.DeepLinkScheme}"])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (result.ExitCode is not 0)
+            {
+                Logger.ZLogWarning($"xdg-mime exited with code {result.ExitCode}: {result.StandardError}");
+                return;
+            }
+
+            Logger.ZLogInformation($"Registered deep link protocol on Linux with process path: {processPath}");
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to register deep link protocol on Linux");
+        }
+    }
 
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder)
     {
@@ -50,7 +93,7 @@ internal sealed partial class LinuxService : IPlatformService
     {
         const string relativePath = @"steamapps/common/Muse Dash";
 
-        if (GamePathService.TryGetGameFolderFromVdf(MuseDashGameId, relativePath, out gameFolder))
+        if (GamePathService.TryGetGameFolderFromVdf(GameConstants.MuseDashSteamAppId, relativePath, out gameFolder))
         {
             return true;
         }
@@ -139,7 +182,7 @@ internal sealed partial class LinuxService : IPlatformService
         try
         {
             var result = await Cli.Wrap("protontricks")
-                .WithArguments([MuseDashGameId, "list-installed"])
+                .WithArguments([GameConstants.MuseDashSteamAppId, "list-installed"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -171,7 +214,7 @@ internal sealed partial class LinuxService : IPlatformService
         try
         {
             var result = await Cli.Wrap("protontricks")
-                .WithArguments([MuseDashGameId, "dotnetdesktop6"])
+                .WithArguments([GameConstants.MuseDashSteamAppId, "dotnetdesktop6"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);

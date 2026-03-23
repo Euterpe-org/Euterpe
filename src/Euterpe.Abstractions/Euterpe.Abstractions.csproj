@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+        <ProjectReference Include="..\Euterpe.Contracts\Euterpe.Contracts.csproj"/>
         <ProjectReference Include="..\Euterpe.Models\Euterpe.Models.csproj"/>
     </ItemGroup>
 
@@ -9,6 +10,7 @@
         <PackageReference Include="Downloader"/>
         <PackageReference Include="DynamicData"/>
         <PackageReference Include="Irihi.Ursa"/>
+        <PackageReference Include="Refit"/>
     </ItemGroup>
 
 </Project>

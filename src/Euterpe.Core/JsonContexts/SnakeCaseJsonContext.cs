@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
-using Euterpe.Models.Statistics;
+using Euterpe.Contracts.Telemetry;
 
 namespace Euterpe.Core.JsonContexts;
 
 [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower)]
-[JsonSerializable(typeof(GitHubRelease[]))]
-[JsonSerializable(typeof(RecordVisitorRequest))]
-[JsonSerializable(typeof(RecordDownloadRequest))]
+[JsonSerializable(typeof(SessionEvent))]
+[JsonSerializable(typeof(ModDownloadEvent))]
 internal sealed partial class SnakeCaseJsonContext : JsonSerializerContext;

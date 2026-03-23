@@ -1,9 +1,9 @@
 <u:UrsaWindow
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:constants="using:Euterpe.Common"
-    xmlns:controls="using:Euterpe.Models.Controls"
+    xmlns:constants="using:Euterpe.Shared"
     xmlns:converters="using:Euterpe.Converters"
+    xmlns:models="using:Euterpe.Styles.Models"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels"
     x:Class="Euterpe.Views.MainWindow"
@@ -11,6 +11,7 @@
     Height="700"
     MinHeight="600"
     MinWidth="1100"
+    Title="Euterpe"
     Width="1150"
     WindowStartupLocation="CenterScreen">
 
@@ -40,11 +41,6 @@
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
                 <u:NavMenu.Styles>
-                    <Style
-                        x:DataType="controls:NavItem"
-                        Selector="u|NavMenuItem">
-                        <Setter Property="IsSeparator" Value="{Binding IsSeparator, Mode=OneWay}" />
-                    </Style>
                     <Style
                         Selector="u|NavMenuItem /template/ Border">
                         <Setter Property="CornerRadius" Value="10" />
@@ -91,7 +87,7 @@
 
                 <u:NavMenu.HeaderTemplate>
                     <DataTemplate
-                        x:DataType="controls:NavItem">
+                        x:DataType="models:NavItem">
                         <StackPanel
                             Orientation="Horizontal">
                             <TextBlock

@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Euterpe.Models.Controls;
+using Euterpe.Styles.Models;
 
 namespace Euterpe.Styles.TemplatedControls;
 

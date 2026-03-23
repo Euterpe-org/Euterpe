@@ -1,7 +1,7 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Euterpe.Models.Controls"
+    xmlns:models="using:Euterpe.Styles.Models"
     xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
 
     <Design.PreviewWith>
@@ -27,7 +27,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate
-                                x:DataType="controls:DropDownButtonItem">
+                                x:DataType="models:DropDownButtonItem">
 
                                 <DropDownButton
                                     Content="{Binding Text.Value, Mode=OneWay}"
@@ -36,7 +36,7 @@
 
                                     <DropDownButton.Styles>
                                         <Style
-                                            x:DataType="controls:DropDownMenuItem"
+                                            x:DataType="models:DropDownMenuItem"
                                             Selector="MenuItem">
                                             <Setter Property="Header" Value="{Binding Text, Mode=OneTime}" />
                                             <Setter Property="Command" Value="{Binding Command, Mode=OneTime}" />
@@ -50,7 +50,7 @@
                                             Placement="BottomEdgeAlignedRight">
                                             <MenuFlyout.ItemTemplate>
                                                 <DataTemplate
-                                                    x:DataType="controls:DropDownMenuItem">
+                                                    x:DataType="models:DropDownMenuItem">
                                                     <MenuItem />
                                                 </DataTemplate>
                                             </MenuFlyout.ItemTemplate>

@@ -28,7 +28,6 @@ public sealed partial class HomePageViewModel : ViewModelBase
         };
     }
 
-    [UsedImplicitly]
     partial void OnSelectedGameModeIndexChanged(int value) => Config.GameMode = (GameMode)value;
 
     #region Injections
