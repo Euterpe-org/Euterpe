@@ -8,7 +8,7 @@ public sealed partial class AppViewModel : ViewModelBase
 
         await SettingService.LoadAsync().ConfigureAwait(false);
 #if PUBLISH
-        TelemetryService.TrackVisitorAsync().SafeFireAndForget();
+        TelemetryService.TrackSessionAsync().SafeFireAndForget();
 #endif
 
         Logger.ZLogInformation($"{nameof(AppViewModel)} Initialized");
