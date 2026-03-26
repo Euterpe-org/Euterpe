@@ -1,18 +1,18 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
+    xmlns:e="https://github.com/Euterpe-org/Euterpe">
 
     <Design.PreviewWith>
         <Border
             Padding="20">
-            <euterpe:Difficulty
+            <e:Difficulty
                 Text="Text" />
         </Border>
     </Design.PreviewWith>
 
     <Style
-        Selector="euterpe|Difficulty">
+        Selector="e|Difficulty">
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel

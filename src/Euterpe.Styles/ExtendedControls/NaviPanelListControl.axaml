@@ -1,14 +1,14 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:models="using:Euterpe.Styles.Models">
     <Design.PreviewWith>
-        <euterpe:NaviPanelListControl />
+        <e:NaviPanelListControl />
     </Design.PreviewWith>
 
     <Style
-        Selector="euterpe|NaviPanelListControl">
+        Selector="e|NaviPanelListControl">
         <Setter Property="Template">
             <ControlTemplate>
                 <ListBox

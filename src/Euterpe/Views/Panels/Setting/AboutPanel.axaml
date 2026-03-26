@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:constants="using:Euterpe.Shared"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Euterpe.Styles.Models"
@@ -221,7 +221,7 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate
                                             x:DataType="models:ContributorCardItem">
-                                            <euterpe:ContributorCardControl
+                                            <e:ContributorCardControl
                                                 Avatar="{Binding Avatar, Mode=OneTime}"
                                                 ButtonCommand="{Binding $parent[UserControl].DataContext.OpenUrlCommand, Mode=OneTime}"
                                                 ContributorDescription="{Binding Description, Mode=OneTime}"

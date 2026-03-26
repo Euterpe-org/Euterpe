@@ -1,17 +1,17 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
+    xmlns:e="https://github.com/Euterpe-org/Euterpe">
     <Design.PreviewWith>
         <Menu
             Height="400"
             Width="500">
-            <euterpe:DifficultyFilter />
+            <e:DifficultyFilter />
         </Menu>
     </Design.PreviewWith>
 
     <Style
-        Selector="euterpe|DifficultyFilter">
+        Selector="e|DifficultyFilter">
         <Setter Property="Height" Value="48" />
         <Setter Property="MinWidth" Value="112" />
         <Setter Property="Padding" Value="0" />

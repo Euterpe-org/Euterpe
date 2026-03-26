@@ -1,15 +1,15 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:models="using:Euterpe.Styles.Models"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe">
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:models="using:Euterpe.Styles.Models">
 
     <Design.PreviewWith>
-        <euterpe:NaviButtonsControl />
+        <e:NaviButtonsControl />
     </Design.PreviewWith>
 
     <Style
-        Selector="euterpe|NaviButtonsControl">
+        Selector="e|NaviButtonsControl">
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel

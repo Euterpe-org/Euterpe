@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Setting"
@@ -20,7 +20,7 @@
         Classes="ContentListRoot">
 
         <!--  Language  -->
-        <euterpe:ContentListItem
+        <e:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_Language}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}">
             <StackPanel
@@ -33,7 +33,7 @@
                     Command="{Binding ApplyLanguageCommand}"
                     Content="{Localize {x:Static loc:XAMLLiteral.Button_Apply}}" />
             </StackPanel>
-        </euterpe:ContentListItem>
+        </e:ContentListItem>
 
     </StackPanel>
 

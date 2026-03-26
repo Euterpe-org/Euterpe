@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Setting"
@@ -20,28 +20,28 @@
         Classes="ContentListRoot">
 
         <!--  Show Console  -->
-        <euterpe:ContentListItem
+        <e:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowConsole}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowConsole}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
-        </euterpe:ContentListItem>
+        </e:ContentListItem>
 
         <!--  Show Start Screen  -->
-        <euterpe:ContentListItem
+        <e:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowStartScreen}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowStartScreen}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.ShowStartScreen, Mode=TwoWay}" />
-        </euterpe:ContentListItem>
+        </e:ContentListItem>
 
         <!--  Always Show ScrollBar  -->
-        <euterpe:ContentListItem
+        <e:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_AlwaysShowScrollBar}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=TwoWay}" />
-        </euterpe:ContentListItem>
+        </e:ContentListItem>
 
     </StackPanel>
 

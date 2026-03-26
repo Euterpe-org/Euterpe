@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Pages"
     x:Class="Euterpe.Views.Pages.SettingPage"
@@ -21,7 +21,7 @@
             Grid.Row="0"
             Classes="WinMainNav">
             <Panel>
-                <euterpe:NaviPanelListControl
+                <e:NaviPanelListControl
                     ItemsSource="{Binding NavItems, Mode=OneTime}"
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
             </Panel>

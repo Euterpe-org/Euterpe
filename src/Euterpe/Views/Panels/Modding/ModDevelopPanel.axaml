@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Modding"
@@ -31,7 +31,7 @@
             </StackPanel.Styles>
 
             <!--  Development Environment Section  -->
-            <euterpe:ContentListItem
+            <e:ContentListItem
                 Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_DevelopmentEnvironment}}">
                 <StackPanel
                     Margin="5,0,10,0"
@@ -208,10 +208,10 @@
                         </Button>
                     </Grid>
                 </StackPanel>
-            </euterpe:ContentListItem>
+            </e:ContentListItem>
 
             <!--  Mod Submission Section  -->
-            <euterpe:ContentListItem
+            <e:ContentListItem
                 Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_SubmitMod}}">
                 <Button
                     Classes="Transparent Card"
@@ -255,10 +255,10 @@
                         </Grid>
                     </Border>
                 </Button>
-            </euterpe:ContentListItem>
+            </e:ContentListItem>
 
             <!--  Recommended IDEs Section  -->
-            <euterpe:ContentListItem
+            <e:ContentListItem
                 Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_RecommendedIDEs}}">
 
                 <!--  3-column grid for IDE options  -->
@@ -354,7 +354,7 @@
                     </Button>
 
                 </Grid>
-            </euterpe:ContentListItem>
+            </e:ContentListItem>
         </StackPanel>
     </ScrollViewer>
 

@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:euterpe="https://github.com/Euterpe-org/Euterpe"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Setting"
@@ -18,12 +18,12 @@
 
     <StackPanel
         Classes="ContentListRoot">
-        <euterpe:ContentListItem
+        <e:ContentListItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_IgnoreException}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_IgnoreException}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.IgnoreException, Mode=TwoWay}" />
-        </euterpe:ContentListItem>
+        </e:ContentListItem>
     </StackPanel>
 
 </UserControl>
