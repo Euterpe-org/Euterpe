@@ -21,51 +21,53 @@
             Source="avares://Euterpe.Styles/Styles/Panels/AppLogPanelStyles.axaml" />
     </UserControl.Styles>
 
-    <Border
-        Classes="LogContainer">
-        <ListBox
-            x:Name="LogListBox"
-            Classes="LogList"
-            ItemsSource="{Binding LogMessagesView}">
-            <ListBox.ItemTemplate>
-                <DataTemplate
-                    x:DataType="logger:LogMessage">
-                    <Grid
-                        Classes="LogEntry"
-                        ColumnDefinitions="Auto, Auto, *">
+    <ScrollViewer>
+        <Border
+            Classes="LogContainer">
+            <ListBox
+                x:Name="LogListBox"
+                Classes="LogList"
+                ItemsSource="{Binding LogMessagesView}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="logger:LogMessage">
+                        <Grid
+                            Classes="LogEntry"
+                            ColumnDefinitions="Auto, Auto, *">
 
-                        <!--  Timestamp  -->
-                        <TextBlock
-                            Grid.Column="0"
-                            Classes="LogTimestamp"
-                            Text="{Binding Timestamp, StringFormat='{}{0:HH:mm:ss.fff}', Mode=OneTime}" />
-
-                        <!--  Level Badge  -->
-                        <Border
-                            Grid.Column="1"
-                            Classes="LogLevelBadge"
-                            Classes.CRT="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Critical}, Mode=OneTime}"
-                            Classes.DBG="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Debug}, Mode=OneTime}"
-                            Classes.ERR="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Error}, Mode=OneTime}"
-                            Classes.INF="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Information}, Mode=OneTime}"
-                            Classes.TRC="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Trace}, Mode=OneTime}"
-                            Classes.WRN="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Warning}, Mode=OneTime}">
+                            <!--  Timestamp  -->
                             <TextBlock
-                                Classes="LogLevelText"
-                                Text="{Binding LogLevelAbbreviation, Mode=OneTime}" />
-                        </Border>
+                                Grid.Column="0"
+                                Classes="LogTimestamp"
+                                Text="{Binding Timestamp, StringFormat='{}{0:HH:mm:ss.fff}', Mode=OneTime}" />
 
-                        <!--  Message  -->
-                        <TextBlock
-                            Grid.Column="2"
-                            Classes="LogMessage"
-                            Text="{Binding Message, Mode=OneTime}"
-                            TextWrapping="Wrap" />
+                            <!--  Level Badge  -->
+                            <Border
+                                Grid.Column="1"
+                                Classes="LogLevelBadge"
+                                Classes.CRT="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Critical}, Mode=OneTime}"
+                                Classes.DBG="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Debug}, Mode=OneTime}"
+                                Classes.ERR="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Error}, Mode=OneTime}"
+                                Classes.INF="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Information}, Mode=OneTime}"
+                                Classes.TRC="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Trace}, Mode=OneTime}"
+                                Classes.WRN="{Binding LogLevel, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static log:LogLevel.Warning}, Mode=OneTime}">
+                                <TextBlock
+                                    Classes="LogLevelText"
+                                    Text="{Binding LogLevelAbbreviation, Mode=OneTime}" />
+                            </Border>
 
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Border>
+                            <!--  Message  -->
+                            <TextBlock
+                                Grid.Column="2"
+                                Classes="LogMessage"
+                                Text="{Binding Message, Mode=OneTime}"
+                                TextWrapping="Wrap" />
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </ScrollViewer>
 
 </UserControl>
