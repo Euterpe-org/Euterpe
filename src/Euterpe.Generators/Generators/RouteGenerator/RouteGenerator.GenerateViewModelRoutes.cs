@@ -32,7 +32,7 @@ public sealed partial class RouteGenerator
         }
 
         sb.ResetIndent();
-        sb.AppendLine("        ];");
+        sb.AppendLine("    ];");
         sb.AppendLine();
 
         sb.AppendLine($$"""
@@ -52,6 +52,7 @@ public sealed partial class RouteGenerator
         sb.AppendLine("        }.ToFrozenDictionary();");
 
         sb.AppendLine($$"""
+
                             {{GetGeneratedCodeAttribute(nameof(RouteGenerator))}}
                             protected override global::Avalonia.Controls.Control ResolveRoute(string route)
                                 => RouteLookup[route](NavigationService);
