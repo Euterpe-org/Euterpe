@@ -1,0 +1,55 @@
+<u:SplashWindow
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:constants="using:Euterpe.Shared"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:Euterpe.ViewModels.Windows"
+    x:Class="Euterpe.Views.Windows.MainSplashWindow"
+    x:DataType="vm:MainSplashWindowViewModel"
+    Title="Euterpe"
+    Width="360"
+    Height="280"
+    CanResize="False"
+    CountDown="{x:Null}"
+    Icon="/Assets/Icon.ico"
+    WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <vm:MainSplashWindowViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="*, Auto, Auto">
+
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Image
+                Height="64"
+                HorizontalAlignment="Center"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="/Assets/Logo.webp" />
+            <TextBlock
+                Margin="0,8,0,0"
+                HorizontalAlignment="Center"
+                FontSize="14"
+                Foreground="{DynamicResource SemiColorText2}"
+                Text="{x:Static constants:BuildInfo.DisplayVersion}" />
+        </StackPanel>
+
+        <ProgressBar
+            Grid.Row="1"
+            Margin="24,0"
+            IsIndeterminate="True" />
+
+        <TextBlock
+            Grid.Row="2"
+            Margin="0,12,0,20"
+            HorizontalAlignment="Center"
+            FontSize="12"
+            Foreground="{DynamicResource SemiColorText3}"
+            Text="Initializing..." />
+
+    </Grid>
+
+</u:SplashWindow>

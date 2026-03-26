@@ -1,22 +1,28 @@
-namespace Euterpe.ViewModels;
+using Irihi.Avalonia.Shared.Contracts;
 
-public sealed partial class MainWindowViewModel : NavViewModelBase
+namespace Euterpe.ViewModels.Windows;
+
+public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 {
+    public void Close()
+    {
+        RequestClose?.Invoke(this, null);
+    }
+
+    public event EventHandler<object?>? RequestClose;
+
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(true);
 
-        await SettingService.ValidateAsync().ConfigureAwait(true);
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
-        await LocalService.ReadGameInformationAsync().ConfigureAwait(false);
-        LocalService.ReadMelonLoaderVersion();
+        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(true);
 
-        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(false);
+        Logger.ZLogInformation($"{nameof(MainSplashWindowViewModel)} Initialized");
 
-        NavigationService.Ready.Open();
-        Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
+        Close();
     }
 
     private async Task CheckAndInstallDotNetRuntimeAsync()
@@ -43,25 +49,15 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
-
-    [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
-
-    [UsedImplicitly]
-    public required LocalizationService LocalizationService { get; init; }
-
-    [UsedImplicitly]
-    public required ILogger<MainWindowViewModel> Logger { get; init; }
+    public required ILogger<MainSplashWindowViewModel> Logger { get; init; }
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
+
 #if RELEASE
     [UsedImplicitly]
     public required IUpdateService UpdateService { get; init; }
 #endif
-    [UsedImplicitly]
-    public required ISettingService SettingService { get; init; }
 
     #endregion Injections
 }

@@ -14,7 +14,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax { BaseList.Types: var types }
-        && types[0].ToString() is "UserControl" or "Window" or "UrsaWindow" or "Application";
+        && types[0].ToString() is "UserControl" or "SplashWindow" or "UrsaWindow" or "Application";
 
     private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
     {
@@ -29,7 +29,7 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         controlType = baseTypeName switch
         {
             "UserControl" => ControlType.UserControl,
-            "Window" or "UrsaWindow" => ControlType.Window,
+            "SplashWindow" or "UrsaWindow" => ControlType.Window,
             "Application" => ControlType.Application,
             _ => controlType
         };

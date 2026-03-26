@@ -28,8 +28,10 @@ public sealed partial class AppViewModel : ViewModelBase
     [UsedImplicitly]
     public required ISettingService SettingService { get; init; }
 
+#if PUBLISH
     [UsedImplicitly]
     public required ITelemetryService TelemetryService { get; init; }
+#endif
 
     #endregion Injections
 }

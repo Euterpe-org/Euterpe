@@ -22,7 +22,7 @@ public sealed class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = Resolve<MainWindow>();
+            desktop.MainWindow = Resolve<MainSplashWindow>();
             deepLinkService.HandleStartupArgs(desktop.Args!);
             HandleDesktopExit(desktop);
         }

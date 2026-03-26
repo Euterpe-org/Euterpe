@@ -13,6 +13,6 @@ public static partial class ServiceExtensions
         builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
 
         // TopLevel
-        builder.Register<TopLevel>(context => context.Resolve<MainWindow>().GetTopLevel()).SingleInstance();
+        builder.Register<TopLevel>(context => context.Resolve<MainSplashWindow>().GetTopLevel()).SingleInstance();
     }
 }
