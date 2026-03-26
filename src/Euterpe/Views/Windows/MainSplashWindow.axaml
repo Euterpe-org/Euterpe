@@ -6,19 +6,19 @@
     xmlns:vm="using:Euterpe.ViewModels.Windows"
     x:Class="Euterpe.Views.Windows.MainSplashWindow"
     x:DataType="vm:MainSplashWindowViewModel"
+    CanResize="False"
+    Height="280"
+    Icon="/Assets/Icon.ico"
     Title="Euterpe"
     Width="360"
-    Height="280"
-    CanResize="False"
-    CountDown="{x:Null}"
-    Icon="/Assets/Icon.ico"
     WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
         <vm:MainSplashWindowViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="*, Auto, Auto">
+    <Grid
+        RowDefinitions="*, Auto, Auto">
 
         <StackPanel
             Grid.Row="0"
@@ -29,25 +29,26 @@
                 HorizontalAlignment="Center"
                 RenderOptions.BitmapInterpolationMode="HighQuality"
                 Source="/Assets/Logo.webp" />
+
             <TextBlock
-                Margin="0,8,0,0"
-                HorizontalAlignment="Center"
                 FontSize="14"
                 Foreground="{DynamicResource SemiColorText2}"
+                HorizontalAlignment="Center"
+                Margin="0,8,0,0"
                 Text="{x:Static constants:BuildInfo.DisplayVersion}" />
         </StackPanel>
 
         <ProgressBar
             Grid.Row="1"
-            Margin="24,0"
-            IsIndeterminate="True" />
+            IsIndeterminate="True"
+            Margin="24,0" />
 
         <TextBlock
             Grid.Row="2"
-            Margin="0,12,0,20"
-            HorizontalAlignment="Center"
             FontSize="12"
             Foreground="{DynamicResource SemiColorText3}"
+            HorizontalAlignment="Center"
+            Margin="0,12,0,20"
             Text="Initializing..." />
 
     </Grid>
