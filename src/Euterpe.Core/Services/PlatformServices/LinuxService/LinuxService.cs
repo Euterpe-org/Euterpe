@@ -173,38 +173,35 @@ internal sealed partial class LinuxService : IPlatformService
 
     public async Task<bool> CheckDotNetRuntimeInstalledAsync()
     {
+        const string relativePath = $"steamapps/compatdata/{GameConstants.MuseDashSteamAppId}/pfx/drive_c/Program Files/dotnet/shared/Microsoft.WindowsDesktop.App";
+        var runtimeRoot = Path.Combine(Config.SteamFolder, relativePath);
+
+        if (!Directory.Exists(runtimeRoot))
+        {
+            Logger.ZLogInformation($".NET Desktop Runtime root path not found: {runtimeRoot}");
+            return false;
+        }
+
+        var installed = Directory.EnumerateDirectories(runtimeRoot, "6.*", SearchOption.TopDirectoryOnly).Any();
+
+        if (!installed)
+        {
+            Logger.ZLogInformation($".NET Desktop Runtime 6 not found in {runtimeRoot}");
+            return false;
+        }
+
+        Logger.ZLogInformation($".NET Desktop Runtime 6 found in {runtimeRoot}");
+        return true;
+    }
+
+    public async Task<bool> InstallDotNetRuntimeAsync()
+    {
         if (!await CheckProtontricksInstalledAsync().ConfigureAwait(true))
         {
             await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Not_Installed).ConfigureAwait(false);
             return false;
         }
 
-        try
-        {
-            var result = await Cli.Wrap("protontricks")
-                .WithArguments([GameConstants.MuseDashSteamAppId, "list-installed"])
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync()
-                .ConfigureAwait(false);
-
-            if (result.IsSuccess && result.StandardOutput.Contains("dotnetdesktop6"))
-            {
-                Logger.ZLogInformation($".NET Runtime is installed in Muse Dash proton prefix");
-                return true;
-            }
-
-            Logger.ZLogInformation($".NET Runtime is not installed in Muse Dash proton prefix");
-            return false;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to check .NET Runtime installation in Muse Dash proton prefix");
-            return false;
-        }
-    }
-
-    public async Task<bool> InstallDotNetRuntimeAsync()
-    {
         if (!await ConfigureWinePrefixAsync().ConfigureAwait(true))
         {
             await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Wineprefix_Failed).ConfigureAwait(false);
