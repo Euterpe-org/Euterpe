@@ -7,7 +7,7 @@ namespace Euterpe.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
 internal sealed partial class LinuxService : IPlatformService
 {
-    private const string DeepLinkDesktopFileName = "com.euterpe_org.euterpe.desktop";
+    private const string DeepLinkDesktopFileName = "com.euterpe-org.Euterpe.desktop";
     private const string DotNetInstallScriptUrl = "https://dot.net/v1/dotnet-install.sh";
 
     private static readonly string[] LinuxPaths = new[]
@@ -35,9 +35,8 @@ internal sealed partial class LinuxService : IPlatformService
                 $"""
                  [Desktop Entry]
                  Type=Application
-                 Name=Euterpe URL Handler
-                 Exec="{processPath.EscapeShellArgument()}" %u
-                 NoDisplay=true
+                 Name=Euterpe
+                 Exec="{processPath.EscapeDesktopExecArgument()}" %u
                  MimeType=x-scheme-handler/{IPlatformService.DeepLinkScheme};
                  Terminal=false
                  """;

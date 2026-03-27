@@ -51,7 +51,7 @@ public static class StringExtensions
             });
         }
 
-        public string EscapeShellArgument()
+        public string EscapeDesktopExecArgument()
         {
             var span = str.AsSpan();
             if (!span.ContainsAny(ShellSpecialChars))
