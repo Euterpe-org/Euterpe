@@ -1,6 +1,6 @@
 namespace Euterpe.ViewModels;
 
-public partial class ViewModelBase : ObservableObject
+public abstract partial class ViewModelBase : ObservableObject
 {
     #region Injections
 
