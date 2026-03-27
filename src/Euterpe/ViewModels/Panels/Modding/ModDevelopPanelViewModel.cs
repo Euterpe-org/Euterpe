@@ -14,8 +14,8 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
     public override async Task InitializeAsync()
     {
-        DotNetSdkInstalled = await LocalService.CheckDotNetSdkInstalledAsync().ConfigureAwait(true);
-        ModTemplateInstalled = await LocalService.CheckModTemplateInstalledAsync().ConfigureAwait(true);
+        DotNetSdkInstalled = await PlatformService.CheckDotNetSdkInstalledAsync().ConfigureAwait(true);
+        ModTemplateInstalled = await PlatformService.CheckModTemplateInstalledAsync().ConfigureAwait(true);
         EnvVariableSet = PlatformService.CheckPathEnvironmentVariableSet();
 
         Logger.ZLogInformation($"{nameof(ModDevelopPanelViewModel)} Initialized");
@@ -116,9 +116,6 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     }
 
     #region Injections
-
-    [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<ModDevelopPanelViewModel> Logger { get; init; }

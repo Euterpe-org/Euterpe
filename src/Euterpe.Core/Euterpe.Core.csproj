@@ -4,6 +4,7 @@
         <PackageReference Include="AsmResolver.DotNet"/>
         <PackageReference Include="AssetsTools.NET"/>
         <PackageReference Include="AsyncAwaitBestPractices"/>
+        <PackageReference Include="CliWrap"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
             <PrivateAssets>all</PrivateAssets>

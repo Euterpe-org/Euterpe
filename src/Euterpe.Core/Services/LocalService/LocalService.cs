@@ -1,50 +1,10 @@
 using AsmResolver.DotNet;
 using AssetsTools.NET.Extra;
-using CliWrap;
-using CliWrap.Buffered;
 
 namespace Euterpe.Core;
 
 internal sealed partial class LocalService : ILocalService
 {
-    public async Task<bool> CheckDotNetSdkInstalledAsync()
-    {
-        try
-        {
-            var result = await Cli.Wrap("dotnet")
-                .WithArguments("--list-sdks")
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync()
-                .ConfigureAwait(false);
-
-            return result.IsSuccess && !result.StandardOutput.IsNullOrEmpty();
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to check .NET SDK installation");
-            return false;
-        }
-    }
-
-    public async Task<bool> CheckModTemplateInstalledAsync()
-    {
-        try
-        {
-            var result = await Cli.Wrap("dotnet")
-                .WithArguments(["new", "list", "musedashmod"])
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteAsync()
-                .ConfigureAwait(false);
-
-            return result.IsSuccess;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to check Mod Template installation");
-            return false;
-        }
-    }
-
     public async Task<string> GetSteamFolderAsync()
     {
         var path = string.Empty;

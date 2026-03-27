@@ -42,7 +42,7 @@ public interface IPlatformService
     /// <param name="processPath"></param>
     Task SetupDeepLinkAsync(string processPath);
 
-    #region Paths
+    #region Path Discovery
 
     /// <summary>
     ///     Get steam folder path
@@ -85,15 +85,27 @@ public interface IPlatformService
     /// <returns></returns>
     bool CheckIsValidSteamExecPath(string filePath);
 
-    #endregion Paths
+    #endregion Path Discovery
 
-    #region Mod Develop
+    #region Dev Environment
 
     /// <summary>
     ///     Check dotnet runtime installed
     /// </summary>
     /// <returns></returns>
     Task<bool> CheckDotNetRuntimeInstalledAsync();
+
+    /// <summary>
+    ///     Check dotnet SDK installed
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> CheckDotNetSdkInstalledAsync();
+
+    /// <summary>
+    ///     Check mod template installed
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> CheckModTemplateInstalledAsync();
 
     /// <summary>
     ///     Install dotnet runtime
@@ -111,19 +123,13 @@ public interface IPlatformService
     ///     Install Mod Template
     /// </summary>
     /// <returns></returns>
-    Task InstallModTemplateAsync() =>
-        Cli.Wrap("dotnet")
-            .WithArguments(["new", "install", "MuseDash.Mod.Template"])
-            .ExecuteAsync();
+    Task InstallModTemplateAsync();
 
     /// <summary>
     ///     Uninstall Mod Template
     /// </summary>
     /// <returns></returns>
-    Task UninstallModTemplateAsync() =>
-        Cli.Wrap("dotnet")
-            .WithArguments(["new", "uninstall", "MuseDash.Mod.Template"])
-            .ExecuteAsync();
+    Task UninstallModTemplateAsync();
 
     /// <summary>
     ///     Check if MD_DIRECTORY environment variable exists
@@ -137,9 +143,9 @@ public interface IPlatformService
     /// <returns></returns>
     bool SetPathEnvironmentVariable();
 
-    #endregion Mod Develop
+    #endregion Dev Environment
 
-    #region File Operations
+    #region Launcher
 
     /// <summary>
     ///     Reveal file with path
@@ -168,5 +174,5 @@ public interface IPlatformService
     /// <returns></returns>
     Task OpenUriAsync(string uri);
 
-    #endregion File Operations
+    #endregion Launcher
 }
