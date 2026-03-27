@@ -15,6 +15,7 @@ public static partial class ServiceExtensions
         builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
 
         // TopLevel
-        builder.Register(_ => new TopLevelProxy { TopLevelFactory = GetCurrentMainWindow }).SingleInstance();
+        builder.Register<TopLevel>(_ => GetCurrentMainWindow().GetTopLevel()).InstancePerDependency();
+        builder.RegisterType<TopLevelProxy>().SingleInstance();
     }
 }
