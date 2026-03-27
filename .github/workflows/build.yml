@@ -52,6 +52,15 @@ jobs:
         run: |
           dotnet test -c Release --no-build --report-trx
 
+      - name: Upload HTML Test Report
+        if: ${{ github.event_name == 'pull_request' || failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: Test-Report-${{ matrix.platform.name }}-${{ matrix.platform.arch }}
+          path: "**/*-report.html"
+          if-no-files-found: ignore
+          retention-days: 10
+
       - name: List Output Directory
         run: |
           ls -la artifacts/output
