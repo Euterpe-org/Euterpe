@@ -31,6 +31,6 @@ public interface IDownloadManager
     Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default);
     Task DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default);
     Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default);
-    IAsyncEnumerable<Mod?> FetchModListAsync(CancellationToken cancellationToken = default);
-    IAsyncEnumerable<Lib?> FetchLibListAsync(CancellationToken cancellationToken = default);
+    Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default);
+    Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default);
 }

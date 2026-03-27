@@ -12,13 +12,8 @@ internal sealed partial class ModManageService
                 .WhenAllAsync(LocalService.LoadLibFromPathAsync!).ConfigureAwait(false))
             .Select(x => new KeyValuePair<string, LibDto>(x!.Name, x)));
 
-        await foreach (var webLib in DownloadManager.FetchLibListAsync().ConfigureAwait(false))
+        foreach (var webLib in await DownloadManager.FetchLibListAsync().ConfigureAwait(false))
         {
-            if (webLib is null)
-            {
-                continue;
-            }
-
             if (_libsDict.TryGetValue(webLib.Name, out var localLib))
             {
                 if (localLib.SHA256 == webLib.SHA256)

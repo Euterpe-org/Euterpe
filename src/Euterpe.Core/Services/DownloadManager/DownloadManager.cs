@@ -135,18 +135,18 @@ internal sealed partial class DownloadManager : IDownloadManager
         return null;
     }
 
-    public IAsyncEnumerable<Mod?> FetchModListAsync(CancellationToken cancellationToken = default)
+    public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods from GitHub {Assets.ModsJsonUrl}...");
+        Logger.ZLogInformation($"Fetching mods from {Assets.ModsJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Mod>(Assets.ModsJsonUrl, Default.Mod, cancellationToken);
+        return await Client.GetFromJsonAsync<Mod[]>(Assets.ModsJsonUrl, Default.ModArray, cancellationToken).ConfigureAwait(false) ?? [];
     }
 
-    public IAsyncEnumerable<Lib?> FetchLibListAsync(CancellationToken cancellationToken = default)
+    public async Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching libs from GitHub {Assets.LibsJsonUrl}...");
+        Logger.ZLogInformation($"Fetching libs from {Assets.LibsJsonUrl}...");
 
-        return Client.GetFromJsonAsAsyncEnumerable<Lib>(Assets.LibsJsonUrl, Default.Lib, cancellationToken);
+        return await Client.GetFromJsonAsync<Lib[]>(Assets.LibsJsonUrl, Default.LibArray, cancellationToken).ConfigureAwait(false) ?? [];
     }
 
     #region Injections
