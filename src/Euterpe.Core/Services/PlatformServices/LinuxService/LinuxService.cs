@@ -8,6 +8,7 @@ namespace Euterpe.Core;
 internal sealed partial class LinuxService : IPlatformService
 {
     private const string DeepLinkDesktopFileName = "com.euterpe_org.euterpe.desktop";
+    private const string DotNetInstallScriptUrl = "https://dot.net/v1/dotnet-install.sh";
 
     private static readonly string[] LinuxPaths = new[]
         {
@@ -232,7 +233,51 @@ internal sealed partial class LinuxService : IPlatformService
         }
     }
 
-    public Task<bool> InstallDotNetSdkAsync() => throw new NotSupportedException();
+    public async Task<bool> InstallDotNetSdkAsync()
+    {
+        var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+        try
+        {
+            await DownloadManager.DownloadFileAsync(DotNetInstallScriptUrl, tempFilePath).ConfigureAwait(false);
+            Logger.ZLogInformation($"Downloaded .NET install script to {tempFilePath}");
+
+            var chmodResult = await Cli.Wrap("chmod")
+                .WithArguments(["+x", tempFilePath])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (chmodResult.ExitCode is not 0)
+            {
+                Logger.ZLogError($"Failed to chmod dotnet-install.sh. ExitCode: {chmodResult.ExitCode}, Error:{chmodResult.StandardError}");
+                return false;
+            }
+
+            var installResult = await Cli.Wrap("bash")
+                .WithArguments([tempFilePath, "--version", "latest"])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (installResult.ExitCode is not 0)
+            {
+                Logger.ZLogError($".NET SDK installation failed. ExitCode: {installResult.ExitCode}, StdErr: {installResult.StandardError}");
+                return false;
+            }
+
+            Logger.ZLogInformation($".NET SDK installation completed successfully");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to install .NET SDK");
+            return false;
+        }
+        finally
+        {
+            FileSystemService.TryDeleteFile(tempFilePath);
+        }
+    }
 
     public bool CheckPathEnvironmentVariableSet()
     {
@@ -286,6 +331,12 @@ internal sealed partial class LinuxService : IPlatformService
 
     [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }
+
+    [UsedImplicitly]
+    public required IDownloadManager DownloadManager { get; init; }
+
+    [UsedImplicitly]
+    public required IFileSystemService FileSystemService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<LinuxService> Logger { get; init; }

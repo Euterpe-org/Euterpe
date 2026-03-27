@@ -201,9 +201,9 @@ internal sealed partial class WindowsService : IPlatformService
 
     public async Task<bool> InstallDotNetSdkAsync()
     {
+        var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             Logger.ZLogInformation($"Downloading .NET SDK from {DotnetSdkUrl} to {tempFilePath}");
             await DownloadManager.DownloadFileAsync(DotnetSdkUrl, tempFilePath).ConfigureAwait(false);
 
@@ -217,20 +217,29 @@ internal sealed partial class WindowsService : IPlatformService
 
             if (process is null)
             {
+                Logger.ZLogError($"Failed to launch .NET SDK installer. Process.Start returned null");
                 return false;
             }
 
             await process.WaitForExitAsync().ConfigureAwait(false);
-            Logger.ZLogInformation($".NET SDK installer finished with exit code: {process.ExitCode}");
 
-            File.Delete(tempFilePath);
+            if (process.ExitCode is not 0)
+            {
+                Logger.ZLogError($".NET SDK installer exited with code {process.ExitCode}");
+                return false;
+            }
 
-            return process.ExitCode is 0;
+            Logger.ZLogInformation($".NET SDK installation completed successfully");
+            return true;
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to install .NET SDK");
             return false;
+        }
+        finally
+        {
+            FileSystemService.TryDeleteFile(tempFilePath);
         }
     }
 
@@ -297,6 +306,9 @@ internal sealed partial class WindowsService : IPlatformService
 
     [UsedImplicitly]
     public required IDownloadManager DownloadManager { get; init; }
+
+    [UsedImplicitly]
+    public required IFileSystemService FileSystemService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<WindowsService> Logger { get; init; }

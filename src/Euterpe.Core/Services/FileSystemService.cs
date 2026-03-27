@@ -33,7 +33,7 @@ internal sealed class FileSystemService : IFileSystemService
 
     public bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
-        if (deleteOption == DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
+        if (deleteOption is DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
         {
             Logger.ZLogWarning($"{filePath} does not exists, skipping deletion");
             return true;
@@ -53,7 +53,7 @@ internal sealed class FileSystemService : IFileSystemService
 
     public bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
-        if (deleteOption == DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
+        if (deleteOption is DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
         {
             Logger.ZLogWarning($"{directoryPath} does not exists, skipping deletion");
             return true;
