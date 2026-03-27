@@ -2,6 +2,8 @@ namespace Euterpe.Services;
 
 public sealed partial class DeepLinkService
 {
+    private IModManageService ModManageService => LazyModManageService.Value;
+
     public async Task SetupAsync()
     {
         var processPath = Environment.ProcessPath ?? throw new InvalidOperationException("Process path is null");
@@ -43,7 +45,7 @@ public sealed partial class DeepLinkService
         {
             case "mod":
                 await NavigationService.NavigateToAsync("/modding/manage").ConfigureAwait(true);
-                await ModManageService.Value.Ready.WaitAsync().ConfigureAwait(true);
+                await ModManageService.Ready.WaitAsync().ConfigureAwait(true);
                 await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
 
@@ -69,7 +71,7 @@ public sealed partial class DeepLinkService
     public required IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
-    public required Lazy<IModManageService> ModManageService { get; init; }
+    public required Lazy<IModManageService> LazyModManageService { get; init; }
 
     #endregion Injections
 }

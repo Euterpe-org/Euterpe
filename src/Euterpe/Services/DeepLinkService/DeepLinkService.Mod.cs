@@ -24,7 +24,7 @@ public sealed partial class DeepLinkService
 
     private async Task InstallModByNameAsync(string modName)
     {
-        var mod = ModManageService.Value.FindModByName(modName);
+        var mod = ModManageService.FindModByName(modName);
         if (mod is null)
         {
             Logger.ZLogWarning($"Deep link: mod '{modName}' not found");
@@ -37,12 +37,12 @@ public sealed partial class DeepLinkService
             return;
         }
 
-        await ModManageService.Value.InstallModAsync(mod).ConfigureAwait(false);
+        await ModManageService.InstallModAsync(mod).ConfigureAwait(false);
     }
 
     private async Task UninstallModByNameAsync(string modName)
     {
-        var mod = ModManageService.Value.FindModByName(modName);
+        var mod = ModManageService.FindModByName(modName);
         if (mod is null)
         {
             Logger.ZLogWarning($"Deep link: mod '{modName}' not found");
@@ -55,6 +55,6 @@ public sealed partial class DeepLinkService
             return;
         }
 
-        await ModManageService.Value.UninstallModAsync(mod).ConfigureAwait(false);
+        await ModManageService.UninstallModAsync(mod).ConfigureAwait(false);
     }
 }
