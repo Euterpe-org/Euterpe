@@ -106,6 +106,9 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>访问</value>
   </data>
+  <data name="InitializingMessage" xml:space="preserve">
+      <value>初始化中...</value>
+  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>加载中...</value>
   </data>
