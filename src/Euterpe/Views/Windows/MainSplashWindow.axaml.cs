@@ -1,6 +1,6 @@
 namespace Euterpe.Views.Windows;
 
-public partial class MainSplashWindow : SplashWindow
+public sealed partial class MainSplashWindow : SplashWindow
 {
     public MainSplashWindow()
     {
