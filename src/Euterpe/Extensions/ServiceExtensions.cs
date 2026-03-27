@@ -1,3 +1,5 @@
+using Euterpe.Core.Proxies;
+
 namespace Euterpe.Extensions;
 
 public static partial class ServiceExtensions
@@ -13,6 +15,6 @@ public static partial class ServiceExtensions
         builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
 
         // TopLevel
-        builder.Register<TopLevel>(context => context.Resolve<MainSplashWindow>().GetTopLevel()).SingleInstance();
+        builder.Register(_ => new TopLevelProxy { TopLevelFactory = GetCurrentMainWindow }).SingleInstance();
     }
 }

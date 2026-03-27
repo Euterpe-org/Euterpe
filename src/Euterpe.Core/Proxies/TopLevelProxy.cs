@@ -1,5 +1,13 @@
-﻿namespace Euterpe.Core.Proxies;
+using Avalonia.Platform.Storage;
 
-[LazyProxy(typeof(TopLevel))]
+namespace Euterpe.Core.Proxies;
+
 [UsedImplicitly]
-internal sealed partial class TopLevelProxy;
+public sealed class TopLevelProxy
+{
+    public required Func<TopLevel> TopLevelFactory { get; init; }
+    private TopLevel Current => TopLevelFactory();
+
+    public IStorageProvider StorageProvider => Current.StorageProvider;
+    public ILauncher Launcher => Current.Launcher;
+}

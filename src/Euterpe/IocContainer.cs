@@ -19,7 +19,6 @@ public static class IocContainer
         builder.RegisterInstances();
         builder.RegisterCoreServices();
         builder.RegisterInternalServices();
-        builder.RegisterLazyProxies();
         builder.RegisterViewAndViewModels();
 
         builder.Populate(services);
