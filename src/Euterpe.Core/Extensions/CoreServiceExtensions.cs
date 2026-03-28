@@ -50,6 +50,13 @@ public static class CoreServiceExtensions
                     options.Retry.UseJitter = true;
                 });
             services
+                .AddRefitClient<IEuterpeApiClient>(new RefitSettings
+                {
+                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
+                }, nameof(EuterpeApi))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri(EuterpeApi.BaseUrl))
+                .AddHttpMessageHandler<XRequestIdHandler>();
+            services
                 .AddRefitClient<ITelemetryApiClient>(new RefitSettings
                 {
                     ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
