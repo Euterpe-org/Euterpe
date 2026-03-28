@@ -2,9 +2,9 @@ using Euterpe.Contracts.Telemetry;
 using Refit;
 using static Euterpe.Shared.EuterpeApi;
 
-namespace Euterpe.Abstractions;
+namespace Euterpe.Core.Http.Clients;
 
-public interface ITelemetryApiClient
+internal interface ITelemetryApiClient
 {
     [Post(Telemetry.Session)]
     Task<HttpResponseMessage> PostSessionAsync([Body] SessionEvent payload, CancellationToken cancellationToken = default);

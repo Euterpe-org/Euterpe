@@ -1,6 +1,4 @@
-using System.Net.Http.Json;
 using Euterpe.Models.Dependencies;
-using static Euterpe.Core.JsonContexts.CamelCaseJsonContext;
 using static Euterpe.Shared.EuterpeCdn;
 
 namespace Euterpe.Core;
@@ -139,14 +137,30 @@ internal sealed partial class DownloadManager : IDownloadManager
     {
         Logger.ZLogInformation($"Fetching mods from {Assets.ModsJsonUrl}...");
 
-        return await Client.GetFromJsonAsync<Mod[]>(Assets.ModsJsonUrl, Default.ModArray, cancellationToken).ConfigureAwait(false) ?? [];
+        try
+        {
+            return await CdnClient.FetchModListAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to fetch mod list after retries");
+            return [];
+        }
     }
 
     public async Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Fetching libs from {Assets.LibsJsonUrl}...");
 
-        return await Client.GetFromJsonAsync<Lib[]>(Assets.LibsJsonUrl, Default.LibArray, cancellationToken).ConfigureAwait(false) ?? [];
+        try
+        {
+            return await CdnClient.FetchLibListAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to fetch lib list after retries");
+            return [];
+        }
     }
 
     #region Injections
@@ -156,6 +170,9 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     [UsedImplicitly]
     public required HttpClient Client { get; init; }
+
+    [UsedImplicitly]
+    public required EuterpeCdnClient CdnClient { get; init; }
 
     [UsedImplicitly]
     public required IDownloadService DownloadService { get; init; }

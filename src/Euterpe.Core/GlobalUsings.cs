@@ -10,6 +10,7 @@ global using DynamicData;
 global using Euterpe.Abstractions;
 global using Euterpe.Contracts.GitHub;
 global using Euterpe.Core.Extensions;
+global using Euterpe.Core.Http.Clients;
 global using Euterpe.Core.Logger;
 global using Euterpe.Core.Proxies;
 global using Euterpe.Core.Utils;

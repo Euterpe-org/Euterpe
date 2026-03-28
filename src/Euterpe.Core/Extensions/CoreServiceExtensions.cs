@@ -1,5 +1,6 @@
 ﻿using Euterpe.Core.Http.Handlers;
 using Euterpe.Core.JsonContexts;
+using Polly;
 using Refit;
 
 namespace Euterpe.Core.Extensions;
@@ -38,6 +39,16 @@ public static class CoreServiceExtensions
         {
             services.AddTransient<XRequestIdHandler>();
             services.AddHttpClient();
+            services.AddHttpClient<EuterpeCdnClient>()
+                .AddStandardResilienceHandler(options =>
+                {
+                    options.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(30);
+                    options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(10);
+                    options.Retry.MaxRetryAttempts = 3;
+                    options.Retry.Delay = TimeSpan.FromMilliseconds(500);
+                    options.Retry.BackoffType = DelayBackoffType.Exponential;
+                    options.Retry.UseJitter = true;
+                });
             services
                 .AddRefitClient<ITelemetryApiClient>(new RefitSettings
                 {
