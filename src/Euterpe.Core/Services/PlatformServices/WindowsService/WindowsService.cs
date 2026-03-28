@@ -1,10 +1,17 @@
+using System.Text;
+using System.Text.Json;
+using Euterpe.Contracts.Account;
 using Microsoft.Win32;
+using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
 
 namespace Euterpe.Core;
 
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
 internal sealed partial class WindowsService : IPlatformService
 {
+    private const string MuseDashRegistryPath = @"Software\PeroPeroGames\MuseDash";
+    private const string UserInfoValueName = "peropero_account_user_info_h3003705636";
+
     public string OsString => "win";
     public string UpdaterFileName => "Updater.exe";
 
@@ -27,6 +34,36 @@ internal sealed partial class WindowsService : IPlatformService
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to register deep link protocol on Windows");
+        }
+    }
+
+    public async Task<MuseDashUidRequest?> GetMuseDashUserIdAsync()
+    {
+        try
+        {
+            using var key = Registry.CurrentUser.OpenSubKey(MuseDashRegistryPath, false);
+            var value = key?.GetValue(UserInfoValueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames);
+
+            if (value is not byte[] bytes || bytes is [])
+            {
+                Logger.ZLogWarning($"MuseDash user info registry value is missing or invalid");
+                return null;
+            }
+
+            var json = Encoding.UTF8.GetString(bytes).TrimEnd('\0');
+            if (json.IsNullOrEmpty())
+            {
+                Logger.ZLogWarning($"MuseDash user info registry value is empty");
+                return null;
+            }
+
+            Logger.ZLogInformation($"Successfully retrieved MuseDash user info from registry");
+            return JsonSerializer.Deserialize(json, Default.MuseDashUidRequest);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to get MuseDash user ID from registry");
+            return null;
         }
     }
 

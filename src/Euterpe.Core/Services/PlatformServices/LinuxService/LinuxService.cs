@@ -1,5 +1,6 @@
 using CliWrap;
 using CliWrap.Buffered;
+using Euterpe.Contracts.Account;
 
 namespace Euterpe.Core;
 
@@ -50,6 +51,8 @@ internal sealed partial class LinuxService : IPlatformService
             Logger.ZLogError(ex, $"Failed to register deep link protocol on Linux");
         }
     }
+
+    public Task<MuseDashUidRequest?> GetMuseDashUserIdAsync() => throw new NotImplementedException();
 
     #region Injections
 

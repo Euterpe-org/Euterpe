@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Euterpe.Contracts.Account;
 
 namespace Euterpe.Abstractions;
 
@@ -41,6 +42,12 @@ public interface IPlatformService
     /// </summary>
     /// <param name="processPath"></param>
     Task SetupDeepLinkAsync(string processPath);
+
+    /// <summary>
+    ///     Get MuseDash UID
+    /// </summary>
+    /// <returns></returns>
+    Task<MuseDashUidRequest?> GetMuseDashUserIdAsync();
 
     #region Path Discovery
 

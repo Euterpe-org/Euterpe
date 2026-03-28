@@ -8,6 +8,7 @@ global using Avalonia.Controls;
 global using Downloader;
 global using DynamicData;
 global using Euterpe.Abstractions;
+global using Euterpe.Contracts;
 global using Euterpe.Contracts.GitHub;
 global using Euterpe.Core.Extensions;
 global using Euterpe.Core.Http.Clients;
