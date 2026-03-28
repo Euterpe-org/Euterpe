@@ -7,7 +7,6 @@ internal sealed partial class ModManageService
     private async Task DownloadModCoreAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
-        TelemetryService.TrackModDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();

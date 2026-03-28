@@ -14,11 +14,4 @@ internal sealed partial class TelemetryService
 
         using var response = await TelemetryApiClient.PostSessionAsync(payload).ConfigureAwait(false);
     }
-
-    private async Task PostModDownloadAsync(string modName, string modAuthor)
-    {
-        var payload = new ModDownloadEvent(modName, modAuthor);
-
-        using var response = await TelemetryApiClient.PostModDownloadAsync(payload).ConfigureAwait(false);
-    }
 }

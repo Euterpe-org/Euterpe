@@ -81,8 +81,5 @@ internal sealed partial class ModManageService : IModManageService
     [UsedImplicitly]
     public required INotificationService NotificationService { get; init; }
 
-    [UsedImplicitly]
-    public required ITelemetryService TelemetryService { get; init; }
-
     #endregion Injections
 }
