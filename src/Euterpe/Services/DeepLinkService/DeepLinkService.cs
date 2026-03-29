@@ -2,6 +2,7 @@ namespace Euterpe.Services;
 
 public sealed partial class DeepLinkService
 {
+    private IAuthService AuthService => LazyAuthService.Value;
     private IModManageService ModManageService => LazyModManageService.Value;
 
     public async Task SetupAsync()
@@ -49,6 +50,10 @@ public sealed partial class DeepLinkService
                 await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
 
+            case "auth":
+                await HandleAuthCallbackAsync(query).ConfigureAwait(false);
+                break;
+
             case "go":
                 await NavigationService.NavigateToAsync($"/{path}").ConfigureAwait(false);
                 break;
@@ -69,6 +74,9 @@ public sealed partial class DeepLinkService
 
     [UsedImplicitly]
     public required IPlatformService PlatformService { get; init; }
+
+    [UsedImplicitly]
+    public required Lazy<IAuthService> LazyAuthService { get; init; }
 
     [UsedImplicitly]
     public required Lazy<IModManageService> LazyModManageService { get; init; }

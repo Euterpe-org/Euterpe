@@ -7,4 +7,11 @@ namespace Euterpe.Core.JsonContexts;
 [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower)]
 [JsonSerializable(typeof(SessionEvent))]
 [JsonSerializable(typeof(MuseDashUidRequest))]
+[JsonSerializable(typeof(TokenPayload))]
+[JsonSerializable(typeof(AppTokenRequest))]
+[JsonSerializable(typeof(AppTokenResponse))]
+[JsonSerializable(typeof(RefreshRequest))]
+[JsonSerializable(typeof(RefreshResponse))]
+[JsonSerializable(typeof(LogoutRequest))]
+[JsonSerializable(typeof(UserInfo))]
 internal sealed partial class SnakeCaseJsonContext : JsonSerializerContext;

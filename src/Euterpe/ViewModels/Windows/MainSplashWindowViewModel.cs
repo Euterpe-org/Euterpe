@@ -6,7 +6,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 {
     public void Close()
     {
-        RequestClose?.Invoke(this, null);
+        RequestClose?.Invoke(this, EventArgs.Empty);
     }
 
     public event EventHandler<object?>? RequestClose;
@@ -21,7 +21,13 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 #endif
         await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(true);
 
-        Logger.ZLogInformation($"{nameof(MainSplashWindowViewModel)} Initialized");
+        var restored = await AuthService.TryRestoreSessionAsync().ConfigureAwait(true);
+        if (!restored)
+        {
+            await AuthService.LoginAsync().ConfigureAwait(true);
+        }
+
+        await AuthService.Ready.WaitAsync().ConfigureAwait(true);
 
         Close();
     }
@@ -48,6 +54,9 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
     }
 
     #region Injections
+
+    [UsedImplicitly]
+    public required IAuthService AuthService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<MainSplashWindowViewModel> Logger { get; init; }
