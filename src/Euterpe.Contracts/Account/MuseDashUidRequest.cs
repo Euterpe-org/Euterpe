@@ -1,6 +1,3 @@
 ﻿namespace Euterpe.Contracts.Account;
 
-public readonly struct MuseDashUidRequest
-{
-    public string Uid { get; init; }
-}
+public readonly record struct MuseDashUidRequest(string Uid);
