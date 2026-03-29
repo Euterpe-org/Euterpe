@@ -83,9 +83,11 @@ public static class CoreServiceExtensions
 
         public void RegisterCoreServices()
         {
+            builder.RegisterType<AuthState>().SingleInstance();
             builder.RegisterType<Config>().SingleInstance();
             builder.RegisterType<WindowNotificationManager>().SingleInstance();
 
+            builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
