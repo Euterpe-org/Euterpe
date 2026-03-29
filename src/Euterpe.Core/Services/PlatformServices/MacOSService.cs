@@ -34,4 +34,7 @@ internal sealed class MacOsService : IPlatformService
     public Task OpenFolderAsync(string folderPath) => throw new NotSupportedException();
     public Task OpenFileAsync(string filePath) => throw new NotSupportedException();
     public Task OpenUriAsync(string uri) => throw new NotSupportedException();
+    public Task SaveTokensAsync(string accessToken, string refreshToken) => throw new NotSupportedException();
+    public Task<(string AccessToken, string RefreshToken)?> LoadTokensAsync() => throw new NotSupportedException();
+    public Task ClearTokensAsync() => throw new NotSupportedException();
 }
