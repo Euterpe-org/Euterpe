@@ -80,7 +80,7 @@ internal sealed partial class LinuxService : IPlatformService
             var hex = result.StandardOutput.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
             if (hex.IsNullOrEmpty())
             {
-                Logger.ZLogWarning($"Failed to parse REG_BINARY value from wine reg output");
+                Logger.ZLogWarning($"Failed to read registry value from wine reg output");
                 return null;
             }
 
