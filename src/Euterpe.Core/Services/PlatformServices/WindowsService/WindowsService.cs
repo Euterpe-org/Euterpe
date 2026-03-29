@@ -9,7 +9,7 @@ namespace Euterpe.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
 internal sealed partial class WindowsService : IPlatformService
 {
-    private const string MuseDashRegistryPath = @"Software\PeroPeroGames\MuseDash";
+    private const string MuseDashRegistrySubKey = @"Software\PeroPeroGames\MuseDash";
     private const string UserInfoValueName = "peropero_account_user_info_h3003705636";
 
     public string OsString => "win";
@@ -41,7 +41,7 @@ internal sealed partial class WindowsService : IPlatformService
     {
         try
         {
-            using var key = Registry.CurrentUser.OpenSubKey(MuseDashRegistryPath, false);
+            using var key = Registry.CurrentUser.OpenSubKey(MuseDashRegistrySubKey, false);
             var value = key?.GetValue(UserInfoValueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames);
 
             if (value is not byte[] bytes || bytes is [])

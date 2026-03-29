@@ -5,6 +5,10 @@ namespace Euterpe.Core;
 
 internal sealed partial class LinuxService
 {
+    private const string DllOverrideCommand = """
+                                              wine reg add "HKCU\Software\Wine\DllOverrides" /v "version" /t "REG_SZ" /d "native,builtin" /f
+                                              """;
+
     private async Task<bool> CheckProtontricksInstalledAsync()
     {
         try
@@ -49,9 +53,8 @@ internal sealed partial class LinuxService
 
             Logger.ZLogInformation($"Windows version set to Windows 10");
 
-            const string dllOverrideCommand = @"wine reg add 'HKEY_CURRENT_USER\Software\Wine\DllOverrides' /v version /t REG_SZ /d native,builtin /f";
             var dllOverrideResult = await Cli.Wrap("protontricks")
-                .WithArguments(["-c", dllOverrideCommand, GameConstants.MuseDashSteamAppId])
+                .WithArguments(["-c", DllOverrideCommand, GameConstants.MuseDashSteamAppId])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);

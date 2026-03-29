@@ -1,6 +1,9 @@
+using System.Text;
+using System.Text.Json;
 using CliWrap;
 using CliWrap.Buffered;
 using Euterpe.Contracts.Account;
+using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
 
 namespace Euterpe.Core;
 
@@ -8,6 +11,12 @@ namespace Euterpe.Core;
 internal sealed partial class LinuxService : IPlatformService
 {
     private const string DeepLinkDesktopFileName = "com.euterpe-org.Euterpe.desktop";
+    private const string MuseDashRegistryPath = @"HKCU\Software\PeroPeroGames\MuseDash";
+    private const string UserInfoValueName = "peropero_account_user_info_h3003705636";
+
+    private const string MuseDashUserInfoCommand = $"""
+                                                    wine reg query "{MuseDashRegistryPath}" /v "{UserInfoValueName}"
+                                                    """;
 
     public string OsString => "linux";
     public string UpdaterFileName => "Updater";
@@ -52,7 +61,46 @@ internal sealed partial class LinuxService : IPlatformService
         }
     }
 
-    public Task<MuseDashUidRequest?> GetMuseDashUserIdAsync() => throw new NotImplementedException();
+    public async Task<MuseDashUidRequest?> GetMuseDashUserIdAsync()
+    {
+        try
+        {
+            var result = await Cli.Wrap("protontricks")
+                .WithArguments(["-c", MuseDashUserInfoCommand, GameConstants.MuseDashSteamAppId])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (result.ExitCode is not 0)
+            {
+                Logger.ZLogWarning($"Failed to query MuseDash user info from registry: {result.StandardError}");
+                return null;
+            }
+
+            var hex = result.StandardOutput.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+            if (hex.IsNullOrEmpty())
+            {
+                Logger.ZLogWarning($"Failed to parse REG_BINARY value from wine reg output");
+                return null;
+            }
+
+            var bytes = Convert.FromHexString(hex);
+            var json = Encoding.UTF8.GetString(bytes).TrimEnd('\0');
+            if (json.IsNullOrEmpty())
+            {
+                Logger.ZLogWarning($"MuseDash user info registry value is empty");
+                return null;
+            }
+
+            Logger.ZLogInformation($"Successfully retrieved MuseDash user info from registry");
+            return JsonSerializer.Deserialize(json, Default.MuseDashUidRequest);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to retrieve MuseDash user info");
+            return null;
+        }
+    }
 
     #region Injections
 
