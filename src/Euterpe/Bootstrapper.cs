@@ -51,7 +51,7 @@ internal static class Bootstrapper
                 return;
             }
 
-            Parallel.ForEach(directories.OrderDescending().Skip(1), (directory, _) => Directory.Delete(directory));
+            Parallel.ForEach(directories.OrderDescending().Skip(1), (directory, _) => Directory.Delete(directory, true));
         }
         catch (Exception ex)
         {
