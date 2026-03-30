@@ -40,7 +40,13 @@ internal sealed partial class UpdateService
         var updateFolder = GetUpdateTempPath();
         var updaterTargetPath = Path.Combine(updateFolder, PlatformService.UpdaterFileName);
 
-        await DownloadManager.DownloadReleaseByTagAsync(version, PlatformService.RuntimeIdentifier, updateFolder, cancellationToken).ConfigureAwait(false);
+        var success = await DownloadManager.DownloadReleaseByTagAsync(version, PlatformService.RuntimeIdentifier, updateFolder, cancellationToken).ConfigureAwait(true);
+        if (!success)
+        {
+            await MessageBoxService.ErrorAsync(MessageBox_Content_ReleaseDownload_Failed, version).ConfigureAwait(false);
+            return;
+        }
+
         Logger.ZLogInformation($"Release {version} download finished");
 
         File.Copy(PlatformService.UpdaterFileName, updaterTargetPath, true);

@@ -106,6 +106,9 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Meglátogatás</value>
   </data>
+  <data name="InitializingMessage" xml:space="preserve">
+    <value>Inicializálás...</value>
+  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Betöltés...</value>
   </data>

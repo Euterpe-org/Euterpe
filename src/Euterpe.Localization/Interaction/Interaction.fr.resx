@@ -137,6 +137,9 @@ Essayez de le supprimer manuellement</value>
     <value>Échec de la lecture des informations du jeu
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Échec du téléchargement de la version {0}</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Voulez-vous définir la variable d'environnement MD_DIRECTORY ?</value>
   </data>

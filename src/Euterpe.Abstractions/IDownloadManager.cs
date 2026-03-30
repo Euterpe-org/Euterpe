@@ -29,7 +29,7 @@ public interface IDownloadManager
     Task<bool> DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default);
     Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default);
     Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default);
-    Task DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default);
+    Task<bool> DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default);
     Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default);
     Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default);
     Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default);

@@ -136,6 +136,9 @@ Bitte lösche sie manuell</value>
     <value>Lesen der Spielinformationen fehlgeschlagen
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Version {0} konnte nicht heruntergeladen werden</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Möchtest du die Umgebungsvariable MD_DIRECTORY setzen?</value>
   </data>

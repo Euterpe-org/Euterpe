@@ -136,6 +136,9 @@
     <value>讀取遊戲資訊失敗
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>下載版本 {0} 失敗</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>確定要設定 MD_DIRECTORY 環境變數嗎？</value>
   </data>

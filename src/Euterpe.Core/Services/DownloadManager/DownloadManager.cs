@@ -97,7 +97,7 @@ internal sealed partial class DownloadManager : IDownloadManager
         return await DownloadAssetAsync(downloadLink, path, $"lib {lib.Name}", cancellationToken).ConfigureAwait(false);
     }
 
-    public async Task DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default)
+    public async Task<bool> DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default)
     {
         var downloadUrl = $"{Releases.BaseUrl}{tag}/Euterpe-{runtimeIdentifier}.zip";
 
@@ -106,10 +106,13 @@ internal sealed partial class DownloadManager : IDownloadManager
             await DownloadService.DownloadFileTaskAsync(downloadUrl,
                 Path.Combine(updateFolder, "Euterpe.zip"),
                 cancellationToken).ConfigureAwait(true);
+
+            return true;
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to download new version");
+            return false;
         }
     }
 

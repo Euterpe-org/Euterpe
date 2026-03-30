@@ -137,6 +137,9 @@ Try to manually delete</value>
     <value>Reading Game Information failed
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Failed to download version {0}</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Are you sure you want to set MD_DIRECTORY environment variable?</value>
   </data>

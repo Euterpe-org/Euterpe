@@ -137,6 +137,9 @@ Pokušaj obrisati ručno</value>
     <value>Čitanje informacija o igri nije uspjelo
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Preuzimanje verzije {0} nije uspjelo</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Želiš li postaviti varijablu okruženja MD_DIRECTORY?</value>
   </data>

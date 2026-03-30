@@ -136,6 +136,9 @@
     <value>게임 정보 읽기에 실패했습니다
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>버전 {0} 다운로드에 실패했습니다</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>환경 변수 MD_DIRECTORY를 설정하시겠습니까?</value>
   </data>

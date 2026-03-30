@@ -137,6 +137,9 @@
     <value>Не удалось прочитать информацию об игре
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Не удалось скачать версию {0}</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Установить переменную окружения MD_DIRECTORY?</value>
   </data>

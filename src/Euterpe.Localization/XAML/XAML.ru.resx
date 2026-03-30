@@ -106,6 +106,9 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Перейти</value>
   </data>
+  <data name="InitializingMessage" xml:space="preserve">
+    <value>Инициализация...</value>
+  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Загрузка...</value>
   </data>

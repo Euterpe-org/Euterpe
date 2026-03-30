@@ -137,6 +137,9 @@ Próbáld meg kézileg törölni</value>
     <value>A játékinformáció olvasása sikertelen
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>A(z) {0} verzió letöltése sikertelen</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Szeretnéd beállítani az MD_DIRECTORY környezeti változót?</value>
   </data>
