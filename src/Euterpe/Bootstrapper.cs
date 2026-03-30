@@ -46,7 +46,7 @@ internal static class Bootstrapper
         try
         {
             var directories = Directory.GetDirectories(".", "backup-*");
-            if (directories is [] or { Length: 1 })
+            if (directories.Length <= 1)
             {
                 return;
             }
