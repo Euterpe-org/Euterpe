@@ -1,6 +1,4 @@
-﻿using AsyncAwaitBestPractices;
-
-namespace Euterpe.Core;
+﻿namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
