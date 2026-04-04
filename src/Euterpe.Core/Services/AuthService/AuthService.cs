@@ -6,9 +6,9 @@ internal sealed class AuthService : IAuthService
 {
     private const string AuthorizePageUrl = "https://euterpe-org.com/auth/app?redirect_uri=euterpe://auth/callback";
 
-    private readonly SemaphoreSlim _refreshLock = new(1, 1);
+    private readonly AsyncExclusiveLock _refreshLock = new();
 
-    public AsyncGate Ready { get; } = new();
+    public AsyncManualResetEvent Ready { get; } = new(false);
 
     public async Task LoginAsync() => await PlatformService.OpenUriAsync(AuthorizePageUrl).ConfigureAwait(false);
 
@@ -49,7 +49,7 @@ internal sealed class AuthService : IAuthService
 
             Logger.ZLogInformation($"User logged in: {response.Me.Nickname}");
 
-            Ready.Open();
+            Ready.Set();
         }
         catch (Exception ex)
         {
@@ -70,7 +70,7 @@ internal sealed class AuthService : IAuthService
             return AuthState.AccessToken;
         }
 
-        await _refreshLock.WaitAsync().ConfigureAwait(false);
+        await _refreshLock.AcquireAsync().ConfigureAwait(false);
         try
         {
             if (DateTime.UtcNow < AuthState.AccessTokenExpiry)
@@ -118,7 +118,7 @@ internal sealed class AuthService : IAuthService
         }
 
         AuthState.IsLoggedIn = true;
-        Ready.Open();
+        Ready.Set();
         return true;
     }
 

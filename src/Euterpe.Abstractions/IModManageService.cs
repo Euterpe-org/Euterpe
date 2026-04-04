@@ -1,10 +1,10 @@
-﻿using Euterpe.Shared.Primitives;
+﻿using DotNext.Threading;
 
 namespace Euterpe.Abstractions;
 
 public interface IModManageService
 {
-    AsyncGate Ready { get; }
+    AsyncManualResetEvent Ready { get; }
     Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache);
     ModDto? FindModByName(string name);
     Task InstallModAsync(ModDto mod);
