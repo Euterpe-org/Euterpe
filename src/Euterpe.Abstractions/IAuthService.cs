@@ -31,6 +31,12 @@ public interface IAuthService
     Task<string?> GetAccessTokenAsync();
 
     /// <summary>
+    ///     Refresh the access token explicitly.
+    /// </summary>
+    /// <returns>Refreshed access token, or null if refresh failed.</returns>
+    Task<string?> RefreshAccessTokenAsync();
+
+    /// <summary>
     ///     Try to restore the session from stored tokens on startup.
     /// </summary>
     /// <returns>True if session was restored successfully.</returns>

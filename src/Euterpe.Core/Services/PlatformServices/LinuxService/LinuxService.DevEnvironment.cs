@@ -7,6 +7,10 @@ internal sealed partial class LinuxService
 {
     private const string DotNetInstallScriptUrl = "https://dot.net/v1/dotnet-install.sh";
 
+    private const string DllOverrideCommand = """
+                                              wine reg add "HKCU\Software\Wine\DllOverrides" /v "version" /t "REG_SZ" /d "native,builtin" /f
+                                              """;
+
     public async Task<bool> CheckDotNetRuntimeInstalledAsync()
     {
         const string relativePath = $"steamapps/compatdata/{GameConstants.MuseDashSteamAppId}/pfx/drive_c/Program Files/dotnet/shared/Microsoft.WindowsDesktop.App";
@@ -200,5 +204,71 @@ internal sealed partial class LinuxService
         MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, Config.MuseDashFolder)
             .ConfigureAwait(false);
         return true;
+    }
+
+    private async Task<bool> CheckProtontricksInstalledAsync()
+    {
+        try
+        {
+            var result = await Cli.Wrap("protontricks")
+                .WithArguments("--version")
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (result.ExitCode is 0)
+            {
+                Logger.ZLogInformation($"Protontricks found: {result.StandardOutput.Trim()}");
+                return true;
+            }
+
+            Logger.ZLogError($"Protontricks check failed: {result.StandardError}");
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Protontricks not found");
+            return false;
+        }
+    }
+
+    private async Task<bool> ConfigureWinePrefixAsync()
+    {
+        try
+        {
+            var winVersionResult = await Cli.Wrap("protontricks")
+                .WithArguments([GameConstants.MuseDashSteamAppId, "win10"])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (winVersionResult.ExitCode is not 0)
+            {
+                Logger.ZLogError($"Failed to set Windows version to Win10: {winVersionResult.StandardError}");
+                return false;
+            }
+
+            Logger.ZLogInformation($"Windows version set to Windows 10");
+
+            var dllOverrideResult = await Cli.Wrap("protontricks")
+                .WithArguments(["-c", DllOverrideCommand, GameConstants.MuseDashSteamAppId])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
+
+            if (dllOverrideResult.ExitCode is not 0)
+            {
+                Logger.ZLogError($"Failed to add version dll override: {dllOverrideResult.StandardError}");
+                return false;
+            }
+
+            Logger.ZLogInformation($"version dll override added successfully");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to configure Wine prefix via protontricks");
+            return false;
+        }
     }
 }

@@ -127,6 +127,9 @@ Try to manually delete</value>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>No updates available</value>
   </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>No keyring service (secret-tool) was found. Your login session cannot be saved and you will need to log in again each time.</value>
+  </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>protontricks is not installed. Please install protontricks to proceed.</value>
   </data>

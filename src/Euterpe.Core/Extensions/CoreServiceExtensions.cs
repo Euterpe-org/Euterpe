@@ -38,6 +38,7 @@ public static class CoreServiceExtensions
         public void RegisterHttpClients()
         {
             services.AddTransient<XRequestIdHandler>();
+            services.AddTransient<AuthHeaderHandler>();
             services.AddHttpClient();
             services.AddHttpClient<EuterpeCdnClient>()
                 .AddStandardResilienceHandler(options =>
@@ -50,12 +51,20 @@ public static class CoreServiceExtensions
                     options.Retry.UseJitter = true;
                 });
             services
+                .AddRefitClient<IEuterpeAuthClient>(new RefitSettings
+                {
+                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
+                }, nameof(EuterpeApi.Auth))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri(EuterpeApi.BaseUrl))
+                .AddHttpMessageHandler<XRequestIdHandler>();
+            services
                 .AddRefitClient<IEuterpeApiClient>(new RefitSettings
                 {
                     ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
                 }, nameof(EuterpeApi))
                 .ConfigureHttpClient(client => client.BaseAddress = new Uri(EuterpeApi.BaseUrl))
-                .AddHttpMessageHandler<XRequestIdHandler>();
+                .AddHttpMessageHandler<XRequestIdHandler>()
+                .AddHttpMessageHandler<AuthHeaderHandler>();
             services
                 .AddRefitClient<ITelemetryApiClient>(new RefitSettings
                 {

@@ -1,7 +1,7 @@
 namespace Euterpe.Contracts.Account;
 
 [PublicAPI]
-public readonly record struct UserInfo(
+public record UserInfo(
     long Uid,
     int Role,
     string Email,

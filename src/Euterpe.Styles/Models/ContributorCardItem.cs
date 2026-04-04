@@ -17,6 +17,6 @@ public sealed class ContributorCardItem
         Links = links;
 
         var avatarPath = avatarName is null ? $"{name}.webp" : $"{avatarName}.webp";
-        Avatar = new Bitmap(AssetLoader.Open(new Uri($"avares://{nameof(Euterpe)}/Assets/Contributors/{avatarPath}")));
+        Avatar = new Bitmap(AssetLoader.Open(new Uri($"avares://{AppName}/Assets/Contributors/{avatarPath}")));
     }
 }

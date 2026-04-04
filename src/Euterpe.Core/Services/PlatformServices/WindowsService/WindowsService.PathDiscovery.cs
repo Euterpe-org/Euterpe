@@ -1,3 +1,5 @@
+using Microsoft.Win32;
+
 namespace Euterpe.Core;
 
 internal sealed partial class WindowsService
@@ -109,5 +111,12 @@ internal sealed partial class WindowsService
         {
             return false;
         }
+    }
+
+    private static bool TryGetSteamFolderFromRegistry(out string steamFolder)
+    {
+        steamFolder = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null)
+            as string ?? string.Empty;
+        return Directory.Exists(steamFolder);
     }
 }

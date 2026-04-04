@@ -8,23 +8,19 @@ namespace Euterpe.Core;
 
 internal sealed partial class WindowsService
 {
-    private static string TokenFilePath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "Euterpe", "auth.dat");
+    private static readonly string TokenFilePath = Path.Combine(AppDataFolder, "auth.dat");
 
     public async Task SaveTokensAsync(string accessToken, string refreshToken)
     {
         var payload = new TokenPayload(accessToken, refreshToken);
         var json = JsonSerializer.Serialize(payload, Default.TokenPayload);
         var plainBytes = Encoding.UTF8.GetBytes(json);
-        var encrypted = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
+        var encrypted = ProtectedData.Protect(plainBytes, DataProtectionScope.CurrentUser);
 
-        var dir = Path.GetDirectoryName(TokenFilePath)!;
-        Directory.CreateDirectory(dir);
         await File.WriteAllBytesAsync(TokenFilePath, encrypted).ConfigureAwait(false);
     }
 
-    public async Task<(string AccessToken, string RefreshToken)?> LoadTokensAsync()
+    public async Task<TokenPayload?> LoadTokensAsync()
     {
         if (!File.Exists(TokenFilePath))
         {
@@ -34,7 +30,7 @@ internal sealed partial class WindowsService
         try
         {
             var encrypted = await File.ReadAllBytesAsync(TokenFilePath).ConfigureAwait(false);
-            var plainBytes = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);
+            var plainBytes = ProtectedData.Unprotect(encrypted, DataProtectionScope.CurrentUser);
             var json = Encoding.UTF8.GetString(plainBytes);
             var payload = JsonSerializer.Deserialize(json, Default.TokenPayload);
 
@@ -43,7 +39,7 @@ internal sealed partial class WindowsService
                 return null;
             }
 
-            return (payload.AccessToken, payload.RefreshToken);
+            return payload;
         }
         catch (CryptographicException ex)
         {
@@ -53,13 +49,20 @@ internal sealed partial class WindowsService
         }
     }
 
-    public Task ClearTokensAsync()
+    public async Task ClearTokensAsync()
     {
-        if (File.Exists(TokenFilePath))
+        if (!File.Exists(TokenFilePath))
+        {
+            return;
+        }
+
+        try
         {
             File.Delete(TokenFilePath);
         }
-
-        return Task.CompletedTask;
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to delete auth token file");
+        }
     }
 }
