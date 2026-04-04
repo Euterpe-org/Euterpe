@@ -25,7 +25,7 @@ global using Euterpe.Services;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;
 global using Euterpe.Shared.Extensions;
-global using Euterpe.Shared.Primitives;
+global using DotNext.Threading;
 global using Euterpe.Styles.Models;
 global using Euterpe.ViewModels;
 global using Euterpe.ViewModels.Components;

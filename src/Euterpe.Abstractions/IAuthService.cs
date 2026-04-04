@@ -1,4 +1,4 @@
-using Euterpe.Shared.Primitives;
+using DotNext.Threading;
 
 namespace Euterpe.Abstractions;
 
@@ -7,7 +7,7 @@ public interface IAuthService
     /// <summary>
     ///     Gate that opens when the user has successfully logged in.
     /// </summary>
-    AsyncGate Ready { get; }
+    AsyncManualResetEvent Ready { get; }
 
     /// <summary>
     ///     Start the login flow by opening the system browser.

@@ -2,7 +2,7 @@ namespace Euterpe.Services;
 
 public sealed class NavigationService
 {
-    public AsyncGate Ready { get; } = new();
+    public AsyncManualResetEvent Ready { get; } = new(false);
 
     public string? CurrentRoute { get; private set; }
 

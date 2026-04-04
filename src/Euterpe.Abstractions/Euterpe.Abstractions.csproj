@@ -6,6 +6,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="DotNext.Threading"/>
         <PackageReference Include="Downloader"/>
         <PackageReference Include="DynamicData"/>
         <PackageReference Include="Irihi.Ursa"/>
