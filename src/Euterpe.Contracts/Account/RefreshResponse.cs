@@ -1,4 +1,4 @@
 namespace Euterpe.Contracts.Account;
 
 [PublicAPI]
-public readonly record struct RefreshResponse(string AccessToken);
+public record RefreshResponse(string AccessToken);

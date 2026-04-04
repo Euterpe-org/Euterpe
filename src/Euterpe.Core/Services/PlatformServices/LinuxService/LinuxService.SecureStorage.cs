@@ -8,86 +8,40 @@ namespace Euterpe.Core;
 
 internal sealed partial class LinuxService
 {
-    private const string SecretToolLabel = "Euterpe";
-    private const string SecretToolAttrApp = "euterpe";
-
-    private static string TokenFilePath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "Euterpe", "auth.json");
-
     public async Task SaveTokensAsync(string accessToken, string refreshToken)
     {
         var payload = new TokenPayload(accessToken, refreshToken);
+        var json = JsonSerializer.Serialize(payload, Default.TokenPayload);
 
-        if (await TrySaveToSecretServiceAsync(payload).ConfigureAwait(false))
-        {
-            return;
-        }
-
-        await SaveToFileAsync(payload).ConfigureAwait(false);
-    }
-
-    public async Task<(string AccessToken, string RefreshToken)?> LoadTokensAsync()
-    {
-        var payload = await TryLoadFromSecretServiceAsync().ConfigureAwait(false)
-                      ?? await LoadFromFileAsync().ConfigureAwait(false);
-
-        if (payload is null || payload.Value.AccessToken.IsNullOrEmpty() || payload.Value.RefreshToken.IsNullOrEmpty())
-        {
-            return null;
-        }
-
-        return (payload.Value.AccessToken, payload.Value.RefreshToken);
-    }
-
-    public async Task ClearTokensAsync()
-    {
         try
         {
-            await Cli.Wrap("secret-tool")
-                .WithArguments(["clear", "app", SecretToolAttrApp])
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync()
-                .ConfigureAwait(false);
-        }
-        catch
-        {
-            // secret-tool not available, ignore
-        }
-
-        if (File.Exists(TokenFilePath))
-        {
-            File.Delete(TokenFilePath);
-        }
-    }
-
-    private async Task<bool> TrySaveToSecretServiceAsync(TokenPayload payload)
-    {
-        try
-        {
-            var json = JsonSerializer.Serialize(payload, Default.TokenPayload);
-
             var result = await Cli.Wrap("secret-tool")
-                .WithArguments(["store", "--label", SecretToolLabel, "app", SecretToolAttrApp])
+                .WithArguments(["store", "--label", AppName, "app", AppName])
                 .WithStandardInputPipe(PipeSource.FromString(json))
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
-                .ConfigureAwait(false);
+                .ConfigureAwait(true);
 
-            return result.ExitCode is 0;
+            if (result.ExitCode is 0)
+            {
+                return;
+            }
+
+            Logger.ZLogWarning($"secret-tool store failed with exit code {result.ExitCode}");
         }
-        catch
+        catch (Exception ex)
         {
-            return false;
+            Logger.ZLogWarning(ex, $"secret-tool is not available");
+            await MessageBoxService.NoticeAsync(MessageBox_Content_SecretService_Unavailable).ConfigureAwait(false);
         }
     }
 
-    private async Task<TokenPayload?> TryLoadFromSecretServiceAsync()
+    public async Task<TokenPayload?> LoadTokensAsync()
     {
         try
         {
             var result = await Cli.Wrap("secret-tool")
-                .WithArguments(["lookup", "app", SecretToolAttrApp])
+                .WithArguments(["lookup", "app", AppName])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -97,7 +51,14 @@ internal sealed partial class LinuxService
                 return null;
             }
 
-            return JsonSerializer.Deserialize(result.StandardOutput, Default.TokenPayload);
+            var payload = JsonSerializer.Deserialize(result.StandardOutput, Default.TokenPayload);
+
+            if (payload.AccessToken.IsNullOrEmpty() || payload.RefreshToken.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            return payload;
         }
         catch
         {
@@ -105,30 +66,19 @@ internal sealed partial class LinuxService
         }
     }
 
-    private async Task SaveToFileAsync(TokenPayload payload)
+    public async Task ClearTokensAsync()
     {
-        var json = JsonSerializer.Serialize(payload, Default.TokenPayload);
-        var dir = Path.GetDirectoryName(TokenFilePath)!;
-        Directory.CreateDirectory(dir);
-        await File.WriteAllTextAsync(TokenFilePath, json).ConfigureAwait(false);
-        File.SetUnixFileMode(TokenFilePath, UnixFileMode.UserRead | UnixFileMode.UserWrite);
-    }
-
-    private async Task<TokenPayload?> LoadFromFileAsync()
-    {
-        if (!File.Exists(TokenFilePath))
-        {
-            return null;
-        }
-
         try
         {
-            var json = await File.ReadAllTextAsync(TokenFilePath).ConfigureAwait(false);
-            return JsonSerializer.Deserialize(json, Default.TokenPayload);
+            await Cli.Wrap("secret-tool")
+                .WithArguments(["clear", "app", AppName])
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync()
+                .ConfigureAwait(false);
         }
-        catch
+        catch (Exception ex)
         {
-            return null;
+            Logger.ZLogWarning(ex, $"Failed to clear tokens with secret-tool");
         }
     }
 }

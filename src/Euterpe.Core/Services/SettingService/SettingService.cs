@@ -3,12 +3,10 @@ namespace Euterpe.Core;
 internal sealed partial class SettingService : ISettingService
 {
     private const string ConfigFileName = "Config.json";
-    private static readonly string ConfigFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(Euterpe));
-    private static readonly string ConfigPath = Path.Combine(ConfigFolder, ConfigFileName);
+    private static readonly string ConfigPath = Path.Combine(AppDataFolder, ConfigFileName);
 
     public async Task LoadAsync()
     {
-        Directory.CreateDirectory(ConfigFolder);
         if (File.Exists(ConfigPath))
         {
             var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);

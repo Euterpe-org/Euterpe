@@ -32,3 +32,4 @@ global using static Euterpe.Core.Utils.DesktopUtils;
 global using static Euterpe.Localization.Interaction;
 global using static Euterpe.Shared.BuildInfo;
 global using static Euterpe.Shared.GitHubConstants;
+global using static Euterpe.Shared.PathConstants;

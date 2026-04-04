@@ -2,46 +2,55 @@ using Euterpe.Contracts.Account;
 
 namespace Euterpe.Core;
 
-internal sealed class AuthService : IAuthService
+internal sealed partial class AuthService : IAuthService
 {
     private const string AuthorizePageUrl = "https://euterpe-org.com/auth/app?redirect_uri=euterpe://auth/callback";
 
-    private readonly AsyncExclusiveLock _refreshLock = new();
+    // 15 minutes but use 14 to be safe and account for clock skew and network delays
+    private static readonly TimeSpan AccessTokenLifetime = TimeSpan.FromMinutes(14);
 
+    private readonly AsyncExclusiveLock _lock = new();
     public AsyncManualResetEvent Ready { get; } = new(false);
 
     public async Task LoginAsync() => await PlatformService.OpenUriAsync(AuthorizePageUrl).ConfigureAwait(false);
 
     public async Task LogoutAsync()
     {
-        if (AuthState.RefreshToken is not null)
+        await _lock.StealAsync("logout").ConfigureAwait(false);
+        try
         {
-            try
+            if (AuthState.RefreshToken is not null)
             {
-                await ApiClient.LogoutAsync(new LogoutRequest(AuthState.RefreshToken)).ConfigureAwait(false);
+                try
+                {
+                    await AuthClient.LogoutAsync(new LogoutRequest(AuthState.RefreshToken)).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    Logger.ZLogWarning(ex, $"Failed to call logout API, clearing local tokens anyway");
+                }
             }
-            catch (Exception ex)
-            {
-                Logger.ZLogWarning(ex, $"Failed to call logout API, clearing local tokens anyway");
-            }
+
+            await ClearSessionAsync().ConfigureAwait(false);
+
+            Logger.ZLogInformation($"User logged out");
         }
-
-        AuthState.Clear();
-
-        await PlatformService.ClearTokensAsync().ConfigureAwait(false);
-
-        Logger.ZLogInformation($"User logged out");
+        finally
+        {
+            _lock.Release();
+        }
     }
 
     public async Task HandleAuthCallbackAsync(string code)
     {
+        await _lock.AcquireAsync().ConfigureAwait(false);
         try
         {
-            var response = await ApiClient.ExchangeAppTokenAsync(new AppTokenRequest(code)).ConfigureAwait(false);
+            var response = await AuthClient.ExchangeAppTokenAsync(new AppTokenRequest(code)).ConfigureAwait(false);
 
             AuthState.AccessToken = response.AccessToken;
             AuthState.RefreshToken = response.RefreshToken;
-            AuthState.AccessTokenExpiry = DateTime.UtcNow.AddMinutes(14);
+            AuthState.AccessTokenExpiry = DateTime.UtcNow.Add(AccessTokenLifetime);
             AuthState.CurrentUser = response.Me;
             AuthState.IsLoggedIn = true;
 
@@ -51,52 +60,28 @@ internal sealed class AuthService : IAuthService
 
             Ready.Set();
         }
-        catch (Exception ex)
+        finally
         {
-            Logger.ZLogError(ex, $"Failed to exchange auth code for token");
-            throw;
+            _lock.Release();
         }
     }
 
     public async Task<string?> GetAccessTokenAsync()
     {
-        if (AuthState.AccessToken is null || AuthState.RefreshToken is null)
+        if (!HasRefreshableSession())
         {
             return null;
         }
 
-        if (DateTime.UtcNow < AuthState.AccessTokenExpiry)
+        if (HasValidAccessToken())
         {
             return AuthState.AccessToken;
         }
 
-        await _refreshLock.AcquireAsync().ConfigureAwait(false);
-        try
-        {
-            if (DateTime.UtcNow < AuthState.AccessTokenExpiry)
-            {
-                return AuthState.AccessToken;
-            }
-
-            var response = await ApiClient.RefreshTokenAsync(new RefreshRequest(AuthState.RefreshToken)).ConfigureAwait(false);
-            AuthState.AccessToken = response.AccessToken;
-            AuthState.AccessTokenExpiry = DateTime.UtcNow.AddMinutes(14);
-
-            await PlatformService.SaveTokensAsync(AuthState.AccessToken, AuthState.RefreshToken).ConfigureAwait(false);
-
-            return AuthState.AccessToken;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to refresh access token, logging out");
-            await LogoutAsync().ConfigureAwait(false);
-            return null;
-        }
-        finally
-        {
-            _refreshLock.Release();
-        }
+        return await RefreshAccessTokenCoreAsync(false).ConfigureAwait(false);
     }
+
+    public async Task<string?> RefreshAccessTokenAsync() => await RefreshAccessTokenCoreAsync(true).ConfigureAwait(false);
 
     public async Task<bool> TryRestoreSessionAsync()
     {
@@ -106,14 +91,23 @@ internal sealed class AuthService : IAuthService
             return false;
         }
 
-        AuthState.AccessToken = tokens.Value.AccessToken;
-        AuthState.RefreshToken = tokens.Value.RefreshToken;
-        AuthState.AccessTokenExpiry = DateTime.MinValue; // Force refresh on first use
+        AuthState.AccessToken = tokens.AccessToken;
+        AuthState.RefreshToken = tokens.RefreshToken;
+        AuthState.AccessTokenExpiry = DateTime.MinValue;
 
-        // Validate by refreshing the token
         var accessToken = await GetAccessTokenAsync().ConfigureAwait(false);
         if (accessToken is null)
         {
+            return false;
+        }
+
+        try
+        {
+            AuthState.CurrentUser = await AuthClient.GetMeAsync(accessToken).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to fetch user info after session restore");
             return false;
         }
 
@@ -131,7 +125,7 @@ internal sealed class AuthService : IAuthService
     public required IPlatformService PlatformService { get; init; }
 
     [UsedImplicitly]
-    public required IEuterpeApiClient ApiClient { get; init; }
+    public required IEuterpeAuthClient AuthClient { get; init; }
 
     [UsedImplicitly]
     public required ILogger<AuthService> Logger { get; init; }

@@ -20,7 +20,7 @@ internal sealed partial class WindowsService : IPlatformService
         try
         {
             using var schemeKey = Registry.CurrentUser.CreateSubKey($@"Software\Classes\{IPlatformService.DeepLinkScheme}");
-            schemeKey.SetValue(string.Empty, $"URL:{nameof(Euterpe)} Protocol", RegistryValueKind.String);
+            schemeKey.SetValue(string.Empty, $"URL:{AppName} Protocol", RegistryValueKind.String);
             schemeKey.SetValue("URL Protocol", string.Empty, RegistryValueKind.String);
 
             using var commandKey = schemeKey.CreateSubKey(@"shell\open\command");

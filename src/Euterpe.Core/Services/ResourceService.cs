@@ -4,7 +4,7 @@ namespace Euterpe.Core;
 
 internal sealed class ResourceService : IResourceService
 {
-    public Stream GetAssetAsStream(string fileName) => AssetLoader.Open(new Uri($"avares://{nameof(Euterpe)}/Assets/{fileName}"));
+    public Stream GetAssetAsStream(string fileName) => AssetLoader.Open(new Uri($"avares://{AppName}/Assets/{fileName}"));
 
     public T? TryGetAppResource<T>(string key) where T : class
     {

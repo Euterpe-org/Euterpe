@@ -1,3 +1,5 @@
+using Euterpe.Contracts.Account;
+
 namespace Euterpe.Abstractions;
 
 public interface IPlatformSecureStorage
@@ -10,8 +12,8 @@ public interface IPlatformSecureStorage
     /// <summary>
     ///     Load tokens from secure storage.
     /// </summary>
-    /// <returns>Access token and refresh token, or null if not found.</returns>
-    Task<(string AccessToken, string RefreshToken)?> LoadTokensAsync();
+    /// <returns>Token payload, or null if not found.</returns>
+    Task<TokenPayload?> LoadTokensAsync();
 
     /// <summary>
     ///     Clear all stored tokens.

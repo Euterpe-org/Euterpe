@@ -20,8 +20,7 @@ public sealed partial class Config : ObservableObject
     public partial string MuseDashFolder { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string CacheFolder { get; set; } =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(Euterpe), "Cache");
+    public partial string CacheFolder { get; set; } = Path.Combine(AppDataFolder, "Cache");
 
     // Game Settings
     [ObservableProperty]

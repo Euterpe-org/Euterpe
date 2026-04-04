@@ -2,5 +2,6 @@
 
 public static class PathConstants
 {
-    public static string AppLogsFolder => Path.Combine(AppContext.BaseDirectory, "Logs");
+    public static readonly string AppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppName);
+    public static readonly string AppLogsFolder = Path.Combine(AppContext.BaseDirectory, "Logs");
 }

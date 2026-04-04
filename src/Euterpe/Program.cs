@@ -25,6 +25,7 @@ internal static class Program
             return;
         }
 
+        Directory.CreateDirectory(AppDataFolder);
         CleanupLogFiles();
         CleanupBackupFiles();
         ConfigureContainer(LogFilePath);
