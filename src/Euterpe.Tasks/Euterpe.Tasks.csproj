@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations.Sources">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="all"/>
     </ItemGroup>
 
