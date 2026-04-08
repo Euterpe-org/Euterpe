@@ -19,7 +19,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     // Overlay
     public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message) =>
-        MessageBox.ShowOverlayAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.YesNo);
+        OverlayMessageBox.ShowAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.YesNo);
 
     public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message, params ReadOnlySpan<object> args) =>
         NoticeConfirmOverlayAsync(string.Format(message, args));
@@ -37,7 +37,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     // Overlay
     public Task<MessageBoxResult> ErrorOverlayAsync(string message) =>
-        MessageBox.ShowOverlayAsync(message, Title_Error, icon: MessageBoxIcon.Error, button: MessageBoxButton.OK);
+        OverlayMessageBox.ShowAsync(message, Title_Error, icon: MessageBoxIcon.Error, button: MessageBoxButton.OK);
 
     public Task<MessageBoxResult> ErrorOverlayAsync(string message, params ReadOnlySpan<object> args) =>
         ErrorOverlayAsync(string.Format(message, args));
@@ -55,7 +55,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     // Overlay
     public Task<MessageBoxResult> NoticeOverlayAsync(string message) =>
-        MessageBox.ShowOverlayAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.OK);
+        OverlayMessageBox.ShowAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.OK);
 
     #endregion
 
@@ -70,7 +70,7 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     // Overlay
     public Task<MessageBoxResult> SuccessOverlayAsync(string message) =>
-        MessageBox.ShowOverlayAsync(message, Title_Success, icon: MessageBoxIcon.Success, button: MessageBoxButton.OK);
+        OverlayMessageBox.ShowAsync(message, Title_Success, icon: MessageBoxIcon.Success, button: MessageBoxButton.OK);
 
     public Task<MessageBoxResult> SuccessOverlayAsync(string message, params ReadOnlySpan<object> args) =>
         SuccessOverlayAsync(string.Format(message, args));
