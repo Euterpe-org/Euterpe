@@ -34,8 +34,17 @@ internal sealed partial class WindowsService
             var json = Encoding.UTF8.GetString(plainBytes);
             var payload = JsonSerializer.Deserialize(json, Default.TokenPayload);
 
+            if (payload == null)
+            {
+                Logger.ZLogWarning($"Failed to deserialize auth tokens, clearing stored data");
+                await ClearTokensAsync().ConfigureAwait(false);
+                return null;
+            }
+
             if (payload.AccessToken.IsNullOrEmpty() || payload.RefreshToken.IsNullOrEmpty())
             {
+                Logger.ZLogWarning($"Auth tokens are empty, clearing stored data");
+                await ClearTokensAsync().ConfigureAwait(false);
                 return null;
             }
 
