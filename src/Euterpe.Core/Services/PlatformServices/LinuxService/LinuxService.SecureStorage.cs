@@ -52,9 +52,17 @@ internal sealed partial class LinuxService
             }
 
             var payload = JsonSerializer.Deserialize(result.StandardOutput, Default.TokenPayload);
+            if (payload == null)
+            {
+                Logger.ZLogWarning($"Failed to deserialize auth tokens, clearing stored data");
+                await ClearTokensAsync().ConfigureAwait(false);
+                return null;
+            }
 
             if (payload.AccessToken.IsNullOrEmpty() || payload.RefreshToken.IsNullOrEmpty())
             {
+                Logger.ZLogWarning($"Auth tokens are empty, clearing stored data");
+                await ClearTokensAsync().ConfigureAwait(false);
                 return null;
             }
 
