@@ -57,7 +57,7 @@
         <PackageVersion Include="TUnit.Mocks" Version="$(TUnitVersion)"/>
         <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)"/>
         <PackageVersion Include="TUnit.Mocks.Logging" Version="$(TUnitVersion)"/>
-        <PackageVersion Include="ValveKeyValue" Version="0.60.0.494"/>
+        <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Verify.TUnit" Version="31.15.0"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.43"/>
