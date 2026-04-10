@@ -8,5 +8,5 @@ public sealed record UserInfo(
     string Nickname,
     string? AvatarUrl,
     bool Banned,
-    bool HasGithub,
-    bool HasGoogle);
+    [property: JsonPropertyName("has_github")] bool HasGitHub,
+    [property: JsonPropertyName("has_google")] bool HasGoogle);
