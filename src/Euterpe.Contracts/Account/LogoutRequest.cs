@@ -1,4 +1,4 @@
 namespace Euterpe.Contracts.Account;
 
 [PublicAPI]
-public record LogoutRequest(string RefreshToken);
+public sealed record LogoutRequest(string RefreshToken);

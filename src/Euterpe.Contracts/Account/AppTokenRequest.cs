@@ -1,4 +1,4 @@
 namespace Euterpe.Contracts.Account;
 
 [PublicAPI]
-public record AppTokenRequest(string Code);
+public sealed  record AppTokenRequest(string Code);

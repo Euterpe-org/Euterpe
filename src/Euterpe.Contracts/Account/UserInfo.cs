@@ -1,7 +1,7 @@
 namespace Euterpe.Contracts.Account;
 
 [PublicAPI]
-public record UserInfo(
+public sealed record UserInfo(
     long Uid,
     int Role,
     string Email,
