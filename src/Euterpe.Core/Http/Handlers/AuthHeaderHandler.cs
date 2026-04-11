@@ -8,10 +8,7 @@ internal sealed class AuthHeaderHandler(IAuthService authService) : DelegatingHa
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var token = await authService.GetAccessTokenAsync().ConfigureAwait(false);
-        if (token is not null)
-        {
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        }
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
@@ -20,14 +17,11 @@ internal sealed class AuthHeaderHandler(IAuthService authService) : DelegatingHa
             return response;
         }
 
-        var newToken = await authService.RefreshAccessTokenAsync().ConfigureAwait(false);
-        if (newToken is null)
-        {
-            return response;
-        }
-
         response.Dispose();
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", newToken);
+
+        // If we got a 401, the access token is likely expired. Try to get a new one and retry the request once.
+        token = await authService.RenewAccessTokenAsync().ConfigureAwait(false);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
 }

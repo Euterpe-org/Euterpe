@@ -6,10 +6,11 @@ public static class EuterpeApi
 
     public static class Auth
     {
-        public const string AppToken = "/auth/app/token";
-        public const string Refresh = "/auth/refresh";
-        public const string Logout = "/auth/logout";
-        public const string Me = "/auth/me";
+        public const string BasePath = "auth";
+        public const string AppToken = "/app/token";
+        public const string Refresh = "/refresh";
+        public const string Logout = "/logout";
+        public const string Me = "/me";
     }
 
     public static class Telemetry
@@ -17,5 +18,15 @@ public static class EuterpeApi
         public const string BasePath = "telemetry";
 
         public const string Session = "/session";
+    }
+
+    public static class Mod
+    {
+        public const string BasePath = "mods";
+    }
+
+    public static class Chart
+    {
+        public const string BasePath = "charts";
     }
 }

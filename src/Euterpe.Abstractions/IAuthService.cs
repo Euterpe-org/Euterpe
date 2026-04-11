@@ -15,30 +15,30 @@ public interface IAuthService
     Task LoginAsync();
 
     /// <summary>
-    ///     Handle the deep link callback with the authorization code.
-    /// </summary>
-    Task HandleAuthCallbackAsync(string code);
-
-    /// <summary>
     ///     Log out the current user.
     /// </summary>
     Task LogoutAsync();
 
     /// <summary>
-    ///     Get a valid access token, refreshing if necessary.
+    ///     Get a usable access token, refreshing it if necessary.
+    ///     Waits for login to complete if no session tokens are present.
     /// </summary>
-    /// <returns>Access token, or null if not logged in.</returns>
-    Task<string?> GetAccessTokenAsync();
+    Task<string> GetAccessTokenAsync();
 
     /// <summary>
-    ///     Refresh the access token explicitly.
+    ///     Force the server to issue a new access token using the current refresh token.
+    ///     If the refresh token is rejected, triggers re-login and waits for completion.
     /// </summary>
-    /// <returns>Refreshed access token, or null if refresh failed.</returns>
-    Task<string?> RefreshAccessTokenAsync();
+    Task<string> RenewAccessTokenAsync();
+
+    /// <summary>
+    ///     Handle the deep link callback with the authorization code.
+    /// </summary>
+    Task CompleteLoginAsync(string code);
 
     /// <summary>
     ///     Try to restore the session from stored tokens on startup.
     /// </summary>
     /// <returns>True if session was restored successfully.</returns>
-    Task<bool> TryRestoreSessionAsync();
+    Task<bool> RestoreSessionAsync();
 }

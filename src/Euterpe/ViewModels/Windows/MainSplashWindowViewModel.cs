@@ -21,7 +21,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 #endif
         await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(true);
 
-        var restored = await AuthService.TryRestoreSessionAsync().ConfigureAwait(true);
+        var restored = await AuthService.RestoreSessionAsync().ConfigureAwait(true);
         if (!restored)
         {
             await AuthService.LoginAsync().ConfigureAwait(true);

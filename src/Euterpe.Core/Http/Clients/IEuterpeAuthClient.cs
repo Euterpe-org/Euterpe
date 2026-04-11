@@ -16,5 +16,5 @@ internal interface IEuterpeAuthClient
     Task LogoutAsync([Body] LogoutRequest request, CancellationToken cancellationToken = default);
 
     [Get(Auth.Me)]
-    Task<UserInfo> GetMeAsync([Authorize] string token, CancellationToken cancellationToken = default);
+    Task<UserInfo> GetCurrentUserAsync([Authorize] string token, CancellationToken cancellationToken = default);
 }

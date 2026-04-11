@@ -12,7 +12,9 @@ public sealed partial class AuthState : ObservableObject
 
     public string? AccessToken { get; set; }
     public string? RefreshToken { get; set; }
-    public DateTime AccessTokenExpiry { get; set; }
+    public DateTimeOffset AccessTokenExpiry { get; set; }
+
+    public bool HasSessionTokens => AccessToken is not null && RefreshToken is not null;
 
     public void Clear()
     {

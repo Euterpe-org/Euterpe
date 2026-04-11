@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using CliWrap;
@@ -28,13 +29,14 @@ internal sealed partial class LinuxService : IPlatformService
             var applicationsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "applications");
             var desktopFilePath = Path.Combine(applicationsPath, DeepLinkDesktopFileName);
             Directory.CreateDirectory(applicationsPath);
+            var execCommand = BuildDeepLinkExecCommand(processPath);
 
             var content =
                 $"""
                  [Desktop Entry]
                  Type=Application
                  Name=Euterpe
-                 Exec="{processPath.EscapeDesktopExecArgument()}" %u
+                 Exec={execCommand} %u
                  MimeType=x-scheme-handler/{IPlatformService.DeepLinkScheme};
                  Terminal=false
                  """;
@@ -100,6 +102,24 @@ internal sealed partial class LinuxService : IPlatformService
             Logger.ZLogError(ex, $"Failed to retrieve MuseDash user info");
             return null;
         }
+    }
+
+    private string BuildDeepLinkExecCommand(string processPath)
+    {
+        if (!Path.GetFileName(processPath).StartsWith("dotnet", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"\"{processPath.EscapeDesktopExecArgument()}\"";
+        }
+
+        var entryAssemblyPath = Assembly.GetEntryAssembly()?.Location;
+        if (entryAssemblyPath.IsNullOrEmpty())
+        {
+            Logger.ZLogWarning($"Entry assembly location is unavailable, falling back to process path for deep link registration");
+            return $"\"{processPath.EscapeDesktopExecArgument()}\"";
+        }
+
+        Logger.ZLogInformation($"Detected dotnet host on Linux, registering deep link with entry assembly path: {entryAssemblyPath}");
+        return $"\"{processPath.EscapeDesktopExecArgument()}\" \"{entryAssemblyPath.EscapeDesktopExecArgument()}\"";
     }
 
     #region Injections
