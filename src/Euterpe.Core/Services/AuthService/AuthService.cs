@@ -1,4 +1,6 @@
+using System.Net;
 using Euterpe.Contracts.Account;
+using Refit;
 
 namespace Euterpe.Core;
 
@@ -27,12 +29,11 @@ internal sealed partial class AuthService : IAuthService
                 }
                 catch (Exception ex)
                 {
-                    Logger.ZLogWarning(ex, $"Failed to call logout API, clearing local tokens anyway");
+                    Logger.ZLogWarning(ex, $"Failed to call logout API");
                 }
             }
 
             await ClearSessionAsync().ConfigureAwait(false);
-
             Logger.ZLogInformation($"User logged out");
         }
         finally
@@ -41,20 +42,13 @@ internal sealed partial class AuthService : IAuthService
         }
     }
 
-    public async Task HandleAuthCallbackAsync(string code)
+    public async Task CompleteLoginAsync(string code)
     {
         await _lock.AcquireAsync().ConfigureAwait(false);
         try
         {
             var response = await AuthClient.ExchangeAppTokenAsync(new AppTokenRequest(code)).ConfigureAwait(false);
-
-            AuthState.AccessToken = response.AccessToken;
-            AuthState.RefreshToken = response.RefreshToken;
-            AuthState.AccessTokenExpiry = DateTime.UtcNow.Add(AccessTokenLifetime);
-            AuthState.CurrentUser = response.Me;
-            AuthState.IsLoggedIn = true;
-
-            await PlatformService.SaveTokensAsync(response.AccessToken, response.RefreshToken).ConfigureAwait(false);
+            await UpdateSessionAsync(response.AccessToken, response.RefreshToken, response.Me).ConfigureAwait(false);
 
             Logger.ZLogInformation($"User logged in: {response.Me.Nickname}");
 
@@ -66,24 +60,40 @@ internal sealed partial class AuthService : IAuthService
         }
     }
 
-    public async Task<string?> GetAccessTokenAsync()
+    public async Task<string> GetAccessTokenAsync()
     {
-        if (!HasRefreshableSession())
+        if (DateTimeOffset.Now < AuthState.AccessTokenExpiry)
         {
-            return null;
+            return AuthState.AccessToken!;
         }
 
-        if (HasValidAccessToken())
-        {
-            return AuthState.AccessToken;
-        }
-
-        return await RefreshAccessTokenCoreAsync(false).ConfigureAwait(false);
+        return await RenewAccessTokenAsync().ConfigureAwait(false);
     }
 
-    public async Task<string?> RefreshAccessTokenAsync() => await RefreshAccessTokenCoreAsync(true).ConfigureAwait(false);
+    public async Task<string> RenewAccessTokenAsync()
+    {
+        await _lock.AcquireAsync().ConfigureAwait(false);
+        try
+        {
+            var response = await AuthClient.RefreshTokenAsync(new RefreshRequest(AuthState.RefreshToken!)).ConfigureAwait(false);
+            await UpdateSessionAsync(response.AccessToken, AuthState.RefreshToken!, AuthState.CurrentUser).ConfigureAwait(false);
+            return AuthState.AccessToken!;
+        }
+        catch (ApiException ex) when (ex.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden)
+        {
+            Logger.ZLogError(ex, $"Refresh token rejected by server, requiring re-login");
+            await ClearSessionAsync().ConfigureAwait(false);
+            await LoginAsync().ConfigureAwait(false);
+            await Ready.WaitAsync().ConfigureAwait(false);
+            return AuthState.AccessToken!;
+        }
+        finally
+        {
+            _lock.Release();
+        }
+    }
 
-    public async Task<bool> TryRestoreSessionAsync()
+    public async Task<bool> RestoreSessionAsync()
     {
         var tokens = await PlatformService.LoadTokensAsync().ConfigureAwait(false);
         if (tokens is null)
@@ -93,21 +103,16 @@ internal sealed partial class AuthService : IAuthService
 
         AuthState.AccessToken = tokens.AccessToken;
         AuthState.RefreshToken = tokens.RefreshToken;
-        AuthState.AccessTokenExpiry = DateTime.MinValue;
-
-        var accessToken = await GetAccessTokenAsync().ConfigureAwait(false);
-        if (accessToken is null)
-        {
-            return false;
-        }
+        AuthState.AccessTokenExpiry = DateTimeOffset.MinValue;
 
         try
         {
-            AuthState.CurrentUser = await AuthClient.GetMeAsync(accessToken).ConfigureAwait(false);
+            var accessToken = await GetAccessTokenAsync().ConfigureAwait(false);
+            AuthState.CurrentUser = await AuthClient.GetCurrentUserAsync(accessToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to fetch user info after session restore");
+            Logger.ZLogError(ex, $"Failed to restore session");
             return false;
         }
 

@@ -15,6 +15,6 @@ public sealed partial class DeepLinkService
             return;
         }
 
-        await AuthService.HandleAuthCallbackAsync(code).ConfigureAwait(false);
+        await AuthService.CompleteLoginAsync(code).ConfigureAwait(false);
     }
 }
