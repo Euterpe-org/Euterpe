@@ -1,16 +1,24 @@
+using Euterpe.Contracts.Telemetry;
+
 namespace Euterpe.Core;
 
-internal sealed partial class TelemetryService : ITelemetryService
+internal sealed class TelemetryService : ITelemetryService
 {
     public async Task TrackSessionAsync()
     {
         try
         {
-            await PostSessionAsync().ConfigureAwait(false);
+            var payload = new SessionEvent(
+                RegionInfo.CurrentRegion.TwoLetterISORegionName,
+                PlatformService.OsString,
+                PlatformService.ArchitectureString,
+                AppVersion);
+
+            using var response = await TelemetryApiClient.TrackSessionAsync(payload).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to track visitor telemetry");
+            Logger.ZLogWarning(ex, $"Failed to track session telemetry");
         }
     }
 
