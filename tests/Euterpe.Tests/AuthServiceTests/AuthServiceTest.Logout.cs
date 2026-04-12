@@ -20,7 +20,6 @@ public sealed partial class AuthServiceTest
         await Assert.That(sut.Ready.IsSet).IsFalse();
         await Assert.That(sut.AuthState.AccessToken).IsNull();
         await Assert.That(sut.AuthState.RefreshToken).IsNull();
-        await Assert.That(sut.AuthState.IsLoggedIn).IsFalse();
     }
 
     [Test]

@@ -10,7 +10,6 @@ internal sealed partial class AuthService
         AuthState.RefreshToken = refreshToken;
         AuthState.AccessTokenExpiry = DateTimeOffset.Now.Add(AccessTokenLifetime);
         AuthState.CurrentUser = currentUser;
-        AuthState.IsLoggedIn = currentUser is not null;
 
         await PlatformService.SaveTokensAsync(accessToken, refreshToken).ConfigureAwait(false);
     }

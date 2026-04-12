@@ -14,7 +14,7 @@ public sealed partial class AuthServiceTest
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
             .Returns(new RefreshResponse(NewAccessToken, NewRefreshToken));
-        var sut = CreateAuthService(authClientMock, authState: authState);
+        var sut = CreateAuthService(authClientMock, authState);
 
         var token = await sut.RenewAccessTokenAsync();
 
@@ -30,7 +30,7 @@ public sealed partial class AuthServiceTest
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
             .Throws(CreateApiException(HttpStatusCode.Unauthorized));
-        var sut = CreateAuthService(authClientMock, authState: authState);
+        var sut = CreateAuthService(authClientMock, authState);
 
         Func<Task<string?>> act = async () => await sut.RenewAccessTokenAsync();
 

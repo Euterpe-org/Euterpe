@@ -5,6 +5,9 @@ using Euterpe.Contracts.Telemetry;
 namespace Euterpe.Core.JsonContexts;
 
 [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.SnakeCaseLower)]
+[JsonSerializable(typeof(Mod[]))]
+[JsonSerializable(typeof(Lib[]))]
+[JsonSerializable(typeof(Chart[]))]
 [JsonSerializable(typeof(SessionEvent))]
 [JsonSerializable(typeof(MuseDashUidRequest))]
 [JsonSerializable(typeof(TokenPayload))]
@@ -14,4 +17,5 @@ namespace Euterpe.Core.JsonContexts;
 [JsonSerializable(typeof(RefreshResponse))]
 [JsonSerializable(typeof(LogoutRequest))]
 [JsonSerializable(typeof(UserInfo))]
+[JsonSerializable(typeof(CurrentUserResponse))]
 internal sealed partial class SnakeCaseJsonContext : JsonSerializerContext;

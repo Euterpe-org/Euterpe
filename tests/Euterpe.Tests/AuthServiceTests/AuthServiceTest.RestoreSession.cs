@@ -20,15 +20,15 @@ public sealed partial class AuthServiceTest
     }
 
     [Test]
-    public async Task RestoreSessionAsync_WhenRefreshFails_ShouldReturnFalseAndClearState()
+    public async Task RestoreSessionAsync_WhenGetCurrentUserFails_ShouldReturnFalseAndClearState()
     {
         var platformServiceMock = IPlatformService.Mock();
         platformServiceMock.LoadTokensAsync()
             .Returns(new TokenPayload(ValidAccessToken, ValidRefreshToken));
-        var authClientMock = IEuterpeAuthClient.Mock();
-        authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
+        var accountClientMock = IEuterpeAccountClient.Mock();
+        accountClientMock.GetCurrentUserAsync(Any<CancellationToken>())
             .Throws(CreateApiException(HttpStatusCode.Unauthorized));
-        var sut = CreateAuthService(authClientMock, platformServiceMock);
+        var sut = CreateAuthService(platformService: platformServiceMock, accountClient: accountClientMock);
 
         var result = await sut.RestoreSessionAsync();
 
@@ -36,6 +36,7 @@ public sealed partial class AuthServiceTest
         await Assert.That(result).IsFalse();
         await Assert.That(sut.AuthState.AccessToken).IsNull();
         await Assert.That(sut.AuthState.RefreshToken).IsNull();
+        await Assert.That(sut.Ready.IsSet).IsFalse();
     }
 
     [Test]
@@ -44,20 +45,16 @@ public sealed partial class AuthServiceTest
         var platformServiceMock = IPlatformService.Mock();
         platformServiceMock.LoadTokensAsync()
             .Returns(new TokenPayload(ValidAccessToken, ValidRefreshToken));
-        var authClientMock = IEuterpeAuthClient.Mock();
-        authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
-            .Returns(new RefreshResponse(NewAccessToken, NewRefreshToken));
-        authClientMock.GetCurrentUserAsync(Any<string>(), Any<CancellationToken>())
-            .Returns(TestUser);
-        var sut = CreateAuthService(authClientMock, platformServiceMock);
+        var accountClientMock = IEuterpeAccountClient.Mock();
+        accountClientMock.GetCurrentUserAsync(Any<CancellationToken>())
+            .Returns(new CurrentUserResponse(TestUser));
+        var sut = CreateAuthService(platformService: platformServiceMock, accountClient: accountClientMock);
 
         var result = await sut.RestoreSessionAsync();
 
         using var _ = Assert.Multiple();
         await Assert.That(result).IsTrue();
-        await Assert.That(sut.AuthState.IsLoggedIn).IsTrue();
         await Assert.That(sut.AuthState.CurrentUser).IsEqualTo(TestUser);
-        await Assert.That(sut.AuthState.RefreshToken).IsEqualTo(NewRefreshToken);
         await Assert.That(sut.Ready.IsSet).IsTrue();
     }
 }

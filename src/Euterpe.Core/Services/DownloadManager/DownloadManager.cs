@@ -142,7 +142,7 @@ internal sealed partial class DownloadManager : IDownloadManager
 
         try
         {
-            return await CdnClient.FetchModListAsync(cancellationToken).ConfigureAwait(false);
+            return await ModClient.GetModManifestAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -157,7 +157,7 @@ internal sealed partial class DownloadManager : IDownloadManager
 
         try
         {
-            return await CdnClient.FetchLibListAsync(cancellationToken).ConfigureAwait(false);
+            return await DistributionClient.GetLibManifestAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -175,7 +175,10 @@ internal sealed partial class DownloadManager : IDownloadManager
     public required HttpClient Client { get; init; }
 
     [UsedImplicitly]
-    public required EuterpeCdnClient CdnClient { get; init; }
+    public required IEuterpeModClient ModClient { get; init; }
+
+    [UsedImplicitly]
+    public required IEuterpeDistributionClient DistributionClient { get; init; }
 
     [UsedImplicitly]
     public required IDownloadService DownloadService { get; init; }

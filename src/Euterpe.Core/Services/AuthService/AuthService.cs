@@ -106,10 +106,12 @@ internal sealed partial class AuthService : IAuthService
         AuthState.AccessToken = tokens.AccessToken;
         AuthState.RefreshToken = tokens.RefreshToken;
 
+        Ready.Set();
+
         try
         {
-            var accessToken = await RenewAccessTokenAsync().ConfigureAwait(false);
-            AuthState.CurrentUser = await AuthClient.GetCurrentUserAsync(accessToken).ConfigureAwait(false);
+            var response = await AccountClient.GetCurrentUserAsync().ConfigureAwait(false);
+            AuthState.CurrentUser = response.User;
         }
         catch (Exception ex)
         {
@@ -118,8 +120,6 @@ internal sealed partial class AuthService : IAuthService
             return false;
         }
 
-        AuthState.IsLoggedIn = true;
-        Ready.Set();
         return true;
     }
 
@@ -130,6 +130,9 @@ internal sealed partial class AuthService : IAuthService
 
     [UsedImplicitly]
     public required IPlatformService PlatformService { get; init; }
+
+    [UsedImplicitly]
+    public required IEuterpeAccountClient AccountClient { get; init; }
 
     [UsedImplicitly]
     public required IEuterpeAuthClient AuthClient { get; init; }

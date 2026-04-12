@@ -14,7 +14,4 @@ public interface IEuterpeAuthClient
 
     [Post(Auth.Logout)]
     Task LogoutAsync([Body] LogoutRequest request, CancellationToken cancellationToken = default);
-
-    [Get(Auth.Me)]
-    Task<UserInfo> GetCurrentUserAsync([Authorize] string token, CancellationToken cancellationToken = default);
 }

@@ -3,10 +3,11 @@ using System.Net.Http.Headers;
 
 namespace Euterpe.Core.Http.Handlers;
 
-internal sealed class AuthHeaderHandler(IAuthService authService) : DelegatingHandler
+internal sealed class AuthHeaderHandler(IServiceProvider services) : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
+        var authService = services.GetRequiredService<IAuthService>();
         var token = await authService.GetAccessTokenAsync().ConfigureAwait(false);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 

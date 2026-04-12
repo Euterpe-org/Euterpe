@@ -40,7 +40,6 @@ public static class CoreServiceExtensions
             services.AddTransient<XRequestIdHandler>();
             services.AddTransient<AuthHeaderHandler>();
             services.AddHttpClient();
-            services.AddHttpClient<EuterpeCdnClient>();
             services
                 .AddRefitClient<IEuterpeAuthClient>(new RefitSettings
                 {
@@ -48,6 +47,22 @@ public static class CoreServiceExtensions
                 }, nameof(EuterpeApi.Auth))
                 .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Auth.BasePath}"))
                 .AddHttpMessageHandler<XRequestIdHandler>();
+            services
+                .AddRefitClient<IEuterpeAccountClient>(new RefitSettings
+                {
+                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
+                }, nameof(EuterpeApi.Me))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Me.BasePath}"))
+                .AddHttpMessageHandler<XRequestIdHandler>()
+                .AddHttpMessageHandler<AuthHeaderHandler>();
+            services
+                .AddRefitClient<IEuterpeDistributionClient>(new RefitSettings
+                {
+                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
+                }, nameof(EuterpeApi.Distribution))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Distribution.BasePath}"))
+                .AddHttpMessageHandler<XRequestIdHandler>()
+                .AddHttpMessageHandler<AuthHeaderHandler>();
             services
                 .AddRefitClient<IEuterpeModClient>(new RefitSettings
                 {

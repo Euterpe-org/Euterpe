@@ -17,11 +17,13 @@ public sealed partial class AuthServiceTest
 
     private AuthService CreateAuthService(
         IEuterpeAuthClient? authClient = null,
+        AuthState? authState = null,
         IPlatformService? platformService = null,
-        AuthState? authState = null) =>
+        IEuterpeAccountClient? accountClient = null) =>
         new()
         {
             AuthState = authState ?? new AuthState(),
+            AccountClient = accountClient ?? IEuterpeAccountClient.Mock(),
             AuthClient = authClient ?? IEuterpeAuthClient.Mock(),
             PlatformService = platformService ?? IPlatformService.Mock(),
             Logger = _logger
