@@ -62,12 +62,22 @@ internal sealed partial class AuthService : IAuthService
     {
         await Ready.WaitAsync().ConfigureAwait(false);
 
-        if (DateTimeOffset.Now < AuthState.AccessTokenExpiry)
+        await _lock.AcquireAsync().ConfigureAwait(false);
+        try
         {
+            if (DateTimeOffset.Now < AuthState.AccessTokenExpiry)
+            {
+                return AuthState.AccessToken!;
+            }
+
+            var response = await AuthClient.RefreshTokenAsync(new RefreshRequest(AuthState.RefreshToken!)).ConfigureAwait(false);
+            await UpdateSessionAsync(response.AccessToken, response.RefreshToken, AuthState.CurrentUser).ConfigureAwait(false);
             return AuthState.AccessToken!;
         }
-
-        return await RenewAccessTokenAsync().ConfigureAwait(false);
+        finally
+        {
+            _lock.Release();
+        }
     }
 
     public async Task<string> RenewAccessTokenAsync()
