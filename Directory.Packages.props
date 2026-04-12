@@ -8,7 +8,7 @@
         <MicrosoftCodeAnalysisVersion>5.3.0</MicrosoftCodeAnalysisVersion>
         <RefitVersion>10.1.6</RefitVersion>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
-        <TUnitVersion>1.21.30</TUnitVersion>
+        <TUnitVersion>1.32.0</TUnitVersion>
         <UrsaVersion>2.0.0-rc1</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
@@ -54,9 +54,9 @@
         <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.5"/>
         <PackageVersion Include="System.ServiceModel.Syndication" Version="10.0.5"/>
         <PackageVersion Include="TUnit" Version="$(TUnitVersion)"/>
-        <PackageVersion Include="TUnit.Mocks" Version="$(TUnitVersion)"/>
-        <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)"/>
-        <PackageVersion Include="TUnit.Mocks.Logging" Version="$(TUnitVersion)"/>
+        <PackageVersion Include="TUnit.Mocks" Version="$(TUnitVersion)-beta"/>
+        <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)-beta"/>
+        <PackageVersion Include="TUnit.Mocks.Logging" Version="$(TUnitVersion)-beta"/>
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Verify.TUnit" Version="31.15.0"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
