@@ -8,6 +8,8 @@ namespace Euterpe.Tests;
 public sealed class UpdateServiceTest : IDisposable
 {
     private const string AppVersion = BuildInfo.AppVersion;
+    private const string ContentTypeHeader = "Content-Type";
+    private const string AtomContentType = "application/rss+xml";
     private const string LowerStableVersion = "0.0.1";
     private const string LowerPrereleaseVersion = "0.0.1-rc1";
     private const string HigherStableVersion = "999.0.0";
@@ -32,9 +34,9 @@ public sealed class UpdateServiceTest : IDisposable
             Config = config ?? Config,
             Client = _mockHttp.CreateClient(),
             Logger = _logger,
-            DownloadManager = downloadManager ?? Mock.Of<IDownloadManager>().Object,
-            MessageBoxService = messageBoxService ?? Mock.Of<IMessageBoxService>().Object,
-            PlatformService = platformService ?? Mock.Of<IPlatformService>().Object
+            DownloadManager = downloadManager ?? IDownloadManager.Mock(),
+            MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
+            PlatformService = platformService ?? IPlatformService.Mock()
         };
 
 
@@ -51,7 +53,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -80,7 +82,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -106,7 +108,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -131,7 +133,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -155,7 +157,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -180,7 +182,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -205,7 +207,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -234,7 +236,7 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
         var updateService = CreateUpdateService();
 
@@ -258,9 +260,9 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
-        var messageBoxServiceMock = Mock.Of<IMessageBoxService>();
+        var messageBoxServiceMock = IMessageBoxService.Mock();
         messageBoxServiceMock.NoticeConfirmAsync(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any)
             .Returns(MessageBoxResult.No);
 
@@ -288,9 +290,9 @@ public sealed class UpdateServiceTest : IDisposable
                      </entry>
                  </feed>
                  """)
-            .WithHeader("Content-Type", "application/rss+xml");
+            .WithHeader(ContentTypeHeader, AtomContentType);
 
-        var messageBoxServiceMock = Mock.Of<IMessageBoxService>();
+        var messageBoxServiceMock = IMessageBoxService.Mock();
         messageBoxServiceMock.NoticeConfirmAsync(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any)
             .Returns(MessageBoxResult.No);
 
