@@ -27,7 +27,6 @@ public interface IAuthService
 
     /// <summary>
     ///     Force the server to issue a new access token using the current refresh token.
-    ///     If the refresh token is rejected, triggers re-login and waits for completion.
     /// </summary>
     Task<string> RenewAccessTokenAsync();
 

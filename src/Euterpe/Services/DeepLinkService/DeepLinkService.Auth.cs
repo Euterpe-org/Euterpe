@@ -12,9 +12,18 @@ public sealed partial class DeepLinkService
         if (code.IsNullOrEmpty())
         {
             Logger.ZLogWarning($"Auth callback missing code parameter: {query}");
+            await AuthService.LoginAsync().ConfigureAwait(false);
             return;
         }
 
-        await AuthService.CompleteLoginAsync(code).ConfigureAwait(false);
+        try
+        {
+            await AuthService.CompleteLoginAsync(code).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Auth callback failed, retrying login");
+            await AuthService.LoginAsync().ConfigureAwait(false);
+        }
     }
 }
