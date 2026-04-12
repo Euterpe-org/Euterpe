@@ -84,7 +84,7 @@ public sealed partial class UpdateServiceTest
         messageBoxServiceMock.NoticeConfirmAsync(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any)
             .Returns(MessageBoxResult.No);
 
-        var updateService = CreateUpdateService(messageBoxService: messageBoxServiceMock.Object);
+        var updateService = CreateUpdateService(messageBoxService: messageBoxServiceMock);
 
         using var _ = Assert.Multiple();
 
