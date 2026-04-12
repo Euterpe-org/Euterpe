@@ -12,12 +12,13 @@ public sealed partial class AuthServiceTest
         var authState = CreateLoggedInState();
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
-            .Returns(new RefreshResponse(NewAccessToken));
+            .Returns(new RefreshResponse(NewAccessToken, NewRefreshToken));
         var sut = CreateAuthService(authClientMock, authState: authState);
 
         var token = await sut.RenewAccessTokenAsync();
 
         await Assert.That(token).IsEqualTo(NewAccessToken);
+        await Assert.That(authState.RefreshToken).IsEqualTo(NewRefreshToken);
     }
 
     [Test]

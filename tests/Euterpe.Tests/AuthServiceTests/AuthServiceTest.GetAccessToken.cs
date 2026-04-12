@@ -22,7 +22,7 @@ public sealed partial class AuthServiceTest
         var authState = CreateExpiredState();
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
-            .Returns(new RefreshResponse(NewAccessToken));
+            .Returns(new RefreshResponse(NewAccessToken, NewRefreshToken));
         var sut = CreateAuthService(authClientMock, authState: authState);
 
         var token = await sut.GetAccessTokenAsync();

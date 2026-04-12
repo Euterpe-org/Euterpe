@@ -50,7 +50,7 @@ public sealed partial class AuthServiceTest
             .Returns(new TokenPayload(ValidAccessToken, ValidRefreshToken));
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
-            .Returns(new RefreshResponse(NewAccessToken));
+            .Returns(new RefreshResponse(NewAccessToken, NewRefreshToken));
         authClientMock.GetCurrentUserAsync(Any<string>(), Any<CancellationToken>())
             .Returns(TestUser);
         var sut = CreateAuthService(authClientMock, platformServiceMock);
