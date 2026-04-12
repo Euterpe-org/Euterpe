@@ -32,10 +32,9 @@ public sealed partial class AuthServiceTest
             .Throws(CreateApiException(HttpStatusCode.Unauthorized));
         var sut = CreateAuthService(authClientMock, authState: authState);
 
-        var act = sut.RenewAccessTokenAsync;
+        Func<Task<string?>> act = async () => await sut.RenewAccessTokenAsync();
 
-        await Assert.That(act).ThrowsException()
-            .And.IsTypeOf<ApiException>();
+        await Assert.That(act).ThrowsExactly<ApiException>();
     }
 
     private static ApiException CreateApiException(HttpStatusCode statusCode)
