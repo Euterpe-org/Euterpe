@@ -1,6 +1,4 @@
-using System.Net;
 using Euterpe.Contracts.Account;
-using Refit;
 
 namespace Euterpe.Core;
 
@@ -62,6 +60,8 @@ internal sealed partial class AuthService : IAuthService
 
     public async Task<string> GetAccessTokenAsync()
     {
+        await Ready.WaitAsync().ConfigureAwait(false);
+
         if (DateTimeOffset.Now < AuthState.AccessTokenExpiry)
         {
             return AuthState.AccessToken!;
@@ -77,14 +77,6 @@ internal sealed partial class AuthService : IAuthService
         {
             var response = await AuthClient.RefreshTokenAsync(new RefreshRequest(AuthState.RefreshToken!)).ConfigureAwait(false);
             await UpdateSessionAsync(response.AccessToken, response.RefreshToken, AuthState.CurrentUser).ConfigureAwait(false);
-            return AuthState.AccessToken!;
-        }
-        catch (ApiException ex) when (ex.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden)
-        {
-            Logger.ZLogError(ex, $"Refresh token rejected by server, requiring re-login");
-            await ClearSessionAsync().ConfigureAwait(false);
-            await LoginAsync().ConfigureAwait(false);
-            await Ready.WaitAsync().ConfigureAwait(false);
             return AuthState.AccessToken!;
         }
         finally
@@ -103,16 +95,16 @@ internal sealed partial class AuthService : IAuthService
 
         AuthState.AccessToken = tokens.AccessToken;
         AuthState.RefreshToken = tokens.RefreshToken;
-        AuthState.AccessTokenExpiry = DateTimeOffset.MinValue;
 
         try
         {
-            var accessToken = await GetAccessTokenAsync().ConfigureAwait(false);
+            var accessToken = await RenewAccessTokenAsync().ConfigureAwait(false);
             AuthState.CurrentUser = await AuthClient.GetCurrentUserAsync(accessToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to restore session");
+            await ClearSessionAsync().ConfigureAwait(false);
             return false;
         }
 
