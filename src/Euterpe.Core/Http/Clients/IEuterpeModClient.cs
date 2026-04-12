@@ -1,5 +1,5 @@
 namespace Euterpe.Core.Http.Clients;
 
-internal interface IEuterpeModClient
+public interface IEuterpeModClient
 {
 }

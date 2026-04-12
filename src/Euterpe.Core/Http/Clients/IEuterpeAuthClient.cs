@@ -4,7 +4,7 @@ using static Euterpe.Shared.EuterpeApi;
 
 namespace Euterpe.Core.Http.Clients;
 
-internal interface IEuterpeAuthClient
+public interface IEuterpeAuthClient
 {
     [Post(Auth.AppToken)]
     Task<AppTokenResponse> ExchangeAppTokenAsync([Body] AppTokenRequest request, CancellationToken cancellationToken = default);
