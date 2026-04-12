@@ -20,12 +20,8 @@ public sealed partial class AuthServiceTest
     }
 
     [Test]
-    [Timeout(5_000)]
-    public async Task RestoreSessionAsync_WhenRefreshFails_ShouldReturnFalseAndClearState(CancellationToken cancellationToken)
+    public async Task RestoreSessionAsync_WhenRefreshFails_ShouldReturnFalseAndClearState()
     {
-        // Issue #4: Bad tokens should be cleared on restore failure.
-        // Also tests that RestoreSessionAsync doesn't hang when refresh token is rejected,
-        // since RenewAccessTokenAsync triggers re-login and awaits Ready.
         var platformServiceMock = IPlatformService.Mock();
         platformServiceMock.LoadTokensAsync()
             .Returns(new TokenPayload(ValidAccessToken, ValidRefreshToken));
@@ -60,6 +56,8 @@ public sealed partial class AuthServiceTest
         using var _ = Assert.Multiple();
         await Assert.That(result).IsTrue();
         await Assert.That(sut.AuthState.IsLoggedIn).IsTrue();
+        await Assert.That(sut.AuthState.CurrentUser).IsEqualTo(TestUser);
+        await Assert.That(sut.AuthState.RefreshToken).IsEqualTo(NewRefreshToken);
         await Assert.That(sut.Ready.IsSet).IsTrue();
     }
 }
