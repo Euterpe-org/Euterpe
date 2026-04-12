@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:constants="using:Euterpe.Shared"
     xmlns:converters="using:Euterpe.Converters"
+    xmlns:labs="using:Avalonia.Labs.Controls"
     xmlns:models="using:Euterpe.Styles.Models"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Windows"
@@ -75,13 +76,14 @@
                 </u:NavMenu.IconTemplate>
 
                 <u:NavMenu.Header>
-                    <Image
+                    <labs:AsyncImage
                         u:NavMenu.CanToggle="False"
                         Height="55"
                         HorizontalAlignment="Center"
                         Margin="0,15,0,10"
+                        PlaceholderSource="/Assets/Logo.webp"
                         RenderOptions.BitmapInterpolationMode="HighQuality"
-                        Source="/Assets/Logo.webp"
+                        Source="{Binding AuthState.AvatarUrl}"
                         VerticalAlignment="Center" />
                 </u:NavMenu.Header>
 

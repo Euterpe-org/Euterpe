@@ -1,6 +1,7 @@
 <Application
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Avalonia.Labs.Controls"
     xmlns:semi="https://irihi.tech/semi"
     xmlns:vm="using:Euterpe.ViewModels"
     x:Class="Euterpe.Views.App"
@@ -13,6 +14,7 @@
         <semi:SemiTheme />
         <semi:SemiPopupAnimations />
         <semi:UrsaSemiTheme />
+        <controls:ControlThemes />
     </Application.Styles>
 
     <TrayIcon.Icons>

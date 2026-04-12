@@ -18,6 +18,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     #region Injections
 
     [UsedImplicitly]
+    public required AuthState AuthState { get; init; }
+
+    [UsedImplicitly]
     public required ISettingService SettingService { get; init; }
 
     [UsedImplicitly]
