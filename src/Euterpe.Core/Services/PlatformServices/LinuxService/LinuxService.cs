@@ -34,7 +34,7 @@ internal sealed partial class LinuxService : IPlatformService
                  [Desktop Entry]
                  Type=Application
                  Name=Euterpe
-                 Exec={processPath.EscapeDesktopExecArgument()} %u
+                 Exec="{processPath.EscapeDesktopExecArgument()}" %u
                  MimeType=x-scheme-handler/{IPlatformService.DeepLinkScheme};
                  Terminal=false
                  """;
