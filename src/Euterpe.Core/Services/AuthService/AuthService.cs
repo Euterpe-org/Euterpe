@@ -76,7 +76,7 @@ internal sealed partial class AuthService : IAuthService
         try
         {
             var response = await AuthClient.RefreshTokenAsync(new RefreshRequest(AuthState.RefreshToken!)).ConfigureAwait(false);
-            await UpdateSessionAsync(response.AccessToken, AuthState.RefreshToken!, AuthState.CurrentUser).ConfigureAwait(false);
+            await UpdateSessionAsync(response.AccessToken, response.RefreshToken, AuthState.CurrentUser).ConfigureAwait(false);
             return AuthState.AccessToken!;
         }
         catch (ApiException ex) when (ex.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden)
