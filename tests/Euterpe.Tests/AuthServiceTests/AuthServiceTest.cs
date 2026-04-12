@@ -1,7 +1,5 @@
-using System.Net;
 using Euterpe.Contracts.Account;
 using Euterpe.Core.Http.Clients;
-using Refit;
 using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests;
@@ -42,11 +40,4 @@ public sealed partial class AuthServiceTest
         RefreshToken = ValidRefreshToken,
         AccessTokenExpiry = DateTimeOffset.Now.AddMinutes(-1)
     };
-
-    private static ApiException CreateApiException(HttpStatusCode statusCode)
-    {
-        var request = new HttpRequestMessage(HttpMethod.Post, "https://test.com");
-        var response = new HttpResponseMessage(statusCode);
-        return ApiException.Create(request, HttpMethod.Post, response, new RefitSettings()).Result;
-    }
 }
