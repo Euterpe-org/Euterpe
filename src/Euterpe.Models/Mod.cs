@@ -3,7 +3,7 @@
 [PublicAPI]
 public sealed class Mod
 {
-    public string Mid { get; set; } = string.Empty;
+    public long Mid { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = string.Empty;
     public string Author { get; set; } = string.Empty;
@@ -23,5 +23,5 @@ public sealed class Mod
     public string DownloadUrl { get; set; } = string.Empty;
 
     [JsonPropertyName("download_count_total")]
-    public string DownloadCount { get; set; } = string.Empty;
+    public long DownloadCount { get; set; }
 }

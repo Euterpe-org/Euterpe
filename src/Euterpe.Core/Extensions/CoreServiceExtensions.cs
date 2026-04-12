@@ -51,8 +51,8 @@ public static class CoreServiceExtensions
                 .AddRefitClient<IEuterpeAccountClient>(new RefitSettings
                 {
                     ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Me))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Me.BasePath}"))
+                }, nameof(EuterpeApi.Account))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Account.BasePath}"))
                 .AddHttpMessageHandler<XRequestIdHandler>()
                 .AddHttpMessageHandler<AuthHeaderHandler>();
             services
@@ -67,8 +67,8 @@ public static class CoreServiceExtensions
                 .AddRefitClient<IEuterpeModClient>(new RefitSettings
                 {
                     ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Mod))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Mod.BasePath}"))
+                }, nameof(EuterpeApi.Mods))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Mods.BasePath}"))
                 .AddHttpMessageHandler<XRequestIdHandler>()
                 .AddHttpMessageHandler<AuthHeaderHandler>()
                 .AddStandardResilienceHandler(options =>
@@ -84,8 +84,8 @@ public static class CoreServiceExtensions
                 .AddRefitClient<IEuterpeChartClient>(new RefitSettings
                 {
                     ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Chart))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Chart.BasePath}"))
+                }, nameof(EuterpeApi.Charts))
+                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Charts.BasePath}"))
                 .AddHttpMessageHandler<XRequestIdHandler>()
                 .AddHttpMessageHandler<AuthHeaderHandler>()
                 .AddStandardResilienceHandler(options =>

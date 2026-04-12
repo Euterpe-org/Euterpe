@@ -5,6 +5,6 @@ namespace Euterpe.Core.Http.Clients;
 
 public interface IEuterpeModClient
 {
-    [Get(EuterpeApi.Mod.Manifest)]
+    [Get(EuterpeApi.Mods.Manifest)]
     Task<Mod[]> GetModManifestAsync(CancellationToken cancellationToken = default);
 }

@@ -13,7 +13,7 @@ public static class EuterpeApi
         public const string Logout = "/logout";
     }
 
-    public static class Me
+    public static class Account
     {
         public const string BasePath = "me";
     }
@@ -25,7 +25,7 @@ public static class EuterpeApi
         public const string Session = "/session";
     }
 
-    public static class Mod
+    public static class Mods
     {
         public const string BasePath = "mods";
 
@@ -55,7 +55,7 @@ public static class EuterpeApi
         }
     }
 
-    public static class Chart
+    public static class Charts
     {
         public const string BasePath = "charts";
     }
