@@ -7,25 +7,12 @@ namespace Euterpe.Tests;
 public sealed partial class UpdateServiceTest
 {
     [Test]
-    public async Task CheckForUpdatesAsync_FindPrerelease_LowerPrereleaseVersion_ShouldNotFindUpdate()
+    public async Task CheckForUpdatesAsync_FindPrerelease_LowerVersion_ShouldNotFindUpdate()
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
-        _mockHttp.OnGet(TagsRSSUrl)
-            .RespondWithString(
-                $"""
-                 <?xml version="1.0" encoding="UTF-8"?>
-                 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
-                     <entry>
-                        <title>{LowerPrereleaseVersion}</title>
-                     </entry>
-                     <entry>
-                        <title>{LowerStableVersion}</title>
-                     </entry>
-                 </feed>
-                 """)
-            .WithHeader(ContentTypeHeader, AtomContentType);
+        var distributionClient = CreateDistributionClientMock(LowerPrereleaseVersion);
 
-        var updateService = CreateUpdateService();
+        var updateService = CreateUpdateService(distributionClient: distributionClient);
 
         using var _ = Assert.Multiple();
 
@@ -36,26 +23,30 @@ public sealed partial class UpdateServiceTest
     }
 
     [Test]
-    public async Task CheckForUpdatesAsync_FindPrerelease_WhenHigherPrereleaseVersionIsSkipped_ShouldSkipVersion()
+    [PrereleaseOnly]
+    public async Task CheckForUpdatesAsync_FindPrerelease_CurrentVersion_ShouldNotFindUpdate()
+    {
+        Config.UpdateChannel = UpdateChannel.Prerelease;
+        var distributionClient = CreateDistributionClientMock(AppVersion);
+
+        var updateService = CreateUpdateService(distributionClient: distributionClient);
+
+        using var _ = Assert.Multiple();
+
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
+        _logger.VerifyLog()
+            .ContainingMessage($"Release version parsed: {AppVersion}")
+            .ContainingMessage("No new version available");
+    }
+
+    [Test]
+    public async Task CheckForUpdatesAsync_FindPrerelease_WhenHigherVersionIsSkipped_ShouldSkipVersion()
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
         Config.SkipVersion = SemVersion.Parse(HigherPrereleaseVersion);
-        _mockHttp.OnGet(TagsRSSUrl)
-            .RespondWithString(
-                $"""
-                 <?xml version="1.0" encoding="UTF-8"?>
-                 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
-                     <entry>
-                        <title>{HigherPrereleaseVersion}</title>
-                     </entry>
-                     <entry>
-                        <title>{HigherStableVersion}</title>
-                     </entry>
-                 </feed>
-                 """)
-            .WithHeader(ContentTypeHeader, AtomContentType);
+        var distributionClient = CreateDistributionClientMock(HigherPrereleaseVersion);
 
-        var updateService = CreateUpdateService();
+        var updateService = CreateUpdateService(distributionClient: distributionClient);
 
         using var _ = Assert.Multiple();
 
@@ -68,23 +59,12 @@ public sealed partial class UpdateServiceTest
     public async Task CheckForUpdatesAsync_FindPrerelease_WhenMessageBoxResultNo_ShouldSkipVersion()
     {
         Config.UpdateChannel = UpdateChannel.Prerelease;
-        _mockHttp.OnGet(TagsRSSUrl)
-            .RespondWithString(
-                $"""
-                 <?xml version="1.0" encoding="UTF-8"?>
-                 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
-                     <entry>
-                         <title>{HigherPrereleaseVersion}</title>
-                     </entry>
-                 </feed>
-                 """)
-            .WithHeader(ContentTypeHeader, AtomContentType);
-
+        var distributionClient = CreateDistributionClientMock(HigherPrereleaseVersion);
         var messageBoxServiceMock = IMessageBoxService.Mock();
         messageBoxServiceMock.NoticeConfirmAsync(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any)
             .Returns(MessageBoxResult.No);
 
-        var updateService = CreateUpdateService(messageBoxService: messageBoxServiceMock);
+        var updateService = CreateUpdateService(distributionClient: distributionClient, messageBoxService: messageBoxServiceMock);
 
         using var _ = Assert.Multiple();
 
