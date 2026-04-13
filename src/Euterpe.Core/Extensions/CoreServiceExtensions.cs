@@ -39,7 +39,9 @@ public static class CoreServiceExtensions
         {
             services.AddTransient<XRequestIdHandler>();
             services.AddTransient<AuthHeaderHandler>();
+            services.AddTransient<LoggingHandler>();
             services.AddHttpClient();
+            services.ConfigureHttpClientDefaults(builder => builder.AddHttpMessageHandler<LoggingHandler>());
             services
                 .AddRefitClient<IEuterpeAuthClient>(new RefitSettings
                 {
