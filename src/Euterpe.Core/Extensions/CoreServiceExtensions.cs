@@ -43,6 +43,8 @@ public static class CoreServiceExtensions
             services.AddTransient<TokenQueryHandler>();
             services.AddHttpClient();
             services.ConfigureHttpClientDefaults(builder => builder.AddHttpMessageHandler<LoggingHandler>());
+            services.AddHttpClient<EuterpeDownloadClient>()
+                .AddHttpMessageHandler<TokenQueryHandler>();
             services
                 .AddRefitClient<IEuterpeAuthClient>(new RefitSettings
                 {

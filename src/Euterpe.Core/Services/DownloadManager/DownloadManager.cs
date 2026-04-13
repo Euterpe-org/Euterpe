@@ -55,7 +55,7 @@ internal sealed partial class DownloadManager : IDownloadManager
 
         try
         {
-            var stream = await Client.GetStreamAsync(downloadUrl, cancellationToken).ConfigureAwait(false);
+            var stream = await DownloadClient.GetStreamAsync(downloadUrl, cancellationToken).ConfigureAwait(false);
             var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
             await using (fs.ConfigureAwait(false))
             {
@@ -155,6 +155,9 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     [UsedImplicitly]
     public required HttpClient Client { get; init; }
+
+    [UsedImplicitly]
+    public required EuterpeDownloadClient DownloadClient { get; init; }
 
     [UsedImplicitly]
     public required IEuterpeModClient ModClient { get; init; }
