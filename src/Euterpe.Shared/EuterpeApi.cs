@@ -16,6 +16,8 @@ public static class EuterpeApi
     public static class Account
     {
         public const string BasePath = "me";
+
+        public const string VanillaBinding = "/vanilla-binding";
     }
 
     public static class Telemetry
@@ -35,24 +37,9 @@ public static class EuterpeApi
     public static class Distribution
     {
         public const string BasePath = "distribution";
-
-        public static class Libs
-        {
-            public const string Path = "/libs";
-            public const string Manifest = "/manifest";
-        }
-
-        public static class Dependencies
-        {
-            public const string Path = "/deps";
-            public const string Manifest = "/manifest";
-        }
-
-        public static class Releases
-        {
-            public const string Path = "/app-releases";
-            public const string Manifest = "/manifest";
-        }
+        public const string LibsPath = "/libs";
+        public const string DependenciesPath = "/deps";
+        public const string ReleasesPath = "/app-releases";
     }
 
     public static class Charts

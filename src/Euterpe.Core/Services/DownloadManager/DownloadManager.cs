@@ -1,5 +1,5 @@
-using Euterpe.Models.Dependencies;
-using static Euterpe.Shared.EuterpeCdn;
+using Euterpe.Contracts.Distribution;
+using Euterpe.Contracts.Mods;
 
 namespace Euterpe.Core;
 
@@ -49,17 +49,6 @@ internal sealed partial class DownloadManager : IDownloadManager
         }
     }
 
-    public Task<bool> DownloadDependencyAsync(
-        DependencySpec spec,
-        EventHandler<DownloadStartedEventArgs>? onDownloadStarted = null,
-        IProgress<double>? progress = null,
-        CancellationToken cancellationToken = default)
-    {
-        Logger.ZLogInformation($"Downloading dependency {spec.Name} from {spec.Url} ...");
-
-        return DownloadFileAsync(spec.Url, spec.FilePath, onDownloadStarted, progress, cancellationToken);
-    }
-
     public async Task<bool> DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Downloading {displayName} ...");
@@ -83,30 +72,23 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
-        var downloadLink = Assets.ModsBaseUrl + mod.FileName;
         var path = Path.Combine(Config.ModsFolder, mod.FileName);
 
-        return await DownloadAssetAsync(downloadLink, path, $"mod {mod.Name}", cancellationToken).ConfigureAwait(false);
+        return await DownloadAssetAsync(mod.DownloadUrl, path, $"mod {mod.Name}", cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
     {
-        var downloadLink = Assets.LibsBaseUrl + lib.FileName;
         var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
 
-        return await DownloadAssetAsync(downloadLink, path, $"lib {lib.Name}", cancellationToken).ConfigureAwait(false);
+        return await DownloadAssetAsync(lib.DownloadUrl, path, $"lib {lib.Name}", cancellationToken).ConfigureAwait(false);
     }
 
-    public async Task<bool> DownloadReleaseByTagAsync(string tag, string runtimeIdentifier, string updateFolder, CancellationToken cancellationToken = default)
+    public async Task<bool> DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default)
     {
-        var downloadUrl = $"{Releases.BaseUrl}{tag}/Euterpe-{runtimeIdentifier}.zip";
-
         try
         {
-            await DownloadService.DownloadFileTaskAsync(downloadUrl,
-                Path.Combine(updateFolder, "Euterpe.zip"),
-                cancellationToken).ConfigureAwait(true);
-
+            await DownloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken).ConfigureAwait(true);
             return true;
         }
         catch (Exception ex)
@@ -138,7 +120,7 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods from {Assets.ModsJsonUrl}...");
+        Logger.ZLogInformation($"Fetching mods ...");
 
         try
         {
@@ -153,11 +135,11 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public async Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching libs from {Assets.LibsJsonUrl}...");
+        Logger.ZLogInformation($"Fetching libs ...");
 
         try
         {
-            return await DistributionClient.GetLibManifestAsync(cancellationToken).ConfigureAwait(false);
+            return await DistributionClient.GetLatestLibsAsync(true, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

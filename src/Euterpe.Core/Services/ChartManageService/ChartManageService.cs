@@ -1,4 +1,6 @@
-﻿namespace Euterpe.Core;
+﻿using Euterpe.Contracts.Charts;
+
+namespace Euterpe.Core;
 
 internal sealed partial class ChartManageService : IChartManageService
 {

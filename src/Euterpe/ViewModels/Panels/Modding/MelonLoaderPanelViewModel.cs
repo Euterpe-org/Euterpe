@@ -39,7 +39,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        Config.MelonLoaderVersion = DependencyConstants.MelonLoader.Version;
+        LocalService.ReadMelonLoaderVersion();
         MelonLoaderInstallStatus = InstallStatus.Installed;
     }
 

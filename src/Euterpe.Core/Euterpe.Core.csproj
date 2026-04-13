@@ -16,7 +16,6 @@
         <PackageReference Include="Refit"/>
         <PackageReference Include="Refit.HttpClientFactory"/>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="System.ServiceModel.Syndication"/>
         <PackageReference Include="ValveKeyValue"/>
         <PackageReference Include="System.Security.Cryptography.ProtectedData"/>
         <PackageReference Include="ZLogger"/>

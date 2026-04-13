@@ -72,6 +72,7 @@ public sealed partial class ModDto : ObservableObject
 
     #region Mod Properties
 
+    public long Mid { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Version { get; set; } = "Unknown";
     public string Author { get; set; } = string.Empty;
@@ -85,6 +86,8 @@ public sealed partial class ModDto : ObservableObject
     public string[] LibDependencies { get; set; } = [];
     public string[] IncompatibleMods { get; set; } = [];
     public string SHA256 { get; set; } = string.Empty;
+    public string DownloadUrl { get; set; } = string.Empty;
+    public long DownloadCount { get; set; }
 
     #endregion Mod Properties
 }

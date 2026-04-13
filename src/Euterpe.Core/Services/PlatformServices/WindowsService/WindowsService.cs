@@ -37,7 +37,7 @@ internal sealed partial class WindowsService : IPlatformService
         }
     }
 
-    public async Task<MuseDashUidRequest?> GetMuseDashUserIdAsync()
+    public async Task<MuseDashUidRequest?> GetMuseDashUidRequestAsync()
     {
         try
         {

@@ -1,4 +1,6 @@
-﻿namespace Euterpe.Abstractions;
+﻿using Euterpe.Contracts.Charts;
+
+namespace Euterpe.Abstractions;
 
 public interface IChartManageService
 {

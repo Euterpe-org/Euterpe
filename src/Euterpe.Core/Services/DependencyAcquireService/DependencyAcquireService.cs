@@ -1,18 +1,15 @@
-using Euterpe.Models.Dependencies;
-using static Euterpe.Shared.DependencyConstants;
-
 namespace Euterpe.Core;
 
 internal sealed partial class DependencyAcquireService : IDependencyAcquireService
 {
     private const int MaxRetries = 3;
 
-    private DependencySpec[] MelonLoaderDependencies =>
+    private DependencyTarget[] MelonLoaderTargets =>
     [
-        new("MelonLoader", MelonLoader.Url, Config.MelonLoaderZipPath, MelonLoader.ZipHash),
-        new("UnityDependency", UnityRuntime.Url, Config.UnityDependencyZipPath, UnityRuntime.ZipHash),
-        new("Cpp2IL", Cpp2IL.ExecutableUrl, Config.Cpp2ILExecutablePath, Cpp2IL.ExecutableHash),
-        new("Cpp2IL Plugin", Cpp2IL.PluginUrl, Config.Cpp2ILPluginPath, Cpp2IL.PluginHash)
+        new("MelonLoader", Config.MelonLoaderZipPath),
+        new("UnityDependencies", Config.UnityDependencyZipPath),
+        new("Cpp2IL", Config.Cpp2ILExecutablePath),
+        new("Cpp2IL-Plugin", Config.Cpp2ILPluginPath)
     ];
 
     public async Task AcquireForMelonLoaderAsync(
@@ -20,9 +17,13 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
         IProgress<double>? progress = null,
         CancellationToken cancellationToken = default)
     {
-        foreach (var dependency in MelonLoaderDependencies)
+        var dependencies = await DistributionClient.GetLatestDependenciesAsync(true, cancellationToken).ConfigureAwait(false);
+
+        foreach (var (slug, filePath) in MelonLoaderTargets)
         {
-            await EnsureValidAsync(dependency, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
+            var entry = dependencies.Single(x => x.Slug == slug).Versions.Single().Value;
+            var spec = new DependencySpec(slug, entry.DownloadUrl, filePath, entry.SHA256);
+            await EnsureValidAsync(spec, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -30,6 +31,9 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required IEuterpeDistributionClient DistributionClient { get; init; }
 
     [UsedImplicitly]
     public required IDownloadManager DownloadManager { get; init; }

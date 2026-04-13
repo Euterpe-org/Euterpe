@@ -1,11 +1,15 @@
 ﻿namespace Euterpe.Models;
 
-[PublicAPI]
-public sealed class Lib
+public sealed class LibDto
 {
+    public bool IsLocal { get; set; }
+
+    #region Lib Properties
+
     public string Name { get; set; } = string.Empty;
     public string FileName { get; set; } = string.Empty;
-
-    [JsonPropertyName("sha256")]
     public string SHA256 { get; set; } = string.Empty;
+    public string DownloadUrl { get; set; } = string.Empty;
+
+    #endregion Lib Properties
 }

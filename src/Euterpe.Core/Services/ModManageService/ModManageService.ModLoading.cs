@@ -1,4 +1,6 @@
-﻿namespace Euterpe.Core;
+﻿using Euterpe.Contracts.Mods;
+
+namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
@@ -31,7 +33,7 @@ internal sealed partial class ModManageService
             }
             else
             {
-                var webModDto = webMod.ToDto();
+                var webModDto = webMod.ToModel();
                 webModDto.State = IsModIncompatible(webMod.MelonVersion, webMod.GameVersion) ? ModState.Incompatible : ModState.Normal;
                 _sourceCache.AddOrUpdate(webModDto);
             }

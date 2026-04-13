@@ -1,5 +1,3 @@
-﻿using Euterpe.Models.Dependencies;
-
 namespace Euterpe.Core;
 
 internal sealed partial class DependencyAcquireService
@@ -18,7 +16,7 @@ internal sealed partial class DependencyAcquireService
 
         for (var attempt = 1; attempt <= MaxRetries; attempt++)
         {
-            var success = await DownloadManager.DownloadDependencyAsync(spec, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
+            var success = await DownloadManager.DownloadFileAsync(spec.Url, spec.FilePath, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
             if (!success)
             {
                 Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: Download of {spec.Name} failed");
@@ -31,7 +29,7 @@ internal sealed partial class DependencyAcquireService
                 return;
             }
 
-            var actualHash = await SHA512Utils.HexFromPathAsync(spec.FilePath).ConfigureAwait(false);
+            var actualHash = await SHA256Utils.HexLowerFromPathAsync(spec.FilePath).ConfigureAwait(false);
             Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: {spec.Name} hash mismatch after download\r\nExpected: {spec.ExpectedHash}\r\nActual: {actualHash}");
         }
 
@@ -45,7 +43,11 @@ internal sealed partial class DependencyAcquireService
             return false;
         }
 
-        var actualHash = await SHA512Utils.HexFromPathAsync(filePath).ConfigureAwait(false);
+        var actualHash = await SHA256Utils.HexLowerFromPathAsync(filePath).ConfigureAwait(false);
         return actualHash == expectedHash;
     }
+
+    private sealed record DependencyTarget(string Slug, string FilePath);
+
+    private sealed record DependencySpec(string Name, string Url, string FilePath, string ExpectedHash);
 }
