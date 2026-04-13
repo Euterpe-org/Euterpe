@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models;
+﻿namespace Euterpe.Contracts.Mods;
 
 [PublicAPI]
 public sealed class Mod

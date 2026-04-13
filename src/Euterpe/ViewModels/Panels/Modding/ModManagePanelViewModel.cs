@@ -42,7 +42,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
             .ThenByDescending(x => x.IsLocal)
             .ThenByDescending(x => x is { State: ModState.Outdated, IsLocal: true })
             .ThenByDescending(x => x.IsInstallable)
-            .ThenByAscending(x => x.Name);
+            .ThenByAscending(x => x.DownloadCount);
 
         _sourceCache.Connect()
             .Filter(x => SearchText.IsNullOrEmpty()

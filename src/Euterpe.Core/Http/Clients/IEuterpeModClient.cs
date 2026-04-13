@@ -1,3 +1,4 @@
+using Euterpe.Contracts.Mods;
 using Refit;
 using static Euterpe.Shared.EuterpeApi;
 

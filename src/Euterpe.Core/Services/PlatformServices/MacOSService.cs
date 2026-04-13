@@ -14,7 +14,7 @@ internal sealed class MacOsService : IPlatformService
     public string OsString => "osx";
     public string UpdaterFileName => "Updater";
     public Task SetupDeepLinkAsync(string processPath) => throw new NotSupportedException();
-    public Task<MuseDashUidRequest?> GetMuseDashUserIdAsync() => throw new NotSupportedException();
+    public Task<MuseDashUidRequest?> GetMuseDashUidRequestAsync() => throw new NotSupportedException();
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder) => throw new NotSupportedException();
     public Task<string?> GetSteamExecPathAsync() => throw new NotSupportedException();
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder) => throw new NotSupportedException();

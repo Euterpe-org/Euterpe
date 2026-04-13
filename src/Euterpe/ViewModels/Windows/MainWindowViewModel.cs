@@ -1,3 +1,5 @@
+using Euterpe.Core.Http.Clients;
+
 namespace Euterpe.ViewModels.Windows;
 
 public sealed partial class MainWindowViewModel : NavViewModelBase
@@ -9,9 +11,30 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         await SettingService.ValidateAsync().ConfigureAwait(true);
         await LocalService.ReadGameInformationAsync().ConfigureAwait(false);
         LocalService.ReadMelonLoaderVersion();
+        BindMuseDashAccountAsync().SafeFireAndForget();
 
         NavigationService.Ready.Set();
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
+    }
+
+    private async Task BindMuseDashAccountAsync()
+    {
+        var request = await PlatformService.GetMuseDashUidRequestAsync().ConfigureAwait(false);
+        if (request is null)
+        {
+            Logger.ZLogWarning($"Failed to get MuseDash user ID. Skipping account binding.");
+            return;
+        }
+
+        try
+        {
+            await AccountClient.BindVanillaAccountAsync(request).ConfigureAwait(false);
+            Logger.ZLogInformation($"Successfully bound MuseDash account.");
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to bind MuseDash account.");
+        }
     }
 
 
@@ -19,6 +42,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required AuthState AuthState { get; init; }
+
+    [UsedImplicitly]
+    public required IEuterpeAccountClient AccountClient { get; init; }
 
     [UsedImplicitly]
     public required ISettingService SettingService { get; init; }

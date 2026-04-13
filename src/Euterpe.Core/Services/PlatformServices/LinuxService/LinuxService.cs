@@ -61,7 +61,7 @@ internal sealed partial class LinuxService : IPlatformService
         }
     }
 
-    public async Task<MuseDashUidRequest?> GetMuseDashUserIdAsync()
+    public async Task<MuseDashUidRequest?> GetMuseDashUidRequestAsync()
     {
         try
         {

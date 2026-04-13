@@ -47,5 +47,5 @@ public interface IPlatformService : IPlatformPathDiscovery, IPlatformDevEnvironm
     ///     Get MuseDash UID
     /// </summary>
     /// <returns></returns>
-    Task<MuseDashUidRequest?> GetMuseDashUserIdAsync();
+    Task<MuseDashUidRequest?> GetMuseDashUidRequestAsync();
 }

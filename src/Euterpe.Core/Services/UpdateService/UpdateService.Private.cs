@@ -10,7 +10,7 @@ internal sealed partial class UpdateService
             return false;
         }
 
-        if (releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
+        if (releaseVersion.ComparePrecedenceTo(CurrentVersion) <= 0)
         {
             Logger.ZLogInformation($"No new version available");
             return false;
@@ -35,19 +35,39 @@ internal sealed partial class UpdateService
         return updateTempPath;
     }
 
-    private async Task StartUpdateProcessAsync(string version, CancellationToken cancellationToken = default)
+    private async Task<bool> HandleReleaseAsync(UpdateTarget? target, CancellationToken cancellationToken = default)
+    {
+        if (target is null)
+        {
+            return false;
+        }
+
+        Logger.ZLogInformation($"Release version parsed: {target.Version}");
+
+        var shouldUpdate = await ShouldUpdateAsync(target.Version).ConfigureAwait(false);
+        if (!shouldUpdate)
+        {
+            return false;
+        }
+
+        await StartUpdateProcessAsync(target, cancellationToken).ConfigureAwait(false);
+        Environment.Exit(0);
+        return true;
+    }
+
+    private async Task StartUpdateProcessAsync(UpdateTarget target, CancellationToken cancellationToken = default)
     {
         var updateFolder = GetUpdateTempPath();
         var updaterTargetPath = Path.Combine(updateFolder, PlatformService.UpdaterFileName);
 
-        var success = await DownloadManager.DownloadReleaseByTagAsync(version, PlatformService.RuntimeIdentifier, updateFolder, cancellationToken).ConfigureAwait(true);
+        var success = await DownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder, cancellationToken).ConfigureAwait(true);
         if (!success)
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_ReleaseDownload_Failed, version).ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_ReleaseDownload_Failed, target.Version).ConfigureAwait(false);
             return;
         }
 
-        Logger.ZLogInformation($"Release {version} download finished");
+        Logger.ZLogInformation($"Release {target.Version} download finished");
 
         File.Copy(PlatformService.UpdaterFileName, updaterTargetPath, true);
 
@@ -61,4 +81,6 @@ internal sealed partial class UpdateService
                 UseShellExecute = false
             });
     }
+
+    private sealed record UpdateTarget(SemVersion Version, string DownloadUrl);
 }

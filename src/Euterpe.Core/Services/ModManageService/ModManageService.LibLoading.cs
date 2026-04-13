@@ -14,18 +14,19 @@ internal sealed partial class ModManageService
 
         foreach (var webLib in await DownloadManager.FetchLibListAsync().ConfigureAwait(false))
         {
-            if (_libsDict.TryGetValue(webLib.Name, out var localLib))
+            if (_libsDict.TryGetValue(webLib.Slug, out var localLib))
             {
-                if (localLib.SHA256 == webLib.SHA256)
+                var webLibDto = webLib.ToModel();
+                if (localLib.SHA256 == webLibDto.SHA256)
                 {
                     continue;
                 }
 
-                DownloadLibAsync(webLib.ToDto()).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Name} failed"));
+                DownloadLibAsync(webLibDto).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Slug} failed"));
             }
             else
             {
-                _libsDict[webLib.Name] = webLib.ToDto();
+                _libsDict[webLib.Slug] = webLib.ToModel();
             }
         }
 
