@@ -16,7 +16,6 @@ public static class IocContainer
         services.RegisterHttpClients();
 
         var builder = new ContainerBuilder();
-        builder.RegisterInstances();
         builder.RegisterCoreServices();
         builder.RegisterInternalServices();
         builder.RegisterViewAndViewModels();

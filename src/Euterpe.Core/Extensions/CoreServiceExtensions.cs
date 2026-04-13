@@ -1,12 +1,21 @@
-﻿using Euterpe.Core.Http.Handlers;
-using Euterpe.Core.JsonContexts;
+using Euterpe.Core.Http.Handlers;
+using Microsoft.Extensions.Http.Resilience;
 using Polly;
-using Refit;
 
 namespace Euterpe.Core.Extensions;
 
 public static class CoreServiceExtensions
 {
+    private static void ConfigureResilience(HttpStandardResilienceOptions options)
+    {
+        options.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(30);
+        options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(10);
+        options.Retry.MaxRetryAttempts = 3;
+        options.Retry.Delay = TimeSpan.FromMilliseconds(500);
+        options.Retry.BackoffType = DelayBackoffType.Exponential;
+        options.Retry.UseJitter = true;
+    }
+
     extension(IServiceCollection services)
     {
         public void RegisterLogger(string logFilePath)
@@ -41,99 +50,39 @@ public static class CoreServiceExtensions
             services.AddTransient<AuthHeaderHandler>();
             services.AddTransient<LoggingHandler>();
             services.AddTransient<TokenQueryHandler>();
-            services.AddHttpClient();
+
+            services.AddSingleton<IDownloadService>(sp =>
+            {
+                var handler = sp.GetRequiredService<TokenQueryHandler>();
+                handler.InnerHandler = new SocketsHttpHandler();
+
+                return new DownloadService(new DownloadConfiguration
+                {
+                    ChunkCount = 8,
+                    MaxTryAgainOnFailure = 4,
+                    ParallelDownload = true,
+                    BlockTimeout = 3000,
+                    CustomHttpMessageHandlerFactory = () => handler
+                });
+            });
+
             services.ConfigureHttpClientDefaults(builder => builder.AddHttpMessageHandler<LoggingHandler>());
-            services.AddHttpClient<EuterpeDownloadClient>()
-                .AddHttpMessageHandler<TokenQueryHandler>();
-            services
-                .AddRefitClient<IEuterpeAuthClient>(new RefitSettings
-                {
-                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Auth))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Auth.BasePath}"))
-                .AddHttpMessageHandler<XRequestIdHandler>();
-            services
-                .AddRefitClient<IEuterpeAccountClient>(new RefitSettings
-                {
-                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Account))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Account.BasePath}"))
-                .AddHttpMessageHandler<XRequestIdHandler>()
-                .AddHttpMessageHandler<AuthHeaderHandler>();
-            services
-                .AddRefitClient<IEuterpeDistributionClient>(new RefitSettings
-                {
-                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Distribution))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Distribution.BasePath}"))
-                .AddHttpMessageHandler<XRequestIdHandler>()
-                .AddHttpMessageHandler<AuthHeaderHandler>();
-            services
-                .AddRefitClient<IEuterpeModClient>(new RefitSettings
-                {
-                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Mods))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Mods.BasePath}"))
-                .AddHttpMessageHandler<XRequestIdHandler>()
-                .AddHttpMessageHandler<AuthHeaderHandler>()
-                .AddStandardResilienceHandler(options =>
-                {
-                    options.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(30);
-                    options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(10);
-                    options.Retry.MaxRetryAttempts = 3;
-                    options.Retry.Delay = TimeSpan.FromMilliseconds(500);
-                    options.Retry.BackoffType = DelayBackoffType.Exponential;
-                    options.Retry.UseJitter = true;
-                });
-            services
-                .AddRefitClient<IEuterpeChartClient>(new RefitSettings
-                {
-                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Charts))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Charts.BasePath}"))
-                .AddHttpMessageHandler<XRequestIdHandler>()
-                .AddHttpMessageHandler<AuthHeaderHandler>()
-                .AddStandardResilienceHandler(options =>
-                {
-                    options.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(30);
-                    options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(10);
-                    options.Retry.MaxRetryAttempts = 3;
-                    options.Retry.Delay = TimeSpan.FromMilliseconds(500);
-                    options.Retry.BackoffType = DelayBackoffType.Exponential;
-                    options.Retry.UseJitter = true;
-                });
-            services
-                .AddRefitClient<ITelemetryApiClient>(new RefitSettings
-                {
-                    ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-                }, nameof(EuterpeApi.Telemetry))
-                .ConfigureHttpClient(client => client.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{EuterpeApi.Telemetry.BasePath}"))
-                .AddHttpMessageHandler<XRequestIdHandler>();
+            services.AddHttpClient();
+            services.AddHttpClient<EuterpeDownloadClient>().AddHttpMessageHandler<TokenQueryHandler>();
+
+            services.AddEuterpeRefitClient<IEuterpeAuthClient>(nameof(EuterpeApi.Auth), EuterpeApi.Auth.BasePath);
+            services.AddEuterpeRefitClient<IEuterpeAccountClient>(nameof(EuterpeApi.Account), EuterpeApi.Account.BasePath, true);
+            services.AddEuterpeRefitClient<IEuterpeDistributionClient>(nameof(EuterpeApi.Distribution), EuterpeApi.Distribution.BasePath, true);
+            services.AddEuterpeRefitClient<IEuterpeModClient>(nameof(EuterpeApi.Mods), EuterpeApi.Mods.BasePath, true)
+                .AddStandardResilienceHandler(ConfigureResilience);
+            services.AddEuterpeRefitClient<IEuterpeChartClient>(nameof(EuterpeApi.Charts), EuterpeApi.Charts.BasePath, true)
+                .AddStandardResilienceHandler(ConfigureResilience);
+            services.AddEuterpeRefitClient<ITelemetryApiClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
         }
     }
 
     extension(ContainerBuilder builder)
     {
-        public void RegisterInstances()
-        {
-            builder.Register(ctx =>
-                {
-                    var handler = ctx.Resolve<TokenQueryHandler>();
-                    handler.InnerHandler = new SocketsHttpHandler();
-
-                    return new DownloadService(new DownloadConfiguration
-                    {
-                        ChunkCount = 8,
-                        MaxTryAgainOnFailure = 4,
-                        ParallelDownload = true,
-                        BlockTimeout = 3000,
-                        CustomHttpMessageHandlerFactory = () => handler
-                    });
-                })
-                .As<IDownloadService>()
-                .SingleInstance();
-        }
-
         public void RegisterCoreServices()
         {
             builder.RegisterType<AuthState>().SingleInstance();
