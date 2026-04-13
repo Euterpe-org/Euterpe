@@ -40,6 +40,7 @@ public static class CoreServiceExtensions
             services.AddTransient<XRequestIdHandler>();
             services.AddTransient<AuthHeaderHandler>();
             services.AddTransient<LoggingHandler>();
+            services.AddTransient<TokenQueryHandler>();
             services.AddHttpClient();
             services.ConfigureHttpClientDefaults(builder => builder.AddHttpMessageHandler<LoggingHandler>());
             services
@@ -113,15 +114,22 @@ public static class CoreServiceExtensions
     {
         public void RegisterInstances()
         {
-            builder.RegisterInstance(new DownloadService(
-                    new DownloadConfiguration
+            builder.Register(ctx =>
+                {
+                    var handler = ctx.Resolve<TokenQueryHandler>();
+                    handler.InnerHandler = new SocketsHttpHandler();
+
+                    return new DownloadService(new DownloadConfiguration
                     {
                         ChunkCount = 8,
                         MaxTryAgainOnFailure = 4,
                         ParallelDownload = true,
-                        BlockTimeout = 3000
-                    }))
-                .As<IDownloadService>();
+                        BlockTimeout = 3000,
+                        CustomHttpMessageHandlerFactory = () => handler
+                    });
+                })
+                .As<IDownloadService>()
+                .SingleInstance();
         }
 
         public void RegisterCoreServices()
