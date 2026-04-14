@@ -223,7 +223,7 @@
                         IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
                         Margin="-30,0,-30,0">
                         <Carousel
-                            Foreground="{Binding ((mods:ModScreenshot)SelectedItem).DominantColor, RelativeSource={RelativeSource Self}, Converter={x:Static conv:DominantColorToForegroundConverter.Instance}, FallbackValue=White}"
+                            Foreground="White"
                             ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}"
                             Theme="{DynamicResource FullCarousel}">
                             <Carousel.ItemTemplate>
@@ -232,9 +232,20 @@
                                         Background="{Binding DominantColor, TargetNullValue=#1a1a2e}"
                                         CornerRadius="10"
                                         ClipToBounds="True">
-                                        <labs:AsyncImage
-                                            Source="{Binding FullUrl}"
-                                            Stretch="UniformToFill" />
+                                        <Grid>
+                                            <labs:AsyncImage
+                                                Source="{Binding FullUrl}"
+                                                Stretch="UniformToFill" />
+                                            <!--  Gradient overlay: ensures white carousel controls stay readable  -->
+                                            <Border CornerRadius="10" IsHitTestVisible="False">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0%,60%" EndPoint="0%,100%">
+                                                        <GradientStop Color="#00000000" Offset="0" />
+                                                        <GradientStop Color="#60000000" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                            </Border>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </Carousel.ItemTemplate>
