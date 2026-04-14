@@ -63,7 +63,7 @@ public sealed partial class UpdateServiceTest
         };
 
         var mock = IEuterpeDistributionClient.Mock();
-        mock.GetLatestAppReleaseAsync(Any<bool>(), Any<bool>(), Any<CancellationToken>())
+        mock.GetAppReleaseAsync(Any<bool>(), Any<bool>(), Any<CancellationToken>())
             .Returns([release]);
         return mock;
     }

@@ -75,7 +75,7 @@ public sealed partial class UpdateServiceTest
     public async Task CheckForUpdatesAsync_FindStable_WhenNoMatchingReleaseForRuntime_ShouldReturnFalse()
     {
         var distributionClient = IEuterpeDistributionClient.Mock();
-        distributionClient.GetLatestAppReleaseAsync(Any<bool>(), Any<bool>(), Any<CancellationToken>())
+        distributionClient.GetAppReleaseAsync(Any<bool>(), Any<bool>(), Any<CancellationToken>())
             .Returns([]);
 
         var updateService = CreateUpdateService(distributionClient: distributionClient);
