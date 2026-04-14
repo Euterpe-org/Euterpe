@@ -226,22 +226,15 @@
                             x:Name="ScreenshotsCarousel"
                             ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}"
                             Theme="{DynamicResource FullCarousel}">
-                            <Carousel.Styles>
-                                <!--  Force white foreground on all carousel chrome (arrows + dots)  -->
-                                <Style Selector="Button">
-                                    <Setter Property="Foreground" Value="White" />
-                                </Style>
-                                <Style Selector="Button:pointerover">
-                                    <Setter Property="Foreground" Value="White" />
-                                    <Setter Property="Opacity" Value="0.8" />
-                                </Style>
-                                <Style Selector="RadioButton">
-                                    <Setter Property="Foreground" Value="White" />
-                                </Style>
-                                <Style Selector="RadioButton:checked">
-                                    <Setter Property="Foreground" Value="White" />
-                                </Style>
-                            </Carousel.Styles>
+                            <Carousel.Resources>
+                                <!--  Override Semi theme's DynamicResource keys for carousel chrome  -->
+                                <SolidColorBrush x:Key="CarouselButtonForeground" Color="#CCFFFFFF" />
+                                <SolidColorBrush x:Key="CarouselButtonPointeroverForeground" Color="White" />
+                                <SolidColorBrush x:Key="CarouselIndicatorForeground" Color="#80FFFFFF" />
+                                <SolidColorBrush x:Key="CarouselIndicatorPointeroverForeground" Color="#B0FFFFFF" />
+                                <SolidColorBrush x:Key="CarouselIndicatorPressedForeground" Color="White" />
+                                <SolidColorBrush x:Key="CarouselIndicatorSelectedForeground" Color="White" />
+                            </Carousel.Resources>
                             <Carousel.ItemTemplate>
                                 <DataTemplate x:DataType="mods:ModScreenshot">
                                     <Border
