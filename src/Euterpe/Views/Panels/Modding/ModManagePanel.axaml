@@ -223,9 +223,25 @@
                         IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
                         Margin="-30,0,-30,0">
                         <Carousel
-                            Foreground="White"
+                            x:Name="ScreenshotsCarousel"
                             ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}"
                             Theme="{DynamicResource FullCarousel}">
+                            <Carousel.Styles>
+                                <!--  Force white foreground on all carousel chrome (arrows + dots)  -->
+                                <Style Selector="Button">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Style>
+                                <Style Selector="Button:pointerover">
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="Opacity" Value="0.8" />
+                                </Style>
+                                <Style Selector="RadioButton">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Style>
+                                <Style Selector="RadioButton:checked">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Style>
+                            </Carousel.Styles>
                             <Carousel.ItemTemplate>
                                 <DataTemplate x:DataType="mods:ModScreenshot">
                                     <Border
@@ -236,7 +252,7 @@
                                             <labs:AsyncImage
                                                 Source="{Binding FullUrl}"
                                                 Stretch="UniformToFill" />
-                                            <!--  Gradient overlay: ensures white carousel controls stay readable  -->
+                                            <!--  Bottom gradient: ensures dots stay readable  -->
                                             <Border CornerRadius="10" IsHitTestVisible="False">
                                                 <Border.Background>
                                                     <LinearGradientBrush StartPoint="0%,60%" EndPoint="0%,100%">
