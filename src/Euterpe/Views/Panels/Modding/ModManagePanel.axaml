@@ -5,6 +5,7 @@
     xmlns:enums="using:Euterpe.Models.Enums"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:Euterpe.Converters"
     xmlns:labs="using:Avalonia.Labs.Controls"
     xmlns:mods="using:Euterpe.Contracts.Mods"
     xmlns:u="https://irihi.tech/ursa"
@@ -218,10 +219,11 @@
 
                     <!--  Screenshots Carousel  -->
                     <Border
-                        Height="200"
+                        Height="260"
                         IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
                         Margin="-30,0,-30,0">
                         <Carousel
+                            Foreground="{Binding ((mods:ModScreenshot)SelectedItem).DominantColor, RelativeSource={RelativeSource Self}, Converter={x:Static conv:DominantColorToForegroundConverter.Instance}, FallbackValue=White}"
                             ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}"
                             Theme="{DynamicResource FullCarousel}">
                             <Carousel.ItemTemplate>
