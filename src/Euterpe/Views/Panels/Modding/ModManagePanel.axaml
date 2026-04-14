@@ -217,49 +217,34 @@
                     Margin="54,24,54,24"
                     Spacing="45">
 
-                    <!--  Screenshots Carousel  -->
-                    <Border
-                        Height="260"
+                    <!--  Screenshots  -->
+                    <ScrollViewer
+                        Height="200"
                         IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
-                        Margin="-30,0,-30,0">
-                        <Carousel
-                            x:Name="ScreenshotsCarousel"
-                            ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}"
-                            Theme="{DynamicResource FullCarousel}">
-                            <Carousel.Resources>
-                                <!--  Override Semi theme's DynamicResource keys for carousel chrome  -->
-                                <SolidColorBrush x:Key="CarouselButtonForeground" Color="#CCFFFFFF" />
-                                <SolidColorBrush x:Key="CarouselButtonPointeroverForeground" Color="White" />
-                                <SolidColorBrush x:Key="CarouselIndicatorForeground" Color="#80FFFFFF" />
-                                <SolidColorBrush x:Key="CarouselIndicatorPointeroverForeground" Color="#B0FFFFFF" />
-                                <SolidColorBrush x:Key="CarouselIndicatorPressedForeground" Color="White" />
-                                <SolidColorBrush x:Key="CarouselIndicatorSelectedForeground" Color="White" />
-                            </Carousel.Resources>
-                            <Carousel.ItemTemplate>
+                        Margin="-30,0,-30,0"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="mods:ModScreenshot">
                                     <Border
+                                        Height="200"
                                         Background="{Binding DominantColor, TargetNullValue=#1a1a2e}"
-                                        CornerRadius="10"
+                                        CornerRadius="8"
                                         ClipToBounds="True">
-                                        <Grid>
-                                            <labs:AsyncImage
-                                                Source="{Binding FullUrl}"
-                                                Stretch="UniformToFill" />
-                                            <!--  Bottom gradient: ensures dots stay readable  -->
-                                            <Border CornerRadius="10" IsHitTestVisible="False">
-                                                <Border.Background>
-                                                    <LinearGradientBrush StartPoint="0%,60%" EndPoint="0%,100%">
-                                                        <GradientStop Color="#00000000" Offset="0" />
-                                                        <GradientStop Color="#60000000" Offset="1" />
-                                                    </LinearGradientBrush>
-                                                </Border.Background>
-                                            </Border>
-                                        </Grid>
+                                        <labs:AsyncImage
+                                            Source="{Binding FullUrl}"
+                                            Stretch="Uniform" />
                                     </Border>
                                 </DataTemplate>
-                            </Carousel.ItemTemplate>
-                        </Carousel>
-                    </Border>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
 
                     <!--  Main Info Section  -->
                     <Grid
