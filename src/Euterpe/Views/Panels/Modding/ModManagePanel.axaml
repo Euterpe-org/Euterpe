@@ -222,7 +222,7 @@
                         x:Name="ScreenshotsScroller"
                         IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
                         Margin="-30,0,-30,0"
-                        HorizontalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Hidden"
                         VerticalScrollBarVisibility="Disabled">
                         <ItemsControl ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}">
                             <ItemsControl.ItemsPanel>
