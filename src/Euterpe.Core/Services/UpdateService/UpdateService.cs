@@ -17,7 +17,7 @@ internal sealed partial class UpdateService : IUpdateService
 
     private async Task<UpdateTarget?> GetReleaseCandidateAsync(bool prerelease, CancellationToken cancellationToken = default)
     {
-        var releases = await DistributionClient.GetLatestAppReleaseAsync(!prerelease, prerelease, cancellationToken).ConfigureAwait(false);
+        var releases = await DistributionClient.GetAppReleaseAsync(!prerelease, prerelease, cancellationToken).ConfigureAwait(false);
         var release = releases.SingleOrDefault(x => x.Slug == PlatformService.RuntimeIdentifier);
         if (release is null)
         {
