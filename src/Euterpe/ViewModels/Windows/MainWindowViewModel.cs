@@ -9,12 +9,23 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         await base.InitializeAsync().ConfigureAwait(true);
 
         await SettingService.ValidateAsync().ConfigureAwait(true);
-        await LocalService.ReadGameInformationAsync().ConfigureAwait(false);
+        await LocalService.ReadGameInformationAsync().ConfigureAwait(true);
         LocalService.ReadMelonLoaderVersion();
         BindMuseDashAccountAsync().SafeFireAndForget();
+        await ShowWizardDialogAsync().ConfigureAwait(true);
 
         NavigationService.Ready.Set();
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
+    }
+
+    private async Task ShowWizardDialogAsync()
+    {
+        var options = new OverlayDialogOptions
+        {
+            Title = "Welcome to Euterpe!"
+        };
+
+        await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, "WizardDialog", options).ConfigureAwait(false);
     }
 
     private async Task BindMuseDashAccountAsync()
@@ -42,6 +53,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required AuthState AuthState { get; init; }
+
+    [UsedImplicitly]
+    public required WizardDialogViewModel WizardDialogViewModel { get; init; }
 
     [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }

@@ -30,6 +30,9 @@
 
     <Grid
         ColumnDefinitions="Auto,*">
+        <u:OverlayDialogHost
+            HostId="WizardDialog" />
+
         <DockPanel
             Grid.Column="0"
             MinWidth="85">
@@ -78,17 +81,19 @@
                 <u:NavMenu.Header>
                     <Border
                         u:NavMenu.CanToggle="False"
-                        Width="55" Height="55"
+                        ClipToBounds="True"
+                        CornerRadius="28"
+                        Height="55"
                         HorizontalAlignment="Center"
                         Margin="0,15,0,10"
-                        CornerRadius="28"
-                        ClipToBounds="True">
+                        Width="55">
                         <labs:AsyncImage
-                            Width="55" Height="55"
+                            Height="55"
                             PlaceholderSource="/Assets/Logo.webp"
                             RenderOptions.BitmapInterpolationMode="HighQuality"
                             Source="{Binding AuthState.AvatarUrl}"
-                            Stretch="UniformToFill" />
+                            Stretch="UniformToFill"
+                            Width="55" />
                     </Border>
                 </u:NavMenu.Header>
 
