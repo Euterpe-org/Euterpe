@@ -391,43 +391,44 @@
                             Classes="SectionTitle"
                             Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Details}}" />
 
-                        <UniformGrid
-                            Classes="Details">
+                        <u:Descriptions
+                            ItemAlignment="Left"
+                            LabelPosition="Left"
+                            Orientation="Vertical">
 
                             <!--  Author  -->
-                            <TextBlock
-                                Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
-                            <TextBlock
-                                Text="{Binding SelectedMod.Author}" />
+                            <u:DescriptionsItem
+                                Content="{Binding SelectedMod.Author}"
+                                Label="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
 
                             <!--  Game Version  -->
-                            <TextBlock
-                                Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_SupportedGameVersion}}" />
-                            <Label
-                                Classes="Ghost TagLabel"
-                                Content="{Binding SelectedMod.LocalizedCompatibleGameVersion}"
-                                Margin="0,-12,0,0" />
+                            <u:DescriptionsItem
+                                Label="{Localize {x:Static loc:XAMLLiteral.ModInfo_SupportedGameVersion}}">
+                                <Label
+                                    Classes="Ghost TagLabel"
+                                    Content="{Binding SelectedMod.LocalizedCompatibleGameVersion}" />
+                            </u:DescriptionsItem>
 
                             <!--  MelonLoader Version  -->
-                            <TextBlock
-                                Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_RequiredMelonLoaderVersion}}" />
-                            <Label
-                                Classes="Ghost TagLabel"
-                                Content="{Binding SelectedMod.MelonVersion}"
-                                Margin="0,-12,0,0" />
+                            <u:DescriptionsItem
+                                Label="{Localize {x:Static loc:XAMLLiteral.ModInfo_RequiredMelonLoaderVersion}}">
+                                <Label
+                                    Classes="Ghost TagLabel"
+                                    Content="{Binding SelectedMod.MelonVersion}" />
+                            </u:DescriptionsItem>
 
                             <!--  Repository  -->
-                            <TextBlock
-                                Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}" />
-                            <HyperlinkButton
-                                Classes="WithIcon Underline"
-                                Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_Visit}}"
-                                NavigateUri="{Binding SelectedMod.RepoPageUrl}" />
-                        </UniformGrid>
+                            <u:DescriptionsItem
+                                Label="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}">
+                                <HyperlinkButton
+                                    Classes="WithIcon Underline"
+                                    Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_Visit}}"
+                                    NavigateUri="{Binding SelectedMod.RepoPageUrl}" />
+                            </u:DescriptionsItem>
+                        </u:Descriptions>
                     </StackPanel>
 
                     <!--  Dependencies Section  -->
-
                     <StackPanel
                         IsVisible="{Binding SelectedMod.HasDependency, Mode=OneWay}">
                         <TextBlock
