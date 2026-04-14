@@ -220,10 +220,9 @@
                     <!--  Screenshots  -->
                     <ScrollViewer
                         x:Name="ScreenshotsScroller"
+                        AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}"
                         IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
                         Margin="-30,0,-30,0"
-                        Padding="0,0,0,6"
-                        AllowAutoHide="False"
                         HorizontalScrollBarVisibility="Auto"
                         VerticalScrollBarVisibility="Disabled">
                         <ItemsControl ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}">
