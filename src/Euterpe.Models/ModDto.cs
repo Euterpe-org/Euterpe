@@ -1,3 +1,4 @@
+using Euterpe.Contracts.Mods;
 using Euterpe.Localization;
 
 namespace Euterpe.Models;
@@ -57,6 +58,9 @@ public sealed partial class ModDto : ObservableObject
     // GitHub Repo
     public string RepoPageUrl => GitHubBaseUrl + Repository;
 
+    // Screenshots
+    public bool HasScreenshots => Screenshots.Length > 0;
+
     // Dependencies
     public bool HasDependency => ModDependencies.Length + LibDependencies.Length > 0;
 
@@ -82,6 +86,7 @@ public sealed partial class ModDto : ObservableObject
     public string[] ModDependencies { get; set; } = [];
     public string[] LibDependencies { get; set; } = [];
     public string[] IncompatibleMods { get; set; } = [];
+    public ModScreenshot[] Screenshots { get; set; } = [];
     public string SHA256 { get; set; } = string.Empty;
     public string DownloadUrl { get; set; } = string.Empty;
     public long DownloadCount { get; set; }

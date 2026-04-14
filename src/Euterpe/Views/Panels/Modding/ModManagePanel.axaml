@@ -5,6 +5,8 @@
     xmlns:enums="using:Euterpe.Models.Enums"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:labs="using:Avalonia.Labs.Controls"
+    xmlns:mods="using:Euterpe.Contracts.Mods"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Modding"
     x:Class="Euterpe.Views.Panels.Modding.ModManagePanel"
@@ -214,28 +216,26 @@
                     Margin="54,24,54,24"
                     Spacing="45">
 
-                    <!--  Banner Carousel  -->
+                    <!--  Screenshots Carousel  -->
                     <Border
                         Height="200"
+                        IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
                         Margin="-30,0,-30,0">
                         <Carousel
+                            ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}"
                             Theme="{DynamicResource FullCarousel}">
-                            <Border
-                                Background="#4053b7"
-                                CornerRadius="10">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    Text="Banner (WIP)"
-                                    VerticalAlignment="Center" />
-                            </Border>
-                            <Border
-                                Background="#233448"
-                                CornerRadius="10">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    Text="Still work in progress"
-                                    VerticalAlignment="Center" />
-                            </Border>
+                            <Carousel.ItemTemplate>
+                                <DataTemplate x:DataType="mods:ModScreenshot">
+                                    <Border
+                                        Background="{Binding DominantColor, TargetNullValue=#1a1a2e}"
+                                        CornerRadius="10"
+                                        ClipToBounds="True">
+                                        <labs:AsyncImage
+                                            Source="{Binding Url}"
+                                            Stretch="UniformToFill" />
+                                    </Border>
+                                </DataTemplate>
+                            </Carousel.ItemTemplate>
                         </Carousel>
                     </Border>
 
