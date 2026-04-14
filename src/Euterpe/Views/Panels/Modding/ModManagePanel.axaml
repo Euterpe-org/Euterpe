@@ -224,7 +224,9 @@
                         Margin="-30,0,-30,0"
                         HorizontalScrollBarVisibility="Auto"
                         VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}">
+                        <ItemsControl
+                            HorizontalAlignment="{Binding SelectedMod.Screenshots.Length, Mode=OneWay, Converter={x:Static conv:SingleItemCenterConverter.Instance}}"
+                            ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" Spacing="8" />
