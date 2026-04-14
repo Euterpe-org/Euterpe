@@ -76,15 +76,20 @@
                 </u:NavMenu.IconTemplate>
 
                 <u:NavMenu.Header>
-                    <labs:AsyncImage
+                    <Border
                         u:NavMenu.CanToggle="False"
-                        Height="55"
+                        Width="55" Height="55"
                         HorizontalAlignment="Center"
                         Margin="0,15,0,10"
-                        PlaceholderSource="/Assets/Logo.webp"
-                        RenderOptions.BitmapInterpolationMode="HighQuality"
-                        Source="{Binding AuthState.AvatarUrl}"
-                        VerticalAlignment="Center" />
+                        CornerRadius="28"
+                        ClipToBounds="True">
+                        <labs:AsyncImage
+                            Width="55" Height="55"
+                            PlaceholderSource="/Assets/Logo.webp"
+                            RenderOptions.BitmapInterpolationMode="HighQuality"
+                            Source="{Binding AuthState.AvatarUrl}"
+                            Stretch="UniformToFill" />
+                    </Border>
                 </u:NavMenu.Header>
 
                 <u:NavMenu.HeaderTemplate>
