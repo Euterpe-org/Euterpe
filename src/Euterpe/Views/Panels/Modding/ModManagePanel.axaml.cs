@@ -1,20 +1,35 @@
-﻿namespace Euterpe.Views.Panels.Modding;
+﻿using Avalonia.Input;
+
+namespace Euterpe.Views.Panels.Modding;
 
 [Route("/modding/manage", DisplayName = Panel_Modding_ModManage, Order = 0)]
 public sealed partial class ModManagePanel : UserControl
 {
+    private const double WheelScrollStep = 60d;
+
     public ModManagePanel()
     {
         InitializeComponent();
 
-        var scroller = this.FindControl<ScrollViewer>("ScreenshotsScroller");
-        if (scroller is not null)
+        ScreenshotsScroller.PointerWheelChanged += OnScreenshotsWheelChanged;
+    }
+
+    private void OnScreenshotsWheelChanged(object? sender, PointerWheelEventArgs e)
+    {
+        var maxX = ScreenshotsScroller.Extent.Width - ScreenshotsScroller.Viewport.Width;
+        if (maxX <= 0)
         {
-            scroller.PointerWheelChanged += (_, e) =>
-            {
-                scroller.Offset = scroller.Offset.WithX(scroller.Offset.X - e.Delta.Y * 60);
-                e.Handled = true;
-            };
+            return;
         }
+
+        var currentX = ScreenshotsScroller.Offset.X;
+        var targetX = Math.Clamp(currentX - e.Delta.Y * WheelScrollStep, 0, maxX);
+        if (Math.Abs(targetX - currentX) < double.Epsilon)
+        {
+            return;
+        }
+
+        ScreenshotsScroller.Offset = ScreenshotsScroller.Offset.WithX(targetX);
+        e.Handled = true;
     }
 }
