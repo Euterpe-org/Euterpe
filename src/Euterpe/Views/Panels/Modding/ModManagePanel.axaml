@@ -225,7 +225,7 @@
                         Margin="-30,0,-30,0"
                         VerticalScrollBarVisibility="Disabled">
                         <ItemsControl
-                            HorizontalAlignment="{Binding SelectedMod.Screenshots.Length, Mode=OneTime, Converter={x:Static converters:FuncValueConverters.HorizontalAlignmentConverter}}"
+                            HorizontalAlignment="{Binding SelectedMod.Screenshots.Length, Mode=OneWay, Converter={x:Static converters:FuncValueConverters.HorizontalAlignmentConverter}}"
                             ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}">
 
                             <ItemsControl.ItemsPanel>
