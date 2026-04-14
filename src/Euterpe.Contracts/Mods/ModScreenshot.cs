@@ -7,5 +7,5 @@ public sealed class ModScreenshot
     public string? DominantColor { get; set; }
 
     [JsonIgnore]
-    public string FullUrl => Url.StartsWith("http") ? Url : $"https://euterpe-org.com{Url}";
+    public string FullUrl => $"https://euterpe-org.com{Url}";
 }
