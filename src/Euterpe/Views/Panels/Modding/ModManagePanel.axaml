@@ -235,6 +235,7 @@
                                 <DataTemplate x:DataType="mods:ModScreenshot">
                                     <Border
                                         Height="200"
+                                        Margin="0,0,0,12"
                                         Background="{Binding DominantColor, TargetNullValue=#1a1a2e}"
                                         CornerRadius="8"
                                         ClipToBounds="True">
