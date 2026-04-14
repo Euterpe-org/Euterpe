@@ -231,7 +231,7 @@
                                         CornerRadius="10"
                                         ClipToBounds="True">
                                         <labs:AsyncImage
-                                            Source="{Binding Url}"
+                                            Source="{Binding FullUrl}"
                                             Stretch="UniformToFill" />
                                     </Border>
                                 </DataTemplate>
