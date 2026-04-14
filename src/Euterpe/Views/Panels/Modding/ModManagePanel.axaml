@@ -367,7 +367,7 @@
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Margin="0,8,0,0"
-                            Text="{Binding SelectedMod.LocalizedModDescription.Value, Mode=OneWay}"
+                            Text="{Binding SelectedMod.Description, Mode=OneWay}"
                             TextWrapping="Wrap" />
                     </Grid>
 
