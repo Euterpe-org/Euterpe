@@ -1,5 +1,4 @@
 using Euterpe.Contracts.Mods;
-using Euterpe.Localization;
 
 namespace Euterpe.Models;
 

@@ -1,12 +1,12 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:enums="using:Euterpe.Models.Enums"
+    xmlns:labs="using:Avalonia.Labs.Controls"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conv="using:Euterpe.Converters"
-    xmlns:labs="using:Avalonia.Labs.Controls"
     xmlns:mods="using:Euterpe.Contracts.Mods"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Modding"
@@ -220,30 +220,33 @@
                     <!--  Screenshots  -->
                     <ScrollViewer
                         x:Name="ScreenshotsScroller"
+                        HorizontalScrollBarVisibility="Auto"
                         IsVisible="{Binding SelectedMod.HasScreenshots, Mode=OneWay}"
                         Margin="-30,0,-30,0"
-                        HorizontalScrollBarVisibility="Auto"
                         VerticalScrollBarVisibility="Disabled">
                         <ItemsControl
-                            HorizontalAlignment="{Binding SelectedMod.Screenshots.Length, Mode=OneWay, Converter={x:Static conv:SingleItemCenterConverter.Instance}}"
+                            HorizontalAlignment="{Binding SelectedMod.Screenshots.Length, Mode=OneTime, Converter={x:Static converters:FuncValueConverters.HorizontalAlignmentConverter}}"
                             ItemsSource="{Binding SelectedMod.Screenshots, Mode=OneWay}">
+
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="8" />
+                                    <StackPanel
+                                        Orientation="Horizontal"
+                                        Spacing="8" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
+
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate x:DataType="mods:ModScreenshot">
-                                    <Border
+                                <DataTemplate
+                                    x:DataType="mods:ModScreenshot">
+                                    <labs:AsyncImage
+                                        Background="{Binding DominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
+                                        ClipToBounds="True"
+                                        CornerRadius="8"
                                         Height="200"
                                         Margin="0,0,0,12"
-                                        Background="{Binding DominantColor, TargetNullValue=#1a1a2e}"
-                                        CornerRadius="8"
-                                        ClipToBounds="True">
-                                        <labs:AsyncImage
-                                            Source="{Binding FullUrl}"
-                                            Stretch="Uniform" />
-                                    </Border>
+                                        Source="{Binding FullUrl}"
+                                        Stretch="Uniform" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
