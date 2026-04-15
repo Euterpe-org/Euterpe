@@ -15,10 +15,10 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public IReadOnlyList<WizardIdentityOption> IdentityOptions { get; } =
     [
-        new(WizardIdentity.Player, "UserGroup", "Player", "Recommended for regular players") { IsSelected = true },
-        new(WizardIdentity.Charter, "Language", "Charter", "Recommended for chart creators"),
-        new(WizardIdentity.Modder, "Code", "Modder", "Recommended for mod developers"),
-        new(WizardIdentity.Custom, "Setting", "Custom", "Customize your setup")
+        new(WizardIdentity.Player, "UserGroup", "Player", "Recommended for regular players", "#2563EB") { IsSelected = true },
+        new(WizardIdentity.Charter, "Language", "Charter", "Recommended for chart creators", "#7B2CBF"),
+        new(WizardIdentity.Modder, "Code", "Modder", "Recommended for mod developers", "#047857"),
+        new(WizardIdentity.Custom, "Setting", "Custom", "Customize your setup", "#B45309")
     ];
 
     public IReadOnlyList<WizardComponent> Components { get; } =
