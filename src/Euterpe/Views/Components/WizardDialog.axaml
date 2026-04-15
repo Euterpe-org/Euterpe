@@ -17,14 +17,14 @@
     </Design.DataContext>
 
     <UserControl.Resources>
-        <!--  Identity Card: opacity overlay approach (no BrushTransition)  -->
+        <!--  Role Card: opacity overlay approach (no BrushTransition)  -->
         <ControlTheme
-            x:Key="IdentityCardItem"
+            x:Key="RoleCardItem"
             TargetType="ListBoxItem">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Margin" Value="0,0,0,6" />
-            <Setter Property="Padding" Value="0" />
+            <Setter Property="Padding" Value="10,8" />
             <Setter Property="Template">
                 <ControlTemplate>
                     <Grid>
@@ -86,7 +86,7 @@
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            Padding="10,8" />
+                            Padding="{TemplateBinding Padding}" />
                     </Grid>
                 </ControlTemplate>
             </Setter>
@@ -106,16 +106,7 @@
                 Selector="^:selected /template/ Border#SelectedBorder">
                 <Setter Property="Opacity" Value="1" />
             </Style>
-            <Style
-                Selector="^:selected /template/ Border#HoverOverlay">
-                <Setter Property="Opacity" Value="0" />
-            </Style>
-
-            <!--  Selected + Hover: keep selected appearance  -->
-            <Style
-                Selector="^:selected:pointerover /template/ Border#SelectedOverlay">
-                <Setter Property="Opacity" Value="0.7" />
-            </Style>
+            <!--  Selected + Hover: keep selected, suppress hover  -->
             <Style
                 Selector="^:selected:pointerover /template/ Border#HoverOverlay">
                 <Setter Property="Opacity" Value="0" />
@@ -125,9 +116,9 @@
 
     <UserControl.Styles>
 
-        <!--  Identity ListBox: remove default chrome  -->
+        <!--  Role ListBox: remove default chrome  -->
         <Style
-            Selector="ListBox.IdentityList">
+            Selector="ListBox.RoleList">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Padding" Value="0" />
@@ -135,21 +126,21 @@
 
         <!--  Apply custom theme to all items  -->
         <Style
-            Selector="ListBox.IdentityList ListBoxItem">
-            <Setter Property="Theme" Value="{StaticResource IdentityCardItem}" />
+            Selector="ListBox.RoleList ListBoxItem">
+            <Setter Property="Theme" Value="{StaticResource RoleCardItem}" />
         </Style>
 
         <!--  Selected foreground (descendant selectors not allowed in ControlTheme)  -->
         <Style
-            Selector="ListBox.IdentityList ListBoxItem:selected TextBlock">
+            Selector="ListBox.RoleList ListBoxItem:selected TextBlock">
             <Setter Property="Foreground" Value="White" />
         </Style>
         <Style
-            Selector="ListBox.IdentityList ListBoxItem:selected PathIcon">
+            Selector="ListBox.RoleList ListBoxItem:selected PathIcon">
             <Setter Property="Foreground" Value="White" />
         </Style>
         <Style
-            Selector="ListBox.IdentityList ListBoxItem:selected Panel > Border">
+            Selector="ListBox.RoleList ListBoxItem:selected Panel > Border">
             <Setter Property="Background" Value="White" />
         </Style>
 
@@ -179,7 +170,7 @@
         RowDefinitions="*,Auto"
         Width="850">
 
-        <!--  Page 1: Identity Selection + Task Options  -->
+        <!--  Page 1: Role Selection + Task Options  -->
         <Grid
             Grid.Row="0"
             ColumnDefinitions="340,*"
@@ -212,11 +203,11 @@
                     Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Description_Welcome}}" />
             </StackPanel>
 
-            <!--  Left: Identity Cards  -->
+            <!--  Left: Role Cards  -->
             <ListBox
                 Grid.Row="1"
                 Grid.Column="0"
-                Classes="IdentityList"
+                Classes="RoleList"
                 ItemsSource="{Binding Roles, Mode=OneTime}"
                 Margin="0,0,12,0"
                 SelectedItem="{Binding SelectedRole}">
