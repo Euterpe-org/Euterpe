@@ -112,13 +112,13 @@
                             <Setter Property="Background" Value="#262563EB" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#CC2563EB" />
+                            <Setter Property="Background" Value="#B32563EB" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard PathIcon">
                             <Setter Property="Foreground" Value="#2563EB" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CC2563EB" />
+                            <Setter Property="Background" Value="#B32563EB" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
                             <Setter Property="Background" Value="White" />
@@ -127,7 +127,7 @@
                             <Setter Property="Foreground" Value="White" />
                         </Style>
                         <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CC2563EB" />
+                            <Setter Property="Background" Value="#B32563EB" />
                         </Style>
                     </Button.Styles>
                     <Border
@@ -175,13 +175,13 @@
                             <Setter Property="Background" Value="#267B2CBF" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#CC7B2CBF" />
+                            <Setter Property="Background" Value="#B37B2CBF" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard PathIcon">
                             <Setter Property="Foreground" Value="#7B2CBF" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CC7B2CBF" />
+                            <Setter Property="Background" Value="#B37B2CBF" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
                             <Setter Property="Background" Value="White" />
@@ -190,7 +190,7 @@
                             <Setter Property="Foreground" Value="White" />
                         </Style>
                         <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CC7B2CBF" />
+                            <Setter Property="Background" Value="#B37B2CBF" />
                         </Style>
                     </Button.Styles>
                     <Border
@@ -238,13 +238,13 @@
                             <Setter Property="Background" Value="#26047857" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#CC047857" />
+                            <Setter Property="Background" Value="#B3047857" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard PathIcon">
                             <Setter Property="Foreground" Value="#047857" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CC047857" />
+                            <Setter Property="Background" Value="#B3047857" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
                             <Setter Property="Background" Value="White" />
@@ -253,7 +253,7 @@
                             <Setter Property="Foreground" Value="White" />
                         </Style>
                         <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CC047857" />
+                            <Setter Property="Background" Value="#B3047857" />
                         </Style>
                     </Button.Styles>
                     <Border
@@ -301,13 +301,13 @@
                             <Setter Property="Background" Value="#26B45309" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#CCB45309" />
+                            <Setter Property="Background" Value="#B3B45309" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard PathIcon">
                             <Setter Property="Foreground" Value="#B45309" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CCB45309" />
+                            <Setter Property="Background" Value="#B3B45309" />
                         </Style>
                         <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
                             <Setter Property="Background" Value="White" />
@@ -316,7 +316,7 @@
                             <Setter Property="Foreground" Value="White" />
                         </Style>
                         <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#CCB45309" />
+                            <Setter Property="Background" Value="#B3B45309" />
                         </Style>
                     </Button.Styles>
                     <Border
