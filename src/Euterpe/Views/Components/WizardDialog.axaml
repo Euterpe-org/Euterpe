@@ -39,7 +39,7 @@
             </Setter>
         </Style>
 
-        <!--  Selected card: white foreground  -->
+        <!--  Selected card: white foreground + icon badge  -->
         <Style
             Selector="Border.IdentityCard.Selected TextBlock">
             <Setter Property="Foreground" Value="White" />
@@ -47,6 +47,11 @@
         <Style
             Selector="Border.IdentityCard.Selected PathIcon">
             <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style
+            Selector="Border.IdentityCard.Selected Panel > Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Opacity" Value="0.2" />
         </Style>
 
         <!--  Progress Bar  -->
