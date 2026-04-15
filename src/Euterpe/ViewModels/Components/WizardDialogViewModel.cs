@@ -11,7 +11,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         [WizardIdentity.Modder] = ["MelonLoader", "EssentialMods", "UninstallConflicts", "DotNetSdk", "ModTemplate", "EnvVariable"]
     };
 
-    private bool _isSyncingIdentity;
+    private bool _isSyncingRole;
 
     public static IReadOnlyList<WizardRole> Roles { get; } =
     [
@@ -52,7 +52,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             task.PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName == nameof(WizardTask.IsSelected))
-                    SyncIdentityFromTasks();
+                    SyncRoleFromTasks();
             };
     }
 
@@ -96,8 +96,8 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     partial void OnSelectedRoleChanged(WizardRole? value)
     {
-        if (_isSyncingIdentity || value is null) return;
-        _isSyncingIdentity = true;
+        if (_isSyncingRole || value is null) return;
+        _isSyncingRole = true;
         try
         {
             if (Presets.TryGetValue(value.Identity, out var preset))
@@ -108,26 +108,26 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         }
         finally
         {
-            _isSyncingIdentity = false;
+            _isSyncingRole = false;
         }
     }
 
-    private void SyncIdentityFromTasks()
+    private void SyncRoleFromTasks()
     {
-        if (_isSyncingIdentity) return;
-        _isSyncingIdentity = true;
+        if (_isSyncingRole) return;
+        _isSyncingRole = true;
         try
         {
-            var matched = FindMatchingIdentity();
+            var matched = FindMatchingRole();
             SelectedRole = Roles.FirstOrDefault(o => o.Identity == matched);
         }
         finally
         {
-            _isSyncingIdentity = false;
+            _isSyncingRole = false;
         }
     }
 
-    private WizardIdentity FindMatchingIdentity()
+    private WizardIdentity FindMatchingRole()
     {
         if (SelectedRole is not null
             && SelectedRole.Identity is not WizardIdentity.Custom
