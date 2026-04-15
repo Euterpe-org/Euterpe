@@ -15,16 +15,7 @@
         <vm:WizardDialogViewModel />
     </Design.DataContext>
 
-    <UserControl.Styles>
-
-        <!--  Identity ListBox: remove default chrome  -->
-        <Style
-            Selector="ListBox.IdentityList">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Padding" Value="0" />
-        </Style>
-
+    <UserControl.Resources>
         <!--  Identity Card: custom theme replacing Semi entirely  -->
         <ControlTheme
             x:Key="IdentityCardItem"
@@ -81,6 +72,17 @@
                 <Setter Property="BorderBrush" Value="#2563EB" />
             </Style>
         </ControlTheme>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+
+        <!--  Identity ListBox: remove default chrome  -->
+        <Style
+            Selector="ListBox.IdentityList">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
 
         <!--  Apply custom theme to all items  -->
         <Style
