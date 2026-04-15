@@ -229,7 +229,7 @@
                     IsChecked="{Binding InstallModTemplate}" />
 
                 <CheckBox
-                    Content="Set Environment Variable (MD_DIRECTORY)"
+                    Content="Set Environment Variable (MD__DIRECTORY)"
                     IsChecked="{Binding SetEnvironmentVariable}" />
             </StackPanel>
         </Grid>
