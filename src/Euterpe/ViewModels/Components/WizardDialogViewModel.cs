@@ -94,8 +94,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             await Task.Delay(Random.Shared.Next(300, 1200)).ConfigureAwait(true);
         }
 
-        NotificationService.Success("Setup completed successfully!");
         Close();
+        await Task.Delay(300).ConfigureAwait(true);
+        NotificationService.Success("Setup completed successfully!");
     }
 
     partial void OnSelectedIdentityOptionChanged(WizardIdentityOption? value)
