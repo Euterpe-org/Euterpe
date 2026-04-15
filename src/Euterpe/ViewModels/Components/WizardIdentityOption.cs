@@ -20,5 +20,5 @@ public sealed partial class WizardIdentityOption(WizardIdentity identity, string
     [NotifyPropertyChangedFor(nameof(BorderBrush))]
     public partial bool IsSelected { get; set; }
 
-    public IBrush BorderBrush => IsSelected ? AccentBrush : Brushes.Transparent;
+    public IBrush BorderBrush => IsSelected ? Brushes.White : Brushes.Transparent;
 }
