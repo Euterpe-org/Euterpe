@@ -61,8 +61,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [UsedImplicitly]
     public required ILogger<WizardDialogViewModel> Logger { get; init; }
 
-    [UsedImplicitly]
-    public required INotificationService NotificationService { get; init; }
 
     #endregion Injections
 
@@ -95,8 +93,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         }
 
         Close();
-        await Task.Delay(300).ConfigureAwait(true);
-        NotificationService.Success("Setup completed successfully!");
     }
 
     partial void OnSelectedIdentityOptionChanged(WizardIdentityOption? value)
