@@ -260,31 +260,45 @@
                 Margin="12,0,0,0"
                 Padding="20,16"
                 Theme="{DynamicResource CardBorder}">
-                <StackPanel
-                    Spacing="4">
+                <DockPanel>
 
                     <TextBlock
+                        DockPanel.Dock="Top"
                         FontSize="15"
                         FontWeight="SemiBold"
-                        Margin="0,0,0,8"
+                        Margin="0,0,0,12"
                         Text="Components"
                         Theme="{StaticResource TitleTextBlock}" />
 
-                    <ItemsControl
-                        ItemsSource="{Binding Components, Mode=OneTime}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate
-                                x:DataType="vm:WizardComponent">
-                                <CheckBox
-                                    IsChecked="{Binding IsSelected}"
-                                    Margin="0,2">
-                                    <TextBlock
-                                        Text="{Binding DisplayName, Mode=OneTime}" />
-                                </CheckBox>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                    <ScrollViewer>
+                        <ItemsControl
+                            ItemsSource="{Binding Components, Mode=OneTime}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate
+                                    x:DataType="vm:WizardComponent">
+                                    <DockPanel
+                                        Margin="0,4">
+                                        <ToggleSwitch
+                                            DockPanel.Dock="Right"
+                                            IsChecked="{Binding IsSelected}"
+                                            VerticalAlignment="Center" />
+                                        <StackPanel
+                                            Spacing="1"
+                                            VerticalAlignment="Center">
+                                            <TextBlock
+                                                FontSize="13"
+                                                Text="{Binding DisplayName, Mode=OneTime}" />
+                                            <TextBlock
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SecondaryTextColor}"
+                                                Text="{Binding Description, Mode=OneTime}" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </DockPanel>
             </Border>
         </Grid>
 
