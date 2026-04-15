@@ -40,7 +40,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public partial double Progress { get; set; }
 
     [ObservableProperty]
-    public partial IReadOnlyList<WizardTaskItem> Tasks { get; set; } = [];
+    public partial string ProgressDescription { get; set; } = string.Empty;
 
     #region Injections
 
@@ -68,16 +68,8 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private void Confirm()
     {
-        var tasks = new List<WizardTaskItem>();
-        if (InstallMelonLoader) tasks.Add(new("Install MelonLoader"));
-        if (InstallEssentialMods) tasks.Add(new("Install Essential Mods"));
-        if (UninstallConflictingMods) tasks.Add(new("Uninstall Conflicting Mods"));
-        if (DownloadChartingTool) tasks.Add(new("Download Charting Tool (MDBMSC)"));
-        if (InstallDotNetSdk) tasks.Add(new("Install .NET SDK"));
-        if (InstallModTemplate) tasks.Add(new("Install Mod Template"));
-        if (SetEnvironmentVariable) tasks.Add(new("Set Environment Variable (MD_DIRECTORY)"));
-        Tasks = tasks;
         IsProgressPage = true;
+        ProgressDescription = "Preparing... (0/0)";
     }
 
     [RelayCommand]
