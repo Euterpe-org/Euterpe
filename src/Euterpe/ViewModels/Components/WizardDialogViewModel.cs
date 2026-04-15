@@ -23,13 +23,13 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public IReadOnlyList<WizardComponent> Components { get; } =
     [
-        new("MelonLoader", "Install MelonLoader") { IsSelected = true },
-        new("EssentialMods", "Install Essential Mods") { IsSelected = true },
-        new("UninstallConflicts", "Uninstall Conflicting Mods") { IsSelected = true },
-        new("ChartingTool", "Download Charting Tool (MDBMSC)"),
-        new("DotNetSdk", "Install .NET SDK"),
-        new("ModTemplate", "Install Mod Template"),
-        new("EnvVariable", "Set Environment Variable (MD_DIRECTORY)")
+        new("MelonLoader", "MelonLoader", "Required mod loader framework") { IsSelected = true },
+        new("EssentialMods", "Essential Mods", "Core mods for the best experience") { IsSelected = true },
+        new("UninstallConflicts", "Uninstall Conflicts", "Remove incompatible mods") { IsSelected = true },
+        new("ChartingTool", "Charting Tool (MDBMSC)", "MDM chart creation toolkit"),
+        new("DotNetSdk", ".NET SDK", "Required for mod development"),
+        new("ModTemplate", "Mod Template", "NuGet template for new mod projects"),
+        new("EnvVariable", "MD_DIRECTORY Variable", "Set game path environment variable")
     ];
 
     [ObservableProperty]
