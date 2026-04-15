@@ -13,9 +13,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     private bool _isSyncingIdentity;
 
-    public IReadOnlyList<WizardIdentityOption> IdentityOptions { get; } =
+    public static IReadOnlyList<WizardIdentityOption> IdentityOptions { get; } =
     [
-        new(WizardIdentity.Player, "UserGroup", "Player", "Recommended for regular players", "#2563EB") { IsSelected = true },
+        new(WizardIdentity.Player, "UserGroup", "Player", "Recommended for regular players", "#2563EB"),
         new(WizardIdentity.Charter, "Language", "Charter", "Recommended for chart creators", "#7B2CBF"),
         new(WizardIdentity.Modder, "Code", "Modder", "Recommended for mod developers", "#047857"),
         new(WizardIdentity.Custom, "Setting", "Custom", "Customize your setup", "#B45309")
@@ -36,7 +36,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public partial bool IsProgressPage { get; set; }
 
     [ObservableProperty]
-    public partial WizardIdentity SelectedIdentity { get; set; }
+    public partial WizardIdentityOption? SelectedIdentityOption { get; set; }
 
     [ObservableProperty]
     public partial double Progress { get; set; }
@@ -46,6 +46,8 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public WizardDialogViewModel()
     {
+        SelectedIdentityOption = IdentityOptions[0];
+
         foreach (var component in Components)
             component.PropertyChanged += (_, e) =>
             {
@@ -72,9 +74,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     }
 
     [RelayCommand]
-    private void SelectIdentity(WizardIdentity identity) => SelectedIdentity = identity;
-
-    [RelayCommand]
     private void SkipWizard() => Close();
 
     [RelayCommand]
@@ -95,19 +94,17 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         Close();
     }
 
-    partial void OnSelectedIdentityChanged(WizardIdentity value)
+    partial void OnSelectedIdentityOptionChanged(WizardIdentityOption? value)
     {
-        if (_isSyncingIdentity) return;
+        if (_isSyncingIdentity || value is null) return;
         _isSyncingIdentity = true;
         try
         {
-            if (Presets.TryGetValue(value, out var preset))
+            if (Presets.TryGetValue(value.Identity, out var preset))
             {
                 foreach (var component in Components)
                     component.IsSelected = preset.Contains(component.Name);
             }
-
-            UpdateIdentitySelections(value);
         }
         finally
         {
@@ -118,19 +115,26 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     private void SyncIdentityFromComponents()
     {
         if (_isSyncingIdentity) return;
-
-        var matched = FindMatchingIdentity();
-        UpdateIdentitySelections(matched);
+        _isSyncingIdentity = true;
+        try
+        {
+            var matched = FindMatchingIdentity();
+            SelectedIdentityOption = IdentityOptions.FirstOrDefault(o => o.Identity == matched);
+        }
+        finally
+        {
+            _isSyncingIdentity = false;
+        }
     }
 
     private WizardIdentity FindMatchingIdentity()
     {
-        // Preserve current identity if its preset still matches
-        if (SelectedIdentity is not WizardIdentity.Custom
-            && Presets.TryGetValue(SelectedIdentity, out var currentPreset)
+        if (SelectedIdentityOption is not null
+            && SelectedIdentityOption.Identity is not WizardIdentity.Custom
+            && Presets.TryGetValue(SelectedIdentityOption.Identity, out var currentPreset)
             && MatchesPreset(currentPreset))
         {
-            return SelectedIdentity;
+            return SelectedIdentityOption.Identity;
         }
 
         foreach (var (identity, preset) in Presets)
@@ -142,9 +146,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         return WizardIdentity.Custom;
     }
 
-    /// <summary>
-    ///     Zero-allocation single-pass comparison against a preset.
-    /// </summary>
     private bool MatchesPreset(HashSet<string> preset)
     {
         var selectedCount = 0;
@@ -156,11 +157,5 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         }
 
         return selectedCount == preset.Count;
-    }
-
-    private void UpdateIdentitySelections(WizardIdentity active)
-    {
-        foreach (var option in IdentityOptions)
-            option.IsSelected = option.Identity == active;
     }
 }
