@@ -276,24 +276,26 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate
                                     x:DataType="vm:WizardComponent">
-                                    <DockPanel
-                                        Margin="0,4">
-                                        <ToggleSwitch
-                                            DockPanel.Dock="Right"
-                                            IsChecked="{Binding IsSelected}"
-                                            VerticalAlignment="Center" />
-                                        <StackPanel
-                                            Spacing="1"
-                                            VerticalAlignment="Center">
-                                            <TextBlock
-                                                FontSize="13"
-                                                Text="{Binding DisplayName, Mode=OneTime}" />
-                                            <TextBlock
-                                                FontSize="11"
-                                                Foreground="{DynamicResource SecondaryTextColor}"
-                                                Text="{Binding Description, Mode=OneTime}" />
-                                        </StackPanel>
-                                    </DockPanel>
+                                    <CheckBox
+                                        IsChecked="{Binding IsSelected}"
+                                        Margin="0,2"
+                                        Padding="0">
+                                        <Grid
+                                            ColumnDefinitions="*,Auto"
+                                            Margin="4,0,0,0">
+                                            <StackPanel
+                                                Spacing="1"
+                                                VerticalAlignment="Center">
+                                                <TextBlock
+                                                    FontSize="13"
+                                                    Text="{Binding DisplayName, Mode=OneTime}" />
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    Foreground="{DynamicResource SecondaryTextColor}"
+                                                    Text="{Binding Description, Mode=OneTime}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </CheckBox>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
