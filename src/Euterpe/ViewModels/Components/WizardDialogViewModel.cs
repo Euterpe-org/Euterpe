@@ -81,10 +81,21 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     private void SkipWizard() => Close();
 
     [RelayCommand]
-    private void Confirm()
+    private async Task ConfirmAsync()
     {
+        var selectedComponents = Components.Where(c => c.IsSelected).ToList();
+        var total = selectedComponents.Count;
+
         IsProgressPage = true;
-        ProgressDescription = "Preparing... (0/0)";
+
+        for (var i = 0; i < total; i++)
+        {
+            ProgressDescription = $"{selectedComponents[i].DisplayName} ({i + 1}/{total})";
+            Progress = (double)(i + 1) / total * 100;
+            await Task.Delay(Random.Shared.Next(300, 1200)).ConfigureAwait(true);
+        }
+
+        IsCompleted = true;
     }
 
     [RelayCommand]
