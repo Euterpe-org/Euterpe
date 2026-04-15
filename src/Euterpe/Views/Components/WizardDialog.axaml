@@ -144,30 +144,18 @@
                 FontSize="24"
                 FontWeight="SemiBold"
                 HorizontalAlignment="Center"
-                IsVisible="{Binding !IsCompleted}"
                 Text="Setting Up..."
-                Theme="{StaticResource TitleTextBlock}" />
-
-            <TextBlock
-                FontSize="24"
-                FontWeight="SemiBold"
-                Foreground="Green"
-                HorizontalAlignment="Center"
-                IsVisible="{Binding IsCompleted}"
-                Text="Setup Complete!"
                 Theme="{StaticResource TitleTextBlock}" />
 
             <!--  Current Task Description  -->
             <TextBlock
                 Foreground="{DynamicResource SecondaryTextColor}"
                 HorizontalAlignment="Center"
-                IsVisible="{Binding !IsCompleted}"
                 Text="{Binding ProgressDescription, Mode=OneWay}" />
 
             <!--  Progress Bar  -->
             <ProgressBar
                 Classes="Primary"
-                IsVisible="{Binding !IsCompleted}"
                 Margin="0,8,0,0"
                 ShowProgressText="True"
                 Value="{Binding Progress, Mode=OneWay}" />
@@ -196,14 +184,6 @@
                     Content="Confirm"
                     DockPanel.Dock="Right"
                     IsVisible="{Binding !IsProgressPage}" />
-
-                <!--  Progress Page: Close  -->
-                <Button
-                    Classes="Primary"
-                    Command="{Binding CompleteCommand}"
-                    Content="Close"
-                    DockPanel.Dock="Right"
-                    IsVisible="{Binding IsCompleted}" />
 
                 <Panel />
             </DockPanel>
