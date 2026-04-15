@@ -25,41 +25,54 @@
             <Setter Property="Padding" Value="0" />
         </Style>
 
-        <!--  Identity ListBoxItem: base  -->
+        <!--  Identity ListBoxItem: layout  -->
         <Style
             Selector="ListBox.IdentityList ListBoxItem">
-            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="2" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Margin" Value="0,0,0,6" />
             <Setter Property="Padding" Value="10,8" />
         </Style>
 
-        <!--  Remove ListBoxItem template chrome  -->
+        <!--  Identity ListBoxItem template: base  -->
         <Style
             Selector="ListBox.IdentityList ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
             <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
             <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition
+                        Property="Background"
+                        Duration="0:0:0.15" />
+                    <BrushTransition
+                        Property="BorderBrush"
+                        Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
         </Style>
 
-        <!--  Hover: subtle accent tint  -->
+        <!--  Hover  -->
         <Style
             Selector="ListBox.IdentityList ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="#15808080" />
         </Style>
 
-        <!--  Selected: accent background + border  -->
+        <!--  Selected  -->
         <Style
             Selector="ListBox.IdentityList ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-        <Style
-            Selector="ListBox.IdentityList ListBoxItem:selected">
             <Setter Property="Background" Value="#B32563EB" />
             <Setter Property="BorderBrush" Value="#2563EB" />
         </Style>
+
+        <!--  Selected + Hover: keep selected appearance  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#B32563EB" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+
+        <!--  Selected foreground  -->
         <Style
             Selector="ListBox.IdentityList ListBoxItem:selected TextBlock">
             <Setter Property="Foreground" Value="White" />
