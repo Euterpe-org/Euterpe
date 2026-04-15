@@ -1,0 +1,449 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="Euterpe.Views.Components.TransitionTestDialog"
+    d:DesignHeight="600"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <!--
+        ════════════════════════════════════════════════════
+        SCHEME A: No transition (instant switch)
+        Background: semi-transparent alpha colors
+        ════════════════════════════════════════════════════
+        -->
+        <ControlTheme
+            x:Key="SchemeA"
+            TargetType="ListBoxItem">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter
+                        x:Name="PART_ContentPresenter"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}" />
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="#262563EB" />
+            </Style>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="#B32563EB" />
+                <Setter Property="BorderBrush" Value="#2563EB" />
+            </Style>
+            <Style Selector="^:selected:pointerover">
+                <Setter Property="Background" Value="#B32563EB" />
+                <Setter Property="BorderBrush" Value="#2563EB" />
+            </Style>
+        </ControlTheme>
+
+        <!--
+        ════════════════════════════════════════════════════
+        SCHEME B: BrushTransition + fully opaque colors only
+        Hover/Selected are opaque pre-blended on dark bg
+        ════════════════════════════════════════════════════
+        -->
+        <ControlTheme
+            x:Key="SchemeB"
+            TargetType="ListBoxItem">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter
+                        x:Name="PART_ContentPresenter"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}" />
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="#1B2D4A" />
+            </Style>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="#2563EB" />
+                <Setter Property="BorderBrush" Value="#5B93F0" />
+            </Style>
+            <Style Selector="^:selected:pointerover">
+                <Setter Property="Background" Value="#2563EB" />
+                <Setter Property="BorderBrush" Value="#5B93F0" />
+            </Style>
+        </ControlTheme>
+
+        <!--
+        ════════════════════════════════════════════════════
+        SCHEME C: BrushTransition + all same alpha (0xFF)
+        Hover is a lighter opaque shade, selected is full
+        ════════════════════════════════════════════════════
+        -->
+        <ControlTheme
+            x:Key="SchemeC"
+            TargetType="ListBoxItem">
+            <Setter Property="Background" Value="#2D2D2D" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter
+                        x:Name="PART_ContentPresenter"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}" />
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="#3A3A4A" />
+            </Style>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="#2563EB" />
+                <Setter Property="BorderBrush" Value="#5B93F0" />
+            </Style>
+            <Style Selector="^:selected:pointerover">
+                <Setter Property="Background" Value="#2D6AF2" />
+                <Setter Property="BorderBrush" Value="#5B93F0" />
+            </Style>
+        </ControlTheme>
+
+        <!--
+        ════════════════════════════════════════════════════
+        SCHEME D: Opacity transition instead of BrushTransition
+        Overlay border with accent color, animate opacity
+        ════════════════════════════════════════════════════
+        -->
+        <ControlTheme
+            x:Key="SchemeD"
+            TargetType="ListBoxItem">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid>
+                        <!--  Accent overlay (opacity animated)  -->
+                        <Border
+                            x:Name="AccentOverlay"
+                            Background="#2563EB"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Opacity="0">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Property="Opacity"
+                                        Duration="0:0:0.2" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+                        <!--  Border overlay for selected  -->
+                        <Border
+                            x:Name="BorderOverlay"
+                            BorderBrush="#5B93F0"
+                            BorderThickness="2"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Opacity="0">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Property="Opacity"
+                                        Duration="0:0:0.2" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+                        <ContentPresenter
+                            x:Name="PART_ContentPresenter"
+                            Background="Transparent"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover /template/ Border#AccentOverlay">
+                <Setter Property="Opacity" Value="0.15" />
+            </Style>
+            <Style Selector="^:selected /template/ Border#AccentOverlay">
+                <Setter Property="Opacity" Value="0.7" />
+            </Style>
+            <Style Selector="^:selected /template/ Border#BorderOverlay">
+                <Setter Property="Opacity" Value="1" />
+            </Style>
+            <Style Selector="^:selected:pointerover /template/ Border#AccentOverlay">
+                <Setter Property="Opacity" Value="0.7" />
+            </Style>
+        </ControlTheme>
+
+        <!--
+        ════════════════════════════════════════════════════
+        SCHEME E: DoubleTransition on Opacity of entire item
+        Dim unselected items when one is selected
+        ════════════════════════════════════════════════════
+        -->
+        <ControlTheme
+            x:Key="SchemeE"
+            TargetType="ListBoxItem">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter
+                        x:Name="PART_ContentPresenter"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}" />
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="#262563EB" />
+            </Style>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="#B32563EB" />
+                <Setter Property="BorderBrush" Value="#2563EB" />
+            </Style>
+            <Style Selector="^:selected:pointerover">
+                <Setter Property="Background" Value="#B32563EB" />
+                <Setter Property="BorderBrush" Value="#2563EB" />
+            </Style>
+        </ControlTheme>
+
+        <!--
+        ════════════════════════════════════════════════════
+        SCHEME F: BrushTransition + same alpha across all states
+        Base/Hover/Selected all use same alpha (#FF or #B3)
+        ════════════════════════════════════════════════════
+        -->
+        <ControlTheme
+            x:Key="SchemeF"
+            TargetType="ListBoxItem">
+            <Setter Property="Background" Value="#B3303030" />
+            <Setter Property="BorderBrush" Value="#B3303030" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter
+                        x:Name="PART_ContentPresenter"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}" />
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="#B3404060" />
+                <Setter Property="BorderBrush" Value="#B3404060" />
+            </Style>
+            <Style Selector="^:selected">
+                <Setter Property="Background" Value="#B32563EB" />
+                <Setter Property="BorderBrush" Value="#B35B93F0" />
+            </Style>
+            <Style Selector="^:selected:pointerover">
+                <Setter Property="Background" Value="#B32D6AF2" />
+                <Setter Property="BorderBrush" Value="#B35B93F0" />
+            </Style>
+        </ControlTheme>
+
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="ListBox.TestList">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="ListBox.TestList ListBoxItem:selected TextBlock">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer>
+        <StackPanel
+            Margin="30"
+            Spacing="30">
+
+            <TextBlock
+                FontSize="20"
+                FontWeight="Bold"
+                Text="Transition Test — Pick the one without pulse artifacts"
+                Theme="{StaticResource TitleTextBlock}" />
+
+            <!--  SCHEME A  -->
+            <StackPanel Spacing="8">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Text="A: No transition, alpha colors (#26 hover, #B3 selected)" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SecondaryTextColor}"
+                    Text="Instant switch, no animation. Baseline reference." />
+                <ListBox
+                    Classes="TestList"
+                    ItemContainerTheme="{StaticResource SchemeA}">
+                    <ListBoxItem Content="Item 1" />
+                    <ListBoxItem Content="Item 2" />
+                    <ListBoxItem Content="Item 3" />
+                </ListBox>
+            </StackPanel>
+
+            <!--  SCHEME B  -->
+            <StackPanel Spacing="8">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Text="B: BrushTransition + opaque pre-blended colors (dark theme only)" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SecondaryTextColor}"
+                    Text="Hover=#1B2D4A, Selected=#2563EB. All #FF alpha. 200ms transition." />
+                <ListBox
+                    Classes="TestList"
+                    ItemContainerTheme="{StaticResource SchemeB}">
+                    <ListBoxItem Content="Item 1" />
+                    <ListBoxItem Content="Item 2" />
+                    <ListBoxItem Content="Item 3" />
+                </ListBox>
+            </StackPanel>
+
+            <!--  SCHEME C  -->
+            <StackPanel Spacing="8">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Text="C: BrushTransition + hardcoded opaque base (#2D2D2D)" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SecondaryTextColor}"
+                    Text="Base=#2D2D2D, Hover=#3A3A4A, Selected=#2563EB. All opaque. 200ms." />
+                <ListBox
+                    Classes="TestList"
+                    ItemContainerTheme="{StaticResource SchemeC}">
+                    <ListBoxItem Content="Item 1" />
+                    <ListBoxItem Content="Item 2" />
+                    <ListBoxItem Content="Item 3" />
+                </ListBox>
+            </StackPanel>
+
+            <!--  SCHEME D  -->
+            <StackPanel Spacing="8">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Text="D: Opacity transition on accent overlay (NOT BrushTransition)" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SecondaryTextColor}"
+                    Text="Accent #2563EB layer with DoubleTransition on Opacity. Hover=0.15, Selected=0.7. 200ms." />
+                <ListBox
+                    Classes="TestList"
+                    ItemContainerTheme="{StaticResource SchemeD}">
+                    <ListBoxItem Content="Item 1" />
+                    <ListBoxItem Content="Item 2" />
+                    <ListBoxItem Content="Item 3" />
+                </ListBox>
+            </StackPanel>
+
+            <!--  SCHEME E  -->
+            <StackPanel Spacing="8">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Text="E: Same as A but reference (no transition, alpha colors)" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SecondaryTextColor}"
+                    Text="Identical to A. Control group." />
+                <ListBox
+                    Classes="TestList"
+                    ItemContainerTheme="{StaticResource SchemeE}">
+                    <ListBoxItem Content="Item 1" />
+                    <ListBoxItem Content="Item 2" />
+                    <ListBoxItem Content="Item 3" />
+                </ListBox>
+            </StackPanel>
+
+            <!--  SCHEME F  -->
+            <StackPanel Spacing="8">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Text="F: BrushTransition + SAME alpha (#B3) on ALL states" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SecondaryTextColor}"
+                    Text="Base=#B3303030, Hover=#B3404060, Selected=#B32563EB. Same alpha everywhere. 200ms." />
+                <ListBox
+                    Classes="TestList"
+                    ItemContainerTheme="{StaticResource SchemeF}">
+                    <ListBoxItem Content="Item 1" />
+                    <ListBoxItem Content="Item 2" />
+                    <ListBoxItem Content="Item 3" />
+                </ListBox>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
