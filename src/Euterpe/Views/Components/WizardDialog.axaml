@@ -16,58 +16,108 @@
     </Design.DataContext>
 
     <UserControl.Resources>
-        <!--  Identity Card: custom theme replacing Semi entirely  -->
+        <!--  Identity Card: opacity overlay approach (no BrushTransition)  -->
         <ControlTheme
             x:Key="IdentityCardItem"
             TargetType="ListBoxItem">
-            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Margin" Value="0,0,0,6" />
-            <Setter Property="Padding" Value="10,8" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition
-                        Property="Background"
-                        Duration="0:0:0.2" />
-                    <BrushTransition
-                        Property="BorderBrush"
-                        Duration="0:0:0.2" />
-                </Transitions>
-            </Setter>
+            <Setter Property="Padding" Value="0" />
             <Setter Property="Template">
                 <ControlTemplate>
-                    <ContentPresenter
-                        x:Name="PART_ContentPresenter"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Content="{TemplateBinding Content}"
-                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        Padding="{TemplateBinding Padding}" />
+                    <Grid>
+                        <!--  Base card background  -->
+                        <Border
+                            x:Name="BaseBg"
+                            Background="{DynamicResource SecondaryCardColor}"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
+
+                        <!--  Hover overlay  -->
+                        <Border
+                            x:Name="HoverOverlay"
+                            Background="#808080"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Opacity="0">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Property="Opacity"
+                                        Duration="0:0:0.15" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+
+                        <!--  Selected overlay  -->
+                        <Border
+                            x:Name="SelectedOverlay"
+                            Background="#2563EB"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Opacity="0">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Property="Opacity"
+                                        Duration="0:0:0.2" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+
+                        <!--  Selected border  -->
+                        <Border
+                            x:Name="SelectedBorder"
+                            BorderBrush="#2563EB"
+                            BorderThickness="2"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Opacity="0">
+                            <Border.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Property="Opacity"
+                                        Duration="0:0:0.2" />
+                                </Transitions>
+                            </Border.Transitions>
+                        </Border>
+
+                        <!--  Content  -->
+                        <ContentPresenter
+                            x:Name="PART_ContentPresenter"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="10,8" />
+                    </Grid>
                 </ControlTemplate>
             </Setter>
 
-            <!--  Hover  -->
+            <!--  Hover: show hover overlay  -->
             <Style
-                Selector="^:pointerover">
-                <Setter Property="Background" Value="#15808080" />
+                Selector="^:pointerover /template/ Border#HoverOverlay">
+                <Setter Property="Opacity" Value="0.1" />
             </Style>
 
-            <!--  Selected  -->
+            <!--  Selected: show selected overlay + border, hide hover  -->
             <Style
-                Selector="^:selected">
-                <Setter Property="Background" Value="#B32563EB" />
-                <Setter Property="BorderBrush" Value="#2563EB" />
+                Selector="^:selected /template/ Border#SelectedOverlay">
+                <Setter Property="Opacity" Value="0.7" />
+            </Style>
+            <Style
+                Selector="^:selected /template/ Border#SelectedBorder">
+                <Setter Property="Opacity" Value="1" />
+            </Style>
+            <Style
+                Selector="^:selected /template/ Border#HoverOverlay">
+                <Setter Property="Opacity" Value="0" />
             </Style>
 
-            <!--  Selected + Hover  -->
+            <!--  Selected + Hover: keep selected appearance  -->
             <Style
-                Selector="^:selected:pointerover">
-                <Setter Property="Background" Value="#B32563EB" />
-                <Setter Property="BorderBrush" Value="#2563EB" />
+                Selector="^:selected:pointerover /template/ Border#SelectedOverlay">
+                <Setter Property="Opacity" Value="0.7" />
+            </Style>
+            <Style
+                Selector="^:selected:pointerover /template/ Border#HoverOverlay">
+                <Setter Property="Opacity" Value="0" />
             </Style>
         </ControlTheme>
     </UserControl.Resources>
