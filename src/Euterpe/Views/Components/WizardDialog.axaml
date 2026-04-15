@@ -170,7 +170,7 @@
         RowDefinitions="*,Auto"
         Width="850">
 
-        <!--  Page 1: Identity Selection + Component Options  -->
+        <!--  Page 1: Identity Selection + Task Options  -->
         <Grid
             Grid.Row="0"
             ColumnDefinitions="340,*"
@@ -200,7 +200,7 @@
                 <TextBlock
                     Foreground="{DynamicResource SecondaryTextColor}"
                     Margin="48,0,0,0"
-                    Text="Choose your role and components to get started" />
+                    Text="Choose your role and tasks to get started" />
             </StackPanel>
 
             <!--  Left: Identity Cards  -->
@@ -251,7 +251,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <!--  Right: Component Options  -->
+            <!--  Right: Task Options  -->
             <Border
                 Grid.Row="1"
                 Grid.Column="1"
