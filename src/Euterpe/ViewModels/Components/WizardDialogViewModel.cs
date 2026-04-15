@@ -61,7 +61,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [UsedImplicitly]
     public required ILogger<WizardDialogViewModel> Logger { get; init; }
 
-
     #endregion Injections
 
     public void Close() => RequestClose?.Invoke(this, null);

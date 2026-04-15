@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Components"
     x:Class="Euterpe.Views.Components.WizardDialog"
     x:DataType="vm:WizardDialogViewModel"
@@ -289,10 +289,8 @@
                                         IsChecked="{Binding IsSelected}"
                                         Margin="0,2"
                                         Padding="0">
-                                        <Grid
-                                            ColumnDefinitions="*,Auto"
+                                        <StackPanel
                                             Margin="4,0,0,0">
-                                            <StackPanel
                                                 Spacing="1"
                                                 VerticalAlignment="Center">
                                                 <TextBlock
@@ -302,8 +300,7 @@
                                                     FontSize="11"
                                                     Foreground="{DynamicResource SecondaryTextColor}"
                                                     Text="{Binding Description, Mode=OneTime}" />
-                                            </StackPanel>
-                                        </Grid>
+                                        </StackPanel>
                                     </CheckBox>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
