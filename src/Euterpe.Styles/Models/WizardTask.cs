@@ -1,4 +1,4 @@
-namespace Euterpe.ViewModels.Components;
+namespace Euterpe.Styles.Models;
 
 public sealed partial class WizardTask(string name, LocalizedString displayName, LocalizedString description) : ObservableObject
 {

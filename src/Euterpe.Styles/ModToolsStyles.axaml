@@ -35,6 +35,8 @@
         Source="/TemplatedControls/Difficulty.axaml" />
     <StyleInclude
         Source="/TemplatedControls/NaviButtonsControl.axaml" />
+    <StyleInclude
+        Source="/TemplatedControls/RoleCard.axaml" />
     <!--  Control Styles  -->
     <StyleInclude
         Source="/Styles/BorderStyles.axaml" />
