@@ -24,7 +24,7 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Padding" Value="14" />
+            <Setter Property="Padding" Value="10,8" />
             <Setter Property="RenderTransform" Value="none" />
             <Setter Property="Transitions">
                 <Transitions>
@@ -59,7 +59,7 @@
         <!--  Page 1: Identity Selection + Component Options  -->
         <Grid
             Grid.Row="0"
-            ColumnDefinitions="280,*"
+            ColumnDefinitions="340,*"
             IsVisible="{Binding !IsProgressPage}"
             Margin="28,24,28,0"
             RowDefinitions="Auto,*">
@@ -67,7 +67,7 @@
             <!--  Header  -->
             <StackPanel
                 Grid.ColumnSpan="2"
-                Margin="0,0,0,20"
+                Margin="0,0,0,18"
                 Spacing="4">
                 <StackPanel
                     Orientation="Horizontal"
@@ -94,7 +94,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 ItemsSource="{Binding IdentityOptions, Mode=OneTime}"
-                Margin="0,0,14,0">
+                Margin="0,0,12,0">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate
                         x:DataType="vm:WizardIdentityOption">
@@ -102,44 +102,43 @@
                             Classes="Transparent Card"
                             Command="{Binding $parent[UserControl].DataContext.SelectIdentityCommand, Mode=OneTime}"
                             CommandParameter="{Binding Identity, Mode=OneTime}"
-                            Margin="0,0,0,8">
+                            Margin="0,0,0,6">
                             <Border
                                 Classes="IdentityCard"
                                 Classes.Selected="{Binding IsSelected, Mode=OneWay}">
-                                <StackPanel
-                                    Spacing="6">
+                                <Grid
+                                    ColumnDefinitions="Auto,*">
+
+                                    <!--  Icon Badge  -->
+                                    <Panel
+                                        Height="30"
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Center"
+                                        Width="30">
+                                        <Border
+                                            Background="{DynamicResource SemiBlue5}"
+                                            CornerRadius="15"
+                                            Opacity="0.12" />
+                                        <PathIcon
+                                            Data="{Binding IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneTime}"
+                                            Foreground="{DynamicResource SemiBlue5}"
+                                            Height="14" />
+                                    </Panel>
+
                                     <StackPanel
-                                        Orientation="Horizontal"
-                                        Spacing="12">
-
-                                        <!--  Icon Badge  -->
-                                        <Panel
-                                            Height="34"
-                                            Width="34">
-                                            <Border
-                                                Background="{DynamicResource SemiBlue5}"
-                                                CornerRadius="17"
-                                                Opacity="0.12" />
-                                            <PathIcon
-                                                Data="{Binding IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneTime}"
-                                                Foreground="{DynamicResource SemiBlue5}"
-                                                Height="16" />
-                                        </Panel>
-
+                                        Grid.Column="1"
+                                        Spacing="1"
+                                        VerticalAlignment="Center">
                                         <TextBlock
-                                            FontSize="15"
+                                            FontSize="14"
                                             FontWeight="SemiBold"
-                                            Text="{Binding Title, Mode=OneTime}"
-                                            VerticalAlignment="Center" />
+                                            Text="{Binding Title, Mode=OneTime}" />
+                                        <TextBlock
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SecondaryTextColor}"
+                                            Text="{Binding Description, Mode=OneTime}" />
                                     </StackPanel>
-
-                                    <TextBlock
-                                        FontSize="12"
-                                        Foreground="{DynamicResource SecondaryTextColor}"
-                                        Margin="46,0,0,0"
-                                        Text="{Binding Description, Mode=OneTime}"
-                                        TextWrapping="Wrap" />
-                                </StackPanel>
+                                </Grid>
                             </Border>
                         </Button>
                     </DataTemplate>
@@ -152,16 +151,16 @@
                 Grid.Column="1"
                 Background="{DynamicResource SecondaryCardColor}"
                 CornerRadius="10"
-                Margin="14,0,0,0"
-                Padding="20"
+                Margin="12,0,0,0"
+                Padding="20,16"
                 Theme="{DynamicResource CardBorder}">
                 <StackPanel
-                    Spacing="6">
+                    Spacing="4">
 
                     <TextBlock
                         FontSize="15"
                         FontWeight="SemiBold"
-                        Margin="0,0,0,10"
+                        Margin="0,0,0,8"
                         Text="Components"
                         Theme="{StaticResource TitleTextBlock}" />
 
@@ -171,9 +170,11 @@
                             <DataTemplate
                                 x:DataType="vm:WizardComponent">
                                 <CheckBox
-                                    Content="{Binding DisplayName, Mode=OneTime}"
                                     IsChecked="{Binding IsSelected}"
-                                    Margin="0,3" />
+                                    Margin="0,2">
+                                    <TextBlock
+                                        Text="{Binding DisplayName, Mode=OneTime}" />
+                                </CheckBox>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -186,28 +187,38 @@
             Grid.Row="0"
             HorizontalAlignment="Center"
             IsVisible="{Binding IsProgressPage}"
-            Spacing="16"
+            Spacing="8"
             VerticalAlignment="Center"
-            Width="450">
+            Width="480">
+
+            <!--  Logo  -->
+            <Image
+                Height="48"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,12"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="/Assets/Logo.webp" />
 
             <!--  Title  -->
             <TextBlock
-                FontSize="24"
-                FontWeight="SemiBold"
+                FontSize="22"
+                FontWeight="Bold"
                 HorizontalAlignment="Center"
-                Text="Setting Up..."
+                Text="Setting Up Euterpe"
                 Theme="{StaticResource TitleTextBlock}" />
 
             <!--  Current Task Description  -->
             <TextBlock
+                FontSize="13"
                 Foreground="{DynamicResource SecondaryTextColor}"
                 HorizontalAlignment="Center"
+                Margin="0,4,0,16"
                 Text="{Binding ProgressDescription, Mode=OneWay}" />
 
             <!--  Progress Bar  -->
             <ProgressBar
                 Classes="Primary"
-                Margin="0,8,0,0"
+                MinWidth="360"
                 ShowProgressText="True"
                 Value="{Binding Progress, Mode=OneWay}" />
         </StackPanel>
