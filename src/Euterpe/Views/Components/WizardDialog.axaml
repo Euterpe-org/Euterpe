@@ -25,14 +25,13 @@
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Padding" Value="10,8" />
-            <Setter Property="RenderTransform" Value="none" />
             <Setter Property="Transitions">
                 <Transitions>
                     <BrushTransition
+                        Property="Background"
+                        Duration="0:0:0.15" />
+                    <BrushTransition
                         Property="BorderBrush"
-                        Duration="0:0:0.2" />
-                    <TransformOperationsTransition
-                        Property="RenderTransform"
                         Duration="0:0:0.15" />
                 </Transitions>
             </Setter>
@@ -41,13 +40,25 @@
         <!--  Identity Card Hover  -->
         <Style
             Selector="Button:pointerover Border.IdentityCard">
-            <Setter Property="RenderTransform" Value="scale(1.02)" />
+            <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         </Style>
 
         <!--  Identity Card Selected  -->
         <Style
             Selector="Border.IdentityCard.Selected">
             <Setter Property="BorderBrush" Value="{DynamicResource SemiBlue5}" />
+        </Style>
+
+        <!--  Progress Bar  -->
+        <Style
+            Selector="ProgressBar.Wizard">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Height" Value="12" />
+            <Setter Property="MinHeight" Value="12" />
+        </Style>
+        <Style
+            Selector="ProgressBar.Wizard /template/ Border">
+            <Setter Property="CornerRadius" Value="6" />
         </Style>
     </UserControl.Styles>
 
@@ -217,10 +228,16 @@
 
             <!--  Progress Bar  -->
             <ProgressBar
-                Classes="Primary"
+                Classes="Primary Wizard"
                 MinWidth="360"
-                ShowProgressText="True"
                 Value="{Binding Progress, Mode=OneWay}" />
+
+            <!--  Percentage  -->
+            <TextBlock
+                FontSize="13"
+                Foreground="{DynamicResource SecondaryTextColor}"
+                HorizontalAlignment="Center"
+                Text="{Binding Progress, StringFormat='{}{0:F0}%', Mode=OneWay}" />
         </StackPanel>
 
         <!--  Bottom Bar  -->
