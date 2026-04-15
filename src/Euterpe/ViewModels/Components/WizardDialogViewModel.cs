@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.ViewModels.Components;
@@ -51,7 +50,11 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public WizardDialogViewModel()
     {
         foreach (var component in Components)
-            component.PropertyChanged += OnComponentPropertyChanged;
+            component.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(WizardComponent.IsSelected))
+                    SyncIdentityFromComponents();
+            };
     }
 
     #region Injections
@@ -87,50 +90,82 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private void Complete() => Close();
 
-    private void OnComponentPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(WizardComponent.IsSelected))
-            SyncIdentityFromComponents();
-    }
-
     partial void OnSelectedIdentityChanged(WizardIdentity value)
     {
         if (_isSyncingIdentity) return;
         _isSyncingIdentity = true;
-
-        if (Presets.TryGetValue(value, out var preset))
+        try
         {
-            foreach (var component in Components)
-                component.IsSelected = preset.Contains(component.Name);
+            if (Presets.TryGetValue(value, out var preset))
+            {
+                foreach (var component in Components)
+                    component.IsSelected = preset.Contains(component.Name);
+            }
+
+            UpdateIdentitySelections(value);
         }
-
-        foreach (var option in IdentityOptions)
-            option.IsSelected = option.Identity == value;
-
-        _isSyncingIdentity = false;
+        finally
+        {
+            _isSyncingIdentity = false;
+        }
     }
 
     private void SyncIdentityFromComponents()
     {
         if (_isSyncingIdentity) return;
         _isSyncingIdentity = true;
+        try
+        {
+            var matched = FindMatchingIdentity();
+            if (matched != SelectedIdentity)
+                SelectedIdentity = matched;
 
-        var selected = GetSelectedComponentNames();
-
-        if (SelectedIdentity is not WizardIdentity.Custom && Presets.TryGetValue(SelectedIdentity, out var current) && current.SetEquals(selected))
+            UpdateIdentitySelections(SelectedIdentity);
+        }
+        finally
         {
             _isSyncingIdentity = false;
-            return;
         }
-
-        SelectedIdentity = Presets
-            .Where(p => p.Value.SetEquals(selected))
-            .Select(p => p.Key)
-            .FirstOrDefault(WizardIdentity.Custom);
-
-        _isSyncingIdentity = false;
     }
 
-    private HashSet<string> GetSelectedComponentNames() =>
-        Components.Where(c => c.IsSelected).Select(c => c.Name).ToHashSet();
+    private WizardIdentity FindMatchingIdentity()
+    {
+        // Preserve current identity if its preset still matches
+        if (SelectedIdentity is not WizardIdentity.Custom
+            && Presets.TryGetValue(SelectedIdentity, out var currentPreset)
+            && MatchesPreset(currentPreset))
+        {
+            return SelectedIdentity;
+        }
+
+        foreach (var (identity, preset) in Presets)
+        {
+            if (MatchesPreset(preset))
+                return identity;
+        }
+
+        return WizardIdentity.Custom;
+    }
+
+    /// <summary>
+    ///     Zero-allocation single-pass comparison against a preset.
+    /// </summary>
+    private bool MatchesPreset(HashSet<string> preset)
+    {
+        var selectedCount = 0;
+        foreach (var component in Components)
+        {
+            if (!component.IsSelected) continue;
+            if (!preset.Contains(component.Name)) return false;
+            selectedCount++;
+        }
+
+        return selectedCount == preset.Count;
+    }
+
+    private void UpdateIdentitySelections(WizardIdentity active)
+    {
+        foreach (var option in IdentityOptions)
+            option.IsSelected = option.Identity == active;
+    }
 }
