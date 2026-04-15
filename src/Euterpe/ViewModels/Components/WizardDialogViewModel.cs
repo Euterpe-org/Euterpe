@@ -21,7 +21,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         new(WizardIdentity.Custom, "Setting", "Custom", "Customize your setup", "#B45309")
     ];
 
-    public IReadOnlyList<WizardComponent> Components { get; } =
+    public IReadOnlyList<WizardTask> Tasks { get; } =
     [
         new("MelonLoader", "MelonLoader", "Required mod loader framework") { IsSelected = true },
         new("EssentialMods", "Essential Mods", "Core mods for the best experience") { IsSelected = true },
@@ -48,11 +48,11 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     {
         SelectedIdentityOption = IdentityOptions[0];
 
-        foreach (var component in Components)
-            component.PropertyChanged += (_, e) =>
+        foreach (var task in Tasks)
+            task.PropertyChanged += (_, e) =>
             {
-                if (e.PropertyName == nameof(WizardComponent.IsSelected))
-                    SyncIdentityFromComponents();
+                if (e.PropertyName == nameof(WizardTask.IsSelected))
+                    SyncIdentityFromTasks();
             };
     }
 
@@ -79,14 +79,14 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        var selectedComponents = Components.Where(c => c.IsSelected).ToList();
-        var total = selectedComponents.Count;
+        var selectedTasks = Tasks.Where(t => t.IsSelected).ToList();
+        var total = selectedTasks.Count;
 
         IsProgressPage = true;
 
         for (var i = 0; i < total; i++)
         {
-            ProgressDescription = $"{selectedComponents[i].DisplayName} ({i + 1}/{total})";
+            ProgressDescription = $"{selectedTasks[i].DisplayName} ({i + 1}/{total})";
             Progress = (double)(i + 1) / total * 100;
             await Task.Delay(Random.Shared.Next(300, 1200)).ConfigureAwait(true);
         }
@@ -102,8 +102,8 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         {
             if (Presets.TryGetValue(value.Identity, out var preset))
             {
-                foreach (var component in Components)
-                    component.IsSelected = preset.Contains(component.Name);
+                foreach (var task in Tasks)
+                    task.IsSelected = preset.Contains(task.Name);
             }
         }
         finally
@@ -112,7 +112,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         }
     }
 
-    private void SyncIdentityFromComponents()
+    private void SyncIdentityFromTasks()
     {
         if (_isSyncingIdentity) return;
         _isSyncingIdentity = true;
@@ -149,10 +149,10 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     private bool MatchesPreset(HashSet<string> preset)
     {
         var selectedCount = 0;
-        foreach (var component in Components)
+        foreach (var task in Tasks)
         {
-            if (!component.IsSelected) continue;
-            if (!preset.Contains(component.Name)) return false;
+            if (!task.IsSelected) continue;
+            if (!preset.Contains(task.Name)) return false;
             selectedCount++;
         }
 

@@ -1,6 +1,6 @@
 namespace Euterpe.ViewModels.Components;
 
-public sealed partial class WizardComponent(string name, string displayName, string description) : ObservableObject
+public sealed partial class WizardTask(string name, string displayName, string description) : ObservableObject
 {
     public string Name { get; } = name;
 
