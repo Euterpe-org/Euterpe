@@ -115,7 +115,7 @@
                     <Button.Styles>
                         <Style
                             Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#332563EB" />
+                            <Setter Property="Background" Value="#1B2D4A" />
                         </Style>
                         <Style
                             Selector="Button Border.IdentityCard.Selected">
@@ -172,7 +172,7 @@
                     <Button.Styles>
                         <Style
                             Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#337B2CBF" />
+                            <Setter Property="Background" Value="#2A1838" />
                         </Style>
                         <Style
                             Selector="Button Border.IdentityCard.Selected">
@@ -229,7 +229,7 @@
                     <Button.Styles>
                         <Style
                             Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#33047857" />
+                            <Setter Property="Background" Value="#0F2E25" />
                         </Style>
                         <Style
                             Selector="Button Border.IdentityCard.Selected">
@@ -286,7 +286,7 @@
                     <Button.Styles>
                         <Style
                             Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#33B45309" />
+                            <Setter Property="Background" Value="#382A10" />
                         </Style>
                         <Style
                             Selector="Button Border.IdentityCard.Selected">
