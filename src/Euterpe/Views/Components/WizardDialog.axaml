@@ -25,13 +25,14 @@
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Padding" Value="10,8" />
+            <Setter Property="RenderTransform" Value="translateY(0)" />
             <Setter Property="Transitions">
                 <Transitions>
                     <BrushTransition
-                        Property="Background"
-                        Duration="0:0:0.15" />
-                    <BrushTransition
                         Property="BorderBrush"
+                        Duration="0:0:0.15" />
+                    <TransformOperationsTransition
+                        Property="RenderTransform"
                         Duration="0:0:0.15" />
                 </Transitions>
             </Setter>
@@ -40,7 +41,7 @@
         <!--  Identity Card Hover  -->
         <Style
             Selector="Button:pointerover Border.IdentityCard">
-            <Setter Property="Background" Value="{DynamicResource CardBackground}" />
+            <Setter Property="RenderTransform" Value="translateY(-2px)" />
         </Style>
 
         <!--  Identity Card Selected  -->
