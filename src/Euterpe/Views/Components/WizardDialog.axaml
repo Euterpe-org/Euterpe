@@ -158,6 +158,14 @@
             <Setter Property="CornerRadius" Value="6" />
             <Setter Property="Height" Value="12" />
             <Setter Property="MinHeight" Value="12" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition
+                        Property="Value"
+                        Duration="0:0:0.4"
+                        Easing="CubicEaseOut" />
+                </Transitions>
+            </Setter>
         </Style>
         <Style
             Selector="ProgressBar.Wizard /template/ Border">
