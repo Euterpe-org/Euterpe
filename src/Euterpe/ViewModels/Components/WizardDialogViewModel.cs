@@ -1,37 +1,43 @@
+using System.ComponentModel;
 using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.ViewModels.Components;
 
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
+    private static readonly Dictionary<WizardIdentity, HashSet<string>> Presets = new()
+    {
+        [WizardIdentity.Player] = ["MelonLoader", "EssentialMods", "UninstallConflicts"],
+        [WizardIdentity.Charter] = ["MelonLoader", "EssentialMods", "UninstallConflicts", "ChartingTool"],
+        [WizardIdentity.Modder] = ["MelonLoader", "EssentialMods", "UninstallConflicts", "DotNetSdk", "ModTemplate", "EnvVariable"]
+    };
+
     private bool _isSyncingIdentity;
+
+    public IReadOnlyList<WizardIdentityOption> IdentityOptions { get; } =
+    [
+        new(WizardIdentity.Player, "UserGroup", "Player", "Recommended for regular players") { IsSelected = true },
+        new(WizardIdentity.Charter, "Language", "Charter", "Recommended for chart creators"),
+        new(WizardIdentity.Modder, "Code", "Modder", "Recommended for mod developers"),
+        new(WizardIdentity.Custom, "Setting", "Custom", "Customize your setup")
+    ];
+
+    public IReadOnlyList<WizardComponent> Components { get; } =
+    [
+        new("MelonLoader", "Install MelonLoader") { IsSelected = true },
+        new("EssentialMods", "Install Essential Mods") { IsSelected = true },
+        new("UninstallConflicts", "Uninstall Conflicting Mods") { IsSelected = true },
+        new("ChartingTool", "Download Charting Tool (MDBMSC)"),
+        new("DotNetSdk", "Install .NET SDK"),
+        new("ModTemplate", "Install Mod Template"),
+        new("EnvVariable", "Set Environment Variable (MD_DIRECTORY)")
+    ];
 
     [ObservableProperty]
     public partial bool IsProgressPage { get; set; }
 
     [ObservableProperty]
     public partial WizardIdentity SelectedIdentity { get; set; }
-
-    [ObservableProperty]
-    public partial bool InstallMelonLoader { get; set; } = true;
-
-    [ObservableProperty]
-    public partial bool InstallEssentialMods { get; set; } = true;
-
-    [ObservableProperty]
-    public partial bool UninstallConflictingMods { get; set; } = true;
-
-    [ObservableProperty]
-    public partial bool DownloadChartingTool { get; set; }
-
-    [ObservableProperty]
-    public partial bool InstallDotNetSdk { get; set; }
-
-    [ObservableProperty]
-    public partial bool InstallModTemplate { get; set; }
-
-    [ObservableProperty]
-    public partial bool SetEnvironmentVariable { get; set; }
 
     [ObservableProperty]
     public partial bool IsCompleted { get; set; }
@@ -41,6 +47,12 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     [ObservableProperty]
     public partial string ProgressDescription { get; set; } = string.Empty;
+
+    public WizardDialogViewModel()
+    {
+        foreach (var component in Components)
+            component.PropertyChanged += OnComponentPropertyChanged;
+    }
 
     #region Injections
 
@@ -75,18 +87,25 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private void Complete() => Close();
 
+    private void OnComponentPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(WizardComponent.IsSelected))
+            SyncIdentityFromComponents();
+    }
+
     partial void OnSelectedIdentityChanged(WizardIdentity value)
     {
         if (_isSyncingIdentity) return;
         _isSyncingIdentity = true;
 
-        (InstallMelonLoader, InstallEssentialMods, UninstallConflictingMods, DownloadChartingTool, InstallDotNetSdk, InstallModTemplate, SetEnvironmentVariable) = value switch
+        if (Presets.TryGetValue(value, out var preset))
         {
-            WizardIdentity.Player => (true, true, true, false, false, false, false),
-            WizardIdentity.Charter => (true, true, true, true, false, false, false),
-            WizardIdentity.Modder => (true, true, true, false, true, true, true),
-            _ => (InstallMelonLoader, InstallEssentialMods, UninstallConflictingMods, DownloadChartingTool, InstallDotNetSdk, InstallModTemplate, SetEnvironmentVariable)
-        };
+            foreach (var component in Components)
+                component.IsSelected = preset.Contains(component.Name);
+        }
+
+        foreach (var option in IdentityOptions)
+            option.IsSelected = option.Identity == value;
 
         _isSyncingIdentity = false;
     }
@@ -96,39 +115,22 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         if (_isSyncingIdentity) return;
         _isSyncingIdentity = true;
 
-        if (SelectedIdentity is not WizardIdentity.Custom && MatchesPreset(SelectedIdentity))
+        var selected = GetSelectedComponentNames();
+
+        if (SelectedIdentity is not WizardIdentity.Custom && Presets.TryGetValue(SelectedIdentity, out var current) && current.SetEquals(selected))
         {
-            // Current identity still matches its preset, keep it
+            _isSyncingIdentity = false;
+            return;
         }
-        else
-        {
-            // Find the best matching preset (most specific first)
-            if (MatchesPreset(WizardIdentity.Modder))
-                SelectedIdentity = WizardIdentity.Modder;
-            else if (MatchesPreset(WizardIdentity.Charter))
-                SelectedIdentity = WizardIdentity.Charter;
-            else if (MatchesPreset(WizardIdentity.Player))
-                SelectedIdentity = WizardIdentity.Player;
-            else
-                SelectedIdentity = WizardIdentity.Custom;
-        }
+
+        SelectedIdentity = Presets
+            .Where(p => p.Value.SetEquals(selected))
+            .Select(p => p.Key)
+            .FirstOrDefault(WizardIdentity.Custom);
 
         _isSyncingIdentity = false;
     }
 
-    private bool MatchesPreset(WizardIdentity identity) => identity switch
-    {
-        WizardIdentity.Player => InstallMelonLoader && InstallEssentialMods && UninstallConflictingMods && !DownloadChartingTool && !InstallDotNetSdk && !InstallModTemplate && !SetEnvironmentVariable,
-        WizardIdentity.Charter => InstallMelonLoader && InstallEssentialMods && UninstallConflictingMods && DownloadChartingTool && !InstallDotNetSdk && !InstallModTemplate && !SetEnvironmentVariable,
-        WizardIdentity.Modder => InstallMelonLoader && InstallEssentialMods && UninstallConflictingMods && !DownloadChartingTool && InstallDotNetSdk && InstallModTemplate && SetEnvironmentVariable,
-        _ => false
-    };
-
-    partial void OnInstallMelonLoaderChanged(bool value) => SyncIdentityFromComponents();
-    partial void OnInstallEssentialModsChanged(bool value) => SyncIdentityFromComponents();
-    partial void OnUninstallConflictingModsChanged(bool value) => SyncIdentityFromComponents();
-    partial void OnDownloadChartingToolChanged(bool value) => SyncIdentityFromComponents();
-    partial void OnInstallDotNetSdkChanged(bool value) => SyncIdentityFromComponents();
-    partial void OnInstallModTemplateChanged(bool value) => SyncIdentityFromComponents();
-    partial void OnSetEnvironmentVariableChanged(bool value) => SyncIdentityFromComponents();
+    private HashSet<string> GetSelectedComponentNames() =>
+        Components.Where(c => c.IsSelected).Select(c => c.Name).ToHashSet();
 }
