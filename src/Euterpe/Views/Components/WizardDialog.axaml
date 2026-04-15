@@ -2,11 +2,12 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="using:Euterpe.Models.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Components"
     x:Class="Euterpe.Views.Components.WizardDialog"
     x:DataType="vm:WizardDialogViewModel"
-    d:DesignHeight="450"
+    d:DesignHeight="480"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
@@ -14,24 +15,337 @@
         <vm:WizardDialogViewModel />
     </Design.DataContext>
 
+    <UserControl.Styles>
+        <Style
+            Selector="Border.IdentityCard">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition
+                        Property="BorderBrush"
+                        Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style
+            Selector="Border.IdentityCard.Selected">
+            <Setter Property="BorderBrush" Value="{DynamicResource SemiBlue5}" />
+        </Style>
+    </UserControl.Styles>
+
     <Grid
-        RowDefinitions="*,*,*,*">
-        <Button
-            Grid.Row="0">
-            Player
-        </Button>
-        <Button
-            Grid.Row="1">
-            Charter
-        </Button>
-        <Button
-            Grid.Row="2">
-            Modder
-        </Button>
-        <Button
-            Grid.Row="3"
-            Command="{Binding SkipWizardCommand}">
-            Skip
-        </Button>
+        Height="480"
+        RowDefinitions="*,Auto"
+        Width="800">
+
+        <!--  Page 1: Identity Selection + Component Options  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="260,*"
+            IsVisible="{Binding !IsProgressPage}"
+            Margin="20,20,20,0">
+
+            <!--  Left: Identity Cards  -->
+            <StackPanel
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                Spacing="8">
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Margin="0,0,0,8"
+                    Text="Choose Your Role"
+                    Theme="{StaticResource TitleTextBlock}" />
+
+                <!--  Player  -->
+                <Button
+                    Classes="Transparent Card"
+                    Command="{Binding SelectIdentityCommand}"
+                    CommandParameter="{x:Static enums:WizardIdentity.Player}">
+                    <Border
+                        Classes="IdentityCard"
+                        Classes.Selected="{Binding SelectedIdentity, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardIdentity.Player}, Mode=OneWay}">
+                        <Grid
+                            ColumnDefinitions="Auto,*">
+                            <PathIcon
+                                Data="{StaticResource SemiIconUserGroup}"
+                                Foreground="{DynamicResource SemiBlue5}"
+                                Height="20"
+                                Margin="0,0,12,0"
+                                VerticalAlignment="Center" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Spacing="2">
+                                <TextBlock
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Text="Player" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource SecondaryTextColor}"
+                                    Text="Recommended for regular players" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <!--  Charter  -->
+                <Button
+                    Classes="Transparent Card"
+                    Command="{Binding SelectIdentityCommand}"
+                    CommandParameter="{x:Static enums:WizardIdentity.Charter}">
+                    <Border
+                        Classes="IdentityCard"
+                        Classes.Selected="{Binding SelectedIdentity, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardIdentity.Charter}, Mode=OneWay}">
+                        <Grid
+                            ColumnDefinitions="Auto,*">
+                            <PathIcon
+                                Data="{StaticResource SemiIconLanguage}"
+                                Foreground="{DynamicResource SemiBlue5}"
+                                Height="20"
+                                Margin="0,0,12,0"
+                                VerticalAlignment="Center" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Spacing="2">
+                                <TextBlock
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Text="Charter" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource SecondaryTextColor}"
+                                    Text="Recommended for chart creators" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <!--  Modder  -->
+                <Button
+                    Classes="Transparent Card"
+                    Command="{Binding SelectIdentityCommand}"
+                    CommandParameter="{x:Static enums:WizardIdentity.Modder}">
+                    <Border
+                        Classes="IdentityCard"
+                        Classes.Selected="{Binding SelectedIdentity, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardIdentity.Modder}, Mode=OneWay}">
+                        <Grid
+                            ColumnDefinitions="Auto,*">
+                            <PathIcon
+                                Data="{StaticResource SemiIconCode}"
+                                Foreground="{DynamicResource SemiBlue5}"
+                                Height="20"
+                                Margin="0,0,12,0"
+                                VerticalAlignment="Center" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Spacing="2">
+                                <TextBlock
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Text="Modder" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource SecondaryTextColor}"
+                                    Text="Recommended for mod developers" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Button>
+
+                <!--  Custom  -->
+                <Button
+                    Classes="Transparent Card"
+                    Command="{Binding SelectIdentityCommand}"
+                    CommandParameter="{x:Static enums:WizardIdentity.Custom}">
+                    <Border
+                        Classes="IdentityCard"
+                        Classes.Selected="{Binding SelectedIdentity, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardIdentity.Custom}, Mode=OneWay}">
+                        <Grid
+                            ColumnDefinitions="Auto,*">
+                            <PathIcon
+                                Data="{StaticResource SemiIconSetting}"
+                                Foreground="{DynamicResource SemiBlue5}"
+                                Height="20"
+                                Margin="0,0,12,0"
+                                VerticalAlignment="Center" />
+                            <StackPanel
+                                Grid.Column="1"
+                                Spacing="2">
+                                <TextBlock
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Text="Custom" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource SecondaryTextColor}"
+                                    Text="Customize your setup" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Button>
+            </StackPanel>
+
+            <!--  Right: Component Options  -->
+            <StackPanel
+                Grid.Column="1"
+                Margin="10,0,0,0"
+                Spacing="8">
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Margin="0,0,0,8"
+                    Text="Components"
+                    Theme="{StaticResource TitleTextBlock}" />
+
+                <CheckBox
+                    Content="Install MelonLoader"
+                    IsChecked="{Binding InstallMelonLoader}" />
+
+                <CheckBox
+                    Content="Install Essential Mods"
+                    IsChecked="{Binding InstallEssentialMods}" />
+
+                <CheckBox
+                    Content="Uninstall Conflicting Mods"
+                    IsChecked="{Binding UninstallConflictingMods}" />
+
+                <CheckBox
+                    Content="Install NuGet &amp; Mod Template"
+                    IsChecked="{Binding InstallDevTools}" />
+            </StackPanel>
+        </Grid>
+
+        <!--  Page 2: Progress  -->
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            IsVisible="{Binding IsProgressPage}"
+            Margin="40"
+            Spacing="20"
+            VerticalAlignment="Center"
+            Width="400">
+
+            <!--  Title  -->
+            <TextBlock
+                FontSize="20"
+                FontWeight="SemiBold"
+                HorizontalAlignment="Center"
+                IsVisible="{Binding !IsCompleted}"
+                Text="Setting Up..."
+                Theme="{StaticResource TitleTextBlock}" />
+
+            <TextBlock
+                FontSize="20"
+                FontWeight="SemiBold"
+                Foreground="Green"
+                HorizontalAlignment="Center"
+                IsVisible="{Binding IsCompleted}"
+                Text="Setup Complete!"
+                Theme="{StaticResource TitleTextBlock}" />
+
+            <!--  Task List  -->
+            <ItemsControl
+                ItemsSource="{Binding Tasks}"
+                Margin="0,10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="vm:WizardTaskItem">
+                        <StackPanel
+                            Height="32"
+                            Margin="0,2"
+                            Orientation="Horizontal"
+                            Spacing="10">
+
+                            <!--  Status Indicator  -->
+                            <Panel
+                                Height="20"
+                                VerticalAlignment="Center"
+                                Width="20">
+
+                                <!--  Pending  -->
+                                <Ellipse
+                                    Fill="{DynamicResource SemiGrey5}"
+                                    Height="8"
+                                    HorizontalAlignment="Center"
+                                    IsVisible="{Binding Status, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardTaskStatus.Pending}, Mode=OneWay}"
+                                    VerticalAlignment="Center"
+                                    Width="8" />
+
+                                <!--  Running  -->
+                                <Ellipse
+                                    Fill="{DynamicResource SemiBlue5}"
+                                    Height="8"
+                                    HorizontalAlignment="Center"
+                                    IsVisible="{Binding Status, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardTaskStatus.Running}, Mode=OneWay}"
+                                    VerticalAlignment="Center"
+                                    Width="8" />
+
+                                <!--  Completed  -->
+                                <PathIcon
+                                    Data="{StaticResource SemiIconVerify}"
+                                    Foreground="Green"
+                                    Height="16"
+                                    IsVisible="{Binding Status, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardTaskStatus.Completed}, Mode=OneWay}" />
+                            </Panel>
+
+                            <!--  Task Name  -->
+                            <TextBlock
+                                Text="{Binding Name, Mode=OneTime}"
+                                VerticalAlignment="Center" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!--  Progress Bar  -->
+            <ProgressBar
+                Classes="Primary"
+                IsIndeterminate="{Binding !IsCompleted}"
+                IsVisible="{Binding !IsCompleted}"
+                Margin="0,10,0,0" />
+        </StackPanel>
+
+        <!--  Bottom Bar  -->
+        <Border
+            Grid.Row="1"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,1,0,0"
+            Padding="20,15">
+            <DockPanel>
+
+                <!--  Selection Page: Skip  -->
+                <Button
+                    Command="{Binding SkipWizardCommand}"
+                    Content="Skip"
+                    DockPanel.Dock="Left"
+                    IsVisible="{Binding !IsProgressPage}"
+                    Theme="{StaticResource GhostButton}" />
+
+                <!--  Selection Page: Confirm  -->
+                <Button
+                    Classes="Primary"
+                    Command="{Binding ConfirmCommand}"
+                    Content="Confirm"
+                    DockPanel.Dock="Right"
+                    IsVisible="{Binding !IsProgressPage}" />
+
+                <!--  Progress Page: Close  -->
+                <Button
+                    Classes="Primary"
+                    Command="{Binding CompleteCommand}"
+                    Content="Close"
+                    DockPanel.Dock="Right"
+                    IsVisible="{Binding IsCompleted}" />
+
+                <Panel />
+            </DockPanel>
+        </Border>
     </Grid>
 </UserControl>

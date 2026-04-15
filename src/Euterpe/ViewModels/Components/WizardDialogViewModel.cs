@@ -1,11 +1,37 @@
-﻿using Irihi.Avalonia.Shared.Contracts;
+using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.ViewModels.Components;
 
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
+    private bool _isSyncingIdentity;
+
+    [ObservableProperty]
+    public partial bool IsProgressPage { get; set; }
+
+    [ObservableProperty]
+    public partial WizardIdentity SelectedIdentity { get; set; }
+
+    [ObservableProperty]
+    public partial bool InstallMelonLoader { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool InstallEssentialMods { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool UninstallConflictingMods { get; set; } = true;
+
+    [ObservableProperty]
+    public partial bool InstallDevTools { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsCompleted { get; set; }
+
     [ObservableProperty]
     public partial double Progress { get; set; }
+
+    [ObservableProperty]
+    public partial IReadOnlyList<WizardTaskItem> Tasks { get; set; } = [];
 
     #region Injections
 
@@ -25,5 +51,75 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     }
 
     [RelayCommand]
+    private void SelectIdentity(WizardIdentity identity) => SelectedIdentity = identity;
+
+    [RelayCommand]
     private void SkipWizard() => Close();
+
+    [RelayCommand]
+    private void Confirm()
+    {
+        var tasks = new List<WizardTaskItem>();
+        if (InstallMelonLoader) tasks.Add(new("Install MelonLoader"));
+        if (InstallEssentialMods) tasks.Add(new("Install Essential Mods"));
+        if (UninstallConflictingMods) tasks.Add(new("Uninstall Conflicting Mods"));
+        if (InstallDevTools) tasks.Add(new("Install NuGet & Mod Template"));
+        Tasks = tasks;
+        IsProgressPage = true;
+    }
+
+    [RelayCommand]
+    private void Complete() => Close();
+
+    partial void OnSelectedIdentityChanged(WizardIdentity value)
+    {
+        if (_isSyncingIdentity) return;
+        _isSyncingIdentity = true;
+
+        (InstallMelonLoader, InstallEssentialMods, UninstallConflictingMods, InstallDevTools) = value switch
+        {
+            WizardIdentity.Player => (true, true, true, false),
+            WizardIdentity.Charter => (true, true, true, false),
+            WizardIdentity.Modder => (true, true, true, true),
+            _ => (InstallMelonLoader, InstallEssentialMods, UninstallConflictingMods, InstallDevTools)
+        };
+
+        _isSyncingIdentity = false;
+    }
+
+    private void SyncIdentityFromComponents()
+    {
+        if (_isSyncingIdentity) return;
+        _isSyncingIdentity = true;
+
+        if (SelectedIdentity is not WizardIdentity.Custom && MatchesPreset(SelectedIdentity))
+        {
+            // Current identity still matches its preset, keep it
+        }
+        else
+        {
+            // Find the best matching preset (most specific first)
+            if (MatchesPreset(WizardIdentity.Modder))
+                SelectedIdentity = WizardIdentity.Modder;
+            else if (MatchesPreset(WizardIdentity.Player))
+                SelectedIdentity = WizardIdentity.Player;
+            else
+                SelectedIdentity = WizardIdentity.Custom;
+        }
+
+        _isSyncingIdentity = false;
+    }
+
+    private bool MatchesPreset(WizardIdentity identity) => identity switch
+    {
+        WizardIdentity.Player => InstallMelonLoader && InstallEssentialMods && UninstallConflictingMods && !InstallDevTools,
+        WizardIdentity.Charter => InstallMelonLoader && InstallEssentialMods && UninstallConflictingMods && !InstallDevTools,
+        WizardIdentity.Modder => InstallMelonLoader && InstallEssentialMods && UninstallConflictingMods && InstallDevTools,
+        _ => false
+    };
+
+    partial void OnInstallMelonLoaderChanged(bool value) => SyncIdentityFromComponents();
+    partial void OnInstallEssentialModsChanged(bool value) => SyncIdentityFromComponents();
+    partial void OnUninstallConflictingModsChanged(bool value) => SyncIdentityFromComponents();
+    partial void OnInstallDevToolsChanged(bool value) => SyncIdentityFromComponents();
 }
