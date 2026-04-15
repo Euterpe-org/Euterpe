@@ -239,14 +239,13 @@
             Grid.Row="0"
             HorizontalAlignment="Center"
             IsVisible="{Binding IsProgressPage}"
-            Margin="40"
-            Spacing="20"
+            Spacing="16"
             VerticalAlignment="Center"
-            Width="400">
+            Width="450">
 
             <!--  Title  -->
             <TextBlock
-                FontSize="20"
+                FontSize="24"
                 FontWeight="SemiBold"
                 HorizontalAlignment="Center"
                 IsVisible="{Binding !IsCompleted}"
@@ -254,7 +253,7 @@
                 Theme="{StaticResource TitleTextBlock}" />
 
             <TextBlock
-                FontSize="20"
+                FontSize="24"
                 FontWeight="SemiBold"
                 Foreground="Green"
                 HorizontalAlignment="Center"
@@ -262,66 +261,20 @@
                 Text="Setup Complete!"
                 Theme="{StaticResource TitleTextBlock}" />
 
-            <!--  Task List  -->
-            <ItemsControl
-                ItemsSource="{Binding Tasks}"
-                Margin="0,10">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate
-                        x:DataType="vm:WizardTaskItem">
-                        <StackPanel
-                            Height="32"
-                            Margin="0,2"
-                            Orientation="Horizontal"
-                            Spacing="10">
-
-                            <!--  Status Indicator  -->
-                            <Panel
-                                Height="20"
-                                VerticalAlignment="Center"
-                                Width="20">
-
-                                <!--  Pending  -->
-                                <Ellipse
-                                    Fill="{DynamicResource SemiGrey5}"
-                                    Height="8"
-                                    HorizontalAlignment="Center"
-                                    IsVisible="{Binding Status, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardTaskStatus.Pending}, Mode=OneWay}"
-                                    VerticalAlignment="Center"
-                                    Width="8" />
-
-                                <!--  Running  -->
-                                <Ellipse
-                                    Fill="{DynamicResource SemiBlue5}"
-                                    Height="8"
-                                    HorizontalAlignment="Center"
-                                    IsVisible="{Binding Status, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardTaskStatus.Running}, Mode=OneWay}"
-                                    VerticalAlignment="Center"
-                                    Width="8" />
-
-                                <!--  Completed  -->
-                                <PathIcon
-                                    Data="{StaticResource SemiIconVerify}"
-                                    Foreground="Green"
-                                    Height="16"
-                                    IsVisible="{Binding Status, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:WizardTaskStatus.Completed}, Mode=OneWay}" />
-                            </Panel>
-
-                            <!--  Task Name  -->
-                            <TextBlock
-                                Text="{Binding Name, Mode=OneTime}"
-                                VerticalAlignment="Center" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <!--  Current Task Description  -->
+            <TextBlock
+                Foreground="{DynamicResource SecondaryTextColor}"
+                HorizontalAlignment="Center"
+                IsVisible="{Binding !IsCompleted}"
+                Text="{Binding ProgressDescription, Mode=OneWay}" />
 
             <!--  Progress Bar  -->
             <ProgressBar
                 Classes="Primary"
-                IsIndeterminate="{Binding !IsCompleted}"
                 IsVisible="{Binding !IsCompleted}"
-                Margin="0,10,0,0" />
+                Margin="0,8,0,0"
+                ShowProgressText="True"
+                Value="{Binding Progress, Mode=OneWay}" />
         </StackPanel>
 
         <!--  Bottom Bar  -->
