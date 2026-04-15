@@ -217,12 +217,12 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Classes="IdentityList"
-                ItemsSource="{Binding IdentityOptions, Mode=OneTime}"
+                ItemsSource="{Binding Roles, Mode=OneTime}"
                 Margin="0,0,12,0"
-                SelectedItem="{Binding SelectedIdentityOption}">
+                SelectedItem="{Binding SelectedRole}">
                 <ListBox.ItemTemplate>
                     <DataTemplate
-                        x:DataType="vm:WizardIdentityOption">
+                        x:DataType="vm:WizardRole">
                         <Grid
                             ColumnDefinitions="Auto,*">
 
