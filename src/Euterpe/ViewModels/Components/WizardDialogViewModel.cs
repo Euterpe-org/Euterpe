@@ -61,6 +61,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [UsedImplicitly]
     public required ILogger<WizardDialogViewModel> Logger { get; init; }
 
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
+
     #endregion Injections
 
     public void Close() => RequestClose?.Invoke(this, null);
@@ -92,6 +95,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         }
 
         Close();
+        await MessageBoxService.SuccessAsync("Setup completed successfully!").ConfigureAwait(false);
     }
 
     partial void OnSelectedIdentityOptionChanged(WizardIdentityOption? value)
