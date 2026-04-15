@@ -39,9 +39,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public partial WizardIdentity SelectedIdentity { get; set; }
 
     [ObservableProperty]
-    public partial bool IsCompleted { get; set; }
-
-    [ObservableProperty]
     public partial double Progress { get; set; }
 
     [ObservableProperty]
@@ -95,11 +92,8 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             await Task.Delay(Random.Shared.Next(300, 1200)).ConfigureAwait(true);
         }
 
-        IsCompleted = true;
+        Close();
     }
-
-    [RelayCommand]
-    private void Complete() => Close();
 
     partial void OnSelectedIdentityChanged(WizardIdentity value)
     {
