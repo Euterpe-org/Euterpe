@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:enums="using:Euterpe.Models.Enums"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Components"
     x:Class="Euterpe.Views.Components.WizardDialog"
@@ -18,27 +17,60 @@
 
     <UserControl.Styles>
 
-        <!--  Identity Card Base  -->
+        <!--  Identity ListBox: remove default chrome  -->
         <Style
-            Selector="Border.IdentityCard">
-            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="ClipToBounds" Value="True" />
-            <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Padding" Value="10,8" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition
-                        Property="BorderBrush"
-                        Duration="0:0:0.2" />
-                </Transitions>
-            </Setter>
+            Selector="ListBox.IdentityList">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
         </Style>
 
-        <!--  Selected card: white foreground  -->
+        <!--  Identity ListBoxItem: base  -->
         <Style
-            Selector="Border.IdentityCard.Selected TextBlock">
+            Selector="ListBox.IdentityList ListBoxItem">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+            <Setter Property="Padding" Value="10,8" />
+        </Style>
+
+        <!--  Remove ListBoxItem template chrome  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
+        <!--  Hover: subtle accent tint  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#15808080" />
+        </Style>
+
+        <!--  Selected: accent background + border  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected">
+            <Setter Property="Background" Value="#B32563EB" />
+            <Setter Property="BorderBrush" Value="#2563EB" />
+        </Style>
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected TextBlock">
             <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected PathIcon">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected Panel > Border">
+            <Setter Property="Background" Value="White" />
         </Style>
 
         <!--  Progress Bar  -->
@@ -93,58 +125,35 @@
             </StackPanel>
 
             <!--  Left: Identity Cards  -->
-            <StackPanel
+            <ListBox
                 Grid.Row="1"
                 Grid.Column="0"
+                Classes="IdentityList"
+                ItemsSource="{Binding IdentityOptions, Mode=OneTime}"
                 Margin="0,0,12,0"
-                Spacing="6">
-
-                <!--  Player (#2563EB)  -->
-                <Button
-                    Classes="Transparent Card"
-                    Command="{Binding SelectIdentityCommand}"
-                    CommandParameter="{x:Static enums:WizardIdentity.Player}">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#262563EB" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#B32563EB" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard PathIcon">
-                            <Setter Property="Foreground" Value="#2563EB" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B32563EB" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
-                            <Setter Property="Background" Value="White" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected PathIcon">
-                            <Setter Property="Foreground" Value="White" />
-                        </Style>
-                        <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B32563EB" />
-                        </Style>
-                    </Button.Styles>
-                    <Border
-                        BorderBrush="{Binding IdentityOptions[0].BorderBrush}"
-                        Classes="IdentityCard"
-                        Classes.Selected="{Binding IdentityOptions[0].IsSelected, Mode=OneWay}">
+                SelectedItem="{Binding SelectedIdentityOption}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="vm:WizardIdentityOption">
                         <Grid
                             ColumnDefinitions="Auto,*">
+
+                            <!--  Icon Badge  -->
                             <Panel
                                 Height="30"
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 Width="30">
                                 <Border
+                                    Background="{Binding AccentColor}"
                                     CornerRadius="15"
                                     Opacity="0.15" />
                                 <PathIcon
-                                    Data="{Binding IdentityOptions[0].IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}}"
+                                    Data="{Binding IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneTime}"
+                                    Foreground="{Binding AccentColor}"
                                     Height="14" />
                             </Panel>
+
                             <StackPanel
                                 Grid.Column="1"
                                 Spacing="1"
@@ -152,205 +161,16 @@
                                 <TextBlock
                                     FontSize="14"
                                     FontWeight="SemiBold"
-                                    Text="Player" />
+                                    Text="{Binding Title, Mode=OneTime}" />
                                 <TextBlock
                                     FontSize="11"
                                     Foreground="{DynamicResource SecondaryTextColor}"
-                                    Text="Recommended for regular players" />
+                                    Text="{Binding Description, Mode=OneTime}" />
                             </StackPanel>
                         </Grid>
-                    </Border>
-                </Button>
-
-                <!--  Charter (#7B2CBF)  -->
-                <Button
-                    Classes="Transparent Card"
-                    Command="{Binding SelectIdentityCommand}"
-                    CommandParameter="{x:Static enums:WizardIdentity.Charter}">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#267B2CBF" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#B37B2CBF" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard PathIcon">
-                            <Setter Property="Foreground" Value="#7B2CBF" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B37B2CBF" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
-                            <Setter Property="Background" Value="White" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected PathIcon">
-                            <Setter Property="Foreground" Value="White" />
-                        </Style>
-                        <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B37B2CBF" />
-                        </Style>
-                    </Button.Styles>
-                    <Border
-                        BorderBrush="{Binding IdentityOptions[1].BorderBrush}"
-                        Classes="IdentityCard"
-                        Classes.Selected="{Binding IdentityOptions[1].IsSelected, Mode=OneWay}">
-                        <Grid
-                            ColumnDefinitions="Auto,*">
-                            <Panel
-                                Height="30"
-                                Margin="0,0,10,0"
-                                VerticalAlignment="Center"
-                                Width="30">
-                                <Border
-                                    CornerRadius="15"
-                                    Opacity="0.15" />
-                                <PathIcon
-                                    Data="{Binding IdentityOptions[1].IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}}"
-                                    Height="14" />
-                            </Panel>
-                            <StackPanel
-                                Grid.Column="1"
-                                Spacing="1"
-                                VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="14"
-                                    FontWeight="SemiBold"
-                                    Text="Charter" />
-                                <TextBlock
-                                    FontSize="11"
-                                    Foreground="{DynamicResource SecondaryTextColor}"
-                                    Text="Recommended for chart creators" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </Button>
-
-                <!--  Modder (#047857)  -->
-                <Button
-                    Classes="Transparent Card"
-                    Command="{Binding SelectIdentityCommand}"
-                    CommandParameter="{x:Static enums:WizardIdentity.Modder}">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#26047857" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#B3047857" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard PathIcon">
-                            <Setter Property="Foreground" Value="#047857" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B3047857" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
-                            <Setter Property="Background" Value="White" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected PathIcon">
-                            <Setter Property="Foreground" Value="White" />
-                        </Style>
-                        <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B3047857" />
-                        </Style>
-                    </Button.Styles>
-                    <Border
-                        BorderBrush="{Binding IdentityOptions[2].BorderBrush}"
-                        Classes="IdentityCard"
-                        Classes.Selected="{Binding IdentityOptions[2].IsSelected, Mode=OneWay}">
-                        <Grid
-                            ColumnDefinitions="Auto,*">
-                            <Panel
-                                Height="30"
-                                Margin="0,0,10,0"
-                                VerticalAlignment="Center"
-                                Width="30">
-                                <Border
-                                    CornerRadius="15"
-                                    Opacity="0.15" />
-                                <PathIcon
-                                    Data="{Binding IdentityOptions[2].IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}}"
-                                    Height="14" />
-                            </Panel>
-                            <StackPanel
-                                Grid.Column="1"
-                                Spacing="1"
-                                VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="14"
-                                    FontWeight="SemiBold"
-                                    Text="Modder" />
-                                <TextBlock
-                                    FontSize="11"
-                                    Foreground="{DynamicResource SecondaryTextColor}"
-                                    Text="Recommended for mod developers" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </Button>
-
-                <!--  Custom (#B45309)  -->
-                <Button
-                    Classes="Transparent Card"
-                    Command="{Binding SelectIdentityCommand}"
-                    CommandParameter="{x:Static enums:WizardIdentity.Custom}">
-                    <Button.Styles>
-                        <Style Selector="Button:pointerover Border.IdentityCard">
-                            <Setter Property="Background" Value="#26B45309" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard Panel > Border">
-                            <Setter Property="Background" Value="#B3B45309" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard PathIcon">
-                            <Setter Property="Foreground" Value="#B45309" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B3B45309" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected Panel > Border">
-                            <Setter Property="Background" Value="White" />
-                        </Style>
-                        <Style Selector="Button Border.IdentityCard.Selected PathIcon">
-                            <Setter Property="Foreground" Value="White" />
-                        </Style>
-                        <Style Selector="Button:pointerover Border.IdentityCard.Selected">
-                            <Setter Property="Background" Value="#B3B45309" />
-                        </Style>
-                    </Button.Styles>
-                    <Border
-                        BorderBrush="{Binding IdentityOptions[3].BorderBrush}"
-                        Classes="IdentityCard"
-                        Classes.Selected="{Binding IdentityOptions[3].IsSelected, Mode=OneWay}">
-                        <Grid
-                            ColumnDefinitions="Auto,*">
-                            <Panel
-                                Height="30"
-                                Margin="0,0,10,0"
-                                VerticalAlignment="Center"
-                                Width="30">
-                                <Border
-                                    CornerRadius="15"
-                                    Opacity="0.15" />
-                                <PathIcon
-                                    Data="{Binding IdentityOptions[3].IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}}"
-                                    Height="14" />
-                            </Panel>
-                            <StackPanel
-                                Grid.Column="1"
-                                Spacing="1"
-                                VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="14"
-                                    FontWeight="SemiBold"
-                                    Text="Custom" />
-                                <TextBlock
-                                    FontSize="11"
-                                    Foreground="{DynamicResource SecondaryTextColor}"
-                                    Text="Customize your setup" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </Button>
-            </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <!--  Right: Component Options  -->
             <Border
