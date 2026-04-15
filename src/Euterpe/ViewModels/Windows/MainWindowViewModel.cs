@@ -12,18 +12,10 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         await LocalService.ReadGameInformationAsync().ConfigureAwait(true);
         LocalService.ReadMelonLoaderVersion();
         BindMuseDashAccountAsync().SafeFireAndForget();
-        // await ShowWizardDialogAsync().ConfigureAwait(true);
-        await ShowTransitionTestAsync().ConfigureAwait(true);
+        await ShowWizardDialogAsync().ConfigureAwait(true);
 
         NavigationService.Ready.Set();
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
-    }
-
-    private async Task ShowTransitionTestAsync()
-    {
-        var options = new OverlayDialogOptions { Title = "Transition Test" };
-        await OverlayDialog.ShowCustomAsync<TransitionTestDialog, TransitionTestDialogViewModel, object>(
-            TransitionTestDialogViewModel, "WizardDialog", options).ConfigureAwait(false);
     }
 
     private async Task ShowWizardDialogAsync()
@@ -65,8 +57,6 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }
 
-    [UsedImplicitly]
-    public required TransitionTestDialogViewModel TransitionTestDialogViewModel { get; init; }
 
     [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }
