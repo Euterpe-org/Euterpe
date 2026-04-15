@@ -30,10 +30,6 @@
 
     <Grid
         ColumnDefinitions="Auto,*">
-        <u:OverlayDialogHost
-            Grid.ColumnSpan="2"
-            HostId="WizardDialog" />
-
         <DockPanel
             Grid.Column="0"
             MinWidth="85">
@@ -138,6 +134,10 @@
             Grid.Column="1"
             Content="{Binding Content, Mode=OneWay}"
             Margin="10,40,0,0" />
+
+        <u:OverlayDialogHost
+            Grid.ColumnSpan="2"
+            HostId="WizardDialog" />
     </Grid>
 
 </u:UrsaWindow>
