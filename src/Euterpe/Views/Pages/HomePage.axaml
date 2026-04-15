@@ -17,7 +17,7 @@
             Source="avares://Euterpe.Styles/Styles/Pages/HomePageStyles.axaml" />
     </UserControl.Styles>
 
-    <Grid>
+    <Panel>
         <!--  Background Image  -->
         <Image
             Source="{DynamicResource BackgroundImage}"
@@ -129,6 +129,6 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-    </Grid>
+    </Panel>
 
 </UserControl>

@@ -93,36 +93,32 @@
                             </StackPanel>
                         </Expander.Header>
 
-                        <Panel>
+                        <!--  Links  -->
+                        <ItemsControl
+                            IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                            ItemsSource="{TemplateBinding Links, Mode=OneWay}">
 
-                            <!--  Links  -->
-                            <ItemsControl
-                                IsVisible="{TemplateBinding Links, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
-                                ItemsSource="{TemplateBinding Links, Mode=OneWay}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        HorizontalAlignment="Center"
+                                        Margin="0,8" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
 
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel
-                                            HorizontalAlignment="Center"
-                                            Margin="0,8" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate
-                                        x:DataType="models:ContributorLink">
-                                        <Button
-                                            Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=e:ContributorCardControl}, Mode=OneTime}"
-                                            CommandParameter="{Binding Url, Mode=OneTime}"
-                                            Margin="4">
-                                            <TextBlock
-                                                Text="{Binding Name, Mode=OneTime}" />
-                                        </Button>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                        </Panel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate
+                                    x:DataType="models:ContributorLink">
+                                    <Button
+                                        Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=e:ContributorCardControl}, Mode=OneTime}"
+                                        CommandParameter="{Binding Url, Mode=OneTime}"
+                                        Margin="4">
+                                        <TextBlock
+                                            Text="{Binding Name, Mode=OneTime}" />
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Expander>
                 </Border>
             </ControlTemplate>
