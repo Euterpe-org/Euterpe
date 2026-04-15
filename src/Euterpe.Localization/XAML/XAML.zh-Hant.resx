@@ -355,4 +355,88 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>西班牙文</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>跳過</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>選擇你的角色和任務以開始</value>
+  </data>
+  <data name="Wizard_Identity_Charter" xml:space="preserve">
+    <value>譜師</value>
+  </data>
+  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+    <value>推薦譜面製作者使用</value>
+  </data>
+  <data name="Wizard_Identity_Custom" xml:space="preserve">
+    <value>自訂</value>
+  </data>
+  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+    <value>自訂你的設定</value>
+  </data>
+  <data name="Wizard_Identity_Modder" xml:space="preserve">
+    <value>模組開發者</value>
+  </data>
+  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+    <value>推薦模組開發者使用</value>
+  </data>
+  <data name="Wizard_Identity_Player" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+    <value>推薦一般玩家使用</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>任務</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+    <value>製譜工具 (MDBMSC)</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+    <value>MDM 譜面製作工具包</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>模組開發必需</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY 變數</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+    <value>設定遊戲路徑環境變數</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+    <value>必備模組</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+    <value>獲得最佳體驗的核心模組</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+    <value>必需的模組載入器框架</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+    <value>模組範本</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+    <value>用於新模組專案的 NuGet 範本</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+    <value>解除安裝衝突</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>移除不相容的模組</value>
+  </data>
+  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+    <value>正在設定 Euterpe</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>歡迎使用 Euterpe</value>
+  </data>
 </root>

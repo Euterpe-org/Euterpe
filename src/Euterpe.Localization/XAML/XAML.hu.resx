@@ -355,4 +355,88 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanyol</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Megerősítés</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>Kihagyás</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Válaszd ki a szereped és a feladatokat a kezdéshez</value>
+  </data>
+  <data name="Wizard_Identity_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+    <value>Ajánlott chart készítőknek</value>
+  </data>
+  <data name="Wizard_Identity_Custom" xml:space="preserve">
+    <value>Egyéni</value>
+  </data>
+  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+    <value>Testreszabott beállítás</value>
+  </data>
+  <data name="Wizard_Identity_Modder" xml:space="preserve">
+    <value>Modder</value>
+  </data>
+  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+    <value>Ajánlott mod fejlesztőknek</value>
+  </data>
+  <data name="Wizard_Identity_Player" xml:space="preserve">
+    <value>Játékos</value>
+  </data>
+  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+    <value>Ajánlott átlagos játékosoknak</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Feladatok</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+    <value>Chart Eszköz (MDBMSC)</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+    <value>MDM chart készítő eszközkészlet</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Szükséges a mod fejlesztéshez</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY Változó</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+    <value>Játék útvonal környezeti változó beállítása</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+    <value>Alapvető Modok</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+    <value>Fő modok a legjobb élményhez</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+    <value>Szükséges mod betöltő keretrendszer</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+    <value>Mod Sablon</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+    <value>NuGet sablon új mod projektekhez</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+    <value>Ütközések Eltávolítása</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>Inkompatibilis modok eltávolítása</value>
+  </data>
+  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+    <value>Euterpe Beállítása</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Üdvözöl az Euterpe</value>
+  </data>
 </root>

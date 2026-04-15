@@ -15,21 +15,21 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public static IReadOnlyList<WizardIdentityOption> IdentityOptions { get; } =
     [
-        new(WizardIdentity.Player, "UserGroup", "Player", "Recommended for regular players", "#2563EB"),
-        new(WizardIdentity.Charter, "Language", "Charter", "Recommended for chart creators", "#7B2CBF"),
-        new(WizardIdentity.Modder, "Code", "Modder", "Recommended for mod developers", "#047857"),
-        new(WizardIdentity.Custom, "Setting", "Custom", "Customize your setup", "#B45309")
+        new(WizardIdentity.Player, "UserGroup", Wizard_Identity_Player, Wizard_Identity_Player_Description, "#2563EB"),
+        new(WizardIdentity.Charter, "Language", Wizard_Identity_Charter, Wizard_Identity_Charter_Description, "#7B2CBF"),
+        new(WizardIdentity.Modder, "Code", Wizard_Identity_Modder, Wizard_Identity_Modder_Description, "#047857"),
+        new(WizardIdentity.Custom, "Setting", Wizard_Identity_Custom, Wizard_Identity_Custom_Description, "#B45309")
     ];
 
     public IReadOnlyList<WizardTask> Tasks { get; } =
     [
-        new("MelonLoader", "MelonLoader", "Required mod loader framework") { IsSelected = true },
-        new("EssentialMods", "Essential Mods", "Core mods for the best experience") { IsSelected = true },
-        new("UninstallConflicts", "Uninstall Conflicts", "Remove incompatible mods") { IsSelected = true },
-        new("ChartingTool", "Charting Tool (MDBMSC)", "MDM chart creation toolkit"),
-        new("DotNetSdk", ".NET SDK", "Required for mod development"),
-        new("ModTemplate", "Mod Template", "NuGet template for new mod projects"),
-        new("EnvVariable", "MD_DIRECTORY Variable", "Set game path environment variable")
+        new("MelonLoader", Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true },
+        new("EssentialMods", Wizard_Task_EssentialMods, Wizard_Task_EssentialMods_Description) { IsSelected = true },
+        new("UninstallConflicts", Wizard_Task_UninstallConflicts, Wizard_Task_UninstallConflicts_Description) { IsSelected = true },
+        new("ChartingTool", Wizard_Task_ChartingTool, Wizard_Task_ChartingTool_Description),
+        new("DotNetSdk", Wizard_Task_DotNetSdk, Wizard_Task_DotNetSdk_Description),
+        new("ModTemplate", Wizard_Task_ModTemplate, Wizard_Task_ModTemplate_Description),
+        new("EnvVariable", Wizard_Task_EnvVariable, Wizard_Task_EnvVariable_Description)
     ];
 
     [ObservableProperty]

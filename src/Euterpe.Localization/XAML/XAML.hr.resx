@@ -355,4 +355,88 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Španjolski</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Potvrdi</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>Preskoči</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Odaberi svoju ulogu i zadatke za početak</value>
+  </data>
+  <data name="Wizard_Identity_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+    <value>Preporučeno za kreatore chartova</value>
+  </data>
+  <data name="Wizard_Identity_Custom" xml:space="preserve">
+    <value>Prilagođeno</value>
+  </data>
+  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+    <value>Prilagodi svoje postavke</value>
+  </data>
+  <data name="Wizard_Identity_Modder" xml:space="preserve">
+    <value>Modder</value>
+  </data>
+  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+    <value>Preporučeno za programere modova</value>
+  </data>
+  <data name="Wizard_Identity_Player" xml:space="preserve">
+    <value>Igrač</value>
+  </data>
+  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+    <value>Preporučeno za obične igrače</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Zadaci</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+    <value>Alat za chartove (MDBMSC)</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+    <value>MDM alat za izradu chartova</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Potrebno za razvoj modova</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY varijabla</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+    <value>Postavi varijablu okruženja za put igre</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+    <value>Osnovni Modovi</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+    <value>Glavni modovi za najbolje iskustvo</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+    <value>Potreban okvir za učitavanje modova</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+    <value>Predložak Moda</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+    <value>NuGet predložak za nove projekte modova</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+    <value>Deinstaliraj Konflikte</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>Ukloni nekompatibilne modove</value>
+  </data>
+  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+    <value>Postavljanje Euterpe</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Dobrodošli u Euterpe</value>
+  </data>
 </root>

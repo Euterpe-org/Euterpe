@@ -355,4 +355,88 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Espagnol</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirmer</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>Passer</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Choisissez votre rôle et vos tâches pour commencer</value>
+  </data>
+  <data name="Wizard_Identity_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+    <value>Recommandé pour les créateurs de charts</value>
+  </data>
+  <data name="Wizard_Identity_Custom" xml:space="preserve">
+    <value>Personnalisé</value>
+  </data>
+  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+    <value>Personnalisez votre configuration</value>
+  </data>
+  <data name="Wizard_Identity_Modder" xml:space="preserve">
+    <value>Moddeur</value>
+  </data>
+  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+    <value>Recommandé pour les développeurs de mods</value>
+  </data>
+  <data name="Wizard_Identity_Player" xml:space="preserve">
+    <value>Joueur</value>
+  </data>
+  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+    <value>Recommandé pour les joueurs réguliers</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Tâches</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+    <value>Outil de Charts (MDBMSC)</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+    <value>Kit de création de charts MDM</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Requis pour le développement de mods</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+    <value>Variable MD_DIRECTORY</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+    <value>Définir la variable d'environnement du chemin du jeu</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+    <value>Mods Essentiels</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+    <value>Mods principaux pour la meilleure expérience</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+    <value>Framework de chargement de mods requis</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+    <value>Modèle de Mod</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+    <value>Modèle NuGet pour de nouveaux projets de mods</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+    <value>Désinstaller les Conflits</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>Supprimer les mods incompatibles</value>
+  </data>
+  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+    <value>Configuration d'Euterpe</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Bienvenue sur Euterpe</value>
+  </data>
 </root>
