@@ -52,18 +52,6 @@
                 <Setter Property="Background" Value="#B32563EB" />
                 <Setter Property="BorderBrush" Value="#2563EB" />
             </Style>
-            <Style
-                Selector="^:selected TextBlock">
-                <Setter Property="Foreground" Value="White" />
-            </Style>
-            <Style
-                Selector="^:selected PathIcon">
-                <Setter Property="Foreground" Value="White" />
-            </Style>
-            <Style
-                Selector="^:selected Panel > Border">
-                <Setter Property="Background" Value="White" />
-            </Style>
 
             <!--  Selected + Hover  -->
             <Style
@@ -88,6 +76,20 @@
         <Style
             Selector="ListBox.IdentityList ListBoxItem">
             <Setter Property="Theme" Value="{StaticResource IdentityCardItem}" />
+        </Style>
+
+        <!--  Selected foreground (descendant selectors not allowed in ControlTheme)  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected TextBlock">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected PathIcon">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected Panel > Border">
+            <Setter Property="Background" Value="White" />
         </Style>
 
         <!--  Progress Bar  -->
