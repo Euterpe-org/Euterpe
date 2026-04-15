@@ -355,4 +355,88 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>スペイン語</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>スキップ</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>ロールとタスクを選んで始めましょう</value>
+  </data>
+  <data name="Wizard_Identity_Charter" xml:space="preserve">
+    <value>チャーター</value>
+  </data>
+  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+    <value>譜面制作者向け</value>
+  </data>
+  <data name="Wizard_Identity_Custom" xml:space="preserve">
+    <value>カスタム</value>
+  </data>
+  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+    <value>セットアップをカスタマイズ</value>
+  </data>
+  <data name="Wizard_Identity_Modder" xml:space="preserve">
+    <value>モッダー</value>
+  </data>
+  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+    <value>Mod開発者向け</value>
+  </data>
+  <data name="Wizard_Identity_Player" xml:space="preserve">
+    <value>プレイヤー</value>
+  </data>
+  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+    <value>一般プレイヤー向け</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>タスク</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+    <value>チャートツール (MDBMSC)</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+    <value>MDMチャート作成ツールキット</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Mod開発に必要</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY 変数</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+    <value>ゲームパス環境変数を設定</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+    <value>必須Mod</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+    <value>最高の体験のためのコアMod</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+    <value>必須Modローダーフレームワーク</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+    <value>Modテンプレート</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+    <value>新規Modプロジェクト用NuGetテンプレート</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+    <value>競合の削除</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>互換性のないModを削除</value>
+  </data>
+  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+    <value>Euterpe セットアップ中</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Euterpe へようこそ</value>
+  </data>
 </root>
