@@ -290,16 +290,16 @@
                                         Margin="0,2"
                                         Padding="0">
                                         <StackPanel
-                                            Margin="4,0,0,0">
-                                                Spacing="1"
-                                                VerticalAlignment="Center">
-                                                <TextBlock
-                                                    FontSize="13"
-                                                    Text="{Binding DisplayName, Mode=OneTime}" />
-                                                <TextBlock
-                                                    FontSize="11"
-                                                    Foreground="{DynamicResource SecondaryTextColor}"
-                                                    Text="{Binding Description, Mode=OneTime}" />
+                                            Margin="4,0,0,0"
+                                            Spacing="1"
+                                            VerticalAlignment="Center">
+                                            <TextBlock
+                                                FontSize="13"
+                                                Text="{Binding DisplayName, Mode=OneTime}" />
+                                            <TextBlock
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SecondaryTextColor}"
+                                                Text="{Binding Description, Mode=OneTime}" />
                                         </StackPanel>
                                     </CheckBox>
                                 </DataTemplate>
