@@ -52,20 +52,32 @@
             </Setter>
         </Style>
 
-        <!--  Hover  -->
+        <!--  Hover: override Semi theme's pointerover  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:pointerover">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
         <Style
             Selector="ListBox.IdentityList ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="#15808080" />
         </Style>
 
-        <!--  Selected  -->
+        <!--  Selected: override Semi theme  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
         <Style
             Selector="ListBox.IdentityList ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="#B32563EB" />
             <Setter Property="BorderBrush" Value="#2563EB" />
         </Style>
 
-        <!--  Selected + Hover: keep selected appearance  -->
+        <!--  Selected + Hover: override Semi + keep selected appearance  -->
+        <Style
+            Selector="ListBox.IdentityList ListBoxItem:selected:pointerover">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
         <Style
             Selector="ListBox.IdentityList ListBoxItem:selected:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="#B32563EB" />
