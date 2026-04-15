@@ -364,28 +364,28 @@
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>역할과 작업을 선택하여 시작하세요</value>
   </data>
-  <data name="Wizard_Identity_Charter" xml:space="preserve">
+  <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>차터</value>
   </data>
-  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
     <value>채보 제작자에게 추천</value>
   </data>
-  <data name="Wizard_Identity_Custom" xml:space="preserve">
+  <data name="Wizard_Role_Custom" xml:space="preserve">
     <value>사용자 정의</value>
   </data>
-  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
     <value>설정을 커스터마이즈</value>
   </data>
-  <data name="Wizard_Identity_Modder" xml:space="preserve">
+  <data name="Wizard_Role_Modder" xml:space="preserve">
     <value>모더</value>
   </data>
-  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
     <value>모드 개발자에게 추천</value>
   </data>
-  <data name="Wizard_Identity_Player" xml:space="preserve">
+  <data name="Wizard_Role_Player" xml:space="preserve">
     <value>플레이어</value>
   </data>
-  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
     <value>일반 플레이어에게 추천</value>
   </data>
   <data name="Wizard_Section_Tasks" xml:space="preserve">

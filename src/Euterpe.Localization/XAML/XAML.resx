@@ -364,28 +364,28 @@
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Choose your role and tasks to get started</value>
   </data>
-  <data name="Wizard_Identity_Charter" xml:space="preserve">
+  <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>Charter</value>
   </data>
-  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
     <value>Recommended for chart creators</value>
   </data>
-  <data name="Wizard_Identity_Custom" xml:space="preserve">
+  <data name="Wizard_Role_Custom" xml:space="preserve">
     <value>Custom</value>
   </data>
-  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
     <value>Customize your setup</value>
   </data>
-  <data name="Wizard_Identity_Modder" xml:space="preserve">
+  <data name="Wizard_Role_Modder" xml:space="preserve">
     <value>Modder</value>
   </data>
-  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
     <value>Recommended for mod developers</value>
   </data>
-  <data name="Wizard_Identity_Player" xml:space="preserve">
+  <data name="Wizard_Role_Player" xml:space="preserve">
     <value>Player</value>
   </data>
-  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
     <value>Recommended for regular players</value>
   </data>
   <data name="Wizard_Section_Tasks" xml:space="preserve">

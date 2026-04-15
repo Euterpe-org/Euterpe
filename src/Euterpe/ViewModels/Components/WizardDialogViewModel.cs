@@ -13,12 +13,12 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     private bool _isSyncingIdentity;
 
-    public static IReadOnlyList<WizardIdentityOption> IdentityOptions { get; } =
+    public static IReadOnlyList<WizardRole> Roles { get; } =
     [
-        new(WizardIdentity.Player, "UserGroup", Wizard_Identity_Player, Wizard_Identity_Player_Description, "#2563EB"),
-        new(WizardIdentity.Charter, "Language", Wizard_Identity_Charter, Wizard_Identity_Charter_Description, "#7B2CBF"),
-        new(WizardIdentity.Modder, "Code", Wizard_Identity_Modder, Wizard_Identity_Modder_Description, "#047857"),
-        new(WizardIdentity.Custom, "Setting", Wizard_Identity_Custom, Wizard_Identity_Custom_Description, "#B45309")
+        new(WizardIdentity.Player, "UserGroup", Wizard_Role_Player, Wizard_Role_Player_Description, "#2563EB"),
+        new(WizardIdentity.Charter, "Language", Wizard_Role_Charter, Wizard_Role_Charter_Description, "#7B2CBF"),
+        new(WizardIdentity.Modder, "Code", Wizard_Role_Modder, Wizard_Role_Modder_Description, "#047857"),
+        new(WizardIdentity.Custom, "Setting", Wizard_Role_Custom, Wizard_Role_Custom_Description, "#B45309")
     ];
 
     public IReadOnlyList<WizardTask> Tasks { get; } =
@@ -36,7 +36,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public partial bool IsProgressPage { get; set; }
 
     [ObservableProperty]
-    public partial WizardIdentityOption? SelectedIdentityOption { get; set; }
+    public partial WizardRole? SelectedRole { get; set; }
 
     [ObservableProperty]
     public partial double Progress { get; set; }
@@ -46,7 +46,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public WizardDialogViewModel()
     {
-        SelectedIdentityOption = IdentityOptions[0];
+        SelectedRole = Roles[0];
 
         foreach (var task in Tasks)
             task.PropertyChanged += (_, e) =>
@@ -94,7 +94,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         Close();
     }
 
-    partial void OnSelectedIdentityOptionChanged(WizardIdentityOption? value)
+    partial void OnSelectedRoleChanged(WizardRole? value)
     {
         if (_isSyncingIdentity || value is null) return;
         _isSyncingIdentity = true;
@@ -119,7 +119,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         try
         {
             var matched = FindMatchingIdentity();
-            SelectedIdentityOption = IdentityOptions.FirstOrDefault(o => o.Identity == matched);
+            SelectedRole = Roles.FirstOrDefault(o => o.Identity == matched);
         }
         finally
         {
@@ -129,12 +129,12 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     private WizardIdentity FindMatchingIdentity()
     {
-        if (SelectedIdentityOption is not null
-            && SelectedIdentityOption.Identity is not WizardIdentity.Custom
-            && Presets.TryGetValue(SelectedIdentityOption.Identity, out var currentPreset)
+        if (SelectedRole is not null
+            && SelectedRole.Identity is not WizardIdentity.Custom
+            && Presets.TryGetValue(SelectedRole.Identity, out var currentPreset)
             && MatchesPreset(currentPreset))
         {
-            return SelectedIdentityOption.Identity;
+            return SelectedRole.Identity;
         }
 
         foreach (var (identity, preset) in Presets)

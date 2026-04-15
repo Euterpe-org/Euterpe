@@ -364,28 +364,28 @@
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>ロールとタスクを選んで始めましょう</value>
   </data>
-  <data name="Wizard_Identity_Charter" xml:space="preserve">
+  <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>チャーター</value>
   </data>
-  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
     <value>譜面制作者向け</value>
   </data>
-  <data name="Wizard_Identity_Custom" xml:space="preserve">
+  <data name="Wizard_Role_Custom" xml:space="preserve">
     <value>カスタム</value>
   </data>
-  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
     <value>セットアップをカスタマイズ</value>
   </data>
-  <data name="Wizard_Identity_Modder" xml:space="preserve">
+  <data name="Wizard_Role_Modder" xml:space="preserve">
     <value>モッダー</value>
   </data>
-  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
     <value>Mod開発者向け</value>
   </data>
-  <data name="Wizard_Identity_Player" xml:space="preserve">
+  <data name="Wizard_Role_Player" xml:space="preserve">
     <value>プレイヤー</value>
   </data>
-  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
     <value>一般プレイヤー向け</value>
   </data>
   <data name="Wizard_Section_Tasks" xml:space="preserve">

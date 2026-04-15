@@ -364,28 +364,28 @@
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>選擇你的角色和任務以開始</value>
   </data>
-  <data name="Wizard_Identity_Charter" xml:space="preserve">
+  <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>譜師</value>
   </data>
-  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
     <value>推薦譜面製作者使用</value>
   </data>
-  <data name="Wizard_Identity_Custom" xml:space="preserve">
+  <data name="Wizard_Role_Custom" xml:space="preserve">
     <value>自訂</value>
   </data>
-  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
     <value>自訂你的設定</value>
   </data>
-  <data name="Wizard_Identity_Modder" xml:space="preserve">
+  <data name="Wizard_Role_Modder" xml:space="preserve">
     <value>模組開發者</value>
   </data>
-  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
     <value>推薦模組開發者使用</value>
   </data>
-  <data name="Wizard_Identity_Player" xml:space="preserve">
+  <data name="Wizard_Role_Player" xml:space="preserve">
     <value>玩家</value>
   </data>
-  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
     <value>推薦一般玩家使用</value>
   </data>
   <data name="Wizard_Section_Tasks" xml:space="preserve">

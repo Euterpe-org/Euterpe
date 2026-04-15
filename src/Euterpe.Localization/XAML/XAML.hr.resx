@@ -364,28 +364,28 @@
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Odaberi svoju ulogu i zadatke za početak</value>
   </data>
-  <data name="Wizard_Identity_Charter" xml:space="preserve">
+  <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>Charter</value>
   </data>
-  <data name="Wizard_Identity_Charter_Description" xml:space="preserve">
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
     <value>Preporučeno za kreatore chartova</value>
   </data>
-  <data name="Wizard_Identity_Custom" xml:space="preserve">
+  <data name="Wizard_Role_Custom" xml:space="preserve">
     <value>Prilagođeno</value>
   </data>
-  <data name="Wizard_Identity_Custom_Description" xml:space="preserve">
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
     <value>Prilagodi svoje postavke</value>
   </data>
-  <data name="Wizard_Identity_Modder" xml:space="preserve">
+  <data name="Wizard_Role_Modder" xml:space="preserve">
     <value>Modder</value>
   </data>
-  <data name="Wizard_Identity_Modder_Description" xml:space="preserve">
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
     <value>Preporučeno za programere modova</value>
   </data>
-  <data name="Wizard_Identity_Player" xml:space="preserve">
+  <data name="Wizard_Role_Player" xml:space="preserve">
     <value>Igrač</value>
   </data>
-  <data name="Wizard_Identity_Player_Description" xml:space="preserve">
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
     <value>Preporučeno za obične igrače</value>
   </data>
   <data name="Wizard_Section_Tasks" xml:space="preserve">
