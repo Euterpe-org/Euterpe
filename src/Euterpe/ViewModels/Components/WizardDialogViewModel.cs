@@ -118,19 +118,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     private void SyncIdentityFromComponents()
     {
         if (_isSyncingIdentity) return;
-        _isSyncingIdentity = true;
-        try
-        {
-            var matched = FindMatchingIdentity();
-            if (matched != SelectedIdentity)
-                SelectedIdentity = matched;
 
-            UpdateIdentitySelections(SelectedIdentity);
-        }
-        finally
-        {
-            _isSyncingIdentity = false;
-        }
+        var matched = FindMatchingIdentity();
+        UpdateIdentitySelections(matched);
     }
 
     private WizardIdentity FindMatchingIdentity()
