@@ -122,6 +122,11 @@
                             <Setter Property="Background" Value="#2563EB" />
                             <Setter Property="BorderBrush" Value="#2563EB" />
                         </Style>
+                        <Style
+                            Selector="Button:pointerover Border.IdentityCard.Selected">
+                            <Setter Property="Background" Value="#2563EB" />
+                            <Setter Property="BorderBrush" Value="#2563EB" />
+                        </Style>
                     </Button.Styles>
                     <Border
                         Classes="IdentityCard"
@@ -171,6 +176,11 @@
                         </Style>
                         <Style
                             Selector="Button Border.IdentityCard.Selected">
+                            <Setter Property="Background" Value="#7B2CBF" />
+                            <Setter Property="BorderBrush" Value="#7B2CBF" />
+                        </Style>
+                        <Style
+                            Selector="Button:pointerover Border.IdentityCard.Selected">
                             <Setter Property="Background" Value="#7B2CBF" />
                             <Setter Property="BorderBrush" Value="#7B2CBF" />
                         </Style>
@@ -226,6 +236,11 @@
                             <Setter Property="Background" Value="#047857" />
                             <Setter Property="BorderBrush" Value="#047857" />
                         </Style>
+                        <Style
+                            Selector="Button:pointerover Border.IdentityCard.Selected">
+                            <Setter Property="Background" Value="#047857" />
+                            <Setter Property="BorderBrush" Value="#047857" />
+                        </Style>
                     </Button.Styles>
                     <Border
                         Classes="IdentityCard"
@@ -275,6 +290,11 @@
                         </Style>
                         <Style
                             Selector="Button Border.IdentityCard.Selected">
+                            <Setter Property="Background" Value="#B45309" />
+                            <Setter Property="BorderBrush" Value="#B45309" />
+                        </Style>
+                        <Style
+                            Selector="Button:pointerover Border.IdentityCard.Selected">
                             <Setter Property="Background" Value="#B45309" />
                             <Setter Property="BorderBrush" Value="#B45309" />
                         </Style>
