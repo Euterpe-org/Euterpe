@@ -217,8 +217,20 @@
                     IsChecked="{Binding UninstallConflictingMods}" />
 
                 <CheckBox
-                    Content="Install NuGet &amp; Mod Template"
-                    IsChecked="{Binding InstallDevTools}" />
+                    Content="Download Charting Tool (MDBMSC)"
+                    IsChecked="{Binding DownloadChartingTool}" />
+
+                <CheckBox
+                    Content="Install .NET SDK"
+                    IsChecked="{Binding InstallDotNetSdk}" />
+
+                <CheckBox
+                    Content="Install Mod Template"
+                    IsChecked="{Binding InstallModTemplate}" />
+
+                <CheckBox
+                    Content="Set Environment Variable (MD_DIRECTORY)"
+                    IsChecked="{Binding SetEnvironmentVariable}" />
             </StackPanel>
         </Grid>
 
