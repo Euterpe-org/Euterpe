@@ -22,7 +22,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     {
         var options = new OverlayDialogOptions
         {
-            Title = "Welcome to Euterpe!"
+            Title = Wizard_Title_Welcome
         };
 
         await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, "WizardDialog", options).ConfigureAwait(false);
@@ -48,7 +48,6 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         }
     }
 
-
     #region Injections
 
     [UsedImplicitly]
@@ -56,7 +55,6 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }
-
 
     [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }
