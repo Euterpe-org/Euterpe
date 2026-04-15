@@ -3,8 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Euterpe.Styles.Models"
     xmlns:vm="using:Euterpe.ViewModels.Components"
     x:Class="Euterpe.Views.Components.WizardDialog"
     x:DataType="vm:WizardDialogViewModel"
@@ -16,134 +18,7 @@
         <vm:WizardDialogViewModel />
     </Design.DataContext>
 
-    <UserControl.Resources>
-        <!--  Role Card: opacity overlay approach (no BrushTransition)  -->
-        <ControlTheme
-            x:Key="RoleCardItem"
-            TargetType="ListBoxItem">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Margin" Value="0,0,0,6" />
-            <Setter Property="Padding" Value="10,8" />
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Grid>
-                        <!--  Base card background  -->
-                        <Border
-                            x:Name="BaseBg"
-                            Background="{DynamicResource SecondaryCardColor}"
-                            CornerRadius="{TemplateBinding CornerRadius}" />
-
-                        <!--  Hover overlay  -->
-                        <Border
-                            x:Name="HoverOverlay"
-                            Background="#808080"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Opacity="0">
-                            <Border.Transitions>
-                                <Transitions>
-                                    <DoubleTransition
-                                        Property="Opacity"
-                                        Duration="0:0:0.15" />
-                                </Transitions>
-                            </Border.Transitions>
-                        </Border>
-
-                        <!--  Selected overlay  -->
-                        <Border
-                            x:Name="SelectedOverlay"
-                            Background="#2563EB"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Opacity="0">
-                            <Border.Transitions>
-                                <Transitions>
-                                    <DoubleTransition
-                                        Property="Opacity"
-                                        Duration="0:0:0.2" />
-                                </Transitions>
-                            </Border.Transitions>
-                        </Border>
-
-                        <!--  Selected border  -->
-                        <Border
-                            x:Name="SelectedBorder"
-                            BorderBrush="#2563EB"
-                            BorderThickness="2"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Opacity="0">
-                            <Border.Transitions>
-                                <Transitions>
-                                    <DoubleTransition
-                                        Property="Opacity"
-                                        Duration="0:0:0.2" />
-                                </Transitions>
-                            </Border.Transitions>
-                        </Border>
-
-                        <!--  Content  -->
-                        <ContentPresenter
-                            x:Name="PART_ContentPresenter"
-                            Content="{TemplateBinding Content}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            CornerRadius="{TemplateBinding CornerRadius}"
-                            Padding="{TemplateBinding Padding}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter>
-
-            <!--  Hover: show hover overlay  -->
-            <Style
-                Selector="^:pointerover /template/ Border#HoverOverlay">
-                <Setter Property="Opacity" Value="0.1" />
-            </Style>
-
-            <!--  Selected: show selected overlay + border, hide hover  -->
-            <Style
-                Selector="^:selected /template/ Border#SelectedOverlay">
-                <Setter Property="Opacity" Value="0.7" />
-            </Style>
-            <Style
-                Selector="^:selected /template/ Border#SelectedBorder">
-                <Setter Property="Opacity" Value="1" />
-            </Style>
-            <!--  Selected + Hover: keep selected, suppress hover  -->
-            <Style
-                Selector="^:selected:pointerover /template/ Border#HoverOverlay">
-                <Setter Property="Opacity" Value="0" />
-            </Style>
-        </ControlTheme>
-    </UserControl.Resources>
-
     <UserControl.Styles>
-
-        <!--  Role ListBox: remove default chrome  -->
-        <Style
-            Selector="ListBox.RoleList">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Padding" Value="0" />
-        </Style>
-
-        <!--  Apply custom theme to all items  -->
-        <Style
-            Selector="ListBox.RoleList ListBoxItem">
-            <Setter Property="Theme" Value="{StaticResource RoleCardItem}" />
-        </Style>
-
-        <!--  Selected foreground (descendant selectors not allowed in ControlTheme)  -->
-        <Style
-            Selector="ListBox.RoleList ListBoxItem:selected TextBlock">
-            <Setter Property="Foreground" Value="White" />
-        </Style>
-        <Style
-            Selector="ListBox.RoleList ListBoxItem:selected PathIcon">
-            <Setter Property="Foreground" Value="White" />
-        </Style>
-        <Style
-            Selector="ListBox.RoleList ListBoxItem:selected Panel > Border">
-            <Setter Property="Background" Value="White" />
-        </Style>
-
         <!--  Progress Bar  -->
         <Style
             Selector="ProgressBar.Wizard">
@@ -213,40 +88,13 @@
                 SelectedItem="{Binding SelectedRole}">
                 <ListBox.ItemTemplate>
                     <DataTemplate
-                        x:DataType="vm:WizardRole">
-                        <Grid
-                            ColumnDefinitions="Auto,*">
-
-                            <!--  Icon Badge  -->
-                            <Panel
-                                Height="30"
-                                Margin="0,0,10,0"
-                                VerticalAlignment="Center"
-                                Width="30">
-                                <Border
-                                    Background="{Binding AccentColor}"
-                                    CornerRadius="15"
-                                    Opacity="0.15" />
-                                <PathIcon
-                                    Data="{Binding IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneTime}"
-                                    Foreground="{Binding AccentColor}"
-                                    Height="14" />
-                            </Panel>
-
-                            <StackPanel
-                                Grid.Column="1"
-                                Spacing="1"
-                                VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="14"
-                                    FontWeight="SemiBold"
-                                    Text="{Binding Title, Mode=OneTime}" />
-                                <TextBlock
-                                    FontSize="11"
-                                    Foreground="{DynamicResource SecondaryTextColor}"
-                                    Text="{Binding Description, Mode=OneTime}" />
-                            </StackPanel>
-                        </Grid>
+                        x:DataType="models:WizardRole">
+                        <e:RoleCard
+                            AccentColor="{Binding AccentColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}, Mode=OneTime}"
+                            Description="{Binding Description, Mode=OneTime}"
+                            Icon="{Binding IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneTime}"
+                            IsSelected="{Binding $parent[ListBoxItem].IsSelected, FallbackValue=False, Mode=OneWay}"
+                            Title="{Binding Title, Mode=OneTime}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -275,7 +123,7 @@
                             ItemsSource="{Binding Tasks, Mode=OneTime}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate
-                                    x:DataType="vm:WizardTask">
+                                    x:DataType="models:WizardTask">
                                     <CheckBox
                                         IsChecked="{Binding IsSelected}"
                                         Margin="0,2"
@@ -336,9 +184,9 @@
 
             <!--  Progress Bar  -->
             <ProgressBar
+                Value="{Binding Progress, Mode=OneWay}"
                 Classes="Primary Wizard"
-                MinWidth="360"
-                Value="{Binding Progress, Mode=OneWay}" />
+                MinWidth="360" />
 
             <!--  Percentage  -->
             <TextBlock
@@ -358,18 +206,18 @@
 
                 <!--  Selection Page: Skip  -->
                 <Button
+                    DockPanel.Dock="Left"
                     Command="{Binding SkipWizardCommand}"
                     Content="{Localize {x:Static loc:XAMLLiteral.Button_Skip}}"
-                    DockPanel.Dock="Left"
                     IsVisible="{Binding !IsProgressPage}"
                     Theme="{StaticResource GhostButton}" />
 
                 <!--  Selection Page: Confirm  -->
                 <Button
+                    DockPanel.Dock="Right"
                     Classes="Primary"
                     Command="{Binding ConfirmCommand}"
                     Content="{Localize {x:Static loc:XAMLLiteral.Button_Confirm}}"
-                    DockPanel.Dock="Right"
                     IsVisible="{Binding !IsProgressPage}" />
 
                 <Panel />

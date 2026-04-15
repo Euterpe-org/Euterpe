@@ -1,0 +1,167 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Euterpe.Styles.TemplatedControls">
+
+    <Design.PreviewWith>
+        <Border
+            Background="{DynamicResource SecondaryCardColor}"
+            Padding="10,8"
+            Width="260">
+            <controls:RoleCard
+                AccentColor="#2563EB"
+                Description="Preview description"
+                Title="Preview role" />
+        </Border>
+    </Design.PreviewWith>
+
+    <!--  Host ListBox (chrome-less)  -->
+    <Style
+        Selector="ListBox.RoleList">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <!--  ListBoxItem: card shell with overlays  -->
+    <Style
+        Selector="ListBox.RoleList ListBoxItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Margin" Value="0,0,0,6" />
+        <Setter Property="Padding" Value="10,8" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Border
+                        x:Name="BaseBg"
+                        Background="{DynamicResource SecondaryCardColor}"
+                        CornerRadius="{TemplateBinding CornerRadius}" />
+
+                    <Border
+                        x:Name="HoverOverlay"
+                        Background="#808080"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Opacity="0">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition
+                                    Property="Opacity"
+                                    Duration="0:0:0.15" />
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+
+                    <Border
+                        x:Name="SelectedOverlay"
+                        Background="#2563EB"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Opacity="0">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition
+                                    Property="Opacity"
+                                    Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+
+                    <Border
+                        x:Name="SelectedBorder"
+                        BorderBrush="#2563EB"
+                        BorderThickness="2"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Opacity="0">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition
+                                    Property="Opacity"
+                                    Duration="0:0:0.2" />
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+
+                    <ContentPresenter
+                        x:Name="PART_ContentPresenter"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style
+        Selector="ListBox.RoleList ListBoxItem:pointerover /template/ Border#HoverOverlay">
+        <Setter Property="Opacity" Value="0.1" />
+    </Style>
+    <Style
+        Selector="ListBox.RoleList ListBoxItem:selected /template/ Border#SelectedOverlay">
+        <Setter Property="Opacity" Value="0.7" />
+    </Style>
+    <Style
+        Selector="ListBox.RoleList ListBoxItem:selected /template/ Border#SelectedBorder">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style
+        Selector="ListBox.RoleList ListBoxItem:selected:pointerover /template/ Border#HoverOverlay">
+        <Setter Property="Opacity" Value="0" />
+    </Style>
+
+    <!--  RoleCard content template  -->
+    <Style
+        Selector="controls|RoleCard">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid
+                    ColumnDefinitions="Auto,*">
+                    <Panel
+                        Height="30"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Width="30">
+                        <Border
+                            x:Name="IconBadgeBg"
+                            Background="{TemplateBinding AccentColor}"
+                            CornerRadius="15"
+                            Opacity="0.15" />
+                        <PathIcon
+                            Data="{TemplateBinding Icon}"
+                            Foreground="{TemplateBinding AccentColor}"
+                            Height="14" />
+                    </Panel>
+
+                    <StackPanel
+                        Grid.Column="1"
+                        Spacing="1"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Text="{TemplateBinding Title}" />
+                        <TextBlock
+                            FontSize="11"
+                            Foreground="{DynamicResource SecondaryTextColor}"
+                            Text="{TemplateBinding Description}" />
+                    </StackPanel>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <!--  Selected visual state  -->
+        <Style
+            Selector="^[IsSelected=True] /template/ TextBlock">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style
+            Selector="^[IsSelected=True] /template/ PathIcon">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style
+            Selector="^[IsSelected=True] /template/ Border#IconBadgeBg">
+            <Setter Property="Background" Value="White" />
+        </Style>
+    </Style>
+
+</Styles>

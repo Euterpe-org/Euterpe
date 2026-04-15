@@ -1,4 +1,4 @@
-using Irihi.Avalonia.Shared.Contracts;
+﻿using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.ViewModels.Components;
 
@@ -44,18 +44,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [ObservableProperty]
     public partial string ProgressDescription { get; set; } = string.Empty;
 
-    public WizardDialogViewModel()
-    {
-        SelectedRole = Roles[0];
-
-        foreach (var task in Tasks)
-            task.PropertyChanged += (_, e) =>
-            {
-                if (e.PropertyName == nameof(WizardTask.IsSelected))
-                    SyncRoleFromTasks();
-            };
-    }
-
     #region Injections
 
     [UsedImplicitly]
@@ -63,7 +51,23 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     #endregion Injections
 
-    public void Close() => RequestClose?.Invoke(this, null);
+    public WizardDialogViewModel()
+    {
+        SelectedRole = Roles[0];
+
+        foreach (var task in Tasks)
+        {
+            task.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(WizardTask.IsSelected))
+                {
+                    SyncRoleFromTasks();
+                }
+            };
+        }
+    }
+
+    public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
 
     public event EventHandler<object?>? RequestClose;
 
@@ -96,14 +100,20 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     partial void OnSelectedRoleChanged(WizardRole? value)
     {
-        if (_isSyncingRole || value is null) return;
+        if (_isSyncingRole || value is null)
+        {
+            return;
+        }
+
         _isSyncingRole = true;
         try
         {
             if (Presets.TryGetValue(value.Identity, out var preset))
             {
                 foreach (var task in Tasks)
+                {
                     task.IsSelected = preset.Contains(task.Name);
+                }
             }
         }
         finally
@@ -114,7 +124,11 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     private void SyncRoleFromTasks()
     {
-        if (_isSyncingRole) return;
+        if (_isSyncingRole)
+        {
+            return;
+        }
+
         _isSyncingRole = true;
         try
         {
@@ -140,7 +154,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         foreach (var (identity, preset) in Presets)
         {
             if (MatchesPreset(preset))
+            {
                 return identity;
+            }
         }
 
         return WizardIdentity.Custom;
@@ -151,8 +167,16 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         var selectedCount = 0;
         foreach (var task in Tasks)
         {
-            if (!task.IsSelected) continue;
-            if (!preset.Contains(task.Name)) return false;
+            if (!task.IsSelected)
+            {
+                continue;
+            }
+
+            if (!preset.Contains(task.Name))
+            {
+                return false;
+            }
+
             selectedCount++;
         }
 
