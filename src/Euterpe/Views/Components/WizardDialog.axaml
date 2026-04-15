@@ -267,15 +267,15 @@
                         FontSize="15"
                         FontWeight="SemiBold"
                         Margin="0,0,0,12"
-                        Text="Components"
+                        Text="Tasks"
                         Theme="{StaticResource TitleTextBlock}" />
 
                     <ScrollViewer>
                         <ItemsControl
-                            ItemsSource="{Binding Components, Mode=OneTime}">
+                            ItemsSource="{Binding Tasks, Mode=OneTime}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate
-                                    x:DataType="vm:WizardComponent">
+                                    x:DataType="vm:WizardTask">
                                     <CheckBox
                                         IsChecked="{Binding IsSelected}"
                                         Margin="0,2"
