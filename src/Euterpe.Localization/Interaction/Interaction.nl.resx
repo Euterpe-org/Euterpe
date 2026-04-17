@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
+    <value>Chart-bestand kiezen</value>
+  </data>
+  <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
+    <value>Steam-uitvoerbaar bestand kiezen</value>
+  </data>
+  <data name="FilePickerFileType_AllFiles" xml:space="preserve">
+    <value>Alle bestanden</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
+    <value>Cachemap kiezen</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
+    <value>Chart-map kiezen</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Muse Dash-map kiezen</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
+    <value>Steam-map kiezen</value>
+  </data>
+  <data name="MessageBox_Button_No" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="MessageBox_Button_Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Selecteer de Muse Dash-map
+Is Muse Dash op deze computer geïnstalleerd?</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+    <value>Selecteer het Steam-uitvoerbare bestand</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>Selecteer de Steam-map</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
+    <value>Het gedetecteerde pad van de Muse Dash-map is
+{0}
+Is dit de juiste spelmap?</value>
+  </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>Kan {0} niet verwijderen</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Kan MelonLoader-map niet verwijderen</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+    <value>.NET 6 Runtime niet gevonden
+Klik op OK om te installeren</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+    <value>Installatie van .NET 6 Runtime mislukt</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>Weet u zeker dat u de .NET SDK wilt installeren?</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>Installatie van .NET 10 SDK mislukt</value>
+  </data>
+  <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
+    <value>Het gekozen pad is ongeldig. Probeer opnieuw</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>Kan MDM-bestand niet maken</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM-bestanden succesvol gemaakt</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>Kan MDM-bestand niet uitpakken</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM-bestanden succesvol uitgepakt</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+    <value>Kan MelonLoader.zip niet verwijderen in
+{0}
+Probeer handmatig te verwijderen</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>Installatie van MelonLoader mislukt: {0}</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader is succesvol geïnstalleerd</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader succesvol verwijderd</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Uitpakken van MelonLoader mislukt</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>MelonLoader zip-bestand niet gevonden</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Weet u zeker dat u de Mod Template wilt installeren?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Installatie van Mod Template mislukt</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Weet u zeker dat u de Mod Template wilt verwijderen?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Verwijderen van Mod Template mislukt</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Nieuwe versie beschikbaar: {0}, wilt u bijwerken?</value>
+  </data>
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
+    <value>Geen updates beschikbaar</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>Er is geen keyring-service (secret-tool) gevonden. Uw aanmeldsessie kan niet worden opgeslagen en u moet elke keer opnieuw inloggen.</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
+    <value>protontricks is niet geïnstalleerd. Installeer protontricks om door te gaan.</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
+    <value>Uitvoeren van wine prefix-commando's via protontricks mislukt. Kan niet doorgaan met de installatie van .NET Runtime.</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Lezen van spelinformatie mislukt
+  {0}</value>
+  </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Versie {0} kon niet worden gedownload</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Weet u zeker dat u de omgevingsvariabele MD_DIRECTORY wilt instellen?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Instellen van omgevingsvariabele MD_DIRECTORY mislukt</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
+    <value>Kopieer de volgende regel en voeg deze toe aan uw /etc/environment-bestand:
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
+    <value>Omgevingsvariabele MD_DIRECTORY succesvol ingesteld op {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+    <value>Mod {0} succesvol geïnstalleerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>Mod {0} succesvol opnieuw geïnstalleerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+    <value>Mod {0} succesvol verwijderd</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
+    <value>Mod {0} succesvol bijgewerkt</value>
+  </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>Server is tijdelijk niet beschikbaar. Probeer het over een moment opnieuw.</value>
+  </data>
+  <data name="Title_Error" xml:space="preserve">
+    <value>Fout</value>
+  </data>
+  <data name="Title_Notice" xml:space="preserve">
+    <value>Mededeling</value>
+  </data>
+  <data name="Title_Success" xml:space="preserve">
+    <value>Succes</value>
+  </data>
+  <data name="Title_Warning" xml:space="preserve">
+    <value>Waarschuwing</value>
+  </data>
+</root>

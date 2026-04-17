@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
+    <value>Escolher arquivo de chart</value>
+  </data>
+  <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
+    <value>Escolher executável do Steam</value>
+  </data>
+  <data name="FilePickerFileType_AllFiles" xml:space="preserve">
+    <value>Todos os arquivos</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
+    <value>Escolher pasta de cache</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
+    <value>Escolher pasta de charts</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Escolher pasta do Muse Dash</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
+    <value>Escolher pasta do Steam</value>
+  </data>
+  <data name="MessageBox_Button_No" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="MessageBox_Button_Yes" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Selecione a pasta do Muse Dash
+Você tem o Muse Dash instalado neste computador?</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+    <value>Selecione o executável do Steam</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>Selecione a pasta do Steam</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
+    <value>O caminho detectado da pasta do Muse Dash é
+{0}
+Esta é a pasta correta do jogo?</value>
+  </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>Falha ao excluir {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Falha ao excluir a pasta do MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+    <value>.NET 6 Runtime não encontrado
+Clique em OK para instalar</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+    <value>Falha ao instalar .NET 6 Runtime</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>Tem certeza de que deseja instalar o .NET SDK?</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>Falha ao instalar .NET 10 SDK</value>
+  </data>
+  <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
+    <value>O caminho escolhido é inválido. Tente novamente</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>Falha ao criar arquivo MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>Arquivos MDM criados com sucesso</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>Falha ao extrair arquivo MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>Arquivos MDM extraídos com sucesso</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+    <value>Falha ao excluir MelonLoader.zip em
+{0}
+Tente excluir manualmente</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>Falha ao instalar MelonLoader: {0}</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader foi instalado com sucesso</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader desinstalado com sucesso</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Falha ao descompactar MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>Arquivo zip do MelonLoader não encontrado</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Tem certeza de que deseja instalar o Mod Template?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Falha ao instalar Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Tem certeza de que deseja desinstalar o Mod Template?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Falha ao desinstalar Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Nova versão disponível: {0}, deseja atualizar?</value>
+  </data>
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
+    <value>Nenhuma atualização disponível</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>Nenhum serviço de chaveiro (secret-tool) foi encontrado. Sua sessão de login não pode ser salva e você precisará fazer login a cada vez.</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
+    <value>protontricks não está instalado. Instale o protontricks para continuar.</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
+    <value>Falha ao executar comandos wine prefix via protontricks. Não é possível continuar com a instalação do .NET Runtime.</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Falha ao ler informações do jogo
+  {0}</value>
+  </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Falha ao baixar a versão {0}</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Tem certeza de que deseja definir a variável de ambiente MD_DIRECTORY?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Falha ao definir a variável de ambiente MD_DIRECTORY</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
+    <value>Copie a linha a seguir e adicione-a ao seu arquivo /etc/environment:
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
+    <value>Variável de ambiente MD_DIRECTORY definida com sucesso para {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+    <value>Mod {0} instalado com sucesso</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>Mod {0} reinstalado com sucesso</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+    <value>Mod {0} desinstalado com sucesso</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
+    <value>Mod {0} atualizado com sucesso</value>
+  </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>O servidor está temporariamente indisponível. Por favor, tente novamente em instantes.</value>
+  </data>
+  <data name="Title_Error" xml:space="preserve">
+    <value>Erro</value>
+  </data>
+  <data name="Title_Notice" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+  <data name="Title_Success" xml:space="preserve">
+    <value>Sucesso</value>
+  </data>
+  <data name="Title_Warning" xml:space="preserve">
+    <value>Atenção</value>
+  </data>
+</root>
