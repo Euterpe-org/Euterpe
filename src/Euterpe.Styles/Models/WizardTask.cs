@@ -1,8 +1,10 @@
+using Euterpe.Models.Enums;
+
 namespace Euterpe.Styles.Models;
 
-public sealed partial class WizardTask(string name, LocalizedString displayName, LocalizedString description) : ObservableObject
+public sealed partial class WizardTask(WizardTaskKind kind, LocalizedString displayName, LocalizedString description) : ObservableObject
 {
-    public string Name { get; } = name;
+    public WizardTaskKind Kind { get; } = kind;
 
     public LocalizedString DisplayName { get; } = displayName;
 

@@ -4,11 +4,15 @@ namespace Euterpe.ViewModels.Components;
 
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
-    private static readonly Dictionary<WizardIdentity, HashSet<string>> Presets = new()
+    private static readonly Dictionary<WizardIdentity, HashSet<WizardTaskKind>> Presets = new()
     {
-        [WizardIdentity.Player] = ["MelonLoader", "EssentialMods", "UninstallConflicts"],
-        [WizardIdentity.Charter] = ["MelonLoader", "EssentialMods", "UninstallConflicts", "ChartingTool"],
-        [WizardIdentity.Modder] = ["MelonLoader", "EssentialMods", "UninstallConflicts", "DotNetSdk", "ModTemplate", "EnvVariable"]
+        [WizardIdentity.Player] = [WizardTaskKind.MelonLoader, WizardTaskKind.EssentialMods, WizardTaskKind.UninstallConflicts],
+        [WizardIdentity.Charter] = [WizardTaskKind.MelonLoader, WizardTaskKind.EssentialMods, WizardTaskKind.UninstallConflicts, WizardTaskKind.ChartingTool],
+        [WizardIdentity.Modder] =
+        [
+            WizardTaskKind.MelonLoader, WizardTaskKind.EssentialMods, WizardTaskKind.UninstallConflicts, WizardTaskKind.DotNetSdk, WizardTaskKind.ModTemplate,
+            WizardTaskKind.EnvVariable
+        ]
     };
 
     private bool _isSyncingRole;
@@ -23,13 +27,13 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public IReadOnlyList<WizardTask> Tasks { get; } =
     [
-        new("MelonLoader", Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true },
-        new("EssentialMods", Wizard_Task_EssentialMods, Wizard_Task_EssentialMods_Description) { IsSelected = true },
-        new("UninstallConflicts", Wizard_Task_UninstallConflicts, Wizard_Task_UninstallConflicts_Description) { IsSelected = true },
-        new("ChartingTool", Wizard_Task_ChartingTool, Wizard_Task_ChartingTool_Description),
-        new("DotNetSdk", Wizard_Task_DotNetSdk, Wizard_Task_DotNetSdk_Description),
-        new("ModTemplate", Wizard_Task_ModTemplate, Wizard_Task_ModTemplate_Description),
-        new("EnvVariable", Wizard_Task_EnvVariable, Wizard_Task_EnvVariable_Description)
+        new(WizardTaskKind.MelonLoader, Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true },
+        new(WizardTaskKind.EssentialMods, Wizard_Task_EssentialMods, Wizard_Task_EssentialMods_Description) { IsSelected = true },
+        new(WizardTaskKind.UninstallConflicts, Wizard_Task_UninstallConflicts, Wizard_Task_UninstallConflicts_Description) { IsSelected = true },
+        new(WizardTaskKind.ChartingTool, Wizard_Task_ChartingTool, Wizard_Task_ChartingTool_Description),
+        new(WizardTaskKind.DotNetSdk, Wizard_Task_DotNetSdk, Wizard_Task_DotNetSdk_Description),
+        new(WizardTaskKind.ModTemplate, Wizard_Task_ModTemplate, Wizard_Task_ModTemplate_Description),
+        new(WizardTaskKind.EnvVariable, Wizard_Task_EnvVariable, Wizard_Task_EnvVariable_Description)
     ];
 
     [ObservableProperty]
@@ -67,6 +71,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(false);
+
         Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
 
@@ -85,7 +90,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
         IsProgressPage = true;
 
-        var stepMap = WizardSteps.ToDictionary(s => s.Name, StringComparer.Ordinal);
+        var stepMap = WizardSteps.ToDictionary(s => s.Kind);
 
         for (var i = 0; i < total; i++)
         {
@@ -93,22 +98,22 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             ProgressDescription = $"{task.DisplayName} ({i + 1}/{total})";
             Progress = (double)i / total * 100;
 
-            if (stepMap.TryGetValue(task.Name, out var step))
+            if (stepMap.TryGetValue(task.Kind, out var step))
             {
-                Logger.ZLogInformation($"Running wizard step '{task.Name}'");
+                Logger.ZLogInformation($"Running wizard step '{task.Kind}'");
                 try
                 {
                     await step.ExecuteAsync().ConfigureAwait(true);
-                    Logger.ZLogInformation($"Completed wizard step '{task.Name}'");
+                    Logger.ZLogInformation($"Completed wizard step '{task.Kind}'");
                 }
                 catch (Exception ex)
                 {
-                    Logger.ZLogError(ex, $"Wizard step '{task.Name}' failed");
+                    Logger.ZLogError(ex, $"Wizard step '{task.Kind}' failed");
                 }
             }
             else
             {
-                Logger.ZLogWarning($"No IWizardStep registered for '{task.Name}'");
+                Logger.ZLogWarning($"No IWizardStep registered for '{task.Kind}'");
             }
 
             Progress = (double)(i + 1) / total * 100;
@@ -134,7 +139,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             {
                 foreach (var task in Tasks)
                 {
-                    task.IsSelected = preset.Contains(task.Name);
+                    task.IsSelected = preset.Contains(task.Kind);
                 }
             }
         }
@@ -184,7 +189,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         return WizardIdentity.Custom;
     }
 
-    private bool MatchesPreset(HashSet<string> preset)
+    private bool MatchesPreset(HashSet<WizardTaskKind> preset)
     {
         var selectedCount = 0;
         foreach (var task in Tasks)
@@ -194,7 +199,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
                 continue;
             }
 
-            if (!preset.Contains(task.Name))
+            if (!preset.Contains(task.Kind))
             {
                 return false;
             }

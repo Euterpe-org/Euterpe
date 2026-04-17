@@ -9,11 +9,11 @@ internal sealed class ChartingToolStep : IWizardStep
 
     #endregion Injections
 
-    public string Name => "ChartingTool";
+    public WizardTaskKind Kind => WizardTaskKind.ChartingTool;
 
     public Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogWarning($"WizardStep '{Name}' not implemented yet");
+        Logger.ZLogWarning($"WizardStep '{Kind}' not implemented yet");
         return Task.CompletedTask;
     }
 }
