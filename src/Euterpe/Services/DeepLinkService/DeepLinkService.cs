@@ -42,11 +42,10 @@ public sealed partial class DeepLinkService
 
     private async Task HandleActionAsync(string action, string path, string query)
     {
-        await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
-
         switch (action)
         {
             case "mod":
+                await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
                 await ModManageService.InitializeModsAsync().ConfigureAwait(true);
                 await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
