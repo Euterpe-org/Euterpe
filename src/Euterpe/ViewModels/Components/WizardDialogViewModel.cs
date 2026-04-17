@@ -44,13 +44,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [ObservableProperty]
     public partial string ProgressDescription { get; set; } = string.Empty;
 
-    #region Injections
-
-    [UsedImplicitly]
-    public required ILogger<WizardDialogViewModel> Logger { get; init; }
-
-    #endregion Injections
-
     public WizardDialogViewModel()
     {
         SelectedRole = Roles[0];
@@ -78,7 +71,11 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     }
 
     [RelayCommand]
-    private void SkipWizard() => Close();
+    private void SkipWizard()
+    {
+        Config.SetupCompleted = true;
+        Close();
+    }
 
     [RelayCommand]
     private async Task ConfirmAsync()
@@ -88,12 +85,37 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
         IsProgressPage = true;
 
+        var stepMap = WizardSteps.ToDictionary(s => s.Name, StringComparer.Ordinal);
+
         for (var i = 0; i < total; i++)
         {
-            ProgressDescription = $"{selectedTasks[i].DisplayName} ({i + 1}/{total})";
+            var task = selectedTasks[i];
+            ProgressDescription = $"{task.DisplayName} ({i + 1}/{total})";
+            Progress = (double)i / total * 100;
+
+            if (stepMap.TryGetValue(task.Name, out var step))
+            {
+                Logger.ZLogInformation($"Running wizard step '{task.Name}'");
+                try
+                {
+                    await step.ExecuteAsync().ConfigureAwait(true);
+                    Logger.ZLogInformation($"Completed wizard step '{task.Name}'");
+                }
+                catch (Exception ex)
+                {
+                    Logger.ZLogError(ex, $"Wizard step '{task.Name}' failed");
+                }
+            }
+            else
+            {
+                Logger.ZLogWarning($"No IWizardStep registered for '{task.Name}'");
+            }
+
             Progress = (double)(i + 1) / total * 100;
-            await Task.Delay(Random.Shared.Next(300, 1200)).ConfigureAwait(true);
         }
+
+        Config.SetupCompleted = true;
+        await SettingService.SaveAsync().ConfigureAwait(true);
 
         Close();
     }
@@ -182,4 +204,20 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
         return selectedCount == preset.Count;
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required ISettingService SettingService { get; init; }
+
+    [UsedImplicitly]
+    public required IEnumerable<IWizardStep> WizardSteps { get; init; }
+
+    [UsedImplicitly]
+    public required ILogger<WizardDialogViewModel> Logger { get; init; }
+
+    #endregion Injections
 }

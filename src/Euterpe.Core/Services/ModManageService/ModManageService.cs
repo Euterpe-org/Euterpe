@@ -1,27 +1,18 @@
 ﻿using System.Collections.Concurrent;
-using R3;
 
 namespace Euterpe.Core;
 
 internal sealed partial class ModManageService : IModManageService
 {
+    private readonly Lazy<Task> _initTask;
+    private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
-    private SourceCache<ModDto, string> _sourceCache = null!;
 
-    public AsyncManualResetEvent Ready { get; } = new(false);
+    public ModManageService() => _initTask = new Lazy<Task>(InitializeCoreAsync, LazyThreadSafetyMode.ExecutionAndPublication);
 
-    public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
-    {
-        _sourceCache = sourceCache;
+    public IObservable<IChangeSet<ModDto, string>> Connect() => _sourceCache.Connect();
 
-        Config.ObservePropertyChanged(x => x.MelonLoaderVersion)
-            .Subscribe(this, (_, self) => self.RefreshModStates());
-
-        await LoadLibsAsync().ConfigureAwait(false);
-        await LoadModsAsync().ConfigureAwait(false);
-
-        Ready.Set();
-    }
+    public Task InitializeModsAsync() => _initTask.Value;
 
     public ModDto? FindModByName(string name) =>
         _sourceCache.Lookup(name) is { HasValue: true, Value: var mod } ? mod : null;
