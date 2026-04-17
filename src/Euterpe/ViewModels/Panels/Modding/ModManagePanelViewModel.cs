@@ -61,7 +61,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(false);
-        await ModManageService.InitializeModsAsync(_sourceCache).ConfigureAwait(false);
+        await ModManageService.InitializeModsAsync().ConfigureAwait(false);
+
+        ModManageService.Connect().PopulateInto(_sourceCache);
 
         AllModsLoaded = true;
         Logger.ZLogInformation($"{nameof(ModManagePanelViewModel)} Initialized");

@@ -1,7 +1,18 @@
-﻿namespace Euterpe.Core;
+﻿using R3;
+
+namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
+    private async Task InitializeCoreAsync()
+    {
+        Config.ObservePropertyChanged(x => x.MelonLoaderVersion)
+            .Subscribe(this, (_, self) => self.RefreshModStates());
+
+        await LoadLibsAsync().ConfigureAwait(false);
+        await LoadModsAsync().ConfigureAwait(false);
+    }
+
     private async Task DownloadModCoreAsync(ModDto mod)
     {
         await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);

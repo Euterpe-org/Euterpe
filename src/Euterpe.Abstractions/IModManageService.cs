@@ -1,11 +1,9 @@
-﻿using DotNext.Threading;
-
-namespace Euterpe.Abstractions;
+﻿namespace Euterpe.Abstractions;
 
 public interface IModManageService
 {
-    AsyncManualResetEvent Ready { get; }
-    Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache);
+    IObservable<IChangeSet<ModDto, string>> Connect();
+    Task InitializeModsAsync();
     ModDto? FindModByName(string name);
     Task InstallModAsync(ModDto mod);
     Task UpdateModAsync(ModDto mod);

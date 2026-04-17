@@ -33,7 +33,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
             Title = Wizard_Title_Welcome
         };
 
-        await OverlayDialog.ShowStandardAsync<WizardDialog, WizardDialogViewModel>(WizardDialogViewModel, WizardHostId, options).ConfigureAwait(false);
+        await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, WizardHostId, options).ConfigureAwait(false);
     }
 
     private async Task BindMuseDashAccountAsync()

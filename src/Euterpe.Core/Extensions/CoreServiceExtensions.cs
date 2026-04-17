@@ -107,6 +107,15 @@ public static class CoreServiceExtensions
             builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
 
+            // Wizard Steps
+            builder.RegisterType<MelonLoaderStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<EssentialModsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<UninstallConflictsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<ChartingToolStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<DotNetSdkStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<ModTemplateStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<EnvVariableStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+
             // Serialization Services
             builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<VdfSerializationService>().As<IVdfSerializationService>().PropertiesAutowired().SingleInstance();

@@ -9,6 +9,7 @@
   ShowConsole: true,
   ShowStartScreen: true,
   AlwaysShowScrollBar: true,
+  SetupCompleted: false,
   UpdateChannel: Stable,
   SkipVersion: null,
   IgnoreException: false
