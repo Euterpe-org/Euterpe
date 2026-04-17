@@ -1,4 +1,4 @@
-﻿using Irihi.Avalonia.Shared.Contracts;
+using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.ViewModels.Components;
 
@@ -6,16 +6,32 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 {
     private static readonly Dictionary<WizardIdentity, HashSet<WizardTaskKind>> Presets = new()
     {
-        [WizardIdentity.Player] = [WizardTaskKind.MelonLoader, WizardTaskKind.EssentialMods, WizardTaskKind.UninstallConflicts],
-        [WizardIdentity.Charter] = [WizardTaskKind.MelonLoader, WizardTaskKind.EssentialMods, WizardTaskKind.UninstallConflicts, WizardTaskKind.ChartingTool],
+        [WizardIdentity.Player] =
+        [
+            WizardTaskKind.MelonLoader,
+            WizardTaskKind.EssentialMods,
+            WizardTaskKind.UninstallConflicts
+        ],
+        [WizardIdentity.Charter] =
+        [
+            WizardTaskKind.MelonLoader,
+            WizardTaskKind.EssentialMods,
+            WizardTaskKind.UninstallConflicts,
+            WizardTaskKind.ChartingTool
+        ],
         [WizardIdentity.Modder] =
         [
-            WizardTaskKind.MelonLoader, WizardTaskKind.EssentialMods, WizardTaskKind.UninstallConflicts, WizardTaskKind.DotNetSdk, WizardTaskKind.ModTemplate,
+            WizardTaskKind.MelonLoader,
+            WizardTaskKind.EssentialMods,
+            WizardTaskKind.UninstallConflicts,
+            WizardTaskKind.DotNetSdk,
+            WizardTaskKind.ModTemplate,
             WizardTaskKind.EnvVariable
         ]
     };
 
-    private bool _isSyncingRole;
+    private bool _applyingPreset;
+    private Dictionary<WizardTaskKind, IWizardStep> _stepMap = null!;
 
     public static IReadOnlyList<WizardRole> Roles { get; } =
     [
@@ -40,28 +56,23 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public partial bool IsProgressPage { get; set; }
 
     [ObservableProperty]
-    public partial WizardRole? SelectedRole { get; set; }
-
-    [ObservableProperty]
     public partial double Progress { get; set; }
 
     [ObservableProperty]
     public partial string ProgressDescription { get; set; } = string.Empty;
 
+    public WizardRole SelectedRole
+    {
+        get => Roles.First(r => r.Identity == ComputeIdentity());
+        set => ApplyPreset(value.Identity);
+    }
+
     public WizardDialogViewModel()
     {
-        SelectedRole = Roles[0];
-
-        foreach (var task in Tasks)
-        {
-            task.PropertyChanged += (_, e) =>
-            {
-                if (e.PropertyName == nameof(WizardTask.IsSelected))
-                {
-                    SyncRoleFromTasks();
-                }
-            };
-        }
+        Tasks.Select(t => t.ObservePropertyChanged(x => x.IsSelected))
+            .Merge()
+            .Where(this, (_, self) => !self._applyingPreset)
+            .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(SelectedRole)));
     }
 
     public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
@@ -71,6 +82,8 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(false);
+
+        _stepMap = WizardSteps.ToDictionary(s => s.Kind);
 
         Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
@@ -85,57 +98,55 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        var selectedTasks = Tasks.Where(t => t.IsSelected).ToList();
-        var total = selectedTasks.Count;
-
+        var tasks = Tasks.Where(t => t.IsSelected).ToArray();
         IsProgressPage = true;
 
-        var stepMap = WizardSteps.ToDictionary(s => s.Kind);
-
-        for (var i = 0; i < total; i++)
+        for (var i = 0; i < tasks.Length; i++)
         {
-            var task = selectedTasks[i];
-            ProgressDescription = $"{task.DisplayName} ({i + 1}/{total})";
-            Progress = (double)i / total * 100;
-
-            if (stepMap.TryGetValue(task.Kind, out var step))
-            {
-                Logger.ZLogInformation($"Running wizard step '{task.Kind}'");
-                try
-                {
-                    await step.ExecuteAsync().ConfigureAwait(true);
-                    Logger.ZLogInformation($"Completed wizard step '{task.Kind}'");
-                }
-                catch (Exception ex)
-                {
-                    Logger.ZLogError(ex, $"Wizard step '{task.Kind}' failed");
-                }
-            }
-            else
-            {
-                Logger.ZLogWarning($"No IWizardStep registered for '{task.Kind}'");
-            }
-
-            Progress = (double)(i + 1) / total * 100;
+            await RunStepAsync(tasks[i], i + 1, tasks.Length).ConfigureAwait(true);
         }
 
         Config.SetupCompleted = true;
         await SettingService.SaveAsync().ConfigureAwait(true);
-
         Close();
     }
 
-    partial void OnSelectedRoleChanged(WizardRole? value)
+    private async Task RunStepAsync(WizardTask task, int index, int total)
     {
-        if (_isSyncingRole || value is null)
+        ProgressDescription = $"{task.DisplayName} ({index}/{total})";
+        Progress = (double)(index - 1) / total * 100;
+
+        if (!_stepMap.TryGetValue(task.Kind, out var step))
+        {
+            Logger.ZLogWarning($"No IWizardStep registered for '{task.Kind}'");
+            return;
+        }
+
+        Logger.ZLogInformation($"Running wizard step '{task.Kind}'");
+        try
+        {
+            await step.ExecuteAsync().ConfigureAwait(true);
+            Logger.ZLogInformation($"Completed wizard step '{task.Kind}'");
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Wizard step '{task.Kind}' failed");
+        }
+
+        Progress = (double)index / total * 100;
+    }
+
+    private void ApplyPreset(WizardIdentity identity)
+    {
+        if (_applyingPreset)
         {
             return;
         }
 
-        _isSyncingRole = true;
+        _applyingPreset = true;
         try
         {
-            if (Presets.TryGetValue(value.Identity, out var preset))
+            if (Presets.TryGetValue(identity, out var preset))
             {
                 foreach (var task in Tasks)
                 {
@@ -145,69 +156,23 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         }
         finally
         {
-            _isSyncingRole = false;
+            _applyingPreset = false;
+            OnPropertyChanged(nameof(SelectedRole));
         }
     }
 
-    private void SyncRoleFromTasks()
+    private WizardIdentity ComputeIdentity()
     {
-        if (_isSyncingRole)
-        {
-            return;
-        }
-
-        _isSyncingRole = true;
-        try
-        {
-            var matched = FindMatchingRole();
-            SelectedRole = Roles.FirstOrDefault(o => o.Identity == matched);
-        }
-        finally
-        {
-            _isSyncingRole = false;
-        }
-    }
-
-    private WizardIdentity FindMatchingRole()
-    {
-        if (SelectedRole is not null
-            && SelectedRole.Identity is not WizardIdentity.Custom
-            && Presets.TryGetValue(SelectedRole.Identity, out var currentPreset)
-            && MatchesPreset(currentPreset))
-        {
-            return SelectedRole.Identity;
-        }
-
+        var selected = Tasks.Where(t => t.IsSelected).Select(t => t.Kind).ToHashSet();
         foreach (var (identity, preset) in Presets)
         {
-            if (MatchesPreset(preset))
+            if (preset.SetEquals(selected))
             {
                 return identity;
             }
         }
 
         return WizardIdentity.Custom;
-    }
-
-    private bool MatchesPreset(HashSet<WizardTaskKind> preset)
-    {
-        var selectedCount = 0;
-        foreach (var task in Tasks)
-        {
-            if (!task.IsSelected)
-            {
-                continue;
-            }
-
-            if (!preset.Contains(task.Kind))
-            {
-                return false;
-            }
-
-            selectedCount++;
-        }
-
-        return selectedCount == preset.Count;
     }
 
     #region Injections
