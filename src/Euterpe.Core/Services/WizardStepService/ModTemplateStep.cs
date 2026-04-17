@@ -9,7 +9,7 @@ internal sealed class ModTemplateStep : IWizardStep
 
     #endregion Injections
 
-    public string Name => "ModTemplate";
+    public WizardTaskKind Kind => WizardTaskKind.ModTemplate;
 
     public async Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default) =>
         await PlatformService.InstallModTemplateAsync().ConfigureAwait(false);

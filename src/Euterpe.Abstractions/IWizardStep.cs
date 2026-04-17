@@ -2,7 +2,7 @@ namespace Euterpe.Abstractions;
 
 public interface IWizardStep
 {
-    string Name { get; }
+    WizardTaskKind Kind { get; }
 
     Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default);
 }
