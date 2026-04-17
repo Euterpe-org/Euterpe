@@ -165,6 +165,9 @@ Essayez de le supprimer manuellement</value>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} mis à jour avec succès</value>
   </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>Le serveur est temporairement indisponible. Veuillez réessayer dans un instant.</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Erreur</value>
   </data>

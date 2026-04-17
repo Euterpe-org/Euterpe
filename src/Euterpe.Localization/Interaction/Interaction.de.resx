@@ -164,6 +164,9 @@ Bitte lösche sie manuell</value>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich aktualisiert</value>
   </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>Der Server ist vorübergehend nicht verfügbar. Bitte versuchen Sie es in einem Moment erneut.</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Fehler</value>
   </data>
