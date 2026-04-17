@@ -49,6 +49,7 @@ public static class CoreServiceExtensions
             services.AddTransient<XRequestIdHandler>();
             services.AddTransient<AuthHeaderHandler>();
             services.AddTransient<LoggingHandler>();
+            services.AddTransient<ServerErrorHandler>();
             services.AddTransient<TokenQueryHandler>();
 
             services.AddSingleton<IDownloadService>(sp =>
@@ -66,7 +67,11 @@ public static class CoreServiceExtensions
                 });
             });
 
-            services.ConfigureHttpClientDefaults(builder => builder.AddHttpMessageHandler<LoggingHandler>());
+            services.ConfigureHttpClientDefaults(builder =>
+            {
+                builder.AddHttpMessageHandler<LoggingHandler>();
+                builder.AddHttpMessageHandler<ServerErrorHandler>();
+            });
             services.AddHttpClient();
             services.AddHttpClient<EuterpeDownloadClient>().AddHttpMessageHandler<TokenQueryHandler>();
 

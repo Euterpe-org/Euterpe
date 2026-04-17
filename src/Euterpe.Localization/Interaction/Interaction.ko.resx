@@ -164,6 +164,9 @@
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>모드 {0}이(가) 업데이트되었습니다</value>
   </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 시도해 주세요.</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
     <value>오류</value>
   </data>

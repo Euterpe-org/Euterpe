@@ -164,6 +164,9 @@
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>模组 {0} 更新成功</value>
   </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>服务器暂时无响应，请稍后再试</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
     <value>错误</value>
   </data>

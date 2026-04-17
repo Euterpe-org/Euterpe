@@ -168,6 +168,9 @@ Try to manually delete</value>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} successfully updated</value>
   </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>Server is temporarily unavailable. Please try again in a moment.</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Error</value>
   </data>
