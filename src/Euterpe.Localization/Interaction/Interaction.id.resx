@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
+    <value>Pilih File Chart</value>
+  </data>
+  <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
+    <value>Pilih Executable Steam</value>
+  </data>
+  <data name="FilePickerFileType_AllFiles" xml:space="preserve">
+    <value>Semua File</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
+    <value>Pilih Folder Cache</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
+    <value>Pilih Folder Chart</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Pilih Folder Muse Dash</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
+    <value>Pilih Folder Steam</value>
+  </data>
+  <data name="MessageBox_Button_No" xml:space="preserve">
+    <value>Tidak</value>
+  </data>
+  <data name="MessageBox_Button_Yes" xml:space="preserve">
+    <value>Ya</value>
+  </data>
+  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Silakan pilih folder Muse Dash
+Apakah Anda memiliki Muse Dash yang terinstal di komputer ini?</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+    <value>Silakan pilih executable Steam</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>Silakan pilih folder Steam</value>
+  </data>
+  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
+    <value>Jalur folder Muse Dash yang terdeteksi adalah
+{0}
+Apakah ini folder game yang benar?</value>
+  </data>
+  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
+    <value>Gagal menghapus {0}</value>
+  </data>
+  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
+    <value>Gagal menghapus folder MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
+    <value>.NET 6 Runtime tidak ditemukan
+Klik OK untuk menginstal</value>
+  </data>
+  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
+    <value>Gagal menginstal .NET 6 Runtime</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>Apakah Anda yakin ingin menginstal .NET SDK?</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>Gagal menginstal .NET 10 SDK</value>
+  </data>
+  <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
+    <value>Jalur yang Anda pilih tidak valid. Coba lagi</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>Gagal membuat file MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>File MDM berhasil dibuat</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>Gagal mengekstrak file MDM</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>File MDM berhasil diekstrak</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
+    <value>Gagal menghapus MelonLoader.zip di
+{0}
+Coba hapus secara manual</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>Gagal menginstal MelonLoader: {0}</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader berhasil diinstal</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader berhasil dihapus</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
+    <value>Gagal mengekstrak MelonLoader</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
+    <value>File zip MelonLoader tidak ditemukan</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Apakah Anda yakin ingin menginstal Mod Template?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Gagal menginstal Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Apakah Anda yakin ingin menghapus Mod Template?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Gagal menghapus Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Versi baru tersedia: {0}, apakah Anda ingin memperbarui?</value>
+  </data>
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
+    <value>Tidak ada pembaruan yang tersedia</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>Layanan keyring (secret-tool) tidak ditemukan. Sesi login Anda tidak dapat disimpan dan Anda harus login setiap kali.</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
+    <value>protontricks tidak terinstal. Silakan instal protontricks untuk melanjutkan.</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
+    <value>Gagal menjalankan perintah wine prefix melalui protontricks. Tidak dapat melanjutkan instalasi .NET Runtime.</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Gagal membaca Informasi Game
+  {0}</value>
+  </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Gagal mengunduh versi {0}</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Apakah Anda yakin ingin mengatur variabel lingkungan MD_DIRECTORY?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Gagal mengatur variabel lingkungan MD_DIRECTORY</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
+    <value>Salin baris berikut dan tambahkan ke file /etc/environment Anda:
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
+    <value>Variabel lingkungan MD_DIRECTORY berhasil diatur ke {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+    <value>Mod {0} berhasil diinstal</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>Mod {0} berhasil diinstal ulang</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+    <value>Mod {0} berhasil dihapus</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
+    <value>Mod {0} berhasil diperbarui</value>
+  </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>Server sementara tidak tersedia. Silakan coba lagi sebentar.</value>
+  </data>
+  <data name="Title_Error" xml:space="preserve">
+    <value>Kesalahan</value>
+  </data>
+  <data name="Title_Notice" xml:space="preserve">
+    <value>Pemberitahuan</value>
+  </data>
+  <data name="Title_Success" xml:space="preserve">
+    <value>Berhasil</value>
+  </data>
+  <data name="Title_Warning" xml:space="preserve">
+    <value>Peringatan</value>
+  </data>
+</root>

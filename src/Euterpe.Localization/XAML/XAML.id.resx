@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllGameVersionCompatible" xml:space="preserve">
+    <value>Semua</value>
+  </data>
+  <data name="Button_Apply" xml:space="preserve">
+    <value>Terapkan</value>
+  </data>
+  <data name="Button_CheckUpdate" xml:space="preserve">
+    <value>Periksa Pembaruan</value>
+  </data>
+  <data name="Button_HelpTranslate" xml:space="preserve">
+    <value>Bantu Terjemahkan</value>
+  </data>
+  <data name="Button_Install" xml:space="preserve">
+    <value>Pasang</value>
+  </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Button_MDMC_Website" xml:space="preserve">
+    <value>Situs MDMC</value>
+  </data>
+  <data name="Button_Reinstall" xml:space="preserve">
+    <value>Pasang Ulang</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>Pilih Ulang</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>Kode Sumber</value>
+  </data>
+  <data name="Button_Uninstall" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="Button_Update" xml:space="preserve">
+    <value>Perbarui</value>
+  </data>
+  <data name="ChartFilterType_Easy" xml:space="preserve">
+    <value>Mudah</value>
+  </data>
+  <data name="ChartFilterType_Hard" xml:space="preserve">
+    <value>Sulit</value>
+  </data>
+  <data name="ChartFilterType_Hidden" xml:space="preserve">
+    <value>Tersembunyi</value>
+  </data>
+  <data name="ChartFilterType_Master" xml:space="preserve">
+    <value>Master</value>
+  </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>Seniman</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>Pengembang</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>Buka</value>
+  </data>
+  <data name="Dropdown_Modded" xml:space="preserve">
+    <value>Termodifikasi</value>
+  </data>
+  <data name="Dropdown_Vanilla" xml:space="preserve">
+    <value>Vanilla</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>Log Aplikasi</value>
+  </data>
+  <data name="Folder_CustomAlbums" xml:space="preserve">
+    <value>Album Kustom</value>
+  </data>
+  <data name="Folder_Mods" xml:space="preserve">
+    <value>Mod</value>
+  </data>
+  <data name="Folder_UserData" xml:space="preserve">
+    <value>Data Pengguna</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>Pustaka Pengguna</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>Beri Bintang di GitHub</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Menikmati Euterpe? Inilah cara Anda dapat membantu</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% Gratis &amp; Sumber Terbuka</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>Kunjungi</value>
+  </data>
+  <data name="InitializingMessage" xml:space="preserve">
+      <value>Menginisialisasi...</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>Memuat...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>Pemasangan MelonLoader diperlukan untuk bermain dengan mod</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>Mengunduh {0}: {1} MB</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>Terpasang</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>Belum Terpasang</value>
+  </data>
+  <data name="MelonLoader_State_Preparing" xml:space="preserve">
+    <value>Menyiapkan...</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
+    <value>Diperlukan untuk pengembangan mod</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
+    <value>.NET 10 SDK</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
+    <value>Memungkinkan build tools untuk menemukan file game</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
+    <value>Atur Variabel Lingkungan</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
+    <value>Buat akun untuk mengunggah dan mengelola mod Anda</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
+    <value>Untuk pembuatan proyek mod yang cepat</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
+    <value>Nuget Mod Template</value>
+  </data>
+  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
+    <value>Lingkungan Pengembangan</value>
+  </data>
+  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
+    <value>IDE yang Direkomendasikan</value>
+  </data>
+  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
+    <value>Kirim Mod</value>
+  </data>
+  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
+    <value>Belum Terpasang</value>
+  </data>
+  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
+    <value>Belum Diatur</value>
+  </data>
+  <data name="ModFilterType_All" xml:space="preserve">
+    <value>Semua</value>
+  </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>Dinonaktifkan</value>
+  </data>
+  <data name="ModFilterType_Enabled" xml:space="preserve">
+    <value>Diaktifkan</value>
+  </data>
+  <data name="ModFilterType_Incompatible" xml:space="preserve">
+    <value>Tidak Kompatibel</value>
+  </data>
+  <data name="ModFilterType_Installed" xml:space="preserve">
+    <value>Terpasang</value>
+  </data>
+  <data name="ModFilterType_Outdated" xml:space="preserve">
+    <value>Usang</value>
+  </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>Penulis</value>
+  </data>
+  <data name="ModInfo_Dependencies" xml:space="preserve">
+    <value>Dependensi</value>
+  </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>Repositori</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>Versi Loader yang Dibutuhkan</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>Versi Game yang Didukung</value>
+  </data>
+  <data name="ModState_Incompatible" xml:space="preserve">
+    <value>Tidak Kompatibel</value>
+  </data>
+  <data name="ModState_Modified" xml:space="preserve">
+    <value>Dimodifikasi</value>
+  </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>Lebih Baru</value>
+  </data>
+  <data name="ModState_Normal" xml:space="preserve">
+    <value>Terpasang</value>
+  </data>
+  <data name="ModState_Outdated" xml:space="preserve">
+    <value>Pembaruan Tersedia</value>
+  </data>
+  <data name="Page_Charting" xml:space="preserve">
+    <value>Charting</value>
+  </data>
+  <data name="Page_Home" xml:space="preserve">
+    <value>Beranda</value>
+  </data>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="Page_Modding" xml:space="preserve">
+    <value>Modding</value>
+  </data>
+  <data name="Page_Setting" xml:space="preserve">
+    <value>Pengaturan</value>
+  </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>Toolkit Chart</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>Kelola Chart</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>Log Aplikasi</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>Log MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>Pengembangan Mod</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>Kelola Mod</value>
+  </data>
+  <data name="Panel_Setting_About" xml:space="preserve">
+    <value>Tentang</value>
+  </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>Lanjutan</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>Tampilan</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>Unduh</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>Pengalaman</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>Manajemen File</value>
+  </data>
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
+    <value>Cari Chart  (Nama, Penulis, Charter)</value>
+  </data>
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
+    <value>Cari Mod  (Nama, Penulis)</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Selalu tampilkan scrollbar untuk daftar</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>Ini termasuk cache saat Anda mengunduh file. Jangan ubah ini saat sedang melakukan operasi lain</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>Cegah aplikasi keluar ketika terjadi eksepsi. (Aktifkan hanya jika Anda tahu apa yang Anda lakukan!)</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>Bahasa UI</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Folder executable Muse Dash</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>Apakah menampilkan konsol saat game diluncurkan</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>Apakah menampilkan layar mulai saat game diluncurkan</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Folder executable Steam</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Saluran pembaruan untuk euterpe</value>
+  </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Selalu Tampilkan ScrollBar</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>Folder Cache</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>Abaikan Eksepsi</value>
+  </data>
+  <data name="Setting_Title_Language" xml:space="preserve">
+    <value>Bahasa</value>
+  </data>
+  <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
+    <value>Folder Muse Dash</value>
+  </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>Tampilkan Konsol</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>Tampilkan Layar Mulai</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Folder Steam</value>
+  </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+    <value>Saluran Pembaruan</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>Prarilis</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>Stabil</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Edit Konfigurasi Mod</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Tionghoa Sederhana</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Tionghoa Tradisional</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Hungaria</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Korea</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Rusia</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Spanyol</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Konfirmasi</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>Lewati</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Pilih peran dan tugas Anda untuk memulai</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>Direkomendasikan untuk pembuat chart</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>Kustom</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>Sesuaikan pengaturan Anda</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>Modder</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>Direkomendasikan untuk pengembang mod</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>Pemain</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>Direkomendasikan untuk pemain biasa</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Tugas</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+    <value>Alat Charting (MDBMSC)</value>
+  </data>
+  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+    <value>Toolkit pembuatan chart MDM</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Diperlukan untuk pengembangan mod</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+    <value>Variabel MD_DIRECTORY</value>
+  </data>
+  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+    <value>Atur variabel lingkungan jalur game</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+    <value>Mod Esensial</value>
+  </data>
+  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+    <value>Mod inti untuk pengalaman terbaik</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+    <value>Framework mod loader yang diperlukan</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+    <value>Mod Template</value>
+  </data>
+  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+    <value>Template NuGet untuk proyek mod baru</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+    <value>Hapus Konflik</value>
+  </data>
+  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>Hapus mod yang tidak kompatibel</value>
+  </data>
+  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+    <value>Menyiapkan Euterpe</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Selamat Datang di Euterpe</value>
+  </data>
+</root>
