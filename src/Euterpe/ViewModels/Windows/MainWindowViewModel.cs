@@ -4,6 +4,8 @@ namespace Euterpe.ViewModels.Windows;
 
 public sealed partial class MainWindowViewModel : NavViewModelBase
 {
+    public const string WizardHostId = "WizardDialog";
+
     public override async Task InitializeAsync()
     {
         await base.InitializeAsync().ConfigureAwait(true);
@@ -12,7 +14,11 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         await LocalService.ReadGameInformationAsync().ConfigureAwait(true);
         LocalService.ReadMelonLoaderVersion();
         BindMuseDashAccountAsync().SafeFireAndForget();
-        await ShowWizardDialogAsync().ConfigureAwait(true);
+
+        if (!Config.SetupCompleted)
+        {
+            await ShowWizardDialogAsync().ConfigureAwait(true);
+        }
 
         NavigationService.Ready.Set();
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
@@ -20,12 +26,14 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     private async Task ShowWizardDialogAsync()
     {
+        Logger.ZLogInformation($"Showing setup wizard dialog");
+
         var options = new OverlayDialogOptions
         {
             Title = Wizard_Title_Welcome
         };
 
-        await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, "WizardDialog", options).ConfigureAwait(false);
+        await OverlayDialog.ShowStandardAsync<WizardDialog, WizardDialogViewModel>(WizardDialogViewModel, WizardHostId, options).ConfigureAwait(false);
     }
 
     private async Task BindMuseDashAccountAsync()
@@ -52,6 +60,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required AuthState AuthState { get; init; }
+
+    [UsedImplicitly]
+    public required Config Config { get; init; }
 
     [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }

@@ -130,14 +130,15 @@
             </StackPanel>
         </DockPanel>
 
+        <u:OverlayDialogHost
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HostId="{x:Static vm:MainWindowViewModel.WizardHostId}" />
+
         <TransitioningContentControl
             Grid.Column="1"
             Content="{Binding Content, Mode=OneWay}"
             Margin="10,40,0,0" />
-
-        <u:OverlayDialogHost
-            Grid.ColumnSpan="2"
-            HostId="WizardDialog" />
     </Grid>
 
 </u:UrsaWindow>
