@@ -126,6 +126,7 @@
                                     x:DataType="models:WizardOption">
                                     <CheckBox
                                         IsChecked="{Binding IsSelected}"
+                                        IsEnabled="{Binding !IsRequired, Mode=OneTime}"
                                         Margin="0,2"
                                         Padding="0">
                                         <StackPanel

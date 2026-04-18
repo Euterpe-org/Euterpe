@@ -10,6 +10,8 @@ public sealed partial class WizardOption(WizardOptionKinds kinds, LocalizedStrin
 
     public LocalizedString Description { get; } = description;
 
+    public bool IsRequired { get; init; }
+
     [ObservableProperty]
     public partial bool IsSelected { get; set; }
 }
