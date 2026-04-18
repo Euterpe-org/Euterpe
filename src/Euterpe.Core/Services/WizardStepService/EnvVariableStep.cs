@@ -9,8 +9,8 @@ internal sealed class EnvVariableStep : IWizardStep
 
     #endregion Injections
 
-    public WizardTaskKind Kind => WizardTaskKind.EnvVariable;
+    public WizardOptionKinds Kinds => WizardOptionKinds.EnvVariable;
 
-    public async Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default) =>
+    public async Task ExecuteAsync(CancellationToken cancellationToken = default) =>
         PlatformService.SetPathEnvironmentVariable();
 }

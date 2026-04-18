@@ -2,11 +2,11 @@ namespace Euterpe.Core;
 
 internal sealed class UninstallConflictsStep : IWizardStep
 {
-    public WizardTaskKind Kind => WizardTaskKind.UninstallConflicts;
+    public WizardOptionKinds Kinds => WizardOptionKinds.UninstallConflicts;
 
-    public Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default)
+    public Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogWarning($"WizardStep '{Kind}' not implemented yet");
+        Logger.ZLogWarning($"WizardStep '{Kinds}' not implemented yet");
         return Task.CompletedTask;
     }
 

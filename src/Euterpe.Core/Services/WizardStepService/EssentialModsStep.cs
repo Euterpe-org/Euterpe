@@ -2,12 +2,12 @@ namespace Euterpe.Core;
 
 internal sealed class EssentialModsStep : IWizardStep
 {
-    public WizardTaskKind Kind => WizardTaskKind.EssentialMods;
+    public WizardOptionKinds Kinds => WizardOptionKinds.EssentialMods;
 
-    public async Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
         await ModManageService.InitializeModsAsync().ConfigureAwait(false);
-        Logger.ZLogWarning($"WizardStep '{Kind}' not implemented yet");
+        Logger.ZLogWarning($"WizardStep '{Kinds}' not implemented yet");
     }
 
     #region Injections
