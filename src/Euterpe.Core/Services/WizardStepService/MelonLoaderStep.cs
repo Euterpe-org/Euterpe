@@ -2,11 +2,11 @@ namespace Euterpe.Core;
 
 internal sealed class MelonLoaderStep : IWizardStep
 {
-    public WizardTaskKind Kind => WizardTaskKind.MelonLoader;
+    public WizardOptionKinds Kinds => WizardOptionKinds.MelonLoader;
 
-    public async Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
-        await DependencyAcquireService.AcquireForMelonLoaderAsync(progress: progress, cancellationToken: cancellationToken).ConfigureAwait(false);
+        await DependencyAcquireService.AcquireForMelonLoaderAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
         LocalService.ReadMelonLoaderVersion();
     }

@@ -4,34 +4,36 @@ namespace Euterpe.ViewModels.Components;
 
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
-    private static readonly Dictionary<WizardIdentity, HashSet<WizardTaskKind>> Presets = new()
+    private static readonly Dictionary<WizardIdentity, WizardOptionKinds> Presets = new()
     {
-        [WizardIdentity.Player] =
-        [
-            WizardTaskKind.MelonLoader,
-            WizardTaskKind.EssentialMods,
-            WizardTaskKind.UninstallConflicts
-        ],
-        [WizardIdentity.Charter] =
-        [
-            WizardTaskKind.MelonLoader,
-            WizardTaskKind.EssentialMods,
-            WizardTaskKind.UninstallConflicts,
-            WizardTaskKind.ChartingTool
-        ],
-        [WizardIdentity.Modder] =
-        [
-            WizardTaskKind.MelonLoader,
-            WizardTaskKind.EssentialMods,
-            WizardTaskKind.UninstallConflicts,
-            WizardTaskKind.DotNetSdk,
-            WizardTaskKind.ModTemplate,
-            WizardTaskKind.EnvVariable
-        ]
+        [WizardIdentity.Player] = WizardOptionKinds.MelonLoader
+                                  | WizardOptionKinds.EssentialMods
+                                  | WizardOptionKinds.UninstallConflicts,
+        [WizardIdentity.Charter] = WizardOptionKinds.MelonLoader
+                                   | WizardOptionKinds.EssentialMods
+                                   | WizardOptionKinds.UninstallConflicts
+                                   | WizardOptionKinds.ChartingTool,
+        [WizardIdentity.Modder] = WizardOptionKinds.MelonLoader
+                                  | WizardOptionKinds.EssentialMods
+                                  | WizardOptionKinds.UninstallConflicts
+                                  | WizardOptionKinds.DotNetSdk
+                                  | WizardOptionKinds.ModTemplate
+                                  | WizardOptionKinds.EnvVariable
     };
 
     private bool _applyingPreset;
-    private Dictionary<WizardTaskKind, IWizardStep> _stepMap = null!;
+    private Dictionary<WizardOptionKinds, IWizardStep> _stepMap = null!;
+
+    public IReadOnlyList<WizardOption> Options { get; } =
+    [
+        new(WizardOptionKinds.MelonLoader, Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true },
+        new(WizardOptionKinds.EssentialMods, Wizard_Task_EssentialMods, Wizard_Task_EssentialMods_Description) { IsSelected = true },
+        new(WizardOptionKinds.UninstallConflicts, Wizard_Task_UninstallConflicts, Wizard_Task_UninstallConflicts_Description) { IsSelected = true },
+        new(WizardOptionKinds.ChartingTool, Wizard_Task_ChartingTool, Wizard_Task_ChartingTool_Description),
+        new(WizardOptionKinds.DotNetSdk, Wizard_Task_DotNetSdk, Wizard_Task_DotNetSdk_Description),
+        new(WizardOptionKinds.ModTemplate, Wizard_Task_ModTemplate, Wizard_Task_ModTemplate_Description),
+        new(WizardOptionKinds.EnvVariable, Wizard_Task_EnvVariable, Wizard_Task_EnvVariable_Description)
+    ];
 
     public static IReadOnlyList<WizardRole> Roles { get; } =
     [
@@ -41,25 +43,14 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         new(WizardIdentity.Custom, "Setting", Wizard_Role_Custom, Wizard_Role_Custom_Description, "#B45309")
     ];
 
-    public IReadOnlyList<WizardTask> Tasks { get; } =
-    [
-        new(WizardTaskKind.MelonLoader, Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true },
-        new(WizardTaskKind.EssentialMods, Wizard_Task_EssentialMods, Wizard_Task_EssentialMods_Description) { IsSelected = true },
-        new(WizardTaskKind.UninstallConflicts, Wizard_Task_UninstallConflicts, Wizard_Task_UninstallConflicts_Description) { IsSelected = true },
-        new(WizardTaskKind.ChartingTool, Wizard_Task_ChartingTool, Wizard_Task_ChartingTool_Description),
-        new(WizardTaskKind.DotNetSdk, Wizard_Task_DotNetSdk, Wizard_Task_DotNetSdk_Description),
-        new(WizardTaskKind.ModTemplate, Wizard_Task_ModTemplate, Wizard_Task_ModTemplate_Description),
-        new(WizardTaskKind.EnvVariable, Wizard_Task_EnvVariable, Wizard_Task_EnvVariable_Description)
-    ];
-
     [ObservableProperty]
-    public partial bool IsProgressPage { get; set; }
+    public partial bool IsSettingUp { get; set; }
 
     [ObservableProperty]
     public partial double Progress { get; set; }
 
     [ObservableProperty]
-    public partial string ProgressDescription { get; set; } = string.Empty;
+    public partial string ProgressLabel { get; set; } = string.Empty;
 
     public WizardRole SelectedRole
     {
@@ -69,7 +60,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public WizardDialogViewModel()
     {
-        Tasks.Select(t => t.ObservePropertyChanged(x => x.IsSelected))
+        Options.Select(t => t.ObservePropertyChanged(x => x.IsSelected))
             .Merge()
             .Where(this, (_, self) => !self._applyingPreset)
             .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(SelectedRole)));
@@ -83,7 +74,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     {
         await base.InitializeAsync().ConfigureAwait(false);
 
-        _stepMap = WizardSteps.ToDictionary(s => s.Kind);
+        _stepMap = WizardSteps.ToDictionary(s => s.Kinds);
 
         Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
@@ -98,12 +89,12 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private async Task ConfirmAsync()
     {
-        var tasks = Tasks.Where(t => t.IsSelected).ToArray();
-        IsProgressPage = true;
+        var options = Options.Where(t => t.IsSelected).ToArray();
+        IsSettingUp = true;
 
-        for (var i = 0; i < tasks.Length; i++)
+        for (var i = 0; i < options.Length; i++)
         {
-            await RunStepAsync(tasks[i], i + 1, tasks.Length).ConfigureAwait(true);
+            await RunStepAsync(options[i], i + 1, options.Length).ConfigureAwait(true);
         }
 
         Config.SetupCompleted = true;
@@ -111,26 +102,21 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         Close();
     }
 
-    private async Task RunStepAsync(WizardTask task, int index, int total)
+    private async Task RunStepAsync(WizardOption option, int index, int total)
     {
-        ProgressDescription = $"{task.DisplayName} ({index}/{total})";
+        ProgressLabel = $"{option.DisplayName} ({index}/{total})";
         Progress = (double)(index - 1) / total * 100;
 
-        if (!_stepMap.TryGetValue(task.Kind, out var step))
-        {
-            Logger.ZLogWarning($"No IWizardStep registered for '{task.Kind}'");
-            return;
-        }
-
-        Logger.ZLogInformation($"Running wizard step '{task.Kind}'");
+        Logger.ZLogInformation($"Running wizard step '{option.Kinds}'");
         try
         {
+            var step = _stepMap[option.Kinds];
             await step.ExecuteAsync().ConfigureAwait(true);
-            Logger.ZLogInformation($"Completed wizard step '{task.Kind}'");
+            Logger.ZLogInformation($"Completed wizard step '{option.Kinds}'");
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Wizard step '{task.Kind}' failed");
+            Logger.ZLogError(ex, $"Wizard step '{option.Kinds}' failed");
         }
 
         Progress = (double)index / total * 100;
@@ -138,7 +124,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     private void ApplyPreset(WizardIdentity identity)
     {
-        if (_applyingPreset)
+        if (identity is WizardIdentity.Custom)
         {
             return;
         }
@@ -146,12 +132,10 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         _applyingPreset = true;
         try
         {
-            if (Presets.TryGetValue(identity, out var preset))
+            var preset = Presets[identity];
+            foreach (var option in Options)
             {
-                foreach (var task in Tasks)
-                {
-                    task.IsSelected = preset.Contains(task.Kind);
-                }
+                option.IsSelected = preset.HasFlag(option.Kinds);
             }
         }
         finally
@@ -163,10 +147,13 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     private WizardIdentity ComputeIdentity()
     {
-        var selected = Tasks.Where(t => t.IsSelected).Select(t => t.Kind).ToHashSet();
+        var selected = Options.Where(t => t.IsSelected)
+            .Select(x => x.Kinds)
+            .Aggregate(WizardOptionKinds.None, (mask, k) => mask | k);
+
         foreach (var (identity, preset) in Presets)
         {
-            if (preset.SetEquals(selected))
+            if (preset == selected)
             {
                 return identity;
             }

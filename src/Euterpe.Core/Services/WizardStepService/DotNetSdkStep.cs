@@ -9,8 +9,8 @@ internal sealed class DotNetSdkStep : IWizardStep
 
     #endregion Injections
 
-    public WizardTaskKind Kind => WizardTaskKind.DotNetSdk;
+    public WizardOptionKinds Kinds => WizardOptionKinds.DotNetSdk;
 
-    public async Task ExecuteAsync(IProgress<double>? progress = null, CancellationToken cancellationToken = default) =>
+    public async Task ExecuteAsync(CancellationToken cancellationToken = default) =>
         await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(false);
 }
