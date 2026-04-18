@@ -80,13 +80,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     }
 
     [RelayCommand]
-    private void SkipWizard()
-    {
-        Config.SetupCompleted = true;
-        Close();
-    }
-
-    [RelayCommand]
     private async Task ConfirmAsync()
     {
         var options = Options.Where(t => t.IsSelected).ToArray();
