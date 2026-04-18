@@ -15,7 +15,6 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
     {
         await base.InitializeAsync().ConfigureAwait(true);
 
-        await SettingService.LoadAsync().ConfigureAwait(true);
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
@@ -63,9 +62,6 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
-    public required ISettingService SettingService { get; init; }
 
 #if RELEASE
     [UsedImplicitly]

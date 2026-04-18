@@ -6,6 +6,7 @@ public sealed partial class AppViewModel : ViewModelBase
     {
         await base.InitializeAsync().ConfigureAwait(false);
 
+        await SettingService.LoadAsync().ConfigureAwait(false);
 #if PUBLISH
         TelemetryService.TrackSessionAsync().SafeFireAndForget();
 #endif
@@ -23,6 +24,9 @@ public sealed partial class AppViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required ILogger<AppViewModel> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required ISettingService SettingService { get; init; }
 
 #if PUBLISH
     [UsedImplicitly]
