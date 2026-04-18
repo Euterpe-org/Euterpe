@@ -10,7 +10,10 @@ namespace Euterpe.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
 internal sealed partial class LinuxService : IPlatformService
 {
-    private const string DeepLinkDesktopFileName = "com.euterpe-org.Euterpe.desktop";
+    private const string AppId = "com.euterpe-org.Euterpe";
+    private const string DeepLinkDesktopFileName = $"{AppId}.desktop";
+    private const string IconAssetName = "Icon.png";
+    private const string IconHicolorSize = "256x256";
     private const string MuseDashRegistryPath = @"HKCU\Software\PeroPeroGames\MuseDash";
     private const string UserInfoValueName = "peropero_account_user_info_h3003705636";
 
@@ -25,17 +28,22 @@ internal sealed partial class LinuxService : IPlatformService
     {
         try
         {
-            var applicationsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "applications");
+            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var applicationsPath = Path.Combine(localAppData, "applications");
             var desktopFilePath = Path.Combine(applicationsPath, DeepLinkDesktopFileName);
             Directory.CreateDirectory(applicationsPath);
+
+            await ExtractIconAsync(localAppData).ConfigureAwait(false);
 
             var content =
                 $"""
                  [Desktop Entry]
                  Type=Application
-                 Name=Euterpe
+                 Name={AppName}
                  Exec="{processPath.EscapeDesktopExecArgument()}" %u
+                 Icon={AppId}
                  MimeType=x-scheme-handler/{IPlatformService.DeepLinkScheme};
+                 StartupWMClass={AppName}
                  Terminal=false
                  """;
 
@@ -124,6 +132,9 @@ internal sealed partial class LinuxService : IPlatformService
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public required IResourceService ResourceService { get; init; }
 
     #endregion Injections
 }
