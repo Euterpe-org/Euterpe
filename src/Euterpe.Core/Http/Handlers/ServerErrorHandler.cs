@@ -3,7 +3,7 @@ namespace Euterpe.Core.Http.Handlers;
 internal sealed class ServerErrorHandler(IServiceProvider services, ILogger<ServerErrorHandler> logger) : DelegatingHandler
 {
     private static readonly TimeSpan DebounceWindow = TimeSpan.FromSeconds(30);
-    private static long LastNotifiedTicks;
+    private static long LastNotifiedTimestamp;
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
@@ -19,14 +19,14 @@ internal sealed class ServerErrorHandler(IServiceProvider services, ILogger<Serv
 
     private void NotifyIfNeeded(HttpRequestMessage request, HttpResponseMessage response)
     {
-        var nowTicks = DateTime.UtcNow.Ticks;
-        var lastTicks = Interlocked.Read(ref LastNotifiedTicks);
-        if (new TimeSpan(nowTicks - lastTicks) < DebounceWindow)
+        var now = Stopwatch.GetTimestamp();
+        var last = Interlocked.Read(ref LastNotifiedTimestamp);
+        if (last != 0 && Stopwatch.GetElapsedTime(last, now) < DebounceWindow)
         {
             return;
         }
 
-        if (Interlocked.CompareExchange(ref LastNotifiedTicks, nowTicks, lastTicks) != lastTicks)
+        if (Interlocked.CompareExchange(ref LastNotifiedTimestamp, now, last) != last)
         {
             return;
         }
