@@ -11,6 +11,13 @@ internal sealed class EnvVariableStep : IWizardStep
 
     public WizardOptionKinds Kinds => WizardOptionKinds.EnvVariable;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default) =>
+    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    {
+        if (PlatformService.CheckPathEnvironmentVariableSet())
+        {
+            return;
+        }
+
         PlatformService.SetPathEnvironmentVariable();
+    }
 }

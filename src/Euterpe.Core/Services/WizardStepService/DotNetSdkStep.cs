@@ -11,6 +11,13 @@ internal sealed class DotNetSdkStep : IWizardStep
 
     public WizardOptionKinds Kinds => WizardOptionKinds.DotNetSdk;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default) =>
+    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    {
+        if (await PlatformService.CheckDotNetSdkInstalledAsync().ConfigureAwait(false))
+        {
+            return;
+        }
+
         await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(false);
+    }
 }
