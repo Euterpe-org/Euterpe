@@ -1,7 +1,3 @@
 ﻿namespace Euterpe.Styles.Models;
 
-public sealed class ContributorGroup(string groupName, ContributorCardItem[] contributors)
-{
-    public LocalizedString GroupName { get; } = groupName;
-    public ContributorCardItem[] Contributors { get; } = contributors;
-}
+public sealed record ContributorGroup(LocalizedString GroupName, ContributorCardItem[] Contributors);
