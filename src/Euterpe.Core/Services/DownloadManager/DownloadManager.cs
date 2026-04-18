@@ -56,11 +56,14 @@ internal sealed partial class DownloadManager : IDownloadManager
         try
         {
             var stream = await DownloadClient.GetStreamAsync(downloadUrl, cancellationToken).ConfigureAwait(false);
-            var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
-            await using (fs.ConfigureAwait(false))
+            await using (stream.ConfigureAwait(false))
             {
-                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-                return true;
+                var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
+                await using (fs.ConfigureAwait(false))
+                {
+                    await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
+                    return true;
+                }
             }
         }
         catch (Exception ex)
