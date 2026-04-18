@@ -92,17 +92,29 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         var options = Options.Where(t => t.IsSelected).ToArray();
         IsSettingUp = true;
 
+        var failed = new List<WizardOption>();
+
         for (var i = 0; i < options.Length; i++)
         {
-            await RunStepAsync(options[i], i + 1, options.Length).ConfigureAwait(true);
+            if (!await RunStepAsync(options[i], i + 1, options.Length).ConfigureAwait(true))
+            {
+                failed.Add(options[i]);
+            }
         }
 
-        Config.SetupCompleted = true;
-        await SettingService.SaveAsync().ConfigureAwait(true);
+        if (failed.Count is 0)
+        {
+            Config.SetupCompleted = true;
+        }
+        else
+        {
+            Logger.ZLogWarning($"Wizard setup incomplete, {failed.Count} step(s) failed: {string.Join(", ", failed.Select(f => f.Kinds))}");
+        }
+
         Close();
     }
 
-    private async Task RunStepAsync(WizardOption option, int index, int total)
+    private async Task<bool> RunStepAsync(WizardOption option, int index, int total)
     {
         ProgressLabel = $"{option.DisplayName} ({index}/{total})";
         Progress = (double)(index - 1) / total * 100;
@@ -113,13 +125,15 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             var step = _stepMap[option.Kinds];
             await step.ExecuteAsync().ConfigureAwait(true);
             Logger.ZLogInformation($"Completed wizard step '{option.Kinds}'");
+            Progress = (double)index / total * 100;
+            return true;
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Wizard step '{option.Kinds}' failed");
+            Progress = (double)index / total * 100;
+            return false;
         }
-
-        Progress = (double)index / total * 100;
     }
 
     private void ApplyPreset(WizardIdentity identity)
