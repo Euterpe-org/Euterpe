@@ -97,6 +97,12 @@ Probeer handmatig te verwijderen</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>Installatie van MelonLoader mislukt: {0}</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
+    <value>MelonLoader is niet geïnstalleerd. Het is vereist om mods te draaien — installeer het om door te gaan.</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
+    <value>Uw MelonLoader ({0}) is ouder dan de aanbevolen versie ({1}). Werk bij voor de beste ervaring.</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader is succesvol geïnstalleerd</value>
   </data>

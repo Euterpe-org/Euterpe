@@ -96,6 +96,12 @@
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>安裝 MelonLoader 失敗：{0}</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
+    <value>尚未安裝 MelonLoader，它是執行模組所必需的，請先安裝。</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
+    <value>當前 MelonLoader 版本 ({0}) 低於推薦版本 ({1})，請升級以獲得最佳體驗。</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader 安裝成功</value>
   </data>

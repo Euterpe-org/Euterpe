@@ -97,6 +97,12 @@ Pokušaj obrisati ručno</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>Instalacija MelonLoadera nije uspjela: {0}</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
+    <value>MelonLoader nije instaliran. Potreban je za pokretanje modova — instalirajte ga za nastavak.</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
+    <value>Vaš MelonLoader ({0}) stariji je od preporučene verzije ({1}). Nadogradite ga za najbolje iskustvo.</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader je uspješno instaliran</value>
   </data>

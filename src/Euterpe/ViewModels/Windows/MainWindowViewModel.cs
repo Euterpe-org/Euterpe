@@ -1,4 +1,5 @@
 using Euterpe.Core.Http.Clients;
+using Semver;
 
 namespace Euterpe.ViewModels.Windows;
 
@@ -21,6 +22,8 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         }
 
         NavigationService.Ready.Set();
+        CheckMelonLoaderAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to check MelonLoader version"));
+
         Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 
@@ -56,6 +59,35 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
         }
     }
 
+    private async Task CheckMelonLoaderAsync()
+    {
+        if (Config.MelonLoaderSemVersion is not { } localVersion)
+        {
+            Logger.ZLogInformation($"MelonLoader not installed, prompting user");
+
+            await MessageBoxService.NoticeAsync(MessageBox_Content_MelonLoader_NotInstalled).ConfigureAwait(true);
+            await NavigationService.NavigateToAsync("/modding/melonloader").ConfigureAwait(false);
+            return;
+        }
+
+        var version = await DependencyAcquireService.GetLatestMelonLoaderVersionAsync().ConfigureAwait(true);
+        if (!SemVersion.TryParse(version, out var latestVersion))
+        {
+            Logger.ZLogWarning($"Failed to parse MelonLoader version {version}");
+            return;
+        }
+
+        if (localVersion.ComparePrecedenceTo(latestVersion) >= 0)
+        {
+            return;
+        }
+
+        Logger.ZLogInformation($"MelonLoader outdated: {localVersion} < {latestVersion}, prompting user");
+
+        await MessageBoxService.NoticeAsync(MessageBox_Content_MelonLoader_Outdated, localVersion, latestVersion).ConfigureAwait(true);
+        await NavigationService.NavigateToAsync("/modding/melonloader").ConfigureAwait(true);
+    }
+
     #region Injections
 
     [UsedImplicitly]
@@ -69,6 +101,12 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }
+
+    [UsedImplicitly]
+    public required IDependencyAcquireService DependencyAcquireService { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
     public required ISettingService SettingService { get; init; }

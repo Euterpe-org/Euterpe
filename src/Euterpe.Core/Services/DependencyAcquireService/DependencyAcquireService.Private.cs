@@ -1,7 +1,12 @@
+using Euterpe.Contracts.Distribution;
+
 namespace Euterpe.Core;
 
 internal sealed partial class DependencyAcquireService
 {
+    private async Task<Dependency[]> GetDependenciesAsync(CancellationToken cancellationToken) =>
+        _cachedDependencies ??= await DistributionClient.GetLatestDependenciesAsync(true, cancellationToken).ConfigureAwait(false);
+
     private async Task EnsureValidAsync(
         DependencySpec spec,
         EventHandler<DownloadStartedEventArgs>? onDownloadStarted = null,

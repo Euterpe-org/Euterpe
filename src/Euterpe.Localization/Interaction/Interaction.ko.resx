@@ -96,6 +96,12 @@
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>MelonLoader 설치에 실패했습니다: {0}</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
+    <value>MelonLoader가 설치되지 않았습니다. 모드를 실행하려면 필수이므로 설치해 주세요.</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
+    <value>현재 MelonLoader 버전({0})이 권장 버전({1})보다 낮습니다. 최상의 경험을 위해 업그레이드해 주세요.</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader가 설치되었습니다</value>
   </data>
