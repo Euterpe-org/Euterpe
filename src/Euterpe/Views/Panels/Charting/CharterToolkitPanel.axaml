@@ -14,17 +14,11 @@
         <vm:CharterToolkitPanelViewModel />
     </Design.DataContext>
 
-    <Grid
-        ColumnDefinitions="*,*">
-        <Button
-            Grid.Column="0"
-            Command="{Binding CreateMdmFilesCommand}"
-            Content="Create MDM Files" />
-
-        <Button
-            Grid.Column="1"
-            Command="{Binding ExtractMdmFilesCommand}"
-            Content="Extract MDM Files" />
-    </Grid>
+    <TextBlock
+        HorizontalAlignment="Center"
+        TextAlignment="Center"
+        VerticalAlignment="Center">
+        CharterToolkitPanel still work in progress...
+    </TextBlock>
 
 </UserControl>
