@@ -9,7 +9,7 @@
         <RefitVersion>10.1.6</RefitVersion>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
         <TUnitVersion>1.36.0</TUnitVersion>
-        <UrsaVersion>2.0.0-rc1</UrsaVersion>
+        <UrsaVersion>2.0.0-rc2</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-rc.1"/>
