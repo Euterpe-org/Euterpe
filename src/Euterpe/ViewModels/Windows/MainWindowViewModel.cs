@@ -33,7 +33,10 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
         var options = new OverlayDialogOptions
         {
-            Title = Wizard_Title_Welcome
+            Title = Wizard_Title_Welcome,
+            CanDragMove = false,
+            CanResize = false,
+            IsCloseButtonVisible = false
         };
 
         await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, WizardHostId, options).ConfigureAwait(false);
