@@ -1,10 +1,12 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
+using Euterpe.Shared.Threading;
 
 namespace Euterpe.Core;
 
 internal sealed partial class ModManageService : IModManageService
 {
     private readonly Lazy<Task> _initTask;
+    private readonly SingleFlight<string> _singleFlight = new();
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
 
@@ -17,47 +19,20 @@ internal sealed partial class ModManageService : IModManageService
     public ModDto? FindModByName(string name) =>
         _sourceCache.Lookup(name) is { HasValue: true, Value: var mod } ? mod : null;
 
-    public async Task InstallModAsync(ModDto mod)
-    {
-        Logger.ZLogInformation($"Installing mod: {mod.Name}");
-        await DownloadModCoreAsync(mod).ConfigureAwait(true);
-        Logger.ZLogInformation($"Mod {mod.Name} successfully installed");
-        NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, mod.Name);
-    }
+    public Task InstallModAsync(ModDto mod) =>
+        _singleFlight.RunAsync(mod.Name, () => InstallModCoreAsync(mod));
 
-    public async Task UpdateModAsync(ModDto mod)
-    {
-        Logger.ZLogInformation($"Updating mod: {mod.Name} from version {mod.LocalVersion} to version {mod.Version}");
-        File.Delete(Path.Combine(Config.ModsFolder, mod.LocalFileName));
-        await DownloadModCoreAsync(mod).ConfigureAwait(true);
-        Logger.ZLogInformation($"Mod {mod.Name} successfully updated to version {mod.Version}");
-        NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, mod.Name);
-    }
+    public Task UpdateModAsync(ModDto mod) =>
+        _singleFlight.RunAsync(mod.Name, () => UpdateModCoreAsync(mod));
 
-    public async Task ReinstallModAsync(ModDto mod)
-    {
-        Logger.ZLogInformation($"Reinstalling mod: {mod.Name}");
-        File.Delete(Path.Combine(Config.ModsFolder, mod.LocalFileName));
-        await DownloadModCoreAsync(mod).ConfigureAwait(true);
-        Logger.ZLogInformation($"Mod {mod.Name} successfully reinstalled");
-        NotificationService.SuccessLight(Notification_Content_Mod_Reinstall_Success, mod.Name);
-    }
+    public Task ReinstallModAsync(ModDto mod) =>
+        _singleFlight.RunAsync(mod.Name, () => ReinstallModCoreAsync(mod));
 
-    public async Task UninstallModAsync(ModDto mod)
-    {
-        Logger.ZLogInformation($"Uninstalling mod: {mod.Name}");
-        File.Delete(Path.Combine(Config.ModsFolder, mod.LocalFileName));
-        await DisableModDependentsAsync(mod).ConfigureAwait(true);
-        mod.RemoveLocalInfo();
-        Logger.ZLogInformation($"Mod {mod.Name} successfully uninstalled");
-        NotificationService.SuccessLight(Notification_Content_Mod_Uninstall_Success, mod.Name);
-    }
+    public Task UninstallModAsync(ModDto mod) =>
+        _singleFlight.RunAsync(mod.Name, () => UninstallModCoreAsync(mod));
 
-    public Task ToggleModAsync(ModDto mod)
-    {
-        Logger.ZLogInformation($"Toggling mod: {mod.Name}");
-        return mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
-    }
+    public Task ToggleModAsync(ModDto mod) =>
+        _singleFlight.RunAsync(mod.Name, () => ToggleModCoreAsync(mod));
 
     #region Injections
 

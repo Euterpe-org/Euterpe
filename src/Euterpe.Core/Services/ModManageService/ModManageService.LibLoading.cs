@@ -47,7 +47,10 @@ internal sealed partial class ModManageService
         }
     }
 
-    private async Task DownloadLibAsync(LibDto lib)
+    private Task DownloadLibAsync(LibDto lib) =>
+        _singleFlight.RunAsync(lib.Name, () => DownloadLibCoreAsync(lib));
+
+    private async Task DownloadLibCoreAsync(LibDto lib)
     {
         await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
         _libsDict[lib.Name] = await LocalService.LoadLibFromPathAsync(Path.Combine(Config.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
