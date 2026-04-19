@@ -89,11 +89,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     private async Task UninstallModAsync(ModDto mod) => await ModManageService.UninstallModAsync(mod).ConfigureAwait(false);
 
     [RelayCommand]
-    private Task ToggleModAsync(ModDto mod)
-    {
-        Logger.ZLogInformation($"Toggling mod: {mod.Name}");
-        return ModManageService.ToggleModAsync(mod);
-    }
+    private async Task ToggleModAsync(ModDto mod) => await ModManageService.ToggleModAsync(mod).ConfigureAwait(false);
 
     partial void OnSelectedModFilterIndexChanged(int value)
     {

@@ -53,7 +53,11 @@ internal sealed partial class ModManageService : IModManageService
         NotificationService.SuccessLight(Notification_Content_Mod_Uninstall_Success, mod.Name);
     }
 
-    public Task ToggleModAsync(ModDto mod) => mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
+    public Task ToggleModAsync(ModDto mod)
+    {
+        Logger.ZLogInformation($"Toggling mod: {mod.Name}");
+        return mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
+    }
 
     #region Injections
 
