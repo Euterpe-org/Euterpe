@@ -51,6 +51,20 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
+    public bool TryMoveFile(string sourcePath, string destinationPath)
+    {
+        try
+        {
+            File.Move(sourcePath, destinationPath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to move file from {sourcePath} to {destinationPath}");
+            return false;
+        }
+    }
+
     public bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
         if (deleteOption is DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))

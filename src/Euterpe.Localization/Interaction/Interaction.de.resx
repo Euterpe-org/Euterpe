@@ -170,6 +170,9 @@ Bitte lösche sie manuell</value>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich neu installiert</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>Status von Mod {0} konnte nicht umgeschaltet werden</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>Mod {0} konnte nicht deinstalliert werden</value>
   </data>

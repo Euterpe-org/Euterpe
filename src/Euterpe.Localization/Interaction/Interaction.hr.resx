@@ -171,6 +171,9 @@ Pokušaj obrisati ručno</value>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} uspješno ponovno instaliran</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>Promjena stanja moda {0} nije uspjela</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>Mod {0} nije uspješno deinstaliran</value>
   </data>

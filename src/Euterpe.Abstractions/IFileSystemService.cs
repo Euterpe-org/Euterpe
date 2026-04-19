@@ -11,6 +11,8 @@ public interface IFileSystemService
 
     bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
 
+    bool TryMoveFile(string sourcePath, string destinationPath);
+
     /// <summary>
     ///     Provides logging besides normal checking
     /// </summary>

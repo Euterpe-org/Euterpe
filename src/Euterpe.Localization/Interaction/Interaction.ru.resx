@@ -171,6 +171,9 @@
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Мод {0} успешно переустановлен</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>Не удалось переключить состояние мода {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>Не удалось удалить мод {0}</value>
   </data>

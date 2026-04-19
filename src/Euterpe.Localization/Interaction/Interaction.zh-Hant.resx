@@ -170,6 +170,9 @@
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>模組 {0} 重新安裝成功</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>切換模組 {0} 狀態失敗</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>模組 {0} 解除安裝失敗</value>
   </data>

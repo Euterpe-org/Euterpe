@@ -171,6 +171,9 @@ Intenta eliminarlo manualmente</value>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} reinstalado correctamente</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>Error al cambiar el estado del mod {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>Error al desinstalar el mod {0}</value>
   </data>

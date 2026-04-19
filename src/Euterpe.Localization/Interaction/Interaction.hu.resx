@@ -171,6 +171,9 @@ Próbáld meg kézileg törölni</value>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>{0} mod sikeresen újratelepítve</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>{0} mod állapotának váltása sikertelen</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>{0} mod eltávolítása sikertelen</value>
   </data>

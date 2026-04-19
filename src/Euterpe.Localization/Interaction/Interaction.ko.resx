@@ -170,6 +170,9 @@
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>모드 {0}이(가) 재설치되었습니다</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>모드 {0} 상태 전환에 실패했습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>모드 {0} 제거에 실패했습니다</value>
   </data>

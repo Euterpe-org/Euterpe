@@ -170,6 +170,9 @@ OK をクリックしてインストールします</value>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} の再インストールが完了しました</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>Mod {0} の状態切り替えに失敗しました</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
     <value>Mod {0} のアンインストールに失敗しました</value>
   </data>
