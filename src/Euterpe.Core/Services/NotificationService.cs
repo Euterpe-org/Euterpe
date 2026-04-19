@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Notifications;
+using Avalonia.Threading;
 using Notification = Ursa.Controls.Notification;
 using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
@@ -13,18 +14,30 @@ internal sealed class NotificationService : INotificationService
 
     #endregion Injections
 
+    private void Show(Notification notification, NotificationType type, string[]? classes = null)
+    {
+        if (Dispatcher.UIThread.CheckAccess())
+        {
+            WindowNotificationManager.Show(notification, type, classes: classes);
+        }
+        else
+        {
+            Dispatcher.UIThread.Post(() => WindowNotificationManager.Show(notification, type, classes: classes));
+        }
+    }
+
     #region Success
 
     // Normal
     public void Success(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Success, content), NotificationType.Success);
+        Show(new Notification(Title_Success, content), NotificationType.Success);
 
     public void Success(string content, params ReadOnlySpan<object> args) =>
         Success(string.Format(content, args));
 
     // Light
     public void SuccessLight(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Success, content), NotificationType.Success, classes: ["Light"]);
+        Show(new Notification(Title_Success, content), NotificationType.Success, ["Light"]);
 
     public void SuccessLight(string content, params ReadOnlySpan<object> args) =>
         SuccessLight(string.Format(content, args));
@@ -35,14 +48,14 @@ internal sealed class NotificationService : INotificationService
 
     // Normal
     public void Notice(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Notice, content), NotificationType.Information);
+        Show(new Notification(Title_Notice, content), NotificationType.Information);
 
     public void Notice(string content, params ReadOnlySpan<object> args) =>
         Notice(string.Format(content, args));
 
     // Light
     public void NoticeLight(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Notice, content), NotificationType.Information, classes: ["Light"]);
+        Show(new Notification(Title_Notice, content), NotificationType.Information, ["Light"]);
 
     public void NoticeLight(string content, params ReadOnlySpan<object> args) =>
         NoticeLight(string.Format(content, args));
@@ -53,14 +66,14 @@ internal sealed class NotificationService : INotificationService
 
     // Normal
     public void Error(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Error, content), NotificationType.Error);
+        Show(new Notification(Title_Error, content), NotificationType.Error);
 
     public void Error(string content, params ReadOnlySpan<object> args) =>
         Error(string.Format(content, args));
 
     // Light
     public void ErrorLight(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Error, content), NotificationType.Error, classes: ["Light"]);
+        Show(new Notification(Title_Error, content), NotificationType.Error, ["Light"]);
 
     public void ErrorLight(string content, params ReadOnlySpan<object> args) =>
         ErrorLight(string.Format(content, args));
@@ -71,14 +84,14 @@ internal sealed class NotificationService : INotificationService
 
     // Normal
     public void Warning(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Warning, content), NotificationType.Warning);
+        Show(new Notification(Title_Warning, content), NotificationType.Warning);
 
     public void Warning(string content, params ReadOnlySpan<object> args) =>
         Warning(string.Format(content, args));
 
     // Light
     public void WarningLight(string content) =>
-        WindowNotificationManager.Show(new Notification(Title_Warning, content), NotificationType.Warning, classes: ["Light"]);
+        Show(new Notification(Title_Warning, content), NotificationType.Warning, ["Light"]);
 
     public void WarningLight(string content, params ReadOnlySpan<object> args) =>
         WarningLight(string.Format(content, args));

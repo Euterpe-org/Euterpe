@@ -76,19 +76,19 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         return PlatformService.OpenFileAsync(Path.Combine(Config.UserDataFolder, SelectedMod.ConfigFile));
     }
 
-    [RelayCommand]
+    [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task InstallModAsync(ModDto mod) => await ModManageService.InstallModAsync(mod).ConfigureAwait(false);
 
-    [RelayCommand]
+    [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task UpdateModAsync(ModDto mod) => await ModManageService.UpdateModAsync(mod).ConfigureAwait(false);
 
-    [RelayCommand]
+    [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task ReinstallModAsync(ModDto mod) => await ModManageService.ReinstallModAsync(mod).ConfigureAwait(false);
 
-    [RelayCommand]
+    [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task UninstallModAsync(ModDto mod) => await ModManageService.UninstallModAsync(mod).ConfigureAwait(false);
 
-    [RelayCommand]
+    [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task ToggleModAsync(ModDto mod) => await ModManageService.ToggleModAsync(mod).ConfigureAwait(false);
 
     partial void OnSelectedModFilterIndexChanged(int value)
