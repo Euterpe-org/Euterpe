@@ -99,6 +99,7 @@ internal sealed partial class ModManageService
 
         await DisableModDependentsAsync(mod).ConfigureAwait(false);
         mod.RemoveLocalInfo();
+
         Logger.ZLogInformation($"Mod {mod.Name} successfully uninstalled");
         NotificationService.SuccessLight(Notification_Content_Mod_Uninstall_Success, mod.Name);
     }
