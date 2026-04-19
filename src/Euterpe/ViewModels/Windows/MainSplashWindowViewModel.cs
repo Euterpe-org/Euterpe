@@ -4,6 +4,8 @@ namespace Euterpe.ViewModels.Windows;
 
 public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 {
+    public AsyncManualResetEvent Ready { get; } = new(false);
+
     public void Close()
     {
         RequestClose?.Invoke(this, EventArgs.Empty);
@@ -28,6 +30,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 
         await AuthService.Ready.WaitAsync().ConfigureAwait(true);
 
+        Ready.Set();
         Close();
     }
 
