@@ -91,7 +91,7 @@ internal sealed partial class DownloadManager : IDownloadManager
     {
         try
         {
-            await DownloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken).ConfigureAwait(true);
+            await DownloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken).ConfigureAwait(false);
             return true;
         }
         catch (Exception ex)
