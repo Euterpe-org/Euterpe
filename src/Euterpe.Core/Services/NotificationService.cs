@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls.Notifications;
+using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
 using Notification = Ursa.Controls.Notification;
 using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
@@ -7,10 +7,12 @@ namespace Euterpe.Core;
 
 internal sealed class NotificationService : INotificationService
 {
+    private WindowNotificationManager NotificationManager => NotificationManagerFactory();
+
     #region Injections
 
     [UsedImplicitly]
-    public required WindowNotificationManager WindowNotificationManager { get; init; }
+    public required Func<WindowNotificationManager> NotificationManagerFactory { get; init; }
 
     #endregion Injections
 
@@ -18,11 +20,11 @@ internal sealed class NotificationService : INotificationService
     {
         if (Dispatcher.UIThread.CheckAccess())
         {
-            WindowNotificationManager.Show(notification, type, classes: classes);
+            NotificationManager.Show(notification, type, classes: classes);
         }
         else
         {
-            Dispatcher.UIThread.Post(() => WindowNotificationManager.Show(notification, type, classes: classes));
+            Dispatcher.UIThread.Post(() => NotificationManager.Show(notification, type, classes: classes));
         }
     }
 

@@ -1,4 +1,5 @@
 using Euterpe.Core.Proxies;
+using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace Euterpe.Extensions;
 
@@ -15,7 +16,10 @@ public static partial class ServiceExtensions
         builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
 
         // TopLevel
-        builder.Register<TopLevel>(_ => GetCurrentMainWindow().GetTopLevel()).InstancePerDependency();
+        builder.Register<TopLevel>(ctx => ctx.Resolve<MainWindow>()).SingleInstance();
         builder.RegisterType<TopLevelProxy>().SingleInstance();
+
+        // Notification
+        builder.Register<WindowNotificationManager>(ctx => ctx.Resolve<MainWindow>().Notifier).SingleInstance();
     }
 }

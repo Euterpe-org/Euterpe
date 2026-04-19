@@ -92,7 +92,6 @@ public static class CoreServiceExtensions
         {
             builder.RegisterType<AuthState>().SingleInstance();
             builder.RegisterType<Config>().SingleInstance();
-            builder.RegisterType<WindowNotificationManager>().SingleInstance();
 
             builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
