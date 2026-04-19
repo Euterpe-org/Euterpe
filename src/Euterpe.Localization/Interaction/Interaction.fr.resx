@@ -159,14 +159,26 @@ Essayez de le supprimer manuellement</value>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>La variable d'environnement MD_DIRECTORY a été définie à {0}</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Échec de l'installation du mod {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} installé avec succès</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>Échec de la réinstallation du mod {0}</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} réinstallé avec succès</value>
   </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>Échec de la désinstallation du mod {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} désinstallé avec succès</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>Échec de la mise à jour du mod {0}</value>
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} mis à jour avec succès</value>

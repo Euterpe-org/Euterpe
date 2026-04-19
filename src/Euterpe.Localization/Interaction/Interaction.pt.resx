@@ -162,14 +162,26 @@ Tente excluir manualmente</value>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Variável de ambiente MD_DIRECTORY definida com sucesso para {0}</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Falha ao instalar o mod {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} instalado com sucesso</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>Falha ao reinstalar o mod {0}</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} reinstalado com sucesso</value>
   </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>Falha ao desinstalar o mod {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} desinstalado com sucesso</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>Falha ao atualizar o mod {0}</value>
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} atualizado com sucesso</value>

@@ -158,14 +158,26 @@ Bitte lösche sie manuell</value>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Umgebungsvariable MD_DIRECTORY wurde auf {0} gesetzt</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Mod {0} konnte nicht installiert werden</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich installiert</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>Mod {0} konnte nicht neu installiert werden</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich neu installiert</value>
   </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>Mod {0} konnte nicht deinstalliert werden</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich deinstalliert</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>Mod {0} konnte nicht aktualisiert werden</value>
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich aktualisiert</value>

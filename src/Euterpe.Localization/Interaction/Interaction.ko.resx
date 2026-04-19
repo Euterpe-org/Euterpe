@@ -158,14 +158,26 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>환경 변수 MD_DIRECTORY가 {0}(으)로 설정되었습니다</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>모드 {0} 설치에 실패했습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>모드 {0}이(가) 설치되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>모드 {0} 재설치에 실패했습니다</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>모드 {0}이(가) 재설치되었습니다</value>
   </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>모드 {0} 제거에 실패했습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>모드 {0}이(가) 제거되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>모드 {0} 업데이트에 실패했습니다</value>
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>모드 {0}이(가) 업데이트되었습니다</value>

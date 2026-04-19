@@ -158,14 +158,26 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>已成功将 MD_DIRECTORY 环境变量设置为 {0}</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>模组 {0} 安装失败</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>模组 {0} 安装成功</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>模组 {0} 重装失败</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>模组 {0} 重装成功</value>
   </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>模组 {0} 卸载失败</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>模组 {0} 卸载成功</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>模组 {0} 更新失败</value>
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>模组 {0} 更新成功</value>

@@ -43,6 +43,9 @@ internal sealed partial class ModManageService : IModManageService
     public required IDownloadManager DownloadManager { get; init; }
 
     [UsedImplicitly]
+    public required IFileSystemService FileSystemService { get; init; }
+
+    [UsedImplicitly]
     public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]

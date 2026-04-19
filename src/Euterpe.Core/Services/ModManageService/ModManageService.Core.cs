@@ -13,18 +13,31 @@ internal sealed partial class ModManageService
         await LoadModsAsync().ConfigureAwait(false);
     }
 
-    private async Task DownloadModCoreAsync(ModDto mod)
+    private async Task<bool> DownloadModCoreAsync(ModDto mod)
     {
-        await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
+        if (!await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false))
+        {
+            return false;
+        }
+
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
+
+        return true;
     }
 
     private async Task InstallModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Installing mod: {mod.Name}");
-        await DownloadModCoreAsync(mod).ConfigureAwait(false);
+
+        if (!await DownloadModCoreAsync(mod).ConfigureAwait(false))
+        {
+            Logger.ZLogError($"Failed to install mod {mod.Name}: download failed");
+            NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, mod.Name);
+            return;
+        }
+
         Logger.ZLogInformation($"Mod {mod.Name} successfully installed");
         NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, mod.Name);
     }
@@ -32,8 +45,21 @@ internal sealed partial class ModManageService
     private async Task UpdateModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Updating mod: {mod.Name} from version {mod.LocalVersion} to version {mod.Version}");
-        File.Delete(Path.Combine(Config.ModsFolder, mod.LocalFileName));
-        await DownloadModCoreAsync(mod).ConfigureAwait(false);
+
+        if (!FileSystemService.TryDeleteFile(Path.Combine(Config.ModsFolder, mod.LocalFileName)))
+        {
+            Logger.ZLogError($"Failed to update mod {mod.Name}: could not delete existing file {mod.LocalFileName}");
+            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, mod.Name);
+            return;
+        }
+
+        if (!await DownloadModCoreAsync(mod).ConfigureAwait(false))
+        {
+            Logger.ZLogError($"Failed to update mod {mod.Name}: download failed");
+            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, mod.Name);
+            return;
+        }
+
         Logger.ZLogInformation($"Mod {mod.Name} successfully updated to version {mod.Version}");
         NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, mod.Name);
     }
@@ -41,8 +67,21 @@ internal sealed partial class ModManageService
     private async Task ReinstallModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Reinstalling mod: {mod.Name}");
-        File.Delete(Path.Combine(Config.ModsFolder, mod.LocalFileName));
-        await DownloadModCoreAsync(mod).ConfigureAwait(false);
+
+        if (!FileSystemService.TryDeleteFile(Path.Combine(Config.ModsFolder, mod.LocalFileName)))
+        {
+            Logger.ZLogError($"Failed to reinstall mod {mod.Name}: could not delete existing file {mod.LocalFileName}");
+            NotificationService.ErrorLight(Notification_Content_Mod_Reinstall_Failed, mod.Name);
+            return;
+        }
+
+        if (!await DownloadModCoreAsync(mod).ConfigureAwait(false))
+        {
+            Logger.ZLogError($"Failed to reinstall mod {mod.Name}: download failed");
+            NotificationService.ErrorLight(Notification_Content_Mod_Reinstall_Failed, mod.Name);
+            return;
+        }
+
         Logger.ZLogInformation($"Mod {mod.Name} successfully reinstalled");
         NotificationService.SuccessLight(Notification_Content_Mod_Reinstall_Success, mod.Name);
     }
@@ -50,7 +89,14 @@ internal sealed partial class ModManageService
     private async Task UninstallModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Uninstalling mod: {mod.Name}");
-        File.Delete(Path.Combine(Config.ModsFolder, mod.LocalFileName));
+
+        if (!FileSystemService.TryDeleteFile(Path.Combine(Config.ModsFolder, mod.LocalFileName)))
+        {
+            Logger.ZLogError($"Failed to uninstall mod {mod.Name}: could not delete file {mod.LocalFileName}");
+            NotificationService.ErrorLight(Notification_Content_Mod_Uninstall_Failed, mod.Name);
+            return;
+        }
+
         await DisableModDependentsAsync(mod).ConfigureAwait(false);
         mod.RemoveLocalInfo();
         Logger.ZLogInformation($"Mod {mod.Name} successfully uninstalled");
