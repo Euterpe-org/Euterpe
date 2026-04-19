@@ -292,6 +292,7 @@
                             <Button
                                 Classes="Primary"
                                 Command="{Binding UpdateModCommand, Mode=OneTime}"
+                                CommandParameter="{Binding SelectedMod, Mode=OneWay}"
                                 IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:ModState.Outdated}, Mode=OneWay}">
                                 <StackPanel
                                     Classes="ControlsHorizontal">
@@ -306,12 +307,14 @@
                             <!--  Install  -->
                             <Button
                                 Command="{Binding InstallModCommand, Mode=OneTime}"
+                                CommandParameter="{Binding SelectedMod, Mode=OneWay}"
                                 Content="{Localize {x:Static loc:XAMLLiteral.Button_Install}}"
                                 IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}" />
 
                             <!--  Reinstall  -->
                             <Button
                                 Command="{Binding ReinstallModCommand, Mode=OneTime}"
+                                CommandParameter="{Binding SelectedMod, Mode=OneWay}"
                                 Content="{Localize {x:Static loc:XAMLLiteral.Button_Reinstall}}"
                                 IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}" />
 
@@ -319,6 +322,7 @@
                             <Button
                                 Classes="Danger"
                                 Command="{Binding UninstallModCommand, Mode=OneTime}"
+                                CommandParameter="{Binding SelectedMod, Mode=OneWay}"
                                 Content="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}"
                                 IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
                         </StackPanel>

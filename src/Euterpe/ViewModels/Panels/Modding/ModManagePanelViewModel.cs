@@ -77,16 +77,16 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task InstallModAsync() => await ModManageService.InstallModAsync(SelectedMod).ConfigureAwait(false);
+    private async Task InstallModAsync(ModDto mod) => await ModManageService.InstallModAsync(mod).ConfigureAwait(false);
 
     [RelayCommand]
-    private async Task UpdateModAsync() => await ModManageService.UpdateModAsync(SelectedMod).ConfigureAwait(false);
+    private async Task UpdateModAsync(ModDto mod) => await ModManageService.UpdateModAsync(mod).ConfigureAwait(false);
 
     [RelayCommand]
-    private async Task ReinstallModAsync() => await ModManageService.ReinstallModAsync(SelectedMod).ConfigureAwait(false);
+    private async Task ReinstallModAsync(ModDto mod) => await ModManageService.ReinstallModAsync(mod).ConfigureAwait(false);
 
     [RelayCommand]
-    private async Task UninstallModAsync() => await ModManageService.UninstallModAsync(SelectedMod).ConfigureAwait(false);
+    private async Task UninstallModAsync(ModDto mod) => await ModManageService.UninstallModAsync(mod).ConfigureAwait(false);
 
     [RelayCommand]
     private Task ToggleModAsync(ModDto mod)
