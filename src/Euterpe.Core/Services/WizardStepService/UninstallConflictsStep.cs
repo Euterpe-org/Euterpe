@@ -2,31 +2,28 @@ namespace Euterpe.Core;
 
 internal sealed class UninstallConflictsStep : IWizardStep
 {
-    private static readonly string[] ConflictModNames =
-    [
-        "CustomAlbums",
-        "Headquarters",
-        "Cinema",
-        "CinemaToggler",
-        "CustomAnchorSupport"
-    ];
-
     public WizardOptionKinds Kinds => WizardOptionKinds.UninstallConflicts;
 
     public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
         await ModManageService.InitializeModsAsync().ConfigureAwait(false);
 
-        foreach (var modName in ConflictModNames)
+        var mod = ModManageService.FindModByName(AppName);
+        if (mod is null)
         {
-            var mod = ModManageService.FindModByName(modName);
-            if (mod is null)
+            return;
+        }
+
+        foreach (var modName in mod.IncompatibleMods)
+        {
+            var incompatibleMod = ModManageService.FindModByName(modName);
+            if (incompatibleMod is null)
             {
                 continue;
             }
 
             Logger.ZLogInformation($"Conflict detected: {modName} is installed and will be uninstalled");
-            await ModManageService.UninstallModAsync(mod).ConfigureAwait(false);
+            await ModManageService.UninstallModAsync(incompatibleMod).ConfigureAwait(false);
         }
     }
 
