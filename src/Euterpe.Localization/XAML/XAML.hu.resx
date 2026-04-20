@@ -22,6 +22,9 @@
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Frissítés keresése</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Megerősítés</value>
+  </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>Segíts a fordításban</value>
   </data>
@@ -39,6 +42,9 @@
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Újraválasztás</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>Kihagyás</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>Forráskód</value>
@@ -79,11 +85,14 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Alkalmazásnaplók</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Egyéni zenék</value>
-  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Modok</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>Offline mappa megnyitása</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>Online mappa megnyitása</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
@@ -354,12 +363,6 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanyol</value>
-  </data>
-  <data name="Button_Confirm" xml:space="preserve">
-    <value>Megerősítés</value>
-  </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>Kihagyás</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Válaszd ki a szereped és a feladatokat a kezdéshez</value>

@@ -6,7 +6,8 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
     [
         new(DropDownButton_Open,
         [
-            new DropDownMenuItem(Folder_CustomAlbums, OpenFolderCommand, Config.CustomAlbumsFolder)
+            new DropDownMenuItem(Folder_OnlineCharts, OpenFolderCommand, Config.OnlineChartsFolder),
+            new DropDownMenuItem(Folder_OfflineCharts, OpenFolderCommand, Config.OfflineChartsFolder)
         ])
     ];
 

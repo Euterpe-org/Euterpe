@@ -22,6 +22,9 @@
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>檢查更新</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>確認</value>
+  </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>協助翻譯</value>
   </data>
@@ -39,6 +42,9 @@
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>重新選擇</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>跳過</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>原始碼</value>
@@ -79,11 +85,14 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>應用程式記錄檔</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>自製譜資料夾</value>
-  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>模組資料夾</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>開啟本地譜資料夾</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>開啟線上譜資料夾</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>使用者資料</value>
@@ -354,12 +363,6 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>西班牙文</value>
-  </data>
-  <data name="Button_Confirm" xml:space="preserve">
-    <value>確認</value>
-  </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>跳過</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>選擇你的角色和任務以開始</value>

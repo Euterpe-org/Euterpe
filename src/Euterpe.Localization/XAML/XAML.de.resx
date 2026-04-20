@@ -22,6 +22,9 @@
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Nach Updates suchen</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>Beim Übersetzen helfen</value>
   </data>
@@ -39,6 +42,9 @@
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Neu auswählen</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>Überspringen</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>Quellcode</value>
@@ -79,11 +85,14 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App-Protokolle</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Eigene Charts</value>
-  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mods</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>Offline-Ordner öffnen</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>Online-Ordner öffnen</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
@@ -354,12 +363,6 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanisch</value>
-  </data>
-  <data name="Button_Confirm" xml:space="preserve">
-    <value>Bestätigen</value>
-  </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>Überspringen</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Wähle deine Rolle und Aufgaben</value>

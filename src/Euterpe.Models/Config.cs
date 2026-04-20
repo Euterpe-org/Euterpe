@@ -70,45 +70,44 @@ public sealed partial class Config : ObservableObject
     public SemVersion? MelonLoaderSemVersion { get; private set; }
 
     // Ignored Paths
-    [JsonIgnore]
-    public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
+    private string EuterpeChartsFolder => Path.Combine(MuseDashFolder, "Euterpe_Charts");
 
     [JsonIgnore]
-    public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");
+    public string OnlineChartsFolder => Path.Combine(EuterpeChartsFolder, "Online");
 
     [JsonIgnore]
-    public string ModsFolder => GetCombinedPath(MuseDashFolder, "Mods");
+    public string OfflineChartsFolder => Path.Combine(EuterpeChartsFolder, "Offline");
 
     [JsonIgnore]
-    public string UserDataFolder => GetCombinedPath(MuseDashFolder, "UserData");
+    public string ModsFolder => Path.Combine(MuseDashFolder, "Mods");
 
     [JsonIgnore]
-    public string UserLibsFolder => GetCombinedPath(MuseDashFolder, "UserLibs");
+    public string UserDataFolder => Path.Combine(MuseDashFolder, "UserData");
 
     [JsonIgnore]
-    public string MelonLoaderFolder => GetCombinedPath(MuseDashFolder, "MelonLoader");
+    public string UserLibsFolder => Path.Combine(MuseDashFolder, "UserLibs");
 
     [JsonIgnore]
-    public string MelonLoaderZipPath => GetCombinedPath(MuseDashFolder, "MelonLoader.zip");
+    public string MelonLoaderFolder => Path.Combine(MuseDashFolder, "MelonLoader");
 
     [JsonIgnore]
-    public string LatestLogPath => GetCombinedPath(MelonLoaderFolder, "Latest.log");
+    public string MelonLoaderZipPath => Path.Combine(MuseDashFolder, "MelonLoader.zip");
+
+    [JsonIgnore]
+    public string LatestLogPath => Path.Combine(MelonLoaderFolder, "Latest.log");
 
     [JsonIgnore]
     private string Il2CppAssemblyGeneratorFolderPath => Path.Combine(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
 
     [JsonIgnore]
-    public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityVersion}.zip");
+    public string UnityDependencyZipPath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityVersion}.zip");
 
     [JsonIgnore]
-    public string Cpp2ILExecutablePath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, Path.Combine("Cpp2IL", "Cpp2IL.exe"));
+    public string Cpp2ILExecutablePath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL", "Cpp2IL.exe");
 
     [JsonIgnore]
-    public string Cpp2ILPluginPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, Path.Combine("Cpp2IL", "Plugins", "Cpp2IL.Plugin.StrippedCodeRegSupport.dll"));
+    public string Cpp2ILPluginPath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL", "Plugins", "Cpp2IL.Plugin.StrippedCodeRegSupport.dll");
 
     partial void OnMelonLoaderVersionChanged(string? value) =>
         MelonLoaderSemVersion = SemVersion.TryParse(value, out var version) ? version : null;
-
-    private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
-        !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;
 }

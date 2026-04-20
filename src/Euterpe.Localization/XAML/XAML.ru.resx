@@ -22,6 +22,9 @@
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Проверить обновления</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>Помочь с переводом</value>
   </data>
@@ -39,6 +42,9 @@
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Выбрать заново</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>Пропустить</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>Исходный код</value>
@@ -79,11 +85,14 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Логи приложения</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Пользовательские чарты</value>
-  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Моды</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>Открыть папку Offline</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>Открыть папку Online</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
@@ -354,12 +363,6 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Испанский</value>
-  </data>
-  <data name="Button_Confirm" xml:space="preserve">
-    <value>Подтвердить</value>
-  </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>Пропустить</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Выберите свою роль и задачи для начала</value>

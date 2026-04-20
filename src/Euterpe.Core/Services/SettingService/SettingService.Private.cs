@@ -77,6 +77,7 @@ internal sealed partial class SettingService
     {
         Directory.CreateDirectory(Config.ModsFolder);
         Directory.CreateDirectory(Config.UserLibsFolder);
-        Directory.CreateDirectory(Config.CustomAlbumsFolder);
+        Directory.CreateDirectory(Config.OnlineChartsFolder);
+        Directory.CreateDirectory(Config.OfflineChartsFolder);
     }
 }

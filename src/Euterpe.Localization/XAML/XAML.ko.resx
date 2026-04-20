@@ -22,6 +22,9 @@
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>업데이트 확인</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>확인</value>
+  </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>번역 참여</value>
   </data>
@@ -39,6 +42,9 @@
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>다시 선택</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>건너뛰기</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>소스 코드</value>
@@ -79,11 +85,14 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>앱 로그</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>커스텀 채보</value>
-  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>모드 폴더</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>Offline 폴더 열기</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>Online 폴더 열기</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
@@ -354,12 +363,6 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>스페인어</value>
-  </data>
-  <data name="Button_Confirm" xml:space="preserve">
-    <value>확인</value>
-  </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>건너뛰기</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>역할과 작업을 선택하여 시작하세요</value>
