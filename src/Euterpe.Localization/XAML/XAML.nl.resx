@@ -89,10 +89,10 @@
     <value>Mods</value>
   </data>
   <data name="Folder_OfflineCharts" xml:space="preserve">
-    <value>Offline-map openen</value>
+    <value>Offline-chartsmap openen</value>
   </data>
   <data name="Folder_OnlineCharts" xml:space="preserve">
-    <value>Online-map openen</value>
+    <value>Online-chartsmap openen</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>Gebruikersgegevens</value>

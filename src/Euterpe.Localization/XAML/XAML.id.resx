@@ -89,10 +89,10 @@
     <value>Mod</value>
   </data>
   <data name="Folder_OfflineCharts" xml:space="preserve">
-    <value>Buka Folder Offline</value>
+    <value>Buka Folder Charts Offline</value>
   </data>
   <data name="Folder_OnlineCharts" xml:space="preserve">
-    <value>Buka Folder Online</value>
+    <value>Buka Folder Charts Online</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>Data Pengguna</value>

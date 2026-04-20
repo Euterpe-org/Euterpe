@@ -89,10 +89,10 @@
     <value>Mods</value>
   </data>
   <data name="Folder_OfflineCharts" xml:space="preserve">
-    <value>Open Offline Folder</value>
+    <value>Open Offline Charts Folder</value>
   </data>
   <data name="Folder_OnlineCharts" xml:space="preserve">
-    <value>Open Online Folder</value>
+    <value>Open Online Charts Folder</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>

@@ -89,10 +89,10 @@
     <value>모드 폴더</value>
   </data>
   <data name="Folder_OfflineCharts" xml:space="preserve">
-    <value>Offline 폴더 열기</value>
+    <value>Offline 채보 폴더 열기</value>
   </data>
   <data name="Folder_OnlineCharts" xml:space="preserve">
-    <value>Online 폴더 열기</value>
+    <value>Online 채보 폴더 열기</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
