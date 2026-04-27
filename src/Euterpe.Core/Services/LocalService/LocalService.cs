@@ -125,22 +125,30 @@ internal sealed partial class LocalService : ILocalService
             IsDisabled = Path.GetExtension(filePath) is ".disabled"
         };
 
-        var bytes = await File.ReadAllBytesAsync(filePath).ConfigureAwait(false);
-        var assembly = AssemblyDefinition.FromBytes(bytes);
-
-        var attribute = assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
-        if (attribute is null)
+        try
         {
-            Logger.ZLogWarning($"{filePath} is not a mod file but inside Mods folder");
+            var bytes = await File.ReadAllBytesAsync(filePath).ConfigureAwait(false);
+            var assembly = AssemblyDefinition.FromBytes(bytes);
+
+            var attribute = assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
+            if (attribute is null)
+            {
+                Logger.ZLogWarning($"{filePath} is not a mod file but inside Mods folder");
+                return null;
+            }
+
+            mod.Name = attribute.Signature!.FixedArguments[1].ToString();
+            mod.LocalVersion = attribute.Signature!.FixedArguments[2].ToString();
+            mod.Author = attribute.Signature!.FixedArguments[3].ToString();
+            mod.SHA256 = SHA256Utils.HexLowerFromBytes(bytes);
+
+            return mod;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to load mod from {filePath}, skipping");
             return null;
         }
-
-        mod.Name = attribute.Signature!.FixedArguments[1].ToString();
-        mod.LocalVersion = attribute.Signature!.FixedArguments[2].ToString();
-        mod.Author = attribute.Signature!.FixedArguments[3].ToString();
-        mod.SHA256 = SHA256Utils.HexLowerFromBytes(bytes);
-
-        return mod;
     }
 
     public async Task<LibDto> LoadLibFromPathAsync(string filePath) =>
