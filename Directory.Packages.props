@@ -8,7 +8,7 @@
         <MicrosoftCodeAnalysisVersion>5.3.0</MicrosoftCodeAnalysisVersion>
         <RefitVersion>10.1.6</RefitVersion>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
-        <TUnitVersion>1.40.5</TUnitVersion>
+        <TUnitVersion>1.40.10</TUnitVersion>
         <UrsaVersion>2.0.0-rc2</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
