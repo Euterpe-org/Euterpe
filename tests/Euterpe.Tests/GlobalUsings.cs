@@ -5,3 +5,4 @@ global using Euterpe.Models.Enums;
 global using Euterpe.Shared;
 global using Euterpe.Tests.Attributes;
 global using JetBrains.Annotations;
+global using TUnit.Assertions.Enums;

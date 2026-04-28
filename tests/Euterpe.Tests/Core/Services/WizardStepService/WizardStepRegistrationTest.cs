@@ -18,14 +18,14 @@ public sealed class WizardStepRegistrationTest
 
         var registrations = container.ComponentRegistry
             .RegistrationsFor(new TypedService(typeof(IWizardStep)))
-            .ToList();
+            .ToArray();
 
-        await Assert.That(registrations.Count).IsEqualTo(7);
+        await Assert.That(registrations.Length).IsEqualTo(7);
 
         var implTypes = registrations
             .Select(r => r.Activator.LimitType.Name)
-            .OrderBy(n => n, StringComparer.Ordinal)
-            .ToList();
+            .Order(StringComparer.Ordinal)
+            .ToArray();
 
         var expected = new[]
         {

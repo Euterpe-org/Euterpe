@@ -41,14 +41,14 @@ public sealed class BiDictionaryTest
     [Test]
     public async Task Add_DuplicateKey_Throws()
     {
-        Action act = () => _dict.Add("one", 100);
+        var act = () => _dict.Add("one", 100);
         await Assert.That(act).Throws<ArgumentException>().WithMessage("An element with the same key already exists.");
     }
 
     [Test]
     public async Task Add_DuplicateValue_Throws()
     {
-        Action act = () => _dict.Add("uno", 1);
+        var act = () => _dict.Add("uno", 1);
         await Assert.That(act).Throws<ArgumentException>().WithMessage("An element with the same value already exists.");
     }
 
@@ -139,16 +139,16 @@ public sealed class BiDictionaryTest
         using var _ = Assert.Multiple();
         await Assert.That(frozen["one"]).IsEqualTo(1);
         await Assert.That(frozen[2]).IsEqualTo("two");
-        await Assert.That(frozen.ToList().Count).IsEqualTo(3);
+        await Assert.That(frozen.Count()).IsEqualTo(3);
     }
 
     [Test]
     public async Task GetEnumerator_YieldsForwardKeyValuePairs()
     {
-        var pairs = _dict.ToList();
+        var pairs = _dict.ToArray();
 
         using var _ = Assert.Multiple();
-        await Assert.That(pairs.Count).IsEqualTo(3);
+        await Assert.That(pairs.Length).IsEqualTo(3);
         await Assert.That(pairs).Contains(new KeyValuePair<string, int>("one", 1));
         await Assert.That(pairs).Contains(new KeyValuePair<string, int>("two", 2));
         await Assert.That(pairs).Contains(new KeyValuePair<string, int>("three", 3));

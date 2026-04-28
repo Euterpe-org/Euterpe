@@ -96,8 +96,8 @@ public sealed class ModDtoTest
     public async Task IsInstallable_DependsOnLocalDownloadAndStateFlags((bool isLocal, bool hasDownload, ModState state, bool expected) data)
     {
         var mod = Create(
-            fileName: data.hasDownload ? "MyMod.dll" : "",
-            localFnWithoutExt: data.isLocal ? "MyMod" : null);
+            data.hasDownload ? "MyMod.dll" : "",
+            data.isLocal ? "MyMod" : null);
         mod.State = data.state;
 
         await Assert.That(mod.IsInstallable).IsEqualTo(data.expected);
@@ -138,7 +138,7 @@ public sealed class ModDtoTest
         mod.ModDependencies = ["ModA", "ModB"];
         mod.LibDependencies = ["LibX"];
 
-        await Assert.That(mod.DependencyNames.SequenceEqual(["ModA", "ModB", "LibX"], StringComparer.Ordinal)).IsTrue();
+        await Assert.That(mod.DependencyNames).IsEquivalentTo(["ModA", "ModB", "LibX"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
     }
 
     [Test]
@@ -158,5 +158,21 @@ public sealed class ModDtoTest
 
         mod.Screenshots = [new ModScreenshot { Url = "https://example.com/img.png" }];
         await Assert.That(mod.HasScreenshots).IsTrue();
+    }
+
+    [Test]
+    [ModsDataGenerator]
+    public async Task Fixture_ProvidesModsWithExpectedShapes(ModDto[] mods)
+    {
+        var modA = mods.Single(m => m.Name is "ModA");
+        var modB = mods.Single(m => m.Name is "ModB");
+        var modC = mods.Single(m => m.Name is "ModC");
+
+        using var _ = Assert.Multiple();
+        await Assert.That(modA.HasDependency).IsFalse();
+        await Assert.That(modB.HasDependency).IsTrue();
+        await Assert.That(modB.DependencyNames).IsEquivalentTo(["ModA"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
+        await Assert.That(modC.HasScreenshots).IsTrue();
+        await Assert.That(modC.LibDependencies).IsEquivalentTo(["LibX"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
     }
 }

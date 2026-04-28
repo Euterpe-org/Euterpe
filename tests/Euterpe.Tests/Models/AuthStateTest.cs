@@ -17,7 +17,7 @@ public sealed class AuthStateTest
         await Assert.That(state.AccessToken).IsNull();
         await Assert.That(state.RefreshToken).IsNull();
         await Assert.That(state.CurrentUser).IsNull();
-        await Assert.That(state.AccessTokenExpiry).IsEqualTo(default(DateTimeOffset));
+        await Assert.That(state.AccessTokenExpiry).IsEqualTo(default);
     }
 
     [Test]
@@ -37,7 +37,7 @@ public sealed class AuthStateTest
         await Assert.That(state.AccessToken).IsNull();
         await Assert.That(state.RefreshToken).IsNull();
         await Assert.That(state.CurrentUser).IsNull();
-        await Assert.That(state.AccessTokenExpiry).IsEqualTo(default(DateTimeOffset));
+        await Assert.That(state.AccessTokenExpiry).IsEqualTo(default);
     }
 
     [Test]

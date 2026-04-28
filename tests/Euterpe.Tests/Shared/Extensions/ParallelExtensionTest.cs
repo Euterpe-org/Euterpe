@@ -22,9 +22,9 @@ public sealed class ParallelExtensionTest
         var input = new[] { 1, 2, 3, 4, 5 };
 
         var result = await input.WhenAllAsync(static i => Task.FromResult<string?>($"item-{i}"));
-        var sorted = result.OrderBy(x => x, StringComparer.Ordinal).ToArray();
+        var sorted = result.Select(x => x!).Order(StringComparer.Ordinal).ToArray();
 
-        await Assert.That(sorted.SequenceEqual(["item-1", "item-2", "item-3", "item-4", "item-5"], StringComparer.Ordinal)).IsTrue();
+        await Assert.That(sorted).IsEquivalentTo(["item-1", "item-2", "item-3", "item-4", "item-5"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
     }
 
     [Test]
@@ -32,24 +32,22 @@ public sealed class ParallelExtensionTest
     {
         var input = new[] { 1, 2, 3 };
 
-        var result = await input.WhenAllAsync(static i => Task.FromResult<string?>(i % 2 == 0 ? null : i.ToString()));
+        var result = await input.WhenAllAsync(static i => Task.FromResult<string?>(i % 2 is 0 ? null : i.ToString()));
 
         using var _ = Assert.Multiple();
         await Assert.That(result.Length).IsEqualTo(3);
         await Assert.That(result.Count(x => x is null)).IsEqualTo(1);
-        var nonNull = result.Where(x => x is not null).Select(x => x!).OrderBy(x => x, StringComparer.Ordinal).ToArray();
-        await Assert.That(nonNull.SequenceEqual(["1", "3"], StringComparer.Ordinal)).IsTrue();
+        var nonNull = result.OfType<string>().Order(StringComparer.Ordinal).ToArray();
+        await Assert.That(nonNull).IsEquivalentTo(["1", "3"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
     }
 
     [Test]
-    [Timeout(5_000)]
-    public async Task WhenAllAsync_PropagatesException(CancellationToken cancellationToken)
+    public async Task WhenAllAsync_PropagatesException()
     {
-        _ = cancellationToken;
         var input = new[] { 1, 2, 3 };
 
-        Func<Task> act = () => input.WhenAllAsync<int, string>(static i =>
-            i == 2 ? Task.FromException<string?>(new InvalidOperationException("boom")) : Task.FromResult<string?>(i.ToString()));
+        Func<Task> act = () => input.WhenAllAsync(static i =>
+            i is 2 ? Task.FromException<string?>(new InvalidOperationException("boom")) : Task.FromResult<string?>(i.ToString()));
 
         await Assert.That(act).Throws<InvalidOperationException>().WithMessage("boom");
     }
