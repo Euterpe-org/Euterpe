@@ -6,9 +6,9 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     [
         new(DropDownButton_Open,
         [
-            new DropDownMenuItem(Folder_Mods, OpenFolderCommand, Config.ModsFolder),
-            new DropDownMenuItem(Folder_UserData, OpenFolderCommand, Config.UserDataFolder),
-            new DropDownMenuItem(Folder_UserLibs, OpenFolderCommand, Config.UserLibsFolder)
+            new DropDownMenuItem(Folder_Mods, OpenFolderCommand, GameConfig.ModsFolder),
+            new DropDownMenuItem(Folder_UserData, OpenFolderCommand, GameConfig.UserDataFolder),
+            new DropDownMenuItem(Folder_UserLibs, OpenFolderCommand, GameConfig.UserLibsFolder)
         ])
     ];
 
@@ -24,7 +24,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
     public required ILogger<ModdingPageViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     #endregion Injections
 }

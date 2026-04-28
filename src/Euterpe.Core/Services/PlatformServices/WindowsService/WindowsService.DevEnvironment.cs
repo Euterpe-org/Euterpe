@@ -183,16 +183,16 @@ internal sealed partial class WindowsService
     public bool CheckPathEnvironmentVariableSet()
     {
         var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
-        return !envValue.IsNullOrEmpty() && envValue == Config.MuseDashFolder;
+        return !envValue.IsNullOrEmpty() && envValue == GameConfig.Folder;
     }
 
     public bool SetPathEnvironmentVariable()
     {
         try
         {
-            Logger.ZLogInformation($"Set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
-            Environment.SetEnvironmentVariable("MD_DIRECTORY", Config.MuseDashFolder, EnvironmentVariableTarget.User);
-            MessageBoxService.SuccessOverlayAsync(MessageBox_Content_SetPathEnvironment_Windows, Config.MuseDashFolder).ConfigureAwait(false);
+            Logger.ZLogInformation($"Set MD_DIRECTORY environment variable to: {GameConfig.Folder}");
+            Environment.SetEnvironmentVariable("MD_DIRECTORY", GameConfig.Folder, EnvironmentVariableTarget.User);
+            MessageBoxService.SuccessOverlayAsync(MessageBox_Content_SetPathEnvironment_Windows, GameConfig.Folder).ConfigureAwait(false);
             return true;
         }
         catch (Exception ex)

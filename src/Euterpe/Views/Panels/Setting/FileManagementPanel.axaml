@@ -27,9 +27,9 @@
                 Classes="ContentListItemVertical">
                 <TextBox
                     Classes="Desc"
-                    Text="{Binding Config.MuseDashFolder, Mode=OneWay}" />
+                    Text="{Binding GameConfig.Folder, Mode=OneWay}" />
                 <Button
-                    Command="{Binding ChangeMuseDashFolderCommand}"
+                    Command="{Binding ChangeGameFolderCommand}"
                     Content="{Localize {x:Static loc:XAMLLiteral.Button_Reselect}}"
                     HorizontalAlignment="Left"
                     Theme="{DynamicResource OutlineButton}" />

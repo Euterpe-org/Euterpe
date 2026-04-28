@@ -3,8 +3,8 @@
 public sealed partial class FileManagementPanelViewModel : ViewModelBase
 {
     [RelayCommand]
-    private async Task ChangeMuseDashFolderAsync() =>
-        Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(false);
+    private async Task ChangeGameFolderAsync() =>
+        GameConfig.Folder = await LocalService.GetGameFolderAsync().ConfigureAwait(false);
 
     [RelayCommand]
     private async Task ChangeCacheFolderAsync() =>
@@ -14,6 +14,9 @@ public sealed partial class FileManagementPanelViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required ILocalService LocalService { get; init; }

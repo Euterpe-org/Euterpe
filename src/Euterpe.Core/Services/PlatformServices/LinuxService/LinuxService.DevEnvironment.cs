@@ -13,7 +13,7 @@ internal sealed partial class LinuxService
 
     public async Task<bool> CheckDotNetRuntimeInstalledAsync()
     {
-        const string relativePath = $"steamapps/compatdata/{GameConstants.MuseDashSteamAppId}/pfx/drive_c/Program Files/dotnet/shared/Microsoft.WindowsDesktop.App";
+        var relativePath = $"steamapps/compatdata/{GameConfig.SteamAppId}/pfx/drive_c/Program Files/dotnet/shared/Microsoft.WindowsDesktop.App";
         var runtimeRoot = Path.Combine(Config.SteamFolder, relativePath);
 
         if (!Directory.Exists(runtimeRoot))
@@ -89,7 +89,7 @@ internal sealed partial class LinuxService
         try
         {
             var result = await Cli.Wrap("protontricks")
-                .WithArguments([GameConstants.MuseDashSteamAppId, "dotnetdesktop6"])
+                .WithArguments([GameConfig.SteamAppId, "dotnetdesktop6"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -195,13 +195,13 @@ internal sealed partial class LinuxService
     public bool CheckPathEnvironmentVariableSet()
     {
         var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
-        return !envValue.IsNullOrEmpty() && envValue == Config.MuseDashFolder;
+        return !envValue.IsNullOrEmpty() && envValue == GameConfig.Folder;
     }
 
     public bool SetPathEnvironmentVariable()
     {
-        Logger.ZLogInformation($"Ask user to set MD_DIRECTORY environment variable to: {Config.MuseDashFolder}");
-        MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, Config.MuseDashFolder)
+        Logger.ZLogInformation($"Ask user to set MD_DIRECTORY environment variable to: {GameConfig.Folder}");
+        MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, GameConfig.Folder)
             .ConfigureAwait(false);
         return true;
     }
@@ -237,7 +237,7 @@ internal sealed partial class LinuxService
         try
         {
             var winVersionResult = await Cli.Wrap("protontricks")
-                .WithArguments([GameConstants.MuseDashSteamAppId, "win10"])
+                .WithArguments([GameConfig.SteamAppId, "win10"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -251,7 +251,7 @@ internal sealed partial class LinuxService
             Logger.ZLogInformation($"Windows version set to Windows 10");
 
             var dllOverrideResult = await Cli.Wrap("protontricks")
-                .WithArguments(["-c", DllOverrideCommand, GameConstants.MuseDashSteamAppId])
+                .WithArguments(["-c", DllOverrideCommand, GameConfig.SteamAppId])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);

@@ -63,7 +63,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_GameVersionMismatch_MarksIncompatible()
     {
         var sut = CreateModManageService(
-            new Config { MuseDashFolder = TestGameFolder, GameVersion = "1.0.0" },
+            CreateGame("1.0.0"),
             DownloadManagerWith(CreateWebMod(gameVersion: "2.0.0")),
             localService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
@@ -76,7 +76,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_MelonVersionIncompatible_MarksIncompatible()
     {
         var sut = CreateModManageService(
-            new Config { MuseDashFolder = TestGameFolder, MelonLoaderVersion = "0.5.0" },
+            CreateGame(melonLoaderVersion: "0.5.0"),
             DownloadManagerWith(CreateWebMod(melonVersion: "0.6.0")),
             localService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
@@ -106,7 +106,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_WebOnlyIncompatibleGameVersion_MarksIncompatible()
     {
         var sut = CreateModManageService(
-            new Config { MuseDashFolder = TestGameFolder, GameVersion = "1.0.0" },
+            CreateGame("1.0.0"),
             DownloadManagerWith(CreateWebMod("WebMod", gameVersion: "2.0.0")));
 
         await sut.InitializeModsAsync();

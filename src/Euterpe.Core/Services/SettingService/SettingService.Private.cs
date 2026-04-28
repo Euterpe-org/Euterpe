@@ -41,11 +41,11 @@ internal sealed partial class SettingService
         }
     }
 
-    private async Task CheckMuseDashFolderAsync()
+    private async Task CheckGameFolderAsync()
     {
-        if (Config.MuseDashFolder.IsNullOrEmpty() || !PlatformService.CheckIsValidGameFolder(Config.MuseDashFolder))
+        if (GameConfig.Folder.IsNullOrEmpty() || !PlatformService.CheckIsValidGameFolder(GameConfig.Folder))
         {
-            Logger.ZLogError($"Stored MuseDash folder is invalid");
+            Logger.ZLogError($"Stored {GameConfig.DisplayName} folder is invalid");
 
             var useDetectedPath = false;
             if (PlatformService.TryGetGameFolder(out var gameFolder))
@@ -56,28 +56,28 @@ internal sealed partial class SettingService
 
             if (useDetectedPath)
             {
-                Config.MuseDashFolder = gameFolder;
+                GameConfig.Folder = gameFolder;
             }
             else
             {
-                Logger.ZLogInformation($"Letting user choose MuseDash folder...");
+                Logger.ZLogInformation($"Letting user choose {GameConfig.DisplayName} folder...");
                 var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_ChooseMuseDashFolder).ConfigureAwait(true);
                 if (result is not MessageBoxResult.Yes)
                 {
-                    Logger.ZLogInformation($"User cancelled MuseDash folder selection. Exiting application.");
+                    Logger.ZLogInformation($"User cancelled {GameConfig.DisplayName} folder selection. Exiting application.");
                     Environment.Exit(0);
                 }
 
-                Config.MuseDashFolder = await LocalService.GetMuseDashFolderAsync().ConfigureAwait(true);
+                GameConfig.Folder = await LocalService.GetGameFolderAsync().ConfigureAwait(true);
             }
         }
     }
 
     private void CreateNecessaryFolders()
     {
-        Directory.CreateDirectory(Config.ModsFolder);
-        Directory.CreateDirectory(Config.UserLibsFolder);
-        Directory.CreateDirectory(Config.OnlineChartsFolder);
-        Directory.CreateDirectory(Config.OfflineChartsFolder);
+        Directory.CreateDirectory(Config.MuseDash.ModsFolder);
+        Directory.CreateDirectory(Config.MuseDash.UserLibsFolder);
+        Directory.CreateDirectory(Config.MuseDash.OnlineChartsFolder);
+        Directory.CreateDirectory(Config.MuseDash.OfflineChartsFolder);
     }
 }

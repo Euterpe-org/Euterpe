@@ -6,7 +6,7 @@ internal sealed partial class ModManageService
 {
     private async Task InitializeCoreAsync()
     {
-        Config.ObservePropertyChanged(x => x.MelonLoaderVersion)
+        GameConfig.ObservePropertyChanged(x => x.MelonLoaderVersion)
             .Subscribe(this, (_, self) => self.RefreshModStates());
 
         await LoadLibsAsync().ConfigureAwait(false);
@@ -46,7 +46,7 @@ internal sealed partial class ModManageService
     {
         Logger.ZLogInformation($"Updating mod: {mod.Name} from version {mod.LocalVersion} to version {mod.Version}");
 
-        if (!FileSystemService.TryDeleteFile(Path.Combine(Config.ModsFolder, mod.LocalFileName)))
+        if (!FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, mod.LocalFileName)))
         {
             Logger.ZLogError($"Failed to update mod {mod.Name}: could not delete existing file {mod.LocalFileName}");
             NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, mod.Name);
@@ -68,7 +68,7 @@ internal sealed partial class ModManageService
     {
         Logger.ZLogInformation($"Reinstalling mod: {mod.Name}");
 
-        if (!FileSystemService.TryDeleteFile(Path.Combine(Config.ModsFolder, mod.LocalFileName)))
+        if (!FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, mod.LocalFileName)))
         {
             Logger.ZLogError($"Failed to reinstall mod {mod.Name}: could not delete existing file {mod.LocalFileName}");
             NotificationService.ErrorLight(Notification_Content_Mod_Reinstall_Failed, mod.Name);
@@ -90,7 +90,7 @@ internal sealed partial class ModManageService
     {
         Logger.ZLogInformation($"Uninstalling mod: {mod.Name}");
 
-        if (!FileSystemService.TryDeleteFile(Path.Combine(Config.ModsFolder, mod.LocalFileName)))
+        if (!FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, mod.LocalFileName)))
         {
             Logger.ZLogError($"Failed to uninstall mod {mod.Name}: could not delete file {mod.LocalFileName}");
             NotificationService.ErrorLight(Notification_Content_Mod_Uninstall_Failed, mod.Name);

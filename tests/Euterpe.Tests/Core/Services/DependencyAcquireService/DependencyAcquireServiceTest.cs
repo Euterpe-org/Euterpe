@@ -13,7 +13,7 @@ public sealed partial class DependencyAcquireServiceTest
     private const string TestMelonLoaderVersion = "0.6.5";
 
     private readonly MockLogger<DependencyAcquireService> _logger = Mock.Logger<DependencyAcquireService>();
-    private Config _config = null!;
+    private MuseDashConfig _game = null!;
     private string _tempDir = null!;
 
     [Before(Test)]
@@ -21,7 +21,7 @@ public sealed partial class DependencyAcquireServiceTest
     {
         _tempDir = Path.Combine(Path.GetTempPath(), $"DependencyAcquireServiceTest_{Guid.NewGuid():N}");
         Directory.CreateDirectory(_tempDir);
-        _config = new Config { MuseDashFolder = _tempDir, UnityVersion = TestUnityVersion };
+        _game = new MuseDashConfig { Folder = _tempDir, UnityVersion = TestUnityVersion };
     }
 
     [After(Test)]
@@ -38,7 +38,7 @@ public sealed partial class DependencyAcquireServiceTest
         IDownloadManager? downloadManager = null) =>
         new()
         {
-            Config = _config,
+            GameConfig = _game,
             DistributionClient = distributionClient ?? IEuterpeDistributionClient.Mock(),
             DownloadManager = downloadManager ?? IDownloadManager.Mock(),
             Logger = _logger
@@ -78,7 +78,7 @@ public sealed partial class DependencyAcquireServiceTest
     private async Task<string> CreateValidDependencyFiles()
     {
         var content = "test-content"u8.ToArray();
-        string[] paths = [_config.MelonLoaderZipPath, _config.UnityDependencyZipPath, _config.Cpp2ILExecutablePath, _config.Cpp2ILPluginPath];
+        string[] paths = [_game.MelonLoaderZipPath, _game.UnityDependencyZipPath, _game.Cpp2ILExecutablePath, _game.Cpp2ILPluginPath];
 
         foreach (var path in paths)
         {

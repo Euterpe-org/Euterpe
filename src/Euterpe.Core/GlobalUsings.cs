@@ -17,6 +17,7 @@ global using Euterpe.Core.Proxies;
 global using Euterpe.Core.Utils;
 global using Euterpe.Models;
 global using Euterpe.Models.Enums;
+global using Euterpe.Models.Games;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;
 global using Euterpe.Shared.Extensions;
