@@ -24,12 +24,16 @@ public sealed partial class AuthServiceTest
     }
 
     [Test]
-    public async Task RenewAccessTokenAsync_WhenRefreshFails_ShouldPropagateException()
+    [Arguments(HttpStatusCode.Unauthorized)]
+    [Arguments(HttpStatusCode.Forbidden)]
+    [Arguments(HttpStatusCode.InternalServerError)]
+    [Arguments(HttpStatusCode.BadGateway)]
+    public async Task RenewAccessTokenAsync_WhenRefreshFails_ShouldPropagateException(HttpStatusCode statusCode)
     {
         var authState = CreateLoggedInState();
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>())
-            .Throws(CreateApiException(HttpStatusCode.Unauthorized));
+            .Throws(CreateApiException(statusCode));
         var sut = CreateAuthService(authClientMock, authState);
 
         Func<Task<string?>> act = async () => await sut.RenewAccessTokenAsync();
