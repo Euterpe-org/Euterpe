@@ -6,10 +6,10 @@ internal sealed partial class ModManageService
 {
     private async Task LoadModsAsync()
     {
-        ModDto[] localMods = (await LocalService.GetModFilePaths()
+        var localMods = (await LocalService.GetModFilePaths()
                 .WhenAllAsync(LocalService.LoadModFromPathAsync).ConfigureAwait(false))
-            .Where(x => x is not null)
-            .ToArray()!;
+            .OfType<ModDto>()
+            .ToArray();
 
         _sourceCache.AddOrUpdate(localMods);
         Logger.ZLogInformation($"Local mods added to source cache");

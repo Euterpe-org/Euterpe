@@ -9,8 +9,8 @@ internal sealed partial class ModManageService
     {
         _libsDict = new ConcurrentDictionary<string, LibDto>(
             (await LocalService.GetLibFilePaths()
-                .WhenAllAsync(LocalService.LoadLibFromPathAsync!).ConfigureAwait(false))
-            .Select(x => new KeyValuePair<string, LibDto>(x!.Name, x)));
+                .WhenAllAsync(LocalService.LoadLibFromPathAsync).ConfigureAwait(false))
+            .Select(x => KeyValuePair.Create(x.Name, x)));
 
         foreach (var webLib in await DownloadManager.FetchLibListAsync().ConfigureAwait(false))
         {
