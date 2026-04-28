@@ -51,9 +51,9 @@ internal sealed partial class WindowsService
 
     public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
     {
-        const string relativePath = @"steamapps\common\Muse Dash";
+        var relativePath = Path.Combine("steamapps", "common", GameConfig.GameFolderName);
 
-        if (GamePathService.TryGetGameFolderFromVdf(GameConstants.MuseDashSteamAppId, relativePath, out gameFolder))
+        if (GamePathService.TryGetGameFolderFromVdf(GameConfig.SteamAppId, relativePath, out gameFolder))
         {
             return true;
         }
@@ -71,16 +71,17 @@ internal sealed partial class WindowsService
 
     public bool CheckIsValidGameFolder(string folderPath)
     {
-        var exePath = Path.Combine(folderPath, "MuseDash.exe");
+        var exeName = GameConfig.ExecutableName;
+        var exePath = Path.Combine(folderPath, exeName);
         var dllPath = Path.Combine(folderPath, "GameAssembly.dll");
 
         if (File.Exists(exePath) && File.Exists(dllPath))
         {
-            Logger.ZLogInformation($"MuseDash.exe and GameAssembly.dll found in {folderPath}");
+            Logger.ZLogInformation($"{exeName} and GameAssembly.dll found in {folderPath}");
             return true;
         }
 
-        Logger.ZLogError($"MuseDash.exe or GameAssembly.dll not found in {folderPath}");
+        Logger.ZLogError($"{exeName} or GameAssembly.dll not found in {folderPath}");
         return false;
     }
 

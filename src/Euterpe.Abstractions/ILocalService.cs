@@ -4,7 +4,7 @@ public interface ILocalService
 {
     Task<string> GetSteamFolderAsync();
     Task<string> GetSteamExecPathAsync();
-    Task<string> GetMuseDashFolderAsync();
+    Task<string> GetGameFolderAsync();
     Task<string> GetCacheFolderAsync();
     string[] GetModFilePaths();
     string[] GetLibFilePaths();

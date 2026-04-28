@@ -75,14 +75,14 @@ internal sealed partial class DownloadManager : IDownloadManager
 
     public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
-        var path = Path.Combine(Config.ModsFolder, mod.FileName);
+        var path = Path.Combine(GameConfig.ModsFolder, mod.FileName);
 
         return await DownloadAssetAsync(mod.DownloadUrl, path, $"mod {mod.Name}", cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
     {
-        var path = Path.Combine(Config.UserLibsFolder, lib.FileName);
+        var path = Path.Combine(GameConfig.UserLibsFolder, lib.FileName);
 
         return await DownloadAssetAsync(lib.DownloadUrl, path, $"lib {lib.Name}", cancellationToken).ConfigureAwait(false);
     }
@@ -154,7 +154,7 @@ internal sealed partial class DownloadManager : IDownloadManager
     #region Injections
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required HttpClient Client { get; init; }

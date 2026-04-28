@@ -37,7 +37,7 @@ internal sealed partial class ModManageService : IModManageService
     #region Injections
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IDownloadManager DownloadManager { get; init; }

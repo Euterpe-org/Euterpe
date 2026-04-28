@@ -74,7 +74,7 @@ internal sealed partial class LinuxService : IPlatformService
         try
         {
             var result = await Cli.Wrap("protontricks")
-                .WithArguments(["-c", MuseDashUserInfoCommand, GameConstants.MuseDashSteamAppId])
+                .WithArguments(["-c", MuseDashUserInfoCommand, GameConfig.SteamAppId])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -114,6 +114,9 @@ internal sealed partial class LinuxService : IPlatformService
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }

@@ -21,6 +21,7 @@ global using Euterpe.Extensions;
 global using Euterpe.Localization;
 global using Euterpe.Models;
 global using Euterpe.Models.Enums;
+global using Euterpe.Models.Games;
 global using Euterpe.Services;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;

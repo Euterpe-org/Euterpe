@@ -32,7 +32,7 @@ public sealed partial class GamePathServiceTest
     private GamePathService CreateService(IVdfSerializationService vdf) =>
         new()
         {
-            Config = new Config { SteamFolder = _tempDir },
+            Config = new Config { SteamFolder = _tempDir, MuseDash = new MuseDashConfig() },
             Logger = _logger,
             VdfSerializationService = vdf
         };

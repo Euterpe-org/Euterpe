@@ -13,14 +13,14 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     protected override Task OnInitializeAsync()
     {
-        SelectedGameModeIndex = (int)Config.GameMode;
+        SelectedGameModeIndex = (int)GameConfig.GameMode;
         return base.OnInitializeAsync();
     }
 
     [RelayCommand]
     private Task LaunchGameAsync()
     {
-        return Config.GameMode switch
+        return GameConfig.GameMode switch
         {
             GameMode.Modded => GameService.LaunchModdedGameAsync(),
             GameMode.Vanilla => GameService.LaunchVanillaGameAsync(),
@@ -28,12 +28,12 @@ public sealed partial class HomePageViewModel : ViewModelBase
         };
     }
 
-    partial void OnSelectedGameModeIndexChanged(int value) => Config.GameMode = (GameMode)value;
+    partial void OnSelectedGameModeIndexChanged(int value) => GameConfig.GameMode = (GameMode)value;
 
     #region Injections
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IGameService GameService { get; init; }

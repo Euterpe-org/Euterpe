@@ -45,7 +45,7 @@ internal sealed partial class SettingService : ISettingService
 
         await CheckSteamFolderAsync().ConfigureAwait(true);
         await CheckSteamExecPathAsync().ConfigureAwait(true);
-        await CheckMuseDashFolderAsync().ConfigureAwait(true);
+        await CheckGameFolderAsync().ConfigureAwait(true);
         CreateNecessaryFolders();
 
         Logger.ZLogInformation($"Checking for valid setting done");
@@ -55,6 +55,9 @@ internal sealed partial class SettingService : ISettingService
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IJsonSerializationService JsonSerializationService { get; init; }

@@ -5,8 +5,8 @@ internal sealed partial class ModManageService
     private async Task<bool> EnableModAsync(ModDto mod)
     {
         if (!FileSystemService.TryMoveFile(
-                Path.Combine(Config.ModsFolder, mod.LocalFileName),
-                Path.Combine(Config.ModsFolder, mod.ReversedFileName)))
+                Path.Combine(GameConfig.ModsFolder, mod.LocalFileName),
+                Path.Combine(GameConfig.ModsFolder, mod.ReversedFileName)))
         {
             Logger.ZLogError($"Failed to enable mod {mod.Name}: could not move file {mod.LocalFileName}");
             return false;
@@ -40,8 +40,8 @@ internal sealed partial class ModManageService
     private async Task<bool> DisableModAsync(ModDto mod)
     {
         if (!FileSystemService.TryMoveFile(
-                Path.Combine(Config.ModsFolder, mod.LocalFileName),
-                Path.Combine(Config.ModsFolder, mod.ReversedFileName)))
+                Path.Combine(GameConfig.ModsFolder, mod.LocalFileName),
+                Path.Combine(GameConfig.ModsFolder, mod.ReversedFileName)))
         {
             Logger.ZLogError($"Failed to disable mod {mod.Name}: could not move file {mod.LocalFileName}");
             return false;

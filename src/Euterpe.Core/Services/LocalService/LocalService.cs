@@ -31,14 +31,14 @@ internal sealed partial class LocalService : ILocalService
         return path;
     }
 
-    public async Task<string> GetMuseDashFolderAsync()
+    public async Task<string> GetGameFolderAsync()
     {
         var path = string.Empty;
 
         while (path.IsNullOrEmpty() || !await EnsureValidGameFolderAsync(path).ConfigureAwait(true))
         {
             path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected MuseDash folder: {path}");
+            Logger.ZLogInformation($"Selected {GameConfig.DisplayName} folder: {path}");
         }
 
         return path;
@@ -56,31 +56,31 @@ internal sealed partial class LocalService : ILocalService
         return path;
     }
 
-    public string[] GetModFilePaths() => Directory.EnumerateFiles(Config.ModsFolder)
+    public string[] GetModFilePaths() => Directory.EnumerateFiles(GameConfig.ModsFolder)
         .Where(x => Path.GetExtension(x) is ".disabled" || Path.GetExtension(x) is ".dll")
         .ToArray();
 
-    public string[] GetLibFilePaths() => Directory.EnumerateFiles(Config.UserLibsFolder)
+    public string[] GetLibFilePaths() => Directory.EnumerateFiles(GameConfig.UserLibsFolder)
         .Where(x => Path.GetExtension(x) is ".dll")
         .ToArray();
 
     public async Task<bool> InstallMelonLoaderAsync()
     {
-        if (!FileSystemService.CheckFileExists(Config.MelonLoaderZipPath))
+        if (!FileSystemService.CheckFileExists(GameConfig.MelonLoaderZipPath))
         {
             await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Zip_NotFound).ConfigureAwait(false);
             return false;
         }
 
-        if (!await ArchiveService.ExtractZipFileAsync(Config.MelonLoaderZipPath, Config.MuseDashFolder).ConfigureAwait(true))
+        if (!await ArchiveService.ExtractZipFileAsync(GameConfig.MelonLoaderZipPath, GameConfig.Folder).ConfigureAwait(true))
         {
             await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Unzip_Failed).ConfigureAwait(false);
             return false;
         }
 
-        if (!FileSystemService.TryDeleteFile(Config.MelonLoaderZipPath))
+        if (!FileSystemService.TryDeleteFile(GameConfig.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_DeleteZip_Failed, Config.MelonLoaderZipPath).ConfigureAwait(false);
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_DeleteZip_Failed, GameConfig.MelonLoaderZipPath).ConfigureAwait(false);
             return false;
         }
 
@@ -91,9 +91,9 @@ internal sealed partial class LocalService : ILocalService
 
     public async Task<bool> UninstallMelonLoaderAsync()
     {
-        var dobbyPath = Path.Combine(Config.MuseDashFolder, "dobby.dll");
-        var noticePath = Path.Combine(Config.MuseDashFolder, "NOTICE.txt");
-        var versionPath = Path.Combine(Config.MuseDashFolder, "version.dll");
+        var dobbyPath = Path.Combine(GameConfig.Folder, "dobby.dll");
+        var noticePath = Path.Combine(GameConfig.Folder, "NOTICE.txt");
+        var versionPath = Path.Combine(GameConfig.Folder, "version.dll");
 
         foreach (var path in new[] { dobbyPath, noticePath, versionPath })
         {
@@ -106,7 +106,7 @@ internal sealed partial class LocalService : ILocalService
             return false;
         }
 
-        if (!FileSystemService.TryDeleteDirectory(Config.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
+        if (!FileSystemService.TryDeleteDirectory(GameConfig.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
             await MessageBoxService.ErrorAsync(MessageBox_Content_DeleteMelonLoaderFolder_Failed).ConfigureAwait(true);
             return false;
@@ -164,7 +164,7 @@ internal sealed partial class LocalService : ILocalService
     {
         var assetsManager = new AssetsManager();
         assetsManager.LoadClassPackage(ResourceService.GetAssetAsStream("classdata.tpk"));
-        var bundlePath = Path.Combine(Config.MuseDashFolder, "MuseDash_Data", "globalgamemanagers");
+        var bundlePath = Path.Combine(GameConfig.Folder, GameConfig.GameDataFolderName, "globalgamemanagers");
         try
         {
             var instance = assetsManager.LoadAssetsFile(bundlePath, true);
@@ -173,8 +173,8 @@ internal sealed partial class LocalService : ILocalService
             var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
             var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
 
-            Config.GameVersion = bundleVersion;
-            Config.UnityVersion = unityVersion[..^2];
+            GameConfig.GameVersion = bundleVersion;
+            GameConfig.UnityVersion = unityVersion[..^2];
 
             Logger.ZLogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
             assetsManager.UnloadAll();
@@ -191,9 +191,9 @@ internal sealed partial class LocalService : ILocalService
     {
         ReadOnlySpan<string> paths =
         [
-            Path.Combine(Config.MuseDashFolder, "version.dll"),
-            Path.Combine(Config.MelonLoaderFolder, "net6", "MelonLoader.dll"),
-            Path.Combine(Config.MelonLoaderFolder, "MelonLoader.dll")
+            Path.Combine(GameConfig.Folder, "version.dll"),
+            Path.Combine(GameConfig.MelonLoaderFolder, "net6", "MelonLoader.dll"),
+            Path.Combine(GameConfig.MelonLoaderFolder, "MelonLoader.dll")
         ];
 
         foreach (var path in paths)
@@ -203,8 +203,8 @@ internal sealed partial class LocalService : ILocalService
                 continue;
             }
 
-            Config.MelonLoaderVersion = Version.Parse(version).ToString(3);
-            Logger.ZLogInformation($"MelonLoader version detected: {Config.MelonLoaderVersion}");
+            GameConfig.MelonLoaderVersion = Version.Parse(version).ToString(3);
+            Logger.ZLogInformation($"MelonLoader version detected: {GameConfig.MelonLoaderVersion}");
             return;
         }
 
@@ -215,6 +215,9 @@ internal sealed partial class LocalService : ILocalService
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IArchiveService ArchiveService { get; init; }

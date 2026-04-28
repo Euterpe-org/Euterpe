@@ -64,7 +64,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     private async Task CheckMelonLoaderAsync()
     {
-        if (Config.MelonLoaderSemVersion is not { } localVersion)
+        if (GameConfig.MelonLoaderSemVersion is not { } localVersion)
         {
             Logger.ZLogInformation($"MelonLoader not installed, prompting user");
 
@@ -98,6 +98,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
     [UsedImplicitly]
     public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }

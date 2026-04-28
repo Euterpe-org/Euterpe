@@ -1,9 +1,11 @@
 ﻿{
   SteamFolder: C:/Program Files (x86)/SteamLibrary,
   SteamExecPath: C:/Program Files (x86)/SteamLibrary/steam.exe,
-  MuseDashFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash,
   CacheFolder: Cache,
-  GameMode: Vanilla,
+  MuseDash: {
+    Folder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash,
+    GameMode: Vanilla
+  },
   LanguageCode: zh-Hans,
   Theme: Dark,
   ShowConsole: true,

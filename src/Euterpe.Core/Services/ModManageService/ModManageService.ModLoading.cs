@@ -44,7 +44,7 @@ internal sealed partial class ModManageService
 
     private bool IsModIncompatible(string melonVersion, string gameVersion)
     {
-        if (Config.MelonLoaderSemVersion is { } semVersion
+        if (GameConfig.MelonLoaderSemVersion is { } semVersion
             && !string.IsNullOrEmpty(melonVersion)
             && SemVersionRange.TryParse($"^{melonVersion}", out var range)
             && !range.Contains(semVersion))
@@ -52,7 +52,7 @@ internal sealed partial class ModManageService
             return true;
         }
 
-        return gameVersion is not "*" && gameVersion != Config.GameVersion;
+        return gameVersion is not "*" && gameVersion != GameConfig.GameVersion;
     }
 
     private void CheckModState(ModDto localMod, Mod webMod)
@@ -83,7 +83,7 @@ internal sealed partial class ModManageService
             return;
         }
 
-        var configFilePath = Path.Combine(Config.UserDataFolder, localMod.ConfigFile);
+        var configFilePath = Path.Combine(GameConfig.UserDataFolder, localMod.ConfigFile);
         localMod.IsValidConfigFile = File.Exists(configFilePath);
     }
 
@@ -119,6 +119,6 @@ internal sealed partial class ModManageService
         }
 
         _sourceCache.Refresh();
-        Logger.ZLogInformation($"Mod states refreshed with MelonLoader version: {Config.MelonLoaderSemVersion}");
+        Logger.ZLogInformation($"Mod states refreshed with MelonLoader version: {GameConfig.MelonLoaderSemVersion}");
     }
 }

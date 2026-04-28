@@ -91,7 +91,8 @@ public static class CoreServiceExtensions
         public void RegisterCoreServices()
         {
             builder.RegisterType<AuthState>().SingleInstance();
-            builder.RegisterType<Config>().SingleInstance();
+            builder.RegisterType<Config>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MuseDashConfig>().AsSelf().As<GameConfig>().Keyed<GameConfig>(GameId.MuseDash).SingleInstance();
 
             builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();

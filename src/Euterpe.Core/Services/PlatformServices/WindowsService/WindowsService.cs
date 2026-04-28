@@ -74,6 +74,9 @@ internal sealed partial class WindowsService : IPlatformService
     public required Config Config { get; init; }
 
     [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
+
+    [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }
 
     [UsedImplicitly]

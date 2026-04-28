@@ -2,6 +2,7 @@ global using Euterpe.Abstractions;
 global using Euterpe.Core;
 global using Euterpe.Models;
 global using Euterpe.Models.Enums;
+global using Euterpe.Models.Games;
 global using Euterpe.Shared;
 global using Euterpe.Tests.Comparers;
 global using JetBrains.Annotations;

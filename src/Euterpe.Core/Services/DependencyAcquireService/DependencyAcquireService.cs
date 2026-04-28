@@ -9,10 +9,10 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
 
     private DependencyTarget[] MelonLoaderTargets =>
     [
-        new("MelonLoader", Config.MelonLoaderZipPath),
-        new("UnityDependencies", Config.UnityDependencyZipPath),
-        new("Cpp2IL", Config.Cpp2ILExecutablePath),
-        new("Cpp2IL-Plugin", Config.Cpp2ILPluginPath)
+        new("MelonLoader", GameConfig.MelonLoaderZipPath),
+        new("UnityDependencies", GameConfig.UnityDependencyZipPath),
+        new("Cpp2IL", GameConfig.Cpp2ILExecutablePath),
+        new("Cpp2IL-Plugin", GameConfig.Cpp2ILPluginPath)
     ];
 
     public async Task AcquireForMelonLoaderAsync(
@@ -47,7 +47,7 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
     #region Injections
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IEuterpeDistributionClient DistributionClient { get; init; }

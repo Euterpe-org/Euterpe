@@ -6,8 +6,8 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
     [
         new(DropDownButton_Open,
         [
-            new DropDownMenuItem(Folder_OnlineCharts, OpenFolderCommand, Config.OnlineChartsFolder),
-            new DropDownMenuItem(Folder_OfflineCharts, OpenFolderCommand, Config.OfflineChartsFolder)
+            new DropDownMenuItem(Folder_OnlineCharts, OpenFolderCommand, GameConfig.OnlineChartsFolder),
+            new DropDownMenuItem(Folder_OfflineCharts, OpenFolderCommand, GameConfig.OfflineChartsFolder)
         ])
     ];
 
@@ -23,7 +23,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
     public required ILogger<ModdingPageViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     #endregion Injections
 }

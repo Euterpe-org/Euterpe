@@ -15,7 +15,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
 
-        MelonLoaderInstallStatus = Config.MelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
+        MelonLoaderInstallStatus = GameConfig.MelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
 
         Logger.ZLogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
     }
@@ -47,7 +47,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     private async Task UninstallMelonLoaderAsync()
     {
         await LocalService.UninstallMelonLoaderAsync().ConfigureAwait(false);
-        Config.MelonLoaderVersion = null;
+        GameConfig.MelonLoaderVersion = null;
         MelonLoaderInstallStatus = InstallStatus.NotInstalled;
         Logger.ZLogInformation($"MelonLoader has been successfully uninstalled");
     }
@@ -63,7 +63,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     #region Injections
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IDependencyAcquireService DependencyAcquireService { get; init; }

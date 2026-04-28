@@ -53,7 +53,7 @@ internal sealed partial class ModManageService
     private async Task DownloadLibCoreAsync(LibDto lib)
     {
         await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
-        _libsDict[lib.Name] = await LocalService.LoadLibFromPathAsync(Path.Combine(Config.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
+        _libsDict[lib.Name] = await LocalService.LoadLibFromPathAsync(Path.Combine(GameConfig.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
         Logger.ZLogInformation($"Lib {lib.Name} download finished");
     }
 }

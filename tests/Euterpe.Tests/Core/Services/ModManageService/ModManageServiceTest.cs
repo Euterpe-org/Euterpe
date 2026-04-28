@@ -16,17 +16,33 @@ public sealed partial class ModManageServiceTest
 
     private readonly MockLogger<ModManageService> _logger = Mock.Logger<ModManageService>();
 
-    private Config Config { get; } = new() { MuseDashFolder = TestGameFolder };
+    private MuseDashConfig Game { get; } = CreateGame();
+
+    private static MuseDashConfig CreateGame(string? gameVersion = null, string? melonLoaderVersion = null)
+    {
+        var game = new MuseDashConfig { Folder = TestGameFolder };
+        if (gameVersion is not null)
+        {
+            game.GameVersion = gameVersion;
+        }
+
+        if (melonLoaderVersion is not null)
+        {
+            game.MelonLoaderVersion = melonLoaderVersion;
+        }
+
+        return game;
+    }
 
     private ModManageService CreateModManageService(
-        Config? config = null,
+        GameConfig? game = null,
         IDownloadManager? downloadManager = null,
         IFileSystemService? fileSystemService = null,
         ILocalService? localService = null,
         INotificationService? notificationService = null) =>
         new()
         {
-            Config = config ?? Config,
+            GameConfig = game ?? Game,
             Logger = _logger,
             DownloadManager = downloadManager ?? CreateEmptyDownloadManager(),
             FileSystemService = fileSystemService ?? IFileSystemService.Mock(),
