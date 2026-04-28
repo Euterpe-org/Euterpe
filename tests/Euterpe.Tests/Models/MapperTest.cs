@@ -114,9 +114,9 @@ public sealed class MapperTest
         await Assert.That(dto.GameVersion).IsEqualTo(mod.GameVersion);
         await Assert.That(dto.MelonVersion).IsEqualTo(mod.MelonVersion);
         await Assert.That(dto.Description).IsEqualTo(mod.Description);
-        await Assert.That(dto.ModDependencies).IsEquivalentTo(mod.ModDependencies);
-        await Assert.That(dto.LibDependencies).IsEquivalentTo(mod.LibDependencies);
-        await Assert.That(dto.IncompatibleMods).IsEquivalentTo(mod.IncompatibleMods);
+        await Assert.That(dto.ModDependencies.SequenceEqual(mod.ModDependencies, StringComparer.Ordinal)).IsTrue();
+        await Assert.That(dto.LibDependencies.SequenceEqual(mod.LibDependencies, StringComparer.Ordinal)).IsTrue();
+        await Assert.That(dto.IncompatibleMods.SequenceEqual(mod.IncompatibleMods, StringComparer.Ordinal)).IsTrue();
         await Assert.That(dto.SHA256).IsEqualTo(mod.SHA256);
         await Assert.That(dto.DownloadUrl).IsEqualTo(mod.DownloadUrl);
         await Assert.That(dto.DownloadCount).IsEqualTo(mod.DownloadCount);

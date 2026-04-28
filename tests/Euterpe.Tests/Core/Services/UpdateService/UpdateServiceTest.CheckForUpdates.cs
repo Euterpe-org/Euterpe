@@ -26,35 +26,20 @@ public sealed partial class UpdateServiceTest
     }
 
     [Test]
-    [StableReleaseOnly]
-    public async Task CheckForUpdatesAsync_CurrentStableVersion_ShouldNotFindUpdate()
+    [Arguments(UpdateChannel.Stable, CurrentStableVersion)]
+    [Arguments(UpdateChannel.Prerelease, CurrentPrereleaseVersion)]
+    public async Task CheckForUpdatesAsync_RemoteEqualsCurrent_ShouldNotFindUpdate(UpdateChannel channel, string version)
     {
-        var distributionClient = CreateDistributionClientMock(AppVersion);
+        Config.UpdateChannel = channel;
+        var distributionClient = CreateDistributionClientMock(version);
 
-        var updateService = CreateUpdateService(distributionClient: distributionClient);
+        var updateService = CreateUpdateService(currentVersion: SemVersion.Parse(version), distributionClient: distributionClient);
 
         using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         _logger.VerifyLog()
-            .ContainingMessage($"Release version parsed: {AppVersion}")
-            .ContainingMessage("No new version available");
-    }
-
-    [Test]
-    [PrereleaseOnly]
-    public async Task CheckForUpdatesAsync_CurrentPrereleaseVersion_ShouldNotFindUpdate()
-    {
-        Config.UpdateChannel = UpdateChannel.Prerelease;
-        var distributionClient = CreateDistributionClientMock(AppVersion);
-
-        var updateService = CreateUpdateService(distributionClient: distributionClient);
-
-        using var _ = Assert.Multiple();
-
-        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        _logger.VerifyLog()
-            .ContainingMessage($"Release version parsed: {AppVersion}")
+            .ContainingMessage($"Release version parsed: {version}")
             .ContainingMessage("No new version available");
     }
 

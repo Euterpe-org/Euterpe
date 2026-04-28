@@ -24,7 +24,7 @@ public sealed class ParallelExtensionTest
         var result = await input.WhenAllAsync(static i => Task.FromResult<string?>($"item-{i}"));
         var sorted = result.OrderBy(x => x, StringComparer.Ordinal).ToArray();
 
-        await Assert.That(sorted).IsEquivalentTo<string?[], string?>(["item-1", "item-2", "item-3", "item-4", "item-5"]);
+        await Assert.That(sorted.SequenceEqual(["item-1", "item-2", "item-3", "item-4", "item-5"], StringComparer.Ordinal)).IsTrue();
     }
 
     [Test]
@@ -38,7 +38,7 @@ public sealed class ParallelExtensionTest
         await Assert.That(result.Length).IsEqualTo(3);
         await Assert.That(result.Count(x => x is null)).IsEqualTo(1);
         var nonNull = result.Where(x => x is not null).Select(x => x!).OrderBy(x => x, StringComparer.Ordinal).ToArray();
-        await Assert.That(nonNull).IsEquivalentTo(["1", "3"]);
+        await Assert.That(nonNull.SequenceEqual(["1", "3"], StringComparer.Ordinal)).IsTrue();
     }
 
     [Test]

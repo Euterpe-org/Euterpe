@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <IsAotCompatible>false</IsAotCompatible>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,12 +1,14 @@
 using Euterpe.Contracts.Distribution;
 using Euterpe.Core.Http.Clients;
+using Semver;
 using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests;
 
 public sealed partial class UpdateServiceTest
 {
-    private const string AppVersion = BuildInfo.AppVersion;
+    private const string CurrentStableVersion = "1.0.0";
+    private const string CurrentPrereleaseVersion = "1.0.0-rc1";
     private const string LowerStableVersion = "0.0.1";
     private const string LowerPrereleaseVersion = "0.0.1-rc1";
     private const string HigherStableVersion = "999.0.0";
@@ -20,6 +22,7 @@ public sealed partial class UpdateServiceTest
 
     private UpdateService CreateUpdateService(
         Config? config = null,
+        SemVersion? currentVersion = null,
         IEuterpeDistributionClient? distributionClient = null,
         IDownloadManager? downloadManager = null,
         IMessageBoxService? messageBoxService = null,
@@ -30,6 +33,7 @@ public sealed partial class UpdateServiceTest
         return new UpdateService
         {
             Config = config ?? Config,
+            CurrentVersion = currentVersion ?? SemVersion.Parse(CurrentStableVersion),
             Logger = _logger,
             DistributionClient = distributionClient ?? IEuterpeDistributionClient.Mock(),
             DownloadManager = downloadManager ?? IDownloadManager.Mock(),

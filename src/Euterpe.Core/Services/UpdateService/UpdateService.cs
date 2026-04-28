@@ -2,7 +2,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class UpdateService : IUpdateService
 {
-    private static readonly SemVersion CurrentVersion = SemVersion.Parse(AppVersion);
+    public SemVersion CurrentVersion { get; init; } = SemVersion.Parse(AppVersion);
 
     public async Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
     {

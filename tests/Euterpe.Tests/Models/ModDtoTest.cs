@@ -138,7 +138,7 @@ public sealed class ModDtoTest
         mod.ModDependencies = ["ModA", "ModB"];
         mod.LibDependencies = ["LibX"];
 
-        await Assert.That(mod.DependencyNames).IsEquivalentTo(["ModA", "ModB", "LibX"]);
+        await Assert.That(mod.DependencyNames.SequenceEqual(["ModA", "ModB", "LibX"], StringComparer.Ordinal)).IsTrue();
     }
 
     [Test]

@@ -8,11 +8,6 @@ namespace Euterpe.Tests;
 [TestSubject(typeof(SemVersionConverter))]
 public sealed class SemVersionConverterTest
 {
-    private static readonly JsonSerializerOptions Options = new()
-    {
-        Converters = { new SemVersionConverter() }
-    };
-
     [Test]
     [Arguments("1.0.0")]
     [Arguments("0.0.1")]
@@ -25,8 +20,8 @@ public sealed class SemVersionConverterTest
     {
         var version = SemVersion.Parse(versionString);
 
-        var json = JsonSerializer.Serialize(version, Options);
-        var deserialized = JsonSerializer.Deserialize<SemVersion>(json, Options);
+        var json = JsonSerializer.Serialize(version, SemVersionJsonContext.Default.SemVersion);
+        var deserialized = JsonSerializer.Deserialize(json, SemVersionJsonContext.Default.SemVersion);
 
         using var _ = Assert.Multiple();
         await Assert.That(deserialized).IsNotNull();
@@ -39,21 +34,21 @@ public sealed class SemVersionConverterTest
     public async Task Serialize_ProducesQuotedVersionString(string versionString, string expectedJson)
     {
         var version = SemVersion.Parse(versionString);
-        var json = JsonSerializer.Serialize(version, Options);
+        var json = JsonSerializer.Serialize(version, SemVersionJsonContext.Default.SemVersion);
         await Assert.That(json).IsEqualTo(expectedJson);
     }
 
     [Test]
     public async Task Deserialize_NullJson_ReturnsNull()
     {
-        var deserialized = JsonSerializer.Deserialize<SemVersion?>("null", Options);
+        var deserialized = JsonSerializer.Deserialize("null", SemVersionJsonContext.Default.SemVersion);
         await Assert.That(deserialized).IsNull();
     }
 
     [Test]
     public async Task Deserialize_InvalidVersionString_Throws()
     {
-        Action act = () => JsonSerializer.Deserialize<SemVersion>("\"not.a.version\"", Options);
+        Action act = () => JsonSerializer.Deserialize("\"not.a.version\"", SemVersionJsonContext.Default.SemVersion);
         await Assert.That(act).Throws<Exception>();
     }
 }
