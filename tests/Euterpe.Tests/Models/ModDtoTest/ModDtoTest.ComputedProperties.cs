@@ -2,52 +2,8 @@ using Euterpe.Contracts.Mods;
 
 namespace Euterpe.Tests;
 
-[Category("ModDtoTests")]
-[TestSubject(typeof(ModDto))]
-public sealed class ModDtoTest
+public sealed partial class ModDtoTest
 {
-    private static ModDto Create(string fileName = "MyMod.dll", string? localFnWithoutExt = null, bool disabled = true) =>
-        new()
-        {
-            Name = "MyMod",
-            FileName = fileName,
-            FileNameWithoutExtension = localFnWithoutExt,
-            IsDisabled = disabled,
-            Version = "1.0.0"
-        };
-
-    [Test]
-    public async Task AddLocalInfo_PromotesToLocalAndCopiesVersion()
-    {
-        var mod = Create();
-
-        mod.AddLocalInfo();
-
-        using var _ = Assert.Multiple();
-        await Assert.That(mod.LocalVersion).IsEqualTo("1.0.0");
-        await Assert.That(mod.State).IsEqualTo(ModState.Normal);
-        await Assert.That(mod.FileNameWithoutExtension).IsEqualTo("MyMod");
-        await Assert.That(mod.IsDisabled).IsFalse();
-        await Assert.That(mod.IsLocal).IsTrue();
-    }
-
-    [Test]
-    public async Task RemoveLocalInfo_DemotesToWebOnly()
-    {
-        var mod = Create(localFnWithoutExt: "MyMod", disabled: false);
-        mod.LocalVersion = "1.0.0";
-        mod.State = ModState.Normal;
-
-        mod.RemoveLocalInfo();
-
-        using var _ = Assert.Multiple();
-        await Assert.That(mod.LocalVersion).IsEmpty();
-        await Assert.That(mod.State).IsEqualTo(ModState.Normal);
-        await Assert.That(mod.FileNameWithoutExtension).IsNull();
-        await Assert.That(mod.IsDisabled).IsTrue();
-        await Assert.That(mod.IsLocal).IsFalse();
-    }
-
     [Test]
     [Arguments(true, "MyMod.disabled", "MyMod.dll")]
     [Arguments(false, "MyMod.dll", "MyMod.disabled")]
@@ -158,21 +114,5 @@ public sealed class ModDtoTest
 
         mod.Screenshots = [new ModScreenshot { Url = "https://example.com/img.png" }];
         await Assert.That(mod.HasScreenshots).IsTrue();
-    }
-
-    [Test]
-    [ModsDataGenerator]
-    public async Task Fixture_ProvidesModsWithExpectedShapes(ModDto[] mods)
-    {
-        var modA = mods.Single(m => m.Name is "ModA");
-        var modB = mods.Single(m => m.Name is "ModB");
-        var modC = mods.Single(m => m.Name is "ModC");
-
-        using var _ = Assert.Multiple();
-        await Assert.That(modA.HasDependency).IsFalse();
-        await Assert.That(modB.HasDependency).IsTrue();
-        await Assert.That(modB.DependencyNames).IsEquivalentTo(["ModA"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
-        await Assert.That(modC.HasScreenshots).IsTrue();
-        await Assert.That(modC.LibDependencies).IsEquivalentTo(["LibX"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
     }
 }
