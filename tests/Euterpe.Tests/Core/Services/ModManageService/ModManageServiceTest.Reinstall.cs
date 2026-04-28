@@ -3,7 +3,7 @@ namespace Euterpe.Tests;
 public sealed partial class ModManageServiceTest
 {
     [Test]
-    public async Task UpdateModAsync_WhenAllSucceed_ReplacesFileAndNotifiesSuccess()
+    public async Task ReinstallModAsync_WhenAllSucceed_ReplacesFileAndNotifiesSuccess()
     {
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
@@ -19,7 +19,7 @@ public sealed partial class ModManageServiceTest
             fileSystemService: fileSystemServiceMock,
             notificationService: notificationServiceMock);
 
-        await sut.UpdateModAsync(mod);
+        await sut.ReinstallModAsync(mod);
 
         using var _ = Assert.Multiple();
         fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).WasCalled(Times.Once);
@@ -29,7 +29,7 @@ public sealed partial class ModManageServiceTest
     }
 
     [Test]
-    public async Task UpdateModAsync_WhenDeleteFails_DoesNotDownload()
+    public async Task ReinstallModAsync_WhenDeleteFails_DoesNotDownload()
     {
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
@@ -44,7 +44,7 @@ public sealed partial class ModManageServiceTest
             fileSystemService: fileSystemServiceMock,
             notificationService: notificationServiceMock);
 
-        await sut.UpdateModAsync(mod);
+        await sut.ReinstallModAsync(mod);
 
         using var _ = Assert.Multiple();
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Never);
@@ -53,7 +53,7 @@ public sealed partial class ModManageServiceTest
     }
 
     [Test]
-    public async Task UpdateModAsync_WhenDownloadFails_NotifiesError()
+    public async Task ReinstallModAsync_WhenDownloadFails_NotifiesError()
     {
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
@@ -69,8 +69,10 @@ public sealed partial class ModManageServiceTest
             fileSystemService: fileSystemServiceMock,
             notificationService: notificationServiceMock);
 
-        await sut.UpdateModAsync(mod);
+        await sut.ReinstallModAsync(mod);
 
+        using var _ = Assert.Multiple();
         notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
+        notificationServiceMock.SuccessLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Never);
     }
 }

@@ -62,4 +62,54 @@ public sealed partial class ModManageServiceTest
         await Assert.That(mod.IsDisabled).IsEqualTo(initiallyDisabled);
         notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
     }
+
+    [Test]
+    public async Task ToggleModAsync_EnableMod_AlsoEnablesDisabledLocalDependency()
+    {
+        var dep = CreateInstalledMod("ModB", "ModB.dll", true);
+        var mod = CreateInstalledMod("ModA", "ModA.dll", true);
+        mod.ModDependencies = ["ModB"];
+
+        var fileSystemServiceMock = IFileSystemService.Mock();
+        fileSystemServiceMock.TryMoveFile(Any<string>(), Any<string>()).Returns(true);
+
+        var sut = CreateModManageService(
+            fileSystemService: fileSystemServiceMock,
+            localService: LocalServiceWith(
+                ("/mods/ModA.disabled", mod),
+                ("/mods/ModB.disabled", dep)));
+
+        await sut.InitializeModsAsync();
+        await sut.ToggleModAsync(mod);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(mod.IsDisabled).IsFalse();
+        await Assert.That(dep.IsDisabled).IsFalse();
+        fileSystemServiceMock.TryMoveFile(Any<string>(), Any<string>()).WasCalled(Times.Exactly(2));
+    }
+
+    [Test]
+    public async Task ToggleModAsync_DisableMod_AlsoDisablesEnabledLocalDependent()
+    {
+        var dep = CreateInstalledMod("ModB", "ModB.dll");
+        var mod = CreateInstalledMod("ModA", "ModA.dll");
+        mod.ModDependencies = ["ModB"];
+
+        var fileSystemServiceMock = IFileSystemService.Mock();
+        fileSystemServiceMock.TryMoveFile(Any<string>(), Any<string>()).Returns(true);
+
+        var sut = CreateModManageService(
+            fileSystemService: fileSystemServiceMock,
+            localService: LocalServiceWith(
+                ("/mods/ModA.dll", mod),
+                ("/mods/ModB.dll", dep)));
+
+        await sut.InitializeModsAsync();
+        await sut.ToggleModAsync(dep);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(dep.IsDisabled).IsTrue();
+        await Assert.That(mod.IsDisabled).IsTrue();
+        fileSystemServiceMock.TryMoveFile(Any<string>(), Any<string>()).WasCalled(Times.Exactly(2));
+    }
 }
