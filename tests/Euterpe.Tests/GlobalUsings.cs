@@ -3,5 +3,7 @@ global using Euterpe.Core;
 global using Euterpe.Models;
 global using Euterpe.Models.Enums;
 global using Euterpe.Shared;
+global using Euterpe.Tests.Comparers;
 global using JetBrains.Annotations;
 global using TUnit.Assertions.Enums;
+global using static Euterpe.Shared.BuildInfo;
