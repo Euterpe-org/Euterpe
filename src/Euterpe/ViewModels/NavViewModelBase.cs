@@ -6,17 +6,25 @@ public abstract partial class NavViewModelBase : ViewModelBase
     public partial Control Content { get; set; } = null!;
 
     [ObservableProperty]
-    public partial NavItem SelectedItem { get; set; } = null!;
+    public partial NavItem? SelectedItem { get; set; }
 
     public abstract IReadOnlyList<NavItem> NavItems { get; }
 
     protected abstract Control ResolveRoute(string route);
 
-    partial void OnSelectedItemChanged(NavItem value) => Content = ResolveRoute(value.NavigateKey);
+    partial void OnSelectedItemChanged(NavItem? value)
+    {
+        if (value is null)
+        {
+            return;
+        }
+
+        Content = ResolveRoute(value.NavigateKey);
+    }
 
     protected override Task OnInitializeAsync()
     {
-        SelectedItem = NavItems[0];
+        SelectedItem ??= NavItems[0];
         return base.OnInitializeAsync();
     }
 }
