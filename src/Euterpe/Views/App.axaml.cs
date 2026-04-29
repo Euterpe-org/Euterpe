@@ -58,12 +58,16 @@ public sealed class App : Application
 
     private static void HandleDesktopExit(IClassicDesktopStyleApplicationLifetime desktop)
     {
-        Observable.FromEventHandler<ControlledApplicationLifetimeExitEventArgs>(
-                handler => desktop.Exit += handler,
-                handler => desktop.Exit -= handler)
-            .Take(1)
-            .SubscribeAwait((_, _) => new ValueTask(Resolve<ISettingService>().SaveAsync()),
-                _ => Resolve<ILogger<App>>().ZLogInformation($"Setting saved successfully"),
-                configureAwait: false);
+        desktop.Exit += (_, _) =>
+        {
+            try
+            {
+                Resolve<ISettingService>().Save();
+            }
+            catch (Exception ex)
+            {
+                Resolve<ILogger<App>>().ZLogError(ex, $"Failed to save settings on exit");
+            }
+        };
     }
 }

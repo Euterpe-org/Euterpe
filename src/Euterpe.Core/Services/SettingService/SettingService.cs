@@ -5,6 +5,27 @@ internal sealed partial class SettingService : ISettingService
     private const string ConfigFileName = "Config.json";
     private static readonly string ConfigPath = Path.Combine(AppDataFolder, ConfigFileName);
 
+    public void Load()
+    {
+        if (File.Exists(ConfigPath))
+        {
+            using var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
+            var savedConfig = JsonSerializationService.DeserializeConfig(stream);
+            if (savedConfig is null)
+            {
+                Logger.ZLogError($"Saved setting is null, using default settings");
+                return;
+            }
+
+            Config.CopyFrom(savedConfig);
+            Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
+        }
+        else
+        {
+            Logger.ZLogInformation($"Setting file not found, using default settings");
+        }
+    }
+
     public async Task LoadAsync()
     {
         if (File.Exists(ConfigPath))
@@ -27,6 +48,13 @@ internal sealed partial class SettingService : ISettingService
         {
             Logger.ZLogInformation($"Setting file not found, using default settings");
         }
+    }
+
+    public void Save()
+    {
+        using var stream = new FileStream(ConfigPath, FileMode.Create, FileAccess.Write);
+        JsonSerializationService.SerializeConfig(stream, Config);
+        Logger.ZLogInformation($"Setting saved to {ConfigPath} successfully");
     }
 
     public async Task SaveAsync()
