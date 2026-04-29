@@ -1,17 +1,15 @@
 namespace Euterpe.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class LazyProxyGenerator : IncrementalGeneratorBase
+public sealed class LazyProxyGenerator : IIncrementalGenerator
 {
     private const string LazyProxyAttributeName = "Euterpe.Shared.Attributes.LazyProxyAttribute";
 
-    protected override string ExpectedRootNamespace => EuterpeCoreNamespace;
-
-    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
             LazyProxyAttributeName, FilterNode, ExtractDataFromContext).Collect();
-        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
+        context.RegisterSourceOutput(syntaxProvider, GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
