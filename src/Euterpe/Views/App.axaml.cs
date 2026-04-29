@@ -16,8 +16,9 @@ public sealed class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        // Initialize all controls with async initializers when they are loaded
-        Control.LoadedEvent.AddClassHandler<Control>(OnControlLoaded);
+        // Initialize Window/UserControl with async initializers when they are loaded
+        Control.LoadedEvent.AddClassHandler<Window>(OnControlLoaded);
+        Control.LoadedEvent.AddClassHandler<UserControl>(OnControlLoaded);
         Resolve<AppViewModel>().InitializeAsync().SafeFireAndForget();
 
         ApplyConfig();
@@ -38,7 +39,7 @@ public sealed class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    private static void OnControlLoaded(Control control, RoutedEventArgs _)
+    private static void OnControlLoaded(ContentControl control, RoutedEventArgs _)
     {
         if (control.DataContext is not IAsyncInitializable initializable)
         {
