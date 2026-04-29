@@ -1,16 +1,15 @@
 namespace Euterpe.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed partial class RouteGenerator : IncrementalGeneratorBase
+public sealed partial class RouteGenerator : IIncrementalGenerator
 {
     private const string RouteAttributeName = "Euterpe.Shared.Attributes.RouteAttribute";
-    protected override string ExpectedRootNamespace => EuterpeNamespace;
 
-    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var syntaxProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
             RouteAttributeName, FilterNode, ExtractDataFromContext).Collect();
-        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
+        context.RegisterSourceOutput(syntaxProvider, GenerateFromData);
     }
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>

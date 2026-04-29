@@ -8,4 +8,3 @@ global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;
 global using static Euterpe.Generators.BuildInfo;
 global using static Euterpe.Generators.SourceGenerationTexts;
-global using static Euterpe.Generators.SourceGeneratorHelper;
