@@ -7,9 +7,9 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 {
     public const string WizardHostId = "WizardDialog";
 
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
-        await base.InitializeAsync().ConfigureAwait(true);
+        await base.OnInitializeAsync().ConfigureAwait(true);
 
         await SettingService.ValidateAsync().ConfigureAwait(true);
         await LocalService.ReadGameInformationAsync().ConfigureAwait(true);

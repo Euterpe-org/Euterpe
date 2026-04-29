@@ -1,4 +1,5 @@
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using static Euterpe.IocContainer;
 
@@ -15,6 +16,10 @@ public sealed class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        // Initialize all controls with async initializers when they are loaded
+        Control.LoadedEvent.AddClassHandler<Control>(OnControlLoaded);
+        Resolve<AppViewModel>().InitializeAsync().SafeFireAndForget();
+
         ApplyConfig();
 
         var deepLinkService = Resolve<DeepLinkService>();
@@ -31,6 +36,16 @@ public sealed class App : Application
             .Subscribe(theme => Resolve<Config>().Theme = AvaloniaResources.ThemeVariants[theme]);
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private static void OnControlLoaded(Control control, RoutedEventArgs _)
+    {
+        if (control.DataContext is not IAsyncInitializable initializable)
+        {
+            return;
+        }
+
+        initializable.InitializeAsync().SafeFireAndForget();
     }
 
     private void ApplyConfig()

@@ -11,9 +11,9 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial double DownloadProgress { get; set; }
 
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
-        await base.InitializeAsync().ConfigureAwait(true);
+        await base.OnInitializeAsync().ConfigureAwait(true);
 
         MelonLoaderInstallStatus = Config.MelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
 

@@ -58,9 +58,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
             .Subscribe();
     }
 
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
-        await base.InitializeAsync().ConfigureAwait(false);
+        await base.OnInitializeAsync().ConfigureAwait(false);
         await ModManageService.InitializeModsAsync().ConfigureAwait(false);
 
         ModManageService.Connect().PopulateInto(_sourceCache);

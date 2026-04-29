@@ -11,10 +11,10 @@ public sealed partial class HomePageViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedGameModeIndex { get; set; }
 
-    public override Task InitializeAsync()
+    protected override Task OnInitializeAsync()
     {
         SelectedGameModeIndex = (int)Config.GameMode;
-        return base.InitializeAsync();
+        return base.OnInitializeAsync();
     }
 
     [RelayCommand]

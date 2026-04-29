@@ -17,11 +17,9 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
 
     #endregion Injections
 
-    public override Task InitializeAsync()
+    protected override Task OnInitializeAsync()
     {
-        base.InitializeAsync();
-
         Logger.ZLogInformation($"{nameof(LoggingPageViewModel)} Initialized");
-        return Task.CompletedTask;
+        return base.OnInitializeAsync();
     }
 }

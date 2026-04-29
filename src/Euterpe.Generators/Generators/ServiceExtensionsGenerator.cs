@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Generators;
+namespace Euterpe.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
@@ -14,28 +14,10 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax { BaseList.Types: var types }
-        && types[0].ToString() is "UserControl" or "SplashWindow" or "UrsaWindow" or "Application";
+        && types[0].ToString() is "UserControl" or "SplashWindow" or "UrsaWindow";
 
-    private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
-    {
-        if (context.Node is not ClassDeclarationSyntax { BaseList.Types: var types } classDeclaration)
-        {
-            return null;
-        }
-
-        var controlType = ControlType.UserControl;
-        var baseTypeName = types[0].ToString();
-
-        controlType = baseTypeName switch
-        {
-            "UserControl" => ControlType.UserControl,
-            "SplashWindow" or "UrsaWindow" => ControlType.Window,
-            "Application" => ControlType.Application,
-            _ => controlType
-        };
-
-        return new ViewData(classDeclaration.Identifier.Text, controlType);
-    }
+    private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _) =>
+        context.Node is not ClassDeclarationSyntax classDeclaration ? null : new ViewData(classDeclaration.Identifier.Text);
 
     private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataCollection)
     {
@@ -46,9 +28,6 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
 
         var sb = new GeneratorStringBuilder();
         sb.AppendLine($$"""
-                        using global::Avalonia.Interactivity;
-                        using static global::Euterpe.IocContainer;
-
                         namespace Euterpe.Extensions;
 
                         partial class ServiceExtensions
@@ -56,31 +35,19 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
                             {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
                             public static void RegisterViewAndViewModels(this ContainerBuilder builder)
                             {
+                                builder.RegisterType<global::Euterpe.ViewModels.AppViewModel>().PropertiesAutowired().SingleInstance();
+
                         """);
 
         foreach (var data in dataCollection)
         {
-            if (data is not var (name, controlType))
+            if (data is not var (name))
             {
                 continue;
             }
 
-            if (controlType is ControlType.Application)
-            {
-                sb.AppendLine(
-                    $"""
-                     builder.RegisterType<{name}ViewModel>()
-                        .OnActivated(x => new ValueTask(x.Instance.InitializeAsync()))
-                        .PropertiesAutowired()
-                        .SingleInstance();
-                     """);
-            }
-            else
-            {
-                sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
-                GenerateViewRegistration(sb, name, controlType);
-            }
-
+            sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+            sb.AppendLine($"\t\tbuilder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
             sb.AppendLine();
         }
 
@@ -92,31 +59,5 @@ public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
         spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
     }
 
-    private static void GenerateViewRegistration(GeneratorStringBuilder sb, string name, ControlType controlType)
-    {
-        var (eventName, eventArgs) = controlType switch
-        {
-            ControlType.UserControl => ("Initialized", ""),
-            ControlType.Window => ("Loaded", "<RoutedEventArgs>"),
-            _ => throw new UnreachableException()
-        };
-
-        sb.AppendLine($$"""
-                                builder.Register<{{name}}>(ctx => new {{name}}{ DataContext = ctx.Resolve<{{name}}ViewModel>() })
-                                .OnActivated(x => Observable.FromEventHandler{{eventArgs}}(
-                                        h => x.Instance.{{eventName}} += h,
-                                        h => x.Instance.{{eventName}} -= h)
-                                    .SubscribeAwait((_, _) => new ValueTask(Resolve<{{name}}ViewModel>().InitializeAsync())))
-                                .SingleInstance();
-                        """);
-    }
-
-    private enum ControlType
-    {
-        UserControl,
-        Window,
-        Application
-    }
-
-    private sealed record ViewData(string Name, ControlType ControlType);
+    private sealed record ViewData(string Name);
 }

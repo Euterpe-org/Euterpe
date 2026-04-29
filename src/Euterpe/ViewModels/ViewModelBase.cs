@@ -1,7 +1,9 @@
 namespace Euterpe.ViewModels;
 
-public abstract partial class ViewModelBase : ObservableObject
+public abstract partial class ViewModelBase : ObservableObject, IAsyncInitializable
 {
+    private readonly Lazy<Task> _initialization;
+
     #region Injections
 
     [UsedImplicitly]
@@ -9,8 +11,11 @@ public abstract partial class ViewModelBase : ObservableObject
 
     #endregion Injections
 
-    [RelayCommand]
-    public virtual Task InitializeAsync() => Task.CompletedTask;
+    protected ViewModelBase() => _initialization = new Lazy<Task>(OnInitializeAsync);
+
+    public Task InitializeAsync() => _initialization.Value;
+
+    protected virtual Task OnInitializeAsync() => Task.CompletedTask;
 
     [RelayCommand]
     private Task OpenFileAsync(string filePath) => PlatformService.OpenFileAsync(filePath);
