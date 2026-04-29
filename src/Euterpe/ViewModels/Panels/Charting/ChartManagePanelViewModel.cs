@@ -2,9 +2,9 @@
 
 public sealed class ChartManagePanelViewModel : ViewModelBase
 {
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
-        await base.InitializeAsync().ConfigureAwait(false);
+        await base.OnInitializeAsync().ConfigureAwait(false);
 
         Logger.ZLogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
     }

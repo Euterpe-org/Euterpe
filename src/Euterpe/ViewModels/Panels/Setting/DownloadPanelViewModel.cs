@@ -11,12 +11,10 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial int SelectedUpdateChannelIndex { get; set; }
 
-    public override Task InitializeAsync()
+    protected override Task OnInitializeAsync()
     {
-        base.InitializeAsync();
-
         Logger.ZLogInformation($"{nameof(DownloadPanelViewModel)} Initialized");
-        return Task.CompletedTask;
+        return base.OnInitializeAsync();
     }
 
     partial void OnSelectedUpdateChannelIndexChanged(int value) => Config.UpdateChannel = (UpdateChannel)value;

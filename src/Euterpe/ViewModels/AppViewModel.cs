@@ -2,9 +2,9 @@ namespace Euterpe.ViewModels;
 
 public sealed partial class AppViewModel : ViewModelBase
 {
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
-        await base.InitializeAsync().ConfigureAwait(false);
+        await base.OnInitializeAsync().ConfigureAwait(false);
 
         await SettingService.LoadAsync().ConfigureAwait(false);
 #if PUBLISH

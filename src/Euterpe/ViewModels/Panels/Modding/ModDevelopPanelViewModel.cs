@@ -12,8 +12,10 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial bool EnvVariableSet { get; set; }
 
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
+        await base.OnInitializeAsync().ConfigureAwait(true);
+
         DotNetSdkInstalled = await PlatformService.CheckDotNetSdkInstalledAsync().ConfigureAwait(true);
         ModTemplateInstalled = await PlatformService.CheckModTemplateInstalledAsync().ConfigureAwait(true);
         EnvVariableSet = PlatformService.CheckPathEnvironmentVariableSet();

@@ -13,9 +13,9 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 
     public event EventHandler<object?>? RequestClose;
 
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
-        await base.InitializeAsync().ConfigureAwait(true);
+        await base.OnInitializeAsync().ConfigureAwait(true);
 
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);

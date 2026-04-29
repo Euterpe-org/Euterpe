@@ -70,9 +70,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public event EventHandler<object?>? RequestClose;
 
-    public override async Task InitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
-        await base.InitializeAsync().ConfigureAwait(false);
+        await base.OnInitializeAsync().ConfigureAwait(false);
 
         _stepMap = WizardSteps.ToDictionary(s => s.Kinds);
 

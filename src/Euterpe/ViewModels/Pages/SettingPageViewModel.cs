@@ -9,11 +9,9 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
 
     #endregion Injections
 
-    public override Task InitializeAsync()
+    protected override Task OnInitializeAsync()
     {
-        base.InitializeAsync();
-
         Logger.ZLogInformation($"{nameof(SettingPageViewModel)} Initialized");
-        return Task.CompletedTask;
+        return base.OnInitializeAsync();
     }
 }
