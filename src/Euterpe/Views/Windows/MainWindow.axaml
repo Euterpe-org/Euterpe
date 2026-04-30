@@ -23,7 +23,6 @@
     <u:UrsaWindow.RightContent>
         <u:ThemeToggleButton
             IsThreeState="False"
-            Margin="0,1,0,0"
             Mode="Controller"
             VerticalAlignment="Top" />
     </u:UrsaWindow.RightContent>
