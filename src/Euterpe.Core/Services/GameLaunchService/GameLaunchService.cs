@@ -1,6 +1,6 @@
 ﻿namespace Euterpe.Core;
 
-internal sealed partial class GameService : IGameService
+internal sealed partial class GameLaunchService : IGameLaunchService
 {
     public async Task LaunchModdedGameAsync()
     {
@@ -33,7 +33,7 @@ internal sealed partial class GameService : IGameService
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<GameService> Logger { get; init; }
+    public required ILogger<GameLaunchService> Logger { get; init; }
 
     [UsedImplicitly]
     public required IPlatformService PlatformService { get; init; }

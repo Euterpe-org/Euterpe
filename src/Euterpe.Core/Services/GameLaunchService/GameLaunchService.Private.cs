@@ -2,7 +2,7 @@ using CliWrap;
 
 namespace Euterpe.Core;
 
-internal sealed partial class GameService
+internal sealed partial class GameLaunchService
 {
     private async Task LaunchGameAsync(string gameId, params IEnumerable<string> launchArguments)
     {

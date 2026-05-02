@@ -101,7 +101,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GameService>().As<IGameService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<GameLaunchService>().As<IGameLaunchService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
             builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
