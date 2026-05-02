@@ -1,6 +1,6 @@
 ﻿namespace Euterpe.Abstractions;
 
-public interface IGameService
+public interface IGameLaunchService
 {
     Task LaunchModdedGameAsync();
     Task LaunchVanillaGameAsync();

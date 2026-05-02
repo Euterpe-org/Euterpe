@@ -22,8 +22,8 @@ public sealed partial class HomePageViewModel : ViewModelBase
     {
         return GameConfig.GameMode switch
         {
-            GameMode.Modded => GameService.LaunchModdedGameAsync(),
-            GameMode.Vanilla => GameService.LaunchVanillaGameAsync(),
+            GameMode.Modded => GameLaunchService.LaunchModdedGameAsync(),
+            GameMode.Vanilla => GameLaunchService.LaunchVanillaGameAsync(),
             _ => throw new UnreachableException()
         };
     }
@@ -36,7 +36,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required IGameService GameService { get; init; }
+    public required IGameLaunchService GameLaunchService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<HomePageViewModel> Logger { get; init; }
