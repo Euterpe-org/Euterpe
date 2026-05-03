@@ -400,6 +400,12 @@
   <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
     <value>MDM 채보 제작 툴킷</value>
   </data>
+  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+    <value>.NET Runtime</value>
+  </data>
+  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+    <value>모드 적용 게임 실행에 필요</value>
+  </data>
   <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>

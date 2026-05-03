@@ -400,6 +400,12 @@
   <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
     <value>MDM 谱面制作工具包</value>
   </data>
+  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+    <value>.NET 运行时</value>
+  </data>
+  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+    <value>运行模组化游戏所需</value>
+  </data>
   <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>

@@ -131,6 +131,7 @@ public static class CoreServiceExtensions
 
             // Wizard Steps
             builder.RegisterType<ChartingToolStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<DotNetRuntimeStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DotNetSdkStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<EnvVariableStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<EssentialModsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();

@@ -7,13 +7,16 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     private static readonly Dictionary<WizardIdentity, WizardOptionKinds> Presets = new()
     {
         [WizardIdentity.Player] = WizardOptionKinds.MelonLoader
+                                  | WizardOptionKinds.DotNetRuntime
                                   | WizardOptionKinds.EssentialMods
                                   | WizardOptionKinds.UninstallConflicts,
         [WizardIdentity.Charter] = WizardOptionKinds.MelonLoader
+                                   | WizardOptionKinds.DotNetRuntime
                                    | WizardOptionKinds.EssentialMods
                                    | WizardOptionKinds.UninstallConflicts
                                    | WizardOptionKinds.ChartingTool,
         [WizardIdentity.Modder] = WizardOptionKinds.MelonLoader
+                                  | WizardOptionKinds.DotNetRuntime
                                   | WizardOptionKinds.EssentialMods
                                   | WizardOptionKinds.UninstallConflicts
                                   | WizardOptionKinds.DotNetSdk
@@ -27,6 +30,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public IReadOnlyList<WizardOption> Options { get; } =
     [
         new(WizardOptionKinds.MelonLoader, Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true, IsRequired = true },
+        new(WizardOptionKinds.DotNetRuntime, Wizard_Task_DotNetRuntime, Wizard_Task_DotNetRuntime_Description) { IsSelected = true, IsRequired = true },
         new(WizardOptionKinds.EssentialMods, Wizard_Task_EssentialMods, Wizard_Task_EssentialMods_Description) { IsSelected = true, IsRequired = true },
         new(WizardOptionKinds.UninstallConflicts, Wizard_Task_UninstallConflicts, Wizard_Task_UninstallConflicts_Description) { IsSelected = true, IsRequired = true },
         new(WizardOptionKinds.ChartingTool, Wizard_Task_ChartingTool, Wizard_Task_ChartingTool_Description),

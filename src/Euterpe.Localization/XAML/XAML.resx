@@ -400,6 +400,12 @@
   <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
     <value>MDM chart creation toolkit</value>
   </data>
+  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+    <value>.NET Runtime</value>
+  </data>
+  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+    <value>Required for running modded game</value>
+  </data>
   <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>

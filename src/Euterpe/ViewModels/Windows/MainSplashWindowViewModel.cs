@@ -20,7 +20,6 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 #if RELEASE
         await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 #endif
-        await CheckAndInstallDotNetRuntimeAsync().ConfigureAwait(true);
 
         var restored = await AuthService.RestoreSessionAsync().ConfigureAwait(true);
         if (!restored)
@@ -34,27 +33,6 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
         Close();
     }
 
-    private async Task CheckAndInstallDotNetRuntimeAsync()
-    {
-        var runtimeInstalled = await PlatformService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true);
-        if (runtimeInstalled)
-        {
-            return;
-        }
-
-        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_DotNetRuntime_Install).ConfigureAwait(true);
-        if (result is not MessageBoxResult.OK)
-        {
-            return;
-        }
-
-        var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
-        if (!success)
-        {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntime_Install_Failed).ConfigureAwait(false);
-        }
-    }
-
     #region Injections
 
     [UsedImplicitly]
@@ -62,9 +40,6 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 
     [UsedImplicitly]
     public required ILogger<MainSplashWindowViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IMessageBoxService MessageBoxService { get; init; }
 
 #if RELEASE
     [UsedImplicitly]

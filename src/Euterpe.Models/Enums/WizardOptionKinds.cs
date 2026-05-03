@@ -5,10 +5,11 @@ public enum WizardOptionKinds
 {
     None = 0,
     MelonLoader = 1 << 0,
-    EssentialMods = 1 << 1,
-    UninstallConflicts = 1 << 2,
-    ChartingTool = 1 << 3,
-    DotNetSdk = 1 << 4,
-    ModTemplate = 1 << 5,
-    EnvVariable = 1 << 6
+    DotNetRuntime = 1 << 1,
+    EssentialMods = 1 << 2,
+    UninstallConflicts = 1 << 3,
+    ChartingTool = 1 << 4,
+    DotNetSdk = 1 << 5,
+    ModTemplate = 1 << 6,
+    EnvVariable = 1 << 7
 }

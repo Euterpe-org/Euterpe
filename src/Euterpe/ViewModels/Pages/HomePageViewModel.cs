@@ -25,9 +25,35 @@ public sealed partial class HomePageViewModel : ViewModelBase
         SelectedGameModeIndex = (int)GameConfig.GameMode;
 
         BindAccountAsync().SafeFireAndForget();
-        CheckMelonLoaderAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to check MelonLoader version"));
+        CheckModdingDependenciesAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to check modding dependencies"));
 
         Logger.ZLogInformation($"{nameof(HomePageViewModel)} Initialized");
+    }
+
+    private async Task CheckModdingDependenciesAsync()
+    {
+        await CheckDotNetRuntimeAsync().ConfigureAwait(true);
+        await CheckMelonLoaderAsync().ConfigureAwait(true);
+    }
+
+    private async Task CheckDotNetRuntimeAsync()
+    {
+        if (await PlatformService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true))
+        {
+            return;
+        }
+
+        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_DotNetRuntime_Install).ConfigureAwait(true);
+        if (result is not MessageBoxResult.OK)
+        {
+            return;
+        }
+
+        var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
+        if (!success)
+        {
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntime_Install_Failed).ConfigureAwait(false);
+        }
     }
 
     [RelayCommand]
