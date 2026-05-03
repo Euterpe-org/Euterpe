@@ -20,7 +20,7 @@ public sealed class WizardStepRegistrationTest
             .RegistrationsFor(new TypedService(typeof(IWizardStep)))
             .ToArray();
 
-        await Assert.That(registrations.Length).IsEqualTo(7);
+        await Assert.That(registrations.Length).IsEqualTo(8);
 
         var implTypes = registrations
             .Select(r => r.Activator.LimitType.Name)
@@ -30,6 +30,7 @@ public sealed class WizardStepRegistrationTest
         var expected = new[]
         {
             "ChartingToolStep",
+            "DotNetRuntimeStep",
             "DotNetSdkStep",
             "EnvVariableStep",
             "EssentialModsStep",
