@@ -11,6 +11,11 @@ public interface IPlatformService : IPlatformPathDiscovery, IPlatformDevEnvironm
     const string DeepLinkScheme = "euterpe";
 
     /// <summary>
+    ///     Fixed value name for MuseDash UID in Windows registry
+    /// </summary>
+    const string UidValueName = "374bfde32ff3436890ff977bc94f8015_#account_id_h274776658";
+
+    /// <summary>
     ///     Get OS string
     /// </summary>
     string OsString { get; }

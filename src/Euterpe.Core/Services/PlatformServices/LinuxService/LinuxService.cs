@@ -15,10 +15,9 @@ internal sealed partial class LinuxService : IPlatformService
     private const string IconAssetName = "Icon.png";
     private const string IconHicolorSize = "256x256";
     private const string MuseDashRegistryPath = @"HKCU\Software\PeroPeroGames\MuseDash";
-    private const string UserInfoValueName = "peropero_account_user_info_h3003705636";
 
     private const string MuseDashUserInfoCommand = $"""
-                                                    wine reg query "{MuseDashRegistryPath}" /v "{UserInfoValueName}"
+                                                    wine reg query "{MuseDashRegistryPath}" /v "{IPlatformService.UidValueName}"
                                                     """;
 
     public string OsString => "linux";
