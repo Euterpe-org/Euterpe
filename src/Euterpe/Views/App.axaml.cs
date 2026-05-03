@@ -62,7 +62,7 @@ public sealed class App : Application
         {
             try
             {
-                Resolve<ISettingService>().Save();
+                Resolve<IAppSettingService>().Save();
             }
             catch (Exception ex)
             {

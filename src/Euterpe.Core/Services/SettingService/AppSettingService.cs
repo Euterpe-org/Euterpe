@@ -1,6 +1,6 @@
 namespace Euterpe.Core;
 
-internal sealed partial class SettingService : ISettingService
+internal sealed partial class AppSettingService : IAppSettingService
 {
     private const string ConfigFileName = "Config.json";
     private static readonly string ConfigPath = Path.Combine(AppDataFolder, ConfigFileName);
@@ -67,16 +67,14 @@ internal sealed partial class SettingService : ISettingService
         }
     }
 
-    public async Task ValidateAsync()
+    public async Task ValidateSteamAsync()
     {
-        Logger.ZLogInformation($"Checking for valid setting...");
+        Logger.ZLogInformation($"Checking for valid Steam setting...");
 
         await CheckSteamFolderAsync().ConfigureAwait(true);
         await CheckSteamExecPathAsync().ConfigureAwait(true);
-        await CheckGameFolderAsync().ConfigureAwait(true);
-        CreateNecessaryFolders();
 
-        Logger.ZLogInformation($"Checking for valid setting done");
+        Logger.ZLogInformation($"Steam setting validated");
     }
 
     #region Injections
@@ -85,16 +83,13 @@ internal sealed partial class SettingService : ISettingService
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IJsonSerializationService JsonSerializationService { get; init; }
 
     [UsedImplicitly]
     public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<SettingService> Logger { get; init; }
+    public required ILogger<AppSettingService> Logger { get; init; }
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }

@@ -175,9 +175,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public required Config Config { get; init; }
 
     [UsedImplicitly]
-    public required ISettingService SettingService { get; init; }
-
-    [UsedImplicitly]
     public required IEnumerable<IWizardStep> WizardSteps { get; init; }
 
     [UsedImplicitly]

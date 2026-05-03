@@ -1,10 +1,10 @@
 namespace Euterpe.Abstractions;
 
-public interface ISettingService
+public interface IAppSettingService
 {
     void Load();
     Task LoadAsync();
     void Save();
     Task SaveAsync();
-    Task ValidateAsync();
+    Task ValidateSteamAsync();
 }
