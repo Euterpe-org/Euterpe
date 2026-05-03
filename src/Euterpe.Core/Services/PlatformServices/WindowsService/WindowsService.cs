@@ -10,7 +10,6 @@ namespace Euterpe.Core;
 internal sealed partial class WindowsService : IPlatformService
 {
     private const string MuseDashRegistrySubKey = @"Software\PeroPeroGames\MuseDash";
-    private const string UserInfoValueName = "peropero_account_user_info_h3003705636";
 
     public string OsString => "win";
     public string UpdaterFileName => "Updater.exe";
@@ -42,7 +41,7 @@ internal sealed partial class WindowsService : IPlatformService
         try
         {
             using var key = Registry.CurrentUser.OpenSubKey(MuseDashRegistrySubKey, false);
-            var value = key?.GetValue(UserInfoValueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames);
+            var value = key?.GetValue(IPlatformService.UidValueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames);
 
             if (value is not byte[] bytes || bytes is [])
             {
