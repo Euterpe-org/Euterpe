@@ -30,7 +30,11 @@ public sealed class App : Application
         {
             desktop.MainWindow = Resolve<MainSplashWindow>();
             deepLinkService.HandleStartupArgs(desktop.Args!);
-            HandleDesktopExit(desktop);
+        }
+
+        if (ApplicationLifetime is IControlledApplicationLifetime controlledLifetime)
+        {
+            HandleExit(controlledLifetime);
         }
 
         this.ObservePropertyChanged(x => x.ActualThemeVariant)
@@ -56,9 +60,9 @@ public sealed class App : Application
         Resolve<LocalizationService>().SetLanguage(config.LanguageCode);
     }
 
-    private static void HandleDesktopExit(IClassicDesktopStyleApplicationLifetime desktop)
+    private static void HandleExit(IControlledApplicationLifetime controlledLifetime)
     {
-        desktop.Exit += (_, _) =>
+        controlledLifetime.Exit += (_, _) =>
         {
             try
             {
