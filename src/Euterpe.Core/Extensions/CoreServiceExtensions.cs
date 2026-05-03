@@ -90,43 +90,24 @@ public static class CoreServiceExtensions
     {
         public void RegisterCoreServices()
         {
+            // Application Wide Services
             builder.RegisterType<AuthState>().SingleInstance();
             builder.RegisterType<Config>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MuseDashConfig>().AsSelf().As<GameConfig>().Keyed<GameConfig>(GameId.MuseDash).SingleInstance();
 
-            builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<AppSettingService>().As<IAppSettingService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GameLaunchService>().As<IGameLaunchService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
-            builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<NotificationService>().As<INotificationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<SettingService>().As<ISettingService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<TelemetryService>().As<ITelemetryService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
-
-            // Wizard Steps
-            builder.RegisterType<MelonLoaderStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<EssentialModsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<UninstallConflictsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<ChartingToolStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<DotNetSdkStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<ModTemplateStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<EnvVariableStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-
-            // Serialization Services
-            builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<VdfSerializationService>().As<IVdfSerializationService>().PropertiesAutowired().SingleInstance();
 
 #pragma warning disable CA1416
-            // Platform Service
 #if WINDOWS
             builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
 #elif LINUX
@@ -135,6 +116,27 @@ public static class CoreServiceExtensions
             builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
 #endif
 #pragma warning restore CA1416
+
+            // Per Game Specific Services
+            builder.RegisterType<MuseDashConfig>().AsSelf().As<GameConfig>().SingleInstance();
+
+            builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<GameLaunchService>().As<IGameLaunchService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
+
+            // Wizard Steps
+            builder.RegisterType<ChartingToolStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<DotNetSdkStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<EnvVariableStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<EssentialModsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MelonLoaderStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<ModTemplateStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<UninstallConflictsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
         }
     }
 }
