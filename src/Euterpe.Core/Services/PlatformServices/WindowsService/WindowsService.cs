@@ -1,8 +1,6 @@
 using System.Text;
-using System.Text.Json;
 using Euterpe.Contracts.Account;
 using Microsoft.Win32;
-using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
 
 namespace Euterpe.Core;
 
@@ -49,15 +47,15 @@ internal sealed partial class WindowsService : IPlatformService
                 return null;
             }
 
-            var json = Encoding.UTF8.GetString(bytes).TrimEnd('\0');
-            if (json.IsNullOrEmpty())
+            var uid = Encoding.UTF8.GetString(bytes).TrimEnd('\0');
+            if (uid.IsNullOrEmpty())
             {
                 Logger.ZLogWarning($"MuseDash user info registry value is empty");
                 return null;
             }
 
             Logger.ZLogInformation($"Successfully retrieved MuseDash user info from registry");
-            return JsonSerializer.Deserialize(json, Default.MuseDashUidRequest);
+            return new MuseDashUidRequest(uid);
         }
         catch (Exception ex)
         {
