@@ -24,21 +24,19 @@
     <StyleInclude
         Source="/Themes/Controls/AsyncImage.axaml" />
     <StyleInclude
-        Source="/Themes/Controls/ContentListItem.axaml" />
-    <StyleInclude
-        Source="/Themes/Controls/ContributorCardControl.axaml" />
+        Source="/Themes/Controls/ContributorCard.axaml" />
     <StyleInclude
         Source="/Themes/Controls/Difficulty.axaml" />
     <StyleInclude
-        Source="/Themes/Controls/DifficultyFilter.axaml" />
+        Source="/Themes/Controls/NavButtonList.axaml" />
     <StyleInclude
-        Source="/Themes/Controls/NaviButtonsControl.axaml" />
-    <StyleInclude
-        Source="/Themes/Controls/NaviPanelListControl.axaml" />
+        Source="/Themes/Controls/NavPanelList.axaml" />
     <StyleInclude
         Source="/Themes/Controls/PlayButton.axaml" />
     <StyleInclude
         Source="/Themes/Controls/RoleCard.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/SettingItem.axaml" />
     <!--  Control Styles  -->
     <StyleInclude
         Source="/Themes/ControlStyles/BorderStyles.axaml" />

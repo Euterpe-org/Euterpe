@@ -4,16 +4,16 @@
     xmlns:e="https://github.com/Euterpe-org/Euterpe">
 
     <Design.PreviewWith>
-        <e:ContentListItem
+        <e:SettingItem
             Description="Description"
             Title="Setting">
             <TextBox
                 Text="Content" />
-        </e:ContentListItem>
+        </e:SettingItem>
     </Design.PreviewWith>
 
     <Style
-        Selector="e|ContentListItem">
+        Selector="e|SettingItem">
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel

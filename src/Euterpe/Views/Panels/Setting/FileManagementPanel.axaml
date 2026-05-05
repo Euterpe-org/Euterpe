@@ -20,11 +20,11 @@
         Classes="ContentListRoot">
 
         <!--  MuseDash Folder  -->
-        <e:ContentListItem
+        <e:SettingItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MuseDashFolder}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolder}}">
             <StackPanel
-                Classes="ContentListItemVertical">
+                Classes="SettingItemVertical">
                 <TextBox
                     Classes="Desc"
                     Text="{Binding GameConfig.Folder, Mode=OneWay}" />
@@ -34,14 +34,14 @@
                     HorizontalAlignment="Left"
                     Theme="{DynamicResource OutlineButton}" />
             </StackPanel>
-        </e:ContentListItem>
+        </e:SettingItem>
 
         <!--  Cache Folder  -->
-        <e:ContentListItem
+        <e:SettingItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_CacheFolder}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_CacheFolder}}">
             <StackPanel
-                Classes="ContentListItemVertical">
+                Classes="SettingItemVertical">
                 <TextBox
                     Classes="Desc"
                     Text="{Binding Config.CacheFolder, Mode=OneWay}" />
@@ -51,7 +51,7 @@
                     HorizontalAlignment="Left"
                     Theme="{DynamicResource OutlineButton}" />
             </StackPanel>
-        </e:ContentListItem>
+        </e:SettingItem>
 
     </StackPanel>
 

@@ -31,7 +31,7 @@
             </StackPanel.Styles>
 
             <!--  Development Environment Section  -->
-            <e:ContentListItem
+            <e:SettingItem
                 Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_DevelopmentEnvironment}}">
                 <StackPanel
                     Margin="5,0,10,0"
@@ -208,10 +208,10 @@
                         </Button>
                     </Grid>
                 </StackPanel>
-            </e:ContentListItem>
+            </e:SettingItem>
 
             <!--  Mod Submission Section  -->
-            <e:ContentListItem
+            <e:SettingItem
                 Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_SubmitMod}}">
                 <Button
                     Classes="Transparent Card"
@@ -255,10 +255,10 @@
                         </Grid>
                     </Border>
                 </Button>
-            </e:ContentListItem>
+            </e:SettingItem>
 
             <!--  Recommended IDEs Section  -->
-            <e:ContentListItem
+            <e:SettingItem
                 Title="{Localize {x:Static loc:XAMLLiteral.ModDevelop_Section_RecommendedIDEs}}">
 
                 <!--  3-column grid for IDE options  -->
@@ -354,7 +354,7 @@
                     </Button>
 
                 </Grid>
-            </e:ContentListItem>
+            </e:SettingItem>
         </StackPanel>
     </ScrollViewer>
 

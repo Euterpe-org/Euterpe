@@ -3,14 +3,14 @@ using Avalonia.Platform;
 
 namespace Euterpe.Controls.Models;
 
-public sealed class ContributorCardItem
+public sealed class Contributor
 {
     public string Name { get; }
     public Bitmap Avatar { get; }
     public string? Description { get; }
     public ContributorLink[]? Links { get; }
 
-    public ContributorCardItem(string name, string? description = null, ContributorLink[]? links = null, string? avatarName = null)
+    public Contributor(string name, string? description = null, ContributorLink[]? links = null, string? avatarName = null)
     {
         Name = name;
         Description = description;

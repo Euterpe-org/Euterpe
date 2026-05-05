@@ -7,59 +7,59 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
     [
         // Developer Team
         new(Contributor_Developer, [
-            new ContributorCardItem("lxy",
+            new Contributor("lxy",
                 "Planning and maintaining the project",
                 [
                     ("GitHub", "https://github.com/lxymahatma"),
                     ("Bilibili", "https://space.bilibili.com/255895683")
                 ]),
-            new ContributorCardItem("KARPED1EM",
+            new Contributor("KARPED1EM",
                 "Remaking UI",
                 [
                     ("GitHub", "https://github.com/KARPED1EM"),
                     ("Bilibili", "https://space.bilibili.com/312252452")
                 ]),
-            new ContributorCardItem("Balint",
+            new Contributor("Balint",
                 "Making the first version of the project",
                 [("GitHub", "https://github.com/Balint817")]),
-            new ContributorCardItem("Ultra Rabbit",
+            new Contributor("Ultra Rabbit",
                 "Rewriting the first version of the project",
                 [("GitHub", "https://github.com/TheBunnies")])
         ]),
 
         // Artist
         new(Contributor_Artist, [
-            new ContributorCardItem("Super Pig",
+            new Contributor("Super Pig",
                 "Drawing the euterpe application icon",
                 [("Bilibili", "https://space.bilibili.com/252615263")]),
-            new ContributorCardItem("aquawtf",
+            new Contributor("aquawtf",
                 "Drawing the euterpe icon"),
-            new ContributorCardItem("Bigbeesushi",
+            new Contributor("Bigbeesushi",
                 "Drawing the euterpe background",
                 [("YouTube", "https://www.youtube.com/@%E9%AD%94%E6%B3%95%E5%B8%AB%E7%8E%A5%E6%9C%88")])
         ]),
 
         // Translators
         new(Translator_ChineseSimplified, [
-            new ContributorCardItem("lxymahatma")
+            new Contributor("lxymahatma")
         ]),
         new(Translator_ChineseTraditional, [
-            new ContributorCardItem("Shiron Lee"),
-            new ContributorCardItem("Bigbeesushi")
+            new Contributor("Shiron Lee"),
+            new Contributor("Bigbeesushi")
         ]),
         new(Translator_Hungarian, [
-            new ContributorCardItem("Balint")
+            new Contributor("Balint")
         ]),
         new(Translator_Korean, [
-            new ContributorCardItem("MEMOLie")
+            new Contributor("MEMOLie")
         ]),
         new(Translator_Russian, [
-            new ContributorCardItem("Ultra Rabbit"),
-            new ContributorCardItem("Ronner"),
-            new ContributorCardItem("taypexx")
+            new Contributor("Ultra Rabbit"),
+            new Contributor("Ronner"),
+            new Contributor("taypexx")
         ]),
         new(Translator_Spanish, [
-            new ContributorCardItem("MNight4")
+            new Contributor("MNight4")
         ])
     ];
 

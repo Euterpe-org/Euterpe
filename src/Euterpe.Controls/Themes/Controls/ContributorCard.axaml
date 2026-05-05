@@ -5,11 +5,11 @@
     xmlns:models="using:Euterpe.Controls.Models">
 
     <Design.PreviewWith>
-        <e:ContributorCardControl />
+        <e:ContributorCard />
     </Design.PreviewWith>
 
     <Style
-        Selector="e|ContributorCardControl">
+        Selector="e|ContributorCard">
         <Setter Property="Width" Value="320" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -110,7 +110,7 @@
                                 <DataTemplate
                                     x:DataType="models:ContributorLink">
                                     <Button
-                                        Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=e:ContributorCardControl}, Mode=OneTime}"
+                                        Command="{Binding ButtonCommand, RelativeSource={RelativeSource AncestorType=e:ContributorCard}, Mode=OneTime}"
                                         CommandParameter="{Binding Url, Mode=OneTime}"
                                         Margin="4">
                                         <TextBlock

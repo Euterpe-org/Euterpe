@@ -3,22 +3,22 @@ using Euterpe.Controls.Models;
 
 namespace Euterpe.Controls;
 
-public sealed class ContributorCardControl : TemplatedControl
+public sealed class ContributorCard : TemplatedControl
 {
     public static readonly StyledProperty<IImage> AvatarProperty =
-        AvaloniaProperty.Register<ContributorCardControl, IImage>(nameof(Avatar));
+        AvaloniaProperty.Register<ContributorCard, IImage>(nameof(Avatar));
 
     public static readonly StyledProperty<string> ContributorNameProperty =
-        AvaloniaProperty.Register<ContributorCardControl, string>(nameof(ContributorName));
+        AvaloniaProperty.Register<ContributorCard, string>(nameof(ContributorName));
 
     public static readonly StyledProperty<string?> ContributorDescriptionProperty =
-        AvaloniaProperty.Register<ContributorCardControl, string?>(nameof(ContributorDescription));
+        AvaloniaProperty.Register<ContributorCard, string?>(nameof(ContributorDescription));
 
     public static readonly StyledProperty<IEnumerable<ContributorLink>?> LinksProperty =
-        AvaloniaProperty.Register<ContributorCardControl, IEnumerable<ContributorLink>?>(nameof(Links));
+        AvaloniaProperty.Register<ContributorCard, IEnumerable<ContributorLink>?>(nameof(Links));
 
     public static readonly StyledProperty<ICommand> ButtonCommandProperty =
-        AvaloniaProperty.Register<ContributorCardControl, ICommand>(nameof(ButtonCommand));
+        AvaloniaProperty.Register<ContributorCard, ICommand>(nameof(ButtonCommand));
 
     [Content]
     public IImage Avatar

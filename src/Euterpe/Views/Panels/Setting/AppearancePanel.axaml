@@ -20,11 +20,11 @@
         Classes="ContentListRoot">
 
         <!--  Language  -->
-        <e:ContentListItem
+        <e:SettingItem
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_Language}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_Language}}">
             <StackPanel
-                Classes="ContentListItemHorizontal">
+                Classes="SettingItemHorizontal">
                 <ComboBox
                     ItemsSource="{Binding AvailableLanguages, Mode=OneTime}"
                     MinWidth="200"
@@ -33,7 +33,7 @@
                     Command="{Binding ApplyLanguageCommand}"
                     Content="{Localize {x:Static loc:XAMLLiteral.Button_Apply}}" />
             </StackPanel>
-        </e:ContentListItem>
+        </e:SettingItem>
 
     </StackPanel>
 

@@ -4,11 +4,11 @@
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:models="using:Euterpe.Controls.Models">
     <Design.PreviewWith>
-        <e:NaviPanelListControl />
+        <e:NavPanelList />
     </Design.PreviewWith>
 
     <Style
-        Selector="e|NaviPanelListControl">
+        Selector="e|NavPanelList">
         <Setter Property="Template">
             <ControlTemplate>
                 <ListBox

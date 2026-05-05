@@ -3,10 +3,10 @@
 public sealed class Difficulty : TemplatedControl
 {
     public static readonly StyledProperty<IImage?> SourceProperty =
-        AvaloniaProperty.Register<Image, IImage?>(nameof(Source));
+        AvaloniaProperty.Register<Difficulty, IImage?>(nameof(Source));
 
     public static readonly StyledProperty<string?> TextProperty =
-        AvaloniaProperty.Register<TextBlock, string?>(nameof(Text));
+        AvaloniaProperty.Register<Difficulty, string?>(nameof(Text));
 
     [Content]
     public IImage? Source

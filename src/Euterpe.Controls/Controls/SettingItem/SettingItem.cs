@@ -1,15 +1,15 @@
 ﻿namespace Euterpe.Controls;
 
-public sealed class ContentListItem : TemplatedControl
+public sealed class SettingItem : TemplatedControl
 {
     public static readonly StyledProperty<string> TitleProperty =
-        AvaloniaProperty.Register<ContentListItem, string>(nameof(Title));
+        AvaloniaProperty.Register<SettingItem, string>(nameof(Title));
 
     public static readonly StyledProperty<string> DescriptionProperty =
-        AvaloniaProperty.Register<ContentListItem, string>(nameof(Description));
+        AvaloniaProperty.Register<SettingItem, string>(nameof(Description));
 
     public static readonly StyledProperty<object> ContentProperty =
-        AvaloniaProperty.Register<ContentListItem, object>(nameof(Content));
+        AvaloniaProperty.Register<SettingItem, object>(nameof(Content));
 
     public string Title
     {
