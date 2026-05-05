@@ -24,6 +24,15 @@ public abstract partial class GameConfig
     public abstract string UidRegistryValueName { get; }
 
     [JsonIgnore]
+    public abstract string ModTemplatePackageName { get; }
+
+    [JsonIgnore]
+    public abstract string ModTemplateShortName { get; }
+
+    [JsonIgnore]
+    public abstract string PathEnvironmentVariableName { get; }
+
+    [JsonIgnore]
     public abstract IReadOnlyList<WizardOption> WizardOptions { get; }
 
     [JsonIgnore]

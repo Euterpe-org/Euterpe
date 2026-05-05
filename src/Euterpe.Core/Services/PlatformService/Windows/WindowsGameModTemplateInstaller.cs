@@ -5,19 +5,12 @@ namespace Euterpe.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
 internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstaller
 {
-    #region Injections
-
-    [UsedImplicitly]
-    public required ILogger<WindowsGameModTemplateInstaller> Logger { get; init; }
-
-    #endregion Injections
-
     public async Task<bool> CheckInstalledAsync()
     {
         try
         {
             var result = await Cli.Wrap("dotnet")
-                .WithArguments(["new", "list", "musedashmod"])
+                .WithArguments(["new", "list", GameConfig.ModTemplateShortName])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteAsync()
                 .ConfigureAwait(false);
@@ -36,7 +29,7 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
         try
         {
             await Cli.Wrap("dotnet")
-                .WithArguments(["new", "install", "MuseDash.Mod.Template"])
+                .WithArguments(["new", "install", GameConfig.ModTemplatePackageName])
                 .ExecuteAsync()
                 .ConfigureAwait(false);
 
@@ -54,7 +47,7 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
         try
         {
             await Cli.Wrap("dotnet")
-                .WithArguments(["new", "uninstall", "MuseDash.Mod.Template"])
+                .WithArguments(["new", "uninstall", GameConfig.ModTemplatePackageName])
                 .ExecuteAsync()
                 .ConfigureAwait(false);
 
@@ -66,4 +59,14 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
             throw;
         }
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
+
+    [UsedImplicitly]
+    public required ILogger<WindowsGameModTemplateInstaller> Logger { get; init; }
+
+    #endregion Injections
 }

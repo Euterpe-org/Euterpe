@@ -1,4 +1,4 @@
-{
+﻿{
   SteamFolder: C:/Program Files (x86)/SteamLibrary,
   SteamExecPath: C:/Program Files (x86)/SteamLibrary/steam.exe,
   CacheFolder: Cache,
@@ -10,6 +10,9 @@
     GameFolderName: Muse Dash,
     GameDataFolderName: MuseDash_Data,
     UidRegistryValueName: 374bfde32ff3436890ff977bc94f8015_#account_id_h274776658,
+    ModTemplatePackageName: MuseDash.Mod.Template,
+    ModTemplateShortName: musedashmod,
+    PathEnvironmentVariableName: MD_DIRECTORY,
     WizardOptions: [
       {
         Kinds: MelonLoader,

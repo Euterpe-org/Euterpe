@@ -102,22 +102,25 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.ZLogInformation($"Setting MD_DIRECTORY environment variable...");
+        Logger.ZLogInformation($"Setting {GameConfig.PathEnvironmentVariableName} environment variable...");
 
         var success = PathEnvironment.Set();
         if (success)
         {
-            Logger.ZLogInformation($"MD_DIRECTORY environment variable set successfully");
+            Logger.ZLogInformation($"{GameConfig.PathEnvironmentVariableName} environment variable set successfully");
             EnvVariableSet = true;
         }
         else
         {
-            Logger.ZLogError($"Failed to set MD_DIRECTORY environment variable");
+            Logger.ZLogError($"Failed to set {GameConfig.PathEnvironmentVariableName} environment variable");
             await MessageBoxService.ErrorAsync(MessageBox_Content_SetMdDirectoryEnvironment_Failed).ConfigureAwait(false);
         }
     }
 
     #region Injections
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required ILogger<ModDevelopPanelViewModel> Logger { get; init; }

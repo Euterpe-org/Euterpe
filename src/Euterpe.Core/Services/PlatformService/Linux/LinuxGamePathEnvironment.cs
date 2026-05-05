@@ -5,13 +5,13 @@ internal sealed class LinuxGamePathEnvironment : IGamePathEnvironment
 {
     public bool IsSet()
     {
-        var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
+        var envValue = Environment.GetEnvironmentVariable(GameConfig.PathEnvironmentVariableName);
         return !envValue.IsNullOrEmpty() && envValue == GameConfig.Folder;
     }
 
     public bool Set()
     {
-        Logger.ZLogInformation($"Ask user to set MD_DIRECTORY environment variable to: {GameConfig.Folder}");
+        Logger.ZLogInformation($"Ask user to set {GameConfig.PathEnvironmentVariableName} environment variable to: {GameConfig.Folder}");
         MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, GameConfig.Folder)
             .ConfigureAwait(false);
         return true;

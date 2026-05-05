@@ -5,7 +5,7 @@ internal sealed class WindowsGamePathEnvironment : IGamePathEnvironment
 {
     public bool IsSet()
     {
-        var envValue = Environment.GetEnvironmentVariable("MD_DIRECTORY");
+        var envValue = Environment.GetEnvironmentVariable(GameConfig.PathEnvironmentVariableName);
         return !envValue.IsNullOrEmpty() && envValue == GameConfig.Folder;
     }
 
@@ -13,14 +13,14 @@ internal sealed class WindowsGamePathEnvironment : IGamePathEnvironment
     {
         try
         {
-            Logger.ZLogInformation($"Set MD_DIRECTORY environment variable to: {GameConfig.Folder}");
-            Environment.SetEnvironmentVariable("MD_DIRECTORY", GameConfig.Folder, EnvironmentVariableTarget.User);
+            Logger.ZLogInformation($"Set {GameConfig.PathEnvironmentVariableName} environment variable to: {GameConfig.Folder}");
+            Environment.SetEnvironmentVariable(GameConfig.PathEnvironmentVariableName, GameConfig.Folder, EnvironmentVariableTarget.User);
             MessageBoxService.SuccessOverlayAsync(MessageBox_Content_SetPathEnvironment_Windows, GameConfig.Folder).ConfigureAwait(false);
             return true;
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to set MD_DIRECTORY environment variable");
+            Logger.ZLogError(ex, $"Failed to set {GameConfig.PathEnvironmentVariableName} environment variable");
             return false;
         }
     }

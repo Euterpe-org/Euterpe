@@ -30,6 +30,15 @@ public sealed class MuseDashConfig : GameConfig
     public override string UidRegistryValueName => "374bfde32ff3436890ff977bc94f8015_#account_id_h274776658";
 
     [JsonIgnore]
+    public override string ModTemplatePackageName => "MuseDash.Mod.Template";
+
+    [JsonIgnore]
+    public override string ModTemplateShortName => "musedashmod";
+
+    [JsonIgnore]
+    public override string PathEnvironmentVariableName => "MD_DIRECTORY";
+
+    [JsonIgnore]
     public override IReadOnlyList<WizardOption> WizardOptions { get; } =
     [
         new(WizardOptionKinds.MelonLoader, Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true, IsRequired = true },
