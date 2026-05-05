@@ -8,18 +8,25 @@ public sealed class MuseDashConfig : GameConfig
         | WizardOptionKinds.EssentialMods
         | WizardOptionKinds.UninstallConflicts;
 
+    [JsonIgnore]
     public override GameId Id => GameId.MuseDash;
 
+    [JsonIgnore]
     public override string DisplayName => "Muse Dash";
 
+    [JsonIgnore]
     public override string SteamAppId => "774171";
 
+    [JsonIgnore]
     public override string ExecutableName => "MuseDash.exe";
 
+    [JsonIgnore]
     public override string GameFolderName => "Muse Dash";
 
+    [JsonIgnore]
     public override string GameDataFolderName => "MuseDash_Data";
 
+    [JsonIgnore]
     public override IReadOnlyList<WizardOption> WizardOptions { get; } =
     [
         new(WizardOptionKinds.MelonLoader, Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true, IsRequired = true },
@@ -32,6 +39,7 @@ public sealed class MuseDashConfig : GameConfig
         new(WizardOptionKinds.EnvVariable, Wizard_Task_EnvVariable, Wizard_Task_EnvVariable_Description)
     ];
 
+    [JsonIgnore]
     public override IReadOnlyDictionary<WizardIdentity, WizardOptionKinds> WizardPresets { get; } = new Dictionary<WizardIdentity, WizardOptionKinds>
     {
         [WizardIdentity.Player] = Required,

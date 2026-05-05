@@ -4,14 +4,14 @@
   CacheFolder: Cache,
   MuseDash: {
     Folder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash,
-    GameMode: Vanilla
+    GameMode: Vanilla,
+    SetupCompleted: false
   },
   LanguageCode: zh-Hans,
   Theme: Dark,
   ShowConsole: true,
   ShowStartScreen: true,
   AlwaysShowScrollBar: true,
-  SetupCompleted: false,
   UpdateChannel: Stable,
   SkipVersion: null,
   IgnoreException: false

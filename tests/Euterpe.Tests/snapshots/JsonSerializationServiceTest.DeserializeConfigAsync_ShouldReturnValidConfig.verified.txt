@@ -3,14 +3,110 @@
   SteamExecPath: C:/Program Files (x86)/SteamLibrary/steam.exe,
   CacheFolder: Cache,
   MuseDash: {
-    Folder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash,
-    GameMode: Vanilla,
     Id: MuseDash,
     DisplayName: Muse Dash,
     SteamAppId: 774171,
     ExecutableName: MuseDash.exe,
     GameFolderName: Muse Dash,
     GameDataFolderName: MuseDash_Data,
+    WizardOptions: [
+      {
+        Kinds: MelonLoader,
+        DisplayName: {
+          Value: MelonLoader
+        },
+        Description: {
+          Value: Required mod loader framework
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: DotNetRuntime,
+        DisplayName: {
+          Value: .NET Runtime
+        },
+        Description: {
+          Value: Required for running modded game
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: EssentialMods,
+        DisplayName: {
+          Value: Essential Mods
+        },
+        Description: {
+          Value: Core mods for the best experience
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: UninstallConflicts,
+        DisplayName: {
+          Value: Uninstall Conflicts
+        },
+        Description: {
+          Value: Remove incompatible mods
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: ChartingTool,
+        DisplayName: {
+          Value: Charting Tool (MDBMSC)
+        },
+        Description: {
+          Value: MDM chart creation toolkit
+        },
+        IsRequired: false,
+        IsSelected: false
+      },
+      {
+        Kinds: DotNetSdk,
+        DisplayName: {
+          Value: .NET SDK
+        },
+        Description: {
+          Value: Required for mod development
+        },
+        IsRequired: false,
+        IsSelected: false
+      },
+      {
+        Kinds: ModTemplate,
+        DisplayName: {
+          Value: Mod Template
+        },
+        Description: {
+          Value: NuGet template for new mod projects
+        },
+        IsRequired: false,
+        IsSelected: false
+      },
+      {
+        Kinds: EnvVariable,
+        DisplayName: {
+          Value: MD_DIRECTORY Variable
+        },
+        Description: {
+          Value: Set game path environment variable
+        },
+        IsRequired: false,
+        IsSelected: false
+      }
+    ],
+    WizardPresets: {
+      Player: MelonLoader, DotNetRuntime, EssentialMods, UninstallConflicts,
+      Charter: MelonLoader, DotNetRuntime, EssentialMods, UninstallConflicts, ChartingTool,
+      Modder: MelonLoader, DotNetRuntime, EssentialMods, UninstallConflicts, DotNetSdk, ModTemplate, EnvVariable
+    },
+    Folder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash,
+    GameMode: Vanilla,
+    SetupCompleted: false,
     GameVersion: ,
     UnityVersion: ,
     ModsFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/Mods,
@@ -31,6 +127,5 @@
   ShowConsole: true,
   ShowStartScreen: true,
   AlwaysShowScrollBar: true,
-  SetupCompleted: false,
   IgnoreException: false
 }
