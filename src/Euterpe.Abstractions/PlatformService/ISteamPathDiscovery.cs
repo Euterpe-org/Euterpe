@@ -1,6 +1,6 @@
 namespace Euterpe.Abstractions;
 
-public interface IPlatformPathDiscovery
+public interface ISteamPathDiscovery
 {
     /// <summary>
     ///     Get steam folder path
@@ -15,20 +15,6 @@ public interface IPlatformPathDiscovery
     /// <param name="folderPath"></param>
     /// <returns></returns>
     bool CheckIsValidSteamFolder(string folderPath);
-
-    /// <summary>
-    ///     Get game folder path
-    /// </summary>
-    /// <param name="gameFolder"></param>
-    /// <returns>Is success</returns>
-    bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder);
-
-    /// <summary>
-    ///     Check is valid game folder
-    /// </summary>
-    /// <param name="folderPath"></param>
-    /// <returns></returns>
-    bool CheckIsValidGameFolder(string folderPath);
 
     /// <summary>
     ///     Get steam executable path

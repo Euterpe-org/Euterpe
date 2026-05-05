@@ -7,7 +7,7 @@ public abstract partial class ViewModelBase : ObservableObject, IAsyncInitializa
     #region Injections
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IPlatformLauncher Launcher { get; init; }
 
     #endregion Injections
 
@@ -18,11 +18,11 @@ public abstract partial class ViewModelBase : ObservableObject, IAsyncInitializa
     protected virtual Task OnInitializeAsync() => Task.CompletedTask;
 
     [RelayCommand]
-    private Task OpenFileAsync(string filePath) => PlatformService.OpenFileAsync(filePath);
+    private Task OpenFileAsync(string filePath) => Launcher.OpenFileAsync(filePath);
 
     [RelayCommand]
-    private Task OpenFolderAsync(string folderPath) => PlatformService.OpenFolderAsync(folderPath);
+    private Task OpenFolderAsync(string folderPath) => Launcher.OpenFolderAsync(folderPath);
 
     [RelayCommand]
-    private Task OpenUrlAsync(string url) => PlatformService.OpenUriAsync(url);
+    private Task OpenUrlAsync(string url) => Launcher.OpenUriAsync(url);
 }

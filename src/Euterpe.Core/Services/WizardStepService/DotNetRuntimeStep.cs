@@ -5,7 +5,7 @@ internal sealed class DotNetRuntimeStep : IWizardStep
     #region Injections
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IGameRuntimeInstaller RuntimeInstaller { get; init; }
 
     #endregion Injections
 
@@ -13,11 +13,11 @@ internal sealed class DotNetRuntimeStep : IWizardStep
 
     public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
-        if (await PlatformService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(false))
+        if (await RuntimeInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
-        await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(false);
+        await RuntimeInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

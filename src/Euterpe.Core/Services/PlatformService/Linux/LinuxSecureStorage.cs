@@ -6,7 +6,8 @@ using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
 
 namespace Euterpe.Core;
 
-internal sealed partial class LinuxService
+[SupportedOSPlatform(nameof(OSPlatform.Linux))]
+internal sealed class LinuxSecureStorage : IPlatformSecureStorage
 {
     public async Task SaveTokensAsync(string accessToken, string refreshToken)
     {
@@ -89,4 +90,14 @@ internal sealed partial class LinuxService
             Logger.ZLogWarning(ex, $"Failed to clear tokens with secret-tool");
         }
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required ILogger<LinuxSecureStorage> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
+
+    #endregion Injections
 }

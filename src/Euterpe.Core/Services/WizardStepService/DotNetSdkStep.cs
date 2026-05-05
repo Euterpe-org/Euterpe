@@ -5,7 +5,7 @@ internal sealed class DotNetSdkStep : IWizardStep
     #region Injections
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IDotNetSdkInstaller SdkInstaller { get; init; }
 
     #endregion Injections
 
@@ -13,11 +13,11 @@ internal sealed class DotNetSdkStep : IWizardStep
 
     public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
-        if (await PlatformService.CheckDotNetSdkInstalledAsync().ConfigureAwait(false))
+        if (await SdkInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
-        await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(false);
+        await SdkInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

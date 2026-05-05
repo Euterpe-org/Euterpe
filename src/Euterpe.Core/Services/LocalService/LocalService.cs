@@ -235,7 +235,10 @@ internal sealed partial class LocalService : ILocalService
     public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required ISteamPathDiscovery SteamDiscovery { get; init; }
+
+    [UsedImplicitly]
+    public required IGamePathDiscovery GamePaths { get; init; }
 
     [UsedImplicitly]
     public required IResourceService ResourceService { get; init; }

@@ -107,19 +107,8 @@ public static class CoreServiceExtensions
             builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<VdfSerializationService>().As<IVdfSerializationService>().PropertiesAutowired().SingleInstance();
 
-#pragma warning disable CA1416
-#if WINDOWS
-            builder.RegisterType<WindowsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-#elif LINUX
-            builder.RegisterType<LinuxService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-#elif MACOS
-            builder.RegisterType<MacOsService>().As<IPlatformService>().PropertiesAutowired().SingleInstance();
-#endif
-#pragma warning restore CA1416
-
             // Per Game Specific Services
             builder.RegisterType<MuseDashConfig>().AsSelf().As<GameConfig>().SingleInstance();
-
             builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
@@ -138,6 +127,54 @@ public static class CoreServiceExtensions
             builder.RegisterType<MelonLoaderStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ModTemplateStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<UninstallConflictsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+
+            builder.RegisterPerPlatformCoreServices();
+        }
+
+        private void RegisterPerPlatformCoreServices()
+        {
+#pragma warning disable CA1416
+#if WINDOWS
+            builder.RegisterType<WindowsDeepLinkSetup>().As<IDeepLinkSetup>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
+
+            builder.RegisterType<WindowsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().SingleInstance();
+#elif LINUX
+            builder.RegisterType<LinuxDeepLinkSetup>().As<IDeepLinkSetup>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
+
+            builder.RegisterType<LinuxGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().SingleInstance();
+#elif MACOS
+            builder.RegisterType<MacOsDeepLinkSetup>().As<IDeepLinkSetup>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
+
+            builder.RegisterType<MacOsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().SingleInstance();
+#endif
+#pragma warning restore CA1416
         }
     }
 }

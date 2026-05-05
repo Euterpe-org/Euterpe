@@ -73,7 +73,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     private Task OpenConfigFileAsync()
     {
         Logger.ZLogInformation($"Opening config file for mod: {SelectedMod.Name}");
-        return PlatformService.OpenFileAsync(Path.Combine(GameConfig.UserDataFolder, SelectedMod.ConfigFile));
+        return Launcher.OpenFileAsync(Path.Combine(GameConfig.UserDataFolder, SelectedMod.ConfigFile));
     }
 
     [RelayCommand(AllowConcurrentExecutions = true)]

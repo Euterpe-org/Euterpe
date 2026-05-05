@@ -14,12 +14,12 @@ internal sealed class GameSettingService : IGameSettingService
 
     private async Task CheckGameFolderAsync()
     {
-        if (GameConfig.Folder.IsNullOrEmpty() || !PlatformService.CheckIsValidGameFolder(GameConfig.Folder))
+        if (GameConfig.Folder.IsNullOrEmpty() || !GamePaths.CheckIsValidGameFolder(GameConfig.Folder))
         {
             Logger.ZLogError($"Stored {GameConfig.DisplayName} folder is invalid");
 
             var useDetectedPath = false;
-            if (PlatformService.TryGetGameFolder(out var gameFolder))
+            if (GamePaths.TryGetGameFolder(out var gameFolder))
             {
                 var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_Confirm_DetectedMuseDashPath, gameFolder).ConfigureAwait(true);
                 useDetectedPath = result is MessageBoxResult.Yes;
@@ -67,7 +67,7 @@ internal sealed class GameSettingService : IGameSettingService
     public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IGamePathDiscovery GamePaths { get; init; }
 
     #endregion Injections
 }

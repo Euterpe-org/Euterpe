@@ -4,7 +4,7 @@ internal sealed partial class LocalService
 {
     private async ValueTask<bool> EnsureValidSteamFolderAsync(string folderPath)
     {
-        if (PlatformService.CheckIsValidSteamFolder(folderPath))
+        if (SteamDiscovery.CheckIsValidSteamFolder(folderPath))
         {
             return true;
         }
@@ -15,7 +15,7 @@ internal sealed partial class LocalService
 
     private async ValueTask<bool> EnsureValidSteamExecPathAsync(string execPath)
     {
-        if (PlatformService.CheckIsValidSteamExecPath(execPath))
+        if (SteamDiscovery.CheckIsValidSteamExecPath(execPath))
         {
             return true;
         }
@@ -26,7 +26,7 @@ internal sealed partial class LocalService
 
     private async ValueTask<bool> EnsureValidGameFolderAsync(string folderPath)
     {
-        if (PlatformService.CheckIsValidGameFolder(folderPath))
+        if (GamePaths.CheckIsValidGameFolder(folderPath))
         {
             return true;
         }

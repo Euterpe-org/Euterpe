@@ -7,24 +7,24 @@ public sealed class EnvVariableStepTest
     [Test]
     public async Task ExecuteAsync_PathEnvVariableAlreadySet_DoesNotSetIt()
     {
-        var platformService = IPlatformService.Mock();
-        platformService.CheckPathEnvironmentVariableSet().Returns(true);
-        var step = new EnvVariableStep { PlatformService = platformService };
+        var pathEnvironment = IGamePathEnvironment.Mock();
+        pathEnvironment.IsSet().Returns(true);
+        var step = new EnvVariableStep { PathEnvironment = pathEnvironment };
 
         await step.ExecuteAsync();
 
-        platformService.SetPathEnvironmentVariable().WasCalled(Times.Never);
+        pathEnvironment.Set().WasCalled(Times.Never);
     }
 
     [Test]
     public async Task ExecuteAsync_PathEnvVariableNotSet_SetsIt()
     {
-        var platformService = IPlatformService.Mock();
-        platformService.CheckPathEnvironmentVariableSet().Returns(false);
-        var step = new EnvVariableStep { PlatformService = platformService };
+        var pathEnvironment = IGamePathEnvironment.Mock();
+        pathEnvironment.IsSet().Returns(false);
+        var step = new EnvVariableStep { PathEnvironment = pathEnvironment };
 
         await step.ExecuteAsync();
 
-        platformService.SetPathEnvironmentVariable().WasCalled(Times.Once);
+        pathEnvironment.Set().WasCalled(Times.Once);
     }
 }

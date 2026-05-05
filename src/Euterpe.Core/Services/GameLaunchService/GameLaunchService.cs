@@ -35,8 +35,5 @@ internal sealed partial class GameLaunchService : IGameLaunchService
     [UsedImplicitly]
     public required ILogger<GameLaunchService> Logger { get; init; }
 
-    [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
-
     #endregion Injections
 }

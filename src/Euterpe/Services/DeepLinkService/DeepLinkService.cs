@@ -8,7 +8,7 @@ public sealed partial class DeepLinkService
     public async Task SetupAsync()
     {
         var processPath = Environment.ProcessPath ?? throw new InvalidOperationException("Process path is null");
-        await PlatformService.SetupDeepLinkAsync(processPath).ConfigureAwait(false);
+        await DeepLinkSetup.SetupDeepLinkAsync(processPath).ConfigureAwait(false);
     }
 
     public void HandleStartupArgs(string[] args)
@@ -25,7 +25,7 @@ public sealed partial class DeepLinkService
     {
         Logger.ZLogInformation($"Deep link received: {uri}");
 
-        if (!Uri.TryCreate(uri, UriKind.Absolute, out var parsed) || parsed.Scheme is not IPlatformService.DeepLinkScheme)
+        if (!Uri.TryCreate(uri, UriKind.Absolute, out var parsed) || parsed.Scheme is not IDeepLinkSetup.DeepLinkScheme)
         {
             Logger.ZLogWarning($"Invalid deep link: {uri}");
             return;
@@ -73,7 +73,7 @@ public sealed partial class DeepLinkService
     public required ILogger<DeepLinkService> Logger { get; init; }
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IDeepLinkSetup DeepLinkSetup { get; init; }
 
     [UsedImplicitly]
     public required Lazy<IAuthService> LazyAuthService { get; init; }

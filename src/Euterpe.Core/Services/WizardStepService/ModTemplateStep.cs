@@ -5,7 +5,7 @@ internal sealed class ModTemplateStep : IWizardStep
     #region Injections
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IGameModTemplateInstaller ModTemplateInstaller { get; init; }
 
     #endregion Injections
 
@@ -13,11 +13,11 @@ internal sealed class ModTemplateStep : IWizardStep
 
     public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
-        if (await PlatformService.CheckModTemplateInstalledAsync().ConfigureAwait(false))
+        if (await ModTemplateInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
-        await PlatformService.InstallModTemplateAsync().ConfigureAwait(false);
+        await ModTemplateInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

@@ -16,9 +16,9 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
 
-        DotNetSdkInstalled = await PlatformService.CheckDotNetSdkInstalledAsync().ConfigureAwait(true);
-        ModTemplateInstalled = await PlatformService.CheckModTemplateInstalledAsync().ConfigureAwait(true);
-        EnvVariableSet = PlatformService.CheckPathEnvironmentVariableSet();
+        DotNetSdkInstalled = await SdkInstaller.CheckInstalledAsync().ConfigureAwait(true);
+        ModTemplateInstalled = await ModTemplateInstaller.CheckInstalledAsync().ConfigureAwait(true);
+        EnvVariableSet = PathEnvironment.IsSet();
 
         Logger.ZLogInformation($"{nameof(ModDevelopPanelViewModel)} Initialized");
     }
@@ -33,7 +33,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         }
 
         Logger.ZLogInformation($"Installing DotNet SDK...");
-        var success = await PlatformService.InstallDotNetSdkAsync().ConfigureAwait(true);
+        var success = await SdkInstaller.InstallAsync().ConfigureAwait(true);
         if (!success)
         {
             await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDK_Install_Failed).ConfigureAwait(false);
@@ -59,7 +59,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         Logger.ZLogInformation($"Installing Mod Template...");
         try
         {
-            await PlatformService.InstallModTemplateAsync().ConfigureAwait(true);
+            await ModTemplateInstaller.InstallAsync().ConfigureAwait(true);
             Logger.ZLogInformation($"Mod Template installed successfully");
             ModTemplateInstalled = true;
         }
@@ -81,7 +81,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         Logger.ZLogInformation($"Uninstalling Mod Template...");
         try
         {
-            await PlatformService.UninstallModTemplateAsync().ConfigureAwait(true);
+            await ModTemplateInstaller.UninstallAsync().ConfigureAwait(true);
             Logger.ZLogInformation($"Mod Template uninstalled successfully");
             ModTemplateInstalled = false;
         }
@@ -104,7 +104,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
         Logger.ZLogInformation($"Setting MD_DIRECTORY environment variable...");
 
-        var success = PlatformService.SetPathEnvironmentVariable();
+        var success = PathEnvironment.Set();
         if (success)
         {
             Logger.ZLogInformation($"MD_DIRECTORY environment variable set successfully");
@@ -124,6 +124,15 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
+
+    [UsedImplicitly]
+    public required IDotNetSdkInstaller SdkInstaller { get; init; }
+
+    [UsedImplicitly]
+    public required IGameModTemplateInstaller ModTemplateInstaller { get; init; }
+
+    [UsedImplicitly]
+    public required IGamePathEnvironment PathEnvironment { get; init; }
 
     #endregion Injections
 }
