@@ -111,6 +111,7 @@ public static class CoreServiceExtensions
 
             // Per Game Specific Services
             builder.RegisterType<MuseDashConfig>().AsSelf().As<GameConfig>().SingleInstance();
+            builder.RegisterType<MuseDash2Config>().AsSelf().SingleInstance();
             builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<GameDownloadManager>().As<IGameDownloadManager>().PropertiesAutowired().SingleInstance();

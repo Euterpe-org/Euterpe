@@ -2,6 +2,7 @@
   SteamFolder: C:/Program Files (x86)/SteamLibrary,
   SteamExecPath: C:/Program Files (x86)/SteamLibrary/steam.exe,
   CacheFolder: Cache,
+  ActiveGame: MuseDash,
   MuseDash: {
     Id: MuseDash,
     DisplayName: Muse Dash,
@@ -125,6 +126,129 @@
     UnityDependencyZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/UnityDependencies_.zip,
     Cpp2ILExecutablePath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Cpp2IL.exe,
     Cpp2ILPluginPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Plugins/Cpp2IL.Plugin.StrippedCodeRegSupport.dll
+  },
+  MuseDash2: {
+    Id: MuseDash2,
+    DisplayName: Muse Dash 2,
+    SteamAppId: 0,
+    ExecutableName: MuseDash2.exe,
+    GameFolderName: Muse Dash 2,
+    GameDataFolderName: MuseDash2_Data,
+    UidRegistryValueName: ,
+    ModTemplatePackageName: MuseDash2.Mod.Template,
+    ModTemplateShortName: musedash2mod,
+    PathEnvironmentVariableName: MD2_DIRECTORY,
+    WizardOptions: [
+      {
+        Kinds: MelonLoader,
+        DisplayName: {
+          Value: MelonLoader
+        },
+        Description: {
+          Value: Required mod loader framework
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: DotNetRuntime,
+        DisplayName: {
+          Value: .NET Runtime
+        },
+        Description: {
+          Value: Required for running modded game
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: EssentialMods,
+        DisplayName: {
+          Value: Essential Mods
+        },
+        Description: {
+          Value: Core mods for the best experience
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: UninstallConflicts,
+        DisplayName: {
+          Value: Uninstall Conflicts
+        },
+        Description: {
+          Value: Remove incompatible mods
+        },
+        IsRequired: true,
+        IsSelected: true
+      },
+      {
+        Kinds: ChartingTool,
+        DisplayName: {
+          Value: Charting Tool (MDBMSC)
+        },
+        Description: {
+          Value: MDM chart creation toolkit
+        },
+        IsRequired: false,
+        IsSelected: false
+      },
+      {
+        Kinds: DotNetSdk,
+        DisplayName: {
+          Value: .NET SDK
+        },
+        Description: {
+          Value: Required for mod development
+        },
+        IsRequired: false,
+        IsSelected: false
+      },
+      {
+        Kinds: ModTemplate,
+        DisplayName: {
+          Value: Mod Template
+        },
+        Description: {
+          Value: NuGet template for new mod projects
+        },
+        IsRequired: false,
+        IsSelected: false
+      },
+      {
+        Kinds: EnvVariable,
+        DisplayName: {
+          Value: MD_DIRECTORY Variable
+        },
+        Description: {
+          Value: Set game path environment variable
+        },
+        IsRequired: false,
+        IsSelected: false
+      }
+    ],
+    WizardPresets: {
+      Player: MelonLoader, DotNetRuntime, EssentialMods, UninstallConflicts,
+      Charter: MelonLoader, DotNetRuntime, EssentialMods, UninstallConflicts, ChartingTool,
+      Modder: MelonLoader, DotNetRuntime, EssentialMods, UninstallConflicts, DotNetSdk, ModTemplate, EnvVariable
+    },
+    Folder: ,
+    SetupCompleted: false,
+    GameVersion: ,
+    UnityVersion: ,
+    ModsFolder: Mods,
+    UserDataFolder: UserData,
+    UserLibsFolder: UserLibs,
+    GameDataFolder: MuseDash2_Data,
+    OnlineChartsFolder: Euterpe_Charts/Online,
+    OfflineChartsFolder: Euterpe_Charts/Offline,
+    MelonLoaderFolder: MelonLoader,
+    MelonLoaderZipPath: MelonLoader.zip,
+    LatestLogPath: MelonLoader/Latest.log,
+    UnityDependencyZipPath: MelonLoader/Dependencies/Il2CppAssemblyGenerator/UnityDependencies_.zip,
+    Cpp2ILExecutablePath: MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Cpp2IL.exe,
+    Cpp2ILPluginPath: MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Plugins/Cpp2IL.Plugin.StrippedCodeRegSupport.dll
   },
   LanguageCode: zh-Hans,
   Theme: Dark,

@@ -18,7 +18,7 @@ public sealed partial class UpdateServiceTest
 
     private readonly MockLogger<UpdateService> _logger = Mock.Logger<UpdateService>();
 
-    private Config Config { get; } = new() { MuseDash = new MuseDashConfig() };
+    private Config Config { get; } = new() { MuseDash = new MuseDashConfig(), MuseDash2 = new MuseDash2Config() };
 
     private UpdateService CreateUpdateService(
         Config? config = null,
