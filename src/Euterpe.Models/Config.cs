@@ -19,7 +19,12 @@ public sealed partial class Config : ObservableObject
     public partial string CacheFolder { get; set; } = Path.Combine(AppDataFolder, "Cache");
 
     // Per Game Settings
+    [ObservableProperty]
+    public partial GameId ActiveGame { get; set; } = GameId.MuseDash;
+
     public required MuseDashConfig MuseDash { get; init; }
+
+    public required MuseDash2Config MuseDash2 { get; init; }
 
     // Appearance Settings
     [AllowNull]

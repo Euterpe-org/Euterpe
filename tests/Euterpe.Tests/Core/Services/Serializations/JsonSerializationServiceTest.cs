@@ -9,9 +9,14 @@ public sealed partial class JsonSerializationServiceTest
                                           "SteamFolder": "C:\\Program Files (x86)\\SteamLibrary",
                                           "SteamExecPath": "C:\\Program Files (x86)\\SteamLibrary\\steam.exe",
                                           "CacheFolder": "Cache",
+                                          "ActiveGame": "MuseDash",
                                           "MuseDash": {
                                               "Folder": "C:\\Program Files (x86)\\SteamLibrary\\steamapps\\common\\Muse Dash",
                                               "GameMode": "Vanilla"
+                                          },
+                                          "MuseDash2": {
+                                              "Folder": "",
+                                              "GameMode": "Modded"
                                           },
                                           "LanguageCode": "zh-Hans",
                                           "Theme": "Dark",
@@ -41,6 +46,7 @@ public sealed partial class JsonSerializationServiceTest
             UnityVersion = "2019.4.32",
             MelonLoaderVersion = "0.6.5"
         },
+        MuseDash2 = new MuseDash2Config(),
         LanguageCode = "zh-Hans",
         Theme = "Dark",
         ShowConsole = true,

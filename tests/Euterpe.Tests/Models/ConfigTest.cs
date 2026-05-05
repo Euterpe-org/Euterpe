@@ -6,5 +6,5 @@ public sealed class ConfigTest
 {
     [Test]
     public async Task DefaultUpdateChannel_IsStable() =>
-        await Assert.That(new Config { MuseDash = new MuseDashConfig() }.UpdateChannel).IsEqualTo(UpdateChannel.Stable);
+        await Assert.That(new Config { MuseDash = new MuseDashConfig(), MuseDash2 = new MuseDash2Config() }.UpdateChannel).IsEqualTo(UpdateChannel.Stable);
 }
