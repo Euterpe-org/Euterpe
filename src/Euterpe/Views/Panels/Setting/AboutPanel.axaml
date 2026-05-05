@@ -54,7 +54,7 @@
                             Height="10"
                             Theme="{StaticResource TagLabel}" />
                         <TextBlock
-                            Foreground="Gray"
+                            Foreground="{DynamicResource SecondaryTextColor}"
                             Text="{x:Static constants:BuildInfo.Copyright}" />
                     </StackPanel>
                 </StackPanel>
@@ -74,7 +74,7 @@
                         Orientation="Vertical"
                         Spacing="20">
                         <TextBlock
-                            Foreground="LightSlateGray"
+                            Foreground="{DynamicResource SecondaryTextColor}"
                             Margin="13,3,13,0">
 
                             <TextBlock.Styles>

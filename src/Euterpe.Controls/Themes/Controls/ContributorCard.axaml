@@ -74,7 +74,7 @@
                                     <!--  Description  -->
                                     <TextBlock
                                         FontSize="10"
-                                        Foreground="LightSlateGray"
+                                        Foreground="{DynamicResource SecondaryTextColor}"
                                         IsVisible="{TemplateBinding ContributorDescription, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
                                         Text="{TemplateBinding ContributorDescription, Mode=OneWay}"
                                         TextWrapping="Wrap"
@@ -83,7 +83,7 @@
                                             <Style
                                                 Selector="TextBlock:disabled">
                                                 <Style.Setters>
-                                                    <Setter Property="Foreground" Value="LightSlateGray" />
+                                                    <Setter Property="Foreground" Value="{DynamicResource SecondaryTextColor}" />
                                                 </Style.Setters>
                                             </Style>
                                         </TextBlock.Styles>

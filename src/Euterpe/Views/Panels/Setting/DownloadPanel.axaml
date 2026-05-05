@@ -20,13 +20,13 @@
         Classes="ContentListRoot">
 
         <!--  Download Prerelease  -->
-        <e:SettingItem
+        <e:LabeledSection
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_UpdateChannel}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_UpdateChannel}}">
             <ComboBox
                 ItemsSource="{Binding UpdateChannels, Mode=OneTime}"
                 SelectedIndex="{Binding SelectedUpdateChannelIndex, Mode=TwoWay}" />
-        </e:SettingItem>
+        </e:LabeledSection>
 
     </StackPanel>
 

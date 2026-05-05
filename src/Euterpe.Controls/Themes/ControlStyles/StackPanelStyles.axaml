@@ -17,14 +17,14 @@
 
         <!--  Content List Item (vertical layout)  -->
         <Style
-            Selector="^.SettingItemVertical">
+            Selector="^.LabeledSectionVertical">
             <Setter Property="Orientation" Value="Vertical" />
             <Setter Property="Spacing" Value="10" />
         </Style>
 
         <!--  Content List Item (Horizontal Layout)  -->
         <Style
-            Selector="^.SettingItemHorizontal">
+            Selector="^.LabeledSectionHorizontal">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Spacing" Value="10" />
         </Style>

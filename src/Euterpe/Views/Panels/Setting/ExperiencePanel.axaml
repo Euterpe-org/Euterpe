@@ -20,28 +20,28 @@
         Classes="ContentListRoot">
 
         <!--  Show Console  -->
-        <e:SettingItem
+        <e:LabeledSection
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowConsole}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowConsole}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.ShowConsole, Mode=TwoWay}" />
-        </e:SettingItem>
+        </e:LabeledSection>
 
         <!--  Show Start Screen  -->
-        <e:SettingItem
+        <e:LabeledSection
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_ShowStartScreen}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_ShowStartScreen}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.ShowStartScreen, Mode=TwoWay}" />
-        </e:SettingItem>
+        </e:LabeledSection>
 
         <!--  Always Show ScrollBar  -->
-        <e:SettingItem
+        <e:LabeledSection
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_AlwaysShowScrollBar}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_AlwaysShowScrollBar}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=TwoWay}" />
-        </e:SettingItem>
+        </e:LabeledSection>
 
     </StackPanel>
 

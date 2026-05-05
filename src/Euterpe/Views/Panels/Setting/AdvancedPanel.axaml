@@ -18,12 +18,12 @@
 
     <StackPanel
         Classes="ContentListRoot">
-        <e:SettingItem
+        <e:LabeledSection
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_IgnoreException}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_IgnoreException}}">
             <ToggleSwitch
                 IsChecked="{Binding Config.IgnoreException, Mode=TwoWay}" />
-        </e:SettingItem>
+        </e:LabeledSection>
     </StackPanel>
 
 </UserControl>
