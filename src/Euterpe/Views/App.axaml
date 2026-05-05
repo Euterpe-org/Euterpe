@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Avalonia.Labs.Controls"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:semi="https://irihi.tech/semi"
     xmlns:vm="using:Euterpe.ViewModels"
     x:Class="Euterpe.Views.App"
@@ -9,8 +10,7 @@
     RequestedThemeVariant="Dark">
 
     <Application.Styles>
-        <StyleInclude
-            Source="avares://Euterpe.Styles/ModToolsStyles.axaml" />
+        <e:EuterpeTheme />
         <semi:SemiTheme />
         <semi:SemiPopupAnimations />
         <semi:UrsaSemiTheme />

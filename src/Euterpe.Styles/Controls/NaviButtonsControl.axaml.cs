@@ -1,6 +1,6 @@
 ﻿using Euterpe.Styles.Models;
 
-namespace Euterpe.Styles.TemplatedControls;
+namespace Euterpe.Styles.Controls;
 
 public sealed class NaviButtonsControl : TemplatedControl
 {

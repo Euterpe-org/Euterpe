@@ -1,4 +1,4 @@
-namespace Euterpe.Styles.ExtendedControls;
+namespace Euterpe.Styles.Controls;
 
 public sealed class DifficultyFilter : MenuItem
 {

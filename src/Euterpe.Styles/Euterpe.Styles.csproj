@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <Import Project="..\Euterpe.Tasks\Euterpe.Tasks.targets"/>
 
-    <Target Name="GenerateStyles" BeforeTargets="BeforeBuild">
-        <GenerateStyles AvaloniaResourceFiles="@(AvaloniaXaml)"/>
+    <Target Name="GenerateTheme" BeforeTargets="BeforeBuild">
+        <GenerateTheme AvaloniaResourceFiles="@(AvaloniaXaml)"/>
     </Target>
 
     <ItemGroup>

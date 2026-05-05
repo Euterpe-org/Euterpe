@@ -1,18 +1,18 @@
 namespace Euterpe.Tasks;
 
 [PublicAPI]
-public sealed class GenerateStyles : Task
+public sealed class GenerateTheme : Task
 {
     private const string AvaloniaNamespaceUrl = "https://github.com/avaloniaui";
     private const string SemiNamespaceUrl = "https://irihi.tech/semi";
     private const string XamlNamespaceUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
 
-    private const string OutputFileName = "ModToolsStyles.axaml";
+    private const string OutputFileName = "EuterpeTheme.axaml";
+    private const string ThemeClassName = "Euterpe.Styles.EuterpeTheme";
 
     private readonly Dictionary<string, CategoryInfo> _categories = new()
     {
-        ["ExtendedControls"] = new CategoryInfo("Extended Controls"),
-        ["TemplatedControls"] = new CategoryInfo("Templated Controls"),
+        ["Controls"] = new CategoryInfo("Controls"),
         ["ControlStyles"] = new CategoryInfo("Control Styles")
     };
 
@@ -46,7 +46,8 @@ public sealed class GenerateStyles : Task
         var styles = new XElement(AvaloniaNamespace + "Styles",
             new XAttribute("xmlns", AvaloniaNamespaceUrl),
             new XAttribute(XNamespace.Xmlns + "x", XamlNamespaceUrl),
-            new XAttribute(XNamespace.Xmlns + "semi", SemiNamespaceUrl));
+            new XAttribute(XNamespace.Xmlns + "semi", SemiNamespaceUrl),
+            new XAttribute(XamlNamespace + "Class", ThemeClassName));
 
         styles.Add(new XElement(SemiNamespace + "SemiTheme"));
         styles.Add(BuildResourcesSection());

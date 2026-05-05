@@ -1,7 +1,8 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:semi="https://irihi.tech/semi">
+    xmlns:semi="https://irihi.tech/semi"
+    x:Class="Euterpe.Styles.EuterpeTheme">
     <semi:SemiTheme />
     <Styles.Resources>
         <ResourceDictionary>
@@ -19,26 +20,25 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>
-    <!--  Extended Controls  -->
+    <!--  Controls  -->
     <StyleInclude
-        Source="/ExtendedControls/DifficultyFilter.axaml" />
+        Source="/Controls/AsyncImage.axaml" />
     <StyleInclude
-        Source="/ExtendedControls/NaviPanelListControl.axaml" />
+        Source="/Controls/ContentListItem.axaml" />
     <StyleInclude
-        Source="/ExtendedControls/PlayButton.axaml" />
-    <!--  Templated Controls  -->
+        Source="/Controls/ContributorCardControl.axaml" />
     <StyleInclude
-        Source="/TemplatedControls/AsyncImage.axaml" />
+        Source="/Controls/Difficulty.axaml" />
     <StyleInclude
-        Source="/TemplatedControls/ContentListItem.axaml" />
+        Source="/Controls/DifficultyFilter.axaml" />
     <StyleInclude
-        Source="/TemplatedControls/ContributorCardControl.axaml" />
+        Source="/Controls/NaviButtonsControl.axaml" />
     <StyleInclude
-        Source="/TemplatedControls/Difficulty.axaml" />
+        Source="/Controls/NaviPanelListControl.axaml" />
     <StyleInclude
-        Source="/TemplatedControls/NaviButtonsControl.axaml" />
+        Source="/Controls/PlayButton.axaml" />
     <StyleInclude
-        Source="/TemplatedControls/RoleCard.axaml" />
+        Source="/Controls/RoleCard.axaml" />
     <!--  Control Styles  -->
     <StyleInclude
         Source="/ControlStyles/BorderStyles.axaml" />

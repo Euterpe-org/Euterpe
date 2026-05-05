@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Styles.TemplatedControls;
+﻿namespace Euterpe.Styles.Controls;
 
 public sealed class ContentListItem : TemplatedControl
 {
