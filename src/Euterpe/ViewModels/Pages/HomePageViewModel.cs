@@ -20,8 +20,8 @@ public sealed partial class HomePageViewModel : ViewModelBase
         await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
 
         await GameSettingService.ValidateGameAsync().ConfigureAwait(true);
-        await LocalService.ReadGameInformationAsync().ConfigureAwait(true);
-        LocalService.ReadMelonLoaderVersion();
+        await GameLocalService.ReadGameInformationAsync().ConfigureAwait(true);
+        GameLocalService.ReadMelonLoaderVersion();
 
         SelectedGameModeIndex = (int)GameConfig.GameMode;
 
@@ -137,7 +137,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required IGameSettingService GameSettingService { get; init; }
 
     [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
+    public required IGameLocalService GameLocalService { get; init; }
 
     [UsedImplicitly]
     public required IGameRuntimeInstaller RuntimeInstaller { get; init; }

@@ -46,7 +46,7 @@ internal sealed partial class ModManageService : IModManageService
     public required IFileSystemService FileSystemService { get; init; }
 
     [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
+    public required IGameLocalService GameLocalService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<ModManageService> Logger { get; init; }

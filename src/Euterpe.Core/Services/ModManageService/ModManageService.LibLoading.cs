@@ -8,8 +8,8 @@ internal sealed partial class ModManageService
     private async Task LoadLibsAsync()
     {
         _libsDict = new ConcurrentDictionary<string, LibDto>(
-            (await LocalService.GetLibFilePaths()
-                .WhenAllAsync(LocalService.LoadLibFromPathAsync).ConfigureAwait(false))
+            (await GameLocalService.GetLibFilePaths()
+                .WhenAllAsync(GameLocalService.LoadLibFromPathAsync).ConfigureAwait(false))
             .Select(x => KeyValuePair.Create(x.Name, x)));
 
         foreach (var webLib in await DownloadManager.FetchLibListAsync().ConfigureAwait(false))
@@ -53,7 +53,7 @@ internal sealed partial class ModManageService
     private async Task DownloadLibCoreAsync(LibDto lib)
     {
         await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
-        _libsDict[lib.Name] = await LocalService.LoadLibFromPathAsync(Path.Combine(GameConfig.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
+        _libsDict[lib.Name] = await GameLocalService.LoadLibFromPathAsync(Path.Combine(GameConfig.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
         Logger.ZLogInformation($"Lib {lib.Name} download finished");
     }
 }

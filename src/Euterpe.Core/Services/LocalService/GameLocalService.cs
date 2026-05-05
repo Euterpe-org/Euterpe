@@ -3,34 +3,8 @@ using AssetsTools.NET.Extra;
 
 namespace Euterpe.Core;
 
-internal sealed partial class LocalService : ILocalService
+internal sealed class GameLocalService : IGameLocalService
 {
-    public async Task<string> GetSteamFolderAsync()
-    {
-        var path = string.Empty;
-
-        while (path.IsNullOrEmpty() || !await EnsureValidSteamFolderAsync(path).ConfigureAwait(true))
-        {
-            path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseSteamFolder).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected Steam folder: {path}");
-        }
-
-        return path;
-    }
-
-    public async Task<string> GetSteamExecPathAsync()
-    {
-        var path = string.Empty;
-
-        while (path.IsNullOrEmpty() || !await EnsureValidSteamExecPathAsync(path).ConfigureAwait(true))
-        {
-            path = await FileSystemPickerService.GetSingleFilePathAsync(FileDialog_Title_ChooseSteamExec).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected Steam executable: {path}");
-        }
-
-        return path;
-    }
-
     public async Task<string> GetGameFolderAsync()
     {
         var path = string.Empty;
@@ -39,18 +13,6 @@ internal sealed partial class LocalService : ILocalService
         {
             path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
             Logger.ZLogInformation($"Selected {GameConfig.DisplayName} folder: {path}");
-        }
-
-        return path;
-    }
-
-    public async Task<string> GetCacheFolderAsync()
-    {
-        var path = string.Empty;
-        while (path.IsNullOrEmpty())
-        {
-            path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseCacheFolder).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected Cache folder: {path}");
         }
 
         return path;
@@ -211,34 +173,45 @@ internal sealed partial class LocalService : ILocalService
         Logger.ZLogInformation($"MelonLoader not installed");
     }
 
+    private async ValueTask<bool> EnsureValidGameFolderAsync(string folderPath)
+    {
+        if (GamePaths.CheckIsValidGameFolder(folderPath))
+        {
+            return true;
+        }
+
+        await MessageBoxService.ErrorAsync(MessageBox_Content_InvalidPath).ConfigureAwait(true);
+        return false;
+    }
+
+    private static string? ReadFileVersion(string filePath)
+    {
+        var versionInfo = FileVersionInfo.GetVersionInfo(filePath);
+        return versionInfo.FileVersion;
+    }
+
     #region Injections
-
-    [UsedImplicitly]
-    public required Config Config { get; init; }
-
-    [UsedImplicitly]
-    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IArchiveService ArchiveService { get; init; }
 
     [UsedImplicitly]
-    public required IFileSystemService FileSystemService { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemPickerService FileSystemPickerService { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<LocalService> Logger { get; init; }
+    public required IFileSystemService FileSystemService { get; init; }
 
     [UsedImplicitly]
-    public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
-    public required ISteamPathDiscovery SteamDiscovery { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IGamePathDiscovery GamePaths { get; init; }
+
+    [UsedImplicitly]
+    public required ILogger<GameLocalService> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
     public required IResourceService ResourceService { get; init; }

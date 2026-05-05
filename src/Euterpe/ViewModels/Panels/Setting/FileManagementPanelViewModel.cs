@@ -4,13 +4,16 @@ public sealed partial class FileManagementPanelViewModel : ViewModelBase
 {
     [RelayCommand]
     private async Task ChangeGameFolderAsync() =>
-        GameConfig.Folder = await LocalService.GetGameFolderAsync().ConfigureAwait(false);
+        GameConfig.Folder = await GameLocalService.GetGameFolderAsync().ConfigureAwait(false);
 
     [RelayCommand]
     private async Task ChangeCacheFolderAsync() =>
-        Config.CacheFolder = await LocalService.GetCacheFolderAsync().ConfigureAwait(false);
+        Config.CacheFolder = await AppLocalService.GetCacheFolderAsync().ConfigureAwait(false);
 
     #region Injections
+
+    [UsedImplicitly]
+    public required IAppLocalService AppLocalService { get; init; }
 
     [UsedImplicitly]
     public required Config Config { get; init; }
@@ -19,7 +22,7 @@ public sealed partial class FileManagementPanelViewModel : ViewModelBase
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
+    public required IGameLocalService GameLocalService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<FileManagementPanelViewModel> Logger { get; init; }

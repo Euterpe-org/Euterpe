@@ -94,6 +94,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<AuthState>().SingleInstance();
             builder.RegisterType<Config>().PropertiesAutowired().SingleInstance();
 
+            builder.RegisterType<AppLocalService>().As<IAppLocalService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AppSettingService>().As<IAppSettingService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
@@ -113,9 +114,9 @@ public static class CoreServiceExtensions
             builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DownloadManager>().As<IDownloadManager>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<GameLaunchService>().As<IGameLaunchService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<GameLocalService>().As<IGameLocalService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LocalService>().As<ILocalService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
 
             // Wizard Steps

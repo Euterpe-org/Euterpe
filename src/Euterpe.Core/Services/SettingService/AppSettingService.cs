@@ -80,13 +80,13 @@ internal sealed partial class AppSettingService : IAppSettingService
     #region Injections
 
     [UsedImplicitly]
+    public required IAppLocalService AppLocalService { get; init; }
+
+    [UsedImplicitly]
     public required Config Config { get; init; }
 
     [UsedImplicitly]
     public required IJsonSerializationService JsonSerializationService { get; init; }
-
-    [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<AppSettingService> Logger { get; init; }

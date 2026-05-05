@@ -7,7 +7,7 @@ public sealed partial class ModManageServiceTest
     {
         var sut = CreateModManageService(
             downloadManager: DownloadManagerWith(CreateWebMod(version: "2.0.0")),
-            localService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
+            gameLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
         await sut.InitializeModsAsync();
 
@@ -22,7 +22,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             downloadManager: DownloadManagerWith(CreateWebMod(version: "1.0.0")),
-            localService: LocalServiceWith((TestModFilePath, localMod)));
+            gameLocalService: LocalServiceWith((TestModFilePath, localMod)));
 
         await sut.InitializeModsAsync();
 
@@ -37,7 +37,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             downloadManager: DownloadManagerWith(CreateWebMod(sha256: "web-sha")),
-            localService: LocalServiceWith((TestModFilePath, localMod)));
+            gameLocalService: LocalServiceWith((TestModFilePath, localMod)));
 
         await sut.InitializeModsAsync();
 
@@ -52,7 +52,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             downloadManager: DownloadManagerWith(CreateWebMod(sha256: "shared-sha")),
-            localService: LocalServiceWith((TestModFilePath, localMod)));
+            gameLocalService: LocalServiceWith((TestModFilePath, localMod)));
 
         await sut.InitializeModsAsync();
 
@@ -65,7 +65,7 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(
             CreateGame("1.0.0"),
             DownloadManagerWith(CreateWebMod(gameVersion: "2.0.0")),
-            localService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
+            gameLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
         await sut.InitializeModsAsync();
 
@@ -78,7 +78,7 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(
             CreateGame(melonLoaderVersion: "0.5.0"),
             DownloadManagerWith(CreateWebMod(melonVersion: "0.6.0")),
-            localService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
+            gameLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
         await sut.InitializeModsAsync();
 
@@ -89,7 +89,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_DuplicatedLocalMods_MarksDuplicated()
     {
         var sut = CreateModManageService(
-            localService: LocalServiceWith(
+            gameLocalService: LocalServiceWith(
                 (TestModFilePath, CreateInstalledMod()),
                 ("/mods/MyMod-copy.dll", CreateInstalledMod(fileName: "MyMod-copy.dll"))));
 

@@ -10,13 +10,13 @@ public sealed class MelonLoaderStepTest
     public async Task ExecuteAsync_AcquiresInstallsAndReadsVersion()
     {
         var depService = IDependencyAcquireService.Mock();
-        var localService = ILocalService.Mock();
+        var localService = IGameLocalService.Mock();
         localService.InstallMelonLoaderAsync().Returns(true);
 
         var step = new MelonLoaderStep
         {
             DependencyAcquireService = depService,
-            LocalService = localService
+            GameLocalService = localService
         };
 
         await step.ExecuteAsync();

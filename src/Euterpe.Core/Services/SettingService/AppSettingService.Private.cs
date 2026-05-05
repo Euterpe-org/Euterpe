@@ -16,7 +16,7 @@ internal sealed partial class AppSettingService
             {
                 Logger.ZLogInformation($"Letting user choose Steam folder...");
                 await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamFolder).ConfigureAwait(true);
-                Config.SteamFolder = await LocalService.GetSteamFolderAsync().ConfigureAwait(true);
+                Config.SteamFolder = await AppLocalService.GetSteamFolderAsync().ConfigureAwait(true);
             }
         }
     }
@@ -36,7 +36,7 @@ internal sealed partial class AppSettingService
             {
                 Logger.ZLogInformation($"Letting user choose Steam executable...");
                 await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamExec).ConfigureAwait(true);
-                Config.SteamExecPath = await LocalService.GetSteamExecPathAsync().ConfigureAwait(true);
+                Config.SteamExecPath = await AppLocalService.GetSteamExecPathAsync().ConfigureAwait(true);
             }
         }
     }

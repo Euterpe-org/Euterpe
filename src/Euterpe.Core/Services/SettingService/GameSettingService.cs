@@ -39,7 +39,7 @@ internal sealed class GameSettingService : IGameSettingService
                     Environment.Exit(0);
                 }
 
-                GameConfig.Folder = await LocalService.GetGameFolderAsync().ConfigureAwait(true);
+                GameConfig.Folder = await GameLocalService.GetGameFolderAsync().ConfigureAwait(true);
             }
         }
     }
@@ -58,7 +58,7 @@ internal sealed class GameSettingService : IGameSettingService
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
+    public required IGameLocalService GameLocalService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<GameSettingService> Logger { get; init; }

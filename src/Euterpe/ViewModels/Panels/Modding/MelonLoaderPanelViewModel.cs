@@ -29,7 +29,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
             var progress = new Progress<double>(value => DownloadProgress = value);
             await DependencyAcquireService.AcquireForMelonLoaderAsync(OnDownloadStarted, progress).ConfigureAwait(true);
-            await LocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
+            await GameLocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -39,14 +39,14 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
             return;
         }
 
-        LocalService.ReadMelonLoaderVersion();
+        GameLocalService.ReadMelonLoaderVersion();
         MelonLoaderInstallStatus = InstallStatus.Installed;
     }
 
     [RelayCommand]
     private async Task UninstallMelonLoaderAsync()
     {
-        await LocalService.UninstallMelonLoaderAsync().ConfigureAwait(false);
+        await GameLocalService.UninstallMelonLoaderAsync().ConfigureAwait(false);
         GameConfig.MelonLoaderVersion = null;
         MelonLoaderInstallStatus = InstallStatus.NotInstalled;
         Logger.ZLogInformation($"MelonLoader has been successfully uninstalled");
@@ -69,7 +69,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     public required IDependencyAcquireService DependencyAcquireService { get; init; }
 
     [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
+    public required IGameLocalService GameLocalService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<MelonLoaderPanelViewModel> Logger { get; init; }

@@ -1,11 +1,8 @@
 namespace Euterpe.Abstractions;
 
-public interface ILocalService
+public interface IGameLocalService
 {
-    Task<string> GetSteamFolderAsync();
-    Task<string> GetSteamExecPathAsync();
     Task<string> GetGameFolderAsync();
-    Task<string> GetCacheFolderAsync();
     string[] GetModFilePaths();
     string[] GetLibFilePaths();
     Task<bool> InstallMelonLoaderAsync();
