@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>Primijeni</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>Natrag</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Provjeri ažuriranja</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>MDMC web-stranica</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Dalje</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Ponovno instaliraj</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Ponovno odaberi</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Pokušaj ponovno</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>Preskoči</value>

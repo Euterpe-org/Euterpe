@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>Terapkan</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>Kembali</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Periksa Pembaruan</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>Situs MDMC</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Selanjutnya</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Pasang Ulang</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Pilih Ulang</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Coba lagi</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>Lewati</value>

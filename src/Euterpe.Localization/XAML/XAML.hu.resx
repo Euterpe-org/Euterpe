@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>Alkalmaz</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>Vissza</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Frissítés keresése</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>MDMC weboldal</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Tovább</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Újratelepítés</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Újraválasztás</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Újra</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>Kihagyás</value>

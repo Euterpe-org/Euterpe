@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>적용</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>뒤로</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>업데이트 확인</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>MDMC 웹사이트</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>다음</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>재설치</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>다시 선택</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>재시도</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>건너뛰기</value>

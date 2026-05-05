@@ -1,14 +1,12 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:e="https://github.com/Euterpe-org/Euterpe"
-    xmlns:games="using:Euterpe.Models.Games"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:Euterpe.Controls.Models"
     xmlns:vm="using:Euterpe.ViewModels.Components"
+    xmlns:wizard="using:Euterpe.Views.Components.Wizard"
+    xmlns:wvm="using:Euterpe.ViewModels.Components.Wizard"
     x:Class="Euterpe.Views.Components.WizardDialog"
     x:DataType="vm:WizardDialogViewModel"
     d:DesignHeight="520"
@@ -19,184 +17,25 @@
         <vm:WizardDialogViewModel />
     </Design.DataContext>
 
-    <UserControl.Styles>
-        <!--  Progress Bar  -->
-        <Style
-            Selector="ProgressBar.Wizard">
-            <Setter Property="CornerRadius" Value="6" />
-            <Setter Property="Height" Value="12" />
-            <Setter Property="MinHeight" Value="12" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <DoubleTransition
-                        Property="Value"
-                        Duration="0:0:0.4"
-                        Easing="CubicEaseOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style
-            Selector="ProgressBar.Wizard /template/ Border">
-            <Setter Property="CornerRadius" Value="6" />
-        </Style>
-    </UserControl.Styles>
-
     <Grid
         Height="520"
         RowDefinitions="*,Auto"
         Width="850">
 
-        <!--  Page 1: Role Selection + Task Options  -->
-        <Grid
+        <TransitioningContentControl
             Grid.Row="0"
-            ColumnDefinitions="340,*"
-            IsVisible="{Binding !IsSettingUp}"
-            Margin="28,24,28,0"
-            RowDefinitions="Auto,*">
-
-            <!--  Header  -->
-            <StackPanel
-                Grid.ColumnSpan="2"
-                Margin="0,0,0,18"
-                Spacing="4">
-                <StackPanel
-                    Orientation="Horizontal"
-                    Spacing="12">
-                    <Image
-                        Height="36"
-                        RenderOptions.BitmapInterpolationMode="HighQuality"
-                        Source="/Assets/Logo.webp" />
-                    <TextBlock
-                        FontSize="22"
-                        FontWeight="Bold"
-                        Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Title_Welcome}}"
-                        Theme="{StaticResource TitleTextBlock}"
-                        VerticalAlignment="Center" />
-                </StackPanel>
-                <TextBlock
-                    Foreground="{DynamicResource SecondaryTextColor}"
-                    Margin="48,0,0,0"
-                    Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Description_Welcome}}" />
-            </StackPanel>
-
-            <!--  Left: Role Cards  -->
-            <ListBox
-                Grid.Row="1"
-                Grid.Column="0"
-                Classes="RoleList"
-                ItemsSource="{Binding Roles, Mode=OneTime}"
-                Margin="0,0,12,0"
-                SelectedItem="{Binding SelectedRole}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate
-                        x:DataType="models:WizardRole">
-                        <e:RoleCard
-                            AccentColor="{Binding AccentColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}, Mode=OneTime}"
-                            Description="{Binding Description, Mode=OneTime}"
-                            Icon="{Binding IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneTime}"
-                            IsSelected="{Binding $parent[ListBoxItem].IsSelected, FallbackValue=False, Mode=OneWay}"
-                            Title="{Binding Title, Mode=OneTime}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-            <!--  Right: Task Options  -->
-            <Border
-                Grid.Row="1"
-                Grid.Column="1"
-                Background="{DynamicResource SecondaryCardColor}"
-                CornerRadius="10"
-                Margin="12,0,0,0"
-                Padding="20,16"
-                Theme="{DynamicResource CardBorder}">
-                <DockPanel>
-
-                    <TextBlock
-                        DockPanel.Dock="Top"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        Margin="0,0,0,12"
-                        Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Section_Tasks}}"
-                        Theme="{StaticResource TitleTextBlock}" />
-
-                    <ScrollViewer>
-                        <ItemsControl
-                            ItemsSource="{Binding Options, Mode=OneTime}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate
-                                    x:DataType="games:WizardOption">
-                                    <CheckBox
-                                        IsChecked="{Binding IsSelected}"
-                                        IsEnabled="{Binding !IsRequired, Mode=OneTime}"
-                                        Margin="0,2"
-                                        Padding="0">
-                                        <StackPanel
-                                            Margin="4,0,0,0"
-                                            Spacing="1"
-                                            VerticalAlignment="Center">
-                                            <TextBlock
-                                                FontSize="13"
-                                                Text="{Binding DisplayName, Mode=OneTime}" />
-                                            <TextBlock
-                                                FontSize="11"
-                                                Foreground="{DynamicResource SecondaryTextColor}"
-                                                Text="{Binding Description, Mode=OneTime}" />
-                                        </StackPanel>
-                                    </CheckBox>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </DockPanel>
-            </Border>
-        </Grid>
-
-        <!--  Page 2: Progress  -->
-        <StackPanel
-            Grid.Row="0"
-            HorizontalAlignment="Center"
-            IsVisible="{Binding IsSettingUp}"
-            Spacing="8"
-            VerticalAlignment="Center"
-            Width="480">
-
-            <!--  Logo  -->
-            <Image
-                Height="48"
-                HorizontalAlignment="Center"
-                Margin="0,0,0,12"
-                RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="/Assets/Logo.webp" />
-
-            <!--  Title  -->
-            <TextBlock
-                FontSize="22"
-                FontWeight="Bold"
-                HorizontalAlignment="Center"
-                Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Title_SettingUp}}"
-                Theme="{StaticResource TitleTextBlock}" />
-
-            <!--  Current Task Description  -->
-            <TextBlock
-                FontSize="13"
-                Foreground="{DynamicResource SecondaryTextColor}"
-                HorizontalAlignment="Center"
-                Margin="0,4,0,16"
-                Text="{Binding ProgressLabel, Mode=OneWay}" />
-
-            <!--  Progress Bar  -->
-            <ProgressBar
-                Value="{Binding Progress, Mode=OneWay}"
-                Classes="Primary Wizard"
-                MinWidth="360" />
-
-            <!--  Percentage  -->
-            <TextBlock
-                FontSize="13"
-                Foreground="{DynamicResource SecondaryTextColor}"
-                HorizontalAlignment="Center"
-                Text="{Binding Progress, StringFormat='{}{0:F0}%', Mode=OneWay}" />
-        </StackPanel>
+            Content="{Binding CurrentPage}">
+            <TransitioningContentControl.DataTemplates>
+                <DataTemplate
+                    DataType="{x:Type wvm:SelectionPageViewModel}">
+                    <wizard:SelectionPage />
+                </DataTemplate>
+                <DataTemplate
+                    DataType="{x:Type wvm:ExecutionPageViewModel}">
+                    <wizard:ExecutionPage />
+                </DataTemplate>
+            </TransitioningContentControl.DataTemplates>
+        </TransitioningContentControl>
 
         <!--  Bottom Bar  -->
         <Border
@@ -205,14 +44,18 @@
             BorderThickness="0,1,0,0"
             Padding="28,15">
             <DockPanel>
-
-                <!--  Selection Page: Confirm  -->
                 <Button
                     DockPanel.Dock="Right"
                     Classes="Primary"
-                    Command="{Binding ConfirmCommand}"
-                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Confirm}}"
-                    IsVisible="{Binding !IsSettingUp}" />
+                    Command="{Binding NextCommand}"
+                    Content="{Binding CurrentPage.NextButtonText}"
+                    IsEnabled="{Binding CurrentPage.CanGoNext, FallbackValue=False}" />
+                <Button
+                    DockPanel.Dock="Right"
+                    Command="{Binding BackCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Back}}"
+                    IsVisible="{Binding CanGoBack}"
+                    Margin="0,0,8,0" />
 
                 <Panel />
             </DockPanel>
