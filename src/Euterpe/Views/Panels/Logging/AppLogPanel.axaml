@@ -18,7 +18,7 @@
 
     <UserControl.Styles>
         <StyleInclude
-            Source="avares://Euterpe.Controls/ControlStyles/Panels/AppLogPanelStyles.axaml" />
+            Source="avares://Euterpe.Controls/Themes/ControlStyles/Panels/AppLogPanelStyles.axaml" />
     </UserControl.Styles>
 
     <ScrollViewer>

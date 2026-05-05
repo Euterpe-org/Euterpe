@@ -22,7 +22,7 @@
 
     <UserControl.Styles>
         <StyleInclude
-            Source="avares://Euterpe.Controls/ControlStyles/Panels/ModManagePanelStyles.axaml" />
+            Source="avares://Euterpe.Controls/Themes/ControlStyles/Panels/ModManagePanelStyles.axaml" />
     </UserControl.Styles>
 
     <!--  Main Layout Grid  -->

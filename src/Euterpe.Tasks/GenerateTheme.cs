@@ -7,13 +7,13 @@ public sealed class GenerateTheme : Task
     private const string SemiNamespaceUrl = "https://irihi.tech/semi";
     private const string XamlNamespaceUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
 
-    private const string OutputFileName = "EuterpeTheme.axaml";
+    private const string OutputFileName = "Themes/EuterpeTheme.axaml";
     private const string ThemeClassName = "Euterpe.Controls.EuterpeTheme";
 
     private readonly Dictionary<string, CategoryInfo> _categories = new()
     {
-        ["Controls"] = new CategoryInfo("Controls"),
-        ["ControlStyles"] = new CategoryInfo("Control Styles")
+        ["Themes/Controls"] = new CategoryInfo("Controls"),
+        ["Themes/ControlStyles"] = new CategoryInfo("Control Styles")
     };
 
     private readonly XNamespace AvaloniaNamespace = AvaloniaNamespaceUrl;
@@ -67,21 +67,21 @@ public sealed class GenerateTheme : Task
     private XElement CreateThemeInclude(string themeName) =>
         new(AvaloniaNamespace + "ResourceInclude",
             new XAttribute(XamlNamespace + "Key", themeName),
-            new XAttribute("Source", $"/Resources/{themeName}Resource.axaml"));
+            new XAttribute("Source", $"/Themes/Resources/{themeName}Resource.axaml"));
 
     private XElement CreateResourceInclude(string resourceName) =>
         new(AvaloniaNamespace + "ResourceInclude",
-            new XAttribute("Source", $"/Resources/{resourceName}Resource.axaml"));
+            new XAttribute("Source", $"/Themes/Resources/{resourceName}Resource.axaml"));
 
     private void ProcessResourceFiles()
     {
         foreach (var file in AvaloniaResourceFiles)
         {
-            var directory = Path.GetDirectoryName(file.ItemSpec);
+            var directory = Path.GetDirectoryName(file.ItemSpec)?.Replace('\\', '/');
             var fileName = file.GetMetadata("Filename");
             var relativePath = $"/{directory}/{fileName}.axaml";
 
-            if (_categories.TryGetValue(directory!, out var category))
+            if (directory != null && _categories.TryGetValue(directory, out var category))
             {
                 category.Sources.Add(relativePath);
             }

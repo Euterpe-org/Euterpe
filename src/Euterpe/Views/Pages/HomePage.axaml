@@ -14,7 +14,7 @@
 
     <UserControl.Styles>
         <StyleInclude
-            Source="avares://Euterpe.Controls/ControlStyles/Pages/HomePageStyles.axaml" />
+            Source="avares://Euterpe.Controls/Themes/ControlStyles/Pages/HomePageStyles.axaml" />
     </UserControl.Styles>
 
     <Panel>
