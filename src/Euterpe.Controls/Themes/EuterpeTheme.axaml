@@ -28,6 +28,8 @@
     <StyleInclude
         Source="/Themes/Controls/Difficulty.axaml" />
     <StyleInclude
+        Source="/Themes/Controls/LabeledSection.axaml" />
+    <StyleInclude
         Source="/Themes/Controls/NavButtonList.axaml" />
     <StyleInclude
         Source="/Themes/Controls/NavPanelList.axaml" />
@@ -35,8 +37,6 @@
         Source="/Themes/Controls/PlayButton.axaml" />
     <StyleInclude
         Source="/Themes/Controls/RoleCard.axaml" />
-    <StyleInclude
-        Source="/Themes/Controls/SettingItem.axaml" />
     <!--  Control Styles  -->
     <StyleInclude
         Source="/Themes/ControlStyles/BorderStyles.axaml" />
