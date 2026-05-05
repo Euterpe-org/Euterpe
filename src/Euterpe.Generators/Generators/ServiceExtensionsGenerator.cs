@@ -28,14 +28,30 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
         var views = dataCollection.OfType<ViewData>().ToArray();
         var appViews = views.Where(static d => !d.IsPerGame);
-        var perGameViews = views.Where(static d => d.IsPerGame);
+        var perGameViews = views.Where(static d => d.IsPerGame).ToArray();
 
         var sb = new GeneratorStringBuilder();
-        sb.AppendLine($$"""
-                        namespace Euterpe.Extensions;
+        sb.AppendLine("""
+                      namespace Euterpe.Extensions;
 
-                        partial class ServiceExtensions
-                        {
+                      partial class ServiceExtensions
+                      {
+                      """);
+
+        AppendAppViewsAndViewModels(sb, appViews);
+        sb.AppendLine();
+        AppendPerGameViews(sb, perGameViews);
+        sb.AppendLine();
+        AppendPerGameViewModels(sb, perGameViews);
+
+        sb.AppendLine("}");
+
+        spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
+    }
+
+    private static void AppendAppViewsAndViewModels(GeneratorStringBuilder sb, IEnumerable<ViewData> views)
+    {
+        sb.AppendLine($$"""
                             {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
                             public static void RegisterAppViewsAndViewModels(this ContainerBuilder builder)
                             {
@@ -43,34 +59,54 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
                         """);
 
-        foreach (var (name, _) in appViews)
+        foreach (var (name, _) in views)
         {
             sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
             sb.AppendLine($"\t\tbuilder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
             sb.AppendLine();
         }
 
-        sb.AppendLine($$"""
-                            }
+        sb.AppendLine("    }");
+    }
 
+    private static void AppendPerGameViews(GeneratorStringBuilder sb, IEnumerable<ViewData> views)
+    {
+        sb.AppendLine($$"""
                             {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
-                            public static void RegisterPerGameViewsAndViewModels(this ContainerBuilder builder)
+                            public static void RegisterPerGameViews(this ContainerBuilder builder)
                             {
                         """);
 
-        foreach (var (name, _) in perGameViews)
+        foreach (var (name, _) in views)
         {
-            sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
-            sb.AppendLine($"\t\tbuilder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
+            sb.AppendLine($$"""
+                                    builder.Register<{{name}}>(_ =>
+                                    {
+                                        var view = new {{name}}();
+                                        global::Euterpe.IocContainer.GameScopeObservable.Subscribe(scope => view.DataContext = scope.Resolve<{{name}}ViewModel>());
+                                        return view;
+                                    }).SingleInstance();
+                            """);
             sb.AppendLine();
         }
 
-        sb.AppendLine("""
-                          }
-                      }
-                      """);
+        sb.AppendLine("    }");
+    }
 
-        spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
+    private static void AppendPerGameViewModels(GeneratorStringBuilder sb, IEnumerable<ViewData> views)
+    {
+        sb.AppendLine($$"""
+                            {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
+                            public static void RegisterPerGameViewModels(this ContainerBuilder builder)
+                            {
+                        """);
+
+        foreach (var (name, _) in views)
+        {
+            sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().InstancePerLifetimeScope();");
+        }
+
+        sb.AppendLine("    }");
     }
 
     private static bool HasPerGameAttribute(ClassDeclarationSyntax classDecl) =>

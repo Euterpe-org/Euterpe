@@ -1,13 +1,19 @@
-﻿using Autofac.Extensions.DependencyInjection;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Euterpe;
 
 public static class IocContainer
 {
-    private static IContainer Container { get; set; } = null!;
+    private static readonly Dictionary<GameId, ILifetimeScope> GameScopes = new();
+    private static IContainer Root { get; set; } = null!;
+    private static BehaviorSubject<ILifetimeScope> GameScopeSubject { get; set; } = null!;
 
-    public static T Resolve<T>() where T : notnull => Container.Resolve<T>();
+    public static Observable<ILifetimeScope> GameScopeObservable => GameScopeSubject;
+
+    public static ILifetimeScope GameScope => GameScopeSubject.Value;
+
+    public static T Resolve<T>() where T : notnull => GameScope.Resolve<T>();
 
     public static void ConfigureContainer(string logFileName)
     {
@@ -17,12 +23,36 @@ public static class IocContainer
 
         var builder = new ContainerBuilder();
         builder.RegisterAppCoreServices();
-        builder.RegisterPerGameCoreServices();
         builder.RegisterInternalServices();
         builder.RegisterAppViewsAndViewModels();
-        builder.RegisterPerGameViewsAndViewModels();
+        builder.RegisterPerGameViews();
 
         builder.Populate(services);
-        Container = builder.Build();
+        Root = builder.Build();
+
+        Root.Resolve<IAppSettingService>().Load();
+
+        var initialGame = Root.Resolve<Config>().ActiveGame;
+        var firstScope = BuildGameScope(initialGame);
+        GameScopes[initialGame] = firstScope;
+        GameScopeSubject = new BehaviorSubject<ILifetimeScope>(firstScope);
     }
+
+    public static void ActivateGame(GameId game)
+    {
+        if (!GameScopes.TryGetValue(game, out var scope))
+        {
+            scope = BuildGameScope(game);
+            GameScopes[game] = scope;
+        }
+
+        GameScopeSubject.OnNext(scope);
+    }
+
+    private static ILifetimeScope BuildGameScope(GameId game) =>
+        Root.BeginLifetimeScope(builder =>
+        {
+            builder.RegisterPerGameCoreServices(game);
+            builder.RegisterPerGameViewModels();
+        });
 }

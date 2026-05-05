@@ -13,7 +13,7 @@ public sealed class WizardStepRegistrationTest
     {
         var builder = new ContainerBuilder();
         builder.RegisterAppCoreServices();
-        builder.RegisterPerGameCoreServices();
+        builder.RegisterPerGameCoreServices(GameId.MuseDash);
 
         await using var container = builder.Build();
 

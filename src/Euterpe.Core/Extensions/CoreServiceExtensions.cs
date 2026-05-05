@@ -93,6 +93,9 @@ public static class CoreServiceExtensions
             builder.RegisterType<AuthState>().SingleInstance();
             builder.RegisterType<Config>().PropertiesAutowired().SingleInstance();
 
+            builder.RegisterType<MuseDashConfig>().AsSelf().SingleInstance();
+            builder.RegisterType<MuseDash2Config>().AsSelf().SingleInstance();
+
             builder.RegisterType<AppDownloadManager>().As<IAppDownloadManager>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AppLocalService>().As<IAppLocalService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AppSettingService>().As<IAppSettingService>().PropertiesAutowired().SingleInstance();
@@ -111,29 +114,36 @@ public static class CoreServiceExtensions
             builder.RegisterPerPlatformAppServices();
         }
 
-        public void RegisterPerGameCoreServices()
+        public void RegisterPerGameCoreServices(GameId activeGame)
         {
-            builder.RegisterType<MuseDashConfig>().AsSelf().As<GameConfig>().SingleInstance();
-            builder.RegisterType<MuseDash2Config>().AsSelf().SingleInstance();
+            switch (activeGame)
+            {
+                case GameId.MuseDash2:
+                    builder.Register<GameConfig>(static ctx => ctx.Resolve<MuseDash2Config>()).InstancePerLifetimeScope();
+                    break;
+                default:
+                    builder.Register<GameConfig>(static ctx => ctx.Resolve<MuseDashConfig>()).InstancePerLifetimeScope();
+                    break;
+            }
 
-            builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GameDownloadManager>().As<IGameDownloadManager>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GameLaunchService>().As<IGameLaunchService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GameLocalService>().As<IGameLocalService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<GameDownloadManager>().As<IGameDownloadManager>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<GameLaunchService>().As<IGameLaunchService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<GameLocalService>().As<IGameLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().InstancePerLifetimeScope();
 
             // Wizard Steps
-            builder.RegisterType<ChartingToolStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<DotNetRuntimeStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<DotNetSdkStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<EnvVariableStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<EssentialModsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MelonLoaderStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<ModTemplateStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<UninstallConflictsStep>().As<IWizardStep>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<ChartingToolStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<DotNetRuntimeStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<DotNetSdkStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<EnvVariableStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<EssentialModsStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MelonLoaderStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<ModTemplateStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<UninstallConflictsStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
 
             builder.RegisterPerPlatformGameServices();
         }
@@ -163,28 +173,30 @@ public static class CoreServiceExtensions
             builder.RegisterType<MacOsSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<MacOsSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
 #endif
+#pragma warning restore CA1416
         }
 
         private void RegisterPerPlatformGameServices()
         {
+#pragma warning disable CA1416
 #if WINDOWS
-            builder.RegisterType<WindowsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<WindowsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<WindowsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<WindowsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<WindowsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().InstancePerLifetimeScope();
 #elif LINUX
-            builder.RegisterType<LinuxGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<LinuxGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<LinuxGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<LinuxGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<LinuxGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().InstancePerLifetimeScope();
 #elif MACOS
-            builder.RegisterType<MacOsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MacOsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MacOsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MacOsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MacOsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().InstancePerLifetimeScope();
 #endif
 #pragma warning restore CA1416
         }
