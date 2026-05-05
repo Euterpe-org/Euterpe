@@ -21,7 +21,7 @@ public sealed partial class RouteGenerator
                             public required global::Euterpe.Services.NavigationService NavigationService { get; init; }
 
                             {{GetGeneratedCodeAttribute(nameof(RouteGenerator))}}
-                            public override global::System.Collections.Generic.IReadOnlyList<global::Euterpe.Styles.Models.NavItem> NavItems { get; } =
+                            public override global::System.Collections.Generic.IReadOnlyList<global::Euterpe.Controls.Models.NavItem> NavItems { get; } =
                             [
                         """);
 

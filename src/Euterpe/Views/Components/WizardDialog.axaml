@@ -6,7 +6,7 @@
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:Euterpe.Styles.Models"
+    xmlns:models="using:Euterpe.Controls.Models"
     xmlns:vm="using:Euterpe.ViewModels.Components"
     x:Class="Euterpe.Views.Components.WizardDialog"
     x:DataType="vm:WizardDialogViewModel"

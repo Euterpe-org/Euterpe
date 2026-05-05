@@ -8,7 +8,7 @@ public sealed class GenerateTheme : Task
     private const string XamlNamespaceUrl = "http://schemas.microsoft.com/winfx/2006/xaml";
 
     private const string OutputFileName = "EuterpeTheme.axaml";
-    private const string ThemeClassName = "Euterpe.Styles.EuterpeTheme";
+    private const string ThemeClassName = "Euterpe.Controls.EuterpeTheme";
 
     private readonly Dictionary<string, CategoryInfo> _categories = new()
     {

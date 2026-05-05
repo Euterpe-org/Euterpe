@@ -20,10 +20,10 @@
         <Project Path="src/Euterpe.Localization/Euterpe.Localization.csproj"/>
         <Project Path="src/Euterpe.Models/Euterpe.Models.csproj"/>
         <Project Path="src/Euterpe.Shared/Euterpe.Shared.csproj"/>
-        <Project Path="src/Euterpe.Styles/Euterpe.Styles.csproj"/>
         <Project Path="src/Euterpe.Tasks/Euterpe.Tasks.csproj"/>
         <Project Path="src/Euterpe.Updater/Euterpe.Updater.csproj"/>
         <Project Path="src/Euterpe/Euterpe.csproj"/>
+        <Project Path="src\Euterpe.Controls\Euterpe.Controls.csproj"/>
     </Folder>
     <Folder Name="/tests/">
         <Project Path="tests/Euterpe.Tests/Euterpe.Tests.csproj"/>

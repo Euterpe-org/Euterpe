@@ -1,7 +1,7 @@
 ﻿using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 
-namespace Euterpe.Styles.Models;
+namespace Euterpe.Controls.Models;
 
 public sealed class ContributorCardItem
 {

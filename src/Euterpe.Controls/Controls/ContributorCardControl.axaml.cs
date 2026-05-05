@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
-using Euterpe.Styles.Models;
+using Euterpe.Controls.Models;
 
-namespace Euterpe.Styles.Controls;
+namespace Euterpe.Controls;
 
 public sealed class ContributorCardControl : TemplatedControl
 {

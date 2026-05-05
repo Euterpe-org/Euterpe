@@ -1,14 +1,14 @@
 <Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Euterpe.Styles.Controls">
+    xmlns:e="https://github.com/Euterpe-org/Euterpe">
 
     <Design.PreviewWith>
         <Border
             Background="{DynamicResource SecondaryCardColor}"
             Padding="10,8"
             Width="260">
-            <controls:RoleCard
+            <e:RoleCard
                 AccentColor="#2563EB"
                 Description="Preview description"
                 Title="Preview role" />
@@ -111,7 +111,7 @@
 
     <!--  RoleCard content template  -->
     <Style
-        Selector="controls|RoleCard">
+        Selector="e|RoleCard">
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid

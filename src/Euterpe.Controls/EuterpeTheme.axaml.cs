@@ -1,8 +1,9 @@
 using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 
-namespace Euterpe.Styles;
+namespace Euterpe.Controls;
 
-public sealed class EuterpeTheme : Avalonia.Styling.Styles
+public sealed class EuterpeTheme : Styles
 {
     public EuterpeTheme(IServiceProvider? sp = null) => AvaloniaXamlLoader.Load(sp, this);
 }

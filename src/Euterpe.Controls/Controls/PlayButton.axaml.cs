@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Euterpe.Styles.Controls;
+namespace Euterpe.Controls;
 
 public sealed class PlayButton : SelectingItemsControl
 {

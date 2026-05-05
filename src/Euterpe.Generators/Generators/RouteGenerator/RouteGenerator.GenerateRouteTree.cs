@@ -13,7 +13,7 @@ public sealed partial class RouteGenerator
 
                       public static class RouteTree
                       {
-                          public static readonly global::Euterpe.Styles.Models.RouteNode Root = new("/", null, [
+                          public static readonly global::Euterpe.Controls.Models.RouteNode Root = new("/", null, [
                       """);
 
         sb.IncreaseIndent(2);

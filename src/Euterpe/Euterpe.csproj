@@ -44,7 +44,7 @@
         <ProjectReference Include="..\Euterpe.Abstractions\Euterpe.Abstractions.csproj"/>
         <ProjectReference Include="..\Euterpe.Core\Euterpe.Core.csproj"/>
         <ProjectReference Include="..\Euterpe.Generators\Euterpe.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
-        <ProjectReference Include="..\Euterpe.Styles\Euterpe.Styles.csproj"/>
+        <ProjectReference Include="..\Euterpe.Controls\Euterpe.Controls.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

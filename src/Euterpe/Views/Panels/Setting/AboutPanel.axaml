@@ -6,7 +6,7 @@
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="using:Euterpe.Styles.Models"
+    xmlns:models="using:Euterpe.Controls.Models"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Setting"
     x:Class="Euterpe.Views.Panels.Setting.AboutPanel"
