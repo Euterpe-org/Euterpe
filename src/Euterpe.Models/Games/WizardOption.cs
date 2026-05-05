@@ -1,6 +1,4 @@
-using Euterpe.Models.Enums;
-
-namespace Euterpe.Controls.Models;
+namespace Euterpe.Models.Games;
 
 public sealed partial class WizardOption(WizardOptionKinds kinds, LocalizedString displayName, LocalizedString description) : ObservableObject
 {

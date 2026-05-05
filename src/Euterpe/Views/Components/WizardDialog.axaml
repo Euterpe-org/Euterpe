@@ -4,6 +4,7 @@
     xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:games="using:Euterpe.Models.Games"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Euterpe.Controls.Models"
@@ -123,7 +124,7 @@
                             ItemsSource="{Binding Options, Mode=OneTime}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate
-                                    x:DataType="models:WizardOption">
+                                    x:DataType="games:WizardOption">
                                     <CheckBox
                                         IsChecked="{Binding IsSelected}"
                                         IsEnabled="{Binding !IsRequired, Mode=OneTime}"

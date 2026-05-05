@@ -4,40 +4,10 @@ namespace Euterpe.ViewModels.Components;
 
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
-    private static readonly Dictionary<WizardIdentity, WizardOptionKinds> Presets = new()
-    {
-        [WizardIdentity.Player] = WizardOptionKinds.MelonLoader
-                                  | WizardOptionKinds.DotNetRuntime
-                                  | WizardOptionKinds.EssentialMods
-                                  | WizardOptionKinds.UninstallConflicts,
-        [WizardIdentity.Charter] = WizardOptionKinds.MelonLoader
-                                   | WizardOptionKinds.DotNetRuntime
-                                   | WizardOptionKinds.EssentialMods
-                                   | WizardOptionKinds.UninstallConflicts
-                                   | WizardOptionKinds.ChartingTool,
-        [WizardIdentity.Modder] = WizardOptionKinds.MelonLoader
-                                  | WizardOptionKinds.DotNetRuntime
-                                  | WizardOptionKinds.EssentialMods
-                                  | WizardOptionKinds.UninstallConflicts
-                                  | WizardOptionKinds.DotNetSdk
-                                  | WizardOptionKinds.ModTemplate
-                                  | WizardOptionKinds.EnvVariable
-    };
-
     private bool _applyingPreset;
     private Dictionary<WizardOptionKinds, IWizardStep> _stepMap = null!;
 
-    public IReadOnlyList<WizardOption> Options { get; } =
-    [
-        new(WizardOptionKinds.MelonLoader, Wizard_Task_MelonLoader, Wizard_Task_MelonLoader_Description) { IsSelected = true, IsRequired = true },
-        new(WizardOptionKinds.DotNetRuntime, Wizard_Task_DotNetRuntime, Wizard_Task_DotNetRuntime_Description) { IsSelected = true, IsRequired = true },
-        new(WizardOptionKinds.EssentialMods, Wizard_Task_EssentialMods, Wizard_Task_EssentialMods_Description) { IsSelected = true, IsRequired = true },
-        new(WizardOptionKinds.UninstallConflicts, Wizard_Task_UninstallConflicts, Wizard_Task_UninstallConflicts_Description) { IsSelected = true, IsRequired = true },
-        new(WizardOptionKinds.ChartingTool, Wizard_Task_ChartingTool, Wizard_Task_ChartingTool_Description),
-        new(WizardOptionKinds.DotNetSdk, Wizard_Task_DotNetSdk, Wizard_Task_DotNetSdk_Description),
-        new(WizardOptionKinds.ModTemplate, Wizard_Task_ModTemplate, Wizard_Task_ModTemplate_Description),
-        new(WizardOptionKinds.EnvVariable, Wizard_Task_EnvVariable, Wizard_Task_EnvVariable_Description)
-    ];
+    public IReadOnlyList<WizardOption> Options => GameConfig.WizardOptions;
 
     public static IReadOnlyList<WizardRole> Roles { get; } =
     [
@@ -62,14 +32,6 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         set => ApplyPreset(value.Identity);
     }
 
-    public WizardDialogViewModel()
-    {
-        Options.Select(t => t.ObservePropertyChanged(x => x.IsSelected))
-            .Merge()
-            .Where(this, (_, self) => !self._applyingPreset)
-            .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(SelectedRole)));
-    }
-
     public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
 
     public event EventHandler<object?>? RequestClose;
@@ -79,6 +41,11 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         await base.OnInitializeAsync().ConfigureAwait(false);
 
         _stepMap = WizardSteps.ToDictionary(s => s.Kinds);
+
+        Options.Select(t => t.ObservePropertyChanged(x => x.IsSelected))
+            .Merge()
+            .Where(this, (_, self) => !self._applyingPreset)
+            .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(SelectedRole)));
 
         Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
@@ -143,7 +110,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
         _applyingPreset = true;
         try
         {
-            var preset = Presets[identity];
+            var preset = GameConfig.WizardPresets[identity];
             foreach (var option in Options)
             {
                 option.IsSelected = preset.HasFlag(option.Kinds);
@@ -162,7 +129,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             .Select(x => x.Kinds)
             .Aggregate(WizardOptionKinds.None, (mask, k) => mask | k);
 
-        foreach (var (identity, preset) in Presets)
+        foreach (var (identity, preset) in GameConfig.WizardPresets)
         {
             if (preset == selected)
             {
