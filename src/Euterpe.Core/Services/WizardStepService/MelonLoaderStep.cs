@@ -6,12 +6,20 @@ internal sealed class MelonLoaderStep : IWizardStep
 
     public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
+        GameLocalService.ReadMelonLoaderVersion();
+        if (GameConfig.MelonLoaderVersion is not null)
+        {
+            return;
+        }
+
         await DependencyAcquireService.AcquireForMelonLoaderAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await GameLocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
-        GameLocalService.ReadMelonLoaderVersion();
     }
 
     #region Injections
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IDependencyAcquireService DependencyAcquireService { get; init; }
