@@ -18,6 +18,8 @@ public abstract partial class GameConfig(
     [ObservableProperty]
     public partial GameMode GameMode { get; set; } = GameMode.Modded;
 
+    public bool SetupCompleted { get; set; }
+
     [JsonIgnore]
     public GameId Id { get; } = id;
 

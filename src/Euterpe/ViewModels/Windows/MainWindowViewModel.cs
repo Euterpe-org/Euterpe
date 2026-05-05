@@ -10,7 +10,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
 
         await AppSettingService.ValidateSteamAsync().ConfigureAwait(true);
 
-        if (!Config.SetupCompleted)
+        if (!GameConfig.SetupCompleted)
         {
             await ShowWizardDialogAsync().ConfigureAwait(true);
         }
@@ -41,7 +41,7 @@ public sealed partial class MainWindowViewModel : NavViewModelBase
     public required AuthState AuthState { get; init; }
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }

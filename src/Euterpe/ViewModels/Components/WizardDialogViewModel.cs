@@ -101,7 +101,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
         if (failed.Count is 0)
         {
-            Config.SetupCompleted = true;
+            GameConfig.SetupCompleted = true;
         }
         else
         {
@@ -176,7 +176,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     #region Injections
 
     [UsedImplicitly]
-    public required Config Config { get; init; }
+    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required IEnumerable<IWizardStep> WizardSteps { get; init; }
