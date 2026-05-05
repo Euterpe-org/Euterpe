@@ -19,6 +19,11 @@ public sealed partial class HomePageViewModel : ViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(true);
         await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
 
+        if (!GameConfig.SetupCompleted)
+        {
+            await ShowWizardDialogAsync().ConfigureAwait(true);
+        }
+
         await GameSettingService.ValidateGameAsync().ConfigureAwait(true);
         await GameLocalService.ReadGameInformationAsync().ConfigureAwait(true);
         GameLocalService.ReadMelonLoaderVersion();
@@ -29,6 +34,21 @@ public sealed partial class HomePageViewModel : ViewModelBase
         CheckModdingDependenciesAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to check modding dependencies"));
 
         Logger.ZLogInformation($"{nameof(HomePageViewModel)} Initialized");
+    }
+
+    private async Task ShowWizardDialogAsync()
+    {
+        Logger.ZLogInformation($"Showing setup wizard dialog");
+
+        var options = new OverlayDialogOptions
+        {
+            Title = Wizard_Title_Welcome,
+            CanDragMove = false,
+            CanResize = false,
+            IsCloseButtonVisible = false
+        };
+
+        await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, MainWindowViewModel.WizardHostId, options).ConfigureAwait(false);
     }
 
     private async Task CheckModdingDependenciesAsync()
@@ -150,6 +170,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required NavigationService NavigationService { get; init; }
+
+    [UsedImplicitly]
+    public required WizardDialogViewModel WizardDialogViewModel { get; init; }
 
     [UsedImplicitly]
     public required ILogger<HomePageViewModel> Logger { get; init; }
