@@ -1,0 +1,50 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe">
+
+    <Design.PreviewWith>
+        <Border
+            Background="Gray"
+            Height="120"
+            Width="120">
+            <e:AsyncImage
+                Source="https://avatars.githubusercontent.com/u/0" />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style
+        Selector="e|AsyncImage">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    ClipToBounds="True"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Margin="0"
+                    Padding="0">
+                    <Grid
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        <Image
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            Name="PART_PlaceholderImage"
+                            Source="{TemplateBinding PlaceholderSource}"
+                            Stretch="{TemplateBinding Stretch}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                        <Image
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            Name="PART_Image"
+                            Stretch="{TemplateBinding Stretch}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

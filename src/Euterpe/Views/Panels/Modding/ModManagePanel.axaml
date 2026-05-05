@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:enums="using:Euterpe.Models.Enums"
-    xmlns:labs="using:Avalonia.Labs.Controls"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mods="using:Euterpe.Contracts.Mods"
@@ -239,7 +239,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate
                                     x:DataType="mods:ModScreenshot">
-                                    <labs:AsyncImage
+                                    <e:AsyncImage
                                         Background="{Binding DominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                                         ClipToBounds="True"
                                         CornerRadius="8"
