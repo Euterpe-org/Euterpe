@@ -12,7 +12,8 @@ public sealed class WizardStepRegistrationTest
     public async Task AllWizardSteps_Registered_AsIWizardStep()
     {
         var builder = new ContainerBuilder();
-        builder.RegisterCoreServices();
+        builder.RegisterAppCoreServices();
+        builder.RegisterPerGameCoreServices();
 
         await using var container = builder.Build();
 
