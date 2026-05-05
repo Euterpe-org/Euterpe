@@ -13,7 +13,7 @@ public sealed class GenerateStyles : Task
     {
         ["ExtendedControls"] = new CategoryInfo("Extended Controls"),
         ["TemplatedControls"] = new CategoryInfo("Templated Controls"),
-        ["Styles"] = new CategoryInfo("Control Styles")
+        ["ControlStyles"] = new CategoryInfo("Control Styles")
     };
 
     private readonly XNamespace AvaloniaNamespace = AvaloniaNamespaceUrl;

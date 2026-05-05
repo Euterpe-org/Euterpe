@@ -28,6 +28,8 @@
         Source="/ExtendedControls/PlayButton.axaml" />
     <!--  Templated Controls  -->
     <StyleInclude
+        Source="/TemplatedControls/AsyncImage.axaml" />
+    <StyleInclude
         Source="/TemplatedControls/ContentListItem.axaml" />
     <StyleInclude
         Source="/TemplatedControls/ContributorCardControl.axaml" />
@@ -39,15 +41,15 @@
         Source="/TemplatedControls/RoleCard.axaml" />
     <!--  Control Styles  -->
     <StyleInclude
-        Source="/Styles/BorderStyles.axaml" />
+        Source="/ControlStyles/BorderStyles.axaml" />
     <StyleInclude
-        Source="/Styles/ButtonStyles.axaml" />
+        Source="/ControlStyles/ButtonStyles.axaml" />
     <StyleInclude
-        Source="/Styles/LabelStyles.axaml" />
+        Source="/ControlStyles/LabelStyles.axaml" />
     <StyleInclude
-        Source="/Styles/StackPanelStyles.axaml" />
+        Source="/ControlStyles/StackPanelStyles.axaml" />
     <StyleInclude
-        Source="/Styles/TextBlockStyles.axaml" />
+        Source="/ControlStyles/TextBlockStyles.axaml" />
     <StyleInclude
-        Source="/Styles/TextBoxStyles.axaml" />
+        Source="/ControlStyles/TextBoxStyles.axaml" />
 </Styles>
