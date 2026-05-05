@@ -1,12 +1,13 @@
 namespace Euterpe.Services;
 
-public sealed class GameSwitcher
+public sealed partial class GameSwitcher : ObservableObject
 {
-    public bool CanSwitch() => true;
+    [ObservableProperty]
+    public partial bool CanSwitch { get; set; } = true;
 
     public async Task SwitchAsync(GameId target)
     {
-        if (target == Config.ActiveGame)
+        if (!CanSwitch || target == Config.ActiveGame)
         {
             return;
         }

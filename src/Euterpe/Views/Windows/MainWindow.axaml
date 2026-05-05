@@ -4,6 +4,7 @@
     xmlns:constants="using:Euterpe.Shared"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:games="using:Euterpe.Models.Games"
     xmlns:models="using:Euterpe.Controls.Models"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Windows"
@@ -21,10 +22,27 @@
     </Design.DataContext>
 
     <u:UrsaWindow.RightContent>
-        <u:ThemeToggleButton
-            IsThreeState="False"
-            Mode="Controller"
-            VerticalAlignment="Top" />
+        <StackPanel
+            Orientation="Horizontal"
+            Spacing="8"
+            VerticalAlignment="Top">
+            <ComboBox
+                IsEnabled="{Binding GameSwitcher.CanSwitch}"
+                ItemsSource="{Binding Config.Games, Mode=OneTime}"
+                MinWidth="140"
+                SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="games:GameConfig">
+                        <TextBlock
+                            Text="{Binding DisplayName, Mode=OneTime}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <u:ThemeToggleButton
+                IsThreeState="False"
+                Mode="Controller" />
+        </StackPanel>
     </u:UrsaWindow.RightContent>
 
     <Grid

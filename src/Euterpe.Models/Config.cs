@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Semver;
@@ -25,6 +26,17 @@ public sealed partial class Config : ObservableObject
     public required MuseDashConfig MuseDash { get; init; }
 
     public required MuseDash2Config MuseDash2 { get; init; }
+
+    [JsonIgnore]
+    public IReadOnlyList<GameConfig> Games => [MuseDash, MuseDash2];
+
+    [JsonIgnore]
+    public GameConfig ActiveGameConfig => ActiveGame switch
+    {
+        GameId.MuseDash => MuseDash,
+        GameId.MuseDash2 => MuseDash2,
+        _ => throw new UnreachableException()
+    };
 
     // Appearance Settings
     [AllowNull]
