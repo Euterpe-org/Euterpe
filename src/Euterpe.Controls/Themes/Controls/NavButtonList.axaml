@@ -11,6 +11,12 @@
     <Style
         Selector="e|NavButtonList">
         <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ItemsPresenter
+                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
                 <StackPanel

@@ -16,7 +16,6 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel
-                    IsVisible="{TemplateBinding IsVisible}"
                     Margin="5,0">
 
                     <Image

@@ -17,7 +17,6 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <StackPanel
-                    IsVisible="{TemplateBinding IsVisible, Mode=OneWay}"
                     Orientation="Vertical"
                     Spacing="15">
 

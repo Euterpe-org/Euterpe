@@ -45,9 +45,6 @@
         Selector="e|PlayButton">
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="230" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="0,0,120,80" />
         <Setter Property="ClipToBounds" Value="False" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -168,7 +165,7 @@
 
     <!--  Play Button Style  -->
     <Style
-        Selector="Button.Play">
+        Selector="e|PlayButton Button.Play">
         <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="20" />
@@ -188,7 +185,7 @@
         </Setter>
     </Style>
     <Style
-        Selector="Button.Play /template/ ContentPresenter">
+        Selector="e|PlayButton Button.Play /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource PrimaryButtonGradient}" />
         <Setter Property="Transitions">
             <Transitions>
@@ -200,25 +197,25 @@
         </Setter>
     </Style>
     <Style
-        Selector="Button.Play:pointerover">
+        Selector="e|PlayButton Button.Play:pointerover">
         <Setter Property="RenderTransform" Value="scale(1.01)" />
     </Style>
     <Style
-        Selector="Button.Play:pointerover /template/ ContentPresenter">
+        Selector="e|PlayButton Button.Play:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource PrimaryButtonHoverGradient}" />
     </Style>
     <Style
-        Selector="Button.Play:pressed">
+        Selector="e|PlayButton Button.Play:pressed">
         <Setter Property="RenderTransform" Value="scale(0.95)" />
     </Style>
     <Style
-        Selector="Button.Play:pressed /template/ ContentPresenter">
+        Selector="e|PlayButton Button.Play:pressed /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource PrimaryButtonPressedGradient}" />
     </Style>
 
     <!--  Dropdown Button Style  -->
     <Style
-        Selector="ToggleButton.SelectPlayVersion">
+        Selector="e|PlayButton ToggleButton.SelectPlayVersion">
         <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="45" />
@@ -235,7 +232,7 @@
         </Setter>
     </Style>
     <Style
-        Selector="ToggleButton.SelectPlayVersion /template/ ContentPresenter">
+        Selector="e|PlayButton ToggleButton.SelectPlayVersion /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
         <Setter Property="Transitions">
             <Transitions>
@@ -247,23 +244,23 @@
         </Setter>
     </Style>
     <Style
-        Selector="ToggleButton.SelectPlayVersion:pointerover">
+        Selector="e|PlayButton ToggleButton.SelectPlayVersion:pointerover">
         <Setter Property="RenderTransform" Value="scale(1.02)" />
     </Style>
     <Style
-        Selector="ToggleButton.SelectPlayVersion:pointerover /template/ ContentPresenter">
+        Selector="e|PlayButton ToggleButton.SelectPlayVersion:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource SecondaryButtonHoverGradient}" />
     </Style>
     <Style
-        Selector="ToggleButton.SelectPlayVersion:pressed">
+        Selector="e|PlayButton ToggleButton.SelectPlayVersion:pressed">
         <Setter Property="RenderTransform" Value="scale(0.95)" />
     </Style>
     <Style
-        Selector="ToggleButton.SelectPlayVersion:pressed /template/ ContentPresenter">
+        Selector="e|PlayButton ToggleButton.SelectPlayVersion:pressed /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource SecondaryButtonPressedGradient}" />
     </Style>
     <Style
-        Selector="ToggleButton.SelectPlayVersion:checked /template/ ContentPresenter">
+        Selector="e|PlayButton ToggleButton.SelectPlayVersion:checked /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource SecondaryButtonGradient}" />
     </Style>
 

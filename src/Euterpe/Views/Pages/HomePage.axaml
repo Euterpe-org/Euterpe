@@ -39,8 +39,11 @@
         <e:PlayButton
             Command="{Binding LaunchGameCommand, Mode=OneTime}"
             Content="{Localize {x:Static loc:XAMLLiteral.Button_LaunchGame}}"
+            HorizontalAlignment="Right"
             ItemsSource="{Binding GameModes, Mode=OneTime}"
-            SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}" />
+            Margin="0,0,120,80"
+            SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}"
+            VerticalAlignment="Bottom" />
 
         <!--  Support Card  -->
         <Border
