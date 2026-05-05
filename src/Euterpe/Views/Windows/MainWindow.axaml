@@ -27,7 +27,7 @@
             Spacing="8"
             VerticalAlignment="Top">
             <ComboBox
-                IsEnabled="{Binding GameSwitcher.CanSwitch}"
+                IsEnabled="False"
                 ItemsSource="{Binding Config.Games, Mode=OneTime}"
                 MinWidth="140"
                 SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
