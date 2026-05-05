@@ -53,7 +53,7 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
     public required IEuterpeDistributionClient DistributionClient { get; init; }
 
     [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
+    public required IAppDownloadManager AppDownloadManager { get; init; }
 
     [UsedImplicitly]
     public required ILogger<DependencyAcquireService> Logger { get; init; }

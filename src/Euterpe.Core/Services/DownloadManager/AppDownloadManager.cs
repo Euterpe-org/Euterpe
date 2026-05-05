@@ -1,9 +1,9 @@
-using Euterpe.Contracts.Distribution;
-using Euterpe.Contracts.Mods;
+using System.Net;
+using DownloadProgressChangedEventArgs = Downloader.DownloadProgressChangedEventArgs;
 
 namespace Euterpe.Core;
 
-internal sealed partial class DownloadManager : IDownloadManager
+internal sealed class AppDownloadManager : IAppDownloadManager
 {
     public async Task<bool> DownloadFileAsync(
         string url,
@@ -73,20 +73,6 @@ internal sealed partial class DownloadManager : IDownloadManager
         }
     }
 
-    public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
-    {
-        var path = Path.Combine(GameConfig.ModsFolder, mod.FileName);
-
-        return await DownloadAssetAsync(mod.DownloadUrl, path, $"mod {mod.Name}", cancellationToken).ConfigureAwait(false);
-    }
-
-    public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
-    {
-        var path = Path.Combine(GameConfig.UserLibsFolder, lib.FileName);
-
-        return await DownloadAssetAsync(lib.DownloadUrl, path, $"lib {lib.Name}", cancellationToken).ConfigureAwait(false);
-    }
-
     public async Task<bool> DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default)
     {
         try
@@ -121,40 +107,63 @@ internal sealed partial class DownloadManager : IDownloadManager
         return null;
     }
 
-    public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)
+    private async Task<string?> FetchReadmeFromBranchesAsync(string repoId, CancellationToken cancellationToken)
     {
-        Logger.ZLogInformation($"Fetching mods ...");
+        foreach (var branch in Branches)
+        {
+            var readme = await FetchReadmeFromBranchAsync(repoId, branch, cancellationToken).ConfigureAwait(false);
+            if (!string.IsNullOrEmpty(readme))
+            {
+                return readme;
+            }
+        }
 
-        try
-        {
-            return await ModClient.GetModManifestAsync(cancellationToken).ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to fetch mod list after retries");
-            return [];
-        }
+        Logger.ZLogInformation($"No Readme found in any branches for {repoId}");
+        return null;
     }
 
-    public async Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default)
+    private async Task<string?> FetchReadmeFromBranchAsync(string repoId, string branch, CancellationToken cancellationToken)
     {
-        Logger.ZLogInformation($"Fetching libs ...");
+        foreach (var url in CommonReadmeNames.Select(readmeName => $"{GitHubRawContentBaseUrl}{repoId}/{branch}/{readmeName}"))
+        {
+            var content = await TryFetchContentAsync(url, cancellationToken).ConfigureAwait(false);
 
+            if (string.IsNullOrEmpty(content))
+            {
+                continue;
+            }
+
+            Logger.ZLogInformation($"Successfully fetched Readme from branch {branch} of {repoId} using URL: {url}");
+            return content;
+        }
+
+        return null;
+    }
+
+    private async Task<string?> TryFetchContentAsync(string url, CancellationToken cancellationToken)
+    {
         try
         {
-            return await DistributionClient.GetLatestLibsAsync(true, cancellationToken).ConfigureAwait(false);
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
+
+            if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Forbidden)
+            {
+                return null;
+            }
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to fetch lib list after retries");
-            return [];
+            Logger.ZLogError(ex, $"Failed to fetch content from URL: {url}");
+            return null;
         }
     }
 
     #region Injections
-
-    [UsedImplicitly]
-    public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
     public required HttpClient Client { get; init; }
@@ -163,16 +172,10 @@ internal sealed partial class DownloadManager : IDownloadManager
     public required EuterpeDownloadClient DownloadClient { get; init; }
 
     [UsedImplicitly]
-    public required IEuterpeModClient ModClient { get; init; }
-
-    [UsedImplicitly]
-    public required IEuterpeDistributionClient DistributionClient { get; init; }
-
-    [UsedImplicitly]
     public required IDownloadService DownloadService { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<DownloadManager> Logger { get; init; }
+    public required ILogger<AppDownloadManager> Logger { get; init; }
 
     #endregion Injections
 }

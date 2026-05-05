@@ -9,7 +9,7 @@ public sealed partial class DependencyAcquireServiceTest
     {
         var sha = await CreateValidDependencyFiles();
         var client = CreateClientReturning(CreateAllMelonLoaderDeps(sha));
-        var downloader = IDownloadManager.Mock();
+        var downloader = IAppDownloadManager.Mock();
         var sut = CreateService(client, downloader);
 
         await sut.AcquireForMelonLoaderAsync();
@@ -27,7 +27,7 @@ public sealed partial class DependencyAcquireServiceTest
     public async Task AcquireForMelonLoaderAsync_DownloadAlwaysFails_ThrowsAfterRetries()
     {
         var client = CreateClientReturning(CreateAllMelonLoaderDeps("expected-sha"));
-        var downloader = IDownloadManager.Mock();
+        var downloader = IAppDownloadManager.Mock();
         downloader.DownloadFileAsync(
                 Any<string>(),
                 Any<string>(),
@@ -57,7 +57,7 @@ public sealed partial class DependencyAcquireServiceTest
         // the post-download hash check and fall through, eventually throwing.
         await CreateValidDependencyFiles();
         var client = CreateClientReturning(CreateAllMelonLoaderDeps("wrong-expected-sha"));
-        var downloader = IDownloadManager.Mock();
+        var downloader = IAppDownloadManager.Mock();
         downloader.DownloadFileAsync(
                 Any<string>(),
                 Any<string>(),

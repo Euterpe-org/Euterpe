@@ -24,7 +24,7 @@ public sealed partial class UpdateServiceTest
         Config? config = null,
         SemVersion? currentVersion = null,
         IEuterpeDistributionClient? distributionClient = null,
-        IDownloadManager? downloadManager = null,
+        IAppDownloadManager? appDownloadManager = null,
         IMessageBoxService? messageBoxService = null,
         IPlatformInfo? platformService = null)
     {
@@ -36,7 +36,7 @@ public sealed partial class UpdateServiceTest
             CurrentVersion = currentVersion ?? SemVersion.Parse(CurrentStableVersion),
             Logger = _logger,
             DistributionClient = distributionClient ?? IEuterpeDistributionClient.Mock(),
-            DownloadManager = downloadManager ?? IDownloadManager.Mock(),
+            AppDownloadManager = appDownloadManager ?? IAppDownloadManager.Mock(),
             MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
             PlatformInfo = platformServiceMock
         };

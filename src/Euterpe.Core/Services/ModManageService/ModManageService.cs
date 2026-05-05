@@ -40,7 +40,7 @@ internal sealed partial class ModManageService : IModManageService
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
+    public required IGameDownloadManager GameDownloadManager { get; init; }
 
     [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }

@@ -15,7 +15,7 @@ internal sealed partial class ModManageService
 
     private async Task<bool> DownloadModCoreAsync(ModDto mod)
     {
-        if (!await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false))
+        if (!await GameDownloadManager.DownloadModAsync(mod).ConfigureAwait(false))
         {
             return false;
         }

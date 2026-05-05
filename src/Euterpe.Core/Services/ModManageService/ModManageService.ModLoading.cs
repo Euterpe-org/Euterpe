@@ -16,7 +16,7 @@ internal sealed partial class ModManageService
 
         CheckDuplicatedMods(localMods);
 
-        foreach (var webMod in await DownloadManager.FetchModListAsync().ConfigureAwait(false))
+        foreach (var webMod in await GameDownloadManager.FetchModListAsync().ConfigureAwait(false))
         {
             if (_sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
             {

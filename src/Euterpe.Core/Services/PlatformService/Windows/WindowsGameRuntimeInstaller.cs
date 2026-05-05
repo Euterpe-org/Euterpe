@@ -33,7 +33,7 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
         {
             var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             Logger.ZLogInformation($"Downloading .NET Runtime from {DotnetRuntimeUrl} to {tempFilePath}");
-            await DownloadManager.DownloadFileAsync(DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+            await AppDownloadManager.DownloadFileAsync(DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
 
             Logger.ZLogInformation($"Launching .NET Runtime installer: {tempFilePath}");
             using var process = Process.Start(
@@ -65,7 +65,7 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
     #region Injections
 
     [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
+    public required IAppDownloadManager AppDownloadManager { get; init; }
 
     [UsedImplicitly]
     public required ILogger<WindowsGameRuntimeInstaller> Logger { get; init; }

@@ -36,7 +36,7 @@ public sealed partial class ModManageServiceTest
 
     private ModManageService CreateModManageService(
         GameConfig? game = null,
-        IDownloadManager? downloadManager = null,
+        IGameDownloadManager? gameDownloadManager = null,
         IFileSystemService? fileSystemService = null,
         IGameLocalService? gameLocalService = null,
         INotificationService? notificationService = null) =>
@@ -44,7 +44,7 @@ public sealed partial class ModManageServiceTest
         {
             GameConfig = game ?? Game,
             Logger = _logger,
-            DownloadManager = downloadManager ?? CreateEmptyDownloadManager(),
+            GameDownloadManager = gameDownloadManager ?? CreateEmptyDownloadManager(),
             FileSystemService = fileSystemService ?? IFileSystemService.Mock(),
             GameLocalService = gameLocalService ?? CreateEmptyLocalService(),
             NotificationService = notificationService ?? INotificationService.Mock()
@@ -99,9 +99,9 @@ public sealed partial class ModManageServiceTest
             }
         };
 
-    private static IDownloadManager CreateEmptyDownloadManager()
+    private static IGameDownloadManager CreateEmptyDownloadManager()
     {
-        var mock = IDownloadManager.Mock();
+        var mock = IGameDownloadManager.Mock();
         mock.FetchModListAsync(Any<CancellationToken>()).Returns([]);
         mock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         return mock;
@@ -128,9 +128,9 @@ public sealed partial class ModManageServiceTest
         return mock;
     }
 
-    private static IDownloadManager DownloadManagerWith(params Mod[] webMods)
+    private static IGameDownloadManager DownloadManagerWith(params Mod[] webMods)
     {
-        var mock = IDownloadManager.Mock();
+        var mock = IGameDownloadManager.Mock();
         mock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         mock.FetchModListAsync(Any<CancellationToken>()).Returns(webMods);
         return mock;

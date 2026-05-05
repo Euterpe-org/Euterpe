@@ -33,7 +33,7 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
         try
         {
             Logger.ZLogInformation($"Downloading .NET SDK from {DotnetSdkUrl} to {tempFilePath}");
-            await DownloadManager.DownloadFileAsync(DotnetSdkUrl, tempFilePath).ConfigureAwait(false);
+            await AppDownloadManager.DownloadFileAsync(DotnetSdkUrl, tempFilePath).ConfigureAwait(false);
 
             Logger.ZLogInformation($"Launching .NET SDK installer: {tempFilePath}");
             using var process = Process.Start(
@@ -74,7 +74,7 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
     #region Injections
 
     [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
+    public required IAppDownloadManager AppDownloadManager { get; init; }
 
     [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }

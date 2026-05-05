@@ -21,7 +21,7 @@ internal sealed partial class DependencyAcquireService
 
         for (var attempt = 1; attempt <= MaxRetries; attempt++)
         {
-            var success = await DownloadManager.DownloadFileAsync(spec.Url, spec.FilePath, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
+            var success = await AppDownloadManager.DownloadFileAsync(spec.Url, spec.FilePath, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
             if (!success)
             {
                 Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: Download of {spec.Name} failed");

@@ -12,7 +12,7 @@ internal sealed partial class ModManageService
                 .WhenAllAsync(GameLocalService.LoadLibFromPathAsync).ConfigureAwait(false))
             .Select(x => KeyValuePair.Create(x.Name, x)));
 
-        foreach (var webLib in await DownloadManager.FetchLibListAsync().ConfigureAwait(false))
+        foreach (var webLib in await GameDownloadManager.FetchLibListAsync().ConfigureAwait(false))
         {
             if (_libsDict.TryGetValue(webLib.Slug, out var localLib))
             {
@@ -52,7 +52,7 @@ internal sealed partial class ModManageService
 
     private async Task DownloadLibCoreAsync(LibDto lib)
     {
-        await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
+        await GameDownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
         _libsDict[lib.Name] = await GameLocalService.LoadLibFromPathAsync(Path.Combine(GameConfig.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
         Logger.ZLogInformation($"Lib {lib.Name} download finished");
     }

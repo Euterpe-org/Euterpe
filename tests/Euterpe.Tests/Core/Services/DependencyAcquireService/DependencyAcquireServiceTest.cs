@@ -35,12 +35,12 @@ public sealed partial class DependencyAcquireServiceTest
 
     private DependencyAcquireService CreateService(
         IEuterpeDistributionClient? distributionClient = null,
-        IDownloadManager? downloadManager = null) =>
+        IAppDownloadManager? appDownloadManager = null) =>
         new()
         {
             GameConfig = _game,
             DistributionClient = distributionClient ?? IEuterpeDistributionClient.Mock(),
-            DownloadManager = downloadManager ?? IDownloadManager.Mock(),
+            AppDownloadManager = appDownloadManager ?? IAppDownloadManager.Mock(),
             Logger = _logger
         };
 

@@ -32,7 +32,7 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            await DownloadManager.DownloadFileAsync(DotNetInstallScriptUrl, tempFilePath).ConfigureAwait(false);
+            await AppDownloadManager.DownloadFileAsync(DotNetInstallScriptUrl, tempFilePath).ConfigureAwait(false);
             Logger.ZLogInformation($"Downloaded .NET install script to {tempFilePath}");
 
             var chmodResult = await Cli.Wrap("chmod")
@@ -76,7 +76,7 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
     #region Injections
 
     [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
+    public required IAppDownloadManager AppDownloadManager { get; init; }
 
     [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }

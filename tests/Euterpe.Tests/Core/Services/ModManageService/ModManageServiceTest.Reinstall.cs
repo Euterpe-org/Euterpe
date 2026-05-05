@@ -8,14 +8,14 @@ public sealed partial class ModManageServiceTest
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
         fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
-        var downloadManagerMock = IDownloadManager.Mock();
+        var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).Returns(true);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         var notificationServiceMock = INotificationService.Mock();
 
         var sut = CreateModManageService(
-            downloadManager: downloadManagerMock,
+            gameDownloadManager: downloadManagerMock,
             fileSystemService: fileSystemServiceMock,
             notificationService: notificationServiceMock);
 
@@ -34,13 +34,13 @@ public sealed partial class ModManageServiceTest
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
         fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(false);
-        var downloadManagerMock = IDownloadManager.Mock();
+        var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         var notificationServiceMock = INotificationService.Mock();
 
         var sut = CreateModManageService(
-            downloadManager: downloadManagerMock,
+            gameDownloadManager: downloadManagerMock,
             fileSystemService: fileSystemServiceMock,
             notificationService: notificationServiceMock);
 
@@ -58,14 +58,14 @@ public sealed partial class ModManageServiceTest
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
         fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
-        var downloadManagerMock = IDownloadManager.Mock();
+        var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).Returns(false);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         var notificationServiceMock = INotificationService.Mock();
 
         var sut = CreateModManageService(
-            downloadManager: downloadManagerMock,
+            gameDownloadManager: downloadManagerMock,
             fileSystemService: fileSystemServiceMock,
             notificationService: notificationServiceMock);
 

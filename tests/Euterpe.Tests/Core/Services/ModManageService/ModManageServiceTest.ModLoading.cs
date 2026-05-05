@@ -6,7 +6,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_LocalVersionOlderThanWeb_MarksOutdated()
     {
         var sut = CreateModManageService(
-            downloadManager: DownloadManagerWith(CreateWebMod(version: "2.0.0")),
+            gameDownloadManager: DownloadManagerWith(CreateWebMod(version: "2.0.0")),
             gameLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
         await sut.InitializeModsAsync();
@@ -21,7 +21,7 @@ public sealed partial class ModManageServiceTest
         localMod.LocalVersion = "2.0.0";
 
         var sut = CreateModManageService(
-            downloadManager: DownloadManagerWith(CreateWebMod(version: "1.0.0")),
+            gameDownloadManager: DownloadManagerWith(CreateWebMod(version: "1.0.0")),
             gameLocalService: LocalServiceWith((TestModFilePath, localMod)));
 
         await sut.InitializeModsAsync();
@@ -36,7 +36,7 @@ public sealed partial class ModManageServiceTest
         localMod.SHA256 = "local-sha";
 
         var sut = CreateModManageService(
-            downloadManager: DownloadManagerWith(CreateWebMod(sha256: "web-sha")),
+            gameDownloadManager: DownloadManagerWith(CreateWebMod(sha256: "web-sha")),
             gameLocalService: LocalServiceWith((TestModFilePath, localMod)));
 
         await sut.InitializeModsAsync();
@@ -51,7 +51,7 @@ public sealed partial class ModManageServiceTest
         localMod.SHA256 = "shared-sha";
 
         var sut = CreateModManageService(
-            downloadManager: DownloadManagerWith(CreateWebMod(sha256: "shared-sha")),
+            gameDownloadManager: DownloadManagerWith(CreateWebMod(sha256: "shared-sha")),
             gameLocalService: LocalServiceWith((TestModFilePath, localMod)));
 
         await sut.InitializeModsAsync();

@@ -6,14 +6,14 @@ public sealed partial class ModManageServiceTest
     public async Task InstallModAsync_WhenDownloadSucceeds_AddsLocalInfoAndNotifiesSuccess()
     {
         var mod = CreateInstallableMod();
-        var downloadManagerMock = IDownloadManager.Mock();
+        var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).Returns(true);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         var notificationServiceMock = INotificationService.Mock();
 
         var sut = CreateModManageService(
-            downloadManager: downloadManagerMock,
+            gameDownloadManager: downloadManagerMock,
             notificationService: notificationServiceMock);
 
         await sut.InstallModAsync(mod);
@@ -30,14 +30,14 @@ public sealed partial class ModManageServiceTest
     public async Task InstallModAsync_WhenDownloadFails_DoesNotAddLocalInfoAndNotifiesError()
     {
         var mod = CreateInstallableMod();
-        var downloadManagerMock = IDownloadManager.Mock();
+        var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).Returns(false);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         var notificationServiceMock = INotificationService.Mock();
 
         var sut = CreateModManageService(
-            downloadManager: downloadManagerMock,
+            gameDownloadManager: downloadManagerMock,
             notificationService: notificationServiceMock);
 
         await sut.InstallModAsync(mod);

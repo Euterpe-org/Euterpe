@@ -39,7 +39,7 @@ internal sealed partial class UpdateService : IUpdateService
     public required IEuterpeDistributionClient DistributionClient { get; init; }
 
     [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
+    public required IAppDownloadManager AppDownloadManager { get; init; }
 
     [UsedImplicitly]
     public required ILogger<UpdateService> Logger { get; init; }

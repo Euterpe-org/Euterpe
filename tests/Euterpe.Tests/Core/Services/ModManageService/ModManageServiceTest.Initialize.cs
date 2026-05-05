@@ -53,7 +53,7 @@ public sealed partial class ModManageServiceTest
     [Test]
     public async Task InitializeModsAsync_AddsWebOnlyModsToSourceCache()
     {
-        var downloadManagerMock = IDownloadManager.Mock();
+        var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns(
         [
@@ -66,7 +66,7 @@ public sealed partial class ModManageServiceTest
             }
         ]);
 
-        var sut = CreateModManageService(downloadManager: downloadManagerMock);
+        var sut = CreateModManageService(gameDownloadManager: downloadManagerMock);
 
         await sut.InitializeModsAsync();
 
