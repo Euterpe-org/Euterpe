@@ -11,7 +11,7 @@ public static class IocContainer
 
     public static Observable<ILifetimeScope> GameScopeObservable => GameScopeSubject;
 
-    public static ILifetimeScope GameScope => GameScopeSubject.Value;
+    private static ILifetimeScope GameScope => GameScopeSubject.Value;
 
     public static T Resolve<T>() where T : notnull => GameScope.Resolve<T>();
 
@@ -32,10 +32,10 @@ public static class IocContainer
 
         Root.Resolve<IAppSettingService>().Load();
 
-        var initialGame = Root.Resolve<Config>().ActiveGame;
-        var firstScope = BuildGameScope(initialGame);
-        GameScopes[initialGame] = firstScope;
-        GameScopeSubject = new BehaviorSubject<ILifetimeScope>(firstScope);
+        var activeGame = Root.Resolve<Config>().ActiveGame;
+        var activeGameScope = BuildGameScope(activeGame);
+        GameScopes[activeGame] = activeGameScope;
+        GameScopeSubject = new BehaviorSubject<ILifetimeScope>(activeGameScope);
     }
 
     public static void ActivateGame(GameId game)
