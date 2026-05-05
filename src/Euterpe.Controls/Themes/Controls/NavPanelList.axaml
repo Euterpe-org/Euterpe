@@ -10,6 +10,12 @@
 
     <Style
         Selector="e|NavPanelList">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ItemsPresenter
+                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
         <Setter Property="ItemsPanel">
             <ItemsPanelTemplate>
                 <StackPanel
