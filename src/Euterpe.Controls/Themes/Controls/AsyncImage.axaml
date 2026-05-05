@@ -39,8 +39,17 @@
                         <Image
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             Name="PART_Image"
+                            Opacity="0"
                             Stretch="{TemplateBinding Stretch}"
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <Image.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Property="Opacity"
+                                        Duration="0:0:0.25" />
+                                </Transitions>
+                            </Image.Transitions>
+                        </Image>
                     </Grid>
                 </Border>
             </ControlTemplate>

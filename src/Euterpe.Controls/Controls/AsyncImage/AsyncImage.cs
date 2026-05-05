@@ -1,4 +1,3 @@
-using Avalonia.Animation;
 using Avalonia.Controls.Metadata;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
@@ -10,7 +9,6 @@ namespace Euterpe.Controls;
 public sealed class AsyncImage : TemplatedControl
 {
     private static readonly HttpClient SharedHttpClient = new();
-    private static readonly CrossFade Transition = new(TimeSpan.FromSeconds(0.25));
 
     public static readonly StyledProperty<string?> SourceProperty =
         AvaloniaProperty.Register<AsyncImage, string?>(nameof(Source));
@@ -22,9 +20,7 @@ public sealed class AsyncImage : TemplatedControl
         AvaloniaProperty.Register<AsyncImage, Stretch>(nameof(Stretch), Stretch.Uniform);
 
     private Image? _imagePart;
-
     private CancellationTokenSource? _loadCts;
-    private Image? _placeholderPart;
 
     public string? Source
     {
@@ -48,7 +44,6 @@ public sealed class AsyncImage : TemplatedControl
     {
         base.OnApplyTemplate(e);
         _imagePart = e.NameScope.Get<Image>("PART_Image");
-        _placeholderPart = e.NameScope.Get<Image>("PART_PlaceholderImage");
         _ = LoadAsync(Source);
     }
 
@@ -67,9 +62,11 @@ public sealed class AsyncImage : TemplatedControl
         _loadCts = new CancellationTokenSource();
         var token = _loadCts.Token;
 
-        _imagePart?.Source = null;
-
-        _ = Transition.Start(_imagePart, _placeholderPart, CancellationToken.None);
+        if (_imagePart is not null)
+        {
+            _imagePart.Opacity = 0;
+            _imagePart.Source = null;
+        }
 
         if (string.IsNullOrEmpty(source) || !Uri.TryCreate(source, UriKind.Absolute, out var uri))
         {
@@ -100,14 +97,13 @@ public sealed class AsyncImage : TemplatedControl
 
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            if (token.IsCancellationRequested)
+            if (token.IsCancellationRequested || _imagePart is null)
             {
                 return;
             }
 
-            _imagePart?.Source = bitmap;
-
-            _ = Transition.Start(_placeholderPart, _imagePart, CancellationToken.None);
+            _imagePart.Source = bitmap;
+            _imagePart.Opacity = 1;
         });
     }
 }
