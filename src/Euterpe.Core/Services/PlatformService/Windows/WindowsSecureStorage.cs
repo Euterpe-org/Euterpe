@@ -6,9 +6,17 @@ using static Euterpe.Core.JsonContexts.SnakeCaseJsonContext;
 
 namespace Euterpe.Core;
 
-internal sealed partial class WindowsService
+[SupportedOSPlatform(nameof(OSPlatform.Windows))]
+internal sealed class WindowsSecureStorage : IPlatformSecureStorage
 {
     private static readonly string TokenFilePath = Path.Combine(AppDataFolder, "auth.dat");
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required ILogger<WindowsSecureStorage> Logger { get; init; }
+
+    #endregion Injections
 
     public async Task SaveTokensAsync(string accessToken, string refreshToken)
     {

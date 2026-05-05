@@ -1,15 +1,9 @@
 using System.Runtime.InteropServices;
-using Euterpe.Contracts.Account;
 
 namespace Euterpe.Abstractions;
 
-public interface IPlatformService : IPlatformPathDiscovery, IPlatformDevEnvironment, IPlatformLauncher, IPlatformSecureStorage
+public interface IPlatformInfo
 {
-    /// <summary>
-    ///     Fixed deep link scheme shared by all platforms.
-    /// </summary>
-    const string DeepLinkScheme = "euterpe";
-
     /// <summary>
     ///     Get OS string
     /// </summary>
@@ -36,16 +30,4 @@ public interface IPlatformService : IPlatformPathDiscovery, IPlatformDevEnvironm
     ///     Get runtime identifier
     /// </summary>
     string RuntimeIdentifier => $"{OsString}-{ArchitectureString}";
-
-    /// <summary>
-    ///     Setup deep link handler for the current platform.
-    /// </summary>
-    /// <param name="processPath"></param>
-    Task SetupDeepLinkAsync(string processPath);
-
-    /// <summary>
-    ///     Get MuseDash UID
-    /// </summary>
-    /// <returns></returns>
-    Task<MuseDashUidRequest?> GetMuseDashUidRequestAsync();
 }

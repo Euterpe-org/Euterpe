@@ -54,8 +54,8 @@ internal static class Program
     {
         Resolve<ILogger<App>>().ZLogCritical(ex, $"Unhandled exception");
 #if PUBLISH
-        Resolve<IPlatformService>().RevealFile(Path.Combine("Logs", LogFileName));
-        Resolve<IPlatformService>().OpenUriAsync("https://github.com/Euterpe-org/Euterpe/issues/new/choose");
+        Resolve<IPlatformLauncher>().RevealFile(Path.Combine("Logs", LogFileName));
+        Resolve<IPlatformLauncher>().OpenUriAsync("https://github.com/Euterpe-org/Euterpe/issues/new/choose");
 #endif
     }
 }

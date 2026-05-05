@@ -39,7 +39,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     private async Task CheckDotNetRuntimeAsync()
     {
-        if (await PlatformService.CheckDotNetRuntimeInstalledAsync().ConfigureAwait(true))
+        if (await RuntimeInstaller.CheckInstalledAsync().ConfigureAwait(true))
         {
             return;
         }
@@ -50,7 +50,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
             return;
         }
 
-        var success = await PlatformService.InstallDotNetRuntimeAsync().ConfigureAwait(true);
+        var success = await RuntimeInstaller.InstallAsync().ConfigureAwait(true);
         if (!success)
         {
             await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntime_Install_Failed).ConfigureAwait(false);
@@ -72,7 +72,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     private async Task BindAccountAsync()
     {
-        var request = await PlatformService.GetMuseDashUidRequestAsync().ConfigureAwait(false);
+        var request = await UidProvider.GetMuseDashUidRequestAsync().ConfigureAwait(false);
         if (request is null)
         {
             Logger.ZLogWarning($"Failed to get MuseDash user ID. Skipping account binding.");
@@ -138,6 +138,12 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required ILocalService LocalService { get; init; }
+
+    [UsedImplicitly]
+    public required IGameRuntimeInstaller RuntimeInstaller { get; init; }
+
+    [UsedImplicitly]
+    public required IGameUidProvider UidProvider { get; init; }
 
     [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }

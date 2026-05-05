@@ -26,7 +26,7 @@ public sealed partial class UpdateServiceTest
         IEuterpeDistributionClient? distributionClient = null,
         IDownloadManager? downloadManager = null,
         IMessageBoxService? messageBoxService = null,
-        IPlatformService? platformService = null)
+        IPlatformInfo? platformService = null)
     {
         var platformServiceMock = platformService ?? CreatePlatformServiceMock();
 
@@ -38,13 +38,13 @@ public sealed partial class UpdateServiceTest
             DistributionClient = distributionClient ?? IEuterpeDistributionClient.Mock(),
             DownloadManager = downloadManager ?? IDownloadManager.Mock(),
             MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
-            PlatformService = platformServiceMock
+            PlatformInfo = platformServiceMock
         };
     }
 
-    private static IPlatformService CreatePlatformServiceMock()
+    private static IPlatformInfo CreatePlatformServiceMock()
     {
-        var mock = IPlatformService.Mock();
+        var mock = IPlatformInfo.Mock();
         mock.RuntimeIdentifier.Returns(TestRuntimeIdentifier);
         return mock;
     }

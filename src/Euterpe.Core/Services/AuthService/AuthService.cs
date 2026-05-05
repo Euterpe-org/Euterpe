@@ -12,7 +12,7 @@ internal sealed partial class AuthService : IAuthService
     private readonly AsyncExclusiveLock _lock = new();
     public AsyncManualResetEvent Ready { get; } = new(false);
 
-    public async Task LoginAsync() => await PlatformService.OpenUriAsync(AuthorizePageUrl).ConfigureAwait(false);
+    public async Task LoginAsync() => await Launcher.OpenUriAsync(AuthorizePageUrl).ConfigureAwait(false);
 
     public async Task LogoutAsync()
     {
@@ -97,7 +97,7 @@ internal sealed partial class AuthService : IAuthService
 
     public async Task<bool> RestoreSessionAsync()
     {
-        var tokens = await PlatformService.LoadTokensAsync().ConfigureAwait(false);
+        var tokens = await SecureStorage.LoadTokensAsync().ConfigureAwait(false);
         if (tokens is null)
         {
             return false;
@@ -129,7 +129,10 @@ internal sealed partial class AuthService : IAuthService
     public required AuthState AuthState { get; init; }
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IPlatformLauncher Launcher { get; init; }
+
+    [UsedImplicitly]
+    public required IPlatformSecureStorage SecureStorage { get; init; }
 
     [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }

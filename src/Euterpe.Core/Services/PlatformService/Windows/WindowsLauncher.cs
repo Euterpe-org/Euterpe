@@ -2,7 +2,8 @@ using Avalonia.Platform.Storage;
 
 namespace Euterpe.Core;
 
-internal sealed partial class WindowsService
+[SupportedOSPlatform(nameof(OSPlatform.Windows))]
+internal sealed class WindowsLauncher : IPlatformLauncher
 {
     public void RevealFile(string filePath)
     {
@@ -33,4 +34,14 @@ internal sealed partial class WindowsService
         await TopLevel.Launcher.LaunchUriAsync(new Uri(uri)).ConfigureAwait(false);
         Logger.ZLogInformation($"Open uri: {uri}");
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required TopLevelProxy TopLevel { get; init; }
+
+    [UsedImplicitly]
+    public required ILogger<WindowsLauncher> Logger { get; init; }
+
+    #endregion Injections
 }

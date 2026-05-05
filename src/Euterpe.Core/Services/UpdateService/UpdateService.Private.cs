@@ -58,7 +58,7 @@ internal sealed partial class UpdateService
     private async Task StartUpdateProcessAsync(UpdateTarget target, CancellationToken cancellationToken = default)
     {
         var updateFolder = GetUpdateTempPath();
-        var updaterTargetPath = Path.Combine(updateFolder, PlatformService.UpdaterFileName);
+        var updaterTargetPath = Path.Combine(updateFolder, PlatformInfo.UpdaterFileName);
 
         var success = await DownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder, cancellationToken).ConfigureAwait(true);
         if (!success)
@@ -69,7 +69,7 @@ internal sealed partial class UpdateService
 
         Logger.ZLogInformation($"Release {target.Version} download finished");
 
-        File.Copy(PlatformService.UpdaterFileName, updaterTargetPath, true);
+        File.Copy(PlatformInfo.UpdaterFileName, updaterTargetPath, true);
 
         Logger.ZLogInformation($"Starting updater process");
         Process.Start(

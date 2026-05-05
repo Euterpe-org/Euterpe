@@ -5,7 +5,7 @@ internal sealed class EnvVariableStep : IWizardStep
     #region Injections
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IGamePathEnvironment PathEnvironment { get; init; }
 
     #endregion Injections
 
@@ -13,11 +13,11 @@ internal sealed class EnvVariableStep : IWizardStep
 
     public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
-        if (PlatformService.CheckPathEnvironmentVariableSet())
+        if (PathEnvironment.IsSet())
         {
             return;
         }
 
-        PlatformService.SetPathEnvironmentVariable();
+        PathEnvironment.Set();
     }
 }

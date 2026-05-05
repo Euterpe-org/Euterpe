@@ -4,11 +4,11 @@ internal sealed partial class AppSettingService
 {
     private async Task CheckSteamFolderAsync()
     {
-        if (Config.SteamFolder.IsNullOrEmpty() || !PlatformService.CheckIsValidSteamFolder(Config.SteamFolder))
+        if (Config.SteamFolder.IsNullOrEmpty() || !SteamDiscovery.CheckIsValidSteamFolder(Config.SteamFolder))
         {
             Logger.ZLogError($"Stored Steam folder is invalid");
 
-            if (PlatformService.TryGetSteamFolder(out var steamFolder))
+            if (SteamDiscovery.TryGetSteamFolder(out var steamFolder))
             {
                 Config.SteamFolder = steamFolder;
             }
@@ -23,11 +23,11 @@ internal sealed partial class AppSettingService
 
     private async Task CheckSteamExecPathAsync()
     {
-        if (Config.SteamExecPath.IsNullOrEmpty() || !PlatformService.CheckIsValidSteamExecPath(Config.SteamExecPath))
+        if (Config.SteamExecPath.IsNullOrEmpty() || !SteamDiscovery.CheckIsValidSteamExecPath(Config.SteamExecPath))
         {
             Logger.ZLogError($"Stored Steam executable is invalid");
 
-            var detectedPath = await PlatformService.GetSteamExecPathAsync().ConfigureAwait(true);
+            var detectedPath = await SteamDiscovery.GetSteamExecPathAsync().ConfigureAwait(true);
             if (!detectedPath.IsNullOrEmpty())
             {
                 Config.SteamExecPath = detectedPath;

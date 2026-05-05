@@ -3,21 +3,19 @@ using CliWrap.Buffered;
 
 namespace Euterpe.Core;
 
-internal sealed partial class LinuxService
+[SupportedOSPlatform(nameof(OSPlatform.Linux))]
+internal sealed class LinuxSteamPathDiscovery : ISteamPathDiscovery
 {
-    private static readonly string[] LinuxPaths = new[]
-        {
-            ".local/share/Steam",
-            ".steam/steam",
-            ".var/app/ocm.valvesoftware.Steam/data/Steam",
-            ".steam/steam",
-            ".steam/root"
-        }
-        .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToArray();
+    #region Injections
+
+    [UsedImplicitly]
+    public required ILogger<LinuxSteamPathDiscovery> Logger { get; init; }
+
+    #endregion Injections
 
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder)
     {
-        steamFolder = LinuxPaths.FirstOrDefault(Directory.Exists);
+        steamFolder = LinuxPaths.SteamSearch.FirstOrDefault(Directory.Exists);
         if (steamFolder is not null && CheckIsValidSteamFolder(steamFolder))
         {
             Logger.ZLogInformation($"Auto detected steam folder on Linux: {steamFolder}");
@@ -39,42 +37,6 @@ internal sealed partial class LinuxService
 
         Logger.ZLogError($"Invalid Steam folder: {folderPath}");
         return false;
-    }
-
-    public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
-    {
-        var relativePath = $"steamapps/common/{GameConfig.GameFolderName}";
-
-        if (GamePathService.TryGetGameFolderFromVdf(GameConfig.SteamAppId, relativePath, out gameFolder))
-        {
-            return true;
-        }
-
-        Logger.ZLogInformation($"Could not get game folder from libraryfolders.vdf");
-
-        if (GamePathService.TryGetGameFolderFromCommonPaths(LinuxPaths, relativePath, out gameFolder))
-        {
-            return true;
-        }
-
-        Logger.ZLogWarning($"Failed to auto detect game path on Linux");
-        return false;
-    }
-
-    public bool CheckIsValidGameFolder(string folderPath)
-    {
-        var exeName = GameConfig.ExecutableName;
-        var exePath = Path.Combine(folderPath, exeName);
-        var dllPath = Path.Combine(folderPath, "GameAssembly.dll");
-
-        if (!File.Exists(exePath) || !File.Exists(dllPath))
-        {
-            Logger.ZLogError($"{exeName} or GameAssembly.dll not found in {folderPath}");
-            return false;
-        }
-
-        Logger.ZLogInformation($"{exeName} and GameAssembly.dll found in {folderPath}");
-        return true;
     }
 
     public async Task<string?> GetSteamExecPathAsync()

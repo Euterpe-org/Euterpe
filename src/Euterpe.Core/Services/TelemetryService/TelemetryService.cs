@@ -10,8 +10,8 @@ internal sealed class TelemetryService : ITelemetryService
         {
             var payload = new SessionEvent(
                 RegionInfo.CurrentRegion.TwoLetterISORegionName,
-                PlatformService.OsString,
-                PlatformService.ArchitectureString,
+                PlatformInfo.OsString,
+                PlatformInfo.ArchitectureString,
                 AppVersion);
 
             using var response = await TelemetryApiClient.TrackSessionAsync(payload).ConfigureAwait(false);
@@ -28,7 +28,7 @@ internal sealed class TelemetryService : ITelemetryService
     public required ITelemetryApiClient TelemetryApiClient { get; init; }
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IPlatformInfo PlatformInfo { get; init; }
 
     [UsedImplicitly]
     public required ILogger<TelemetryService> Logger { get; init; }

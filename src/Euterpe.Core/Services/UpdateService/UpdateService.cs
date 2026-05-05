@@ -18,7 +18,7 @@ internal sealed partial class UpdateService : IUpdateService
     private async Task<UpdateTarget?> GetReleaseCandidateAsync(bool prerelease, CancellationToken cancellationToken = default)
     {
         var releases = await DistributionClient.GetAppReleaseAsync(!prerelease, prerelease, cancellationToken).ConfigureAwait(false);
-        var release = releases.SingleOrDefault(x => x.Slug == PlatformService.RuntimeIdentifier);
+        var release = releases.SingleOrDefault(x => x.Slug == PlatformInfo.RuntimeIdentifier);
         if (release is null)
         {
             return null;
@@ -48,7 +48,7 @@ internal sealed partial class UpdateService : IUpdateService
     public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
-    public required IPlatformService PlatformService { get; init; }
+    public required IPlatformInfo PlatformInfo { get; init; }
 
     #endregion Injections
 }

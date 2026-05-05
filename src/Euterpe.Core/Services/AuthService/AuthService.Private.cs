@@ -11,13 +11,13 @@ internal sealed partial class AuthService
         AuthState.AccessTokenExpiry = DateTimeOffset.Now.Add(AccessTokenLifetime);
         AuthState.CurrentUser = currentUser;
 
-        await PlatformService.SaveTokensAsync(accessToken, refreshToken).ConfigureAwait(false);
+        await SecureStorage.SaveTokensAsync(accessToken, refreshToken).ConfigureAwait(false);
     }
 
     private async Task ClearSessionAsync()
     {
         AuthState.Clear();
-        await PlatformService.ClearTokensAsync().ConfigureAwait(false);
+        await SecureStorage.ClearTokensAsync().ConfigureAwait(false);
         Ready.Reset();
     }
 }

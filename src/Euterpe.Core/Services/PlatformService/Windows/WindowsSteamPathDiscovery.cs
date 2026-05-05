@@ -2,19 +2,9 @@ using Microsoft.Win32;
 
 namespace Euterpe.Core;
 
-internal sealed partial class WindowsService
+[SupportedOSPlatform(nameof(OSPlatform.Windows))]
+internal sealed class WindowsSteamPathDiscovery : ISteamPathDiscovery
 {
-    private static readonly string[] WindowsPaths = new[]
-        {
-            @"Program Files\Steam",
-            @"Program Files (x86)\Steam",
-            @"Program Files\SteamLibrary",
-            @"Program Files (x86)\SteamLibrary",
-            @"Steam",
-            @"SteamLibrary"
-        }
-        .SelectMany(path => Environment.GetLogicalDrives().Select(drive => Path.Combine(drive, path))).ToArray();
-
     public bool TryGetSteamFolder([NotNullWhen(true)] out string? steamFolder)
     {
         if (TryGetSteamFolderFromRegistry(out steamFolder))
@@ -25,7 +15,7 @@ internal sealed partial class WindowsService
 
         Logger.ZLogWarning($"Failed to get Steam folder from Registry");
 
-        steamFolder = WindowsPaths.FirstOrDefault(Directory.Exists);
+        steamFolder = WindowsPaths.SteamSearch.FirstOrDefault(Directory.Exists);
         if (steamFolder is not null && CheckIsValidSteamFolder(steamFolder))
         {
             Logger.ZLogInformation($"Auto detected Steam folder on Windows: {steamFolder}");
@@ -46,42 +36,6 @@ internal sealed partial class WindowsService
         }
 
         Logger.ZLogError($"Invalid Steam folder: {folderPath}");
-        return false;
-    }
-
-    public bool TryGetGameFolder([NotNullWhen(true)] out string? gameFolder)
-    {
-        var relativePath = Path.Combine("steamapps", "common", GameConfig.GameFolderName);
-
-        if (GamePathService.TryGetGameFolderFromVdf(GameConfig.SteamAppId, relativePath, out gameFolder))
-        {
-            return true;
-        }
-
-        Logger.ZLogInformation($"Could not get game folder from libraryfolders.vdf");
-
-        if (GamePathService.TryGetGameFolderFromCommonPaths(WindowsPaths, relativePath, out gameFolder))
-        {
-            return true;
-        }
-
-        Logger.ZLogWarning($"Failed to auto detect game path on Windows");
-        return false;
-    }
-
-    public bool CheckIsValidGameFolder(string folderPath)
-    {
-        var exeName = GameConfig.ExecutableName;
-        var exePath = Path.Combine(folderPath, exeName);
-        var dllPath = Path.Combine(folderPath, "GameAssembly.dll");
-
-        if (File.Exists(exePath) && File.Exists(dllPath))
-        {
-            Logger.ZLogInformation($"{exeName} and GameAssembly.dll found in {folderPath}");
-            return true;
-        }
-
-        Logger.ZLogError($"{exeName} or GameAssembly.dll not found in {folderPath}");
         return false;
     }
 
@@ -120,4 +74,14 @@ internal sealed partial class WindowsService
             as string ?? string.Empty;
         return Directory.Exists(steamFolder);
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required Config Config { get; init; }
+
+    [UsedImplicitly]
+    public required ILogger<WindowsSteamPathDiscovery> Logger { get; init; }
+
+    #endregion Injections
 }
