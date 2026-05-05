@@ -15,7 +15,9 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
         && types[0].ToString() is "UserControl" or "SplashWindow" or "UrsaWindow";
 
     private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _) =>
-        context.Node is not ClassDeclarationSyntax classDeclaration ? null : new ViewData(classDeclaration.Identifier.Text);
+        context.Node is not ClassDeclarationSyntax classDeclaration
+            ? null
+            : new ViewData(classDeclaration.Identifier.Text, HasPerGameAttribute(classDeclaration));
 
     private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataCollection)
     {
@@ -24,6 +26,10 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
             return;
         }
 
+        var views = dataCollection.OfType<ViewData>().ToArray();
+        var appViews = views.Where(static d => !d.IsPerGame);
+        var perGameViews = views.Where(static d => d.IsPerGame);
+
         var sb = new GeneratorStringBuilder();
         sb.AppendLine($$"""
                         namespace Euterpe.Extensions;
@@ -31,19 +37,29 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
                         partial class ServiceExtensions
                         {
                             {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
-                            public static void RegisterViewAndViewModels(this ContainerBuilder builder)
+                            public static void RegisterAppViewsAndViewModels(this ContainerBuilder builder)
                             {
                                 builder.RegisterType<global::Euterpe.ViewModels.AppViewModel>().PropertiesAutowired().SingleInstance();
 
                         """);
 
-        foreach (var data in dataCollection)
+        foreach (var (name, _) in appViews)
         {
-            if (data is not var (name))
-            {
-                continue;
-            }
+            sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
+            sb.AppendLine($"\t\tbuilder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
+            sb.AppendLine();
+        }
 
+        sb.AppendLine($$"""
+                            }
+
+                            {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
+                            public static void RegisterPerGameViewsAndViewModels(this ContainerBuilder builder)
+                            {
+                        """);
+
+        foreach (var (name, _) in perGameViews)
+        {
             sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
             sb.AppendLine($"\t\tbuilder.Register<{name}>(ctx => new {name} {{ DataContext = ctx.Resolve<{name}ViewModel>() }}).SingleInstance();");
             sb.AppendLine();
@@ -57,5 +73,10 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
         spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
     }
 
-    private sealed record ViewData(string Name);
+    private static bool HasPerGameAttribute(ClassDeclarationSyntax classDecl) =>
+        classDecl.AttributeLists
+            .SelectMany(static al => al.Attributes)
+            .Any(static attr => attr.Name.ToString() is "PerGameView");
+
+    private sealed record ViewData(string Name, bool IsPerGame);
 }
