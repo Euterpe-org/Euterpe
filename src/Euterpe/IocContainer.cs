@@ -46,7 +46,7 @@ public static class IocContainer
             GameScopes[game] = scope;
         }
 
-        GameScopeSubject.OnNext(scope);
+        Dispatcher.UIThread.Post(() => GameScopeSubject.OnNext(scope));
     }
 
     private static ILifetimeScope BuildGameScope(GameId game) =>

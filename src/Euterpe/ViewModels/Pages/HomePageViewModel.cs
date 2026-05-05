@@ -48,7 +48,15 @@ public sealed partial class HomePageViewModel : ViewModelBase
             IsCloseButtonVisible = false
         };
 
-        await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, MainWindowViewModel.WizardHostId, options).ConfigureAwait(false);
+        GameSwitcher.CanSwitch = false;
+        try
+        {
+            await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, MainWindowViewModel.WizardHostId, options).ConfigureAwait(true);
+        }
+        finally
+        {
+            GameSwitcher.CanSwitch = true;
+        }
     }
 
     private async Task CheckModdingDependenciesAsync()
@@ -170,6 +178,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required NavigationService NavigationService { get; init; }
+
+    [UsedImplicitly]
+    public required GameSwitcher GameSwitcher { get; init; }
 
     [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }
