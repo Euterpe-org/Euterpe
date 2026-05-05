@@ -39,7 +39,7 @@ internal sealed partial class WindowsService : IPlatformService
         try
         {
             using var key = Registry.CurrentUser.OpenSubKey(MuseDashRegistrySubKey, false);
-            var value = key?.GetValue(IPlatformService.UidValueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames);
+            var value = key?.GetValue(GameConfig.UidRegistryValueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames);
 
             if (value is not byte[] bytes || bytes is [])
             {

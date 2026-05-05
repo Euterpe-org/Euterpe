@@ -9,6 +9,7 @@
     ExecutableName: MuseDash.exe,
     GameFolderName: Muse Dash,
     GameDataFolderName: MuseDash_Data,
+    UidRegistryValueName: 374bfde32ff3436890ff977bc94f8015_#account_id_h274776658,
     WizardOptions: [
       {
         Kinds: MelonLoader,

@@ -21,6 +21,9 @@ public abstract partial class GameConfig
     public abstract string GameDataFolderName { get; }
 
     [JsonIgnore]
+    public abstract string UidRegistryValueName { get; }
+
+    [JsonIgnore]
     public abstract IReadOnlyList<WizardOption> WizardOptions { get; }
 
     [JsonIgnore]
