@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 namespace Euterpe.Views.Pages;
 
 [Route("/home", DisplayName = Page_Home, Icon = "Home", Order = 0)]
+[PerGameView]
 public sealed partial class HomePage : UserControl
 {
     public HomePage()
