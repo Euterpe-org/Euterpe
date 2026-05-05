@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Проверить обновления</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>Сайт MDMC</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Далее</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Переустановить</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Выбрать заново</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Повторить</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>Пропустить</value>

@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>应用</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>上一步</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>检查更新</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>MDMC 网站</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>下一步</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>重装</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>重新选择</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>重试</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>跳过</value>

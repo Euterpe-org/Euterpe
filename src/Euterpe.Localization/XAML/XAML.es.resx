@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>Aplicar</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Buscar actualizaciones</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>Web de MDMC</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Reinstalar</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Seleccionar de nuevo</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Reintentar</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>Omitir</value>

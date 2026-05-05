@@ -19,6 +19,9 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>適用</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>戻る</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>アップデートを確認</value>
   </data>
@@ -37,11 +40,17 @@
   <data name="Button_MDMC_Website" xml:space="preserve">
     <value>MDMC ウェブサイト</value>
   </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>次へ</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>再インストール</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>再選択</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>再試行</value>
   </data>
   <data name="Button_Skip" xml:space="preserve">
     <value>スキップ</value>

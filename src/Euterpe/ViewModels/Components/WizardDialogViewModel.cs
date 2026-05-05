@@ -4,140 +4,74 @@ namespace Euterpe.ViewModels.Components;
 
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
-    private bool _applyingPreset;
-    private Dictionary<WizardOptionKinds, IWizardStep> _stepMap = null!;
-
-    public IReadOnlyList<WizardOption> Options => GameConfig.WizardOptions;
-
-    public static IReadOnlyList<WizardRole> Roles { get; } =
-    [
-        new(WizardIdentity.Player, "UserGroup", Wizard_Role_Player, Wizard_Role_Player_Description, "#2563EB"),
-        new(WizardIdentity.Charter, "Language", Wizard_Role_Charter, Wizard_Role_Charter_Description, "#7B2CBF"),
-        new(WizardIdentity.Modder, "Code", Wizard_Role_Modder, Wizard_Role_Modder_Description, "#047857"),
-        new(WizardIdentity.Custom, "Setting", Wizard_Role_Custom, Wizard_Role_Custom_Description, "#B45309")
-    ];
-
     [ObservableProperty]
-    public partial bool IsSettingUp { get; set; }
+    [NotifyPropertyChangedFor(nameof(CurrentPage))]
+    [NotifyPropertyChangedFor(nameof(CanGoBack))]
+    [NotifyPropertyChangedFor(nameof(IsLastPage))]
+    public partial int CurrentPageIndex { get; set; }
 
-    [ObservableProperty]
-    public partial double Progress { get; set; }
+    public IReadOnlyList<WizardPageViewModelBase> Pages => [SelectionPage, ExecutionPage];
 
-    [ObservableProperty]
-    public partial string ProgressLabel { get; set; } = string.Empty;
+    public WizardPageViewModelBase? CurrentPage =>
+        Pages.Count > 0 && CurrentPageIndex >= 0 && CurrentPageIndex < Pages.Count ? Pages[CurrentPageIndex] : null;
 
-    public WizardRole SelectedRole
-    {
-        get => Roles.First(r => r.Identity == ComputeIdentity());
-        set => ApplyPreset(value.Identity);
-    }
+    public bool CanGoBack => CurrentPage?.CanGoBack is true && CurrentPageIndex > 0;
 
-    public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
+    public bool IsLastPage => Pages.Count > 0 && CurrentPageIndex == Pages.Count - 1;
 
     public event EventHandler<object?>? RequestClose;
+
+    public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
 
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(false);
 
-        _stepMap = WizardSteps.ToDictionary(s => s.Kinds);
+        foreach (var page in Pages)
+        {
+            await page.InitializeAsync().ConfigureAwait(false);
+        }
 
-        Options.Select(t => t.ObservePropertyChanged(x => x.IsSelected))
-            .Merge()
-            .Where(this, (_, self) => !self._applyingPreset)
-            .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(SelectedRole)));
+        OnPropertyChanged(nameof(CurrentPage));
+        OnPropertyChanged(nameof(CanGoBack));
+        OnPropertyChanged(nameof(IsLastPage));
 
         Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
 
     [RelayCommand]
-    private async Task ConfirmAsync()
+    private async Task NextAsync()
     {
-        var options = Options.Where(t => t.IsSelected).ToArray();
-        IsSettingUp = true;
-
-        var failed = new List<WizardOption>();
-
-        for (var i = 0; i < options.Length; i++)
+        if (IsLastPage)
         {
-            if (!await RunStepAsync(options[i], i + 1, options.Length).ConfigureAwait(true))
+            if (State.AllSucceeded)
             {
-                failed.Add(options[i]);
+                GameConfig.SetupCompleted = true;
             }
-        }
+            else
+            {
+                Logger.ZLogWarning($"Wizard closed without all steps succeeding");
+            }
 
-        if (failed.Count is 0)
-        {
-            GameConfig.SetupCompleted = true;
-        }
-        else
-        {
-            Logger.ZLogWarning($"Wizard setup incomplete, {failed.Count} step(s) failed: {string.Join(", ", failed.Select(f => f.Kinds))}");
-        }
-
-        Close();
-    }
-
-    private async Task<bool> RunStepAsync(WizardOption option, int index, int total)
-    {
-        ProgressLabel = $"{option.DisplayName} ({index}/{total})";
-        Progress = (double)(index - 1) / total * 100;
-
-        Logger.ZLogInformation($"Running wizard step '{option.Kinds}'");
-        try
-        {
-            var step = _stepMap[option.Kinds];
-            await step.ExecuteAsync().ConfigureAwait(true);
-            Logger.ZLogInformation($"Completed wizard step '{option.Kinds}'");
-            Progress = (double)index / total * 100;
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Wizard step '{option.Kinds}' failed");
-            Progress = (double)index / total * 100;
-            return false;
-        }
-    }
-
-    private void ApplyPreset(WizardIdentity identity)
-    {
-        if (identity is WizardIdentity.Custom)
-        {
+            Close();
             return;
         }
 
-        _applyingPreset = true;
-        try
+        CurrentPageIndex++;
+
+        if (CurrentPage is { } page)
         {
-            var preset = GameConfig.WizardPresets[identity];
-            foreach (var option in Options)
-            {
-                option.IsSelected = preset.HasFlag(option.Kinds);
-            }
-        }
-        finally
-        {
-            _applyingPreset = false;
-            OnPropertyChanged(nameof(SelectedRole));
+            await page.OnEnterAsync().ConfigureAwait(true);
         }
     }
 
-    private WizardIdentity ComputeIdentity()
+    [RelayCommand]
+    private void Back()
     {
-        var selected = Options.Where(t => t.IsSelected)
-            .Select(x => x.Kinds)
-            .Aggregate(WizardOptionKinds.None, (mask, k) => mask | k);
-
-        foreach (var (identity, preset) in GameConfig.WizardPresets)
+        if (CurrentPageIndex > 0)
         {
-            if (preset == selected)
-            {
-                return identity;
-            }
+            CurrentPageIndex--;
         }
-
-        return WizardIdentity.Custom;
     }
 
     #region Injections
@@ -146,10 +80,16 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required IEnumerable<IWizardStep> WizardSteps { get; init; }
+    public required ILogger<WizardDialogViewModel> Logger { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<WizardDialogViewModel> Logger { get; init; }
+    public required ExecutionPageViewModel ExecutionPage { get; init; }
+
+    [UsedImplicitly]
+    public required SelectionPageViewModel SelectionPage { get; init; }
+
+    [UsedImplicitly]
+    public required WizardState State { get; init; }
 
     #endregion Injections
 }
