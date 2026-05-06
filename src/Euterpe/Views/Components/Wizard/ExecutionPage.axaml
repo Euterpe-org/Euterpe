@@ -79,7 +79,7 @@
                                 <TextBlock
                                     FontSize="12"
                                     Foreground="{DynamicResource SecondaryTextColor}"
-                                    Text="{Binding Status}"
+                                    Text="{Binding StatusDisplay}"
                                     VerticalAlignment="Center" />
                                 <StackPanel
                                     Grid.Column="1"

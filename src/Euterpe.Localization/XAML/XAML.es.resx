@@ -403,6 +403,18 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>Tareas</value>
   </data>
+  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+    <value>Pendiente</value>
+  </data>
+  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+    <value>En ejecución</value>
+  </data>
+  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Herramienta de Charts (MDBMSC)</value>
   </data>

@@ -403,6 +403,18 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>Zadaci</value>
   </data>
+  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+    <value>Na čekanju</value>
+  </data>
+  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+    <value>Izvršava se</value>
+  </data>
+  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+    <value>Gotovo</value>
+  </data>
+  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+    <value>Neuspjelo</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Alat za chartove (MDBMSC)</value>
   </data>

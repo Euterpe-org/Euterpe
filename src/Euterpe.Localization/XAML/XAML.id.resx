@@ -403,6 +403,18 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>Tugas</value>
   </data>
+  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+    <value>Menunggu</value>
+  </data>
+  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+    <value>Berjalan</value>
+  </data>
+  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+    <value>Selesai</value>
+  </data>
+  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+    <value>Gagal</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Alat Charting (MDBMSC)</value>
   </data>

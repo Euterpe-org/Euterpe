@@ -403,6 +403,18 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>タスク</value>
   </data>
+  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+    <value>待機中</value>
+  </data>
+  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>チャートツール (MDBMSC)</value>
   </data>
