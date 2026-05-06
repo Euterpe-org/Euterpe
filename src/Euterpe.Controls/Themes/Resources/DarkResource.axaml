@@ -13,7 +13,7 @@
     </Bitmap>
     <Bitmap
         x:Key="TitleImage">
-        avares://Euterpe/Assets/MDMC_Title_Dark.webp
+        avares://Euterpe/Assets/MuseDash_Title_Dark.webp
     </Bitmap>
 
     <!--  General Colors  -->
