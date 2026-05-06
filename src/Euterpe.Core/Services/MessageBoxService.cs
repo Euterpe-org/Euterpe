@@ -1,25 +1,37 @@
-﻿namespace Euterpe.Core;
+using Avalonia.Threading;
+
+namespace Euterpe.Core;
 
 internal sealed class MessageBoxService : IMessageBoxService
 {
+    private static Task<MessageBoxResult> ShowAsync(string message, string title, MessageBoxIcon icon, MessageBoxButton button) =>
+        Dispatcher.UIThread.CheckAccess()
+            ? MessageBox.ShowAsync(message, title, icon, button)
+            : Dispatcher.UIThread.InvokeAsync(() => MessageBox.ShowAsync(message, title, icon, button));
+
+    private static Task<MessageBoxResult> ShowOverlayAsync(string message, string title, MessageBoxIcon icon, MessageBoxButton button) =>
+        Dispatcher.UIThread.CheckAccess()
+            ? OverlayMessageBox.ShowAsync(message, title, icon: icon, button: button)
+            : Dispatcher.UIThread.InvokeAsync(() => OverlayMessageBox.ShowAsync(message, title, icon: icon, button: button));
+
     #region Confirm
 
     // Normal
     public Task<MessageBoxResult> WarningConfirmAsync(string message) =>
-        MessageBox.ShowAsync(message, Title_Warning, MessageBoxIcon.Warning, MessageBoxButton.YesNo);
+        ShowAsync(message, Title_Warning, MessageBoxIcon.Warning, MessageBoxButton.YesNo);
 
     public Task<MessageBoxResult> WarningConfirmAsync(string message, params ReadOnlySpan<object> args) =>
         WarningConfirmAsync(string.Format(message, args));
 
     public Task<MessageBoxResult> NoticeConfirmAsync(string message) =>
-        MessageBox.ShowAsync(message, Title_Notice, MessageBoxIcon.Information, MessageBoxButton.YesNo);
+        ShowAsync(message, Title_Notice, MessageBoxIcon.Information, MessageBoxButton.YesNo);
 
     public Task<MessageBoxResult> NoticeConfirmAsync(string message, params ReadOnlySpan<object> args) =>
         NoticeConfirmAsync(string.Format(message, args));
 
     // Overlay
     public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message) =>
-        OverlayMessageBox.ShowAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.YesNo);
+        ShowOverlayAsync(message, Title_Notice, MessageBoxIcon.Information, MessageBoxButton.YesNo);
 
     public Task<MessageBoxResult> NoticeConfirmOverlayAsync(string message, params ReadOnlySpan<object> args) =>
         NoticeConfirmOverlayAsync(string.Format(message, args));
@@ -30,14 +42,14 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     // Normal
     public Task<MessageBoxResult> ErrorAsync(string message) =>
-        MessageBox.ShowAsync(message, Title_Error, MessageBoxIcon.Error);
+        ShowAsync(message, Title_Error, MessageBoxIcon.Error, MessageBoxButton.OK);
 
     public Task<MessageBoxResult> ErrorAsync(string message, params ReadOnlySpan<object> args) =>
         ErrorAsync(string.Format(message, args));
 
     // Overlay
     public Task<MessageBoxResult> ErrorOverlayAsync(string message) =>
-        OverlayMessageBox.ShowAsync(message, Title_Error, icon: MessageBoxIcon.Error, button: MessageBoxButton.OK);
+        ShowOverlayAsync(message, Title_Error, MessageBoxIcon.Error, MessageBoxButton.OK);
 
     public Task<MessageBoxResult> ErrorOverlayAsync(string message, params ReadOnlySpan<object> args) =>
         ErrorOverlayAsync(string.Format(message, args));
@@ -48,14 +60,14 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     // Normal
     public Task<MessageBoxResult> NoticeAsync(string message) =>
-        MessageBox.ShowAsync(message, Title_Notice, MessageBoxIcon.Information);
+        ShowAsync(message, Title_Notice, MessageBoxIcon.Information, MessageBoxButton.OK);
 
     public Task<MessageBoxResult> NoticeAsync(string message, params ReadOnlySpan<object> args) =>
         NoticeAsync(string.Format(message, args));
 
     // Overlay
     public Task<MessageBoxResult> NoticeOverlayAsync(string message) =>
-        OverlayMessageBox.ShowAsync(message, Title_Notice, icon: MessageBoxIcon.Information, button: MessageBoxButton.OK);
+        ShowOverlayAsync(message, Title_Notice, MessageBoxIcon.Information, MessageBoxButton.OK);
 
     #endregion
 
@@ -63,14 +75,14 @@ internal sealed class MessageBoxService : IMessageBoxService
 
     // Normal
     public Task<MessageBoxResult> SuccessAsync(string message) =>
-        MessageBox.ShowAsync(message, Title_Success, MessageBoxIcon.Success);
+        ShowAsync(message, Title_Success, MessageBoxIcon.Success, MessageBoxButton.OK);
 
     public Task<MessageBoxResult> SuccessAsync(string message, params ReadOnlySpan<object> args) =>
         SuccessAsync(string.Format(message, args));
 
     // Overlay
     public Task<MessageBoxResult> SuccessOverlayAsync(string message) =>
-        OverlayMessageBox.ShowAsync(message, Title_Success, icon: MessageBoxIcon.Success, button: MessageBoxButton.OK);
+        ShowOverlayAsync(message, Title_Success, MessageBoxIcon.Success, MessageBoxButton.OK);
 
     public Task<MessageBoxResult> SuccessOverlayAsync(string message, params ReadOnlySpan<object> args) =>
         SuccessOverlayAsync(string.Format(message, args));
