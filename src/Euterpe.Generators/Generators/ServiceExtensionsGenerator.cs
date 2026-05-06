@@ -83,7 +83,12 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
                                     builder.Register<{{name}}>(_ =>
                                     {
                                         var view = new {{name}}();
-                                        global::Euterpe.IocContainer.GameScopeObservable.Subscribe(scope => view.DataContext = scope.Resolve<{{name}}ViewModel>());
+                                        global::Euterpe.IocContainer.GameScopeObservable.Subscribe(scope =>
+                                        {
+                                            var viewModel = scope.Resolve<{{name}}ViewModel>();
+                                            view.DataContext = viewModel;
+                                            viewModel.InitializeAsync().SafeFireAndForget();
+                                        });
                                         return view;
                                     }).SingleInstance();
                             """);
