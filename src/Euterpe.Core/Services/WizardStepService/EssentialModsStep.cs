@@ -4,8 +4,9 @@ internal sealed class EssentialModsStep : IWizardStep
 {
     public WizardOptionKinds Kinds => WizardOptionKinds.EssentialMods;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
+        progress?.Report("Initializing essential mods ...");
         await ModManageService.InitializeModsAsync().ConfigureAwait(false);
         Logger.ZLogWarning($"WizardStep '{Kinds}' not implemented yet");
     }

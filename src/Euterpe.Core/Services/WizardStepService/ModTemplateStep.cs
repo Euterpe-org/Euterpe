@@ -11,13 +11,14 @@ internal sealed class ModTemplateStep : IWizardStep
 
     public WizardOptionKinds Kinds => WizardOptionKinds.ModTemplate;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         if (await ModTemplateInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
+        progress?.Report("Installing mod template ...");
         await ModTemplateInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

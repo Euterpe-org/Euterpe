@@ -16,6 +16,9 @@ public sealed partial class WizardStepState : ObservableObject
     [ObservableProperty]
     public partial string? ErrorMessage { get; set; }
 
+    [ObservableProperty]
+    public partial string? Message { get; set; }
+
     public bool CanRetry => Status is WizardStepStatus.Failed;
 
     public LocalizedString StatusDisplay => Status switch

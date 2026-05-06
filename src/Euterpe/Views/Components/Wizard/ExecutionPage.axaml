@@ -91,6 +91,12 @@
                                         Text="{Binding DisplayName, Mode=OneTime}" />
                                     <TextBlock
                                         FontSize="11"
+                                        Foreground="{DynamicResource SecondaryTextColor}"
+                                        IsVisible="{Binding Message, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                        Text="{Binding Message}"
+                                        TextWrapping="Wrap" />
+                                    <TextBlock
+                                        FontSize="11"
                                         Foreground="#D14343"
                                         IsVisible="{Binding ErrorMessage, Converter={x:Static ObjectConverters.IsNotNull}}"
                                         Text="{Binding ErrorMessage}"

@@ -19,10 +19,9 @@ public sealed class MelonLoaderStepTest
         };
 
     [Test]
-    public async Task ExecuteAsync_InstallsAndReadsVersion_WhenNotInstalledAndLatestAvailable()
+    public async Task ExecuteAsync_Installs_WhenNotInstalled()
     {
         var depService = IDependencyAcquireService.Mock();
-        depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).Returns("0.7.0");
         var localService = IGameLocalService.Mock();
         localService.InstallMelonLoaderAsync().Returns(true);
 
@@ -31,6 +30,7 @@ public sealed class MelonLoaderStepTest
         await step.ExecuteAsync();
 
         using var _ = Assert.Multiple();
+        depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).WasCalled(Times.Never);
         depService.AcquireForMelonLoaderAsync(
                 Any<EventHandler<DownloadStartedEventArgs>?>(),
                 Any<IProgress<double>?>(),
@@ -38,27 +38,6 @@ public sealed class MelonLoaderStepTest
             .WasCalled(Times.Once);
         localService.InstallMelonLoaderAsync().WasCalled(Times.Once);
         localService.ReadMelonLoaderVersion().WasCalled(Times.Exactly(2));
-    }
-
-    [Test]
-    public async Task ExecuteAsync_Throws_WhenNotInstalledAndLatestUnavailable()
-    {
-        var depService = IDependencyAcquireService.Mock();
-        depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).Returns((string?)null);
-        var localService = IGameLocalService.Mock();
-
-        var step = CreateStep(depService, localService, new MuseDashConfig());
-
-        var act = async () => await step.ExecuteAsync();
-        await Assert.That(act).Throws<InvalidOperationException>();
-
-        using var _ = Assert.Multiple();
-        depService.AcquireForMelonLoaderAsync(
-                Any<EventHandler<DownloadStartedEventArgs>?>(),
-                Any<IProgress<double>?>(),
-                Any<CancellationToken>())
-            .WasCalled(Times.Never);
-        localService.InstallMelonLoaderAsync().WasCalled(Times.Never);
     }
 
     [Test]
@@ -83,7 +62,7 @@ public sealed class MelonLoaderStepTest
     }
 
     [Test]
-    public async Task ExecuteAsync_SkipsInstall_WhenInstalledAndLatestUnavailable()
+    public async Task ExecuteAsync_Throws_WhenLatestUnavailable()
     {
         var depService = IDependencyAcquireService.Mock();
         depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).Returns((string?)null);
@@ -91,7 +70,8 @@ public sealed class MelonLoaderStepTest
 
         var step = CreateStep(depService, localService, new MuseDashConfig { MelonLoaderVersion = "0.6.5" });
 
-        await step.ExecuteAsync();
+        var act = async () => await step.ExecuteAsync();
+        await Assert.That(act).Throws<InvalidOperationException>();
 
         using var _ = Assert.Multiple();
         depService.AcquireForMelonLoaderAsync(

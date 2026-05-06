@@ -11,13 +11,14 @@ internal sealed class DotNetRuntimeStep : IWizardStep
 
     public WizardOptionKinds Kinds => WizardOptionKinds.DotNetRuntime;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         if (await RuntimeInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
+        progress?.Report("Installing .NET runtime ...");
         await RuntimeInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

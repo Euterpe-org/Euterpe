@@ -11,13 +11,14 @@ internal sealed class EnvVariableStep : IWizardStep
 
     public WizardOptionKinds Kinds => WizardOptionKinds.EnvVariable;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         if (PathEnvironment.IsSet())
         {
             return;
         }
 
+        progress?.Report("Setting environment variable ...");
         PathEnvironment.Set();
     }
 }

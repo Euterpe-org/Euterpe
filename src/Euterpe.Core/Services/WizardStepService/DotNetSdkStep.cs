@@ -11,13 +11,14 @@ internal sealed class DotNetSdkStep : IWizardStep
 
     public WizardOptionKinds Kinds => WizardOptionKinds.DotNetSdk;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         if (await SdkInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
+        progress?.Report("Installing .NET SDK ...");
         await SdkInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

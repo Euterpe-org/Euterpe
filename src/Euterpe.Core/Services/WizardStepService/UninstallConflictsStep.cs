@@ -4,7 +4,7 @@ internal sealed class UninstallConflictsStep : IWizardStep
 {
     public WizardOptionKinds Kinds => WizardOptionKinds.UninstallConflicts;
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         await ModManageService.InitializeModsAsync().ConfigureAwait(false);
 
@@ -23,6 +23,7 @@ internal sealed class UninstallConflictsStep : IWizardStep
             }
 
             Logger.ZLogInformation($"Conflict detected: {modName} is installed and will be uninstalled");
+            progress?.Report($"Uninstalling incompatible mod: {modName} ...");
             await ModManageService.UninstallModAsync(incompatibleMod).ConfigureAwait(false);
         }
     }

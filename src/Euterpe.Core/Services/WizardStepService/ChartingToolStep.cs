@@ -11,7 +11,7 @@ internal sealed class ChartingToolStep : IWizardStep
 
     public WizardOptionKinds Kinds => WizardOptionKinds.ChartingTool;
 
-    public Task ExecuteAsync(CancellationToken cancellationToken = default)
+    public Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         Logger.ZLogWarning($"WizardStep '{Kinds}' not implemented yet");
         return Task.CompletedTask;

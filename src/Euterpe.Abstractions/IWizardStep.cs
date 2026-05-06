@@ -4,5 +4,5 @@ public interface IWizardStep
 {
     WizardOptionKinds Kinds { get; }
 
-    Task ExecuteAsync(CancellationToken cancellationToken = default);
+    Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default);
 }

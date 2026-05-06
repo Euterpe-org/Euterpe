@@ -87,11 +87,14 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
     {
         step.Status = WizardStepStatus.Running;
         step.ErrorMessage = null;
+        step.Message = null;
+
+        var progress = new Progress<string>(msg => step.Message = msg);
 
         Logger.ZLogInformation($"Running wizard step '{step.Kinds}'");
         try
         {
-            await StepMap[step.Kinds].ExecuteAsync().ConfigureAwait(true);
+            await StepMap[step.Kinds].ExecuteAsync(progress).ConfigureAwait(true);
             step.Status = WizardStepStatus.Succeeded;
             Logger.ZLogInformation($"Completed wizard step '{step.Kinds}'");
         }
