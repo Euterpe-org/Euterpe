@@ -33,10 +33,14 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         }
 
         Logger.ZLogInformation($"Installing DotNet SDK...");
-        var success = await SdkInstaller.InstallAsync().ConfigureAwait(true);
-        if (!success)
+        try
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDK_Install_Failed).ConfigureAwait(false);
+            await SdkInstaller.InstallAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to install DotNet SDK");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDK_Install_Failed).ConfigureAwait(true);
             return;
         }
 

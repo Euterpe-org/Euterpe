@@ -114,31 +114,22 @@ internal sealed class GameLocalService : IGameLocalService
             IsLocal = true
         };
 
-    public async ValueTask ReadGameInformationAsync()
+    public void ReadGameInformation()
     {
         var assetsManager = new AssetsManager();
         assetsManager.LoadClassPackage(ResourceService.GetAssetAsStream("classdata.tpk"));
-        var bundlePath = Path.Combine(GameConfig.Folder, GameConfig.GameDataFolderName, "globalgamemanagers");
-        try
-        {
-            var instance = assetsManager.LoadAssetsFile(bundlePath, true);
-            var unityVersion = instance.file.Metadata.UnityVersion;
-            assetsManager.LoadClassDatabaseFromPackage(unityVersion);
-            var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
-            var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
 
-            GameConfig.GameVersion = bundleVersion;
-            GameConfig.UnityVersion = unityVersion[..^2];
+        var instance = assetsManager.LoadAssetsFile(GameConfig.GlobalGameManagersPath, true);
+        var unityVersion = instance.file.Metadata.UnityVersion;
+        assetsManager.LoadClassDatabaseFromPackage(unityVersion);
+        var playerSettings = instance.file.GetAssetsOfType(AssetClassID.PlayerSettings)[0];
+        var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
 
-            Logger.ZLogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
-            assetsManager.UnloadAll();
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogCritical(ex, $"Read game information failed");
-            await MessageBoxService.ErrorAsync(MessageBox_Content_ReadGameInformation_Failed, bundlePath).ConfigureAwait(true);
-            Environment.Exit(0);
-        }
+        GameConfig.GameVersion = bundleVersion;
+        GameConfig.UnityVersion = unityVersion[..^2];
+
+        Logger.ZLogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
+        assetsManager.UnloadAll();
     }
 
     public void ReadMelonLoaderVersion()

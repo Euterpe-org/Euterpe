@@ -4,5 +4,5 @@ namespace Euterpe.Core;
 internal sealed class MacOsDotNetSdkInstaller : IDotNetSdkInstaller
 {
     public Task<bool> CheckInstalledAsync() => throw new NotSupportedException();
-    public Task<bool> InstallAsync() => throw new NotSupportedException();
+    public Task InstallAsync() => throw new NotSupportedException();
 }

@@ -27,7 +27,7 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
         }
     }
 
-    public async Task<bool> InstallAsync()
+    public async Task InstallAsync()
     {
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
@@ -43,8 +43,7 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
 
             if (chmodResult.ExitCode is not 0)
             {
-                Logger.ZLogError($"Failed to chmod dotnet-install.sh. ExitCode: {chmodResult.ExitCode}, Error:{chmodResult.StandardError}");
-                return false;
+                throw new InvalidOperationException($"chmod +x dotnet-install.sh failed with exit code {chmodResult.ExitCode}: {chmodResult.StandardError}");
             }
 
             var installResult = await Cli.Wrap("bash")
@@ -55,17 +54,10 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
 
             if (installResult.ExitCode is not 0)
             {
-                Logger.ZLogError($".NET SDK installation failed. ExitCode: {installResult.ExitCode}, StdErr: {installResult.StandardError}");
-                return false;
+                throw new InvalidOperationException($"dotnet-install.sh failed with exit code {installResult.ExitCode}: {installResult.StandardError}");
             }
 
             Logger.ZLogInformation($".NET SDK installation completed successfully");
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to install .NET SDK");
-            return false;
         }
         finally
         {

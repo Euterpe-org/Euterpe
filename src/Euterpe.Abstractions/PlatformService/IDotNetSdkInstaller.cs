@@ -8,7 +8,7 @@ public interface IDotNetSdkInstaller
     Task<bool> CheckInstalledAsync();
 
     /// <summary>
-    ///     Install the .NET SDK.
+    ///     Install the .NET SDK. Throws on failure.
     /// </summary>
-    Task<bool> InstallAsync();
+    Task InstallAsync();
 }

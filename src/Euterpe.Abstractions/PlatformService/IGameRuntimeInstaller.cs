@@ -8,7 +8,7 @@ public interface IGameRuntimeInstaller
     Task<bool> CheckInstalledAsync();
 
     /// <summary>
-    ///     Install the runtime required by the game.
+    ///     Install the runtime required by the game. Throws on failure.
     /// </summary>
-    Task<bool> InstallAsync();
+    Task InstallAsync();
 }

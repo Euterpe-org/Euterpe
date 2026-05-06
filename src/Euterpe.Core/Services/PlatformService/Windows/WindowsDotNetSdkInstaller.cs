@@ -27,7 +27,7 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
         }
     }
 
-    public async Task<bool> InstallAsync()
+    public async Task InstallAsync()
     {
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
@@ -45,25 +45,17 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
 
             if (process is null)
             {
-                Logger.ZLogError($"Failed to launch .NET SDK installer. Process.Start returned null");
-                return false;
+                throw new InvalidOperationException($"Failed to start .NET SDK installer process at {tempFilePath}");
             }
 
             await process.WaitForExitAsync().ConfigureAwait(false);
 
             if (process.ExitCode is not 0)
             {
-                Logger.ZLogError($".NET SDK installer exited with code {process.ExitCode}");
-                return false;
+                throw new InvalidOperationException($".NET SDK installer exited with code {process.ExitCode}");
             }
 
             Logger.ZLogInformation($".NET SDK installation completed successfully");
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to install .NET SDK");
-            return false;
         }
         finally
         {

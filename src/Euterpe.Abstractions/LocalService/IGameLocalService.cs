@@ -9,6 +9,6 @@ public interface IGameLocalService
     Task UninstallMelonLoaderAsync();
     Task<ModDto?> LoadModFromPathAsync(string filePath);
     Task<LibDto> LoadLibFromPathAsync(string filePath);
-    ValueTask ReadGameInformationAsync();
+    void ReadGameInformation();
     void ReadMelonLoaderVersion();
 }

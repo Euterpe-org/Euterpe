@@ -30,6 +30,9 @@ public abstract partial class GameConfig
     public string GameDataFolder => Path.Combine(Folder, GameDataFolderName);
 
     [JsonIgnore]
+    public string GlobalGameManagersPath => Path.Combine(GameDataFolder, "globalgamemanagers");
+
+    [JsonIgnore]
     public string OnlineChartsFolder => Path.Combine(EuterpeChartsFolder, "Online");
 
     [JsonIgnore]

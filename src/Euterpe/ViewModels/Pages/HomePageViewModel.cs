@@ -53,7 +53,19 @@ public sealed partial class HomePageViewModel : ViewModelBase
     private async Task LoadGameStateAsync()
     {
         GameSettingService.EnsureGameFolders();
-        await GameLocalService.ReadGameInformationAsync().ConfigureAwait(true);
+
+        try
+        {
+            GameLocalService.ReadGameInformation();
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogCritical(ex, $"Read game information failed; aborting startup");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_ReadGameInformation_Failed, GameConfig.GlobalGameManagersPath).ConfigureAwait(true);
+            Environment.Exit(1);
+            return;
+        }
+
         GameLocalService.ReadMelonLoaderVersion();
         SelectedGameModeIndex = (int)GameConfig.GameMode;
     }
@@ -76,6 +88,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required IGameLocalService GameLocalService { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
     public required IGameRuntimeInstaller RuntimeInstaller { get; init; }

@@ -33,42 +33,32 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
         return true;
     }
 
-    public async Task<bool> InstallAsync()
+    public async Task InstallAsync()
     {
-        if (!await CheckProtontricksInstalledAsync().ConfigureAwait(true))
+        if (!await CheckProtontricksInstalledAsync().ConfigureAwait(false))
         {
             await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Not_Installed).ConfigureAwait(false);
-            return false;
+            throw new InvalidOperationException("Protontricks not installed");
         }
 
-        if (!await ConfigureWinePrefixAsync().ConfigureAwait(true))
+        if (!await ConfigureWinePrefixAsync().ConfigureAwait(false))
         {
             await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Wineprefix_Failed).ConfigureAwait(false);
-            return false;
+            throw new InvalidOperationException("Failed to configure wineprefix");
         }
 
-        try
+        var result = await Cli.Wrap("protontricks")
+            .WithArguments([GameConfig.SteamAppId, "dotnetdesktop6"])
+            .WithValidation(CommandResultValidation.None)
+            .ExecuteBufferedAsync()
+            .ConfigureAwait(false);
+
+        if (result.ExitCode is not 0)
         {
-            var result = await Cli.Wrap("protontricks")
-                .WithArguments([GameConfig.SteamAppId, "dotnetdesktop6"])
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync()
-                .ConfigureAwait(false);
-
-            if (result.ExitCode is 0)
-            {
-                Logger.ZLogInformation($".NET Runtime installed successfully via protontricks");
-                return true;
-            }
-
-            Logger.ZLogError($".NET Runtime installation failed with exit code: {result.ExitCode}");
-            return false;
+            throw new InvalidOperationException($"protontricks dotnetdesktop6 install failed with exit code {result.ExitCode}: {result.StandardError}");
         }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to install .NET Runtime");
-            return false;
-        }
+
+        Logger.ZLogInformation($".NET Runtime installed successfully via protontricks");
     }
 
     private async Task<bool> CheckProtontricksInstalledAsync()

@@ -27,38 +27,33 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
         }
     }
 
-    public async Task<bool> InstallAsync()
+    public async Task InstallAsync()
     {
-        try
-        {
-            var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            Logger.ZLogInformation($"Downloading .NET Runtime from {DotnetRuntimeUrl} to {tempFilePath}");
-            await AppDownloadManager.DownloadFileAsync(DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+        var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+        Logger.ZLogInformation($"Downloading .NET Runtime from {DotnetRuntimeUrl} to {tempFilePath}");
+        await AppDownloadManager.DownloadFileAsync(DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
 
-            Logger.ZLogInformation($"Launching .NET Runtime installer: {tempFilePath}");
-            using var process = Process.Start(
-                new ProcessStartInfo(tempFilePath)
-                {
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                });
-
-            if (process is null)
+        Logger.ZLogInformation($"Launching .NET Runtime installer: {tempFilePath}");
+        using var process = Process.Start(
+            new ProcessStartInfo(tempFilePath)
             {
-                return false;
-            }
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
 
-            await process.WaitForExitAsync().ConfigureAwait(false);
-            Logger.ZLogInformation($".NET Runtime installer finished with exit code: {process.ExitCode}");
-
-            File.Delete(tempFilePath);
-
-            return process.ExitCode is 0;
-        }
-        catch (Exception ex)
+        if (process is null)
         {
-            Logger.ZLogError(ex, $"Failed to install .NET Runtime");
-            return false;
+            throw new InvalidOperationException($"Failed to start .NET Runtime installer process at {tempFilePath}");
+        }
+
+        await process.WaitForExitAsync().ConfigureAwait(false);
+        Logger.ZLogInformation($".NET Runtime installer finished with exit code: {process.ExitCode}");
+
+        File.Delete(tempFilePath);
+
+        if (process.ExitCode is not 0)
+        {
+            throw new InvalidOperationException($".NET Runtime installer exited with code {process.ExitCode}");
         }
     }
 

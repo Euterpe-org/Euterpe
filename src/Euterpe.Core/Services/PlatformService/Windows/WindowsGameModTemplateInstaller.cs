@@ -26,38 +26,22 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
 
     public async Task InstallAsync()
     {
-        try
-        {
-            await Cli.Wrap("dotnet")
-                .WithArguments(["new", "install", GameConfig.ModTemplatePackageName])
-                .ExecuteAsync()
-                .ConfigureAwait(false);
+        await Cli.Wrap("dotnet")
+            .WithArguments(["new", "install", GameConfig.ModTemplatePackageName])
+            .ExecuteAsync()
+            .ConfigureAwait(false);
 
-            Logger.ZLogInformation($"Mod Template installed successfully");
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to install Mod Template");
-            throw;
-        }
+        Logger.ZLogInformation($"Mod Template installed successfully");
     }
 
     public async Task UninstallAsync()
     {
-        try
-        {
-            await Cli.Wrap("dotnet")
-                .WithArguments(["new", "uninstall", GameConfig.ModTemplatePackageName])
-                .ExecuteAsync()
-                .ConfigureAwait(false);
+        await Cli.Wrap("dotnet")
+            .WithArguments(["new", "uninstall", GameConfig.ModTemplatePackageName])
+            .ExecuteAsync()
+            .ConfigureAwait(false);
 
-            Logger.ZLogInformation($"Mod Template uninstalled successfully");
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to uninstall Mod Template");
-            throw;
-        }
+        Logger.ZLogInformation($"Mod Template uninstalled successfully");
     }
 
     #region Injections
