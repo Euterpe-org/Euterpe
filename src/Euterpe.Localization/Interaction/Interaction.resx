@@ -40,33 +40,17 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Please select Muse Dash folder
-Do you have Muse Dash installed on this computer?</value>
-  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Please select Steam executable</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Please select Steam folder</value>
   </data>
-  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
-    <value>Detected Muse Dash folder path is
-{0}
-Is this the correct game folder?</value>
-  </data>
   <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
     <value>Failed to delete {0}</value>
   </data>
   <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
     <value>Failed to delete MelonLoader folder</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime not found
-Click OK to install</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-    <value>Failed to install .NET 6 Runtime</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Are you sure you want to install the .Net SDK?</value>

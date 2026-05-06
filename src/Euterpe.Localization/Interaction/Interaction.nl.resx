@@ -40,33 +40,17 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Selecteer de Muse Dash-map
-Is Muse Dash op deze computer geïnstalleerd?</value>
-  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Selecteer het Steam-uitvoerbare bestand</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Selecteer de Steam-map</value>
   </data>
-  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
-    <value>Het gedetecteerde pad van de Muse Dash-map is
-{0}
-Is dit de juiste spelmap?</value>
-  </data>
   <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
     <value>Kan {0} niet verwijderen</value>
   </data>
   <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
     <value>Kan MelonLoader-map niet verwijderen</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime niet gevonden
-Klik op OK om te installeren</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-    <value>Installatie van .NET 6 Runtime mislukt</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Weet u zeker dat u de .NET SDK wilt installeren?</value>

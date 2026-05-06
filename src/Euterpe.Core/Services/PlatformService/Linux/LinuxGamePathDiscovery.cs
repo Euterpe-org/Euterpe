@@ -23,8 +23,13 @@ internal sealed class LinuxGamePathDiscovery : IGamePathDiscovery
         return false;
     }
 
-    public bool CheckIsValidGameFolder(string folderPath)
+    public bool CheckIsValidGameFolder([NotNullWhen(true)] string? folderPath)
     {
+        if (folderPath.IsNullOrEmpty())
+        {
+            return false;
+        }
+
         var exeName = GameConfig.ExecutableName;
         var exePath = Path.Combine(folderPath, exeName);
         var dllPath = Path.Combine(folderPath, "GameAssembly.dll");

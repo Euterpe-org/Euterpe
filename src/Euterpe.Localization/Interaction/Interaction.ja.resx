@@ -40,33 +40,17 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>はい</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Muse Dash フォルダーを選択してください
-このPCに Muse Dash はインストールされていますか？</value>
-  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Steam 実行ファイルを選択してください</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Steam フォルダーを選択してください</value>
   </data>
-  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
-    <value>検出された Muse Dash フォルダーのパス：
-{0}
-このゲームフォルダーで間違いありませんか？</value>
-  </data>
   <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
     <value>{0} の削除に失敗しました</value>
   </data>
   <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
     <value>MelonLoader フォルダーの削除に失敗しました</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime が見つかりません
-OK をクリックしてインストールします</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-    <value>.NET 6 Runtime のインストールに失敗しました</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>.NET SDK をインストールしますか？</value>

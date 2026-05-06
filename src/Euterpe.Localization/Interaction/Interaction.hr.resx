@@ -40,33 +40,17 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Da</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Odaberi mapu Muse Dash
-Je li Muse Dash instaliran na ovom računalu?</value>
-  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Odaberi izvršnu datoteku Steama</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Odaberi mapu Steama</value>
   </data>
-  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
-    <value>Otkrivena mapa Muse Dash:
-{0}
-Je li ovo ispravna mapa igre?</value>
-  </data>
   <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
     <value>Brisanje {0} nije uspjelo</value>
   </data>
   <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
     <value>Brisanje mape MelonLoader nije uspjelo</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime nije pronađen
-Klikni OK za instalaciju</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-    <value>Instalacija .NET 6 Runtimea nije uspjela</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Želiš li instalirati .NET SDK?</value>

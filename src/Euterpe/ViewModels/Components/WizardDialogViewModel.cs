@@ -27,20 +27,20 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public Task PrepareForFullSetupAsync()
     {
         _completesSetup = true;
-        return PrepareAsync([GamePathPage, RolePage, ExecutionPage], false);
+        return PrepareAsync([GamePathPage, RolePage, ExecutionPage]);
     }
 
     public Task PrepareForOptionAsync(WizardOptionKinds kind)
     {
         _completesSetup = false;
         SelectOnly(kind);
-        return PrepareAsync([ExecutionPage], true);
+        return PrepareAsync([ExecutionPage]);
     }
 
     public Task PrepareForGamePathAsync()
     {
         _completesSetup = false;
-        return PrepareAsync([GamePathPage], false);
+        return PrepareAsync([GamePathPage]);
     }
 
     protected override async Task OnInitializeAsync()
@@ -71,10 +71,11 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private void Back() => CurrentPageIndex--;
 
-    private async Task PrepareAsync(IReadOnlyList<WizardPageViewModelBase> pages, bool autoEnter)
+    private async Task PrepareAsync(IReadOnlyList<WizardPageViewModelBase> pages)
     {
         State.Reset();
         Pages = pages;
+
         CurrentPageIndex = 0;
         OnPropertyChanged(nameof(CurrentPage));
         OnPropertyChanged(nameof(CanGoBack));
@@ -85,10 +86,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             await page.InitializeAsync().ConfigureAwait(true);
         }
 
-        if (autoEnter)
-        {
-            CurrentPage.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
-        }
+        CurrentPage.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
     }
 
     private void SelectOnly(WizardOptionKinds kind)

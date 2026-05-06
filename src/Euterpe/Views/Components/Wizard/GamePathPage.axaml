@@ -64,7 +64,7 @@
                     Theme="{DynamicResource CardBorder}">
                     <TextBlock
                         FontSize="12"
-                        Text="{Binding SelectedFolder, FallbackValue=''}"
+                        Text="{Binding SelectedFolder}"
                         TextTrimming="CharacterEllipsis"
                         VerticalAlignment="Center" />
                 </Border>

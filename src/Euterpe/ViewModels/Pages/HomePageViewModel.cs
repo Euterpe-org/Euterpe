@@ -18,24 +18,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(true);
         await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
 
-        if (GameConfig.SetupCompleted)
-        {
-            await GameSettingService.ValidateGameFolderAsync().ConfigureAwait(true);
-        }
-        else
-        {
-            await ShowFullWizardAsync().ConfigureAwait(true);
-        }
-
-        GameSettingService.EnsureGameFolders();
-
-        await GameLocalService.ReadGameInformationAsync().ConfigureAwait(true);
-        GameLocalService.ReadMelonLoaderVersion();
-
-        SelectedGameModeIndex = (int)GameConfig.GameMode;
-
-        BindAccountAsync().SafeFireAndForget();
-        CheckModdingDependenciesAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to check modding dependencies"));
+        await EnsureSetupAsync().ConfigureAwait(true);
+        await LoadGameStateAsync().ConfigureAwait(true);
+        StartBackgroundTasks();
 
         Logger.ZLogInformation($"{nameof(HomePageViewModel)} Initialized");
     }
@@ -51,96 +36,26 @@ public sealed partial class HomePageViewModel : ViewModelBase
         };
     }
 
-    private async Task ShowFullWizardAsync()
+    private async Task EnsureSetupAsync()
     {
-        Logger.ZLogInformation($"Showing full setup wizard");
-        await WizardDialogViewModel.PrepareForFullSetupAsync().ConfigureAwait(true);
-        await ShowWizardDialogAsync(Wizard_Title_Welcome).ConfigureAwait(true);
-    }
-
-    private async Task ShowOptionWizardAsync(WizardOptionKinds kind)
-    {
-        Logger.ZLogInformation($"Showing single-option wizard for {kind}");
-        await WizardDialogViewModel.PrepareForOptionAsync(kind).ConfigureAwait(true);
-        await ShowWizardDialogAsync(Wizard_Title_SettingUp).ConfigureAwait(true);
-    }
-
-    private async Task ShowWizardDialogAsync(string title)
-    {
-        var options = new OverlayDialogOptions
+        if (!GameConfig.SetupCompleted)
         {
-            Title = title,
-            CanDragMove = false,
-            CanResize = false,
-            IsCloseButtonVisible = false
-        };
-
-        GameSwitcher.CanSwitch = false;
-        try
-        {
-            await OverlayDialog.ShowCustomAsync<WizardDialog, WizardDialogViewModel, object>(WizardDialogViewModel, MainWindowViewModel.WizardHostId, options).ConfigureAwait(true);
+            Logger.ZLogInformation($"Setup not completed, opening full setup wizard");
+            await ShowFullWizardAsync().ConfigureAwait(true);
         }
-        finally
+        else if (!GameSettingService.IsValidGameFolder())
         {
-            GameSwitcher.CanSwitch = true;
+            Logger.ZLogWarning($"Stored {GameConfig.DisplayName} folder is invalid, opening game path wizard");
+            await ShowGamePathWizardAsync().ConfigureAwait(true);
         }
     }
 
-    private async Task BindAccountAsync()
+    private async Task LoadGameStateAsync()
     {
-        var request = await UidProvider.GetMuseDashUidRequestAsync().ConfigureAwait(false);
-        if (request is null)
-        {
-            Logger.ZLogWarning($"Failed to get MuseDash user ID. Skipping account binding.");
-            return;
-        }
-
-        try
-        {
-            await AccountClient.BindVanillaAccountAsync(request).ConfigureAwait(false);
-            Logger.ZLogInformation($"Successfully bound MuseDash account.");
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to bind MuseDash account.");
-        }
-    }
-
-    private async Task CheckModdingDependenciesAsync()
-    {
-        await CheckDotNetRuntimeAsync().ConfigureAwait(true);
-        await CheckMelonLoaderAsync().ConfigureAwait(true);
-    }
-
-    private async Task CheckDotNetRuntimeAsync()
-    {
-        if (await RuntimeInstaller.CheckInstalledAsync().ConfigureAwait(true))
-        {
-            return;
-        }
-
-        var result = await MessageBoxService.NoticeAsync(MessageBox_Content_DotNetRuntime_Install).ConfigureAwait(true);
-        if (result is not MessageBoxResult.OK)
-        {
-            return;
-        }
-
-        var success = await RuntimeInstaller.InstallAsync().ConfigureAwait(true);
-        if (!success)
-        {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetRuntime_Install_Failed).ConfigureAwait(false);
-        }
-    }
-
-    private async Task CheckMelonLoaderAsync()
-    {
-        if (GameConfig.MelonLoaderSemVersion is not null)
-        {
-            return;
-        }
-
-        Logger.ZLogInformation($"MelonLoader not installed, opening single-option wizard");
-        await ShowOptionWizardAsync(WizardOptionKinds.MelonLoader).ConfigureAwait(false);
+        GameSettingService.EnsureGameFolders();
+        await GameLocalService.ReadGameInformationAsync().ConfigureAwait(true);
+        GameLocalService.ReadMelonLoaderVersion();
+        SelectedGameModeIndex = (int)GameConfig.GameMode;
     }
 
     partial void OnSelectedGameModeIndexChanged(int value) => GameConfig.GameMode = (GameMode)value;
@@ -167,9 +82,6 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required IGameUidProvider UidProvider { get; init; }
-
-    [UsedImplicitly]
-    public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
     public required NavigationService NavigationService { get; init; }

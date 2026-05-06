@@ -14,5 +14,5 @@ public interface IGamePathDiscovery
     /// </summary>
     /// <param name="folderPath"></param>
     /// <returns></returns>
-    bool CheckIsValidGameFolder(string folderPath);
+    bool CheckIsValidGameFolder([NotNullWhen(true)] string? folderPath);
 }

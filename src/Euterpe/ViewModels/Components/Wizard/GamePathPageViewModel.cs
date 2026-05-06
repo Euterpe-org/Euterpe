@@ -46,7 +46,7 @@ public sealed partial class GamePathPageViewModel : WizardPageViewModelBase
     partial void OnSelectedFolderChanged(string? value)
     {
         GameConfig.Folder = value;
-        IsSelectedFolderValid = !value.IsNullOrEmpty() && GamePaths.CheckIsValidGameFolder(value);
+        IsSelectedFolderValid = GamePaths.CheckIsValidGameFolder(value);
     }
 
     #region Injections
