@@ -1,13 +1,13 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:contracts="using:Euterpe.Contracts.Mods"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
-    xmlns:mods="using:Euterpe.Models.Mods"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:contracts="using:Euterpe.Contracts.Mods"
+    xmlns:mods="using:Euterpe.Models.Mods"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Modding"
     x:Class="Euterpe.Views.Panels.Modding.ModManagePanel"
@@ -78,120 +78,119 @@
                     LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}"
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Top">
-                    <ScrollViewer
-                        AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}"
-                        Margin="12,0,12,12">
-                        <u:SelectionList
-                            ItemsSource="{Binding Mods, Mode=OneWay}"
-                            SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
-                            <u:SelectionList.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel
-                                        Orientation="Vertical"
-                                        VerticalAlignment="Top" />
-                                </ItemsPanelTemplate>
-                            </u:SelectionList.ItemsPanel>
+                    <u:SelectionList
+                        ItemsSource="{Binding Mods, Mode=OneWay}"
+                        Margin="12,0,12,12"
+                        ScrollViewer.AllowAutoHide="{Binding !Config.AlwaysShowScrollBar, Mode=OneWay}"
+                        SelectedItem="{Binding SelectedMod, Mode=OneWayToSource}">
 
-                            <!--  Selection Indicator  -->
-                            <u:SelectionList.Indicator>
+                        <u:SelectionList.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Top" />
+                            </ItemsPanelTemplate>
+                        </u:SelectionList.ItemsPanel>
+
+                        <!--  Selection Indicator  -->
+                        <u:SelectionList.Indicator>
+                            <Border
+                                Background="Transparent"
+                                CornerRadius="4">
                                 <Border
-                                    Background="Transparent"
-                                    CornerRadius="4">
-                                    <Border
-                                        Background="{DynamicResource SemiBlue6}"
-                                        CornerRadius="4"
-                                        HorizontalAlignment="Left"
-                                        Margin="0,8"
-                                        Width="4" />
-                                </Border>
-                            </u:SelectionList.Indicator>
+                                    Background="{DynamicResource SemiBlue6}"
+                                    CornerRadius="4"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,8"
+                                    Width="4" />
+                            </Border>
+                        </u:SelectionList.Indicator>
 
-                            <!--  Mod Item Template  -->
-                            <u:SelectionList.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid
-                                        ColumnDefinitions="*,60"
-                                        Width="320">
+                        <!--  Mod Item Template  -->
+                        <u:SelectionList.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    ColumnDefinitions="*,60"
+                                    Width="320">
+                                    <StackPanel
+                                        Height="60"
+                                        Margin="8,5"
+                                        Spacing="5">
+
+                                        <!--  Mod Name  -->
+                                        <TextBlock
+                                            Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
+                                            Text="{Binding Name, Mode=OneWay}" />
+
+                                        <!--  Mod Status Tags  -->
                                         <StackPanel
-                                            Height="60"
-                                            Margin="8,5"
-                                            Spacing="5">
+                                            Classes="ControlsHorizontal">
+                                            <StackPanel.Styles>
+                                                <Style
+                                                    Selector="Label.Gray">
+                                                    <Setter Property="Content" Value="{Binding Version, Mode=OneWay}" />
+                                                </Style>
+                                                <Style
+                                                    Selector="Label.Indigo">
+                                                    <Setter Property="Content" Value="{Binding LocalVersion, Mode=OneWay}" />
+                                                </Style>
+                                            </StackPanel.Styles>
 
-                                            <!--  Mod Name  -->
-                                            <TextBlock
-                                                Classes.Active="{Binding $parent[u:SelectionListItem].IsSelected, Mode=OneWay}"
-                                                Text="{Binding Name, Mode=OneWay}" />
+                                            <Label
+                                                Classes="Ghost TagLabel"
+                                                Classes.Gray="{Binding !IsLocal, Mode=OneWay}"
+                                                Classes.Indigo="{Binding IsLocal, Mode=OneWay}" />
 
-                                            <!--  Mod Status Tags  -->
                                             <StackPanel
-                                                Classes="ControlsHorizontal">
-                                                <StackPanel.Styles>
-                                                    <Style
-                                                        Selector="Label.Gray">
-                                                        <Setter Property="Content" Value="{Binding Version, Mode=OneWay}" />
-                                                    </Style>
-                                                    <Style
-                                                        Selector="Label.Indigo">
-                                                        <Setter Property="Content" Value="{Binding LocalVersion, Mode=OneWay}" />
-                                                    </Style>
-                                                </StackPanel.Styles>
-
+                                                Classes="ControlsHorizontal"
+                                                IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Outdated}, Mode=OneWay}">
+                                                <PathIcon
+                                                    Data="{StaticResource SemiIconArrowRight}"
+                                                    Height="10" />
                                                 <Label
-                                                    Classes="Ghost TagLabel"
-                                                    Classes.Gray="{Binding !IsLocal, Mode=OneWay}"
-                                                    Classes.Indigo="{Binding IsLocal, Mode=OneWay}" />
-
-                                                <StackPanel
-                                                    Classes="ControlsHorizontal"
-                                                    IsVisible="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Outdated}, Mode=OneWay}">
-                                                    <PathIcon
-                                                        Data="{StaticResource SemiIconArrowRight}"
-                                                        Height="10" />
-                                                    <Label
-                                                        Classes="Ghost Green TagLabel"
-                                                        Content="{Binding Version, Mode=OneWay}" />
-                                                </StackPanel>
-
-                                                <Label
-                                                    Classes="Ghost TagLabel"
-                                                    Classes.Orange="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Modified}, Mode=OneWay}"
-                                                    Classes.Purple="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Newer}, Mode=OneWay}"
-                                                    Classes.Red="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Incompatible}, Mode=OneWay}">
-                                                    <Label.IsVisible>
-                                                        <MultiBinding
-                                                            Converter="{x:Static BoolConverters.And}">
-                                                            <Binding
-                                                                Converter="{x:Static ObjectConverters.NotEqual}"
-                                                                ConverterParameter="{x:Static mods:ModState.Normal}"
-                                                                Path="State" />
-                                                            <Binding
-                                                                Converter="{x:Static ObjectConverters.NotEqual}"
-                                                                ConverterParameter="{x:Static mods:ModState.Outdated}"
-                                                                Path="State" />
-                                                        </MultiBinding>
-                                                    </Label.IsVisible>
-                                                </Label>
-
+                                                    Classes="Ghost Green TagLabel"
+                                                    Content="{Binding Version, Mode=OneWay}" />
                                             </StackPanel>
+
+                                            <Label
+                                                Classes="Ghost TagLabel"
+                                                Classes.Orange="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Modified}, Mode=OneWay}"
+                                                Classes.Purple="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Newer}, Mode=OneWay}"
+                                                Classes.Red="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Incompatible}, Mode=OneWay}">
+                                                <Label.IsVisible>
+                                                    <MultiBinding
+                                                        Converter="{x:Static BoolConverters.And}">
+                                                        <Binding
+                                                            Converter="{x:Static ObjectConverters.NotEqual}"
+                                                            ConverterParameter="{x:Static mods:ModState.Normal}"
+                                                            Path="State" />
+                                                        <Binding
+                                                            Converter="{x:Static ObjectConverters.NotEqual}"
+                                                            ConverterParameter="{x:Static mods:ModState.Outdated}"
+                                                            Path="State" />
+                                                    </MultiBinding>
+                                                </Label.IsVisible>
+                                            </Label>
+
                                         </StackPanel>
+                                    </StackPanel>
 
-                                        <!--  Mod Toggle Switch  -->
-                                        <ToggleSwitch
-                                            Grid.Column="1"
-                                            Command="{Binding $parent[UserControl].DataContext.ToggleModCommand, Mode=OneTime}"
-                                            CommandParameter="{Binding ., Mode=OneWay}"
-                                            HorizontalAlignment="Right"
-                                            IsChecked="{Binding !IsDisabled, Mode=OneWay}"
-                                            IsVisible="{Binding IsLocal, Mode=OneWay}"
-                                            Margin="0,0,4,0"
-                                            VerticalAlignment="Center" />
+                                    <!--  Mod Toggle Switch  -->
+                                    <ToggleSwitch
+                                        Grid.Column="1"
+                                        Command="{Binding $parent[UserControl].DataContext.ToggleModCommand, Mode=OneTime}"
+                                        CommandParameter="{Binding ., Mode=OneWay}"
+                                        HorizontalAlignment="Right"
+                                        IsChecked="{Binding !IsDisabled, Mode=OneWay}"
+                                        IsVisible="{Binding IsLocal, Mode=OneWay}"
+                                        Margin="0,0,4,0"
+                                        VerticalAlignment="Center" />
 
-                                    </Grid>
-                                </DataTemplate>
-                            </u:SelectionList.ItemTemplate>
-                        </u:SelectionList>
-                    </ScrollViewer>
+                                </Grid>
+                            </DataTemplate>
+                        </u:SelectionList.ItemTemplate>
+                    </u:SelectionList>
                 </u:LoadingContainer>
             </Grid>
         </Border>
