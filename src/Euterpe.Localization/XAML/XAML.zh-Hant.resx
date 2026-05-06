@@ -40,9 +40,6 @@
   <data name="Button_LaunchGame" xml:space="preserve">
     <value>啟動遊戲</value>
   </data>
-  <data name="Button_MDMC_Website" xml:space="preserve">
-    <value>MDMC 網站</value>
-  </data>
   <data name="Button_Next" xml:space="preserve">
     <value>下一步</value>
   </data>

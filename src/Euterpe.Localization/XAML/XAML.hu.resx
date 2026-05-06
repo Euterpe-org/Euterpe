@@ -40,9 +40,6 @@
   <data name="Button_LaunchGame" xml:space="preserve">
     <value>Játék</value>
   </data>
-  <data name="Button_MDMC_Website" xml:space="preserve">
-    <value>MDMC weboldal</value>
-  </data>
   <data name="Button_Next" xml:space="preserve">
     <value>Tovább</value>
   </data>
