@@ -40,9 +40,6 @@
   <data name="Button_LaunchGame" xml:space="preserve">
     <value>Main</value>
   </data>
-  <data name="Button_MDMC_Website" xml:space="preserve">
-    <value>Situs MDMC</value>
-  </data>
   <data name="Button_Next" xml:space="preserve">
     <value>Selanjutnya</value>
   </data>
