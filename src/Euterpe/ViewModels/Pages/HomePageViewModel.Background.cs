@@ -41,8 +41,8 @@ public sealed partial class HomePageViewModel
             return;
         }
 
-        Logger.ZLogInformation($".NET runtime not installed, opening single-option wizard");
-        await ShowOptionWizardAsync(WizardOptionKinds.DotNetRuntime).ConfigureAwait(false);
+        Logger.ZLogInformation($".NET runtime not installed, opening repair dialog");
+        await ShowOptionRepairAsync(WizardOptionKinds.DotNetRuntime).ConfigureAwait(false);
     }
 
     private async Task CheckMelonLoaderAsync()
@@ -52,7 +52,7 @@ public sealed partial class HomePageViewModel
             return;
         }
 
-        Logger.ZLogInformation($"MelonLoader not installed, opening single-option wizard");
-        await ShowOptionWizardAsync(WizardOptionKinds.MelonLoader).ConfigureAwait(false);
+        Logger.ZLogInformation($"MelonLoader not installed, opening repair dialog");
+        await ShowOptionRepairAsync(WizardOptionKinds.MelonLoader).ConfigureAwait(false);
     }
 }

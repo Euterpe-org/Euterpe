@@ -45,8 +45,8 @@ public sealed partial class HomePageViewModel : ViewModelBase
         }
         else if (!GameSettingService.IsValidGameFolder())
         {
-            Logger.ZLogWarning($"Stored {GameConfig.DisplayName} folder is invalid, opening game path wizard");
-            await ShowGamePathWizardAsync().ConfigureAwait(true);
+            Logger.ZLogWarning($"Stored {GameConfig.DisplayName} folder is invalid, opening game path repair");
+            await ShowGamePathRepairAsync().ConfigureAwait(true);
         }
     }
 
@@ -91,6 +91,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }
+
+    [UsedImplicitly]
+    public required RepairDialogViewModel RepairDialogViewModel { get; init; }
 
     [UsedImplicitly]
     public required ILogger<HomePageViewModel> Logger { get; init; }

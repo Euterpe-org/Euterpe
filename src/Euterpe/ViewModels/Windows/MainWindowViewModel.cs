@@ -2,10 +2,10 @@ namespace Euterpe.ViewModels.Windows;
 
 public sealed partial class MainWindowViewModel : NavViewModelBase
 {
-    public const string WizardHostId = "WizardDialog";
+    public const string DialogHostId = "DialogHost";
 
     [ObservableProperty]
-    public partial GameConfig SelectedGame { get; set; }
+    public partial GameConfig SelectedGame { get; set; } = null!;
 
     protected override async Task OnInitializeAsync()
     {

@@ -150,7 +150,7 @@
         <u:OverlayDialogHost
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            HostId="{x:Static vm:MainWindowViewModel.WizardHostId}"
+            HostId="{x:Static vm:MainWindowViewModel.DialogHostId}"
             ZIndex="1" />
 
         <TransitioningContentControl

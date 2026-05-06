@@ -4,8 +4,6 @@ namespace Euterpe.ViewModels.Components;
 
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
-    private bool _completesSetup;
-
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CurrentPage))]
     [NotifyPropertyChangedFor(nameof(CanGoBack))]
@@ -24,23 +22,22 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
 
-    public Task PrepareForFullSetupAsync()
+    public async Task PrepareForFullSetupAsync()
     {
-        _completesSetup = true;
-        return PrepareAsync([GamePathPage, RolePage, ExecutionPage]);
-    }
+        State.Reset();
+        Pages = [GamePathPage, RolePage, ExecutionPage];
 
-    public Task PrepareForOptionAsync(WizardOptionKinds kind)
-    {
-        _completesSetup = false;
-        SelectOnly(kind);
-        return PrepareAsync([ExecutionPage]);
-    }
+        CurrentPageIndex = 0;
+        OnPropertyChanged(nameof(CurrentPage));
+        OnPropertyChanged(nameof(CanGoBack));
+        OnPropertyChanged(nameof(IsLastPage));
 
-    public Task PrepareForGamePathAsync()
-    {
-        _completesSetup = false;
-        return PrepareAsync([GamePathPage]);
+        foreach (var page in Pages)
+        {
+            await page.InitializeAsync().ConfigureAwait(true);
+        }
+
+        CurrentPage.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
     }
 
     protected override async Task OnInitializeAsync()
@@ -60,42 +57,12 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             return;
         }
 
-        if (_completesSetup)
-        {
-            GameConfig.SetupCompleted = true;
-        }
-
+        GameConfig.SetupCompleted = true;
         Close();
     }
 
     [RelayCommand]
     private void Back() => CurrentPageIndex--;
-
-    private async Task PrepareAsync(IReadOnlyList<WizardPageViewModelBase> pages)
-    {
-        State.Reset();
-        Pages = pages;
-
-        CurrentPageIndex = 0;
-        OnPropertyChanged(nameof(CurrentPage));
-        OnPropertyChanged(nameof(CanGoBack));
-        OnPropertyChanged(nameof(IsLastPage));
-
-        foreach (var page in Pages)
-        {
-            await page.InitializeAsync().ConfigureAwait(true);
-        }
-
-        CurrentPage.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
-    }
-
-    private void SelectOnly(WizardOptionKinds kind)
-    {
-        foreach (var option in GameConfig.WizardOptions)
-        {
-            option.IsSelected = option.Kinds == kind;
-        }
-    }
 
     #region Injections
 
