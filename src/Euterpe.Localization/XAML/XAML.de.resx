@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>Fehlgeschlagen</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>Fehlgeschlagen. Bitte das Protokoll prüfen oder erneut versuchen.</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Charting-Tool (MDBMSC)</value>
   </data>

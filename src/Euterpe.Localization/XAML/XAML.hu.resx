@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>Sikertelen</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>Sikertelen. Ellenőrizze a naplót, vagy próbálja újra.</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Chart Eszköz (MDBMSC)</value>
   </data>

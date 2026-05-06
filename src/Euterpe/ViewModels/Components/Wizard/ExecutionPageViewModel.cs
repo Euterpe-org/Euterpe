@@ -101,7 +101,7 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
         catch (Exception ex)
         {
             step.Status = WizardStepStatus.Failed;
-            step.ErrorMessage = ex.Message;
+            step.ErrorMessage = Wizard_Step_Failed;
             Logger.ZLogError(ex, $"Wizard step '{step.Kinds}' failed");
         }
     }

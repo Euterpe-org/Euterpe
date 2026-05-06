@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>Échec</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>Échec. Consultez le journal ou réessayez.</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Outil de Charts (MDBMSC)</value>
   </data>

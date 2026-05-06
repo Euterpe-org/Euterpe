@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>실패</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>실패했습니다. 로그를 확인하거나 다시 시도하세요.</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>채보 도구 (MDBMSC)</value>
   </data>

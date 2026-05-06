@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>Failed</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>Failed. Please check the log or retry.</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Charting Tool (MDBMSC)</value>
   </data>

@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>Не удалось выполнить. Проверьте журнал или повторите попытку.</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Инструмент для чартов (MDBMSC)</value>
   </data>

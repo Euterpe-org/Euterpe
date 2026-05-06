@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>Gagal</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>Gagal. Periksa log atau coba lagi.</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>Alat Charting (MDBMSC)</value>
   </data>

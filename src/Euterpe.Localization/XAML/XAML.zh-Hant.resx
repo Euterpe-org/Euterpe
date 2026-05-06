@@ -415,6 +415,9 @@
   <data name="Wizard_StepStatus_Failed" xml:space="preserve">
     <value>失敗</value>
   </data>
+  <data name="Wizard_Step_Failed" xml:space="preserve">
+    <value>執行失敗，請查看日誌或重試</value>
+  </data>
   <data name="Wizard_Task_ChartingTool" xml:space="preserve">
     <value>製譜工具 (MDBMSC)</value>
   </data>
