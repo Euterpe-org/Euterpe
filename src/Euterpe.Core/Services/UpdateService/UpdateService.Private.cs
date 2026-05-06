@@ -60,10 +60,14 @@ internal sealed partial class UpdateService
         var updateFolder = GetUpdateTempPath();
         var updaterTargetPath = Path.Combine(updateFolder, PlatformInfo.UpdaterFileName);
 
-        var success = await AppDownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder, cancellationToken).ConfigureAwait(true);
-        if (!success)
+        try
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_ReleaseDownload_Failed, target.Version).ConfigureAwait(false);
+            await AppDownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder, cancellationToken).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to download release {target.Version}");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_ReleaseDownload_Failed, target.Version).ConfigureAwait(true);
             return;
         }
 

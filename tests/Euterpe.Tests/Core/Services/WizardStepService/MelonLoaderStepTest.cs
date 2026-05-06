@@ -64,7 +64,7 @@ public sealed class MelonLoaderStepTest
     public async Task ExecuteAsync_Throws_WhenLatestUnavailable()
     {
         var depService = IDependencyAcquireService.Mock();
-        depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).Returns((string?)null);
+        depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).Throws(new InvalidOperationException("fetch failed"));
         var localService = IGameLocalService.Mock();
 
         var step = CreateStep(depService, localService, new MuseDashConfig { MelonLoaderVersion = "0.6.5" });

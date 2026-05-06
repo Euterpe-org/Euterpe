@@ -5,7 +5,7 @@ namespace Euterpe.Core;
 
 internal sealed class AppDownloadManager : IAppDownloadManager
 {
-    public async Task<bool> DownloadFileAsync(
+    public async Task DownloadFileAsync(
         string url,
         string filePath,
         EventHandler<DownloadStartedEventArgs>? onDownloadStarted = null,
@@ -28,12 +28,6 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         try
         {
             await DownloadService.DownloadFileTaskAsync(url, filePath, cancellationToken).ConfigureAwait(false);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to download file from {url} to {filePath}");
-            return false;
         }
         finally
         {
@@ -49,43 +43,23 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
     }
 
-    public async Task<bool> DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default)
+    public async Task DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Downloading {displayName} ...");
 
-        try
+        var stream = await DownloadClient.GetStreamAsync(downloadUrl, cancellationToken).ConfigureAwait(false);
+        await using (stream.ConfigureAwait(false))
         {
-            var stream = await DownloadClient.GetStreamAsync(downloadUrl, cancellationToken).ConfigureAwait(false);
-            await using (stream.ConfigureAwait(false))
+            var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
+            await using (fs.ConfigureAwait(false))
             {
-                var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
-                await using (fs.ConfigureAwait(false))
-                {
-                    await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
-                    return true;
-                }
+                await stream.CopyToAsync(fs, cancellationToken).ConfigureAwait(false);
             }
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to download {displayName}");
-            return false;
         }
     }
 
-    public async Task<bool> DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            await DownloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken).ConfigureAwait(false);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to download new version");
-            return false;
-        }
-    }
+    public Task DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default) =>
+        DownloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken);
 
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
@@ -158,7 +132,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to fetch content from URL: {url}");
+            Logger.ZLogWarning(ex, $"Failed to fetch content from URL: {url}");
             return null;
         }
     }

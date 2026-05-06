@@ -36,7 +36,6 @@ public sealed partial class ModManageServiceTest
         var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([CreateWebLib(TestLibName, "new-sha")]);
-        downloadManagerMock.DownloadLibAsync(Any<LibDto>(), Any<CancellationToken>()).Returns(true);
 
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
@@ -59,7 +58,6 @@ public sealed partial class ModManageServiceTest
         var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([CreateWebMod(libDependencies: [TestLibName])]);
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([CreateWebLib(TestLibName, "lib-sha")]);
-        downloadManagerMock.DownloadLibAsync(Any<LibDto>(), Any<CancellationToken>()).Returns(true);
 
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,

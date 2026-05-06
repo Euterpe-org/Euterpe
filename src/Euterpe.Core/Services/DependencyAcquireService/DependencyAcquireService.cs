@@ -30,18 +30,10 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
         }
     }
 
-    public async Task<string?> GetLatestMelonLoaderVersionAsync(CancellationToken cancellationToken = default)
+    public async Task<string> GetLatestMelonLoaderVersionAsync(CancellationToken cancellationToken = default)
     {
-        try
-        {
-            var dependencies = await GetDependenciesAsync(cancellationToken).ConfigureAwait(false);
-            return dependencies.Single(x => x.Slug is "MelonLoader").Versions.Single().Key;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogWarning(ex, $"Failed to fetch latest MelonLoader version");
-            return null;
-        }
+        var dependencies = await GetDependenciesAsync(cancellationToken).ConfigureAwait(false);
+        return dependencies.Single(x => x.Slug is "MelonLoader").Versions.Single().Key;
     }
 
     #region Injections

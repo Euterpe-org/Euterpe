@@ -33,10 +33,7 @@ internal sealed class GameLocalService : IGameLocalService
             throw new InvalidOperationException($"MelonLoader zip not found at {GameConfig.MelonLoaderZipPath}");
         }
 
-        if (!await ArchiveService.ExtractZipFileAsync(GameConfig.MelonLoaderZipPath, GameConfig.Folder).ConfigureAwait(false))
-        {
-            throw new InvalidOperationException($"Failed to extract MelonLoader zip at {GameConfig.MelonLoaderZipPath}");
-        }
+        await ArchiveService.ExtractZipFileAsync(GameConfig.MelonLoaderZipPath, GameConfig.Folder).ConfigureAwait(false);
 
         if (!FileSystemService.TryDeleteFile(GameConfig.MelonLoaderZipPath))
         {

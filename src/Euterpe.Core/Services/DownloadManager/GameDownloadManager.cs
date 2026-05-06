@@ -5,18 +5,18 @@ namespace Euterpe.Core;
 
 internal sealed class GameDownloadManager : IGameDownloadManager
 {
-    public async Task<bool> DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
+    public Task DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
         var path = Path.Combine(GameConfig.ModsFolder, mod.FileName);
 
-        return await AppDownloadManager.DownloadAssetAsync(mod.DownloadUrl, path, $"mod {mod.Name}", cancellationToken).ConfigureAwait(false);
+        return AppDownloadManager.DownloadAssetAsync(mod.DownloadUrl, path, $"mod {mod.Name}", cancellationToken);
     }
 
-    public async Task<bool> DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
+    public Task DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default)
     {
         var path = Path.Combine(GameConfig.UserLibsFolder, lib.FileName);
 
-        return await AppDownloadManager.DownloadAssetAsync(lib.DownloadUrl, path, $"lib {lib.Name}", cancellationToken).ConfigureAwait(false);
+        return AppDownloadManager.DownloadAssetAsync(lib.DownloadUrl, path, $"lib {lib.Name}", cancellationToken);
     }
 
     public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)

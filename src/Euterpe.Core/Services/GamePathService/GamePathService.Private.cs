@@ -30,7 +30,7 @@ internal sealed partial class GamePathService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to deserialize libraryfolders.vdf");
+            Logger.ZLogWarning(ex, $"Failed to deserialize libraryfolders.vdf");
             return false;
         }
     }

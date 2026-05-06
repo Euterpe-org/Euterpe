@@ -46,7 +46,7 @@ internal sealed class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to delete file {filePath}");
+            Logger.ZLogWarning(ex, $"Failed to delete file {filePath}");
             return false;
         }
     }
@@ -60,7 +60,7 @@ internal sealed class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to move file from {sourcePath} to {destinationPath}");
+            Logger.ZLogWarning(ex, $"Failed to move file from {sourcePath} to {destinationPath}");
             return false;
         }
     }
@@ -80,7 +80,7 @@ internal sealed class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to delete directory {directoryPath}");
+            Logger.ZLogWarning(ex, $"Failed to delete directory {directoryPath}");
             return false;
         }
     }

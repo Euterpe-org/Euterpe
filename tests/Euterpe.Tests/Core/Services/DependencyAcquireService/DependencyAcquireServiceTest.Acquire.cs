@@ -34,7 +34,7 @@ public sealed partial class DependencyAcquireServiceTest
                 Any<EventHandler<DownloadStartedEventArgs>?>(),
                 Any<IProgress<double>?>(),
                 Any<CancellationToken>())
-            .Returns(false);
+            .Throws(new InvalidOperationException("download failed"));
         var sut = CreateService(client, downloader);
 
         var act = () => sut.AcquireForMelonLoaderAsync();
@@ -58,13 +58,7 @@ public sealed partial class DependencyAcquireServiceTest
         await CreateValidDependencyFiles();
         var client = CreateClientReturning(CreateAllMelonLoaderDeps("wrong-expected-sha"));
         var downloader = IAppDownloadManager.Mock();
-        downloader.DownloadFileAsync(
-                Any<string>(),
-                Any<string>(),
-                Any<EventHandler<DownloadStartedEventArgs>?>(),
-                Any<IProgress<double>?>(),
-                Any<CancellationToken>())
-            .Returns(true);
+        // Default mock returns Task.CompletedTask — equivalent to "download succeeded".
         var sut = CreateService(client, downloader);
 
         var act = () => sut.AcquireForMelonLoaderAsync();

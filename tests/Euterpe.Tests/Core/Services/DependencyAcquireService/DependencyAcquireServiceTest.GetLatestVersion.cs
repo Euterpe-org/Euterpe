@@ -16,16 +16,16 @@ public sealed partial class DependencyAcquireServiceTest
     }
 
     [Test]
-    public async Task GetLatestMelonLoaderVersionAsync_ClientThrows_ReturnsNull()
+    public async Task GetLatestMelonLoaderVersionAsync_ClientThrows_Propagates()
     {
         var client = IEuterpeDistributionClient.Mock();
         client.GetLatestDependenciesAsync(true, Any<CancellationToken>())
             .Throws(new HttpRequestException("network down"));
         var sut = CreateService(client);
 
-        var result = await sut.GetLatestMelonLoaderVersionAsync();
+        var act = async () => await sut.GetLatestMelonLoaderVersionAsync();
 
-        await Assert.That(result).IsNull();
+        await Assert.That(act).Throws<HttpRequestException>();
     }
 
     [Test]

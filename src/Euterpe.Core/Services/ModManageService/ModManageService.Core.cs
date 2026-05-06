@@ -13,27 +13,25 @@ internal sealed partial class ModManageService
         await LoadModsAsync().ConfigureAwait(false);
     }
 
-    private async Task<bool> DownloadModCoreAsync(ModDto mod)
+    private async Task DownloadModCoreAsync(ModDto mod)
     {
-        if (!await GameDownloadManager.DownloadModAsync(mod).ConfigureAwait(false))
-        {
-            return false;
-        }
-
+        await GameDownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
         mod.AddLocalInfo();
-
-        return true;
     }
 
     private async Task InstallModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Installing mod: {mod.Name}");
 
-        if (!await DownloadModCoreAsync(mod).ConfigureAwait(false))
+        try
         {
-            Logger.ZLogError($"Failed to install mod {mod.Name}: download failed");
+            await DownloadModCoreAsync(mod).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to install mod {mod.Name}");
             NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, mod.Name);
             return;
         }
@@ -53,9 +51,13 @@ internal sealed partial class ModManageService
             return;
         }
 
-        if (!await DownloadModCoreAsync(mod).ConfigureAwait(false))
+        try
         {
-            Logger.ZLogError($"Failed to update mod {mod.Name}: download failed");
+            await DownloadModCoreAsync(mod).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to update mod {mod.Name}");
             NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, mod.Name);
             return;
         }
@@ -75,9 +77,13 @@ internal sealed partial class ModManageService
             return;
         }
 
-        if (!await DownloadModCoreAsync(mod).ConfigureAwait(false))
+        try
         {
-            Logger.ZLogError($"Failed to reinstall mod {mod.Name}: download failed");
+            await DownloadModCoreAsync(mod).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to reinstall mod {mod.Name}");
             NotificationService.ErrorLight(Notification_Content_Mod_Reinstall_Failed, mod.Name);
             return;
         }
