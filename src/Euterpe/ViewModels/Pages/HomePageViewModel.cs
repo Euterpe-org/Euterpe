@@ -45,6 +45,8 @@ public sealed partial class HomePageViewModel : ViewModelBase
     {
         Logger.ZLogInformation($"Showing setup wizard dialog");
 
+        WizardDialogViewModel.PrepareForShow();
+
         var options = new OverlayDialogOptions
         {
             Title = Wizard_Title_Welcome,

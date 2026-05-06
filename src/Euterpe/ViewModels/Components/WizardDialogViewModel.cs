@@ -23,6 +23,12 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
 
+    public void PrepareForShow()
+    {
+        CurrentPageIndex = 0;
+        State.Reset();
+    }
+
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(false);
