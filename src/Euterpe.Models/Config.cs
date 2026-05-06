@@ -28,7 +28,7 @@ public sealed partial class Config : ObservableObject
     public required MuseDash2Config MuseDash2 { get; init; }
 
     [JsonIgnore]
-    public IReadOnlyList<GameConfig> Games => [MuseDash, MuseDash2];
+    public IReadOnlyList<GameConfig> Games => field ??= [MuseDash, MuseDash2];
 
     [JsonIgnore]
     public GameConfig ActiveGameConfig => ActiveGame switch

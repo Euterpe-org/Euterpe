@@ -2,7 +2,7 @@ namespace Euterpe.ViewModels.Components.Wizard;
 
 public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
 {
-    private Dictionary<WizardOptionKinds, IWizardStep> _stepMap = null!;
+    private Dictionary<WizardOptionKinds, IWizardStep> StepMap => field ??= WizardSteps.ToDictionary(s => s.Kinds);
 
     public override LocalizedString Title => Wizard_Title_SettingUp;
 
@@ -21,8 +21,6 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(false);
-
-        _stepMap = WizardSteps.ToDictionary(s => s.Kinds);
 
         State.ObservePropertyChanged(x => x.IsExecutionFinished)
             .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(CanGoNext)));
@@ -103,7 +101,7 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
         Logger.ZLogInformation($"Running wizard step '{step.Kinds}'");
         try
         {
-            await _stepMap[step.Kinds].ExecuteAsync().ConfigureAwait(true);
+            await StepMap[step.Kinds].ExecuteAsync().ConfigureAwait(true);
             step.Status = WizardStepStatus.Succeeded;
             Logger.ZLogInformation($"Completed wizard step '{step.Kinds}'");
         }

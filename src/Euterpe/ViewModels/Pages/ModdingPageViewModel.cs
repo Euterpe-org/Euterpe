@@ -2,7 +2,7 @@
 
 public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
-    public IReadOnlyList<DropDownButtonItem> DropDownButtons =>
+    public IReadOnlyList<DropDownButtonItem> DropDownButtons => field ??=
     [
         new(DropDownButton_Open,
         [
