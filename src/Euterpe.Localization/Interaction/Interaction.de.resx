@@ -46,12 +46,6 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Bitte wähle den Steam-Ordner aus</value>
   </data>
-  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
-    <value>Löschen von {0} fehlgeschlagen</value>
-  </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
-    <value>MelonLoader-Ordner konnte nicht gelöscht werden</value>
-  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Möchtest du das .NET SDK installieren?</value>
   </data>
@@ -73,24 +67,17 @@
   <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
     <value>MDM-Dateien erfolgreich entpackt</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-    <value>MelonLoader.zip in {0} konnte nicht gelöscht werden
-Bitte lösche sie manuell</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
-    <value>MelonLoader konnte nicht installiert werden: {0}</value>
+    <value>MelonLoader konnte nicht installiert werden</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader wurde erfolgreich installiert</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>MelonLoader konnte nicht deinstalliert werden</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader wurde erfolgreich deinstalliert</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
-    <value>MelonLoader konnte nicht entpackt werden</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
-    <value>MelonLoader-Zip-Datei nicht gefunden</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
     <value>Möchtest du die Mod-Vorlage installieren?</value>

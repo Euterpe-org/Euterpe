@@ -46,12 +46,6 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>请选择 Steam 文件夹</value>
   </data>
-  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
-    <value>{0} 删除失败</value>
-  </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
-    <value>MelonLoader 文件夹删除失败</value>
-  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>确定要安装 .NET SDK 吗？</value>
   </data>
@@ -73,24 +67,17 @@
   <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
     <value>MDM 文件解压成功</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-    <value>无法删除 {0} 下的 MelonLoader.zip
-请尝试手动删除</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
-    <value>MelonLoader 安装失败：{0}</value>
+    <value>MelonLoader 安装失败</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader 安装成功</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>MelonLoader 卸载失败</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader 卸载成功</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
-    <value>MelonLoader 解压失败</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
-    <value>未找到 MelonLoader 压缩包</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
     <value>确定要安装 Mod 模板吗？</value>

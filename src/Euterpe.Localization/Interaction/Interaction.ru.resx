@@ -46,12 +46,6 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Выберите папку Steam</value>
   </data>
-  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
-    <value>Не удалось удалить {0}</value>
-  </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
-    <value>Не удалось удалить папку MelonLoader</value>
-  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Установить .NET SDK?</value>
   </data>
@@ -73,25 +67,17 @@
   <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
     <value>Файлы MDM успешно извлечены</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-    <value>Не удалось удалить MelonLoader.zip в
-{0}
-Попробуйте удалить вручную</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
-    <value>Не удалось установить MelonLoader: {0}</value>
+    <value>Не удалось установить MelonLoader</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader успешно установлен</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>Не удалось удалить MelonLoader</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader успешно удалён</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
-    <value>Не удалось распаковать MelonLoader</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
-    <value>Файл MelonLoader.zip не найден</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
     <value>Установить шаблон мода?</value>

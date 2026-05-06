@@ -46,12 +46,6 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Odaberi mapu Steama</value>
   </data>
-  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
-    <value>Brisanje {0} nije uspjelo</value>
-  </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
-    <value>Brisanje mape MelonLoader nije uspjelo</value>
-  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Želiš li instalirati .NET SDK?</value>
   </data>
@@ -73,25 +67,17 @@
   <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
     <value>MDM datoteke uspješno raspakirane</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-    <value>Nije moguće obrisati MelonLoader.zip u
-{0}
-Pokušaj obrisati ručno</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
-    <value>Instalacija MelonLoadera nije uspjela: {0}</value>
+    <value>Instalacija MelonLoadera nije uspjela</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader je uspješno instaliran</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>Deinstalacija MelonLoadera nije uspjela</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader je uspješno deinstaliran</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
-    <value>Raspakiranje MelonLoadera nije uspjelo</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
-    <value>MelonLoader zip datoteka nije pronađena</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
     <value>Želiš li instalirati predložak moda?</value>

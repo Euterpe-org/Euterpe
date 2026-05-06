@@ -46,12 +46,6 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Silakan pilih folder Steam</value>
   </data>
-  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
-    <value>Gagal menghapus {0}</value>
-  </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
-    <value>Gagal menghapus folder MelonLoader</value>
-  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Apakah Anda yakin ingin menginstal .NET SDK?</value>
   </data>
@@ -73,25 +67,17 @@
   <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
     <value>File MDM berhasil diekstrak</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-    <value>Gagal menghapus MelonLoader.zip di
-{0}
-Coba hapus secara manual</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
-    <value>Gagal menginstal MelonLoader: {0}</value>
+    <value>Gagal menginstal MelonLoader</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader berhasil diinstal</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>Gagal menghapus MelonLoader</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader berhasil dihapus</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
-    <value>Gagal mengekstrak MelonLoader</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
-    <value>File zip MelonLoader tidak ditemukan</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
     <value>Apakah Anda yakin ingin menginstal Mod Template?</value>

@@ -26,57 +26,49 @@ internal sealed class GameLocalService : IGameLocalService
         .Where(x => Path.GetExtension(x) is ".dll")
         .ToArray();
 
-    public async Task<bool> InstallMelonLoaderAsync()
+    public async Task InstallMelonLoaderAsync()
     {
         if (!FileSystemService.CheckFileExists(GameConfig.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Zip_NotFound).ConfigureAwait(false);
-            return false;
+            throw new InvalidOperationException($"MelonLoader zip not found at {GameConfig.MelonLoaderZipPath}");
         }
 
-        if (!await ArchiveService.ExtractZipFileAsync(GameConfig.MelonLoaderZipPath, GameConfig.Folder).ConfigureAwait(true))
+        if (!await ArchiveService.ExtractZipFileAsync(GameConfig.MelonLoaderZipPath, GameConfig.Folder).ConfigureAwait(false))
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Unzip_Failed).ConfigureAwait(false);
-            return false;
+            throw new InvalidOperationException($"Failed to extract MelonLoader zip at {GameConfig.MelonLoaderZipPath}");
         }
 
         if (!FileSystemService.TryDeleteFile(GameConfig.MelonLoaderZipPath))
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_DeleteZip_Failed, GameConfig.MelonLoaderZipPath).ConfigureAwait(false);
-            return false;
+            throw new InvalidOperationException($"Failed to delete MelonLoader zip at {GameConfig.MelonLoaderZipPath}");
         }
 
         Logger.ZLogInformation($"MelonLoader installed successfully");
-        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Install_Success).ConfigureAwait(false);
-        return true;
     }
 
-    public async Task<bool> UninstallMelonLoaderAsync()
+    public Task UninstallMelonLoaderAsync()
     {
         var dobbyPath = Path.Combine(GameConfig.Folder, "dobby.dll");
         var noticePath = Path.Combine(GameConfig.Folder, "NOTICE.txt");
         var versionPath = Path.Combine(GameConfig.Folder, "version.dll");
 
-        foreach (var path in new[] { dobbyPath, noticePath, versionPath })
-        {
-            if (FileSystemService.TryDeleteFile(path, DeleteOption.IgnoreIfNotFound))
-            {
-                continue;
-            }
+        ReadOnlySpan<string> paths = [dobbyPath, noticePath, versionPath];
 
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DeleteFile_Failed, Path.GetFileName(path)).ConfigureAwait(true);
-            return false;
+        foreach (var path in paths)
+        {
+            if (!FileSystemService.TryDeleteFile(path, DeleteOption.IgnoreIfNotFound))
+            {
+                throw new InvalidOperationException($"Failed to delete {path}");
+            }
         }
 
         if (!FileSystemService.TryDeleteDirectory(GameConfig.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_DeleteMelonLoaderFolder_Failed).ConfigureAwait(true);
-            return false;
+            throw new InvalidOperationException($"Failed to delete MelonLoader folder at {GameConfig.MelonLoaderFolder}");
         }
 
         Logger.ZLogInformation($"MelonLoader uninstalled successfully");
-        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Uninstall_Success).ConfigureAwait(true);
-        return true;
+        return Task.CompletedTask;
     }
 
     public async Task<ModDto?> LoadModFromPathAsync(string filePath)

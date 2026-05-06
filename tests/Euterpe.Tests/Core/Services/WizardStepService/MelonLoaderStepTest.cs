@@ -23,7 +23,6 @@ public sealed class MelonLoaderStepTest
     {
         var depService = IDependencyAcquireService.Mock();
         var localService = IGameLocalService.Mock();
-        localService.InstallMelonLoaderAsync().Returns(true);
 
         var step = CreateStep(depService, localService, new MuseDashConfig());
 
@@ -88,7 +87,6 @@ public sealed class MelonLoaderStepTest
         var depService = IDependencyAcquireService.Mock();
         depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).Returns("0.7.0");
         var localService = IGameLocalService.Mock();
-        localService.InstallMelonLoaderAsync().Returns(true);
 
         var step = CreateStep(depService, localService, new MuseDashConfig { MelonLoaderVersion = "0.6.5" });
 

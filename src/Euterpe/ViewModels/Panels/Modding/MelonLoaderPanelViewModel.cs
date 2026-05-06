@@ -29,27 +29,38 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
             var progress = new Progress<double>(value => DownloadProgress = value);
             await DependencyAcquireService.AcquireForMelonLoaderAsync(OnDownloadStarted, progress).ConfigureAwait(true);
-            await GameLocalService.InstallMelonLoaderAsync().ConfigureAwait(false);
+            await GameLocalService.InstallMelonLoaderAsync().ConfigureAwait(true);
         }
         catch (Exception ex)
         {
-            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Install_Failed, ex).ConfigureAwait(false);
             Logger.ZLogError(ex, $"Failed to install MelonLoader");
             MelonLoaderInstallStatus = InstallStatus.NotInstalled;
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Install_Failed).ConfigureAwait(true);
             return;
         }
 
         GameLocalService.ReadMelonLoaderVersion();
         MelonLoaderInstallStatus = InstallStatus.Installed;
+        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Install_Success).ConfigureAwait(true);
     }
 
     [RelayCommand]
     private async Task UninstallMelonLoaderAsync()
     {
-        await GameLocalService.UninstallMelonLoaderAsync().ConfigureAwait(false);
+        try
+        {
+            await GameLocalService.UninstallMelonLoaderAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to uninstall MelonLoader");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Uninstall_Failed).ConfigureAwait(true);
+            return;
+        }
+
         GameConfig.MelonLoaderVersion = null;
         MelonLoaderInstallStatus = InstallStatus.NotInstalled;
-        Logger.ZLogInformation($"MelonLoader has been successfully uninstalled");
+        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Uninstall_Success).ConfigureAwait(true);
     }
 
     private void OnDownloadStarted(object? sender, DownloadStartedEventArgs args)
