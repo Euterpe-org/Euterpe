@@ -12,12 +12,11 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public IReadOnlyList<WizardPageViewModelBase> Pages { get; private set; } = null!;
 
-    public WizardPageViewModelBase? CurrentPage =>
-        Pages.Count > 0 && CurrentPageIndex >= 0 && CurrentPageIndex < Pages.Count ? Pages[CurrentPageIndex] : null;
+    public WizardPageViewModelBase CurrentPage => Pages[CurrentPageIndex];
 
-    public bool CanGoBack => CurrentPage?.CanGoBack is true && CurrentPageIndex > 0;
+    public bool CanGoBack => CurrentPage.CanGoBack && CurrentPageIndex > 0;
 
-    public bool IsLastPage => Pages.Count > 0 && CurrentPageIndex == Pages.Count - 1;
+    public bool IsLastPage => CurrentPageIndex == Pages.Count - 1;
 
     public event EventHandler<object?>? RequestClose;
 
@@ -50,15 +49,15 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             await page.InitializeAsync().ConfigureAwait(true);
         }
 
-        if (singleOption is not null && CurrentPage is { } current)
+        if (singleOption is not null)
         {
-            current.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
+            CurrentPage.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
         }
     }
 
     protected override async Task OnInitializeAsync()
     {
-        await base.OnInitializeAsync().ConfigureAwait(true);
+        await base.OnInitializeAsync().ConfigureAwait(false);
 
         Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
@@ -68,35 +67,17 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     {
         if (IsLastPage)
         {
-            if (State.AllSucceeded)
-            {
-                GameConfig.SetupCompleted = true;
-            }
-            else
-            {
-                Logger.ZLogWarning($"Wizard closed without all steps succeeding");
-            }
-
+            GameConfig.SetupCompleted = true;
             Close();
             return;
         }
 
         CurrentPageIndex++;
-
-        if (CurrentPage is { } page)
-        {
-            await page.OnEnterAsync().ConfigureAwait(true);
-        }
+        await CurrentPage.OnEnterAsync().ConfigureAwait(false);
     }
 
     [RelayCommand]
-    private void Back()
-    {
-        if (CurrentPageIndex > 0)
-        {
-            CurrentPageIndex--;
-        }
-    }
+    private void Back() => CurrentPageIndex--;
 
     #region Injections
 

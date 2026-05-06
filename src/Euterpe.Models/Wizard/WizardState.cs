@@ -8,15 +8,12 @@ public sealed partial class WizardState : ObservableObject
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsRunning))]
-    [NotifyPropertyChangedFor(nameof(IsFinished))]
     [NotifyPropertyChangedFor(nameof(AllSucceeded))]
     public partial WizardExecutionStage Stage { get; set; }
 
     public bool IsRunning => Stage is WizardExecutionStage.Running;
 
-    public bool IsFinished => Stage is WizardExecutionStage.Finished;
-
-    public bool AllSucceeded => IsFinished && Steps.All(s => s.Status is WizardStepStatus.Succeeded);
+    public bool AllSucceeded => Stage is WizardExecutionStage.Finished && Steps.All(s => s.Status is WizardStepStatus.Succeeded);
 
     public void Reset()
     {

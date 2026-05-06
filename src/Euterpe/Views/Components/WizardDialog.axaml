@@ -53,7 +53,7 @@
                     Classes="Primary"
                     Command="{Binding NextCommand}"
                     Content="{Binding CurrentPage.NextButtonText}"
-                    IsEnabled="{Binding CurrentPage.CanGoNext, FallbackValue=False}" />
+                    IsEnabled="{Binding CurrentPage.CanGoNext}" />
                 <Button
                     DockPanel.Dock="Right"
                     Command="{Binding BackCommand}"

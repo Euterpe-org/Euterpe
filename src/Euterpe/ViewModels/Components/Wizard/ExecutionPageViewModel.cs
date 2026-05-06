@@ -8,7 +8,7 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
 
     public override bool CanGoBack => false;
 
-    public override bool CanGoNext => State.IsFinished;
+    public override bool CanGoNext => State.AllSucceeded;
 
     public override LocalizedString NextButtonText => Button_Confirm;
 
