@@ -31,8 +31,8 @@
                     <wizard:GamePathPage />
                 </DataTemplate>
                 <DataTemplate
-                    DataType="{x:Type wvm:SelectionPageViewModel}">
-                    <wizard:SelectionPage />
+                    DataType="{x:Type wvm:RolePageViewModel}">
+                    <wizard:RolePage />
                 </DataTemplate>
                 <DataTemplate
                     DataType="{x:Type wvm:ExecutionPageViewModel}">

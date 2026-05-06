@@ -9,14 +9,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Euterpe.Controls.Models"
     xmlns:vm="using:Euterpe.ViewModels.Components.Wizard"
-    x:Class="Euterpe.Views.Components.Wizard.SelectionPage"
-    x:DataType="vm:SelectionPageViewModel"
+    x:Class="Euterpe.Views.Components.Wizard.RolePage"
+    x:DataType="vm:RolePageViewModel"
     d:DesignHeight="460"
     d:DesignWidth="850"
     mc:Ignorable="d">
 
     <Design.DataContext>
-        <vm:SelectionPageViewModel />
+        <vm:RolePageViewModel />
     </Design.DataContext>
 
     <Grid

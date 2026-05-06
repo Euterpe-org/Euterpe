@@ -1,6 +1,6 @@
 namespace Euterpe.ViewModels.Components.Wizard;
 
-public sealed class SelectionPageViewModel : WizardPageViewModelBase
+public sealed class RolePageViewModel : WizardPageViewModelBase
 {
     private bool _applyingPreset;
 
@@ -33,7 +33,7 @@ public sealed class SelectionPageViewModel : WizardPageViewModelBase
             .Where(this, (_, self) => !self._applyingPreset)
             .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(SelectedRole)));
 
-        Logger.ZLogInformation($"{nameof(SelectionPageViewModel)} Initialized");
+        Logger.ZLogInformation($"{nameof(RolePageViewModel)} Initialized");
     }
 
     private void ApplyPreset(WizardIdentity identity)
@@ -82,7 +82,7 @@ public sealed class SelectionPageViewModel : WizardPageViewModelBase
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required ILogger<SelectionPageViewModel> Logger { get; init; }
+    public required ILogger<RolePageViewModel> Logger { get; init; }
 
     #endregion Injections
 }
