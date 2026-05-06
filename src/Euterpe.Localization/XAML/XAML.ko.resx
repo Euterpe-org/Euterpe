@@ -22,6 +22,9 @@
   <data name="Button_Back" xml:space="preserve">
     <value>뒤로</value>
   </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>찾아보기...</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>업데이트 확인</value>
   </data>
@@ -373,8 +376,14 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>스페인어</value>
   </data>
+  <data name="Wizard_Description_GamePath" xml:space="preserve">
+    <value>게임이 설치된 위치를 알려주세요</value>
+  </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>역할과 작업을 선택하여 시작하세요</value>
+  </data>
+  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+    <value>유효한 게임 폴더가 아닙니다</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>차터</value>
@@ -450,6 +459,9 @@
   </data>
   <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>호환되지 않는 모드 제거</value>
+  </data>
+  <data name="Wizard_Title_GamePath" xml:space="preserve">
+    <value>게임 폴더 찾기</value>
   </data>
   <data name="Wizard_Title_SettingUp" xml:space="preserve">
     <value>Euterpe 설정 중</value>

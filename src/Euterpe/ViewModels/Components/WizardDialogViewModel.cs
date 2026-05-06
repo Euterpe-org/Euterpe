@@ -10,7 +10,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [NotifyPropertyChangedFor(nameof(IsLastPage))]
     public partial int CurrentPageIndex { get; set; }
 
-    public IReadOnlyList<WizardPageViewModelBase> Pages => [SelectionPage, ExecutionPage];
+    public IReadOnlyList<WizardPageViewModelBase> Pages => [GamePathPage, SelectionPage, ExecutionPage];
 
     public WizardPageViewModelBase? CurrentPage =>
         Pages.Count > 0 && CurrentPageIndex >= 0 && CurrentPageIndex < Pages.Count ? Pages[CurrentPageIndex] : null;
@@ -84,6 +84,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     [UsedImplicitly]
     public required ExecutionPageViewModel ExecutionPage { get; init; }
+
+    [UsedImplicitly]
+    public required GamePathPageViewModel GamePathPage { get; init; }
 
     [UsedImplicitly]
     public required SelectionPageViewModel SelectionPage { get; init; }

@@ -2,5 +2,7 @@ namespace Euterpe.Abstractions;
 
 public interface IGameSettingService
 {
-    Task ValidateGameAsync();
+    Task ValidateGameFolderAsync();
+
+    void EnsureGameFolders();
 }

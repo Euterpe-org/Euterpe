@@ -27,6 +27,10 @@
             Content="{Binding CurrentPage}">
             <TransitioningContentControl.DataTemplates>
                 <DataTemplate
+                    DataType="{x:Type wvm:GamePathPageViewModel}">
+                    <wizard:GamePathPage />
+                </DataTemplate>
+                <DataTemplate
                     DataType="{x:Type wvm:SelectionPageViewModel}">
                     <wizard:SelectionPage />
                 </DataTemplate>
