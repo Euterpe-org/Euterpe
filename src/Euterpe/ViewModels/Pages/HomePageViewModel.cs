@@ -24,7 +24,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
         }
         else
         {
-            await ShowWizardDialogAsync().ConfigureAwait(true);
+            await ShowFullWizardAsync().ConfigureAwait(true);
         }
 
         GameSettingService.EnsureGameFolders();
@@ -40,15 +40,36 @@ public sealed partial class HomePageViewModel : ViewModelBase
         Logger.ZLogInformation($"{nameof(HomePageViewModel)} Initialized");
     }
 
-    private async Task ShowWizardDialogAsync(WizardOptionKinds? singleOption = null)
+    [RelayCommand]
+    private Task LaunchGameAsync()
     {
-        Logger.ZLogInformation($"Showing setup wizard dialog (singleOption={singleOption})");
+        return GameConfig.GameMode switch
+        {
+            GameMode.Modded => GameLaunchService.LaunchModdedGameAsync(),
+            GameMode.Vanilla => GameLaunchService.LaunchVanillaGameAsync(),
+            _ => throw new UnreachableException()
+        };
+    }
 
-        await WizardDialogViewModel.PrepareForShowAsync(singleOption).ConfigureAwait(true);
+    private async Task ShowFullWizardAsync()
+    {
+        Logger.ZLogInformation($"Showing full setup wizard");
+        await WizardDialogViewModel.PrepareForFullSetupAsync().ConfigureAwait(true);
+        await ShowWizardDialogAsync(Wizard_Title_Welcome).ConfigureAwait(true);
+    }
 
+    private async Task ShowOptionWizardAsync(WizardOptionKinds kind)
+    {
+        Logger.ZLogInformation($"Showing single-option wizard for {kind}");
+        await WizardDialogViewModel.PrepareForOptionAsync(kind).ConfigureAwait(true);
+        await ShowWizardDialogAsync(Wizard_Title_SettingUp).ConfigureAwait(true);
+    }
+
+    private async Task ShowWizardDialogAsync(string title)
+    {
         var options = new OverlayDialogOptions
         {
-            Title = singleOption is null ? Wizard_Title_Welcome : Wizard_Title_SettingUp,
+            Title = title,
             CanDragMove = false,
             CanResize = false,
             IsCloseButtonVisible = false
@@ -62,6 +83,26 @@ public sealed partial class HomePageViewModel : ViewModelBase
         finally
         {
             GameSwitcher.CanSwitch = true;
+        }
+    }
+
+    private async Task BindAccountAsync()
+    {
+        var request = await UidProvider.GetMuseDashUidRequestAsync().ConfigureAwait(false);
+        if (request is null)
+        {
+            Logger.ZLogWarning($"Failed to get MuseDash user ID. Skipping account binding.");
+            return;
+        }
+
+        try
+        {
+            await AccountClient.BindVanillaAccountAsync(request).ConfigureAwait(false);
+            Logger.ZLogInformation($"Successfully bound MuseDash account.");
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to bind MuseDash account.");
         }
     }
 
@@ -91,39 +132,6 @@ public sealed partial class HomePageViewModel : ViewModelBase
         }
     }
 
-    [RelayCommand]
-    private Task LaunchGameAsync()
-    {
-        return GameConfig.GameMode switch
-        {
-            GameMode.Modded => GameLaunchService.LaunchModdedGameAsync(),
-            GameMode.Vanilla => GameLaunchService.LaunchVanillaGameAsync(),
-            _ => throw new UnreachableException()
-        };
-    }
-
-    partial void OnSelectedGameModeIndexChanged(int value) => GameConfig.GameMode = (GameMode)value;
-
-    private async Task BindAccountAsync()
-    {
-        var request = await UidProvider.GetMuseDashUidRequestAsync().ConfigureAwait(false);
-        if (request is null)
-        {
-            Logger.ZLogWarning($"Failed to get MuseDash user ID. Skipping account binding.");
-            return;
-        }
-
-        try
-        {
-            await AccountClient.BindVanillaAccountAsync(request).ConfigureAwait(false);
-            Logger.ZLogInformation($"Successfully bound MuseDash account.");
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to bind MuseDash account.");
-        }
-    }
-
     private async Task CheckMelonLoaderAsync()
     {
         if (GameConfig.MelonLoaderSemVersion is not null)
@@ -131,9 +139,11 @@ public sealed partial class HomePageViewModel : ViewModelBase
             return;
         }
 
-        Logger.ZLogInformation($"MelonLoader not installed, opening single-step wizard");
-        await ShowWizardDialogAsync(WizardOptionKinds.MelonLoader).ConfigureAwait(false);
+        Logger.ZLogInformation($"MelonLoader not installed, opening single-option wizard");
+        await ShowOptionWizardAsync(WizardOptionKinds.MelonLoader).ConfigureAwait(false);
     }
+
+    partial void OnSelectedGameModeIndexChanged(int value) => GameConfig.GameMode = (GameMode)value;
 
     #region Injections
 
