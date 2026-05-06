@@ -9,13 +9,12 @@ public sealed partial class GamePathPageViewModel : WizardPageViewModelBase
     public override bool CanGoNext => IsSelectedFolderValid;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsSelectedFolderValid))]
-    [NotifyPropertyChangedFor(nameof(ShowInvalidMessage))]
-    [NotifyPropertyChangedFor(nameof(CanGoNext))]
     public partial string? SelectedFolder { get; set; }
 
-    public bool IsSelectedFolderValid =>
-        !SelectedFolder.IsNullOrEmpty() && GamePaths.CheckIsValidGameFolder(SelectedFolder);
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowInvalidMessage))]
+    [NotifyPropertyChangedFor(nameof(CanGoNext))]
+    public partial bool IsSelectedFolderValid { get; set; }
 
     public bool ShowInvalidMessage => !SelectedFolder.IsNullOrEmpty() && !IsSelectedFolderValid;
 
@@ -44,7 +43,11 @@ public sealed partial class GamePathPageViewModel : WizardPageViewModelBase
         Logger.ZLogInformation($"User selected {GameConfig.DisplayName} folder: {folder}");
     }
 
-    partial void OnSelectedFolderChanged(string? value) => GameConfig.Folder = value;
+    partial void OnSelectedFolderChanged(string? value)
+    {
+        GameConfig.Folder = value;
+        IsSelectedFolderValid = !value.IsNullOrEmpty() && GamePaths.CheckIsValidGameFolder(value);
+    }
 
     #region Injections
 
