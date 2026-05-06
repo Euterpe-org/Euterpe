@@ -52,9 +52,6 @@
   <data name="Button_Retry" xml:space="preserve">
     <value>重试</value>
   </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>跳过</value>
-  </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>源代码</value>
   </data>
@@ -141,9 +138,6 @@
   </data>
   <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
     <value>未安装</value>
-  </data>
-  <data name="MelonLoader_State_Preparing" xml:space="preserve">
-    <value>准备中...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>模组开发所需</value>
