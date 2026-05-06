@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models;
+﻿namespace Euterpe.Models.Charts;
 
 public sealed partial class InfoJson : ObservableObject
 {

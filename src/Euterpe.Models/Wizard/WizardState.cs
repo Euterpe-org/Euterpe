@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Euterpe.Models.Games;
+namespace Euterpe.Models.Wizard;
 
 public sealed partial class WizardState : ObservableObject
 {

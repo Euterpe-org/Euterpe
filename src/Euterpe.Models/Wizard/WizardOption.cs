@@ -1,4 +1,4 @@
-namespace Euterpe.Models.Games;
+namespace Euterpe.Models.Wizard;
 
 public sealed partial class WizardOption(WizardOptionKinds kinds, LocalizedString displayName, LocalizedString description) : ObservableObject
 {

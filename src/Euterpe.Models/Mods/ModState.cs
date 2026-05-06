@@ -1,4 +1,4 @@
-namespace Euterpe.Models.Enums;
+namespace Euterpe.Models.Mods;
 
 public enum ModState
 {

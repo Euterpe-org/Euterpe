@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:enums="using:Euterpe.Models.Enums"
+    xmlns:mods="using:Euterpe.Models.Mods"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Panels.Modding"
@@ -68,18 +68,18 @@
                     </DockPanel.Styles>
 
                     <TextBlock
-                        Classes.Installed="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Installed}, Mode=OneWay}"
-                        Classes.NotInstalled="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.NotInstalled}, Mode=OneWay}"
+                        Classes.Installed="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Installed}, Mode=OneWay}"
+                        Classes.NotInstalled="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.NotInstalled}, Mode=OneWay}"
                         FontSize="16"
                         Foreground="{DynamicResource SecondaryTextColor}"
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
                         Margin="0,0,6,0"
                         VerticalAlignment="Center" />
 
                     <TextBlock
                         FontSize="16"
                         Foreground="{DynamicResource SecondaryTextColor}"
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
                         Margin="0,0,6,0"
                         Text="{Binding DownloadText, Mode=OneWay}"
                         VerticalAlignment="Center" />
@@ -98,7 +98,7 @@
 
                     <!--  Buttons  -->
                     <StackPanel
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
                         Orientation="Horizontal"
                         Spacing="30">
                         <Button
@@ -119,7 +119,7 @@
                     <ProgressBar
                         Value="{Binding DownloadProgress, Mode=OneWay}"
                         Classes="Primary"
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static enums:InstallStatus.Downloading}, Mode=OneWay}"
+                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
                         ShowProgressText="True"
                         VerticalAlignment="Center"
                         Width="260" />

@@ -1,4 +1,4 @@
-using Euterpe.Models.Enums;
+using Euterpe.Models.Wizard;
 
 namespace Euterpe.Controls.Models;
 

@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models.Enums;
+﻿namespace Euterpe.Models.Common;
 
 [JsonConverter(typeof(JsonStringEnumConverter<UpdateChannel>))]
 public enum UpdateChannel

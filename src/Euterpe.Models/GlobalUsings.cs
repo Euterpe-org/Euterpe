@@ -1,7 +1,11 @@
 global using System.Text.Json.Serialization;
 global using CommunityToolkit.Mvvm.ComponentModel;
-global using Euterpe.Models.Enums;
+global using Euterpe.Models.Auth;
+global using Euterpe.Models.Charts;
+global using Euterpe.Models.Common;
 global using Euterpe.Models.Games;
+global using Euterpe.Models.Mods;
+global using Euterpe.Models.Wizard;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Extensions;
 global using JetBrains.Annotations;

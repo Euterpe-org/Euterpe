@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:games="using:Euterpe.Models.Games"
+    xmlns:wizard="using:Euterpe.Models.Wizard"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Components.Wizard"
@@ -72,7 +72,7 @@
                     ItemsSource="{Binding State.Steps}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate
-                            x:DataType="games:WizardStepState">
+                            x:DataType="wizard:WizardStepState">
                             <Grid
                                 ColumnDefinitions="80,*,Auto"
                                 Margin="0,4">

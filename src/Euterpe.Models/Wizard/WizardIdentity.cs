@@ -1,4 +1,4 @@
-namespace Euterpe.Models.Enums;
+namespace Euterpe.Models.Wizard;
 
 public enum WizardIdentity
 {

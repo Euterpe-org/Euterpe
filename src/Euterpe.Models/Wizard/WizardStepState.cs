@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Euterpe.Models.Games;
+namespace Euterpe.Models.Wizard;
 
 public sealed partial class WizardStepState : ObservableObject
 {

@@ -1,6 +1,6 @@
 using Euterpe.Contracts.Account;
 
-namespace Euterpe.Models;
+namespace Euterpe.Models.Auth;
 
 public sealed partial class AuthState : ObservableObject
 {

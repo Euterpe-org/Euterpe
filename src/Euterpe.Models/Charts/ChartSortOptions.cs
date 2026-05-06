@@ -1,4 +1,4 @@
-namespace Euterpe.Models.Enums;
+namespace Euterpe.Models.Charts;
 
 public enum ChartSortOptions
 {

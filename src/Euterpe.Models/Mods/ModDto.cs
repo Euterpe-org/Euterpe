@@ -1,6 +1,6 @@
 using Euterpe.Contracts.Mods;
 
-namespace Euterpe.Models;
+namespace Euterpe.Models.Mods;
 
 public sealed partial class ModDto : ObservableObject
 {
