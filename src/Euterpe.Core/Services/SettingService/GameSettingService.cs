@@ -2,49 +2,42 @@ namespace Euterpe.Core;
 
 internal sealed class GameSettingService : IGameSettingService
 {
-    public async Task ValidateGameAsync()
+    public async Task ValidateGameFolderAsync()
     {
-        Logger.ZLogInformation($"Checking for valid {GameConfig.DisplayName} setting...");
+        Logger.ZLogInformation($"Checking for valid {GameConfig.DisplayName} folder...");
 
-        await CheckGameFolderAsync().ConfigureAwait(true);
-        CreateNecessaryFolders();
-
-        Logger.ZLogInformation($"{GameConfig.DisplayName} setting validated");
-    }
-
-    private async Task CheckGameFolderAsync()
-    {
-        if (GameConfig.Folder.IsNullOrEmpty() || !GamePaths.CheckIsValidGameFolder(GameConfig.Folder))
+        if (!GameConfig.Folder.IsNullOrEmpty() && GamePaths.CheckIsValidGameFolder(GameConfig.Folder))
         {
-            Logger.ZLogError($"Stored {GameConfig.DisplayName} folder is invalid");
-
-            var useDetectedPath = false;
-            if (GamePaths.TryGetGameFolder(out var gameFolder))
-            {
-                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_Confirm_DetectedMuseDashPath, gameFolder).ConfigureAwait(true);
-                useDetectedPath = result is MessageBoxResult.Yes;
-            }
-
-            if (useDetectedPath)
-            {
-                GameConfig.Folder = gameFolder;
-            }
-            else
-            {
-                Logger.ZLogInformation($"Letting user choose {GameConfig.DisplayName} folder...");
-                var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_ChooseMuseDashFolder).ConfigureAwait(true);
-                if (result is not MessageBoxResult.Yes)
-                {
-                    Logger.ZLogInformation($"User cancelled {GameConfig.DisplayName} folder selection. Exiting application.");
-                    Environment.Exit(0);
-                }
-
-                GameConfig.Folder = await GameLocalService.GetGameFolderAsync().ConfigureAwait(true);
-            }
+            return;
         }
+
+        Logger.ZLogError($"Stored {GameConfig.DisplayName} folder is invalid");
+
+        var useDetectedPath = false;
+        if (GamePaths.TryGetGameFolder(out var gameFolder))
+        {
+            var result = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_Confirm_DetectedMuseDashPath, gameFolder).ConfigureAwait(true);
+            useDetectedPath = result is MessageBoxResult.Yes;
+        }
+
+        if (useDetectedPath)
+        {
+            GameConfig.Folder = gameFolder;
+            return;
+        }
+
+        Logger.ZLogInformation($"Letting user choose {GameConfig.DisplayName} folder...");
+        var confirm = await MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_ChooseMuseDashFolder).ConfigureAwait(true);
+        if (confirm is not MessageBoxResult.Yes)
+        {
+            Logger.ZLogInformation($"User cancelled {GameConfig.DisplayName} folder selection. Exiting application.");
+            Environment.Exit(0);
+        }
+
+        GameConfig.Folder = await GameLocalService.GetGameFolderAsync().ConfigureAwait(true);
     }
 
-    private void CreateNecessaryFolders()
+    public void EnsureGameFolders()
     {
         Directory.CreateDirectory(GameConfig.ModsFolder);
         Directory.CreateDirectory(GameConfig.UserLibsFolder);

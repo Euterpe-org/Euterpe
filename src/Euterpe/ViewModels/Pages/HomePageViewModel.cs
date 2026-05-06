@@ -19,12 +19,16 @@ public sealed partial class HomePageViewModel : ViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(true);
         await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
 
-        await GameSettingService.ValidateGameAsync().ConfigureAwait(true);
-
-        if (!GameConfig.SetupCompleted)
+        if (GameConfig.SetupCompleted)
+        {
+            await GameSettingService.ValidateGameFolderAsync().ConfigureAwait(true);
+        }
+        else
         {
             await ShowWizardDialogAsync().ConfigureAwait(true);
         }
+
+        GameSettingService.EnsureGameFolders();
 
         await GameLocalService.ReadGameInformationAsync().ConfigureAwait(true);
         GameLocalService.ReadMelonLoaderVersion();

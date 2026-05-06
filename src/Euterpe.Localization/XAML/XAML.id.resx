@@ -22,6 +22,9 @@
   <data name="Button_Back" xml:space="preserve">
     <value>Kembali</value>
   </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>Telusuri...</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Periksa Pembaruan</value>
   </data>
@@ -373,8 +376,14 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanyol</value>
   </data>
+  <data name="Wizard_Description_GamePath" xml:space="preserve">
+    <value>Beri tahu kami di mana game terpasang</value>
+  </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Pilih peran dan tugas Anda untuk memulai</value>
+  </data>
+  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+    <value>Bukan folder game yang valid</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>Charter</value>
@@ -450,6 +459,9 @@
   </data>
   <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>Hapus mod yang tidak kompatibel</value>
+  </data>
+  <data name="Wizard_Title_GamePath" xml:space="preserve">
+    <value>Cari folder game</value>
   </data>
   <data name="Wizard_Title_SettingUp" xml:space="preserve">
     <value>Menyiapkan Euterpe</value>

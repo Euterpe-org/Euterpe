@@ -1,0 +1,85 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.ViewModels.Components.Wizard"
+    x:Class="Euterpe.Views.Components.Wizard.GamePathPage"
+    x:DataType="vm:GamePathPageViewModel"
+    d:DesignHeight="460"
+    d:DesignWidth="850"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:GamePathPageViewModel />
+    </Design.DataContext>
+
+    <Grid
+        Margin="28,24"
+        RowDefinitions="Auto,*">
+
+        <!--  Header  -->
+        <StackPanel
+            Grid.Row="0"
+            Margin="0,0,0,24"
+            Spacing="4">
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="12">
+                <Image
+                    Height="36"
+                    RenderOptions.BitmapInterpolationMode="HighQuality"
+                    Source="/Assets/Logo.webp" />
+                <TextBlock
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Title_GamePath}}"
+                    Theme="{StaticResource TitleTextBlock}"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+            <TextBlock
+                Foreground="{DynamicResource SecondaryTextColor}"
+                Margin="48,0,0,0"
+                Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Description_GamePath}}" />
+        </StackPanel>
+
+        <!--  Body  -->
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            MaxWidth="560"
+            Spacing="14"
+            VerticalAlignment="Center">
+
+            <!--  Selected folder display + browse  -->
+            <Grid
+                ColumnDefinitions="*,Auto">
+                <Border
+                    Grid.Column="0"
+                    Background="{DynamicResource SecondaryCardColor}"
+                    CornerRadius="6"
+                    Margin="0,0,8,0"
+                    Padding="12,8"
+                    Theme="{DynamicResource CardBorder}">
+                    <TextBlock
+                        FontSize="12"
+                        Text="{Binding SelectedFolder, FallbackValue=''}"
+                        TextTrimming="CharacterEllipsis"
+                        VerticalAlignment="Center" />
+                </Border>
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding BrowseCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Browse}}" />
+            </Grid>
+
+            <!--  Validation message  -->
+            <TextBlock
+                FontSize="12"
+                Foreground="#D14343"
+                IsVisible="{Binding ShowInvalidMessage}"
+                Text="{Localize {x:Static loc:XAMLLiteral.Wizard_GamePath_Invalid}}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

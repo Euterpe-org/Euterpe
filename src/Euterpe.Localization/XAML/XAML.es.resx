@@ -22,6 +22,9 @@
   <data name="Button_Back" xml:space="preserve">
     <value>Atrás</value>
   </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>Examinar...</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Buscar actualizaciones</value>
   </data>
@@ -373,8 +376,14 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Español</value>
   </data>
+  <data name="Wizard_Description_GamePath" xml:space="preserve">
+    <value>Indícanos dónde está instalado el juego</value>
+  </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Elige tu rol y tareas para comenzar</value>
+  </data>
+  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+    <value>No es una carpeta de juego válida</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>Charter</value>
@@ -450,6 +459,9 @@
   </data>
   <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>Eliminar mods incompatibles</value>
+  </data>
+  <data name="Wizard_Title_GamePath" xml:space="preserve">
+    <value>Localizar carpeta del juego</value>
   </data>
   <data name="Wizard_Title_SettingUp" xml:space="preserve">
     <value>Configurando Euterpe</value>

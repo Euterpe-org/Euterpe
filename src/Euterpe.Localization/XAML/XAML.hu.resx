@@ -22,6 +22,9 @@
   <data name="Button_Back" xml:space="preserve">
     <value>Vissza</value>
   </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>Tallózás...</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Frissítés keresése</value>
   </data>
@@ -373,8 +376,14 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanyol</value>
   </data>
+  <data name="Wizard_Description_GamePath" xml:space="preserve">
+    <value>Add meg, hol van telepítve a játék</value>
+  </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Válaszd ki a szereped és a feladatokat a kezdéshez</value>
+  </data>
+  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+    <value>Érvénytelen játékmappa</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
     <value>Charter</value>
@@ -450,6 +459,9 @@
   </data>
   <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>Inkompatibilis modok eltávolítása</value>
+  </data>
+  <data name="Wizard_Title_GamePath" xml:space="preserve">
+    <value>Játékmappa keresése</value>
   </data>
   <data name="Wizard_Title_SettingUp" xml:space="preserve">
     <value>Euterpe Beállítása</value>
