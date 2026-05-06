@@ -2,13 +2,11 @@ using System.Diagnostics;
 
 namespace Euterpe.Models.Games;
 
-public sealed partial class WizardStepState(WizardOption option) : ObservableObject
+public sealed partial class WizardStepState : ObservableObject
 {
-    public WizardOption Option { get; } = option;
+    public required WizardOptionKinds Kinds { get; init; }
 
-    public WizardOptionKinds Kinds => Option.Kinds;
-
-    public LocalizedString DisplayName => Option.DisplayName;
+    public required LocalizedString DisplayName { get; init; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanRetry))]

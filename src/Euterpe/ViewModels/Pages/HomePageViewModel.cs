@@ -1,5 +1,4 @@
 using Euterpe.Core.Http.Clients;
-using Semver;
 
 namespace Euterpe.ViewModels.Pages;
 
@@ -41,15 +40,15 @@ public sealed partial class HomePageViewModel : ViewModelBase
         Logger.ZLogInformation($"{nameof(HomePageViewModel)} Initialized");
     }
 
-    private async Task ShowWizardDialogAsync()
+    private async Task ShowWizardDialogAsync(WizardOptionKinds? singleOption = null)
     {
-        Logger.ZLogInformation($"Showing setup wizard dialog");
+        Logger.ZLogInformation($"Showing setup wizard dialog (singleOption={singleOption})");
 
-        WizardDialogViewModel.PrepareForShow();
+        await WizardDialogViewModel.PrepareForShowAsync(singleOption).ConfigureAwait(true);
 
         var options = new OverlayDialogOptions
         {
-            Title = Wizard_Title_Welcome,
+            Title = singleOption is null ? Wizard_Title_Welcome : Wizard_Title_SettingUp,
             CanDragMove = false,
             CanResize = false,
             IsCloseButtonVisible = false
@@ -127,31 +126,13 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     private async Task CheckMelonLoaderAsync()
     {
-        if (GameConfig.MelonLoaderSemVersion is not { } localVersion)
-        {
-            Logger.ZLogInformation($"MelonLoader not installed, prompting user");
-
-            await MessageBoxService.NoticeAsync(MessageBox_Content_MelonLoader_NotInstalled).ConfigureAwait(true);
-            await NavigationService.NavigateToAsync("/modding/melonloader").ConfigureAwait(false);
-            return;
-        }
-
-        var version = await DependencyAcquireService.GetLatestMelonLoaderVersionAsync().ConfigureAwait(true);
-        if (!SemVersion.TryParse(version, out var latestVersion))
-        {
-            Logger.ZLogWarning($"Failed to parse MelonLoader version {version}");
-            return;
-        }
-
-        if (localVersion.ComparePrecedenceTo(latestVersion) >= 0)
+        if (GameConfig.MelonLoaderSemVersion is not null)
         {
             return;
         }
 
-        Logger.ZLogInformation($"MelonLoader outdated: {localVersion} < {latestVersion}, prompting user");
-
-        await MessageBoxService.NoticeAsync(MessageBox_Content_MelonLoader_Outdated, localVersion, latestVersion).ConfigureAwait(true);
-        await NavigationService.NavigateToAsync("/modding/melonloader").ConfigureAwait(true);
+        Logger.ZLogInformation($"MelonLoader not installed, opening single-step wizard");
+        await ShowWizardDialogAsync(WizardOptionKinds.MelonLoader).ConfigureAwait(false);
     }
 
     #region Injections
@@ -161,9 +142,6 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }
-
-    [UsedImplicitly]
-    public required IDependencyAcquireService DependencyAcquireService { get; init; }
 
     [UsedImplicitly]
     public required IGameLaunchService GameLaunchService { get; init; }

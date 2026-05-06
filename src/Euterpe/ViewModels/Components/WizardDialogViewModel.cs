@@ -10,7 +10,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [NotifyPropertyChangedFor(nameof(IsLastPage))]
     public partial int CurrentPageIndex { get; set; }
 
-    public IReadOnlyList<WizardPageViewModelBase> Pages => field ??= [GamePathPage, RolePage, ExecutionPage];
+    public IReadOnlyList<WizardPageViewModelBase> Pages { get; private set; } = null!;
 
     public WizardPageViewModelBase? CurrentPage =>
         Pages.Count > 0 && CurrentPageIndex >= 0 && CurrentPageIndex < Pages.Count ? Pages[CurrentPageIndex] : null;
@@ -23,24 +23,42 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
 
     public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
 
-    public void PrepareForShow()
+    public async Task PrepareForShowAsync(WizardOptionKinds? singleOption = null)
     {
-        CurrentPageIndex = 0;
         State.Reset();
+
+        if (singleOption is { } kinds)
+        {
+            Pages = [ExecutionPage];
+            foreach (var option in GameConfig.WizardOptions)
+            {
+                option.IsSelected = option.Kinds == kinds;
+            }
+        }
+        else
+        {
+            Pages = [GamePathPage, RolePage, ExecutionPage];
+        }
+
+        CurrentPageIndex = 0;
+        OnPropertyChanged(nameof(CurrentPage));
+        OnPropertyChanged(nameof(CanGoBack));
+        OnPropertyChanged(nameof(IsLastPage));
+
+        foreach (var page in Pages)
+        {
+            await page.InitializeAsync().ConfigureAwait(true);
+        }
+
+        if (singleOption is not null && CurrentPage is { } current)
+        {
+            current.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
+        }
     }
 
     protected override async Task OnInitializeAsync()
     {
-        await base.OnInitializeAsync().ConfigureAwait(false);
-
-        foreach (var page in Pages)
-        {
-            await page.InitializeAsync().ConfigureAwait(false);
-        }
-
-        OnPropertyChanged(nameof(CurrentPage));
-        OnPropertyChanged(nameof(CanGoBack));
-        OnPropertyChanged(nameof(IsLastPage));
+        await base.OnInitializeAsync().ConfigureAwait(true);
 
         Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }

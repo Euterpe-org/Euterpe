@@ -96,12 +96,6 @@ OK をクリックしてインストールします</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>MelonLoader のインストールに失敗しました：{0}</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
-    <value>MelonLoader がインストールされていません。MOD の実行に必須です。インストールしてください。</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
-    <value>現在の MelonLoader バージョン ({0}) は推奨バージョン ({1}) より古いです。最適な体験のためアップグレードしてください。</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader のインストールが完了しました</value>
   </data>

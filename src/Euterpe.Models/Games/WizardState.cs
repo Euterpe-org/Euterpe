@@ -7,17 +7,20 @@ public sealed partial class WizardState : ObservableObject
     public ObservableCollection<WizardStepState> Steps { get; } = [];
 
     [ObservableProperty]
-    public partial bool IsRunning { get; set; }
+    [NotifyPropertyChangedFor(nameof(IsRunning))]
+    [NotifyPropertyChangedFor(nameof(IsFinished))]
+    [NotifyPropertyChangedFor(nameof(AllSucceeded))]
+    public partial WizardExecutionStage Stage { get; set; }
 
-    [ObservableProperty]
-    public partial bool IsExecutionFinished { get; set; }
+    public bool IsRunning => Stage is WizardExecutionStage.Running;
 
-    public bool AllSucceeded => Steps.Count > 0 && Steps.All(s => s.Status is WizardStepStatus.Succeeded);
+    public bool IsFinished => Stage is WizardExecutionStage.Finished;
+
+    public bool AllSucceeded => IsFinished && Steps.All(s => s.Status is WizardStepStatus.Succeeded);
 
     public void Reset()
     {
         Steps.Clear();
-        IsRunning = false;
-        IsExecutionFinished = false;
+        Stage = WizardExecutionStage.NotStarted;
     }
 }

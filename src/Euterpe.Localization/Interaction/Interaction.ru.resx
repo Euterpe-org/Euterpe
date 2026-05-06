@@ -97,12 +97,6 @@
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>Не удалось установить MelonLoader: {0}</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
-    <value>MelonLoader не установлен. Он необходим для запуска модов — пожалуйста, установите его.</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
-    <value>Ваша версия MelonLoader ({0}) ниже рекомендуемой ({1}). Пожалуйста, обновитесь для получения наилучшего опыта.</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader успешно установлен</value>
   </data>

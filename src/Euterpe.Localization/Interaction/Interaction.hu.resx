@@ -97,12 +97,6 @@ Próbáld meg kézileg törölni</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>A MelonLoader telepítése sikertelen: {0}</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
-    <value>A MelonLoader nincs telepítve. A modok futtatásához szükséges – kérjük, telepítse a folytatáshoz.</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
-    <value>Az Ön MelonLoader verziója ({0}) régebbi az ajánlottnál ({1}). Kérjük, frissítse a legjobb élmény érdekében.</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>A MelonLoader sikeresen települt</value>
   </data>

@@ -97,12 +97,6 @@ Coba hapus secara manual</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>Gagal menginstal MelonLoader: {0}</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
-    <value>MelonLoader belum terpasang. Ini diperlukan untuk menjalankan mod — harap pasang untuk melanjutkan.</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
-    <value>MelonLoader Anda ({0}) lebih lama dari versi yang disarankan ({1}). Harap perbarui untuk pengalaman terbaik.</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader berhasil diinstal</value>
   </data>

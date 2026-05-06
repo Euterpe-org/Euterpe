@@ -97,12 +97,6 @@ Try to manually delete</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>Failed to install MelonLoader: {0}</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
-    <value>MelonLoader is not installed. It is required to run mods — please install it to continue.</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
-    <value>Your MelonLoader ({0}) is older than the recommended version ({1}). Please upgrade to ensure the best experience.</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader has been successfully installed</value>
   </data>

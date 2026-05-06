@@ -97,12 +97,6 @@ Tente excluir manualmente</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>Falha ao instalar MelonLoader: {0}</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
-    <value>MelonLoader não está instalado. É necessário para executar mods — instale-o para continuar.</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
-    <value>Seu MelonLoader ({0}) é mais antigo que a versão recomendada ({1}). Atualize para ter a melhor experiência.</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader foi instalado com sucesso</value>
   </data>

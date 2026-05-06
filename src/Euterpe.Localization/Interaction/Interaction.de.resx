@@ -96,12 +96,6 @@ Bitte lösche sie manuell</value>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
     <value>MelonLoader konnte nicht installiert werden: {0}</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_NotInstalled" xml:space="preserve">
-    <value>MelonLoader ist nicht installiert. Er wird zum Ausführen von Mods benötigt – bitte installieren Sie ihn, um fortzufahren.</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Outdated" xml:space="preserve">
-    <value>Ihr MelonLoader ({0}) ist älter als die empfohlene Version ({1}). Bitte aktualisieren Sie für das beste Erlebnis.</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader wurde erfolgreich installiert</value>
   </data>

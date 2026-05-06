@@ -101,6 +101,7 @@
                                     Command="{Binding $parent[UserControl].DataContext.RetryCommand}"
                                     CommandParameter="{Binding}"
                                     Content="{Localize {x:Static loc:XAMLLiteral.Button_Retry}}"
+                                    IsEnabled="{Binding !$parent[UserControl].DataContext.State.IsRunning}"
                                     IsVisible="{Binding CanRetry}"
                                     VerticalAlignment="Center" />
                             </Grid>

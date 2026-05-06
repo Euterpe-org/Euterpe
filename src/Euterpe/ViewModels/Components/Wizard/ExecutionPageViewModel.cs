@@ -8,7 +8,7 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
 
     public override bool CanGoBack => false;
 
-    public override bool CanGoNext => State.IsExecutionFinished;
+    public override bool CanGoNext => State.IsFinished;
 
     public override LocalizedString NextButtonText => Button_Confirm;
 
@@ -22,7 +22,7 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
     {
         await base.OnInitializeAsync().ConfigureAwait(false);
 
-        State.ObservePropertyChanged(x => x.IsExecutionFinished)
+        State.ObservePropertyChanged(x => x.Stage)
             .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(CanGoNext)));
 
         Logger.ZLogInformation($"{nameof(ExecutionPageViewModel)} Initialized");
@@ -30,17 +30,16 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
 
     public override async Task OnEnterAsync()
     {
-        if (State.Steps.Count > 0)
-        {
-            return;
-        }
-
         var selected = GameConfig.WizardOptions.Where(o => o.IsSelected).ToArray();
         Logger.ZLogInformation($"Starting wizard execution with {selected.Length} step(s): {string.Join(", ", selected.Select(o => o.Kinds))}");
 
         foreach (var option in selected)
         {
-            State.Steps.Add(new WizardStepState(option));
+            State.Steps.Add(new WizardStepState
+            {
+                Kinds = option.Kinds,
+                DisplayName = option.DisplayName
+            });
         }
 
         await RunAllAsync().ConfigureAwait(true);
@@ -49,30 +48,22 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
     [RelayCommand]
     private async Task RetryAsync(WizardStepState step)
     {
-        if (State.IsRunning || step.Status is WizardStepStatus.Running or WizardStepStatus.Succeeded)
-        {
-            return;
-        }
-
         Logger.ZLogInformation($"User retrying step '{step.Kinds}'");
 
-        State.IsRunning = true;
-        State.IsExecutionFinished = false;
+        State.Stage = WizardExecutionStage.Running;
         try
         {
             await RunStepAsync(step).ConfigureAwait(true);
         }
         finally
         {
-            State.IsRunning = false;
-            UpdateFinishedFlag();
+            State.Stage = WizardExecutionStage.Finished;
         }
     }
 
     private async Task RunAllAsync()
     {
-        State.IsRunning = true;
-        State.IsExecutionFinished = false;
+        State.Stage = WizardExecutionStage.Running;
         try
         {
             for (var i = 0; i < State.Steps.Count; i++)
@@ -88,8 +79,7 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
         }
         finally
         {
-            State.IsRunning = false;
-            UpdateFinishedFlag();
+            State.Stage = WizardExecutionStage.Finished;
         }
     }
 
@@ -112,9 +102,6 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
             Logger.ZLogError(ex, $"Wizard step '{step.Kinds}' failed");
         }
     }
-
-    private void UpdateFinishedFlag() =>
-        State.IsExecutionFinished = State.Steps.All(s => s.Status is WizardStepStatus.Succeeded or WizardStepStatus.Failed);
 
     #region Injections
 
