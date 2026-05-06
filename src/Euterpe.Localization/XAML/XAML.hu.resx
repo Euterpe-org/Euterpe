@@ -52,9 +52,6 @@
   <data name="Button_Retry" xml:space="preserve">
     <value>Újra</value>
   </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>Kihagyás</value>
-  </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>Forráskód</value>
   </data>
@@ -141,9 +138,6 @@
   </data>
   <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
     <value>Nincs telepítve</value>
-  </data>
-  <data name="MelonLoader_State_Preparing" xml:space="preserve">
-    <value>Előkészítés...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>Szükséges a mod fejlesztéshez</value>

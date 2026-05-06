@@ -52,9 +52,6 @@
   <data name="Button_Retry" xml:space="preserve">
     <value>Tentar novamente</value>
   </data>
-  <data name="Button_Skip" xml:space="preserve">
-    <value>Pular</value>
-  </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>Código-fonte</value>
   </data>
@@ -141,9 +138,6 @@
   </data>
   <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
     <value>Não instalado</value>
-  </data>
-  <data name="MelonLoader_State_Preparing" xml:space="preserve">
-    <value>Preparando...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>Necessário para desenvolvimento de mods</value>
