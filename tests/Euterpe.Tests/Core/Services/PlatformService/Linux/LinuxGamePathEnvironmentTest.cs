@@ -16,35 +16,33 @@ public sealed class LinuxGamePathEnvironmentTest
     private string _envName = null!;
 
     [Before(Test)]
-    public void CaptureEnvName() => _envName = new MuseDashConfig().PathEnvironmentVariableName;
+    public void GenerateUniqueEnvName() => _envName = $"EUTERPE_TEST_{Guid.NewGuid():N}";
 
     [After(Test)]
     public void ClearEnv() => Environment.SetEnvironmentVariable(_envName, null);
 
-    private LinuxGamePathEnvironment CreateService(IMessageBoxService? messageBox = null) => new()
+    private LinuxGamePathEnvironment CreateService(IMessageBoxService? messageBox = null)
     {
-        GameConfig = new MuseDashConfig { Folder = TestFolder },
-        Logger = _logger,
-        MessageBoxService = messageBox ?? IMessageBoxService.Mock()
-    };
+        var config = GameConfig.Mock();
+        config.PathEnvironmentVariableName.Returns(_envName);
+        config.Object.Folder = TestFolder;
+        return new LinuxGamePathEnvironment
+        {
+            GameConfig = config,
+            Logger = _logger,
+            MessageBoxService = messageBox ?? IMessageBoxService.Mock()
+        };
+    }
 
     [Test]
-    public async Task IsSet_ReflectsEnvironmentVariable()
+    [Arguments(null, false)]
+    [Arguments(TestFolder, true)]
+    [Arguments("/some/other/path", false)]
+    public async Task IsSet_ReflectsEnvironmentVariable(string? envValue, bool expected)
     {
-        // Combined into one test because all three branches mutate the same process-wide env var.
-        // Splitting them would force [NotInParallel] and lose parallelism.
         var service = CreateService();
-
-        using var _ = Assert.Multiple();
-
-        Environment.SetEnvironmentVariable(_envName, null);
-        await Assert.That(service.IsSet()).IsFalse();
-
-        Environment.SetEnvironmentVariable(_envName, TestFolder);
-        await Assert.That(service.IsSet()).IsTrue();
-
-        Environment.SetEnvironmentVariable(_envName, "/some/other/path");
-        await Assert.That(service.IsSet()).IsFalse();
+        Environment.SetEnvironmentVariable(_envName, envValue);
+        await Assert.That(service.IsSet()).IsEqualTo(expected);
     }
 
     [Test]

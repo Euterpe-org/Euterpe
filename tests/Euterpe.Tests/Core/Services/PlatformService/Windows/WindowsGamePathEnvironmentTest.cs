@@ -9,7 +9,6 @@ namespace Euterpe.Tests.Windows;
 [TestSubject(typeof(WindowsGamePathEnvironment))]
 [RunOn(OS.Windows)]
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-[NotInParallel(nameof(WindowsGamePathEnvironmentTest))]
 public sealed class WindowsGamePathEnvironmentTest
 {
     private const string TestFolder = @"C:\Test\MuseDash";
@@ -17,38 +16,33 @@ public sealed class WindowsGamePathEnvironmentTest
     private string _envName = null!;
 
     [Before(Test)]
-    public void CaptureEnvName() => _envName = new MuseDashConfig().PathEnvironmentVariableName;
+    public void GenerateUniqueEnvName() => _envName = $"EUTERPE_TEST_{Guid.NewGuid():N}";
 
     [After(Test)]
-    public void ClearEnv()
+    public void ClearEnv() => Environment.SetEnvironmentVariable(_envName, null, EnvironmentVariableTarget.User);
+
+    private WindowsGamePathEnvironment CreateService(IMessageBoxService? messageBox = null)
     {
-        // Set() on Windows writes to user scope; clear both to be safe.
-        Environment.SetEnvironmentVariable(_envName, null);
-        Environment.SetEnvironmentVariable(_envName, null, EnvironmentVariableTarget.User);
+        var config = GameConfig.Mock();
+        config.PathEnvironmentVariableName.Returns(_envName);
+        config.Object.Folder = TestFolder;
+        return new WindowsGamePathEnvironment
+        {
+            GameConfig = config,
+            Logger = _logger,
+            MessageBoxService = messageBox ?? IMessageBoxService.Mock()
+        };
     }
 
-    private WindowsGamePathEnvironment CreateService(IMessageBoxService? messageBox = null) => new()
-    {
-        GameConfig = new MuseDashConfig { Folder = TestFolder },
-        Logger = _logger,
-        MessageBoxService = messageBox ?? IMessageBoxService.Mock()
-    };
-
     [Test]
-    public async Task IsSet_ReflectsEnvironmentVariable()
+    [Arguments(null, false)]
+    [Arguments(TestFolder, true)]
+    [Arguments(@"C:\different\path", false)]
+    public async Task IsSet_ReflectsEnvironmentVariable(string? envValue, bool expected)
     {
         var service = CreateService();
-
-        using var _ = Assert.Multiple();
-
-        Environment.SetEnvironmentVariable(_envName, null);
-        await Assert.That(service.IsSet()).IsFalse();
-
-        Environment.SetEnvironmentVariable(_envName, TestFolder);
-        await Assert.That(service.IsSet()).IsTrue();
-
-        Environment.SetEnvironmentVariable(_envName, @"C:\different\path");
-        await Assert.That(service.IsSet()).IsFalse();
+        Environment.SetEnvironmentVariable(_envName, envValue);
+        await Assert.That(service.IsSet()).IsEqualTo(expected);
     }
 
     [Test]
