@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using TUnit.Core.Enums;
@@ -42,9 +41,12 @@ public sealed class WindowsGamePathDiscoveryTest
     public async Task TryGetGameFolder_VdfReturnsPath_ReturnsTrueWithFolder()
     {
         var expected = Path.Combine(_tempDir, "Muse Dash");
-        var stub = new StubGamePathService { VdfFolder = expected };
+        var pathService = IGamePathService.Mock();
+        pathService.TryGetGameFolderFromVdf(Any<string>(), Any<string>())
+            .SetsOutGameFolder(expected)
+            .Returns(true);
 
-        var service = CreateService(stub);
+        var service = CreateService(pathService);
         var found = service.TryGetGameFolder(out var folder);
 
         using var _ = Assert.Multiple();
@@ -56,9 +58,12 @@ public sealed class WindowsGamePathDiscoveryTest
     public async Task TryGetGameFolder_VdfFails_FallsBackToCommonPaths()
     {
         var expected = Path.Combine(_tempDir, "fallback");
-        var stub = new StubGamePathService { CommonFolder = expected };
+        var pathService = IGamePathService.Mock();
+        pathService.TryGetGameFolderFromCommonPaths(Any<string[]>(), Any<string>())
+            .SetsOutGameFolder(expected)
+            .Returns(true);
 
-        var service = CreateService(stub);
+        var service = CreateService(pathService);
         var found = service.TryGetGameFolder(out var folder);
 
         using var _ = Assert.Multiple();
@@ -70,9 +75,7 @@ public sealed class WindowsGamePathDiscoveryTest
     [Test]
     public async Task TryGetGameFolder_BothMethodsFail_ReturnsFalseAndLogsWarning()
     {
-        var stub = new StubGamePathService();
-
-        var service = CreateService(stub);
+        var service = CreateService(IGamePathService.Mock());
         var found = service.TryGetGameFolder(out var folder);
 
         using var _ = Assert.Multiple();
@@ -86,7 +89,7 @@ public sealed class WindowsGamePathDiscoveryTest
     [Arguments("")]
     public async Task CheckIsValidGameFolder_NullOrEmpty_ReturnsFalse(string? path)
     {
-        var service = CreateService(new StubGamePathService());
+        var service = CreateService(IGamePathService.Mock());
         await Assert.That(service.CheckIsValidGameFolder(path)).IsFalse();
     }
 
@@ -95,7 +98,7 @@ public sealed class WindowsGamePathDiscoveryTest
     {
         await File.WriteAllBytesAsync(Path.Combine(_tempDir, "GameAssembly.dll"), []);
 
-        var service = CreateService(new StubGamePathService());
+        var service = CreateService(IGamePathService.Mock());
         var result = service.CheckIsValidGameFolder(_tempDir);
 
         using var _ = Assert.Multiple();
@@ -110,29 +113,11 @@ public sealed class WindowsGamePathDiscoveryTest
         await File.WriteAllBytesAsync(Path.Combine(_tempDir, config.ExecutableName), []);
         await File.WriteAllBytesAsync(Path.Combine(_tempDir, "GameAssembly.dll"), []);
 
-        var service = CreateService(new StubGamePathService());
+        var service = CreateService(IGamePathService.Mock());
         var result = service.CheckIsValidGameFolder(_tempDir);
 
         using var _ = Assert.Multiple();
         await Assert.That(result).IsTrue();
         _logger.VerifyLog().ContainingMessage("found in");
-    }
-
-    private sealed class StubGamePathService : IGamePathService
-    {
-        public string? VdfFolder { get; init; }
-        public string? CommonFolder { get; init; }
-
-        public bool TryGetGameFolderFromVdf(string appId, string relativePath, [NotNullWhen(true)] out string? gameFolder)
-        {
-            gameFolder = VdfFolder;
-            return VdfFolder is not null;
-        }
-
-        public bool TryGetGameFolderFromCommonPaths(string[] commonPaths, string relativePath, [NotNullWhen(true)] out string? gameFolder)
-        {
-            gameFolder = CommonFolder;
-            return CommonFolder is not null;
-        }
     }
 }
