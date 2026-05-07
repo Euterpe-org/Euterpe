@@ -61,9 +61,10 @@ jobs:
         run: cat coverage-report/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload to Codecov
-        if: always() && matrix.platform.name == 'linux'
+        if: always()
         uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: TestResults/*.cobertura.xml
+          flags: ${{ matrix.platform.name }}
           fail_ci_if_error: false
