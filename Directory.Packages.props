@@ -16,6 +16,7 @@
         <PackageVersion Include="AssetsTools.NET" Version="3.0.4"/>
         <PackageVersion Include="AsyncAwaitBestPractices" Version="10.0.0"/>
         <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="11.0.0"/>
+        <PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.6"/>
         <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
@@ -57,6 +58,7 @@
         <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)-beta"/>
         <PackageVersion Include="TUnit.Mocks.Logging" Version="$(TUnitVersion)-beta"/>
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
+        <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.TUnit" Version="31.16.2"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.58"/>

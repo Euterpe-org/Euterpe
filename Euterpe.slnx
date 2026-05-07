@@ -26,6 +26,7 @@
         <Project Path="src\Euterpe.Controls\Euterpe.Controls.csproj"/>
     </Folder>
     <Folder Name="/tests/">
+        <Project Path="tests/Euterpe.Generators.Tests/Euterpe.Generators.Tests.csproj"/>
         <Project Path="tests/Euterpe.Tests/Euterpe.Tests.csproj"/>
     </Folder>
 </Solution>
