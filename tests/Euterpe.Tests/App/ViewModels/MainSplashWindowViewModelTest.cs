@@ -73,6 +73,9 @@ public sealed class MainSplashWindowViewModelTest
     {
         Launcher = IPlatformLauncher.Mock(),
         Logger = NullLogger<MainSplashWindowViewModel>.Instance,
-        AuthService = authService
+        AuthService = authService,
+#if RELEASE
+        UpdateService = IUpdateService.Mock()
+#endif
     };
 }
