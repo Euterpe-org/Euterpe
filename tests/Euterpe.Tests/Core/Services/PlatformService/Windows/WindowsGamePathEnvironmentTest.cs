@@ -9,6 +9,7 @@ namespace Euterpe.Tests.Windows;
 [TestSubject(typeof(WindowsGamePathEnvironment))]
 [RunOn(OS.Windows)]
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
+[NotInParallel(nameof(WindowsGamePathEnvironmentTest))]
 public sealed class WindowsGamePathEnvironmentTest
 {
     private const string TestFolder = @"C:\Test\MuseDash";

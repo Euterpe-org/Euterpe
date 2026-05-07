@@ -21,11 +21,12 @@ public sealed class CoreServiceExtensionsTest
         try
         {
             services.RegisterLogger(logFile);
-            var provider = services.BuildServiceProvider();
-
-            using var _ = Assert.Multiple();
-            await Assert.That(provider.GetService<ILogger<CoreServiceExtensionsTest>>()).IsNotNull();
-            await Assert.That(provider.GetService<LiveLogProcessor>()).IsNotNull();
+            await using (var provider = services.BuildServiceProvider())
+            {
+                using var _ = Assert.Multiple();
+                await Assert.That(provider.GetService<ILogger<CoreServiceExtensionsTest>>()).IsNotNull();
+                await Assert.That(provider.GetService<LiveLogProcessor>()).IsNotNull();
+            }
         }
         finally
         {
