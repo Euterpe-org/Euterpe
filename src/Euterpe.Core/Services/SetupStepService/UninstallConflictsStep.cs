@@ -1,8 +1,8 @@
 namespace Euterpe.Core;
 
-internal sealed class UninstallConflictsStep : IWizardStep
+internal sealed class UninstallConflictsStep : ISetupStep
 {
-    public WizardOptionKinds Kinds => WizardOptionKinds.UninstallConflicts;
+    public SetupOptionKinds Kinds => SetupOptionKinds.UninstallConflicts;
 
     public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {

@@ -33,8 +33,8 @@ public abstract partial class GameConfig
     public abstract string PathEnvironmentVariableName { get; }
 
     [JsonIgnore]
-    public abstract IReadOnlyList<WizardOption> WizardOptions { get; }
+    public abstract IReadOnlyList<SetupOption> SetupOptions { get; }
 
     [JsonIgnore]
-    public abstract IReadOnlyDictionary<WizardIdentity, WizardOptionKinds> WizardPresets { get; }
+    public abstract IReadOnlyDictionary<WizardIdentity, SetupOptionKinds> WizardPresets { get; }
 }

@@ -1,8 +1,8 @@
 namespace Euterpe.Abstractions;
 
-public interface IWizardStep
+public interface ISetupStep
 {
-    WizardOptionKinds Kinds { get; }
+    SetupOptionKinds Kinds { get; }
 
     Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default);
 }

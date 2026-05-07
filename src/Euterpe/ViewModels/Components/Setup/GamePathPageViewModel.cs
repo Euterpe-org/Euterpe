@@ -1,6 +1,6 @@
-namespace Euterpe.ViewModels.Components.Wizard;
+namespace Euterpe.ViewModels.Components.Setup;
 
-public sealed partial class GamePathPageViewModel : WizardPageViewModelBase
+public sealed partial class GamePathPageViewModel : SetupPageViewModelBase
 {
     public override LocalizedString Title => Wizard_Title_GamePath;
 

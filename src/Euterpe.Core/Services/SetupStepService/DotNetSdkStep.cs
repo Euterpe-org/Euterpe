@@ -1,6 +1,6 @@
 namespace Euterpe.Core;
 
-internal sealed class DotNetSdkStep : IWizardStep
+internal sealed class DotNetSdkStep : ISetupStep
 {
     #region Injections
 
@@ -9,7 +9,7 @@ internal sealed class DotNetSdkStep : IWizardStep
 
     #endregion Injections
 
-    public WizardOptionKinds Kinds => WizardOptionKinds.DotNetSdk;
+    public SetupOptionKinds Kinds => SetupOptionKinds.DotNetSdk;
 
     public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {

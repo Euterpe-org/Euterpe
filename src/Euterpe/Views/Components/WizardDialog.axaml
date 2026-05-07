@@ -5,6 +5,8 @@
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Components"
+    xmlns:setup="using:Euterpe.Views.Components.Setup"
+    xmlns:svm="using:Euterpe.ViewModels.Components.Setup"
     xmlns:wizard="using:Euterpe.Views.Components.Wizard"
     xmlns:wvm="using:Euterpe.ViewModels.Components.Wizard"
     x:Class="Euterpe.Views.Components.WizardDialog"
@@ -27,16 +29,16 @@
             Content="{Binding CurrentPage}">
             <TransitioningContentControl.DataTemplates>
                 <DataTemplate
-                    DataType="{x:Type wvm:GamePathPageViewModel}">
-                    <wizard:GamePathPage />
+                    DataType="{x:Type svm:GamePathPageViewModel}">
+                    <setup:GamePathPage />
                 </DataTemplate>
                 <DataTemplate
                     DataType="{x:Type wvm:RolePageViewModel}">
                     <wizard:RolePage />
                 </DataTemplate>
                 <DataTemplate
-                    DataType="{x:Type wvm:ExecutionPageViewModel}">
-                    <wizard:ExecutionPage />
+                    DataType="{x:Type svm:ExecutionPageViewModel}">
+                    <setup:ExecutionPage />
                 </DataTemplate>
             </TransitioningContentControl.DataTemplates>
         </TransitioningContentControl>

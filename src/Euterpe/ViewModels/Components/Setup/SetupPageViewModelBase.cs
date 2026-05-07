@@ -1,6 +1,6 @@
-namespace Euterpe.ViewModels.Components.Wizard;
+namespace Euterpe.ViewModels.Components.Setup;
 
-public abstract class WizardPageViewModelBase : ViewModelBase
+public abstract class SetupPageViewModelBase : ViewModelBase
 {
     public abstract LocalizedString Title { get; }
 
@@ -11,7 +11,7 @@ public abstract class WizardPageViewModelBase : ViewModelBase
     public virtual LocalizedString NextButtonText => Button_Next;
 
     [UsedImplicitly]
-    public required WizardState State { get; init; }
+    public required SetupState State { get; init; }
 
     public virtual Task OnEnterAsync() => Task.CompletedTask;
 }

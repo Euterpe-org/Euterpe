@@ -1,6 +1,6 @@
 namespace Euterpe.Core;
 
-internal sealed class EnvVariableStep : IWizardStep
+internal sealed class EnvVariableStep : ISetupStep
 {
     #region Injections
 
@@ -9,7 +9,7 @@ internal sealed class EnvVariableStep : IWizardStep
 
     #endregion Injections
 
-    public WizardOptionKinds Kinds => WizardOptionKinds.EnvVariable;
+    public SetupOptionKinds Kinds => SetupOptionKinds.EnvVariable;
 
     public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {

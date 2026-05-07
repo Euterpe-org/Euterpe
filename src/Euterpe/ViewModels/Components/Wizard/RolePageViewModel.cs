@@ -1,10 +1,10 @@
 namespace Euterpe.ViewModels.Components.Wizard;
 
-public sealed class RolePageViewModel : WizardPageViewModelBase
+public sealed class RolePageViewModel : SetupPageViewModelBase
 {
     private bool _applyingPreset;
 
-    public IReadOnlyList<WizardOption> Options => GameConfig.WizardOptions;
+    public IReadOnlyList<SetupOption> Options => GameConfig.SetupOptions;
 
     public static IReadOnlyList<WizardRole> Roles { get; } =
     [
@@ -63,7 +63,7 @@ public sealed class RolePageViewModel : WizardPageViewModelBase
     {
         var selected = Options.Where(t => t.IsSelected)
             .Select(x => x.Kinds)
-            .Aggregate(WizardOptionKinds.None, (mask, k) => mask | k);
+            .Aggregate(SetupOptionKinds.None, (mask, k) => mask | k);
 
         foreach (var (identity, preset) in GameConfig.WizardPresets)
         {

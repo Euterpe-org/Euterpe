@@ -10,7 +10,7 @@ public sealed partial class HomePageViewModel
         await ShowDialogAsync<WizardDialog, WizardDialogViewModel>(WizardDialogViewModel, Wizard_Title_Welcome).ConfigureAwait(true);
     }
 
-    private async Task ShowOptionRepairAsync(WizardOptionKinds kind)
+    private async Task ShowOptionRepairAsync(SetupOptionKinds kind)
     {
         await RepairDialogViewModel.PrepareForOptionAsync(kind).ConfigureAwait(true);
         await ShowDialogAsync<RepairDialog, RepairDialogViewModel>(RepairDialogViewModel, Wizard_Title_SettingUp).ConfigureAwait(true);

@@ -10,9 +10,9 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     [NotifyPropertyChangedFor(nameof(IsLastPage))]
     public partial int CurrentPageIndex { get; set; }
 
-    public IReadOnlyList<WizardPageViewModelBase> Pages { get; private set; } = null!;
+    public IReadOnlyList<SetupPageViewModelBase> Pages { get; private set; } = null!;
 
-    public WizardPageViewModelBase CurrentPage => Pages[CurrentPageIndex];
+    public SetupPageViewModelBase CurrentPage => Pages[CurrentPageIndex];
 
     public bool CanGoBack => CurrentPage.CanGoBack && CurrentPageIndex > 0;
 
@@ -82,7 +82,7 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
     public required RolePageViewModel RolePage { get; init; }
 
     [UsedImplicitly]
-    public required WizardState State { get; init; }
+    public required SetupState State { get; init; }
 
     #endregion Injections
 }

@@ -21,6 +21,7 @@ global using Euterpe.Models.Charts;
 global using Euterpe.Models.Common;
 global using Euterpe.Models.Games;
 global using Euterpe.Models.Mods;
+global using Euterpe.Models.Setup;
 global using Euterpe.Models.Wizard;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;

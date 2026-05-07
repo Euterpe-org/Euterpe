@@ -14,7 +14,7 @@
     ModTemplatePackageName: MuseDash.Mod.Template,
     ModTemplateShortName: musedashmod,
     PathEnvironmentVariableName: MD_DIRECTORY,
-    WizardOptions: [
+    SetupOptions: [
       {
         Kinds: MelonLoader,
         DisplayName: {
@@ -139,7 +139,7 @@
     ModTemplatePackageName: MuseDash2.Mod.Template,
     ModTemplateShortName: musedash2mod,
     PathEnvironmentVariableName: MD2_DIRECTORY,
-    WizardOptions: [
+    SetupOptions: [
       {
         Kinds: MelonLoader,
         DisplayName: {
@@ -264,7 +264,7 @@
       ModTemplatePackageName: MuseDash.Mod.Template,
       ModTemplateShortName: musedashmod,
       PathEnvironmentVariableName: MD_DIRECTORY,
-      WizardOptions: [
+      SetupOptions: [
         {
           Kinds: MelonLoader,
           DisplayName: {
@@ -389,7 +389,7 @@
       ModTemplatePackageName: MuseDash2.Mod.Template,
       ModTemplateShortName: musedash2mod,
       PathEnvironmentVariableName: MD2_DIRECTORY,
-      WizardOptions: [
+      SetupOptions: [
         {
           Kinds: MelonLoader,
           DisplayName: {
@@ -514,7 +514,7 @@
     ModTemplatePackageName: MuseDash.Mod.Template,
     ModTemplateShortName: musedashmod,
     PathEnvironmentVariableName: MD_DIRECTORY,
-    WizardOptions: [
+    SetupOptions: [
       {
         Kinds: MelonLoader,
         DisplayName: {

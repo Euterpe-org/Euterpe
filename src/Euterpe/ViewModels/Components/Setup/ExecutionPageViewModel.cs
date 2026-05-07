@@ -1,8 +1,8 @@
-namespace Euterpe.ViewModels.Components.Wizard;
+namespace Euterpe.ViewModels.Components.Setup;
 
-public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
+public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
 {
-    private Dictionary<WizardOptionKinds, IWizardStep> StepMap => field ??= WizardSteps.ToDictionary(s => s.Kinds);
+    private Dictionary<SetupOptionKinds, ISetupStep> StepMap => field ??= SetupSteps.ToDictionary(s => s.Kinds);
 
     public override LocalizedString Title => Wizard_Title_SettingUp;
 
@@ -30,12 +30,12 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
 
     public override async Task OnEnterAsync()
     {
-        var selected = GameConfig.WizardOptions.Where(o => o.IsSelected).ToArray();
-        Logger.ZLogInformation($"Starting wizard execution with {selected.Length} step(s): {string.Join(", ", selected.Select(o => o.Kinds))}");
+        var selected = GameConfig.SetupOptions.Where(o => o.IsSelected).ToArray();
+        Logger.ZLogInformation($"Starting setup execution with {selected.Length} step(s): {string.Join(", ", selected.Select(o => o.Kinds))}");
 
         foreach (var option in selected)
         {
-            State.Steps.Add(new WizardStepState
+            State.Steps.Add(new SetupStepState
             {
                 Kinds = option.Kinds,
                 DisplayName = option.DisplayName
@@ -46,24 +46,24 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
     }
 
     [RelayCommand]
-    private async Task RetryAsync(WizardStepState step)
+    private async Task RetryAsync(SetupStepState step)
     {
         Logger.ZLogInformation($"User retrying step '{step.Kinds}'");
 
-        State.Stage = WizardExecutionStage.Running;
+        State.Stage = SetupExecutionStage.Running;
         try
         {
             await RunStepAsync(step).ConfigureAwait(true);
         }
         finally
         {
-            State.Stage = WizardExecutionStage.Finished;
+            State.Stage = SetupExecutionStage.Finished;
         }
     }
 
     private async Task RunAllAsync()
     {
-        State.Stage = WizardExecutionStage.Running;
+        State.Stage = SetupExecutionStage.Running;
         try
         {
             for (var i = 0; i < State.Steps.Count; i++)
@@ -79,30 +79,30 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
         }
         finally
         {
-            State.Stage = WizardExecutionStage.Finished;
+            State.Stage = SetupExecutionStage.Finished;
         }
     }
 
-    private async Task RunStepAsync(WizardStepState step)
+    private async Task RunStepAsync(SetupStepState step)
     {
-        step.Status = WizardStepStatus.Running;
+        step.Status = SetupStepStatus.Running;
         step.ErrorMessage = null;
         step.Message = null;
 
         var progress = new Progress<string>(msg => step.Message = msg);
 
-        Logger.ZLogInformation($"Running wizard step '{step.Kinds}'");
+        Logger.ZLogInformation($"Running setup step '{step.Kinds}'");
         try
         {
             await StepMap[step.Kinds].ExecuteAsync(progress).ConfigureAwait(true);
-            step.Status = WizardStepStatus.Succeeded;
-            Logger.ZLogInformation($"Completed wizard step '{step.Kinds}'");
+            step.Status = SetupStepStatus.Succeeded;
+            Logger.ZLogInformation($"Completed setup step '{step.Kinds}'");
         }
         catch (Exception ex)
         {
-            step.Status = WizardStepStatus.Failed;
+            step.Status = SetupStepStatus.Failed;
             step.ErrorMessage = Wizard_Step_Failed;
-            Logger.ZLogError(ex, $"Wizard step '{step.Kinds}' failed");
+            Logger.ZLogError(ex, $"Setup step '{step.Kinds}' failed");
         }
     }
 
@@ -112,7 +112,7 @@ public sealed partial class ExecutionPageViewModel : WizardPageViewModelBase
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required IEnumerable<IWizardStep> WizardSteps { get; init; }
+    public required IEnumerable<ISetupStep> SetupSteps { get; init; }
 
     [UsedImplicitly]
     public required ILogger<ExecutionPageViewModel> Logger { get; init; }

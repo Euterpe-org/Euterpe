@@ -5,7 +5,7 @@ namespace Euterpe.ViewModels.Components;
 public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContext
 {
     [ObservableProperty]
-    public partial WizardPageViewModelBase Content { get; set; } = null!;
+    public partial SetupPageViewModelBase Content { get; set; } = null!;
 
     public event EventHandler<object?>? RequestClose;
 
@@ -17,11 +17,11 @@ public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContex
         return ShowAsync(GamePathPage);
     }
 
-    public Task PrepareForOptionAsync(WizardOptionKinds kind)
+    public Task PrepareForOptionAsync(SetupOptionKinds kind)
     {
         State.Reset();
 
-        foreach (var option in GameConfig.WizardOptions)
+        foreach (var option in GameConfig.SetupOptions)
         {
             option.IsSelected = option.Kinds == kind;
         }
@@ -39,7 +39,7 @@ public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContex
     [RelayCommand]
     private void Apply() => Close();
 
-    private async Task ShowAsync(WizardPageViewModelBase content)
+    private async Task ShowAsync(SetupPageViewModelBase content)
     {
         Content = content;
         await content.InitializeAsync().ConfigureAwait(true);
@@ -61,7 +61,7 @@ public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContex
     public required GamePathPageViewModel GamePathPage { get; init; }
 
     [UsedImplicitly]
-    public required WizardState State { get; init; }
+    public required SetupState State { get; init; }
 
     #endregion Injections
 }

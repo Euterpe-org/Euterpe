@@ -4,12 +4,12 @@ using Euterpe.Core.Extensions;
 
 namespace Euterpe.Tests;
 
-[Category("WizardStepRegistrationTests")]
-[TestSubject(typeof(IWizardStep))]
-public sealed class WizardStepRegistrationTest
+[Category("SetupStepRegistrationTests")]
+[TestSubject(typeof(ISetupStep))]
+public sealed class SetupStepRegistrationTest
 {
     [Test]
-    public async Task AllWizardSteps_Registered_AsIWizardStep()
+    public async Task AllSetupSteps_Registered_AsISetupStep()
     {
         var builder = new ContainerBuilder();
         builder.RegisterAppCoreServices();
@@ -18,7 +18,7 @@ public sealed class WizardStepRegistrationTest
         await using var container = builder.Build();
 
         var registrations = container.ComponentRegistry
-            .RegistrationsFor(new TypedService(typeof(IWizardStep)))
+            .RegistrationsFor(new TypedService(typeof(ISetupStep)))
             .ToArray();
 
         await Assert.That(registrations.Length).IsEqualTo(8);

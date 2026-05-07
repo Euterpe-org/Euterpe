@@ -126,7 +126,7 @@ public static class CoreServiceExtensions
                     break;
             }
 
-            builder.RegisterType<WizardState>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<SetupState>().AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().InstancePerLifetimeScope();
@@ -137,15 +137,15 @@ public static class CoreServiceExtensions
             builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().InstancePerLifetimeScope();
 
-            // Wizard Steps
-            builder.RegisterType<ChartingToolStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<DotNetRuntimeStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<DotNetSdkStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<EnvVariableStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<EssentialModsStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<MelonLoaderStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<ModTemplateStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<UninstallConflictsStep>().As<IWizardStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            // Setup Steps
+            builder.RegisterType<ChartingToolStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<DotNetRuntimeStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<DotNetSdkStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<EnvVariableStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<EssentialModsStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MelonLoaderStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<ModTemplateStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<UninstallConflictsStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
 
             builder.RegisterPerPlatformGameServices();
         }

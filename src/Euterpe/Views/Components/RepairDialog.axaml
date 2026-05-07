@@ -5,8 +5,8 @@
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.ViewModels.Components"
-    xmlns:wizard="using:Euterpe.Views.Components.Wizard"
-    xmlns:wvm="using:Euterpe.ViewModels.Components.Wizard"
+    xmlns:setup="using:Euterpe.Views.Components.Setup"
+    xmlns:svm="using:Euterpe.ViewModels.Components.Setup"
     x:Class="Euterpe.Views.Components.RepairDialog"
     x:DataType="vm:RepairDialogViewModel"
     d:DesignHeight="520"
@@ -27,12 +27,12 @@
             Content="{Binding Content}">
             <ContentControl.DataTemplates>
                 <DataTemplate
-                    DataType="{x:Type wvm:GamePathPageViewModel}">
-                    <wizard:GamePathPage />
+                    DataType="{x:Type svm:GamePathPageViewModel}">
+                    <setup:GamePathPage />
                 </DataTemplate>
                 <DataTemplate
-                    DataType="{x:Type wvm:ExecutionPageViewModel}">
-                    <wizard:ExecutionPage />
+                    DataType="{x:Type svm:ExecutionPageViewModel}">
+                    <setup:ExecutionPage />
                 </DataTemplate>
             </ContentControl.DataTemplates>
         </ContentControl>

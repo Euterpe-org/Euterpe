@@ -2,11 +2,11 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:wizard="using:Euterpe.Models.Wizard"
+    xmlns:setup="using:Euterpe.Models.Setup"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="using:Euterpe.ViewModels.Components.Wizard"
-    x:Class="Euterpe.Views.Components.Wizard.ExecutionPage"
+    xmlns:vm="using:Euterpe.ViewModels.Components.Setup"
+    x:Class="Euterpe.Views.Components.Setup.ExecutionPage"
     x:DataType="vm:ExecutionPageViewModel"
     d:DesignHeight="460"
     d:DesignWidth="850"
@@ -72,7 +72,7 @@
                     ItemsSource="{Binding State.Steps}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate
-                            x:DataType="wizard:WizardStepState">
+                            x:DataType="setup:SetupStepState">
                             <Grid
                                 ColumnDefinitions="80,*,Auto"
                                 Margin="0,4">

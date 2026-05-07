@@ -1,6 +1,6 @@
 namespace Euterpe.Core;
 
-internal sealed class ModTemplateStep : IWizardStep
+internal sealed class ModTemplateStep : ISetupStep
 {
     #region Injections
 
@@ -9,7 +9,7 @@ internal sealed class ModTemplateStep : IWizardStep
 
     #endregion Injections
 
-    public WizardOptionKinds Kinds => WizardOptionKinds.ModTemplate;
+    public SetupOptionKinds Kinds => SetupOptionKinds.ModTemplate;
 
     public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {

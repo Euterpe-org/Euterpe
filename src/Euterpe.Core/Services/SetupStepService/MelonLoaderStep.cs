@@ -1,8 +1,8 @@
 namespace Euterpe.Core;
 
-internal sealed class MelonLoaderStep : IWizardStep
+internal sealed class MelonLoaderStep : ISetupStep
 {
-    public WizardOptionKinds Kinds => WizardOptionKinds.MelonLoader;
+    public SetupOptionKinds Kinds => SetupOptionKinds.MelonLoader;
 
     public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {

@@ -1,6 +1,6 @@
 namespace Euterpe.Core;
 
-internal sealed class ChartingToolStep : IWizardStep
+internal sealed class ChartingToolStep : ISetupStep
 {
     #region Injections
 
@@ -9,11 +9,11 @@ internal sealed class ChartingToolStep : IWizardStep
 
     #endregion Injections
 
-    public WizardOptionKinds Kinds => WizardOptionKinds.ChartingTool;
+    public SetupOptionKinds Kinds => SetupOptionKinds.ChartingTool;
 
     public Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogWarning($"WizardStep '{Kinds}' not implemented yet");
+        Logger.ZLogWarning($"SetupStep '{Kinds}' not implemented yet");
         return Task.CompletedTask;
     }
 }

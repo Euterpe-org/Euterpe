@@ -1,8 +1,8 @@
-namespace Euterpe.Models.Wizard;
+namespace Euterpe.Models.Setup;
 
-public sealed partial class WizardOption(WizardOptionKinds kinds, LocalizedString displayName, LocalizedString description) : ObservableObject
+public sealed partial class SetupOption(SetupOptionKinds kinds, LocalizedString displayName, LocalizedString description) : ObservableObject
 {
-    public WizardOptionKinds Kinds { get; } = kinds;
+    public SetupOptionKinds Kinds { get; } = kinds;
 
     public LocalizedString DisplayName { get; } = displayName;
 

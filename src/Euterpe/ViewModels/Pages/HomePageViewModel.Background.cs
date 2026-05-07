@@ -42,7 +42,7 @@ public sealed partial class HomePageViewModel
         }
 
         Logger.ZLogInformation($".NET runtime not installed, opening repair dialog");
-        await ShowOptionRepairAsync(WizardOptionKinds.DotNetRuntime).ConfigureAwait(false);
+        await ShowOptionRepairAsync(SetupOptionKinds.DotNetRuntime).ConfigureAwait(false);
     }
 
     private async Task CheckMelonLoaderAsync()
@@ -53,6 +53,6 @@ public sealed partial class HomePageViewModel
         }
 
         Logger.ZLogInformation($"MelonLoader not installed, opening repair dialog");
-        await ShowOptionRepairAsync(WizardOptionKinds.MelonLoader).ConfigureAwait(false);
+        await ShowOptionRepairAsync(SetupOptionKinds.MelonLoader).ConfigureAwait(false);
     }
 }

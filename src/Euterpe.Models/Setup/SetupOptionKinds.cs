@@ -1,7 +1,7 @@
-namespace Euterpe.Models.Wizard;
+namespace Euterpe.Models.Setup;
 
 [Flags]
-public enum WizardOptionKinds
+public enum SetupOptionKinds
 {
     None = 0,
     MelonLoader = 1 << 0,
