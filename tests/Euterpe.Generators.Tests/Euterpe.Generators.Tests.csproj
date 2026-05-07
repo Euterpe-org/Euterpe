@@ -9,7 +9,6 @@
         <PackageReference Include="Basic.Reference.Assemblies.Net100"/>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp"/>
-        <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="Verify.SourceGenerators"/>
         <PackageReference Include="Verify.TUnit"/>

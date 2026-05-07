@@ -6,7 +6,6 @@
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
         <PackageReference Include="NetArchTest.eNhancedEdition"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="TUnit.Mocks"/>
