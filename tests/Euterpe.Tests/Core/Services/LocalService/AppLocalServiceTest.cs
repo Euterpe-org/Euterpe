@@ -123,15 +123,15 @@ public sealed class AppLocalServiceTest
         public Task<string?> GetSingleFilePathAsync(string dialogTitle) =>
             Task.FromResult(_fileIndex < FileResults.Length ? FileResults[_fileIndex++] : null);
 
-        public Task<IStorageFolder?> GetSingleFolderAsync(string dialogTitle) => throw new NotImplementedException();
-        public Task<IReadOnlyList<IStorageFolder>?> GetMultipleFoldersAsync(string dialogTitle) => throw new NotImplementedException();
-        public Task<IEnumerable<string?>?> GetMultipleFoldersPathAsync(string dialogTitle) => throw new NotImplementedException();
-        public Task<IStorageFile?> GetSingleFileAsync(string dialogTitle) => throw new NotImplementedException();
+        public Task<IStorageFolder?> GetSingleFolderAsync(string dialogTitle) => throw new NotSupportedException();
+        public Task<IReadOnlyList<IStorageFolder>?> GetMultipleFoldersAsync(string dialogTitle) => throw new NotSupportedException();
+        public Task<IEnumerable<string?>?> GetMultipleFoldersPathAsync(string dialogTitle) => throw new NotSupportedException();
+        public Task<IStorageFile?> GetSingleFileAsync(string dialogTitle) => throw new NotSupportedException();
 
         public Task<IReadOnlyList<IStorageFile>?> GetMultipleFilesAsync(string dialogTitle, IReadOnlyList<FilePickerFileType>? extraFileTypes = null) =>
-            throw new NotImplementedException();
+            throw new NotSupportedException();
 
         public Task<IEnumerable<string?>?> GetMultipleFilePathsAsync(string dialogTitle, IReadOnlyList<FilePickerFileType>? extraFileTypes = null) =>
-            throw new NotImplementedException();
+            throw new NotSupportedException();
     }
 }
