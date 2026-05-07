@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Euterpe.Tests;
 
 [Category("JsonSerializationServiceTests")]
@@ -33,26 +35,21 @@ public sealed partial class JsonSerializationServiceTest
 
     private readonly JsonSerializationService _jsonSerializationService = new();
 
-    private static Config CreateTestConfig() => new()
+    [Test]
+    public Task DeserializeConfig_ShouldReturnValidConfig()
     {
-        SteamFolder = @"C:\Program Files (x86)\SteamLibrary",
-        SteamExecPath = @"C:\Program Files (x86)\SteamLibrary\steam.exe",
-        CacheFolder = "Cache",
-        MuseDash = new MuseDashConfig
-        {
-            Folder = @"C:\Program Files (x86)\SteamLibrary\steamapps\common\Muse Dash",
-            GameMode = GameMode.Vanilla,
-            GameVersion = "1.0.0",
-            UnityVersion = "2019.4.32",
-            MelonLoaderVersion = "0.6.5"
-        },
-        MuseDash2 = new MuseDash2Config(),
-        LanguageCode = "zh-Hans",
-        Theme = "Dark",
-        ShowConsole = true,
-        AlwaysShowScrollBar = true,
-        UpdateChannel = UpdateChannel.Stable,
-        SkipVersion = null,
-        IgnoreException = false
-    };
+        var stream = new MemoryStream(Encoding.UTF8.GetBytes(ConfigJson));
+        var config = _jsonSerializationService.DeserializeConfig(stream);
+
+        return Verify(config);
+    }
+
+    [Test]
+    public async Task DeserializeConfigAsync_ShouldReturnValidConfig()
+    {
+        var stream = new MemoryStream(Encoding.UTF8.GetBytes(ConfigJson));
+        var config = await _jsonSerializationService.DeserializeConfigAsync(stream);
+
+        await Verify(config);
+    }
 }
