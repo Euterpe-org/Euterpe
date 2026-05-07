@@ -81,7 +81,7 @@ public sealed class GenerateTheme : Task
             var fileName = file.GetMetadata("Filename");
             var relativePath = $"/{directory}/{fileName}.axaml";
 
-            if (directory != null && _categories.TryGetValue(directory, out var category))
+            if (directory is not null && _categories.TryGetValue(directory, out var category))
             {
                 category.Sources.Add(relativePath);
             }
@@ -107,13 +107,13 @@ public sealed class GenerateTheme : Task
         new(AvaloniaNamespace + "StyleInclude",
             new XAttribute("Source", source));
 
-    private void SaveStylesToFile(XElement styles)
+    private static void SaveStylesToFile(XElement styles)
     {
         var settings = new XmlWriterSettings
         {
             Indent = true,
             IndentChars = "    ",
-            NewLineChars = Environment.NewLine,
+            NewLineChars = "\n",
             NewLineHandling = NewLineHandling.Replace,
             NewLineOnAttributes = true,
             OmitXmlDeclaration = true
