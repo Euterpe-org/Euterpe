@@ -97,6 +97,18 @@ public sealed class ViewSmokeTests : HeadlessTest
         await Assert.That(window.IsLoaded).IsTrue();
     });
 
+    [Test]
+    public Task MainSplashWindow_LoadsIntoVisualTree() => RunOnUI(async () =>
+    {
+        var window = new MainSplashWindow();
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        using var _ = Assert.Multiple();
+        await Assert.That(window).IsNotNull();
+        await Assert.That(window.IsLoaded).IsTrue();
+    });
+
     private static Task Smoke(Func<Control> factory) => RunOnUI(async () =>
     {
         var view = factory();

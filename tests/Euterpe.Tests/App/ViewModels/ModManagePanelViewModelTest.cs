@@ -60,12 +60,86 @@ public sealed class ModManagePanelViewModelTest
         await Assert.That(openedFiles[0]).Contains(gameConfig.UserDataFolder);
     }
 
-    private static ModManagePanelViewModel NewViewModel() => new()
+    [Test]
+    public async Task InstallModCommand_DelegatesToService()
+    {
+        var modManageService = IModManageService.Mock();
+        var vm = NewViewModel(modManageService);
+        var mod = new ModDto { Name = "TestMod" };
+
+        await vm.InstallModCommand.ExecuteAsync(mod);
+
+        modManageService.InstallModAsync(mod).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task UpdateModCommand_DelegatesToService()
+    {
+        var modManageService = IModManageService.Mock();
+        var vm = NewViewModel(modManageService);
+        var mod = new ModDto { Name = "TestMod" };
+
+        await vm.UpdateModCommand.ExecuteAsync(mod);
+
+        modManageService.UpdateModAsync(mod).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task ReinstallModCommand_DelegatesToService()
+    {
+        var modManageService = IModManageService.Mock();
+        var vm = NewViewModel(modManageService);
+        var mod = new ModDto { Name = "TestMod" };
+
+        await vm.ReinstallModCommand.ExecuteAsync(mod);
+
+        modManageService.ReinstallModAsync(mod).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task UninstallModCommand_DelegatesToService()
+    {
+        var modManageService = IModManageService.Mock();
+        var vm = NewViewModel(modManageService);
+        var mod = new ModDto { Name = "TestMod" };
+
+        await vm.UninstallModCommand.ExecuteAsync(mod);
+
+        modManageService.UninstallModAsync(mod).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task ToggleModCommand_DelegatesToService()
+    {
+        var modManageService = IModManageService.Mock();
+        var vm = NewViewModel(modManageService);
+        var mod = new ModDto { Name = "TestMod" };
+
+        await vm.ToggleModCommand.ExecuteAsync(mod);
+
+        modManageService.ToggleModAsync(mod).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task OnInitializeAsync_InitializesModsAndSetsAllModsLoaded()
+    {
+        var modManageService = IModManageService.Mock();
+        modManageService.Connect().Returns(System.Reactive.Linq.Observable.Empty<DynamicData.IChangeSet<ModDto, string>>());
+        var vm = NewViewModel(modManageService);
+
+        await vm.InitializeAsync();
+
+        using var _ = Assert.Multiple();
+        modManageService.InitializeModsAsync().WasCalled(Times.Once);
+        await Assert.That(vm.AllModsLoaded).IsTrue();
+    }
+
+    private static ModManagePanelViewModel NewViewModel(IModManageService? modManageService = null) => new()
     {
         Launcher = IPlatformLauncher.Mock(),
         Logger = NullLogger<ModManagePanelViewModel>.Instance,
         Config = new Config { MuseDash = new MuseDashConfig(), MuseDash2 = new MuseDash2Config() },
         GameConfig = new MuseDashConfig(),
-        ModManageService = IModManageService.Mock()
+        ModManageService = modManageService ?? IModManageService.Mock()
     };
 }

@@ -1,4 +1,5 @@
 using Euterpe.ViewModels.Components;
+using Euterpe.ViewModels.Components.Setup;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests;
@@ -68,6 +69,98 @@ public sealed class RepairDialogViewModelTest
 
         launcher.OpenUriAsync("https://example.com").WasCalled(Times.Once);
         await Task.CompletedTask;
+    }
+
+    [Test]
+    public async Task PrepareForGamePathAsync_ResetsStateAndSetsGamePagePresented()
+    {
+        var state = new SetupState();
+        state.Steps.Add(new SetupStepState { Kinds = SetupOptionKinds.MelonLoader, DisplayName = "stale" });
+        state.Stage = SetupExecutionStage.Finished;
+
+        var gamePathPage = NewGamePathPage();
+        var vm = NewFullViewModel(state: state, gamePathPage: gamePathPage);
+
+        await vm.PrepareForGamePathAsync();
+
+        using var _ = Assert.Multiple();
+        await Assert.That(vm.Content).IsSameReferenceAs(gamePathPage);
+        await Assert.That(state.Steps).IsEmpty();
+        await Assert.That(state.Stage).IsEqualTo(SetupExecutionStage.NotStarted);
+    }
+
+    [Test]
+    public async Task PrepareForOptionAsync_ResetsStateAndSelectsOnlyMatchingOption()
+    {
+        var state = new SetupState();
+        var gameConfig = new MuseDashConfig();
+        foreach (var option in gameConfig.SetupOptions)
+        {
+            option.IsSelected = true;
+        }
+
+        var executionPage = NewExecutionPage(gameConfig, state);
+        var vm = NewFullViewModel(gameConfig: gameConfig, state: state, executionPage: executionPage);
+
+        await vm.PrepareForOptionAsync(SetupOptionKinds.MelonLoader);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(vm.Content).IsSameReferenceAs(executionPage);
+        await Assert.That(gameConfig.SetupOptions.Single(o => o.IsSelected).Kinds).IsEqualTo(SetupOptionKinds.MelonLoader);
+        await Assert.That(gameConfig.SetupOptions.Where(o => o.Kinds != SetupOptionKinds.MelonLoader).All(o => !o.IsSelected)).IsTrue();
+    }
+
+    [Test]
+    public async Task PrepareForOptionAsync_NoMatchingOption_AllOptionsDeselected()
+    {
+        var state = new SetupState();
+        var gameConfig = new MuseDashConfig();
+        gameConfig.SetupOptions[0].IsSelected = true;
+
+        var executionPage = NewExecutionPage(gameConfig, state);
+        var vm = NewFullViewModel(gameConfig: gameConfig, state: state, executionPage: executionPage);
+
+        await vm.PrepareForOptionAsync(SetupOptionKinds.None);
+
+        await Assert.That(gameConfig.SetupOptions.All(o => !o.IsSelected)).IsTrue();
+    }
+
+    private static GamePathPageViewModel NewGamePathPage() => new()
+    {
+        Launcher = IPlatformLauncher.Mock(),
+        Logger = NullLogger<GamePathPageViewModel>.Instance,
+        State = null!,
+        GameConfig = new MuseDashConfig(),
+        GamePaths = IGamePathDiscovery.Mock(),
+        FileSystemPickerService = null!
+    };
+
+    private static ExecutionPageViewModel NewExecutionPage(GameConfig gameConfig, SetupState state) => new()
+    {
+        Launcher = IPlatformLauncher.Mock(),
+        Logger = NullLogger<ExecutionPageViewModel>.Instance,
+        GameConfig = gameConfig,
+        SetupSteps = [],
+        State = state
+    };
+
+    private static RepairDialogViewModel NewFullViewModel(
+        GameConfig? gameConfig = null,
+        SetupState? state = null,
+        GamePathPageViewModel? gamePathPage = null,
+        ExecutionPageViewModel? executionPage = null)
+    {
+        var resolvedState = state ?? new SetupState();
+        var resolvedConfig = gameConfig ?? new MuseDashConfig();
+        return new RepairDialogViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            Logger = NullLogger<RepairDialogViewModel>.Instance,
+            GameConfig = resolvedConfig,
+            State = resolvedState,
+            GamePathPage = gamePathPage ?? NewGamePathPage(),
+            ExecutionPage = executionPage ?? NewExecutionPage(resolvedConfig, resolvedState)
+        };
     }
 
     private static RepairDialogViewModel NewViewModel(IPlatformLauncher? launcher = null) => new()

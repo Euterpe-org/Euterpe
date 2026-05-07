@@ -10,7 +10,16 @@ namespace Euterpe.Tests;
 [TestSubject(typeof(LiveLogService))]
 public sealed class LiveLogServiceTest
 {
-    private static List<LogMessage> MaterializeView(IEnumerable view) => view.Cast<LogMessage>().ToList();
+    private static List<LogMessage> MaterializeView(IEnumerable view)
+    {
+        var list = new List<LogMessage>();
+        foreach (LogMessage item in view)
+        {
+            list.Add(item);
+        }
+
+        return list;
+    }
 
     private static (LiveLogService service, LiveLogProcessor processor, ILoggerFactory factory) CreateWiredService()
     {

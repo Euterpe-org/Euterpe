@@ -15,6 +15,7 @@
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="TUnit.Mocks"/>
+        <PackageReference Include="TUnit.Mocks.Logging"/>
     </ItemGroup>
 
     <ItemGroup>
