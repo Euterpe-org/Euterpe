@@ -14,7 +14,8 @@
 
 ![Release](https://img.shields.io/github/v/release/Euterpe-org/Euterpe?style=flat&label=release&color=0ea5e9&labelColor=1f2937)
 ![Downloads](https://img.shields.io/github/downloads/Euterpe-org/Euterpe/total?style=flat&label=downloads&color=22c55e&labelColor=1f2937)
-![Build](https://img.shields.io/github/actions/workflow/status/Euterpe-org/Euterpe/build.yml?style=flat&label=build&color=f59e0b&labelColor=1f2937)
+![Build](https://img.shields.io/github/actions/workflow/status/Euterpe-org/Euterpe/ci.yml?style=flat&label=build&color=f59e0b&labelColor=1f2937)
+[![Coverage](https://img.shields.io/codecov/c/github/Euterpe-org/Euterpe?token=GZLAOW13F2&style=flat&label=coverage&color=ec4899&labelColor=1f2937)](https://codecov.io/gh/Euterpe-org/Euterpe)
 ![License](https://img.shields.io/github/license/Euterpe-org/Euterpe?style=flat&label=license&color=8b5cf6&labelColor=1f2937)
 
 </div>
