@@ -367,13 +367,13 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>스페인어</value>
   </data>
-  <data name="Wizard_Description_GamePath" xml:space="preserve">
+  <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>게임이 설치된 위치를 알려주세요</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>역할과 작업을 선택하여 시작하세요</value>
   </data>
-  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>유효한 게임 폴더가 아닙니다</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
@@ -403,73 +403,73 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>작업</value>
   </data>
-  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>대기 중</value>
   </data>
-  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
     <value>실행 중</value>
   </data>
-  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>완료</value>
   </data>
-  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>실패</value>
   </data>
-  <data name="Wizard_Step_Failed" xml:space="preserve">
+  <data name="Setup_Step_Failed" xml:space="preserve">
     <value>실패했습니다. 로그를 확인하거나 다시 시도하세요.</value>
   </data>
-  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
     <value>채보 도구 (MDBMSC)</value>
   </data>
-  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
     <value>MDM 채보 제작 툴킷</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
     <value>모드 적용 게임 실행에 필요</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
     <value>모드 개발에 필요</value>
   </data>
-  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
     <value>MD_DIRECTORY 변수</value>
   </data>
-  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
     <value>게임 경로 환경 변수 설정</value>
   </data>
-  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
     <value>필수 모드</value>
   </data>
-  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
     <value>최고의 경험을 위한 핵심 모드</value>
   </data>
-  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
     <value>MelonLoader</value>
   </data>
-  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>필수 모드 로더 프레임워크</value>
   </data>
-  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>모드 템플릿</value>
   </data>
-  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
     <value>새 모드 프로젝트용 NuGet 템플릿</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
     <value>충돌 제거</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>호환되지 않는 모드 제거</value>
   </data>
-  <data name="Wizard_Title_GamePath" xml:space="preserve">
+  <data name="Setup_Title_GamePath" xml:space="preserve">
     <value>게임 폴더 찾기</value>
   </data>
-  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe 설정 중</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">

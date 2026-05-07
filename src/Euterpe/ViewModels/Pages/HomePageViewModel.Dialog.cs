@@ -13,13 +13,13 @@ public sealed partial class HomePageViewModel
     private async Task ShowOptionRepairAsync(SetupOptionKinds kind)
     {
         await RepairDialogViewModel.PrepareForOptionAsync(kind).ConfigureAwait(true);
-        await ShowDialogAsync<RepairDialog, RepairDialogViewModel>(RepairDialogViewModel, Wizard_Title_SettingUp).ConfigureAwait(true);
+        await ShowDialogAsync<RepairDialog, RepairDialogViewModel>(RepairDialogViewModel, Setup_Title_SettingUp).ConfigureAwait(true);
     }
 
     private async Task ShowGamePathRepairAsync()
     {
         await RepairDialogViewModel.PrepareForGamePathAsync().ConfigureAwait(true);
-        await ShowDialogAsync<RepairDialog, RepairDialogViewModel>(RepairDialogViewModel, Wizard_Title_GamePath).ConfigureAwait(true);
+        await ShowDialogAsync<RepairDialog, RepairDialogViewModel>(RepairDialogViewModel, Setup_Title_GamePath).ConfigureAwait(true);
     }
 
     private async Task ShowDialogAsync<TView, TViewModel>(TViewModel vm, string title)

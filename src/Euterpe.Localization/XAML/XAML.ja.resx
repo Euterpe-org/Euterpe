@@ -367,13 +367,13 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>スペイン語</value>
   </data>
-  <data name="Wizard_Description_GamePath" xml:space="preserve">
+  <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>ゲームのインストール場所を教えてください</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>ロールとタスクを選んで始めましょう</value>
   </data>
-  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>有効なゲームフォルダではありません</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
@@ -403,73 +403,73 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>タスク</value>
   </data>
-  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>待機中</value>
   </data>
-  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
     <value>実行中</value>
   </data>
-  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>完了</value>
   </data>
-  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>失敗</value>
   </data>
-  <data name="Wizard_Step_Failed" xml:space="preserve">
+  <data name="Setup_Step_Failed" xml:space="preserve">
     <value>失敗しました。ログを確認して再試行してください。</value>
   </data>
-  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
     <value>チャートツール (MDBMSC)</value>
   </data>
-  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
     <value>MDMチャート作成ツールキット</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
     <value>Mod適用ゲームの実行に必要</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
     <value>Mod開発に必要</value>
   </data>
-  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
     <value>MD_DIRECTORY 変数</value>
   </data>
-  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
     <value>ゲームパス環境変数を設定</value>
   </data>
-  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
     <value>必須Mod</value>
   </data>
-  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
     <value>最高の体験のためのコアMod</value>
   </data>
-  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
     <value>MelonLoader</value>
   </data>
-  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>必須Modローダーフレームワーク</value>
   </data>
-  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Modテンプレート</value>
   </data>
-  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
     <value>新規Modプロジェクト用NuGetテンプレート</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
     <value>競合の削除</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>互換性のないModを削除</value>
   </data>
-  <data name="Wizard_Title_GamePath" xml:space="preserve">
+  <data name="Setup_Title_GamePath" xml:space="preserve">
     <value>ゲームフォルダの指定</value>
   </data>
-  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe セットアップ中</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">

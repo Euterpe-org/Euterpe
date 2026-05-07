@@ -56,7 +56,7 @@
                 FontSize="20"
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
-                Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Title_SettingUp}}"
+                Text="{Localize {x:Static loc:XAMLLiteral.Setup_Title_SettingUp}}"
                 Theme="{StaticResource TitleTextBlock}" />
         </StackPanel>
 

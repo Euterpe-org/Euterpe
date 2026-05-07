@@ -34,14 +34,14 @@
                 <TextBlock
                     FontSize="22"
                     FontWeight="Bold"
-                    Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Title_GamePath}}"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Setup_Title_GamePath}}"
                     Theme="{StaticResource TitleTextBlock}"
                     VerticalAlignment="Center" />
             </StackPanel>
             <TextBlock
                 Foreground="{DynamicResource SecondaryTextColor}"
                 Margin="48,0,0,0"
-                Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Description_GamePath}}" />
+                Text="{Localize {x:Static loc:XAMLLiteral.Setup_Description_GamePath}}" />
         </StackPanel>
 
         <!--  Body  -->
@@ -79,7 +79,7 @@
                 FontSize="12"
                 Foreground="#D14343"
                 IsVisible="{Binding ShowInvalidMessage}"
-                Text="{Localize {x:Static loc:XAMLLiteral.Wizard_GamePath_Invalid}}" />
+                Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_Invalid}}" />
         </StackPanel>
     </Grid>
 </UserControl>

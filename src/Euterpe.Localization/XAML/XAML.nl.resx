@@ -367,13 +367,13 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spaans</value>
   </data>
-  <data name="Wizard_Description_GamePath" xml:space="preserve">
+  <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Vertel ons waar het spel is geïnstalleerd</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Kies uw rol en taken om te beginnen</value>
   </data>
-  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Geen geldige spelmap</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
@@ -403,73 +403,73 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>Taken</value>
   </data>
-  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>Wachtend</value>
   </data>
-  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
     <value>Actief</value>
   </data>
-  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>Klaar</value>
   </data>
-  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Mislukt</value>
   </data>
-  <data name="Wizard_Step_Failed" xml:space="preserve">
+  <data name="Setup_Step_Failed" xml:space="preserve">
     <value>Mislukt. Controleer het logboek of probeer opnieuw.</value>
   </data>
-  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
     <value>Charting Tool (MDBMSC)</value>
   </data>
-  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
     <value>Toolkit voor het maken van MDM-charts</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
     <value>Vereist om de gemodde game te draaien</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
     <value>Vereist voor modontwikkeling</value>
   </data>
-  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
     <value>MD_DIRECTORY-variabele</value>
   </data>
-  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
     <value>Omgevingsvariabele voor spelpad instellen</value>
   </data>
-  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
     <value>Essentiële mods</value>
   </data>
-  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
     <value>Kernmods voor de beste ervaring</value>
   </data>
-  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
     <value>MelonLoader</value>
   </data>
-  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>Vereist mod loader-framework</value>
   </data>
-  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Mod Template</value>
   </data>
-  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
     <value>NuGet-template voor nieuwe modprojecten</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
     <value>Conflicten verwijderen</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>Incompatibele mods verwijderen</value>
   </data>
-  <data name="Wizard_Title_GamePath" xml:space="preserve">
+  <data name="Setup_Title_GamePath" xml:space="preserve">
     <value>Spelmap zoeken</value>
   </data>
-  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe instellen</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">

@@ -367,13 +367,13 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanish</value>
   </data>
-  <data name="Wizard_Description_GamePath" xml:space="preserve">
+  <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Tell us where your game is installed</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Choose your role and tasks to get started</value>
   </data>
-  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Not a valid game folder</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
@@ -403,73 +403,73 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>Tasks</value>
   </data>
-  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>Pending</value>
   </data>
-  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
     <value>Running</value>
   </data>
-  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>Done</value>
   </data>
-  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Failed</value>
   </data>
-  <data name="Wizard_Step_Failed" xml:space="preserve">
+  <data name="Setup_Step_Failed" xml:space="preserve">
     <value>Failed. Please check the log or retry.</value>
   </data>
-  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
     <value>Charting Tool (MDBMSC)</value>
   </data>
-  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
     <value>MDM chart creation toolkit</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
     <value>Required for running modded game</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
     <value>Required for mod development</value>
   </data>
-  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
     <value>MD_DIRECTORY Variable</value>
   </data>
-  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
     <value>Set game path environment variable</value>
   </data>
-  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
     <value>Essential Mods</value>
   </data>
-  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
     <value>Core mods for the best experience</value>
   </data>
-  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
     <value>MelonLoader</value>
   </data>
-  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>Required mod loader framework</value>
   </data>
-  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Mod Template</value>
   </data>
-  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
     <value>NuGet template for new mod projects</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
     <value>Uninstall Conflicts</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>Remove incompatible mods</value>
   </data>
-  <data name="Wizard_Title_GamePath" xml:space="preserve">
+  <data name="Setup_Title_GamePath" xml:space="preserve">
     <value>Locate Game Folder</value>
   </data>
-  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Setting Up Euterpe</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">

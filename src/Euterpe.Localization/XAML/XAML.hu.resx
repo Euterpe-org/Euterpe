@@ -367,13 +367,13 @@
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanyol</value>
   </data>
-  <data name="Wizard_Description_GamePath" xml:space="preserve">
+  <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Add meg, hol van telepítve a játék</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Válaszd ki a szereped és a feladatokat a kezdéshez</value>
   </data>
-  <data name="Wizard_GamePath_Invalid" xml:space="preserve">
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Érvénytelen játékmappa</value>
   </data>
   <data name="Wizard_Role_Charter" xml:space="preserve">
@@ -403,73 +403,73 @@
   <data name="Wizard_Section_Tasks" xml:space="preserve">
     <value>Feladatok</value>
   </data>
-  <data name="Wizard_StepStatus_Pending" xml:space="preserve">
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>Várakozik</value>
   </data>
-  <data name="Wizard_StepStatus_Running" xml:space="preserve">
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
     <value>Fut</value>
   </data>
-  <data name="Wizard_StepStatus_Succeeded" xml:space="preserve">
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>Kész</value>
   </data>
-  <data name="Wizard_StepStatus_Failed" xml:space="preserve">
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Sikertelen</value>
   </data>
-  <data name="Wizard_Step_Failed" xml:space="preserve">
+  <data name="Setup_Step_Failed" xml:space="preserve">
     <value>Sikertelen. Ellenőrizze a naplót, vagy próbálja újra.</value>
   </data>
-  <data name="Wizard_Task_ChartingTool" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
     <value>Chart Eszköz (MDBMSC)</value>
   </data>
-  <data name="Wizard_Task_ChartingTool_Description" xml:space="preserve">
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
     <value>MDM chart készítő eszközkészlet</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>
   </data>
-  <data name="Wizard_Task_DotNetRuntime_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
     <value>Szükséges a moddolt játék futtatásához</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>
   </data>
-  <data name="Wizard_Task_DotNetSdk_Description" xml:space="preserve">
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
     <value>Szükséges a mod fejlesztéshez</value>
   </data>
-  <data name="Wizard_Task_EnvVariable" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
     <value>MD_DIRECTORY Változó</value>
   </data>
-  <data name="Wizard_Task_EnvVariable_Description" xml:space="preserve">
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
     <value>Játék útvonal környezeti változó beállítása</value>
   </data>
-  <data name="Wizard_Task_EssentialMods" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
     <value>Alapvető Modok</value>
   </data>
-  <data name="Wizard_Task_EssentialMods_Description" xml:space="preserve">
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
     <value>Fő modok a legjobb élményhez</value>
   </data>
-  <data name="Wizard_Task_MelonLoader" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
     <value>MelonLoader</value>
   </data>
-  <data name="Wizard_Task_MelonLoader_Description" xml:space="preserve">
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>Szükséges mod betöltő keretrendszer</value>
   </data>
-  <data name="Wizard_Task_ModTemplate" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Mod Sablon</value>
   </data>
-  <data name="Wizard_Task_ModTemplate_Description" xml:space="preserve">
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
     <value>NuGet sablon új mod projektekhez</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
     <value>Ütközések Eltávolítása</value>
   </data>
-  <data name="Wizard_Task_UninstallConflicts_Description" xml:space="preserve">
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
     <value>Inkompatibilis modok eltávolítása</value>
   </data>
-  <data name="Wizard_Title_GamePath" xml:space="preserve">
+  <data name="Setup_Title_GamePath" xml:space="preserve">
     <value>Játékmappa keresése</value>
   </data>
-  <data name="Wizard_Title_SettingUp" xml:space="preserve">
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe Beállítása</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">

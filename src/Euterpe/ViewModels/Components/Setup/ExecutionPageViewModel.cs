@@ -4,7 +4,7 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
 {
     private Dictionary<SetupOptionKinds, ISetupStep> StepMap => field ??= SetupSteps.ToDictionary(s => s.Kinds);
 
-    public override LocalizedString Title => Wizard_Title_SettingUp;
+    public override LocalizedString Title => Setup_Title_SettingUp;
 
     public override bool CanGoBack => false;
 
@@ -101,7 +101,7 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
         catch (Exception ex)
         {
             step.Status = SetupStepStatus.Failed;
-            step.ErrorMessage = Wizard_Step_Failed;
+            step.ErrorMessage = Setup_Step_Failed;
             Logger.ZLogError(ex, $"Setup step '{step.Kinds}' failed");
         }
     }

@@ -2,7 +2,7 @@ namespace Euterpe.ViewModels.Components.Setup;
 
 public sealed partial class GamePathPageViewModel : SetupPageViewModelBase
 {
-    public override LocalizedString Title => Wizard_Title_GamePath;
+    public override LocalizedString Title => Setup_Title_GamePath;
 
     public override bool CanGoBack => false;
 

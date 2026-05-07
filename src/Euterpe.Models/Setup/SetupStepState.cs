@@ -23,10 +23,10 @@ public sealed partial class SetupStepState : ObservableObject
 
     public LocalizedString StatusDisplay => Status switch
     {
-        SetupStepStatus.Pending => Wizard_StepStatus_Pending,
-        SetupStepStatus.Running => Wizard_StepStatus_Running,
-        SetupStepStatus.Succeeded => Wizard_StepStatus_Succeeded,
-        SetupStepStatus.Failed => Wizard_StepStatus_Failed,
+        SetupStepStatus.Pending => Setup_StepStatus_Pending,
+        SetupStepStatus.Running => Setup_StepStatus_Running,
+        SetupStepStatus.Succeeded => Setup_StepStatus_Succeeded,
+        SetupStepStatus.Failed => Setup_StepStatus_Failed,
         _ => throw new UnreachableException()
     };
 }
