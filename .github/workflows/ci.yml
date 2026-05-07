@@ -45,20 +45,14 @@ jobs:
       - name: Build
         run: dotnet build -c Release -p:DebugType=embedded
 
-      - name: Test with coverage
-        run: dotnet test -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
+      - name: Test core
+        run: dotnet test --project tests/Euterpe.Tests/Euterpe.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
 
-      - name: Generate coverage report
-        if: always() && matrix.platform.name == 'linux'
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.5.9
-        with:
-          reports: "TestResults/*.cobertura.xml"
-          targetdir: coverage-report
-          reporttypes: MarkdownSummaryGithub
+      - name: Test generators
+        run: dotnet test --project tests/Euterpe.Generators.Tests/Euterpe.Generators.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
 
-      - name: Append coverage to job summary
-        if: always() && matrix.platform.name == 'linux'
-        run: cat coverage-report/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Test headless
+        run: dotnet test --project tests/Euterpe.Headless.Tests/Euterpe.Headless.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
 
       - name: Upload to Codecov
         if: always()
