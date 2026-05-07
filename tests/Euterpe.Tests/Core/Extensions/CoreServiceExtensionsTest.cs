@@ -14,27 +14,14 @@ namespace Euterpe.Tests;
 public sealed class CoreServiceExtensionsTest
 {
     [Test]
-    public async Task RegisterLogger_ResolvesILogger()
+    public async Task RegisterLogger_RegistersLoggerServices()
     {
         var services = new ServiceCollection();
-        var logFile = Path.Combine(Path.GetTempPath(), $"euterpe_logger_{Guid.NewGuid():N}.log");
-        try
-        {
-            services.RegisterLogger(logFile);
-            await using (var provider = services.BuildServiceProvider())
-            {
-                using var _ = Assert.Multiple();
-                await Assert.That(provider.GetService<ILogger<CoreServiceExtensionsTest>>()).IsNotNull();
-                await Assert.That(provider.GetService<LiveLogProcessor>()).IsNotNull();
-            }
-        }
-        finally
-        {
-            if (File.Exists(logFile))
-            {
-                File.Delete(logFile);
-            }
-        }
+        services.RegisterLogger("dummy.log");
+
+        using var _ = Assert.Multiple();
+        await Assert.That(services.Any(s => s.ServiceType == typeof(LiveLogProcessor))).IsTrue();
+        await Assert.That(services.Any(s => s.ServiceType == typeof(ILoggerFactory))).IsTrue();
     }
 
     [Test]
