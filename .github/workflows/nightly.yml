@@ -13,8 +13,29 @@ permissions:
   contents: write
 
 jobs:
+  check:
+    name: Check for recent commits
+    runs-on: ubuntu-latest
+    outputs:
+      should_build: ${{ steps.check.outputs.should_build }}
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+      - name: Check for commits in last 24 hours
+        id: check
+        run: |
+          if [ -n "$(git log -1 --since='24 hours ago')" ]; then
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_build=false" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
     name: Build (${{ matrix.platform.name }}-${{ matrix.platform.arch }})
+    needs: check
+    if: github.event_name == 'workflow_dispatch' || needs.check.outputs.should_build == 'true'
     strategy:
       fail-fast: false
       matrix:
