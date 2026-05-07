@@ -62,7 +62,7 @@ jobs:
 
       - name: Upload to Codecov
         if: always() && matrix.platform.name == 'linux'
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           files: TestResults/*.cobertura.xml
           fail_ci_if_error: false
