@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <IsTestProject>true</IsTestProject>
+        <IsAotCompatible>false</IsAotCompatible>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia"/>
+        <PackageReference Include="Avalonia.Headless"/>
+        <PackageReference Include="Irihi.Ursa"/>
+        <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Semi.Avalonia"/>
+        <PackageReference Include="TUnit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Euterpe\Euterpe.csproj"/>
+        <ProjectReference Include="..\..\src\Euterpe.Controls\Euterpe.Controls.csproj"/>
+    </ItemGroup>
+
+</Project>
