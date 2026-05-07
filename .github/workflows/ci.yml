@@ -59,3 +59,10 @@ jobs:
       - name: Append coverage to job summary
         if: always() && matrix.platform.name == 'linux'
         run: cat coverage-report/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload to Codecov
+        if: always() && matrix.platform.name == 'linux'
+        uses: codecov/codecov-action@v5
+        with:
+          files: TestResults/*.cobertura.xml
+          fail_ci_if_error: false
