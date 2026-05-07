@@ -43,7 +43,7 @@ jobs:
           global-json-file: global.json
 
       - name: Build
-        run: dotnet build -c Release
+        run: dotnet build -c Release -p:DebugType=embedded
 
       - name: Test with coverage
         run: dotnet test -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
