@@ -64,5 +64,6 @@ jobs:
         if: always() && matrix.platform.name == 'linux'
         uses: codecov/codecov-action@v6
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: TestResults/*.cobertura.xml
           fail_ci_if_error: false
