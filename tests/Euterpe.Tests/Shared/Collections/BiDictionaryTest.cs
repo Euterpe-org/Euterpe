@@ -1,3 +1,4 @@
+using System.Collections;
 using Euterpe.Shared.Collections;
 
 namespace Euterpe.Tests;
@@ -152,5 +153,100 @@ public sealed class BiDictionaryTest
         await Assert.That(pairs).Contains(new KeyValuePair<string, int>("one", 1));
         await Assert.That(pairs).Contains(new KeyValuePair<string, int>("two", 2));
         await Assert.That(pairs).Contains(new KeyValuePair<string, int>("three", 3));
+    }
+
+    [Test]
+    public async Task NonGenericEnumerator_YieldsForwardKeyValuePairs()
+    {
+        IEnumerable enumerable = _dict;
+        var pairs = new List<KeyValuePair<string, int>>();
+        foreach (var item in enumerable)
+        {
+            pairs.Add((KeyValuePair<string, int>)item);
+        }
+
+        using var _ = Assert.Multiple();
+        await Assert.That(pairs.Count).IsEqualTo(3);
+        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("one", 1));
+    }
+
+    [Test]
+    public async Task IndexerSetByKey_OverwritesValueAndReverseEntry()
+    {
+        _dict["one"] = 100;
+
+        using var _ = Assert.Multiple();
+        await Assert.That(_dict["one"]).IsEqualTo(100);
+        await Assert.That(_dict[100]).IsEqualTo("one");
+    }
+
+    [Test]
+    public async Task IndexerSetByValue_OverwritesKeyAndForwardEntry()
+    {
+        _dict[1] = "uno";
+
+        using var _ = Assert.Multiple();
+        await Assert.That(_dict[1]).IsEqualTo("uno");
+        await Assert.That(_dict["uno"]).IsEqualTo(1);
+    }
+
+    [Test]
+    public async Task TryGetValue_MissingKey_ReturnsFalse()
+    {
+        var found = _dict.TryGetValue("missing", out var value);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(found).IsFalse();
+        await Assert.That(value).IsEqualTo(default);
+    }
+
+    [Test]
+    public async Task TryGetKey_MissingValue_ReturnsFalse()
+    {
+        var found = _dict.TryGetKey(99, out var key);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(found).IsFalse();
+        await Assert.That(key).IsNull();
+    }
+
+    [Test]
+    public async Task RemoveByValue_MissingValue_ReturnsFalse()
+    {
+        var removed = _dict.RemoveByValue(99);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(removed).IsFalse();
+        await Assert.That(_dict.Count).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task CollectionInitializer_BuildsBiDictionaryViaCreate()
+    {
+        BiDictionary<string, int> dict =
+        [
+            new KeyValuePair<string, int>("ten", 10),
+            new KeyValuePair<string, int>("twenty", 20)
+        ];
+
+        using var _ = Assert.Multiple();
+        await Assert.That(dict.Count).IsEqualTo(2);
+        await Assert.That(dict["ten"]).IsEqualTo(10);
+        await Assert.That(dict[20]).IsEqualTo("twenty");
+    }
+
+    [Test]
+    public async Task FrozenBiDictionary_NonGenericEnumerator_YieldsKeyValuePairs()
+    {
+        var frozen = _dict.ToFrozenBiDictionary();
+        IEnumerable enumerable = frozen;
+
+        var count = 0;
+        foreach (var _ in enumerable)
+        {
+            count++;
+        }
+
+        await Assert.That(count).IsEqualTo(3);
     }
 }

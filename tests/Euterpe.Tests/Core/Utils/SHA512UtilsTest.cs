@@ -69,4 +69,22 @@ public sealed class SHA512UtilsTest
         await File.WriteAllTextAsync(_tempFile, content);
         await Assert.That(SHA512Utils.HexLowerFromPath(_tempFile)).IsEqualTo(expected);
     }
+
+    [Test]
+    [Arguments("", EmptyHashUpper)]
+    [Arguments("abc", AbcHashUpper)]
+    public async Task HexFromPath_ReturnsExpectedUpperCaseHash(string content, string expected)
+    {
+        await File.WriteAllTextAsync(_tempFile, content);
+        await Assert.That(SHA512Utils.HexFromPath(_tempFile)).IsEqualTo(expected);
+    }
+
+    [Test]
+    [Arguments("", EmptyHashLower)]
+    [Arguments("abc", AbcHashLower)]
+    public async Task HexLowerFromPathAsync_ReturnsExpectedLowerCaseHash(string content, string expected)
+    {
+        await File.WriteAllTextAsync(_tempFile, content);
+        await Assert.That(await SHA512Utils.HexLowerFromPathAsync(_tempFile)).IsEqualTo(expected);
+    }
 }
