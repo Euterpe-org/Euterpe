@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\src\Euterpe\Euterpe.csproj"/>
         <ProjectReference Include="..\..\src\Euterpe.Core\Euterpe.Core.csproj"/>
     </ItemGroup>
 
