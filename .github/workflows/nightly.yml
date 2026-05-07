@@ -62,7 +62,7 @@ jobs:
           ref: dev
 
       - name: Download zips
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: nightly-*
           path: ./dist
