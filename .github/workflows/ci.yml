@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+    paths-ignore:
+      - "assets/**"
+      - "LICENSE"
+      - "**/*.md"
+  pull_request:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - "assets/**"
+      - "LICENSE"
+      - "**/*.md"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: Test (${{ matrix.platform.name }}-${{ matrix.platform.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { os: ubuntu-latest, name: linux, arch: x64 }
+          - { os: windows-latest, name: win, arch: x64 }
+
+    runs-on: ${{ matrix.platform.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet build -c Release
+
+      - name: Test with coverage
+        run: dotnet test -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
+
+      - name: Generate coverage report
+        if: always() && matrix.platform.name == 'linux'
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.5.9
+        with:
+          reports: "TestResults/*.cobertura.xml"
+          targetdir: coverage-report
+          reporttypes: MarkdownSummaryGithub
+
+      - name: Append coverage to job summary
+        if: always() && matrix.platform.name == 'linux'
+        run: cat coverage-report/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"

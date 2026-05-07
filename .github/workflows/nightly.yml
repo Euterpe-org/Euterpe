@@ -1,0 +1,88 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build (${{ matrix.platform.name }}-${{ matrix.platform.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { os: ubuntu-latest, name: linux, arch: x64 }
+          - { os: windows-latest, name: win, arch: x64 }
+
+    runs-on: ${{ matrix.platform.os }}
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet publish
+
+      - name: Test
+        run: dotnet test -c Release --no-build --report-trx
+
+      - name: Create archive
+        working-directory: artifacts/output
+        run: 7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip" *
+
+      - name: Upload zip
+        uses: actions/upload-artifact@v7
+        with:
+          name: nightly-${{ matrix.platform.name }}-${{ matrix.platform.arch }}
+          path: Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip
+          if-no-files-found: error
+
+  release:
+    name: Publish nightly release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+
+      - name: Download zips
+        uses: actions/download-artifact@v7
+        with:
+          pattern: nightly-*
+          path: ./dist
+          merge-multiple: true
+
+      - name: Delete previous nightly release and tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete nightly --yes --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
+
+      - name: Create nightly release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: Nightly Build
+          prerelease: true
+          make_latest: false
+          target_commitish: dev
+          body: |
+            Auto-built nightly from `dev` at ${{ github.sha }}.
+            This release is overwritten on every successful nightly run.
+          files: dist/*.zip

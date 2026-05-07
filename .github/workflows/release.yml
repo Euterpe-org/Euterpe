@@ -1,0 +1,75 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-*"
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build (${{ matrix.platform.name }}-${{ matrix.platform.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { os: ubuntu-latest, name: linux, arch: x64 }
+          - { os: windows-latest, name: win, arch: x64 }
+
+    runs-on: ${{ matrix.platform.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet publish
+
+      - name: Test
+        run: dotnet test -c Release --no-build --report-trx
+
+      - name: Create archive
+        working-directory: artifacts/output
+        run: 7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip" *
+
+      - name: Upload zip
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-${{ matrix.platform.name }}-${{ matrix.platform.arch }}
+          path: Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip
+          if-no-files-found: error
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Download zips
+        uses: actions/download-artifact@v7
+        with:
+          pattern: release-*
+          path: ./dist
+          merge-multiple: true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          files: dist/*.zip
