@@ -68,4 +68,76 @@ public sealed class VdfSerializationServiceTest
         await Assert.That(result.TotalSize).IsEqualTo(original.TotalSize);
         await Assert.That(result.Apps).IsEquivalentTo(original.Apps, KeyValuePairComparer<string, string>.Default);
     }
+
+    [Test]
+    public async Task SerializeToFile_AndDeserializeFromFile_RoundTrip_PreservesAllFields()
+    {
+        var original = new LibraryFolder
+        {
+            Path = "/home/user/SteamLibrary",
+            Label = "Linux",
+            ContentId = "67890",
+            TotalSize = "12345",
+            Apps = new Dictionary<string, string>
+            {
+                ["774171"] = "1024"
+            }
+        };
+
+        var tempFile = Path.Combine(Path.GetTempPath(), $"vdf_{Guid.NewGuid():N}.vdf");
+        try
+        {
+            _service.SerializeToFile(tempFile, original, "library");
+            var roundTripped = _service.DeserializeFromFile<LibraryFolder>(tempFile);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(roundTripped.Path).IsEqualTo(original.Path);
+            await Assert.That(roundTripped.Label).IsEqualTo(original.Label);
+            await Assert.That(roundTripped.ContentId).IsEqualTo(original.ContentId);
+            await Assert.That(roundTripped.TotalSize).IsEqualTo(original.TotalSize);
+            await Assert.That(roundTripped.Apps).IsEquivalentTo(original.Apps, KeyValuePairComparer<string, string>.Default);
+        }
+        finally
+        {
+            if (File.Exists(tempFile))
+            {
+                File.Delete(tempFile);
+            }
+        }
+    }
+
+    [Test]
+    public async Task DeserializeFromFile_FileExists_ReadsContent()
+    {
+        const string vdf = """
+                           "library"
+                           {
+                               "path"      "/file/path"
+                               "label"     "FromFile"
+                               "contentid" "999"
+                               "totalsize" "1"
+                               "apps"
+                               {
+                                   "1" "2"
+                               }
+                           }
+                           """;
+        var tempFile = Path.Combine(Path.GetTempPath(), $"vdf_{Guid.NewGuid():N}.vdf");
+        try
+        {
+            await File.WriteAllTextAsync(tempFile, vdf);
+            var result = _service.DeserializeFromFile<LibraryFolder>(tempFile);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(result.Path).IsEqualTo("/file/path");
+            await Assert.That(result.Label).IsEqualTo("FromFile");
+        }
+        finally
+        {
+            if (File.Exists(tempFile))
+            {
+                File.Delete(tempFile);
+            }
+        }
+    }
 }
