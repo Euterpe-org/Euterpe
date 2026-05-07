@@ -1,13 +1,10 @@
-using Avalonia.VisualTree;
-using Euterpe.Controls;
-
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(LabeledSection))]
 public sealed class LabeledSectionTests : HeadlessTest
 {
     [Test]
-    public Task Title_and_description_bind_to_template_textblocks() => RunOnUI(async () =>
+    public Task TitleAndDescription_BindToTemplateTextBlocks() => RunOnUI(async () =>
     {
         var section = new LabeledSection { Title = "Hello", Description = "World" };
         var window = new Window { Content = section, Width = 400, Height = 300 };
@@ -22,7 +19,7 @@ public sealed class LabeledSectionTests : HeadlessTest
     });
 
     [Test]
-    public Task Title_change_propagates_to_template_textblock() => RunOnUI(async () =>
+    public Task TitleChange_PropagatesToTemplateTextBlock() => RunOnUI(async () =>
     {
         var section = new LabeledSection { Title = "Initial" };
         var window = new Window { Content = section, Width = 400, Height = 300 };

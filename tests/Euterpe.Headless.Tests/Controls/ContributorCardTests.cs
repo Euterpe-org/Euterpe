@@ -1,0 +1,95 @@
+using Euterpe.Controls.Models;
+
+namespace Euterpe.Headless.Tests.Controls;
+
+[TestSubject(typeof(ContributorCard))]
+public sealed class ContributorCardTests : HeadlessTest
+{
+    [Test]
+    public Task ContributorName_BindsToTemplateTextBlock() => RunOnUI(async () =>
+    {
+        var card = new ContributorCard { ContributorName = "lxymahatma" };
+        var window = new Window { Content = card, Width = 400, Height = 200 };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var nameTextBlock = card.GetVisualDescendants()
+            .OfType<TextBlock>()
+            .FirstOrDefault(tb => tb.Text == "lxymahatma");
+        await Assert.That(nameTextBlock).IsNotNull();
+    });
+
+    [Test]
+    public Task DescriptionTextBlock_IsHidden_WhenDescriptionIsNull() => RunOnUI(async () =>
+    {
+        var card = new ContributorCard
+        {
+            ContributorName = "test",
+            ContributorDescription = null
+        };
+        var window = new Window { Content = card, Width = 400, Height = 200 };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var nameTextBlock = card.GetVisualDescendants()
+            .OfType<TextBlock>()
+            .First(tb => tb.Text == "test");
+        var descTextBlock = card.GetVisualDescendants()
+            .OfType<TextBlock>()
+            .FirstOrDefault(tb => !ReferenceEquals(tb, nameTextBlock));
+
+        using var _ = Assert.Multiple();
+        await Assert.That(descTextBlock).IsNotNull();
+        await Assert.That(descTextBlock!.IsVisible).IsFalse();
+    });
+
+    [Test]
+    public Task DescriptionTextBlock_IsVisible_WhenDescriptionIsSet() => RunOnUI(async () =>
+    {
+        var card = new ContributorCard
+        {
+            ContributorName = "test",
+            ContributorDescription = "the maintainer"
+        };
+        var window = new Window { Content = card, Width = 400, Height = 200 };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var descTextBlock = card.GetVisualDescendants()
+            .OfType<TextBlock>()
+            .FirstOrDefault(tb => tb.Text == "the maintainer");
+
+        using var _ = Assert.Multiple();
+        await Assert.That(descTextBlock).IsNotNull();
+        await Assert.That(descTextBlock!.IsVisible).IsTrue();
+    });
+
+    [Test]
+    public Task ButtonCommand_TriggersWithLinkUrl_WhenLinkButtonClicked() => RunOnUI(async () =>
+    {
+        var receivedUrls = new List<object?>();
+        var card = new ContributorCard
+        {
+            ContributorName = "test",
+            Links = [new ContributorLink("github", "https://github.com")],
+            ButtonCommand = new DelegateCommand(p => receivedUrls.Add(p)),
+        };
+        var window = new Window { Content = card, Width = 400, Height = 300 };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var expander = card.GetVisualDescendants().OfType<Expander>().First();
+        expander.IsExpanded = true;
+        Dispatcher.UIThread.RunJobs();
+
+        var linkButton = card.GetVisualDescendants()
+            .OfType<Button>()
+            .FirstOrDefault(b => b.CommandParameter is "https://github.com");
+
+        using var _ = Assert.Multiple();
+        await Assert.That(linkButton).IsNotNull();
+        linkButton!.Command?.Execute(linkButton.CommandParameter);
+        Dispatcher.UIThread.RunJobs();
+        await Assert.That(receivedUrls).Contains("https://github.com");
+    });
+}

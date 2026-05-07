@@ -15,6 +15,9 @@ public static class IocContainer
 
     public static T Resolve<T>() where T : notnull => GameScope.Resolve<T>();
 
+    internal static void SetTestScope(ILifetimeScope scope) =>
+        GameScopeSubject = new BehaviorSubject<ILifetimeScope>(scope);
+
     public static void ConfigureContainer(string logFileName)
     {
         var services = new ServiceCollection();
