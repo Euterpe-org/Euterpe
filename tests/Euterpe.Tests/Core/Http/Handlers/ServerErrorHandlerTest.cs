@@ -43,7 +43,7 @@ public sealed class ServerErrorHandlerTest
 
         using var assertions = Assert.Multiple();
         await Assert.That(logger.Entries).IsEmpty();
-        notification.Warning(Any<string>()).WasCalled(Times.Never);
+        notification.Warning(Any<string>(), Any<TimeSpan?>()).WasCalled(Times.Never);
     }
 
     [Test]
@@ -57,7 +57,7 @@ public sealed class ServerErrorHandlerTest
 
         await client.GetAsync("https://example.test/");
 
-        notification.Warning(Any<string>()).WasCalled(Times.Never);
+        notification.Warning(Any<string>(), Any<TimeSpan?>()).WasCalled(Times.Never);
     }
 
     [Test]
@@ -76,7 +76,7 @@ public sealed class ServerErrorHandlerTest
         await Assert.That(logger.Entries[0].LogLevel).IsEqualTo(LogLevel.Warning);
         await Assert.That(logger.Entries[0].Message).Contains("500");
         await Assert.That(logger.Entries[0].Message).Contains("https://example.test/api/x");
-        notification.Warning(Any<string>()).WasCalled(Times.Once);
+        notification.Warning(Any<string>(), Any<TimeSpan?>()).WasCalled(Times.Once);
     }
 
     [Test]
@@ -92,6 +92,6 @@ public sealed class ServerErrorHandlerTest
         await client.GetAsync("https://example.test/");
         await client.GetAsync("https://example.test/");
 
-        notification.Warning(Any<string>()).WasCalled(Times.Once);
+        notification.Warning(Any<string>(), Any<TimeSpan?>()).WasCalled(Times.Once);
     }
 }
