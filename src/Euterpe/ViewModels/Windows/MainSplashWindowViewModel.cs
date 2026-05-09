@@ -16,7 +16,6 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
-
         var restored = await AuthService.RestoreSessionAsync().ConfigureAwait(true);
         if (!restored)
         {

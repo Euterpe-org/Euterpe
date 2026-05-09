@@ -105,6 +105,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required GameSwitcher GameSwitcher { get; init; }
 
     [UsedImplicitly]
+    public required IDialogService DialogService { get; init; }
+
+    [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }
 
     [UsedImplicitly]

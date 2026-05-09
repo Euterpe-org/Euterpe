@@ -23,8 +23,8 @@ partial class ServiceExtensions
 		builder.RegisterType<HomeViewViewModel>().PropertiesAutowired().SingleInstance();
 		builder.Register<HomeView>(ctx => new HomeView { DataContext = ctx.Resolve<HomeViewViewModel>() }).SingleInstance();
 
-		builder.RegisterType<SplashViewViewModel>().PropertiesAutowired().SingleInstance();
-		builder.Register<SplashView>(ctx => new SplashView { DataContext = ctx.Resolve<SplashViewViewModel>() }).SingleInstance();
+		builder.RegisterType<SettingsViewViewModel>().PropertiesAutowired().SingleInstance();
+		builder.Register<SettingsView>(ctx => new SettingsView { DataContext = ctx.Resolve<SettingsViewViewModel>() }).SingleInstance();
 
     }
 

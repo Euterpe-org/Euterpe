@@ -46,6 +46,12 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>请选择 Steam 文件夹</value>
   </data>
+  <data name="MessageBox_Content_CrashDialog_CopyFailed" xml:space="preserve">
+    <value>复制错误信息到剪贴板失败。</value>
+  </data>
+  <data name="MessageBox_Content_CrashDialog_CopySuccess" xml:space="preserve">
+    <value>错误信息已复制到剪贴板。</value>
+  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>确定要安装 .NET SDK 吗？</value>
   </data>

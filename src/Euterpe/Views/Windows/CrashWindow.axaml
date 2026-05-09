@@ -1,0 +1,120 @@
+<u:UrsaWindow
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:Euterpe.ViewModels.Windows"
+    x:Class="Euterpe.Views.Windows.CrashWindow"
+    x:DataType="vm:CrashWindowViewModel"
+    CanResize="True"
+    Height="520"
+    Icon="/Assets/Icon.ico"
+    MinHeight="380"
+    MinWidth="520"
+    Title="{Localize {x:Static loc:XAMLLiteral.CrashDialog_Title}}"
+    Width="680"
+    WindowStartupLocation="CenterOwner">
+
+    <Design.DataContext>
+        <vm:CrashWindowViewModel />
+    </Design.DataContext>
+
+    <Grid
+        RowDefinitions="Auto,*,Auto">
+
+        <!--  Header  -->
+        <Border
+            Grid.Row="0"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,0,0,1"
+            Padding="24,18">
+            <StackPanel
+                Spacing="4">
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource SemiRed5}"
+                    Text="{Localize {x:Static loc:XAMLLiteral.CrashDialog_Header}}" />
+                <TextBlock
+                    FontFamily="Cascadia Code,Consolas,Menlo,monospace"
+                    FontSize="12"
+                    Foreground="{DynamicResource SemiColorText2}"
+                    Text="{Binding ExceptionType}"
+                    TextTrimming="CharacterEllipsis" />
+                <TextBlock
+                    FontSize="13"
+                    Foreground="{DynamicResource SemiColorText1}"
+                    Margin="0,2,0,0"
+                    Text="{Binding ExceptionMessage}"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SemiColorText3}"
+                    Margin="0,8,0,0"
+                    Text="{Binding EnvironmentInfo}"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    FontSize="11"
+                    Foreground="{DynamicResource SemiColorText3}"
+                    Text="{Binding CrashTime}" />
+            </StackPanel>
+        </Border>
+
+        <!--  Stack trace  -->
+        <Border
+            Grid.Row="1"
+            Background="{DynamicResource SemiColorBackground1}"
+            Margin="24,16,24,0"
+            Padding="0">
+            <ScrollViewer
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Auto">
+                <SelectableTextBlock
+                    FontFamily="Cascadia Code,Consolas,Menlo,monospace"
+                    FontSize="12"
+                    Padding="12"
+                    Text="{Binding ExceptionDetails}"
+                    TextWrapping="Wrap" />
+            </ScrollViewer>
+        </Border>
+
+        <!--  Bottom Bar  -->
+        <Border
+            Grid.Row="2"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,1,0,0"
+            Margin="0,16,0,0"
+            Padding="24,14">
+            <DockPanel>
+                <StackPanel
+                    DockPanel.Dock="Right"
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <Button
+                        Command="{Binding ContinueCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.CrashDialog_Button_Continue}}" />
+                    <Button
+                        Classes="Danger"
+                        Command="{Binding ExitCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.CrashDialog_Button_Exit}}" />
+                </StackPanel>
+
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <Button
+                        Command="{Binding CopyCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.CrashDialog_Button_Copy}}" />
+                    <Button
+                        Command="{Binding OpenLogCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.CrashDialog_Button_OpenLog}}" />
+                    <Button
+                        Command="{Binding FeedbackCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.CrashDialog_Button_Feedback}}" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+    </Grid>
+
+</u:UrsaWindow>

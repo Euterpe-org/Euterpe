@@ -79,6 +79,27 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>Developer</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>Copy Details</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub Feedback</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>Open Log</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe encountered an error</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>Crash Report</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>Open</value>
   </data>

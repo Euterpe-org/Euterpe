@@ -18,10 +18,10 @@ public static class IocContainer
     internal static void SetTestScope(ILifetimeScope scope) =>
         GameScopeSubject = new BehaviorSubject<ILifetimeScope>(scope);
 
-    public static void ConfigureContainer(string logFileName)
+    public static void ConfigureContainer()
     {
         var services = new ServiceCollection();
-        services.RegisterLogger(logFileName);
+        services.RegisterLogger();
         services.RegisterHttpClients();
 
         var builder = new ContainerBuilder();
@@ -29,6 +29,7 @@ public static class IocContainer
         builder.RegisterInternalServices();
         builder.RegisterAppViewsAndViewModels();
         builder.RegisterPerGameViews();
+        builder.RegisterWindowsAndViewModels();
 
         builder.Populate(services);
         Root = builder.Build();

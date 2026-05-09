@@ -10,10 +10,10 @@ public sealed class ServiceExtensionsGeneratorTests
 
                               public partial class HomeView : UserControl;
 
-                              public partial class SplashView : SplashWindow;
+                              public partial class SettingsView : UserControl;
 
                               [PerGameView]
-                              public partial class GameDetailView : UrsaWindow;
+                              public partial class GameDetailView : UserControl;
 
                               [PerGameView]
                               public partial class GameSettingsView : UserControl;

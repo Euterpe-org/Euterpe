@@ -12,7 +12,7 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
     private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
         node is ClassDeclarationSyntax { BaseList.Types: var types }
-        && types[0].ToString() is "UserControl" or "SplashWindow" or "UrsaWindow";
+        && types[0].ToString() is "UserControl";
 
     private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _) =>
         context.Node is not ClassDeclarationSyntax classDeclaration
