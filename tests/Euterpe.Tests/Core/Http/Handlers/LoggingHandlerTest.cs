@@ -39,7 +39,7 @@ public sealed class LoggingHandlerTest
         await Assert.That(logger.Entries).HasSingleItem();
         var entry = logger.Entries[0];
         await Assert.That(entry.LogLevel).IsEqualTo(LogLevel.Warning);
-        await Assert.That(entry.Message).Contains("BadRequest");
+        await Assert.That(entry.Message).Contains("400");
         await Assert.That(entry.Message).Contains("bad-payload");
         await Assert.That(entry.Message).Contains("https://example.test/api/things");
     }

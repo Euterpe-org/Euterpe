@@ -40,11 +40,16 @@ public sealed class EssentialModsStepTest
         var modManageService = IModManageService.Mock();
         var step = CreateStep(modManageService);
         var reports = new List<string>();
-        var progress = new Progress<string>(s => reports.Add(s));
+        var reported = new TaskCompletionSource();
+        var progress = new Progress<string>(s =>
+        {
+            reports.Add(s);
+            reported.TrySetResult();
+        });
 
         await step.ExecuteAsync(progress);
+        await reported.Task.WaitAsync(TimeSpan.FromSeconds(2));
 
-        await Task.Yield();
         await Assert.That(reports).Contains("Initializing essential mods ...");
     }
 
