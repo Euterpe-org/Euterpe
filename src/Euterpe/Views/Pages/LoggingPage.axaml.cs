@@ -1,5 +1,6 @@
 ﻿namespace Euterpe.Views.Pages;
 
+[PerGameView]
 [Route("/logging", DisplayName = Page_Logging, Icon = "Terminal", Order = 3)]
 public sealed partial class LoggingPage : UserControl
 {

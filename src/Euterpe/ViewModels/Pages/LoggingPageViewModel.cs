@@ -4,22 +4,27 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
 {
     public IReadOnlyList<DropDownButtonItem> DropDownButtons => field ??=
     [
-        new(DropDownButton_Open,
+        new DropDownButtonItem(DropDownButton_Open,
         [
-            new DropDownMenuItem(Folder_AppLogs, OpenFolderCommand, AppLogsFolder)
+            new DropDownMenuItem(Folder_AppLogs, OpenFolderCommand, AppLogsFolder),
+            new DropDownMenuItem(Folder_MelonLoaderLogs, OpenFolderCommand, GameConfig.MelonLoaderFolder)
         ])
     ];
+
+    protected override async Task OnInitializeAsync()
+    {
+        await base.OnInitializeAsync().ConfigureAwait(false);
+
+        Logger.ZLogInformation($"{nameof(LoggingPageViewModel)} Initialized");
+    }
 
     #region Injections
 
     [UsedImplicitly]
     public required ILogger<LoggingPageViewModel> Logger { get; init; }
 
-    #endregion Injections
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
 
-    protected override Task OnInitializeAsync()
-    {
-        Logger.ZLogInformation($"{nameof(LoggingPageViewModel)} Initialized");
-        return base.OnInitializeAsync();
-    }
+    #endregion Injections
 }

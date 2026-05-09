@@ -91,6 +91,9 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App-logs</value>
   </data>
+  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
+    <value>MelonLoader-logs</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mods</value>
   </data>
@@ -346,62 +349,14 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>Stabiel</value>
   </data>
-  <data name="ToolTip_EditModConfig" xml:space="preserve">
-    <value>Modconfiguratie bewerken</value>
-  </data>
-  <data name="Translator_ChineseSimplified" xml:space="preserve">
-    <value>Vereenvoudigd Chinees</value>
-  </data>
-  <data name="Translator_ChineseTraditional" xml:space="preserve">
-    <value>Traditioneel Chinees</value>
-  </data>
-  <data name="Translator_Hungarian" xml:space="preserve">
-    <value>Hongaars</value>
-  </data>
-  <data name="Translator_Korean" xml:space="preserve">
-    <value>Koreaans</value>
-  </data>
-  <data name="Translator_Russian" xml:space="preserve">
-    <value>Russisch</value>
-  </data>
-  <data name="Translator_Spanish" xml:space="preserve">
-    <value>Spaans</value>
-  </data>
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Vertel ons waar het spel is geïnstalleerd</value>
-  </data>
-  <data name="Wizard_Description_Welcome" xml:space="preserve">
-    <value>Kies uw rol en taken om te beginnen</value>
   </data>
   <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Geen geldige spelmap</value>
   </data>
-  <data name="Wizard_Role_Charter" xml:space="preserve">
-    <value>Charter</value>
-  </data>
-  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
-    <value>Aanbevolen voor chartmakers</value>
-  </data>
-  <data name="Wizard_Role_Custom" xml:space="preserve">
-    <value>Aangepast</value>
-  </data>
-  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
-    <value>Pas uw configuratie aan</value>
-  </data>
-  <data name="Wizard_Role_Modder" xml:space="preserve">
-    <value>Modder</value>
-  </data>
-  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
-    <value>Aanbevolen voor modontwikkelaars</value>
-  </data>
-  <data name="Wizard_Role_Player" xml:space="preserve">
-    <value>Speler</value>
-  </data>
-  <data name="Wizard_Role_Player_Description" xml:space="preserve">
-    <value>Aanbevolen voor reguliere spelers</value>
-  </data>
-  <data name="Wizard_Section_Tasks" xml:space="preserve">
-    <value>Taken</value>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>Mislukt</value>
   </data>
   <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>Wachtend</value>
@@ -411,9 +366,6 @@
   </data>
   <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>Klaar</value>
-  </data>
-  <data name="Setup_StepStatus_Failed" xml:space="preserve">
-    <value>Mislukt</value>
   </data>
   <data name="Setup_Step_Failed" xml:space="preserve">
     <value>Mislukt. Controleer het logboek of probeer opnieuw.</value>
@@ -471,6 +423,57 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe instellen</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Modconfiguratie bewerken</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Vereenvoudigd Chinees</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Traditioneel Chinees</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Hongaars</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Koreaans</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Russisch</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Spaans</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Kies uw rol en taken om te beginnen</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>Aanbevolen voor chartmakers</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>Aangepast</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>Pas uw configuratie aan</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>Modder</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>Aanbevolen voor modontwikkelaars</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>Speler</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>Aanbevolen voor reguliere spelers</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Taken</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>Welkom bij Euterpe</value>

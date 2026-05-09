@@ -91,6 +91,9 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>앱 로그</value>
   </data>
+  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
+    <value>MelonLoader 로그 폴더</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>모드 폴더</value>
   </data>
@@ -346,62 +349,14 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>안정 버전</value>
   </data>
-  <data name="ToolTip_EditModConfig" xml:space="preserve">
-    <value>모드 설정 편집</value>
-  </data>
-  <data name="Translator_ChineseSimplified" xml:space="preserve">
-    <value>중국어(간체)</value>
-  </data>
-  <data name="Translator_ChineseTraditional" xml:space="preserve">
-    <value>중국어(번체)</value>
-  </data>
-  <data name="Translator_Hungarian" xml:space="preserve">
-    <value>헝가리어</value>
-  </data>
-  <data name="Translator_Korean" xml:space="preserve">
-    <value>한국어</value>
-  </data>
-  <data name="Translator_Russian" xml:space="preserve">
-    <value>러시아어</value>
-  </data>
-  <data name="Translator_Spanish" xml:space="preserve">
-    <value>스페인어</value>
-  </data>
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>게임이 설치된 위치를 알려주세요</value>
-  </data>
-  <data name="Wizard_Description_Welcome" xml:space="preserve">
-    <value>역할과 작업을 선택하여 시작하세요</value>
   </data>
   <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>유효한 게임 폴더가 아닙니다</value>
   </data>
-  <data name="Wizard_Role_Charter" xml:space="preserve">
-    <value>차터</value>
-  </data>
-  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
-    <value>채보 제작자에게 추천</value>
-  </data>
-  <data name="Wizard_Role_Custom" xml:space="preserve">
-    <value>사용자 정의</value>
-  </data>
-  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
-    <value>설정을 커스터마이즈</value>
-  </data>
-  <data name="Wizard_Role_Modder" xml:space="preserve">
-    <value>모더</value>
-  </data>
-  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
-    <value>모드 개발자에게 추천</value>
-  </data>
-  <data name="Wizard_Role_Player" xml:space="preserve">
-    <value>플레이어</value>
-  </data>
-  <data name="Wizard_Role_Player_Description" xml:space="preserve">
-    <value>일반 플레이어에게 추천</value>
-  </data>
-  <data name="Wizard_Section_Tasks" xml:space="preserve">
-    <value>작업</value>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>실패</value>
   </data>
   <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>대기 중</value>
@@ -411,9 +366,6 @@
   </data>
   <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>완료</value>
-  </data>
-  <data name="Setup_StepStatus_Failed" xml:space="preserve">
-    <value>실패</value>
   </data>
   <data name="Setup_Step_Failed" xml:space="preserve">
     <value>실패했습니다. 로그를 확인하거나 다시 시도하세요.</value>
@@ -471,6 +423,57 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe 설정 중</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>모드 설정 편집</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>중국어(간체)</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>중국어(번체)</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>헝가리어</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>러시아어</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>스페인어</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>역할과 작업을 선택하여 시작하세요</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>차터</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>채보 제작자에게 추천</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>사용자 정의</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>설정을 커스터마이즈</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>모더</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>모드 개발자에게 추천</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>플레이어</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>일반 플레이어에게 추천</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>작업</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>Euterpe에 오신 것을 환영합니다</value>

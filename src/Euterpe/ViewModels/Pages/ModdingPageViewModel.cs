@@ -4,7 +4,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 {
     public IReadOnlyList<DropDownButtonItem> DropDownButtons => field ??=
     [
-        new(DropDownButton_Open,
+        new DropDownButtonItem(DropDownButton_Open,
         [
             new DropDownMenuItem(Folder_Mods, OpenFolderCommand, GameConfig.ModsFolder),
             new DropDownMenuItem(Folder_UserData, OpenFolderCommand, GameConfig.UserDataFolder),

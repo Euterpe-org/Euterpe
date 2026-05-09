@@ -91,6 +91,9 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Log Aplikasi</value>
   </data>
+  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
+    <value>Log MelonLoader</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mod</value>
   </data>
@@ -346,62 +349,14 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>Stabil</value>
   </data>
-  <data name="ToolTip_EditModConfig" xml:space="preserve">
-    <value>Edit Konfigurasi Mod</value>
-  </data>
-  <data name="Translator_ChineseSimplified" xml:space="preserve">
-    <value>Tionghoa Sederhana</value>
-  </data>
-  <data name="Translator_ChineseTraditional" xml:space="preserve">
-    <value>Tionghoa Tradisional</value>
-  </data>
-  <data name="Translator_Hungarian" xml:space="preserve">
-    <value>Hungaria</value>
-  </data>
-  <data name="Translator_Korean" xml:space="preserve">
-    <value>Korea</value>
-  </data>
-  <data name="Translator_Russian" xml:space="preserve">
-    <value>Rusia</value>
-  </data>
-  <data name="Translator_Spanish" xml:space="preserve">
-    <value>Spanyol</value>
-  </data>
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Beri tahu kami di mana game terpasang</value>
-  </data>
-  <data name="Wizard_Description_Welcome" xml:space="preserve">
-    <value>Pilih peran dan tugas Anda untuk memulai</value>
   </data>
   <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Bukan folder game yang valid</value>
   </data>
-  <data name="Wizard_Role_Charter" xml:space="preserve">
-    <value>Charter</value>
-  </data>
-  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
-    <value>Direkomendasikan untuk pembuat chart</value>
-  </data>
-  <data name="Wizard_Role_Custom" xml:space="preserve">
-    <value>Kustom</value>
-  </data>
-  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
-    <value>Sesuaikan pengaturan Anda</value>
-  </data>
-  <data name="Wizard_Role_Modder" xml:space="preserve">
-    <value>Modder</value>
-  </data>
-  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
-    <value>Direkomendasikan untuk pengembang mod</value>
-  </data>
-  <data name="Wizard_Role_Player" xml:space="preserve">
-    <value>Pemain</value>
-  </data>
-  <data name="Wizard_Role_Player_Description" xml:space="preserve">
-    <value>Direkomendasikan untuk pemain biasa</value>
-  </data>
-  <data name="Wizard_Section_Tasks" xml:space="preserve">
-    <value>Tugas</value>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>Gagal</value>
   </data>
   <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>Menunggu</value>
@@ -411,9 +366,6 @@
   </data>
   <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>Selesai</value>
-  </data>
-  <data name="Setup_StepStatus_Failed" xml:space="preserve">
-    <value>Gagal</value>
   </data>
   <data name="Setup_Step_Failed" xml:space="preserve">
     <value>Gagal. Periksa log atau coba lagi.</value>
@@ -471,6 +423,57 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Menyiapkan Euterpe</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Edit Konfigurasi Mod</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Tionghoa Sederhana</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Tionghoa Tradisional</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Hungaria</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Korea</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Rusia</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Spanyol</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Pilih peran dan tugas Anda untuk memulai</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>Direkomendasikan untuk pembuat chart</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>Kustom</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>Sesuaikan pengaturan Anda</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>Modder</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>Direkomendasikan untuk pengembang mod</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>Pemain</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>Direkomendasikan untuk pemain biasa</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Tugas</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>Selamat Datang di Euterpe</value>

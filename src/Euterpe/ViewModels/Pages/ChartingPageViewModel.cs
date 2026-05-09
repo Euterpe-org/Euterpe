@@ -4,7 +4,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 {
     public IReadOnlyList<DropDownButtonItem> DropDownButtons => field ??=
     [
-        new(DropDownButton_Open,
+        new DropDownButtonItem(DropDownButton_Open,
         [
             new DropDownMenuItem(Folder_OnlineCharts, OpenFolderCommand, GameConfig.OnlineChartsFolder),
             new DropDownMenuItem(Folder_OfflineCharts, OpenFolderCommand, GameConfig.OfflineChartsFolder)

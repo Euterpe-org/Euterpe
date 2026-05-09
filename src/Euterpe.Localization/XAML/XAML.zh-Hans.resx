@@ -91,6 +91,9 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>应用日志文件夹</value>
   </data>
+  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
+    <value>模组加载器日志文件夹</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>模组文件夹</value>
   </data>
@@ -346,62 +349,14 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>稳定版</value>
   </data>
-  <data name="ToolTip_EditModConfig" xml:space="preserve">
-    <value>编辑 Mod 配置</value>
-  </data>
-  <data name="Translator_ChineseSimplified" xml:space="preserve">
-    <value>简体中文</value>
-  </data>
-  <data name="Translator_ChineseTraditional" xml:space="preserve">
-    <value>繁体中文</value>
-  </data>
-  <data name="Translator_Hungarian" xml:space="preserve">
-    <value>匈牙利语</value>
-  </data>
-  <data name="Translator_Korean" xml:space="preserve">
-    <value>韩语</value>
-  </data>
-  <data name="Translator_Russian" xml:space="preserve">
-    <value>俄语</value>
-  </data>
-  <data name="Translator_Spanish" xml:space="preserve">
-    <value>西班牙语</value>
-  </data>
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>请告诉我们游戏安装在哪里</value>
-  </data>
-  <data name="Wizard_Description_Welcome" xml:space="preserve">
-    <value>选择你的角色和任务以开始</value>
   </data>
   <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>不是有效的游戏文件夹</value>
   </data>
-  <data name="Wizard_Role_Charter" xml:space="preserve">
-    <value>谱师</value>
-  </data>
-  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
-    <value>推荐谱面制作者使用</value>
-  </data>
-  <data name="Wizard_Role_Custom" xml:space="preserve">
-    <value>自定义</value>
-  </data>
-  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
-    <value>自定义你的设置</value>
-  </data>
-  <data name="Wizard_Role_Modder" xml:space="preserve">
-    <value>模组开发者</value>
-  </data>
-  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
-    <value>推荐模组开发者使用</value>
-  </data>
-  <data name="Wizard_Role_Player" xml:space="preserve">
-    <value>玩家</value>
-  </data>
-  <data name="Wizard_Role_Player_Description" xml:space="preserve">
-    <value>推荐普通玩家使用</value>
-  </data>
-  <data name="Wizard_Section_Tasks" xml:space="preserve">
-    <value>任务</value>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>失败</value>
   </data>
   <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>待执行</value>
@@ -411,9 +366,6 @@
   </data>
   <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>完成</value>
-  </data>
-  <data name="Setup_StepStatus_Failed" xml:space="preserve">
-    <value>失败</value>
   </data>
   <data name="Setup_Step_Failed" xml:space="preserve">
     <value>执行失败，请查看日志或重试</value>
@@ -471,6 +423,57 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>正在设置 Euterpe</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>编辑 Mod 配置</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>匈牙利语</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>韩语</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>俄语</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>西班牙语</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>选择你的角色和任务以开始</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>谱师</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>推荐谱面制作者使用</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>自定义你的设置</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>模组开发者</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>推荐模组开发者使用</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>推荐普通玩家使用</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>任务</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>欢迎使用 Euterpe</value>

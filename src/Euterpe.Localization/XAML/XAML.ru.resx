@@ -91,6 +91,9 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Логи приложения</value>
   </data>
+  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
+    <value>Логи MelonLoader</value>
+  </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Моды</value>
   </data>
@@ -346,62 +349,14 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>Стабильный</value>
   </data>
-  <data name="ToolTip_EditModConfig" xml:space="preserve">
-    <value>Изменить конфигурацию мода</value>
-  </data>
-  <data name="Translator_ChineseSimplified" xml:space="preserve">
-    <value>Упрощённый китайский</value>
-  </data>
-  <data name="Translator_ChineseTraditional" xml:space="preserve">
-    <value>Традиционный китайский</value>
-  </data>
-  <data name="Translator_Hungarian" xml:space="preserve">
-    <value>Венгерский</value>
-  </data>
-  <data name="Translator_Korean" xml:space="preserve">
-    <value>Корейский</value>
-  </data>
-  <data name="Translator_Russian" xml:space="preserve">
-    <value>Русский</value>
-  </data>
-  <data name="Translator_Spanish" xml:space="preserve">
-    <value>Испанский</value>
-  </data>
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Укажите, где установлена игра</value>
-  </data>
-  <data name="Wizard_Description_Welcome" xml:space="preserve">
-    <value>Выберите свою роль и задачи для начала</value>
   </data>
   <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Недопустимая папка игры</value>
   </data>
-  <data name="Wizard_Role_Charter" xml:space="preserve">
-    <value>Чартер</value>
-  </data>
-  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
-    <value>Рекомендуется для создателей чартов</value>
-  </data>
-  <data name="Wizard_Role_Custom" xml:space="preserve">
-    <value>Пользовательский</value>
-  </data>
-  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
-    <value>Настройте свою конфигурацию</value>
-  </data>
-  <data name="Wizard_Role_Modder" xml:space="preserve">
-    <value>Моддер</value>
-  </data>
-  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
-    <value>Рекомендуется для разработчиков модов</value>
-  </data>
-  <data name="Wizard_Role_Player" xml:space="preserve">
-    <value>Игрок</value>
-  </data>
-  <data name="Wizard_Role_Player_Description" xml:space="preserve">
-    <value>Рекомендуется для обычных игроков</value>
-  </data>
-  <data name="Wizard_Section_Tasks" xml:space="preserve">
-    <value>Задачи</value>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>Ошибка</value>
   </data>
   <data name="Setup_StepStatus_Pending" xml:space="preserve">
     <value>Ожидание</value>
@@ -411,9 +366,6 @@
   </data>
   <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
     <value>Готово</value>
-  </data>
-  <data name="Setup_StepStatus_Failed" xml:space="preserve">
-    <value>Ошибка</value>
   </data>
   <data name="Setup_Step_Failed" xml:space="preserve">
     <value>Не удалось выполнить. Проверьте журнал или повторите попытку.</value>
@@ -471,6 +423,57 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Настройка Euterpe</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Изменить конфигурацию мода</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Упрощённый китайский</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Традиционный китайский</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Венгерский</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Корейский</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Испанский</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Выберите свою роль и задачи для начала</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>Чартер</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>Рекомендуется для создателей чартов</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>Пользовательский</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>Настройте свою конфигурацию</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>Моддер</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>Рекомендуется для разработчиков модов</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>Игрок</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>Рекомендуется для обычных игроков</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Задачи</value>
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>Добро пожаловать в Euterpe</value>
