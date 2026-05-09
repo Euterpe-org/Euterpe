@@ -1,13 +1,11 @@
 using static Euterpe.Bootstrapper;
+using static Euterpe.CrashHandler;
 using static Euterpe.IocContainer;
 
 namespace Euterpe;
 
 internal static class Program
 {
-    private static readonly string LogFileName = $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.log";
-    private static readonly string LogFilePath = Path.Combine(AppLogsFolder, LogFileName);
-
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
     // yet and stuff might break.
@@ -28,7 +26,7 @@ internal static class Program
         Directory.CreateDirectory(AppDataFolder);
         CleanupLogFiles();
         CleanupBackupFiles();
-        ConfigureContainer(LogFilePath);
+        ConfigureContainer();
         StartDeepLinkPipeServer();
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         StopDeepLinkPipeServer();
@@ -43,19 +41,6 @@ internal static class Program
 #if DEBUG
             .WithDeveloperTools()
 #endif
-            .UseR3(ReportException)
-            .HandleUIThreadException(ex =>
-            {
-                ReportException(ex.Exception);
-                ex.Handled = Resolve<Config>().IgnoreException;
-            });
-
-    private static void ReportException(Exception ex)
-    {
-        Resolve<ILogger<App>>().ZLogCritical(ex, $"Unhandled exception");
-#if PUBLISH
-        Resolve<IPlatformLauncher>().RevealFile(Path.Combine("Logs", LogFileName));
-        Resolve<IPlatformLauncher>().OpenUriAsync("https://github.com/Euterpe-org/Euterpe/issues/new/choose");
-#endif
-    }
+            .UseR3(ex => ReportException(ex))
+            .HandleUIThreadException(ex => ex.Handled = ReportException(ex.Exception));
 }

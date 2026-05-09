@@ -37,7 +37,7 @@ public sealed partial class HomePageViewModel
         GameSwitcher.CanSwitch = false;
         try
         {
-            await OverlayDialog.ShowCustomAsync<TView, TViewModel, object>(vm, MainWindowViewModel.DialogHostId, options).ConfigureAwait(true);
+            await DialogService.ShowOverlayAsync<TView, TViewModel, object>(vm, options, MainWindowViewModel.DialogHostId).ConfigureAwait(true);
         }
         finally
         {

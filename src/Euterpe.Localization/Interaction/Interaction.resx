@@ -46,6 +46,12 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Please select Steam folder</value>
   </data>
+  <data name="MessageBox_Content_CrashDialog_CopyFailed" xml:space="preserve">
+    <value>Failed to copy error details to the clipboard.</value>
+  </data>
+  <data name="MessageBox_Content_CrashDialog_CopySuccess" xml:space="preserve">
+    <value>Error details copied to the clipboard.</value>
+  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Are you sure you want to install the .Net SDK?</value>
   </data>

@@ -79,6 +79,27 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>开发者</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>继续运行</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>复制错误信息</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub 反馈</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>打开日志</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe 遇到了一个错误</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>崩溃报告</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>打开</value>
   </data>
