@@ -85,6 +85,10 @@ jobs:
         with:
           ref: dev
 
+      - name: Capture build date
+        id: info
+        run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
       - name: Download zips
         uses: actions/download-artifact@v8
         with:
@@ -102,11 +106,10 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           tag_name: nightly
-          name: Nightly Build
+          name: "Nightly ${{ steps.info.outputs.date }}"
           prerelease: true
           make_latest: false
           target_commitish: dev
           body: |
-            Auto-built nightly from `dev` at ${{ github.sha }}.
-            This release is overwritten on every successful nightly run.
+            Auto-built from `dev` on ${{ steps.info.outputs.date }} (UTC) at ${{ github.sha }}.
           files: dist/*.zip
