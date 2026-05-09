@@ -4,6 +4,7 @@
         <OutputType>Exe</OutputType>
         <IsTestProject>true</IsTestProject>
         <IsAotCompatible>false</IsAotCompatible>
+        <IsPublishable>false</IsPublishable>
     </PropertyGroup>
 
     <ItemGroup>

@@ -56,10 +56,13 @@ jobs:
           global-json-file: global.json
 
       - name: Build
-        run: dotnet publish
+        run: dotnet build -c Release
 
       - name: Test
         run: dotnet test -c Release --no-build --report-trx
+
+      - name: Publish
+        run: dotnet publish -c Release
 
       - name: Create archive
         working-directory: artifacts/output
