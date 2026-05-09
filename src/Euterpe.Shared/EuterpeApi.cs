@@ -24,7 +24,7 @@ public static class EuterpeApi
     {
         public const string BasePath = "telemetry";
 
-        public const string Session = "/session";
+        public const string Session = "/app/session";
     }
 
     public static class Mods

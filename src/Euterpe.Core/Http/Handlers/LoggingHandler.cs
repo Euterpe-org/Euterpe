@@ -13,7 +13,7 @@ internal sealed class LoggingHandler(ILogger<LoggingHandler> logger) : Delegatin
 
         await response.Content.LoadIntoBufferAsync(cancellationToken).ConfigureAwait(false);
         var body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-        logger.ZLogWarning($"HTTP {response.StatusCode} {request.Method} {request.RequestUri}: {body}");
+        logger.ZLogWarning($"HTTP {(int)response.StatusCode} {request.Method} {request.RequestUri}: {body}");
 
         return response;
     }

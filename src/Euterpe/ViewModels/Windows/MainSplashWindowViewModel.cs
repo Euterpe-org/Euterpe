@@ -17,10 +17,6 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
 
-#if RELEASE
-        await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
-#endif
-
         var restored = await AuthService.RestoreSessionAsync().ConfigureAwait(true);
         if (!restored)
         {
@@ -28,6 +24,18 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
         }
 
         await AuthService.Ready.WaitAsync().ConfigureAwait(true);
+
+#if RELEASE
+        try
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+            await UpdateService.CheckForUpdatesAsync(cts.Token).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Update check failed during splash, continuing startup");
+        }
+#endif
 
         Ready.Set();
         Close();
