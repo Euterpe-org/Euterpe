@@ -16,7 +16,7 @@
         <PackageVersion Include="AssetsTools.NET" Version="3.0.4"/>
         <PackageVersion Include="AsyncAwaitBestPractices" Version="10.0.0"/>
         <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="11.0.0"/>
-        <PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.6"/>
+        <PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.7"/>
         <PackageVersion Include="Avalonia" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)"/>
         <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
