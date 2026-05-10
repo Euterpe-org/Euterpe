@@ -78,6 +78,21 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
+    public required GameSwitcher GameSwitcher { get; init; }
+
+    [UsedImplicitly]
+    public required NavigationService NavigationService { get; init; }
+
+    [UsedImplicitly]
+    public required WizardDialogViewModel WizardDialogViewModel { get; init; }
+
+    [UsedImplicitly]
+    public required RepairDialogViewModel RepairDialogViewModel { get; init; }
+
+    [UsedImplicitly]
+    public required IDialogService DialogService { get; init; }
+
+    [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }
 
     [UsedImplicitly]
@@ -90,6 +105,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required IGameLocalService GameLocalService { get; init; }
 
     [UsedImplicitly]
+    public required ILogger<HomePageViewModel> Logger { get; init; }
+
+    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
 
     [UsedImplicitly]
@@ -97,24 +115,6 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     [UsedImplicitly]
     public required IGameUidProvider UidProvider { get; init; }
-
-    [UsedImplicitly]
-    public required NavigationService NavigationService { get; init; }
-
-    [UsedImplicitly]
-    public required GameSwitcher GameSwitcher { get; init; }
-
-    [UsedImplicitly]
-    public required IDialogService DialogService { get; init; }
-
-    [UsedImplicitly]
-    public required WizardDialogViewModel WizardDialogViewModel { get; init; }
-
-    [UsedImplicitly]
-    public required RepairDialogViewModel RepairDialogViewModel { get; init; }
-
-    [UsedImplicitly]
-    public required ILogger<HomePageViewModel> Logger { get; init; }
 
     #endregion Injections
 }
