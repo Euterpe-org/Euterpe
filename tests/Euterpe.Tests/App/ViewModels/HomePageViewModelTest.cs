@@ -83,6 +83,7 @@ public sealed class HomePageViewModelTest
         NavigationService = null!,
         GameSwitcher = null!,
         WizardDialogViewModel = null!,
-        RepairDialogViewModel = null!
+        RepairDialogViewModel = null!,
+        DialogService = null!
     };
 }

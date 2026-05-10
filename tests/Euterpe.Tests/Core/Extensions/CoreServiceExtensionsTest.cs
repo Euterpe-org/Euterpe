@@ -17,7 +17,7 @@ public sealed class CoreServiceExtensionsTest
     public async Task RegisterLogger_RegistersLoggerServices()
     {
         var services = new ServiceCollection();
-        services.RegisterLogger("dummy.log");
+        services.RegisterLogger();
 
         using var _ = Assert.Multiple();
         await Assert.That(services.Any(s => s.ServiceType == typeof(LiveLogProcessor))).IsTrue();
