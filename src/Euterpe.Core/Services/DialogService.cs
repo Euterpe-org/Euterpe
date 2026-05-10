@@ -1,15 +1,17 @@
-using AsyncAwaitBestPractices;
 using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.Core;
 
 internal sealed class DialogService : IDialogService
 {
+    [UsedImplicitly]
+    public required IComponentContext Container { get; init; }
+
     public async Task<T?> ShowDialogAsync<TWindow, TViewModel, T>(TViewModel vm, Window? owner = null)
-        where TWindow : Window, new()
+        where TWindow : Window
         where TViewModel : class, IDialog<T>
     {
-        var window = new TWindow { DataContext = vm };
+        var window = Container.Resolve<TWindow>();
 
         T? result = default;
         EventHandler<T> handler = (_, value) =>
@@ -20,30 +22,27 @@ internal sealed class DialogService : IDialogService
 
         vm.RequestClose += handler;
 
-        var closed = new TaskCompletionSource();
-        EventHandler closedHandler = (_, _) => closed.TrySetResult();
-        window.Closed += closedHandler;
-
         try
         {
             owner ??= GetCurrentDesktop().MainWindow;
             if (owner is { IsVisible: true })
             {
                 window.Icon ??= owner.Icon;
-                window.ShowDialog(owner).SafeFireAndForget();
+                await window.ShowDialog(owner).ConfigureAwait(true);
             }
             else
             {
+                var closed = new TaskCompletionSource();
+                window.Closed += (_, _) => closed.TrySetResult();
                 window.Show();
+                await closed.Task.ConfigureAwait(true);
             }
 
-            await closed.Task.ConfigureAwait(true);
             return result;
         }
         finally
         {
             vm.RequestClose -= handler;
-            window.Closed -= closedHandler;
         }
     }
 
