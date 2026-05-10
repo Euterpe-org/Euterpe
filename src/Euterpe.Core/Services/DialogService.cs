@@ -1,8 +1,9 @@
+using AsyncAwaitBestPractices;
 using Irihi.Avalonia.Shared.Contracts;
 
-namespace Euterpe.Services;
+namespace Euterpe.Core;
 
-public sealed class DialogService : IDialogService
+internal sealed class DialogService : IDialogService
 {
     public async Task<T?> ShowDialogAsync<TWindow, TViewModel, T>(TViewModel vm, Window? owner = null)
         where TWindow : Window, new()

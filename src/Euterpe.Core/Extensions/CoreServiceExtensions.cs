@@ -101,6 +101,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<AppSettingService>().As<IAppSettingService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<DialogService>().As<IDialogService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
