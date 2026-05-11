@@ -27,8 +27,11 @@ public interface IAuthService
 
     /// <summary>
     ///     Force the server to issue a new access token using the current refresh token.
+    ///     Concurrent callers passing the same <paramref name="staleToken" /> are deduplicated:
+    ///     only the first one performs the refresh, subsequent callers receive the already-renewed token.
     /// </summary>
-    Task<string> RenewAccessTokenAsync();
+    /// <param name="staleToken">The access token that the caller observed as invalid.</param>
+    Task<string> RenewAccessTokenAsync(string staleToken);
 
     /// <summary>
     ///     Handle the deep link callback with the authorization code.

@@ -38,7 +38,7 @@ public sealed class AuthHeaderHandlerTest
     {
         var auth = IAuthService.Mock();
         auth.GetAccessTokenAsync().Returns("expired");
-        auth.RenewAccessTokenAsync().Returns("renewed");
+        auth.RenewAccessTokenAsync(Any<string>()).Returns("renewed");
         var inner = new FakeHttpMessageHandler((_, n) =>
             new HttpResponseMessage(n == 1 ? HttpStatusCode.Unauthorized : HttpStatusCode.OK));
         using var handler = new AuthHeaderHandler(BuildServices(auth)) { InnerHandler = inner };
@@ -49,7 +49,7 @@ public sealed class AuthHeaderHandlerTest
         using var assertions = Assert.Multiple();
         await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);
         await Assert.That(inner.CallCount).IsEqualTo(2);
-        auth.RenewAccessTokenAsync().WasCalled(Times.Once);
+        auth.RenewAccessTokenAsync(Any<string>()).WasCalled(Times.Once);
         await Assert.That(inner.AuthorizationParameters[0]).IsEqualTo("expired");
         await Assert.That(inner.AuthorizationParameters[1]).IsEqualTo("renewed");
     }
@@ -59,7 +59,7 @@ public sealed class AuthHeaderHandlerTest
     {
         var auth = IAuthService.Mock();
         auth.GetAccessTokenAsync().Returns("expired");
-        auth.RenewAccessTokenAsync().Returns("still-bad");
+        auth.RenewAccessTokenAsync(Any<string>()).Returns("still-bad");
         var inner = new FakeHttpMessageHandler(HttpStatusCode.Unauthorized);
         using var handler = new AuthHeaderHandler(BuildServices(auth)) { InnerHandler = inner };
         using var client = new HttpClient(handler);
@@ -84,6 +84,6 @@ public sealed class AuthHeaderHandlerTest
 
         using var assertions = Assert.Multiple();
         await Assert.That(inner.CallCount).IsEqualTo(1);
-        auth.RenewAccessTokenAsync().WasCalled(Times.Never);
+        auth.RenewAccessTokenAsync(Any<string>()).WasCalled(Times.Never);
     }
 }

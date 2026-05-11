@@ -77,11 +77,16 @@ internal sealed partial class AuthService : IAuthService
         }
     }
 
-    public async Task<string> RenewAccessTokenAsync()
+    public async Task<string> RenewAccessTokenAsync(string staleToken)
     {
         await _lock.AcquireAsync().ConfigureAwait(false);
         try
         {
+            if (AuthState.AccessToken != staleToken)
+            {
+                return AuthState.AccessToken!;
+            }
+
             var response = await AuthClient.RefreshTokenAsync(new RefreshRequest(AuthState.RefreshToken!)).ConfigureAwait(false);
             await UpdateSessionAsync(response.AccessToken, response.RefreshToken, AuthState.CurrentUser).ConfigureAwait(false);
             return AuthState.AccessToken!;

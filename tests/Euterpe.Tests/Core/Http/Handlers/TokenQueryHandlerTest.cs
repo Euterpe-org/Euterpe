@@ -57,7 +57,7 @@ public sealed class TokenQueryHandlerTest
     {
         var auth = IAuthService.Mock();
         auth.GetAccessTokenAsync().Returns("expired");
-        auth.RenewAccessTokenAsync().Returns("fresh");
+        auth.RenewAccessTokenAsync(Any<string>()).Returns("fresh");
         var inner = new FakeHttpMessageHandler((_, n) =>
             new HttpResponseMessage(n == 1 ? HttpStatusCode.Unauthorized : HttpStatusCode.OK));
         using var handler = new TokenQueryHandler(BuildServices(auth)) { InnerHandler = inner };
@@ -72,7 +72,7 @@ public sealed class TokenQueryHandlerTest
         await Assert.That(inner.CallCount).IsEqualTo(2);
         await Assert.That(firstQuery["t"]).IsEqualTo("expired");
         await Assert.That(secondQuery["t"]).IsEqualTo("fresh");
-        auth.RenewAccessTokenAsync().WasCalled(Times.Once);
+        auth.RenewAccessTokenAsync(Any<string>()).WasCalled(Times.Once);
     }
 
     [Test]
@@ -88,6 +88,6 @@ public sealed class TokenQueryHandlerTest
 
         using var assertions = Assert.Multiple();
         await Assert.That(inner.CallCount).IsEqualTo(1);
-        auth.RenewAccessTokenAsync().WasCalled(Times.Never);
+        auth.RenewAccessTokenAsync(Any<string>()).WasCalled(Times.Never);
     }
 }

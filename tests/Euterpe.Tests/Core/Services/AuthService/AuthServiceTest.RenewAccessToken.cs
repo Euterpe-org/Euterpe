@@ -16,11 +16,26 @@ public sealed partial class AuthServiceTest
             .Returns(new RefreshResponse(NewAccessToken, NewRefreshToken));
         var sut = CreateAuthService(authClientMock, authState);
 
-        var token = await sut.RenewAccessTokenAsync();
+        var token = await sut.RenewAccessTokenAsync(ValidAccessToken);
 
         using var _ = Assert.Multiple();
         await Assert.That(token).IsEqualTo(NewAccessToken);
         await Assert.That(authState.RefreshToken).IsEqualTo(NewRefreshToken);
+    }
+
+    [Test]
+    public async Task RenewAccessTokenAsync_WhenAnotherCallerAlreadyRefreshed_ShouldReturnCurrentTokenWithoutCallingServer()
+    {
+        var authState = CreateLoggedInState();
+        authState.AccessToken = NewAccessToken;
+        var authClientMock = IEuterpeAuthClient.Mock();
+        var sut = CreateAuthService(authClientMock, authState);
+
+        var token = await sut.RenewAccessTokenAsync(ValidAccessToken);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(token).IsEqualTo(NewAccessToken);
+        authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>()).WasCalled(Times.Never);
     }
 
     [Test]
@@ -36,7 +51,7 @@ public sealed partial class AuthServiceTest
             .Throws(CreateApiException(statusCode));
         var sut = CreateAuthService(authClientMock, authState);
 
-        Func<Task<string?>> act = async () => await sut.RenewAccessTokenAsync();
+        Func<Task<string?>> act = async () => await sut.RenewAccessTokenAsync(ValidAccessToken);
 
         await Assert.That(act).ThrowsExactly<ApiException>();
     }

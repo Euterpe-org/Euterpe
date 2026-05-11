@@ -21,7 +21,7 @@ internal sealed class AuthHeaderHandler(IServiceProvider services) : DelegatingH
         response.Dispose();
 
         // If we got a 401, the access token is likely expired. Try to get a new one and retry the request once.
-        token = await authService.RenewAccessTokenAsync().ConfigureAwait(false);
+        token = await authService.RenewAccessTokenAsync(token).ConfigureAwait(false);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
