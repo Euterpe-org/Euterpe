@@ -14,6 +14,15 @@ public static class CoreServiceExtensions
         options.Retry.Delay = TimeSpan.FromMilliseconds(500);
         options.Retry.BackoffType = DelayBackoffType.Exponential;
         options.Retry.UseJitter = true;
+
+        // Only retry GET requests
+        options.Retry.ShouldHandle = static args =>
+        {
+            var request = args.Context.GetRequestMessage();
+            return request?.Method != HttpMethod.Get
+                ? ValueTask.FromResult(false)
+                : ValueTask.FromResult(HttpClientResiliencePredicates.IsTransient(args.Outcome));
+        };
     }
 
     extension(IServiceCollection services)
@@ -75,9 +84,12 @@ public static class CoreServiceExtensions
             services.AddHttpClient();
             services.AddHttpClient<EuterpeDownloadClient>().AddHttpMessageHandler<TokenQueryHandler>();
 
-            services.AddEuterpeRefitClient<IEuterpeAuthClient>(nameof(EuterpeApi.Auth), EuterpeApi.Auth.BasePath);
-            services.AddEuterpeRefitClient<IEuterpeAccountClient>(nameof(EuterpeApi.Account), EuterpeApi.Account.BasePath, true);
-            services.AddEuterpeRefitClient<IEuterpeDistributionClient>(nameof(EuterpeApi.Distribution), EuterpeApi.Distribution.BasePath, true);
+            services.AddEuterpeRefitClient<IEuterpeAuthClient>(nameof(EuterpeApi.Auth), EuterpeApi.Auth.BasePath)
+                .AddStandardResilienceHandler(ConfigureResilience);
+            services.AddEuterpeRefitClient<IEuterpeAccountClient>(nameof(EuterpeApi.Account), EuterpeApi.Account.BasePath, true)
+                .AddStandardResilienceHandler(ConfigureResilience);
+            services.AddEuterpeRefitClient<IEuterpeDistributionClient>(nameof(EuterpeApi.Distribution), EuterpeApi.Distribution.BasePath, true)
+                .AddStandardResilienceHandler(ConfigureResilience);
             services.AddEuterpeRefitClient<IEuterpeModClient>(nameof(EuterpeApi.Mods), EuterpeApi.Mods.BasePath, true)
                 .AddStandardResilienceHandler(ConfigureResilience);
             services.AddEuterpeRefitClient<IEuterpeChartClient>(nameof(EuterpeApi.Charts), EuterpeApi.Charts.BasePath, true)
