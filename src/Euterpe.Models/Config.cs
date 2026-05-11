@@ -23,9 +23,9 @@ public sealed partial class Config : ObservableObject
     [ObservableProperty]
     public partial GameId ActiveGame { get; set; } = GameId.MuseDash;
 
-    public required MuseDashConfig MuseDash { get; init; }
+    public MuseDashConfig MuseDash { get; init; } = new();
 
-    public required MuseDash2Config MuseDash2 { get; init; }
+    public MuseDash2Config MuseDash2 { get; init; } = new();
 
     [JsonIgnore]
     public IReadOnlyList<GameConfig> Games => field ??= [MuseDash, MuseDash2];
