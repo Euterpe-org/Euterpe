@@ -24,7 +24,7 @@ public sealed class App : Application
         ApplyConfig();
 
         var deepLinkService = Resolve<DeepLinkService>();
-        deepLinkService.SetupAsync().SafeFireAndForget();
+        deepLinkService.SetupAsync().SafeFireAndForget(ex => Resolve<ILogger<App>>().ZLogError(ex, $"Failed to register deep-link OS handler"));
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -50,7 +50,7 @@ public sealed class App : Application
             return;
         }
 
-        initializable.InitializeAsync().SafeFireAndForget();
+        initializable.InitializeAsync().SafeFireAndForget(ex => Resolve<ILogger<App>>().ZLogError(ex, $"Async initializer for {control.GetType().Name} failed"));
     }
 
     private void ApplyConfig()
