@@ -31,6 +31,8 @@ public static class IocContainer
         builder.RegisterPerGameViews();
         builder.RegisterWindowsAndViewModels();
 
+        builder.Register<Observable<ILifetimeScope>>(static _ => GameScopeSubject).SingleInstance();
+
         builder.Populate(services);
         Root = builder.Build();
 

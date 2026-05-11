@@ -80,10 +80,10 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
         foreach (var (name, _) in views)
         {
             sb.AppendLine($$"""
-                                    builder.Register<{{name}}>(_ =>
+                                    builder.Register<{{name}}>(ctx =>
                                     {
                                         var view = new {{name}}();
-                                        global::Euterpe.IocContainer.GameScopeObservable.Subscribe(scope =>
+                                        ctx.Resolve<global::R3.Observable<global::Autofac.ILifetimeScope>>().Subscribe(scope =>
                                         {
                                             var viewModel = scope.Resolve<{{name}}ViewModel>();
                                             view.DataContext = viewModel;

@@ -31,10 +31,10 @@ partial class ServiceExtensions
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.ServiceExtensionsGenerator", "1.0.0")]
     public static void RegisterPerGameViews(this ContainerBuilder builder)
     {
-        builder.Register<GameDetailView>(_ =>
+        builder.Register<GameDetailView>(ctx =>
         {
             var view = new GameDetailView();
-            global::Euterpe.IocContainer.GameScopeObservable.Subscribe(scope =>
+            ctx.Resolve<global::R3.Observable<global::Autofac.ILifetimeScope>>().Subscribe(scope =>
             {
                 var viewModel = scope.Resolve<GameDetailViewViewModel>();
                 view.DataContext = viewModel;
@@ -43,10 +43,10 @@ partial class ServiceExtensions
             return view;
         }).SingleInstance();
 
-        builder.Register<GameSettingsView>(_ =>
+        builder.Register<GameSettingsView>(ctx =>
         {
             var view = new GameSettingsView();
-            global::Euterpe.IocContainer.GameScopeObservable.Subscribe(scope =>
+            ctx.Resolve<global::R3.Observable<global::Autofac.ILifetimeScope>>().Subscribe(scope =>
             {
                 var viewModel = scope.Resolve<GameSettingsViewViewModel>();
                 view.DataContext = viewModel;
