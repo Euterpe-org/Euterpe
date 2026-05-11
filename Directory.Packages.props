@@ -4,11 +4,11 @@
     </PropertyGroup>
     <!-- Package Group Versions -->
     <PropertyGroup>
-        <AvaloniaVersion>12.0.2</AvaloniaVersion>
+        <AvaloniaVersion>12.0.3</AvaloniaVersion>
         <MicrosoftCodeAnalysisVersion>5.3.0</MicrosoftCodeAnalysisVersion>
         <RefitVersion>10.1.6</RefitVersion>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
-        <TUnitVersion>1.43.41</TUnitVersion>
+        <TUnitVersion>1.44.0</TUnitVersion>
         <UrsaVersion>2.0.0</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
@@ -54,9 +54,9 @@
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.7"/>
         <PackageVersion Include="TUnit" Version="$(TUnitVersion)"/>
-        <PackageVersion Include="TUnit.Mocks" Version="$(TUnitVersion)-beta"/>
-        <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)-beta"/>
-        <PackageVersion Include="TUnit.Mocks.Logging" Version="$(TUnitVersion)-beta"/>
+        <PackageVersion Include="TUnit.Mocks" Version="$(TUnitVersion)"/>
+        <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)"/>
+        <PackageVersion Include="TUnit.Mocks.Logging" Version="$(TUnitVersion)"/>
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.TUnit" Version="31.16.3"/>
