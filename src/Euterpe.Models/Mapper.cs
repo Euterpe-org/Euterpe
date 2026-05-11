@@ -4,7 +4,7 @@ using Riok.Mapperly.Abstractions;
 
 namespace Euterpe.Models;
 
-[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Source)]
 public static partial class Mapper
 {
     public static partial ModDto ToModel(this Mod mod);
@@ -27,6 +27,9 @@ public static partial class Mapper
     [MapDerivedType<MuseDash2Config, MuseDash2Config>]
     private static partial void UpdateGameConfig([MappingTarget] this GameConfig current, GameConfig saved);
 
+    [MapperIgnoreSource(nameof(Config.MuseDash))]
+    [MapperIgnoreSource(nameof(Config.MuseDash2))]
+    [MapperIgnoreSource(nameof(Config.ActiveGameConfig))]
     [MapperIgnoreTarget(nameof(Config.MuseDash))]
     [MapperIgnoreTarget(nameof(Config.MuseDash2))]
     [MapperIgnoreTarget(nameof(Config.ActiveGameConfig))]
