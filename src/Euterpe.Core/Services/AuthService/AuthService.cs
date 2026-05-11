@@ -6,9 +6,6 @@ internal sealed partial class AuthService : IAuthService
 {
     private const string AuthorizePageUrl = "https://euterpe-org.com/auth/app?redirect_uri=euterpe://auth/callback";
 
-    // 15 minutes but use 14 to be safe and account for clock skew and network delays
-    private static readonly TimeSpan AccessTokenLifetime = TimeSpan.FromMinutes(14);
-
     private readonly AsyncExclusiveLock _lock = new();
     public AsyncManualResetEvent Ready { get; } = new(false);
 

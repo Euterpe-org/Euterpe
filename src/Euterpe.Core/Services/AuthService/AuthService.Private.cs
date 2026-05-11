@@ -8,7 +8,7 @@ internal sealed partial class AuthService
     {
         AuthState.AccessToken = accessToken;
         AuthState.RefreshToken = refreshToken;
-        AuthState.AccessTokenExpiry = DateTimeOffset.Now.Add(AccessTokenLifetime);
+        AuthState.AccessTokenExpiry = DateTimeOffset.Now.Add(AuthConstants.AccessTokenLifetime);
         AuthState.CurrentUser = currentUser;
 
         await SecureStorage.SaveTokensAsync(accessToken, refreshToken).ConfigureAwait(false);
