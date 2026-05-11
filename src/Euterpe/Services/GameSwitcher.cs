@@ -2,30 +2,49 @@ namespace Euterpe.Services;
 
 public sealed partial class GameSwitcher : ObservableObject
 {
+    private readonly AsyncExclusiveLock _switchLock = new();
+
     [ObservableProperty]
     public partial bool CanSwitch { get; set; } = true;
 
     public async Task SwitchAsync(GameId target)
     {
-        if (!CanSwitch || target == Config.ActiveGame)
+        if (target == Config.ActiveGame)
         {
             return;
         }
 
-        Logger.ZLogInformation($"Switching active game from {Config.ActiveGame} to {target}");
+        if (!await _switchLock.TryAcquireAsync(TimeSpan.Zero).ConfigureAwait(false))
+        {
+            Logger.ZLogInformation($"Switch to {target} ignored — another switch is in progress");
+            return;
+        }
 
-        Config.ActiveGame = target;
-        await AppSettingService.SaveAsync().ConfigureAwait(false);
-        IocContainer.ActivateGame(target);
+        var previous = Config.ActiveGame;
+        try
+        {
+            CanSwitch = false;
+
+            Logger.ZLogInformation($"Switching active game from {previous} to {target}");
+            Config.ActiveGame = target;
+            IocContainer.ActivateGame(target);
+        }
+        catch
+        {
+            Config.ActiveGame = previous;
+            throw;
+        }
+        finally
+        {
+            CanSwitch = true;
+            _switchLock.Release();
+        }
     }
 
     #region Injections
 
     [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
-    public required IAppSettingService AppSettingService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<GameSwitcher> Logger { get; init; }
