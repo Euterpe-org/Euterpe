@@ -7,47 +7,65 @@ internal sealed partial class AppSettingService : IAppSettingService
 
     public void Load()
     {
-        if (File.Exists(ConfigPath))
-        {
-            using var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
-            var savedConfig = JsonSerializationService.DeserializeConfig(stream);
-            if (savedConfig is null)
-            {
-                Logger.ZLogError($"Saved setting is null, using default settings");
-                return;
-            }
-
-            Config.CopyFrom(savedConfig);
-            Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
-        }
-        else
+        if (!File.Exists(ConfigPath))
         {
             Logger.ZLogInformation($"Setting file not found, using default settings");
+            return;
         }
+
+        Config? savedConfig;
+        try
+        {
+            using var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
+            savedConfig = JsonSerializationService.DeserializeConfig(stream);
+        }
+        catch (Exception ex)
+        {
+            BackupCorruptedConfig(ex);
+            return;
+        }
+
+        if (savedConfig is null)
+        {
+            Logger.ZLogError($"Saved setting is null, using default settings");
+            return;
+        }
+
+        Config.CopyFrom(savedConfig);
+        Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
     }
 
     public async Task LoadAsync()
     {
-        if (File.Exists(ConfigPath))
+        if (!File.Exists(ConfigPath))
+        {
+            Logger.ZLogInformation($"Setting file not found, using default settings");
+            return;
+        }
+
+        Config? savedConfig;
+        try
         {
             var stream = new FileStream(ConfigPath, FileMode.Open, FileAccess.Read);
             await using (stream.ConfigureAwait(false))
             {
-                var savedConfig = await JsonSerializationService.DeserializeConfigAsync(stream).ConfigureAwait(true);
-                if (savedConfig is null)
-                {
-                    Logger.ZLogError($"Saved setting is null, using default settings");
-                    return;
-                }
-
-                Config.CopyFrom(savedConfig);
-                Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
+                savedConfig = await JsonSerializationService.DeserializeConfigAsync(stream).ConfigureAwait(true);
             }
         }
-        else
+        catch (Exception ex)
         {
-            Logger.ZLogInformation($"Setting file not found, using default settings");
+            BackupCorruptedConfig(ex);
+            return;
         }
+
+        if (savedConfig is null)
+        {
+            Logger.ZLogError($"Saved setting is null, using default settings");
+            return;
+        }
+
+        Config.CopyFrom(savedConfig);
+        Logger.ZLogInformation($"Setting loaded from {ConfigPath} successfully");
     }
 
     public void Save()
