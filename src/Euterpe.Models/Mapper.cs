@@ -22,5 +22,20 @@ public static partial class Mapper
     }
 
     public static partial void UpdateFromMod([MappingTarget] this ModDto modDto, Mod mod);
-    public static partial void CopyFrom([MappingTarget] this Config currentConfig, Config savedConfig);
+
+    [MapDerivedType<MuseDashConfig, MuseDashConfig>]
+    [MapDerivedType<MuseDash2Config, MuseDash2Config>]
+    private static partial void UpdateGameConfig([MappingTarget] this GameConfig current, GameConfig saved);
+
+    [MapperIgnoreTarget(nameof(Config.MuseDash))]
+    [MapperIgnoreTarget(nameof(Config.MuseDash2))]
+    [MapperIgnoreTarget(nameof(Config.ActiveGameConfig))]
+    private static partial void CopyFromCore([MappingTarget] this Config currentConfig, Config savedConfig);
+
+    public static void CopyFrom(this Config currentConfig, Config savedConfig)
+    {
+        currentConfig.CopyFromCore(savedConfig);
+        currentConfig.MuseDash.UpdateGameConfig(savedConfig.MuseDash);
+        currentConfig.MuseDash2.UpdateGameConfig(savedConfig.MuseDash2);
+    }
 }
