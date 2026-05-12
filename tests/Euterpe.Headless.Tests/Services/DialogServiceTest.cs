@@ -14,7 +14,7 @@ public sealed class DialogServiceTest : HeadlessTest
         var owner = NewVisibleOwner();
         var vm = new TestDialogVm();
 
-        var task = service.ShowDialogAsync<TestDialogWindow, TestDialogVm, bool>(vm, owner);
+        var task = service.ShowWindowDialogAsync<TestDialogWindow, TestDialogVm, bool>(vm, owner);
         Dispatcher.UIThread.RunJobs();
 
         vm.Close(true);
@@ -30,7 +30,7 @@ public sealed class DialogServiceTest : HeadlessTest
         var owner = NewVisibleOwner();
         var vm = new TestDialogVm();
 
-        var task = service.ShowDialogAsync<TestDialogWindow, TestDialogVm, bool>(vm, owner);
+        var task = service.ShowWindowDialogAsync<TestDialogWindow, TestDialogVm, bool>(vm, owner);
         Dispatcher.UIThread.RunJobs();
 
         vm.Close(false);
@@ -46,7 +46,7 @@ public sealed class DialogServiceTest : HeadlessTest
         var hiddenOwner = new Window();
         var vm = new TestDialogVm();
 
-        var task = service.ShowDialogAsync<TestDialogWindow, TestDialogVm, bool>(vm, hiddenOwner);
+        var task = service.ShowWindowDialogAsync<TestDialogWindow, TestDialogVm, bool>(vm, hiddenOwner);
         Dispatcher.UIThread.RunJobs();
 
         vm.Close(true);

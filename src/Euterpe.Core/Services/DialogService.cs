@@ -7,7 +7,7 @@ internal sealed class DialogService : IDialogService
     [UsedImplicitly]
     public required IComponentContext Container { get; init; }
 
-    public async Task<T?> ShowDialogAsync<TWindow, TViewModel, T>(TViewModel vm, Window? owner = null)
+    public async Task<T?> ShowWindowDialogAsync<TWindow, TViewModel, T>(TViewModel vm, Window? owner = null)
         where TWindow : Window
         where TViewModel : class, IDialog<T>
     {

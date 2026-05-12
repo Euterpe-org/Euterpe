@@ -41,12 +41,12 @@ public sealed partial class HomePageViewModel : ViewModelBase
         if (!GameConfig.SetupCompleted)
         {
             Logger.ZLogInformation($"Setup not completed, opening full setup wizard");
-            await ShowFullWizardAsync().ConfigureAwait(true);
+            await SetupDialogService.ShowFullWizardAsync().ConfigureAwait(true);
         }
         else if (!GameSettingService.IsValidGameFolder())
         {
             Logger.ZLogWarning($"Stored {GameConfig.DisplayName} folder is invalid, opening game path repair");
-            await ShowGamePathRepairAsync().ConfigureAwait(true);
+            await SetupDialogService.ShowGamePathRepairAsync().ConfigureAwait(true);
         }
     }
 
@@ -78,19 +78,10 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required GameConfig GameConfig { get; init; }
 
     [UsedImplicitly]
-    public required GameSwitcher GameSwitcher { get; init; }
-
-    [UsedImplicitly]
     public required NavigationService NavigationService { get; init; }
 
     [UsedImplicitly]
-    public required WizardDialogViewModel WizardDialogViewModel { get; init; }
-
-    [UsedImplicitly]
-    public required RepairDialogViewModel RepairDialogViewModel { get; init; }
-
-    [UsedImplicitly]
-    public required IDialogService DialogService { get; init; }
+    public required SetupDialogService SetupDialogService { get; init; }
 
     [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }

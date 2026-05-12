@@ -59,6 +59,7 @@ public static class IocContainer
         Root.BeginLifetimeScope(builder =>
         {
             builder.RegisterPerGameCoreServices(game);
+            builder.RegisterPerGameAppServices();
             builder.RegisterPerGameViewModels();
         });
 }

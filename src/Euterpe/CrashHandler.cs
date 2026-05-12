@@ -33,7 +33,7 @@ internal static class CrashHandler
         try
         {
             var shouldContinue = await Resolve<IDialogService>()
-                .ShowDialogAsync<CrashWindow, CrashWindowViewModel, bool>(vm)
+                .ShowWindowDialogAsync<CrashWindow, CrashWindowViewModel, bool>(vm)
                 .ConfigureAwait(true);
 
             if (!shouldContinue)

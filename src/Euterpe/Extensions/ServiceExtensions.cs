@@ -12,8 +12,8 @@ public static partial class ServiceExtensions
             // Self Services
             builder.RegisterType<DeepLinkService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<GameSwitcher>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LocalizationService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
 
             // Auto Activate Services
             builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
@@ -35,6 +35,11 @@ public static partial class ServiceExtensions
 
             builder.RegisterType<CrashWindowViewModel>().PropertiesAutowired().SingleInstance();
             builder.Register(static ctx => new CrashWindow { DataContext = ctx.Resolve<CrashWindowViewModel>() }).InstancePerDependency();
+        }
+
+        public void RegisterPerGameAppServices()
+        {
+            builder.RegisterType<SetupDialogService>().PropertiesAutowired().InstancePerLifetimeScope();
         }
     }
 }

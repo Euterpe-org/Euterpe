@@ -81,9 +81,6 @@ public sealed class HomePageViewModelTest
         RuntimeInstaller = IGameRuntimeInstaller.Mock(),
         UidProvider = IGameUidProvider.Mock(),
         NavigationService = null!,
-        GameSwitcher = null!,
-        WizardDialogViewModel = null!,
-        RepairDialogViewModel = null!,
-        DialogService = null!
+        SetupDialogService = null!
     };
 }

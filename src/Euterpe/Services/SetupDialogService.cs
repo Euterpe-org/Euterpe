@@ -1,22 +1,22 @@
 using Irihi.Avalonia.Shared.Contracts;
 
-namespace Euterpe.ViewModels.Pages;
+namespace Euterpe.Services;
 
-public sealed partial class HomePageViewModel
+public sealed class SetupDialogService
 {
-    private async Task ShowFullWizardAsync()
+    public async Task ShowFullWizardAsync()
     {
         await WizardDialogViewModel.PrepareForFullSetupAsync().ConfigureAwait(true);
         await ShowDialogAsync<WizardDialog, WizardDialogViewModel>(WizardDialogViewModel, Wizard_Title_Welcome).ConfigureAwait(true);
     }
 
-    private async Task ShowOptionRepairAsync(SetupOptionKinds kind)
+    public async Task ShowOptionRepairAsync(SetupOptionKinds kind)
     {
         await RepairDialogViewModel.PrepareForOptionAsync(kind).ConfigureAwait(true);
         await ShowDialogAsync<RepairDialog, RepairDialogViewModel>(RepairDialogViewModel, Setup_Title_SettingUp).ConfigureAwait(true);
     }
 
-    private async Task ShowGamePathRepairAsync()
+    public async Task ShowGamePathRepairAsync()
     {
         await RepairDialogViewModel.PrepareForGamePathAsync().ConfigureAwait(true);
         await ShowDialogAsync<RepairDialog, RepairDialogViewModel>(RepairDialogViewModel, Setup_Title_GamePath).ConfigureAwait(true);
@@ -44,4 +44,20 @@ public sealed partial class HomePageViewModel
             GameSwitcher.CanSwitch = true;
         }
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required IDialogService DialogService { get; init; }
+
+    [UsedImplicitly]
+    public required GameSwitcher GameSwitcher { get; init; }
+
+    [UsedImplicitly]
+    public required WizardDialogViewModel WizardDialogViewModel { get; init; }
+
+    [UsedImplicitly]
+    public required RepairDialogViewModel RepairDialogViewModel { get; init; }
+
+    #endregion Injections
 }
