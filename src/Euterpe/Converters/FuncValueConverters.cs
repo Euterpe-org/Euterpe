@@ -5,11 +5,8 @@ namespace Euterpe.Converters;
 
 public static class FuncValueConverters
 {
-    private const string IconPrefix = "SemiIcon";
-    private static readonly IResourceService _resourceService = IocContainer.Resolve<IResourceService>();
-
     public static FuncValueConverter<string, StreamGeometry?> SemiIconConverter { get; } =
-        new(iconKeyName => _resourceService.TryGetAppResource<StreamGeometry>($"{IconPrefix}{iconKeyName}"));
+        new(key => GetCurrentApplication().TryGetResource($"SemiIcon{key}", out var result) ? result as StreamGeometry : null);
 
     public static FuncValueConverter<int, HorizontalAlignment> HorizontalAlignmentConverter { get; } =
         new(count => count is 1 ? HorizontalAlignment.Center : HorizontalAlignment.Left);
