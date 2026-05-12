@@ -1,3 +1,4 @@
+using Autofac;
 using Euterpe.Services;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -15,7 +16,11 @@ public sealed class NavigationServiceTest
     private const string RouteA = "/__nav_test_a__";
     private const string RouteB = "/__nav_test_b__";
 
-    private static NavigationService NewService() => new() { Logger = NullLogger<NavigationService>.Instance };
+    private static NavigationService NewService() => new()
+    {
+        Logger = NullLogger<NavigationService>.Instance,
+        Container = new ContainerBuilder().Build()
+    };
 
     [Test]
     public async Task Ctor_InitialState()

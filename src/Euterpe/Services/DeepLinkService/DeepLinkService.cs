@@ -3,7 +3,7 @@ namespace Euterpe.Services;
 public sealed partial class DeepLinkService
 {
     private IAuthService AuthService => LazyAuthService.Value;
-    private static IModManageService ModManageService => IocContainer.Resolve<IModManageService>();
+    private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
 
     public async Task SetupAsync()
     {
@@ -77,6 +77,9 @@ public sealed partial class DeepLinkService
 
     [UsedImplicitly]
     public required Lazy<IAuthService> LazyAuthService { get; init; }
+
+    [UsedImplicitly]
+    public required BehaviorSubject<ILifetimeScope> GameScope { get; init; }
 
     #endregion Injections
 }

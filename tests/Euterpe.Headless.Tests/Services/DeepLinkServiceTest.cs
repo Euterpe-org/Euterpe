@@ -1,8 +1,10 @@
 using System.Reflection;
+using Autofac;
 using Euterpe.Abstractions;
 using Euterpe.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using R3;
 using TUnit.Mocks.Logging;
 
 namespace Euterpe.Headless.Tests.Services;
@@ -13,13 +15,22 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     private static DeepLinkService NewService(
         IAuthService? auth = null,
         IDeepLinkSetup? setup = null,
-        MockLogger<DeepLinkService>? logger = null) => new()
+        MockLogger<DeepLinkService>? logger = null)
     {
-        NavigationService = new NavigationService { Logger = NullLogger<NavigationService>.Instance },
-        Logger = logger ?? Mock.Logger<DeepLinkService>(),
-        DeepLinkSetup = setup ?? IDeepLinkSetup.Mock(),
-        LazyAuthService = new Lazy<IAuthService>(() => auth ?? IAuthService.Mock())
-    };
+        var container = new ContainerBuilder().Build();
+        return new DeepLinkService
+        {
+            NavigationService = new NavigationService
+            {
+                Logger = NullLogger<NavigationService>.Instance,
+                Container = container
+            },
+            Logger = logger ?? Mock.Logger<DeepLinkService>(),
+            DeepLinkSetup = setup ?? IDeepLinkSetup.Mock(),
+            LazyAuthService = new Lazy<IAuthService>(() => auth ?? IAuthService.Mock()),
+            GameScope = new BehaviorSubject<ILifetimeScope>(container)
+        };
+    }
 
     [Test]
     public Task HandleStartupArgs_Empty_DoesNothing() => RunOnUI(async () =>
