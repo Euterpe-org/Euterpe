@@ -18,10 +18,6 @@ namespace Sample.ViewModels;
 partial class SettingsViewViewModel
 {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.RouteGenerator", "1.0.0")]
-    [global::JetBrains.Annotations.UsedImplicitly]
-    public required global::Euterpe.Services.NavigationService NavigationService { get; init; }
-
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.RouteGenerator", "1.0.0")]
     public override global::System.Collections.Generic.IReadOnlyList<global::Euterpe.Controls.Models.NavItem> NavItems { get; } =
     [
         new(global::Euterpe.Localization.XAMLLiteral.General, "/settings/general"),

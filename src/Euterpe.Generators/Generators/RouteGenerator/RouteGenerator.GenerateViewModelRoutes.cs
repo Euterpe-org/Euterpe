@@ -17,10 +17,6 @@ public sealed partial class RouteGenerator
                         partial class {{viewModelName}}
                         {
                             {{GetGeneratedCodeAttribute(nameof(RouteGenerator))}}
-                            [global::JetBrains.Annotations.UsedImplicitly]
-                            public required global::Euterpe.Services.NavigationService NavigationService { get; init; }
-
-                            {{GetGeneratedCodeAttribute(nameof(RouteGenerator))}}
                             public override global::System.Collections.Generic.IReadOnlyList<global::Euterpe.Controls.Models.NavItem> NavItems { get; } =
                             [
                         """);

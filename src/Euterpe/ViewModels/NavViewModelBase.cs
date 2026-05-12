@@ -10,6 +10,9 @@ public abstract partial class NavViewModelBase : ViewModelBase
 
     public abstract IReadOnlyList<NavItem> NavItems { get; }
 
+    [UsedImplicitly]
+    public required NavigationService NavigationService { get; init; }
+
     protected abstract Control ResolveRoute(string route);
 
     partial void OnSelectedItemChanged(NavItem? value)
