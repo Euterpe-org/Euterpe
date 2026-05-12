@@ -2,6 +2,9 @@ namespace Euterpe.Views.Windows;
 
 public sealed partial class MainSplashWindow : SplashWindow
 {
+    [UsedImplicitly]
+    public Lazy<MainWindow> MainWindow { get; init; } = null!;
+
     public MainSplashWindow()
     {
         InitializeComponent();
@@ -17,5 +20,5 @@ public sealed partial class MainSplashWindow : SplashWindow
         return true;
     }
 
-    protected override async Task<Window?> CreateNextWindow() => IocContainer.Resolve<MainWindow>();
+    protected override Task<Window?> CreateNextWindow() => Task.FromResult<Window?>(MainWindow.Value);
 }
