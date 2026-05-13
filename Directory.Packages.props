@@ -37,8 +37,8 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisVersion)"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="4.14.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)"/>
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.7"/>
-        <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.5.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.8"/>
+        <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.6.0"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="ObservableCollections" Version="3.3.4"/>
         <PackageVersion Include="Polyfill" Version="10.5.1"/>
@@ -52,7 +52,7 @@
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
         <PackageVersion Include="Semi.Avalonia" Version="12.0.1"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
-        <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.7"/>
+        <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.8"/>
         <PackageVersion Include="TUnit" Version="$(TUnitVersion)"/>
         <PackageVersion Include="TUnit.Mocks" Version="$(TUnitVersion)"/>
         <PackageVersion Include="TUnit.Mocks.Http" Version="$(TUnitVersion)"/>
