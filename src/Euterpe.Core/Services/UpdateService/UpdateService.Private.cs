@@ -1,4 +1,6 @@
-﻿namespace Euterpe.Core;
+﻿using Ursa.Controls;
+
+namespace Euterpe.Core;
 
 internal sealed partial class UpdateService
 {

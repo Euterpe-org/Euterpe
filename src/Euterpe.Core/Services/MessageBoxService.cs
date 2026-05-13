@@ -1,4 +1,5 @@
 using Avalonia.Threading;
+using Ursa.Controls;
 
 namespace Euterpe.Core;
 

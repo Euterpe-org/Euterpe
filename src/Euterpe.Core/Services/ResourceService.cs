@@ -1,4 +1,5 @@
-﻿using Avalonia.Platform;
+﻿using Avalonia.Controls;
+using Avalonia.Platform;
 
 namespace Euterpe.Core;
 
