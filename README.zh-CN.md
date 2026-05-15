@@ -32,8 +32,8 @@
 
 - **正式版：** 适合大多数用户的稳定版本。
   [前往 GitHub Releases](https://github.com/Euterpe-org/Euterpe/releases)
-- **CI 版：** 仅针对特定提交。打开 Actions，选择工作流运行，然后从 **Artifacts** 下载。
-  [打开 GitHub Actions](https://github.com/Euterpe-org/Euterpe/actions)
+- **开发版：** 每天从 `dev` 分支自动构建，包含最新功能，但可能不稳定。
+  [下载开发版](https://github.com/Euterpe-org/Euterpe/releases/tag/nightly)
 
 </br>
 

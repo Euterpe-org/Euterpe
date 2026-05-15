@@ -28,8 +28,8 @@ English | [简体中文](README.zh-CN.md)
 
 - **Release:** The stable build for most users.
   [Go to GitHub Releases](https://github.com/Euterpe-org/Euterpe/releases)
-- **CI:** For specific commits only. Open Actions, pick the workflow run, then download from **Artifacts**.
-  [Open GitHub Actions](https://github.com/Euterpe-org/Euterpe/actions)
+- **Nightly:** Auto-built from `dev` daily. Latest features, may be unstable.
+  [Download nightly](https://github.com/Euterpe-org/Euterpe/releases/tag/nightly)
 
 ## 🍉 Euterpe Hub
 
