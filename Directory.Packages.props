@@ -12,7 +12,7 @@
         <UrsaVersion>2.0.0</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
-        <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0-rc.1"/>
+        <PackageVersion Include="AsmResolver.DotNet" Version="6.0.0"/>
         <PackageVersion Include="AssetsTools.NET" Version="3.0.4"/>
         <PackageVersion Include="AsyncAwaitBestPractices" Version="10.0.0"/>
         <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="11.0.0"/>
