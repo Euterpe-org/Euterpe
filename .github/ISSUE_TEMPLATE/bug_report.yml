@@ -6,7 +6,7 @@ body:
   - type: checkboxes
     id: checking1
     attributes:
-      label: I'm using the latest build release of Muse Dash Mod Tools and this problem still exists.
+      label: I'm using the latest build release of Euterpe and this problem still exists.
       options:
         - label: "Yes"
           required: true
