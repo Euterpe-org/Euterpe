@@ -27,7 +27,7 @@
         <PackageVersion Include="CliWrap" Version="3.10.1"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
         <PackageVersion Include="ConsoleAppFramework" Version="5.7.13"/>
-        <PackageVersion Include="DotNext.Threading" Version="6.2.1"/>
+        <PackageVersion Include="DotNext.Threading" Version="6.2.3"/>
         <PackageVersion Include="Downloader" Version="5.5.0"/>
         <PackageVersion Include="DynamicData" Version="9.4.31"/>
         <PackageVersion Include="HotAvalonia" Version="3.1.0"/>
