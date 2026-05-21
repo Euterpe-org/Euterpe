@@ -91,8 +91,8 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Zapisnici aplikacije</value>
   </data>
-  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
-    <value>MelonLoader zapisnici</value>
+  <data name="Folder_GameLogs" xml:space="preserve">
+    <value>Zapisnici igre</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mods</value>

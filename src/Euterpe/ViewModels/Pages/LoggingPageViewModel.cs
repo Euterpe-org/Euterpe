@@ -7,7 +7,7 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
         new DropDownButtonItem(DropDownButton_Open,
         [
             new DropDownMenuItem(Folder_AppLogs, OpenFolderCommand, AppLogsFolder),
-            new DropDownMenuItem(Folder_MelonLoaderLogs, OpenFolderCommand, GameConfig.MelonLoaderFolder)
+            new DropDownMenuItem(Folder_GameLogs, OpenFolderCommand, GameConfig.MelonLoaderFolder)
         ])
     ];
 

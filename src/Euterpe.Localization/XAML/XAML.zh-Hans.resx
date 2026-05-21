@@ -112,8 +112,8 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>应用日志文件夹</value>
   </data>
-  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
-    <value>模组加载器日志文件夹</value>
+  <data name="Folder_GameLogs" xml:space="preserve">
+    <value>游戏日志文件夹</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>模组文件夹</value>

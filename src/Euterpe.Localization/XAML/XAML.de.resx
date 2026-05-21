@@ -91,8 +91,8 @@
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App-Protokolle</value>
   </data>
-  <data name="Folder_MelonLoaderLogs" xml:space="preserve">
-    <value>MelonLoader-Protokolle</value>
+  <data name="Folder_GameLogs" xml:space="preserve">
+    <value>Spielprotokolle</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mods</value>
