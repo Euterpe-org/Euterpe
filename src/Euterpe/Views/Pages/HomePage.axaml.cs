@@ -1,3 +1,4 @@
+using Avalonia.Input;
 using Avalonia.Interactivity;
 
 namespace Euterpe.Views.Pages;
@@ -6,6 +7,9 @@ namespace Euterpe.Views.Pages;
 [PerGameView]
 public sealed partial class HomePage : UserControl
 {
+    private const int EasterEggClickThreshold = 10;
+    private int _titleClickCount;
+
     public HomePage()
     {
         InitializeComponent();
@@ -18,6 +22,19 @@ public sealed partial class HomePage : UserControl
 
     private void TitleButton_Click(object? sender, RoutedEventArgs e)
     {
-        // Just for visual effect, no actual action
+        _titleClickCount++;
+
+        if (_titleClickCount < EasterEggClickThreshold)
+        {
+            return;
+        }
+
+        _titleClickCount = 0;
+        MadelineOverlay.IsVisible = true;
+    }
+
+    private void MadelineOverlay_PointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        MadelineOverlay.IsVisible = false;
     }
 }
