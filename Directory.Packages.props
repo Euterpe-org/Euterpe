@@ -61,7 +61,7 @@
         <PackageVersion Include="TUnit.Mocks.Logging" Version="$(TUnitVersion)"/>
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
-        <PackageVersion Include="Verify.TUnit" Version="31.16.3"/>
+        <PackageVersion Include="Verify.TUnit" Version="31.17.0"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.58"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
