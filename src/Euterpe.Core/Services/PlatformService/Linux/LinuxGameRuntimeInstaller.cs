@@ -10,7 +10,64 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
                                               wine reg add "HKCU\Software\Wine\DllOverrides" /v "version" /t "REG_SZ" /d "native,builtin" /f
                                               """;
 
-    public async Task<bool> CheckInstalledAsync()
+    public Task<bool> CheckInstalledAsync() =>
+        Task.FromResult(CheckGameLocalRuntimeInstalled() || CheckProtonPrefixRuntimeInstalled());
+
+    public async Task InstallAsync()
+    {
+        if (!await CheckProtontricksInstalledAsync().ConfigureAwait(false))
+        {
+            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Not_Installed).ConfigureAwait(false);
+            throw new InvalidOperationException("Protontricks not installed");
+        }
+
+        if (!await ApplyVersionDllOverrideAsync().ConfigureAwait(false))
+        {
+            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Wineprefix_Failed).ConfigureAwait(false);
+            throw new InvalidOperationException("Failed to configure wineprefix");
+        }
+
+        var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+        try
+        {
+            Logger.ZLogInformation($"Downloading .NET Runtime from {IGameRuntimeInstaller.DotnetRuntimeUrl} to {tempFilePath}");
+            await AppDownloadManager.DownloadFileAsync(IGameRuntimeInstaller.DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+
+            Logger.ZLogInformation($"Extracting .NET Runtime to {GameConfig.DotnetRuntimeFolder}");
+            await ArchiveService.ExtractZipFileAsync(tempFilePath, GameConfig.DotnetRuntimeFolder).ConfigureAwait(false);
+
+            Logger.ZLogInformation($".NET Runtime installed to {GameConfig.DotnetRuntimeFolder}");
+        }
+        finally
+        {
+            FileSystemService.TryDeleteFile(tempFilePath);
+        }
+    }
+
+    private bool CheckGameLocalRuntimeInstalled()
+    {
+        ReadOnlySpan<string> dotnetPaths =
+        [
+            GameConfig.DotnetRuntimeFolder,
+            GameConfig.MelonLoaderDotnetRuntimeFolder
+        ];
+
+        foreach (var path in dotnetPaths)
+        {
+            if (!Directory.Exists(path))
+            {
+                continue;
+            }
+
+            Logger.ZLogInformation($"Game-local .NET runtime found: {path}");
+            return true;
+        }
+
+        Logger.ZLogInformation($"No game-local .NET runtime found in {GameConfig.Folder}");
+        return false;
+    }
+
+    private bool CheckProtonPrefixRuntimeInstalled()
     {
         var relativePath = $"steamapps/compatdata/{GameConfig.SteamAppId}/pfx/drive_c/Program Files/dotnet/shared/Microsoft.WindowsDesktop.App";
         var runtimeRoot = Path.Combine(Config.SteamFolder, relativePath);
@@ -31,34 +88,6 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
         Logger.ZLogInformation($".NET Desktop Runtime 6 found in {runtimeRoot}");
         return true;
-    }
-
-    public async Task InstallAsync()
-    {
-        if (!await CheckProtontricksInstalledAsync().ConfigureAwait(false))
-        {
-            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Not_Installed).ConfigureAwait(false);
-            throw new InvalidOperationException("Protontricks not installed");
-        }
-
-        if (!await ConfigureWinePrefixAsync().ConfigureAwait(false))
-        {
-            await MessageBoxService.ErrorOverlayAsync(MessageBox_Content_Protontricks_Wineprefix_Failed).ConfigureAwait(false);
-            throw new InvalidOperationException("Failed to configure wineprefix");
-        }
-
-        var result = await Cli.Wrap("protontricks")
-            .WithArguments([GameConfig.SteamAppId, "dotnetdesktop6"])
-            .WithValidation(CommandResultValidation.None)
-            .ExecuteBufferedAsync()
-            .ConfigureAwait(false);
-
-        if (result.ExitCode is not 0)
-        {
-            throw new InvalidOperationException($"protontricks dotnetdesktop6 install failed with exit code {result.ExitCode}: {result.StandardError}");
-        }
-
-        Logger.ZLogInformation($".NET Runtime installed successfully via protontricks");
     }
 
     private async Task<bool> CheckProtontricksInstalledAsync()
@@ -87,33 +116,19 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
         }
     }
 
-    private async Task<bool> ConfigureWinePrefixAsync()
+    private async Task<bool> ApplyVersionDllOverrideAsync()
     {
         try
         {
-            var winVersionResult = await Cli.Wrap("protontricks")
-                .WithArguments([GameConfig.SteamAppId, "win10"])
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync()
-                .ConfigureAwait(false);
-
-            if (winVersionResult.ExitCode is not 0)
-            {
-                Logger.ZLogError($"Failed to set Windows version to Win10: {winVersionResult.StandardError}");
-                return false;
-            }
-
-            Logger.ZLogInformation($"Windows version set to Windows 10");
-
-            var dllOverrideResult = await Cli.Wrap("protontricks")
+            var result = await Cli.Wrap("protontricks")
                 .WithArguments(["-c", DllOverrideCommand, GameConfig.SteamAppId])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
 
-            if (dllOverrideResult.ExitCode is not 0)
+            if (result.ExitCode is not 0)
             {
-                Logger.ZLogError($"Failed to add version dll override: {dllOverrideResult.StandardError}");
+                Logger.ZLogError($"Failed to add version dll override: {result.StandardError}");
                 return false;
             }
 
@@ -122,7 +137,7 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to configure Wine prefix via protontricks");
+            Logger.ZLogError(ex, $"Failed to apply version dll override via protontricks");
             return false;
         }
     }
@@ -134,6 +149,15 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
     [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
+
+    [UsedImplicitly]
+    public required IAppDownloadManager AppDownloadManager { get; init; }
+
+    [UsedImplicitly]
+    public required IArchiveService ArchiveService { get; init; }
+
+    [UsedImplicitly]
+    public required IFileSystemService FileSystemService { get; init; }
 
     [UsedImplicitly]
     public required ILogger<LinuxGameRuntimeInstaller> Logger { get; init; }

@@ -48,6 +48,12 @@ public abstract partial class GameConfig
     public string LatestLogPath => Path.Combine(MelonLoaderFolder, "Latest.log");
 
     [JsonIgnore]
+    public string DotnetRuntimeFolder => Path.Combine(Folder, "dotnet");
+
+    [JsonIgnore]
+    public string MelonLoaderDotnetRuntimeFolder => Path.Combine(MelonLoaderFolder, "Dependencies", "dotnet");
+
+    [JsonIgnore]
     public string UnityDependencyZipPath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityVersion}.zip");
 
     [JsonIgnore]
