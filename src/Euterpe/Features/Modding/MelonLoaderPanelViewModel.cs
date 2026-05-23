@@ -1,0 +1,92 @@
+﻿namespace Euterpe.Features.Modding;
+
+public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
+{
+    [ObservableProperty]
+    public partial InstallStatus MelonLoaderInstallStatus { get; set; }
+
+    [ObservableProperty]
+    public partial LocalizedString? DownloadText { get; set; }
+
+    [ObservableProperty]
+    public partial double DownloadProgress { get; set; }
+
+    protected override async Task OnInitializeAsync()
+    {
+        await base.OnInitializeAsync().ConfigureAwait(true);
+
+        MelonLoaderInstallStatus = GameConfig.MelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
+
+        Logger.ZLogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
+    }
+
+    [RelayCommand]
+    private async Task InstallMelonLoaderAsync()
+    {
+        try
+        {
+            MelonLoaderInstallStatus = InstallStatus.Downloading;
+
+            var progress = new Progress<double>(value => DownloadProgress = value);
+            await DependencyAcquireService.AcquireForMelonLoaderAsync(OnDownloadStarted, progress).ConfigureAwait(true);
+            await GameLocalService.InstallMelonLoaderAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to install MelonLoader");
+            MelonLoaderInstallStatus = InstallStatus.NotInstalled;
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Install_Failed).ConfigureAwait(true);
+            return;
+        }
+
+        GameLocalService.ReadMelonLoaderVersion();
+        MelonLoaderInstallStatus = InstallStatus.Installed;
+        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Install_Success).ConfigureAwait(true);
+    }
+
+    [RelayCommand]
+    private async Task UninstallMelonLoaderAsync()
+    {
+        try
+        {
+            await GameLocalService.UninstallMelonLoaderAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to uninstall MelonLoader");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Uninstall_Failed).ConfigureAwait(true);
+            return;
+        }
+
+        GameConfig.MelonLoaderVersion = null;
+        MelonLoaderInstallStatus = InstallStatus.NotInstalled;
+        await MessageBoxService.SuccessAsync(MessageBox_Content_MelonLoader_Uninstall_Success).ConfigureAwait(true);
+    }
+
+    private void OnDownloadStarted(object? sender, DownloadStartedEventArgs args)
+    {
+        var fileName = Path.GetFileName(args.FileName);
+        var mbSize = args.TotalBytesToReceive / (1024d * 1024d);
+        DownloadText = string.Format(XAML.MelonLoader_State_Downloading, fileName, $"{mbSize:F2}");
+        Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
+    }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
+
+    [UsedImplicitly]
+    public required IDependencyAcquireService DependencyAcquireService { get; init; }
+
+    [UsedImplicitly]
+    public required IGameLocalService GameLocalService { get; init; }
+
+    [UsedImplicitly]
+    public required ILogger<MelonLoaderPanelViewModel> Logger { get; init; }
+
+    [UsedImplicitly]
+    public required IMessageBoxService MessageBoxService { get; init; }
+
+    #endregion Injections
+}

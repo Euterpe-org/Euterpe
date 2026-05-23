@@ -1,4 +1,4 @@
-using Euterpe.ViewModels.Windows;
+using Euterpe.Shell;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests;

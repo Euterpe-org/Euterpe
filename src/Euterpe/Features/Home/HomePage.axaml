@@ -1,0 +1,153 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:gif="clr-namespace:Avalonia.Labs.Gif;assembly=Avalonia.Labs.Gif"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:m="using:Euterpe.Markup"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:Euterpe.Features.Home"
+    x:Class="Euterpe.Features.Home.HomePage"
+    x:DataType="vm:HomePageViewModel">
+
+    <Design.DataContext>
+        <vm:HomePageViewModel />
+    </Design.DataContext>
+
+    <UserControl.Styles>
+        <StyleInclude
+            Source="avares://Euterpe.Controls/Themes/ControlStyles/Pages/HomePageStyles.axaml" />
+    </UserControl.Styles>
+
+    <Panel>
+        <!--  Background Image  -->
+        <Image
+            Source="{DynamicResource BackgroundImage}"
+            Stretch="UniformToFill" />
+
+        <!--  Title Image  -->
+        <Button
+            Classes="TitleButton"
+            Click="TitleButton_Click"
+            HorizontalAlignment="Left"
+            Margin="60,70"
+            VerticalAlignment="Top">
+            <Image
+                Height="140"
+                Source="{DynamicResource TitleImage}" />
+        </Button>
+
+        <!--  Easter Egg: Madeline  -->
+        <Border
+            x:Name="MadelineOverlay"
+            Background="Transparent"
+            HorizontalAlignment="Center"
+            IsVisible="False"
+            PointerPressed="MadelineOverlay_PointerPressed"
+            VerticalAlignment="Center">
+            <gif:GifImage
+                Height="200"
+                Source="{m:GifSource /Assets/madeline.gif}"
+                Stretch="Uniform" />
+        </Border>
+
+        <!--  Play Button  -->
+        <e:PlayButton
+            Command="{Binding LaunchGameCommand, Mode=OneTime}"
+            Content="{Localize {x:Static loc:XAMLLiteral.Button_LaunchGame}}"
+            HorizontalAlignment="Right"
+            ItemsSource="{Binding GameModes, Mode=OneTime}"
+            Margin="0,0,120,80"
+            SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}"
+            VerticalAlignment="Bottom" />
+
+        <!--  Support Card  -->
+        <Border
+            x:Name="SupportCard"
+            Classes="SupportCard"
+            HorizontalAlignment="Right"
+            Margin="0,60,90,0"
+            Theme="{DynamicResource CardBorder}"
+            VerticalAlignment="Top">
+            <StackPanel
+                Orientation="Vertical"
+                Spacing="15">
+                <StackPanel.Styles>
+                    <Style
+                        Selector="u|IconButton">
+                        <Setter Property="Command" Value="{Binding OpenUrlCommand, Mode=OneTime}" />
+                        <Setter Property="IconPlacement" Value="Left" />
+                    </Style>
+                </StackPanel.Styles>
+
+                <!--  Header with Close Button  -->
+                <Grid
+                    ColumnDefinitions="*,Auto,*">
+                    <!--  Left: Emoji  -->
+                    <TextBlock
+                        Grid.Column="0"
+                        Classes="SupportEmoji"
+                        HorizontalAlignment="Left"
+                        Text="✨"
+                        VerticalAlignment="Center" />
+
+                    <!--  Center: Title  -->
+                    <TextBlock
+                        Grid.Column="1"
+                        Classes="SupportTitle"
+                        Text="{Localize {x:Static loc:XAMLLiteral.HomePage_SupportTitle}}"
+                        VerticalAlignment="Center" />
+
+                    <!--  Right: Close Button  -->
+                    <Button
+                        x:Name="CloseButton"
+                        Grid.Column="2"
+                        Classes="SupportCloseButton"
+                        Click="CloseButton_Click"
+                        HorizontalAlignment="Right"
+                        Padding="4"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="14"
+                            Text="✕" />
+                    </Button>
+                </Grid>
+
+                <!--  Support Description  -->
+                <TextBlock
+                    Classes="SupportDescription"
+                    Text="{Localize {x:Static loc:XAMLLiteral.HomePage_SupportDescription}}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+
+                <!--  Action Buttons  -->
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <u:IconButton
+                        CommandParameter="https://github.com/Euterpe-org/Euterpe">
+                        <TextBlock>
+                            <Run
+                                FontFamily="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji"
+                                Text="⭐ " />
+                            <Run
+                                Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_GitHubStar}}" />
+                        </TextBlock>
+                    </u:IconButton>
+
+                    <u:IconButton
+                        CommandParameter="https://euterpe-org.com/sponsors">
+                        <TextBlock>
+                            <Run
+                                Text="💖 " />
+                            <Run
+                                Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_Sponsor}}" />
+                        </TextBlock>
+                    </u:IconButton>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Panel>
+
+</UserControl>

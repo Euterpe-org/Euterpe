@@ -10,15 +10,15 @@ public sealed class GenerateTheme : Task
     private const string OutputFileName = "Themes/EuterpeTheme.axaml";
     private const string ThemeClassName = "Euterpe.Controls.EuterpeTheme";
 
+    private readonly XNamespace AvaloniaNamespace = AvaloniaNamespaceUrl;
+    private readonly XNamespace SemiNamespace = SemiNamespaceUrl;
+    private readonly XNamespace XamlNamespace = XamlNamespaceUrl;
+
     private readonly Dictionary<string, CategoryInfo> _categories = new()
     {
         ["Themes/Controls"] = new CategoryInfo("Controls"),
         ["Themes/ControlStyles"] = new CategoryInfo("Control Styles")
     };
-
-    private readonly XNamespace AvaloniaNamespace = AvaloniaNamespaceUrl;
-    private readonly XNamespace SemiNamespace = SemiNamespaceUrl;
-    private readonly XNamespace XamlNamespace = XamlNamespaceUrl;
 
     [Required]
     public ITaskItem[] AvaloniaResourceFiles { get; set; } = null!;

@@ -76,7 +76,7 @@ public sealed partial class RouteGenerator : IIncrementalGenerator
     }
 
     private static (string Namespace, string Name) DeriveViewModel(RouteData route) =>
-        (route.Namespace.Replace(".Views", ".ViewModels"), route.ClassName + "ViewModel");
+        (route.Namespace, route.ClassName + "ViewModel");
 
     private sealed record RouteData(string ClassName, string Namespace, string Path, string DisplayName, string Icon, int Order);
 }

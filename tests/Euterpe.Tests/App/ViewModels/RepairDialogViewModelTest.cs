@@ -1,5 +1,4 @@
-using Euterpe.ViewModels.Components;
-using Euterpe.ViewModels.Components.Setup;
+using Euterpe.Features.Setup;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests;
@@ -100,7 +99,7 @@ public sealed class RepairDialogViewModelTest
         }
 
         var executionPage = NewExecutionPage(gameConfig, state);
-        var vm = NewFullViewModel(gameConfig: gameConfig, state: state, executionPage: executionPage);
+        var vm = NewFullViewModel(gameConfig, state, executionPage: executionPage);
 
         await vm.PrepareForOptionAsync(SetupOptionKinds.MelonLoader);
 
@@ -118,7 +117,7 @@ public sealed class RepairDialogViewModelTest
         gameConfig.SetupOptions[0].IsSelected = true;
 
         var executionPage = NewExecutionPage(gameConfig, state);
-        var vm = NewFullViewModel(gameConfig: gameConfig, state: state, executionPage: executionPage);
+        var vm = NewFullViewModel(gameConfig, state, executionPage: executionPage);
 
         await vm.PrepareForOptionAsync(SetupOptionKinds.None);
 

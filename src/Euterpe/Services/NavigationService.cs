@@ -6,16 +6,6 @@ public sealed class NavigationService
 
     public string? CurrentRoute { get; private set; }
 
-    #region Injections
-
-    [UsedImplicitly]
-    public required IComponentContext Container { get; init; }
-
-    [UsedImplicitly]
-    public required ILogger<NavigationService> Logger { get; init; }
-
-    #endregion Injections
-
     public Control NavigateTo<TView>() where TView : Control, new()
     {
         Logger.ZLogInformation($"Navigating to View: {typeof(TView).Name}");
@@ -47,4 +37,14 @@ public sealed class NavigationService
         await Ready.WaitAsync().ConfigureAwait(true);
         NavigateTo(route);
     }
+
+    #region Injections
+
+    [UsedImplicitly]
+    public required IComponentContext Container { get; init; }
+
+    [UsedImplicitly]
+    public required ILogger<NavigationService> Logger { get; init; }
+
+    #endregion Injections
 }

@@ -55,7 +55,7 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
                             {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
                             public static void RegisterAppViewsAndViewModels(this ContainerBuilder builder)
                             {
-                                builder.RegisterType<global::Euterpe.ViewModels.AppViewModel>().PropertiesAutowired().SingleInstance();
+                                builder.RegisterType<global::Euterpe.AppViewModel>().PropertiesAutowired().SingleInstance();
 
                         """);
 

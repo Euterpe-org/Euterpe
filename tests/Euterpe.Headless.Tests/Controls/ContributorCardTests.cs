@@ -72,7 +72,7 @@ public sealed class ContributorCardTests : HeadlessTest
         {
             ContributorName = "test",
             Links = [new ContributorLink("github", "https://github.com")],
-            ButtonCommand = new DelegateCommand(p => receivedUrls.Add(p)),
+            ButtonCommand = new DelegateCommand(p => receivedUrls.Add(p))
         };
         var window = new Window { Content = card, Width = 400, Height = 300 };
         window.Show();

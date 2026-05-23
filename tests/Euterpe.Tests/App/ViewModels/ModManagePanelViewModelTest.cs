@@ -1,4 +1,6 @@
-using Euterpe.ViewModels.Panels.Modding;
+using System.Reactive.Linq;
+using DynamicData;
+using Euterpe.Features.Modding;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests;
@@ -124,7 +126,7 @@ public sealed class ModManagePanelViewModelTest
     public async Task OnInitializeAsync_InitializesModsAndSetsAllModsLoaded()
     {
         var modManageService = IModManageService.Mock();
-        modManageService.Connect().Returns(System.Reactive.Linq.Observable.Empty<DynamicData.IChangeSet<ModDto, string>>());
+        modManageService.Connect().Returns(Observable.Empty<IChangeSet<ModDto, string>>());
         var vm = NewViewModel(modManageService);
 
         await vm.InitializeAsync();

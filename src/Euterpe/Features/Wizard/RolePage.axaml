@@ -1,0 +1,123 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Euterpe.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Euterpe.Controls.Models"
+    xmlns:setup="using:Euterpe.Models.Setup"
+    xmlns:vm="using:Euterpe.Features.Wizard"
+    x:Class="Euterpe.Features.Wizard.RolePage"
+    x:DataType="vm:RolePageViewModel"
+    d:DesignHeight="460"
+    d:DesignWidth="850"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:RolePageViewModel />
+    </Design.DataContext>
+
+    <Grid
+        ColumnDefinitions="340,*"
+        Margin="28,24,28,0"
+        RowDefinitions="Auto,*">
+
+        <!--  Header  -->
+        <StackPanel
+            Grid.ColumnSpan="2"
+            Margin="0,0,0,18"
+            Spacing="4">
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="12">
+                <Image
+                    Height="36"
+                    RenderOptions.BitmapInterpolationMode="HighQuality"
+                    Source="/Assets/Logo.webp" />
+                <TextBlock
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Title_Welcome}}"
+                    Theme="{StaticResource TitleTextBlock}"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+            <TextBlock
+                Foreground="{DynamicResource SecondaryTextColor}"
+                Margin="48,0,0,0"
+                Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Description_Welcome}}" />
+        </StackPanel>
+
+        <!--  Left: Role Cards  -->
+        <ListBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Classes="RoleList"
+            ItemsSource="{Binding Roles, Mode=OneTime}"
+            Margin="0,0,12,0"
+            SelectedItem="{Binding SelectedRole}">
+            <ListBox.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:WizardRole">
+                    <e:RoleCard
+                        AccentColor="{Binding AccentColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}, Mode=OneTime}"
+                        Description="{Binding Description, Mode=OneTime}"
+                        Icon="{Binding IconKey, Converter={x:Static converters:FuncValueConverters.SemiIconConverter}, Mode=OneTime}"
+                        IsSelected="{Binding $parent[ListBoxItem].IsSelected, FallbackValue=False, Mode=OneWay}"
+                        Title="{Binding Title, Mode=OneTime}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--  Right: Task Options  -->
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Background="{DynamicResource SecondaryCardColor}"
+            CornerRadius="10"
+            Margin="12,0,0,0"
+            Padding="20,16"
+            Theme="{DynamicResource CardBorder}">
+            <DockPanel>
+
+                <TextBlock
+                    DockPanel.Dock="Top"
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Margin="0,0,0,12"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Wizard_Section_Tasks}}"
+                    Theme="{StaticResource TitleTextBlock}" />
+
+                <ScrollViewer>
+                    <ItemsControl
+                        ItemsSource="{Binding Options, Mode=OneTime}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate
+                                x:DataType="setup:SetupOption">
+                                <CheckBox
+                                    IsChecked="{Binding IsSelected}"
+                                    IsEnabled="{Binding !IsRequired, Mode=OneTime}"
+                                    Margin="0,2"
+                                    Padding="0">
+                                    <StackPanel
+                                        Margin="4,0,0,0"
+                                        Spacing="1"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            FontSize="13"
+                                            Text="{Binding DisplayName, Mode=OneTime}" />
+                                        <TextBlock
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SecondaryTextColor}"
+                                            Text="{Binding Description, Mode=OneTime}" />
+                                    </StackPanel>
+                                </CheckBox>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

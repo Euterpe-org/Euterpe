@@ -18,9 +18,9 @@ namespace Euterpe;
 public static class RouteTree
 {
     public static readonly global::Euterpe.Controls.Models.RouteNode Root = new("/", null, [
-        new("/settings", () => { var vm = Resolve<global::Sample.ViewModels.HomeViewViewModel>(); vm.SelectedItem = vm.NavItems[0]; }, [
-            new("/settings/general", () => { var vm = Resolve<global::Sample.ViewModels.SettingsViewViewModel>(); vm.SelectedItem = vm.NavItems[0]; }, []),
-            new("/settings/advanced", () => { var vm = Resolve<global::Sample.ViewModels.SettingsViewViewModel>(); vm.SelectedItem = vm.NavItems[1]; }, []),
+        new("/settings", () => { var vm = Resolve<global::Sample.Views.HomeViewViewModel>(); vm.SelectedItem = vm.NavItems[0]; }, [
+            new("/settings/general", () => { var vm = Resolve<global::Sample.Views.SettingsViewViewModel>(); vm.SelectedItem = vm.NavItems[0]; }, []),
+            new("/settings/advanced", () => { var vm = Resolve<global::Sample.Views.SettingsViewViewModel>(); vm.SelectedItem = vm.NavItems[1]; }, []),
         ]),
     ]);
 }

@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 using Euterpe.Abstractions;
-using Euterpe.ViewModels.Panels.Setting;
+using Euterpe.Features.Setting;
 
 namespace Euterpe.Headless.Tests.ViewModels;
 

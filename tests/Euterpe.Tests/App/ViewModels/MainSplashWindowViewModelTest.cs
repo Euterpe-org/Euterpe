@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 using DotNext.Threading;
-using Euterpe.ViewModels.Windows;
+using Euterpe.Shell;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests;

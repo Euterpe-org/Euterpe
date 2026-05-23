@@ -112,7 +112,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     public async Task HandleAuthCallback_WithValidCode_CallsCompleteLogin()
     {
         var auth = IAuthService.Mock();
-        var service = NewService(auth: auth);
+        var service = NewService(auth);
 
         await InvokeAuthCallback(service, "code=abc123&state=xyz");
 
@@ -126,7 +126,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     {
         var auth = IAuthService.Mock();
         var logger = Mock.Logger<DeepLinkService>();
-        var service = NewService(auth: auth, logger: logger);
+        var service = NewService(auth, logger: logger);
 
         await InvokeAuthCallback(service, "state=xyz");
 
@@ -140,7 +140,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     public async Task HandleAuthCallback_EmptyQuery_FallsBackToLogin()
     {
         var auth = IAuthService.Mock();
-        var service = NewService(auth: auth);
+        var service = NewService(auth);
 
         await InvokeAuthCallback(service, "");
 
@@ -155,7 +155,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
         var auth = IAuthService.Mock();
         auth.CompleteLoginAsync(Any<string>()).Throws(new InvalidOperationException("boom"));
         var logger = Mock.Logger<DeepLinkService>();
-        var service = NewService(auth: auth, logger: logger);
+        var service = NewService(auth, logger: logger);
 
         await InvokeAuthCallback(service, "code=abc123");
 

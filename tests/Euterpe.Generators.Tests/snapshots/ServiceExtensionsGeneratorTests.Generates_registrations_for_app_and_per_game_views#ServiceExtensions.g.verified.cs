@@ -18,7 +18,7 @@ partial class ServiceExtensions
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.ServiceExtensionsGenerator", "1.0.0")]
     public static void RegisterAppViewsAndViewModels(this ContainerBuilder builder)
     {
-        builder.RegisterType<global::Euterpe.ViewModels.AppViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<global::Euterpe.AppViewModel>().PropertiesAutowired().SingleInstance();
 
 		builder.RegisterType<HomeViewViewModel>().PropertiesAutowired().SingleInstance();
 		builder.Register<HomeView>(ctx => new HomeView { DataContext = ctx.Resolve<HomeViewViewModel>() }).SingleInstance();

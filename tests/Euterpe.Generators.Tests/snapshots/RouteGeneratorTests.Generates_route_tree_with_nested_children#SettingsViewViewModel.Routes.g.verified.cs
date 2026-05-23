@@ -13,7 +13,7 @@
 
 using System.Collections.Frozen;
 
-namespace Sample.ViewModels;
+namespace Sample.Views;
 
 partial class SettingsViewViewModel
 {

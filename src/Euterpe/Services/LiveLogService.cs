@@ -4,8 +4,8 @@ namespace Euterpe.Services;
 
 public sealed class LiveLogService
 {
-    private readonly ObservableFixedSizeRingBuffer<LogMessage> _logMessages = new(50);
     public readonly INotifyCollectionChangedSynchronizedViewList<LogMessage> LogMessagesView;
+    private readonly ObservableFixedSizeRingBuffer<LogMessage> _logMessages = new(50);
 
     public LiveLogService(LiveLogProcessor processor)
     {

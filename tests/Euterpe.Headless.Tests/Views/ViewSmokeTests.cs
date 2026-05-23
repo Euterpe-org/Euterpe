@@ -1,12 +1,11 @@
-using Euterpe.Views.Components;
-using Euterpe.Views.Components.Setup;
-using Euterpe.Views.Components.Wizard;
-using Euterpe.Views.Pages;
-using Euterpe.Views.Panels.Charting;
-using Euterpe.Views.Panels.Logging;
-using Euterpe.Views.Panels.Modding;
-using Euterpe.Views.Panels.Setting;
-using Euterpe.Views.Windows;
+using Euterpe.Features.Charting;
+using Euterpe.Features.Home;
+using Euterpe.Features.Logging;
+using Euterpe.Features.Modding;
+using Euterpe.Features.Setting;
+using Euterpe.Features.Setup;
+using Euterpe.Features.Wizard;
+using Euterpe.Shell;
 
 namespace Euterpe.Headless.Tests.Views;
 
