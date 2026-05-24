@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Modding;
+namespace Euterpe.Features.Modding;
 
 public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 {

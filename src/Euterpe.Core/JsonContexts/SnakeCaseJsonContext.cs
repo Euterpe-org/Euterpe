@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Euterpe.Contracts.Account;
 using Euterpe.Contracts.Charts;
 using Euterpe.Contracts.Distribution;

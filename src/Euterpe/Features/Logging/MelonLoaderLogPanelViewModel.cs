@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Logging;
+namespace Euterpe.Features.Logging;
 
 public sealed class MelonLoaderLogPanelViewModel : ViewModelBase
 {

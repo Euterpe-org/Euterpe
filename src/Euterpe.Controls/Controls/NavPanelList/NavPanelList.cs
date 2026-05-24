@@ -1,3 +1,3 @@
-﻿namespace Euterpe.Controls;
+namespace Euterpe.Controls;
 
 public sealed class NavPanelList : ListBox;

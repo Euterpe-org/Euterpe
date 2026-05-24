@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Charting;
+namespace Euterpe.Features.Charting;
 
 public sealed class ChartManagePanelViewModel : ViewModelBase
 {

@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Setting;
+namespace Euterpe.Features.Setting;
 
 [Route("/setting/file", DisplayName = Panel_Setting_FileManagement, Order = 3)]
 [PerGameView]

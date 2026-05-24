@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Euterpe.Core.Converters;
 
 namespace Euterpe.Core.JsonContexts;

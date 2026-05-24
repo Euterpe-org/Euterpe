@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Setting;
+namespace Euterpe.Features.Setting;
 
 // ReSharper disable StringLiteralTypo
 public sealed partial class AboutPanelViewModel : ViewModelBase

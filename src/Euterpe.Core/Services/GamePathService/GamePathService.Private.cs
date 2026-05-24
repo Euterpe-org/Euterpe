@@ -1,4 +1,4 @@
-﻿using Euterpe.Models.VDFs;
+using Euterpe.Models.VDFs;
 
 namespace Euterpe.Core;
 

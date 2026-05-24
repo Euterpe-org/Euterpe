@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Services;
+namespace Euterpe.Services;
 
 public sealed partial class DeepLinkService
 {

@@ -1,4 +1,4 @@
-﻿using SemiTheme = Semi.Avalonia.SemiTheme;
+using SemiTheme = Semi.Avalonia.SemiTheme;
 using UrsaSemiTheme = Ursa.Themes.Semi.UrsaSemiTheme;
 
 namespace Euterpe.Services;

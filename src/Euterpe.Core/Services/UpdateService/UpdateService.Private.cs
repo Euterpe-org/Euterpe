@@ -1,4 +1,4 @@
-﻿using Ursa.Controls;
+using Ursa.Controls;
 
 namespace Euterpe.Core;
 

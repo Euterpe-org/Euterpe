@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Abstractions;
+namespace Euterpe.Abstractions;
 
 public interface IModManageService
 {

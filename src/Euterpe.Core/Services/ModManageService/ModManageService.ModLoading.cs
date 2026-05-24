@@ -1,4 +1,4 @@
-﻿using Euterpe.Contracts.Mods;
+using Euterpe.Contracts.Mods;
 
 namespace Euterpe.Core;
 

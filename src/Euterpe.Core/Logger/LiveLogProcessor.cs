@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Core.Logger;
+namespace Euterpe.Core.Logger;
 
 public sealed class LiveLogProcessor : IAsyncLogProcessor
 {

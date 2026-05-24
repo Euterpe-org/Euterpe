@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Frozen;
 
 namespace Euterpe.Shared.Collections;

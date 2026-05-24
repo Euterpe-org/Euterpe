@@ -1,4 +1,4 @@
-﻿using Avalonia.Styling;
+using Avalonia.Styling;
 using Euterpe.Shared.Collections;
 
 namespace Euterpe;

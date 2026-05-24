@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 using Utf8StringInterpolation;
 using static Euterpe.Core.Logger.AnsiEscapeColors;
 using static Euterpe.Core.Logger.LoggingConstants;

@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Contracts.GitHub;
+namespace Euterpe.Contracts.GitHub;
 
 [PublicAPI]
 public sealed class GitHubRepoContentLinks

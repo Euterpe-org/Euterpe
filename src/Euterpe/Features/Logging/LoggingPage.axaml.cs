@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Logging;
+namespace Euterpe.Features.Logging;
 
 [PerGameView]
 [Route("/logging", DisplayName = Page_Logging, Icon = "Terminal", Order = 3)]

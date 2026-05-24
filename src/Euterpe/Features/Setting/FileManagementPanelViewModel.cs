@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Setting;
+namespace Euterpe.Features.Setting;
 
 public sealed partial class FileManagementPanelViewModel : ViewModelBase
 {

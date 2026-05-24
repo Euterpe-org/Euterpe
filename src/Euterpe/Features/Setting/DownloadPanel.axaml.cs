@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Setting;
+namespace Euterpe.Features.Setting;
 
 [Route("/setting/download", DisplayName = Panel_Setting_Download, Order = 4)]
 public sealed partial class DownloadPanel : UserControl

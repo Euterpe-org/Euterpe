@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Generators.StringBuilders;
+namespace Euterpe.Generators.StringBuilders;
 
 public class IndentedStringBuilder
 {

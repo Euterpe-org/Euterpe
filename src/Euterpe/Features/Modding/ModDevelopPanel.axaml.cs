@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Modding;
+namespace Euterpe.Features.Modding;
 
 [Route("/modding/develop", DisplayName = Panel_Modding_ModDevelop, Order = 2)]
 [PerGameView]

@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Controls.Models;
+namespace Euterpe.Controls.Models;
 
 public sealed record ContributorLink(string Name, string Url)
 {

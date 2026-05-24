@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Shared;
+namespace Euterpe.Shared;
 
 public static class GitHubConstants
 {

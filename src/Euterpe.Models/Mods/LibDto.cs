@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models.Mods;
+namespace Euterpe.Models.Mods;
 
 public sealed class LibDto
 {

@@ -1,4 +1,4 @@
-﻿using Euterpe.Contracts.Charts;
+using Euterpe.Contracts.Charts;
 
 namespace Euterpe.Core;
 

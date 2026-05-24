@@ -1,4 +1,4 @@
-﻿using static Euterpe.Core.Logger.AnsiEscapeColors;
+using static Euterpe.Core.Logger.AnsiEscapeColors;
 
 namespace Euterpe.Core.Logger;
 

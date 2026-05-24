@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models.Games;
+namespace Euterpe.Models.Games;
 
 [JsonConverter(typeof(JsonStringEnumConverter<GameMode>))]
 public enum GameMode

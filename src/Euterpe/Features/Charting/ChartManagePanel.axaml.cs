@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Charting;
+namespace Euterpe.Features.Charting;
 
 [Route("/charting/manage", DisplayName = Panel_Charting_ChartManage, Order = 0)]
 [PerGameView]

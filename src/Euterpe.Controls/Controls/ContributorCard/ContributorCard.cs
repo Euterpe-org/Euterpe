@@ -1,4 +1,4 @@
-﻿using System.Windows.Input;
+using System.Windows.Input;
 using Euterpe.Controls.Models;
 
 namespace Euterpe.Controls;

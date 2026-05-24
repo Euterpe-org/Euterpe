@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Wizard;
+namespace Euterpe.Features.Wizard;
 
 [PerGameView]
 public sealed partial class WizardDialog : UserControl

@@ -1,3 +1,3 @@
-﻿namespace Euterpe.Tests;
+namespace Euterpe.Tests;
 
 public static class GlobalHooks;

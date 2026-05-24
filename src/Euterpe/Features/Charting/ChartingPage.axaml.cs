@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Charting;
+namespace Euterpe.Features.Charting;
 
 [Route("/charting", DisplayName = Page_Charting, Icon = "Music", Order = 2)]
 [PerGameView]

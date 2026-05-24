@@ -1,4 +1,4 @@
-﻿using static Euterpe.Core.Logger.LoggingConstants;
+using static Euterpe.Core.Logger.LoggingConstants;
 
 namespace Euterpe.Core.Logger;
 

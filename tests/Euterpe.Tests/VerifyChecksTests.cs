@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Tests;
+namespace Euterpe.Tests;
 
 public sealed class VerifyChecksTests
 {

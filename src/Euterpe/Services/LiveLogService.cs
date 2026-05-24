@@ -1,4 +1,4 @@
-﻿using ObservableCollections;
+using ObservableCollections;
 
 namespace Euterpe.Services;
 

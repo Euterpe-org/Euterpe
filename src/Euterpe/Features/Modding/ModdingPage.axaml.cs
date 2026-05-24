@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Features.Modding;
+namespace Euterpe.Features.Modding;
 
 [Route("/modding", DisplayName = Page_Modding, Icon = "Wrench", Order = 1)]
 [PerGameView]

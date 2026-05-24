@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <Import Project="..\Euterpe.Tasks\Euterpe.Tasks.targets"/>
 
     <Target Name="GenerateTheme" BeforeTargets="BeforeBuild">

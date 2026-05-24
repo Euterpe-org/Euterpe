@@ -1,4 +1,4 @@
-﻿using Euterpe.Contracts.Distribution;
+using Euterpe.Contracts.Distribution;
 using Euterpe.Contracts.Mods;
 using Riok.Mapperly.Abstractions;
 
