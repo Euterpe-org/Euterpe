@@ -6,7 +6,6 @@ namespace Euterpe.Core;
 
 internal sealed class DialogService : IDialogService
 {
-    [UsedImplicitly]
     public required IComponentContext Container { get; init; }
 
     public async Task<T?> ShowWindowDialogAsync<TWindow, TViewModel, T>(TViewModel vm, Window? owner = null)

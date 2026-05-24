@@ -73,19 +73,10 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IDependencyAcquireService DependencyAcquireService { get; init; }
-
-    [UsedImplicitly]
     public required IGameLocalService GameLocalService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<MelonLoaderPanelViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections

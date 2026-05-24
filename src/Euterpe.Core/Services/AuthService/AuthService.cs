@@ -127,22 +127,11 @@ internal sealed partial class AuthService : IAuthService
 
     #region Injections
 
-    [UsedImplicitly]
     public required AuthState AuthState { get; init; }
-
-    [UsedImplicitly]
     public required IPlatformLauncher Launcher { get; init; }
-
-    [UsedImplicitly]
     public required IPlatformSecureStorage SecureStorage { get; init; }
-
-    [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }
-
-    [UsedImplicitly]
     public required IEuterpeAuthClient AuthClient { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<AuthService> Logger { get; init; }
 
     #endregion Injections

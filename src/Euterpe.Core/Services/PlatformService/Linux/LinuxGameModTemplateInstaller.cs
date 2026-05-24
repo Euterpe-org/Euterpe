@@ -46,10 +46,7 @@ internal sealed class LinuxGameModTemplateInstaller : IGameModTemplateInstaller
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LinuxGameModTemplateInstaller> Logger { get; init; }
 
     #endregion Injections

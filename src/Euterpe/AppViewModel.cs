@@ -21,11 +21,8 @@ public sealed partial class AppViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<AppViewModel> Logger { get; init; }
-
 #if PUBLISH
-    [UsedImplicitly]
     public required ITelemetryService TelemetryService { get; init; }
 #endif
 

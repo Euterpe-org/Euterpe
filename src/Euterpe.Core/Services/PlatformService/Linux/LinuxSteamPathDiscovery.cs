@@ -8,7 +8,6 @@ internal sealed class LinuxSteamPathDiscovery : ISteamPathDiscovery
 {
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<LinuxSteamPathDiscovery> Logger { get; init; }
 
     #endregion Injections

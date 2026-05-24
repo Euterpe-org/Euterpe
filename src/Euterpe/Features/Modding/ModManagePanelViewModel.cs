@@ -102,16 +102,9 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<ModManagePanelViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IModManageService ModManageService { get; init; }
 
     #endregion Injections

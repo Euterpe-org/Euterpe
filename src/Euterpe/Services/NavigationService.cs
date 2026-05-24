@@ -40,10 +40,7 @@ public sealed class NavigationService
 
     #region Injections
 
-    [UsedImplicitly]
     public required IComponentContext Container { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<NavigationService> Logger { get; init; }
 
     #endregion Injections

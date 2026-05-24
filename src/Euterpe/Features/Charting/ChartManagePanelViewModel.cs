@@ -11,10 +11,7 @@ public sealed class ChartManagePanelViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required IChartManageService ChartManageService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
 
     #endregion Injections

@@ -26,7 +26,6 @@ global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;
 global using Euterpe.Shared.Extensions;
 global using DotNext.Threading;
-global using JetBrains.Annotations;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using Semver;

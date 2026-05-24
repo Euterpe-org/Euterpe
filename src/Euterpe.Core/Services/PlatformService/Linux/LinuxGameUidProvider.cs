@@ -57,10 +57,7 @@ internal sealed class LinuxGameUidProvider : IGameUidProvider
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LinuxGameUidProvider> Logger { get; init; }
 
     #endregion Injections

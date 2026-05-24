@@ -51,19 +51,10 @@ internal sealed class GameDownloadManager : IGameDownloadManager
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IAppDownloadManager AppDownloadManager { get; init; }
-
-    [UsedImplicitly]
     public required IEuterpeDistributionClient DistributionClient { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<GameDownloadManager> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IEuterpeModClient ModClient { get; init; }
 
     #endregion Injections

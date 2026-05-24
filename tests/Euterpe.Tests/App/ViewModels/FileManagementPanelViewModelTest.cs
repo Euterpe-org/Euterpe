@@ -44,7 +44,6 @@ public sealed class FileManagementPanelViewModelTest
         GameConfig? gameConfig = null) => new()
     {
         Launcher = IPlatformLauncher.Mock(),
-        Logger = NullLogger<FileManagementPanelViewModel>.Instance,
         AppLocalService = appLocal ?? IAppLocalService.Mock(),
         GameLocalService = gameLocal ?? IGameLocalService.Mock(),
         Config = config ?? NewConfig(),

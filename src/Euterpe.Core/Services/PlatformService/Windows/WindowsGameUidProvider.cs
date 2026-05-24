@@ -41,10 +41,7 @@ internal sealed class WindowsGameUidProvider : IGameUidProvider
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<WindowsGameUidProvider> Logger { get; init; }
 
     #endregion Injections

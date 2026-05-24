@@ -78,10 +78,7 @@ internal sealed class LinuxDeepLinkSetup : IDeepLinkSetup
 
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<LinuxDeepLinkSetup> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IResourceService ResourceService { get; init; }
 
     #endregion Injections

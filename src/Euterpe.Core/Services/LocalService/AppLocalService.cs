@@ -64,16 +64,9 @@ internal sealed class AppLocalService : IAppLocalService
 
     #region Injections
 
-    [UsedImplicitly]
     public required IFileSystemPickerService FileSystemPickerService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<AppLocalService> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
     public required ISteamPathDiscovery SteamDiscovery { get; init; }
 
     #endregion Injections

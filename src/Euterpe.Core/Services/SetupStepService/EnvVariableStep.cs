@@ -4,7 +4,6 @@ internal sealed class EnvVariableStep : ISetupStep
 {
     #region Injections
 
-    [UsedImplicitly]
     public required IGamePathEnvironment PathEnvironment { get; init; }
 
     #endregion Injections

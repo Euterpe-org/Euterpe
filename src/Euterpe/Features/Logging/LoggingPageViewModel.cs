@@ -20,10 +20,7 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<LoggingPageViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
 
     #endregion Injections

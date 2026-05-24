@@ -75,10 +75,7 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required IUpdateService UpdateService { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections

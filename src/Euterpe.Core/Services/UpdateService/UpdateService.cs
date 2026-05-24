@@ -32,22 +32,11 @@ internal sealed partial class UpdateService : IUpdateService
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required IEuterpeDistributionClient DistributionClient { get; init; }
-
-    [UsedImplicitly]
     public required IAppDownloadManager AppDownloadManager { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<UpdateService> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
     public required IPlatformInfo PlatformInfo { get; init; }
 
     #endregion Injections

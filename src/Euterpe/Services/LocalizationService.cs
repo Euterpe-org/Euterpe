@@ -104,10 +104,7 @@ public sealed class LocalizationService
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LocalizationService> Logger { get; init; }
 
     #endregion Injections

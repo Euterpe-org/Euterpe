@@ -93,10 +93,7 @@ internal sealed class LinuxSecureStorage : IPlatformSecureStorage
 
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<LinuxSecureStorage> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections

@@ -14,10 +14,7 @@ internal sealed class GameSettingService : IGameSettingService
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IGamePathDiscovery GamePaths { get; init; }
 
     #endregion Injections

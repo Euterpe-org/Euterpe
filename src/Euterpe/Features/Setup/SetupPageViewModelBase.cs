@@ -10,7 +10,6 @@ public abstract class SetupPageViewModelBase : ViewModelBase
 
     public virtual LocalizedString NextButtonText => Button_Next;
 
-    [UsedImplicitly]
     public required SetupState State { get; init; }
 
     public virtual Task OnEnterAsync() => Task.CompletedTask;

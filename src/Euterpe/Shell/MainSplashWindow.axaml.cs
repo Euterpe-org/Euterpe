@@ -2,7 +2,6 @@ namespace Euterpe.Shell;
 
 public sealed partial class MainSplashWindow : SplashWindow
 {
-    [UsedImplicitly]
     public Lazy<MainWindow> MainWindow { get; init; } = null!;
 
     public MainSplashWindow()

@@ -48,19 +48,10 @@ public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContex
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<RepairDialogViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
     public required ExecutionPageViewModel ExecutionPage { get; init; }
-
-    [UsedImplicitly]
     public required GamePathPageViewModel GamePathPage { get; init; }
-
-    [UsedImplicitly]
     public required SetupState State { get; init; }
 
     #endregion Injections

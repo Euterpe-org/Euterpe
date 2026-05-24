@@ -12,20 +12,10 @@ public sealed partial class FileManagementPanelViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required IAppLocalService AppLocalService { get; init; }
-
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IGameLocalService GameLocalService { get; init; }
-
-    [UsedImplicitly]
-    public required ILogger<FileManagementPanelViewModel> Logger { get; init; }
 
     #endregion Injections
 }

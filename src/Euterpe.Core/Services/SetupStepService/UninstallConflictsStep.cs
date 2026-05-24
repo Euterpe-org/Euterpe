@@ -30,10 +30,7 @@ internal sealed class UninstallConflictsStep : ISetupStep
 
     #region Injections
 
-    [UsedImplicitly]
     public required IModManageService ModManageService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<UninstallConflictsStep> Logger { get; init; }
 
     #endregion Injections

@@ -13,10 +13,7 @@ internal sealed partial class ChartManageService : IChartManageService
 
     #region Injections
 
-    [UsedImplicitly]
     public required HttpClient Client { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<ChartManageService> Logger { get; init; }
 
     #endregion Injections

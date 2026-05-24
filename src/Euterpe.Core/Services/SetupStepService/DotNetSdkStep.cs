@@ -4,7 +4,6 @@ internal sealed class DotNetSdkStep : ISetupStep
 {
     #region Injections
 
-    [UsedImplicitly]
     public required IDotNetSdkInstaller SdkInstaller { get; init; }
 
     #endregion Injections

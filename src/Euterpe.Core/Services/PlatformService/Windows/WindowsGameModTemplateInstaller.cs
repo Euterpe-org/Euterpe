@@ -46,10 +46,7 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<WindowsGameModTemplateInstaller> Logger { get; init; }
 
     #endregion Injections

@@ -43,10 +43,7 @@ public sealed partial class GameSwitcher : ObservableObject
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<GameSwitcher> Logger { get; init; }
 
     #endregion Injections

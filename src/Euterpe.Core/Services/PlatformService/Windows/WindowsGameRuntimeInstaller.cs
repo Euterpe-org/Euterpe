@@ -72,19 +72,10 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IAppDownloadManager AppDownloadManager { get; init; }
-
-    [UsedImplicitly]
     public required IArchiveService ArchiveService { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<WindowsGameRuntimeInstaller> Logger { get; init; }
 
     #endregion Injections

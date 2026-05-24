@@ -77,10 +77,7 @@ internal sealed class WindowsSteamPathDiscovery : ISteamPathDiscovery
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<WindowsSteamPathDiscovery> Logger { get; init; }
 
     #endregion Injections

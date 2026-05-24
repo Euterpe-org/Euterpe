@@ -38,10 +38,7 @@ internal sealed class LinuxLauncher : IPlatformLauncher
 
     #region Injections
 
-    [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LinuxLauncher> Logger { get; init; }
 
     #endregion Injections

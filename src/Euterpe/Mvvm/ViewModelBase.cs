@@ -6,7 +6,6 @@ public abstract partial class ViewModelBase : ObservableObject, IAsyncInitializa
 
     #region Injections
 
-    [UsedImplicitly]
     public required IPlatformLauncher Launcher { get; init; }
 
     #endregion Injections

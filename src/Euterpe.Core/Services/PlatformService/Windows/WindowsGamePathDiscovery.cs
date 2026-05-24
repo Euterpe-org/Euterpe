@@ -46,13 +46,8 @@ internal sealed class WindowsGamePathDiscovery : IGamePathDiscovery
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IGamePathService GamePathService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<WindowsGamePathDiscovery> Logger { get; init; }
 
     #endregion Injections

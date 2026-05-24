@@ -123,22 +123,11 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<ModDevelopPanelViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
     public required IDotNetSdkInstaller SdkInstaller { get; init; }
-
-    [UsedImplicitly]
     public required IGameModTemplateInstaller ModTemplateInstaller { get; init; }
-
-    [UsedImplicitly]
     public required IGamePathEnvironment PathEnvironment { get; init; }
 
     #endregion Injections

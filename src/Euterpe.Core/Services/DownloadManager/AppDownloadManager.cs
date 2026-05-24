@@ -139,16 +139,9 @@ internal sealed class AppDownloadManager : IAppDownloadManager
 
     #region Injections
 
-    [UsedImplicitly]
     public required HttpClient Client { get; init; }
-
-    [UsedImplicitly]
     public required EuterpeDownloadClient DownloadClient { get; init; }
-
-    [UsedImplicitly]
     public required IDownloadService DownloadService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<AppDownloadManager> Logger { get; init; }
 
     #endregion Injections

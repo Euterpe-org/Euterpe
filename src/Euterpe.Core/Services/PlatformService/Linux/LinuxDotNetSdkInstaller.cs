@@ -67,13 +67,8 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
 
     #region Injections
 
-    [UsedImplicitly]
     public required IAppDownloadManager AppDownloadManager { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LinuxDotNetSdkInstaller> Logger { get; init; }
 
     #endregion Injections

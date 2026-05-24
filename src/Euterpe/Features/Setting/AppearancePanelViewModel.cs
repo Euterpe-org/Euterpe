@@ -23,14 +23,7 @@ public sealed partial class AppearancePanelViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
-
-    public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required LocalizationService LocalizationService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<AppearancePanelViewModel> Logger { get; init; }
 
     #endregion Injections

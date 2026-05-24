@@ -38,16 +38,9 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IEuterpeDistributionClient DistributionClient { get; init; }
-
-    [UsedImplicitly]
     public required IAppDownloadManager AppDownloadManager { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<DependencyAcquireService> Logger { get; init; }
 
     #endregion Injections

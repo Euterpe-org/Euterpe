@@ -4,7 +4,6 @@ internal sealed class DotNetRuntimeStep : ISetupStep
 {
     #region Injections
 
-    [UsedImplicitly]
     public required IGameRuntimeInstaller RuntimeInstaller { get; init; }
 
     #endregion Injections

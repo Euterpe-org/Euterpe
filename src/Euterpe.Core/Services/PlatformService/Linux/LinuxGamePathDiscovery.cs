@@ -46,13 +46,8 @@ internal sealed class LinuxGamePathDiscovery : IGamePathDiscovery
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IGamePathService GamePathService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LinuxGamePathDiscovery> Logger { get; init; }
 
     #endregion Injections

@@ -13,7 +13,6 @@ internal sealed class WindowsSecureStorage : IPlatformSecureStorage
 
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<WindowsSecureStorage> Logger { get; init; }
 
     #endregion Injections

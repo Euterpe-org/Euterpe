@@ -24,13 +24,8 @@ internal sealed class TelemetryService : ITelemetryService
 
     #region Injections
 
-    [UsedImplicitly]
     public required ITelemetryApiClient TelemetryApiClient { get; init; }
-
-    [UsedImplicitly]
     public required IPlatformInfo PlatformInfo { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<TelemetryService> Logger { get; init; }
 
     #endregion Injections

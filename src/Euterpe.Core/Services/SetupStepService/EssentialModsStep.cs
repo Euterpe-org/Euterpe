@@ -13,10 +13,7 @@ internal sealed class EssentialModsStep : ISetupStep
 
     #region Injections
 
-    [UsedImplicitly]
     public required IModManageService ModManageService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<EssentialModsStep> Logger { get; init; }
 
     #endregion Injections

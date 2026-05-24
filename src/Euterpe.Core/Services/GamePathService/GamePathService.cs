@@ -39,13 +39,8 @@ internal sealed partial class GamePathService : IGamePathService
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<GamePathService> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IVdfSerializationService VdfSerializationService { get; init; }
 
     #endregion Injections

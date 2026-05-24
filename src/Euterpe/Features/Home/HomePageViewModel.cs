@@ -74,37 +74,16 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required NavigationService NavigationService { get; init; }
-
-    [UsedImplicitly]
     public required SetupDialogService SetupDialogService { get; init; }
-
-    [UsedImplicitly]
     public required IEuterpeAccountClient AccountClient { get; init; }
-
-    [UsedImplicitly]
     public required IGameLaunchService GameLaunchService { get; init; }
-
-    [UsedImplicitly]
     public required IGameSettingService GameSettingService { get; init; }
-
-    [UsedImplicitly]
     public required IGameLocalService GameLocalService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<HomePageViewModel> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
     public required IGameRuntimeInstaller RuntimeInstaller { get; init; }
-
-    [UsedImplicitly]
     public required IGameUidProvider UidProvider { get; init; }
 
     #endregion Injections

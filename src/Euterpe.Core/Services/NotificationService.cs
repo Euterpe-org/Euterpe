@@ -11,7 +11,6 @@ internal sealed class NotificationService : INotificationService
 
     #region Injections
 
-    [UsedImplicitly]
     public required Func<WindowNotificationManager> NotificationManagerFactory { get; init; }
 
     #endregion Injections

@@ -4,7 +4,6 @@ internal sealed class ChartingToolStep : ISetupStep
 {
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<ChartingToolStep> Logger { get; init; }
 
     #endregion Injections

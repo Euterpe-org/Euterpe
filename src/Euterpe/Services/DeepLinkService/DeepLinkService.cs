@@ -66,19 +66,10 @@ public sealed partial class DeepLinkService
 
     #region Injections
 
-    [UsedImplicitly]
     public required NavigationService NavigationService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<DeepLinkService> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IDeepLinkSetup DeepLinkSetup { get; init; }
-
-    [UsedImplicitly]
     public required Lazy<IAuthService> LazyAuthService { get; init; }
-
-    [UsedImplicitly]
     public required BehaviorSubject<ILifetimeScope> GameScope { get; init; }
 
     #endregion Injections

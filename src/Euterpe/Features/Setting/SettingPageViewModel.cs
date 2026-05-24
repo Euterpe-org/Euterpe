@@ -4,7 +4,6 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
 {
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<SettingPageViewModel> Logger { get; init; }
 
     #endregion Injections

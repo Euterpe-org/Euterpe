@@ -78,10 +78,7 @@ public sealed class RolePageViewModel : SetupPageViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<RolePageViewModel> Logger { get; init; }
 
     #endregion Injections

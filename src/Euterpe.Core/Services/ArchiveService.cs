@@ -6,7 +6,6 @@ internal sealed class ArchiveService : IArchiveService
 {
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<ArchiveService> Logger { get; init; }
 
     #endregion Injections

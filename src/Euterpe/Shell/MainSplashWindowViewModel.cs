@@ -42,14 +42,9 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 
     #region Injections
 
-    [UsedImplicitly]
     public required IAuthService AuthService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<MainSplashWindowViewModel> Logger { get; init; }
-
 #if RELEASE
-    [UsedImplicitly]
     public required IUpdateService UpdateService { get; init; }
 #endif
 

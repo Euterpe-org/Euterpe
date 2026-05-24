@@ -4,7 +4,6 @@ internal sealed class ModTemplateStep : ISetupStep
 {
     #region Injections
 
-    [UsedImplicitly]
     public required IGameModTemplateInstaller ModTemplateInstaller { get; init; }
 
     #endregion Injections

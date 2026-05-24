@@ -40,16 +40,9 @@ internal sealed class MelonLoaderStep : ISetupStep
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IDependencyAcquireService DependencyAcquireService { get; init; }
-
-    [UsedImplicitly]
     public required IGameLocalService GameLocalService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<MelonLoaderStep> Logger { get; init; }
 
     #endregion Injections

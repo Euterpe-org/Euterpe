@@ -51,16 +51,9 @@ public sealed partial class GamePathPageViewModel : SetupPageViewModelBase
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IGamePathDiscovery GamePaths { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemPickerService FileSystemPickerService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<GamePathPageViewModel> Logger { get; init; }
 
     #endregion Injections

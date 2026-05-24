@@ -1,2 +1,1 @@
-﻿global using JetBrains.Annotations;
-global using static Euterpe.Shared.BuildInfo;
+﻿global using static Euterpe.Shared.BuildInfo;

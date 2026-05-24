@@ -4,7 +4,6 @@ namespace Euterpe.Core;
 
 internal sealed class FileSystemPickerService : IFileSystemPickerService
 {
-    [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }
 
     public async Task<IStorageFolder?> GetSingleFolderAsync(string dialogTitle)

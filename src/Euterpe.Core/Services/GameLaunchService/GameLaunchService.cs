@@ -26,13 +26,8 @@ internal sealed partial class GameLaunchService : IGameLaunchService
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<GameLaunchService> Logger { get; init; }
 
     #endregion Injections

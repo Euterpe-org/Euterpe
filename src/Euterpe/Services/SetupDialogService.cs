@@ -47,16 +47,9 @@ public sealed class SetupDialogService
 
     #region Injections
 
-    [UsedImplicitly]
     public required IDialogService DialogService { get; init; }
-
-    [UsedImplicitly]
     public required GameSwitcher GameSwitcher { get; init; }
-
-    [UsedImplicitly]
     public required WizardDialogViewModel WizardDialogViewModel { get; init; }
-
-    [UsedImplicitly]
     public required RepairDialogViewModel RepairDialogViewModel { get; init; }
 
     #endregion Injections

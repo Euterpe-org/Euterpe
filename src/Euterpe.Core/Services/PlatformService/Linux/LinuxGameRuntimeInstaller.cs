@@ -144,25 +144,12 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IAppDownloadManager AppDownloadManager { get; init; }
-
-    [UsedImplicitly]
     public required IArchiveService ArchiveService { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LinuxGameRuntimeInstaller> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
 
     #endregion Injections

@@ -7,7 +7,6 @@ internal sealed class WindowsDeepLinkSetup : IDeepLinkSetup
 {
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<WindowsDeepLinkSetup> Logger { get; init; }
 
     #endregion Injections

@@ -172,28 +172,13 @@ internal sealed class GameLocalService : IGameLocalService
 
     #region Injections
 
-    [UsedImplicitly]
     public required IArchiveService ArchiveService { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemPickerService FileSystemPickerService { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }
-
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IGamePathDiscovery GamePaths { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<GameLocalService> Logger { get; init; }
-
-    [UsedImplicitly]
     public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
     public required IResourceService ResourceService { get; init; }
 
     #endregion Injections

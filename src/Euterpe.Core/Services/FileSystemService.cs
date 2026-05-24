@@ -4,7 +4,6 @@ internal sealed class FileSystemService : IFileSystemService
 {
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<FileSystemService> Logger { get; init; }
 
     #endregion Injections

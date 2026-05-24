@@ -36,22 +36,11 @@ internal sealed partial class ModManageService : IModManageService
 
     #region Injections
 
-    [UsedImplicitly]
     public required GameConfig GameConfig { get; init; }
-
-    [UsedImplicitly]
     public required IGameDownloadManager GameDownloadManager { get; init; }
-
-    [UsedImplicitly]
     public required IFileSystemService FileSystemService { get; init; }
-
-    [UsedImplicitly]
     public required IGameLocalService GameLocalService { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<ModManageService> Logger { get; init; }
-
-    [UsedImplicitly]
     public required INotificationService NotificationService { get; init; }
 
     #endregion Injections

@@ -37,10 +37,7 @@ internal sealed class WindowsLauncher : IPlatformLauncher
 
     #region Injections
 
-    [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<WindowsLauncher> Logger { get; init; }
 
     #endregion Injections
