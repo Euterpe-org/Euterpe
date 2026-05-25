@@ -52,7 +52,7 @@
         <PackageVersion Include="ResXLocalize.Avalonia.R3" Version="2.0.0"/>
         <PackageVersion Include="Riok.Mapperly" Version="4.3.1"/>
         <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
-        <PackageVersion Include="Semi.Avalonia" Version="12.0.1"/>
+        <PackageVersion Include="Semi.Avalonia" Version="12.0.3"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.8"/>
         <PackageVersion Include="TUnit" Version="$(TUnitVersion)"/>
