@@ -1,11 +1,16 @@
 <u:UrsaWindow
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="using:Euterpe.Features.Charting"
     xmlns:constants="using:Euterpe.Shared"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:games="using:Euterpe.Models.Games"
+    xmlns:home="using:Euterpe.Features.Home"
+    xmlns:logging="using:Euterpe.Features.Logging"
+    xmlns:modding="using:Euterpe.Features.Modding"
     xmlns:models="using:Euterpe.Controls.Models"
+    xmlns:setting="using:Euterpe.Features.Setting"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.Shell"
     x:Class="Euterpe.Shell.MainWindow"
@@ -153,10 +158,25 @@
             HostId="{x:Static vm:MainWindowViewModel.DialogHostId}"
             ZIndex="1" />
 
-        <TransitioningContentControl
+        <Panel
             Grid.Column="1"
-            Content="{Binding Content, Mode=OneWay}"
-            Margin="10,40,0,0" />
+            Margin="10,40,0,0">
+            <home:HomePage
+                DataContext="{Binding HomePageHost.Content}"
+                IsVisible="{Binding $parent[Window].DataContext.HomePageHost.IsActive}" />
+            <modding:ModdingPage
+                DataContext="{Binding ModdingPageHost.Content}"
+                IsVisible="{Binding $parent[Window].DataContext.ModdingPageHost.IsActive}" />
+            <charting:ChartingPage
+                DataContext="{Binding ChartingPageHost.Content}"
+                IsVisible="{Binding $parent[Window].DataContext.ChartingPageHost.IsActive}" />
+            <logging:LoggingPage
+                DataContext="{Binding LoggingPageHost.Content}"
+                IsVisible="{Binding $parent[Window].DataContext.LoggingPageHost.IsActive}" />
+            <setting:SettingPage
+                DataContext="{Binding SettingPageHost.Content}"
+                IsVisible="{Binding $parent[Window].DataContext.SettingPageHost.IsActive}" />
+        </Panel>
     </Grid>
 
 </u:UrsaWindow>

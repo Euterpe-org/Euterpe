@@ -1,5 +1,6 @@
 namespace Euterpe.Features.Setup;
 
+[PerGame]
 public sealed partial class GamePathPageViewModel : SetupPageViewModelBase
 {
     public override LocalizedString Title => Setup_Title_GamePath;

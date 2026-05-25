@@ -22,8 +22,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
         {
             NavigationService = new NavigationService
             {
-                Logger = NullLogger<NavigationService>.Instance,
-                Container = container
+                Logger = NullLogger<NavigationService>.Instance
             },
             Logger = logger ?? Mock.Logger<DeepLinkService>(),
             DeepLinkSetup = setup ?? IDeepLinkSetup.Mock(),

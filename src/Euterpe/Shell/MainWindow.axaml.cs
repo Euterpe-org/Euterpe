@@ -2,7 +2,6 @@ using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace Euterpe.Shell;
 
-[Route("/")]
 public sealed partial class MainWindow : UrsaWindow
 {
     public WindowNotificationManager Notifier { get; }

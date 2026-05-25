@@ -2,6 +2,8 @@ using Euterpe.Core.Http.Clients;
 
 namespace Euterpe.Features.Home;
 
+[Route("/home", DisplayName = Page_Home, Icon = "Home", Order = 0)]
+[PerGame]
 public sealed partial class HomePageViewModel : ViewModelBase
 {
     public IReadOnlyList<LocalizedString> GameModes { get; } =

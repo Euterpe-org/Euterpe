@@ -2,8 +2,6 @@ using Avalonia.Input;
 
 namespace Euterpe.Features.Modding;
 
-[Route("/modding/manage", DisplayName = Panel_Modding_ModManage, Order = 0)]
-[PerGameView]
 public sealed partial class ModManagePanel : UserControl
 {
     private const double WheelScrollStep = 60d;

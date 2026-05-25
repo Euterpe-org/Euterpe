@@ -32,6 +32,9 @@ public sealed partial class RouteGenerator : IIncrementalGenerator
             return null;
         }
 
+        var isPerGame = symbol.GetAttributes()
+            .Any(static a => a.AttributeClass?.ToDisplayString() is "Euterpe.Shared.Attributes.PerGameAttribute");
+
         var displayName = string.Empty;
         var icon = string.Empty;
         var order = 0;
@@ -54,7 +57,7 @@ public sealed partial class RouteGenerator : IIncrementalGenerator
             }
         }
 
-        return new RouteData(symbol.Name, symbol.ContainingNamespace.ToDisplayString(), path, displayName, icon, order);
+        return new RouteData(symbol.Name, symbol.ContainingNamespace.ToDisplayString(), path, displayName, icon, order, isPerGame);
     }
 
     private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<RouteData?> dataCollection)
@@ -71,12 +74,11 @@ public sealed partial class RouteGenerator : IIncrementalGenerator
         foreach (var (parentPath, children) in tree.ChildrenByParent)
         {
             var (ns, name) = tree.GetViewModel(parentPath);
-            spc.AddSource($"{name}.Routes.g.cs", GenerateViewModelRoutes(ns, name, children));
+            spc.AddSource($"{name}.Routes.g.cs", GenerateViewModelRoutes(ns, name, children, parentPath is "/"));
         }
     }
 
-    private static (string Namespace, string Name) DeriveViewModel(RouteData route) =>
-        (route.Namespace, route.ClassName + "ViewModel");
+    private static (string Namespace, string Name) DeriveViewModel(RouteData route) => (route.Namespace, route.ClassName);
 
-    private sealed record RouteData(string ClassName, string Namespace, string Path, string DisplayName, string Icon, int Order);
+    private sealed record RouteData(string ClassName, string Namespace, string Path, string DisplayName, string Icon, int Order, bool IsPerGame);
 }

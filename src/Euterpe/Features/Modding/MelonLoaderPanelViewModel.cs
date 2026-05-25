@@ -1,5 +1,7 @@
 namespace Euterpe.Features.Modding;
 
+[Route("/modding/melonloader", DisplayName = Panel_Modding_MelonLoader, Order = 1)]
+[PerGame]
 public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 {
     [ObservableProperty]

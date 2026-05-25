@@ -3,8 +3,6 @@ using Avalonia.Interactivity;
 
 namespace Euterpe.Features.Home;
 
-[Route("/home", DisplayName = Page_Home, Icon = "Home", Order = 0)]
-[PerGameView]
 public sealed partial class HomePage : UserControl
 {
     private const int EasterEggClickThreshold = 10;

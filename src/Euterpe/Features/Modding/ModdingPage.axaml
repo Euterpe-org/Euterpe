@@ -31,7 +31,19 @@
         <ContentControl
             Grid.Row="1"
             Content="{Binding Content, Mode=OneWay}"
-            Margin="0,10,10,10" />
+            Margin="0,10,10,10">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type vm:ModManagePanelViewModel}">
+                    <vm:ModManagePanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:MelonLoaderPanelViewModel}">
+                    <vm:MelonLoaderPanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:ModDevelopPanelViewModel}">
+                    <vm:ModDevelopPanel />
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
     </Grid>
 
 </UserControl>

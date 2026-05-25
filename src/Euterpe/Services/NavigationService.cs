@@ -6,11 +6,11 @@ public sealed class NavigationService
 
     public string? CurrentRoute { get; private set; }
 
-    public Control NavigateTo<TView>() where TView : Control, new()
-    {
-        Logger.ZLogInformation($"Navigating to View: {typeof(TView).Name}");
-        return Container.Resolve<TView>();
-    }
+    #region Injections
+
+    public required ILogger<NavigationService> Logger { get; init; }
+
+    #endregion Injections
 
     public void NavigateTo(string route)
     {
@@ -28,8 +28,7 @@ public sealed class NavigationService
             node = child;
         }
 
-        CurrentRoute = route;
-        Logger.ZLogInformation($"Navigated to: {route}");
+        NotifyNavigated(route);
     }
 
     public async Task NavigateToAsync(string route)
@@ -38,10 +37,9 @@ public sealed class NavigationService
         NavigateTo(route);
     }
 
-    #region Injections
-
-    public required IComponentContext Container { get; init; }
-    public required ILogger<NavigationService> Logger { get; init; }
-
-    #endregion Injections
+    public void NotifyNavigated(string route)
+    {
+        CurrentRoute = route;
+        Logger.ZLogInformation($"Navigated to: {route}");
+    }
 }

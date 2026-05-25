@@ -3,6 +3,8 @@ using DynamicData.Binding;
 
 namespace Euterpe.Features.Modding;
 
+[Route("/modding/manage", DisplayName = Panel_Modding_ModManage, Order = 0)]
+[PerGame]
 public sealed partial class ModManagePanelViewModel : ViewModelBase
 {
     private readonly ReadOnlyObservableCollection<ModDto> _mods;

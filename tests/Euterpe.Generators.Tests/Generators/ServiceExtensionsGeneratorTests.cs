@@ -3,20 +3,41 @@ namespace Euterpe.Generators.Tests.Generators;
 public sealed class ServiceExtensionsGeneratorTests
 {
     [Test]
-    public Task Generates_registrations_for_app_and_per_game_views()
+    public Task Generates_registrations_for_app_and_per_game_view_models()
     {
         const string source = """
-                              namespace Sample.Views;
+                              namespace Sample
+                              {
+                                  using Euterpe.Shared.Attributes;
 
-                              public partial class HomeView : UserControl;
+                                  [Route("/")]
+                                  public partial class RootViewModel;
 
-                              public partial class SettingsView : UserControl;
+                                  [Route("/home")]
+                                  public partial class HomeViewModel;
 
-                              [PerGameView]
-                              public partial class GameDetailView : UserControl;
+                                  [Route("/modding")]
+                                  [PerGame]
+                                  public partial class ModdingViewModel;
 
-                              [PerGameView]
-                              public partial class GameSettingsView : UserControl;
+                                  [PerGame]
+                                  public partial class WizardDialogViewModel;
+                              }
+
+                              namespace Euterpe.Shared.Attributes
+                              {
+                                  [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
+                                  public sealed class RouteAttribute(string path) : System.Attribute
+                                  {
+                                      public string Path { get; } = path;
+                                      public string DisplayName { get; init; } = "";
+                                      public string Icon { get; init; } = "";
+                                      public int Order { get; init; }
+                                  }
+
+                                  [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
+                                  public sealed class PerGameAttribute : System.Attribute;
+                              }
                               """;
 
         return Verify(GeneratorTestHelper.Run<ServiceExtensionsGenerator>(source));

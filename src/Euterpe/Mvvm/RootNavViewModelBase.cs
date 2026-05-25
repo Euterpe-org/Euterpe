@@ -1,19 +1,16 @@
 namespace Euterpe.Mvvm;
 
-public abstract partial class NavViewModelBase : ViewModelBase
+public abstract partial class RootNavViewModelBase : ViewModelBase
 {
-    [ObservableProperty]
-    public partial ViewModelBase Content { get; set; } = null!;
-
     [ObservableProperty]
     public partial NavItem? SelectedItem { get; set; }
 
     public abstract IReadOnlyList<NavItem> NavItems { get; }
+    public abstract IReadOnlyList<PageHost> Pages { get; }
 
-    public required IComponentContext Container { get; init; }
     public required NavigationService NavigationService { get; init; }
 
-    protected abstract ViewModelBase ResolveRoute(string route);
+    protected abstract PageHost ResolveRoute(string route);
 
     partial void OnSelectedItemChanged(NavItem? value)
     {
@@ -22,8 +19,11 @@ public abstract partial class NavViewModelBase : ViewModelBase
             return;
         }
 
-        Content = ResolveRoute(value.NavigateKey);
-        Content.InitializeAsync().SafeFireAndForget();
+        var next = ResolveRoute(value.NavigateKey);
+        foreach (var page in Pages)
+        {
+            page.IsActive = ReferenceEquals(page, next);
+        }
 
         NavigationService.NotifyNavigated(value.NavigateKey);
     }

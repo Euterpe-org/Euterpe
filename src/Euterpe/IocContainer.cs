@@ -27,8 +27,7 @@ public static class IocContainer
         var builder = new ContainerBuilder();
         builder.RegisterAppCoreServices();
         builder.RegisterInternalServices();
-        builder.RegisterAppViewsAndViewModels();
-        builder.RegisterPerGameViews();
+        builder.RegisterAppViewModels();
         builder.RegisterWindowsAndViewModels();
 
         builder.Register(static _ => GameScopeSubject).AsSelf().As<Observable<ILifetimeScope>>().SingleInstance();

@@ -16,9 +16,8 @@ public sealed class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        // Initialize Window/UserControl with async initializers when they are loaded
+        // Initialize Window with async initializers when they are loaded
         Control.LoadedEvent.AddClassHandler<Window>(OnControlLoaded);
-        Control.LoadedEvent.AddClassHandler<UserControl>(OnControlLoaded);
         Resolve<AppViewModel>().InitializeAsync().SafeFireAndForget();
 
         ApplyConfig();

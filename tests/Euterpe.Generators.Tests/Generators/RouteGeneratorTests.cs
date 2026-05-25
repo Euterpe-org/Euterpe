@@ -6,21 +6,26 @@ public sealed class RouteGeneratorTests
     public Task Generates_route_tree_with_nested_children()
     {
         const string source = """
-                              namespace Sample.Views
+                              namespace Sample
                               {
                                   using Euterpe.Shared.Attributes;
 
-                                  [Route("/", DisplayName = "Home", Order = 0)]
-                                  public partial class HomeView;
+                                  [Route("/", DisplayName = "Root", Order = 0)]
+                                  public partial class RootViewModel;
+
+                                  [Route("/home", DisplayName = "Home", Icon = "house", Order = 0)]
+                                  [PerGame]
+                                  public partial class HomeViewModel;
 
                                   [Route("/settings", DisplayName = "Settings", Icon = "gear", Order = 1)]
-                                  public partial class SettingsView;
+                                  public partial class SettingsViewModel;
 
                                   [Route("/settings/general", DisplayName = "General", Order = 0)]
-                                  public partial class GeneralSettingsView;
+                                  public partial class GeneralViewModel;
 
                                   [Route("/settings/advanced", DisplayName = "Advanced", Order = 1)]
-                                  public partial class AdvancedSettingsView;
+                                  [PerGame]
+                                  public partial class AdvancedViewModel;
                               }
 
                               namespace Euterpe.Shared.Attributes
@@ -33,6 +38,9 @@ public sealed class RouteGeneratorTests
                                       public string Icon { get; init; } = "";
                                       public int Order { get; init; }
                                   }
+
+                                  [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
+                                  public sealed class PerGameAttribute : System.Attribute;
                               }
                               """;
 

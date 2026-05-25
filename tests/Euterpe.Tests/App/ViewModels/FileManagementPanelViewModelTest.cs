@@ -1,5 +1,4 @@
 using Euterpe.Features.Setting;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests;
 

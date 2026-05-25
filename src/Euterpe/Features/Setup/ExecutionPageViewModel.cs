@@ -1,5 +1,6 @@
 namespace Euterpe.Features.Setup;
 
+[PerGame]
 public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
 {
     private Dictionary<SetupOptionKinds, ISetupStep> StepMap => field ??= SetupSteps.ToDictionary(s => s.Kinds);

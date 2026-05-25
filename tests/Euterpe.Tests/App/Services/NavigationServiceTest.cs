@@ -1,4 +1,3 @@
-using Autofac;
 using Euterpe.Services;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -18,8 +17,7 @@ public sealed class NavigationServiceTest
 
     private static NavigationService NewService() => new()
     {
-        Logger = NullLogger<NavigationService>.Instance,
-        Container = new ContainerBuilder().Build()
+        Logger = NullLogger<NavigationService>.Instance
     };
 
     [Test]

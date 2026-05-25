@@ -1,5 +1,7 @@
 namespace Euterpe.Features.Charting;
 
+[Route("/charting/manage", DisplayName = Panel_Charting_ChartManage, Order = 0)]
+[PerGame]
 public sealed class ChartManagePanelViewModel : ViewModelBase
 {
     protected override async Task OnInitializeAsync()

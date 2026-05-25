@@ -1,6 +1,7 @@
 namespace Euterpe.Shell;
 
-public sealed partial class MainWindowViewModel : NavViewModelBase
+[Route("/")]
+public sealed partial class MainWindowViewModel : RootNavViewModelBase
 {
     public const string DialogHostId = "DialogHost";
 

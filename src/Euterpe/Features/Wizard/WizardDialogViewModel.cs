@@ -2,6 +2,7 @@ using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.Features.Wizard;
 
+[PerGame]
 public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContext
 {
     [ObservableProperty]

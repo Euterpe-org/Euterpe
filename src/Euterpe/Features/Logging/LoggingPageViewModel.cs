@@ -1,5 +1,7 @@
 namespace Euterpe.Features.Logging;
 
+[Route("/logging", DisplayName = Page_Logging, Icon = "Terminal", Order = 3)]
+[PerGame]
 public sealed partial class LoggingPageViewModel : NavViewModelBase
 {
     public IReadOnlyList<DropDownButtonItem> DropDownButtons => field ??=

@@ -2,6 +2,7 @@ using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.Features.Setup;
 
+[PerGame]
 public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContext
 {
     [ObservableProperty]
