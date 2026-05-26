@@ -20,8 +20,11 @@ public sealed partial class RouteGenerator
             ChildrenByParent = childrenByParent;
         }
 
-        public (string Namespace, string Name) GetViewModel(string routePath) =>
-            DeriveViewModel(_routeByPath[routePath]);
+        public (string Namespace, string Name) GetViewModel(string routePath)
+        {
+            var route = _routeByPath[routePath];
+            return (route.Namespace, route.ClassName);
+        }
 
         public static RouteTree Build(ImmutableArray<RouteData?> routes)
         {
@@ -64,7 +67,7 @@ public sealed partial class RouteGenerator
             foreach (var (parentPath, children) in childrenBuilder)
             {
                 children.Sort(static (a, b) => a.Order.CompareTo(b.Order));
-                frozenChildren[parentPath] = [..children];
+                frozenChildren[parentPath] = [.. children];
             }
 
             return new RouteTree(routeByPath.ToFrozenDictionary(), frozenChildren.ToFrozenDictionary());

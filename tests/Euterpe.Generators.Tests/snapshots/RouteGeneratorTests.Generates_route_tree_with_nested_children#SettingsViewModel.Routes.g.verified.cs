@@ -25,12 +25,11 @@ partial class SettingsViewModel
     ];
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.RouteGenerator", "1.0.0")]
-    private static readonly FrozenDictionary<string, global::System.Func<global::Autofac.IComponentContext, global::Euterpe.Mvvm.ViewModelBase>> RouteLookup =
-        new global::System.Collections.Generic.Dictionary<string, global::System.Func<global::Autofac.IComponentContext, global::Euterpe.Mvvm.ViewModelBase>>
-        {
-            ["/settings/general"] = static ctx => ctx.Resolve<global::Sample.GeneralViewModel>(),
-            ["/settings/advanced"] = static ctx => ctx.Resolve<global::Sample.AdvancedViewModel>(),
-        }.ToFrozenDictionary();
+    private static readonly FrozenDictionary<string, global::System.Func<global::Autofac.IComponentContext, global::Euterpe.Mvvm.ViewModelBase>> RouteLookup = new global::System.Collections.Generic.Dictionary<string, global::System.Func<global::Autofac.IComponentContext, global::Euterpe.Mvvm.ViewModelBase>>
+    {
+        ["/settings/general"] = static ctx => ctx.Resolve<global::Sample.GeneralViewModel>(),
+        ["/settings/advanced"] = static ctx => ctx.Resolve<global::Sample.AdvancedViewModel>(),
+    }.ToFrozenDictionary();
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.RouteGenerator", "1.0.0")]
     protected override global::Euterpe.Mvvm.ViewModelBase ResolveRoute(string route) => RouteLookup[route](Container);

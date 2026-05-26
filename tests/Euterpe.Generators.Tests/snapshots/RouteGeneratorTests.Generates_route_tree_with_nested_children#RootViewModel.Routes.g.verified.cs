@@ -31,12 +31,11 @@ partial class RootViewModel
     public override global::System.Collections.Generic.IReadOnlyList<global::Euterpe.Mvvm.PageHost> Pages => field ??= [HomeHost, SettingsHost];
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.RouteGenerator", "1.0.0")]
-    private static readonly FrozenDictionary<string, int> RouteIndex =
-        new global::System.Collections.Generic.Dictionary<string, int>
-        {
-            ["/home"] = 0,
-            ["/settings"] = 1,
-        }.ToFrozenDictionary();
+    private static readonly FrozenDictionary<string, int> RouteIndex = new global::System.Collections.Generic.Dictionary<string, int>
+    {
+        ["/home"] = 0,
+        ["/settings"] = 1,
+    }.ToFrozenDictionary();
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.RouteGenerator", "1.0.0")]
     protected override global::Euterpe.Mvvm.PageHost ResolveRoute(string route) => Pages[RouteIndex[route]];

@@ -8,33 +8,37 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var routed = context.SyntaxProvider.ForAttributeWithMetadataName(
-            RouteAttributeName,
-            static (node, _) => node is ClassDeclarationSyntax,
-            static (ctx, _) => ExtractRouted(ctx)).Collect();
+        var routed = context.SyntaxProvider
+            .ForAttributeWithMetadataName(RouteAttributeName, static (node, _) => node is ClassDeclarationSyntax, ExtractRouted)
+            .Collect();
 
-        var perGame = context.SyntaxProvider.ForAttributeWithMetadataName(
-            PerGameAttributeName,
-            static (node, _) => node is ClassDeclarationSyntax,
-            static (ctx, _) => ((INamedTypeSymbol)ctx.TargetSymbol).ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)).Collect();
+        var perGame = context.SyntaxProvider
+            .ForAttributeWithMetadataName(PerGameAttributeName, static (node, _) => node is ClassDeclarationSyntax,
+                static (ctx, _) => ctx.TargetSymbol is INamedTypeSymbol symbol ? symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) : string.Empty)
+            .Collect();
 
-        context.RegisterSourceOutput(routed.Combine(perGame), GenerateFromData);
+        context.RegisterSourceOutput(routed.Combine(perGame), Generate);
     }
 
-    private static RegistrationData ExtractRouted(GeneratorAttributeSyntaxContext context)
+    private static RegistrationData? ExtractRouted(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
-        var symbol = (INamedTypeSymbol)context.TargetSymbol;
-        var attribute = context.Attributes.Single(static x => x.AttributeClass!.ToDisplayString() == RouteAttributeName);
-        var path = attribute.ConstructorArguments[0].Value as string ?? string.Empty;
-        var isPerGame = symbol.GetAttributes()
-            .Any(static a => a.AttributeClass?.ToDisplayString() == PerGameAttributeName);
+        if (context is not
+            {
+                TargetSymbol: INamedTypeSymbol symbol,
+                Attributes:
+                [
+                    { ConstructorArguments: [{ Value: string path }] }
+                ]
+            })
+        {
+            return null;
+        }
 
+        var isPerGame = symbol.GetAttributes().Any(static a => a.AttributeClass?.ToDisplayString() is PerGameAttributeName);
         return new RegistrationData(symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat), isPerGame, path);
     }
 
-    private static void GenerateFromData(
-        SourceProductionContext spc,
-        (ImmutableArray<RegistrationData> Routed, ImmutableArray<string> PerGame) data)
+    private static void Generate(SourceProductionContext spc, (ImmutableArray<RegistrationData?> Routed, ImmutableArray<string> PerGame) data)
     {
         var (routed, perGame) = data;
         if (routed.IsEmpty && perGame.IsEmpty)
@@ -42,13 +46,13 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
             return;
         }
 
-        var seen = new HashSet<string>();
+        var registered = new HashSet<string>();
         var appViewModels = new List<string>();
         var perGameViewModels = new List<string>();
 
         foreach (var item in routed)
         {
-            if (item.Path == "/" || !seen.Add(item.FullName))
+            if (item is not { Path: not "/" } || !registered.Add(item.FullName))
             {
                 continue;
             }
@@ -56,60 +60,42 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
             (item.IsPerGame ? perGameViewModels : appViewModels).Add(item.FullName);
         }
 
-        foreach (var name in perGame)
-        {
-            if (seen.Add(name))
-            {
-                perGameViewModels.Add(name);
-            }
-        }
+        perGameViewModels.AddRange(perGame.Where(registered.Add));
 
         appViewModels.Sort(StringComparer.Ordinal);
         perGameViewModels.Sort(StringComparer.Ordinal);
 
-        var sb = new GeneratorStringBuilder();
-        sb.AppendLine("""
-                      namespace Euterpe.Extensions;
+        var cb = new CodeBuilder();
+        cb.Append(Header).AppendLine();
+        cb.AppendLine("namespace Euterpe.Extensions;");
+        cb.AppendLine();
 
-                      partial class ServiceExtensions
-                      {
-                      """);
+        using (cb.Block("partial class ServiceExtensions"))
+        {
+            AppendRegistration(cb, "RegisterAppViewModels", "SingleInstance()", appViewModels, true);
+            cb.AppendLine();
+            AppendRegistration(cb, "RegisterPerGameViewModels", "InstancePerLifetimeScope()", perGameViewModels, false);
+        }
 
-        AppendRegistrationMethod(sb, "RegisterAppViewModels", appViewModels, "SingleInstance()",
-            "\t\tbuilder.RegisterType<global::Euterpe.AppViewModel>().PropertiesAutowired().SingleInstance();");
-        sb.AppendLine();
-        AppendRegistrationMethod(sb, "RegisterPerGameViewModels", perGameViewModels, "InstancePerLifetimeScope()", null);
-
-        sb.AppendLine("}");
-
-        spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
+        spc.AddSource("ServiceExtensions.g.cs", cb.ToString());
     }
 
-    private static void AppendRegistrationMethod(
-        GeneratorStringBuilder sb,
-        string methodName,
-        List<string> viewModels,
-        string lifetime,
-        string? prelude)
+    private static void AppendRegistration(CodeBuilder cb, string methodName, string lifetime, List<string> viewModels, bool registerAppViewModel)
     {
-        sb.AppendLine($$"""
-                            {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
-                            public static void {{methodName}}(this ContainerBuilder builder)
-                            {
-                        """);
-
-        if (prelude is not null)
+        cb.AppendLine(GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator)));
+        using (cb.Block($"public static void {methodName}(this ContainerBuilder builder)"))
         {
-            sb.AppendLine(prelude);
-            sb.AppendLine();
-        }
+            if (registerAppViewModel)
+            {
+                cb.AppendLine("builder.RegisterType<global::Euterpe.AppViewModel>().PropertiesAutowired().SingleInstance();");
+                cb.AppendLine();
+            }
 
-        foreach (var viewModel in viewModels)
-        {
-            sb.AppendLine($"\t\tbuilder.RegisterType<{viewModel}>().PropertiesAutowired().{lifetime};");
+            foreach (var viewModel in viewModels)
+            {
+                cb.AppendLine($"builder.RegisterType<{viewModel}>().PropertiesAutowired().{lifetime};");
+            }
         }
-
-        sb.AppendLine("    }");
     }
 
     private sealed record RegistrationData(string FullName, bool IsPerGame, string Path);

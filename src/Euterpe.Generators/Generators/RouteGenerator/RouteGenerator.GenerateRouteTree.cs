@@ -4,57 +4,51 @@ public sealed partial class RouteGenerator
 {
     private static string GenerateRouteTree(RouteTree tree)
     {
-        var sb = new IndentedGeneratorStringBuilder();
+        var cb = new CodeBuilder();
+        cb.Append(Header).AppendLine();
+        cb.AppendLine("using static Euterpe.IocContainer;");
+        cb.AppendLine();
+        cb.AppendLine("namespace Euterpe;");
+        cb.AppendLine();
 
-        sb.AppendLine("""
-                      using static Euterpe.IocContainer;
-
-                      namespace Euterpe;
-
-                      public static class RouteTree
-                      {
-                          public static readonly global::Euterpe.Controls.Models.RouteNode Root = new("/", null, [
-                      """);
-
-        sb.IncreaseIndent(2);
-        var rootChildren = tree.RootChildren;
-        for (var i = 0; i < rootChildren.Length; i++)
+        using (cb.Block("public static class RouteTree"))
         {
-            WriteRouteNode(sb, rootChildren[i], i, "/", tree);
+            cb.AppendLine("""public static readonly global::Euterpe.Controls.Models.RouteNode Root = new("/", null, [""");
+            using (cb.Indent())
+            {
+                var rootChildren = tree.RootChildren;
+                for (var i = 0; i < rootChildren.Length; i++)
+                {
+                    WriteRouteNode(cb, rootChildren[i], i, "/", tree);
+                }
+            }
+
+            cb.AppendLine("]);");
         }
 
-        sb.ResetIndent();
-
-        sb.AppendLine("""
-                          ]);
-                      }
-                      """);
-
-        return sb.ToString();
+        return cb.ToString();
     }
 
-    private static void WriteRouteNode(IndentedGeneratorStringBuilder sb, RouteData route, int index, string parentPath, RouteTree tree)
+    private static void WriteRouteNode(CodeBuilder cb, RouteData route, int index, string parentPath, RouteTree tree)
     {
-        var (viewModelNamespace, viewModelName) = tree.GetViewModel(parentPath);
-
-        var selectLambda =
-            $$"""() => { var vm = Resolve<global::{{viewModelNamespace}}.{{viewModelName}}>(); vm.SelectedItem = vm.NavItems[{{index}}]; }""";
+        var (ns, name) = tree.GetViewModel(parentPath);
+        var select = $$"""() => { var vm = Resolve<global::{{ns}}.{{name}}>(); vm.SelectedItem = vm.NavItems[{{index}}]; }""";
 
         if (!tree.ChildrenByParent.TryGetValue(route.Path, out var children))
         {
-            sb.AppendLine($"""new("{route.Path}", {selectLambda}, []),""");
+            cb.AppendLine($"""new("{route.Path}", {select}, []),""");
             return;
         }
 
-        sb.AppendLine($"""new("{route.Path}", {selectLambda}, [""");
-        sb.IncreaseIndent();
-
-        for (var i = 0; i < children.Length; i++)
+        cb.AppendLine($"""new("{route.Path}", {select}, [""");
+        using (cb.Indent())
         {
-            WriteRouteNode(sb, children[i], i, route.Path, tree);
+            for (var i = 0; i < children.Length; i++)
+            {
+                WriteRouteNode(cb, children[i], i, route.Path, tree);
+            }
         }
 
-        sb.DecreaseIndent();
-        sb.AppendLine("]),");
+        cb.AppendLine("]),");
     }
 }

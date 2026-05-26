@@ -2,7 +2,6 @@ global using System.Collections.Immutable;
 global using System.Diagnostics;
 global using System.Text;
 global using Euterpe.Generators.Extensions;
-global using Euterpe.Generators.StringBuilders;
 global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;

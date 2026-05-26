@@ -18,15 +18,15 @@ partial class ServiceExtensions
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.ServiceExtensionsGenerator", "1.0.0")]
     public static void RegisterAppViewModels(this ContainerBuilder builder)
     {
-		builder.RegisterType<global::Euterpe.AppViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<global::Euterpe.AppViewModel>().PropertiesAutowired().SingleInstance();
 
-		builder.RegisterType<global::Sample.HomeViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<global::Sample.HomeViewModel>().PropertiesAutowired().SingleInstance();
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.ServiceExtensionsGenerator", "1.0.0")]
     public static void RegisterPerGameViewModels(this ContainerBuilder builder)
     {
-		builder.RegisterType<global::Sample.ModdingViewModel>().PropertiesAutowired().InstancePerLifetimeScope();
-		builder.RegisterType<global::Sample.WizardDialogViewModel>().PropertiesAutowired().InstancePerLifetimeScope();
+        builder.RegisterType<global::Sample.ModdingViewModel>().PropertiesAutowired().InstancePerLifetimeScope();
+        builder.RegisterType<global::Sample.WizardDialogViewModel>().PropertiesAutowired().InstancePerLifetimeScope();
     }
 }
