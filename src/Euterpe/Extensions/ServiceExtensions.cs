@@ -1,5 +1,4 @@
 using Euterpe.Core.Proxies;
-using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace Euterpe.Extensions;
 
@@ -20,21 +19,13 @@ public static partial class ServiceExtensions
 
             // TopLevel
             builder.RegisterType<TopLevelProxy>().SingleInstance();
-
-            // Notification
-            builder.Register<WindowNotificationManager>(ctx => ctx.Resolve<MainWindow>().Notifier).SingleInstance();
         }
 
-        public void RegisterWindowsAndViewModels()
+        public void RegisterShellViewModels()
         {
             builder.RegisterType<MainWindowViewModel>().PropertiesAutowired().SingleInstance();
-            builder.Register(static ctx => new MainWindow { DataContext = ctx.Resolve<MainWindowViewModel>() }).SingleInstance();
-
             builder.RegisterType<MainSplashWindowViewModel>().PropertiesAutowired().SingleInstance();
-            builder.Register(static ctx => new MainSplashWindow { DataContext = ctx.Resolve<MainSplashWindowViewModel>() }).PropertiesAutowired().SingleInstance();
-
             builder.RegisterType<CrashWindowViewModel>().PropertiesAutowired().SingleInstance();
-            builder.Register(static ctx => new CrashWindow { DataContext = ctx.Resolve<CrashWindowViewModel>() }).InstancePerDependency();
         }
 
         public void RegisterPerGameAppServices()

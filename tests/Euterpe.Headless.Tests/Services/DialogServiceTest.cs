@@ -55,13 +55,7 @@ public sealed class DialogServiceTest : HeadlessTest
         await Assert.That(result).IsTrue();
     });
 
-    private static IDialogService NewService()
-    {
-        var builder = new ContainerBuilder();
-        builder.RegisterType<TestDialogWindow>().AsSelf();
-        builder.RegisterType<DialogService>().As<IDialogService>().PropertiesAutowired().SingleInstance();
-        return builder.Build().Resolve<IDialogService>();
-    }
+    private static IDialogService NewService() => new DialogService();
 
     private static Window NewVisibleOwner()
     {

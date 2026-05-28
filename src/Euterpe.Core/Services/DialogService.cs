@@ -6,13 +6,11 @@ namespace Euterpe.Core;
 
 internal sealed class DialogService : IDialogService
 {
-    public required IComponentContext Container { get; init; }
-
     public async Task<T?> ShowWindowDialogAsync<TWindow, TViewModel, T>(TViewModel vm, Window? owner = null)
-        where TWindow : Window
+        where TWindow : Window, new()
         where TViewModel : class, IDialog<T>
     {
-        var window = Container.Resolve<TWindow>();
+        var window = new TWindow { DataContext = vm };
 
         T? result = default;
         EventHandler<T> handler = (_, value) =>

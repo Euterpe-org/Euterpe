@@ -2,7 +2,7 @@ namespace Euterpe.Shell;
 
 public sealed partial class MainSplashWindow : SplashWindow
 {
-    public Lazy<MainWindow> MainWindow { get; init; } = null!;
+    public required Func<MainWindow> MainWindowFactory { get; init; }
 
     public MainSplashWindow()
     {
@@ -19,5 +19,5 @@ public sealed partial class MainSplashWindow : SplashWindow
         return true;
     }
 
-    protected override Task<Window?> CreateNextWindow() => Task.FromResult<Window?>(MainWindow.Value);
+    protected override Task<Window?> CreateNextWindow() => Task.FromResult<Window?>(MainWindowFactory());
 }

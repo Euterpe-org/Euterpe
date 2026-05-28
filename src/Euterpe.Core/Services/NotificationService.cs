@@ -5,25 +5,19 @@ using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace Euterpe.Core;
 
-internal sealed class NotificationService : INotificationService
+internal sealed class NotificationService : INotificationService, INotificationServiceWiring
 {
-    private WindowNotificationManager NotificationManager => NotificationManagerFactory();
-
-    #region Injections
-
-    public required Func<WindowNotificationManager> NotificationManagerFactory { get; init; }
-
-    #endregion Injections
+    public WindowNotificationManager Notifier { private get; set; } = null!;
 
     private void Show(Notification notification, NotificationType type, TimeSpan? expiration, string[]? classes = null)
     {
         if (Dispatcher.UIThread.CheckAccess())
         {
-            NotificationManager.Show(notification, type, expiration, classes: classes);
+            Notifier.Show(notification, type, expiration, classes: classes);
         }
         else
         {
-            Dispatcher.UIThread.Post(() => NotificationManager.Show(notification, type, expiration, classes: classes));
+            Dispatcher.UIThread.Post(() => Notifier.Show(notification, type, expiration, classes: classes));
         }
     }
 

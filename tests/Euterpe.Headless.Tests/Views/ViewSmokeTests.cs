@@ -99,7 +99,7 @@ public sealed class ViewSmokeTests : HeadlessTest
     [Test]
     public Task MainSplashWindow_LoadsIntoVisualTree() => RunOnUI(async () =>
     {
-        var window = new MainSplashWindow();
+        var window = new MainSplashWindow { MainWindowFactory = () => new MainWindow() };
         window.Show();
         Dispatcher.UIThread.RunJobs();
 

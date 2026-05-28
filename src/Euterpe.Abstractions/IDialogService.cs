@@ -7,7 +7,7 @@ namespace Euterpe.Abstractions;
 public interface IDialogService
 {
     Task<T?> ShowWindowDialogAsync<TWindow, TViewModel, T>(TViewModel vm, Window? owner = null)
-        where TWindow : Window
+        where TWindow : Window, new()
         where TViewModel : class, IDialog<T>;
 
     Task<T?> ShowOverlayAsync<TView, TViewModel, T>(

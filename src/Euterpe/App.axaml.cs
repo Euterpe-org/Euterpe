@@ -27,7 +27,16 @@ public sealed class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = Resolve<MainSplashWindow>();
+            desktop.MainWindow = new MainSplashWindow
+            {
+                DataContext = Resolve<MainSplashWindowViewModel>(),
+                MainWindowFactory = () =>
+                {
+                    var window = new MainWindow { DataContext = Resolve<MainWindowViewModel>() };
+                    Resolve<INotificationServiceWiring>().Notifier = window.Notifier;
+                    return window;
+                }
+            };
             deepLinkService.HandleStartupArgs(desktop.Args!);
         }
 

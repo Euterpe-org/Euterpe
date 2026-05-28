@@ -118,7 +118,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
-            builder.RegisterType<NotificationService>().As<INotificationService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<NotificationService>().As<INotificationService>().As<INotificationServiceWiring>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<TelemetryService>().As<ITelemetryService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
