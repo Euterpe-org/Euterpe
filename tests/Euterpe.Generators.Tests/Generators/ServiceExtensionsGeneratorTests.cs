@@ -22,6 +22,9 @@ public sealed class ServiceExtensionsGeneratorTests
 
                                   [PerGame]
                                   public partial class WizardDialogViewModel;
+
+                                  [Register]
+                                  public partial class CrashViewModel;
                               }
 
                               namespace Euterpe.Shared.Attributes
@@ -37,6 +40,9 @@ public sealed class ServiceExtensionsGeneratorTests
 
                                   [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
                                   public sealed class PerGameAttribute : System.Attribute;
+
+                                  [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
+                                  public sealed class RegisterAttribute : System.Attribute;
                               }
                               """;
 

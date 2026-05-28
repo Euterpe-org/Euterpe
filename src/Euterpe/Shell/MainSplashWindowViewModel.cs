@@ -2,6 +2,7 @@ using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.Shell;
 
+[Register]
 public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 {
     public AsyncManualResetEvent Ready { get; } = new(false);

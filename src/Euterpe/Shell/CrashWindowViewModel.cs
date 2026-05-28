@@ -4,6 +4,7 @@ using Euterpe.Core.Proxies;
 
 namespace Euterpe.Shell;
 
+[Register]
 public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
 {
     private const string FeedbackUri = "https://github.com/Euterpe-org/Euterpe/issues/new/choose";

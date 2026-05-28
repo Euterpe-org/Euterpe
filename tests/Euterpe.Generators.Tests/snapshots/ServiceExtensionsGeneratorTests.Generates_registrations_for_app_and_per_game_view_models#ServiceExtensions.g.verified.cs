@@ -18,9 +18,9 @@ partial class ServiceExtensions
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.ServiceExtensionsGenerator", "1.0.0")]
     public static void RegisterAppViewModels(this ContainerBuilder builder)
     {
-        builder.RegisterType<global::Euterpe.AppViewModel>().PropertiesAutowired().SingleInstance();
-
+        builder.RegisterType<global::Sample.CrashViewModel>().PropertiesAutowired().SingleInstance();
         builder.RegisterType<global::Sample.HomeViewModel>().PropertiesAutowired().SingleInstance();
+        builder.RegisterType<global::Sample.RootViewModel>().PropertiesAutowired().SingleInstance();
     }
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.ServiceExtensionsGenerator", "1.0.0")]

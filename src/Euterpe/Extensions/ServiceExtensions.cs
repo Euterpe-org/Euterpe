@@ -22,13 +22,6 @@ public static partial class ServiceExtensions
             builder.RegisterType<TopLevelProxy>().SingleInstance();
         }
 
-        public void RegisterShellViewModels()
-        {
-            builder.RegisterType<MainWindowViewModel>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MainSplashWindowViewModel>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<CrashWindowViewModel>().PropertiesAutowired().SingleInstance();
-        }
-
         public void RegisterPerGameAppServices()
         {
             builder.RegisterType<SetupDialogService>().PropertiesAutowired().InstancePerLifetimeScope();
