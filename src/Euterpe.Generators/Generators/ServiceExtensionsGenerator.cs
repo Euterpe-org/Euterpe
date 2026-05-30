@@ -38,7 +38,8 @@ public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
         return new RegistrationData(symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat), isPerGame);
     }
 
-    private static void Generate(SourceProductionContext spc, ((ImmutableArray<RegistrationData?> Routed, ImmutableArray<string> PerGame) RoutedAndPerGame, ImmutableArray<string> Registered) data)
+    private static void Generate(SourceProductionContext spc,
+        ((ImmutableArray<RegistrationData?> Routed, ImmutableArray<string> PerGame) RoutedAndPerGame, ImmutableArray<string> Registered) data)
     {
         var ((routed, perGame), registered) = data;
         if (routed.IsEmpty && perGame.IsEmpty && registered.IsEmpty)

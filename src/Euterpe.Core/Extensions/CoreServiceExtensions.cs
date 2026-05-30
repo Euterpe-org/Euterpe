@@ -1,6 +1,9 @@
 using Euterpe.Core.Http.Handlers;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
+using SoundFlow.Abstracts;
+using SoundFlow.Backends.MiniAudio;
+using SoundFlow.Codecs.FFMpeg;
 
 namespace Euterpe.Core.Extensions;
 
@@ -108,11 +111,19 @@ public static class CoreServiceExtensions
             builder.RegisterType<MuseDashConfig>().AsSelf().SingleInstance();
             builder.RegisterType<MuseDash2Config>().AsSelf().SingleInstance();
 
+            builder.Register<AudioEngine>(_ =>
+            {
+                var engine = new MiniAudioEngine();
+                engine.RegisterCodecFactory(new FFmpegCodecFactory());
+                return engine;
+            }).SingleInstance();
+
             builder.RegisterType<AppDownloadManager>().As<IAppDownloadManager>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AppLocalService>().As<IAppLocalService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AppSettingService>().As<IAppSettingService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AudioPlayerService>().As<IAudioPlayerService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<AudioConverterService>().As<IAudioConverterService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DialogService>().As<IDialogService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
@@ -135,7 +146,7 @@ public static class CoreServiceExtensions
                 case GameId.MuseDash2:
                     builder.Register<GameConfig>(static ctx => ctx.Resolve<MuseDash2Config>()).InstancePerLifetimeScope();
                     break;
-                default:
+                case GameId.MuseDash:
                     builder.Register<GameConfig>(static ctx => ctx.Resolve<MuseDashConfig>()).InstancePerLifetimeScope();
                     break;
             }

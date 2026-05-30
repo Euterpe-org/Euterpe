@@ -1,7 +1,5 @@
 using SoundFlow.Abstracts;
 using SoundFlow.Abstracts.Devices;
-using SoundFlow.Backends.MiniAudio;
-using SoundFlow.Codecs.FFMpeg;
 using SoundFlow.Components;
 using SoundFlow.Providers;
 using SoundFlow.Structs;
@@ -11,29 +9,17 @@ namespace Euterpe.Core;
 internal sealed class AudioPlayerService : IAudioPlayerService
 {
     private static readonly AudioFormat Format = AudioFormat.DvdHq;
-    private readonly AudioEngine _engine = new MiniAudioEngine();
 
     private AudioPlaybackDevice? _device;
     private SoundPlayer? _player;
-
-    #region Injections
-
-    public required ILogger<AudioPlayerService> Logger { get; init; }
-
-    #endregion Injections
-
-    public AudioPlayerService()
-    {
-        _engine.RegisterCodecFactory(new FFmpegCodecFactory());
-    }
 
     public void Play(string filePath)
     {
         StopInternal();
 
         var device = EnsureDevice();
-        var provider = new StreamDataProvider(_engine, Format, File.OpenRead(filePath));
-        _player = new SoundPlayer(_engine, Format, provider);
+        var provider = new StreamDataProvider(Engine, Format, File.OpenRead(filePath));
+        _player = new SoundPlayer(Engine, Format, provider);
         device.MasterMixer.AddComponent(_player);
         _player.Play();
 
@@ -50,7 +36,6 @@ internal sealed class AudioPlayerService : IAudioPlayerService
     {
         StopInternal();
         _device?.Dispose();
-        _engine.Dispose();
     }
 
     private AudioPlaybackDevice EnsureDevice()
@@ -60,7 +45,7 @@ internal sealed class AudioPlayerService : IAudioPlayerService
             return _device;
         }
 
-        _device = _engine.InitializePlaybackDevice(null, Format);
+        _device = Engine.InitializePlaybackDevice(null, Format);
         _device.Start();
         return _device;
     }
@@ -77,4 +62,11 @@ internal sealed class AudioPlayerService : IAudioPlayerService
         _player.Dispose();
         _player = null;
     }
+
+    #region Injections
+
+    public required AudioEngine Engine { get; init; }
+    public required ILogger<AudioPlayerService> Logger { get; init; }
+
+    #endregion Injections
 }
