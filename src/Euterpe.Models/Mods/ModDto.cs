@@ -35,6 +35,7 @@ public sealed partial class ModDto : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsLocal))]
     [NotifyPropertyChangedFor(nameof(IsInstallable))]
     [NotifyPropertyChangedFor(nameof(IsReinstallable))]
+    [NotifyPropertyChangedFor(nameof(IsToggleVisible))]
     public partial string? FileNameWithoutExtension { get; set; }
 
     public string LocalFileName => FileNameWithoutExtension + (IsDisabled ? ".disabled" : ".dll");
@@ -44,10 +45,15 @@ public sealed partial class ModDto : ObservableObject
     [ObservableProperty]
     public partial bool IsDisabled { get; set; } = true;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsToggleVisible))]
+    public partial bool IsProcessing { get; set; }
+
     public bool IsLocal => FileNameWithoutExtension is not null;
     public bool HasDownloadSource => !FileName.IsNullOrEmpty();
     public bool IsInstallable => !IsLocal && HasDownloadSource && State is not ModState.Incompatible;
     public bool IsReinstallable => IsLocal && State is ModState.Modified;
+    public bool IsToggleVisible => IsLocal && !IsProcessing;
 
     [ObservableProperty]
     public partial bool IsValidConfigFile { get; set; }
@@ -63,7 +69,7 @@ public sealed partial class ModDto : ObservableObject
     // Dependencies
     public bool HasDependency => ModDependencies.Length + LibDependencies.Length > 0;
 
-    public string[] DependencyNames => !HasDependency ? [] : [..ModDependencies, ..LibDependencies];
+    public string[] DependencyNames => !HasDependency ? [] : [.. ModDependencies, .. LibDependencies];
 
     // LocalizedStrings
     public LocalizedString LocalizedCompatibleGameVersion => GameVersion is "*" ? AllGameVersionCompatible : GameVersion;

@@ -19,20 +19,23 @@ internal sealed partial class ModManageService : IModManageService
     public ModDto? FindModByName(string name) =>
         _sourceCache.Lookup(name) is { HasValue: true, Value: var mod } ? mod : null;
 
-    public Task InstallModAsync(ModDto mod) =>
-        _singleFlight.RunAsync(mod.Name, () => InstallModCoreAsync(mod));
+    public Task InstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => InstallModCoreAsync(mod));
 
-    public Task UpdateModAsync(ModDto mod) =>
-        _singleFlight.RunAsync(mod.Name, () => UpdateModCoreAsync(mod));
+    public Task UpdateModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod));
 
-    public Task ReinstallModAsync(ModDto mod) =>
-        _singleFlight.RunAsync(mod.Name, () => ReinstallModCoreAsync(mod));
+    public Task ReinstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ReinstallModCoreAsync(mod));
 
-    public Task UninstallModAsync(ModDto mod) =>
-        _singleFlight.RunAsync(mod.Name, () => UninstallModCoreAsync(mod));
+    public Task UninstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UninstallModCoreAsync(mod));
 
-    public Task ToggleModAsync(ModDto mod) =>
-        _singleFlight.RunAsync(mod.Name, () => ToggleModCoreAsync(mod));
+    public Task ToggleModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ToggleModCoreAsync(mod));
+
+    private async Task RunExclusiveAsync(ModDto mod, Func<Task> action) =>
+        await _singleFlight.RunAsync(mod.Name, async () =>
+        {
+            mod.IsProcessing = true;
+            await action().ConfigureAwait(false);
+            mod.IsProcessing = false;
+        }).ConfigureAwait(false);
 
     #region Injections
 

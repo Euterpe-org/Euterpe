@@ -176,6 +176,14 @@
                                             </StackPanel>
                                         </StackPanel>
 
+                                        <!--  Busy Spinner  -->
+                                        <u:LoadingIcon
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right"
+                                            IsVisible="{Binding IsProcessing, Mode=OneWay}"
+                                            Margin="0,0,8,0"
+                                            VerticalAlignment="Center" />
+
                                         <!--  Mod Toggle Switch  -->
                                         <ToggleSwitch
                                             Grid.Column="1"
@@ -183,7 +191,7 @@
                                             CommandParameter="{Binding ., Mode=OneWay}"
                                             HorizontalAlignment="Right"
                                             IsChecked="{Binding !IsDisabled, Mode=OneWay}"
-                                            IsVisible="{Binding IsLocal, Mode=OneWay}"
+                                            IsVisible="{Binding IsToggleVisible, Mode=OneWay}"
                                             Margin="0,0,4,0"
                                             VerticalAlignment="Center" />
 
@@ -293,12 +301,17 @@
                                 Classes="Primary"
                                 Command="{Binding UpdateModCommand, Mode=OneTime}"
                                 CommandParameter="{Binding SelectedMod, Mode=OneWay}"
+                                IsEnabled="{Binding !SelectedMod.IsProcessing, Mode=OneWay}"
                                 IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Outdated}, Mode=OneWay}">
                                 <StackPanel
                                     Classes="ControlsHorizontal">
+                                    <u:LoadingIcon
+                                        Height="15"
+                                        IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
                                     <PathIcon
                                         Data="{StaticResource SemiIconRefresh}"
-                                        Height="15" />
+                                        Height="15"
+                                        IsVisible="{Binding !SelectedMod.IsProcessing, Mode=OneWay}" />
                                     <TextBlock
                                         Text="{Localize {x:Static loc:XAMLLiteral.Button_Update}}" />
                                 </StackPanel>
@@ -308,23 +321,50 @@
                             <Button
                                 Command="{Binding InstallModCommand, Mode=OneTime}"
                                 CommandParameter="{Binding SelectedMod, Mode=OneWay}"
-                                Content="{Localize {x:Static loc:XAMLLiteral.Button_Install}}"
-                                IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}" />
+                                IsEnabled="{Binding !SelectedMod.IsProcessing, Mode=OneWay}"
+                                IsVisible="{Binding SelectedMod.IsInstallable, Mode=OneWay}">
+                                <StackPanel
+                                    Classes="ControlsHorizontal">
+                                    <u:LoadingIcon
+                                        Height="15"
+                                        IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
+                                    <TextBlock
+                                        Text="{Localize {x:Static loc:XAMLLiteral.Button_Install}}" />
+                                </StackPanel>
+                            </Button>
 
                             <!--  Reinstall  -->
                             <Button
                                 Command="{Binding ReinstallModCommand, Mode=OneTime}"
                                 CommandParameter="{Binding SelectedMod, Mode=OneWay}"
-                                Content="{Localize {x:Static loc:XAMLLiteral.Button_Reinstall}}"
-                                IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}" />
+                                IsEnabled="{Binding !SelectedMod.IsProcessing, Mode=OneWay}"
+                                IsVisible="{Binding SelectedMod.IsReinstallable, Mode=OneWay}">
+                                <StackPanel
+                                    Classes="ControlsHorizontal">
+                                    <u:LoadingIcon
+                                        Height="15"
+                                        IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
+                                    <TextBlock
+                                        Text="{Localize {x:Static loc:XAMLLiteral.Button_Reinstall}}" />
+                                </StackPanel>
+                            </Button>
 
                             <!--  Uninstall  -->
                             <Button
                                 Classes="Danger"
                                 Command="{Binding UninstallModCommand, Mode=OneTime}"
                                 CommandParameter="{Binding SelectedMod, Mode=OneWay}"
-                                Content="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}"
-                                IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
+                                IsEnabled="{Binding !SelectedMod.IsProcessing, Mode=OneWay}"
+                                IsVisible="{Binding SelectedMod.IsLocal, Mode=OneWay}">
+                                <StackPanel
+                                    Classes="ControlsHorizontal">
+                                    <u:LoadingIcon
+                                        Height="15"
+                                        IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
+                                    <TextBlock
+                                        Text="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}" />
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
 
                         <!--  Mod Status Tags  -->
