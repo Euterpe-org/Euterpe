@@ -16,6 +16,8 @@
         <PackageReference Include="Refit"/>
         <PackageReference Include="Refit.HttpClientFactory"/>
         <PackageReference Include="Semver"/>
+        <PackageReference Include="SoundFlow"/>
+        <PackageReference Include="SoundFlow.Codecs.FFMpeg"/>
         <PackageReference Include="ValveKeyValue"/>
         <PackageReference Include="System.Security.Cryptography.ProtectedData"/>
         <PackageReference Include="ZLogger"/>
