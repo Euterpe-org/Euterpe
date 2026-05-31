@@ -52,6 +52,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>Échec de l'installation du .NET 10 SDK</value>
   </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>Échec de la connexion. Voulez-vous réessayer ? Sélectionner Non fermera Euterpe.</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Le chemin sélectionné est invalide. Veuillez réessayer</value>
   </data>

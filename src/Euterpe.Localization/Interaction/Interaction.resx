@@ -61,6 +61,9 @@
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>The path you have chosen is invalid. Try again</value>
   </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>Sign-in failed. Would you like to try again? Selecting No will close Euterpe.</value>
+  </data>
   <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
     <value>Failed to create MDM file</value>
   </data>

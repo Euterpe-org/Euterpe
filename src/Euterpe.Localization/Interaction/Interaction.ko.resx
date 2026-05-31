@@ -52,6 +52,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>.NET 10 SDK 설치에 실패했습니다</value>
   </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>로그인에 실패했습니다. 다시 시도하시겠습니까? 아니요를 선택하면 Euterpe가 종료됩니다.</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>선택한 경로가 올바르지 않습니다. 다시 선택해 주세요</value>
   </data>

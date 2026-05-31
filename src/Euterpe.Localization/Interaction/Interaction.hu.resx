@@ -52,6 +52,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>A .NET 10 SDK telepítése sikertelen</value>
   </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>A bejelentkezés sikertelen. Szeretnéd újrapróbálni? A Nem választása bezárja az Euterpe-t.</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>A kiválasztott útvonal érvénytelen. Próbáld újra</value>
   </data>

@@ -18,9 +18,9 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
         var restored = await AuthService.RestoreSessionAsync().ConfigureAwait(true);
-        if (!restored)
+        if (!restored && !await EnsureLoggedInAsync().ConfigureAwait(true))
         {
-            await AuthService.LoginAsync().ConfigureAwait(true);
+            return;
         }
 
         await AuthService.Ready.WaitAsync().ConfigureAwait(true);
@@ -41,9 +41,33 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
         Close();
     }
 
+    /// <summary>
+    ///     Drive the login flow until it succeeds, prompting to retry or quit on each failure.
+    /// </summary>
+    /// <returns>True once logged in; false if the user chose to quit (shutdown initiated).</returns>
+    private async Task<bool> EnsureLoggedInAsync()
+    {
+        while (true)
+        {
+            await AuthService.LoginAsync().ConfigureAwait(true);
+            if (AuthService.Ready.IsSet)
+            {
+                return true;
+            }
+
+            var result = await MessageBoxService.WarningConfirmAsync(MessageBox_Content_Login_Failed).ConfigureAwait(true);
+            if (result is not MessageBoxResult.Yes)
+            {
+                GetCurrentDesktop().Shutdown();
+                return false;
+            }
+        }
+    }
+
     #region Injections
 
     public required IAuthService AuthService { get; init; }
+    public required IMessageBoxService MessageBoxService { get; init; }
     public required ILogger<MainSplashWindowViewModel> Logger { get; init; }
 #if RELEASE
     public required IUpdateService UpdateService { get; init; }

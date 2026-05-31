@@ -52,6 +52,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>Gagal menginstal .NET 10 SDK</value>
   </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>Gagal masuk. Apakah Anda ingin mencoba lagi? Memilih Tidak akan menutup Euterpe.</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Jalur yang Anda pilih tidak valid. Coba lagi</value>
   </data>

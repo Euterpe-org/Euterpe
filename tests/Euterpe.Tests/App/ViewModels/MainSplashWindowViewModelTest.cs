@@ -2,6 +2,7 @@ using System.Runtime.CompilerServices;
 using DotNext.Threading;
 using Euterpe.Shell;
 using Microsoft.Extensions.Logging.Abstractions;
+using Ursa.Controls;
 
 namespace Euterpe.Tests;
 
@@ -29,6 +30,34 @@ public sealed class MainSplashWindowViewModelTest
         await vm.InitializeAsync();
 
         await Assert.That(loginCount.Value).IsEqualTo(1);
+    }
+
+    [Test]
+    public async Task OnInitializeAsync_LoginFailsThenRetrySucceeds_PromptsAndRetries()
+    {
+        var ready = new AsyncManualResetEvent(false);
+        var loginCount = new StrongBox<int>(0);
+        var auth = IAuthService.Mock();
+        auth.Ready.Returns(ready);
+        auth.RestoreSessionAsync().Returns(false);
+        auth.LoginAsync().Callback(() =>
+        {
+            loginCount.Value++;
+            if (loginCount.Value == 2)
+            {
+                ready.Set();
+            }
+        });
+
+        var messageBox = IMessageBoxService.Mock();
+        messageBox.WarningConfirmAsync(Any<string>()).Returns(MessageBoxResult.Yes);
+        var vm = NewViewModel(auth, messageBox);
+
+        await vm.InitializeAsync();
+
+        using var _ = Assert.Multiple();
+        await Assert.That(loginCount.Value).IsEqualTo(2);
+        messageBox.WarningConfirmAsync(Any<string>()).WasCalled(Times.Once);
     }
 
     [Test]
@@ -69,11 +98,12 @@ public sealed class MainSplashWindowViewModelTest
         return auth;
     }
 
-    private static MainSplashWindowViewModel NewViewModel(IAuthService authService) => new()
+    private static MainSplashWindowViewModel NewViewModel(IAuthService authService, IMessageBoxService? messageBoxService = null) => new()
     {
         Launcher = IPlatformLauncher.Mock(),
         Logger = NullLogger<MainSplashWindowViewModel>.Instance,
         AuthService = authService,
+        MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
 #if RELEASE
         UpdateService = IUpdateService.Mock()
 #endif
