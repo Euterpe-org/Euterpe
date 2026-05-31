@@ -1,3 +1,5 @@
+using Euterpe.Contracts.Account;
+
 namespace Euterpe.Abstractions;
 
 public interface ILoopbackCallbackListener : IDisposable
