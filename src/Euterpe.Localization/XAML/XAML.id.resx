@@ -352,6 +352,18 @@
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Beri tahu kami di mana game terpasang</value>
   </data>
+  <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
+    <value>Euterpe tidak sepenuhnya kompatibel dengan ekosistem MDMC (Muse Dash Modding Community). Jika Anda lebih memilih untuk tidak menggunakannya, Anda masih dapat menutup Euterpe sekarang. Melanjutkan tidak akan menghapus mod dan chart yang sudah ada di perangkat Anda, dan Anda tetap dapat bermain seperti biasa. Namun, CustomAlbums akan digantikan oleh mod resmi Euterpe: beralih kembali ke CustomAlbums setelahnya akan membuat game tidak dapat dimainkan, dan mod atau pengelola chart lain seperti MuseDashTOOL mungkin berhenti berfungsi.</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
+    <value>Kompatibilitas terbatas dengan MDMC</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
+    <value>Luangkan waktu untuk membaca ini, lalu pilih folder game Anda</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
+    <value>Sebelum Anda mulai</value>
+  </data>
   <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Bukan folder game yang valid</value>
   </data>
