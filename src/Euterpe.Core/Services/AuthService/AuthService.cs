@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Web;
 using Euterpe.Contracts.Account;
 
 namespace Euterpe.Core;
@@ -62,14 +63,6 @@ internal sealed partial class AuthService : IAuthService
         }
     }
 
-    private static string BuildAuthorizeUrl(string redirectUri, string codeChallenge, string state) =>
-        $"{AuthorizePageUrl}"
-        + $"?client_id={ClientId}"
-        + $"&redirect_uri={Uri.EscapeDataString(redirectUri)}"
-        + $"&code_challenge={codeChallenge}"
-        + "&code_challenge_method=S256"
-        + $"&state={state}";
-
     public async Task LogoutAsync()
     {
         await _lock.StealAsync("logout").ConfigureAwait(false);
@@ -89,24 +82,6 @@ internal sealed partial class AuthService : IAuthService
 
             await ClearSessionAsync().ConfigureAwait(false);
             Logger.ZLogInformation($"User logged out");
-        }
-        finally
-        {
-            _lock.Release();
-        }
-    }
-
-    private async Task ExchangeCodeAsync(string code, string codeVerifier, string redirectUri)
-    {
-        await _lock.AcquireAsync().ConfigureAwait(false);
-        try
-        {
-            var response = await AuthClient.ExchangeAppTokenAsync(new AppTokenRequest(ClientId, code, codeVerifier, redirectUri)).ConfigureAwait(false);
-            await UpdateSessionAsync(response.AccessToken, response.RefreshToken, response.Me).ConfigureAwait(false);
-
-            Logger.ZLogInformation($"User logged in: {response.Me.Nickname}");
-
-            Ready.Set();
         }
         finally
         {
@@ -182,6 +157,36 @@ internal sealed partial class AuthService : IAuthService
         }
 
         return true;
+    }
+
+    private static string BuildAuthorizeUrl(string redirectUri, string codeChallenge, string state)
+    {
+        var query = HttpUtility.ParseQueryString(string.Empty);
+        query["client_id"] = ClientId;
+        query["redirect_uri"] = redirectUri;
+        query["code_challenge"] = codeChallenge;
+        query["code_challenge_method"] = "S256";
+        query["state"] = state;
+
+        return $"{AuthorizePageUrl}?{query}";
+    }
+
+    private async Task ExchangeCodeAsync(string code, string codeVerifier, string redirectUri)
+    {
+        await _lock.AcquireAsync().ConfigureAwait(false);
+        try
+        {
+            var response = await AuthClient.ExchangeAppTokenAsync(new AppTokenRequest(ClientId, code, codeVerifier, redirectUri)).ConfigureAwait(false);
+            await UpdateSessionAsync(response.AccessToken, response.RefreshToken, response.Me).ConfigureAwait(false);
+
+            Logger.ZLogInformation($"User logged in: {response.Me.Nickname}");
+
+            Ready.Set();
+        }
+        finally
+        {
+            _lock.Release();
+        }
     }
 
     #region Injections
