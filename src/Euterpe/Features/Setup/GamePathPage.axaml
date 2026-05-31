@@ -52,26 +52,24 @@
             Spacing="14"
             VerticalAlignment="Center">
 
-            <!--  MDMC compatibility warning  -->
+            <!--  MDMC compatibility notice  -->
             <Border
                 Background="{DynamicResource SecondaryCardColor}"
-                BorderBrush="#E0A106"
-                BorderThickness="1"
                 CornerRadius="8"
-                Padding="16,12">
+                Padding="16,12"
+                Theme="{DynamicResource CardBorder}">
                 <StackPanel Spacing="6">
                     <StackPanel
                         Orientation="Horizontal"
                         Spacing="8">
                         <TextBlock
-                            FontFamily="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji"
-                            FontSize="16"
-                            Text="⚠️"
+                            FontSize="14"
+                            Foreground="{DynamicResource SecondaryTextColor}"
+                            Text="ℹ"
                             VerticalAlignment="Center" />
                         <TextBlock
                             FontSize="14"
                             FontWeight="SemiBold"
-                            Foreground="#E0A106"
                             Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning_Title}}"
                             VerticalAlignment="Center" />
                     </StackPanel>
