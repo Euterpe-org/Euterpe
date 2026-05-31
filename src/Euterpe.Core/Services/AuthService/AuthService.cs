@@ -52,7 +52,14 @@ internal sealed partial class AuthService : IAuthService
             return;
         }
 
-        await ExchangeCodeAsync(callback.Code, pkce.Verifier, redirectUri).ConfigureAwait(false);
+        try
+        {
+            await ExchangeCodeAsync(callback.Code, pkce.Verifier, redirectUri).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Login failed during token exchange");
+        }
     }
 
     private static string BuildAuthorizeUrl(string redirectUri, string codeChallenge, string state) =>

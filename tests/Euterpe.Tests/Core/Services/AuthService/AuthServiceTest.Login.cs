@@ -53,10 +53,40 @@ public sealed partial class AuthServiceTest
         var (launcher, listenerFactory) = StateEchoingLoopback(AuthCode, null);
         var sut = CreateAuthService(authClientMock, launcher: launcher, listenerFactory: listenerFactory);
 
-        var act = () => sut.LoginAsync();
+        await sut.LoginAsync();
 
-        await Assert.That(act).ThrowsException();
+        using var _ = Assert.Multiple();
         await Assert.That(sut.Ready.IsSet).IsFalse();
+        authClientMock.ExchangeAppTokenAsync(Any<AppTokenRequest>(), Any<CancellationToken>()).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task LoginAsync_WhenCallbackTimesOut_ShouldNotExchangeNorSetReady()
+    {
+        var authClientMock = IEuterpeAuthClient.Mock();
+        var listener = ILoopbackCallbackListener.Mock();
+        listener.WaitForCallbackAsync(Any<CancellationToken>()).Throws(new OperationCanceledException());
+        var sut = CreateAuthService(authClientMock, listenerFactory: () => listener);
+
+        await sut.LoginAsync();
+
+        using var _ = Assert.Multiple();
+        await Assert.That(sut.Ready.IsSet).IsFalse();
+        authClientMock.ExchangeAppTokenAsync(Any<AppTokenRequest>(), Any<CancellationToken>()).WasNeverCalled();
+    }
+
+    [Test]
+    public async Task LoginAsync_WhenCodeMissing_ShouldNotExchangeNorSetReady()
+    {
+        var authClientMock = IEuterpeAuthClient.Mock();
+        var (launcher, listenerFactory) = StateEchoingLoopback(null, null);
+        var sut = CreateAuthService(authClientMock, launcher: launcher, listenerFactory: listenerFactory);
+
+        await sut.LoginAsync();
+
+        using var _ = Assert.Multiple();
+        await Assert.That(sut.Ready.IsSet).IsFalse();
+        authClientMock.ExchangeAppTokenAsync(Any<AppTokenRequest>(), Any<CancellationToken>()).WasNeverCalled();
     }
 
     [Test]
