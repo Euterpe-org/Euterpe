@@ -2,7 +2,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Euterpe.Contracts.Account;
-using Euterpe.Core;
 
 namespace Euterpe.Tests;
 

@@ -34,6 +34,8 @@ internal sealed class LoopbackCallbackListener : ILoopbackCallbackListener
         }
     }
 
+    public void Dispose() => _listener.Dispose();
+
     private static async Task<string> ReadRequestLineAsync(NetworkStream stream, CancellationToken cancellationToken)
     {
         var buffer = new byte[4096];
@@ -77,6 +79,4 @@ internal sealed class LoopbackCallbackListener : ILoopbackCallbackListener
         var query = HttpUtility.ParseQueryString(parts[1][(queryStart + 1)..]);
         return new LoopbackCallbackResult(query["code"], query["state"], query["error"]);
     }
-
-    public void Dispose() => _listener.Dispose();
 }
