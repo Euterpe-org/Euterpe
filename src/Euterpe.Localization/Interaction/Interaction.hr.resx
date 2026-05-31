@@ -52,6 +52,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>Instalacija .NET 10 SDK-a nije uspjela</value>
   </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>Prijava nije uspjela. Želiš li pokušati ponovo? Odabir opcije Ne zatvorit će Euterpe.</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>Odabrana putanja nije valjana. Pokušaj ponovo</value>
   </data>

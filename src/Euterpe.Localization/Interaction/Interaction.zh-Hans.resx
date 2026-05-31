@@ -58,6 +58,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>安装 .NET 10 SDK 失败</value>
   </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>登录失败，是否重试？选择“否”将关闭 Euterpe。</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>选择的路径无效，请重新选择</value>
   </data>
