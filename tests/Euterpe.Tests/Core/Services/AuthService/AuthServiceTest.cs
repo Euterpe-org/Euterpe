@@ -20,7 +20,8 @@ public sealed partial class AuthServiceTest
         AuthState? authState = null,
         IPlatformLauncher? launcher = null,
         IPlatformSecureStorage? secureStorage = null,
-        IEuterpeAccountClient? accountClient = null) =>
+        IEuterpeAccountClient? accountClient = null,
+        Func<ILoopbackCallbackListener>? listenerFactory = null) =>
         new()
         {
             AuthState = authState ?? new AuthState(),
@@ -28,8 +29,16 @@ public sealed partial class AuthServiceTest
             AuthClient = authClient ?? IEuterpeAuthClient.Mock(),
             Launcher = launcher ?? IPlatformLauncher.Mock(),
             SecureStorage = secureStorage ?? IPlatformSecureStorage.Mock(),
+            ListenerFactory = listenerFactory ?? (() => ILoopbackCallbackListener.Mock()),
             Logger = _logger
         };
+
+    // Builds a service wired with a loopback that completes login successfully via LoginAsync.
+    private AuthService CreateLoggableService(IEuterpeAuthClient authClient)
+    {
+        var (launcher, listenerFactory) = StateEchoingLoopback(AuthCode, null);
+        return CreateAuthService(authClient, launcher: launcher, listenerFactory: listenerFactory);
+    }
 
     private static AuthState CreateLoggedInState() => new()
     {

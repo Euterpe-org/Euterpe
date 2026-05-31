@@ -6,5 +6,6 @@ public static class ByteExtensions
     {
         public string ToHexString() => Convert.ToHexString(bytes);
         public string ToHexStringLower() => Convert.ToHexStringLower(bytes);
+        public string ToBase64Url() => Convert.ToBase64String(bytes).TrimEnd('=').Replace('+', '-').Replace('/', '_');
     }
 }
