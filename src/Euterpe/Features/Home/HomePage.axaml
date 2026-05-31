@@ -37,29 +37,33 @@
                 Source="{DynamicResource TitleImage}" />
         </Button>
 
-        <!--  Easter Egg: Madeline  -->
-        <Border
-            x:Name="MadelineOverlay"
-            Background="Transparent"
-            HorizontalAlignment="Center"
-            IsVisible="False"
-            PointerPressed="MadelineOverlay_PointerPressed"
-            VerticalAlignment="Center">
-            <gif:GifImage
-                Height="200"
-                Source="{m:GifSource /Assets/madeline.gif}"
-                Stretch="Uniform" />
-        </Border>
-
-        <!--  Play Button  -->
-        <e:PlayButton
-            Command="{Binding LaunchGameCommand, Mode=OneTime}"
-            Content="{Localize {x:Static loc:XAMLLiteral.Button_LaunchGame}}"
+        <!--  Play Button with Madeline easter egg stacked above it  -->
+        <StackPanel
             HorizontalAlignment="Right"
-            ItemsSource="{Binding GameModes, Mode=OneTime}"
-            Margin="0,0,120,80"
-            SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}"
-            VerticalAlignment="Bottom" />
+            Margin="0,0,130,80"
+            Spacing="1"
+            VerticalAlignment="Bottom">
+            <!--  Easter Egg: Madeline  -->
+            <Border
+                x:Name="MadelineOverlay"
+                Background="Transparent"
+                HorizontalAlignment="Right"
+                IsVisible="False"
+                PointerPressed="MadelineOverlay_PointerPressed">
+                <gif:GifImage
+                    Height="200"
+                    Source="{m:GifSource /Assets/madeline.gif}"
+                    Stretch="Uniform" />
+            </Border>
+
+            <!--  Play Button  -->
+            <e:PlayButton
+                Command="{Binding LaunchGameCommand, Mode=OneTime}"
+                Content="{Localize {x:Static loc:XAMLLiteral.Button_LaunchGame}}"
+                HorizontalAlignment="Right"
+                ItemsSource="{Binding GameModes, Mode=OneTime}"
+                SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}" />
+        </StackPanel>
 
         <!--  Support Card  -->
         <Border
