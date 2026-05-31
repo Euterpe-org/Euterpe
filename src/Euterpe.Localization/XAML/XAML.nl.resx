@@ -352,6 +352,18 @@
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Vertel ons waar het spel is geïnstalleerd</value>
   </data>
+  <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
+    <value>Euterpe is niet volledig compatibel met het MDMC-ecosysteem (Muse Dash Modding Community). Als u het liever niet gebruikt, kunt u Euterpe nu nog sluiten. Doorgaan verwijdert de mods en charts die al op uw apparaat staan niet, en u kunt gewoon blijven spelen. CustomAlbums wordt echter vervangen door de officiële mod van Euterpe: later terugschakelen naar CustomAlbums maakt het spel onspeelbaar, en andere mods of chartbeheerders zoals MuseDashTOOL werken mogelijk niet meer.</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
+    <value>Beperkte compatibiliteit met MDMC</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
+    <value>Neem even de tijd om dit te lezen en kies daarna uw spelmap.</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
+    <value>Voordat u begint</value>
+  </data>
   <data name="Setup_GamePath_Invalid" xml:space="preserve">
     <value>Geen geldige spelmap</value>
   </data>

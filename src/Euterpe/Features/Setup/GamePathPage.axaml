@@ -34,14 +34,14 @@
                 <TextBlock
                     FontSize="22"
                     FontWeight="Bold"
-                    Text="{Localize {x:Static loc:XAMLLiteral.Setup_Title_GamePath}}"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_WelcomeTitle}}"
                     Theme="{StaticResource TitleTextBlock}"
                     VerticalAlignment="Center" />
             </StackPanel>
             <TextBlock
                 Foreground="{DynamicResource SecondaryTextColor}"
                 Margin="48,0,0,0"
-                Text="{Localize {x:Static loc:XAMLLiteral.Setup_Description_GamePath}}" />
+                Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_WelcomeSubtitle}}" />
         </StackPanel>
 
         <!--  Body  -->
@@ -52,34 +52,71 @@
             Spacing="14"
             VerticalAlignment="Center">
 
-            <!--  Selected folder display + browse  -->
-            <Grid
-                ColumnDefinitions="*,Auto">
-                <Border
-                    Grid.Column="0"
-                    Background="{DynamicResource SecondaryCardColor}"
-                    CornerRadius="6"
-                    Margin="0,0,8,0"
-                    Padding="12,8"
-                    Theme="{DynamicResource CardBorder}">
+            <!--  MDMC compatibility warning  -->
+            <Border
+                Background="{DynamicResource SecondaryCardColor}"
+                BorderBrush="#E0A106"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="16,12">
+                <StackPanel Spacing="6">
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Spacing="8">
+                        <TextBlock
+                            FontFamily="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji"
+                            FontSize="16"
+                            Text="⚠️"
+                            VerticalAlignment="Center" />
+                        <TextBlock
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Foreground="#E0A106"
+                            Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning_Title}}"
+                            VerticalAlignment="Center" />
+                    </StackPanel>
                     <TextBlock
                         FontSize="12"
-                        Text="{Binding SelectedFolder}"
-                        TextTrimming="CharacterEllipsis"
-                        VerticalAlignment="Center" />
-                </Border>
-                <Button
-                    Grid.Column="1"
-                    Command="{Binding BrowseCommand}"
-                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Browse}}" />
-            </Grid>
+                        Foreground="{DynamicResource SecondaryTextColor}"
+                        Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning}}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
 
-            <!--  Validation message  -->
-            <TextBlock
-                FontSize="12"
-                Foreground="#D14343"
-                IsVisible="{Binding ShowInvalidMessage}"
-                Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_Invalid}}" />
+            <!--  Game folder picker  -->
+            <StackPanel
+                Spacing="6">
+                <TextBlock
+                    FontWeight="SemiBold"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolder}}" />
+                <Grid
+                    ColumnDefinitions="*,Auto">
+                    <Border
+                        Grid.Column="0"
+                        Background="{DynamicResource SecondaryCardColor}"
+                        CornerRadius="6"
+                        Margin="0,0,8,0"
+                        Padding="12,8"
+                        Theme="{DynamicResource CardBorder}">
+                        <TextBlock
+                            FontSize="12"
+                            Text="{Binding SelectedFolder}"
+                            TextTrimming="CharacterEllipsis"
+                            VerticalAlignment="Center" />
+                    </Border>
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding BrowseCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.Button_Browse}}" />
+                </Grid>
+
+                <!--  Validation message  -->
+                <TextBlock
+                    FontSize="12"
+                    Foreground="#D14343"
+                    IsVisible="{Binding ShowInvalidMessage}"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_Invalid}}" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
