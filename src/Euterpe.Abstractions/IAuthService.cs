@@ -34,11 +34,6 @@ public interface IAuthService
     Task<string> RenewAccessTokenAsync(string staleToken);
 
     /// <summary>
-    ///     Handle the deep link callback with the authorization code.
-    /// </summary>
-    Task CompleteLoginAsync(string code);
-
-    /// <summary>
     ///     Try to restore the session from stored tokens on startup.
     /// </summary>
     /// <returns>True if session was restored successfully.</returns>

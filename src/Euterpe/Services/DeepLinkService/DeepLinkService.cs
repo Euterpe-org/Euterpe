@@ -54,10 +54,6 @@ public sealed partial class DeepLinkService
                 await HandleChartActionAsync(path).ConfigureAwait(false);
                 break;
 
-            case "auth":
-                await HandleAuthCallbackAsync(query).ConfigureAwait(false);
-                break;
-
             case "go":
                 await NavigationService.NavigateToAsync($"/{path}").ConfigureAwait(false);
                 break;

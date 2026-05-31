@@ -11,9 +11,9 @@ public sealed partial class AuthServiceTest
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.ExchangeAppTokenAsync(Any<AppTokenRequest>(), Any<CancellationToken>())
             .Returns(new AppTokenResponse(ValidAccessToken, ValidRefreshToken, TestUser));
-        var sut = CreateAuthService(authClientMock);
+        var sut = CreateLoggableService(authClientMock);
 
-        await sut.CompleteLoginAsync(AuthCode);
+        await sut.LoginAsync();
         await sut.LogoutAsync();
 
         using var _ = Assert.Multiple();
@@ -30,9 +30,9 @@ public sealed partial class AuthServiceTest
             .Returns(new AppTokenResponse(ValidAccessToken, ValidRefreshToken, TestUser));
         authClientMock.LogoutAsync(Any<LogoutRequest>(), Any<CancellationToken>())
             .Throws(new HttpRequestException("Network error"));
-        var sut = CreateAuthService(authClientMock);
+        var sut = CreateLoggableService(authClientMock);
 
-        await sut.CompleteLoginAsync(AuthCode);
+        await sut.LoginAsync();
         await sut.LogoutAsync();
 
         using var _ = Assert.Multiple();
