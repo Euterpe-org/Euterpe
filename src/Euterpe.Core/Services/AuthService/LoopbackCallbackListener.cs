@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Web;
+using Euterpe.Contracts.Account;
 
 namespace Euterpe.Core;
 
