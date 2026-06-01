@@ -65,7 +65,7 @@
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.TUnit" Version="31.18.0"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
-        <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.58"/>
+        <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.98"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
         <GlobalPackageReference Include="Roslynator.Formatting.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
     </ItemGroup>
