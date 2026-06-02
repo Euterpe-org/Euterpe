@@ -9,7 +9,7 @@
         <RefitVersion>10.1.6</RefitVersion>
         <R3Version>1.3.1</R3Version>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
-        <TUnitVersion>1.47.0</TUnitVersion>
+        <TUnitVersion>1.48.6</TUnitVersion>
         <UrsaVersion>2.0.0</UrsaVersion>
     </PropertyGroup>
     <ItemGroup>
