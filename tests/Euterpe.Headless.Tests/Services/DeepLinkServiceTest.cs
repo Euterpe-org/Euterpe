@@ -14,7 +14,6 @@ namespace Euterpe.Headless.Tests.Services;
 public sealed class DeepLinkServiceTest : HeadlessTest
 {
     private static DeepLinkService NewService(
-        IAuthService? auth = null,
         IDeepLinkSetup? setup = null,
         MockLogger<DeepLinkService>? logger = null,
         IModManageService? modManageService = null)
@@ -34,7 +33,6 @@ public sealed class DeepLinkServiceTest : HeadlessTest
             },
             Logger = logger ?? Mock.Logger<DeepLinkService>(),
             DeepLinkSetup = setup ?? IDeepLinkSetup.Mock(),
-            LazyAuthService = new Lazy<IAuthService>(() => auth ?? IAuthService.Mock()),
             GameScope = new BehaviorSubject<ILifetimeScope>(container)
         };
     }
