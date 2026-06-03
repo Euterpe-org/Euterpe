@@ -23,6 +23,12 @@ internal sealed partial class ModManageService : IModManageService
 
     public Task UpdateModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod));
 
+    public Task ReinstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ReinstallModCoreAsync(mod));
+
+    public Task UninstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UninstallModCoreAsync(mod));
+
+    public Task ToggleModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ToggleModCoreAsync(mod));
+
     public async Task UpdateAllModsAsync()
     {
         var outdatedMods = _sourceCache.Items.Where(mod => mod.State is ModState.Outdated).ToArray();
@@ -33,20 +39,6 @@ internal sealed partial class ModManageService : IModManageService
             await UpdateModAsync(mod).ConfigureAwait(false);
         }
     }
-
-    public Task ReinstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ReinstallModCoreAsync(mod));
-
-    public Task UninstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UninstallModCoreAsync(mod));
-
-    public Task ToggleModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ToggleModCoreAsync(mod));
-
-    private async Task RunExclusiveAsync(ModDto mod, Func<Task> action) =>
-        await _singleFlight.RunAsync(mod.Name, async () =>
-        {
-            mod.IsProcessing = true;
-            await action().ConfigureAwait(false);
-            mod.IsProcessing = false;
-        }).ConfigureAwait(false);
 
     #region Injections
 

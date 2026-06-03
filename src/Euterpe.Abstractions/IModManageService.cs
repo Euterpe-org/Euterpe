@@ -7,8 +7,8 @@ public interface IModManageService
     ModDto? FindModByName(string name);
     Task InstallModAsync(ModDto mod);
     Task UpdateModAsync(ModDto mod);
-    Task UpdateAllModsAsync();
     Task ReinstallModAsync(ModDto mod);
     Task UninstallModAsync(ModDto mod);
     Task ToggleModAsync(ModDto mod);
+    Task UpdateAllModsAsync();
 }

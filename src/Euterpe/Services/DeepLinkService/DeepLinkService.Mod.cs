@@ -63,6 +63,12 @@ public sealed partial class DeepLinkService
             return;
         }
 
+        if (mod.State is not ModState.Outdated)
+        {
+            Logger.ZLogInformation($"Deep link: mod '{modName}' is not outdated and cannot be updated");
+            return;
+        }
+
         await ModManageService.UpdateModAsync(mod).ConfigureAwait(false);
     }
 
