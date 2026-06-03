@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text;
 using Euterpe.Contracts.Account;
 
 namespace Euterpe.Core;
@@ -14,13 +15,14 @@ internal sealed partial class AuthService : IAuthService
 
     public async Task LoginAsync()
     {
-        var pkce = PkcePair.Generate();
+        var verifier = RandomNumberGenerator.GetBytes(32).ToBase64Url();
+        var challenge = SHA256.HashData(Encoding.ASCII.GetBytes(verifier)).ToBase64Url();
         var state = RandomNumberGenerator.GetBytes(32).ToBase64Url();
 
         using var listener = ListenerFactory();
         var redirectUri = $"http://127.0.0.1:{listener.Port}/callback";
 
-        await Launcher.OpenUriAsync(BuildAuthorizeUrl(redirectUri, pkce.Challenge, state)).ConfigureAwait(false);
+        await Launcher.OpenUriAsync(BuildAuthorizeUrl(redirectUri, challenge, state)).ConfigureAwait(false);
 
         using var cts = new CancellationTokenSource(CallbackTimeout);
         LoopbackCallbackResult callback;
@@ -54,7 +56,7 @@ internal sealed partial class AuthService : IAuthService
 
         try
         {
-            await ExchangeCodeAsync(callback.Code, pkce.Verifier, redirectUri).ConfigureAwait(false);
+            await ExchangeCodeAsync(callback.Code, verifier, redirectUri).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
