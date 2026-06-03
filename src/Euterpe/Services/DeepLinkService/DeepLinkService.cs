@@ -50,6 +50,10 @@ public sealed partial class DeepLinkService
                 await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
 
+            case "chart":
+                await HandleChartActionAsync(path).ConfigureAwait(false);
+                break;
+
             case "auth":
                 await HandleAuthCallbackAsync(query).ConfigureAwait(false);
                 break;
