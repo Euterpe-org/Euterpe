@@ -1,4 +1,4 @@
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using Autofac;
 using Euterpe.Abstractions;
 using Euterpe.Models.Mods;
@@ -110,15 +110,11 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     // Private HandleModActionAsync / HandleChartActionAsync tests (bypass the NavigationService.Ready
     // gate + ActivateMainWindow sitting between HandleUri and the per-domain dispatch).
 
-    private static Task InvokeModAction(DeepLinkService service, string path) =>
-        (Task)typeof(DeepLinkService)
-            .GetMethod("HandleModActionAsync", BindingFlags.NonPublic | BindingFlags.Instance)!
-            .Invoke(service, [path])!;
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleModActionAsync")]
+    private static extern Task InvokeModAction(DeepLinkService service, string path);
 
-    private static Task InvokeChartAction(DeepLinkService service, string path) =>
-        (Task)typeof(DeepLinkService)
-            .GetMethod("HandleChartActionAsync", BindingFlags.NonPublic | BindingFlags.Instance)!
-            .Invoke(service, [path])!;
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleChartActionAsync")]
+    private static extern Task InvokeChartAction(DeepLinkService service, string path);
 
     [Test]
     public async Task HandleModAction_Update_WithoutName_UpdatesAllMods()
