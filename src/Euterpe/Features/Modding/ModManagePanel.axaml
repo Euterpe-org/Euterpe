@@ -463,6 +463,7 @@
 
                             <!--  Repository  -->
                             <u:DescriptionsItem
+                                IsVisible="{Binding SelectedMod.HasRepository, Mode=OneWay}"
                                 Label="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}">
                                 <HyperlinkButton
                                     Classes="WithIcon Underline"

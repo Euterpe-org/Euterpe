@@ -62,6 +62,7 @@ public sealed partial class ModDto : ObservableObject
 
     // GitHub Repo
     public string RepoPageUrl => GitHubBaseUrl + Repository;
+    public bool HasRepository => !Repository.IsNullOrEmpty();
 
     // Screenshots
     public bool HasScreenshots => Screenshots.Length > 0;
