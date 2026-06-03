@@ -56,11 +56,14 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
             }
 
             var result = await MessageBoxService.WarningConfirmAsync(MessageBox_Content_Login_Failed).ConfigureAwait(true);
-            if (result is not MessageBoxResult.Yes)
+            if (result is MessageBoxResult.Yes)
             {
-                GetCurrentDesktop().Shutdown();
-                return false;
+                continue;
             }
+
+            Ready.Set();
+            GetCurrentDesktop().Shutdown();
+            return false;
         }
     }
 
