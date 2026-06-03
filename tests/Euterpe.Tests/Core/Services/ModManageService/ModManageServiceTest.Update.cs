@@ -52,6 +52,62 @@ public sealed partial class ModManageServiceTest
     }
 
     [Test]
+    public async Task UpdateAllModsAsync_UpdatesOnlyOutdatedMods()
+    {
+        var outdated = CreateInstalledMod(name: "Outdated", fileName: "Outdated.dll");
+        var upToDate = CreateInstalledMod(name: "UpToDate", fileName: "UpToDate.dll");
+        upToDate.SHA256 = "shared-sha";
+
+        var fileSystemServiceMock = IFileSystemService.Mock();
+        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
+
+        var downloadManagerMock = IGameDownloadManager.Mock();
+        downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
+        downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns(
+        [
+            CreateWebMod("Outdated", version: "2.0.0"),
+            CreateWebMod("UpToDate", version: "1.0.0", sha256: "shared-sha")
+        ]);
+        var notificationServiceMock = INotificationService.Mock();
+
+        var sut = CreateModManageService(
+            gameDownloadManager: downloadManagerMock,
+            fileSystemService: fileSystemServiceMock,
+            gameLocalService: LocalServiceWith(
+                ("/mods/Outdated.dll", outdated),
+                ("/mods/UpToDate.dll", upToDate)),
+            notificationService: notificationServiceMock);
+
+        await sut.InitializeModsAsync();
+        await sut.UpdateAllModsAsync();
+
+        downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task UpdateAllModsAsync_WhenNoOutdatedMods_DoesNotDownload()
+    {
+        var upToDate = CreateInstalledMod();
+        upToDate.SHA256 = "shared-sha";
+
+        var downloadManagerMock = IGameDownloadManager.Mock();
+        downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
+        downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns(
+        [
+            CreateWebMod(sha256: "shared-sha")
+        ]);
+
+        var sut = CreateModManageService(
+            gameDownloadManager: downloadManagerMock,
+            gameLocalService: LocalServiceWith((TestModFilePath, upToDate)));
+
+        await sut.InitializeModsAsync();
+        await sut.UpdateAllModsAsync();
+
+        downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Never);
+    }
+
+    [Test]
     public async Task UpdateModAsync_WhenDownloadFails_NotifiesError()
     {
         var mod = CreateInstalledMod();

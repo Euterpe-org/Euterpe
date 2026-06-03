@@ -23,6 +23,17 @@ internal sealed partial class ModManageService : IModManageService
 
     public Task UpdateModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod));
 
+    public async Task UpdateAllModsAsync()
+    {
+        var outdatedMods = _sourceCache.Items.Where(mod => mod.State is ModState.Outdated).ToArray();
+        Logger.ZLogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
+
+        foreach (var mod in outdatedMods)
+        {
+            await UpdateModAsync(mod).ConfigureAwait(false);
+        }
+    }
+
     public Task ReinstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ReinstallModCoreAsync(mod));
 
     public Task UninstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UninstallModCoreAsync(mod));
