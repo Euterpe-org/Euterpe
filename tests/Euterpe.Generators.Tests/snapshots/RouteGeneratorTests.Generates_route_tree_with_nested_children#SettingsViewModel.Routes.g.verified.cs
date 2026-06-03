@@ -28,7 +28,7 @@ partial class SettingsViewModel
     private static readonly FrozenDictionary<string, global::System.Func<global::Autofac.IComponentContext, global::Euterpe.Mvvm.ViewModelBase>> RouteLookup = new global::System.Collections.Generic.Dictionary<string, global::System.Func<global::Autofac.IComponentContext, global::Euterpe.Mvvm.ViewModelBase>>
     {
         ["/settings/general"] = static ctx => ctx.Resolve<global::Sample.GeneralViewModel>(),
-        ["/settings/advanced"] = static ctx => ctx.Resolve<global::Sample.AdvancedViewModel>(),
+        ["/settings/advanced"] = static _ => global::Euterpe.IocContainer.Resolve<global::Sample.AdvancedViewModel>(),
     }.ToFrozenDictionary();
 
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Euterpe.SourceGenerators.RouteGenerator", "1.0.0")]

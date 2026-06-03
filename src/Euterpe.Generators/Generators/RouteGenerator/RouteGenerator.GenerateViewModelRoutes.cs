@@ -93,7 +93,13 @@ public sealed partial class RouteGenerator
             {
                 foreach (var child in children)
                 {
-                    cb.AppendLine($"""["{child.Path}"] = static ctx => ctx.Resolve<global::{child.Namespace}.{child.ClassName}>(),""");
+                    // PerGame children live only in the current game scope, never in the parent's captured
+                    // Container (which is the root scope when the parent page is an app-level singleton), so
+                    // resolve them through IocContainer.Resolve to hit the active game scope instead.
+                    var resolver = child.IsPerGame
+                        ? $"static _ => global::Euterpe.IocContainer.Resolve<global::{child.Namespace}.{child.ClassName}>()"
+                        : $"static ctx => ctx.Resolve<global::{child.Namespace}.{child.ClassName}>()";
+                    cb.AppendLine($"""["{child.Path}"] = {resolver},""");
                 }
             }
 
