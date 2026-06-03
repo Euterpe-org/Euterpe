@@ -81,7 +81,9 @@ public sealed partial class ModManageServiceTest
         await sut.InitializeModsAsync();
         await sut.UpdateAllModsAsync();
 
-        downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Once);
+        using var _ = Assert.Multiple();
+        downloadManagerMock.DownloadModAsync(outdated, Any<CancellationToken>()).WasCalled(Times.Once);
+        downloadManagerMock.DownloadModAsync(upToDate, Any<CancellationToken>()).WasCalled(Times.Never);
     }
 
     [Test]
