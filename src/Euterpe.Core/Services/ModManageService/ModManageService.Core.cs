@@ -123,4 +123,12 @@ internal sealed partial class ModManageService
             NotificationService.ErrorLight(Notification_Content_Mod_Toggle_Failed, mod.Name);
         }
     }
+
+    private async Task RunExclusiveAsync(ModDto mod, Func<Task> action) =>
+        await _singleFlight.RunAsync(mod.Name, async () =>
+        {
+            mod.IsProcessing = true;
+            await action().ConfigureAwait(false);
+            mod.IsProcessing = false;
+        }).ConfigureAwait(false);
 }
