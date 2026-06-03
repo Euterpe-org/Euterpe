@@ -202,7 +202,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     public async Task HandleModAction_Update_NamedInstalledMod_UpdatesThatMod()
     {
         var mods = IModManageService.Mock();
-        var installed = new ModDto { Name = "Euterpe", FileNameWithoutExtension = "Euterpe" };
+        var installed = new ModDto { Name = "Euterpe", FileNameWithoutExtension = "Euterpe", State = ModState.Outdated };
         mods.FindModByName("Euterpe").Returns(installed);
         var service = NewService(modManageService: mods);
 
@@ -219,6 +219,19 @@ public sealed class DeepLinkServiceTest : HeadlessTest
         var mods = IModManageService.Mock();
         var notInstalled = new ModDto { Name = "Euterpe" };
         mods.FindModByName("Euterpe").Returns(notInstalled);
+        var service = NewService(modManageService: mods);
+
+        await InvokeModAction(service, "update/Euterpe");
+
+        mods.UpdateModAsync(Any<ModDto>()).WasCalled(Times.Never);
+    }
+
+    [Test]
+    public async Task HandleModAction_Update_NamedNotOutdatedMod_DoesNotUpdate()
+    {
+        var mods = IModManageService.Mock();
+        var upToDate = new ModDto { Name = "Euterpe", FileNameWithoutExtension = "Euterpe", State = ModState.Normal };
+        mods.FindModByName("Euterpe").Returns(upToDate);
         var service = NewService(modManageService: mods);
 
         await InvokeModAction(service, "update/Euterpe");
