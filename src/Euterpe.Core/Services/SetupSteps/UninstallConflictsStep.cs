@@ -17,7 +17,7 @@ internal sealed class UninstallConflictsStep : ISetupStep
         foreach (var modName in mod.IncompatibleMods)
         {
             var incompatibleMod = ModManageService.FindModByName(modName);
-            if (incompatibleMod is null)
+            if (incompatibleMod is not { IsLocal: true })
             {
                 continue;
             }
