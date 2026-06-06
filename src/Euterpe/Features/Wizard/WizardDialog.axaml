@@ -55,6 +55,7 @@
                     Classes="Primary"
                     Command="{Binding NextCommand}"
                     Content="{Binding CurrentPage.NextButtonText}"
+                    IsDefault="True"
                     IsEnabled="{Binding CurrentPage.CanGoNext}" />
                 <Button
                     DockPanel.Dock="Right"

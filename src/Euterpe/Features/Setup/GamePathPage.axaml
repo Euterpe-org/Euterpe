@@ -58,7 +58,8 @@
                 CornerRadius="8"
                 Padding="16,12"
                 Theme="{DynamicResource CardBorder}">
-                <StackPanel Spacing="6">
+                <StackPanel
+                    Spacing="6">
                     <StackPanel
                         Orientation="Horizontal"
                         Spacing="8">

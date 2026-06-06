@@ -49,6 +49,7 @@
                     Classes="Primary"
                     Command="{Binding ApplyCommand}"
                     Content="{Localize {x:Static loc:XAMLLiteral.Button_Confirm}}"
+                    IsDefault="True"
                     IsEnabled="{Binding Content.CanGoNext}" />
 
                 <Panel />
