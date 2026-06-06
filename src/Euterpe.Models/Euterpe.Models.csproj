@@ -2,6 +2,7 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="MessagePack"/>
         <PackageReference Include="Riok.Mapperly"/>
         <PackageReference Include="Semver"/>
     </ItemGroup>
