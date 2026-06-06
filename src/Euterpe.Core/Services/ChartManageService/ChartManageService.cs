@@ -1,19 +1,19 @@
-using Euterpe.Contracts.Charts;
-
 namespace Euterpe.Core;
 
 internal sealed partial class ChartManageService : IChartManageService
 {
-    private SourceCache<Chart, string> _sourceCache = null!;
+    private readonly Lazy<Task> _initTask;
+    private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderPath);
 
-    public async Task InitializeChartsAsync(SourceCache<Chart, string> sourceCache)
-    {
-        _sourceCache = sourceCache;
-    }
+    public ChartManageService() => _initTask = new Lazy<Task>(LoadChartsAsync, LazyThreadSafetyMode.ExecutionAndPublication);
+
+    public IObservable<IChangeSet<ChartDto, string>> Connect() => _sourceCache.Connect();
+
+    public Task InitializeChartsAsync() => _initTask.Value;
 
     #region Injections
 
-    public required HttpClient Client { get; init; }
+    public required IChartLocalService ChartLocalService { get; init; }
     public required ILogger<ChartManageService> Logger { get; init; }
 
     #endregion Injections

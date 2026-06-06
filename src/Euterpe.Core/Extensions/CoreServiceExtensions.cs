@@ -156,6 +156,7 @@ public static class CoreServiceExtensions
 
             builder.RegisterType<SetupState>().AsSelf().InstancePerLifetimeScope();
 
+            builder.RegisterType<ChartLocalService>().As<IChartLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GameDownloadManager>().As<IGameDownloadManager>().PropertiesAutowired().InstancePerLifetimeScope();

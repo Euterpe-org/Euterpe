@@ -17,13 +17,6 @@ internal sealed class GameLocalService : IGameLocalService
         return path;
     }
 
-    public string[] GetChartFolderPaths() => Directory.EnumerateDirectories(GameConfig.EuterpeChartsFolder)
-        .ToArray();
-
-    public string[] GetCustomAlbumsChartFilePaths() => Directory.EnumerateFiles(GameConfig.CustomAlbumsChartsFolder)
-        .Where(x => Path.GetExtension(x) is ".json")
-        .ToArray();
-
     public async Task InstallMelonLoaderAsync()
     {
         if (!FileSystemService.CheckFileExists(GameConfig.MelonLoaderZipPath))
@@ -64,20 +57,6 @@ internal sealed class GameLocalService : IGameLocalService
 
         Logger.ZLogInformation($"MelonLoader uninstalled successfully");
         return Task.CompletedTask;
-    }
-
-    public async Task<ChartDto?> LoadChartFromPathAsync(string filePath)
-    {
-        var chart = new ChartDto();
-        try
-        {
-            return chart;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to load chart from {filePath}, skipping");
-            return null;
-        }
     }
 
     public void ReadGameInformation()
