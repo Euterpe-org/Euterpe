@@ -26,6 +26,13 @@ internal sealed class GameLocalService : IGameLocalService
         .Where(x => Path.GetExtension(x) is ".dll")
         .ToArray();
 
+    public string[] GetChartFolderPaths() => Directory.EnumerateDirectories(GameConfig.EuterpeChartsFolder)
+        .ToArray();
+
+    public string[] GetCustomAlbumsChartFilePaths() => Directory.EnumerateFiles(GameConfig.CustomAlbumsChartsFolder)
+        .Where(x => Path.GetExtension(x) is ".json")
+        .ToArray();
+
     public async Task InstallMelonLoaderAsync()
     {
         if (!FileSystemService.CheckFileExists(GameConfig.MelonLoaderZipPath))
@@ -110,6 +117,20 @@ internal sealed class GameLocalService : IGameLocalService
             SHA256 = await SHA256Utils.HexLowerFromPathAsync(filePath).ConfigureAwait(false),
             IsLocal = true
         };
+
+    public async Task<ChartDto?> LoadChartFromPathAsync(string filePath)
+    {
+        var chart = new ChartDto();
+        try
+        {
+            return chart;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to load chart from {filePath}, skipping");
+            return null;
+        }
+    }
 
     public void ReadGameInformation()
     {
