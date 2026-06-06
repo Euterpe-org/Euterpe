@@ -163,6 +163,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<GameLocalService>().As<IGameLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<ModLocalService>().As<IModLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().InstancePerLifetimeScope();
 
             // Setup Steps

@@ -73,7 +73,7 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
             fileSystemService: fileSystemServiceMock,
-            gameLocalService: LocalServiceWith(
+            modLocalService: LocalServiceWith(
                 ("/mods/Outdated.dll", outdated),
                 ("/mods/UpToDate.dll", upToDate)),
             notificationService: notificationServiceMock);
@@ -101,7 +101,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
-            gameLocalService: LocalServiceWith((TestModFilePath, upToDate)));
+            modLocalService: LocalServiceWith((TestModFilePath, upToDate)));
 
         await sut.InitializeModsAsync();
         await sut.UpdateAllModsAsync();

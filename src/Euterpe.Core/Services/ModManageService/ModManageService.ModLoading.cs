@@ -6,8 +6,8 @@ internal sealed partial class ModManageService
 {
     private async Task LoadModsAsync()
     {
-        var localMods = (await GameLocalService.GetModFilePaths()
-                .WhenAllAsync(GameLocalService.LoadModFromPathAsync).ConfigureAwait(false))
+        var localMods = (await ModLocalService.GetModFilePaths()
+                .WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
             .OfType<ModDto>()
             .ToArray();
 

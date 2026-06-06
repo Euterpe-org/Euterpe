@@ -75,7 +75,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             fileSystemService: fileSystemServiceMock,
-            gameLocalService: LocalServiceWith(
+            modLocalService: LocalServiceWith(
                 ("/mods/ModA.disabled", mod),
                 ("/mods/ModB.disabled", dep)));
 
@@ -100,7 +100,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             fileSystemService: fileSystemServiceMock,
-            gameLocalService: LocalServiceWith(
+            modLocalService: LocalServiceWith(
                 ("/mods/ModA.dll", mod),
                 ("/mods/ModB.dll", dep)));
 

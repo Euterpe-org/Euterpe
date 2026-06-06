@@ -21,11 +21,11 @@ public sealed partial class ModManageServiceTest
     [Test]
     public async Task InitializeModsAsync_CalledTwice_OnlyLoadsOnce()
     {
-        var localServiceMock = IGameLocalService.Mock();
+        var localServiceMock = IModLocalService.Mock();
         localServiceMock.GetModFilePaths().Returns([]);
         localServiceMock.GetLibFilePaths().Returns([]);
 
-        var sut = CreateModManageService(gameLocalService: localServiceMock);
+        var sut = CreateModManageService(modLocalService: localServiceMock);
 
         await sut.InitializeModsAsync();
         await sut.InitializeModsAsync();
@@ -38,12 +38,12 @@ public sealed partial class ModManageServiceTest
     [Test]
     public async Task InitializeModsAsync_LoadsLocalModsIntoSourceCache()
     {
-        var localServiceMock = IGameLocalService.Mock();
+        var localServiceMock = IModLocalService.Mock();
         localServiceMock.GetModFilePaths().Returns([TestModFilePath]);
         localServiceMock.GetLibFilePaths().Returns([]);
         localServiceMock.LoadModFromPathAsync(TestModFilePath).Returns(CreateInstalledMod());
 
-        var sut = CreateModManageService(gameLocalService: localServiceMock);
+        var sut = CreateModManageService(modLocalService: localServiceMock);
 
         await sut.InitializeModsAsync();
 

@@ -45,7 +45,7 @@ internal sealed partial class ModManageService : IModManageService
     public required GameConfig GameConfig { get; init; }
     public required IGameDownloadManager GameDownloadManager { get; init; }
     public required IFileSystemService FileSystemService { get; init; }
-    public required IGameLocalService GameLocalService { get; init; }
+    public required IModLocalService ModLocalService { get; init; }
     public required ILogger<ModManageService> Logger { get; init; }
     public required INotificationService NotificationService { get; init; }
 

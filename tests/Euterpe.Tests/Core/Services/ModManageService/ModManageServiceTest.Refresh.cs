@@ -9,7 +9,7 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(
             game,
             DownloadManagerWith(CreateWebMod(melonVersion: "0.5.0")),
-            gameLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
+            modLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
         await sut.InitializeModsAsync();
         var mod = sut.FindModByName(TestModName);
@@ -28,7 +28,7 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(
             game,
             DownloadManagerWith(CreateWebMod(melonVersion: "0.5.0")),
-            gameLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
+            modLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
         await sut.InitializeModsAsync();
         var mod = sut.FindModByName(TestModName);
@@ -47,7 +47,7 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(
             game,
             DownloadManagerWith(CreateWebMod(version: "2.0.0", melonVersion: "0.5.0")),
-            gameLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
+            modLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
 
         await sut.InitializeModsAsync();
         var mod = sut.FindModByName(TestModName);

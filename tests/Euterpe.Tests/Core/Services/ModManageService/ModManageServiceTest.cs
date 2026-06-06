@@ -38,7 +38,7 @@ public sealed partial class ModManageServiceTest
         GameConfig? game = null,
         IGameDownloadManager? gameDownloadManager = null,
         IFileSystemService? fileSystemService = null,
-        IGameLocalService? gameLocalService = null,
+        IModLocalService? modLocalService = null,
         INotificationService? notificationService = null) =>
         new()
         {
@@ -46,7 +46,7 @@ public sealed partial class ModManageServiceTest
             Logger = _logger,
             GameDownloadManager = gameDownloadManager ?? CreateEmptyDownloadManager(),
             FileSystemService = fileSystemService ?? IFileSystemService.Mock(),
-            GameLocalService = gameLocalService ?? CreateEmptyLocalService(),
+            ModLocalService = modLocalService ?? CreateEmptyLocalService(),
             NotificationService = notificationService ?? INotificationService.Mock()
         };
 
@@ -107,17 +107,17 @@ public sealed partial class ModManageServiceTest
         return mock;
     }
 
-    private static IGameLocalService CreateEmptyLocalService()
+    private static IModLocalService CreateEmptyLocalService()
     {
-        var mock = IGameLocalService.Mock();
+        var mock = IModLocalService.Mock();
         mock.GetModFilePaths().Returns([]);
         mock.GetLibFilePaths().Returns([]);
         return mock;
     }
 
-    private static IGameLocalService LocalServiceWith(params (string Path, ModDto Mod)[] mods)
+    private static IModLocalService LocalServiceWith(params (string Path, ModDto Mod)[] mods)
     {
-        var mock = IGameLocalService.Mock();
+        var mock = IModLocalService.Mock();
         mock.GetModFilePaths().Returns(mods.Select(m => m.Path).ToArray());
         mock.GetLibFilePaths().Returns([]);
         foreach (var (path, mod) in mods)
