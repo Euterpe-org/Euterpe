@@ -54,8 +54,8 @@ public sealed partial class ModManageServiceTest
     [Test]
     public async Task UpdateAllModsAsync_UpdatesOnlyOutdatedMods()
     {
-        var outdated = CreateInstalledMod(name: "Outdated", fileName: "Outdated.dll");
-        var upToDate = CreateInstalledMod(name: "UpToDate", fileName: "UpToDate.dll");
+        var outdated = CreateInstalledMod("Outdated", "Outdated.dll");
+        var upToDate = CreateInstalledMod("UpToDate", "UpToDate.dll");
         upToDate.SHA256 = "shared-sha";
 
         var fileSystemServiceMock = IFileSystemService.Mock();
@@ -65,8 +65,8 @@ public sealed partial class ModManageServiceTest
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns(
         [
-            CreateWebMod("Outdated", version: "2.0.0"),
-            CreateWebMod("UpToDate", version: "1.0.0", sha256: "shared-sha")
+            CreateWebMod("Outdated", "2.0.0"),
+            CreateWebMod("UpToDate", "1.0.0", "shared-sha")
         ]);
         var notificationServiceMock = INotificationService.Mock();
 

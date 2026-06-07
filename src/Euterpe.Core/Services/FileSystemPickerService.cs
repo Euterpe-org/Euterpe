@@ -87,7 +87,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle,
                 FileTypeFilter =
                 [
-                    ..extraFileTypes ?? [],
+                    .. extraFileTypes ?? [],
                     new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }
                 ]
             }).ConfigureAwait(true);
@@ -104,7 +104,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle,
                 FileTypeFilter =
                 [
-                    ..extraFileTypes ?? [],
+                    .. extraFileTypes ?? [],
                     new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }
                 ]
             }).ConfigureAwait(true);
