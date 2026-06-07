@@ -1,9 +1,9 @@
+using static Euterpe.Models.Charts.ChartFiles;
+
 namespace Euterpe.Core;
 
 internal sealed class ChartLocalService : IChartLocalService
 {
-    private const string ManifestFileName = "manifest.epk";
-
     public string[] GetChartFolderPaths(ChartSource source) =>
         Directory.EnumerateDirectories(
                 source switch
@@ -36,6 +36,7 @@ internal sealed class ChartLocalService : IChartLocalService
                 return new ChartDto
                 {
                     FolderPath = chartFolder,
+                    FolderName = Path.GetFileName(chartFolder),
                     Manifest = manifest,
                     Source = source
                 };

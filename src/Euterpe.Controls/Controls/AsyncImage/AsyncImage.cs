@@ -76,13 +76,20 @@ public sealed class AsyncImage : TemplatedControl
         Bitmap bitmap;
         try
         {
-            var stream = await SharedHttpClient.GetStreamAsync(uri, token).ConfigureAwait(false);
-            await using (stream.ConfigureAwait(false))
+            if (uri.IsFile)
             {
-                using var memoryStream = new MemoryStream();
-                await stream.CopyToAsync(memoryStream, token).ConfigureAwait(false);
-                memoryStream.Position = 0;
-                bitmap = new Bitmap(memoryStream);
+                bitmap = await Task.Run(() => new Bitmap(uri.LocalPath), token).ConfigureAwait(false);
+            }
+            else
+            {
+                var stream = await SharedHttpClient.GetStreamAsync(uri, token).ConfigureAwait(false);
+                await using (stream.ConfigureAwait(false))
+                {
+                    using var memoryStream = new MemoryStream();
+                    await stream.CopyToAsync(memoryStream, token).ConfigureAwait(false);
+                    memoryStream.Position = 0;
+                    bitmap = new Bitmap(memoryStream);
+                }
             }
         }
         catch

@@ -61,16 +61,16 @@
   <data name="Button_Update" xml:space="preserve">
     <value>업데이트</value>
   </data>
-  <data name="ChartFilterType_Easy" xml:space="preserve">
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>쉬움</value>
   </data>
-  <data name="ChartFilterType_Hard" xml:space="preserve">
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
     <value>어려움</value>
   </data>
-  <data name="ChartFilterType_Hidden" xml:space="preserve">
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
     <value>히든</value>
   </data>
-  <data name="ChartFilterType_Master" xml:space="preserve">
+  <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>마스터</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">

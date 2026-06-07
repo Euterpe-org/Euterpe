@@ -61,16 +61,16 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Actualizar</value>
   </data>
-  <data name="ChartFilterType_Easy" xml:space="preserve">
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Fácil</value>
   </data>
-  <data name="ChartFilterType_Hard" xml:space="preserve">
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
     <value>Difícil</value>
   </data>
-  <data name="ChartFilterType_Hidden" xml:space="preserve">
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
     <value>Oculto</value>
   </data>
-  <data name="ChartFilterType_Master" xml:space="preserve">
+  <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>Maestro</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">

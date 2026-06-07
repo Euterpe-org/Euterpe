@@ -1,8 +1,11 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Euterpe.Models.Charts"
     xmlns:vm="using:Euterpe.Features.Charting"
     x:Class="Euterpe.Features.Charting.ChartManagePanel"
     x:DataType="vm:ChartManagePanelViewModel"
@@ -14,11 +17,99 @@
         <vm:ChartManagePanelViewModel />
     </Design.DataContext>
 
-    <TextBlock
-        HorizontalAlignment="Center"
-        TextAlignment="Center"
-        VerticalAlignment="Center">
-        ChartsPanel still work in progress...
-    </TextBlock>
+    <Grid
+        Margin="16"
+        RowDefinitions="Auto,*">
+
+        <!--  Top bar: source toggle + search + stop  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="Auto,*,Auto"
+            Margin="0,0,0,12">
+            <ComboBox
+                Grid.Column="0"
+                MinWidth="120"
+                SelectedIndex="{Binding SelectedChartSourceIndex}">
+                <ComboBoxItem>Online</ComboBoxItem>
+                <ComboBoxItem>Offline</ComboBoxItem>
+            </ComboBox>
+
+            <TextBox
+                Grid.Column="1"
+                Margin="12,0"
+                PlaceholderText="Search charts..."
+                Text="{Binding SearchText}" />
+
+            <Button
+                Grid.Column="2"
+                Command="{Binding StopMusicCommand}"
+                Content="Stop" />
+        </Grid>
+
+        <!--  Chart list  -->
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Charts}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:ChartDto">
+                        <Border
+                            Background="{DynamicResource SecondaryCardColor}"
+                            CornerRadius="8"
+                            Margin="0,0,0,8"
+                            Padding="8">
+                            <Grid ColumnDefinitions="64,*,Auto">
+                                <e:AsyncImage
+                                    Grid.Column="0"
+                                    Width="64"
+                                    Height="64"
+                                    Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
+                                    ClipToBounds="True"
+                                    CornerRadius="6"
+                                    Source="{Binding CoverPath}"
+                                    Stretch="UniformToFill" />
+
+                                <StackPanel
+                                    Grid.Column="1"
+                                    Margin="12,0"
+                                    VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Text="{Binding Manifest.Meta.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Opacity="0.7"
+                                        Text="{Binding Manifest.Meta.Author}" />
+
+                                    <ItemsControl
+                                        Margin="0,4,0,0"
+                                        ItemsSource="{Binding Difficulties}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" Spacing="4" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="models:ChartDifficulty">
+                                                <Image
+                                                    Width="20"
+                                                    Height="20"
+                                                    Source="{Binding ., Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+
+                                <Button
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding $parent[UserControl].DataContext.PlayCommand}"
+                                    CommandParameter="{Binding}"
+                                    Content="▶ Play" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
 
 </UserControl>
