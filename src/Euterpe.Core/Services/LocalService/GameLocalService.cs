@@ -19,17 +19,14 @@ internal sealed class GameLocalService : IGameLocalService
 
     public async Task InstallMelonLoaderAsync()
     {
-        if (!FileSystemService.CheckFileExists(GameConfig.MelonLoaderZipPath))
+        if (!File.Exists(GameConfig.MelonLoaderZipPath))
         {
-            throw new InvalidOperationException($"MelonLoader zip not found at {GameConfig.MelonLoaderZipPath}");
+            throw new FileNotFoundException($"MelonLoader zip not found at {GameConfig.MelonLoaderZipPath}", GameConfig.MelonLoaderZipPath);
         }
 
         await ArchiveService.ExtractZipFileAsync(GameConfig.MelonLoaderZipPath, GameConfig.Folder).ConfigureAwait(false);
 
-        if (!FileSystemService.TryDeleteFile(GameConfig.MelonLoaderZipPath))
-        {
-            throw new InvalidOperationException($"Failed to delete MelonLoader zip at {GameConfig.MelonLoaderZipPath}");
-        }
+        FileSystemService.DeleteFile(GameConfig.MelonLoaderZipPath);
 
         Logger.ZLogInformation($"MelonLoader installed successfully");
     }
@@ -44,16 +41,10 @@ internal sealed class GameLocalService : IGameLocalService
 
         foreach (var path in paths)
         {
-            if (!FileSystemService.TryDeleteFile(path, DeleteOption.IgnoreIfNotFound))
-            {
-                throw new InvalidOperationException($"Failed to delete {path}");
-            }
+            FileSystemService.DeleteFile(path, DeleteOption.IgnoreIfNotFound);
         }
 
-        if (!FileSystemService.TryDeleteDirectory(GameConfig.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound))
-        {
-            throw new InvalidOperationException($"Failed to delete MelonLoader folder at {GameConfig.MelonLoaderFolder}");
-        }
+        FileSystemService.DeleteDirectory(GameConfig.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound);
 
         Logger.ZLogInformation($"MelonLoader uninstalled successfully");
         return Task.CompletedTask;

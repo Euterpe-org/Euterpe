@@ -8,39 +8,21 @@ internal sealed class FileSystemService : IFileSystemService
 
     #endregion Injections
 
-    public bool CheckFileExists(string filePath)
+    public void DeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
-        if (File.Exists(filePath))
+        if (deleteOption is DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
         {
-            return true;
+            return;
         }
 
-        Logger.ZLogError($"{Path.GetFileName(filePath)} does not exists on {filePath}");
-        return false;
-    }
-
-    public bool CheckDirectoryExists(string directoryPath)
-    {
-        if (Directory.Exists(directoryPath))
-        {
-            return true;
-        }
-
-        Logger.ZLogError($"{Path.GetDirectoryName(directoryPath)} does not exists on {directoryPath}");
-        return false;
+        File.Delete(filePath);
     }
 
     public bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
-        if (deleteOption is DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
-        {
-            Logger.ZLogWarning($"{filePath} does not exists, skipping deletion");
-            return true;
-        }
-
         try
         {
-            File.Delete(filePath);
+            DeleteFile(filePath, deleteOption);
             return true;
         }
         catch (Exception ex)
@@ -64,17 +46,21 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
-    public bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
+    public void DeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
         if (deleteOption is DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
         {
-            Logger.ZLogWarning($"{directoryPath} does not exists, skipping deletion");
-            return true;
+            return;
         }
 
+        Directory.Delete(directoryPath, true);
+    }
+
+    public bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
+    {
         try
         {
-            Directory.Delete(directoryPath, true);
+            DeleteDirectory(directoryPath, deleteOption);
             return true;
         }
         catch (Exception ex)
@@ -103,21 +89,7 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
-    public bool TryCopyDirectory(string sourcePath, string destinationPath)
-    {
-        try
-        {
-            CopyDirectory(sourcePath, destinationPath);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogWarning(ex, $"Failed to copy directory from {sourcePath} to {destinationPath}");
-            return false;
-        }
-    }
-
-    private static void CopyDirectory(string sourcePath, string destinationPath)
+    public void CopyDirectory(string sourcePath, string destinationPath)
     {
         Directory.CreateDirectory(destinationPath);
 

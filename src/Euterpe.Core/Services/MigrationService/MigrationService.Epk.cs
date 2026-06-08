@@ -46,9 +46,13 @@ internal sealed partial class MigrationService
             return;
         }
 
-        if (!FileSystemService.TryCopyDirectory(source.Path, workFolder))
+        try
         {
-            throw new IOException($"Failed to copy folder chart '{source.Path}'");
+            FileSystemService.CopyDirectory(source.Path, workFolder);
+        }
+        catch (Exception ex)
+        {
+            throw new IOException($"Failed to copy folder chart '{source.Path}'", ex);
         }
     }
 
