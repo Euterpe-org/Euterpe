@@ -19,7 +19,8 @@ internal sealed partial class MigrationService
         var info = await ReadInfoAsync(workFolder, cancellationToken).ConfigureAwait(false);
         var cinema = await ReadCinemaAsync(workFolder, cancellationToken).ConfigureAwait(false);
 
-        await NormalizeMusicAsync(workFolder, cancellationToken).ConfigureAwait(false);
+        await NormalizeAudioAsync(workFolder, MusicName, true, cancellationToken).ConfigureAwait(false);
+        await NormalizeAudioAsync(workFolder, DemoName, false, cancellationToken).ConfigureAwait(false);
         NormalizeVideoName(workFolder);
         DeleteConsumedSources(workFolder);
 
@@ -72,17 +73,21 @@ internal sealed partial class MigrationService
             : null;
     }
 
-    private async Task NormalizeMusicAsync(string folder, CancellationToken cancellationToken)
+    private async Task NormalizeAudioAsync(string folder, string name, bool required, CancellationToken cancellationToken)
     {
-        var source = Directory.EnumerateFiles(folder, $"{MusicName}.*").Single();
-        var extension = Path.GetExtension(source)[1..];
+        var matches = Directory.EnumerateFiles(folder, $"{name}.*");
+        var source = required ? matches.Single() : matches.SingleOrDefault();
+        if (source is null)
+        {
+            return;
+        }
 
-        switch (extension)
+        switch (Path.GetExtension(source)[1..])
         {
             case "ogg":
                 return;
             case "mp3":
-                var target = Path.Combine(folder, MusicFileName);
+                var target = Path.Combine(folder, $"{name}{MusicExtension}");
                 await Task.Run(() => AudioConverter.Convert(source, target, MusicExtension[1..], cancellationToken), cancellationToken).ConfigureAwait(false);
                 File.Delete(source);
                 break;

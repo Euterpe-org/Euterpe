@@ -9,6 +9,7 @@ public static class ChartFiles
     public const string CoverName = "cover";
 
     public const string MusicName = "music";
+    public const string DemoName = "demo";
     public const string MusicExtension = ".ogg";
 
     public static readonly IReadOnlyList<string> CoverExtensions = [".png", ".gif"];
