@@ -14,7 +14,11 @@ public interface IFileSystemService
     /// </summary>
     bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
 
-    bool TryMoveFile(string sourcePath, string destinationPath);
+    /// <summary>
+    ///     Moves a file to <paramref name="destinationPath" />, optionally replacing an existing destination.
+    ///     The move itself is an atomic rename when both paths are on the same volume.
+    /// </summary>
+    bool TryMoveFile(string sourcePath, string destinationPath, bool overwrite = false);
 
     /// <summary>
     ///     Deletes a directory recursively, throwing on failure so the caller can surface the real cause. With

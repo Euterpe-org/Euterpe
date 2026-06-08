@@ -39,7 +39,13 @@ public abstract partial class GameConfig
     public string OfflineChartsFolder => Path.Combine(EuterpeChartsFolder, "Offline");
 
     [JsonIgnore]
-    public string TempChartsFolder => Path.Combine(EuterpeChartsFolder, "Temp");
+    public string TempFolder => Path.Combine(Folder, "Euterpe_Temp");
+
+    [JsonIgnore]
+    public string TempChartsFolder => Path.Combine(TempFolder, "Charts");
+
+    [JsonIgnore]
+    public string TempModsFolder => Path.Combine(TempFolder, "Mods");
 
     [JsonIgnore]
     public string CustomAlbumsChartsFolder => Path.Combine(Folder, "Custom_Albums");

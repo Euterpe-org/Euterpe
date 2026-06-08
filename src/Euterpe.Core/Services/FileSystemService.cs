@@ -32,11 +32,11 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
-    public bool TryMoveFile(string sourcePath, string destinationPath)
+    public bool TryMoveFile(string sourcePath, string destinationPath, bool overwrite = false)
     {
         try
         {
-            File.Move(sourcePath, destinationPath);
+            File.Move(sourcePath, destinationPath, overwrite);
             return true;
         }
         catch (Exception ex)
