@@ -4,13 +4,11 @@ namespace Euterpe.Core;
 
 internal sealed class ModLocalService : IModLocalService
 {
-    public string[] GetModFilePaths() => Directory.EnumerateFiles(GameConfig.ModsFolder)
-        .Where(x => Path.GetExtension(x) is ".disabled" || Path.GetExtension(x) is ".dll")
-        .ToArray();
+    public IEnumerable<string> GetModFilePaths() => Directory.EnumerateFiles(GameConfig.ModsFolder)
+        .Where(x => Path.GetExtension(x) is ".disabled" || Path.GetExtension(x) is ".dll");
 
-    public string[] GetLibFilePaths() => Directory.EnumerateFiles(GameConfig.UserLibsFolder)
-        .Where(x => Path.GetExtension(x) is ".dll")
-        .ToArray();
+    public IEnumerable<string> GetLibFilePaths() => Directory.EnumerateFiles(GameConfig.UserLibsFolder)
+        .Where(x => Path.GetExtension(x) is ".dll");
 
     public async Task<ModDto?> LoadModFromPathAsync(string filePath)
     {

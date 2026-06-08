@@ -132,7 +132,8 @@ public sealed class WizardDialogViewModelTest
         Logger = NullLogger<ExecutionPageViewModel>.Instance,
         GameConfig = gameConfig,
         SetupSteps = [],
-        State = state
+        State = state,
+        GameSettingService = IGameSettingService.Mock()
     };
 
     private static WizardDialogViewModel NewFullViewModel(

@@ -439,6 +439,12 @@
   <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>Required mod loader framework</value>
   </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>Migrate Legacy Data</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>Convert charts from older mods like CustomAlbums to Euterpe's format</value>
+  </data>
   <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Mod Template</value>
   </data>

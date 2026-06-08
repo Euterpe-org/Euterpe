@@ -140,7 +140,8 @@ public sealed class RepairDialogViewModelTest
         Logger = NullLogger<ExecutionPageViewModel>.Instance,
         GameConfig = gameConfig,
         SetupSteps = [],
-        State = state
+        State = state,
+        GameSettingService = IGameSettingService.Mock()
     };
 
     private static RepairDialogViewModel NewFullViewModel(

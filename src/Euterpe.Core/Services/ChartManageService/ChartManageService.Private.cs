@@ -18,6 +18,6 @@ internal sealed partial class ChartManageService
             .ToArray();
 
         _sourceCache.AddOrUpdate(charts);
-        Logger.ZLogInformation($"Loaded {charts.Length} {source} chart(s)");
+        Logger.ZLogInformation($"Loaded {charts.Length} {source.ToString()} chart(s)");
     }
 }

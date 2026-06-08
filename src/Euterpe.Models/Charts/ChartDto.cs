@@ -17,7 +17,10 @@ public sealed class ChartDto : ObservableObject
     public required Manifest Manifest { get; init; }
     public ChartSource Source { get; init; } = ChartSource.Offline;
 
-    public string? CoverPath => AssetPath(CoverFileName);
+    public string? CoverPath => CoverExtensions
+        .Select(extension => AssetPath(CoverName + extension))
+        .FirstOrDefault(path => path is not null);
+
     public string? MusicPath => AssetPath(MusicFileName);
     public string? VideoPath => AssetPath(VideoFileName);
 

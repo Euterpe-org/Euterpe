@@ -2,8 +2,8 @@ namespace Euterpe.Abstractions;
 
 public interface IModLocalService
 {
-    string[] GetModFilePaths();
-    string[] GetLibFilePaths();
+    IEnumerable<string> GetModFilePaths();
+    IEnumerable<string> GetLibFilePaths();
     Task<ModDto?> LoadModFromPathAsync(string filePath);
     Task<LibDto> LoadLibFromPathAsync(string filePath);
 }

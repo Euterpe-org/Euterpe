@@ -126,6 +126,12 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>已成功將 MD_DIRECTORY 環境變數設定為 {0}</value>
   </data>
+  <data name="Notification_Content_Migration_Partial" xml:space="preserve">
+    <value>已遷移 {0} 張 CustomAlbums 譜面，{1} 張失敗</value>
+  </data>
+  <data name="Notification_Content_Migration_Success" xml:space="preserve">
+    <value>已遷移 {0} 張 CustomAlbums 譜面</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>模組 {0} 安裝失敗</value>
   </data>

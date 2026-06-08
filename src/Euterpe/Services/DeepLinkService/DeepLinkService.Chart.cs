@@ -9,8 +9,8 @@ public sealed partial class DeepLinkService
         switch (segments)
         {
             case ["convert"]:
-                // Placeholder: legacy chart conversion (CustomAlbums -> epk) is not implemented yet.
-                Logger.ZLogInformation($"Chart convert deep link received (not implemented yet)");
+                Logger.ZLogInformation($"Chart convert deep link received, migrating CustomAlbums charts");
+                await MigrationService.MigrateCustomAlbumsAsync().ConfigureAwait(false);
                 break;
 
             default:

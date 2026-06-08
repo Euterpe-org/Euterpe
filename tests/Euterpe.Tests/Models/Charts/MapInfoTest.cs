@@ -1,3 +1,5 @@
+using Euterpe.Models.Charts.CustomAlbums;
+
 namespace Euterpe.Tests.Charts;
 
 [Category("MapInfoTests")]

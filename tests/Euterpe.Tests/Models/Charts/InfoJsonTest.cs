@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Tests.Charts;
 

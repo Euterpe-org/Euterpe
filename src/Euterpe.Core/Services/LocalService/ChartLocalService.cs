@@ -1,21 +1,21 @@
 using static Euterpe.Models.Charts.ChartFiles;
+using static Euterpe.Models.Charts.CustomAlbums.CustomAlbumFiles;
 
 namespace Euterpe.Core;
 
 internal sealed class ChartLocalService : IChartLocalService
 {
-    public string[] GetChartFolderPaths(ChartSource source) =>
+    public IEnumerable<string> GetChartFolderPaths(ChartSource source) =>
         Directory.EnumerateDirectories(
-                source switch
-                {
-                    ChartSource.Online => GameConfig.OnlineChartsFolder,
-                    ChartSource.Offline => GameConfig.OfflineChartsFolder,
-                    _ => throw new UnreachableException()
-                })
-            .ToArray();
+            source switch
+            {
+                ChartSource.Online => GameConfig.OnlineChartsFolder,
+                ChartSource.Offline => GameConfig.OfflineChartsFolder,
+                _ => throw new UnreachableException()
+            });
 
     public string[] GetCustomAlbumsChartFilePaths() => Directory.EnumerateFiles(GameConfig.CustomAlbumsChartsFolder)
-        .Where(x => Path.GetExtension(x) is ".json")
+        .Where(x => Path.GetExtension(x) is PackageExtension)
         .ToArray();
 
     public async Task<ChartDto?> LoadChartFromPathAsync(string chartFolder, ChartSource source)

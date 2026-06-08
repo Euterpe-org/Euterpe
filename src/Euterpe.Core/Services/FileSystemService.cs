@@ -83,4 +83,23 @@ internal sealed class FileSystemService : IFileSystemService
             return false;
         }
     }
+
+    public bool TryMoveDirectory(string sourcePath, string destinationPath, bool overwrite = false)
+    {
+        try
+        {
+            if (overwrite && Directory.Exists(destinationPath))
+            {
+                Directory.Delete(destinationPath, true);
+            }
+
+            Directory.Move(sourcePath, destinationPath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to move directory from {sourcePath} to {destinationPath}");
+            return false;
+        }
+    }
 }

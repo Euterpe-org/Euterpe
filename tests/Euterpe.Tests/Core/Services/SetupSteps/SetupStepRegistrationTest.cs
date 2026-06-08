@@ -21,7 +21,7 @@ public sealed class SetupStepRegistrationTest
             .RegistrationsFor(new TypedService(typeof(ISetupStep)))
             .ToArray();
 
-        await Assert.That(registrations.Length).IsEqualTo(8);
+        await Assert.That(registrations.Length).IsEqualTo(9);
 
         var implTypes = registrations
             .Select(r => r.Activator.LimitType.Name)
@@ -36,6 +36,7 @@ public sealed class SetupStepRegistrationTest
             "EnvVariableStep",
             "EssentialModsStep",
             "MelonLoaderStep",
+            "MigrationStep",
             "ModTemplateStep",
             "UninstallConflictsStep"
         };

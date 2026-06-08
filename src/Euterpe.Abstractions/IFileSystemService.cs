@@ -21,4 +21,11 @@ public interface IFileSystemService
     bool CheckDirectoryExists(string directoryPath);
 
     bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
+
+    /// <summary>
+    ///     Moves a directory to <paramref name="destinationPath" />, optionally replacing an existing destination.
+    ///     The destination's parent directory must already exist. The move itself is an atomic rename when both
+    ///     paths are on the same volume.
+    /// </summary>
+    bool TryMoveDirectory(string sourcePath, string destinationPath, bool overwrite = false);
 }
