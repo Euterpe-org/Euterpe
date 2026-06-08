@@ -23,6 +23,6 @@ public sealed class ManifestMeta
     [Key("hide_message")] public string? HideMessage { get; set; }
     [Key("cover_dominant_color")] public string? CoverDominantColor { get; set; }
     [Key("uploader")] public ManifestUploader? Uploader { get; set; }
-    [Key("created_at")] public long CreatedAt { get; set; }
-    [Key("updated_at")] public long UpdatedAt { get; set; }
+    [Key("created_at")] public long? CreatedAt { get; set; }
+    [Key("updated_at")] public long? UpdatedAt { get; set; }
 }
