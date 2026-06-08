@@ -2,9 +2,7 @@ using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Tests;
 
-[Category("CustomAlbumMapperTests")]
-[TestSubject(typeof(CustomAlbumMapper))]
-public sealed class CustomAlbumMapperTest
+public sealed partial class MapperTest
 {
     [Test]
     public async Task ToManifestMeta_MapsCoreFields()
@@ -17,7 +15,7 @@ public sealed class CustomAlbumMapperTest
             Scene = "scene_01"
         };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, 0.5f, []);
+        var meta = info.ToManifestMeta(0.5f, []);
 
         await Assert.That(meta.Name).IsEqualTo("Song");
         await Assert.That(meta.NameRomanized).IsEqualTo("Song Romanized");
@@ -31,7 +29,7 @@ public sealed class CustomAlbumMapperTest
     {
         var info = new InfoJson { Name = "Song", Author = "Composer" };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, null, []);
+        var meta = info.ToManifestMeta(null, []);
 
         await Assert.That(meta.NameRomanized).IsEqualTo(string.Empty);
         await Assert.That(meta.HideMode).IsEqualTo(string.Empty);
@@ -50,7 +48,7 @@ public sealed class CustomAlbumMapperTest
     {
         var info = new InfoJson { Name = "Song", Author = "Composer", Bpm = bpm };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, null, []);
+        var meta = info.ToManifestMeta(null, []);
 
         await Assert.That(meta.Bpm).IsEqualTo(expected);
         await Assert.That(meta.BpmMin).IsEqualTo(expectedMin);
@@ -72,7 +70,7 @@ public sealed class CustomAlbumMapperTest
             LevelDesigner3 = ""
         };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, null, [ChartDifficulty.Easy, ChartDifficulty.Master]);
+        var meta = info.ToManifestMeta(null, [ChartDifficulty.Easy, ChartDifficulty.Master]);
 
         await Assert.That(meta.Maps.Count).IsEqualTo(2);
         await Assert.That(meta.Maps.ContainsKey("map2")).IsFalse();

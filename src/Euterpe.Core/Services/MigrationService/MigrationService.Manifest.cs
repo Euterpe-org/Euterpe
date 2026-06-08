@@ -14,7 +14,7 @@ internal sealed partial class MigrationService
         {
             Schema = Manifest.CurrentSchema,
             Cid = null,
-            Meta = CustomAlbumMapper.ToManifestMeta(info, cinema?.Opacity, difficulties),
+            Meta = info.ToManifestMeta(cinema?.Opacity, difficulties),
             Files = files
         };
 

@@ -1,4 +1,4 @@
-﻿using static Euterpe.Models.Charts.ChartFiles;
+using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Core;
 

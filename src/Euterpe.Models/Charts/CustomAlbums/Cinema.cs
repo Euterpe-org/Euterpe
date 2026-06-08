@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models.Charts.CustomAlbums;
+namespace Euterpe.Models.Charts.CustomAlbums;
 
 public sealed class Cinema
 {

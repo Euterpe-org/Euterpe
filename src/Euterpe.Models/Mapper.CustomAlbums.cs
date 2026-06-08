@@ -1,10 +1,11 @@
+using System.Diagnostics;
 using Euterpe.Models.Charts.CustomAlbums;
 
-namespace Euterpe.Core;
+namespace Euterpe.Models;
 
-internal static class CustomAlbumMapper
+public static partial class Mapper
 {
-    public static ManifestMeta ToManifestMeta(InfoJson info, float? backgroundVideoOpacity, IReadOnlyList<ChartDifficulty> difficulties)
+    public static ManifestMeta ToManifestMeta(this InfoJson info, float? backgroundVideoOpacity, IReadOnlyList<ChartDifficulty> difficulties)
     {
         var (bpm, bpmMin, bpmMax) = ParseBpm(info.Bpm);
 

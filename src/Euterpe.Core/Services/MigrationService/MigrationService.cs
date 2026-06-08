@@ -12,7 +12,7 @@ internal sealed partial class MigrationService : IMigrationService
             return;
         }
 
-        var sources = ResolveSources(ChartLocalService.GetCustomAlbumsSourcePaths());
+        var sources = ChartLocalService.GetCustomAlbumsSources();
         int migrated = 0, skipped = 0, failed = 0;
 
         for (var i = 0; i < sources.Length; i++)
@@ -49,6 +49,13 @@ internal sealed partial class MigrationService : IMigrationService
         {
             NotificationService.SuccessLight(Notification_Content_Migration_Success, migrated);
         }
+    }
+
+    private enum MigrationOutcome
+    {
+        Migrated,
+        Skipped,
+        Failed
     }
 
     #region Injections

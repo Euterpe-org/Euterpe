@@ -1,9 +1,10 @@
+using Euterpe.Models.Charts.CustomAlbums;
 using static Euterpe.Models.Charts.ChartFiles;
 using static Euterpe.Models.Charts.CustomAlbums.CustomAlbumFiles;
 
 namespace Euterpe.Core;
 
-internal sealed class ChartLocalService : IChartLocalService
+internal sealed partial class ChartLocalService : IChartLocalService
 {
     public IEnumerable<string> GetChartFolderPaths(ChartSource source) =>
         Directory.EnumerateDirectories(
@@ -14,13 +15,13 @@ internal sealed class ChartLocalService : IChartLocalService
                 _ => throw new UnreachableException()
             });
 
-    public string[] GetCustomAlbumsSourcePaths()
+    public CustomAlbumSource[] GetCustomAlbumsSources()
     {
         var root = GameConfig.CustomAlbumsChartsFolder;
         var packages = Directory.EnumerateFiles(root).Where(x => Path.GetExtension(x) is PackageExtension);
         var folders = Directory.EnumerateDirectories(root).Where(d => File.Exists(Path.Combine(d, InfoFileName)));
 
-        return [.. packages, .. folders];
+        return ResolveSources([.. packages, .. folders]);
     }
 
     public async Task<ChartDto?> LoadChartFromPathAsync(string chartFolder, ChartSource source)

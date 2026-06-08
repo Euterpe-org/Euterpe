@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models.Charts;
+namespace Euterpe.Models.Charts;
 
 public enum ChartSource
 {
