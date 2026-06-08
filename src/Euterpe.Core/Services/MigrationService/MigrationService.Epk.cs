@@ -23,19 +23,21 @@ internal sealed partial class MigrationService
         NormalizeVideoName(workFolder);
         DeleteConsumedSources(workFolder);
 
+        var files = BuildFiles(workFolder);
+        var difficulties = files.ExistingDifficulties();
+
         var manifest = new Manifest
         {
             Schema = Manifest.CurrentSchema,
             Cid = null,
-            Meta = CustomAlbumMapper.ToManifestMeta(info, cinema?.Opacity),
-            Files = BuildFiles(workFolder)
+            Meta = CustomAlbumMapper.ToManifestMeta(info, cinema?.Opacity, difficulties),
+            Files = files
         };
 
         var manifestPath = Path.Combine(workFolder, ManifestFileName);
         await WriteManifestAsync(manifestPath, manifest, cancellationToken).ConfigureAwait(false);
     }
 
-    // .mdm packages are zip archives; folder charts are copied verbatim. Both land in the same work folder.
     private async Task PopulateWorkFolderAsync(CustomAlbumSource source, string workFolder)
     {
         if (!source.IsFolder)
@@ -104,9 +106,9 @@ internal sealed partial class MigrationService
     {
         var files = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase);
 
-        foreach (var path in Directory.EnumerateFiles(folder))
+        foreach (var file in new DirectoryInfo(folder).EnumerateFiles())
         {
-            files[Path.GetFileName(path)] = new ManifestFileEntry { Version = 1, Size = new FileInfo(path).Length };
+            files[file.Name] = new ManifestFileEntry { Version = 1, Size = file.Length };
         }
 
         return files;

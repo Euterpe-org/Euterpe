@@ -18,7 +18,7 @@ public sealed class CustomAlbumMapperTest
             Scene = "scene_01"
         };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, 0.5f);
+        var meta = CustomAlbumMapper.ToManifestMeta(info, 0.5f, []);
 
         await Assert.That(meta.Name).IsEqualTo("Song");
         await Assert.That(meta.NameRomanized).IsEqualTo("Song Romanized");
@@ -32,7 +32,7 @@ public sealed class CustomAlbumMapperTest
     {
         var info = new InfoJson { Name = "Song", Author = "Composer" };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, null);
+        var meta = CustomAlbumMapper.ToManifestMeta(info, null, []);
 
         await Assert.That(meta.NameRomanized).IsEqualTo(string.Empty);
         await Assert.That(meta.HideMode).IsEqualTo(string.Empty);
@@ -51,7 +51,7 @@ public sealed class CustomAlbumMapperTest
     {
         var info = new InfoJson { Name = "Song", Author = "Composer", Bpm = bpm };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, null);
+        var meta = CustomAlbumMapper.ToManifestMeta(info, null, []);
 
         await Assert.That(meta.Bpm).IsEqualTo(expected);
         await Assert.That(meta.BpmMin).IsEqualTo(expectedMin);
@@ -59,25 +59,27 @@ public sealed class CustomAlbumMapperTest
     }
 
     [Test]
-    public async Task ToManifestMeta_BuildsMapsForNonBlankDifficultiesWithDesignerFallback()
+    public async Task ToManifestMeta_BuildsMapsForGivenDifficultiesWithDesignerFallback()
     {
         var info = new InfoJson
         {
             Name = "Song",
             Author = "Composer",
             Difficulty1 = "2",
-            Difficulty2 = "",
+            Difficulty2 = "5", // declared in info.json but Hard is not among the present difficulties, so it must be excluded
             Difficulty3 = "8",
             LevelDesigner = "General",
             LevelDesigner1 = "Alice",
             LevelDesigner3 = ""
         };
 
-        var meta = CustomAlbumMapper.ToManifestMeta(info, null);
+        var meta = CustomAlbumMapper.ToManifestMeta(info, null, [ChartDifficulty.Easy, ChartDifficulty.Master]);
 
         await Assert.That(meta.Maps.Count).IsEqualTo(2);
-        await Assert.That(meta.Maps["map1.bms"].Rating).IsEqualTo("2");
-        await Assert.That(meta.Maps["map1.bms"].Charters).IsEquivalentTo(new[] { "Alice" });
-        await Assert.That(meta.Maps["map3.bms"].Charters).IsEquivalentTo(new[] { "General" });
+        await Assert.That(meta.Maps.ContainsKey("map2")).IsFalse();
+        await Assert.That(meta.Maps["map1"].Rating).IsEqualTo("2");
+        await Assert.That(meta.Maps["map1"].Charters).IsEquivalentTo(new[] { "Alice" });
+        await Assert.That(meta.Maps["map3"].Rating).IsEqualTo("8");
+        await Assert.That(meta.Maps["map3"].Charters).IsEquivalentTo(new[] { "General" });
     }
 }

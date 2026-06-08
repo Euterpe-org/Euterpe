@@ -4,7 +4,7 @@ namespace Euterpe.Core;
 
 internal static class CustomAlbumMapper
 {
-    public static ManifestMeta ToManifestMeta(InfoJson info, float? backgroundVideoOpacity)
+    public static ManifestMeta ToManifestMeta(InfoJson info, float? backgroundVideoOpacity, IReadOnlyList<ChartDifficulty> difficulties)
     {
         var (bpm, bpmMin, bpmMax) = ParseBpm(info.Bpm);
 
@@ -21,7 +21,7 @@ internal static class CustomAlbumMapper
             Scene = info.Scene,
             BackgroundVideoOpacity = backgroundVideoOpacity,
             SearchKeywords = info.SearchTags,
-            Maps = BuildMaps(info),
+            Maps = BuildMaps(info, difficulties),
             HideMode = info.HideBmsMode,
             HideRatingOverride = info.Difficulty4,
             HideMessage = info.HideBmsMessage,
@@ -29,19 +29,14 @@ internal static class CustomAlbumMapper
         };
     }
 
-    private static Dictionary<string, ManifestMap> BuildMaps(InfoJson info)
+    private static Dictionary<string, ManifestMap> BuildMaps(InfoJson info, IReadOnlyList<ChartDifficulty> difficulties)
     {
         var maps = new Dictionary<string, ManifestMap>(StringComparer.OrdinalIgnoreCase);
 
-        for (var index = 1; index <= 4; index++)
+        foreach (var difficulty in difficulties)
         {
-            var (rating, designer) = ResolveDifficulty(info, index);
-            if (rating.IsNullOrWhiteSpace())
-            {
-                continue;
-            }
-
-            maps[$"map{index}"] = new ManifestMap
+            var (rating, designer) = ResolveDifficulty(info, difficulty);
+            maps[$"map{(int)difficulty}"] = new ManifestMap
             {
                 Rating = rating,
                 Charters = [designer],
@@ -52,12 +47,12 @@ internal static class CustomAlbumMapper
         return maps;
     }
 
-    private static (string Rating, string Designer) ResolveDifficulty(InfoJson info, int index) => index switch
+    private static (string Rating, string Designer) ResolveDifficulty(InfoJson info, ChartDifficulty difficulty) => difficulty switch
     {
-        1 => (info.Difficulty1, info.LevelDesigner1.DefaultIfWhiteSpace(info.LevelDesigner)),
-        2 => (info.Difficulty2, info.LevelDesigner2.DefaultIfWhiteSpace(info.LevelDesigner)),
-        3 => (info.Difficulty3, info.LevelDesigner3.DefaultIfWhiteSpace(info.LevelDesigner)),
-        4 => (info.Difficulty4, info.LevelDesigner4.DefaultIfWhiteSpace(info.LevelDesigner)),
+        ChartDifficulty.Easy => (info.Difficulty1, info.LevelDesigner1.DefaultIfWhiteSpace(info.LevelDesigner)),
+        ChartDifficulty.Hard => (info.Difficulty2, info.LevelDesigner2.DefaultIfWhiteSpace(info.LevelDesigner)),
+        ChartDifficulty.Master => (info.Difficulty3, info.LevelDesigner3.DefaultIfWhiteSpace(info.LevelDesigner)),
+        ChartDifficulty.Hidden => (info.Difficulty4, info.LevelDesigner4.DefaultIfWhiteSpace(info.LevelDesigner)),
         _ => throw new UnreachableException()
     };
 

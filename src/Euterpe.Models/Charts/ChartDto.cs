@@ -4,14 +4,6 @@ namespace Euterpe.Models.Charts;
 
 public sealed class ChartDto : ObservableObject
 {
-    private static readonly ChartDifficulty[] AllDifficulties =
-    [
-        ChartDifficulty.Easy,
-        ChartDifficulty.Hard,
-        ChartDifficulty.Master,
-        ChartDifficulty.Hidden
-    ];
-
     public required string FolderPath { get; init; }
     public required string FolderName { get; init; }
     public required Manifest Manifest { get; init; }
@@ -25,7 +17,7 @@ public sealed class ChartDto : ObservableObject
     public string? VideoPath => AssetPath(VideoFileName);
 
     public IReadOnlyList<ChartDifficulty> Difficulties =>
-        [.. AllDifficulties.Where(HasDifficulty)];
+        Manifest.Files.ExistingDifficulties();
 
     public bool HasDifficulty(ChartDifficulty difficulty) =>
         Manifest.Files.ContainsKey(MapFileName(difficulty));
