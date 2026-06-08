@@ -1,4 +1,3 @@
-using Euterpe.Core;
 using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Tests;

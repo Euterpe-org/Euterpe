@@ -39,15 +39,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         Logger.ZLogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
     }
 
-    partial void OnSelectedChartSourceIndexChanged(int value)
-    {
-        _selectedSource = (ChartSource)value;
-        _sourceCache.Refresh();
-    }
-
-    [UsedImplicitly]
-    partial void OnSearchTextChanged(string? value) => _sourceCache.Refresh();
-
     [RelayCommand]
     private async Task PlayAsync(ChartDto chart)
     {
@@ -61,6 +52,15 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     [RelayCommand]
     private void StopMusic() => AudioPlayerService.Stop();
+
+    partial void OnSelectedChartSourceIndexChanged(int value)
+    {
+        _selectedSource = (ChartSource)value;
+        _sourceCache.Refresh();
+    }
+
+    [UsedImplicitly]
+    partial void OnSearchTextChanged(string? value) => _sourceCache.Refresh();
 
     #region Injections
 
