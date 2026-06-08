@@ -14,9 +14,14 @@ internal sealed class ChartLocalService : IChartLocalService
                 _ => throw new UnreachableException()
             });
 
-    public string[] GetCustomAlbumsChartFilePaths() => Directory.EnumerateFiles(GameConfig.CustomAlbumsChartsFolder)
-        .Where(x => Path.GetExtension(x) is PackageExtension)
-        .ToArray();
+    public string[] GetCustomAlbumsSourcePaths()
+    {
+        var root = GameConfig.CustomAlbumsChartsFolder;
+        var packages = Directory.EnumerateFiles(root).Where(x => Path.GetExtension(x) is PackageExtension);
+        var folders = Directory.EnumerateDirectories(root).Where(d => File.Exists(Path.Combine(d, InfoFileName)));
+
+        return [.. packages, .. folders];
+    }
 
     public async Task<ChartDto?> LoadChartFromPathAsync(string chartFolder, ChartSource source)
     {

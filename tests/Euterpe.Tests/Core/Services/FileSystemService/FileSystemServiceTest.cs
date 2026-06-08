@@ -208,4 +208,47 @@ public sealed class FileSystemServiceTest
             Directory.Delete(work, true);
         }
     }
+
+    [Test]
+    public async Task TryCopyDirectory_CopiesFilesAndNestedFoldersAndLeavesSource()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var src = Path.Combine(work, "src");
+            var nested = Path.Combine(src, "nested");
+            Directory.CreateDirectory(nested);
+            await File.WriteAllTextAsync(Path.Combine(src, "top.txt"), "top");
+            await File.WriteAllTextAsync(Path.Combine(nested, "deep.txt"), "deep");
+
+            var dst = Path.Combine(work, "dst");
+            var ok = NewService().TryCopyDirectory(src, dst);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(ok).IsTrue();
+            await Assert.That(Directory.Exists(src)).IsTrue();
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(dst, "top.txt"))).IsEqualTo("top");
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(dst, "nested", "deep.txt"))).IsEqualTo("deep");
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task TryCopyDirectory_SourceMissing_ReturnsFalse()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var ok = NewService().TryCopyDirectory(Path.Combine(work, "missing"), Path.Combine(work, "dst"));
+
+            await Assert.That(ok).IsFalse();
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
 }

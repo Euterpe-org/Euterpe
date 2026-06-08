@@ -28,4 +28,6 @@ public interface IFileSystemService
     ///     paths are on the same volume.
     /// </summary>
     bool TryMoveDirectory(string sourcePath, string destinationPath, bool overwrite = false);
+
+    bool TryCopyDirectory(string sourcePath, string destinationPath);
 }

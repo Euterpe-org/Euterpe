@@ -102,4 +102,33 @@ internal sealed class FileSystemService : IFileSystemService
             return false;
         }
     }
+
+    public bool TryCopyDirectory(string sourcePath, string destinationPath)
+    {
+        try
+        {
+            CopyDirectory(sourcePath, destinationPath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to copy directory from {sourcePath} to {destinationPath}");
+            return false;
+        }
+    }
+
+    private static void CopyDirectory(string sourcePath, string destinationPath)
+    {
+        Directory.CreateDirectory(destinationPath);
+
+        foreach (var file in Directory.EnumerateFiles(sourcePath))
+        {
+            File.Copy(file, Path.Combine(destinationPath, Path.GetFileName(file)), true);
+        }
+
+        foreach (var directory in Directory.EnumerateDirectories(sourcePath))
+        {
+            CopyDirectory(directory, Path.Combine(destinationPath, Path.GetFileName(directory)));
+        }
+    }
 }

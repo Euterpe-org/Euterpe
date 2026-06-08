@@ -51,6 +51,7 @@ public sealed partial class DeepLinkService
                 break;
 
             case "chart":
+                await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
                 await HandleChartActionAsync(path).ConfigureAwait(false);
                 break;
 
