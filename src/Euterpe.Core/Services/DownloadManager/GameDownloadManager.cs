@@ -1,3 +1,4 @@
+using Euterpe.Contracts.Charts;
 using Euterpe.Contracts.Distribution;
 using Euterpe.Contracts.Mods;
 
@@ -44,6 +45,52 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
         }
     }
 
+    public async Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, CancellationToken cancellationToken = default)
+    {
+        Logger.ZLogInformation($"Updating chart {cid} ({changedFiles.Count} changed file(s)) ...");
+
+        var workFolder = Path.Combine(GameConfig.TempChartsFolder, cid);
+        var destinationFolder = Path.Combine(GameConfig.OnlineChartsFolder, cid);
+
+        try
+        {
+            FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
+            FileSystemService.CopyDirectory(destinationFolder, workFolder);
+
+            foreach (var fileName in changedFiles)
+            {
+                await DownloadChartFileAsync(cid, workFolder, fileName, cancellationToken).ConfigureAwait(false);
+            }
+
+            if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder, true))
+            {
+                throw new IOException($"Failed to move updated chart {cid} into place");
+            }
+
+            Logger.ZLogInformation($"Chart {cid} updated");
+            return destinationFolder;
+        }
+        finally
+        {
+            FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
+        }
+    }
+
+    public async Task<CheckChartUpdatesResponse> CheckChartUpdatesAsync(CheckChartUpdatesRequest request, CancellationToken cancellationToken = default)
+    {
+        Logger.ZLogInformation($"Checking updates for {request.Charts.Count} chart(s) ...");
+
+        try
+        {
+            return await ChartClient.CheckChartUpdatesAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to check chart updates");
+            return new CheckChartUpdatesResponse();
+        }
+    }
+
     public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Fetching mods ...");
@@ -78,6 +125,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
     public required GameConfig GameConfig { get; init; }
     public required IAppDownloadManager AppDownloadManager { get; init; }
+    public required IEuterpeChartClient ChartClient { get; init; }
     public required IEuterpeDistributionClient DistributionClient { get; init; }
     public required IFileSystemService FileSystemService { get; init; }
     public required IMessagePackSerializationService MessagePackSerialization { get; init; }

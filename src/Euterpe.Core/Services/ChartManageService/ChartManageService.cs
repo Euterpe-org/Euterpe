@@ -1,11 +1,14 @@
+using Euterpe.Shared.Threading;
+
 namespace Euterpe.Core;
 
 internal sealed partial class ChartManageService : IChartManageService
 {
     private readonly Lazy<Task> _initTask;
+    private readonly SingleFlight<string> _singleFlight = new();
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderPath);
 
-    public ChartManageService() => _initTask = new Lazy<Task>(LoadChartsAsync, LazyThreadSafetyMode.ExecutionAndPublication);
+    public ChartManageService() => _initTask = new Lazy<Task>(LoadChartsCoreAsync, LazyThreadSafetyMode.ExecutionAndPublication);
 
     public IObservable<IChangeSet<ChartDto, string>> Connect() => _sourceCache.Connect();
 
@@ -13,59 +16,26 @@ internal sealed partial class ChartManageService : IChartManageService
 
     public Task RefreshOfflineChartsAsync() => LoadFromSourceAsync(ChartSource.Offline);
 
-    public async Task DownloadChartAsync(string chartId, CancellationToken cancellationToken = default)
+    public Task DownloadChartAsync(string chartId, CancellationToken cancellationToken = default) =>
+        RunExclusiveAsync(chartId, () => DownloadChartCoreAsync(chartId, cancellationToken));
+
+    public Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default)
     {
-        try
+        var chart = GetOnlineCharts().FirstOrDefault(c => c.FolderName == chartId);
+        if (chart is not null)
         {
-            var folderPath = await GameDownloadManager.DownloadChartAsync(chartId, cancellationToken).ConfigureAwait(false);
-
-            var chart = await ChartLocalService.LoadChartFromPathAsync(folderPath, ChartSource.Online).ConfigureAwait(false);
-            if (chart is null)
-            {
-                Logger.ZLogWarning($"Downloaded chart {chartId} but failed to load it from {folderPath}");
-                NotificationService.ErrorLight(Notification_Content_Chart_Download_Failed, chartId);
-                return;
-            }
-
-            _sourceCache.AddOrUpdate(chart);
-            Logger.ZLogInformation($"Chart {chartId} downloaded and added to cache");
-            NotificationService.SuccessLight(Notification_Content_Chart_Download_Success, chart.Manifest.Meta.Name);
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to download chart {chartId}");
-            NotificationService.ErrorLight(Notification_Content_Chart_Download_Failed, chartId);
-        }
-    }
-
-    public Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default) =>
-        throw new NotImplementedException();
-
-    public Task RemoveChartAsync(string folderPath)
-    {
-        Logger.ZLogInformation($"Removing chart at {folderPath}");
-
-        var name = _sourceCache.Lookup(folderPath) is { HasValue: true, Value: var chart }
-            ? chart.Manifest.Meta.Name
-            : Path.GetFileName(folderPath);
-
-        if (FileSystemService.TryDeleteDirectory(folderPath, DeleteOption.IgnoreIfNotFound))
-        {
-            _sourceCache.RemoveKey(folderPath);
-            Logger.ZLogInformation($"Chart at {folderPath} removed");
-            NotificationService.SuccessLight(Notification_Content_Chart_Remove_Success, name);
-        }
-        else
-        {
-            Logger.ZLogError($"Failed to remove chart at {folderPath}");
-            NotificationService.ErrorLight(Notification_Content_Chart_Remove_Failed, name);
+            return CheckAndApplyUpdatesAsync([chart], cancellationToken);
         }
 
+        Logger.ZLogWarning($"Update requested for unknown online chart {chartId}");
         return Task.CompletedTask;
     }
 
+    public Task RemoveChartAsync(string folderPath) =>
+        RunExclusiveAsync(Path.GetFileName(folderPath), () => RemoveChartCoreAsync(folderPath));
+
     public Task UpdateAllChartsAsync(CancellationToken cancellationToken = default) =>
-        throw new NotImplementedException();
+        CheckAndApplyUpdatesAsync(GetOnlineCharts(), cancellationToken);
 
     #region Injections
 
