@@ -4,6 +4,7 @@ public static class ChartFiles
 {
     public const string ManifestFileName = "manifest.epk";
     public const string MusicFileName = $"{MusicName}{MusicExtension}";
+    public const string DemoFileName = $"{DemoName}{MusicExtension}";
     public const string VideoFileName = "video.mp4";
 
     public const string CoverName = "cover";

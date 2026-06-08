@@ -51,12 +51,12 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task PlayAsync(ChartDto chart)
     {
-        if (chart.MusicPath is not { } musicPath)
+        if ((chart.DemoPath ?? chart.MusicPath) is not { } audioPath)
         {
             return;
         }
 
-        await Task.Run(() => AudioPlayerService.Play(musicPath)).ConfigureAwait(false);
+        await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
     }
 
     [RelayCommand]

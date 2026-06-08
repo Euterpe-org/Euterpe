@@ -14,6 +14,7 @@ public sealed class ChartDto : ObservableObject
         .FirstOrDefault(path => path is not null);
 
     public string? MusicPath => AssetPath(MusicFileName);
+    public string? DemoPath => AssetPath(DemoFileName);
     public string? VideoPath => AssetPath(VideoFileName);
 
     public IReadOnlyList<ChartDifficulty> Difficulties =>
