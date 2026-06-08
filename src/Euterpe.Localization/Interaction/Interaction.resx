@@ -135,6 +135,24 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>MD_DIRECTORY environment variable successfully set to {0}</value>
   </data>
+  <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
+    <value>Failed to download chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
+    <value>Chart {0} successfully downloaded</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Failed" xml:space="preserve">
+    <value>Failed to remove chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
+    <value>Chart {0} successfully removed</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>Failed to update chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>Chart {0} successfully updated</value>
+  </data>
   <data name="Notification_Content_Migration_Partial" xml:space="preserve">
     <value>Migrated {0} CustomAlbums charts, {1} failed</value>
   </data>

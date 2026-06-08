@@ -2,8 +2,9 @@ namespace Euterpe.Services;
 
 public sealed partial class DeepLinkService
 {
-    private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
+    private IChartManageService ChartManageService => GameScope.Value.Resolve<IChartManageService>();
     private IMigrationService MigrationService => GameScope.Value.Resolve<IMigrationService>();
+    private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
 
     public async Task SetupAsync()
     {
@@ -52,6 +53,7 @@ public sealed partial class DeepLinkService
 
             case "chart":
                 await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
+                await ChartManageService.InitializeChartsAsync().ConfigureAwait(true);
                 await HandleChartActionAsync(path).ConfigureAwait(false);
                 break;
 

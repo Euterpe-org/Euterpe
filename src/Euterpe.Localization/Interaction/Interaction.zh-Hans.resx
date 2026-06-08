@@ -132,6 +132,24 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>已成功将 MD_DIRECTORY 环境变量设置为 {0}</value>
   </data>
+  <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
+    <value>谱面 {0} 下载失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
+    <value>谱面 {0} 下载成功</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Failed" xml:space="preserve">
+    <value>谱面 {0} 移除失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
+    <value>谱面 {0} 移除成功</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>谱面 {0} 更新失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>谱面 {0} 更新成功</value>
+  </data>
   <data name="Notification_Content_Migration_Partial" xml:space="preserve">
     <value>已迁移 {0} 张 CustomAlbums 谱面，{1} 张失败</value>
   </data>

@@ -33,19 +33,15 @@ internal sealed class ChartLocalService : IChartLocalService
 
         try
         {
-            var stream = File.OpenRead(manifestPath);
-            await using (stream.ConfigureAwait(false))
-            {
-                var manifest = await MessagePackSerialization.DeserializeManifestAsync(stream).ConfigureAwait(false);
+            var manifest = await MessagePackSerialization.DeserializeManifestFromFileAsync(manifestPath).ConfigureAwait(false);
 
-                return new ChartDto
-                {
-                    FolderPath = chartFolder,
-                    FolderName = Path.GetFileName(chartFolder),
-                    Manifest = manifest,
-                    Source = source
-                };
-            }
+            return new ChartDto
+            {
+                FolderPath = chartFolder,
+                FolderName = Path.GetFileName(chartFolder),
+                Manifest = manifest,
+                Source = source
+            };
         }
         catch (Exception ex)
         {

@@ -39,19 +39,13 @@ internal sealed partial class MigrationService
         }
         finally
         {
-            if (Directory.Exists(workFolder))
-            {
-                Directory.Delete(workFolder, true);
-            }
+            FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
         }
     }
 
     private async Task BuildChartAsync(CustomAlbumSource source, string workFolder, CancellationToken cancellationToken)
     {
-        if (Directory.Exists(workFolder))
-        {
-            Directory.Delete(workFolder, true);
-        }
+        FileSystemService.DeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
 
         await PopulateWorkFolderAsync(source, workFolder).ConfigureAwait(false);
 

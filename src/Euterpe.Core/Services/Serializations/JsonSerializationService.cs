@@ -6,6 +6,12 @@ namespace Euterpe.Core;
 
 internal sealed class JsonSerializationService : IJsonSerializationService
 {
+    public Config? DeserializeConfig(Stream utf8Json) =>
+        JsonSerializer.Deserialize(utf8Json, Default.Config);
+
+    public ValueTask<Config?> DeserializeConfigAsync(Stream utf8Json, CancellationToken cancellationToken = default) =>
+        JsonSerializer.DeserializeAsync(utf8Json, Default.Config, cancellationToken);
+
     public async ValueTask<T> DeserializeFromFileAsync<T>(string filePath, JsonTypeInfo<T> typeInfo, CancellationToken cancellationToken = default)
     {
         var stream = File.OpenRead(filePath);
@@ -15,12 +21,6 @@ internal sealed class JsonSerializationService : IJsonSerializationService
                    ?? throw new InvalidDataException($"'{filePath}' is empty or invalid");
         }
     }
-
-    public Config? DeserializeConfig(Stream utf8Json) =>
-        JsonSerializer.Deserialize(utf8Json, Default.Config);
-
-    public ValueTask<Config?> DeserializeConfigAsync(Stream utf8Json, CancellationToken cancellationToken = default) =>
-        JsonSerializer.DeserializeAsync(utf8Json, Default.Config, cancellationToken);
 
     public void SerializeConfig(Stream utf8Json, Config value) =>
         JsonSerializer.Serialize(utf8Json, value, Default.Config);

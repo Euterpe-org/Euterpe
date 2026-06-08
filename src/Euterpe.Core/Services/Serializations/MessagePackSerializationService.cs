@@ -17,6 +17,15 @@ internal sealed class MessagePackSerializationService : IMessagePackSerializatio
     public ValueTask<Manifest> DeserializeManifestAsync(Stream stream, CancellationToken cancellationToken = default) =>
         MessagePackSerializer.DeserializeAsync<Manifest>(stream, Options, cancellationToken);
 
+    public async ValueTask<Manifest> DeserializeManifestFromFileAsync(string filePath, CancellationToken cancellationToken = default)
+    {
+        var stream = File.OpenRead(filePath);
+        await using (stream.ConfigureAwait(false))
+        {
+            return await DeserializeManifestAsync(stream, cancellationToken).ConfigureAwait(false);
+        }
+    }
+
     public void SerializeManifest(Stream stream, Manifest value) =>
         MessagePackSerializer.Serialize(stream, value, Options);
 

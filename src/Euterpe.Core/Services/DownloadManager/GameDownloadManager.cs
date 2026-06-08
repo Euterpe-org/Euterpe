@@ -3,7 +3,7 @@ using Euterpe.Contracts.Mods;
 
 namespace Euterpe.Core;
 
-internal sealed class GameDownloadManager : IGameDownloadManager
+internal sealed partial class GameDownloadManager : IGameDownloadManager
 {
     public Task DownloadModAsync(ModDto mod, CancellationToken cancellationToken = default)
     {
@@ -17,6 +17,31 @@ internal sealed class GameDownloadManager : IGameDownloadManager
         var path = Path.Combine(GameConfig.UserLibsFolder, lib.FileName);
 
         return AppDownloadManager.DownloadAssetAsync(lib.DownloadUrl, path, $"lib {lib.Name}", cancellationToken);
+    }
+
+    public async Task<string> DownloadChartAsync(string cid, CancellationToken cancellationToken = default)
+    {
+        Logger.ZLogInformation($"Downloading chart {cid} ...");
+
+        var workFolder = Path.Combine(GameConfig.TempChartsFolder, cid);
+        var destinationFolder = Path.Combine(GameConfig.OnlineChartsFolder, cid);
+
+        try
+        {
+            await PopulateChartWorkFolderAsync(cid, workFolder, cancellationToken).ConfigureAwait(false);
+
+            if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder, true))
+            {
+                throw new IOException($"Failed to move downloaded chart {cid} into place");
+            }
+
+            Logger.ZLogInformation($"Chart {cid} downloaded");
+            return destinationFolder;
+        }
+        finally
+        {
+            FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
+        }
     }
 
     public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)
@@ -54,6 +79,8 @@ internal sealed class GameDownloadManager : IGameDownloadManager
     public required GameConfig GameConfig { get; init; }
     public required IAppDownloadManager AppDownloadManager { get; init; }
     public required IEuterpeDistributionClient DistributionClient { get; init; }
+    public required IFileSystemService FileSystemService { get; init; }
+    public required IMessagePackSerializationService MessagePackSerialization { get; init; }
     public required ILogger<GameDownloadManager> Logger { get; init; }
     public required IEuterpeModClient ModClient { get; init; }
 
