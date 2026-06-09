@@ -13,6 +13,8 @@ internal sealed class AudioPlayerService : IAudioPlayerService
     private AudioPlaybackDevice? _device;
     private SoundPlayer? _player;
 
+    public event EventHandler? PlaybackEnded;
+
     public void Play(string filePath)
     {
         StopInternal();
@@ -20,6 +22,7 @@ internal sealed class AudioPlayerService : IAudioPlayerService
         var device = EnsureDevice();
         var provider = new ResilientSoundDataProvider(new StreamDataProvider(Engine, Format, File.OpenRead(filePath)), Logger);
         _player = new SoundPlayer(Engine, Format, provider);
+        _player.PlaybackEnded += OnPlayerPlaybackEnded;
         device.MasterMixer.AddComponent(_player);
         _player.Play();
 
@@ -57,11 +60,16 @@ internal sealed class AudioPlayerService : IAudioPlayerService
             return;
         }
 
+        // Detach before stopping so manual stops / track switches don't raise PlaybackEnded;
+        // only natural end-of-stream (which fires while still attached) reaches subscribers.
+        _player.PlaybackEnded -= OnPlayerPlaybackEnded;
         _player.Stop();
         _device?.MasterMixer.RemoveComponent(_player);
         _player.Dispose();
         _player = null;
     }
+
+    private void OnPlayerPlaybackEnded(object? sender, EventArgs e) => PlaybackEnded?.Invoke(this, e);
 
     #region Injections
 
