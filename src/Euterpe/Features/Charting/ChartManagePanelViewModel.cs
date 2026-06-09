@@ -15,6 +15,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
     private readonly BehaviorSubject<IComparer<ChartDto>> _comparer;
 
+    // FolderName of the chart whose preview is paused with its player still loaded (null = none).
+    private string? _pausedFolder;
+
     // Source filter (Online / Offline)
     [ObservableProperty]
     public partial int SelectedChartSourceIndex { get; set; }
@@ -82,10 +85,23 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task TogglePlayAsync(ChartDto chart)
     {
-        if (CurrentlyPlaying == chart.FolderName)
+        var folder = chart.FolderName;
+
+        // Pause the chart that is currently playing.
+        if (CurrentlyPlaying == folder)
         {
-            AudioPlayerService.Stop();
+            AudioPlayerService.Pause();
+            _pausedFolder = folder;
             CurrentlyPlaying = null;
+            return;
+        }
+
+        // Resume this chart if it was paused and nothing else has played since.
+        if (_pausedFolder == folder)
+        {
+            AudioPlayerService.Resume();
+            _pausedFolder = null;
+            CurrentlyPlaying = folder;
             return;
         }
 
@@ -94,9 +110,11 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return;
         }
 
-        // Play() stops any current playback first, so only one preview ever plays.
+        // Reflect playback immediately (on the UI thread), then decode/start off-thread.
+        // Play() stops and disposes any current/paused player first, so only one preview ever exists.
+        _pausedFolder = null;
+        CurrentlyPlaying = folder;
         await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
-        CurrentlyPlaying = chart.FolderName;
     }
 
     [RelayCommand]

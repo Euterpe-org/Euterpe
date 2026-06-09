@@ -32,11 +32,16 @@ public static class FuncValueConverters
     public static FuncValueConverter<ChartDto, IReadOnlyList<DifficultyBadge>> ChartDifficultyBadgesConverter { get; } =
         new(static chart => chart is null ? [] : ChartRating.Badges(chart));
 
-    // [folderName, currentlyPlaying] -> is this chart the one playing
-    public static FuncMultiValueConverter<string?, bool> ChartIsPlayingConverter { get; } =
-        new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing);
-
-    // [folderName, currentlyPlaying] -> stop glyph when playing, else play glyph
+    // [folderName, currentlyPlaying] -> pause glyph when this chart is playing, else play glyph
     public static FuncMultiValueConverter<string?, string> ChartPlayGlyphConverter { get; } =
-        new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing ? "⏹" : "▶");
+        new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing ? "⏸" : "▶");
+
+    // [folderName, currentlyPlaying, isCoverHovered] -> cover overlay opacity.
+    // The mask + play/pause button show whenever the chart is NOT playing, or the cover is hovered;
+    // they hide (revealing the cover) only while playing and not hovered.
+    public static FuncMultiValueConverter<object?, double> ChartOverlayOpacityConverter { get; } =
+        new(static values =>
+            values.ToArray() is [var folder, var playing, var hover] && Equals(folder, playing) && hover is not true
+                ? 0d
+                : 1d);
 }

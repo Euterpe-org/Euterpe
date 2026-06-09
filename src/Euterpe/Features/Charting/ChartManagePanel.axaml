@@ -139,55 +139,95 @@
                                 Margin="0,0,12,12"
                                 Padding="8">
                                 <StackPanel Spacing="6">
-                                    <!--  Cover with hover play/pause + now-playing indicator  -->
-                                    <Panel>
-                                        <e:AsyncImage
-                                            Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
-                                            ClipToBounds="True"
-                                            CornerRadius="8"
-                                            Height="150"
-                                            HorizontalAlignment="Stretch"
-                                            Source="{Binding CoverPath}"
-                                            Stretch="UniformToFill" />
+                                    <!--  Cover: the whole cover toggles play/pause; mask + button appear together  -->
+                                    <Button
+                                        Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
+                                        CommandParameter="{Binding}"
+                                        Focusable="False"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Stretch"
+                                        Padding="0"
+                                        VerticalContentAlignment="Stretch">
+                                        <Button.Styles>
+                                            <Style Selector="Button">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderThickness" Value="0" />
+                                                <Setter Property="CornerRadius" Value="8" />
+                                            </Style>
+                                            <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                            </Style>
+                                            <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                                                <Setter Property="Background" Value="Transparent" />
+                                            </Style>
+                                            <!--  Hover enlarges the center play/pause button  -->
+                                            <Style Selector="Button:pointerover Border.playDisc">
+                                                <Setter Property="RenderTransform" Value="scale(1.12)" />
+                                            </Style>
+                                        </Button.Styles>
 
-                                        <!--  Now playing indicator  -->
-                                        <Border
-                                            Background="#CC1DB954"
-                                            CornerRadius="6"
-                                            HorizontalAlignment="Left"
-                                            Margin="6"
-                                            Padding="6,2"
-                                            VerticalAlignment="Top">
-                                            <Border.IsVisible>
-                                                <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartIsPlayingConverter}">
-                                                    <Binding Path="FolderName" />
-                                                    <Binding Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
-                                                </MultiBinding>
-                                            </Border.IsVisible>
-                                            <TextBlock FontSize="11" Foreground="White" Text="♪" />
-                                        </Border>
+                                        <!--  1:1 square cover container (height tracks width)  -->
+                                        <Panel Height="{Binding $self.Bounds.Width}">
+                                            <Border
+                                                ClipToBounds="True"
+                                                CornerRadius="8">
+                                                <e:AsyncImage
+                                                    Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
+                                                    HorizontalAlignment="Stretch"
+                                                    Source="{Binding CoverPath}"
+                                                    Stretch="UniformToFill" />
+                                            </Border>
 
-                                        <!--  Hover play / pause  -->
-                                        <Button
-                                            Background="#B3000000"
-                                            Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
-                                            CommandParameter="{Binding}"
-                                            CornerRadius="20"
-                                            Foreground="White"
-                                            HorizontalAlignment="Center"
-                                            IsVisible="{Binding $parent[Border].IsPointerOver}"
-                                            Padding="0"
-                                            VerticalAlignment="Center"
-                                            Width="40"
-                                            Height="40">
-                                            <Button.Content>
-                                                <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartPlayGlyphConverter}">
-                                                    <Binding Path="FolderName" />
-                                                    <Binding Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
-                                                </MultiBinding>
-                                            </Button.Content>
-                                        </Button>
-                                    </Panel>
+                                            <!--  Mask + play/pause button (bound together via overlay opacity)  -->
+                                            <Border
+                                                Background="#40000000"
+                                                CornerRadius="8"
+                                                IsHitTestVisible="False">
+                                                <Border.Opacity>
+                                                    <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartOverlayOpacityConverter}">
+                                                        <Binding Path="FolderName" />
+                                                        <Binding Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
+                                                        <Binding Path="$parent[Button].IsPointerOver" />
+                                                    </MultiBinding>
+                                                </Border.Opacity>
+                                                <Border.Transitions>
+                                                    <Transitions>
+                                                        <DoubleTransition Property="Opacity" Duration="0:0:0.3" />
+                                                    </Transitions>
+                                                </Border.Transitions>
+
+                                                <Border
+                                                    Background="#26FFFFFF"
+                                                    Classes="playDisc"
+                                                    CornerRadius="20"
+                                                    Height="40"
+                                                    HorizontalAlignment="Center"
+                                                    RenderTransform="scale(1)"
+                                                    RenderTransformOrigin="50%,50%"
+                                                    VerticalAlignment="Center"
+                                                    Width="40">
+                                                    <Border.Transitions>
+                                                        <Transitions>
+                                                            <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" />
+                                                        </Transitions>
+                                                    </Border.Transitions>
+                                                    <TextBlock
+                                                        FontSize="16"
+                                                        Foreground="White"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartPlayGlyphConverter}">
+                                                                <Binding Path="FolderName" />
+                                                                <Binding Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </Border>
+                                            </Border>
+                                        </Panel>
+                                    </Button>
 
                                     <!--  Title / author  -->
                                     <TextBlock
@@ -225,10 +265,15 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate x:DataType="vm:DifficultyBadge">
-                                                <Panel Height="30" Width="30">
+                                                <Panel
+                                                    ClipToBounds="True"
+                                                    Height="32"
+                                                    Width="32">
                                                     <Image
+                                                        Height="32"
                                                         Source="{Binding Difficulty, Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
-                                                        Stretch="Uniform" />
+                                                        Stretch="Uniform"
+                                                        Width="32" />
                                                     <Border
                                                         Background="#99000000"
                                                         CornerRadius="4"
@@ -239,7 +284,9 @@
                                                             FontSize="11"
                                                             FontWeight="Bold"
                                                             Foreground="White"
-                                                            Text="{Binding Rating}" />
+                                                            HorizontalAlignment="Center"
+                                                            Text="{Binding Rating}"
+                                                            VerticalAlignment="Center" />
                                                     </Border>
                                                 </Panel>
                                             </DataTemplate>
