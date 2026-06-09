@@ -95,9 +95,9 @@
                         <StackPanel Spacing="6">
                             <TextBlock FontWeight="SemiBold" Text="Rating" />
                             <Grid ColumnDefinitions="*,Auto,*">
-                                <NumericUpDown Grid.Column="0" Increment="1" FormatString="0.#" Maximum="99" Minimum="0" Value="{Binding RatingMin}" />
+                                <NumericUpDown Grid.Column="0" Increment="1" FormatString="0" Maximum="13" Minimum="1" Value="{Binding RatingMin}" />
                                 <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
-                                <NumericUpDown Grid.Column="2" Increment="1" FormatString="0.#" Maximum="99" Minimum="0" Value="{Binding RatingMax}" />
+                                <NumericUpDown Grid.Column="2" Increment="1" FormatString="0" Maximum="13" Minimum="1" Value="{Binding RatingMax}" />
                             </Grid>
                         </StackPanel>
 
@@ -225,6 +225,48 @@
                                                     </PathIcon>
                                                 </Border>
                                             </Border>
+
+                                            <!--  Difficulty + rating badges, overlaid top-right (laid out toward the left)  -->
+                                            <ItemsControl
+                                                HorizontalAlignment="Right"
+                                                IsHitTestVisible="False"
+                                                ItemsSource="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDifficultyBadgesConverter}}"
+                                                Margin="6"
+                                                VerticalAlignment="Top">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal" Spacing="3" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate x:DataType="vm:DifficultyBadge">
+                                                        <Panel
+                                                            ClipToBounds="True"
+                                                            Height="30"
+                                                            Width="30">
+                                                            <Image
+                                                                Height="30"
+                                                                Source="{Binding Difficulty, Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
+                                                                Stretch="Uniform"
+                                                                Width="30" />
+                                                            <Border
+                                                                Background="#99000000"
+                                                                CornerRadius="4"
+                                                                HorizontalAlignment="Center"
+                                                                Padding="3,0"
+                                                                VerticalAlignment="Center">
+                                                                <TextBlock
+                                                                    FontSize="11"
+                                                                    FontWeight="Bold"
+                                                                    Foreground="White"
+                                                                    HorizontalAlignment="Center"
+                                                                    Text="{Binding Rating}"
+                                                                    VerticalAlignment="Center" />
+                                                            </Border>
+                                                        </Panel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
                                         </Panel>
                                     </Button>
 
@@ -242,63 +284,68 @@
                                         Text="{Binding Manifest.Meta.Author}"
                                         TextTrimming="CharacterEllipsis" />
 
-                                    <!--  Meta row: bpm + scene  -->
+                                    <!--  Meta row: bpm + video tag  -->
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <TextBlock
                                             FontSize="12"
                                             Opacity="0.85"
                                             Text="{Binding Manifest.Meta, Converter={x:Static converters:FuncValueConverters.ChartBpmConverter}, StringFormat='♪ {0}'}" />
-                                        <TextBlock
-                                            FontSize="12"
-                                            Opacity="0.6"
-                                            Text="{Binding Manifest.Meta.Scene}"
-                                            TextTrimming="CharacterEllipsis" />
+                                        <Border
+                                            Background="#40808080"
+                                            CornerRadius="3"
+                                            IsVisible="{Binding VideoPath, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                            Padding="5,1"
+                                            VerticalAlignment="Center">
+                                            <TextBlock
+                                                FontSize="10"
+                                                FontWeight="SemiBold"
+                                                Opacity="0.85"
+                                                Text="VIDEO" />
+                                        </Border>
                                     </StackPanel>
 
-                                    <!--  Difficulty icons with rating overlaid  -->
-                                    <ItemsControl ItemsSource="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDifficultyBadgesConverter}}">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Horizontal" Spacing="4" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate x:DataType="vm:DifficultyBadge">
-                                                <Panel
-                                                    ClipToBounds="True"
-                                                    Height="32"
-                                                    Width="32">
-                                                    <Image
-                                                        Height="32"
-                                                        Source="{Binding Difficulty, Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
-                                                        Stretch="Uniform"
-                                                        Width="32" />
-                                                    <Border
-                                                        Background="#99000000"
-                                                        CornerRadius="4"
-                                                        HorizontalAlignment="Center"
-                                                        Padding="3,0"
-                                                        VerticalAlignment="Center">
-                                                        <TextBlock
-                                                            FontSize="11"
-                                                            FontWeight="Bold"
-                                                            Foreground="White"
-                                                            HorizontalAlignment="Center"
-                                                            Text="{Binding Rating}"
-                                                            VerticalAlignment="Center" />
-                                                    </Border>
-                                                </Panel>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-
-                                    <!--  Uploader  -->
-                                    <TextBlock
-                                        FontSize="11"
-                                        IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                        Opacity="0.55"
-                                        Text="{Binding Manifest.Meta.Uploader.Nickname, StringFormat='by {0}'}"
-                                        TextTrimming="CharacterEllipsis" />
+                                    <!--  Uploader + mini delete button (same row, button pinned right)  -->
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock
+                                            FontSize="11"
+                                            Grid.Column="0"
+                                            IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                            Opacity="0.55"
+                                            Text="{Binding Manifest.Meta.Uploader.Nickname, StringFormat='by {0}'}"
+                                            TextTrimming="CharacterEllipsis"
+                                            VerticalAlignment="Center" />
+                                        <Button
+                                            Grid.Column="1"
+                                            Command="{Binding $parent[UserControl].DataContext.RemoveChartCommand}"
+                                            CommandParameter="{Binding}"
+                                            Focusable="False"
+                                            Height="18"
+                                            MinHeight="0"
+                                            MinWidth="0"
+                                            Padding="0"
+                                            ToolTip.Tip="Delete"
+                                            VerticalAlignment="Center"
+                                            Width="22">
+                                            <Button.Styles>
+                                                <Style Selector="Button">
+                                                    <Setter Property="Background" Value="Transparent" />
+                                                    <Setter Property="BorderThickness" Value="0" />
+                                                </Style>
+                                                <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                                    <Setter Property="Background" Value="Transparent" />
+                                                </Style>
+                                                <Style Selector="Button:pointerover PathIcon">
+                                                    <Setter Property="Foreground" Value="#F5333E" />
+                                                    <Setter Property="Opacity" Value="1" />
+                                                </Style>
+                                            </Button.Styles>
+                                            <PathIcon
+                                                Data="M6 19 c0 1.1 .9 2 2 2 h8 c1.1 0 2 -.9 2 -2 V7 H6 v12 z M19 4 h-3.5 l-1 -1 h-5 l-1 1 H5 v2 h14 V4 z"
+                                                Height="13"
+                                                Opacity="0.5"
+                                                Width="13" />
+                                        </Button>
+                                    </Grid>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
