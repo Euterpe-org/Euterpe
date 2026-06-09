@@ -322,13 +322,28 @@
                                         </Panel>
                                     </Button>
 
-                                    <!--  Title / author  -->
-                                    <TextBlock
-                                        FontWeight="SemiBold"
-                                        MaxLines="1"
-                                        Text="{Binding Manifest.Meta.Name}"
-                                        TextTrimming="CharacterEllipsis"
-                                        ToolTip.Tip="{Binding Manifest.Meta.Name}" />
+                                    <!--  Title -> web chart detail page (online charts only); the author line below stays plain  -->
+                                    <Button
+                                        Classes="Transparent"
+                                        Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
+                                        CommandParameter="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDetailUrlConverter}}"
+                                        Cursor="Hand"
+                                        HorizontalContentAlignment="Stretch"
+                                        IsHitTestVisible="{Binding Source, Converter={x:Static converters:FuncValueConverters.ChartIsOnlineConverter}}"
+                                        MinHeight="0"
+                                        Padding="0"
+                                        ToolTip.Tip="{Binding Manifest.Meta.Name}">
+                                        <Button.Styles>
+                                            <Style Selector="Button:pointerover TextBlock">
+                                                <Setter Property="TextDecorations" Value="Underline" />
+                                            </Style>
+                                        </Button.Styles>
+                                        <TextBlock
+                                            FontWeight="SemiBold"
+                                            MaxLines="1"
+                                            Text="{Binding Manifest.Meta.Name}"
+                                            TextTrimming="CharacterEllipsis" />
+                                    </Button>
                                     <TextBlock
                                         FontSize="12"
                                         MaxLines="1"
@@ -360,14 +375,29 @@
                                     <Grid
                                         ColumnDefinitions="*,24"
                                         MinHeight="18">
-                                        <TextBlock
-                                            FontSize="11"
+                                        <Button
                                             Grid.Column="0"
+                                            Classes="Transparent"
+                                            Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
+                                            CommandParameter="{Binding Manifest.Meta.Uploader, Converter={x:Static converters:FuncValueConverters.ChartUploaderUrlConverter}}"
+                                            Cursor="Hand"
+                                            HorizontalContentAlignment="Stretch"
+                                            IsHitTestVisible="{Binding Source, Converter={x:Static converters:FuncValueConverters.ChartIsOnlineConverter}}"
                                             IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                            Opacity="0.55"
-                                            Text="{Binding Manifest.Meta.Uploader.Nickname, Converter={x:Static converters:FuncValueConverters.ChartUploaderConverter}}"
-                                            TextTrimming="CharacterEllipsis"
-                                            VerticalAlignment="Center" />
+                                            MinHeight="0"
+                                            Padding="0"
+                                            VerticalAlignment="Center">
+                                            <Button.Styles>
+                                                <Style Selector="Button:pointerover TextBlock">
+                                                    <Setter Property="TextDecorations" Value="Underline" />
+                                                </Style>
+                                            </Button.Styles>
+                                            <TextBlock
+                                                FontSize="11"
+                                                Opacity="0.55"
+                                                Text="{Binding Manifest.Meta.Uploader.Nickname, Converter={x:Static converters:FuncValueConverters.ChartUploaderConverter}}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </Button>
                                         <Button
                                             Grid.Column="1"
                                             Command="{Binding $parent[UserControl].DataContext.RemoveChartCommand}"

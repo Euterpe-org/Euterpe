@@ -34,6 +34,18 @@ public static class FuncValueConverters
     public static FuncValueConverter<string?, string?> ChartUploaderConverter { get; } =
         new(static nickname => nickname is null ? null : string.Format(CultureInfo.CurrentCulture, XAML.ChartManage_UploadedBy, nickname));
 
+    // ChartDto -> its web chart detail page. Only valid for web-origin charts; gate the link on the Online source.
+    public static FuncValueConverter<ChartDto, string?> ChartDetailUrlConverter { get; } =
+        new(static chart => chart is null ? null : $"https://euterpe-org.com/charts/{chart.Manifest.Cid}");
+
+    // Uploader -> their web profile page, charts tab.
+    public static FuncValueConverter<ManifestUploader?, string?> ChartUploaderUrlConverter { get; } =
+        new(static uploader => uploader is null ? null : $"https://euterpe-org.com/users/{uploader.Uid}?tab=charts");
+
+    // Only web-origin (Online) charts have a web detail / uploader page worth linking to.
+    public static FuncValueConverter<ChartSource, bool> ChartIsOnlineConverter { get; } =
+        new(static source => source is ChartSource.Online);
+
     public static FuncValueConverter<bool, string> SortDirectionConverter { get; } =
         new(static descending => descending ? "↓" : "↑");
 
