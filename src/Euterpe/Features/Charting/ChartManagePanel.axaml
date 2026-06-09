@@ -304,8 +304,10 @@
                                         </Border>
                                     </StackPanel>
 
-                                    <!--  Uploader + mini delete button (same row, button pinned right)  -->
-                                    <Grid ColumnDefinitions="*,Auto">
+                                    <!--  Uploader + mini delete button (same row, pinned right; delete shows on card hover)  -->
+                                    <Grid
+                                        ColumnDefinitions="*,24"
+                                        MinHeight="18">
                                         <TextBlock
                                             FontSize="11"
                                             Grid.Column="0"
@@ -320,6 +322,7 @@
                                             CommandParameter="{Binding}"
                                             Focusable="False"
                                             Height="18"
+                                            IsVisible="{Binding $parent[Border].IsPointerOver}"
                                             MinHeight="0"
                                             MinWidth="0"
                                             Padding="0"
