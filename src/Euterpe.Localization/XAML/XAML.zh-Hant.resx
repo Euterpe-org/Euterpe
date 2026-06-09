@@ -490,4 +490,61 @@
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>歡迎使用 Euterpe</value>
   </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>刪除</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>降序</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>難度</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>含影片</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>直播安全</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>在網路上瀏覽並下載譜面</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>取得譜面</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>定數</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>重設</value>
+  </data>
+  <data name="ChartManage_Sort_DateAdded" xml:space="preserve">
+    <value>新增日期</value>
+  </data>
+  <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
+    <value>更新日期</value>
+  </data>
+  <data name="ChartManage_Sort_Difficulties" xml:space="preserve">
+    <value>難度數量</value>
+  </data>
+  <data name="ChartManage_Sort_Name" xml:space="preserve">
+    <value>名稱</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>排序方式</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>影片</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>由 {0} 上傳</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>本地</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>線上</value>
+  </data>
 </root>

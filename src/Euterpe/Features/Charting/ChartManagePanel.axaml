@@ -4,6 +4,7 @@
     xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Euterpe.Models.Charts"
     xmlns:vm="using:Euterpe.Features.Charting"
@@ -54,35 +55,35 @@
                 Grid.Column="0"
                 MinWidth="110"
                 SelectedIndex="{Binding SelectedChartSourceIndex}">
-                <ComboBoxItem>Online</ComboBoxItem>
-                <ComboBoxItem>Offline</ComboBoxItem>
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartSource_Online}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartSource_Offline}}" />
             </ComboBox>
 
             <TextBox
                 Grid.Column="1"
                 Margin="12,0"
-                PlaceholderText="Search  (name, author, charter)"
+                PlaceholderText="{Localize {x:Static loc:XAMLLiteral.SearchBarPlaceholder_Chart}}"
                 Text="{Binding SearchText}" />
 
             <ComboBox
                 Grid.Column="2"
                 MinWidth="140"
                 SelectedIndex="{Binding SortField}"
-                ToolTip.Tip="Sort by">
-                <ComboBoxItem>Name</ComboBoxItem>
-                <ComboBoxItem>Author</ComboBoxItem>
-                <ComboBoxItem>BPM</ComboBoxItem>
-                <ComboBoxItem>Rating</ComboBoxItem>
-                <ComboBoxItem>Date added</ComboBoxItem>
-                <ComboBoxItem>Date updated</ComboBoxItem>
-                <ComboBoxItem>Difficulties</ComboBoxItem>
+                ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_SortBy}}">
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_Name}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Bpm}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Rating}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_DateAdded}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_DateUpdated}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_Difficulties}}" />
             </ComboBox>
 
             <ToggleButton
                 Grid.Column="3"
                 IsChecked="{Binding SortDescending}"
                 Margin="8,0,0,0"
-                ToolTip.Tip="Descending"
+                ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_Descending}}"
                 Width="40">
                 <TextBlock Text="{Binding SortDescending, Converter={x:Static converters:FuncValueConverters.SortDirectionConverter}}" />
             </ToggleButton>
@@ -90,7 +91,7 @@
             <Button
                 Grid.Column="4"
                 Command="{Binding ResetFiltersCommand}"
-                Content="Reset"
+                Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Reset}}"
                 Margin="8,0,0,0" />
         </Grid>
 
@@ -124,7 +125,7 @@
                                 <StackPanel>
                                     <TextBlock
                                         Classes="CardTitle"
-                                        Text="Get Charts">
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_GetCharts_Title}}">
                                         <TextBlock.Foreground>
                                             <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                                                 <GradientStop Offset="0" Color="#FF9966" />
@@ -134,21 +135,21 @@
                                     </TextBlock>
                                     <TextBlock
                                         Classes="CardDesc"
-                                        Text="Browse &amp; download charts on the web" />
+                                        Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_GetCharts_Description}}" />
                                 </StackPanel>
                             </Border>
                         </Button>
 
                         <StackPanel Spacing="6">
-                            <TextBlock FontWeight="SemiBold" Text="Difficulty" />
-                            <CheckBox Content="Easy" IsChecked="{Binding ShowEasy}" />
-                            <CheckBox Content="Hard" IsChecked="{Binding ShowHard}" />
-                            <CheckBox Content="Master" IsChecked="{Binding ShowMaster}" />
-                            <CheckBox Content="Hidden" IsChecked="{Binding ShowHidden}" />
+                            <TextBlock FontWeight="SemiBold" Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_Difficulty}}" />
+                            <CheckBox Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Easy}}" IsChecked="{Binding ShowEasy}" />
+                            <CheckBox Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hard}}" IsChecked="{Binding ShowHard}" />
+                            <CheckBox Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Master}}" IsChecked="{Binding ShowMaster}" />
+                            <CheckBox Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hidden}}" IsChecked="{Binding ShowHidden}" />
                         </StackPanel>
 
                         <StackPanel Spacing="6">
-                            <TextBlock FontWeight="SemiBold" Text="Rating" />
+                            <TextBlock FontWeight="SemiBold" Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Rating}}" />
                             <Grid ColumnDefinitions="*,Auto,*">
                                 <NumericUpDown Grid.Column="0" Increment="1" FormatString="0" Maximum="12" Minimum="1" Value="{Binding RatingMin}" />
                                 <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
@@ -157,7 +158,7 @@
                         </StackPanel>
 
                         <StackPanel Spacing="6">
-                            <TextBlock FontWeight="SemiBold" Text="BPM" />
+                            <TextBlock FontWeight="SemiBold" Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Bpm}}" />
                             <Grid ColumnDefinitions="*,Auto,*">
                                 <NumericUpDown Grid.Column="0" Increment="10" FormatString="0" Maximum="999" Minimum="0" Value="{Binding BpmMin}" />
                                 <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
@@ -166,8 +167,8 @@
                         </StackPanel>
 
                         <StackPanel Spacing="6">
-                            <CheckBox Content="Streamer safe" IsChecked="{Binding StreamerSafeOnly}" />
-                            <CheckBox Content="Has video" IsChecked="{Binding HasVideoOnly}" />
+                            <CheckBox Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_StreamerSafe}}" IsChecked="{Binding StreamerSafeOnly}" />
+                            <CheckBox Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_HasVideo}}" IsChecked="{Binding HasVideoOnly}" />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -350,7 +351,7 @@
                                                 FontSize="10"
                                                 FontWeight="SemiBold"
                                                 Opacity="0.85"
-                                                Text="VIDEO" />
+                                                Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Tag_Video}}" />
                                         </Border>
                                     </StackPanel>
 
@@ -363,7 +364,7 @@
                                             Grid.Column="0"
                                             IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
                                             Opacity="0.55"
-                                            Text="{Binding Manifest.Meta.Uploader.Nickname, StringFormat='by {0}'}"
+                                            Text="{Binding Manifest.Meta.Uploader.Nickname, Converter={x:Static converters:FuncValueConverters.ChartUploaderConverter}}"
                                             TextTrimming="CharacterEllipsis"
                                             VerticalAlignment="Center" />
                                         <Button
@@ -376,7 +377,7 @@
                                             MinHeight="0"
                                             MinWidth="0"
                                             Padding="0"
-                                            ToolTip.Tip="Delete"
+                                            ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_Delete}}"
                                             VerticalAlignment="Center"
                                             Width="22">
                                             <Button.Styles>

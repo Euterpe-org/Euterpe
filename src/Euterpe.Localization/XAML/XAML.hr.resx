@@ -490,4 +490,61 @@
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>Dobrodošli u Euterpe</value>
   </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>Izbriši</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>Silazno</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>Težina</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>Ima videozapis</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>Sigurno za streamanje</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>Pregledaj i preuzmi chartove na webu</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>Nabavi chartove</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>Razina</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>Poništi</value>
+  </data>
+  <data name="ChartManage_Sort_DateAdded" xml:space="preserve">
+    <value>Datum dodavanja</value>
+  </data>
+  <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
+    <value>Datum ažuriranja</value>
+  </data>
+  <data name="ChartManage_Sort_Difficulties" xml:space="preserve">
+    <value>Težine</value>
+  </data>
+  <data name="ChartManage_Sort_Name" xml:space="preserve">
+    <value>Naziv</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>Razvrstaj po</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>Videozapis</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>autor {0}</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
 </root>
