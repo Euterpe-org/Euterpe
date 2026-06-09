@@ -19,29 +19,9 @@ internal sealed partial class DependencyAcquireService
             return;
         }
 
-        for (var attempt = 1; attempt <= MaxRetries; attempt++)
-        {
-            try
-            {
-                await AppDownloadManager.DownloadFileAsync(spec.Url, spec.FilePath, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.ZLogWarning(ex, $"Attempt {attempt}/{MaxRetries}: Download of {spec.Name} failed");
-                continue;
-            }
-
-            if (await IsValidAsync(spec.FilePath, spec.ExpectedHash).ConfigureAwait(false))
-            {
-                Logger.ZLogInformation($"{spec.Name} download completed successfully");
-                return;
-            }
-
-            var actualHash = await SHA256Utils.HexLowerFromPathAsync(spec.FilePath).ConfigureAwait(false);
-            Logger.ZLogWarning($"Attempt {attempt}/{MaxRetries}: {spec.Name} hash mismatch after download\r\nExpected: {spec.ExpectedHash}\r\nActual: {actualHash}");
-        }
-
-        throw new InvalidOperationException($"Failed to download a valid {spec.Name} after {MaxRetries} attempts.");
+        await DownloadUtils.DownloadVerifiedAsync(
+            ct => AppDownloadManager.DownloadFileAsync(spec.Url, spec.FilePath, onDownloadStarted, progress, ct),
+            spec.FilePath, spec.ExpectedHash, spec.Name, MaxRetries, Logger, cancellationToken).ConfigureAwait(false);
     }
 
     private static async Task<bool> IsValidAsync(string filePath, string expectedHash)

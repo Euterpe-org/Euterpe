@@ -40,7 +40,7 @@ public sealed partial class DependencyAcquireServiceTest
         var act = () => sut.AcquireForMelonLoaderAsync();
 
         using var _ = Assert.Multiple();
-        await Assert.That(act).Throws<InvalidOperationException>();
+        await Assert.That(act).Throws<IOException>();
         downloader.DownloadFileAsync(
                 Any<string>(),
                 Any<string>(),
@@ -63,6 +63,6 @@ public sealed partial class DependencyAcquireServiceTest
 
         var act = () => sut.AcquireForMelonLoaderAsync();
 
-        await Assert.That(act).Throws<InvalidOperationException>();
+        await Assert.That(act).Throws<IOException>();
     }
 }
