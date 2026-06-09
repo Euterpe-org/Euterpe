@@ -76,6 +76,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
         ChartManageService.Connect().PopulateInto(_sourceCache);
 
+        AudioPlayerService.PlaybackEnded += OnPlaybackEnded;
+
         Logger.ZLogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
     }
 
@@ -112,6 +114,20 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         _pausedFolder = null;
         CurrentlyPlaying = folder;
         await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
+    }
+
+    // Reset the now-playing state when a preview ends on its own (natural end, or stopped on decode failure).
+    // Fires on the audio thread; marshal to the UI thread and only clear if that same chart is still playing.
+    private void OnPlaybackEnded(object? sender, EventArgs e)
+    {
+        var ended = CurrentlyPlaying;
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (CurrentlyPlaying == ended)
+            {
+                CurrentlyPlaying = null;
+            }
+        });
     }
 
     [RelayCommand]
