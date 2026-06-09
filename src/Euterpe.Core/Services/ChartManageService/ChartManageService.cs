@@ -19,23 +19,46 @@ internal sealed partial class ChartManageService : IChartManageService
     public Task DownloadChartAsync(string chartId, CancellationToken cancellationToken = default) =>
         RunExclusiveAsync(chartId, () => DownloadChartCoreAsync(chartId, cancellationToken));
 
-    public Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default)
+    public async Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default)
     {
         var chart = GetOnlineCharts().FirstOrDefault(c => c.FolderName == chartId);
-        if (chart is not null)
+        if (chart is null)
         {
-            return CheckAndApplyUpdatesAsync([chart], cancellationToken);
+            Logger.ZLogWarning($"Update requested for unknown online chart {chartId}");
+            return;
         }
 
-        Logger.ZLogWarning($"Update requested for unknown online chart {chartId}");
-        return Task.CompletedTask;
+        foreach (var (success, displayName) in await CheckAndApplyUpdatesAsync([chart], cancellationToken).ConfigureAwait(false))
+        {
+            if (success)
+            {
+                NotificationService.SuccessLight(Notification_Content_Chart_Update_Success, displayName);
+            }
+            else
+            {
+                NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, displayName);
+            }
+        }
     }
 
     public Task RemoveChartAsync(string folderPath) =>
         RunExclusiveAsync(Path.GetFileName(folderPath), () => RemoveChartCoreAsync(folderPath));
 
-    public Task UpdateAllChartsAsync(CancellationToken cancellationToken = default) =>
-        CheckAndApplyUpdatesAsync(GetOnlineCharts(), cancellationToken);
+    public async Task UpdateAllChartsAsync(CancellationToken cancellationToken = default)
+    {
+        var results = await CheckAndApplyUpdatesAsync(GetOnlineCharts(), cancellationToken).ConfigureAwait(false);
+        var updated = results.Count(r => r.Success);
+        var failed = results.Count - updated;
+
+        if (failed > 0)
+        {
+            NotificationService.WarningLight(Notification_Content_Chart_UpdateAll_Partial, updated, failed);
+        }
+        else if (updated > 0)
+        {
+            NotificationService.SuccessLight(Notification_Content_Chart_UpdateAll_Success, updated);
+        }
+    }
 
     #region Injections
 

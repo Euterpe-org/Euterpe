@@ -153,6 +153,12 @@
   <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
     <value>Chart {0} successfully updated</value>
   </data>
+  <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
+    <value>Updated {0} charts, {1} failed</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Success" xml:space="preserve">
+    <value>Updated {0} charts</value>
+  </data>
   <data name="Notification_Content_Migration_Partial" xml:space="preserve">
     <value>Migrated {0} CustomAlbums charts, {1} failed</value>
   </data>

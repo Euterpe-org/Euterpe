@@ -35,7 +35,7 @@ internal sealed partial class ChartManageService
         }
     }
 
-    private async Task UpdateChartCoreAsync(string cid, IReadOnlyCollection<string> changedFiles, CancellationToken cancellationToken)
+    private async Task<ChartUpdateResult> UpdateChartCoreAsync(string cid, IReadOnlyCollection<string> changedFiles, CancellationToken cancellationToken)
     {
         try
         {
@@ -45,18 +45,17 @@ internal sealed partial class ChartManageService
             if (chart is null)
             {
                 Logger.ZLogWarning($"Updated chart {cid} but failed to load it from {folderPath}");
-                NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, cid);
-                return;
+                return new ChartUpdateResult(false, cid);
             }
 
             _sourceCache.AddOrUpdate(chart);
             Logger.ZLogInformation($"Chart {cid} updated");
-            NotificationService.SuccessLight(Notification_Content_Chart_Update_Success, chart.Manifest.Meta.Name);
+            return new ChartUpdateResult(true, chart.Manifest.Meta.Name);
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to update chart {cid}");
-            NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, cid);
+            return new ChartUpdateResult(false, cid);
         }
     }
 
@@ -105,4 +104,13 @@ internal sealed partial class ChartManageService
     }
 
     private Task RunExclusiveAsync(string key, Func<Task> action) => _singleFlight.RunAsync(key, action);
+
+    private async Task<T> RunExclusiveAsync<T>(string key, Func<Task<T>> action)
+    {
+        T result = default!;
+        await _singleFlight.RunAsync(key, async () => result = await action().ConfigureAwait(false)).ConfigureAwait(false);
+        return result;
+    }
+
+    private readonly record struct ChartUpdateResult(bool Success, string DisplayName);
 }

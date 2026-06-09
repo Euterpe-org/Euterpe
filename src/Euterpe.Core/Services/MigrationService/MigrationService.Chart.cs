@@ -137,4 +137,11 @@ internal sealed partial class MigrationService
         FileSystemService.TryDeleteFile(Path.Combine(folder, InfoFileName));
         FileSystemService.TryDeleteFile(Path.Combine(folder, CinemaFileName), DeleteOption.IgnoreIfNotFound);
     }
+
+    private enum MigrationOutcome
+    {
+        Migrated,
+        Skipped,
+        Failed
+    }
 }

@@ -51,13 +51,6 @@ internal sealed partial class MigrationService : IMigrationService
         }
     }
 
-    private enum MigrationOutcome
-    {
-        Migrated,
-        Skipped,
-        Failed
-    }
-
     #region Injections
 
     public required GameConfig GameConfig { get; init; }
