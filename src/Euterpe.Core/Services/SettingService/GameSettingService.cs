@@ -11,8 +11,6 @@ internal sealed class GameSettingService : IGameSettingService
         Directory.CreateDirectory(GameConfig.OnlineChartsFolder);
         Directory.CreateDirectory(GameConfig.OfflineChartsFolder);
 
-        // Clean up temp folders on startup
-        FileSystemService.TryDeleteDirectory(GameConfig.TempFolder, DeleteOption.IgnoreIfNotFound);
         Directory.CreateDirectory(GameConfig.TempModsFolder);
         Directory.CreateDirectory(GameConfig.TempChartsFolder);
     }
@@ -21,7 +19,6 @@ internal sealed class GameSettingService : IGameSettingService
 
     public required GameConfig GameConfig { get; init; }
     public required IGamePathDiscovery GamePaths { get; init; }
-    public required IFileSystemService FileSystemService { get; init; }
 
     #endregion Injections
 }

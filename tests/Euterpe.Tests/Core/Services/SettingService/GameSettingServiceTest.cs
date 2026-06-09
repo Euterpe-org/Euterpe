@@ -1,13 +1,9 @@
-using Microsoft.Extensions.Logging.Abstractions;
-
 namespace Euterpe.Tests;
 
 [Category("GameSettingServiceTests")]
 [TestSubject(typeof(GameSettingService))]
 public sealed class GameSettingServiceTest
 {
-    private static FileSystemService NewFileSystemService() => new() { Logger = NullLogger<FileSystemService>.Instance };
-
     [Test]
     [Arguments(true)]
     [Arguments(false)]
@@ -18,8 +14,7 @@ public sealed class GameSettingServiceTest
         var service = new GameSettingService
         {
             GameConfig = new MuseDashConfig { Folder = "/some/folder" },
-            GamePaths = paths,
-            FileSystemService = NewFileSystemService()
+            GamePaths = paths
         };
 
         await Assert.That(service.IsValidGameFolder()).IsEqualTo(expected);
@@ -35,8 +30,7 @@ public sealed class GameSettingServiceTest
             var service = new GameSettingService
             {
                 GameConfig = gameConfig,
-                GamePaths = IGamePathDiscovery.Mock(),
-                FileSystemService = NewFileSystemService()
+                GamePaths = IGamePathDiscovery.Mock()
             };
 
             service.EnsureGameFolders();
@@ -59,7 +53,7 @@ public sealed class GameSettingServiceTest
     }
 
     [Test]
-    public async Task EnsureGameFolders_WipesStaleTempContent()
+    public async Task EnsureGameFolders_PreservesInFlightTempContent()
     {
         var root = Path.Combine(Path.GetTempPath(), $"euterpe-test-{Guid.NewGuid():N}");
         try
@@ -68,19 +62,22 @@ public sealed class GameSettingServiceTest
             var service = new GameSettingService
             {
                 GameConfig = gameConfig,
-                GamePaths = IGamePathDiscovery.Mock(),
-                FileSystemService = NewFileSystemService()
+                GamePaths = IGamePathDiscovery.Mock()
             };
 
-            // Simulate an orphan left behind by a crash mid-download.
-            Directory.CreateDirectory(gameConfig.TempModsFolder);
-            var orphan = Path.Combine(gameConfig.TempModsFolder, "stale.dll");
-            await File.WriteAllTextAsync(orphan, "partial");
+            // Simulate a chart download that is already in progress: its work folder and a
+            // partially downloaded file live under the temp charts folder.
+            var workFolder = Path.Combine(gameConfig.TempChartsFolder, "13");
+            Directory.CreateDirectory(workFolder);
+            var inFlightFile = Path.Combine(workFolder, "manifest.epk");
+            await File.WriteAllTextAsync(inFlightFile, "partial");
 
             service.EnsureGameFolders();
 
+            // EnsureGameFolders must not wipe temp; otherwise it races with the active download
+            // and the download fails with DirectoryNotFoundException when it writes the file.
             using var assertions = Assert.Multiple();
-            await Assert.That(File.Exists(orphan)).IsFalse();
+            await Assert.That(File.Exists(inFlightFile)).IsTrue();
             await Assert.That(Directory.Exists(gameConfig.TempModsFolder)).IsTrue();
             await Assert.That(Directory.Exists(gameConfig.TempChartsFolder)).IsTrue();
         }
