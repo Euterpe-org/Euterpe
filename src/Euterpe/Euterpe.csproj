@@ -33,6 +33,7 @@
         <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
+        <PackageReference Include="Xaml.Behaviors.Interactions.DragAndDrop"/>
     </ItemGroup>
 
     <!-- Avalonia Diagnostics Package-->

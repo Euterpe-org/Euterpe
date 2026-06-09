@@ -21,6 +21,12 @@ public interface IFileSystemService
     bool TryMoveFile(string sourcePath, string destinationPath, bool overwrite = false);
 
     /// <summary>
+    ///     Copies a file to <paramref name="destinationPath" />, creating the destination directory if missing.
+    ///     Best-effort: logs a warning and returns <c>false</c> on failure instead of throwing.
+    /// </summary>
+    bool TryCopyFile(string sourcePath, string destinationPath, bool overwrite = false);
+
+    /// <summary>
     ///     Deletes a directory recursively, throwing on failure so the caller can surface the real cause. With
     ///     <see cref="DeleteOption.IgnoreIfNotFound" /> a missing directory is a no-op.
     /// </summary>

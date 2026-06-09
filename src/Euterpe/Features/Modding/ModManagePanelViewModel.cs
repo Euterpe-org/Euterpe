@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Avalonia.Platform.Storage;
 using DynamicData.Binding;
 
 namespace Euterpe.Features.Modding;
@@ -92,6 +93,18 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
     [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task ToggleModAsync(ModDto mod) => await ModManageService.ToggleModAsync(mod).ConfigureAwait(false);
+
+    [RelayCommand]
+    private async Task ImportModsAsync(IReadOnlyList<IStorageItem> files)
+    {
+        var paths = files.GetLocalPaths().OfType<string>().ToArray();
+        if (paths is [])
+        {
+            return;
+        }
+
+        await ModManageService.ImportModsAsync(paths).ConfigureAwait(false);
+    }
 
     partial void OnSelectedModFilterIndexChanged(int value)
     {

@@ -17,9 +17,26 @@
         <vm:ChartManagePanelViewModel />
     </Design.DataContext>
 
+    <UserControl.Styles>
+        <Style
+            Selector="Border#DropOverlay">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style
+            Selector="Grid.DragOver &gt; Border#DropOverlay">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+    </UserControl.Styles>
+
     <Grid
+        e:DropZone.IsActive="True"
         Margin="16"
         RowDefinitions="Auto,*">
+
+        <Interaction.Behaviors>
+            <FilesDropBehavior
+                Command="{Binding ImportChartsCommand}" />
+        </Interaction.Behaviors>
 
         <!--  Top bar: source toggle + search + stop  -->
         <Grid
@@ -45,6 +62,16 @@
                 Command="{Binding StopMusicCommand}"
                 Content="Stop" />
         </Grid>
+
+        <!--  Drag-over highlight overlay  -->
+        <Border
+            x:Name="DropOverlay"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            BorderBrush="{DynamicResource SemiBlue6}"
+            BorderThickness="2"
+            CornerRadius="8"
+            IsHitTestVisible="False" />
 
         <!--  Chart list  -->
         <ScrollViewer

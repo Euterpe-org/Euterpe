@@ -1,10 +1,46 @@
+using Euterpe.Models.Charts.CustomAlbums;
+
 namespace Euterpe.Core;
 
 internal sealed partial class MigrationService : IMigrationService
 {
-    public async Task MigrateCustomAlbumsAsync(
-        IProgress<string>? progress = null,
-        CancellationToken cancellationToken = default)
+    public async Task<MigrationOutcome> MigrateCustomAlbumAsync(CustomAlbumSource source, CancellationToken cancellationToken = default)
+    {
+        var name = source.Name;
+        var destinationFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
+
+        if (Directory.Exists(destinationFolder))
+        {
+            Logger.ZLogInformation($"'{name}' already migrated, skipping");
+            return MigrationOutcome.Skipped;
+        }
+
+        var workFolder = Path.Combine(GameConfig.TempChartsFolder, name);
+        try
+        {
+            await BuildChartAsync(source, workFolder, cancellationToken).ConfigureAwait(false);
+
+            if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder))
+            {
+                Logger.ZLogError($"Failed to move migrated chart '{name}'");
+                return MigrationOutcome.Failed;
+            }
+
+            Logger.ZLogInformation($"Migrated '{name}' -> {destinationFolder}");
+            return MigrationOutcome.Migrated;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to migrate custom album '{name}', skipping");
+            return MigrationOutcome.Failed;
+        }
+        finally
+        {
+            FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
+        }
+    }
+
+    public async Task MigrateCustomAlbumsAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         if (!Directory.Exists(GameConfig.CustomAlbumsChartsFolder))
         {
@@ -19,7 +55,7 @@ internal sealed partial class MigrationService : IMigrationService
         {
             progress?.Report($"{sources[i].Name} ({i + 1}/{sources.Length})");
 
-            switch (await MigrateSourceAsync(sources[i], cancellationToken).ConfigureAwait(false))
+            switch (await MigrateCustomAlbumAsync(sources[i], cancellationToken).ConfigureAwait(false))
             {
                 case MigrationOutcome.Migrated:
                     migrated++;
@@ -50,6 +86,7 @@ internal sealed partial class MigrationService : IMigrationService
             NotificationService.SuccessLight(Notification_Content_Migration_Success, migrated);
         }
     }
+
 
     #region Injections
 

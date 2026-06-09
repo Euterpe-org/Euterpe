@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Avalonia.Platform.Storage;
 
 namespace Euterpe.Features.Charting;
 
@@ -52,6 +53,21 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     [RelayCommand]
     private void StopMusic() => AudioPlayerService.Stop();
+
+    [RelayCommand]
+    private async Task ImportChartsAsync(IReadOnlyList<IStorageItem> files)
+    {
+        var paths = files.GetLocalPaths().OfType<string>().ToArray();
+        if (paths is [])
+        {
+            return;
+        }
+
+        if (await ChartManageService.ImportChartsAsync(paths).ConfigureAwait(false))
+        {
+            SelectedChartSourceIndex = (int)ChartSource.Offline;
+        }
+    }
 
     partial void OnSelectedChartSourceIndexChanged(int value)
     {

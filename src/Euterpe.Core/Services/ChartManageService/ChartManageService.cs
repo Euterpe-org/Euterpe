@@ -62,11 +62,14 @@ internal sealed partial class ChartManageService : IChartManageService
 
     #region Injections
 
+    public required GameConfig GameConfig { get; init; }
+    public required IArchiveService Archive { get; init; }
     public required IChartLocalService ChartLocalService { get; init; }
     public required IFileSystemService FileSystemService { get; init; }
     public required IGameDownloadManager GameDownloadManager { get; init; }
     public required ILogger<ChartManageService> Logger { get; init; }
     public required INotificationService NotificationService { get; init; }
+    public required IMigrationService MigrationService { get; init; }
 
     #endregion Injections
 }

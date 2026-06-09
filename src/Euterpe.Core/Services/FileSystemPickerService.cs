@@ -51,7 +51,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle
             }).ConfigureAwait(true);
 
-        return folders is not [] ? folders.Select(x => x.TryGetLocalPath()) : null;
+        return folders is not [] ? folders.GetLocalPaths() : null;
     }
 
     public async Task<IStorageFile?> GetSingleFileAsync(string dialogTitle)
@@ -109,6 +109,6 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 ]
             }).ConfigureAwait(true);
 
-        return files is not [] ? files.Select(x => x.TryGetLocalPath()) : null;
+        return files is not [] ? files.GetLocalPaths() : null;
     }
 }

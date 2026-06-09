@@ -9,4 +9,5 @@ public interface IChartManageService
     Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default);
     Task RemoveChartAsync(string folderPath);
     Task UpdateAllChartsAsync(CancellationToken cancellationToken = default);
+    Task<bool> ImportChartsAsync(IReadOnlyList<string> paths, CancellationToken cancellationToken = default);
 }

@@ -46,6 +46,31 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
+    public bool TryCopyFile(string sourcePath, string destinationPath, bool overwrite = false)
+    {
+        try
+        {
+            if (string.Equals(Path.GetFullPath(sourcePath), Path.GetFullPath(destinationPath), StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            var directory = Path.GetDirectoryName(destinationPath);
+            if (!directory.IsNullOrEmpty())
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            File.Copy(sourcePath, destinationPath, overwrite);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to copy file from {sourcePath} to {destinationPath}");
+            return false;
+        }
+    }
+
     public void DeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
         if (deleteOption is DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))

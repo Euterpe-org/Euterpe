@@ -26,7 +26,7 @@ internal sealed class ModLocalService : IModLocalService
             var attribute = assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
             if (attribute is null)
             {
-                Logger.ZLogWarning($"{filePath} is not a mod file but inside Mods folder");
+                Logger.ZLogWarning($"{filePath} has no MelonInfoAttribute and is not a MelonLoader mod");
                 return null;
             }
 

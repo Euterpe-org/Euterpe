@@ -7,42 +7,6 @@ namespace Euterpe.Core;
 
 internal sealed partial class MigrationService
 {
-    private async Task<MigrationOutcome> MigrateSourceAsync(CustomAlbumSource source, CancellationToken cancellationToken)
-    {
-        var name = source.Name;
-        var destinationFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
-
-        if (Directory.Exists(destinationFolder))
-        {
-            Logger.ZLogInformation($"'{name}' already migrated, skipping");
-            return MigrationOutcome.Skipped;
-        }
-
-        var workFolder = Path.Combine(GameConfig.TempChartsFolder, name);
-        try
-        {
-            await BuildChartAsync(source, workFolder, cancellationToken).ConfigureAwait(false);
-
-            if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder))
-            {
-                Logger.ZLogError($"Failed to move migrated chart '{name}'");
-                return MigrationOutcome.Failed;
-            }
-
-            Logger.ZLogInformation($"Migrated '{name}' -> {destinationFolder}");
-            return MigrationOutcome.Migrated;
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to migrate custom album '{name}', skipping");
-            return MigrationOutcome.Failed;
-        }
-        finally
-        {
-            FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
-        }
-    }
-
     private async Task BuildChartAsync(CustomAlbumSource source, string workFolder, CancellationToken cancellationToken)
     {
         FileSystemService.DeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
@@ -136,12 +100,5 @@ internal sealed partial class MigrationService
     {
         FileSystemService.TryDeleteFile(Path.Combine(folder, InfoFileName));
         FileSystemService.TryDeleteFile(Path.Combine(folder, CinemaFileName), DeleteOption.IgnoreIfNotFound);
-    }
-
-    private enum MigrationOutcome
-    {
-        Migrated,
-        Skipped,
-        Failed
     }
 }

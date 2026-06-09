@@ -62,13 +62,22 @@ internal sealed partial class ModManageService
             return;
         }
 
+        localMod.State = DetermineModState(localMod, webMod.ToModel());
+    }
+
+    private ModState DetermineModState(ModDto localMod, ModDto webMod)
+    {
+        if (IsModIncompatible(webMod.MelonVersion, webMod.GameVersion))
+        {
+            return ModState.Incompatible;
+        }
+
         var localVersion = SemVersion.Parse(localMod.LocalVersion);
         var webVersion = SemVersion.Parse(webMod.Version);
         var versionComparison = localVersion.ComparePrecedenceTo(webVersion);
 
-        localMod.State = versionComparison switch
+        return versionComparison switch
         {
-            _ when IsModIncompatible(webMod.MelonVersion, webMod.GameVersion) => ModState.Incompatible,
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,

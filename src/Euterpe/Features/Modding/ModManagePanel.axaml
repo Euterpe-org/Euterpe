@@ -23,11 +23,25 @@
     <UserControl.Styles>
         <StyleInclude
             Source="avares://Euterpe.Controls/Themes/ControlStyles/Panels/ModManagePanelStyles.axaml" />
+        <Style
+            Selector="Border#DropOverlay">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style
+            Selector="Grid.DragOver &gt; Border#DropOverlay">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
     </UserControl.Styles>
 
     <!--  Main Layout Grid  -->
     <Grid
+        e:DropZone.IsActive="True"
         ColumnDefinitions="380,*">
+
+        <Interaction.Behaviors>
+            <FilesDropBehavior
+                Command="{Binding ImportModsCommand}" />
+        </Interaction.Behaviors>
 
         <!--  Left Panel: Mod List Section  -->
         <Border
@@ -203,6 +217,16 @@
                 </u:LoadingContainer>
             </Grid>
         </Border>
+
+        <!--  Drag-over highlight overlay  -->
+        <Border
+            x:Name="DropOverlay"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            BorderBrush="{DynamicResource SemiBlue6}"
+            BorderThickness="2"
+            CornerRadius="8"
+            IsHitTestVisible="False" />
 
         <!--  Right Panel: Mod Details Section  -->
         <Panel
