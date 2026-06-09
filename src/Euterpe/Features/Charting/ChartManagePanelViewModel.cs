@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Avalonia.Platform.Storage;
 using DynamicData.Binding;
 
 namespace Euterpe.Features.Charting;
@@ -156,6 +157,21 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         }
 
         await ChartManageService.RemoveChartAsync(chart.FolderPath).ConfigureAwait(false);
+    }
+
+    [RelayCommand]
+    private async Task ImportChartsAsync(IReadOnlyList<IStorageItem> files)
+    {
+        var paths = files.GetLocalPaths().OfType<string>().ToArray();
+        if (paths is [])
+        {
+            return;
+        }
+
+        if (await ChartManageService.ImportChartsAsync(paths).ConfigureAwait(false))
+        {
+            SelectedChartSourceIndex = (int)ChartSource.Offline;
+        }
     }
 
     private bool MatchesFilters(ChartDto chart)
