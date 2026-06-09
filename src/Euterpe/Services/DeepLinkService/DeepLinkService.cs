@@ -46,13 +46,13 @@ public sealed partial class DeepLinkService
         switch (action)
         {
             case "mod":
-                await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
+                await NavigationService.NavigateToAsync("/modding/manage").ConfigureAwait(true);
                 await ModManageService.InitializeModsAsync().ConfigureAwait(true);
                 await HandleModActionAsync(path).ConfigureAwait(false);
                 break;
 
             case "chart":
-                await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
+                await NavigationService.NavigateToAsync("/charting/manage").ConfigureAwait(true);
                 await ChartManageService.InitializeChartsAsync().ConfigureAwait(true);
                 await HandleChartActionAsync(path).ConfigureAwait(false);
                 break;
