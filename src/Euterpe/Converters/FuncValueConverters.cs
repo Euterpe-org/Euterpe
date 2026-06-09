@@ -23,12 +23,20 @@ public static class FuncValueConverters
         new(static difficulty => DifficultyIcons.GetOrAdd(difficulty, static d =>
             new Bitmap(AssetLoader.Open(AppAssets.Uri($"Difficulties/{d}.png")))));
 
-    public static FuncValueConverter<ChartDto, string> ChartRatingConverter { get; } =
-        new(static chart => chart is null ? string.Empty : ChartRating.MaxDisplay(chart));
-
     public static FuncValueConverter<ManifestMeta, string> ChartBpmConverter { get; } =
         new(static meta => meta is null ? string.Empty : ChartRating.BpmDisplay(meta));
 
     public static FuncValueConverter<bool, string> SortDirectionConverter { get; } =
         new(static descending => descending ? "↓" : "↑");
+
+    public static FuncValueConverter<ChartDto, IReadOnlyList<DifficultyBadge>> ChartDifficultyBadgesConverter { get; } =
+        new(static chart => chart is null ? [] : ChartRating.Badges(chart));
+
+    // [folderName, currentlyPlaying] -> is this chart the one playing
+    public static FuncMultiValueConverter<string?, bool> ChartIsPlayingConverter { get; } =
+        new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing);
+
+    // [folderName, currentlyPlaying] -> stop glyph when playing, else play glyph
+    public static FuncMultiValueConverter<string?, string> ChartPlayGlyphConverter { get; } =
+        new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing ? "⏹" : "▶");
 }
