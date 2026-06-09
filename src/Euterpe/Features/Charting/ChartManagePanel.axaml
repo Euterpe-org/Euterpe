@@ -108,25 +108,35 @@
                 Padding="12">
                 <ScrollViewer>
                     <StackPanel Spacing="14">
-                        <!--  Charts are downloaded on the web; send users there to pick them  -->
+                        <!--  Charts are browsed/downloaded on the web; flashy CTA card to send users there  -->
                         <Button
-                            Classes="Primary"
+                            Classes="Transparent Card"
                             Command="{Binding OpenUrlCommand}"
                             CommandParameter="https://euterpe-org.com/charts"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"
                             ToolTip.Tip="https://euterpe-org.com/charts">
-                            <StackPanel
-                                Orientation="Horizontal"
-                                Spacing="8">
-                                <PathIcon
-                                    Data="M19 9 h-4 V3 H9 v6 H5 l7 7 7 -7 z M5 18 v2 h14 v-2 H5 z"
-                                    Height="16"
-                                    Width="16" />
-                                <TextBlock
-                                    Text="Browse &amp; download charts"
-                                    VerticalAlignment="Center" />
-                            </StackPanel>
+                            <Button.Styles>
+                                <Style Selector="Button:pointerover Border.Hover">
+                                    <Setter Property="Background" Value="#B32E29" />
+                                    <Setter Property="RenderTransform" Value="scale(1.02)" />
+                                </Style>
+                            </Button.Styles>
+                            <Border Classes="Hover">
+                                <StackPanel>
+                                    <TextBlock
+                                        Classes="CardTitle"
+                                        Text="Get Charts">
+                                        <TextBlock.Foreground>
+                                            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                                <GradientStop Offset="0" Color="#FF9966" />
+                                                <GradientStop Offset="1" Color="#FF5E62" />
+                                            </LinearGradientBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <TextBlock
+                                        Classes="CardDesc"
+                                        Text="Browse &amp; download charts on the web" />
+                                </StackPanel>
+                            </Border>
                         </Button>
 
                         <StackPanel Spacing="6">
