@@ -174,12 +174,12 @@
                 </ScrollViewer>
             </Border>
 
-            <!--  Tiled chart grid (4 per row at default window size)  -->
+            <!--  Chart grid: fixed-width cards that wrap, so the column count flows with window width (≈4 at the default size, more when wider) instead of locking to 4  -->
             <ScrollViewer Grid.Column="1">
                 <ItemsControl ItemsSource="{Binding Charts}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="4" />
+                            <WrapPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -188,7 +188,8 @@
                                 Background="{DynamicResource SecondaryCardColor}"
                                 CornerRadius="10"
                                 Margin="0,0,12,12"
-                                Padding="8">
+                                Padding="8"
+                                Width="180">
                                 <StackPanel Spacing="6">
                                     <!--  Cover: the whole cover toggles play/pause; mask + button appear together  -->
                                     <Button
