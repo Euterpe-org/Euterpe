@@ -17,35 +17,18 @@
         <vm:ChartManagePanelViewModel />
     </Design.DataContext>
 
-    <UserControl.Styles>
-        <Style
-            Selector="Border#DropOverlay">
-            <Setter Property="IsVisible" Value="False" />
-        </Style>
-        <Style
-            Selector="Grid.DragOver &gt; Border#DropOverlay">
-            <Setter Property="IsVisible" Value="True" />
-        </Style>
-    </UserControl.Styles>
-
     <Grid
-        e:DropZone.IsActive="True"
         Margin="16"
         RowDefinitions="Auto,*">
 
-        <Interaction.Behaviors>
-            <FilesDropBehavior
-                Command="{Binding ImportChartsCommand}" />
-        </Interaction.Behaviors>
-
-        <!--  Top bar: source toggle + search + stop  -->
+        <!--  Top bar: source + search + sort + reset + stop  -->
         <Grid
             Grid.Row="0"
-            ColumnDefinitions="Auto,*,Auto"
+            ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto"
             Margin="0,0,0,12">
             <ComboBox
                 Grid.Column="0"
-                MinWidth="120"
+                MinWidth="110"
                 SelectedIndex="{Binding SelectedChartSourceIndex}">
                 <ComboBoxItem>Online</ComboBoxItem>
                 <ComboBoxItem>Offline</ComboBoxItem>
@@ -54,75 +37,188 @@
             <TextBox
                 Grid.Column="1"
                 Margin="12,0"
-                PlaceholderText="Search charts..."
+                PlaceholderText="Search  (name, author, charter)"
                 Text="{Binding SearchText}" />
 
-            <Button
+            <ComboBox
                 Grid.Column="2"
+                MinWidth="140"
+                SelectedIndex="{Binding SortField}"
+                ToolTip.Tip="Sort by">
+                <ComboBoxItem>Name</ComboBoxItem>
+                <ComboBoxItem>Author</ComboBoxItem>
+                <ComboBoxItem>BPM</ComboBoxItem>
+                <ComboBoxItem>Rating</ComboBoxItem>
+                <ComboBoxItem>Date added</ComboBoxItem>
+                <ComboBoxItem>Date updated</ComboBoxItem>
+                <ComboBoxItem>Difficulties</ComboBoxItem>
+            </ComboBox>
+
+            <ToggleButton
+                Grid.Column="3"
+                Margin="8,0,0,0"
+                IsChecked="{Binding SortDescending}"
+                ToolTip.Tip="Descending"
+                Width="40">
+                <TextBlock Text="{Binding SortDescending, Converter={x:Static converters:FuncValueConverters.SortDirectionConverter}}" />
+            </ToggleButton>
+
+            <Button
+                Grid.Column="4"
+                Command="{Binding ResetFiltersCommand}"
+                Content="Reset"
+                Margin="8,0,0,0" />
+
+            <Button
+                Grid.Column="5"
                 Command="{Binding StopMusicCommand}"
-                Content="Stop" />
+                Content="Stop"
+                Margin="8,0,0,0" />
         </Grid>
 
-        <!--  Drag-over highlight overlay  -->
-        <Border
-            x:Name="DropOverlay"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            BorderBrush="{DynamicResource SemiBlue6}"
-            BorderThickness="2"
-            CornerRadius="8"
-            IsHitTestVisible="False" />
+        <!--  Body: filter rail + tiled grid  -->
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="220,*">
 
-        <!--  Chart list  -->
-        <ScrollViewer
-            Grid.Row="1">
-            <ItemsControl
-                ItemsSource="{Binding Charts}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate
-                        x:DataType="models:ChartDto">
-                        <Border
-                            Background="{DynamicResource SecondaryCardColor}"
-                            CornerRadius="8"
-                            Margin="0,0,0,8"
-                            Padding="8">
-                            <Grid
-                                ColumnDefinitions="64,*,Auto">
-                                <e:AsyncImage
-                                    Grid.Column="0"
-                                    Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
-                                    ClipToBounds="True"
-                                    CornerRadius="6"
-                                    Height="64"
-                                    Source="{Binding CoverPath}"
-                                    Stretch="UniformToFill"
-                                    Width="64" />
+            <!--  Filter rail  -->
+            <Border
+                Grid.Column="0"
+                Background="{DynamicResource SecondaryCardColor}"
+                CornerRadius="8"
+                Margin="0,0,12,0"
+                Padding="12">
+                <ScrollViewer>
+                    <StackPanel Spacing="14">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Text="Difficulty" />
+                            <CheckBox Content="Easy" IsChecked="{Binding ShowEasy}" />
+                            <CheckBox Content="Hard" IsChecked="{Binding ShowHard}" />
+                            <CheckBox Content="Master" IsChecked="{Binding ShowMaster}" />
+                            <CheckBox Content="Hidden" IsChecked="{Binding ShowHidden}" />
+                        </StackPanel>
 
-                                <StackPanel
-                                    Grid.Column="1"
-                                    Margin="12,0"
-                                    VerticalAlignment="Center">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Text="Rating" />
+                            <Grid ColumnDefinitions="*,Auto,*">
+                                <NumericUpDown Grid.Column="0" Minimum="0" Maximum="99" Increment="1" FormatString="0.#" Value="{Binding RatingMin}" />
+                                <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
+                                <NumericUpDown Grid.Column="2" Minimum="0" Maximum="99" Increment="1" FormatString="0.#" Value="{Binding RatingMax}" />
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Text="BPM" />
+                            <Grid ColumnDefinitions="*,Auto,*">
+                                <NumericUpDown Grid.Column="0" Minimum="0" Maximum="999" Increment="10" FormatString="0" Value="{Binding BpmMin}" />
+                                <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
+                                <NumericUpDown Grid.Column="2" Minimum="0" Maximum="999" Increment="10" FormatString="0" Value="{Binding BpmMax}" />
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="SemiBold" Text="Scene" />
+                            <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding Scenes}" PlaceholderText="Any" SelectedItem="{Binding SelectedScene}" />
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+                            <CheckBox Content="Streamer safe" IsChecked="{Binding StreamerSafeOnly}" />
+                            <CheckBox Content="Has video" IsChecked="{Binding HasVideoOnly}" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!--  Tiled chart grid  -->
+            <ScrollViewer Grid.Column="1">
+                <ItemsControl ItemsSource="{Binding Charts}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:ChartDto">
+                            <Border
+                                Background="{DynamicResource SecondaryCardColor}"
+                                CornerRadius="10"
+                                Margin="0,0,12,12"
+                                Padding="8"
+                                Width="196">
+                                <StackPanel Spacing="6">
+                                    <!--  Cover  -->
+                                    <Panel>
+                                        <e:AsyncImage
+                                            Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
+                                            ClipToBounds="True"
+                                            CornerRadius="8"
+                                            Height="180"
+                                            Source="{Binding CoverPath}"
+                                            Stretch="UniformToFill" />
+                                        <Border
+                                            Background="#CC000000"
+                                            CornerRadius="6"
+                                            HorizontalAlignment="Left"
+                                            Margin="6"
+                                            Padding="6,2"
+                                            VerticalAlignment="Top">
+                                            <TextBlock
+                                                FontSize="12"
+                                                FontWeight="Bold"
+                                                Foreground="White"
+                                                Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartRatingConverter}, StringFormat='Lv {0}'}" />
+                                        </Border>
+                                        <Button
+                                            Background="#CC000000"
+                                            Command="{Binding $parent[UserControl].DataContext.PlayCommand}"
+                                            CommandParameter="{Binding}"
+                                            Content="▶"
+                                            CornerRadius="14"
+                                            Foreground="White"
+                                            HorizontalAlignment="Right"
+                                            Margin="6"
+                                            Padding="0"
+                                            VerticalAlignment="Bottom"
+                                            Width="28"
+                                            Height="28" />
+                                    </Panel>
+
+                                    <!--  Title / author  -->
                                     <TextBlock
                                         FontWeight="SemiBold"
-                                        Text="{Binding Manifest.Meta.Name}" />
+                                        MaxLines="1"
+                                        Text="{Binding Manifest.Meta.Name}"
+                                        TextTrimming="CharacterEllipsis"
+                                        ToolTip.Tip="{Binding Manifest.Meta.Name}" />
                                     <TextBlock
                                         FontSize="12"
+                                        MaxLines="1"
                                         Opacity="0.7"
-                                        Text="{Binding Manifest.Meta.Author}" />
+                                        Text="{Binding Manifest.Meta.Author}"
+                                        TextTrimming="CharacterEllipsis" />
 
-                                    <ItemsControl
-                                        ItemsSource="{Binding Difficulties}"
-                                        Margin="0,4,0,0">
+                                    <!--  Meta row: bpm, scene, flags  -->
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock
+                                            FontSize="12"
+                                            Opacity="0.85"
+                                            Text="{Binding Manifest.Meta, Converter={x:Static converters:FuncValueConverters.ChartBpmConverter}, StringFormat='♪ {0}'}" />
+                                        <TextBlock
+                                            FontSize="12"
+                                            Opacity="0.6"
+                                            Text="{Binding Manifest.Meta.Scene}"
+                                            TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+
+                                    <!--  Difficulty icons  -->
+                                    <ItemsControl ItemsSource="{Binding Difficulties}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <StackPanel
-                                                    Orientation="Horizontal"
-                                                    Spacing="4" />
+                                                <StackPanel Orientation="Horizontal" Spacing="4" />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate
-                                                x:DataType="models:ChartDifficulty">
+                                            <DataTemplate x:DataType="models:ChartDifficulty">
                                                 <Image
                                                     Height="20"
                                                     Source="{Binding ., Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
@@ -130,20 +226,21 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                </StackPanel>
 
-                                <Button
-                                    Grid.Column="2"
-                                    Command="{Binding $parent[UserControl].DataContext.PlayCommand}"
-                                    CommandParameter="{Binding}"
-                                    Content="▶ Play"
-                                    VerticalAlignment="Center" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                                    <!--  Uploader  -->
+                                    <TextBlock
+                                        FontSize="11"
+                                        IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                        Opacity="0.55"
+                                        Text="{Binding Manifest.Meta.Uploader.Nickname, StringFormat='by {0}'}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 
 </UserControl>
