@@ -22,4 +22,13 @@ public static class FuncValueConverters
     public static FuncValueConverter<ChartDifficulty, Bitmap> DifficultyIconConverter { get; } =
         new(static difficulty => DifficultyIcons.GetOrAdd(difficulty, static d =>
             new Bitmap(AssetLoader.Open(AppAssets.Uri($"Difficulties/{d}.png")))));
+
+    public static FuncValueConverter<ChartDto, string> ChartRatingConverter { get; } =
+        new(static chart => chart is null ? string.Empty : ChartRating.MaxDisplay(chart));
+
+    public static FuncValueConverter<ManifestMeta, string> ChartBpmConverter { get; } =
+        new(static meta => meta is null ? string.Empty : ChartRating.BpmDisplay(meta));
+
+    public static FuncValueConverter<bool, string> SortDirectionConverter { get; } =
+        new(static descending => descending ? "↓" : "↑");
 }
