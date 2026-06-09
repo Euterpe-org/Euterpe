@@ -47,25 +47,29 @@
         </Grid>
 
         <!--  Chart list  -->
-        <ScrollViewer Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Charts}">
+        <ScrollViewer
+            Grid.Row="1">
+            <ItemsControl
+                ItemsSource="{Binding Charts}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="models:ChartDto">
+                    <DataTemplate
+                        x:DataType="models:ChartDto">
                         <Border
                             Background="{DynamicResource SecondaryCardColor}"
                             CornerRadius="8"
                             Margin="0,0,0,8"
                             Padding="8">
-                            <Grid ColumnDefinitions="64,*,Auto">
+                            <Grid
+                                ColumnDefinitions="64,*,Auto">
                                 <e:AsyncImage
                                     Grid.Column="0"
-                                    Width="64"
-                                    Height="64"
                                     Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                                     ClipToBounds="True"
                                     CornerRadius="6"
+                                    Height="64"
                                     Source="{Binding CoverPath}"
-                                    Stretch="UniformToFill" />
+                                    Stretch="UniformToFill"
+                                    Width="64" />
 
                                 <StackPanel
                                     Grid.Column="1"
@@ -80,19 +84,22 @@
                                         Text="{Binding Manifest.Meta.Author}" />
 
                                     <ItemsControl
-                                        Margin="0,4,0,0"
-                                        ItemsSource="{Binding Difficulties}">
+                                        ItemsSource="{Binding Difficulties}"
+                                        Margin="0,4,0,0">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Horizontal" Spacing="4" />
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    Spacing="4" />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate x:DataType="models:ChartDifficulty">
+                                            <DataTemplate
+                                                x:DataType="models:ChartDifficulty">
                                                 <Image
-                                                    Width="20"
                                                     Height="20"
-                                                    Source="{Binding ., Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}" />
+                                                    Source="{Binding ., Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
+                                                    Width="20" />
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
@@ -100,10 +107,10 @@
 
                                 <Button
                                     Grid.Column="2"
-                                    VerticalAlignment="Center"
                                     Command="{Binding $parent[UserControl].DataContext.PlayCommand}"
                                     CommandParameter="{Binding}"
-                                    Content="▶ Play" />
+                                    Content="▶ Play"
+                                    VerticalAlignment="Center" />
                             </Grid>
                         </Border>
                     </DataTemplate>
