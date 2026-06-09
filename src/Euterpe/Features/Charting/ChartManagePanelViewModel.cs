@@ -7,9 +7,6 @@ namespace Euterpe.Features.Charting;
 [PerGame]
 public sealed partial class ChartManagePanelViewModel : ViewModelBase
 {
-    private const int BpmCeiling = 999;
-    private const double RatingCeiling = 99;
-
     private readonly ReadOnlyObservableCollection<ChartDto> _charts;
     private readonly ReadOnlyObservableCollection<string> _scenes;
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
@@ -32,13 +29,13 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [ObservableProperty] public partial bool ShowMaster { get; set; } = true;
     [ObservableProperty] public partial bool ShowHidden { get; set; } = true;
 
-    // Rating range (across maps)
-    [ObservableProperty] public partial double RatingMin { get; set; }
-    [ObservableProperty] public partial double RatingMax { get; set; } = RatingCeiling;
+    // Rating range (across maps); null = unbounded
+    [ObservableProperty] public partial double? RatingMin { get; set; }
+    [ObservableProperty] public partial double? RatingMax { get; set; }
 
-    // BPM range
-    [ObservableProperty] public partial int BpmMin { get; set; }
-    [ObservableProperty] public partial int BpmMax { get; set; } = BpmCeiling;
+    // BPM range; null = unbounded
+    [ObservableProperty] public partial int? BpmMin { get; set; }
+    [ObservableProperty] public partial int? BpmMax { get; set; }
 
     [ObservableProperty] public partial bool StreamerSafeOnly { get; set; }
     [ObservableProperty] public partial bool HasVideoOnly { get; set; }
@@ -122,10 +119,10 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     {
         SearchText = null;
         ShowEasy = ShowHard = ShowMaster = ShowHidden = true;
-        RatingMin = 0;
-        RatingMax = RatingCeiling;
-        BpmMin = 0;
-        BpmMax = BpmCeiling;
+        RatingMin = null;
+        RatingMax = null;
+        BpmMin = null;
+        BpmMax = null;
         StreamerSafeOnly = false;
         HasVideoOnly = false;
         SelectedScene = null;
@@ -164,13 +161,15 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return false;
         }
 
-        if ((RatingMin > 0 || RatingMax < RatingCeiling)
-            && !meta.Maps.Values.Any(m => ChartRating.Parse(m.Rating) is var r && r >= RatingMin && r <= RatingMax))
+        if ((RatingMin is not null || RatingMax is not null)
+            && !meta.Maps.Values.Any(m => ChartRating.Parse(m.Rating) is var r
+                && r >= (RatingMin ?? double.MinValue)
+                && r <= (RatingMax ?? double.MaxValue)))
         {
             return false;
         }
 
-        if ((BpmMin > 0 || BpmMax < BpmCeiling) && (meta.Bpm < BpmMin || meta.Bpm > BpmMax))
+        if ((BpmMin is { } bpmMin && meta.Bpm < bpmMin) || (BpmMax is { } bpmMax && meta.Bpm > bpmMax))
         {
             return false;
         }
@@ -225,10 +224,10 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     partial void OnShowHardChanged(bool value) => RefreshFilter();
     partial void OnShowMasterChanged(bool value) => RefreshFilter();
     partial void OnShowHiddenChanged(bool value) => RefreshFilter();
-    partial void OnRatingMinChanged(double value) => RefreshFilter();
-    partial void OnRatingMaxChanged(double value) => RefreshFilter();
-    partial void OnBpmMinChanged(int value) => RefreshFilter();
-    partial void OnBpmMaxChanged(int value) => RefreshFilter();
+    partial void OnRatingMinChanged(double? value) => RefreshFilter();
+    partial void OnRatingMaxChanged(double? value) => RefreshFilter();
+    partial void OnBpmMinChanged(int? value) => RefreshFilter();
+    partial void OnBpmMaxChanged(int? value) => RefreshFilter();
     partial void OnStreamerSafeOnlyChanged(bool value) => RefreshFilter();
     partial void OnHasVideoOnlyChanged(bool value) => RefreshFilter();
     partial void OnSelectedSceneChanged(string? value) => RefreshFilter();
