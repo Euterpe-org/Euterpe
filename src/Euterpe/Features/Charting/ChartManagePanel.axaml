@@ -21,10 +21,10 @@
         Margin="16"
         RowDefinitions="Auto,*">
 
-        <!--  Top bar: source + search + sort + reset + stop  -->
+        <!--  Top bar: source + search + sort + reset  -->
         <Grid
             Grid.Row="0"
-            ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto"
+            ColumnDefinitions="Auto,*,Auto,Auto,Auto"
             Margin="0,0,0,12">
             <ComboBox
                 Grid.Column="0"
@@ -56,8 +56,8 @@
 
             <ToggleButton
                 Grid.Column="3"
-                Margin="8,0,0,0"
                 IsChecked="{Binding SortDescending}"
+                Margin="8,0,0,0"
                 ToolTip.Tip="Descending"
                 Width="40">
                 <TextBlock Text="{Binding SortDescending, Converter={x:Static converters:FuncValueConverters.SortDirectionConverter}}" />
@@ -67,12 +67,6 @@
                 Grid.Column="4"
                 Command="{Binding ResetFiltersCommand}"
                 Content="Reset"
-                Margin="8,0,0,0" />
-
-            <Button
-                Grid.Column="5"
-                Command="{Binding StopMusicCommand}"
-                Content="Stop"
                 Margin="8,0,0,0" />
         </Grid>
 
@@ -101,18 +95,18 @@
                         <StackPanel Spacing="6">
                             <TextBlock FontWeight="SemiBold" Text="Rating" />
                             <Grid ColumnDefinitions="*,Auto,*">
-                                <NumericUpDown Grid.Column="0" Minimum="0" Maximum="99" Increment="1" FormatString="0.#" Value="{Binding RatingMin}" />
+                                <NumericUpDown Grid.Column="0" Increment="1" FormatString="0.#" Maximum="99" Minimum="0" Value="{Binding RatingMin}" />
                                 <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
-                                <NumericUpDown Grid.Column="2" Minimum="0" Maximum="99" Increment="1" FormatString="0.#" Value="{Binding RatingMax}" />
+                                <NumericUpDown Grid.Column="2" Increment="1" FormatString="0.#" Maximum="99" Minimum="0" Value="{Binding RatingMax}" />
                             </Grid>
                         </StackPanel>
 
                         <StackPanel Spacing="6">
                             <TextBlock FontWeight="SemiBold" Text="BPM" />
                             <Grid ColumnDefinitions="*,Auto,*">
-                                <NumericUpDown Grid.Column="0" Minimum="0" Maximum="999" Increment="10" FormatString="0" Value="{Binding BpmMin}" />
+                                <NumericUpDown Grid.Column="0" Increment="10" FormatString="0" Maximum="999" Minimum="0" Value="{Binding BpmMin}" />
                                 <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
-                                <NumericUpDown Grid.Column="2" Minimum="0" Maximum="999" Increment="10" FormatString="0" Value="{Binding BpmMax}" />
+                                <NumericUpDown Grid.Column="2" Increment="10" FormatString="0" Maximum="999" Minimum="0" Value="{Binding BpmMax}" />
                             </Grid>
                         </StackPanel>
 
@@ -129,12 +123,12 @@
                 </ScrollViewer>
             </Border>
 
-            <!--  Tiled chart grid  -->
+            <!--  Tiled chart grid (4 per row at default window size)  -->
             <ScrollViewer Grid.Column="1">
                 <ItemsControl ItemsSource="{Binding Charts}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" />
+                            <UniformGrid Columns="4" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -143,44 +137,56 @@
                                 Background="{DynamicResource SecondaryCardColor}"
                                 CornerRadius="10"
                                 Margin="0,0,12,12"
-                                Padding="8"
-                                Width="196">
+                                Padding="8">
                                 <StackPanel Spacing="6">
-                                    <!--  Cover  -->
+                                    <!--  Cover with hover play/pause + now-playing indicator  -->
                                     <Panel>
                                         <e:AsyncImage
                                             Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                                             ClipToBounds="True"
                                             CornerRadius="8"
-                                            Height="180"
+                                            Height="150"
+                                            HorizontalAlignment="Stretch"
                                             Source="{Binding CoverPath}"
                                             Stretch="UniformToFill" />
+
+                                        <!--  Now playing indicator  -->
                                         <Border
-                                            Background="#CC000000"
+                                            Background="#CC1DB954"
                                             CornerRadius="6"
                                             HorizontalAlignment="Left"
                                             Margin="6"
                                             Padding="6,2"
                                             VerticalAlignment="Top">
-                                            <TextBlock
-                                                FontSize="12"
-                                                FontWeight="Bold"
-                                                Foreground="White"
-                                                Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartRatingConverter}, StringFormat='Lv {0}'}" />
+                                            <Border.IsVisible>
+                                                <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartIsPlayingConverter}">
+                                                    <Binding Path="FolderName" />
+                                                    <Binding Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
+                                                </MultiBinding>
+                                            </Border.IsVisible>
+                                            <TextBlock FontSize="11" Foreground="White" Text="♪" />
                                         </Border>
+
+                                        <!--  Hover play / pause  -->
                                         <Button
-                                            Background="#CC000000"
-                                            Command="{Binding $parent[UserControl].DataContext.PlayCommand}"
+                                            Background="#B3000000"
+                                            Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
                                             CommandParameter="{Binding}"
-                                            Content="▶"
-                                            CornerRadius="14"
+                                            CornerRadius="20"
                                             Foreground="White"
-                                            HorizontalAlignment="Right"
-                                            Margin="6"
+                                            HorizontalAlignment="Center"
+                                            IsVisible="{Binding $parent[Border].IsPointerOver}"
                                             Padding="0"
-                                            VerticalAlignment="Bottom"
-                                            Width="28"
-                                            Height="28" />
+                                            VerticalAlignment="Center"
+                                            Width="40"
+                                            Height="40">
+                                            <Button.Content>
+                                                <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartPlayGlyphConverter}">
+                                                    <Binding Path="FolderName" />
+                                                    <Binding Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
+                                                </MultiBinding>
+                                            </Button.Content>
+                                        </Button>
                                     </Panel>
 
                                     <!--  Title / author  -->
@@ -197,7 +203,7 @@
                                         Text="{Binding Manifest.Meta.Author}"
                                         TextTrimming="CharacterEllipsis" />
 
-                                    <!--  Meta row: bpm, scene, flags  -->
+                                    <!--  Meta row: bpm + scene  -->
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <TextBlock
                                             FontSize="12"
@@ -210,19 +216,32 @@
                                             TextTrimming="CharacterEllipsis" />
                                     </StackPanel>
 
-                                    <!--  Difficulty icons  -->
-                                    <ItemsControl ItemsSource="{Binding Difficulties}">
+                                    <!--  Difficulty icons with rating overlaid  -->
+                                    <ItemsControl ItemsSource="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDifficultyBadgesConverter}}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Horizontal" Spacing="4" />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate x:DataType="models:ChartDifficulty">
-                                                <Image
-                                                    Height="20"
-                                                    Source="{Binding ., Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
-                                                    Width="20" />
+                                            <DataTemplate x:DataType="vm:DifficultyBadge">
+                                                <Panel Height="30" Width="30">
+                                                    <Image
+                                                        Source="{Binding Difficulty, Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
+                                                        Stretch="Uniform" />
+                                                    <Border
+                                                        Background="#99000000"
+                                                        CornerRadius="4"
+                                                        HorizontalAlignment="Center"
+                                                        Padding="3,0"
+                                                        VerticalAlignment="Center">
+                                                        <TextBlock
+                                                            FontSize="11"
+                                                            FontWeight="Bold"
+                                                            Foreground="White"
+                                                            Text="{Binding Rating}" />
+                                                    </Border>
+                                                </Panel>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>

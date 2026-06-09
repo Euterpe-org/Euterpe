@@ -46,6 +46,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [ObservableProperty] public partial ChartSortField SortField { get; set; }
     [ObservableProperty] public partial bool SortDescending { get; set; }
 
+    // FolderName of the chart whose preview is currently playing (null = none)
+    [ObservableProperty] public partial string? CurrentlyPlaying { get; set; }
+
     public ReadOnlyObservableCollection<ChartDto> Charts => _charts;
     public ReadOnlyObservableCollection<string> Scenes => _scenes;
 
@@ -77,18 +80,24 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task PlayAsync(ChartDto chart)
+    private async Task TogglePlayAsync(ChartDto chart)
     {
+        if (CurrentlyPlaying == chart.FolderName)
+        {
+            AudioPlayerService.Stop();
+            CurrentlyPlaying = null;
+            return;
+        }
+
         if ((chart.DemoPath ?? chart.MusicPath) is not { } audioPath)
         {
             return;
         }
 
+        // Play() stops any current playback first, so only one preview ever plays.
         await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
+        CurrentlyPlaying = chart.FolderName;
     }
-
-    [RelayCommand]
-    private void StopMusic() => AudioPlayerService.Stop();
 
     [RelayCommand]
     private void ResetFilters()
