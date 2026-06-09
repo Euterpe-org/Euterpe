@@ -106,7 +106,7 @@
         <Setter Property="Background" Value="#2050C8A8" />
         <Style
             Selector="^ TextBlock">
-            <Setter Property="Foreground" Value="#50C8A8" />
+            <Setter Property="Foreground" Value="{DynamicResource SemiTeal5}" />
         </Style>
     </Style>
     <Style

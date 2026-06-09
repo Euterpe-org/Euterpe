@@ -40,7 +40,7 @@
 
                     <Border
                         x:Name="HoverOverlay"
-                        Background="#808080"
+                        Background="{DynamicResource SemiGrey5}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Opacity="0">
                         <Border.Transitions>

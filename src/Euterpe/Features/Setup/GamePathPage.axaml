@@ -112,7 +112,7 @@
                 <!--  Validation message  -->
                 <TextBlock
                     FontSize="12"
-                    Foreground="#D14343"
+                    Foreground="{DynamicResource SemiColorDanger}"
                     IsVisible="{Binding ShowInvalidMessage}"
                     Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_Invalid}}" />
             </StackPanel>
