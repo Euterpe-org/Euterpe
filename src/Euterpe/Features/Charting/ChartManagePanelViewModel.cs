@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using Avalonia.Platform.Storage;
-using DynamicData.Binding;
 
 namespace Euterpe.Features.Charting;
 
@@ -8,8 +7,10 @@ namespace Euterpe.Features.Charting;
 [PerGame]
 public sealed partial class ChartManagePanelViewModel : ViewModelBase
 {
+    private const int MinRating = 1;
+    private const int MaxRating = 12;
+
     private readonly ReadOnlyObservableCollection<ChartDto> _charts;
-    private readonly ReadOnlyObservableCollection<string> _scenes;
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
     private readonly BehaviorSubject<IComparer<ChartDto>> _comparer;
 
@@ -30,9 +31,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [ObservableProperty] public partial bool ShowMaster { get; set; } = true;
     [ObservableProperty] public partial bool ShowHidden { get; set; } = true;
 
-    // Rating range (across maps); null = unbounded
-    [ObservableProperty] public partial double? RatingMin { get; set; }
-    [ObservableProperty] public partial double? RatingMax { get; set; }
+    // Rating range by the floor of a chart's rating (1-12); the full 1-12 range covers everything.
+    [ObservableProperty] public partial int? RatingMin { get; set; } = MinRating;
+    [ObservableProperty] public partial int? RatingMax { get; set; } = MaxRating;
 
     // BPM range; null = unbounded
     [ObservableProperty] public partial int? BpmMin { get; set; }
@@ -40,8 +41,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     [ObservableProperty] public partial bool StreamerSafeOnly { get; set; }
     [ObservableProperty] public partial bool HasVideoOnly { get; set; }
-
-    [ObservableProperty] public partial string? SelectedScene { get; set; }
 
     // Sort
     [ObservableProperty] public partial ChartSortField SortField { get; set; }
@@ -51,7 +50,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [ObservableProperty] public partial string? CurrentlyPlaying { get; set; }
 
     public ReadOnlyObservableCollection<ChartDto> Charts => _charts;
-    public ReadOnlyObservableCollection<string> Scenes => _scenes;
 
     public ChartManagePanelViewModel()
     {
@@ -62,11 +60,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         connect
             .Filter(MatchesFilters)
             .SortAndBind(out _charts, _comparer.AsSystemObservable())
-            .Subscribe();
-
-        connect
-            .DistinctValues(x => x.Manifest.Meta.Scene)
-            .SortAndBind(out _scenes, SortExpressionComparer<string>.Ascending(x => x))
             .Subscribe();
     }
 
@@ -136,13 +129,12 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     {
         SearchText = null;
         ShowEasy = ShowHard = ShowMaster = ShowHidden = true;
-        RatingMin = null;
-        RatingMax = null;
+        RatingMin = MinRating;
+        RatingMax = MaxRating;
         BpmMin = null;
         BpmMax = null;
         StreamerSafeOnly = false;
         HasVideoOnly = false;
-        SelectedScene = null;
     }
 
     [RelayCommand]
@@ -207,10 +199,11 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return false;
         }
 
-        if ((RatingMin is not null || RatingMax is not null)
-            && !meta.Maps.Values.Any(m => ChartRating.Parse(m.Rating) is var r
-                && r >= (RatingMin ?? double.MinValue)
-                && r <= (RatingMax ?? double.MaxValue)))
+        var ratingMin = RatingMin ?? MinRating;
+        var ratingMax = RatingMax ?? MaxRating;
+        if ((ratingMin > MinRating || ratingMax < MaxRating)
+            && !meta.Maps.Values.Any(m =>
+                (int)Math.Floor(ChartRating.Parse(m.Rating)) is var r && r >= ratingMin && r <= ratingMax))
         {
             return false;
         }
@@ -226,11 +219,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         }
 
         if (HasVideoOnly && chart.VideoPath is null)
-        {
-            return false;
-        }
-
-        if (!SelectedScene.IsNullOrEmpty() && !string.Equals(meta.Scene, SelectedScene, StringComparison.Ordinal))
         {
             return false;
         }
@@ -270,13 +258,12 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     partial void OnShowHardChanged(bool value) => RefreshFilter();
     partial void OnShowMasterChanged(bool value) => RefreshFilter();
     partial void OnShowHiddenChanged(bool value) => RefreshFilter();
-    partial void OnRatingMinChanged(double? value) => RefreshFilter();
-    partial void OnRatingMaxChanged(double? value) => RefreshFilter();
+    partial void OnRatingMinChanged(int? value) => RefreshFilter();
+    partial void OnRatingMaxChanged(int? value) => RefreshFilter();
     partial void OnBpmMinChanged(int? value) => RefreshFilter();
     partial void OnBpmMaxChanged(int? value) => RefreshFilter();
     partial void OnStreamerSafeOnlyChanged(bool value) => RefreshFilter();
     partial void OnHasVideoOnlyChanged(bool value) => RefreshFilter();
-    partial void OnSelectedSceneChanged(string? value) => RefreshFilter();
     partial void OnSortFieldChanged(ChartSortField value) => RefreshSort();
     partial void OnSortDescendingChanged(bool value) => RefreshSort();
 

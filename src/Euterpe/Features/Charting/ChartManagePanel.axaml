@@ -119,9 +119,9 @@
                         <StackPanel Spacing="6">
                             <TextBlock FontWeight="SemiBold" Text="Rating" />
                             <Grid ColumnDefinitions="*,Auto,*">
-                                <NumericUpDown Grid.Column="0" Increment="1" FormatString="0" Maximum="13" Minimum="1" Value="{Binding RatingMin}" />
+                                <NumericUpDown Grid.Column="0" Increment="1" FormatString="0" Maximum="12" Minimum="1" Value="{Binding RatingMin}" />
                                 <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
-                                <NumericUpDown Grid.Column="2" Increment="1" FormatString="0" Maximum="13" Minimum="1" Value="{Binding RatingMax}" />
+                                <NumericUpDown Grid.Column="2" Increment="1" FormatString="0" Maximum="12" Minimum="1" Value="{Binding RatingMax}" />
                             </Grid>
                         </StackPanel>
 
@@ -132,11 +132,6 @@
                                 <TextBlock Grid.Column="1" Margin="6,0" Text="–" VerticalAlignment="Center" />
                                 <NumericUpDown Grid.Column="2" Increment="10" FormatString="0" Maximum="999" Minimum="0" Value="{Binding BpmMax}" />
                             </Grid>
-                        </StackPanel>
-
-                        <StackPanel Spacing="6">
-                            <TextBlock FontWeight="SemiBold" Text="Scene" />
-                            <ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding Scenes}" PlaceholderText="Any" SelectedItem="{Binding SelectedScene}" />
                         </StackPanel>
 
                         <StackPanel Spacing="6">
