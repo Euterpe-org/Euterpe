@@ -8,9 +8,8 @@ namespace Euterpe.Core;
 
 internal sealed class AudioPlayerService : IAudioPlayerService
 {
-    private static readonly AudioFormat Format = AudioFormat.DvdHq;
-
     private AudioPlaybackDevice? _device;
+    private AudioFormat? _deviceFormat;
     private SoundPlayer? _player;
 
     public event EventHandler? PlaybackEnded;
@@ -19,9 +18,21 @@ internal sealed class AudioPlayerService : IAudioPlayerService
     {
         StopInternal();
 
-        var device = EnsureDevice();
-        var provider = new ResilientSoundDataProvider(new StreamDataProvider(Engine, Format, File.OpenRead(filePath)), Logger);
-        _player = new SoundPlayer(Engine, Format, provider);
+        // Decode at the file's native format. Neither the decoder nor SoundPlayer resample the
+        // sample rate for us (SoundPlayer assumes the provider already matches its format), so the
+        // device, player and provider must all share the source's format — otherwise e.g. a 44.1kHz
+        // file played through a fixed 48kHz device comes out sped up and pitched up.
+        var source = new StreamDataProvider(Engine, File.OpenRead(filePath));
+        var format = new AudioFormat
+        {
+            Format = source.SampleFormat,
+            Channels = source.FormatInfo!.ChannelCount,
+            Layout = AudioFormat.GetLayoutFromChannels(source.FormatInfo.ChannelCount),
+            SampleRate = source.SampleRate
+        };
+
+        var device = EnsureDevice(format);
+        _player = new SoundPlayer(Engine, format, new ResilientSoundDataProvider(source, Logger));
         _player.PlaybackEnded += OnPlayerPlaybackEnded;
         device.MasterMixer.AddComponent(_player);
         _player.Play();
@@ -41,15 +52,19 @@ internal sealed class AudioPlayerService : IAudioPlayerService
         _device?.Dispose();
     }
 
-    private AudioPlaybackDevice EnsureDevice()
+    private AudioPlaybackDevice EnsureDevice(AudioFormat format)
     {
-        if (_device is not null)
+        // Reuse the device while the format is unchanged; re-create it when a track needs a
+        // different native format so the device rate always matches what we feed it.
+        if (_device is { } existing && _deviceFormat == format)
         {
-            return _device;
+            return existing;
         }
 
-        _device = Engine.InitializePlaybackDevice(null, Format);
+        _device?.Dispose();
+        _device = Engine.InitializePlaybackDevice(null, format);
         _device.Start();
+        _deviceFormat = format;
         return _device;
     }
 
