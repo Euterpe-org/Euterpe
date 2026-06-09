@@ -18,7 +18,7 @@ internal sealed class AudioPlayerService : IAudioPlayerService
         StopInternal();
 
         var device = EnsureDevice();
-        var provider = new StreamDataProvider(Engine, Format, File.OpenRead(filePath));
+        var provider = new ResilientSoundDataProvider(new StreamDataProvider(Engine, Format, File.OpenRead(filePath)), Logger);
         _player = new SoundPlayer(Engine, Format, provider);
         device.MasterMixer.AddComponent(_player);
         _player.Play();
