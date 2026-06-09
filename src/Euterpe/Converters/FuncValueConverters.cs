@@ -30,6 +30,10 @@ public static class FuncValueConverters
     public static FuncValueConverter<ManifestMeta, string> ChartBpmConverter { get; } =
         new(static meta => meta is null ? string.Empty : ChartRating.BpmDisplay(meta));
 
+    // Uploader nickname -> localized "by {nickname}".
+    public static FuncValueConverter<string?, string?> ChartUploaderConverter { get; } =
+        new(static nickname => nickname is null ? null : string.Format(CultureInfo.CurrentCulture, XAML.ChartManage_UploadedBy, nickname));
+
     public static FuncValueConverter<bool, string> SortDirectionConverter { get; } =
         new(static descending => descending ? "↓" : "↑");
 
