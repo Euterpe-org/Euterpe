@@ -108,6 +108,27 @@
                 Padding="12">
                 <ScrollViewer>
                     <StackPanel Spacing="14">
+                        <!--  Charts are downloaded on the web; send users there to pick them  -->
+                        <Button
+                            Classes="Primary"
+                            Command="{Binding OpenUrlCommand}"
+                            CommandParameter="https://euterpe-org.com/charts"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            ToolTip.Tip="https://euterpe-org.com/charts">
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Spacing="8">
+                                <PathIcon
+                                    Data="M19 9 h-4 V3 H9 v6 H5 l7 7 7 -7 z M5 18 v2 h14 v-2 H5 z"
+                                    Height="16"
+                                    Width="16" />
+                                <TextBlock
+                                    Text="Browse &amp; download charts"
+                                    VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+
                         <StackPanel Spacing="6">
                             <TextBlock FontWeight="SemiBold" Text="Difficulty" />
                             <CheckBox Content="Easy" IsChecked="{Binding ShowEasy}" />
