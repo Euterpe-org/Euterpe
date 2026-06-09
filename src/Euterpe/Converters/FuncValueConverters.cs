@@ -10,6 +10,10 @@ public static class FuncValueConverters
 {
     private static readonly ConcurrentDictionary<ChartDifficulty, Bitmap> DifficultyIcons = new();
 
+    // Real vector icons (not glyphs): Play = right-pointing triangle; Pause = two bars.
+    private static readonly Geometry PlayIcon = StreamGeometry.Parse("M0,0 L0,12 L10,6 Z");
+    private static readonly Geometry PauseIcon = StreamGeometry.Parse("M0,0 L3,0 L3,12 L0,12 Z M6,0 L9,0 L9,12 L6,12 Z");
+
     public static FuncValueConverter<string, StreamGeometry?> SemiIconConverter { get; } =
         new(key => GetCurrentApplication().TryGetResource($"SemiIcon{key}", out var result) ? result as StreamGeometry : null);
 
@@ -32,9 +36,9 @@ public static class FuncValueConverters
     public static FuncValueConverter<ChartDto, IReadOnlyList<DifficultyBadge>> ChartDifficultyBadgesConverter { get; } =
         new(static chart => chart is null ? [] : ChartRating.Badges(chart));
 
-    // [folderName, currentlyPlaying] -> pause glyph when this chart is playing, else play glyph
-    public static FuncMultiValueConverter<string?, string> ChartPlayGlyphConverter { get; } =
-        new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing ? "⏸" : "▶");
+    // [folderName, currentlyPlaying] -> pause icon when this chart is playing, else play icon
+    public static FuncMultiValueConverter<string?, Geometry> ChartPlayIconConverter { get; } =
+        new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing ? PauseIcon : PlayIcon);
 
     // [folderName, currentlyPlaying, isCoverHovered] -> cover overlay opacity.
     // The mask + play/pause button show whenever the chart is NOT playing, or the cover is hovered;
