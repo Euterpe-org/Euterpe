@@ -111,6 +111,7 @@ public sealed class GenerateTheme : Task
     {
         var settings = new XmlWriterSettings
         {
+            Encoding = new UTF8Encoding(false),
             Indent = true,
             IndentChars = "    ",
             NewLineChars = "\n",
