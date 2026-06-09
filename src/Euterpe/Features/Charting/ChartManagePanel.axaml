@@ -212,18 +212,17 @@
                                                             <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" />
                                                         </Transitions>
                                                     </Border.Transitions>
-                                                    <TextBlock
-                                                        FontSize="16"
+                                                    <PathIcon
                                                         Foreground="White"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center">
-                                                        <TextBlock.Text>
-                                                            <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartPlayGlyphConverter}">
+                                                        Height="14"
+                                                        Width="14">
+                                                        <PathIcon.Data>
+                                                            <MultiBinding Converter="{x:Static converters:FuncValueConverters.ChartPlayIconConverter}">
                                                                 <Binding Path="FolderName" />
                                                                 <Binding Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
                                                             </MultiBinding>
-                                                        </TextBlock.Text>
-                                                    </TextBlock>
+                                                        </PathIcon.Data>
+                                                    </PathIcon>
                                                 </Border>
                                             </Border>
                                         </Panel>
