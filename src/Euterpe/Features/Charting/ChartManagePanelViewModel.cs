@@ -128,6 +128,20 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         SelectedScene = null;
     }
 
+    [RelayCommand]
+    private async Task RemoveChartAsync(ChartDto chart)
+    {
+        // Stop the preview first if this chart is the one playing/paused, releasing its file handle before deletion.
+        if (CurrentlyPlaying == chart.FolderName || _pausedFolder == chart.FolderName)
+        {
+            AudioPlayerService.Stop();
+            CurrentlyPlaying = null;
+            _pausedFolder = null;
+        }
+
+        await ChartManageService.RemoveChartAsync(chart.FolderPath).ConfigureAwait(false);
+    }
+
     private bool MatchesFilters(ChartDto chart)
     {
         var meta = chart.Manifest.Meta;
