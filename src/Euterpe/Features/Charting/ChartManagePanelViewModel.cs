@@ -49,6 +49,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     // FolderName of the chart whose preview is currently playing (null = none)
     [ObservableProperty] public partial string? CurrentlyPlaying { get; set; }
 
+    [ObservableProperty] public partial bool AllChartsLoaded { get; set; }
+
     public ReadOnlyObservableCollection<ChartDto> Charts => _charts;
 
     public ChartManagePanelViewModel()
@@ -68,7 +70,12 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(false);
         await ChartManageService.InitializeChartsAsync().ConfigureAwait(false);
 
-        ChartManageService.Connect().PopulateInto(_sourceCache);
+        // The load runs on the thread pool; bind the cache and clear the loading state on the UI thread.
+        await Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            ChartManageService.Connect().PopulateInto(_sourceCache);
+            AllChartsLoaded = true;
+        });
 
         AudioPlayerService.PlaybackEnded += OnPlaybackEnded;
 
