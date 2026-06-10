@@ -51,7 +51,7 @@ internal sealed partial class ModManageService
         var cached = _sourceCache.Lookup(mod.Name).ValueOrDefault();
         var installed = cached is { IsLocal: true } ? cached : null;
 
-        if (installed is not null && CompareModVersions(mod.LocalVersion, installed.LocalVersion) <= 0)
+        if (installed is not null && mod.LocalVersion.ComparePrecedenceTo(installed.LocalVersion) <= 0)
         {
             Logger.ZLogInformation($"Skipped import of {mod.Name}: version {installed.LocalVersion} already installed");
             NotificationService.WarningLight(Notification_Content_Mod_Import_Duplicated, mod.Name);

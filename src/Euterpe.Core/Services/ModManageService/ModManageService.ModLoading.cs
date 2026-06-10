@@ -72,7 +72,7 @@ internal sealed partial class ModManageService
             return ModState.Incompatible;
         }
 
-        return CompareModVersions(localMod.LocalVersion, webMod.Version) switch
+        return localMod.LocalVersion.ComparePrecedenceTo(webMod.Version) switch
         {
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
@@ -80,9 +80,6 @@ internal sealed partial class ModManageService
             _ => ModState.Normal
         };
     }
-
-    private static int CompareModVersions(string left, string right) =>
-        SemVersion.Parse(left).ComparePrecedenceTo(SemVersion.Parse(right));
 
     private void CheckConfigFile(ModDto localMod)
     {
