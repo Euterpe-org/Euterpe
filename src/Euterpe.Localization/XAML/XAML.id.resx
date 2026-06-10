@@ -526,8 +526,8 @@
   <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
     <value>Tanggal Diperbarui</value>
   </data>
-  <data name="ChartManage_Sort_Difficulties" xml:space="preserve">
-    <value>Tingkat Kesulitan</value>
+  <data name="ChartManage_Sort_Maps" xml:space="preserve">
+    <value>Jumlah Map</value>
   </data>
   <data name="ChartManage_Sort_Name" xml:space="preserve">
     <value>Nama</value>
@@ -553,7 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>Migrasikan Chart MDM</value>
   </data>
-  <data name="ChartManage_Sort_Size" xml:space="preserve">
-    <value>Ukuran</value>
+  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
+    <value>Ukuran File</value>
   </data>
 </root>

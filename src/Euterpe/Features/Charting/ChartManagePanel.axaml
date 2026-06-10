@@ -76,8 +76,8 @@
                 <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Rating}}" />
                 <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_DateAdded}}" />
                 <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_DateUpdated}}" />
-                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_Difficulties}}" />
-                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_Size}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_Maps}}" />
+                <ComboBoxItem Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_FileSize}}" />
             </ComboBox>
 
             <ToggleButton
@@ -211,6 +211,12 @@
                                 Margin="0,0,12,12"
                                 Padding="8"
                                 Width="180">
+                                <Border.Styles>
+                                    <!--  Hovering the card swaps the size text for the delete button in the same slot  -->
+                                    <Style Selector="Border:pointerover TextBlock.sizeText">
+                                        <Setter Property="Opacity" Value="0" />
+                                    </Style>
+                                </Border.Styles>
                                 <StackPanel Spacing="6">
                                     <!--  Cover: the whole cover toggles play/pause; mask + button appear together  -->
                                     <Button
@@ -343,7 +349,15 @@
                                         </Panel>
                                     </Button>
 
-                                    <!--  Title -> web chart detail page (online charts only); the author line below stays plain  -->
+                                    <!--  Author (least prominent, above the title)  -->
+                                    <TextBlock
+                                        FontSize="11"
+                                        MaxLines="1"
+                                        Opacity="0.5"
+                                        Text="{Binding Manifest.Meta.Author}"
+                                        TextTrimming="CharacterEllipsis" />
+
+                                    <!--  Title -> web chart detail page (online charts only)  -->
                                     <Button
                                         Classes="Transparent"
                                         Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
@@ -366,33 +380,22 @@
                                             Text="{Binding Manifest.Meta.Name}"
                                             TextTrimming="CharacterEllipsis" />
                                     </Button>
+                                    <!--  Charters (all difficulties, de-duplicated; brighter than the author)  -->
                                     <TextBlock
                                         FontSize="12"
-                                        MaxLines="1"
-                                        Opacity="0.7"
-                                        Text="{Binding Manifest.Meta.Author}"
-                                        TextTrimming="CharacterEllipsis" />
-
-                                    <!--  Charters (all difficulties, de-duplicated)  -->
-                                    <TextBlock
-                                        FontSize="11"
                                         IsVisible="{Binding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                         MaxLines="1"
-                                        Opacity="0.55"
+                                        Opacity="0.7"
                                         Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartChartersConverter}}"
                                         TextTrimming="CharacterEllipsis"
                                         ToolTip.Tip="{Binding $self.Text}" />
 
-                                    <!--  Meta row: bpm + size + video tag  -->
+                                    <!--  Meta row: bpm + video tag  -->
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <TextBlock
                                             FontSize="12"
                                             Opacity="0.85"
                                             Text="{Binding Manifest.Meta, Converter={x:Static converters:FuncValueConverters.ChartBpmConverter}, StringFormat='♪ {0}'}" />
-                                        <TextBlock
-                                            FontSize="12"
-                                            Opacity="0.6"
-                                            Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartSizeConverter}}" />
                                         <Border
                                             Background="#40808080"
                                             CornerRadius="3"
@@ -407,9 +410,9 @@
                                         </Border>
                                     </StackPanel>
 
-                                    <!--  Uploader + mini delete button (same row, pinned right; delete shows on card hover)  -->
+                                    <!--  Uploader + size/delete sharing the right slot: size when idle, delete on card hover  -->
                                     <Grid
-                                        ColumnDefinitions="*,24"
+                                        ColumnDefinitions="*,Auto"
                                         MinHeight="18">
                                         <Button
                                             Grid.Column="0"
@@ -431,17 +434,29 @@
                                             </Button.Styles>
                                             <TextBlock
                                                 FontSize="11"
+                                                FontWeight="Normal"
                                                 Foreground="{DynamicResource SemiColorText0}"
                                                 Opacity="0.55"
                                                 Text="{Binding Manifest.Meta.Uploader.Nickname, Converter={x:Static converters:FuncValueConverters.ChartUploaderConverter}}"
                                                 TextTrimming="CharacterEllipsis" />
                                         </Button>
-                                        <Button
+                                        <Panel
                                             Grid.Column="1"
+                                            VerticalAlignment="Center">
+                                        <!--  Size shown while idle; kept in layout (opacity, not visibility) so the slot width never jumps  -->
+                                        <TextBlock
+                                            Classes="sizeText"
+                                            FontSize="11"
+                                            HorizontalAlignment="Right"
+                                            Opacity="0.55"
+                                            Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartSizeConverter}}"
+                                            VerticalAlignment="Center" />
+                                        <Button
                                             Command="{Binding $parent[UserControl].DataContext.RemoveChartCommand}"
                                             CommandParameter="{Binding}"
                                             Focusable="False"
                                             Height="18"
+                                            HorizontalAlignment="Right"
                                             IsVisible="{Binding $parent[Border].IsPointerOver}"
                                             MinHeight="0"
                                             MinWidth="0"
@@ -468,6 +483,7 @@
                                                 Opacity="0.5"
                                                 Width="13" />
                                         </Button>
+                                        </Panel>
                                     </Grid>
                                 </StackPanel>
                             </Border>

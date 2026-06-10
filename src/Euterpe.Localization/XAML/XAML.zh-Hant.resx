@@ -526,8 +526,8 @@
   <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
     <value>更新日期</value>
   </data>
-  <data name="ChartManage_Sort_Difficulties" xml:space="preserve">
-    <value>難度數量</value>
+  <data name="ChartManage_Sort_Maps" xml:space="preserve">
+    <value>地圖數量</value>
   </data>
   <data name="ChartManage_Sort_Name" xml:space="preserve">
     <value>名稱</value>
@@ -553,7 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>遷移 MDM 譜面</value>
   </data>
-  <data name="ChartManage_Sort_Size" xml:space="preserve">
-    <value>體積</value>
+  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
+    <value>檔案大小</value>
   </data>
 </root>

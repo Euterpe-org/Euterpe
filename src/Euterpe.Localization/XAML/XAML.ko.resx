@@ -526,8 +526,8 @@
   <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
     <value>업데이트한 날짜</value>
   </data>
-  <data name="ChartManage_Sort_Difficulties" xml:space="preserve">
-    <value>난이도 수</value>
+  <data name="ChartManage_Sort_Maps" xml:space="preserve">
+    <value>맵 수</value>
   </data>
   <data name="ChartManage_Sort_Name" xml:space="preserve">
     <value>이름</value>
@@ -553,7 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>MDM 채보 마이그레이션</value>
   </data>
-  <data name="ChartManage_Sort_Size" xml:space="preserve">
-    <value>크기</value>
+  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
+    <value>파일 크기</value>
   </data>
 </root>
