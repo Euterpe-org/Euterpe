@@ -8,9 +8,7 @@ internal sealed partial class ChartManageService : IChartManageService
     private readonly SingleFlight<string> _singleFlight = new();
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderPath);
 
-    // Task.Run keeps the load off the caller's thread: the manifest loading chain completes
-    // synchronously (no real suspension points), so invoking it inline would freeze the UI thread.
-    public ChartManageService() => _initTask = new Lazy<Task>(() => Task.Run(LoadChartsCoreAsync), LazyThreadSafetyMode.ExecutionAndPublication);
+    public ChartManageService() => _initTask = new Lazy<Task>(LoadChartsCoreAsync, LazyThreadSafetyMode.ExecutionAndPublication);
 
     public IObservable<IChangeSet<ChartDto, string>> Connect() => _sourceCache.Connect();
 

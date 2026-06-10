@@ -14,40 +14,32 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
     private readonly BehaviorSubject<IComparer<ChartDto>> _comparer;
 
-    // FolderName of the chart whose preview is paused with its player still loaded (null = none).
-    private string? _pausedFolder;
+    private string? _pausedFolderName;
 
-    // Source filter (Online / Offline)
     [ObservableProperty]
     public partial int SelectedChartSourceIndex { get; set; }
 
-    // Free-text search (name / romanized / author / charter)
     [ObservableProperty]
     public partial string? SearchText { get; set; }
 
-    // Difficulty presence
     [ObservableProperty] public partial bool ShowEasy { get; set; } = true;
     [ObservableProperty] public partial bool ShowHard { get; set; } = true;
     [ObservableProperty] public partial bool ShowMaster { get; set; } = true;
     [ObservableProperty] public partial bool ShowHidden { get; set; } = true;
 
-    // Rating range by the floor of a chart's rating (1-12); the full 1-12 range covers everything.
     [ObservableProperty] public partial int? RatingMin { get; set; } = MinRating;
     [ObservableProperty] public partial int? RatingMax { get; set; } = MaxRating;
 
-    // BPM range; null = unbounded
     [ObservableProperty] public partial int? BpmMin { get; set; }
     [ObservableProperty] public partial int? BpmMax { get; set; }
 
     [ObservableProperty] public partial bool StreamerSafeOnly { get; set; }
     [ObservableProperty] public partial bool HasVideoOnly { get; set; }
 
-    // Sort
     [ObservableProperty] public partial ChartSortField SortField { get; set; }
     [ObservableProperty] public partial bool SortDescending { get; set; }
 
-    // FolderName of the chart whose preview is currently playing (null = none)
-    [ObservableProperty] public partial string? CurrentlyPlaying { get; set; }
+    [ObservableProperty] public partial string? PlayingFolderName { get; set; }
 
     [ObservableProperty] public partial bool AllChartsLoaded { get; set; }
 
@@ -70,7 +62,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(false);
         await ChartManageService.InitializeChartsAsync().ConfigureAwait(false);
 
-        // The load runs on the thread pool; bind the cache and clear the loading state on the UI thread.
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
             ChartManageService.Connect().PopulateInto(_sourceCache);
@@ -85,23 +76,21 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task TogglePlayAsync(ChartDto chart)
     {
-        var folder = chart.FolderName;
+        var folderName = chart.FolderName;
 
-        // Pause the chart that is currently playing.
-        if (CurrentlyPlaying == folder)
+        if (PlayingFolderName == folderName)
         {
             AudioPlayerService.Pause();
-            _pausedFolder = folder;
-            CurrentlyPlaying = null;
+            _pausedFolderName = folderName;
+            PlayingFolderName = null;
             return;
         }
 
-        // Resume this chart if it was paused and nothing else has played since.
-        if (_pausedFolder == folder)
+        if (_pausedFolderName == folderName)
         {
             AudioPlayerService.Resume();
-            _pausedFolder = null;
-            CurrentlyPlaying = folder;
+            _pausedFolderName = null;
+            PlayingFolderName = folderName;
             return;
         }
 
@@ -110,23 +99,20 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return;
         }
 
-        // Reflect playback immediately (on the UI thread), then decode/start off-thread.
-        // Play() stops and disposes any current/paused player first, so only one preview ever exists.
-        _pausedFolder = null;
-        CurrentlyPlaying = folder;
+        _pausedFolderName = null;
+        PlayingFolderName = folderName;
         await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
     }
 
-    // Reset the now-playing state when a preview ends on its own (natural end, or stopped on decode failure).
-    // Fires on the audio thread; marshal to the UI thread and only clear if that same chart is still playing.
+    // Fires on the audio thread.
     private void OnPlaybackEnded(object? sender, EventArgs e)
     {
-        var ended = CurrentlyPlaying;
+        var endedFolderName = PlayingFolderName;
         Dispatcher.UIThread.Post(() =>
         {
-            if (CurrentlyPlaying == ended)
+            if (PlayingFolderName == endedFolderName)
             {
-                CurrentlyPlaying = null;
+                PlayingFolderName = null;
             }
         });
     }
@@ -147,19 +133,17 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task RemoveChartAsync(ChartDto chart)
     {
-        // Stop the preview first if this chart is the one playing/paused, releasing its file handle before deletion.
-        if (CurrentlyPlaying == chart.FolderName || _pausedFolder == chart.FolderName)
+        // Release the audio file handle before the folder is deleted.
+        if (PlayingFolderName == chart.FolderName || _pausedFolderName == chart.FolderName)
         {
             AudioPlayerService.Stop();
-            CurrentlyPlaying = null;
-            _pausedFolder = null;
+            PlayingFolderName = null;
+            _pausedFolderName = null;
         }
 
         await ChartManageService.RemoveChartAsync(chart.FolderPath).ConfigureAwait(false);
     }
 
-    // The services only toast when something was updated/migrated (no-ops stay silent for the
-    // automatic startup/wizard paths), so an explicit button press reports "nothing to do" here.
     [RelayCommand]
     private async Task UpdateAllChartsAsync(CancellationToken cancellationToken)
     {
@@ -175,10 +159,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         if (await ChartManageService.MigrateCustomAlbumsAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is 0)
         {
             NotificationService.NoticeLight(Notification_Content_Migration_None);
-            return;
         }
-
-        await ChartManageService.RefreshOfflineChartsAsync().ConfigureAwait(false);
     }
 
     [RelayCommand]
@@ -297,7 +278,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required IAudioPlayerService AudioPlayerService { get; init; }
     public required IChartManageService ChartManageService { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
-    public required IMigrationService MigrationService { get; init; }
     public required INotificationService NotificationService { get; init; }
 
     #endregion Injections

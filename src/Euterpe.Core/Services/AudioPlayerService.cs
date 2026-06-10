@@ -18,10 +18,7 @@ internal sealed class AudioPlayerService : IAudioPlayerService
     {
         StopInternal();
 
-        // Decode at the file's native format. Neither the decoder nor SoundPlayer resample the
-        // sample rate for us (SoundPlayer assumes the provider already matches its format), so the
-        // device, player and provider must all share the source's format — otherwise e.g. a 44.1kHz
-        // file played through a fixed 48kHz device comes out sped up and pitched up.
+        // Nothing in the SoundFlow pipeline resamples, so device, player and provider must all use the source's native format.
         var source = new StreamDataProvider(Engine, File.OpenRead(filePath));
         var format = new AudioFormat
         {
@@ -54,8 +51,6 @@ internal sealed class AudioPlayerService : IAudioPlayerService
 
     private AudioPlaybackDevice EnsureDevice(AudioFormat format)
     {
-        // Reuse the device while the format is unchanged; re-create it when a track needs a
-        // different native format so the device rate always matches what we feed it.
         if (_device is { } existing && _deviceFormat == format)
         {
             return existing;
@@ -75,8 +70,7 @@ internal sealed class AudioPlayerService : IAudioPlayerService
             return;
         }
 
-        // Detach before stopping so manual stops / track switches don't raise PlaybackEnded;
-        // only natural end-of-stream (which fires while still attached) reaches subscribers.
+        // Detach first so only natural end-of-stream raises PlaybackEnded.
         _player.PlaybackEnded -= OnPlayerPlaybackEnded;
         _player.Stop();
         _device?.MasterMixer.RemoveComponent(_player);
