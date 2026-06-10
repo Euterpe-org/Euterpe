@@ -81,21 +81,21 @@
                 SelectedIndex="{Binding SortField}"
                 ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_SortBy}}">
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_Name}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Name}}" />
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ModInfo_Author}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Author}}" />
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Bpm}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Bpm}}" />
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Rating}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Rating}}" />
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_DateAdded}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_DateAdded}}" />
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_DateUpdated}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_DateUpdated}}" />
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_Maps}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_MapCount}}" />
                 <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Sort_FileSize}}" />
+                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Size}}" />
             </ComboBox>
 
             <ToggleButton

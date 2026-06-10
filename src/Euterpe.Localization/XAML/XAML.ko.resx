@@ -73,6 +73,81 @@
   <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>마스터</value>
   </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>내림차순</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>난이도</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>영상 있음</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>방송 가능</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>웹에서 채보 둘러보기 &amp; 다운로드</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>채보 받기</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>MDM 채보 마이그레이션</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>레벨</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>초기화</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>정렬 기준</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>영상</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>모든 채보 업데이트</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>업로더: {0}</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>작성자</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>추가한 날짜</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>업데이트한 날짜</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>맵 수</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>레벨</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>파일 크기</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>아티스트</value>
   </data>
@@ -489,71 +564,5 @@
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>Euterpe에 오신 것을 환영합니다</value>
-  </data>
-  <data name="ChartManage_Bpm" xml:space="preserve">
-    <value>BPM</value>
-  </data>
-  <data name="ChartManage_Delete" xml:space="preserve">
-    <value>삭제</value>
-  </data>
-  <data name="ChartManage_Descending" xml:space="preserve">
-    <value>내림차순</value>
-  </data>
-  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
-    <value>난이도</value>
-  </data>
-  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
-    <value>영상 있음</value>
-  </data>
-  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
-    <value>방송 가능</value>
-  </data>
-  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
-    <value>웹에서 채보 둘러보기 &amp; 다운로드</value>
-  </data>
-  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
-    <value>채보 받기</value>
-  </data>
-  <data name="ChartManage_Rating" xml:space="preserve">
-    <value>레벨</value>
-  </data>
-  <data name="ChartManage_Reset" xml:space="preserve">
-    <value>초기화</value>
-  </data>
-  <data name="ChartManage_Sort_DateAdded" xml:space="preserve">
-    <value>추가한 날짜</value>
-  </data>
-  <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
-    <value>업데이트한 날짜</value>
-  </data>
-  <data name="ChartManage_Sort_Maps" xml:space="preserve">
-    <value>맵 수</value>
-  </data>
-  <data name="ChartManage_Sort_Name" xml:space="preserve">
-    <value>이름</value>
-  </data>
-  <data name="ChartManage_SortBy" xml:space="preserve">
-    <value>정렬 기준</value>
-  </data>
-  <data name="ChartManage_Tag_Video" xml:space="preserve">
-    <value>영상</value>
-  </data>
-  <data name="ChartManage_UploadedBy" xml:space="preserve">
-    <value>업로더: {0}</value>
-  </data>
-  <data name="ChartSource_Offline" xml:space="preserve">
-    <value>Offline</value>
-  </data>
-  <data name="ChartSource_Online" xml:space="preserve">
-    <value>Online</value>
-  </data>
-  <data name="ChartManage_UpdateAll" xml:space="preserve">
-    <value>모든 채보 업데이트</value>
-  </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>MDM 채보 마이그레이션</value>
-  </data>
-  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
-    <value>파일 크기</value>
   </data>
 </root>

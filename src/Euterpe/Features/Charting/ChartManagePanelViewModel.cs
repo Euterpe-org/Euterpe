@@ -263,7 +263,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             ChartSortField.Rating => (a, b) => a.MaxRating.CompareTo(b.MaxRating),
             ChartSortField.DateAdded => (a, b) => (a.Manifest.Meta.CreatedAt ?? 0).CompareTo(b.Manifest.Meta.CreatedAt ?? 0),
             ChartSortField.DateUpdated => (a, b) => (a.Manifest.Meta.UpdatedAt ?? 0).CompareTo(b.Manifest.Meta.UpdatedAt ?? 0),
-            ChartSortField.DifficultyCount => (a, b) => a.Difficulties.Count.CompareTo(b.Difficulties.Count),
+            ChartSortField.MapCount => (a, b) => a.Difficulties.Count.CompareTo(b.Difficulties.Count),
             ChartSortField.Size => (a, b) => a.SizeBytes.CompareTo(b.SizeBytes),
             _ => (a, b) => string.Compare(a.Manifest.Meta.Name, b.Manifest.Meta.Name, StringComparison.OrdinalIgnoreCase)
         };
