@@ -62,7 +62,7 @@ public sealed partial class ChartDto : ObservableObject
             : Manifest.Meta.Bpm.ToString(CultureInfo.InvariantCulture);
 
     public string CharterDisplay =>
-        string.Join("、", Manifest.Meta.Maps.Values
+        string.Join(", ", Manifest.Meta.Maps.Values
             .SelectMany(map => map.Charters)
             .Distinct(StringComparer.OrdinalIgnoreCase));
 
