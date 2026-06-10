@@ -1,3 +1,4 @@
+using System.Globalization;
 using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Models.Charts;
@@ -19,6 +20,34 @@ public sealed class ChartDto : ObservableObject
 
     public IReadOnlyList<ChartDifficulty> Difficulties =>
         Manifest.Files.ExistingDifficulties();
+
+    public IReadOnlyList<DifficultyBadge> DifficultyBadges =>
+    [
+        .. Difficulties.Select(difficulty =>
+            new DifficultyBadge(difficulty, Manifest.Meta.Maps.GetValueOrDefault(MapName(difficulty))?.Rating ?? string.Empty))
+    ];
+
+    public double MaxRating =>
+        Manifest.Meta.Maps.Values.Select(map => ChartRating.Parse(map.Rating)).DefaultIfEmpty(-1).Max();
+
+    public long SizeBytes => Manifest.Files.Values.Sum(file => file.Size);
+
+    public string SizeDisplay => SizeBytes switch
+    {
+        var bytes and >= 1 << 30 => string.Create(CultureInfo.InvariantCulture, $"{bytes / (double)(1 << 30):0.#} GB"),
+        var bytes and >= 1 << 20 => string.Create(CultureInfo.InvariantCulture, $"{bytes / (double)(1 << 20):0.#} MB"),
+        var bytes => string.Create(CultureInfo.InvariantCulture, $"{bytes / (double)(1 << 10):0.#} KB")
+    };
+
+    public string BpmDisplay =>
+        Manifest.Meta is { BpmMin: { } min, BpmMax: { } max } && min != max
+            ? $"{min}–{max}"
+            : Manifest.Meta.Bpm.ToString(CultureInfo.InvariantCulture);
+
+    public string CharterDisplay =>
+        string.Join("、", Manifest.Meta.Maps.Values
+            .SelectMany(map => map.Charters)
+            .Distinct(StringComparer.OrdinalIgnoreCase));
 
     public bool HasDifficulty(ChartDifficulty difficulty) =>
         Manifest.Files.ContainsKey(MapFileName(difficulty));

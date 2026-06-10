@@ -404,7 +404,7 @@
                                                 <ItemsControl
                                                     HorizontalAlignment="Right"
                                                     IsHitTestVisible="False"
-                                                    ItemsSource="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDifficultyBadgesConverter}}"
+                                                    ItemsSource="{Binding DifficultyBadges}"
                                                     Margin="6"
                                                     VerticalAlignment="Top">
                                                     <ItemsControl.ItemsPanel>
@@ -416,7 +416,7 @@
                                                     </ItemsControl.ItemsPanel>
                                                     <ItemsControl.ItemTemplate>
                                                         <DataTemplate
-                                                            x:DataType="vm:DifficultyBadge">
+                                                            x:DataType="models:DifficultyBadge">
                                                             <Panel
                                                                 ClipToBounds="True"
                                                                 Height="30"
@@ -480,7 +480,7 @@
                                                 IsVisible="{Binding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                                 MaxLines="1"
                                                 Opacity="0.7"
-                                                Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartChartersConverter}}"
+                                                Text="{Binding CharterDisplay}"
                                                 TextTrimming="CharacterEllipsis"
                                                 ToolTip.Tip="{Binding $self.Text}" />
                                         </StackPanel>
@@ -492,7 +492,7 @@
                                             <TextBlock
                                                 FontSize="12"
                                                 Opacity="0.85"
-                                                Text="{Binding Manifest.Meta, Converter={x:Static converters:FuncValueConverters.ChartBpmConverter}, StringFormat='♪ {0}'}" />
+                                                Text="{Binding BpmDisplay, StringFormat='♪ {0}'}" />
                                             <Border
                                                 Background="#40808080"
                                                 CornerRadius="3"
@@ -540,7 +540,7 @@
                                                     Classes="sizeText"
                                                     FontSize="11"
                                                     HorizontalAlignment="Right"
-                                                    Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartSizeConverter}}"
+                                                    Text="{Binding SizeDisplay}"
                                                     VerticalAlignment="Center" />
                                                 <Button
                                                     Classes="Transparent"

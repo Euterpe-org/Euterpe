@@ -1,4 +1,4 @@
-namespace Euterpe.Features.Charting;
+namespace Euterpe.Models.Charts;
 
 public enum ChartSortField
 {

@@ -37,7 +37,7 @@ public static partial class Mapper
         foreach (var difficulty in difficulties)
         {
             var (rating, designer) = ResolveDifficulty(info, difficulty);
-            maps[$"map{(int)difficulty}"] = new ManifestMap
+            maps[ChartFiles.MapName(difficulty)] = new ManifestMap
             {
                 Rating = rating,
                 Charters = [designer],
