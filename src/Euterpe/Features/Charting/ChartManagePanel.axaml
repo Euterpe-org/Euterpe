@@ -7,6 +7,7 @@
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:Euterpe.Models.Charts"
+    xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.Features.Charting"
     x:Class="Euterpe.Features.Charting.ChartManagePanel"
     x:DataType="vm:ChartManagePanelViewModel"
@@ -196,7 +197,13 @@
             </Border>
 
             <!--  Chart grid: fixed-width cards that wrap, so the column count flows with window width (≈4 at the default size, more when wider) instead of locking to 4  -->
-            <ScrollViewer Grid.Column="1">
+            <u:LoadingContainer
+                Grid.Column="1"
+                IsLoading="{Binding !AllChartsLoaded, Mode=OneWay}"
+                LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}"
+                VerticalAlignment="Stretch"
+                VerticalContentAlignment="Top">
+            <ScrollViewer>
                 <ItemsControl ItemsSource="{Binding Charts}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -502,6 +509,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+            </u:LoadingContainer>
         </Grid>
     </Grid>
 
