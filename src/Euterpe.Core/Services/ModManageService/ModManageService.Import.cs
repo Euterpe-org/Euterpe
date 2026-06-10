@@ -1,3 +1,5 @@
+using DynamicData.Kernel;
+
 namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
@@ -19,48 +21,52 @@ internal sealed partial class ModManageService
             ? await ModLocalService.LoadModFromPathAsync(filePath).ConfigureAwait(false)
             : null;
 
-        if (mod is not null)
-        {
-            await ImportModAsync(mod, filePath).ConfigureAwait(false);
-        }
-        else if (extension is ".dll")
-        {
-            await ImportLibAsync(filePath).ConfigureAwait(false);
-        }
-        else
+        if (mod is null && extension is not ".dll")
         {
             Logger.ZLogWarning($"Ignored dropped file (not a mod or lib): {fileName}");
+            NotificationService.ErrorLight(Notification_Content_Mod_Import_Unsupported, fileName);
+            return;
+        }
+
+        try
+        {
+            if (mod is not null)
+            {
+                ImportMod(mod, filePath);
+            }
+            else
+            {
+                await ImportLibAsync(filePath).ConfigureAwait(false);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to import {fileName}");
             NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, fileName);
         }
     }
 
-    private async Task ImportModAsync(ModDto mod, string filePath)
+    private void ImportMod(ModDto mod, string filePath)
     {
-        var cached = _sourceCache.Lookup(mod.Name) is { HasValue: true, Value: var value } ? value : null;
+        var cached = _sourceCache.Lookup(mod.Name).ValueOrDefault();
+        var installed = cached is { IsLocal: true } ? cached : null;
 
-        if (cached is { IsLocal: true }
-            && SemVersion.Parse(mod.LocalVersion).ComparePrecedenceTo(SemVersion.Parse(cached.LocalVersion)) <= 0)
+        if (installed is not null && CompareModVersions(mod.LocalVersion, installed.LocalVersion) <= 0)
         {
-            Logger.ZLogInformation($"Skipped import of {mod.Name}: version {cached.LocalVersion} already installed");
+            Logger.ZLogInformation($"Skipped import of {mod.Name}: version {installed.LocalVersion} already installed");
             NotificationService.WarningLight(Notification_Content_Mod_Import_Duplicated, mod.Name);
             return;
         }
 
-        var fileName = Path.GetFileName(filePath);
-        if (!FileSystemService.TryCopyFile(filePath, Path.Combine(GameConfig.ModsFolder, fileName), true))
+        if (!TryReplaceModFile(filePath, installed))
         {
             NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, mod.Name);
             return;
         }
 
-        if (cached is { IsLocal: true } && cached.LocalFileName != mod.LocalFileName)
-        {
-            FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, cached.LocalFileName), DeleteOption.IgnoreIfNotFound);
-        }
+        CacheImportedMod(mod, cached);
 
-        IntegrateImportedMod(mod, cached);
-
-        Logger.ZLogInformation($"Imported mod {mod.Name} from {fileName}");
+        Logger.ZLogInformation($"Imported mod {mod.Name} from {Path.GetFileName(filePath)}");
         NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, mod.Name);
     }
 
@@ -82,7 +88,23 @@ internal sealed partial class ModManageService
         NotificationService.SuccessLight(Notification_Content_Lib_Import_Success, lib.Name);
     }
 
-    private void IntegrateImportedMod(ModDto localMod, ModDto? cached)
+    private bool TryReplaceModFile(string sourcePath, ModDto? installed)
+    {
+        var fileName = Path.GetFileName(sourcePath);
+        if (!FileSystemService.TryCopyFile(sourcePath, Path.Combine(GameConfig.ModsFolder, fileName), true))
+        {
+            return false;
+        }
+
+        if (installed is not null && installed.LocalFileName != fileName)
+        {
+            FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, installed.LocalFileName), DeleteOption.IgnoreIfNotFound);
+        }
+
+        return true;
+    }
+
+    private void CacheImportedMod(ModDto localMod, ModDto? cached)
     {
         if (cached is not { HasDownloadSource: true })
         {

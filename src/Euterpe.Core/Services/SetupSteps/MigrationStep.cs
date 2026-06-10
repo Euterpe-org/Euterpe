@@ -4,7 +4,7 @@ internal sealed class MigrationStep : ISetupStep
 {
     #region Injections
 
-    public required IMigrationService MigrationService { get; init; }
+    public required IChartManageService ChartManageService { get; init; }
 
     #endregion Injections
 
@@ -13,6 +13,6 @@ internal sealed class MigrationStep : ISetupStep
     public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         progress?.Report("Migrating CustomAlbums Charts ...");
-        await MigrationService.MigrateCustomAlbumsAsync(progress, cancellationToken).ConfigureAwait(false);
+        await ChartManageService.MigrateCustomAlbumsAsync(progress, cancellationToken).ConfigureAwait(false);
     }
 }

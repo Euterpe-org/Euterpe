@@ -180,6 +180,9 @@
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>模组 {0} 已导入</value>
   </data>
+  <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
+    <value>{0} 不是受支持的模组或依赖库文件</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>模组 {0} 安装失败</value>
   </data>

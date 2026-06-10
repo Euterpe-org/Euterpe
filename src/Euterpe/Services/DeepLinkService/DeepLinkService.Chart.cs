@@ -10,8 +10,7 @@ public sealed partial class DeepLinkService
         {
             case ["convert"]:
                 Logger.ZLogInformation($"Chart convert deep link received, migrating CustomAlbums charts");
-                await MigrationService.MigrateCustomAlbumsAsync().ConfigureAwait(false);
-                await ChartManageService.RefreshOfflineChartsAsync().ConfigureAwait(false);
+                await ChartManageService.MigrateCustomAlbumsAsync().ConfigureAwait(false);
                 break;
 
             case ["download", var chartId]:

@@ -183,6 +183,9 @@
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>Mod {0} is already imported</value>
   </data>
+  <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
+    <value>{0} is not a supported mod or library file</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>Failed to install mod {0}</value>
   </data>

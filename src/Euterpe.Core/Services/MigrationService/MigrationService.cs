@@ -4,7 +4,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class MigrationService : IMigrationService
 {
-    public async Task<MigrationOutcome> MigrateCustomAlbumAsync(CustomAlbumSource source, CancellationToken cancellationToken = default)
+    public async Task<(MigrationOutcome Outcome, string Destination)> MigrateCustomAlbumAsync(CustomAlbumSource source, CancellationToken cancellationToken = default)
     {
         var name = source.Name;
         var destinationFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
@@ -12,7 +12,7 @@ internal sealed partial class MigrationService : IMigrationService
         if (Directory.Exists(destinationFolder))
         {
             Logger.ZLogInformation($"'{name}' already migrated, skipping");
-            return MigrationOutcome.Skipped;
+            return (MigrationOutcome.Skipped, destinationFolder);
         }
 
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, name);
@@ -23,16 +23,16 @@ internal sealed partial class MigrationService : IMigrationService
             if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder))
             {
                 Logger.ZLogError($"Failed to move migrated chart '{name}'");
-                return MigrationOutcome.Failed;
+                return (MigrationOutcome.Failed, destinationFolder);
             }
 
             Logger.ZLogInformation($"Migrated '{name}' -> {destinationFolder}");
-            return MigrationOutcome.Migrated;
+            return (MigrationOutcome.Migrated, destinationFolder);
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to migrate custom album '{name}', skipping");
-            return MigrationOutcome.Failed;
+            return (MigrationOutcome.Failed, destinationFolder);
         }
         finally
         {
@@ -40,65 +40,15 @@ internal sealed partial class MigrationService : IMigrationService
         }
     }
 
-    public async Task MigrateCustomAlbumsAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
-    {
-        if (!Directory.Exists(GameConfig.CustomAlbumsChartsFolder))
-        {
-            Logger.ZLogInformation($"No CustomAlbums folder at {GameConfig.CustomAlbumsChartsFolder}, nothing to migrate");
-            return;
-        }
-
-        var sources = ChartLocalService.GetCustomAlbumsSources();
-        int migrated = 0, skipped = 0, failed = 0;
-
-        for (var i = 0; i < sources.Length; i++)
-        {
-            progress?.Report($"{sources[i].Name} ({i + 1}/{sources.Length})");
-
-            switch (await MigrateCustomAlbumAsync(sources[i], cancellationToken).ConfigureAwait(false))
-            {
-                case MigrationOutcome.Migrated:
-                    migrated++;
-                    break;
-                case MigrationOutcome.Skipped:
-                    skipped++;
-                    break;
-                case MigrationOutcome.Failed:
-                    failed++;
-                    break;
-                default:
-                    throw new UnreachableException();
-            }
-        }
-
-        Logger.ZLogInformation($"CustomAlbums migration complete: {migrated} migrated, {skipped} skipped, {failed} failed");
-
-        if (failed > 0)
-        {
-            NotificationService.WarningLight(Notification_Content_Migration_Partial, migrated, failed);
-            return;
-        }
-
-        FileSystemService.TryDeleteDirectory(GameConfig.CustomAlbumsChartsFolder);
-
-        if (migrated > 0)
-        {
-            NotificationService.SuccessLight(Notification_Content_Migration_Success, migrated);
-        }
-    }
-
-
     #region Injections
 
     public required GameConfig GameConfig { get; init; }
     public required IArchiveService Archive { get; init; }
     public required IAudioConverterService AudioConverter { get; init; }
-    public required IChartLocalService ChartLocalService { get; init; }
     public required IFileSystemService FileSystemService { get; init; }
     public required IJsonSerializationService JsonSerialization { get; init; }
     public required ILogger<MigrationService> Logger { get; init; }
     public required IMessagePackSerializationService MessagePackSerialization { get; init; }
-    public required INotificationService NotificationService { get; init; }
 
     #endregion Injections
 }

@@ -16,11 +16,6 @@ internal sealed partial class ChartManageService
             }
         }
 
-        if (imported > 0)
-        {
-            await RefreshOfflineChartsAsync().ConfigureAwait(false);
-        }
-
         return imported > 0;
     }
 
@@ -38,9 +33,14 @@ internal sealed partial class ChartManageService
 
         try
         {
-            var outcome = kind is ChartDropKind.Package
+            var (outcome, destination) = kind is ChartDropKind.Package
                 ? await ExtractPackagedChartAsync(path, name).ConfigureAwait(false)
                 : await MigrationService.MigrateCustomAlbumAsync(ChartLocalService.CreateCustomAlbumSource(path), cancellationToken).ConfigureAwait(false);
+
+            if (outcome is MigrationOutcome.Migrated)
+            {
+                await AddImportedChartAsync(destination).ConfigureAwait(false);
+            }
 
             return ReportOutcome(outcome, name, path);
         }
@@ -49,6 +49,18 @@ internal sealed partial class ChartManageService
             Logger.ZLogError(ex, $"Failed to import chart from {path}");
             NotificationService.ErrorLight(Notification_Content_Chart_Import_Failed, name);
             return false;
+        }
+    }
+
+    private async Task AddImportedChartAsync(string chartFolder)
+    {
+        if (await ChartLocalService.LoadChartFromPathAsync(chartFolder, ChartSource.Offline).ConfigureAwait(false) is { } chart)
+        {
+            _sourceCache.AddOrUpdate(chart);
+        }
+        else
+        {
+            Logger.ZLogWarning($"Imported chart at {chartFolder} could not be loaded into the cache");
         }
     }
 
@@ -74,18 +86,18 @@ internal sealed partial class ChartManageService
         };
     }
 
-    private async Task<MigrationOutcome> ExtractPackagedChartAsync(string path, string name)
+    private async Task<(MigrationOutcome Outcome, string Destination)> ExtractPackagedChartAsync(string path, string name)
     {
         var destination = Path.Combine(GameConfig.OfflineChartsFolder, name);
         if (Directory.Exists(destination))
         {
-            return MigrationOutcome.Skipped;
+            return (MigrationOutcome.Skipped, destination);
         }
 
         try
         {
             await Archive.ExtractZipFileAsync(path, destination).ConfigureAwait(false);
-            return MigrationOutcome.Migrated;
+            return (MigrationOutcome.Migrated, destination);
         }
         catch
         {

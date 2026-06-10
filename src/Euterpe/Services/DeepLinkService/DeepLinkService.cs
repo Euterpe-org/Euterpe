@@ -3,7 +3,6 @@ namespace Euterpe.Services;
 public sealed partial class DeepLinkService
 {
     private IChartManageService ChartManageService => GameScope.Value.Resolve<IChartManageService>();
-    private IMigrationService MigrationService => GameScope.Value.Resolve<IMigrationService>();
     private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
 
     public async Task SetupAsync()
