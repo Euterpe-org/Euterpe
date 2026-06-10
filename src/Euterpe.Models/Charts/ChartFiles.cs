@@ -26,7 +26,7 @@ public static class ChartFiles
 
     public static string MapName(ChartDifficulty difficulty) => $"map{(int)difficulty}";
 
-    public static string MapFileName(ChartDifficulty difficulty) => $"{MapName(difficulty)}.bms";
+    public static string MapFileName(ChartDifficulty difficulty) => $"map{(int)difficulty}.bms";
 
     public static IReadOnlyList<ChartDifficulty> ExistingDifficulties(this IReadOnlyDictionary<string, ManifestFileEntry> files) =>
         [.. AllDifficulties.Where(difficulty => files.ContainsKey(MapFileName(difficulty)))];
