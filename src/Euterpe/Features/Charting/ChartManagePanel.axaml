@@ -101,15 +101,18 @@
             ColumnDefinitions="220,*">
 
             <!--  Filter rail  -->
+            <!--  Right padding lives on the scroll content, not the rail: the freed 12px is a gutter
+                  the overlay scrollbar floats in, so it never covers content, while without a
+                  scrollbar the content keeps symmetric 12px margins at any window size.  -->
             <Border
                 Grid.Column="0"
                 Background="{DynamicResource SecondaryCardColor}"
                 CornerRadius="8"
                 Margin="0,0,12,0"
-                Padding="12">
+                Padding="12,12,0,12">
                 <Grid RowDefinitions="*,Auto">
                     <ScrollViewer Grid.Row="0">
-                    <StackPanel Spacing="14">
+                    <StackPanel Margin="0,0,12,0" Spacing="14">
                         <!--  Charts are browsed/downloaded on the web; flashy CTA card to send users there  -->
                         <Button
                             Classes="Transparent Card"
@@ -177,7 +180,7 @@
                     <!--  Maintenance actions, pinned below the scrolling filters  -->
                     <StackPanel
                         Grid.Row="1"
-                        Margin="0,12,0,0"
+                        Margin="0,12,12,0"
                         Spacing="6">
                         <Button
                             Command="{Binding UpdateAllChartsCommand}"
