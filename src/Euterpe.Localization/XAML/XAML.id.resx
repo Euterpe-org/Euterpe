@@ -553,4 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>Migrasikan Chart MDM</value>
   </data>
+  <data name="ChartManage_Sort_Size" xml:space="preserve">
+    <value>Ukuran</value>
+  </data>
 </root>

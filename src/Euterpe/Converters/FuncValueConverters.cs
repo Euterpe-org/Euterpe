@@ -52,6 +52,12 @@ public static class FuncValueConverters
     public static FuncValueConverter<ChartDto, IReadOnlyList<DifficultyBadge>> ChartDifficultyBadgesConverter { get; } =
         new(static chart => chart is null ? [] : ChartRating.Badges(chart));
 
+    public static FuncValueConverter<ChartDto, string> ChartSizeConverter { get; } =
+        new(static chart => chart is null ? string.Empty : ChartRating.SizeDisplay(chart));
+
+    public static FuncValueConverter<ChartDto, string> ChartChartersConverter { get; } =
+        new(static chart => chart is null ? string.Empty : ChartRating.CharterDisplay(chart));
+
     // [folderName, currentlyPlaying] -> pause icon when this chart is playing, else play icon
     public static FuncMultiValueConverter<string?, Geometry> ChartPlayIconConverter { get; } =
         new(static values => values.ToArray() is [{ } folder, var playing] && folder == playing ? PauseIcon : PlayIcon);

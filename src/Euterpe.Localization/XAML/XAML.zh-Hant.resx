@@ -553,4 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>遷移 MDM 譜面</value>
   </data>
+  <data name="ChartManage_Sort_Size" xml:space="preserve">
+    <value>體積</value>
+  </data>
 </root>
