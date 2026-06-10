@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Avalonia.Platform.Storage;
 
 namespace Euterpe.Features.Charting;
@@ -7,11 +8,12 @@ namespace Euterpe.Features.Charting;
 [PerGame]
 public sealed partial class ChartManagePanelViewModel : ViewModelBase
 {
-    private const int MinRating = 1;
-    private const int MaxRating = 12;
+    private const int RatingLowerBound = 1;
+    private const int RatingUpperBound = 12;
 
     private readonly ReadOnlyObservableCollection<ChartDto> _charts;
     private readonly BehaviorSubject<IComparer<ChartDto>> _comparer;
+    private readonly Subject<Unit> _searchTextChanged = new();
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
 
     private ChartDto? _playingChart;
@@ -28,8 +30,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [ObservableProperty] public partial bool ShowMaster { get; set; } = true;
     [ObservableProperty] public partial bool ShowHidden { get; set; } = true;
 
-    [ObservableProperty] public partial int? RatingMin { get; set; } = MinRating;
-    [ObservableProperty] public partial int? RatingMax { get; set; } = MaxRating;
+    [ObservableProperty] public partial int? RatingMin { get; set; } = RatingLowerBound;
+    [ObservableProperty] public partial int? RatingMax { get; set; } = RatingUpperBound;
 
     [ObservableProperty] public partial int? BpmMin { get; set; }
     [ObservableProperty] public partial int? BpmMax { get; set; }
@@ -52,6 +54,10 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             .Filter(MatchesFilters)
             .SortAndBind(out _charts, _comparer.AsSystemObservable())
             .Subscribe();
+
+        _searchTextChanged
+            .Debounce(TimeSpan.FromMilliseconds(300))
+            .Subscribe(this, static (_, vm) => vm.RefreshFilter());
     }
 
     protected override async Task OnInitializeAsync()
@@ -143,8 +149,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     {
         SearchText = null;
         ShowEasy = ShowHard = ShowMaster = ShowHidden = true;
-        RatingMin = MinRating;
-        RatingMax = MaxRating;
+        RatingMin = RatingLowerBound;
+        RatingMax = RatingUpperBound;
         BpmMin = null;
         BpmMax = null;
         StreamerSafeOnly = false;
@@ -222,9 +228,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return false;
         }
 
-        var ratingMin = RatingMin ?? MinRating;
-        var ratingMax = RatingMax ?? MaxRating;
-        if ((ratingMin > MinRating || ratingMax < MaxRating)
+        var ratingMin = RatingMin ?? RatingLowerBound;
+        var ratingMax = RatingMax ?? RatingUpperBound;
+        if ((ratingMin > RatingLowerBound || ratingMax < RatingUpperBound)
             && !meta.Maps.Values.Select(static m => (int)m.RatingValue).Any(r => r >= ratingMin && r <= ratingMax))
         {
             return false;
@@ -276,20 +282,25 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     private void RefreshSort() => _comparer.OnNext(BuildComparer());
 
-    partial void OnSelectedChartSourceIndexChanged(int value) => RefreshFilter();
-    partial void OnSearchTextChanged(string? value) => RefreshFilter();
-    partial void OnShowEasyChanged(bool value) => RefreshFilter();
-    partial void OnShowHardChanged(bool value) => RefreshFilter();
-    partial void OnShowMasterChanged(bool value) => RefreshFilter();
-    partial void OnShowHiddenChanged(bool value) => RefreshFilter();
-    partial void OnRatingMinChanged(int? value) => RefreshFilter();
-    partial void OnRatingMaxChanged(int? value) => RefreshFilter();
-    partial void OnBpmMinChanged(int? value) => RefreshFilter();
-    partial void OnBpmMaxChanged(int? value) => RefreshFilter();
-    partial void OnStreamerSafeOnlyChanged(bool value) => RefreshFilter();
-    partial void OnHasVideoOnlyChanged(bool value) => RefreshFilter();
-    partial void OnSortFieldChanged(ChartSortField value) => RefreshSort();
-    partial void OnSortDescendingChanged(bool value) => RefreshSort();
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+
+        switch (e.PropertyName)
+        {
+            case nameof(SearchText):
+                _searchTextChanged.OnNext(Unit.Default);
+                break;
+            case nameof(SelectedChartSourceIndex) or nameof(ShowEasy) or nameof(ShowHard) or nameof(ShowMaster)
+                or nameof(ShowHidden) or nameof(RatingMin) or nameof(RatingMax) or nameof(BpmMin) or nameof(BpmMax)
+                or nameof(StreamerSafeOnly) or nameof(HasVideoOnly):
+                RefreshFilter();
+                break;
+            case nameof(SortField) or nameof(SortDescending):
+                RefreshSort();
+                break;
+        }
+    }
 
     #region Injections
 
