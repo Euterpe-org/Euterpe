@@ -5,6 +5,11 @@
 - Design the change, don't just complete the feature: a working implementation that leaves tech debt is not acceptable. If every viable approach leaves debt, the module itself is due for a redesign — surface that instead of bolting on.
 - Build along the known extension axes; this app already paid for assuming a single game (the `[PerGame]`/game-scope rework when multi-game support arrived). Ask "what varies when the next game/variant arrives" before hardcoding, and keep game-specific state and services game-scoped.
 
+## Language & APIs
+
+- Use the newest C# syntax and BCL APIs the repo's `LangVersion`/TFM allows (`field` keyword, `extension` members, collection expressions, span/`IFormatProvider` overloads) — never an older equivalent out of habit; the newer API is usually the better-optimized one.
+- When several APIs solve the same problem, pick the best-performing one for the concrete situation (allocations, lookup cost, parse overloads) — deliberately, not first-that-works.
+
 ## Naming & comments
 
 - Method and variable names must be self-explanatory; if a name needs a comment to be understood, rename it (e.g. `PlayingFolderName`, not `CurrentlyPlaying` + a comment).
@@ -33,12 +38,20 @@
 - No redundant wrapper services or pass-through methods: put the method on the existing domain service and make the real method public.
 - File/IO primitives go through `IFileSystemService` (`Try*` pattern); never raw `Directory`/`File` calls with ad-hoc try/catch in services.
 
+## Localization
+
+- During development add the neutral `.resx` plus `zh-Hans`/`zh-Hant` only — those are the locales the user can read and test with, and keys may still churn while the feature settles. The remaining locales get batch-translated once the feature is final.
+- Keys are `Name_Action_State` segments, scoped by where the text belongs:
+  - Page/panel-scoped view text: `<PanelName>_<Element>` (`ChartManage_SortBy`, `Setting_Title_Language`).
+  - Self-identifying concepts, especially enum members: `<TypeName>_<Member>` (`ChartDifficulty_Easy`, `ChartSortField_MapCount`, `ModFilterType_All`) — never borrow another feature's key because the value happens to match today.
+  - Code-side messages in `Interaction`: `<Kind>_Content_<Domain>_<Action>_<State>` (`Notification_Content_Chart_UpdateAll_Success`, `MessageBox_Content_SetPathEnvironment_Windows`).
+- Keep `.resx` data entries alphabetically ordered — merge new keys into place, never append at the end.
+
 ## Misc
 
 - Deduplicate shared one-liners into a single home (e.g. `ChartFiles.MapName`), even tiny ones.
 - Before writing anything by hand, check the packages already referenced (`Directory.Packages.props`) for an existing facility — especially the easily-forgotten ones: CommunityToolkit.Mvvm's `[NotifyPropertyChangedFor]` for dependent properties instead of manually raising `OnPropertyChanged`, R3 `Observable`s for event wiring/composition instead of manual event handlers.
 - Prefer an existing library over hand-rolling, but verify its actual behavior (decompile if needed) before adopting or rejecting it.
-- Localized strings: during development add the neutral `.resx` plus `zh-Hans`/`zh-Hant` only — those are the locales the user can read and test with, and keys may still churn while the feature settles. The remaining locales get batch-translated once the feature is final.
 - Logging via ZLogger interpolation (`Logger.ZLogInformation($"...")`).
 - DI: `public required T Name { get; init; }` properties inside `#region Injections`.
 - `.cs` files end with exactly one trailing newline (`insert_final_newline` applies to `[*.cs]` only).
