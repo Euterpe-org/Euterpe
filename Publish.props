@@ -15,6 +15,12 @@
     <Import Project="$(MSBuildProjectDirectory)\$(MSBuildProjectName).props"
             Condition="Exists('$(MSBuildProjectDirectory)\$(MSBuildProjectName).props')"/>
 
+    <Target Name="Exclude Package Pdbs" AfterTargets="ComputeFilesToPublish">
+        <ItemGroup>
+            <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)" Condition="'%(Extension)' == '.pdb'"/>
+        </ItemGroup>
+    </Target>
+
     <Target Name="Copy Builds" AfterTargets="Publish">
         <PropertyGroup>
             <_NativeDir>$(OutputPath)native\</_NativeDir>
