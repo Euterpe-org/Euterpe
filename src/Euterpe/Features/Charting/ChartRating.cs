@@ -22,6 +22,23 @@ public static class ChartRating
             ? $"{min}–{max}"
             : meta.Bpm.ToString(CultureInfo.InvariantCulture);
 
+    public static long Size(ChartDto chart) =>
+        chart.Manifest.Files.Values.Sum(f => f.Size);
+
+    public static string SizeDisplay(ChartDto chart) =>
+        Size(chart) switch
+        {
+            var b and >= 1 << 30 => string.Create(CultureInfo.InvariantCulture, $"{b / (double)(1 << 30):0.#} GB"),
+            var b and >= 1 << 20 => string.Create(CultureInfo.InvariantCulture, $"{b / (double)(1 << 20):0.#} MB"),
+            var b => string.Create(CultureInfo.InvariantCulture, $"{b / (double)(1 << 10):0.#} KB")
+        };
+
+    // All charters across difficulties, de-duplicated case-insensitively (first spelling wins).
+    public static string CharterDisplay(ChartDto chart) =>
+        string.Join("、", chart.Manifest.Meta.Maps.Values
+            .SelectMany(m => m.Charters)
+            .Distinct(StringComparer.OrdinalIgnoreCase));
+
     public static IReadOnlyList<DifficultyBadge> Badges(ChartDto chart) =>
     [
         .. chart.Difficulties.Select(difficulty =>

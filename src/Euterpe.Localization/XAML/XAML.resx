@@ -580,4 +580,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>Migrate MDM Charts</value>
   </data>
+  <data name="ChartManage_Sort_Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
 </root>

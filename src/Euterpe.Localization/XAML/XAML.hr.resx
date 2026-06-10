@@ -553,4 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>Migriraj MDM chartove</value>
   </data>
+  <data name="ChartManage_Sort_Size" xml:space="preserve">
+    <value>Veličina</value>
+  </data>
 </root>

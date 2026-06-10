@@ -553,4 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>Migrer les charts MDM</value>
   </data>
+  <data name="ChartManage_Sort_Size" xml:space="preserve">
+    <value>Taille</value>
+  </data>
 </root>
