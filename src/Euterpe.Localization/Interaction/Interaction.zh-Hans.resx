@@ -132,6 +132,9 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>已成功将 MD_DIRECTORY 环境变量设置为 {0}</value>
   </data>
+  <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
+    <value>音频播放失败</value>
+  </data>
   <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
     <value>谱面 {0} 下载失败</value>
   </data>

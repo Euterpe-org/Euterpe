@@ -135,6 +135,9 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>MD_DIRECTORY environment variable successfully set to {0}</value>
   </data>
+  <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
+    <value>Failed to play audio</value>
+  </data>
   <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
     <value>Failed to download chart {0}</value>
   </data>
