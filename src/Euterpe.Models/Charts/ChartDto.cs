@@ -45,7 +45,7 @@ public sealed partial class ChartDto : ObservableObject
     ];
 
     public double MaxRating =>
-        Manifest.Meta.Maps.Values.Select(map => ChartRating.Parse(map.Rating)).DefaultIfEmpty(-1).Max();
+        Manifest.Meta.Maps.Values.Select(static map => map.RatingValue).DefaultIfEmpty(-1).Max();
 
     public long SizeBytes => Manifest.Files.Values.Sum(file => file.Size);
 

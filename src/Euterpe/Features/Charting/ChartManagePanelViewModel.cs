@@ -225,8 +225,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         var ratingMin = RatingMin ?? MinRating;
         var ratingMax = RatingMax ?? MaxRating;
         if ((ratingMin > MinRating || ratingMax < MaxRating)
-            && !meta.Maps.Values.Any(m =>
-                (int)Math.Floor(ChartRating.Parse(m.Rating)) is var r && r >= ratingMin && r <= ratingMax))
+            && !meta.Maps.Values.Select(static m => (int)m.RatingValue).Any(r => r >= ratingMin && r <= ratingMax))
         {
             return false;
         }
