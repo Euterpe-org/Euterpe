@@ -73,6 +73,81 @@
   <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>Master</value>
   </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>Decrescente</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>Dificuldade</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>Com vídeo</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>Seguro para transmissão</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>Explore &amp; baixe charts na web</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>Obter charts</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>Migrar charts do MDM</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>Nível</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>Redefinir</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>Ordenar por</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>Vídeo</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>Atualizar todos os charts</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>por {0}</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>Data de adição</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>Data de atualização</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>Mapas</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>Nível</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>Tamanho do arquivo</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>Artista</value>
   </data>
@@ -489,71 +564,5 @@
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>Bem-vindo ao Euterpe</value>
-  </data>
-  <data name="ChartManage_Bpm" xml:space="preserve">
-    <value>BPM</value>
-  </data>
-  <data name="ChartManage_Delete" xml:space="preserve">
-    <value>Excluir</value>
-  </data>
-  <data name="ChartManage_Descending" xml:space="preserve">
-    <value>Decrescente</value>
-  </data>
-  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
-    <value>Dificuldade</value>
-  </data>
-  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
-    <value>Com vídeo</value>
-  </data>
-  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
-    <value>Seguro para transmissão</value>
-  </data>
-  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
-    <value>Explore &amp; baixe charts na web</value>
-  </data>
-  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
-    <value>Obter charts</value>
-  </data>
-  <data name="ChartManage_Rating" xml:space="preserve">
-    <value>Nível</value>
-  </data>
-  <data name="ChartManage_Reset" xml:space="preserve">
-    <value>Redefinir</value>
-  </data>
-  <data name="ChartManage_Sort_DateAdded" xml:space="preserve">
-    <value>Data de adição</value>
-  </data>
-  <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
-    <value>Data de atualização</value>
-  </data>
-  <data name="ChartManage_Sort_Maps" xml:space="preserve">
-    <value>Mapas</value>
-  </data>
-  <data name="ChartManage_Sort_Name" xml:space="preserve">
-    <value>Nome</value>
-  </data>
-  <data name="ChartManage_SortBy" xml:space="preserve">
-    <value>Ordenar por</value>
-  </data>
-  <data name="ChartManage_Tag_Video" xml:space="preserve">
-    <value>Vídeo</value>
-  </data>
-  <data name="ChartManage_UploadedBy" xml:space="preserve">
-    <value>por {0}</value>
-  </data>
-  <data name="ChartSource_Offline" xml:space="preserve">
-    <value>Offline</value>
-  </data>
-  <data name="ChartSource_Online" xml:space="preserve">
-    <value>Online</value>
-  </data>
-  <data name="ChartManage_UpdateAll" xml:space="preserve">
-    <value>Atualizar todos os charts</value>
-  </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>Migrar charts do MDM</value>
-  </data>
-  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
-    <value>Tamanho do arquivo</value>
   </data>
 </root>

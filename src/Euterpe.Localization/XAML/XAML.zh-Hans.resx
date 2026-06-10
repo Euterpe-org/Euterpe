@@ -73,6 +73,81 @@
   <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>大触</value>
   </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>降序</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>难度</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>含视频</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>可直播</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>浏览并下载谱面</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>获取谱面</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>迁移 MDM 谱面</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>定数</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>排序方式</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>更新全部谱面</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>由 {0} 上传</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>添加日期</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>更新日期</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>地图数量</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>定数</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>本地</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>线上</value>
+  </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>艺术家</value>
   </data>
@@ -510,71 +585,5 @@
   </data>
   <data name="Wizard_Title_Welcome" xml:space="preserve">
     <value>欢迎使用 Euterpe</value>
-  </data>
-  <data name="ChartManage_Bpm" xml:space="preserve">
-    <value>BPM</value>
-  </data>
-  <data name="ChartManage_Delete" xml:space="preserve">
-    <value>删除</value>
-  </data>
-  <data name="ChartManage_Descending" xml:space="preserve">
-    <value>降序</value>
-  </data>
-  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
-    <value>难度</value>
-  </data>
-  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
-    <value>含视频</value>
-  </data>
-  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
-    <value>可直播</value>
-  </data>
-  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
-    <value>浏览并下载谱面</value>
-  </data>
-  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
-    <value>获取谱面</value>
-  </data>
-  <data name="ChartManage_Rating" xml:space="preserve">
-    <value>定数</value>
-  </data>
-  <data name="ChartManage_Reset" xml:space="preserve">
-    <value>重置</value>
-  </data>
-  <data name="ChartManage_Sort_DateAdded" xml:space="preserve">
-    <value>添加日期</value>
-  </data>
-  <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
-    <value>更新日期</value>
-  </data>
-  <data name="ChartManage_Sort_Maps" xml:space="preserve">
-    <value>地图数量</value>
-  </data>
-  <data name="ChartManage_Sort_Name" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="ChartManage_SortBy" xml:space="preserve">
-    <value>排序方式</value>
-  </data>
-  <data name="ChartManage_Tag_Video" xml:space="preserve">
-    <value>视频</value>
-  </data>
-  <data name="ChartManage_UploadedBy" xml:space="preserve">
-    <value>由 {0} 上传</value>
-  </data>
-  <data name="ChartSource_Offline" xml:space="preserve">
-    <value>本地</value>
-  </data>
-  <data name="ChartSource_Online" xml:space="preserve">
-    <value>线上</value>
-  </data>
-  <data name="ChartManage_UpdateAll" xml:space="preserve">
-    <value>更新全部谱面</value>
-  </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>迁移 MDM 谱面</value>
-  </data>
-  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
-    <value>文件大小</value>
   </data>
 </root>

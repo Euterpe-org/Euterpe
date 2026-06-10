@@ -8,6 +8,6 @@ public enum ChartSortField
     Rating,
     DateAdded,
     DateUpdated,
-    DifficultyCount,
+    MapCount,
     Size
 }
