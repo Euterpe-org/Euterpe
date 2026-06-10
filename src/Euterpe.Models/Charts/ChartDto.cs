@@ -36,18 +36,23 @@ public sealed partial class ChartDto : ObservableObject
     public string? VideoPath => AssetPath(VideoFileName);
 
     public IReadOnlyList<ChartDifficulty> Difficulties =>
-        Manifest.Files.ExistingDifficulties();
+        field ??= Manifest.Files.ExistingDifficulties();
 
     public IReadOnlyList<DifficultyBadge> DifficultyBadges =>
-    [
-        .. Difficulties.Select(difficulty =>
-            new DifficultyBadge(difficulty, Manifest.Meta.Maps.GetValueOrDefault(MapName(difficulty))?.Rating ?? string.Empty))
-    ];
+        field ??=
+        [
+            .. Difficulties.Select(difficulty =>
+                new DifficultyBadge(difficulty, Manifest.Meta.Maps.GetValueOrDefault(MapName(difficulty))?.Rating ?? string.Empty))
+        ];
 
     public double MaxRating =>
-        Manifest.Meta.Maps.Values.Select(static map => map.RatingValue).DefaultIfEmpty(-1).Max();
+        _maxRating ??= Manifest.Meta.Maps.Values.Select(static map => map.RatingValue).DefaultIfEmpty(-1).Max();
 
-    public long SizeBytes => Manifest.Files.Values.Sum(file => file.Size);
+    private double? _maxRating;
+
+    public long SizeBytes => _sizeBytes ??= Manifest.Files.Values.Sum(static file => file.Size);
+
+    private long? _sizeBytes;
 
     public string SizeDisplay => SizeBytes switch
     {
