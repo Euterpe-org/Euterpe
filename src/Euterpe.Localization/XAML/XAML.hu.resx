@@ -526,8 +526,8 @@
   <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
     <value>Frissítés dátuma</value>
   </data>
-  <data name="ChartManage_Sort_Difficulties" xml:space="preserve">
-    <value>Nehézségek</value>
+  <data name="ChartManage_Sort_Maps" xml:space="preserve">
+    <value>Mapek</value>
   </data>
   <data name="ChartManage_Sort_Name" xml:space="preserve">
     <value>Név</value>
@@ -553,7 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>MDM chartek migrálása</value>
   </data>
-  <data name="ChartManage_Sort_Size" xml:space="preserve">
-    <value>Méret</value>
+  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
+    <value>Fájlméret</value>
   </data>
 </root>

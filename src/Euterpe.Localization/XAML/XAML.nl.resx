@@ -526,8 +526,8 @@
   <data name="ChartManage_Sort_DateUpdated" xml:space="preserve">
     <value>Bijgewerkt op</value>
   </data>
-  <data name="ChartManage_Sort_Difficulties" xml:space="preserve">
-    <value>Moeilijkheden</value>
+  <data name="ChartManage_Sort_Maps" xml:space="preserve">
+    <value>Maps</value>
   </data>
   <data name="ChartManage_Sort_Name" xml:space="preserve">
     <value>Naam</value>
@@ -553,7 +553,7 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>MDM-charts migreren</value>
   </data>
-  <data name="ChartManage_Sort_Size" xml:space="preserve">
-    <value>Grootte</value>
+  <data name="ChartManage_Sort_FileSize" xml:space="preserve">
+    <value>Bestandsgrootte</value>
   </data>
 </root>
