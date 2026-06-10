@@ -212,7 +212,11 @@
                                 Padding="8"
                                 Width="180">
                                 <Border.Styles>
-                                    <!--  Hovering the card swaps the size text for the delete button in the same slot  -->
+                                    <!--  Hovering the card swaps the size text for the delete button in the same slot.
+                                          Both opacities live here: a local value would outrank the pseudo-class setter.  -->
+                                    <Style Selector="TextBlock.sizeText">
+                                        <Setter Property="Opacity" Value="0.55" />
+                                    </Style>
                                     <Style Selector="Border:pointerover TextBlock.sizeText">
                                         <Setter Property="Opacity" Value="0" />
                                     </Style>
@@ -240,7 +244,11 @@
                                             <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
                                                 <Setter Property="Background" Value="Transparent" />
                                             </Style>
-                                            <!--  Hover enlarges the center play/pause button  -->
+                                            <!--  Hover enlarges the center play/pause button; the idle transform lives here
+                                                  too, since a local value would outrank the pseudo-class setter  -->
+                                            <Style Selector="Border.playDisc">
+                                                <Setter Property="RenderTransform" Value="scale(1)" />
+                                            </Style>
                                             <Style Selector="Button:pointerover Border.playDisc">
                                                 <Setter Property="RenderTransform" Value="scale(1.12)" />
                                             </Style>
@@ -282,7 +290,6 @@
                                                     CornerRadius="20"
                                                     Height="40"
                                                     HorizontalAlignment="Center"
-                                                    RenderTransform="scale(1)"
                                                     RenderTransformOrigin="50%,50%"
                                                     VerticalAlignment="Center"
                                                     Width="40">
@@ -349,6 +356,8 @@
                                         </Panel>
                                     </Button>
 
+                                    <!--  Author / title / charters, packed tighter than the card's default spacing  -->
+                                    <StackPanel Spacing="2">
                                     <!--  Author (least prominent, above the title)  -->
                                     <TextBlock
                                         FontSize="11"
@@ -389,6 +398,7 @@
                                         Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartChartersConverter}}"
                                         TextTrimming="CharacterEllipsis"
                                         ToolTip.Tip="{Binding $self.Text}" />
+                                    </StackPanel>
 
                                     <!--  Meta row: bpm + video tag  -->
                                     <StackPanel Orientation="Horizontal" Spacing="8">
@@ -448,7 +458,6 @@
                                             Classes="sizeText"
                                             FontSize="11"
                                             HorizontalAlignment="Right"
-                                            Opacity="0.55"
                                             Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartSizeConverter}}"
                                             VerticalAlignment="Center" />
                                         <Button
@@ -472,6 +481,9 @@
                                                 <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
                                                     <Setter Property="Background" Value="Transparent" />
                                                 </Style>
+                                                <Style Selector="PathIcon">
+                                                    <Setter Property="Opacity" Value="0.5" />
+                                                </Style>
                                                 <Style Selector="Button:pointerover PathIcon">
                                                     <Setter Property="Foreground" Value="#F5333E" />
                                                     <Setter Property="Opacity" Value="1" />
@@ -480,7 +492,6 @@
                                             <PathIcon
                                                 Data="M6 19 c0 1.1 .9 2 2 2 h8 c1.1 0 2 -.9 2 -2 V7 H6 v12 z M19 4 h-3.5 l-1 -1 h-5 l-1 1 H5 v2 h14 V4 z"
                                                 Height="13"
-                                                Opacity="0.5"
                                                 Width="13" />
                                         </Button>
                                         </Panel>
