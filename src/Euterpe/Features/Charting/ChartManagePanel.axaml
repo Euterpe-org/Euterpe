@@ -28,6 +28,10 @@
             Selector="Grid.DragOver &gt; Border#DropOverlay">
             <Setter Property="IsVisible" Value="True" />
         </Style>
+        <Style
+            Selector="Button.Link:pointerover TextBlock">
+            <Setter Property="TextDecorations" Value="Underline" />
+        </Style>
     </UserControl.Styles>
 
     <Grid
@@ -316,29 +320,14 @@
                                         Spacing="6">
                                         <!--  Cover: the whole cover toggles play/pause; mask + button appear together  -->
                                         <Button
+                                            Classes="Transparent"
                                             Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
                                             CommandParameter="{Binding}"
                                             Focusable="False"
-                                            HorizontalAlignment="Stretch"
                                             HorizontalContentAlignment="Stretch"
                                             Padding="0"
                                             VerticalContentAlignment="Stretch">
                                             <Button.Styles>
-                                                <Style
-                                                    Selector="Button">
-                                                    <Setter Property="Background" Value="Transparent" />
-                                                    <Setter Property="BorderThickness" Value="0" />
-                                                    <Setter Property="CornerRadius" Value="8" />
-                                                </Style>
-                                                <Style
-                                                    Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                                                    <Setter Property="Background" Value="Transparent" />
-                                                    <Setter Property="BorderBrush" Value="Transparent" />
-                                                </Style>
-                                                <Style
-                                                    Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
-                                                    <Setter Property="Background" Value="Transparent" />
-                                                </Style>
                                                 <!--
                                                     Hover enlarges the center play/pause button; the idle transform lives here
                                                     too, since a local value would outrank the pseudo-class setter
@@ -361,7 +350,6 @@
                                                     CornerRadius="8">
                                                     <e:AsyncImage
                                                         Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
-                                                        HorizontalAlignment="Stretch"
                                                         Source="{Binding CoverPath}"
                                                         Stretch="UniformToFill" />
                                                 </Border>
@@ -483,7 +471,7 @@
 
                                             <!--  Title -> web chart detail page (online charts only)  -->
                                             <Button
-                                                Classes="Transparent"
+                                                Classes="Transparent Link"
                                                 Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
                                                 CommandParameter="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDetailUrlConverter}}"
                                                 Cursor="Hand"
@@ -493,12 +481,6 @@
                                                 MinWidth="0"
                                                 Padding="0"
                                                 ToolTip.Tip="{Binding Manifest.Meta.Name}">
-                                                <Button.Styles>
-                                                    <Style
-                                                        Selector="Button:pointerover TextBlock">
-                                                        <Setter Property="TextDecorations" Value="Underline" />
-                                                    </Style>
-                                                </Button.Styles>
                                                 <TextBlock
                                                     FontWeight="SemiBold"
                                                     MaxLines="1"
@@ -544,7 +526,7 @@
                                             MinHeight="18">
                                             <Button
                                                 Grid.Column="0"
-                                                Classes="Transparent"
+                                                Classes="Transparent Link"
                                                 Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
                                                 CommandParameter="{Binding Manifest.Meta.Uploader, Converter={x:Static converters:FuncValueConverters.ChartUploaderUrlConverter}}"
                                                 Cursor="Hand"
@@ -555,12 +537,6 @@
                                                 MinWidth="0"
                                                 Padding="0"
                                                 VerticalAlignment="Center">
-                                                <Button.Styles>
-                                                    <Style
-                                                        Selector="Button:pointerover TextBlock">
-                                                        <Setter Property="TextDecorations" Value="Underline" />
-                                                    </Style>
-                                                </Button.Styles>
                                                 <TextBlock
                                                     FontSize="11"
                                                     FontWeight="Normal"
@@ -580,6 +556,7 @@
                                                     Text="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartSizeConverter}}"
                                                     VerticalAlignment="Center" />
                                                 <Button
+                                                    Classes="Transparent"
                                                     Command="{Binding $parent[UserControl].DataContext.RemoveChartCommand}"
                                                     CommandParameter="{Binding}"
                                                     Focusable="False"
@@ -593,15 +570,6 @@
                                                     VerticalAlignment="Center"
                                                     Width="22">
                                                     <Button.Styles>
-                                                        <Style
-                                                            Selector="Button">
-                                                            <Setter Property="Background" Value="Transparent" />
-                                                            <Setter Property="BorderThickness" Value="0" />
-                                                        </Style>
-                                                        <Style
-                                                            Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                                                            <Setter Property="Background" Value="Transparent" />
-                                                        </Style>
                                                         <Style
                                                             Selector="PathIcon">
                                                             <Setter Property="Opacity" Value="0.5" />
