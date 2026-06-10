@@ -547,4 +547,10 @@
   <data name="ChartSource_Online" xml:space="preserve">
     <value>Online</value>
   </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>모든 채보 업데이트</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>MDM 채보 마이그레이션</value>
+  </data>
 </root>

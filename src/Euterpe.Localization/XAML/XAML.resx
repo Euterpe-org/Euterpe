@@ -574,4 +574,10 @@
   <data name="ChartSource_Online" xml:space="preserve">
     <value>Online</value>
   </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>Update All Charts</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>Migrate MDM Charts</value>
+  </data>
 </root>

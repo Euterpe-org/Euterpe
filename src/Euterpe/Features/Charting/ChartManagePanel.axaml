@@ -107,7 +107,8 @@
                 CornerRadius="8"
                 Margin="0,0,12,0"
                 Padding="12">
-                <ScrollViewer>
+                <Grid RowDefinitions="*,Auto">
+                    <ScrollViewer Grid.Row="0">
                     <StackPanel Spacing="14">
                         <!--  Charts are browsed/downloaded on the web; flashy CTA card to send users there  -->
                         <Button
@@ -171,7 +172,23 @@
                             <CheckBox Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_HasVideo}}" IsChecked="{Binding HasVideoOnly}" />
                         </StackPanel>
                     </StackPanel>
-                </ScrollViewer>
+                    </ScrollViewer>
+
+                    <!--  Maintenance actions, pinned below the scrolling filters  -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="0,12,0,0"
+                        Spacing="6">
+                        <Button
+                            Command="{Binding UpdateAllChartsCommand}"
+                            Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_UpdateAll}}"
+                            HorizontalAlignment="Stretch" />
+                        <Button
+                            Command="{Binding MigrateCustomAlbumsCommand}"
+                            Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_MigrateMdm}}"
+                            HorizontalAlignment="Stretch" />
+                    </StackPanel>
+                </Grid>
             </Border>
 
             <!--  Chart grid: fixed-width cards that wrap, so the column count flows with window width (≈4 at the default size, more when wider) instead of locking to 4  -->
