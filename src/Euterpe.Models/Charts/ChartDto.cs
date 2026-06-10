@@ -1,14 +1,31 @@
 using System.Globalization;
+using Euterpe.Localization;
 using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Models.Charts;
 
-public sealed class ChartDto : ObservableObject
+public sealed partial class ChartDto : ObservableObject
 {
     public required string FolderPath { get; init; }
     public required string FolderName { get; init; }
     public required Manifest Manifest { get; init; }
     public ChartSource Source { get; init; } = ChartSource.Offline;
+
+    [ObservableProperty]
+    public partial bool IsPlaying { get; set; }
+
+    public bool IsOnline => Source is ChartSource.Online;
+
+    public string? DetailUrl =>
+        Manifest.Cid is { } cid ? $"{EuterpeWeb.BaseUrl}/charts/{cid}" : null;
+
+    public string? UploaderPageUrl =>
+        Manifest.Meta.Uploader is { } uploader ? $"{EuterpeWeb.BaseUrl}/users/{uploader.Uid}?tab=charts" : null;
+
+    public string? UploaderDisplay =>
+        Manifest.Meta.Uploader is { } uploader
+            ? string.Format(CultureInfo.CurrentCulture, XAML.ChartManage_UploadedBy, uploader.Nickname)
+            : null;
 
     public string? CoverPath => CoverExtensions
         .Select(extension => AssetPath(CoverName + extension))

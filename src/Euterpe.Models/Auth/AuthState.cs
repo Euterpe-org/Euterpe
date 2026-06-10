@@ -8,7 +8,7 @@ public sealed partial class AuthState : ObservableObject
     [NotifyPropertyChangedFor(nameof(AvatarUrl))]
     public partial UserInfo? CurrentUser { get; set; }
 
-    public string AvatarUrl => $"https://euterpe-org.com/{CurrentUser?.AvatarUrl}";
+    public string AvatarUrl => $"{EuterpeWeb.BaseUrl}/{CurrentUser?.AvatarUrl}";
 
     public string? AccessToken { get; set; }
     public string? RefreshToken { get; set; }

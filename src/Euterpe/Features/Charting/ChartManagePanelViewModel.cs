@@ -14,7 +14,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     private readonly BehaviorSubject<IComparer<ChartDto>> _comparer;
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
 
-    private string? _pausedFolderName;
+    private ChartDto? _playingChart;
+    private ChartDto? _pausedChart;
 
     [ObservableProperty]
     public partial int SelectedChartSourceIndex { get; set; }
@@ -38,8 +39,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     [ObservableProperty] public partial ChartSortField SortField { get; set; }
     [ObservableProperty] public partial bool SortDescending { get; set; }
-
-    [ObservableProperty] public partial string? PlayingFolderName { get; set; }
 
     [ObservableProperty] public partial bool AllChartsLoaded { get; set; }
 
@@ -71,21 +70,19 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task TogglePlayAsync(ChartDto chart)
     {
-        var folderName = chart.FolderName;
-
-        if (PlayingFolderName == folderName)
+        if (_playingChart == chart)
         {
             AudioPlayerService.Pause();
-            _pausedFolderName = folderName;
-            PlayingFolderName = null;
+            _pausedChart = chart;
+            SetPlayingChart(null);
             return;
         }
 
-        if (_pausedFolderName == folderName)
+        if (_pausedChart == chart)
         {
             AudioPlayerService.Resume();
-            _pausedFolderName = null;
-            PlayingFolderName = folderName;
+            _pausedChart = null;
+            SetPlayingChart(chart);
             return;
         }
 
@@ -94,31 +91,50 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return;
         }
 
-        _pausedFolderName = null;
-        PlayingFolderName = folderName;
+        _pausedChart = null;
+        SetPlayingChart(chart);
         await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
     }
 
     private void OnPlayingFileChanged(object? sender, string? playingFilePath)
     {
-        var playingFolderName = OwnedFolderName(playingFilePath);
+        var playingChart = OwnedChart(playingFilePath);
         Dispatcher.UIThread.Post(() =>
         {
-            PlayingFolderName = playingFolderName;
-            _pausedFolderName = null;
+            SetPlayingChart(playingChart);
+            _pausedChart = null;
         });
     }
 
-    private string? OwnedFolderName(string? audioFilePath)
+    private void SetPlayingChart(ChartDto? chart)
+    {
+        if (_playingChart == chart)
+        {
+            return;
+        }
+
+        if (_playingChart is not null)
+        {
+            _playingChart.IsPlaying = false;
+        }
+
+        _playingChart = chart;
+
+        if (chart is not null)
+        {
+            chart.IsPlaying = true;
+        }
+    }
+
+    private ChartDto? OwnedChart(string? audioFilePath)
     {
         if (Path.GetDirectoryName(audioFilePath) is not { } folderPath)
         {
             return null;
         }
 
-        var folderName = Path.GetFileName(folderPath);
-        return _sourceCache.Lookup(folderName) is { HasValue: true, Value.FolderPath: var ownedPath } && ownedPath == folderPath
-            ? folderName
+        return _sourceCache.Lookup(Path.GetFileName(folderPath)) is { HasValue: true, Value: var chart } && chart.FolderPath == folderPath
+            ? chart
             : null;
     }
 
@@ -138,7 +154,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task RemoveChartAsync(ChartDto chart)
     {
-        if (PlayingFolderName == chart.FolderName || _pausedFolderName == chart.FolderName)
+        if (_playingChart == chart || _pausedChart == chart)
         {
             AudioPlayerService.Stop();
         }

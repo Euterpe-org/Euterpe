@@ -104,8 +104,17 @@
                 Margin="8,0,0,0"
                 ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_Descending}}"
                 Width="40">
-                <TextBlock
-                    Text="{Binding SortDescending, Converter={x:Static converters:FuncValueConverters.SortDirectionConverter}}" />
+                <ToggleButton.Styles>
+                    <Style
+                        Selector="ToggleButton TextBlock">
+                        <Setter Property="Text" Value="↑" />
+                    </Style>
+                    <Style
+                        Selector="ToggleButton:checked TextBlock">
+                        <Setter Property="Text" Value="↓" />
+                    </Style>
+                </ToggleButton.Styles>
+                <TextBlock />
             </ToggleButton>
 
             <Button
@@ -313,6 +322,7 @@
                                         <!--  Cover: click toggles play/pause  -->
                                         <Button
                                             Classes="Transparent"
+                                            Classes.Playing="{Binding IsPlaying}"
                                             Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
                                             CommandParameter="{Binding}"
                                             Focusable="False"
@@ -328,6 +338,22 @@
                                                 <Style
                                                     Selector="Button:pointerover Border.playDisc">
                                                     <Setter Property="RenderTransform" Value="scale(1.12)" />
+                                                </Style>
+                                                <Style
+                                                    Selector="Border.playOverlay">
+                                                    <Setter Property="Opacity" Value="1" />
+                                                </Style>
+                                                <Style
+                                                    Selector="Button.Playing:not(:pointerover) Border.playOverlay">
+                                                    <Setter Property="Opacity" Value="0" />
+                                                </Style>
+                                                <Style
+                                                    Selector="PathIcon.playPauseIcon">
+                                                    <Setter Property="Data" Value="{StaticResource PlayIcon}" />
+                                                </Style>
+                                                <Style
+                                                    Selector="Button.Playing PathIcon.playPauseIcon">
+                                                    <Setter Property="Data" Value="{StaticResource PauseIcon}" />
                                                 </Style>
                                             </Button.Styles>
 
@@ -346,19 +372,9 @@
                                                 <!--  Play overlay: mask + play/pause button  -->
                                                 <Border
                                                     Background="#40000000"
+                                                    Classes="playOverlay"
                                                     CornerRadius="8"
                                                     IsHitTestVisible="False">
-                                                    <Border.Opacity>
-                                                        <MultiBinding
-                                                            Converter="{x:Static converters:FuncValueConverters.ChartOverlayOpacityConverter}">
-                                                            <Binding
-                                                                Path="FolderName" />
-                                                            <Binding
-                                                                Path="$parent[UserControl].DataContext.PlayingFolderName" />
-                                                            <Binding
-                                                                Path="$parent[Button].IsPointerOver" />
-                                                        </MultiBinding>
-                                                    </Border.Opacity>
                                                     <Border.Transitions>
                                                         <Transitions>
                                                             <DoubleTransition
@@ -384,19 +400,10 @@
                                                             </Transitions>
                                                         </Border.Transitions>
                                                         <PathIcon
+                                                            Classes="playPauseIcon"
                                                             Foreground="White"
                                                             Height="14"
-                                                            Width="14">
-                                                            <PathIcon.Data>
-                                                                <MultiBinding
-                                                                    Converter="{x:Static converters:FuncValueConverters.ChartPlayIconConverter}">
-                                                                    <Binding
-                                                                        Path="FolderName" />
-                                                                    <Binding
-                                                                        Path="$parent[UserControl].DataContext.PlayingFolderName" />
-                                                                </MultiBinding>
-                                                            </PathIcon.Data>
-                                                        </PathIcon>
+                                                            Width="14" />
                                                     </Border>
                                                 </Border>
 
@@ -461,10 +468,10 @@
                                             <Button
                                                 Classes="Transparent Link"
                                                 Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
-                                                CommandParameter="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDetailUrlConverter}}"
+                                                CommandParameter="{Binding DetailUrl}"
                                                 Cursor="Hand"
                                                 HorizontalAlignment="Left"
-                                                IsHitTestVisible="{Binding Source, Converter={x:Static converters:FuncValueConverters.ChartIsOnlineConverter}}"
+                                                IsHitTestVisible="{Binding IsOnline}"
                                                 MinHeight="0"
                                                 MinWidth="0"
                                                 Padding="0"
@@ -515,10 +522,10 @@
                                                 Grid.Column="0"
                                                 Classes="Transparent Link"
                                                 Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
-                                                CommandParameter="{Binding Manifest.Meta.Uploader, Converter={x:Static converters:FuncValueConverters.ChartUploaderUrlConverter}}"
+                                                CommandParameter="{Binding UploaderPageUrl}"
                                                 Cursor="Hand"
                                                 HorizontalAlignment="Left"
-                                                IsHitTestVisible="{Binding Source, Converter={x:Static converters:FuncValueConverters.ChartIsOnlineConverter}}"
+                                                IsHitTestVisible="{Binding IsOnline}"
                                                 IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
                                                 MinHeight="0"
                                                 MinWidth="0"
@@ -529,7 +536,7 @@
                                                     FontWeight="Normal"
                                                     Foreground="{DynamicResource SemiColorText0}"
                                                     Opacity="0.55"
-                                                    Text="{Binding Manifest.Meta.Uploader.Nickname, Converter={x:Static converters:FuncValueConverters.ChartUploaderConverter}}"
+                                                    Text="{Binding UploaderDisplay}"
                                                     TextTrimming="CharacterEllipsis" />
                                             </Button>
                                             <Panel
