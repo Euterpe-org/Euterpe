@@ -152,6 +152,17 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private Task UpdateAllChartsAsync(CancellationToken cancellationToken) =>
+        ChartManageService.UpdateAllChartsAsync(cancellationToken);
+
+    [RelayCommand]
+    private async Task MigrateCustomAlbumsAsync(CancellationToken cancellationToken)
+    {
+        await MigrationService.MigrateCustomAlbumsAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await ChartManageService.RefreshOfflineChartsAsync().ConfigureAwait(false);
+    }
+
+    [RelayCommand]
     private async Task ImportChartsAsync(IReadOnlyList<IStorageItem> files)
     {
         var paths = files.GetLocalPaths().OfType<string>().ToArray();
@@ -272,6 +283,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required IAudioPlayerService AudioPlayerService { get; init; }
     public required IChartManageService ChartManageService { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
+    public required IMigrationService MigrationService { get; init; }
 
     #endregion Injections
 }

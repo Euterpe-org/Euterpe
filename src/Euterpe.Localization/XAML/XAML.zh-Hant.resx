@@ -547,4 +547,10 @@
   <data name="ChartSource_Online" xml:space="preserve">
     <value>線上</value>
   </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>更新全部譜面</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>遷移 MDM 譜面</value>
+  </data>
 </root>
