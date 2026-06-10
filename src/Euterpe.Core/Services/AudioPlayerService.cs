@@ -12,40 +12,56 @@ internal sealed class AudioPlayerService : IAudioPlayerService
     private AudioFormat? _deviceFormat;
     private SoundPlayer? _player;
 
-    public event EventHandler? PlaybackEnded;
+    public string? PlayingFilePath { get; private set; }
+
+    public event EventHandler<string?>? PlayingFileChanged;
 
     public void Play(string filePath)
     {
-        StopInternal();
+        StopPlayer();
 
-        // Nothing in the SoundFlow pipeline resamples, so device, player and provider must all use the source's native format.
-        var source = new StreamDataProvider(Engine, File.OpenRead(filePath));
-        var format = new AudioFormat
+        try
         {
-            Format = source.SampleFormat,
-            Channels = source.FormatInfo!.ChannelCount,
-            Layout = AudioFormat.GetLayoutFromChannels(source.FormatInfo.ChannelCount),
-            SampleRate = source.SampleRate
-        };
+            var source = new StreamDataProvider(Engine, File.OpenRead(filePath));
+            var format = new AudioFormat
+            {
+                Format = source.SampleFormat,
+                Channels = source.FormatInfo!.ChannelCount,
+                Layout = AudioFormat.GetLayoutFromChannels(source.FormatInfo.ChannelCount),
+                SampleRate = source.SampleRate
+            };
 
-        var device = EnsureDevice(format);
-        _player = new SoundPlayer(Engine, format, new ResilientSoundDataProvider(source, Logger));
-        _player.PlaybackEnded += OnPlayerPlaybackEnded;
-        device.MasterMixer.AddComponent(_player);
-        _player.Play();
+            var device = EnsureDevice(format);
+            _player = new SoundPlayer(Engine, format, new ResilientSoundDataProvider(source, Logger));
+            _player.PlaybackEnded += OnPlayerPlaybackEnded;
+            device.MasterMixer.AddComponent(_player);
+            _player.Play();
+            SetPlayingFile(filePath);
 
-        Logger.ZLogInformation($"Playing audio {filePath}");
+            Logger.ZLogInformation($"Playing audio {filePath}");
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to start audio playback for {filePath}");
+            NotificationService.ErrorLight(Notification_Content_Audio_Play_Failed);
+            StopPlayer();
+            SetPlayingFile(null);
+        }
     }
 
     public void Pause() => _player?.Pause();
 
     public void Resume() => _player?.Play();
 
-    public void Stop() => StopInternal();
+    public void Stop()
+    {
+        StopPlayer();
+        SetPlayingFile(null);
+    }
 
     public void Dispose()
     {
-        StopInternal();
+        StopPlayer();
         _device?.Dispose();
     }
 
@@ -63,14 +79,13 @@ internal sealed class AudioPlayerService : IAudioPlayerService
         return _device;
     }
 
-    private void StopInternal()
+    private void StopPlayer()
     {
         if (_player is null)
         {
             return;
         }
 
-        // Detach first so only natural end-of-stream raises PlaybackEnded.
         _player.PlaybackEnded -= OnPlayerPlaybackEnded;
         _player.Stop();
         _device?.MasterMixer.RemoveComponent(_player);
@@ -78,12 +93,30 @@ internal sealed class AudioPlayerService : IAudioPlayerService
         _player = null;
     }
 
-    private void OnPlayerPlaybackEnded(object? sender, EventArgs e) => PlaybackEnded?.Invoke(this, e);
+    private void SetPlayingFile(string? filePath)
+    {
+        if (PlayingFilePath == filePath)
+        {
+            return;
+        }
+
+        PlayingFilePath = filePath;
+        PlayingFileChanged?.Invoke(this, filePath);
+    }
+
+    private void OnPlayerPlaybackEnded(object? sender, EventArgs e)
+    {
+        if (ReferenceEquals(sender, _player))
+        {
+            SetPlayingFile(null);
+        }
+    }
 
     #region Injections
 
     public required AudioEngine Engine { get; init; }
     public required ILogger<AudioPlayerService> Logger { get; init; }
+    public required INotificationService NotificationService { get; init; }
 
     #endregion Injections
 }

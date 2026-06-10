@@ -11,8 +11,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     private const int MaxRating = 12;
 
     private readonly ReadOnlyObservableCollection<ChartDto> _charts;
-    private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
     private readonly BehaviorSubject<IComparer<ChartDto>> _comparer;
+    private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
 
     private string? _pausedFolderName;
 
@@ -47,11 +47,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     public ChartManagePanelViewModel()
     {
-        _comparer = new(BuildComparer());
+        _comparer = new BehaviorSubject<IComparer<ChartDto>>(BuildComparer());
 
-        var connect = _sourceCache.Connect();
-
-        connect
+        _sourceCache.Connect()
             .Filter(MatchesFilters)
             .SortAndBind(out _charts, _comparer.AsSystemObservable())
             .Subscribe();
@@ -59,16 +57,13 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     protected override async Task OnInitializeAsync()
     {
-        await base.OnInitializeAsync().ConfigureAwait(false);
-        await ChartManageService.InitializeChartsAsync().ConfigureAwait(false);
+        await base.OnInitializeAsync().ConfigureAwait(true);
+        await ChartManageService.InitializeChartsAsync().ConfigureAwait(true);
 
-        await Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            ChartManageService.Connect().PopulateInto(_sourceCache);
-            AllChartsLoaded = true;
-        });
+        ChartManageService.Connect().PopulateInto(_sourceCache);
+        AllChartsLoaded = true;
 
-        AudioPlayerService.PlaybackEnded += OnPlaybackEnded;
+        AudioPlayerService.PlayingFileChanged += OnPlayingFileChanged;
 
         Logger.ZLogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
     }
@@ -104,17 +99,27 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
     }
 
-    // Fires on the audio thread.
-    private void OnPlaybackEnded(object? sender, EventArgs e)
+    private void OnPlayingFileChanged(object? sender, string? playingFilePath)
     {
-        var endedFolderName = PlayingFolderName;
+        var playingFolderName = OwnedFolderName(playingFilePath);
         Dispatcher.UIThread.Post(() =>
         {
-            if (PlayingFolderName == endedFolderName)
-            {
-                PlayingFolderName = null;
-            }
+            PlayingFolderName = playingFolderName;
+            _pausedFolderName = null;
         });
+    }
+
+    private string? OwnedFolderName(string? audioFilePath)
+    {
+        if (Path.GetDirectoryName(audioFilePath) is not { } folderPath)
+        {
+            return null;
+        }
+
+        var folderName = Path.GetFileName(folderPath);
+        return _sourceCache.Lookup(folderName) is { HasValue: true, Value.FolderPath: var ownedPath } && ownedPath == folderPath
+            ? folderName
+            : null;
     }
 
     [RelayCommand]
@@ -133,12 +138,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task RemoveChartAsync(ChartDto chart)
     {
-        // Release the audio file handle before the folder is deleted.
         if (PlayingFolderName == chart.FolderName || _pausedFolderName == chart.FolderName)
         {
             AudioPlayerService.Stop();
-            PlayingFolderName = null;
-            _pausedFolderName = null;
         }
 
         await ChartManageService.RemoveChartAsync(chart.FolderPath).ConfigureAwait(false);
@@ -147,7 +149,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task UpdateAllChartsAsync(CancellationToken cancellationToken)
     {
-        if (await ChartManageService.UpdateAllChartsAsync(cancellationToken).ConfigureAwait(false) is 0)
+        if (await ChartManageService.UpdateAllChartsAsync(cancellationToken).ConfigureAwait(true) is 0)
         {
             NotificationService.NoticeLight(Notification_Content_Chart_UpdateAll_UpToDate);
         }
@@ -156,7 +158,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task MigrateCustomAlbumsAsync(CancellationToken cancellationToken)
     {
-        if (await ChartManageService.MigrateCustomAlbumsAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is 0)
+        if (await ChartManageService.MigrateCustomAlbumsAsync(cancellationToken: cancellationToken).ConfigureAwait(true) is 0)
         {
             NotificationService.NoticeLight(Notification_Content_Migration_None);
         }
@@ -171,7 +173,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return;
         }
 
-        if (await ChartManageService.ImportChartsAsync(paths).ConfigureAwait(false))
+        if (await ChartManageService.ImportChartsAsync(paths).ConfigureAwait(true))
         {
             SelectedChartSourceIndex = (int)ChartSource.Offline;
         }
@@ -231,7 +233,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         return true;
     }
 
-    private IComparer<ChartDto> BuildComparer()
+    private Comparer<ChartDto> BuildComparer()
     {
         Comparison<ChartDto> comparison = SortField switch
         {
@@ -245,12 +247,13 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             _ => (a, b) => string.Compare(a.Manifest.Meta.Name, b.Manifest.Meta.Name, StringComparison.OrdinalIgnoreCase)
         };
 
-        if (SortDescending)
+        if (!SortDescending)
         {
-            var ascending = comparison;
-            comparison = (a, b) => ascending(b, a);
+            return Comparer<ChartDto>.Create(comparison);
         }
 
+        var ascending = comparison;
+        comparison = (a, b) => ascending(b, a);
         return Comparer<ChartDto>.Create(comparison);
     }
 

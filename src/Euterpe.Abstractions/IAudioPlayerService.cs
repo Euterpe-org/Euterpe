@@ -2,7 +2,9 @@ namespace Euterpe.Abstractions;
 
 public interface IAudioPlayerService : IDisposable
 {
-    event EventHandler? PlaybackEnded;
+    string? PlayingFilePath { get; }
+
+    event EventHandler<string?>? PlayingFileChanged;
 
     void Play(string filePath);
     void Pause();

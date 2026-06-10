@@ -4,7 +4,6 @@ using SoundFlow.Metadata.Models;
 
 namespace Euterpe.Core;
 
-/// <summary>Turns a mid-stream decode failure (e.g. corrupt audio) into a clean end-of-stream instead of an unhandled exception on the audio thread.</summary>
 internal sealed class ResilientSoundDataProvider(ISoundDataProvider inner, ILogger logger) : ISoundDataProvider
 {
     public int Position => inner.Position;
@@ -27,14 +26,22 @@ internal sealed class ResilientSoundDataProvider(ISoundDataProvider inner, ILogg
         remove => inner.PositionChanged -= value;
     }
 
+    private bool _failed;
+
     public int ReadBytes(Span<float> buffer)
     {
+        if (_failed)
+        {
+            return 0;
+        }
+
         try
         {
             return inner.ReadBytes(buffer);
         }
         catch (Exception ex)
         {
+            _failed = true;
             logger.ZLogWarning(ex, $"Audio decode failed; stopping preview playback");
             return 0;
         }
