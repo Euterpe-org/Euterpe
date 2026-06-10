@@ -42,7 +42,7 @@ internal sealed partial class ChartManageService : IChartManageService
     public Task RemoveChartAsync(string folderPath) =>
         RunExclusiveAsync(Path.GetFileName(folderPath), () => RemoveChartCoreAsync(folderPath));
 
-    public async Task UpdateAllChartsAsync(CancellationToken cancellationToken = default)
+    public async Task<int> UpdateAllChartsAsync(CancellationToken cancellationToken = default)
     {
         var results = await CheckAndApplyUpdatesAsync(GetOnlineCharts(), cancellationToken).ConfigureAwait(false);
         var updated = results.Count(r => r.Success);
@@ -56,14 +56,16 @@ internal sealed partial class ChartManageService : IChartManageService
         {
             NotificationService.SuccessLight(Notification_Content_Chart_UpdateAll_Success, updated);
         }
+
+        return results.Count;
     }
 
-    public async Task MigrateCustomAlbumsAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public async Task<int> MigrateCustomAlbumsAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         if (!Directory.Exists(GameConfig.CustomAlbumsChartsFolder))
         {
             Logger.ZLogInformation($"No CustomAlbums folder at {GameConfig.CustomAlbumsChartsFolder}, nothing to migrate");
-            return;
+            return 0;
         }
 
         var sources = ChartLocalService.GetCustomAlbumsSources();
@@ -96,7 +98,7 @@ internal sealed partial class ChartManageService : IChartManageService
         if (failed > 0)
         {
             NotificationService.WarningLight(Notification_Content_Migration_Partial, migrated, failed);
-            return;
+            return migrated + failed;
         }
 
         FileSystemService.TryDeleteDirectory(GameConfig.CustomAlbumsChartsFolder);
@@ -105,6 +107,8 @@ internal sealed partial class ChartManageService : IChartManageService
         {
             NotificationService.SuccessLight(Notification_Content_Migration_Success, migrated);
         }
+
+        return migrated;
     }
 
     #region Injections
