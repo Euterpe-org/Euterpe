@@ -328,9 +328,10 @@
                                         Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
                                         CommandParameter="{Binding ., Converter={x:Static converters:FuncValueConverters.ChartDetailUrlConverter}}"
                                         Cursor="Hand"
-                                        HorizontalContentAlignment="Stretch"
+                                        HorizontalAlignment="Left"
                                         IsHitTestVisible="{Binding Source, Converter={x:Static converters:FuncValueConverters.ChartIsOnlineConverter}}"
                                         MinHeight="0"
+                                        MinWidth="0"
                                         Padding="0"
                                         ToolTip.Tip="{Binding Manifest.Meta.Name}">
                                         <Button.Styles>
@@ -381,10 +382,11 @@
                                             Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
                                             CommandParameter="{Binding Manifest.Meta.Uploader, Converter={x:Static converters:FuncValueConverters.ChartUploaderUrlConverter}}"
                                             Cursor="Hand"
-                                            HorizontalContentAlignment="Stretch"
+                                            HorizontalAlignment="Left"
                                             IsHitTestVisible="{Binding Source, Converter={x:Static converters:FuncValueConverters.ChartIsOnlineConverter}}"
                                             IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
                                             MinHeight="0"
+                                            MinWidth="0"
                                             Padding="0"
                                             VerticalAlignment="Center">
                                             <Button.Styles>
@@ -394,6 +396,7 @@
                                             </Button.Styles>
                                             <TextBlock
                                                 FontSize="11"
+                                                Foreground="{DynamicResource SemiColorText0}"
                                                 Opacity="0.55"
                                                 Text="{Binding Manifest.Meta.Uploader.Nickname, Converter={x:Static converters:FuncValueConverters.ChartUploaderConverter}}"
                                                 TextTrimming="CharacterEllipsis" />
