@@ -171,6 +171,12 @@
   <data name="Notification_Content_Chart_UpdateAll_Success" xml:space="preserve">
     <value>Updated {0} charts</value>
   </data>
+  <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
+    <value>All charts are up to date</value>
+  </data>
+  <data name="Notification_Content_Migration_None" xml:space="preserve">
+    <value>No MDM charts to migrate</value>
+  </data>
   <data name="Notification_Content_Migration_Partial" xml:space="preserve">
     <value>Migrated {0} CustomAlbums charts, {1} failed</value>
   </data>

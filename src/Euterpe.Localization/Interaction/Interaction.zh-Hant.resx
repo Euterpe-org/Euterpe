@@ -162,6 +162,12 @@
   <data name="Notification_Content_Chart_UpdateAll_Success" xml:space="preserve">
     <value>已更新 {0} 張譜面</value>
   </data>
+  <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
+    <value>所有譜面皆為最新</value>
+  </data>
+  <data name="Notification_Content_Migration_None" xml:space="preserve">
+    <value>沒有可遷移的 MDM 譜面</value>
+  </data>
   <data name="Notification_Content_Migration_Partial" xml:space="preserve">
     <value>已遷移 {0} 張 CustomAlbums 譜面，{1} 張失敗</value>
   </data>

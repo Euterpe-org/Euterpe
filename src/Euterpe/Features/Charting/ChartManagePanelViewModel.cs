@@ -151,14 +151,26 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         await ChartManageService.RemoveChartAsync(chart.FolderPath).ConfigureAwait(false);
     }
 
+    // The services only toast when something was updated/migrated (no-ops stay silent for the
+    // automatic startup/wizard paths), so an explicit button press reports "nothing to do" here.
     [RelayCommand]
-    private Task UpdateAllChartsAsync(CancellationToken cancellationToken) =>
-        ChartManageService.UpdateAllChartsAsync(cancellationToken);
+    private async Task UpdateAllChartsAsync(CancellationToken cancellationToken)
+    {
+        if (await ChartManageService.UpdateAllChartsAsync(cancellationToken).ConfigureAwait(false) is 0)
+        {
+            NotificationService.NoticeLight(Notification_Content_Chart_UpdateAll_UpToDate);
+        }
+    }
 
     [RelayCommand]
     private async Task MigrateCustomAlbumsAsync(CancellationToken cancellationToken)
     {
-        await MigrationService.MigrateCustomAlbumsAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        if (await ChartManageService.MigrateCustomAlbumsAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is 0)
+        {
+            NotificationService.NoticeLight(Notification_Content_Migration_None);
+            return;
+        }
+
         await ChartManageService.RefreshOfflineChartsAsync().ConfigureAwait(false);
     }
 
@@ -284,6 +296,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required IChartManageService ChartManageService { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
     public required IMigrationService MigrationService { get; init; }
+    public required INotificationService NotificationService { get; init; }
 
     #endregion Injections
 }
