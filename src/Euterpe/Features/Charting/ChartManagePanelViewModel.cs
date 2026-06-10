@@ -199,14 +199,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     private bool MatchesFilters(ChartDto chart)
     {
         var meta = chart.Manifest.Meta;
-        var source = (ChartSource)SelectedChartSourceIndex;
 
-        if (source is ChartSource.Online && chart.Source is not ChartSource.Online)
-        {
-            return false;
-        }
-
-        if (source is ChartSource.Offline && chart.Source is not ChartSource.Offline)
+        if (chart.Source != (ChartSource)SelectedChartSourceIndex)
         {
             return false;
         }
