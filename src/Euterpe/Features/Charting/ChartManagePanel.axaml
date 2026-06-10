@@ -120,12 +120,7 @@
             Grid.Row="1"
             ColumnDefinitions="220,*">
 
-            <!--  Filter rail  -->
-            <!--
-                Right padding lives on the scroll content, not the rail: the freed 12px is a gutter
-                the overlay scrollbar floats in, so it never covers content, while without a
-                scrollbar the content keeps symmetric 12px margins at any window size.
-            -->
+            <!--  Filter rail; right padding lives on the scroll content so the overlay scrollbar floats in the freed gutter  -->
             <Border
                 Grid.Column="0"
                 Background="{DynamicResource SecondaryCardColor}"
@@ -139,7 +134,7 @@
                         <StackPanel
                             Margin="0,0,12,0"
                             Spacing="14">
-                            <!--  Charts are browsed/downloaded on the web; flashy CTA card to send users there  -->
+                            <!--  CTA to the web chart library  -->
                             <Button
                                 Classes="Transparent Card"
                                 Command="{Binding OpenUrlCommand}"
@@ -261,7 +256,7 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                    <!--  Maintenance actions, pinned below the scrolling filters  -->
+                    <!--  Maintenance actions  -->
                     <StackPanel
                         Grid.Row="1"
                         Margin="0,12,12,0"
@@ -278,7 +273,7 @@
                 </Grid>
             </Border>
 
-            <!--  Chart grid: fixed-width cards that wrap, so the column count flows with window width (≈4 at the default size, more when wider) instead of locking to 4  -->
+            <!--  Chart grid: fixed-width cards wrap, so the column count flows with window width  -->
             <u:LoadingContainer
                 Grid.Column="1"
                 IsLoading="{Binding !AllChartsLoaded, Mode=OneWay}"
@@ -303,10 +298,7 @@
                                     Padding="8"
                                     Width="180">
                                     <Border.Styles>
-                                        <!--
-                                            Hovering the card swaps the size text for the delete button in the same slot.
-                                            Both opacities live here: a local value would outrank the pseudo-class setter.
-                                        -->
+                                        <!--  A local Opacity would outrank the :pointerover setter, so both live here  -->
                                         <Style
                                             Selector="TextBlock.sizeText">
                                             <Setter Property="Opacity" Value="0.55" />
@@ -318,7 +310,7 @@
                                     </Border.Styles>
                                     <StackPanel
                                         Spacing="6">
-                                        <!--  Cover: the whole cover toggles play/pause; mask + button appear together  -->
+                                        <!--  Cover: click toggles play/pause  -->
                                         <Button
                                             Classes="Transparent"
                                             Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
@@ -328,10 +320,7 @@
                                             Padding="0"
                                             VerticalContentAlignment="Stretch">
                                             <Button.Styles>
-                                                <!--
-                                                    Hover enlarges the center play/pause button; the idle transform lives here
-                                                    too, since a local value would outrank the pseudo-class setter
-                                                -->
+                                                <!--  A local RenderTransform would outrank the :pointerover setter, so both live here  -->
                                                 <Style
                                                     Selector="Border.playDisc">
                                                     <Setter Property="RenderTransform" Value="scale(1)" />
@@ -354,7 +343,7 @@
                                                         Stretch="UniformToFill" />
                                                 </Border>
 
-                                                <!--  Mask + play/pause button (bound together via overlay opacity)  -->
+                                                <!--  Play overlay: mask + play/pause button  -->
                                                 <Border
                                                     Background="#40000000"
                                                     CornerRadius="8"
@@ -365,7 +354,7 @@
                                                             <Binding
                                                                 Path="FolderName" />
                                                             <Binding
-                                                                Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
+                                                                Path="$parent[UserControl].DataContext.PlayingFolderName" />
                                                             <Binding
                                                                 Path="$parent[Button].IsPointerOver" />
                                                         </MultiBinding>
@@ -404,14 +393,14 @@
                                                                     <Binding
                                                                         Path="FolderName" />
                                                                     <Binding
-                                                                        Path="$parent[UserControl].DataContext.CurrentlyPlaying" />
+                                                                        Path="$parent[UserControl].DataContext.PlayingFolderName" />
                                                                 </MultiBinding>
                                                             </PathIcon.Data>
                                                         </PathIcon>
                                                     </Border>
                                                 </Border>
 
-                                                <!--  Difficulty + rating badges, overlaid top-right (laid out toward the left)  -->
+                                                <!--  Difficulty + rating badges  -->
                                                 <ItemsControl
                                                     HorizontalAlignment="Right"
                                                     IsHitTestVisible="False"
@@ -458,10 +447,9 @@
                                             </Panel>
                                         </Button>
 
-                                        <!--  Author / title / charters, packed tighter than the card's default spacing  -->
+                                        <!--  Author / title / charters  -->
                                         <StackPanel
                                             Spacing="2">
-                                            <!--  Author (least prominent, above the title)  -->
                                             <TextBlock
                                                 FontSize="11"
                                                 MaxLines="1"
@@ -487,7 +475,6 @@
                                                     Text="{Binding Manifest.Meta.Name}"
                                                     TextTrimming="CharacterEllipsis" />
                                             </Button>
-                                            <!--  Charters (all difficulties, de-duplicated; brighter than the author)  -->
                                             <TextBlock
                                                 FontSize="12"
                                                 IsVisible="{Binding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
@@ -520,7 +507,7 @@
                                             </Border>
                                         </StackPanel>
 
-                                        <!--  Uploader + size/delete sharing the right slot: size when idle, delete on card hover  -->
+                                        <!--  Uploader + right slot: size when idle, delete on card hover  -->
                                         <Grid
                                             ColumnDefinitions="*,Auto"
                                             MinHeight="18">
@@ -548,7 +535,7 @@
                                             <Panel
                                                 Grid.Column="1"
                                                 VerticalAlignment="Center">
-                                                <!--  Size shown while idle; kept in layout (opacity, not visibility) so the slot width never jumps  -->
+                                                <!--  Opacity, not IsVisible: keeps the slot width stable  -->
                                                 <TextBlock
                                                     Classes="sizeText"
                                                     FontSize="11"
