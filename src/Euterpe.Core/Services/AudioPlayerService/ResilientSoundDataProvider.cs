@@ -6,6 +6,8 @@ namespace Euterpe.Core;
 
 internal sealed class ResilientSoundDataProvider(ISoundDataProvider inner, ILogger logger) : ISoundDataProvider
 {
+    private bool _failed;
+
     public int Position => inner.Position;
     public int Length => inner.Length;
     public bool CanSeek => inner.CanSeek;
@@ -25,8 +27,6 @@ internal sealed class ResilientSoundDataProvider(ISoundDataProvider inner, ILogg
         add => inner.PositionChanged += value;
         remove => inner.PositionChanged -= value;
     }
-
-    private bool _failed;
 
     public int ReadBytes(Span<float> buffer)
     {
