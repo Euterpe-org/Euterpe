@@ -6,12 +6,10 @@ using SoundFlow.Structs;
 
 namespace Euterpe.Core;
 
-internal sealed class AudioPlayerService : IAudioPlayerService
+internal sealed partial class AudioPlayerService : IAudioPlayerService
 {
     private AudioPlaybackDevice? _device;
-    private AudioFormat? _deviceFormat;
     private SoundPlayer? _player;
-
     public string? PlayingFilePath { get; private set; }
 
     public event EventHandler<string?>? PlayingFileChanged;
@@ -63,53 +61,6 @@ internal sealed class AudioPlayerService : IAudioPlayerService
     {
         StopPlayer();
         _device?.Dispose();
-    }
-
-    private AudioPlaybackDevice EnsureDevice(AudioFormat format)
-    {
-        if (_device is { } existing && _deviceFormat == format)
-        {
-            return existing;
-        }
-
-        _device?.Dispose();
-        _device = Engine.InitializePlaybackDevice(null, format);
-        _device.Start();
-        _deviceFormat = format;
-        return _device;
-    }
-
-    private void StopPlayer()
-    {
-        if (_player is null)
-        {
-            return;
-        }
-
-        _player.PlaybackEnded -= OnPlayerPlaybackEnded;
-        _player.Stop();
-        _device?.MasterMixer.RemoveComponent(_player);
-        _player.Dispose();
-        _player = null;
-    }
-
-    private void SetPlayingFile(string? filePath)
-    {
-        if (PlayingFilePath == filePath)
-        {
-            return;
-        }
-
-        PlayingFilePath = filePath;
-        PlayingFileChanged?.Invoke(this, filePath);
-    }
-
-    private void OnPlayerPlaybackEnded(object? sender, EventArgs e)
-    {
-        if (ReferenceEquals(sender, _player))
-        {
-            SetPlayingFile(null);
-        }
     }
 
     #region Injections
