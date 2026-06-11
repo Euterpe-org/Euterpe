@@ -43,7 +43,7 @@
         <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.6.0"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="ObservableCollections" Version="3.3.4"/>
-        <PackageVersion Include="Polyfill" Version="10.8.0"/>
+        <PackageVersion Include="Polyfill" Version="10.8.1"/>
         <PackageVersion Include="PublishAotCompressed" Version="1.0.5"/>
         <PackageVersion Include="R3" Version="$(R3Version)"/>
         <PackageVersion Include="R3Extensions.Avalonia" Version="$(R3Version)"/>
