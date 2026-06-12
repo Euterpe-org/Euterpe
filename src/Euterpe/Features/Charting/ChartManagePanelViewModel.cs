@@ -92,7 +92,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return;
         }
 
-        if ((chart.DemoPath ?? chart.MusicPath) is not { } audioPath)
+        if (chart.AudioPath is not { } audioPath)
         {
             return;
         }

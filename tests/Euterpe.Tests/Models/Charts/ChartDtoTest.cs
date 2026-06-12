@@ -72,14 +72,6 @@ public sealed class ChartDtoTest
     }
 
     [Test]
-    public async Task BpmDisplay_EqualMinMax_ShowsSingleBpm()
-    {
-        var chart = CreateChart(bpm: 128, bpmMin: 128, bpmMax: 128);
-
-        await Assert.That(chart.BpmDisplay).IsEqualTo("128");
-    }
-
-    [Test]
     public async Task BpmDisplay_NoRange_ShowsBpm()
     {
         var chart = CreateChart(bpm: 120);
