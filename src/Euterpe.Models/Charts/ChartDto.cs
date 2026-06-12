@@ -46,7 +46,7 @@ public sealed partial class ChartDto : ObservableObject
         ];
 
     public double MaxRating =>
-        _maxRating ??= Manifest.Meta.Maps.Values.Select(static map => map.RatingValue).DefaultIfEmpty(-1).Max();
+        _maxRating ??= Manifest.Meta.Maps.Values.Max(static map => map.RatingValue);
 
     private double? _maxRating;
 

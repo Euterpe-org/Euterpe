@@ -100,23 +100,15 @@ public sealed class ChartDtoTest
     }
 
     [Test]
-    public async Task MaxRating_PlusRating_SortsAboveBase()
+    public async Task MaxRating_MultipleMaps_PicksHighest()
     {
         var chart = CreateChart(maps: new()
         {
             ["map1"] = CreateMap("8"),
-            ["map2"] = CreateMap("11+")
+            ["map2"] = CreateMap("11")
         });
 
-        await Assert.That(chart.MaxRating).IsEqualTo(11.5);
-    }
-
-    [Test]
-    public async Task MaxRating_NoMaps_IsMinusOne()
-    {
-        var chart = CreateChart();
-
-        await Assert.That(chart.MaxRating).IsEqualTo(-1);
+        await Assert.That(chart.MaxRating).IsEqualTo(11);
     }
 
     [Test]

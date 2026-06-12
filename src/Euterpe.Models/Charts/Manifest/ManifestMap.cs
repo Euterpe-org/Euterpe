@@ -11,18 +11,6 @@ public sealed class ManifestMap
     [Key("predicted_rating")] public double? PredictedRating { get; set; }
 
     [IgnoreMember]
-    public double RatingValue
-    {
-        get
-        {
-            if (Rating.IsNullOrEmpty())
-            {
-                return -1;
-            }
-
-            var plus = Rating.EndsWith('+');
-            var numeric = plus ? Rating[..^1] : Rating;
-            return double.TryParse(numeric, CultureInfo.InvariantCulture, out var value) ? value + (plus ? 0.5 : 0) : -1;
-        }
-    }
+    public double RatingValue =>
+        double.TryParse(Rating, CultureInfo.InvariantCulture, out var value) ? value : -1;
 }

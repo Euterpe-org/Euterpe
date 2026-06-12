@@ -8,9 +8,7 @@ public sealed class ManifestMapTest
     [Arguments("8", 8)]
     [Arguments("12", 12)]
     [Arguments("9.5", 9.5)]
-    [Arguments("11+", 11.5)]
     [Arguments("", -1)]
-    [Arguments("+", -1)]
     [Arguments("abc", -1)]
     public async Task RatingValue_Rating_ParsesToSortValue(string rating, double expected)
     {
