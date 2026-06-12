@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Tests.Charts;
 
@@ -16,24 +17,6 @@ public sealed class InfoJsonTest
         await Assert.That(info.Bpm).IsEqualTo(string.Empty);
         await Assert.That(info.Name).IsEqualTo(string.Empty);
         await Assert.That(info.SearchTags).IsEmpty();
-        await Assert.That(info.SearchTagsString).IsEqualTo(string.Empty);
-    }
-
-    [Test]
-    public async Task SettingProperty_RaisesPropertyChanged()
-    {
-        var info = new InfoJson();
-        var changed = new List<string?>();
-        info.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
-
-        info.Author = "tester";
-        info.Bpm = "120";
-        info.Name = "song";
-
-        using var _ = Assert.Multiple();
-        await Assert.That(changed).Contains(nameof(InfoJson.Author));
-        await Assert.That(changed).Contains(nameof(InfoJson.Bpm));
-        await Assert.That(changed).Contains(nameof(InfoJson.Name));
     }
 
     [Test]
@@ -47,7 +30,6 @@ public sealed class InfoJsonTest
             Difficulty2 = "2",
             Difficulty3 = "3",
             Difficulty4 = "4",
-            HideBmsDifficulty = "h",
             HideBmsMessage = "m",
             HideBmsMode = "mode",
             LevelDesigner = "ld",
@@ -72,13 +54,5 @@ public sealed class InfoJsonTest
         await Assert.That(deserialized.NameRomanized).IsEqualTo(original.NameRomanized);
         await Assert.That(deserialized.SearchTags).IsEquivalentTo(original.SearchTags, EqualityComparer<string>.Default, CollectionOrdering.Matching);
         await Assert.That(deserialized.UnlockLevel).IsEqualTo(original.UnlockLevel);
-    }
-
-    [Test]
-    public async Task SearchTagsString_IgnoredInJson()
-    {
-        var info = new InfoJson { SearchTagsString = "ignored" };
-        var json = JsonSerializer.Serialize(info);
-        await Assert.That(json).DoesNotContain("ignored");
     }
 }

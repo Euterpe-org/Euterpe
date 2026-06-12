@@ -77,6 +77,7 @@ public sealed class HomePageViewModelTest
         GameLaunchService = launchService ?? IGameLaunchService.Mock(),
         GameSettingService = IGameSettingService.Mock(),
         GameLocalService = IGameLocalService.Mock(),
+        ChartManageService = IChartManageService.Mock(),
         MessageBoxService = IMessageBoxService.Mock(),
         RuntimeInstaller = IGameRuntimeInstaller.Mock(),
         UidProvider = IGameUidProvider.Mock(),

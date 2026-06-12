@@ -9,8 +9,24 @@ public sealed partial class DeepLinkService
         switch (segments)
         {
             case ["convert"]:
-                // Placeholder: legacy chart conversion (CustomAlbums -> epk) is not implemented yet.
-                Logger.ZLogInformation($"Chart convert deep link received (not implemented yet)");
+                Logger.ZLogInformation($"Chart convert deep link received, migrating CustomAlbums charts");
+                await ChartManageService.MigrateCustomAlbumsAsync().ConfigureAwait(false);
+                break;
+
+            case ["download", var chartId]:
+                await ChartManageService.DownloadChartAsync(chartId).ConfigureAwait(false);
+                break;
+
+            case ["update"]:
+                await ChartManageService.UpdateAllChartsAsync().ConfigureAwait(false);
+                break;
+
+            case ["update", var chartId]:
+                await ChartManageService.UpdateChartAsync(chartId).ConfigureAwait(false);
+                break;
+
+            case ["remove", var folderPath]:
+                await ChartManageService.RemoveChartAsync(folderPath).ConfigureAwait(false);
                 break;
 
             default:

@@ -40,6 +40,46 @@ public sealed class GameSettingServiceTest
             await Assert.That(Directory.Exists(gameConfig.UserLibsFolder)).IsTrue();
             await Assert.That(Directory.Exists(gameConfig.OnlineChartsFolder)).IsTrue();
             await Assert.That(Directory.Exists(gameConfig.OfflineChartsFolder)).IsTrue();
+            await Assert.That(Directory.Exists(gameConfig.TempChartsFolder)).IsTrue();
+            await Assert.That(Directory.Exists(gameConfig.TempModsFolder)).IsTrue();
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, true);
+            }
+        }
+    }
+
+    [Test]
+    public async Task EnsureGameFolders_PreservesInFlightTempContent()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"euterpe-test-{Guid.NewGuid():N}");
+        try
+        {
+            var gameConfig = new MuseDashConfig { Folder = root };
+            var service = new GameSettingService
+            {
+                GameConfig = gameConfig,
+                GamePaths = IGamePathDiscovery.Mock()
+            };
+
+            // Simulate a chart download that is already in progress: its work folder and a
+            // partially downloaded file live under the temp charts folder.
+            var workFolder = Path.Combine(gameConfig.TempChartsFolder, "13");
+            Directory.CreateDirectory(workFolder);
+            var inFlightFile = Path.Combine(workFolder, "manifest.epk");
+            await File.WriteAllTextAsync(inFlightFile, "partial");
+
+            service.EnsureGameFolders();
+
+            // EnsureGameFolders must not wipe temp; otherwise it races with the active download
+            // and the download fails with DirectoryNotFoundException when it writes the file.
+            using var assertions = Assert.Multiple();
+            await Assert.That(File.Exists(inFlightFile)).IsTrue();
+            await Assert.That(Directory.Exists(gameConfig.TempModsFolder)).IsTrue();
+            await Assert.That(Directory.Exists(gameConfig.TempChartsFolder)).IsTrue();
         }
         finally
         {

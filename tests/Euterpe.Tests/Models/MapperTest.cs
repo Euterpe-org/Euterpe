@@ -5,7 +5,7 @@ namespace Euterpe.Tests;
 
 [Category("MapperTests")]
 [TestSubject(typeof(Mapper))]
-public sealed class MapperTest
+public sealed partial class MapperTest
 {
     public static IEnumerable<Func<(Lib lib, LibDto expected)>> LibToModelCases()
     {

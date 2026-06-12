@@ -45,5 +45,7 @@ public static class EuterpeApi
     public static class Charts
     {
         public const string BasePath = "charts";
+
+        public const string CheckUpdates = "/check-updates";
     }
 }

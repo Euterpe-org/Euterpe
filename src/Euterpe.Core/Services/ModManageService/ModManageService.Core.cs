@@ -21,6 +21,18 @@ internal sealed partial class ModManageService
         mod.AddLocalInfo();
     }
 
+    private async Task ReplaceModCoreAsync(ModDto mod)
+    {
+        var previousFileName = mod.LocalFileName;
+
+        await DownloadModCoreAsync(mod).ConfigureAwait(false);
+
+        if (!string.Equals(previousFileName, mod.FileName, StringComparison.OrdinalIgnoreCase))
+        {
+            FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, previousFileName), DeleteOption.IgnoreIfNotFound);
+        }
+    }
+
     private async Task InstallModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Installing mod: {mod.Name}");
@@ -44,16 +56,9 @@ internal sealed partial class ModManageService
     {
         Logger.ZLogInformation($"Updating mod: {mod.Name} from version {mod.LocalVersion} to version {mod.Version}");
 
-        if (!FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, mod.LocalFileName)))
-        {
-            Logger.ZLogError($"Failed to update mod {mod.Name}: could not delete existing file {mod.LocalFileName}");
-            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, mod.Name);
-            return;
-        }
-
         try
         {
-            await DownloadModCoreAsync(mod).ConfigureAwait(false);
+            await ReplaceModCoreAsync(mod).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -70,16 +75,9 @@ internal sealed partial class ModManageService
     {
         Logger.ZLogInformation($"Reinstalling mod: {mod.Name}");
 
-        if (!FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, mod.LocalFileName)))
-        {
-            Logger.ZLogError($"Failed to reinstall mod {mod.Name}: could not delete existing file {mod.LocalFileName}");
-            NotificationService.ErrorLight(Notification_Content_Mod_Reinstall_Failed, mod.Name);
-            return;
-        }
-
         try
         {
-            await DownloadModCoreAsync(mod).ConfigureAwait(false);
+            await ReplaceModCoreAsync(mod).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

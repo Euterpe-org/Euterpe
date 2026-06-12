@@ -1,5 +1,6 @@
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Euterpe.Shared;
 
 namespace Euterpe.Controls.Models;
 
@@ -17,6 +18,6 @@ public sealed class Contributor
         Links = links;
 
         var avatarPath = avatarName is null ? $"{name}.webp" : $"{avatarName}.webp";
-        Avatar = new Bitmap(AssetLoader.Open(new Uri($"avares://{AppName}/Assets/Contributors/{avatarPath}")));
+        Avatar = new Bitmap(AssetLoader.Open(AppAssets.Uri($"Contributors/{avatarPath}")));
     }
 }

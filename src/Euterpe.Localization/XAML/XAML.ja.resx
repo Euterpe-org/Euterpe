@@ -61,17 +61,92 @@
   <data name="Button_Update" xml:space="preserve">
     <value>アップデート</value>
   </data>
-  <data name="ChartFilterType_Easy" xml:space="preserve">
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>普通</value>
   </data>
-  <data name="ChartFilterType_Hard" xml:space="preserve">
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
     <value>玄人</value>
   </data>
-  <data name="ChartFilterType_Hidden" xml:space="preserve">
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
     <value>隠し</value>
   </data>
-  <data name="ChartFilterType_Master" xml:space="preserve">
+  <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>達人</value>
+  </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>降順</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>難易度</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>動画あり</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>配信向け</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>ウェブで譜面を閲覧 &amp; ダウンロード</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>譜面を入手</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>MDM の譜面を移行</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>リセット</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>並べ替え</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>動画</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>すべての譜面を更新</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>投稿者：{0}</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>追加日</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>更新日</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>マップ数</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>ファイルサイズ</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>アーティスト</value>

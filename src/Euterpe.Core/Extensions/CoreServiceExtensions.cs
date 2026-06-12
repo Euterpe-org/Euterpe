@@ -130,6 +130,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<JsonSerializationService>().As<IJsonSerializationService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MessagePackSerializationService>().As<IMessagePackSerializationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LoopbackCallbackListener>().As<ILoopbackCallbackListener>().InstancePerDependency();
             builder.RegisterType<MessageBoxService>().As<IMessageBoxService>().SingleInstance();
             builder.RegisterType<NotificationService>().As<INotificationService>().As<INotificationServiceWiring>().PropertiesAutowired().SingleInstance();
@@ -155,17 +156,21 @@ public static class CoreServiceExtensions
 
             builder.RegisterType<SetupState>().AsSelf().InstancePerLifetimeScope();
 
+            builder.RegisterType<ChartLocalService>().As<IChartLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<ChartManageService>().As<IChartManageService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MigrationService>().As<IMigrationService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<DependencyAcquireService>().As<IDependencyAcquireService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GameDownloadManager>().As<IGameDownloadManager>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GameLaunchService>().As<IGameLaunchService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GameLocalService>().As<IGameLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GamePathService>().As<IGamePathService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<ModLocalService>().As<IModLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().InstancePerLifetimeScope();
 
             // Setup Steps
             builder.RegisterType<ChartingToolStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<MigrationStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<DotNetRuntimeStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<DotNetSdkStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<EnvVariableStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();

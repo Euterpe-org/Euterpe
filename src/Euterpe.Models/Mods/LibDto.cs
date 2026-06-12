@@ -2,14 +2,14 @@ namespace Euterpe.Models.Mods;
 
 public sealed class LibDto
 {
-    public bool IsLocal { get; set; }
+    public bool IsLocal { get; init; }
 
     #region Lib Properties
 
-    public string Name { get; set; } = string.Empty;
-    public string FileName { get; set; } = string.Empty;
-    public string SHA256 { get; set; } = string.Empty;
-    public string DownloadUrl { get; set; } = string.Empty;
+    public required string Name { get; init; }
+    public required string FileName { get; init; }
+    public required string SHA256 { get; init; }
+    public string DownloadUrl { get; init; } = string.Empty;
 
     #endregion Lib Properties
 }

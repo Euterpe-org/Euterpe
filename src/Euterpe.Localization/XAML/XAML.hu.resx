@@ -61,17 +61,92 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Frissítés</value>
   </data>
-  <data name="ChartFilterType_Easy" xml:space="preserve">
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Könnyű</value>
   </data>
-  <data name="ChartFilterType_Hard" xml:space="preserve">
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
     <value>Nehéz</value>
   </data>
-  <data name="ChartFilterType_Hidden" xml:space="preserve">
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
     <value>Rejtett</value>
   </data>
-  <data name="ChartFilterType_Master" xml:space="preserve">
+  <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>Mester</value>
+  </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>Csökkenő</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>Nehézség</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>Van videó</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>Streamelhető</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>Chartek böngészése &amp; letöltése a weben</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>Chartek beszerzése</value>
+  </data>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>MDM chartek migrálása</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>Szint</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>Visszaállítás</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>Rendezés</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>Videó</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>Összes chart frissítése</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>készítette: {0}</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>Szerző</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>Hozzáadás dátuma</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>Frissítés dátuma</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>Mapek</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>Név</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>Szint</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>Fájlméret</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>Művész</value>

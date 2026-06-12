@@ -6,7 +6,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_LocalLibSameShaAsWeb_DoesNotTriggerDownload()
     {
         var localLib = new LibDto { Name = TestLibName, FileName = TestLibFileName, SHA256 = "shared-sha", IsLocal = true };
-        var localServiceMock = IGameLocalService.Mock();
+        var localServiceMock = IModLocalService.Mock();
         localServiceMock.GetModFilePaths().Returns([]);
         localServiceMock.GetLibFilePaths().Returns([TestLibFilePath]);
         localServiceMock.LoadLibFromPathAsync(TestLibFilePath).Returns(localLib);
@@ -17,7 +17,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
-            gameLocalService: localServiceMock);
+            modLocalService: localServiceMock);
 
         await sut.InitializeModsAsync();
 
@@ -28,7 +28,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_LocalLibDifferentShaFromWeb_TriggersDownload()
     {
         var localLib = new LibDto { Name = TestLibName, FileName = TestLibFileName, SHA256 = "old-sha", IsLocal = true };
-        var localServiceMock = IGameLocalService.Mock();
+        var localServiceMock = IModLocalService.Mock();
         localServiceMock.GetModFilePaths().Returns([]);
         localServiceMock.GetLibFilePaths().Returns([TestLibFilePath]);
         localServiceMock.LoadLibFromPathAsync(Any<string>()).Returns(localLib);
@@ -39,7 +39,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
-            gameLocalService: localServiceMock);
+            modLocalService: localServiceMock);
 
         await sut.InitializeModsAsync();
 
@@ -49,7 +49,7 @@ public sealed partial class ModManageServiceTest
     [Test]
     public async Task InitializeModsAsync_ModDependsOnWebOnlyLib_TriggersDownload()
     {
-        var localServiceMock = IGameLocalService.Mock();
+        var localServiceMock = IModLocalService.Mock();
         localServiceMock.GetModFilePaths().Returns([TestModFilePath]);
         localServiceMock.LoadModFromPathAsync(TestModFilePath).Returns(CreateInstalledMod());
         localServiceMock.GetLibFilePaths().Returns([]);
@@ -61,7 +61,7 @@ public sealed partial class ModManageServiceTest
 
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
-            gameLocalService: localServiceMock);
+            modLocalService: localServiceMock);
 
         await sut.InitializeModsAsync();
 

@@ -97,7 +97,7 @@
                                         TextWrapping="Wrap" />
                                     <TextBlock
                                         FontSize="11"
-                                        Foreground="#D14343"
+                                        Foreground="{DynamicResource SemiColorDanger}"
                                         IsVisible="{Binding ErrorMessage, Converter={x:Static ObjectConverters.IsNotNull}}"
                                         Text="{Binding ErrorMessage}"
                                         TextWrapping="Wrap" />

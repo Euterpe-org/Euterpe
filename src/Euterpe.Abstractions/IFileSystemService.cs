@@ -3,22 +3,51 @@ namespace Euterpe.Abstractions;
 public interface IFileSystemService
 {
     /// <summary>
-    ///     Provides logging besides normal checking
+    ///     Deletes a file, throwing on failure so the caller can surface the real cause. With
+    ///     <see cref="DeleteOption.IgnoreIfNotFound" /> a missing file is a no-op.
     /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    bool CheckFileExists(string filePath);
-
-    bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
-
-    bool TryMoveFile(string sourcePath, string destinationPath);
+    void DeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
 
     /// <summary>
-    ///     Provides logging besides normal checking
+    ///     Best-effort file delete: logs a warning and returns <c>false</c> on failure instead of throwing.
+    ///     Use when failure is non-fatal and the caller continues regardless.
     /// </summary>
-    /// <param name="directoryPath"></param>
-    /// <returns></returns>
-    bool CheckDirectoryExists(string directoryPath);
+    bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
 
+    /// <summary>
+    ///     Moves a file to <paramref name="destinationPath" />, optionally replacing an existing destination.
+    ///     The move itself is an atomic rename when both paths are on the same volume.
+    /// </summary>
+    bool TryMoveFile(string sourcePath, string destinationPath, bool overwrite = false);
+
+    /// <summary>
+    ///     Copies a file to <paramref name="destinationPath" />, creating the destination directory if missing.
+    ///     Best-effort: logs a warning and returns <c>false</c> on failure instead of throwing.
+    /// </summary>
+    bool TryCopyFile(string sourcePath, string destinationPath, bool overwrite = false);
+
+    /// <summary>
+    ///     Deletes a directory recursively, throwing on failure so the caller can surface the real cause. With
+    ///     <see cref="DeleteOption.IgnoreIfNotFound" /> a missing directory is a no-op.
+    /// </summary>
+    void DeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
+
+    /// <summary>
+    ///     Best-effort directory delete: logs a warning and returns <c>false</c> on failure instead of throwing.
+    ///     Use when failure is non-fatal and the caller continues regardless.
+    /// </summary>
     bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
+
+    /// <summary>
+    ///     Moves a directory to <paramref name="destinationPath" />, optionally replacing an existing destination.
+    ///     The destination's parent directory must already exist. The move itself is an atomic rename when both
+    ///     paths are on the same volume.
+    /// </summary>
+    bool TryMoveDirectory(string sourcePath, string destinationPath, bool overwrite = false);
+
+    /// <summary>
+    ///     Recursively copies a directory tree, throwing on failure so the caller can surface the real cause. The
+    ///     destination is created if missing and existing files are overwritten.
+    /// </summary>
+    void CopyDirectory(string sourcePath, string destinationPath);
 }

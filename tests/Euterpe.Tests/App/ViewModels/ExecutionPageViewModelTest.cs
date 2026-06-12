@@ -143,6 +143,7 @@ public sealed class ExecutionPageViewModelTest
         Logger = NullLogger<ExecutionPageViewModel>.Instance,
         State = new SetupState(),
         GameConfig = gameConfig,
-        SetupSteps = steps
+        SetupSteps = steps,
+        GameSettingService = IGameSettingService.Mock()
     };
 }

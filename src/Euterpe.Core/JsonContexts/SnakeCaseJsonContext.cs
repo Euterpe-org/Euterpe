@@ -4,6 +4,7 @@ using Euterpe.Contracts.Charts;
 using Euterpe.Contracts.Distribution;
 using Euterpe.Contracts.Mods;
 using Euterpe.Contracts.Telemetry;
+using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Core.JsonContexts;
 
@@ -13,6 +14,8 @@ namespace Euterpe.Core.JsonContexts;
 [JsonSerializable(typeof(Lib[]))]
 [JsonSerializable(typeof(Release[]))]
 [JsonSerializable(typeof(Chart[]))]
+[JsonSerializable(typeof(CheckChartUpdatesRequest))]
+[JsonSerializable(typeof(CheckChartUpdatesResponse))]
 [JsonSerializable(typeof(SessionEvent))]
 [JsonSerializable(typeof(MuseDashUidRequest))]
 [JsonSerializable(typeof(TokenPayload))]
@@ -23,4 +26,5 @@ namespace Euterpe.Core.JsonContexts;
 [JsonSerializable(typeof(LogoutRequest))]
 [JsonSerializable(typeof(UserInfo))]
 [JsonSerializable(typeof(CurrentUserResponse))]
+[JsonSerializable(typeof(Cinema))]
 internal sealed partial class SnakeCaseJsonContext : JsonSerializerContext;

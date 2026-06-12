@@ -10,6 +10,9 @@ internal sealed class GameSettingService : IGameSettingService
         Directory.CreateDirectory(GameConfig.UserLibsFolder);
         Directory.CreateDirectory(GameConfig.OnlineChartsFolder);
         Directory.CreateDirectory(GameConfig.OfflineChartsFolder);
+
+        Directory.CreateDirectory(GameConfig.TempModsFolder);
+        Directory.CreateDirectory(GameConfig.TempChartsFolder);
     }
 
     #region Injections

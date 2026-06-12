@@ -132,6 +132,66 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>已成功将 MD_DIRECTORY 环境变量设置为 {0}</value>
   </data>
+  <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
+    <value>音频播放失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
+    <value>谱面 {0} 下载失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
+    <value>谱面 {0} 下载成功</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Duplicated" xml:space="preserve">
+    <value>谱面 {0} 已导入</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Failed" xml:space="preserve">
+    <value>谱面 {0} 导入失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
+    <value>谱面 {0} 导入成功</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
+    <value>{0} 不是受支持的谱面文件或文件夹</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Failed" xml:space="preserve">
+    <value>谱面 {0} 移除失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
+    <value>谱面 {0} 移除成功</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>谱面 {0} 更新失败</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>谱面 {0} 更新成功</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
+    <value>已更新 {0} 张谱面，{1} 张失败</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Success" xml:space="preserve">
+    <value>已更新 {0} 张谱面</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
+    <value>所有谱面均已是最新</value>
+  </data>
+  <data name="Notification_Content_Migration_None" xml:space="preserve">
+    <value>没有可迁移的 MDM 谱面</value>
+  </data>
+  <data name="Notification_Content_Migration_Partial" xml:space="preserve">
+    <value>已迁移 {0} 张 CustomAlbums 谱面，{1} 张失败</value>
+  </data>
+  <data name="Notification_Content_Migration_Success" xml:space="preserve">
+    <value>已迁移 {0} 张 CustomAlbums 谱面</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>依赖库 {0} 导入成功</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
+    <value>模组 {0} 已导入</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
+    <value>{0} 不是受支持的模组或依赖库文件</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>模组 {0} 安装失败</value>
   </data>

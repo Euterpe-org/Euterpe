@@ -6,8 +6,8 @@ internal sealed partial class ModManageService
 {
     private async Task LoadModsAsync()
     {
-        var localMods = (await GameLocalService.GetModFilePaths()
-                .WhenAllAsync(GameLocalService.LoadModFromPathAsync).ConfigureAwait(false))
+        var localMods = (await ModLocalService.GetModFilePaths()
+                .WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
             .OfType<ModDto>()
             .ToArray();
 
@@ -62,13 +62,18 @@ internal sealed partial class ModManageService
             return;
         }
 
-        var localVersion = SemVersion.Parse(localMod.LocalVersion);
-        var webVersion = SemVersion.Parse(webMod.Version);
-        var versionComparison = localVersion.ComparePrecedenceTo(webVersion);
+        localMod.State = DetermineModState(localMod, webMod.ToModel());
+    }
 
-        localMod.State = versionComparison switch
+    private ModState DetermineModState(ModDto localMod, ModDto webMod)
+    {
+        if (IsModIncompatible(webMod.MelonVersion, webMod.GameVersion))
         {
-            _ when IsModIncompatible(webMod.MelonVersion, webMod.GameVersion) => ModState.Incompatible,
+            return ModState.Incompatible;
+        }
+
+        return localMod.LocalVersion.ComparePrecedenceTo(webMod.Version) switch
+        {
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,

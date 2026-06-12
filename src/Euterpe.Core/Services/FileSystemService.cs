@@ -8,39 +8,21 @@ internal sealed class FileSystemService : IFileSystemService
 
     #endregion Injections
 
-    public bool CheckFileExists(string filePath)
+    public void DeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
-        if (File.Exists(filePath))
+        if (deleteOption is DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
         {
-            return true;
+            return;
         }
 
-        Logger.ZLogError($"{Path.GetFileName(filePath)} does not exists on {filePath}");
-        return false;
-    }
-
-    public bool CheckDirectoryExists(string directoryPath)
-    {
-        if (Directory.Exists(directoryPath))
-        {
-            return true;
-        }
-
-        Logger.ZLogError($"{Path.GetDirectoryName(directoryPath)} does not exists on {directoryPath}");
-        return false;
+        File.Delete(filePath);
     }
 
     public bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
-        if (deleteOption is DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
-        {
-            Logger.ZLogWarning($"{filePath} does not exists, skipping deletion");
-            return true;
-        }
-
         try
         {
-            File.Delete(filePath);
+            DeleteFile(filePath, deleteOption);
             return true;
         }
         catch (Exception ex)
@@ -50,11 +32,11 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
-    public bool TryMoveFile(string sourcePath, string destinationPath)
+    public bool TryMoveFile(string sourcePath, string destinationPath, bool overwrite = false)
     {
         try
         {
-            File.Move(sourcePath, destinationPath);
+            File.Move(sourcePath, destinationPath, overwrite);
             return true;
         }
         catch (Exception ex)
@@ -64,23 +46,86 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
-    public bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
+    public bool TryCopyFile(string sourcePath, string destinationPath, bool overwrite = false)
+    {
+        try
+        {
+            if (string.Equals(Path.GetFullPath(sourcePath), Path.GetFullPath(destinationPath), StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            var directory = Path.GetDirectoryName(destinationPath);
+            if (!directory.IsNullOrEmpty())
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            File.Copy(sourcePath, destinationPath, overwrite);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to copy file from {sourcePath} to {destinationPath}");
+            return false;
+        }
+    }
+
+    public void DeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
         if (deleteOption is DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
         {
-            Logger.ZLogWarning($"{directoryPath} does not exists, skipping deletion");
-            return true;
+            return;
         }
 
+        Directory.Delete(directoryPath, true);
+    }
+
+    public bool TryDeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
+    {
         try
         {
-            Directory.Delete(directoryPath, true);
+            DeleteDirectory(directoryPath, deleteOption);
             return true;
         }
         catch (Exception ex)
         {
             Logger.ZLogWarning(ex, $"Failed to delete directory {directoryPath}");
             return false;
+        }
+    }
+
+    public bool TryMoveDirectory(string sourcePath, string destinationPath, bool overwrite = false)
+    {
+        try
+        {
+            if (overwrite && Directory.Exists(destinationPath))
+            {
+                Directory.Delete(destinationPath, true);
+            }
+
+            Directory.Move(sourcePath, destinationPath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to move directory from {sourcePath} to {destinationPath}");
+            return false;
+        }
+    }
+
+    public void CopyDirectory(string sourcePath, string destinationPath)
+    {
+        Directory.CreateDirectory(destinationPath);
+
+        foreach (var file in Directory.EnumerateFiles(sourcePath))
+        {
+            File.Copy(file, Path.Combine(destinationPath, Path.GetFileName(file)), true);
+        }
+
+        foreach (var directory in Directory.EnumerateDirectories(sourcePath))
+        {
+            CopyDirectory(directory, Path.Combine(destinationPath, Path.GetFileName(directory)));
         }
     }
 }

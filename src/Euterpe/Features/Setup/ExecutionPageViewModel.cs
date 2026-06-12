@@ -31,6 +31,8 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
 
     public override async Task OnEnterAsync()
     {
+        GameSettingService.EnsureGameFolders();
+
         var selected = GameConfig.SetupOptions.Where(o => o.IsSelected).ToArray();
         Logger.ZLogInformation($"Starting setup execution with {selected.Length} step(s): {string.Join(", ", selected.Select(o => o.Kinds))}");
 
@@ -111,6 +113,7 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
 
     public required GameConfig GameConfig { get; init; }
     public required IEnumerable<ISetupStep> SetupSteps { get; init; }
+    public required IGameSettingService GameSettingService { get; init; }
     public required ILogger<ExecutionPageViewModel> Logger { get; init; }
 
     #endregion Injections

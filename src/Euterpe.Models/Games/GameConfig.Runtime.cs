@@ -39,6 +39,18 @@ public abstract partial class GameConfig
     public string OfflineChartsFolder => Path.Combine(EuterpeChartsFolder, "Offline");
 
     [JsonIgnore]
+    public string TempFolder => Path.Combine(Folder, "Euterpe_Temp");
+
+    [JsonIgnore]
+    public string TempChartsFolder => Path.Combine(TempFolder, "Charts");
+
+    [JsonIgnore]
+    public string TempModsFolder => Path.Combine(TempFolder, "Mods");
+
+    [JsonIgnore]
+    public string CustomAlbumsChartsFolder => Path.Combine(Folder, "Custom_Albums");
+
+    [JsonIgnore]
     public string MelonLoaderFolder => Path.Combine(Folder, "MelonLoader");
 
     [JsonIgnore]
@@ -63,7 +75,6 @@ public abstract partial class GameConfig
     public string Cpp2ILPluginPath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL", "Plugins", "Cpp2IL.Plugin.StrippedCodeRegSupport.dll");
 
     private string EuterpeChartsFolder => Path.Combine(Folder, "Euterpe_Charts");
-
     private string Il2CppAssemblyGeneratorFolderPath => Path.Combine(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
 
     partial void OnMelonLoaderVersionChanged(string? value) =>

@@ -16,12 +16,18 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     private static DeepLinkService NewService(
         IDeepLinkSetup? setup = null,
         MockLogger<DeepLinkService>? logger = null,
-        IModManageService? modManageService = null)
+        IModManageService? modManageService = null,
+        IChartManageService? chartManageService = null)
     {
         var builder = new ContainerBuilder();
         if (modManageService is not null)
         {
             builder.RegisterInstance(modManageService).As<IModManageService>();
+        }
+
+        if (chartManageService is not null)
+        {
+            builder.RegisterInstance(chartManageService).As<IChartManageService>();
         }
 
         var container = builder.Build();
@@ -169,14 +175,16 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     }
 
     [Test]
-    public async Task HandleChartAction_Convert_LogsPlaceholderWithoutWarning()
+    public async Task HandleChartAction_Convert_MigratesCustomAlbums()
     {
         var logger = Mock.Logger<DeepLinkService>();
-        var service = NewService(logger: logger);
+        var charts = IChartManageService.Mock();
+        var service = NewService(logger: logger, chartManageService: charts);
 
         await InvokeChartAction(service, "convert");
 
         using var _ = Assert.Multiple();
+        charts.MigrateCustomAlbumsAsync(Any<IProgress<string>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Information && e.Message.Contains("Chart convert"))).IsTrue();
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Warning)).IsFalse();
     }

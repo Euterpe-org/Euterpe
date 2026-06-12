@@ -664,7 +664,7 @@ resharper_csharp_align_multiline_parameter = false
 resharper_csharp_align_multiple_declaration = false
 resharper_csharp_allow_far_alignment = false
 resharper_csharp_empty_block_style = multiline
-resharper_csharp_insert_final_newline = false
+resharper_csharp_insert_final_newline = true
 resharper_csharp_keep_existing_enum_arrangement = false
 resharper_csharp_keep_nontrivial_alias = false
 resharper_csharp_new_line_before_while = false
@@ -4238,8 +4238,11 @@ insert_final_newline = false
 tab_width = unset
 trim_trailing_whitespace = false
 
-# Meziantou.Analyzer
+# C# ends with a final newline
 [*.cs]
+insert_final_newline = true
+
+# Meziantou.Analyzer
 dotnet_diagnostic.ma0004.severity = warning
 dotnet_diagnostic.ma0008.severity = warning
 dotnet_diagnostic.ma0010.severity = warning

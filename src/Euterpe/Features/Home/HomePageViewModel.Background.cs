@@ -6,6 +6,7 @@ public sealed partial class HomePageViewModel
     {
         BindAccountAsync().SafeFireAndForget();
         CheckModdingDependenciesAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to check modding dependencies"));
+        UpdateChartsAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to auto-update charts"));
     }
 
     private async Task BindAccountAsync()
@@ -54,5 +55,11 @@ public sealed partial class HomePageViewModel
 
         Logger.ZLogInformation($"MelonLoader not installed, opening repair dialog");
         await SetupDialogService.ShowOptionRepairAsync(SetupOptionKinds.MelonLoader).ConfigureAwait(false);
+    }
+
+    private async Task UpdateChartsAsync()
+    {
+        await ChartManageService.InitializeChartsAsync().ConfigureAwait(false);
+        await ChartManageService.UpdateAllChartsAsync().ConfigureAwait(false);
     }
 }

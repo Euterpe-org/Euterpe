@@ -16,15 +16,17 @@ public sealed class FileSystemServiceTest
     }
 
     [Test]
-    public async Task CheckFileExists_Present_ReturnsTrue()
+    public async Task DeleteFile_Existing_Deletes()
     {
         var work = NewTempFolder();
         try
         {
-            var path = Path.Combine(work, "f.txt");
+            var path = Path.Combine(work, "to-delete.txt");
             await File.WriteAllTextAsync(path, "x");
 
-            await Assert.That(NewService().CheckFileExists(path)).IsTrue();
+            NewService().DeleteFile(path);
+
+            await Assert.That(File.Exists(path)).IsFalse();
         }
         finally
         {
@@ -33,40 +35,14 @@ public sealed class FileSystemServiceTest
     }
 
     [Test]
-    public async Task CheckFileExists_Missing_ReturnsFalse()
+    public async Task DeleteFile_Missing_IgnoreIfNotFound_DoesNotThrow()
     {
         var work = NewTempFolder();
         try
         {
-            await Assert.That(NewService().CheckFileExists(Path.Combine(work, "missing.txt"))).IsFalse();
-        }
-        finally
-        {
-            Directory.Delete(work, true);
-        }
-    }
+            var act = () => NewService().DeleteFile(Path.Combine(work, "missing.txt"), DeleteOption.IgnoreIfNotFound);
 
-    [Test]
-    public async Task CheckDirectoryExists_Present_ReturnsTrue()
-    {
-        var work = NewTempFolder();
-        try
-        {
-            await Assert.That(NewService().CheckDirectoryExists(work)).IsTrue();
-        }
-        finally
-        {
-            Directory.Delete(work, true);
-        }
-    }
-
-    [Test]
-    public async Task CheckDirectoryExists_Missing_ReturnsFalse()
-    {
-        var work = NewTempFolder();
-        try
-        {
-            await Assert.That(NewService().CheckDirectoryExists(Path.Combine(work, "no_such_dir"))).IsFalse();
+            await Assert.That(act).ThrowsNothing();
         }
         finally
         {
@@ -151,6 +127,62 @@ public sealed class FileSystemServiceTest
     }
 
     [Test]
+    public async Task DeleteDirectory_Existing_DeletesRecursively()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var nested = Path.Combine(work, "nested");
+            Directory.CreateDirectory(nested);
+            await File.WriteAllTextAsync(Path.Combine(nested, "f.txt"), "x");
+
+            NewService().DeleteDirectory(nested);
+
+            await Assert.That(Directory.Exists(nested)).IsFalse();
+        }
+        finally
+        {
+            if (Directory.Exists(work))
+            {
+                Directory.Delete(work, true);
+            }
+        }
+    }
+
+    [Test]
+    public async Task DeleteDirectory_Missing_FailIfNotFound_Throws()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            // Directory.Delete throws DirectoryNotFoundException on missing paths (unlike File.Delete which is silent).
+            var act = () => NewService().DeleteDirectory(Path.Combine(work, "missing_dir"));
+
+            await Assert.That(act).Throws<DirectoryNotFoundException>();
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task DeleteDirectory_Missing_IgnoreIfNotFound_DoesNotThrow()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var act = () => NewService().DeleteDirectory(Path.Combine(work, "missing_dir"), DeleteOption.IgnoreIfNotFound);
+
+            await Assert.That(act).ThrowsNothing();
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
     public async Task TryDeleteDirectory_Existing_DeletesRecursively()
     {
         var work = NewTempFolder();
@@ -202,6 +234,48 @@ public sealed class FileSystemServiceTest
             var ok = NewService().TryDeleteDirectory(Path.Combine(work, "missing_dir"), DeleteOption.IgnoreIfNotFound);
 
             await Assert.That(ok).IsTrue();
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task CopyDirectory_CopiesFilesAndNestedFoldersAndLeavesSource()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var src = Path.Combine(work, "src");
+            var nested = Path.Combine(src, "nested");
+            Directory.CreateDirectory(nested);
+            await File.WriteAllTextAsync(Path.Combine(src, "top.txt"), "top");
+            await File.WriteAllTextAsync(Path.Combine(nested, "deep.txt"), "deep");
+
+            var dst = Path.Combine(work, "dst");
+            NewService().CopyDirectory(src, dst);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(Directory.Exists(src)).IsTrue();
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(dst, "top.txt"))).IsEqualTo("top");
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(dst, "nested", "deep.txt"))).IsEqualTo("deep");
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task CopyDirectory_SourceMissing_Throws()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var act = () => NewService().CopyDirectory(Path.Combine(work, "missing"), Path.Combine(work, "dst"));
+
+            await Assert.That(act).Throws<DirectoryNotFoundException>();
         }
         finally
         {
