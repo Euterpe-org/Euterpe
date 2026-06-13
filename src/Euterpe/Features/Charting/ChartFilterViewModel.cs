@@ -9,7 +9,7 @@ public sealed partial class ChartFilterViewModel : ObservableObject
 
     private readonly Subject<string?> _changed = new();
 
-    [ObservableProperty] public partial int SelectedChartSourceIndex { get; set; }
+    [ObservableProperty] public partial ChartSource Source { get; set; } = ChartSource.Online;
     [ObservableProperty] public partial string? SearchText { get; set; }
 
     [ObservableProperty] public partial bool ShowEasy { get; set; } = true;
@@ -50,7 +50,7 @@ public sealed partial class ChartFilterViewModel : ObservableObject
         && MatchesVideo(chart);
 
     private bool MatchesSource(ChartDto chart) =>
-        chart.Source == (ChartSource)SelectedChartSourceIndex;
+        chart.Source == Source;
 
     private bool MatchesSearch(ChartDto chart)
     {

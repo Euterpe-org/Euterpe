@@ -80,8 +80,10 @@
                     <!--  Filter Dropdown  -->
                     <ComboBox
                         Grid.Column="1"
-                        ItemsSource="{Binding ModFilterTypes, Mode=OneTime}"
-                        SelectedIndex="{Binding SelectedModFilterIndex, Mode=TwoWay}" />
+                        DisplayMemberBinding="{Binding Display.Value}"
+                        ItemsSource="{Binding ModFilters, Mode=OneTime}"
+                        SelectedValue="{Binding ModFilter, Mode=TwoWay}"
+                        SelectedValueBinding="{Binding Value}" />
 
                 </Grid>
 

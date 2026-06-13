@@ -17,13 +17,13 @@ public sealed class ModManagePanelViewModelTest
         using var assertions = Assert.Multiple();
         await Assert.That(vm.Mods).IsEmpty();
         await Assert.That(vm.SearchText).IsNull();
-        await Assert.That(vm.SelectedModFilterIndex).IsEqualTo(0);
+        await Assert.That(vm.ModFilter).IsEqualTo(ModFilterType.All);
         await Assert.That(vm.AllModsLoaded).IsFalse();
     }
 
     [Test]
-    public async Task ModFilterTypes_HasSixOptions() =>
-        await Assert.That(ModManagePanelViewModel.ModFilterTypes).Count().IsEqualTo(6);
+    public async Task ModFilters_HasSixOptions() =>
+        await Assert.That(ModManagePanelViewModel.ModFilters).Count().IsEqualTo(6);
 
     [Test]
     public async Task SearchTextChanged_RaisesPropertyChanged()

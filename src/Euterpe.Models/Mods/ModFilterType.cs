@@ -1,5 +1,6 @@
 namespace Euterpe.Models.Mods;
 
+[EnumExtensions]
 public enum ModFilterType
 {
     All = 0,

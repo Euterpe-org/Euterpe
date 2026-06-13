@@ -1,5 +1,6 @@
 namespace Euterpe.Models.Charts;
 
+[EnumExtensions]
 public enum ChartDifficulty
 {
     Easy = 1,

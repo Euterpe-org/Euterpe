@@ -61,13 +61,11 @@
             Margin="0,0,0,12">
             <ComboBox
                 Grid.Column="0"
+                DisplayMemberBinding="{Binding Display.Value}"
+                ItemsSource="{Binding ChartSources}"
                 MinWidth="110"
-                SelectedIndex="{Binding Filter.SelectedChartSourceIndex}">
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSource_Online}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSource_Offline}}" />
-            </ComboBox>
+                SelectedValue="{Binding Filter.Source}"
+                SelectedValueBinding="{Binding Value}" />
 
             <TextBox
                 Grid.Column="1"
@@ -77,26 +75,12 @@
 
             <ComboBox
                 Grid.Column="2"
+                DisplayMemberBinding="{Binding Display.Value}"
+                ItemsSource="{Binding SortFields}"
                 MinWidth="140"
-                SelectedIndex="{Binding SortField}"
-                ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_SortBy}}">
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Name}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Author}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Bpm}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Rating}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_DateAdded}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_DateUpdated}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_MapCount}}" />
-                <ComboBoxItem
-                    Content="{Localize {x:Static loc:XAMLLiteral.ChartSortField_Size}}" />
-            </ComboBox>
+                SelectedValue="{Binding SortField}"
+                SelectedValueBinding="{Binding Value}"
+                ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_SortBy}}" />
 
             <ToggleButton
                 Grid.Column="3"

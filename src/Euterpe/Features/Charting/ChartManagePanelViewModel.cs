@@ -16,6 +16,14 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [ObservableProperty] public partial ChartSortField SortField { get; set; }
     [ObservableProperty] public partial bool SortDescending { get; set; }
 
+    public static IReadOnlyList<EnumOption<ChartSource>> ChartSources { get; } =
+        [.. ChartSourceExtensions.GetValues().Select(static source =>
+            new EnumOption<ChartSource>(source, $"{nameof(ChartSource)}_{source.ToStringFast()}"))];
+
+    public static IReadOnlyList<EnumOption<ChartSortField>> SortFields { get; } =
+        [.. ChartSortFieldExtensions.GetValues().Select(static field =>
+            new EnumOption<ChartSortField>(field, $"{nameof(ChartSortField)}_{field.ToStringFast()}"))];
+
     [ObservableProperty] public partial bool AllChartsLoaded { get; set; }
 
     public ChartFilterViewModel Filter { get; } = new();
@@ -175,7 +183,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
         if (await ChartManageService.ImportChartsAsync(paths).ConfigureAwait(true))
         {
-            Filter.SelectedChartSourceIndex = (int)ChartSource.Offline;
+            Filter.Source = ChartSource.Offline;
         }
     }
 

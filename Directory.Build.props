@@ -21,6 +21,7 @@
 
     <!-- Third Party Library Properties-->
     <PropertyGroup>
+        <EnumGenerator_EnableUsageAnalyzers>true</EnumGenerator_EnableUsageAnalyzers>
         <MeziantouAnalysisMode>None</MeziantouAnalysisMode>
         <MvvmToolkitEnableINotifyPropertyChangingSupport>false</MvvmToolkitEnableINotifyPropertyChangingSupport>
     </PropertyGroup>
