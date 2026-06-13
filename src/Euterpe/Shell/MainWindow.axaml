@@ -107,6 +107,7 @@
                         Margin="0,15,0,10"
                         Width="55">
                         <e:AsyncImage
+                            DecodeWidth="55"
                             Height="55"
                             PlaceholderSource="/Assets/Logo.webp"
                             RenderOptions.BitmapInterpolationMode="HighQuality"

@@ -277,6 +277,7 @@
                                         Background="{Binding DominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                                         ClipToBounds="True"
                                         CornerRadius="8"
+                                        DecodeHeight="200"
                                         Height="200"
                                         Margin="0,0,0,12"
                                         Source="{Binding FullUrl}"
