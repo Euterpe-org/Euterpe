@@ -4,12 +4,21 @@ namespace Euterpe.Features.Modding;
 
 public sealed partial class ModFilterViewModel : ObservableObject
 {
-    private readonly Subject<string?> _changed = new();
+    private readonly Subject<string?> _propertyChanged = new();
 
     [ObservableProperty] public partial string? SearchText { get; set; }
     [ObservableProperty] public partial ModFilterType ModFilter { get; set; } = ModFilterType.All;
 
-    public Observable<string?> Changed => _changed;
+    public Observable<Unit> Changed { get; }
+
+    public ModFilterViewModel() =>
+        Changed = new[]
+        {
+            _propertyChanged.Where(static name => name != nameof(SearchText)),
+            _propertyChanged.Where(static name => name == nameof(SearchText)).Debounce(AppConstants.SearchDebounce)
+        }
+        .Merge()
+        .Select(static _ => Unit.Default);
 
     public bool Matches(ModDto mod)
     {
@@ -34,6 +43,6 @@ public sealed partial class ModFilterViewModel : ObservableObject
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
-        _changed.OnNext(e.PropertyName);
+        _propertyChanged.OnNext(e.PropertyName);
     }
 }

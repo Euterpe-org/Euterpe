@@ -7,7 +7,7 @@ public sealed partial class ChartFilterViewModel : ObservableObject
     private const int RatingLowerBound = 1;
     private const int RatingUpperBound = 12;
 
-    private readonly Subject<string?> _changed = new();
+    private readonly Subject<string?> _propertyChanged = new();
 
     [ObservableProperty] public partial ChartSource Source { get; set; } = ChartSource.Online;
     [ObservableProperty] public partial string? SearchText { get; set; }
@@ -26,7 +26,16 @@ public sealed partial class ChartFilterViewModel : ObservableObject
     [ObservableProperty] public partial bool StreamerSafeOnly { get; set; }
     [ObservableProperty] public partial bool HasVideoOnly { get; set; }
 
-    public Observable<string?> Changed => _changed;
+    public Observable<Unit> Changed { get; }
+
+    public ChartFilterViewModel() =>
+        Changed = new[]
+        {
+            _propertyChanged.Where(static name => name != nameof(SearchText)),
+            _propertyChanged.Where(static name => name == nameof(SearchText)).Debounce(AppConstants.SearchDebounce)
+        }
+        .Merge()
+        .Select(static _ => Unit.Default);
 
     public void Reset()
     {
@@ -106,6 +115,6 @@ public sealed partial class ChartFilterViewModel : ObservableObject
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
-        _changed.OnNext(e.PropertyName);
+        _propertyChanged.OnNext(e.PropertyName);
     }
 }

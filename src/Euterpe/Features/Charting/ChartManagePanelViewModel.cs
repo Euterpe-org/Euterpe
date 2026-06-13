@@ -32,16 +32,6 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     public ChartManagePanelViewModel()
     {
-        var filterState = new[]
-            {
-                Filter.Changed.Where(static name => name != nameof(ChartFilterViewModel.SearchText)),
-                Filter.Changed.Where(static name => name == nameof(ChartFilterViewModel.SearchText))
-                    .Debounce(AppConstants.SearchDebounce)
-            }
-            .Merge()
-            .Select(this, static (_, vm) => vm.Filter)
-            .Prepend(Filter);
-
         var comparer = new[]
             {
                 this.ObservePropertyChanged(static x => x.SortField).AsUnitObservable(),
@@ -51,9 +41,11 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             .Select(this, static (_, vm) => vm.BuildComparer());
 
         _sourceCache.Connect()
-            .Filter(filterState.AsSystemObservable(), static (filter, chart) => filter.Matches(chart))
+            .Filter(chart => Filter.Matches(chart))
             .SortAndBind(out _charts, comparer.AsSystemObservable())
             .Subscribe();
+
+        Filter.Changed.Subscribe(this, static (_, vm) => vm._sourceCache.Refresh());
     }
 
     protected override async Task OnInitializeAsync()

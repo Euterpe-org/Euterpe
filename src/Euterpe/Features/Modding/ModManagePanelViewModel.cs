@@ -39,20 +39,12 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
             .ThenByDescending(x => x.DownloadCount)
             .ThenByAscending(x => x.Name);
 
-        var filterState = new[]
-            {
-                Filter.Changed.Where(static name => name != nameof(ModFilterViewModel.SearchText)),
-                Filter.Changed.Where(static name => name == nameof(ModFilterViewModel.SearchText))
-                    .Debounce(AppConstants.SearchDebounce)
-            }
-            .Merge()
-            .Select(this, static (_, vm) => vm.Filter)
-            .Prepend(Filter);
-
         _sourceCache.Connect()
-            .Filter(filterState.AsSystemObservable(), static (filter, mod) => filter.Matches(mod))
+            .Filter(mod => Filter.Matches(mod))
             .SortAndBind(out _mods, comparer)
             .Subscribe();
+
+        Filter.Changed.Subscribe(this, static (_, vm) => vm._sourceCache.Refresh());
     }
 
     protected override async Task OnInitializeAsync()
