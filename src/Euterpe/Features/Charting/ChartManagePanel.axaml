@@ -186,11 +186,9 @@
                                     Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Rating}}" />
                                 <Grid
                                     ColumnDefinitions="*,Auto,*">
-                                    <NumericUpDown
+                                    <u:NumericIntUpDown
                                         Grid.Column="0"
                                         Value="{Binding Filter.RatingMin}"
-                                        FormatString="0"
-                                        Increment="1"
                                         Maximum="12"
                                         Minimum="1" />
                                     <TextBlock
@@ -198,11 +196,9 @@
                                         Margin="6,0"
                                         Text="–"
                                         VerticalAlignment="Center" />
-                                    <NumericUpDown
+                                    <u:NumericIntUpDown
                                         Grid.Column="2"
                                         Value="{Binding Filter.RatingMax}"
-                                        FormatString="0"
-                                        Increment="1"
                                         Maximum="12"
                                         Minimum="1" />
                                 </Grid>
@@ -215,25 +211,23 @@
                                     Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Bpm}}" />
                                 <Grid
                                     ColumnDefinitions="*,Auto,*">
-                                    <NumericUpDown
+                                    <u:NumericIntUpDown
                                         Grid.Column="0"
                                         Value="{Binding Filter.BpmMin}"
-                                        FormatString="0"
-                                        Increment="10"
                                         Maximum="999"
-                                        Minimum="0" />
+                                        Minimum="0"
+                                        Step="10" />
                                     <TextBlock
                                         Grid.Column="1"
                                         Margin="6,0"
                                         Text="–"
                                         VerticalAlignment="Center" />
-                                    <NumericUpDown
+                                    <u:NumericIntUpDown
                                         Grid.Column="2"
                                         Value="{Binding Filter.BpmMax}"
-                                        FormatString="0"
-                                        Increment="10"
                                         Maximum="999"
-                                        Minimum="0" />
+                                        Minimum="0"
+                                        Step="10" />
                                 </Grid>
                             </StackPanel>
 
