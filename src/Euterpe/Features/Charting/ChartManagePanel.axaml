@@ -92,24 +92,33 @@
                 SelectedValueBinding="{Binding Value}"
                 ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_SortBy}}" />
 
-            <ToggleButton
+            <u:IconToggleButton
                 Grid.Column="3"
                 IsChecked="{Binding SortDescending}"
                 Margin="8,0,0,0"
                 ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_Descending}}"
                 Width="40">
-                <ToggleButton.Styles>
+                <u:IconToggleButton.IconTemplate>
+                    <DataTemplate
+                        DataType="Geometry">
+                        <PathIcon
+                            Data="{Binding .}"
+                            Height="12"
+                            Theme="{StaticResource InnerPathIcon}"
+                            Width="12" />
+                    </DataTemplate>
+                </u:IconToggleButton.IconTemplate>
+                <u:IconToggleButton.Styles>
                     <Style
-                        Selector="ToggleButton TextBlock">
-                        <Setter Property="Text" Value="↑" />
+                        Selector="u|IconToggleButton">
+                        <Setter Property="Icon" Value="{StaticResource SemiIconArrowUp}" />
                     </Style>
                     <Style
-                        Selector="ToggleButton:checked TextBlock">
-                        <Setter Property="Text" Value="↓" />
+                        Selector="u|IconToggleButton:checked">
+                        <Setter Property="Icon" Value="{StaticResource SemiIconArrowDown}" />
                     </Style>
-                </ToggleButton.Styles>
-                <TextBlock />
-            </ToggleButton>
+                </u:IconToggleButton.Styles>
+            </u:IconToggleButton>
 
             <Button
                 Grid.Column="4"
