@@ -31,9 +31,9 @@ public sealed class ChartDtoTest
                     BpmMin = bpmMin,
                     BpmMax = bpmMax,
                     Uploader = uploader,
-                    Maps = maps ?? new()
+                    Maps = maps ?? new Dictionary<string, ManifestMap>()
                 },
-                Files = files ?? new()
+                Files = files ?? new Dictionary<string, ManifestFileEntry>()
             }
         };
 
@@ -46,7 +46,11 @@ public sealed class ChartDtoTest
     [Arguments(3L * (1 << 30) / 2, "1.5 GB")]
     public async Task SizeDisplay_TotalSize_FormatsBinaryUnits(long size, string expected)
     {
-        var chart = CreateChart(files: new() { ["music.ogg"] = new ManifestFileEntry { Size = size } });
+        var chart = CreateChart(files: new Dictionary<string, ManifestFileEntry>
+        {
+            ["music.ogg"] = new()
+                { Size = size }
+        });
 
         await Assert.That(chart.SizeDisplay).IsEqualTo(expected);
     }
@@ -54,10 +58,12 @@ public sealed class ChartDtoTest
     [Test]
     public async Task SizeBytes_MultipleFiles_Sums()
     {
-        var chart = CreateChart(files: new()
+        var chart = CreateChart(files: new Dictionary<string, ManifestFileEntry>
         {
-            ["music.ogg"] = new ManifestFileEntry { Size = 300 },
-            ["map1.bms"] = new ManifestFileEntry { Size = 212 }
+            ["music.ogg"] = new()
+                { Size = 300 },
+            ["map1.bms"] = new()
+                { Size = 212 }
         });
 
         await Assert.That(chart.SizeBytes).IsEqualTo(512);
@@ -82,7 +88,7 @@ public sealed class ChartDtoTest
     [Test]
     public async Task CharterDisplay_DuplicateCharters_DedupesCaseInsensitive()
     {
-        var chart = CreateChart(maps: new()
+        var chart = CreateChart(maps: new Dictionary<string, ManifestMap>
         {
             ["map1"] = CreateMap("8", "Alice", "Bob"),
             ["map2"] = CreateMap("10", "alice")
@@ -94,7 +100,7 @@ public sealed class ChartDtoTest
     [Test]
     public async Task MaxRating_MultipleMaps_PicksHighest()
     {
-        var chart = CreateChart(maps: new()
+        var chart = CreateChart(maps: new Dictionary<string, ManifestMap>
         {
             ["map1"] = CreateMap("8"),
             ["map2"] = CreateMap("11")
@@ -106,7 +112,7 @@ public sealed class ChartDtoTest
     [Test]
     public async Task DetailUrl_WithCid_PointsToChartPage()
     {
-        var chart = CreateChart(cid: 123);
+        var chart = CreateChart(123);
 
         await Assert.That(chart.DetailUrl).IsEqualTo("https://euterpe-org.com/charts/123");
     }

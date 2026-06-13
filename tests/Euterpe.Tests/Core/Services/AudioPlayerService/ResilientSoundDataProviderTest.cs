@@ -1,7 +1,6 @@
 using SoundFlow.Enums;
 using SoundFlow.Interfaces;
 using SoundFlow.Metadata.Models;
-using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests;
 
@@ -53,8 +52,17 @@ public sealed class ResilientSoundDataProviderTest
         public bool IsDisposed { get; private set; }
         public SoundFormatInfo? FormatInfo => null;
 
-        public event EventHandler<EventArgs>? EndOfStreamReached { add { } remove { } }
-        public event EventHandler<PositionChangedEventArgs>? PositionChanged { add { } remove { } }
+        public event EventHandler<EventArgs>? EndOfStreamReached
+        {
+            add { }
+            remove { }
+        }
+
+        public event EventHandler<PositionChangedEventArgs>? PositionChanged
+        {
+            add { }
+            remove { }
+        }
 
         public int ReadBytes(Span<float> buffer)
         {

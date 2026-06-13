@@ -9,25 +9,29 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 {
     private readonly ReadOnlyObservableCollection<ChartDto> _charts;
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
-
-    private ChartDto? _playingChart;
     private ChartDto? _pausedChart;
-
-    [ObservableProperty] public partial ChartSortField SortField { get; set; }
-    [ObservableProperty] public partial bool SortDescending { get; set; }
+    private ChartDto? _playingChart;
 
     public static IReadOnlyList<EnumOption<ChartSource>> ChartSources { get; } =
         [.. ChartSourceExtensions.GetValues().Select(static source =>
             new EnumOption<ChartSource>(source, $"{nameof(ChartSource)}_{source.ToStringFast()}"))];
 
     public static IReadOnlyList<EnumOption<ChartSortField>> SortFields { get; } =
-        [.. ChartSortFieldExtensions.GetValues().Select(static field =>
-            new EnumOption<ChartSortField>(field, $"{nameof(ChartSortField)}_{field.ToStringFast()}"))];
+    [
+        .. ChartSortFieldExtensions.GetValues().Select(static field =>
+            new EnumOption<ChartSortField>(field, $"{nameof(ChartSortField)}_{field.ToStringFast()}"))
+    ];
 
-    [ObservableProperty] public partial bool AllChartsLoaded { get; set; }
+    [ObservableProperty]
+    public partial ChartSortField SortField { get; set; }
+
+    [ObservableProperty]
+    public partial bool SortDescending { get; set; }
+
+    [ObservableProperty]
+    public partial bool AllChartsLoaded { get; set; }
 
     public ChartFilterViewModel Filter { get; } = new();
-
     public ReadOnlyObservableCollection<ChartDto> Charts => _charts;
 
     public ChartManagePanelViewModel()
@@ -181,7 +185,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     private Comparer<ChartDto> BuildComparer()
     {
-        Comparison<ChartDto> comparison = SortField switch
+        var comparison = SortField switch
         {
             ChartSortField.Author => ByText(x => x.Manifest.Meta.Author),
             ChartSortField.Bpm => By(x => x.Manifest.Meta.Bpm),
@@ -195,11 +199,15 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
         return Comparer<ChartDto>.Create(SortDescending ? (a, b) => comparison(b, a) : comparison);
 
-        static Comparison<ChartDto> By<TKey>(Func<ChartDto, TKey> key) where TKey : IComparable<TKey> =>
-            (a, b) => key(a).CompareTo(key(b));
+        static Comparison<ChartDto> By<TKey>(Func<ChartDto, TKey> key) where TKey : IComparable<TKey>
+        {
+            return (a, b) => key(a).CompareTo(key(b));
+        }
 
-        static Comparison<ChartDto> ByText(Func<ChartDto, string> key) =>
-            (a, b) => string.Compare(key(a), key(b), StringComparison.OrdinalIgnoreCase);
+        static Comparison<ChartDto> ByText(Func<ChartDto, string> key)
+        {
+            return (a, b) => string.Compare(key(a), key(b), StringComparison.OrdinalIgnoreCase);
+        }
     }
 
     #region Injections

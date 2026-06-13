@@ -13,12 +13,12 @@ public sealed partial class ModFilterViewModel : ObservableObject
 
     public ModFilterViewModel() =>
         Changed = new[]
-        {
-            _propertyChanged.Where(static name => name != nameof(SearchText)),
-            _propertyChanged.Where(static name => name == nameof(SearchText)).Debounce(AppConstants.SearchDebounce)
-        }
-        .Merge()
-        .Select(static _ => Unit.Default);
+            {
+                _propertyChanged.Where(static name => name != nameof(SearchText)),
+                _propertyChanged.Where(static name => name == nameof(SearchText)).Debounce(AppConstants.SearchDebounce)
+            }
+            .Merge()
+            .Select(static _ => Unit.Default);
 
     public bool Matches(ModDto mod)
     {

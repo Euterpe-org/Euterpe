@@ -30,12 +30,12 @@ public sealed partial class ChartFilterViewModel : ObservableObject
 
     public ChartFilterViewModel() =>
         Changed = new[]
-        {
-            _propertyChanged.Where(static name => name != nameof(SearchText)),
-            _propertyChanged.Where(static name => name == nameof(SearchText)).Debounce(AppConstants.SearchDebounce)
-        }
-        .Merge()
-        .Select(static _ => Unit.Default);
+            {
+                _propertyChanged.Where(static name => name != nameof(SearchText)),
+                _propertyChanged.Where(static name => name == nameof(SearchText)).Debounce(AppConstants.SearchDebounce)
+            }
+            .Merge()
+            .Select(static _ => Unit.Default);
 
     public void Reset()
     {
@@ -70,9 +70,9 @@ public sealed partial class ChartFilterViewModel : ObservableObject
 
         var meta = chart.Manifest.Meta;
         return meta.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-            || (meta.NameRomanized?.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ?? false)
-            || meta.Author.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-            || meta.Maps.Values.Any(m => m.Charters.Any(c => c.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+               || (meta.NameRomanized?.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ?? false)
+               || meta.Author.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+               || meta.Maps.Values.Any(m => m.Charters.Any(c => c.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
     }
 
     private bool MatchesDifficulty(ChartDto chart)
@@ -83,9 +83,9 @@ public sealed partial class ChartFilterViewModel : ObservableObject
         }
 
         return (ShowEasy && chart.HasDifficulty(ChartDifficulty.Easy))
-            || (ShowHard && chart.HasDifficulty(ChartDifficulty.Hard))
-            || (ShowMaster && chart.HasDifficulty(ChartDifficulty.Master))
-            || (ShowHidden && chart.HasDifficulty(ChartDifficulty.Hidden));
+               || (ShowHard && chart.HasDifficulty(ChartDifficulty.Hard))
+               || (ShowMaster && chart.HasDifficulty(ChartDifficulty.Master))
+               || (ShowHidden && chart.HasDifficulty(ChartDifficulty.Hidden));
     }
 
     private bool MatchesRating(ChartDto chart)

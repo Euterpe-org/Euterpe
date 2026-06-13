@@ -24,7 +24,6 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     public partial bool AllModsLoaded { get; set; }
 
     public ModFilterViewModel Filter { get; } = new();
-
     public ReadOnlyObservableCollection<ModDto> Mods => _mods;
 
     public ModManagePanelViewModel()
