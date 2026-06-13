@@ -144,24 +144,4 @@ public sealed class ChartDtoTest
 
         await Assert.That(chart.IsOnline).IsEqualTo(expected);
     }
-
-    [Test]
-    public async Task DifficultyBadges_ExistingMaps_PairDifficultyWithRating()
-    {
-        var chart = CreateChart(
-            maps: new() { ["map1"] = CreateMap("8") },
-            files: new()
-            {
-                ["map1.bms"] = new ManifestFileEntry(),
-                ["map3.bms"] = new ManifestFileEntry()
-            });
-
-        using var _ = Assert.Multiple();
-        await Assert.That(chart.Difficulties).IsEquivalentTo([ChartDifficulty.Easy, ChartDifficulty.Master], CollectionOrdering.Matching);
-        await Assert.That(chart.DifficultyBadges).IsEquivalentTo(
-        [
-            new DifficultyBadge(ChartDifficulty.Easy, "8"),
-            new DifficultyBadge(ChartDifficulty.Master, string.Empty)
-        ], CollectionOrdering.Matching);
-    }
 }

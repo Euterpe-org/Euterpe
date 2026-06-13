@@ -62,7 +62,7 @@
             <ComboBox
                 Grid.Column="0"
                 MinWidth="110"
-                SelectedIndex="{Binding SelectedChartSourceIndex}">
+                SelectedIndex="{Binding Filter.SelectedChartSourceIndex}">
                 <ComboBoxItem
                     Content="{Localize {x:Static loc:XAMLLiteral.ChartSource_Online}}" />
                 <ComboBoxItem
@@ -73,7 +73,7 @@
                 Grid.Column="1"
                 Margin="12,0"
                 PlaceholderText="{Localize {x:Static loc:XAMLLiteral.SearchBarPlaceholder_Chart}}"
-                Text="{Binding SearchText}" />
+                Text="{Binding Filter.SearchText}" />
 
             <ComboBox
                 Grid.Column="2"
@@ -183,16 +183,16 @@
                                     Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_Difficulty}}" />
                                 <CheckBox
                                     Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Easy}}"
-                                    IsChecked="{Binding ShowEasy}" />
+                                    IsChecked="{Binding Filter.ShowEasy}" />
                                 <CheckBox
                                     Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hard}}"
-                                    IsChecked="{Binding ShowHard}" />
+                                    IsChecked="{Binding Filter.ShowHard}" />
                                 <CheckBox
                                     Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Master}}"
-                                    IsChecked="{Binding ShowMaster}" />
+                                    IsChecked="{Binding Filter.ShowMaster}" />
                                 <CheckBox
                                     Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hidden}}"
-                                    IsChecked="{Binding ShowHidden}" />
+                                    IsChecked="{Binding Filter.ShowHidden}" />
                             </StackPanel>
 
                             <StackPanel
@@ -204,7 +204,7 @@
                                     ColumnDefinitions="*,Auto,*">
                                     <NumericUpDown
                                         Grid.Column="0"
-                                        Value="{Binding RatingMin}"
+                                        Value="{Binding Filter.RatingMin}"
                                         FormatString="0"
                                         Increment="1"
                                         Maximum="12"
@@ -216,7 +216,7 @@
                                         VerticalAlignment="Center" />
                                     <NumericUpDown
                                         Grid.Column="2"
-                                        Value="{Binding RatingMax}"
+                                        Value="{Binding Filter.RatingMax}"
                                         FormatString="0"
                                         Increment="1"
                                         Maximum="12"
@@ -233,7 +233,7 @@
                                     ColumnDefinitions="*,Auto,*">
                                     <NumericUpDown
                                         Grid.Column="0"
-                                        Value="{Binding BpmMin}"
+                                        Value="{Binding Filter.BpmMin}"
                                         FormatString="0"
                                         Increment="10"
                                         Maximum="999"
@@ -245,7 +245,7 @@
                                         VerticalAlignment="Center" />
                                     <NumericUpDown
                                         Grid.Column="2"
-                                        Value="{Binding BpmMax}"
+                                        Value="{Binding Filter.BpmMax}"
                                         FormatString="0"
                                         Increment="10"
                                         Maximum="999"
@@ -257,10 +257,10 @@
                                 Spacing="6">
                                 <CheckBox
                                     Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_StreamerSafe}}"
-                                    IsChecked="{Binding StreamerSafeOnly}" />
+                                    IsChecked="{Binding Filter.StreamerSafeOnly}" />
                                 <CheckBox
                                     Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_HasVideo}}"
-                                    IsChecked="{Binding HasVideoOnly}" />
+                                    IsChecked="{Binding Filter.HasVideoOnly}" />
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
@@ -503,7 +503,7 @@
                                             <Border
                                                 Background="#40808080"
                                                 CornerRadius="3"
-                                                IsVisible="{Binding VideoPath, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                                IsVisible="{Binding HasVideo}"
                                                 Padding="5,1"
                                                 VerticalAlignment="Center">
                                                 <TextBlock

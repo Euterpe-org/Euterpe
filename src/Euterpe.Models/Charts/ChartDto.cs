@@ -35,6 +35,7 @@ public sealed partial class ChartDto : ObservableObject
 
     public string? AudioPath => AssetPath(DemoFileName) ?? AssetPath(MusicFileName);
     public string? VideoPath => AssetPath(VideoFileName);
+    public bool HasVideo => VideoPath is not null;
 
     // Difficulties
     public IReadOnlyList<ChartDifficulty> Difficulties =>
