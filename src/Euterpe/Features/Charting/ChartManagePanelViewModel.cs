@@ -111,17 +111,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             return;
         }
 
-        if (_playingChart is not null)
-        {
-            _playingChart.IsPlaying = false;
-        }
-
+        _playingChart?.IsPlaying = false;
         _playingChart = chart;
-
-        if (chart is not null)
-        {
-            chart.IsPlaying = true;
-        }
+        chart?.IsPlaying = true;
     }
 
     private ChartDto? OwnedChart(string? audioFilePath)
