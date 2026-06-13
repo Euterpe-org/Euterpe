@@ -78,7 +78,7 @@
 
                             <!--  Dropdown Arrow Icon  -->
                             <PathIcon
-                                Data="M 0 0 L 8 0 L 4 5 Z"
+                                Data="{StaticResource SemiIconTriangleDown}"
                                 Foreground="White"
                                 Height="5"
                                 Width="8" />
@@ -111,7 +111,7 @@
                                                         <!--  Selection Checkmark  -->
                                                         <PathIcon
                                                             Grid.Column="0"
-                                                            Data="{StaticResource CheckMark}"
+                                                            Data="{StaticResource SemiIconTick}"
                                                             Foreground="{DynamicResource FlyoutIconForeground}"
                                                             Height="16"
                                                             HorizontalAlignment="Left"

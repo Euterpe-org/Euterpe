@@ -69,9 +69,19 @@
 
             <TextBox
                 Grid.Column="1"
+                AcceptsReturn="False"
+                AcceptsTab="False"
+                Classes="ClearButton"
                 Margin="12,0"
+                MaxLength="30"
                 PlaceholderText="{Localize {x:Static loc:XAMLLiteral.SearchBarPlaceholder_Chart}}"
-                Text="{Binding Filter.SearchText}" />
+                Text="{Binding Filter.SearchText}">
+                <TextBox.InnerLeftContent>
+                    <PathIcon
+                        Data="{StaticResource SemiIconSearch}"
+                        Height="18" />
+                </TextBox.InnerLeftContent>
+            </TextBox>
 
             <ComboBox
                 Grid.Column="2"
@@ -327,11 +337,11 @@
                                                 </Style>
                                                 <Style
                                                     Selector="PathIcon.playPauseIcon">
-                                                    <Setter Property="Data" Value="{StaticResource PlayIcon}" />
+                                                    <Setter Property="Data" Value="{StaticResource SemiIconPlay}" />
                                                 </Style>
                                                 <Style
                                                     Selector="Button.Playing PathIcon.playPauseIcon">
-                                                    <Setter Property="Data" Value="{StaticResource PauseIcon}" />
+                                                    <Setter Property="Data" Value="{StaticResource SemiIconPause}" />
                                                 </Style>
                                             </Button.Styles>
 
@@ -548,12 +558,12 @@
                                                         </Style>
                                                         <Style
                                                             Selector="Button:pointerover PathIcon">
-                                                            <Setter Property="Foreground" Value="#F5333E" />
+                                                            <Setter Property="Foreground" Value="{DynamicResource SemiColorDanger}" />
                                                             <Setter Property="Opacity" Value="1" />
                                                         </Style>
                                                     </Button.Styles>
                                                     <PathIcon
-                                                        Data="M6 19 c0 1.1 .9 2 2 2 h8 c1.1 0 2 -.9 2 -2 V7 H6 v12 z M19 4 h-3.5 l-1 -1 h-5 l-1 1 H5 v2 h14 V4 z"
+                                                        Data="{StaticResource SemiIconDelete}"
                                                         Height="13"
                                                         Width="13" />
                                                 </Button>

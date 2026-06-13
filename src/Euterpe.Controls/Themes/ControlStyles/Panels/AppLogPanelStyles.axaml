@@ -40,11 +40,11 @@
     </Style>
     <Style
         Selector="ListBox.LogList ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="#10FFFFFF" />
+        <Setter Property="Background" Value="{DynamicResource SemiColorFill0}" />
     </Style>
     <Style
         Selector="ListBox.LogList ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="#18FFFFFF" />
+        <Setter Property="Background" Value="{DynamicResource SemiColorFill1}" />
     </Style>
 
     <!--  Log Entry Grid  -->
@@ -87,7 +87,7 @@
     <!--  Level Badge Colors  -->
     <Style
         Selector="Border.LogLevelBadge.TRC">
-        <Setter Property="Background" Value="#20808080" />
+        <Setter Property="Background" Value="{DynamicResource LabelTagLightGreyBackground}" />
         <Style
             Selector="^ TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource SemiGrey5}" />
@@ -95,7 +95,7 @@
     </Style>
     <Style
         Selector="Border.LogLevelBadge.DBG">
-        <Setter Property="Background" Value="#2054A9FF" />
+        <Setter Property="Background" Value="{DynamicResource LabelTagLightBlueBackground}" />
         <Style
             Selector="^ TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource SemiBlue5}" />
@@ -103,7 +103,7 @@
     </Style>
     <Style
         Selector="Border.LogLevelBadge.INF">
-        <Setter Property="Background" Value="#2050C8A8" />
+        <Setter Property="Background" Value="{DynamicResource LabelTagLightTealBackground}" />
         <Style
             Selector="^ TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource SemiTeal5}" />
@@ -111,7 +111,7 @@
     </Style>
     <Style
         Selector="Border.LogLevelBadge.WRN">
-        <Setter Property="Background" Value="#25F0B040" />
+        <Setter Property="Background" Value="{DynamicResource LabelTagLightYellowBackground}" />
         <Style
             Selector="^ TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource SemiYellow5}" />
@@ -119,7 +119,7 @@
     </Style>
     <Style
         Selector="Border.LogLevelBadge.ERR">
-        <Setter Property="Background" Value="#25F05050" />
+        <Setter Property="Background" Value="{DynamicResource LabelTagLightRedBackground}" />
         <Style
             Selector="^ TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource SemiRed5}" />
@@ -127,7 +127,7 @@
     </Style>
     <Style
         Selector="Border.LogLevelBadge.CRT">
-        <Setter Property="Background" Value="#25C060F0" />
+        <Setter Property="Background" Value="{DynamicResource LabelTagLightPurpleBackground}" />
         <Style
             Selector="^ TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource SemiPurple5}" />
