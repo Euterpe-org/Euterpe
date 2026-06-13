@@ -15,10 +15,6 @@ public sealed partial class ChartDto : ObservableObject
     public required Manifest Manifest { get; init; }
     public ChartSource Source { get; init; } = ChartSource.Offline;
 
-    // Binding Boolean Properties
-    [ObservableProperty]
-    public partial bool IsPlaying { get; set; }
-
     public bool IsOnline => Source is ChartSource.Online;
 
     // Web Urls

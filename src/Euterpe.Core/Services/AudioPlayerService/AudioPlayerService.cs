@@ -1,64 +1,69 @@
+using Avalonia.Threading;
 using SoundFlow.Abstracts;
 using SoundFlow.Abstracts.Devices;
 using SoundFlow.Components;
-using SoundFlow.Providers;
-using SoundFlow.Structs;
 
 namespace Euterpe.Core;
 
 internal sealed partial class AudioPlayerService : IAudioPlayerService
 {
     private AudioPlaybackDevice? _device;
+    private CancellationTokenSource? _playCts;
     private SoundPlayer? _player;
-    public string? PlayingFilePath { get; private set; }
+    private EventHandler<EventArgs>? _playerEndedHandler;
 
-    public event EventHandler<string?>? PlayingFileChanged;
-
-    public void Play(string filePath)
+    public async Task PlayAsync(string key, string filePath)
     {
         StopPlayer();
+        PlaybackState.Set(PlaybackStatus.Playing, key);
+
+        _playCts?.Cancel();
+        var cts = _playCts = new CancellationTokenSource();
 
         try
         {
-            var source = new StreamDataProvider(Engine, File.OpenRead(filePath));
-            var format = new AudioFormat
-            {
-                Format = source.SampleFormat,
-                Channels = source.FormatInfo!.ChannelCount,
-                Layout = AudioFormat.GetLayoutFromChannels(source.FormatInfo.ChannelCount),
-                SampleRate = source.SampleRate
-            };
-
-            var device = EnsureDevice(format);
-            _player = new SoundPlayer(Engine, format, new ResilientSoundDataProvider(source, Logger));
-            _player.PlaybackEnded += OnPlayerPlaybackEnded;
-            device.MasterMixer.AddComponent(_player);
-            _player.Play();
-            SetPlayingFile(filePath);
-
-            Logger.ZLogInformation($"Playing audio {filePath}");
+            var (source, format) = await Task.Run(() => Prepare(filePath), cts.Token).ConfigureAwait(false);
+            Dispatcher.UIThread.Post(() => Activate(source, format, cts));
+        }
+        catch (OperationCanceledException)
+        {
+            // Superseded by a newer play or stopped mid-load; not a failure.
         }
         catch (Exception ex)
         {
             Logger.ZLogWarning(ex, $"Failed to start audio playback for {filePath}");
-            NotificationService.ErrorLight(Notification_Content_Audio_Play_Failed);
-            StopPlayer();
-            SetPlayingFile(null);
+            Dispatcher.UIThread.Post(() => Fail(cts));
         }
     }
 
-    public void Pause() => _player?.Pause();
+    public void Pause()
+    {
+        _player?.Pause();
+        if (PlaybackState.PlayingKey is { } key)
+        {
+            PlaybackState.Set(PlaybackStatus.Paused, key);
+        }
+    }
 
-    public void Resume() => _player?.Play();
+    public void Resume()
+    {
+        _player?.Play();
+        if (PlaybackState.PlayingKey is { } key)
+        {
+            PlaybackState.Set(PlaybackStatus.Playing, key);
+        }
+    }
 
     public void Stop()
     {
+        _playCts?.Cancel();
         StopPlayer();
-        SetPlayingFile(null);
+        PlaybackState.Set(PlaybackStatus.Idle, null);
     }
 
     public void Dispose()
     {
+        _playCts?.Cancel();
         StopPlayer();
         _device?.Dispose();
     }
@@ -66,6 +71,7 @@ internal sealed partial class AudioPlayerService : IAudioPlayerService
     #region Injections
 
     public required AudioEngine Engine { get; init; }
+    public required PlaybackState PlaybackState { get; init; }
     public required ILogger<AudioPlayerService> Logger { get; init; }
     public required INotificationService NotificationService { get; init; }
 

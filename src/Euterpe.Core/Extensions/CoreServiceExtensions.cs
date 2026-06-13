@@ -107,6 +107,7 @@ public static class CoreServiceExtensions
         public void RegisterAppCoreServices()
         {
             builder.RegisterType<AuthState>().SingleInstance();
+            builder.RegisterType<PlaybackState>().SingleInstance();
             builder.RegisterType<Config>().PropertiesAutowired().SingleInstance();
 
             builder.RegisterType<MuseDashConfig>().AsSelf().SingleInstance();

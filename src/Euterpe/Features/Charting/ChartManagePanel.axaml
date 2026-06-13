@@ -310,13 +310,23 @@
                                         <!--  Cover: click toggles play/pause  -->
                                         <Button
                                             Classes="Transparent"
-                                            Classes.Playing="{Binding IsPlaying}"
                                             Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
                                             CommandParameter="{Binding}"
                                             Focusable="False"
                                             HorizontalContentAlignment="Stretch"
                                             Padding="0"
                                             VerticalContentAlignment="Stretch">
+                                            <Classes.Playing>
+                                                <MultiBinding
+                                                    Converter="{x:Static converters:FuncValueConverters.TileIsPlaying}">
+                                                    <Binding
+                                                        Path="$parent[UserControl].DataContext.Playback.PlayingKey" />
+                                                    <Binding
+                                                        Path="$parent[UserControl].DataContext.Playback.Status" />
+                                                    <Binding
+                                                        Path="FolderPath" />
+                                                </MultiBinding>
+                                            </Classes.Playing>
                                             <Button.Styles>
                                                 <!--  A local RenderTransform would outrank the :pointerover setter, so both live here  -->
                                                 <Style

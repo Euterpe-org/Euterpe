@@ -22,4 +22,9 @@ public static class FuncValueConverters
     public static FuncValueConverter<ChartDifficulty, Bitmap> DifficultyIconConverter { get; } =
         new(static difficulty => DifficultyIcons.GetOrAdd(difficulty, static d =>
             new Bitmap(AssetLoader.Open(AppAssets.Uri($"Difficulties/{d}.png")))));
+
+    // [PlaybackState.PlayingKey, PlaybackState.Status, ChartDto.FolderPath]
+    public static FuncMultiValueConverter<object?, bool> TileIsPlaying { get; } =
+        new(static values => values.ToArray() is [string playingKey, PlaybackStatus.Playing, string folderPath]
+                             && playingKey == folderPath);
 }

@@ -8,13 +8,13 @@ namespace Euterpe.Features.Charting;
 public sealed partial class ChartManagePanelViewModel : ViewModelBase
 {
     private readonly ReadOnlyObservableCollection<ChartDto> _charts;
-    private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderName);
-    private ChartDto? _pausedChart;
-    private ChartDto? _playingChart;
+    private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderPath);
 
     public static IReadOnlyList<EnumOption<ChartSource>> ChartSources { get; } =
-        [.. ChartSourceExtensions.GetValues().Select(static source =>
-            new EnumOption<ChartSource>(source, $"{nameof(ChartSource)}_{source.ToStringFast()}"))];
+    [
+        .. ChartSourceExtensions.GetValues().Select(static source =>
+            new EnumOption<ChartSource>(source, $"{nameof(ChartSource)}_{source.ToStringFast()}"))
+    ];
 
     public static IReadOnlyList<EnumOption<ChartSortField>> SortFields { get; } =
     [
@@ -60,72 +60,30 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         ChartManageService.Connect().PopulateInto(_sourceCache);
         AllChartsLoaded = true;
 
-        AudioPlayerService.PlayingFileChanged += OnPlayingFileChanged;
-
         Logger.ZLogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
     }
 
     [RelayCommand]
     private async Task TogglePlayAsync(ChartDto chart)
     {
-        if (_playingChart == chart)
+        if (Playback.PlayingKey == chart.FolderPath)
         {
-            AudioPlayerService.Pause();
-            _pausedChart = chart;
-            SetPlayingChart(null);
+            if (Playback.Status is PlaybackStatus.Playing)
+            {
+                AudioPlayerService.Pause();
+            }
+            else
+            {
+                AudioPlayerService.Resume();
+            }
+
             return;
         }
 
-        if (_pausedChart == chart)
+        if (chart.AudioPath is { } audioPath)
         {
-            AudioPlayerService.Resume();
-            _pausedChart = null;
-            SetPlayingChart(chart);
-            return;
+            await AudioPlayerService.PlayAsync(chart.FolderPath, audioPath).ConfigureAwait(false);
         }
-
-        if (chart.AudioPath is not { } audioPath)
-        {
-            return;
-        }
-
-        _pausedChart = null;
-        SetPlayingChart(chart);
-        await Task.Run(() => AudioPlayerService.Play(audioPath)).ConfigureAwait(false);
-    }
-
-    private void OnPlayingFileChanged(object? sender, string? playingFilePath)
-    {
-        var playingChart = OwnedChart(playingFilePath);
-        Dispatcher.UIThread.Post(() =>
-        {
-            SetPlayingChart(playingChart);
-            _pausedChart = null;
-        });
-    }
-
-    private void SetPlayingChart(ChartDto? chart)
-    {
-        if (_playingChart == chart)
-        {
-            return;
-        }
-
-        _playingChart?.IsPlaying = false;
-        _playingChart = chart;
-        chart?.IsPlaying = true;
-    }
-
-    private ChartDto? OwnedChart(string? audioFilePath)
-    {
-        if (Path.GetDirectoryName(audioFilePath) is not { } folderPath)
-        {
-            return null;
-        }
-
-        return _sourceCache.Lookup(Path.GetFileName(folderPath)) is { HasValue: true, Value: var chart } && chart.FolderPath == folderPath
-            ? chart
-            : null;
     }
 
     [RelayCommand]
@@ -134,7 +92,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task RemoveChartAsync(ChartDto chart)
     {
-        if (_playingChart == chart || _pausedChart == chart)
+        if (Playback.PlayingKey == chart.FolderPath)
         {
             AudioPlayerService.Stop();
         }
@@ -204,6 +162,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     #region Injections
 
+    public required PlaybackState Playback { get; init; }
     public required IAudioPlayerService AudioPlayerService { get; init; }
     public required IChartManageService ChartManageService { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
