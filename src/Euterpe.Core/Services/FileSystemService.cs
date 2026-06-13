@@ -71,6 +71,29 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
+    public async Task<bool> TryWriteFileAtomicAsync(string filePath, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default)
+    {
+        var tempPath = filePath + ".tmp";
+        try
+        {
+            var directory = Path.GetDirectoryName(filePath);
+            if (!directory.IsNullOrEmpty())
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            await File.WriteAllBytesAsync(tempPath, bytes, cancellationToken).ConfigureAwait(false);
+            File.Move(tempPath, filePath, true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to write file {filePath}");
+            TryDeleteFile(tempPath, DeleteOption.IgnoreIfNotFound);
+            return false;
+        }
+    }
+
     public void DeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
         if (deleteOption is DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
@@ -127,5 +150,21 @@ internal sealed class FileSystemService : IFileSystemService
         {
             CopyDirectory(directory, Path.Combine(destinationPath, Path.GetFileName(directory)));
         }
+    }
+
+    public IReadOnlyDictionary<string, long> GetFileSizes(string directory)
+    {
+        var sizes = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase);
+        if (!Directory.Exists(directory))
+        {
+            return sizes;
+        }
+
+        foreach (var file in new DirectoryInfo(directory).EnumerateFiles())
+        {
+            sizes[file.Name] = file.Length;
+        }
+
+        return sizes;
     }
 }

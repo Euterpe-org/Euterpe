@@ -16,6 +16,9 @@
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
     <value>选择谱面文件</value>
   </data>
+  <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
+    <value>选择 EPK 文件</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>选择 Steam 可执行文件</value>
   </data>
@@ -57,6 +60,9 @@
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>安装 .NET 10 SDK 失败</value>
+  </data>
+  <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
+    <value>放弃未保存的更改吗？</value>
   </data>
   <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
     <value>登录失败，是否重试？选择“否”将关闭 Euterpe。</value>
@@ -173,6 +179,21 @@
   </data>
   <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
     <value>所有谱面均已是最新</value>
+  </data>
+  <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
+    <value>在线谱面不可编辑</value>
+  </data>
+  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
+    <value>此 EPK 引用的 {0} 个文件在所在文件夹中缺失</value>
+  </data>
+  <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
+    <value>不是有效的 EPK 文件</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Failed" xml:space="preserve">
+    <value>保存「{0}」失败</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
+    <value>已保存「{0}」</value>
   </data>
   <data name="Notification_Content_Migration_None" xml:space="preserve">
     <value>没有可迁移的 MDM 谱面</value>

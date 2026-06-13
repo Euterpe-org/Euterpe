@@ -2,6 +2,8 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.Features.Charting"
     x:Class="Euterpe.Features.Charting.CharterToolkitPanel"
@@ -14,11 +16,32 @@
         <vm:CharterToolkitPanelViewModel />
     </Design.DataContext>
 
-    <TextBlock
-        HorizontalAlignment="Center"
-        TextAlignment="Center"
-        VerticalAlignment="Center">
-        CharterToolkitPanel still work in progress...
-    </TextBlock>
+    <Panel>
+        <!--  Tool launcher (shown when no tool is active)  -->
+        <StackPanel
+            Classes="ContentListRoot"
+            IsVisible="{Binding ActiveTool, Converter={x:Static ObjectConverters.IsNull}}">
+            <e:LabeledSection
+                Description="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Launcher_Description}}"
+                Title="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Launcher_Title}}">
+                <Button
+                    Classes="Primary"
+                    Command="{Binding OpenEpkEditorCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.EpkEditor_OpenFile}}"
+                    HorizontalAlignment="Left" />
+            </e:LabeledSection>
+        </StackPanel>
+
+        <!--  Active tool fills the panel  -->
+        <ContentControl
+            Content="{Binding ActiveTool}">
+            <ContentControl.DataTemplates>
+                <DataTemplate
+                    DataType="{x:Type vm:EpkEditorPanelViewModel}">
+                    <vm:EpkEditorPanel />
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+    </Panel>
 
 </UserControl>

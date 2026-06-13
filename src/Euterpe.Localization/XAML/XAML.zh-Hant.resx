@@ -163,6 +163,81 @@
   <data name="Dropdown_Vanilla" xml:space="preserve">
     <value>原版</value>
   </data>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
+    <value>區間</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>背景影片不透明度</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>簡介</value>
+  </data>
+  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
+    <value>難度</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>檔案</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>隱藏提示</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>隱藏模式</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>隱藏難度值覆寫</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>名稱</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>羅馬音名稱</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>適合直播</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>場景</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>彩蛋場景</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>搜尋關鍵字</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
+    <value>多個關鍵字以逗號分隔</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>重新整理</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>開啟並編輯譜面 manifest.epk 的元數據</value>
+  </data>
+  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
+    <value>EPK 元數據編輯器</value>
+  </data>
+  <data name="EpkEditor_Map_Charters" xml:space="preserve">
+    <value>譜師</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>難度值</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>開啟 EPK 檔案…</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>儲存</value>
+  </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>應用程式記錄檔</value>
   </data>

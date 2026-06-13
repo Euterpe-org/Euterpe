@@ -26,6 +26,9 @@ internal sealed class MessagePackSerializationService : IMessagePackSerializatio
         }
     }
 
+    public byte[] SerializeManifest(Manifest value) =>
+        MessagePackSerializer.Serialize(value, Options);
+
     public void SerializeManifest(Stream stream, Manifest value) =>
         MessagePackSerializer.Serialize(stream, value, Options);
 

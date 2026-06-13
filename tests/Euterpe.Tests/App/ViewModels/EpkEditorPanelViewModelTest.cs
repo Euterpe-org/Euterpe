@@ -1,0 +1,122 @@
+using Euterpe.Features.Charting;
+
+namespace Euterpe.Tests;
+
+[Category("EpkEditorPanelViewModelTests")]
+[TestSubject(typeof(EpkEditorPanelViewModel))]
+public sealed class EpkEditorPanelViewModelTest
+{
+    [Test]
+    public async Task Open_ReplacingAnEditedChart_ResetsAllState()
+    {
+        var vm = NewViewModel();
+
+        vm.Open("C:/charts/B/manifest.epk", RangeChartWithHidden());
+        vm.Name = "edited";
+        vm.SearchKeywordsText = "edited keywords";
+        vm.Maps[0].Rating = "999";
+
+        vm.Open("C:/charts/A/manifest.epk", SingleChartWithoutHidden());
+
+        using var _ = Assert.Multiple();
+        await Assert.That(vm.Name).IsEqualTo("Song A");
+        await Assert.That(vm.Author).IsEqualTo("Author A");
+        await Assert.That(vm.SafeForStreamer).IsTrue();
+        await Assert.That(vm.IsBpmRange).IsFalse();
+        await Assert.That(vm.Bpm).IsEqualTo(120);
+        await Assert.That(vm.BpmMin).IsNull();
+        await Assert.That(vm.BpmMax).IsNull();
+        await Assert.That(vm.SearchKeywordsText).IsEqualTo("a, b");
+        await Assert.That(vm.HasHiddenDifficulty).IsFalse();
+        await Assert.That(vm.Maps.Count).IsEqualTo(2);
+        await Assert.That(vm.Maps[0].Difficulty).IsEqualTo(ChartDifficulty.Easy);
+        await Assert.That(vm.Maps[1].Difficulty).IsEqualTo(ChartDifficulty.Hard);
+        await Assert.That(vm.Maps[0].Rating).IsEqualTo("3");
+        await Assert.That(vm.Files.Count).IsEqualTo(2);
+    }
+
+    [Test]
+    public async Task Open_RangeChartWithHidden_PopulatesRangeAndHideSection()
+    {
+        var vm = NewViewModel();
+
+        vm.Open("C:/charts/B/manifest.epk", RangeChartWithHidden());
+
+        using var _ = Assert.Multiple();
+        await Assert.That(vm.IsBpmRange).IsTrue();
+        await Assert.That(vm.BpmMin).IsEqualTo(130);
+        await Assert.That(vm.BpmMax).IsEqualTo(160);
+        await Assert.That(vm.HasHiddenDifficulty).IsTrue();
+        await Assert.That(vm.Maps[^1].Difficulty).IsEqualTo(ChartDifficulty.Hidden);
+    }
+
+    private static EpkEditorPanelViewModel NewViewModel()
+    {
+        var fileSystem = IFileSystemService.Mock();
+        fileSystem.GetFileSizes(Any<string>()).Returns(new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["map1.bms"] = 1,
+            ["map2.bms"] = 1,
+            ["map4.bms"] = 1,
+            ["music.ogg"] = 1
+        });
+
+        return new EpkEditorPanelViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            FileSystemService = fileSystem,
+            MessageBoxService = IMessageBoxService.Mock(),
+            MessagePackSerialization = IMessagePackSerializationService.Mock(),
+            NotificationService = INotificationService.Mock()
+        };
+    }
+
+    private static Manifest SingleChartWithoutHidden() => new()
+    {
+        Schema = Manifest.CurrentSchema,
+        Meta = new ManifestMeta
+        {
+            Name = "Song A",
+            Author = "Author A",
+            Scene = "scene-a",
+            SafeForStreamer = true,
+            Bpm = 120,
+            SearchKeywords = ["a", "b"],
+            Maps = new Dictionary<string, ManifestMap>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["map1"] = new() { Rating = "3", Charters = ["alice"] },
+                ["map2"] = new() { Rating = "6", Charters = ["bob"] }
+            }
+        },
+        Files = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["map1.bms"] = new() { Version = 1, Size = 10 },
+            ["music.ogg"] = new() { Version = 1, Size = 20 }
+        }
+    };
+
+    private static Manifest RangeChartWithHidden() => new()
+    {
+        Schema = Manifest.CurrentSchema,
+        Meta = new ManifestMeta
+        {
+            Name = "Song B",
+            Author = "Author B",
+            Scene = "scene-b",
+            SafeForStreamer = false,
+            Bpm = 140,
+            BpmMin = 130,
+            BpmMax = 160,
+            Maps = new Dictionary<string, ManifestMap>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["map1"] = new() { Rating = "5", Charters = ["carol"] },
+                ["map4"] = new() { Rating = "?", Charters = ["dave"] }
+            }
+        },
+        Files = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["map1.bms"] = new() { Version = 1, Size = 11 },
+            ["map4.bms"] = new() { Version = 1, Size = 22 }
+        }
+    };
+}
