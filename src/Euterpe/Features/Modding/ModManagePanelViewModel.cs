@@ -12,20 +12,18 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
 
     public static IReadOnlyList<EnumOption<ModFilterType>> ModFilters { get; } =
-        [.. ModFilterTypeExtensions.GetValues().Select(static filter =>
-            new EnumOption<ModFilterType>(filter, $"{nameof(ModFilterType)}_{filter.ToStringFast()}"))];
-
-    [ObservableProperty]
-    public partial string? SearchText { get; set; }
+    [
+        .. ModFilterTypeExtensions.GetValues().Select(static filter =>
+            new EnumOption<ModFilterType>(filter, $"{nameof(ModFilterType)}_{filter.ToStringFast()}"))
+    ];
 
     [ObservableProperty]
     public partial ModDto SelectedMod { get; set; } = null!;
 
     [ObservableProperty]
-    public partial ModFilterType ModFilter { get; set; } = ModFilterType.All;
-
-    [ObservableProperty]
     public partial bool AllModsLoaded { get; set; }
+
+    public ModFilterViewModel Filter { get; } = new();
 
     public ReadOnlyObservableCollection<ModDto> Mods => _mods;
 
@@ -41,15 +39,18 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
             .ThenByDescending(x => x.DownloadCount)
             .ThenByAscending(x => x.Name);
 
+        var filterState = new[]
+            {
+                Filter.Changed.Where(static name => name != nameof(ModFilterViewModel.SearchText)),
+                Filter.Changed.Where(static name => name == nameof(ModFilterViewModel.SearchText))
+                    .Debounce(AppConstants.SearchDebounce)
+            }
+            .Merge()
+            .Select(this, static (_, vm) => vm.Filter)
+            .Prepend(Filter);
+
         _sourceCache.Connect()
-            .Filter(x => SearchText.IsNullOrEmpty()
-                         || x.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-                         || x.Author.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-            .Filter(x => ModFilter is not ModFilterType.Installed || x.IsLocal)
-            .Filter(x => ModFilter is not ModFilterType.Enabled || x is { IsDisabled: false, IsLocal: true })
-            .Filter(x => ModFilter is not ModFilterType.Disabled || x is { IsDisabled: true, IsLocal: true })
-            .Filter(x => ModFilter is not ModFilterType.Outdated || x.State is ModState.Outdated)
-            .Filter(x => ModFilter is not ModFilterType.Incompatible || x is { State: ModState.Incompatible, IsLocal: true })
+            .Filter(filterState.AsSystemObservable(), static (filter, mod) => filter.Matches(mod))
             .SortAndBind(out _mods, comparer)
             .Subscribe();
     }
@@ -98,12 +99,6 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
         await ModManageService.ImportModsAsync(paths).ConfigureAwait(false);
     }
-
-    [UsedImplicitly]
-    partial void OnModFilterChanged(ModFilterType value) => _sourceCache.Refresh();
-
-    [UsedImplicitly]
-    partial void OnSearchTextChanged(string? value) => _sourceCache.Refresh();
 
     #region Injections
 

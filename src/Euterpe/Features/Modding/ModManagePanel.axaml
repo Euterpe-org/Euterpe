@@ -69,7 +69,7 @@
                         Margin="0,0,10,0"
                         MaxLength="30"
                         PlaceholderText="{Localize {x:Static loc:XAMLLiteral.SearchBarPlaceholder_Mod}}"
-                        Text="{Binding SearchText, Mode=OneWayToSource}">
+                        Text="{Binding Filter.SearchText, Mode=OneWayToSource}">
                         <TextBox.InnerLeftContent>
                             <PathIcon
                                 Data="{StaticResource SemiIconSearch}"
@@ -82,7 +82,7 @@
                         Grid.Column="1"
                         DisplayMemberBinding="{Binding Display.Value}"
                         ItemsSource="{Binding ModFilters, Mode=OneTime}"
-                        SelectedValue="{Binding ModFilter, Mode=TwoWay}"
+                        SelectedValue="{Binding Filter.ModFilter, Mode=TwoWay}"
                         SelectedValueBinding="{Binding Value}" />
 
                 </Grid>

@@ -36,7 +36,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             {
                 Filter.Changed.Where(static name => name != nameof(ChartFilterViewModel.SearchText)),
                 Filter.Changed.Where(static name => name == nameof(ChartFilterViewModel.SearchText))
-                    .Debounce(TimeSpan.FromMilliseconds(300))
+                    .Debounce(AppConstants.SearchDebounce)
             }
             .Merge()
             .Select(this, static (_, vm) => vm.Filter)

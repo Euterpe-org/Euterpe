@@ -16,8 +16,8 @@ public sealed class ModManagePanelViewModelTest
 
         using var assertions = Assert.Multiple();
         await Assert.That(vm.Mods).IsEmpty();
-        await Assert.That(vm.SearchText).IsNull();
-        await Assert.That(vm.ModFilter).IsEqualTo(ModFilterType.All);
+        await Assert.That(vm.Filter.SearchText).IsNull();
+        await Assert.That(vm.Filter.ModFilter).IsEqualTo(ModFilterType.All);
         await Assert.That(vm.AllModsLoaded).IsFalse();
     }
 
@@ -30,11 +30,11 @@ public sealed class ModManagePanelViewModelTest
     {
         var vm = NewViewModel();
         var changed = new List<string?>();
-        vm.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
+        vm.Filter.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
 
-        vm.SearchText = "hello";
+        vm.Filter.SearchText = "hello";
 
-        await Assert.That(changed).Contains(nameof(ModManagePanelViewModel.SearchText));
+        await Assert.That(changed).Contains(nameof(ModFilterViewModel.SearchText));
     }
 
     [Test]
