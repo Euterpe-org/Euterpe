@@ -21,10 +21,24 @@ public sealed class EnvVariableStepTest
     {
         var pathEnvironment = IGamePathEnvironment.Mock();
         pathEnvironment.IsSet().Returns(false);
+        pathEnvironment.Set().Returns(true);
         var step = new EnvVariableStep { PathEnvironment = pathEnvironment };
 
         await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         pathEnvironment.Set().WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task ExecuteAsync_WhenSetFails_Throws()
+    {
+        var pathEnvironment = IGamePathEnvironment.Mock();
+        pathEnvironment.IsSet().Returns(false);
+        pathEnvironment.Set().Returns(false);
+        var step = new EnvVariableStep { PathEnvironment = pathEnvironment };
+
+        var act = () => step.ExecuteAsync(new Progress<string>(_ => { }));
+
+        await Assert.That(act).Throws<InvalidOperationException>();
     }
 }

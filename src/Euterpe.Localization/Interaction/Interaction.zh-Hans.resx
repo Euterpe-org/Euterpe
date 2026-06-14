@@ -61,6 +61,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>安装 .NET 10 SDK 失败</value>
   </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Success" xml:space="preserve">
+    <value>.NET 10 SDK 安装成功</value>
+  </data>
   <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
     <value>放弃未保存的更改吗？</value>
   </data>
@@ -100,11 +103,17 @@
   <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
     <value>Mod 模板安装失败</value>
   </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Success" xml:space="preserve">
+    <value>Mod 模板安装成功</value>
+  </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
     <value>确定要卸载 Mod 模板吗？</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
     <value>Mod 模板卸载失败</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Success" xml:space="preserve">
+    <value>Mod 模板卸载成功</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
     <value>发现新版本：{0}，是否升级？</value>

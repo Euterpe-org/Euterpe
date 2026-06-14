@@ -61,6 +61,9 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>Failed to install .NET 10 SDK</value>
   </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Success" xml:space="preserve">
+    <value>.NET 10 SDK has been successfully installed</value>
+  </data>
   <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
     <value>Discard unsaved changes?</value>
   </data>
@@ -100,11 +103,17 @@
   <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
     <value>Failed to install Mod Template</value>
   </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Success" xml:space="preserve">
+    <value>Mod Template has been successfully installed</value>
+  </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
     <value>Are you sure you want to uninstall the Mod Template?</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
     <value>Failed to uninstall Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Success" xml:space="preserve">
+    <value>Mod Template uninstalled successfully</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
     <value>New version available: {0}, do you want to upgrade?</value>

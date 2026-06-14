@@ -48,6 +48,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
 
         Logger.ZLogInformation($"DotNet SDK installed successfully");
         DotNetSdkInstalled = true;
+        await MessageBoxService.SuccessAsync(MessageBox_Content_DotNetSDK_Install_Success).ConfigureAwait(false);
     }
 
     [RelayCommand(CanExecute = nameof(DotNetSdkInstalled))]
@@ -68,6 +69,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             await ModTemplateInstaller.InstallAsync().ConfigureAwait(true);
             Logger.ZLogInformation($"Mod Template installed successfully");
             ModTemplateInstalled = true;
+            await MessageBoxService.SuccessAsync(MessageBox_Content_ModTemplate_Install_Success).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -90,6 +92,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             await ModTemplateInstaller.UninstallAsync().ConfigureAwait(true);
             Logger.ZLogInformation($"Mod Template uninstalled successfully");
             ModTemplateInstalled = false;
+            await MessageBoxService.SuccessAsync(MessageBox_Content_ModTemplate_Uninstall_Success).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
