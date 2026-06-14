@@ -42,14 +42,13 @@ public sealed partial class DeepLinkService
 
         var action = parsed.Host;
         var path = Uri.UnescapeDataString(parsed.AbsolutePath.TrimStart('/'));
-        var query = Uri.UnescapeDataString(parsed.Query.TrimStart('?'));
 
         if (ShouldActivateWindow(parsed.Query))
         {
             ActivateMainWindow(true);
         }
 
-        HandleActionAsync(action, path, query).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {argument}"));
+        HandleActionAsync(action, path).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {argument}"));
     }
 
     private static bool ShouldActivateWindow(string query) =>
@@ -67,7 +66,7 @@ public sealed partial class DeepLinkService
         return argument.EndsWith(ChartFiles.ManifestExtension, StringComparison.OrdinalIgnoreCase) ? argument : null;
     }
 
-    private async Task HandleActionAsync(string action, string path, string query)
+    private async Task HandleActionAsync(string action, string path)
     {
         switch (action)
         {
@@ -88,7 +87,7 @@ public sealed partial class DeepLinkService
                 break;
 
             default:
-                Logger.ZLogWarning($"Unknown deep link action '{action}' with path '{path}' and query '{query}'");
+                Logger.ZLogWarning($"Unknown deep link action '{action}' with path '{path}'");
                 break;
         }
     }
