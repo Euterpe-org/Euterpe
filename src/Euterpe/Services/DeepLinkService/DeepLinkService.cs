@@ -27,6 +27,12 @@ public sealed partial class DeepLinkService
     {
         Logger.ZLogInformation($"Activation received: {argument}");
 
+        if (Uri.TryCreate(argument, UriKind.Absolute, out var parsed) && parsed.Scheme is ISystemAssociationSetup.DeepLinkScheme)
+        {
+            HandleDeepLink(parsed);
+            return;
+        }
+
         if (GetEpkPath(argument) is { } epkFilePath)
         {
             ActivateMainWindow(true);
@@ -34,21 +40,20 @@ public sealed partial class DeepLinkService
             return;
         }
 
-        if (!Uri.TryCreate(argument, UriKind.Absolute, out var parsed) || parsed.Scheme is not ISystemAssociationSetup.DeepLinkScheme)
-        {
-            Logger.ZLogWarning($"Unhandled activation: {argument}");
-            return;
-        }
+        Logger.ZLogWarning($"Unhandled activation: {argument}");
+    }
 
-        var action = parsed.Host;
-        var path = Uri.UnescapeDataString(parsed.AbsolutePath.TrimStart('/'));
-
-        if (ShouldActivateWindow(parsed.Query))
+    private void HandleDeepLink(Uri uri)
+    {
+        if (ShouldActivateWindow(uri.Query))
         {
             ActivateMainWindow(true);
         }
 
-        HandleActionAsync(action, path).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {argument}"));
+        var action = uri.Host;
+        var path = Uri.UnescapeDataString(uri.AbsolutePath.TrimStart('/'));
+
+        HandleActionAsync(action, path).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {uri}"));
     }
 
     private static bool ShouldActivateWindow(string query) =>
