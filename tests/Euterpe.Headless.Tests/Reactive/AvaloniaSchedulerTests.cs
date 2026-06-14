@@ -9,45 +9,45 @@ namespace Euterpe.Headless.Tests.Reactive;
 public sealed class AvaloniaSchedulerTests : HeadlessTest
 {
     [Test]
-    public Task Schedule_OnUiThread_RunsInline() => RunOnUI(async () =>
+    public Task Schedule_OnUIThread_RunsInline() => RunOnUI(async () =>
     {
         var ranSynchronously = false;
-        var ranOnUiThread = false;
+        var ranOnUIThread = false;
 
         AvaloniaScheduler.Instance.Schedule(() =>
         {
             ranSynchronously = true;
-            ranOnUiThread = Dispatcher.UIThread.CheckAccess();
+            ranOnUIThread = Dispatcher.UIThread.CheckAccess();
         });
 
         using var _ = Assert.Multiple();
         await Assert.That(ranSynchronously).IsTrue();
-        await Assert.That(ranOnUiThread).IsTrue();
+        await Assert.That(ranOnUIThread).IsTrue();
     });
 
     [Test]
-    public Task Schedule_OffUiThread_PostsToUiThread() => RunOnUI(async () =>
+    public Task Schedule_OffUIThread_PostsToUIThread() => RunOnUI(async () =>
     {
-        var ranOnUiThread = false;
+        var ranOnUIThread = false;
 
         await Task.Run(() =>
-            AvaloniaScheduler.Instance.Schedule(() => ranOnUiThread = Dispatcher.UIThread.CheckAccess()));
+            AvaloniaScheduler.Instance.Schedule(() => ranOnUIThread = Dispatcher.UIThread.CheckAccess()));
         Dispatcher.UIThread.RunJobs();
 
-        await Assert.That(ranOnUiThread).IsTrue();
+        await Assert.That(ranOnUIThread).IsTrue();
     });
 
     [Test]
-    public Task SortAndBindOnUi_BackgroundMutation_BindsOnUiThreadInSortedOrder() => RunOnUI(async () =>
+    public Task SortAndBindOnUI_BackgroundMutation_BindsOnUIThreadInSortedOrder() => RunOnUI(async () =>
     {
         var cache = new SourceCache<Item, int>(item => item.Id);
         using var subscription = cache.Connect()
-            .SortAndBindOnUi(out var items, Comparer<Item>.Create((left, right) => left.Id.CompareTo(right.Id)))
+            .SortAndBindOnUI(out var items, Comparer<Item>.Create((left, right) => left.Id.CompareTo(right.Id)))
             .Subscribe();
 
-        var boundOffUiThread = false;
+        var boundOffUIThread = false;
         ((INotifyCollectionChanged)items).CollectionChanged += (_, _) =>
-            boundOffUiThread |= !Dispatcher.UIThread.CheckAccess();
+            boundOffUIThread |= !Dispatcher.UIThread.CheckAccess();
 
         await Task.Run(() =>
         {
@@ -60,7 +60,7 @@ public sealed class AvaloniaSchedulerTests : HeadlessTest
         await Assert.That(items.Count).IsEqualTo(2);
         await Assert.That(items[0].Id).IsEqualTo(1);
         await Assert.That(items[1].Id).IsEqualTo(2);
-        await Assert.That(boundOffUiThread).IsFalse();
+        await Assert.That(boundOffUIThread).IsFalse();
     });
 
     private sealed record Item(int Id);

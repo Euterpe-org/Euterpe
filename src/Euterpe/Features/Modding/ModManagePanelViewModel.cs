@@ -40,7 +40,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
         _sourceCache.Connect()
             .Filter(mod => Filter.Matches(mod))
-            .SortAndBindOnUi(out _mods, comparer)
+            .SortAndBindOnUI(out _mods, comparer)
             .Subscribe();
 
         Filter.Changed.Subscribe(this, static (_, vm) => vm._sourceCache.Refresh());
