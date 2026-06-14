@@ -42,6 +42,7 @@ global using Euterpe.Features.Setting;
 global using Euterpe.Features.Setup;
 global using Euterpe.Features.Wizard;
 global using Euterpe.Mvvm;
+global using Euterpe.Reactive;
 global using Euterpe.Shell;
 global using JetBrains.Annotations;
 global using Microsoft.Extensions.Logging;
