@@ -104,7 +104,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task UpdateAllChartsAsync(CancellationToken cancellationToken)
     {
-        if (await ChartManageService.UpdateAllChartsAsync(cancellationToken).ConfigureAwait(true) is 0)
+        var updatedCount = await ChartManageService.UpdateAllChartsAsync(cancellationToken).ConfigureAwait(true);
+        if (updatedCount is 0)
         {
             NotificationService.NoticeLight(Notification_Content_Chart_UpdateAll_UpToDate);
         }
@@ -129,7 +130,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         try
         {
             var progress = new Progress<MigrationProgress>(MigrationDialog.Report);
-            if (await ChartManageService.MigrateCustomAlbumsAsync(progress).ConfigureAwait(true) is 0)
+            var migratedCount = await ChartManageService.MigrateCustomAlbumsAsync(progress).ConfigureAwait(true);
+            if (migratedCount is 0)
             {
                 NotificationService.NoticeLight(Notification_Content_Migration_None);
             }
