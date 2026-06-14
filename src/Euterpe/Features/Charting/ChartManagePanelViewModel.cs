@@ -47,7 +47,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
         _sourceCache.Connect()
             .Filter(chart => Filter.Matches(chart))
-            .SortAndBind(out _charts, comparer.AsSystemObservable())
+            .SortAndBindOnUi(out _charts, comparer.AsSystemObservable())
             .Subscribe();
 
         Filter.Changed.Subscribe(this, static (_, vm) => vm._sourceCache.Refresh());

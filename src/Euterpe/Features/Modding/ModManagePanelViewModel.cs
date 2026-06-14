@@ -40,7 +40,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
         _sourceCache.Connect()
             .Filter(mod => Filter.Matches(mod))
-            .SortAndBind(out _mods, comparer)
+            .SortAndBindOnUi(out _mods, comparer)
             .Subscribe();
 
         Filter.Changed.Subscribe(this, static (_, vm) => vm._sourceCache.Refresh());
@@ -48,8 +48,8 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
 
     protected override async Task OnInitializeAsync()
     {
-        await base.OnInitializeAsync().ConfigureAwait(false);
-        await ModManageService.InitializeModsAsync().ConfigureAwait(false);
+        await base.OnInitializeAsync().ConfigureAwait(true);
+        await ModManageService.InitializeModsAsync().ConfigureAwait(true);
 
         ModManageService.Connect().PopulateInto(_sourceCache);
 
