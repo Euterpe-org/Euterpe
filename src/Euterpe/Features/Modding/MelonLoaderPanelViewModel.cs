@@ -25,6 +25,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task InstallMelonLoaderAsync()
     {
+        Logger.ZLogInformation($"Installing MelonLoader");
         try
         {
             MelonLoaderInstallStatus = InstallStatus.Downloading;
@@ -49,6 +50,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task UninstallMelonLoaderAsync()
     {
+        Logger.ZLogInformation($"Uninstalling MelonLoader");
         try
         {
             await GameLocalService.UninstallMelonLoaderAsync().ConfigureAwait(true);
