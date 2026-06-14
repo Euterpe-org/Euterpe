@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using Avalonia.Platform.Storage;
+using Euterpe.Models.Migrations;
 
 namespace Euterpe.Features.Charting;
 
@@ -110,11 +111,34 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task MigrateCustomAlbumsAsync(CancellationToken cancellationToken)
+    private async Task MigrateCustomAlbumsAsync()
     {
-        if (await ChartManageService.MigrateCustomAlbumsAsync(cancellationToken: cancellationToken).ConfigureAwait(true) is 0)
+        MigrationDialog.Reset();
+
+        var options = new OverlayDialogOptions
         {
-            NotificationService.NoticeLight(Notification_Content_Migration_None);
+            Title = ChartManage_Migrating,
+            CanDragMove = false,
+            CanResize = false,
+            IsCloseButtonVisible = false
+        };
+
+        GameSwitcher.CanSwitch = false;
+        var dialog = DialogService.ShowOverlayAsync<MigrationProgressDialog, MigrationProgressDialogViewModel, object>(
+            MigrationDialog, options, MainWindowViewModel.DialogHostId);
+        try
+        {
+            var progress = new Progress<MigrationProgress>(MigrationDialog.Report);
+            if (await ChartManageService.MigrateCustomAlbumsAsync(progress).ConfigureAwait(true) is 0)
+            {
+                NotificationService.NoticeLight(Notification_Content_Migration_None);
+            }
+        }
+        finally
+        {
+            MigrationDialog.Close();
+            GameSwitcher.CanSwitch = true;
+            await dialog.ConfigureAwait(true);
         }
     }
 
@@ -165,7 +189,10 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required PlaybackState Playback { get; init; }
     public required IAudioPlayerService AudioPlayerService { get; init; }
     public required IChartManageService ChartManageService { get; init; }
+    public required IDialogService DialogService { get; init; }
+    public required GameSwitcher GameSwitcher { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
+    public required MigrationProgressDialogViewModel MigrationDialog { get; init; }
     public required INotificationService NotificationService { get; init; }
 
     #endregion Injections

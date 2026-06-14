@@ -1,0 +1,36 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.Features.Charting"
+    x:Class="Euterpe.Features.Charting.MigrationProgressDialog"
+    x:DataType="vm:MigrationProgressDialogViewModel"
+    d:DesignWidth="380"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:MigrationProgressDialogViewModel />
+    </Design.DataContext>
+
+    <StackPanel
+        Margin="28,24"
+        Spacing="14"
+        Width="380">
+        <TextBlock
+            Foreground="{DynamicResource SecondaryTextColor}"
+            HorizontalAlignment="Center"
+            Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_MigratingHint}}"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+        <ProgressBar
+            Classes="Primary Rounded"
+            Value="{Binding Progress, Mode=OneWay}" />
+        <TextBlock
+            FontSize="12"
+            Foreground="{DynamicResource SecondaryTextColor}"
+            HorizontalAlignment="Center"
+            Text="{Binding ProgressLabel, Mode=OneWay}" />
+    </StackPanel>
+</UserControl>

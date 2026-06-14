@@ -100,6 +100,12 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>Migrate MDM Charts</value>
   </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>Migrating Charts</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>Migration is in progress. Please wait and do not close the app.</value>
+  </data>
   <data name="ChartManage_Rating" xml:space="preserve">
     <value>Rating</value>
   </data>

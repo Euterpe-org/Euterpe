@@ -100,6 +100,12 @@
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>迁移 MDM 谱面</value>
   </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>正在迁移谱面</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>正在迁移，请勿关闭应用，耐心等待…</value>
+  </data>
   <data name="ChartManage_Rating" xml:space="preserve">
     <value>定数</value>
   </data>
