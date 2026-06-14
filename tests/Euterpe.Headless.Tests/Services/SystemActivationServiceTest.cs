@@ -187,48 +187,42 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         using var _ = Assert.Multiple();
         mods.UpdateAllModsAsync().WasCalled(Times.Once);
-        mods.UpdateModAsync(Any<ModDto>()).WasCalled(Times.Never);
+        mods.UpdateModByNameAsync(Any<string>()).WasCalled(Times.Never);
     }
 
     [Test]
-    public async Task HandleModAction_Update_NamedInstalledMod_UpdatesThatMod()
+    public async Task HandleModAction_Install_Named_DelegatesToInstallByName()
     {
         var mods = IModManageService.Mock();
-        var installed = new ModDto { Name = "Euterpe", FileNameWithoutExtension = "Euterpe", State = ModState.Outdated };
-        mods.FindModByName("Euterpe").Returns(installed);
+        var service = NewService(modManageService: mods);
+
+        await InvokeModAction(service, "install/Euterpe");
+
+        mods.InstallModByNameAsync("Euterpe").WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task HandleModAction_Update_Named_DelegatesToUpdateByName()
+    {
+        var mods = IModManageService.Mock();
         var service = NewService(modManageService: mods);
 
         await InvokeModAction(service, "update/Euterpe");
 
         using var _ = Assert.Multiple();
-        mods.UpdateModAsync(installed).WasCalled(Times.Once);
+        mods.UpdateModByNameAsync("Euterpe").WasCalled(Times.Once);
         mods.UpdateAllModsAsync().WasCalled(Times.Never);
     }
 
     [Test]
-    public async Task HandleModAction_Update_NamedNotInstalledMod_DoesNotUpdate()
+    public async Task HandleModAction_Uninstall_Named_DelegatesToUninstallByName()
     {
         var mods = IModManageService.Mock();
-        var notInstalled = new ModDto { Name = "Euterpe" };
-        mods.FindModByName("Euterpe").Returns(notInstalled);
         var service = NewService(modManageService: mods);
 
-        await InvokeModAction(service, "update/Euterpe");
+        await InvokeModAction(service, "uninstall/Euterpe");
 
-        mods.UpdateModAsync(Any<ModDto>()).WasCalled(Times.Never);
-    }
-
-    [Test]
-    public async Task HandleModAction_Update_NamedNotOutdatedMod_DoesNotUpdate()
-    {
-        var mods = IModManageService.Mock();
-        var upToDate = new ModDto { Name = "Euterpe", FileNameWithoutExtension = "Euterpe", State = ModState.Normal };
-        mods.FindModByName("Euterpe").Returns(upToDate);
-        var service = NewService(modManageService: mods);
-
-        await InvokeModAction(service, "update/Euterpe");
-
-        mods.UpdateModAsync(Any<ModDto>()).WasCalled(Times.Never);
+        mods.UninstallModByNameAsync("Euterpe").WasCalled(Times.Once);
     }
 
     [Test]

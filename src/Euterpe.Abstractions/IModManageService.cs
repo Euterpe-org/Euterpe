@@ -11,5 +11,8 @@ public interface IModManageService
     Task UninstallModAsync(ModDto mod);
     Task ToggleModAsync(ModDto mod);
     Task<int> UpdateAllModsAsync();
+    Task InstallModByNameAsync(string name);
+    Task UpdateModByNameAsync(string name);
+    Task UninstallModByNameAsync(string name);
     Task ImportModsAsync(IReadOnlyList<string> filePaths);
 }

@@ -67,6 +67,73 @@ internal sealed partial class ModManageService : IModManageService
         return outdatedMods.Length;
     }
 
+    public async Task InstallModByNameAsync(string name)
+    {
+        var mod = FindModByName(name);
+        if (mod is null)
+        {
+            Logger.ZLogWarning($"Install requested for unknown mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
+            return;
+        }
+
+        if (mod.IsLocal)
+        {
+            Logger.ZLogInformation($"Install requested for already-installed mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_Install_AlreadyInstalled, name);
+            return;
+        }
+
+        await InstallModAsync(mod).ConfigureAwait(false);
+    }
+
+    public async Task UpdateModByNameAsync(string name)
+    {
+        var mod = FindModByName(name);
+        if (mod is null)
+        {
+            Logger.ZLogWarning($"Update requested for unknown mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
+            return;
+        }
+
+        if (!mod.IsLocal)
+        {
+            Logger.ZLogInformation($"Update requested for not-installed mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotInstalled, name);
+            return;
+        }
+
+        if (mod.State is not ModState.Outdated)
+        {
+            Logger.ZLogInformation($"Update requested for up-to-date mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_Update_UpToDate, name);
+            return;
+        }
+
+        await UpdateModAsync(mod).ConfigureAwait(false);
+    }
+
+    public async Task UninstallModByNameAsync(string name)
+    {
+        var mod = FindModByName(name);
+        if (mod is null)
+        {
+            Logger.ZLogWarning($"Uninstall requested for unknown mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
+            return;
+        }
+
+        if (!mod.IsLocal)
+        {
+            Logger.ZLogInformation($"Uninstall requested for not-installed mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotInstalled, name);
+            return;
+        }
+
+        await UninstallModAsync(mod).ConfigureAwait(false);
+    }
+
     #region Injections
 
     public required GameConfig GameConfig { get; init; }

@@ -219,11 +219,20 @@
   <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
     <value>{0} is not a supported mod or library file</value>
   </data>
+  <data name="Notification_Content_Mod_Install_AlreadyInstalled" xml:space="preserve">
+    <value>Mod {0} is already installed</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>Failed to install mod {0}</value>
   </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} successfully installed</value>
+  </data>
+  <data name="Notification_Content_Mod_NotFound" xml:space="preserve">
+    <value>Mod {0} not found</value>
+  </data>
+  <data name="Notification_Content_Mod_NotInstalled" xml:space="preserve">
+    <value>Mod {0} is not installed</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
     <value>Failed to reinstall mod {0}</value>
@@ -245,6 +254,9 @@
   </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} successfully updated</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
+    <value>Mod {0} is already up to date</value>
   </data>
   <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
     <value>Updated {0} mods, {1} failed</value>
