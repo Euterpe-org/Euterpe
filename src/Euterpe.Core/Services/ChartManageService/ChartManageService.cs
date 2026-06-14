@@ -60,57 +60,6 @@ internal sealed partial class ChartManageService : IChartManageService
         return results.Count;
     }
 
-    public async Task<int> MigrateCustomAlbumsAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
-    {
-        if (!Directory.Exists(GameConfig.CustomAlbumsChartsFolder))
-        {
-            Logger.ZLogInformation($"No CustomAlbums folder at {GameConfig.CustomAlbumsChartsFolder}, nothing to migrate");
-            return 0;
-        }
-
-        var sources = ChartLocalService.GetCustomAlbumsSources();
-        int migrated = 0, skipped = 0, failed = 0;
-
-        for (var i = 0; i < sources.Length; i++)
-        {
-            progress?.Report($"{sources[i].Name} ({i + 1}/{sources.Length})");
-
-            var (outcome, destination) = await MigrationService.MigrateCustomAlbumAsync(sources[i], cancellationToken).ConfigureAwait(false);
-            switch (outcome)
-            {
-                case MigrationOutcome.Migrated:
-                    migrated++;
-                    await AddImportedChartAsync(destination).ConfigureAwait(false);
-                    break;
-                case MigrationOutcome.Skipped:
-                    skipped++;
-                    break;
-                case MigrationOutcome.Failed:
-                    failed++;
-                    break;
-                default:
-                    throw new UnreachableException();
-            }
-        }
-
-        Logger.ZLogInformation($"CustomAlbums migration complete: {migrated} migrated, {skipped} skipped, {failed} failed");
-
-        if (failed > 0)
-        {
-            NotificationService.WarningLight(Notification_Content_Migration_Partial, migrated, failed);
-            return migrated + failed;
-        }
-
-        FileSystemService.TryDeleteDirectory(GameConfig.CustomAlbumsChartsFolder);
-
-        if (migrated > 0)
-        {
-            NotificationService.SuccessLight(Notification_Content_Migration_Success, migrated);
-        }
-
-        return migrated;
-    }
-
     #region Injections
 
     public required GameConfig GameConfig { get; init; }

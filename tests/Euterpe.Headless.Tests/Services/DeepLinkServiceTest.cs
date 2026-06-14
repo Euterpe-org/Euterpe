@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using Autofac;
 using Euterpe.Abstractions;
+using Euterpe.Models.Migrations;
 using Euterpe.Models.Mods;
 using Euterpe.Services;
 using Microsoft.Extensions.Logging;
@@ -184,7 +185,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
         await InvokeChartAction(service, "convert");
 
         using var _ = Assert.Multiple();
-        charts.MigrateCustomAlbumsAsync(Any<IProgress<string>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
+        charts.MigrateCustomAlbumsAsync(Any<IProgress<MigrationProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Information && e.Message.Contains("Chart convert"))).IsTrue();
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Warning)).IsFalse();
     }

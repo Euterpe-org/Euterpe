@@ -13,6 +13,11 @@ internal sealed class MigrationStep : ISetupStep
     public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
     {
         progress?.Report("Migrating CustomAlbums Charts ...");
-        await ChartManageService.MigrateCustomAlbumsAsync(progress, cancellationToken).ConfigureAwait(false);
+
+        var migrationProgress = progress is null
+            ? null
+            : new Progress<MigrationProgress>(p => progress.Report($"{p.Completed}/{p.Total}"));
+
+        await ChartManageService.MigrateCustomAlbumsAsync(migrationProgress, cancellationToken).ConfigureAwait(false);
     }
 }

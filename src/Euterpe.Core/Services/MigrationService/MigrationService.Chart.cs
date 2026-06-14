@@ -16,8 +16,8 @@ internal sealed partial class MigrationService
         var info = await ReadInfoAsync(workFolder, cancellationToken).ConfigureAwait(false);
         var cinema = await ReadCinemaAsync(workFolder, cancellationToken).ConfigureAwait(false);
 
-        await NormalizeAudioAsync(workFolder, MusicName, true, cancellationToken).ConfigureAwait(false);
-        await NormalizeAudioAsync(workFolder, DemoName, false, cancellationToken).ConfigureAwait(false);
+        NormalizeAudio(workFolder, MusicName, true, cancellationToken);
+        NormalizeAudio(workFolder, DemoName, false, cancellationToken);
         NormalizeVideoName(workFolder);
         DeleteConsumedSources(workFolder);
 
@@ -58,7 +58,7 @@ internal sealed partial class MigrationService
             : null;
     }
 
-    private async Task NormalizeAudioAsync(string folder, string name, bool required, CancellationToken cancellationToken)
+    private void NormalizeAudio(string folder, string name, bool required, CancellationToken cancellationToken)
     {
         var matches = Directory.EnumerateFiles(folder, $"{name}.*");
         var source = required ? matches.Single() : matches.SingleOrDefault();
@@ -73,7 +73,7 @@ internal sealed partial class MigrationService
                 return;
             case "mp3":
                 var target = Path.Combine(folder, $"{name}{MusicExtension}");
-                await Task.Run(() => AudioConverter.Convert(source, target, MusicExtension[1..], cancellationToken), cancellationToken).ConfigureAwait(false);
+                AudioConverter.Convert(source, target, MusicExtension[1..], cancellationToken);
                 File.Delete(source);
                 break;
         }
