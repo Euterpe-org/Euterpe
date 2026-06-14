@@ -187,21 +187,21 @@ public static class CoreServiceExtensions
         {
 #pragma warning disable CA1416
 #if WINDOWS
-            builder.RegisterType<WindowsDeepLinkSetup>().As<IDeepLinkSetup>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<WindowsSystemAssociationSetup>().As<ISystemAssociationSetup>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<WindowsDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<WindowsLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<WindowsPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<WindowsSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<WindowsSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
 #elif LINUX
-            builder.RegisterType<LinuxDeepLinkSetup>().As<IDeepLinkSetup>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LinuxSystemAssociationSetup>().As<ISystemAssociationSetup>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LinuxDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LinuxLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LinuxPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LinuxSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LinuxSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
 #elif MACOS
-            builder.RegisterType<MacOsDeepLinkSetup>().As<IDeepLinkSetup>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<MacOsSystemAssociationSetup>().As<ISystemAssociationSetup>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<MacOsDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<MacOsLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<MacOsPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();

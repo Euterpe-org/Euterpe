@@ -3,19 +3,19 @@ using Microsoft.Win32;
 namespace Euterpe.Core;
 
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-internal sealed class WindowsDeepLinkSetup : IDeepLinkSetup
+internal sealed class WindowsSystemAssociationSetup : ISystemAssociationSetup
 {
     #region Injections
 
-    public required ILogger<WindowsDeepLinkSetup> Logger { get; init; }
+    public required ILogger<WindowsSystemAssociationSetup> Logger { get; init; }
 
     #endregion Injections
 
-    public async Task SetupDeepLinkAsync(string processPath)
+    public async Task RegisterAsync(string processPath)
     {
         try
         {
-            using var schemeKey = Registry.CurrentUser.CreateSubKey($@"Software\Classes\{IDeepLinkSetup.DeepLinkScheme}");
+            using var schemeKey = Registry.CurrentUser.CreateSubKey($@"Software\Classes\{ISystemAssociationSetup.DeepLinkScheme}");
             schemeKey.SetValue(string.Empty, $"URL:{AppName} Protocol", RegistryValueKind.String);
             schemeKey.SetValue("URL Protocol", string.Empty, RegistryValueKind.String);
 

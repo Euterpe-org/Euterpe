@@ -8,7 +8,7 @@ public sealed partial class DeepLinkService
     public async Task SetupAsync()
     {
         var processPath = Environment.ProcessPath ?? throw new InvalidOperationException("Process path is null");
-        await DeepLinkSetup.SetupDeepLinkAsync(processPath).ConfigureAwait(false);
+        await AssociationSetup.RegisterAsync(processPath).ConfigureAwait(false);
     }
 
     public void HandleStartupArgs(string[] args)
@@ -70,7 +70,7 @@ public sealed partial class DeepLinkService
 
     public required NavigationService NavigationService { get; init; }
     public required ILogger<DeepLinkService> Logger { get; init; }
-    public required IDeepLinkSetup DeepLinkSetup { get; init; }
+    public required ISystemAssociationSetup AssociationSetup { get; init; }
     public required BehaviorSubject<ILifetimeScope> GameScope { get; init; }
 
     #endregion Injections

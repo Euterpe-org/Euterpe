@@ -4,14 +4,14 @@ using CliWrap.Buffered;
 namespace Euterpe.Core;
 
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-internal sealed class LinuxDeepLinkSetup : IDeepLinkSetup
+internal sealed class LinuxSystemAssociationSetup : ISystemAssociationSetup
 {
     private const string AppId = "com.euterpe-org.Euterpe";
     private const string DeepLinkDesktopFileName = $"{AppId}.desktop";
     private const string IconAssetName = "Icon.png";
     private const string IconHicolorSize = "256x256";
 
-    public async Task SetupDeepLinkAsync(string processPath)
+    public async Task RegisterAsync(string processPath)
     {
         try
         {
@@ -29,7 +29,7 @@ internal sealed class LinuxDeepLinkSetup : IDeepLinkSetup
                  Name={AppName}
                  Exec="{processPath.EscapeDesktopExecArgument()}" %u
                  Icon={AppId}
-                 MimeType=x-scheme-handler/{IDeepLinkSetup.DeepLinkScheme};
+                 MimeType=x-scheme-handler/{ISystemAssociationSetup.DeepLinkScheme};
                  StartupWMClass={AppName}
                  Terminal=false
                  """;
@@ -37,7 +37,7 @@ internal sealed class LinuxDeepLinkSetup : IDeepLinkSetup
             await File.WriteAllTextAsync(desktopFilePath, content).ConfigureAwait(false);
 
             var result = await Cli.Wrap("xdg-mime")
-                .WithArguments(["default", DeepLinkDesktopFileName, $"x-scheme-handler/{IDeepLinkSetup.DeepLinkScheme}"])
+                .WithArguments(["default", DeepLinkDesktopFileName, $"x-scheme-handler/{ISystemAssociationSetup.DeepLinkScheme}"])
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
@@ -78,7 +78,7 @@ internal sealed class LinuxDeepLinkSetup : IDeepLinkSetup
 
     #region Injections
 
-    public required ILogger<LinuxDeepLinkSetup> Logger { get; init; }
+    public required ILogger<LinuxSystemAssociationSetup> Logger { get; init; }
     public required IResourceService ResourceService { get; init; }
 
     #endregion Injections

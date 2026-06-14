@@ -1,6 +1,6 @@
 namespace Euterpe.Abstractions;
 
-public interface IDeepLinkSetup
+public interface ISystemAssociationSetup
 {
     /// <summary>
     ///     Fixed deep link scheme shared by all platforms.
@@ -8,8 +8,8 @@ public interface IDeepLinkSetup
     const string DeepLinkScheme = "euterpe";
 
     /// <summary>
-    ///     Setup deep link handler for the current platform.
+    ///     Register the deep link scheme and file type associations for the current platform.
     /// </summary>
     /// <param name="processPath"></param>
-    Task SetupDeepLinkAsync(string processPath);
+    Task RegisterAsync(string processPath);
 }
