@@ -254,7 +254,6 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         using var _ = Assert.Multiple();
         charts.MigrateCustomAlbumsAsync(Any<IProgress<MigrationProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
-        await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Information && e.Message.Contains("Chart convert"))).IsTrue();
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Warning)).IsFalse();
     });
 

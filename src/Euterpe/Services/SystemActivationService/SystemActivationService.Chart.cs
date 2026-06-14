@@ -9,7 +9,6 @@ public sealed partial class SystemActivationService
         switch (segments)
         {
             case ["convert"]:
-                Logger.ZLogInformation($"Chart convert deep link received, migrating CustomAlbums charts");
                 await ChartManagePanelViewModel.MigrateCustomAlbumsAsync().ConfigureAwait(false);
                 break;
 
