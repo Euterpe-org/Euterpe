@@ -16,27 +16,6 @@
         <vm:ExecutionPageViewModel />
     </Design.DataContext>
 
-    <UserControl.Styles>
-        <Style
-            Selector="ProgressBar.Wizard">
-            <Setter Property="CornerRadius" Value="6" />
-            <Setter Property="Height" Value="10" />
-            <Setter Property="MinHeight" Value="10" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <DoubleTransition
-                        Property="Value"
-                        Duration="0:0:0.4"
-                        Easing="CubicEaseOut" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style
-            Selector="ProgressBar.Wizard /template/ Border">
-            <Setter Property="CornerRadius" Value="6" />
-        </Style>
-    </UserControl.Styles>
-
     <Grid
         Margin="28,24"
         RowDefinitions="Auto,*,Auto">
@@ -124,7 +103,7 @@
             Spacing="6">
             <ProgressBar
                 Value="{Binding Progress, Mode=OneWay}"
-                Classes="Primary Wizard" />
+                Classes="Primary Rounded" />
             <TextBlock
                 FontSize="12"
                 Foreground="{DynamicResource SecondaryTextColor}"

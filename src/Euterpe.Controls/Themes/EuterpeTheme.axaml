@@ -47,6 +47,8 @@
     <StyleInclude
         Source="/Themes/ControlStyles/LabelStyles.axaml" />
     <StyleInclude
+        Source="/Themes/ControlStyles/ProgressBarStyles.axaml" />
+    <StyleInclude
         Source="/Themes/ControlStyles/StackPanelStyles.axaml" />
     <StyleInclude
         Source="/Themes/ControlStyles/TextBlockStyles.axaml" />
