@@ -6,7 +6,7 @@ internal sealed class EssentialModsStep : ISetupStep
 
     public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
-        progress.Report("Initializing essential mods ...");
+        progress.Report(XAML.Setup_Progress_InitializingEssentialMods);
         await ModManageService.InitializeModsAsync().ConfigureAwait(false);
 
         var mod = ModManageService.FindModByName(AppName);
@@ -17,7 +17,7 @@ internal sealed class EssentialModsStep : ISetupStep
         }
 
         await ModManageService.InstallModAsync(mod).ConfigureAwait(false);
-        progress.Report("Essential mods installed");
+        progress.Report(XAML.Setup_Progress_EssentialModsInstalled);
     }
 
     #region Injections

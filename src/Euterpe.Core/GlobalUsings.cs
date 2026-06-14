@@ -14,6 +14,7 @@ global using Euterpe.Core.Http.Clients;
 global using Euterpe.Core.Logger;
 global using Euterpe.Core.Proxies;
 global using Euterpe.Core.Utils;
+global using Euterpe.Localization;
 global using Euterpe.Models;
 global using Euterpe.Models.Auth;
 global using Euterpe.Models.Charts;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -121,9 +121,6 @@
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Geen updates beschikbaar</value>
   </data>
-  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
-    <value>Er is geen keyring-service (secret-tool) gevonden. Uw aanmeldsessie kan niet worden opgeslagen en u moet elke keer opnieuw inloggen.</value>
-  </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>protontricks is niet geïnstalleerd. Installeer protontricks om door te gaan.</value>
   </data>
@@ -136,6 +133,9 @@
   </data>
   <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
     <value>Versie {0} kon niet worden gedownload</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>Er is geen keyring-service (secret-tool) gevonden. Uw aanmeldsessie kan niet worden opgeslagen en u moet elke keer opnieuw inloggen.</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Weet u zeker dat u de omgevingsvariabele MD_DIRECTORY wilt instellen?</value>
@@ -177,15 +177,6 @@
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>Chart {0} succesvol verwijderd</value>
   </data>
-  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
-    <value>Bijwerken van chart {0} mislukt</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
-    <value>Chart {0} succesvol bijgewerkt</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
-    <value>Chart {0} is al up-to-date</value>
-  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>{0} charts bijgewerkt, {1} mislukt</value>
   </data>
@@ -194,6 +185,15 @@
   </data>
   <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
     <value>Alle charts zijn up-to-date</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>Bijwerken van chart {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>Chart {0} succesvol bijgewerkt</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>Chart {0} is al up-to-date</value>
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>Online charts kunnen niet worden bewerkt</value>
@@ -210,6 +210,12 @@
   <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
     <value>{0} opgeslagen</value>
   </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>Importeren van bibliotheek {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>Bibliotheek {0} succesvol geïmporteerd</value>
+  </data>
   <data name="Notification_Content_Migration_None" xml:space="preserve">
     <value>Geen MDM-charts om te migreren</value>
   </data>
@@ -218,12 +224,6 @@
   </data>
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>{0} CustomAlbums-charts gemigreerd</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
-    <value>Importeren van bibliotheek {0} mislukt</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
-    <value>Bibliotheek {0} succesvol geïmporteerd</value>
   </data>
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>Mod {0} is al geïmporteerd</value>
@@ -267,6 +267,12 @@
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} succesvol verwijderd</value>
   </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>{0} mods bijgewerkt, {1} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>{0} mods bijgewerkt</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
     <value>Bijwerken van mod {0} mislukt</value>
   </data>
@@ -275,12 +281,6 @@
   </data>
   <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
     <value>Mod {0} is al up-to-date</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
-    <value>{0} mods bijgewerkt, {1} mislukt</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
-    <value>{0} mods bijgewerkt</value>
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>Server is tijdelijk niet beschikbaar. Probeer het over een moment opnieuw.</value>

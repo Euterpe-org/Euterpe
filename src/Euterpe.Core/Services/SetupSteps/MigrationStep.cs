@@ -12,7 +12,7 @@ internal sealed class MigrationStep : ISetupStep
 
     public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
-        progress.Report("Migrating CustomAlbums Charts ...");
+        progress.Report(XAML.Setup_Progress_MigratingCharts);
 
         var migrationProgress = new Progress<MigrationProgress>(p => progress.Report($"{p.Completed}/{p.Total}"));
 

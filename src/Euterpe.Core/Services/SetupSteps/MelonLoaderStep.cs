@@ -10,7 +10,7 @@ internal sealed class MelonLoaderStep : ISetupStep
 
         if (GameConfig.MelonLoaderSemVersion is not { } localVersion)
         {
-            progress.Report("Installing MelonLoader ...");
+            progress.Report(XAML.Setup_Progress_InstallingMelonLoader);
             await InstallAsync(cancellationToken).ConfigureAwait(false);
             return;
         }
@@ -27,7 +27,7 @@ internal sealed class MelonLoaderStep : ISetupStep
         }
 
         Logger.ZLogInformation($"MelonLoader outdated: {localVersion} < {latestVersion}, upgrading");
-        progress.Report($"Upgrading MelonLoader {localVersion} → {latestVersion} ...");
+        progress.Report(string.Format(XAML.Setup_Progress_UpgradingMelonLoader, localVersion, latestVersion));
         await InstallAsync(cancellationToken).ConfigureAwait(false);
     }
 

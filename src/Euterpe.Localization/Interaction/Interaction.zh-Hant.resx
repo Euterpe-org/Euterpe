@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -121,9 +121,6 @@
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>沒有可用的更新</value>
   </data>
-  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
-    <value>找不到金鑰環服務（secret-tool）。您的登入工作階段無法儲存，每次都需要重新登入。</value>
-  </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>尚未安裝 protontricks，請先安裝 protontricks 再繼續。</value>
   </data>
@@ -136,6 +133,9 @@
   </data>
   <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
     <value>下載版本 {0} 失敗</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>找不到金鑰環服務（secret-tool）。您的登入工作階段無法儲存，每次都需要重新登入。</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>確定要設定 MD_DIRECTORY 環境變數嗎？</value>
@@ -177,15 +177,6 @@
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>譜面 {0} 移除成功</value>
   </data>
-  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
-    <value>譜面 {0} 更新失敗</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
-    <value>譜面 {0} 更新成功</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
-    <value>譜面 {0} 已是最新</value>
-  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>已更新 {0} 張譜面，{1} 張失敗</value>
   </data>
@@ -194,6 +185,15 @@
   </data>
   <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
     <value>所有譜面皆為最新</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>譜面 {0} 更新失敗</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>譜面 {0} 更新成功</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>譜面 {0} 已是最新</value>
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>線上譜面不可編輯</value>
@@ -210,6 +210,12 @@
   <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
     <value>已儲存「{0}」</value>
   </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>相依庫 {0} 匯入失敗</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>相依庫 {0} 匯入成功</value>
+  </data>
   <data name="Notification_Content_Migration_None" xml:space="preserve">
     <value>沒有可遷移的 MDM 譜面</value>
   </data>
@@ -218,12 +224,6 @@
   </data>
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>已遷移 {0} 張 CustomAlbums 譜面</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
-    <value>相依庫 {0} 匯入失敗</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
-    <value>相依庫 {0} 匯入成功</value>
   </data>
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>模組 {0} 已匯入</value>
@@ -267,6 +267,12 @@
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>模組 {0} 解除安裝成功</value>
   </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>已更新 {0} 個模組，{1} 個失敗</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>已更新 {0} 個模組</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
     <value>模組 {0} 更新失敗</value>
   </data>
@@ -275,12 +281,6 @@
   </data>
   <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
     <value>模組 {0} 已是最新</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
-    <value>已更新 {0} 個模組，{1} 個失敗</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
-    <value>已更新 {0} 個模組</value>
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>伺服器暫時無回應，請稍後再試</value>

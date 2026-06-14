@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -543,6 +543,36 @@
   </data>
   <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
     <value>开始之前</value>
+  </data>
+  <data name="Setup_Progress_EssentialModsInstalled" xml:space="preserve">
+    <value>必备模组安装完成</value>
+  </data>
+  <data name="Setup_Progress_InitializingEssentialMods" xml:space="preserve">
+    <value>正在初始化必备模组……</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
+    <value>正在安装 .NET 运行时……</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
+    <value>正在安装 .NET SDK……</value>
+  </data>
+  <data name="Setup_Progress_InstallingMelonLoader" xml:space="preserve">
+    <value>正在安装 MelonLoader……</value>
+  </data>
+  <data name="Setup_Progress_InstallingModTemplate" xml:space="preserve">
+    <value>正在安装模组模板……</value>
+  </data>
+  <data name="Setup_Progress_MigratingCharts" xml:space="preserve">
+    <value>正在迁移 CustomAlbums 谱面……</value>
+  </data>
+  <data name="Setup_Progress_SettingEnvVariable" xml:space="preserve">
+    <value>正在设置环境变量……</value>
+  </data>
+  <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
+    <value>正在卸载不兼容的模组：{0}……</value>
+  </data>
+  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
+    <value>正在升级 MelonLoader {0} → {1}……</value>
   </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>失败</value>

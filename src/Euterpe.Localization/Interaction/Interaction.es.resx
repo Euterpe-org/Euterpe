@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -121,9 +121,6 @@
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>No hay actualizaciones disponibles</value>
   </data>
-  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
-    <value>No se encontró ningún servicio de llavero (secret-tool). Tu sesión no se puede guardar y tendrás que iniciar sesión cada vez.</value>
-  </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>protontricks no está instalado. Instala protontricks para continuar.</value>
   </data>
@@ -136,6 +133,9 @@
   </data>
   <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
     <value>Error al descargar la versión {0}</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>No se encontró ningún servicio de llavero (secret-tool). Tu sesión no se puede guardar y tendrás que iniciar sesión cada vez.</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>¿Quieres establecer la variable de entorno MD_DIRECTORY?</value>
@@ -177,15 +177,6 @@
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>Chart {0} eliminado correctamente</value>
   </data>
-  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
-    <value>Error al actualizar el chart {0}</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
-    <value>Chart {0} actualizado correctamente</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
-    <value>El chart {0} ya está actualizado</value>
-  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>{0} charts actualizados, {1} fallaron</value>
   </data>
@@ -194,6 +185,15 @@
   </data>
   <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
     <value>Todos los charts están actualizados</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>Error al actualizar el chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>Chart {0} actualizado correctamente</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>El chart {0} ya está actualizado</value>
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>Los charts en línea no se pueden editar</value>
@@ -210,6 +210,12 @@
   <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
     <value>{0} guardado</value>
   </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>Error al importar la biblioteca {0}</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>Biblioteca {0} importada correctamente</value>
+  </data>
   <data name="Notification_Content_Migration_None" xml:space="preserve">
     <value>No hay charts MDM para migrar</value>
   </data>
@@ -218,12 +224,6 @@
   </data>
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>{0} charts de CustomAlbums migrados</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
-    <value>Error al importar la biblioteca {0}</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
-    <value>Biblioteca {0} importada correctamente</value>
   </data>
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>El mod {0} ya está importado</value>
@@ -267,6 +267,12 @@
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} desinstalado correctamente</value>
   </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>{0} mods actualizados, {1} fallaron</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>{0} mods actualizados</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
     <value>Error al actualizar el mod {0}</value>
   </data>
@@ -275,12 +281,6 @@
   </data>
   <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
     <value>El mod {0} ya está actualizado</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
-    <value>{0} mods actualizados, {1} fallaron</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
-    <value>{0} mods actualizados</value>
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>El servidor no está disponible temporalmente. Por favor, inténtalo de nuevo en un momento.</value>

@@ -17,7 +17,7 @@ internal sealed class EnvVariableStep : ISetupStep
             return;
         }
 
-        progress.Report("Setting environment variable ...");
+        progress.Report(XAML.Setup_Progress_SettingEnvVariable);
         if (!PathEnvironment.Set())
         {
             throw new InvalidOperationException("Failed to set the game directory environment variable");

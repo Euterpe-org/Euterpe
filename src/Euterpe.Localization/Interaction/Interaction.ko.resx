@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -121,9 +121,6 @@
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>사용 가능한 업데이트가 없습니다</value>
   </data>
-  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
-    <value>키링 서비스(secret-tool)를 찾을 수 없습니다. 로그인 세션을 저장할 수 없으며, 매번 다시 로그인해야 합니다.</value>
-  </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>protontricks가 설치되어 있지 않습니다. 계속하려면 protontricks를 설치해 주세요.</value>
   </data>
@@ -136,6 +133,9 @@
   </data>
   <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
     <value>버전 {0} 다운로드에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>키링 서비스(secret-tool)를 찾을 수 없습니다. 로그인 세션을 저장할 수 없으며, 매번 다시 로그인해야 합니다.</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>환경 변수 MD_DIRECTORY를 설정하시겠습니까?</value>
@@ -177,15 +177,6 @@
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>채보 {0}이(가) 삭제되었습니다</value>
   </data>
-  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
-    <value>채보 {0} 업데이트에 실패했습니다</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
-    <value>채보 {0}이(가) 업데이트되었습니다</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
-    <value>채보 {0}은(는) 이미 최신 버전입니다</value>
-  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>채보 {0}개가 업데이트되었고, {1}개가 실패했습니다</value>
   </data>
@@ -194,6 +185,15 @@
   </data>
   <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
     <value>모든 채보가 최신 버전입니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>채보 {0} 업데이트에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>채보 {0}이(가) 업데이트되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>채보 {0}은(는) 이미 최신 버전입니다</value>
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>온라인 채보는 편집할 수 없습니다</value>
@@ -210,6 +210,12 @@
   <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
     <value>{0}이(가) 저장되었습니다</value>
   </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>라이브러리 {0} 가져오기에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>라이브러리 {0}을(를) 가져왔습니다</value>
+  </data>
   <data name="Notification_Content_Migration_None" xml:space="preserve">
     <value>마이그레이션할 MDM 채보가 없습니다</value>
   </data>
@@ -218,12 +224,6 @@
   </data>
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>CustomAlbums 채보 {0}개를 마이그레이션했습니다</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
-    <value>라이브러리 {0} 가져오기에 실패했습니다</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
-    <value>라이브러리 {0}을(를) 가져왔습니다</value>
   </data>
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>모드 {0}은(는) 이미 가져왔습니다</value>
@@ -267,6 +267,12 @@
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>모드 {0}이(가) 제거되었습니다</value>
   </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>모드 {0}개가 업데이트되었고, {1}개가 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>모드 {0}개가 업데이트되었습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
     <value>모드 {0} 업데이트에 실패했습니다</value>
   </data>
@@ -275,12 +281,6 @@
   </data>
   <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
     <value>모드 {0}은(는) 이미 최신 버전입니다</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
-    <value>모드 {0}개가 업데이트되었고, {1}개가 실패했습니다</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
-    <value>모드 {0}개가 업데이트되었습니다</value>
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 시도해 주세요.</value>

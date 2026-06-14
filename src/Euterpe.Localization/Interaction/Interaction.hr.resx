@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -121,9 +121,6 @@
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Nema dostupnih ažuriranja</value>
   </data>
-  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
-    <value>Nije pronađena usluga privezka ključeva (secret-tool). Sesija prijave ne može biti spremljena i morat ćeš se prijaviti svaki put iznova.</value>
-  </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>protontricks nije instaliran. Instaliraj protontricks za nastavak.</value>
   </data>
@@ -136,6 +133,9 @@
   </data>
   <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
     <value>Preuzimanje verzije {0} nije uspjelo</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>Nije pronađena usluga privezka ključeva (secret-tool). Sesija prijave ne može biti spremljena i morat ćeš se prijaviti svaki put iznova.</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Želiš li postaviti varijablu okruženja MD_DIRECTORY?</value>
@@ -177,15 +177,6 @@
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>Chart {0} uspješno uklonjen</value>
   </data>
-  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
-    <value>Ažuriranje charta {0} nije uspjelo</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
-    <value>Chart {0} uspješno ažuriran</value>
-  </data>
-  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
-    <value>Chart {0} je već ažuran</value>
-  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>Ažurirano {0} chartova, {1} neuspješno</value>
   </data>
@@ -194,6 +185,15 @@
   </data>
   <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
     <value>Svi chartovi su ažurni</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>Ažuriranje charta {0} nije uspjelo</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>Chart {0} uspješno ažuriran</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>Chart {0} je već ažuran</value>
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>Online chartovi ne mogu se uređivati</value>
@@ -210,6 +210,12 @@
   <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
     <value>Spremljeno {0}</value>
   </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>Uvoz biblioteke {0} nije uspio</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>Biblioteka {0} uspješno uvezena</value>
+  </data>
   <data name="Notification_Content_Migration_None" xml:space="preserve">
     <value>Nema MDM chartova za migraciju</value>
   </data>
@@ -218,12 +224,6 @@
   </data>
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>Migrirano {0} CustomAlbums chartova</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
-    <value>Uvoz biblioteke {0} nije uspio</value>
-  </data>
-  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
-    <value>Biblioteka {0} uspješno uvezena</value>
   </data>
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>Mod {0} je već uvezen</value>
@@ -267,6 +267,12 @@
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} uspješno deinstaliran</value>
   </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>Ažurirano {0} modova, {1} neuspješno</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>Ažurirano {0} modova</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
     <value>Mod {0} nije uspješno ažuriran</value>
   </data>
@@ -275,12 +281,6 @@
   </data>
   <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
     <value>Mod {0} je već ažuran</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
-    <value>Ažurirano {0} modova, {1} neuspješno</value>
-  </data>
-  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
-    <value>Ažurirano {0} modova</value>
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>Poslužitelj je privremeno nedostupan. Pokušajte ponovno za trenutak.</value>
