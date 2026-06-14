@@ -11,7 +11,7 @@ public interface IGameDownloadManager
     Task DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default);
 
     // Chart operations
-    Task<string> DownloadChartAsync(string cid, CancellationToken cancellationToken = default);
+    Task<string> DownloadChartAsync(string cid, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
     Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, CancellationToken cancellationToken = default);
     Task<CheckChartUpdatesResponse> CheckChartUpdatesAsync(CheckChartUpdatesRequest request, CancellationToken cancellationToken = default);
 

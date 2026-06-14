@@ -7,7 +7,7 @@ public interface IChartManageService
     Task InitializeChartsAsync();
 
     // Single-chart operations
-    Task DownloadChartAsync(string chartId, CancellationToken cancellationToken = default);
+    Task DownloadChartAsync(string chartId, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
     Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default);
     Task RemoveChartAsync(string folderPath);
 

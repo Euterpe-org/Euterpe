@@ -14,7 +14,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
     public Task DownloadLibAsync(LibDto lib, CancellationToken cancellationToken = default) =>
         DownloadAssetAtomicAsync(lib.DownloadUrl, GameConfig.UserLibsFolder, lib.FileName, lib.SHA256, $"lib {lib.Name}", cancellationToken);
 
-    public async Task<string> DownloadChartAsync(string cid, CancellationToken cancellationToken = default)
+    public async Task<string> DownloadChartAsync(string cid, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Downloading chart {cid} ...");
 
@@ -23,7 +23,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
         try
         {
-            await PopulateChartWorkFolderAsync(cid, workFolder, cancellationToken).ConfigureAwait(false);
+            await PopulateChartWorkFolderAsync(cid, workFolder, progress, cancellationToken).ConfigureAwait(false);
 
             if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder, true))
             {

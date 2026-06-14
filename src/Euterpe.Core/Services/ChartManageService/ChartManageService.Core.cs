@@ -10,11 +10,11 @@ internal sealed partial class ChartManageService
         Logger.ZLogInformation($"All charts loaded");
     }
 
-    private async Task DownloadChartCoreAsync(string chartId, CancellationToken cancellationToken)
+    private async Task DownloadChartCoreAsync(string chartId, IProgress<BatchProgress>? progress, CancellationToken cancellationToken)
     {
         try
         {
-            var folderPath = await GameDownloadManager.DownloadChartAsync(chartId, cancellationToken).ConfigureAwait(false);
+            var folderPath = await GameDownloadManager.DownloadChartAsync(chartId, progress, cancellationToken).ConfigureAwait(false);
 
             var chart = await ChartLocalService.LoadChartFromPathAsync(folderPath, ChartSource.Online).ConfigureAwait(false);
             if (chart is null)

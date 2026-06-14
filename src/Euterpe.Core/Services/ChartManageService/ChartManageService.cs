@@ -14,8 +14,8 @@ internal sealed partial class ChartManageService : IChartManageService
 
     public Task InitializeChartsAsync() => _initTask.Value;
 
-    public Task DownloadChartAsync(string chartId, CancellationToken cancellationToken = default) =>
-        RunExclusiveAsync(chartId, () => DownloadChartCoreAsync(chartId, cancellationToken));
+    public Task DownloadChartAsync(string chartId, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default) =>
+        RunExclusiveAsync(chartId, () => DownloadChartCoreAsync(chartId, progress, cancellationToken));
 
     public async Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default)
     {

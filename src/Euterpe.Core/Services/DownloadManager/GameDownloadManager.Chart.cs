@@ -4,7 +4,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class GameDownloadManager
 {
-    private async Task PopulateChartWorkFolderAsync(string cid, string workFolder, CancellationToken cancellationToken)
+    private async Task PopulateChartWorkFolderAsync(string cid, string workFolder, IProgress<BatchProgress>? progress, CancellationToken cancellationToken)
     {
         FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
         Directory.CreateDirectory(workFolder);
@@ -14,9 +14,12 @@ internal sealed partial class GameDownloadManager
         var manifestPath = Path.Combine(workFolder, ManifestFileName);
         var manifest = await MessagePackSerialization.DeserializeManifestFromFileAsync(manifestPath, cancellationToken).ConfigureAwait(false);
 
-        foreach (var fileName in manifest.Files.Keys.Where(fileName => fileName != ManifestFileName))
+        var fileNames = manifest.Files.Keys.Where(fileName => fileName != ManifestFileName).ToArray();
+        var completed = 0;
+        foreach (var fileName in fileNames)
         {
             await DownloadChartFileAsync(cid, workFolder, fileName, cancellationToken).ConfigureAwait(false);
+            progress?.Report(new BatchProgress(++completed, fileNames.Length));
         }
     }
 
