@@ -41,6 +41,7 @@
 ## Localization
 
 - During development add the neutral `.resx` plus `zh-Hans`/`zh-Hant` only — those are the locales the user can read and test with, and keys may still churn while the feature settles. The remaining locales get batch-translated once the feature is final.
+- Pick the table by where the text is shown, not by who assigns it: `XAML` = presentation-surface text (labels, titles, descriptions, button captions, and inline status/progress shown inside a page/panel — even when set from a viewmodel or core service, e.g. `MelonLoader_State_Downloading`, `Setup_Step_Failed`, `Setup_Progress_*`); `Interaction` = transient interaction surfaces (message boxes, toast notifications, OS file/folder pickers). So "code-side messages in `Interaction`" below means dialog/notification text, not every code-set string; a core service reads an `XAML` value via `XAML.Key` (Core imports only `static Interaction`, so add `global using Euterpe.Localization;` there).
 - Keys are `Name_Action_State` segments, scoped by where the text belongs:
   - Page/panel-scoped view text: `<PanelName>_<Element>` (`ChartManage_SortBy`, `Setting_Title_Language`).
   - Self-identifying concepts, especially enum members: `<TypeName>_<Member>` (`ChartDifficulty_Easy`, `ChartSortField_MapCount`, `ModFilterType_All`) — never borrow another feature's key because the value happens to match today.
