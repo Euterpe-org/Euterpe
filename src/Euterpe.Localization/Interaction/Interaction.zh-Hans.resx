@@ -207,11 +207,20 @@
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>已迁移 {0} 张 CustomAlbums 谱面</value>
   </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>依赖库 {0} 导入失败</value>
+  </data>
   <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
     <value>依赖库 {0} 导入成功</value>
   </data>
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>模组 {0} 已导入</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Failed" xml:space="preserve">
+    <value>模组 {0} 导入失败</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Success" xml:space="preserve">
+    <value>模组 {0} 导入成功</value>
   </data>
   <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
     <value>{0} 不是受支持的模组或依赖库文件</value>

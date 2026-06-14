@@ -210,11 +210,20 @@
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>Migrated {0} CustomAlbums charts</value>
   </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>Failed to import library {0}</value>
+  </data>
   <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
     <value>Library {0} successfully imported</value>
   </data>
   <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
     <value>Mod {0} is already imported</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Failed" xml:space="preserve">
+    <value>Failed to import mod {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Success" xml:space="preserve">
+    <value>Mod {0} successfully imported</value>
   </data>
   <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
     <value>{0} is not a supported mod or library file</value>

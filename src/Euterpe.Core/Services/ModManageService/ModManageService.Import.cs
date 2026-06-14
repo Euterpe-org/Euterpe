@@ -42,7 +42,7 @@ internal sealed partial class ModManageService
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to import {fileName}");
-            NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, fileName);
+            NotificationService.ErrorLight(Notification_Content_Mod_Import_Failed, fileName);
         }
     }
 
@@ -60,14 +60,15 @@ internal sealed partial class ModManageService
 
         if (!TryReplaceModFile(filePath, installed))
         {
-            NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, mod.Name);
+            Logger.ZLogWarning($"Failed to import mod {mod.Name}: could not copy file");
+            NotificationService.ErrorLight(Notification_Content_Mod_Import_Failed, mod.Name);
             return;
         }
 
         CacheImportedMod(mod, cached);
 
         Logger.ZLogInformation($"Imported mod {mod.Name} from {Path.GetFileName(filePath)}");
-        NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, mod.Name);
+        NotificationService.SuccessLight(Notification_Content_Mod_Import_Success, mod.Name);
     }
 
     private async Task ImportLibAsync(string filePath)
@@ -77,7 +78,8 @@ internal sealed partial class ModManageService
 
         if (!FileSystemService.TryCopyFile(filePath, destPath, true))
         {
-            NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, fileName);
+            Logger.ZLogWarning($"Failed to import library {fileName}: could not copy file");
+            NotificationService.ErrorLight(Notification_Content_Lib_Import_Failed, fileName);
             return;
         }
 
