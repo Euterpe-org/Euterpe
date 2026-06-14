@@ -40,33 +40,6 @@ internal sealed partial class ModManageService : IModManageService
 
     public Task ToggleModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ToggleModCoreAsync(mod));
 
-    public async Task<int> UpdateAllModsAsync()
-    {
-        var outdatedMods = _sourceCache.Items.Where(mod => mod.State is ModState.Outdated).ToArray();
-        Logger.ZLogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
-
-        var updated = 0;
-        foreach (var mod in outdatedMods)
-        {
-            if ((await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false)).Success)
-            {
-                updated++;
-            }
-        }
-
-        var failed = outdatedMods.Length - updated;
-        if (failed > 0)
-        {
-            NotificationService.WarningLight(Notification_Content_Mod_UpdateAll_Partial, updated, failed);
-        }
-        else if (updated > 0)
-        {
-            NotificationService.SuccessLight(Notification_Content_Mod_UpdateAll_Success, updated);
-        }
-
-        return outdatedMods.Length;
-    }
-
     public async Task InstallModByNameAsync(string name)
     {
         var mod = FindModByName(name);
@@ -132,6 +105,33 @@ internal sealed partial class ModManageService : IModManageService
         }
 
         await UninstallModAsync(mod).ConfigureAwait(false);
+    }
+
+    public async Task<int> UpdateAllModsAsync()
+    {
+        var outdatedMods = _sourceCache.Items.Where(mod => mod.State is ModState.Outdated).ToArray();
+        Logger.ZLogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
+
+        var updated = 0;
+        foreach (var mod in outdatedMods)
+        {
+            if ((await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false)).Success)
+            {
+                updated++;
+            }
+        }
+
+        var failed = outdatedMods.Length - updated;
+        if (failed > 0)
+        {
+            NotificationService.WarningLight(Notification_Content_Mod_UpdateAll_Partial, updated, failed);
+        }
+        else if (updated > 0)
+        {
+            NotificationService.SuccessLight(Notification_Content_Mod_UpdateAll_Success, updated);
+        }
+
+        return outdatedMods.Length;
     }
 
     #region Injections
