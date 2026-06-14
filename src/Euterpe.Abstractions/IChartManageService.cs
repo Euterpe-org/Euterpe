@@ -13,6 +13,6 @@ public interface IChartManageService
 
     // Bulk operations
     Task<int> UpdateAllChartsAsync(CancellationToken cancellationToken = default);
-    Task<int> MigrateCustomAlbumsAsync(IProgress<MigrationProgress>? progress = null, CancellationToken cancellationToken = default);
+    Task<int> MigrateCustomAlbumsAsync(IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
     Task<bool> ImportChartsAsync(IReadOnlyList<string> paths, CancellationToken cancellationToken = default);
 }

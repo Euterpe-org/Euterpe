@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using Avalonia.Platform.Storage;
-using Euterpe.Models.Migrations;
+using Euterpe.Models.Progress;
 
 namespace Euterpe.Features.Charting;
 
@@ -114,7 +114,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [RelayCommand]
     public async Task MigrateCustomAlbumsAsync()
     {
-        MigrationDialog.Reset();
+        ProgressDialogViewModel.Reset();
+        ProgressDialogViewModel.Hint = ChartManage_MigratingHint;
 
         var options = new OverlayDialogOptions
         {
@@ -125,11 +126,11 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         };
 
         GameSwitcher.CanSwitch = false;
-        var dialog = DialogService.ShowOverlayAsync<MigrationProgressDialog, MigrationProgressDialogViewModel, object>(
-            MigrationDialog, options, MainWindowViewModel.DialogHostId);
+        var dialog = DialogService.ShowOverlayAsync<ProgressDialog, ProgressDialogViewModel, object>(
+            ProgressDialogViewModel, options, MainWindowViewModel.DialogHostId);
         try
         {
-            var progress = new Progress<MigrationProgress>(MigrationDialog.Report);
+            var progress = new Progress<BatchProgress>(ProgressDialogViewModel.Report);
             var migratedCount = await ChartManageService.MigrateCustomAlbumsAsync(progress).ConfigureAwait(true);
             if (migratedCount is 0)
             {
@@ -138,7 +139,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         }
         finally
         {
-            MigrationDialog.Close();
+            ProgressDialogViewModel.Close();
             GameSwitcher.CanSwitch = true;
             await dialog.ConfigureAwait(true);
         }
@@ -194,8 +195,8 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required IDialogService DialogService { get; init; }
     public required GameSwitcher GameSwitcher { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
-    public required MigrationProgressDialogViewModel MigrationDialog { get; init; }
     public required INotificationService NotificationService { get; init; }
+    public required ProgressDialogViewModel ProgressDialogViewModel { get; init; }
 
     #endregion Injections
 }

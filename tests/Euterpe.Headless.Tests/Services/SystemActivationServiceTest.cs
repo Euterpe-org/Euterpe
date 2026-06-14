@@ -3,9 +3,9 @@ using Autofac;
 using Euterpe.Abstractions;
 using Euterpe.Features.Charting;
 using Euterpe.Models;
-using Euterpe.Models.Migrations;
 using Euterpe.Models.Mods;
 using Euterpe.Models.Playback;
+using Euterpe.Models.Progress;
 using Euterpe.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -239,7 +239,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
             DialogService = IDialogService.Mock(),
             GameSwitcher = new GameSwitcher { Config = new Config(), Logger = NullLogger<GameSwitcher>.Instance },
             Logger = NullLogger<ChartManagePanelViewModel>.Instance,
-            MigrationDialog = new MigrationProgressDialogViewModel { Launcher = IPlatformLauncher.Mock() },
+            ProgressDialogViewModel = new ProgressDialogViewModel { Launcher = IPlatformLauncher.Mock() },
             NotificationService = INotificationService.Mock()
         };
         var service = NewService(logger: logger, chartManageService: charts, chartViewModel: viewModel);
@@ -247,7 +247,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         await InvokeChartAction(service, "convert");
 
         using var _ = Assert.Multiple();
-        charts.MigrateCustomAlbumsAsync(Any<IProgress<MigrationProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
+        charts.MigrateCustomAlbumsAsync(Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Warning)).IsFalse();
     });
 

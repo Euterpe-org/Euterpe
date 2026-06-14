@@ -5,7 +5,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class ChartManageService
 {
-    public async Task<int> MigrateCustomAlbumsAsync(IProgress<MigrationProgress>? progress = null, CancellationToken cancellationToken = default)
+    public async Task<int> MigrateCustomAlbumsAsync(IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
     {
         if (!Directory.Exists(GameConfig.CustomAlbumsChartsFolder))
         {
@@ -24,7 +24,7 @@ internal sealed partial class ChartManageService
                 async (source, token) =>
                 {
                     outcomes.Add(await MigrateSourceAsync(source, migratedCharts, token).ConfigureAwait(false));
-                    progress?.Report(new MigrationProgress(Interlocked.Increment(ref completed), sources.Length));
+                    progress?.Report(new BatchProgress(Interlocked.Increment(ref completed), sources.Length));
                 })
             .ConfigureAwait(false);
 

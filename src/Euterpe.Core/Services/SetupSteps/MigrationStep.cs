@@ -14,7 +14,7 @@ internal sealed class MigrationStep : ISetupStep
     {
         progress.Report(XAML.Setup_Progress_MigratingCharts);
 
-        var migrationProgress = new Progress<MigrationProgress>(p => progress.Report($"{p.Completed}/{p.Total}"));
+        var migrationProgress = new Progress<BatchProgress>(p => progress.Report(p.CountDisplay));
 
         await ChartManageService.MigrateCustomAlbumsAsync(migrationProgress, cancellationToken).ConfigureAwait(false);
     }

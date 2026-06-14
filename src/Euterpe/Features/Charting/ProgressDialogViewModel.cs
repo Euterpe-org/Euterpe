@@ -1,11 +1,17 @@
-using Euterpe.Models.Migrations;
+using Euterpe.Models.Progress;
 using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.Features.Charting;
 
 [PerGame]
-public sealed partial class MigrationProgressDialogViewModel : ViewModelBase, IDialogContext
+public sealed partial class ProgressDialogViewModel : ViewModelBase, IDialogContext
 {
+    [ObservableProperty]
+    public partial LocalizedString? Hint { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsIndeterminate { get; set; }
+
     [ObservableProperty]
     public partial double Progress { get; set; }
 
@@ -18,13 +24,16 @@ public sealed partial class MigrationProgressDialogViewModel : ViewModelBase, ID
 
     public void Reset()
     {
+        Hint = null;
+        IsIndeterminate = false;
         Progress = 0;
         ProgressLabel = string.Empty;
     }
 
-    public void Report(MigrationProgress progress)
+    public void Report(BatchProgress progress)
     {
+        IsIndeterminate = false;
         Progress = progress.Percentage;
-        ProgressLabel = $"{progress.Completed}/{progress.Total}";
+        ProgressLabel = progress.CountDisplay;
     }
 }
