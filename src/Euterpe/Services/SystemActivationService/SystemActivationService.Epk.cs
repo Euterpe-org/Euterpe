@@ -2,6 +2,24 @@ namespace Euterpe.Services;
 
 public sealed partial class SystemActivationService
 {
+    private static string? GetEpkPath(string argument)
+    {
+        if (Uri.TryCreate(argument, UriKind.Absolute, out var uri))
+        {
+            return uri.IsFile && uri.LocalPath.EndsWith(ChartFiles.ManifestExtension, StringComparison.OrdinalIgnoreCase)
+                ? uri.LocalPath
+                : null;
+        }
+
+        return argument.EndsWith(ChartFiles.ManifestExtension, StringComparison.OrdinalIgnoreCase) ? argument : null;
+    }
+
+    private void HandleEpkFile(string filePath)
+    {
+        ActivateMainWindow(true);
+        HandleEpkFileAsync(filePath).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to open EPK file: {filePath}"));
+    }
+
     private async Task HandleEpkFileAsync(string filePath)
     {
         Logger.ZLogInformation($"Opening EPK file: {filePath}");
