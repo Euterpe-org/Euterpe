@@ -273,7 +273,7 @@
                             HorizontalAlignment="Stretch" />
                         <Button
                             Command="{Binding MigrateCustomAlbumsCommand}"
-                            Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_MigrateMdm}}"
+                            Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_MigrateAllMdm}}"
                             HorizontalAlignment="Stretch" />
                     </StackPanel>
                 </Grid>

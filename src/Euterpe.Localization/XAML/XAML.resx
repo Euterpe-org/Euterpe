@@ -97,8 +97,8 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Get Charts</value>
   </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>Migrate MDM Charts</value>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>Migrate All MDM Charts</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
     <value>Migrating Charts</value>
