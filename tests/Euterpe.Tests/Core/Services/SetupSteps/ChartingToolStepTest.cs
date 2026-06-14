@@ -23,7 +23,7 @@ public sealed class ChartingToolStepTest
     {
         var step = CreateStep();
 
-        var act = async () => await step.ExecuteAsync();
+        var act = async () => await step.ExecuteAsync(new Progress<string>(_ => { }));
         await Assert.That(act).ThrowsNothing();
     }
 

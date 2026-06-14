@@ -10,14 +10,14 @@ internal sealed class DotNetSdkStep : ISetupStep
 
     public SetupOptionKinds Kinds => SetupOptionKinds.DotNetSdk;
 
-    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
         if (await SdkInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
-        progress?.Report("Installing .NET SDK ...");
+        progress.Report("Installing .NET SDK ...");
         await SdkInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

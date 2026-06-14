@@ -11,7 +11,7 @@ public sealed class ModTemplateStepTest
         modTemplateInstaller.CheckInstalledAsync().Returns(true);
         var step = new ModTemplateStep { ModTemplateInstaller = modTemplateInstaller };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         modTemplateInstaller.InstallAsync().WasCalled(Times.Never);
     }
@@ -23,7 +23,7 @@ public sealed class ModTemplateStepTest
         modTemplateInstaller.CheckInstalledAsync().Returns(false);
         var step = new ModTemplateStep { ModTemplateInstaller = modTemplateInstaller };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         modTemplateInstaller.InstallAsync().WasCalled(Times.Once);
     }

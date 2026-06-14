@@ -4,13 +4,13 @@ internal sealed class MelonLoaderStep : ISetupStep
 {
     public SetupOptionKinds Kinds => SetupOptionKinds.MelonLoader;
 
-    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
         GameLocalService.ReadMelonLoaderVersion();
 
         if (GameConfig.MelonLoaderSemVersion is not { } localVersion)
         {
-            progress?.Report("Installing MelonLoader ...");
+            progress.Report("Installing MelonLoader ...");
             await InstallAsync(cancellationToken).ConfigureAwait(false);
             return;
         }
@@ -27,7 +27,7 @@ internal sealed class MelonLoaderStep : ISetupStep
         }
 
         Logger.ZLogInformation($"MelonLoader outdated: {localVersion} < {latestVersion}, upgrading");
-        progress?.Report($"Upgrading MelonLoader {localVersion} → {latestVersion} ...");
+        progress.Report($"Upgrading MelonLoader {localVersion} → {latestVersion} ...");
         await InstallAsync(cancellationToken).ConfigureAwait(false);
     }
 

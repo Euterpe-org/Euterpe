@@ -10,14 +10,14 @@ internal sealed class DotNetRuntimeStep : ISetupStep
 
     public SetupOptionKinds Kinds => SetupOptionKinds.DotNetRuntime;
 
-    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
         if (await RuntimeInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
-        progress?.Report("Installing .NET runtime ...");
+        progress.Report("Installing .NET runtime ...");
         await RuntimeInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

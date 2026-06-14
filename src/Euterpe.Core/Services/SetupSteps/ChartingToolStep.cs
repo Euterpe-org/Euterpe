@@ -10,7 +10,7 @@ internal sealed class ChartingToolStep : ISetupStep
 
     public SetupOptionKinds Kinds => SetupOptionKinds.ChartingTool;
 
-    public Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
         Logger.ZLogWarning($"SetupStep '{Kinds}' not implemented yet");
         return Task.CompletedTask;

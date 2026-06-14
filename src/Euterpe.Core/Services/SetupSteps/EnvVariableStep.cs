@@ -10,14 +10,14 @@ internal sealed class EnvVariableStep : ISetupStep
 
     public SetupOptionKinds Kinds => SetupOptionKinds.EnvVariable;
 
-    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
         if (PathEnvironment.IsSet())
         {
             return;
         }
 
-        progress?.Report("Setting environment variable ...");
+        progress.Report("Setting environment variable ...");
         PathEnvironment.Set();
     }
 }

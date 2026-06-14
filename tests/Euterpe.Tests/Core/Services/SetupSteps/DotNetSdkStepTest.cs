@@ -11,7 +11,7 @@ public sealed class DotNetSdkStepTest
         sdkInstaller.CheckInstalledAsync().Returns(true);
         var step = new DotNetSdkStep { SdkInstaller = sdkInstaller };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         sdkInstaller.InstallAsync().WasCalled(Times.Never);
     }
@@ -23,7 +23,7 @@ public sealed class DotNetSdkStepTest
         sdkInstaller.CheckInstalledAsync().Returns(false);
         var step = new DotNetSdkStep { SdkInstaller = sdkInstaller };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         sdkInstaller.InstallAsync().WasCalled(Times.Once);
     }

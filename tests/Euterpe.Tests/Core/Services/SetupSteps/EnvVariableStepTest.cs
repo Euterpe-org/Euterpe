@@ -11,7 +11,7 @@ public sealed class EnvVariableStepTest
         pathEnvironment.IsSet().Returns(true);
         var step = new EnvVariableStep { PathEnvironment = pathEnvironment };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         pathEnvironment.Set().WasCalled(Times.Never);
     }
@@ -23,7 +23,7 @@ public sealed class EnvVariableStepTest
         pathEnvironment.IsSet().Returns(false);
         var step = new EnvVariableStep { PathEnvironment = pathEnvironment };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         pathEnvironment.Set().WasCalled(Times.Once);
     }

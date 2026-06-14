@@ -23,7 +23,7 @@ public sealed class UninstallConflictsStepTest
 
         var step = CreateStep(modManageService);
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         modManageService.UninstallModAsync(Any<ModDto>()).WasCalled(Times.Never);
     }
@@ -37,7 +37,7 @@ public sealed class UninstallConflictsStepTest
 
         var step = CreateStep(modManageService);
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         modManageService.UninstallModAsync(Any<ModDto>()).WasCalled(Times.Never);
     }
@@ -54,7 +54,7 @@ public sealed class UninstallConflictsStepTest
 
         var step = CreateStep(modManageService);
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         modManageService.UninstallModAsync(evilMod).WasCalled(Times.Once);
     }
@@ -69,7 +69,7 @@ public sealed class UninstallConflictsStepTest
 
         var step = CreateStep(modManageService);
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         modManageService.UninstallModAsync(Any<ModDto>()).WasCalled(Times.Never);
     }

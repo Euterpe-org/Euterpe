@@ -11,7 +11,7 @@ public sealed class DotNetRuntimeStepTest
         runtimeInstaller.CheckInstalledAsync().Returns(true);
         var step = new DotNetRuntimeStep { RuntimeInstaller = runtimeInstaller };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         runtimeInstaller.InstallAsync().WasCalled(Times.Never);
     }
@@ -23,7 +23,7 @@ public sealed class DotNetRuntimeStepTest
         runtimeInstaller.CheckInstalledAsync().Returns(false);
         var step = new DotNetRuntimeStep { RuntimeInstaller = runtimeInstaller };
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         runtimeInstaller.InstallAsync().WasCalled(Times.Once);
     }

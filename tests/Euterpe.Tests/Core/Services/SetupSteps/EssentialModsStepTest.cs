@@ -29,13 +29,13 @@ public sealed class EssentialModsStepTest
         var modManageService = IModManageService.Mock();
         var step = CreateStep(modManageService);
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         modManageService.InitializeModsAsync().WasCalled(Times.Once);
     }
 
     [Test]
-    public async Task ExecuteAsync_ReportsProgress_WhenProgressProvided()
+    public async Task ExecuteAsync_ReportsProgress()
     {
         var modManageService = IModManageService.Mock();
         var step = CreateStep(modManageService);
@@ -51,15 +51,5 @@ public sealed class EssentialModsStepTest
         await reported.Task.WaitAsync(TimeSpan.FromSeconds(2));
 
         await Assert.That(reports).Contains("Initializing essential mods ...");
-    }
-
-    [Test]
-    public async Task ExecuteAsync_DoesNotThrow_WhenProgressIsNull()
-    {
-        var modManageService = IModManageService.Mock();
-        var step = CreateStep(modManageService);
-
-        var act = async () => await step.ExecuteAsync();
-        await Assert.That(act).ThrowsNothing();
     }
 }

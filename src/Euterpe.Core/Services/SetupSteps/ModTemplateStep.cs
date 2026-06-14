@@ -10,14 +10,14 @@ internal sealed class ModTemplateStep : ISetupStep
 
     public SetupOptionKinds Kinds => SetupOptionKinds.ModTemplate;
 
-    public async Task ExecuteAsync(IProgress<string>? progress = null, CancellationToken cancellationToken = default)
+    public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
         if (await ModTemplateInstaller.CheckInstalledAsync().ConfigureAwait(false))
         {
             return;
         }
 
-        progress?.Report("Installing mod template ...");
+        progress.Report("Installing mod template ...");
         await ModTemplateInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

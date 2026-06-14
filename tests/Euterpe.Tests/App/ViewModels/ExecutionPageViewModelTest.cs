@@ -132,7 +132,7 @@ public sealed class ExecutionPageViewModelTest
     {
         var step = ISetupStep.Mock();
         step.Kinds.Returns(kinds);
-        step.ExecuteAsync(Any<IProgress<string>?>(), Any<CancellationToken>())
+        step.ExecuteAsync(Any<IProgress<string>>(), Any<CancellationToken>())
             .Throws<InvalidOperationException>();
         return step;
     }

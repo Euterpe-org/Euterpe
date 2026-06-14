@@ -26,7 +26,7 @@ public sealed class MelonLoaderStepTest
 
         var step = CreateStep(depService, localService, new MuseDashConfig());
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         using var _ = Assert.Multiple();
         depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).WasCalled(Times.Never);
@@ -48,7 +48,7 @@ public sealed class MelonLoaderStepTest
 
         var step = CreateStep(depService, localService, new MuseDashConfig { MelonLoaderVersion = "0.7.0" });
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         using var _ = Assert.Multiple();
         depService.AcquireForMelonLoaderAsync(
@@ -69,7 +69,7 @@ public sealed class MelonLoaderStepTest
 
         var step = CreateStep(depService, localService, new MuseDashConfig { MelonLoaderVersion = "0.6.5" });
 
-        var act = async () => await step.ExecuteAsync();
+        var act = async () => await step.ExecuteAsync(new Progress<string>(_ => { }));
         await Assert.That(act).Throws<InvalidOperationException>();
 
         using var _ = Assert.Multiple();
@@ -90,7 +90,7 @@ public sealed class MelonLoaderStepTest
 
         var step = CreateStep(depService, localService, new MuseDashConfig { MelonLoaderVersion = "0.6.5" });
 
-        await step.ExecuteAsync();
+        await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         using var _ = Assert.Multiple();
         depService.AcquireForMelonLoaderAsync(
