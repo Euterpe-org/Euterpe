@@ -11,28 +11,34 @@ internal sealed class WindowsSystemAssociationSetup : ISystemAssociationSetup
 
     #endregion Injections
 
-    public async Task RegisterAsync(string processPath)
+    public Task RegisterAsync(string processPath)
     {
         try
         {
-            using var schemeKey = Registry.CurrentUser.CreateSubKey($@"Software\Classes\{ISystemAssociationSetup.DeepLinkScheme}");
-            schemeKey.SetValue(string.Empty, $"URL:{AppName} Protocol", RegistryValueKind.String);
-            schemeKey.SetValue("URL Protocol", string.Empty, RegistryValueKind.String);
-
-            using var commandKey = schemeKey.CreateSubKey(@"shell\open\command");
-            commandKey.SetValue(string.Empty, $"\"{processPath}\" \"%1\"", RegistryValueKind.String);
-
-            using var iconKey = schemeKey.CreateSubKey("DefaultIcon");
-            iconKey.SetValue(string.Empty, $"\"{processPath}\",0", RegistryValueKind.String);
-
+            RegisterDeepLinkScheme(processPath);
             RegisterEpkFileAssociation(processPath);
 
             Logger.ZLogInformation($"Registered deep link protocol and file association on Windows with process path: {processPath}");
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to register deep link protocol on Windows");
+            Logger.ZLogError(ex, $"Failed to register deep link protocol and file association on Windows");
         }
+
+        return Task.CompletedTask;
+    }
+
+    private static void RegisterDeepLinkScheme(string processPath)
+    {
+        using var schemeKey = Registry.CurrentUser.CreateSubKey($@"Software\Classes\{ISystemAssociationSetup.DeepLinkScheme}");
+        schemeKey.SetValue(string.Empty, $"URL:{AppName} Protocol", RegistryValueKind.String);
+        schemeKey.SetValue("URL Protocol", string.Empty, RegistryValueKind.String);
+
+        using var commandKey = schemeKey.CreateSubKey(@"shell\open\command");
+        commandKey.SetValue(string.Empty, $"\"{processPath}\" \"%1\"", RegistryValueKind.String);
+
+        using var iconKey = schemeKey.CreateSubKey("DefaultIcon");
+        iconKey.SetValue(string.Empty, $"\"{processPath}\",0", RegistryValueKind.String);
     }
 
     private static void RegisterEpkFileAssociation(string processPath)
