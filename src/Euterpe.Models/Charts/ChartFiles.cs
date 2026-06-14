@@ -2,7 +2,8 @@ namespace Euterpe.Models.Charts;
 
 public static class ChartFiles
 {
-    public const string ManifestFileName = "manifest.epk";
+    public const string ManifestExtension = ".epk";
+    public const string ManifestFileName = $"manifest{ManifestExtension}";
     public const string PackageExtension = ".zip";
     public const string MusicFileName = $"{MusicName}{MusicExtension}";
     public const string DemoFileName = $"{DemoName}{MusicExtension}";
