@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using Avalonia.Threading;
 using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Core;
@@ -31,7 +30,7 @@ internal sealed partial class ChartManageService
 
         if (!migratedCharts.IsEmpty)
         {
-            await Dispatcher.UIThread.InvokeAsync(() => _sourceCache.AddOrUpdate(migratedCharts)).GetTask().ConfigureAwait(false);
+            _sourceCache.AddOrUpdate(migratedCharts);
         }
 
         var migrated = outcomes.Count(outcome => outcome is MigrationOutcome.Migrated);
