@@ -14,7 +14,7 @@ internal sealed class AppInitializer
         app.RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
         LocalizationService.SetLanguage(Config.LanguageCode);
 
-        DeepLinkService.SetupAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to register deep-link OS handler"));
+        SystemActivationService.SetupAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to register OS associations"));
 
         if (app.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -28,7 +28,7 @@ internal sealed class AppInitializer
                     return window;
                 }
             };
-            DeepLinkService.HandleStartupArgs(desktop.Args!);
+            SystemActivationService.HandleStartupArgs(desktop.Args!);
         }
 
         if (app.ApplicationLifetime is IControlledApplicationLifetime controlled)
@@ -68,7 +68,7 @@ internal sealed class AppInitializer
     public required AppViewModel AppViewModel { get; init; }
     public required MainSplashWindowViewModel MainSplashWindowViewModel { get; init; }
     public required MainWindowViewModel MainWindowViewModel { get; init; }
-    public required DeepLinkService DeepLinkService { get; init; }
+    public required SystemActivationService SystemActivationService { get; init; }
     public required LocalizationService LocalizationService { get; init; }
     public required IAppSettingService AppSettingService { get; init; }
     public required ILogger<App> Logger { get; init; }

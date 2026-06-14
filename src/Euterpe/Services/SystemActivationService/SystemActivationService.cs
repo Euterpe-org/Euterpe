@@ -2,7 +2,7 @@ using System.Web;
 
 namespace Euterpe.Services;
 
-public sealed partial class DeepLinkService
+public sealed partial class SystemActivationService
 {
     private IChartManageService ChartManageService => GameScope.Value.Resolve<IChartManageService>();
     private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
@@ -100,7 +100,7 @@ public sealed partial class DeepLinkService
     #region Injections
 
     public required NavigationService NavigationService { get; init; }
-    public required ILogger<DeepLinkService> Logger { get; init; }
+    public required ILogger<SystemActivationService> Logger { get; init; }
     public required ISystemAssociationSetup AssociationSetup { get; init; }
     public required BehaviorSubject<ILifetimeScope> GameScope { get; init; }
 

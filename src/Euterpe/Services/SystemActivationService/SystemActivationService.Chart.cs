@@ -1,6 +1,6 @@
 namespace Euterpe.Services;
 
-public sealed partial class DeepLinkService
+public sealed partial class SystemActivationService
 {
     private async Task HandleChartActionAsync(string path)
     {

@@ -91,7 +91,7 @@ internal static class Bootstrapper
 
                     if (!argument.IsNullOrEmpty())
                     {
-                        Dispatcher.UIThread.Post(() => IocContainer.Resolve<DeepLinkService>().HandleActivation(argument));
+                        Dispatcher.UIThread.Post(() => IocContainer.Resolve<SystemActivationService>().HandleActivation(argument));
                     }
                 }
             }

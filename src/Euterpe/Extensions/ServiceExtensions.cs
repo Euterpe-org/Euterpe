@@ -10,7 +10,7 @@ public static partial class ServiceExtensions
         {
             // Self Services
             builder.RegisterType<AppInitializer>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<DeepLinkService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<SystemActivationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<GameSwitcher>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LocalizationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();

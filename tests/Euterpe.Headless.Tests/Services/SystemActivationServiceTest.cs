@@ -11,12 +11,12 @@ using TUnit.Mocks.Logging;
 
 namespace Euterpe.Headless.Tests.Services;
 
-[TestSubject(typeof(DeepLinkService))]
-public sealed class DeepLinkServiceTest : HeadlessTest
+[TestSubject(typeof(SystemActivationService))]
+public sealed class SystemActivationServiceTest : HeadlessTest
 {
-    private static DeepLinkService NewService(
+    private static SystemActivationService NewService(
         ISystemAssociationSetup? setup = null,
-        MockLogger<DeepLinkService>? logger = null,
+        MockLogger<SystemActivationService>? logger = null,
         IModManageService? modManageService = null,
         IChartManageService? chartManageService = null)
     {
@@ -32,13 +32,13 @@ public sealed class DeepLinkServiceTest : HeadlessTest
         }
 
         var container = builder.Build();
-        return new DeepLinkService
+        return new SystemActivationService
         {
             NavigationService = new NavigationService
             {
                 Logger = NullLogger<NavigationService>.Instance
             },
-            Logger = logger ?? Mock.Logger<DeepLinkService>(),
+            Logger = logger ?? Mock.Logger<SystemActivationService>(),
             AssociationSetup = setup ?? ISystemAssociationSetup.Mock(),
             GameScope = new BehaviorSubject<ILifetimeScope>(container)
         };
@@ -47,7 +47,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     [Test]
     public Task HandleStartupArgs_Empty_DoesNothing() => RunOnUI(async () =>
     {
-        var logger = Mock.Logger<DeepLinkService>();
+        var logger = Mock.Logger<SystemActivationService>();
         var service = NewService(logger: logger);
 
         service.HandleStartupArgs([]);
@@ -58,7 +58,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     [Test]
     public Task HandleStartupArgs_NonUri_LogsWarning() => RunOnUI(async () =>
     {
-        var logger = Mock.Logger<DeepLinkService>();
+        var logger = Mock.Logger<SystemActivationService>();
         var service = NewService(logger: logger);
 
         service.HandleStartupArgs(["not-a-uri-at-all"]);
@@ -72,7 +72,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     [Test]
     public Task HandleActivation_NonAbsoluteUri_LogsWarning() => RunOnUI(async () =>
     {
-        var logger = Mock.Logger<DeepLinkService>();
+        var logger = Mock.Logger<SystemActivationService>();
         var service = NewService(logger: logger);
 
         service.HandleActivation("relative/path");
@@ -86,7 +86,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     [Test]
     public Task HandleActivation_WrongScheme_LogsWarning() => RunOnUI(async () =>
     {
-        var logger = Mock.Logger<DeepLinkService>();
+        var logger = Mock.Logger<SystemActivationService>();
         var service = NewService(logger: logger);
 
         service.HandleActivation("http://example.com/mod/install/foo");
@@ -100,7 +100,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     [Test]
     public Task HandleActivation_LogsReceivedAtInfoLevel() => RunOnUI(async () =>
     {
-        var logger = Mock.Logger<DeepLinkService>();
+        var logger = Mock.Logger<SystemActivationService>();
         var service = NewService(logger: logger);
 
         service.HandleActivation("not-a-uri");
@@ -113,7 +113,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     });
 
     [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = "GetEpkPath")]
-    private static extern string? InvokeGetEpkPath(DeepLinkService? service, string argument);
+    private static extern string? InvokeGetEpkPath(SystemActivationService? service, string argument);
 
     [Test]
     public async Task GetEpkPath_RelativeEpkPath_ReturnsArgument()
@@ -142,7 +142,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     }
 
     [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = "ShouldActivateWindow")]
-    private static extern bool InvokeShouldActivateWindow(DeepLinkService? service, string query);
+    private static extern bool InvokeShouldActivateWindow(SystemActivationService? service, string query);
 
     [Test]
     [Arguments("", true)]
@@ -163,10 +163,10 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     // gate + ActivateMainWindow sitting between HandleActivation and the per-domain dispatch).
 
     [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleModActionAsync")]
-    private static extern Task InvokeModAction(DeepLinkService service, string path);
+    private static extern Task InvokeModAction(SystemActivationService service, string path);
 
     [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleChartActionAsync")]
-    private static extern Task InvokeChartAction(DeepLinkService service, string path);
+    private static extern Task InvokeChartAction(SystemActivationService service, string path);
 
     [Test]
     public async Task HandleModAction_Update_WithoutName_UpdatesAllMods()
@@ -225,7 +225,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     [Test]
     public async Task HandleChartAction_Convert_MigratesCustomAlbums()
     {
-        var logger = Mock.Logger<DeepLinkService>();
+        var logger = Mock.Logger<SystemActivationService>();
         var charts = IChartManageService.Mock();
         var service = NewService(logger: logger, chartManageService: charts);
 
@@ -240,7 +240,7 @@ public sealed class DeepLinkServiceTest : HeadlessTest
     [Test]
     public async Task HandleChartAction_UnknownPath_LogsWarning()
     {
-        var logger = Mock.Logger<DeepLinkService>();
+        var logger = Mock.Logger<SystemActivationService>();
         var service = NewService(logger: logger);
 
         await InvokeChartAction(service, "bogus");
