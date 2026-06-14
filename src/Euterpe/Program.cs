@@ -27,9 +27,9 @@ internal static class Program
         CleanupLogFiles();
         CleanupBackupFiles();
         ConfigureContainer();
-        StartDeepLinkPipeServer();
+        StartActivationPipeServer();
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        StopDeepLinkPipeServer();
+        StopActivationPipeServer();
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.

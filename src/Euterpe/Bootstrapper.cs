@@ -4,20 +4,20 @@ namespace Euterpe;
 
 internal static class Bootstrapper
 {
-    private const string PipeName = $"{AppName}-DeepLink";
+    private const string PipeName = $"{AppName}-Activation";
     private const string BootstrapLogFile = "bootstrap.log";
 
-    private static readonly CancellationTokenSource DeepLinkPipeCts = new();
+    private static readonly CancellationTokenSource ActivationPipeCts = new();
 
-    internal static void StartDeepLinkPipeServer()
+    internal static void StartActivationPipeServer()
     {
-        ListenForDeepLinkPipeAsync(DeepLinkPipeCts.Token).SafeFireAndForget();
+        ListenForActivationPipeAsync(ActivationPipeCts.Token).SafeFireAndForget();
     }
 
-    internal static void StopDeepLinkPipeServer()
+    internal static void StopActivationPipeServer()
     {
-        DeepLinkPipeCts.Cancel();
-        DeepLinkPipeCts.Dispose();
+        ActivationPipeCts.Cancel();
+        ActivationPipeCts.Dispose();
     }
 
     internal static void CleanupLogFiles()
@@ -76,7 +76,7 @@ internal static class Bootstrapper
         }
     }
 
-    private static async Task ListenForDeepLinkPipeAsync(CancellationToken ct)
+    private static async Task ListenForActivationPipeAsync(CancellationToken ct)
     {
         while (!ct.IsCancellationRequested)
         {
