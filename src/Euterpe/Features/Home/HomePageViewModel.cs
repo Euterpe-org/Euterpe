@@ -6,14 +6,11 @@ namespace Euterpe.Features.Home;
 [PerGame]
 public sealed partial class HomePageViewModel : ViewModelBase
 {
-    public IReadOnlyList<LocalizedString> GameModes { get; } =
+    public static IReadOnlyList<EnumOption<GameMode>> GameModes { get; } =
     [
-        Dropdown_Modded,
-        Dropdown_Vanilla
+        .. GameModeExtensions.GetValues().Select(static mode =>
+            new EnumOption<GameMode>(mode, $"{nameof(GameMode)}_{mode.ToStringFast()}"))
     ];
-
-    [ObservableProperty]
-    public partial int SelectedGameModeIndex { get; set; }
 
     protected override async Task OnInitializeAsync()
     {
@@ -69,10 +66,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
         }
 
         GameLocalService.ReadMelonLoaderVersion();
-        SelectedGameModeIndex = (int)GameConfig.GameMode;
     }
-
-    partial void OnSelectedGameModeIndexChanged(int value) => GameConfig.GameMode = (GameMode)value;
 
     #region Injections
 

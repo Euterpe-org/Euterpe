@@ -8,24 +8,12 @@ namespace Euterpe.Tests;
 public sealed class HomePageViewModelTest
 {
     [Test]
-    [Arguments(0, GameMode.Modded)]
-    [Arguments(1, GameMode.Vanilla)]
-    public async Task SelectedGameModeIndex_ChangedWritesToGameConfig(int index, GameMode expected)
-    {
-        var gameConfig = new MuseDashConfig();
-        var vm = NewViewModel(gameConfig);
-
-        vm.SelectedGameModeIndex = index;
-
-        await Assert.That(gameConfig.GameMode).IsEqualTo(expected);
-    }
-
-    [Test]
     public async Task GameModes_HasModdedAndVanilla()
     {
-        var vm = NewViewModel(new MuseDashConfig());
-
-        await Assert.That(vm.GameModes).Count().IsEqualTo(2);
+        using var _ = Assert.Multiple();
+        await Assert.That(HomePageViewModel.GameModes).Count().IsEqualTo(2);
+        await Assert.That(HomePageViewModel.GameModes[0].Value).IsEqualTo(GameMode.Modded);
+        await Assert.That(HomePageViewModel.GameModes[1].Value).IsEqualTo(GameMode.Vanilla);
     }
 
     [Test]

@@ -184,12 +184,6 @@
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>열기</value>
   </data>
-  <data name="Dropdown_Modded" xml:space="preserve">
-    <value>모드 적용</value>
-  </data>
-  <data name="Dropdown_Vanilla" xml:space="preserve">
-    <value>바닐라</value>
-  </data>
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>뒤로</value>
   </data>
@@ -285,6 +279,12 @@
   </data>
   <data name="Folder_UserLibs" xml:space="preserve">
     <value>UserLibs</value>
+  </data>
+  <data name="GameMode_Modded" xml:space="preserve">
+    <value>모드 적용</value>
+  </data>
+  <data name="GameMode_Vanilla" xml:space="preserve">
+    <value>바닐라</value>
   </data>
   <data name="HomePage_Button_GitHubStar" xml:space="preserve">
     <value>GitHub에서 Star</value>

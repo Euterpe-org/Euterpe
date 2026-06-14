@@ -184,12 +184,6 @@
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>Abrir</value>
   </data>
-  <data name="Dropdown_Modded" xml:space="preserve">
-    <value>Com mods</value>
-  </data>
-  <data name="Dropdown_Vanilla" xml:space="preserve">
-    <value>Vanilla</value>
-  </data>
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Voltar</value>
   </data>
@@ -285,6 +279,12 @@
   </data>
   <data name="Folder_UserLibs" xml:space="preserve">
     <value>Bibliotecas do usuário</value>
+  </data>
+  <data name="GameMode_Modded" xml:space="preserve">
+    <value>Com mods</value>
+  </data>
+  <data name="GameMode_Vanilla" xml:space="preserve">
+    <value>Vanilla</value>
   </data>
   <data name="HomePage_Button_GitHubStar" xml:space="preserve">
     <value>Favoritar no GitHub</value>

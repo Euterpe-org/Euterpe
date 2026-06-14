@@ -63,7 +63,8 @@
                 Content="{Localize {x:Static loc:XAMLLiteral.Button_LaunchGame}}"
                 HorizontalAlignment="Right"
                 ItemsSource="{Binding GameModes, Mode=OneTime}"
-                SelectedIndex="{Binding SelectedGameModeIndex, Mode=TwoWay}" />
+                SelectedValue="{Binding GameConfig.GameMode, Mode=TwoWay}"
+                SelectedValueBinding="{Binding Value}" />
         </StackPanel>
 
         <!--  Support Card  -->
