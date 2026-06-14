@@ -104,7 +104,7 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
         catch (Exception ex)
         {
             step.Status = SetupStepStatus.Failed;
-            step.ErrorMessage = Setup_Step_Failed;
+            step.ErrorMessage = XAML.Setup_Step_Failed;
             Logger.ZLogError(ex, $"Setup step '{step.Kinds}' failed");
         }
     }
