@@ -111,7 +111,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task MigrateCustomAlbumsAsync()
+    public async Task MigrateCustomAlbumsAsync()
     {
         MigrationDialog.Reset();
 

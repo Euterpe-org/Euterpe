@@ -1,10 +1,12 @@
 using System.Web;
+using Euterpe.Features.Charting;
 
 namespace Euterpe.Services;
 
 public sealed partial class SystemActivationService
 {
     private IChartManageService ChartManageService => GameScope.Value.Resolve<IChartManageService>();
+    private ChartManagePanelViewModel ChartManagePanelViewModel => GameScope.Value.Resolve<ChartManagePanelViewModel>();
     private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
 
     private void HandleDeepLink(Uri uri)

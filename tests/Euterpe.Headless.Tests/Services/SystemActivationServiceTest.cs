@@ -1,8 +1,11 @@
 using System.Runtime.CompilerServices;
 using Autofac;
 using Euterpe.Abstractions;
+using Euterpe.Features.Charting;
+using Euterpe.Models;
 using Euterpe.Models.Migrations;
 using Euterpe.Models.Mods;
+using Euterpe.Models.Playback;
 using Euterpe.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -18,7 +21,8 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         ISystemAssociationSetup? setup = null,
         MockLogger<SystemActivationService>? logger = null,
         IModManageService? modManageService = null,
-        IChartManageService? chartManageService = null)
+        IChartManageService? chartManageService = null,
+        ChartManagePanelViewModel? chartViewModel = null)
     {
         var builder = new ContainerBuilder();
         if (modManageService is not null)
@@ -29,6 +33,11 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         if (chartManageService is not null)
         {
             builder.RegisterInstance(chartManageService).As<IChartManageService>();
+        }
+
+        if (chartViewModel is not null)
+        {
+            builder.RegisterInstance(chartViewModel).AsSelf();
         }
 
         var container = builder.Build();
@@ -223,11 +232,23 @@ public sealed class SystemActivationServiceTest : HeadlessTest
     }
 
     [Test]
-    public async Task HandleChartAction_Convert_MigratesCustomAlbums()
+    public Task HandleChartAction_Convert_MigratesCustomAlbums() => RunOnUI(async () =>
     {
         var logger = Mock.Logger<SystemActivationService>();
         var charts = IChartManageService.Mock();
-        var service = NewService(logger: logger, chartManageService: charts);
+        var viewModel = new ChartManagePanelViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            Playback = new PlaybackState(),
+            AudioPlayerService = IAudioPlayerService.Mock(),
+            ChartManageService = charts,
+            DialogService = IDialogService.Mock(),
+            GameSwitcher = new GameSwitcher { Config = new Config(), Logger = NullLogger<GameSwitcher>.Instance },
+            Logger = NullLogger<ChartManagePanelViewModel>.Instance,
+            MigrationDialog = new MigrationProgressDialogViewModel { Launcher = IPlatformLauncher.Mock() },
+            NotificationService = INotificationService.Mock()
+        };
+        var service = NewService(logger: logger, chartManageService: charts, chartViewModel: viewModel);
 
         await InvokeChartAction(service, "convert");
 
@@ -235,7 +256,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         charts.MigrateCustomAlbumsAsync(Any<IProgress<MigrationProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Information && e.Message.Contains("Chart convert"))).IsTrue();
         await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Warning)).IsFalse();
-    }
+    });
 
     [Test]
     public async Task HandleChartAction_UnknownPath_LogsWarning()

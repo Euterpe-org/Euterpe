@@ -10,7 +10,7 @@ public sealed partial class SystemActivationService
         {
             case ["convert"]:
                 Logger.ZLogInformation($"Chart convert deep link received, migrating CustomAlbums charts");
-                await ChartManageService.MigrateCustomAlbumsAsync().ConfigureAwait(false);
+                await ChartManagePanelViewModel.MigrateCustomAlbumsAsync().ConfigureAwait(false);
                 break;
 
             case ["download", var chartId]:
