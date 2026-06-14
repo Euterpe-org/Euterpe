@@ -21,7 +21,18 @@ internal sealed partial class ModManageService : IModManageService
 
     public Task InstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => InstallModCoreAsync(mod));
 
-    public Task UpdateModAsync(ModDto mod) => RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod));
+    public async Task UpdateModAsync(ModDto mod)
+    {
+        var (success, name) = await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false);
+        if (success)
+        {
+            NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, name);
+        }
+        else
+        {
+            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, name);
+        }
+    }
 
     public Task ReinstallModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ReinstallModCoreAsync(mod));
 
@@ -29,15 +40,31 @@ internal sealed partial class ModManageService : IModManageService
 
     public Task ToggleModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ToggleModCoreAsync(mod));
 
-    public async Task UpdateAllModsAsync()
+    public async Task<int> UpdateAllModsAsync()
     {
         var outdatedMods = _sourceCache.Items.Where(mod => mod.State is ModState.Outdated).ToArray();
         Logger.ZLogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
 
+        var updated = 0;
         foreach (var mod in outdatedMods)
         {
-            await UpdateModAsync(mod).ConfigureAwait(false);
+            if ((await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false)).Success)
+            {
+                updated++;
+            }
         }
+
+        var failed = outdatedMods.Length - updated;
+        if (failed > 0)
+        {
+            NotificationService.WarningLight(Notification_Content_Mod_UpdateAll_Partial, updated, failed);
+        }
+        else if (updated > 0)
+        {
+            NotificationService.SuccessLight(Notification_Content_Mod_UpdateAll_Success, updated);
+        }
+
+        return outdatedMods.Length;
     }
 
     #region Injections

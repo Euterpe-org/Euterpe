@@ -52,7 +52,7 @@ internal sealed partial class ModManageService
         NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, mod.Name);
     }
 
-    private async Task UpdateModCoreAsync(ModDto mod)
+    private async Task<ModUpdateResult> UpdateModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Updating mod: {mod.Name} from version {mod.LocalVersion} to version {mod.Version}");
 
@@ -63,12 +63,11 @@ internal sealed partial class ModManageService
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to update mod {mod.Name}");
-            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, mod.Name);
-            return;
+            return new ModUpdateResult(false, mod.Name);
         }
 
         Logger.ZLogInformation($"Mod {mod.Name} successfully updated to version {mod.Version}");
-        NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, mod.Name);
+        return new ModUpdateResult(true, mod.Name);
     }
 
     private async Task ReinstallModCoreAsync(ModDto mod)
@@ -129,4 +128,18 @@ internal sealed partial class ModManageService
             await action().ConfigureAwait(false);
             mod.IsProcessing = false;
         }).ConfigureAwait(false);
+
+    private async Task<T> RunExclusiveAsync<T>(ModDto mod, Func<Task<T>> action)
+    {
+        T result = default!;
+        await _singleFlight.RunAsync(mod.Name, async () =>
+        {
+            mod.IsProcessing = true;
+            result = await action().ConfigureAwait(false);
+            mod.IsProcessing = false;
+        }).ConfigureAwait(false);
+        return result;
+    }
+
+    private readonly record struct ModUpdateResult(bool Success, string Name);
 }
