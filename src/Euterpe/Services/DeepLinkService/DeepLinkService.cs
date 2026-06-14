@@ -18,16 +18,23 @@ public sealed partial class DeepLinkService
             return;
         }
 
-        HandleUri(args[0]);
+        HandleActivation(args[0]);
     }
 
-    public void HandleUri(string uri)
+    public void HandleActivation(string argument)
     {
-        Logger.ZLogInformation($"Deep link received: {uri}");
+        Logger.ZLogInformation($"Activation received: {argument}");
 
-        if (!Uri.TryCreate(uri, UriKind.Absolute, out var parsed) || parsed.Scheme is not IDeepLinkSetup.DeepLinkScheme)
+        if (GetEpkPath(argument) is { } epkFilePath)
         {
-            Logger.ZLogWarning($"Invalid deep link: {uri}");
+            ActivateMainWindow(true);
+            HandleEpkFileAsync(epkFilePath).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to open EPK file: {epkFilePath}"));
+            return;
+        }
+
+        if (!Uri.TryCreate(argument, UriKind.Absolute, out var parsed) || parsed.Scheme is not ISystemAssociationSetup.DeepLinkScheme)
+        {
+            Logger.ZLogWarning($"Unhandled activation: {argument}");
             return;
         }
 
@@ -37,7 +44,19 @@ public sealed partial class DeepLinkService
         var path = Uri.UnescapeDataString(parsed.AbsolutePath.TrimStart('/'));
         var query = Uri.UnescapeDataString(parsed.Query.TrimStart('?'));
 
-        HandleActionAsync(action, path, query).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {uri}"));
+        HandleActionAsync(action, path, query).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {argument}"));
+    }
+
+    private static string? GetEpkPath(string argument)
+    {
+        if (Uri.TryCreate(argument, UriKind.Absolute, out var uri))
+        {
+            return uri.IsFile && uri.LocalPath.EndsWith(ChartFiles.ManifestExtension, StringComparison.OrdinalIgnoreCase)
+                ? uri.LocalPath
+                : null;
+        }
+
+        return argument.EndsWith(ChartFiles.ManifestExtension, StringComparison.OrdinalIgnoreCase) ? argument : null;
     }
 
     private async Task HandleActionAsync(string action, string path, string query)

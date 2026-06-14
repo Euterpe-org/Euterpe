@@ -66,54 +66,83 @@ public sealed class DeepLinkServiceTest : HeadlessTest
         var warning = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Warning);
         using var _ = Assert.Multiple();
         await Assert.That(warning).IsNotNull();
-        await Assert.That(warning!.Message).Contains("Invalid deep link");
+        await Assert.That(warning!.Message).Contains("Unhandled activation");
     });
 
     [Test]
-    public Task HandleUri_NonAbsoluteUri_LogsWarning() => RunOnUI(async () =>
+    public Task HandleActivation_NonAbsoluteUri_LogsWarning() => RunOnUI(async () =>
     {
         var logger = Mock.Logger<DeepLinkService>();
         var service = NewService(logger: logger);
 
-        service.HandleUri("relative/path");
+        service.HandleActivation("relative/path");
 
         var warning = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Warning);
         using var _ = Assert.Multiple();
         await Assert.That(warning).IsNotNull();
-        await Assert.That(warning!.Message).Contains("Invalid deep link");
+        await Assert.That(warning!.Message).Contains("Unhandled activation");
     });
 
     [Test]
-    public Task HandleUri_WrongScheme_LogsWarning() => RunOnUI(async () =>
+    public Task HandleActivation_WrongScheme_LogsWarning() => RunOnUI(async () =>
     {
         var logger = Mock.Logger<DeepLinkService>();
         var service = NewService(logger: logger);
 
-        service.HandleUri("http://example.com/mod/install/foo");
+        service.HandleActivation("http://example.com/mod/install/foo");
 
         var warning = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Warning);
         using var _ = Assert.Multiple();
         await Assert.That(warning).IsNotNull();
-        await Assert.That(warning!.Message).Contains("Invalid deep link");
+        await Assert.That(warning!.Message).Contains("Unhandled activation");
     });
 
     [Test]
-    public Task HandleUri_LogsReceivedAtInfoLevel() => RunOnUI(async () =>
+    public Task HandleActivation_LogsReceivedAtInfoLevel() => RunOnUI(async () =>
     {
         var logger = Mock.Logger<DeepLinkService>();
         var service = NewService(logger: logger);
 
-        service.HandleUri("not-a-uri");
+        service.HandleActivation("not-a-uri");
 
         var info = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Information);
         using var _ = Assert.Multiple();
         await Assert.That(info).IsNotNull();
-        await Assert.That(info!.Message).Contains("Deep link received");
+        await Assert.That(info!.Message).Contains("Activation received");
         await Assert.That(info.Message).Contains("not-a-uri");
     });
 
+    [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = "GetEpkPath")]
+    private static extern string? InvokeGetEpkPath(DeepLinkService? service, string argument);
+
+    [Test]
+    public async Task GetEpkPath_RelativeEpkPath_ReturnsArgument()
+    {
+        await Assert.That(InvokeGetEpkPath(null, "foo.epk")).IsEqualTo("foo.epk");
+    }
+
+    [Test]
+    public async Task GetEpkPath_EpkFileUri_ReturnsLocalPathEndingInExtension()
+    {
+        var result = InvokeGetEpkPath(null, "file:///charts/foo.epk");
+
+        using var _ = Assert.Multiple();
+        await Assert.That(result).IsNotNull();
+        await Assert.That(result!).EndsWith(".epk");
+    }
+
+    [Test]
+    [Arguments("euterpe://mod/install/foo")]
+    [Arguments("http://example.com/charts/foo.epk")]
+    [Arguments("file:///charts/foo.txt")]
+    [Arguments("not-a-uri")]
+    public async Task GetEpkPath_NonEpk_ReturnsNull(string argument)
+    {
+        await Assert.That(InvokeGetEpkPath(null, argument)).IsNull();
+    }
+
     // Private HandleModActionAsync / HandleChartActionAsync tests (bypass the NavigationService.Ready
-    // gate + ActivateMainWindow sitting between HandleUri and the per-domain dispatch).
+    // gate + ActivateMainWindow sitting between HandleActivation and the per-domain dispatch).
 
     [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleModActionAsync")]
     private static extern Task InvokeModAction(DeepLinkService service, string path);

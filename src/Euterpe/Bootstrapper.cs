@@ -63,11 +63,11 @@ internal static class Bootstrapper
     {
         try
         {
-            var uri = args[0];
+            var argument = args[0];
             using var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out);
             client.Connect(3000);
             using var writer = new StreamWriter(client);
-            writer.Write(uri);
+            writer.Write(argument);
             writer.Flush();
         }
         catch (Exception ex)
@@ -87,11 +87,11 @@ internal static class Bootstrapper
                 {
                     await server.WaitForConnectionAsync(ct).ConfigureAwait(false);
                     using var reader = new StreamReader(server);
-                    var uri = await reader.ReadToEndAsync(ct).ConfigureAwait(false);
+                    var argument = await reader.ReadToEndAsync(ct).ConfigureAwait(false);
 
-                    if (!uri.IsNullOrEmpty())
+                    if (!argument.IsNullOrEmpty())
                     {
-                        Dispatcher.UIThread.Post(() => IocContainer.Resolve<DeepLinkService>().HandleUri(uri));
+                        Dispatcher.UIThread.Post(() => IocContainer.Resolve<DeepLinkService>().HandleActivation(argument));
                     }
                 }
             }

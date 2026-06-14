@@ -24,7 +24,7 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
         }
     }
 
-    private async Task OpenEpkAsync(string filePath)
+    public async Task OpenEpkAsync(string filePath)
     {
         Manifest manifest;
         try
