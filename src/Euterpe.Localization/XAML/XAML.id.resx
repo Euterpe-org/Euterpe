@@ -97,8 +97,14 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Dapatkan Chart</value>
   </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>Migrasikan Chart MDM</value>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>Migrasi Semua Chart MDM</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>Migrasi Chart</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>Migrasi sedang berlangsung. Mohon tunggu dan jangan tutup aplikasi.</value>
   </data>
   <data name="ChartManage_Rating" xml:space="preserve">
     <value>Tingkat</value>
@@ -154,6 +160,27 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>Pengembang</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>Lanjutkan</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>Salin Detail</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>Keluar</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>Umpan Balik GitHub</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>Buka Log</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe mengalami kesalahan</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>Laporan Crash</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>Buka</value>
   </data>
@@ -162,6 +189,81 @@
   </data>
   <data name="Dropdown_Vanilla" xml:space="preserve">
     <value>Vanilla</value>
+  </data>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>Kembali</value>
+  </data>
+  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
+    <value>Rentang</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>Penulis</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>Opasitas Video Latar</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>Deskripsi</value>
+  </data>
+  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
+    <value>Kesulitan</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>Sembunyikan Pesan</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>Sembunyikan Mode</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>Sembunyikan Penggantian Rating</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>Nama</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>Nama Romanisasi</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>Aman untuk Streamer</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>Adegan</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>Adegan (Easter Egg)</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>Kata Kunci Pencarian</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
+    <value>Pisahkan kata kunci dengan koma</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>Segarkan</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>Buka dan edit metadata manifest.epk sebuah chart</value>
+  </data>
+  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
+    <value>Editor Metadata EPK</value>
+  </data>
+  <data name="EpkEditor_Map_Charters" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>Tingkat</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>Buka File EPK…</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>Simpan</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Log Aplikasi</value>
@@ -200,7 +302,7 @@
     <value>Kunjungi</value>
   </data>
   <data name="InitializingMessage" xml:space="preserve">
-      <value>Menginisialisasi...</value>
+    <value>Menginisialisasi...</value>
   </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Memuat...</value>
@@ -427,6 +529,9 @@
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Beri tahu kami di mana game terpasang</value>
   </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>Bukan folder game yang valid</value>
+  </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
     <value>Euterpe tidak sepenuhnya kompatibel dengan ekosistem MDMC (Muse Dash Modding Community). Jika Anda lebih memilih untuk tidak menggunakannya, Anda masih dapat menutup Euterpe sekarang. Melanjutkan tidak akan menghapus mod dan chart yang sudah ada di perangkat Anda, dan Anda tetap dapat bermain seperti biasa. Namun, CustomAlbums akan digantikan oleh mod resmi Euterpe: beralih kembali ke CustomAlbums setelahnya akan membuat game tidak dapat dimainkan, dan mod atau pengelola chart lain seperti MuseDashTOOL mungkin berhenti berfungsi.</value>
   </data>
@@ -438,9 +543,6 @@
   </data>
   <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
     <value>Sebelum Anda mulai</value>
-  </data>
-  <data name="Setup_GamePath_Invalid" xml:space="preserve">
-    <value>Bukan folder game yang valid</value>
   </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Gagal</value>
@@ -492,6 +594,12 @@
   </data>
   <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>Framework mod loader yang diperlukan</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>Migrasi Data Lama</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>Konversi chart dari mod lama seperti CustomAlbums ke format Euterpe</value>
   </data>
   <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Mod Template</value>

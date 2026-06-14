@@ -67,11 +67,11 @@
   <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
     <value>放弃未保存的更改吗？</value>
   </data>
-  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
-    <value>登录失败，是否重试？选择“否”将关闭 Euterpe。</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>选择的路径无效，请重新选择</value>
+  </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>登录失败，是否重试？选择“否”将关闭 Euterpe。</value>
   </data>
   <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
     <value>MDM 文件创建失败</value>
@@ -120,6 +120,9 @@
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>无可用的更新</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>未找到密钥环服务（secret-tool）。无法保存登录会话，每次启动时均需重新登录。</value>
   </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>未安装 protontricks，请先安装 protontricks 再继续。</value>

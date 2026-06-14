@@ -97,8 +97,14 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>譜面を入手</value>
   </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>MDM の譜面を移行</value>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>すべての MDM 譜面を移行</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>譜面を移行中</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>移行中です。しばらくお待ちください。アプリを閉じないでください。</value>
   </data>
   <data name="ChartManage_Rating" xml:space="preserve">
     <value>レベル</value>
@@ -154,6 +160,27 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>開発者</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>続行</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>詳細をコピー</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub フィードバック</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>ログを開く</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe でエラーが発生しました</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>クラッシュレポート</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>開く</value>
   </data>
@@ -162,6 +189,81 @@
   </data>
   <data name="Dropdown_Vanilla" xml:space="preserve">
     <value>バニラ</value>
+  </data>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
+    <value>範囲</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>背景動画の不透明度</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
+    <value>難易度</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>非表示メッセージ</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>非表示モード</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>レベル上書きを非表示</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>ローマ字名</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>配信向け</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>シーン</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>シーン（イースターエッグ）</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>検索キーワード</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
+    <value>キーワードをカンマで区切る</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>譜面の manifest.epk のメタデータを開いて編集</value>
+  </data>
+  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
+    <value>EPK メタデータエディター</value>
+  </data>
+  <data name="EpkEditor_Map_Charters" xml:space="preserve">
+    <value>譜面作者</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>EPK ファイルを開く…</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>保存</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>アプリログ</value>
@@ -427,6 +529,9 @@
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>ゲームのインストール場所を教えてください</value>
   </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>有効なゲームフォルダではありません</value>
+  </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
     <value>Euterpe は MDMC（Muse Dash Modding Community）エコシステムと完全には互換性がありません。使用を希望しない場合は、ここで Euterpe を閉じることもできます。続行しても、お使いのデバイスに既にある Mod や譜面は削除されず、これまでどおりプレイできます。ただし、CustomAlbums は Euterpe 公式の Mod に置き換えられます。あとから CustomAlbums に戻すとゲームがプレイできなくなり、MuseDashTOOL などの他の Mod や譜面管理ツールも動作しなくなる場合があります。</value>
   </data>
@@ -438,9 +543,6 @@
   </data>
   <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
     <value>はじめる前に</value>
-  </data>
-  <data name="Setup_GamePath_Invalid" xml:space="preserve">
-    <value>有効なゲームフォルダではありません</value>
   </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>失敗</value>
@@ -492,6 +594,12 @@
   </data>
   <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>必須Modローダーフレームワーク</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>レガシーデータを移行</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>CustomAlbums などの旧 Mod から Euterpe の形式に譜面を変換</value>
   </data>
   <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Modテンプレート</value>

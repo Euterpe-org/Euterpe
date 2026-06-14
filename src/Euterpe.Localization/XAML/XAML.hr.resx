@@ -97,8 +97,14 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Nabavi chartove</value>
   </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>Migriraj MDM chartove</value>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>Migriraj sve MDM chartove</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>Migriranje chartova</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>Migracija je u tijeku. Pričekajte i nemojte zatvoriti aplikaciju.</value>
   </data>
   <data name="ChartManage_Rating" xml:space="preserve">
     <value>Razina</value>
@@ -154,6 +160,27 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>Programer</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>Nastavi</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>Kopiraj detalje</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>Izlaz</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub povratne informacije</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>Otvori zapisnik</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe je naišao na pogrešku</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>Izvješće o padu</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>Otvori</value>
   </data>
@@ -162,6 +189,81 @@
   </data>
   <data name="Dropdown_Vanilla" xml:space="preserve">
     <value>Bez modova</value>
+  </data>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>Natrag</value>
+  </data>
+  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
+    <value>Raspon</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>Prozirnost pozadinskog videozapisa</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
+    <value>Težine</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>Datoteke</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>Sakrij poruku</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>Sakrij način rada</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>Sakrij nadjačavanje razine</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>Naziv</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>Romanizirani naziv</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>Sigurno za streamere</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>Scena</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>Scena (Easter Egg)</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>Ključne riječi za pretragu</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
+    <value>Odvojite ključne riječi zarezima</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>Osvježi</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>Otvori i uredi metapodatke datoteke manifest.epk charta</value>
+  </data>
+  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
+    <value>EPK uređivač metapodataka</value>
+  </data>
+  <data name="EpkEditor_Map_Charters" xml:space="preserve">
+    <value>Kreatori chartova</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>Razina</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>Otvori EPK datoteku…</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>Spremi</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Zapisnici aplikacije</value>
@@ -427,6 +529,9 @@
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Reci nam gdje je igra instalirana</value>
   </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>Mapa igre nije valjana</value>
+  </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
     <value>Euterpe nije potpuno kompatibilan s ekosustavom MDMC (Muse Dash Modding Community). Ako ga radije ne bi koristio, sada još uvijek možeš zatvoriti Euterpe. Ako nastaviš, modovi i chartovi koji su već na tvom uređaju neće biti uklonjeni i možeš nastaviti normalno igrati. Međutim, CustomAlbums će biti zamijenjen Euterpeovim službenim modom: kasniji povratak na CustomAlbums učinit će igru neigrivom, a drugi modovi ili upravitelji chartova poput MuseDashTOOL-a mogli bi prestati raditi.</value>
   </data>
@@ -438,9 +543,6 @@
   </data>
   <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
     <value>Prije nego što počneš</value>
-  </data>
-  <data name="Setup_GamePath_Invalid" xml:space="preserve">
-    <value>Mapa igre nije valjana</value>
   </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Neuspjelo</value>
@@ -492,6 +594,12 @@
   </data>
   <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>Potreban okvir za učitavanje modova</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>Migriraj starije podatke</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>Pretvori chartove iz starijih modova poput CustomAlbums u Euterpeov format</value>
   </data>
   <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Predložak Moda</value>

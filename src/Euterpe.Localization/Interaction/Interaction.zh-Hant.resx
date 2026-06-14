@@ -49,6 +49,12 @@
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>請選擇 Steam 資料夾</value>
   </data>
+  <data name="MessageBox_Content_CrashDialog_CopyFailed" xml:space="preserve">
+    <value>複製錯誤詳情至剪貼簿失敗</value>
+  </data>
+  <data name="MessageBox_Content_CrashDialog_CopySuccess" xml:space="preserve">
+    <value>已將錯誤詳情複製至剪貼簿</value>
+  </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>確定要安裝 .NET SDK 嗎？</value>
   </data>
@@ -61,11 +67,11 @@
   <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
     <value>放棄未儲存的變更嗎？</value>
   </data>
-  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
-    <value>登入失敗，是否要重試？選擇「否」將關閉 Euterpe。</value>
-  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>選擇的路徑無效，請重新選擇</value>
+  </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>登入失敗，是否要重試？選擇「否」將關閉 Euterpe。</value>
   </data>
   <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
     <value>建立 MDM 檔案失敗</value>
@@ -114,6 +120,9 @@
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>沒有可用的更新</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>找不到金鑰環服務（secret-tool）。您的登入工作階段無法儲存，每次都需要重新登入。</value>
   </data>
   <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
     <value>尚未安裝 protontricks，請先安裝 protontricks 再繼續。</value>

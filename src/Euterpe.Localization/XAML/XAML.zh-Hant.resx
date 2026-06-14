@@ -160,6 +160,27 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>開發者</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>繼續</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>複製詳情</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub 意見回饋</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>開啟記錄檔</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe 發生錯誤</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>崩潰報告</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>開啟</value>
   </data>
@@ -508,6 +529,9 @@
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>請告訴我們遊戲安裝在哪裡</value>
   </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>不是有效的遊戲資料夾</value>
+  </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
     <value>Euterpe 並未完全相容於 MDMC（Muse Dash Modding Community）生態。如果你不想使用，現在仍可以關閉 Euterpe。繼續進行不會移除裝置上既有的模組與譜面，你依然可以正常遊玩。不過，CustomAlbums 將會被 Euterpe 的官方模組取代：之後若切換回 CustomAlbums 會導致遊戲無法遊玩，而喵斯兔（MuseDashTOOL）等其他模組或譜面管理工具也可能無法運作。</value>
   </data>
@@ -519,9 +543,6 @@
   </data>
   <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
     <value>開始之前</value>
-  </data>
-  <data name="Setup_GamePath_Invalid" xml:space="preserve">
-    <value>不是有效的遊戲資料夾</value>
   </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>失敗</value>
@@ -573,6 +594,12 @@
   </data>
   <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>必需的模組載入器框架</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>遷移舊版資料</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>將 CustomAlbums 等舊版模組的譜面轉換為 Euterpe 格式</value>
   </data>
   <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>模組範本</value>

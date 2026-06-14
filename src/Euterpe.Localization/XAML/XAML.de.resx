@@ -97,8 +97,14 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Charts holen</value>
   </data>
-  <data name="ChartManage_MigrateMdm" xml:space="preserve">
-    <value>MDM-Charts migrieren</value>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>Alle MDM-Charts migrieren</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>Charts werden migriert</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>Migration läuft. Bitte warten und die App nicht schließen.</value>
   </data>
   <data name="ChartManage_Rating" xml:space="preserve">
     <value>Bewertung</value>
@@ -154,6 +160,27 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>Entwickler</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>Fortfahren</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>Details kopieren</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub Feedback</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>Protokoll öffnen</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>In Euterpe ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>Absturzbericht</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>Öffnen</value>
   </data>
@@ -162,6 +189,81 @@
   </data>
   <data name="Dropdown_Vanilla" xml:space="preserve">
     <value>Vanilla</value>
+  </data>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
+    <value>Bereich</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>Autor</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>Hintergrundvideo-Deckkraft</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
+    <value>Schwierigkeitsgrade</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>Dateien</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>Versteckt-Meldung</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>Versteckt-Modus</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>Bewertungsüberschreibung (Versteckt)</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>Romanisierter Name</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>Streamer-sicher</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>Szene</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>Szene (Easter Egg)</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>Suchbegriffe</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
+    <value>Suchbegriffe mit Kommas trennen</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>Metadaten der manifest.epk eines Charts öffnen und bearbeiten</value>
+  </data>
+  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
+    <value>EPK-Metadaten-Editor</value>
+  </data>
+  <data name="EpkEditor_Map_Charters" xml:space="preserve">
+    <value>Charters</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>Bewertung</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>EPK-Datei öffnen…</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>Speichern</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App-Protokolle</value>
@@ -427,6 +529,9 @@
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Sag uns, wo dein Spiel installiert ist</value>
   </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>Kein gültiger Spielordner</value>
+  </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
     <value>Euterpe ist nicht vollständig mit dem Ökosystem von MDMC (Muse Dash Modding Community) kompatibel. Wenn du es lieber nicht verwenden möchtest, kannst du Euterpe jetzt noch schließen. Wenn du fortfährst, werden die bereits auf deinem Gerät vorhandenen Mods und Charts nicht entfernt, und du kannst ganz normal weiterspielen. CustomAlbums wird jedoch durch den offiziellen Mod von Euterpe ersetzt: Wechselst du danach wieder zu CustomAlbums zurück, lässt sich das Spiel nicht mehr spielen, und andere Mods oder Chart-Verwaltungen wie MuseDashTOOL funktionieren möglicherweise nicht mehr.</value>
   </data>
@@ -438,9 +543,6 @@
   </data>
   <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
     <value>Bevor du loslegst</value>
-  </data>
-  <data name="Setup_GamePath_Invalid" xml:space="preserve">
-    <value>Kein gültiger Spielordner</value>
   </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Fehlgeschlagen</value>
@@ -492,6 +594,12 @@
   </data>
   <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
     <value>Erforderliches Mod-Loader-Framework</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>Altdaten migrieren</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>Charts aus älteren Mods wie CustomAlbums in das Euterpe-Format konvertieren</value>
   </data>
   <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Mod-Vorlage</value>

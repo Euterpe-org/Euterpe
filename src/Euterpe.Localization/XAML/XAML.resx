@@ -302,7 +302,7 @@
     <value>Visit</value>
   </data>
   <data name="InitializingMessage" xml:space="preserve">
-      <value>Initializing...</value>
+    <value>Initializing...</value>
   </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Loading...</value>
