@@ -69,8 +69,9 @@ internal sealed class LinuxSecureStorage : IPlatformSecureStorage
 
             return payload;
         }
-        catch
+        catch (Exception ex)
         {
+            Logger.ZLogWarning(ex, $"Failed to load auth tokens");
             return null;
         }
     }

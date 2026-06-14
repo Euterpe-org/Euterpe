@@ -19,12 +19,19 @@ internal sealed class WindowsSecureStorage : IPlatformSecureStorage
 
     public async Task SaveTokensAsync(string accessToken, string refreshToken)
     {
-        var payload = new TokenPayload(accessToken, refreshToken);
-        var json = JsonSerializer.Serialize(payload, Default.TokenPayload);
-        var plainBytes = Encoding.UTF8.GetBytes(json);
-        var encrypted = ProtectedData.Protect(plainBytes, DataProtectionScope.CurrentUser);
+        try
+        {
+            var payload = new TokenPayload(accessToken, refreshToken);
+            var json = JsonSerializer.Serialize(payload, Default.TokenPayload);
+            var plainBytes = Encoding.UTF8.GetBytes(json);
+            var encrypted = ProtectedData.Protect(plainBytes, DataProtectionScope.CurrentUser);
 
-        await File.WriteAllBytesAsync(TokenFilePath, encrypted).ConfigureAwait(false);
+            await File.WriteAllBytesAsync(TokenFilePath, encrypted).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to save auth tokens");
+        }
     }
 
     public async Task<TokenPayload?> LoadTokensAsync()
