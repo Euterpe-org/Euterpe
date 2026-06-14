@@ -1,16 +1,23 @@
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Avalonia.Controls.Templates;
 using Avalonia.Layout;
 
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(WrapVirtualizer))]
+[Category("WrapVirtualizerTests")]
 public sealed class WrapVirtualizerTests : HeadlessTest
 {
-    private static (WrapVirtualizer Wrap, Window Window) CreateHost(int itemCount, double itemWidth, double windowWidth, double windowHeight)
+    private static (WrapVirtualizer Wrap, Window Window) CreateHost(int itemCount, double itemWidth, double windowWidth, double windowHeight) =>
+        CreateHost(Enumerable.Range(0, itemCount).Select(i => $"item {i}").ToList(), itemWidth, windowWidth, windowHeight);
+
+    private static (WrapVirtualizer Wrap, Window Window) CreateHost(IEnumerable items, double itemWidth, double windowWidth, double windowHeight)
     {
         var wrap = new WrapVirtualizer
         {
-            ItemsSource = Enumerable.Range(0, itemCount).Select(i => $"item {i}").ToList(),
+            ItemsSource = items,
             ItemWidth = itemWidth,
             ItemTemplate = new FuncDataTemplate<string>((_, _) => new Border { Width = itemWidth, Height = 40 }, true)
         };
@@ -18,6 +25,16 @@ public sealed class WrapVirtualizerTests : HeadlessTest
         window.Show();
         Dispatcher.UIThread.RunJobs();
         return (wrap, window);
+    }
+
+    private static string FlatString(WrapVirtualizer wrap) =>
+        string.Join(",", wrap.Rows.SelectMany(row => row.Items));
+
+    private static List<NotifyCollectionChangedAction> TrackRowActions(WrapVirtualizer wrap)
+    {
+        var actions = new List<NotifyCollectionChangedAction>();
+        ((INotifyCollectionChanged)wrap.Rows).CollectionChanged += (_, e) => actions.Add(e.Action);
+        return actions;
     }
 
     [Test]
@@ -111,5 +128,75 @@ public sealed class WrapVirtualizerTests : HeadlessTest
         using var _ = Assert.Multiple();
         await Assert.That(second.X).IsGreaterThan(first.X);
         await Assert.That(second.Y).IsEqualTo(first.Y);
+    });
+
+    [Test]
+    public Task Add_ItemAtEnd_AppendsRowWithoutReset() => RunOnUI(async () =>
+    {
+        var source = new ObservableCollection<string>(Enumerable.Range(0, 9).Select(i => $"item {i}"));
+        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var actions = TrackRowActions(wrap);
+
+        source.Add("item 9");
+
+        using var _ = Assert.Multiple();
+        await Assert.That(wrap.Rows.Count).IsEqualTo(4);
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
+    });
+
+    [Test]
+    public Task Add_ItemInMiddle_RipplesAndPreservesOrder() => RunOnUI(async () =>
+    {
+        var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
+        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+
+        source.Insert(1, "inserted");
+
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+    });
+
+    [Test]
+    public Task Remove_Item_RipplesAndDropsEmptyRowWithoutReset() => RunOnUI(async () =>
+    {
+        var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
+        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var actions = TrackRowActions(wrap);
+
+        source.RemoveAt(2);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(wrap.Rows.Count).IsEqualTo(3);
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
+    });
+
+    [Test]
+    public Task Replace_Item_UpdatesSingleCellWithoutReset() => RunOnUI(async () =>
+    {
+        var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
+        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var actions = TrackRowActions(wrap);
+
+        source[4] = "changed";
+
+        using var _ = Assert.Multiple();
+        await Assert.That(wrap.Rows[1].Items[1]).IsEqualTo("changed");
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
+    });
+
+    [Test]
+    public Task Move_Item_ReordersWithoutReset() => RunOnUI(async () =>
+    {
+        var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
+        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var actions = TrackRowActions(wrap);
+
+        source.Move(0, 5);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
     });
 }

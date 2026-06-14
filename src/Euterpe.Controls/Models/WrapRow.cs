@@ -1,3 +1,8 @@
+using Avalonia.Collections;
+
 namespace Euterpe.Controls.Models;
 
-public sealed record WrapRow(IReadOnlyList<object?> Items);
+public sealed class WrapRow
+{
+    public AvaloniaList<object?> Items { get; } = [];
+}

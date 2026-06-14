@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Specialized;
+using Avalonia.Collections;
 using Avalonia.Controls.Templates;
 using Euterpe.Controls.Models;
 
@@ -19,8 +20,9 @@ public sealed class WrapVirtualizer : TemplatedControl
     public static readonly DirectProperty<WrapVirtualizer, IReadOnlyList<WrapRow>> RowsProperty =
         AvaloniaProperty.RegisterDirect<WrapVirtualizer, IReadOnlyList<WrapRow>>(nameof(Rows), o => o.Rows);
 
-    private IReadOnlyList<object?> _items = [];
-    private IReadOnlyList<WrapRow> _rows = [];
+    private readonly AvaloniaList<WrapRow> _rows = [];
+    private INotifyCollectionChanged? _subscription;
+    private bool _attached;
     private int _columns = 1;
 
     public IEnumerable? ItemsSource
@@ -42,18 +44,14 @@ public sealed class WrapVirtualizer : TemplatedControl
         set => SetValue(ItemWidthProperty, value);
     }
 
-    public IReadOnlyList<WrapRow> Rows
-    {
-        get => _rows;
-        private set => SetAndRaise(RowsProperty, ref _rows, value);
-    }
+    public IReadOnlyList<WrapRow> Rows => _rows;
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
         if (change.Property == ItemsSourceProperty)
         {
-            OnItemsSourceChanged(change.OldValue as IEnumerable, change.NewValue as IEnumerable);
+            ResubscribeAndRebuild();
         }
         else if (change.Property == ItemWidthProperty)
         {
@@ -68,30 +66,42 @@ public sealed class WrapVirtualizer : TemplatedControl
         return base.MeasureOverride(availableSize);
     }
 
-    private void OnItemsSourceChanged(IEnumerable? oldValue, IEnumerable? newValue)
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
-        if (oldValue is INotifyCollectionChanged oldNotifier)
-        {
-            oldNotifier.CollectionChanged -= OnSourceCollectionChanged;
-        }
-
-        if (newValue is INotifyCollectionChanged newNotifier)
-        {
-            newNotifier.CollectionChanged += OnSourceCollectionChanged;
-        }
-
-        Snapshot(newValue);
-        RebuildRows();
+        base.OnAttachedToVisualTree(e);
+        _attached = true;
+        ResubscribeAndRebuild();
     }
 
-    private void OnSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
-        Snapshot(ItemsSource);
-        RebuildRows();
+        base.OnDetachedFromVisualTree(e);
+        _attached = false;
+        Unsubscribe();
     }
 
-    private void Snapshot(IEnumerable? source) =>
-        _items = source?.Cast<object?>().ToArray() ?? [];
+    private void ResubscribeAndRebuild()
+    {
+        Unsubscribe();
+        if (_attached && ItemsSource is INotifyCollectionChanged notifier)
+        {
+            notifier.CollectionChanged += OnSourceCollectionChanged;
+            _subscription = notifier;
+        }
+
+        RebuildFromSource();
+    }
+
+    private void Unsubscribe()
+    {
+        if (_subscription is null)
+        {
+            return;
+        }
+
+        _subscription.CollectionChanged -= OnSourceCollectionChanged;
+        _subscription = null;
+    }
 
     private void UpdateColumns(double width)
     {
@@ -107,30 +117,146 @@ public sealed class WrapVirtualizer : TemplatedControl
         }
 
         _columns = columns;
-        RebuildRows();
+        RebuildFromSource();
     }
 
-    private void RebuildRows()
+    // Granular edits assume _rows is already chunked at the current _columns; a column change rebuilds first, and
+    // CollectionChanged is marshalled onto this UI thread, so a reflow and an incremental edit never interleave.
+    private void OnSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        if (_items.Count is 0 || _columns <= 0)
+        switch (e.Action)
         {
-            Rows = [];
+            case NotifyCollectionChangedAction.Add when e.NewItems is { } added && e.NewStartingIndex >= 0:
+                for (var i = 0; i < added.Count; i++)
+                {
+                    InsertItem(e.NewStartingIndex + i, added[i]);
+                }
+
+                break;
+            case NotifyCollectionChangedAction.Remove when e.OldItems is { } removed && e.OldStartingIndex >= 0:
+                for (var i = 0; i < removed.Count; i++)
+                {
+                    RemoveItem(e.OldStartingIndex);
+                }
+
+                break;
+            case NotifyCollectionChangedAction.Replace when e.NewItems is { } replaced && e.NewStartingIndex >= 0:
+                for (var i = 0; i < replaced.Count; i++)
+                {
+                    ReplaceItem(e.NewStartingIndex + i, replaced[i]);
+                }
+
+                break;
+            case NotifyCollectionChangedAction.Move when e.OldItems is { Count: 1 } moved && e.OldStartingIndex >= 0 && e.NewStartingIndex >= 0:
+                RemoveItem(e.OldStartingIndex);
+                InsertItem(e.NewStartingIndex, moved[0]);
+                break;
+            default:
+                RebuildFromSource();
+                break;
+        }
+    }
+
+    private void RebuildFromSource()
+    {
+        _rows.Clear();
+        _rows.AddRange(BuildRows(ItemsSource, _columns));
+    }
+
+    private static List<WrapRow> BuildRows(IEnumerable? source, int columns)
+    {
+        var rows = new List<WrapRow>();
+        if (source is null)
+        {
+            return rows;
+        }
+
+        WrapRow? row = null;
+        var column = 0;
+        foreach (var item in source)
+        {
+            if (column == 0)
+            {
+                row = new WrapRow();
+                rows.Add(row);
+            }
+
+            row!.Items.Add(item);
+            column = (column + 1) % columns;
+        }
+
+        return rows;
+    }
+
+    private void InsertItem(int index, object? item)
+    {
+        var rowIndex = index / _columns;
+        var offset = index % _columns;
+        if (rowIndex > _rows.Count
+            || (rowIndex == _rows.Count && offset != 0)
+            || (rowIndex < _rows.Count && offset > _rows[rowIndex].Items.Count))
+        {
+            RebuildFromSource();
             return;
         }
 
-        var rows = new List<WrapRow>((_items.Count + _columns - 1) / _columns);
-        for (var start = 0; start < _items.Count; start += _columns)
+        if (rowIndex == _rows.Count)
         {
-            var count = Math.Min(_columns, _items.Count - start);
-            var slice = new object?[count];
-            for (var offset = 0; offset < count; offset++)
-            {
-                slice[offset] = _items[start + offset];
-            }
-
-            rows.Add(new WrapRow(slice));
+            _rows.Add(new WrapRow());
         }
 
-        Rows = rows;
+        var carry = item;
+        for (var i = rowIndex; i < _rows.Count; i++)
+        {
+            var items = _rows[i].Items;
+            items.Insert(i == rowIndex ? offset : 0, carry);
+            if (items.Count <= _columns)
+            {
+                return;
+            }
+
+            carry = items[_columns];
+            items.RemoveAt(_columns);
+        }
+
+        _rows.Add(new WrapRow());
+        _rows[^1].Items.Add(carry);
+    }
+
+    private void RemoveItem(int index)
+    {
+        var rowIndex = index / _columns;
+        var offset = index % _columns;
+        if (rowIndex >= _rows.Count || offset >= _rows[rowIndex].Items.Count)
+        {
+            RebuildFromSource();
+            return;
+        }
+
+        _rows[rowIndex].Items.RemoveAt(offset);
+        for (var i = rowIndex; i < _rows.Count - 1; i++)
+        {
+            var next = _rows[i + 1].Items;
+            _rows[i].Items.Add(next[0]);
+            next.RemoveAt(0);
+        }
+
+        if (_rows[^1].Items.Count == 0)
+        {
+            _rows.RemoveAt(_rows.Count - 1);
+        }
+    }
+
+    private void ReplaceItem(int index, object? item)
+    {
+        var rowIndex = index / _columns;
+        var offset = index % _columns;
+        if (rowIndex >= _rows.Count || offset >= _rows[rowIndex].Items.Count)
+        {
+            RebuildFromSource();
+            return;
+        }
+
+        _rows[rowIndex].Items[offset] = item;
     }
 }
