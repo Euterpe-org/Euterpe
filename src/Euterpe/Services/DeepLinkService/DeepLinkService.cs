@@ -1,3 +1,5 @@
+using System.Web;
+
 namespace Euterpe.Services;
 
 public sealed partial class DeepLinkService
@@ -38,14 +40,20 @@ public sealed partial class DeepLinkService
             return;
         }
 
-        ActivateMainWindow(true);
-
         var action = parsed.Host;
         var path = Uri.UnescapeDataString(parsed.AbsolutePath.TrimStart('/'));
         var query = Uri.UnescapeDataString(parsed.Query.TrimStart('?'));
 
+        if (ShouldActivateWindow(parsed.Query))
+        {
+            ActivateMainWindow(true);
+        }
+
         HandleActionAsync(action, path, query).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to handle deep link: {argument}"));
     }
+
+    private static bool ShouldActivateWindow(string query) =>
+        !bool.TryParse(HttpUtility.ParseQueryString(query)["silent"], out var silent) || !silent;
 
     private static string? GetEpkPath(string argument)
     {

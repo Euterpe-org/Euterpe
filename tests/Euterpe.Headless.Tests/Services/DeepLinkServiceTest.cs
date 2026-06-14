@@ -141,6 +141,24 @@ public sealed class DeepLinkServiceTest : HeadlessTest
         await Assert.That(InvokeGetEpkPath(null, argument)).IsNull();
     }
 
+    [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = "ShouldActivateWindow")]
+    private static extern bool InvokeShouldActivateWindow(DeepLinkService? service, string query);
+
+    [Test]
+    [Arguments("", true)]
+    [Arguments("silent=true", false)]
+    [Arguments("?silent=true", false)]
+    [Arguments("?silent=TRUE", false)]
+    [Arguments("?silent=false", true)]
+    [Arguments("?silent=1", true)]
+    [Arguments("?silent", true)]
+    [Arguments("?other=1&silent=true", false)]
+    [Arguments("?presilent=1", true)]
+    public async Task ShouldActivateWindow_HonorsSilentFlag(string query, bool expected)
+    {
+        await Assert.That(InvokeShouldActivateWindow(null, query)).IsEqualTo(expected);
+    }
+
     // Private HandleModActionAsync / HandleChartActionAsync tests (bypass the NavigationService.Ready
     // gate + ActivateMainWindow sitting between HandleActivation and the per-domain dispatch).
 
