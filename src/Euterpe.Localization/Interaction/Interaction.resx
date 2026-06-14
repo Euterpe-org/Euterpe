@@ -174,6 +174,9 @@
   <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
     <value>Chart {0} successfully updated</value>
   </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>Chart {0} is already up to date</value>
+  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>Updated {0} charts, {1} failed</value>
   </data>

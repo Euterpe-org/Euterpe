@@ -23,10 +23,18 @@ internal sealed partial class ChartManageService : IChartManageService
         if (chart is null)
         {
             Logger.ZLogWarning($"Update requested for unknown online chart {chartId}");
+            NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, chartId);
             return;
         }
 
-        foreach (var (success, displayName) in await CheckAndApplyUpdatesAsync([chart], cancellationToken).ConfigureAwait(false))
+        var results = await CheckAndApplyUpdatesAsync([chart], cancellationToken).ConfigureAwait(false);
+        if (results is [])
+        {
+            NotificationService.NoticeLight(Notification_Content_Chart_Update_UpToDate, chart.Manifest.Meta.Name);
+            return;
+        }
+
+        foreach (var (success, displayName) in results)
         {
             if (success)
             {
