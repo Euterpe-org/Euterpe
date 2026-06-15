@@ -193,8 +193,8 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>返回</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>區間</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>新增譜師</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
     <value>作者</value>
@@ -241,11 +241,23 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>搜尋關鍵字</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>多個關鍵字以逗號分隔</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>變速</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>重新整理</value>
+  </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} 個檔案 · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_NameAuthorRequired" xml:space="preserve">
+    <value>請填寫歌曲名稱與作者後儲存</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>請設定有效的速度範圍（最小值 ≤ 最大值）</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>新增關鍵字</value>
   </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>開啟並編輯譜面 manifest.epk 的元數據</value>
@@ -259,11 +271,29 @@
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>難度值</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>此譜面引用的 {0} 個檔案在其資料夾中遺失</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>開啟 EPK 檔案…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>開啟資料夾</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>儲存</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>檢索</value>
+  </data>
+  <data name="EpkEditor_Section_Gameplay" xml:space="preserve">
+    <value>玩法</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>隱藏難度</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>基本資訊</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>應用程式記錄檔</value>

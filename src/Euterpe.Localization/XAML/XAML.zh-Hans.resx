@@ -193,8 +193,8 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>返回</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>区间</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>添加谱师</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
     <value>作者</value>
@@ -241,11 +241,23 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>搜索关键词</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>多个关键词用逗号分隔</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>变速</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>刷新</value>
+  </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} 个文件 · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_NameAuthorRequired" xml:space="preserve">
+    <value>请填写歌曲名称和作者后保存</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>请设置有效的速度范围（最小值 ≤ 最大值）</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>添加关键词</value>
   </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>打开并编辑谱面 manifest.epk 的元数据</value>
@@ -259,11 +271,29 @@
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>难度值</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>此谱面引用的 {0} 个文件在其文件夹中缺失</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>打开 EPK 文件…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>保存</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>检索</value>
+  </data>
+  <data name="EpkEditor_Section_Gameplay" xml:space="preserve">
+    <value>玩法</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>隐藏难度</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>基本信息</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>应用日志文件夹</value>

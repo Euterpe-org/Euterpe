@@ -13,8 +13,9 @@ public sealed class EpkEditorPanelViewModelTest
 
         vm.Open("C:/charts/B/manifest.epk", RangeChartWithHidden());
         vm.Name = "edited";
-        vm.SearchKeywordsText = "edited keywords";
+        vm.SearchKeywords.Add("edited");
         vm.Maps[0].Rating = "999";
+        vm.Maps[0].Charters.Add("edited");
 
         vm.Open("C:/charts/A/manifest.epk", SingleChartWithoutHidden());
 
@@ -26,12 +27,16 @@ public sealed class EpkEditorPanelViewModelTest
         await Assert.That(vm.Bpm).IsEqualTo(120);
         await Assert.That(vm.BpmMin).IsNull();
         await Assert.That(vm.BpmMax).IsNull();
-        await Assert.That(vm.SearchKeywordsText).IsEqualTo("a, b");
+        await Assert.That(vm.SearchKeywords.Count).IsEqualTo(2);
+        await Assert.That(vm.SearchKeywords[0]).IsEqualTo("a");
+        await Assert.That(vm.SearchKeywords[1]).IsEqualTo("b");
         await Assert.That(vm.HasHiddenDifficulty).IsFalse();
         await Assert.That(vm.Maps.Count).IsEqualTo(2);
         await Assert.That(vm.Maps[0].Difficulty).IsEqualTo(ChartDifficulty.Easy);
         await Assert.That(vm.Maps[1].Difficulty).IsEqualTo(ChartDifficulty.Hard);
         await Assert.That(vm.Maps[0].Rating).IsEqualTo("3");
+        await Assert.That(vm.Maps[0].Charters.Count).IsEqualTo(1);
+        await Assert.That(vm.Maps[0].Charters[0]).IsEqualTo("alice");
         await Assert.That(vm.Files.Count).IsEqualTo(2);
     }
 

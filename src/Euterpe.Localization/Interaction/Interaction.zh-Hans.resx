@@ -198,9 +198,6 @@
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>在线谱面不可编辑</value>
   </data>
-  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
-    <value>此 EPK 引用的 {0} 个文件在所在文件夹中缺失</value>
-  </data>
   <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
     <value>不是有效的 EPK 文件</value>
   </data>

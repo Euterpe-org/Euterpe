@@ -1,12 +1,14 @@
+using System.Collections.ObjectModel;
+
 namespace Euterpe.Features.Charting;
 
 public sealed partial class DifficultyEditViewModel : ObservableObject
 {
-    public DifficultyEditViewModel(ChartDifficulty difficulty, string rating, string chartersText)
+    public DifficultyEditViewModel(ChartDifficulty difficulty, string rating, IEnumerable<string> charters)
     {
         Difficulty = difficulty;
         Rating = rating;
-        ChartersText = chartersText;
+        Charters = [.. charters];
     }
 
     public ChartDifficulty Difficulty { get; }
@@ -16,6 +18,5 @@ public sealed partial class DifficultyEditViewModel : ObservableObject
     [ObservableProperty]
     public partial string Rating { get; set; }
 
-    [ObservableProperty]
-    public partial string ChartersText { get; set; }
+    public ObservableCollection<string> Charters { get; }
 }

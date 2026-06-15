@@ -46,6 +46,9 @@ public sealed class ViewSmokeTest : HeadlessTest
     public Task CharterToolkitPanel_LoadsIntoVisualTree() => Smoke(() => new CharterToolkitPanel());
 
     [Test]
+    public Task EpkEditorPanel_LoadsIntoVisualTree() => Smoke(() => new EpkEditorPanel());
+
+    [Test]
     public Task ChartManagePanel_LoadsIntoVisualTree() => Smoke(() => new ChartManagePanel());
 
     [Test]

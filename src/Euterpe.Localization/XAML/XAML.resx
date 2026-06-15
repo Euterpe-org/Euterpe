@@ -193,8 +193,8 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Back</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Range</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Add a charter</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
     <value>Author</value>
@@ -241,11 +241,23 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Search Keywords</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Separate keywords with commas</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Variable tempo</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Refresh</value>
+  </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} files · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_NameAuthorRequired" xml:space="preserve">
+    <value>Enter a song name and author to save</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Set a valid tempo range (min ≤ max)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Add a keyword</value>
   </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>Open and edit the metadata of a chart's manifest.epk</value>
@@ -259,11 +271,29 @@
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Rating</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} file(s) referenced by this chart are missing from its folder</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>Open EPK File…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Discovery</value>
+  </data>
+  <data name="EpkEditor_Section_Gameplay" xml:space="preserve">
+    <value>Gameplay</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Hidden Difficulty</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Identity</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App Logs</value>

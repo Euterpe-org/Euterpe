@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 
 namespace Euterpe.Features.Charting;
@@ -13,8 +14,11 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     private Manifest? _original;
     private Dictionary<string, ManifestFileEntry> _files = new(StringComparer.OrdinalIgnoreCase);
 
+    public EpkEditorPanelViewModel() => SearchKeywords.CollectionChanged += OnEditCollectionChanged;
+
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string Name { get; set; } = string.Empty;
 
     [ObservableProperty]
@@ -22,6 +26,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string Author { get; set; } = string.Empty;
 
     [ObservableProperty]
@@ -35,14 +40,20 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
+    [NotifyPropertyChangedFor(nameof(BpmRangeInvalid))]
     public partial bool IsBpmRange { get; set; }
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
+    [NotifyPropertyChangedFor(nameof(BpmRangeInvalid))]
     public partial int? BpmMin { get; set; }
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
+    [NotifyPropertyChangedFor(nameof(BpmRangeInvalid))]
     public partial int? BpmMax { get; set; }
 
     [ObservableProperty]
@@ -53,9 +64,6 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 
     [ObservableProperty]
     public partial float? BackgroundVideoOpacity { get; set; }
-
-    [ObservableProperty]
-    public partial string SearchKeywordsText { get; set; } = string.Empty;
 
     [ObservableProperty]
     public partial bool HasHiddenDifficulty { get; set; }
@@ -69,9 +77,43 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial string? HideMessage { get; set; }
 
+    [ObservableProperty]
+    public partial string? FolderPath { get; set; }
+
+    [ObservableProperty]
+    public partial string? CoverPath { get; set; }
+
+    [ObservableProperty]
+    public partial string? CoverDominantColor { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasVideo { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasMissingFiles))]
+    [NotifyPropertyChangedFor(nameof(MissingFilesMessage))]
+    public partial int MissingFileCount { get; set; }
+
+    [ObservableProperty]
+    public partial string FilesSummary { get; set; } = string.Empty;
+
+    public ObservableCollection<string> SearchKeywords { get; } = [];
+
     public ObservableCollection<DifficultyEditViewModel> Maps { get; } = [];
 
     public ObservableCollection<EpkFileEntry> Files { get; } = [];
+
+    public bool CanSave =>
+        !Name.IsNullOrWhiteSpace()
+        && !Author.IsNullOrWhiteSpace()
+        && !BpmRangeInvalid;
+
+    public bool BpmRangeInvalid =>
+        IsBpmRange && (BpmMin is not { } min || BpmMax is not { } max || min > max);
+
+    public bool HasMissingFiles => MissingFileCount > 0;
+
+    public string MissingFilesMessage => string.Format(XAML.EpkEditor_MissingFiles, MissingFileCount);
 
     public event Action? CloseRequested;
 
@@ -97,37 +139,24 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         Scene = meta.Scene;
         SceneEgg = meta.SceneEgg;
         BackgroundVideoOpacity = meta.BackgroundVideoOpacity;
-        SearchKeywordsText = meta.SearchKeywords is { } keywords ? string.Join(", ", keywords) : string.Empty;
         HideMode = meta.HideMode;
         HideRatingOverride = meta.HideRatingOverride;
         HideMessage = meta.HideMessage;
 
-        foreach (var row in Maps)
-        {
-            row.PropertyChanged -= OnMapChanged;
-        }
+        FolderPath = _folder;
+        CoverDominantColor = meta.CoverDominantColor;
+        CoverPath = ResolveCoverPath();
 
-        Maps.Clear();
-        foreach (var difficulty in ChartDifficultyExtensions.GetValues())
-        {
-            if (!meta.Maps.TryGetValue(ChartFiles.MapName(difficulty), out var map))
-            {
-                continue;
-            }
-
-            var row = new DifficultyEditViewModel(difficulty, map.Rating, string.Join(", ", map.Charters));
-            row.PropertyChanged += OnMapChanged;
-            Maps.Add(row);
-        }
+        LoadKeywords(meta.SearchKeywords);
+        LoadMaps(meta.Maps);
 
         HasHiddenDifficulty = meta.Maps.ContainsKey(ChartFiles.MapName(ChartDifficulty.Hidden));
 
         RebuildFilesDisplay();
+        RecomputeMissingFiles();
 
         _loading = false;
         _dirty = false;
-
-        WarnOnMissingFiles();
     }
 
     [RelayCommand(CanExecute = nameof(CanSave))]
@@ -186,13 +215,9 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 
         _files = refreshed;
         RebuildFilesDisplay();
+        RecomputeMissingFiles();
         _dirty = true;
     }
-
-    private bool CanSave =>
-        !Name.IsNullOrWhiteSpace()
-        && !Author.IsNullOrWhiteSpace()
-        && (!IsBpmRange || (BpmMin is { } min && BpmMax is { } max && min <= max));
 
     private Manifest BuildManifest()
     {
@@ -206,10 +231,12 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
             maps[key] = new ManifestMap
             {
                 Rating = edited?.Rating ?? map.Rating,
-                Charters = edited is not null ? SplitList(edited.ChartersText) : map.Charters,
+                Charters = edited is not null ? CleanTags(edited.Charters) : map.Charters,
                 PredictedRating = map.PredictedRating
             };
         }
+
+        var keywords = CleanTags(SearchKeywords);
 
         var editedMeta = new ManifestMeta
         {
@@ -224,7 +251,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
             Scene = Scene,
             SceneEgg = NullIfBlank(SceneEgg),
             BackgroundVideoOpacity = BackgroundVideoOpacity,
-            SearchKeywords = SplitListOrNull(SearchKeywordsText),
+            SearchKeywords = keywords.Length > 0 ? keywords : null,
             Maps = maps,
             HideMode = HasHiddenDifficulty ? NullIfBlank(HideMode) : meta.HideMode,
             HideRatingOverride = HasHiddenDifficulty ? NullIfBlank(HideRatingOverride) : meta.HideRatingOverride,
@@ -244,6 +271,57 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         };
     }
 
+    private void LoadKeywords(string[]? keywords)
+    {
+        SearchKeywords.Clear();
+        if (keywords is null)
+        {
+            return;
+        }
+
+        foreach (var keyword in keywords)
+        {
+            SearchKeywords.Add(keyword);
+        }
+    }
+
+    private void LoadMaps(IReadOnlyDictionary<string, ManifestMap> mapsByName)
+    {
+        foreach (var row in Maps)
+        {
+            row.PropertyChanged -= OnMapChanged;
+            row.Charters.CollectionChanged -= OnEditCollectionChanged;
+        }
+
+        Maps.Clear();
+        foreach (var difficulty in ChartDifficultyExtensions.GetValues())
+        {
+            if (!mapsByName.TryGetValue(ChartFiles.MapName(difficulty), out var map))
+            {
+                continue;
+            }
+
+            var row = new DifficultyEditViewModel(difficulty, map.Rating, map.Charters);
+            row.PropertyChanged += OnMapChanged;
+            row.Charters.CollectionChanged += OnEditCollectionChanged;
+            Maps.Add(row);
+        }
+    }
+
+    private string? ResolveCoverPath()
+    {
+        if (_folder is not { } folder)
+        {
+            return null;
+        }
+
+        return ChartFiles.CoverExtensions
+            .Select(extension => ChartFiles.CoverName + extension)
+            .Where(_files.ContainsKey)
+            .Select(name => Path.Combine(folder, name))
+            .FirstOrDefault();
+    }
+
     private void RebuildFilesDisplay()
     {
         Files.Clear();
@@ -251,24 +329,33 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         {
             Files.Add(new EpkFileEntry(name, entry.Size));
         }
+
+        HasVideo = _files.ContainsKey(ChartFiles.VideoFileName);
+        var totalSize = _files.Values.Sum(static entry => entry.Size);
+        FilesSummary = string.Format(XAML.EpkEditor_Files_Summary, Files.Count, totalSize.ToReadableSize());
     }
 
-    private void WarnOnMissingFiles()
+    private void RecomputeMissingFiles()
     {
         if (_folder is null)
         {
+            MissingFileCount = 0;
             return;
         }
 
         var present = FileSystemService.GetFileSizes(_folder);
-        var missing = _files.Keys.Count(name => !present.ContainsKey(name));
-        if (missing > 0)
-        {
-            NotificationService.WarningLight(Notification_Content_Epk_Open_FilesMissing, missing);
-        }
+        MissingFileCount = _files.Keys.Count(name => !present.ContainsKey(name));
     }
 
     private void OnMapChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (!_loading)
+        {
+            _dirty = true;
+        }
+    }
+
+    private void OnEditCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (!_loading)
         {
@@ -288,11 +375,8 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     private static string? NullIfBlank(string? value) =>
         value.IsNullOrWhiteSpace() ? null : value.Trim();
 
-    private static string[] SplitList(string? value) =>
-        value.IsNullOrWhiteSpace() ? [] : [.. value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
-
-    private static string[]? SplitListOrNull(string? value) =>
-        value.IsNullOrWhiteSpace() ? null : [.. value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
+    private static string[] CleanTags(IEnumerable<string> tags) =>
+        [.. tags.Select(static tag => tag.Trim()).Where(static tag => tag.Length > 0)];
 
     #region Injections
 
