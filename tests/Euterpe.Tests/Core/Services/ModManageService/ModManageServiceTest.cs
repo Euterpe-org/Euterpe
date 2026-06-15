@@ -4,6 +4,8 @@ using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
 
+[Category("ModManageServiceTests")]
+[TestSubject(typeof(ModManageService))]
 public sealed partial class ModManageServiceTest
 {
     private const string TestGameFolder = "/games/MuseDash";

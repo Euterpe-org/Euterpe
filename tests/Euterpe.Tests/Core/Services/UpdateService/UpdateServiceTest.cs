@@ -5,6 +5,8 @@ using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
 
+[Category("UpdateServiceTests")]
+[TestSubject(typeof(UpdateService))]
 public sealed partial class UpdateServiceTest
 {
     private const string CurrentStableVersion = "1.0.0";

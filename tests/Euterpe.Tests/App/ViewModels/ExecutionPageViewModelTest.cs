@@ -21,7 +21,7 @@ public sealed class ExecutionPageViewModelTest
 
         await vm.OnEnterAsync();
 
-        using var assertions = Assert.Multiple();
+        using var _ = Assert.Multiple();
         await Assert.That(vm.State.Steps).Count().IsEqualTo(1);
         await Assert.That(vm.State.Steps[0].Kinds).IsEqualTo(firstKinds);
     }
@@ -36,7 +36,7 @@ public sealed class ExecutionPageViewModelTest
 
         await vm.OnEnterAsync();
 
-        using var assertions = Assert.Multiple();
+        using var _ = Assert.Multiple();
         await Assert.That(vm.State.Steps[0].Status).IsEqualTo(SetupStepStatus.Succeeded);
         await Assert.That(vm.State.Stage).IsEqualTo(SetupExecutionStage.Finished);
         await Assert.That(vm.State.AllSucceeded).IsTrue();
@@ -53,7 +53,7 @@ public sealed class ExecutionPageViewModelTest
 
         await vm.OnEnterAsync();
 
-        using var assertions = Assert.Multiple();
+        using var _ = Assert.Multiple();
         await Assert.That(vm.State.Steps[0].Status).IsEqualTo(SetupStepStatus.Failed);
         await Assert.That(vm.State.Steps[0].ErrorMessage).IsNotNull();
         await Assert.That(vm.State.Stage).IsEqualTo(SetupExecutionStage.Finished);
@@ -79,7 +79,7 @@ public sealed class ExecutionPageViewModelTest
 
         await vm.OnEnterAsync();
 
-        using var assertions = Assert.Multiple();
+        using var _ = Assert.Multiple();
         await Assert.That(vm.State.Steps[0].Status).IsEqualTo(SetupStepStatus.Succeeded);
         await Assert.That(vm.State.Steps[1].Status).IsEqualTo(SetupStepStatus.Failed);
     }
@@ -105,7 +105,7 @@ public sealed class ExecutionPageViewModelTest
 
         await vm.RetryCommand.ExecuteAsync(failedStep);
 
-        using var assertions = Assert.Multiple();
+        using var _ = Assert.Multiple();
         await Assert.That(failedStep.Status).IsEqualTo(SetupStepStatus.Succeeded);
         await Assert.That(failedStep.ErrorMessage).IsNull();
         await Assert.That(vm.State.Stage).IsEqualTo(SetupExecutionStage.Finished);

@@ -37,13 +37,13 @@ public sealed class RepairDialogViewModelTest
     }
 
     [Test]
-    public async Task Close_WithNoSubscriber_DoesNotThrow()
+    public Task Close_WithNoSubscriber_DoesNotThrow()
     {
         var vm = NewViewModel();
 
         vm.Close();
 
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
@@ -55,7 +55,6 @@ public sealed class RepairDialogViewModelTest
         await vm.OpenFileCommand.ExecuteAsync("/path/to/file");
 
         launcher.OpenFileAsync("/path/to/file").WasCalled(Times.Once);
-        await Task.CompletedTask;
     }
 
     [Test]
@@ -67,7 +66,6 @@ public sealed class RepairDialogViewModelTest
         await vm.OpenUrlCommand.ExecuteAsync("https://example.com");
 
         launcher.OpenUriAsync("https://example.com").WasCalled(Times.Once);
-        await Task.CompletedTask;
     }
 
     [Test]

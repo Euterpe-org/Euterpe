@@ -4,6 +4,8 @@ using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
 
+[Category("AuthServiceTests")]
+[TestSubject(typeof(AuthService))]
 public sealed partial class AuthServiceTest
 {
     private const string ValidAccessToken = "valid-access-token";
