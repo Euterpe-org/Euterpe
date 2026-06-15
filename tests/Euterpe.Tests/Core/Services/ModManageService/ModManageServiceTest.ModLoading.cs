@@ -117,4 +117,50 @@ public sealed partial class ModManageServiceTest
         await Assert.That(mod!.IsLocal).IsFalse();
         await Assert.That(mod.State).IsEqualTo(ModState.Incompatible);
     }
+
+    [Test]
+    public async Task InitializeModsAsync_TwoInstalledMutuallyIncompatibleMods_MarksBothIncompatible()
+    {
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")),
+            modLocalService: LocalServiceWith(
+                ("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll")),
+                ("/mods/ModB.dll", CreateInstalledMod("ModB", "ModB.dll"))));
+
+        await sut.InitializeModsAsync();
+
+        using var _ = Assert.Multiple();
+        await Assert.That(sut.FindModByName("ModA")!.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(sut.FindModByName("ModB")!.State).IsEqualTo(ModState.Incompatible);
+    }
+
+    [Test]
+    public async Task InitializeModsAsync_IncompatibleModNotInstalled_DoesNotMarkIncompatible()
+    {
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")),
+            modLocalService: LocalServiceWith(("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll"))));
+
+        await sut.InitializeModsAsync();
+
+        using var _ = Assert.Multiple();
+        await Assert.That(sut.FindModByName("ModA")!.State).IsEqualTo(ModState.Normal);
+        await Assert.That(sut.FindModByName("ModB")!.State).IsEqualTo(ModState.Normal);
+    }
+
+    [Test]
+    public async Task InitializeModsAsync_IncompatibleModMissingFromCatalog_DoesNotMarkIncompatible()
+    {
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(CreateWebMod("ModA", incompatibleMods: ["GhostMod"])),
+            modLocalService: LocalServiceWith(("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll"))));
+
+        await sut.InitializeModsAsync();
+
+        await Assert.That(sut.FindModByName("ModA")!.State).IsEqualTo(ModState.Normal);
+    }
 }

@@ -74,7 +74,8 @@ public sealed partial class ModManageServiceTest
         string sha256 = "",
         string gameVersion = "*",
         string melonVersion = "",
-        string[]? libDependencies = null) =>
+        string[]? libDependencies = null,
+        string[]? incompatibleMods = null) =>
         new()
         {
             Name = name,
@@ -83,7 +84,8 @@ public sealed partial class ModManageServiceTest
             GameVersion = gameVersion,
             MelonVersion = melonVersion,
             SHA256 = sha256,
-            LibDependencies = libDependencies ?? []
+            LibDependencies = libDependencies ?? [],
+            IncompatibleMods = incompatibleMods ?? []
         };
 
     private static Lib CreateWebLib(string slug = "MyLib", string sha256 = "") =>

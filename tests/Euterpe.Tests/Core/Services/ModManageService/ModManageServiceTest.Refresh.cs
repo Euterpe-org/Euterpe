@@ -58,4 +58,25 @@ public sealed partial class ModManageServiceTest
         game.MelonLoaderVersion = "0.4.0";
         await Assert.That(mod.State).IsEqualTo(ModState.Outdated);
     }
+
+    [Test]
+    public async Task ChangingMelonLoaderVersion_AfterInit_PreservesIncompatibleMods()
+    {
+        var game = CreateGame(melonLoaderVersion: "0.5.0");
+        var sut = CreateModManageService(
+            game,
+            DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")),
+            modLocalService: LocalServiceWith(
+                ("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll")),
+                ("/mods/ModB.dll", CreateInstalledMod("ModB", "ModB.dll"))));
+
+        await sut.InitializeModsAsync();
+        game.MelonLoaderVersion = "0.6.0";
+
+        using var _ = Assert.Multiple();
+        await Assert.That(sut.FindModByName("ModA")!.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(sut.FindModByName("ModB")!.State).IsEqualTo(ModState.Incompatible);
+    }
 }

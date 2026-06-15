@@ -39,6 +39,8 @@ internal sealed partial class ModManageService
             }
         }
 
+        CheckIncompatibleMods();
+
         Logger.ZLogInformation($"All mods loaded");
     }
 
@@ -111,6 +113,29 @@ internal sealed partial class ModManageService
         Logger.ZLogInformation($"Checking duplicated mods finished");
     }
 
+    private void CheckIncompatibleMods()
+    {
+        var installedMods = _sourceCache.Items.Where(mod => mod.IsLocal).ToArray();
+        var installedNames = installedMods.Select(mod => mod.Name).ToHashSet();
+        var declaredIncompatibleNames = installedMods.SelectMany(mod => mod.IncompatibleMods).ToHashSet();
+
+        foreach (var mod in installedMods)
+        {
+            if (mod.State is ModState.Duplicated)
+            {
+                continue;
+            }
+
+            if (!mod.IncompatibleMods.Any(installedNames.Contains) && !declaredIncompatibleNames.Contains(mod.Name))
+            {
+                continue;
+            }
+
+            Logger.ZLogInformation($"Mod {mod.Name} conflicts with another installed mod and is marked incompatible");
+            mod.State = ModState.Incompatible;
+        }
+    }
+
     private void RefreshModStates()
     {
         foreach (var modDto in _sourceCache.Items)
@@ -122,6 +147,8 @@ internal sealed partial class ModManageService
 
             modDto.State = IsModIncompatible(modDto.MelonVersion, modDto.GameVersion) ? ModState.Incompatible : ModState.Normal;
         }
+
+        CheckIncompatibleMods();
 
         _sourceCache.Refresh();
         Logger.ZLogInformation($"Mod states refreshed with MelonLoader version: {GameConfig.MelonLoaderSemVersion}");
