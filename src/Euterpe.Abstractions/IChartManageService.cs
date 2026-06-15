@@ -10,6 +10,7 @@ public interface IChartManageService
     Task DownloadChartAsync(string chartId, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
     Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default);
     Task RemoveChartAsync(string folderPath);
+    Task RefreshChartAsync(string folderPath);
 
     // Bulk operations
     Task<int> UpdateAllChartsAsync(CancellationToken cancellationToken = default);

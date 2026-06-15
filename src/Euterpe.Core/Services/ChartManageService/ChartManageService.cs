@@ -50,6 +50,9 @@ internal sealed partial class ChartManageService : IChartManageService
     public Task RemoveChartAsync(string folderPath) =>
         RunExclusiveAsync(Path.GetFileName(folderPath), () => RemoveChartCoreAsync(folderPath));
 
+    public Task RefreshChartAsync(string folderPath) =>
+        RunExclusiveAsync(Path.GetFileName(folderPath), () => RefreshChartCoreAsync(folderPath));
+
     public async Task<int> UpdateAllChartsAsync(CancellationToken cancellationToken = default)
     {
         var results = await CheckAndApplyUpdatesAsync(GetOnlineCharts(), cancellationToken).ConfigureAwait(false);

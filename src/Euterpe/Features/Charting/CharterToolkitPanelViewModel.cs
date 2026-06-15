@@ -11,6 +11,7 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(false);
 
         Editor.CloseRequested += OnEditorCloseRequested;
+        Editor.Saved += OnEditorSaved;
 
         Logger.ZLogInformation($"{nameof(CharterToolkitPanelViewModel)} Initialized");
     }
@@ -50,8 +51,12 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
 
     private void OnEditorCloseRequested() => ActiveTool = null;
 
+    private void OnEditorSaved(string folderPath) =>
+        ChartManageService.RefreshChartAsync(folderPath).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to refresh chart after editing {folderPath}"));
+
     #region Injections
 
+    public required IChartManageService ChartManageService { get; init; }
     public required EpkEditorPanelViewModel Editor { get; init; }
     public required IFileSystemPickerService FileSystemPickerService { get; init; }
     public required ILogger<CharterToolkitPanelViewModel> Logger { get; init; }

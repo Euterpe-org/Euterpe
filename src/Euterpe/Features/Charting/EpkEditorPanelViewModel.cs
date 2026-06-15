@@ -116,6 +116,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     public string MissingFilesMessage => string.Format(XAML.EpkEditor_MissingFiles, MissingFileCount);
 
     public event Action? CloseRequested;
+    public event Action<string>? Saved;
 
     public void Open(string filePath, Manifest manifest)
     {
@@ -172,6 +173,11 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         {
             _dirty = false;
             NotificationService.SuccessLight(Notification_Content_Epk_Save_Success, Name);
+            if (_folder is { } folder)
+            {
+                Saved?.Invoke(folder);
+            }
+
             CloseRequested?.Invoke();
         }
         else

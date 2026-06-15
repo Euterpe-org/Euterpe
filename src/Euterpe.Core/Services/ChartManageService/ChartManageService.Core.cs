@@ -82,6 +82,24 @@ internal sealed partial class ChartManageService
         return Task.CompletedTask;
     }
 
+    private async Task RefreshChartCoreAsync(string folderPath)
+    {
+        var fullPath = Path.GetFullPath(folderPath);
+        var existing = _sourceCache.Items.FirstOrDefault(chart =>
+            string.Equals(Path.GetFullPath(chart.FolderPath), fullPath, StringComparison.OrdinalIgnoreCase));
+        if (existing is null)
+        {
+            return;
+        }
+
+        var refreshed = await ChartLocalService.LoadChartFromPathAsync(existing.FolderPath, existing.Source).ConfigureAwait(false);
+        if (refreshed is not null)
+        {
+            _sourceCache.AddOrUpdate(refreshed);
+            Logger.ZLogInformation($"Refreshed chart at {existing.FolderPath} after manifest edit");
+        }
+    }
+
     private Task RemoveDelistedChartCoreAsync(string cid)
     {
         var chart = GetOnlineCharts().FirstOrDefault(c => c.FolderName == cid);

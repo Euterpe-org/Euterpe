@@ -55,6 +55,34 @@ public sealed class EpkEditorPanelViewModelTest
         await Assert.That(vm.Maps[^1].Difficulty).IsEqualTo(ChartDifficulty.Hidden);
     }
 
+    [Test]
+    public async Task Save_WhenWriteSucceeds_RaisesSavedWithChartFolder()
+    {
+        var fileSystem = IFileSystemService.Mock();
+        fileSystem.GetFileSizes(Any<string>()).Returns(new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase));
+        fileSystem.TryWriteFileAtomicAsync(Any<string>(), Any<ReadOnlyMemory<byte>>(), Any<CancellationToken>()).Returns(true);
+
+        var serialization = IMessagePackSerializationService.Mock();
+        serialization.SerializeManifest(Any<Manifest>()).Returns([1, 2, 3]);
+
+        var vm = new EpkEditorPanelViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            FileSystemService = fileSystem,
+            MessageBoxService = IMessageBoxService.Mock(),
+            MessagePackSerialization = serialization,
+            NotificationService = INotificationService.Mock()
+        };
+        vm.Open("C:/charts/A/manifest.epk", SingleChartWithoutHidden());
+
+        string? savedFolder = null;
+        vm.Saved += folder => savedFolder = folder;
+
+        await vm.SaveCommand.ExecuteAsync(null);
+
+        await Assert.That(savedFolder).IsEqualTo(Path.GetDirectoryName("C:/charts/A/manifest.epk"));
+    }
+
     private static EpkEditorPanelViewModel NewViewModel()
     {
         var fileSystem = IFileSystemService.Mock();
