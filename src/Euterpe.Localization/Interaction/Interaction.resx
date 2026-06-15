@@ -177,6 +177,15 @@
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>Chart {0} successfully removed</value>
   </data>
+  <data name="Notification_Content_Chart_Sync_Added" xml:space="preserve">
+    <value>Added chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Removed" xml:space="preserve">
+    <value>Removed chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Summary" xml:space="preserve">
+    <value>Synced charts: {0} added, {1} removed</value>
+  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>Updated {0} charts, {1} failed</value>
   </data>

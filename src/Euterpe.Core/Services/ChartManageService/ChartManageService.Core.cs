@@ -4,10 +4,10 @@ internal sealed partial class ChartManageService
 {
     private async Task LoadChartsCoreAsync()
     {
-        await LoadFromSourceAsync(ChartSource.Offline).ConfigureAwait(false);
-        await LoadFromSourceAsync(ChartSource.Online).ConfigureAwait(false);
-
+        await ReconcileChartsAsync().ConfigureAwait(false);
         Logger.ZLogInformation($"All charts loaded");
+
+        StartWatching();
     }
 
     private async Task DownloadChartCoreAsync(string chartId, IProgress<BatchProgress>? progress, CancellationToken cancellationToken)

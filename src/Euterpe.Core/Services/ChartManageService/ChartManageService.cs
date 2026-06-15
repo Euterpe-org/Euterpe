@@ -2,7 +2,7 @@ using Euterpe.Shared.Threading;
 
 namespace Euterpe.Core;
 
-internal sealed partial class ChartManageService : IChartManageService
+internal sealed partial class ChartManageService : IChartManageService, IDisposable
 {
     private readonly Lazy<Task> _initTask;
     private readonly SingleFlight<string> _singleFlight = new();

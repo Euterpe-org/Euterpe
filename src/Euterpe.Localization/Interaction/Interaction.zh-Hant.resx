@@ -177,6 +177,15 @@
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>譜面 {0} 移除成功</value>
   </data>
+  <data name="Notification_Content_Chart_Sync_Added" xml:space="preserve">
+    <value>已新增譜面 {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Removed" xml:space="preserve">
+    <value>已移除譜面 {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Summary" xml:space="preserve">
+    <value>已同步譜面：新增 {0}，移除 {1}</value>
+  </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>已更新 {0} 張譜面，{1} 張失敗</value>
   </data>
