@@ -118,6 +118,10 @@ internal sealed partial class ChartManageService
                 Logger.ZLogInformation($"Import of {name} skipped: chart already exists");
                 NotificationService.WarningLight(Notification_Content_Chart_Import_Duplicated, name);
                 return false;
+            case MigrationOutcome.Unsupported:
+                Logger.ZLogInformation($"Import of {name} skipped: chart cannot be migrated");
+                NotificationService.ErrorLight(Notification_Content_Chart_Import_Unmigratable, name);
+                return false;
             case MigrationOutcome.Failed:
                 NotificationService.ErrorLight(Notification_Content_Chart_Import_Failed, name);
                 return false;

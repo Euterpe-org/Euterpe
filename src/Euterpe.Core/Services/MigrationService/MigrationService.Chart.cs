@@ -7,17 +7,11 @@ namespace Euterpe.Core;
 
 internal sealed partial class MigrationService
 {
-    private async Task BuildChartAsync(CustomAlbumSource source, string workFolder, CancellationToken cancellationToken)
+    private async Task BuildChartAsync(string workFolder, CancellationToken cancellationToken)
     {
-        FileSystemService.DeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
-
-        await PopulateWorkFolderAsync(source, workFolder).ConfigureAwait(false);
-
         var info = await ReadInfoAsync(workFolder, cancellationToken).ConfigureAwait(false);
         var cinema = await ReadCinemaAsync(workFolder, cancellationToken).ConfigureAwait(false);
 
-        NormalizeAudio(workFolder, MusicName, true, cancellationToken);
-        NormalizeAudio(workFolder, DemoName, false, cancellationToken);
         NormalizeVideoName(workFolder);
         DeleteConsumedSources(workFolder);
 
@@ -58,26 +52,15 @@ internal sealed partial class MigrationService
             : null;
     }
 
-    private void NormalizeAudio(string folder, string name, bool required, CancellationToken cancellationToken)
+    private static bool HasSupportedAudio(string folder)
     {
-        var matches = Directory.EnumerateFiles(folder, $"{name}.*");
-        var source = required ? matches.Single() : matches.SingleOrDefault();
-        if (source is null)
-        {
-            return;
-        }
-
-        switch (Path.GetExtension(source)[1..])
-        {
-            case "ogg":
-                return;
-            case "mp3":
-                var target = Path.Combine(folder, $"{name}{MusicExtension}");
-                AudioConverter.Convert(source, target, MusicExtension[1..], cancellationToken);
-                File.Delete(source);
-                break;
-        }
+        var music = Directory.EnumerateFiles(folder, $"{MusicName}.*").Single();
+        var demo = Directory.EnumerateFiles(folder, $"{DemoName}.*").SingleOrDefault();
+        return IsOgg(music) && (demo is null || IsOgg(demo));
     }
+
+    private static bool IsOgg(string path) =>
+        string.Equals(Path.GetExtension(path), MusicExtension, StringComparison.OrdinalIgnoreCase);
 
     private static void NormalizeVideoName(string folder)
     {

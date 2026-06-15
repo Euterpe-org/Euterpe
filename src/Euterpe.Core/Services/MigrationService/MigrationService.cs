@@ -18,7 +18,16 @@ internal sealed partial class MigrationService : IMigrationService
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, name);
         try
         {
-            await BuildChartAsync(source, workFolder, cancellationToken).ConfigureAwait(false);
+            FileSystemService.DeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
+            await PopulateWorkFolderAsync(source, workFolder).ConfigureAwait(false);
+
+            if (!HasSupportedAudio(workFolder))
+            {
+                Logger.ZLogInformation($"'{name}' uses an unsupported audio format, skipping migration");
+                return (MigrationOutcome.Unsupported, destinationFolder);
+            }
+
+            await BuildChartAsync(workFolder, cancellationToken).ConfigureAwait(false);
 
             if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder))
             {
@@ -44,7 +53,6 @@ internal sealed partial class MigrationService : IMigrationService
 
     public required GameConfig GameConfig { get; init; }
     public required IArchiveService Archive { get; init; }
-    public required IAudioConverterService AudioConverter { get; init; }
     public required IFileSystemService FileSystemService { get; init; }
     public required IJsonSerializationService JsonSerialization { get; init; }
     public required ILogger<MigrationService> Logger { get; init; }

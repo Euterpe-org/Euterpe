@@ -35,18 +35,20 @@ internal sealed partial class ChartManageService
 
         var migrated = outcomes.Count(outcome => outcome is MigrationOutcome.Migrated);
         var skipped = outcomes.Count(outcome => outcome is MigrationOutcome.Skipped);
+        var unsupported = outcomes.Count(outcome => outcome is MigrationOutcome.Unsupported);
         var failed = outcomes.Count(outcome => outcome is MigrationOutcome.Failed);
-        Logger.ZLogInformation($"CustomAlbums migration complete: {migrated} migrated, {skipped} skipped, {failed} failed");
+        Logger.ZLogInformation($"CustomAlbums migration complete: {migrated} migrated, {skipped} skipped, {unsupported} unsupported, {failed} failed");
 
         if (!Directory.EnumerateFileSystemEntries(GameConfig.CustomAlbumsChartsFolder).Any())
         {
             FileSystemService.TryDeleteDirectory(GameConfig.CustomAlbumsChartsFolder, DeleteOption.IgnoreIfNotFound);
         }
 
-        if (failed > 0)
+        var notMigrated = failed + unsupported;
+        if (notMigrated > 0)
         {
-            NotificationService.WarningLight(Notification_Content_Migration_Partial, migrated, failed);
-            return migrated + failed;
+            NotificationService.WarningLight(Notification_Content_Migration_Partial, migrated, notMigrated);
+            return migrated + notMigrated;
         }
 
         if (migrated > 0)

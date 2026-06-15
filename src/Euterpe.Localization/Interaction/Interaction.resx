@@ -168,6 +168,9 @@
   <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
     <value>Chart {0} successfully imported</value>
   </data>
+  <data name="Notification_Content_Chart_Import_Unmigratable" xml:space="preserve">
+    <value>Chart {0} cannot be migrated</value>
+  </data>
   <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
     <value>{0} is not a supported chart file or folder</value>
   </data>
@@ -220,7 +223,7 @@
     <value>No MDM charts to migrate</value>
   </data>
   <data name="Notification_Content_Migration_Partial" xml:space="preserve">
-    <value>Migrated {0} CustomAlbums charts, {1} failed</value>
+    <value>Migrated {0} CustomAlbums charts, {1} could not be migrated</value>
   </data>
   <data name="Notification_Content_Migration_Success" xml:space="preserve">
     <value>Migrated {0} CustomAlbums charts</value>

@@ -4,5 +4,6 @@ public enum MigrationOutcome
 {
     Migrated,
     Skipped,
-    Failed
+    Failed,
+    Unsupported
 }
