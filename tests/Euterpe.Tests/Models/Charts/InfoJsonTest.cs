@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Euterpe.Core.JsonContexts;
 using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Tests.Models.Charts;
@@ -44,8 +45,8 @@ public sealed class InfoJsonTest
             UnlockLevel = "5"
         };
 
-        var json = JsonSerializer.Serialize(original);
-        var deserialized = JsonSerializer.Deserialize<InfoJson>(json)!;
+        var json = JsonSerializer.Serialize(original, CamelCaseContext.Default.InfoJson);
+        var deserialized = JsonSerializer.Deserialize(json, CamelCaseContext.Default.InfoJson)!;
 
         using var _ = Assert.Multiple();
         await Assert.That(deserialized.Author).IsEqualTo(original.Author);
