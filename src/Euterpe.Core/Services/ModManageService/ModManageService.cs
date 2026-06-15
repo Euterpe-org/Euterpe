@@ -3,7 +3,7 @@ using Euterpe.Shared.Threading;
 
 namespace Euterpe.Core;
 
-internal sealed partial class ModManageService : IModManageService
+internal sealed partial class ModManageService : IModManageService, IDisposable
 {
     private readonly Lazy<Task> _initTask;
     private readonly SingleFlight<string> _singleFlight = new();

@@ -4,18 +4,8 @@ namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
-    private async Task LoadModsAsync()
+    private async Task MergeWebCatalogAsync()
     {
-        var localMods = (await ModLocalService.GetModFilePaths()
-                .WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
-            .OfType<ModDto>()
-            .ToArray();
-
-        _sourceCache.AddOrUpdate(localMods);
-        Logger.ZLogInformation($"Local mods added to source cache");
-
-        CheckDuplicatedMods(localMods);
-
         foreach (var webMod in await GameDownloadManager.FetchModListAsync().ConfigureAwait(false))
         {
             if (_sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
@@ -38,8 +28,6 @@ internal sealed partial class ModManageService
                 _sourceCache.AddOrUpdate(webModDto);
             }
         }
-
-        CheckIncompatibleMods();
 
         Logger.ZLogInformation($"All mods loaded");
     }

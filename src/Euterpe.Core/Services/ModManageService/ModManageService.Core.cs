@@ -10,7 +10,13 @@ internal sealed partial class ModManageService
             .Subscribe(this, (_, self) => self.RefreshModStates());
 
         await LoadLibsAsync().ConfigureAwait(false);
-        await LoadModsAsync().ConfigureAwait(false);
+
+        var (diskMods, _, _) = await SyncLocalModsAsync().ConfigureAwait(false);
+        CheckDuplicatedMods(diskMods);
+        await MergeWebCatalogAsync().ConfigureAwait(false);
+        CheckIncompatibleMods();
+
+        StartWatching();
     }
 
     private async Task DownloadModCoreAsync(ModDto mod)

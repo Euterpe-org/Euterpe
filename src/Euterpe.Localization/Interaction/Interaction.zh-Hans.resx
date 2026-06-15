@@ -264,6 +264,15 @@
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>模组 {0} 重装成功</value>
   </data>
+  <data name="Notification_Content_Mod_Sync_Added" xml:space="preserve">
+    <value>已添加模组 {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Removed" xml:space="preserve">
+    <value>已移除模组 {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Summary" xml:space="preserve">
+    <value>已同步模组：新增 {0}，移除 {1}</value>
+  </data>
   <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
     <value>切换模组 {0} 状态失败</value>
   </data>

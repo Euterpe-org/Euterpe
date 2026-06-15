@@ -264,6 +264,15 @@
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>模組 {0} 重新安裝成功</value>
   </data>
+  <data name="Notification_Content_Mod_Sync_Added" xml:space="preserve">
+    <value>已新增模組 {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Removed" xml:space="preserve">
+    <value>已移除模組 {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Summary" xml:space="preserve">
+    <value>已同步模組：新增 {0}，移除 {1}</value>
+  </data>
   <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
     <value>切換模組 {0} 狀態失敗</value>
   </data>
