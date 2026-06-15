@@ -128,12 +128,12 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
     }
 
-    #region Injections
+    #region Injectionsn
 
     public required HttpClient Client { get; init; }
     public required EuterpeDownloadClient DownloadClient { get; init; }
-    public required ILogger<AppDownloadManager> Logger { get; init; }
     public required Func<DownloadService> DownloadServiceFactory { get; init; }
+    public required ILogger<AppDownloadManager> Logger { get; init; }
 
     #endregion Injections
 }

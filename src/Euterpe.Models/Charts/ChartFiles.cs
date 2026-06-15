@@ -17,6 +17,8 @@ public static class ChartFiles
 
     public static readonly IReadOnlyList<string> CoverExtensions = [".png", ".gif"];
 
+    public static bool IsLargeMedia(string fileName) => fileName == VideoFileName;
+
     public static string MapName(ChartDifficulty difficulty) => $"map{(int)difficulty}";
 
     public static string MapFileName(ChartDifficulty difficulty) => $"map{(int)difficulty}.bms";

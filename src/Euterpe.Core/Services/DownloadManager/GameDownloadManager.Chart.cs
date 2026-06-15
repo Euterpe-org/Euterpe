@@ -26,7 +26,11 @@ internal sealed partial class GameDownloadManager
     private Task DownloadChartFileAsync(string cid, string workFolder, string fileName, CancellationToken cancellationToken)
     {
         var filePath = Path.Combine(workFolder, fileName);
-        return AppDownloadManager.DownloadAssetAsync(ChartFileUrl(cid, fileName), filePath, $"chart {cid}/{fileName}", cancellationToken);
+        var url = ChartFileUrl(cid, fileName);
+
+        return IsLargeMedia(fileName)
+            ? AppDownloadManager.DownloadFileAsync(url, filePath, cancellationToken: cancellationToken)
+            : AppDownloadManager.DownloadAssetAsync(url, filePath, $"chart {cid}/{fileName}", cancellationToken);
     }
 
     private static string ChartFileUrl(string cid, string fileName) =>
