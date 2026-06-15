@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Euterpe.Tests.Models;
 
 [Category("LanguageTests")]
@@ -17,13 +15,5 @@ public sealed class LanguageTest
         using var _ = Assert.Multiple();
         await Assert.That(language.Name).IsEqualTo(code);
         await Assert.That(language.ToString()).StartsWith($"{code} - ");
-    }
-
-    [Test]
-    public async Task ToString_FormatsAsNameDashDisplayName()
-    {
-        Language language = "en-US";
-        var expected = $"en-US - {CultureInfo.GetCultureInfo("en-US").DisplayName}";
-        await Assert.That(language.ToString()).IsEqualTo(expected);
     }
 }

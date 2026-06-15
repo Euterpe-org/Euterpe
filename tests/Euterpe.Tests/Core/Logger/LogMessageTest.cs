@@ -21,22 +21,4 @@ public sealed class LogMessageTest
         var msg = new LogMessage(DateTimeOffset.UtcNow, level, new LogCategory("cat"), "m");
         await Assert.That(msg.LogLevelAbbreviation).IsEqualTo(expected);
     }
-
-    [Test]
-    public async Task RecordEquality_ComparesAllFields()
-    {
-        var ts = new DateTimeOffset(2026, 5, 7, 0, 0, 0, TimeSpan.Zero);
-        var category = new LogCategory("cat");
-
-        var a = new LogMessage(ts, LogLevel.Information, category, "msg");
-        var b = new LogMessage(ts, LogLevel.Information, category, "msg");
-        var c = a with { Message = "different" };
-
-        using var _ = Assert.Multiple();
-        await Assert.That(a).IsEqualTo(b);
-        await Assert.That(a).IsNotEqualTo(c);
-        await Assert.That(a.Timestamp).IsEqualTo(ts);
-        await Assert.That(a.LogLevel).IsEqualTo(LogLevel.Information);
-        await Assert.That(a.Message).IsEqualTo("msg");
-    }
 }

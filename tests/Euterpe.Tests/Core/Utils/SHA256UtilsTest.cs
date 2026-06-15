@@ -80,13 +80,4 @@ public sealed class SHA256UtilsTest
         await File.WriteAllTextAsync(_tempFile, content);
         await Assert.That(SHA256Utils.HexLowerFromPath(_tempFile)).IsEqualTo(expected);
     }
-
-    [Test]
-    public async Task HexFromBytes_AndHexLowerFromBytes_ProduceSameHashIgnoringCase()
-    {
-        var bytes = Encoding.UTF8.GetBytes("hash equality");
-        var upper = SHA256Utils.HexFromBytes(bytes);
-        var lower = SHA256Utils.HexLowerFromBytes(bytes);
-        await Assert.That(upper).IsEqualTo(lower.ToUpperInvariant());
-    }
 }

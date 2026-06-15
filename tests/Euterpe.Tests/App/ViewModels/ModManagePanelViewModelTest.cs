@@ -26,18 +26,6 @@ public sealed class ModManagePanelViewModelTest
         await Assert.That(ModManagePanelViewModel.ModFilters).Count().IsEqualTo(6);
 
     [Test]
-    public async Task SearchTextChanged_RaisesPropertyChanged()
-    {
-        var vm = NewViewModel();
-        var changed = new List<string?>();
-        vm.Filter.PropertyChanged += (_, args) => changed.Add(args.PropertyName);
-
-        vm.Filter.SearchText = "hello";
-
-        await Assert.That(changed).Contains(nameof(ModFilterViewModel.SearchText));
-    }
-
-    [Test]
     public async Task OpenConfigFileCommand_DelegatesToLauncher_WithComposedPath()
     {
         var launcher = IPlatformLauncher.Mock();

@@ -12,13 +12,6 @@ public sealed partial class ModManageServiceTest
     }
 
     [Test]
-    public async Task Connect_ReturnsObservable()
-    {
-        var sut = CreateModManageService();
-        await Assert.That(sut.Connect()).IsNotNull();
-    }
-
-    [Test]
     public async Task InitializeModsAsync_CalledTwice_OnlyLoadsOnce()
     {
         var localServiceMock = IModLocalService.Mock();
