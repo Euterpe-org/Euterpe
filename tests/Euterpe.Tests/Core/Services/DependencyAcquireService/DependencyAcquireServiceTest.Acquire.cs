@@ -53,12 +53,9 @@ public sealed partial class DependencyAcquireServiceTest
     [Test]
     public async Task AcquireForMelonLoaderAsync_DownloadSucceedsButHashMismatch_ThrowsAfterRetries()
     {
-        // Files exist with a known SHA; client expects a different SHA → all 3 attempts hit
-        // the post-download hash check and fall through, eventually throwing.
         await CreateValidDependencyFiles();
         var client = CreateClientReturning(CreateAllMelonLoaderDeps("wrong-expected-sha"));
         var downloader = IAppDownloadManager.Mock();
-        // Default mock returns Task.CompletedTask — equivalent to "download succeeded".
         var sut = CreateService(client, downloader);
 
         var act = () => sut.AcquireForMelonLoaderAsync();

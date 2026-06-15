@@ -213,8 +213,7 @@ public sealed class FileSystemServiceTest
         var work = NewTempFolder();
         try
         {
-            // Without IgnoreIfNotFound, the catch path runs because Directory.Delete throws
-            // DirectoryNotFoundException on missing paths (unlike File.Delete which is silent).
+            // Directory.Delete throws DirectoryNotFoundException on missing paths (unlike File.Delete which is silent).
             var ok = NewService().TryDeleteDirectory(Path.Combine(work, "missing_dir"));
 
             await Assert.That(ok).IsFalse();

@@ -3,12 +3,6 @@ using Euterpe.Features.Setting;
 
 namespace Euterpe.Headless.Tests.ViewModels;
 
-/// <summary>
-///     Lives here (not in Euterpe.Tests) because <c>AboutPanelViewModel.ContributorGroups</c>
-///     constructs <c>Contributor</c> objects whose ctor calls <c>AssetLoader.Open(avares://...)</c>,
-///     which needs the Avalonia platform initialized — exactly what the headless test session
-///     gives us via <c>HeadlessTest</c>.
-/// </summary>
 [TestSubject(typeof(AboutPanelViewModel))]
 public sealed class AboutPanelViewModelTest : HeadlessTest
 {

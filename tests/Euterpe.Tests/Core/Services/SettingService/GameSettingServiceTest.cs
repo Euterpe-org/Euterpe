@@ -65,8 +65,6 @@ public sealed class GameSettingServiceTest
                 GamePaths = IGamePathDiscovery.Mock()
             };
 
-            // Simulate a chart download that is already in progress: its work folder and a
-            // partially downloaded file live under the temp charts folder.
             var workFolder = Path.Combine(gameConfig.TempChartsFolder, "13");
             Directory.CreateDirectory(workFolder);
             var inFlightFile = Path.Combine(workFolder, "manifest.epk");
@@ -74,8 +72,7 @@ public sealed class GameSettingServiceTest
 
             service.EnsureGameFolders();
 
-            // EnsureGameFolders must not wipe temp; otherwise it races with the active download
-            // and the download fails with DirectoryNotFoundException when it writes the file.
+            // EnsureGameFolders must not wipe temp, or it races with the active download.
             using var assertions = Assert.Multiple();
             await Assert.That(File.Exists(inFlightFile)).IsTrue();
             await Assert.That(Directory.Exists(gameConfig.TempModsFolder)).IsTrue();

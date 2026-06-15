@@ -3,10 +3,6 @@ using Avalonia.Styling;
 
 namespace Euterpe.Headless.Tests.Theme;
 
-/// <summary>
-///     Verifies that <c>EuterpeTheme</c>'s ThemeDictionaries entries (Dark vs Light) are addressable
-///     via the theme-variant-aware resource lookup that DynamicResource uses at runtime.
-/// </summary>
 [NotInParallel("ApplicationThemeVariant")]
 public sealed class ThemeSwitchingTests : HeadlessTest
 {

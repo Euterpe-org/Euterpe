@@ -36,14 +36,10 @@ public sealed partial class ModDtoTest
 
     public static IEnumerable<Func<(bool isLocal, bool hasDownload, ModState state, bool expected)>> InstallableCases()
     {
-        // not local + has download + not incompatible → installable
         yield return () => (false, true, ModState.Normal, true);
         yield return () => (false, true, ModState.Outdated, true);
-        // local mods are never installable
         yield return () => (true, true, ModState.Normal, false);
-        // no download source → not installable
         yield return () => (false, false, ModState.Normal, false);
-        // incompatible → not installable
         yield return () => (false, true, ModState.Incompatible, false);
     }
 

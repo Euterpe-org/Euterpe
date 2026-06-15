@@ -5,11 +5,6 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Euterpe.Headless.Tests.Integration;
 
-/// <summary>
-///     Demonstrates end-to-end testing patterns: real user input → bound command → ViewModel state change.
-///     For pure ViewModel logic (no view involved), prefer unit tests in Euterpe.Tests with mocked services.
-///     Reach for headless integration tests when you specifically want to verify the binding/wiring path.
-/// </summary>
 public sealed partial class ViewModelBindingTests : HeadlessTest
 {
     [Test]

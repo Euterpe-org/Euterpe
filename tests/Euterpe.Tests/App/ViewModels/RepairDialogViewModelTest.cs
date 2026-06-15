@@ -3,11 +3,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests.App.ViewModels;
 
-/// <summary>
-///     Demonstrates ViewModel unit testing patterns:
-///     instantiate VM directly, satisfy <c>required</c> dependencies (mock or null! the unused ones),
-///     invoke commands, and assert side effects. No Avalonia or headless platform involved.
-/// </summary>
 [Category("RepairDialogViewModelTests")]
 [TestSubject(typeof(RepairDialogViewModel))]
 public sealed class RepairDialogViewModelTest

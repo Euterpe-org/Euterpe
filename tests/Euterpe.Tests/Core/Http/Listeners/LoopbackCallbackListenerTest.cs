@@ -54,7 +54,6 @@ public sealed class LoopbackCallbackListenerTest
             await Assert.That(callbackTask.IsCompleted).IsFalse();
         }
 
-        // The real redirect then completes the wait.
         await SendAsync(listener.Port, "GET /callback?code=abc&state=xyz HTTP/1.1", cancellationToken);
         var result = await callbackTask;
 

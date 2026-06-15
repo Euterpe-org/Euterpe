@@ -64,7 +64,7 @@ public sealed partial class MapperTest
             Author = "Composer",
             Scene = "scene_01",
             Difficulty1 = "2",
-            Difficulty2 = "5", // declared in info.json but Hard is not among the present difficulties, so it must be excluded
+            Difficulty2 = "5",
             Difficulty3 = "8",
             LevelDesigner = "General",
             LevelDesigner1 = "Alice",

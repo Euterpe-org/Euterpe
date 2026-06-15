@@ -168,8 +168,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         await Assert.That(InvokeShouldActivateWindow(null, query)).IsEqualTo(expected);
     }
 
-    // Private HandleModActionAsync / HandleChartActionAsync tests (bypass the NavigationService.Ready
-    // gate + ActivateMainWindow sitting between HandleActivation and the per-domain dispatch).
+    // Private HandleModActionAsync / HandleChartActionAsync tests bypass the NavigationService.Ready gate + ActivateMainWindow.
 
     [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleModActionAsync")]
     private static extern Task InvokeModAction(SystemActivationService service, string path);

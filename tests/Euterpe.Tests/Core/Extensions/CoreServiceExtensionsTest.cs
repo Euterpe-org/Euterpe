@@ -45,9 +45,7 @@ public sealed class CoreServiceExtensionsTest
     [Test]
     public async Task RegisterHttpClients_RegistersAllRefitClientServiceDescriptors()
     {
-        // Refit clients can't be resolved at runtime in this test setup (the source generator
-        // doesn't emit clients into the test assembly), but service-collection registration
-        // is what RegisterHttpClients owns — verify the descriptors are present.
+        // Refit clients can't be resolved in the test assembly (no generated clients), so assert only the registered descriptors.
         var services = new ServiceCollection();
         services.RegisterHttpClients();
 

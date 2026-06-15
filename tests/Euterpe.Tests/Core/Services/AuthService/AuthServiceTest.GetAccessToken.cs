@@ -45,7 +45,6 @@ public sealed partial class AuthServiceTest
 
         await Assert.That(getTokenTask.IsCompleted).IsFalse();
 
-        // Simulate login completing
         await Task.Delay(200, cancellationToken);
         await sut.LoginAsync();
 

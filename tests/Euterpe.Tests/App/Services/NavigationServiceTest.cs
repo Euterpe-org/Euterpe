@@ -3,11 +3,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests.App.Services;
 
-/// <summary>
-///     Routes that don't prefix-match any RouteTree node skip Select-callbacks (which would otherwise
-///     hit <c>IocContainer.Resolve</c> and require a bootstrapped scope). All tests use unmatched
-///     synthetic routes so we exercise NavigationService's own state logic without app DI.
-/// </summary>
 [Category("NavigationServiceTests")]
 [TestSubject(typeof(NavigationService))]
 public sealed class NavigationServiceTest

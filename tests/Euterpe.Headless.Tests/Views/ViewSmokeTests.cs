@@ -9,10 +9,6 @@ using Euterpe.Shell;
 
 namespace Euterpe.Headless.Tests.Views;
 
-/// <summary>
-///     Smoke tests that each view's XAML loads into the visual tree without exceptions.
-///     Catches XAML typos, missing resources, broken compiled bindings, and theme regressions.
-/// </summary>
 public sealed class ViewSmokeTests : HeadlessTest
 {
     [Test]

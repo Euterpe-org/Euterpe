@@ -13,7 +13,6 @@ public sealed partial class AuthServiceTest
         var launcher = IPlatformLauncher.Mock();
         launcher.OpenUriAsync(Any<string>()).Callback(url => capturedUrl = url);
 
-        // Returning a non-matching state stops the flow right after the browser is launched.
         var sut = CreateAuthService(launcher: launcher, listenerFactory: StaticListener(AuthCode, "tampered-state", null));
         await sut.LoginAsync();
 
@@ -116,7 +115,6 @@ public sealed partial class AuthServiceTest
         authClientMock.ExchangeAppTokenAsync(Any<AppTokenRequest>(), Any<CancellationToken>()).WasNeverCalled();
     }
 
-    // A loopback whose callback echoes back the state the app put in the authorize URL, so state validation passes.
     private static (IPlatformLauncher launcher, Func<ILoopbackCallbackListener> factory) StateEchoingLoopback(string? code, string? error)
     {
         string? capturedState = null;

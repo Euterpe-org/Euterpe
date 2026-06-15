@@ -87,7 +87,6 @@ public sealed class SingleFlightTest
         var faulting = () => flight.RunAsync("key", () => Task.FromException(new InvalidOperationException("boom")));
         await Assert.That(faulting).Throws<InvalidOperationException>().WithMessage("boom");
 
-        // After the previous call faulted, the next call should run a fresh task.
         var ran = false;
         await flight.RunAsync("key", () =>
         {

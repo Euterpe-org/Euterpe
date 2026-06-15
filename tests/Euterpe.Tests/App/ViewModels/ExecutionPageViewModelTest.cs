@@ -64,7 +64,6 @@ public sealed class ExecutionPageViewModelTest
     public async Task OnEnterAsync_PartialFailure_OnlyFailingStepMarkedFailed()
     {
         var gameConfig = new MuseDashConfig();
-        // Select first two options
         foreach (var o in gameConfig.SetupOptions)
         {
             o.IsSelected = false;
@@ -92,7 +91,6 @@ public sealed class ExecutionPageViewModelTest
         var firstKinds = gameConfig.SetupOptions[0].Kinds;
         var vm = NewViewModel(gameConfig, [SuccessfulStep(firstKinds)]);
 
-        // Pre-populate a failed step (simulating a prior failure)
         var failedStep = new SetupStepState
         {
             Kinds = firstKinds,
