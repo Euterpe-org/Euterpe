@@ -43,13 +43,13 @@ internal sealed class WindowsSystemAssociationSetup : ISystemAssociationSetup
 
     private static void RegisterEpkFileAssociation(string processPath)
     {
-        var progId = $"{AppName}{ChartFiles.ManifestExtension}";
+        const string progId = $"{AppName}{ChartFiles.ManifestExtension}";
 
         using var extensionKey = Registry.CurrentUser.CreateSubKey($@"Software\Classes\{ChartFiles.ManifestExtension}");
         extensionKey.SetValue(string.Empty, progId, RegistryValueKind.String);
 
         using var progIdKey = Registry.CurrentUser.CreateSubKey($@"Software\Classes\{progId}");
-        progIdKey.SetValue(string.Empty, $"{AppName} Chart", RegistryValueKind.String);
+        progIdKey.SetValue(string.Empty, $"{AppName} Manifest Pack", RegistryValueKind.String);
 
         using var iconKey = progIdKey.CreateSubKey("DefaultIcon");
         iconKey.SetValue(string.Empty, $"\"{processPath}\",0", RegistryValueKind.String);

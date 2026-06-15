@@ -87,16 +87,15 @@ internal sealed class LinuxSystemAssociationSetup : ISystemAssociationSetup
 
         Directory.CreateDirectory(mimePackagesDir);
 
-        var package =
-            $"""
-             <?xml version="1.0" encoding="UTF-8"?>
-             <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-                 <mime-type type="{EpkMimeType}">
-                     <comment>{AppName} Chart</comment>
-                     <glob pattern="*{ChartFiles.ManifestExtension}"/>
-                 </mime-type>
-             </mime-info>
-             """;
+        const string package = $"""
+                                <?xml version="1.0" encoding="UTF-8"?>
+                                <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+                                    <mime-type type="{EpkMimeType}">
+                                        <comment>{AppName} Manifest Pack</comment>
+                                        <glob pattern="*{ChartFiles.ManifestExtension}"/>
+                                    </mime-type>
+                                </mime-info>
+                                """;
 
         await File.WriteAllTextAsync(mimePackagePath, package).ConfigureAwait(false);
 
