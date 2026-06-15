@@ -1,4 +1,3 @@
-using System.Globalization;
 using Euterpe.Localization;
 using static Euterpe.Models.Charts.ChartFiles;
 
@@ -52,19 +51,7 @@ public sealed partial class ChartDto : ObservableObject
             ? string.Format(XAML.ChartManage_UploadedBy, uploader.Nickname)
             : null;
 
-    public string SizeDisplay
-    {
-        get
-        {
-            var (divisor, unit) = SizeBytes switch
-            {
-                >= 1 << 30 => (1 << 30, "GB"),
-                >= 1 << 20 => (1 << 20, "MB"),
-                _ => (1 << 10, "KB")
-            };
-            return string.Create(CultureInfo.InvariantCulture, $"{SizeBytes / (double)divisor:0.#} {unit}");
-        }
-    }
+    public string SizeDisplay => SizeBytes.ToReadableSize();
 
     public string BpmDisplay =>
         Manifest.Meta is { BpmMin: { } min, BpmMax: { } max }
