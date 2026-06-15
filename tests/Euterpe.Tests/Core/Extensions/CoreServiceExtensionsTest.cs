@@ -38,7 +38,7 @@ public sealed class CoreServiceExtensionsTest
         await Assert.That(provider.GetService<LoggingHandler>()).IsNotNull();
         await Assert.That(provider.GetService<ServerErrorHandler>()).IsNotNull();
         await Assert.That(provider.GetService<TokenQueryHandler>()).IsNotNull();
-        await Assert.That(provider.GetService<IDownloadService>()).IsNotNull();
+        await Assert.That(services.Any(s => s.ServiceType == typeof(Func<DownloadService>))).IsTrue();
         await Assert.That(provider.GetService<IHttpClientFactory>()).IsNotNull();
     }
 

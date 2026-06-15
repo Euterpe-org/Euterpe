@@ -65,12 +65,12 @@ public static class CoreServiceExtensions
             services.AddTransient<ServerErrorHandler>();
             services.AddTransient<TokenQueryHandler>();
 
-            services.AddSingleton<IDownloadService>(sp =>
+            services.AddSingleton<Func<DownloadService>>(sp =>
             {
                 var handler = sp.GetRequiredService<TokenQueryHandler>();
                 handler.InnerHandler = new SocketsHttpHandler();
 
-                return new DownloadService(new DownloadConfiguration
+                return () => new DownloadService(new DownloadConfiguration
                 {
                     ChunkCount = 8,
                     MaxTryAgainOnFailure = 4,

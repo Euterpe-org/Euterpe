@@ -1,5 +1,4 @@
 using System.Net;
-using DownloadProgressChangedEventArgs = Downloader.DownloadProgressChangedEventArgs;
 
 namespace Euterpe.Core;
 
@@ -12,34 +11,20 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         IProgress<double>? downloadProgress = null,
         CancellationToken cancellationToken = default)
     {
-        EventHandler<DownloadProgressChangedEventArgs>? progressHandler = null;
-
-        if (onDownloadStarted is not null)
-        {
-            DownloadService.DownloadStarted += onDownloadStarted;
-        }
-
-        if (downloadProgress is not null)
-        {
-            progressHandler = (_, e) => downloadProgress.Report(e.ProgressPercentage);
-            DownloadService.DownloadProgressChanged += progressHandler;
-        }
-
-        try
-        {
-            await DownloadService.DownloadFileTaskAsync(url, filePath, cancellationToken).ConfigureAwait(false);
-        }
-        finally
+        var downloadService = DownloadServiceFactory();
+        await using (downloadService.ConfigureAwait(false))
         {
             if (onDownloadStarted is not null)
             {
-                DownloadService.DownloadStarted -= onDownloadStarted;
+                downloadService.DownloadStarted += onDownloadStarted;
             }
 
-            if (progressHandler is not null)
+            if (downloadProgress is not null)
             {
-                DownloadService.DownloadProgressChanged -= progressHandler;
+                downloadService.DownloadProgressChanged += (_, e) => downloadProgress.Report(e.ProgressPercentage);
             }
+
+            await downloadService.DownloadFileTaskAsync(url, filePath, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -58,8 +43,14 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
     }
 
-    public Task DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default) =>
-        DownloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken);
+    public async Task DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default)
+    {
+        var downloadService = DownloadServiceFactory();
+        await using (downloadService.ConfigureAwait(false))
+        {
+            await downloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken).ConfigureAwait(false);
+        }
+    }
 
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
@@ -141,8 +132,8 @@ internal sealed class AppDownloadManager : IAppDownloadManager
 
     public required HttpClient Client { get; init; }
     public required EuterpeDownloadClient DownloadClient { get; init; }
-    public required IDownloadService DownloadService { get; init; }
     public required ILogger<AppDownloadManager> Logger { get; init; }
+    public required Func<DownloadService> DownloadServiceFactory { get; init; }
 
     #endregion Injections
 }
