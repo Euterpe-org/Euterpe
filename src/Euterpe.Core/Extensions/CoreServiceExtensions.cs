@@ -65,6 +65,8 @@ public static class CoreServiceExtensions
             services.AddTransient<ServerErrorHandler>();
             services.AddTransient<TokenQueryHandler>();
 
+            services.AddSingleton<ServerErrorNotifier>();
+
             services.AddSingleton<Func<DownloadService>>(sp =>
             {
                 var handler = sp.GetRequiredService<TokenQueryHandler>();

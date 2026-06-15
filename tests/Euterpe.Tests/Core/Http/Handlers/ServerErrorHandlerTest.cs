@@ -1,5 +1,4 @@
 using System.Net;
-using System.Reflection;
 using Euterpe.Core.Http.Handlers;
 using Euterpe.Tests.TestSupport;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,18 +7,9 @@ using Microsoft.Extensions.Logging;
 namespace Euterpe.Tests.Core.Http.Handlers;
 
 [Category("ServerErrorHandlerTests")]
-[NotInParallel("ServerErrorHandlerStaticState")]
 [TestSubject(typeof(ServerErrorHandler))]
 public sealed class ServerErrorHandlerTest
 {
-    private static void ResetDebounce()
-    {
-        var field = typeof(ServerErrorHandler).GetField(
-            "LastNotifiedTimestamp",
-            BindingFlags.NonPublic | BindingFlags.Static)!;
-        field.SetValue(null, 0L);
-    }
-
     private static IServiceProvider BuildServices(INotificationService notificationService)
     {
         var services = new ServiceCollection();
@@ -27,16 +17,16 @@ public sealed class ServerErrorHandlerTest
         return services.BuildServiceProvider();
     }
 
-    [Before(Test)]
-    public void Setup() => ResetDebounce();
+    private static ServerErrorHandler CreateHandler(INotificationService notification, ILogger<ServerErrorNotifier> logger, HttpMessageHandler inner) =>
+        new(new ServerErrorNotifier(BuildServices(notification), logger)) { InnerHandler = inner };
 
     [Test]
     public async Task SendAsync_SuccessResponse_DoesNotNotifyOrLog()
     {
         var notification = INotificationService.Mock();
-        var logger = Mock.Logger<ServerErrorHandler>();
+        var logger = Mock.Logger<ServerErrorNotifier>();
         var inner = new FakeHttpMessageHandler();
-        using var handler = new ServerErrorHandler(BuildServices(notification), logger) { InnerHandler = inner };
+        using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 
         await client.GetAsync("https://example.test/");
@@ -50,9 +40,9 @@ public sealed class ServerErrorHandlerTest
     public async Task SendAsync_4xxResponse_DoesNotNotify()
     {
         var notification = INotificationService.Mock();
-        var logger = Mock.Logger<ServerErrorHandler>();
+        var logger = Mock.Logger<ServerErrorNotifier>();
         var inner = new FakeHttpMessageHandler(HttpStatusCode.NotFound);
-        using var handler = new ServerErrorHandler(BuildServices(notification), logger) { InnerHandler = inner };
+        using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 
         await client.GetAsync("https://example.test/");
@@ -64,9 +54,9 @@ public sealed class ServerErrorHandlerTest
     public async Task SendAsync_5xxResponse_LogsWarningAndNotifies()
     {
         var notification = INotificationService.Mock();
-        var logger = Mock.Logger<ServerErrorHandler>();
+        var logger = Mock.Logger<ServerErrorNotifier>();
         var inner = new FakeHttpMessageHandler(HttpStatusCode.InternalServerError);
-        using var handler = new ServerErrorHandler(BuildServices(notification), logger) { InnerHandler = inner };
+        using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 
         await client.GetAsync("https://example.test/api/x");
@@ -83,9 +73,9 @@ public sealed class ServerErrorHandlerTest
     public async Task SendAsync_ConsecutiveServerErrors_DebouncesNotification()
     {
         var notification = INotificationService.Mock();
-        var logger = Mock.Logger<ServerErrorHandler>();
+        var logger = Mock.Logger<ServerErrorNotifier>();
         var inner = new FakeHttpMessageHandler(HttpStatusCode.BadGateway);
-        using var handler = new ServerErrorHandler(BuildServices(notification), logger) { InnerHandler = inner };
+        using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 
         await client.GetAsync("https://example.test/");
