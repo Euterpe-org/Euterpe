@@ -533,10 +533,10 @@
     <value>Mapa igre nije valjana</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe nije potpuno kompatibilan s ekosustavom MDMC (Muse Dash Modding Community). Ako ga radije ne bi koristio, sada još uvijek možeš zatvoriti Euterpe. Ako nastaviš, modovi i chartovi koji su već na tvom uređaju neće biti uklonjeni i možeš nastaviti normalno igrati. Međutim, CustomAlbums će biti zamijenjen Euterpeovim službenim modom: kasniji povratak na CustomAlbums učinit će igru neigrivom, a drugi modovi ili upravitelji chartova poput MuseDashTOOL-a mogli bi prestati raditi.</value>
+    <value>Euterpe nije kompatibilan s ekosustavom MDMC (Muse Dash Modding Community). Nastavak s Euterpeom otežava povratak na ekosustav MDMC, a Headquarters (MDMC ljestvica) bit će zamijenjen Euterpeovom ljestvicom. Modovi ili upravitelji chartova koji nisu Euterpe, poput MuseDashTOOL-a, više neće raditi.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Ograničena kompatibilnost s MDMC-om</value>
+    <value>Nije kompatibilan s ekosustavom MDMC</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Odvoji trenutak da ovo pročitaš, zatim odaberi mapu igre</value>

@@ -569,10 +569,10 @@
     <value>Not a valid game folder</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe is not fully compatible with the MDMC (Muse Dash Modding Community) ecosystem. If you'd prefer not to use it, you can still close Euterpe now. Continuing will not remove the mods and charts already on your device, and you can keep playing as normal. However, CustomAlbums will be replaced by Euterpe's official mod: switching back to CustomAlbums afterwards will make the game unplayable, and other mods or chart managers such as MuseDashTOOL may stop working.</value>
+    <value>Euterpe is not compatible with the MDMC (Muse Dash Modding Community) ecosystem. Continuing with Euterpe makes it hard to roll back to the MDMC ecosystem, and Headquarters (the MDMC leaderboard) will be replaced by Euterpe's leaderboard. Non-Euterpe mods or chart managers such as MuseDashTOOL will no longer work.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Limited compatibility with MDMC</value>
+    <value>Incompatible with the MDMC ecosystem</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Take a moment to read this, then choose your game folder.</value>

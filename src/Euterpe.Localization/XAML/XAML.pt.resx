@@ -533,10 +533,10 @@
     <value>Pasta do jogo inválida</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>O Euterpe não é totalmente compatível com o ecossistema do MDMC (Muse Dash Modding Community). Se preferir não usá-lo, você ainda pode fechar o Euterpe agora. Continuar não removerá os mods e charts que já estão no seu dispositivo, e você poderá continuar jogando normalmente. No entanto, o CustomAlbums será substituído pelo mod oficial do Euterpe: voltar a usar o CustomAlbums depois deixará o jogo injogável, e outros mods ou gerenciadores de charts como o MuseDashTOOL podem parar de funcionar.</value>
+    <value>O Euterpe não é compatível com o ecossistema do MDMC (Muse Dash Modding Community). Continuar com o Euterpe torna difícil voltar ao ecossistema do MDMC, e o Headquarters (a classificação do MDMC) será substituído pela classificação do Euterpe. Mods ou gerenciadores de charts que não sejam do Euterpe, como o MuseDashTOOL, deixarão de funcionar.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Compatibilidade limitada com o MDMC</value>
+    <value>Incompatível com o ecossistema do MDMC</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Reserve um momento para ler isto e depois escolha a pasta do jogo.</value>

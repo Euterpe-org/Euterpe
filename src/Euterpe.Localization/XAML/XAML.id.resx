@@ -533,10 +533,10 @@
     <value>Bukan folder game yang valid</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe tidak sepenuhnya kompatibel dengan ekosistem MDMC (Muse Dash Modding Community). Jika Anda lebih memilih untuk tidak menggunakannya, Anda masih dapat menutup Euterpe sekarang. Melanjutkan tidak akan menghapus mod dan chart yang sudah ada di perangkat Anda, dan Anda tetap dapat bermain seperti biasa. Namun, CustomAlbums akan digantikan oleh mod resmi Euterpe: beralih kembali ke CustomAlbums setelahnya akan membuat game tidak dapat dimainkan, dan mod atau pengelola chart lain seperti MuseDashTOOL mungkin berhenti berfungsi.</value>
+    <value>Euterpe tidak kompatibel dengan ekosistem MDMC (Muse Dash Modding Community). Melanjutkan dengan Euterpe membuat sulit untuk kembali ke ekosistem MDMC, dan Headquarters (papan peringkat MDMC) akan digantikan oleh papan peringkat Euterpe. Mod atau pengelola chart selain Euterpe seperti MuseDashTOOL tidak akan berfungsi lagi.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Kompatibilitas terbatas dengan MDMC</value>
+    <value>Tidak kompatibel dengan ekosistem MDMC</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Luangkan waktu untuk membaca ini, lalu pilih folder game Anda</value>

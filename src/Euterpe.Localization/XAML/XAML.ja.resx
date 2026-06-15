@@ -533,10 +533,10 @@
     <value>有効なゲームフォルダではありません</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe は MDMC（Muse Dash Modding Community）エコシステムと完全には互換性がありません。使用を希望しない場合は、ここで Euterpe を閉じることもできます。続行しても、お使いのデバイスに既にある Mod や譜面は削除されず、これまでどおりプレイできます。ただし、CustomAlbums は Euterpe 公式の Mod に置き換えられます。あとから CustomAlbums に戻すとゲームがプレイできなくなり、MuseDashTOOL などの他の Mod や譜面管理ツールも動作しなくなる場合があります。</value>
+    <value>Euterpe は MDMC（Muse Dash Modding Community）エコシステムと互換性がありません。Euterpe を使い続けると MDMC エコシステムへ戻すことが難しくなり、Headquarters（MDMC のランキング）は Euterpe のランキングに置き換えられます。MuseDashTOOL など Euterpe 以外の Mod や譜面管理ツールは動作しなくなります。</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>MDMC との互換性は限定的です</value>
+    <value>MDMC エコシステムと互換性なし</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>まずは以下をご確認のうえ、ゲームフォルダを選択してください。</value>

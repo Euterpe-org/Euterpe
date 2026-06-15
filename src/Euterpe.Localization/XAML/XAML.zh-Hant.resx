@@ -569,10 +569,10 @@
     <value>不是有效的遊戲資料夾</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe 並未完全相容於 MDMC（Muse Dash Modding Community）生態。如果你不想使用，現在仍可以關閉 Euterpe。繼續進行不會移除裝置上既有的模組與譜面，你依然可以正常遊玩。不過，CustomAlbums 將會被 Euterpe 的官方模組取代：之後若切換回 CustomAlbums 會導致遊戲無法遊玩，而喵斯兔（MuseDashTOOL）等其他模組或譜面管理工具也可能無法運作。</value>
+    <value>Euterpe 與 MDMC（Muse Dash Modding Community）生態不相容。繼續使用 Euterpe 將難以回退到 MDMC 生態，Headquarters（MDMC 排行榜）也將被 Euterpe 排行榜取代。繼續後，非 Euterpe 的模組或譜面管理器（例如喵斯兔 MuseDashTOOL）將無法正常運作。</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>與 MDMC 的相容性有限</value>
+    <value>與 MDMC 生態不相容</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>花點時間讀一下這段說明，然後選擇你的遊戲資料夾</value>

@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.Features.Setup"
     x:Class="Euterpe.Features.Setup.GamePathPage"
     x:DataType="vm:GamePathPageViewModel"
@@ -52,35 +53,13 @@
             Spacing="14"
             VerticalAlignment="Center">
 
-            <!--  MDMC compatibility notice  -->
-            <Border
-                Background="{DynamicResource SecondaryCardColor}"
+            <!--  MDMC compatibility warning  -->
+            <u:Banner
+                CanClose="False"
+                Content="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning}}"
                 CornerRadius="8"
-                Padding="16,12"
-                Theme="{DynamicResource CardBorder}">
-                <StackPanel
-                    Spacing="6">
-                    <StackPanel
-                        Orientation="Horizontal"
-                        Spacing="8">
-                        <TextBlock
-                            FontSize="14"
-                            Foreground="{DynamicResource SecondaryTextColor}"
-                            Text="ℹ"
-                            VerticalAlignment="Center" />
-                        <TextBlock
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning_Title}}"
-                            VerticalAlignment="Center" />
-                    </StackPanel>
-                    <TextBlock
-                        FontSize="12"
-                        Foreground="{DynamicResource SecondaryTextColor}"
-                        Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning}}"
-                        TextWrapping="Wrap" />
-                </StackPanel>
-            </Border>
+                Header="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning_Title}}"
+                Type="Warning" />
 
             <!--  Game folder picker  -->
             <StackPanel
