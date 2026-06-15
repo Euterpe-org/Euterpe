@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Euterpe.Models.Charts.CustomAlbums;
+using Riok.Mapperly.Abstractions;
 
 namespace Euterpe.Models;
 
@@ -19,7 +20,7 @@ public static partial class Mapper
             Bpm = bpm,
             BpmMin = bpmMin,
             BpmMax = bpmMax,
-            Scene = info.Scene,
+            Scene = NormalizeScene(info.Scene),
             BackgroundVideoOpacity = backgroundVideoOpacity,
             SearchKeywords = info.SearchTags,
             Maps = BuildMaps(info, difficulties),
@@ -71,5 +72,14 @@ public static partial class Mapper
         }
 
         return int.TryParse(parts[0], out var single) ? (single, null, null) : (0, null, null);
+    }
+
+    [UserMapping(Default = false)]
+    private static string NormalizeScene(string scene)
+    {
+        const string prefix = "scene_";
+        return scene.StartsWith(prefix, StringComparison.Ordinal) && int.TryParse(scene.AsSpan(prefix.Length), out var number)
+            ? $"{prefix}{number:D2}"
+            : throw new InvalidDataException($"Invalid scene '{scene}'");
     }
 }

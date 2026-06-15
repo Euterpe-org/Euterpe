@@ -27,7 +27,7 @@ public sealed partial class MapperTest
     [Test]
     public async Task ToManifestMeta_BlankOptionalFieldsPassThrough()
     {
-        var info = new InfoJson { Name = "Song", Author = "Composer" };
+        var info = new InfoJson { Name = "Song", Author = "Composer", Scene = "scene_01" };
 
         var meta = info.ToManifestMeta(null, []);
 
@@ -46,7 +46,7 @@ public sealed partial class MapperTest
     [Arguments("not-a-number", 0, null, null)]
     public async Task ToManifestMeta_ParsesBpm(string bpm, int expected, int? expectedMin, int? expectedMax)
     {
-        var info = new InfoJson { Name = "Song", Author = "Composer", Bpm = bpm };
+        var info = new InfoJson { Name = "Song", Author = "Composer", Bpm = bpm, Scene = "scene_01" };
 
         var meta = info.ToManifestMeta(null, []);
 
@@ -62,6 +62,7 @@ public sealed partial class MapperTest
         {
             Name = "Song",
             Author = "Composer",
+            Scene = "scene_01",
             Difficulty1 = "2",
             Difficulty2 = "5", // declared in info.json but Hard is not among the present difficulties, so it must be excluded
             Difficulty3 = "8",
@@ -78,5 +79,35 @@ public sealed partial class MapperTest
         await Assert.That(meta.Maps["map1"].Charters).IsEquivalentTo(new[] { "Alice" });
         await Assert.That(meta.Maps["map3"].Rating).IsEqualTo("8");
         await Assert.That(meta.Maps["map3"].Charters).IsEquivalentTo(new[] { "General" });
+    }
+
+    [Test]
+    [Arguments("scene_1", "scene_01")]
+    [Arguments("scene_01", "scene_01")]
+    [Arguments("scene_12", "scene_12")]
+    [Arguments("scene_99", "scene_99")]
+    public async Task ToManifestMeta_NormalizesSceneToTwoDigits(string scene, string expected)
+    {
+        var info = new InfoJson { Name = "Song", Author = "Composer", Scene = scene };
+
+        var meta = info.ToManifestMeta(null, []);
+
+        await Assert.That(meta.Scene).IsEqualTo(expected);
+    }
+
+    [Test]
+    [Arguments("")]
+    [Arguments("scene")]
+    [Arguments("scene-a")]
+    [Arguments("scene_")]
+    [Arguments("scene_abc")]
+    [Arguments("scene_100")]
+    [Arguments("scene_123")]
+    public async Task ToManifestMeta_InvalidScene_Throws(string scene)
+    {
+        var info = new InfoJson { Name = "Song", Author = "Composer", Scene = scene };
+        Action act = () => info.ToManifestMeta(null, []);
+
+        await Assert.That(act).Throws<InvalidDataException>();
     }
 }
