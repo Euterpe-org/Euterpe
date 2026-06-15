@@ -2,9 +2,9 @@ using Semver;
 
 namespace Euterpe.Tests.Models;
 
-[Category("MuseDashTests")]
+[Category("MuseDashConfigTests")]
 [TestSubject(typeof(MuseDashConfig))]
-public sealed class MuseDashTest
+public sealed class MuseDashConfigTest
 {
     private const string GameFolder = "/games/MuseDash";
 

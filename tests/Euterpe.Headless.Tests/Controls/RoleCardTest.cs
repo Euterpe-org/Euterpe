@@ -1,7 +1,8 @@
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(RoleCard))]
-public sealed class RoleCardTests : HeadlessTest
+[Category("RoleCardTests")]
+public sealed class RoleCardTest : HeadlessTest
 {
     [Test]
     public Task DefaultIsSelected_IsFalse() => RunOnUI(async () =>

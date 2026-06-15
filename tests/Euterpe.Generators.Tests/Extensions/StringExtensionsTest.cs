@@ -3,6 +3,7 @@ using Euterpe.Generators.Extensions;
 namespace Euterpe.Generators.Tests.Extensions;
 
 [TestSubject(typeof(StringExtensions))]
+[Category("StringExtensionsTests")]
 public sealed class StringExtensionsTest
 {
     [Test]

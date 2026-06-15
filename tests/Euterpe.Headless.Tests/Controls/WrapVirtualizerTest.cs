@@ -8,7 +8,7 @@ namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(WrapVirtualizer))]
 [Category("WrapVirtualizerTests")]
-public sealed class WrapVirtualizerTests : HeadlessTest
+public sealed class WrapVirtualizerTest : HeadlessTest
 {
     private static (WrapVirtualizer Wrap, Window Window) CreateHost(int itemCount, double itemWidth, double windowWidth, double windowHeight) =>
         CreateHost(Enumerable.Range(0, itemCount).Select(i => $"item {i}").ToList(), itemWidth, windowWidth, windowHeight);

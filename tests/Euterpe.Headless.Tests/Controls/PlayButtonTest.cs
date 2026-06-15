@@ -1,7 +1,8 @@
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(PlayButton))]
-public sealed class PlayButtonTests : HeadlessTest
+[Category("PlayButtonTests")]
+public sealed class PlayButtonTest : HeadlessTest
 {
     [Test]
     public Task InnerPlayButton_InheritsCommand_ViaTemplateBinding() => RunOnUI(async () =>

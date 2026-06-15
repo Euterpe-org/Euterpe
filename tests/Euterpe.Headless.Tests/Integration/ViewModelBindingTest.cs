@@ -5,7 +5,8 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace Euterpe.Headless.Tests.Integration;
 
-public sealed partial class ViewModelBindingTests : HeadlessTest
+[Category("ViewModelBindingTests")]
+public sealed partial class ViewModelBindingTest : HeadlessTest
 {
     [Test]
     public Task MouseClick_ExecutesBoundCommand_AndIncrementsCounter() => RunOnUI(async () =>

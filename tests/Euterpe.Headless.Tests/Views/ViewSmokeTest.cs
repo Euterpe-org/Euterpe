@@ -9,7 +9,8 @@ using Euterpe.Shell;
 
 namespace Euterpe.Headless.Tests.Views;
 
-public sealed class ViewSmokeTests : HeadlessTest
+[Category("ViewSmokeTests")]
+public sealed class ViewSmokeTest : HeadlessTest
 {
     [Test]
     public Task ChartingPage_LoadsIntoVisualTree() => Smoke(() => new ChartingPage());

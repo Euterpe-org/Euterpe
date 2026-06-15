@@ -1,7 +1,8 @@
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(Difficulty))]
-public sealed class DifficultyTests : HeadlessTest
+[Category("DifficultyTests")]
+public sealed class DifficultyTest : HeadlessTest
 {
     [Test]
     public Task Text_BindsToTemplateTextBlock() => RunOnUI(async () =>

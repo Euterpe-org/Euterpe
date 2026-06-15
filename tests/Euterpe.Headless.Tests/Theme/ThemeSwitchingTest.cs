@@ -4,7 +4,8 @@ using Avalonia.Styling;
 namespace Euterpe.Headless.Tests.Theme;
 
 [NotInParallel("ApplicationThemeVariant")]
-public sealed class ThemeSwitchingTests : HeadlessTest
+[Category("ThemeSwitchingTests")]
+public sealed class ThemeSwitchingTest : HeadlessTest
 {
     [Test]
     public Task FindResource_Dark_ResolvesBackgroundImage() => RunOnUI(async () =>

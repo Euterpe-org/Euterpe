@@ -2,7 +2,8 @@ using Avalonia.Input;
 
 namespace Euterpe.Headless.Tests.Input;
 
-public sealed class HeadlessInputTests : HeadlessTest
+[Category("HeadlessInputTests")]
+public sealed class HeadlessInputTest : HeadlessTest
 {
     [Test]
     public Task MouseClick_OnButton_RaisesClickEvent() => RunOnUI(async () =>

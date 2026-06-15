@@ -6,7 +6,8 @@ using Euterpe.Reactive;
 namespace Euterpe.Headless.Tests.Reactive;
 
 [TestSubject(typeof(AvaloniaScheduler))]
-public sealed class AvaloniaSchedulerTests : HeadlessTest
+[Category("AvaloniaSchedulerTests")]
+public sealed class AvaloniaSchedulerTest : HeadlessTest
 {
     [Test]
     public Task Schedule_OnUIThread_RunsInline() => RunOnUI(async () =>

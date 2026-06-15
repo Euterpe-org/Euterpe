@@ -1,7 +1,8 @@
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(LabeledSection))]
-public sealed class LabeledSectionTests : HeadlessTest
+[Category("LabeledSectionTests")]
+public sealed class LabeledSectionTest : HeadlessTest
 {
     [Test]
     public Task TitleAndDescription_BindToTemplateTextBlocks() => RunOnUI(async () =>

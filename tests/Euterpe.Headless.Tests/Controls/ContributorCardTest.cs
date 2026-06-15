@@ -3,7 +3,8 @@ using Euterpe.Controls.Models;
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(ContributorCard))]
-public sealed class ContributorCardTests : HeadlessTest
+[Category("ContributorCardTests")]
+public sealed class ContributorCardTest : HeadlessTest
 {
     [Test]
     public Task ContributorName_BindsToTemplateTextBlock() => RunOnUI(async () =>

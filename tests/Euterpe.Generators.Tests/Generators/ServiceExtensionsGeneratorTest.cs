@@ -1,31 +1,32 @@
 namespace Euterpe.Generators.Tests.Generators;
 
-public sealed class RouteGeneratorTests
+[TestSubject(typeof(ServiceExtensionsGenerator))]
+[Category("ServiceExtensionsGeneratorTests")]
+public sealed class ServiceExtensionsGeneratorTest
 {
     [Test]
-    public Task Generates_route_tree_with_nested_children()
+    public Task Generates_registrations_for_app_and_per_game_view_models()
     {
         const string source = """
                               namespace Sample
                               {
                                   using Euterpe.Shared.Attributes;
 
-                                  [Route("/", DisplayName = "Root", Order = 0)]
+                                  [Route("/")]
                                   public partial class RootViewModel;
 
-                                  [Route("/home", DisplayName = "Home", Icon = "house", Order = 0)]
-                                  [PerGame]
+                                  [Route("/home")]
                                   public partial class HomeViewModel;
 
-                                  [Route("/settings", DisplayName = "Settings", Icon = "gear", Order = 1)]
-                                  public partial class SettingsViewModel;
-
-                                  [Route("/settings/general", DisplayName = "General", Order = 0)]
-                                  public partial class GeneralViewModel;
-
-                                  [Route("/settings/advanced", DisplayName = "Advanced", Order = 1)]
+                                  [Route("/modding")]
                                   [PerGame]
-                                  public partial class AdvancedViewModel;
+                                  public partial class ModdingViewModel;
+
+                                  [PerGame]
+                                  public partial class WizardDialogViewModel;
+
+                                  [Register]
+                                  public partial class CrashViewModel;
                               }
 
                               namespace Euterpe.Shared.Attributes
@@ -41,9 +42,12 @@ public sealed class RouteGeneratorTests
 
                                   [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
                                   public sealed class PerGameAttribute : System.Attribute;
+
+                                  [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
+                                  public sealed class RegisterAttribute : System.Attribute;
                               }
                               """;
 
-        return Verify(GeneratorTestHelper.Run<RouteGenerator>(source));
+        return Verify(GeneratorTestHelper.Run<ServiceExtensionsGenerator>(source));
     }
 }

@@ -3,7 +3,8 @@ using Avalonia.Media.Imaging;
 namespace Euterpe.Headless.Tests.Controls;
 
 [TestSubject(typeof(AsyncImage))]
-public sealed class AsyncImageTests : HeadlessTest
+[Category("AsyncImageTests")]
+public sealed class AsyncImageTest : HeadlessTest
 {
     [Test]
     public Task DefaultStretch_IsUniform() => RunOnUI(async () =>
