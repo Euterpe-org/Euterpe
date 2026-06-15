@@ -56,10 +56,21 @@
             <!--  MDMC compatibility warning  -->
             <u:Banner
                 CanClose="False"
-                Content="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning}}"
                 CornerRadius="8"
                 Header="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning_Title}}"
-                Type="Warning" />
+                Type="Warning">
+                <StackPanel
+                    Spacing="8">
+                    <TextBlock
+                        Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning}}"
+                        TextWrapping="Wrap" />
+                    <HyperlinkButton
+                        Classes="WithIcon Underline"
+                        Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_LearnMore}}"
+                        HorizontalAlignment="Left"
+                        NavigateUri="https://euterpe-org.com/docs/ecosystem/from-mdmc" />
+                </StackPanel>
+            </u:Banner>
 
             <!--  Game folder picker  -->
             <StackPanel

@@ -298,6 +298,9 @@
   <data name="HomePage_SupportTitle" xml:space="preserve">
     <value>100% ingyenes és nyílt forráskódú</value>
   </data>
+  <data name="HyperLinkButton_LearnMore" xml:space="preserve">
+    <value>További információ</value>
+  </data>
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Meglátogatás</value>
   </data>
