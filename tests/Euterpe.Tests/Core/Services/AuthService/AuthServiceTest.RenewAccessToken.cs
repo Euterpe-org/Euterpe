@@ -3,7 +3,7 @@ using Euterpe.Contracts.Account;
 using Euterpe.Core.Http.Clients;
 using Refit;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 public sealed partial class AuthServiceTest
 {

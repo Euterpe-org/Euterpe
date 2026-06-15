@@ -3,7 +3,7 @@ using System.Runtime.Versioning;
 using TUnit.Core.Enums;
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests.Windows;
+namespace Euterpe.Tests.Core;
 
 [Category("WindowsSteamPathDiscoveryTests")]
 [TestSubject(typeof(WindowsSteamPathDiscovery))]

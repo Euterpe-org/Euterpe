@@ -2,7 +2,7 @@ using Autofac;
 using Autofac.Core;
 using Euterpe.Core.Extensions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("SetupStepRegistrationTests")]
 [TestSubject(typeof(ISetupStep))]

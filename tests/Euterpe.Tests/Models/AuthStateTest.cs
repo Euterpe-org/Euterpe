@@ -1,6 +1,6 @@
 using Euterpe.Contracts.Account;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 [Category("AuthStateTests")]
 [TestSubject(typeof(AuthState))]

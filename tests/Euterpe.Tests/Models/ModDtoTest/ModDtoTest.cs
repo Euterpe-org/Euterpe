@@ -1,4 +1,4 @@
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 [Category("ModDtoTests")]
 [TestSubject(typeof(ModDto))]

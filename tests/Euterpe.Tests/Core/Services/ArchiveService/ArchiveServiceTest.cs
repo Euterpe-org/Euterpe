@@ -1,7 +1,7 @@
 using System.IO.Compression;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("ArchiveServiceTests")]
 [TestSubject(typeof(ArchiveService))]

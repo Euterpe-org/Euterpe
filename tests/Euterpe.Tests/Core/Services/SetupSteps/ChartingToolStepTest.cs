@@ -1,6 +1,6 @@
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("ChartingToolStepTests")]
 [TestSubject(typeof(ChartingToolStep))]

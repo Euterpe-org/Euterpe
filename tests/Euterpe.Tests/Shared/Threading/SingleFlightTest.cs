@@ -1,6 +1,6 @@
 using Euterpe.Shared.Threading;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Shared.Threading;
 
 [Category("SingleFlightTests")]
 [TestSubject(typeof(SingleFlight<>))]

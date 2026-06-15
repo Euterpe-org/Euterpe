@@ -1,6 +1,6 @@
 using Semver;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 [Category("MuseDashTests")]
 [TestSubject(typeof(MuseDashConfig))]

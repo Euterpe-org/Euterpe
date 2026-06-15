@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("AppSettingServiceTests")]
 [TestSubject(typeof(AppSettingService))]

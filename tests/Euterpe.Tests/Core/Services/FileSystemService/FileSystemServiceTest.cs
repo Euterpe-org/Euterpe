@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("FileSystemServiceTests")]
 [TestSubject(typeof(FileSystemService))]

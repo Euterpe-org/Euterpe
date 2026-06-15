@@ -7,7 +7,7 @@ using Euterpe.Core.Logger;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Extensions;
 
 [Category("CoreServiceExtensionsTests")]
 [TestSubject(typeof(CoreServiceExtensions))]

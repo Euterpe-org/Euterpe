@@ -1,7 +1,7 @@
 using Euterpe.Contracts.Distribution;
 using Euterpe.Contracts.Mods;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 [Category("MapperTests")]
 [TestSubject(typeof(Mapper))]

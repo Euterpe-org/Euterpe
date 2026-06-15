@@ -1,6 +1,6 @@
 using Euterpe.Contracts.Mods;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 public sealed partial class ModManageServiceTest
 {

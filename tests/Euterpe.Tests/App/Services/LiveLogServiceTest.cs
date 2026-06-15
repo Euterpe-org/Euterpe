@@ -4,7 +4,7 @@ using Euterpe.Services;
 using Microsoft.Extensions.Logging;
 using ZLogger;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.Services;
 
 [Category("LiveLogServiceTests")]
 [TestSubject(typeof(LiveLogService))]

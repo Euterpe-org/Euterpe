@@ -1,7 +1,7 @@
 using Euterpe.Core.Http.Handlers;
 using Euterpe.Tests.TestSupport;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Http.Handlers;
 
 [Category("XRequestIdHandlerTests")]
 [TestSubject(typeof(XRequestIdHandler))]

@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using TUnit.Core.Enums;
 
-namespace Euterpe.Tests.Windows;
+namespace Euterpe.Tests.Core;
 
 [Category("WindowsPlatformInfoTests")]
 [TestSubject(typeof(WindowsPlatformInfo))]

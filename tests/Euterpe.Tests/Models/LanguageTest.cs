@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 [Category("LanguageTests")]
 [TestSubject(typeof(Language))]

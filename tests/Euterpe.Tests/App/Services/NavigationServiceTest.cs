@@ -1,7 +1,7 @@
 using Euterpe.Services;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.Services;
 
 /// <summary>
 ///     Routes that don't prefix-match any RouteTree node skip Select-callbacks (which would otherwise

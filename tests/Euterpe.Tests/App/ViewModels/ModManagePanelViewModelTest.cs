@@ -3,7 +3,7 @@ using DynamicData;
 using Euterpe.Features.Modding;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("ModManagePanelViewModelTests")]
 [TestSubject(typeof(ModManagePanelViewModel))]

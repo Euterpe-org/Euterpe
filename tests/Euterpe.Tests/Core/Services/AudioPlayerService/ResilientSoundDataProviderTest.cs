@@ -2,7 +2,7 @@ using SoundFlow.Enums;
 using SoundFlow.Interfaces;
 using SoundFlow.Metadata.Models;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("ResilientSoundDataProviderTests")]
 [TestSubject(typeof(ResilientSoundDataProvider))]

@@ -1,6 +1,6 @@
 using Euterpe.Core.Extensions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Extensions;
 
 [Category("ByteExtensionsTests")]
 [TestSubject(typeof(ByteExtensions))]

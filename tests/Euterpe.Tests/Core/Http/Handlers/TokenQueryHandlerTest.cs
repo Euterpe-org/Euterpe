@@ -4,7 +4,7 @@ using Euterpe.Core.Http.Handlers;
 using Euterpe.Tests.TestSupport;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Http.Handlers;
 
 [Category("TokenQueryHandlerTests")]
 [TestSubject(typeof(TokenQueryHandler))]

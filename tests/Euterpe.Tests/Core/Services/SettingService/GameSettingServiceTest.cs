@@ -1,4 +1,4 @@
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("GameSettingServiceTests")]
 [TestSubject(typeof(GameSettingService))]

@@ -2,7 +2,7 @@ using Euterpe.Features.Setup;
 using Euterpe.Features.Wizard;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("WizardDialogViewModelTests")]
 [TestSubject(typeof(WizardDialogViewModel))]

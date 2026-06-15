@@ -1,7 +1,7 @@
 using Euterpe.Models.VDFs;
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("GamePathServiceTests")]
 [TestSubject(typeof(GamePathService))]

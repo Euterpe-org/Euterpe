@@ -1,7 +1,7 @@
 using NetArchTest.Rules;
 using Assembly = System.Reflection.Assembly;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Architecture;
 
 [Category("ArchitectureTests")]
 public sealed class ArchitectureTests

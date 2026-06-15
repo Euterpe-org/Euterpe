@@ -2,7 +2,7 @@ using Euterpe.Contracts.Distribution;
 using Euterpe.Contracts.Mods;
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 public sealed partial class ModManageServiceTest
 {

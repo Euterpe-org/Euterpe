@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using TUnit.Core.Enums;
 
-namespace Euterpe.Tests.Linux;
+namespace Euterpe.Tests.Core;
 
 [Category("LinuxPlatformInfoTests")]
 [TestSubject(typeof(LinuxPlatformInfo))]

@@ -1,6 +1,6 @@
 using Euterpe.Models.VDFs;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 public sealed partial class GamePathServiceTest
 {

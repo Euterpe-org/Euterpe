@@ -2,7 +2,7 @@ using Avalonia.Platform.Storage;
 using TUnit.Mocks.Logging;
 using Ursa.Controls;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("AppLocalServiceTests")]
 [TestSubject(typeof(AppLocalService))]

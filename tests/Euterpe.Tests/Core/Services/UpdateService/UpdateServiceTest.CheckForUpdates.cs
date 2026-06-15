@@ -3,7 +3,7 @@ using Semver;
 using TUnit.Mocks.Logging;
 using Ursa.Controls;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 public sealed partial class UpdateServiceTest
 {

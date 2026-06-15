@@ -1,6 +1,6 @@
 using Euterpe.Contracts.Mods;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 public sealed partial class ModDtoTest
 {

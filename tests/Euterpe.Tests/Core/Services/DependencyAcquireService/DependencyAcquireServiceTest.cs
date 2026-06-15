@@ -3,7 +3,7 @@ using Euterpe.Core.Http.Clients;
 using Euterpe.Core.Utils;
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("DependencyAcquireServiceTests")]
 [TestSubject(typeof(DependencyAcquireService))]

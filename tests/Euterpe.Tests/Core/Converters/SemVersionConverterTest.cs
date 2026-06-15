@@ -2,7 +2,7 @@ using System.Text.Json;
 using Euterpe.Core.Converters;
 using Semver;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Converters;
 
 [Category("SemVersionConverterTests")]
 [TestSubject(typeof(SemVersionConverter))]

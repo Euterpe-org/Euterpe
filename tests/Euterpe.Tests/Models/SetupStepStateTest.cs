@@ -1,4 +1,4 @@
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 [Category("SetupStepStateTests")]
 [TestSubject(typeof(SetupStepState))]

@@ -1,7 +1,7 @@
 using Euterpe.Shell;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("CrashWindowViewModelTests")]
 [TestSubject(typeof(CrashWindowViewModel))]

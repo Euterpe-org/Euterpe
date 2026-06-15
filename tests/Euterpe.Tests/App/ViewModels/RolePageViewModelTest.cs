@@ -1,7 +1,7 @@
 using Euterpe.Features.Wizard;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("RolePageViewModelTests")]
 [TestSubject(typeof(RolePageViewModel))]

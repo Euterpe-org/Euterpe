@@ -2,7 +2,7 @@ using System.Globalization;
 using Avalonia.Data.Converters;
 using Euterpe.Converters;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.Converters;
 
 [Category("FuncValueConvertersTests")]
 [TestSubject(typeof(FuncValueConverters))]

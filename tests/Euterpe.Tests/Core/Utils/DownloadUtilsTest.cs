@@ -1,7 +1,7 @@
 using Euterpe.Core.Utils;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Utils;
 
 [Category("DownloadUtilsTests")]
 [TestSubject(typeof(DownloadUtils))]

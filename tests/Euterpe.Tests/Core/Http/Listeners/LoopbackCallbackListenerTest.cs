@@ -4,7 +4,7 @@ using System.Text;
 using Euterpe.Contracts.Account;
 using Euterpe.Core.Http.Listeners;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Http.Listeners;
 
 [Category("LoopbackCallbackListenerTests")]
 [TestSubject(typeof(LoopbackCallbackListener))]

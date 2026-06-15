@@ -1,4 +1,4 @@
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models.Playback;
 
 [Category("PlaybackStateTests")]
 [TestSubject(typeof(PlaybackState))]

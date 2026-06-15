@@ -3,7 +3,7 @@ using Euterpe.Core.Http.Handlers;
 using Euterpe.Tests.TestSupport;
 using Microsoft.Extensions.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Http.Handlers;
 
 [Category("LoggingHandlerTests")]
 [TestSubject(typeof(LoggingHandler))]

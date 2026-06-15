@@ -1,7 +1,7 @@
 using Euterpe.Features.Setting;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("DownloadPanelViewModelTests")]
 [TestSubject(typeof(DownloadPanelViewModel))]

@@ -1,4 +1,4 @@
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("DotNetSdkStepTests")]
 [TestSubject(typeof(DotNetSdkStep))]

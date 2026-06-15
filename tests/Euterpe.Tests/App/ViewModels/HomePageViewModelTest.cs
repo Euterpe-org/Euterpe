@@ -1,7 +1,7 @@
 using Euterpe.Features.Home;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("HomePageViewModelTests")]
 [TestSubject(typeof(HomePageViewModel))]

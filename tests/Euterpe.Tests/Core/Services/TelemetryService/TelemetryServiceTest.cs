@@ -3,7 +3,7 @@ using Euterpe.Contracts.Telemetry;
 using Euterpe.Core.Http.Clients;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("TelemetryServiceTests")]
 [TestSubject(typeof(TelemetryService))]

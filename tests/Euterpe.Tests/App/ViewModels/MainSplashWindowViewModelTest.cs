@@ -4,7 +4,7 @@ using Euterpe.Shell;
 using Microsoft.Extensions.Logging.Abstractions;
 using Ursa.Controls;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("MainSplashWindowViewModelTests")]
 [TestSubject(typeof(MainSplashWindowViewModel))]

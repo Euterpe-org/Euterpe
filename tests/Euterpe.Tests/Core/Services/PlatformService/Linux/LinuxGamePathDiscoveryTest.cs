@@ -3,7 +3,7 @@ using System.Runtime.Versioning;
 using TUnit.Core.Enums;
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests.Linux;
+namespace Euterpe.Tests.Core;
 
 [Category("LinuxGamePathDiscoveryTests")]
 [TestSubject(typeof(LinuxGamePathDiscovery))]

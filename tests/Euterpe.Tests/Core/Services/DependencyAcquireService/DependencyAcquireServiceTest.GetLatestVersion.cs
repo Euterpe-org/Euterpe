@@ -1,6 +1,6 @@
 using Euterpe.Core.Http.Clients;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 public sealed partial class DependencyAcquireServiceTest
 {

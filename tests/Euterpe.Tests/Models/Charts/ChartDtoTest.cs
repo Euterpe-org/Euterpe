@@ -1,4 +1,4 @@
-namespace Euterpe.Tests.Charts;
+namespace Euterpe.Tests.Models.Charts;
 
 [Category("ChartDtoTests")]
 [TestSubject(typeof(ChartDto))]

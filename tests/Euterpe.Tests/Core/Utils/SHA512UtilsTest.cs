@@ -1,7 +1,7 @@
 using System.Text;
 using Euterpe.Core.Utils;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Utils;
 
 [Category("SHA512UtilsTests")]
 [TestSubject(typeof(SHA512Utils))]

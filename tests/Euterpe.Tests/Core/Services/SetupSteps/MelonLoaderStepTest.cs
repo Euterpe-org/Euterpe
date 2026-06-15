@@ -1,7 +1,7 @@
 using Downloader;
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("MelonLoaderStepTests")]
 [TestSubject(typeof(MelonLoaderStep))]

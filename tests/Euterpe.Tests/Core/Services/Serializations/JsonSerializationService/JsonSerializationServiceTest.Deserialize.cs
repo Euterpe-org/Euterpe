@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("JsonSerializationServiceTests")]
 [TestSubject(typeof(JsonSerializationService))]

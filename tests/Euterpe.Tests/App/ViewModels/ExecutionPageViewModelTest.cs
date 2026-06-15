@@ -1,7 +1,7 @@
 using Euterpe.Features.Setup;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("ExecutionPageViewModelTests")]
 [TestSubject(typeof(ExecutionPageViewModel))]

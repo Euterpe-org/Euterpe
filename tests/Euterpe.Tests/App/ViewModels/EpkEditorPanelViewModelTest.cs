@@ -1,6 +1,6 @@
 using Euterpe.Features.Charting;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("EpkEditorPanelViewModelTests")]
 [TestSubject(typeof(EpkEditorPanelViewModel))]

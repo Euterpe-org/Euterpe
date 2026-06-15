@@ -1,6 +1,6 @@
 using Euterpe.Models.Charts.CustomAlbums;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Models;
 
 public sealed partial class MapperTest
 {

@@ -2,7 +2,7 @@ using Euterpe.Core.Logger;
 using Microsoft.Extensions.Logging;
 using ZLogger;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core.Logger;
 
 [Category("LogMessageTests")]
 [TestSubject(typeof(LogMessage))]

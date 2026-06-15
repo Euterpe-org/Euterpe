@@ -1,6 +1,6 @@
 using Euterpe.Features.Setting;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.App.ViewModels;
 
 [Category("FileManagementPanelViewModelTests")]
 [TestSubject(typeof(FileManagementPanelViewModel))]

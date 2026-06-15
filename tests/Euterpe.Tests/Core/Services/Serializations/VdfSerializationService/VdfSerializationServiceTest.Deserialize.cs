@@ -1,7 +1,7 @@
 using System.Text;
 using Euterpe.Models.VDFs;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 [Category("VdfSerializationServiceTests")]
 [TestSubject(typeof(VdfSerializationService))]

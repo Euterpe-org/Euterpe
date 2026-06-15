@@ -2,7 +2,7 @@ using Euterpe.Contracts.Account;
 using Euterpe.Core.Http.Clients;
 using TUnit.Mocks.Logging;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Core;
 
 public sealed partial class AuthServiceTest
 {

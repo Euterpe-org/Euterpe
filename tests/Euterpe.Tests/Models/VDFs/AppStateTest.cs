@@ -1,6 +1,6 @@
 using Euterpe.Models.VDFs;
 
-namespace Euterpe.Tests.VDFs;
+namespace Euterpe.Tests.Models.VDFs;
 
 [Category("AppStateTests")]
 [TestSubject(typeof(AppState))]

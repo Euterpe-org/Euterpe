@@ -1,6 +1,6 @@
 using Euterpe.Shared.Extensions;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Shared.Extensions;
 
 [Category("StringExtensionsTests")]
 [TestSubject(typeof(StringExtensions))]

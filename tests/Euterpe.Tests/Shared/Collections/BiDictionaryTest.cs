@@ -1,7 +1,7 @@
 using System.Collections;
 using Euterpe.Shared.Collections;
 
-namespace Euterpe.Tests;
+namespace Euterpe.Tests.Shared.Collections;
 
 [Category("BiDictionaryTests")]
 [TestSubject(typeof(BiDictionary<,>))]

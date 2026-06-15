@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Euterpe.Models.Charts.CustomAlbums;
 
-namespace Euterpe.Tests.Charts;
+namespace Euterpe.Tests.Models.Charts;
 
 [Category("InfoJsonTests")]
 [TestSubject(typeof(InfoJson))]
