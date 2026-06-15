@@ -282,4 +282,103 @@ public sealed class FileSystemServiceTest
             Directory.Delete(work, true);
         }
     }
+
+    [Test]
+    public async Task TryMoveDirectoryToAvailablePath_DesiredFree_MovesToDesired()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var src = Path.Combine(work, "src");
+            Directory.CreateDirectory(src);
+            await File.WriteAllTextAsync(Path.Combine(src, "f.txt"), "payload");
+
+            var desired = Path.Combine(work, "chart");
+            var ok = NewService().TryMoveDirectoryToAvailablePath(src, desired, out var finalPath);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(ok).IsTrue();
+            await Assert.That(finalPath).IsEqualTo(desired);
+            await Assert.That(Directory.Exists(src)).IsFalse();
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(desired, "f.txt"))).IsEqualTo("payload");
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task TryMoveDirectoryToAvailablePath_DesiredTaken_MovesToSuffixedSibling()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var desired = Path.Combine(work, "chart");
+            Directory.CreateDirectory(desired);
+            await File.WriteAllTextAsync(Path.Combine(desired, "existing.txt"), "old");
+
+            var src = Path.Combine(work, "src");
+            Directory.CreateDirectory(src);
+            await File.WriteAllTextAsync(Path.Combine(src, "f.txt"), "payload");
+
+            var ok = NewService().TryMoveDirectoryToAvailablePath(src, desired, out var finalPath);
+            var suffix = Path.GetFileName(finalPath)["chart-".Length..];
+
+            using var _ = Assert.Multiple();
+            await Assert.That(ok).IsTrue();
+            await Assert.That(Path.GetFileName(finalPath)).StartsWith("chart-");
+            await Assert.That(suffix.Length).IsEqualTo(8);
+            await Assert.That(suffix.All(Uri.IsHexDigit)).IsTrue();
+            await Assert.That(Directory.Exists(src)).IsFalse();
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(desired, "existing.txt"))).IsEqualTo("old");
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(finalPath, "f.txt"))).IsEqualTo("payload");
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task TryMoveDirectoryToAvailablePath_ParentMissing_CreatesParentAndMoves()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var src = Path.Combine(work, "src");
+            Directory.CreateDirectory(src);
+            await File.WriteAllTextAsync(Path.Combine(src, "f.txt"), "payload");
+
+            var desired = Path.Combine(work, "offline", "chart");
+            var ok = NewService().TryMoveDirectoryToAvailablePath(src, desired, out var finalPath);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(ok).IsTrue();
+            await Assert.That(finalPath).IsEqualTo(desired);
+            await Assert.That(await File.ReadAllTextAsync(Path.Combine(desired, "f.txt"))).IsEqualTo("payload");
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task TryMoveDirectoryToAvailablePath_SourceMissing_ReturnsFalse()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var ok = NewService().TryMoveDirectoryToAvailablePath(Path.Combine(work, "missing"), Path.Combine(work, "chart"), out var finalPath);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(ok).IsFalse();
+            await Assert.That(finalPath).IsEmpty();
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
 }

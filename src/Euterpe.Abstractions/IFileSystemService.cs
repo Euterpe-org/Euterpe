@@ -53,6 +53,15 @@ public interface IFileSystemService
     bool TryMoveDirectory(string sourcePath, string destinationPath, bool overwrite = false);
 
     /// <summary>
+    ///     Moves a directory to <paramref name="desiredPath" />, or to a randomly suffixed sibling
+    ///     (<c>desiredPath-xxxxxxxx</c>) when that path is already taken, reporting the path actually used in
+    ///     <paramref name="finalPath" />. The move is the atomic claim, so the operation stays correct when several
+    ///     callers target the same destination concurrently. The destination's parent is created if missing.
+    ///     Best-effort: logs a warning and returns <c>false</c> on failure.
+    /// </summary>
+    bool TryMoveDirectoryToAvailablePath(string sourcePath, string desiredPath, out string finalPath);
+
+    /// <summary>
     ///     Recursively copies a directory tree, throwing on failure so the caller can surface the real cause. The
     ///     destination is created if missing and existing files are overwritten.
     /// </summary>

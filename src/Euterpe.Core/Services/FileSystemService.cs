@@ -2,6 +2,8 @@ namespace Euterpe.Core;
 
 internal sealed class FileSystemService : IFileSystemService
 {
+    private const int MaxAvailablePathAttempts = 8;
+
     #region Injections
 
     public required ILogger<FileSystemService> Logger { get; init; }
@@ -135,6 +137,41 @@ internal sealed class FileSystemService : IFileSystemService
             Logger.ZLogWarning(ex, $"Failed to move directory from {sourcePath} to {destinationPath}");
             return false;
         }
+    }
+
+    public bool TryMoveDirectoryToAvailablePath(string sourcePath, string desiredPath, out string finalPath)
+    {
+        var parent = Path.GetDirectoryName(desiredPath);
+        var candidate = desiredPath;
+
+        for (var attempt = 0; attempt < MaxAvailablePathAttempts; attempt++)
+        {
+            try
+            {
+                if (!parent.IsNullOrEmpty())
+                {
+                    Directory.CreateDirectory(parent);
+                }
+
+                Directory.Move(sourcePath, candidate);
+                finalPath = candidate;
+                return true;
+            }
+            catch (IOException) when (Directory.Exists(candidate))
+            {
+                candidate = $"{desiredPath}-{Guid.NewGuid().ToString("N")[..8]}";
+            }
+            catch (Exception ex)
+            {
+                Logger.ZLogWarning(ex, $"Failed to move directory from {sourcePath} to {candidate}");
+                finalPath = string.Empty;
+                return false;
+            }
+        }
+
+        Logger.ZLogWarning($"Exhausted available-path attempts moving directory from {sourcePath} to {desiredPath}");
+        finalPath = string.Empty;
+        return false;
     }
 
     public void CopyDirectory(string sourcePath, string destinationPath)
