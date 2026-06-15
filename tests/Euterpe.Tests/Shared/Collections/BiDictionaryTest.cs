@@ -150,9 +150,9 @@ public sealed class BiDictionaryTest
 
         using var _ = Assert.Multiple();
         await Assert.That(pairs.Length).IsEqualTo(3);
-        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("one", 1));
-        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("two", 2));
-        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("three", 3));
+        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("one", 1), KeyValuePairComparer<string, int>.Default);
+        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("two", 2), KeyValuePairComparer<string, int>.Default);
+        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("three", 3), KeyValuePairComparer<string, int>.Default);
     }
 
     [Test]
@@ -167,7 +167,7 @@ public sealed class BiDictionaryTest
 
         using var _ = Assert.Multiple();
         await Assert.That(pairs.Count).IsEqualTo(3);
-        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("one", 1));
+        await Assert.That(pairs).Contains(new KeyValuePair<string, int>("one", 1), KeyValuePairComparer<string, int>.Default);
     }
 
     [Test]
