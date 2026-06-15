@@ -6,7 +6,7 @@ namespace Euterpe.Tests.Core;
 
 [Category("ChartManageServiceTests")]
 [TestSubject(typeof(ChartManageService))]
-public sealed class ChartManageServiceTest
+public sealed partial class ChartManageServiceTest
 {
     private const string ChartFolder = "/charts/A";
 
