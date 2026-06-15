@@ -13,7 +13,7 @@ public sealed partial class SystemActivationService
                 break;
 
             case ["download", var chartId]:
-                await ChartManageService.DownloadChartAsync(chartId).ConfigureAwait(false);
+                await ChartManagePanelViewModel.DownloadChartAsync(chartId).ConfigureAwait(false);
                 break;
 
             case ["update"]:

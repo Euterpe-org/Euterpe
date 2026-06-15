@@ -82,6 +82,12 @@
   <data name="ChartManage_Descending" xml:space="preserve">
     <value>Descending</value>
   </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>Downloading Chart</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>Download is in progress. Please wait and do not close the app.</value>
+  </data>
   <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
     <value>Difficulty</value>
   </data>

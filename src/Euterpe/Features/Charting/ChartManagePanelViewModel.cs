@@ -112,38 +112,19 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public async Task MigrateCustomAlbumsAsync()
-    {
-        ProgressDialogViewModel.Reset();
-        ProgressDialogViewModel.Hint = ChartManage_MigratingHint;
-
-        var options = new OverlayDialogOptions
+    public Task MigrateCustomAlbumsAsync() =>
+        RunWithProgressDialogAsync(ChartManage_Migrating, ChartManage_MigratingHint, indeterminate: false, async progress =>
         {
-            Title = ChartManage_Migrating,
-            CanDragMove = false,
-            CanResize = false,
-            IsCloseButtonVisible = false
-        };
-
-        GameSwitcher.CanSwitch = false;
-        var dialog = DialogService.ShowOverlayAsync<ProgressDialog, ProgressDialogViewModel, object>(
-            ProgressDialogViewModel, options, MainWindowViewModel.DialogHostId);
-        try
-        {
-            var progress = new Progress<BatchProgress>(ProgressDialogViewModel.Report);
             var migratedCount = await ChartManageService.MigrateCustomAlbumsAsync(progress).ConfigureAwait(true);
             if (migratedCount is 0)
             {
                 NotificationService.NoticeLight(Notification_Content_Migration_None);
             }
-        }
-        finally
-        {
-            ProgressDialogViewModel.Close();
-            GameSwitcher.CanSwitch = true;
-            await dialog.ConfigureAwait(true);
-        }
-    }
+        });
+
+    public Task DownloadChartAsync(string chartId) =>
+        RunWithProgressDialogAsync(ChartManage_Downloading, ChartManage_DownloadingHint, indeterminate: true, progress =>
+            ChartManageService.DownloadChartAsync(chartId, progress));
 
     [RelayCommand]
     private async Task ImportChartsAsync(IReadOnlyList<IStorageItem> files)
@@ -157,6 +138,36 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         if (await ChartManageService.ImportChartsAsync(paths).ConfigureAwait(true))
         {
             Filter.Source = ChartSource.Offline;
+        }
+    }
+
+    private async Task RunWithProgressDialogAsync(string title, string hint, bool indeterminate, Func<IProgress<BatchProgress>, Task> work)
+    {
+        ProgressDialogViewModel.Reset();
+        ProgressDialogViewModel.IsIndeterminate = indeterminate;
+        ProgressDialogViewModel.Hint = hint;
+
+        var options = new OverlayDialogOptions
+        {
+            Title = title,
+            CanDragMove = false,
+            CanResize = false,
+            IsCloseButtonVisible = false
+        };
+
+        GameSwitcher.CanSwitch = false;
+        var dialog = DialogService.ShowOverlayAsync<ProgressDialog, ProgressDialogViewModel, object>(
+            ProgressDialogViewModel, options, MainWindowViewModel.DialogHostId);
+        try
+        {
+            var progress = new Progress<BatchProgress>(ProgressDialogViewModel.Report);
+            await work(progress).ConfigureAwait(true);
+        }
+        finally
+        {
+            ProgressDialogViewModel.Close();
+            GameSwitcher.CanSwitch = true;
+            await dialog.ConfigureAwait(true);
         }
     }
 

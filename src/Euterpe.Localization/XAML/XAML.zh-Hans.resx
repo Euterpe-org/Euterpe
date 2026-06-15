@@ -82,6 +82,12 @@
   <data name="ChartManage_Descending" xml:space="preserve">
     <value>降序</value>
   </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>正在下载谱面</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>正在下载，请勿关闭应用，耐心等待…</value>
+  </data>
   <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
     <value>难度</value>
   </data>
