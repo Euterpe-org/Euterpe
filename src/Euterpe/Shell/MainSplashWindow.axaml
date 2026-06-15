@@ -29,7 +29,7 @@
                 Height="64"
                 HorizontalAlignment="Center"
                 RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="/Assets/Logo.webp" />
+                Source="/Assets/Icon.png" />
 
             <TextBlock
                 FontSize="14"
