@@ -34,7 +34,7 @@
                 <Image
                     Height="120"
                     RenderOptions.BitmapInterpolationMode="HighQuality"
-                    Source="/Assets/Logo.webp" />
+                    Source="/Assets/Icon.png" />
 
                 <!--  Title & Version & Copyright  -->
                 <StackPanel
@@ -43,7 +43,7 @@
                     <TextBlock
                         Classes="H1"
                         HorizontalAlignment="Left"
-                        Text="Euterpe"
+                        Text="Euterpe App"
                         Theme="{StaticResource TitleTextBlock}" />
                     <StackPanel
                         Orientation="Horizontal"

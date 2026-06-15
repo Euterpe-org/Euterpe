@@ -109,7 +109,7 @@
                         <e:AsyncImage
                             DecodeWidth="55"
                             Height="55"
-                            PlaceholderSource="/Assets/Logo.webp"
+                            PlaceholderSource="/Assets/Icon.png"
                             RenderOptions.BitmapInterpolationMode="HighQuality"
                             Source="{Binding AuthState.AvatarUrl}"
                             Stretch="UniformToFill"

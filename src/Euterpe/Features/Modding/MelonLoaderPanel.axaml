@@ -16,117 +16,132 @@
         <vm:MelonLoaderPanelViewModel />
     </Design.DataContext>
 
-    <StackPanel
-        HorizontalAlignment="Center"
-        Margin="0,0,0,40"
-        MinWidth="400"
-        Orientation="Vertical"
-        Spacing="15"
-        VerticalAlignment="Center">
+    <Panel
+        ClipToBounds="True">
 
-        <!--  Logo & Title  -->
+        <!--  Background Watermelon  -->
+        <Image
+            Height="620"
+            HorizontalAlignment="Right"
+            IsHitTestVisible="False"
+            Margin="0,0,-90,-110"
+            RenderOptions.BitmapInterpolationMode="HighQuality"
+            RenderTransform="rotate(-12deg)"
+            Source="/Assets/Q_Melon_Blur.webp"
+            VerticalAlignment="Bottom" />
+
         <StackPanel
             HorizontalAlignment="Center"
-            Orientation="Horizontal"
-            Spacing="25">
-            <Image
-                Height="50"
-                RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="/Assets/ML_Icon.png" />
-            <Image
-                Height="40"
-                RenderOptions.BitmapInterpolationMode="HighQuality"
-                Source="/Assets/ML_Text.png" />
-        </StackPanel>
+            Margin="0,0,360,40"
+            MinWidth="400"
+            Orientation="Vertical"
+            Spacing="15"
+            VerticalAlignment="Center">
 
-        <TextBlock
-            Foreground="{DynamicResource SecondaryTextColor}"
-            HorizontalAlignment="Center"
-            Text="{Localize {x:Static loc:XAMLLiteral.MelonLoader_Description}}" />
-
-        <Border
-            Margin="30"
-            MinWidth="300"
-            Padding="20"
-            Theme="{DynamicResource CardBorder}">
+            <!--  Logo & Title  -->
             <StackPanel
-                Orientation="Vertical">
-
-                <!--  Status Area  -->
-                <DockPanel
-                    HorizontalAlignment="Center"
-                    Margin="20,10,20,15">
-                    <DockPanel.Styles>
-                        <Style
-                            Selector="TextBlock.Installed">
-                            <Setter Property="Text" Value="{Localize {x:Static loc:XAMLLiteral.MelonLoader_State_Installed}}" />
-                        </Style>
-                        <Style
-                            Selector="TextBlock.NotInstalled">
-                            <Setter Property="Text" Value="{Localize {x:Static loc:XAMLLiteral.MelonLoader_State_NotInstalled}}" />
-                        </Style>
-                    </DockPanel.Styles>
-
-                    <TextBlock
-                        Classes.Installed="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Installed}, Mode=OneWay}"
-                        Classes.NotInstalled="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.NotInstalled}, Mode=OneWay}"
-                        FontSize="16"
-                        Foreground="{DynamicResource SecondaryTextColor}"
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
-                        Margin="0,0,6,0"
-                        VerticalAlignment="Center" />
-
-                    <TextBlock
-                        FontSize="16"
-                        Foreground="{DynamicResource SecondaryTextColor}"
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
-                        Margin="0,0,6,0"
-                        Text="{Binding DownloadText, Mode=OneWay}"
-                        VerticalAlignment="Center" />
-
-                    <Label
-                        Classes="Ghost Green"
-                        Content="{Binding GameConfig.MelonLoaderVersion, StringFormat='v{0}', Mode=OneWay}"
-                        IsVisible="{Binding GameConfig.MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
-                        Theme="{StaticResource TagLabel}" />
-                </DockPanel>
-
-                <!--  Action Area  -->
-                <Grid
-                    Height="60"
-                    HorizontalAlignment="Center">
-
-                    <!--  Buttons  -->
-                    <StackPanel
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
-                        Orientation="Horizontal"
-                        Spacing="30">
-                        <Button
-                            Classes="Large"
-                            Command="{Binding InstallMelonLoaderCommand}"
-                            Content="{Localize {x:Static loc:XAMLLiteral.Button_Install}}"
-                            IsVisible="{Binding GameConfig.MelonLoaderVersion, Converter={x:Static StringConverters.IsNullOrEmpty}, Mode=OneWay}"
-                            Width="100" />
-                        <Button
-                            Classes="Large Danger"
-                            Command="{Binding UninstallMelonLoaderCommand}"
-                            Content="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}"
-                            IsVisible="{Binding GameConfig.MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
-                            Width="100" />
-                    </StackPanel>
-
-                    <!--  Progress Bar  -->
-                    <ProgressBar
-                        Value="{Binding DownloadProgress, Mode=OneWay}"
-                        Classes="Primary"
-                        IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
-                        ShowProgressText="True"
-                        VerticalAlignment="Center"
-                        Width="260" />
-
-                </Grid>
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="25">
+                <Image
+                    Height="50"
+                    RenderOptions.BitmapInterpolationMode="HighQuality"
+                    Source="/Assets/ML_Icon.png" />
+                <Image
+                    Height="40"
+                    RenderOptions.BitmapInterpolationMode="HighQuality"
+                    Source="/Assets/ML_Text.png" />
             </StackPanel>
-        </Border>
-    </StackPanel>
+
+            <TextBlock
+                Foreground="{DynamicResource SecondaryTextColor}"
+                HorizontalAlignment="Center"
+                Text="{Localize {x:Static loc:XAMLLiteral.MelonLoader_Description}}" />
+
+            <Border
+                Margin="30"
+                MinWidth="300"
+                Padding="20"
+                Theme="{DynamicResource CardBorder}">
+                <StackPanel
+                    Orientation="Vertical">
+
+                    <!--  Status Area  -->
+                    <DockPanel
+                        HorizontalAlignment="Center"
+                        Margin="20,10,20,15">
+                        <DockPanel.Styles>
+                            <Style
+                                Selector="TextBlock.Installed">
+                                <Setter Property="Text" Value="{Localize {x:Static loc:XAMLLiteral.MelonLoader_State_Installed}}" />
+                            </Style>
+                            <Style
+                                Selector="TextBlock.NotInstalled">
+                                <Setter Property="Text" Value="{Localize {x:Static loc:XAMLLiteral.MelonLoader_State_NotInstalled}}" />
+                            </Style>
+                        </DockPanel.Styles>
+
+                        <TextBlock
+                            Classes.Installed="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Installed}, Mode=OneWay}"
+                            Classes.NotInstalled="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.NotInstalled}, Mode=OneWay}"
+                            FontSize="16"
+                            Foreground="{DynamicResource SecondaryTextColor}"
+                            IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
+                            Margin="0,0,6,0"
+                            VerticalAlignment="Center" />
+
+                        <TextBlock
+                            FontSize="16"
+                            Foreground="{DynamicResource SecondaryTextColor}"
+                            IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
+                            Margin="0,0,6,0"
+                            Text="{Binding DownloadText, Mode=OneWay}"
+                            VerticalAlignment="Center" />
+
+                        <Label
+                            Classes="Ghost Green"
+                            Content="{Binding GameConfig.MelonLoaderVersion, StringFormat='v{0}', Mode=OneWay}"
+                            IsVisible="{Binding GameConfig.MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
+                            Theme="{StaticResource TagLabel}" />
+                    </DockPanel>
+
+                    <!--  Action Area  -->
+                    <Grid
+                        Height="60"
+                        HorizontalAlignment="Center">
+
+                        <!--  Buttons  -->
+                        <StackPanel
+                            IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
+                            Orientation="Horizontal"
+                            Spacing="30">
+                            <Button
+                                Classes="Large"
+                                Command="{Binding InstallMelonLoaderCommand}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_Install}}"
+                                IsVisible="{Binding GameConfig.MelonLoaderVersion, Converter={x:Static StringConverters.IsNullOrEmpty}, Mode=OneWay}"
+                                Width="100" />
+                            <Button
+                                Classes="Large Danger"
+                                Command="{Binding UninstallMelonLoaderCommand}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}"
+                                IsVisible="{Binding GameConfig.MelonLoaderVersion, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
+                                Width="100" />
+                        </StackPanel>
+
+                        <!--  Progress Bar  -->
+                        <ProgressBar
+                            Value="{Binding DownloadProgress, Mode=OneWay}"
+                            Classes="Primary"
+                            IsVisible="{Binding MelonLoaderInstallStatus, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:InstallStatus.Downloading}, Mode=OneWay}"
+                            ShowProgressText="True"
+                            VerticalAlignment="Center"
+                            Width="260" />
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Panel>
 
 </UserControl>

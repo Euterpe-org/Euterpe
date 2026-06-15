@@ -235,7 +235,7 @@
                                 Grid.Column="0"
                                 Height="64"
                                 Margin="0,0,20,0"
-                                Source="/Assets/Euterpe_Logo.png" />
+                                Source="/Assets/Icon.png" />
                             <StackPanel
                                 Grid.Column="1">
                                 <TextBlock
