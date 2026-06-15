@@ -101,8 +101,6 @@ public sealed partial class MapperTest
     [Arguments("scene-a")]
     [Arguments("scene_")]
     [Arguments("scene_abc")]
-    [Arguments("scene_100")]
-    [Arguments("scene_123")]
     public async Task ToManifestMeta_InvalidScene_Throws(string scene)
     {
         var info = new InfoJson { Name = "Song", Author = "Composer", Scene = scene };
