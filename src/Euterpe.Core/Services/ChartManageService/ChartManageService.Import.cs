@@ -88,21 +88,20 @@ internal sealed partial class ChartManageService
 
     private async Task<(MigrationOutcome Outcome, string Destination)> ExtractPackagedChartAsync(string path, string name)
     {
-        var destination = Path.Combine(GameConfig.OfflineChartsFolder, name);
-        if (Directory.Exists(destination))
-        {
-            return (MigrationOutcome.Skipped, destination);
-        }
+        var desiredFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
+        var workFolder = Path.Combine(GameConfig.TempChartsFolder, Guid.NewGuid().ToString("N"));
 
         try
         {
-            await Archive.ExtractZipFileAsync(path, destination).ConfigureAwait(false);
-            return (MigrationOutcome.Migrated, destination);
+            await Archive.ExtractZipFileAsync(path, workFolder).ConfigureAwait(false);
+
+            return FileSystemService.TryMoveDirectoryToAvailablePath(workFolder, desiredFolder, out var destination)
+                ? (MigrationOutcome.Migrated, destination)
+                : (MigrationOutcome.Failed, desiredFolder);
         }
-        catch
+        finally
         {
-            FileSystemService.TryDeleteDirectory(destination, DeleteOption.IgnoreIfNotFound);
-            throw;
+            FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
         }
     }
 
@@ -114,10 +113,6 @@ internal sealed partial class ChartManageService
                 Logger.ZLogInformation($"Imported chart {name} from {path}");
                 NotificationService.SuccessLight(Notification_Content_Chart_Import_Success, name);
                 return true;
-            case MigrationOutcome.Skipped:
-                Logger.ZLogInformation($"Import of {name} skipped: chart already exists");
-                NotificationService.WarningLight(Notification_Content_Chart_Import_Duplicated, name);
-                return false;
             case MigrationOutcome.Unsupported:
                 Logger.ZLogInformation($"Import of {name} skipped: chart cannot be migrated");
                 NotificationService.ErrorLight(Notification_Content_Chart_Import_Unmigratable, name);

@@ -159,9 +159,6 @@
   <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
     <value>谱面 {0} 下载成功</value>
   </data>
-  <data name="Notification_Content_Chart_Import_Duplicated" xml:space="preserve">
-    <value>谱面 {0} 已导入</value>
-  </data>
   <data name="Notification_Content_Chart_Import_Failed" xml:space="preserve">
     <value>谱面 {0} 导入失败</value>
   </data>

@@ -159,9 +159,6 @@
   <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
     <value>Chart {0} berhasil diunduh</value>
   </data>
-  <data name="Notification_Content_Chart_Import_Duplicated" xml:space="preserve">
-    <value>Chart {0} sudah diimpor</value>
-  </data>
   <data name="Notification_Content_Chart_Import_Failed" xml:space="preserve">
     <value>Gagal mengimpor chart {0}</value>
   </data>
