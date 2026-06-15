@@ -7,32 +7,25 @@ internal sealed partial class MigrationService : IMigrationService
     public async Task<(MigrationOutcome Outcome, string Destination)> MigrateCustomAlbumAsync(CustomAlbumSource source, CancellationToken cancellationToken = default)
     {
         var name = source.Name;
-        var destinationFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
+        var desiredFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
+        var workFolder = Path.Combine(GameConfig.TempChartsFolder, Guid.NewGuid().ToString("N"));
 
-        if (Directory.Exists(destinationFolder))
-        {
-            Logger.ZLogInformation($"'{name}' already migrated, skipping");
-            return (MigrationOutcome.Skipped, destinationFolder);
-        }
-
-        var workFolder = Path.Combine(GameConfig.TempChartsFolder, name);
         try
         {
-            FileSystemService.DeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
             await PopulateWorkFolderAsync(source, workFolder).ConfigureAwait(false);
 
             if (!HasSupportedAudio(workFolder))
             {
                 Logger.ZLogInformation($"'{name}' uses an unsupported audio format, skipping migration");
-                return (MigrationOutcome.Unsupported, destinationFolder);
+                return (MigrationOutcome.Unsupported, desiredFolder);
             }
 
             await BuildChartAsync(workFolder, cancellationToken).ConfigureAwait(false);
 
-            if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder))
+            if (!FileSystemService.TryMoveDirectoryToAvailablePath(workFolder, desiredFolder, out var destinationFolder))
             {
                 Logger.ZLogError($"Failed to move migrated chart '{name}'");
-                return (MigrationOutcome.Failed, destinationFolder);
+                return (MigrationOutcome.Failed, desiredFolder);
             }
 
             Logger.ZLogInformation($"Migrated '{name}' -> {destinationFolder}");
@@ -41,7 +34,7 @@ internal sealed partial class MigrationService : IMigrationService
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to migrate custom album '{name}', skipping");
-            return (MigrationOutcome.Failed, destinationFolder);
+            return (MigrationOutcome.Failed, desiredFolder);
         }
         finally
         {

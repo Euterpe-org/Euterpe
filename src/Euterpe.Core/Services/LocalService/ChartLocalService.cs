@@ -3,7 +3,7 @@ using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Core;
 
-internal sealed partial class ChartLocalService : IChartLocalService
+internal sealed class ChartLocalService : IChartLocalService
 {
     public IEnumerable<string> GetChartFolderPaths(ChartSource source) =>
         Directory.EnumerateDirectories(
@@ -22,7 +22,11 @@ internal sealed partial class ChartLocalService : IChartLocalService
         var packages = Directory.EnumerateFiles(root).Where(x => Path.GetExtension(x) is CustomAlbumFiles.PackageExtension);
         var folders = Directory.EnumerateDirectories(root).Where(d => File.Exists(Path.Combine(d, CustomAlbumFiles.InfoFileName)));
 
-        return ResolveSources([.. packages, .. folders]);
+        return
+        [
+            .. packages.Select(static path => new CustomAlbumSource(path, false)),
+            .. folders.Select(static path => new CustomAlbumSource(path, true))
+        ];
     }
 
     public async Task<ChartDto?> LoadChartFromPathAsync(string chartFolder, ChartSource source)

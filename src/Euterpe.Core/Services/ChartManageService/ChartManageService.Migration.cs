@@ -34,10 +34,9 @@ internal sealed partial class ChartManageService
         }
 
         var migrated = outcomes.Count(outcome => outcome is MigrationOutcome.Migrated);
-        var skipped = outcomes.Count(outcome => outcome is MigrationOutcome.Skipped);
         var unsupported = outcomes.Count(outcome => outcome is MigrationOutcome.Unsupported);
         var failed = outcomes.Count(outcome => outcome is MigrationOutcome.Failed);
-        Logger.ZLogInformation($"CustomAlbums migration complete: {migrated} migrated, {skipped} skipped, {unsupported} unsupported, {failed} failed");
+        Logger.ZLogInformation($"CustomAlbums migration complete: {migrated} migrated, {unsupported} unsupported, {failed} failed");
 
         if (!Directory.EnumerateFileSystemEntries(GameConfig.CustomAlbumsChartsFolder).Any())
         {
@@ -62,23 +61,17 @@ internal sealed partial class ChartManageService
     private async Task<MigrationOutcome> MigrateSourceAsync(CustomAlbumSource source, ConcurrentBag<ChartDto> migratedCharts, CancellationToken cancellationToken)
     {
         var (outcome, destination) = await MigrationService.MigrateCustomAlbumAsync(source, cancellationToken).ConfigureAwait(false);
-        switch (outcome)
+        if (outcome is MigrationOutcome.Migrated)
         {
-            case MigrationOutcome.Migrated:
-                DeleteSource(source);
-                if (await ChartLocalService.LoadChartFromPathAsync(destination, ChartSource.Offline).ConfigureAwait(false) is { } chart)
-                {
-                    migratedCharts.Add(chart);
-                }
-                else
-                {
-                    Logger.ZLogWarning($"Migrated chart at {destination} could not be loaded into the cache");
-                }
-
-                break;
-            case MigrationOutcome.Skipped:
-                DeleteSource(source);
-                break;
+            DeleteSource(source);
+            if (await ChartLocalService.LoadChartFromPathAsync(destination, ChartSource.Offline).ConfigureAwait(false) is { } chart)
+            {
+                migratedCharts.Add(chart);
+            }
+            else
+            {
+                Logger.ZLogWarning($"Migrated chart at {destination} could not be loaded into the cache");
+            }
         }
 
         return outcome;
