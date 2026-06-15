@@ -40,7 +40,7 @@ public sealed class AuthHeaderHandlerTest
         auth.GetAccessTokenAsync().Returns("expired");
         auth.RenewAccessTokenAsync(Any<string>()).Returns("renewed");
         var inner = new FakeHttpMessageHandler((_, n) =>
-            new HttpResponseMessage(n == 1 ? HttpStatusCode.Unauthorized : HttpStatusCode.OK));
+            new HttpResponseMessage(n is 1 ? HttpStatusCode.Unauthorized : HttpStatusCode.OK));
         using var handler = new AuthHeaderHandler(BuildServices(auth)) { InnerHandler = inner };
         using var client = new HttpClient(handler);
 

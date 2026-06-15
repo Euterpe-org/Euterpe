@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Euterpe.Tests.Core;
@@ -15,14 +14,12 @@ public sealed class AppSettingServiceTest
         config.SteamExecPath = "/steam/steam";
         var steam = NewSteamMock(true, true);
         var msgBox = IMessageBoxService.Mock();
-        var noticeCalls = new StrongBox<int>(0);
-        msgBox.NoticeOverlayAsync(Any<string>()).Callback(() => noticeCalls.Value++);
 
         var service = NewService(config, steam, msgBox);
         await service.ValidateSteamAsync();
 
+        msgBox.NoticeOverlayAsync(Any<string>()).WasNeverCalled();
         using var assertions = Assert.Multiple();
-        await Assert.That(noticeCalls.Value).IsEqualTo(0);
         await Assert.That(config.SteamFolder).IsEqualTo("/steam");
         await Assert.That(config.SteamExecPath).IsEqualTo("/steam/steam");
     }
@@ -35,15 +32,12 @@ public sealed class AppSettingServiceTest
         config.SteamExecPath = "/steam/steam";
         var steam = NewSteamMock(false, true, "/auto/steam");
         var msgBox = IMessageBoxService.Mock();
-        var noticeCalls = new StrongBox<int>(0);
-        msgBox.NoticeOverlayAsync(Any<string>()).Callback(() => noticeCalls.Value++);
 
         var service = NewService(config, steam, msgBox);
         await service.ValidateSteamAsync();
 
-        using var assertions = Assert.Multiple();
+        msgBox.NoticeOverlayAsync(Any<string>()).WasNeverCalled();
         await Assert.That(config.SteamFolder).IsEqualTo("/auto/steam");
-        await Assert.That(noticeCalls.Value).IsEqualTo(0);
     }
 
     [Test]
@@ -54,17 +48,14 @@ public sealed class AppSettingServiceTest
         config.SteamExecPath = "/steam/steam";
         var steam = NewSteamMock(false, true);
         var msgBox = IMessageBoxService.Mock();
-        var noticeCalls = new StrongBox<int>(0);
-        msgBox.NoticeOverlayAsync(Any<string>()).Callback(() => noticeCalls.Value++);
         var appLocal = IAppLocalService.Mock();
         appLocal.GetSteamFolderAsync().Returns("/user/picked");
 
         var service = NewService(config, steam, msgBox, appLocal);
         await service.ValidateSteamAsync();
 
-        using var assertions = Assert.Multiple();
+        msgBox.NoticeOverlayAsync(Any<string>()).WasCalled(Times.Once);
         await Assert.That(config.SteamFolder).IsEqualTo("/user/picked");
-        await Assert.That(noticeCalls.Value).IsEqualTo(1);
     }
 
     [Test]

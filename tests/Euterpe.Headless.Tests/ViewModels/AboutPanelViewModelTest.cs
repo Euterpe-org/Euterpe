@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Euterpe.Abstractions;
 using Euterpe.Features.Setting;
 
@@ -26,13 +25,11 @@ public sealed class AboutPanelViewModelTest : HeadlessTest
         var update = IUpdateService.Mock();
         update.CheckForUpdatesAsync(Any<CancellationToken>()).Returns(false);
         var msgBox = IMessageBoxService.Mock();
-        var successCalls = new StrongBox<int>(0);
-        msgBox.SuccessAsync(Any<string>()).Callback(() => successCalls.Value++);
         var vm = NewViewModel(update, msgBox);
 
         await vm.CheckUpdateCommand.ExecuteAsync(null);
 
-        await Assert.That(successCalls.Value).IsEqualTo(1);
+        msgBox.SuccessAsync(Any<string>()).WasCalled(Times.Once);
     });
 
     [Test]
@@ -41,13 +38,11 @@ public sealed class AboutPanelViewModelTest : HeadlessTest
         var update = IUpdateService.Mock();
         update.CheckForUpdatesAsync(Any<CancellationToken>()).Returns(true);
         var msgBox = IMessageBoxService.Mock();
-        var successCalls = new StrongBox<int>(0);
-        msgBox.SuccessAsync(Any<string>()).Callback(() => successCalls.Value++);
         var vm = NewViewModel(update, msgBox);
 
         await vm.CheckUpdateCommand.ExecuteAsync(null);
 
-        await Assert.That(successCalls.Value).IsEqualTo(0);
+        msgBox.SuccessAsync(Any<string>()).WasNeverCalled();
     });
 
     private static AboutPanelViewModel NewViewModel(

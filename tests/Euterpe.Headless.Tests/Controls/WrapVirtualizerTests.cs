@@ -28,7 +28,7 @@ public sealed class WrapVirtualizerTests : HeadlessTest
     }
 
     private static string FlatString(WrapVirtualizer wrap) =>
-        string.Join(",", wrap.Rows.SelectMany(row => row.Items));
+        string.Join(',', wrap.Rows.SelectMany(row => row.Items));
 
     private static List<NotifyCollectionChangedAction> TrackRowActions(WrapVirtualizer wrap)
     {
@@ -141,7 +141,7 @@ public sealed class WrapVirtualizerTests : HeadlessTest
 
         using var _ = Assert.Multiple();
         await Assert.That(wrap.Rows.Count).IsEqualTo(4);
-        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(',', source));
         await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
     });
 
@@ -153,7 +153,7 @@ public sealed class WrapVirtualizerTests : HeadlessTest
 
         source.Insert(1, "inserted");
 
-        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(',', source));
     });
 
     [Test]
@@ -167,7 +167,7 @@ public sealed class WrapVirtualizerTests : HeadlessTest
 
         using var _ = Assert.Multiple();
         await Assert.That(wrap.Rows.Count).IsEqualTo(3);
-        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(',', source));
         await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
     });
 
@@ -182,7 +182,7 @@ public sealed class WrapVirtualizerTests : HeadlessTest
 
         using var _ = Assert.Multiple();
         await Assert.That(wrap.Rows[1].Items[1]).IsEqualTo("changed");
-        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(',', source));
         await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
     });
 
@@ -196,7 +196,7 @@ public sealed class WrapVirtualizerTests : HeadlessTest
         source.Move(0, 5);
 
         using var _ = Assert.Multiple();
-        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(",", source));
+        await Assert.That(FlatString(wrap)).IsEqualTo(string.Join(',', source));
         await Assert.That(actions.Contains(NotifyCollectionChangedAction.Reset)).IsFalse();
     });
 }

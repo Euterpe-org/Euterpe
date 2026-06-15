@@ -1,7 +1,7 @@
 using System.Net;
 using Euterpe.Contracts.Telemetry;
 using Euterpe.Core.Http.Clients;
-using Microsoft.Extensions.Logging.Abstractions;
+using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
 
@@ -15,7 +15,7 @@ public sealed class TelemetryServiceTest
     {
         TelemetryApiClient = client ?? ITelemetryApiClient.Mock(),
         PlatformInfo = platformInfo ?? StubPlatformInfo(),
-        Logger = NullLogger<TelemetryService>.Instance
+        Logger = Mock.Logger<TelemetryService>()
     };
 
     private static IPlatformInfo StubPlatformInfo()

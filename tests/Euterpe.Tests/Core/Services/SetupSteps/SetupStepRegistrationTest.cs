@@ -21,15 +21,13 @@ public sealed class SetupStepRegistrationTest
             .RegistrationsFor(new TypedService(typeof(ISetupStep)))
             .ToArray();
 
-        await Assert.That(registrations.Length).IsEqualTo(9);
-
         var implTypes = registrations
             .Select(r => r.Activator.LimitType.Name)
             .Order(StringComparer.Ordinal)
             .ToArray();
 
-        var expected = new[]
-        {
+        string[] expected =
+        [
             "ChartingToolStep",
             "DotNetRuntimeStep",
             "DotNetSdkStep",
@@ -39,11 +37,8 @@ public sealed class SetupStepRegistrationTest
             "MigrationStep",
             "ModTemplateStep",
             "UninstallConflictsStep"
-        };
+        ];
 
-        for (var i = 0; i < expected.Length; i++)
-        {
-            await Assert.That(implTypes[i]).IsEqualTo(expected[i]);
-        }
+        await Assert.That(implTypes).IsEquivalentTo(expected);
     }
 }

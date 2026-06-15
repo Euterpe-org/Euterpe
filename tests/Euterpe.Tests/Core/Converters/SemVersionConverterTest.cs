@@ -49,6 +49,6 @@ public sealed class SemVersionConverterTest
     public async Task Deserialize_InvalidVersionString_Throws()
     {
         Action act = () => JsonSerializer.Deserialize("\"not.a.version\"", SemVersionJsonContext.Default.SemVersion);
-        await Assert.That(act).Throws<Exception>();
+        await Assert.That(act).Throws<FormatException>();
     }
 }

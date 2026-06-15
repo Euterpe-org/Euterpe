@@ -59,7 +59,7 @@ public sealed class TokenQueryHandlerTest
         auth.GetAccessTokenAsync().Returns("expired");
         auth.RenewAccessTokenAsync(Any<string>()).Returns("fresh");
         var inner = new FakeHttpMessageHandler((_, n) =>
-            new HttpResponseMessage(n == 1 ? HttpStatusCode.Unauthorized : HttpStatusCode.OK));
+            new HttpResponseMessage(n is 1 ? HttpStatusCode.Unauthorized : HttpStatusCode.OK));
         using var handler = new TokenQueryHandler(BuildServices(auth)) { InnerHandler = inner };
         using var client = new HttpClient(handler);
 

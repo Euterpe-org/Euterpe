@@ -7,6 +7,8 @@ namespace Euterpe.Tests.Contracts;
 [TestSubject(typeof(GitHubRelease))]
 public sealed class GitHubContractsTest
 {
+    private static readonly JsonSerializerOptions SnakeCase = new() { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
+
     [Test]
     public async Task GitHubRelease_Defaults_AreEmptyStringsAndZero()
     {
@@ -47,9 +49,8 @@ public sealed class GitHubContractsTest
             Body = "release notes"
         };
 
-        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
-        var json = JsonSerializer.Serialize(release, options);
-        var parsed = JsonSerializer.Deserialize<GitHubRelease>(json, options)!;
+        var json = JsonSerializer.Serialize(release, SnakeCase);
+        var parsed = JsonSerializer.Deserialize<GitHubRelease>(json, SnakeCase)!;
 
         using var _ = Assert.Multiple();
         await Assert.That(parsed.Id).IsEqualTo(release.Id);
@@ -113,8 +114,7 @@ public sealed class GitHubContractsTest
                               "_links": { "self": "s", "git": "g", "html": "h" }
                             }
                             """;
-        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower };
-        var parsed = JsonSerializer.Deserialize<GitHubRepoContent>(json, options)!;
+        var parsed = JsonSerializer.Deserialize<GitHubRepoContent>(json, SnakeCase)!;
 
         using var _ = Assert.Multiple();
         await Assert.That(parsed.SHA).IsEqualTo("abc123");

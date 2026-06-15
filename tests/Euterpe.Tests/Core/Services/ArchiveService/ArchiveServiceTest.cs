@@ -30,7 +30,7 @@ public sealed class ArchiveServiceTest
 
             NewService().CreateZipFile(source, zipPath);
 
-            using var zip = ZipFile.OpenRead(zipPath);
+            await using var zip = ZipFile.OpenRead(zipPath);
             using var _ = Assert.Multiple();
             await Assert.That(File.Exists(zipPath)).IsTrue();
             await Assert.That(zip.Entries.Select(e => e.Name).Order(StringComparer.Ordinal)).IsEquivalentTo(["a.txt", "b.txt"]);
@@ -55,7 +55,7 @@ public sealed class ArchiveServiceTest
 
             NewService().CreateZipFile(source, zipPath);
 
-            using var zip = ZipFile.OpenRead(zipPath);
+            await using var zip = ZipFile.OpenRead(zipPath);
             await Assert.That(zip.Entries.Single().Name).IsEqualTo("new.txt");
         }
         finally
@@ -77,7 +77,7 @@ public sealed class ArchiveServiceTest
 
             await NewService().CreateZipFileAsync(source, zipPath);
 
-            using var zip = ZipFile.OpenRead(zipPath);
+            await using var zip = ZipFile.OpenRead(zipPath);
             using var _ = Assert.Multiple();
             await Assert.That(File.Exists(zipPath)).IsTrue();
             await Assert.That(zip.Entries.Single().Name).IsEqualTo("a.txt");
@@ -102,7 +102,7 @@ public sealed class ArchiveServiceTest
 
             await NewService().CreateZipFileAsync(source, zipPath);
 
-            using var zip = ZipFile.OpenRead(zipPath);
+            await using var zip = ZipFile.OpenRead(zipPath);
             await Assert.That(zip.Entries.Single().Name).IsEqualTo("fresh.txt");
         }
         finally

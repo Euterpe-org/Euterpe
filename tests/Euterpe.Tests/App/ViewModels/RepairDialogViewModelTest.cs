@@ -104,7 +104,7 @@ public sealed class RepairDialogViewModelTest
         using var _ = Assert.Multiple();
         await Assert.That(vm.Content).IsSameReferenceAs(executionPage);
         await Assert.That(gameConfig.SetupOptions.Single(o => o.IsSelected).Kinds).IsEqualTo(SetupOptionKinds.MelonLoader);
-        await Assert.That(gameConfig.SetupOptions.Where(o => o.Kinds != SetupOptionKinds.MelonLoader).All(o => !o.IsSelected)).IsTrue();
+        await Assert.That(gameConfig.SetupOptions.Where(o => o.Kinds is not SetupOptionKinds.MelonLoader).All(o => !o.IsSelected)).IsTrue();
     }
 
     [Test]

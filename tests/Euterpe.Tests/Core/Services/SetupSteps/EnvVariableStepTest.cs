@@ -39,6 +39,6 @@ public sealed class EnvVariableStepTest
 
         var act = () => step.ExecuteAsync(new Progress<string>(_ => { }));
 
-        await Assert.That(act).Throws<InvalidOperationException>();
+        await Assert.That(act).ThrowsExactly<InvalidOperationException>();
     }
 }

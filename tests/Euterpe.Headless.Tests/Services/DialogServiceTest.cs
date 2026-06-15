@@ -54,7 +54,7 @@ public sealed class DialogServiceTest : HeadlessTest
         await Assert.That(result).IsTrue();
     });
 
-    private static IDialogService NewService() => new DialogService();
+    private static DialogService NewService() => new DialogService();
 
     private static Window NewVisibleOwner()
     {

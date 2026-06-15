@@ -43,7 +43,7 @@ public sealed class MainSplashWindowViewModelTest
         auth.LoginAsync().Callback(() =>
         {
             loginCount.Value++;
-            if (loginCount.Value == 2)
+            if (loginCount.Value is 2)
             {
                 ready.Set();
             }
@@ -55,7 +55,6 @@ public sealed class MainSplashWindowViewModelTest
 
         await vm.InitializeAsync();
 
-        using var _ = Assert.Multiple();
         await Assert.That(loginCount.Value).IsEqualTo(2);
         messageBox.WarningConfirmAsync(Any<string>()).WasCalled(Times.Once);
     }

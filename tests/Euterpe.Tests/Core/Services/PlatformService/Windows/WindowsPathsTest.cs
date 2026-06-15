@@ -20,8 +20,8 @@ public sealed class WindowsPathsTest
             @"Program Files (x86)\Steam",
             @"Program Files\SteamLibrary",
             @"Program Files (x86)\SteamLibrary",
-            @"Steam",
-            @"SteamLibrary"
+            "Steam",
+            "SteamLibrary"
         };
 
         using var _ = Assert.Multiple();

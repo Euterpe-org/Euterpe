@@ -22,10 +22,10 @@ public sealed class AsyncImageTests : HeadlessTest
 
         var partImage = asyncImage.GetVisualDescendants()
             .OfType<Image>()
-            .FirstOrDefault(i => i.Name == "PART_Image");
+            .FirstOrDefault(i => i.Name is "PART_Image");
         var partPlaceholder = asyncImage.GetVisualDescendants()
             .OfType<Image>()
-            .FirstOrDefault(i => i.Name == "PART_PlaceholderImage");
+            .FirstOrDefault(i => i.Name is "PART_PlaceholderImage");
 
         using var _ = Assert.Multiple();
         await Assert.That(partImage).IsNotNull();
@@ -75,7 +75,7 @@ public sealed class AsyncImageTests : HeadlessTest
 
         var partImage = asyncImage.GetVisualDescendants()
             .OfType<Image>()
-            .First(i => i.Name == "PART_Image");
+            .First(i => i.Name is "PART_Image");
         await Assert.That(partImage.Stretch).IsEqualTo(Stretch.Fill);
     });
 
@@ -178,7 +178,7 @@ public sealed class AsyncImageTests : HeadlessTest
     });
 
     private static Image PartImage(AsyncImage image) =>
-        image.GetVisualDescendants().OfType<Image>().First(i => i.Name == "PART_Image");
+        image.GetVisualDescendants().OfType<Image>().First(i => i.Name is "PART_Image");
 
     private static async Task<Bitmap?> WaitForBitmap(AsyncImage image, Bitmap? previous = null)
     {

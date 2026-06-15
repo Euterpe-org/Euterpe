@@ -76,9 +76,9 @@ public sealed partial class MapperTest
         await Assert.That(meta.Maps.Count).IsEqualTo(2);
         await Assert.That(meta.Maps.ContainsKey("map2")).IsFalse();
         await Assert.That(meta.Maps["map1"].Rating).IsEqualTo("2");
-        await Assert.That(meta.Maps["map1"].Charters).IsEquivalentTo(new[] { "Alice" });
+        await Assert.That(meta.Maps["map1"].Charters).IsEquivalentTo(["Alice"]);
         await Assert.That(meta.Maps["map3"].Rating).IsEqualTo("8");
-        await Assert.That(meta.Maps["map3"].Charters).IsEquivalentTo(new[] { "General" });
+        await Assert.That(meta.Maps["map3"].Charters).IsEquivalentTo(["General"]);
     }
 
     [Test]
@@ -108,6 +108,6 @@ public sealed partial class MapperTest
         var info = new InfoJson { Name = "Song", Author = "Composer", Scene = scene };
         Action act = () => info.ToManifestMeta(null, []);
 
-        await Assert.That(act).Throws<InvalidDataException>();
+        await Assert.That(act).ThrowsExactly<InvalidDataException>();
     }
 }

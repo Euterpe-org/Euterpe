@@ -20,7 +20,7 @@ public sealed class RoleCardTests : HeadlessTest
 
         var iconBadge = card.GetVisualDescendants()
             .OfType<Border>()
-            .First(b => b.Name == "IconBadgeBg");
+            .First(b => b.Name is "IconBadgeBg");
 
         var brush = iconBadge.Background as ISolidColorBrush;
         await Assert.That(brush?.Color).IsEqualTo(Colors.Red);
@@ -36,7 +36,7 @@ public sealed class RoleCardTests : HeadlessTest
 
         var iconBadge = card.GetVisualDescendants()
             .OfType<Border>()
-            .First(b => b.Name == "IconBadgeBg");
+            .First(b => b.Name is "IconBadgeBg");
 
         card.IsSelected = true;
         Dispatcher.UIThread.RunJobs();

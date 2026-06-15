@@ -25,7 +25,6 @@ public sealed class HomePageViewModelTest
 
         await vm.LaunchGameCommand.ExecuteAsync(null);
 
-        using var _ = Assert.Multiple();
         launchService.LaunchModdedGameAsync().WasCalled(Times.Once);
         launchService.LaunchVanillaGameAsync().WasCalled(Times.Never);
     }
@@ -39,7 +38,6 @@ public sealed class HomePageViewModelTest
 
         await vm.LaunchGameCommand.ExecuteAsync(null);
 
-        using var _ = Assert.Multiple();
         launchService.LaunchVanillaGameAsync().WasCalled(Times.Once);
         launchService.LaunchModdedGameAsync().WasCalled(Times.Never);
     }

@@ -70,7 +70,7 @@ public sealed class MelonLoaderStepTest
         var step = CreateStep(depService, localService, new MuseDashConfig { MelonLoaderVersion = "0.6.5" });
 
         var act = async () => await step.ExecuteAsync(new Progress<string>(_ => { }));
-        await Assert.That(act).Throws<InvalidOperationException>();
+        await Assert.That(act).ThrowsExactly<InvalidOperationException>();
 
         using var _ = Assert.Multiple();
         depService.AcquireForMelonLoaderAsync(

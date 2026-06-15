@@ -24,7 +24,7 @@ public sealed class LinuxPathsTest
     [Test]
     public async Task SteamSearch_ContainsKnownLocations()
     {
-        var joined = string.Join(";", LinuxPaths.SteamSearch);
+        var joined = string.Join(';', LinuxPaths.SteamSearch);
 
         using var _ = Assert.Multiple();
         await Assert.That(joined).Contains(".local/share/Steam");

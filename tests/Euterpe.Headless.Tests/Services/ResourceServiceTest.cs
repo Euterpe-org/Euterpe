@@ -7,7 +7,7 @@ namespace Euterpe.Headless.Tests.Services;
 [TestSubject(typeof(ResourceService))]
 public sealed class ResourceServiceTest : HeadlessTest
 {
-    private static IResourceService NewService() => new ResourceService();
+    private static ResourceService NewService() => new ResourceService();
 
     [Test]
     public Task GetAssetAsStream_ExistingAsset_ReturnsReadableStream() => RunOnUI(async () =>
@@ -28,7 +28,7 @@ public sealed class ResourceServiceTest : HeadlessTest
         var service = NewService();
 
         var act = () => service.GetAssetAsStream("__does_not_exist__.png");
-        await Assert.That(act).Throws<Exception>();
+        await Assert.That(act).Throws<FileNotFoundException>();
     });
 
     [Test]

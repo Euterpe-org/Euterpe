@@ -17,8 +17,6 @@ public sealed partial class UpdateServiceTest
 
         var updateService = CreateUpdateService(distributionClient: distributionClient);
 
-        using var _ = Assert.Multiple();
-
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         _logger.VerifyLog()
             .ContainingMessage($"Release version parsed: {version}")
@@ -34,8 +32,6 @@ public sealed partial class UpdateServiceTest
         var distributionClient = CreateDistributionClientMock(version);
 
         var updateService = CreateUpdateService(currentVersion: SemVersion.Parse(version), distributionClient: distributionClient);
-
-        using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         _logger.VerifyLog()
@@ -53,8 +49,6 @@ public sealed partial class UpdateServiceTest
         var distributionClient = CreateDistributionClientMock(version);
 
         var updateService = CreateUpdateService(distributionClient: distributionClient);
-
-        using var _ = Assert.Multiple();
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
         _logger.VerifyLog()

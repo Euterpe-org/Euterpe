@@ -15,7 +15,7 @@ public sealed class ContributorCardTests : HeadlessTest
 
         var nameTextBlock = card.GetVisualDescendants()
             .OfType<TextBlock>()
-            .FirstOrDefault(tb => tb.Text == "lxymahatma");
+            .FirstOrDefault(tb => tb.Text is "lxymahatma");
         await Assert.That(nameTextBlock).IsNotNull();
     });
 
@@ -33,7 +33,7 @@ public sealed class ContributorCardTests : HeadlessTest
 
         var nameTextBlock = card.GetVisualDescendants()
             .OfType<TextBlock>()
-            .First(tb => tb.Text == "test");
+            .First(tb => tb.Text is "test");
         var descTextBlock = card.GetVisualDescendants()
             .OfType<TextBlock>()
             .FirstOrDefault(tb => !ReferenceEquals(tb, nameTextBlock));
@@ -57,7 +57,7 @@ public sealed class ContributorCardTests : HeadlessTest
 
         var descTextBlock = card.GetVisualDescendants()
             .OfType<TextBlock>()
-            .FirstOrDefault(tb => tb.Text == "the maintainer");
+            .FirstOrDefault(tb => tb.Text is "the maintainer");
 
         using var _ = Assert.Multiple();
         await Assert.That(descTextBlock).IsNotNull();

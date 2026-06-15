@@ -75,7 +75,7 @@ public sealed partial class MapperTest
         };
 
         Action act = () => lib.ToModel();
-        await Assert.That(act).Throws<InvalidOperationException>();
+        await Assert.That(act).ThrowsExactly<InvalidOperationException>();
     }
 
     [Test]

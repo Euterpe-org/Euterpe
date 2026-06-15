@@ -79,7 +79,7 @@ public sealed class DownloadUtilsTest
         Func<CancellationToken, Task> download = _ =>
         {
             calls++;
-            if (calls == 1)
+            if (calls is 1)
             {
                 throw new IOException("transient failure");
             }

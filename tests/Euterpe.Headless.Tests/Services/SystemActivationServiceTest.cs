@@ -72,7 +72,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         service.HandleStartupArgs(["not-a-uri-at-all"]);
 
-        var warning = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Warning);
+        var warning = logger.Entries.SingleOrDefault(e => e.LogLevel is LogLevel.Warning);
         using var _ = Assert.Multiple();
         await Assert.That(warning).IsNotNull();
         await Assert.That(warning!.Message).Contains("Unhandled activation");
@@ -86,7 +86,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         service.HandleActivation("relative/path");
 
-        var warning = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Warning);
+        var warning = logger.Entries.SingleOrDefault(e => e.LogLevel is LogLevel.Warning);
         using var _ = Assert.Multiple();
         await Assert.That(warning).IsNotNull();
         await Assert.That(warning!.Message).Contains("Unhandled activation");
@@ -100,7 +100,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         service.HandleActivation("http://example.com/mod/install/foo");
 
-        var warning = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Warning);
+        var warning = logger.Entries.SingleOrDefault(e => e.LogLevel is LogLevel.Warning);
         using var _ = Assert.Multiple();
         await Assert.That(warning).IsNotNull();
         await Assert.That(warning!.Message).Contains("Unhandled activation");
@@ -114,7 +114,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         service.HandleActivation("not-a-uri");
 
-        var info = logger.Entries.SingleOrDefault(e => e.LogLevel == LogLevel.Information);
+        var info = logger.Entries.SingleOrDefault(e => e.LogLevel is LogLevel.Information);
         using var _ = Assert.Multiple();
         await Assert.That(info).IsNotNull();
         await Assert.That(info!.Message).Contains("Activation received");
@@ -248,7 +248,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         using var _ = Assert.Multiple();
         charts.MigrateCustomAlbumsAsync(Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
-        await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Warning)).IsFalse();
+        await Assert.That(logger.Entries.Any(e => e.LogLevel is LogLevel.Warning)).IsFalse();
     });
 
     [Test]
@@ -259,6 +259,6 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
         await InvokeChartAction(service, "bogus");
 
-        await Assert.That(logger.Entries.Any(e => e.LogLevel == LogLevel.Warning && e.Message.Contains("Unknown chart deep link"))).IsTrue();
+        await Assert.That(logger.Entries.Any(e => e.LogLevel is LogLevel.Warning && e.Message.Contains("Unknown chart deep link"))).IsTrue();
     }
 }

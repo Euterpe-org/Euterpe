@@ -35,7 +35,7 @@ public sealed partial class AuthServiceTest
 
         using var _ = Assert.Multiple();
         await Assert.That(token).IsEqualTo(NewAccessToken);
-        authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>()).WasCalled(Times.Never);
+        authClientMock.RefreshTokenAsync(Any<RefreshRequest>(), Any<CancellationToken>()).WasNeverCalled();
     }
 
     [Test]

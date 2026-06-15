@@ -35,7 +35,7 @@ public sealed class RolePageViewModelTest
         var vm = NewViewModel(gameConfig);
         var modderPreset = gameConfig.WizardPresets[WizardIdentity.Modder];
 
-        vm.SelectedRole = RolePageViewModel.Roles.First(r => r.Identity == WizardIdentity.Modder);
+        vm.SelectedRole = RolePageViewModel.Roles.First(r => r.Identity is WizardIdentity.Modder);
 
         var actual = gameConfig.SetupOptions
             .Where(o => o.IsSelected)
@@ -54,7 +54,7 @@ public sealed class RolePageViewModelTest
             .Select(o => o.Kinds)
             .Aggregate(SetupOptionKinds.None, (acc, k) => acc | k);
 
-        vm.SelectedRole = RolePageViewModel.Roles.First(r => r.Identity == WizardIdentity.Custom);
+        vm.SelectedRole = RolePageViewModel.Roles.First(r => r.Identity is WizardIdentity.Custom);
 
         var afterMask = gameConfig.SetupOptions
             .Where(o => o.IsSelected)

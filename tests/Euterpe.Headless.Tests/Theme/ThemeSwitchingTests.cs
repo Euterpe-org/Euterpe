@@ -55,7 +55,7 @@ public sealed class ThemeSwitchingTests : HeadlessTest
             var darkBg = window.FindResource(ThemeVariant.Dark, "BackgroundImage");
             var lightBg = window.FindResource(ThemeVariant.Light, "BackgroundImage");
 
-            await Assert.That(ReferenceEquals(darkBg, lightBg)).IsFalse();
+            await Assert.That(darkBg).IsNotSameReferenceAs(lightBg);
         }
         finally
         {
@@ -95,8 +95,7 @@ public sealed class ThemeSwitchingTests : HeadlessTest
             using var _ = Assert.Multiple();
             await Assert.That(darkCheck).IsNotNull();
             await Assert.That(lightCheck).IsNotNull();
-            // Shared (non-theme-scoped) resources should resolve to the same instance under either theme.
-            await Assert.That(darkCheck).IsEqualTo(lightCheck);
+            await Assert.That(darkCheck).IsSameReferenceAs(lightCheck);
         }
         finally
         {
