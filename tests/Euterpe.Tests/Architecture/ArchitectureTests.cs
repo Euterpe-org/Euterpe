@@ -18,7 +18,7 @@ public sealed class ArchitectureTests
     public async Task Abstractions_ClassesArePublicAndInterfaces_ReturnsTrue()
     {
         var result = AbstractionsTypes.That()
-            .ResideInNamespace("^Euterpe.Abstractions$")
+            .ResideInNamespaceMatching("^Euterpe\\.Abstractions$")
             .Should()
             .BePublic()
             .And()
@@ -32,7 +32,7 @@ public sealed class ArchitectureTests
     public async Task CoreServices_ClassesAreInternalAndSealed_ReturnsTrue()
     {
         var result = CoreTypes.That()
-            .ResideInNamespaceMatching("^Euterpe.Core$")
+            .ResideInNamespaceMatching("^Euterpe\\.Core$")
             .And()
             .AreNotStatic()
             .Should()
