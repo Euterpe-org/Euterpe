@@ -137,7 +137,7 @@ public sealed partial class ModManageServiceTest
     }
 
     [Test]
-    public async Task InitializeModsAsync_IncompatibleModNotInstalled_DoesNotMarkIncompatible()
+    public async Task InitializeModsAsync_WebModConflictsWithInstalled_MarksWebModIncompatible()
     {
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(
@@ -147,9 +147,30 @@ public sealed partial class ModManageServiceTest
 
         await sut.InitializeModsAsync();
 
+        var modB = sut.FindModByName("ModB")!;
         using var _ = Assert.Multiple();
         await Assert.That(sut.FindModByName("ModA")!.State).IsEqualTo(ModState.Normal);
-        await Assert.That(sut.FindModByName("ModB")!.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modB.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modB.IsInstallable).IsFalse();
+    }
+
+    [Test]
+    public async Task InitializeModsAsync_ConflictingModsBothUninstalled_DoesNotMarkIncompatible()
+    {
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")));
+
+        await sut.InitializeModsAsync();
+
+        var modA = sut.FindModByName("ModA")!;
+        var modB = sut.FindModByName("ModB")!;
+        using var _ = Assert.Multiple();
+        await Assert.That(modA.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modB.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modA.IsInstallable).IsTrue();
+        await Assert.That(modB.IsInstallable).IsTrue();
     }
 
     [Test]

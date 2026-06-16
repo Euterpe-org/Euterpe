@@ -107,7 +107,7 @@ internal sealed partial class ModManageService
         var installedNames = installedMods.Select(mod => mod.Name).ToHashSet();
         var declaredIncompatibleNames = installedMods.SelectMany(mod => mod.IncompatibleMods).ToHashSet();
 
-        foreach (var mod in installedMods)
+        foreach (var mod in _sourceCache.Items)
         {
             if (mod.State is ModState.Duplicated)
             {
@@ -119,7 +119,7 @@ internal sealed partial class ModManageService
                 continue;
             }
 
-            Logger.ZLogInformation($"Mod {mod.Name} conflicts with another installed mod and is marked incompatible");
+            Logger.ZLogInformation($"Mod {mod.Name} is incompatible with an installed mod");
             mod.State = ModState.Incompatible;
         }
     }
