@@ -249,6 +249,9 @@
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>Failed to install mod {0}</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Incompatible" xml:space="preserve">
+    <value>Mod {0} is incompatible and cannot be installed</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} successfully installed</value>
   </data>

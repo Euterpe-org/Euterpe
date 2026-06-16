@@ -54,6 +54,48 @@ public sealed partial class ModManageServiceTest
     }
 
     [Test]
+    public async Task InstallModByNameAsync_WhenIncompatible_NotifiesAndDoesNotDownload()
+    {
+        var downloadManagerMock = IGameDownloadManager.Mock();
+        downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
+        downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([CreateWebMod(melonVersion: "0.5.0")]);
+        var notificationServiceMock = INotificationService.Mock();
+        var sut = CreateModManageService(
+            CreateGame(melonLoaderVersion: "0.4.0"),
+            downloadManagerMock,
+            notificationService: notificationServiceMock);
+        await sut.InitializeModsAsync();
+
+        await sut.InstallModByNameAsync(TestModName);
+
+        using var _ = Assert.Multiple();
+        notificationServiceMock.NoticeLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
+        downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Never);
+    }
+
+    [Test]
+    public async Task InstallModByNameAsync_WhenConflictsWithInstalledMod_NotifiesAndDoesNotDownload()
+    {
+        var downloadManagerMock = IGameDownloadManager.Mock();
+        downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
+        downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([
+            CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+            CreateWebMod("ModB")]);
+        var notificationServiceMock = INotificationService.Mock();
+        var sut = CreateModManageService(
+            gameDownloadManager: downloadManagerMock,
+            modLocalService: LocalServiceWith(("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll"))),
+            notificationService: notificationServiceMock);
+        await sut.InitializeModsAsync();
+
+        await sut.InstallModByNameAsync("ModB");
+
+        using var _ = Assert.Multiple();
+        notificationServiceMock.NoticeLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
+        downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Never);
+    }
+
+    [Test]
     public async Task UpdateModByNameAsync_WhenNotInstalled_NotifiesAndDoesNotDownload()
     {
         var downloadManagerMock = IGameDownloadManager.Mock();

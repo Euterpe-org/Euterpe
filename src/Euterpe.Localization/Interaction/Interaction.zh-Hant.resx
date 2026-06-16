@@ -249,6 +249,9 @@
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>模組 {0} 安裝失敗</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Incompatible" xml:space="preserve">
+    <value>模組 {0} 不相容，無法安裝</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>模組 {0} 安裝成功</value>
   </data>

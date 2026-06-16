@@ -71,6 +71,13 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
             return;
         }
 
+        if (mod.State is ModState.Incompatible)
+        {
+            Logger.ZLogInformation($"Install requested for incompatible mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_Install_Incompatible, name);
+            return;
+        }
+
         await InstallModAsync(mod).ConfigureAwait(false);
     }
 
