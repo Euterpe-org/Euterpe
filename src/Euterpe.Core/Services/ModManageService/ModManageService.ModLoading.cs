@@ -123,22 +123,4 @@ internal sealed partial class ModManageService
             mod.State = ModState.Incompatible;
         }
     }
-
-    private void RefreshModStates()
-    {
-        foreach (var modDto in _sourceCache.Items)
-        {
-            if (!modDto.HasDownloadSource || modDto.State is not (ModState.Normal or ModState.Incompatible))
-            {
-                continue;
-            }
-
-            modDto.State = IsModIncompatible(modDto.MelonVersion, modDto.GameVersion) ? ModState.Incompatible : ModState.Normal;
-        }
-
-        CheckIncompatibleMods();
-
-        _sourceCache.Refresh();
-        Logger.ZLogInformation($"Mod states refreshed with MelonLoader version: {GameConfig.MelonLoaderSemVersion}");
-    }
 }

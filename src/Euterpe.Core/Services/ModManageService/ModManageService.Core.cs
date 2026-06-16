@@ -6,8 +6,8 @@ internal sealed partial class ModManageService
 {
     private async Task InitializeCoreAsync()
     {
-        GameConfig.ObservePropertyChanged(x => x.MelonLoaderVersion)
-            .Subscribe(this, (_, self) => self.RefreshModStates());
+        GameConfig.ObservePropertyChanged(x => x.MelonLoaderVersion, pushCurrentValueOnSubscribe: false)
+            .SubscribeAwait(this, static (_, self, _) => self.ReconcileAfterMelonLoaderChangeAsync());
 
         await LoadLibsAsync().ConfigureAwait(false);
 
@@ -17,6 +17,18 @@ internal sealed partial class ModManageService
         CheckIncompatibleMods();
 
         StartWatching();
+    }
+
+    private async ValueTask ReconcileAfterMelonLoaderChangeAsync()
+    {
+        try
+        {
+            await ReconcileModsAsync().ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to reconcile mods after MelonLoader version change");
+        }
     }
 
     private async Task DownloadModCoreAsync(ModDto mod)
