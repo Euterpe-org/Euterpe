@@ -131,8 +131,14 @@ internal sealed partial class ModManageService
         await _singleFlight.RunAsync(mod.Name, async () =>
         {
             mod.IsProcessing = true;
-            await action().ConfigureAwait(false);
-            mod.IsProcessing = false;
+            try
+            {
+                await action().ConfigureAwait(false);
+            }
+            finally
+            {
+                mod.IsProcessing = false;
+            }
         }).ConfigureAwait(false);
 
     private async Task<T> RunExclusiveAsync<T>(ModDto mod, Func<Task<T>> action)
@@ -141,8 +147,14 @@ internal sealed partial class ModManageService
         await _singleFlight.RunAsync(mod.Name, async () =>
         {
             mod.IsProcessing = true;
-            result = await action().ConfigureAwait(false);
-            mod.IsProcessing = false;
+            try
+            {
+                result = await action().ConfigureAwait(false);
+            }
+            finally
+            {
+                mod.IsProcessing = false;
+            }
         }).ConfigureAwait(false);
         return result;
     }

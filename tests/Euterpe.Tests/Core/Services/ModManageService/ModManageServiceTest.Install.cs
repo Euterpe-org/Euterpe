@@ -47,4 +47,25 @@ public sealed partial class ModManageServiceTest
         notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
         notificationServiceMock.SuccessLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Never);
     }
+
+    [Test]
+    public async Task InstallModAsync_WhenConflictsWithAnotherWebMod_MarksTheOtherWebModIncompatible()
+    {
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")));
+        await sut.InitializeModsAsync();
+
+        var modA = sut.FindModByName("ModA")!;
+        var modB = sut.FindModByName("ModB")!;
+        await Assert.That(modB.IsInstallable).IsTrue();
+
+        await sut.InstallModAsync(modA);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(modA.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modB.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modB.IsInstallable).IsFalse();
+    }
 }

@@ -4,20 +4,46 @@ internal sealed partial class ModManageService
 {
     public async Task ReconcileModsAsync()
     {
-        var (diskMods, added, removed) = await SyncLocalModsAsync().ConfigureAwait(false);
-        RecomputeModStates(diskMods);
-        _sourceCache.Refresh();
-        NotifyModSync(added, removed);
+        await _reconcileGate.WaitAsync().ConfigureAwait(false);
+        try
+        {
+            var (diskMods, added, removed) = await SyncLocalModsAsync().ConfigureAwait(false);
+            RecomputeModStates(diskMods);
+            _sourceCache.Refresh();
+            NotifyModSync(added, removed);
+        }
+        finally
+        {
+            _reconcileGate.Release();
+        }
     }
+
+    private async Task RecomputeStatesAsync()
+    {
+        await _reconcileGate.WaitAsync().ConfigureAwait(false);
+        try
+        {
+            var diskMods = await LoadDiskModsAsync().ConfigureAwait(false);
+            RecomputeModStates(diskMods);
+            _sourceCache.Refresh();
+        }
+        finally
+        {
+            _reconcileGate.Release();
+        }
+    }
+
+    private async Task<ModDto[]> LoadDiskModsAsync() =>
+        (await ModLocalService.GetModFilePaths().WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
+            .OfType<ModDto>()
+            .ToArray();
 
     private async Task<(ModDto[] DiskMods, List<string> Added, List<string> Removed)> SyncLocalModsAsync()
     {
         var added = new List<string>();
         var removed = new List<string>();
 
-        var diskMods = (await ModLocalService.GetModFilePaths().WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
-            .OfType<ModDto>()
-            .ToArray();
+        var diskMods = await LoadDiskModsAsync().ConfigureAwait(false);
         var diskNames = diskMods.Select(static mod => mod.Name).ToHashSet(StringComparer.Ordinal);
 
         // One entry per Name (last file wins for the cache, matching AddOrUpdate); duplicate
