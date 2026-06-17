@@ -302,8 +302,8 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         }
     }
 
-    // Map rows follow the union of the manifest's maps and the .bms files present in the folder, so a
-    // chart can be edited after a difficulty is dropped in or removed. Refresh keeps any in-flight edits.
+    // Rows track the .bms files on disk; the manifest only prefills each row's rating and charters, so a
+    // difficulty dropped into or removed from the folder appears or drops out on refresh. Edits are kept.
     private void ReconcileMaps(bool preserveEdits)
     {
         var kept = preserveEdits
@@ -318,14 +318,9 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 
         Maps.Clear();
         var manifestMaps = _original?.Meta.Maps;
-        foreach (var difficulty in ChartDifficultyExtensions.GetValues())
+        foreach (var difficulty in _files.ExistingDifficulties())
         {
             var manifestMap = manifestMaps?.GetValueOrDefault(ChartFiles.MapName(difficulty));
-            if (manifestMap is null && !_files.ContainsKey(ChartFiles.MapFileName(difficulty)))
-            {
-                continue;
-            }
-
             var row = kept.GetValueOrDefault(difficulty)
                 ?? new DifficultyEditViewModel(difficulty, manifestMap?.Rating ?? string.Empty, manifestMap?.Charters ?? []);
             row.PropertyChanged += OnMapChanged;

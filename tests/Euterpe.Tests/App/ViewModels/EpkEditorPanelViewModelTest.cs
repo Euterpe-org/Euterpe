@@ -37,7 +37,7 @@ public sealed class EpkEditorPanelViewModelTest
         await Assert.That(vm.Maps[0].Rating).IsEqualTo("3");
         await Assert.That(vm.Maps[0].Charters.Count).IsEqualTo(1);
         await Assert.That(vm.Maps[0].Charters[0]).IsEqualTo("alice");
-        await Assert.That(vm.Files.Count).IsEqualTo(2);
+        await Assert.That(vm.Files.Count).IsEqualTo(3);
     }
 
     [Test]
@@ -118,6 +118,40 @@ public sealed class EpkEditorPanelViewModelTest
         await Assert.That(vm.Maps[^1].Difficulty).IsEqualTo(ChartDifficulty.Hidden);
         await Assert.That(vm.Maps[^1].Rating).IsEqualTo(string.Empty);
         await Assert.That(vm.HasHiddenDifficulty).IsTrue();
+    }
+
+    [Test]
+    public async Task RefreshFiles_WhenABmsIsRemoved_DropsTheMapRowAndBlocksSave()
+    {
+        var folder = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["map1.bms"] = 1,
+            ["map2.bms"] = 1,
+            ["music.ogg"] = 1
+        };
+        var fileSystem = IFileSystemService.Mock();
+        fileSystem.GetFileSizes(Any<string>()).Returns(folder);
+
+        var vm = new EpkEditorPanelViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            FileSystemService = fileSystem,
+            MessageBoxService = IMessageBoxService.Mock(),
+            MessagePackSerialization = IMessagePackSerializationService.Mock(),
+            NotificationService = INotificationService.Mock()
+        };
+        vm.Open("C:/charts/A/manifest.epk", SingleChartWithoutHidden());
+
+        await Assert.That(vm.Maps.Count).IsEqualTo(2);
+        await Assert.That(vm.CanSave).IsTrue();
+
+        folder.Remove("map2.bms");
+        vm.RefreshFilesCommand.Execute(null);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(vm.Maps.Count).IsEqualTo(1);
+        await Assert.That(vm.Maps[0].Difficulty).IsEqualTo(ChartDifficulty.Easy);
+        await Assert.That(vm.CanSave).IsFalse();
     }
 
     [Test]
@@ -207,6 +241,7 @@ public sealed class EpkEditorPanelViewModelTest
         Files = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase)
         {
             ["map1.bms"] = new() { Version = 1, Size = 10 },
+            ["map2.bms"] = new() { Version = 1, Size = 30 },
             ["music.ogg"] = new() { Version = 1, Size = 20 }
         }
     };
