@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Frissítés</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Hozzávetőleges szintek megjóslása és a chart Note-eloszlásának elemzése</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Töltsd fel és tedd közzé a chartodat</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Chart beküldése</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Egy chart manifest metaadatainak helyi szerkesztése</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Offline eszközök</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Chartek elemzése és beküldése az Euterpe oldalon (a böngészőben nyílik meg)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Online eszközök</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Könnyű</value>
   </data>
@@ -187,38 +211,41 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Vissza</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Tartomány</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Charter hozzáadása</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Szerző</value>
+    <value>Dal szerzője</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Háttérvideó átlátszósága</value>
+    <value>Videó átlátszósága</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Max. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Min. BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Leírás</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Nehézségek</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>Fájlok</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Rejtett üzenet</value>
+    <value>Üzenet</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Rejtett mód</value>
+    <value>Mód</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Szint felülírás elrejtése</value>
+    <value>Szint megjelenítésének felülírása</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Név</value>
+    <value>Chart neve</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Romanizált név</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Keresési kulcsszavak</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Kulcsszavak vesszővel elválasztva</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Változó tempó</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Frissítés</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} fájl · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>A mentéshez töltsd ki az összes kötelező mezőt</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Adj meg érvényes tempótartományt (min ≤ max)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Kulcsszó hozzáadása</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>Chart manifest.epk metaadatainak megnyitása és szerkesztése</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK Metaadat-szerkesztő</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Charterek</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Szint</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} fájl, amelyre ez a chart hivatkozik, hiányzik a mappájából</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Új EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Új chart építése egy mappányi eszközből</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>EPK fájl megnyitása…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Mappa megnyitása</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Mentés</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Chart-információk</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Leírás és felfedezés</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Rejtett nehézség</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Alapadatok</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Mapek</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Alkalmazásnaplók</value>

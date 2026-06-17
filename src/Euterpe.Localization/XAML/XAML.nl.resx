@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Bijwerken</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Voorspel bij benadering de niveaus en analyseer de Note-opbouw van een chart</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Upload en publiceer je chart</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Chart indienen</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Bewerk de manifest-metadata van een chart lokaal</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Offline-tools</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Analyseer en dien charts in op de Euterpe-site (opent in je browser)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Online-tools</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Makkelijk</value>
   </data>
@@ -187,38 +211,41 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Terug</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Bereik</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Een charter toevoegen</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Auteur</value>
+    <value>Songauteur</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Achtergrondvideo-transparantie</value>
+    <value>Videotransparantie</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Max. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Min. BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Beschrijving</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Moeilijkheidsgraden</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>Bestanden</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Verborgen bericht</value>
+    <value>Bericht</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Verborgen modus</value>
+    <value>Modus</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Niveauoverschrijving verbergen</value>
+    <value>Niveauweergave overschrijven</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Naam</value>
+    <value>Chartnaam</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Geromaniseerde naam</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Zoekwoorden</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Zoekwoorden scheiden met komma's</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Variabel tempo</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Vernieuwen</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} bestanden · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Vul alle verplichte velden in om op te slaan</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Stel een geldig tempobereik in (min ≤ max)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Een zoekwoord toevoegen</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
-    <value>De metadata van het manifest.epk van een chart openen en bewerken</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK-metadata-editor</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Charters</value>
+    <value>De manifest.epk van een chart openen en de metadata ervan bewerken</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Niveau</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} bestand(en) waarnaar deze chart verwijst ontbreken in de map</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Nieuwe EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Een nieuwe chart bouwen vanuit een map met assets</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>EPK-bestand openen…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Map openen</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Opslaan</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Chart-info</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Beschrijving &amp; vindbaarheid</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Verborgen moeilijkheid</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Basisinfo</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Maps</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App-logs</value>

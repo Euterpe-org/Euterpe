@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Mettre à jour</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Prédit des niveaux approximatifs et analyse la répartition des Note d'un chart</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Téléversez et publiez votre chart</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Soumettre le chart</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Modifier localement les métadonnées du manifest d'un chart</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Outils hors ligne</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Analysez et soumettez des charts sur le site Euterpe (s'ouvre dans votre navigateur)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Outils en ligne</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Easy</value>
   </data>
@@ -187,44 +211,47 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Retour</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Plage</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Ajouter un charteur</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Auteur</value>
+    <value>Auteur du morceau</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Opacité de la vidéo d'arrière-plan</value>
+    <value>Opacité de la vidéo</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>BPM max</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>BPM min</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Difficultés</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>Fichiers</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Message (mode caché)</value>
+    <value>Message</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Mode caché</value>
+    <value>Mode</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Niveau alternatif</value>
+    <value>Niveau affiché alternatif</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Nom</value>
+    <value>Nom du chart</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Nom romanisé</value>
   </data>
   <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
-    <value>Sûr pour le streaming</value>
+    <value>Sûr pour les streamers</value>
   </data>
   <data name="EpkEditor_Field_Scene" xml:space="preserve">
     <value>Scène</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Mots-clés de recherche</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Séparez les mots-clés par des virgules</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Tempo variable</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Actualiser</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} fichiers · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Remplissez tous les champs obligatoires pour enregistrer</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Définissez une plage de tempo valide (min ≤ max)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Ajouter un mot-clé</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>Ouvrir et modifier les métadonnées du manifest.epk d'un chart</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>Éditeur de métadonnées EPK</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Charteurs</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Niveau</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} fichier(s) référencé(s) par ce chart sont absents de son dossier</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Nouveau EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Créer un chart à partir d'un dossier de ressources</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>Ouvrir un fichier EPK…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Ouvrir le dossier</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Enregistrer</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Infos du chart</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Description et découverte</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Difficulté cachée</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Infos de base</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Maps</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Journaux de l'appli</value>

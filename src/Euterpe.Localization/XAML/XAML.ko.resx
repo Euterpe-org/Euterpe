@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>업데이트</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>대략적인 레벨을 예측하고 채보의 Note 분석</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>채보 분석기</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>채보를 업로드하고 게시</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>채보 제출</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>채보의 manifest 메타데이터를 로컬에서 편집</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>오프라인 도구</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Euterpe 사이트에서 채보를 분석하고 제출 (브라우저에서 열림)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>온라인 도구</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>쉬움</value>
   </data>
@@ -187,38 +211,41 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>뒤로</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>범위</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>채보 제작자 추가</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>작성자</value>
+    <value>작곡가</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>배경 영상 불투명도</value>
+    <value>영상 불투명도</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>최대 BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>최소 BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>설명</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>난이도</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>파일</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>숨김 메시지</value>
+    <value>메시지</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>숨김 모드</value>
+    <value>모드</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>난이도 재정의 숨김</value>
+    <value>레벨 표시 재정의</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>이름</value>
+    <value>곡명</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>로마자 이름</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>검색 키워드</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>쉼표로 키워드를 구분하세요</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>변속</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>새로 고침</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>파일 {0}개 · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>모든 필수 항목을 입력하면 저장할 수 있습니다</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>유효한 템포 범위를 설정하세요 (최소 ≤ 최대)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>키워드 추가</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>채보의 manifest.epk 메타데이터를 열고 편집합니다</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK 메타데이터 편집기</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>채보 제작자</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>레벨</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>이 채보가 참조하는 파일 {0}개가 폴더에 없습니다</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>새 EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>소재를 모아 둔 폴더에서 새 채보를 만듭니다</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>EPK 파일 열기…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>폴더 열기</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>저장</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>채보 정보</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>설명 및 탐색</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>히든 난이도</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>기본 정보</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>맵</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>앱 로그</value>

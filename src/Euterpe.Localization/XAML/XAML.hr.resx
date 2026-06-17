@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Ažuriraj</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Predvidi približne razine i analiziraj raspodjelu Note u chartu</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Prenesi i objavi svoj chart</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Pošalji chart</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Uredi metapodatke manifesta charta lokalno</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Offline alati</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Analiziraj i pošalji chartove na Euterpe stranici (otvara se u pregledniku)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Online alati</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Easy</value>
   </data>
@@ -187,38 +211,41 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Natrag</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Raspon</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Dodaj kreatora charta</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Autor</value>
+    <value>Autor pjesme</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Prozirnost pozadinskog videozapisa</value>
+    <value>Prozirnost videozapisa</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Maks. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Min. BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Opis</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Težine</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>Datoteke</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Sakrij poruku</value>
+    <value>Poruka</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Sakrij način rada</value>
+    <value>Način rada</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Sakrij nadjačavanje razine</value>
+    <value>Nadjačavanje prikaza razine</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Naziv</value>
+    <value>Naziv charta</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Romanizirani naziv</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Ključne riječi za pretragu</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Odvojite ključne riječi zarezima</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Promjenjivi tempo</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Osvježi</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} datoteka · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Ispunite sva obavezna polja za spremanje</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Postavite valjan raspon tempa (min ≤ maks)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Dodaj ključnu riječ</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>Otvori i uredi metapodatke datoteke manifest.epk charta</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK uređivač metapodataka</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Kreatori chartova</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Razina</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} datoteka na koje ovaj chart upućuje nedostaje u njegovoj mapi</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Novi EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Izgradi novi chart iz mape s resursima</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>Otvori EPK datoteku…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Otvori mapu</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Spremi</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Informacije o chartu</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Opis i otkrivanje</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Skrivena težina</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Osnovne informacije</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Mape</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Zapisnici aplikacije</value>

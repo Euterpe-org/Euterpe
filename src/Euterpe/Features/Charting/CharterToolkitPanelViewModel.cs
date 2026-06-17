@@ -26,6 +26,47 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
         }
     }
 
+    [RelayCommand]
+    private async Task NewEpkEditorAsync()
+    {
+        if (await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseChartFolder).ConfigureAwait(true) is not { } folder)
+        {
+            return;
+        }
+
+        var present = FileSystemService.GetFileSizes(folder);
+        if (present.ContainsKey(ChartFiles.ManifestFileName))
+        {
+            await OpenEpkAsync(Path.Combine(folder, ChartFiles.ManifestFileName)).ConfigureAwait(true);
+            return;
+        }
+
+        var files = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase);
+        foreach (var (name, size) in present)
+        {
+            if (name.EndsWith(".tmp", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            files[name] = new ManifestFileEntry { Version = 1, Size = size };
+        }
+
+        Editor.Open(Path.Combine(folder, ChartFiles.ManifestFileName), new Manifest
+        {
+            Schema = Manifest.CurrentSchema,
+            Meta = new ManifestMeta
+            {
+                Name = string.Empty,
+                Author = string.Empty,
+                Scene = "scene_01",
+                Maps = new Dictionary<string, ManifestMap>(StringComparer.OrdinalIgnoreCase)
+            },
+            Files = files
+        });
+        ActiveTool = Editor;
+    }
+
     public async Task OpenEpkAsync(string filePath)
     {
         Manifest manifest;
@@ -60,6 +101,7 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
     public required IChartManageService ChartManageService { get; init; }
     public required EpkEditorPanelViewModel Editor { get; init; }
     public required IFileSystemPickerService FileSystemPickerService { get; init; }
+    public required IFileSystemService FileSystemService { get; init; }
     public required ILogger<CharterToolkitPanelViewModel> Logger { get; init; }
     public required IMessagePackSerializationService MessagePackSerialization { get; init; }
     public required INotificationService NotificationService { get; init; }

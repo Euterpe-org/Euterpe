@@ -8,7 +8,6 @@ namespace Euterpe.Features.Charting;
 public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 {
     private bool _loading;
-    private bool _dirty;
     private string? _filePath;
     private string? _folder;
     private Manifest? _original;
@@ -36,6 +35,8 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     public partial bool SafeForStreamer { get; set; }
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial int? Bpm { get; set; }
 
     [ObservableProperty]
@@ -57,6 +58,8 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     public partial int? BpmMax { get; set; }
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSave))]
     public partial string Scene { get; set; } = string.Empty;
 
     [ObservableProperty]
@@ -78,6 +81,9 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     public partial string? HideMessage { get; set; }
 
     [ObservableProperty]
+    public partial string? FilePath { get; set; }
+
+    [ObservableProperty]
     public partial string? FolderPath { get; set; }
 
     [ObservableProperty]
@@ -97,6 +103,9 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial string FilesSummary { get; set; } = string.Empty;
 
+    [ObservableProperty]
+    public partial bool IsDirty { get; set; }
+
     public ObservableCollection<string> SearchKeywords { get; } = [];
 
     public ObservableCollection<DifficultyEditViewModel> Maps { get; } = [];
@@ -106,7 +115,11 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     public bool CanSave =>
         !Name.IsNullOrWhiteSpace()
         && !Author.IsNullOrWhiteSpace()
-        && !BpmRangeInvalid;
+        && !Scene.IsNullOrWhiteSpace()
+        && Bpm is not null
+        && !BpmRangeInvalid
+        && Maps.Any(static map => map.Difficulty == ChartDifficulty.Hard)
+        && Maps.All(static map => !map.Rating.IsNullOrWhiteSpace() && map.Charters.Any(static charter => !charter.IsNullOrWhiteSpace()));
 
     public bool BpmRangeInvalid =>
         IsBpmRange && (BpmMin is not { } min || BpmMax is not { } max || min > max);
@@ -144,20 +157,19 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         HideRatingOverride = meta.HideRatingOverride;
         HideMessage = meta.HideMessage;
 
+        FilePath = filePath;
         FolderPath = _folder;
         CoverDominantColor = meta.CoverDominantColor;
         CoverPath = ResolveCoverPath();
 
         LoadKeywords(meta.SearchKeywords);
-        LoadMaps(meta.Maps);
-
-        HasHiddenDifficulty = meta.Maps.ContainsKey(ChartFiles.MapName(ChartDifficulty.Hidden));
+        ReconcileMaps(preserveEdits: false);
 
         RebuildFilesDisplay();
         RecomputeMissingFiles();
 
         _loading = false;
-        _dirty = false;
+        IsDirty = false;
     }
 
     [RelayCommand(CanExecute = nameof(CanSave))]
@@ -171,14 +183,12 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         var bytes = MessagePackSerialization.SerializeManifest(BuildManifest());
         if (await FileSystemService.TryWriteFileAtomicAsync(_filePath, bytes).ConfigureAwait(true))
         {
-            _dirty = false;
+            IsDirty = false;
             NotificationService.SuccessLight(Notification_Content_Epk_Save_Success, Name);
             if (_folder is { } folder)
             {
                 Saved?.Invoke(folder);
             }
-
-            CloseRequested?.Invoke();
         }
         else
         {
@@ -189,7 +199,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task BackAsync()
     {
-        if (_dirty &&
+        if (IsDirty &&
             await MessageBoxService.WarningConfirmAsync(MessageBox_Content_Epk_Discard_Confirm).ConfigureAwait(true) is not MessageBoxResult.Yes)
         {
             return;
@@ -221,8 +231,9 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 
         _files = refreshed;
         RebuildFilesDisplay();
+        ReconcileMaps(preserveEdits: true);
         RecomputeMissingFiles();
-        _dirty = true;
+        IsDirty = true;
     }
 
     private Manifest BuildManifest()
@@ -230,15 +241,15 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         var original = _original!;
         var meta = original.Meta;
 
-        var maps = new Dictionary<string, ManifestMap>(meta.Maps.Count, StringComparer.OrdinalIgnoreCase);
-        foreach (var (key, map) in meta.Maps)
+        var maps = new Dictionary<string, ManifestMap>(Maps.Count, StringComparer.OrdinalIgnoreCase);
+        foreach (var row in Maps)
         {
-            var edited = Maps.FirstOrDefault(row => string.Equals(ChartFiles.MapName(row.Difficulty), key, StringComparison.OrdinalIgnoreCase));
+            var key = ChartFiles.MapName(row.Difficulty);
             maps[key] = new ManifestMap
             {
-                Rating = edited?.Rating ?? map.Rating,
-                Charters = edited is not null ? CleanTags(edited.Charters) : map.Charters,
-                PredictedRating = map.PredictedRating
+                Rating = row.Rating,
+                Charters = CleanTags(row.Charters),
+                PredictedRating = meta.Maps.TryGetValue(key, out var originalMap) ? originalMap.PredictedRating : null
             };
         }
 
@@ -291,8 +302,14 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         }
     }
 
-    private void LoadMaps(IReadOnlyDictionary<string, ManifestMap> mapsByName)
+    // Map rows follow the union of the manifest's maps and the .bms files present in the folder, so a
+    // chart can be edited after a difficulty is dropped in or removed. Refresh keeps any in-flight edits.
+    private void ReconcileMaps(bool preserveEdits)
     {
+        var kept = preserveEdits
+            ? Maps.ToDictionary(static row => row.Difficulty)
+            : new Dictionary<ChartDifficulty, DifficultyEditViewModel>();
+
         foreach (var row in Maps)
         {
             row.PropertyChanged -= OnMapChanged;
@@ -300,18 +317,24 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         }
 
         Maps.Clear();
+        var manifestMaps = _original?.Meta.Maps;
         foreach (var difficulty in ChartDifficultyExtensions.GetValues())
         {
-            if (!mapsByName.TryGetValue(ChartFiles.MapName(difficulty), out var map))
+            var manifestMap = manifestMaps?.GetValueOrDefault(ChartFiles.MapName(difficulty));
+            if (manifestMap is null && !_files.ContainsKey(ChartFiles.MapFileName(difficulty)))
             {
                 continue;
             }
 
-            var row = new DifficultyEditViewModel(difficulty, map.Rating, map.Charters);
+            var row = kept.GetValueOrDefault(difficulty)
+                ?? new DifficultyEditViewModel(difficulty, manifestMap?.Rating ?? string.Empty, manifestMap?.Charters ?? []);
             row.PropertyChanged += OnMapChanged;
             row.Charters.CollectionChanged += OnEditCollectionChanged;
             Maps.Add(row);
         }
+
+        HasHiddenDifficulty = Maps.Any(static row => row.Difficulty == ChartDifficulty.Hidden);
+        NotifySaveCanExecuteChanged();
     }
 
     private string? ResolveCoverPath()
@@ -357,24 +380,34 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     {
         if (!_loading)
         {
-            _dirty = true;
+            IsDirty = true;
         }
+
+        NotifySaveCanExecuteChanged();
     }
 
     private void OnEditCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (!_loading)
         {
-            _dirty = true;
+            IsDirty = true;
         }
+
+        NotifySaveCanExecuteChanged();
+    }
+
+    private void NotifySaveCanExecuteChanged()
+    {
+        OnPropertyChanged(nameof(CanSave));
+        SaveCommand.NotifyCanExecuteChanged();
     }
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
-        if (!_loading)
+        if (!_loading && e.PropertyName != nameof(IsDirty))
         {
-            _dirty = true;
+            IsDirty = true;
         }
     }
 

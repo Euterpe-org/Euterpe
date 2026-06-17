@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Perbarui</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Prediksi perkiraan tingkat dan analisis rincian Note sebuah chart</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Unggah dan publikasikan chart Anda</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Kirim Chart</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Edit metadata manifest chart secara lokal</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Alat Offline</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Analisis dan kirim chart di situs Euterpe (terbuka di browser Anda)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Alat Online</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Mudah</value>
   </data>
@@ -187,44 +211,47 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Kembali</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Rentang</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Tambah charter</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Penulis</value>
+    <value>Penulis Lagu</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Opasitas Video Latar</value>
+    <value>Opasitas Video</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>BPM Maks</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>BPM Min</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Deskripsi</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Kesulitan</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>File</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Sembunyikan Pesan</value>
+    <value>Pesan</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Sembunyikan Mode</value>
+    <value>Mode</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Sembunyikan Penggantian Rating</value>
+    <value>Penggantian Tampilan Tingkat</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Nama</value>
+    <value>Nama Chart</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Nama Romanisasi</value>
   </data>
   <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
-    <value>Aman untuk Streamer</value>
+    <value>Aman untuk streamer</value>
   </data>
   <data name="EpkEditor_Field_Scene" xml:space="preserve">
     <value>Adegan</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Kata Kunci Pencarian</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Pisahkan kata kunci dengan koma</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Tempo bervariasi</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Segarkan</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} file · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Isi semua kolom wajib untuk menyimpan</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Tetapkan rentang tempo yang valid (min ≤ maks)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Tambah kata kunci</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>Buka dan edit metadata manifest.epk sebuah chart</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>Editor Metadata EPK</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Charter</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Tingkat</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} file yang dirujuk oleh chart ini tidak ada di foldernya</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>EPK Baru…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Buat chart baru dari folder berisi aset</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>Buka File EPK…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Buka folder</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Simpan</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Info Chart</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Deskripsi &amp; Penemuan</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Kesulitan Tersembunyi</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Info Dasar</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Map</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Log Aplikasi</value>
