@@ -1,4 +1,4 @@
-﻿using SemiTheme = Semi.Avalonia.SemiTheme;
+using SemiTheme = Semi.Avalonia.SemiTheme;
 using UrsaSemiTheme = Ursa.Themes.Semi.UrsaSemiTheme;
 
 namespace Euterpe.Services;
@@ -13,8 +13,11 @@ public sealed class LocalizationService
         "fr",
         "hr",
         "hu",
+        "id",
         "ja",
         "ko",
+        "nl",
+        "pt",
         "ru",
         "zh-Hans",
         "zh-Hant"
@@ -28,8 +31,11 @@ public sealed class LocalizationService
         ["fr"] = "fr-fr",
         ["hr"] = "hr",
         ["hu"] = "hu",
+        ["id"] = "en-us",
         ["ja"] = "ja-jp",
         ["ko"] = "ko-kr",
+        ["nl"] = "nl-nl",
+        ["pt"] = "en-us",
         ["ru"] = "ru-ru",
         ["zh-Hans"] = "zh-cn",
         ["zh-Hant"] = "zh-tw"
@@ -98,10 +104,7 @@ public sealed class LocalizationService
 
     #region Injections
 
-    [UsedImplicitly]
     public required Config Config { get; init; }
-
-    [UsedImplicitly]
     public required ILogger<LocalizationService> Logger { get; init; }
 
     #endregion Injections

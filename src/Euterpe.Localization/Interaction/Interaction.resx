@@ -16,6 +16,9 @@
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
     <value>Choose Chart File</value>
   </data>
+  <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
+    <value>Choose EPK File</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>Choose Steam Executable</value>
   </data>
@@ -40,33 +43,17 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Please select Muse Dash folder
-Do you have Muse Dash installed on this computer?</value>
-  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Please select Steam executable</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Please select Steam folder</value>
   </data>
-  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
-    <value>Detected Muse Dash folder path is
-{0}
-Is this the correct game folder?</value>
+  <data name="MessageBox_Content_CrashDialog_CopyFailed" xml:space="preserve">
+    <value>Failed to copy error details to the clipboard.</value>
   </data>
-  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
-    <value>Failed to delete {0}</value>
-  </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
-    <value>Failed to delete MelonLoader folder</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime not found
-Click OK to install</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-    <value>Failed to install .NET 6 Runtime</value>
+  <data name="MessageBox_Content_CrashDialog_CopySuccess" xml:space="preserve">
+    <value>Error details copied to the clipboard.</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>Are you sure you want to install the .Net SDK?</value>
@@ -74,8 +61,17 @@ Click OK to install</value>
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>Failed to install .NET 10 SDK</value>
   </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Success" xml:space="preserve">
+    <value>.NET 10 SDK has been successfully installed</value>
+  </data>
+  <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
+    <value>Discard unsaved changes?</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>The path you have chosen is invalid. Try again</value>
+  </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>Sign-in failed. Would you like to try again? Selecting No will close Euterpe.</value>
   </data>
   <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
     <value>Failed to create MDM file</value>
@@ -89,25 +85,17 @@ Click OK to install</value>
   <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
     <value>MDM files extracted successfully</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-    <value>Failed to delete MelonLoader.zip in
-{0}
-Try to manually delete</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
-    <value>Failed to install MelonLoader: {0}</value>
+    <value>Failed to install MelonLoader</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader has been successfully installed</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>Failed to uninstall MelonLoader</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader uninstalled successfully</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
-    <value>Failed to unzip MelonLoader</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
-    <value>MelonLoader zip file not found</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
     <value>Are you sure you want to install the Mod Template?</value>
@@ -115,11 +103,17 @@ Try to manually delete</value>
   <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
     <value>Failed to install Mod Template</value>
   </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Success" xml:space="preserve">
+    <value>Mod Template has been successfully installed</value>
+  </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
     <value>Are you sure you want to uninstall the Mod Template?</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
     <value>Failed to uninstall Mod Template</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Success" xml:space="preserve">
+    <value>Mod Template uninstalled successfully</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
     <value>New version available: {0}, do you want to upgrade?</value>
@@ -137,6 +131,12 @@ Try to manually delete</value>
     <value>Reading Game Information failed
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Failed to download version {0}</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>No keyring service (secret-tool) was found. Your login session cannot be saved and you will need to log in again each time.</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Are you sure you want to set MD_DIRECTORY environment variable?</value>
   </data>
@@ -150,17 +150,158 @@ Try to manually delete</value>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>MD_DIRECTORY environment variable successfully set to {0}</value>
   </data>
+  <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
+    <value>Failed to play audio</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
+    <value>Failed to download chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
+    <value>Chart {0} successfully downloaded</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Failed" xml:space="preserve">
+    <value>Failed to import chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
+    <value>Chart {0} successfully imported</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Unmigratable" xml:space="preserve">
+    <value>Chart {0} cannot be migrated</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
+    <value>{0} is not a supported chart file or folder</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Failed" xml:space="preserve">
+    <value>Failed to remove chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
+    <value>Chart {0} successfully removed</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Added" xml:space="preserve">
+    <value>Added chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Removed" xml:space="preserve">
+    <value>Removed chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Summary" xml:space="preserve">
+    <value>Synced charts: {0} added, {1} removed</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
+    <value>Updated {0} charts, {1} failed</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Success" xml:space="preserve">
+    <value>Updated {0} charts</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
+    <value>All charts are up to date</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>Failed to update chart {0}</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>Chart {0} successfully updated</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>Chart {0} is already up to date</value>
+  </data>
+  <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
+    <value>Online charts cannot be edited</value>
+  </data>
+  <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
+    <value>Not a valid EPK file</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Failed" xml:space="preserve">
+    <value>Failed to save {0}</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
+    <value>Saved {0}</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>Failed to import library {0}</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>Library {0} successfully imported</value>
+  </data>
+  <data name="Notification_Content_Migration_None" xml:space="preserve">
+    <value>No MDM charts to migrate</value>
+  </data>
+  <data name="Notification_Content_Migration_Partial" xml:space="preserve">
+    <value>Migrated {0} CustomAlbums charts, {1} could not be migrated</value>
+  </data>
+  <data name="Notification_Content_Migration_Success" xml:space="preserve">
+    <value>Migrated {0} CustomAlbums charts</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
+    <value>Mod {0} is already imported</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Failed" xml:space="preserve">
+    <value>Failed to import mod {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Success" xml:space="preserve">
+    <value>Mod {0} successfully imported</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
+    <value>{0} is not a supported mod or library file</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_AlreadyInstalled" xml:space="preserve">
+    <value>Mod {0} is already installed</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Failed to install mod {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Incompatible" xml:space="preserve">
+    <value>Mod {0} is incompatible and cannot be installed</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} successfully installed</value>
+  </data>
+  <data name="Notification_Content_Mod_NotFound" xml:space="preserve">
+    <value>Mod {0} not found</value>
+  </data>
+  <data name="Notification_Content_Mod_NotInstalled" xml:space="preserve">
+    <value>Mod {0} is not installed</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>Failed to reinstall mod {0}</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} successfully reinstalled</value>
   </data>
+  <data name="Notification_Content_Mod_Sync_Added" xml:space="preserve">
+    <value>Added mod {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Removed" xml:space="preserve">
+    <value>Removed mod {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Summary" xml:space="preserve">
+    <value>Synced mods: {0} added, {1} removed</value>
+  </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>Failed to toggle mod {0}</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>Failed to uninstall mod {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>Mod {0} successfully uninstalled</value>
   </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>Updated {0} mods, {1} failed</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>Updated {0} mods</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>Failed to update mod {0}</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>Mod {0} successfully updated</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
+    <value>Mod {0} is already up to date</value>
+  </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>Server is temporarily unavailable. Please try again in a moment.</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Error</value>

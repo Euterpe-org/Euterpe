@@ -1,17 +1,30 @@
+using Euterpe.Core.Proxies;
+
 namespace Euterpe.Extensions;
 
 public static partial class ServiceExtensions
 {
-    public static void RegisterInternalServices(this ContainerBuilder builder)
+    extension(ContainerBuilder builder)
     {
-        // Self Services
-        builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
-        builder.RegisterType<LocalizationService>().PropertiesAutowired().SingleInstance();
+        public void RegisterInternalServices()
+        {
+            // Self Services
+            builder.RegisterType<AppInitializer>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<SystemActivationService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<GameSwitcher>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<LocalizationService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
 
-        // Auto Activate Services
-        builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
+            // Auto Activate Services
+            builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
 
-        // TopLevel
-        builder.Register<TopLevel>(context => context.Resolve<MainWindow>().GetTopLevel()).SingleInstance();
+            // TopLevel
+            builder.RegisterType<TopLevelProxy>().SingleInstance();
+        }
+
+        public void RegisterPerGameAppServices()
+        {
+            builder.RegisterType<SetupDialogService>().PropertiesAutowired().InstancePerLifetimeScope();
+        }
     }
 }

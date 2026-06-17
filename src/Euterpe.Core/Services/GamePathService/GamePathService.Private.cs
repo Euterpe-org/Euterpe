@@ -1,4 +1,4 @@
-﻿using Euterpe.Models.VDFs;
+using Euterpe.Models.VDFs;
 
 namespace Euterpe.Core;
 
@@ -20,6 +20,7 @@ internal sealed partial class GamePathService
             var data = VdfSerializationService.DeserializeFromFile<Dictionary<string, LibraryFolder>>(vdfPath);
 
             libraryFolders = data.Values
+                .Where(library => !library.Path.IsNullOrEmpty())
                 .Select(library =>
                 {
                     library.Path = library.Path.NormalizeSlashes();
@@ -30,7 +31,7 @@ internal sealed partial class GamePathService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to deserialize libraryfolders.vdf");
+            Logger.ZLogWarning(ex, $"Failed to deserialize libraryfolders.vdf");
             return false;
         }
     }

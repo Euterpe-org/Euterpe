@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
+    <value>Chart-bestand kiezen</value>
+  </data>
+  <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
+    <value>EPK-bestand kiezen</value>
+  </data>
+  <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
+    <value>Steam-uitvoerbaar bestand kiezen</value>
+  </data>
+  <data name="FilePickerFileType_AllFiles" xml:space="preserve">
+    <value>Alle bestanden</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
+    <value>Cachemap kiezen</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseChartFolder" xml:space="preserve">
+    <value>Chart-map kiezen</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseMuseDashFolder" xml:space="preserve">
+    <value>Muse Dash-map kiezen</value>
+  </data>
+  <data name="FolderDialog_Title_ChooseSteamFolder" xml:space="preserve">
+    <value>Steam-map kiezen</value>
+  </data>
+  <data name="MessageBox_Button_No" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="MessageBox_Button_Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
+    <value>Selecteer het Steam-uitvoerbare bestand</value>
+  </data>
+  <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
+    <value>Selecteer de Steam-map</value>
+  </data>
+  <data name="MessageBox_Content_CrashDialog_CopyFailed" xml:space="preserve">
+    <value>Kopiëren van foutgegevens naar het klembord mislukt.</value>
+  </data>
+  <data name="MessageBox_Content_CrashDialog_CopySuccess" xml:space="preserve">
+    <value>Foutgegevens gekopieerd naar het klembord.</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
+    <value>Weet u zeker dat u de .NET SDK wilt installeren?</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
+    <value>Installatie van .NET 10 SDK mislukt</value>
+  </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Success" xml:space="preserve">
+    <value>.NET 10 SDK is succesvol geïnstalleerd</value>
+  </data>
+  <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
+    <value>Niet-opgeslagen wijzigingen verwerpen?</value>
+  </data>
+  <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
+    <value>Het gekozen pad is ongeldig. Probeer opnieuw</value>
+  </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>Aanmelden mislukt. Wilt u het opnieuw proberen? Als u Nee kiest, wordt Euterpe afgesloten.</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
+    <value>Kan MDM-bestand niet maken</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Create_Success" xml:space="preserve">
+    <value>MDM-bestanden succesvol gemaakt</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Failed" xml:space="preserve">
+    <value>Kan MDM-bestand niet uitpakken</value>
+  </data>
+  <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
+    <value>MDM-bestanden succesvol uitgepakt</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
+    <value>Installatie van MelonLoader mislukt</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
+    <value>MelonLoader is succesvol geïnstalleerd</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>Verwijderen van MelonLoader mislukt</value>
+  </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
+    <value>MelonLoader succesvol verwijderd</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
+    <value>Weet u zeker dat u de Mod Template wilt installeren?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
+    <value>Installatie van Mod Template mislukt</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Success" xml:space="preserve">
+    <value>Mod Template is succesvol geïnstalleerd</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
+    <value>Weet u zeker dat u de Mod Template wilt verwijderen?</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
+    <value>Verwijderen van Mod Template mislukt</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Success" xml:space="preserve">
+    <value>Mod Template succesvol verwijderd</value>
+  </data>
+  <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
+    <value>Nieuwe versie beschikbaar: {0}, wilt u bijwerken?</value>
+  </data>
+  <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
+    <value>Geen updates beschikbaar</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Not_Installed" xml:space="preserve">
+    <value>protontricks is niet geïnstalleerd. Installeer protontricks om door te gaan.</value>
+  </data>
+  <data name="MessageBox_Content_Protontricks_Wineprefix_Failed" xml:space="preserve">
+    <value>Uitvoeren van wine prefix-commando's via protontricks mislukt. Kan niet doorgaan met de installatie van .NET Runtime.</value>
+  </data>
+  <data name="MessageBox_Content_ReadGameInformation_Failed" xml:space="preserve">
+    <value>Lezen van spelinformatie mislukt
+  {0}</value>
+  </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>Versie {0} kon niet worden gedownload</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>Er is geen keyring-service (secret-tool) gevonden. Uw aanmeldsessie kan niet worden opgeslagen en u moet elke keer opnieuw inloggen.</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
+    <value>Weet u zeker dat u de omgevingsvariabele MD_DIRECTORY wilt instellen?</value>
+  </data>
+  <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
+    <value>Instellen van omgevingsvariabele MD_DIRECTORY mislukt</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
+    <value>Kopieer de volgende regel en voeg deze toe aan uw /etc/environment-bestand:
+{0}</value>
+  </data>
+  <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
+    <value>Omgevingsvariabele MD_DIRECTORY succesvol ingesteld op {0}</value>
+  </data>
+  <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
+    <value>Afspelen van audio mislukt</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
+    <value>Downloaden van chart {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
+    <value>Chart {0} succesvol gedownload</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Failed" xml:space="preserve">
+    <value>Importeren van chart {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
+    <value>Chart {0} succesvol geïmporteerd</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
+    <value>{0} is geen ondersteund chart-bestand of map</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Failed" xml:space="preserve">
+    <value>Verwijderen van chart {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
+    <value>Chart {0} succesvol verwijderd</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
+    <value>{0} charts bijgewerkt, {1} mislukt</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Success" xml:space="preserve">
+    <value>{0} charts bijgewerkt</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
+    <value>Alle charts zijn up-to-date</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>Bijwerken van chart {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>Chart {0} succesvol bijgewerkt</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>Chart {0} is al up-to-date</value>
+  </data>
+  <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
+    <value>Online charts kunnen niet worden bewerkt</value>
+  </data>
+  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
+    <value>Er ontbreken {0} bestand(en) in de map van dit EPK</value>
+  </data>
+  <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
+    <value>Geen geldig EPK-bestand</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Failed" xml:space="preserve">
+    <value>Opslaan van {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
+    <value>{0} opgeslagen</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>Importeren van bibliotheek {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>Bibliotheek {0} succesvol geïmporteerd</value>
+  </data>
+  <data name="Notification_Content_Migration_None" xml:space="preserve">
+    <value>Geen MDM-charts om te migreren</value>
+  </data>
+  <data name="Notification_Content_Migration_Partial" xml:space="preserve">
+    <value>{0} CustomAlbums-charts gemigreerd, {1} mislukt</value>
+  </data>
+  <data name="Notification_Content_Migration_Success" xml:space="preserve">
+    <value>{0} CustomAlbums-charts gemigreerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
+    <value>Mod {0} is al geïmporteerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Failed" xml:space="preserve">
+    <value>Importeren van mod {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Success" xml:space="preserve">
+    <value>Mod {0} succesvol geïmporteerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
+    <value>{0} is geen ondersteund mod- of bibliotheekbestand</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_AlreadyInstalled" xml:space="preserve">
+    <value>Mod {0} is al geïnstalleerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>Installatie van mod {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
+    <value>Mod {0} succesvol geïnstalleerd</value>
+  </data>
+  <data name="Notification_Content_Mod_NotFound" xml:space="preserve">
+    <value>Mod {0} niet gevonden</value>
+  </data>
+  <data name="Notification_Content_Mod_NotInstalled" xml:space="preserve">
+    <value>Mod {0} is niet geïnstalleerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>Herinstallatie van mod {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
+    <value>Mod {0} succesvol opnieuw geïnstalleerd</value>
+  </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>Schakelen van status van mod {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>Verwijderen van mod {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
+    <value>Mod {0} succesvol verwijderd</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>{0} mods bijgewerkt, {1} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>{0} mods bijgewerkt</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>Bijwerken van mod {0} mislukt</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
+    <value>Mod {0} succesvol bijgewerkt</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
+    <value>Mod {0} is al up-to-date</value>
+  </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>Server is tijdelijk niet beschikbaar. Probeer het over een moment opnieuw.</value>
+  </data>
+  <data name="Title_Error" xml:space="preserve">
+    <value>Fout</value>
+  </data>
+  <data name="Title_Notice" xml:space="preserve">
+    <value>Mededeling</value>
+  </data>
+  <data name="Title_Success" xml:space="preserve">
+    <value>Succes</value>
+  </data>
+  <data name="Title_Warning" xml:space="preserve">
+    <value>Waarschuwing</value>
+  </data>
+</root>

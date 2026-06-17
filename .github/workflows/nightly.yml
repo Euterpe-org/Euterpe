@@ -1,0 +1,115 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: "15 1 * * *"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    name: Check for recent commits
+    runs-on: ubuntu-latest
+    outputs:
+      should_build: ${{ steps.check.outputs.should_build }}
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+      - name: Check for commits in last 24 hours
+        id: check
+        run: |
+          if [ -n "$(git log -1 --since='24 hours ago')" ]; then
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_build=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    name: Build (${{ matrix.platform.name }}-${{ matrix.platform.arch }})
+    needs: check
+    if: github.event_name == 'workflow_dispatch' || needs.check.outputs.should_build == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { os: ubuntu-latest, name: linux, arch: x64 }
+          - { os: windows-latest, name: win, arch: x64 }
+
+    runs-on: ${{ matrix.platform.os }}
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet build -c Release
+
+      - name: Test
+        run: dotnet test -c Release --no-build --report-trx
+
+      - name: Publish
+        run: dotnet publish -c Release
+
+      - name: Create archive
+        working-directory: artifacts/output
+        run: 7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip" *
+
+      - name: Upload zip
+        uses: actions/upload-artifact@v7
+        with:
+          name: nightly-${{ matrix.platform.name }}-${{ matrix.platform.arch }}
+          path: Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip
+          if-no-files-found: error
+
+  release:
+    name: Publish nightly release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+
+      - name: Capture build date
+        id: info
+        run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Download zips
+        uses: actions/download-artifact@v8
+        with:
+          pattern: nightly-*
+          path: ./dist
+          merge-multiple: true
+
+      - name: Delete previous nightly release and tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete nightly --yes --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
+
+      - name: Create nightly release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: nightly
+          name: "Nightly ${{ steps.info.outputs.date }}"
+          prerelease: true
+          make_latest: false
+          target_commitish: dev
+          body: |
+            Auto-built from `dev` on ${{ steps.info.outputs.date }} (UTC) at ${{ github.sha }}.
+          files: dist/*.zip

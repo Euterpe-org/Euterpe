@@ -2,19 +2,22 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
+        <IsAotCompatible>false</IsAotCompatible>
+        <IsPublishable>false</IsPublishable>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
         <PackageReference Include="NetArchTest.eNhancedEdition"/>
-        <PackageReference Include="RichardSzalay.MockHttp"/>
         <PackageReference Include="TUnit"/>
+        <PackageReference Include="TUnit.Mocks"/>
+        <PackageReference Include="TUnit.Mocks.Http"/>
+        <PackageReference Include="TUnit.Mocks.Logging"/>
         <PackageReference Include="Verify.TUnit"/>
-        <PackageReference Include="Rocks"/>
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\src\Euterpe\Euterpe.csproj"/>
         <ProjectReference Include="..\..\src\Euterpe.Core\Euterpe.Core.csproj"/>
     </ItemGroup>
 

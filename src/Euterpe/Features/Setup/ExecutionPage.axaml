@@ -1,0 +1,114 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:setup="using:Euterpe.Models.Setup"
+    xmlns:vm="using:Euterpe.Features.Setup"
+    x:Class="Euterpe.Features.Setup.ExecutionPage"
+    x:DataType="vm:ExecutionPageViewModel"
+    d:DesignHeight="460"
+    d:DesignWidth="850"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:ExecutionPageViewModel />
+    </Design.DataContext>
+
+    <Grid
+        Margin="28,24"
+        RowDefinitions="Auto,*,Auto">
+
+        <!--  Header  -->
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Margin="0,0,0,16"
+            Spacing="6">
+            <Image
+                Height="40"
+                HorizontalAlignment="Center"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="/Assets/Icon.png" />
+            <TextBlock
+                FontSize="20"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                Text="{Localize {x:Static loc:XAMLLiteral.Setup_Title_SettingUp}}"
+                Theme="{StaticResource TitleTextBlock}" />
+        </StackPanel>
+
+        <!--  Step List  -->
+        <Border
+            Grid.Row="1"
+            Background="{DynamicResource SecondaryCardColor}"
+            CornerRadius="10"
+            Padding="16,12"
+            Theme="{DynamicResource CardBorder}">
+            <ScrollViewer>
+                <ItemsControl
+                    ItemsSource="{Binding State.Steps}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="setup:SetupStepState">
+                            <Grid
+                                ColumnDefinitions="80,*,Auto"
+                                Margin="0,4">
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource SecondaryTextColor}"
+                                    Text="{Binding StatusDisplay}"
+                                    VerticalAlignment="Center" />
+                                <StackPanel
+                                    Grid.Column="1"
+                                    Margin="8,0"
+                                    Spacing="2"
+                                    VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontSize="13"
+                                        Text="{Binding DisplayName, Mode=OneTime}" />
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource SecondaryTextColor}"
+                                        IsVisible="{Binding Message, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                        Text="{Binding Message}"
+                                        TextWrapping="Wrap" />
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource SemiColorDanger}"
+                                        IsVisible="{Binding ErrorMessage, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                        Text="{Binding ErrorMessage}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button
+                                    Grid.Column="2"
+                                    Command="{Binding $parent[UserControl].DataContext.RetryCommand}"
+                                    CommandParameter="{Binding}"
+                                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Retry}}"
+                                    IsEnabled="{Binding !$parent[UserControl].DataContext.State.IsRunning}"
+                                    IsVisible="{Binding CanRetry}"
+                                    VerticalAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+
+        <!--  Progress  -->
+        <StackPanel
+            Grid.Row="2"
+            Margin="0,12,0,0"
+            Spacing="6">
+            <ProgressBar
+                Value="{Binding Progress, Mode=OneWay}"
+                Classes="Primary Rounded" />
+            <TextBlock
+                FontSize="12"
+                Foreground="{DynamicResource SecondaryTextColor}"
+                HorizontalAlignment="Center"
+                Text="{Binding ProgressLabel, Mode=OneWay}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

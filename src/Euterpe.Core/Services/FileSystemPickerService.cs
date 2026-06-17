@@ -4,7 +4,6 @@ namespace Euterpe.Core;
 
 internal sealed class FileSystemPickerService : IFileSystemPickerService
 {
-    [UsedImplicitly]
     public required TopLevelProxy TopLevel { get; init; }
 
     public async Task<IStorageFolder?> GetSingleFolderAsync(string dialogTitle)
@@ -52,7 +51,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle
             }).ConfigureAwait(true);
 
-        return folders is not [] ? folders.Select(x => x.TryGetLocalPath()) : null;
+        return folders is not [] ? folders.GetLocalPaths() : null;
     }
 
     public async Task<IStorageFile?> GetSingleFileAsync(string dialogTitle)
@@ -88,7 +87,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle,
                 FileTypeFilter =
                 [
-                    ..extraFileTypes ?? [],
+                    .. extraFileTypes ?? [],
                     new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }
                 ]
             }).ConfigureAwait(true);
@@ -105,11 +104,11 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle,
                 FileTypeFilter =
                 [
-                    ..extraFileTypes ?? [],
+                    .. extraFileTypes ?? [],
                     new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }
                 ]
             }).ConfigureAwait(true);
 
-        return files is not [] ? files.Select(x => x.TryGetLocalPath()) : null;
+        return files is not [] ? files.GetLocalPaths() : null;
     }
 }

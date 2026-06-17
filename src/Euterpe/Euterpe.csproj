@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-    <Import Condition="'$(IsPublishing)' == 'true'" Project="$(SolutionDir)Publish.props"/>
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Condition="'$(IsPublishing)' == 'true'" Project="..\..\Publish.props"/>
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
@@ -20,6 +20,7 @@
         <PackageReference Include="Avalonia"/>
         <PackageReference Include="Avalonia.Desktop"/>
         <PackageReference Include="Avalonia.Fonts.Inter"/>
+        <PackageReference Include="Avalonia.Labs.Gif"/>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
@@ -32,6 +33,7 @@
         <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
+        <PackageReference Include="Xaml.Behaviors.Interactions.DragAndDrop"/>
     </ItemGroup>
 
     <!-- Avalonia Diagnostics Package-->
@@ -43,7 +45,7 @@
         <ProjectReference Include="..\Euterpe.Abstractions\Euterpe.Abstractions.csproj"/>
         <ProjectReference Include="..\Euterpe.Core\Euterpe.Core.csproj"/>
         <ProjectReference Include="..\Euterpe.Generators\Euterpe.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
-        <ProjectReference Include="..\Euterpe.Styles\Euterpe.Styles.csproj"/>
+        <ProjectReference Include="..\Euterpe.Controls\Euterpe.Controls.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

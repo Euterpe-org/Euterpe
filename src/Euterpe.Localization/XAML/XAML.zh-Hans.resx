@@ -19,8 +19,17 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>应用</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>上一步</value>
+  </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>浏览...</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>检查更新</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>确认</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>帮助翻译</value>
@@ -31,14 +40,17 @@
   <data name="Button_LaunchGame" xml:space="preserve">
     <value>开始游戏</value>
   </data>
-  <data name="Button_MDMC_Website" xml:space="preserve">
-    <value>MDMC 网站</value>
+  <data name="Button_Next" xml:space="preserve">
+    <value>下一步</value>
   </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>重装</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>重新选择</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>重试</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>源代码</value>
@@ -49,17 +61,128 @@
   <data name="Button_Update" xml:space="preserve">
     <value>更新</value>
   </data>
-  <data name="ChartFilterType_Easy" xml:space="preserve">
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>预测大概定数并分析谱面 Note 信息</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>谱面分析器</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>上传并发布你的谱面</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>提交谱面</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>在本地编辑谱面的 manifest 元数据</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>离线工具</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>在 Euterpe 网站上分析、提交谱面（在浏览器中打开）</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>在线工具</value>
+  </data>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>萌新</value>
   </data>
-  <data name="ChartFilterType_Hard" xml:space="preserve">
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
     <value>高手</value>
   </data>
-  <data name="ChartFilterType_Hidden" xml:space="preserve">
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
     <value>隐藏</value>
   </data>
-  <data name="ChartFilterType_Master" xml:space="preserve">
+  <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>大触</value>
+  </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>降序</value>
+  </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>正在下载谱面</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>正在下载，请勿关闭应用，耐心等待…</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>难度</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>含视频</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>可直播</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>浏览并下载谱面</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>获取谱面</value>
+  </data>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>迁移全部 MDM 谱面</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>正在迁移谱面</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>正在迁移，请勿关闭应用，耐心等待…</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>定数</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>排序方式</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>更新全部谱面</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>由 {0} 上传</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>添加日期</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>更新日期</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>地图数量</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>定数</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>本地</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>线上</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>艺术家</value>
@@ -67,29 +190,167 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>开发者</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>继续运行</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>复制错误信息</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub 反馈</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>打开日志</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe 遇到了一个错误</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>崩溃报告</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>打开</value>
   </data>
-  <data name="Dropdown_Modded" xml:space="preserve">
-    <value>Mod 版</value>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>返回</value>
   </data>
-  <data name="Dropdown_Vanilla" xml:space="preserve">
-    <value>原版</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>添加谱师</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>曲师</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>视频透明度</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>最高 BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>最低 BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>简介</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>消息</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>定数显示覆盖</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>曲名</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>罗马音</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>适合直播</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>场景</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>彩蛋场景</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>搜索关键词</value>
+  </data>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>变速</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} 个文件 · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>请填写所有必填项后保存</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>请设置有效的速度范围（最小值 ≤ 最大值）</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>添加关键词</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>打开并编辑谱面 manifest.epk 的元数据</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>定数</value>
+  </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>此谱面引用的 {0} 个文件在其文件夹中缺失</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>新建 EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>从一个放好素材的文件夹创建新谱面</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>打开 EPK 文件…</value>
+  </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>谱面信息</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>描述与发现</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>隐藏难度</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>基本信息</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>地图</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>应用日志文件夹</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>自制谱文件夹</value>
+  <data name="Folder_GameLogs" xml:space="preserve">
+    <value>游戏日志文件夹</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>模组文件夹</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>打开本地谱文件夹</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>打开线上谱文件夹</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>配置文件夹</value>
   </data>
   <data name="Folder_UserLibs" xml:space="preserve">
     <value>依赖文件夹</value>
+  </data>
+  <data name="GameMode_Modded" xml:space="preserve">
+    <value>Mod 版</value>
+  </data>
+  <data name="GameMode_Vanilla" xml:space="preserve">
+    <value>原版</value>
   </data>
   <data name="HomePage_Button_GitHubStar" xml:space="preserve">
     <value>点个 Star</value>
@@ -103,8 +364,14 @@
   <data name="HomePage_SupportTitle" xml:space="preserve">
     <value>100% 免费 · 开源</value>
   </data>
+  <data name="HyperLinkButton_LearnMore" xml:space="preserve">
+    <value>查看详情</value>
+  </data>
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>访问</value>
+  </data>
+  <data name="InitializingMessage" xml:space="preserve">
+    <value>初始化中...</value>
   </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>加载中...</value>
@@ -120,9 +387,6 @@
   </data>
   <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
     <value>未安装</value>
-  </data>
-  <data name="MelonLoader_State_Preparing" xml:space="preserve">
-    <value>准备中...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>模组开发所需</value>
@@ -186,6 +450,9 @@
   </data>
   <data name="ModInfo_Details" xml:space="preserve">
     <value>详情</value>
+  </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>不兼容的模组</value>
   </data>
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>仓库</value>
@@ -296,7 +563,7 @@
     <value>Steam 应用所在文件夹</value>
   </data>
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
-    <value>检查 euterpe 更新的频道</value>
+    <value>Euterpe 的更新频道</value>
   </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>始终显示滚动条</value>
@@ -331,6 +598,129 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>稳定版</value>
   </data>
+  <data name="Setup_Description_GamePath" xml:space="preserve">
+    <value>请告诉我们游戏安装在哪里</value>
+  </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>不是有效的游戏文件夹</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
+    <value>Euterpe 与 MDMC（Muse Dash Modding Community）生态不兼容。继续使用 Euterpe 将难以回退到 MDMC 生态，Headquarters（MDMC 排行榜）也将被 Euterpe 排行榜取代。继续后，非 Euterpe 的模组或谱面管理器（例如喵斯兔 MuseDashTOOL）将无法正常运作。</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
+    <value>与 MDMC 生态不兼容</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
+    <value>请先花点时间读一读下面的说明，然后选择你的游戏文件夹</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
+    <value>开始之前</value>
+  </data>
+  <data name="Setup_Progress_EssentialModsInstalled" xml:space="preserve">
+    <value>必备模组安装完成</value>
+  </data>
+  <data name="Setup_Progress_InitializingEssentialMods" xml:space="preserve">
+    <value>正在初始化必备模组……</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
+    <value>正在安装 .NET 运行时……</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
+    <value>正在安装 .NET SDK……</value>
+  </data>
+  <data name="Setup_Progress_InstallingMelonLoader" xml:space="preserve">
+    <value>正在安装 MelonLoader……</value>
+  </data>
+  <data name="Setup_Progress_InstallingModTemplate" xml:space="preserve">
+    <value>正在安装模组模板……</value>
+  </data>
+  <data name="Setup_Progress_MigratingCharts" xml:space="preserve">
+    <value>正在迁移 CustomAlbums 谱面……</value>
+  </data>
+  <data name="Setup_Progress_SettingEnvVariable" xml:space="preserve">
+    <value>正在设置环境变量……</value>
+  </data>
+  <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
+    <value>正在卸载不兼容的模组：{0}……</value>
+  </data>
+  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
+    <value>正在升级 MelonLoader {0} → {1}……</value>
+  </data>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
+    <value>待执行</value>
+  </data>
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
+    <value>进行中</value>
+  </data>
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Setup_Step_Failed" xml:space="preserve">
+    <value>执行失败，请查看日志或重试</value>
+  </data>
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
+    <value>制谱工具 (MDBMSC)</value>
+  </data>
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
+    <value>MDM 谱面制作工具包</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
+    <value>.NET 运行时</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
+    <value>运行模组化游戏所需</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>模组开发必需</value>
+  </data>
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY 变量</value>
+  </data>
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
+    <value>设置游戏路径环境变量</value>
+  </data>
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
+    <value>必备模组</value>
+  </data>
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
+    <value>获得最佳体验的核心模组</value>
+  </data>
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
+    <value>必需的模组加载器框架</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>迁移旧版数据</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>将 CustomAlbums 等旧版模组中的谱面转换为 Euterpe 格式</value>
+  </data>
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
+    <value>模组模板</value>
+  </data>
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
+    <value>用于新模组项目的 NuGet 模板</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
+    <value>卸载冲突</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>移除不兼容的模组</value>
+  </data>
+  <data name="Setup_Title_GamePath" xml:space="preserve">
+    <value>定位游戏文件夹</value>
+  </data>
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
+    <value>正在设置 Euterpe</value>
+  </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>编辑 Mod 配置</value>
   </data>
@@ -351,5 +741,38 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>西班牙语</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>选择你的角色和任务以开始</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>谱师</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>推荐谱面制作者使用</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>自定义你的设置</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>模组开发者</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>推荐模组开发者使用</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>推荐普通玩家使用</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>任务</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>欢迎使用 Euterpe</value>
   </data>
 </root>

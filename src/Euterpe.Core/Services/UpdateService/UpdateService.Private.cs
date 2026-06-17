@@ -1,4 +1,6 @@
-﻿namespace Euterpe.Core;
+using Ursa.Controls;
+
+namespace Euterpe.Core;
 
 internal sealed partial class UpdateService
 {
@@ -10,7 +12,7 @@ internal sealed partial class UpdateService
             return false;
         }
 
-        if (releaseVersion.ComparePrecedenceTo(_currentVersion) <= 0)
+        if (releaseVersion.ComparePrecedenceTo(CurrentVersion) <= 0)
         {
             Logger.ZLogInformation($"No new version available");
             return false;
@@ -35,15 +37,45 @@ internal sealed partial class UpdateService
         return updateTempPath;
     }
 
-    private async Task StartUpdateProcessAsync(string version, CancellationToken cancellationToken = default)
+    private async Task<bool> HandleReleaseAsync(UpdateTarget? target, CancellationToken cancellationToken = default)
+    {
+        if (target is null)
+        {
+            return false;
+        }
+
+        Logger.ZLogInformation($"Release version parsed: {target.Version}");
+
+        var shouldUpdate = await ShouldUpdateAsync(target.Version).ConfigureAwait(false);
+        if (!shouldUpdate)
+        {
+            return false;
+        }
+
+        await StartUpdateProcessAsync(target, cancellationToken).ConfigureAwait(false);
+        Environment.Exit(0);
+        return true;
+    }
+
+    private async Task StartUpdateProcessAsync(UpdateTarget target, CancellationToken cancellationToken = default)
     {
         var updateFolder = GetUpdateTempPath();
-        var updaterTargetPath = Path.Combine(updateFolder, PlatformService.UpdaterFileName);
+        var updaterTargetPath = Path.Combine(updateFolder, PlatformInfo.UpdaterFileName);
 
-        await DownloadManager.DownloadReleaseByTagAsync(version, PlatformService.RuntimeIdentifier, updateFolder, cancellationToken).ConfigureAwait(false);
-        Logger.ZLogInformation($"Release {version} download finished");
+        try
+        {
+            await AppDownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder, cancellationToken).ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Failed to download release {target.Version}");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_ReleaseDownload_Failed, target.Version).ConfigureAwait(true);
+            return;
+        }
 
-        File.Copy(PlatformService.UpdaterFileName, updaterTargetPath, true);
+        Logger.ZLogInformation($"Release {target.Version} download finished");
+
+        File.Copy(PlatformInfo.UpdaterFileName, updaterTargetPath, true);
 
         Logger.ZLogInformation($"Starting updater process");
         Process.Start(
@@ -55,4 +87,6 @@ internal sealed partial class UpdateService
                 UseShellExecute = false
             });
     }
+
+    private sealed record UpdateTarget(SemVersion Version, string DownloadUrl);
 }

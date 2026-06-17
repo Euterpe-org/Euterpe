@@ -1,5 +1,7 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Threading;
 
 namespace Euterpe.Core.Utils;
 
@@ -11,13 +13,32 @@ public static class DesktopUtils
         return app ?? throw new InvalidOperationException("Application is null.");
     }
 
-    public static IClassicDesktopStyleApplicationLifetime GetCurrentDesktop()
+    public static IClassicDesktopStyleApplicationLifetime GetCurrentDesktop() =>
+        GetCurrentApplication().ApplicationLifetime as IClassicDesktopStyleApplicationLifetime
+        ?? throw new InvalidOperationException("Desktop is null.");
+
+    public static Window GetCurrentMainWindow()
     {
-        if (GetCurrentApplication().ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
+        var mainWindow = GetCurrentDesktop().MainWindow;
+        return mainWindow ?? throw new InvalidOperationException("MainWindow is null.");
+    }
+
+    public static void ActivateMainWindow(bool force = false)
+    {
+        var mainWindow = GetCurrentMainWindow();
+        if (mainWindow.WindowState is WindowState.Minimized)
         {
-            throw new InvalidOperationException("Desktop is null.");
+            mainWindow.WindowState = WindowState.Normal;
         }
 
-        return desktop;
+        // This forces window to show at front when using DeepLink
+        if (force)
+        {
+            mainWindow.Topmost = true;
+            mainWindow.Topmost = false;
+        }
+
+        // window.Activate() must be called on UI thread, otherwise it won't work with tray icon
+        Dispatcher.UIThread.Post(mainWindow.Activate);
     }
 }

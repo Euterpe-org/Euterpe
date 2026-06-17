@@ -1,0 +1,48 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:models="using:Euterpe.Controls.Models">
+
+    <Design.PreviewWith>
+        <e:NavPanelList />
+    </Design.PreviewWith>
+
+    <Style
+        Selector="e|NavPanelList">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ItemsPresenter
+                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel
+                    Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <DataTemplate
+                x:DataType="models:NavItem">
+                <Label
+                    Content="{Binding DisplayName.Value, Mode=OneWay}"
+                    Theme="{StaticResource BorderlessButton}"
+                    VerticalAlignment="Center" />
+            </DataTemplate>
+        </Setter>
+    </Style>
+
+    <Style
+        Selector="e|NavPanelList ListBoxItem">
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Margin" Value="5,2" />
+        <Setter Property="Padding" Value="12,4" />
+        <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonUncheckedForeground}" />
+    </Style>
+    <Style
+        Selector="e|NavPanelList ListBoxItem:selected Label">
+        <Setter Property="Foreground" Value="{DynamicResource RadioButtonButtonCheckedForeground}" />
+    </Style>
+
+</Styles>

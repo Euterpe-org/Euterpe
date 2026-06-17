@@ -1,0 +1,56 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.Features.Setting"
+    x:Class="Euterpe.Features.Setting.SettingPage"
+    x:DataType="vm:SettingPageViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:SettingPageViewModel />
+    </Design.DataContext>
+
+    <Grid
+        RowDefinitions="Auto, *">
+        <Border
+            Grid.Row="0"
+            Classes="WinMainNav">
+            <Panel>
+                <e:NavPanelList
+                    ItemsSource="{Binding NavItems, Mode=OneTime}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+            </Panel>
+        </Border>
+        <ContentControl
+            Grid.Row="1"
+            Content="{Binding Content, Mode=OneWay}"
+            Margin="0,10,10,10">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type vm:AboutPanelViewModel}">
+                    <vm:AboutPanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:AppearancePanelViewModel}">
+                    <vm:AppearancePanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:ExperiencePanelViewModel}">
+                    <vm:ExperiencePanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:FileManagementPanelViewModel}">
+                    <vm:FileManagementPanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:DownloadPanelViewModel}">
+                    <vm:DownloadPanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:AdvancedPanelViewModel}">
+                    <vm:AdvancedPanel />
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+    </Grid>
+
+</UserControl>

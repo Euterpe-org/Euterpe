@@ -1,4 +1,5 @@
-﻿global using System.Xml;
+global using System.Text;
+global using System.Xml;
 global using System.Xml.Linq;
 global using JetBrains.Annotations;
 global using Microsoft.Build.Framework;

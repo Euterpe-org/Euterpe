@@ -6,7 +6,38 @@
   "baseBranchPatterns": [
     "dev"
   ],
+  "useBaseBranchConfig": "merge",
   "extends": [
     "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track NuGet versions from *Version properties in Directory.Packages.props",
+      "managerFilePatterns": [
+        "Directory.Packages.props"
+      ],
+      "matchStrings": [
+        "<(?<depName>[A-Za-z0-9_.-]+)Version>(?<currentValue>[^<]+)</[A-Za-z0-9_.-]+Version>"
+      ],
+      "datasourceTemplate": "nuget",
+      "versioningTemplate": "nuget"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
+    },
+    {
+      "matchPackageNames": [
+        "Meziantou.Analyzer"
+      ],
+      "schedule": [
+        "* * 1 * *"
+      ]
+    }
   ]
 }

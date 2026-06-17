@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Core.Logger;
+namespace Euterpe.Core.Logger;
 
 internal static class AnsiEscapeColors
 {

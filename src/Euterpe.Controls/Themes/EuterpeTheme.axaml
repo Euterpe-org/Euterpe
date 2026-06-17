@@ -1,0 +1,57 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:semi="https://irihi.tech/semi"
+    x:Class="Euterpe.Controls.EuterpeTheme">
+    <semi:SemiTheme />
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceInclude
+                    x:Key="Light"
+                    Source="/Themes/Resources/LightResource.axaml" />
+                <ResourceInclude
+                    x:Key="Dark"
+                    Source="/Themes/Resources/DarkResource.axaml" />
+            </ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude
+                    Source="/Themes/Resources/SharedResource.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+    <!--  Controls  -->
+    <StyleInclude
+        Source="/Themes/Controls/AsyncImage.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/ContributorCard.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/Difficulty.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/LabeledSection.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/NavButtonList.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/NavPanelList.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/PlayButton.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/RoleCard.axaml" />
+    <StyleInclude
+        Source="/Themes/Controls/WrapVirtualizer.axaml" />
+    <!--  Control Styles  -->
+    <StyleInclude
+        Source="/Themes/ControlStyles/BorderStyles.axaml" />
+    <StyleInclude
+        Source="/Themes/ControlStyles/ButtonStyles.axaml" />
+    <StyleInclude
+        Source="/Themes/ControlStyles/LabelStyles.axaml" />
+    <StyleInclude
+        Source="/Themes/ControlStyles/ProgressBarStyles.axaml" />
+    <StyleInclude
+        Source="/Themes/ControlStyles/StackPanelStyles.axaml" />
+    <StyleInclude
+        Source="/Themes/ControlStyles/TextBlockStyles.axaml" />
+    <StyleInclude
+        Source="/Themes/ControlStyles/TextBoxStyles.axaml" />
+</Styles>

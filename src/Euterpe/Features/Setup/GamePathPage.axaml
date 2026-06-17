@@ -1,0 +1,111 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:Euterpe.Features.Setup"
+    x:Class="Euterpe.Features.Setup.GamePathPage"
+    x:DataType="vm:GamePathPageViewModel"
+    d:DesignHeight="460"
+    d:DesignWidth="850"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:GamePathPageViewModel />
+    </Design.DataContext>
+
+    <Grid
+        Margin="28,24"
+        RowDefinitions="Auto,*">
+
+        <!--  Header  -->
+        <StackPanel
+            Grid.Row="0"
+            Margin="0,0,0,24"
+            Spacing="4">
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="12">
+                <Image
+                    Height="36"
+                    RenderOptions.BitmapInterpolationMode="HighQuality"
+                    Source="/Assets/Icon.png" />
+                <TextBlock
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_WelcomeTitle}}"
+                    Theme="{StaticResource TitleTextBlock}"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+            <TextBlock
+                Foreground="{DynamicResource SecondaryTextColor}"
+                Margin="48,0,0,0"
+                Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_WelcomeSubtitle}}" />
+        </StackPanel>
+
+        <!--  Body  -->
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            MaxWidth="560"
+            Spacing="14"
+            VerticalAlignment="Center">
+
+            <!--  MDMC compatibility warning  -->
+            <u:Banner
+                CanClose="False"
+                CornerRadius="8"
+                Header="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning_Title}}"
+                Type="Warning">
+                <StackPanel
+                    Spacing="8">
+                    <TextBlock
+                        Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_MdmcWarning}}"
+                        TextWrapping="Wrap" />
+                    <HyperlinkButton
+                        Classes="WithIcon Underline"
+                        Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_LearnMore}}"
+                        HorizontalAlignment="Left"
+                        NavigateUri="https://euterpe-org.com/docs/ecosystem/from-mdmc" />
+                </StackPanel>
+            </u:Banner>
+
+            <!--  Game folder picker  -->
+            <StackPanel
+                Spacing="6">
+                <TextBlock
+                    FontWeight="SemiBold"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MuseDashFolder}}" />
+                <Grid
+                    ColumnDefinitions="*,Auto">
+                    <Border
+                        Grid.Column="0"
+                        Background="{DynamicResource SecondaryCardColor}"
+                        CornerRadius="6"
+                        Margin="0,0,8,0"
+                        Padding="12,8"
+                        Theme="{DynamicResource CardBorder}">
+                        <TextBlock
+                            FontSize="12"
+                            Text="{Binding SelectedFolder}"
+                            TextTrimming="CharacterEllipsis"
+                            VerticalAlignment="Center" />
+                    </Border>
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding BrowseCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.Button_Browse}}" />
+                </Grid>
+
+                <!--  Validation message  -->
+                <TextBlock
+                    FontSize="12"
+                    Foreground="{DynamicResource SemiColorDanger}"
+                    IsVisible="{Binding ShowInvalidMessage}"
+                    Text="{Localize {x:Static loc:XAMLLiteral.Setup_GamePath_Invalid}}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

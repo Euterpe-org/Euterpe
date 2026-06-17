@@ -1,0 +1,71 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:setup="using:Euterpe.Features.Setup"
+    xmlns:svm="using:Euterpe.Features.Setup"
+    xmlns:vm="using:Euterpe.Features.Wizard"
+    xmlns:wizard="using:Euterpe.Features.Wizard"
+    xmlns:wvm="using:Euterpe.Features.Wizard"
+    x:Class="Euterpe.Features.Wizard.WizardDialog"
+    x:DataType="vm:WizardDialogViewModel"
+    d:DesignHeight="520"
+    d:DesignWidth="850"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:WizardDialogViewModel />
+    </Design.DataContext>
+
+    <Grid
+        Height="520"
+        RowDefinitions="*,Auto"
+        Width="850">
+
+        <TransitioningContentControl
+            Grid.Row="0"
+            Content="{Binding CurrentPage}">
+            <TransitioningContentControl.DataTemplates>
+                <DataTemplate
+                    DataType="{x:Type svm:GamePathPageViewModel}">
+                    <setup:GamePathPage />
+                </DataTemplate>
+                <DataTemplate
+                    DataType="{x:Type wvm:RolePageViewModel}">
+                    <wizard:RolePage />
+                </DataTemplate>
+                <DataTemplate
+                    DataType="{x:Type svm:ExecutionPageViewModel}">
+                    <setup:ExecutionPage />
+                </DataTemplate>
+            </TransitioningContentControl.DataTemplates>
+        </TransitioningContentControl>
+
+        <!--  Bottom Bar  -->
+        <Border
+            Grid.Row="1"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,1,0,0"
+            Padding="28,15">
+            <DockPanel>
+                <Button
+                    DockPanel.Dock="Right"
+                    Classes="Primary"
+                    Command="{Binding NextCommand}"
+                    Content="{Binding CurrentPage.NextButtonText}"
+                    IsDefault="True"
+                    IsEnabled="{Binding CurrentPage.CanGoNext}" />
+                <Button
+                    DockPanel.Dock="Right"
+                    Command="{Binding BackCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.Button_Back}}"
+                    IsVisible="{Binding CanGoBack}"
+                    Margin="0,0,8,0" />
+
+                <Panel />
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

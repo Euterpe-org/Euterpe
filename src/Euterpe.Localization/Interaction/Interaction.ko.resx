@@ -16,6 +16,9 @@
   <data name="FileDialog_Title_ChooseChartFile" xml:space="preserve">
     <value>채보 파일 선택</value>
   </data>
+  <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
+    <value>EPK 파일 선택</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>Steam 실행 파일 선택</value>
   </data>
@@ -40,33 +43,17 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>네</value>
   </data>
-  <data name="MessageBox_Content_ChooseMuseDashFolder" xml:space="preserve">
-    <value>Muse Dash 폴더를 선택해 주세요
-이 컴퓨터에 Muse Dash가 설치되어 있나요?</value>
-  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Steam 실행 파일을 선택해 주세요</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
     <value>Steam 폴더를 선택해 주세요</value>
   </data>
-  <data name="MessageBox_Content_Confirm_DetectedMuseDashPath" xml:space="preserve">
-    <value>감지된 Muse Dash 폴더 경로:
-{0}
-올바른 게임 폴더가 맞나요?</value>
+  <data name="MessageBox_Content_CrashDialog_CopyFailed" xml:space="preserve">
+    <value>오류 세부 정보를 클립보드에 복사하지 못했습니다.</value>
   </data>
-  <data name="MessageBox_Content_DeleteFile_Failed" xml:space="preserve">
-    <value>{0} 삭제에 실패했습니다</value>
-  </data>
-  <data name="MessageBox_Content_DeleteMelonLoaderFolder_Failed" xml:space="preserve">
-    <value>MelonLoader 폴더 삭제에 실패했습니다</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install" xml:space="preserve">
-    <value>.NET 6 Runtime을 찾을 수 없습니다
-확인을 클릭하여 설치합니다</value>
-  </data>
-  <data name="MessageBox_Content_DotNetRuntime_Install_Failed" xml:space="preserve">
-    <value>.NET 6 Runtime 설치에 실패했습니다</value>
+  <data name="MessageBox_Content_CrashDialog_CopySuccess" xml:space="preserve">
+    <value>오류 세부 정보가 클립보드에 복사되었습니다.</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
     <value>.NET SDK를 설치하시겠습니까?</value>
@@ -74,8 +61,17 @@
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>.NET 10 SDK 설치에 실패했습니다</value>
   </data>
+  <data name="MessageBox_Content_DotNetSDK_Install_Success" xml:space="preserve">
+    <value>.NET 10 SDK가 설치되었습니다</value>
+  </data>
+  <data name="MessageBox_Content_Epk_Discard_Confirm" xml:space="preserve">
+    <value>저장하지 않은 변경 내용을 버리시겠습니까?</value>
+  </data>
   <data name="MessageBox_Content_InvalidPath" xml:space="preserve">
     <value>선택한 경로가 올바르지 않습니다. 다시 선택해 주세요</value>
+  </data>
+  <data name="MessageBox_Content_Login_Failed" xml:space="preserve">
+    <value>로그인에 실패했습니다. 다시 시도하시겠습니까? 아니요를 선택하면 Euterpe가 종료됩니다.</value>
   </data>
   <data name="MessageBox_Content_MdmFile_Create_Failed" xml:space="preserve">
     <value>MDM 파일 생성에 실패했습니다</value>
@@ -89,24 +85,17 @@
   <data name="MessageBox_Content_MdmFile_Extract_Success" xml:space="preserve">
     <value>MDM 파일이 추출되었습니다</value>
   </data>
-  <data name="MessageBox_Content_MelonLoader_DeleteZip_Failed" xml:space="preserve">
-    <value>{0}의 MelonLoader.zip을 삭제할 수 없습니다
-직접 삭제해 주세요</value>
-  </data>
   <data name="MessageBox_Content_MelonLoader_Install_Failed" xml:space="preserve">
-    <value>MelonLoader 설치에 실패했습니다: {0}</value>
+    <value>MelonLoader 설치에 실패했습니다</value>
   </data>
   <data name="MessageBox_Content_MelonLoader_Install_Success" xml:space="preserve">
     <value>MelonLoader가 설치되었습니다</value>
   </data>
+  <data name="MessageBox_Content_MelonLoader_Uninstall_Failed" xml:space="preserve">
+    <value>MelonLoader 제거에 실패했습니다</value>
+  </data>
   <data name="MessageBox_Content_MelonLoader_Uninstall_Success" xml:space="preserve">
     <value>MelonLoader가 제거되었습니다</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Unzip_Failed" xml:space="preserve">
-    <value>MelonLoader 압축 해제에 실패했습니다</value>
-  </data>
-  <data name="MessageBox_Content_MelonLoader_Zip_NotFound" xml:space="preserve">
-    <value>MelonLoader zip 파일을 찾을 수 없습니다</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Install" xml:space="preserve">
     <value>모드 템플릿을 설치하시겠습니까?</value>
@@ -114,11 +103,17 @@
   <data name="MessageBox_Content_ModTemplate_Install_Failed" xml:space="preserve">
     <value>모드 템플릿 설치에 실패했습니다</value>
   </data>
+  <data name="MessageBox_Content_ModTemplate_Install_Success" xml:space="preserve">
+    <value>모드 템플릿이 설치되었습니다</value>
+  </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall" xml:space="preserve">
     <value>모드 템플릿을 제거하시겠습니까?</value>
   </data>
   <data name="MessageBox_Content_ModTemplate_Uninstall_Failed" xml:space="preserve">
     <value>모드 템플릿 제거에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_ModTemplate_Uninstall_Success" xml:space="preserve">
+    <value>모드 템플릿이 제거되었습니다</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
     <value>새 버전 {0}을(를) 사용할 수 있습니다. 업그레이드하시겠습니까?</value>
@@ -136,6 +131,12 @@
     <value>게임 정보 읽기에 실패했습니다
   {0}</value>
   </data>
+  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
+    <value>버전 {0} 다운로드에 실패했습니다</value>
+  </data>
+  <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
+    <value>키링 서비스(secret-tool)를 찾을 수 없습니다. 로그인 세션을 저장할 수 없으며, 매번 다시 로그인해야 합니다.</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>환경 변수 MD_DIRECTORY를 설정하시겠습니까?</value>
   </data>
@@ -149,17 +150,137 @@
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>환경 변수 MD_DIRECTORY가 {0}(으)로 설정되었습니다</value>
   </data>
+  <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
+    <value>오디오 재생에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
+    <value>채보 {0} 다운로드에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Download_Success" xml:space="preserve">
+    <value>채보 {0}이(가) 다운로드되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Failed" xml:space="preserve">
+    <value>채보 {0} 가져오기에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
+    <value>채보 {0}을(를) 가져왔습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
+    <value>{0}은(는) 지원되는 채보 파일 또는 폴더가 아닙니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Failed" xml:space="preserve">
+    <value>채보 {0} 삭제에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
+    <value>채보 {0}이(가) 삭제되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
+    <value>채보 {0}개가 업데이트되었고, {1}개가 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_Success" xml:space="preserve">
+    <value>채보 {0}개가 업데이트되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_UpdateAll_UpToDate" xml:space="preserve">
+    <value>모든 채보가 최신 버전입니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Failed" xml:space="preserve">
+    <value>채보 {0} 업데이트에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_Success" xml:space="preserve">
+    <value>채보 {0}이(가) 업데이트되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Update_UpToDate" xml:space="preserve">
+    <value>채보 {0}은(는) 이미 최신 버전입니다</value>
+  </data>
+  <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
+    <value>온라인 채보는 편집할 수 없습니다</value>
+  </data>
+  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
+    <value>이 EPK에서 참조하는 파일 {0}개가 해당 폴더에 없습니다</value>
+  </data>
+  <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
+    <value>유효한 EPK 파일이 아닙니다</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Failed" xml:space="preserve">
+    <value>{0} 저장에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Epk_Save_Success" xml:space="preserve">
+    <value>{0}이(가) 저장되었습니다</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Failed" xml:space="preserve">
+    <value>라이브러리 {0} 가져오기에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Lib_Import_Success" xml:space="preserve">
+    <value>라이브러리 {0}을(를) 가져왔습니다</value>
+  </data>
+  <data name="Notification_Content_Migration_None" xml:space="preserve">
+    <value>마이그레이션할 MDM 채보가 없습니다</value>
+  </data>
+  <data name="Notification_Content_Migration_Partial" xml:space="preserve">
+    <value>CustomAlbums 채보 {0}개가 마이그레이션되었고, {1}개가 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Migration_Success" xml:space="preserve">
+    <value>CustomAlbums 채보 {0}개를 마이그레이션했습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Duplicated" xml:space="preserve">
+    <value>모드 {0}은(는) 이미 가져왔습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Failed" xml:space="preserve">
+    <value>모드 {0} 가져오기에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Success" xml:space="preserve">
+    <value>모드 {0}을(를) 가져왔습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Import_Unsupported" xml:space="preserve">
+    <value>{0}은(는) 지원되는 모드 또는 라이브러리 파일이 아닙니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_AlreadyInstalled" xml:space="preserve">
+    <value>모드 {0}은(는) 이미 설치되어 있습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
+    <value>모드 {0} 설치에 실패했습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>모드 {0}이(가) 설치되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_NotFound" xml:space="preserve">
+    <value>모드 {0}을(를) 찾을 수 없습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_NotInstalled" xml:space="preserve">
+    <value>모드 {0}이(가) 설치되어 있지 않습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Reinstall_Failed" xml:space="preserve">
+    <value>모드 {0} 재설치에 실패했습니다</value>
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>모드 {0}이(가) 재설치되었습니다</value>
   </data>
+  <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
+    <value>모드 {0} 상태 전환에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Uninstall_Failed" xml:space="preserve">
+    <value>모드 {0} 제거에 실패했습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Uninstall_Success" xml:space="preserve">
     <value>모드 {0}이(가) 제거되었습니다</value>
   </data>
+  <data name="Notification_Content_Mod_UpdateAll_Partial" xml:space="preserve">
+    <value>모드 {0}개가 업데이트되었고, {1}개가 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_UpdateAll_Success" xml:space="preserve">
+    <value>모드 {0}개가 업데이트되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_Failed" xml:space="preserve">
+    <value>모드 {0} 업데이트에 실패했습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Update_Success" xml:space="preserve">
     <value>모드 {0}이(가) 업데이트되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Update_UpToDate" xml:space="preserve">
+    <value>모드 {0}은(는) 이미 최신 버전입니다</value>
+  </data>
+  <data name="Notification_Content_Server_Error" xml:space="preserve">
+    <value>서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 시도해 주세요.</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>오류</value>

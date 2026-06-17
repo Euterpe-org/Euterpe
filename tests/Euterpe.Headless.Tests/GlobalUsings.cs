@@ -1,0 +1,10 @@
+global using Avalonia;
+global using Avalonia.Controls;
+global using Avalonia.Headless;
+global using Avalonia.Media;
+global using Avalonia.Threading;
+global using Avalonia.VisualTree;
+global using Euterpe.Controls;
+global using Euterpe.Headless.Tests.TestSupport;
+global using JetBrains.Annotations;
+global using TUnit.Core;

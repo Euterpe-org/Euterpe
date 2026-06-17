@@ -1,4 +1,4 @@
-﻿using ValveKeyValue;
+using ValveKeyValue;
 
 namespace Euterpe.Core;
 

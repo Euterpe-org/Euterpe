@@ -1,0 +1,38 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.Features.Charting"
+    x:Class="Euterpe.Features.Charting.ProgressDialog"
+    x:DataType="vm:ProgressDialogViewModel"
+    d:DesignWidth="380"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:ProgressDialogViewModel />
+    </Design.DataContext>
+
+    <StackPanel
+        Margin="28,24"
+        Spacing="14"
+        Width="380">
+        <TextBlock
+            Foreground="{DynamicResource SecondaryTextColor}"
+            HorizontalAlignment="Center"
+            IsVisible="{Binding Hint, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+            Text="{Binding Hint, Mode=OneWay}"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+        <ProgressBar
+            Classes="Primary Rounded"
+            IsIndeterminate="{Binding IsIndeterminate, Mode=OneWay}"
+            Value="{Binding Progress, Mode=OneWay}" />
+        <TextBlock
+            FontSize="12"
+            Foreground="{DynamicResource SecondaryTextColor}"
+            HorizontalAlignment="Center"
+            IsVisible="{Binding !IsIndeterminate, Mode=OneWay}"
+            Text="{Binding ProgressLabel, Mode=OneWay}" />
+    </StackPanel>
+</UserControl>

@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
     <PropertyGroup>
         <AssemblyPath>$(ExternalBuildsFolder)$(MSBuildThisFileName).dll</AssemblyPath>
     </PropertyGroup>
@@ -7,7 +7,7 @@
         <MSBuild Projects="..\Euterpe.Tasks\Euterpe.Tasks.csproj" Targets="Build"/>
     </Target>
 
-    <UsingTask TaskName="$(MSBuildThisFileName).GenerateStyles"
+    <UsingTask TaskName="$(MSBuildThisFileName).GenerateTheme"
                AssemblyFile="$(AssemblyPath)"
                Runtime="NET"
                TaskFactory="TaskHostFactory"/>

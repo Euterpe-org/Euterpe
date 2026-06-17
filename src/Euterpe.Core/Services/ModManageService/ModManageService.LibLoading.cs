@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using AsyncAwaitBestPractices;
 
 namespace Euterpe.Core;
@@ -8,29 +8,25 @@ internal sealed partial class ModManageService
     private async Task LoadLibsAsync()
     {
         _libsDict = new ConcurrentDictionary<string, LibDto>(
-            (await LocalService.GetLibFilePaths()
-                .WhenAllAsync(LocalService.LoadLibFromPathAsync!).ConfigureAwait(false))
-            .Select(x => new KeyValuePair<string, LibDto>(x!.Name, x)));
+            (await ModLocalService.GetLibFilePaths()
+                .WhenAllAsync(ModLocalService.LoadLibFromPathAsync).ConfigureAwait(false))
+            .Select(x => KeyValuePair.Create(x.Name, x)));
 
-        await foreach (var webLib in DownloadManager.GetLibListAsync().ConfigureAwait(false))
+        foreach (var webLib in await GameDownloadManager.FetchLibListAsync().ConfigureAwait(false))
         {
-            if (webLib is null)
+            if (_libsDict.TryGetValue(webLib.Slug, out var localLib))
             {
-                continue;
-            }
-
-            if (_libsDict.TryGetValue(webLib.Name, out var localLib))
-            {
-                if (localLib.SHA256 == webLib.SHA256)
+                var webLibDto = webLib.ToModel();
+                if (localLib.SHA256 == webLibDto.SHA256)
                 {
                     continue;
                 }
 
-                DownloadLibAsync(webLib.ToDto()).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Name} failed"));
+                DownloadLibAsync(webLibDto).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Slug} failed"));
             }
             else
             {
-                _libsDict[webLib.Name] = webLib.ToDto();
+                _libsDict[webLib.Slug] = webLib.ToModel();
             }
         }
 
@@ -51,10 +47,13 @@ internal sealed partial class ModManageService
         }
     }
 
-    private async Task DownloadLibAsync(LibDto lib)
+    private Task DownloadLibAsync(LibDto lib) =>
+        _singleFlight.RunAsync(lib.Name, () => DownloadLibCoreAsync(lib));
+
+    private async Task DownloadLibCoreAsync(LibDto lib)
     {
-        await DownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
-        _libsDict[lib.Name] = await LocalService.LoadLibFromPathAsync(Path.Combine(Config.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
+        await GameDownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
+        _libsDict[lib.Name] = await ModLocalService.LoadLibFromPathAsync(Path.Combine(GameConfig.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
         Logger.ZLogInformation($"Lib {lib.Name} download finished");
     }
 }

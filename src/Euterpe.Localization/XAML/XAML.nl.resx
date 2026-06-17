@@ -1,0 +1,772 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <schema />
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllGameVersionCompatible" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="Button_Apply" xml:space="preserve">
+    <value>Toepassen</value>
+  </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>Bladeren...</value>
+  </data>
+  <data name="Button_CheckUpdate" xml:space="preserve">
+    <value>Controleer Update</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Bevestigen</value>
+  </data>
+  <data name="Button_HelpTranslate" xml:space="preserve">
+    <value>Help Vertalen</value>
+  </data>
+  <data name="Button_Install" xml:space="preserve">
+    <value>Installeren</value>
+  </data>
+  <data name="Button_LaunchGame" xml:space="preserve">
+    <value>Spelen</value>
+  </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="Button_Reinstall" xml:space="preserve">
+    <value>Opnieuw installeren</value>
+  </data>
+  <data name="Button_Reselect" xml:space="preserve">
+    <value>Opnieuw selecteren</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Opnieuw</value>
+  </data>
+  <data name="Button_SourceCode" xml:space="preserve">
+    <value>Broncode</value>
+  </data>
+  <data name="Button_Uninstall" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Button_Update" xml:space="preserve">
+    <value>Bijwerken</value>
+  </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Voorspel bij benadering de niveaus en analyseer de Note-opbouw van een chart</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Upload en publiceer je chart</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Chart indienen</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Bewerk de manifest-metadata van een chart lokaal</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Offline-tools</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Analyseer en dien charts in op de Euterpe-site (opent in je browser)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Online-tools</value>
+  </data>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
+    <value>Makkelijk</value>
+  </data>
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
+    <value>Moeilijk</value>
+  </data>
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
+    <value>Verborgen</value>
+  </data>
+  <data name="ChartDifficulty_Master" xml:space="preserve">
+    <value>Master</value>
+  </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>Aflopend</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>Moeilijkheid</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>Met video</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>Streamveilig</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>Charts zoeken &amp; downloaden op het web</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>Charts ophalen</value>
+  </data>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>Alle MDM-charts migreren</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>Charts migreren</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>Migratie is bezig. Een moment geduld en sluit de app niet.</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>Niveau</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>Herstellen</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>Sorteren op</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>Alle charts bijwerken</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>door {0}</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>Auteur</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>Toegevoegd op</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>Bijgewerkt op</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>Maps</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>Niveau</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>Bestandsgrootte</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Contributor_Artist" xml:space="preserve">
+    <value>Artiest</value>
+  </data>
+  <data name="Contributor_Developer" xml:space="preserve">
+    <value>Ontwikkelaar</value>
+  </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>Doorgaan</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>Details kopiëren</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>Afsluiten</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub Feedback</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>Log openen</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe heeft een fout ondervonden</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>Crashrapport</value>
+  </data>
+  <data name="DropDownButton_Open" xml:space="preserve">
+    <value>Openen</value>
+  </data>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Een charter toevoegen</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>Songauteur</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>Videotransparantie</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Max. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Min. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>Beschrijving</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>Bestanden</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>Bericht</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>Modus</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>Niveauweergave overschrijven</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>Chartnaam</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>Geromaniseerde naam</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>Streamveilig</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>Scène</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>Scène (paaseitje)</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>Zoekwoorden</value>
+  </data>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Variabel tempo</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>Vernieuwen</value>
+  </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} bestanden · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Vul alle verplichte velden in om op te slaan</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Stel een geldig tempobereik in (min ≤ max)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Een zoekwoord toevoegen</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>De manifest.epk van een chart openen en de metadata ervan bewerken</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>Niveau</value>
+  </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} bestand(en) waarnaar deze chart verwijst ontbreken in de map</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Nieuwe EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Een nieuwe chart bouwen vanuit een map met assets</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>EPK-bestand openen…</value>
+  </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Map openen</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Chart-info</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Beschrijving &amp; vindbaarheid</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Verborgen moeilijkheid</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Basisinfo</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Maps</value>
+  </data>
+  <data name="Folder_AppLogs" xml:space="preserve">
+    <value>App-logs</value>
+  </data>
+  <data name="Folder_GameLogs" xml:space="preserve">
+    <value>Spel-logs</value>
+  </data>
+  <data name="Folder_Mods" xml:space="preserve">
+    <value>Mods</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>Offline-chartsmap openen</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>Online-chartsmap openen</value>
+  </data>
+  <data name="Folder_UserData" xml:space="preserve">
+    <value>Gebruikersgegevens</value>
+  </data>
+  <data name="Folder_UserLibs" xml:space="preserve">
+    <value>Gebruikersbibliotheken</value>
+  </data>
+  <data name="GameMode_Modded" xml:space="preserve">
+    <value>Met mods</value>
+  </data>
+  <data name="GameMode_Vanilla" xml:space="preserve">
+    <value>Vanilla</value>
+  </data>
+  <data name="HomePage_Button_GitHubStar" xml:space="preserve">
+    <value>Ster geven op GitHub</value>
+  </data>
+  <data name="HomePage_Button_Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="HomePage_SupportDescription" xml:space="preserve">
+    <value>Vind je Euterpe leuk? Zo kun je helpen</value>
+  </data>
+  <data name="HomePage_SupportTitle" xml:space="preserve">
+    <value>100% gratis &amp; open source</value>
+  </data>
+  <data name="HyperLinkButton_LearnMore" xml:space="preserve">
+    <value>Meer informatie</value>
+  </data>
+  <data name="HyperLinkButton_Visit" xml:space="preserve">
+    <value>Bezoeken</value>
+  </data>
+  <data name="InitializingMessage" xml:space="preserve">
+    <value>Initialiseren...</value>
+  </data>
+  <data name="LoadingMessage" xml:space="preserve">
+    <value>Laden...</value>
+  </data>
+  <data name="MelonLoader_Description" xml:space="preserve">
+    <value>Installatie van MelonLoader is vereist om met mods te spelen</value>
+  </data>
+  <data name="MelonLoader_State_Downloading" xml:space="preserve">
+    <value>Downloaden van {0}: {1} MB</value>
+  </data>
+  <data name="MelonLoader_State_Installed" xml:space="preserve">
+    <value>Geïnstalleerd</value>
+  </data>
+  <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
+    <value>Niet geïnstalleerd</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
+    <value>Vereist voor modontwikkeling</value>
+  </data>
+  <data name="ModDevelop_Card_DotNetSDK_Title" xml:space="preserve">
+    <value>.NET 10 SDK</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Description" xml:space="preserve">
+    <value>Stelt buildtools in staat spelbestanden te vinden</value>
+  </data>
+  <data name="ModDevelop_Card_EnvVariable_Title" xml:space="preserve">
+    <value>Omgevingsvariabele instellen</value>
+  </data>
+  <data name="ModDevelop_Card_EuterpeHub_Description" xml:space="preserve">
+    <value>Maak een account om uw mods te uploaden en te beheren</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Description" xml:space="preserve">
+    <value>Voor snelle aanmaak van modprojecten</value>
+  </data>
+  <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
+    <value>Mod Template Nuget</value>
+  </data>
+  <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
+    <value>Ontwikkelomgeving</value>
+  </data>
+  <data name="ModDevelop_Section_RecommendedIDEs" xml:space="preserve">
+    <value>Aanbevolen IDE's</value>
+  </data>
+  <data name="ModDevelop_Section_SubmitMod" xml:space="preserve">
+    <value>Mod indienen</value>
+  </data>
+  <data name="ModDevelop_Status_NotInstalled" xml:space="preserve">
+    <value>Niet geïnstalleerd</value>
+  </data>
+  <data name="ModDevelop_Status_NotSet" xml:space="preserve">
+    <value>Niet ingesteld</value>
+  </data>
+  <data name="ModFilterType_All" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="ModFilterType_Disabled" xml:space="preserve">
+    <value>Uitgeschakeld</value>
+  </data>
+  <data name="ModFilterType_Enabled" xml:space="preserve">
+    <value>Ingeschakeld</value>
+  </data>
+  <data name="ModFilterType_Incompatible" xml:space="preserve">
+    <value>Incompatibel</value>
+  </data>
+  <data name="ModFilterType_Installed" xml:space="preserve">
+    <value>Geïnstalleerd</value>
+  </data>
+  <data name="ModFilterType_Outdated" xml:space="preserve">
+    <value>Verouderd</value>
+  </data>
+  <data name="ModInfo_Author" xml:space="preserve">
+    <value>Auteur</value>
+  </data>
+  <data name="ModInfo_Dependencies" xml:space="preserve">
+    <value>Afhankelijkheden</value>
+  </data>
+  <data name="ModInfo_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>Incompatibele mods</value>
+  </data>
+  <data name="ModInfo_Repository" xml:space="preserve">
+    <value>Repository</value>
+  </data>
+  <data name="ModInfo_RequiredMelonLoaderVersion" xml:space="preserve">
+    <value>Vereiste Loader-versie</value>
+  </data>
+  <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
+    <value>Ondersteunde spelversie</value>
+  </data>
+  <data name="ModState_Incompatible" xml:space="preserve">
+    <value>Incompatibel</value>
+  </data>
+  <data name="ModState_Modified" xml:space="preserve">
+    <value>Gewijzigd</value>
+  </data>
+  <data name="ModState_Newer" xml:space="preserve">
+    <value>Nieuwer</value>
+  </data>
+  <data name="ModState_Normal" xml:space="preserve">
+    <value>Geïnstalleerd</value>
+  </data>
+  <data name="ModState_Outdated" xml:space="preserve">
+    <value>Update beschikbaar</value>
+  </data>
+  <data name="Page_Charting" xml:space="preserve">
+    <value>Charting</value>
+  </data>
+  <data name="Page_Home" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Page_Logging" xml:space="preserve">
+    <value>Logboek</value>
+  </data>
+  <data name="Page_Modding" xml:space="preserve">
+    <value>Modding</value>
+  </data>
+  <data name="Page_Setting" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
+    <value>Chart Toolkit</value>
+  </data>
+  <data name="Panel_Charting_ChartManage" xml:space="preserve">
+    <value>Chartbeheer</value>
+  </data>
+  <data name="Panel_Logging_AppLog" xml:space="preserve">
+    <value>App-log</value>
+  </data>
+  <data name="Panel_Logging_MelonLoaderLog" xml:space="preserve">
+    <value>MelonLoader-log</value>
+  </data>
+  <data name="Panel_Modding_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Panel_Modding_ModDevelop" xml:space="preserve">
+    <value>Modontwikkeling</value>
+  </data>
+  <data name="Panel_Modding_ModManage" xml:space="preserve">
+    <value>Modbeheer</value>
+  </data>
+  <data name="Panel_Setting_About" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="Panel_Setting_Advanced" xml:space="preserve">
+    <value>Geavanceerd</value>
+  </data>
+  <data name="Panel_Setting_Appearance" xml:space="preserve">
+    <value>Uiterlijk</value>
+  </data>
+  <data name="Panel_Setting_Download" xml:space="preserve">
+    <value>Downloaden</value>
+  </data>
+  <data name="Panel_Setting_Experience" xml:space="preserve">
+    <value>Ervaring</value>
+  </data>
+  <data name="Panel_Setting_FileManagement" xml:space="preserve">
+    <value>Bestandsbeheer</value>
+  </data>
+  <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
+    <value>Charts zoeken  (Naam, Auteur, Charter)</value>
+  </data>
+  <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
+    <value>Mods zoeken  (Naam, Auteur)</value>
+  </data>
+  <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Altijd schuifbalk weergeven voor de lijst</value>
+  </data>
+  <data name="Setting_Description_CacheFolder" xml:space="preserve">
+    <value>Dit omvat de cache wanneer u bestanden downloadt. Wijzig dit niet tijdens andere bewerkingen</value>
+  </data>
+  <data name="Setting_Description_IgnoreException" xml:space="preserve">
+    <value>Voorkom dat de applicatie afsluit wanneer een uitzondering optreedt. (Schakel dit alleen in als u weet wat u doet!)</value>
+  </data>
+  <data name="Setting_Description_Language" xml:space="preserve">
+    <value>UI-taal</value>
+  </data>
+  <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
+    <value>Map met Muse Dash-uitvoerbaar bestand</value>
+  </data>
+  <data name="Setting_Description_ShowConsole" xml:space="preserve">
+    <value>Of de console wordt weergegeven wanneer het spel wordt gestart</value>
+  </data>
+  <data name="Setting_Description_ShowStartScreen" xml:space="preserve">
+    <value>Of het startscherm wordt weergegeven wanneer het spel wordt gestart</value>
+  </data>
+  <data name="Setting_Description_SteamFolder" xml:space="preserve">
+    <value>Map met Steam-uitvoerbaar bestand</value>
+  </data>
+  <data name="Setting_Description_UpdateChannel" xml:space="preserve">
+    <value>Updatekanaal voor euterpe</value>
+  </data>
+  <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
+    <value>Altijd schuifbalk weergeven</value>
+  </data>
+  <data name="Setting_Title_CacheFolder" xml:space="preserve">
+    <value>Cachemap</value>
+  </data>
+  <data name="Setting_Title_IgnoreException" xml:space="preserve">
+    <value>Uitzondering negeren</value>
+  </data>
+  <data name="Setting_Title_Language" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
+    <value>Muse Dash-map</value>
+  </data>
+  <data name="Setting_Title_ShowConsole" xml:space="preserve">
+    <value>Console weergeven</value>
+  </data>
+  <data name="Setting_Title_ShowStartScreen" xml:space="preserve">
+    <value>Startscherm weergeven</value>
+  </data>
+  <data name="Setting_Title_SteamFolder" xml:space="preserve">
+    <value>Steam-map</value>
+  </data>
+  <data name="Setting_Title_UpdateChannel" xml:space="preserve">
+    <value>Updatekanaal</value>
+  </data>
+  <data name="Setting_UpdateChannel_Prerelease" xml:space="preserve">
+    <value>Prerelease</value>
+  </data>
+  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
+    <value>Stabiel</value>
+  </data>
+  <data name="Setup_Description_GamePath" xml:space="preserve">
+    <value>Vertel ons waar het spel is geïnstalleerd</value>
+  </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>Geen geldige spelmap</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
+    <value>Euterpe is niet compatibel met het MDMC-ecosysteem (Muse Dash Modding Community). Doorgaan met Euterpe maakt het moeilijk om terug te keren naar het MDMC-ecosysteem, en Headquarters (de MDMC-ranglijst) wordt vervangen door de ranglijst van Euterpe. Mods of chartbeheerders buiten Euterpe, zoals MuseDashTOOL, werken dan niet meer.</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
+    <value>Niet compatibel met het MDMC-ecosysteem</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
+    <value>Neem even de tijd om dit te lezen en kies daarna uw spelmap.</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
+    <value>Voordat u begint</value>
+  </data>
+  <data name="Setup_Progress_EssentialModsInstalled" xml:space="preserve">
+    <value>Essentiële mods geïnstalleerd</value>
+  </data>
+  <data name="Setup_Progress_InitializingEssentialMods" xml:space="preserve">
+    <value>Essentiële mods initialiseren ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
+    <value>.NET runtime installeren ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
+    <value>.NET SDK installeren ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingMelonLoader" xml:space="preserve">
+    <value>MelonLoader installeren ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingModTemplate" xml:space="preserve">
+    <value>Mod-template installeren ...</value>
+  </data>
+  <data name="Setup_Progress_MigratingCharts" xml:space="preserve">
+    <value>CustomAlbums-charts migreren ...</value>
+  </data>
+  <data name="Setup_Progress_SettingEnvVariable" xml:space="preserve">
+    <value>Omgevingsvariabele instellen ...</value>
+  </data>
+  <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
+    <value>Incompatibele mod verwijderen: {0} ...</value>
+  </data>
+  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
+    <value>MelonLoader upgraden {0} → {1} ...</value>
+  </data>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>Mislukt</value>
+  </data>
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
+    <value>Wachtend</value>
+  </data>
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
+    <value>Actief</value>
+  </data>
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
+    <value>Klaar</value>
+  </data>
+  <data name="Setup_Step_Failed" xml:space="preserve">
+    <value>Mislukt. Controleer het logboek of probeer opnieuw.</value>
+  </data>
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
+    <value>Charting Tool (MDBMSC)</value>
+  </data>
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
+    <value>Toolkit voor het maken van MDM-charts</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
+    <value>.NET Runtime</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
+    <value>Vereist om de gemodde game te draaien</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Vereist voor modontwikkeling</value>
+  </data>
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY-variabele</value>
+  </data>
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
+    <value>Omgevingsvariabele voor spelpad instellen</value>
+  </data>
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
+    <value>Essentiële mods</value>
+  </data>
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
+    <value>Kernmods voor de beste ervaring</value>
+  </data>
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
+    <value>Vereist mod loader-framework</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>Verouderde gegevens migreren</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>Charts van oudere mods zoals CustomAlbums omzetten naar het formaat van Euterpe</value>
+  </data>
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
+    <value>Mod Template</value>
+  </data>
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
+    <value>NuGet-template voor nieuwe modprojecten</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
+    <value>Conflicten verwijderen</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>Incompatibele mods verwijderen</value>
+  </data>
+  <data name="Setup_Title_GamePath" xml:space="preserve">
+    <value>Spelmap zoeken</value>
+  </data>
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
+    <value>Euterpe instellen</value>
+  </data>
+  <data name="ToolTip_EditModConfig" xml:space="preserve">
+    <value>Modconfiguratie bewerken</value>
+  </data>
+  <data name="Translator_ChineseSimplified" xml:space="preserve">
+    <value>Vereenvoudigd Chinees</value>
+  </data>
+  <data name="Translator_ChineseTraditional" xml:space="preserve">
+    <value>Traditioneel Chinees</value>
+  </data>
+  <data name="Translator_Hungarian" xml:space="preserve">
+    <value>Hongaars</value>
+  </data>
+  <data name="Translator_Korean" xml:space="preserve">
+    <value>Koreaans</value>
+  </data>
+  <data name="Translator_Russian" xml:space="preserve">
+    <value>Russisch</value>
+  </data>
+  <data name="Translator_Spanish" xml:space="preserve">
+    <value>Spaans</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Kies uw rol en taken om te beginnen</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>Aanbevolen voor chartmakers</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>Aangepast</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>Pas uw configuratie aan</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>Modder</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>Aanbevolen voor modontwikkelaars</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>Speler</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>Aanbevolen voor reguliere spelers</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Taken</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Welkom bij Euterpe</value>
+  </data>
+</root>

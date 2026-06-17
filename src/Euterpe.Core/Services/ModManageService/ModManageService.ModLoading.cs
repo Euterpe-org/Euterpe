@@ -1,26 +1,13 @@
-﻿namespace Euterpe.Core;
+using Euterpe.Contracts.Mods;
+
+namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
-    private async Task LoadModsAsync()
+    private async Task MergeWebCatalogAsync()
     {
-        ModDto[] localMods = (await LocalService.GetModFilePaths()
-                .WhenAllAsync(LocalService.LoadModFromPathAsync).ConfigureAwait(false))
-            .Where(x => x is not null)
-            .ToArray()!;
-
-        _sourceCache.AddOrUpdate(localMods);
-        Logger.ZLogInformation($"Local mods added to source cache");
-
-        CheckDuplicatedMods(localMods);
-
-        await foreach (var webMod in DownloadManager.GetModListAsync().ConfigureAwait(false))
+        foreach (var webMod in await GameDownloadManager.FetchModListAsync().ConfigureAwait(false))
         {
-            if (webMod is null)
-            {
-                continue;
-            }
-
             if (_sourceCache.Lookup(webMod.Name) is { HasValue: true, Value: var localMod })
             {
                 CheckModState(localMod, webMod);
@@ -36,8 +23,8 @@ internal sealed partial class ModManageService
             }
             else
             {
-                var webModDto = webMod.ToDto();
-                webModDto.State = IsModIncompatible(webMod) ? ModState.Incompatible : ModState.Normal;
+                var webModDto = webMod.ToModel();
+                webModDto.State = IsModIncompatible(webMod.MelonVersion, webMod.GameVersion) ? ModState.Incompatible : ModState.Normal;
                 _sourceCache.AddOrUpdate(webModDto);
             }
         }
@@ -45,17 +32,17 @@ internal sealed partial class ModManageService
         Logger.ZLogInformation($"All mods loaded");
     }
 
-    private bool IsModIncompatible(Mod mod)
+    private bool IsModIncompatible(string melonVersion, string gameVersion)
     {
-        if (_melonLoaderVersion is not null
-            && !string.IsNullOrEmpty(mod.MelonVersion)
-            && SemVersionRange.TryParse($"^{mod.MelonVersion}", out var range)
-            && !range.Contains(_melonLoaderVersion))
+        if (GameConfig.MelonLoaderSemVersion is { } semVersion
+            && !string.IsNullOrEmpty(melonVersion)
+            && SemVersionRange.TryParse($"^{melonVersion}", out var range)
+            && !range.Contains(semVersion))
         {
             return true;
         }
 
-        return mod.GameVersion is not "*" && mod.GameVersion != Config.GameVersion;
+        return gameVersion is not "*" && gameVersion != GameConfig.GameVersion;
     }
 
     private void CheckModState(ModDto localMod, Mod webMod)
@@ -65,13 +52,18 @@ internal sealed partial class ModManageService
             return;
         }
 
-        var localVersion = SemVersion.Parse(localMod.LocalVersion);
-        var webVersion = SemVersion.Parse(webMod.Version);
-        var versionComparison = localVersion.ComparePrecedenceTo(webVersion);
+        localMod.State = DetermineModState(localMod, webMod.ToModel());
+    }
 
-        localMod.State = versionComparison switch
+    private ModState DetermineModState(ModDto localMod, ModDto webMod)
+    {
+        if (IsModIncompatible(webMod.MelonVersion, webMod.GameVersion))
         {
-            _ when IsModIncompatible(webMod) => ModState.Incompatible,
+            return ModState.Incompatible;
+        }
+
+        return localMod.LocalVersion.ComparePrecedenceTo(webMod.Version) switch
+        {
             < 0 => ModState.Outdated,
             > 0 => ModState.Newer,
             _ when localMod.SHA256 != webMod.SHA256 => ModState.Modified,
@@ -86,7 +78,7 @@ internal sealed partial class ModManageService
             return;
         }
 
-        var configFilePath = Path.Combine(Config.UserDataFolder, localMod.ConfigFile);
+        var configFilePath = Path.Combine(GameConfig.UserDataFolder, localMod.ConfigFile);
         localMod.IsValidConfigFile = File.Exists(configFilePath);
     }
 
@@ -94,7 +86,7 @@ internal sealed partial class ModManageService
     {
         var duplicatedModGroups = localMods
             .GroupBy(mod => mod.Name)
-            .Where(group => group.Select(mod => mod.LocalFileName).Distinct().Count() > 1);
+            .Where(group => group.Select(mod => mod.LocalFileName).Distinct().Skip(1).Any());
 
         foreach (var duplicatedModGroup in duplicatedModGroups)
         {
@@ -107,5 +99,28 @@ internal sealed partial class ModManageService
         }
 
         Logger.ZLogInformation($"Checking duplicated mods finished");
+    }
+
+    private void CheckIncompatibleMods()
+    {
+        var installedMods = _sourceCache.Items.Where(mod => mod.IsLocal).ToArray();
+        var installedNames = installedMods.Select(mod => mod.Name).ToHashSet();
+        var declaredIncompatibleNames = installedMods.SelectMany(mod => mod.IncompatibleMods).ToHashSet();
+
+        foreach (var mod in _sourceCache.Items)
+        {
+            if (mod.State is ModState.Duplicated)
+            {
+                continue;
+            }
+
+            if (!mod.IncompatibleMods.Any(installedNames.Contains) && !declaredIncompatibleNames.Contains(mod.Name))
+            {
+                continue;
+            }
+
+            Logger.ZLogInformation($"Mod {mod.Name} is incompatible with an installed mod");
+            mod.State = ModState.Incompatible;
+        }
     }
 }

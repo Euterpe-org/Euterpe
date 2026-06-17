@@ -2,16 +2,44 @@ namespace Euterpe.Services;
 
 public sealed class NavigationService
 {
+    public AsyncManualResetEvent Ready { get; } = new(false);
+
+    public string? CurrentRoute { get; private set; }
+
     #region Injections
 
-    [UsedImplicitly]
     public required ILogger<NavigationService> Logger { get; init; }
 
     #endregion Injections
 
-    public Control NavigateTo<TView>() where TView : Control, new()
+    public void NavigateTo(string route)
     {
-        Logger.ZLogInformation($"Navigating to View: {typeof(TView).Name}");
-        return IocContainer.Resolve<TView>();
+        if (string.Equals(CurrentRoute, route, StringComparison.Ordinal))
+        {
+            Logger.ZLogDebug($"Already at route: {route}, skipping navigation");
+            return;
+        }
+
+        var node = RouteTree.Root;
+
+        while (node.Children.FirstOrDefault(x => route.StartsWith(x.Path, StringComparison.Ordinal)) is { } child)
+        {
+            child.Select?.Invoke();
+            node = child;
+        }
+
+        NotifyNavigated(route);
+    }
+
+    public async Task NavigateToAsync(string route)
+    {
+        await Ready.WaitAsync().ConfigureAwait(true);
+        NavigateTo(route);
+    }
+
+    public void NotifyNavigated(string route)
+    {
+        CurrentRoute = route;
+        Logger.ZLogInformation($"Navigated to: {route}");
     }
 }

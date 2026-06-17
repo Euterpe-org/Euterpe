@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 using Utf8StringInterpolation;
 
 namespace Euterpe.Core.Logger;

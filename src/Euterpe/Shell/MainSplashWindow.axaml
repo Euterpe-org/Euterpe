@@ -1,0 +1,57 @@
+<u:SplashWindow
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:constants="using:Euterpe.Shared"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:Euterpe.Shell"
+    x:Class="Euterpe.Shell.MainSplashWindow"
+    x:DataType="vm:MainSplashWindowViewModel"
+    CanResize="False"
+    Height="280"
+    Icon="/Assets/Icon.ico"
+    Title="Euterpe"
+    Width="360"
+    WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <vm:MainSplashWindowViewModel />
+    </Design.DataContext>
+
+    <Grid
+        RowDefinitions="*, Auto, Auto">
+
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Image
+                Height="64"
+                HorizontalAlignment="Center"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="/Assets/Icon.png" />
+
+            <TextBlock
+                FontSize="14"
+                Foreground="{DynamicResource SemiColorText2}"
+                HorizontalAlignment="Center"
+                Margin="0,8,0,0"
+                Text="{x:Static constants:BuildInfo.DisplayVersion}" />
+        </StackPanel>
+
+        <ProgressBar
+            Grid.Row="1"
+            IsIndeterminate="True"
+            Margin="24,0" />
+
+        <TextBlock
+            Grid.Row="2"
+            FontSize="12"
+            Foreground="{DynamicResource SemiColorText3}"
+            HorizontalAlignment="Center"
+            Margin="0,12,0,20"
+            Text="{Localize {x:Static loc:XAMLLiteral.InitializingMessage}}" />
+
+    </Grid>
+
+</u:SplashWindow>

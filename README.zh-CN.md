@@ -7,14 +7,15 @@
 <div align="center">
   <img src="assets/Logo.webp" width="120" alt="Euterpe Logo" />
   <h1>Euterpe</h1>
-  <p><strong>发现、分享和管理 Muse Dash 模组的现代化平台</strong></p>
+  <p><strong>发现、分享和管理喵斯快跑谱面与模组的现代化平台</strong></p>
 </div>
 
 <div align="center">
 
 ![Release](https://img.shields.io/github/v/release/Euterpe-org/Euterpe?style=flat&label=release&color=0ea5e9&labelColor=1f2937)
 ![Downloads](https://img.shields.io/github/downloads/Euterpe-org/Euterpe/total?style=flat&label=downloads&color=22c55e&labelColor=1f2937)
-![Build](https://img.shields.io/github/actions/workflow/status/Euterpe-org/Euterpe/build.yml?style=flat&label=build&color=f59e0b&labelColor=1f2937)
+![Build](https://img.shields.io/github/actions/workflow/status/Euterpe-org/Euterpe/ci.yml?style=flat&label=build&color=f59e0b&labelColor=1f2937)
+[![Coverage](https://img.shields.io/codecov/c/github/Euterpe-org/Euterpe?token=GZLAOW13F2&style=flat&label=coverage&color=ec4899&labelColor=1f2937)](https://codecov.io/gh/Euterpe-org/Euterpe)
 ![License](https://img.shields.io/github/license/Euterpe-org/Euterpe?style=flat&label=license&color=8b5cf6&labelColor=1f2937)
 
 </div>
@@ -22,7 +23,11 @@
 </br>
 
 <div align="center">
-  <img src="assets/Preview.webp" width="600" alt="Euterpe 预览" />
+  <img src="assets/Preview1.webp" width="600" alt="Euterpe 模组管理" />
+</div>
+
+<div align="center">
+  <img src="assets/Preview2.webp" width="600" alt="Euterpe 谱面管理" />
 </div>
 
 </br>
@@ -31,15 +36,15 @@
 
 - **正式版：** 适合大多数用户的稳定版本。
   [前往 GitHub Releases](https://github.com/Euterpe-org/Euterpe/releases)
-- **CI 版：** 仅针对特定提交。打开 Actions，选择工作流运行，然后从 **Artifacts** 下载。
-  [打开 GitHub Actions](https://github.com/Euterpe-org/Euterpe/actions)
+- **开发版：** 每天从 `dev` 分支自动构建，包含最新功能，但可能不稳定。
+  [下载开发版](https://github.com/Euterpe-org/Euterpe/releases/tag/nightly)
 
 </br>
 
-## 🍉 Euterpe Hub
+## 🎹 Euterpe Hub
 
-生态系统的核心 - 随时浏览所有模组。
-开发者可以创建账户，一键上传和管理模组。
+生态系统的核心 - 玩家随时浏览所有谱面与模组；谱师与开发者一键上传和管理谱面与模组。
+创建你的账号，加入 Euterpe 大家庭！
 
 [![Euterpe Hub](https://img.shields.io/badge/Euterpe%20Hub-访问网站-0ea5e9?style=for-the-badge&logo=safari&logoColor=white&labelColor=1f2937)](https://euterpe-org.com)
 

@@ -10,5 +10,8 @@ public static class VerifyGlobalSettings
         UseProjectRelativeDirectory("snapshots");
         // Make path separators consistent across platforms
         VerifierSettings.AddScrubber(sb => sb.Replace('\\', '/'));
+
+        VerifierSettings.IgnoreMembers<Config>(nameof(Config.Games), nameof(Config.ActiveGameConfig));
+        VerifierSettings.IgnoreMembers<GameConfig>(nameof(GameConfig.SetupOptions), nameof(GameConfig.WizardPresets));
     }
 }

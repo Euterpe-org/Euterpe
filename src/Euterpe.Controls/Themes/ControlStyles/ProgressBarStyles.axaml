@@ -1,0 +1,24 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style
+        Selector="ProgressBar.Rounded">
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Height" Value="10" />
+        <Setter Property="MinHeight" Value="10" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition
+                    Property="Value"
+                    Duration="0:0:0.4"
+                    Easing="CubicEaseOut" />
+            </Transitions>
+        </Setter>
+
+        <Style
+            Selector="^ /template/ Border">
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+    </Style>
+</Styles>

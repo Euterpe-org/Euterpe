@@ -1,0 +1,570 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Euterpe.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:Euterpe.Models.Charts"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:vm="using:Euterpe.Features.Charting"
+    x:Class="Euterpe.Features.Charting.EpkEditorPanel"
+    x:DataType="vm:EpkEditorPanelViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:EpkEditorPanelViewModel />
+    </Design.DataContext>
+
+    <UserControl.KeyBindings>
+        <KeyBinding
+            Command="{Binding SaveCommand}"
+            Gesture="Ctrl+S" />
+    </UserControl.KeyBindings>
+
+    <UserControl.Styles>
+        <Style
+            Selector="Border.Card">
+            <Setter Property="Background" Value="{DynamicResource SecondaryCardColor}" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style
+            Selector="TextBlock.SectionTitle">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style
+            Selector="TextBlock.FieldLabel">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="{DynamicResource SemiColorText2}" />
+        </Style>
+        <!--  Give chips room from the tag box's top-left edge  -->
+        <Style
+            Selector="u|TagInput /template/ Border#PART_RootBorder">
+            <Setter Property="Padding" Value="2,2,0,0" />
+        </Style>
+        <!--  Each field stacks its label above the input with room to breathe  -->
+        <Style
+            Selector="StackPanel.Field">
+            <Setter Property="Spacing" Value="6" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid
+        RowDefinitions="Auto,*,Auto">
+
+        <!--  Document header: close, identity, reveal folder  -->
+        <Border
+            Grid.Row="0"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,0,0,1"
+            Padding="16,10">
+            <Grid
+                ColumnDefinitions="Auto,Auto,*,Auto">
+                <Button
+                    Classes="Transparent"
+                    Command="{Binding BackCommand}"
+                    Grid.Column="0"
+                    Padding="8,6"
+                    VerticalAlignment="Center">
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Spacing="4">
+                        <PathIcon
+                            Data="{StaticResource SemiIconChevronLeft}"
+                            Height="16"
+                            Width="16" />
+                        <TextBlock
+                            Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Back}}" />
+                    </StackPanel>
+                </Button>
+
+                <Border
+                    Grid.Column="1"
+                    Background="{DynamicResource SemiColorFill0}"
+                    ClipToBounds="True"
+                    CornerRadius="8"
+                    Height="48"
+                    Margin="16,0,12,0"
+                    VerticalAlignment="Center"
+                    Width="48">
+                    <Panel>
+                        <PathIcon
+                            Data="{StaticResource SemiIconMusic}"
+                            Foreground="{DynamicResource SemiColorText2}"
+                            Height="18"
+                            Opacity="0.4"
+                            Width="18" />
+                        <e:AsyncImage
+                            Background="{Binding CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
+                            DecodeWidth="48"
+                            Source="{Binding CoverPath}"
+                            Stretch="UniformToFill" />
+                    </Panel>
+                </Border>
+
+                <StackPanel
+                    Grid.Column="2"
+                    Spacing="2"
+                    VerticalAlignment="Center">
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Spacing="6">
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            MaxLines="1"
+                            Text="{Binding Name}"
+                            TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                            FontSize="14"
+                            Foreground="{DynamicResource SemiColorText0}"
+                            IsVisible="{Binding IsDirty}"
+                            Text="●"
+                            VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource SemiColorText2}"
+                        MaxLines="1"
+                        Text="{Binding FilePath}"
+                        TextTrimming="CharacterEllipsis"
+                        ToolTip.Tip="{Binding FilePath}" />
+                </StackPanel>
+
+                <Button
+                    Classes="Transparent"
+                    Command="{Binding OpenFolderCommand}"
+                    CommandParameter="{Binding FolderPath}"
+                    Grid.Column="3"
+                    IsEnabled="{Binding FolderPath, Converter={x:Static ObjectConverters.IsNotNull}}"
+                    Padding="8"
+                    ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.EpkEditor_OpenFolder}}"
+                    VerticalAlignment="Center">
+                    <PathIcon
+                        Data="{StaticResource SemiIconFolderOpen}"
+                        Height="16"
+                        Width="16" />
+                </Button>
+            </Grid>
+        </Border>
+
+        <!--  Editable metadata: uniform cards in two filling, independent columns  -->
+        <ScrollViewer
+            Grid.Row="1">
+            <StackPanel
+                HorizontalAlignment="Stretch"
+                Margin="20"
+                MaxWidth="1200"
+                Spacing="16">
+
+                <!--  Files referenced by the manifest but absent from the folder  -->
+                <u:Banner
+                    CanClose="False"
+                    Content="{Binding MissingFilesMessage}"
+                    CornerRadius="8"
+                    IsVisible="{Binding HasMissingFiles}"
+                    Type="Warning" />
+
+                <Grid
+                    ColumnDefinitions="*,16,*">
+
+                    <!--  Left column  -->
+                    <StackPanel
+                        Grid.Column="0"
+                        Spacing="16">
+
+                        <!--  Basic info  -->
+                        <Border
+                            Classes="Card">
+                            <StackPanel
+                                Spacing="16">
+                                <TextBlock
+                                    Classes="SectionTitle"
+                                    Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Section_Identity}}" />
+                                <StackPanel
+                                    Classes="Field">
+                                    <StackPanel
+                                        Orientation="Horizontal"
+                                        Spacing="2">
+                                        <TextBlock
+                                            Classes="FieldLabel"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_Name}}" />
+                                        <TextBlock
+                                            Foreground="{DynamicResource SemiColorDanger}"
+                                            Text="*" />
+                                    </StackPanel>
+                                    <TextBox
+                                        Text="{Binding Name}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Classes="Field">
+                                    <StackPanel
+                                        Orientation="Horizontal"
+                                        Spacing="2">
+                                        <TextBlock
+                                            Classes="FieldLabel"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_Author}}" />
+                                        <TextBlock
+                                            Foreground="{DynamicResource SemiColorDanger}"
+                                            Text="*" />
+                                    </StackPanel>
+                                    <TextBox
+                                        Text="{Binding Author}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Classes="Field">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_NameRomanized}}" />
+                                    <TextBox
+                                        Text="{Binding NameRomanized}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!--  Description and discovery  -->
+                        <Border
+                            Classes="Card">
+                            <StackPanel
+                                Spacing="16">
+                                <TextBlock
+                                    Classes="SectionTitle"
+                                    Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Section_Discovery}}" />
+                                <StackPanel
+                                    Classes="Field">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_Description}}" />
+                                    <TextBox
+                                        AcceptsReturn="True"
+                                        Height="104"
+                                        Padding="10,8"
+                                        Text="{Binding Description}"
+                                        TextWrapping="Wrap"
+                                        VerticalContentAlignment="Top" />
+                                </StackPanel>
+                                <Grid
+                                    ColumnDefinitions="*,Auto">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Grid.Column="0"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_SafeForStreamer}}"
+                                        VerticalAlignment="Center" />
+                                    <ToggleSwitch
+                                        Grid.Column="1"
+                                        IsChecked="{Binding SafeForStreamer, Mode=TwoWay}" />
+                                </Grid>
+                                <StackPanel
+                                    Classes="Field">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_SearchKeywords}}" />
+                                    <u:TagInput
+                                        LostFocusBehavior="Add"
+                                        PlaceholderText="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Keywords_Watermark}}"
+                                        Separator=","
+                                        Tags="{Binding SearchKeywords}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!--  Files are read-only; Refresh re-reads them from the chart folder  -->
+                        <Border
+                            Classes="Card">
+                            <StackPanel
+                                Spacing="12">
+                                <Grid
+                                    ColumnDefinitions="*,Auto">
+                                    <TextBlock
+                                        Classes="SectionTitle"
+                                        Grid.Column="0"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_Files}}"
+                                        VerticalAlignment="Center" />
+                                    <Button
+                                        Classes="Transparent"
+                                        Command="{Binding RefreshFilesCommand}"
+                                        Grid.Column="1"
+                                        Padding="8,4">
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            Spacing="6">
+                                            <PathIcon
+                                                Data="{StaticResource SemiIconRefresh}"
+                                                Height="14"
+                                                Width="14" />
+                                            <TextBlock
+                                                Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Files_Refresh}}" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                                <TextBlock
+                                    Classes="FieldLabel"
+                                    Text="{Binding FilesSummary}" />
+                                <ItemsControl
+                                    ItemsSource="{Binding Files}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate
+                                            x:DataType="models:EpkFileEntry">
+                                            <Grid
+                                                ColumnDefinitions="*,Auto"
+                                                Margin="0,0,0,2">
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    Text="{Binding Name}" />
+                                                <TextBlock
+                                                    Foreground="{DynamicResource SemiColorText2}"
+                                                    Grid.Column="1"
+                                                    Text="{Binding SizeDisplay}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <!--  Right column  -->
+                    <StackPanel
+                        Grid.Column="2"
+                        Spacing="16">
+
+                        <!--  Chart info: tempo and stage  -->
+                        <Border
+                            Classes="Card">
+                            <StackPanel
+                                Spacing="16">
+                                <TextBlock
+                                    Classes="SectionTitle"
+                                    Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Section_ChartInfo}}" />
+                                <StackPanel
+                                    Classes="Field">
+                                    <StackPanel
+                                        Orientation="Horizontal"
+                                        Spacing="2">
+                                        <TextBlock
+                                            Classes="FieldLabel"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_Scene}}" />
+                                        <TextBlock
+                                            Foreground="{DynamicResource SemiColorDanger}"
+                                            Text="*" />
+                                    </StackPanel>
+                                    <TextBox
+                                        Text="{Binding Scene}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Classes="Field">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_SceneEgg}}" />
+                                    <TextBox
+                                        Text="{Binding SceneEgg}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Spacing="8">
+                                    <StackPanel
+                                        Classes="Field">
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            Spacing="2">
+                                            <TextBlock
+                                                Classes="FieldLabel"
+                                                Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_Bpm}}" />
+                                            <TextBlock
+                                                Foreground="{DynamicResource SemiColorDanger}"
+                                                Text="*" />
+                                        </StackPanel>
+                                        <u:NumericIntUpDown
+                                            Maximum="999"
+                                            Minimum="0"
+                                            Value="{Binding Bpm}" />
+                                    </StackPanel>
+                                    <Grid
+                                        ColumnDefinitions="*,Auto">
+                                        <TextBlock
+                                            Classes="FieldLabel"
+                                            Grid.Column="0"
+                                            Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_TempoVariable}}"
+                                            VerticalAlignment="Center" />
+                                        <ToggleSwitch
+                                            Grid.Column="1"
+                                            IsChecked="{Binding IsBpmRange, Mode=TwoWay}" />
+                                    </Grid>
+                                    <Grid
+                                        ColumnDefinitions="*,Auto,*"
+                                        IsVisible="{Binding IsBpmRange}">
+                                        <u:NumericIntUpDown
+                                            Grid.Column="0"
+                                            Maximum="999"
+                                            Minimum="0"
+                                            PlaceholderText="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_BpmMin}}"
+                                            Value="{Binding BpmMin}" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Margin="8,0"
+                                            Text="–"
+                                            VerticalAlignment="Center" />
+                                        <u:NumericIntUpDown
+                                            Grid.Column="2"
+                                            Maximum="999"
+                                            Minimum="0"
+                                            PlaceholderText="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_BpmMax}}"
+                                            Value="{Binding BpmMax}" />
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel
+                                    Classes="Field"
+                                    IsVisible="{Binding HasVideo}">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_BackgroundVideoOpacity}}" />
+                                    <u:NumericFloatUpDown
+                                        HorizontalAlignment="Left"
+                                        Maximum="1"
+                                        Minimum="0"
+                                        Step="0.1"
+                                        Value="{Binding BackgroundVideoOpacity}"
+                                        Width="150" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!--  Per-map rating and charters  -->
+                        <Border
+                            Classes="Card">
+                            <StackPanel
+                                Spacing="12">
+                                <TextBlock
+                                    Classes="SectionTitle"
+                                    Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Section_Maps}}" />
+                                <ItemsControl
+                                    ItemsSource="{Binding Maps}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel
+                                                Spacing="10" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate
+                                            x:DataType="vm:DifficultyEditViewModel">
+                                            <Grid
+                                                ColumnDefinitions="36,Auto,64,*">
+                                                <Image
+                                                    Grid.Column="0"
+                                                    Height="28"
+                                                    Source="{Binding Difficulty, Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
+                                                    VerticalAlignment="Center"
+                                                    Width="28" />
+                                                <TextBlock
+                                                    Grid.Column="1"
+                                                    Margin="0,0,12,0"
+                                                    Text="{Binding DifficultyName.Value}"
+                                                    VerticalAlignment="Center" />
+                                                <TextBox
+                                                    Grid.Column="2"
+                                                    PlaceholderText="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Map_Rating}}"
+                                                    Text="{Binding Rating}"
+                                                    VerticalAlignment="Center" />
+                                                <u:TagInput
+                                                    Grid.Column="3"
+                                                    LostFocusBehavior="Add"
+                                                    Margin="10,0,0,0"
+                                                    PlaceholderText="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Charters_Watermark}}"
+                                                    Separator=","
+                                                    Tags="{Binding Charters}"
+                                                    VerticalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                        <!--  Hidden-difficulty (map4) settings; only when the chart has a Hidden map  -->
+                        <Border
+                            Classes="Card"
+                            IsVisible="{Binding HasHiddenDifficulty}">
+                            <StackPanel
+                                Spacing="16">
+                                <TextBlock
+                                    Classes="SectionTitle"
+                                    Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Section_HiddenMode}}" />
+                                <StackPanel
+                                    Classes="Field">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_HideMode}}" />
+                                    <TextBox
+                                        Text="{Binding HideMode}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Classes="Field">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_HideRatingOverride}}" />
+                                    <TextBox
+                                        Text="{Binding HideRatingOverride}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Classes="Field">
+                                    <TextBlock
+                                        Classes="FieldLabel"
+                                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Field_HideMessage}}" />
+                                    <TextBox
+                                        Text="{Binding HideMessage}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--  Sticky footer: validation hint + primary save  -->
+        <Border
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,1,0,0"
+            Grid.Row="2"
+            Padding="16,12">
+            <Grid
+                ColumnDefinitions="*,Auto">
+                <StackPanel
+                    Grid.Column="0"
+                    IsVisible="{Binding !CanSave}"
+                    Orientation="Horizontal"
+                    Spacing="8"
+                    VerticalAlignment="Center">
+                    <PathIcon
+                        Data="{StaticResource SemiIconAlertTriangle}"
+                        Foreground="{DynamicResource SemiColorWarning}"
+                        Height="14"
+                        Width="14" />
+                    <TextBlock
+                        Foreground="{DynamicResource SemiColorText2}"
+                        IsVisible="{Binding BpmRangeInvalid}"
+                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Hint_TempoRange}}"
+                        VerticalAlignment="Center" />
+                    <TextBlock
+                        Foreground="{DynamicResource SemiColorText2}"
+                        IsVisible="{Binding !BpmRangeInvalid}"
+                        Text="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Hint_Required}}"
+                        VerticalAlignment="Center" />
+                </StackPanel>
+                <Button
+                    Classes="Primary"
+                    Command="{Binding SaveCommand}"
+                    Content="{Localize {x:Static loc:XAMLLiteral.EpkEditor_Save}}"
+                    Grid.Column="1"
+                    MinWidth="96" />
+            </Grid>
+        </Border>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,45 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe">
+
+    <Design.PreviewWith>
+        <e:LabeledSection
+            Description="Description"
+            Title="Setting">
+            <TextBox
+                Text="Content" />
+        </e:LabeledSection>
+    </Design.PreviewWith>
+
+    <Style
+        Selector="e|LabeledSection">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel
+                    Orientation="Vertical"
+                    Spacing="15">
+
+                    <StackPanel
+                        Orientation="Vertical"
+                        Spacing="5">
+                        <TextBlock
+                            Classes="H4"
+                            Text="{TemplateBinding Title, Mode=OneWay}"
+                            Theme="{StaticResource TitleTextBlock}" />
+
+                        <TextBlock
+                            Foreground="{DynamicResource SecondaryTextColor}"
+                            IsVisible="{TemplateBinding Description, Converter={x:Static ObjectConverters.IsNotNull}, Mode=OneWay}"
+                            Text="{TemplateBinding Description, Mode=OneWay}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <ContentPresenter
+                        Content="{TemplateBinding Content, Mode=OneWay}" />
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>

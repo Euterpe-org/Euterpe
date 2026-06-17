@@ -1,0 +1,1 @@
+global using static Euterpe.Shared.BuildInfo;

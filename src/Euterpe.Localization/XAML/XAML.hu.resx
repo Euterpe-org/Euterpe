@@ -19,8 +19,17 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>Alkalmaz</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>Vissza</value>
+  </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>Tallózás...</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>Frissítés keresése</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Megerősítés</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>Segíts a fordításban</value>
@@ -31,14 +40,17 @@
   <data name="Button_LaunchGame" xml:space="preserve">
     <value>Játék</value>
   </data>
-  <data name="Button_MDMC_Website" xml:space="preserve">
-    <value>MDMC weboldal</value>
+  <data name="Button_Next" xml:space="preserve">
+    <value>Tovább</value>
   </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Újratelepítés</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>Újraválasztás</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Újra</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>Forráskód</value>
@@ -49,17 +61,122 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Frissítés</value>
   </data>
-  <data name="ChartFilterType_Easy" xml:space="preserve">
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Hozzávetőleges szintek megjóslása és a chart Note-eloszlásának elemzése</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Töltsd fel és tedd közzé a chartodat</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Chart beküldése</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Egy chart manifest metaadatainak helyi szerkesztése</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Offline eszközök</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Chartek elemzése és beküldése az Euterpe oldalon (a böngészőben nyílik meg)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Online eszközök</value>
+  </data>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Könnyű</value>
   </data>
-  <data name="ChartFilterType_Hard" xml:space="preserve">
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
     <value>Nehéz</value>
   </data>
-  <data name="ChartFilterType_Hidden" xml:space="preserve">
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
     <value>Rejtett</value>
   </data>
-  <data name="ChartFilterType_Master" xml:space="preserve">
+  <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>Mester</value>
+  </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>Csökkenő</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>Nehézség</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>Van videó</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>Streamelhető</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>Chartek böngészése &amp; letöltése a weben</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>Chartek beszerzése</value>
+  </data>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>Összes MDM chart migrálása</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>Chartek migrálása</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>A migráció folyamatban van. Kérjük, várj és ne zárd be az alkalmazást.</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>Szint</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>Visszaállítás</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>Rendezés</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>Videó</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>Összes chart frissítése</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>készítette: {0}</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>Szerző</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>Hozzáadás dátuma</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>Frissítés dátuma</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>Mapek</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>Név</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>Szint</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>Fájlméret</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>Művész</value>
@@ -67,29 +184,167 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>Fejlesztő</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>Folytatás</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>Részletek másolása</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>Kilépés</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub visszajelzés</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>Napló megnyitása</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Az Euterpe hibába ütközött</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>Összeomlási jelentés</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>Megnyitás</value>
   </data>
-  <data name="Dropdown_Modded" xml:space="preserve">
-    <value>Moddolt</value>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>Vissza</value>
   </data>
-  <data name="Dropdown_Vanilla" xml:space="preserve">
-    <value>Vanilla</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Charter hozzáadása</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>Dal szerzője</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>Videó átlátszósága</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Max. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Min. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>Leírás</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>Fájlok</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>Üzenet</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>Mód</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>Szint megjelenítésének felülírása</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>Chart neve</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>Romanizált név</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>Streamelhető</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>Jelenet</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>Jelenet (Easter Egg)</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>Keresési kulcsszavak</value>
+  </data>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Változó tempó</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>Frissítés</value>
+  </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} fájl · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>A mentéshez töltsd ki az összes kötelező mezőt</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Adj meg érvényes tempótartományt (min ≤ max)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Kulcsszó hozzáadása</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>Chart manifest.epk metaadatainak megnyitása és szerkesztése</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>Szint</value>
+  </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} fájl, amelyre ez a chart hivatkozik, hiányzik a mappájából</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Új EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Új chart építése egy mappányi eszközből</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>EPK fájl megnyitása…</value>
+  </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Mappa megnyitása</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>Mentés</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Chart-információk</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Leírás és felfedezés</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Rejtett nehézség</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Alapadatok</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Mapek</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Alkalmazásnaplók</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>Egyéni zenék</value>
+  <data name="Folder_GameLogs" xml:space="preserve">
+    <value>Játéknaplók</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Modok</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>Offline charts mappa megnyitása</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>Online charts mappa megnyitása</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
   </data>
   <data name="Folder_UserLibs" xml:space="preserve">
     <value>UserLibs</value>
+  </data>
+  <data name="GameMode_Modded" xml:space="preserve">
+    <value>Moddolt</value>
+  </data>
+  <data name="GameMode_Vanilla" xml:space="preserve">
+    <value>Vanilla</value>
   </data>
   <data name="HomePage_Button_GitHubStar" xml:space="preserve">
     <value>Csillag a GitHubon</value>
@@ -103,8 +358,14 @@
   <data name="HomePage_SupportTitle" xml:space="preserve">
     <value>100% ingyenes és nyílt forráskódú</value>
   </data>
+  <data name="HyperLinkButton_LearnMore" xml:space="preserve">
+    <value>További információ</value>
+  </data>
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Meglátogatás</value>
+  </data>
+  <data name="InitializingMessage" xml:space="preserve">
+    <value>Inicializálás...</value>
   </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Betöltés...</value>
@@ -120,9 +381,6 @@
   </data>
   <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
     <value>Nincs telepítve</value>
-  </data>
-  <data name="MelonLoader_State_Preparing" xml:space="preserve">
-    <value>Előkészítés...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>Szükséges a mod fejlesztéshez</value>
@@ -186,6 +444,9 @@
   </data>
   <data name="ModInfo_Details" xml:space="preserve">
     <value>Részletek</value>
+  </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>Nem kompatibilis modok</value>
   </data>
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>Tároló</value>
@@ -331,6 +592,129 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>Stabil</value>
   </data>
+  <data name="Setup_Description_GamePath" xml:space="preserve">
+    <value>Add meg, hol van telepítve a játék</value>
+  </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>Érvénytelen játékmappa</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
+    <value>Az Euterpe nem kompatibilis az MDMC (Muse Dash Modding Community) ökoszisztémával. Az Euterpe használatának folytatása megnehezíti az MDMC ökoszisztémához való visszatérést, és a Headquarters (az MDMC ranglista) helyét az Euterpe ranglistája veszi át. A nem Euterpe modok vagy chartkezelők, például a MuseDashTOOL, többé nem fognak működni.</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
+    <value>Nem kompatibilis az MDMC ökoszisztémával</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
+    <value>Szánj rá egy percet, hogy elolvasd, majd válaszd ki a játékmappát</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
+    <value>Mielőtt elkezdenéd</value>
+  </data>
+  <data name="Setup_Progress_EssentialModsInstalled" xml:space="preserve">
+    <value>Alapvető modok telepítve</value>
+  </data>
+  <data name="Setup_Progress_InitializingEssentialMods" xml:space="preserve">
+    <value>Alapvető modok inicializálása ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
+    <value>.NET runtime telepítése ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
+    <value>.NET SDK telepítése ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingMelonLoader" xml:space="preserve">
+    <value>MelonLoader telepítése ...</value>
+  </data>
+  <data name="Setup_Progress_InstallingModTemplate" xml:space="preserve">
+    <value>Mod sablon telepítése ...</value>
+  </data>
+  <data name="Setup_Progress_MigratingCharts" xml:space="preserve">
+    <value>CustomAlbums chartok migrálása ...</value>
+  </data>
+  <data name="Setup_Progress_SettingEnvVariable" xml:space="preserve">
+    <value>Környezeti változó beállítása ...</value>
+  </data>
+  <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
+    <value>Nem kompatibilis mod eltávolítása: {0} ...</value>
+  </data>
+  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
+    <value>MelonLoader frissítése {0} → {1} ...</value>
+  </data>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>Sikertelen</value>
+  </data>
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
+    <value>Várakozik</value>
+  </data>
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
+    <value>Fut</value>
+  </data>
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
+    <value>Kész</value>
+  </data>
+  <data name="Setup_Step_Failed" xml:space="preserve">
+    <value>Sikertelen. Ellenőrizze a naplót, vagy próbálja újra.</value>
+  </data>
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
+    <value>Chart Eszköz (MDBMSC)</value>
+  </data>
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
+    <value>MDM chart készítő eszközkészlet</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
+    <value>.NET Runtime</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
+    <value>Szükséges a moddolt játék futtatásához</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Szükséges a mod fejlesztéshez</value>
+  </data>
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY Változó</value>
+  </data>
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
+    <value>Játék útvonal környezeti változó beállítása</value>
+  </data>
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
+    <value>Alapvető Modok</value>
+  </data>
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
+    <value>Fő modok a legjobb élményhez</value>
+  </data>
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
+    <value>Szükséges mod betöltő keretrendszer</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>Régi adatok migrálása</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>Chartek konvertálása régebbi modokból, például CustomAlbums-ból Euterpe formátumba</value>
+  </data>
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
+    <value>Mod Sablon</value>
+  </data>
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
+    <value>NuGet sablon új mod projektekhez</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
+    <value>Ütközések Eltávolítása</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>Inkompatibilis modok eltávolítása</value>
+  </data>
+  <data name="Setup_Title_GamePath" xml:space="preserve">
+    <value>Játékmappa keresése</value>
+  </data>
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
+    <value>Euterpe Beállítása</value>
+  </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>Mod beállítások szerkesztése</value>
   </data>
@@ -351,5 +735,38 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanyol</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>Válaszd ki a szereped és a feladatokat a kezdéshez</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>Charter</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>Ajánlott chart készítőknek</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>Egyéni</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>Testreszabott beállítás</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>Modder</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>Ajánlott mod fejlesztőknek</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>Játékos</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>Ajánlott átlagos játékosoknak</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>Feladatok</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Üdvözöl az Euterpe</value>
   </data>
 </root>

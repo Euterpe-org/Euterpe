@@ -1,0 +1,63 @@
+name: Bug 反馈
+description: 报告一个 Bug
+title: "[Bug]: "
+labels: "bug"
+body:
+  - type: checkboxes
+    id: checking1
+    attributes:
+      label: 我正在使用 Euterpe 的最新版本，并且该问题仍然存在。
+      options:
+        - label: "是"
+          required: true
+
+  - type: checkboxes
+    id: checking2
+    attributes:
+      label: 现有的 issue 列表中没有类似的问题
+      description: https://github.com/Euterpe-org/Euterpe/issues
+      options:
+        - label: "是"
+          required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 操作系统
+      description: 你正在使用哪个操作系统？
+      options:
+        - Windows 10 及以下
+        - Windows 11
+        - Ubuntu
+        - 其他 Linux 发行版
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_detail
+    attributes:
+      label: Bug 详情
+      placeholder: 请详细描述你遇到的问题
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 截图（可选）
+      placeholder: |-
+        点击此输入框并将截图或视频拖入即可上传。
+        提交 issue 后请确认截图或视频可以正常显示。
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志
+      placeholder: |-
+        1. 进入应用目录下的 Logs 文件夹（通常是 Euterpe\Logs），选择最下方的日志文件。
+        2. 如果应用崩溃了，它通常会自动打开该文件夹并选中对应日志。
+        3. 将日志文件（*.log）拖入此输入框上传。
+    validations:
+      required: true

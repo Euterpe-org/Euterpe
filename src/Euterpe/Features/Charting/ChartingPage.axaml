@@ -1,0 +1,46 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.Features.Charting"
+    x:Class="Euterpe.Features.Charting.ChartingPage"
+    x:DataType="vm:ChartingPageViewModel"
+    d:DesignHeight="700"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:ChartingPageViewModel />
+    </Design.DataContext>
+
+    <Grid
+        RowDefinitions="Auto, *">
+        <Border
+            Grid.Row="0"
+            Classes="WinMainNav">
+            <Panel>
+                <e:NavPanelList
+                    ItemsSource="{Binding NavItems, Mode=OneTime}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                <e:NavButtonList
+                    ItemsSource="{Binding DropDownButtons, Mode=OneTime}" />
+            </Panel>
+        </Border>
+        <ContentControl
+            Grid.Row="1"
+            Content="{Binding Content, Mode=OneWay}"
+            Margin="0,10,10,10">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type vm:ChartManagePanelViewModel}">
+                    <vm:ChartManagePanel />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:CharterToolkitPanelViewModel}">
+                    <vm:CharterToolkitPanel />
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+    </Grid>
+
+</UserControl>

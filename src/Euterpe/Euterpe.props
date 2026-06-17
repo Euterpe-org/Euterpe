@@ -1,4 +1,4 @@
-﻿<Project>
+<Project>
     <PropertyGroup>
         <TrimMode>link</TrimMode>
     </PropertyGroup>

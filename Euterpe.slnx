@@ -2,7 +2,6 @@
     <Folder Name="/Solution Items/">
         <File Path=".editorconfig"/>
         <File Path=".imgbotconfig"/>
-        <File Path=".github/workflows/build.yml"/>
         <File Path="Directory.Build.props"/>
         <File Path="Directory.Packages.props"/>
         <File Path="global.json"/>
@@ -14,17 +13,20 @@
     </Folder>
     <Folder Name="/src/">
         <Project Path="src/Euterpe.Abstractions/Euterpe.Abstractions.csproj"/>
-        <Project Path="src/Euterpe.Common/Euterpe.Common.csproj"/>
+        <Project Path="src/Euterpe.Contracts/Euterpe.Contracts.csproj"/>
         <Project Path="src/Euterpe.Core/Euterpe.Core.csproj"/>
         <Project Path="src/Euterpe.Generators/Euterpe.Generators.csproj"/>
         <Project Path="src/Euterpe.Localization/Euterpe.Localization.csproj"/>
         <Project Path="src/Euterpe.Models/Euterpe.Models.csproj"/>
-        <Project Path="src/Euterpe.Styles/Euterpe.Styles.csproj"/>
+        <Project Path="src/Euterpe.Shared/Euterpe.Shared.csproj"/>
         <Project Path="src/Euterpe.Tasks/Euterpe.Tasks.csproj"/>
         <Project Path="src/Euterpe.Updater/Euterpe.Updater.csproj"/>
         <Project Path="src/Euterpe/Euterpe.csproj"/>
+        <Project Path="src\Euterpe.Controls\Euterpe.Controls.csproj"/>
     </Folder>
     <Folder Name="/tests/">
+        <Project Path="tests/Euterpe.Generators.Tests/Euterpe.Generators.Tests.csproj"/>
+        <Project Path="tests/Euterpe.Headless.Tests/Euterpe.Headless.Tests.csproj"/>
         <Project Path="tests/Euterpe.Tests/Euterpe.Tests.csproj"/>
     </Folder>
 </Solution>

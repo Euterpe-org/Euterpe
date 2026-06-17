@@ -1,61 +1,173 @@
-﻿using System.Collections.Concurrent;
-using AsyncAwaitBestPractices;
+using System.Collections.Concurrent;
+using Euterpe.Shared.Threading;
 
 namespace Euterpe.Core;
 
-internal sealed partial class ModManageService : IModManageService
+internal sealed partial class ModManageService : IModManageService, IDisposable
 {
+    private readonly Lazy<Task> _initTask;
+    private readonly SingleFlight<string> _singleFlight = new();
+    private readonly SemaphoreSlim _reconcileGate = new(1, 1);
+    private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
-    private SemVersion? _melonLoaderVersion;
-    private SourceCache<ModDto, string> _sourceCache = null!;
 
-    public async Task InitializeModsAsync(SourceCache<ModDto, string> sourceCache)
-    {
-        _sourceCache = sourceCache;
+    public ModManageService() => _initTask = new Lazy<Task>(InitializeCoreAsync, LazyThreadSafetyMode.ExecutionAndPublication);
 
-        _melonLoaderVersion = SemVersion.TryParse(Config.MelonLoaderVersion, out var parsedVersion) ? parsedVersion : null;
+    public IObservable<IChangeSet<ModDto, string>> Connect() => _sourceCache.Connect();
 
-        await LoadLibsAsync().ConfigureAwait(false);
-        await LoadModsAsync().ConfigureAwait(false);
-    }
+    public Task InitializeModsAsync() => _initTask.Value;
+
+    public ModDto? FindModByName(string name) =>
+        _sourceCache.Lookup(name) is { HasValue: true, Value: var mod } ? mod : null;
 
     public async Task InstallModAsync(ModDto mod)
     {
-        await DownloadManager.DownloadModAsync(mod).ConfigureAwait(false);
-        StatisticsService.RecordDownloadAsync(mod.Name, mod.Author).SafeFireAndForget();
-        CheckLibDependencies(mod);
-        await EnableModDependenciesAsync(mod).ConfigureAwait(false);
-        mod.AddLocalInfo();
+        await RunExclusiveAsync(mod, () => InstallModCoreAsync(mod)).ConfigureAwait(false);
+        await RecomputeStatesAsync().ConfigureAwait(false);
+    }
+
+    public async Task UpdateModAsync(ModDto mod)
+    {
+        var (success, name) = await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false);
+        await RecomputeStatesAsync().ConfigureAwait(false);
+        if (success)
+        {
+            NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, name);
+        }
+        else
+        {
+            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, name);
+        }
+    }
+
+    public async Task ReinstallModAsync(ModDto mod)
+    {
+        await RunExclusiveAsync(mod, () => ReinstallModCoreAsync(mod)).ConfigureAwait(false);
+        await RecomputeStatesAsync().ConfigureAwait(false);
     }
 
     public async Task UninstallModAsync(ModDto mod)
     {
-        File.Delete(Path.Combine(Config.ModsFolder, mod.LocalFileName));
-        await DisableModDependentsAsync(mod).ConfigureAwait(false);
-        mod.RemoveLocalInfo();
+        await RunExclusiveAsync(mod, () => UninstallModCoreAsync(mod)).ConfigureAwait(false);
+        await RecomputeStatesAsync().ConfigureAwait(false);
     }
 
-    public Task ToggleModAsync(ModDto mod) => mod.IsDisabled ? EnableModAsync(mod) : DisableModAsync(mod);
+    public Task ToggleModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ToggleModCoreAsync(mod));
+
+    public async Task InstallModByNameAsync(string name)
+    {
+        var mod = FindModByName(name);
+        if (mod is null)
+        {
+            Logger.ZLogWarning($"Install requested for unknown mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
+            return;
+        }
+
+        if (mod.IsLocal)
+        {
+            Logger.ZLogInformation($"Install requested for already-installed mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_Install_AlreadyInstalled, name);
+            return;
+        }
+
+        if (mod.State is ModState.Incompatible)
+        {
+            Logger.ZLogInformation($"Install requested for incompatible mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_Install_Incompatible, name);
+            return;
+        }
+
+        await InstallModAsync(mod).ConfigureAwait(false);
+    }
+
+    public async Task UpdateModByNameAsync(string name)
+    {
+        var mod = FindModByName(name);
+        if (mod is null)
+        {
+            Logger.ZLogWarning($"Update requested for unknown mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
+            return;
+        }
+
+        if (!mod.IsLocal)
+        {
+            Logger.ZLogInformation($"Update requested for not-installed mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotInstalled, name);
+            return;
+        }
+
+        if (mod.State is not ModState.Outdated)
+        {
+            Logger.ZLogInformation($"Update requested for up-to-date mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_Update_UpToDate, name);
+            return;
+        }
+
+        await UpdateModAsync(mod).ConfigureAwait(false);
+    }
+
+    public async Task UninstallModByNameAsync(string name)
+    {
+        var mod = FindModByName(name);
+        if (mod is null)
+        {
+            Logger.ZLogWarning($"Uninstall requested for unknown mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
+            return;
+        }
+
+        if (!mod.IsLocal)
+        {
+            Logger.ZLogInformation($"Uninstall requested for not-installed mod {name}");
+            NotificationService.NoticeLight(Notification_Content_Mod_NotInstalled, name);
+            return;
+        }
+
+        await UninstallModAsync(mod).ConfigureAwait(false);
+    }
+
+    public async Task<int> UpdateAllModsAsync()
+    {
+        var outdatedMods = _sourceCache.Items.Where(mod => mod.State is ModState.Outdated).ToArray();
+        Logger.ZLogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
+
+        var updated = 0;
+        foreach (var mod in outdatedMods)
+        {
+            if ((await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false)).Success)
+            {
+                updated++;
+            }
+        }
+
+        if (updated > 0)
+        {
+            await RecomputeStatesAsync().ConfigureAwait(false);
+        }
+
+        var failed = outdatedMods.Length - updated;
+        if (failed > 0)
+        {
+            NotificationService.WarningLight(Notification_Content_Mod_UpdateAll_Partial, updated, failed);
+        }
+        else if (updated > 0)
+        {
+            NotificationService.SuccessLight(Notification_Content_Mod_UpdateAll_Success, updated);
+        }
+
+        return outdatedMods.Length;
+    }
 
     #region Injections
 
-    [UsedImplicitly]
-    public required Config Config { get; init; }
-
-    [UsedImplicitly]
-    public required IDownloadManager DownloadManager { get; init; }
-
-    [UsedImplicitly]
-    public required ILocalService LocalService { get; init; }
-
-    [UsedImplicitly]
+    public required GameConfig GameConfig { get; init; }
+    public required IGameDownloadManager GameDownloadManager { get; init; }
+    public required IFileSystemService FileSystemService { get; init; }
+    public required IModLocalService ModLocalService { get; init; }
     public required ILogger<ModManageService> Logger { get; init; }
-
-    [UsedImplicitly]
-    public required IMessageBoxService MessageBoxService { get; init; }
-
-    [UsedImplicitly]
-    public required IStatisticsService StatisticsService { get; init; }
+    public required INotificationService NotificationService { get; init; }
 
     #endregion Injections
 }

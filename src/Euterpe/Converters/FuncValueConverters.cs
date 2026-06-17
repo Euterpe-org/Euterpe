@@ -1,12 +1,30 @@
+using System.Collections.Concurrent;
+using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace Euterpe.Converters;
 
 public static class FuncValueConverters
 {
-    private const string IconPrefix = "SemiIcon";
-    private static readonly IResourceService _resourceService = IocContainer.Resolve<IResourceService>();
+    private static readonly ConcurrentDictionary<ChartDifficulty, Bitmap> DifficultyIcons = new();
 
     public static FuncValueConverter<string, StreamGeometry?> SemiIconConverter { get; } =
-        new(iconKeyName => _resourceService.TryGetAppResource<StreamGeometry>($"{IconPrefix}{iconKeyName}"));
+        new(key => GetCurrentApplication().TryGetResource($"SemiIcon{key}", out var result) ? result as StreamGeometry : null);
+
+    public static FuncValueConverter<int, HorizontalAlignment> HorizontalAlignmentConverter { get; } =
+        new(count => count is 1 ? HorizontalAlignment.Center : HorizontalAlignment.Left);
+
+    public static FuncValueConverter<string?, IBrush?> HexColorToBrushConverter { get; } =
+        new(hex => Color.TryParse(hex, out var color) ? new SolidColorBrush(color) : null);
+
+    public static FuncValueConverter<ChartDifficulty, Bitmap> DifficultyIconConverter { get; } =
+        new(static difficulty => DifficultyIcons.GetOrAdd(difficulty, static d =>
+            new Bitmap(AssetLoader.Open(AppAssets.Uri($"Difficulties/{d}.png")))));
+
+    // [PlaybackState.PlayingKey, PlaybackState.Status, ChartDto.FolderPath]
+    public static FuncMultiValueConverter<object?, bool> TileIsPlaying { get; } =
+        new(static values => values.ToArray() is [string playingKey, PlaybackStatus.Playing, string folderPath]
+                             && playingKey == folderPath);
 }

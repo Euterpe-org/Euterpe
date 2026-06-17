@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <IsAotCompatible>false</IsAotCompatible>
+        <IsPublishable>false</IsPublishable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Basic.Reference.Assemblies.Net100"/>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp"/>
+        <PackageReference Include="TUnit"/>
+        <PackageReference Include="Verify.SourceGenerators"/>
+        <PackageReference Include="Verify.TUnit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Euterpe.Generators\Euterpe.Generators.csproj"/>
+    </ItemGroup>
+
+</Project>

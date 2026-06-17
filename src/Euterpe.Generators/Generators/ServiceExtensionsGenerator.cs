@@ -1,122 +1,98 @@
-﻿namespace Euterpe.Generators;
+namespace Euterpe.Generators;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class ServiceExtensionsGenerator : IncrementalGeneratorBase
+public sealed class ServiceExtensionsGenerator : IIncrementalGenerator
 {
-    protected override string ExpectedRootNamespace => EuterpeNamespace;
+    private const string RouteAttributeName = "Euterpe.Shared.Attributes.RouteAttribute";
+    private const string PerGameAttributeName = "Euterpe.Shared.Attributes.PerGameAttribute";
+    private const string RegisterAttributeName = "Euterpe.Shared.Attributes.RegisterAttribute";
 
-    protected override void InitializeCore(IncrementalGeneratorInitializationContext context, IncrementalValueProvider<bool> isValidProvider)
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var syntaxProvider = context.SyntaxProvider.CreateSyntaxProvider(
-            FilterNode, ExtractDataFromContext).Collect();
-        context.RegisterSourceOutput(syntaxProvider.WithCondition(isValidProvider), GenerateFromData);
+        var routed = context.SyntaxProvider
+            .ForAttributeWithMetadataName(RouteAttributeName, static (node, _) => node is ClassDeclarationSyntax, ExtractRouted)
+            .Collect();
+
+        var perGame = context.SyntaxProvider
+            .ForAttributeWithMetadataName(PerGameAttributeName, static (node, _) => node is ClassDeclarationSyntax, ExtractFullName)
+            .Collect();
+
+        var registered = context.SyntaxProvider
+            .ForAttributeWithMetadataName(RegisterAttributeName, static (node, _) => node is ClassDeclarationSyntax, ExtractFullName)
+            .Collect();
+
+        context.RegisterSourceOutput(routed.Combine(perGame).Combine(registered), Generate);
     }
 
-    private static bool FilterNode(SyntaxNode node, CancellationToken _) =>
-        node is ClassDeclarationSyntax { BaseList.Types: var types }
-        && types[0].ToString() is "UserControl" or "Window" or "UrsaWindow" or "Application";
+    private static string ExtractFullName(GeneratorAttributeSyntaxContext context, CancellationToken _) =>
+        context.TargetSymbol is INamedTypeSymbol symbol ? symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) : string.Empty;
 
-    private static ViewData? ExtractDataFromContext(GeneratorSyntaxContext context, CancellationToken _)
+    private static RegistrationData? ExtractRouted(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
-        if (context.Node is not ClassDeclarationSyntax { BaseList.Types: var types } classDeclaration)
+        if (context.TargetSymbol is not INamedTypeSymbol symbol)
         {
             return null;
         }
 
-        var controlType = ControlType.UserControl;
-        var baseTypeName = types[0].ToString();
-
-        controlType = baseTypeName switch
-        {
-            "UserControl" => ControlType.UserControl,
-            "Window" or "UrsaWindow" => ControlType.Window,
-            "Application" => ControlType.Application,
-            _ => controlType
-        };
-
-        return new ViewData(classDeclaration.Identifier.Text, controlType);
+        var isPerGame = symbol.GetAttributes().Any(static a => a.AttributeClass?.ToDisplayString() is PerGameAttributeName);
+        return new RegistrationData(symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat), isPerGame);
     }
 
-    private static void GenerateFromData(SourceProductionContext spc, ImmutableArray<ViewData?> dataCollection)
+    private static void Generate(SourceProductionContext spc,
+        ((ImmutableArray<RegistrationData?> Routed, ImmutableArray<string> PerGame) RoutedAndPerGame, ImmutableArray<string> Registered) data)
     {
-        if (dataCollection is [])
+        var ((routed, perGame), registered) = data;
+        if (routed.IsEmpty && perGame.IsEmpty && registered.IsEmpty)
         {
             return;
         }
 
-        var sb = new GeneratorStringBuilder();
-        sb.AppendLine($$"""
-                        using global::Avalonia.Interactivity;
-                        using static global::Euterpe.IocContainer;
+        var seen = new HashSet<string>();
+        var appViewModels = new List<string>();
+        var perGameViewModels = new List<string>();
 
-                        namespace Euterpe.Extensions;
-
-                        partial class ServiceExtensions
-                        {
-                            {{GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator))}}
-                            public static void RegisterViewAndViewModels(this ContainerBuilder builder)
-                            {
-                        """);
-
-        foreach (var data in dataCollection)
+        foreach (var item in routed)
         {
-            if (data is not var (name, controlType))
+            if (item is null || !seen.Add(item.FullName))
             {
                 continue;
             }
 
-            if (controlType is ControlType.Application)
-            {
-                sb.AppendLine(
-                    $"""
-                     builder.RegisterType<{name}ViewModel>()
-                        .OnActivated(x => new ValueTask(x.Instance.InitializeAsync()))
-                        .PropertiesAutowired()
-                        .SingleInstance();
-                     """);
-            }
-            else
-            {
-                sb.AppendLine($"\t\tbuilder.RegisterType<{name}ViewModel>().PropertiesAutowired().SingleInstance();");
-                GenerateViewRegistration(sb, name, controlType);
-            }
-
-            sb.AppendLine();
+            (item.IsPerGame ? perGameViewModels : appViewModels).Add(item.FullName);
         }
 
-        sb.AppendLine("""
-                          }
-                      }
-                      """);
+        appViewModels.AddRange(registered.Where(seen.Add));
+        perGameViewModels.AddRange(perGame.Where(seen.Add));
 
-        spc.AddSource("ServiceExtensions.g.cs", sb.ToString());
-    }
+        appViewModels.Sort(StringComparer.Ordinal);
+        perGameViewModels.Sort(StringComparer.Ordinal);
 
-    private static void GenerateViewRegistration(GeneratorStringBuilder sb, string name, ControlType controlType)
-    {
-        var (eventName, eventArgs) = controlType switch
+        var cb = new CodeBuilder();
+        cb.Append(Header).AppendLine();
+        cb.AppendLine("namespace Euterpe.Extensions;");
+        cb.AppendLine();
+
+        using (cb.Block("partial class ServiceExtensions"))
         {
-            ControlType.UserControl => ("Initialized", ""),
-            ControlType.Window => ("Loaded", "<RoutedEventArgs>"),
-            _ => throw new UnreachableException()
-        };
+            AppendRegistration(cb, "RegisterAppViewModels", "SingleInstance()", appViewModels);
+            cb.AppendLine();
+            AppendRegistration(cb, "RegisterPerGameViewModels", "InstancePerLifetimeScope()", perGameViewModels);
+        }
 
-        sb.AppendLine($$"""
-                                builder.Register<{{name}}>(ctx => new {{name}}{ DataContext = ctx.Resolve<{{name}}ViewModel>() })
-                                .OnActivated(x => Observable.FromEventHandler{{eventArgs}}(
-                                        h => x.Instance.{{eventName}} += h,
-                                        h => x.Instance.{{eventName}} -= h)
-                                    .SubscribeAwait((_, _) => new ValueTask(Resolve<{{name}}ViewModel>().InitializeAsync())))
-                                .SingleInstance();
-                        """);
+        spc.AddSource("ServiceExtensions.g.cs", cb.ToString());
     }
 
-    private enum ControlType
+    private static void AppendRegistration(CodeBuilder cb, string methodName, string lifetime, List<string> viewModels)
     {
-        UserControl,
-        Window,
-        Application
+        cb.AppendLine(GetGeneratedCodeAttribute(nameof(ServiceExtensionsGenerator)));
+        using (cb.Block($"public static void {methodName}(this ContainerBuilder builder)"))
+        {
+            foreach (var viewModel in viewModels)
+            {
+                cb.AppendLine($"builder.RegisterType<{viewModel}>().PropertiesAutowired().{lifetime};");
+            }
+        }
     }
 
-    private sealed record ViewData(string Name, ControlType ControlType);
+    private sealed record RegistrationData(string FullName, bool IsPerGame);
 }

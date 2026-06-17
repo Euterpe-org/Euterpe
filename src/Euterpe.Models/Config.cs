@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Semver;
 
@@ -15,17 +16,27 @@ public sealed partial class Config : ObservableObject
     [ObservableProperty]
     public partial string SteamExecPath { get; set; } = string.Empty;
 
-    [AllowNull]
     [ObservableProperty]
-    public partial string MuseDashFolder { get; set; } = string.Empty;
+    public partial string CacheFolder { get; set; } = Path.Combine(AppDataFolder, "Cache");
 
+    // Per Game Settings
     [ObservableProperty]
-    public partial string CacheFolder { get; set; } =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(Euterpe), "Cache");
+    public partial GameId ActiveGame { get; set; } = GameId.MuseDash;
 
-    // Game Settings
-    [ObservableProperty]
-    public partial GameMode GameMode { get; set; } = GameMode.Modded;
+    public MuseDashConfig MuseDash { get; set; } = new();
+
+    public MuseDash2Config MuseDash2 { get; set; } = new();
+
+    [JsonIgnore]
+    public IReadOnlyList<GameConfig> Games => field ??= [MuseDash, MuseDash2];
+
+    [JsonIgnore]
+    public GameConfig ActiveGameConfig => ActiveGame switch
+    {
+        GameId.MuseDash => MuseDash,
+        GameId.MuseDash2 => MuseDash2,
+        _ => throw new UnreachableException()
+    };
 
     // Appearance Settings
     [AllowNull]
@@ -52,55 +63,4 @@ public sealed partial class Config : ObservableObject
     // Advanced Settings
     [ObservableProperty]
     public partial bool IgnoreException { get; set; }
-
-    // Game Information
-    [JsonIgnore]
-    public string GameVersion { get; set; } = string.Empty;
-
-    [JsonIgnore]
-    public string UnityVersion { get; set; } = string.Empty;
-
-    [JsonIgnore]
-    [ObservableProperty]
-    public partial string? MelonLoaderVersion { get; set; }
-
-    // Ignored Paths
-    [JsonIgnore]
-    public string ChartFolder => GetCombinedPath(CacheFolder, "Charts");
-
-    [JsonIgnore]
-    public string CustomAlbumsFolder => GetCombinedPath(MuseDashFolder, "Custom_Albums");
-
-    [JsonIgnore]
-    public string ModsFolder => GetCombinedPath(MuseDashFolder, "Mods");
-
-    [JsonIgnore]
-    public string UserDataFolder => GetCombinedPath(MuseDashFolder, "UserData");
-
-    [JsonIgnore]
-    public string UserLibsFolder => GetCombinedPath(MuseDashFolder, "UserLibs");
-
-    [JsonIgnore]
-    public string MelonLoaderFolder => GetCombinedPath(MuseDashFolder, "MelonLoader");
-
-    [JsonIgnore]
-    public string MelonLoaderZipPath => GetCombinedPath(MuseDashFolder, "MelonLoader.zip");
-
-    [JsonIgnore]
-    public string LatestLogPath => GetCombinedPath(MelonLoaderFolder, "Latest.log");
-
-    [JsonIgnore]
-    private string Il2CppAssemblyGeneratorFolderPath => Path.Combine(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
-
-    [JsonIgnore]
-    public string UnityDependencyZipPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityVersion}.zip");
-
-    [JsonIgnore]
-    public string Cpp2ILExecutablePath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, Path.Combine("Cpp2IL", "Cpp2IL.exe"));
-
-    [JsonIgnore]
-    public string Cpp2ILPluginPath => GetCombinedPath(Il2CppAssemblyGeneratorFolderPath, Path.Combine("Cpp2IL", "Plugins", "Cpp2IL.Plugin.StrippedCodeRegSupport.dll"));
-
-    private static string GetCombinedPath(string? folderPath, string targetPath, string defaultPath = "") =>
-        !folderPath.IsNullOrEmpty() ? Path.Combine(folderPath, targetPath) : defaultPath;
 }

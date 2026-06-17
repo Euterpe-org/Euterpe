@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+    paths-ignore:
+      - "assets/**"
+      - "LICENSE"
+      - "**/*.md"
+  pull_request:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - "assets/**"
+      - "LICENSE"
+      - "**/*.md"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: Test (${{ matrix.platform.name }}-${{ matrix.platform.arch }})
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { os: ubuntu-latest, name: linux, arch: x64 }
+          - { os: windows-latest, name: win, arch: x64 }
+
+    runs-on: ${{ matrix.platform.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Build
+        run: dotnet build -c Release -p:DebugType=embedded
+
+      - name: Test core
+        run: dotnet test --project tests/Euterpe.Tests/Euterpe.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
+
+      - name: Test generators
+        run: dotnet test --project tests/Euterpe.Generators.Tests/Euterpe.Generators.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
+
+      - name: Test headless
+        run: dotnet test --project tests/Euterpe.Headless.Tests/Euterpe.Headless.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
+
+      - name: Upload to Codecov
+        if: always()
+        uses: codecov/codecov-action@v7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: TestResults/*.cobertura.xml
+          flags: ${{ matrix.platform.name }}
+          fail_ci_if_error: false

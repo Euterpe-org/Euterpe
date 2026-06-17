@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Extensions;
+namespace Euterpe.Extensions;
 
 public static class VisualExtensions
 {

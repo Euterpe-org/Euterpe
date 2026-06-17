@@ -1,13 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="MessagePack"/>
+        <PackageReference Include="NetEscapades.EnumGenerators"/>
         <PackageReference Include="Riok.Mapperly"/>
         <PackageReference Include="Semver"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Euterpe.Common\Euterpe.Common.csproj"/>
+        <ProjectReference Include="..\Euterpe.Contracts\Euterpe.Contracts.csproj"/>
+        <ProjectReference Include="..\Euterpe.Shared\Euterpe.Shared.csproj"/>
         <ProjectReference Include="..\Euterpe.Localization\Euterpe.Localization.csproj"/>
     </ItemGroup>
 

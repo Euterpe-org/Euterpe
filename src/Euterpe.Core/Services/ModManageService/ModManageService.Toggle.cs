@@ -1,17 +1,24 @@
-﻿namespace Euterpe.Core;
+namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
-    private async Task EnableModAsync(ModDto mod)
+    private async Task<bool> EnableModAsync(ModDto mod)
     {
-        File.Move(Path.Combine(Config.ModsFolder, mod.LocalFileName),
-            Path.Combine(Config.ModsFolder, mod.ReversedFileName));
+        if (!FileSystemService.TryMoveFile(
+                Path.Combine(GameConfig.ModsFolder, mod.LocalFileName),
+                Path.Combine(GameConfig.ModsFolder, mod.ReversedFileName)))
+        {
+            Logger.ZLogError($"Failed to enable mod {mod.Name}: could not move file {mod.LocalFileName}");
+            return false;
+        }
 
         CheckLibDependencies(mod);
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
 
-        Logger.ZLogInformation($"Change mod {mod.Name} state to enabled");
         mod.IsDisabled = false;
+        Logger.ZLogInformation($"Change mod {mod.Name} state to enabled");
+
+        return true;
     }
 
     private async Task EnableModDependenciesAsync(ModDto mod)
@@ -30,15 +37,22 @@ internal sealed partial class ModManageService
         }
     }
 
-    private async Task DisableModAsync(ModDto mod)
+    private async Task<bool> DisableModAsync(ModDto mod)
     {
-        File.Move(Path.Combine(Config.ModsFolder, mod.LocalFileName),
-            Path.Combine(Config.ModsFolder, mod.ReversedFileName));
+        if (!FileSystemService.TryMoveFile(
+                Path.Combine(GameConfig.ModsFolder, mod.LocalFileName),
+                Path.Combine(GameConfig.ModsFolder, mod.ReversedFileName)))
+        {
+            Logger.ZLogError($"Failed to disable mod {mod.Name}: could not move file {mod.LocalFileName}");
+            return false;
+        }
 
         await DisableModDependentsAsync(mod).ConfigureAwait(false);
 
-        Logger.ZLogInformation($"Change mod {mod.Name} state to disabled");
         mod.IsDisabled = true;
+        Logger.ZLogInformation($"Change mod {mod.Name} state to disabled");
+
+        return true;
     }
 
     private async Task DisableModDependentsAsync(ModDto mod)

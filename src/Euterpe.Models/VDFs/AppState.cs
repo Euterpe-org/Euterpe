@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Models.VDFs;
+namespace Euterpe.Models.VDFs;
 
 public sealed class AppState
 {

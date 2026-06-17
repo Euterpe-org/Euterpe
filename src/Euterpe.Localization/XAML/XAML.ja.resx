@@ -19,8 +19,17 @@
   <data name="Button_Apply" xml:space="preserve">
     <value>適用</value>
   </data>
+  <data name="Button_Back" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>参照...</value>
+  </data>
   <data name="Button_CheckUpdate" xml:space="preserve">
     <value>アップデートを確認</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>確認</value>
   </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>翻訳に協力</value>
@@ -31,14 +40,17 @@
   <data name="Button_LaunchGame" xml:space="preserve">
     <value>ゲーム開始</value>
   </data>
-  <data name="Button_MDMC_Website" xml:space="preserve">
-    <value>MDMC ウェブサイト</value>
+  <data name="Button_Next" xml:space="preserve">
+    <value>次へ</value>
   </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>再インストール</value>
   </data>
   <data name="Button_Reselect" xml:space="preserve">
     <value>再選択</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>再試行</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>ソースコード</value>
@@ -49,17 +61,122 @@
   <data name="Button_Update" xml:space="preserve">
     <value>アップデート</value>
   </data>
-  <data name="ChartFilterType_Easy" xml:space="preserve">
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>おおよそのレベルを予測し、譜面の Note 内訳を分析</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>譜面分析器</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>譜面をアップロードして公開</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>譜面を提出</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>譜面の manifest メタデータをローカルで編集</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>オフラインツール</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Euterpe サイトで譜面を分析・提出（ブラウザで開く）</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>オンラインツール</value>
+  </data>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>普通</value>
   </data>
-  <data name="ChartFilterType_Hard" xml:space="preserve">
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
     <value>玄人</value>
   </data>
-  <data name="ChartFilterType_Hidden" xml:space="preserve">
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
     <value>隠し</value>
   </data>
-  <data name="ChartFilterType_Master" xml:space="preserve">
+  <data name="ChartDifficulty_Master" xml:space="preserve">
     <value>達人</value>
+  </data>
+  <data name="ChartManage_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartManage_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="ChartManage_Descending" xml:space="preserve">
+    <value>降順</value>
+  </data>
+  <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
+    <value>難易度</value>
+  </data>
+  <data name="ChartManage_Filter_HasVideo" xml:space="preserve">
+    <value>動画あり</value>
+  </data>
+  <data name="ChartManage_Filter_StreamerSafe" xml:space="preserve">
+    <value>配信向け</value>
+  </data>
+  <data name="ChartManage_GetCharts_Description" xml:space="preserve">
+    <value>ウェブで譜面を閲覧 &amp; ダウンロード</value>
+  </data>
+  <data name="ChartManage_GetCharts_Title" xml:space="preserve">
+    <value>譜面を入手</value>
+  </data>
+  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
+    <value>すべての MDM 譜面を移行</value>
+  </data>
+  <data name="ChartManage_Migrating" xml:space="preserve">
+    <value>譜面を移行中</value>
+  </data>
+  <data name="ChartManage_MigratingHint" xml:space="preserve">
+    <value>移行中です。しばらくお待ちください。アプリを閉じないでください。</value>
+  </data>
+  <data name="ChartManage_Rating" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="ChartManage_Reset" xml:space="preserve">
+    <value>リセット</value>
+  </data>
+  <data name="ChartManage_SortBy" xml:space="preserve">
+    <value>並べ替え</value>
+  </data>
+  <data name="ChartManage_Tag_Video" xml:space="preserve">
+    <value>動画</value>
+  </data>
+  <data name="ChartManage_UpdateAll" xml:space="preserve">
+    <value>すべての譜面を更新</value>
+  </data>
+  <data name="ChartManage_UploadedBy" xml:space="preserve">
+    <value>投稿者：{0}</value>
+  </data>
+  <data name="ChartSortField_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="ChartSortField_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="ChartSortField_DateAdded" xml:space="preserve">
+    <value>追加日</value>
+  </data>
+  <data name="ChartSortField_DateUpdated" xml:space="preserve">
+    <value>更新日</value>
+  </data>
+  <data name="ChartSortField_MapCount" xml:space="preserve">
+    <value>マップ数</value>
+  </data>
+  <data name="ChartSortField_Name" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="ChartSortField_Rating" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="ChartSortField_Size" xml:space="preserve">
+    <value>ファイルサイズ</value>
+  </data>
+  <data name="ChartSource_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ChartSource_Online" xml:space="preserve">
+    <value>Online</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>アーティスト</value>
@@ -67,29 +184,167 @@
   <data name="Contributor_Developer" xml:space="preserve">
     <value>開発者</value>
   </data>
+  <data name="CrashDialog_Button_Continue" xml:space="preserve">
+    <value>続行</value>
+  </data>
+  <data name="CrashDialog_Button_Copy" xml:space="preserve">
+    <value>詳細をコピー</value>
+  </data>
+  <data name="CrashDialog_Button_Exit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="CrashDialog_Button_Feedback" xml:space="preserve">
+    <value>GitHub フィードバック</value>
+  </data>
+  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
+    <value>ログを開く</value>
+  </data>
+  <data name="CrashDialog_Header" xml:space="preserve">
+    <value>Euterpe でエラーが発生しました</value>
+  </data>
+  <data name="CrashDialog_Title" xml:space="preserve">
+    <value>クラッシュレポート</value>
+  </data>
   <data name="DropDownButton_Open" xml:space="preserve">
     <value>開く</value>
   </data>
-  <data name="Dropdown_Modded" xml:space="preserve">
-    <value>Mod版</value>
+  <data name="EpkEditor_Back" xml:space="preserve">
+    <value>戻る</value>
   </data>
-  <data name="Dropdown_Vanilla" xml:space="preserve">
-    <value>バニラ</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>譜面作者を追加</value>
+  </data>
+  <data name="EpkEditor_Field_Author" xml:space="preserve">
+    <value>曲作者</value>
+  </data>
+  <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
+    <value>動画の不透明度</value>
+  </data>
+  <data name="EpkEditor_Field_Bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>最大 BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>最小 BPM</value>
+  </data>
+  <data name="EpkEditor_Field_Description" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="EpkEditor_Field_Files" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
+    <value>メッセージ</value>
+  </data>
+  <data name="EpkEditor_Field_HideMode" xml:space="preserve">
+    <value>モード</value>
+  </data>
+  <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
+    <value>レベル表示の上書き</value>
+  </data>
+  <data name="EpkEditor_Field_Name" xml:space="preserve">
+    <value>曲名</value>
+  </data>
+  <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
+    <value>ローマ字名</value>
+  </data>
+  <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
+    <value>配信向け</value>
+  </data>
+  <data name="EpkEditor_Field_Scene" xml:space="preserve">
+    <value>シーン</value>
+  </data>
+  <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
+    <value>シーン（イースターエッグ）</value>
+  </data>
+  <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
+    <value>検索キーワード</value>
+  </data>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>変速</value>
+  </data>
+  <data name="EpkEditor_Files_Refresh" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} 個のファイル · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>すべての必須項目を入力すると保存できます</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>有効なテンポ範囲を設定してください（最小 ≤ 最大）</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>キーワードを追加</value>
+  </data>
+  <data name="EpkEditor_Launcher_Description" xml:space="preserve">
+    <value>譜面の manifest.epk のメタデータを開いて編集</value>
+  </data>
+  <data name="EpkEditor_Map_Rating" xml:space="preserve">
+    <value>レベル</value>
+  </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>この譜面が参照している {0} 個のファイルがフォルダ内に見つかりません</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>新規 EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>素材を入れたフォルダから新しい譜面を作成</value>
+  </data>
+  <data name="EpkEditor_OpenFile" xml:space="preserve">
+    <value>EPK ファイルを開く…</value>
+  </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>フォルダを開く</value>
+  </data>
+  <data name="EpkEditor_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>譜面情報</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>説明と発見</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>隠し難易度</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>基本情報</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>マップ</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>アプリログ</value>
   </data>
-  <data name="Folder_CustomAlbums" xml:space="preserve">
-    <value>カスタム譜面</value>
+  <data name="Folder_GameLogs" xml:space="preserve">
+    <value>ゲームログ</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
     <value>Mods</value>
+  </data>
+  <data name="Folder_OfflineCharts" xml:space="preserve">
+    <value>Offline譜面フォルダを開く</value>
+  </data>
+  <data name="Folder_OnlineCharts" xml:space="preserve">
+    <value>Online譜面フォルダを開く</value>
   </data>
   <data name="Folder_UserData" xml:space="preserve">
     <value>UserData</value>
   </data>
   <data name="Folder_UserLibs" xml:space="preserve">
     <value>UserLibs</value>
+  </data>
+  <data name="GameMode_Modded" xml:space="preserve">
+    <value>Mod版</value>
+  </data>
+  <data name="GameMode_Vanilla" xml:space="preserve">
+    <value>バニラ</value>
   </data>
   <data name="HomePage_Button_GitHubStar" xml:space="preserve">
     <value>GitHubでStarする</value>
@@ -103,8 +358,14 @@
   <data name="HomePage_SupportTitle" xml:space="preserve">
     <value>100% 無料・オープンソース</value>
   </data>
+  <data name="HyperLinkButton_LearnMore" xml:space="preserve">
+    <value>詳細を見る</value>
+  </data>
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>アクセス</value>
+  </data>
+  <data name="InitializingMessage" xml:space="preserve">
+    <value>初期化中...</value>
   </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>読み込み中...</value>
@@ -120,9 +381,6 @@
   </data>
   <data name="MelonLoader_State_NotInstalled" xml:space="preserve">
     <value>未インストール</value>
-  </data>
-  <data name="MelonLoader_State_Preparing" xml:space="preserve">
-    <value>準備中...</value>
   </data>
   <data name="ModDevelop_Card_DotNetSDK_Description" xml:space="preserve">
     <value>Mod開発に必要</value>
@@ -186,6 +444,9 @@
   </data>
   <data name="ModInfo_Details" xml:space="preserve">
     <value>詳細</value>
+  </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>非互換のMod</value>
   </data>
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>リポジトリ</value>
@@ -331,6 +592,129 @@
   <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
     <value>安定版</value>
   </data>
+  <data name="Setup_Description_GamePath" xml:space="preserve">
+    <value>ゲームのインストール場所を教えてください</value>
+  </data>
+  <data name="Setup_GamePath_Invalid" xml:space="preserve">
+    <value>有効なゲームフォルダではありません</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
+    <value>Euterpe は MDMC（Muse Dash Modding Community）エコシステムと互換性がありません。Euterpe を使い続けると MDMC エコシステムへ戻すことが難しくなり、Headquarters（MDMC のランキング）は Euterpe のランキングに置き換えられます。MuseDashTOOL など Euterpe 以外の Mod や譜面管理ツールは動作しなくなります。</value>
+  </data>
+  <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
+    <value>MDMC エコシステムと互換性なし</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
+    <value>まずは以下をご確認のうえ、ゲームフォルダを選択してください。</value>
+  </data>
+  <data name="Setup_GamePath_WelcomeTitle" xml:space="preserve">
+    <value>はじめる前に</value>
+  </data>
+  <data name="Setup_Progress_EssentialModsInstalled" xml:space="preserve">
+    <value>必須Modをインストールしました</value>
+  </data>
+  <data name="Setup_Progress_InitializingEssentialMods" xml:space="preserve">
+    <value>必須Modを初期化しています…</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
+    <value>.NET runtime をインストールしています…</value>
+  </data>
+  <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
+    <value>.NET SDK をインストールしています…</value>
+  </data>
+  <data name="Setup_Progress_InstallingMelonLoader" xml:space="preserve">
+    <value>MelonLoader をインストールしています…</value>
+  </data>
+  <data name="Setup_Progress_InstallingModTemplate" xml:space="preserve">
+    <value>Modテンプレートをインストールしています…</value>
+  </data>
+  <data name="Setup_Progress_MigratingCharts" xml:space="preserve">
+    <value>CustomAlbums 譜面を移行しています…</value>
+  </data>
+  <data name="Setup_Progress_SettingEnvVariable" xml:space="preserve">
+    <value>環境変数を設定しています…</value>
+  </data>
+  <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
+    <value>非対応の Mod をアンインストールしています: {0} …</value>
+  </data>
+  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
+    <value>MelonLoader を更新しています {0} → {1} …</value>
+  </data>
+  <data name="Setup_StepStatus_Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="Setup_StepStatus_Pending" xml:space="preserve">
+    <value>待機中</value>
+  </data>
+  <data name="Setup_StepStatus_Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="Setup_StepStatus_Succeeded" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="Setup_Step_Failed" xml:space="preserve">
+    <value>失敗しました。ログを確認して再試行してください。</value>
+  </data>
+  <data name="Setup_Task_ChartingTool" xml:space="preserve">
+    <value>チャートツール (MDBMSC)</value>
+  </data>
+  <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
+    <value>MDMチャート作成ツールキット</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
+    <value>.NET Runtime</value>
+  </data>
+  <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
+    <value>Mod適用ゲームの実行に必要</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk" xml:space="preserve">
+    <value>.NET SDK</value>
+  </data>
+  <data name="Setup_Task_DotNetSdk_Description" xml:space="preserve">
+    <value>Mod開発に必要</value>
+  </data>
+  <data name="Setup_Task_EnvVariable" xml:space="preserve">
+    <value>MD_DIRECTORY 変数</value>
+  </data>
+  <data name="Setup_Task_EnvVariable_Description" xml:space="preserve">
+    <value>ゲームパス環境変数を設定</value>
+  </data>
+  <data name="Setup_Task_EssentialMods" xml:space="preserve">
+    <value>必須Mod</value>
+  </data>
+  <data name="Setup_Task_EssentialMods_Description" xml:space="preserve">
+    <value>最高の体験のためのコアMod</value>
+  </data>
+  <data name="Setup_Task_MelonLoader" xml:space="preserve">
+    <value>MelonLoader</value>
+  </data>
+  <data name="Setup_Task_MelonLoader_Description" xml:space="preserve">
+    <value>必須Modローダーフレームワーク</value>
+  </data>
+  <data name="Setup_Task_Migration" xml:space="preserve">
+    <value>レガシーデータを移行</value>
+  </data>
+  <data name="Setup_Task_Migration_Description" xml:space="preserve">
+    <value>CustomAlbums などの旧 Mod から Euterpe の形式に譜面を変換</value>
+  </data>
+  <data name="Setup_Task_ModTemplate" xml:space="preserve">
+    <value>Modテンプレート</value>
+  </data>
+  <data name="Setup_Task_ModTemplate_Description" xml:space="preserve">
+    <value>新規Modプロジェクト用NuGetテンプレート</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts" xml:space="preserve">
+    <value>競合の削除</value>
+  </data>
+  <data name="Setup_Task_UninstallConflicts_Description" xml:space="preserve">
+    <value>互換性のないModを削除</value>
+  </data>
+  <data name="Setup_Title_GamePath" xml:space="preserve">
+    <value>ゲームフォルダの指定</value>
+  </data>
+  <data name="Setup_Title_SettingUp" xml:space="preserve">
+    <value>Euterpe セットアップ中</value>
+  </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>Mod設定を編集</value>
   </data>
@@ -351,5 +735,38 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>スペイン語</value>
+  </data>
+  <data name="Wizard_Description_Welcome" xml:space="preserve">
+    <value>ロールとタスクを選んで始めましょう</value>
+  </data>
+  <data name="Wizard_Role_Charter" xml:space="preserve">
+    <value>チャーター</value>
+  </data>
+  <data name="Wizard_Role_Charter_Description" xml:space="preserve">
+    <value>譜面制作者向け</value>
+  </data>
+  <data name="Wizard_Role_Custom" xml:space="preserve">
+    <value>カスタム</value>
+  </data>
+  <data name="Wizard_Role_Custom_Description" xml:space="preserve">
+    <value>セットアップをカスタマイズ</value>
+  </data>
+  <data name="Wizard_Role_Modder" xml:space="preserve">
+    <value>モッダー</value>
+  </data>
+  <data name="Wizard_Role_Modder_Description" xml:space="preserve">
+    <value>Mod開発者向け</value>
+  </data>
+  <data name="Wizard_Role_Player" xml:space="preserve">
+    <value>プレイヤー</value>
+  </data>
+  <data name="Wizard_Role_Player_Description" xml:space="preserve">
+    <value>一般プレイヤー向け</value>
+  </data>
+  <data name="Wizard_Section_Tasks" xml:space="preserve">
+    <value>タスク</value>
+  </data>
+  <data name="Wizard_Title_Welcome" xml:space="preserve">
+    <value>Euterpe へようこそ</value>
   </data>
 </root>

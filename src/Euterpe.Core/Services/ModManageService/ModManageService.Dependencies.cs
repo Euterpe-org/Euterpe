@@ -1,4 +1,4 @@
-﻿namespace Euterpe.Core;
+namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
@@ -7,10 +7,10 @@ internal sealed partial class ModManageService
     /// </summary>
     /// <param name="mod"></param>
     /// <returns></returns>
-    private IEnumerable<ModDto> FindModDependencies(ModDto mod)
+    private ModDto[] FindModDependencies(ModDto mod)
     {
         Logger.ZLogInformation($"Finding mod dependencies for {mod.Name}");
-        return mod.ModDependencies.Select(x => _sourceCache.Lookup(x).Value);
+        return mod.ModDependencies.Select(x => _sourceCache.Lookup(x).Value).ToArray();
     }
 
     /// <summary>
@@ -18,9 +18,9 @@ internal sealed partial class ModManageService
     /// </summary>
     /// <param name="mod"></param>
     /// <returns></returns>
-    private IEnumerable<ModDto> FindModDependents(ModDto mod)
+    private ModDto[] FindModDependents(ModDto mod)
     {
         Logger.ZLogInformation($"Finding mod dependents for {mod.Name}");
-        return _sourceCache.Items.Where(x => x.ModDependencies.Contains(mod.Name));
+        return _sourceCache.Items.Where(x => x.ModDependencies.Contains(mod.Name)).ToArray();
     }
 }

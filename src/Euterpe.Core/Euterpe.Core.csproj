@@ -1,17 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
         <PackageReference Include="AsmResolver.DotNet"/>
         <PackageReference Include="AssetsTools.NET"/>
         <PackageReference Include="AsyncAwaitBestPractices"/>
+        <PackageReference Include="CliWrap"/>
         <PackageReference Include="Autofac"/>
         <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Http"/>
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience"/>
+        <PackageReference Include="R3"/>
+        <PackageReference Include="Refit"/>
+        <PackageReference Include="Refit.HttpClientFactory"/>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="System.ServiceModel.Syndication"/>
+        <PackageReference Include="SoundFlow"/>
+        <PackageReference Include="SoundFlow.Codecs.FFMpeg"/>
         <PackageReference Include="ValveKeyValue"/>
+        <PackageReference Include="System.Security.Cryptography.ProtectedData"/>
         <PackageReference Include="ZLogger"/>
     </ItemGroup>
 
