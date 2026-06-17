@@ -7,7 +7,7 @@ English | [简体中文](README.zh-CN.md)
 <div align="center">
   <img src="assets/Logo.webp" width="120" alt="Euterpe Logo" />
   <h1>Euterpe</h1>
-  <p><strong>A modern platform to discover, share, and manage Muse Dash mods.</strong></p>
+  <p><strong>The community platform for Muse Dash custom charts, mods, and creator tooling.</strong></p>
 </div>
 
 <div align="center">
@@ -20,9 +20,17 @@ English | [简体中文](README.zh-CN.md)
 
 </div>
 
+</br>
+
 <div align="center">
-  <img src="assets/Preview.webp" width="600" alt="Euterpe Preview" />
+  <img src="assets/Preview1.webp" width="600" alt="Euterpe Mod Management" />
 </div>
+
+<div align="center">
+  <img src="assets/Preview2.webp" width="600" alt="Euterpe Chart Management" />
+</div>
+
+</br>
 
 ## 📥 Download
 
@@ -31,12 +39,16 @@ English | [简体中文](README.zh-CN.md)
 - **Nightly:** Auto-built from `dev` daily. Latest features, may be unstable.
   [Download nightly](https://github.com/Euterpe-org/Euterpe/releases/tag/nightly)
 
-## 🍉 Euterpe Hub
+</br>
 
-The heart of the ecosystem — browse every mod anytime.
-Developers can create accounts to upload and manage mods in one click.
+## 🎹 Euterpe Hub
+
+The heart of the ecosystem — players browse every chart and mod anytime; charters and developers upload and manage charts and mods in one click.
+Create your account and join the Euterpe family!
 
 [![Euterpe Hub](https://img.shields.io/badge/Euterpe%20Hub-Visit%20Site-0ea5e9?style=for-the-badge&logo=safari&logoColor=white&labelColor=1f2937)](https://euterpe-org.com)
+
+</br>
 
 ## 💬 Discord
 
@@ -44,9 +56,13 @@ Join the official Discord server for updates, support, and community.
 
 [![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=for-the-badge&logo=discord&logoColor=white&labelColor=1f2937)](https://discord.gg/2rzjcga3nr)
 
+</br>
+
 ## 🤝 Contributors
 
 [![Contributors](https://contrib.rocks/image?repo=Euterpe-org/Euterpe)](https://github.com/Euterpe-org/Euterpe/graphs/contributors)
+
+</br>
 
 ## 📜 License
 
@@ -54,6 +70,8 @@ This project is licensed under the [GNU General Public License v3.0](LICENSE).
 
 <details>
 <summary><b>Third-Party Notices</b></summary>
+
+</br>
 
 ### Libraries
 

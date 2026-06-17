@@ -7,7 +7,7 @@
 <div align="center">
   <img src="assets/Logo.webp" width="120" alt="Euterpe Logo" />
   <h1>Euterpe</h1>
-  <p><strong>发现、分享和管理 Muse Dash 模组的现代化平台</strong></p>
+  <p><strong>发现、分享和管理喵斯快跑谱面与模组的现代化平台</strong></p>
 </div>
 
 <div align="center">
@@ -23,7 +23,11 @@
 </br>
 
 <div align="center">
-  <img src="assets/Preview.webp" width="600" alt="Euterpe 预览" />
+  <img src="assets/Preview1.webp" width="600" alt="Euterpe 模组管理" />
+</div>
+
+<div align="center">
+  <img src="assets/Preview2.webp" width="600" alt="Euterpe 谱面管理" />
 </div>
 
 </br>
@@ -37,10 +41,10 @@
 
 </br>
 
-## 🍉 Euterpe Hub
+## 🎹 Euterpe Hub
 
-生态系统的核心 - 随时浏览所有模组。
-开发者可以创建账户，一键上传和管理模组。
+生态系统的核心 - 玩家随时浏览所有谱面与模组；谱师与开发者一键上传和管理谱面与模组。
+创建你的账号，加入 Euterpe 大家庭！
 
 [![Euterpe Hub](https://img.shields.io/badge/Euterpe%20Hub-访问网站-0ea5e9?style=for-the-badge&logo=safari&logoColor=white&labelColor=1f2937)](https://euterpe-org.com)
 
