@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>アップデート</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>おおよそのレベルを予測し、譜面の Note 内訳を分析</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>譜面分析器</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>譜面をアップロードして公開</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>譜面を提出</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>譜面の manifest メタデータをローカルで編集</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>オフラインツール</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Euterpe サイトで譜面を分析・提出（ブラウザで開く）</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>オンラインツール</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>普通</value>
   </data>
@@ -187,38 +211,41 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>戻る</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>範囲</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>譜面作者を追加</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>作者</value>
+    <value>曲作者</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>背景動画の不透明度</value>
+    <value>動画の不透明度</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>最大 BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>最小 BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>説明</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>難易度</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>ファイル</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>非表示メッセージ</value>
+    <value>メッセージ</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>非表示モード</value>
+    <value>モード</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>レベル上書きを非表示</value>
+    <value>レベル表示の上書き</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>名前</value>
+    <value>曲名</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>ローマ字名</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>検索キーワード</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>キーワードをカンマで区切る</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>変速</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>更新</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} 個のファイル · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>すべての必須項目を入力すると保存できます</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>有効なテンポ範囲を設定してください（最小 ≤ 最大）</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>キーワードを追加</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>譜面の manifest.epk のメタデータを開いて編集</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK メタデータエディター</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>譜面作者</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>レベル</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>この譜面が参照している {0} 個のファイルがフォルダ内に見つかりません</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>新規 EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>素材を入れたフォルダから新しい譜面を作成</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>EPK ファイルを開く…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>フォルダを開く</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>保存</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>譜面情報</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>説明と発見</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>隠し難易度</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>基本情報</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>マップ</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>アプリログ</value>

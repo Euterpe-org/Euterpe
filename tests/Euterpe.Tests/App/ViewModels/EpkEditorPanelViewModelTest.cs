@@ -83,6 +83,89 @@ public sealed class EpkEditorPanelViewModelTest
         await Assert.That(savedFolder).IsEqualTo(Path.GetDirectoryName("C:/charts/A/manifest.epk"));
     }
 
+    [Test]
+    public async Task RefreshFiles_WhenABmsAppears_AddsAnEditableMapRowAndKeepsEdits()
+    {
+        var folder = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["map1.bms"] = 1,
+            ["music.ogg"] = 1
+        };
+        var fileSystem = IFileSystemService.Mock();
+        fileSystem.GetFileSizes(Any<string>()).Returns(folder);
+
+        var vm = new EpkEditorPanelViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            FileSystemService = fileSystem,
+            MessageBoxService = IMessageBoxService.Mock(),
+            MessagePackSerialization = IMessagePackSerializationService.Mock(),
+            NotificationService = INotificationService.Mock()
+        };
+        vm.Open("C:/charts/A/manifest.epk", EasyOnlyChart());
+        vm.Maps[0].Rating = "5";
+
+        await Assert.That(vm.Maps.Count).IsEqualTo(1);
+        await Assert.That(vm.HasHiddenDifficulty).IsFalse();
+
+        folder["map4.bms"] = 1;
+        vm.RefreshFilesCommand.Execute(null);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(vm.Maps.Count).IsEqualTo(2);
+        await Assert.That(vm.Maps[0].Difficulty).IsEqualTo(ChartDifficulty.Easy);
+        await Assert.That(vm.Maps[0].Rating).IsEqualTo("5");
+        await Assert.That(vm.Maps[^1].Difficulty).IsEqualTo(ChartDifficulty.Hidden);
+        await Assert.That(vm.Maps[^1].Rating).IsEqualTo(string.Empty);
+        await Assert.That(vm.HasHiddenDifficulty).IsTrue();
+    }
+
+    [Test]
+    public async Task CanSave_RequiresSceneAndEveryPresentMapFilled()
+    {
+        var vm = NewViewModel();
+        vm.Open("C:/charts/A/manifest.epk", SingleChartWithoutHidden());
+
+        await Assert.That(vm.CanSave).IsTrue();
+
+        vm.Scene = "   ";
+        await Assert.That(vm.CanSave).IsFalse();
+        vm.Scene = "scene_01";
+        await Assert.That(vm.CanSave).IsTrue();
+
+        vm.Maps[1].Charters.Clear();
+        await Assert.That(vm.CanSave).IsFalse();
+    }
+
+    [Test]
+    public async Task CanSave_RequiresAMap2()
+    {
+        var vm = NewViewModel();
+        vm.Open("C:/charts/A/manifest.epk", EasyOnlyChart());
+
+        await Assert.That(vm.CanSave).IsFalse();
+    }
+
+    private static Manifest EasyOnlyChart() => new()
+    {
+        Schema = Manifest.CurrentSchema,
+        Meta = new ManifestMeta
+        {
+            Name = "Solo",
+            Author = "Author",
+            Scene = "scene",
+            Maps = new Dictionary<string, ManifestMap>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["map1"] = new() { Rating = "3", Charters = ["alice"] }
+            }
+        },
+        Files = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["map1.bms"] = new() { Version = 1, Size = 10 },
+            ["music.ogg"] = new() { Version = 1, Size = 20 }
+        }
+    };
+
     private static EpkEditorPanelViewModel NewViewModel()
     {
         var fileSystem = IFileSystemService.Mock();

@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Predict approximate ratings and analyse a chart's Note breakdown</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Upload and publish your chart</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Submit Chart</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Edit a chart's manifest metadata locally</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Offline Tools</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Analyse and submit charts on the Euterpe site (opens in your browser)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Online Tools</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Easy</value>
   </data>
@@ -197,46 +221,49 @@
     <value>Add a charter</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Author</value>
+    <value>Song Author</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Background Video Opacity</value>
+    <value>Video Opacity</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Max BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Min BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Difficulties</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>Files</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Hide Message</value>
+    <value>Message</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Hide Mode</value>
+    <value>Mode</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Hide Rating Override</value>
+    <value>Rating Display Override</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Chart Name</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Romanized Name</value>
   </data>
   <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
-    <value>Safe for Streamer</value>
+    <value>Safe for streamers</value>
   </data>
   <data name="EpkEditor_Field_Scene" xml:space="preserve">
     <value>Scene</value>
   </data>
   <data name="EpkEditor_Field_SceneEgg" xml:space="preserve">
-    <value>Scene (Easter Egg)</value>
+    <value>Scene Egg</value>
   </data>
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Search Keywords</value>
@@ -250,8 +277,8 @@
   <data name="EpkEditor_Files_Summary" xml:space="preserve">
     <value>{0} files · {1}</value>
   </data>
-  <data name="EpkEditor_Hint_NameAuthorRequired" xml:space="preserve">
-    <value>Enter a song name and author to save</value>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Fill in all required fields to save</value>
   </data>
   <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
     <value>Set a valid tempo range (min ≤ max)</value>
@@ -262,17 +289,17 @@
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>Open and edit the metadata of a chart's manifest.epk</value>
   </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK Metadata Editor</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Charters</value>
-  </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Rating</value>
   </data>
   <data name="EpkEditor_MissingFiles" xml:space="preserve">
     <value>{0} file(s) referenced by this chart are missing from its folder</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>New EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Build a new chart from a folder of assets</value>
   </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>Open EPK File…</value>
@@ -283,17 +310,20 @@
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
-    <value>Discovery</value>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Chart Info</value>
   </data>
-  <data name="EpkEditor_Section_Gameplay" xml:space="preserve">
-    <value>Gameplay</value>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Description &amp; Discovery</value>
   </data>
   <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
     <value>Hidden Difficulty</value>
   </data>
   <data name="EpkEditor_Section_Identity" xml:space="preserve">
-    <value>Identity</value>
+    <value>Basic Info</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Maps</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App Logs</value>

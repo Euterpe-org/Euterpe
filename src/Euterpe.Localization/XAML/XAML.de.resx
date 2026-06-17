@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Ungefähre Bewertungen vorhersagen und die Note-Aufschlüsselung eines Charts analysieren</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Lade deinen Chart hoch und veröffentliche ihn</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Chart einreichen</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Die Manifest-Metadaten eines Charts lokal bearbeiten</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Offline-Werkzeuge</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Charts auf der Euterpe-Website analysieren und einreichen (öffnet im Browser)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Online-Werkzeuge</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Easy</value>
   </data>
@@ -187,38 +211,41 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Zurück</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Bereich</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Charter hinzufügen</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Autor</value>
+    <value>Song-Autor</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Hintergrundvideo-Deckkraft</value>
+    <value>Video-Deckkraft</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Max. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Min. BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Beschreibung</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Schwierigkeitsgrade</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>Dateien</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Versteckt-Meldung</value>
+    <value>Meldung</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Versteckt-Modus</value>
+    <value>Modus</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Bewertungsüberschreibung (Versteckt)</value>
+    <value>Anzeige der Bewertung überschreiben</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Chart-Name</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Romanisierter Name</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Suchbegriffe</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Suchbegriffe mit Kommas trennen</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Variables Tempo</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} Dateien · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Fülle alle Pflichtfelder aus, um zu speichern</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Lege einen gültigen Tempobereich fest (Min ≤ Max)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Suchbegriff hinzufügen</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
-    <value>Metadaten der manifest.epk eines Charts öffnen und bearbeiten</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK-Metadaten-Editor</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Charters</value>
+    <value>Die manifest.epk eines Charts öffnen und ihre Metadaten bearbeiten</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Bewertung</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} von diesem Chart referenzierte Datei(en) fehlen in seinem Ordner</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Neue EPK …</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Einen neuen Chart aus einem Ordner mit Assets erstellen</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>EPK-Datei öffnen…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Ordner öffnen</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Speichern</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Chart-Infos</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Beschreibung &amp; Auffindbarkeit</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Versteckte Schwierigkeit</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Basisinfos</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Maps</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>App-Protokolle</value>

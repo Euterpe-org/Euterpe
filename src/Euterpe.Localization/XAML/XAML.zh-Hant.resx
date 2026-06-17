@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>更新</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>預測大概定數並分析譜面 Note 資訊</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>譜面分析器</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>上傳並發布你的譜面</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>提交譜面</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>在本機編輯譜面的 manifest 元數據</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>離線工具</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>在 Euterpe 網站上分析、提交譜面（在瀏覽器中開啟）</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>線上工具</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>萌新</value>
   </data>
@@ -197,37 +221,40 @@
     <value>新增譜師</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>作者</value>
+    <value>曲師</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>背景影片不透明度</value>
+    <value>影片透明度</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>最高 BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>最低 BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>簡介</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>難度</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>檔案</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>隱藏提示</value>
+    <value>訊息</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>隱藏模式</value>
+    <value>模式</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>隱藏難度值覆寫</value>
+    <value>定數顯示覆蓋</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>名稱</value>
+    <value>曲名</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
-    <value>羅馬音名稱</value>
+    <value>羅馬音</value>
   </data>
   <data name="EpkEditor_Field_SafeForStreamer" xml:space="preserve">
     <value>適合直播</value>
@@ -250,8 +277,8 @@
   <data name="EpkEditor_Files_Summary" xml:space="preserve">
     <value>{0} 個檔案 · {1}</value>
   </data>
-  <data name="EpkEditor_Hint_NameAuthorRequired" xml:space="preserve">
-    <value>請填寫歌曲名稱與作者後儲存</value>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>請填寫所有必填項後儲存</value>
   </data>
   <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
     <value>請設定有效的速度範圍（最小值 ≤ 最大值）</value>
@@ -262,17 +289,17 @@
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
     <value>開啟並編輯譜面 manifest.epk 的元數據</value>
   </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>EPK 元數據編輯器</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>譜師</value>
-  </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
-    <value>難度值</value>
+    <value>定數</value>
   </data>
   <data name="EpkEditor_MissingFiles" xml:space="preserve">
     <value>此譜面引用的 {0} 個檔案在其資料夾中遺失</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>新建 EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>從一個放好素材的資料夾建立新譜面</value>
   </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>開啟 EPK 檔案…</value>
@@ -283,17 +310,20 @@
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>儲存</value>
   </data>
-  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
-    <value>檢索</value>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>譜面資訊</value>
   </data>
-  <data name="EpkEditor_Section_Gameplay" xml:space="preserve">
-    <value>玩法</value>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>描述與發現</value>
   </data>
   <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
     <value>隱藏難度</value>
   </data>
   <data name="EpkEditor_Section_Identity" xml:space="preserve">
     <value>基本資訊</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>地圖</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>應用程式記錄檔</value>

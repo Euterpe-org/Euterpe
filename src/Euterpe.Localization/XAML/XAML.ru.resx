@@ -61,6 +61,30 @@
   <data name="Button_Update" xml:space="preserve">
     <value>Обновить</value>
   </data>
+  <data name="ChartAnalyzer_Description" xml:space="preserve">
+    <value>Прогнозировать приблизительные уровни и анализировать разбивку Note чарта</value>
+  </data>
+  <data name="ChartAnalyzer_Title" xml:space="preserve">
+    <value>Chart Analyzer</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Загрузите и опубликуйте свой чарт</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Отправить чарт</value>
+  </data>
+  <data name="CharterToolkit_Offline_Description" xml:space="preserve">
+    <value>Редактировать метаданные manifest чарта локально</value>
+  </data>
+  <data name="CharterToolkit_Offline_Title" xml:space="preserve">
+    <value>Офлайн-инструменты</value>
+  </data>
+  <data name="CharterToolkit_Online_Description" xml:space="preserve">
+    <value>Анализировать и отправлять чарты на сайте Euterpe (откроется в браузере)</value>
+  </data>
+  <data name="CharterToolkit_Online_Title" xml:space="preserve">
+    <value>Онлайн-инструменты</value>
+  </data>
   <data name="ChartDifficulty_Easy" xml:space="preserve">
     <value>Легко</value>
   </data>
@@ -187,38 +211,41 @@
   <data name="EpkEditor_Back" xml:space="preserve">
     <value>Назад</value>
   </data>
-  <data name="EpkEditor_Bpm_Range" xml:space="preserve">
-    <value>Диапазон</value>
+  <data name="EpkEditor_Charters_Watermark" xml:space="preserve">
+    <value>Добавить чартера</value>
   </data>
   <data name="EpkEditor_Field_Author" xml:space="preserve">
-    <value>Автор</value>
+    <value>Автор песни</value>
   </data>
   <data name="EpkEditor_Field_BackgroundVideoOpacity" xml:space="preserve">
-    <value>Прозрачность фонового видео</value>
+    <value>Прозрачность видео</value>
   </data>
   <data name="EpkEditor_Field_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
+  <data name="EpkEditor_Field_BpmMax" xml:space="preserve">
+    <value>Макс. BPM</value>
+  </data>
+  <data name="EpkEditor_Field_BpmMin" xml:space="preserve">
+    <value>Мин. BPM</value>
+  </data>
   <data name="EpkEditor_Field_Description" xml:space="preserve">
     <value>Описание</value>
-  </data>
-  <data name="EpkEditor_Field_Difficulties" xml:space="preserve">
-    <value>Сложности</value>
   </data>
   <data name="EpkEditor_Field_Files" xml:space="preserve">
     <value>Файлы</value>
   </data>
   <data name="EpkEditor_Field_HideMessage" xml:space="preserve">
-    <value>Скрытое сообщение</value>
+    <value>Сообщение</value>
   </data>
   <data name="EpkEditor_Field_HideMode" xml:space="preserve">
-    <value>Скрытый режим</value>
+    <value>Режим</value>
   </data>
   <data name="EpkEditor_Field_HideRatingOverride" xml:space="preserve">
-    <value>Переопределение скрытого уровня</value>
+    <value>Переопределение отображения уровня</value>
   </data>
   <data name="EpkEditor_Field_Name" xml:space="preserve">
-    <value>Название</value>
+    <value>Название чарта</value>
   </data>
   <data name="EpkEditor_Field_NameRomanized" xml:space="preserve">
     <value>Название романизацией</value>
@@ -235,29 +262,62 @@
   <data name="EpkEditor_Field_SearchKeywords" xml:space="preserve">
     <value>Ключевые слова поиска</value>
   </data>
-  <data name="EpkEditor_Field_SearchKeywords_Description" xml:space="preserve">
-    <value>Разделяйте ключевые слова запятыми</value>
+  <data name="EpkEditor_Field_TempoVariable" xml:space="preserve">
+    <value>Переменный темп</value>
   </data>
   <data name="EpkEditor_Files_Refresh" xml:space="preserve">
     <value>Обновить</value>
   </data>
+  <data name="EpkEditor_Files_Summary" xml:space="preserve">
+    <value>{0} файлов · {1}</value>
+  </data>
+  <data name="EpkEditor_Hint_Required" xml:space="preserve">
+    <value>Заполните все обязательные поля для сохранения</value>
+  </data>
+  <data name="EpkEditor_Hint_TempoRange" xml:space="preserve">
+    <value>Задайте допустимый диапазон темпа (мин ≤ макс)</value>
+  </data>
+  <data name="EpkEditor_Keywords_Watermark" xml:space="preserve">
+    <value>Добавить ключевое слово</value>
+  </data>
   <data name="EpkEditor_Launcher_Description" xml:space="preserve">
-    <value>Открыть и редактировать метаданные файла manifest.epk чарта</value>
-  </data>
-  <data name="EpkEditor_Launcher_Title" xml:space="preserve">
-    <value>Редактор метаданных EPK</value>
-  </data>
-  <data name="EpkEditor_Map_Charters" xml:space="preserve">
-    <value>Чартеры</value>
+    <value>Открыть manifest.epk чарта и редактировать его метаданные</value>
   </data>
   <data name="EpkEditor_Map_Rating" xml:space="preserve">
     <value>Уровень</value>
   </data>
+  <data name="EpkEditor_MissingFiles" xml:space="preserve">
+    <value>{0} файл(ов), на которые ссылается этот чарт, отсутствуют в его папке</value>
+  </data>
+  <data name="EpkEditor_NewFile" xml:space="preserve">
+    <value>Новый EPK…</value>
+  </data>
+  <data name="EpkEditor_New_Description" xml:space="preserve">
+    <value>Создать новый чарт из папки с ресурсами</value>
+  </data>
   <data name="EpkEditor_OpenFile" xml:space="preserve">
     <value>Открыть файл EPK…</value>
   </data>
+  <data name="EpkEditor_OpenFolder" xml:space="preserve">
+    <value>Открыть папку</value>
+  </data>
   <data name="EpkEditor_Save" xml:space="preserve">
     <value>Сохранить</value>
+  </data>
+  <data name="EpkEditor_Section_ChartInfo" xml:space="preserve">
+    <value>Сведения о чарте</value>
+  </data>
+  <data name="EpkEditor_Section_Discovery" xml:space="preserve">
+    <value>Описание и обнаружение</value>
+  </data>
+  <data name="EpkEditor_Section_HiddenMode" xml:space="preserve">
+    <value>Скрытая сложность</value>
+  </data>
+  <data name="EpkEditor_Section_Identity" xml:space="preserve">
+    <value>Основные сведения</value>
+  </data>
+  <data name="EpkEditor_Section_Maps" xml:space="preserve">
+    <value>Карты</value>
   </data>
   <data name="Folder_AppLogs" xml:space="preserve">
     <value>Логи приложения</value>
