@@ -94,7 +94,7 @@
                         Grid.Column="0"
                         Classes="SupportEmoji"
                         HorizontalAlignment="Left"
-                        Text="✨"
+                        Text="✦"
                         VerticalAlignment="Center" />
 
                     <!--  Center: Title  -->
@@ -135,8 +135,7 @@
                         CommandParameter="https://github.com/Euterpe-org/Euterpe">
                         <TextBlock>
                             <Run
-                                FontFamily="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji"
-                                Text="⭐ " />
+                                Text="★ " />
                             <Run
                                 Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_GitHubStar}}" />
                         </TextBlock>
@@ -146,7 +145,7 @@
                         CommandParameter="https://euterpe-org.com/sponsors">
                         <TextBlock>
                             <Run
-                                Text="💖 " />
+                                Text="♥ " />
                             <Run
                                 Text="{Localize {x:Static loc:XAMLLiteral.HomePage_Button_Sponsor}}" />
                         </TextBlock>
