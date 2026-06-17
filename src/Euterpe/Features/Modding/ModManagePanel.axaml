@@ -519,6 +519,31 @@
                         </ItemsControl>
                     </StackPanel>
 
+                    <!--  Incompatible Mods Section: mods that can't be used alongside this one  -->
+                    <StackPanel
+                        IsVisible="{Binding SelectedMod.HasIncompatibleMods, Mode=OneWay}">
+                        <TextBlock
+                            Classes="SectionTitle"
+                            Text="{Localize {x:Static loc:XAMLLiteral.ModInfo_IncompatibleMods}}" />
+                        <ItemsControl
+                            ItemsSource="{Binding SelectedMod.IncompatibleMods, Mode=OneWay}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label
+                                        Classes="Ghost Gray TagLabel"
+                                        Content="{Binding ., Mode=OneWay}"
+                                        Margin="0,0,8,8" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
                 </StackPanel>
             </ScrollViewer>
         </Panel>

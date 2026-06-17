@@ -445,6 +445,9 @@
   <data name="ModInfo_Details" xml:space="preserve">
     <value>Подробности</value>
   </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>Несовместимые моды</value>
+  </data>
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>Репозиторий</value>
   </data>

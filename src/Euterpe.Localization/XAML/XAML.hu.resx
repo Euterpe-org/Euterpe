@@ -445,6 +445,9 @@
   <data name="ModInfo_Details" xml:space="preserve">
     <value>Részletek</value>
   </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>Nem kompatibilis modok</value>
+  </data>
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>Tároló</value>
   </data>

@@ -451,6 +451,9 @@
   <data name="ModInfo_Details" xml:space="preserve">
     <value>详情</value>
   </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>不兼容的模组</value>
+  </data>
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>仓库</value>
   </data>
