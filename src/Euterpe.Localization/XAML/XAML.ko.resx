@@ -445,6 +445,9 @@
   <data name="ModInfo_Details" xml:space="preserve">
     <value>상세 정보</value>
   </data>
+  <data name="ModInfo_IncompatibleMods" xml:space="preserve">
+    <value>호환되지 않는 모드</value>
+  </data>
   <data name="ModInfo_Repository" xml:space="preserve">
     <value>저장소</value>
   </data>

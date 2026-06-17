@@ -72,6 +72,9 @@ public sealed partial class ModDto : ObservableObject
 
     public string[] DependencyNames => !HasDependency ? [] : [.. ModDependencies, .. LibDependencies];
 
+    // Incompatible mods
+    public bool HasIncompatibleMods => IncompatibleMods is not [];
+
     // LocalizedStrings
     public LocalizedString LocalizedCompatibleGameVersion => GameVersion is "*" ? AllGameVersionCompatible : GameVersion;
 
