@@ -65,7 +65,7 @@ public sealed partial class ModDto : ObservableObject
     public bool HasRepository => !Repository.IsNullOrEmpty();
 
     // Screenshots
-    public bool HasScreenshots => Screenshots.Length > 0;
+    public bool HasScreenshots => Screenshots is not [];
 
     // Dependencies
     public bool HasDependency => ModDependencies.Length + LibDependencies.Length > 0;
