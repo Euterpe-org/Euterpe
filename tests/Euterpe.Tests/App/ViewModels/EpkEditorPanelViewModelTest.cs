@@ -56,6 +56,43 @@ public sealed class EpkEditorPanelViewModelTest
     }
 
     [Test]
+    public async Task CreateNew_SeedsFilesFromFolderSkippingManifestAndTemp()
+    {
+        var folder = new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["map1.bms"] = 10,
+            ["map2.bms"] = 20,
+            ["music.ogg"] = 30,
+            ["scratch.tmp"] = 5,
+            [ChartFiles.ManifestFileName] = 99
+        };
+        var fileSystem = IFileSystemService.Mock();
+        fileSystem.GetFileSizes(Any<string>()).Returns(folder);
+
+        var vm = new EpkEditorPanelViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            FileSystemService = fileSystem,
+            MessageBoxService = IMessageBoxService.Mock(),
+            MessagePackSerialization = IMessagePackSerializationService.Mock(),
+            NotificationService = INotificationService.Mock()
+        };
+
+        vm.CreateNew("C:/charts/New");
+
+        using var _ = Assert.Multiple();
+        await Assert.That(vm.Name).IsEqualTo(string.Empty);
+        await Assert.That(vm.Author).IsEqualTo(string.Empty);
+        await Assert.That(vm.Scene).IsEqualTo("scene_01");
+        await Assert.That(vm.IsDirty).IsFalse();
+        await Assert.That(vm.Files.Count).IsEqualTo(3);
+        await Assert.That(vm.Files.Any(file => file.Name == ChartFiles.ManifestFileName)).IsFalse();
+        await Assert.That(vm.Maps.Count).IsEqualTo(2);
+        await Assert.That(vm.Maps[0].Difficulty).IsEqualTo(ChartDifficulty.Easy);
+        await Assert.That(vm.Maps[1].Difficulty).IsEqualTo(ChartDifficulty.Hard);
+    }
+
+    [Test]
     public async Task Save_WhenWriteSucceeds_RaisesSavedWithChartFolder()
     {
         var fileSystem = IFileSystemService.Mock();

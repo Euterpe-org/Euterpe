@@ -173,6 +173,20 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
         IsDirty = false;
     }
 
+    public void CreateNew(string folder) =>
+        Open(Path.Combine(folder, ChartFiles.ManifestFileName), new Manifest
+        {
+            Schema = Manifest.CurrentSchema,
+            Meta = new ManifestMeta
+            {
+                Name = string.Empty,
+                Author = string.Empty,
+                Scene = "scene_01",
+                Maps = new Dictionary<string, ManifestMap>(StringComparer.OrdinalIgnoreCase)
+            },
+            Files = ScanFiles(folder, carryVersionsFrom: null)
+        });
+
     [RelayCommand(CanExecute = nameof(CanSave))]
     private async Task SaveAsync()
     {
@@ -217,20 +231,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
             return;
         }
 
-        var refreshed = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase);
-        foreach (var (name, size) in FileSystemService.GetFileSizes(_folder))
-        {
-            if (string.Equals(name, ChartFiles.ManifestFileName, StringComparison.OrdinalIgnoreCase)
-                || name.EndsWith(".tmp", StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            var version = _files.TryGetValue(name, out var existing) ? existing.Version : 1;
-            refreshed[name] = new ManifestFileEntry { Version = version, Size = size };
-        }
-
-        _files = refreshed;
+        _files = ScanFiles(_folder, _files);
         RebuildFilesDisplay();
         ReconcileMaps(preserveEdits: true);
         RecomputeMissingFiles();
@@ -345,6 +346,24 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
             .Where(_files.ContainsKey)
             .Select(name => Path.Combine(folder, name))
             .FirstOrDefault();
+    }
+
+    private Dictionary<string, ManifestFileEntry> ScanFiles(string folder, IReadOnlyDictionary<string, ManifestFileEntry>? carryVersionsFrom)
+    {
+        var scanned = new Dictionary<string, ManifestFileEntry>(StringComparer.OrdinalIgnoreCase);
+        foreach (var (name, size) in FileSystemService.GetFileSizes(folder))
+        {
+            if (string.Equals(name, ChartFiles.ManifestFileName, StringComparison.OrdinalIgnoreCase)
+                || name.EndsWith(".tmp", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var version = carryVersionsFrom?.GetValueOrDefault(name)?.Version ?? 1;
+            scanned[name] = new ManifestFileEntry { Version = version, Size = size };
+        }
+
+        return scanned;
     }
 
     private void RebuildFilesDisplay()
