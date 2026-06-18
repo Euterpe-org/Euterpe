@@ -6,7 +6,7 @@
     <PropertyGroup>
         <AvaloniaVersion>12.0.4</AvaloniaVersion>
         <MicrosoftCodeAnalysisVersion>5.3.0</MicrosoftCodeAnalysisVersion>
-        <RefitVersion>11.1.0</RefitVersion>
+        <RefitVersion>11.2.0</RefitVersion>
         <R3Version>1.3.1</R3Version>
         <RoslynatorAnalyzersVersion>4.15.0</RoslynatorAnalyzersVersion>
         <TUnitVersion>1.56.0</TUnitVersion>
