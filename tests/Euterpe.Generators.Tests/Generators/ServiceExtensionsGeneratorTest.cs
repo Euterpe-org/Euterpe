@@ -13,19 +13,21 @@ public sealed class ServiceExtensionsGeneratorTest
                                   using Euterpe.Shared.Attributes;
 
                                   [Route("/")]
+                                  [AppSingleton]
                                   public partial class RootViewModel;
 
                                   [Route("/home")]
+                                  [AppSingleton]
                                   public partial class HomeViewModel;
 
                                   [Route("/modding")]
-                                  [PerGame]
                                   public partial class ModdingViewModel;
 
-                                  [PerGame]
+                                  [Register]
                                   public partial class WizardDialogViewModel;
 
                                   [Register]
+                                  [AppSingleton]
                                   public partial class CrashViewModel;
                               }
 
@@ -41,7 +43,7 @@ public sealed class ServiceExtensionsGeneratorTest
                                   }
 
                                   [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
-                                  public sealed class PerGameAttribute : System.Attribute;
+                                  public sealed class AppSingletonAttribute : System.Attribute;
 
                                   [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
                                   public sealed class RegisterAttribute : System.Attribute;

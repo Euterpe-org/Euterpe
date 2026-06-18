@@ -5,7 +5,6 @@ using Euterpe.Models.Progress;
 namespace Euterpe.Features.Charting;
 
 [Route("/charting/manage", DisplayName = Panel_Charting_ChartManage, Order = 0)]
-[PerGame]
 public sealed partial class ChartManagePanelViewModel : ViewModelBase
 {
     private readonly ReadOnlyObservableCollection<ChartDto> _charts;

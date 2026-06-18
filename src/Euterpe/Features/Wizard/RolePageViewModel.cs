@@ -1,6 +1,6 @@
 namespace Euterpe.Features.Wizard;
 
-[PerGame]
+[Register]
 public sealed class RolePageViewModel : SetupPageViewModelBase
 {
     private bool _applyingPreset;

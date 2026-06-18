@@ -17,9 +17,9 @@ public sealed partial class RouteGenerator
             foreach (var child in children)
             {
                 var viewModel = $"global::{child.Namespace}.{child.ClassName}";
-                var host = child.IsPerGame
-                    ? $"global::Euterpe.Mvvm.PageHost.PerGame<{viewModel}>()"
-                    : $"global::Euterpe.Mvvm.PageHost.App(global::Euterpe.IocContainer.Resolve<{viewModel}>())";
+                var host = child.IsAppSingleton
+                    ? $"global::Euterpe.Mvvm.PageHost.App(global::Euterpe.IocContainer.Resolve<{viewModel}>())"
+                    : $"global::Euterpe.Mvvm.PageHost.PerGame<{viewModel}>()";
                 cb.AppendLine($"public global::Euterpe.Mvvm.PageHost {HostName(child)} {{ get; }} = {host};");
             }
 
@@ -93,12 +93,12 @@ public sealed partial class RouteGenerator
             {
                 foreach (var child in children)
                 {
-                    // PerGame children live only in the current game scope, never in the parent's captured
-                    // Container (which is the root scope when the parent page is an app-level singleton), so
-                    // resolve them through IocContainer.Resolve to hit the active game scope instead.
-                    var resolver = child.IsPerGame
-                        ? $"static _ => global::Euterpe.IocContainer.Resolve<global::{child.Namespace}.{child.ClassName}>()"
-                        : $"static ctx => ctx.Resolve<global::{child.Namespace}.{child.ClassName}>()";
+                    // Game-scoped children (the default) live only in the active game scope, never in the parent's
+                    // captured Container (the root scope when the parent page is an app singleton), so resolve them
+                    // through IocContainer.Resolve to hit the active game scope instead.
+                    var resolver = child.IsAppSingleton
+                        ? $"static ctx => ctx.Resolve<global::{child.Namespace}.{child.ClassName}>()"
+                        : $"static _ => global::Euterpe.IocContainer.Resolve<global::{child.Namespace}.{child.ClassName}>()";
                     cb.AppendLine($"""["{child.Path}"] = {resolver},""");
                 }
             }

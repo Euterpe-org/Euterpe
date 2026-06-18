@@ -1,7 +1,6 @@
 namespace Euterpe.Features.Charting;
 
 [Route("/charting", DisplayName = Page_Charting, Icon = "Music", Order = 2)]
-[PerGame]
 public sealed partial class ChartingPageViewModel : NavViewModelBase
 {
     public IReadOnlyList<DropDownButtonItem> DropDownButtons => field ??=

@@ -4,7 +4,7 @@ namespace Euterpe.Generators;
 public sealed partial class RouteGenerator : IIncrementalGenerator
 {
     private const string RouteAttributeName = "Euterpe.Shared.Attributes.RouteAttribute";
-    private const string PerGameAttributeName = "Euterpe.Shared.Attributes.PerGameAttribute";
+    private const string AppSingletonAttributeName = "Euterpe.Shared.Attributes.AppSingletonAttribute";
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -51,9 +51,9 @@ public sealed partial class RouteGenerator : IIncrementalGenerator
             }
         }
 
-        var isPerGame = symbol.GetAttributes().Any(static a => a.AttributeClass?.ToDisplayString() is PerGameAttributeName);
+        var isAppSingleton = symbol.GetAttributes().Any(static a => a.AttributeClass?.ToDisplayString() is AppSingletonAttributeName);
 
-        return new RouteData(symbol.Name, symbol.ContainingNamespace.ToDisplayString(), path, displayName, icon, order, isPerGame);
+        return new RouteData(symbol.Name, symbol.ContainingNamespace.ToDisplayString(), path, displayName, icon, order, isAppSingleton);
     }
 
     private static void Generate(SourceProductionContext spc, ImmutableArray<RouteData?> routes)
@@ -73,5 +73,5 @@ public sealed partial class RouteGenerator : IIncrementalGenerator
         }
     }
 
-    private sealed record RouteData(string ClassName, string Namespace, string Path, string DisplayName, string Icon, int Order, bool IsPerGame);
+    private sealed record RouteData(string ClassName, string Namespace, string Path, string DisplayName, string Icon, int Order, bool IsAppSingleton);
 }
