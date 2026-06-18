@@ -3,7 +3,7 @@ using Irihi.Avalonia.Shared.Contracts;
 
 namespace Euterpe.Features.Charting;
 
-[PerGame]
+[Register]
 public sealed partial class ProgressDialogViewModel : ViewModelBase, IDialogContext
 {
     [ObservableProperty]

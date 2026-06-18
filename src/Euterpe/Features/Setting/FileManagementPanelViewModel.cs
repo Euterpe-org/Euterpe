@@ -1,7 +1,6 @@
 namespace Euterpe.Features.Setting;
 
 [Route("/setting/file", DisplayName = Panel_Setting_FileManagement, Order = 3)]
-[PerGame]
 public sealed partial class FileManagementPanelViewModel : ViewModelBase
 {
     [RelayCommand]

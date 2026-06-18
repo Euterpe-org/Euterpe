@@ -1,6 +1,7 @@
 namespace Euterpe.Shell;
 
 [Route("/")]
+[AppSingleton]
 public sealed partial class MainWindowViewModel : RootNavViewModelBase
 {
     public const string DialogHostId = "DialogHost";

@@ -16,17 +16,17 @@ public sealed class RouteGeneratorTest
                                   public partial class RootViewModel;
 
                                   [Route("/home", DisplayName = "Home", Icon = "house", Order = 0)]
-                                  [PerGame]
                                   public partial class HomeViewModel;
 
                                   [Route("/settings", DisplayName = "Settings", Icon = "gear", Order = 1)]
+                                  [AppSingleton]
                                   public partial class SettingsViewModel;
 
                                   [Route("/settings/general", DisplayName = "General", Order = 0)]
+                                  [AppSingleton]
                                   public partial class GeneralViewModel;
 
                                   [Route("/settings/advanced", DisplayName = "Advanced", Order = 1)]
-                                  [PerGame]
                                   public partial class AdvancedViewModel;
                               }
 
@@ -42,7 +42,7 @@ public sealed class RouteGeneratorTest
                                   }
 
                                   [System.AttributeUsage(System.AttributeTargets.Class, Inherited = false)]
-                                  public sealed class PerGameAttribute : System.Attribute;
+                                  public sealed class AppSingletonAttribute : System.Attribute;
                               }
                               """;
 

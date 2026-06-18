@@ -2,6 +2,7 @@ namespace Euterpe.Features.Setting;
 
 // ReSharper disable StringLiteralTypo
 [Route("/setting/about", DisplayName = Panel_Setting_About, Order = 0)]
+[AppSingleton]
 public sealed partial class AboutPanelViewModel : ViewModelBase
 {
     public ContributorGroup[] ContributorGroups { get; } =

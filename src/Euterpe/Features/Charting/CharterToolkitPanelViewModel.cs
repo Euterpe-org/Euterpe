@@ -1,7 +1,6 @@
 namespace Euterpe.Features.Charting;
 
 [Route("/charting/toolkit", DisplayName = Panel_Charting_CharterToolkit, Order = 1)]
-[PerGame]
 public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
 {
     [ObservableProperty]

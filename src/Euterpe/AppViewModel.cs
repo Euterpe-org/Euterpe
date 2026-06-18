@@ -1,6 +1,7 @@
 namespace Euterpe;
 
 [Register]
+[AppSingleton]
 public sealed partial class AppViewModel : ViewModelBase
 {
     protected override async Task OnInitializeAsync()

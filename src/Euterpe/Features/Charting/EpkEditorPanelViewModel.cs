@@ -5,6 +5,7 @@ using System.ComponentModel;
 namespace Euterpe.Features.Charting;
 
 [Register]
+[AppSingleton]
 public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 {
     private bool _loading;
