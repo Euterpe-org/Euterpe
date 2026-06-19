@@ -100,7 +100,7 @@
                             Height="18"
                             Opacity="0.4"
                             Width="18" />
-                        <e:AsyncImage
+                        <e:CoverImage
                             Background="{Binding CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                             DecodeWidth="48"
                             Source="{Binding CoverPath}"

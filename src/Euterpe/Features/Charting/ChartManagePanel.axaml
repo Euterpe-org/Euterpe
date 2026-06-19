@@ -367,7 +367,7 @@
                                             <Border
                                                 ClipToBounds="True"
                                                 CornerRadius="8">
-                                                <e:AsyncImage
+                                                <e:CoverImage
                                                     Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                                                     DecodeWidth="164"
                                                     Source="{Binding CoverPath}"
