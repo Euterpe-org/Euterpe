@@ -54,7 +54,7 @@ public sealed class CoverImage : TemplatedControl
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        if (change.Property == SourceProperty && _staticPart is not null)
+        if (change.Property == SourceProperty && _gifPart is not null)
         {
             ApplySource();
         }
@@ -63,7 +63,7 @@ public sealed class CoverImage : TemplatedControl
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
-        if (_reloadOnAttach && _staticPart is not null)
+        if (_reloadOnAttach && _gifPart is not null)
         {
             _reloadOnAttach = false;
             ApplySource();
@@ -79,11 +79,6 @@ public sealed class CoverImage : TemplatedControl
             _gifPart.Source = null;
         }
 
-        if (_staticPart is not null)
-        {
-            _staticPart.Source = null;
-        }
-
         DisposeGifSource();
         _reloadOnAttach = true;
     }
@@ -96,45 +91,19 @@ public sealed class CoverImage : TemplatedControl
             return;
         }
 
-        var source = Source;
-        if (IsAnimated(source))
+        if (IsAnimated(Source))
         {
-            _staticPart.Source = null;
             _staticPart.IsVisible = false;
             _gifPart.IsVisible = true;
             _loadCts = new CancellationTokenSource();
-            _ = LoadGifAsync(source!, _loadCts.Token);
+            _ = LoadGifAsync(Source!, _loadCts.Token);
             return;
         }
 
-        ShowStatic(source);
+        ShowStatic();
     }
 
-    private async Task LoadGifAsync(string source, CancellationToken token)
-    {
-        var built = await BuildGifSourceAsync(source, token).ConfigureAwait(false);
-        await Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            if (token.IsCancellationRequested || _staticPart is null || _gifPart is null)
-            {
-                built?.Dispose();
-                return;
-            }
-
-            if (built is null)
-            {
-                ShowStatic(source);
-                return;
-            }
-
-            var previous = _gifSource;
-            _gifSource = built;
-            _gifPart.Source = built;
-            previous?.Dispose();
-        });
-    }
-
-    private void ShowStatic(string? source)
+    private void ShowStatic()
     {
         if (_staticPart is null || _gifPart is null)
         {
@@ -144,8 +113,31 @@ public sealed class CoverImage : TemplatedControl
         _gifPart.Source = null;
         _gifPart.IsVisible = false;
         DisposeGifSource();
-        _staticPart.Source = source;
         _staticPart.IsVisible = true;
+    }
+
+    private async Task LoadGifAsync(string source, CancellationToken token)
+    {
+        var built = await BuildGifSourceAsync(source, token).ConfigureAwait(false);
+        await Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            if (token.IsCancellationRequested || _gifPart is null)
+            {
+                built?.Dispose();
+                return;
+            }
+
+            if (built is null)
+            {
+                ShowStatic();
+                return;
+            }
+
+            var previous = _gifSource;
+            _gifSource = built;
+            _gifPart.Source = built;
+            previous?.Dispose();
+        });
     }
 
     private static async Task<GifStreamSource?> BuildGifSourceAsync(string source, CancellationToken token)

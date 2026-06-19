@@ -30,6 +30,7 @@
                         <e:AsyncImage
                             DecodeWidth="{TemplateBinding DecodeWidth}"
                             Name="PART_Static"
+                            Source="{TemplateBinding Source}"
                             Stretch="{TemplateBinding Stretch}" />
                         <gif:GifImage
                             IsVisible="False"

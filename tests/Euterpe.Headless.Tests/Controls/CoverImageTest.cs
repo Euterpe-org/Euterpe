@@ -1,3 +1,5 @@
+using Avalonia.Controls.Templates;
+using Avalonia.Data;
 using Avalonia.Labs.Gif;
 using Avalonia.Media.Imaging;
 
@@ -9,6 +11,9 @@ public sealed class CoverImageTest : HeadlessTest
 {
     private static readonly byte[] MinimalGif =
         Convert.FromBase64String("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+
+    private static readonly byte[] MinimalWebp =
+        Convert.FromBase64String("UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoEAAQAAgA0JaACdLoB+AADsAD+8Oj3/yC5YXXI1/8gP+QH/ID/+PIAAAA=");
 
     [Test]
     public Task DefaultStretch_IsUniform() => RunOnUI(async () =>
@@ -203,6 +208,80 @@ public sealed class CoverImageTest : HeadlessTest
         }
     });
 
+    [Test]
+    public Task StaticSource_DecodesBitmapIntoStaticPart() => RunOnUI(async () =>
+    {
+        var path = CreateTempPng(128, 128);
+        try
+        {
+            var cover = Show(new CoverImage { Source = new Uri(path).AbsoluteUri, DecodeWidth = 64, Stretch = Stretch.UniformToFill });
+            var bitmap = await WaitForStaticBitmap(cover);
+
+            await Assert.That(bitmap).IsNotNull();
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    });
+
+    [Test]
+    public Task BoundSourceInItemTemplate_DecodesStaticBitmap() => RunOnUI(async () =>
+    {
+        var path = CreateTempPng(128, 128);
+        try
+        {
+            var items = new ItemsControl
+            {
+                ItemsSource = new[] { new CoverData { CoverPath = new Uri(path).AbsoluteUri } },
+                ItemTemplate = new FuncDataTemplate<CoverData>((_, _) =>
+                {
+                    var cover = new CoverImage { DecodeWidth = 64, Stretch = Stretch.UniformToFill };
+                    cover.Bind(CoverImage.SourceProperty, new Binding(nameof(CoverData.CoverPath)));
+                    return cover;
+                })
+            };
+            var window = new Window { Content = items, Width = 200, Height = 200 };
+            window.Show();
+            Dispatcher.UIThread.RunJobs();
+
+            var cover = items.GetVisualDescendants().OfType<CoverImage>().First();
+            var bitmap = await WaitForStaticBitmap(cover);
+
+            await Assert.That(bitmap).IsNotNull();
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    });
+
+    [Test]
+    public Task WebpSource_DecodesIntoStaticPart() => RunOnUI(async () =>
+    {
+        var path = Path.Combine(Path.GetTempPath(), $"euterpe_coverimage_{Guid.NewGuid():N}.webp");
+        File.WriteAllBytes(path, MinimalWebp);
+        try
+        {
+            var cover = Show(new CoverImage { Source = new Uri(path).AbsoluteUri, DecodeWidth = 4, Stretch = Stretch.UniformToFill });
+            var bitmap = await WaitForStaticBitmap(cover);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(bitmap).IsNotNull();
+            await Assert.That(StaticPart(cover).IsVisible).IsTrue();
+            await Assert.That(GifPart(cover).IsVisible).IsFalse();
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    });
+
+    private sealed class CoverData
+    {
+        public string? CoverPath { get; init; }
+    }
+
     private static CoverImage Show(CoverImage cover)
     {
         var window = new Window { Content = cover, Width = 200, Height = 200 };
@@ -232,6 +311,24 @@ public sealed class CoverImageTest : HeadlessTest
         }
 
         return gifPart.Source;
+    }
+
+    private static async Task<Bitmap?> WaitForStaticBitmap(CoverImage cover)
+    {
+        var staticPart = StaticPart(cover);
+        for (var attempt = 0; attempt < 200; attempt++)
+        {
+            Dispatcher.UIThread.RunJobs();
+            var inner = staticPart.GetVisualDescendants().OfType<Image>().FirstOrDefault(image => image.Name is "PART_Image");
+            if (inner?.Source is Bitmap bitmap)
+            {
+                return bitmap;
+            }
+
+            await Task.Delay(5);
+        }
+
+        return null;
     }
 
     private static async Task WaitUntil(Func<bool> condition)
