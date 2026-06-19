@@ -137,6 +137,9 @@
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>No keyring service (secret-tool) was found. Your login session cannot be saved and you will need to log in again each time.</value>
   </data>
+  <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
+    <value>The Euterpe server is currently unavailable. Euterpe will now close. Please try again later.</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Are you sure you want to set MD_DIRECTORY environment variable?</value>
   </data>

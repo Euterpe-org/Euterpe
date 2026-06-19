@@ -18,10 +18,18 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
-        var restored = await AuthService.RestoreSessionAsync().ConfigureAwait(true);
-        if (!restored && !await EnsureLoggedInAsync().ConfigureAwait(true))
+
+        if (!await AuthService.IsServerHealthyAsync().ConfigureAwait(true))
         {
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Server_Unavailable).ConfigureAwait(false);
+            Environment.Exit(0);
             return;
+        }
+
+        var restored = await AuthService.RestoreSessionAsync().ConfigureAwait(true);
+        if (!restored)
+        {
+            await EnsureLoggedInAsync().ConfigureAwait(true);
         }
 
         await AuthService.Ready.WaitAsync().ConfigureAwait(true);
@@ -44,16 +52,16 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 
     /// <summary>
     ///     Drive the login flow until it succeeds, prompting to retry or quit on each failure.
+    ///     Exits the process if the user chooses to quit.
     /// </summary>
-    /// <returns>True once logged in; false if the user chose to quit (shutdown initiated).</returns>
-    private async Task<bool> EnsureLoggedInAsync()
+    private async Task EnsureLoggedInAsync()
     {
         while (true)
         {
             await AuthService.LoginAsync().ConfigureAwait(true);
             if (AuthService.Ready.IsSet)
             {
-                return true;
+                return;
             }
 
             var result = await MessageBoxService.WarningConfirmAsync(MessageBox_Content_Login_Failed).ConfigureAwait(true);
@@ -62,9 +70,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
                 continue;
             }
 
-            Ready.Set();
-            GetCurrentDesktop().Shutdown();
-            return false;
+            Environment.Exit(0);
         }
     }
 

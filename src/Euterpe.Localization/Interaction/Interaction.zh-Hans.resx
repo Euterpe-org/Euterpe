@@ -137,6 +137,9 @@
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>未找到密钥环服务（secret-tool）。无法保存登录会话，每次启动时均需重新登录。</value>
   </data>
+  <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
+    <value>Euterpe 服务器当前不可用。Euterpe 即将关闭，请稍后重试。</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>确定要设置 MD_DIRECTORY 环境变量吗？</value>
   </data>

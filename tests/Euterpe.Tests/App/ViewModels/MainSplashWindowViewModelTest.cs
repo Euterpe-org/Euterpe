@@ -40,6 +40,7 @@ public sealed class MainSplashWindowViewModelTest
         var auth = IAuthService.Mock();
         auth.Ready.Returns(ready);
         auth.RestoreSessionAsync().Returns(false);
+        auth.IsServerHealthyAsync().Returns(true);
         auth.LoginAsync().Callback(() =>
         {
             loginCount.Value++;
@@ -93,6 +94,7 @@ public sealed class MainSplashWindowViewModelTest
         var auth = IAuthService.Mock();
         auth.Ready.Returns(new AsyncManualResetEvent(true));
         auth.RestoreSessionAsync().Returns(restoreSucceeds);
+        auth.IsServerHealthyAsync().Returns(true);
         auth.LoginAsync().Callback(() => counter.Value++);
         return auth;
     }

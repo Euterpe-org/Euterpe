@@ -2,6 +2,7 @@ using Euterpe.Core.Http.Handlers;
 using Euterpe.Core.Http.Listeners;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
+using Refit;
 using SoundFlow.Abstracts;
 using SoundFlow.Backends.MiniAudio;
 using SoundFlow.Codecs.FFMpeg;
@@ -101,6 +102,9 @@ public static class CoreServiceExtensions
             services.AddEuterpeRefitClient<IEuterpeChartClient>(nameof(EuterpeApi.Charts), EuterpeApi.Charts.BasePath, true)
                 .AddStandardResilienceHandler(ConfigureResilience);
             services.AddEuterpeRefitClient<ITelemetryApiClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
+
+            services.AddRefitClient<IEuterpeHealthClient>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(EuterpeWeb.BaseUrl));
         }
     }
 
