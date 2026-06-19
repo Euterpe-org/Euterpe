@@ -150,4 +150,50 @@ public sealed class ChartDtoTest
 
         await Assert.That(chart.IsOnline).IsEqualTo(expected);
     }
+
+    [Test]
+    public async Task CoverPath_WebpAndPng_PrefersWebp()
+    {
+        var chart = CreateChart(files: new Dictionary<string, ManifestFileEntry>
+        {
+            ["cover.png"] = new(),
+            ["cover.webp"] = new()
+        });
+
+        await Assert.That(chart.CoverPath).IsEqualTo(Path.Combine("/charts/folder", "cover.webp"));
+    }
+
+    [Test]
+    public async Task CoverPath_PngAndGif_PrefersPng()
+    {
+        var chart = CreateChart(files: new Dictionary<string, ManifestFileEntry>
+        {
+            ["cover.gif"] = new(),
+            ["cover.png"] = new()
+        });
+
+        await Assert.That(chart.CoverPath).IsEqualTo(Path.Combine("/charts/folder", "cover.png"));
+    }
+
+    [Test]
+    public async Task CoverPath_OnlyGif_ResolvesGif()
+    {
+        var chart = CreateChart(files: new Dictionary<string, ManifestFileEntry>
+        {
+            ["cover.gif"] = new()
+        });
+
+        await Assert.That(chart.CoverPath).IsEqualTo(Path.Combine("/charts/folder", "cover.gif"));
+    }
+
+    [Test]
+    public async Task CoverPath_NoCoverFile_IsNull()
+    {
+        var chart = CreateChart(files: new Dictionary<string, ManifestFileEntry>
+        {
+            ["music.ogg"] = new()
+        });
+
+        await Assert.That(chart.CoverPath).IsNull();
+    }
 }
