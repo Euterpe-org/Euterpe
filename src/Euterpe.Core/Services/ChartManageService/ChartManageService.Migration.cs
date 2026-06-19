@@ -61,17 +61,19 @@ internal sealed partial class ChartManageService
     private async Task<MigrationOutcome> MigrateSourceAsync(CustomAlbumSource source, ConcurrentBag<ChartDto> migratedCharts, CancellationToken cancellationToken)
     {
         var (outcome, destination) = await MigrationService.MigrateCustomAlbumAsync(source, cancellationToken).ConfigureAwait(false);
-        if (outcome is MigrationOutcome.Migrated)
+        if (outcome is not MigrationOutcome.Migrated)
         {
-            DeleteSource(source);
-            if (await ChartLocalService.LoadChartFromPathAsync(destination, ChartSource.Offline).ConfigureAwait(false) is { } chart)
-            {
-                migratedCharts.Add(chart);
-            }
-            else
-            {
-                Logger.ZLogWarning($"Migrated chart at {destination} could not be loaded into the cache");
-            }
+            return outcome;
+        }
+
+        DeleteSource(source);
+        if (await ChartLocalService.LoadChartFromPathAsync(destination, ChartSource.Offline).ConfigureAwait(false) is { } chart)
+        {
+            migratedCharts.Add(chart);
+        }
+        else
+        {
+            Logger.ZLogWarning($"Migrated chart at {destination} could not be loaded into the cache");
         }
 
         return outcome;

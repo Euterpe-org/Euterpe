@@ -52,15 +52,8 @@ internal sealed partial class MigrationService
             : null;
     }
 
-    private static bool HasSupportedAudio(string folder)
-    {
-        var music = Directory.EnumerateFiles(folder, $"{MusicName}.*").Single();
-        var demo = Directory.EnumerateFiles(folder, $"{DemoName}.*").SingleOrDefault();
-        return IsOgg(music) && (demo is null || IsOgg(demo));
-    }
-
-    private static bool IsOgg(string path) =>
-        string.Equals(Path.GetExtension(path), MusicExtension, StringComparison.OrdinalIgnoreCase);
+    private static bool HasSupportedMusic(string folder) =>
+        File.Exists(Path.Combine(folder, MusicFileName));
 
     private static void NormalizeVideoName(string folder)
     {
