@@ -7,17 +7,27 @@ namespace Euterpe.Core;
 
 internal sealed class NotificationService : INotificationService, INotificationServiceWiring
 {
-    public WindowNotificationManager Notifier { private get; set; } = null!;
+    private WindowNotificationManager? _notifier;
+
+    WindowNotificationManager INotificationServiceWiring.Notifier
+    {
+        set => _notifier = value;
+    }
 
     private void Show(Notification notification, NotificationType type, TimeSpan? expiration, string[]? classes = null)
     {
+        if (_notifier is not { } notifier)
+        {
+            return;
+        }
+
         if (Dispatcher.UIThread.CheckAccess())
         {
-            Notifier.Show(notification, type, expiration, classes: classes);
+            notifier.Show(notification, type, expiration, classes: classes);
         }
         else
         {
-            Dispatcher.UIThread.Post(() => Notifier.Show(notification, type, expiration, classes: classes));
+            Dispatcher.UIThread.Post(() => notifier.Show(notification, type, expiration, classes: classes));
         }
     }
 

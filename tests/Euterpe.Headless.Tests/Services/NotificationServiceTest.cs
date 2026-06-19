@@ -1,3 +1,4 @@
+using Euterpe.Abstractions;
 using Euterpe.Core;
 using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
@@ -11,7 +12,9 @@ public sealed class NotificationServiceTest : HeadlessTest
         var window = new Window();
         window.Show();
         Dispatcher.UIThread.RunJobs();
-        return new NotificationService { Notifier = new WindowNotificationManager(window) };
+        var service = new NotificationService();
+        ((INotificationServiceWiring)service).Notifier = new WindowNotificationManager(window);
+        return service;
     }
 
     [Test]
@@ -55,7 +58,8 @@ public sealed class NotificationServiceTest : HeadlessTest
             return Task.FromResult(new WindowNotificationManager(window));
         });
 
-        var service = new NotificationService { Notifier = manager };
+        var service = new NotificationService();
+        ((INotificationServiceWiring)service).Notifier = manager;
 
         var act = () => Task.Run(() => service.Success("from background", TimeSpan.Zero));
         await Assert.That(act).ThrowsNothing();
@@ -65,5 +69,15 @@ public sealed class NotificationServiceTest : HeadlessTest
             Dispatcher.UIThread.RunJobs();
             return Task.CompletedTask;
         });
+    }
+
+    [Test]
+    public async Task BeforeNotifierWired_DoesNotThrow()
+    {
+        var service = new NotificationService();
+
+        var act = () => service.Error("no host yet", TimeSpan.Zero);
+
+        await Assert.That(act).ThrowsNothing();
     }
 }
