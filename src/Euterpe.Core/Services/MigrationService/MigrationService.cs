@@ -14,7 +14,7 @@ internal sealed partial class MigrationService : IMigrationService
         {
             await PopulateWorkFolderAsync(source, workFolder).ConfigureAwait(false);
 
-            if (!HasSupportedAudio(workFolder))
+            if (!HasSupportedMusic(workFolder))
             {
                 Logger.ZLogInformation($"'{name}' uses an unsupported audio format, skipping migration");
                 return (MigrationOutcome.Unsupported, desiredFolder);
