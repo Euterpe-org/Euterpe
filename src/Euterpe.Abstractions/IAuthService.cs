@@ -38,4 +38,9 @@ public interface IAuthService
     /// </summary>
     /// <returns>True if session was restored successfully.</returns>
     Task<bool> RestoreSessionAsync();
+
+    /// <summary>
+    ///     Check whether the Euterpe backend is reachable and healthy (HTTP 200 from its health endpoint).
+    /// </summary>
+    Task<bool> IsServerHealthyAsync();
 }

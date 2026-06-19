@@ -1,3 +1,4 @@
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using Euterpe.Contracts.Account;
@@ -9,6 +10,7 @@ internal sealed partial class AuthService : IAuthService
     private const string ClientId = "euterpe-app";
     private const string AuthorizePageUrl = "https://euterpe-org.com/auth/app";
     private static readonly TimeSpan CallbackTimeout = TimeSpan.FromMinutes(5);
+    private static readonly TimeSpan HealthCheckTimeout = TimeSpan.FromSeconds(5);
 
     private readonly AsyncExclusiveLock _lock = new();
     public AsyncManualResetEvent Ready { get; } = new(false);
@@ -160,6 +162,21 @@ internal sealed partial class AuthService : IAuthService
         return true;
     }
 
+    public async Task<bool> IsServerHealthyAsync()
+    {
+        try
+        {
+            using var cts = new CancellationTokenSource(HealthCheckTimeout);
+            using var response = await HealthClient.CheckAsync(cts.Token).ConfigureAwait(false);
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Server health check failed");
+            return false;
+        }
+    }
+
     #region Injections
 
     public required AuthState AuthState { get; init; }
@@ -168,6 +185,7 @@ internal sealed partial class AuthService : IAuthService
     public required IPlatformSecureStorage SecureStorage { get; init; }
     public required IEuterpeAccountClient AccountClient { get; init; }
     public required IEuterpeAuthClient AuthClient { get; init; }
+    public required IEuterpeHealthClient HealthClient { get; init; }
     public required ILogger<AuthService> Logger { get; init; }
 
     #endregion Injections

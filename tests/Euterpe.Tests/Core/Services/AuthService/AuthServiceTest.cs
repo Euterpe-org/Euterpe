@@ -23,12 +23,14 @@ public sealed partial class AuthServiceTest
         IPlatformLauncher? launcher = null,
         IPlatformSecureStorage? secureStorage = null,
         IEuterpeAccountClient? accountClient = null,
+        IEuterpeHealthClient? healthClient = null,
         Func<ILoopbackCallbackListener>? listenerFactory = null) =>
         new()
         {
             AuthState = authState ?? new AuthState(),
             AccountClient = accountClient ?? IEuterpeAccountClient.Mock(),
             AuthClient = authClient ?? IEuterpeAuthClient.Mock(),
+            HealthClient = healthClient ?? IEuterpeHealthClient.Mock(),
             Launcher = launcher ?? IPlatformLauncher.Mock(),
             SecureStorage = secureStorage ?? IPlatformSecureStorage.Mock(),
             ListenerFactory = listenerFactory ?? (() => ILoopbackCallbackListener.Mock()),

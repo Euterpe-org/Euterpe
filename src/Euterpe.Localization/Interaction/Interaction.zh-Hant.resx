@@ -137,6 +137,9 @@
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>找不到金鑰環服務（secret-tool）。您的登入工作階段無法儲存，每次都需要重新登入。</value>
   </data>
+  <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
+    <value>Euterpe 伺服器目前無法使用。Euterpe 即將關閉，請稍後再試。</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>確定要設定 MD_DIRECTORY 環境變數嗎？</value>
   </data>
