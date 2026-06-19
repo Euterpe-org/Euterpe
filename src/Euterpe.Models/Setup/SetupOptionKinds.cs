@@ -4,11 +4,11 @@ namespace Euterpe.Models.Setup;
 public enum SetupOptionKinds
 {
     None = 0,
-    Migration = 1 << 0,
-    MelonLoader = 1 << 1,
-    DotNetRuntime = 1 << 2,
-    EssentialMods = 1 << 3,
-    UninstallConflicts = 1 << 4,
+    MelonLoader = 1 << 0,
+    DotNetRuntime = 1 << 1,
+    EssentialMods = 1 << 2,
+    UninstallConflicts = 1 << 3,
+    Migration = 1 << 4,
     ChartingTool = 1 << 5,
     DotNetSdk = 1 << 6,
     ModTemplate = 1 << 7,
