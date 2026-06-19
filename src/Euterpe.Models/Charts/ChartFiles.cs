@@ -15,7 +15,7 @@ public static class ChartFiles
     public const string DemoName = "demo";
     public const string MusicExtension = ".ogg";
 
-    public static readonly IReadOnlyList<string> CoverExtensions = [".png", ".gif"];
+    public static readonly IReadOnlyList<string> CoverExtensions = [".webp", ".png", ".gif"];
 
     public static bool IsLargeMedia(string fileName) => fileName == VideoFileName;
 
