@@ -26,6 +26,8 @@
     <StyleInclude
         Source="/Themes/Controls/ContributorCard.axaml" />
     <StyleInclude
+        Source="/Themes/Controls/CoverImage.axaml" />
+    <StyleInclude
         Source="/Themes/Controls/Difficulty.axaml" />
     <StyleInclude
         Source="/Themes/Controls/LabeledSection.axaml" />

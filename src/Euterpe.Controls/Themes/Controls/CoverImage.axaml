@@ -1,0 +1,44 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe"
+    xmlns:gif="clr-namespace:Avalonia.Labs.Gif;assembly=Avalonia.Labs.Gif">
+
+    <Design.PreviewWith>
+        <Border
+            Background="Gray"
+            Height="120"
+            Width="120">
+            <e:CoverImage
+                Source="https://avatars.githubusercontent.com/u/0" />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style
+        Selector="e|CoverImage">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    ClipToBounds="True"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <Panel>
+                        <e:AsyncImage
+                            DecodeWidth="{TemplateBinding DecodeWidth}"
+                            Name="PART_Static"
+                            Stretch="{TemplateBinding Stretch}" />
+                        <gif:GifImage
+                            IsVisible="False"
+                            Name="PART_Gif"
+                            Stretch="{TemplateBinding Stretch}" />
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+</Styles>
