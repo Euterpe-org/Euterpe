@@ -6,6 +6,7 @@
     <PropertyGroup>
         <PublishAot>true</PublishAot>
         <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>full</TrimMode>
         <PublishLzmaCompressed>true</PublishLzmaCompressed>
         <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
         <DebuggerSupport>false</DebuggerSupport>

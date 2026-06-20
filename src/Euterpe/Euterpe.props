@@ -1,12 +1,4 @@
 <Project>
-    <PropertyGroup>
-        <TrimMode>link</TrimMode>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <TrimmerRootDescriptor Include="TrimAssemblyConfig.xml"/>
-    </ItemGroup>
-
     <ItemGroup Condition="Exists('$(NativeLibraryDir)') And '$(IsWindows)' == 'true'">
         <DirectPInvoke Include="av_libglesv2"/>
         <NativeLibrary Include="$(NativeLibraryDir)\libANGLE_static.lib"/>
