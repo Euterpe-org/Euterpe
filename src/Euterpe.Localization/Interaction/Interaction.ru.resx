@@ -137,6 +137,9 @@
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Служба хранения ключей (secret-tool) не найдена. Сессия входа не будет сохранена, и вам потребуется входить заново при каждом запуске.</value>
   </data>
+  <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
+    <value>Сервер Euterpe в настоящее время недоступен. Euterpe закроется. Пожалуйста, повторите попытку позже.</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Установить переменную окружения MD_DIRECTORY?</value>
   </data>
@@ -165,6 +168,9 @@
   <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
     <value>Чарт {0} успешно импортирован</value>
   </data>
+  <data name="Notification_Content_Chart_Import_Unmigratable" xml:space="preserve">
+    <value>Чарт {0} невозможно перенести</value>
+  </data>
   <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
     <value>{0} не является поддерживаемым файлом или папкой чарта</value>
   </data>
@@ -173,6 +179,15 @@
   </data>
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>Чарт {0} успешно удалён</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Added" xml:space="preserve">
+    <value>Чарт {0} добавлен</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Removed" xml:space="preserve">
+    <value>Чарт {0} удалён</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Summary" xml:space="preserve">
+    <value>Чарты синхронизированы: добавлено {0}, удалено {1}</value>
   </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>Обновлено {0} чартов, {1} не удалось</value>
@@ -194,9 +209,6 @@
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>Онлайн-чарты недоступны для редактирования</value>
-  </data>
-  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
-    <value>В папке отсутствует {0} файл(ов), указанных в этом EPK</value>
   </data>
   <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
     <value>Недействительный файл EPK</value>
@@ -240,6 +252,9 @@
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>Не удалось установить мод {0}</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Incompatible" xml:space="preserve">
+    <value>Мод {0} несовместим и не может быть установлен</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Мод {0} успешно установлен</value>
   </data>
@@ -254,6 +269,15 @@
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Мод {0} успешно переустановлен</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Added" xml:space="preserve">
+    <value>Мод {0} добавлен</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Removed" xml:space="preserve">
+    <value>Мод {0} удалён</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Summary" xml:space="preserve">
+    <value>Моды синхронизированы: добавлено {0}, удалено {1}</value>
   </data>
   <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
     <value>Не удалось переключить состояние мода {0}</value>

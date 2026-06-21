@@ -67,11 +67,17 @@
   <data name="ChartAnalyzer_Title" xml:space="preserve">
     <value>譜面分析器</value>
   </data>
-  <data name="ChartSubmit_Description" xml:space="preserve">
-    <value>上傳並發布你的譜面</value>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
+    <value>萌新</value>
   </data>
-  <data name="ChartSubmit_Title" xml:space="preserve">
-    <value>提交譜面</value>
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
+    <value>高手</value>
+  </data>
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
+    <value>隱藏</value>
+  </data>
+  <data name="ChartDifficulty_Master" xml:space="preserve">
+    <value>大觸</value>
   </data>
   <data name="CharterToolkit_Offline_Description" xml:space="preserve">
     <value>在本機編輯譜面的 manifest 元數據</value>
@@ -84,18 +90,6 @@
   </data>
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>線上工具</value>
-  </data>
-  <data name="ChartDifficulty_Easy" xml:space="preserve">
-    <value>萌新</value>
-  </data>
-  <data name="ChartDifficulty_Hard" xml:space="preserve">
-    <value>高手</value>
-  </data>
-  <data name="ChartDifficulty_Hidden" xml:space="preserve">
-    <value>隱藏</value>
-  </data>
-  <data name="ChartDifficulty_Master" xml:space="preserve">
-    <value>大觸</value>
   </data>
   <data name="ChartManage_Bpm" xml:space="preserve">
     <value>BPM</value>
@@ -127,8 +121,8 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>取得譜面</value>
   </data>
-  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
-    <value>遷移全部 MDM 譜面</value>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>遷移 MDM 譜面</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
     <value>正在遷移譜面</value>
@@ -183,6 +177,12 @@
   </data>
   <data name="ChartSource_Online" xml:space="preserve">
     <value>線上</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>上傳並發布你的譜面</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>提交譜面</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>美術設計</value>

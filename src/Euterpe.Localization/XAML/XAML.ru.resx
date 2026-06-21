@@ -67,11 +67,17 @@
   <data name="ChartAnalyzer_Title" xml:space="preserve">
     <value>Chart Analyzer</value>
   </data>
-  <data name="ChartSubmit_Description" xml:space="preserve">
-    <value>Загрузите и опубликуйте свой чарт</value>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
+    <value>Легко</value>
   </data>
-  <data name="ChartSubmit_Title" xml:space="preserve">
-    <value>Отправить чарт</value>
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
+    <value>Сложно</value>
+  </data>
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
+    <value>Скрытый</value>
+  </data>
+  <data name="ChartDifficulty_Master" xml:space="preserve">
+    <value>Мастер</value>
   </data>
   <data name="CharterToolkit_Offline_Description" xml:space="preserve">
     <value>Редактировать метаданные manifest чарта локально</value>
@@ -85,18 +91,6 @@
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>Онлайн-инструменты</value>
   </data>
-  <data name="ChartDifficulty_Easy" xml:space="preserve">
-    <value>Легко</value>
-  </data>
-  <data name="ChartDifficulty_Hard" xml:space="preserve">
-    <value>Сложно</value>
-  </data>
-  <data name="ChartDifficulty_Hidden" xml:space="preserve">
-    <value>Скрытый</value>
-  </data>
-  <data name="ChartDifficulty_Master" xml:space="preserve">
-    <value>Мастер</value>
-  </data>
   <data name="ChartManage_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
@@ -105,6 +99,12 @@
   </data>
   <data name="ChartManage_Descending" xml:space="preserve">
     <value>По убыванию</value>
+  </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>Скачивание чарта</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>Выполняется скачивание. Пожалуйста, подождите и не закрывайте приложение.</value>
   </data>
   <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
     <value>Сложность</value>
@@ -121,8 +121,8 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Получить чарты</value>
   </data>
-  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
-    <value>Перенести все чарты MDM</value>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>Перенести чарты MDM</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
     <value>Перенос чартов</value>
@@ -177,6 +177,12 @@
   </data>
   <data name="ChartSource_Online" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Загрузите и опубликуйте свой чарт</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Отправить чарт</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>Художник</value>

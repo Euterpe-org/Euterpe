@@ -137,6 +137,9 @@
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>キーリングサービス（secret-tool）が見つかりませんでした。ログインセッションを保存できないため、毎回ログインが必要です。</value>
   </data>
+  <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
+    <value>Euterpe サーバーは現在利用できません。Euterpe を終了します。しばらくしてからもう一度お試しください。</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>環境変数 MD_DIRECTORY を設定しますか？</value>
   </data>
@@ -165,6 +168,9 @@
   <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
     <value>譜面 {0} のインポートが完了しました</value>
   </data>
+  <data name="Notification_Content_Chart_Import_Unmigratable" xml:space="preserve">
+    <value>譜面 {0} を移行できません</value>
+  </data>
   <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
     <value>{0} はサポートされていない譜面ファイルまたはフォルダーです</value>
   </data>
@@ -173,6 +179,15 @@
   </data>
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>譜面 {0} を削除しました</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Added" xml:space="preserve">
+    <value>譜面 {0} を追加しました</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Removed" xml:space="preserve">
+    <value>譜面 {0} を削除しました</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Summary" xml:space="preserve">
+    <value>譜面を同期しました：{0} 件追加、{1} 件削除</value>
   </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>{0} 件の譜面を更新しました（{1} 件失敗）</value>
@@ -194,9 +209,6 @@
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>オンライン譜面は編集できません</value>
-  </data>
-  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
-    <value>この EPK で参照されている {0} 件のファイルがフォルダーに見つかりません</value>
   </data>
   <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
     <value>有効な EPK ファイルではありません</value>
@@ -240,6 +252,9 @@
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>Mod {0} のインストールに失敗しました</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Incompatible" xml:space="preserve">
+    <value>Mod {0} は非互換のためインストールできません</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} のインストールが完了しました</value>
   </data>
@@ -254,6 +269,15 @@
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} の再インストールが完了しました</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Added" xml:space="preserve">
+    <value>Mod {0} を追加しました</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Removed" xml:space="preserve">
+    <value>Mod {0} を削除しました</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Summary" xml:space="preserve">
+    <value>Mod を同期しました：{0} 件追加、{1} 件削除</value>
   </data>
   <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
     <value>Mod {0} の状態切り替えに失敗しました</value>

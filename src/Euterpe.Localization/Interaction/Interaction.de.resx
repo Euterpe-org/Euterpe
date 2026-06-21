@@ -137,6 +137,9 @@
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Es wurde kein Schlüsselbundservice (secret-tool) gefunden. Deine Anmeldesitzung kann nicht gespeichert werden, und du musst dich bei jedem Start erneut anmelden.</value>
   </data>
+  <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
+    <value>Der Euterpe-Server ist derzeit nicht verfügbar. Euterpe wird jetzt geschlossen. Bitte versuchen Sie es später erneut.</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Möchtest du die Umgebungsvariable MD_DIRECTORY setzen?</value>
   </data>
@@ -165,6 +168,9 @@
   <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
     <value>Chart {0} erfolgreich importiert</value>
   </data>
+  <data name="Notification_Content_Chart_Import_Unmigratable" xml:space="preserve">
+    <value>Chart {0} kann nicht migriert werden</value>
+  </data>
   <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
     <value>{0} ist keine unterstützte Chart-Datei oder kein unterstützter Ordner</value>
   </data>
@@ -173,6 +179,15 @@
   </data>
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>Chart {0} erfolgreich entfernt</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Added" xml:space="preserve">
+    <value>Chart {0} hinzugefügt</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Removed" xml:space="preserve">
+    <value>Chart {0} entfernt</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Summary" xml:space="preserve">
+    <value>Charts synchronisiert: {0} hinzugefügt, {1} entfernt</value>
   </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>{0} Charts aktualisiert, {1} fehlgeschlagen</value>
@@ -194,9 +209,6 @@
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>Online-Charts können nicht bearbeitet werden</value>
-  </data>
-  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
-    <value>{0} Datei(en) dieser EPK fehlen im zugehörigen Ordner</value>
   </data>
   <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
     <value>Keine gültige EPK-Datei</value>
@@ -240,6 +252,9 @@
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>Mod {0} konnte nicht installiert werden</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Incompatible" xml:space="preserve">
+    <value>Mod {0} ist inkompatibel und kann nicht installiert werden</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich installiert</value>
   </data>
@@ -254,6 +269,15 @@
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>Mod {0} erfolgreich neu installiert</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Added" xml:space="preserve">
+    <value>Mod {0} hinzugefügt</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Removed" xml:space="preserve">
+    <value>Mod {0} entfernt</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Summary" xml:space="preserve">
+    <value>Mods synchronisiert: {0} hinzugefügt, {1} entfernt</value>
   </data>
   <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
     <value>Status von Mod {0} konnte nicht umgeschaltet werden</value>

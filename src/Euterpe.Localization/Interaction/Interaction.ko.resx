@@ -137,6 +137,9 @@
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>키링 서비스(secret-tool)를 찾을 수 없습니다. 로그인 세션을 저장할 수 없으며, 매번 다시 로그인해야 합니다.</value>
   </data>
+  <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
+    <value>Euterpe 서버를 현재 사용할 수 없습니다. Euterpe가 종료됩니다. 잠시 후 다시 시도해 주세요.</value>
+  </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>환경 변수 MD_DIRECTORY를 설정하시겠습니까?</value>
   </data>
@@ -165,6 +168,9 @@
   <data name="Notification_Content_Chart_Import_Success" xml:space="preserve">
     <value>채보 {0}을(를) 가져왔습니다</value>
   </data>
+  <data name="Notification_Content_Chart_Import_Unmigratable" xml:space="preserve">
+    <value>채보 {0}을(를) 마이그레이션할 수 없습니다</value>
+  </data>
   <data name="Notification_Content_Chart_Import_Unsupported" xml:space="preserve">
     <value>{0}은(는) 지원되는 채보 파일 또는 폴더가 아닙니다</value>
   </data>
@@ -173,6 +179,15 @@
   </data>
   <data name="Notification_Content_Chart_Remove_Success" xml:space="preserve">
     <value>채보 {0}이(가) 삭제되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Added" xml:space="preserve">
+    <value>채보 {0}이(가) 추가되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Removed" xml:space="preserve">
+    <value>채보 {0}이(가) 삭제되었습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_Sync_Summary" xml:space="preserve">
+    <value>채보 동기화 완료: 추가 {0}개, 삭제 {1}개</value>
   </data>
   <data name="Notification_Content_Chart_UpdateAll_Partial" xml:space="preserve">
     <value>채보 {0}개가 업데이트되었고, {1}개가 실패했습니다</value>
@@ -194,9 +209,6 @@
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
     <value>온라인 채보는 편집할 수 없습니다</value>
-  </data>
-  <data name="Notification_Content_Epk_Open_FilesMissing" xml:space="preserve">
-    <value>이 EPK에서 참조하는 파일 {0}개가 해당 폴더에 없습니다</value>
   </data>
   <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
     <value>유효한 EPK 파일이 아닙니다</value>
@@ -240,6 +252,9 @@
   <data name="Notification_Content_Mod_Install_Failed" xml:space="preserve">
     <value>모드 {0} 설치에 실패했습니다</value>
   </data>
+  <data name="Notification_Content_Mod_Install_Incompatible" xml:space="preserve">
+    <value>모드 {0}은(는) 호환되지 않아 설치할 수 없습니다</value>
+  </data>
   <data name="Notification_Content_Mod_Install_Success" xml:space="preserve">
     <value>모드 {0}이(가) 설치되었습니다</value>
   </data>
@@ -254,6 +269,15 @@
   </data>
   <data name="Notification_Content_Mod_Reinstall_Success" xml:space="preserve">
     <value>모드 {0}이(가) 재설치되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Added" xml:space="preserve">
+    <value>모드 {0}이(가) 추가되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Removed" xml:space="preserve">
+    <value>모드 {0}이(가) 삭제되었습니다</value>
+  </data>
+  <data name="Notification_Content_Mod_Sync_Summary" xml:space="preserve">
+    <value>모드 동기화 완료: 추가 {0}개, 삭제 {1}개</value>
   </data>
   <data name="Notification_Content_Mod_Toggle_Failed" xml:space="preserve">
     <value>모드 {0} 상태 전환에 실패했습니다</value>
