@@ -6,8 +6,8 @@ namespace Euterpe.Core;
 internal sealed partial class ModManageService : IModManageService, IDisposable
 {
     private readonly Lazy<Task> _initTask;
-    private readonly SingleFlight<string> _singleFlight = new();
     private readonly SemaphoreSlim _reconcileGate = new(1, 1);
+    private readonly SingleFlight<string> _singleFlight = new();
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
 
@@ -28,15 +28,15 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
 
     public async Task UpdateModAsync(ModDto mod)
     {
-        var (success, name) = await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false);
+        var success = await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false);
         await RecomputeStatesAsync().ConfigureAwait(false);
         if (success)
         {
-            NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, name);
+            NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, mod.Name);
         }
         else
         {
-            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, name);
+            NotificationService.ErrorLight(Notification_Content_Mod_Update_Failed, mod.Name);
         }
     }
 
@@ -74,7 +74,7 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         if (mod.State is ModState.Incompatible)
         {
             Logger.ZLogInformation($"Install requested for incompatible mod {name}");
-            NotificationService.NoticeLight(Notification_Content_Mod_Install_Incompatible, name);
+            NotificationService.ErrorLight(Notification_Content_Mod_Install_Incompatible, name);
             return;
         }
 
@@ -94,7 +94,7 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         if (!mod.IsLocal)
         {
             Logger.ZLogInformation($"Update requested for not-installed mod {name}");
-            NotificationService.NoticeLight(Notification_Content_Mod_NotInstalled, name);
+            NotificationService.ErrorLight(Notification_Content_Mod_NotInstalled, name);
             return;
         }
 
@@ -120,7 +120,7 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
 
         if (!mod.IsLocal)
         {
-            Logger.ZLogInformation($"Uninstall requested for not-installed mod {name}");
+            Logger.ZLogInformation($"Uninstall requested for not installed mod {name}");
             NotificationService.NoticeLight(Notification_Content_Mod_NotInstalled, name);
             return;
         }
@@ -136,7 +136,7 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         var updated = 0;
         foreach (var mod in outdatedMods)
         {
-            if ((await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false)).Success)
+            if (await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false))
             {
                 updated++;
             }
