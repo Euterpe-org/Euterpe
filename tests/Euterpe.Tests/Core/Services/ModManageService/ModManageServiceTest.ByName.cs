@@ -69,7 +69,7 @@ public sealed partial class ModManageServiceTest
         await sut.InstallModByNameAsync(TestModName);
 
         using var _ = Assert.Multiple();
-        notificationServiceMock.NoticeLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
+        notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Never);
     }
 
@@ -80,7 +80,8 @@ public sealed partial class ModManageServiceTest
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([
             CreateWebMod("ModA", incompatibleMods: ["ModB"]),
-            CreateWebMod("ModB")]);
+            CreateWebMod("ModB")
+        ]);
         var notificationServiceMock = INotificationService.Mock();
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
@@ -91,7 +92,7 @@ public sealed partial class ModManageServiceTest
         await sut.InstallModByNameAsync("ModB");
 
         using var _ = Assert.Multiple();
-        notificationServiceMock.NoticeLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
+        notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Never);
     }
 
@@ -108,7 +109,7 @@ public sealed partial class ModManageServiceTest
         await sut.UpdateModByNameAsync(TestModName);
 
         using var _ = Assert.Multiple();
-        notificationServiceMock.NoticeLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
+        notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Never);
     }
 
