@@ -1,6 +1,5 @@
 using DynamicData;
 using Euterpe.Contracts.Charts;
-using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Tests.Core;
 
@@ -9,8 +8,8 @@ public sealed partial class ChartManageServiceTest
     [Test]
     public async Task UpdateAllChartsAsync_ManifestInDeleted_PrunesTombstonedChart()
     {
-        var local = new OnlineChartLocalService();
-        local.Set("/online/13", OnlineChartAt("/online/13", "Song"));
+        var local = new FakeChartLocalService();
+        local.Set(CreateChart("Song", ChartSource.Online, "/online/13"));
 
         var fileSystem = IFileSystemService.Mock();
         fileSystem.GetFileSizes(Any<string>()).Returns(new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase) { ["manifest.epk"] = 1 });
@@ -36,8 +35,8 @@ public sealed partial class ChartManageServiceTest
     [Test]
     public async Task UpdateAllChartsAsync_ChangedAndDeletedDelta_UpdatesThroughDownloadManager()
     {
-        var local = new OnlineChartLocalService();
-        local.Set("/online/13", OnlineChartAt("/online/13", "before"));
+        var local = new FakeChartLocalService();
+        local.Set(CreateChart("before", ChartSource.Online, "/online/13"));
 
         var fileSystem = IFileSystemService.Mock();
         fileSystem.GetFileSizes(Any<string>()).Returns(new Dictionary<string, long>(StringComparer.OrdinalIgnoreCase)
@@ -60,43 +59,12 @@ public sealed partial class ChartManageServiceTest
         await service.InitializeChartsAsync();
         using var _ = service.Connect().Bind(out var charts).Subscribe();
 
-        local.Set("/online/13", OnlineChartAt("/online/13", "after"));
+        local.Set(CreateChart("after", ChartSource.Online, "/online/13"));
         await service.UpdateAllChartsAsync();
 
         using var __ = Assert.Multiple();
         download.UpdateChartAsync("13", Any<IReadOnlyCollection<string>>(), Any<IReadOnlyCollection<string>>(), Any<CancellationToken>()).WasCalled(Times.Once);
         await Assert.That(charts.Count).IsEqualTo(1);
         await Assert.That(charts[0].Manifest.Meta.Name).IsEqualTo("after");
-    }
-
-    private static ChartDto OnlineChartAt(string folder, string name) =>
-        new()
-        {
-            FolderPath = folder,
-            FolderName = Path.GetFileName(folder),
-            Source = ChartSource.Online,
-            Manifest = new Manifest
-            {
-                Schema = Manifest.CurrentSchema,
-                Meta = new ManifestMeta { Name = name, Author = "author", Scene = "scene", Maps = new() },
-                Files = new()
-            }
-        };
-
-    private sealed class OnlineChartLocalService : IChartLocalService
-    {
-        private readonly Dictionary<string, ChartDto> _online = [];
-
-        public void Set(string folder, ChartDto chart) => _online[folder] = chart;
-
-        public IEnumerable<string> GetChartFolderPaths(ChartSource source) =>
-            source is ChartSource.Online ? _online.Keys : [];
-
-        public Task<ChartDto?> LoadChartFromPathAsync(string chartFolder, ChartSource source) =>
-            Task.FromResult(_online.GetValueOrDefault(chartFolder));
-
-        public CustomAlbumSource CreateCustomAlbumSource(string path) => throw new NotSupportedException();
-
-        public CustomAlbumSource[] GetCustomAlbumsSources() => throw new NotSupportedException();
     }
 }
