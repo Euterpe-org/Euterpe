@@ -35,11 +35,11 @@ internal sealed partial class ChartManageService
         }
     }
 
-    private async Task<ChartUpdateResult> UpdateChartCoreAsync(string cid, IReadOnlyCollection<string> changedFiles, CancellationToken cancellationToken)
+    private async Task<ChartUpdateResult> UpdateChartCoreAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles, CancellationToken cancellationToken)
     {
         try
         {
-            var folderPath = await GameDownloadManager.UpdateChartAsync(cid, changedFiles, cancellationToken).ConfigureAwait(false);
+            var folderPath = await GameDownloadManager.UpdateChartAsync(cid, changedFiles, deletedFiles, cancellationToken).ConfigureAwait(false);
 
             var chart = await ChartLocalService.LoadChartFromPathAsync(folderPath, ChartSource.Online).ConfigureAwait(false);
             if (chart is null)
