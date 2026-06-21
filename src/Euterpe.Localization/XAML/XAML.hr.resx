@@ -67,11 +67,17 @@
   <data name="ChartAnalyzer_Title" xml:space="preserve">
     <value>Chart Analyzer</value>
   </data>
-  <data name="ChartSubmit_Description" xml:space="preserve">
-    <value>Prenesi i objavi svoj chart</value>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
+    <value>Easy</value>
   </data>
-  <data name="ChartSubmit_Title" xml:space="preserve">
-    <value>Pošalji chart</value>
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
+    <value>Hard</value>
+  </data>
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="ChartDifficulty_Master" xml:space="preserve">
+    <value>Master</value>
   </data>
   <data name="CharterToolkit_Offline_Description" xml:space="preserve">
     <value>Uredi metapodatke manifesta charta lokalno</value>
@@ -85,18 +91,6 @@
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>Online alati</value>
   </data>
-  <data name="ChartDifficulty_Easy" xml:space="preserve">
-    <value>Easy</value>
-  </data>
-  <data name="ChartDifficulty_Hard" xml:space="preserve">
-    <value>Hard</value>
-  </data>
-  <data name="ChartDifficulty_Hidden" xml:space="preserve">
-    <value>Hidden</value>
-  </data>
-  <data name="ChartDifficulty_Master" xml:space="preserve">
-    <value>Master</value>
-  </data>
   <data name="ChartManage_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
@@ -105,6 +99,12 @@
   </data>
   <data name="ChartManage_Descending" xml:space="preserve">
     <value>Silazno</value>
+  </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>Preuzimanje charta</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>Preuzimanje je u tijeku. Pričekajte i nemojte zatvoriti aplikaciju.</value>
   </data>
   <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
     <value>Težina</value>
@@ -121,8 +121,8 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Nabavi chartove</value>
   </data>
-  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
-    <value>Migriraj sve MDM chartove</value>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>Migriraj MDM chartove</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
     <value>Migriranje chartova</value>
@@ -177,6 +177,12 @@
   </data>
   <data name="ChartSource_Online" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Prenesi i objavi svoj chart</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Pošalji chart</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>Umjetnik</value>

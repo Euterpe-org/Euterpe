@@ -67,11 +67,17 @@
   <data name="ChartAnalyzer_Title" xml:space="preserve">
     <value>Chart Analyzer</value>
   </data>
-  <data name="ChartSubmit_Description" xml:space="preserve">
-    <value>Lade deinen Chart hoch und veröffentliche ihn</value>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
+    <value>Easy</value>
   </data>
-  <data name="ChartSubmit_Title" xml:space="preserve">
-    <value>Chart einreichen</value>
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
+    <value>Hard</value>
+  </data>
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="ChartDifficulty_Master" xml:space="preserve">
+    <value>Master</value>
   </data>
   <data name="CharterToolkit_Offline_Description" xml:space="preserve">
     <value>Die Manifest-Metadaten eines Charts lokal bearbeiten</value>
@@ -85,18 +91,6 @@
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>Online-Werkzeuge</value>
   </data>
-  <data name="ChartDifficulty_Easy" xml:space="preserve">
-    <value>Easy</value>
-  </data>
-  <data name="ChartDifficulty_Hard" xml:space="preserve">
-    <value>Hard</value>
-  </data>
-  <data name="ChartDifficulty_Hidden" xml:space="preserve">
-    <value>Hidden</value>
-  </data>
-  <data name="ChartDifficulty_Master" xml:space="preserve">
-    <value>Master</value>
-  </data>
   <data name="ChartManage_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
@@ -105,6 +99,12 @@
   </data>
   <data name="ChartManage_Descending" xml:space="preserve">
     <value>Absteigend</value>
+  </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>Chart wird heruntergeladen</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>Download läuft. Bitte warten und die App nicht schließen.</value>
   </data>
   <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
     <value>Schwierigkeit</value>
@@ -121,8 +121,8 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Charts holen</value>
   </data>
-  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
-    <value>Alle MDM-Charts migrieren</value>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>MDM-Charts migrieren</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
     <value>Charts werden migriert</value>
@@ -177,6 +177,12 @@
   </data>
   <data name="ChartSource_Online" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Lade deinen Chart hoch und veröffentliche ihn</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Chart einreichen</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>Künstler</value>

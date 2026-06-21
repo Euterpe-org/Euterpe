@@ -67,11 +67,17 @@
   <data name="ChartAnalyzer_Title" xml:space="preserve">
     <value>Chart Analyzer</value>
   </data>
-  <data name="ChartSubmit_Description" xml:space="preserve">
-    <value>Envie e publique seu chart</value>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
+    <value>Fácil</value>
   </data>
-  <data name="ChartSubmit_Title" xml:space="preserve">
-    <value>Enviar chart</value>
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
+    <value>Difícil</value>
+  </data>
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
+    <value>Oculto</value>
+  </data>
+  <data name="ChartDifficulty_Master" xml:space="preserve">
+    <value>Master</value>
   </data>
   <data name="CharterToolkit_Offline_Description" xml:space="preserve">
     <value>Edite localmente os metadados do manifest de um chart</value>
@@ -85,18 +91,6 @@
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>Ferramentas online</value>
   </data>
-  <data name="ChartDifficulty_Easy" xml:space="preserve">
-    <value>Fácil</value>
-  </data>
-  <data name="ChartDifficulty_Hard" xml:space="preserve">
-    <value>Difícil</value>
-  </data>
-  <data name="ChartDifficulty_Hidden" xml:space="preserve">
-    <value>Oculto</value>
-  </data>
-  <data name="ChartDifficulty_Master" xml:space="preserve">
-    <value>Master</value>
-  </data>
   <data name="ChartManage_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
@@ -105,6 +99,12 @@
   </data>
   <data name="ChartManage_Descending" xml:space="preserve">
     <value>Decrescente</value>
+  </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>Baixando chart</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>Download em andamento. Aguarde e não feche o aplicativo.</value>
   </data>
   <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
     <value>Dificuldade</value>
@@ -121,8 +121,8 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>Obter charts</value>
   </data>
-  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
-    <value>Migrar todos os charts MDM</value>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>Migrar charts MDM</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
     <value>Migrando charts</value>
@@ -177,6 +177,12 @@
   </data>
   <data name="ChartSource_Online" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>Envie e publique seu chart</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>Enviar chart</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>Artista</value>

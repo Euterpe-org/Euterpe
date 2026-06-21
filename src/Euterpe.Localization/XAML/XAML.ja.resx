@@ -67,11 +67,17 @@
   <data name="ChartAnalyzer_Title" xml:space="preserve">
     <value>譜面分析器</value>
   </data>
-  <data name="ChartSubmit_Description" xml:space="preserve">
-    <value>譜面をアップロードして公開</value>
+  <data name="ChartDifficulty_Easy" xml:space="preserve">
+    <value>普通</value>
   </data>
-  <data name="ChartSubmit_Title" xml:space="preserve">
-    <value>譜面を提出</value>
+  <data name="ChartDifficulty_Hard" xml:space="preserve">
+    <value>玄人</value>
+  </data>
+  <data name="ChartDifficulty_Hidden" xml:space="preserve">
+    <value>隠し</value>
+  </data>
+  <data name="ChartDifficulty_Master" xml:space="preserve">
+    <value>達人</value>
   </data>
   <data name="CharterToolkit_Offline_Description" xml:space="preserve">
     <value>譜面の manifest メタデータをローカルで編集</value>
@@ -85,18 +91,6 @@
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>オンラインツール</value>
   </data>
-  <data name="ChartDifficulty_Easy" xml:space="preserve">
-    <value>普通</value>
-  </data>
-  <data name="ChartDifficulty_Hard" xml:space="preserve">
-    <value>玄人</value>
-  </data>
-  <data name="ChartDifficulty_Hidden" xml:space="preserve">
-    <value>隠し</value>
-  </data>
-  <data name="ChartDifficulty_Master" xml:space="preserve">
-    <value>達人</value>
-  </data>
   <data name="ChartManage_Bpm" xml:space="preserve">
     <value>BPM</value>
   </data>
@@ -105,6 +99,12 @@
   </data>
   <data name="ChartManage_Descending" xml:space="preserve">
     <value>降順</value>
+  </data>
+  <data name="ChartManage_Downloading" xml:space="preserve">
+    <value>譜面をダウンロード中</value>
+  </data>
+  <data name="ChartManage_DownloadingHint" xml:space="preserve">
+    <value>ダウンロード中です。しばらくお待ちください。アプリを閉じないでください。</value>
   </data>
   <data name="ChartManage_Filter_Difficulty" xml:space="preserve">
     <value>難易度</value>
@@ -121,8 +121,8 @@
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
     <value>譜面を入手</value>
   </data>
-  <data name="ChartManage_MigrateAllMdm" xml:space="preserve">
-    <value>すべての MDM 譜面を移行</value>
+  <data name="ChartManage_MigrateMdm" xml:space="preserve">
+    <value>MDM 譜面を移行</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
     <value>譜面を移行中</value>
@@ -177,6 +177,12 @@
   </data>
   <data name="ChartSource_Online" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="ChartSubmit_Description" xml:space="preserve">
+    <value>譜面をアップロードして公開</value>
+  </data>
+  <data name="ChartSubmit_Title" xml:space="preserve">
+    <value>譜面を提出</value>
   </data>
   <data name="Contributor_Artist" xml:space="preserve">
     <value>アーティスト</value>
