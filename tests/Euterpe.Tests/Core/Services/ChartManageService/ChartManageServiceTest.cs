@@ -13,12 +13,13 @@ public sealed partial class ChartManageServiceTest
     [Test]
     public async Task RefreshChartAsync_KnownFolder_ReloadsManifestFromDisk()
     {
-        var local = new FakeChartLocalService(ChartFolder) { Chart = CreateChart("before") };
+        var local = new FakeChartLocalService();
+        local.Set(CreateChart("before"));
         var service = CreateService(local);
         await service.InitializeChartsAsync();
         using var _ = service.Connect().Bind(out var charts).Subscribe();
 
-        local.Chart = CreateChart("after");
+        local.Set(CreateChart("after"));
         await service.RefreshChartAsync(ChartFolder);
 
         await Assert.That(charts[0].Manifest.Meta.Name).IsEqualTo("after");
@@ -27,12 +28,13 @@ public sealed partial class ChartManageServiceTest
     [Test]
     public async Task RefreshChartAsync_FolderOutsideLibrary_LeavesLibraryUnchanged()
     {
-        var local = new FakeChartLocalService(ChartFolder) { Chart = CreateChart("before") };
+        var local = new FakeChartLocalService();
+        local.Set(CreateChart("before"));
         var service = CreateService(local);
         await service.InitializeChartsAsync();
         using var _ = service.Connect().Bind(out var charts).Subscribe();
 
-        local.Chart = CreateChart("after");
+        local.Set(CreateChart("after"));
         await service.RefreshChartAsync("/somewhere/else");
 
         await Assert.That(charts.Count).IsEqualTo(1);
@@ -55,12 +57,12 @@ public sealed partial class ChartManageServiceTest
             MigrationService = IMigrationService.Mock()
         };
 
-    private static ChartDto CreateChart(string name) =>
+    private static ChartDto CreateChart(string name, ChartSource source = ChartSource.Offline, string folderPath = ChartFolder) =>
         new()
         {
-            FolderPath = ChartFolder,
-            FolderName = "A",
-            Source = ChartSource.Offline,
+            FolderPath = folderPath,
+            FolderName = Path.GetFileName(folderPath),
+            Source = source,
             Manifest = new Manifest
             {
                 Schema = Manifest.CurrentSchema,
@@ -69,15 +71,19 @@ public sealed partial class ChartManageServiceTest
             }
         };
 
-    private sealed class FakeChartLocalService(string offlineFolder) : IChartLocalService
+    private sealed class FakeChartLocalService : IChartLocalService
     {
-        public ChartDto? Chart { get; set; }
+        private readonly Dictionary<string, ChartDto> _charts = [];
+
+        public void Set(ChartDto chart) => _charts[chart.FolderPath] = chart;
+
+        public void Remove(string folderPath) => _charts.Remove(folderPath);
 
         public IEnumerable<string> GetChartFolderPaths(ChartSource source) =>
-            source is ChartSource.Offline ? [offlineFolder] : [];
+            _charts.Values.Where(chart => chart.Source == source).Select(chart => chart.FolderPath);
 
         public Task<ChartDto?> LoadChartFromPathAsync(string chartFolder, ChartSource source) =>
-            Task.FromResult(Chart);
+            Task.FromResult(_charts.GetValueOrDefault(chartFolder));
 
         public CustomAlbumSource CreateCustomAlbumSource(string path) => throw new NotSupportedException();
 
