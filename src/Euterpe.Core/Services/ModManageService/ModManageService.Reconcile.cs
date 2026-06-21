@@ -125,6 +125,13 @@ internal sealed partial class ModManageService
 
     private void RecomputeModStates(ModDto[] diskMods)
     {
+        // diskMods may contain duplicate names; keep the first.
+        var diskModsByName = new Dictionary<string, ModDto>(StringComparer.Ordinal);
+        foreach (var disk in diskMods)
+        {
+            diskModsByName.TryAdd(disk.Name, disk);
+        }
+
         foreach (var mod in _sourceCache.Items)
         {
             if (mod.IsProcessing)
@@ -139,7 +146,7 @@ internal sealed partial class ModManageService
             }
             else if (mod.IsLocal)
             {
-                if (diskMods.FirstOrDefault(disk => disk.Name == mod.Name) is { } disk)
+                if (diskModsByName.TryGetValue(mod.Name, out var disk))
                 {
                     mod.State = DetermineModState(disk, mod);
                 }
