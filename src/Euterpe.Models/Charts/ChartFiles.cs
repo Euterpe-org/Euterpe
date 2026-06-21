@@ -26,8 +26,7 @@ public static class ChartFiles
     public static bool IsCoverFile(string fileName) =>
         Path.GetFileNameWithoutExtension(fileName.AsSpan()).Equals(CoverName, StringComparison.OrdinalIgnoreCase);
 
-    // Every file name a chart may carry, including retired ones (e.g. legacy cover.png) so orphans of any
-    // type surface for the server's reverse diff to prune.
+    // Recognises retired names too (e.g. legacy cover.png) so the server's reverse diff can prune orphans.
     public static bool IsChartFile(string fileName) =>
         fileName is ManifestFileName or MusicFileName or DemoFileName or VideoFileName
         || IsCoverFile(fileName)

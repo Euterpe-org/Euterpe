@@ -52,9 +52,9 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
             FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
             FileSystemService.CopyDirectory(destinationFolder, workFolder);
 
-            // Any change bumps the manifest, so refetch it whenever changedFiles is non-empty (the server omits it when other files change); a pure orphan cleanup downloads nothing.
+            // The server omits manifest.epk when other files change; re-add it, since every change bumps it.
             var toDownload = changedFiles.Count > 0
-                ? changedFiles.Append(ManifestFileName).Distinct(StringComparer.Ordinal)
+                ? changedFiles.Append(ManifestFileName).Distinct(StringComparer.OrdinalIgnoreCase)
                 : changedFiles;
             foreach (var fileName in toDownload)
             {

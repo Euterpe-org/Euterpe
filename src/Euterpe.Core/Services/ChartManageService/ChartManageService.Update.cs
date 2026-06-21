@@ -13,7 +13,7 @@ internal sealed partial class ChartManageService
             return results;
         }
 
-        // BuildFileVersions scans each chart folder (synchronous I/O); keep it off the calling UI thread.
+        // Per-chart disk scan is synchronous; keep it off the UI thread.
         var request = await Task.Run(
                 () => new CheckChartUpdatesRequest
                 {
@@ -39,7 +39,7 @@ internal sealed partial class ChartManageService
         return results;
     }
 
-    // Report on-disk chart files, not just manifest entries, so the server's reverse diff prunes orphans the manifest no longer lists.
+    // Report on-disk orphans (version 0) too, so the server's reverse diff can prune them.
     private Dictionary<string, ChartFileEntry> BuildFileVersions(ChartDto chart)
     {
         var declared = chart.Manifest.Files;
