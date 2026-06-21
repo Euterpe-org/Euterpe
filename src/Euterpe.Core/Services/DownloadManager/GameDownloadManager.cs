@@ -1,6 +1,7 @@
 using Euterpe.Contracts.Charts;
 using Euterpe.Contracts.Distribution;
 using Euterpe.Contracts.Mods;
+using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Core;
 
@@ -39,9 +40,9 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
         }
     }
 
-    public async Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, CancellationToken cancellationToken = default)
+    public async Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Updating chart {cid} ({changedFiles.Count} changed file(s)) ...");
+        Logger.ZLogInformation($"Updating chart {cid} ({changedFiles.Count} changed, {deletedFiles.Count} deleted file(s)) ...");
 
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, cid);
         var destinationFolder = Path.Combine(GameConfig.OnlineChartsFolder, cid);
@@ -51,9 +52,18 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
             FileSystemService.TryDeleteDirectory(workFolder, DeleteOption.IgnoreIfNotFound);
             FileSystemService.CopyDirectory(destinationFolder, workFolder);
 
-            foreach (var fileName in changedFiles)
+            // Any change bumps the manifest, so refetch it whenever changedFiles is non-empty (the server omits it when other files change); a pure orphan cleanup downloads nothing.
+            var toDownload = changedFiles.Count > 0
+                ? changedFiles.Append(ManifestFileName).Distinct(StringComparer.Ordinal)
+                : changedFiles;
+            foreach (var fileName in toDownload)
             {
                 await DownloadChartFileAsync(cid, workFolder, fileName, cancellationToken).ConfigureAwait(false);
+            }
+
+            foreach (var fileName in deletedFiles)
+            {
+                FileSystemService.TryDeleteFile(Path.Combine(workFolder, fileName), DeleteOption.IgnoreIfNotFound);
             }
 
             if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder, true))

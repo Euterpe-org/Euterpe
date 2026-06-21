@@ -1,4 +1,5 @@
 using Euterpe.Contracts.Charts;
+using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Core;
 
@@ -12,32 +13,38 @@ internal sealed partial class ChartManageService
             return results;
         }
 
-        var request = new CheckChartUpdatesRequest
-        {
-            Charts = charts.ToDictionary(
-                chart => chart.FolderName,
-                chart => chart.Manifest.Files.ToDictionary(
-                    file => file.Key,
-                    file => new ChartFileEntry
-                    {
-                        Version = file.Value.Version
-                    }))
-        };
+        // BuildFileVersions scans each chart folder (synchronous I/O); keep it off the calling UI thread.
+        var request = await Task.Run(
+                () => new CheckChartUpdatesRequest
+                {
+                    Charts = charts.ToDictionary(chart => chart.FolderName, BuildFileVersions)
+                },
+                cancellationToken)
+            .ConfigureAwait(false);
 
         var response = await GameDownloadManager.CheckChartUpdatesAsync(request, cancellationToken).ConfigureAwait(false);
 
-        foreach (var (cid, changedFiles) in response.Updates)
+        foreach (var (cid, delta) in response.Charts)
         {
-            string[] files = [.. changedFiles.Keys];
-            var result = await RunExclusiveAsync(cid, () => UpdateChartCoreAsync(cid, files, cancellationToken)).ConfigureAwait(false);
+            if (delta.Deleted.Contains(ManifestFileName))
+            {
+                await RunExclusiveAsync(cid, () => RemoveDelistedChartCoreAsync(cid)).ConfigureAwait(false);
+                continue;
+            }
+
+            var result = await RunExclusiveAsync(cid, () => UpdateChartCoreAsync(cid, delta.Changed, delta.Deleted, cancellationToken)).ConfigureAwait(false);
             results.Add(result);
         }
 
-        foreach (var cid in response.Removed)
-        {
-            await RunExclusiveAsync(cid.ToString(), () => RemoveDelistedChartCoreAsync(cid.ToString())).ConfigureAwait(false);
-        }
-
         return results;
+    }
+
+    // Report on-disk chart files, not just manifest entries, so the server's reverse diff prunes orphans the manifest no longer lists.
+    private Dictionary<string, ChartFileEntry> BuildFileVersions(ChartDto chart)
+    {
+        var declared = chart.Manifest.Files;
+        return FileSystemService.GetFileSizes(chart.FolderPath).Keys
+            .Where(fileName => declared.ContainsKey(fileName) || IsChartFile(fileName))
+            .ToDictionary(fileName => fileName, fileName => new ChartFileEntry { Version = declared.GetValueOrDefault(fileName)?.Version ?? 0 });
     }
 }

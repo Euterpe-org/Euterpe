@@ -15,14 +15,42 @@ public static class ChartFiles
     public const string DemoName = "demo";
     public const string MusicExtension = ".ogg";
 
+    public const string MapPrefix = "map";
+    public const string BmsExtension = ".bms";
+    public const string TalkExtension = ".talk";
+
     public static readonly IReadOnlyList<string> CoverExtensions = [".webp", ".png", ".gif"];
 
     public static bool IsLargeMedia(string fileName) => fileName == VideoFileName;
 
-    public static string MapName(ChartDifficulty difficulty) => $"map{(int)difficulty}";
+    public static bool IsCoverFile(string fileName) =>
+        Path.GetFileNameWithoutExtension(fileName.AsSpan()).Equals(CoverName, StringComparison.OrdinalIgnoreCase);
 
-    public static string MapFileName(ChartDifficulty difficulty) => $"map{(int)difficulty}.bms";
+    // Every file name a chart may carry, including retired ones (e.g. legacy cover.png) so orphans of any
+    // type surface for the server's reverse diff to prune.
+    public static bool IsChartFile(string fileName) =>
+        fileName is ManifestFileName or MusicFileName or DemoFileName or VideoFileName
+        || IsCoverFile(fileName)
+        || IsMapFile(fileName);
+
+    public static string MapName(ChartDifficulty difficulty) => $"{MapPrefix}{(int)difficulty}";
+
+    public static string MapFileName(ChartDifficulty difficulty) => $"{MapName(difficulty)}{BmsExtension}";
 
     public static IReadOnlyList<ChartDifficulty> ExistingDifficulties(this IReadOnlyDictionary<string, ManifestFileEntry> files) =>
         [.. ChartDifficultyExtensions.GetValues().Where(difficulty => files.ContainsKey(MapFileName(difficulty)))];
+
+    private static bool IsMapFile(string fileName)
+    {
+        var extension = Path.GetExtension(fileName.AsSpan());
+        if (!extension.Equals(BmsExtension, StringComparison.OrdinalIgnoreCase)
+            && !extension.Equals(TalkExtension, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        var stem = Path.GetFileNameWithoutExtension(fileName.AsSpan());
+        return stem.StartsWith(MapPrefix, StringComparison.OrdinalIgnoreCase)
+            && int.TryParse(stem[MapPrefix.Length..], out _);
+    }
 }

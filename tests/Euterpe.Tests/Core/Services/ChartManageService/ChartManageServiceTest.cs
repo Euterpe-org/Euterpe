@@ -39,14 +39,17 @@ public sealed partial class ChartManageServiceTest
         await Assert.That(charts[0].Manifest.Meta.Name).IsEqualTo("before");
     }
 
-    private static ChartManageService CreateService(IChartLocalService localService) =>
+    private static ChartManageService CreateService(
+        IChartLocalService localService,
+        IGameDownloadManager? gameDownloadManager = null,
+        IFileSystemService? fileSystemService = null) =>
         new()
         {
             GameConfig = new MuseDashConfig(),
             Archive = IArchiveService.Mock(),
             ChartLocalService = localService,
-            FileSystemService = IFileSystemService.Mock(),
-            GameDownloadManager = IGameDownloadManager.Mock(),
+            FileSystemService = fileSystemService ?? IFileSystemService.Mock(),
+            GameDownloadManager = gameDownloadManager ?? IGameDownloadManager.Mock(),
             Logger = Mock.Logger<ChartManageService>(),
             NotificationService = INotificationService.Mock(),
             MigrationService = IMigrationService.Mock()
