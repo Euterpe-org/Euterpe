@@ -101,7 +101,7 @@ jobs:
             echo "uploading $slug v$VERSION ($zip)"
             curl --fail-with-body -sS -X POST \
               "https://euterpe-org.com/api/workspace/distribution/upload" \
-              -H "Authorization: Bearer $EUTERPE_API_KEY" \
+              -H "Authorization: ApiKey $EUTERPE_API_KEY" \
               -H "X-Request-Id: $(cat /proc/sys/kernel/random/uuid)" \
               -F "bucket=app-releases" \
               -F "slug=$slug" \
