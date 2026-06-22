@@ -21,7 +21,6 @@ public sealed partial class JsonSerializationServiceTest
         ShowConsole = true,
         AlwaysShowScrollBar = true,
         UpdateChannel = UpdateChannel.Stable,
-        SkipVersion = null,
         IgnoreException = false
     };
 

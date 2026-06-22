@@ -116,7 +116,7 @@
     <value>A mod sablon sikeresen eltávolítva</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>Új verzió elérhető: {0}. Szeretnéd frissíteni?</value>
+    <value>Új verzió elérhető: {0}. Frissítés folyamatban.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Nincs elérhető frissítés</value>

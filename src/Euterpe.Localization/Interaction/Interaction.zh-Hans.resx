@@ -116,7 +116,7 @@
     <value>Mod 模板卸载成功</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>发现新版本：{0}，是否升级？</value>
+    <value>发现新版本：{0}，即将更新。</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>无可用的更新</value>

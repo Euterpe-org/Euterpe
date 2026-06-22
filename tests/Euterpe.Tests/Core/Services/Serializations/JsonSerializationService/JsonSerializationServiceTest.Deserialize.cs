@@ -28,7 +28,6 @@ public sealed partial class JsonSerializationServiceTest
                                           "UpdateSource": "GitHubRSS",
                                           "GitHubToken": null,
                                           "UpdateChannel": "Stable",
-                                          "SkipVersion": null,
                                           "IgnoreException": false
                                       }
                                       """;

@@ -116,7 +116,7 @@
     <value>Le modèle de mod a été désinstallé avec succès</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>Nouvelle version disponible : {0}. Voulez-vous mettre à jour ?</value>
+    <value>Nouvelle version disponible : {0}. Mise à jour en cours.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Aucune mise à jour disponible</value>

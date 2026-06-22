@@ -116,7 +116,7 @@
     <value>모드 템플릿이 제거되었습니다</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>새 버전 {0}을(를) 사용할 수 있습니다. 업그레이드하시겠습니까?</value>
+    <value>새 버전 {0}을(를) 사용할 수 있습니다. 곧 업데이트합니다.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>사용 가능한 업데이트가 없습니다</value>

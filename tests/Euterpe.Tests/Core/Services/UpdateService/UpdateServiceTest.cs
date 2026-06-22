@@ -13,8 +13,6 @@ public sealed partial class UpdateServiceTest
     private const string CurrentPrereleaseVersion = "1.0.0-rc1";
     private const string LowerStableVersion = "0.0.1";
     private const string LowerPrereleaseVersion = "0.0.1-rc1";
-    private const string HigherStableVersion = "999.0.0";
-    private const string HigherPrereleaseVersion = "999.0.1-rc1";
     private const string TestRuntimeIdentifier = "test-rid";
     private const string TestDownloadUrl = "https://example.com/release.zip";
 

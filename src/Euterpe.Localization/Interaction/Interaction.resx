@@ -116,7 +116,7 @@
     <value>Mod Template uninstalled successfully</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>New version available: {0}, do you want to upgrade?</value>
+    <value>New version available: {0}, updating now.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>No updates available</value>

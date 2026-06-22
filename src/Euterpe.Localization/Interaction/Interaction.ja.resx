@@ -116,7 +116,7 @@
     <value>Mod テンプレートのアンインストールが完了しました</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>新しいバージョンがあります：{0}　アップグレードしますか？</value>
+    <value>新しいバージョンがあります：{0}　まもなく更新します。</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>利用可能なアップデートはありません</value>

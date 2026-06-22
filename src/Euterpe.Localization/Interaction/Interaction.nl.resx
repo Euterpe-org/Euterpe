@@ -116,7 +116,7 @@
     <value>Mod Template succesvol verwijderd</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>Nieuwe versie beschikbaar: {0}, wilt u bijwerken?</value>
+    <value>Nieuwe versie beschikbaar: {0}, nu bijwerken.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Geen updates beschikbaar</value>
