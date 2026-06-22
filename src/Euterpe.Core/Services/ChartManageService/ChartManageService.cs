@@ -14,8 +14,15 @@ internal sealed partial class ChartManageService : IChartManageService, IDisposa
 
     public Task InitializeChartsAsync() => _initTask.Value;
 
-    public Task DownloadChartAsync(string chartId, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default) =>
-        RunExclusiveAsync(chartId, () => DownloadChartCoreAsync(chartId, progress, cancellationToken));
+    public Task DownloadChartAsync(string chartId, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
+    {
+        if (GetOnlineCharts().Any(chart => chart.FolderName == chartId))
+        {
+            return UpdateChartAsync(chartId, cancellationToken);
+        }
+
+        return RunExclusiveAsync(chartId, () => DownloadChartCoreAsync(chartId, progress, cancellationToken));
+    }
 
     public async Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default)
     {
