@@ -26,6 +26,7 @@ public sealed class AsyncImage : TemplatedControl
         AvaloniaProperty.Register<AsyncImage, double>(nameof(DecodeHeight), double.NaN);
 
     private Image? _imagePart;
+    private Image? _placeholderPart;
     private Bitmap? _currentBitmap;
     private CancellationTokenSource? _loadCts;
     private bool _reloadOnAttach;
@@ -64,6 +65,7 @@ public sealed class AsyncImage : TemplatedControl
     {
         base.OnApplyTemplate(e);
         _imagePart = e.NameScope.Get<Image>("PART_Image");
+        _placeholderPart = e.NameScope.Get<Image>("PART_PlaceholderImage");
         _ = LoadAsync(Source);
     }
 
@@ -113,6 +115,11 @@ public sealed class AsyncImage : TemplatedControl
             _imagePart.Source = null;
         }
 
+        if (_placeholderPart is not null)
+        {
+            _placeholderPart.IsVisible = true;
+        }
+
         if (string.IsNullOrEmpty(source) || !Uri.TryCreate(source, UriKind.Absolute, out var uri))
         {
             return;
@@ -142,6 +149,11 @@ public sealed class AsyncImage : TemplatedControl
             _currentBitmap = bitmap;
             _imagePart.Source = bitmap;
             _imagePart.Opacity = 1;
+            if (_placeholderPart is not null)
+            {
+                _placeholderPart.IsVisible = false;
+            }
+
             previous?.Dispose();
         });
     }
