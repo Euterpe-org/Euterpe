@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using Semver;
 
 namespace Euterpe.Models;
 
@@ -57,8 +56,6 @@ public sealed partial class Config : ObservableObject
     // Download Settings
     [ObservableProperty]
     public partial UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
-
-    public SemVersion? SkipVersion { get; set; }
 
     // Advanced Settings
     [ObservableProperty]

@@ -116,7 +116,7 @@
     <value>Mod-Vorlage wurde erfolgreich deinstalliert</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>Neue Version verfügbar: {0}. Möchtest du aktualisieren?</value>
+    <value>Neue Version verfügbar: {0}. Wird jetzt aktualisiert.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Keine Updates verfügbar</value>

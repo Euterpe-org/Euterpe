@@ -116,7 +116,7 @@
     <value>La plantilla de mod se desinstaló correctamente</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>Nueva versión disponible: {0}. ¿Quieres actualizar?</value>
+    <value>Nueva versión disponible: {0}. Actualizando ahora.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>No hay actualizaciones disponibles</value>

@@ -116,7 +116,7 @@
     <value>Шаблон мода успешно удалён</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>Доступна новая версия: {0}. Обновить?</value>
+    <value>Доступна новая версия: {0}. Выполняется обновление.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Обновления не найдены</value>

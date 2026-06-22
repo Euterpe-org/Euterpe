@@ -19,6 +19,5 @@
   ShowStartScreen: true,
   AlwaysShowScrollBar: true,
   UpdateChannel: Stable,
-  SkipVersion: null,
   IgnoreException: false
 }

@@ -116,7 +116,7 @@
     <value>Predložak moda je uspješno deinstaliran</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>Dostupna je nova verzija: {0}. Želiš li nadograditi?</value>
+    <value>Dostupna je nova verzija: {0}. Ažuriranje u tijeku.</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>Nema dostupnih ažuriranja</value>

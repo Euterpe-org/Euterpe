@@ -116,7 +116,7 @@
     <value>Mod 範本已成功解除安裝</value>
   </data>
   <data name="MessageBox_Content_NewVersionAvailable" xml:space="preserve">
-    <value>發現新版本：{0}，是否升級？</value>
+    <value>發現新版本：{0}，即將更新。</value>
   </data>
   <data name="MessageBox_Content_NoUpdatesFound" xml:space="preserve">
     <value>沒有可用的更新</value>

@@ -1,32 +1,17 @@
-using Ursa.Controls;
-
 namespace Euterpe.Core;
 
 internal sealed partial class UpdateService
 {
     private async Task<bool> ShouldUpdateAsync(SemVersion releaseVersion)
     {
-        if (Config.SkipVersion == releaseVersion)
-        {
-            Logger.ZLogInformation($"New version is skipped by user configuration");
-            return false;
-        }
-
         if (releaseVersion.ComparePrecedenceTo(CurrentVersion) <= 0)
         {
             Logger.ZLogInformation($"No new version available");
             return false;
         }
 
-        var result = await MessageBoxService.NoticeConfirmAsync(MessageBox_Content_NewVersionAvailable, releaseVersion).ConfigureAwait(true);
-        if (result is MessageBoxResult.Yes)
-        {
-            return true;
-        }
-
-        Logger.ZLogInformation($"User choose to skip this version: {releaseVersion}");
-        Config.SkipVersion = releaseVersion;
-        return false;
+        await MessageBoxService.NoticeAsync(MessageBox_Content_NewVersionAvailable, releaseVersion).ConfigureAwait(true);
+        return true;
     }
 
     private static string GetUpdateTempPath()
