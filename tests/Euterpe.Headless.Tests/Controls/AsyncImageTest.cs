@@ -34,6 +34,59 @@ public sealed class AsyncImageTest : HeadlessTest
     });
 
     [Test]
+    public Task Placeholder_HidesAfterImageLoads() => RunOnUI(async () =>
+    {
+        var path = CreateTempPng(64, 64);
+        try
+        {
+            var asyncImage = new AsyncImage { Source = new Uri(path).AbsoluteUri, DecodeWidth = 64 };
+            var window = new Window { Content = asyncImage, Width = 200, Height = 200 };
+            window.Show();
+
+            await WaitForBitmap(asyncImage);
+
+            await Assert.That(Placeholder(asyncImage).IsVisible).IsFalse();
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    });
+
+    [Test]
+    public Task Placeholder_StaysVisibleWhenSourceEmpty() => RunOnUI(async () =>
+    {
+        var asyncImage = new AsyncImage { Source = null };
+        var window = new Window { Content = asyncImage, Width = 200, Height = 200 };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        await Assert.That(Placeholder(asyncImage).IsVisible).IsTrue();
+    });
+
+    [Test]
+    public Task Placeholder_ReappearsWhenSourceClearedAfterLoad() => RunOnUI(async () =>
+    {
+        var path = CreateTempPng(64, 64);
+        try
+        {
+            var asyncImage = new AsyncImage { Source = new Uri(path).AbsoluteUri, DecodeWidth = 64 };
+            var window = new Window { Content = asyncImage, Width = 200, Height = 200 };
+            window.Show();
+            await WaitForBitmap(asyncImage);
+
+            asyncImage.Source = null;
+            Dispatcher.UIThread.RunJobs();
+
+            await Assert.That(Placeholder(asyncImage).IsVisible).IsTrue();
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    });
+
+    [Test]
     public Task NullSource_DoesNotThrowAfterTemplateApply() => RunOnUI(async () =>
     {
         var asyncImage = new AsyncImage { Source = null };
@@ -180,6 +233,9 @@ public sealed class AsyncImageTest : HeadlessTest
 
     private static Image PartImage(AsyncImage image) =>
         image.GetVisualDescendants().OfType<Image>().First(i => i.Name is "PART_Image");
+
+    private static Image Placeholder(AsyncImage image) =>
+        image.GetVisualDescendants().OfType<Image>().First(i => i.Name is "PART_PlaceholderImage");
 
     private static async Task<Bitmap?> WaitForBitmap(AsyncImage image, Bitmap? previous = null)
     {
