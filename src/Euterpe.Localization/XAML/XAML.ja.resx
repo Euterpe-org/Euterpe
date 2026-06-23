@@ -370,9 +370,6 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>アクセス</value>
   </data>
-  <data name="InitializingMessage" xml:space="preserve">
-    <value>初期化中...</value>
-  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>読み込み中...</value>
   </data>
@@ -720,6 +717,9 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe セットアップ中</value>
+  </data>
+  <data name="Splash_LoginPrompt" xml:space="preserve">
+    <value>ブラウザでログインして承認してください</value>
   </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>Mod設定を編集</value>

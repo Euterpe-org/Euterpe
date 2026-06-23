@@ -370,9 +370,6 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Перейти</value>
   </data>
-  <data name="InitializingMessage" xml:space="preserve">
-    <value>Инициализация...</value>
-  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Загрузка...</value>
   </data>
@@ -720,6 +717,9 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Настройка Euterpe</value>
+  </data>
+  <data name="Splash_LoginPrompt" xml:space="preserve">
+    <value>Войдите и авторизуйтесь в браузере</value>
   </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>Изменить конфигурацию мода</value>
