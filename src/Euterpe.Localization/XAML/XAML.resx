@@ -370,9 +370,6 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Visit</value>
   </data>
-  <data name="InitializingMessage" xml:space="preserve">
-    <value>Initializing...</value>
-  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Loading...</value>
   </data>
@@ -720,6 +717,9 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Setting Up Euterpe</value>
+  </data>
+  <data name="Splash_LoginPrompt" xml:space="preserve">
+    <value>Please log in and authorize in your browser</value>
   </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>Edit Mod Config</value>

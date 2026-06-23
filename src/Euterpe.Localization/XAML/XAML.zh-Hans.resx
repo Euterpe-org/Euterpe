@@ -370,9 +370,6 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>访问</value>
   </data>
-  <data name="InitializingMessage" xml:space="preserve">
-    <value>初始化中...</value>
-  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>加载中...</value>
   </data>
@@ -720,6 +717,9 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>正在设置 Euterpe</value>
+  </data>
+  <data name="Splash_LoginPrompt" xml:space="preserve">
+    <value>请在浏览器里登录并授权</value>
   </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>编辑 Mod 配置</value>

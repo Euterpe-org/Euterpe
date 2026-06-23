@@ -370,9 +370,6 @@
   <data name="HyperLinkButton_Visit" xml:space="preserve">
     <value>Besuchen</value>
   </data>
-  <data name="InitializingMessage" xml:space="preserve">
-    <value>Initialisierung...</value>
-  </data>
   <data name="LoadingMessage" xml:space="preserve">
     <value>Wird geladen...</value>
   </data>
@@ -720,6 +717,9 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe einrichten</value>
+  </data>
+  <data name="Splash_LoginPrompt" xml:space="preserve">
+    <value>Bitte im Browser anmelden und autorisieren</value>
   </data>
   <data name="ToolTip_EditModConfig" xml:space="preserve">
     <value>Mod-Konfiguration bearbeiten</value>
