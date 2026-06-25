@@ -640,9 +640,6 @@
   <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
     <value>正在解除安裝不相容的模組：{0}……</value>
   </data>
-  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
-    <value>正在升級 MelonLoader {0} → {1}……</value>
-  </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>失敗</value>
   </data>

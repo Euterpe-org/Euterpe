@@ -640,9 +640,6 @@
   <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
     <value>Nem kompatibilis mod eltávolítása: {0} ...</value>
   </data>
-  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
-    <value>MelonLoader frissítése {0} → {1} ...</value>
-  </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Sikertelen</value>
   </data>

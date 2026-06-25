@@ -640,9 +640,6 @@
   <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
     <value>非対応の Mod をアンインストールしています: {0} …</value>
   </data>
-  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
-    <value>MelonLoader を更新しています {0} → {1} …</value>
-  </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>失敗</value>
   </data>
