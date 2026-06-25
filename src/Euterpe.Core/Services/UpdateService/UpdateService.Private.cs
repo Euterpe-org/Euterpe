@@ -63,14 +63,25 @@ internal sealed partial class UpdateService
         File.Copy(PlatformInfo.UpdaterFileName, updaterTargetPath, true);
 
         Logger.ZLogInformation($"Starting updater process");
-        Process.Start(
-            new ProcessStartInfo
+
+        var updaterProcessInfo = new ProcessStartInfo
+        {
+            FileName = updaterTargetPath,
+            ArgumentList =
             {
-                FileName = updaterTargetPath,
-                Arguments = $"update -d {AppDomain.CurrentDomain.BaseDirectory} -ov {AppVersion} -pid {Environment.ProcessId}",
-                WorkingDirectory = updateFolder,
-                UseShellExecute = false
-            });
+                "update",
+                "-d",
+                AppDomain.CurrentDomain.BaseDirectory,
+                "-ov",
+                AppVersion,
+                "-pid",
+                Environment.ProcessId.ToString()
+            },
+            WorkingDirectory = updateFolder,
+            UseShellExecute = false
+        };
+
+        Process.Start(updaterProcessInfo);
     }
 
     private sealed record UpdateTarget(SemVersion Version, string DownloadUrl);
