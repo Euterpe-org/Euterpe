@@ -7,6 +7,7 @@ internal sealed class EssentialModsStep : ISetupStep
     public async Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
         progress.Report(XAML.Setup_Progress_InitializingEssentialMods);
+
         await ModManageService.InitializeModsAsync().ConfigureAwait(false);
 
         var mod = ModManageService.FindModByName(AppName);

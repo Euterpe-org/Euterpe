@@ -18,6 +18,7 @@ internal sealed class ModTemplateStep : ISetupStep
         }
 
         progress.Report(XAML.Setup_Progress_InstallingModTemplate);
+
         await ModTemplateInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

@@ -18,6 +18,7 @@ internal sealed class DotNetRuntimeStep : ISetupStep
         }
 
         progress.Report(XAML.Setup_Progress_InstallingDotNetRuntime);
+
         await RuntimeInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

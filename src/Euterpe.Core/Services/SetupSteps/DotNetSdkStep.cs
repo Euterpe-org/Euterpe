@@ -18,6 +18,7 @@ internal sealed class DotNetSdkStep : ISetupStep
         }
 
         progress.Report(XAML.Setup_Progress_InstallingDotNetSdk);
+
         await SdkInstaller.InstallAsync().ConfigureAwait(false);
     }
 }

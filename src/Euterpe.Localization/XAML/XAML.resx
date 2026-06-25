@@ -640,9 +640,6 @@
   <data name="Setup_Progress_UninstallingConflict" xml:space="preserve">
     <value>Uninstalling incompatible mod: {0} ...</value>
   </data>
-  <data name="Setup_Progress_UpgradingMelonLoader" xml:space="preserve">
-    <value>Upgrading MelonLoader {0} → {1} ...</value>
-  </data>
   <data name="Setup_StepStatus_Failed" xml:space="preserve">
     <value>Failed</value>
   </data>
