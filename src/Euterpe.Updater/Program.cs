@@ -1,7 +1,17 @@
 using Microsoft.Extensions.DependencyInjection;
 
 var app = ConsoleApp.Create()
-    .ConfigureServices(services => services.AddSingleton<ILocalService, LocalService>())
+    .ConfigureServices(services =>
+    {
+        services.AddSingleton<ILocalService, LocalService>();
+#if WINDOWS
+        services.AddSingleton<IPlatformInfo, WindowsPlatformInfo>();
+#elif LINUX
+        services.AddSingleton<IPlatformInfo, LinuxPlatformInfo>();
+#elif MACOS
+        services.AddSingleton<IPlatformInfo, MacOsPlatformInfo>();
+#endif
+    })
     .ConfigureLogging(logging =>
     {
         logging.ClearProviders();

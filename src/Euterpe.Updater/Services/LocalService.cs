@@ -6,19 +6,10 @@ public sealed class LocalService(ILogger<LocalService> logger) : ILocalService
 {
     private readonly ILogger<LocalService> _logger = logger;
 
-    public bool ExtractZipFile(string zipPath, string extractPath)
+    public void ExtractZipFile(string zipPath, string extractPath)
     {
-        try
-        {
-            ZipFile.ExtractToDirectory(zipPath, extractPath, true);
-            _logger.ZLogInformation($"Successfully extracted {zipPath} to {extractPath}");
-            return true;
-        }
-        catch (Exception ex)
-        {
-            _logger.ZLogError(ex, $"Failed to extract file {zipPath} to {extractPath}");
-            return false;
-        }
+        ZipFile.ExtractToDirectory(zipPath, extractPath, true);
+        _logger.ZLogInformation($"Successfully extracted {zipPath} to {extractPath}");
     }
 
     public void CopyDirectory(string sourceDir, string destinationDir)
