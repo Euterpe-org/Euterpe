@@ -656,10 +656,10 @@
     <value>Sikertelen. Ellenőrizze a naplót, vagy próbálja újra.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Chart Eszköz (MDBMSC)</value>
+    <value>Chart Eszköz (MDBMSC) (nincs megvalósítva)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDM chart készítő eszközkészlet</value>
+    <value>MDM chart készítő eszközkészlet (nincs megvalósítva)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

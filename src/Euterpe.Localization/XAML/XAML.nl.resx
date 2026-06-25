@@ -656,10 +656,10 @@
     <value>Mislukt. Controleer het logboek of probeer opnieuw.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Charting Tool (MDBMSC)</value>
+    <value>Charting Tool (MDBMSC) (niet geïmplementeerd)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>Toolkit voor het maken van MDM-charts</value>
+    <value>Toolkit voor het maken van MDM-charts (niet geïmplementeerd)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

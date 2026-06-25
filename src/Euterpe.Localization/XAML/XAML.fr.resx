@@ -656,10 +656,10 @@
     <value>Échec. Consultez le journal ou réessayez.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Outil de Charts (MDBMSC)</value>
+    <value>Outil de Charts (MDBMSC) (non implémenté)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>Kit de création de charts MDM</value>
+    <value>Kit de création de charts MDM (non implémenté)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

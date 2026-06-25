@@ -656,10 +656,10 @@
     <value>失敗しました。ログを確認して再試行してください。</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>チャートツール (MDBMSC)</value>
+    <value>チャートツール (MDBMSC)（未実装）</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDMチャート作成ツールキット</value>
+    <value>MDMチャート作成ツールキット（未実装）</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

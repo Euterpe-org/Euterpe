@@ -656,10 +656,10 @@
     <value>Failed. Please check the log or retry.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Charting Tool (MDBMSC)</value>
+    <value>Charting Tool (MDBMSC) (not implemented)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDM chart creation toolkit</value>
+    <value>MDM chart creation toolkit (not implemented)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

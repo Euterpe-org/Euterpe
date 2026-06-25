@@ -656,10 +656,10 @@
     <value>Gagal. Periksa log atau coba lagi.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Alat Charting (MDBMSC)</value>
+    <value>Alat Charting (MDBMSC) (belum diimplementasikan)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>Toolkit pembuatan chart MDM</value>
+    <value>Toolkit pembuatan chart MDM (belum diimplementasikan)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

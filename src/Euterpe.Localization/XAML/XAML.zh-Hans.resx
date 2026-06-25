@@ -656,10 +656,10 @@
     <value>执行失败，请查看日志或重试</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>制谱工具 (MDBMSC)</value>
+    <value>制谱工具 (MDBMSC)（还未实现）</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDM 谱面制作工具包</value>
+    <value>MDM 谱面制作工具包（还未实现）</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET 运行时</value>

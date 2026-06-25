@@ -656,10 +656,10 @@
     <value>Nije uspjelo. Provjerite zapisnik ili pokušajte ponovno.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Alat za chartove (MDBMSC)</value>
+    <value>Alat za chartove (MDBMSC) (nije implementirano)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDM alat za izradu chartova</value>
+    <value>MDM alat za izradu chartova (nije implementirano)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

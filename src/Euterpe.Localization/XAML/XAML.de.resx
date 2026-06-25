@@ -656,10 +656,10 @@
     <value>Fehlgeschlagen. Bitte das Protokoll prüfen oder erneut versuchen.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Charting-Tool (MDBMSC)</value>
+    <value>Charting-Tool (MDBMSC) (nicht implementiert)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDM-Chart-Erstellungs-Toolkit</value>
+    <value>MDM-Chart-Erstellungs-Toolkit (nicht implementiert)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>
