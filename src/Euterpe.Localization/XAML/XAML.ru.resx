@@ -656,10 +656,10 @@
     <value>Не удалось выполнить. Проверьте журнал или повторите попытку.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>Инструмент для чартов (MDBMSC)</value>
+    <value>Инструмент для чартов (MDBMSC) (не реализовано)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>Набор инструментов для создания чартов MDM</value>
+    <value>Набор инструментов для создания чартов MDM (не реализовано)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

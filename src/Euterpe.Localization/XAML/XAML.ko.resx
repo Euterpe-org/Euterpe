@@ -656,10 +656,10 @@
     <value>실패했습니다. 로그를 확인하거나 다시 시도하세요.</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>채보 도구 (MDBMSC)</value>
+    <value>채보 도구 (MDBMSC) (미구현)</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDM 채보 제작 툴킷</value>
+    <value>MDM 채보 제작 툴킷 (미구현)</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>
