@@ -602,10 +602,10 @@
     <value>Недопустимая папка игры</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe несовместим с экосистемой MDMC (Muse Dash Modding Community). Продолжение работы с Euterpe затруднит возврат к экосистеме MDMC, а Headquarters (таблица лидеров MDMC) будет заменена таблицей лидеров Euterpe. Моды и менеджеры чартов, не относящиеся к Euterpe, такие как MuseDashTOOL, перестанут работать.</value>
+    <value>Если вы ранее использовали MDMC, небольшое число чартов может не распознаться, а некоторые моды будут заменены обновлёнными версиями; среди них мод Headquarters несовместим с Euterpe. Если вы не понимаете, о чём это сообщение, его можно проигнорировать.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Несовместимо с экосистемой MDMC</value>
+    <value>Предупреждение о совместимости</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Уделите минуту этой заметке, затем выберите папку с игрой</value>

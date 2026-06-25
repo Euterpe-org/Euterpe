@@ -602,10 +602,10 @@
     <value>No es una carpeta de juego válida</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe no es compatible con el ecosistema de MDMC (Muse Dash Modding Community). Continuar con Euterpe dificulta volver al ecosistema de MDMC, y Headquarters (la clasificación de MDMC) será reemplazado por la clasificación de Euterpe. Los mods o gestores de charts ajenos a Euterpe, como MuseDashTOOL, dejarán de funcionar.</value>
+    <value>Si has usado MDMC anteriormente, es posible que un número muy reducido de charts no se reconozca, y algunos mods se reemplazarán por versiones mejoradas; entre ellos, el mod Headquarters no es compatible con Euterpe. Si no sabes de qué trata este mensaje, puedes ignorarlo.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Incompatible con el ecosistema de MDMC</value>
+    <value>Aviso de compatibilidad</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Tómate un momento para leer esto y luego elige tu carpeta del juego</value>
