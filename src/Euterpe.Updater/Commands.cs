@@ -1,14 +1,13 @@
-using System.Diagnostics;
-
 namespace Euterpe.Updater;
 
 public sealed class Commands
 {
     /// <summary>
-    ///     From which version to create a backup.
+    ///     Applies a downloaded update and relaunches the application.
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="localService"></param>
+    /// <param name="platformInfo"></param>
     /// <param name="sourceDirectory">-d, Source directory where the application is.</param>
     /// <param name="oldVersion">-ov, Current version of the application.</param>
     /// <param name="pid">-pid, Process ID.</param>
@@ -16,13 +15,14 @@ public sealed class Commands
     public async Task UpdateAsync(
         [FromServices] ILogger<Commands> logger,
         [FromServices] ILocalService localService,
+        [FromServices] IPlatformInfo platformInfo,
         string sourceDirectory,
         string oldVersion,
         int pid)
     {
         try
         {
-            var mainProcess = Process.GetProcessById(pid);
+            using var mainProcess = Process.GetProcessById(pid);
             await mainProcess.WaitForExitAsync().WaitAsync(TimeSpan.FromSeconds(30)).ConfigureAwait(false);
 
             logger.ZLogInformation($"Process with ID {pid} has exited successfully.");
@@ -32,20 +32,32 @@ public sealed class Commands
             logger.ZLogInformation($"Process with ID {pid} has already exited.");
         }
 
-        Directory.CreateDirectory(Path.Combine(sourceDirectory, $"backup-{oldVersion}"));
-        logger.ZLogInformation($"Backup folder created at {sourceDirectory} for version {oldVersion}");
-
-        localService.CopyDirectory(sourceDirectory, Path.Combine(sourceDirectory, $"backup-{oldVersion}"));
-        logger.ZLogInformation($"Backup completed for version {oldVersion}");
-
-        if (!localService.ExtractZipFile("Euterpe.zip", sourceDirectory))
+        try
         {
-            return;
+            var backupDirectory = Path.Combine(sourceDirectory, $"backup-{oldVersion}");
+            Directory.CreateDirectory(backupDirectory);
+            logger.ZLogInformation($"Backup folder created at {backupDirectory}");
+
+            localService.CopyDirectory(sourceDirectory, backupDirectory);
+            logger.ZLogInformation($"Backup completed for version {oldVersion}");
+
+            localService.ExtractZipFile("Euterpe.zip", sourceDirectory);
+            logger.ZLogInformation($"Update completed successfully!");
+
+            var applicationPath = Path.Combine(sourceDirectory, platformInfo.ApplicationFileName);
+            Process.Start(
+                new ProcessStartInfo(applicationPath)
+                {
+                    WorkingDirectory = sourceDirectory,
+                    UseShellExecute = false
+                });
+
+            logger.ZLogInformation($"Launched application: {applicationPath}");
         }
-
-        logger.ZLogInformation($"Updated files extracted to {sourceDirectory}");
-        logger.ZLogInformation($"Update completed successfully!");
-
-        Console.ReadKey();
+        catch (Exception ex)
+        {
+            logger.ZLogError(ex, $"Update failed. Press any key to exit.");
+            Console.ReadKey();
+        }
     }
 }
