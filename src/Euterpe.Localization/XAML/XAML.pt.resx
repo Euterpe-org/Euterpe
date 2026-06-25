@@ -602,10 +602,10 @@
     <value>Pasta do jogo inválida</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>O Euterpe não é compatível com o ecossistema do MDMC (Muse Dash Modding Community). Continuar com o Euterpe torna difícil voltar ao ecossistema do MDMC, e o Headquarters (a classificação do MDMC) será substituído pela classificação do Euterpe. Mods ou gerenciadores de charts que não sejam do Euterpe, como o MuseDashTOOL, deixarão de funcionar.</value>
+    <value>Se você já usou o MDMC, é possível que um número muito pequeno de charts não seja reconhecido, e alguns mods serão substituídos por versões atualizadas; entre eles, o mod Headquarters não é compatível com o Euterpe. Se você não sabe do que se trata esta mensagem, pode ignorá-la.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Incompatível com o ecossistema do MDMC</value>
+    <value>Aviso de compatibilidade</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Reserve um momento para ler isto e depois escolha a pasta do jogo.</value>

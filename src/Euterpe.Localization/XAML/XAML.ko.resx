@@ -602,10 +602,10 @@
     <value>유효한 게임 폴더가 아닙니다</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe는 MDMC(Muse Dash Modding Community) 생태계와 호환되지 않습니다. Euterpe를 계속 사용하면 MDMC 생태계로 되돌리기 어려워지며, Headquarters(MDMC 순위표)는 Euterpe 순위표로 대체됩니다. MuseDashTOOL과 같은 Euterpe 이외의 모드나 채보 관리 도구는 더 이상 작동하지 않습니다.</value>
+    <value>이전에 MDMC를 사용한 적이 있다면 극히 일부 채보가 인식되지 않을 수 있으며, 일부 모드는 업그레이드 버전으로 교체됩니다. 그중 Headquarters 모드는 Euterpe와 호환되지 않습니다. 이 메시지가 무슨 뜻인지 모르겠다면 무시하셔도 됩니다.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>MDMC 생태계와 호환되지 않음</value>
+    <value>호환성 경고</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>잠시 안내를 읽어 보신 후 게임 폴더를 선택해 주세요.</value>

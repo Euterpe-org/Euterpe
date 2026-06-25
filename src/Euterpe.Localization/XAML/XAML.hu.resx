@@ -602,10 +602,10 @@
     <value>Érvénytelen játékmappa</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Az Euterpe nem kompatibilis az MDMC (Muse Dash Modding Community) ökoszisztémával. Az Euterpe használatának folytatása megnehezíti az MDMC ökoszisztémához való visszatérést, és a Headquarters (az MDMC ranglista) helyét az Euterpe ranglistája veszi át. A nem Euterpe modok vagy chartkezelők, például a MuseDashTOOL, többé nem fognak működni.</value>
+    <value>Ha korábban használtad az MDMC-t, előfordulhat, hogy nagyon kevés chartot nem ismer fel a program, és egyes modokat frissített verziókra cserél; ezek közül a Headquarters mod nem kompatibilis az Euterpével. Ha nem tudod, miről szól ez az üzenet, nyugodtan hagyd figyelmen kívül.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Nem kompatibilis az MDMC ökoszisztémával</value>
+    <value>Kompatibilitási figyelmeztetés</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Szánj rá egy percet, hogy elolvasd, majd válaszd ki a játékmappát</value>

@@ -602,10 +602,10 @@
     <value>Bukan folder game yang valid</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe tidak kompatibel dengan ekosistem MDMC (Muse Dash Modding Community). Melanjutkan dengan Euterpe membuat sulit untuk kembali ke ekosistem MDMC, dan Headquarters (papan peringkat MDMC) akan digantikan oleh papan peringkat Euterpe. Mod atau pengelola chart selain Euterpe seperti MuseDashTOOL tidak akan berfungsi lagi.</value>
+    <value>Jika Anda pernah menggunakan MDMC, sejumlah kecil chart mungkin tidak dikenali, dan beberapa mod akan diganti dengan versi yang ditingkatkan; di antaranya, mod Headquarters tidak kompatibel dengan Euterpe. Jika Anda tidak mengerti maksud pesan ini, abaikan saja.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Tidak kompatibel dengan ekosistem MDMC</value>
+    <value>Peringatan kompatibilitas</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Luangkan waktu untuk membaca ini, lalu pilih folder game Anda</value>

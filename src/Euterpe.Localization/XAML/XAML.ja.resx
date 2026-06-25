@@ -602,10 +602,10 @@
     <value>有効なゲームフォルダではありません</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe は MDMC（Muse Dash Modding Community）エコシステムと互換性がありません。Euterpe を使い続けると MDMC エコシステムへ戻すことが難しくなり、Headquarters（MDMC のランキング）は Euterpe のランキングに置き換えられます。MuseDashTOOL など Euterpe 以外の Mod や譜面管理ツールは動作しなくなります。</value>
+    <value>以前 MDMC を使用していた場合、ごく一部の譜面が認識されないことがあり、一部の Mod はアップグレード版に置き換えられます。そのうち Headquarters Mod は Euterpe と互換性がありません。このメッセージの意味が分からない場合は、無視してかまいません。</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>MDMC エコシステムと互換性なし</value>
+    <value>互換性に関する警告</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>まずは以下をご確認のうえ、ゲームフォルダを選択してください。</value>

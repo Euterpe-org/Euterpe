@@ -602,10 +602,10 @@
     <value>Kein gültiger Spielordner</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning" xml:space="preserve">
-    <value>Euterpe ist nicht mit dem MDMC-Ökosystem (Muse Dash Modding Community) kompatibel. Das Fortfahren mit Euterpe erschwert eine Rückkehr zum MDMC-Ökosystem, und Headquarters (die MDMC-Bestenliste) wird durch die Bestenliste von Euterpe ersetzt. Nicht zu Euterpe gehörende Mods oder Chart-Manager wie MuseDashTOOL funktionieren dann nicht mehr.</value>
+    <value>Falls du zuvor MDMC verwendet hast, werden möglicherweise einige wenige Charts nicht erkannt, und manche Mods werden durch verbesserte Versionen ersetzt; darunter ist der Headquarters-Mod nicht mit Euterpe kompatibel. Wenn du nicht weißt, worum es in dieser Meldung geht, kannst du sie einfach ignorieren.</value>
   </data>
   <data name="Setup_GamePath_MdmcWarning_Title" xml:space="preserve">
-    <value>Nicht kompatibel mit dem MDMC-Ökosystem</value>
+    <value>Kompatibilitätshinweis</value>
   </data>
   <data name="Setup_GamePath_WelcomeSubtitle" xml:space="preserve">
     <value>Nimm dir kurz Zeit, das hier zu lesen, und wähle dann deinen Spielordner</value>
