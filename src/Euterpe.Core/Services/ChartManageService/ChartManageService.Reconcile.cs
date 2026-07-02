@@ -13,17 +13,6 @@ internal sealed partial class ChartManageService
         NotifyChartSync(addedCharts, removedCharts);
     }
 
-    private async Task ReconcileChartsAsync(IReadOnlySet<string> changedFolders)
-    {
-        var existingFolders = changedFolders.Where(Directory.Exists).ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var addedCharts = await LoadLocalChartsAsync(FindAddedChartFolders(existingFolders)).ConfigureAwait(false);
-        var removedCharts = FindCachedCharts(changedFolders.Where(folder => !existingFolders.Contains(folder)));
-
-        _sourceCache.AddOrUpdate(addedCharts);
-        _sourceCache.Remove(removedCharts);
-        NotifyChartSync(addedCharts, removedCharts);
-    }
-
     private async Task<ChartDto[]> LoadLocalChartsAsync(IEnumerable<string> chartFolders) =>
     [
         .. (await chartFolders
@@ -41,9 +30,6 @@ internal sealed partial class ChartManageService
 
     private string[] FindAddedChartFolders(IEnumerable<string> chartFolders) =>
         [.. chartFolders.Where(folder => !_sourceCache.Lookup(folder).HasValue)];
-
-    private ChartDto[] FindCachedCharts(IEnumerable<string> chartFolders) =>
-        [.. chartFolders.Select(folder => _sourceCache.Lookup(folder)).Where(static cached => cached.HasValue).Select(static cached => cached.Value)];
 
     // The folder snapshot races ops caching freshly written charts, so a folder that exists on disk is never evicted.
     private ChartDto[] FindRemovedCharts(string[] localFolders)

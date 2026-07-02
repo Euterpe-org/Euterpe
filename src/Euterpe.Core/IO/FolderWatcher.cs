@@ -3,61 +3,47 @@ using Timeout = System.Threading.Timeout;
 
 namespace Euterpe.Core;
 
-// FileSystemWatcher events arrive on thread-pool threads and a single user action emits many of them,
-// so changes are debounced on a background timer (never the UI dispatcher) and drained through one serial pump.
+// FileSystemWatcher events arrive on thread-pool threads in bursts, so changes are debounced on a background timer and reconciles never overlap.
 internal sealed class FolderWatcher : IDisposable
 {
-    public static readonly TimeSpan DefaultDebounce = TimeSpan.FromMilliseconds(400);
+    private static readonly TimeSpan DefaultDebounce = TimeSpan.FromMilliseconds(400);
 
     private readonly Lock _gate = new();
-    private readonly HashSet<string> _dirty = new(StringComparer.OrdinalIgnoreCase);
     private readonly List<FileSystemWatcher> _watchers = [];
-
-    private readonly IReadOnlyList<string> _roots;
     private readonly bool _includeSubdirectories;
-    private readonly Func<string, string?> _mapToKey;
-    private readonly Func<IReadOnlySet<string>, Task> _reconcileChanged;
-    private readonly Func<Task> _reconcileAll;
+    private readonly Func<Task> _reconcileAsync;
+    private readonly Func<string, bool> _isRelevantChange;
     private readonly TimeSpan _debounce;
-    private readonly ILogger _logger;
-    private readonly string _label;
     private readonly Timer _debounceTimer;
+    private readonly ILogger _logger;
 
-    private bool _fullRescanRequested;
-    private bool _running;
+    private bool _reconciling;
+    private bool _rerunRequested;
     private bool _disposed;
 
     public FolderWatcher(
         IReadOnlyList<string> roots,
         bool includeSubdirectories,
-        Func<string, string?> mapToKey,
-        Func<IReadOnlySet<string>, Task> reconcileChanged,
-        Func<Task> reconcileAll,
-        TimeSpan debounce,
+        Func<Task> reconcileAsync,
         ILogger logger,
-        string label)
+        Func<string, bool>? isRelevantChange = null,
+        TimeSpan? debounce = null)
     {
-        _roots = roots;
         _includeSubdirectories = includeSubdirectories;
-        _mapToKey = mapToKey;
-        _reconcileChanged = reconcileChanged;
-        _reconcileAll = reconcileAll;
-        _debounce = debounce;
+        _reconcileAsync = reconcileAsync;
         _logger = logger;
-        _label = label;
-        _debounceTimer = new Timer(static state => ((FolderWatcher)state!).KickPump(), this, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
-    }
+        _isRelevantChange = isRelevantChange ?? (static (string _) => true);
+        _debounce = debounce ?? DefaultDebounce;
+        _debounceTimer = new Timer(static state => ((FolderWatcher)state!).OnDebounceElapsed(), this, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
 
-    public void Start()
-    {
-        foreach (var root in _roots)
+        foreach (var root in roots)
         {
             Directory.CreateDirectory(root);
-            CreateWatcher(root);
+            _watchers.Add(CreateWatcher(root));
         }
     }
 
-    private void CreateWatcher(string root)
+    private FileSystemWatcher CreateWatcher(string root)
     {
         var watcher = new FileSystemWatcher(root)
         {
@@ -71,106 +57,44 @@ internal sealed class FolderWatcher : IDisposable
         watcher.Renamed += OnFileSystemRenamed;
         watcher.Error += OnFileSystemError;
         watcher.EnableRaisingEvents = true;
-        _watchers.Add(watcher);
+        return watcher;
     }
 
-    private void OnFileSystemChanged(object sender, FileSystemEventArgs e) => Enqueue(e.FullPath);
+    private void OnFileSystemChanged(object sender, FileSystemEventArgs e)
+    {
+        if (_isRelevantChange(e.FullPath))
+        {
+            ScheduleReconcile();
+        }
+    }
 
     private void OnFileSystemRenamed(object sender, RenamedEventArgs e)
     {
-        Enqueue(e.OldFullPath);
-        Enqueue(e.FullPath);
+        if (_isRelevantChange(e.OldFullPath) || _isRelevantChange(e.FullPath))
+        {
+            ScheduleReconcile();
+        }
     }
 
     private void OnFileSystemError(object sender, ErrorEventArgs e)
     {
-        _logger.ZLogWarning(e.GetException(), $"FileSystemWatcher error on {_label}; re-arming and scheduling a full rescan");
-
-        lock (_gate)
-        {
-            _fullRescanRequested = true;
-        }
-        KickPump();
-
-        if (sender is FileSystemWatcher watcher)
-        {
-            _ = Task.Run(() => RearmWatcher(watcher));
-        }
+        _logger.ZLogWarning(e.GetException(), $"FileSystemWatcher error; re-arming the watcher and scheduling a reconcile");
+        RearmWatcher((FileSystemWatcher)sender);
+        ScheduleReconcile();
     }
 
-    private void Enqueue(string fullPath)
-    {
-        if (_mapToKey(fullPath) is not { } key)
-        {
-            return;
-        }
-
-        lock (_gate)
-        {
-            _dirty.Add(key);
-        }
-        _debounceTimer.Change(_debounce, Timeout.InfiniteTimeSpan);
-    }
-
-    private void KickPump()
+    private void ScheduleReconcile()
     {
         lock (_gate)
         {
-            if (_running || _disposed)
+            if (!_disposed)
             {
-                return;
-            }
-            _running = true;
-        }
-        _ = PumpAsync();
-    }
-
-    private async Task PumpAsync()
-    {
-        try
-        {
-            while (true)
-            {
-                bool full;
-                HashSet<string>? batch = null;
-                lock (_gate)
-                {
-                    full = _fullRescanRequested;
-                    _fullRescanRequested = false;
-                    if (!full && _dirty.Count == 0)
-                    {
-                        _running = false;
-                        return;
-                    }
-
-                    if (!full)
-                    {
-                        batch = new HashSet<string>(_dirty, StringComparer.OrdinalIgnoreCase);
-                    }
-                    _dirty.Clear();
-                }
-
-                try
-                {
-                    await (full ? _reconcileAll() : _reconcileChanged(batch!)).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    _logger.ZLogError(ex, $"Reconcile failed on {_label}");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.ZLogError(ex, $"Reconcile pump crashed on {_label}");
-            lock (_gate)
-            {
-                _running = false;
+                _debounceTimer.Change(_debounce, Timeout.InfiniteTimeSpan);
             }
         }
     }
 
-    private void RearmWatcher(FileSystemWatcher watcher)
+    private void OnDebounceElapsed()
     {
         lock (_gate)
         {
@@ -178,18 +102,60 @@ internal sealed class FolderWatcher : IDisposable
             {
                 return;
             }
+            if (_reconciling)
+            {
+                _rerunRequested = true;
+                return;
+            }
+            _reconciling = true;
+        }
+        _ = RunReconcileAsync();
+    }
 
-            var root = watcher.Path;
-            _watchers.Remove(watcher);
+    private async Task RunReconcileAsync()
+    {
+        try
+        {
+            await _reconcileAsync().ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            _logger.ZLogError(ex, $"Watcher-triggered reconcile failed");
+        }
+
+        bool rerun;
+        lock (_gate)
+        {
+            _reconciling = false;
+            rerun = _rerunRequested;
+            _rerunRequested = false;
+        }
+        if (rerun)
+        {
+            ScheduleReconcile();
+        }
+    }
+
+    private void RearmWatcher(FileSystemWatcher deadWatcher)
+    {
+        var root = deadWatcher.Path;
+        lock (_gate)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            _watchers.Remove(deadWatcher);
+            deadWatcher.Dispose();
             try
             {
-                watcher.Dispose();
                 Directory.CreateDirectory(root);
-                CreateWatcher(root);
+                _watchers.Add(CreateWatcher(root));
             }
             catch (Exception ex)
             {
-                _logger.ZLogError(ex, $"Failed to re-arm watcher on {root}");
+                _logger.ZLogError(ex, $"Failed to re-arm the watcher on {root}");
             }
         }
     }
