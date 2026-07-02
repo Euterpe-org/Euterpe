@@ -14,24 +14,18 @@ internal sealed partial class ChartManageService
         }
 
         var sources = ChartLocalService.GetCustomAlbumsSources();
-        var migratedCharts = new ConcurrentBag<ChartDto>();
         var outcomes = new ConcurrentBag<MigrationOutcome>();
         var completed = 0;
 
         await Parallel.ForEachAsync(
                 sources,
-                new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = cancellationToken },
+                new ParallelOptions { CancellationToken = cancellationToken },
                 async (source, token) =>
                 {
-                    outcomes.Add(await MigrateSourceAsync(source, migratedCharts, token).ConfigureAwait(false));
+                    outcomes.Add(await MigrateSourceAsync(source, token).ConfigureAwait(false));
                     progress?.Report(new BatchProgress(Interlocked.Increment(ref completed), sources.Length));
                 })
             .ConfigureAwait(false);
-
-        if (!migratedCharts.IsEmpty)
-        {
-            _sourceCache.AddOrUpdate(migratedCharts);
-        }
 
         var migrated = outcomes.Count(outcome => outcome is MigrationOutcome.Migrated);
         var unsupported = outcomes.Count(outcome => outcome is MigrationOutcome.Unsupported);
@@ -58,7 +52,7 @@ internal sealed partial class ChartManageService
         return migrated;
     }
 
-    private async Task<MigrationOutcome> MigrateSourceAsync(CustomAlbumSource source, ConcurrentBag<ChartDto> migratedCharts, CancellationToken cancellationToken)
+    private async Task<MigrationOutcome> MigrateSourceAsync(CustomAlbumSource source, CancellationToken cancellationToken)
     {
         var (outcome, destination) = await MigrationService.MigrateCustomAlbumAsync(source, cancellationToken).ConfigureAwait(false);
         if (outcome is not MigrationOutcome.Migrated)
@@ -66,20 +60,12 @@ internal sealed partial class ChartManageService
             return outcome;
         }
 
-        DeleteSource(source);
-        if (await ChartLocalService.LoadChartFromPathAsync(destination, ChartSource.Offline).ConfigureAwait(false) is { } chart)
-        {
-            migratedCharts.Add(chart);
-        }
-        else
-        {
-            Logger.ZLogWarning($"Migrated chart at {destination} could not be loaded into the cache");
-        }
-
+        RemoveCustomAlbumSource(source);
+        await CacheLocalChartAsync(destination, ChartSource.Offline).ConfigureAwait(false);
         return outcome;
     }
 
-    private void DeleteSource(CustomAlbumSource source)
+    private void RemoveCustomAlbumSource(CustomAlbumSource source)
     {
         if (source.IsFolder)
         {

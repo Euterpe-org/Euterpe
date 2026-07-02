@@ -4,104 +4,68 @@ internal sealed partial class ChartManageService
 {
     public async Task ReconcileChartsAsync()
     {
-        var diskFolders = EnumerateChartFolders().ToArray();
-        var diskKeys = diskFolders.Select(static folder => folder.Path).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var localFolders = GetLocalChartFolders();
+        var addedCharts = await LoadLocalChartsAsync(FindAddedChartFolders(localFolders)).ConfigureAwait(false);
+        var removedCharts = FindRemovedCharts(localFolders);
 
-        var missing = (await diskFolders
-                .Where(folder => !_sourceCache.Lookup(folder.Path).HasValue)
-                .WhenAllAsync(folder => ChartLocalService.LoadChartFromPathAsync(folder.Path, folder.Source)).ConfigureAwait(false))
+        _sourceCache.AddOrUpdate(addedCharts);
+        _sourceCache.Remove(removedCharts);
+        NotifyChartSync(addedCharts, removedCharts);
+    }
+
+    private async Task ReconcileChartsAsync(IReadOnlySet<string> changedFolders)
+    {
+        var existingFolders = changedFolders.Where(Directory.Exists).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var addedCharts = await LoadLocalChartsAsync(FindAddedChartFolders(existingFolders)).ConfigureAwait(false);
+        var removedCharts = FindCachedCharts(changedFolders.Where(folder => !existingFolders.Contains(folder)));
+
+        _sourceCache.AddOrUpdate(addedCharts);
+        _sourceCache.Remove(removedCharts);
+        NotifyChartSync(addedCharts, removedCharts);
+    }
+
+    private async Task<ChartDto[]> LoadLocalChartsAsync(IEnumerable<string> chartFolders) =>
+    [
+        .. (await chartFolders
+                .WhenAllAsync(folder => ChartLocalService.LoadChartFromPathAsync(folder, GetChartSource(folder))).ConfigureAwait(false))
             .OfType<ChartDto>()
-            .ToArray();
-        _sourceCache.AddOrUpdate(missing);
+    ];
 
-        foreach (var key in _sourceCache.Keys.ToArray())
-        {
-            if (!diskKeys.Contains(key) && !Directory.Exists(key))
-            {
-                _sourceCache.RemoveKey(key);
-            }
-        }
+    private string[] GetLocalChartFolders() =>
+        [.. ChartLocalService.GetChartFolderPaths(ChartSource.Offline), .. ChartLocalService.GetChartFolderPaths(ChartSource.Online)];
 
-        Logger.ZLogInformation($"Reconciled charts: {_sourceCache.Count} present, {missing.Length} newly loaded");
+    private ChartSource GetChartSource(string chartFolder) =>
+        chartFolder.StartsWith(GameConfig.OnlineChartsFolder, StringComparison.OrdinalIgnoreCase)
+            ? ChartSource.Online
+            : ChartSource.Offline;
+
+    private string[] FindAddedChartFolders(IEnumerable<string> chartFolders) =>
+        [.. chartFolders.Where(folder => !_sourceCache.Lookup(folder).HasValue)];
+
+    private ChartDto[] FindCachedCharts(IEnumerable<string> chartFolders) =>
+        [.. chartFolders.Select(folder => _sourceCache.Lookup(folder)).Where(static cached => cached.HasValue).Select(static cached => cached.Value)];
+
+    // The folder snapshot races ops caching freshly written charts, so a folder that exists on disk is never evicted.
+    private ChartDto[] FindRemovedCharts(string[] localFolders)
+    {
+        var localKeys = localFolders.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        return [.. _sourceCache.Items.Where(chart => !localKeys.Contains(chart.FolderPath) && !Directory.Exists(chart.FolderPath))];
     }
 
-    public async Task ReconcileChartsAsync(IReadOnlySet<string> changedFolders)
+    private void NotifyChartSync(ChartDto[] addedCharts, ChartDto[] removedCharts)
     {
-        var added = new List<string>();
-        var removed = new List<string>();
-
-        foreach (var folder in changedFolders)
+        switch (addedCharts, removedCharts)
         {
-            if (ResolveChartSource(folder) is not { } source)
-            {
-                continue;
-            }
-
-            var existing = _sourceCache.Lookup(folder);
-            if (Directory.Exists(folder))
-            {
-                if (!existing.HasValue && await LoadAndCacheChartAsync(folder, source).ConfigureAwait(false) is { } chart)
-                {
-                    added.Add(chart.Manifest.Meta.Name);
-                }
-            }
-            else if (existing.HasValue)
-            {
-                _sourceCache.RemoveKey(folder);
-                removed.Add(existing.Value.Manifest.Meta.Name);
-            }
-        }
-
-        NotifyChartSync(added, removed);
-    }
-
-    private async Task<ChartDto?> LoadAndCacheChartAsync(string folder, ChartSource source)
-    {
-        var chart = await ChartLocalService.LoadChartFromPathAsync(folder, source).ConfigureAwait(false);
-        if (chart is not null)
-        {
-            _sourceCache.AddOrUpdate(chart);
-            Logger.ZLogInformation($"Reconciled chart at {folder}");
-        }
-
-        return chart;
-    }
-
-    private IEnumerable<(string Path, ChartSource Source)> EnumerateChartFolders() =>
-        EnumerateSource(ChartSource.Offline).Concat(EnumerateSource(ChartSource.Online));
-
-    private IEnumerable<(string Path, ChartSource Source)> EnumerateSource(ChartSource source) =>
-        ChartLocalService.GetChartFolderPaths(source).Select(path => (path, source));
-
-    private ChartSource? ResolveChartSource(string folder)
-    {
-        if (folder.StartsWith(GameConfig.OnlineChartsFolder, StringComparison.OrdinalIgnoreCase))
-        {
-            return ChartSource.Online;
-        }
-
-        if (folder.StartsWith(GameConfig.OfflineChartsFolder, StringComparison.OrdinalIgnoreCase))
-        {
-            return ChartSource.Offline;
-        }
-
-        return null;
-    }
-
-    private void NotifyChartSync(IReadOnlyList<string> added, IReadOnlyList<string> removed)
-    {
-        switch (added.Count, removed.Count)
-        {
-            case (0, 0):
+            case ([], []):
                 break;
-            case (1, 0):
-                NotificationService.SuccessLight(Notification_Content_Chart_Sync_Added, added[0]);
+            case ([var addedChart], []):
+                NotificationService.SuccessLight(Notification_Content_Chart_Sync_Added, addedChart.Manifest.Meta.Name);
                 break;
-            case (0, 1):
-                NotificationService.NoticeLight(Notification_Content_Chart_Sync_Removed, removed[0]);
+            case ([], [var removedChart]):
+                NotificationService.NoticeLight(Notification_Content_Chart_Sync_Removed, removedChart.Manifest.Meta.Name);
                 break;
             default:
-                NotificationService.NoticeLight(Notification_Content_Chart_Sync_Summary, added.Count, removed.Count);
+                NotificationService.NoticeLight(Notification_Content_Chart_Sync_Summary, addedCharts.Length, removedCharts.Length);
                 break;
         }
     }
