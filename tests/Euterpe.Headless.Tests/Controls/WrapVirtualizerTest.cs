@@ -40,7 +40,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     [Test]
     public Task Rows_ChunkItemsByComputedColumnCount() => RunOnUI(async () =>
     {
-        var (wrap, _) = CreateHost(itemCount: 10, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(10, 100, 350, 400);
 
         using var _ = Assert.Multiple();
         await Assert.That(wrap.Rows[0].Items.Count).IsEqualTo(3);
@@ -50,14 +50,14 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     [Test]
     public Task Rows_LastRowHoldsRemainder() => RunOnUI(async () =>
     {
-        var (wrap, _) = CreateHost(itemCount: 10, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(10, 100, 350, 400);
         await Assert.That(wrap.Rows[^1].Items.Count).IsEqualTo(1);
     });
 
     [Test]
     public Task Virtualization_RealizesFewerRowsThanTotal() => RunOnUI(async () =>
     {
-        var (wrap, _) = CreateHost(itemCount: 2000, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(2000, 100, 350, 400);
 
         var panel = wrap.GetVisualDescendants().OfType<VirtualizingStackPanel>().First();
         var realizedRows = panel.GetVisualChildren().OfType<Control>().Count();
@@ -71,7 +71,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     [Test]
     public Task WidthChange_RecomputesColumns() => RunOnUI(async () =>
     {
-        var (wrap, window) = CreateHost(itemCount: 12, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, window) = CreateHost(12, 100, 350, 400);
         await Assert.That(wrap.Rows[0].Items.Count).IsEqualTo(3);
 
         window.Width = 520;
@@ -83,7 +83,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     [Test]
     public Task ItemTemplate_RendersItemsInRow() => RunOnUI(async () =>
     {
-        var (wrap, _) = CreateHost(itemCount: 6, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(6, 100, 350, 400);
 
         var borders = wrap.GetVisualDescendants().OfType<Border>().Count(b => b.Width == 100 && b.Height == 40);
         await Assert.That(borders).IsGreaterThan(0);
@@ -115,7 +115,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     [Test]
     public Task Cards_InSameRowAreArrangedHorizontally() => RunOnUI(async () =>
     {
-        var (wrap, _) = CreateHost(itemCount: 6, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(6, 100, 350, 400);
 
         var cards = wrap.GetVisualDescendants()
             .OfType<Border>()
@@ -134,7 +134,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     public Task Add_ItemAtEnd_AppendsRowWithoutReset() => RunOnUI(async () =>
     {
         var source = new ObservableCollection<string>(Enumerable.Range(0, 9).Select(i => $"item {i}"));
-        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(source, 100, 350, 400);
         var actions = TrackRowActions(wrap);
 
         source.Add("item 9");
@@ -149,7 +149,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     public Task Add_ItemInMiddle_RipplesAndPreservesOrder() => RunOnUI(async () =>
     {
         var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
-        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(source, 100, 350, 400);
 
         source.Insert(1, "inserted");
 
@@ -160,7 +160,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     public Task Remove_Item_RipplesAndDropsEmptyRowWithoutReset() => RunOnUI(async () =>
     {
         var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
-        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(source, 100, 350, 400);
         var actions = TrackRowActions(wrap);
 
         source.RemoveAt(2);
@@ -175,7 +175,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     public Task Replace_Item_UpdatesSingleCellWithoutReset() => RunOnUI(async () =>
     {
         var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
-        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(source, 100, 350, 400);
         var actions = TrackRowActions(wrap);
 
         source[4] = "changed";
@@ -190,7 +190,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     public Task Move_Item_ReordersWithoutReset() => RunOnUI(async () =>
     {
         var source = new ObservableCollection<string>(Enumerable.Range(0, 10).Select(i => $"item {i}"));
-        var (wrap, _) = CreateHost(source, itemWidth: 100, windowWidth: 350, windowHeight: 400);
+        var (wrap, _) = CreateHost(source, 100, 350, 400);
         var actions = TrackRowActions(wrap);
 
         source.Move(0, 5);

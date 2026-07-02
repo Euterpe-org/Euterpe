@@ -31,7 +31,8 @@ internal sealed partial class ChartManageService
         }
     }
 
-    private async Task<ChartUpdateResult> UpdateChartCoreAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles, CancellationToken cancellationToken)
+    private async Task<ChartUpdateResult> UpdateChartCoreAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles,
+        CancellationToken cancellationToken)
     {
         try
         {

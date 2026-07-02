@@ -37,5 +37,5 @@ internal sealed partial class ModManageService
 
     private void CheckConfigFile(ModDto localMod) =>
         localMod.IsValidConfigFile = !localMod.ConfigFile.IsNullOrEmpty()
-            && File.Exists(Path.Combine(GameConfig.UserDataFolder, localMod.ConfigFile));
+                                     && File.Exists(Path.Combine(GameConfig.UserDataFolder, localMod.ConfigFile));
 }

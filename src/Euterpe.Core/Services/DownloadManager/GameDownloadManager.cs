@@ -40,7 +40,8 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
         }
     }
 
-    public async Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles, CancellationToken cancellationToken = default)
+    public async Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles,
+        CancellationToken cancellationToken = default)
     {
         Logger.ZLogInformation($"Updating chart {cid} ({changedFiles.Count} changed, {deletedFiles.Count} deleted file(s)) ...");
 

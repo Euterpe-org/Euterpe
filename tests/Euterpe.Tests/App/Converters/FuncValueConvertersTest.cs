@@ -10,7 +10,7 @@ public sealed class FuncValueConvertersTest
 {
     private static bool ConvertTileIsPlaying(object? playingKey, object? status, object? folderPath) =>
         (bool)((IMultiValueConverter)FuncValueConverters.TileIsPlaying)
-            .Convert([playingKey, status, folderPath], typeof(bool), null, CultureInfo.InvariantCulture)!;
+        .Convert([playingKey, status, folderPath], typeof(bool), null, CultureInfo.InvariantCulture)!;
 
     [Test]
     public async Task TileIsPlaying_PlayingMatchingKey_ReturnsTrue() =>

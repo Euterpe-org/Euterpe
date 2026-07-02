@@ -16,8 +16,8 @@ internal sealed partial class ChartManageService
     private async Task<ChartDto[]> LoadLocalChartsAsync(IEnumerable<string> chartFolders) =>
     [
         .. (await chartFolders
-                .WhenAllAsync(folder => ChartLocalService.LoadChartFromPathAsync(folder, GetChartSource(folder))).ConfigureAwait(false))
-            .OfType<ChartDto>()
+            .WhenAllAsync(folder => ChartLocalService.LoadChartFromPathAsync(folder, GetChartSource(folder))).ConfigureAwait(false))
+        .OfType<ChartDto>()
     ];
 
     private string[] GetLocalChartFolders() =>

@@ -6,7 +6,7 @@ internal sealed partial class ModManageService
 {
     private async Task InitializeCoreAsync()
     {
-        GameConfig.ObservePropertyChanged(x => x.MelonLoaderVersion, pushCurrentValueOnSubscribe: false)
+        GameConfig.ObservePropertyChanged(x => x.MelonLoaderVersion, false)
             .SubscribeAwait(this, static (_, self, _) => self.ReconcileAfterMelonLoaderChangeAsync());
 
         await LoadLibsAsync().ConfigureAwait(false);

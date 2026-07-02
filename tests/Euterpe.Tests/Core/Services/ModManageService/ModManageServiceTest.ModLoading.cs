@@ -156,7 +156,7 @@ public sealed partial class ModManageServiceTest
                 CreateWebMod("ModB")),
             modLocalService: LocalServiceWith(
                 ("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll")),
-                ("/mods/ModB.disabled", CreateInstalledMod("ModB", "ModB.dll", disabled: true))));
+                ("/mods/ModB.disabled", CreateInstalledMod("ModB", "ModB.dll", true))));
 
         await sut.InitializeModsAsync();
 

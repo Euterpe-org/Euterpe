@@ -38,10 +38,10 @@ internal sealed partial class ModManageService
     private async Task<ModDto[]> LoadLocalModsAsync() =>
     [
         .. (await ModLocalService.GetModFilePaths()
-                .WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
-            .OfType<ModDto>()
-            .GroupBy(static mod => mod.Name)
-            .Select(CheckDuplicatedMod)
+            .WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
+        .OfType<ModDto>()
+        .GroupBy(static mod => mod.Name)
+        .Select(CheckDuplicatedMod)
     ];
 
     private static ModDto CheckDuplicatedMod(IGrouping<string, ModDto> localModGroup)

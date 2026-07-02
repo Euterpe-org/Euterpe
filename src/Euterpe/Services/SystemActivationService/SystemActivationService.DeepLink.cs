@@ -1,5 +1,4 @@
 using System.Web;
-using Euterpe.Features.Charting;
 
 namespace Euterpe.Services;
 

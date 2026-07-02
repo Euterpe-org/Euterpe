@@ -277,11 +277,6 @@ public sealed class CoverImageTest : HeadlessTest
         }
     });
 
-    private sealed class CoverData
-    {
-        public string? CoverPath { get; init; }
-    }
-
     private static CoverImage Show(CoverImage cover)
     {
         var window = new Window { Content = cover, Width = 200, Height = 200 };
@@ -372,5 +367,10 @@ public sealed class CoverImageTest : HeadlessTest
         using var stream = File.Create(path);
         bitmap.Save(stream);
         return path;
+    }
+
+    private sealed class CoverData
+    {
+        public string? CoverPath { get; init; }
     }
 }

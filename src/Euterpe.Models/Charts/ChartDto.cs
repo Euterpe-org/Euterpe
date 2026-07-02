@@ -1,9 +1,8 @@
-using Euterpe.Localization;
 using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Models.Charts;
 
-public sealed partial class ChartDto : ObservableObject
+public sealed class ChartDto : ObservableObject
 {
     private double? _maxRating;
     private long? _sizeBytes;

@@ -100,7 +100,7 @@ public sealed partial class ModManageServiceTest
         await sut.InitializeModsAsync();
 
         local.Set("/mods/Dup.dll", LocalMod("Dup", sha: "a"));
-        local.Set("/mods/Dup-copy.dll", LocalMod("Dup", fileName: "Dup-copy.dll", sha: "b"));
+        local.Set("/mods/Dup-copy.dll", LocalMod("Dup", "Dup-copy.dll", sha: "b"));
         await sut.ReconcileModsAsync();
 
         var mod = sut.FindModByName("Dup")!;
@@ -115,7 +115,7 @@ public sealed partial class ModManageServiceTest
     {
         var local = new MutableModLocalService();
         local.Set("/mods/Dup.dll", LocalMod("Dup", sha: "a"));
-        local.Set("/mods/Dup-copy.dll", LocalMod("Dup", fileName: "Dup-copy.dll", sha: "b"));
+        local.Set("/mods/Dup-copy.dll", LocalMod("Dup", "Dup-copy.dll", sha: "b"));
         var sut = CreateModManageService(modLocalService: local);
         await sut.InitializeModsAsync();
         await Assert.That(sut.FindModByName("Dup")!.State).IsEqualTo(ModState.Duplicated);
@@ -146,12 +146,6 @@ public sealed partial class ModManageServiceTest
     {
         private readonly Dictionary<string, ModDto> _files = [];
 
-        public void Set(string path, ModDto mod) => _files[path] = mod;
-
-        public void Remove(string path) => _files.Remove(path);
-
-        public void Clear() => _files.Clear();
-
         public IEnumerable<string> GetModFilePaths() => _files.Keys;
 
         public IEnumerable<string> GetLibFilePaths() => [];
@@ -170,5 +164,11 @@ public sealed partial class ModManageServiceTest
                 : null);
 
         public Task<LibDto> LoadLibFromPathAsync(string filePath) => throw new NotSupportedException();
+
+        public void Set(string path, ModDto mod) => _files[path] = mod;
+
+        public void Remove(string path) => _files.Remove(path);
+
+        public void Clear() => _files.Clear();
     }
 }

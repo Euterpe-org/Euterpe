@@ -112,7 +112,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
 
     [RelayCommand]
     public Task MigrateCustomAlbumsAsync() =>
-        RunWithProgressDialogAsync(ChartManage_Migrating, ChartManage_MigratingHint, indeterminate: false, async progress =>
+        RunWithProgressDialogAsync(ChartManage_Migrating, ChartManage_MigratingHint, false, async progress =>
         {
             var migratedCount = await ChartManageService.MigrateCustomAlbumsAsync(progress).ConfigureAwait(true);
             if (migratedCount is 0)
@@ -122,7 +122,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         });
 
     public Task DownloadChartAsync(string cid) =>
-        RunWithProgressDialogAsync(ChartManage_Downloading, ChartManage_DownloadingHint, indeterminate: true, progress =>
+        RunWithProgressDialogAsync(ChartManage_Downloading, ChartManage_DownloadingHint, true, progress =>
             ChartManageService.DownloadChartAsync(cid, progress));
 
     [RelayCommand]

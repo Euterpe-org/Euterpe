@@ -1,7 +1,6 @@
 using System.Net;
 using Euterpe.Contracts.Telemetry;
 using Euterpe.Core.Http.Clients;
-using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
 

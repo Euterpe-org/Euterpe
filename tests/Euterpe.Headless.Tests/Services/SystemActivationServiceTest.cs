@@ -3,7 +3,6 @@ using Autofac;
 using Euterpe.Abstractions;
 using Euterpe.Features.Charting;
 using Euterpe.Models;
-using Euterpe.Models.Mods;
 using Euterpe.Models.Playback;
 using Euterpe.Models.Progress;
 using Euterpe.Services;

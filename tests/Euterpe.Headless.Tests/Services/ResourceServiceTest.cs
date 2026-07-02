@@ -1,5 +1,4 @@
 using Avalonia.Media.Imaging;
-using Euterpe.Abstractions;
 using Euterpe.Core;
 
 namespace Euterpe.Headless.Tests.Services;
@@ -7,7 +6,7 @@ namespace Euterpe.Headless.Tests.Services;
 [TestSubject(typeof(ResourceService))]
 public sealed class ResourceServiceTest : HeadlessTest
 {
-    private static ResourceService NewService() => new ResourceService();
+    private static ResourceService NewService() => new();
 
     [Test]
     public Task GetAssetAsStream_ExistingAsset_ReturnsReadableStream() => RunOnUI(async () =>

@@ -19,11 +19,12 @@ public sealed class CoverImage : TemplatedControl
     public static readonly StyledProperty<double> DecodeWidthProperty =
         AvaloniaProperty.Register<CoverImage, double>(nameof(DecodeWidth), double.NaN);
 
-    private AsyncImage? _staticPart;
     private GifImage? _gifPart;
     private GifStreamSource? _gifSource;
     private CancellationTokenSource? _loadCts;
     private bool _reloadOnAttach;
+
+    private AsyncImage? _staticPart;
 
     public string? Source
     {
@@ -153,7 +154,7 @@ public sealed class CoverImage : TemplatedControl
             {
                 var bytes = File.ReadAllBytes(uri.LocalPath);
                 token.ThrowIfCancellationRequested();
-                return GifStreamSource.FromStream(new MemoryStream(bytes, writable: false));
+                return GifStreamSource.FromStream(new MemoryStream(bytes, false));
             }, token).ConfigureAwait(false);
         }
         catch
