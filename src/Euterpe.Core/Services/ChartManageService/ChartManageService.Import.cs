@@ -86,7 +86,7 @@ internal sealed partial class ChartManageService
         };
     }
 
-    private async Task<(MigrationOutcome Outcome, string Destination)> ExtractPackagedChartAsync(string path, string name)
+    private async Task<MigrationResult> ExtractPackagedChartAsync(string path, string name)
     {
         var desiredFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, Guid.NewGuid().ToString("N"));
@@ -96,8 +96,8 @@ internal sealed partial class ChartManageService
             await Archive.ExtractZipFileAsync(path, workFolder).ConfigureAwait(false);
 
             return FileSystemService.TryMoveDirectoryToAvailablePath(workFolder, desiredFolder, out var destination)
-                ? (MigrationOutcome.Migrated, destination)
-                : (MigrationOutcome.Failed, desiredFolder);
+                ? new MigrationResult(MigrationOutcome.Migrated, destination)
+                : new MigrationResult(MigrationOutcome.Failed, desiredFolder);
         }
         finally
         {

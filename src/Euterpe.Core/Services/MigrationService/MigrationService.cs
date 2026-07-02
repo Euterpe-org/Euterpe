@@ -4,7 +4,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class MigrationService : IMigrationService
 {
-    public async Task<(MigrationOutcome Outcome, string Destination)> MigrateCustomAlbumAsync(CustomAlbumSource source, CancellationToken cancellationToken = default)
+    public async Task<MigrationResult> MigrateCustomAlbumAsync(CustomAlbumSource source, CancellationToken cancellationToken = default)
     {
         var name = source.Name;
         var desiredFolder = Path.Combine(GameConfig.OfflineChartsFolder, name);
@@ -17,7 +17,7 @@ internal sealed partial class MigrationService : IMigrationService
             if (!HasSupportedMusic(workFolder))
             {
                 Logger.ZLogInformation($"'{name}' uses an unsupported audio format, skipping migration");
-                return (MigrationOutcome.Unsupported, desiredFolder);
+                return new(MigrationOutcome.Unsupported, desiredFolder);
             }
 
             await BuildChartAsync(workFolder, cancellationToken).ConfigureAwait(false);
@@ -25,16 +25,16 @@ internal sealed partial class MigrationService : IMigrationService
             if (!FileSystemService.TryMoveDirectoryToAvailablePath(workFolder, desiredFolder, out var destinationFolder))
             {
                 Logger.ZLogError($"Failed to move migrated chart '{name}'");
-                return (MigrationOutcome.Failed, desiredFolder);
+                return new(MigrationOutcome.Failed, desiredFolder);
             }
 
             Logger.ZLogInformation($"Migrated '{name}' -> {destinationFolder}");
-            return (MigrationOutcome.Migrated, destinationFolder);
+            return new(MigrationOutcome.Migrated, destinationFolder);
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to migrate custom album '{name}', skipping");
-            return (MigrationOutcome.Failed, desiredFolder);
+            return new(MigrationOutcome.Failed, desiredFolder);
         }
         finally
         {
