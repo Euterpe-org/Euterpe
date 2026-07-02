@@ -39,6 +39,11 @@
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Margin" Value="0,0,0,16" />
         </Style>
+        <Style
+            Selector="^.IncompatibleReason">
+            <Setter Property="Foreground" Value="{DynamicResource SemiColorDanger}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
     </Style>
 
     <Style
