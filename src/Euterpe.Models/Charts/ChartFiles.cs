@@ -39,6 +39,13 @@ public static class ChartFiles
     public static IReadOnlyList<ChartDifficulty> ExistingDifficulties(this IReadOnlyDictionary<string, ManifestFileEntry> files) =>
         [.. ChartDifficultyExtensions.GetValues().Where(difficulty => files.ContainsKey(MapFileName(difficulty)))];
 
+    public static string? FindCoverPath(this IReadOnlyDictionary<string, ManifestFileEntry> files, string folderPath) =>
+        CoverExtensions
+            .Select(extension => CoverName + extension)
+            .Where(files.ContainsKey)
+            .Select(fileName => Path.Combine(folderPath, fileName))
+            .FirstOrDefault();
+
     private static bool IsMapFile(string fileName)
     {
         var extension = Path.GetExtension(fileName.AsSpan());
