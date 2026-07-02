@@ -20,6 +20,7 @@ public sealed partial class ModManageServiceTest
         game.MelonLoaderVersion = "0.4.0";
         await sut.ReconcileModsAsync();
         await Assert.That(mod.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(mod.IncompatibleReason).IsEqualTo(ModIncompatibleReason.MelonLoader);
     }
 
     [Test]

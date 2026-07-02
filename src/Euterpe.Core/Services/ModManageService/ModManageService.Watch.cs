@@ -31,7 +31,7 @@ internal sealed partial class ModManageService
     }
 
     private static string? MapModFile(string fullPath) =>
-        Path.GetExtension(fullPath) is ".dll" or ".disabled" ? fullPath : null;
+        ModFiles.IsModFile(fullPath) ? fullPath : null;
 
     public void Dispose()
     {

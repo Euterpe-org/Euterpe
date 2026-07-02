@@ -6,7 +6,7 @@ namespace Euterpe.Core;
 internal sealed partial class ModManageService : IModManageService, IDisposable
 {
     private readonly Lazy<Task> _initTask;
-    private readonly SemaphoreSlim _reconcileGate = new(1, 1);
+    private readonly AsyncExclusiveLock _reconcileGate = new();
     private readonly SingleFlight<string> _singleFlight = new();
     private readonly SourceCache<ModDto, string> _sourceCache = new(x => x.Name);
     private ConcurrentDictionary<string, LibDto> _libsDict = [];
@@ -20,16 +20,12 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
     public ModDto? FindModByName(string name) =>
         _sourceCache.Lookup(name) is { HasValue: true, Value: var mod } ? mod : null;
 
-    public async Task InstallModAsync(ModDto mod)
-    {
-        await RunExclusiveAsync(mod, () => InstallModCoreAsync(mod)).ConfigureAwait(false);
-        await RecomputeStatesAsync().ConfigureAwait(false);
-    }
+    public Task InstallModAsync(ModDto mod) => RunAndRefreshAsync(mod, () => InstallModCoreAsync(mod));
 
     public async Task UpdateModAsync(ModDto mod)
     {
         var success = await RunExclusiveAsync(mod, () => UpdateModCoreAsync(mod)).ConfigureAwait(false);
-        await RecomputeStatesAsync().ConfigureAwait(false);
+        await RefreshModStatesAsync().ConfigureAwait(false);
         if (success)
         {
             NotificationService.SuccessLight(Notification_Content_Mod_Update_Success, mod.Name);
@@ -40,19 +36,11 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         }
     }
 
-    public async Task ReinstallModAsync(ModDto mod)
-    {
-        await RunExclusiveAsync(mod, () => ReinstallModCoreAsync(mod)).ConfigureAwait(false);
-        await RecomputeStatesAsync().ConfigureAwait(false);
-    }
+    public Task ReinstallModAsync(ModDto mod) => RunAndRefreshAsync(mod, () => ReinstallModCoreAsync(mod));
 
-    public async Task UninstallModAsync(ModDto mod)
-    {
-        await RunExclusiveAsync(mod, () => UninstallModCoreAsync(mod)).ConfigureAwait(false);
-        await RecomputeStatesAsync().ConfigureAwait(false);
-    }
+    public Task UninstallModAsync(ModDto mod) => RunAndRefreshAsync(mod, () => UninstallModCoreAsync(mod));
 
-    public Task ToggleModAsync(ModDto mod) => RunExclusiveAsync(mod, () => ToggleModCoreAsync(mod));
+    public Task ToggleModAsync(ModDto mod) => RunAndRefreshAsync(mod, () => ToggleModCoreAsync(mod));
 
     public async Task InstallModByNameAsync(string name)
     {
@@ -130,7 +118,7 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
 
     public async Task<int> UpdateAllModsAsync()
     {
-        var outdatedMods = _sourceCache.Items.Where(mod => mod.State is ModState.Outdated).ToArray();
+        var outdatedMods = GetOutdatedMods();
         Logger.ZLogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
 
         var updated = 0;
@@ -144,7 +132,7 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
 
         if (updated > 0)
         {
-            await RecomputeStatesAsync().ConfigureAwait(false);
+            await RefreshModStatesAsync().ConfigureAwait(false);
         }
 
         var failed = outdatedMods.Length - updated;

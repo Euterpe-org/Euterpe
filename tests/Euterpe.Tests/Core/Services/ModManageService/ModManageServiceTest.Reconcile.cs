@@ -12,7 +12,7 @@ public sealed partial class ModManageServiceTest
         await sut.InitializeModsAsync();
         await Assert.That(sut.FindModByName("WebMod")!.IsLocal).IsFalse();
 
-        local.Set("/mods/WebMod.dll", DiskMod("WebMod"));
+        local.Set("/mods/WebMod.dll", LocalMod("WebMod"));
         await sut.ReconcileModsAsync();
 
         var mod = sut.FindModByName("WebMod")!;
@@ -25,7 +25,7 @@ public sealed partial class ModManageServiceTest
     public async Task ReconcileModsAsync_CatalogModFileDeleted_RevertsToNotInstalledKeepingWebMetadata()
     {
         var local = new MutableModLocalService();
-        local.Set("/mods/WebMod.dll", DiskMod("WebMod"));
+        local.Set("/mods/WebMod.dll", LocalMod("WebMod"));
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(CreateWebMod("WebMod")),
             modLocalService: local);
@@ -46,7 +46,7 @@ public sealed partial class ModManageServiceTest
     public async Task ReconcileModsAsync_LocalOnlyModFileDeleted_RemovesFromCache()
     {
         var local = new MutableModLocalService();
-        local.Set("/mods/LocalMod.dll", DiskMod("LocalMod"));
+        local.Set("/mods/LocalMod.dll", LocalMod("LocalMod"));
         var sut = CreateModManageService(modLocalService: local);
         await sut.InitializeModsAsync();
         await Assert.That(sut.FindModByName("LocalMod")).IsNotNull();
@@ -64,7 +64,7 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(modLocalService: local);
         await sut.InitializeModsAsync();
 
-        local.Set("/mods/NewMod.dll", DiskMod("NewMod"));
+        local.Set("/mods/NewMod.dll", LocalMod("NewMod"));
         await sut.ReconcileModsAsync();
 
         var mod = sut.FindModByName("NewMod");
@@ -77,7 +77,7 @@ public sealed partial class ModManageServiceTest
     public async Task ReconcileModsAsync_NoDiskChange_LeavesInstalledModUnchanged()
     {
         var local = new MutableModLocalService();
-        local.Set("/mods/WebMod.dll", DiskMod("WebMod", sha: "shared"));
+        local.Set("/mods/WebMod.dll", LocalMod("WebMod", sha: "shared"));
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(CreateWebMod("WebMod", sha256: "shared")),
             modLocalService: local);
@@ -99,8 +99,8 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(modLocalService: local);
         await sut.InitializeModsAsync();
 
-        local.Set("/mods/Dup.dll", DiskMod("Dup", sha: "a"));
-        local.Set("/mods/Dup-copy.dll", DiskMod("Dup", fileName: "Dup-copy.dll", sha: "b"));
+        local.Set("/mods/Dup.dll", LocalMod("Dup", sha: "a"));
+        local.Set("/mods/Dup-copy.dll", LocalMod("Dup", fileName: "Dup-copy.dll", sha: "b"));
         await sut.ReconcileModsAsync();
 
         var mod = sut.FindModByName("Dup")!;
@@ -110,14 +110,33 @@ public sealed partial class ModManageServiceTest
         await Assert.That(mod.DuplicatedModPaths).Contains("Dup-copy.dll");
     }
 
-    private static ModDto DiskMod(string name, string? fileName = null, string version = "1.0.0", string sha = "sha", bool disabled = false)
+    [Test]
+    public async Task ReconcileModsAsync_DuplicateFileRemoved_ClearsDuplicated()
+    {
+        var local = new MutableModLocalService();
+        local.Set("/mods/Dup.dll", LocalMod("Dup", sha: "a"));
+        local.Set("/mods/Dup-copy.dll", LocalMod("Dup", fileName: "Dup-copy.dll", sha: "b"));
+        var sut = CreateModManageService(modLocalService: local);
+        await sut.InitializeModsAsync();
+        await Assert.That(sut.FindModByName("Dup")!.State).IsEqualTo(ModState.Duplicated);
+
+        local.Remove("/mods/Dup-copy.dll");
+        await sut.ReconcileModsAsync();
+
+        var mod = sut.FindModByName("Dup")!;
+        using var _ = Assert.Multiple();
+        await Assert.That(mod.State).IsEqualTo(ModState.Normal);
+        await Assert.That(mod.DuplicatedModPaths).IsEmpty();
+    }
+
+    private static ModDto LocalMod(string name, string? fileName = null, string version = "1.0.0", string sha = "sha", bool disabled = false)
     {
         var file = fileName ?? $"{name}.dll";
         return new ModDto
         {
             Name = name,
             LocalVersion = version,
-            SHA256 = sha,
+            LocalSHA256 = sha,
             FileNameWithoutExtension = Path.GetFileNameWithoutExtension(file),
             IsDisabled = disabled
         };
@@ -128,6 +147,8 @@ public sealed partial class ModManageServiceTest
         private readonly Dictionary<string, ModDto> _files = [];
 
         public void Set(string path, ModDto mod) => _files[path] = mod;
+
+        public void Remove(string path) => _files.Remove(path);
 
         public void Clear() => _files.Clear();
 
@@ -141,7 +162,7 @@ public sealed partial class ModManageServiceTest
                 {
                     Name = template.Name,
                     LocalVersion = template.LocalVersion,
-                    SHA256 = template.SHA256,
+                    LocalSHA256 = template.LocalSHA256,
                     FileNameWithoutExtension = template.FileNameWithoutExtension,
                     IsDisabled = template.IsDisabled,
                     Author = template.Author

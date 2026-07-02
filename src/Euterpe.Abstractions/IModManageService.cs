@@ -25,6 +25,6 @@ public interface IModManageService
     Task<int> UpdateAllModsAsync();
     Task ImportModsAsync(IReadOnlyList<string> filePaths);
 
-    // Disk reconciliation
+    // Local file reconciliation
     Task ReconcileModsAsync();
 }

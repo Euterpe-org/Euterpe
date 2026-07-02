@@ -64,6 +64,68 @@ public sealed partial class ModManageServiceTest
     }
 
     [Test]
+    public async Task ToggleModAsync_DisablingConflictPartner_ClearsIncompatibleFromBoth()
+    {
+        var fileSystemServiceMock = IFileSystemService.Mock();
+        fileSystemServiceMock.TryMoveFile(Any<string>(), Any<string>(), Any<bool>()).Returns(true);
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")),
+            fileSystemService: fileSystemServiceMock,
+            modLocalService: LocalServiceWith(
+                ("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll")),
+                ("/mods/ModB.dll", CreateInstalledMod("ModB", "ModB.dll"))));
+        await sut.InitializeModsAsync();
+
+        var modA = sut.FindModByName("ModA")!;
+        var modB = sut.FindModByName("ModB")!;
+        await Assert.That(modA.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modB.State).IsEqualTo(ModState.Incompatible);
+
+        await sut.ToggleModAsync(modB);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(modB.IsDisabled).IsTrue();
+        await Assert.That(modA.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modB.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modA.IncompatibleReason).IsEqualTo(ModIncompatibleReason.None);
+        await Assert.That(modB.IncompatibleReason).IsEqualTo(ModIncompatibleReason.None);
+        await Assert.That(modA.ConflictingModNames).IsEmpty();
+        await Assert.That(modB.ConflictingModNames).IsEmpty();
+    }
+
+    [Test]
+    public async Task ToggleModAsync_ReenablingConflictPartner_MarksBothIncompatibleAgain()
+    {
+        var fileSystemServiceMock = IFileSystemService.Mock();
+        fileSystemServiceMock.TryMoveFile(Any<string>(), Any<string>(), Any<bool>()).Returns(true);
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")),
+            fileSystemService: fileSystemServiceMock,
+            modLocalService: LocalServiceWith(
+                ("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll")),
+                ("/mods/ModB.disabled", CreateInstalledMod("ModB", "ModB.dll", disabled: true))));
+        await sut.InitializeModsAsync();
+
+        var modA = sut.FindModByName("ModA")!;
+        var modB = sut.FindModByName("ModB")!;
+        await Assert.That(modA.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modB.State).IsEqualTo(ModState.Normal);
+
+        await sut.ToggleModAsync(modB);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(modB.IsDisabled).IsFalse();
+        await Assert.That(modA.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modB.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modA.IncompatibleReason).IsEqualTo(ModIncompatibleReason.ConflictingMod);
+        await Assert.That(modB.IncompatibleReason).IsEqualTo(ModIncompatibleReason.ConflictingMod);
+    }
+
+    [Test]
     public async Task ToggleModAsync_EnableMod_AlsoEnablesDisabledLocalDependency()
     {
         var dep = CreateInstalledMod("ModB", "ModB.dll", true);

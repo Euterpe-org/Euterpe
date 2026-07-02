@@ -33,7 +33,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_SameVersionDifferentSha_MarksModified()
     {
         var localMod = CreateInstalledMod();
-        localMod.SHA256 = "local-sha";
+        localMod.LocalSHA256 = "local-sha";
 
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(CreateWebMod(sha256: "web-sha")),
@@ -48,7 +48,7 @@ public sealed partial class ModManageServiceTest
     public async Task InitializeModsAsync_SameVersionMatchingSha_MarksNormal()
     {
         var localMod = CreateInstalledMod();
-        localMod.SHA256 = "shared-sha";
+        localMod.LocalSHA256 = "shared-sha";
 
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(CreateWebMod(sha256: "shared-sha")),
@@ -69,7 +69,10 @@ public sealed partial class ModManageServiceTest
 
         await sut.InitializeModsAsync();
 
-        await Assert.That(sut.FindModByName(TestModName)!.State).IsEqualTo(ModState.Incompatible);
+        var mod = sut.FindModByName(TestModName)!;
+        using var _ = Assert.Multiple();
+        await Assert.That(mod.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(mod.IncompatibleReason).IsEqualTo(ModIncompatibleReason.GameVersion);
     }
 
     [Test]
@@ -82,7 +85,10 @@ public sealed partial class ModManageServiceTest
 
         await sut.InitializeModsAsync();
 
-        await Assert.That(sut.FindModByName(TestModName)!.State).IsEqualTo(ModState.Incompatible);
+        var mod = sut.FindModByName(TestModName)!;
+        using var _ = Assert.Multiple();
+        await Assert.That(mod.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(mod.IncompatibleReason).IsEqualTo(ModIncompatibleReason.MelonLoader);
     }
 
     [Test]
@@ -131,9 +137,36 @@ public sealed partial class ModManageServiceTest
 
         await sut.InitializeModsAsync();
 
+        var modA = sut.FindModByName("ModA")!;
+        var modB = sut.FindModByName("ModB")!;
         using var _ = Assert.Multiple();
-        await Assert.That(sut.FindModByName("ModA")!.State).IsEqualTo(ModState.Incompatible);
-        await Assert.That(sut.FindModByName("ModB")!.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modA.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modB.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modA.IncompatibleReason).IsEqualTo(ModIncompatibleReason.ConflictingMod);
+        await Assert.That(modA.ConflictingModNames).IsEquivalentTo(["ModB"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
+        await Assert.That(modB.ConflictingModNames).IsEquivalentTo(["ModA"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
+    }
+
+    [Test]
+    public async Task InitializeModsAsync_ConflictPartnerDisabled_DoesNotMarkIncompatible()
+    {
+        var sut = CreateModManageService(
+            gameDownloadManager: DownloadManagerWith(
+                CreateWebMod("ModA", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModB")),
+            modLocalService: LocalServiceWith(
+                ("/mods/ModA.dll", CreateInstalledMod("ModA", "ModA.dll")),
+                ("/mods/ModB.disabled", CreateInstalledMod("ModB", "ModB.dll", disabled: true))));
+
+        await sut.InitializeModsAsync();
+
+        var modA = sut.FindModByName("ModA")!;
+        var modB = sut.FindModByName("ModB")!;
+        using var _ = Assert.Multiple();
+        await Assert.That(modA.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modB.State).IsEqualTo(ModState.Normal);
+        await Assert.That(modA.IncompatibleReason).IsEqualTo(ModIncompatibleReason.None);
+        await Assert.That(modB.IncompatibleReason).IsEqualTo(ModIncompatibleReason.None);
     }
 
     [Test]
@@ -151,6 +184,8 @@ public sealed partial class ModManageServiceTest
         using var _ = Assert.Multiple();
         await Assert.That(sut.FindModByName("ModA")!.State).IsEqualTo(ModState.Normal);
         await Assert.That(modB.State).IsEqualTo(ModState.Incompatible);
+        await Assert.That(modB.IncompatibleReason).IsEqualTo(ModIncompatibleReason.ConflictingMod);
+        await Assert.That(modB.ConflictingModNames).IsEquivalentTo(["ModA"], EqualityComparer<string>.Default, CollectionOrdering.Matching);
         await Assert.That(modB.IsInstallable).IsFalse();
     }
 

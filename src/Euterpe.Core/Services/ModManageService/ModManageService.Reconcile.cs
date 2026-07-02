@@ -4,13 +4,17 @@ internal sealed partial class ModManageService
 {
     public async Task ReconcileModsAsync()
     {
-        await _reconcileGate.WaitAsync().ConfigureAwait(false);
+        await _reconcileGate.AcquireAsync().ConfigureAwait(false);
         try
         {
-            var (diskMods, added, removed) = await SyncLocalModsAsync().ConfigureAwait(false);
-            RecomputeModStates(diskMods);
-            _sourceCache.Refresh();
-            NotifyModSync(added, removed);
+            var localMods = await LoadLocalModsAsync().ConfigureAwait(false);
+            var addedMods = FindAddedMods(localMods);
+            var removedMods = FindRemovedMods(localMods);
+
+            CacheLocalMods(localMods);
+            RemoveLocalMods(removedMods);
+            RefreshModStatesCore();
+            NotifyModSync(addedMods, removedMods);
         }
         finally
         {
@@ -18,14 +22,12 @@ internal sealed partial class ModManageService
         }
     }
 
-    private async Task RecomputeStatesAsync()
+    private async Task RefreshModStatesAsync()
     {
-        await _reconcileGate.WaitAsync().ConfigureAwait(false);
+        await _reconcileGate.AcquireAsync().ConfigureAwait(false);
         try
         {
-            var diskMods = await LoadDiskModsAsync().ConfigureAwait(false);
-            RecomputeModStates(diskMods);
-            _sourceCache.Refresh();
+            RefreshModStatesCore();
         }
         finally
         {
@@ -33,43 +35,45 @@ internal sealed partial class ModManageService
         }
     }
 
-    private async Task<ModDto[]> LoadDiskModsAsync() =>
-        (await ModLocalService.GetModFilePaths().WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
+    private async Task<ModDto[]> LoadLocalModsAsync() =>
+    [
+        .. (await ModLocalService.GetModFilePaths()
+                .WhenAllAsync(ModLocalService.LoadModFromPathAsync).ConfigureAwait(false))
             .OfType<ModDto>()
-            .ToArray();
+            .GroupBy(static mod => mod.Name)
+            .Select(CheckDuplicatedMod)
+    ];
 
-    private async Task<(ModDto[] DiskMods, List<string> Added, List<string> Removed)> SyncLocalModsAsync()
+    private static ModDto CheckDuplicatedMod(IGrouping<string, ModDto> localModGroup)
     {
-        var added = new List<string>();
-        var removed = new List<string>();
-
-        var diskMods = await LoadDiskModsAsync().ConfigureAwait(false);
-        var diskNames = diskMods.Select(static mod => mod.Name).ToHashSet(StringComparer.Ordinal);
-
-        // One entry per Name (last file wins for the cache, matching AddOrUpdate); duplicate
-        // detection runs later on the pristine diskMods array, so never mutate a disk DTO here.
-        foreach (var group in diskMods.GroupBy(static mod => mod.Name, StringComparer.Ordinal))
-        {
-            MergeLocalMod(group.Last(), added);
-        }
-
-        foreach (var cached in _sourceCache.Items.Where(static mod => mod is { IsLocal: true, IsProcessing: false }).ToArray())
-        {
-            if (!diskNames.Contains(cached.Name))
-            {
-                PruneLocalMod(cached, removed);
-            }
-        }
-
-        return (diskMods, added, removed);
+        var localMod = localModGroup.First();
+        var fileNames = localModGroup.Select(static mod => mod.LocalFileName).ToArray();
+        localMod.DuplicatedModPaths = fileNames.Length > 1 ? fileNames : [];
+        return localMod;
     }
 
-    private void MergeLocalMod(ModDto disk, List<string> added)
+    private ModDto[] FindAddedMods(ModDto[] localMods) =>
+        localMods.Where(localMod => FindModByName(localMod.Name) is not ({ IsLocal: true } or { IsProcessing: true })).ToArray();
+
+    private ModDto[] FindRemovedMods(ModDto[] localMods)
     {
-        if (_sourceCache.Lookup(disk.Name) is not { HasValue: true, Value: var cached })
+        var localModNames = localMods.Select(static mod => mod.Name).ToHashSet();
+        return GetInstalledMods().Where(mod => !mod.IsProcessing && !localModNames.Contains(mod.Name)).ToArray();
+    }
+
+    private void CacheLocalMods(ModDto[] localMods)
+    {
+        foreach (var localMod in localMods)
         {
-            _sourceCache.AddOrUpdate(disk);
-            added.Add(disk.Name);
+            CacheLocalMod(localMod);
+        }
+    }
+
+    private void CacheLocalMod(ModDto localMod)
+    {
+        if (_sourceCache.Lookup(localMod.Name) is not { HasValue: true, Value: var cached })
+        {
+            _sourceCache.AddOrUpdate(localMod);
             return;
         }
 
@@ -78,103 +82,125 @@ internal sealed partial class ModManageService
             return;
         }
 
-        var unchanged = cached.IsLocal
-            && cached.LocalFileName == disk.LocalFileName
-            && cached.LocalVersion == disk.LocalVersion
-            && (cached.HasDownloadSource || cached.SHA256 == disk.SHA256);
-        if (unchanged)
-        {
-            return;
-        }
+        cached.FileNameWithoutExtension = localMod.FileNameWithoutExtension;
+        cached.IsDisabled = localMod.IsDisabled;
+        cached.LocalVersion = localMod.LocalVersion;
+        cached.LocalSHA256 = localMod.LocalSHA256;
+        cached.DuplicatedModPaths = localMod.DuplicatedModPaths;
+        CheckModFiles(cached);
+    }
 
-        var wasLocal = cached.IsLocal;
-        cached.FileNameWithoutExtension = disk.FileNameWithoutExtension;
-        cached.IsDisabled = disk.IsDisabled;
-        cached.LocalVersion = disk.LocalVersion;
-        if (!cached.HasDownloadSource)
+    private void RemoveLocalMods(ModDto[] removedMods)
+    {
+        foreach (var removedMod in removedMods)
         {
-            cached.SHA256 = disk.SHA256;
-        }
-
-        CheckConfigFile(cached);
-        if (!cached.IsDisabled)
-        {
-            CheckLibDependencies(cached);
-        }
-
-        _sourceCache.AddOrUpdate(cached);
-        if (!wasLocal)
-        {
-            added.Add(cached.Name);
+            RemoveLocalMod(removedMod);
         }
     }
 
-    private void PruneLocalMod(ModDto cached, List<string> removed)
+    private void RemoveLocalMod(ModDto removedMod)
     {
-        removed.Add(cached.Name);
-        if (cached.HasDownloadSource)
+        if (removedMod.HasDownloadSource)
         {
-            cached.RemoveLocalInfo();
-            _sourceCache.AddOrUpdate(cached);
+            removedMod.RemoveLocalInfo();
         }
         else
         {
-            _sourceCache.RemoveKey(cached.Name);
+            _sourceCache.RemoveKey(removedMod.Name);
         }
     }
 
-    private void RecomputeModStates(ModDto[] diskMods)
+    private void RefreshModStatesCore()
     {
-        // diskMods may contain duplicate names; keep the first.
-        var diskModsByName = new Dictionary<string, ModDto>(StringComparer.Ordinal);
-        foreach (var disk in diskMods)
+        var enabledMods = GetEnabledMods();
+        foreach (var mod in _sourceCache.Items.Where(static mod => !mod.IsProcessing))
         {
-            diskModsByName.TryAdd(disk.Name, disk);
+            mod.ConflictingModNames = FindConflictingMods(mod, enabledMods);
+            mod.IncompatibleReason = DetermineIncompatibleReason(mod);
+            mod.State = DetermineModState(mod);
         }
 
-        foreach (var mod in _sourceCache.Items)
-        {
-            if (mod.IsProcessing)
-            {
-                continue;
-            }
-
-            mod.DuplicatedModPaths = [];
-            if (!mod.HasDownloadSource)
-            {
-                mod.State = ModState.Normal;
-            }
-            else if (mod.IsLocal)
-            {
-                if (diskModsByName.TryGetValue(mod.Name, out var disk))
-                {
-                    mod.State = DetermineModState(disk, mod);
-                }
-            }
-            else
-            {
-                mod.State = IsModIncompatible(mod.MelonVersion, mod.GameVersion) ? ModState.Incompatible : ModState.Normal;
-            }
-        }
-
-        CheckDuplicatedMods(diskMods);
-        CheckIncompatibleMods();
+        _sourceCache.Refresh();
     }
 
-    private void NotifyModSync(IReadOnlyList<string> added, IReadOnlyList<string> removed)
+    private static string[] FindConflictingMods(ModDto mod, ModDto[] enabledMods)
     {
-        switch (added.Count, removed.Count)
+        if (mod is { IsLocal: true, IsDisabled: true })
         {
-            case (0, 0):
+            return [];
+        }
+
+        return enabledMods
+            .Where(other => mod.IncompatibleMods.Contains(other.Name) || other.IncompatibleMods.Contains(mod.Name))
+            .Select(static other => other.Name)
+            .Order(StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    private ModIncompatibleReason DetermineIncompatibleReason(ModDto mod)
+    {
+        if (mod.ConflictingModNames is not [])
+        {
+            return ModIncompatibleReason.ConflictingMod;
+        }
+
+        if (!mod.HasDownloadSource)
+        {
+            return ModIncompatibleReason.None;
+        }
+
+        if (GameConfig.MelonLoaderSemVersion is { } semVersion
+            && SemVersionRange.TryParse($"^{mod.MelonVersion}", out var range)
+            && !range.Contains(semVersion))
+        {
+            return ModIncompatibleReason.MelonLoader;
+        }
+
+        return mod.GameVersion is not "*" && mod.GameVersion != GameConfig.GameVersion
+            ? ModIncompatibleReason.GameVersion
+            : ModIncompatibleReason.None;
+    }
+
+    private static ModState DetermineModState(ModDto mod)
+    {
+        if (mod.DuplicatedModPaths is not [])
+        {
+            return ModState.Duplicated;
+        }
+
+        if (mod.IncompatibleReason is not ModIncompatibleReason.None)
+        {
+            return ModState.Incompatible;
+        }
+
+        if (!mod.IsLocal || !mod.HasDownloadSource)
+        {
+            return ModState.Normal;
+        }
+
+        return mod.LocalVersion.ComparePrecedenceTo(mod.Version) switch
+        {
+            < 0 => ModState.Outdated,
+            > 0 => ModState.Newer,
+            _ when mod.LocalSHA256 != mod.SHA256 => ModState.Modified,
+            _ => ModState.Normal
+        };
+    }
+
+    private void NotifyModSync(ModDto[] addedMods, ModDto[] removedMods)
+    {
+        switch (addedMods, removedMods)
+        {
+            case ([], []):
                 break;
-            case (1, 0):
-                NotificationService.SuccessLight(Notification_Content_Mod_Sync_Added, added[0]);
+            case ([var addedMod], []):
+                NotificationService.SuccessLight(Notification_Content_Mod_Sync_Added, addedMod.Name);
                 break;
-            case (0, 1):
-                NotificationService.NoticeLight(Notification_Content_Mod_Sync_Removed, removed[0]);
+            case ([], [var removedMod]):
+                NotificationService.NoticeLight(Notification_Content_Mod_Sync_Removed, removedMod.Name);
                 break;
             default:
-                NotificationService.NoticeLight(Notification_Content_Mod_Sync_Summary, added.Count, removed.Count);
+                NotificationService.NoticeLight(Notification_Content_Mod_Sync_Summary, addedMods.Length, removedMods.Length);
                 break;
         }
     }

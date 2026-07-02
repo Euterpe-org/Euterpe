@@ -11,10 +11,17 @@ internal sealed partial class ModManageService
 
         await LoadLibsAsync().ConfigureAwait(false);
 
-        var (diskMods, _, _) = await SyncLocalModsAsync().ConfigureAwait(false);
-        CheckDuplicatedMods(diskMods);
-        await MergeWebCatalogAsync().ConfigureAwait(false);
-        CheckIncompatibleMods();
+        await _reconcileGate.AcquireAsync().ConfigureAwait(false);
+        try
+        {
+            CacheLocalMods(await LoadLocalModsAsync().ConfigureAwait(false));
+            await LoadWebModsAsync().ConfigureAwait(false);
+            RefreshModStatesCore();
+        }
+        finally
+        {
+            _reconcileGate.Release();
+        }
 
         StartWatching();
     }
@@ -139,19 +146,16 @@ internal sealed partial class ModManageService
         }
     }
 
-    private async Task RunExclusiveAsync(ModDto mod, Func<Task> action) =>
-        await _singleFlight.RunAsync(mod.Name, async () =>
+    private async Task RunAndRefreshAsync(ModDto mod, Func<Task> action)
+    {
+        await RunExclusiveAsync(mod, async () =>
         {
-            mod.IsProcessing = true;
-            try
-            {
-                await action().ConfigureAwait(false);
-            }
-            finally
-            {
-                mod.IsProcessing = false;
-            }
+            await action().ConfigureAwait(false);
+            return true;
         }).ConfigureAwait(false);
+
+        await RefreshModStatesAsync().ConfigureAwait(false);
+    }
 
     private async Task<T> RunExclusiveAsync<T>(ModDto mod, Func<Task<T>> action)
     {

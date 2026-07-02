@@ -5,17 +5,17 @@ namespace Euterpe.Core;
 internal sealed class ModLocalService : IModLocalService
 {
     public IEnumerable<string> GetModFilePaths() => Directory.EnumerateFiles(GameConfig.ModsFolder)
-        .Where(x => Path.GetExtension(x) is ".disabled" || Path.GetExtension(x) is ".dll");
+        .Where(ModFiles.IsModFile);
 
     public IEnumerable<string> GetLibFilePaths() => Directory.EnumerateFiles(GameConfig.UserLibsFolder)
-        .Where(x => Path.GetExtension(x) is ".dll");
+        .Where(static x => Path.GetExtension(x) is ModFiles.DllExtension);
 
     public async Task<ModDto?> LoadModFromPathAsync(string filePath)
     {
         var mod = new ModDto
         {
             FileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePath),
-            IsDisabled = Path.GetExtension(filePath) is ".disabled"
+            IsDisabled = Path.GetExtension(filePath) is ModFiles.DisabledExtension
         };
 
         try
@@ -33,7 +33,7 @@ internal sealed class ModLocalService : IModLocalService
             mod.Name = attribute.Signature!.FixedArguments[1].ToString();
             mod.LocalVersion = attribute.Signature!.FixedArguments[2].ToString();
             mod.Author = attribute.Signature!.FixedArguments[3].ToString();
-            mod.SHA256 = SHA256Utils.HexLowerFromBytes(bytes);
+            mod.LocalSHA256 = SHA256Utils.HexLowerFromBytes(bytes);
 
             return mod;
         }

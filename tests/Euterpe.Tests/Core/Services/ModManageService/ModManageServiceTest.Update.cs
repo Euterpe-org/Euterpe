@@ -56,7 +56,7 @@ public sealed partial class ModManageServiceTest
     {
         var outdated = CreateInstalledMod("Outdated", "Outdated.dll");
         var upToDate = CreateInstalledMod("UpToDate", "UpToDate.dll");
-        upToDate.SHA256 = "shared-sha";
+        upToDate.LocalSHA256 = "shared-sha";
 
         var fileSystemServiceMock = IFileSystemService.Mock();
         fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
@@ -90,7 +90,7 @@ public sealed partial class ModManageServiceTest
     public async Task UpdateAllModsAsync_WhenNoOutdatedMods_DoesNotDownload()
     {
         var upToDate = CreateInstalledMod();
-        upToDate.SHA256 = "shared-sha";
+        upToDate.LocalSHA256 = "shared-sha";
 
         var downloadManagerMock = IGameDownloadManager.Mock();
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);

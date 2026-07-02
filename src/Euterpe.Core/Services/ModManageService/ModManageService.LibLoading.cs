@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using AsyncAwaitBestPractices;
+using Euterpe.Contracts.Distribution;
 
 namespace Euterpe.Core;
 
@@ -10,40 +11,36 @@ internal sealed partial class ModManageService
         _libsDict = new ConcurrentDictionary<string, LibDto>(
             (await ModLocalService.GetLibFilePaths()
                 .WhenAllAsync(ModLocalService.LoadLibFromPathAsync).ConfigureAwait(false))
-            .Select(x => KeyValuePair.Create(x.Name, x)));
+            .Select(static lib => KeyValuePair.Create(lib.Name, lib)));
 
         foreach (var webLib in await GameDownloadManager.FetchLibListAsync().ConfigureAwait(false))
         {
-            if (_libsDict.TryGetValue(webLib.Slug, out var localLib))
-            {
-                var webLibDto = webLib.ToModel();
-                if (localLib.SHA256 == webLibDto.SHA256)
-                {
-                    continue;
-                }
-
-                DownloadLibAsync(webLibDto).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Slug} failed"));
-            }
-            else
-            {
-                _libsDict[webLib.Slug] = webLib.ToModel();
-            }
+            CacheWebLib(webLib);
         }
 
         Logger.ZLogInformation($"All libs loaded");
     }
 
+    private void CacheWebLib(Lib webLib)
+    {
+        if (!_libsDict.TryGetValue(webLib.Slug, out var localLib))
+        {
+            _libsDict[webLib.Slug] = webLib.ToModel();
+            return;
+        }
+
+        var webLibDto = webLib.ToModel();
+        if (localLib.SHA256 != webLibDto.SHA256)
+        {
+            DownloadLibAsync(webLibDto).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Slug} failed"));
+        }
+    }
+
     private void CheckLibDependencies(ModDto mod)
     {
-        foreach (var libName in mod.LibDependencies)
+        foreach (var lib in mod.LibDependencies.Select(libName => _libsDict[libName]).Where(static lib => !lib.IsLocal))
         {
-            var lib = _libsDict[libName];
-            if (lib.IsLocal)
-            {
-                continue;
-            }
-
-            DownloadLibAsync(lib).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {libName} failed"));
+            DownloadLibAsync(lib).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {lib.Name} failed"));
         }
     }
 
