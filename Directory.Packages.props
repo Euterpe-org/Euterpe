@@ -66,7 +66,7 @@
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.TUnit" Version="31.20.0"/>
-        <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.0.1"/>
+        <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.5"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.117"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="$(RoslynatorAnalyzersVersion)"/>
