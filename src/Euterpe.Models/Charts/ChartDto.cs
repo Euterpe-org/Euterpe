@@ -24,9 +24,7 @@ public sealed partial class ChartDto : ObservableObject
         Manifest.Meta.Uploader is { } uploader ? $"{EuterpeWeb.BaseUrl}/users/{uploader.Uid}?tab=charts" : null;
 
     // Asset Paths
-    public string? CoverPath => CoverExtensions
-        .Select(extension => AssetPath(CoverName + extension))
-        .FirstOrDefault(path => path is not null);
+    public string? CoverPath => Manifest.Files.FindCoverPath(FolderPath);
 
     public string? AudioPath => AssetPath(DemoFileName) ?? AssetPath(MusicFileName);
     public string? VideoPath => AssetPath(VideoFileName);
