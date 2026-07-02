@@ -7,15 +7,17 @@ public sealed partial class ModDto : ObservableObject
     public void RemoveLocalInfo()
     {
         LocalVersion = string.Empty;
-        State = ModState.Normal;
+        LocalSHA256 = string.Empty;
+        DuplicatedModPaths = [];
         FileNameWithoutExtension = null;
         IsDisabled = true;
     }
 
+    // Downloads are SHA-verified, so the fresh local file is known to match the catalog file.
     public void AddLocalInfo()
     {
         LocalVersion = Version;
-        State = ModState.Normal;
+        LocalSHA256 = SHA256;
         FileNameWithoutExtension = FileName[..^4];
         IsDisabled = false;
     }
@@ -26,10 +28,31 @@ public sealed partial class ModDto : ObservableObject
     [ObservableProperty]
     public partial string LocalVersion { get; set; } = string.Empty;
 
+    public string LocalSHA256 { get; set; } = string.Empty;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsInstallable))]
     [NotifyPropertyChangedFor(nameof(IsReinstallable))]
+    [NotifyPropertyChangedFor(nameof(IncompatibleReasonDisplay))]
     public partial ModState State { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IncompatibleReasonDisplay))]
+    public partial ModIncompatibleReason IncompatibleReason { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IncompatibleReasonDisplay))]
+    public partial string[] ConflictingModNames { get; set; } = [];
+
+    public string? IncompatibleReasonDisplay => State is not ModState.Incompatible
+        ? null
+        : IncompatibleReason switch
+        {
+            ModIncompatibleReason.MelonLoader => string.Format(XAML.ModIncompatibleReason_MelonLoader, MelonVersion),
+            ModIncompatibleReason.GameVersion => string.Format(XAML.ModIncompatibleReason_GameVersion, GameVersion),
+            ModIncompatibleReason.ConflictingMod => string.Format(XAML.ModIncompatibleReason_ConflictingMod, string.Join(", ", ConflictingModNames)),
+            _ => null
+        };
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLocal))]
@@ -38,8 +61,8 @@ public sealed partial class ModDto : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsToggleVisible))]
     public partial string? FileNameWithoutExtension { get; set; }
 
-    public string LocalFileName => FileNameWithoutExtension + (IsDisabled ? ".disabled" : ".dll");
-    public string ReversedFileName => FileNameWithoutExtension + (IsDisabled ? ".dll" : ".disabled");
+    public string LocalFileName => FileNameWithoutExtension + (IsDisabled ? ModFiles.DisabledExtension : ModFiles.DllExtension);
+    public string ReversedFileName => FileNameWithoutExtension + (IsDisabled ? ModFiles.DllExtension : ModFiles.DisabledExtension);
 
     // Binding Boolean Properties
     [ObservableProperty]
@@ -70,7 +93,7 @@ public sealed partial class ModDto : ObservableObject
     // Dependencies
     public bool HasDependency => ModDependencies.Length + LibDependencies.Length > 0;
 
-    public string[] DependencyNames => !HasDependency ? [] : [.. ModDependencies, .. LibDependencies];
+    public string[] DependencyNames => [.. ModDependencies, .. LibDependencies];
 
     // Incompatible mods
     public bool HasIncompatibleMods => IncompatibleMods is not [];

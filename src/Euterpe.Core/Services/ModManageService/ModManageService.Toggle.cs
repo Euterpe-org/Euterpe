@@ -23,16 +23,15 @@ internal sealed partial class ModManageService
 
     private async Task EnableModDependenciesAsync(ModDto mod)
     {
-        var modDependencies = FindModDependencies(mod);
-        foreach (var dependency in modDependencies)
+        foreach (var dependency in FindModDependencies(mod))
         {
-            if (dependency is { IsDisabled: true, IsLocal: true })
-            {
-                await EnableModAsync(dependency).ConfigureAwait(false);
-            }
-            else if (!dependency.IsLocal)
+            if (!dependency.IsLocal)
             {
                 await InstallModAsync(dependency).ConfigureAwait(false);
+            }
+            else if (dependency.IsDisabled)
+            {
+                await EnableModAsync(dependency).ConfigureAwait(false);
             }
         }
     }
@@ -57,13 +56,9 @@ internal sealed partial class ModManageService
 
     private async Task DisableModDependentsAsync(ModDto mod)
     {
-        var modDependents = FindModDependents(mod);
-        foreach (var dependent in modDependents)
+        foreach (var dependent in FindModDependents(mod).Where(static dependent => dependent is { IsDisabled: false, IsLocal: true }))
         {
-            if (dependent is { IsDisabled: false, IsLocal: true })
-            {
-                await DisableModAsync(dependent).ConfigureAwait(false);
-            }
+            await DisableModAsync(dependent).ConfigureAwait(false);
         }
     }
 }

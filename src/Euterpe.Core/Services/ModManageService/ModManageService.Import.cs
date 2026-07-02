@@ -1,5 +1,3 @@
-using DynamicData.Kernel;
-
 namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
@@ -10,33 +8,29 @@ internal sealed partial class ModManageService
         {
             await ImportFileAsync(filePath).ConfigureAwait(false);
         }
+
+        await RefreshModStatesAsync().ConfigureAwait(false);
     }
 
     private async Task ImportFileAsync(string filePath)
     {
         var fileName = Path.GetFileName(filePath);
-        var extension = Path.GetExtension(filePath);
-
-        var mod = extension is ".dll" or ".disabled"
-            ? await ModLocalService.LoadModFromPathAsync(filePath).ConfigureAwait(false)
-            : null;
-
-        if (mod is null && extension is not ".dll")
-        {
-            Logger.ZLogWarning($"Ignored dropped file (not a mod or lib): {fileName}");
-            NotificationService.ErrorLight(Notification_Content_Mod_Import_Unsupported, fileName);
-            return;
-        }
 
         try
         {
-            if (mod is not null)
+            if (ModFiles.IsModFile(filePath)
+                && await ModLocalService.LoadModFromPathAsync(filePath).ConfigureAwait(false) is { } mod)
             {
                 ImportMod(mod, filePath);
             }
-            else
+            else if (Path.GetExtension(filePath) is ModFiles.DllExtension)
             {
                 await ImportLibAsync(filePath).ConfigureAwait(false);
+            }
+            else
+            {
+                Logger.ZLogWarning($"Ignored dropped file (not a mod or lib): {fileName}");
+                NotificationService.ErrorLight(Notification_Content_Mod_Import_Unsupported, fileName);
             }
         }
         catch (Exception ex)
@@ -48,8 +42,7 @@ internal sealed partial class ModManageService
 
     private void ImportMod(ModDto mod, string filePath)
     {
-        var cached = _sourceCache.Lookup(mod.Name).ValueOrDefault();
-        var installed = cached is { IsLocal: true } ? cached : null;
+        var installed = FindModByName(mod.Name) is { IsLocal: true } cached ? cached : null;
 
         if (installed is not null && mod.LocalVersion.ComparePrecedenceTo(installed.LocalVersion) <= 0)
         {
@@ -65,7 +58,7 @@ internal sealed partial class ModManageService
             return;
         }
 
-        CacheImportedMod(mod, cached);
+        CacheLocalMod(mod);
 
         Logger.ZLogInformation($"Imported mod {mod.Name} from {Path.GetFileName(filePath)}");
         NotificationService.SuccessLight(Notification_Content_Mod_Import_Success, mod.Name);
@@ -104,27 +97,5 @@ internal sealed partial class ModManageService
         }
 
         return true;
-    }
-
-    private void CacheImportedMod(ModDto localMod, ModDto? cached)
-    {
-        if (cached is not { HasDownloadSource: true })
-        {
-            _sourceCache.AddOrUpdate(localMod);
-            return;
-        }
-
-        cached.FileNameWithoutExtension = localMod.FileNameWithoutExtension;
-        cached.LocalVersion = localMod.LocalVersion;
-        cached.IsDisabled = localMod.IsDisabled;
-        cached.State = DetermineModState(localMod, cached);
-
-        CheckConfigFile(cached);
-        if (!cached.IsDisabled)
-        {
-            CheckLibDependencies(cached);
-        }
-
-        _sourceCache.AddOrUpdate(cached);
     }
 }

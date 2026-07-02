@@ -1,5 +1,6 @@
 global using System.Text.Json.Serialization;
 global using CommunityToolkit.Mvvm.ComponentModel;
+global using Euterpe.Localization;
 global using Euterpe.Models.Auth;
 global using Euterpe.Models.Charts;
 global using Euterpe.Models.Common;

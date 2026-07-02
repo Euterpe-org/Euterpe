@@ -439,6 +439,15 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>有更新</value>
   </data>
+  <data name="ModIncompatibleReason_ConflictingMod" xml:space="preserve">
+    <value>与已启用的 Mod 冲突：{0}</value>
+  </data>
+  <data name="ModIncompatibleReason_GameVersion" xml:space="preserve">
+    <value>需要游戏版本 {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_MelonLoader" xml:space="preserve">
+    <value>需要 MelonLoader {0}</value>
+  </data>
   <data name="ModInfo_Author" xml:space="preserve">
     <value>作者</value>
   </data>
