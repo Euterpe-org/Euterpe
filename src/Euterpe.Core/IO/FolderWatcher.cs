@@ -7,19 +7,19 @@ namespace Euterpe.Core;
 internal sealed class FolderWatcher : IDisposable
 {
     private static readonly TimeSpan DefaultDebounce = TimeSpan.FromMilliseconds(400);
-
-    private readonly Lock _gate = new();
-    private readonly List<FileSystemWatcher> _watchers = [];
-    private readonly bool _includeSubdirectories;
-    private readonly Func<Task> _reconcileAsync;
-    private readonly Func<string, bool> _isRelevantChange;
     private readonly TimeSpan _debounce;
     private readonly Timer _debounceTimer;
+
+    private readonly Lock _gate = new();
+    private readonly bool _includeSubdirectories;
+    private readonly Func<string, bool> _isRelevantChange;
     private readonly ILogger _logger;
+    private readonly Func<Task> _reconcileAsync;
+    private readonly List<FileSystemWatcher> _watchers = [];
+    private bool _disposed;
 
     private bool _reconciling;
     private bool _rerunRequested;
-    private bool _disposed;
 
     public FolderWatcher(
         IReadOnlyList<string> roots,
@@ -32,7 +32,7 @@ internal sealed class FolderWatcher : IDisposable
         _includeSubdirectories = includeSubdirectories;
         _reconcileAsync = reconcileAsync;
         _logger = logger;
-        _isRelevantChange = isRelevantChange ?? (static (string _) => true);
+        _isRelevantChange = isRelevantChange ?? (static _ => true);
         _debounce = debounce ?? DefaultDebounce;
         _debounceTimer = new Timer(static state => ((FolderWatcher)state!).OnDebounceElapsed(), this, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
 
@@ -40,6 +40,28 @@ internal sealed class FolderWatcher : IDisposable
         {
             Directory.CreateDirectory(root);
             _watchers.Add(CreateWatcher(root));
+        }
+    }
+
+    public void Dispose()
+    {
+        List<FileSystemWatcher> watchers;
+        lock (_gate)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            _disposed = true;
+            watchers = [.. _watchers];
+            _watchers.Clear();
+        }
+
+        _debounceTimer.Dispose();
+        foreach (var watcher in watchers)
+        {
+            watcher.Dispose();
         }
     }
 
@@ -102,13 +124,16 @@ internal sealed class FolderWatcher : IDisposable
             {
                 return;
             }
+
             if (_reconciling)
             {
                 _rerunRequested = true;
                 return;
             }
+
             _reconciling = true;
         }
+
         _ = RunReconcileAsync();
     }
 
@@ -130,6 +155,7 @@ internal sealed class FolderWatcher : IDisposable
             rerun = _rerunRequested;
             _rerunRequested = false;
         }
+
         if (rerun)
         {
             ScheduleReconcile();
@@ -157,27 +183,6 @@ internal sealed class FolderWatcher : IDisposable
             {
                 _logger.ZLogError(ex, $"Failed to re-arm the watcher on {root}");
             }
-        }
-    }
-
-    public void Dispose()
-    {
-        List<FileSystemWatcher> watchers;
-        lock (_gate)
-        {
-            if (_disposed)
-            {
-                return;
-            }
-            _disposed = true;
-            watchers = [.. _watchers];
-            _watchers.Clear();
-        }
-
-        _debounceTimer.Dispose();
-        foreach (var watcher in watchers)
-        {
-            watcher.Dispose();
         }
     }
 }

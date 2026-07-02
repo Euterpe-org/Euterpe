@@ -1,5 +1,3 @@
-using TUnit.Mocks.Logging;
-
 namespace Euterpe.Tests.Core;
 
 [Category("FolderWatcherTests")]
@@ -24,7 +22,7 @@ public sealed class FolderWatcherTest
         {
             watcher = new FolderWatcher(
                 [root],
-                includeSubdirectories: false,
+                false,
                 () =>
                 {
                     reconciled.TrySetResult();
@@ -40,7 +38,7 @@ public sealed class FolderWatcherTest
         finally
         {
             watcher?.Dispose();
-            Directory.Delete(root, recursive: true);
+            Directory.Delete(root, true);
         }
     }
 
@@ -56,7 +54,7 @@ public sealed class FolderWatcherTest
         {
             watcher = new FolderWatcher(
                 [root],
-                includeSubdirectories: false,
+                false,
                 () =>
                 {
                     Interlocked.Increment(ref reconcileCount);
@@ -64,8 +62,8 @@ public sealed class FolderWatcherTest
                     return Task.CompletedTask;
                 },
                 Mock.Logger<FolderWatcher>(),
-                isRelevantChange: static path => path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase),
-                debounce: TestDebounce);
+                static path => path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase),
+                TestDebounce);
 
             WriteFile(root, "notes.txt");
             await Task.Delay(TestDebounce * 6);
@@ -78,7 +76,7 @@ public sealed class FolderWatcherTest
         finally
         {
             watcher?.Dispose();
-            Directory.Delete(root, recursive: true);
+            Directory.Delete(root, true);
         }
     }
 
@@ -94,7 +92,7 @@ public sealed class FolderWatcherTest
         {
             watcher = new FolderWatcher(
                 [root],
-                includeSubdirectories: false,
+                false,
                 () =>
                 {
                     Interlocked.Increment(ref reconcileCount);
@@ -116,7 +114,7 @@ public sealed class FolderWatcherTest
         finally
         {
             watcher?.Dispose();
-            Directory.Delete(root, recursive: true);
+            Directory.Delete(root, true);
         }
     }
 
@@ -132,7 +130,7 @@ public sealed class FolderWatcherTest
         {
             watcher = new FolderWatcher(
                 [root],
-                includeSubdirectories: false,
+                false,
                 () =>
                 {
                     if (Interlocked.Increment(ref reconcileCount) == 1)
@@ -155,7 +153,7 @@ public sealed class FolderWatcherTest
         finally
         {
             watcher?.Dispose();
-            Directory.Delete(root, recursive: true);
+            Directory.Delete(root, true);
         }
     }
 
@@ -173,7 +171,7 @@ public sealed class FolderWatcherTest
         {
             watcher = new FolderWatcher(
                 [root],
-                includeSubdirectories: false,
+                false,
                 async () =>
                 {
                     if (Interlocked.Increment(ref reconcileCount) == 1)
@@ -200,7 +198,7 @@ public sealed class FolderWatcherTest
         finally
         {
             watcher?.Dispose();
-            Directory.Delete(root, recursive: true);
+            Directory.Delete(root, true);
         }
     }
 }

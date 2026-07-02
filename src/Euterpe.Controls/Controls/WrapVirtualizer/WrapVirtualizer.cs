@@ -21,9 +21,9 @@ public sealed class WrapVirtualizer : TemplatedControl
         AvaloniaProperty.RegisterDirect<WrapVirtualizer, IReadOnlyList<WrapRow>>(nameof(Rows), o => o.Rows);
 
     private readonly AvaloniaList<WrapRow> _rows = [];
-    private INotifyCollectionChanged? _subscription;
     private bool _attached;
     private int _columns = 1;
+    private INotifyCollectionChanged? _subscription;
 
     public IEnumerable? ItemsSource
     {

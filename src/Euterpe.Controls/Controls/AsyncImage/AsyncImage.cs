@@ -25,10 +25,11 @@ public sealed class AsyncImage : TemplatedControl
     public static readonly StyledProperty<double> DecodeHeightProperty =
         AvaloniaProperty.Register<AsyncImage, double>(nameof(DecodeHeight), double.NaN);
 
-    private Image? _imagePart;
-    private Image? _placeholderPart;
     private Bitmap? _currentBitmap;
+
+    private Image? _imagePart;
     private CancellationTokenSource? _loadCts;
+    private Image? _placeholderPart;
     private bool _reloadOnAttach;
 
     public string? Source

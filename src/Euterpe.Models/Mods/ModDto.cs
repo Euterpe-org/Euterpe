@@ -13,7 +13,6 @@ public sealed partial class ModDto : ObservableObject
         IsDisabled = true;
     }
 
-    // Downloads are SHA-verified, so the fresh local file is known to match the catalog file.
     public void AddLocalInfo()
     {
         LocalVersion = Version;

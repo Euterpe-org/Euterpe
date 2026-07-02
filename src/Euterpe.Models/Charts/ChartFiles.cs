@@ -57,6 +57,6 @@ public static class ChartFiles
 
         var stem = Path.GetFileNameWithoutExtension(fileName.AsSpan());
         return stem.StartsWith(MapPrefix, StringComparison.OrdinalIgnoreCase)
-            && int.TryParse(stem[MapPrefix.Length..], out _);
+               && int.TryParse(stem[MapPrefix.Length..], out _);
     }
 }

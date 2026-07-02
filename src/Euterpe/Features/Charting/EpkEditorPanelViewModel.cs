@@ -7,10 +7,8 @@ namespace Euterpe.Features.Charting;
 [AppSingleton]
 public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 {
-    private Dictionary<string, ManifestMap> _originalMaps = null!;
     private Dictionary<string, ManifestFileEntry> _files = null!;
-
-    public EpkEditorPanelViewModel() => SearchKeywords.CollectionChanged += OnChildEdited;
+    private Dictionary<string, ManifestMap> _originalMaps = null!;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
@@ -122,6 +120,8 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
 
     public string MissingFilesMessage => string.Format(XAML.EpkEditor_MissingFiles, MissingFileCount);
 
+    public EpkEditorPanelViewModel() => SearchKeywords.CollectionChanged += OnChildEdited;
+
     public event Action? CloseRequested;
     public event Action<string>? Saved;
 
@@ -157,7 +157,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
             SearchKeywords.Add(keyword);
         }
 
-        ReconcileMaps(preserveEdits: false);
+        ReconcileMaps(false);
         RefreshFilesDisplay();
 
         IsDirty = false;
@@ -174,7 +174,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
                 Scene = "scene_01",
                 Maps = new Dictionary<string, ManifestMap>(StringComparer.OrdinalIgnoreCase)
             },
-            Files = ScanFiles(folder, carryVersionsFrom: null)
+            Files = ScanFiles(folder, null)
         });
 
     [RelayCommand(CanExecute = nameof(CanSave))]
@@ -209,7 +209,7 @@ public sealed partial class EpkEditorPanelViewModel : ViewModelBase
     private void RefreshFiles()
     {
         _files = ScanFiles(FolderPath, _files);
-        ReconcileMaps(preserveEdits: true);
+        ReconcileMaps(true);
         RefreshFilesDisplay();
         IsDirty = true;
     }

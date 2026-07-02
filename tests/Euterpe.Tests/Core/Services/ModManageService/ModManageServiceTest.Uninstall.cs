@@ -54,8 +54,8 @@ public sealed partial class ModManageServiceTest
         var sut = CreateModManageService(
             CreateGame(melonLoaderVersion: "0.4.0"),
             DownloadManagerWith(CreateWebMod(melonVersion: "0.5.0")),
-            fileSystemService: fileSystemServiceMock,
-            modLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
+            fileSystemServiceMock,
+            LocalServiceWith((TestModFilePath, CreateInstalledMod())));
         await sut.InitializeModsAsync();
 
         var mod = sut.FindModByName(TestModName)!;
@@ -76,7 +76,7 @@ public sealed partial class ModManageServiceTest
         fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(
-                CreateWebMod("ModA", version: "2.0.0", incompatibleMods: ["ModB"]),
+                CreateWebMod("ModA", "2.0.0", incompatibleMods: ["ModB"]),
                 CreateWebMod("ModB")),
             fileSystemService: fileSystemServiceMock,
             modLocalService: LocalServiceWith(

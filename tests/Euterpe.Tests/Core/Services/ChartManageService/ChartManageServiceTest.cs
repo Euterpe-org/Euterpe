@@ -1,6 +1,5 @@
 using DynamicData;
 using Euterpe.Models.Charts.CustomAlbums;
-using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
 
@@ -66,18 +65,14 @@ public sealed partial class ChartManageServiceTest
             Manifest = new Manifest
             {
                 Schema = Manifest.CurrentSchema,
-                Meta = new ManifestMeta { Name = name, Author = "author", Scene = "scene", Maps = new() },
-                Files = new()
+                Meta = new ManifestMeta { Name = name, Author = "author", Scene = "scene", Maps = new Dictionary<string, ManifestMap>() },
+                Files = new Dictionary<string, ManifestFileEntry>()
             }
         };
 
     private sealed class FakeChartLocalService : IChartLocalService
     {
         private readonly Dictionary<string, ChartDto> _charts = [];
-
-        public void Set(ChartDto chart) => _charts[chart.FolderPath] = chart;
-
-        public void Remove(string folderPath) => _charts.Remove(folderPath);
 
         public IEnumerable<string> GetChartFolderPaths(ChartSource source) =>
             _charts.Values.Where(chart => chart.Source == source).Select(chart => chart.FolderPath);
@@ -88,5 +83,9 @@ public sealed partial class ChartManageServiceTest
         public CustomAlbumSource CreateCustomAlbumSource(string path) => throw new NotSupportedException();
 
         public CustomAlbumSource[] GetCustomAlbumsSources() => throw new NotSupportedException();
+
+        public void Set(ChartDto chart) => _charts[chart.FolderPath] = chart;
+
+        public void Remove(string folderPath) => _charts.Remove(folderPath);
     }
 }
