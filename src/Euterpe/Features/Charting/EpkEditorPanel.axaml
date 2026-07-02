@@ -101,7 +101,6 @@
                             Opacity="0.4"
                             Width="18" />
                         <e:CoverImage
-                            Background="{Binding CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                             DecodeWidth="48"
                             Source="{Binding CoverPath}"
                             Stretch="UniformToFill" />
@@ -142,7 +141,6 @@
                     Command="{Binding OpenFolderCommand}"
                     CommandParameter="{Binding FolderPath}"
                     Grid.Column="3"
-                    IsEnabled="{Binding FolderPath, Converter={x:Static ObjectConverters.IsNotNull}}"
                     Padding="8"
                     ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.EpkEditor_OpenFolder}}"
                     VerticalAlignment="Center">
