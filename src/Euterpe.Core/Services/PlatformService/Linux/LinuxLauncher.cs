@@ -30,10 +30,20 @@ internal sealed class LinuxLauncher : IPlatformLauncher
         Logger.ZLogInformation($"Open file: {filePath}");
     }
 
-    public async Task OpenUriAsync(string uri)
+    public Task OpenUriAsync(string uri)
     {
-        await TopLevel.Launcher.LaunchUriAsync(new Uri(uri)).ConfigureAwait(false);
+        // Avalonia's Linux launcher corrupts uri query strings via broken shell escaping (AvaloniaUI/Avalonia#20230)
+        Process.Start(
+            new ProcessStartInfo("xdg-open")
+            {
+                ArgumentList = { uri },
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        );
+
         Logger.ZLogInformation($"Open uri: {uri}");
+        return Task.CompletedTask;
     }
 
     #region Injections
