@@ -39,28 +39,17 @@ internal sealed partial class ChartManageService
 
             if (outcome is MigrationOutcome.Migrated)
             {
-                await AddImportedChartAsync(destination).ConfigureAwait(false);
+                await CacheLocalChartAsync(destination, ChartSource.Offline).ConfigureAwait(false);
             }
 
-            return ReportOutcome(outcome, name, path);
+            NotifyImportOutcome(outcome, name, path);
+            return outcome is MigrationOutcome.Migrated;
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to import chart from {path}");
             NotificationService.ErrorLight(Notification_Content_Chart_Import_Failed, name);
             return false;
-        }
-    }
-
-    private async Task AddImportedChartAsync(string chartFolder)
-    {
-        if (await ChartLocalService.LoadChartFromPathAsync(chartFolder, ChartSource.Offline).ConfigureAwait(false) is { } chart)
-        {
-            _sourceCache.AddOrUpdate(chart);
-        }
-        else
-        {
-            Logger.ZLogWarning($"Imported chart at {chartFolder} could not be loaded into the cache");
         }
     }
 
@@ -105,21 +94,21 @@ internal sealed partial class ChartManageService
         }
     }
 
-    private bool ReportOutcome(MigrationOutcome outcome, string name, string path)
+    private void NotifyImportOutcome(MigrationOutcome outcome, string name, string path)
     {
         switch (outcome)
         {
             case MigrationOutcome.Migrated:
                 Logger.ZLogInformation($"Imported chart {name} from {path}");
                 NotificationService.SuccessLight(Notification_Content_Chart_Import_Success, name);
-                return true;
+                break;
             case MigrationOutcome.Unsupported:
                 Logger.ZLogInformation($"Import of {name} skipped: chart cannot be migrated");
                 NotificationService.ErrorLight(Notification_Content_Chart_Import_Unmigratable, name);
-                return false;
+                break;
             case MigrationOutcome.Failed:
                 NotificationService.ErrorLight(Notification_Content_Chart_Import_Failed, name);
-                return false;
+                break;
             default:
                 throw new UnreachableException();
         }

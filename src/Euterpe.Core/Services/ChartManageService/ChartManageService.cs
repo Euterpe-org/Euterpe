@@ -8,49 +8,40 @@ internal sealed partial class ChartManageService : IChartManageService, IDisposa
     private readonly SingleFlight<string> _singleFlight = new();
     private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderPath);
 
-    public ChartManageService() => _initTask = new Lazy<Task>(LoadChartsCoreAsync, LazyThreadSafetyMode.ExecutionAndPublication);
+    public ChartManageService() => _initTask = new Lazy<Task>(InitializeCoreAsync, LazyThreadSafetyMode.ExecutionAndPublication);
 
     public IObservable<IChangeSet<ChartDto, string>> Connect() => _sourceCache.Connect();
 
     public Task InitializeChartsAsync() => _initTask.Value;
 
-    public Task DownloadChartAsync(string chartId, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
-    {
-        if (GetOnlineCharts().Any(chart => chart.FolderName == chartId))
-        {
-            return UpdateChartAsync(chartId, cancellationToken);
-        }
+    public Task DownloadChartAsync(string cid, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default) =>
+        FindOnlineChartByCid(cid) is null
+            ? RunExclusiveAsync(cid, () => DownloadChartCoreAsync(cid, progress, cancellationToken))
+            : UpdateChartAsync(cid, cancellationToken);
 
-        return RunExclusiveAsync(chartId, () => DownloadChartCoreAsync(chartId, progress, cancellationToken));
-    }
-
-    public async Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default)
+    public async Task UpdateChartAsync(string cid, CancellationToken cancellationToken = default)
     {
-        var chart = GetOnlineCharts().FirstOrDefault(c => c.FolderName == chartId);
-        if (chart is null)
+        if (FindOnlineChartByCid(cid) is not { } chart)
         {
-            Logger.ZLogWarning($"Update requested for unknown online chart {chartId}");
-            NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, chartId);
+            Logger.ZLogWarning($"Update requested for unknown online chart {cid}");
+            NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, cid);
             return;
         }
 
         var results = await CheckAndApplyUpdatesAsync([chart], cancellationToken).ConfigureAwait(false);
-        if (results is [])
+        if (results is not [var (success, displayName)])
         {
             NotificationService.NoticeLight(Notification_Content_Chart_Update_UpToDate, chart.Manifest.Meta.Name);
             return;
         }
 
-        foreach (var (success, displayName) in results)
+        if (success)
         {
-            if (success)
-            {
-                NotificationService.SuccessLight(Notification_Content_Chart_Update_Success, displayName);
-            }
-            else
-            {
-                NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, displayName);
-            }
+            NotificationService.SuccessLight(Notification_Content_Chart_Update_Success, displayName);
+        }
+        else
+        {
+            NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, displayName);
         }
     }
 

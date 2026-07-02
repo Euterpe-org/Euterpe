@@ -121,9 +121,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             }
         });
 
-    public Task DownloadChartAsync(string chartId) =>
+    public Task DownloadChartAsync(string cid) =>
         RunWithProgressDialogAsync(ChartManage_Downloading, ChartManage_DownloadingHint, indeterminate: true, progress =>
-            ChartManageService.DownloadChartAsync(chartId, progress));
+            ChartManageService.DownloadChartAsync(cid, progress));
 
     [RelayCommand]
     private async Task ImportChartsAsync(IReadOnlyList<IStorageItem> files)

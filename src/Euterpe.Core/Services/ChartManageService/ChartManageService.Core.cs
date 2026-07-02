@@ -2,36 +2,32 @@ namespace Euterpe.Core;
 
 internal sealed partial class ChartManageService
 {
-    private async Task LoadChartsCoreAsync()
+    private async Task InitializeCoreAsync()
     {
-        await ReconcileChartsAsync().ConfigureAwait(false);
+        _sourceCache.AddOrUpdate(await LoadLocalChartsAsync(GetLocalChartFolders()).ConfigureAwait(false));
         Logger.ZLogInformation($"All charts loaded");
 
         StartWatching();
     }
 
-    private async Task DownloadChartCoreAsync(string chartId, IProgress<BatchProgress>? progress, CancellationToken cancellationToken)
+    private async Task DownloadChartCoreAsync(string cid, IProgress<BatchProgress>? progress, CancellationToken cancellationToken)
     {
         try
         {
-            var folderPath = await GameDownloadManager.DownloadChartAsync(chartId, progress, cancellationToken).ConfigureAwait(false);
-
-            var chart = await ChartLocalService.LoadChartFromPathAsync(folderPath, ChartSource.Online).ConfigureAwait(false);
-            if (chart is null)
+            var folderPath = await GameDownloadManager.DownloadChartAsync(cid, progress, cancellationToken).ConfigureAwait(false);
+            if (await CacheLocalChartAsync(folderPath, ChartSource.Online).ConfigureAwait(false) is not { } chart)
             {
-                Logger.ZLogWarning($"Downloaded chart {chartId} but failed to load it from {folderPath}");
-                NotificationService.ErrorLight(Notification_Content_Chart_Download_Failed, chartId);
+                NotificationService.ErrorLight(Notification_Content_Chart_Download_Failed, cid);
                 return;
             }
 
-            _sourceCache.AddOrUpdate(chart);
-            Logger.ZLogInformation($"Chart {chartId} downloaded and added to cache");
+            Logger.ZLogInformation($"Chart {cid} downloaded and added to cache");
             NotificationService.SuccessLight(Notification_Content_Chart_Download_Success, chart.Manifest.Meta.Name);
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download chart {chartId}");
-            NotificationService.ErrorLight(Notification_Content_Chart_Download_Failed, chartId);
+            Logger.ZLogError(ex, $"Failed to download chart {cid}");
+            NotificationService.ErrorLight(Notification_Content_Chart_Download_Failed, cid);
         }
     }
 
@@ -40,15 +36,11 @@ internal sealed partial class ChartManageService
         try
         {
             var folderPath = await GameDownloadManager.UpdateChartAsync(cid, changedFiles, deletedFiles, cancellationToken).ConfigureAwait(false);
-
-            var chart = await ChartLocalService.LoadChartFromPathAsync(folderPath, ChartSource.Online).ConfigureAwait(false);
-            if (chart is null)
+            if (await CacheLocalChartAsync(folderPath, ChartSource.Online).ConfigureAwait(false) is not { } chart)
             {
-                Logger.ZLogWarning($"Updated chart {cid} but failed to load it from {folderPath}");
                 return new ChartUpdateResult(false, cid);
             }
 
-            _sourceCache.AddOrUpdate(chart);
             Logger.ZLogInformation($"Chart {cid} updated");
             return new ChartUpdateResult(true, chart.Manifest.Meta.Name);
         }
@@ -67,9 +59,8 @@ internal sealed partial class ChartManageService
             ? chart.Manifest.Meta.Name
             : Path.GetFileName(folderPath);
 
-        if (FileSystemService.TryDeleteDirectory(folderPath, DeleteOption.IgnoreIfNotFound))
+        if (RemoveLocalChart(folderPath))
         {
-            _sourceCache.RemoveKey(folderPath);
             Logger.ZLogInformation($"Chart at {folderPath} removed");
             NotificationService.SuccessLight(Notification_Content_Chart_Remove_Success, name);
         }
@@ -92,25 +83,18 @@ internal sealed partial class ChartManageService
             return;
         }
 
-        var refreshed = await ChartLocalService.LoadChartFromPathAsync(existing.FolderPath, existing.Source).ConfigureAwait(false);
-        if (refreshed is not null)
-        {
-            _sourceCache.AddOrUpdate(refreshed);
-            Logger.ZLogInformation($"Refreshed chart at {existing.FolderPath} after manifest edit");
-        }
+        await CacheLocalChartAsync(existing.FolderPath, existing.Source).ConfigureAwait(false);
     }
 
     private Task RemoveDelistedChartCoreAsync(string cid)
     {
-        var chart = GetOnlineCharts().FirstOrDefault(c => c.FolderName == cid);
-        if (chart is null)
+        if (FindOnlineChartByCid(cid) is not { } chart)
         {
             return Task.CompletedTask;
         }
 
-        if (FileSystemService.TryDeleteDirectory(chart.FolderPath, DeleteOption.IgnoreIfNotFound))
+        if (RemoveLocalChart(chart.FolderPath))
         {
-            _sourceCache.RemoveKey(chart.FolderPath);
             Logger.ZLogInformation($"Removed delisted chart {cid}");
         }
         else
@@ -119,6 +103,30 @@ internal sealed partial class ChartManageService
         }
 
         return Task.CompletedTask;
+    }
+
+    private async Task<ChartDto?> CacheLocalChartAsync(string chartFolder, ChartSource source)
+    {
+        var chart = await ChartLocalService.LoadChartFromPathAsync(chartFolder, source).ConfigureAwait(false);
+        if (chart is null)
+        {
+            Logger.ZLogWarning($"Chart at {chartFolder} could not be loaded into the cache");
+            return null;
+        }
+
+        _sourceCache.AddOrUpdate(chart);
+        return chart;
+    }
+
+    private bool RemoveLocalChart(string folderPath)
+    {
+        if (!FileSystemService.TryDeleteDirectory(folderPath, DeleteOption.IgnoreIfNotFound))
+        {
+            return false;
+        }
+
+        _sourceCache.RemoveKey(folderPath);
+        return true;
     }
 
     private Task RunExclusiveAsync(string key, Func<Task> action) => _singleFlight.RunAsync(key, action);

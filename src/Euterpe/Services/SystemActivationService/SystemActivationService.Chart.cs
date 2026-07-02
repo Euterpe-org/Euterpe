@@ -12,16 +12,16 @@ public sealed partial class SystemActivationService
                 await ChartManagePanelViewModel.MigrateCustomAlbumsAsync().ConfigureAwait(false);
                 break;
 
-            case ["download", var chartId]:
-                await ChartManagePanelViewModel.DownloadChartAsync(chartId).ConfigureAwait(false);
+            case ["download", var cid]:
+                await ChartManagePanelViewModel.DownloadChartAsync(cid).ConfigureAwait(false);
                 break;
 
             case ["update"]:
                 await ChartManageService.UpdateAllChartsAsync().ConfigureAwait(false);
                 break;
 
-            case ["update", var chartId]:
-                await ChartManageService.UpdateChartAsync(chartId).ConfigureAwait(false);
+            case ["update", var cid]:
+                await ChartManageService.UpdateChartAsync(cid).ConfigureAwait(false);
                 break;
 
             case ["remove", var folderPath]:

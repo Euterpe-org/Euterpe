@@ -7,8 +7,8 @@ public interface IChartManageService
     Task InitializeChartsAsync();
 
     // Single-chart operations
-    Task DownloadChartAsync(string chartId, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
-    Task UpdateChartAsync(string chartId, CancellationToken cancellationToken = default);
+    Task DownloadChartAsync(string cid, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
+    Task UpdateChartAsync(string cid, CancellationToken cancellationToken = default);
     Task RemoveChartAsync(string folderPath);
     Task RefreshChartAsync(string folderPath);
 
@@ -17,7 +17,6 @@ public interface IChartManageService
     Task<int> MigrateCustomAlbumsAsync(IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
     Task<bool> ImportChartsAsync(IReadOnlyList<string> paths, CancellationToken cancellationToken = default);
 
-    // Disk reconciliation
+    // Local folder reconciliation
     Task ReconcileChartsAsync();
-    Task ReconcileChartsAsync(IReadOnlySet<string> changedFolders);
 }
