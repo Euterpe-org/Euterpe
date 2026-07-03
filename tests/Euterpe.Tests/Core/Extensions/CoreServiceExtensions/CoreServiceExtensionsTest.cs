@@ -1,8 +1,5 @@
 using Autofac;
-using Downloader;
 using Euterpe.Core.Extensions;
-using Euterpe.Core.Http.Clients;
-using Euterpe.Core.Http.Handlers;
 using Euterpe.Core.Logger;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -11,7 +8,7 @@ namespace Euterpe.Tests.Core.Extensions;
 
 [Category("CoreServiceExtensionsTests")]
 [TestSubject(typeof(CoreServiceExtensions))]
-public sealed class CoreServiceExtensionsTest
+public sealed partial class CoreServiceExtensionsTest
 {
     [Test]
     public async Task RegisterLogger_RegistersLoggerServices()
@@ -22,50 +19,6 @@ public sealed class CoreServiceExtensionsTest
         using var _ = Assert.Multiple();
         await Assert.That(services.Any(s => s.ServiceType == typeof(LiveLogProcessor))).IsTrue();
         await Assert.That(services.Any(s => s.ServiceType == typeof(ILoggerFactory))).IsTrue();
-    }
-
-    [Test]
-    public async Task RegisterHttpClients_RegistersAllHandlersAndDownloadService()
-    {
-        var services = new ServiceCollection();
-        services.RegisterHttpClients();
-        var provider = services.BuildServiceProvider();
-
-        using var _ = Assert.Multiple();
-
-        await Assert.That(provider.GetService<XRequestIdHandler>()).IsNotNull();
-        await Assert.That(provider.GetService<AuthHeaderHandler>()).IsNotNull();
-        await Assert.That(provider.GetService<LoggingHandler>()).IsNotNull();
-        await Assert.That(provider.GetService<ServerErrorHandler>()).IsNotNull();
-        await Assert.That(provider.GetService<TokenQueryHandler>()).IsNotNull();
-        await Assert.That(services.Any(s => s.ServiceType == typeof(Func<DownloadService>))).IsTrue();
-        await Assert.That(provider.GetService<IHttpClientFactory>()).IsNotNull();
-    }
-
-    [Test]
-    public async Task RegisterHttpClients_RegistersAllRefitClientServiceDescriptors()
-    {
-        // Refit clients can't be resolved in the test assembly (no generated clients), so assert only the registered descriptors.
-        var services = new ServiceCollection();
-        services.RegisterHttpClients();
-
-        Type[] expectedRefitClients =
-        [
-            typeof(IEuterpeAuthClient),
-            typeof(IEuterpeAccountClient),
-            typeof(IEuterpeDistributionClient),
-            typeof(IEuterpeModClient),
-            typeof(IEuterpeChartClient),
-            typeof(ITelemetryApiClient)
-        ];
-
-        using var _ = Assert.Multiple();
-        foreach (var t in expectedRefitClients)
-        {
-            await Assert.That(services.Any(s => s.ServiceType == t)).IsTrue();
-        }
-
-        await Assert.That(services.Any(s => s.ServiceType == typeof(EuterpeDownloadClient))).IsTrue();
     }
 
     [Test]
