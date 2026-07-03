@@ -4,50 +4,59 @@ namespace Euterpe;
 
 internal static class CrashHandler
 {
-    private static int CrashShowing;
+    private const int ReportStormLimit = 100;
+    private static int ReportsSinceLastDialogClose;
+    private static bool CrashWindowShowing;
 
-    internal static bool ReportException(Exception ex)
+    internal static void ReportException(Exception ex)
     {
         Resolve<ILogger<App>>().ZLogCritical(ex, $"Unhandled exception");
 
         if (Resolve<Config>().IgnoreException)
         {
-            return true;
+            return;
         }
 
-        if (Interlocked.Exchange(ref CrashShowing, 1) is 1)
+        if (Interlocked.Increment(ref ReportsSinceLastDialogClose) > ReportStormLimit)
         {
             Environment.Exit(1);
-            return false;
         }
 
         Dispatcher.UIThread.Post(() => ShowCrashDialogAsync(ex).SafeFireAndForget());
-        return true;
     }
 
     private static async Task ShowCrashDialogAsync(Exception ex)
     {
-        var vm = Resolve<CrashWindowViewModel>();
-        vm.SetException(ex);
+        if (CrashWindowShowing)
+        {
+            return;
+        }
 
+        CrashWindowShowing = true;
+
+        bool shouldContinue;
         try
         {
-            var shouldContinue = await Resolve<IDialogService>()
+            var vm = Resolve<CrashWindowViewModel>();
+            vm.SetException(ex);
+
+            shouldContinue = await Resolve<IDialogService>()
                 .ShowWindowDialogAsync<CrashWindow, CrashWindowViewModel, bool>(vm)
                 .ConfigureAwait(true);
-
-            if (!shouldContinue)
-            {
-                Environment.Exit(1);
-            }
         }
         catch
         {
-            Environment.Exit(1);
+            shouldContinue = false;
         }
         finally
         {
-            Interlocked.Exchange(ref CrashShowing, 0);
+            CrashWindowShowing = false;
+            Interlocked.Exchange(ref ReportsSinceLastDialogClose, 0);
+        }
+
+        if (!shouldContinue)
+        {
+            Environment.Exit(1);
         }
     }
 }

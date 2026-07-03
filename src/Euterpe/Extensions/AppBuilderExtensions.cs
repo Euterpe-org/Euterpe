@@ -2,15 +2,12 @@ namespace Euterpe.Extensions;
 
 public static class AppBuilderExtensions
 {
-    public static AppBuilder HandleUIThreadException(this AppBuilder builder, Action<DispatcherUnhandledExceptionEventArgs> action)
+    public static AppBuilder HandleUIThreadException(this AppBuilder builder, Action<Exception> handler)
     {
-        return builder.AfterSetup(_ =>
+        return builder.AfterSetup(_ => Dispatcher.UIThread.UnhandledException += (_, args) =>
         {
-            Observable.FromEvent<DispatcherUnhandledExceptionEventHandler, DispatcherUnhandledExceptionEventArgs>(
-                    handler => (_, args) => handler(args),
-                    handler => Dispatcher.UIThread.UnhandledException += handler,
-                    handler => Dispatcher.UIThread.UnhandledException -= handler)
-                .Subscribe(action);
+            handler(args.Exception);
+            args.Handled = true;
         });
     }
 }
