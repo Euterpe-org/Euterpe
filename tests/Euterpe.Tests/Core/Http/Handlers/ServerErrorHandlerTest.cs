@@ -1,6 +1,5 @@
 using System.Net;
 using Euterpe.Core.Http.Handlers;
-using Euterpe.Tests.TestSupport;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -25,7 +24,8 @@ public sealed class ServerErrorHandlerTest
     {
         var notification = INotificationService.Mock();
         var logger = Mock.Logger<ServerErrorNotifier>();
-        var inner = new FakeHttpMessageHandler();
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().Respond();
         using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 
@@ -41,7 +41,8 @@ public sealed class ServerErrorHandlerTest
     {
         var notification = INotificationService.Mock();
         var logger = Mock.Logger<ServerErrorNotifier>();
-        var inner = new FakeHttpMessageHandler(HttpStatusCode.NotFound);
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().Respond(HttpStatusCode.NotFound);
         using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 
@@ -55,7 +56,8 @@ public sealed class ServerErrorHandlerTest
     {
         var notification = INotificationService.Mock();
         var logger = Mock.Logger<ServerErrorNotifier>();
-        var inner = new FakeHttpMessageHandler(HttpStatusCode.InternalServerError);
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().Respond(HttpStatusCode.InternalServerError);
         using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 
@@ -74,7 +76,8 @@ public sealed class ServerErrorHandlerTest
     {
         var notification = INotificationService.Mock();
         var logger = Mock.Logger<ServerErrorNotifier>();
-        var inner = new FakeHttpMessageHandler(HttpStatusCode.BadGateway);
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().Respond(HttpStatusCode.BadGateway);
         using var handler = CreateHandler(notification, logger, inner);
         using var client = new HttpClient(handler);
 

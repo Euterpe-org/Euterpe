@@ -1,7 +1,6 @@
 using System.Net;
 using System.Web;
 using Euterpe.Core.Http.Handlers;
-using Euterpe.Tests.TestSupport;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Euterpe.Tests.Core.Http.Handlers;
@@ -22,14 +21,14 @@ public sealed class TokenQueryHandlerTest
     {
         var auth = IAuthService.Mock();
         auth.GetAccessTokenAsync().Returns("token-abc");
-        var inner = new FakeHttpMessageHandler();
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().Respond();
         using var handler = new TokenQueryHandler(BuildServices(auth)) { InnerHandler = inner };
         using var client = new HttpClient(handler);
 
         await client.GetAsync("https://example.test/files/song");
 
-        var request = inner.Requests.Single();
-        var query = HttpUtility.ParseQueryString(request.RequestUri!.Query);
+        var query = HttpUtility.ParseQueryString(inner.Requests.Single().RequestUri!.Query);
         await Assert.That(query["t"]).IsEqualTo("token-abc");
     }
 
@@ -38,14 +37,14 @@ public sealed class TokenQueryHandlerTest
     {
         var auth = IAuthService.Mock();
         auth.GetAccessTokenAsync().Returns("tok");
-        var inner = new FakeHttpMessageHandler();
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().Respond();
         using var handler = new TokenQueryHandler(BuildServices(auth)) { InnerHandler = inner };
         using var client = new HttpClient(handler);
 
         await client.GetAsync("https://example.test/files?id=42&kind=audio");
 
-        var request = inner.Requests.Single();
-        var query = HttpUtility.ParseQueryString(request.RequestUri!.Query);
+        var query = HttpUtility.ParseQueryString(inner.Requests.Single().RequestUri!.Query);
         using var assertions = Assert.Multiple();
         await Assert.That(query["id"]).IsEqualTo("42");
         await Assert.That(query["kind"]).IsEqualTo("audio");
@@ -58,18 +57,20 @@ public sealed class TokenQueryHandlerTest
         var auth = IAuthService.Mock();
         auth.GetAccessTokenAsync().Returns("expired");
         auth.RenewAccessTokenAsync(Any<string>()).Returns("fresh");
-        var inner = new FakeHttpMessageHandler((_, n) =>
-            new HttpResponseMessage(n is 1 ? HttpStatusCode.Unauthorized : HttpStatusCode.OK));
+        var inner = Mock.HttpHandler();
+        var sequence = inner.OnAnyRequest();
+        sequence.Respond(HttpStatusCode.Unauthorized);
+        sequence.Respond();
         using var handler = new TokenQueryHandler(BuildServices(auth)) { InnerHandler = inner };
         using var client = new HttpClient(handler);
 
         var response = await client.GetAsync("https://example.test/files/song");
 
-        var firstQuery = HttpUtility.ParseQueryString(inner.RequestUris[0]!.Query);
-        var secondQuery = HttpUtility.ParseQueryString(inner.RequestUris[1]!.Query);
+        var firstQuery = HttpUtility.ParseQueryString(inner.Requests[0].RequestUri!.Query);
+        var secondQuery = HttpUtility.ParseQueryString(inner.Requests[1].RequestUri!.Query);
         using var assertions = Assert.Multiple();
         await Assert.That(response.StatusCode).IsEqualTo(HttpStatusCode.OK);
-        await Assert.That(inner.CallCount).IsEqualTo(2);
+        await Assert.That(inner.Requests.Count).IsEqualTo(2);
         await Assert.That(firstQuery["t"]).IsEqualTo("expired");
         await Assert.That(secondQuery["t"]).IsEqualTo("fresh");
         auth.RenewAccessTokenAsync(Any<string>()).WasCalled(Times.Once);
@@ -80,14 +81,15 @@ public sealed class TokenQueryHandlerTest
     {
         var auth = IAuthService.Mock();
         auth.GetAccessTokenAsync().Returns("tok");
-        var inner = new FakeHttpMessageHandler(HttpStatusCode.NotFound);
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().Respond(HttpStatusCode.NotFound);
         using var handler = new TokenQueryHandler(BuildServices(auth)) { InnerHandler = inner };
         using var client = new HttpClient(handler);
 
         await client.GetAsync("https://example.test/files/missing");
 
         using var assertions = Assert.Multiple();
-        await Assert.That(inner.CallCount).IsEqualTo(1);
+        await Assert.That(inner.Requests.Count).IsEqualTo(1);
         auth.RenewAccessTokenAsync(Any<string>()).WasCalled(Times.Never);
     }
 }

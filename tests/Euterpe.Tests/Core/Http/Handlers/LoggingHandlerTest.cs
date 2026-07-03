@@ -1,6 +1,5 @@
 using System.Net;
 using Euterpe.Core.Http.Handlers;
-using Euterpe.Tests.TestSupport;
 using Microsoft.Extensions.Logging;
 
 namespace Euterpe.Tests.Core.Http.Handlers;
@@ -12,7 +11,8 @@ public sealed class LoggingHandlerTest
     [Test]
     public async Task SendAsync_SuccessResponse_DoesNotLog()
     {
-        var inner = new FakeHttpMessageHandler(HttpStatusCode.OK, "ok");
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().RespondWithString("ok");
         var logger = Mock.Logger<LoggingHandler>();
         using var handler = new LoggingHandler(logger) { InnerHandler = inner };
         using var client = new HttpClient(handler);
@@ -27,7 +27,8 @@ public sealed class LoggingHandlerTest
     [Test]
     public async Task SendAsync_NonSuccess_LogsWarningWithBody()
     {
-        var inner = new FakeHttpMessageHandler(HttpStatusCode.BadRequest, "bad-payload");
+        var inner = Mock.HttpHandler();
+        inner.OnAnyRequest().RespondWithString("bad-payload", HttpStatusCode.BadRequest);
         var logger = Mock.Logger<LoggingHandler>();
         using var handler = new LoggingHandler(logger) { InnerHandler = inner };
         using var client = new HttpClient(handler);
