@@ -41,6 +41,6 @@ internal static class Program
 #if DEBUG
             .WithDeveloperTools()
 #endif
-            .UseR3(ex => ReportException(ex))
-            .HandleUIThreadException(ex => ex.Handled = ReportException(ex.Exception));
+            .UseR3(ReportException)
+            .HandleUIThreadException(ReportException);
 }

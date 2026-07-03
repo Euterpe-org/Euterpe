@@ -13,17 +13,13 @@ public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
     public string EnvironmentInfo { get; } =
         $"Euterpe {DisplayVersion} · {RuntimeInformation.OSDescription.Trim()} ({RuntimeInformation.OSArchitecture}) · {RuntimeInformation.FrameworkDescription}";
 
-    [ObservableProperty]
-    public partial string CrashTime { get; set; } = string.Empty;
+    public string CrashTime { get; private set; } = string.Empty;
 
-    [ObservableProperty]
-    public partial string ExceptionType { get; set; } = string.Empty;
+    public string ExceptionType { get; private set; } = string.Empty;
 
-    [ObservableProperty]
-    public partial string ExceptionMessage { get; set; } = string.Empty;
+    public string ExceptionMessage { get; private set; } = string.Empty;
 
-    [ObservableProperty]
-    public partial string ExceptionDetails { get; set; } = string.Empty;
+    public string ExceptionDetails { get; private set; } = string.Empty;
 
     public event EventHandler<bool>? RequestClose;
     public void Close(bool result) => RequestClose?.Invoke(this, result);
@@ -41,13 +37,8 @@ public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
     {
         try
         {
-            if (TopLevel.Clipboard is null)
-            {
-                throw new InvalidOperationException("Clipboard unavailable.");
-            }
-
             var copyText = $"{EnvironmentInfo}{Environment.NewLine}{CrashTime}{Environment.NewLine}{Environment.NewLine}{ExceptionDetails}";
-            await TopLevel.Clipboard.SetTextAsync(copyText).ConfigureAwait(true);
+            await TopLevel.Clipboard!.SetTextAsync(copyText).ConfigureAwait(true);
             await MessageBoxService.SuccessAsync(MessageBox_Content_CrashDialog_CopySuccess).ConfigureAwait(true);
         }
         catch (Exception ex)
@@ -61,7 +52,7 @@ public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
     private void OpenLog() => Launcher.RevealFile(LogFilePath);
 
     [RelayCommand]
-    private async Task FeedbackAsync() => await Launcher.OpenUriAsync(FeedbackUri).ConfigureAwait(false);
+    private Task FeedbackAsync() => Launcher.OpenUriAsync(FeedbackUri);
 
     [RelayCommand]
     private void Continue() => Close(true);
