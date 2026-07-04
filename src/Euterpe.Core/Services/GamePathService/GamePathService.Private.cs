@@ -4,6 +4,7 @@ namespace Euterpe.Core;
 
 internal sealed partial class GamePathService
 {
+    [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(LibraryFolder))]
     private bool TryGetAllSteamLibraries([NotNullWhen(true)] out LibraryFolder[]? libraryFolders)
     {
         libraryFolders = null;
