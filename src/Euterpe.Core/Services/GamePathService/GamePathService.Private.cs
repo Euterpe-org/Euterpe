@@ -40,9 +40,7 @@ internal sealed partial class GamePathService
     {
         gameFolder = null;
 
-        var targetLibrary = libraryFolders
-            .FirstOrDefault(library => library.Apps.ContainsKey(appId));
-
+        var targetLibrary = libraryFolders.FirstOrDefault(library => library.Apps.ContainsKey(appId));
         if (targetLibrary is null)
         {
             Logger.ZLogWarning($"AppId {appId} not found in any Steam library.");
