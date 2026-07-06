@@ -25,7 +25,6 @@ internal static class Program
 
         Directory.CreateDirectory(AppDataFolder);
         CleanupLogFiles();
-        CleanupBackupFiles();
         ConfigureContainer();
         StartActivationPipeServer();
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
