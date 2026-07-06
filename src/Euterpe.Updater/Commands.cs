@@ -2,6 +2,8 @@ namespace Euterpe.Updater;
 
 public sealed class Commands
 {
+    private const string BackupPrefix = "backup-";
+
     /// <summary>
     ///     Applies a downloaded update and relaunches the application.
     /// </summary>
@@ -47,7 +49,12 @@ public sealed class Commands
             return;
         }
 
-        var backupDirectory = Path.Combine(sourceDirectory, $"backup-{oldVersion}");
+        foreach (var directory in Directory.EnumerateDirectories(sourceDirectory, $"{BackupPrefix}*"))
+        {
+            localService.TryDeleteDirectory(directory);
+        }
+
+        var backupDirectory = Path.Combine(sourceDirectory, $"{BackupPrefix}{oldVersion}");
         try
         {
             Directory.CreateDirectory(backupDirectory);
