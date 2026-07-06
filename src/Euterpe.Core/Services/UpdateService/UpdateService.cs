@@ -27,7 +27,7 @@ internal sealed partial class UpdateService : IUpdateService
         var entry = release.Versions.Single();
         var version = SemVersion.Parse(entry.Key);
 
-        return new UpdateTarget(version, entry.Value.DownloadUrl);
+        return new UpdateTarget(version, entry.Value.DownloadUrl, entry.Value.SHA256);
     }
 
     #region Injections
