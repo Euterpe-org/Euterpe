@@ -131,9 +131,6 @@
     <value>Gagal membaca Informasi Game
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Gagal mengunduh versi {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Layanan keyring (secret-tool) tidak ditemukan. Sesi login Anda tidak dapat disimpan dan Anda harus login setiap kali.</value>
   </data>

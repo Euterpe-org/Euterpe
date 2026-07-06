@@ -131,9 +131,6 @@
     <value>Échec de la lecture des informations du jeu
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Échec du téléchargement de la version {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Aucun service de trousseau (secret-tool) n'a été trouvé. Votre session de connexion ne peut pas être enregistrée et vous devrez vous reconnecter à chaque fois.</value>
   </data>

@@ -131,9 +131,6 @@
     <value>No se pudo leer la información del juego
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Error al descargar la versión {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>No se encontró ningún servicio de llavero (secret-tool). Tu sesión no se puede guardar y tendrás que iniciar sesión cada vez.</value>
   </data>

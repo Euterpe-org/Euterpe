@@ -131,9 +131,6 @@
     <value>Reading Game Information failed
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Failed to download version {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>No keyring service (secret-tool) was found. Your login session cannot be saved and you will need to log in again each time.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>MD_DIRECTORY environment variable successfully set to {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>Failed to check for updates, please try again later</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>Failed to update to version {0}</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Failed to play audio</value>

@@ -131,9 +131,6 @@
     <value>Lesen der Spielinformationen fehlgeschlagen
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Version {0} konnte nicht heruntergeladen werden</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Es wurde kein Schlüsselbundservice (secret-tool) gefunden. Deine Anmeldesitzung kann nicht gespeichert werden, und du musst dich bei jedem Start erneut anmelden.</value>
   </data>

@@ -131,9 +131,6 @@
     <value>ゲーム情報の読み取りに失敗しました
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>バージョン {0} のダウンロードに失敗しました</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>キーリングサービス（secret-tool）が見つかりませんでした。ログインセッションを保存できないため、毎回ログインが必要です。</value>
   </data>

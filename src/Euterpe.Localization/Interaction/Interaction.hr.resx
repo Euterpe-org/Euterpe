@@ -131,9 +131,6 @@
     <value>Čitanje informacija o igri nije uspjelo
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Preuzimanje verzije {0} nije uspjelo</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Nije pronađena usluga privezka ključeva (secret-tool). Sesija prijave ne može biti spremljena i morat ćeš se prijaviti svaki put iznova.</value>
   </data>

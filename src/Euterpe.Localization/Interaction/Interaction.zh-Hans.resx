@@ -131,9 +131,6 @@
     <value>读取游戏信息失败
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>下载版本 {0} 失败</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>未找到密钥环服务（secret-tool）。无法保存登录会话，每次启动时均需重新登录。</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>已成功将 MD_DIRECTORY 环境变量设置为 {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>检查更新失败，请稍后重试</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>更新到版本 {0} 失败</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>音频播放失败</value>

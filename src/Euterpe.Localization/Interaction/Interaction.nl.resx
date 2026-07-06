@@ -131,9 +131,6 @@
     <value>Lezen van spelinformatie mislukt
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Versie {0} kon niet worden gedownload</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Er is geen keyring-service (secret-tool) gevonden. Uw aanmeldsessie kan niet worden opgeslagen en u moet elke keer opnieuw inloggen.</value>
   </data>

@@ -131,9 +131,6 @@
     <value>Falha ao ler informações do jogo
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Falha ao baixar a versão {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Nenhum serviço de chaveiro (secret-tool) foi encontrado. Sua sessão de login não pode ser salva e você precisará fazer login a cada vez.</value>
   </data>

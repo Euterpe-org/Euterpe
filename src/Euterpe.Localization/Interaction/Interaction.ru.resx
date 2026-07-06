@@ -131,9 +131,6 @@
     <value>Не удалось прочитать информацию об игре
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Не удалось скачать версию {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Служба хранения ключей (secret-tool) не найдена. Сессия входа не будет сохранена, и вам потребуется входить заново при каждом запуске.</value>
   </data>

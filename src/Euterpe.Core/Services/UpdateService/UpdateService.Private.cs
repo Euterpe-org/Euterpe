@@ -37,51 +37,53 @@ internal sealed partial class UpdateService
             return false;
         }
 
-        await StartUpdateProcessAsync(target).ConfigureAwait(false);
-        Environment.Exit(0);
+        if (await TryStartUpdateProcessAsync(target).ConfigureAwait(false))
+        {
+            Environment.Exit(0);
+        }
+
         return true;
     }
 
-    private async Task StartUpdateProcessAsync(UpdateTarget target)
+    private async Task<bool> TryStartUpdateProcessAsync(UpdateTarget target)
     {
-        var updateFolder = GetUpdateTempPath();
-        var updaterTargetPath = Path.Combine(updateFolder, PlatformInfo.UpdaterFileName);
-
         try
         {
+            var updateFolder = GetUpdateTempPath();
+            var updaterTargetPath = Path.Combine(updateFolder, PlatformInfo.UpdaterFileName);
+
             await AppDownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder).ConfigureAwait(true);
+            Logger.ZLogInformation($"Release {target.Version} download finished");
+
+            File.Copy(PlatformInfo.UpdaterFileName, updaterTargetPath, true);
+
+            Logger.ZLogInformation($"Starting updater process");
+            var updaterProcessInfo = new ProcessStartInfo
+            {
+                FileName = updaterTargetPath,
+                ArgumentList =
+                {
+                    "update",
+                    "-d",
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "-ov",
+                    AppVersion,
+                    "-pid",
+                    Environment.ProcessId.ToString()
+                },
+                WorkingDirectory = updateFolder,
+                UseShellExecute = false
+            };
+
+            Process.Start(updaterProcessInfo);
+            return true;
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to download release {target.Version}");
-            await MessageBoxService.ErrorAsync(MessageBox_Content_ReleaseDownload_Failed, target.Version).ConfigureAwait(true);
-            return;
+            Logger.ZLogError(ex, $"Failed to update to release {target.Version}");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Update_Failed, target.Version).ConfigureAwait(false);
+            return false;
         }
-
-        Logger.ZLogInformation($"Release {target.Version} download finished");
-
-        File.Copy(PlatformInfo.UpdaterFileName, updaterTargetPath, true);
-
-        Logger.ZLogInformation($"Starting updater process");
-
-        var updaterProcessInfo = new ProcessStartInfo
-        {
-            FileName = updaterTargetPath,
-            ArgumentList =
-            {
-                "update",
-                "-d",
-                AppDomain.CurrentDomain.BaseDirectory,
-                "-ov",
-                AppVersion,
-                "-pid",
-                Environment.ProcessId.ToString()
-            },
-            WorkingDirectory = updateFolder,
-            UseShellExecute = false
-        };
-
-        Process.Start(updaterProcessInfo);
     }
 
     private sealed record UpdateTarget(SemVersion Version, string DownloadUrl);
