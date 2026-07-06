@@ -22,7 +22,7 @@ internal sealed partial class UpdateService
         return updateTempPath;
     }
 
-    private async Task<bool> HandleReleaseAsync(UpdateTarget? target, CancellationToken cancellationToken = default)
+    private async Task<bool> HandleReleaseAsync(UpdateTarget? target)
     {
         if (target is null)
         {
@@ -37,19 +37,19 @@ internal sealed partial class UpdateService
             return false;
         }
 
-        await StartUpdateProcessAsync(target, cancellationToken).ConfigureAwait(false);
+        await StartUpdateProcessAsync(target).ConfigureAwait(false);
         Environment.Exit(0);
         return true;
     }
 
-    private async Task StartUpdateProcessAsync(UpdateTarget target, CancellationToken cancellationToken = default)
+    private async Task StartUpdateProcessAsync(UpdateTarget target)
     {
         var updateFolder = GetUpdateTempPath();
         var updaterTargetPath = Path.Combine(updateFolder, PlatformInfo.UpdaterFileName);
 
         try
         {
-            await AppDownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder, cancellationToken).ConfigureAwait(true);
+            await AppDownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder).ConfigureAwait(true);
         }
         catch (Exception ex)
         {

@@ -12,7 +12,7 @@ internal sealed partial class UpdateService : IUpdateService
         var prerelease = Config.UpdateChannel is UpdateChannel.Prerelease;
         var target = await GetReleaseCandidateAsync(prerelease, cancellationToken).ConfigureAwait(true);
 
-        return await HandleReleaseAsync(target, cancellationToken).ConfigureAwait(false);
+        return await HandleReleaseAsync(target).ConfigureAwait(false);
     }
 
     private async Task<UpdateTarget?> GetReleaseCandidateAsync(bool prerelease, CancellationToken cancellationToken = default)
