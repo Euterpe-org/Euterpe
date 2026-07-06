@@ -7,24 +7,25 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
     private const int MaxRetries = 3;
     private Dependency[]? _cachedDependencies;
 
-    private DependencyTarget[] MelonLoaderTargets =>
-    [
-        new("MelonLoader", GameConfig.MelonLoaderZipPath),
-        new("UnityDependencies", GameConfig.UnityDependencyZipPath),
-        new("Cpp2IL", GameConfig.Cpp2ILExecutablePath),
-        new("Cpp2IL-Plugin", GameConfig.Cpp2ILPluginPath)
-    ];
-
     public async Task AcquireForMelonLoaderAsync(
         EventHandler<DownloadStartedEventArgs>? onDownloadStarted = null,
         IProgress<double>? progress = null,
         CancellationToken cancellationToken = default)
     {
         var dependencies = await GetDependenciesAsync(cancellationToken).ConfigureAwait(false);
+        var unityVersion = dependencies.First(x => x.Slug is "UnityDependencies").Versions.Single().Key;
 
-        foreach (var (slug, filePath) in MelonLoaderTargets)
+        DependencyTarget[] targets =
+        [
+            new("MelonLoader", GameConfig.MelonLoaderZipPath),
+            new("UnityDependencies", GameConfig.UnityDependencyZipPath(unityVersion)),
+            new("Cpp2IL", GameConfig.Cpp2ILExecutablePath),
+            new("Cpp2IL-Plugin", GameConfig.Cpp2ILPluginPath)
+        ];
+
+        foreach (var (slug, filePath) in targets)
         {
-            var entry = dependencies.Single(x => x.Slug == slug).Versions.Single().Value;
+            var entry = dependencies.First(x => x.Slug == slug).Versions.Single().Value;
             var spec = new DependencySpec(slug, entry.DownloadUrl, filePath, entry.SHA256);
             await EnsureValidAsync(spec, onDownloadStarted, progress, cancellationToken).ConfigureAwait(false);
         }

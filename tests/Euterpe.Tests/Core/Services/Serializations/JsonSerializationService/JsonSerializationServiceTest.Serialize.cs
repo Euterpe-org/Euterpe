@@ -12,7 +12,6 @@ public sealed partial class JsonSerializationServiceTest
             Folder = @"C:\Program Files (x86)\SteamLibrary\steamapps\common\Muse Dash",
             GameMode = GameMode.Vanilla,
             GameVersion = "1.0.0",
-            UnityVersion = "2019.4.32",
             MelonLoaderVersion = "0.6.5"
         },
         MuseDash2 = new MuseDash2Config(),
