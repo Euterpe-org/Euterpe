@@ -51,4 +51,18 @@ public sealed class LocalService(ILogger<LocalService> logger) : ILocalService
             return false;
         }
     }
+
+    public bool TryDeleteDirectory(string directoryPath)
+    {
+        try
+        {
+            Directory.Delete(directoryPath, true);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.ZLogWarning(ex, $"Failed to delete directory {directoryPath}");
+            return false;
+        }
+    }
 }

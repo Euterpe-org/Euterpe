@@ -6,4 +6,5 @@ public interface ILocalService
     void ExtractZipFile(string zipPath, string extractPath);
     void CopyDirectory(string sourceDir, string destinationDir);
     bool TryDeleteFile(string filePath);
+    bool TryDeleteDirectory(string directoryPath);
 }

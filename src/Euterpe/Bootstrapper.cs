@@ -41,24 +41,6 @@ internal static class Bootstrapper
         }
     }
 
-    internal static void CleanupBackupFiles()
-    {
-        try
-        {
-            var directories = Directory.GetDirectories(".", "backup-*");
-            if (directories.Length <= 1)
-            {
-                return;
-            }
-
-            Parallel.ForEach(directories.OrderDescending().Skip(1), (directory, _) => Directory.Delete(directory, true));
-        }
-        catch (Exception ex)
-        {
-            LogBootstrapException(ex);
-        }
-    }
-
     internal static void SendArgsToPrimaryInstance(string[] args)
     {
         try
