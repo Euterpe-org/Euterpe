@@ -46,9 +46,9 @@ public sealed class MuseDashConfigTest
     [Test]
     public async Task UnityDependencyZipPath_IncludesUnityVersion()
     {
-        var game = new MuseDashConfig { Folder = GameFolder, UnityVersion = "2019.4.32" };
+        var game = new MuseDashConfig { Folder = GameFolder };
 
-        await Assert.That(game.UnityDependencyZipPath).IsEqualTo(
+        await Assert.That(game.UnityDependencyZipPath("2019.4.32")).IsEqualTo(
             Path.Combine(GameFolder, "MelonLoader", "Dependencies", "Il2CppAssemblyGenerator", "UnityDependencies_2019.4.32.zip"));
     }
 
