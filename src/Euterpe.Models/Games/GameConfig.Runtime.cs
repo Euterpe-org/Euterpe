@@ -8,9 +8,6 @@ public abstract partial class GameConfig
     public string GameVersion { get; set; } = string.Empty;
 
     [JsonIgnore]
-    public string UnityVersion { get; set; } = string.Empty;
-
-    [JsonIgnore]
     [ObservableProperty]
     public partial string? MelonLoaderVersion { get; set; }
 
@@ -66,9 +63,6 @@ public abstract partial class GameConfig
     public string MelonLoaderDotnetRuntimeFolder => Path.Combine(MelonLoaderFolder, "Dependencies", "dotnet");
 
     [JsonIgnore]
-    public string UnityDependencyZipPath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{UnityVersion}.zip");
-
-    [JsonIgnore]
     public string Cpp2ILExecutablePath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL", "Cpp2IL.exe");
 
     [JsonIgnore]
@@ -76,6 +70,9 @@ public abstract partial class GameConfig
 
     private string EuterpeChartsFolder => Path.Combine(Folder, "Euterpe_Charts");
     private string Il2CppAssemblyGeneratorFolderPath => Path.Combine(MelonLoaderFolder, "Dependencies", "Il2CppAssemblyGenerator");
+
+    public string UnityDependencyZipPath(string unityVersion) =>
+        Path.Combine(Il2CppAssemblyGeneratorFolderPath, $"UnityDependencies_{unityVersion}.zip");
 
     partial void OnMelonLoaderVersionChanged(string? value) =>
         MelonLoaderSemVersion = SemVersion.TryParse(value, out var version) ? version : null;

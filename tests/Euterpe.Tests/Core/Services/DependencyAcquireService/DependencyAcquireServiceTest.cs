@@ -21,7 +21,7 @@ public sealed partial class DependencyAcquireServiceTest
     {
         _tempDir = Path.Combine(Path.GetTempPath(), $"DependencyAcquireServiceTest_{Guid.NewGuid():N}");
         Directory.CreateDirectory(_tempDir);
-        _game = new MuseDashConfig { Folder = _tempDir, UnityVersion = TestUnityVersion };
+        _game = new MuseDashConfig { Folder = _tempDir };
     }
 
     [After(Test)]
@@ -78,7 +78,7 @@ public sealed partial class DependencyAcquireServiceTest
     private async Task<string> CreateValidDependencyFiles()
     {
         var content = "test-content"u8.ToArray();
-        string[] paths = [_game.MelonLoaderZipPath, _game.UnityDependencyZipPath, _game.Cpp2ILExecutablePath, _game.Cpp2ILPluginPath];
+        string[] paths = [_game.MelonLoaderZipPath, _game.UnityDependencyZipPath(TestUnityVersion), _game.Cpp2ILExecutablePath, _game.Cpp2ILPluginPath];
 
         foreach (var path in paths)
         {

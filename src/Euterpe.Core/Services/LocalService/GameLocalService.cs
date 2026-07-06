@@ -62,7 +62,6 @@ internal sealed class GameLocalService : IGameLocalService
         var bundleVersion = assetsManager.GetBaseField(instance, playerSettings)["bundleVersion"].AsString;
 
         GameConfig.GameVersion = bundleVersion;
-        GameConfig.UnityVersion = unityVersion[..^2];
 
         Logger.ZLogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
         assetsManager.UnloadAll();
