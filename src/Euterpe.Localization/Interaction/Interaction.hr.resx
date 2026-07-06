@@ -131,9 +131,6 @@
     <value>Čitanje informacija o igri nije uspjelo
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Preuzimanje verzije {0} nije uspjelo</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Nije pronađena usluga privezka ključeva (secret-tool). Sesija prijave ne može biti spremljena i morat ćeš se prijaviti svaki put iznova.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Varijabla okruženja MD_DIRECTORY postavljena je na {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>Provjera ažuriranja nije uspjela, pokušajte ponovo kasnije</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>Ažuriranje na verziju {0} nije uspjelo</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Reprodukcija zvuka nije uspjela</value>

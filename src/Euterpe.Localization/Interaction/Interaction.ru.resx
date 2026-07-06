@@ -131,9 +131,6 @@
     <value>Не удалось прочитать информацию об игре
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Не удалось скачать версию {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Служба хранения ключей (secret-tool) не найдена. Сессия входа не будет сохранена, и вам потребуется входить заново при каждом запуске.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Переменная окружения MD_DIRECTORY установлена: {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>Не удалось проверить обновления, попробуйте позже</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>Не удалось обновить до версии {0}</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Не удалось воспроизвести аудио</value>
