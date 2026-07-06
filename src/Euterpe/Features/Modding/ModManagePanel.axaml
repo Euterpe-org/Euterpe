@@ -334,7 +334,7 @@
                                 <StackPanel
                                     Classes="ControlsHorizontal">
                                     <u:LoadingIcon
-                                        Height="15"
+                                        Classes="Small"
                                         IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
                                     <PathIcon
                                         Data="{StaticResource SemiIconRefresh}"
@@ -354,7 +354,7 @@
                                 <StackPanel
                                     Classes="ControlsHorizontal">
                                     <u:LoadingIcon
-                                        Height="15"
+                                        Classes="Small"
                                         IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
                                     <TextBlock
                                         Text="{Localize {x:Static loc:XAMLLiteral.Button_Install}}" />
@@ -370,7 +370,7 @@
                                 <StackPanel
                                     Classes="ControlsHorizontal">
                                     <u:LoadingIcon
-                                        Height="15"
+                                        Classes="Small"
                                         IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
                                     <TextBlock
                                         Text="{Localize {x:Static loc:XAMLLiteral.Button_Reinstall}}" />
@@ -387,7 +387,7 @@
                                 <StackPanel
                                     Classes="ControlsHorizontal">
                                     <u:LoadingIcon
-                                        Height="15"
+                                        Classes="Small"
                                         IsVisible="{Binding SelectedMod.IsProcessing, Mode=OneWay}" />
                                     <TextBlock
                                         Text="{Localize {x:Static loc:XAMLLiteral.Button_Uninstall}}" />
