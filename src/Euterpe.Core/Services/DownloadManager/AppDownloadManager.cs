@@ -24,7 +24,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
                 downloadService.DownloadProgressChanged += (_, e) => downloadProgress.Report(e.ProgressPercentage);
             }
 
-            await downloadService.DownloadFileTaskAsync(url, filePath, cancellationToken).ConfigureAwait(false);
+            await downloadService.DownloadFileOrThrowAsync(url, filePath, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -43,14 +43,8 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
     }
 
-    public async Task DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default)
-    {
-        var downloadService = DownloadServiceFactory();
-        await using (downloadService.ConfigureAwait(false))
-        {
-            await downloadService.DownloadFileTaskAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken).ConfigureAwait(false);
-        }
-    }
+    public async Task DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default) =>
+        await DownloadFileAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken: cancellationToken).ConfigureAwait(false);
 
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
@@ -128,7 +122,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
     }
 
-    #region Injectionsn
+    #region Injections
 
     public required HttpClient Client { get; init; }
     public required EuterpeDownloadClient DownloadClient { get; init; }
