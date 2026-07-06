@@ -2,6 +2,8 @@ namespace Euterpe.Core;
 
 internal sealed partial class UpdateService
 {
+    private const int MaxRetries = 3;
+
     private async Task<bool> ShouldUpdateAsync(SemVersion releaseVersion)
     {
         if (releaseVersion.ComparePrecedenceTo(CurrentVersion) <= 0)
@@ -16,10 +18,10 @@ internal sealed partial class UpdateService
 
     private static string GetUpdateTempPath()
     {
-        var updateTempPath = Path.Combine(Path.GetTempPath(), AppName, "Update");
-        Directory.CreateDirectory(updateTempPath);
+        var updateFolder = Path.Combine(Path.GetTempPath(), AppName, "Update");
+        Directory.CreateDirectory(updateFolder);
 
-        return updateTempPath;
+        return updateFolder;
     }
 
     private async Task<bool> HandleReleaseAsync(UpdateTarget? target)
@@ -50,12 +52,16 @@ internal sealed partial class UpdateService
         try
         {
             var updateFolder = GetUpdateTempPath();
+            var zipPath = Path.Combine(updateFolder, $"{AppName}.zip");
             var updaterTargetPath = Path.Combine(updateFolder, PlatformInfo.UpdaterFileName);
 
-            await AppDownloadManager.DownloadReleaseAsync(target.DownloadUrl, updateFolder).ConfigureAwait(true);
+            await DownloadUtils.DownloadVerifiedAsync(
+                ct => AppDownloadManager.DownloadFileAsync(target.DownloadUrl, zipPath, cancellationToken: ct),
+                zipPath, target.Sha256, $"Release {target.Version}", MaxRetries, Logger, CancellationToken.None).ConfigureAwait(true);
+
             Logger.ZLogInformation($"Release {target.Version} download finished");
 
-            File.Copy(PlatformInfo.UpdaterFileName, updaterTargetPath, true);
+            File.Copy(Path.Combine(AppContext.BaseDirectory, PlatformInfo.UpdaterFileName), updaterTargetPath, true);
 
             Logger.ZLogInformation($"Starting updater process");
             var updaterProcessInfo = new ProcessStartInfo
@@ -65,7 +71,9 @@ internal sealed partial class UpdateService
                 {
                     "update",
                     "-d",
-                    AppDomain.CurrentDomain.BaseDirectory,
+                    AppContext.BaseDirectory,
+                    "-zip",
+                    zipPath,
                     "-ov",
                     AppVersion,
                     "-pid",
@@ -86,5 +94,5 @@ internal sealed partial class UpdateService
         }
     }
 
-    private sealed record UpdateTarget(SemVersion Version, string DownloadUrl);
+    private sealed record UpdateTarget(SemVersion Version, string DownloadUrl, string Sha256);
 }

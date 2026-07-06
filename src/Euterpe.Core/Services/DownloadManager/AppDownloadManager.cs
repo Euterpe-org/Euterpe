@@ -43,9 +43,6 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
     }
 
-    public async Task DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default) =>
-        await DownloadFileAsync(downloadUrl, Path.Combine(updateFolder, "Euterpe.zip"), cancellationToken: cancellationToken).ConfigureAwait(false);
-
     public async Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default)
     {
         if (ReadmeCache.TryGetValue(repoId, out var readme))

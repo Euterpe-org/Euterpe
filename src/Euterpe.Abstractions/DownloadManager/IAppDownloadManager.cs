@@ -18,6 +18,5 @@ public interface IAppDownloadManager
         CancellationToken cancellationToken = default);
 
     Task DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default);
-    Task DownloadReleaseAsync(string downloadUrl, string updateFolder, CancellationToken cancellationToken = default);
     Task<string?> FetchReadmeAsync(string repoId, CancellationToken cancellationToken = default);
 }
