@@ -9,6 +9,7 @@ public sealed class Commands
     /// <param name="localService"></param>
     /// <param name="platformInfo"></param>
     /// <param name="sourceDirectory">-d, Source directory where the application is.</param>
+    /// <param name="zipPath">-zip, Absolute path to the downloaded update package.</param>
     /// <param name="oldVersion">-ov, Current version of the application.</param>
     /// <param name="pid">-pid, Process ID.</param>
     [Command("update")]
@@ -17,6 +18,7 @@ public sealed class Commands
         [FromServices] ILocalService localService,
         [FromServices] IPlatformInfo platformInfo,
         string sourceDirectory,
+        string zipPath,
         string oldVersion,
         int pid)
     {
@@ -41,7 +43,7 @@ public sealed class Commands
             localService.CopyDirectory(sourceDirectory, backupDirectory);
             logger.ZLogInformation($"Backup completed for version {oldVersion}");
 
-            localService.ExtractZipFile("Euterpe.zip", sourceDirectory);
+            localService.ExtractZipFile(zipPath, sourceDirectory);
             logger.ZLogInformation($"Update completed successfully!");
 
             var applicationPath = Path.Combine(sourceDirectory, platformInfo.ApplicationFileName);
