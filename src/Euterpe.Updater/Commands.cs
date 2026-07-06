@@ -33,10 +33,23 @@ public sealed class Commands
         {
             logger.ZLogInformation($"Process with ID {pid} has already exited.");
         }
+        catch (TimeoutException)
+        {
+            logger.ZLogError($"Process with ID {pid} is still running after 30 seconds, aborting update. Press any key to exit.");
+            Console.ReadKey();
+            return;
+        }
 
+        if (!localService.IsReadableZipFile(zipPath))
+        {
+            logger.ZLogError($"Update package at {zipPath} is missing or unreadable, aborting update. Press any key to exit.");
+            Console.ReadKey();
+            return;
+        }
+
+        var backupDirectory = Path.Combine(sourceDirectory, $"backup-{oldVersion}");
         try
         {
-            var backupDirectory = Path.Combine(sourceDirectory, $"backup-{oldVersion}");
             Directory.CreateDirectory(backupDirectory);
             logger.ZLogInformation($"Backup folder created at {backupDirectory}");
 
@@ -45,21 +58,38 @@ public sealed class Commands
 
             localService.ExtractZipFile(zipPath, sourceDirectory);
             logger.ZLogInformation($"Update completed successfully!");
-
-            var applicationPath = Path.Combine(sourceDirectory, platformInfo.ApplicationFileName);
-            Process.Start(
-                new ProcessStartInfo(applicationPath)
-                {
-                    WorkingDirectory = sourceDirectory,
-                    UseShellExecute = false
-                });
-
-            logger.ZLogInformation($"Launched application: {applicationPath}");
         }
         catch (Exception ex)
         {
-            logger.ZLogError(ex, $"Update failed. Press any key to exit.");
+            logger.ZLogError(ex,
+                $"Update failed and the installation may be incomplete. Your previous version is backed up at {backupDirectory}. Restore it manually or reinstall. Press any key to exit.");
+            Console.ReadKey();
+            return;
+        }
+
+        localService.TryDeleteFile(zipPath);
+
+        try
+        {
+            LaunchApplication(logger, sourceDirectory, platformInfo.ApplicationFileName);
+        }
+        catch (Exception ex)
+        {
+            logger.ZLogError(ex, $"Update completed, but the application could not be started automatically. Please start it manually. Press any key to exit.");
             Console.ReadKey();
         }
+    }
+
+    private static void LaunchApplication(ILogger<Commands> logger, string sourceDirectory, string applicationFileName)
+    {
+        var applicationPath = Path.Combine(sourceDirectory, applicationFileName);
+        Process.Start(
+            new ProcessStartInfo(applicationPath)
+            {
+                WorkingDirectory = sourceDirectory,
+                UseShellExecute = false
+            });
+
+        logger.ZLogInformation($"Launched application: {applicationPath}");
     }
 }

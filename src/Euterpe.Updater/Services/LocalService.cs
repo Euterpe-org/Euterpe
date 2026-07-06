@@ -6,6 +6,20 @@ public sealed class LocalService(ILogger<LocalService> logger) : ILocalService
 {
     private readonly ILogger<LocalService> _logger = logger;
 
+    public bool IsReadableZipFile(string zipPath)
+    {
+        try
+        {
+            using var archive = ZipFile.OpenRead(zipPath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.ZLogError(ex, $"Cannot open zip file at {zipPath}");
+            return false;
+        }
+    }
+
     public void ExtractZipFile(string zipPath, string extractPath)
     {
         ZipFile.ExtractToDirectory(zipPath, extractPath, true);
@@ -22,5 +36,19 @@ public sealed class LocalService(ILogger<LocalService> logger) : ILocalService
         }
 
         _logger.ZLogInformation($"Directory copied from {sourceDir} to {destinationDir}");
+    }
+
+    public bool TryDeleteFile(string filePath)
+    {
+        try
+        {
+            File.Delete(filePath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.ZLogWarning(ex, $"Failed to delete {filePath}");
+            return false;
+        }
     }
 }
