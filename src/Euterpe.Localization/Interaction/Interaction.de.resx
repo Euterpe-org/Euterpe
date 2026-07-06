@@ -131,9 +131,6 @@
     <value>Lesen der Spielinformationen fehlgeschlagen
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Version {0} konnte nicht heruntergeladen werden</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Es wurde kein Schlüsselbundservice (secret-tool) gefunden. Deine Anmeldesitzung kann nicht gespeichert werden, und du musst dich bei jedem Start erneut anmelden.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Umgebungsvariable MD_DIRECTORY wurde auf {0} gesetzt</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>Suche nach Updates fehlgeschlagen, bitte versuche es später erneut</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>Aktualisierung auf Version {0} fehlgeschlagen</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Audio konnte nicht abgespielt werden</value>

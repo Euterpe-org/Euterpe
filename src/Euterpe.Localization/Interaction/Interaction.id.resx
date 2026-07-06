@@ -131,9 +131,6 @@
     <value>Gagal membaca Informasi Game
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Gagal mengunduh versi {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Layanan keyring (secret-tool) tidak ditemukan. Sesi login Anda tidak dapat disimpan dan Anda harus login setiap kali.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Variabel lingkungan MD_DIRECTORY berhasil diatur ke {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>Gagal memeriksa pembaruan, silakan coba lagi nanti</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>Gagal memperbarui ke versi {0}</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Gagal memutar audio</value>

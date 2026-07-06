@@ -131,9 +131,6 @@
     <value>Falha ao ler informações do jogo
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Falha ao baixar a versão {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Nenhum serviço de chaveiro (secret-tool) foi encontrado. Sua sessão de login não pode ser salva e você precisará fazer login a cada vez.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Variável de ambiente MD_DIRECTORY definida com sucesso para {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>Falha ao verificar atualizações, tente novamente mais tarde</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>Falha ao atualizar para a versão {0}</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Falha ao reproduzir áudio</value>

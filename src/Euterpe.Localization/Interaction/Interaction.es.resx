@@ -131,9 +131,6 @@
     <value>No se pudo leer la información del juego
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Error al descargar la versión {0}</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>No se encontró ningún servicio de llavero (secret-tool). Tu sesión no se puede guardar y tendrás que iniciar sesión cada vez.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>La variable de entorno MD_DIRECTORY se estableció a {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>No se pudo buscar actualizaciones, inténtalo de nuevo más tarde</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>No se pudo actualizar a la versión {0}</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Error al reproducir el audio</value>

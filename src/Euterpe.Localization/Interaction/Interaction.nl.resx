@@ -131,9 +131,6 @@
     <value>Lezen van spelinformatie mislukt
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>Versie {0} kon niet worden gedownload</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>Er is geen keyring-service (secret-tool) gevonden. Uw aanmeldsessie kan niet worden opgeslagen en u moet elke keer opnieuw inloggen.</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>Omgevingsvariabele MD_DIRECTORY succesvol ingesteld op {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>Kan niet op updates controleren, probeer het later opnieuw</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>Bijwerken naar versie {0} mislukt</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Afspelen van audio mislukt</value>

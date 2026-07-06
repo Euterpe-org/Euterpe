@@ -131,9 +131,6 @@
     <value>讀取遊戲資訊失敗
   {0}</value>
   </data>
-  <data name="MessageBox_Content_ReleaseDownload_Failed" xml:space="preserve">
-    <value>下載版本 {0} 失敗</value>
-  </data>
   <data name="MessageBox_Content_SecretService_Unavailable" xml:space="preserve">
     <value>找不到金鑰環服務（secret-tool）。您的登入工作階段無法儲存，每次都需要重新登入。</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Windows" xml:space="preserve">
     <value>已成功將 MD_DIRECTORY 環境變數設定為 {0}</value>
+  </data>
+  <data name="MessageBox_Content_Update_Check_Failed" xml:space="preserve">
+    <value>檢查更新失敗，請稍後重試</value>
+  </data>
+  <data name="MessageBox_Content_Update_Failed" xml:space="preserve">
+    <value>更新到版本 {0} 失敗</value>
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>音訊播放失敗</value>

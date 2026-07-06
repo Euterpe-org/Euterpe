@@ -44,6 +44,7 @@ public sealed class AboutPanelViewModelTest : HeadlessTest
         IMessageBoxService? msgBox = null) => new()
     {
         Launcher = IPlatformLauncher.Mock(),
+        Logger = Mock.Logger<AboutPanelViewModel>(),
         UpdateService = update ?? IUpdateService.Mock(),
         MessageBoxService = msgBox ?? IMessageBoxService.Mock()
     };
