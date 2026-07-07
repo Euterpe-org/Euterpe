@@ -439,6 +439,15 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>Elavult</value>
   </data>
+  <data name="ModIncompatibleReason_ConflictingMod" xml:space="preserve">
+    <value>Ütközik az engedélyezett moddal: {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_GameVersion" xml:space="preserve">
+    <value>{0} játékverzió szükséges</value>
+  </data>
+  <data name="ModIncompatibleReason_MelonLoader" xml:space="preserve">
+    <value>MelonLoader {0} szükséges</value>
+  </data>
   <data name="ModInfo_Author" xml:space="preserve">
     <value>Szerző</value>
   </data>

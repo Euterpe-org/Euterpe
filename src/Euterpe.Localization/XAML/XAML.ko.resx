@@ -439,6 +439,15 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>업데이트 있음</value>
   </data>
+  <data name="ModIncompatibleReason_ConflictingMod" xml:space="preserve">
+    <value>활성화된 모드와 충돌합니다: {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_GameVersion" xml:space="preserve">
+    <value>게임 버전 {0}이(가) 필요합니다</value>
+  </data>
+  <data name="ModIncompatibleReason_MelonLoader" xml:space="preserve">
+    <value>MelonLoader {0}이(가) 필요합니다</value>
+  </data>
   <data name="ModInfo_Author" xml:space="preserve">
     <value>작성자</value>
   </data>
