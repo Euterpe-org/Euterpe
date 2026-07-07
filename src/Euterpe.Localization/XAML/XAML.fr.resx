@@ -439,6 +439,15 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>Obsolètes</value>
   </data>
+  <data name="ModIncompatibleReason_ConflictingMod" xml:space="preserve">
+    <value>En conflit avec le mod activé : {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_GameVersion" xml:space="preserve">
+    <value>Nécessite la version du jeu {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_MelonLoader" xml:space="preserve">
+    <value>Nécessite MelonLoader {0}</value>
+  </data>
   <data name="ModInfo_Author" xml:space="preserve">
     <value>Auteur</value>
   </data>

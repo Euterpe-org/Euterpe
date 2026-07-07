@@ -439,6 +439,15 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>Usang</value>
   </data>
+  <data name="ModIncompatibleReason_ConflictingMod" xml:space="preserve">
+    <value>Bertentangan dengan mod yang diaktifkan: {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_GameVersion" xml:space="preserve">
+    <value>Membutuhkan versi game {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_MelonLoader" xml:space="preserve">
+    <value>Membutuhkan MelonLoader {0}</value>
+  </data>
   <data name="ModInfo_Author" xml:space="preserve">
     <value>Penulis</value>
   </data>

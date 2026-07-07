@@ -439,6 +439,15 @@
   <data name="ModFilterType_Outdated" xml:space="preserve">
     <value>Zastarjeli</value>
   </data>
+  <data name="ModIncompatibleReason_ConflictingMod" xml:space="preserve">
+    <value>U sukobu s omogućenim modom: {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_GameVersion" xml:space="preserve">
+    <value>Zahtijeva verziju igre {0}</value>
+  </data>
+  <data name="ModIncompatibleReason_MelonLoader" xml:space="preserve">
+    <value>Zahtijeva MelonLoader {0}</value>
+  </data>
   <data name="ModInfo_Author" xml:space="preserve">
     <value>Autor</value>
   </data>
