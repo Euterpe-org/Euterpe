@@ -125,7 +125,7 @@ public sealed class AppLocalServiceTest
 
         public Task<IStorageFolder?> GetSingleFolderAsync(string dialogTitle) => throw new NotSupportedException();
         public Task<IReadOnlyList<IStorageFolder>?> GetMultipleFoldersAsync(string dialogTitle) => throw new NotSupportedException();
-        public Task<IEnumerable<string?>?> GetMultipleFoldersPathAsync(string dialogTitle) => throw new NotSupportedException();
+        public Task<IEnumerable<string?>?> GetMultipleFolderPathsAsync(string dialogTitle) => throw new NotSupportedException();
         public Task<IStorageFile?> GetSingleFileAsync(string dialogTitle) => throw new NotSupportedException();
 
         public Task<IReadOnlyList<IStorageFile>?> GetMultipleFilesAsync(string dialogTitle, IReadOnlyList<FilePickerFileType>? extraFileTypes = null) =>

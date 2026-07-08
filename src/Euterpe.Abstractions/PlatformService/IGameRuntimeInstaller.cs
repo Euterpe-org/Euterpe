@@ -2,7 +2,7 @@ namespace Euterpe.Abstractions;
 
 public interface IGameRuntimeInstaller
 {
-    const string DotnetRuntimeUrl = "https://aka.ms/dotnet/6.0/dotnet-runtime-win-x64.zip";
+    const string DotNetRuntimeUrl = "https://aka.ms/dotnet/6.0/dotnet-runtime-win-x64.zip";
 
     /// <summary>
     ///     Check the runtime required by the game is installed.

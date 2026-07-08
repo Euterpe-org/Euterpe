@@ -57,10 +57,10 @@ public abstract partial class GameConfig
     public string LatestLogPath => Path.Combine(MelonLoaderFolder, "Latest.log");
 
     [JsonIgnore]
-    public string DotnetRuntimeFolder => Path.Combine(Folder, "dotnet");
+    public string DotNetRuntimeFolder => Path.Combine(Folder, "dotnet");
 
     [JsonIgnore]
-    public string MelonLoaderDotnetRuntimeFolder => Path.Combine(MelonLoaderFolder, "Dependencies", "dotnet");
+    public string MelonLoaderDotNetRuntimeFolder => Path.Combine(MelonLoaderFolder, "Dependencies", "dotnet");
 
     [JsonIgnore]
     public string Cpp2ILExecutablePath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL", "Cpp2IL.exe");

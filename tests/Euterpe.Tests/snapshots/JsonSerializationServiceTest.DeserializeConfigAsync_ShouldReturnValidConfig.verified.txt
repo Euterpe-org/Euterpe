@@ -32,8 +32,8 @@
     MelonLoaderFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader,
     MelonLoaderZipPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader.zip,
     LatestLogPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Latest.log,
-    DotnetRuntimeFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/dotnet,
-    MelonLoaderDotnetRuntimeFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/dotnet,
+    DotNetRuntimeFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/dotnet,
+    MelonLoaderDotNetRuntimeFolder: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/dotnet,
     Cpp2ILExecutablePath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Cpp2IL.exe,
     Cpp2ILPluginPath: C:/Program Files (x86)/SteamLibrary/steamapps/common/Muse Dash/MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Plugins/Cpp2IL.Plugin.StrippedCodeRegSupport.dll
   },
@@ -65,8 +65,8 @@
     MelonLoaderFolder: MelonLoader,
     MelonLoaderZipPath: MelonLoader.zip,
     LatestLogPath: MelonLoader/Latest.log,
-    DotnetRuntimeFolder: dotnet,
-    MelonLoaderDotnetRuntimeFolder: MelonLoader/Dependencies/dotnet,
+    DotNetRuntimeFolder: dotnet,
+    MelonLoaderDotNetRuntimeFolder: MelonLoader/Dependencies/dotnet,
     Cpp2ILExecutablePath: MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Cpp2IL.exe,
     Cpp2ILPluginPath: MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Plugins/Cpp2IL.Plugin.StrippedCodeRegSupport.dll
   },

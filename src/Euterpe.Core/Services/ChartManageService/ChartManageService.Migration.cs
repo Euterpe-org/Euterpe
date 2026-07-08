@@ -13,7 +13,7 @@ internal sealed partial class ChartManageService
             return 0;
         }
 
-        var sources = ChartLocalService.GetCustomAlbumsSources();
+        var sources = ChartLocalService.GetCustomAlbumSources();
         var outcomes = new ConcurrentBag<MigrationOutcome>();
         var completed = 0;
 

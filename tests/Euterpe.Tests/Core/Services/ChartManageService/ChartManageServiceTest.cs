@@ -82,7 +82,7 @@ public sealed partial class ChartManageServiceTest
 
         public CustomAlbumSource CreateCustomAlbumSource(string path) => throw new NotSupportedException();
 
-        public CustomAlbumSource[] GetCustomAlbumsSources() => throw new NotSupportedException();
+        public CustomAlbumSource[] GetCustomAlbumSources() => throw new NotSupportedException();
 
         public void Set(ChartDto chart) => _charts[chart.FolderPath] = chart;
 

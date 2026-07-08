@@ -364,10 +364,10 @@
   <data name="HomePage_SupportTitle" xml:space="preserve">
     <value>100 % kostenlos &amp; Open Source</value>
   </data>
-  <data name="HyperLinkButton_LearnMore" xml:space="preserve">
+  <data name="HyperlinkButton_LearnMore" xml:space="preserve">
     <value>Mehr erfahren</value>
   </data>
-  <data name="HyperLinkButton_Visit" xml:space="preserve">
+  <data name="HyperlinkButton_Visit" xml:space="preserve">
     <value>Besuchen</value>
   </data>
   <data name="LoadingMessage" xml:space="preserve">

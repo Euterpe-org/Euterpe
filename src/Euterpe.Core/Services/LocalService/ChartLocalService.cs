@@ -16,7 +16,7 @@ internal sealed class ChartLocalService : IChartLocalService
 
     public CustomAlbumSource CreateCustomAlbumSource(string path) => new(path, Directory.Exists(path));
 
-    public CustomAlbumSource[] GetCustomAlbumsSources()
+    public CustomAlbumSource[] GetCustomAlbumSources()
     {
         var root = GameConfig.CustomAlbumsChartsFolder;
         var packages = Directory.EnumerateFiles(root).Where(x => Path.GetExtension(x) is CustomAlbumFiles.PackageExtension);

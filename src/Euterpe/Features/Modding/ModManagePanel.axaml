@@ -504,7 +504,7 @@
                                 Label="{Localize {x:Static loc:XAMLLiteral.ModInfo_Repository}}">
                                 <HyperlinkButton
                                     Classes="WithIcon Underline"
-                                    Content="{Localize {x:Static loc:XAMLLiteral.HyperLinkButton_Visit}}"
+                                    Content="{Localize {x:Static loc:XAMLLiteral.HyperlinkButton_Visit}}"
                                     NavigateUri="{Binding SelectedMod.RepoPageUrl}" />
                             </u:DescriptionsItem>
                         </u:Descriptions>

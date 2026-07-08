@@ -42,7 +42,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
         return folders is not [] ? folders : null;
     }
 
-    public async Task<IEnumerable<string?>?> GetMultipleFoldersPathAsync(string dialogTitle)
+    public async Task<IEnumerable<string?>?> GetMultipleFolderPathsAsync(string dialogTitle)
     {
         var folders = await TopLevel.StorageProvider.OpenFolderPickerAsync(
             new FolderPickerOpenOptions
