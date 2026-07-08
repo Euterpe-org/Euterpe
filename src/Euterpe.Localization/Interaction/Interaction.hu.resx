@@ -211,7 +211,7 @@
     <value>{0} chart már naprakész</value>
   </data>
   <data name="Notification_Content_Epk_Edit_OnlineReadonly" xml:space="preserve">
-    <value>Online chartek nem szerkeszthetők</value>
+    <value>Online chartok nem szerkeszthetők</value>
   </data>
   <data name="Notification_Content_Epk_Open_Invalid" xml:space="preserve">
     <value>Érvénytelen EPK fájl</value>

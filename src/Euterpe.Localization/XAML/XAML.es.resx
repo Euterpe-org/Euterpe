@@ -404,7 +404,7 @@
     <value>Para crear proyectos de mods rápidamente</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Plantilla de mod Nuget</value>
+    <value>Plantilla de mod NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>Entorno de desarrollo</value>
@@ -500,7 +500,7 @@
     <value>Ajustes</value>
   </data>
   <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
-    <value>Herramientas de charts</value>
+    <value>Herramientas del charter</value>
   </data>
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>Gestión de charts</value>
@@ -629,7 +629,7 @@
     <value>Inicializando mods esenciales ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
-    <value>Instalando .NET runtime ...</value>
+    <value>Instalando .NET Runtime ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
     <value>Instalando .NET SDK ...</value>

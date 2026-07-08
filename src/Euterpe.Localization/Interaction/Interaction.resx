@@ -44,10 +44,10 @@
     <value>Yes</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
-    <value>Please select Steam executable</value>
+    <value>Please select the Steam executable</value>
   </data>
   <data name="MessageBox_Content_ChooseSteamFolder" xml:space="preserve">
-    <value>Please select Steam folder</value>
+    <value>Please select the Steam folder</value>
   </data>
   <data name="MessageBox_Content_CrashDialog_CopyFailed" xml:space="preserve">
     <value>Failed to copy error details to the clipboard.</value>
@@ -56,7 +56,7 @@
     <value>Error details copied to the clipboard.</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install" xml:space="preserve">
-    <value>Are you sure you want to install the .Net SDK?</value>
+    <value>Are you sure you want to install the .NET SDK?</value>
   </data>
   <data name="MessageBox_Content_DotNetSDK_Install_Failed" xml:space="preserve">
     <value>Failed to install .NET 10 SDK</value>
@@ -138,10 +138,10 @@
     <value>The Euterpe server is currently unavailable. Euterpe will now close. Please try again later.</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
-    <value>Are you sure you want to set MD_DIRECTORY environment variable?</value>
+    <value>Are you sure you want to set the MD_DIRECTORY environment variable?</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment_Failed" xml:space="preserve">
-    <value>Failed to set MD_DIRECTORY environment variable</value>
+    <value>Failed to set the MD_DIRECTORY environment variable</value>
   </data>
   <data name="MessageBox_Content_SetPathEnvironment_Linux" xml:space="preserve">
     <value>Copy the following line and add it to your /etc/environment file:

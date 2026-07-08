@@ -377,7 +377,7 @@
     <value>需要安装 MelonLoader 才能使用模组</value>
   </data>
   <data name="MelonLoader_State_Downloading" xml:space="preserve">
-    <value>正在下载 {0}: {1} MB</value>
+    <value>正在下载 {0}：{1} MB</value>
   </data>
   <data name="MelonLoader_State_Installed" xml:space="preserve">
     <value>已安装</value>
@@ -404,7 +404,7 @@
     <value>快速创建模组项目</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>模组模板 Nuget</value>
+    <value>模组模板 NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>开发环境</value>

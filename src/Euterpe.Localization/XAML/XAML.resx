@@ -62,7 +62,7 @@
     <value>Update</value>
   </data>
   <data name="ChartAnalyzer_Description" xml:space="preserve">
-    <value>Predict approximate ratings and analyse a chart's Note breakdown</value>
+    <value>Predict approximate ratings and analyze a chart's Note breakdown</value>
   </data>
   <data name="ChartAnalyzer_Title" xml:space="preserve">
     <value>Chart Analyzer</value>
@@ -86,7 +86,7 @@
     <value>Offline Tools</value>
   </data>
   <data name="CharterToolkit_Online_Description" xml:space="preserve">
-    <value>Analyse and submit charts on the Euterpe site (opens in your browser)</value>
+    <value>Analyze and submit charts on the Euterpe site (opens in your browser)</value>
   </data>
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>Online Tools</value>
@@ -404,7 +404,7 @@
     <value>For quick mod project creation</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Mod Template Nuget</value>
+    <value>Mod Template NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>Development Environment</value>
@@ -500,10 +500,10 @@
     <value>Setting</value>
   </data>
   <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
-    <value>Chart Toolkit</value>
+    <value>Charter Toolkit</value>
   </data>
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
-    <value>Chart Manage</value>
+    <value>Chart Management</value>
   </data>
   <data name="Panel_Logging_AppLog" xml:space="preserve">
     <value>App Log</value>
@@ -515,10 +515,10 @@
     <value>MelonLoader</value>
   </data>
   <data name="Panel_Modding_ModDevelop" xml:space="preserve">
-    <value>Mod Develop</value>
+    <value>Mod Development</value>
   </data>
   <data name="Panel_Modding_ModManage" xml:space="preserve">
-    <value>Mod Manage</value>
+    <value>Mod Management</value>
   </data>
   <data name="Panel_Setting_About" xml:space="preserve">
     <value>About</value>
@@ -545,7 +545,7 @@
     <value>Search Mods  (Name, Author)</value>
   </data>
   <data name="Setting_Description_AlwaysShowScrollBar" xml:space="preserve">
-    <value>Always show scrollbar for list</value>
+    <value>Always show scrollbar for lists</value>
   </data>
   <data name="Setting_Description_CacheFolder" xml:space="preserve">
     <value>This includes the cache when you download files. Please do not change this when performing other operations</value>
@@ -569,7 +569,7 @@
     <value>Steam executable folder</value>
   </data>
   <data name="Setting_Description_UpdateChannel" xml:space="preserve">
-    <value>Update channel for euterpe</value>
+    <value>Update channel for Euterpe</value>
   </data>
   <data name="Setting_Title_AlwaysShowScrollBar" xml:space="preserve">
     <value>Always Show ScrollBar</value>
@@ -629,7 +629,7 @@
     <value>Initializing essential mods ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
-    <value>Installing .NET runtime ...</value>
+    <value>Installing .NET Runtime ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
     <value>Installing .NET SDK ...</value>
@@ -674,7 +674,7 @@
     <value>.NET Runtime</value>
   </data>
   <data name="Setup_Task_DotNetRuntime_Description" xml:space="preserve">
-    <value>Required for running modded game</value>
+    <value>Required for running the modded game</value>
   </data>
   <data name="Setup_Task_DotNetSdk" xml:space="preserve">
     <value>.NET SDK</value>

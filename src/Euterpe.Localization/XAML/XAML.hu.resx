@@ -86,7 +86,7 @@
     <value>Offline eszközök</value>
   </data>
   <data name="CharterToolkit_Online_Description" xml:space="preserve">
-    <value>Chartek elemzése és beküldése az Euterpe oldalon (a böngészőben nyílik meg)</value>
+    <value>Chartok elemzése és beküldése az Euterpe oldalon (a böngészőben nyílik meg)</value>
   </data>
   <data name="CharterToolkit_Online_Title" xml:space="preserve">
     <value>Online eszközök</value>
@@ -116,16 +116,16 @@
     <value>Streamelhető</value>
   </data>
   <data name="ChartManage_GetCharts_Description" xml:space="preserve">
-    <value>Chartek böngészése &amp; letöltése a weben</value>
+    <value>Chartok böngészése &amp; letöltése a weben</value>
   </data>
   <data name="ChartManage_GetCharts_Title" xml:space="preserve">
-    <value>Chartek beszerzése</value>
+    <value>Chartok beszerzése</value>
   </data>
   <data name="ChartManage_MigrateMdm" xml:space="preserve">
     <value>MDM chart migrálása</value>
   </data>
   <data name="ChartManage_Migrating" xml:space="preserve">
-    <value>Chartek migrálása</value>
+    <value>Chartok migrálása</value>
   </data>
   <data name="ChartManage_MigratingHint" xml:space="preserve">
     <value>A migráció folyamatban van. Kérjük, várj és ne zárd be az alkalmazást.</value>
@@ -404,7 +404,7 @@
     <value>Gyors mod projekt létrehozásához</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Mod sablon Nuget</value>
+    <value>Mod sablon NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>Fejlesztői környezet</value>
@@ -500,7 +500,7 @@
     <value>Beállítások</value>
   </data>
   <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
-    <value>Chart eszközök</value>
+    <value>Charter eszközök</value>
   </data>
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>Zenék kezelése</value>
@@ -629,7 +629,7 @@
     <value>Alapvető modok inicializálása ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
-    <value>.NET runtime telepítése ...</value>
+    <value>.NET Runtime telepítése ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
     <value>.NET SDK telepítése ...</value>
@@ -704,7 +704,7 @@
     <value>Régi adatok migrálása</value>
   </data>
   <data name="Setup_Task_Migration_Description" xml:space="preserve">
-    <value>Chartek konvertálása régebbi modokból, például CustomAlbums-ból Euterpe formátumba</value>
+    <value>Chartok konvertálása régebbi modokból, például CustomAlbums-ból Euterpe formátumba</value>
   </data>
   <data name="Setup_Task_ModTemplate" xml:space="preserve">
     <value>Mod Sablon</value>

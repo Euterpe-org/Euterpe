@@ -135,7 +135,7 @@
     <value>Es wurde kein Schlüsselbundservice (secret-tool) gefunden. Deine Anmeldesitzung kann nicht gespeichert werden, und du musst dich bei jedem Start erneut anmelden.</value>
   </data>
   <data name="MessageBox_Content_Server_Unavailable" xml:space="preserve">
-    <value>Der Euterpe-Server ist derzeit nicht verfügbar. Euterpe wird jetzt geschlossen. Bitte versuchen Sie es später erneut.</value>
+    <value>Der Euterpe-Server ist derzeit nicht verfügbar. Euterpe wird jetzt geschlossen. Bitte versuche es später erneut.</value>
   </data>
   <data name="MessageBox_Content_SetMdDirectoryEnvironment" xml:space="preserve">
     <value>Möchtest du die Umgebungsvariable MD_DIRECTORY setzen?</value>
@@ -307,7 +307,7 @@
     <value>Mod {0} ist bereits aktuell</value>
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
-    <value>Der Server ist vorübergehend nicht verfügbar. Bitte versuchen Sie es in einem Moment erneut.</value>
+    <value>Der Server ist vorübergehend nicht verfügbar. Bitte versuche es in einem Moment erneut.</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Fehler</value>
