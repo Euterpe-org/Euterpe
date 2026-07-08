@@ -6,9 +6,8 @@ internal static class LinuxPaths
         {
             ".local/share/Steam",
             ".steam/steam",
-            ".var/app/ocm.valvesoftware.Steam/data/Steam",
-            ".steam/steam",
-            ".steam/root"
+            ".steam/root",
+            ".var/app/com.valvesoftware.Steam/data/Steam"
         }
         .Select(path => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), path)).ToArray();
 }

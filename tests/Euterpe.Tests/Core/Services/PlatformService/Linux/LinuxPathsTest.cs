@@ -29,7 +29,13 @@ public sealed class LinuxPathsTest
         using var _ = Assert.Multiple();
         await Assert.That(joined).Contains(".local/share/Steam");
         await Assert.That(joined).Contains(".steam/steam");
-        await Assert.That(joined).Contains(".var/app/ocm.valvesoftware.Steam/data/Steam");
+        await Assert.That(joined).Contains(".var/app/com.valvesoftware.Steam/data/Steam");
         await Assert.That(joined).Contains(".steam/root");
+    }
+
+    [Test]
+    public async Task SteamSearch_HasNoDuplicateEntries()
+    {
+        await Assert.That(LinuxPaths.SteamSearch).HasDistinctItems();
     }
 }
