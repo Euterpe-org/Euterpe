@@ -6,7 +6,7 @@ public static class StreamReaderExtensions
     {
         /// <summary>
         ///     Read lines using <see cref="StreamReader" /> asynchronously, with start line and end line.
-        ///     Line number start with 1
+        ///     Line numbers start at 1
         /// </summary>
         /// <param name="startLine"></param>
         /// <param name="endLine"></param>
@@ -16,7 +16,7 @@ public static class StreamReaderExtensions
         {
             if (startLine > endLine || startLine < 1)
             {
-                throw new ArgumentException("StartLine must be less than or equal to EndLine and start with 1");
+                throw new ArgumentException("startLine must be at least 1 and not greater than endLine");
             }
 
             var lines = new List<string?>();
@@ -42,7 +42,7 @@ public static class StreamReaderExtensions
 
         /// <summary>
         ///     Read lines using <see cref="StreamReader" /> asynchronously, with range
-        ///     Line number start with 1
+        ///     Line numbers start at 1
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
@@ -53,7 +53,7 @@ public static class StreamReaderExtensions
             var endLine = range.End.Value;
             if (startLine > endLine || startLine < 1)
             {
-                throw new ArgumentException("StartLine must be less than or equal to EndLine and start with 1");
+                throw new ArgumentException("startLine must be at least 1 and not greater than endLine");
             }
 
             var lines = new List<string?>();

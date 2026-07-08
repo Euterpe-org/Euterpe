@@ -16,7 +16,7 @@ public sealed class SemVersionConverterTest
     [Arguments("1.0.0-alpha.1")]
     [Arguments("1.0.0+build.1")]
     [Arguments("999.999.999-rc99")]
-    public async Task Roundtrip_PreservesVersionString(string versionString)
+    public async Task RoundTrip_PreservesVersionString(string versionString)
     {
         var version = SemVersion.Parse(versionString);
 

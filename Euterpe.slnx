@@ -14,6 +14,7 @@
     <Folder Name="/src/">
         <Project Path="src/Euterpe.Abstractions/Euterpe.Abstractions.csproj"/>
         <Project Path="src/Euterpe.Contracts/Euterpe.Contracts.csproj"/>
+        <Project Path="src/Euterpe.Controls/Euterpe.Controls.csproj"/>
         <Project Path="src/Euterpe.Core/Euterpe.Core.csproj"/>
         <Project Path="src/Euterpe.Generators/Euterpe.Generators.csproj"/>
         <Project Path="src/Euterpe.Localization/Euterpe.Localization.csproj"/>
@@ -22,7 +23,6 @@
         <Project Path="src/Euterpe.Tasks/Euterpe.Tasks.csproj"/>
         <Project Path="src/Euterpe.Updater/Euterpe.Updater.csproj"/>
         <Project Path="src/Euterpe/Euterpe.csproj"/>
-        <Project Path="src\Euterpe.Controls\Euterpe.Controls.csproj"/>
     </Folder>
     <Folder Name="/tests/">
         <Project Path="tests/Euterpe.Generators.Tests/Euterpe.Generators.Tests.csproj"/>

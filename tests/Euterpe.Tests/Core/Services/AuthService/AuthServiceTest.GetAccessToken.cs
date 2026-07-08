@@ -39,7 +39,7 @@ public sealed partial class AuthServiceTest
         var authClientMock = IEuterpeAuthClient.Mock();
         authClientMock.ExchangeAppTokenAsync(Any<AppTokenRequest>(), Any<CancellationToken>())
             .Returns(new AppTokenResponse(NewAccessToken, NewRefreshToken, TestUser));
-        var sut = CreateLoggableService(authClientMock);
+        var sut = CreateLoginReadyService(authClientMock);
 
         var getTokenTask = sut.GetAccessTokenAsync();
 
