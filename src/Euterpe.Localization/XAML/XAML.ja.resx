@@ -404,7 +404,7 @@
     <value>Modプロジェクトをすばやく作成</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Modテンプレート Nuget</value>
+    <value>Modテンプレート NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>開発環境</value>
@@ -500,7 +500,7 @@
     <value>設定</value>
   </data>
   <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
-    <value>譜面ツール</value>
+    <value>譜面制作者ツール</value>
   </data>
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>譜面管理</value>
@@ -629,7 +629,7 @@
     <value>必須Modを初期化しています…</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
-    <value>.NET runtime をインストールしています…</value>
+    <value>.NET Runtime をインストールしています…</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
     <value>.NET SDK をインストールしています…</value>
@@ -665,10 +665,10 @@
     <value>失敗しました。ログを確認して再試行してください。</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
-    <value>チャートツール (MDBMSC)（未実装）</value>
+    <value>譜面作成ツール (MDBMSC)（未実装）</value>
   </data>
   <data name="Setup_Task_ChartingTool_Description" xml:space="preserve">
-    <value>MDMチャート作成ツールキット（未実装）</value>
+    <value>MDM譜面作成ツールキット（未実装）</value>
   </data>
   <data name="Setup_Task_DotNetRuntime" xml:space="preserve">
     <value>.NET Runtime</value>

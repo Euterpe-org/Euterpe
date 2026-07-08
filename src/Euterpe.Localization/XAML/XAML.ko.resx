@@ -404,7 +404,7 @@
     <value>모드 프로젝트를 빠르게 생성</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>모드 템플릿 Nuget</value>
+    <value>모드 템플릿 NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>개발 환경</value>
@@ -500,7 +500,7 @@
     <value>설정</value>
   </data>
   <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
-    <value>채보 도구</value>
+    <value>차터 도구</value>
   </data>
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>채보 관리</value>
@@ -629,7 +629,7 @@
     <value>필수 모드 초기화 중…</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
-    <value>.NET runtime 설치 중…</value>
+    <value>.NET Runtime 설치 중…</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
     <value>.NET SDK 설치 중…</value>

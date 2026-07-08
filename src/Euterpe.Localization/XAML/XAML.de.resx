@@ -296,7 +296,7 @@
     <value>{0} von diesem Chart referenzierte Datei(en) fehlen in seinem Ordner</value>
   </data>
   <data name="EpkEditor_NewFile" xml:space="preserve">
-    <value>Neue EPK …</value>
+    <value>Neue EPK…</value>
   </data>
   <data name="EpkEditor_New_Description" xml:space="preserve">
     <value>Einen neuen Chart aus einem Ordner mit Assets erstellen</value>
@@ -404,7 +404,7 @@
     <value>Für schnelle Mod-Projekterstellung</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>Mod-Vorlage Nuget</value>
+    <value>Mod-Vorlage NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>Entwicklungsumgebung</value>
@@ -500,7 +500,7 @@
     <value>Einstellungen</value>
   </data>
   <data name="Panel_Charting_CharterToolkit" xml:space="preserve">
-    <value>Chart-Werkzeuge</value>
+    <value>Charter-Werkzeuge</value>
   </data>
   <data name="Panel_Charting_ChartManage" xml:space="preserve">
     <value>Chart-Verwaltung</value>
@@ -629,7 +629,7 @@
     <value>Essentielle Mods werden initialisiert ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetRuntime" xml:space="preserve">
-    <value>.NET runtime wird installiert ...</value>
+    <value>.NET Runtime wird installiert ...</value>
   </data>
   <data name="Setup_Progress_InstallingDotNetSdk" xml:space="preserve">
     <value>.NET SDK wird installiert ...</value>

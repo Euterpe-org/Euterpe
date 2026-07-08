@@ -404,7 +404,7 @@
     <value>快速建立模組專案</value>
   </data>
   <data name="ModDevelop_Card_ModTemplate_Title" xml:space="preserve">
-    <value>模組範本 Nuget</value>
+    <value>模組範本 NuGet</value>
   </data>
   <data name="ModDevelop_Section_DevelopmentEnvironment" xml:space="preserve">
     <value>開發環境</value>
@@ -662,7 +662,7 @@
     <value>完成</value>
   </data>
   <data name="Setup_Step_Failed" xml:space="preserve">
-    <value>執行失敗，請查看日誌或重試</value>
+    <value>執行失敗，請查看記錄檔或重試</value>
   </data>
   <data name="Setup_Task_ChartingTool" xml:space="preserve">
     <value>製譜工具 (MDBMSC)（還未實現）</value>
