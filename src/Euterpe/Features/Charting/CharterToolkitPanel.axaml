@@ -100,7 +100,7 @@
                 <Grid
                     ColumnDefinitions="*,16,*"
                     MaxWidth="820">
-                    <!--  Chart Analyzer: predict ratings, analyse Notes  -->
+                    <!--  Chart Analyzer: predict ratings, analyze Notes  -->
                     <Button
                         Classes="Transparent Card"
                         Command="{Binding OpenUrlCommand}"

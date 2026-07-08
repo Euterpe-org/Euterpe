@@ -3,7 +3,7 @@ namespace Euterpe.Abstractions;
 public interface ISteamPathDiscovery
 {
     /// <summary>
-    ///     Get steam folder path
+    ///     Get Steam folder path
     /// </summary>
     /// <param name="steamFolder"></param>
     /// <returns>Is success</returns>
@@ -17,7 +17,7 @@ public interface ISteamPathDiscovery
     bool CheckIsValidSteamFolder(string folderPath);
 
     /// <summary>
-    ///     Get steam executable path
+    ///     Get Steam executable path
     /// </summary>
     /// <returns></returns>
     Task<string?> GetSteamExecPathAsync();

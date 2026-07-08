@@ -1,5 +1,5 @@
 name: Help Wanted
-description: You've met a problem and need help
+description: You've run into a problem and need help
 title: "[Help Wanted]: "
 labels: "help wanted"
 body:
@@ -7,7 +7,7 @@ body:
     id: os
     attributes:
       label: Operating system
-      description: which OS you are using ?
+      description: Which OS are you using?
       options:
         - Windows 10 and below
         - Windows 11
@@ -29,7 +29,7 @@ body:
     attributes:
       label: Screenshots (Optional)
       placeholder: |-
-        Clicking on this box and drag your screenshots or videos here to upload.
+        Click on this box and drag your screenshots or videos here to upload.
         Make sure the screenshots or videos are displayed normally after submitting the issue
     validations:
       required: false

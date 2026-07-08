@@ -32,12 +32,12 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         // Artist
         new(Contributor_Artist, [
             new Contributor("Super Pig",
-                "Drawing the euterpe application icon",
+                "Drawing the Euterpe application icon",
                 [("Bilibili", "https://space.bilibili.com/252615263")]),
             new Contributor("aquawtf",
-                "Drawing the euterpe icon"),
+                "Drawing the Euterpe icon"),
             new Contributor("Bigbeesushi",
-                "Drawing the euterpe background",
+                "Drawing the Euterpe background",
                 [("YouTube", "https://www.youtube.com/@%E9%AD%94%E6%B3%95%E5%B8%AB%E7%8E%A5%E6%9C%88")])
         ]),
 

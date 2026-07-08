@@ -37,8 +37,7 @@ public sealed partial class AuthServiceTest
             Logger = _logger
         };
 
-    // Builds a service wired with a loopback that completes login successfully via LoginAsync.
-    private AuthService CreateLoggableService(IEuterpeAuthClient authClient)
+    private AuthService CreateLoginReadyService(IEuterpeAuthClient authClient)
     {
         var (launcher, listenerFactory) = StateEchoingLoopback(AuthCode, null);
         return CreateAuthService(authClient, launcher: launcher, listenerFactory: listenerFactory);

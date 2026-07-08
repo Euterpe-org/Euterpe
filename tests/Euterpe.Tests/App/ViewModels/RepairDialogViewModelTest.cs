@@ -64,7 +64,7 @@ public sealed class RepairDialogViewModelTest
     }
 
     [Test]
-    public async Task PrepareForGamePathAsync_ResetsStateAndSetsGamePagePresented()
+    public async Task PrepareForGamePathAsync_ResetsStateAndSetsGamePathPagePresented()
     {
         var state = new SetupState();
         state.Steps.Add(new SetupStepState { Kinds = SetupOptionKinds.MelonLoader, DisplayName = "stale" });
