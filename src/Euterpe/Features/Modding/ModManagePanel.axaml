@@ -144,7 +144,7 @@
                                                 Classes="ControlsHorizontal">
                                                 <StackPanel.Styles>
                                                     <Style
-                                                        Selector="Label.Gray">
+                                                        Selector="Label.Grey">
                                                         <Setter Property="Content" Value="{Binding Version, Mode=OneWay}" />
                                                     </Style>
                                                     <Style
@@ -155,7 +155,7 @@
 
                                                 <Label
                                                     Classes="Ghost TagLabel"
-                                                    Classes.Gray="{Binding !IsLocal, Mode=OneWay}"
+                                                    Classes.Grey="{Binding !IsLocal, Mode=OneWay}"
                                                     Classes.Indigo="{Binding IsLocal, Mode=OneWay}" />
 
                                                 <StackPanel
@@ -404,7 +404,7 @@
                             Margin="0,8">
                             <StackPanel.Styles>
                                 <Style
-                                    Selector="Label.Gray">
+                                    Selector="Label.Grey">
                                     <Setter Property="Content" Value="{Binding SelectedMod.Version, StringFormat='v{0}', Mode=OneWay}" />
                                 </Style>
                                 <Style
@@ -422,7 +422,7 @@
                             <!--  Version Label  -->
                             <Label
                                 Classes="Ghost TagLabel"
-                                Classes.Gray="{Binding !SelectedMod.IsLocal, Mode=OneWay}"
+                                Classes.Grey="{Binding !SelectedMod.IsLocal, Mode=OneWay}"
                                 Classes.Indigo="{Binding SelectedMod.IsLocal, Mode=OneWay}" />
 
                             <!--  Update Version Indicator  -->
@@ -546,7 +546,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label
-                                        Classes="Ghost Gray TagLabel"
+                                        Classes="Ghost Grey TagLabel"
                                         Content="{Binding ., Mode=OneWay}"
                                         Margin="0,0,8,8" />
                                 </DataTemplate>
