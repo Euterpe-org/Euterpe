@@ -30,13 +30,13 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            Logger.ZLogInformation($"Downloading .NET Runtime from {IGameRuntimeInstaller.DotnetRuntimeUrl} to {tempFilePath}");
-            await AppDownloadManager.DownloadFileAsync(IGameRuntimeInstaller.DotnetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+            Logger.ZLogInformation($"Downloading .NET Runtime from {IGameRuntimeInstaller.DotNetRuntimeUrl} to {tempFilePath}");
+            await AppDownloadManager.DownloadFileAsync(IGameRuntimeInstaller.DotNetRuntimeUrl, tempFilePath).ConfigureAwait(false);
 
-            Logger.ZLogInformation($"Extracting .NET Runtime to {GameConfig.DotnetRuntimeFolder}");
-            await ArchiveService.ExtractZipFileAsync(tempFilePath, GameConfig.DotnetRuntimeFolder).ConfigureAwait(false);
+            Logger.ZLogInformation($"Extracting .NET Runtime to {GameConfig.DotNetRuntimeFolder}");
+            await ArchiveService.ExtractZipFileAsync(tempFilePath, GameConfig.DotNetRuntimeFolder).ConfigureAwait(false);
 
-            Logger.ZLogInformation($".NET Runtime installed to {GameConfig.DotnetRuntimeFolder}");
+            Logger.ZLogInformation($".NET Runtime installed to {GameConfig.DotNetRuntimeFolder}");
         }
         finally
         {
@@ -48,8 +48,8 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
     {
         ReadOnlySpan<string> dotnetPaths =
         [
-            GameConfig.DotnetRuntimeFolder,
-            GameConfig.MelonLoaderDotnetRuntimeFolder
+            GameConfig.DotNetRuntimeFolder,
+            GameConfig.MelonLoaderDotNetRuntimeFolder
         ];
 
         foreach (var path in dotnetPaths)

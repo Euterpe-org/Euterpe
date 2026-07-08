@@ -6,6 +6,6 @@ public interface IChartLocalService
 {
     IEnumerable<string> GetChartFolderPaths(ChartSource source);
     CustomAlbumSource CreateCustomAlbumSource(string path);
-    CustomAlbumSource[] GetCustomAlbumsSources();
+    CustomAlbumSource[] GetCustomAlbumSources();
     Task<ChartDto?> LoadChartFromPathAsync(string chartFolder, ChartSource source);
 }

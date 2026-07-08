@@ -6,7 +6,7 @@ namespace Euterpe.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
 internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
 {
-    private const string DotnetSdkUrl = "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x64.exe";
+    private const string DotNetSdkUrl = "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x64.exe";
 
     public async Task<bool> CheckInstalledAsync()
     {
@@ -32,8 +32,8 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            Logger.ZLogInformation($"Downloading .NET SDK from {DotnetSdkUrl} to {tempFilePath}");
-            await AppDownloadManager.DownloadFileAsync(DotnetSdkUrl, tempFilePath).ConfigureAwait(false);
+            Logger.ZLogInformation($"Downloading .NET SDK from {DotNetSdkUrl} to {tempFilePath}");
+            await AppDownloadManager.DownloadFileAsync(DotNetSdkUrl, tempFilePath).ConfigureAwait(false);
 
             Logger.ZLogInformation($"Launching .NET SDK installer: {tempFilePath}");
             using var process = Process.Start(
