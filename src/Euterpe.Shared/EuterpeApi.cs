@@ -37,7 +37,7 @@ public static class EuterpeApi
         public const string BasePath = "distribution";
         public const string LibsPath = "/libs";
         public const string DependenciesPath = "/deps";
-        public const string ReleasesPath = "/app-releases";
+        public const string VelopackPath = "/velopack";
     }
 
     public static class Charts

@@ -16,11 +16,4 @@ public sealed class WindowsPlatformInfoTest
         var info = new WindowsPlatformInfo();
         await Assert.That(info.OsString).IsEqualTo("win");
     }
-
-    [Test]
-    public async Task UpdaterFileName_IsUpdaterExe()
-    {
-        var info = new WindowsPlatformInfo();
-        await Assert.That(info.UpdaterFileName).IsEqualTo("Updater.exe");
-    }
 }

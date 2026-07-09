@@ -4,5 +4,5 @@ namespace Euterpe.Models.Common;
 public enum UpdateChannel
 {
     Stable,
-    Prerelease
+    Beta
 }

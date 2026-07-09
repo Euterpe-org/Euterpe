@@ -37,8 +37,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 #if RELEASE
         try
         {
-            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
-            await UpdateService.CheckForUpdatesAsync(cts.Token).ConfigureAwait(true);
+            await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
         }
         catch (Exception ex)
         {

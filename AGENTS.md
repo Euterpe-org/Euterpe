@@ -12,8 +12,6 @@ Avalonia desktop app. Projects under `src/`:
 - `Euterpe.Models` — app-internal models, DTOs, enums and records (types that cross the network go in `Euterpe.Contracts` instead).
 - `Euterpe.Shared` — dependency-free utilities referenced across projects: attributes, collections, extensions, threading helpers, constants.
 - `Euterpe.Tasks` — custom MSBuild build tasks (e.g. generating `EuterpeTheme.axaml`).
-- `Euterpe.Updater` — standalone console app that applies a downloaded update after the main app exits.
-
 Tests under `tests/` (TUnit):
 
 - `Euterpe.Generators.Tests` — source generator tests, snapshot-verified with Verify (`snapshots/`).

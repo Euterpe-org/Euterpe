@@ -29,10 +29,10 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="ObservableCollections"/>
-        <PackageReference Include="PublishAotCompressed"/>
         <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="Semver"/>
+        <PackageReference Include="Velopack"/>
         <PackageReference Include="Xaml.Behaviors.Interactions.DragAndDrop"/>
     </ItemGroup>
 

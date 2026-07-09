@@ -10,11 +10,6 @@ public interface IPlatformInfo
     string OsString { get; }
 
     /// <summary>
-    ///     Get Updater file name
-    /// </summary>
-    string UpdaterFileName { get; }
-
-    /// <summary>
     ///     Get architecture string
     /// </summary>
     string ArchitectureString =>

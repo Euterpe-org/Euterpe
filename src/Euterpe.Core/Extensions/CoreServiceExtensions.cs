@@ -5,6 +5,7 @@ using Refit;
 using SoundFlow.Abstracts;
 using SoundFlow.Backends.MiniAudio;
 using SoundFlow.Codecs.FFMpeg;
+using Velopack.Sources;
 
 namespace Euterpe.Core.Extensions;
 
@@ -126,6 +127,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<ResourceService>().As<IResourceService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<TelemetryService>().As<ITelemetryService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<UpdateService>().As<IUpdateService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<VelopackFileDownloader>().As<IFileDownloader>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<VdfSerializationService>().As<IVdfSerializationService>().PropertiesAutowired().SingleInstance();
 
             builder.RegisterPerPlatformAppServices();
