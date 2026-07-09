@@ -16,11 +16,4 @@ public sealed class LinuxPlatformInfoTest
         var info = new LinuxPlatformInfo();
         await Assert.That(info.OsString).IsEqualTo("linux");
     }
-
-    [Test]
-    public async Task UpdaterFileName_IsUpdater()
-    {
-        var info = new LinuxPlatformInfo();
-        await Assert.That(info.UpdaterFileName).IsEqualTo("Updater");
-    }
 }

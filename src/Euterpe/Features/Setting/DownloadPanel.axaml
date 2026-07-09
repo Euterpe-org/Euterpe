@@ -19,7 +19,7 @@
     <StackPanel
         Classes="ContentListRoot">
 
-        <!--  Download Prerelease  -->
+        <!--  Download Beta  -->
         <e:LabeledSection
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_UpdateChannel}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_UpdateChannel}}">

@@ -7,7 +7,7 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
     public static IReadOnlyList<LocalizedString> UpdateChannels { get; } =
     [
         Setting_UpdateChannel_Stable,
-        Setting_UpdateChannel_Prerelease
+        Setting_UpdateChannel_Beta
     ];
 
     [ObservableProperty]

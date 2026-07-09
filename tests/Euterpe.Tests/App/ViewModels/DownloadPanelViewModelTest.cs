@@ -9,7 +9,7 @@ public sealed class DownloadPanelViewModelTest
 {
     [Test]
     [Arguments(0, UpdateChannel.Stable)]
-    [Arguments(1, UpdateChannel.Prerelease)]
+    [Arguments(1, UpdateChannel.Beta)]
     public async Task SelectedUpdateChannelIndex_WritesBackToConfig(int index, UpdateChannel expected)
     {
         var config = NewConfig();

@@ -1,3 +1,4 @@
+using Velopack;
 using static Euterpe.Bootstrapper;
 using static Euterpe.CrashHandler;
 using static Euterpe.IocContainer;
@@ -12,6 +13,8 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        VelopackApp.Build().Run();
+
         using var mutex = new Mutex(true, AppName, out var createdNew);
         if (!createdNew)
         {

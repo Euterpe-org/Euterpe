@@ -4,5 +4,4 @@ namespace Euterpe.Core;
 internal sealed class WindowsPlatformInfo : IPlatformInfo
 {
     public string OsString => "win";
-    public string UpdaterFileName => "Updater.exe";
 }
