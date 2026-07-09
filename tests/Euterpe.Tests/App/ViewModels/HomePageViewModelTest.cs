@@ -66,7 +66,6 @@ public sealed class HomePageViewModelTest
         ChartManageService = IChartManageService.Mock(),
         MessageBoxService = IMessageBoxService.Mock(),
         RuntimeInstaller = IGameRuntimeInstaller.Mock(),
-        UidProvider = IGameUidProvider.Mock(),
         NavigationService = null!,
         SetupDialogService = null!
     };

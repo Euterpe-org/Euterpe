@@ -225,19 +225,16 @@ public static class CoreServiceExtensions
             builder.RegisterType<WindowsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<WindowsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<WindowsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<WindowsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().InstancePerLifetimeScope();
 #elif LINUX
             builder.RegisterType<LinuxGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<LinuxGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<LinuxGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<LinuxGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<LinuxGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().InstancePerLifetimeScope();
 #elif MACOS
             builder.RegisterType<MacOsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<MacOsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<MacOsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<MacOsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<MacOsGameUidProvider>().As<IGameUidProvider>().PropertiesAutowired().InstancePerLifetimeScope();
 #endif
 #pragma warning restore CA1416
         }

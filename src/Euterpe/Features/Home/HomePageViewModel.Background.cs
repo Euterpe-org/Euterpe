@@ -4,29 +4,8 @@ public sealed partial class HomePageViewModel
 {
     private void StartBackgroundTasks()
     {
-        BindAccountAsync().SafeFireAndForget();
         CheckModdingDependenciesAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to check modding dependencies"));
         UpdateChartsAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to auto-update charts"));
-    }
-
-    private async Task BindAccountAsync()
-    {
-        var request = await UidProvider.GetMuseDashUidRequestAsync().ConfigureAwait(false);
-        if (request is null)
-        {
-            Logger.ZLogWarning($"Failed to get MuseDash user ID. Skipping account binding.");
-            return;
-        }
-
-        try
-        {
-            await AccountClient.BindVanillaAccountAsync(request).ConfigureAwait(false);
-            Logger.ZLogInformation($"Successfully bound MuseDash account.");
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Failed to bind MuseDash account.");
-        }
     }
 
     private async Task CheckModdingDependenciesAsync()

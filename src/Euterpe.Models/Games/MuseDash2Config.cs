@@ -27,9 +27,6 @@ public sealed class MuseDash2Config : GameConfig
     public override string GameDataFolderName => "MuseDash2_Data";
 
     [JsonIgnore]
-    public override string UidRegistryValueName => string.Empty;
-
-    [JsonIgnore]
     public override string ModTemplatePackageName => "MuseDash2.Mod.Template";
 
     [JsonIgnore]
