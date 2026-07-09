@@ -80,7 +80,6 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required ILogger<HomePageViewModel> Logger { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
     public required IGameRuntimeInstaller RuntimeInstaller { get; init; }
-    public required IGameUidProvider UidProvider { get; init; }
 
     #endregion Injections
 }

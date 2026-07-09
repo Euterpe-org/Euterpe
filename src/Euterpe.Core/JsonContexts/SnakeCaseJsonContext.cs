@@ -17,7 +17,6 @@ namespace Euterpe.Core.JsonContexts;
 [JsonSerializable(typeof(CheckChartUpdatesRequest))]
 [JsonSerializable(typeof(CheckChartUpdatesResponse))]
 [JsonSerializable(typeof(SessionEvent))]
-[JsonSerializable(typeof(MuseDashUidRequest))]
 [JsonSerializable(typeof(TokenPayload))]
 [JsonSerializable(typeof(AppTokenRequest))]
 [JsonSerializable(typeof(AppTokenResponse))]

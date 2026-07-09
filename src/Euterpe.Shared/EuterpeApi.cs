@@ -16,8 +16,6 @@ public static class EuterpeApi
     public static class Account
     {
         public const string BasePath = "me";
-
-        public const string VanillaBinding = "/vanilla-binding";
     }
 
     public static class Telemetry
