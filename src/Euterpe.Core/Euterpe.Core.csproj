@@ -22,6 +22,7 @@
         <PackageReference Include="Tmds.DBus.Generator"/>
         <PackageReference Include="Tmds.DBus.Protocol"/>
         <PackageReference Include="ValveKeyValue"/>
+        <PackageReference Include="Velopack"/>
         <PackageReference Include="ZLogger"/>
     </ItemGroup>
 

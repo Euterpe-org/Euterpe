@@ -1,7 +1,6 @@
-using Euterpe.Contracts.Distribution;
-using Euterpe.Core.Http.Clients;
-using Semver;
 using TUnit.Mocks.Logging;
+using Velopack.Locators;
+using Velopack.Sources;
 
 namespace Euterpe.Tests.Core;
 
@@ -9,12 +8,12 @@ namespace Euterpe.Tests.Core;
 [TestSubject(typeof(UpdateService))]
 public sealed partial class UpdateServiceTest
 {
+    private const string AppId = "Euterpe";
     private const string CurrentStableVersion = "1.0.0";
-    private const string CurrentPrereleaseVersion = "1.0.0-rc1";
+    private const string CurrentBetaVersion = "1.0.0-beta.1";
     private const string LowerStableVersion = "0.0.1";
-    private const string LowerPrereleaseVersion = "0.0.1-rc1";
+    private const string LowerBetaVersion = "0.0.1-beta.1";
     private const string TestRuntimeIdentifier = "test-rid";
-    private const string TestDownloadUrl = "https://example.com/release.zip";
 
     private readonly MockLogger<UpdateService> _logger = Mock.Logger<UpdateService>();
 
@@ -22,53 +21,58 @@ public sealed partial class UpdateServiceTest
 
     private UpdateService CreateUpdateService(
         Config? config = null,
-        SemVersion? currentVersion = null,
-        IEuterpeDistributionClient? distributionClient = null,
-        IAppDownloadManager? appDownloadManager = null,
-        IMessageBoxService? messageBoxService = null,
-        IPlatformInfo? platformService = null)
+        string currentVersion = CurrentStableVersion,
+        IFileDownloader? feedDownloader = null,
+        IPlatformInfo? platformInfo = null)
     {
-        var platformServiceMock = platformService ?? CreatePlatformServiceMock();
-
         return new UpdateService
         {
             Config = config ?? Config,
-            CurrentVersion = currentVersion ?? SemVersion.Parse(CurrentStableVersion),
+            FeedDownloader = feedDownloader ?? new TestFeedDownloader(CreateFeed()),
             Logger = _logger,
-            DistributionClient = distributionClient ?? IEuterpeDistributionClient.Mock(),
-            AppDownloadManager = appDownloadManager ?? IAppDownloadManager.Mock(),
-            MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
-            PlatformInfo = platformServiceMock
+            PlatformInfo = platformInfo ?? CreatePlatformInfoMock(),
+            VelopackLocatorOverride = new TestVelopackLocator(AppId, currentVersion, AppContext.BaseDirectory)
         };
     }
 
-    private static IPlatformInfo CreatePlatformServiceMock()
+    private static IPlatformInfo CreatePlatformInfoMock()
     {
         var mock = IPlatformInfo.Mock();
         mock.RuntimeIdentifier.Returns(TestRuntimeIdentifier);
         return mock;
     }
 
-    private static IEuterpeDistributionClient CreateDistributionClientMock(string version)
+    private static string CreateFeed(string? version = null)
     {
-        var release = new Release
-        {
-            Slug = TestRuntimeIdentifier,
-            FileExtension = "zip",
-            Versions = new Dictionary<string, DistributionVersion<ReleaseMetadata>>
-            {
-                [version] = new()
-                {
-                    DownloadUrl = TestDownloadUrl,
-                    SHA256 = "sha256",
-                    FileSize = 100
-                }
-            }
-        };
+        return version is null
+            ? """{"Assets":[]}"""
+            : $$"""{"Assets":[{"PackageId":"{{AppId}}","Version":"{{version}}","Type":"Full","FileName":"{{AppId}}-{{version}}-full.nupkg","SHA1":"0123456789012345678901234567890123456789","Size":1}]}""";
+    }
 
-        var mock = IEuterpeDistributionClient.Mock();
-        mock.GetAppReleaseAsync(Any<bool>(), Any<bool>(), Any<CancellationToken>())
-            .Returns([release]);
-        return mock;
+    private sealed class TestFeedDownloader(string response) : IFileDownloader
+    {
+        public string? LastUrl { get; private set; }
+
+        public Task DownloadFile(
+            string url,
+            string targetFile,
+            Action<int> progress,
+            IDictionary<string, string>? headers = null,
+            double timeout = 30,
+            CancellationToken cancelToken = default)
+        {
+            throw new NotSupportedException();
+        }
+
+        public Task<byte[]> DownloadBytes(string url, IDictionary<string, string>? headers = null, double timeout = 30)
+        {
+            throw new NotSupportedException();
+        }
+
+        public Task<string> DownloadString(string url, IDictionary<string, string>? headers = null, double timeout = 30)
+        {
+            LastUrl = url;
+            return Task.FromResult(response);
+        }
     }
 }

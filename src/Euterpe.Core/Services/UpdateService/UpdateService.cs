@@ -1,42 +1,62 @@
+using Velopack;
+using Velopack.Sources;
+
 namespace Euterpe.Core;
 
 internal sealed partial class UpdateService : IUpdateService
 {
-    public SemVersion CurrentVersion { get; init; } = SemVersion.Parse(AppVersion);
+    private UpdateManager? _manager;
+    private UpdateInfo? _updateInfo;
 
-    public async Task<bool> CheckForUpdatesAsync(CancellationToken cancellationToken = default)
+    public async Task<string?> CheckForUpdatesAsync()
     {
-        Logger.ZLogInformation($"Get Current version: {CurrentVersion}");
-        Logger.ZLogInformation($"Checking for updates ...");
+        var runtimeIdentifier = PlatformInfo.RuntimeIdentifier;
+        var channel = GetVelopackChannel(runtimeIdentifier);
 
-        var prerelease = Config.UpdateChannel is UpdateChannel.Prerelease;
-        var target = await GetReleaseCandidateAsync(prerelease, cancellationToken).ConfigureAwait(true);
-
-        return await HandleReleaseAsync(target).ConfigureAwait(false);
-    }
-
-    private async Task<UpdateTarget?> GetReleaseCandidateAsync(bool prerelease, CancellationToken cancellationToken = default)
-    {
-        var releases = await DistributionClient.GetAppReleaseAsync(!prerelease, prerelease, cancellationToken).ConfigureAwait(false);
-        var release = releases.SingleOrDefault(x => x.Slug == PlatformInfo.RuntimeIdentifier);
-        if (release is null)
+        var manager = CreateUpdateManager(runtimeIdentifier, channel);
+        if (!manager.IsInstalled)
         {
+            Logger.ZLogError($"Not running from a Velopack installation on channel {channel}");
+            throw new InvalidOperationException("The application is not running from a Velopack installation.");
+        }
+
+        Logger.ZLogInformation($"Checking for updates on channel {channel} ...");
+
+        var updateInfo = await manager
+            .CheckForUpdatesAsync()
+            .WaitAsync(TimeSpan.FromSeconds(15))
+            .ConfigureAwait(false);
+
+        if (updateInfo is null)
+        {
+            Logger.ZLogInformation($"No new version available");
             return null;
         }
 
-        var entry = release.Versions.Single();
-        var version = SemVersion.Parse(entry.Key);
+        _manager = manager;
+        _updateInfo = updateInfo;
 
-        return new UpdateTarget(version, entry.Value.DownloadUrl, entry.Value.SHA256);
+        var newVersion = updateInfo.TargetFullRelease.Version.ToString();
+        Logger.ZLogInformation($"New version available: {newVersion}");
+        return newVersion;
+    }
+
+    public async Task UpdateAsync(IProgress<int> progress)
+    {
+        progress.Report(0);
+
+        await _manager!
+            .DownloadUpdatesAsync(_updateInfo!, progress.Report)
+            .ConfigureAwait(false);
+
+        _manager.ApplyUpdatesAndRestart(_updateInfo!.TargetFullRelease);
     }
 
     #region Injections
 
     public required Config Config { get; init; }
-    public required IEuterpeDistributionClient DistributionClient { get; init; }
-    public required IAppDownloadManager AppDownloadManager { get; init; }
+    public required IFileDownloader FeedDownloader { get; init; }
     public required ILogger<UpdateService> Logger { get; init; }
-    public required IMessageBoxService MessageBoxService { get; init; }
     public required IPlatformInfo PlatformInfo { get; init; }
 
     #endregion Injections

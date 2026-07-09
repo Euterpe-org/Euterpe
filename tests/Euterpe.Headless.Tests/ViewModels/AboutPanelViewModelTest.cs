@@ -17,7 +17,7 @@ public sealed class AboutPanelViewModelTest : HeadlessTest
     public Task CheckUpdateCommand_NoUpdateFound_ShowsSuccessMessage() => RunOnUI(async () =>
     {
         var update = IUpdateService.Mock();
-        update.CheckForUpdatesAsync(Any<CancellationToken>()).Returns(false);
+        update.CheckForUpdatesAsync().Returns(false);
         var msgBox = IMessageBoxService.Mock();
         var vm = NewViewModel(update, msgBox);
 
@@ -30,7 +30,7 @@ public sealed class AboutPanelViewModelTest : HeadlessTest
     public Task CheckUpdateCommand_UpdateFound_DoesNotShowSuccess() => RunOnUI(async () =>
     {
         var update = IUpdateService.Mock();
-        update.CheckForUpdatesAsync(Any<CancellationToken>()).Returns(true);
+        update.CheckForUpdatesAsync().Returns(true);
         var msgBox = IMessageBoxService.Mock();
         var vm = NewViewModel(update, msgBox);
 

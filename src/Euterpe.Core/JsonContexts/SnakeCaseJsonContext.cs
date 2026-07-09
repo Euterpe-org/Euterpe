@@ -12,7 +12,6 @@ namespace Euterpe.Core.JsonContexts;
 [JsonSerializable(typeof(Mod[]))]
 [JsonSerializable(typeof(Dependency[]))]
 [JsonSerializable(typeof(Lib[]))]
-[JsonSerializable(typeof(Release[]))]
 [JsonSerializable(typeof(Chart[]))]
 [JsonSerializable(typeof(CheckChartUpdatesRequest))]
 [JsonSerializable(typeof(CheckChartUpdatesResponse))]

@@ -67,9 +67,9 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
     {
         try
         {
-            var hasUpdate = await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
+            var newVersion = await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
 
-            if (!hasUpdate)
+            if (newVersion is null)
             {
                 await MessageBoxService.SuccessAsync(MessageBox_Content_NoUpdatesFound).ConfigureAwait(false);
             }

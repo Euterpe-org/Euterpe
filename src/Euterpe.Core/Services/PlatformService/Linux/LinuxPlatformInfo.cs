@@ -4,5 +4,4 @@ namespace Euterpe.Core;
 internal sealed class LinuxPlatformInfo : IPlatformInfo
 {
     public string OsString => "linux";
-    public string UpdaterFileName => "Updater";
 }

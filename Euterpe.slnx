@@ -21,7 +21,6 @@
         <Project Path="src/Euterpe.Models/Euterpe.Models.csproj"/>
         <Project Path="src/Euterpe.Shared/Euterpe.Shared.csproj"/>
         <Project Path="src/Euterpe.Tasks/Euterpe.Tasks.csproj"/>
-        <Project Path="src/Euterpe.Updater/Euterpe.Updater.csproj"/>
         <Project Path="src/Euterpe/Euterpe.csproj"/>
     </Folder>
     <Folder Name="/tests/">

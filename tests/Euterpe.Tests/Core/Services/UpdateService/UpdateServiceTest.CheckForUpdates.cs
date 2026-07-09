@@ -1,5 +1,3 @@
-using Euterpe.Core.Http.Clients;
-using Semver;
 using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
@@ -7,46 +5,57 @@ namespace Euterpe.Tests.Core;
 public sealed partial class UpdateServiceTest
 {
     [Test]
-    [Arguments(UpdateChannel.Stable, LowerStableVersion)]
-    [Arguments(UpdateChannel.Prerelease, LowerPrereleaseVersion)]
-    public async Task CheckForUpdatesAsync_LowerVersion_ShouldNotFindUpdate(UpdateChannel channel, string version)
+    [Arguments(UpdateChannel.Stable, LowerStableVersion, CurrentStableVersion, TestRuntimeIdentifier + "-stable")]
+    [Arguments(UpdateChannel.Beta, LowerBetaVersion, CurrentBetaVersion, TestRuntimeIdentifier + "-beta")]
+    [Arguments(UpdateChannel.Stable, CurrentStableVersion, CurrentStableVersion, TestRuntimeIdentifier + "-stable")]
+    [Arguments(UpdateChannel.Beta, CurrentBetaVersion, CurrentBetaVersion, TestRuntimeIdentifier + "-beta")]
+    public async Task CheckForUpdatesAsync_NoNewerVersion_ReturnsNull(
+        UpdateChannel channel,
+        string remoteVersion,
+        string currentVersion,
+        string expectedChannel)
     {
         Config.UpdateChannel = channel;
-        var distributionClient = CreateDistributionClientMock(version);
+        var downloader = new TestFeedDownloader(CreateFeed(remoteVersion));
 
-        var updateService = CreateUpdateService(distributionClient: distributionClient);
+        var updateService = CreateUpdateService(currentVersion: currentVersion, feedDownloader: downloader);
 
-        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsNull();
+        await Assert.That(downloader.LastUrl).StartsWith(
+            $"{EuterpeApi.BaseUrl}{EuterpeApi.Distribution.BasePath}{EuterpeApi.Distribution.VelopackPath}/{TestRuntimeIdentifier}/releases.{expectedChannel}.json?");
         _logger.VerifyLog()
-            .ContainingMessage($"Release version parsed: {version}")
+            .ContainingMessage($"Checking for updates on channel {expectedChannel}")
             .ContainingMessage("No new version available");
     }
 
     [Test]
-    [Arguments(UpdateChannel.Stable, CurrentStableVersion)]
-    [Arguments(UpdateChannel.Prerelease, CurrentPrereleaseVersion)]
-    public async Task CheckForUpdatesAsync_RemoteEqualsCurrent_ShouldNotFindUpdate(UpdateChannel channel, string version)
+    public async Task CheckForUpdatesAsync_EmptyFeed_ReturnsNull()
     {
-        Config.UpdateChannel = channel;
-        var distributionClient = CreateDistributionClientMock(version);
+        var updateService = CreateUpdateService();
 
-        var updateService = CreateUpdateService(currentVersion: SemVersion.Parse(version), distributionClient: distributionClient);
-
-        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
-        _logger.VerifyLog()
-            .ContainingMessage($"Release version parsed: {version}")
-            .ContainingMessage("No new version available");
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsNull();
+        _logger.VerifyLog().ContainingMessage("No new version available");
     }
 
     [Test]
-    public async Task CheckForUpdatesAsync_WhenNoMatchingReleaseForRuntime_ShouldReturnFalse()
+    [Arguments(UpdateChannel.Stable, "2.0.0", CurrentStableVersion, TestRuntimeIdentifier + "-stable")]
+    [Arguments(UpdateChannel.Beta, "2.0.0-beta.1", CurrentBetaVersion, TestRuntimeIdentifier + "-beta")]
+    public async Task CheckForUpdatesAsync_NewerVersion_ReturnsVersion(
+        UpdateChannel channel,
+        string remoteVersion,
+        string currentVersion,
+        string expectedChannel)
     {
-        var distributionClient = IEuterpeDistributionClient.Mock();
-        distributionClient.GetAppReleaseAsync(Any<bool>(), Any<bool>(), Any<CancellationToken>())
-            .Returns([]);
+        Config.UpdateChannel = channel;
+        var downloader = new TestFeedDownloader(CreateFeed(remoteVersion));
 
-        var updateService = CreateUpdateService(distributionClient: distributionClient);
+        var updateService = CreateUpdateService(currentVersion: currentVersion, feedDownloader: downloader);
 
-        await Assert.That(await updateService.CheckForUpdatesAsync()).IsFalse();
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsEqualTo(remoteVersion);
+        await Assert.That(downloader.LastUrl).StartsWith(
+            $"{EuterpeApi.BaseUrl}{EuterpeApi.Distribution.BasePath}{EuterpeApi.Distribution.VelopackPath}/{TestRuntimeIdentifier}/releases.{expectedChannel}.json?");
+        _logger.VerifyLog()
+            .ContainingMessage($"Checking for updates on channel {expectedChannel}")
+            .ContainingMessage($"New version available: {remoteVersion}");
     }
 }

@@ -4,5 +4,4 @@ namespace Euterpe.Core;
 internal sealed class MacOsPlatformInfo : IPlatformInfo
 {
     public string OsString => "osx";
-    public string UpdaterFileName => "Updater";
 }

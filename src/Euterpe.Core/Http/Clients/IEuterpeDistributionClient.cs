@@ -11,7 +11,4 @@ public interface IEuterpeDistributionClient
 
     [Get(Distribution.DependenciesPath)]
     Task<Dependency[]> GetLatestDependenciesAsync([Query] bool latest = true, CancellationToken cancellationToken = default);
-
-    [Get(Distribution.ReleasesPath)]
-    Task<Release[]> GetAppReleaseAsync([Query] bool latest = true, [Query] bool prerelease = false, CancellationToken cancellationToken = default);
 }
