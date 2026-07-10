@@ -29,6 +29,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     {
         var comparer = SortExpressionComparer<ModDto>
             .Descending(x => x.State is ModState.Duplicated)
+            .ThenByDescending(x => x is { State: ModState.Incompatible, IsLocal: true })
             .ThenByDescending(x => x.State is ModState.Modified)
             .ThenByDescending(x => x is { IsLocal: true, IsDisabled: false })
             .ThenByDescending(x => x.IsLocal)
