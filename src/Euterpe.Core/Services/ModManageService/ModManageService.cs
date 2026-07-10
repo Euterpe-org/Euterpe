@@ -20,6 +20,9 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
     public ModDto? FindModByName(string name) =>
         _sourceCache.Lookup(name) is { HasValue: true, Value: var mod } ? mod : null;
 
+    public IReadOnlyList<ModDto> GetInstalledMods() =>
+        _sourceCache.Items.Where(static mod => mod.IsLocal).ToArray();
+
     public Task InstallModAsync(ModDto mod) => RunAndRefreshAsync(mod, () => InstallModCoreAsync(mod));
 
     public async Task UpdateModAsync(ModDto mod)
@@ -146,6 +149,31 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         }
 
         return outdatedMods.Length;
+    }
+
+    public async Task<IReadOnlyList<BulkItemResult>> InstallModsAsync(IReadOnlyList<ModInstallRequest> requests,
+        IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
+    {
+        var results = new List<BulkItemResult>(requests.Count);
+        var completed = 0;
+        var changed = false;
+
+        foreach (var request in requests)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var outcome = await InstallModForBulkAsync(request).ConfigureAwait(false);
+            results.Add(new BulkItemResult(request.Name, outcome));
+            changed |= outcome is BulkItemOutcome.Added || outcome is BulkItemOutcome.AlreadyPresent;
+            progress?.Report(new BatchProgress(++completed, requests.Count));
+        }
+
+        if (changed)
+        {
+            await RefreshModStatesAsync().ConfigureAwait(false);
+        }
+
+        return results;
     }
 
     #region Injections

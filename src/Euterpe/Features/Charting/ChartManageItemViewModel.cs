@@ -4,6 +4,8 @@ public sealed partial class ChartManageItemViewModel(ChartDto chart) : Observabl
 {
     public ChartDto Chart { get; } = chart;
 
+    public bool CanShare => Chart is { IsOnline: true, Manifest.Cid: not null };
+
     [ObservableProperty]
     public partial bool IsSelected { get; set; }
 }

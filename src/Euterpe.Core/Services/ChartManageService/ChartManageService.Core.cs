@@ -31,6 +31,22 @@ internal sealed partial class ChartManageService
         }
     }
 
+    private async Task<BulkItemOutcome> DownloadChartForBulkAsync(string cid, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var folderPath = await GameDownloadManager.DownloadChartAsync(cid, null, cancellationToken).ConfigureAwait(false);
+            return await CacheLocalChartAsync(folderPath, ChartSource.Online).ConfigureAwait(false) is not null
+                ? BulkItemOutcome.Added
+                : BulkItemOutcome.Failed;
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            Logger.ZLogError(ex, $"Failed to download chart {cid} during bulk import");
+            return BulkItemOutcome.Failed;
+        }
+    }
+
     private async Task<ChartUpdateResult> UpdateChartCoreAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles,
         CancellationToken cancellationToken)
     {

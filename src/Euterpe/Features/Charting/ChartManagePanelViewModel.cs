@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
+using Avalonia.Input.Platform;
 using Avalonia.Platform.Storage;
+using Euterpe.Core.Proxies;
 using Euterpe.Models.Progress;
 
 namespace Euterpe.Features.Charting;
@@ -39,6 +41,9 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(SelectedCountDisplay))]
     public partial int SelectedCount { get; set; }
 
+    [ObservableProperty]
+    public partial bool CanShareSelection { get; set; }
+
     public bool HasSelection => SelectedCount > 0;
     public string SelectedCountDisplay => string.Format(CultureInfo.CurrentCulture, XAML.ChartManage_SelectedCount, SelectedCount);
 
@@ -66,7 +71,12 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             .AutoRefresh(static item => item.IsSelected)
             .Filter(static item => item.IsSelected)
             .ToCollection()
-            .Subscribe(selectedItems => SelectedCount = selectedItems.Count);
+            .Subscribe(selectedItems =>
+            {
+                SelectedCount = selectedItems.Count;
+                CanShareSelection = selectedItems.Count is > 0 and <= GameSharePackage.MaximumChartCount
+                    && selectedItems.All(static item => item.CanShare);
+            });
     }
 
     partial void OnIsSelectionModeChanged(bool value)
@@ -184,6 +194,27 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private Task ImportShareAsync() => ShareImportDialogService.ShowAsync();
+
+    [RelayCommand]
+    private async Task ShareSelectedAsync()
+    {
+        if (!CanShareSelection)
+        {
+            return;
+        }
+
+        var cids = _sourceCache.Items
+            .Where(static item => item.IsSelected)
+            .Select(static item => item.Chart.Manifest.Cid!.Value)
+            .ToArray();
+
+        var shareLink = GameShareService.CreateChartShareLink(cids);
+        await TopLevel.Clipboard!.SetTextAsync(shareLink).ConfigureAwait(true);
+        NotificationService.SuccessLight(Notification_Content_Share_Copy_Success);
+    }
+
+    [RelayCommand]
     private async Task DeleteSelectedAsync()
     {
         var folderPaths = _sourceCache.Items
@@ -273,10 +304,13 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required IChartManageService ChartManageService { get; init; }
     public required IDialogService DialogService { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
+    public required IGameShareService GameShareService { get; init; }
     public required GameSwitcher GameSwitcher { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
     public required INotificationService NotificationService { get; init; }
     public required ProgressDialogViewModel ProgressDialogViewModel { get; init; }
+    public required ShareImportDialogService ShareImportDialogService { get; init; }
+    public required TopLevelProxy TopLevel { get; init; }
 
     #endregion Injections
 }

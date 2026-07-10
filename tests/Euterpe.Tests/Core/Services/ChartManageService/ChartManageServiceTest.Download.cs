@@ -50,4 +50,53 @@ public sealed partial class ChartManageServiceTest
         await Assert.That(charts.Count).IsEqualTo(1);
         await Assert.That(charts[0].Manifest.Meta.Name).IsEqualTo("downloaded");
     }
+
+    [Test]
+    public async Task DownloadChartsAsync_MixOfInstalledAndNew_ReportsPerCidOutcomes()
+    {
+        var local = new FakeChartLocalService();
+        local.Set(CreateChart("owned", ChartSource.Online, "/online/13"));
+
+        var download = IGameDownloadManager.Mock();
+        download.DownloadChartAsync("20", Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).Returns("/online/20");
+
+        var service = CreateService(local, download);
+        await service.InitializeChartsAsync();
+
+        local.Set(CreateChart("new", ChartSource.Online, "/online/20"));
+        var results = await service.DownloadChartsAsync(["13", "20"]);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(results.Single(r => r.Identifier == "13").Outcome).IsEqualTo(BulkItemOutcome.AlreadyPresent);
+        await Assert.That(results.Single(r => r.Identifier == "20").Outcome).IsEqualTo(BulkItemOutcome.Added);
+        download.DownloadChartAsync("13", Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Never);
+        download.DownloadChartAsync("20", Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
+    }
+
+    [Test]
+    public async Task DownloadChartsAsync_ChartNotLoadable_ReportsFailed()
+    {
+        var download = IGameDownloadManager.Mock();
+        download.DownloadChartAsync("99", Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).Returns("/online/99");
+
+        var service = CreateService(new FakeChartLocalService(), download);
+        await service.InitializeChartsAsync();
+
+        var results = await service.DownloadChartsAsync(["99"]);
+
+        await Assert.That(results.Single().Outcome).IsEqualTo(BulkItemOutcome.Failed);
+    }
+
+    [Test]
+    public async Task DownloadChartsAsync_CanceledDownload_PropagatesCancellation()
+    {
+        var download = IGameDownloadManager.Mock();
+        download.DownloadChartAsync("13", Any<IProgress<BatchProgress>?>(), Any<CancellationToken>())
+            .Throws(new OperationCanceledException());
+        var service = CreateService(new FakeChartLocalService(), download);
+        await service.InitializeChartsAsync();
+
+        await Assert.That(() => service.DownloadChartsAsync(["13"]))
+            .Throws<OperationCanceledException>();
+    }
 }

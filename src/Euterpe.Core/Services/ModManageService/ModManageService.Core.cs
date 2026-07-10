@@ -77,6 +77,67 @@ internal sealed partial class ModManageService
         NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, mod.Name);
     }
 
+    private async Task<BulkItemOutcome> InstallModForBulkAsync(ModInstallRequest request)
+    {
+        var mod = FindModByName(request.Name);
+        if (mod is null || !mod.HasDownloadSource)
+        {
+            return BulkItemOutcome.Skipped;
+        }
+
+        if (mod.IsLocal)
+        {
+            if (mod.IsDisabled == request.IsDisabled)
+            {
+                return BulkItemOutcome.AlreadyPresent;
+            }
+
+            try
+            {
+                var changed = await RunExclusiveAsync(mod, () => request.IsDisabled
+                    ? DisableModAsync(mod)
+                    : EnableModAsync(mod)).ConfigureAwait(false);
+                return changed ? BulkItemOutcome.AlreadyPresent : BulkItemOutcome.Failed;
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException)
+            {
+                Logger.ZLogError(ex, $"Failed to apply state for installed mod {request.Name} during bulk import");
+                return BulkItemOutcome.Failed;
+            }
+        }
+
+        if (mod.State is ModState.Incompatible)
+        {
+            return BulkItemOutcome.Skipped;
+        }
+
+        try
+        {
+            var applied = await RunExclusiveAsync(mod, async () =>
+            {
+                await DownloadModCoreAsync(mod).ConfigureAwait(false);
+                if (request.IsDisabled && !await DisableModAsync(mod).ConfigureAwait(false))
+                {
+                    return false;
+                }
+
+                return true;
+            }).ConfigureAwait(false);
+
+            if (!applied)
+            {
+                return BulkItemOutcome.Failed;
+            }
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            Logger.ZLogError(ex, $"Failed to install mod {request.Name} during bulk import");
+            return BulkItemOutcome.Failed;
+        }
+
+        return BulkItemOutcome.Added;
+    }
+
     private async Task<bool> UpdateModCoreAsync(ModDto mod)
     {
         Logger.ZLogInformation($"Updating mod: {mod.Name} from version {mod.LocalVersion} to version {mod.Version}");

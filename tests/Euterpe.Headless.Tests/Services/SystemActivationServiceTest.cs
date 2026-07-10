@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using Autofac;
 using Euterpe.Abstractions;
+using Euterpe.Core.Proxies;
 using Euterpe.Features.Charting;
 using Euterpe.Models;
 using Euterpe.Models.Playback;
@@ -235,10 +236,14 @@ public sealed class SystemActivationServiceTest : HeadlessTest
             AudioPlayerService = IAudioPlayerService.Mock(),
             ChartManageService = charts,
             DialogService = IDialogService.Mock(),
+            MessageBoxService = IMessageBoxService.Mock(),
+            GameShareService = IGameShareService.Mock(),
             GameSwitcher = new GameSwitcher { Config = new Config(), Logger = NullLogger<GameSwitcher>.Instance },
             Logger = NullLogger<ChartManagePanelViewModel>.Instance,
             ProgressDialogViewModel = new ProgressDialogViewModel { Launcher = IPlatformLauncher.Mock() },
-            NotificationService = INotificationService.Mock()
+            NotificationService = INotificationService.Mock(),
+            ShareImportDialogService = null!,
+            TopLevel = new TopLevelProxy()
         };
         var service = NewService(logger: logger, chartManageService: charts, chartViewModel: viewModel);
 

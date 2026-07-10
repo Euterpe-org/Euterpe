@@ -283,6 +283,10 @@
                                 Command="{Binding MigrateCustomAlbumsCommand}"
                                 Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_MigrateMdm}}"
                                 HorizontalAlignment="Stretch" />
+                            <Button
+                                Command="{Binding ImportShareCommand}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Share_Import_Header}}"
+                                HorizontalAlignment="Stretch" />
                         </StackPanel>
                         <StackPanel
                             IsVisible="{Binding IsSelectionMode}"
@@ -290,6 +294,13 @@
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 Text="{Binding SelectedCountDisplay}" />
+                            <Button
+                                Classes="Primary"
+                                Command="{Binding ShareSelectedCommand}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.Share_Title}}"
+                                HorizontalAlignment="Stretch"
+                                IsEnabled="{Binding CanShareSelection}"
+                                ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_ShareHint}}" />
                             <Button
                                 Classes="Danger"
                                 Command="{Binding DeleteSelectedCommand}"
