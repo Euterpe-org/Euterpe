@@ -43,6 +43,9 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>是</value>
   </data>
+  <data name="MessageBox_Content_Chart_BulkDelete_Confirm" xml:space="preserve">
+    <value>刪除選取的 {0} 張譜面？</value>
+  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>請選擇 Steam 執行檔</value>
   </data>
@@ -158,6 +161,12 @@
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>音訊播放失敗</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Partial" xml:space="preserve">
+    <value>已刪除 {0} 張譜面，{1} 張失敗</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Success" xml:space="preserve">
+    <value>已刪除 {0} 張譜面</value>
   </data>
   <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
     <value>譜面 {0} 下載失敗</value>

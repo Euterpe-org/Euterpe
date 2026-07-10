@@ -2,7 +2,7 @@ using static Euterpe.Models.Charts.ChartFiles;
 
 namespace Euterpe.Models.Charts;
 
-public sealed class ChartDto : ObservableObject
+public sealed class ChartDto
 {
     private double? _maxRating;
     private long? _sizeBytes;

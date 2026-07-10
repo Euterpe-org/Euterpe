@@ -69,6 +69,32 @@ internal sealed partial class ChartManageService : IChartManageService, IDisposa
         return results.Count;
     }
 
+    public async Task<int> DeleteChartsAsync(IReadOnlyList<string> folderPaths, CancellationToken cancellationToken = default)
+    {
+        var succeeded = 0;
+
+        foreach (var folderPath in folderPaths)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (await RunExclusiveAsync(Path.GetFileName(folderPath), () => Task.FromResult(RemoveLocalChart(folderPath))).ConfigureAwait(false))
+            {
+                succeeded++;
+            }
+        }
+
+        var failed = folderPaths.Count - succeeded;
+        if (failed > 0)
+        {
+            NotificationService.WarningLight(Notification_Content_Chart_BulkDelete_Partial, succeeded, failed);
+        }
+        else if (succeeded > 0)
+        {
+            NotificationService.SuccessLight(Notification_Content_Chart_BulkDelete_Success, succeeded);
+        }
+
+        return succeeded;
+    }
+
     #region Injections
 
     public required GameConfig GameConfig { get; init; }

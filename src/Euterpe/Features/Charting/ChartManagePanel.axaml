@@ -57,7 +57,7 @@
         <!--  Top bar: source + search + sort + reset  -->
         <Grid
             Grid.Row="0"
-            ColumnDefinitions="Auto,*,Auto,Auto,Auto"
+            ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto"
             Margin="0,0,0,12">
             <ComboBox
                 Grid.Column="0"
@@ -124,6 +124,12 @@
                 Grid.Column="4"
                 Command="{Binding ResetFiltersCommand}"
                 Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Reset}}"
+                Margin="8,0,0,0" />
+
+            <ToggleButton
+                Grid.Column="5"
+                Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Select}}"
+                IsChecked="{Binding IsSelectionMode}"
                 Margin="8,0,0,0" />
         </Grid>
 
@@ -262,20 +268,36 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                    <!--  Maintenance actions  -->
-                    <StackPanel
+                    <!--  Maintenance actions / selection toolbar  -->
+                    <Panel
                         Grid.Row="1"
-                        Margin="0,12,12,0"
-                        Spacing="6">
-                        <Button
-                            Command="{Binding UpdateAllChartsCommand}"
-                            Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_UpdateAll}}"
-                            HorizontalAlignment="Stretch" />
-                        <Button
-                            Command="{Binding MigrateCustomAlbumsCommand}"
-                            Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_MigrateMdm}}"
-                            HorizontalAlignment="Stretch" />
-                    </StackPanel>
+                        Margin="0,12,12,0">
+                        <StackPanel
+                            IsVisible="{Binding !IsSelectionMode}"
+                            Spacing="6">
+                            <Button
+                                Command="{Binding UpdateAllChartsCommand}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_UpdateAll}}"
+                                HorizontalAlignment="Stretch" />
+                            <Button
+                                Command="{Binding MigrateCustomAlbumsCommand}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_MigrateMdm}}"
+                                HorizontalAlignment="Stretch" />
+                        </StackPanel>
+                        <StackPanel
+                            IsVisible="{Binding IsSelectionMode}"
+                            Spacing="6">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="{Binding SelectedCountDisplay}" />
+                            <Button
+                                Classes="Danger"
+                                Command="{Binding DeleteSelectedCommand}"
+                                Content="{Localize {x:Static loc:XAMLLiteral.ChartManage_Delete}}"
+                                HorizontalAlignment="Stretch"
+                                IsEnabled="{Binding HasSelection}" />
+                        </StackPanel>
+                    </Panel>
                 </Grid>
             </Border>
 
@@ -292,7 +314,7 @@
                     ItemWidth="192">
                     <e:WrapVirtualizer.ItemTemplate>
                         <DataTemplate
-                            x:DataType="models:ChartDto">
+                            x:DataType="vm:ChartManageItemViewModel">
                             <Border
                                 Background="{DynamicResource SecondaryCardColor}"
                                 CornerRadius="10"
@@ -315,7 +337,7 @@
                                     <!--  Cover: click toggles play/pause  -->
                                     <Button
                                         Classes="Transparent"
-                                        Command="{Binding $parent[UserControl].DataContext.TogglePlayCommand}"
+                                        Command="{Binding $parent[UserControl].DataContext.ActivateChartCommand}"
                                         CommandParameter="{Binding}"
                                         Focusable="False"
                                         HorizontalContentAlignment="Stretch"
@@ -329,7 +351,7 @@
                                                 <Binding
                                                     Path="$parent[UserControl].DataContext.Playback.Status" />
                                                 <Binding
-                                                    Path="FolderPath" />
+                                                    Path="Chart.FolderPath" />
                                             </MultiBinding>
                                         </Classes.Playing>
                                         <Button.Styles>
@@ -368,9 +390,9 @@
                                                 ClipToBounds="True"
                                                 CornerRadius="8">
                                                 <e:CoverImage
-                                                    Background="{Binding Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
+                                                    Background="{Binding Chart.Manifest.Meta.CoverDominantColor, Converter={x:Static converters:FuncValueConverters.HexColorToBrushConverter}}"
                                                     DecodeWidth="164"
-                                                    Source="{Binding CoverPath}"
+                                                    Source="{Binding Chart.CoverPath}"
                                                     Stretch="UniformToFill" />
                                             </Border>
 
@@ -416,7 +438,7 @@
                                             <ItemsControl
                                                 HorizontalAlignment="Right"
                                                 IsHitTestVisible="False"
-                                                ItemsSource="{Binding DifficultyBadges}"
+                                                ItemsSource="{Binding Chart.DifficultyBadges}"
                                                 Margin="6"
                                                 VerticalAlignment="Top">
                                                 <ItemsControl.ItemsPanel>
@@ -456,6 +478,16 @@
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
+
+                                            <!--  Selection indicator  -->
+                                            <CheckBox
+                                                Focusable="False"
+                                                HorizontalAlignment="Left"
+                                                IsHitTestVisible="False"
+                                                IsChecked="{Binding IsSelected}"
+                                                IsVisible="{Binding $parent[UserControl].DataContext.IsSelectionMode}"
+                                                Margin="4"
+                                                VerticalAlignment="Top" />
                                         </Panel>
                                     </Button>
 
@@ -466,25 +498,25 @@
                                             FontSize="11"
                                             MaxLines="1"
                                             Opacity="0.5"
-                                            Text="{Binding Manifest.Meta.Author}"
+                                            Text="{Binding Chart.Manifest.Meta.Author}"
                                             TextTrimming="CharacterEllipsis" />
 
                                         <!--  Title -> web chart detail page (online charts only)  -->
                                         <Button
                                             Classes="Transparent Link"
                                             Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
-                                            CommandParameter="{Binding DetailUrl}"
+                                            CommandParameter="{Binding Chart.DetailUrl}"
                                             Cursor="Hand"
                                             HorizontalAlignment="Left"
-                                            IsHitTestVisible="{Binding IsOnline}"
+                                            IsHitTestVisible="{Binding Chart.IsOnline}"
                                             MinHeight="0"
                                             MinWidth="0"
                                             Padding="0"
-                                            ToolTip.Tip="{Binding Manifest.Meta.Name}">
+                                            ToolTip.Tip="{Binding Chart.Manifest.Meta.Name}">
                                             <TextBlock
                                                 FontWeight="SemiBold"
                                                 MaxLines="1"
-                                                Text="{Binding Manifest.Meta.Name}"
+                                                Text="{Binding Chart.Manifest.Meta.Name}"
                                                 TextTrimming="CharacterEllipsis" />
                                         </Button>
                                         <TextBlock
@@ -492,7 +524,7 @@
                                             IsVisible="{Binding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                             MaxLines="1"
                                             Opacity="0.7"
-                                            Text="{Binding CharterDisplay}"
+                                            Text="{Binding Chart.CharterDisplay}"
                                             TextTrimming="CharacterEllipsis"
                                             ToolTip.Tip="{Binding $self.Text}" />
                                     </StackPanel>
@@ -504,11 +536,11 @@
                                         <TextBlock
                                             FontSize="12"
                                             Opacity="0.85"
-                                            Text="{Binding BpmDisplay, StringFormat='♪ {0}'}" />
+                                            Text="{Binding Chart.BpmDisplay, StringFormat='♪ {0}'}" />
                                         <Border
                                             Background="#40808080"
                                             CornerRadius="3"
-                                            IsVisible="{Binding HasVideo}"
+                                            IsVisible="{Binding Chart.HasVideo}"
                                             Padding="5,1"
                                             VerticalAlignment="Center">
                                             <TextBlock
@@ -527,11 +559,11 @@
                                             Grid.Column="0"
                                             Classes="Transparent Link"
                                             Command="{Binding $parent[UserControl].DataContext.OpenUrlCommand}"
-                                            CommandParameter="{Binding UploaderPageUrl}"
+                                            CommandParameter="{Binding Chart.UploaderPageUrl}"
                                             Cursor="Hand"
                                             HorizontalAlignment="Left"
-                                            IsHitTestVisible="{Binding IsOnline}"
-                                            IsVisible="{Binding Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                            IsHitTestVisible="{Binding Chart.IsOnline}"
+                                            IsVisible="{Binding Chart.Manifest.Meta.Uploader, Converter={x:Static ObjectConverters.IsNotNull}}"
                                             MinHeight="0"
                                             MinWidth="0"
                                             Padding="0"
@@ -541,7 +573,7 @@
                                                 FontWeight="Normal"
                                                 Foreground="{DynamicResource SemiColorText0}"
                                                 Opacity="0.55"
-                                                Text="{Binding UploaderDisplay}"
+                                                Text="{Binding Chart.UploaderDisplay}"
                                                 TextTrimming="CharacterEllipsis" />
                                         </Button>
                                         <Panel
@@ -552,12 +584,12 @@
                                                 Classes="sizeText"
                                                 FontSize="11"
                                                 HorizontalAlignment="Right"
-                                                Text="{Binding SizeDisplay}"
+                                                Text="{Binding Chart.SizeDisplay}"
                                                 VerticalAlignment="Center" />
                                             <Button
                                                 Classes="Transparent"
                                                 Command="{Binding $parent[UserControl].DataContext.RemoveChartCommand}"
-                                                CommandParameter="{Binding}"
+                                                CommandParameter="{Binding Chart}"
                                                 Focusable="False"
                                                 Height="18"
                                                 HorizontalAlignment="Right"
