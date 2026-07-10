@@ -136,6 +136,12 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>重置</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>已选 {0}</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>排序方式</value>
   </data>

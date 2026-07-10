@@ -7,8 +7,8 @@ namespace Euterpe.Features.Charting;
 [Route("/charting/manage", DisplayName = Panel_Charting_ChartManage, Order = 0)]
 public sealed partial class ChartManagePanelViewModel : ViewModelBase
 {
-    private readonly ReadOnlyObservableCollection<ChartDto> _charts;
-    private readonly SourceCache<ChartDto, string> _sourceCache = new(x => x.FolderPath);
+    private readonly ReadOnlyObservableCollection<ChartManageItemViewModel> _charts;
+    private readonly SourceCache<ChartManageItemViewModel, string> _sourceCache = new(x => x.Chart.FolderPath);
 
     public static IReadOnlyList<EnumOption<ChartSource>> ChartSources { get; } =
     [
@@ -31,8 +31,19 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     [ObservableProperty]
     public partial bool AllChartsLoaded { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsSelectionMode { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasSelection))]
+    [NotifyPropertyChangedFor(nameof(SelectedCountDisplay))]
+    public partial int SelectedCount { get; set; }
+
+    public bool HasSelection => SelectedCount > 0;
+    public string SelectedCountDisplay => string.Format(CultureInfo.CurrentCulture, XAML.ChartManage_SelectedCount, SelectedCount);
+
     public ChartFilterViewModel Filter { get; } = new();
-    public ReadOnlyObservableCollection<ChartDto> Charts => _charts;
+    public ReadOnlyObservableCollection<ChartManageItemViewModel> Charts => _charts;
 
     public ChartManagePanelViewModel()
     {
@@ -45,11 +56,30 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             .Select(this, static (_, vm) => vm.BuildComparer());
 
         _sourceCache.Connect()
-            .Filter(chart => Filter.Matches(chart))
+            .Filter(item => Filter.Matches(item.Chart))
             .SortAndBindOnUI(out _charts, comparer.AsSystemObservable())
             .Subscribe();
 
         Filter.Changed.Subscribe(this, static (_, vm) => vm._sourceCache.Refresh());
+
+        _sourceCache.Connect()
+            .AutoRefresh(static item => item.IsSelected)
+            .Filter(static item => item.IsSelected)
+            .ToCollection()
+            .Subscribe(selectedItems => SelectedCount = selectedItems.Count);
+    }
+
+    partial void OnIsSelectionModeChanged(bool value)
+    {
+        if (value)
+        {
+            return;
+        }
+
+        foreach (var item in _sourceCache.Items)
+        {
+            item.IsSelected = false;
+        }
     }
 
     protected override async Task OnInitializeAsync()
@@ -57,13 +87,26 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(true);
         await ChartManageService.InitializeChartsAsync().ConfigureAwait(true);
 
-        ChartManageService.Connect().PopulateInto(_sourceCache);
+        ChartManageService.Connect()
+            .Transform(static chart => new ChartManageItemViewModel(chart))
+            .PopulateInto(_sourceCache);
         AllChartsLoaded = true;
 
         Logger.ZLogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
     }
 
     [RelayCommand]
+    private async Task ActivateChartAsync(ChartManageItemViewModel item)
+    {
+        if (IsSelectionMode)
+        {
+            item.IsSelected = !item.IsSelected;
+            return;
+        }
+
+        await TogglePlayAsync(item.Chart).ConfigureAwait(false);
+    }
+
     private async Task TogglePlayAsync(ChartDto chart)
     {
         if (Playback.PlayingKey == chart.FolderPath)
@@ -140,6 +183,32 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         }
     }
 
+    [RelayCommand]
+    private async Task DeleteSelectedAsync()
+    {
+        var folderPaths = _sourceCache.Items
+            .Where(static item => item.IsSelected)
+            .Select(static item => item.Chart.FolderPath)
+            .ToArray();
+        if (folderPaths is [])
+        {
+            return;
+        }
+
+        if (await MessageBoxService.WarningConfirmAsync(MessageBox_Content_Chart_BulkDelete_Confirm, folderPaths.Length).ConfigureAwait(true) is not MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        if (Playback.PlayingKey is { } playingKey && folderPaths.Contains(playingKey))
+        {
+            AudioPlayerService.Stop();
+        }
+
+        await ChartManageService.DeleteChartsAsync(folderPaths).ConfigureAwait(true);
+        IsSelectionMode = false;
+    }
+
     private async Task RunWithProgressDialogAsync(string title, string hint, bool indeterminate, Func<IProgress<BatchProgress>, Task> work)
     {
         ProgressDialogViewModel.Reset();
@@ -170,28 +239,28 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         }
     }
 
-    private Comparer<ChartDto> BuildComparer()
+    private Comparer<ChartManageItemViewModel> BuildComparer()
     {
         var comparison = SortField switch
         {
-            ChartSortField.Author => ByText(x => x.Manifest.Meta.Author),
-            ChartSortField.Bpm => By(x => x.Manifest.Meta.Bpm),
-            ChartSortField.Rating => By(x => x.MaxRating),
-            ChartSortField.DateAdded => By(x => x.Manifest.Meta.CreatedAt ?? 0),
-            ChartSortField.DateUpdated => By(x => x.Manifest.Meta.UpdatedAt ?? 0),
-            ChartSortField.MapCount => By(x => x.Difficulties.Count),
-            ChartSortField.Size => By(x => x.SizeBytes),
-            _ => ByText(x => x.Manifest.Meta.Name)
+            ChartSortField.Author => ByText(x => x.Chart.Manifest.Meta.Author),
+            ChartSortField.Bpm => By(x => x.Chart.Manifest.Meta.Bpm),
+            ChartSortField.Rating => By(x => x.Chart.MaxRating),
+            ChartSortField.DateAdded => By(x => x.Chart.Manifest.Meta.CreatedAt ?? 0),
+            ChartSortField.DateUpdated => By(x => x.Chart.Manifest.Meta.UpdatedAt ?? 0),
+            ChartSortField.MapCount => By(x => x.Chart.Difficulties.Count),
+            ChartSortField.Size => By(x => x.Chart.SizeBytes),
+            _ => ByText(x => x.Chart.Manifest.Meta.Name)
         };
 
-        return Comparer<ChartDto>.Create(SortDescending ? (a, b) => comparison(b, a) : comparison);
+        return Comparer<ChartManageItemViewModel>.Create(SortDescending ? (a, b) => comparison(b, a) : comparison);
 
-        static Comparison<ChartDto> By<TKey>(Func<ChartDto, TKey> key) where TKey : IComparable<TKey>
+        static Comparison<ChartManageItemViewModel> By<TKey>(Func<ChartManageItemViewModel, TKey> key) where TKey : IComparable<TKey>
         {
             return (a, b) => key(a).CompareTo(key(b));
         }
 
-        static Comparison<ChartDto> ByText(Func<ChartDto, string> key)
+        static Comparison<ChartManageItemViewModel> ByText(Func<ChartManageItemViewModel, string> key)
         {
             return (a, b) => string.Compare(key(a), key(b), StringComparison.OrdinalIgnoreCase);
         }
@@ -203,6 +272,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required IAudioPlayerService AudioPlayerService { get; init; }
     public required IChartManageService ChartManageService { get; init; }
     public required IDialogService DialogService { get; init; }
+    public required IMessageBoxService MessageBoxService { get; init; }
     public required GameSwitcher GameSwitcher { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
     public required INotificationService NotificationService { get; init; }

@@ -43,6 +43,9 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="MessageBox_Content_Chart_BulkDelete_Confirm" xml:space="preserve">
+    <value>Delete {0} selected charts?</value>
+  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Please select the Steam executable</value>
   </data>
@@ -158,6 +161,12 @@
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Failed to play audio</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Partial" xml:space="preserve">
+    <value>Deleted {0} charts, {1} failed</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Success" xml:space="preserve">
+    <value>Deleted {0} charts</value>
   </data>
   <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
     <value>Failed to download chart {0}</value>
