@@ -24,10 +24,6 @@ public sealed partial class SystemActivationService
                 await ChartManageService.UpdateChartAsync(cid).ConfigureAwait(false);
                 break;
 
-            case ["remove", var folderPath]:
-                await ChartManageService.RemoveChartAsync(folderPath).ConfigureAwait(false);
-                break;
-
             default:
                 Logger.ZLogWarning($"Unknown chart deep link path: {path}");
                 break;
