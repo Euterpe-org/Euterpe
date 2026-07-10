@@ -10,4 +10,9 @@ public static class ByteExtensions
         public string ToHexStringLower() => Convert.ToHexStringLower(bytes);
         public string ToBase64Url() => Base64Url.EncodeToString(bytes);
     }
+
+    extension(string value)
+    {
+        public byte[] FromBase64Url() => Base64Url.DecodeFromChars(value);
+    }
 }

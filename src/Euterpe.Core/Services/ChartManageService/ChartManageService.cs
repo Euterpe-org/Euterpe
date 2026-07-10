@@ -14,6 +14,12 @@ internal sealed partial class ChartManageService : IChartManageService, IDisposa
 
     public Task InitializeChartsAsync() => _initTask.Value;
 
+    public IReadOnlyList<int> GetOnlineChartCids() =>
+        _sourceCache.Items
+            .Where(chart => chart is { Source: ChartSource.Online, Manifest.Cid: not null })
+            .Select(chart => chart.Manifest.Cid!.Value)
+            .ToArray();
+
     public Task DownloadChartAsync(string cid, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default) =>
         FindOnlineChartByCid(cid) is null
             ? RunExclusiveAsync(cid, () => DownloadChartCoreAsync(cid, progress, cancellationToken))
@@ -67,6 +73,25 @@ internal sealed partial class ChartManageService : IChartManageService, IDisposa
         }
 
         return results.Count;
+    }
+
+    public async Task<IReadOnlyList<BulkItemResult>> DownloadChartsAsync(IReadOnlyList<string> cids,
+        IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
+    {
+        var results = new List<BulkItemResult>(cids.Count);
+        var completed = 0;
+
+        foreach (var cid in cids)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var outcome = FindOnlineChartByCid(cid) is not null
+                ? BulkItemOutcome.AlreadyPresent
+                : await RunExclusiveAsync(cid, () => DownloadChartForBulkAsync(cid, cancellationToken)).ConfigureAwait(false);
+            results.Add(new BulkItemResult(cid, outcome));
+            progress?.Report(new BatchProgress(++completed, cids.Count));
+        }
+
+        return results;
     }
 
     public async Task<int> DeleteChartsAsync(IReadOnlyList<string> folderPaths, CancellationToken cancellationToken = default)

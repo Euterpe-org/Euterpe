@@ -318,6 +318,12 @@
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>Server is temporarily unavailable. Please try again in a moment.</value>
   </data>
+  <data name="Notification_Content_Share_Copy_Success" xml:space="preserve">
+    <value>Share code copied</value>
+  </data>
+  <data name="Notification_Content_Share_Create_Empty" xml:space="preserve">
+    <value>There are no downloadable installed mods to share</value>
+  </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Error</value>
   </data>

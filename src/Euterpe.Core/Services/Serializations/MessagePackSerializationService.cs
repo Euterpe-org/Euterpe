@@ -34,4 +34,11 @@ internal sealed class MessagePackSerializationService : IMessagePackSerializatio
 
     public Task SerializeManifestAsync(Stream stream, Manifest value, CancellationToken cancellationToken = default) =>
         Serializer.SerializeAsync(stream, value, cancellationToken).AsTask();
+
+    public byte[] SerializeGameSharePackage(GameSharePackage value) =>
+        Serializer.Serialize(value);
+
+    public GameSharePackage DeserializeGameSharePackage(byte[] bytes) =>
+        Serializer.Deserialize<GameSharePackage>(bytes)
+        ?? throw new InvalidDataException("The MessagePack payload did not contain a game share package.");
 }

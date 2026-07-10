@@ -57,7 +57,7 @@
                 <!--  Search and Filter Section  -->
                 <Grid
                     Grid.Row="0"
-                    ColumnDefinitions="*,Auto"
+                    ColumnDefinitions="*,Auto,Auto"
                     Margin="15,15,15,10">
 
                     <!--  Search Box  -->
@@ -84,6 +84,13 @@
                         ItemsSource="{Binding ModFilters, Mode=OneTime}"
                         SelectedValue="{Binding Filter.ModFilter, Mode=TwoWay}"
                         SelectedValueBinding="{Binding Value}" />
+
+                    <!--  Share  -->
+                    <Button
+                        Grid.Column="2"
+                        Command="{Binding ShareModsCommand}"
+                        Content="{Localize {x:Static loc:XAMLLiteral.Share_Title}}"
+                        Margin="8,0,0,0" />
 
                 </Grid>
 

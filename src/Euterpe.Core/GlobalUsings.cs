@@ -25,6 +25,7 @@ global using Euterpe.Models.Mods;
 global using Euterpe.Models.Playback;
 global using Euterpe.Models.Progress;
 global using Euterpe.Models.Setup;
+global using Euterpe.Models.Sharing;
 global using Euterpe.Models.Wizard;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;

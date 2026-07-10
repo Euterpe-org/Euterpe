@@ -8,4 +8,7 @@ public interface IMessagePackSerializationService
     byte[] SerializeManifest(Manifest value);
     void SerializeManifest(Stream stream, Manifest value);
     Task SerializeManifestAsync(Stream stream, Manifest value, CancellationToken cancellationToken = default);
+
+    byte[] SerializeGameSharePackage(GameSharePackage value);
+    GameSharePackage DeserializeGameSharePackage(byte[] bytes);
 }

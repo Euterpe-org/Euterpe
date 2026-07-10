@@ -25,6 +25,7 @@ public static partial class ServiceExtensions
         public void RegisterPerGameAppServices()
         {
             builder.RegisterType<SetupDialogService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<ShareImportDialogService>().PropertiesAutowired().InstancePerLifetimeScope();
         }
     }
 }

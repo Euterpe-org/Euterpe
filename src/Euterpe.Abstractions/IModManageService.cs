@@ -8,6 +8,7 @@ public interface IModManageService
 
     // Lookup
     ModDto? FindModByName(string name);
+    IReadOnlyList<ModDto> GetInstalledMods();
 
     // Single-mod operations
     Task InstallModAsync(ModDto mod);
@@ -23,6 +24,7 @@ public interface IModManageService
 
     // Bulk operations
     Task<int> UpdateAllModsAsync();
+    Task<IReadOnlyList<BulkItemResult>> InstallModsAsync(IReadOnlyList<ModInstallRequest> requests, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default);
     Task ImportModsAsync(IReadOnlyList<string> filePaths);
 
     // Local file reconciliation

@@ -11,4 +11,5 @@ global using Euterpe.Models.Migrations;
 global using Euterpe.Models.Mods;
 global using Euterpe.Models.Progress;
 global using Euterpe.Models.Setup;
+global using Euterpe.Models.Sharing;
 global using Euterpe.Models.Wizard;

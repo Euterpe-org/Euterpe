@@ -2,9 +2,6 @@ namespace Euterpe.Core;
 
 internal sealed partial class ModManageService
 {
-    private ModDto[] GetInstalledMods() =>
-        _sourceCache.Items.Where(static mod => mod.IsLocal).ToArray();
-
     private ModDto[] GetEnabledMods() =>
         _sourceCache.Items.Where(static mod => mod is { IsLocal: true, IsDisabled: false }).ToArray();
 

@@ -142,6 +142,9 @@
   <data name="ChartManage_SelectedCount" xml:space="preserve">
     <value>已選 {0}</value>
   </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>僅線上譜面可分享，每次最多 100 張</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>排序方式</value>
   </data>
@@ -729,6 +732,39 @@
   </data>
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>正在設定 Euterpe</value>
+  </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>匯入已取消</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>匯入失敗</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>匯入分享碼</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>分享碼無效</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>在此貼上分享碼</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>{0} 張譜面 · {1} 個模組</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>譜面：{0} 下載 · {1} 已有 · {2} 失敗；模組：{3} 安裝 · {4} 已有 · {5} 跳過</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>開始匯入</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>此分享碼用於 {0}，請先切換到該遊戲</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>分享</value>
   </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>請在瀏覽器中登入並授權</value>

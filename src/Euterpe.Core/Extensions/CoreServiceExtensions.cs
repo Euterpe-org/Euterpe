@@ -175,6 +175,7 @@ public static class CoreServiceExtensions
             builder.RegisterType<GameSettingService>().As<IGameSettingService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<ModLocalService>().As<IModLocalService>().PropertiesAutowired().InstancePerLifetimeScope();
             builder.RegisterType<ModManageService>().As<IModManageService>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<GameShareService>().As<IGameShareService>().PropertiesAutowired().InstancePerLifetimeScope();
 
             // Setup Steps
             builder.RegisterType<ChartingToolStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();

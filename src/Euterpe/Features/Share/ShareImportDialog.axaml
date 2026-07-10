@@ -1,0 +1,52 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:vm="clr-namespace:Euterpe.Features.Share"
+    x:Class="Euterpe.Features.Share.ShareImportDialog"
+    x:DataType="vm:ShareImportDialogViewModel"
+    Width="440">
+    <StackPanel
+        Margin="28,24"
+        Spacing="8">
+        <TextBox
+            AcceptsReturn="True"
+            Height="76"
+            IsEnabled="{Binding !IsImporting}"
+            PlaceholderText="{Localize {x:Static loc:XAMLLiteral.Share_Import_Placeholder}}"
+            Text="{Binding ShareText}"
+            TextWrapping="Wrap"
+            VerticalContentAlignment="Top" />
+        <TextBlock
+            Foreground="{DynamicResource SemiColorText1}"
+            IsVisible="{Binding ValidationMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+            Text="{Binding ValidationMessage}"
+            TextWrapping="Wrap" />
+        <Button
+            Classes="Primary"
+            Command="{Binding ImportCommand}"
+            Content="{Localize {x:Static loc:XAMLLiteral.Share_Import_Start}}"
+            HorizontalAlignment="Stretch"
+            IsEnabled="{Binding CanImport}"
+            IsVisible="{Binding !IsImporting}" />
+        <StackPanel
+            IsVisible="{Binding IsImporting}"
+            Spacing="6">
+            <ProgressBar
+                Maximum="100"
+                Minimum="0"
+                Value="{Binding Progress}" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                Text="{Binding ProgressLabel}" />
+            <Button
+                Command="{Binding CancelImportCommand}"
+                Content="{Localize {x:Static loc:XAMLLiteral.Share_Import_Cancel}}"
+                HorizontalAlignment="Stretch" />
+        </StackPanel>
+        <TextBlock
+            IsVisible="{Binding ResultSummary, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+            Text="{Binding ResultSummary}"
+            TextWrapping="Wrap" />
+    </StackPanel>
+</UserControl>
