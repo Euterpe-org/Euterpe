@@ -1,5 +1,6 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
+using Euterpe.Controls;
 
 namespace Euterpe;
 
@@ -7,6 +8,8 @@ internal sealed class AppInitializer
 {
     public void Run(Application app)
     {
+        AsyncImage.DefaultRemoteLoader = RemoteImageLoader;
+
         // Initialize Window with async initializers when they are loaded
         Control.LoadedEvent.AddClassHandler<Window>(OnControlLoaded);
         AppViewModel.InitializeAsync().SafeFireAndForget();
@@ -71,6 +74,7 @@ internal sealed class AppInitializer
     public required SystemActivationService SystemActivationService { get; init; }
     public required LocalizationService LocalizationService { get; init; }
     public required IAppSettingService AppSettingService { get; init; }
+    public required IRemoteImageLoader RemoteImageLoader { get; init; }
     public required ILogger<App> Logger { get; init; }
     public required INotificationServiceWiring NotificationServiceWiring { get; init; }
 

@@ -127,6 +127,81 @@ public sealed class FileSystemServiceTest
     }
 
     [Test]
+    public async Task GetFileLastWriteTimeUtc_Existing_ReturnsUtcTimestamp()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var path = Path.Combine(work, "f.txt");
+            await File.WriteAllTextAsync(path, "x");
+
+            var lastWrite = NewService().GetFileLastWriteTimeUtc(path);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(lastWrite).IsNotNull();
+            await Assert.That(lastWrite!.Value.Kind).IsEqualTo(DateTimeKind.Utc);
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task GetFileLastWriteTimeUtc_Missing_ReturnsNull()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var lastWrite = NewService().GetFileLastWriteTimeUtc(Path.Combine(work, "missing.txt"));
+
+            await Assert.That(lastWrite).IsNull();
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task TryOpenReadFile_Existing_ReturnsReadableStream()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            var path = Path.Combine(work, "f.txt");
+            await File.WriteAllTextAsync(path, "payload");
+
+            await using var stream = NewService().TryOpenReadFile(path);
+            using var reader = new StreamReader(stream!);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(stream).IsNotNull();
+            await Assert.That(await reader.ReadToEndAsync()).IsEqualTo("payload");
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
+    public async Task TryOpenReadFile_Missing_ReturnsNull()
+    {
+        var work = NewTempFolder();
+        try
+        {
+            await using var stream = NewService().TryOpenReadFile(Path.Combine(work, "missing.txt"));
+
+            await Assert.That(stream).IsNull();
+        }
+        finally
+        {
+            Directory.Delete(work, true);
+        }
+    }
+
+    [Test]
     public async Task DeleteDirectory_Existing_DeletesRecursively()
     {
         var work = NewTempFolder();

@@ -80,6 +80,46 @@ public sealed class SingleFlightTest
     }
 
     [Test]
+    public async Task RunAsync_TypedConcurrentCallsWithSameKey_ShareOneExecutionAndResult()
+    {
+        var flight = new SingleFlight<string>();
+        var executions = 0;
+        using var release = new SemaphoreSlim(0, 1);
+
+        async Task<int> Work()
+        {
+            Interlocked.Increment(ref executions);
+            await release.WaitAsync().ConfigureAwait(false);
+            return 42;
+        }
+
+        var t1 = flight.RunAsync("key", Work);
+        var t2 = flight.RunAsync("key", Work);
+
+        release.Release();
+        var results = await Task.WhenAll(t1, t2);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(executions).IsEqualTo(1);
+        await Assert.That(results[0]).IsEqualTo(42);
+        await Assert.That(results[1]).IsEqualTo(42);
+    }
+
+    [Test]
+    [Timeout(5_000)]
+    public async Task RunAsync_TypedAfterPreviousCompletes_StartsFreshExecution(CancellationToken cancellationToken)
+    {
+        var flight = new SingleFlight<string>();
+
+        var first = await flight.RunAsync("key", static () => Task.FromResult(1)).WaitAsync(cancellationToken);
+        var second = await flight.RunAsync("key", static () => Task.FromResult(2)).WaitAsync(cancellationToken);
+
+        using var _ = Assert.Multiple();
+        await Assert.That(first).IsEqualTo(1);
+        await Assert.That(second).IsEqualTo(2);
+    }
+
+    [Test]
     public async Task RunAsync_WhenWorkThrows_PropagatesAndReleasesSlot()
     {
         var flight = new SingleFlight<string>();

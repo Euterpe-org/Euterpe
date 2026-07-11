@@ -96,6 +96,22 @@ internal sealed class FileSystemService : IFileSystemService
         }
     }
 
+    public DateTime? GetFileLastWriteTimeUtc(string filePath) =>
+        File.Exists(filePath) ? File.GetLastWriteTimeUtc(filePath) : null;
+
+    public Stream? TryOpenReadFile(string filePath)
+    {
+        try
+        {
+            return File.OpenRead(filePath);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogWarning(ex, $"Failed to open file {filePath}");
+            return null;
+        }
+    }
+
     public void DeleteDirectory(string directoryPath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
     {
         if (deleteOption is DeleteOption.IgnoreIfNotFound && !Directory.Exists(directoryPath))
