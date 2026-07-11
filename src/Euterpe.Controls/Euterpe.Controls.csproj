@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Euterpe.Abstractions\Euterpe.Abstractions.csproj"/>
         <ProjectReference Include="..\Euterpe.Models\Euterpe.Models.csproj"/>
         <ProjectReference Include="..\Euterpe.Tasks\Euterpe.Tasks.csproj"/>
     </ItemGroup>

@@ -2,6 +2,7 @@ using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Labs.Gif;
 using Avalonia.Media.Imaging;
+using Euterpe.Abstractions;
 
 namespace Euterpe.Headless.Tests.Controls;
 
@@ -76,6 +77,33 @@ public sealed class CoverImageTest : HeadlessTest
         finally
         {
             File.Delete(path);
+        }
+    });
+
+    [Test]
+    [NotInParallel("AsyncImage.DefaultRemoteLoader")]
+    public Task DefaultRemoteLoader_RemoteGifSource_BuildsGifSource() => RunOnUI(async () =>
+    {
+        var previousLoader = AsyncImage.DefaultRemoteLoader;
+        try
+        {
+            Uri? requestedSource = null;
+            var loader = IRemoteImageLoader.Mock();
+            loader.OpenReadAsync(Any<Uri>(), Any<CancellationToken>())
+                .Callback((source, _) => requestedSource = source)
+                .Returns(new MemoryStream(MinimalGif, false));
+            AsyncImage.DefaultRemoteLoader = loader;
+            var cover = Show(new CoverImage { Source = "https://euterpe-org.com/cover.gif" });
+
+            var gifSource = await WaitForGifSource(cover);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(gifSource).IsNotNull();
+            await Assert.That(requestedSource).IsEqualTo(new Uri("https://euterpe-org.com/cover.gif"));
+        }
+        finally
+        {
+            AsyncImage.DefaultRemoteLoader = previousLoader;
         }
     });
 

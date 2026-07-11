@@ -141,21 +141,46 @@ public sealed class CoverImage : TemplatedControl
         });
     }
 
-    private static async Task<GifStreamSource?> BuildGifSourceAsync(string source, CancellationToken token)
+    private async Task<GifStreamSource?> BuildGifSourceAsync(string source, CancellationToken token)
     {
-        if (!Uri.TryCreate(source, UriKind.Absolute, out var uri) || !uri.IsFile)
+        if (!Uri.TryCreate(source, UriKind.Absolute, out var uri))
         {
             return null;
         }
 
         try
         {
-            return await Task.Run(() =>
+            if (uri.IsFile)
             {
-                var bytes = File.ReadAllBytes(uri.LocalPath);
-                token.ThrowIfCancellationRequested();
-                return GifStreamSource.FromStream(new MemoryStream(bytes, false));
-            }, token).ConfigureAwait(false);
+                return await Task.Run(() =>
+                {
+                    var bytes = File.ReadAllBytes(uri.LocalPath);
+                    token.ThrowIfCancellationRequested();
+                    return GifStreamSource.FromStream(new MemoryStream(bytes, false));
+                }, token).ConfigureAwait(false);
+            }
+
+            var loader = AsyncImage.DefaultRemoteLoader;
+            if (loader is null)
+            {
+                return null;
+            }
+
+            var stream = await loader.OpenReadAsync(uri, token).ConfigureAwait(false);
+            if (stream is null)
+            {
+                return null;
+            }
+
+            await using (stream.ConfigureAwait(false))
+            {
+                using var buffer = new MemoryStream();
+                await stream.CopyToAsync(buffer, token).ConfigureAwait(false);
+                var bytes = buffer.ToArray();
+                return await Task.Run(
+                    () => GifStreamSource.FromStream(new MemoryStream(bytes, false)),
+                    token).ConfigureAwait(false);
+            }
         }
         catch
         {

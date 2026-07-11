@@ -34,6 +34,16 @@ public interface IFileSystemService
     Task<bool> TryWriteFileAtomicAsync(string filePath, ReadOnlyMemory<byte> bytes, CancellationToken cancellationToken = default);
 
     /// <summary>
+    ///     Returns the file's last write time in UTC, or <c>null</c> when the file does not exist.
+    /// </summary>
+    DateTime? GetFileLastWriteTimeUtc(string filePath);
+
+    /// <summary>
+    ///     Opens a file for reading, or returns <c>null</c> when it cannot be opened. The caller owns the returned stream.
+    /// </summary>
+    Stream? TryOpenReadFile(string filePath);
+
+    /// <summary>
     ///     Deletes a directory recursively, throwing on failure so the caller can surface the real cause. With
     ///     <see cref="DeleteOption.IgnoreIfNotFound" /> a missing directory is a no-op.
     /// </summary>

@@ -32,6 +32,8 @@ public sealed class AsyncImage : TemplatedControl
     private Image? _placeholderPart;
     private bool _reloadOnAttach;
 
+    public static IRemoteImageLoader? DefaultRemoteLoader { get; set; }
+
     public string? Source
     {
         get => GetValue(SourceProperty);
@@ -82,11 +84,13 @@ public sealed class AsyncImage : TemplatedControl
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
-        if (_reloadOnAttach && _imagePart is not null)
+        if (!_reloadOnAttach || _imagePart is null)
         {
-            _reloadOnAttach = false;
-            _ = LoadAsync(Source);
+            return;
         }
+
+        _reloadOnAttach = false;
+        _ = LoadAsync(Source);
     }
 
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -116,10 +120,7 @@ public sealed class AsyncImage : TemplatedControl
             _imagePart.Source = null;
         }
 
-        if (_placeholderPart is not null)
-        {
-            _placeholderPart.IsVisible = true;
-        }
+        _placeholderPart?.IsVisible = true;
 
         if (string.IsNullOrEmpty(source) || !Uri.TryCreate(source, UriKind.Absolute, out var uri))
         {
@@ -150,10 +151,7 @@ public sealed class AsyncImage : TemplatedControl
             _currentBitmap = bitmap;
             _imagePart.Source = bitmap;
             _imagePart.Opacity = 1;
-            if (_placeholderPart is not null)
-            {
-                _placeholderPart.IsVisible = false;
-            }
+            _placeholderPart?.IsVisible = false;
 
             previous?.Dispose();
         });
@@ -167,6 +165,20 @@ public sealed class AsyncImage : TemplatedControl
 
         try
         {
+            if (!uri.IsFile && DefaultRemoteLoader is { } loader)
+            {
+                var stream = await loader.OpenReadAsync(uri, token).ConfigureAwait(false);
+                if (stream is null)
+                {
+                    return null;
+                }
+
+                await using (stream.ConfigureAwait(false))
+                {
+                    return await Task.Run(() => Decode(stream, decodeWidth, decodeHeight, scaling), token).ConfigureAwait(false);
+                }
+            }
+
             if (uri.IsFile)
             {
                 var localPath = uri.LocalPath;

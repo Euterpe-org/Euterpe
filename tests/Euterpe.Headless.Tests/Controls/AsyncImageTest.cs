@@ -1,4 +1,5 @@
 using Avalonia.Media.Imaging;
+using Euterpe.Abstractions;
 
 namespace Euterpe.Headless.Tests.Controls;
 
@@ -151,6 +152,42 @@ public sealed class AsyncImageTest : HeadlessTest
         }
         finally
         {
+            File.Delete(path);
+        }
+    });
+
+    [Test]
+    [NotInParallel("AsyncImage.DefaultRemoteLoader")]
+    public Task DefaultRemoteLoader_RemoteSource_DecodesReturnedStream() => RunOnUI(async () =>
+    {
+        var path = CreateTempPng(128, 128);
+        var previousLoader = AsyncImage.DefaultRemoteLoader;
+        try
+        {
+            var bytes = File.ReadAllBytes(path);
+            Uri? requestedSource = null;
+            var loader = IRemoteImageLoader.Mock();
+            loader.OpenReadAsync(Any<Uri>(), Any<CancellationToken>())
+                .Callback((source, _) => requestedSource = source)
+                .Returns(new MemoryStream(bytes, false));
+            AsyncImage.DefaultRemoteLoader = loader;
+            var asyncImage = new AsyncImage
+            {
+                DecodeWidth = 64,
+                Source = "https://euterpe-org.com/image.png"
+            };
+            var window = new Window { Content = asyncImage, Width = 200, Height = 200 };
+            window.Show();
+
+            var bitmap = await WaitForBitmap(asyncImage);
+
+            using var _ = Assert.Multiple();
+            await Assert.That(bitmap).IsNotNull();
+            await Assert.That(requestedSource).IsEqualTo(new Uri("https://euterpe-org.com/image.png"));
+        }
+        finally
+        {
+            AsyncImage.DefaultRemoteLoader = previousLoader;
             File.Delete(path);
         }
     });
