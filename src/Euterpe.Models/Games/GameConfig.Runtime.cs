@@ -57,10 +57,22 @@ public abstract partial class GameConfig
     public string LatestLogPath => Path.Combine(MelonLoaderFolder, "Latest.log");
 
     [JsonIgnore]
+    public virtual int DotNetRuntimeMajorVersion => 6;
+
+    [JsonIgnore]
+    public string DotNetRuntimeUrl => $"https://aka.ms/dotnet/{DotNetRuntimeMajorVersion}.0/dotnet-runtime-win-x64.zip";
+
+    [JsonIgnore]
     public string DotNetRuntimeFolder => Path.Combine(Folder, "dotnet");
 
     [JsonIgnore]
+    public string DotNetSharedFrameworkFolder => Path.Combine(DotNetRuntimeFolder, "shared", "Microsoft.NETCore.App");
+
+    [JsonIgnore]
     public string MelonLoaderDotNetRuntimeFolder => Path.Combine(MelonLoaderFolder, "Dependencies", "dotnet");
+
+    [JsonIgnore]
+    public string MelonLoaderDotNetSharedFrameworkFolder => Path.Combine(MelonLoaderDotNetRuntimeFolder, "shared", "Microsoft.NETCore.App");
 
     [JsonIgnore]
     public string Cpp2ILExecutablePath => Path.Combine(Il2CppAssemblyGeneratorFolderPath, "Cpp2IL", "Cpp2IL.exe");
