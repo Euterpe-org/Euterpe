@@ -14,8 +14,8 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            Logger.ZLogInformation($"Downloading .NET Runtime from {IGameRuntimeInstaller.DotNetRuntimeUrl} to {tempFilePath}");
-            await AppDownloadManager.DownloadFileAsync(IGameRuntimeInstaller.DotNetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+            Logger.ZLogInformation($"Downloading .NET Runtime from {GameConfig.DotNetRuntimeUrl} to {tempFilePath}");
+            await AppDownloadManager.DownloadFileAsync(GameConfig.DotNetRuntimeUrl, tempFilePath).ConfigureAwait(false);
 
             Logger.ZLogInformation($"Extracting .NET Runtime to {GameConfig.DotNetRuntimeFolder}");
             await ArchiveService.ExtractZipFileAsync(tempFilePath, GameConfig.DotNetRuntimeFolder).ConfigureAwait(false);
@@ -30,26 +30,30 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
 
     private bool CheckGameLocalRuntimeInstalled()
     {
-        ReadOnlySpan<string> dotnetPaths =
+        ReadOnlySpan<string> sharedFrameworkFolders =
         [
-            GameConfig.DotNetRuntimeFolder,
-            GameConfig.MelonLoaderDotNetRuntimeFolder
+            GameConfig.DotNetSharedFrameworkFolder,
+            GameConfig.MelonLoaderDotNetSharedFrameworkFolder
         ];
 
-        foreach (var path in dotnetPaths)
+        foreach (var folder in sharedFrameworkFolders)
         {
-            if (!Directory.Exists(path))
+            if (!ContainsRequiredRuntime(folder))
             {
                 continue;
             }
 
-            Logger.ZLogInformation($"Game-local .NET runtime found: {path}");
+            Logger.ZLogInformation($"Game-local .NET {GameConfig.DotNetRuntimeMajorVersion} runtime found: {folder}");
             return true;
         }
 
-        Logger.ZLogInformation($"No game-local .NET runtime found in {GameConfig.Folder}");
+        Logger.ZLogInformation($"No game-local .NET {GameConfig.DotNetRuntimeMajorVersion} runtime found in {GameConfig.Folder}");
         return false;
     }
+
+    private bool ContainsRequiredRuntime(string sharedFrameworkFolder) =>
+        Directory.Exists(sharedFrameworkFolder)
+        && Directory.EnumerateDirectories(sharedFrameworkFolder, $"{GameConfig.DotNetRuntimeMajorVersion}.*", SearchOption.TopDirectoryOnly).Any();
 
     private async Task<bool> CheckSystemRuntimeInstalledAsync()
     {
@@ -61,7 +65,7 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
                 .ExecuteBufferedAsync()
                 .ConfigureAwait(false);
 
-            return result.IsSuccess && result.StandardOutput.Contains("Microsoft.NETCore.App 6.");
+            return result.IsSuccess && result.StandardOutput.Contains($"Microsoft.NETCore.App {GameConfig.DotNetRuntimeMajorVersion}.");
         }
         catch (Exception ex)
         {
