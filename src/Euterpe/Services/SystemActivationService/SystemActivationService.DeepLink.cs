@@ -7,6 +7,7 @@ public sealed partial class SystemActivationService
     private IChartManageService ChartManageService => GameScope.Value.Resolve<IChartManageService>();
     private ChartManagePanelViewModel ChartManagePanelViewModel => GameScope.Value.Resolve<ChartManagePanelViewModel>();
     private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
+    private ShareImportDialogService ShareImportDialogService => GameScope.Value.Resolve<ShareImportDialogService>();
 
     private void HandleDeepLink(Uri uri)
     {
@@ -42,6 +43,11 @@ public sealed partial class SystemActivationService
 
             case "go":
                 await NavigationService.NavigateToAsync($"/{path}").ConfigureAwait(false);
+                break;
+
+            case "share":
+                await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
+                await ShareImportDialogService.ShowAsync(path).ConfigureAwait(false);
                 break;
 
             default:

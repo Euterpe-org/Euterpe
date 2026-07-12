@@ -3,6 +3,7 @@ using Autofac;
 using Euterpe.Abstractions;
 using Euterpe.Core.Proxies;
 using Euterpe.Features.Charting;
+using Euterpe.Features.Share;
 using Euterpe.Models;
 using Euterpe.Models.Playback;
 using Euterpe.Models.Progress;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using R3;
 using TUnit.Mocks.Logging;
+using Ursa.Controls;
 
 namespace Euterpe.Headless.Tests.Services;
 
@@ -22,7 +24,8 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         MockLogger<SystemActivationService>? logger = null,
         IModManageService? modManageService = null,
         IChartManageService? chartManageService = null,
-        ChartManagePanelViewModel? chartViewModel = null)
+        ChartManagePanelViewModel? chartViewModel = null,
+        ShareImportDialogService? shareImportDialogService = null)
     {
         var builder = new ContainerBuilder();
         if (modManageService is not null)
@@ -38,6 +41,11 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         if (chartViewModel is not null)
         {
             builder.RegisterInstance(chartViewModel).AsSelf();
+        }
+
+        if (shareImportDialogService is not null)
+        {
+            builder.RegisterInstance(shareImportDialogService).AsSelf();
         }
 
         var container = builder.Build();
@@ -175,6 +183,44 @@ public sealed class SystemActivationServiceTest : HeadlessTest
 
     [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleChartActionAsync")]
     private static extern Task InvokeChartAction(SystemActivationService service, string path);
+
+    [UnsafeAccessor(UnsafeAccessorKind.Method, Name = "HandleActionAsync")]
+    private static extern Task InvokeAction(SystemActivationService service, string action, string path);
+
+    [Test]
+    public async Task HandleActionAsync_Share_WaitsUntilMainWindowIsReadyAndOpensImportDialog()
+    {
+        var dialogService = IDialogService.Mock();
+        dialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel, object>(
+                Any<ShareImportDialogViewModel>(), Any<OverlayDialogOptions?>(), Any<string?>(), Any<CancellationToken?>())
+            .Returns((object?)null);
+        var viewModel = new ShareImportDialogViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            GameShareService = IGameShareService.Mock(),
+            Config = new Config(),
+            Logger = NullLogger<ShareImportDialogViewModel>.Instance
+        };
+        var dialog = new ShareImportDialogService
+        {
+            DialogService = dialogService,
+            GameSwitcher = new GameSwitcher
+            {
+                Config = new Config(),
+                Logger = NullLogger<GameSwitcher>.Instance
+            },
+            ShareImportDialogViewModel = viewModel
+        };
+        var service = NewService(shareImportDialogService: dialog);
+
+        var activation = InvokeAction(service, "share", "encoded-package");
+        await Assert.That(activation.IsCompleted).IsFalse();
+
+        service.NavigationService.Ready.Set();
+        await activation;
+
+        await Assert.That(viewModel.ShareText).IsEqualTo("encoded-package");
+    }
 
     [Test]
     public async Task HandleModAction_Update_WithoutName_UpdatesAllMods()
