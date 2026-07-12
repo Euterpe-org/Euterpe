@@ -25,7 +25,7 @@
 
 ## Code organization
 
-- Where a type belongs is defined by the project map in CLAUDE.md.
+- Where a type belongs is defined by the project map in `AGENTS.md`.
 - Values derivable from a model are computed properties on the model itself (see `ChartDto.SizeDisplay`, `BpmDisplay`, `DifficultyBadges`), not static helper classes or converter wrappers.
 - Large types split into `Name.Topic.cs` partial files.
 - Service layout: the suffix-less `<Service>.cs` holds only the public interface implementation. Everything else lives in partials — `<Service>.Private.cs` when the helpers are few, `<Service>.<Topic>.cs` (`.Core`, `.Import`, ...) when there is enough to split by topic.
