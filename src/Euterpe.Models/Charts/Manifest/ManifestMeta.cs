@@ -1,28 +1,27 @@
-using MessagePack;
+using PolyType;
 
 namespace Euterpe.Models.Charts;
 
-[MessagePackObject]
 public sealed class ManifestMeta
 {
-    [Key("name")] public string Name { get; set; } = null!;
-    [Key("name_romanized")] public string? NameRomanized { get; set; }
-    [Key("author")] public string Author { get; set; } = null!;
-    [Key("description")] public string? Description { get; set; }
-    [Key("safe_for_streamer")] public bool SafeForStreamer { get; set; }
-    [Key("bpm")] public int Bpm { get; set; }
-    [Key("bpm_min")] public int? BpmMin { get; set; }
-    [Key("bpm_max")] public int? BpmMax { get; set; }
-    [Key("scene")] public string Scene { get; set; } = null!;
-    [Key("scene_egg")] public string? SceneEgg { get; set; }
-    [Key("background_video_opacity")] public float? BackgroundVideoOpacity { get; set; }
-    [Key("search_keywords")] public string[]? SearchKeywords { get; set; }
-    [Key("maps")] public Dictionary<string, ManifestMap> Maps { get; set; } = null!;
-    [Key("hide_mode")] public string? HideMode { get; set; }
-    [Key("hide_rating_override")] public string? HideRatingOverride { get; set; }
-    [Key("hide_message")] public string? HideMessage { get; set; }
-    [Key("cover_dominant_color")] public string? CoverDominantColor { get; set; }
-    [Key("uploader")] public ManifestUploader? Uploader { get; set; }
-    [Key("created_at")] public long? CreatedAt { get; set; }
-    [Key("updated_at")] public long? UpdatedAt { get; set; }
+    [PropertyShape(Name = "name")] public string Name { get; set; } = null!;
+    [PropertyShape(Name = "name_romanized")] public string? NameRomanized { get; set; }
+    [PropertyShape(Name = "author")] public string Author { get; set; } = null!;
+    [PropertyShape(Name = "description")] public string? Description { get; set; }
+    [PropertyShape(Name = "safe_for_streamer")] public bool SafeForStreamer { get; set; }
+    [PropertyShape(Name = "bpm")] public int Bpm { get; set; }
+    [PropertyShape(Name = "bpm_min")] public int? BpmMin { get; set; }
+    [PropertyShape(Name = "bpm_max")] public int? BpmMax { get; set; }
+    [PropertyShape(Name = "scene")] public string Scene { get; set; } = null!;
+    [PropertyShape(Name = "scene_egg")] public string? SceneEgg { get; set; }
+    [PropertyShape(Name = "background_video_opacity")] public float? BackgroundVideoOpacity { get; set; }
+    [PropertyShape(Name = "search_keywords")] public string[]? SearchKeywords { get; set; }
+    [PropertyShape(Name = "maps")] public Dictionary<string, ManifestMap> Maps { get; set; } = null!;
+    [PropertyShape(Name = "hide_mode")] public string? HideMode { get; set; }
+    [PropertyShape(Name = "hide_rating_override")] public string? HideRatingOverride { get; set; }
+    [PropertyShape(Name = "hide_message")] public string? HideMessage { get; set; }
+    [PropertyShape(Name = "cover_dominant_color")] public string? CoverDominantColor { get; set; }
+    [PropertyShape(Name = "uploader")] public ManifestUploader? Uploader { get; set; }
+    [PropertyShape(Name = "created_at")] public long? CreatedAt { get; set; }
+    [PropertyShape(Name = "updated_at")] public long? UpdatedAt { get; set; }
 }

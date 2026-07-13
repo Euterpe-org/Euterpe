@@ -1,10 +1,9 @@
-using MessagePack;
+using PolyType;
 
 namespace Euterpe.Models.Charts;
 
-[MessagePackObject]
 public sealed class ManifestFileEntry
 {
-    [Key("version")] public int Version { get; set; }
-    [Key("size")] public long Size { get; set; }
+    [PropertyShape(Name = "version")] public int Version { get; set; }
+    [PropertyShape(Name = "size")] public long Size { get; set; }
 }
