@@ -1,21 +1,18 @@
-using Euterpe.Models.Serialization;
-using MessagePack;
-using MessagePack.Resolvers;
+using Nerdbank.MessagePack;
 
 namespace Euterpe.Core;
 
 internal sealed class MessagePackSerializationService : IMessagePackSerializationService
 {
-    private static readonly MessagePackSerializerOptions Options =
-        MessagePackSerializerOptions.Standard
-            .WithResolver(CompositeResolver.Create(EuterpeResolver.Instance, StandardResolver.Instance))
-            .WithSecurity(MessagePackSecurity.UntrustedData);
+    private static readonly MessagePackSerializer Serializer = new();
 
     public Manifest DeserializeManifest(Stream stream) =>
-        MessagePackSerializer.Deserialize<Manifest>(stream, Options);
+        Serializer.Deserialize<Manifest>(stream)
+        ?? throw new InvalidDataException("The MessagePack payload did not contain a manifest.");
 
-    public ValueTask<Manifest> DeserializeManifestAsync(Stream stream, CancellationToken cancellationToken = default) =>
-        MessagePackSerializer.DeserializeAsync<Manifest>(stream, Options, cancellationToken);
+    public async ValueTask<Manifest> DeserializeManifestAsync(Stream stream, CancellationToken cancellationToken = default) =>
+        await Serializer.DeserializeAsync<Manifest>(stream, cancellationToken).ConfigureAwait(false)
+        ?? throw new InvalidDataException("The MessagePack payload did not contain a manifest.");
 
     public async ValueTask<Manifest> DeserializeManifestFromFileAsync(string filePath, CancellationToken cancellationToken = default)
     {
@@ -27,11 +24,11 @@ internal sealed class MessagePackSerializationService : IMessagePackSerializatio
     }
 
     public byte[] SerializeManifest(Manifest value) =>
-        MessagePackSerializer.Serialize(value, Options);
+        Serializer.Serialize(value);
 
     public void SerializeManifest(Stream stream, Manifest value) =>
-        MessagePackSerializer.Serialize(stream, value, Options);
+        Serializer.Serialize(stream, value);
 
     public Task SerializeManifestAsync(Stream stream, Manifest value, CancellationToken cancellationToken = default) =>
-        MessagePackSerializer.SerializeAsync(stream, value, Options, cancellationToken);
+        Serializer.SerializeAsync(stream, value, cancellationToken).AsTask();
 }

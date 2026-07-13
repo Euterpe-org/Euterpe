@@ -62,8 +62,6 @@ public sealed class ArchitectureTests
         var result = ModelsTypes.That()
             .ResideInNamespace("Euterpe.Models")
             .And()
-            .DoNotResideInNamespace("Euterpe.Models.Serialization")
-            .And()
             .AreNotStatic()
             .Should()
             .BePublic()

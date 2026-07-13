@@ -1,14 +1,14 @@
-using MessagePack;
+using PolyType;
 
 namespace Euterpe.Models.Charts;
 
-[MessagePackObject]
-public sealed class Manifest
+[GenerateShape]
+public sealed partial class Manifest
 {
     public const int CurrentSchema = 1;
 
-    [Key("schema")] public int Schema { get; set; }
-    [Key("cid")] public int? Cid { get; set; }
-    [Key("meta")] public ManifestMeta Meta { get; set; } = null!;
-    [Key("files")] public Dictionary<string, ManifestFileEntry> Files { get; set; } = null!;
+    [PropertyShape(Name = "schema")] public int Schema { get; set; }
+    [PropertyShape(Name = "cid")] public int? Cid { get; set; }
+    [PropertyShape(Name = "meta")] public ManifestMeta Meta { get; set; } = null!;
+    [PropertyShape(Name = "files")] public Dictionary<string, ManifestFileEntry> Files { get; set; } = null!;
 }
