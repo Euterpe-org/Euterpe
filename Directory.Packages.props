@@ -26,7 +26,7 @@
         <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.1.0"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2026.2.0"/>
         <PackageVersion Include="Nerdbank.MessagePack" Version="1.2.36"/>
-        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.7.1"/>
+        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.8.2"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.6.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.6.0"/>
