@@ -30,8 +30,8 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.6.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.6.0"/>
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.9"/>
-        <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.7.0"/>
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.10"/>
+        <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.8.0"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="NetEscapades.EnumGenerators" Version="1.0.0-beta21"/>
         <PackageVersion Include="ObservableCollections" Version="3.3.4"/>
@@ -48,7 +48,7 @@
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="SoundFlow" Version="1.4.1"/>
         <PackageVersion Include="SoundFlow.Codecs.FFMpeg" Version="1.4.0"/>
-        <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.9"/>
+        <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.10"/>
         <PackageVersion Include="TUnit" Version="1.59.0"/>
         <PackageVersion Include="TUnit.Mocks" Version="1.59.0"/>
         <PackageVersion Include="TUnit.Mocks.Http" Version="1.59.0"/>
