@@ -49,10 +49,10 @@
         <PackageVersion Include="SoundFlow" Version="1.4.1"/>
         <PackageVersion Include="SoundFlow.Codecs.FFMpeg" Version="1.4.0"/>
         <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.10"/>
-        <PackageVersion Include="TUnit" Version="1.60.0"/>
-        <PackageVersion Include="TUnit.Mocks" Version="1.60.0"/>
-        <PackageVersion Include="TUnit.Mocks.Http" Version="1.60.0"/>
-        <PackageVersion Include="TUnit.Mocks.Logging" Version="1.60.0"/>
+        <PackageVersion Include="TUnit" Version="1.61.0"/>
+        <PackageVersion Include="TUnit.Mocks" Version="1.61.0"/>
+        <PackageVersion Include="TUnit.Mocks.Http" Version="1.61.0"/>
+        <PackageVersion Include="TUnit.Mocks.Logging" Version="1.61.0"/>
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.TUnit" Version="31.24.2"/>
