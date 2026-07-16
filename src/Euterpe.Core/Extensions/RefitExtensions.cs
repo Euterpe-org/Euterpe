@@ -15,7 +15,7 @@ public static class RefitExtensions
         where T : class
     {
         var builder = services
-            .AddRefitClient<T>(RefitSettings, name)
+            .AddRefitGeneratedClient<T>(RefitSettings, name)
             .ConfigureHttpClient(c => c.BaseAddress = new Uri($"{EuterpeApi.BaseUrl}{basePath}"))
             .AddHttpMessageHandler<XRequestIdHandler>();
 
