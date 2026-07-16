@@ -7,8 +7,8 @@ public sealed partial class Manifest
 {
     public const int CurrentSchema = 1;
 
-    [PropertyShape(Name = "schema")] public int Schema { get; set; }
-    [PropertyShape(Name = "cid")] public int? Cid { get; set; }
-    [PropertyShape(Name = "meta")] public ManifestMeta Meta { get; set; } = null!;
-    [PropertyShape(Name = "files")] public Dictionary<string, ManifestFileEntry> Files { get; set; } = null!;
+    public int Schema { get; set; }
+    public int? Cid { get; set; }
+    public ManifestMeta Meta { get; set; } = null!;
+    public Dictionary<string, ManifestFileEntry> Files { get; set; } = null!;
 }
