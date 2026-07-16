@@ -4,7 +4,10 @@ namespace Euterpe.Core;
 
 internal sealed class MessagePackSerializationService : IMessagePackSerializationService
 {
-    private static readonly MessagePackSerializer Serializer = new();
+    private static readonly MessagePackSerializer Serializer = new()
+    {
+        PropertyNamingPolicy = MessagePackNamingPolicy.SnakeLowerCase
+    };
 
     public Manifest DeserializeManifest(Stream stream) =>
         Serializer.Deserialize<Manifest>(stream)

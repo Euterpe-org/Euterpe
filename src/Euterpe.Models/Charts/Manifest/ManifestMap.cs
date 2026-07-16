@@ -5,9 +5,9 @@ namespace Euterpe.Models.Charts;
 
 public sealed class ManifestMap
 {
-    [PropertyShape(Name = "rating")] public string Rating { get; set; } = null!;
-    [PropertyShape(Name = "charters")] public string[] Charters { get; set; } = null!;
-    [PropertyShape(Name = "predicted_rating")] public double? PredictedRating { get; set; }
+    public string Rating { get; set; } = null!;
+    public string[] Charters { get; set; } = null!;
+    public double? PredictedRating { get; set; }
 
     [PropertyShape(Ignore = true)]
     public double RatingValue =>
