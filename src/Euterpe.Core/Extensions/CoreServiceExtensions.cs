@@ -103,7 +103,7 @@ public static class CoreServiceExtensions
                 .AddStandardResilienceHandler(ConfigureResilience);
             services.AddEuterpeRefitClient<ITelemetryApiClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
 
-            services.AddRefitClient<IEuterpeHealthClient>()
+            services.AddRefitGeneratedClient<IEuterpeHealthClient>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(EuterpeWeb.BaseUrl));
         }
     }

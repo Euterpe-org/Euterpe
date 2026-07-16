@@ -20,7 +20,7 @@ public sealed partial class CoreServiceExtensionsTest
         services.RegisterHttpClients();
         services.AddSingleton(authService);
         services.AddSingleton(notificationService ?? INotificationService.Mock());
-        // AddRefitClient sets a per-name primary handler, so the mock must be re-configured per-name after it.
+        // Refit configures a per-name primary handler, so reconfigure the mock after registration.
         services.AddHttpClient(nameof(EuterpeApi.Mods)).ConfigurePrimaryHttpMessageHandler(() => primary);
         return services.BuildServiceProvider();
     }
