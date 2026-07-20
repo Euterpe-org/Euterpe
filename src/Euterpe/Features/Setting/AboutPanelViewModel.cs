@@ -10,34 +10,31 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         // Developer Team
         new(Contributor_Developer, [
             new Contributor("lxy",
-                "Planning and maintaining the project",
+                "Managing and maintaining the project",
                 [
                     ("GitHub", "https://github.com/lxymahatma"),
                     ("Bilibili", "https://space.bilibili.com/255895683")
                 ]),
             new Contributor("KARPED1EM",
-                "Remaking UI",
+                "Leading UI and UX design and development",
                 [
                     ("GitHub", "https://github.com/KARPED1EM"),
                     ("Bilibili", "https://space.bilibili.com/312252452")
                 ]),
             new Contributor("Balint",
-                "Making the first version of the project",
+                "Building the initial prototype of MuseDashModTools",
                 [("GitHub", "https://github.com/Balint817")]),
             new Contributor("Ultra Rabbit",
-                "Rewriting the first version of the project",
+                "Reworking the initial MuseDashModTools implementation",
                 [("GitHub", "https://github.com/TheBunnies")])
         ]),
 
         // Artist
         new(Contributor_Artist, [
-            new Contributor("Super Pig",
-                "Drawing the Euterpe application icon",
-                [("Bilibili", "https://space.bilibili.com/252615263")]),
             new Contributor("aquawtf",
-                "Drawing the Euterpe icon"),
+                "Creating the artwork used as the MelonLoader page background"),
             new Contributor("Bigbeesushi",
-                "Drawing the Euterpe background",
+                "Creating the artwork used as the Mod Management page background",
                 [("YouTube", "https://www.youtube.com/@%E9%AD%94%E6%B3%95%E5%B8%AB%E7%8E%A5%E6%9C%88")])
         ]),
 
