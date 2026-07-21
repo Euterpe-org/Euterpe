@@ -365,7 +365,7 @@ public sealed class CoverImageTest : HeadlessTest
         using var bitmap = new RenderTargetBitmap(new PixelSize(width, height), new Vector(96, 96));
         var path = Path.Combine(Path.GetTempPath(), $"euterpe_coverimage_{Guid.NewGuid():N}.png");
         using var stream = File.Create(path);
-        bitmap.Save(stream);
+        bitmap.Save(stream, new PngBitmapEncoderOptions());
         return path;
     }
 
