@@ -9,10 +9,10 @@ namespace Euterpe.Tests.Core;
 public sealed class TelemetryServiceTest
 {
     private static TelemetryService NewService(
-        ITelemetryApiClient? client = null,
+        IEuterpeTelemetryClient? client = null,
         IPlatformInfo? platformInfo = null) => new()
     {
-        TelemetryApiClient = client ?? ITelemetryApiClient.Mock(),
+        TelemetryClient = client ?? IEuterpeTelemetryClient.Mock(),
         PlatformInfo = platformInfo ?? StubPlatformInfo(),
         Logger = Mock.Logger<TelemetryService>()
     };
@@ -28,7 +28,7 @@ public sealed class TelemetryServiceTest
     public async Task TrackSessionAsync_SendsPayloadWithPlatformAndVersion()
     {
         var captured = new List<SessionEvent>();
-        var client = ITelemetryApiClient.Mock();
+        var client = IEuterpeTelemetryClient.Mock();
         client.TrackSessionAsync(Any<SessionEvent>(), Any<CancellationToken>())
             .Callback((p, _) => captured.Add(p));
         var platform = IPlatformInfo.Mock();
@@ -48,7 +48,7 @@ public sealed class TelemetryServiceTest
     [Test]
     public async Task TrackSessionAsync_ApiClientThrows_SwallowsException()
     {
-        var client = ITelemetryApiClient.Mock();
+        var client = IEuterpeTelemetryClient.Mock();
         client.TrackSessionAsync(Any<SessionEvent>(), Any<CancellationToken>())
             .Throws(new HttpRequestException("server unreachable"));
 
@@ -59,7 +59,7 @@ public sealed class TelemetryServiceTest
     [Test]
     public async Task TrackSessionAsync_CallsApiClientOnce()
     {
-        var client = ITelemetryApiClient.Mock();
+        var client = IEuterpeTelemetryClient.Mock();
         client.TrackSessionAsync(Any<SessionEvent>(), Any<CancellationToken>())
             .Returns(new HttpResponseMessage(HttpStatusCode.NoContent));
 

@@ -6,16 +6,16 @@ using static Euterpe.Shared.EuterpeApi;
 
 namespace Euterpe.Tests.Core.Http.Clients;
 
-[Category("ITelemetryApiClientTests")]
-[TestSubject(typeof(ITelemetryApiClient))]
-public sealed class ITelemetryApiClientTest
+[Category("IEuterpeTelemetryClientTests")]
+[TestSubject(typeof(IEuterpeTelemetryClient))]
+public sealed class IEuterpeTelemetryClientTest
 {
     [Test]
     public async Task TrackSessionAsync_ServerError_ReturnsResponseWithoutThrowing()
     {
         using var http = Mock.HttpHandler();
         http.OnPost("/api/telemetry/app/session").Respond(HttpStatusCode.InternalServerError);
-        var api = http.CreateEuterpeClient<ITelemetryApiClient>(Telemetry.BasePath);
+        var api = http.CreateEuterpeClient<IEuterpeTelemetryClient>(Telemetry.BasePath);
 
         using var response = await api.TrackSessionAsync(new SessionEvent("JP", "windows", "x64", "1.2.3"));
 
