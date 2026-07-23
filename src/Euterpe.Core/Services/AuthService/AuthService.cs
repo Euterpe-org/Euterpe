@@ -10,8 +10,6 @@ internal sealed partial class AuthService : IAuthService
     private const string ClientId = "euterpe-app";
     private const string AuthorizePageUrl = "https://euterpe-org.com/auth/app";
     private static readonly TimeSpan CallbackTimeout = TimeSpan.FromMinutes(5);
-    private static readonly TimeSpan HealthCheckTimeout = TimeSpan.FromSeconds(5);
-
     private readonly AsyncExclusiveLock _lock = new();
     public AsyncManualResetEvent Ready { get; } = new(false);
 
@@ -166,9 +164,8 @@ internal sealed partial class AuthService : IAuthService
     {
         try
         {
-            using var cts = new CancellationTokenSource(HealthCheckTimeout);
-            using var response = await HealthClient.CheckAsync(cts.Token).ConfigureAwait(false);
-            return response.StatusCode == HttpStatusCode.OK;
+            using var response = await HealthClient.CheckAsync().ConfigureAwait(false);
+            return response.StatusCode is HttpStatusCode.OK;
         }
         catch (Exception ex)
         {

@@ -1,7 +1,6 @@
 using Euterpe.Core.Http.Handlers;
 using Euterpe.Core.Http.Listeners;
-using Microsoft.Extensions.Http.Resilience;
-using Polly;
+using Euterpe.Core.Http.Resilience;
 using Refit;
 using SoundFlow.Abstracts;
 using SoundFlow.Backends.MiniAudio;
@@ -11,25 +10,6 @@ namespace Euterpe.Core.Extensions;
 
 public static class CoreServiceExtensions
 {
-    private static void ConfigureResilience(HttpStandardResilienceOptions options)
-    {
-        options.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(30);
-        options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(10);
-        options.Retry.MaxRetryAttempts = 3;
-        options.Retry.Delay = TimeSpan.FromMilliseconds(500);
-        options.Retry.BackoffType = DelayBackoffType.Exponential;
-        options.Retry.UseJitter = true;
-
-        // Only retry GET requests
-        options.Retry.ShouldHandle = static args =>
-        {
-            var request = args.Context.GetRequestMessage();
-            return request?.Method != HttpMethod.Get
-                ? ValueTask.FromResult(false)
-                : ValueTask.FromResult(HttpClientResiliencePredicates.IsTransient(args.Outcome));
-        };
-    }
-
     extension(IServiceCollection services)
     {
         public void RegisterLogger()
@@ -92,19 +72,20 @@ public static class CoreServiceExtensions
             services.AddHttpClient<EuterpeDownloadClient>().AddHttpMessageHandler<TokenQueryHandler>();
 
             services.AddEuterpeRefitClient<IEuterpeAuthClient>(nameof(EuterpeApi.Auth), EuterpeApi.Auth.BasePath)
-                .AddStandardResilienceHandler(ConfigureResilience);
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeAccountClient>(nameof(EuterpeApi.Account), EuterpeApi.Account.BasePath, true)
-                .AddStandardResilienceHandler(ConfigureResilience);
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeDistributionClient>(nameof(EuterpeApi.Distribution), EuterpeApi.Distribution.BasePath, true)
-                .AddStandardResilienceHandler(ConfigureResilience);
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeModClient>(nameof(EuterpeApi.Mods), EuterpeApi.Mods.BasePath, true)
-                .AddStandardResilienceHandler(ConfigureResilience);
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeChartClient>(nameof(EuterpeApi.Charts), EuterpeApi.Charts.BasePath, true)
-                .AddStandardResilienceHandler(ConfigureResilience);
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<ITelemetryApiClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
 
             services.AddRefitGeneratedClient<IEuterpeHealthClient>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri(EuterpeWeb.BaseUrl));
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(EuterpeWeb.BaseUrl))
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureHealthCheck);
         }
     }
 
