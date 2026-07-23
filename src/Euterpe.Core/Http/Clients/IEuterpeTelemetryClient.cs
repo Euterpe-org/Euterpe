@@ -4,7 +4,7 @@ using static Euterpe.Shared.EuterpeApi;
 
 namespace Euterpe.Core.Http.Clients;
 
-public interface ITelemetryApiClient
+public interface IEuterpeTelemetryClient
 {
     [Post(Telemetry.Session)]
     Task<HttpResponseMessage> TrackSessionAsync([Body] SessionEvent payload, CancellationToken cancellationToken = default);

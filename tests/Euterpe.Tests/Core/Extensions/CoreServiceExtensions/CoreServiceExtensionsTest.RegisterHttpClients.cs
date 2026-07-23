@@ -56,7 +56,7 @@ public sealed partial class CoreServiceExtensionsTest
             typeof(IEuterpeDistributionClient),
             typeof(IEuterpeModClient),
             typeof(IEuterpeChartClient),
-            typeof(ITelemetryApiClient),
+            typeof(IEuterpeTelemetryClient),
             typeof(IEuterpeHealthClient)
         ];
 

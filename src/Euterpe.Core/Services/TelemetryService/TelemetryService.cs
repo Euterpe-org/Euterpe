@@ -14,7 +14,7 @@ internal sealed class TelemetryService : ITelemetryService
                 PlatformInfo.ArchitectureString,
                 AppVersion);
 
-            using var response = await TelemetryApiClient.TrackSessionAsync(payload).ConfigureAwait(false);
+            using var response = await TelemetryClient.TrackSessionAsync(payload).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -24,7 +24,7 @@ internal sealed class TelemetryService : ITelemetryService
 
     #region Injections
 
-    public required ITelemetryApiClient TelemetryApiClient { get; init; }
+    public required IEuterpeTelemetryClient TelemetryClient { get; init; }
     public required IPlatformInfo PlatformInfo { get; init; }
     public required ILogger<TelemetryService> Logger { get; init; }
 

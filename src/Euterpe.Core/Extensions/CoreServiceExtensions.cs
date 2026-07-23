@@ -81,7 +81,7 @@ public static class CoreServiceExtensions
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeChartClient>(nameof(EuterpeApi.Charts), EuterpeApi.Charts.BasePath, true)
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
-            services.AddEuterpeRefitClient<ITelemetryApiClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
+            services.AddEuterpeRefitClient<IEuterpeTelemetryClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
 
             services.AddRefitGeneratedClient<IEuterpeHealthClient>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri(EuterpeWeb.BaseUrl))
