@@ -24,4 +24,7 @@ public abstract partial class ViewModelBase : ObservableObject, IAsyncInitializa
 
     [RelayCommand]
     private Task OpenUrlAsync(string url) => Launcher.OpenUriAsync(url);
+
+    [RelayCommand]
+    private Task RevealFileAsync(string filePath) => Launcher.RevealFileAsync(filePath);
 }

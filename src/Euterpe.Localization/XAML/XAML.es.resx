@@ -43,6 +43,9 @@
   <data name="Button_Next" xml:space="preserve">
     <value>Siguiente</value>
   </data>
+  <data name="Button_OpenLog" xml:space="preserve">
+    <value>Abrir registro</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Reinstalar</value>
   </data>
@@ -201,9 +204,6 @@
   </data>
   <data name="CrashDialog_Button_Feedback" xml:space="preserve">
     <value>Comentarios en GitHub</value>
-  </data>
-  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
-    <value>Abrir registro</value>
   </data>
   <data name="CrashDialog_Header" xml:space="preserve">
     <value>Euterpe encontró un error</value>

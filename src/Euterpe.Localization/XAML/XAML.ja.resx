@@ -43,6 +43,9 @@
   <data name="Button_Next" xml:space="preserve">
     <value>次へ</value>
   </data>
+  <data name="Button_OpenLog" xml:space="preserve">
+    <value>ログを開く</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>再インストール</value>
   </data>
@@ -201,9 +204,6 @@
   </data>
   <data name="CrashDialog_Button_Feedback" xml:space="preserve">
     <value>GitHub フィードバック</value>
-  </data>
-  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
-    <value>ログを開く</value>
   </data>
   <data name="CrashDialog_Header" xml:space="preserve">
     <value>Euterpe でエラーが発生しました</value>

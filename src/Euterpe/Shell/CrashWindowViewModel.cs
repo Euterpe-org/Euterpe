@@ -8,8 +8,6 @@ namespace Euterpe.Shell;
 [AppSingleton]
 public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
 {
-    private const string FeedbackUri = "https://github.com/Euterpe-org/Euterpe/issues/new/choose";
-
     public string EnvironmentInfo { get; } =
         $"Euterpe {DisplayVersion} · {RuntimeInformation.OSDescription.Trim()} ({RuntimeInformation.OSArchitecture}) · {RuntimeInformation.FrameworkDescription}";
 
@@ -47,12 +45,6 @@ public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
             await MessageBoxService.ErrorAsync(MessageBox_Content_CrashDialog_CopyFailed).ConfigureAwait(true);
         }
     }
-
-    [RelayCommand]
-    private void OpenLog() => Launcher.RevealFile(LogFilePath);
-
-    [RelayCommand]
-    private Task FeedbackAsync() => Launcher.OpenUriAsync(FeedbackUri);
 
     [RelayCommand]
     private void Continue() => Close(true);
