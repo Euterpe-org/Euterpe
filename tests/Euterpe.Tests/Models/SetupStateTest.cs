@@ -21,6 +21,7 @@ public sealed class SetupStateTest
         await Assert.That(state.Stage).IsEqualTo(SetupExecutionStage.NotStarted);
         await Assert.That(state.IsRunning).IsFalse();
         await Assert.That(state.AllSucceeded).IsFalse();
+        await Assert.That(state.HasFailedSteps).IsFalse();
         await Assert.That(state.Steps).IsEmpty();
     }
 
@@ -64,6 +65,27 @@ public sealed class SetupStateTest
     }
 
     [Test]
+    public async Task HasFailedSteps_True_WhenFinishedAndAnyStepFailed()
+    {
+        var state = new SetupState();
+        state.Steps.Add(NewStep(SetupStepStatus.Succeeded));
+        state.Steps.Add(NewStep(SetupStepStatus.Failed));
+        state.Stage = SetupExecutionStage.Finished;
+
+        await Assert.That(state.HasFailedSteps).IsTrue();
+    }
+
+    [Test]
+    public async Task HasFailedSteps_False_WhenStageNotFinished()
+    {
+        var state = new SetupState();
+        state.Steps.Add(NewStep(SetupStepStatus.Failed));
+        state.Stage = SetupExecutionStage.Running;
+
+        await Assert.That(state.HasFailedSteps).IsFalse();
+    }
+
+    [Test]
     public async Task Reset_ClearsStepsAndResetsStage()
     {
         var state = new SetupState();
@@ -90,5 +112,6 @@ public sealed class SetupStateTest
         await Assert.That(changed).Contains(nameof(SetupState.Stage));
         await Assert.That(changed).Contains(nameof(SetupState.IsRunning));
         await Assert.That(changed).Contains(nameof(SetupState.AllSucceeded));
+        await Assert.That(changed).Contains(nameof(SetupState.HasFailedSteps));
     }
 }
