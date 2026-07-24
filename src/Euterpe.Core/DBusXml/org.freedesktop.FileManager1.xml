@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+    <interface name="org.freedesktop.FileManager1">
+        <method name="ShowItems">
+            <arg name="URIs" type="as" direction="in"/>
+            <arg name="StartupId" type="s" direction="in"/>
+        </method>
+    </interface>
+</node>

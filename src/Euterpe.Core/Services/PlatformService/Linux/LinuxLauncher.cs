@@ -3,31 +3,18 @@ using Avalonia.Platform.Storage;
 namespace Euterpe.Core;
 
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
-internal sealed class LinuxLauncher : IPlatformLauncher
+internal sealed partial class LinuxLauncher : IPlatformLauncher
 {
-    public void RevealFile(string filePath)
+    public async Task OpenFileAsync(string filePath)
     {
-        Process.Start(
-            new ProcessStartInfo("xdg-open", filePath)
-            {
-                UseShellExecute = false,
-                CreateNoWindow = true
-            }
-        );
-
-        Logger.ZLogInformation($"Reveal file: {filePath}");
+        await TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath)).ConfigureAwait(false);
+        Logger.ZLogInformation($"Open file: {filePath}");
     }
 
     public async Task OpenFolderAsync(string folderPath)
     {
         await TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath)).ConfigureAwait(false);
         Logger.ZLogInformation($"Open folder: {folderPath}");
-    }
-
-    public async Task OpenFileAsync(string filePath)
-    {
-        await TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath)).ConfigureAwait(false);
-        Logger.ZLogInformation($"Open file: {filePath}");
     }
 
     public Task OpenUriAsync(string uri)
@@ -44,6 +31,18 @@ internal sealed class LinuxLauncher : IPlatformLauncher
 
         Logger.ZLogInformation($"Open uri: {uri}");
         return Task.CompletedTask;
+    }
+
+    public async Task RevealFileAsync(string filePath)
+    {
+        if (await TryRevealFileAsync(filePath).ConfigureAwait(false))
+        {
+            Logger.ZLogInformation($"Reveal file: {filePath}");
+            return;
+        }
+
+        var folderPath = Path.GetDirectoryName(filePath)!;
+        await OpenFolderAsync(folderPath).ConfigureAwait(false);
     }
 
     #region Injections

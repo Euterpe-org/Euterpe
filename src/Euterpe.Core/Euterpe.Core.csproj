@@ -18,13 +18,16 @@
         <PackageReference Include="Semver"/>
         <PackageReference Include="SoundFlow"/>
         <PackageReference Include="SoundFlow.Codecs.FFMpeg"/>
-        <PackageReference Include="ValveKeyValue"/>
         <PackageReference Include="System.Security.Cryptography.ProtectedData"/>
+        <PackageReference Include="Tmds.DBus.Generator"/>
+        <PackageReference Include="Tmds.DBus.Protocol"/>
+        <PackageReference Include="ValveKeyValue"/>
         <PackageReference Include="ZLogger"/>
     </ItemGroup>
 
     <ItemGroup>
         <AdditionalFiles Include="BannedSymbols.txt"/>
+        <AdditionalFiles Include="DBusXml\*.xml" DBusGeneratorMode="Proxy" Namespace="$(RootNamespace).DBus"/>
     </ItemGroup>
 
     <ItemGroup>

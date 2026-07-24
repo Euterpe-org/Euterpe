@@ -43,6 +43,9 @@
   <data name="Button_Next" xml:space="preserve">
     <value>Volgende</value>
   </data>
+  <data name="Button_OpenLog" xml:space="preserve">
+    <value>Log openen</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>Opnieuw installeren</value>
   </data>
@@ -201,9 +204,6 @@
   </data>
   <data name="CrashDialog_Button_Feedback" xml:space="preserve">
     <value>GitHub Feedback</value>
-  </data>
-  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
-    <value>Log openen</value>
   </data>
   <data name="CrashDialog_Header" xml:space="preserve">
     <value>Euterpe heeft een fout ondervonden</value>

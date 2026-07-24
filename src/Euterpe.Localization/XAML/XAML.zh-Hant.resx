@@ -43,6 +43,9 @@
   <data name="Button_Next" xml:space="preserve">
     <value>下一步</value>
   </data>
+  <data name="Button_OpenLog" xml:space="preserve">
+    <value>開啟記錄檔</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>重新安裝</value>
   </data>
@@ -210,9 +213,6 @@
   </data>
   <data name="CrashDialog_Button_Feedback" xml:space="preserve">
     <value>GitHub 意見回饋</value>
-  </data>
-  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
-    <value>開啟記錄檔</value>
   </data>
   <data name="CrashDialog_Header" xml:space="preserve">
     <value>Euterpe 發生錯誤</value>

@@ -43,6 +43,9 @@
   <data name="Button_Next" xml:space="preserve">
     <value>다음</value>
   </data>
+  <data name="Button_OpenLog" xml:space="preserve">
+    <value>로그 열기</value>
+  </data>
   <data name="Button_Reinstall" xml:space="preserve">
     <value>재설치</value>
   </data>
@@ -201,9 +204,6 @@
   </data>
   <data name="CrashDialog_Button_Feedback" xml:space="preserve">
     <value>GitHub 피드백</value>
-  </data>
-  <data name="CrashDialog_Button_OpenLog" xml:space="preserve">
-    <value>로그 열기</value>
   </data>
   <data name="CrashDialog_Header" xml:space="preserve">
     <value>Euterpe에서 오류가 발생했습니다</value>
