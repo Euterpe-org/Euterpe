@@ -1,3 +1,5 @@
+using System.Buffers.Text;
+
 namespace Euterpe.Tests.Core;
 
 public sealed partial class GameShareServiceTest
@@ -61,7 +63,7 @@ public sealed partial class GameShareServiceTest
     private static GameSharePackage? ParseSerializedPackage(GameSharePackage package)
     {
         var serialization = new MessagePackSerializationService();
-        var code = System.Buffers.Text.Base64Url.EncodeToString(serialization.SerializeGameSharePackage(package));
+        var code = Base64Url.EncodeToString(serialization.SerializeGameSharePackage(package));
         return CreateService().TryParseShareLink(code);
     }
 }

@@ -31,7 +31,10 @@ public sealed partial class GameShareServiceTest
     {
         var service = CreateService();
 
-        void Act() => service.CreateChartShareLink([0]);
+        void Act()
+        {
+            service.CreateChartShareLink([0]);
+        }
 
         await Assert.That(Act).Throws<ArgumentException>();
     }
@@ -42,7 +45,10 @@ public sealed partial class GameShareServiceTest
         var service = CreateService();
         var chartIds = Enumerable.Range(1, GameSharePackage.MaximumChartCount + 1).ToArray();
 
-        void Act() => service.CreateChartShareLink(chartIds);
+        void Act()
+        {
+            service.CreateChartShareLink(chartIds);
+        }
 
         await Assert.That(Act).Throws<ArgumentException>();
     }

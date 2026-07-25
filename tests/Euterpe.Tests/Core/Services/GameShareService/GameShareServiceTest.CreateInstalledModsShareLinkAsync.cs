@@ -6,7 +6,7 @@ public sealed partial class GameShareServiceTest
     public async Task CreateInstalledModsShareLinkAsync_ThenParse_IncludesRemoteModsAndExcludesLocalOnly()
     {
         var modServiceMock = IModManageService.Mock();
-        modServiceMock.GetInstalledMods().Returns([CreateRemoteMod("ModA", isDisabled: true), CreateLocalOnlyMod("Sideload")]);
+        modServiceMock.GetInstalledMods().Returns([CreateRemoteMod("ModA", true), CreateLocalOnlyMod("Sideload")]);
         var service = CreateService(modManageService: modServiceMock);
 
         var parsed = service.TryParseShareLink((await service.CreateInstalledModsShareLinkAsync())!);
