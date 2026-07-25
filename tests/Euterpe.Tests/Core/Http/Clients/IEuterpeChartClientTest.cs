@@ -21,7 +21,14 @@ public sealed class IEuterpeChartClientTest
 
         var response = await api.CheckChartUpdatesAsync(new CheckChartUpdatesRequest
         {
-            Charts = { ["AbCdEf123"] = new() { ["map1.bms"] = new ChartFileEntry { Version = 3 } } }
+            Charts =
+            {
+                ["AbCdEf123"] = new Dictionary<string, ChartFileEntry>
+                {
+                    ["map1.bms"] = new()
+                        { Version = 3 }
+                }
+            }
         });
 
         var delta = response.Charts["AbCdEf123"];

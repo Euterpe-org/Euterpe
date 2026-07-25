@@ -29,6 +29,10 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
     [ObservableProperty]
     public partial string? ResultSummary { get; set; }
 
+    public event EventHandler<object?>? RequestClose;
+
+    public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
+
     public void Prepare(string? shareText = null)
     {
         CancelImport();
@@ -128,13 +132,11 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
             Count(mods, BulkItemOutcome.Added), Count(mods, BulkItemOutcome.AlreadyPresent),
             Count(mods, BulkItemOutcome.Skipped) + Count(mods, BulkItemOutcome.Failed));
 
-        static int Count(IReadOnlyList<BulkItemResult> items, BulkItemOutcome outcome) =>
-            items.Count(item => item.Outcome == outcome);
+        static int Count(IReadOnlyList<BulkItemResult> items, BulkItemOutcome outcome)
+        {
+            return items.Count(item => item.Outcome == outcome);
+        }
     }
-
-    public event EventHandler<object?>? RequestClose;
-
-    public void Close() => RequestClose?.Invoke(this, EventArgs.Empty);
 
     #region Injections
 

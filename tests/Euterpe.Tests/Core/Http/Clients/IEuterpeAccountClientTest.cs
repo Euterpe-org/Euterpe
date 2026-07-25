@@ -13,7 +13,8 @@ public sealed class IEuterpeAccountClientTest
     {
         using var http = Mock.HttpHandler();
         http.OnGet("/api/me")
-            .RespondWithJson("""{"user":{"uid":7,"role":1,"email":"user@euterpe.test","nickname":"N","avatar_url":"https://euterpe-org.com/a.png","banned":false,"has_github":true,"has_google":true}}""");
+            .RespondWithJson(
+                """{"user":{"uid":7,"role":1,"email":"user@euterpe.test","nickname":"N","avatar_url":"https://euterpe-org.com/a.png","banned":false,"has_github":true,"has_google":true}}""");
         var api = http.CreateEuterpeClient<IEuterpeAccountClient>(Account.BasePath);
 
         var response = await api.GetCurrentUserAsync();

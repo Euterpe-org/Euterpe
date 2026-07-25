@@ -1,6 +1,5 @@
 using System.Net;
 using TUnit.Mocks.Http;
-using TUnit.Mocks.Logging;
 
 namespace Euterpe.Tests.Core;
 

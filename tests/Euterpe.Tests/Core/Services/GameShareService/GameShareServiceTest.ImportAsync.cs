@@ -62,7 +62,10 @@ public sealed partial class GameShareServiceTest
             ChartIds = [13]
         };
 
-        Task Act() => service.ImportAsync(package);
+        Task Act()
+        {
+            return service.ImportAsync(package);
+        }
 
         await Assert.That(Act).Throws<InvalidOperationException>();
     }

@@ -75,7 +75,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             {
                 SelectedCount = selectedItems.Count;
                 CanShareSelection = selectedItems.Count is > 0 and <= GameSharePackage.MaximumChartCount
-                    && selectedItems.All(static item => item.CanShare);
+                                    && selectedItems.All(static item => item.CanShare);
             });
     }
 
