@@ -54,7 +54,7 @@ internal sealed partial class ModManageService
 
         if (!string.Equals(previousFileName, mod.FileName, StringComparison.OrdinalIgnoreCase))
         {
-            FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, previousFileName), DeleteOption.IgnoreIfNotFound);
+            FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, previousFileName));
         }
     }
 

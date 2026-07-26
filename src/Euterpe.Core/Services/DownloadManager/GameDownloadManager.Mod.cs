@@ -27,7 +27,7 @@ internal sealed partial class GameDownloadManager
         }
         finally
         {
-            FileSystemService.TryDeleteFile(workPath, DeleteOption.IgnoreIfNotFound);
+            FileSystemService.TryDeleteFile(workPath);
         }
     }
 }

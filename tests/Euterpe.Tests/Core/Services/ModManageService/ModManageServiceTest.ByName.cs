@@ -142,7 +142,7 @@ public sealed partial class ModManageServiceTest
         downloadManagerMock.FetchLibListAsync(Any<CancellationToken>()).Returns([]);
         downloadManagerMock.FetchModListAsync(Any<CancellationToken>()).Returns([CreateWebMod(version: "2.0.0")]);
         var fileSystemServiceMock = IFileSystemService.Mock();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).Returns(true);
         var sut = CreateModManageService(
             gameDownloadManager: downloadManagerMock,
             fileSystemService: fileSystemServiceMock,
@@ -172,14 +172,14 @@ public sealed partial class ModManageServiceTest
 
         using var _ = Assert.Multiple();
         notificationServiceMock.NoticeLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).WasCalled(Times.Never);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).WasCalled(Times.Never);
     }
 
     [Test]
     public async Task UninstallModByNameAsync_WhenInstalled_Deletes()
     {
         var fileSystemServiceMock = IFileSystemService.Mock();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).Returns(true);
         var sut = CreateModManageService(
             fileSystemService: fileSystemServiceMock,
             modLocalService: LocalServiceWith((TestModFilePath, CreateInstalledMod())));
@@ -187,6 +187,6 @@ public sealed partial class ModManageServiceTest
 
         await sut.UninstallModByNameAsync(TestModName);
 
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).WasCalled(Times.Once);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).WasCalled(Times.Once);
     }
 }

@@ -4,7 +4,7 @@ namespace Euterpe.Tests.Core;
 
 [Category("FileSystemServiceTests")]
 [TestSubject(typeof(FileSystemService))]
-public sealed class FileSystemServiceTest
+public sealed partial class FileSystemServiceTest
 {
     private static FileSystemService NewService() => new() { Logger = NullLogger<FileSystemService>.Instance };
 
@@ -13,41 +13,6 @@ public sealed class FileSystemServiceTest
         var path = Path.Combine(Path.GetTempPath(), "Euterpe.Tests.Fs_" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(path);
         return path;
-    }
-
-    [Test]
-    public async Task DeleteFile_Existing_Deletes()
-    {
-        var work = NewTempFolder();
-        try
-        {
-            var path = Path.Combine(work, "to-delete.txt");
-            await File.WriteAllTextAsync(path, "x");
-
-            NewService().DeleteFile(path);
-
-            await Assert.That(File.Exists(path)).IsFalse();
-        }
-        finally
-        {
-            Directory.Delete(work, true);
-        }
-    }
-
-    [Test]
-    public async Task DeleteFile_Missing_IgnoreIfNotFound_DoesNotThrow()
-    {
-        var work = NewTempFolder();
-        try
-        {
-            var act = () => NewService().DeleteFile(Path.Combine(work, "missing.txt"), DeleteOption.IgnoreIfNotFound);
-
-            await Assert.That(act).ThrowsNothing();
-        }
-        finally
-        {
-            Directory.Delete(work, true);
-        }
     }
 
     [Test]
@@ -72,12 +37,12 @@ public sealed class FileSystemServiceTest
     }
 
     [Test]
-    public async Task TryDeleteFile_Missing_IgnoreIfNotFound_ShortCircuitsToTrue()
+    public async Task TryDeleteFile_Missing_ReturnsTrue()
     {
         var work = NewTempFolder();
         try
         {
-            var ok = NewService().TryDeleteFile(Path.Combine(work, "missing.txt"), DeleteOption.IgnoreIfNotFound);
+            var ok = NewService().TryDeleteFile(Path.Combine(work, "missing.txt"));
 
             await Assert.That(ok).IsTrue();
         }

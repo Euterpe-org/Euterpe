@@ -73,7 +73,7 @@ internal sealed partial class ChartManageService
         }
         else
         {
-            FileSystemService.TryDeleteFile(source.Path, DeleteOption.IgnoreIfNotFound);
+            FileSystemService.TryDeleteFile(source.Path);
         }
     }
 }

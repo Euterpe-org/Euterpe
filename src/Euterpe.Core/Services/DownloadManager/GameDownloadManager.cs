@@ -64,7 +64,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
             foreach (var fileName in deletedFiles)
             {
-                FileSystemService.TryDeleteFile(Path.Combine(workFolder, fileName), DeleteOption.IgnoreIfNotFound);
+                FileSystemService.TryDeleteFile(Path.Combine(workFolder, fileName));
             }
 
             if (!FileSystemService.TryMoveDirectory(workFolder, destinationFolder, true))

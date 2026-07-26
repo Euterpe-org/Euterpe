@@ -75,6 +75,6 @@ internal sealed partial class MigrationService
     private void DeleteConsumedSources(string folder)
     {
         FileSystemService.TryDeleteFile(Path.Combine(folder, InfoFileName));
-        FileSystemService.TryDeleteFile(Path.Combine(folder, CinemaFileName), DeleteOption.IgnoreIfNotFound);
+        FileSystemService.TryDeleteFile(Path.Combine(folder, CinemaFileName));
     }
 }

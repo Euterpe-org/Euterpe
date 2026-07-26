@@ -3,16 +3,10 @@ namespace Euterpe.Abstractions;
 public partial interface IFileSystemService
 {
     /// <summary>
-    ///     Deletes a file, throwing on failure so the caller can surface the real cause. With
-    ///     <see cref="DeleteOption.IgnoreIfNotFound" /> a missing file is a no-op.
-    /// </summary>
-    void DeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
-
-    /// <summary>
     ///     Best-effort file deletion: logs a warning and returns <c>false</c> on failure instead of throwing.
-    ///     Use when failure is non-fatal and the caller continues regardless.
+    ///     A missing file is treated as successfully deleted.
     /// </summary>
-    bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound);
+    bool TryDeleteFile(string filePath);
 
     /// <summary>
     ///     Moves a file to <paramref name="destinationPath" />, optionally replacing an existing destination.

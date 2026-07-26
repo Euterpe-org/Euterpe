@@ -26,7 +26,7 @@ internal sealed class GameLocalService : IGameLocalService
 
         await ArchiveService.ExtractZipFileAsync(GameConfig.MelonLoaderZipPath, GameConfig.Folder).ConfigureAwait(false);
 
-        FileSystemService.DeleteFile(GameConfig.MelonLoaderZipPath);
+        File.Delete(GameConfig.MelonLoaderZipPath);
 
         Logger.ZLogInformation($"MelonLoader installed successfully");
     }
@@ -41,7 +41,7 @@ internal sealed class GameLocalService : IGameLocalService
 
         foreach (var path in paths)
         {
-            FileSystemService.DeleteFile(path, DeleteOption.IgnoreIfNotFound);
+            File.Delete(path);
         }
 
         FileSystemService.DeleteDirectory(GameConfig.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound);
