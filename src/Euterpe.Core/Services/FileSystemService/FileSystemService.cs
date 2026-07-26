@@ -8,21 +8,11 @@ internal sealed partial class FileSystemService : IFileSystemService
 
     #endregion Injections
 
-    public void DeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
-    {
-        if (deleteOption is DeleteOption.IgnoreIfNotFound && !File.Exists(filePath))
-        {
-            return;
-        }
-
-        File.Delete(filePath);
-    }
-
-    public bool TryDeleteFile(string filePath, DeleteOption deleteOption = DeleteOption.FailIfNotFound)
+    public bool TryDeleteFile(string filePath)
     {
         try
         {
-            DeleteFile(filePath, deleteOption);
+            File.Delete(filePath);
             return true;
         }
         catch (Exception ex)
@@ -50,7 +40,7 @@ internal sealed partial class FileSystemService : IFileSystemService
     {
         try
         {
-            if (string.Equals(Path.GetFullPath(sourcePath), Path.GetFullPath(destinationPath), StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(Path.GetFullPath(sourcePath), Path.GetFullPath(destinationPath), StringComparison.Ordinal))
             {
                 return true;
             }
@@ -89,7 +79,7 @@ internal sealed partial class FileSystemService : IFileSystemService
         catch (Exception ex)
         {
             Logger.ZLogWarning(ex, $"Failed to write file {filePath}");
-            TryDeleteFile(tempPath, DeleteOption.IgnoreIfNotFound);
+            TryDeleteFile(tempPath);
             return false;
         }
     }

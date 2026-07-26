@@ -7,7 +7,7 @@ public sealed partial class ModManageServiceTest
     {
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).Returns(true);
         var notificationServiceMock = INotificationService.Mock();
 
         var sut = CreateModManageService(
@@ -20,7 +20,7 @@ public sealed partial class ModManageServiceTest
         await Assert.That(mod.IsLocal).IsFalse();
         await Assert.That(mod.LocalVersion).IsEmpty();
         await Assert.That(mod.IsDisabled).IsTrue();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).WasCalled(Times.Once);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).WasCalled(Times.Once);
         notificationServiceMock.SuccessLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
         notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Never);
     }
@@ -30,7 +30,7 @@ public sealed partial class ModManageServiceTest
     {
         var mod = CreateInstalledMod();
         var fileSystemServiceMock = IFileSystemService.Mock();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(false);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).Returns(false);
         var notificationServiceMock = INotificationService.Mock();
 
         var sut = CreateModManageService(
@@ -50,7 +50,7 @@ public sealed partial class ModManageServiceTest
     public async Task UninstallModAsync_WhenModIncompatibleWithMelonLoader_RemainsIncompatible()
     {
         var fileSystemServiceMock = IFileSystemService.Mock();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).Returns(true);
         var sut = CreateModManageService(
             CreateGame(melonLoaderVersion: "0.4.0"),
             DownloadManagerWith(CreateWebMod(melonVersion: "0.5.0")),
@@ -73,7 +73,7 @@ public sealed partial class ModManageServiceTest
     public async Task UninstallModAsync_WhenConflictCleared_RestoresOutdatedPartner()
     {
         var fileSystemServiceMock = IFileSystemService.Mock();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).Returns(true);
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(
                 CreateWebMod("ModA", "2.0.0", incompatibleMods: ["ModB"]),
@@ -100,7 +100,7 @@ public sealed partial class ModManageServiceTest
     public async Task UninstallModAsync_WhenConflictSourceRemoved_RestoresWebPeerInstallable()
     {
         var fileSystemServiceMock = IFileSystemService.Mock();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).Returns(true);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).Returns(true);
         var sut = CreateModManageService(
             gameDownloadManager: DownloadManagerWith(
                 CreateWebMod("ModA", incompatibleMods: ["ModB"]),

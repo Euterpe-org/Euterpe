@@ -21,7 +21,7 @@ public sealed partial class ModManageServiceTest
 
         using var _ = Assert.Multiple();
         downloadManagerMock.DownloadModAsync(Any<ModDto>(), Any<CancellationToken>()).WasCalled(Times.Once);
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).WasCalled(Times.Never);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).WasCalled(Times.Never);
         notificationServiceMock.SuccessLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
         notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Never);
     }
@@ -45,7 +45,7 @@ public sealed partial class ModManageServiceTest
         await sut.ReinstallModAsync(mod);
 
         using var _ = Assert.Multiple();
-        fileSystemServiceMock.TryDeleteFile(Any<string>(), Any<DeleteOption>()).WasCalled(Times.Never);
+        fileSystemServiceMock.TryDeleteFile(Any<string>()).WasCalled(Times.Never);
         notificationServiceMock.ErrorLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Once);
         notificationServiceMock.SuccessLight(Any<string>(), RefStructArg<ReadOnlySpan<object>>.Any).WasCalled(Times.Never);
     }

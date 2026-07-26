@@ -93,7 +93,7 @@ internal sealed partial class ModManageService
 
         if (installed is not null && installed.LocalFileName != fileName)
         {
-            FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, installed.LocalFileName), DeleteOption.IgnoreIfNotFound);
+            FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, installed.LocalFileName));
         }
 
         return true;
