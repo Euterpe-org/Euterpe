@@ -96,7 +96,9 @@ public sealed partial class ChartManageServiceTest
         var service = CreateService(new FakeChartLocalService(), download);
         await service.InitializeChartsAsync();
 
-        await Assert.That(() => service.DownloadChartsAsync(["13"]))
+        Func<Task> act = () => service.DownloadChartsAsync(["13"]);
+
+        await Assert.That(act)
             .Throws<OperationCanceledException>();
     }
 }
