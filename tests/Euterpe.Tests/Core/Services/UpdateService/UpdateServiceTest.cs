@@ -1,5 +1,7 @@
 using TUnit.Mocks.Logging;
+using Velopack;
 using Velopack.Locators;
+using Velopack.Logging;
 using Velopack.Sources;
 
 namespace Euterpe.Tests.Core;
@@ -23,7 +25,8 @@ public sealed partial class UpdateServiceTest
         Config? config = null,
         string currentVersion = CurrentStableVersion,
         IFileDownloader? feedDownloader = null,
-        IPlatformInfo? platformInfo = null)
+        IPlatformInfo? platformInfo = null,
+        bool isInstalled = true)
     {
         return new UpdateService
         {
@@ -31,8 +34,18 @@ public sealed partial class UpdateServiceTest
             FeedDownloader = feedDownloader ?? new TestFeedDownloader(CreateFeed()),
             Logger = _logger,
             PlatformInfo = platformInfo ?? CreatePlatformInfoMock(),
-            VelopackLocatorOverride = new TestVelopackLocator(AppId, currentVersion, AppContext.BaseDirectory)
+            VelopackLocatorOverride = isInstalled
+                ? new TestVelopackLocator(AppId, currentVersion, AppContext.BaseDirectory)
+                : CreateNotInstalledVelopackLocator()
         };
+    }
+
+    private static IVelopackLocator CreateNotInstalledVelopackLocator()
+    {
+        var locator = IVelopackLocator.Mock();
+        locator.CurrentlyInstalledVersion.Returns((SemanticVersion?)null);
+        locator.Log.Returns(new NullVelopackLogger());
+        return locator;
     }
 
     private static IPlatformInfo CreatePlatformInfoMock()
