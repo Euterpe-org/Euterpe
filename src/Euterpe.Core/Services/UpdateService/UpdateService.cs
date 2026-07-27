@@ -16,8 +16,8 @@ internal sealed partial class UpdateService : IUpdateService
         var manager = CreateUpdateManager(runtimeIdentifier, channel);
         if (!manager.IsInstalled)
         {
-            Logger.ZLogError($"Not running from a Velopack installation on channel {channel}");
-            throw new InvalidOperationException("The application is not running from a Velopack installation.");
+            Logger.ZLogInformation($"Skipping update check because the application is not running from a Velopack installation");
+            return null;
         }
 
         Logger.ZLogInformation($"Checking for updates on channel {channel} ...");

@@ -5,6 +5,18 @@ namespace Euterpe.Tests.Core;
 public sealed partial class UpdateServiceTest
 {
     [Test]
+    public async Task CheckForUpdatesAsync_NotVelopackInstalled_ReturnsNullWithoutRequest()
+    {
+        var downloader = new TestFeedDownloader(CreateFeed("2.0.0"));
+        var updateService = CreateUpdateService(feedDownloader: downloader, isInstalled: false);
+
+        await Assert.That(await updateService.CheckForUpdatesAsync()).IsNull();
+        await Assert.That(downloader.LastUrl).IsNull();
+        _logger.VerifyLog().ContainingMessage(
+            "Skipping update check because the application is not running from a Velopack installation");
+    }
+
+    [Test]
     [Arguments(UpdateChannel.Stable, LowerStableVersion, CurrentStableVersion, TestRuntimeIdentifier + "-stable")]
     [Arguments(UpdateChannel.Beta, LowerBetaVersion, CurrentBetaVersion, TestRuntimeIdentifier + "-beta")]
     [Arguments(UpdateChannel.Stable, CurrentStableVersion, CurrentStableVersion, TestRuntimeIdentifier + "-stable")]
