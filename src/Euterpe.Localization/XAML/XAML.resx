@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -789,6 +789,21 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Spanish</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>A new version is ready and will be installed automatically.</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>Euterpe will restart automatically when the update is ready.</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>Downloading update…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>Target version</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Updating Euterpe</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Choose your role and tasks to get started</value>

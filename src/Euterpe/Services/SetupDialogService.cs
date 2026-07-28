@@ -37,7 +37,7 @@ public sealed class SetupDialogService
         GameSwitcher.CanSwitch = false;
         try
         {
-            await DialogService.ShowOverlayAsync<TView, TViewModel, object>(vm, options, MainWindowViewModel.DialogHostId).ConfigureAwait(true);
+            await DialogService.ShowOverlayAsync<TView, TViewModel>(vm, options, MainWindowViewModel.DialogHostId).ConfigureAwait(true);
         }
         finally
         {

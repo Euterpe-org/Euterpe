@@ -1,5 +1,7 @@
 using System.Runtime.CompilerServices;
 using DotNext.Threading;
+using Euterpe.Features.Update;
+using Euterpe.Services;
 using Euterpe.Shell;
 using Microsoft.Extensions.Logging.Abstractions;
 using Ursa.Controls;
@@ -99,14 +101,26 @@ public sealed class MainSplashWindowViewModelTest
         return auth;
     }
 
-    private static MainSplashWindowViewModel NewViewModel(IAuthService authService, IMessageBoxService? messageBoxService = null) => new()
+    private static MainSplashWindowViewModel NewViewModel(IAuthService authService, IMessageBoxService? messageBoxService = null)
     {
-        Launcher = IPlatformLauncher.Mock(),
-        Logger = NullLogger<MainSplashWindowViewModel>.Instance,
-        AuthService = authService,
-        MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
-#if RELEASE
-        UpdateService = IUpdateService.Mock()
-#endif
-    };
+        var updateService = IUpdateService.Mock();
+        updateService.CheckForUpdatesAsync().Returns((string?)null);
+
+        return new MainSplashWindowViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            Logger = NullLogger<MainSplashWindowViewModel>.Instance,
+            AuthService = authService,
+            MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
+            UpdateDialogService = new UpdateDialogService
+            {
+                DialogService = IDialogService.Mock(),
+                Logger = NullLogger<UpdateDialogService>.Instance,
+                MessageBoxService = messageBoxService ?? IMessageBoxService.Mock(),
+                UpdateService = updateService,
+                UpdateDialogViewModelFactory = static version => new UpdateDialogViewModel(version)
+            },
+            UpdateService = updateService
+        };
+    }
 }

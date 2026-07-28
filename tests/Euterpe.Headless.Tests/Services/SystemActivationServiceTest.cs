@@ -191,9 +191,8 @@ public sealed class SystemActivationServiceTest : HeadlessTest
     public async Task HandleActionAsync_Share_WaitsUntilMainWindowIsReadyAndOpensImportDialog()
     {
         var dialogService = IDialogService.Mock();
-        dialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel, object>(
-                Any<ShareImportDialogViewModel>(), Any<OverlayDialogOptions?>(), Any<string?>(), Any<CancellationToken?>())
-            .Returns((object?)null);
+        dialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel>(
+            Any<ShareImportDialogViewModel>(), Any<OverlayDialogOptions?>(), Any<string?>(), Any<CancellationToken?>());
         var viewModel = new ShareImportDialogViewModel
         {
             Launcher = IPlatformLauncher.Mock(),

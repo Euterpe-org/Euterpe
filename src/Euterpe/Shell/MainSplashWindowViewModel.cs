@@ -6,6 +6,8 @@ namespace Euterpe.Shell;
 [AppSingleton]
 public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 {
+    public const string DialogHostId = "SplashDialogHost";
+
     public AsyncManualResetEvent Ready { get; } = new(false);
 
     public void Close()
@@ -35,14 +37,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
         await AuthService.Ready.WaitAsync().ConfigureAwait(true);
 
 #if RELEASE
-        try
-        {
-            await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
-        }
-        catch (Exception ex)
-        {
-            Logger.ZLogError(ex, $"Update check failed during splash, continuing startup");
-        }
+        await CheckAppUpdateAsync().ConfigureAwait(true);
 #endif
 
         Ready.Set();
@@ -73,14 +68,43 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
         }
     }
 
+#if RELEASE
+    private async Task CheckAppUpdateAsync()
+    {
+        string? newVersion;
+
+        try
+        {
+            newVersion = await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
+        }
+        catch (Exception ex)
+        {
+            Logger.ZLogError(ex, $"Update check failed during splash");
+            await MessageBoxService.ErrorAsync(MessageBox_Content_Update_Check_Failed).ConfigureAwait(false);
+
+            Environment.Exit(0);
+            return;
+        }
+
+        if (newVersion is null)
+        {
+            return;
+        }
+
+        if (!await UpdateDialogService.ShowAsync(newVersion, DialogHostId).ConfigureAwait(true))
+        {
+            Environment.Exit(0);
+        }
+    }
+#endif
+
     #region Injections
 
+    public required UpdateDialogService UpdateDialogService { get; init; }
     public required IAuthService AuthService { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
     public required ILogger<MainSplashWindowViewModel> Logger { get; init; }
-#if RELEASE
     public required IUpdateService UpdateService { get; init; }
-#endif
 
     #endregion Injections
 }
