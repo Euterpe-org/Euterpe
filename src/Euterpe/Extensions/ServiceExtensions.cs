@@ -14,6 +14,9 @@ public static partial class ServiceExtensions
             builder.RegisterType<GameSwitcher>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<LocalizationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<UpdateDialogService>().PropertiesAutowired().SingleInstance();
+
+            builder.RegisterType<UpdateDialogViewModel>().PropertiesAutowired().InstancePerDependency();
 
             // Auto Activate Services
             builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();

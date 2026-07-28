@@ -4,7 +4,7 @@ namespace Euterpe.Shell;
 [AppSingleton]
 public sealed partial class MainWindowViewModel : RootNavViewModelBase
 {
-    public const string DialogHostId = "DialogHost";
+    public const string DialogHostId = "MainDialogHost";
 
     [ObservableProperty]
     public partial GameConfig SelectedGame { get; set; } = null!;

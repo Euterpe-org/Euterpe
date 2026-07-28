@@ -1,5 +1,8 @@
 using Euterpe.Abstractions;
 using Euterpe.Features.Setting;
+using Euterpe.Features.Update;
+using Euterpe.Services;
+using Ursa.Controls;
 
 namespace Euterpe.Headless.Tests.ViewModels;
 
@@ -17,7 +20,7 @@ public sealed class AboutPanelViewModelTest : HeadlessTest
     public Task CheckUpdateCommand_NoUpdateFound_ShowsSuccessMessage() => RunOnUI(async () =>
     {
         var update = IUpdateService.Mock();
-        update.CheckForUpdatesAsync().Returns(false);
+        update.CheckForUpdatesAsync().Returns((string?)null);
         var msgBox = IMessageBoxService.Mock();
         var vm = NewViewModel(update, msgBox);
 
@@ -30,22 +33,39 @@ public sealed class AboutPanelViewModelTest : HeadlessTest
     public Task CheckUpdateCommand_UpdateFound_DoesNotShowSuccess() => RunOnUI(async () =>
     {
         var update = IUpdateService.Mock();
-        update.CheckForUpdatesAsync().Returns(true);
+        update.CheckForUpdatesAsync().Returns("2.1.0");
         var msgBox = IMessageBoxService.Mock();
         var vm = NewViewModel(update, msgBox);
 
         await vm.CheckUpdateCommand.ExecuteAsync(null);
 
         msgBox.SuccessAsync(Any<string>()).WasNeverCalled();
+        update.UpdateAsync(Any<IProgress<int>>()).WasCalled(Times.Once);
     });
 
     private static AboutPanelViewModel NewViewModel(
         IUpdateService? update = null,
-        IMessageBoxService? msgBox = null) => new()
+        IMessageBoxService? msgBox = null)
     {
-        Launcher = IPlatformLauncher.Mock(),
-        Logger = Mock.Logger<AboutPanelViewModel>(),
-        UpdateService = update ?? IUpdateService.Mock(),
-        MessageBoxService = msgBox ?? IMessageBoxService.Mock()
-    };
+        var updateService = update ?? IUpdateService.Mock();
+        var dialogService = IDialogService.Mock();
+        dialogService.ShowOverlayAsync<UpdateDialog, UpdateDialogViewModel>(
+            Any<UpdateDialogViewModel>(), Any<OverlayDialogOptions?>(), Any<string?>(), Any<CancellationToken?>());
+
+        return new AboutPanelViewModel
+        {
+            Launcher = IPlatformLauncher.Mock(),
+            Logger = Mock.Logger<AboutPanelViewModel>(),
+            MessageBoxService = msgBox ?? IMessageBoxService.Mock(),
+            UpdateDialogService = new UpdateDialogService
+            {
+                DialogService = dialogService,
+                Logger = Mock.Logger<UpdateDialogService>(),
+                MessageBoxService = msgBox ?? IMessageBoxService.Mock(),
+                UpdateService = updateService,
+                UpdateDialogViewModelFactory = static version => new UpdateDialogViewModel(version)
+            },
+            UpdateService = updateService
+        };
+    }
 }

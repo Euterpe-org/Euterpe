@@ -11,7 +11,7 @@
     Height="280"
     Icon="/Assets/Icon.ico"
     Title="Euterpe"
-    Width="360"
+    Width="420"
     WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
@@ -38,6 +38,12 @@
                 Margin="0,8,0,0"
                 Text="{x:Static constants:BuildInfo.DisplayVersion}" />
         </StackPanel>
+
+        <u:OverlayDialogHost
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            HostId="{x:Static vm:MainSplashWindowViewModel.DialogHostId}"
+            ZIndex="1" />
 
         <ProgressBar
             Grid.Row="1"

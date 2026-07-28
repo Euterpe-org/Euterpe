@@ -1,7 +1,7 @@
 namespace Euterpe.Abstractions;
 
-public interface IDialog<T>
+public interface IDialog<TResult>
 {
-    event EventHandler<T>? RequestClose;
-    void Close(T result);
+    event EventHandler<TResult>? RequestClose;
+    void Close(TResult result);
 }

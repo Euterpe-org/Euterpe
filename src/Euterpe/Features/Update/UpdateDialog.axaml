@@ -1,0 +1,98 @@
+<UserControl
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Euterpe.Features.Update"
+    x:Class="Euterpe.Features.Update.UpdateDialog"
+    x:DataType="vm:UpdateDialogViewModel"
+    d:DesignHeight="220"
+    d:DesignWidth="388"
+    mc:Ignorable="d">
+
+    <StackPanel
+        Margin="24,22"
+        Spacing="18"
+        Width="340">
+
+        <!--  Header  -->
+        <Grid
+            ColumnDefinitions="Auto,*">
+            <Border
+                Background="{DynamicResource SecondaryCardColor}"
+                CornerRadius="12"
+                Height="52"
+                Width="52">
+                <Image
+                    Height="34"
+                    HorizontalAlignment="Center"
+                    RenderOptions.BitmapInterpolationMode="HighQuality"
+                    Source="/Assets/Icon.png"
+                    VerticalAlignment="Center" />
+            </Border>
+
+            <StackPanel
+                Grid.Column="1"
+                Margin="16,0,0,0"
+                Spacing="6"
+                VerticalAlignment="Center">
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Text="{Localize {x:Static loc:XAMLLiteral.UpdateDialog_Title}}"
+                    Theme="{StaticResource TitleTextBlock}" />
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource SemiColorText2}"
+                        Text="{Localize {x:Static loc:XAMLLiteral.UpdateDialog_TargetVersion}}"
+                        VerticalAlignment="Center" />
+                    <Label
+                        Classes="Ghost Blue TagLabel"
+                        Content="{Binding VersionDisplay, Mode=OneTime}"
+                        VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock
+            FontSize="13"
+            Foreground="{DynamicResource SemiColorText2}"
+            Text="{Localize {x:Static loc:XAMLLiteral.UpdateDialog_Description}}"
+            TextWrapping="Wrap" />
+
+        <!--  Download Progress  -->
+        <StackPanel
+            Spacing="7">
+            <Grid
+                ColumnDefinitions="*,Auto">
+                <TextBlock
+                    FontSize="12"
+                    Foreground="{DynamicResource SemiColorText2}"
+                    Text="{Localize {x:Static loc:XAMLLiteral.UpdateDialog_State_Downloading}}" />
+                <TextBlock
+                    Grid.Column="1"
+                    FontSize="12"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource SemiBlue6}"
+                    Text="{Binding ProgressText, Mode=OneWay}" />
+            </Grid>
+
+            <ProgressBar
+                Classes="Primary Rounded"
+                Maximum="100"
+                Minimum="0"
+                Value="{Binding Progress, Mode=OneWay}" />
+        </StackPanel>
+
+        <TextBlock
+            FontSize="11"
+            Foreground="{DynamicResource SemiColorText3}"
+            Text="{Localize {x:Static loc:XAMLLiteral.UpdateDialog_RestartHint}}"
+            TextWrapping="Wrap" />
+    </StackPanel>
+</UserControl>
