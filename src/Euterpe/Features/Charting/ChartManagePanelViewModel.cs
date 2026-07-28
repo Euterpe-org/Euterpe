@@ -255,7 +255,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
         };
 
         GameSwitcher.CanSwitch = false;
-        var dialog = DialogService.ShowOverlayAsync<ProgressDialog, ProgressDialogViewModel, object>(
+        var dialog = DialogService.ShowOverlayAsync<ProgressDialog, ProgressDialogViewModel>(
             ProgressDialogViewModel, options, MainWindowViewModel.DialogHostId);
         try
         {

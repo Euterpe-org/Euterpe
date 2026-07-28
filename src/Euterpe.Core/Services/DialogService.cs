@@ -54,6 +54,15 @@ internal sealed class DialogService : IDialogService
         where TViewModel : class, IDialogContext =>
         OverlayDialog.ShowCustomAsync<TView, TViewModel, T>(vm, hostId, options, token);
 
+    public async Task ShowOverlayAsync<TView, TViewModel>(
+        TViewModel vm,
+        OverlayDialogOptions? options = null,
+        string? hostId = null,
+        CancellationToken? token = null)
+        where TView : Control, new()
+        where TViewModel : class, IDialogContext =>
+        await OverlayDialog.ShowCustomAsync<TView, TViewModel, object>(vm, hostId, options, token).ConfigureAwait(true);
+
     public Task<DialogResult> ShowStandardOverlayAsync<TView, TViewModel>(
         TViewModel vm,
         OverlayDialogOptions? options = null,

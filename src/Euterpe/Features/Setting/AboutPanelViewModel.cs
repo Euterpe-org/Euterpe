@@ -65,27 +65,33 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task CheckUpdateAsync()
     {
+        string? newVersion;
         try
         {
-            var newVersion = await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
-
-            if (newVersion is null)
-            {
-                await MessageBoxService.SuccessAsync(MessageBox_Content_NoUpdatesFound).ConfigureAwait(false);
-            }
+            newVersion = await UpdateService.CheckForUpdatesAsync().ConfigureAwait(true);
         }
         catch (Exception ex)
         {
             Logger.ZLogError(ex, $"Failed to check for updates");
             await MessageBoxService.ErrorAsync(MessageBox_Content_Update_Check_Failed).ConfigureAwait(false);
+            return;
         }
+
+        if (newVersion is null)
+        {
+            await MessageBoxService.SuccessAsync(MessageBox_Content_NoUpdatesFound).ConfigureAwait(false);
+            return;
+        }
+
+        await UpdateDialogService.ShowAsync(newVersion, MainWindowViewModel.DialogHostId).ConfigureAwait(false);
     }
 
     #region Injections
 
+    public required UpdateDialogService UpdateDialogService { get; init; }
     public required ILogger<AboutPanelViewModel> Logger { get; init; }
-    public required IUpdateService UpdateService { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
+    public required IUpdateService UpdateService { get; init; }
 
     #endregion Injections
 }

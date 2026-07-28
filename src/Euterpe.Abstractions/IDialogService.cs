@@ -18,6 +18,14 @@ public interface IDialogService
         where TView : Control, new()
         where TViewModel : class, IDialogContext;
 
+    Task ShowOverlayAsync<TView, TViewModel>(
+        TViewModel vm,
+        OverlayDialogOptions? options = null,
+        string? hostId = null,
+        CancellationToken? token = null)
+        where TView : Control, new()
+        where TViewModel : class, IDialogContext;
+
     Task<DialogResult> ShowStandardOverlayAsync<TView, TViewModel>(
         TViewModel vm,
         OverlayDialogOptions? options = null,

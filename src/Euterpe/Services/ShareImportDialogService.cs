@@ -18,7 +18,7 @@ public sealed class ShareImportDialogService
         GameSwitcher.CanSwitch = false;
         try
         {
-            await DialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel, object>(
+            await DialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel>(
                 ShareImportDialogViewModel, options, MainWindowViewModel.DialogHostId).ConfigureAwait(true);
         }
         finally
