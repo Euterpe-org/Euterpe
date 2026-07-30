@@ -18,7 +18,6 @@ public sealed class Mod
     public string[] IncompatibleMods { get; set; } = [];
     public ModScreenshot[] Screenshots { get; set; } = [];
 
-    [JsonPropertyName("sha256")]
     public string SHA256 { get; set; } = string.Empty;
 
     public string DownloadUrl { get; set; } = string.Empty;
