@@ -1,6 +1,12 @@
 <Project>
     <Target Name="GenerateBuildInfo" BeforeTargets="BeforeCompile;CoreCompile" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)AssemblyInfo.cs">
+        <ItemGroup>
+            <_AvaloniaPackage Include="@(PackageVersion)"
+                              Condition="'%(PackageVersion.Identity)' == 'Avalonia'"/>
+        </ItemGroup>
+
         <PropertyGroup>
+            <_AvaloniaVersion>@(_AvaloniaPackage->'%(Version)')</_AvaloniaVersion>
             <GeneratedText><![CDATA[
 namespace $(RootNamespace)%3B
 public static partial class BuildInfo
@@ -12,7 +18,7 @@ public static partial class BuildInfo
     public const string AppVersion = "$(Version)"%3B
     public const string DisplayVersion = $"v{AppVersion}"%3B
     public const string DotNetVersion = "$(TargetFrameworkVersion)"%3B
-    public const string AvaloniaVersion = "$(AvaloniaVersion)"%3B
+    public const string AvaloniaVersion = "$(_AvaloniaVersion)"%3B
 }
       ]]></GeneratedText>
             <GeneratedFilePath>$(IntermediateOutputPath)BuildInfo.g.cs</GeneratedFilePath>
