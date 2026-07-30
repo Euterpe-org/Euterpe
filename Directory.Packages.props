@@ -50,14 +50,14 @@
         <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.10"/>
         <PackageVersion Include="Tmds.DBus.Generator" Version="0.94.2"/>
         <PackageVersion Include="Tmds.DBus.Protocol" Version="0.94.2"/>
-        <PackageVersion Include="TUnit" Version="1.61.0"/>
-        <PackageVersion Include="TUnit.Mocks" Version="1.61.0"/>
-        <PackageVersion Include="TUnit.Mocks.Http" Version="1.61.0"/>
-        <PackageVersion Include="TUnit.Mocks.Logging" Version="1.61.0"/>
+        <PackageVersion Include="TUnit" Version="1.63.0"/>
+        <PackageVersion Include="TUnit.Mocks" Version="1.63.0"/>
+        <PackageVersion Include="TUnit.Mocks.Http" Version="1.63.0"/>
+        <PackageVersion Include="TUnit.Mocks.Logging" Version="1.63.0"/>
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Velopack" Version="1.2.0"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
-        <PackageVersion Include="Verify.TUnit" Version="31.24.2"/>
+        <PackageVersion Include="Verify.TUnit" Version="31.27.0"/>
         <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.5"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.117"/>
