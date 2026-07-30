@@ -11,6 +11,9 @@
         <File Path="renovate.json"/>
         <File Path="Settings.XamlStyler"/>
     </Folder>
+    <Folder Name="/build/">
+        <Project Path="build/Euterpe.Releaser/Euterpe.Releaser.csproj"/>
+    </Folder>
     <Folder Name="/src/">
         <Project Path="src/Euterpe.Abstractions/Euterpe.Abstractions.csproj"/>
         <Project Path="src/Euterpe.Contracts/Euterpe.Contracts.csproj"/>

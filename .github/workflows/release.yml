@@ -14,16 +14,39 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    name: Build (${{ matrix.platform.name }}-${{ matrix.platform.arch }})
+  prepare:
+    name: Prepare GitHub draft
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Validate release tag
+        run: git grep -F "<Version>${GITHUB_REF_NAME}</Version>" -- Directory.Build.props
+
+      - name: Create GitHub draft
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          draft: true
+
+  stage:
+    name: Stage (${{ matrix.rid }})
+    needs: prepare
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - {os: ubuntu-latest, name: linux, arch: x64}
-          - {os: windows-latest, name: win, arch: x64,}
+        include:
+          - rid: linux-x64
+            os: ubuntu-latest
+          - rid: win-x64
+            os: windows-latest
+    runs-on: ${{ matrix.os }}
 
-    runs-on: ${{ matrix.platform.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -39,74 +62,54 @@ jobs:
       - name: Test
         run: dotnet test -c Release --no-build --report-trx
 
-      - name: Publish
-        run: dotnet publish -c Release
+      - name: Restore tools
+        run: dotnet tool restore
 
-      - name: Create archive
-        working-directory: artifacts/output
-        run: 7z a -tzip "$GITHUB_WORKSPACE/Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip" *
+      - name: Stage release
+        env:
+          EUTERPE_API_KEY: ${{ secrets.EUTERPE_API_KEY }}
+        run: >
+          dotnet run
+          --project build/Euterpe.Releaser/Euterpe.Releaser.csproj
+          -c Release
+          --no-build
+          -- stage
+          --rid "${{ matrix.rid }}"
 
-      - name: Upload zip
-        uses: actions/upload-artifact@v7
+      - name: Upload installer to GitHub draft
+        uses: softprops/action-gh-release@v3
         with:
-          name: release-${{ matrix.platform.name }}-${{ matrix.platform.arch }}
-          path: Euterpe-${{ matrix.platform.name }}-${{ matrix.platform.arch }}.zip
-          if-no-files-found: error
+          tag_name: ${{ github.ref_name }}
+          draft: true
+          fail_on_unmatched_files: false
+          files: |
+            artifacts/releases/${{ matrix.rid }}-${{ contains(github.ref_name, '-') && 'beta' || 'stable' }}/*.exe
+            artifacts/releases/${{ matrix.rid }}-${{ contains(github.ref_name, '-') && 'beta' || 'stable' }}/*.AppImage
 
-  release:
-    name: Publish GitHub Release
-    needs: build
+  publish:
+    name: Publish release
+    needs: stage
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Download zips
-        uses: actions/download-artifact@v8
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v6
         with:
-          pattern: release-*
-          path: ./dist
-          merge-multiple: true
+          global-json-file: global.json
 
-      - name: Create GitHub Release
+      - name: Publish staged release
+        env:
+          EUTERPE_API_KEY: ${{ secrets.EUTERPE_API_KEY }}
+        run: >
+          dotnet run
+          --project build/Euterpe.Releaser/Euterpe.Releaser.csproj
+          -c Release
+          -- publish
+
+      - name: Publish GitHub Release
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
-          generate_release_notes: true
-          prerelease: ${{ contains(github.ref_name, '-') }}
-          files: dist/*.zip
-
-  distribute:
-    name: Publish to Euterpe Distribution
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download zips
-        uses: actions/download-artifact@v8
-        with:
-          pattern: release-*
-          path: ./dist
-          merge-multiple: true
-
-      - name: Upload to Euterpe Distribution
-        env:
-          EUTERPE_API_KEY: ${{ secrets.EUTERPE_API_KEY }}
-          VERSION: ${{ github.ref_name }}
-          PRERELEASE: ${{ contains(github.ref_name, '-') }}
-        run: |
-          shopt -s nullglob
-          for zip in dist/*.zip; do
-            slug=$(basename "$zip" .zip); slug=${slug#Euterpe-}
-            echo "uploading $slug v$VERSION ($zip)"
-            curl --fail-with-body -sS -X POST \
-              "https://euterpe-org.com/api/workspace/distribution/upload" \
-              -H "Authorization: ApiKey $EUTERPE_API_KEY" \
-              -H "X-Request-Id: $(cat /proc/sys/kernel/random/uuid)" \
-              -F "bucket=app-releases" \
-              -F "slug=$slug" \
-              -F "version=$VERSION" \
-              -F "is_prerelease=$PRERELEASE" \
-              -F "file=@$zip;type=application/zip"
-            echo
-          done
