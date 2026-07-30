@@ -1,0 +1,12 @@
+global using System.Net.Http.Json;
+global using System.Net.Http.Headers;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using CliWrap;
+global using ConsoleAppFramework;
+global using Euterpe.Contracts.Distribution;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Semver;
+global using ZLogger;
+global using static Euterpe.Releaser.ReleaserConfiguration;

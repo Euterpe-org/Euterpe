@@ -1,0 +1,145 @@
+using static Euterpe.Releaser.ReleaseArtifactNames;
+using static Euterpe.Releaser.ReleasePlanner;
+
+namespace Euterpe.Releaser;
+
+internal sealed class RidReleaseStager(
+    ReleaseProcessRunner processRunner,
+    ILogger<RidReleaseStager> logger)
+{
+    public async Task StageAsync(
+        ReleaseRuntime runtime,
+        SemVersion version,
+        CancellationToken cancellationToken)
+    {
+        using var apiClient = new VelopackApiClient();
+        var context = new StageContext(Environment.CurrentDirectory, runtime, version, apiClient);
+        var releaseBases = await GetReleaseBasesAsync(context, cancellationToken);
+        var packageChannels = GetPackageChannels(runtime, version, releaseBases[runtime.BetaChannel] is not null);
+
+        if (packageChannels.All(channel => releaseBases[channel]?.Version == version.ToString()))
+        {
+            logger.ZLogInformation($"Velopack version {version} is already published for {runtime.Rid}; skipping staging");
+            return;
+        }
+
+        var applicationDirectory = Path.Combine(context.RepositoryRoot, "artifacts", "output");
+        await PublishApplicationAsync(context, cancellationToken);
+
+        foreach (var channel in packageChannels)
+        {
+            await StageChannelAsync(
+                    context,
+                    channel,
+                    releaseBases[channel],
+                    applicationDirectory,
+                    cancellationToken);
+        }
+    }
+
+    private async Task StageChannelAsync(
+        StageContext context,
+        string channel,
+        VelopackReleaseBase? releaseBase,
+        string applicationDirectory,
+        CancellationToken cancellationToken)
+    {
+        var outputDirectory = Path.Combine(
+            context.RepositoryRoot,
+            "artifacts",
+            "releases",
+            channel);
+        Directory.CreateDirectory(outputDirectory);
+
+        if (releaseBase is not null)
+        {
+            logger.ZLogInformation($"Downloading {channel} base {releaseBase.Version}");
+            var baseVersion = SemVersion.Parse(releaseBase.Version, SemVersionStyles.Strict);
+            var destinationPath = Path.Combine(outputDirectory, GetFullPackageFileName(baseVersion, channel));
+            await context.ApiClient.DownloadReleaseBaseAsync(releaseBase.DownloadPath, destinationPath, cancellationToken);
+        }
+
+        await PackChannelAsync(context, channel, applicationDirectory, outputDirectory, cancellationToken);
+
+        List<(string Type, string Path)> assets =
+        [
+            ("full", Path.Combine(outputDirectory, GetFullPackageFileName(context.Version, channel)))
+        ];
+        if (releaseBase is not null)
+        {
+            assets.Add(("delta", Path.Combine(outputDirectory, GetDeltaPackageFileName(context.Version, channel))));
+        }
+
+        assets.Add(("installer", Path.Combine(outputDirectory, GetInstallerFileName(context.Runtime, channel))));
+
+        foreach (var asset in assets)
+        {
+            logger.ZLogInformation($"Staging {channel} {asset.Type}: {asset.Path}");
+            await context.ApiClient.UploadAssetAsync(
+                    channel,
+                    context.Version,
+                    asset.Type,
+                    asset.Path,
+                    cancellationToken);
+        }
+    }
+
+    private static async Task<Dictionary<string, VelopackReleaseBase?>> GetReleaseBasesAsync(
+        StageContext context,
+        CancellationToken cancellationToken)
+    {
+        var releaseBases = new Dictionary<string, VelopackReleaseBase?>();
+        foreach (var channel in GetBaseChannels(context.Runtime, context.Version))
+        {
+            var releaseBase = await context.ApiClient.GetReleaseBaseAsync(channel, cancellationToken);
+            releaseBases.Add(channel, releaseBase);
+        }
+
+        return releaseBases;
+    }
+
+    private async Task PublishApplicationAsync(StageContext context, CancellationToken cancellationToken)
+    {
+        logger.ZLogInformation($"Publishing {context.Runtime.Rid} application files to artifacts/output");
+        await processRunner.RunDotNetAsync(
+                [
+                    "publish",
+                    ApplicationProject,
+                    "-c",
+                    "Release",
+                    "-r",
+                    context.Runtime.Rid
+                ],
+                cancellationToken);
+    }
+
+    private async Task PackChannelAsync(
+        StageContext context,
+        string channel,
+        string applicationDirectory,
+        string outputDirectory,
+        CancellationToken cancellationToken)
+    {
+        logger.ZLogInformation($"Packing {channel}");
+        await processRunner.RunVpkAsync(
+                [
+                    "pack",
+                    "--packId", PackageId,
+                    "--packVersion", context.Version.ToString(),
+                    "--packDir", applicationDirectory,
+                    "--mainExe", context.Runtime.MainExecutable,
+                    "--runtime", context.Runtime.Rid,
+                    "--channel", channel,
+                    "--delta", "BestSpeed",
+                    "--outputDir", outputDirectory,
+                    .. context.Runtime.ExtraVpkArguments
+                ],
+                cancellationToken);
+    }
+
+    private sealed record StageContext(
+        string RepositoryRoot,
+        ReleaseRuntime Runtime,
+        SemVersion Version,
+        VelopackApiClient ApiClient);
+}

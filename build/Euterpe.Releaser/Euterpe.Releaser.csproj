@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <IsAotCompatible>false</IsAotCompatible>
+        <IsPublishable>false</IsPublishable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CliWrap"/>
+        <PackageReference Include="ConsoleAppFramework"/>
+        <PackageReference Include="Semver"/>
+        <PackageReference Include="ZLogger"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Euterpe.Contracts\Euterpe.Contracts.csproj"/>
+        <ProjectReference Include="..\..\src\Euterpe.Shared\Euterpe.Shared.csproj"/>
+    </ItemGroup>
+
+</Project>
