@@ -5,8 +5,15 @@ namespace Euterpe.Core.Http.Handlers;
 
 internal sealed class TokenQueryHandler(IServiceProvider services) : DelegatingHandler
 {
+    private static readonly Uri DownloadBaseUri = new(EuterpeDownload.BaseUrl);
+
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
+        if (!DownloadBaseUri.IsBaseOf(request.RequestUri!))
+        {
+            return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
         var authService = services.GetRequiredService<IAuthService>();
         var token = await authService.GetAccessTokenAsync().ConfigureAwait(false);
         request.RequestUri = AppendToken(request.RequestUri!, token);
