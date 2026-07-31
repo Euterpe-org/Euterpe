@@ -4,22 +4,17 @@ namespace Euterpe.Features.Setting;
 [AppSingleton]
 public sealed partial class DownloadPanelViewModel : ViewModelBase
 {
-    public static IReadOnlyList<LocalizedString> UpdateChannels { get; } =
+    public static IReadOnlyList<EnumOption<UpdateChannel>> UpdateChannels { get; } =
     [
-        Setting_UpdateChannel_Stable,
-        Setting_UpdateChannel_Beta
+        .. UpdateChannelExtensions.GetValues().Select(static channel =>
+            new EnumOption<UpdateChannel>(channel, $"{nameof(UpdateChannel)}_{channel.ToStringFast()}"))
     ];
-
-    [ObservableProperty]
-    public partial int SelectedUpdateChannelIndex { get; set; }
 
     protected override Task OnInitializeAsync()
     {
         Logger.LogInformation($"{nameof(DownloadPanelViewModel)} Initialized");
         return base.OnInitializeAsync();
     }
-
-    partial void OnSelectedUpdateChannelIndexChanged(int value) => Config.UpdateChannel = (UpdateChannel)value;
 
     #region Injections
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <schema />
   <resheader name="resmimetype">
@@ -598,12 +598,6 @@
   <data name="Setting_Title_UpdateChannel" xml:space="preserve">
     <value>Канал обновлений</value>
   </data>
-  <data name="Setting_UpdateChannel_Beta" xml:space="preserve">
-    <value>Бета-версия</value>
-  </data>
-  <data name="Setting_UpdateChannel_Stable" xml:space="preserve">
-    <value>Стабильный</value>
-  </data>
   <data name="Setup_Description_GamePath" xml:space="preserve">
     <value>Укажите, где установлена игра</value>
   </data>
@@ -747,6 +741,12 @@
   </data>
   <data name="Translator_Spanish" xml:space="preserve">
     <value>Испанский</value>
+  </data>
+  <data name="UpdateChannel_Beta" xml:space="preserve">
+    <value>Бета-версия</value>
+  </data>
+  <data name="UpdateChannel_Stable" xml:space="preserve">
+    <value>Стабильный</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Выберите свою роль и задачи для начала</value>
