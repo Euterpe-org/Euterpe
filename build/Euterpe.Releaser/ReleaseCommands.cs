@@ -2,6 +2,8 @@ namespace Euterpe.Releaser;
 
 internal sealed class ReleaseCommands
 {
+    private readonly Logger _logger = LogManager.GetLogger(nameof(ReleaseCommands));
+
     [Command("stage")]
     public Task StageAsync(
         [FromServices] RidReleaseStager stager,
@@ -11,12 +13,11 @@ internal sealed class ReleaseCommands
 
     [Command("publish")]
     public async Task PublishAsync(
-        [FromServices] ILogger<ReleaseCommands> logger,
         CancellationToken cancellationToken = default)
     {
         using var apiClient = new VelopackApiClient();
 
-        logger.ZLogInformation($"Publishing staged Velopack version {ReleaseVersion}");
+        _logger.Info($"Publishing staged Velopack version {ReleaseVersion.ToString()}");
         await apiClient.PublishAsync(ReleaseVersion, cancellationToken);
     }
 }

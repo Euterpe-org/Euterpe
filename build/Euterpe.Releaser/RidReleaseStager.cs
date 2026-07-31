@@ -3,10 +3,10 @@ using static Euterpe.Releaser.ReleasePlanner;
 
 namespace Euterpe.Releaser;
 
-internal sealed class RidReleaseStager(
-    ReleaseProcessRunner processRunner,
-    ILogger<RidReleaseStager> logger)
+internal sealed class RidReleaseStager(ReleaseProcessRunner processRunner)
 {
+    private readonly Logger _logger = LogManager.GetLogger(nameof(RidReleaseStager));
+
     public async Task StageAsync(
         ReleaseRuntime runtime,
         SemVersion version,
@@ -19,7 +19,7 @@ internal sealed class RidReleaseStager(
 
         if (packageChannels.All(channel => releaseBases[channel]?.Version == version.ToString()))
         {
-            logger.ZLogInformation($"Velopack version {version} is already published for {runtime.Rid}; skipping staging");
+            _logger.Info($"Velopack version {version.ToString()} is already published for {runtime.Rid}; skipping staging");
             return;
         }
 
@@ -29,11 +29,11 @@ internal sealed class RidReleaseStager(
         foreach (var channel in packageChannels)
         {
             await StageChannelAsync(
-                    context,
-                    channel,
-                    releaseBases[channel],
-                    applicationDirectory,
-                    cancellationToken);
+                context,
+                channel,
+                releaseBases[channel],
+                applicationDirectory,
+                cancellationToken);
         }
     }
 
@@ -53,7 +53,7 @@ internal sealed class RidReleaseStager(
 
         if (releaseBase is not null)
         {
-            logger.ZLogInformation($"Downloading {channel} base {releaseBase.Version}");
+            _logger.Info($"Downloading {channel} base {releaseBase.Version}");
             var baseVersion = SemVersion.Parse(releaseBase.Version, SemVersionStyles.Strict);
             var destinationPath = Path.Combine(outputDirectory, GetFullPackageFileName(baseVersion, channel));
             await context.ApiClient.DownloadReleaseBaseAsync(releaseBase.DownloadPath, destinationPath, cancellationToken);
@@ -74,13 +74,13 @@ internal sealed class RidReleaseStager(
 
         foreach (var asset in assets)
         {
-            logger.ZLogInformation($"Staging {channel} {asset.Type}: {asset.Path}");
+            _logger.Info($"Staging {channel} {asset.Type}: {asset.Path}");
             await context.ApiClient.UploadAssetAsync(
-                    channel,
-                    context.Version,
-                    asset.Type,
-                    asset.Path,
-                    cancellationToken);
+                channel,
+                context.Version,
+                asset.Type,
+                asset.Path,
+                cancellationToken);
         }
     }
 
@@ -100,17 +100,17 @@ internal sealed class RidReleaseStager(
 
     private async Task PublishApplicationAsync(StageContext context, CancellationToken cancellationToken)
     {
-        logger.ZLogInformation($"Publishing {context.Runtime.Rid} application files to artifacts/output");
+        _logger.Info($"Publishing {context.Runtime.Rid} application files to artifacts/output");
         await processRunner.RunDotNetAsync(
-                [
-                    "publish",
-                    ApplicationProject,
-                    "-c",
-                    "Release",
-                    "-r",
-                    context.Runtime.Rid
-                ],
-                cancellationToken);
+            [
+                "publish",
+                ApplicationProject,
+                "-c",
+                "Release",
+                "-r",
+                context.Runtime.Rid
+            ],
+            cancellationToken);
     }
 
     private async Task PackChannelAsync(
@@ -120,21 +120,21 @@ internal sealed class RidReleaseStager(
         string outputDirectory,
         CancellationToken cancellationToken)
     {
-        logger.ZLogInformation($"Packing {channel}");
+        _logger.Info($"Packing {channel}");
         await processRunner.RunVpkAsync(
-                [
-                    "pack",
-                    "--packId", PackageId,
-                    "--packVersion", context.Version.ToString(),
-                    "--packDir", applicationDirectory,
-                    "--mainExe", context.Runtime.MainExecutable,
-                    "--runtime", context.Runtime.Rid,
-                    "--channel", channel,
-                    "--delta", "BestSpeed",
-                    "--outputDir", outputDirectory,
-                    .. context.Runtime.ExtraVpkArguments
-                ],
-                cancellationToken);
+            [
+                "pack",
+                "--packId", PackageId,
+                "--packVersion", context.Version.ToString(),
+                "--packDir", applicationDirectory,
+                "--mainExe", context.Runtime.MainExecutable,
+                "--runtime", context.Runtime.Rid,
+                "--channel", channel,
+                "--delta", "BestSpeed",
+                "--outputDir", outputDirectory,
+                .. context.Runtime.ExtraVpkArguments
+            ],
+            cancellationToken);
     }
 
     private sealed record StageContext(

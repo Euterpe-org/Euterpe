@@ -9,8 +9,9 @@
     <ItemGroup>
         <PackageReference Include="CliWrap"/>
         <PackageReference Include="ConsoleAppFramework"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="ZLogger"/>
+        <PackageReference Include="XenoAtom.Logging"/>
     </ItemGroup>
 
     <ItemGroup>
