@@ -22,8 +22,8 @@
         <PackageVersion Include="Downloader" Version="5.9.5"/>
         <PackageVersion Include="DynamicData" Version="9.4.33"/>
         <PackageVersion Include="HotAvalonia" Version="3.1.4"/>
-        <PackageVersion Include="Irihi.Ursa" Version="2.1.0"/>
-        <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.1.0"/>
+        <PackageVersion Include="Irihi.Ursa" Version="2.2.0"/>
+        <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.2.0"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2026.2.0"/>
         <PackageVersion Include="Nerdbank.MessagePack" Version="1.2.36"/>
         <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.8.2"/>
