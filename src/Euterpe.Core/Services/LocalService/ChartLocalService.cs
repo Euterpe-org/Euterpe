@@ -51,7 +51,7 @@ internal sealed class ChartLocalService : IChartLocalService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to load chart from {chartFolder}, skipping");
+            Logger.LogError(ex, $"Failed to load chart from {chartFolder}, skipping");
             return null;
         }
     }

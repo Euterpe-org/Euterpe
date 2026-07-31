@@ -42,7 +42,7 @@ internal sealed class ResilientSoundDataProvider(ISoundDataProvider inner, ILogg
         catch (Exception ex)
         {
             _failed = true;
-            logger.ZLogWarning(ex, $"Audio decode failed; stopping preview playback");
+            logger.LogWarning(ex, $"Audio decode failed; stopping preview playback");
             return 0;
         }
     }

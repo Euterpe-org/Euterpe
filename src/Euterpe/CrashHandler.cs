@@ -10,7 +10,7 @@ internal static class CrashHandler
 
     internal static void ReportException(Exception ex)
     {
-        Resolve<ILogger<App>>().ZLogCritical(ex, $"Unhandled exception");
+        Resolve<ILogger<App>>().LogCritical(ex, $"Unhandled exception");
 
         if (Resolve<Config>().IgnoreException)
         {

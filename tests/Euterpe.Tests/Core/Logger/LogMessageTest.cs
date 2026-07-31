@@ -1,6 +1,5 @@
 using Euterpe.Core.Logger;
 using Microsoft.Extensions.Logging;
-using ZLogger;
 
 namespace Euterpe.Tests.Core.Logger;
 
@@ -18,7 +17,7 @@ public sealed class LogMessageTest
     [Arguments(LogLevel.None, "NON")]
     public async Task LogLevelAbbreviation_DerivedFromLevel(LogLevel level, string expected)
     {
-        var msg = new LogMessage(DateTimeOffset.UtcNow, level, new LogCategory("cat"), "m");
+        var msg = new LogMessage(DateTimeOffset.UtcNow, level, "cat", "m");
         await Assert.That(msg.LogLevelAbbreviation).IsEqualTo(expected);
     }
 }

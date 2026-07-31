@@ -7,9 +7,9 @@ public sealed class LiveLogService
     public readonly INotifyCollectionChangedSynchronizedViewList<LogMessage> LogMessagesView;
     private readonly ObservableFixedSizeRingBuffer<LogMessage> _logMessages = new(50);
 
-    public LiveLogService(LiveLogProcessor processor)
+    public LiveLogService(LiveLogTarget target)
     {
-        processor.OnLogMessageReceived += logMessage => _logMessages.AddLast(logMessage);
+        target.OnLogMessageReceived += logMessage => _logMessages.AddLast(logMessage);
 
         LogMessagesView = _logMessages.CreateView(x => x).ToNotifyCollectionChanged();
     }

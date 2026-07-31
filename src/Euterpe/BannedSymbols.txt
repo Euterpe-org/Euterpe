@@ -1,1 +1,0 @@
-T:Microsoft.Extensions.Logging.LoggerExtensions;Don't use this, use ZLog instead.

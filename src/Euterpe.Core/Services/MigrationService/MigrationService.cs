@@ -16,7 +16,7 @@ internal sealed partial class MigrationService : IMigrationService
 
             if (!HasSupportedMusic(workFolder))
             {
-                Logger.ZLogInformation($"'{name}' uses an unsupported audio format, skipping migration");
+                Logger.LogInformation($"'{name}' uses an unsupported audio format, skipping migration");
                 return new MigrationResult(MigrationOutcome.Unsupported, desiredFolder);
             }
 
@@ -24,16 +24,16 @@ internal sealed partial class MigrationService : IMigrationService
 
             if (!FileSystemService.TryMoveDirectoryToAvailablePath(workFolder, desiredFolder, out var destinationFolder))
             {
-                Logger.ZLogError($"Failed to move migrated chart '{name}'");
+                Logger.LogError($"Failed to move migrated chart '{name}'");
                 return new MigrationResult(MigrationOutcome.Failed, desiredFolder);
             }
 
-            Logger.ZLogInformation($"Migrated '{name}' -> {destinationFolder}");
+            Logger.LogInformation($"Migrated '{name}' -> {destinationFolder}");
             return new MigrationResult(MigrationOutcome.Migrated, destinationFolder);
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to migrate custom album '{name}', skipping");
+            Logger.LogError(ex, $"Failed to migrate custom album '{name}', skipping");
             return new MigrationResult(MigrationOutcome.Failed, desiredFolder);
         }
         finally

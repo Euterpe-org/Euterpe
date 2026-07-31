@@ -38,14 +38,14 @@ public sealed partial class WizardDialogViewModel : ViewModelBase, IDialogContex
             await page.InitializeAsync().ConfigureAwait(true);
         }
 
-        CurrentPage.OnEnterAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Wizard OnEnter failed"));
+        CurrentPage.OnEnterAsync().SafeFireAndForget(ex => Logger.LogError(ex, $"Wizard OnEnter failed"));
     }
 
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(false);
 
-        Logger.ZLogInformation($"{nameof(WizardDialogViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(WizardDialogViewModel)} Initialized");
     }
 
     [RelayCommand]

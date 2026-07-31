@@ -14,7 +14,7 @@ internal sealed partial class ImageCacheService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to download image {source}");
+            Logger.LogWarning(ex, $"Failed to download image {source}");
             return null;
         }
     }

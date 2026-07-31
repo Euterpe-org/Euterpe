@@ -43,7 +43,6 @@
     {
       "matchPackageNames": [
         "Microsoft.CodeAnalysis.Analyzers",
-        "Microsoft.CodeAnalysis.BannedApiAnalyzers",
         "Microsoft.CodeAnalysis.CSharp"
       ],
       "groupName": "Microsoft.CodeAnalysis"

@@ -12,7 +12,7 @@ public sealed partial class AppViewModel : ViewModelBase
         TelemetryService.TrackSessionAsync().SafeFireAndForget();
 #endif
 
-        Logger.ZLogInformation($"{nameof(AppViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(AppViewModel)} Initialized");
     }
 
     [RelayCommand]

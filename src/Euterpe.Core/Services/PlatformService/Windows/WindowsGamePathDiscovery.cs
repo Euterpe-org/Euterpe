@@ -12,14 +12,14 @@ internal sealed class WindowsGamePathDiscovery : IGamePathDiscovery
             return true;
         }
 
-        Logger.ZLogInformation($"Could not get game folder from libraryfolders.vdf");
+        Logger.LogInformation($"Could not get game folder from libraryfolders.vdf");
 
         if (GamePathService.TryGetGameFolderFromCommonPaths(WindowsPaths.SteamSearch, relativePath, out gameFolder))
         {
             return true;
         }
 
-        Logger.ZLogWarning($"Failed to auto detect game path on Windows");
+        Logger.LogWarning($"Failed to auto detect game path on Windows");
         return false;
     }
 
@@ -36,11 +36,11 @@ internal sealed class WindowsGamePathDiscovery : IGamePathDiscovery
 
         if (File.Exists(exePath) && File.Exists(dllPath))
         {
-            Logger.ZLogInformation($"{exeName} and GameAssembly.dll found in {folderPath}");
+            Logger.LogInformation($"{exeName} and GameAssembly.dll found in {folderPath}");
             return true;
         }
 
-        Logger.ZLogError($"{exeName} or GameAssembly.dll not found in {folderPath}");
+        Logger.LogError($"{exeName} or GameAssembly.dll not found in {folderPath}");
         return false;
     }
 

@@ -17,7 +17,7 @@ internal sealed partial class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to delete file {filePath}");
+            Logger.LogWarning(ex, $"Failed to delete file {filePath}");
             return false;
         }
     }
@@ -31,7 +31,7 @@ internal sealed partial class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to move file from {sourcePath} to {destinationPath}");
+            Logger.LogWarning(ex, $"Failed to move file from {sourcePath} to {destinationPath}");
             return false;
         }
     }
@@ -56,7 +56,7 @@ internal sealed partial class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to copy file from {sourcePath} to {destinationPath}");
+            Logger.LogWarning(ex, $"Failed to copy file from {sourcePath} to {destinationPath}");
             return false;
         }
     }
@@ -78,7 +78,7 @@ internal sealed partial class FileSystemService : IFileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to write file {filePath}");
+            Logger.LogWarning(ex, $"Failed to write file {filePath}");
             TryDeleteFile(tempPath);
             return false;
         }

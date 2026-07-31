@@ -28,11 +28,11 @@ internal sealed class LinuxSecureStorage : IPlatformSecureStorage
                 return;
             }
 
-            Logger.ZLogWarning($"secret-tool store failed with exit code {result.ExitCode}");
+            Logger.LogWarning($"secret-tool store failed with exit code {result.ExitCode}");
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"secret-tool is not available");
+            Logger.LogWarning(ex, $"secret-tool is not available");
             await MessageBoxService.NoticeAsync(MessageBox_Content_SecretService_Unavailable).ConfigureAwait(false);
         }
     }
@@ -55,14 +55,14 @@ internal sealed class LinuxSecureStorage : IPlatformSecureStorage
             var payload = JsonSerializer.Deserialize(result.StandardOutput, Default.TokenPayload);
             if (payload == null)
             {
-                Logger.ZLogWarning($"Failed to deserialize auth tokens, clearing stored data");
+                Logger.LogWarning($"Failed to deserialize auth tokens, clearing stored data");
                 await ClearTokensAsync().ConfigureAwait(false);
                 return null;
             }
 
             if (payload.AccessToken.IsNullOrEmpty() || payload.RefreshToken.IsNullOrEmpty())
             {
-                Logger.ZLogWarning($"Auth tokens are empty, clearing stored data");
+                Logger.LogWarning($"Auth tokens are empty, clearing stored data");
                 await ClearTokensAsync().ConfigureAwait(false);
                 return null;
             }
@@ -71,7 +71,7 @@ internal sealed class LinuxSecureStorage : IPlatformSecureStorage
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to load auth tokens");
+            Logger.LogWarning(ex, $"Failed to load auth tokens");
             return null;
         }
     }
@@ -88,7 +88,7 @@ internal sealed class LinuxSecureStorage : IPlatformSecureStorage
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to clear tokens with secret-tool");
+            Logger.LogWarning(ex, $"Failed to clear tokens with secret-tool");
         }
     }
 

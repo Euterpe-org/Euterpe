@@ -22,7 +22,7 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to check .NET SDK installation");
+            Logger.LogError(ex, $"Failed to check .NET SDK installation");
             return false;
         }
     }
@@ -33,7 +33,7 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
         try
         {
             await AppDownloadManager.DownloadFileAsync(DotNetInstallScriptUrl, tempFilePath).ConfigureAwait(false);
-            Logger.ZLogInformation($"Downloaded .NET install script to {tempFilePath}");
+            Logger.LogInformation($"Downloaded .NET install script to {tempFilePath}");
 
             var chmodResult = await Cli.Wrap("chmod")
                 .WithArguments(["+x", tempFilePath])
@@ -57,7 +57,7 @@ internal sealed class LinuxDotNetSdkInstaller : IDotNetSdkInstaller
                 throw new InvalidOperationException($"dotnet-install.sh failed with exit code {installResult.ExitCode}: {installResult.StandardError}");
             }
 
-            Logger.ZLogInformation($".NET SDK installation completed successfully");
+            Logger.LogInformation($".NET SDK installation completed successfully");
         }
         finally
         {

@@ -31,7 +31,7 @@ internal sealed partial class AudioPlayerService : IAudioPlayerService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to start audio playback for {filePath}");
+            Logger.LogWarning(ex, $"Failed to start audio playback for {filePath}");
             Dispatcher.UIThread.Post(() => Fail(cts));
         }
     }

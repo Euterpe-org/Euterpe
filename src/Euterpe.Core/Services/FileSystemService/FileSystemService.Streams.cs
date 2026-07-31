@@ -10,7 +10,7 @@ internal sealed partial class FileSystemService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to open file {filePath}");
+            Logger.LogWarning(ex, $"Failed to open file {filePath}");
             return null;
         }
     }

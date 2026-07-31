@@ -34,7 +34,6 @@ global using DotNext.Threading;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using Semver;
-global using ZLogger;
 global using static Euterpe.Core.GitHubResources;
 global using static Euterpe.Core.Utils.DesktopUtils;
 global using static Euterpe.Localization.Interaction;

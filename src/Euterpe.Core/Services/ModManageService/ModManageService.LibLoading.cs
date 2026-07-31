@@ -18,7 +18,7 @@ internal sealed partial class ModManageService
             CacheWebLib(webLib);
         }
 
-        Logger.ZLogInformation($"All libs loaded");
+        Logger.LogInformation($"All libs loaded");
     }
 
     private void CacheWebLib(Lib webLib)
@@ -32,7 +32,7 @@ internal sealed partial class ModManageService
         var webLibDto = webLib.ToModel();
         if (localLib.SHA256 != webLibDto.SHA256)
         {
-            DownloadLibAsync(webLibDto).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {webLib.Slug} failed"));
+            DownloadLibAsync(webLibDto).SafeFireAndForget(ex => Logger.LogError(ex, $"Download lib {webLib.Slug} failed"));
         }
     }
 
@@ -40,7 +40,7 @@ internal sealed partial class ModManageService
     {
         foreach (var lib in mod.LibDependencies.Select(libName => _libsDict[libName]).Where(static lib => !lib.IsLocal))
         {
-            DownloadLibAsync(lib).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Download lib {lib.Name} failed"));
+            DownloadLibAsync(lib).SafeFireAndForget(ex => Logger.LogError(ex, $"Download lib {lib.Name} failed"));
         }
     }
 
@@ -51,6 +51,6 @@ internal sealed partial class ModManageService
     {
         await GameDownloadManager.DownloadLibAsync(lib).ConfigureAwait(false);
         _libsDict[lib.Name] = await ModLocalService.LoadLibFromPathAsync(Path.Combine(GameConfig.UserLibsFolder, lib.FileName)).ConfigureAwait(false);
-        Logger.ZLogInformation($"Lib {lib.Name} download finished");
+        Logger.LogInformation($"Lib {lib.Name} download finished");
     }
 }

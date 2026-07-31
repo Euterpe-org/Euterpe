@@ -17,7 +17,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
     public async Task<string> DownloadChartAsync(string cid, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading chart {cid} ...");
+        Logger.LogInformation($"Downloading chart {cid} ...");
 
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, cid);
         var destinationFolder = Path.Combine(GameConfig.OnlineChartsFolder, cid);
@@ -31,7 +31,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
                 throw new IOException($"Failed to move downloaded chart {cid} into place");
             }
 
-            Logger.ZLogInformation($"Chart {cid} downloaded");
+            Logger.LogInformation($"Chart {cid} downloaded");
             return destinationFolder;
         }
         finally
@@ -43,7 +43,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
     public async Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles,
         CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Updating chart {cid} ({changedFiles.Count} changed, {deletedFiles.Count} deleted file(s)) ...");
+        Logger.LogInformation($"Updating chart {cid} ({changedFiles.Count} changed, {deletedFiles.Count} deleted file(s)) ...");
 
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, cid);
         var destinationFolder = Path.Combine(GameConfig.OnlineChartsFolder, cid);
@@ -72,7 +72,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
                 throw new IOException($"Failed to move updated chart {cid} into place");
             }
 
-            Logger.ZLogInformation($"Chart {cid} updated");
+            Logger.LogInformation($"Chart {cid} updated");
             return destinationFolder;
         }
         finally
@@ -83,7 +83,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
     public async Task<CheckChartUpdatesResponse> CheckChartUpdatesAsync(CheckChartUpdatesRequest request, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Checking updates for {request.Charts.Count} chart(s) ...");
+        Logger.LogInformation($"Checking updates for {request.Charts.Count} chart(s) ...");
 
         try
         {
@@ -91,14 +91,14 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to check chart updates");
+            Logger.LogError(ex, $"Failed to check chart updates");
             return new CheckChartUpdatesResponse();
         }
     }
 
     public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching mods ...");
+        Logger.LogInformation($"Fetching mods ...");
 
         try
         {
@@ -106,14 +106,14 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to fetch mod list after retries");
+            Logger.LogError(ex, $"Failed to fetch mod list after retries");
             return [];
         }
     }
 
     public async Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Fetching libs ...");
+        Logger.LogInformation($"Fetching libs ...");
 
         try
         {
@@ -121,7 +121,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to fetch lib list after retries");
+            Logger.LogError(ex, $"Failed to fetch lib list after retries");
             return [];
         }
     }

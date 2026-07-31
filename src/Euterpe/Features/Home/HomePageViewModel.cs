@@ -20,7 +20,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
         await LoadGameStateAsync().ConfigureAwait(true);
         StartBackgroundTasks();
 
-        Logger.ZLogInformation($"{nameof(HomePageViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(HomePageViewModel)} Initialized");
     }
 
     [RelayCommand]
@@ -38,12 +38,12 @@ public sealed partial class HomePageViewModel : ViewModelBase
     {
         if (!GameConfig.SetupCompleted)
         {
-            Logger.ZLogInformation($"Setup not completed, opening full setup wizard");
+            Logger.LogInformation($"Setup not completed, opening full setup wizard");
             await SetupDialogService.ShowFullWizardAsync().ConfigureAwait(true);
         }
         else if (!GameSettingService.IsValidGameFolder())
         {
-            Logger.ZLogWarning($"Stored {GameConfig.DisplayName} folder is invalid, opening game path repair");
+            Logger.LogWarning($"Stored {GameConfig.DisplayName} folder is invalid, opening game path repair");
             await SetupDialogService.ShowGamePathRepairAsync().ConfigureAwait(true);
         }
     }
@@ -58,7 +58,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            Logger.ZLogCritical(ex, $"Read game information failed; aborting startup");
+            Logger.LogCritical(ex, $"Read game information failed; aborting startup");
             await MessageBoxService.ErrorAsync(MessageBox_Content_ReadGameInformation_Failed, GameConfig.GlobalGameManagersPath).ConfigureAwait(true);
             Environment.Exit(1);
             return;

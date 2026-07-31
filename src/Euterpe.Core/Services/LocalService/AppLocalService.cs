@@ -9,7 +9,7 @@ internal sealed class AppLocalService : IAppLocalService
         while (path.IsNullOrEmpty() || !await EnsureValidSteamFolderAsync(path).ConfigureAwait(true))
         {
             path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseSteamFolder).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected Steam folder: {path}");
+            Logger.LogInformation($"Selected Steam folder: {path}");
         }
 
         return path;
@@ -22,7 +22,7 @@ internal sealed class AppLocalService : IAppLocalService
         while (path.IsNullOrEmpty() || !await EnsureValidSteamExecPathAsync(path).ConfigureAwait(true))
         {
             path = await FileSystemPickerService.GetSingleFilePathAsync(FileDialog_Title_ChooseSteamExec).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected Steam executable: {path}");
+            Logger.LogInformation($"Selected Steam executable: {path}");
         }
 
         return path;
@@ -34,7 +34,7 @@ internal sealed class AppLocalService : IAppLocalService
         while (path.IsNullOrEmpty())
         {
             path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseCacheFolder).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected Cache folder: {path}");
+            Logger.LogInformation($"Selected Cache folder: {path}");
         }
 
         return path;

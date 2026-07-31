@@ -47,7 +47,6 @@ global using JetBrains.Annotations;
 global using Microsoft.Extensions.Logging;
 global using R3;
 global using Ursa.Controls;
-global using ZLogger;
 global using static Euterpe.Core.Utils.DesktopUtils;
 global using static Euterpe.Localization.Interaction;
 global using static Euterpe.Localization.XAMLLiteral;

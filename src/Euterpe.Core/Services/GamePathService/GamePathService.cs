@@ -17,7 +17,7 @@ internal sealed partial class GamePathService : IGamePathService
             return false;
         }
 
-        Logger.ZLogInformation($"Detected game path from Steam libraryfolders.vdf: {gameFolder}");
+        Logger.LogInformation($"Detected game path from Steam libraryfolders.vdf: {gameFolder}");
         return true;
     }
 
@@ -29,11 +29,11 @@ internal sealed partial class GamePathService : IGamePathService
 
         if (gameFolder is null)
         {
-            Logger.ZLogWarning($"Failed to auto detect game path on Steam common paths.");
+            Logger.LogWarning($"Failed to auto detect game path on Steam common paths.");
             return false;
         }
 
-        Logger.ZLogInformation($"Auto detected game path on Steam common paths: {gameFolder}");
+        Logger.LogInformation($"Auto detected game path on Steam common paths: {gameFolder}");
         return true;
     }
 

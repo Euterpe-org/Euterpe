@@ -18,13 +18,13 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
 
         MelonLoaderInstallStatus = GameConfig.MelonLoaderVersion is null ? InstallStatus.NotInstalled : InstallStatus.Installed;
 
-        Logger.ZLogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(MelonLoaderPanelViewModel)} Initialized");
     }
 
     [RelayCommand]
     private async Task InstallMelonLoaderAsync()
     {
-        Logger.ZLogInformation($"Installing MelonLoader");
+        Logger.LogInformation($"Installing MelonLoader");
         try
         {
             MelonLoaderInstallStatus = InstallStatus.Downloading;
@@ -35,7 +35,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to install MelonLoader");
+            Logger.LogError(ex, $"Failed to install MelonLoader");
             MelonLoaderInstallStatus = InstallStatus.NotInstalled;
             await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Install_Failed).ConfigureAwait(true);
             return;
@@ -49,14 +49,14 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task UninstallMelonLoaderAsync()
     {
-        Logger.ZLogInformation($"Uninstalling MelonLoader");
+        Logger.LogInformation($"Uninstalling MelonLoader");
         try
         {
             await GameLocalService.UninstallMelonLoaderAsync().ConfigureAwait(true);
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to uninstall MelonLoader");
+            Logger.LogError(ex, $"Failed to uninstall MelonLoader");
             await MessageBoxService.ErrorAsync(MessageBox_Content_MelonLoader_Uninstall_Failed).ConfigureAwait(true);
             return;
         }
@@ -71,7 +71,7 @@ public sealed partial class MelonLoaderPanelViewModel : ViewModelBase
         var fileName = Path.GetFileName(args.FileName);
         var mbSize = args.TotalBytesToReceive / (1024d * 1024d);
         DownloadText = string.Format(XAML.MelonLoader_State_Downloading, fileName, $"{mbSize:F2}");
-        Logger.ZLogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
+        Logger.LogInformation($"Downloading {fileName}: {args.TotalBytesToReceive}B");
     }
 
     #region Injections

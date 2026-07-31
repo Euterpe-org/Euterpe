@@ -16,7 +16,7 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
     {
         await base.OnInitializeAsync().ConfigureAwait(false);
 
-        Logger.ZLogInformation($"{nameof(LoggingPageViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(LoggingPageViewModel)} Initialized");
     }
 
     #region Injections

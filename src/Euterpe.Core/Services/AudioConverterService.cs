@@ -31,7 +31,7 @@ internal sealed class AudioConverterService : IAudioConverterService
             encoder.Encode(buffer.AsSpan(0, read));
         }
 
-        Logger.ZLogInformation($"Converted {sourcePath} to {destinationPath} ({targetFormatId})");
+        Logger.LogInformation($"Converted {sourcePath} to {destinationPath} ({targetFormatId})");
     }
 
     #region Injections

@@ -26,7 +26,7 @@ internal sealed class ModLocalService : IModLocalService
             var attribute = assembly.FindCustomAttributes("MelonLoader", "MelonInfoAttribute").FirstOrDefault();
             if (attribute is null)
             {
-                Logger.ZLogWarning($"{filePath} has no MelonInfoAttribute and is not a MelonLoader mod");
+                Logger.LogWarning($"{filePath} has no MelonInfoAttribute and is not a MelonLoader mod");
                 return null;
             }
 
@@ -39,7 +39,7 @@ internal sealed class ModLocalService : IModLocalService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to load mod from {filePath}, skipping");
+            Logger.LogError(ex, $"Failed to load mod from {filePath}, skipping");
             return null;
         }
     }

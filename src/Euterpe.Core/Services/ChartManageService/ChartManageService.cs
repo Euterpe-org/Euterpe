@@ -29,7 +29,7 @@ internal sealed partial class ChartManageService : IChartManageService, IDisposa
     {
         if (FindOnlineChartByCid(cid) is not { } chart)
         {
-            Logger.ZLogWarning($"Update requested for unknown online chart {cid}");
+            Logger.LogWarning($"Update requested for unknown online chart {cid}");
             NotificationService.ErrorLight(Notification_Content_Chart_Update_Failed, cid);
             return;
         }

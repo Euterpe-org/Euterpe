@@ -8,19 +8,19 @@ internal sealed class WindowsLauncher : IPlatformLauncher
     public async Task OpenFileAsync(string filePath)
     {
         await TopLevel.Launcher.LaunchFileInfoAsync(new FileInfo(filePath)).ConfigureAwait(false);
-        Logger.ZLogInformation($"Open file: {filePath}");
+        Logger.LogInformation($"Open file: {filePath}");
     }
 
     public async Task OpenFolderAsync(string folderPath)
     {
         await TopLevel.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(folderPath)).ConfigureAwait(false);
-        Logger.ZLogInformation($"Open folder: {folderPath}");
+        Logger.LogInformation($"Open folder: {folderPath}");
     }
 
     public async Task OpenUriAsync(string uri)
     {
         await TopLevel.Launcher.LaunchUriAsync(new Uri(uri)).ConfigureAwait(false);
-        Logger.ZLogInformation($"Open uri: {uri}");
+        Logger.LogInformation($"Open uri: {uri}");
     }
 
     public Task RevealFileAsync(string filePath)
@@ -32,7 +32,7 @@ internal sealed class WindowsLauncher : IPlatformLauncher
                 CreateNoWindow = true
             }
         );
-        Logger.ZLogInformation($"Reveal file: {filePath}");
+        Logger.LogInformation($"Reveal file: {filePath}");
         return Task.CompletedTask;
     }
 

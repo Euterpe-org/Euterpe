@@ -12,7 +12,7 @@ internal sealed partial class GamePathService
         var vdfPath = Path.Combine(Config.SteamFolder, "steamapps", "libraryfolders.vdf");
         if (!File.Exists(vdfPath))
         {
-            Logger.ZLogWarning($"Steam libraryfolders.vdf not found at {vdfPath}");
+            Logger.LogWarning($"Steam libraryfolders.vdf not found at {vdfPath}");
             return false;
         }
 
@@ -32,7 +32,7 @@ internal sealed partial class GamePathService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to deserialize libraryfolders.vdf");
+            Logger.LogWarning(ex, $"Failed to deserialize libraryfolders.vdf");
             return false;
         }
     }
@@ -44,7 +44,7 @@ internal sealed partial class GamePathService
         var targetLibrary = libraryFolders.FirstOrDefault(library => library.Apps.ContainsKey(appId));
         if (targetLibrary is null)
         {
-            Logger.ZLogWarning($"AppId {appId} not found in any Steam library.");
+            Logger.LogWarning($"AppId {appId} not found in any Steam library.");
             return false;
         }
 
@@ -54,7 +54,7 @@ internal sealed partial class GamePathService
             return true;
         }
 
-        Logger.ZLogWarning($"Game folder not found in detected Steam library even though the appId exists there: {gameFolder}");
+        Logger.LogWarning($"Game folder not found in detected Steam library even though the appId exists there: {gameFolder}");
         return false;
     }
 
@@ -69,7 +69,7 @@ internal sealed partial class GamePathService
             return true;
         }
 
-        Logger.ZLogWarning($"Game folder not found in any Steam library paths.");
+        Logger.LogWarning($"Game folder not found in any Steam library paths.");
         return false;
     }
 }

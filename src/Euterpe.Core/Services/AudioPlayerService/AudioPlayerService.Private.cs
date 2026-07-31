@@ -45,7 +45,7 @@ internal sealed partial class AudioPlayerService
             player.Play();
         }
 
-        Logger.ZLogInformation($"Playing audio {PlaybackState.PlayingKey}");
+        Logger.LogInformation($"Playing audio {PlaybackState.PlayingKey}");
         return;
 
         // PlaybackEnded fires on the native audio render thread, so only marshal back and compare identity.

@@ -24,7 +24,7 @@ public sealed class UpdateDialogService
         catch (Exception ex)
         {
             succeeded = false;
-            Logger.ZLogError(ex, $"Failed to update to version {version}");
+            Logger.LogError(ex, $"Failed to update to version {version}");
         }
         finally
         {

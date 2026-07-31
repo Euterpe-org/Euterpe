@@ -47,15 +47,15 @@ internal sealed class LinuxSystemAssociationSetup : ISystemAssociationSetup
 
             if (result.ExitCode is not 0)
             {
-                Logger.ZLogWarning($"xdg-mime exited with code {result.ExitCode}: {result.StandardError}");
+                Logger.LogWarning($"xdg-mime exited with code {result.ExitCode}: {result.StandardError}");
                 return;
             }
 
-            Logger.ZLogInformation($"Registered deep link protocol and file association on Linux with process path: {processPath}");
+            Logger.LogInformation($"Registered deep link protocol and file association on Linux with process path: {processPath}");
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to register deep link protocol on Linux");
+            Logger.LogError(ex, $"Failed to register deep link protocol on Linux");
         }
     }
 
@@ -76,7 +76,7 @@ internal sealed class LinuxSystemAssociationSetup : ISystemAssociationSetup
             }
         }
 
-        Logger.ZLogInformation($"Extracted application icon to {iconPath}");
+        Logger.LogInformation($"Extracted application icon to {iconPath}");
     }
 
     private async Task InstallEpkMimeTypeAsync(string localAppData)
@@ -107,11 +107,11 @@ internal sealed class LinuxSystemAssociationSetup : ISystemAssociationSetup
 
         if (result.ExitCode is not 0)
         {
-            Logger.ZLogWarning($"update-mime-database exited with code {result.ExitCode}: {result.StandardError}");
+            Logger.LogWarning($"update-mime-database exited with code {result.ExitCode}: {result.StandardError}");
             return;
         }
 
-        Logger.ZLogInformation($"Installed EPK MIME type to {mimePackagePath}");
+        Logger.LogInformation($"Installed EPK MIME type to {mimePackagePath}");
     }
 
     #region Injections

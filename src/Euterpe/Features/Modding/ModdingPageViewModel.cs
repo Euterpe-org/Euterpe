@@ -15,7 +15,7 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 
     protected override Task OnInitializeAsync()
     {
-        Logger.ZLogInformation($"{nameof(ModdingPageViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(ModdingPageViewModel)} Initialized");
         return base.OnInitializeAsync();
     }
 

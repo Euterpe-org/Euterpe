@@ -6,12 +6,11 @@
         <PackageReference Include="AsyncAwaitBestPractices"/>
         <PackageReference Include="CliWrap"/>
         <PackageReference Include="Autofac"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+
         <PackageReference Include="Microsoft.Extensions.Http"/>
         <PackageReference Include="Microsoft.Extensions.Http.Resilience"/>
+        <PackageReference Include="NLog"/>
+        <PackageReference Include="NLog.Extensions.Logging"/>
         <PackageReference Include="R3"/>
         <PackageReference Include="Refit"/>
         <PackageReference Include="Refit.HttpClientFactory"/>
@@ -23,11 +22,9 @@
         <PackageReference Include="Tmds.DBus.Protocol"/>
         <PackageReference Include="ValveKeyValue"/>
         <PackageReference Include="Velopack"/>
-        <PackageReference Include="ZLogger"/>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="BannedSymbols.txt"/>
         <AdditionalFiles Include="DBusXml\*.xml" DBusGeneratorMode="Proxy" Namespace="$(RootNamespace).DBus"/>
     </ItemGroup>
 
