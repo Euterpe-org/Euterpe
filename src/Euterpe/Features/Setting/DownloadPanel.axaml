@@ -24,8 +24,10 @@
             Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_UpdateChannel}}"
             Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_UpdateChannel}}">
             <ComboBox
+                DisplayMemberBinding="{Binding Display.Value}"
                 ItemsSource="{Binding UpdateChannels, Mode=OneTime}"
-                SelectedIndex="{Binding SelectedUpdateChannelIndex, Mode=TwoWay}" />
+                SelectedValue="{Binding Config.UpdateChannel, Mode=TwoWay}"
+                SelectedValueBinding="{Binding Value}" />
         </e:LabeledSection>
 
     </StackPanel>
