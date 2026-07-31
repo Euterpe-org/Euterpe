@@ -2,6 +2,7 @@ using System.Runtime.InteropServices;
 
 namespace Euterpe.Abstractions;
 
+[PlatformService(ServiceRegistrationLifetime.AppSingleton)]
 public interface IPlatformInfo
 {
     /// <summary>

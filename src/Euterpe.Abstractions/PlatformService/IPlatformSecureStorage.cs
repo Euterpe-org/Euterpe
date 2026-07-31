@@ -2,6 +2,7 @@ using Euterpe.Contracts.Account;
 
 namespace Euterpe.Abstractions;
 
+[PlatformService(ServiceRegistrationLifetime.AppSingleton)]
 public interface IPlatformSecureStorage
 {
     /// <summary>
