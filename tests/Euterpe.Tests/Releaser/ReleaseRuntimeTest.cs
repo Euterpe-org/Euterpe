@@ -1,5 +1,7 @@
 using Euterpe.Releaser;
 
+using static Euterpe.Releaser.ReleaserConfiguration;
+
 namespace Euterpe.Tests.Releaser;
 
 [Category("ReleaserTests")]
@@ -21,7 +23,11 @@ public sealed class ReleaseRuntimeTest
 
         await Assert.That(runtime.MainExecutable).IsEqualTo(expectedExecutable);
         await Assert.That(runtime.InstallerFileSuffix).IsEqualTo(expectedInstallerFileSuffix);
-        await Assert.That(runtime.ExtraVpkArguments.Contains("--noPortable")).IsEqualTo(expectedDisablePortable);
+        await Assert.That(runtime.ExtraVpkArguments.SequenceEqual(
+                expectedDisablePortable
+                    ? ["--noPortable", "--icon", PackageIconPath]
+                    : []))
+            .IsTrue();
         await Assert.That(runtime.StableChannel).IsEqualTo($"{rid}-stable");
         await Assert.That(runtime.BetaChannel).IsEqualTo($"{rid}-beta");
     }
