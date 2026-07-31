@@ -13,14 +13,14 @@ internal sealed class WindowsGamePathEnvironment : IGamePathEnvironment
     {
         try
         {
-            Logger.ZLogInformation($"Set {GameConfig.PathEnvironmentVariableName} environment variable to: {GameConfig.Folder}");
+            Logger.LogInformation($"Set {GameConfig.PathEnvironmentVariableName} environment variable to: {GameConfig.Folder}");
             Environment.SetEnvironmentVariable(GameConfig.PathEnvironmentVariableName, GameConfig.Folder, EnvironmentVariableTarget.User);
             MessageBoxService.SuccessOverlayAsync(MessageBox_Content_SetPathEnvironment_Windows, GameConfig.Folder).ConfigureAwait(false);
             return true;
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to set {GameConfig.PathEnvironmentVariableName} environment variable");
+            Logger.LogError(ex, $"Failed to set {GameConfig.PathEnvironmentVariableName} environment variable");
             return false;
         }
     }

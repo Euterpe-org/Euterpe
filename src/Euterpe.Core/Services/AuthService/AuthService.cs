@@ -32,25 +32,25 @@ internal sealed partial class AuthService : IAuthService
         }
         catch (OperationCanceledException)
         {
-            Logger.ZLogWarning($"Login timed out waiting for the authorization callback");
+            Logger.LogWarning($"Login timed out waiting for the authorization callback");
             return;
         }
 
         if (callback.State != state)
         {
-            Logger.ZLogWarning($"Login rejected: state mismatch");
+            Logger.LogWarning($"Login rejected: state mismatch");
             return;
         }
 
         if (!callback.Error.IsNullOrEmpty())
         {
-            Logger.ZLogWarning($"Login failed with error: {callback.Error}");
+            Logger.LogWarning($"Login failed with error: {callback.Error}");
             return;
         }
 
         if (callback.Code.IsNullOrEmpty())
         {
-            Logger.ZLogWarning($"Login callback missing authorization code");
+            Logger.LogWarning($"Login callback missing authorization code");
             return;
         }
 
@@ -60,7 +60,7 @@ internal sealed partial class AuthService : IAuthService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Login failed during token exchange");
+            Logger.LogError(ex, $"Login failed during token exchange");
         }
     }
 
@@ -77,12 +77,12 @@ internal sealed partial class AuthService : IAuthService
                 }
                 catch (Exception ex)
                 {
-                    Logger.ZLogWarning(ex, $"Failed to call logout API");
+                    Logger.LogWarning(ex, $"Failed to call logout API");
                 }
             }
 
             await ClearSessionAsync().ConfigureAwait(false);
-            Logger.ZLogInformation($"User logged out");
+            Logger.LogInformation($"User logged out");
         }
         finally
         {
@@ -152,7 +152,7 @@ internal sealed partial class AuthService : IAuthService
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to restore session");
+            Logger.LogError(ex, $"Failed to restore session");
             await ClearSessionAsync().ConfigureAwait(false);
             return false;
         }
@@ -169,7 +169,7 @@ internal sealed partial class AuthService : IAuthService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Server health check failed");
+            Logger.LogWarning(ex, $"Server health check failed");
             return false;
         }
     }

@@ -9,20 +9,20 @@ internal sealed class WindowsSteamPathDiscovery : ISteamPathDiscovery
     {
         if (TryGetSteamFolderFromRegistry(out steamFolder))
         {
-            Logger.ZLogInformation($"Detected Steam folder from Registry: {steamFolder}");
+            Logger.LogInformation($"Detected Steam folder from Registry: {steamFolder}");
             return true;
         }
 
-        Logger.ZLogWarning($"Failed to get Steam folder from Registry");
+        Logger.LogWarning($"Failed to get Steam folder from Registry");
 
         steamFolder = WindowsPaths.SteamSearch.FirstOrDefault(Directory.Exists);
         if (steamFolder is not null && CheckIsValidSteamFolder(steamFolder))
         {
-            Logger.ZLogInformation($"Auto detected Steam folder on Windows: {steamFolder}");
+            Logger.LogInformation($"Auto detected Steam folder on Windows: {steamFolder}");
             return true;
         }
 
-        Logger.ZLogWarning($"Auto detect Steam install on common path failed.");
+        Logger.LogWarning($"Auto detect Steam install on common path failed.");
         return false;
     }
 
@@ -31,11 +31,11 @@ internal sealed class WindowsSteamPathDiscovery : ISteamPathDiscovery
         var steamAppsPath = Path.Combine(folderPath, "steamapps");
         if (Directory.Exists(steamAppsPath))
         {
-            Logger.ZLogInformation($"Valid Steam folder: {folderPath}");
+            Logger.LogInformation($"Valid Steam folder: {folderPath}");
             return true;
         }
 
-        Logger.ZLogError($"Invalid Steam folder: {folderPath}");
+        Logger.LogError($"Invalid Steam folder: {folderPath}");
         return false;
     }
 
@@ -44,11 +44,11 @@ internal sealed class WindowsSteamPathDiscovery : ISteamPathDiscovery
         var steamExecPath = Path.Combine(Config.SteamFolder, "steam.exe");
         if (File.Exists(steamExecPath))
         {
-            Logger.ZLogInformation($"steam.exe found at: {steamExecPath}");
+            Logger.LogInformation($"steam.exe found at: {steamExecPath}");
             return steamExecPath;
         }
 
-        Logger.ZLogError($"steam.exe not found at: {steamExecPath}");
+        Logger.LogError($"steam.exe not found at: {steamExecPath}");
         return null;
     }
 

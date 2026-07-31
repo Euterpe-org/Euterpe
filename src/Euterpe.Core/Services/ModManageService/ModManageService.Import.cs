@@ -29,13 +29,13 @@ internal sealed partial class ModManageService
             }
             else
             {
-                Logger.ZLogWarning($"Ignored dropped file (not a mod or lib): {fileName}");
+                Logger.LogWarning($"Ignored dropped file (not a mod or lib): {fileName}");
                 NotificationService.ErrorLight(Notification_Content_Mod_Import_Unsupported, fileName);
             }
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to import {fileName}");
+            Logger.LogError(ex, $"Failed to import {fileName}");
             NotificationService.ErrorLight(Notification_Content_Mod_Import_Failed, fileName);
         }
     }
@@ -46,21 +46,21 @@ internal sealed partial class ModManageService
 
         if (installed is not null && mod.LocalVersion.ComparePrecedenceTo(installed.LocalVersion) <= 0)
         {
-            Logger.ZLogInformation($"Skipped import of {mod.Name}: version {installed.LocalVersion} already installed");
+            Logger.LogInformation($"Skipped import of {mod.Name}: version {installed.LocalVersion} already installed");
             NotificationService.WarningLight(Notification_Content_Mod_Import_Duplicated, mod.Name);
             return;
         }
 
         if (!TryReplaceModFile(filePath, installed))
         {
-            Logger.ZLogWarning($"Failed to import mod {mod.Name}: could not copy file");
+            Logger.LogWarning($"Failed to import mod {mod.Name}: could not copy file");
             NotificationService.ErrorLight(Notification_Content_Mod_Import_Failed, mod.Name);
             return;
         }
 
         CacheLocalMod(mod);
 
-        Logger.ZLogInformation($"Imported mod {mod.Name} from {Path.GetFileName(filePath)}");
+        Logger.LogInformation($"Imported mod {mod.Name} from {Path.GetFileName(filePath)}");
         NotificationService.SuccessLight(Notification_Content_Mod_Import_Success, mod.Name);
     }
 
@@ -71,7 +71,7 @@ internal sealed partial class ModManageService
 
         if (!FileSystemService.TryCopyFile(filePath, destPath, true))
         {
-            Logger.ZLogWarning($"Failed to import library {fileName}: could not copy file");
+            Logger.LogWarning($"Failed to import library {fileName}: could not copy file");
             NotificationService.ErrorLight(Notification_Content_Lib_Import_Failed, fileName);
             return;
         }
@@ -79,7 +79,7 @@ internal sealed partial class ModManageService
         var lib = await ModLocalService.LoadLibFromPathAsync(destPath).ConfigureAwait(false);
         _libsDict[lib.Name] = lib;
 
-        Logger.ZLogInformation($"Imported lib {lib.Name} from {fileName}");
+        Logger.LogInformation($"Imported lib {lib.Name} from {fileName}");
         NotificationService.SuccessLight(Notification_Content_Lib_Import_Success, lib.Name);
     }
 

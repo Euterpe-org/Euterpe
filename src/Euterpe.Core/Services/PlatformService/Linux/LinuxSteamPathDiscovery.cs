@@ -17,11 +17,11 @@ internal sealed class LinuxSteamPathDiscovery : ISteamPathDiscovery
         steamFolder = LinuxPaths.SteamSearch.FirstOrDefault(Directory.Exists);
         if (steamFolder is not null && CheckIsValidSteamFolder(steamFolder))
         {
-            Logger.ZLogInformation($"Auto detected Steam folder on Linux: {steamFolder}");
+            Logger.LogInformation($"Auto detected Steam folder on Linux: {steamFolder}");
             return true;
         }
 
-        Logger.ZLogWarning($"Auto detect Steam install on common path failed.");
+        Logger.LogWarning($"Auto detect Steam install on common path failed.");
         return false;
     }
 
@@ -30,11 +30,11 @@ internal sealed class LinuxSteamPathDiscovery : ISteamPathDiscovery
         var steamAppsPath = Path.Combine(folderPath, "steamapps");
         if (Directory.Exists(steamAppsPath))
         {
-            Logger.ZLogInformation($"Valid Steam folder: {folderPath}");
+            Logger.LogInformation($"Valid Steam folder: {folderPath}");
             return true;
         }
 
-        Logger.ZLogError($"Invalid Steam folder: {folderPath}");
+        Logger.LogError($"Invalid Steam folder: {folderPath}");
         return false;
     }
 
@@ -59,12 +59,12 @@ internal sealed class LinuxSteamPathDiscovery : ISteamPathDiscovery
                 return null;
             }
 
-            Logger.ZLogInformation($"Found Steam executable via 'which': {path}");
+            Logger.LogInformation($"Found Steam executable via 'which': {path}");
             return path;
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to run 'which steam'");
+            Logger.LogError(ex, $"Failed to run 'which steam'");
             return null;
         }
     }

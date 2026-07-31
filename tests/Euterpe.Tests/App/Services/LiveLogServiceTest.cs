@@ -1,8 +1,9 @@
 using System.Collections;
 using Euterpe.Core.Logger;
 using Euterpe.Services;
-using Microsoft.Extensions.Logging;
-using ZLogger;
+using MicrosoftLogLevel = Microsoft.Extensions.Logging.LogLevel;
+using NLog;
+using NLog.Config;
 
 namespace Euterpe.Tests.App.Services;
 
@@ -21,90 +22,88 @@ public sealed class LiveLogServiceTest
         return list;
     }
 
-    private static (LiveLogService service, LiveLogProcessor processor, ILoggerFactory factory) CreateWiredService()
+    private static (LiveLogService Service, LogFactory Factory) CreateWiredService()
     {
-        var processor = new LiveLogProcessor();
-        var service = new LiveLogService(processor);
-        var factory = LoggerFactory.Create(builder =>
-        {
-            builder.SetMinimumLevel(LogLevel.Trace);
-            builder.AddZLoggerLogProcessor(_ => processor);
-        });
-        return (service, processor, factory);
+        var target = new LiveLogTarget();
+        var service = new LiveLogService(target);
+        var logFactory = new LogFactory();
+        var configuration = new LoggingConfiguration(logFactory);
+        configuration.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, target);
+        logFactory.Configuration = configuration;
+        return (service, logFactory);
     }
 
     [Test]
     public async Task Ctor_NoMessages_ViewIsEmpty()
     {
-        var processor = new LiveLogProcessor();
-        var service = new LiveLogService(processor);
+        var service = new LiveLogService(new LiveLogTarget());
 
         await Assert.That(service.LogMessagesView).IsEmpty();
     }
 
     [Test]
-    public async Task ProcessorEvent_AppendsMessageToView()
+    public async Task TargetEvent_AppendsMessageToView()
     {
-        var (service, _, factory) = CreateWiredService();
+        var (service, factory) = CreateWiredService();
         using (factory)
         {
-            factory.CreateLogger("Euterpe.Tests").ZLogInformation($"hello world");
+            factory.GetLogger("Euterpe.Tests").Info("hello world");
         }
 
         var view = MaterializeView(service.LogMessagesView);
         using var _ = Assert.Multiple();
         await Assert.That(view).HasSingleItem();
-        await Assert.That(view[0].Message).Contains("hello world");
-        await Assert.That(view[0].LogLevel).IsEqualTo(LogLevel.Information);
+        await Assert.That(view[0].Message).IsEqualTo("hello world");
+        await Assert.That(view[0].LogLevel).IsEqualTo(MicrosoftLogLevel.Information);
     }
 
     [Test]
-    public async Task ProcessorEvent_PreservesAppendOrder()
+    public async Task TargetEvent_PreservesAppendOrder()
     {
-        var (service, _, factory) = CreateWiredService();
+        var (service, factory) = CreateWiredService();
         using (factory)
         {
-            var logger = factory.CreateLogger("Euterpe.Tests");
-            logger.ZLogInformation($"first");
-            logger.ZLogInformation($"second");
-            logger.ZLogInformation($"third");
+            var logger = factory.GetLogger("Euterpe.Tests");
+            logger.Info("first");
+            logger.Info("second");
+            logger.Info("third");
         }
 
         var view = MaterializeView(service.LogMessagesView);
         using var _ = Assert.Multiple();
         await Assert.That(view).Count().IsEqualTo(3);
-        await Assert.That(view[0].Message).Contains("first");
-        await Assert.That(view[1].Message).Contains("second");
-        await Assert.That(view[2].Message).Contains("third");
+        await Assert.That(view[0].Message).IsEqualTo("first");
+        await Assert.That(view[1].Message).IsEqualTo("second");
+        await Assert.That(view[2].Message).IsEqualTo("third");
     }
 
     [Test]
     public async Task RingBuffer_DropsOldestWhenExceedingCapacity()
     {
-        var (service, _, factory) = CreateWiredService();
+        var (service, factory) = CreateWiredService();
         using (factory)
         {
-            var logger = factory.CreateLogger("Euterpe.Tests");
+            var logger = factory.GetLogger("Euterpe.Tests");
             for (var i = 0; i < 55; i++)
             {
-                logger.ZLogInformation($"msg-{i}");
+                logger.Info("msg-{0}", i);
             }
         }
 
         var view = MaterializeView(service.LogMessagesView);
         using var _ = Assert.Multiple();
         await Assert.That(view).Count().IsEqualTo(50);
-        await Assert.That(view[0].Message).Contains("msg-5");
-        await Assert.That(view[49].Message).Contains("msg-54");
+        await Assert.That(view[0].Message).IsEqualTo("msg-5");
+        await Assert.That(view[49].Message).IsEqualTo("msg-54");
     }
 
     [Test]
-    public async Task ProcessorEvent_FilteredCategory_DoesNotAppendToView()
+    public async Task TargetEvent_FilteredCategory_DoesNotAppendToView()
     {
-        var (service, _, factory) = CreateWiredService();
+        var (service, factory) = CreateWiredService();
         using (factory)
         {
-            factory.CreateLogger("Euterpe.Services.NavigationService").ZLogInformation($"routed");
+            factory.GetLogger("Euterpe.Services.NavigationService").Info("routed");
         }
 
         await Assert.That(service.LogMessagesView).IsEmpty();

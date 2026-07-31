@@ -17,7 +17,7 @@ internal sealed class AppInitializer
         app.RequestedThemeVariant = AvaloniaResources.ThemeVariants[Config.Theme];
         LocalizationService.SetLanguage(Config.LanguageCode);
 
-        SystemActivationService.SetupAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to register OS associations"));
+        SystemActivationService.SetupAsync().SafeFireAndForget(ex => Logger.LogError(ex, $"Failed to register OS associations"));
 
         if (app.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -50,7 +50,7 @@ internal sealed class AppInitializer
             return;
         }
 
-        initializable.InitializeAsync().SafeFireAndForget(ex => Logger.ZLogError(ex, $"Async initializer for {initializable.GetType().Name} failed"));
+        initializable.InitializeAsync().SafeFireAndForget(ex => Logger.LogError(ex, $"Async initializer for {initializable.GetType().Name} failed"));
     }
 
     private void OnExit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
@@ -61,7 +61,7 @@ internal sealed class AppInitializer
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to save settings on exit");
+            Logger.LogError(ex, $"Failed to save settings on exit");
         }
     }
 

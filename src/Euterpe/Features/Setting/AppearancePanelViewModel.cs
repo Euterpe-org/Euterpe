@@ -14,7 +14,7 @@ public sealed partial class AppearancePanelViewModel : ViewModelBase
     {
         CurrentLanguage = LocalizationService.GetCurrentLanguage();
 
-        Logger.ZLogInformation($"{nameof(AppearancePanelViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(AppearancePanelViewModel)} Initialized");
         return base.OnInitializeAsync();
     }
 

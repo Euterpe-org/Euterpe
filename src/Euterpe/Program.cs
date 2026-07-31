@@ -30,8 +30,15 @@ internal static class Program
         CleanupLogFiles();
         ConfigureContainer();
         StartActivationPipeServer();
-        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        StopActivationPipeServer();
+        try
+        {
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        }
+        finally
+        {
+            StopActivationPipeServer();
+            NLog.LogManager.Shutdown();
+        }
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.

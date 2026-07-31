@@ -16,7 +16,7 @@ public sealed partial class GameSwitcher : ObservableObject
 
         if (!await _switchLock.TryAcquireAsync(TimeSpan.Zero).ConfigureAwait(false))
         {
-            Logger.ZLogInformation($"Switch to {target} ignored — another switch is in progress");
+            Logger.LogInformation($"Switch to {target} ignored — another switch is in progress");
             return;
         }
 
@@ -25,7 +25,7 @@ public sealed partial class GameSwitcher : ObservableObject
         {
             CanSwitch = false;
 
-            Logger.ZLogInformation($"Switching active game from {previous} to {target}");
+            Logger.LogInformation($"Switching active game from {previous} to {target}");
             Config.ActiveGame = target;
             IocContainer.ActivateGame(target);
         }

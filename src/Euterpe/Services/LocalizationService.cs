@@ -52,7 +52,7 @@ public sealed class LocalizationService
         catch (CultureNotFoundException ex)
         {
             currentCulture = CultureInfo.CurrentUICulture;
-            Logger.ZLogError(ex, $"Invalid language code {Config.LanguageCode} from config, falling back to {currentCulture.EnglishName}");
+            Logger.LogError(ex, $"Invalid language code {Config.LanguageCode} from config, falling back to {currentCulture.EnglishName}");
         }
 
         foreach (var cultureName in CreateCultureFallbackChain(currentCulture).Select(x => x.Name))
@@ -67,7 +67,7 @@ public sealed class LocalizationService
             return language;
         }
 
-        Logger.ZLogError($"No matching language found for {currentCulture.Name}, falling back to English");
+        Logger.LogError($"No matching language found for {currentCulture.Name}, falling back to English");
         Config.LanguageCode = "en";
         return "en";
     }
@@ -87,7 +87,7 @@ public sealed class LocalizationService
         UrsaSemiTheme.OverrideLocaleResources(GetCurrentApplication(), semiCulture);
 
         Config.LanguageCode = language;
-        Logger.ZLogInformation($"Language set to {language}");
+        Logger.LogInformation($"Language set to {language}");
     }
 
     private static IEnumerable<CultureInfo> CreateCultureFallbackChain(CultureInfo startingCulture)

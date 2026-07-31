@@ -1,6 +1,7 @@
 using Euterpe.Core.Http.Handlers;
 using Euterpe.Core.Http.Listeners;
 using Euterpe.Core.Http.Resilience;
+using NLog.Extensions.Logging;
 using Refit;
 using SoundFlow.Abstracts;
 using SoundFlow.Backends.MiniAudio;
@@ -15,27 +16,15 @@ public static class CoreServiceExtensions
     {
         public void RegisterLogger()
         {
-            services.AddSingleton<LiveLogProcessor>();
+            var liveLogTarget = new LiveLogTarget();
+            var configuration = AppLoggingConfiguration.Create(liveLogTarget);
+
+            services.AddSingleton(liveLogTarget);
             services.AddLogging(x =>
             {
                 x.ClearProviders();
-#if DEBUG
-                x.SetMinimumLevel(LogLevel.Debug);
-                x.AddZLoggerConsole(options =>
-                {
-                    options.ConfigureEnableAnsiEscapeCode = true;
-                    options.UseFormatter(() => new LogConsoleFormatter());
-                });
-#else
-                x.SetMinimumLevel(LogLevel.Information);
-#endif
-                x.AddZLoggerFile((options, _) =>
-                {
-                    options.FileShared = true;
-                    options.UseFormatter(() => new LogFileFormatter());
-                    return LogFilePath;
-                });
-                x.AddZLoggerLogProcessor((_, provider) => provider.GetRequiredService<LiveLogProcessor>());
+                x.SetMinimumLevel(AppLoggingConfiguration.MinimumMicrosoftLogLevel);
+                x.AddNLog(configuration);
             });
         }
 

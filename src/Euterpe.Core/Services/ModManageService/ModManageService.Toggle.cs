@@ -8,7 +8,7 @@ internal sealed partial class ModManageService
                 Path.Combine(GameConfig.ModsFolder, mod.LocalFileName),
                 Path.Combine(GameConfig.ModsFolder, mod.ReversedFileName)))
         {
-            Logger.ZLogError($"Failed to enable mod {mod.Name}: could not move file {mod.LocalFileName}");
+            Logger.LogError($"Failed to enable mod {mod.Name}: could not move file {mod.LocalFileName}");
             return false;
         }
 
@@ -16,7 +16,7 @@ internal sealed partial class ModManageService
         await EnableModDependenciesAsync(mod).ConfigureAwait(false);
 
         mod.IsDisabled = false;
-        Logger.ZLogInformation($"Change mod {mod.Name} state to enabled");
+        Logger.LogInformation($"Change mod {mod.Name} state to enabled");
 
         return true;
     }
@@ -42,14 +42,14 @@ internal sealed partial class ModManageService
                 Path.Combine(GameConfig.ModsFolder, mod.LocalFileName),
                 Path.Combine(GameConfig.ModsFolder, mod.ReversedFileName)))
         {
-            Logger.ZLogError($"Failed to disable mod {mod.Name}: could not move file {mod.LocalFileName}");
+            Logger.LogError($"Failed to disable mod {mod.Name}: could not move file {mod.LocalFileName}");
             return false;
         }
 
         await DisableModDependentsAsync(mod).ConfigureAwait(false);
 
         mod.IsDisabled = true;
-        Logger.ZLogInformation($"Change mod {mod.Name} state to disabled");
+        Logger.LogInformation($"Change mod {mod.Name} state to disabled");
 
         return true;
     }

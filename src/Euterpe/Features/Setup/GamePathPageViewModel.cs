@@ -28,7 +28,7 @@ public sealed partial class GamePathPageViewModel : SetupPageViewModelBase
             SelectedFolder = detected;
         }
 
-        Logger.ZLogInformation($"{nameof(GamePathPageViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(GamePathPageViewModel)} Initialized");
     }
 
     [RelayCommand]
@@ -41,7 +41,7 @@ public sealed partial class GamePathPageViewModel : SetupPageViewModelBase
         }
 
         SelectedFolder = folder;
-        Logger.ZLogInformation($"User selected {GameConfig.DisplayName} folder: {folder}");
+        Logger.LogInformation($"User selected {GameConfig.DisplayName} folder: {folder}");
     }
 
     partial void OnSelectedFolderChanged(string? value)

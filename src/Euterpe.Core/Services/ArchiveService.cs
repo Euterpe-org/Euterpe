@@ -18,7 +18,7 @@ internal sealed class ArchiveService : IArchiveService
         }
 
         ZipFile.CreateFromDirectory(sourceFolder, zipPath, CompressionLevel.Optimal, false);
-        Logger.ZLogInformation($"Successfully created {zipPath} from {sourceFolder}");
+        Logger.LogInformation($"Successfully created {zipPath} from {sourceFolder}");
     }
 
     public async Task CreateZipFileAsync(string sourceFolder, string zipPath)
@@ -29,18 +29,18 @@ internal sealed class ArchiveService : IArchiveService
         }
 
         await ZipFile.CreateFromDirectoryAsync(sourceFolder, zipPath, CompressionLevel.Optimal, false).ConfigureAwait(false);
-        Logger.ZLogInformation($"Successfully created {zipPath} from {sourceFolder}");
+        Logger.LogInformation($"Successfully created {zipPath} from {sourceFolder}");
     }
 
     public void ExtractZipFile(string zipPath, string extractPath)
     {
         ZipFile.ExtractToDirectory(zipPath, extractPath, true);
-        Logger.ZLogInformation($"Successfully extracted {zipPath} to {extractPath}");
+        Logger.LogInformation($"Successfully extracted {zipPath} to {extractPath}");
     }
 
     public async Task ExtractZipFileAsync(string zipPath, string extractPath)
     {
         await ZipFile.ExtractToDirectoryAsync(zipPath, extractPath, true).ConfigureAwait(false);
-        Logger.ZLogInformation($"Successfully extracted {zipPath} to {extractPath}");
+        Logger.LogInformation($"Successfully extracted {zipPath} to {extractPath}");
     }
 }

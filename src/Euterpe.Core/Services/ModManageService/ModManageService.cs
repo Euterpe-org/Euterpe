@@ -50,21 +50,21 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         var mod = FindModByName(name);
         if (mod is null)
         {
-            Logger.ZLogWarning($"Install requested for unknown mod {name}");
+            Logger.LogWarning($"Install requested for unknown mod {name}");
             NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
             return;
         }
 
         if (mod.IsLocal)
         {
-            Logger.ZLogInformation($"Install requested for already-installed mod {name}");
+            Logger.LogInformation($"Install requested for already-installed mod {name}");
             NotificationService.NoticeLight(Notification_Content_Mod_Install_AlreadyInstalled, name);
             return;
         }
 
         if (mod.State is ModState.Incompatible)
         {
-            Logger.ZLogInformation($"Install requested for incompatible mod {name}");
+            Logger.LogInformation($"Install requested for incompatible mod {name}");
             NotificationService.ErrorLight(Notification_Content_Mod_Install_Incompatible, name);
             return;
         }
@@ -77,21 +77,21 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         var mod = FindModByName(name);
         if (mod is null)
         {
-            Logger.ZLogWarning($"Update requested for unknown mod {name}");
+            Logger.LogWarning($"Update requested for unknown mod {name}");
             NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
             return;
         }
 
         if (!mod.IsLocal)
         {
-            Logger.ZLogInformation($"Update requested for not-installed mod {name}");
+            Logger.LogInformation($"Update requested for not-installed mod {name}");
             NotificationService.ErrorLight(Notification_Content_Mod_NotInstalled, name);
             return;
         }
 
         if (mod.State is not ModState.Outdated)
         {
-            Logger.ZLogInformation($"Update requested for up-to-date mod {name}");
+            Logger.LogInformation($"Update requested for up-to-date mod {name}");
             NotificationService.NoticeLight(Notification_Content_Mod_Update_UpToDate, name);
             return;
         }
@@ -104,14 +104,14 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         var mod = FindModByName(name);
         if (mod is null)
         {
-            Logger.ZLogWarning($"Uninstall requested for unknown mod {name}");
+            Logger.LogWarning($"Uninstall requested for unknown mod {name}");
             NotificationService.NoticeLight(Notification_Content_Mod_NotFound, name);
             return;
         }
 
         if (!mod.IsLocal)
         {
-            Logger.ZLogInformation($"Uninstall requested for not installed mod {name}");
+            Logger.LogInformation($"Uninstall requested for not installed mod {name}");
             NotificationService.NoticeLight(Notification_Content_Mod_NotInstalled, name);
             return;
         }
@@ -122,7 +122,7 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
     public async Task<int> UpdateAllModsAsync()
     {
         var outdatedMods = GetOutdatedMods();
-        Logger.ZLogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
+        Logger.LogInformation($"Updating {outdatedMods.Length} outdated mod(s)");
 
         var updated = 0;
         foreach (var mod in outdatedMods)

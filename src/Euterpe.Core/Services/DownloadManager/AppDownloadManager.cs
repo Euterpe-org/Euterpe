@@ -30,7 +30,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
 
     public async Task DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default)
     {
-        Logger.ZLogInformation($"Downloading {displayName} ...");
+        Logger.LogInformation($"Downloading {displayName} ...");
 
         var stream = await DownloadClient.GetStreamAsync(downloadUrl, cancellationToken).ConfigureAwait(false);
         await using (stream.ConfigureAwait(false))
@@ -47,11 +47,11 @@ internal sealed class AppDownloadManager : IAppDownloadManager
     {
         if (ReadmeCache.TryGetValue(repoId, out var readme))
         {
-            Logger.ZLogInformation($"Using cached Readme for {repoId}");
+            Logger.LogInformation($"Using cached Readme for {repoId}");
             return readme;
         }
 
-        Logger.ZLogInformation($"Attempting to fetch Readme for {repoId}");
+        Logger.LogInformation($"Attempting to fetch Readme for {repoId}");
         readme = await FetchReadmeFromBranchesAsync(repoId, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrEmpty(readme))
         {
@@ -59,7 +59,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
             return readme;
         }
 
-        Logger.ZLogInformation($"Branch readme fetch failed");
+        Logger.LogInformation($"Branch readme fetch failed");
         return null;
     }
 
@@ -74,7 +74,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
             }
         }
 
-        Logger.ZLogInformation($"No Readme found in any branches for {repoId}");
+        Logger.LogInformation($"No Readme found in any branches for {repoId}");
         return null;
     }
 
@@ -89,7 +89,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
                 continue;
             }
 
-            Logger.ZLogInformation($"Successfully fetched Readme from branch {branch} of {repoId} using URL: {url}");
+            Logger.LogInformation($"Successfully fetched Readme from branch {branch} of {repoId} using URL: {url}");
             return content;
         }
 
@@ -114,7 +114,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to fetch content from URL: {url}");
+            Logger.LogWarning(ex, $"Failed to fetch content from URL: {url}");
             return null;
         }
     }

@@ -30,7 +30,7 @@ internal sealed class WindowsSecureStorage : IPlatformSecureStorage
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to save auth tokens");
+            Logger.LogWarning(ex, $"Failed to save auth tokens");
         }
     }
 
@@ -50,14 +50,14 @@ internal sealed class WindowsSecureStorage : IPlatformSecureStorage
 
             if (payload == null)
             {
-                Logger.ZLogWarning($"Failed to deserialize auth tokens, clearing stored data");
+                Logger.LogWarning($"Failed to deserialize auth tokens, clearing stored data");
                 await ClearTokensAsync().ConfigureAwait(false);
                 return null;
             }
 
             if (payload.AccessToken.IsNullOrEmpty() || payload.RefreshToken.IsNullOrEmpty())
             {
-                Logger.ZLogWarning($"Auth tokens are empty, clearing stored data");
+                Logger.LogWarning($"Auth tokens are empty, clearing stored data");
                 await ClearTokensAsync().ConfigureAwait(false);
                 return null;
             }
@@ -66,7 +66,7 @@ internal sealed class WindowsSecureStorage : IPlatformSecureStorage
         }
         catch (CryptographicException ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to decrypt auth tokens, clearing stored data");
+            Logger.LogWarning(ex, $"Failed to decrypt auth tokens, clearing stored data");
             await ClearTokensAsync().ConfigureAwait(false);
             return null;
         }
@@ -85,7 +85,7 @@ internal sealed class WindowsSecureStorage : IPlatformSecureStorage
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to delete auth token file");
+            Logger.LogWarning(ex, $"Failed to delete auth token file");
         }
     }
 }

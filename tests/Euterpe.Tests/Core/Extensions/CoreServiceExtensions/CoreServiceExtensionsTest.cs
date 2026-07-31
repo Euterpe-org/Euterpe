@@ -17,7 +17,7 @@ public sealed partial class CoreServiceExtensionsTest
         services.RegisterLogger();
 
         using var _ = Assert.Multiple();
-        await Assert.That(services.Any(s => s.ServiceType == typeof(LiveLogProcessor))).IsTrue();
+        await Assert.That(services.Any(s => s.ServiceType == typeof(LiveLogTarget))).IsTrue();
         await Assert.That(services.Any(s => s.ServiceType == typeof(ILoggerFactory))).IsTrue();
     }
 

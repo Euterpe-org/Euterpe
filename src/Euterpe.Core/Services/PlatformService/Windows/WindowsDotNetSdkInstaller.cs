@@ -22,7 +22,7 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
         }
         catch (Exception ex)
         {
-            Logger.ZLogError(ex, $"Failed to check .NET SDK installation");
+            Logger.LogError(ex, $"Failed to check .NET SDK installation");
             return false;
         }
     }
@@ -32,10 +32,10 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            Logger.ZLogInformation($"Downloading .NET SDK from {DotNetSdkUrl} to {tempFilePath}");
+            Logger.LogInformation($"Downloading .NET SDK from {DotNetSdkUrl} to {tempFilePath}");
             await AppDownloadManager.DownloadFileAsync(DotNetSdkUrl, tempFilePath).ConfigureAwait(false);
 
-            Logger.ZLogInformation($"Launching .NET SDK installer: {tempFilePath}");
+            Logger.LogInformation($"Launching .NET SDK installer: {tempFilePath}");
             using var process = Process.Start(
                 new ProcessStartInfo(tempFilePath)
                 {
@@ -55,7 +55,7 @@ internal sealed class WindowsDotNetSdkInstaller : IDotNetSdkInstaller
                 throw new InvalidOperationException($".NET SDK installer exited with code {process.ExitCode}");
             }
 
-            Logger.ZLogInformation($".NET SDK installation completed successfully");
+            Logger.LogInformation($".NET SDK installation completed successfully");
         }
         finally
         {

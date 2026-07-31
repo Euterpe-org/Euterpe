@@ -18,11 +18,11 @@ public sealed partial class MainWindowViewModel : RootNavViewModelBase
 
         NavigationService.Ready.Set();
 
-        Logger.ZLogInformation($"{nameof(MainWindowViewModel)} Initialized");
+        Logger.LogInformation($"{nameof(MainWindowViewModel)} Initialized");
     }
 
     partial void OnSelectedGameChanged(GameConfig value) =>
-        GameSwitcher.SwitchAsync(value.Id).SafeFireAndForget(ex => Logger.ZLogError(ex, $"Failed to switch game to {value.Id}"));
+        GameSwitcher.SwitchAsync(value.Id).SafeFireAndForget(ex => Logger.LogError(ex, $"Failed to switch game to {value.Id}"));
 
     #region Injections
 

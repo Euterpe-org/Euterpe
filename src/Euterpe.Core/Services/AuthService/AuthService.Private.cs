@@ -25,7 +25,7 @@ internal sealed partial class AuthService
             var response = await AuthClient.ExchangeAppTokenAsync(new AppTokenRequest(ClientId, code, codeVerifier, redirectUri)).ConfigureAwait(false);
             await UpdateSessionAsync(response.AccessToken, response.RefreshToken, response.Me).ConfigureAwait(false);
 
-            Logger.ZLogInformation($"User logged in: {response.Me.Nickname}");
+            Logger.LogInformation($"User logged in: {response.Me.Nickname}");
 
             Ready.Set();
         }

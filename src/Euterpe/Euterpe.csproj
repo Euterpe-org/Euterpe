@@ -24,10 +24,7 @@
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+
         <PackageReference Include="ObservableCollections"/>
         <PackageReference Include="R3Extensions.Avalonia"/>
         <PackageReference Include="Semi.Avalonia"/>
@@ -48,7 +45,4 @@
         <ProjectReference Include="..\Euterpe.Controls\Euterpe.Controls.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <AdditionalFiles Include="BannedSymbols.txt"/>
-    </ItemGroup>
 </Project>

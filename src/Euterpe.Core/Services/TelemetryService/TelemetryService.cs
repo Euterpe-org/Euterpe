@@ -18,7 +18,7 @@ internal sealed class TelemetryService : ITelemetryService
         }
         catch (Exception ex)
         {
-            Logger.ZLogWarning(ex, $"Failed to track session telemetry");
+            Logger.LogWarning(ex, $"Failed to track session telemetry");
         }
     }
 

@@ -11,7 +11,7 @@ internal sealed class LinuxGamePathEnvironment : IGamePathEnvironment
 
     public bool Set()
     {
-        Logger.ZLogInformation($"Ask user to set {GameConfig.PathEnvironmentVariableName} environment variable to: {GameConfig.Folder}");
+        Logger.LogInformation($"Ask user to set {GameConfig.PathEnvironmentVariableName} environment variable to: {GameConfig.Folder}");
         MessageBoxService.NoticeConfirmOverlayAsync(MessageBox_Content_SetPathEnvironment_Linux, GameConfig.Folder).ConfigureAwait(false);
         return true;
     }

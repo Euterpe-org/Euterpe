@@ -11,7 +11,7 @@ internal sealed partial class ModManageService
             CacheWebMod(webMod);
         }
 
-        Logger.ZLogInformation($"All mods loaded");
+        Logger.LogInformation($"All mods loaded");
     }
 
     private void CacheWebMod(Mod webMod)

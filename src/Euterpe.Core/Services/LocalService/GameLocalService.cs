@@ -11,7 +11,7 @@ internal sealed class GameLocalService : IGameLocalService
         while (path.IsNullOrEmpty() || !await EnsureValidGameFolderAsync(path).ConfigureAwait(true))
         {
             path = await FileSystemPickerService.GetSingleFolderPathAsync(FolderDialog_Title_ChooseMuseDashFolder).ConfigureAwait(true);
-            Logger.ZLogInformation($"Selected {GameConfig.DisplayName} folder: {path}");
+            Logger.LogInformation($"Selected {GameConfig.DisplayName} folder: {path}");
         }
 
         return path;
@@ -28,7 +28,7 @@ internal sealed class GameLocalService : IGameLocalService
 
         File.Delete(GameConfig.MelonLoaderZipPath);
 
-        Logger.ZLogInformation($"MelonLoader installed successfully");
+        Logger.LogInformation($"MelonLoader installed successfully");
     }
 
     public Task UninstallMelonLoaderAsync()
@@ -46,7 +46,7 @@ internal sealed class GameLocalService : IGameLocalService
 
         FileSystemService.DeleteDirectory(GameConfig.MelonLoaderFolder, DeleteOption.IgnoreIfNotFound);
 
-        Logger.ZLogInformation($"MelonLoader uninstalled successfully");
+        Logger.LogInformation($"MelonLoader uninstalled successfully");
         return Task.CompletedTask;
     }
 
@@ -63,7 +63,7 @@ internal sealed class GameLocalService : IGameLocalService
 
         GameConfig.GameVersion = bundleVersion;
 
-        Logger.ZLogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
+        Logger.LogInformation($"Game information read successfully - Game version: {bundleVersion}, Unity version: {unityVersion}");
         assetsManager.UnloadAll();
     }
 
@@ -84,11 +84,11 @@ internal sealed class GameLocalService : IGameLocalService
             }
 
             GameConfig.MelonLoaderVersion = Version.Parse(version).ToString(3);
-            Logger.ZLogInformation($"MelonLoader version detected: {GameConfig.MelonLoaderVersion}");
+            Logger.LogInformation($"MelonLoader version detected: {GameConfig.MelonLoaderVersion}");
             return;
         }
 
-        Logger.ZLogInformation($"MelonLoader not installed");
+        Logger.LogInformation($"MelonLoader not installed");
     }
 
     private async ValueTask<bool> EnsureValidGameFolderAsync(string folderPath)
